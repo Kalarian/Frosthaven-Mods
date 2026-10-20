@@ -69,6 +69,18 @@ namespace FrosthavenMods
             }
         }
 
+        /// <summary>The game only allows house-rule changes on the map/outpost, but the prologue is scenarios back to back.
+        /// Our rules only matter in the outpost and travel as a side action outside the scenario's lockstep state, so
+        /// they can change any time in a game: solo, or by the host while nobody is joining (the game's own conditions
+        /// minus the map-only one).</summary>
+        private static bool CanChangeOurRulesNow()
+        {
+            if (SaveData.Instance?.Global == null || SaveData.Instance.Global.CurrentGameState == EGameState.None) return false;
+            if (FFSNetwork.IsShuttingDown || FFSNetwork.IsStartingUp) return false;
+            if (!FFSNetwork.IsOnline) return true;
+            return FFSNetwork.IsHost && FFSNet.PlayerRegistry.JoiningPlayers.Count == 0 && FFSNet.PlayerRegistry.ConnectingUsers.Count == 0;
+        }
+
         /// <summary>The in-game screen's own callback captures the rules as they were when the screen opened, so flipping
         /// two switches in a row would undo the first. Our switches read the current rules at click time instead.</summary>
         [HarmonyPatch(typeof(GameSettingsService), nameof(GameSettingsService.GetSettingsDTO))]
@@ -76,9 +88,11 @@ namespace FrosthavenMods
         private static void FreshCallbacks(ref UICampaignSettingsWindow.Params __result)
         {
             if (__result.General == null) return;
+            bool canChange = CanChangeOurRulesNow();
             foreach (CampaignSettingDTO dto in __result.General)
             {
                 if (!Ours.TryGetValue(dto, out ModRules.Rule r)) continue;
+                dto.Interactable = canChange;
                 dto.OnValueChange = result =>
                 {
                     if (!(result is bool on)) return;
