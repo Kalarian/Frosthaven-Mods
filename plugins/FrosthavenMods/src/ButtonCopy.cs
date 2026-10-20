@@ -19,12 +19,22 @@ namespace FrosthavenMods
         public static FHButton Make(FHMapView view, Transform parent, string name, string text, Action onClick)
         {
             var template = Traverse.Create(view.Modules.DistributionModule).Field("DoneButton").GetValue<FHButton>();
+            return Make(template, parent, name, text, onClick);
+        }
+
+        /// <summary>The same, from any of the game's text buttons (e.g. on screens outside the outpost map).</summary>
+        public static FHButton Make(FHButton template, Transform parent, string name, string text, Action onClick)
+        {
             if (template == null) { Plugin.Log.LogWarning("Frosthaven Mods: no button to copy"); return null; }
             GameObject go = UnityEngine.Object.Instantiate(template.gameObject, parent, false);
+            go.SetActive(true);
             go.name = name;
             // No keyboard shortcut (the original answers Confirm/Enter).
             // (HotkeyClickableScopeElement lives in DevLocker.GFrame.Input; matched by name to avoid the reference.)
             foreach (Component c in go.GetComponentsInChildren<Component>(true).Where(c => c != null && c.GetType().Name == "HotkeyClickableScopeElement").ToList())
+                UnityEngine.Object.DestroyImmediate(c);
+            // The label's own translation component would put the original button's text back (e.g. when it is shown).
+            foreach (Component c in go.GetComponentsInChildren<Component>(true).Where(c => c != null && (c.GetType().Name == "Localize" || c.GetType().Name == "TextLocalizedListener")).ToList())
                 UnityEngine.Object.DestroyImmediate(c);
             HideKeyHint(go);
             // The empty circle: the "which player suggests this" avatar list (from the UI dump).

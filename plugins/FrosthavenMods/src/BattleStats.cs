@@ -19,20 +19,31 @@ namespace FrosthavenMods
     /// attack modifier drawn, heal, card lost, element, door, trap ...) but its table sums only 8 of them. A postfix on
     /// ScenarioResultViewService.BuildBattleStatsTable appends our rows, computed from Party.LastScenarioStats - the
     /// same records the game's own rows come from. Display only: nothing changes in the game, nothing needs syncing.
-    /// Phase 1 also writes the raw records to FrosthavenMods\stats\ so the numbers can be checked against what happened.
+    /// The raw records also go to FrosthavenMods\stats\ so the numbers can be checked against what happened, and each
+    /// scenario is added to the campaign totals (CampaignStats).
     /// </summary>
     [HarmonyPatch]
     internal static class BattleStats
     {
-        /// <summary>One extra row: a label, a value per character, and whether the highest value gets the gold
-        /// highlight (like the game's rows). A section row has no values.</summary>
-        private sealed class Row
+        /// <summary>One extra row. Its value per character is a number (Num), or a ratio Num / Den (shown as "-" when Den
+        /// is 0). Campaign totals add Num and Den over the scenarios (Agg.Sum), or keep the highest Num (Agg.Max), so a
+        /// ratio stays a true campaign-wide average. The highest value gets the gold highlight, like the game's rows.
+        /// A section row ("OFFENSE") has no values.</summary>
+        internal enum Agg { Sum, Max }
+
+        internal sealed class Row
         {
             public string Label;
-            public Func<CPlayerStatsScenario, string> Value;
-            public Func<CPlayerStatsScenario, double> Score; // for the highlight; null = no highlight
+            public Func<CPlayerStatsScenario, double> Num;
+            public Func<CPlayerStatsScenario, double> Den;
+            public Agg Agg;
+            public string Format = "0";
             public bool Section;
             public Func<Sprite> Icon;
+
+            public double? Value(double num, double den) => Den == null ? num : den > 0 ? num / den : (double?)null;
+
+            public string Text(double? value) => value == null ? "-" : value.Value.ToString(Format);
         }
 
         private static readonly HashSet<string> SectionLabels = new HashSet<string>();
@@ -44,7 +55,19 @@ namespace FrosthavenMods
         }
 
         private static Row Int(string label, Func<Sprite> icon, Func<CPlayerStatsScenario, int> f) =>
-            new Row { Label = label, Icon = icon, Value = s => f(s).ToString(), Score = s => f(s) };
+            new Row { Label = label, Icon = icon, Num = s => f(s) };
+
+        private static Row Best(string label, Func<Sprite> icon, Func<CPlayerStatsScenario, int> f) =>
+            new Row { Label = label, Icon = icon, Num = s => f(s), Agg = Agg.Max };
+
+        private static Row Ratio(string label, Func<Sprite> icon, string format, Func<CPlayerStatsScenario, double> num, Func<CPlayerStatsScenario, double> den) =>
+            new Row { Label = label, Icon = icon, Num = num, Den = den, Format = format };
+
+        internal static IEnumerable<Row> AllRows => Rows;
+
+        internal static bool IsSection(string label) => SectionLabels.Contains(label ?? "");
+
+        internal static Sprite IconOf(Row row) => row.Section ? null : SafeIcon(row.Icon);
 
         // ---- icons: the game's own sprites (battle stat icons, condition icons, element icons)
 
@@ -190,15 +213,9 @@ namespace FrosthavenMods
         private static readonly List<Row> Rows = new List<Row>
         {
             Section("OFFENSE"),
-            Int("Biggest hit", Dealt, s => Max(s.DamageDealt, d => d.FinalDamageAmount)),
+            Best("Biggest hit", Dealt, s => Max(s.DamageDealt, d => d.FinalDamageAmount)),
             Int("Hits landed", Dealt, s => Count(s.DamageDealt, d => Attack(d) && d.FinalDamageAmount > 0)),
-            new Row
-            {
-                Label = "Damage per round",
-                Icon = Dealt,
-                Value = s => s.RoundsPlayed <= 0 ? "-" : (Sum(s.DamageDealt, d => d.FinalDamageAmount) / (double)s.RoundsPlayed).ToString("0.0"),
-                Score = s => s.RoundsPlayed <= 0 ? 0 : Sum(s.DamageDealt, d => d.FinalDamageAmount) / (double)s.RoundsPlayed,
-            },
+            Ratio("Damage per round", Dealt, "0.0", s => Sum(s.DamageDealt, d => d.FinalDamageAmount), s => s.RoundsPlayed),
             Int("Overkill", Killed, s => Sum(s.Kills?.Where(EnemyKill), Overkill)),
             // The attack's strength before the shield isn't recorded, so the amount blocked can't be known when nothing
             // got through (an attack of 2 into shield 5 logs Shielded=5): count the hits a shield stopped instead.
@@ -211,7 +228,7 @@ namespace FrosthavenMods
             Int("Kills by summons", Killed, s => Count(s.Kills, k => k.PerformedBySummons && EnemyKill(k))),
 
             Section("DEFENSE"),
-            Int("Biggest hit taken", Taken, s => Max(s.DamageReceived?.Where(d => d.CauseOfDamage != CActor.ECauseOfDamage.Self), d => d.FinalDamageAmount)),
+            Best("Biggest hit taken", Taken, s => Max(s.DamageReceived?.Where(d => d.CauseOfDamage != CActor.ECauseOfDamage.Self), d => d.FinalDamageAmount)),
             Int("Self-inflicted damage", Taken, s => Sum(s.DamageReceived, d => d.CauseOfDamage == CActor.ECauseOfDamage.Self ? d.FinalDamageAmount : 0)),
             Int("Shield on hits taken", Good(CCondition.EPositiveCondition.Ward), s => Sum(s.DamageReceived, d => d.Avoided == 0 ? Math.Max(0, d.Shield) : 0)),
             Int("Hits negated", Good(CCondition.EPositiveCondition.Invisible), s => Count(s.DamageReceived, d => d.Avoided > 0)),
@@ -227,13 +244,8 @@ namespace FrosthavenMods
 
             Section("LUCK"),
             Int("Modifiers drawn", Good(CCondition.EPositiveCondition.Bless), s => Mods(s).Count()),
-            new Row
-            {
-                Label = "Average modifier",
-                Icon = Good(CCondition.EPositiveCondition.Bless),
-                Value = s => { var n = Mods(s).Select(Number).Where(v => v.HasValue).ToList(); return n.Count == 0 ? "-" : n.Average(v => v.Value).ToString("+0.0;-0.0;0.0"); },
-                Score = s => { var n = Mods(s).Select(Number).Where(v => v.HasValue).ToList(); return n.Count == 0 ? 0 : n.Average(v => v.Value); },
-            },
+            Ratio("Average modifier", Good(CCondition.EPositiveCondition.Bless), "+0.0;-0.0;0.0",
+                s => Mods(s).Select(Number).Where(v => v.HasValue).Sum(v => v.Value), s => Mods(s).Select(Number).Count(v => v.HasValue)),
             Int("Crits (x2)", Good(CCondition.EPositiveCondition.Bless), s => Mods(s).Count(IsCrit)),
             Int("Nulls", Bad(CCondition.ENegativeCondition.Curse), s => Mods(s).Count(IsNull)),
             Int("Attacks with advantage", Good(CCondition.EPositiveCondition.Advantage), s => Count(Abilities(s), a => a.Advantage != null && a.Advantage.Any(v => v))),
@@ -265,6 +277,7 @@ namespace FrosthavenMods
                     .Select(h => stats.FirstOrDefault(s => s.CharacterID == h.BattleStats?.CharacterID || s.CharacterID == h.ClassID))
                     .ToList();
                 ShareSummonPool(stats);
+                CampaignStats.Record(battleResults, columns, __result);
                 int oldRows = __result.RowHeaders.Count, cols = __result.ColumHeaders.Count;
                 var cells = new DebriefingTableDTO.Cell[oldRows + Rows.Count, cols];
                 for (int r = 0; r < oldRows; r++)
@@ -273,17 +286,13 @@ namespace FrosthavenMods
                 for (int i = 0; i < Rows.Count; i++)
                 {
                     Row row = Rows[i];
-                    __result.RowHeaders.Add(new DebriefingTableDTO.Header { Text = row.Label, Icon = row.Section ? null : SafeIcon(row.Icon) });
-                    double best = 0;
-                    if (!row.Section && row.Score != null)
-                        best = columns.Where(s => s != null).Select(row.Score).DefaultIfEmpty(0).Max();
-                    for (int c = 0; c < cols; c++)
+                    __result.RowHeaders.Add(new DebriefingTableDTO.Header { Text = row.Label, Icon = IconOf(row) });
+                    var values = Enumerable.Range(0, cols).Select(c =>
                     {
                         CPlayerStatsScenario s = c < columns.Count ? columns[c] : null;
-                        if (row.Section || s == null) { cells[oldRows + i, c] = new DebriefingTableDTO.Cell { Text = "" }; continue; }
-                        double score = row.Score?.Invoke(s) ?? 0;
-                        cells[oldRows + i, c] = new DebriefingTableDTO.Cell { Text = row.Value(s), IsHighlighted = best > 0 && score == best };
-                    }
+                        return row.Section || s == null ? (double?)null : row.Value(row.Num(s), row.Den?.Invoke(s) ?? 0);
+                    }).ToList();
+                    FillRow(cells, oldRows + i, row, values);
                 }
                 __result.Cells = cells;
                 WriteRawLog(stats);
@@ -292,6 +301,16 @@ namespace FrosthavenMods
             {
                 Plugin.Log.LogError("Battle stats: could not add the extra rows: " + e);
             }
+        }
+
+        /// <summary>One row of cells; the highest value (above 0) is highlighted.</summary>
+        internal static void FillRow(DebriefingTableDTO.Cell[,] cells, int r, Row row, List<double?> values)
+        {
+            double best = values.Where(v => v.HasValue).Select(v => v.Value).DefaultIfEmpty(0).Max();
+            for (int c = 0; c < values.Count; c++)
+                cells[r, c] = row.Section
+                    ? new DebriefingTableDTO.Cell { Text = "" }
+                    : new DebriefingTableDTO.Cell { Text = row.Text(values[c]), IsHighlighted = best > 0 && values[c] == best };
         }
 
         /// <summary>Section rows ("OFFENSE" ...) are titles: no icon box and no value bars. The table lays its cells out
@@ -309,7 +328,7 @@ namespace FrosthavenMods
                 int rows = data.Cells.GetLength(0);
                 for (int r = 0; r < rows && r < ___m_RowHeaders.Count; r++)
                 {
-                    bool section = SectionLabels.Contains(data.RowHeaders[r].Text ?? "");
+                    bool section = IsSection(data.RowHeaders[r].Text);
                     var icon = Traverse.Create(___m_RowHeaders[r]).Field("Icon").GetValue<Image>();
                     if (icon != null) icon.enabled = !section && data.RowHeaders[r].Icon != null;
                     for (int k = r; k < ___m_Cells.Count && k < data.Cells.Length; k += rows)

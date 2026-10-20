@@ -87,6 +87,21 @@ The installer copies `game/*` from the pack into the game folder and records eve
 A BepInEx someone else installed is kept (only our plugin is added). Uninstall removes only what we placed, plus
 BepInEx's own cache/config/logs when the loader is ours. Other people's plugins are never touched.
 
+## Battle stats (always on, display only)
+
+The post-scenario Statistics page (the screen with XP and accolades) gets about 40 extra rows in six sections
+(`BattleStats`). The game records ~40 kinds of events per character per scenario (`CPlayerStats` lists, filled by
+`StatsDataStorage.ScrapeEventLog`) but its table sums only 8; ours are computed from the same records
+(`Party.LastScenarioStats`). What the records mean was checked in the game code (see the comments in `BattleStats.cs`):
+summons count as part of their owner (the game already files their damage, kills and heals on the owner; their
+modifier draws, abilities and elements are matched back from the game's summon pool by summon GUID / class).
+
+"This scenario" / "Campaign" buttons in the page header switch to campaign-long totals (`CampaignStats`): per
+character (class + name), sums for counts, bests for "biggest" rows, campaign-wide ratios for averages. Stored in
+`<game>\FrosthavenMods\stats\campaign-<campaign name>.txt`, one file per campaign, per player. The game's own lifetime
+records (`CPlayerRecords`) are never updated by the game, so totals start with the mod. Each scenario's raw records
+also go to `<game>\FrosthavenMods\stats\scenario-*.txt` for checking.
+
 ## Co-op testing
 
 `docs/COOP_TEST.md` is the two-player test script. The mod logs every outpost command, rule change, gift (resources
