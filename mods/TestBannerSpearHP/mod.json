@@ -1,0 +1,5 @@
+{
+  "name": "Test: Banner Spear HP",
+  "description": "In-game load test: Banner Spear max HP +10 at every level (10 -> 20 at level 1).",
+  "enabled": false
+}

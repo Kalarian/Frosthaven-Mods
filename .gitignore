@@ -1,0 +1,14 @@
+# Whitelist: only the mods, tools and docs are published. Game data (extracted/, backup/), work copies of game
+# files (work/) and anything decompiled never leave this machine.
+*
+!.gitignore
+!.gitattributes
+!VERSION
+!README.md
+!mods/
+!mods/**
+!tools/
+!tools/**
+tools/__pycache__/
+mods/**/bin/
+mods/**/obj/

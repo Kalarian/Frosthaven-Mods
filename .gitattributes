@@ -1,0 +1,6 @@
+# Patches and added game files must keep their exact bytes (the game's YML is CRLF): never convert line endings.
+*.diff -text
+mods/**/files/** -text
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
