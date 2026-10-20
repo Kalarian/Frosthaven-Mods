@@ -45,7 +45,17 @@ Mod layout, `mods/<Name>/`:
   - `ApplyHeader` never reads the rules back, so they reset to off on every reload.
   - The screen's callbacks capture the rules from when the window opened, so flipping two switches undid the first.
   - The window's row list is never emptied.
-- Rules so far: "Give gold" (bit 24, released in v0.2.0 as "Shared gold") and "Item trading". **Both are switches only, and do nothing yet.**
+- Rules so far:
+  - **Give gold** (bit 24, released in v0.2.0 as "Shared gold"). In the outpost, a character's Equipment screen gets
+    a "Give gold" button. It picks a recipient (party members, plus characters still in creation), then an amount,
+    and sends the custom multiplayer command `FrosthavenMods.GiveGold`. Our prefix on
+    `MultiplayerGameController.GetExectionContext` resolves that command, so it runs on every machine like
+    SellItem/BuyItem, with the host validating it. Limits:
+    - The giver must be in the party, have played at least 1 scenario, and have the gold.
+    - Characters still in creation can receive but not give. Unspent gold is lost when creation finishes.
+    - Only the player controlling the giver sees the button.
+    - Every player needs the mod: a peer without it fails when the command arrives.
+  - **Item trading** (bit 25): a switch only so far; does nothing yet.
 
 The installer copies `game/*` from the pack into the game folder and records every file it placed in `state.json`.
 A BepInEx someone else installed is kept (only our plugin is added). Uninstall removes only what we placed, plus
