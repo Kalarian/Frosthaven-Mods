@@ -200,7 +200,9 @@ namespace FrosthavenMods
                 Score = s => s.RoundsPlayed <= 0 ? 0 : Sum(s.DamageDealt, d => d.FinalDamageAmount) / (double)s.RoundsPlayed,
             },
             Int("Overkill", Killed, s => Sum(s.Kills?.Where(EnemyKill), Overkill)),
-            Int("Blocked by enemy shields", Dealt, s => Sum(s.DamageDealt, d => d.Shielded)),
+            // The attack's strength before the shield isn't recorded, so the amount blocked can't be known when nothing
+            // got through (an attack of 2 into shield 5 logs Shielded=5): count the hits a shield stopped instead.
+            Int("Hits stopped by shields", Dealt, s => Count(s.DamageDealt, d => Attack(d) && d.Shielded > 0 && d.FinalDamageAmount == 0)),
             Int("Poison bonus damage", Bad(CCondition.ENegativeCondition.Poison), s => Sum(s.DamageDealt, d => d.PoisonDamage)),
             Int("Melee hits", Dealt, s => Count(s.DamageDealt, d => Attack(d) && d.IsMelee && d.FinalDamageAmount > 0)),
             Int("Ranged hits", Dealt, s => Count(s.DamageDealt, d => Attack(d) && !d.IsMelee && d.FinalDamageAmount > 0)),
@@ -218,7 +220,8 @@ namespace FrosthavenMods
             Int("Exhausted", Bad(CCondition.ENegativeCondition.Bane), s => s.PlayerSurvivedScenario ? 0 : 1),
 
             Section("SUPPORT"),
-            Int("Heals", Healed, s => Count(s.Heals)),
+            // Heals on someone already at full health are logged with 0: only count the ones that restored health.
+            Int("Heals", Healed, s => Count(s.Heals, h => h.HealAmount > 0)),
             Int("Poison/wound cleared", Good(CCondition.EPositiveCondition.Regenerate), s => Count(s.Heals, h => h.PoisonRemoved || h.WoundRemoved)),
             Int("Summons", Good(CCondition.EPositiveCondition.Strengthen), s => Count(Abilities(s), a => a.ActionData?.AbilityType == CAbility.EAbilityType.Summon)),
 
