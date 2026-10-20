@@ -25,14 +25,11 @@ namespace FrosthavenMods
     /// Clicks only change this screen; "Give" sends one synced command per gift, from both tabs. Esc closes it (GiveEscape).
     /// The game shows the modules a state exposes as properties (FHViewStateBase.UseModules), hence DistributionModule.
     /// </summary>
-    internal sealed class GiveResourcesViewState : FHMapViewState
+    internal sealed class GiveResourcesViewState : FHMapViewState, IModWindow
     {
         public static readonly GiveKind[] Kinds = { GiveKind.Gold, GiveKind.Lumber, GiveKind.Metal, GiveKind.Hide };
 
         private static readonly MethodInfo ItemTooltip = AccessTools.Method(typeof(ResourceAllocationService), "ItemTooltipFunc");
-
-        /// <summary>The open Give window, if any (for Esc).</summary>
-        internal static GiveResourcesViewState Open { get; private set; }
 
         private readonly CharacterID _giverId;
         private readonly List<CharacterID> _receivers;
@@ -56,18 +53,18 @@ namespace FrosthavenMods
 
         public override void OnShow()
         {
-            Open = this;
+            ModWindow.Open = this;
             GiveResourcesPatches.Safe("open the window", Build);
         }
 
         public override void OnHide()
         {
-            if (Open == this) Open = null;
+            if (ModWindow.Open == this) ModWindow.Open = null;
             GiveResourcesPatches.Safe("restore the row labels", _labels.Restore);
             GiveResourcesPatches.Safe("remove the tabs", _tabs.Hide);
         }
 
-        internal void Close() => PopThisState();
+        public void Close() => PopThisState();
 
         private int Pending(int column, GiveKind kind) => _pending.TryGetValue((column, kind), out int v) ? v : 0;
 

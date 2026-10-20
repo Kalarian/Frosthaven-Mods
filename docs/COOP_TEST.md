@@ -1,4 +1,4 @@
-# Co-op test: House Rules, Tradeable resources and equipment, Share duplicate loot (v0.3.0)
+# Co-op test: House Rules, Tradeable resources and equipment, duplicate loot, loot allocation (v0.3.0)
 
 Two players: **Host** (runs the campaign) and **Client** (joins). Takes about an hour. Have voice chat open, since
 some steps are done at the same moment.
@@ -46,7 +46,7 @@ some steps are done at the same moment.
 |---|---|---|---|
 | A1 | Host | Load the test campaign as a multiplayer game. Client joins. | The join works. |
 | A2 | Host | Give the client 2 of the 4 characters (the game's party slot / player assignment). | Each player controls 2 characters. Write down which ones: Host = **H1, H2**, Client = **C1, C2**. Also note which two own the same item. |
-| A3 | Both | Options > **Custom Rules**. | Both see "Mod pack rules" with **Tradeable resources and equipment** and **Share duplicate loot**, both Active. On the client they're greyed out (only the host can change them). |
+| A3 | Both | Options > **Custom Rules**. | Both see "Mod pack rules" with **Tradeable resources and equipment**, **Share duplicate loot** and **Always allocate scenario loot**, all Active. On the client they're greyed out (only the host can change them). |
 | A4 | Both | **CHECKPOINT** (#1) | |
 
 ## B. House rules sync
@@ -127,11 +127,12 @@ To check an item on a character: select them and open their equipment / item scr
 
 | # | Who | Do | Expected |
 |---|---|---|---|
-| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows both rules on, for both players. |
+| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows all three rules on, for both players. |
 | I2 | Both | **CHECKPOINT** (#9) | Identical to #8. |
 | I3 | Both | Start any scenario together, bringing **given** items, and play 2–3 rounds normally. Use a given item if you can. | **No desync message.** The given items work. (The Give button is hidden during scenarios.) |
-| I4 | Host | Leave the scenario (abandon or finish) and get back to the outpost. | If someone looted a copy of an item they already own, the item reward window opens with nothing assigned. The host (party leader) left-clicks one character, then another: the item moves in one click, on both screens. Done assigns it (Share duplicate loot). |
-| I5 | Both | **CHECKPOINT** (#10) | |
+| I4 | Host | Leave the scenario (abandon or finish) and get back to the outpost. Loot something first if you can. | If someone looted a copy of an item they already own, the item reward window opens with nothing assigned. The host (party leader) left-clicks one character, then another: the item moves in one click, on both screens. Done assigns it (Share duplicate loot). |
+| I5 | Host | If anyone looted gold, materials or items: the **Allocate Loot** window opens for the host only, after any reward window, pre-filled as looted. Move some gold (right-click one character, left-click another) and an item, then **Allocate**. | Both PCs show the new split. The client never sees the window. |
+| I6 | Both | **CHECKPOINT** (#10) | |
 
 ## After the test
 
@@ -154,3 +155,12 @@ A duplicate drop is rare, so the dev tools can fake one (solo only, test campaig
 2. Turn **Share duplicate loot** off and press **Ctrl+F12** again. No window: the character gets the item's sell value
    in gold instead (the game's normal behaviour).
 3. If every other party member already owns that item, the copy is sold even with the rule on.
+
+## Solo: Allocate Loot (host, before the session)
+
+1. With **Always allocate scenario loot** on, start any scenario and press **Ctrl+Shift+F10** (dev tools): it wins and
+   adds fake loot (party member n gets 10n gold and n lumber; the first one also 3 metal and a shop item).
+2. Back on the map, after any other end-of-scenario windows, **Allocate Loot** opens, pre-filled as looted. The number
+   by each row is unallocated/looted. Move some of everything, check Allocate is greyed while a row is unallocated,
+   then Allocate. The top bar shows the new amounts.
+3. Repeat and press **Keep as looted** (or Esc): nothing changes.

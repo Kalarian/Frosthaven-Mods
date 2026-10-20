@@ -79,6 +79,13 @@ Mod layout, `mods/<Name>/`:
     for source `"scenario_loot"` puts the duplicate in the game's own items-to-gain list (`ItemToGainIDs` +
     `GainItem` unresolved action), so the outpost opens the usual item reward window. Falls back to the auto-sell when
     nobody else can own it or the reward window couldn't hand out every pending item.
+  - **Always allocate scenario loot** (bit 27; `LootAllocation`, `LootAllocationViewState`). A prefix/postfix pair on
+    `ScenarioController.CompleteActiveScenario` records, on the local copy, each party member's gold, materials and
+    newly owned looted items from the `ScenarioResult`. Once the outpost is quiet (no unresolved actions, events,
+    loading or open window), the party leader gets the Allocate Loot window: every party member is a column, cells
+    start as looted, rows must be fully handed out. Allocate sends the differences as `GiveResources` / `GiveItem`
+    commands; Keep as looted / Esc changes nothing. Lost (stays as looted) if the game closes or a new scenario starts
+    first.
   - Item reward window (all item rewards, not a switch; `RewardWindowPatches`): opens with nothing assigned instead of
     the game's pre-assignment, and left-clicking another character moves an assigned item there in one click
     (unassign + assign through the window's own synced `UpdateItemsDistribution`).
