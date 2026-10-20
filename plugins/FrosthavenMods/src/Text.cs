@@ -14,7 +14,7 @@ namespace FrosthavenMods
         {
             ["FHMODS_GIVE_TITLE"] = "Give Resources",
             ["FHMODS_GIVE"] = "Give",
-            ["FHMODS_GIVE_HINT"] = "Ctrl: Give",
+            ["FHMODS_GIVE_HINT"] = "Give",
         };
 
         public static string Get(string key) => Strings.TryGetValue(key, out string text) ? text : key;
