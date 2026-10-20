@@ -19,30 +19,23 @@ namespace FrosthavenMods
             public string Description;
         }
 
-        // Bit 24 was first released as "Shared gold"; it now means Give resources (a save with it on keeps it on).
-        public const ERulesFlag GiveResources = (ERulesFlag)(1 << 24);
-        public const ERulesFlag ItemTrading = (ERulesFlag)(1 << 25);
+        // Bit 24 was first released as "Shared gold", then "Give resources"; it now means Tradeable resources and
+        // equipment (a save with it on keeps it on). Bit 25 was "Item trading" before the two were merged: unused now,
+        // and harmless if an old test save still has it set.
+        public const ERulesFlag Trading = (ERulesFlag)(1 << 24);
         public const ERulesFlag ShareDuplicateLoot = (ERulesFlag)(1 << 26);
 
         public static readonly List<Rule> All = new List<Rule>
         {
             new Rule
             {
-                Flag = GiveResources,
-                Name = "Give resources (mod)",
-                Description = "In the outpost, Ctrl+click a character's portrait in the party column to give their gold, " +
-                              "lumber, metal or hide to another party member (or one being created).\n\n" +
-                              "The giver must have played at least one scenario. Herbs are already shared in this game.\n" +
-                              "Board game rule bent: gold and resources normally can't be transferred between characters.",
-            },
-            new Rule
-            {
-                Flag = ItemTrading,
-                Name = "Item trading (mod)",
-                Description = "In the outpost, give an item a character owns (worn or not) to another party member: the " +
-                              "Items tab of the same Give window.\n\n" +
-                              "The giver must have played at least one scenario, and nobody can own two copies of an item.\n" +
-                              "Board game rule bent: items normally can't be transferred or traded between characters.",
+                Flag = Trading,
+                Name = "Tradeable resources and equipment (mod)",
+                Description = "In the outpost, Ctrl+click a character's portrait in the party column (or use the GIVE " +
+                              "button under their name) to give their gold, lumber, metal, hide or items to another " +
+                              "party member. Gold and materials can also go to a character being created.\n\n" +
+                              "Herbs are already shared in this game. Nobody can own two copies of an item.\n" +
+                              "Board game rule bent: gold, resources and items normally can't be transferred between characters.",
             },
             new Rule
             {
@@ -63,8 +56,8 @@ namespace FrosthavenMods
 
         public static bool IsOn(ERulesFlag flag) => (Current & flag) == flag;
 
-        /// <summary>The Give window (Ctrl+click, the GIVE button, the hint line) is there when either give rule is on.</summary>
-        public static bool GiveOn => IsOn(GiveResources) || IsOn(ItemTrading);
+        /// <summary>The Give window (Ctrl+click, the GIVE button, the hint line) is there while the trading rule is on.</summary>
+        public static bool GiveOn => IsOn(Trading);
 
         public static string Describe(ERulesFlag rules)
         {

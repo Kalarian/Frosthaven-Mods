@@ -15,7 +15,7 @@ namespace FrosthavenMods
 {
     /// <summary>
     /// The Give window: the game's own distribution table (the Building Donation screen), filled with our data, with a
-    /// Resources tab and an Items tab (GiveTabs) when both rules are on. Columns are the rest of the party (at most 3,
+    /// Resources tab and an Items tab (GiveTabs). Columns are the rest of the party (at most 3,
     /// so the table fits like every other party window).
     /// - Resources: rows are gold and the three materials, the row headers count down the giver's amount left. Click
     ///   +1 / right-click -1 come from the table; Ctrl (+/-10) and Shift (all / none) are handled here.
@@ -36,7 +36,6 @@ namespace FrosthavenMods
 
         private readonly CharacterID _giverId;
         private readonly List<CharacterID> _receivers;
-        private readonly bool _resourcesOn, _itemsOn;
         private bool _onItems;
         private readonly Dictionary<(int Column, GiveKind Kind), int> _pending = new Dictionary<(int, GiveKind), int>();
         private readonly Dictionary<ItemID, int> _pendingItems = new Dictionary<ItemID, int>(); // item -> column
@@ -48,13 +47,11 @@ namespace FrosthavenMods
 
         private ResourceAllocationService Allocation => View.GetService<ResourceAllocationService>();
 
-        public GiveResourcesViewState(CharacterID giverId, List<CharacterID> receivers, bool resourcesOn, bool itemsOn, bool startOnItems)
+        public GiveResourcesViewState(CharacterID giverId, List<CharacterID> receivers, bool startOnItems)
         {
             _giverId = giverId;
             _receivers = receivers;
-            _resourcesOn = resourcesOn;
-            _itemsOn = itemsOn;
-            _onItems = itemsOn && (startOnItems || !resourcesOn);
+            _onItems = startOnItems;
         }
 
         public override void OnShow()
@@ -111,9 +108,8 @@ namespace FrosthavenMods
                 CancelButtonKey = "GUI_CANCEL",
             });
             _labels.Fix(DistributionModule.transform);
-            if (_resourcesOn && _itemsOn)
-                _tabs.Show(View, DistributionModule.transform, _onItems, Tab("Resources", ResourceGifts), Tab("Items", _pendingItems.Count),
-                    () => SwitchTo(false), () => SwitchTo(true));
+            _tabs.Show(View, DistributionModule.transform, _onItems, Tab("Resources", ResourceGifts), Tab("Items", _pendingItems.Count),
+                () => SwitchTo(false), () => SwitchTo(true));
             if (_onItems) UiDump.Once("Give window, items tab", DistributionModule.transform);
         }
 

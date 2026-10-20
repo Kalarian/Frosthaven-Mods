@@ -46,9 +46,12 @@ Mod layout, `mods/<Name>/`:
   - The screen's callbacks capture the rules from when the window opened, so flipping two switches undid the first.
   - The window's row list is never emptied.
 - Rules so far:
-  - **Give resources** (bit 24, released in v0.2.0 as "Shared gold"). In the outpost, Ctrl+left-click the portrait of
-    a character you control in the party column. This wraps the portrait's own Select click; middle-click is taken by
-    the game's character summary. The game's Building Donation table opens, filled with our data (`GiveResourcesViewState`):
+  - **Tradeable resources and equipment** (bit 24; released in v0.2.0 as "Shared gold", then built as two rules,
+    Give resources and Item trading, merged into one; bit 25 is unused). In the outpost, Ctrl+left-click the portrait
+    of a character you control in the party column, or use the GIVE button under the name in the top bar. The
+    Ctrl+click wraps the portrait's own Select click; middle-click is taken by the game's character summary. The game's Building Donation table opens, filled with our data
+    (`GiveResourcesViewState`), with **Resources** and **Items** tab buttons in the window's separator row (`GiveTabs`).
+    Resources tab:
     - Columns: the rest of the party (plus a character being created into a party slot), so at most 3. The bench was
       tried, but the table doesn't scroll well past 6 columns, and giving to the bench is rare.
     - Rows: gold, lumber, metal, hide. Each row header counts down the giver's amount left.
@@ -59,20 +62,18 @@ Mod layout, `mods/<Name>/`:
     The command is resolved by a prefix on `MultiplayerGameController.GetExectionContext`, so it runs on every machine
     like SellItem/BuyItem, with the host
     validating it. Limits:
-    - The giver must be in the party, have played at least 1 scenario, and have the amount.
+    - The giver must be in the party and have the amount. (A "played at least 1 scenario" check was removed for
+      testing; it guarded against passing on a new character's starting purchases.)
     - Herbs aren't included: the digital game keeps herbs only in the shared Frosthaven supply.
     - Gold given to a character in creation is lost if not spent before creation finishes; materials are kept.
     - Every player needs the mod: a peer without it fails when the command arrives.
-    - The window, the portrait Ctrl+click, the top-bar GIVE button and the hint line show while either give rule is on.
-  - **Item trading** (bit 25). The **Items** tab of the same window (tab buttons `Resources` / `Items` sit in the
-    window's separator row when both rules are on, `GiveTabs`). One row per item the giver owns (worn or not), with the
-    game's item card on hover; a cell is an on/off pick, laid out like the game's item reward window. A receiver who
-    already owns a copy is marked and locked. Long lists use the table's own vertical scroll view. **Give** sends the
+
+    Items tab: one row per item the giver owns (worn or not), with the game's item card on hover; a cell is an on/off
+    pick, laid out like the game's item reward window. A receiver who already owns a copy is marked and locked. Long lists use the table's own vertical scroll view. **Give** sends the
     queued gifts from both tabs, one `FrosthavenMods.GiveItem` command per item:
     - `Action_RemoveItem` (the selling path: unequips, back to the supply, re-checks small item slots), then
       `Action_GainItem` (the buying path: out of the supply again), then equip if a slot is free.
     - Receivers: party members only (not a character in creation, who could buy with starting gold and pass it on).
-      The giver must have played at least 1 scenario.
   - **Share duplicate loot** (bit 26). Board game rule (p. 32): a looted copy of an item you already own goes to
     another character or is sold; the digital game always sells it. A prefix on `CharacterController.Action_GainItem`
     for source `"scenario_loot"` puts the duplicate in the game's own items-to-gain list (`ItemToGainIDs` +

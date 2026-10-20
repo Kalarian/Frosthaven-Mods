@@ -1,4 +1,4 @@
-# Co-op test: House Rules, Give resources, Item trading (v0.3.0)
+# Co-op test: House Rules, Tradeable resources and equipment, Share duplicate loot (v0.3.0)
 
 Two players: **Host** (runs the campaign) and **Client** (joins). Takes about an hour. Have voice chat open, since
 some steps are done at the same moment.
@@ -6,7 +6,7 @@ some steps are done at the same moment.
 ## What we're checking
 
 1. House rules (Options > Custom Rules) sync from the host to the client, and only the host can change them.
-2. Give resources and Give items work for both players, and both PCs end up with the same gold, materials and items.
+2. Giving resources and items works for both players, and both PCs end up with the same gold, materials and items.
 3. Nobody can give from a character that the other player controls.
 4. Nothing desyncs afterwards: saving, reloading, shopping, crafting, donating, a scenario.
 
@@ -46,22 +46,20 @@ some steps are done at the same moment.
 |---|---|---|---|
 | A1 | Host | Load the test campaign as a multiplayer game. Client joins. | The join works. |
 | A2 | Host | Give the client 2 of the 4 characters (the game's party slot / player assignment). | Each player controls 2 characters. Write down which ones: Host = **H1, H2**, Client = **C1, C2**. Also note which two own the same item. |
-| A3 | Both | Options > **Custom Rules**. | Both see "Mod pack rules" with **Give resources**, **Item trading** and **Share duplicate loot**, all Active. On the client they're greyed out (only the host can change them). |
+| A3 | Both | Options > **Custom Rules**. | Both see "Mod pack rules" with **Tradeable resources and equipment** and **Share duplicate loot**, both Active. On the client they're greyed out (only the host can change them). |
 | A4 | Both | **CHECKPOINT** (#1) | |
 
 ## B. House rules sync
 
 | # | Who | Do | Expected |
 |---|---|---|---|
-| B1 | Host | Custom Rules: turn **Item trading** off. | |
-| B2 | Client | Close and reopen Custom Rules. | Item trading shows **Inactive** for the client too. |
-| B3 | Both | Each opens Give for one of their own characters (Ctrl+click the portrait). | No **Resources / Items** buttons at the top: resources only. Cancel. |
-| B4 | Host | Turn **Give resources** off too. | |
-| B5 | Both | Go to another outpost screen and back (e.g. open and close a building). | For **both**: the **GIVE** button under the name in the top bar is gone, and so is the **Ctrl + click Give** line under the party list. Ctrl+click on a portrait just selects it. |
-| B6 | Host | Turn **Item trading** back on (Give resources stays off). Both: change screens again. | The GIVE button and hint line are back. Opening Give shows **Give Items** directly, no tab buttons. Cancel. |
-| B7 | Host | Turn **Give resources** back on. Both: change screens again. | Opening Give shows **Give Resources** with the **Resources / Items** buttons at the top. Cancel. |
-| B8 | Client | Try clicking a Custom Rules switch. | Nothing happens (greyed out). |
-| B9 | Both | **CHECKPOINT** (#2) | |
+| B1 | Host | Custom Rules: turn **Tradeable resources and equipment** off. | |
+| B2 | Client | Close and reopen Custom Rules. | It shows **Inactive** for the client too. |
+| B3 | Both | Go to another outpost screen and back (e.g. open and close a building). | For **both**: the **GIVE** button under the name in the top bar is gone, and so is the **Ctrl + click Give** line under the party list. Ctrl+click on a portrait just selects it. |
+| B4 | Host | Turn it back on. Both: change screens again. | The GIVE button and the hint line are back for both. Opening Give shows the **Resources / Items** buttons at the top. Cancel. |
+| B5 | Host | Turn **Share duplicate loot** off, then the client reopens Custom Rules; then the host turns it back on and the client reopens again. | The client sees Inactive, then Active. |
+| B6 | Client | Try clicking a Custom Rules switch. | Nothing happens (greyed out). |
+| B7 | Both | **CHECKPOINT** (#2) | |
 
 ## C. The host gives resources
 
@@ -129,7 +127,7 @@ To check an item on a character: select them and open their equipment / item scr
 
 | # | Who | Do | Expected |
 |---|---|---|---|
-| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows all three rules on, for both players. |
+| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows both rules on, for both players. |
 | I2 | Both | **CHECKPOINT** (#9) | Identical to #8. |
 | I3 | Both | Start any scenario together, bringing **given** items, and play 2–3 rounds normally. Use a given item if you can. | **No desync message.** The given items work. (The Give button is hidden during scenarios.) |
 | I4 | Host | Leave the scenario (abandon or finish) and get back to the outpost. | If someone looted a copy of an item they already own, the item reward window opens so you can pick who gets it (Share duplicate loot). |

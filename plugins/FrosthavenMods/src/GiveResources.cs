@@ -19,7 +19,8 @@ namespace FrosthavenMods
     public enum GiveKind { Gold = 0, Lumber = 1, Metal = 2, Hide = 3 }
 
     /// <summary>
-    /// House rule "Give resources": in the outpost, a character can hand gold or materials to another character.
+    /// House rule "Tradeable resources and equipment", resources half: in the outpost, a character can hand gold or
+    /// materials to another character (items: GiveItems.cs).
     ///
     /// Sync: outpost actions are named multiplayer commands that every machine replays (FHMapChoreographer.ExecuteCommand
     /// → host validates and broadcasts → clients apply or roll back). We add one command, "FrosthavenMods.GiveResources",
@@ -98,11 +99,12 @@ namespace FrosthavenMods
         public static bool CanReceive(CharacterState c) =>
             c.PartyState == CharacterPartyStateType.InParty || c.PartyState == CharacterPartyStateType.CreationProcess;
 
-        /// <summary>Why the giver can't give anything at all right now (null if they can).</summary>
+        /// <summary>Why the giver can't give anything at all right now (null if they can). A "must have played one
+        /// scenario" check (giver.ScenariosStarted &lt; 1, against passing on a new character's starting purchases) was
+        /// removed at the user's request to ease testing; they may want it back.</summary>
         public static string WhyCantGive(CharacterState giver)
         {
             if (giver.PartyState != CharacterPartyStateType.InParty) return Name(giver) + " must be in the party to give.";
-            if (giver.ScenariosStarted < 1) return Name(giver) + " can give after playing their first scenario.";
             return null;
         }
 
@@ -188,23 +190,17 @@ namespace FrosthavenMods
             if (giver == null) return;
             string cant = GiveRules.WhyCantGive(giver);
             if (cant != null) { Message(view, cant); return; }
-            bool resources = ModRules.IsOn(ModRules.GiveResources), items = ModRules.IsOn(ModRules.ItemTrading);
-            bool hasResources = resources && GiveResourcesViewState.Kinds.Any(k => GiveRules.Amount(giver, k) > 0);
-            bool hasItems = items && ItemRules.Giveable(view.GameController, giver).Count > 0;
-            if (!hasResources && !hasItems)
-            {
-                string what = resources && items ? "gold, materials or items" : resources ? "gold or materials" : "items";
-                Message(view, GiveRules.Name(giver) + " has no " + what + " to give.");
-                return;
-            }
+            bool hasResources = GiveResourcesViewState.Kinds.Any(k => GiveRules.Amount(giver, k) > 0);
+            bool hasItems = ItemRules.Giveable(view.GameController, giver).Count > 0;
+            if (!hasResources && !hasItems) { Message(view, GiveRules.Name(giver) + " has no gold, materials or items to give."); return; }
             var receivers = view.GameState.AllCharacters
-                .Where(c => c != giver && (resources ? GiveRules.CanReceive(c) : ItemRules.CanReceive(c)))
+                .Where(c => c != giver && GiveRules.CanReceive(c))
                 .OrderBy(c => c.PartyState == CharacterPartyStateType.InParty ? 0 : 1)
                 .Select(c => c.ID)
                 .ToList();
             if (receivers.Count == 0) { Message(view, "There is nobody else in the party to give to."); return; }
-            // Opens on Resources, or on Items when there are no resources to give (or that rule is off).
-            view.PushState(new GiveResourcesViewState(giverId, receivers, resources, items, startOnItems: !hasResources));
+            // Opens on Resources, or on Items when there are no resources to give.
+            view.PushState(new GiveResourcesViewState(giverId, receivers, startOnItems: !hasResources));
         }
 
         internal static void Safe(string step, Action action)

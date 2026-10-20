@@ -7,8 +7,9 @@ using HarmonyLib;
 namespace FrosthavenMods
 {
     /// <summary>
-    /// House rule "Item trading": in the outpost, a character can hand an item they own to another party member (the
-    /// Items tab of the Give window). Same sync model as GiveResources: one named multiplayer command that every copy of
+    /// House rule "Tradeable resources and equipment", items half: in the outpost, a character can hand an item they
+    /// own to another party member (the Items tab of the Give window). Same sync model as GiveResources: one named
+    /// multiplayer command that every copy of
     /// the campaign replays and that checks campaign state only.
     ///
     /// The move uses the game's own steps: Action_RemoveItem (the selling path: unequips it, puts it back in the shop or

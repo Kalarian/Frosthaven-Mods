@@ -15,16 +15,17 @@ namespace FrosthavenDevTools
     ///   Ctrl+F9   +100 gold and +10 lumber/metal/hide per party member, +10 of each herb to the Frosthaven supply
     ///   Ctrl+F10  "win"            DebugMenu.WinScenarioCommand: wins the current scenario
     ///   Ctrl+F11  "skip_prologue"  FHMapChoreographer.SkipPrologue: ends the prologue (map only), lands in the outpost
-    ///   Ctrl+F12  fake duplicate loot: the selected character "loots" a copy of their first item, as at the end of a
+    ///   Ctrl+F12  fake duplicate loot: the selected character "loots" a second copy of one of their items (one that
+    ///             could really drop: not every copy owned, someone else could take it), as at the end of a
     ///             scenario. With the mod's Share duplicate loot rule on, the item reward window opens; off, it is sold.
     ///             (Test campaigns only: the copy is conjured, not taken from the supply.)
     /// The game destroys BepInEx's plugin object soon after startup (as in Stolen Realm), so the plugin's own Update
     /// never runs; the keys are polled from postfixes on the game's own per-frame methods instead.
     /// </summary>
-    [BepInPlugin("frosthaven.devtools", "Frosthaven Dev Tools", "0.1.5")]
+    [BepInPlugin("frosthaven.devtools", "Frosthaven Dev Tools", "0.1.6")]
     public class DevTools : BaseUnityPlugin
     {
-        private static ManualLogSource _log;
+        internal static ManualLogSource _log;
         private static readonly MethodInfo Win = AccessTools.Method("DebugMenu:WinScenarioCommand");
         private static readonly MethodInfo SkipPrologue = AccessTools.Method("FHMapChoreographer:SkipPrologue");
         private static int _lastFrame = -1;
@@ -162,8 +163,18 @@ namespace FrosthavenDevTools
         {
             FHRL.CampaignController campaign = _game.CampaignController;
             campaign.CharacterController.TryGetCharacter(id, out FHRL.CharacterState c);
-            FHRL.ItemDef item = c == null ? null : System.Linq.Enumerable.FirstOrDefault(campaign.CharacterController.GetOwnedItems(c));
-            if (item == null) throw new FHRL.FHGameException("the selected character owns no items");
+            var owned = c == null ? new System.Collections.Generic.List<FHRL.ItemDef>() : System.Linq.Enumerable.ToList(campaign.CharacterController.GetOwnedItems(c));
+            if (owned.Count == 0) throw new FHRL.FHGameException("the selected character owns no items");
+            // Prefer an item a second copy of could really drop (not every copy owned) that someone else could take.
+            FHRL.ItemDef item = System.Linq.Enumerable.FirstOrDefault(owned, i =>
+                (i.IsUnlimitedQuantity || campaign.CountItemInstancesInCharacters(i) < i.Quantity) &&
+                System.Linq.Enumerable.Any(campaign.State.PartyCharacters, p => p != c && campaign.CharacterController.CanHaveItem(p, i)));
+            if (item == null)
+            {
+                item = owned[0];
+                DevTools._log.LogInfo($"Dev tools: none of {c.Name}'s items can drop a second copy for someone else; using {item.Name}, which will be sold.");
+            }
+            else DevTools._log.LogInfo($"Dev tools: {c.Name} 'loots' a second {item.Name} (item {item.ID.ID}).");
             BeginResult.Invoke(campaign, null);
             GainItem.Invoke(campaign.CharacterController, new object[] { c, item, "scenario_loot" });
             return (FHRL.CampaignController.Result)EndResult.Invoke(campaign, null);
