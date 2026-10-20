@@ -302,6 +302,10 @@ namespace FrosthavenInstaller
     {
         public string BuildId, VanillaSha, InstalledSha, Version;
         public List<string> Mods = new List<string>();
+        /// <summary>Game-folder files this installer placed (paths relative to the game folder, '/' separated).</summary>
+        public List<string> Files = new List<string>();
+        /// <summary>True when the BepInEx loader in the game folder was put there by us (so uninstall removes it).</summary>
+        public bool LoaderOwned;
 
         public static string Folder(string gameDir) { return Path.Combine(gameDir, "FrosthavenMods"); }
         private static string FilePath(string gameDir) { return Path.Combine(Folder(gameDir), "state.json"); }
@@ -313,18 +317,27 @@ namespace FrosthavenInstaller
             if (!File.Exists(p)) return null;
             string j = File.ReadAllText(p, Encoding.UTF8);
             var s = new State { BuildId = Str(j, "buildid"), VanillaSha = Str(j, "vanilla_sha"), InstalledSha = Str(j, "installed_sha"), Version = Str(j, "version") };
-            Match m = Regex.Match(j, "\"mods\"\\s*:\\s*\\[([^\\]]*)\\]");
-            if (m.Success) foreach (Match x in Regex.Matches(m.Groups[1].Value, "\"([^\"]*)\"")) s.Mods.Add(x.Groups[1].Value);
+            s.Mods = List(j, "mods");
+            s.Files = List(j, "files");
+            s.LoaderOwned = Regex.IsMatch(j, "\"loader_owned\"\\s*:\\s*true");
             return s;
         }
 
         public void Save(string gameDir)
         {
             Directory.CreateDirectory(Folder(gameDir));
-            string mods = string.Join(", ", Mods.Select(Q).ToArray());
             string j = "{\n  \"buildid\": " + Q(BuildId) + ",\n  \"vanilla_sha\": " + Q(VanillaSha) + ",\n  \"installed_sha\": " + Q(InstalledSha)
-                     + ",\n  \"mods\": [" + mods + "],\n  \"version\": " + Q(Version) + "\n}";
+                     + ",\n  \"mods\": [" + string.Join(", ", Mods.Select(Q).ToArray()) + "],\n  \"version\": " + Q(Version)
+                     + ",\n  \"files\": [" + string.Join(", ", Files.Select(Q).ToArray()) + "],\n  \"loader_owned\": " + (LoaderOwned ? "true" : "false") + "\n}";
             File.WriteAllText(FilePath(gameDir), j, new UTF8Encoding(false));
+        }
+
+        private static List<string> List(string json, string key)
+        {
+            var list = new List<string>();
+            Match m = Regex.Match(json, "\"" + key + "\"\\s*:\\s*\\[([^\\]]*)\\]");
+            if (m.Success) foreach (Match x in Regex.Matches(m.Groups[1].Value, "\"([^\"]*)\"")) list.Add(x.Groups[1].Value);
+            return list;
         }
 
         private static string Str(string json, string key)
@@ -403,7 +416,8 @@ namespace FrosthavenInstaller
             }
             Ruleset.Read(game); // it is a real ruleset
             if (state != null && state.BuildId != build) log.AppendLine("The game was updated by Steam (build " + state.BuildId + " -> " + build + "); saving the new original.");
-            var fresh = new State { BuildId = build, VanillaSha = gameSha };
+            // the game files we placed are still there after a Steam update: keep tracking them
+            var fresh = new State { BuildId = build, VanillaSha = gameSha, Files = state != null ? state.Files : new List<string>(), LoaderOwned = state != null && state.LoaderOwned };
             Directory.CreateDirectory(State.Folder(gameDir));
             foreach (string old in Directory.GetFiles(State.Folder(gameDir), "Base.ruleset.*")) File.Delete(old);
             File.WriteAllBytes(fresh.BackupPath(gameDir), game);
@@ -517,8 +531,9 @@ namespace FrosthavenInstaller
                     state.InstalledSha = Sha256(result);
                     state.Mods = mods.Select(m => m.Folder).ToList();
                     state.Version = version;
+                    InstallGameFiles(gameDir, zip, state, log);
                     state.Save(gameDir);
-                    log.AppendLine("Installed " + mods.Count + " mod(s).");
+                    log.AppendLine("Installed " + mods.Count + " rules mod(s)" + (state.Files.Count > 0 ? " and the code plugin(s)." : "."));
                 }
             }
             log.AppendLine("Done. Launch the game from Steam as usual.");
@@ -526,11 +541,88 @@ namespace FrosthavenInstaller
             return 0;
         }
 
+        private const string LoaderMarker = "winhttp.dll";
+
+        /// <summary>Copy the pack's game/ files into the game folder. A BepInEx loader that someone else installed is left
+        /// alone (only our plugins are added). Files we placed last time that are no longer in the pack are removed.</summary>
+        private static void InstallGameFiles(string gameDir, ZipArchive zip, State state, StringBuilder log)
+        {
+            var entries = zip.Entries.Where(e => e.FullName.StartsWith("game/") && !e.FullName.EndsWith("/")).ToList();
+            var previous = new HashSet<string>(state.Files, StringComparer.OrdinalIgnoreCase);
+            bool foreignLoader = File.Exists(Path.Combine(gameDir, LoaderMarker)) && !state.LoaderOwned;
+            if (foreignLoader && entries.Count > 0)
+                log.AppendLine("  A mod loader (BepInEx) was already installed; keeping it and adding our plugin to it.");
+            var placed = new List<string>();
+            foreach (ZipArchiveEntry e in entries)
+            {
+                string rel = e.FullName.Substring("game/".Length);
+                bool isPlugin = rel.StartsWith("BepInEx/plugins/", StringComparison.OrdinalIgnoreCase);
+                if (foreignLoader && !isPlugin) continue;
+                if (rel.Split('/').Any(p => p == ".." || p.Length == 0) || Path.IsPathRooted(rel)) throw new InvalidDataException("bad path in pack: " + rel);
+                string dest = Path.Combine(gameDir, rel.Replace('/', Path.DirectorySeparatorChar));
+                Directory.CreateDirectory(Path.GetDirectoryName(dest));
+                using (Stream src = e.Open())
+                using (var dst = new FileStream(dest, FileMode.Create, FileAccess.Write)) src.CopyTo(dst);
+                placed.Add(rel);
+            }
+            if (!foreignLoader && placed.Contains(LoaderMarker)) state.LoaderOwned = true;
+            var now = new HashSet<string>(placed, StringComparer.OrdinalIgnoreCase);
+            foreach (string old in previous.Where(p => !now.Contains(p)))   // e.g. a plugin that left the pack
+            {
+                string path = Path.Combine(gameDir, old.Replace('/', Path.DirectorySeparatorChar));
+                TryDelete(path, log);
+                try { string dir = Path.GetDirectoryName(path); if (Directory.Exists(dir) && !Directory.EnumerateFileSystemEntries(dir).Any()) Directory.Delete(dir); } catch { }
+            }
+            if (placed.Count == 0 && state.LoaderOwned) RemoveLoaderLeftovers(gameDir, state, log);
+            state.Files = now.OrderBy(p => p, StringComparer.OrdinalIgnoreCase).ToList();
+            int plugins = placed.Count(p => p.StartsWith("BepInEx/plugins/", StringComparison.OrdinalIgnoreCase));
+            if (placed.Count > 0) log.AppendLine("  + " + (foreignLoader ? "" : "mod loader and ") + plugins + " plugin file(s)");
+        }
+
+        private static void TryDelete(string path, StringBuilder log)
+        {
+            try { if (File.Exists(path)) File.Delete(path); }
+            catch (Exception e) { log.AppendLine("  Could not remove " + path + ": " + e.Message); }
+        }
+
+        /// <summary>Remove the files we placed. If the loader is ours, also the files BepInEx writes itself (cache, its
+        /// config, logs), then any folders left empty. Someone else's plugins are never touched.</summary>
+        private static void RemoveGameFiles(string gameDir, State state, StringBuilder log)
+        {
+            foreach (string rel in state.Files) TryDelete(Path.Combine(gameDir, rel.Replace('/', Path.DirectorySeparatorChar)), log);
+            if (state.LoaderOwned) RemoveLoaderLeftovers(gameDir, state, log);
+            state.Files = new List<string>();
+        }
+
+        private static void RemoveLoaderLeftovers(string gameDir, State state, StringBuilder log)
+        {
+            string bep = Path.Combine(gameDir, "BepInEx");
+            foreach (string f in new[] { LoaderMarker, "doorstop_config.ini", ".doorstop_version" }) TryDelete(Path.Combine(gameDir, f), log);
+            if (Directory.Exists(bep))
+            {
+                try { if (Directory.Exists(Path.Combine(bep, "cache"))) Directory.Delete(Path.Combine(bep, "cache"), true); } catch { }
+                TryDelete(Path.Combine(bep, "config", "BepInEx.cfg"), log);
+                foreach (string f in Directory.GetFiles(bep, "LogOutput*.log")) TryDelete(f, log);
+                foreach (string d in Directory.GetDirectories(bep, "*", SearchOption.AllDirectories).OrderByDescending(d => d.Length))
+                    try { if (!Directory.EnumerateFileSystemEntries(d).Any()) Directory.Delete(d); } catch { }
+                try { if (!Directory.EnumerateFileSystemEntries(bep).Any()) Directory.Delete(bep); } catch { }
+                if (Directory.Exists(bep)) log.AppendLine("  Left the BepInEx folder in place: it has other files in it (another mod?).");
+            }
+            state.LoaderOwned = false;
+        }
+
         public static int Uninstall(string gameDir, StringBuilder log)
         {
             if (IsGameRunning()) { log.AppendLine("Frosthaven is running. Close the game, then try again."); return 1; }
             State state = State.Load(gameDir);
             if (state == null) { log.AppendLine("No mods are installed (nothing to remove)."); return 0; }
+            if (state.Files.Count > 0 || state.LoaderOwned)
+            {
+                bool owned = state.LoaderOwned;
+                RemoveGameFiles(gameDir, state, log);
+                state.Save(gameDir);
+                log.AppendLine(owned ? "Removed the mod loader and plugins." : "Removed our plugin (the mod loader that was already there is kept).");
+            }
             string gameSha = Sha256(File.ReadAllBytes(RulesetPath(gameDir)));
             if (gameSha == state.InstalledSha)
             {

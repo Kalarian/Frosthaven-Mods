@@ -32,6 +32,25 @@ Mod layout, `mods/<Name>/`:
 - `patches/<path>.diff`: a unified diff against `<path>` inside the ruleset
 - `files/<path>`: a new file added to the ruleset (its first line `Parser: <Type>` decides where it loads)
 
+## Code mods (house rules)
+
+`plugins/FrosthavenMods/` is a BepInEx 5 plugin (`frosthaven.mods.dll`, netstandard2.1, HarmonyX). The loader is in
+`loader/` (see its README). Every code feature is a **campaign house rule**:
+- The game has a House Rules screen (Options > House Rules), but it's hidden in this build because
+  `GameSettingsService.ValidCampaignRules` is `None`. The plugin shows it for campaigns and adds our own switches.
+- Our rules are extra bits (from `1 << 24` up) in the game's own campaign rules number (`PartyAdventureData.Rules`).
+  The game saves that number in the save header and sends it to co-op players (join token + `ChangeHouseRuleSettings`),
+  so the host's choice reaches everyone and is stored in the campaign. The vanilla game ignores unknown bits.
+- The plugin fixes three game bugs on the way:
+  - `ApplyHeader` never reads the rules back, so they reset to off on every reload.
+  - The screen's callbacks capture the rules from when the window opened, so flipping two switches undid the first.
+  - The window's row list is never emptied.
+- Rules so far: "Shared gold" and "Item trading". **Both are switches only, and do nothing yet.**
+
+The installer copies `game/*` from the pack into the game folder and records every file it placed in `state.json`.
+A BepInEx someone else installed is kept (only our plugin is added). Uninstall removes only what we placed, plus
+BepInEx's own cache/config/logs when the loader is ours. Other people's plugins are never touched.
+
 ## Tools (Python 3, stdlib only)
 
 `tools/fh_mods.py`: the mod pipeline

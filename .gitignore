@@ -11,6 +11,12 @@
 !tools/
 !tools/**
 !installer/
+!loader/
+!loader/**
+!plugins/
+!plugins/**
+plugins/**/bin/
+plugins/**/obj/
 !installer/**
 installer/bin/
 installer/obj/

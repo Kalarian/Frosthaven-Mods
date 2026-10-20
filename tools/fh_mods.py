@@ -257,8 +257,10 @@ def vanilla_backup():
     build_id = steam_build_id()
     BACKUP.mkdir(exist_ok=True)
     (BACKUP / f"Base.ruleset.{build_id}").write_bytes(game)
+    # keep the installer's own fields (game files it placed, loader ownership): those files are still in the game folder
+    keep = {k: v for k, v in state.items() if k in ("files", "loader_owned")}
     STATE.write_text(json.dumps({"buildid": build_id, "vanilla_sha": game_sha, "installed_sha": None,
-                                 "mods": [], "version": None}, indent=2), encoding="utf-8")
+                                 "mods": [], "version": None, **keep}, indent=2), encoding="utf-8")
     print(f"backed up vanilla Base.ruleset (Steam build {build_id})")
     return game
 
