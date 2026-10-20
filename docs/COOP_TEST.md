@@ -9,6 +9,8 @@ some steps are done at the same moment.
 2. Giving resources and items works for both players, and both PCs end up with the same gold, materials and items.
 3. Nobody can give from a character that the other player controls.
 4. Nothing desyncs afterwards: saving, reloading, shopping, crafting, donating, a scenario.
+5. The battle stats (extra rows and the Campaign view on the post-scenario Statistics page) show the same numbers on
+   both PCs.
 
 ## How we check
 
@@ -130,8 +132,10 @@ To check an item on a character: select them and open their equipment / item scr
 | I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows both rules on, for both players. |
 | I2 | Both | **CHECKPOINT** (#9) | Identical to #8. |
 | I3 | Both | Start any scenario together, bringing **given** items, and play 2–3 rounds normally. Use a given item if you can. | **No desync message.** The given items work. (The Give button is hidden during scenarios.) |
-| I4 | Host | Leave the scenario (abandon or finish) and get back to the outpost. | If someone looted a copy of an item they already own, the item reward window opens with nothing assigned. The host (party leader) left-clicks one character, then another: the item moves in one click, on both screens. Done assigns it (Share duplicate loot). |
-| I5 | Both | **CHECKPOINT** (#10) | |
+| I4 | Both | Finish the scenario (win if you can; a loss also works). On the post-scenario screen, open the **Statistics** tab (crossed swords). | Under the game's 8 rows: section titles (OFFENSE, DEFENSE, ...) with no bars, and rows with icons, no white boxes. **Both PCs show the same number in every row.** Take a screenshot on each PC (scroll down for the rest). |
+| I5 | Both | Click **Campaign** (top right of the Statistics page), then **This scenario**. | The buttons don't overlap the title. Campaign shows a **Scenarios played** row and totals; each player's count is the number of scenarios they've finished with the mod (they can differ if one played more solo). This scenario switches back. |
+| I6 | Host | Continue back to the outpost. | If someone looted a copy of an item they already own, the item reward window opens with nothing assigned. The host (party leader) left-clicks one character, then another: the item moves in one click, on both screens. Done assigns it (Share duplicate loot). |
+| I7 | Both | **CHECKPOINT** (#10) | |
 
 ## After the test
 
@@ -139,7 +143,9 @@ To check an item on a character: select them and open their equipment / item scr
 2. The **client** sends their `coop-log.txt` to the host.
 3. The host gives Claude both files (or runs
    `python tools/coop_compare.py <host coop-log.txt> <client coop-log.txt>`).
-4. Also note anything odd from the tables above: what you expected and what happened.
+4. Also send the newest `FrosthavenMods\stats\scenario-*.txt` from each PC (the raw battle records), to check the
+   stats match between players.
+5. Also note anything odd from the tables above: what you expected and what happened.
 
 **Don't relaunch the game before copying the files.** They're kept across launches (each launch adds a new session),
 but sending them straight away avoids confusion.
@@ -154,3 +160,12 @@ A duplicate drop is rare, so the dev tools can fake one (solo only, test campaig
 2. Turn **Share duplicate loot** off and press **Ctrl+F12** again. No window: the character gets the item's sell value
    in gold instead (the game's normal behaviour).
 3. If every other party member already owns that item, the copy is sold even with the rule on.
+
+## Solo: battle stats (host, before the session)
+
+1. Play any scenario for a few rounds with some fighting, then finish it (Ctrl+F10 wins it; a win with no fighting
+   records almost nothing).
+2. On the Statistics tab: the extra rows appear under the game's 8, section titles have no bars, every row has an
+   icon. Note anything memorable (a crit, a null, a summon, a heal) and check the matching rows.
+3. Click **Campaign**: Scenarios played goes up by one for every scenario finished with the mod. Click
+   **This scenario** to switch back.
