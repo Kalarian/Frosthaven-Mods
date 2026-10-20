@@ -83,9 +83,11 @@ namespace FrosthavenMods
             if (string.IsNullOrEmpty(p) || (p[0] != '+' && p[0] != '-')) return null;
             return int.TryParse(p, out int v) ? v : (int?)null;
         }
-        private static bool IsCrit(string m) => m != null && (m.IndexOf("x2", StringComparison.OrdinalIgnoreCase) >= 0 || m.IndexOf("double", StringComparison.OrdinalIgnoreCase) >= 0 || m.IndexOf("crit", StringComparison.OrdinalIgnoreCase) >= 0);
+        private static bool Has(string m, params string[] parts) => m != null && parts.Any(p => m.IndexOf(p, StringComparison.OrdinalIgnoreCase) >= 0);
 
-        private static bool IsNull(string m) => m != null && (m.IndexOf("null", StringComparison.OrdinalIgnoreCase) >= 0 || m.IndexOf("x0", StringComparison.OrdinalIgnoreCase) >= 0 || m.IndexOf("miss", StringComparison.OrdinalIgnoreCase) >= 0);
+        private static bool IsCrit(string m) => Has(m, "x2", "*2", "2x", "\u00d72", "double", "crit");
+
+        private static bool IsNull(string m) => Has(m, "null", "x0", "*0", "\u00d70", "miss");
 
         private static IEnumerable<string> Mods(CPlayerStatsScenario s) => s.Modifiers?.SelectMany(m => m.Modifier ?? new List<string>()).Select(Plain) ?? Enumerable.Empty<string>();
 
@@ -98,11 +100,25 @@ namespace FrosthavenMods
 
         private static int Overkill(CPlayerStatsKill k) => Math.Max(0, k.LastDamageAmount - k.PreDamageHealth);
 
+        // What the game's records mean (checked in StatsDataStorage / GameState, 2026-10-20):
+        // - DamageDealt / DamageReceived / Kills / Heals also hold your summons' entries, flagged PerformedBySummons.
+        // - Damage Avoided = a whole hit negated (lose cards, prevent-damage effects); Shielded is set for enemy targets
+        //   only; Shield is the target's shield value on that hit.
+        // - Trap records are springing ("Activate") and disarming ("Disarm") traps.
+        // - RemovedCondition is conditions removed FROM the character (wearing off included), so it is not used.
+        private static bool Own(CPlayerStatsDamage d) => !d.PerformedBySummons;
+
+        private static bool OwnAttack(CPlayerStatsDamage d) => Own(d) && d.ActionData?.AbilityType == CAbility.EAbilityType.Attack;
+
+        private static bool EnemyKill(CPlayerStatsKill k) => k.ActorWhoDiedType != "Player" && k.ActorWhoDiedType != "HeroSummon";
+
+        private static bool Sprung(CPlayerStatsTrap t) => string.Equals(t.TrapAction, "Activate", StringComparison.OrdinalIgnoreCase);
+
         private static readonly List<Row> Rows = new List<Row>
         {
             Section("OFFENSE"),
-            Int("Biggest hit", Dealt, s => Max(s.DamageDealt, d => d.FinalDamageAmount)),
-            Int("Hits landed", Dealt, s => Count(s.DamageDealt, d => d.FinalDamageAmount > 0)),
+            Int("Biggest hit", Dealt, s => Max(s.DamageDealt?.Where(Own), d => d.FinalDamageAmount)),
+            Int("Hits landed", Dealt, s => Count(s.DamageDealt, d => OwnAttack(d) && d.FinalDamageAmount > 0)),
             new Row
             {
                 Label = "Damage per round",
@@ -110,27 +126,27 @@ namespace FrosthavenMods
                 Value = s => s.RoundsPlayed <= 0 ? "-" : (Sum(s.DamageDealt, d => d.FinalDamageAmount) / (double)s.RoundsPlayed).ToString("0.0"),
                 Score = s => s.RoundsPlayed <= 0 ? 0 : Sum(s.DamageDealt, d => d.FinalDamageAmount) / (double)s.RoundsPlayed,
             },
-            Int("Overkill", Killed, s => Sum(s.Kills, Overkill)),
-            Int("Lost to enemy shields", Dealt, s => Sum(s.DamageDealt, d => d.Shielded)),
+            Int("Overkill", Killed, s => Sum(s.Kills?.Where(EnemyKill), Overkill)),
+            Int("Blocked by enemy shields", Dealt, s => Sum(s.DamageDealt, d => d.Shielded)),
             Int("Poison bonus damage", Bad(CCondition.ENegativeCondition.Poison), s => Sum(s.DamageDealt, d => d.PoisonDamage)),
-            Int("Melee hits", Dealt, s => Count(s.DamageDealt, d => d.IsMelee && d.FinalDamageAmount > 0)),
-            Int("Ranged hits", Dealt, s => Count(s.DamageDealt, d => !d.IsMelee && d.FinalDamageAmount > 0)),
+            Int("Melee hits", Dealt, s => Count(s.DamageDealt, d => OwnAttack(d) && d.IsMelee && d.FinalDamageAmount > 0)),
+            Int("Ranged hits", Dealt, s => Count(s.DamageDealt, d => OwnAttack(d) && !d.IsMelee && d.FinalDamageAmount > 0)),
             Int("Area attacks", Dealt, s => Count(Abilities(s), a => a.AreaEffect == true)),
             Int("Damage by summons", Dealt, s => Sum(s.DamageDealt, d => d.PerformedBySummons ? d.FinalDamageAmount : 0)),
-            Int("Kills by summons", Killed, s => Count(s.Kills, k => k.PerformedBySummons)),
+            Int("Kills by summons", Killed, s => Count(s.Kills, k => k.PerformedBySummons && EnemyKill(k))),
 
             Section("DEFENSE"),
-            Int("Biggest hit taken", Taken, s => Max(s.DamageReceived, d => d.CauseOfDamage == CActor.ECauseOfDamage.Self ? 0 : d.FinalDamageAmount)),
-            Int("Self-inflicted damage", Taken, s => Sum(s.DamageReceived, d => d.CauseOfDamage == CActor.ECauseOfDamage.Self ? d.FinalDamageAmount : 0)),
-            Int("Blocked by shield", Good(CCondition.EPositiveCondition.Ward), s => Sum(s.DamageReceived, d => d.Shielded + d.ItemShielded)),
-            Int("Attacks avoided", Good(CCondition.EPositiveCondition.Invisible), s => Count(s.DamageReceived, d => d.Avoided > 0)),
-            Int("Damage negated by cards", Good(CCondition.EPositiveCondition.Ward), s => Sum(s.LoseCards, c => c.DamageAvoided)),
-            Int("Trap damage taken", Taken, s => Sum(s.Trap, t => t.TrapDamage)),
+            Int("Biggest hit taken", Taken, s => Max(s.DamageReceived?.Where(d => Own(d) && d.CauseOfDamage != CActor.ECauseOfDamage.Self), d => d.FinalDamageAmount)),
+            Int("Self-inflicted damage", Taken, s => Sum(s.DamageReceived, d => Own(d) && d.CauseOfDamage == CActor.ECauseOfDamage.Self ? d.FinalDamageAmount : 0)),
+            Int("Shield on hits taken", Good(CCondition.EPositiveCondition.Ward), s => Sum(s.DamageReceived, d => Own(d) && d.Avoided == 0 ? Math.Max(0, d.Shield) : 0)),
+            Int("Hits negated", Good(CCondition.EPositiveCondition.Invisible), s => Count(s.DamageReceived, d => Own(d) && d.Avoided > 0)),
+            Int("Damage negated", Good(CCondition.EPositiveCondition.Ward), s => Sum(s.DamageReceived, d => Own(d) ? d.Avoided : 0)),
+            Int("Trap damage taken", Taken, s => Sum(s.Trap?.Where(Sprung), t => t.TrapDamage)),
             Int("Exhausted", Bad(CCondition.ENegativeCondition.Bane), s => s.PlayerSurvivedScenario ? 0 : 1),
 
             Section("SUPPORT"),
             Int("Heals", Healed, s => Count(s.Heals)),
-            Int("Conditions removed", Good(CCondition.EPositiveCondition.Regenerate), s => Count(s.RemovedCondition)),
+            Int("Poison/wound cleared", Good(CCondition.EPositiveCondition.Regenerate), s => Count(s.Heals, h => h.PoisonRemoved || h.WoundRemoved)),
             Int("Summons", Good(CCondition.EPositiveCondition.Strengthen), s => Count(Abilities(s), a => a.ActionData?.AbilityType == CAbility.EAbilityType.Summon)),
 
             Section("LUCK"),
@@ -155,7 +171,8 @@ namespace FrosthavenMods
             Section("EXPLORATION"),
             Int("Doors opened", Chests, s => Sum(s.Door, d => d.Doors)),
             Int("Loot picked up", Looted, s => Count(s.Loot)),
-            Int("Traps sprung", Taken, s => Count(s.Trap)),
+            Int("Traps sprung", Taken, s => Count(s.Trap, Sprung)),
+            Int("Traps disarmed", Good(CCondition.EPositiveCondition.Immovable), s => Count(s.Trap, t => !Sprung(t))),
             Int("Enemies forced into traps", Killed, s => Count(s.ForcedActorsIntoTraps)),
             Int("Rounds played", Xp, s => s.RoundsPlayed),
         };
@@ -257,9 +274,9 @@ namespace FrosthavenMods
                         .Where(p => typeof(System.Collections.ICollection).IsAssignableFrom(p.PropertyType))
                         .Select(p => $"{p.Name}={(p.GetValue(s) as System.Collections.ICollection)?.Count ?? 0}")));
                     foreach (var d in s.DamageDealt ?? new List<CPlayerStatsDamage>())
-                        sb.AppendLine($"  DEALT r{d.Round} {d.FinalDamageAmount} to {d.ActorWhoReceivedDamageMonsterType ?? d.ActorWhoReceivedDamageClassID} (hp {d.HealthBeforeDamage}) shielded={d.Shielded} avoided={d.Avoided} poison={d.PoisonDamage} melee={d.IsMelee} cause={d.CauseOfDamage} ability={d.ActionData?.ActingAbilityName} type={d.ActionData?.AbilityType} summon={d.PerformedBySummons}");
+                        sb.AppendLine($"  DEALT r{d.Round} {d.FinalDamageAmount} to {d.ActorWhoReceivedDamageMonsterType ?? d.ActorWhoReceivedDamageClassID} (hp {d.HealthBeforeDamage}) shielded={d.Shielded} shield={d.Shield} avoided={d.Avoided} poison={d.PoisonDamage} melee={d.IsMelee} cause={d.CauseOfDamage} ability={d.ActionData?.ActingAbilityName} type={d.ActionData?.AbilityType} summon={d.PerformedBySummons}");
                     foreach (var d in s.DamageReceived ?? new List<CPlayerStatsDamage>())
-                        sb.AppendLine($"  TAKEN r{d.Round} {d.FinalDamageAmount} from {d.ActorWhoDealtDamageMonsterType ?? d.ActorWhoDealtDamageClassID} shielded={d.Shielded} item={d.ItemShielded} avoided={d.Avoided} cause={d.CauseOfDamage}");
+                        sb.AppendLine($"  TAKEN r{d.Round} {d.FinalDamageAmount} from {d.ActorWhoDealtDamageMonsterType ?? d.ActorWhoDealtDamageClassID} shielded={d.Shielded} shield={d.Shield} avoided={d.Avoided} cause={d.CauseOfDamage} summon={d.PerformedBySummons}");
                     foreach (var k in s.Kills ?? new List<CPlayerStatsKill>())
                         sb.AppendLine($"  KILL r{k.Round} {k.ActorWhoDiedMonsterType ?? k.ActorWhoDiedClassID} type={k.ActorWhoDiedType} cause={k.CauseOfDeath} last={k.LastDamageAmount} hpBefore={k.PreDamageHealth} max={k.MaxHealth} summon={k.PerformedBySummons}");
                     foreach (var m in s.Modifiers ?? new List<CPlayerStatsModifiers>())
@@ -274,6 +291,8 @@ namespace FrosthavenMods
                         sb.AppendLine($"  INFUSE r{e.Round} {e.Element}");
                     foreach (var e in s.Consumed ?? new List<CPlayerStatsElement>())
                         sb.AppendLine($"  CONSUME r{e.Round} {e.Element}");
+                    foreach (var t in s.Trap ?? new List<CPlayerStatsTrap>())
+                        sb.AppendLine($"  TRAP r{t.Round} {t.TrapAction} damage={t.TrapDamage}");
                     foreach (var l in s.Loot ?? new List<CPlayerStatsLoot>())
                         sb.AppendLine($"  LOOT r{l.Round} {l.LootType} endOfTurn={l.EndOfTurn}");
                 }
