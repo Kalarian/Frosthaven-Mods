@@ -163,7 +163,7 @@ namespace FrosthavenMods
             }
         }
 
-        private static CharacterState Find(FHMapView view, CharacterID id) =>
+        internal static CharacterState Find(FHMapView view, CharacterID id) =>
             view.GameController.CharacterController.TryGetCharacter(id, out CharacterState c) ? c : null;
 
         private static void Start(FHMapView view, CharacterID giverId)
@@ -172,76 +172,23 @@ namespace FrosthavenMods
             if (giver == null) return;
             string cant = GiveRules.WhyCantGive(giver);
             if (cant != null) { Message(view, cant); return; }
-            if (GiveRules.Amount(giver, GiveKind.Gold) + giver.Resources.TotalMaterials <= 0) { Message(view, GiveRules.Name(giver) + " has no gold or materials to give."); return; }
-
-            var items = view.GameState.AllCharacters
+            if (GiveResourcesViewState.Kinds.All(k => GiveRules.Amount(giver, k) <= 0)) { Message(view, GiveRules.Name(giver) + " has no gold or materials to give."); return; }
+            var receivers = view.GameState.AllCharacters
                 .Where(c => c != giver && GiveRules.CanReceive(c))
                 .OrderBy(c => c.PartyState == CharacterPartyStateType.InParty ? 0 : c.PartyState == CharacterPartyStateType.CreationProcess ? 1 : 2)
-                .Select(c => new GenericListModalViewState.ListItem
-                {
-                    Item = c.ID,
-                    Text = $"{GiveRules.Name(c)}  ({c.Gold} gold)" +
-                           (c.PartyState == CharacterPartyStateType.Removed ? "  - not in party" :
-                            c.PartyState == CharacterPartyStateType.CreationProcess ? "  - being created: unspent gold is lost when creation finishes" : ""),
-                })
+                .Select(c => c.ID)
                 .ToList();
-            if (items.Count == 0) { Message(view, "There is nobody to give to."); return; }
-
-            view.PushState(new GenericListModalViewState("Give resources", $"{GiveRules.Name(giver)} gives to:", items, -1, null, "Cancel",
-                pick => { if (pick?.Item is CharacterID to) ChooseWhat(view, giverId, to); }, backgroundEnabled: true));
+            if (receivers.Count == 0) { Message(view, "There is nobody to give to."); return; }
+            view.PushState(new GiveResourcesViewState(giverId, receivers));
         }
 
-        /// <summary>What to give: gold and the three materials with the giver's amounts (none = greyed out). Uses the
-        /// game's list window: its ResourcePickerModalViewState has no callers in the game and does nothing when pushed.
-        /// After each gift this reopens for the same recipient; "Done" closes it.</summary>
-        private static void ChooseWhat(FHMapView view, CharacterID giverId, CharacterID receiverId)
-        {
-            Safe("choose what", () =>
-            {
-                CharacterState giver = Find(view, giverId), receiver = Find(view, receiverId);
-                if (giver == null || receiver == null) { Plugin.Log.LogWarning("Give resources: character not found"); return; }
-                var kinds = new[] { GiveKind.Gold, GiveKind.Lumber, GiveKind.Metal, GiveKind.Hide };
-                if (kinds.All(k => GiveRules.Amount(giver, k) <= 0)) { Message(view, GiveRules.Name(giver) + " has nothing left to give."); return; }
-                var items = kinds.Select(k => new GenericListModalViewState.ListItem
-                {
-                    Item = k,
-                    Text = $"{char.ToUpperInvariant(GiveRules.Label(k)[0])}{GiveRules.Label(k).Substring(1)}  ({GiveRules.Amount(giver, k)})",
-                    Enabled = GiveRules.Amount(giver, k) > 0,
-                }).ToList();
-                view.PushState(new GenericListModalViewState("Give resources",
-                    $"What does {GiveRules.Name(giver)} give to {GiveRules.Name(receiver)}?", items, -1, null, "Done",
-                    pick => { if (pick?.Item is GiveKind kind) Safe("choose amount", () => ChooseAmount(view, giverId, receiverId, kind)); }, backgroundEnabled: true, columns: 2));
-            });
-        }
-
-        private static void Safe(string step, Action action)
+        internal static void Safe(string step, Action action)
         {
             try { action(); }
             catch (Exception e) { Plugin.Log.LogError($"Give resources: {step} failed: {e}"); }
         }
 
-        private static readonly int[] Presets = { 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 75, 100, 150, 200, 250, 300, 400, 500, 750, 1000 };
-
-        private static void ChooseAmount(FHMapView view, CharacterID giverId, CharacterID receiverId, GiveKind kind)
-        {
-            CharacterState giver = Find(view, giverId), receiver = Find(view, receiverId);
-            if (giver == null || receiver == null) return;
-            int have = GiveRules.Amount(giver, kind);
-            string label = GiveRules.Label(kind);
-            var items = Presets.Where(a => a < have)
-                .Select(a => new GenericListModalViewState.ListItem { Item = a, Text = $"{a} {label}" })
-                .Concat(new[] { new GenericListModalViewState.ListItem { Item = have, Text = $"All ({have} {label})" } })
-                .ToList();
-            view.PushState(new GenericListModalViewState("Give resources",
-                $"How much {label} does {GiveRules.Name(giver)} give to {GiveRules.Name(receiver)}? ({have} available)", items, -1, null, "Cancel",
-                pick =>
-                {
-                    if (pick?.Item is int amount && Give(view, giver, receiver, kind, amount))
-                        ChooseWhat(view, giverId, receiverId); // give more to the same character
-                }, backgroundEnabled: true, columns: 4));
-        }
-
-        private static bool Give(FHMapView view, CharacterState giver, CharacterState receiver, GiveKind kind, int amount)
+        internal static bool Give(FHMapView view, CharacterState giver, CharacterState receiver, GiveKind kind, int amount)
         {
             string why = GiveRules.WhyNot(giver, receiver, kind, amount);
             if (why != null) { Message(view, why); return false; }
@@ -259,7 +206,7 @@ namespace FrosthavenMods
             }
         }
 
-        private static void Message(FHMapView view, string text) =>
+        internal static void Message(FHMapView view, string text) =>
             view.PushState(new GenericModalViewState(text, "Give resources", null, canCancel: false));
     }
 }

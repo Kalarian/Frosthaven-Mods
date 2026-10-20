@@ -20,7 +20,13 @@ namespace FrosthavenMods
         {
             Log = Logger;
             var harmony = new Harmony(Guid);
-            harmony.PatchAll(typeof(Plugin).Assembly);
+            // One patch class at a time: if a game update breaks one feature's patch, the others still load.
+            foreach (System.Type type in AccessTools.GetTypesFromAssembly(typeof(Plugin).Assembly))
+            {
+                if (type.GetCustomAttributes(typeof(HarmonyPatch), false).Length == 0) continue;
+                try { harmony.CreateClassProcessor(type).Patch(); }
+                catch (System.Exception e) { Log.LogError($"Could not patch {type.Name} (that feature is off): {e}"); }
+            }
             int n = 0;
             foreach (var _ in harmony.GetPatchedMethods()) n++;
             Log.LogInfo($"Frosthaven Mods {Version} loaded: {n} game methods patched. House rules: {ModRules.Describe()}");

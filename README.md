@@ -46,12 +46,16 @@ Mod layout, `mods/<Name>/`:
   - The screen's callbacks capture the rules from when the window opened, so flipping two switches undid the first.
   - The window's row list is never emptied.
 - Rules so far:
-  - **Give resources** (bit 24, released in v0.2.0 as "Shared gold"). In the outpost, the party column gets a
-    Ctrl+left-click "Give" action on each portrait you control (wraps the portrait's own Select click; middle-click is
-    taken by the game's character summary). It picks a recipient (party, bench, or a character
-    being created; not retired), then gold, lumber, metal or hide (list window), then an amount. The
-    picker reopens for more. The custom multiplayer command `FrosthavenMods.GiveResources` is resolved by a prefix on
-    `MultiplayerGameController.GetExectionContext`, so it runs on every machine like SellItem/BuyItem, with the host
+  - **Give resources** (bit 24, released in v0.2.0 as "Shared gold"). In the outpost, Ctrl+left-click the portrait of
+    a character you control in the party column. This wraps the portrait's own Select click; middle-click is taken by
+    the game's character summary. The game's Building Donation table opens, filled with our data (`GiveResourcesViewState`):
+    - Columns: everyone who can receive (party, bench, in creation; not retired).
+    - Rows: gold, lumber, metal, hide. Each row header counts down the giver's amount left.
+    - Click +1, right-click -1, Shift+click all/clear (built into the table), Ctrl+click +/-10 (ours).
+    - Nothing is sent until **Give**, which sends one `FrosthavenMods.GiveResources` command per filled cell.
+
+    The command is resolved by a prefix on `MultiplayerGameController.GetExectionContext`, so it runs on every machine
+    like SellItem/BuyItem, with the host
     validating it. Limits:
     - The giver must be in the party, have played at least 1 scenario, and have the amount.
     - Herbs aren't included: the digital game keeps herbs only in the shared Frosthaven supply.
