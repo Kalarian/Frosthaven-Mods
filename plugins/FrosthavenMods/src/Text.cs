@@ -14,9 +14,6 @@ namespace FrosthavenMods
         {
             ["FHMODS_GIVE_TITLE"] = "Give Resources",
             ["FHMODS_GIVE_ITEMS_TITLE"] = "Give Items",
-            ["FHMODS_LOOT_TITLE"] = "Allocate Loot",
-            ["FHMODS_LOOT_DONE"] = "Allocate",
-            ["FHMODS_LOOT_KEEP"] = "Keep as looted",
             ["FHMODS_GIVE"] = "Give",
             ["FHMODS_GIVE_HINT"] = "Give",
         };

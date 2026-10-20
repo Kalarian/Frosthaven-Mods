@@ -24,7 +24,7 @@ namespace FrosthavenMods
         // and harmless if an old test save still has it set.
         public const ERulesFlag Trading = (ERulesFlag)(1 << 24);
         public const ERulesFlag ShareDuplicateLoot = (ERulesFlag)(1 << 26);
-        public const ERulesFlag AllocateLoot = (ERulesFlag)(1 << 27);
+        // Bit 27 was "Always allocate scenario loot" (tried and removed 2026-10-20): unused, harmless if a save has it.
 
         public static readonly List<Rule> All = new List<Rule>
         {
@@ -47,16 +47,6 @@ namespace FrosthavenMods
                               "If nobody else in the party can take it, it is still sold.\n\n" +
                               "Board game rule restored: the looter gives it to another character or sells it. To sell, " +
                               "the new owner sells it in Downtime for the same gold.",
-            },
-            new Rule
-            {
-                Flag = AllocateLoot,
-                Name = "Always allocate scenario loot (mod)",
-                Description = "After every scenario, the party leader splits the loot: the gold, lumber, metal, hide and " +
-                              "items picked up in that scenario. The window starts with everything where it was looted; " +
-                              "\"Keep as looted\" leaves it that way.\n\n" +
-                              "Scenario rewards (not loot) and herbs (already shared) are not included.\n" +
-                              "Board game rule bent: loot normally belongs to the character who looted it.",
             },
         };
 

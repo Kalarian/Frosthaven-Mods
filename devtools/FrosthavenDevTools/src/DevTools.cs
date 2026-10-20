@@ -14,8 +14,6 @@ namespace FrosthavenDevTools
     /// console to type them into:
     ///   Ctrl+F9   +100 gold and +10 lumber/metal/hide per party member, +10 of each herb to the Frosthaven supply
     ///   Ctrl+F10  "win"            DebugMenu.WinScenarioCommand: wins the current scenario
-    ///   Ctrl+Shift+F10  win with fake loot: as Ctrl+F10, and the scenario result gives party member n (1, 2, ...)
-    ///             10n gold and n lumber, the first one also metal and a shop item (for the mod's Allocate Loot window)
     ///   Ctrl+F11  "skip_prologue"  FHMapChoreographer.SkipPrologue: ends the prologue (map only), lands in the outpost
     ///   Ctrl+F12  fake duplicate loot: the selected character "loots" a second copy of one of their items (one that
     ///             could really drop: not every copy owned, someone else could take it), as at the end of a
@@ -24,7 +22,7 @@ namespace FrosthavenDevTools
     /// The game destroys BepInEx's plugin object soon after startup (as in Stolen Realm), so the plugin's own Update
     /// never runs; the keys are polled from postfixes on the game's own per-frame methods instead.
     /// </summary>
-    [BepInPlugin("frosthaven.devtools", "Frosthaven Dev Tools", "0.1.8")]
+    [BepInPlugin("frosthaven.devtools", "Frosthaven Dev Tools", "0.1.9")]
     public class DevTools : BaseUnityPlugin
     {
         internal static ManualLogSource _log;
@@ -45,8 +43,6 @@ namespace FrosthavenDevTools
                 harmony.Patch(m, postfix: new HarmonyMethod(typeof(DevTools), nameof(Poll)));
                 hooks++;
             }
-            harmony.Patch(AccessTools.Method(typeof(FHRL.ScenarioController), nameof(FHRL.ScenarioController.CompleteActiveScenario)),
-                prefix: new HarmonyMethod(typeof(DevTools), nameof(AddFakeLoot)));
             harmony.Patch(AccessTools.Method(typeof(FHRL.MultiplayerGameController), "GetExectionContext"),
                 prefix: new HarmonyMethod(typeof(DevCommands), nameof(DevCommands.Resolve)));
             _log.LogInfo($"Dev tools loaded (solo only, {hooks} frame hooks): Ctrl+F10 = win scenario [{(Win != null ? "ok" : "MISSING")}], " +
@@ -65,17 +61,7 @@ namespace FrosthavenDevTools
             Keyboard kb = Keyboard.current;
             if (kb == null || !kb.ctrlKey.isPressed) return;
             if (kb.f9Key.wasPressedThisFrame) Run("+100 gold, +10 of each material and herb", AddGold);
-            if (kb.f10Key.wasPressedThisFrame)
-            {
-                bool loot = kb.shiftKey.isPressed;
-                Run(loot ? "win scenario with fake loot" : "win scenario", () =>
-                {
-                    // The result is applied on every copy of the campaign (yours and, in a solo game too, the
-                    // checking copy), so the fake loot applies to every result for a short while, not just once.
-                    if (loot) _fakeLootUntil = Time.realtimeSinceStartup + 600f; // the result is applied back on the map, after the end screens
-                    Win.Invoke(null, new object[] { null, -1 });
-                });
-            }
+            if (kb.f10Key.wasPressedThisFrame) Run("win scenario", () => Win.Invoke(null, new object[] { null, -1 }));
             if (kb.f11Key.wasPressedThisFrame) Run("skip prologue", DoSkipPrologue);
             if (kb.f12Key.wasPressedThisFrame) Run("fake duplicate loot", FakeDuplicateLoot);
         }
@@ -90,36 +76,6 @@ namespace FrosthavenDevTools
             if (map == null || map.GameState == null) throw new InvalidOperationException("only works in the outpost, not inside a scenario");
             map.ExecuteCommand(DevCommands.Path, 100, 10);
             map.View.RefreshView();
-        }
-
-        private static float _fakeLootUntil = -1f;
-
-        /// <summary>Ctrl+Shift+F10: loot added to the scenario result before the game applies it. Depends only on the
-        /// campaign state, so every copy adds the same.</summary>
-        private static void AddFakeLoot(FHRL.ScenarioController __instance, FHRL.ScenarioResult result)
-        {
-            if (result == null || Time.realtimeSinceStartup > _fakeLootUntil) return;
-            try
-            {
-                for (int i = 0; i < result.Characters.Count; i++)
-                {
-                    var r = result.Characters[i];
-                    r.GoldChange += 10 * (i + 1);
-                    r.ResourceChange = r.ResourceChange + new FHRL.OutpostResources(FHRL.OutpostMaterialType.Lumber, i + 1);
-                    if (i != 0) continue;
-                    r.ResourceChange = r.ResourceChange + new FHRL.OutpostResources(FHRL.OutpostMaterialType.Metal, 3);
-                    FHRL.CampaignController campaign = __instance.CampaignController;
-                    FHRL.CharacterState c = System.Linq.Enumerable.FirstOrDefault(campaign.State.PartyCharacters, p => p.ClassDef == r.Character);
-                    foreach (FHRL.ItemID id in campaign.State.Outpost.PurchasableItemIDs)
-                    {
-                        if (c == null || !campaign.CharacterController.CanHaveItem(c, campaign.DefRepository.Items[id])) continue;
-                        r.NewItemIDs.Add(id);
-                        break;
-                    }
-                }
-                _log.LogInfo("Dev tools: fake loot added to the scenario result.");
-            }
-            catch (Exception e) { _log.LogWarning("Dev tools: fake loot failed: " + e.Message); }
         }
 
         private static readonly MethodInfo PushActiveEvent = AccessTools.Method(typeof(FHGUI.FHMapView), "TryPushActiveEvent");
