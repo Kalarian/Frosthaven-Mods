@@ -130,7 +130,7 @@ To check an item on a character: select them and open their equipment / item scr
 | I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows both rules on, for both players. |
 | I2 | Both | **CHECKPOINT** (#9) | Identical to #8. |
 | I3 | Both | Start any scenario together, bringing **given** items, and play 2–3 rounds normally. Use a given item if you can. | **No desync message.** The given items work. (The Give button is hidden during scenarios.) |
-| I4 | Host | Leave the scenario (abandon or finish) and get back to the outpost. | If someone looted a copy of an item they already own, the item reward window opens so you can pick who gets it (Share duplicate loot). |
+| I4 | Host | Leave the scenario (abandon or finish) and get back to the outpost. | If someone looted a copy of an item they already own, the item reward window opens with nothing assigned. The host (party leader) left-clicks one character, then another: the item moves in one click, on both screens. Done assigns it (Share duplicate loot). |
 | I5 | Both | **CHECKPOINT** (#10) | |
 
 ## After the test

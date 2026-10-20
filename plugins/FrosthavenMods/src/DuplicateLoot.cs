@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using FHRL;
 using HarmonyLib;
@@ -62,7 +63,10 @@ namespace FrosthavenMods
             // The reward window gives each character at most one item and must hand out all of them, so make sure the
             // game's own default split still works with this item added (other rewards may be waiting too).
             var items = state.ItemsToGain.Concat(new[] { item }).ToList();
-            var split = state.GenerateDefaultGainItemDistirubtion(items, campaign);
+            List<CharacterItemDistribution> split;
+            RewardWindowPatches.Probing = true; // the real split, not the window's "start unassigned" one
+            try { split = state.GenerateDefaultGainItemDistirubtion(items, campaign); }
+            finally { RewardWindowPatches.Probing = false; }
             if (split == null || split.Count(d => d.Item != null) < items.Count) return "the reward window could not hand it out";
             return null;
         }

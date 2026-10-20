@@ -79,6 +79,9 @@ Mod layout, `mods/<Name>/`:
     for source `"scenario_loot"` puts the duplicate in the game's own items-to-gain list (`ItemToGainIDs` +
     `GainItem` unresolved action), so the outpost opens the usual item reward window. Falls back to the auto-sell when
     nobody else can own it or the reward window couldn't hand out every pending item.
+  - Item reward window (all item rewards, not a switch; `RewardWindowPatches`): opens with nothing assigned instead of
+    the game's pre-assignment, and left-clicking another character moves an assigned item there in one click
+    (unassign + assign through the window's own synced `UpdateItemsDistribution`).
 
 The installer copies `game/*` from the pack into the game folder and records every file it placed in `state.json`.
 A BepInEx someone else installed is kept (only our plugin is added). Uninstall removes only what we placed, plus
