@@ -49,6 +49,7 @@ namespace FrosthavenMods
         public override void OnHide()
         {
             if (Open == this) Open = null;
+            GiveResourcesPatches.Safe("restore the row labels", _labels.Restore);
         }
 
         internal void Close() => PopThisState();
@@ -111,7 +112,13 @@ namespace FrosthavenMods
                 DoneButtonKey = "FHMODS_GIVE",
                 CancelButtonKey = "GUI_CANCEL",
             });
+            _labels.Fix(DistributionModule.transform);
         }
+
+        // The row labels ("110/110") sit 20 px left of their slot and the table clips its left edge, which cut off the
+        // first digit of 3-digit amounts. Centre them (and let long ones shrink) while our window is open; the table is
+        // shared with the game's Building Donation screen, so put them back on close.
+        private readonly RowLabelFix _labels = new RowLabelFix();
 
         private void Change(int column, GiveKind kind, int delta)
         {
