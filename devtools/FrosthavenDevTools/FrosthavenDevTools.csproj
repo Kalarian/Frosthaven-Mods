@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>frosthaven.devtools</AssemblyName>
+    <Product>FrosthavenDevTools</Product>
+    <Version>0.1.0</Version>
+    <RootNamespace>FrosthavenDevTools</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591;MSB3277</NoWarn>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+
+    <!-- Override with: dotnet build -c Release -p:GamePath="D:\Games\Frosthaven" -->
+    <GamePath Condition="'$(GamePath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Frosthaven</GamePath>
+    <GameManaged>$(GamePath)\Frosthaven_Data\Managed</GameManaged>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="src\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- BepInEx 5 (Mono) + HarmonyX come from the BepInEx NuGet feed (see nuget.config). -->
+    <PackageReference Include="BepInEx.Core" Version="5.4.21" ExcludeAssets="runtime" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Game assemblies, referenced from the install so versions always match. Private=false keeps them out of bin. -->
+    <Reference Include="Assembly-CSharp"><HintPath>$(GameManaged)\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="ForsthavenRuleLibrary"><HintPath>$(GameManaged)\ForsthavenRuleLibrary.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.InputSystem"><HintPath>$(GameManaged)\Unity.InputSystem.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(GameManaged)\UnityEngine.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(GameManaged)\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+
+</Project>
