@@ -87,10 +87,10 @@ namespace FrosthavenMods
             }
         }
 
-        /// <summary>In the party, on the bench (set aside), or still being created. Not retired.</summary>
+        /// <summary>The party: in it, or being created into a party slot. (The bench was tried and dropped: the table
+        /// only fits the party, and giving to the bench is rare.)</summary>
         public static bool CanReceive(CharacterState c) =>
-            c.PartyState == CharacterPartyStateType.InParty || c.PartyState == CharacterPartyStateType.Removed ||
-            c.PartyState == CharacterPartyStateType.CreationProcess;
+            c.PartyState == CharacterPartyStateType.InParty || c.PartyState == CharacterPartyStateType.CreationProcess;
 
         /// <summary>Why the giver can't give anything at all right now (null if they can).</summary>
         public static string WhyCantGive(CharacterState giver)
@@ -109,7 +109,7 @@ namespace FrosthavenMods
             if (amount <= 0) return "the amount must be at least 1.";
             string cant = WhyCantGive(giver);
             if (cant != null) return cant;
-            if (!CanReceive(receiver)) return Name(receiver) + " can't receive (retired?).";
+            if (!CanReceive(receiver)) return Name(receiver) + " is not in the party.";
             if (Amount(giver, kind) < amount) return Name(giver) + $" only has {Amount(giver, kind)} {Label(kind)}.";
             return null;
         }
@@ -175,10 +175,10 @@ namespace FrosthavenMods
             if (GiveResourcesViewState.Kinds.All(k => GiveRules.Amount(giver, k) <= 0)) { Message(view, GiveRules.Name(giver) + " has no gold or materials to give."); return; }
             var receivers = view.GameState.AllCharacters
                 .Where(c => c != giver && GiveRules.CanReceive(c))
-                .OrderBy(c => c.PartyState == CharacterPartyStateType.InParty ? 0 : c.PartyState == CharacterPartyStateType.CreationProcess ? 1 : 2)
+                .OrderBy(c => c.PartyState == CharacterPartyStateType.InParty ? 0 : 1)
                 .Select(c => c.ID)
                 .ToList();
-            if (receivers.Count == 0) { Message(view, "There is nobody to give to."); return; }
+            if (receivers.Count == 0) { Message(view, "There is nobody else in the party to give to."); return; }
             view.PushState(new GiveResourcesViewState(giverId, receivers));
         }
 

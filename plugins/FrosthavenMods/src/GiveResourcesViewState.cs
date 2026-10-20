@@ -11,15 +11,18 @@ namespace FrosthavenMods
 {
     /// <summary>
     /// The Give resources window: the game's own distribution table (the Building Donation screen), filled with our
-    /// data. Columns are everyone who can receive, rows are gold and the three materials, the row headers count down the
-    /// giver's amount left. Clicks only change the numbers on this screen; "Give" sends one synced GiveResources command
-    /// per filled cell. Click +1 / right-click -1 and Shift+click all / clear come from the table itself; Ctrl+click
-    /// is +/-10 (added here).
+    /// data. Columns are the rest of the party (at most 3, so the table fits like every other party window), rows are
+    /// gold and the three materials, the row headers count down the giver's amount left. Clicks only change the numbers
+    /// on this screen; "Give" sends one synced GiveResources command per filled cell. Click +1 / right-click -1 come
+    /// from the table; Ctrl (+/-10) and Shift (all / none) are handled here. Esc closes it (GiveEscape).
     /// The game shows the modules a state exposes as properties (FHViewStateBase.UseModules), hence DistributionModule.
     /// </summary>
     internal sealed class GiveResourcesViewState : FHMapViewState
     {
         public static readonly GiveKind[] Kinds = { GiveKind.Gold, GiveKind.Lumber, GiveKind.Metal, GiveKind.Hide };
+
+        /// <summary>The open Give window, if any (for Esc).</summary>
+        internal static GiveResourcesViewState Open { get; private set; }
 
         private readonly CharacterID _giverId;
         private readonly List<CharacterID> _receivers;
@@ -37,7 +40,18 @@ namespace FrosthavenMods
             _receivers = receivers;
         }
 
-        public override void OnShow() => GiveResourcesPatches.Safe("open the window", Build);
+        public override void OnShow()
+        {
+            Open = this;
+            GiveResourcesPatches.Safe("open the window", Build);
+        }
+
+        public override void OnHide()
+        {
+            if (Open == this) Open = null;
+        }
+
+        internal void Close() => PopThisState();
 
         private int Pending(int column, GiveKind kind) => _pending.TryGetValue((column, kind), out int v) ? v : 0;
 
@@ -89,8 +103,7 @@ namespace FrosthavenMods
             {
                 Table = table,
                 Title = "FHMODS_GIVE_TITLE",
-                DescriptionLiteral = $"{GiveRules.Name(giver)} gives (left: {string.Join(", ", Kinds.Select(k => $"{GiveRules.Amount(giver, k) - PendingTotal(k)} {GiveRules.Label(k)}"))}).\n" +
-                                     "Left-click +1, right-click -1. Hold Ctrl for 10, Shift for all / none.",
+                DescriptionLiteral = $"{GiveRules.Name(giver)} gives. Left-click +1, right-click -1. Hold Ctrl for 10, Shift for all / none.",
                 IsDone = () => _pending.Values.Any(v => v > 0),
                 OnDone = () => GiveResourcesPatches.Safe("give", GiveAll),
                 OnCancel = PopThisState,
@@ -98,22 +111,6 @@ namespace FrosthavenMods
                 DoneButtonKey = "FHMODS_GIVE",
                 CancelButtonKey = "GUI_CANCEL",
             });
-            _layout.Apply(DistributionModule.transform, _receivers.Count);
-            _layout.SetPortraitTooltips(_receivers.Select(id => Describe(GiveResourcesPatches.Find(View, id))).ToList());
-        }
-
-        // The table module is shared with the game's own Building Donation screen: undo our layout changes on close.
-        private readonly GiveTableLayout _layout = new GiveTableLayout();
-
-        public override void OnHide() => GiveResourcesPatches.Safe("restore the window", _layout.Restore);
-
-        private static string Describe(CharacterState c)
-        {
-            if (c == null) return null;
-            string where = c.PartyState == CharacterPartyStateType.InParty ? "in party"
-                : c.PartyState == CharacterPartyStateType.CreationProcess ? "being created"
-                : "on the bench";
-            return $"{GiveRules.Name(c)} - level {c.Level}, {where}";
         }
 
         private void Change(int column, GiveKind kind, int delta)

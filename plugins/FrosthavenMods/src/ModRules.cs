@@ -30,7 +30,7 @@ namespace FrosthavenMods
                 Flag = GiveResources,
                 Name = "Give resources (mod)",
                 Description = "In the outpost, Ctrl+click a character's portrait in the party column to give their gold, " +
-                              "lumber, metal or hide to another character: in the party, on the bench, or being created.\n\n" +
+                              "lumber, metal or hide to another party member (or one being created).\n\n" +
                               "The giver must have played at least one scenario. Herbs are already shared in this game.\n" +
                               "Board game rule bent: gold and resources normally can't be transferred between characters.",
             },

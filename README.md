@@ -49,9 +49,11 @@ Mod layout, `mods/<Name>/`:
   - **Give resources** (bit 24, released in v0.2.0 as "Shared gold"). In the outpost, Ctrl+left-click the portrait of
     a character you control in the party column. This wraps the portrait's own Select click; middle-click is taken by
     the game's character summary. The game's Building Donation table opens, filled with our data (`GiveResourcesViewState`):
-    - Columns: everyone who can receive (party, bench, in creation; not retired).
+    - Columns: the rest of the party (plus a character being created into a party slot), so at most 3. The bench was
+      tried, but the table doesn't scroll well past 6 columns, and giving to the bench is rare.
     - Rows: gold, lumber, metal, hide. Each row header counts down the giver's amount left.
-    - Click +1, right-click -1, Shift+click all/clear (built into the table), Ctrl+click +/-10 (ours).
+    - Click +1, right-click -1 (from the table); Ctrl+click +/-10 and Shift+click all/none (ours). Esc closes it
+      (and the pause menu doesn't also open).
     - Nothing is sent until **Give**, which sends one `FrosthavenMods.GiveResources` command per filled cell.
 
     The command is resolved by a prefix on `MultiplayerGameController.GetExectionContext`, so it runs on every machine
