@@ -89,6 +89,13 @@ namespace FrosthavenMods
 
         private static IEnumerable<string> Mods(CPlayerStatsScenario s) => s.Modifiers?.SelectMany(m => m.Modifier ?? new List<string>()).Select(Plain) ?? Enumerable.Empty<string>();
 
+        /// <summary>Abilities used, each once: the game can record the same ability more than once (seen in the raw
+        /// log: one Heal card logged twice for one heal), so records sharing the ability's ID, round and type count once.
+        /// (HeroSummons is no use for counting summons: the game adds a record each time a summon moves.)</summary>
+        private static IEnumerable<CPlayerStatsAbilities> Abilities(CPlayerStatsScenario s) =>
+            s.Abilities?.GroupBy(a => (a.AbilityID, a.Round, a.ActionData?.AbilityType, a.ActionData?.ActingAbilityName)).Select(g => g.First())
+            ?? Enumerable.Empty<CPlayerStatsAbilities>();
+
         private static int Overkill(CPlayerStatsKill k) => Math.Max(0, k.LastDamageAmount - k.PreDamageHealth);
 
         private static readonly List<Row> Rows = new List<Row>
@@ -108,7 +115,7 @@ namespace FrosthavenMods
             Int("Poison bonus damage", Bad(CCondition.ENegativeCondition.Poison), s => Sum(s.DamageDealt, d => d.PoisonDamage)),
             Int("Melee hits", Dealt, s => Count(s.DamageDealt, d => d.IsMelee && d.FinalDamageAmount > 0)),
             Int("Ranged hits", Dealt, s => Count(s.DamageDealt, d => !d.IsMelee && d.FinalDamageAmount > 0)),
-            Int("Area attacks", Dealt, s => Count(s.Abilities, a => a.AreaEffect == true)),
+            Int("Area attacks", Dealt, s => Count(Abilities(s), a => a.AreaEffect == true)),
             Int("Damage by summons", Dealt, s => Sum(s.DamageDealt, d => d.PerformedBySummons ? d.FinalDamageAmount : 0)),
             Int("Kills by summons", Killed, s => Count(s.Kills, k => k.PerformedBySummons)),
 
@@ -124,7 +131,7 @@ namespace FrosthavenMods
             Section("SUPPORT"),
             Int("Heals", Healed, s => Count(s.Heals)),
             Int("Conditions removed", Good(CCondition.EPositiveCondition.Regenerate), s => Count(s.RemovedCondition)),
-            Int("Summons", Good(CCondition.EPositiveCondition.Strengthen), s => Count(s.HeroSummons)),
+            Int("Summons", Good(CCondition.EPositiveCondition.Strengthen), s => Count(Abilities(s), a => a.ActionData?.AbilityType == CAbility.EAbilityType.Summon)),
 
             Section("LUCK"),
             Int("Modifiers drawn", Good(CCondition.EPositiveCondition.Bless), s => Mods(s).Count()),
@@ -137,7 +144,7 @@ namespace FrosthavenMods
             },
             Int("Crits (x2)", Good(CCondition.EPositiveCondition.Bless), s => Mods(s).Count(IsCrit)),
             Int("Nulls", Bad(CCondition.ENegativeCondition.Curse), s => Mods(s).Count(IsNull)),
-            Int("Attacks with advantage", Good(CCondition.EPositiveCondition.Advantage), s => Count(s.Abilities, a => a.Advantage != null && a.Advantage.Any(v => v))),
+            Int("Attacks with advantage", Good(CCondition.EPositiveCondition.Advantage), s => Count(Abilities(s), a => a.Advantage != null && a.Advantage.Any(v => v))),
 
             Section("CARDS AND ELEMENTS"),
             Int("Cards lost", Used, s => Count(s.LoseCards)),
@@ -258,7 +265,7 @@ namespace FrosthavenMods
                     foreach (var m in s.Modifiers ?? new List<CPlayerStatsModifiers>())
                         sb.AppendLine($"  MOD r{m.Round} {string.Join(",", (m.Modifier ?? new List<string>()).Select(Plain))}");
                     foreach (var a in s.Abilities ?? new List<CPlayerStatsAbilities>())
-                        sb.AppendLine($"  ABILITY r{a.Round} {a.ActionData?.ActingAbilityName} type={a.ActionData?.AbilityType} amount={a.Amount} targets={a.Targets} aoe={a.AreaEffect} adv={string.Join(",", a.Advantage ?? new List<bool>())} default={a.DefaultAction}");
+                        sb.AppendLine($"  ABILITY r{a.Round} {a.ActionData?.ActingAbilityName} type={a.ActionData?.AbilityType} amount={a.Amount} targets={a.Targets} aoe={a.AreaEffect} adv={string.Join(",", a.Advantage ?? new List<bool>())} default={a.DefaultAction} id={a.AbilityID}");
                     foreach (var h in s.Heals ?? new List<CPlayerStatsHeal>())
                         sb.AppendLine($"  HEAL r{h.Round} {h.HealAmount} poisonRemoved={h.PoisonRemoved} woundRemoved={h.WoundRemoved}");
                     foreach (var c in s.LoseCards ?? new List<CPlayerStatsLoseCard>())
