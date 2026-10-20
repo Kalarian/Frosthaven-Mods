@@ -55,6 +55,8 @@ namespace FrosthavenMods
                 UnityEngine.Object.DestroyImmediate(c);
 
             HideKeyHint(go);
+            // The empty circle: the Give window's "which player suggests this" avatar list (from the UI dump).
+            go.transform.Find("Container_SuggestingUsersList")?.gameObject.SetActive(false);
             UiDump.Once("Header Give button (copy)", go.transform);
 
             var rt = (RectTransform)go.transform;
