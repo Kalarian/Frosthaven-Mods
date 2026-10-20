@@ -209,8 +209,7 @@ namespace FrosthavenMods
             FHButton button = existing != null ? existing.GetComponent<FHButton>() : null;
             if (button == null)
             {
-                FHButton template = page.GetComponentInParent<FHGUI.Modules.ScenarioDebriefingModule>()?
-                    .GetComponentsInChildren<FHButton>(true).FirstOrDefault(b => b.name.StartsWith("FH_ButtonBar_Common"));
+                FHButton template = Template(page);
                 button = ButtonCopy.Make(template, header, name, text, () => { });
                 if (button == null) return null;
                 var layout = button.GetComponent<LayoutElement>() ?? button.gameObject.AddComponent<LayoutElement>();
@@ -227,6 +226,20 @@ namespace FrosthavenMods
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => GiveResourcesPatches.Safe("switch the stats view", () => Show(page, isCampaign)));
             return button;
+        }
+
+        /// <summary>A text button to copy: the debrief screen's own footer button ("FH_ButtonBar_Common"). When the page
+        /// is set up, that part of the screen is still switched off, so the search includes inactive objects, then any
+        /// loaded copy of that button, then any text button on the screen.</summary>
+        private static FHButton Template(Component near)
+        {
+            bool Bar(FHButton b) => b != null && b.name.StartsWith("FH_ButtonBar_Common");
+            FHButton[] onScreen = near.transform.root.GetComponentsInChildren<FHButton>(true);
+            FHButton template = onScreen.FirstOrDefault(Bar)
+                ?? Resources.FindObjectsOfTypeAll<FHButton>().FirstOrDefault(Bar)
+                ?? onScreen.FirstOrDefault(b => b.GetComponentInChildren<TMPro.TextMeshProUGUI>(true) != null);
+            Plugin.Log.LogInfo("Battle stats: toggle buttons copied from " + (template != null ? template.name : "nothing"));
+            return template;
         }
 
         private static void Show(UIDebriefingBattleStats page, bool campaign)
