@@ -131,8 +131,9 @@ namespace FrosthavenMods
             return false;
         }
 
-        /// <summary>Party column: middle-click a character's portrait to give from them. The game lists the action with
-        /// its own Select / View hints.</summary>
+        /// <summary>Party column: Ctrl+left-click a character's portrait to give from them. Wraps the portrait's own
+        /// left-click (Select) action, so a plain click still selects. (Middle-click is taken: the game opens the
+        /// character summary on it, outside these hint actions.)</summary>
         [HarmonyPatch(typeof(PartyViewService), nameof(PartyViewService.GetPartyColumnSlotInteractions))]
         [HarmonyPostfix]
         private static void AddGiveAction(PartySlotDTO partySlotDto, ref IEnumerable<UIPartySlotHints.HintedActionParams> __result)
@@ -144,15 +145,17 @@ namespace FrosthavenMods
                 if (view == null || view.GameState?.ActiveScenario != null) return;
                 if (!view.IsSoloGame && !partySlotDto.Owned) return; // only the controlling player gives
                 CharacterID id = partySlotDto.CharacterID;
-                var give = new UIPartySlotHints.HintedActionParams
+                var actions = __result.ToList();
+                foreach (var action in actions.Where(a => a.InteractionType == FHInputEventElement.UserInteractionType.LeftClick))
                 {
-                    HintKey = "GUI_SELECT",
-                    HitLocalizedOverride = FHUILocFormatting.GetActionIconFormat(FHInputEventElement.UserInteractionType.MiddleClick) + " Give",
-                    ColorSchemeID = "PositiveAction",
-                    InteractionType = FHInputEventElement.UserInteractionType.MiddleClick,
-                    ActionCallback = () => Start(view, id),
-                };
-                __result = __result.Concat(new[] { give }).ToList();
+                    Action select = action.ActionCallback;
+                    action.ActionCallback = () =>
+                    {
+                        if (UnityEngine.InputSystem.Keyboard.current?.ctrlKey.isPressed == true) Start(view, id);
+                        else select?.Invoke();
+                    };
+                }
+                __result = actions;
             }
             catch (Exception e)
             {

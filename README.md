@@ -47,7 +47,8 @@ Mod layout, `mods/<Name>/`:
   - The window's row list is never emptied.
 - Rules so far:
   - **Give resources** (bit 24, released in v0.2.0 as "Shared gold"). In the outpost, the party column gets a
-    middle-click "Give" action on each portrait you control. It picks a recipient (party, bench, or a character
+    Ctrl+left-click "Give" action on each portrait you control (wraps the portrait's own Select click; middle-click is
+    taken by the game's character summary). It picks a recipient (party, bench, or a character
     being created; not retired), then gold, lumber, metal or hide with the game's icon picker, then an amount. The
     picker reopens for more. The custom multiplayer command `FrosthavenMods.GiveResources` is resolved by a prefix on
     `MultiplayerGameController.GetExectionContext`, so it runs on every machine like SellItem/BuyItem, with the host
