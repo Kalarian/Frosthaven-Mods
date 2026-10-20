@@ -12,13 +12,13 @@ namespace FrosthavenDevTools
     /// Testing shortcuts for the author's own machine. NOT part of the mod pack (lives in devtools/, never packed).
     /// Solo games only. They call the game's own debug console commands, which ship in the retail build but have no
     /// console to type them into:
-    ///   Ctrl+F9   +100 gold to each party member (synced CharacterGainGold effect)
+    ///   Ctrl+F9   +100 gold and +5 metal to each party member (synced CharacterGainGold/Metal effects)
     ///   Ctrl+F10  "win"            DebugMenu.WinScenarioCommand: wins the current scenario
     ///   Ctrl+F11  "skip_prologue"  FHMapChoreographer.SkipPrologue: ends the prologue (map only), lands in the outpost
     /// The game destroys BepInEx's plugin object soon after startup (as in Stolen Realm), so the plugin's own Update
     /// never runs; the keys are polled from postfixes on the game's own per-frame methods instead.
     /// </summary>
-    [BepInPlugin("frosthaven.devtools", "Frosthaven Dev Tools", "0.1.2")]
+    [BepInPlugin("frosthaven.devtools", "Frosthaven Dev Tools", "0.1.3")]
     public class DevTools : BaseUnityPlugin
     {
         private static ManualLogSource _log;
@@ -54,7 +54,7 @@ namespace FrosthavenDevTools
             }
             Keyboard kb = Keyboard.current;
             if (kb == null || !kb.ctrlKey.isPressed) return;
-            if (kb.f9Key.wasPressedThisFrame) Run("+100 gold to each party member", AddGold);
+            if (kb.f9Key.wasPressedThisFrame) Run("+100 gold and +5 metal to each party member", AddGold);
             if (kb.f10Key.wasPressedThisFrame) Run("win scenario", () => Win.Invoke(null, new object[] { null, -1 }));
             if (kb.f11Key.wasPressedThisFrame) Run("skip prologue", DoSkipPrologue);
         }
@@ -67,7 +67,10 @@ namespace FrosthavenDevTools
             var map = Singleton<FHMapChoreographer>.InstanceFast;
             if (map == null || map.GameState == null) throw new InvalidOperationException("only works in the outpost, not inside a scenario");
             foreach (FHRL.CharacterState c in System.Linq.Enumerable.ToList(map.GameState.PartyCharacters))
+            {
                 map.ExecuteCommand(FHRPC.Campaign.ApplyEffect, new FHRL.CampaignEffect(FHRL.CampaignEffectType.CharacterGainGold, c.ClassID.ID, 100));
+                map.ExecuteCommand(FHRPC.Campaign.ApplyEffect, new FHRL.CampaignEffect(FHRL.CampaignEffectType.CharacterGainMetal, c.ClassID.ID, 5));
+            }
             map.View.RefreshView();
         }
 

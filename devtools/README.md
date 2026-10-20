@@ -2,7 +2,8 @@
 
 `FrosthavenDevTools/` is a BepInEx plugin for testing on the author's machine. It is never packed or released
 (`tools/pack_zip.py` only packs `plugins/`). It works in solo games only:
-- **Ctrl+F9** gives each party member +100 gold, through a synced command (outpost only).
+- **Ctrl+F9** gives each party member +100 gold and +5 metal, through synced commands (outpost only). The game has
+  no lumber or hide effect for characters.
 - **Ctrl+F10** wins the current scenario (the game's own `win` debug command).
 - **Ctrl+F11** skips the rest of the prologue (`skip_prologue`). It only works on the map between prologue missions,
   and lands the campaign in the outpost (week 2, downtime). Use it on a throwaway test campaign.
