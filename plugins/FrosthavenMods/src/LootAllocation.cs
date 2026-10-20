@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FHGUI;
+using FHGUI.States;
 using FHRL;
 using HarmonyLib;
 
@@ -94,7 +95,12 @@ namespace FrosthavenMods
             }
         }
 
-        /// <summary>Opens the window when the outpost is quiet. Runs every frame (InputFHManager.LateUpdate).</summary>
+        private const float QuietSeconds = 1f;
+        private static float _quietSince = -1f;
+        private static readonly AccessTools.FieldRef<FHMapView, CampaignEvent.ScenarioCompleted> PendingCompletion =
+            AccessTools.FieldRefAccess<FHMapView, CampaignEvent.ScenarioCompleted>("PendingScenarioCompletionEvent");
+
+        /// <summary>Opens the window once the map is quiet for a moment. Runs every frame (InputFHManager.LateUpdate).</summary>
         [HarmonyPatch(typeof(InputFHManager), "LateUpdate")]
         [HarmonyPostfix]
         private static void OpenWhenReady()
@@ -103,23 +109,38 @@ namespace FrosthavenMods
             try
             {
                 var map = Singleton<FHMapChoreographer>.InstanceFast;
-                FHMapView view = map?.View;
                 CampaignState state = map?.GameState;
-                if (view == null || state == null) return;
-                if (state.ActiveScenario != null) { Pending = null; return; } // a new scenario started first: keep as looted
-                if (!view.IsPartyLeader || ModWindow.Open != null || view.CurrentState == null || view.CurrentModalState != null) return;
-                if (SceneController.Instance != null && SceneController.Instance.IsLoading) return;
-                if (state.HasUnresolvedActions() || map.GameClient.HasUnprocessedResults) return;
-                if (map.GameController.OutpostEventController.HasEventToResolve) return;
+                if (state?.ActiveScenario != null) { Pending = null; return; } // a new scenario started first: keep as looted
+                if (!Quiet(map)) { _quietSince = -1f; return; }
+                // Stay quiet a moment: screens can hand over to each other across a few frames.
+                if (_quietSince < 0f) _quietSince = UnityEngine.Time.realtimeSinceStartup;
+                if (UnityEngine.Time.realtimeSinceStartup - _quietSince < QuietSeconds) return;
+                _quietSince = -1f;
                 LootBatch batch = Pending;
                 Pending = null;
-                view.PushState(new LootAllocationViewState(batch));
+                map.View.PushState(new LootAllocationViewState(batch));
             }
             catch (Exception e)
             {
                 Pending = null;
                 Plugin.Log.LogError("Allocate loot: could not open the window (the loot stays with the looters): " + e);
             }
+        }
+
+        /// <summary>Nothing else is showing or waiting: the end-of-scenario sequence on the map (the closing story
+        /// NarrationViewState, the scenario rewards modal, "scenario unlocked" screens), reward windows, events,
+        /// loading, another window of ours.</summary>
+        private static bool Quiet(FHMapChoreographer map)
+        {
+            FHMapView view = map?.View;
+            CampaignState state = map?.GameState;
+            if (view == null || state == null) return false;
+            if (!view.IsPartyLeader || ModWindow.Open != null || view.CurrentState == null || view.CurrentModalState != null) return false;
+            if (view.CurrentState is NarrationViewState || view.CurrentState is ScenarioUnlockViewState) return false;
+            if (PendingCompletion(view) != null) return false;
+            if (SceneController.Instance != null && SceneController.Instance.IsLoading) return false;
+            if (state.HasUnresolvedActions() || map.GameClient.HasUnprocessedResults) return false;
+            return !map.GameController.OutpostEventController.HasEventToResolve;
         }
     }
 }
