@@ -91,33 +91,37 @@ namespace FrosthavenMods
             return false;
         }
 
-        private static bool _lastHeaderWasDetails;
+        // null = OnShow returned before setting up the header (invalid selection); true = the simple header with a Back
+        // bar (prologue, or a character outside the party); false = the normal outpost screen, which has no button bar.
+        private static bool? _simpleHeader;
 
-        /// <summary>CharacterEquipmentViewState.OnShow shows its Back bar only when this returns true; remember it.</summary>
         [HarmonyPatch(typeof(HeaderViewService), nameof(HeaderViewService.SetupCharacterDetailsHeader))]
         [HarmonyPostfix]
-        private static void RememberHeaderMode(bool __result) => _lastHeaderWasDetails = __result;
+        private static void RememberHeaderMode(bool __result) => _simpleHeader = __result;
 
         [HarmonyPatch(typeof(CharacterEquipmentViewState), nameof(CharacterEquipmentViewState.OnShow))]
         [HarmonyPrefix]
-        private static void ForgetHeaderMode() => _lastHeaderWasDetails = false;
+        private static void ForgetHeaderMode() => _simpleHeader = null;
 
-        /// <summary>Add a "Give gold" button next to Back on a character's Equipment screen in the outpost.</summary>
+        /// <summary>Add a "Give gold" button to a character's Equipment screen in the outpost (next to Back when the game
+        /// shows one; on its own otherwise).</summary>
         [HarmonyPatch(typeof(CharacterEquipmentViewState), nameof(CharacterEquipmentViewState.OnShow))]
         [HarmonyPostfix]
         private static void AddButton(CharacterEquipmentViewState __instance)
         {
             try
             {
-                if (!_lastHeaderWasDetails || !ModRules.IsOn(ModRules.GiveGold)) return;
+                if (_simpleHeader == null || !ModRules.IsOn(ModRules.GiveGold)) return;
                 FHMapView view = __instance.View;
                 CharacterState giver = view?.SelectedCharacter;
                 if (giver == null || view.GameState.ActiveScenario != null) return;
                 if (!view.IsSoloGame && !view.PlayerCharacters.Contains(giver)) return; // only the controlling player
                 var screen = view.Modules.Characters.MainScreen;
-                screen.SetButtonsBar(
-                    screen.Button_Back(() => PopThisState.Invoke(__instance, null)),
-                    new ButtonsBarParam { LabelKey = "@Give gold", Callback = () => ChooseRecipient(view, giver) });
+                var give = new ButtonsBarParam { LabelKey = "@Give gold", Callback = () => ChooseRecipient(view, giver) };
+                if (_simpleHeader == true)
+                    screen.SetButtonsBar(screen.Button_Back(() => PopThisState.Invoke(__instance, null)), give);
+                else
+                    screen.SetButtonsBar(give);
             }
             catch (Exception e)
             {
