@@ -140,10 +140,10 @@ namespace FrosthavenMods
         {
             try
             {
-                if (partySlotDto == null || partySlotDto.IsEmpty || partySlotDto.InCreation || !ModRules.IsOn(ModRules.GiveResources)) return;
+                if (partySlotDto == null || partySlotDto.IsEmpty || !ModRules.IsOn(ModRules.GiveResources)) return;
                 FHMapView view = Singleton<FHMapChoreographer>.InstanceFast?.View;
                 if (view == null || view.GameState?.ActiveScenario != null) return;
-                if (!view.IsSoloGame && !partySlotDto.Owned) return; // only the controlling player gives
+                bool controlled = view.IsSoloGame || partySlotDto.Owned; // only the controlling player gives
                 CharacterID id = partySlotDto.CharacterID;
                 var actions = __result.ToList();
                 foreach (var action in actions.Where(a => a.InteractionType == FHInputEventElement.UserInteractionType.LeftClick))
@@ -151,7 +151,11 @@ namespace FrosthavenMods
                     Action select = action.ActionCallback;
                     action.ActionCallback = () =>
                     {
-                        if (UnityEngine.InputSystem.Keyboard.current?.ctrlKey.isPressed == true) Safe("start", () => Start(view, id));
+                        if (UnityEngine.InputSystem.Keyboard.current?.ctrlKey.isPressed == true)
+                        {
+                            if (controlled) Safe("start", () => Start(view, id));
+                            else Message(view, "You can only give from characters you control.");
+                        }
                         else select?.Invoke();
                     };
                 }
