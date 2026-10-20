@@ -6,8 +6,14 @@ Mods for the digital Frosthaven (Snapshot Games, Steam app 2347080), made for a 
 > on join and then compares game-state hashes during play, so mismatched mods show up as a desync mid-scenario,
 > not as a join error.
 
-Status: the pipeline is built, but no release has shipped yet. The first step is confirming in game that a
-modified `Base.ruleset` loads (the `TestBannerSpearHP` mod).
+**Players:** download `Install Frosthaven Mods.exe` from the
+[latest release](https://github.com/Kalarian/Frosthaven-Mods/releases/latest), close the game, run it, and click
+Install / Update. Each run checks GitHub, so the same exe always installs the newest pack. "Remove mods" puts the
+game's original rules back. Saves are never touched.
+
+Status: pipeline and installer done and tested. A modified `Base.ruleset` loads in game (verified 2026-10-20 with
+the `TestBannerSpearHP` mod: Banner Spear showed 20 HP at level 1, no YML errors in Player.log). No release yet,
+since there are no real mods yet.
 
 ---
 
@@ -37,9 +43,10 @@ python tools/fh_mods.py restore                               # put vanilla back
 python tools/fh_mods.py status
 python tools/fh_mods.py build <out.ruleset> [--mod NAME ...]
 ```
-Install keeps the vanilla file in `backup/Base.ruleset.<steam build id>`. It takes a fresh backup when Steam
-updates the game, and refuses to touch a `Base.ruleset` it can't account for. If that happens, run Steam's
-"Verify integrity of game files".
+The vanilla file is kept in `<game>\FrosthavenMods\Base.ruleset.<steam build id>` next to `state.json`. The
+installer exe uses the same folder and format, so the two tools always agree. A fresh backup is taken when Steam
+updates the game. A `Base.ruleset` neither tool can account for is never touched: run Steam's "Verify integrity of
+game files" instead.
 
 `tools/fh_ruleset.py`: low-level archive tool (`info`, `verify`, `unpack`, `pack`). The vanilla extract used for
 authoring is made with `python tools/fh_ruleset.py unpack <Base.ruleset> extracted/Base`. It stays on this machine.
@@ -60,7 +67,21 @@ The game loads entries in index order, batched by runs of the same parser type. 
   the Stolen Realm pack.
 - The Gloomhaven Digital mod system (rulesets, Workshop, Level Editor) is still in the code but not enabled in
   Frosthaven (`IsModdingEnabled`).
-- Planned: a one-click installer exe that checks this repo's latest GitHub release (as in the Stolen Realm pack),
-  with uninstall/restore built in.
+
+## Releasing
+
+```
+bash tools/publish.sh <version> "<one-line notes>"
+```
+This writes `VERSION`, runs `tools/pack_zip.py` (every enabled mod, and the release stops if any patch no longer
+applies to the current game), builds `installer/` with the zip embedded (`tools/build_installer.sh`, .NET SDK), writes
+`SHA256SUMS.txt`, commits, tags, and creates the GitHub release with the zip, exe and checksums. Build output goes
+to `dist/`, which is not committed.
+
+Installer (`installer/Program.cs`, .NET Framework 4.8 WinForms, one file): it finds the game through the Steam
+libraries, downloads a newer pack from the latest release (checksum-verified), rebuilds `Base.ruleset` from the
+vanilla backup plus every mod in the pack, and refuses to run while the game is open. Headless mode for testing:
+`"Install Frosthaven Mods.exe" "<game folder>" install [offline]` / `uninstall`, which writes
+`FrosthavenMods\install-log.txt`. Its output is byte-identical to `fh_mods.py build` for the same mods.
 
 Licence: MIT (the tools and patches; Frosthaven and its game data belong to their owners).

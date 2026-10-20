@@ -10,6 +10,10 @@
 !mods/**
 !tools/
 !tools/**
+!installer/
+!installer/**
+installer/bin/
+installer/obj/
 tools/__pycache__/
 mods/**/bin/
 mods/**/obj/

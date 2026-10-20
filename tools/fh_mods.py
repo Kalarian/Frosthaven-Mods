@@ -33,9 +33,10 @@ ROOT = Path(__file__).resolve().parent.parent
 MODS = ROOT / "mods"
 WORK = ROOT / "work"
 VANILLA_EXTRACT = ROOT / "extracted" / "Base"
-BACKUP = ROOT / "backup"
-STATE = BACKUP / "state.json"
 GAME = Path(r"C:\Program Files (x86)\Steam\steamapps\common\Frosthaven")
+# Shared with the installer exe: vanilla backup + state live in the game folder, so both tools always agree.
+BACKUP = GAME / "FrosthavenMods"
+STATE = BACKUP / "state.json"
 GAME_RULESET = GAME / "Frosthaven_Data" / "StreamingAssets" / "Rulebase" / "Base.ruleset"
 APP_MANIFEST = GAME.parent.parent / "appmanifest_2347080.acf"
 NO_EOL = b"\\ No newline at end of file\n"
@@ -128,7 +129,8 @@ def apply_diff(data, diff, label, warn=print):
 
 def load_mods(names=None):
     mods = []
-    for d in sorted(p for p in MODS.iterdir() if (p / "mod.json").exists()) if MODS.exists() else []:
+    # Order: mod folder names, then paths, compared lowercased (the installer uses the same rule)
+    for d in sorted((p for p in MODS.iterdir() if (p / "mod.json").exists()), key=lambda p: p.name.lower()) if MODS.exists() else []:
         meta = json.loads((d / "mod.json").read_text(encoding="utf-8"))
         if names is None and not meta.get("enabled", True):
             continue
@@ -142,19 +144,24 @@ def load_mods(names=None):
     return mods
 
 
+def sorted_files(folder, suffix=""):
+    if not folder.exists():
+        return []
+    files = [p for p in folder.rglob("*") if p.is_file() and p.name.endswith(suffix)]
+    return sorted(files, key=lambda p: p.relative_to(folder).as_posix().lower())
+
+
 def build(vanilla_bytes, mods):
     entries = rs.read_ruleset(vanilla_bytes)
     by_name = {e["name"].lower(): e for e in entries}
     for d, meta in mods:
-        for p in sorted((d / "patches").rglob("*.diff")) if (d / "patches").exists() else []:
+        for p in sorted_files(d / "patches", ".diff"):
             rel = p.relative_to(d / "patches").as_posix()[:-len(".diff")]
             e = by_name.get(rel.lower())
             if e is None:
                 raise ValueError(f"{d.name}: patch target {rel} is not in the game's ruleset")
             e["data"] = apply_diff(e["data"], p.read_bytes(), f"{d.name}: {rel}")
-        for p in sorted((d / "files").rglob("*")) if (d / "files").exists() else []:
-            if not p.is_file():
-                continue
+        for p in sorted_files(d / "files"):
             rel = p.relative_to(d / "files").as_posix()
             e = by_name.get(rel.lower())
             if e is not None:
@@ -194,6 +201,8 @@ def cmd_diff(args):
         if not p.is_file():
             continue
         rel = p.relative_to(work).as_posix()
+        if not rel.isascii():
+            sys.exit(f"{rel}: use ASCII-only file names (the ruleset index stores plain bytes)")
         vanilla = VANILLA_EXTRACT / rel
         patch = mod / "patches" / (rel + ".diff")
         if vanilla.is_file():
@@ -249,7 +258,7 @@ def vanilla_backup():
     BACKUP.mkdir(exist_ok=True)
     (BACKUP / f"Base.ruleset.{build_id}").write_bytes(game)
     STATE.write_text(json.dumps({"buildid": build_id, "vanilla_sha": game_sha, "installed_sha": None,
-                                 "mods": []}, indent=2), encoding="utf-8")
+                                 "mods": [], "version": None}, indent=2), encoding="utf-8")
     print(f"backed up vanilla Base.ruleset (Steam build {build_id})")
     return game
 
@@ -269,7 +278,7 @@ def cmd_install(args):
     tmp.write_bytes(data)
     tmp.replace(GAME_RULESET)
     state = read_state()
-    state.update(installed_sha=sha(data), mods=[d.name for d, _ in mods])
+    state.update(installed_sha=sha(data), mods=[d.name for d, _ in mods], version="dev")
     STATE.write_text(json.dumps(state, indent=2), encoding="utf-8")
     print(f"installed {len(mods)} mod(s): {', '.join(state['mods']) or '(none)'}")
 
@@ -283,7 +292,7 @@ def cmd_restore(args):
         return
     data = vanilla_backup()
     GAME_RULESET.write_bytes(data)
-    state.update(installed_sha=None, mods=[])
+    state.update(installed_sha=None, mods=[], version=None)
     STATE.write_text(json.dumps(state, indent=2), encoding="utf-8")
     print("restored vanilla Base.ruleset")
 
