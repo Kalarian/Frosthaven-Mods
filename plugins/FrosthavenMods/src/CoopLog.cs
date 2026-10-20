@@ -15,7 +15,7 @@ namespace FrosthavenMods
     /// - every outpost multiplayer command: sender, which copy ran it (local = what this player sees; host-check = the
     ///   host's authoritative copy), and whether it failed (a failure on host-check means everyone rolls it back)
     /// - house-rule changes and receipts (HouseRulesPatches), gifts (GiveResourcesCommands)
-    /// - snapshots: every character's gold/materials, the herb supply, the rules, and a hash of all of it; taken after
+    /// - snapshots: every character's gold/materials/items (owned and worn), the herb supply, the rules, and a hash of all of it; taken after
     ///   each gift / rule change and on Ctrl+F8 ("checkpoint #n" - both players press it together to compare)
     /// </summary>
     [HarmonyPatch]
@@ -62,7 +62,7 @@ namespace FrosthavenMods
 
         public static string Me() => Singleton<FHMapChoreographer>.InstanceFast?.GameClient?.PlayerID.ToString() ?? "?";
 
-        /// <summary>Gold/materials of every character, herbs, rules, and a short hash of all of it.</summary>
+        /// <summary>Gold/materials/items of every character, herbs, rules, and a short hash of all of it.</summary>
         public static void Snapshot(string label, MultiplayerGameController game = null)
         {
             try
@@ -75,7 +75,10 @@ namespace FrosthavenMods
                 foreach (CharacterState c in state.AllCharacters.Where(c => c.PartyState != CharacterPartyStateType.Retired)
                              .OrderBy(c => c.ClassID.ID).ThenBy(c => c.Name))
                 {
-                    body.Append($" | {GiveRules.Name(c)}({c.ClassID.ID.Replace("ID", "")},{c.PartyState}) gold={c.Gold} lumber={c.Resources.Lumber} metal={c.Resources.Metal} hide={c.Resources.Hide}");
+                    string items = string.Join(",", c.OwnedItemIDs.Select(i => i.ID).OrderBy(i => i));
+                    string worn = string.Join(",", c.EquipedItemIDs.Select(i => i.ID).OrderBy(i => i));
+                    body.Append($" | {GiveRules.Name(c)}({c.ClassID.ID.Replace("ID", "")},{c.PartyState}) gold={c.Gold} lumber={c.Resources.Lumber} metal={c.Resources.Metal} hide={c.Resources.Hide}" +
+                                $" items={(items.Length == 0 ? "-" : items)} worn={(worn.Length == 0 ? "-" : worn)}");
                 }
                 OutpostResources o = state.Outpost.Resources;
                 body.Append($" | herbs={o.Arrowvine},{o.Axenut},{o.Corpsecap},{o.Flamefruit},{o.Rockroot},{o.Snowthistle}");

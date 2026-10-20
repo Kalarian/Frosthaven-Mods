@@ -8,7 +8,8 @@ session in each file is used; --session N picks the Nth session (1 = first) in b
 Checks:
 - checkpoints (Ctrl+F8, pressed together by both players): each player's "local" snapshot must match the other's,
   and on the host the "local" copy must match the "host-check" copy (the authoritative one)
-- lists failed commands (a failure on host-check = rolled back for everyone), rejected/applied gifts, rule changes
+- lists failed commands (a failure on host-check = rolled back for everyone), rejected/applied gifts (resources and
+  items), duplicate loot, rule changes
 Exit code 0 when every compared checkpoint matches.
 """
 
@@ -39,7 +40,7 @@ def parse(lines):
             if m["label"].startswith("checkpoint #"):
                 checkpoints.setdefault(m["label"], {})[m["copy"]] = m
             continue
-        if any(k in line for k in ("FAILED", "GIVE ", "RULES ")):
+        if any(k in line for k in ("FAILED", "GIVE ", "RULES ", "DUPLICATE LOOT")):
             events.append(line)
     return checkpoints, events
 

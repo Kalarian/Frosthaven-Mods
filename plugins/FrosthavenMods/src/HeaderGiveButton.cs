@@ -31,7 +31,7 @@ namespace FrosthavenMods
                 FHMapView view = Singleton<FHMapChoreographer>.InstanceFast?.View;
                 if (view == null) return;
                 UiDump.Once("Top bar hero text area", ____heroData.transform.parent);
-                bool show = ModRules.IsOn(ModRules.GiveResources) && view.GameState?.ActiveScenario == null && view.SelectedCharacter != null;
+                bool show = ModRules.GiveOn && view.GameState?.ActiveScenario == null && view.SelectedCharacter != null;
                 Transform existing = ____heroData.transform.Find(ButtonName);
                 if (existing == null)
                 {
@@ -45,52 +45,17 @@ namespace FrosthavenMods
 
         private static Transform Create(FHMapView view, TMP_Text heroData)
         {
-            var template = Traverse.Create(view.Modules.DistributionModule).Field("DoneButton").GetValue<FHButton>();
-            if (template == null) { Plugin.Log.LogWarning("Give resources: no button to copy for the header"); return null; }
-            GameObject go = UnityEngine.Object.Instantiate(template.gameObject, heroData.transform, false);
-            go.name = ButtonName;
-            // No keyboard shortcut (the Give window's button answers Confirm/Enter).
-            // (HotkeyClickableScopeElement lives in DevLocker.GFrame.Input; matched by name to avoid the reference.)
-            foreach (Component c in go.GetComponentsInChildren<Component>(true).Where(c => c != null && c.GetType().Name == "HotkeyClickableScopeElement").ToList())
-                UnityEngine.Object.DestroyImmediate(c);
+            FHButton button = ButtonCopy.Make(view, heroData.transform, ButtonName, Text.Get("FHMODS_GIVE"), OnClick);
+            if (button == null) return null;
+            UiDump.Once("Header Give button (copy)", button.transform);
 
-            HideKeyHint(go);
-            // The empty circle: the Give window's "which player suggests this" avatar list (from the UI dump).
-            go.transform.Find("Container_SuggestingUsersList")?.gameObject.SetActive(false);
-            UiDump.Once("Header Give button (copy)", go.transform);
-
-            var rt = (RectTransform)go.transform;
+            var rt = (RectTransform)button.transform;
             rt.anchorMin = new Vector2(0f, 0f);
             rt.anchorMax = new Vector2(0f, 0f);
             rt.pivot = new Vector2(0f, 1f);
             rt.anchoredPosition = new Vector2(0f, -4f);
             rt.localScale = new Vector3(Scale, Scale, 1f);
-
-            var button = go.GetComponent<FHButton>();
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() => GiveResourcesPatches.Safe("header Give", OnClick));
-            button.interactable = true;
-            button.SetNonLocalizedText(Text.Get("FHMODS_GIVE"));
-            var group = go.GetComponent<CanvasGroup>();
-            if (group != null) { group.alpha = 1f; group.interactable = true; group.blocksRaycasts = true; }
-            return go.transform;
-        }
-
-        private static readonly System.Text.RegularExpressions.Regex HintName =
-            new System.Text.RegularExpressions.Regex("hotkey|hint|glyph|prompt|input", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-
-        /// <summary>The copied button keeps its key/controller hint icon (an empty circle once the hotkey is removed).
-        /// Switch off every child that looks like one (by name or component type), never the label or the button's
-        /// own frame.</summary>
-        private static void HideKeyHint(GameObject button)
-        {
-            foreach (Transform t in button.GetComponentsInChildren<Transform>(true))
-            {
-                if (t == button.transform || t.GetComponent<TMP_Text>() != null) continue;
-                bool hint = HintName.IsMatch(t.name) ||
-                            t.GetComponents<Component>().Any(c => c != null && HintName.IsMatch(c.GetType().Name));
-                if (hint && t.GetComponentInChildren<TMP_Text>(true) == null) t.gameObject.SetActive(false);
-            }
+            return button.transform;
         }
 
         private static void OnClick()

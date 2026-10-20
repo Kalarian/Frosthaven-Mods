@@ -33,6 +33,7 @@
     <!-- Game assemblies, referenced from the install so versions always match. Private=false keeps them out of bin. -->
     <Reference Include="Assembly-CSharp"><HintPath>$(GameManaged)\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="ForsthavenRuleLibrary"><HintPath>$(GameManaged)\ForsthavenRuleLibrary.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="ScenarioRuleLibrary"><HintPath>$(GameManaged)\ScenarioRuleLibrary.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="Unity.InputSystem"><HintPath>$(GameManaged)\Unity.InputSystem.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine"><HintPath>$(GameManaged)\UnityEngine.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine.UI"><HintPath>$(GameManaged)\UnityEngine.UI.dll</HintPath><Private>false</Private></Reference>

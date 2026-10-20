@@ -32,7 +32,7 @@ namespace FrosthavenMods
                 Transform box = ____hintsContainer.transform;
                 Transform clone = box.Find(CloneName);
                 var view = Singleton<FHMapChoreographer>.InstanceFast?.View;
-                bool show = ModRules.IsOn(ModRules.GiveResources) && view?.GameState?.ActiveScenario == null;
+                bool show = ModRules.GiveOn && view?.GameState?.ActiveScenario == null;
                 if (clone == null)
                 {
                     if (!show) return;

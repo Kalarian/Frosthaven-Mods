@@ -63,7 +63,21 @@ Mod layout, `mods/<Name>/`:
     - Herbs aren't included: the digital game keeps herbs only in the shared Frosthaven supply.
     - Gold given to a character in creation is lost if not spent before creation finishes; materials are kept.
     - Every player needs the mod: a peer without it fails when the command arrives.
-  - **Item trading** (bit 25): a switch only so far; does nothing yet.
+    - The window, the portrait Ctrl+click, the top-bar GIVE button and the hint line show while either give rule is on.
+  - **Item trading** (bit 25). The **Items** tab of the same window (tab buttons `Resources` / `Items` sit in the
+    window's separator row when both rules are on, `GiveTabs`). One row per item the giver owns (worn or not), with the
+    game's item card on hover; a cell is an on/off pick, laid out like the game's item reward window. A receiver who
+    already owns a copy is marked and locked. Long lists use the table's own vertical scroll view. **Give** sends the
+    queued gifts from both tabs, one `FrosthavenMods.GiveItem` command per item:
+    - `Action_RemoveItem` (the selling path: unequips, back to the supply, re-checks small item slots), then
+      `Action_GainItem` (the buying path: out of the supply again), then equip if a slot is free.
+    - Receivers: party members only (not a character in creation, who could buy with starting gold and pass it on).
+      The giver must have played at least 1 scenario.
+  - **Share duplicate loot** (bit 26). Board game rule (p. 32): a looted copy of an item you already own goes to
+    another character or is sold; the digital game always sells it. A prefix on `CharacterController.Action_GainItem`
+    for source `"scenario_loot"` puts the duplicate in the game's own items-to-gain list (`ItemToGainIDs` +
+    `GainItem` unresolved action), so the outpost opens the usual item reward window. Falls back to the auto-sell when
+    nobody else can own it or the reward window couldn't hand out every pending item.
 
 The installer copies `game/*` from the pack into the game folder and records every file it placed in `state.json`.
 A BepInEx someone else installed is kept (only our plugin is added). Uninstall removes only what we placed, plus
@@ -71,8 +85,8 @@ BepInEx's own cache/config/logs when the loader is ours. Other people's plugins 
 
 ## Co-op testing
 
-`docs/COOP_TEST.md` is the two-player test script. The mod logs every outpost command, rule change, gift and
-Ctrl+F8 checkpoint to `<game>\FrosthavenMods\coop-log.txt`, and `tools/coop_compare.py <host log> <client log>`
+`docs/COOP_TEST.md` is the two-player test script. The mod logs every outpost command, rule change, gift (resources
+and items), duplicate loot and Ctrl+F8 checkpoint (gold, materials, owned and worn items per character) to `<game>\FrosthavenMods\coop-log.txt`, and `tools/coop_compare.py <host log> <client log>`
 compares the two players' checkpoints.
 
 ## Tools (Python 3, stdlib only)

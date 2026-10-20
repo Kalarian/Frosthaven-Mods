@@ -27,7 +27,7 @@ namespace FrosthavenMods
     /// through it). The command only reads campaign state, so every machine reaches the same verdict. The rule switch and
     /// character ownership are checked in the UI, like the game's own ownership checks (they are not campaign state).
     /// </summary>
-    public sealed class GiveResourcesCommands
+    public sealed partial class GiveResourcesCommands
     {
         public const string CommandPath = "FrosthavenMods.GiveResources";
 
@@ -125,15 +125,19 @@ namespace FrosthavenMods
     internal static class GiveResourcesPatches
     {
         private static readonly ConditionalWeakTable<MultiplayerGameController, GiveResourcesCommands> Handlers = new ConditionalWeakTable<MultiplayerGameController, GiveResourcesCommands>();
-        private static readonly MethodInfo CommandMethod = typeof(GiveResourcesCommands).GetMethod(nameof(GiveResourcesCommands.GiveResources));
+        private static readonly Dictionary<string, MethodInfo> Commands = new Dictionary<string, MethodInfo>
+        {
+            [GiveResourcesCommands.CommandPath] = typeof(GiveResourcesCommands).GetMethod(nameof(GiveResourcesCommands.GiveResources)),
+            [GiveResourcesCommands.ItemCommandPath] = typeof(GiveResourcesCommands).GetMethod(nameof(GiveResourcesCommands.GiveItem)),
+        };
 
-        /// <summary>Resolve our command name. Bound to this controller instance (the host runs two: server and client copy).</summary>
+        /// <summary>Resolve our command names. Bound to this controller instance (the host runs two: server and client copy).</summary>
         [HarmonyPatch(typeof(MultiplayerGameController), "GetExectionContext")]
         [HarmonyPrefix]
         private static bool ResolveCommand(MultiplayerGameController __instance, string path, ref ValueTuple<object, MethodInfo> __result)
         {
-            if (path != GiveResourcesCommands.CommandPath) return true;
-            __result = (Handlers.GetValue(__instance, g => new GiveResourcesCommands(g)), CommandMethod);
+            if (path == null || !Commands.TryGetValue(path, out MethodInfo method)) return true;
+            __result = (Handlers.GetValue(__instance, g => new GiveResourcesCommands(g)), method);
             return false;
         }
 
@@ -146,7 +150,7 @@ namespace FrosthavenMods
         {
             try
             {
-                if (partySlotDto == null || partySlotDto.IsEmpty || !ModRules.IsOn(ModRules.GiveResources)) return;
+                if (partySlotDto == null || partySlotDto.IsEmpty || !ModRules.GiveOn) return;
                 FHMapView view = Singleton<FHMapChoreographer>.InstanceFast?.View;
                 if (view == null || view.GameState?.ActiveScenario != null) return;
                 bool controlled = view.IsSoloGame || partySlotDto.Owned; // only the controlling player gives
@@ -184,14 +188,23 @@ namespace FrosthavenMods
             if (giver == null) return;
             string cant = GiveRules.WhyCantGive(giver);
             if (cant != null) { Message(view, cant); return; }
-            if (GiveResourcesViewState.Kinds.All(k => GiveRules.Amount(giver, k) <= 0)) { Message(view, GiveRules.Name(giver) + " has no gold or materials to give."); return; }
+            bool resources = ModRules.IsOn(ModRules.GiveResources), items = ModRules.IsOn(ModRules.ItemTrading);
+            bool hasResources = resources && GiveResourcesViewState.Kinds.Any(k => GiveRules.Amount(giver, k) > 0);
+            bool hasItems = items && ItemRules.Giveable(view.GameController, giver).Count > 0;
+            if (!hasResources && !hasItems)
+            {
+                string what = resources && items ? "gold, materials or items" : resources ? "gold or materials" : "items";
+                Message(view, GiveRules.Name(giver) + " has no " + what + " to give.");
+                return;
+            }
             var receivers = view.GameState.AllCharacters
-                .Where(c => c != giver && GiveRules.CanReceive(c))
+                .Where(c => c != giver && (resources ? GiveRules.CanReceive(c) : ItemRules.CanReceive(c)))
                 .OrderBy(c => c.PartyState == CharacterPartyStateType.InParty ? 0 : 1)
                 .Select(c => c.ID)
                 .ToList();
             if (receivers.Count == 0) { Message(view, "There is nobody else in the party to give to."); return; }
-            view.PushState(new GiveResourcesViewState(giverId, receivers));
+            // Opens on Resources, or on Items when there are no resources to give (or that rule is off).
+            view.PushState(new GiveResourcesViewState(giverId, receivers, resources, items, startOnItems: !hasResources));
         }
 
         internal static void Safe(string step, Action action)
@@ -218,7 +231,25 @@ namespace FrosthavenMods
             }
         }
 
+        internal static bool GiveItem(FHMapView view, CharacterState giver, CharacterState receiver, ItemDef item)
+        {
+            string why = ItemRules.WhyNot(view.GameController, giver, receiver, item);
+            if (why != null) { Message(view, why); return false; }
+            try
+            {
+                view.Choreographer.ExecuteCommand(GiveResourcesCommands.ItemCommandPath, giver.ID, receiver.ID, (int)item.ID.ID);
+                view.RefreshView();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError("Give item: command failed: " + e);
+                Message(view, "Could not give: " + (e.InnerException ?? e).Message);
+                return false;
+            }
+        }
+
         internal static void Message(FHMapView view, string text) =>
-            view.PushState(new GenericModalViewState(text, "Give resources", null, canCancel: false));
+            view.PushState(new GenericModalViewState(text, "Give", null, canCancel: false));
     }
 }

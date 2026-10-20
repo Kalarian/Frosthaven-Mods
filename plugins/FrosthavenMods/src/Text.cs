@@ -13,6 +13,7 @@ namespace FrosthavenMods
         private static readonly Dictionary<string, string> Strings = new Dictionary<string, string>
         {
             ["FHMODS_GIVE_TITLE"] = "Give Resources",
+            ["FHMODS_GIVE_ITEMS_TITLE"] = "Give Items",
             ["FHMODS_GIVE"] = "Give",
             ["FHMODS_GIVE_HINT"] = "Give",
         };

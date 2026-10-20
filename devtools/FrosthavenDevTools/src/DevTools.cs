@@ -15,10 +15,13 @@ namespace FrosthavenDevTools
     ///   Ctrl+F9   +100 gold and +10 lumber/metal/hide per party member, +10 of each herb to the Frosthaven supply
     ///   Ctrl+F10  "win"            DebugMenu.WinScenarioCommand: wins the current scenario
     ///   Ctrl+F11  "skip_prologue"  FHMapChoreographer.SkipPrologue: ends the prologue (map only), lands in the outpost
+    ///   Ctrl+F12  fake duplicate loot: the selected character "loots" a copy of their first item, as at the end of a
+    ///             scenario. With the mod's Share duplicate loot rule on, the item reward window opens; off, it is sold.
+    ///             (Test campaigns only: the copy is conjured, not taken from the supply.)
     /// The game destroys BepInEx's plugin object soon after startup (as in Stolen Realm), so the plugin's own Update
     /// never runs; the keys are polled from postfixes on the game's own per-frame methods instead.
     /// </summary>
-    [BepInPlugin("frosthaven.devtools", "Frosthaven Dev Tools", "0.1.4")]
+    [BepInPlugin("frosthaven.devtools", "Frosthaven Dev Tools", "0.1.5")]
     public class DevTools : BaseUnityPlugin
     {
         private static ManualLogSource _log;
@@ -59,6 +62,7 @@ namespace FrosthavenDevTools
             if (kb.f9Key.wasPressedThisFrame) Run("+100 gold, +10 of each material and herb", AddGold);
             if (kb.f10Key.wasPressedThisFrame) Run("win scenario", () => Win.Invoke(null, new object[] { null, -1 }));
             if (kb.f11Key.wasPressedThisFrame) Run("skip prologue", DoSkipPrologue);
+            if (kb.f12Key.wasPressedThisFrame) Run("fake duplicate loot", FakeDuplicateLoot);
         }
 
         /// <summary>Ctrl+F9: 100 gold and 10 lumber/metal/hide to each party member, 10 of each herb to the Frosthaven
@@ -70,6 +74,19 @@ namespace FrosthavenDevTools
             var map = Singleton<FHMapChoreographer>.InstanceFast;
             if (map == null || map.GameState == null) throw new InvalidOperationException("only works in the outpost, not inside a scenario");
             map.ExecuteCommand(DevCommands.Path, 100, 10);
+            map.View.RefreshView();
+        }
+
+        private static readonly MethodInfo PushActiveEvent = AccessTools.Method(typeof(FHGUI.FHMapView), "TryPushActiveEvent");
+
+        private static void FakeDuplicateLoot()
+        {
+            var map = Singleton<FHMapChoreographer>.InstanceFast;
+            if (map == null || map.GameState == null) throw new InvalidOperationException("only works in the outpost, not inside a scenario");
+            FHRL.CharacterState c = map.View.SelectedCharacter ?? throw new InvalidOperationException("select a character first");
+            map.ExecuteCommand(DevCommands.FakeLootPath, c.ID);
+            // The outpost shows pending rewards when it loads; ask it to look now.
+            PushActiveEvent?.Invoke(map.View, new object[] { false });
             map.View.RefreshView();
         }
 
@@ -100,6 +117,9 @@ namespace FrosthavenDevTools
     public sealed class DevCommands
     {
         public const string Path = "FrosthavenDevTools.Grant";
+        public const string FakeLootPath = "FrosthavenDevTools.FakeDuplicateLoot";
+        private static readonly MethodInfo GainItem = AccessTools.Method(typeof(FHRL.CharacterController), "Action_GainItem",
+            new[] { typeof(FHRL.CharacterState), typeof(FHRL.ItemDef), typeof(string) });
         private static readonly MethodInfo BeginResult = AccessTools.Method(typeof(FHRL.CampaignController), "BeginResult");
         private static readonly MethodInfo EndResult = AccessTools.Method(typeof(FHRL.CampaignController), "EndResult");
         private static readonly MethodInfo AddGold = AccessTools.Method(typeof(FHRL.CharacterController), "Action_AddGold");
@@ -108,14 +128,16 @@ namespace FrosthavenDevTools
         private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<FHRL.MultiplayerGameController, DevCommands> Handlers =
             new System.Runtime.CompilerServices.ConditionalWeakTable<FHRL.MultiplayerGameController, DevCommands>();
         private static readonly MethodInfo GrantMethod = typeof(DevCommands).GetMethod(nameof(Grant));
+        private static readonly MethodInfo FakeLootMethod = typeof(DevCommands).GetMethod(nameof(FakeDuplicateLoot));
 
         private readonly FHRL.MultiplayerGameController _game;
         public DevCommands(FHRL.MultiplayerGameController game) { _game = game; }
 
         public static bool Resolve(FHRL.MultiplayerGameController __instance, string path, ref ValueTuple<object, MethodInfo> __result)
         {
-            if (path != Path) return true;
-            __result = (Handlers.GetValue(__instance, g => new DevCommands(g)), GrantMethod);
+            MethodInfo method = path == Path ? GrantMethod : path == FakeLootPath ? FakeLootMethod : null;
+            if (method == null) return true;
+            __result = (Handlers.GetValue(__instance, g => new DevCommands(g)), method);
             return false;
         }
 
@@ -132,6 +154,18 @@ namespace FrosthavenDevTools
                 AddResources.Invoke(campaign.CharacterController, new object[] { c, materials });
             }
             AddOutpostResources.Invoke(campaign.OutpostController, new object[] { herbs });
+            return (FHRL.CampaignController.Result)EndResult.Invoke(campaign, null);
+        }
+
+        [FHRL.MultiplayerCommand(FHRL.MultiplayerCommandExecType.Everybody)]
+        public FHRL.CampaignController.Result FakeDuplicateLoot(FHRL.CharacterID id)
+        {
+            FHRL.CampaignController campaign = _game.CampaignController;
+            campaign.CharacterController.TryGetCharacter(id, out FHRL.CharacterState c);
+            FHRL.ItemDef item = c == null ? null : System.Linq.Enumerable.FirstOrDefault(campaign.CharacterController.GetOwnedItems(c));
+            if (item == null) throw new FHRL.FHGameException("the selected character owns no items");
+            BeginResult.Invoke(campaign, null);
+            GainItem.Invoke(campaign.CharacterController, new object[] { c, item, "scenario_loot" });
             return (FHRL.CampaignController.Result)EndResult.Invoke(campaign, null);
         }
     }
