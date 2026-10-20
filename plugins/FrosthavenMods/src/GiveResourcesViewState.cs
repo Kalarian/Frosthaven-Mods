@@ -73,14 +73,12 @@ namespace FrosthavenMods
                 for (int col = 0; col < _receivers.Count; col++)
                 {
                     int column = col, current = Pending(col, kind);
-                    CharacterState receiver = GiveResourcesPatches.Find(View, _receivers[col]);
                     row.CellData.Add(new UIDistributionCell.Params
                     {
                         CurrentDelta = current,
                         MaxDelta = current + left,
                         Enabled = true,
                         IsGain = true,
-                        TooltipLiteral = Describe(receiver),
                         OnChange = delta => GiveResourcesPatches.Safe("change an amount", () => Change(column, kind, delta)),
                     });
                 }
@@ -91,7 +89,8 @@ namespace FrosthavenMods
             {
                 Table = table,
                 Title = "FHMODS_GIVE_TITLE",
-                DescriptionLiteral = $"{GiveRules.Name(giver)} gives. Left-click +1, right-click -1. Hold Ctrl for 10, Shift for all / none.",
+                DescriptionLiteral = $"{GiveRules.Name(giver)} gives (left: {string.Join(", ", Kinds.Select(k => $"{GiveRules.Amount(giver, k) - PendingTotal(k)} {GiveRules.Label(k)}"))}).\n" +
+                                     "Left-click +1, right-click -1. Hold Ctrl for 10, Shift for all / none.",
                 IsDone = () => _pending.Values.Any(v => v > 0),
                 OnDone = () => GiveResourcesPatches.Safe("give", GiveAll),
                 OnCancel = PopThisState,
@@ -99,8 +98,14 @@ namespace FrosthavenMods
                 DoneButtonKey = "FHMODS_GIVE",
                 CancelButtonKey = "GUI_CANCEL",
             });
-            UiDump.Once("Give Resources window (DistributionModule)", DistributionModule.transform);
+            _layout.Apply(DistributionModule.transform, _receivers.Count);
+            _layout.SetPortraitTooltips(_receivers.Select(id => Describe(GiveResourcesPatches.Find(View, id))).ToList());
         }
+
+        // The table module is shared with the game's own Building Donation screen: undo our layout changes on close.
+        private readonly GiveTableLayout _layout = new GiveTableLayout();
+
+        public override void OnHide() => GiveResourcesPatches.Safe("restore the window", _layout.Restore);
 
         private static string Describe(CharacterState c)
         {
