@@ -19,19 +19,20 @@ namespace FrosthavenMods
             public string Description;
         }
 
-        // Bit 24 was first released as "Shared gold"; it now means Give gold (a save with it on keeps it on).
-        public const ERulesFlag GiveGold = (ERulesFlag)(1 << 24);
+        // Bit 24 was first released as "Shared gold"; it now means Give resources (a save with it on keeps it on).
+        public const ERulesFlag GiveResources = (ERulesFlag)(1 << 24);
         public const ERulesFlag ItemTrading = (ERulesFlag)(1 << 25);
 
         public static readonly List<Rule> All = new List<Rule>
         {
             new Rule
             {
-                Flag = GiveGold,
-                Name = "Give gold (mod)",
-                Description = "Not active yet: this switch only tests that the setting saves and syncs to everyone.\n\n" +
-                              "Planned: in the outpost, a character can give some of their gold to another character. " +
-                              "Gold still belongs to each character (board game: gold cannot be transferred between characters).",
+                Flag = GiveResources,
+                Name = "Give resources (mod)",
+                Description = "In the outpost, middle-click a character's portrait in the party column to give their gold, " +
+                              "lumber, metal or hide to another character: in the party, on the bench, or being created.\n\n" +
+                              "The giver must have played at least one scenario. Herbs are already shared in this game.\n" +
+                              "Board game rule bent: gold and resources normally can't be transferred between characters.",
             },
             new Rule
             {

@@ -46,14 +46,15 @@ Mod layout, `mods/<Name>/`:
   - The screen's callbacks capture the rules from when the window opened, so flipping two switches undid the first.
   - The window's row list is never emptied.
 - Rules so far:
-  - **Give gold** (bit 24, released in v0.2.0 as "Shared gold"). In the outpost, a character's Equipment screen gets
-    a "Give gold" button. It picks a recipient (party members, plus characters still in creation), then an amount,
-    and sends the custom multiplayer command `FrosthavenMods.GiveGold`. Our prefix on
-    `MultiplayerGameController.GetExectionContext` resolves that command, so it runs on every machine like
-    SellItem/BuyItem, with the host validating it. Limits:
-    - The giver must be in the party, have played at least 1 scenario, and have the gold.
-    - Characters still in creation can receive but not give. Unspent gold is lost when creation finishes.
-    - Only the player controlling the giver sees the button.
+  - **Give resources** (bit 24, released in v0.2.0 as "Shared gold"). In the outpost, the party column gets a
+    middle-click "Give" action on each portrait you control. It picks a recipient (party, bench, or a character
+    being created; not retired), then gold, lumber, metal or hide with the game's icon picker, then an amount. The
+    picker reopens for more. The custom multiplayer command `FrosthavenMods.GiveResources` is resolved by a prefix on
+    `MultiplayerGameController.GetExectionContext`, so it runs on every machine like SellItem/BuyItem, with the host
+    validating it. Limits:
+    - The giver must be in the party, have played at least 1 scenario, and have the amount.
+    - Herbs aren't included: the digital game keeps herbs only in the shared Frosthaven supply.
+    - Gold given to a character in creation is lost if not spent before creation finishes; materials are kept.
     - Every player needs the mod: a peer without it fails when the command arrives.
   - **Item trading** (bit 25): a switch only so far; does nothing yet.
 
