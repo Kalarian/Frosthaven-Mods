@@ -4,6 +4,7 @@
 !.gitignore
 !.gitattributes
 !VERSION
+!LICENSE
 !README.md
 !mods/
 !mods/**

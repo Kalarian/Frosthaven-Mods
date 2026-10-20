@@ -62,3 +62,5 @@ The game loads entries in index order, batched by runs of the same parser type. 
   Frosthaven (`IsModdingEnabled`).
 - Planned: a one-click installer exe that checks this repo's latest GitHub release (as in the Stolen Realm pack),
   with uninstall/restore built in.
+
+Licence: MIT (the tools and patches; Frosthaven and its game data belong to their owners).
