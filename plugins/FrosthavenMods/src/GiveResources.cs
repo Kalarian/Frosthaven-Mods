@@ -151,7 +151,7 @@ namespace FrosthavenMods
                     Action select = action.ActionCallback;
                     action.ActionCallback = () =>
                     {
-                        if (UnityEngine.InputSystem.Keyboard.current?.ctrlKey.isPressed == true) Start(view, id);
+                        if (UnityEngine.InputSystem.Keyboard.current?.ctrlKey.isPressed == true) Safe("start", () => Start(view, id));
                         else select?.Invoke();
                     };
                 }
@@ -191,35 +191,33 @@ namespace FrosthavenMods
                 pick => { if (pick?.Item is CharacterID to) ChooseWhat(view, giverId, to); }, backgroundEnabled: true));
         }
 
-        /// <summary>The game's icon picker with gold and the three materials (the giver's amounts). After each gift it
-        /// reopens for the same recipient until closed.</summary>
+        /// <summary>What to give: gold and the three materials with the giver's amounts (none = greyed out). Uses the
+        /// game's list window: its ResourcePickerModalViewState has no callers in the game and does nothing when pushed.
+        /// After each gift this reopens for the same recipient; "Done" closes it.</summary>
         private static void ChooseWhat(FHMapView view, CharacterID giverId, CharacterID receiverId)
         {
-            CharacterState giver = Find(view, giverId), receiver = Find(view, receiverId);
-            if (giver == null || receiver == null) return;
-            var tools = UIInfoTools.Instance;
-            FHGUI.Common.Elements.UIPickerSlot.UIPickerSlotDTO Slot(GiveKind k, UnityEngine.Sprite icon, string tooltip)
+            Safe("choose what", () =>
             {
-                int have = GiveRules.Amount(giver, k);
-                return new FHGUI.Common.Elements.UIPickerSlot.UIPickerSlotDTO { Icon = icon, Quantity = have, Available = have > 0, Tooltip = tooltip, SlotData = k };
-            }
-            var data = new UIPicker.UIPickerData
-            {
-                TitleLocKey = "GUI_SELECT",
-                PickerElements = new[]
+                CharacterState giver = Find(view, giverId), receiver = Find(view, receiverId);
+                if (giver == null || receiver == null) { Plugin.Log.LogWarning("Give resources: character not found"); return; }
+                var kinds = new[] { GiveKind.Gold, GiveKind.Lumber, GiveKind.Metal, GiveKind.Hide };
+                if (kinds.All(k => GiveRules.Amount(giver, k) <= 0)) { Message(view, GiveRules.Name(giver) + " has nothing left to give."); return; }
+                var items = kinds.Select(k => new GenericListModalViewState.ListItem
                 {
-                    Slot(GiveKind.Gold, tools.GetResourceConfig("Gold").IconStylized, null),
-                    Slot(GiveKind.Lumber, tools.GetResourceConfig(OutpostMaterialType.Lumber).BigIcon, "RESOURCE_Lumber"),
-                    Slot(GiveKind.Metal, tools.GetResourceConfig(OutpostMaterialType.Metal).BigIcon, "RESOURCE_Metal"),
-                    Slot(GiveKind.Hide, tools.GetResourceConfig(OutpostMaterialType.Hide).BigIcon, "RESOURCE_Hide"),
-                },
-            };
-            if (data.PickerElements.All(e => !e.Available)) { Message(view, GiveRules.Name(giver) + " has nothing left to give."); return; }
-            view.PushState(new PickerThenState(data, result =>
-            {
-                if (result.Selected == null || result.Selected.Length == 0) return; // closed
-                if (result.Selected[0].SlotData is GiveKind kind) ChooseAmount(view, giverId, receiverId, kind);
-            }));
+                    Item = k,
+                    Text = $"{char.ToUpperInvariant(GiveRules.Label(k)[0])}{GiveRules.Label(k).Substring(1)}  ({GiveRules.Amount(giver, k)})",
+                    Enabled = GiveRules.Amount(giver, k) > 0,
+                }).ToList();
+                view.PushState(new GenericListModalViewState("Give resources",
+                    $"What does {GiveRules.Name(giver)} give to {GiveRules.Name(receiver)}?", items, -1, null, "Done",
+                    pick => { if (pick?.Item is GiveKind kind) Safe("choose amount", () => ChooseAmount(view, giverId, receiverId, kind)); }, backgroundEnabled: true, columns: 2));
+            });
+        }
+
+        private static void Safe(string step, Action action)
+        {
+            try { action(); }
+            catch (Exception e) { Plugin.Log.LogError($"Give resources: {step} failed: {e}"); }
         }
 
         private static readonly int[] Presets = { 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 75, 100, 150, 200, 250, 300, 400, 500, 750, 1000 };
@@ -263,27 +261,5 @@ namespace FrosthavenMods
 
         private static void Message(FHMapView view, string text) =>
             view.PushState(new GenericModalViewState(text, "Give resources", null, canCancel: false));
-
-        /// <summary>The game's ResourcePickerModalViewState runs its callback before closing itself, and a state only
-        /// closes while it is on top, so opening the next window from the callback would leave the picker stuck behind
-        /// it. This one closes first, then continues.</summary>
-        private sealed class PickerThenState : ResourcePickerModalViewState
-        {
-            private readonly UIPicker.UIPickerData _data;
-            private readonly Action<UIPicker.UIPickerResult> _then;
-
-            public PickerThenState(UIPicker.UIPickerData data, Action<UIPicker.UIPickerResult> then) : base(data, null)
-            {
-                _data = data;
-                _then = then;
-            }
-
-            public override void OnShow()
-            {
-                View.Modules.GenericModals.ResourcePickerModal.Init(_data,
-                    result => { PopThisState(); _then(result); return true; },
-                    () => { PopThisState(); _then(default); });
-            }
-        }
     }
 }
