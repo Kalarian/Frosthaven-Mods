@@ -45,7 +45,7 @@ Mod layout, `mods/<Name>/`:
   - `ApplyHeader` never reads the rules back, so they reset to off on every reload.
   - The screen's callbacks capture the rules from when the window opened, so flipping two switches undid the first.
   - The window's row list is never emptied.
-- Rules so far: "Shared gold" and "Item trading". **Both are switches only, and do nothing yet.**
+- Rules so far: "Give gold" (bit 24, released in v0.2.0 as "Shared gold") and "Item trading". **Both are switches only, and do nothing yet.**
 
 The installer copies `game/*` from the pack into the game folder and records every file it placed in `state.json`.
 A BepInEx someone else installed is kept (only our plugin is added). Uninstall removes only what we placed, plus
