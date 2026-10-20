@@ -46,8 +46,14 @@ namespace FrosthavenMods
             CampaignController campaign = _game.CampaignController;
             campaign.CharacterController.TryGetCharacter(from, out CharacterState giver);
             campaign.CharacterController.TryGetCharacter(to, out CharacterState receiver);
+            string copy = CoopLog.Copy(_game);
+            string what = $"{GiveRules.Name(giver)} -> {GiveRules.Name(receiver)}: {amount} {GiveRules.Label((GiveKind)kind)}";
             string why = GiveRules.WhyNot(giver, receiver, (GiveKind)kind, amount);
-            if (why != null) throw new FHGameException("Give resources: " + why);
+            if (why != null)
+            {
+                CoopLog.Write($"GIVE REJECTED on={copy} {what} ({why})");
+                throw new FHGameException("Give resources: " + why);
+            }
 
             // One result bracket, like SellItem/BuyItem: both sides change together.
             BeginResult.Invoke(campaign, null);
@@ -63,8 +69,8 @@ namespace FrosthavenMods
                 AddResources.Invoke(campaign.CharacterController, new object[] { receiver, r });
             }
             var result = (CampaignController.Result)EndResult.Invoke(campaign, null);
-            Plugin.Log.LogInfo($"Give resources: {GiveRules.Name(giver)} gave {amount} {GiveRules.Label((GiveKind)kind)} to {GiveRules.Name(receiver)} " +
-                               $"(now {GiveRules.Amount(giver, (GiveKind)kind)} / {GiveRules.Amount(receiver, (GiveKind)kind)})");
+            CoopLog.Write($"GIVE APPLIED on={copy} {what} (now {GiveRules.Amount(giver, (GiveKind)kind)} / {GiveRules.Amount(receiver, (GiveKind)kind)})");
+            CoopLog.Snapshot("after give", _game);
             return result;
         }
     }

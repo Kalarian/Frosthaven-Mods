@@ -12,13 +12,14 @@ namespace FrosthavenMods
     public class Plugin : BaseUnityPlugin
     {
         public const string Guid = "frosthaven.mods";
-        public const string Version = "0.2.0";
+        public const string Version = "0.3.0";
 
         internal static ManualLogSource Log;
 
         private void Awake()
         {
             Log = Logger;
+            CoopLog.SessionStart();
             var harmony = new Harmony(Guid);
             // One patch class at a time: if a game update breaks one feature's patch, the others still load.
             foreach (System.Type type in AccessTools.GetTypesFromAssembly(typeof(Plugin).Assembly))

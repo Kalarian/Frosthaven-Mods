@@ -99,8 +99,9 @@ namespace FrosthavenMods
                     PartyAdventureData data = SaveData.Instance?.Global?.CurrentAdventureData;
                     if (data == null) return;
                     ERulesFlag next = on ? data.Rules | r.Flag : data.Rules & ~r.Flag;
-                    Plugin.Log.LogInfo($"House rules: '{r.Name}' -> {(on ? "on" : "off")} (rules {(int)data.Rules:X} -> {(int)next:X}: {ModRules.Describe(next)})");
+                    CoopLog.Write($"RULES CHANGED here: '{r.Name}' -> {(on ? "on" : "off")} (rules {(int)data.Rules:X} -> {(int)next:X}: {ModRules.Describe(next)}) role={CoopLog.Role()}");
                     data.ChangeCampaignRules(next);
+                    CoopLog.Snapshot("after rule change");
                 };
             }
         }
@@ -116,7 +117,7 @@ namespace FrosthavenMods
                 if (header.Rules == __instance.Rules) return;
                 AccessTools.PropertySetter(typeof(PartyAdventureData), nameof(PartyAdventureData.Rules)).Invoke(__instance, new object[] { header.Rules });
                 if ((header.Rules & ModRules.Mask) != 0)
-                    Plugin.Log.LogInfo($"House rules: '{header.CampaignName}' saved with {ModRules.Describe(header.Rules)}");
+                    CoopLog.Write($"RULES LOADED '{header.CampaignName}': {ModRules.Describe(header.Rules)} (rules {(int)header.Rules:X})");
             }
             catch (Exception e)
             {
@@ -130,7 +131,8 @@ namespace FrosthavenMods
         private static void LogReceived()
         {
             ERulesFlag now = ModRules.Current;
-            Plugin.Log.LogInfo($"House rules: received from the host (rules {(int)now:X}: {ModRules.Describe(now)})");
+            CoopLog.Write($"RULES RECEIVED from the host: rules {(int)now:X}: {ModRules.Describe(now)}");
+            CoopLog.Snapshot("after rules received");
         }
 
         /// <summary>Game bug: the settings window destroys its rows on every rebuild but never empties its row list, so the
