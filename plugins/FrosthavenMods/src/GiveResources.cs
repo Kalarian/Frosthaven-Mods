@@ -170,6 +170,8 @@ namespace FrosthavenMods
         internal static CharacterState Find(FHMapView view, CharacterID id) =>
             view.GameController.CharacterController.TryGetCharacter(id, out CharacterState c) ? c : null;
 
+        internal static void StartFrom(FHMapView view, CharacterID giverId) => Safe("start", () => Start(view, giverId));
+
         private static void Start(FHMapView view, CharacterID giverId)
         {
             CharacterState giver = Find(view, giverId);
