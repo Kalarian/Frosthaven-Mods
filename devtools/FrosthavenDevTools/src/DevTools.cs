@@ -3,6 +3,7 @@ using System.Reflection;
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace FrosthavenDevTools
@@ -13,23 +14,43 @@ namespace FrosthavenDevTools
     /// console to type them into:
     ///   Ctrl+F10  "win"            DebugMenu.WinScenarioCommand: wins the current scenario
     ///   Ctrl+F11  "skip_prologue"  FHMapChoreographer.SkipPrologue: ends the prologue (map only), lands in the outpost
+    /// The game destroys BepInEx's plugin object soon after startup (as in Stolen Realm), so the plugin's own Update
+    /// never runs; the keys are polled from postfixes on the game's own per-frame methods instead.
     /// </summary>
-    [BepInPlugin("frosthaven.devtools", "Frosthaven Dev Tools", "0.1.0")]
+    [BepInPlugin("frosthaven.devtools", "Frosthaven Dev Tools", "0.1.1")]
     public class DevTools : BaseUnityPlugin
     {
         private static ManualLogSource _log;
         private static readonly MethodInfo Win = AccessTools.Method("DebugMenu:WinScenarioCommand");
         private static readonly MethodInfo SkipPrologue = AccessTools.Method("FHMapChoreographer:SkipPrologue");
+        private static int _lastFrame = -1;
+        private static string _listeningVia;
 
         private void Awake()
         {
             _log = Logger;
-            _log.LogInfo($"Dev tools loaded (solo only): Ctrl+F10 = win scenario [{(Win != null ? "ok" : "MISSING")}], " +
+            var harmony = new Harmony("frosthaven.devtools");
+            int hooks = 0;
+            foreach (string target in new[] { "InputFHManager:LateUpdate", "Choreographer:Update" })
+            {
+                MethodInfo m = AccessTools.Method(target);
+                if (m == null) { _log.LogWarning("Dev tools: no " + target + " to hook"); continue; }
+                harmony.Patch(m, postfix: new HarmonyMethod(typeof(DevTools), nameof(Poll)));
+                hooks++;
+            }
+            _log.LogInfo($"Dev tools loaded (solo only, {hooks} frame hooks): Ctrl+F10 = win scenario [{(Win != null ? "ok" : "MISSING")}], " +
                          $"Ctrl+F11 = skip prologue [{(SkipPrologue != null ? "ok" : "MISSING")}]");
         }
 
-        private void Update()
+        private static void Poll(MethodBase __originalMethod)
         {
+            if (Time.frameCount == _lastFrame) return;
+            _lastFrame = Time.frameCount;
+            if (_listeningVia == null)
+            {
+                _listeningVia = __originalMethod.DeclaringType?.Name;
+                _log.LogInfo("Dev tools: listening for keys (via " + _listeningVia + ")");
+            }
             Keyboard kb = Keyboard.current;
             if (kb == null || !kb.ctrlKey.isPressed) return;
             if (kb.f10Key.wasPressedThisFrame) Run("win scenario", () => Win.Invoke(null, new object[] { null, -1 }));
