@@ -89,26 +89,99 @@ namespace FrosthavenMods
 
         private static bool IsNull(string m) => Has(m, "null", "x0", "*0", "\u00d70", "miss");
 
-        private static IEnumerable<string> Mods(CPlayerStatsScenario s) => s.Modifiers?.SelectMany(m => m.Modifier ?? new List<string>()).Select(Plain) ?? Enumerable.Empty<string>();
+        // ---- summons count as part of their owner (the user's call). The game already files a summon's damage dealt
+        // and taken, kills and heals on the owner (flagged PerformedBySummons). Its attack modifier draws, abilities
+        // and elements only go to the game's shared summon pool (StatsState.m_HeroSummonStats), so they are matched
+        // back here: each owner's HeroSummons records name their summons' class IDs and GUIDs. A class claimed by two
+        // owners is left out rather than guessed.
+
+        private static Dictionary<string, CPlayerStatsScenario> _summonShare = new Dictionary<string, CPlayerStatsScenario>();
+        private static List<string> _summonLog = new List<string>();
+
+        private static CPlayerStatsScenario Pool(CPlayerStatsScenario s) =>
+            s != null && s.CharacterID != null && _summonShare.TryGetValue(s.CharacterID, out CPlayerStatsScenario p) ? p : null;
+
+        private static void ShareSummonPool(List<CPlayerStatsScenario> stats)
+        {
+            _summonShare = new Dictionary<string, CPlayerStatsScenario>();
+            _summonLog = new List<string>();
+            CPlayerStatsScenario pool = ScenarioManager.CurrentScenarioState?.Stats?.m_HeroSummonStats;
+            if (pool == null) { _summonLog.Add("no summon pool"); return; }
+            var classOwners = new Dictionary<string, HashSet<string>>();
+            var guidOwner = new Dictionary<string, string>();
+            foreach (CPlayerStatsScenario s in stats)
+            {
+                foreach (CPlayerStatsHeroSummon h in s.HeroSummons ?? new List<CPlayerStatsHeroSummon>())
+                {
+                    if (h.ClassID != null)
+                    {
+                        if (!classOwners.TryGetValue(h.ClassID, out HashSet<string> owners)) classOwners[h.ClassID] = owners = new HashSet<string>();
+                        owners.Add(s.CharacterID);
+                    }
+                    if (h.GUID != null) guidOwner[h.GUID] = s.CharacterID;
+                }
+            }
+            string Owner(string classID, string guid)
+            {
+                if (guid != null && guidOwner.TryGetValue(guid, out string byGuid)) return byGuid;
+                if (classID != null && classOwners.TryGetValue(classID, out HashSet<string> owners) && owners.Count == 1) return owners.First();
+                return null;
+            }
+            CPlayerStatsScenario Share(string owner)
+            {
+                if (!_summonShare.TryGetValue(owner, out CPlayerStatsScenario share)) _summonShare[owner] = share = new CPlayerStatsScenario((string)null);
+                return share;
+            }
+            int unmatched = 0;
+            foreach (CPlayerStatsModifiers m in pool.Modifiers ?? new List<CPlayerStatsModifiers>())
+            {
+                string owner = Owner(m.ActionData?.MainActorClassID, m.ActionData?.MainActorGUID);
+                if (owner == null) { unmatched++; _summonLog.Add($"  pool MOD r{m.Round} class={m.ActionData?.MainActorClassID} -> nobody"); continue; }
+                Share(owner).Modifiers.Add(m);
+                _summonLog.Add($"  pool MOD r{m.Round} class={m.ActionData?.MainActorClassID} {string.Join(",", (m.Modifier ?? new List<string>()).Select(Plain))} -> {owner}");
+            }
+            foreach (CPlayerStatsAbilities a in pool.Abilities ?? new List<CPlayerStatsAbilities>())
+            {
+                string owner = Owner(a.ActionData?.MainActorClassID, a.ActionData?.MainActorGUID);
+                if (owner == null) { unmatched++; continue; }
+                Share(owner).Abilities.Add(a);
+            }
+            foreach (CPlayerStatsElement e in (pool.Infusions ?? new List<CPlayerStatsElement>()).Concat(pool.Consumed ?? new List<CPlayerStatsElement>()))
+            {
+                string owner = Owner(e.ActorClassID, null);
+                if (owner == null) { unmatched++; continue; }
+                (e.StatsElementType == CPlayerStatsElement.EStatsElementType.Consumed ? Share(owner).Consumed : Share(owner).Infusions).Add(e);
+            }
+            _summonLog.Insert(0, $"summon pool: {pool.Modifiers?.Count ?? 0} modifier draws, {pool.Abilities?.Count ?? 0} abilities, " +
+                                 $"{(pool.Infusions?.Count ?? 0) + (pool.Consumed?.Count ?? 0)} element records; {unmatched} not matched to an owner; " +
+                                 "summons by owner: " + string.Join(", ", classOwners.Select(kv => kv.Key + "=" + string.Join("/", kv.Value))));
+        }
+
+        private static IEnumerable<string> Mods(CPlayerStatsScenario s) =>
+            (s.Modifiers ?? new List<CPlayerStatsModifiers>()).Concat(Pool(s)?.Modifiers ?? new List<CPlayerStatsModifiers>())
+                .SelectMany(m => m.Modifier ?? new List<string>()).Select(Plain);
+
+        private static int Infused(CPlayerStatsScenario s) => Count(s.Infusions) + Count(Pool(s)?.Infusions);
+
+        private static int ConsumedCount(CPlayerStatsScenario s) => Count(s.Consumed) + Count(Pool(s)?.Consumed);
 
         /// <summary>Abilities used, each once: the game can record the same ability more than once (seen in the raw
         /// log: one Heal card logged twice for one heal), so records sharing the ability's ID, round and type count once.
         /// (HeroSummons is no use for counting summons: the game adds a record each time a summon moves.)</summary>
         private static IEnumerable<CPlayerStatsAbilities> Abilities(CPlayerStatsScenario s) =>
-            s.Abilities?.GroupBy(a => (a.AbilityID, a.Round, a.ActionData?.AbilityType, a.ActionData?.ActingAbilityName)).Select(g => g.First())
-            ?? Enumerable.Empty<CPlayerStatsAbilities>();
+            (s.Abilities ?? new List<CPlayerStatsAbilities>()).Concat(Pool(s)?.Abilities ?? new List<CPlayerStatsAbilities>())
+                .GroupBy(a => (a.AbilityID, a.Round, a.ActionData?.AbilityType, a.ActionData?.ActingAbilityName)).Select(g => g.First());
 
         private static int Overkill(CPlayerStatsKill k) => Math.Max(0, k.LastDamageAmount - k.PreDamageHealth);
 
         // What the game's records mean (checked in StatsDataStorage / GameState, 2026-10-20):
-        // - DamageDealt / DamageReceived / Kills / Heals also hold your summons' entries, flagged PerformedBySummons.
+        // - DamageDealt / DamageReceived / Kills / Heals also hold your summons' entries, flagged PerformedBySummons:
+        //   counted as yours (summons are an extension of their owner); the "by summons" rows show their share.
         // - Damage Avoided = a whole hit negated (lose cards, prevent-damage effects); Shielded is set for enemy targets
         //   only; Shield is the target's shield value on that hit.
         // - Trap records are springing ("Activate") and disarming ("Disarm") traps.
         // - RemovedCondition is conditions removed FROM the character (wearing off included), so it is not used.
-        private static bool Own(CPlayerStatsDamage d) => !d.PerformedBySummons;
-
-        private static bool OwnAttack(CPlayerStatsDamage d) => Own(d) && d.ActionData?.AbilityType == CAbility.EAbilityType.Attack;
+        private static bool Attack(CPlayerStatsDamage d) => d.ActionData?.AbilityType == CAbility.EAbilityType.Attack;
 
         private static bool EnemyKill(CPlayerStatsKill k) => k.ActorWhoDiedType != "Player" && k.ActorWhoDiedType != "HeroSummon";
 
@@ -117,8 +190,8 @@ namespace FrosthavenMods
         private static readonly List<Row> Rows = new List<Row>
         {
             Section("OFFENSE"),
-            Int("Biggest hit", Dealt, s => Max(s.DamageDealt?.Where(Own), d => d.FinalDamageAmount)),
-            Int("Hits landed", Dealt, s => Count(s.DamageDealt, d => OwnAttack(d) && d.FinalDamageAmount > 0)),
+            Int("Biggest hit", Dealt, s => Max(s.DamageDealt, d => d.FinalDamageAmount)),
+            Int("Hits landed", Dealt, s => Count(s.DamageDealt, d => Attack(d) && d.FinalDamageAmount > 0)),
             new Row
             {
                 Label = "Damage per round",
@@ -129,18 +202,18 @@ namespace FrosthavenMods
             Int("Overkill", Killed, s => Sum(s.Kills?.Where(EnemyKill), Overkill)),
             Int("Blocked by enemy shields", Dealt, s => Sum(s.DamageDealt, d => d.Shielded)),
             Int("Poison bonus damage", Bad(CCondition.ENegativeCondition.Poison), s => Sum(s.DamageDealt, d => d.PoisonDamage)),
-            Int("Melee hits", Dealt, s => Count(s.DamageDealt, d => OwnAttack(d) && d.IsMelee && d.FinalDamageAmount > 0)),
-            Int("Ranged hits", Dealt, s => Count(s.DamageDealt, d => OwnAttack(d) && !d.IsMelee && d.FinalDamageAmount > 0)),
+            Int("Melee hits", Dealt, s => Count(s.DamageDealt, d => Attack(d) && d.IsMelee && d.FinalDamageAmount > 0)),
+            Int("Ranged hits", Dealt, s => Count(s.DamageDealt, d => Attack(d) && !d.IsMelee && d.FinalDamageAmount > 0)),
             Int("Area attacks", Dealt, s => Count(Abilities(s), a => a.AreaEffect == true)),
             Int("Damage by summons", Dealt, s => Sum(s.DamageDealt, d => d.PerformedBySummons ? d.FinalDamageAmount : 0)),
             Int("Kills by summons", Killed, s => Count(s.Kills, k => k.PerformedBySummons && EnemyKill(k))),
 
             Section("DEFENSE"),
-            Int("Biggest hit taken", Taken, s => Max(s.DamageReceived?.Where(d => Own(d) && d.CauseOfDamage != CActor.ECauseOfDamage.Self), d => d.FinalDamageAmount)),
-            Int("Self-inflicted damage", Taken, s => Sum(s.DamageReceived, d => Own(d) && d.CauseOfDamage == CActor.ECauseOfDamage.Self ? d.FinalDamageAmount : 0)),
-            Int("Shield on hits taken", Good(CCondition.EPositiveCondition.Ward), s => Sum(s.DamageReceived, d => Own(d) && d.Avoided == 0 ? Math.Max(0, d.Shield) : 0)),
-            Int("Hits negated", Good(CCondition.EPositiveCondition.Invisible), s => Count(s.DamageReceived, d => Own(d) && d.Avoided > 0)),
-            Int("Damage negated", Good(CCondition.EPositiveCondition.Ward), s => Sum(s.DamageReceived, d => Own(d) ? d.Avoided : 0)),
+            Int("Biggest hit taken", Taken, s => Max(s.DamageReceived?.Where(d => d.CauseOfDamage != CActor.ECauseOfDamage.Self), d => d.FinalDamageAmount)),
+            Int("Self-inflicted damage", Taken, s => Sum(s.DamageReceived, d => d.CauseOfDamage == CActor.ECauseOfDamage.Self ? d.FinalDamageAmount : 0)),
+            Int("Shield on hits taken", Good(CCondition.EPositiveCondition.Ward), s => Sum(s.DamageReceived, d => d.Avoided == 0 ? Math.Max(0, d.Shield) : 0)),
+            Int("Hits negated", Good(CCondition.EPositiveCondition.Invisible), s => Count(s.DamageReceived, d => d.Avoided > 0)),
+            Int("Damage negated", Good(CCondition.EPositiveCondition.Ward), s => Sum(s.DamageReceived, d => d.Avoided)),
             Int("Trap damage taken", Taken, s => Sum(s.Trap?.Where(Sprung), t => t.TrapDamage)),
             Int("Exhausted", Bad(CCondition.ENegativeCondition.Bane), s => s.PlayerSurvivedScenario ? 0 : 1),
 
@@ -165,8 +238,8 @@ namespace FrosthavenMods
             Section("CARDS AND ELEMENTS"),
             Int("Cards lost", Used, s => Count(s.LoseCards)),
             Int("Cards recovered", Used, s => Count(s.RecoverCards)),
-            Int("Elements infused", Element, s => Count(s.Infusions)),
-            Int("Elements consumed", Element, s => Count(s.Consumed)),
+            Int("Elements infused", Element, Infused),
+            Int("Elements consumed", Element, ConsumedCount),
 
             Section("EXPLORATION"),
             Int("Doors opened", Chests, s => Sum(s.Door, d => d.Doors)),
@@ -188,6 +261,7 @@ namespace FrosthavenMods
                 var columns = battleResults.IndividualRewards
                     .Select(h => stats.FirstOrDefault(s => s.CharacterID == h.BattleStats?.CharacterID || s.CharacterID == h.ClassID))
                     .ToList();
+                ShareSummonPool(stats);
                 int oldRows = __result.RowHeaders.Count, cols = __result.ColumHeaders.Count;
                 var cells = new DebriefingTableDTO.Cell[oldRows + Rows.Count, cols];
                 for (int r = 0; r < oldRows; r++)
@@ -267,6 +341,7 @@ namespace FrosthavenMods
                 _lastLogged = key;
                 var sb = new StringBuilder();
                 sb.AppendLine($"===== scenario stats {DateTime.Now:yyyy-MM-dd HH:mm:ss}, Frosthaven Mods {Plugin.Version} =====");
+                foreach (string line in _summonLog) sb.AppendLine(line);
                 foreach (CPlayerStatsScenario s in stats)
                 {
                     sb.AppendLine($"--- {s.CharacterID}: rounds={s.RoundsPlayed} survived={s.PlayerSurvivedScenario}");
