@@ -54,6 +54,9 @@ namespace FrosthavenMods
             foreach (Component c in go.GetComponentsInChildren<Component>(true).Where(c => c != null && c.GetType().Name == "HotkeyClickableScopeElement").ToList())
                 UnityEngine.Object.DestroyImmediate(c);
 
+            HideKeyHint(go);
+            UiDump.Once("Header Give button (copy)", go.transform);
+
             var rt = (RectTransform)go.transform;
             rt.anchorMin = new Vector2(0f, 0f);
             rt.anchorMax = new Vector2(0f, 0f);
@@ -69,6 +72,23 @@ namespace FrosthavenMods
             var group = go.GetComponent<CanvasGroup>();
             if (group != null) { group.alpha = 1f; group.interactable = true; group.blocksRaycasts = true; }
             return go.transform;
+        }
+
+        private static readonly System.Text.RegularExpressions.Regex HintName =
+            new System.Text.RegularExpressions.Regex("hotkey|hint|glyph|prompt|input", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+        /// <summary>The copied button keeps its key/controller hint icon (an empty circle once the hotkey is removed).
+        /// Switch off every child that looks like one (by name or component type), never the label or the button's
+        /// own frame.</summary>
+        private static void HideKeyHint(GameObject button)
+        {
+            foreach (Transform t in button.GetComponentsInChildren<Transform>(true))
+            {
+                if (t == button.transform || t.GetComponent<TMP_Text>() != null) continue;
+                bool hint = HintName.IsMatch(t.name) ||
+                            t.GetComponents<Component>().Any(c => c != null && HintName.IsMatch(c.GetType().Name));
+                if (hint && t.GetComponentInChildren<TMP_Text>(true) == null) t.gameObject.SetActive(false);
+            }
         }
 
         private static void OnClick()
