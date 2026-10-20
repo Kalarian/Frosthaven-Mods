@@ -73,12 +73,14 @@ namespace FrosthavenMods
                 for (int col = 0; col < _receivers.Count; col++)
                 {
                     int column = col, current = Pending(col, kind);
+                    CharacterState receiver = GiveResourcesPatches.Find(View, _receivers[col]);
                     row.CellData.Add(new UIDistributionCell.Params
                     {
                         CurrentDelta = current,
                         MaxDelta = current + left,
                         Enabled = true,
                         IsGain = true,
+                        TooltipLiteral = Describe(receiver),
                         OnChange = delta => GiveResourcesPatches.Safe("change an amount", () => Change(column, kind, delta)),
                     });
                 }
@@ -89,7 +91,7 @@ namespace FrosthavenMods
             {
                 Table = table,
                 Title = "FHMODS_GIVE_TITLE",
-                DescriptionLiteral = $"{GiveRules.Name(giver)} gives. Click +1, Ctrl+click +10, Shift+click all. Right-click to take back.",
+                DescriptionLiteral = $"{GiveRules.Name(giver)} gives. Left-click +1, right-click -1. Hold Ctrl for 10, Shift for all / none.",
                 IsDone = () => _pending.Values.Any(v => v > 0),
                 OnDone = () => GiveResourcesPatches.Safe("give", GiveAll),
                 OnCancel = PopThisState,
@@ -97,15 +99,28 @@ namespace FrosthavenMods
                 DoneButtonKey = "FHMODS_GIVE",
                 CancelButtonKey = "GUI_CANCEL",
             });
+            UiDump.Once("Give Resources window (DistributionModule)", DistributionModule.transform);
+        }
+
+        private static string Describe(CharacterState c)
+        {
+            if (c == null) return null;
+            string where = c.PartyState == CharacterPartyStateType.InParty ? "in party"
+                : c.PartyState == CharacterPartyStateType.CreationProcess ? "being created"
+                : "on the bench";
+            return $"{GiveRules.Name(c)} - level {c.Level}, {where}";
         }
 
         private void Change(int column, GiveKind kind, int delta)
         {
             CharacterState giver = GiveResourcesPatches.Find(View, _giverId);
             if (giver == null) return;
-            if (Math.Abs(delta) == 1 && UnityEngine.InputSystem.Keyboard.current?.ctrlKey.isPressed == true) delta *= 10;
+            var kb = UnityEngine.InputSystem.Keyboard.current;
             int current = Pending(column, kind);
             int left = GiveRules.Amount(giver, kind) - PendingTotal(kind);
+            // Shift: all that's left / none. Checked here because the table's own Shift uses the legacy input API.
+            if (kb?.shiftKey.isPressed == true) delta = delta > 0 ? left : -current;
+            else if (Math.Abs(delta) == 1 && kb?.ctrlKey.isPressed == true) delta *= 10;
             _pending[(column, kind)] = Math.Max(0, Math.Min(current + delta, current + left));
             Build();
         }
