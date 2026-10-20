@@ -69,6 +69,12 @@ The installer copies `game/*` from the pack into the game folder and records eve
 A BepInEx someone else installed is kept (only our plugin is added). Uninstall removes only what we placed, plus
 BepInEx's own cache/config/logs when the loader is ours. Other people's plugins are never touched.
 
+## Co-op testing
+
+`docs/COOP_TEST.md` is the two-player test script. The mod logs every outpost command, rule change, gift and
+Ctrl+F8 checkpoint to `<game>\FrosthavenMods\coop-log.txt`, and `tools/coop_compare.py <host log> <client log>`
+compares the two players' checkpoints.
+
 ## Tools (Python 3, stdlib only)
 
 `tools/fh_mods.py`: the mod pipeline

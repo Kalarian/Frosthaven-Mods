@@ -6,6 +6,8 @@
 !VERSION
 !LICENSE
 !README.md
+!docs/
+!docs/**
 !mods/
 !mods/**
 !tools/
