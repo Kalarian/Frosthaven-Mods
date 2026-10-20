@@ -22,7 +22,7 @@ namespace FrosthavenDevTools
     /// The game destroys BepInEx's plugin object soon after startup (as in Stolen Realm), so the plugin's own Update
     /// never runs; the keys are polled from postfixes on the game's own per-frame methods instead.
     /// </summary>
-    [BepInPlugin("frosthaven.devtools", "Frosthaven Dev Tools", "0.1.6")]
+    [BepInPlugin("frosthaven.devtools", "Frosthaven Dev Tools", "0.1.7")]
     public class DevTools : BaseUnityPlugin
     {
         internal static ManualLogSource _log;
@@ -85,7 +85,25 @@ namespace FrosthavenDevTools
             var map = Singleton<FHMapChoreographer>.InstanceFast;
             if (map == null || map.GameState == null) throw new InvalidOperationException("only works in the outpost, not inside a scenario");
             FHRL.CharacterState c = map.View.SelectedCharacter ?? throw new InvalidOperationException("select a character first");
-            map.ExecuteCommand(DevCommands.FakeLootPath, c.ID);
+            FHRL.CampaignController campaign = map.View.GameController;
+            var owned = System.Linq.Enumerable.ToList(campaign.CharacterController.GetOwnedItems(c));
+            // Only an item a second copy of could really drop (not every copy owned) that someone else could take.
+            FHRL.ItemDef item = System.Linq.Enumerable.FirstOrDefault(owned, i =>
+                (i.IsUnlimitedQuantity || campaign.CountItemInstancesInCharacters(i) < i.Quantity) &&
+                System.Linq.Enumerable.Any(campaign.State.PartyCharacters, p => p != c && campaign.CharacterController.CanHaveItem(p, i)));
+            if (item == null)
+            {
+                string why = owned.Count == 0
+                    ? $"{c.Name} owns no items."
+                    : $"Every copy of each of {c.Name}'s items is already owned (bench characters count), or nobody else in the party " +
+                      "could take it, so no second copy could drop.\n\nBuy an item that's still in the shop, one nobody else in the " +
+                      "party owns, and try again.";
+                map.View.PushState(new FHGUI.States.GenericModalViewState(why, "Dev tools: fake duplicate loot", null, canCancel: false));
+                _log.LogInfo("Dev tools: fake duplicate loot skipped: " + why);
+                return;
+            }
+            _log.LogInfo($"Dev tools: {c.Name} 'loots' a second {item.Name} (item {item.ID.ID}).");
+            map.ExecuteCommand(DevCommands.FakeLootPath, c.ID, (int)item.ID.ID);
             // The outpost shows pending rewards when it loads; ask it to look now.
             PushActiveEvent?.Invoke(map.View, new object[] { false });
             map.View.RefreshView();
@@ -159,22 +177,12 @@ namespace FrosthavenDevTools
         }
 
         [FHRL.MultiplayerCommand(FHRL.MultiplayerCommandExecType.Everybody)]
-        public FHRL.CampaignController.Result FakeDuplicateLoot(FHRL.CharacterID id)
+        public FHRL.CampaignController.Result FakeDuplicateLoot(FHRL.CharacterID id, int itemId)
         {
             FHRL.CampaignController campaign = _game.CampaignController;
             campaign.CharacterController.TryGetCharacter(id, out FHRL.CharacterState c);
-            var owned = c == null ? new System.Collections.Generic.List<FHRL.ItemDef>() : System.Linq.Enumerable.ToList(campaign.CharacterController.GetOwnedItems(c));
-            if (owned.Count == 0) throw new FHRL.FHGameException("the selected character owns no items");
-            // Prefer an item a second copy of could really drop (not every copy owned) that someone else could take.
-            FHRL.ItemDef item = System.Linq.Enumerable.FirstOrDefault(owned, i =>
-                (i.IsUnlimitedQuantity || campaign.CountItemInstancesInCharacters(i) < i.Quantity) &&
-                System.Linq.Enumerable.Any(campaign.State.PartyCharacters, p => p != c && campaign.CharacterController.CanHaveItem(p, i)));
-            if (item == null)
-            {
-                item = owned[0];
-                DevTools._log.LogInfo($"Dev tools: none of {c.Name}'s items can drop a second copy for someone else; using {item.Name}, which will be sold.");
-            }
-            else DevTools._log.LogInfo($"Dev tools: {c.Name} 'loots' a second {item.Name} (item {item.ID.ID}).");
+            if (c == null || !campaign.DefRepository.Items.TryGetValue(new FHRL.ItemID((uint)itemId), out FHRL.ItemDef item))
+                throw new FHRL.FHGameException("unknown character or item");
             BeginResult.Invoke(campaign, null);
             GainItem.Invoke(campaign.CharacterController, new object[] { c, item, "scenario_loot" });
             return (FHRL.CampaignController.Result)EndResult.Invoke(campaign, null);
