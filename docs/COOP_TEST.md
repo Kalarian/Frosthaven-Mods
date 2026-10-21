@@ -39,7 +39,7 @@ some steps are done at the same moment.
    - **two characters own the same item** (e.g. both buy the same cheap item). That's for the "already owns" check.
 5. In Options > **Custom Rules**, turn on all six mod rules: **Tradeable resources and equipment**, **Share duplicate
    loot**, **Reveal event outcomes**, **Dwarf's balance changes**, **Game bug fixes** and **Milestone saves**.
-6. Optional, solo: test duplicate loot and battle stats (see the end of this file). Then save and quit to the main
+6. Optional, solo: test duplicate loot, battle stats and milestone saves (see the end of this file). Then save and quit to the main
    menu.
 
 **Both players:**
