@@ -34,6 +34,7 @@
     <Reference Include="Assembly-CSharp"><HintPath>$(GameManaged)\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="ForsthavenRuleLibrary"><HintPath>$(GameManaged)\ForsthavenRuleLibrary.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="MapRuleLibrary"><HintPath>$(GameManaged)\MapRuleLibrary.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="SharedLibrary"><HintPath>$(GameManaged)\SharedLibrary.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="ScenarioRuleLibrary"><HintPath>$(GameManaged)\ScenarioRuleLibrary.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="Unity.InputSystem"><HintPath>$(GameManaged)\Unity.InputSystem.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine"><HintPath>$(GameManaged)\UnityEngine.dll</HintPath><Private>false</Private></Reference>

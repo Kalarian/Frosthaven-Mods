@@ -17,7 +17,15 @@ namespace FrosthavenMods
             public ERulesFlag Flag;
             public string Name;
             public string Description;
+
+            /// <summary>Changes what happens inside scenarios (or at their end). A rule change reaches each co-op player
+            /// outside the scenario's lockstep, so these are locked during online scenarios (a change landing at
+            /// different moments on different PCs would desync them). Display-only and outpost-only rules aren't.</summary>
+            public bool AffectsScenarios;
         }
+
+        /// <summary>The note added to a locked rule's description while it is locked.</summary>
+        public const string LockedNote = "\n\n(Locked during online scenarios: change it in the outpost.)";
 
         // Bit 24 was first released as "Shared gold", then "Give resources"; it now means Tradeable resources and
         // equipment (a save with it on keeps it on). Bit 25 was "Item trading" before the two were merged: unused now,
@@ -27,6 +35,7 @@ namespace FrosthavenMods
         // Bit 27 was "Always allocate scenario loot" (tried and removed 2026-10-20): unused, harmless if a save has it.
         public const ERulesFlag RevealEvents = (ERulesFlag)(1 << 28);
         public const ERulesFlag DwarfTweaks = (ERulesFlag)(1 << 29);
+        public const ERulesFlag BugFixes = (ERulesFlag)(1 << 30);
 
         public static readonly List<Rule> All = new List<Rule>
         {
@@ -43,6 +52,7 @@ namespace FrosthavenMods
             new Rule
             {
                 Flag = ShareDuplicateLoot,
+                AffectsScenarios = true,
                 Name = "Share duplicate loot (mod)",
                 Description = "When a character loots a copy of an item they already own, the party picks who gets it " +
                               "back in the outpost (the usual item reward window) instead of it being sold automatically. " +
@@ -62,6 +72,7 @@ namespace FrosthavenMods
             new Rule
             {
                 Flag = DwarfTweaks,
+                AffectsScenarios = true,
                 Name = "Dwarf's balance changes (mod)",
                 Description = "Tweaks from Dwarf74's Unofficial Frosthaven Campaign Tweaks (he maintains the official FAQ " +
                               "and was a main campaign playtester):\n" +
@@ -73,6 +84,17 @@ namespace FrosthavenMods
                               "- Scenario 14: also kill all Abael Herders to win; Piranha Pigs spawn only on odd rounds " +
                               "and Lightning Eels only on even rounds, alternating spawn points.\n" +
                               "- Boneshaper's first mastery (kill 15 of your summons) counts over any number of scenarios.",
+            },
+            new Rule
+            {
+                Flag = BugFixes,
+                AffectsScenarios = true,
+                Name = "Game bug fixes (mod)",
+                Description = "Fixes for bugs in the game's own code:\n" +
+                              "- Fair attack modifier shuffles. The game's shuffle is off by one (a card can never stay " +
+                              "where it was) and new decks always put a +0 at the bottom, which makes nulls and x2s " +
+                              "slightly more frequent (about 6.25% of draws each instead of 6%). With this on, player " +
+                              "and monster decks are shuffled fairly.",
             },
         };
 

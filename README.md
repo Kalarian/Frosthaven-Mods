@@ -89,6 +89,13 @@ Mod layout, `mods/<Name>/`:
     Herders goal added to the level data in `CSRLYML.GetCustomLevel`; automatic spawners off, `ScenarioScript_FH014`
     spawns pigs on odd rounds b/d and eels on even rounds c/e), Boneshaper mastery 1 career-long (summon kills from each `ScenarioResult` added up in a marker in
     `CampaignState.LootedChestTreasureTableIDs`; at 15 on a win the mastery is added to `MasteriesCompleted`).
+  - **Game bug fixes** (bit 30; `BugFixes`): fair attack modifier shuffles. The game's `Extensions.Shuffle` is off
+    by one (Sattolo's algorithm: no card stays put) and decks are built / reshuffled by inserting at `Next(0, Count)`
+    (never the bottom: a +0 is always the bottom card of a new deck). Nulls and x2s come up ~6.25% of draws each instead
+    of ~6.0% (`tools/amd_sim.py` simulates both). The mod adds a correct Fisher-Yates shuffle from the scenario RNG after
+    every build / reshuffle of player and monster decks.
+  - Rules marked `AffectsScenarios` (duplicate loot, Dwarf's changes, bug fixes) are locked during online scenarios:
+    a rule change travels outside the scenario lockstep and could land at different moments on different PCs.
   - Item reward window (all item rewards, not a switch; `RewardWindowPatches`): opens with nothing assigned instead of
     the game's pre-assignment, and left-clicking another character moves an assigned item there in one click
     (unassign + assign through the window's own synced `UpdateItemsDistribution`).

@@ -81,6 +81,14 @@ namespace FrosthavenMods
             return FFSNetwork.IsHost && FFSNet.PlayerRegistry.JoiningPlayers.Count == 0 && FFSNet.PlayerRegistry.ConnectingUsers.Count == 0;
         }
 
+        /// <summary>In a scenario of an online game. Rules that change play are locked then: a rule change travels outside
+        /// the scenario's lockstep, so it could take effect at different moments on different PCs.</summary>
+        private static bool OnlineScenario()
+        {
+            try { return FFSNetwork.IsOnline && SaveData.Instance?.Global?.CurrentGameState == EGameState.Scenario; }
+            catch { return false; }
+        }
+
         /// <summary>The in-game screen's own callback captures the rules as they were when the screen opened, so flipping
         /// two switches in a row would undo the first. Our switches read the current rules at click time instead.</summary>
         [HarmonyPatch(typeof(GameSettingsService), nameof(GameSettingsService.GetSettingsDTO))]
@@ -89,13 +97,21 @@ namespace FrosthavenMods
         {
             if (__result.General == null) return;
             bool canChange = CanChangeOurRulesNow();
+            bool onlineScenario = OnlineScenario();
             foreach (CampaignSettingDTO dto in __result.General)
             {
                 if (!Ours.TryGetValue(dto, out ModRules.Rule r)) continue;
-                dto.Interactable = canChange;
+                bool locked = r.AffectsScenarios && onlineScenario;
+                dto.Interactable = canChange && !locked;
+                if (locked)
+                {
+                    dto.DescriptionLocalized += ModRules.LockedNote;
+                    dto.TooltipLocalized += ModRules.LockedNote;
+                }
                 dto.OnValueChange = result =>
                 {
                     if (!(result is bool on)) return;
+                    if (r.AffectsScenarios && OnlineScenario()) return; // locked (see ModRules.Rule.AffectsScenarios)
                     PartyAdventureData data = SaveData.Instance?.Global?.CurrentAdventureData;
                     if (data == null) return;
                     ERulesFlag next = on ? data.Rules | r.Flag : data.Rules & ~r.Flag;
