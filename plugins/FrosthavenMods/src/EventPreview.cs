@@ -93,26 +93,72 @@ namespace FrosthavenMods
             if (!sim.OutpostEventController.IsValidOption(option)) return new Preview { Summary = "Requirement not met." };
 
             int effectsBefore = ev.AppliedEffectsFromOutcome.Count;
-            var actionsBefore = new HashSet<CampaignInteractionType>(state.UnresolvedActions.Select(a => a.Type));
+            var actionsBefore = new HashSet<CampaignUnresolvedAction>(state.UnresolvedActions);
             sim.OutpostEventController.ResolveCurrentEvent(option);
+            string outcome = OutcomeText(ev);
 
-            List<CampaignEffect> effects = ev.AppliedEffectsFromOutcome.Skip(effectsBefore).ToList();
-            var parts = new List<string>();
-            foreach (CampaignEffect effect in service.CombineCampaignEffects(effects.Where(e => e.Type != CampaignEffectType.TriggerAttackOutpost)))
+            // An option can stop at steps the party carries out first (pay 10 gold, pick herbs to give up...) and then
+            // continue. Show each step's amounts, then play the rest out as the game does once they're done.
+            var steps = new List<string>();
+            for (int step = 0; ; step++)
             {
-                OutpostEventDTO.Effect shown = service.GetFormattedEffect(effect);
-                if (shown != null && !shown.Hidden && !string.IsNullOrWhiteSpace(shown.Text)) parts.Add(Clean(shown.Text));
+                List<CampaignEffect> effects = ev.AppliedEffectsFromOutcome.Skip(effectsBefore).ToList();
+                effectsBefore = ev.AppliedEffectsFromOutcome.Count;
+                var parts = new List<string>();
+                foreach (CampaignEffect effect in service.CombineCampaignEffects(effects.Where(e => e.Type != CampaignEffectType.TriggerAttackOutpost)))
+                {
+                    OutpostEventDTO.Effect shown = service.GetFormattedEffect(effect);
+                    if (shown != null && !shown.Hidden && !string.IsNullOrWhiteSpace(shown.Text)) parts.Add(Clean(shown.Text));
+                }
+                if (effects.Any(e => e.Type == CampaignEffectType.TriggerAttackOutpost)) parts.Add("Outpost attack!");
+                List<CampaignUnresolvedAction> pending = state.UnresolvedActions.Where(a => !actionsBefore.Contains(a)).ToList();
+                parts.AddRange(pending.Select(a => Describe(a, state)).Distinct());
+                if (parts.Count > 0) steps.Add((steps.Count == 0 ? "" : "Then: ") + string.Join(" • ", parts));
+                if (ev.Completed) break;
+                if (!ev.OptionSelected) { steps.Add("Then you choose again"); break; }
+                if (step >= 4) { steps.Add("The event continues"); break; }
+
+                // the party has done its part: on this copy, mark the steps done and let the event go on
+                foreach (CampaignUnresolvedAction a in pending) state.UnresolvedActions.Remove(a);
+                state.AnyHerbsToLose = state.AnyHerbsToGain = 0;
+                state.MaterialsToLose = state.MaterialsToGain = default;
+                try { sim.OutpostEventController.ContinueResolveCurrentEvent(); }
+                catch { steps.Add("The event continues"); break; }
             }
-            if (effects.Any(e => e.Type == CampaignEffectType.TriggerAttackOutpost)) parts.Add("Outpost attack!");
-            foreach (var action in state.UnresolvedActions.Select(a => a.Type).Distinct().Where(t => !actionsBefore.Contains(t)))
-                parts.Add("Then: " + Words(action.ToString()));
-            if (!ev.Completed) parts.Add("The event continues");
 
             return new Preview
             {
-                Summary = parts.Count == 0 ? "No effect" : string.Join(" • ", parts),
-                Outcome = OutcomeText(ev),
+                Summary = steps.Count == 0 ? "No effect" : string.Join("\n", steps),
+                Outcome = outcome,
             };
+        }
+
+        /// <summary>A step the party carries out, with its amount where the game records one.</summary>
+        private static string Describe(CampaignUnresolvedAction a, CampaignState state)
+        {
+            int n = a.GetInt(0);
+            switch (a.Type)
+            {
+                case CampaignInteractionType.LoseGold: return n > 0 ? $"Pay {n} gold (from any characters)" : "Pay gold";
+                case CampaignInteractionType.GainGold: return n > 0 ? $"Gain {n} gold (shared as you like)" : "Gain gold";
+                case CampaignInteractionType.LoseAnyHerbs: return state.AnyHerbsToLose > 0 ? $"Pay {state.AnyHerbsToLose} herbs of any kind" : "Pay herbs";
+                case CampaignInteractionType.GainAnyHerbs: return state.AnyHerbsToGain > 0 ? $"Gain {state.AnyHerbsToGain} herbs of any kind" : "Gain herbs";
+                case CampaignInteractionType.LoseMaterials: return "Pay " + Amounts(state.MaterialsToLose, "materials");
+                case CampaignInteractionType.GainMaterials: return "Gain " + Amounts(state.MaterialsToGain, "materials");
+                default: return Words(a.Type.ToString()) + (n > 0 ? $" ({n})" : "");
+            }
+        }
+
+        private static string Amounts(OutpostResourceChange c, string fallback)
+        {
+            var parts = new List<string>();
+            if (c.Resources.Lumber > 0) parts.Add($"{c.Resources.Lumber} lumber");
+            if (c.Resources.Metal > 0) parts.Add($"{c.Resources.Metal} metal");
+            if (c.Resources.Hide > 0) parts.Add($"{c.Resources.Hide} hide");
+            if (c.Resources.TotalHerbs > 0) parts.Add($"{c.Resources.TotalHerbs} herbs");
+            if (c.AnyMaterial > 0) parts.Add($"{c.AnyMaterial} materials of any kind");
+            if (c.AnyHerb > 0) parts.Add($"{c.AnyHerb} herbs of any kind");
+            return parts.Count == 0 ? fallback : string.Join(", ", parts);
         }
 
         /// <summary>The outcome text the game would show after this choice.</summary>
