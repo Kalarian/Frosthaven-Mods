@@ -167,6 +167,111 @@ namespace FrosthavenMods
             Swap(code, AccessTools.PropertyGetter(typeof(SharedLibrary.Client.SharedClient), nameof(SharedLibrary.Client.SharedClient.GlobalRNG)),
                 AccessTools.Method(typeof(BugFixes), nameof(InfuseRandom)), "infuse-any dice");
 
+        // ---- batch 2: gameplay bugs (docs/GAME_BUGS.md)
+
+        // O1: finishing a REBUILD also paid the 2-morale "second build this week" cost (rules: rebuild any number of
+        // wrecked buildings; only the 2nd build/upgrade costs morale). The extra cost is zeroed while a rebuild finishes.
+        [ThreadStatic] private static bool _finishingRebuild;
+
+        [HarmonyPatch(typeof(FHRL.BuildingsController), "Action_FinishBuildingDonation")]
+        [HarmonyPrefix]
+        private static void RebuildStart(FHRL.BuildingState building, bool cancelled) =>
+            _finishingRebuild = On && !cancelled && building != null && building.WreckedOrRebuilding;
+
+        [HarmonyPatch(typeof(FHRL.BuildingsController), "Action_FinishBuildingDonation")]
+        [HarmonyFinalizer]
+        private static Exception RebuildEnd(Exception __exception) { _finishingRebuild = false; return __exception; }
+
+        [HarmonyPatch(typeof(FHRL.BuildingsController), nameof(FHRL.BuildingsController.GetConstructionExtraMoraleCost))]
+        [HarmonyPostfix]
+        private static void NoRebuildMorale(ref uint __result)
+        {
+            if (_finishingRebuild) __result = 0;
+        }
+
+        // O3: morale only had an upper bound (rules: the track goes from 0 to 20).
+        [HarmonyPatch(typeof(FHRL.OutpostController), "Action_AddMorale")]
+        [HarmonyPostfix]
+        private static void MoraleFloor(FHRL.OutpostController __instance)
+        {
+            if (!On) return;
+            FHRL.OutpostState outpost = __instance.CampaignController?.State?.Outpost;
+            if (outpost != null && outpost.Morale < 0) outpost.Morale = 0;
+        }
+
+        // O4: the Jeweler's percentage discount was shown and checked (CanBuyItem passes applyPerc) but not charged
+        // (Action_BuyItem calls GetDiscountedCost without it). Charge what the screen shows.
+        [ThreadStatic] private static bool _shopBuy;
+
+        [HarmonyPatch(typeof(FHRL.TradingController), nameof(FHRL.TradingController.BuyItem),
+            new[] { typeof(FHRL.CharacterState), typeof(FHRL.ItemDef), typeof(bool), typeof(bool), typeof(bool) })]
+        [HarmonyPrefix]
+        private static void ShopBuyStart(bool travellingMerchant) => _shopBuy = On && !travellingMerchant;
+
+        [HarmonyPatch(typeof(FHRL.TradingController), nameof(FHRL.TradingController.BuyItem),
+            new[] { typeof(FHRL.CharacterState), typeof(FHRL.ItemDef), typeof(bool), typeof(bool), typeof(bool) })]
+        [HarmonyFinalizer]
+        private static Exception ShopBuyEnd(Exception __exception) { _shopBuy = false; return __exception; }
+
+        [HarmonyPatch(typeof(FHRL.TradingController), nameof(FHRL.TradingController.GetDiscountedCost))]
+        [HarmonyPrefix]
+        private static void JewelerDiscount(ref bool applyPerc)
+        {
+            if (_shopBuy) applyPerc = true;
+        }
+
+        // O2: PQ 14 ("a quest in each of 5 areas") counted every scenario in an area, so 5 in one area completed it.
+        [HarmonyPatch(typeof(FHRL.PQ_14), nameof(FHRL.PQ_14.IncProgress))]
+        [HarmonyPostfix]
+        private static void OnePerArea(FHRL.PersonalQuestState state)
+        {
+            if (!On || state?.ProgressTrackers == null) return;
+            for (int i = 0; i < state.ProgressTrackers.Length; i++)
+                if (state.ProgressTrackers[i] > 1) state.SetProgress(1, i);
+        }
+
+        // O6: "week in this season" was Week % 10, so the 10th week of a season counted as week 0 (e.g. SO-28 saw
+        // 10 weeks left in week 10, and next-summer retirement sections landed in winter).
+        [HarmonyPatch(typeof(FHRL.Calendar), nameof(FHRL.Calendar.GetWeekInThisSeason))]
+        [HarmonyPostfix]
+        private static void WeekInSeason(ref FHRL.Calendar __instance, ref uint __result)
+        {
+            if (On && __instance.Week > 0) __result = (__instance.Week - 1) % 10 + 1;
+        }
+
+        // O7: SO-10's "if winter, second week of next summer" was hard-coded as week 22 (year 1), so from year 2 the
+        // delivery landed in the past and was lost after paying 15 gold.
+        [HarmonyPatch(typeof(FHRL.OutpostEvents.SO_10_OutpostEventDef), "GetWeeksToDelivery")]
+        [HarmonyPostfix]
+        private static void SO10Delivery(FHRL.CampaignState state, ref int __result)
+        {
+            if (!On || state?.Outpost == null) return;
+            uint week = state.Outpost.Week;
+            var arrival = new FHRL.Calendar(week + 3);
+            if (arrival.IsSummer) return;
+            __result = (int)(20 * arrival.Year + 2 - week); // second week of the summer after that winter
+        }
+
+        // C1: a reshuffle in the middle of a rolling-modifier chain kept the in-use card twice: the game matches cards in
+        // use by reference, but what's in use is a copy (ChangeModifierValues copies every drawn card), so the original
+        // was shuffled back AND the copy added to the discards. Point the discard entry at the copy so the game's own
+        // matching finds it.
+        [HarmonyPatch(typeof(CActor), nameof(CActor.ShuffleAttackModifierCards))]
+        [HarmonyPrefix]
+        private static void KeepInUseOnce(List<AttackModifierYMLData> discarded, List<AttackModifierYMLData> inUse)
+        {
+            if (!On || inUse == null || discarded == null) return;
+            Safe(() =>
+            {
+                foreach (AttackModifierYMLData used in inUse)
+                {
+                    if (used == null || discarded.Contains(used)) continue;
+                    int i = discarded.FindLastIndex(d => d != null && !inUse.Contains(d) && d.Name == used.Name);
+                    if (i >= 0) discarded[i] = used;
+                }
+            });
+        }
+
         private static SharedLibrary.Random InfuseRandom() =>
             On && ScenarioManager.CurrentScenarioState?.ScenarioRNG != null ? ScenarioManager.CurrentScenarioState.ScenarioRNG : SharedLibrary.Client.SharedClient.GlobalRNG;
     }

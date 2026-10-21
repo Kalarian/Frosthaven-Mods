@@ -44,7 +44,7 @@ Fixed by the mod pack's **Game bug fixes** rule are marked ✅.
 
 | # | Bug | Status | Effect |
 |---|---|---|---|
-| C1 | A reshuffle in the middle of a rolling-modifier chain duplicates the in-use rolling card | confirmed | The deck grows by a card each time, for the rest of the scenario |
+| C1 ✅ | A reshuffle in the middle of a rolling-modifier chain duplicates the in-use rolling card | confirmed | The deck grows by a card each time, for the rest of the scenario |
 | C2 | The second card of an advantage/disadvantage draw can reshuffle the first back in | confirmed | Rare: a card compared with itself |
 | C3 | The 200-card guard on rolling chains checks a list that never grows | confirmed | A deck of only rolling cards would hang the game (latent) |
 | C4 | Automatic advantage/disadvantage pick ignores the "ambiguous: first drawn" rule and already-applied rolling cards | confirmed | Can pick the smaller final result |
@@ -67,13 +67,13 @@ Fixed by the mod pack's **Game bug fixes** rule are marked ✅.
 
 | # | Bug | Status | Effect |
 |---|---|---|---|
-| O1 | Rebuilding a wrecked building charges the extra-build morale cost when the week's build is used | verified | -2 morale per rebuild; rules allow any number of rebuilds |
-| O2 | PQ 14 ("a quest in each of 5 areas") completes with 5 quests in one area | confirmed | Quest done too early |
-| O3 | Morale can go below 0 | confirmed | |
-| O4 | Jeweler discount shown and checked but never charged; also limited to Jeweler items (text: all small items) | confirmed | Players pay full price |
+| O1 ✅ | Rebuilding a wrecked building charges the extra-build morale cost when the week's build is used | verified | -2 morale per rebuild; rules allow any number of rebuilds |
+| O2 ✅ | PQ 14 ("a quest in each of 5 areas") completes with 5 quests in one area | confirmed | Quest done too early |
+| O3 ✅ | Morale can go below 0 | confirmed | |
+| O4 ✅ | Jeweler discount shown and checked but never charged; also limited to Jeweler items (text: all small items; the fix charges what's shown, Jeweler items only) | confirmed | Players pay full price |
 | O5 | Inn allows 5 / 9 purchases a week at level 2 / 3 instead of 2 / 3 | confirmed | Too generous |
-| O6 | "Week in this season" is `Week % 10`: the last week of each season is week 0 | verified | SO-28 wrecks 2 buildings in week 10; next-summer retirement sections land in winter |
-| O7 | SO-10 merchant delivery is lost in year 2+ after paying 15 gold | confirmed | Gold lost for nothing |
+| O6 ✅ | "Week in this season" is `Week % 10`: the last week of each season is week 0 | verified | SO-28 wrecks 2 buildings in week 10; next-summer retirement sections land in winter |
+| O7 ✅ | SO-10 merchant delivery is lost in year 2+ after paying 15 gold | confirmed | Gold lost for nothing |
 | O8 | Crafted items sell for their whole component tree, not 2 gold per resource or item | confirmed (maybe intended) | Crafted items sell for more |
 | O9 | Hazardous terrain at scenario level 6 deals 4 instead of 3 | confirmed (data) | Low |
 | O10 | WO-07 section 47.1 placed one week early | likely | Low |

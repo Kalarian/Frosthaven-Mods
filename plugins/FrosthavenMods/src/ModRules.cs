@@ -97,7 +97,11 @@ namespace FrosthavenMods
                               "and monster decks are shuffled fairly.\n" +
                               "- Co-op desync fixes: a failed outpost command no longer freezes that player's outpost; " +
                               "the Strategy favor draws the same cards for everyone; a Restful Slippers short rest no " +
-                              "longer puts the players' dice out of step; \"infuse any element\" uses the shared dice.",
+                              "longer puts the players' dice out of step; \"infuse any element\" uses the shared dice.\n" +
+                              "- Gameplay fixes: rebuilding costs no extra morale; morale can't go below 0; the Jeweler " +
+                              "discount is charged as shown; PQ 14 needs five different areas; the last week of a season " +
+                              "counts as week 10 (not 0); SO-10's delivery arrives in later years too; rolling modifiers " +
+                              "aren't duplicated by a mid-attack reshuffle.",
             },
         };
 

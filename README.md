@@ -98,6 +98,10 @@ Mod layout, `mods/<Name>/`:
     `CampaignController._currentResult` after a failed command; transpilers swap the Strategy favor's clock-seeded
     `new FHRandom()` for the campaign RNG, Restful Slippers' `ScenarioRNG` (UI code, one PC only) for a local
     generator, and "infuse any"'s `SharedClient.GlobalRNG` for `ScenarioRNG`.
+    Gameplay fixes: no extra-build morale while a rebuild finishes; morale floored at 0; the Jeweler percentage applied
+    when buying (`GetDiscountedCost(applyPerc)` inside `BuyItem`); PQ 14 trackers capped at 1 per area; season week
+    `(Week - 1) % 10 + 1`; SO-10 delivery in week 2 of the right next summer; mid-chain reshuffles match in-use rolling
+    copies to their discarded originals.
   - Rules marked `AffectsScenarios` (duplicate loot, Dwarf's changes, bug fixes) are locked during online scenarios:
     a rule change travels outside the scenario lockstep and could land at different moments on different PCs.
   - Item reward window (all item rewards, not a switch; `RewardWindowPatches`): opens with nothing assigned instead of
