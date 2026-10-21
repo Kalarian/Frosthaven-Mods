@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Frosthaven Mods: Player Guide</title>
+<style>
+@page { size: Letter; margin: 0.6in 0.65in; }
+:root { --ink:#1d1d20; --muted:#5d5a55; --line:#ddd6c8; --accent:#7a5a1e; --soft:#f6f1e6; --good:#2e6b3f; --tag:#ece5d6; }
+* { box-sizing:border-box; }
+body { margin:0; color:var(--ink); font:10pt/1.4 "Segoe UI", system-ui, sans-serif; background:#fff; }
+h1 { font-size:26pt; margin:0; color:var(--accent); letter-spacing:-.01em; }
+.subtitle { font-size:12pt; color:var(--muted); margin:2px 0 12px; }
+h2 { font-size:14.5pt; color:var(--accent); margin:16px 0 6px; break-after:avoid; border-bottom:2px solid var(--line); padding-bottom:3px; }
+h3 { font-size:12.5pt; margin:0 0 2px; }
+p { margin:6px 0; }
+ul, ol { margin:4px 0 6px; padding-left:20px; } li { margin:2px 0; }
+.box { background:var(--soft); border-left:4px solid var(--accent); padding:8px 12px; margin:10px 0; border-radius:0 6px 6px 0; }
+.mod { border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin:10px 0; break-inside:avoid; }
+.mod .tag { display:inline-block; font-size:8.5pt; padding:1px 7px; border-radius:9px; background:var(--tag); color:var(--muted); margin-left:6px; vertical-align:2px; font-weight:600; }
+.mod .tag.play { background:#f3dccf; color:#8a3b1c; }
+.mod .tag.look { background:#d8e9dc; color:var(--good); }
+.mod .what { margin:4px 0 6px; }
+.label { font-weight:700; font-size:9.5pt; letter-spacing:.03em; color:var(--muted); text-transform:uppercase; margin-top:6px; }
+kbd { font:600 9pt "Segoe UI", sans-serif; border:1px solid #bbb; border-bottom-width:2px; border-radius:4px; padding:0 5px; background:#fafafa; }
+table { border-collapse:collapse; width:100%; font-size:10pt; margin:6px 0; }
+th, td { text-align:left; padding:3px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+th { color:var(--muted); font-size:9pt; text-transform:uppercase; letter-spacing:.03em; }
+.page-break { break-before:page; }
+.keep { break-inside:avoid; }
+.muted { color:var(--muted); } .small { font-size:9.5pt; }
+</style></head>
+<body>
+
+<h1>Frosthaven Mods</h1>
+<div class="subtitle">Player guide · version __VERSION__ · what each mod does and how to use it</div>
+
+<div class="box">
+<b>The short version:</b> everyone installs the same version of the mods. The host turns on the mods the group
+wants in <b>Options &gt; Custom Rules</b>. Everything else happens in the game as usual.
+</div>
+
+<h2>Installing and updating</h2>
+<ol>
+  <li>Close Frosthaven.</li>
+  <li>Download <b>Install Frosthaven Mods.exe</b> from the latest release:
+      <span class="muted">github.com/Kalarian/Frosthaven-Mods/releases/latest</span></li>
+  <li>Run it and click <b>Install / Update</b>. If Windows warns you, click <b>More info</b>, then <b>Run anyway</b>.</li>
+  <li>The installer always fetches the newest version, so you can keep the same file and run it again for updates.</li>
+</ol>
+<p><b>Everyone in a co-op game must have the same version.</b> The game won't stop you from joining with a
+different one; instead, things go out of sync partway through a scenario. If you're not sure, everyone runs the
+installer before you play.</p>
+<p>To remove the mods, run the installer and click <b>Remove mods</b>. Your saves are never changed, and a campaign
+played with the mods still loads without them.</p>
+
+<h2>Turning mods on and off</h2>
+<ul>
+  <li>Every mod is a switch in <b>Options &gt; Custom Rules</b> while a campaign is loaded. All of them start off.</li>
+  <li>The <b>host</b> decides. The switches are saved with the campaign and sent to everyone who joins.</li>
+  <li>You can change them at any time in the outpost. Mods that change how scenarios play can't be changed during an
+      online scenario (the switch says so); change them back in the outpost.</li>
+</ul>
+
+<table>
+  <tr><th>Mod</th><th>In one line</th><th>Changes the game?</th></tr>
+  <tr><td>Tradeable resources and equipment</td><td>Give gold, materials and items to another character</td><td>Yes</td></tr>
+  <tr><td>Share duplicate loot</td><td>A second copy of an item you loot goes to someone else instead of being sold</td><td>Yes</td></tr>
+  <tr><td>Easier item reward window</td><td>Handing out item rewards takes fewer clicks</td><td>No</td></tr>
+  <tr><td>Reveal event outcomes</td><td>See what each event choice will do before you pick it</td><td>Yes (information)</td></tr>
+  <tr><td>Dwarf's balance changes</td><td>A few fixes to the campaign's rough spots, from a well-known player</td><td>Yes</td></tr>
+  <tr><td>Game bug fixes</td><td>Fixes bugs in the game itself</td><td>Yes (bug fixes)</td></tr>
+  <tr><td>Milestone saves</td><td>Automatic backup saves you can go back to</td><td>No</td></tr>
+  <tr><td>Battle stats</td><td>Lots more stats after each scenario, and campaign totals</td><td>No</td></tr>
+  <tr><td>Modifier deck odds</td><td>Shows the odds of your next attack modifier draw</td><td>No</td></tr>
+  <tr><td>Scenario map file</td><td>Saves your progress for the scenario map page</td><td>No</td></tr>
+</table>
+
+<h2 class="page-break">The mods</h2>
+
+<div class="mod">
+  <h3>Tradeable resources and equipment <span class="tag play">changes the game</span></h3>
+  <p class="what">Pass gold, lumber, metal, hide and items between characters in the party. Normally each character
+  keeps their own.</p>
+  <div class="label">How to use</div>
+  <ul>
+    <li>In the outpost, hold <kbd>Ctrl</kbd> and click the portrait of one of <i>your</i> characters in the party
+        column on the left, or click the <b>GIVE</b> button under their name at the top.</li>
+    <li><b>Resources</b> tab: each column is another party member. Click a cell to give 1, right-click to take 1 back,
+        <kbd>Ctrl</kbd>+click for 10, <kbd>Shift</kbd>+click for everything (or nothing).</li>
+    <li><b>Items</b> tab: click the cell under the person who should get the item.</li>
+    <li>Nothing happens until you press <b>Give</b>. <kbd>Esc</kbd> closes the window without giving.</li>
+  </ul>
+  <div class="label">Good to know</div>
+  <ul>
+    <li>Herbs aren't in it: the game already keeps herbs in one shared supply.</li>
+    <li>Nobody can own two copies of the same item, so someone who already has it can't be picked.</li>
+    <li>Gold and materials can also go to a character being created. Items go to party members only.</li>
+  </ul>
+</div>
+
+<div class="mod">
+  <h3>Share duplicate loot <span class="tag play">changes the game</span></h3>
+  <p class="what">When you loot an item you already own, the game normally sells it on the spot. With this on, the
+  party decides who gets it, which is the board game's rule.</p>
+  <div class="label">How to use</div>
+  <ul>
+    <li>Nothing to do during the scenario. Back in the outpost, the usual item reward window opens: pick who gets it.</li>
+    <li>If nobody else in the party can take it, it's sold as usual. To sell it anyway, the new owner sells it in the
+        shop for the same gold.</li>
+  </ul>
+</div>
+
+<div class="mod">
+  <h3>Easier item reward window <span class="tag look">convenience</span></h3>
+  <p class="what">The window that hands out item rewards (from events, quests and shared duplicate loot) is
+  quicker to use.</p>
+  <ul>
+    <li>It opens with nothing assigned, so you choose who gets each item instead of undoing the game's guess.</li>
+    <li>Left-clicking another character moves an item to them in one click.</li>
+    <li>Every item still has to go to someone before <b>Done</b>.</li>
+  </ul>
+</div>
+
+<div class="mod">
+  <h3>Reveal event outcomes <span class="tag play">shows hidden information</span></h3>
+  <p class="what">On town, road and boat events, each option shows what it will do for your party before you choose:
+  gold, damage, morale, items, an outpost attack, choices you'll be asked to make.</p>
+  <ul>
+    <li>Hover over an option to read its outcome story text.</li>
+    <li>When an outcome depends on a random roll, it shows the roll you would actually get.</li>
+  </ul>
+</div>
+
+<div class="mod">
+  <h3>Dwarf's balance changes <span class="tag play">changes the game</span></h3>
+  <p class="what">A handful of changes from Dwarf74's <i>Unofficial Frosthaven Campaign Tweaks</i>. He maintains the
+  official FAQ and was one of the main campaign playtesters. They smooth out spots many groups find frustrating:</p>
+  <ul>
+    <li><b>Personal quests:</b> once everyone has finished one, the quests that unlock the Tavern and the Stables come
+        up first, and new quests prefer ones that still unlock something new.</li>
+    <li><b>Early Barracks:</b> in the first winter, with good morale, the outpost event that upgrades the Barracks
+        comes up early.</li>
+    <li><b>Shorter waits:</b> personal quest 7's two waits are 5 weeks instead of 6. Personal quest 15 needs 60 gold.</li>
+    <li><b>Scenario 14</b> is reworked: you also have to defeat the Abael Herders, and the spawning monsters alternate
+        rounds.</li>
+    <li><b>Boneshaper:</b> the first mastery (kill 15 of your own summons) can be done across several scenarios.</li>
+  </ul>
+</div>
+
+<div class="mod">
+  <h3>Game bug fixes <span class="tag play">changes the game</span></h3>
+  <p class="what">Fixes for mistakes in the game's own code. One switch for all of them:</p>
+  <ul>
+    <li><b>Fair shuffles:</b> the game's shuffle is slightly broken, which makes nulls and x2s a little more common
+        than they should be. Attack modifier decks, the loot deck and similar draws are shuffled properly.</li>
+    <li><b>Co-op:</b> fixes for several things that could put players out of sync or freeze the outpost.</li>
+    <li><b>Outpost:</b> rebuilding doesn't cost extra morale, morale can't go below 0, the Jeweler's discount is
+        charged as shown, the calendar shows the right week, and a few events work the way their cards say (which
+        buildings get attacked first, cards that went missing from the town guard deck).</li>
+    <li><b>Quests and events:</b> personal quest 14 needs five <i>different</i> areas, and the SO-10 delivery still
+        arrives in later years.</li>
+  </ul>
+</div>
+
+<div class="mod">
+  <h3>Milestone saves <span class="tag look">no gameplay change</span></h3>
+  <p class="what">The game only keeps its last 15 autosaves, roughly the last hour or two of play. This makes a named
+  backup at the start of every scenario and every outpost visit, so you can go back further after a crash, a desync
+  or a misclick.</p>
+  <ul>
+    <li>They appear in the normal <b>Load</b> list as <i>Mod backup - week 23 - scenario 14 start</i> or
+        <i>Mod backup - week 24 - outpost</i>.</li>
+    <li>The newest 20 are kept. Your own saves and the game's autosaves are never touched.</li>
+    <li>Only the host's game makes them. To go back in co-op, the host loads the backup on their own, then hosts the
+        game again and everyone rejoins.</li>
+    <li>Not available in Iron Man campaigns.</li>
+  </ul>
+</div>
+
+<div class="mod">
+  <h3>Battle stats <span class="tag look">no gameplay change</span></h3>
+  <p class="what">After each scenario, the <b>Statistics</b> tab gets about 40 extra rows: damage, kills, healing,
+  shields, luck with your modifier deck, cards and elements used, exploration and more. Summons count for the character
+  who summoned them.</p>
+  <ul>
+    <li>The <b>Campaign</b> button at the top of the Statistics page shows each character's totals over every scenario
+        played with this on. <b>This scenario</b> switches back.</li>
+    <li>The host can also make a <b>campaign stats web page</b> (leaderboards, records, trends) to share with the group.</li>
+  </ul>
+</div>
+
+<div class="mod">
+  <h3>Modifier deck odds <span class="tag look">no gameplay change</span></h3>
+  <p class="what">In a scenario, open the attack modifier panel by your hand (the one that shows how many of each
+  card are left). Under the counts, it shows the odds of your next draw:</p>
+  <ul>
+    <li>Null, x2, -1/-2, +0, +1/+2, and the chance of a rolling bonus. Curses count as nulls and blesses as x2s.</li>
+    <li>A second line shows the same for the monsters' deck.</li>
+    <li>It notes when a deck will reshuffle at the end of the round. It's the same math you could do from the counts
+        the game already shows.</li>
+  </ul>
+</div>
+
+<div class="mod">
+  <h3>Scenario map file <span class="tag look">no gameplay change</span></h3>
+  <p class="what">Saves your campaign's progress (which scenarios are done, available or locked out) every time the
+  game autosaves, for the <b>scenario map page</b>.</p>
+  <ul>
+    <li>The map page shows every scenario, what unlocks it, what it leads to, and which ones lock each other out,
+        coloured by your campaign's progress.</li>
+    <li>It also shows the choices that still matter (like which of two scenarios to play) and how many scenarios each
+        option keeps open, so you can aim for the most scenarios in one campaign.</li>
+    <li><b>Spoilers:</b> the map shows every scenario's name. Ask the host for the page if you want it.</li>
+  </ul>
+</div>
+
+<div class="keep">
+<h2>If something goes wrong</h2>
+<ul>
+  <li><b>"Out of sync" / desync message:</b> before closing the game, everyone presses <kbd>Ctrl</kbd>+<kbd>F7</kbd>.
+      It puts a zip file on your desktop. Send it to Kalarian along with what you were doing.</li>
+  <li><b>Something got lost or went badly:</b> the host can load a <b>Mod backup</b> save (see Milestone saves).</li>
+  <li><b>Not sure everyone is on the same version:</b> everyone runs the installer again. It shows the version it
+      installed.</li>
+</ul>
+</div>
+<p class="small muted">Frosthaven Mods is a fan project, not made or supported by Snapshot Games or Cephalofair.</p>
+
+</body></html>
