@@ -87,7 +87,8 @@ Mod layout, `mods/<Name>/`:
     that unlock something new before ones that don't), early Barracks (WO-20 drawn in year 1 winter from week 12 every 2
     weeks with Barracks level 1 and morale 10+, once), PQ 07 waits 5 weeks, PQ 15 goal 60, Scenario 14 rework (Abael
     Herders goal added to the level data in `CSRLYML.GetCustomLevel`; automatic spawners off, `ScenarioScript_FH014`
-    spawns pigs on odd rounds b/d and eels on even rounds c/e).
+    spawns pigs on odd rounds b/d and eels on even rounds c/e), Boneshaper mastery 1 career-long (summon kills from each `ScenarioResult` added up in a marker in
+    `CampaignState.LootedChestTreasureTableIDs`; at 15 on a win the mastery is added to `MasteriesCompleted`).
   - Item reward window (all item rewards, not a switch; `RewardWindowPatches`): opens with nothing assigned instead of
     the game's pre-assignment, and left-clicking another character moves an assigned item there in one click
     (unassign + assign through the window's own synced `UpdateItemsDistribution`).

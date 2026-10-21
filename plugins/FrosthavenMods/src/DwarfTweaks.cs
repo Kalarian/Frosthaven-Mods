@@ -182,6 +182,64 @@ namespace FrosthavenMods
             }
         }
 
+        // ---- Boneshaper mastery 1: "kill 15 of your summons" over any number of scenarios
+        // The game checks it per scenario (Boneshaper_Mastery_1.yml: Kill, the six summon classes, 15, SubFilter
+        // Scenario; only kills by the Boneshaper personally are Kills on its stats). The scenario result every peer
+        // receives (CompleteActiveScenario, an Everybody command) lists each character's kills (MonstersKilled), so the
+        // career count is added up there, from the payload, on every peer alike. It lives in synced campaign state: a
+        // marker string in CampaignState.LootedChestTreasureTableIDs ("FHMODS:BoneKills:<character guid>=<n>"), a list
+        // whose readers only test for real chest IDs (Contains / Except), so the marker is inert and the save still
+        // loads without the mod. At 15 on a won scenario the mastery is added to the result's MasteriesCompleted, and
+        // the game awards it its own way (validation, 1 perk mark) - masteries are only awarded on wins in the game.
+
+        private static readonly MasteryID BoneMastery = new MasteryID("Boneshaper_MASTERY_1");
+        private static readonly HashSet<string> BoneSummons = new HashSet<string>
+            { "BoneHordeID", "RagingCorpseID", "ShamblingSkeletonID", "SkeletonSorcererID", "StitchedAtrocityID", "WraithID" };
+        private const string BoneMarker = "FHMODS:BoneKills:";
+
+        [HarmonyPatch(typeof(ScenarioController), nameof(ScenarioController.CompleteActiveScenario))]
+        [HarmonyPrefix]
+        private static void BoneshaperCareer(ScenarioController __instance, ScenarioResult result)
+        {
+            if (!On || result == null || result.isRestarting) return;
+            try
+            {
+                CampaignController campaign = __instance.CampaignController;
+                CampaignState state = campaign.State;
+                foreach (ScenarioResult.CharacterResult r in result.Characters)
+                {
+                    if (r.Character?.ID.ID != "BoneshaperID") continue;
+                    CharacterState c = state.PartyCharacters.FirstOrDefault(p => p.ClassDef == r.Character);
+                    if (c == null || c.CompletedMasteryIDs.Contains(BoneMastery)) continue;
+                    int kills = r.MonstersKilled?.Count(k => k?.monsterClassID != null && BoneSummons.Contains(k.monsterClassID)) ?? 0;
+                    string prefix = BoneMarker + c.ID.ID + "=";
+                    string old = state.LootedChestTreasureTableIDs.FirstOrDefault(s => s.StartsWith(prefix));
+                    int total = (old != null && int.TryParse(old.Substring(prefix.Length), out int n) ? n : 0) + kills;
+                    if (old != null) state.LootedChestTreasureTableIDs.Remove(old);
+                    state.LootedChestTreasureTableIDs.Add(prefix + total);
+                    if (kills > 0) CoopLog.Write($"DWARF: {GiveRules.Name(c)} killed {kills} of their summons; career total {total}/15");
+                    if (total >= 15 && result.ScenarioWon && !r.MasteriesCompleted.Contains(BoneMastery))
+                    {
+                        r.MasteriesCompleted.Add(BoneMastery);
+                        CoopLog.Write($"DWARF: {GiveRules.Name(c)} completes the Boneshaper mastery (career total {total})");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError("Dwarf's balance changes: Boneshaper career count skipped: " + e);
+            }
+        }
+
+        /// <summary>The mastery's text says what the rule now is.</summary>
+        [HarmonyPatch(typeof(GLOOM.LocalizationManager), nameof(GLOOM.LocalizationManager.GetTranslation))]
+        [HarmonyPostfix]
+        private static void BoneshaperText(string term, ref string __result)
+        {
+            if (term != null && term.EndsWith("Boneshaper_MASTERY_1_Desc") && On)
+                __result = "Over any number of scenarios, kill at least 15 of your summons.";
+        }
+
         // ---- PQ 15: goal 60 instead of 70
 
         [HarmonyPatch(typeof(PQ_15), nameof(PQ_15.CalcProgress))]
