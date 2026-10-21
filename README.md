@@ -188,6 +188,14 @@ game files" instead.
 `tools/fh_ruleset.py`: low-level archive tool (`info`, `verify`, `unpack`, `pack`). The vanilla extract used for
 authoring is made with `python tools/fh_ruleset.py unpack <Base.ruleset> extracted/Base`. It stays on this machine.
 
+`tools/campaign_stats.py`: the campaign stats page. `python tools/campaign_stats.py` turns every
+`<game>\FrosthavenMods\stats\campaign-<name>.txt` (written by the Battle stats rule) into `campaign-<name>.html`
+next to it: one self-contained page (works offline, can be shared as a file) with Party, Leaderboards (campaign total
+or per scenario), Records (best single scenario per stat, with ties), Scenarios (sortable history for any stat) and
+Trends (each scenario or running total). Records, Scenarios and Trends use the per-scenario "game"/"perf" lines,
+kept from the first scenario after the update that added them; older scenarios are in the totals only. A file or
+`-o out.html` can be given. Each player's PC has its own file; the host's covers every co-op scenario.
+
 ## Ruleset format
 
 Reverse-engineered from `FH.YML.RulebaseFile` in `Assembly-CSharp.dll`:
