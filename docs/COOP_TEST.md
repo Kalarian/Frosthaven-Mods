@@ -1,4 +1,4 @@
-# Co-op test: the Frosthaven Mods house rules (v0.5.0)
+# Co-op test: the Frosthaven Mods house rules (v0.6.0)
 
 Two players: **Host** (runs the campaign) and **Client** (joins). Takes about an hour. Have voice chat open, since
 some steps are done at the same moment.
@@ -37,16 +37,16 @@ some steps are done at the same moment.
 4. Spend some of that gold so the characters own items (the shop, or the Craftsman):
    - every character owns **at least 2 items**, and at least one of them is **worn** (equipped);
    - **two characters own the same item** (e.g. both buy the same cheap item). That's for the "already owns" check.
-5. In Options > **Custom Rules**, turn on all nine mod rules: **Tradeable resources and equipment**, **Share duplicate
+5. In Options > **Custom Rules**, turn on all ten mod rules: **Tradeable resources and equipment**, **Share duplicate
    loot**, **Reveal event outcomes**, **Dwarf's balance changes**, **Game bug fixes**, **Milestone saves**, **Battle
-   stats**, **Easier item reward window** and **Modifier deck odds**.
+   stats**, **Easier item reward window**, **Modifier deck odds** and **Scenario map file**.
 6. Optional, solo: test duplicate loot, battle stats and milestone saves (see the end of this file). Then save and quit to the main
    menu.
 
 **Both players:**
 7. Close Frosthaven and run the installer (`Install Frosthaven Mods.exe`, from the
    [latest release](https://github.com/Kalarian/Frosthaven-Mods/releases/latest)). Click **Install / Update**. The
-   window must say **v0.5.0** for both of you.
+   window must say **v0.6.0** for both of you.
    - If Windows shows a warning, click "More info", then "Run anyway".
 8. Start the game.
 
@@ -137,7 +137,7 @@ To check an item on a character: select them and open their equipment / item scr
 
 | # | Who | Do | Expected |
 |---|---|---|---|
-| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows all nine rules on, for both players. |
+| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows all ten rules on, for both players. |
 | I2 | Both | **CHECKPOINT** (#9) | Identical to #8. |
 | I3 | Both | Start any scenario together, bringing **given** items, and play 3–4 rounds normally. Use a given item if you can. **Each player short rests at least once** (with Restful Slippers if anyone owns them). | **No desync message.** The given items work. (The Give button is hidden during scenarios.) |
 | I3b | Host | During the scenario, open Options > **Custom Rules**. | **Share duplicate loot**, **Dwarf's balance changes** and **Game bug fixes** are greyed out with "Locked during online scenarios" in their description. **Tradeable resources** and **Reveal event outcomes** can still be switched. Close without changing anything. |
@@ -217,7 +217,7 @@ A duplicate drop is rare, so the dev tools can fake one (solo only, test campaig
 4. Keep the panel open while a monster attacks: the Monsters line updates by itself.
 5. Turn the rule off: the extra lines are gone; the game's counters are unchanged.
 
-## Solo: scenario map file (next version, not in v0.5.0)
+## Solo: scenario map file (host, any time)
 
 1. Turn on **Scenario map file**. Play until the game autosaves (end a round, or go back to the outpost): the game
    folder has `FrosthavenMods\scenarios\progress-<campaign>.txt`, listing your scenarios, sections and calendar.
