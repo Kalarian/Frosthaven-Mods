@@ -27,11 +27,13 @@ namespace FrosthavenMods
         /// <summary>Set while DuplicateLoot asks the game for its default split (to see whether it would work).</summary>
         [ThreadStatic] internal static bool Probing;
 
+        private static bool On => ModRules.IsOn(ModRules.RewardWindow);
+
         [HarmonyPatch(typeof(CampaignUtil), nameof(CampaignUtil.GenerateDefaultGainItemDistirubtion))]
         [HarmonyPostfix]
         private static void StartUnassigned(List<CharacterItemDistribution> __result)
         {
-            if (Probing || __result == null) return;
+            if (Probing || __result == null || !On) return;
             foreach (CharacterItemDistribution d in __result) d.Item = null;
         }
 
@@ -41,7 +43,7 @@ namespace FrosthavenMods
         {
             try
             {
-                if (change == null || change.ChangeType != DistributionChangeType.Gain || change.Items == null) return;
+                if (!On || change == null || change.ChangeType != DistributionChangeType.Gain || change.Items == null) return;
                 if (data.Table?.Rows == null || data.Table.Columns == null || distributions?.Items == null) return;
                 List<ItemDef> items = change.Items.Distinct().ToList();
                 if (items.Count != data.Table.Rows.Count) return; // not the layout we know: leave it alone

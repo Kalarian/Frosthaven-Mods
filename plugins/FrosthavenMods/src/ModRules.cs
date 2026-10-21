@@ -37,6 +37,8 @@ namespace FrosthavenMods
         public const ERulesFlag DwarfTweaks = (ERulesFlag)(1 << 29);
         public const ERulesFlag BugFixes = (ERulesFlag)(1 << 30);
         public const ERulesFlag MilestoneSaves = (ERulesFlag)(1 << 23);
+        public const ERulesFlag BattleStats = (ERulesFlag)(1 << 22);
+        public const ERulesFlag RewardWindow = (ERulesFlag)(1 << 21);
 
         public static readonly List<Rule> All = new List<Rule>
         {
@@ -118,6 +120,24 @@ namespace FrosthavenMods
                               "named saves and the game's autosaves are never touched.\n\n" +
                               "The game keeps only its last 15 autosaves (about the last hour or two of play). To go back " +
                               "in co-op, the host loads a backup on their own, then hosts again. Not available in Iron Man.",
+            },
+            new Rule
+            {
+                Flag = BattleStats,
+                Name = "Battle stats (mod)",
+                Description = "After each scenario, the Statistics tab gets about 40 more rows (offense, defense, support, " +
+                              "luck, cards and elements, exploration), with summons counted for their owner, and a " +
+                              "Campaign button with each character's totals over every scenario played with this on.\n\n" +
+                              "Display only: it changes nothing in play.",
+            },
+            new Rule
+            {
+                Flag = RewardWindow,
+                Name = "Easier item reward window (mod)",
+                Description = "The window that hands out item rewards (events, quests, shared duplicate loot) opens with " +
+                              "nothing assigned, so you choose who gets each item, and left-clicking another character " +
+                              "moves an assigned item to them in one click (instead of right-click, then left-click).\n\n" +
+                              "Every item still has to be assigned before Done.",
             },
         };
 

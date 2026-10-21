@@ -269,6 +269,7 @@ namespace FrosthavenMods
         [HarmonyPostfix]
         private static void AddRows(BattleResultDTO battleResults, ref DebriefingTableDTO __result)
         {
+            if (!ModRules.IsOn(ModRules.BattleStats)) return;
             try
             {
                 List<CPlayerStatsScenario> stats = ScenarioResultViewService.Party?.LastScenarioStats;

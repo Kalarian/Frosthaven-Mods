@@ -191,7 +191,7 @@ namespace FrosthavenMods
         [HarmonyPostfix]
         private static void AddButtons(UIDebriefingBattleStats __instance, UIDebriefingBattleStats.Params @params)
         {
-            if (_switching) return;
+            if (_switching || !ModRules.IsOn(ModRules.BattleStats)) return;
             GiveResourcesPatches.Safe("add the campaign stats buttons", () =>
             {
                 _scenarioTable = @params.TableData; // a new Statistics page always opens on this scenario

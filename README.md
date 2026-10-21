@@ -113,7 +113,7 @@ Mod layout, `mods/<Name>/`:
     Iron Man. Nothing is sent to other players.
   - Rules marked `AffectsScenarios` (duplicate loot, Dwarf's changes, bug fixes) are locked during online scenarios:
     a rule change travels outside the scenario lockstep and could land at different moments on different PCs.
-  - Item reward window (all item rewards, not a switch; `RewardWindowPatches`): opens with nothing assigned instead of
+  - **Easier item reward window** (bit 21; `RewardWindowPatches`, all item rewards): opens with nothing assigned instead of
     the game's pre-assignment, and left-clicking another character moves an assigned item there in one click
     (unassign + assign through the window's own synced `UpdateItemsDistribution`).
 
@@ -121,9 +121,9 @@ The installer copies `game/*` from the pack into the game folder and records eve
 A BepInEx someone else installed is kept (only our plugin is added). Uninstall removes only what we placed, plus
 BepInEx's own cache/config/logs when the loader is ours. Other people's plugins are never touched.
 
-## Battle stats (always on, display only)
+## Battle stats (house rule, bit 22, display only)
 
-The post-scenario Statistics page (the screen with XP and accolades) gets about 40 extra rows in six sections
+With the **Battle stats** rule on, the post-scenario Statistics page (the screen with XP and accolades) gets about 40 extra rows in six sections
 (`BattleStats`). The game records ~40 kinds of events per character per scenario (`CPlayerStats` lists, filled by
 `StatsDataStorage.ScrapeEventLog`) but its table sums only 8; ours are computed from the same records
 (`Party.LastScenarioStats`). What the records mean was checked in the game code (see the comments in `BattleStats.cs`):
