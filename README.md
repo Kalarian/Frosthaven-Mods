@@ -38,7 +38,7 @@ Mod layout, `mods/<Name>/`:
 `loader/` (see its README). Every code feature is a **campaign house rule**:
 - The game has a House Rules screen (Options > House Rules), but it's hidden in this build because
   `GameSettingsService.ValidCampaignRules` is `None`. The plugin shows it for campaigns and adds our own switches.
-- Our rules are extra bits (`1 << 23` and up) in the game's own campaign rules number (`PartyAdventureData.Rules`).
+- Our rules are extra bits (`1 << 19` to `1 << 30`) in the game's own campaign rules number (`PartyAdventureData.Rules`).
   The game saves that number in the save header and sends it to co-op players (join token + `ChangeHouseRuleSettings`),
   so the host's choice reaches everyone and is stored in the campaign. The vanilla game ignores unknown bits.
 - The plugin fixes three game bugs on the way:
@@ -130,6 +130,15 @@ bonus, and whether the deck reshuffles at the end of the round; the same for the
 (`MonsterClassManager.EnemyMonsterAttackModifierDeck`). Curses count as nulls, blesses as x2s. If no non-rolling card is
 left, the whole deck counts (it reshuffles mid-draw). A small component refreshes the line while the pop-out is open.
 
+## Scenario map file (house rule, bit 19, display only)
+
+`ScenarioProgress` writes the campaign's progress to `<game>\FrosthavenMods\scenarios\progress-<campaign name>.txt`
+after each of the game's autosaves (postfix on `SaveData.AutoSaveCurrentAdventureData`, like Milestone saves):
+unlocked, completed (with the ending) and locked-out scenarios (`CampaignState.UnlockedScenarios` /
+`LockedScenarios`), read and pending sections, calendar entries, job postings, puzzles, personal quests, stickers and
+the travel unlocks (sled, boat, climbing gear). The save files are a binary .NET format, so this is the readable copy
+for `tools/scenario_map.py`. It reads the campaign state and sends nothing.
+
 ## Battle stats (house rule, bit 22, display only)
 
 With the **Battle stats** rule on, the post-scenario Statistics page (the screen with XP and accolades) gets about 40 extra rows in six sections
@@ -195,6 +204,18 @@ or per scenario), Records (best single scenario per stat, with ties), Scenarios 
 Trends (each scenario or running total). Records, Scenarios and Trends use the per-scenario "game"/"perf" lines,
 kept from the first scenario after the update that added them; older scenarios are in the totals only. A file or
 `-o out.html` can be given. Each player's PC has its own file; the host's covers every co-op scenario.
+
+`tools/scenario_map.py`: the scenario map page (spoilers: every scenario's name). `python tools/scenario_map.py`
+turns every `<game>\FrosthavenMods\scenarios\progress-<name>.txt` (written by the Scenario map file rule) into
+`scenario-map-<name>.html` next to it; `--blank` writes the map without a campaign. The unlocks come from the game's
+own `Base.ruleset` (scenario conclusions and campaign sections, plus the campaign's starting calendar and class
+retirement sections) and from a table in the script of the unlocks the game makes in code: events, personal quests,
+town guard perks (job postings), puzzle rewards, building upgrades, treasure chests, special loot cards, ancient
+coins. Tabs: Map (one lane per story line, coloured by the campaign's progress; click a scenario for what unlocks it,
+what it leads to and what it locks out, with its whole chain highlighted; `#28` in the address opens #28), Scenarios
+(sortable list), Choices & max path (every open lockout, scenario ending and section choice that changes which
+scenarios stay reachable, what each option gives up, and the best combination), Notes. Four scenarios (81, 123,
+127, 135) have no unlock anywhere in the game's data or code as of this game version and are marked as untraced.
 
 ## Ruleset format
 

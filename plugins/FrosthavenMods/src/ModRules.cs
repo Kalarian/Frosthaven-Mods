@@ -40,6 +40,7 @@ namespace FrosthavenMods
         public const ERulesFlag BattleStats = (ERulesFlag)(1 << 22);
         public const ERulesFlag RewardWindow = (ERulesFlag)(1 << 21);
         public const ERulesFlag DeckOdds = (ERulesFlag)(1 << 20);
+        public const ERulesFlag ScenarioMap = (ERulesFlag)(1 << 19);
 
         public static readonly List<Rule> All = new List<Rule>
         {
@@ -150,6 +151,17 @@ namespace FrosthavenMods
                               "the end of the round. Curses count as nulls and blesses as x2s.\n\n" +
                               "Display only: it changes nothing in play, and it only does the math on the counts the " +
                               "game already shows.",
+            },
+            new Rule
+            {
+                Flag = ScenarioMap,
+                Name = "Scenario map file (mod)",
+                Description = "Each time the game autosaves, writes this campaign's scenario progress (completed, available " +
+                              "and locked-out scenarios, read sections, the calendar, puzzles, personal quests) to a file " +
+                              "in the game folder, under FrosthavenMods\\scenarios. The mod's scenario map page " +
+                              "(tools/scenario_map.py) uses it to colour the unlock map and to show what each choice " +
+                              "still leaves open.\n\n" +
+                              "Display only: it changes nothing in play. The map shows every scenario's name (spoilers).",
             },
         };
 

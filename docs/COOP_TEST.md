@@ -216,3 +216,14 @@ A duplicate drop is rare, so the dev tools can fake one (solo only, test campaig
    round, it's gone and the counts are back to full.
 4. Keep the panel open while a monster attacks: the Monsters line updates by itself.
 5. Turn the rule off: the extra lines are gone; the game's counters are unchanged.
+
+## Solo: scenario map file (next version, not in v0.5.0)
+
+1. Turn on **Scenario map file**. Play until the game autosaves (end a round, or go back to the outpost): the game
+   folder has `FrosthavenMods\scenarios\progress-<campaign>.txt`, listing your scenarios, sections and calendar.
+2. Run `python tools/scenario_map.py`: it writes `scenario-map-<campaign>.html` next to the file. Open it: the
+   scenarios you completed are green, the ones you can play now are gold, a locked-out one is red.
+3. Click a scenario you can play now: the panel lists what unlocked it and what it leads to, and its chain lights up.
+4. Choices & max path: the lockouts you already made are under "Already decided"; the open ones show what each
+   option gives up.
+5. Turn the rule off and autosave again: the file stops changing (its time stays the same).
