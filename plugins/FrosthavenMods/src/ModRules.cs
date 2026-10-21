@@ -26,6 +26,7 @@ namespace FrosthavenMods
         public const ERulesFlag ShareDuplicateLoot = (ERulesFlag)(1 << 26);
         // Bit 27 was "Always allocate scenario loot" (tried and removed 2026-10-20): unused, harmless if a save has it.
         public const ERulesFlag RevealEvents = (ERulesFlag)(1 << 28);
+        public const ERulesFlag DwarfTweaks = (ERulesFlag)(1 << 29);
 
         public static readonly List<Rule> All = new List<Rule>
         {
@@ -57,6 +58,18 @@ namespace FrosthavenMods
                               "damage, morale, choices you'll make, an outpost attack) before you pick it. Hover over an " +
                               "option for its outcome text. Random outcomes show the roll you would actually get.\n\n" +
                               "Board game rule bent: you normally read only the outcome of the option you chose.",
+            },
+            new Rule
+            {
+                Flag = DwarfTweaks,
+                Name = "Dwarf's balance changes (mod)",
+                Description = "Tweaks from Dwarf74's Unofficial Frosthaven Campaign Tweaks (he maintains the official FAQ " +
+                              "and was a main campaign playtester):\n" +
+                              "- Personal quests: once four are complete, the ones that unlock the Tavern (74) and the " +
+                              "Stables (88) are dealt first, and new deals prefer quests that still unlock something new.\n" +
+                              "- Early Barracks: in Winter of year 1 (from week 2, every 2 weeks), with morale 10+ and " +
+                              "the Barracks at level 1, the outpost event is WO-20, the Barracks upgrade event.\n" +
+                              "- PQ 07 (Aesther Outpost): its two 6-week waits are 5 weeks. PQ 15: the goal is 60 gold.",
             },
         };
 
