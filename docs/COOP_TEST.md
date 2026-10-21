@@ -37,9 +37,9 @@ some steps are done at the same moment.
 4. Spend some of that gold so the characters own items (the shop, or the Craftsman):
    - every character owns **at least 2 items**, and at least one of them is **worn** (equipped);
    - **two characters own the same item** (e.g. both buy the same cheap item). That's for the "already owns" check.
-5. In Options > **Custom Rules**, turn on all eight mod rules: **Tradeable resources and equipment**, **Share duplicate
+5. In Options > **Custom Rules**, turn on all nine mod rules: **Tradeable resources and equipment**, **Share duplicate
    loot**, **Reveal event outcomes**, **Dwarf's balance changes**, **Game bug fixes**, **Milestone saves**, **Battle
-   stats** and **Easier item reward window**.
+   stats**, **Easier item reward window** and **Modifier deck odds**.
 6. Optional, solo: test duplicate loot, battle stats and milestone saves (see the end of this file). Then save and quit to the main
    menu.
 
@@ -137,7 +137,7 @@ To check an item on a character: select them and open their equipment / item scr
 
 | # | Who | Do | Expected |
 |---|---|---|---|
-| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows all eight rules on, for both players. |
+| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows all nine rules on, for both players. |
 | I2 | Both | **CHECKPOINT** (#9) | Identical to #8. |
 | I3 | Both | Start any scenario together, bringing **given** items, and play 3–4 rounds normally. Use a given item if you can. **Each player short rests at least once** (with Restful Slippers if anyone owns them). | **No desync message.** The given items work. (The Give button is hidden during scenarios.) |
 | I3b | Host | During the scenario, open Options > **Custom Rules**. | **Share duplicate loot**, **Dwarf's balance changes** and **Game bug fixes** are greyed out with "Locked during online scenarios" in their description. **Tradeable resources** and **Reveal event outcomes** can still be switched. Close without changing anything. |
@@ -204,3 +204,15 @@ A duplicate drop is rare, so the dev tools can fake one (solo only, test campaig
 3. Load the scenario-start backup: the scenario starts again from round 1, as it was.
 4. Restarting a scenario doesn't add a second backup for it. The 21st backup removes the oldest one; your own named
    saves (like "Mid Battle") stay.
+
+## Solo: modifier deck odds (host, any time)
+
+1. Turn on **Modifier deck odds**. In a scenario, open the attack modifier panel by your hand (the game's left / used
+   counters): under them, a "Next draw" line with Null, x2, -1/-2, +0, +1/+2 (and Rolling, if your deck has rolling
+   cards), and a "Monsters" line.
+2. Check one number by hand: Null % = nulls left / (cards left - rolling cards left). At the start of a scenario with
+   a 20-card deck with no perks it's 1/20 = 5%.
+3. Attack until a null or x2 comes up, then open the panel: "(reshuffles at the end of the round)" appears; after the
+   round, it's gone and the counts are back to full.
+4. Keep the panel open while a monster attacks: the Monsters line updates by itself.
+5. Turn the rule off: the extra lines are gone; the game's counters are unchanged.

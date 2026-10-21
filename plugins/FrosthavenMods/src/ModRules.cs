@@ -39,6 +39,7 @@ namespace FrosthavenMods
         public const ERulesFlag MilestoneSaves = (ERulesFlag)(1 << 23);
         public const ERulesFlag BattleStats = (ERulesFlag)(1 << 22);
         public const ERulesFlag RewardWindow = (ERulesFlag)(1 << 21);
+        public const ERulesFlag DeckOdds = (ERulesFlag)(1 << 20);
 
         public static readonly List<Rule> All = new List<Rule>
         {
@@ -138,6 +139,17 @@ namespace FrosthavenMods
                               "nothing assigned, so you choose who gets each item, and left-clicking another character " +
                               "moves an assigned item to them in one click (instead of right-click, then left-click).\n\n" +
                               "Every item still has to be assigned before Done.",
+            },
+            new Rule
+            {
+                Flag = DeckOdds,
+                Name = "Modifier deck odds (mod)",
+                Description = "In scenarios, the attack modifier panel by your hand (which already shows how many of each " +
+                              "card are left) also shows the odds of your next draw: null, x2, -1/-2, +0, +1/+2 and a " +
+                              "rolling bonus, and the same for the monster deck. It notes when a deck will reshuffle at " +
+                              "the end of the round. Curses count as nulls and blesses as x2s.\n\n" +
+                              "Display only: it changes nothing in play, and it only does the math on the counts the " +
+                              "game already shows.",
             },
         };
 

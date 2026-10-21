@@ -121,6 +121,15 @@ The installer copies `game/*` from the pack into the game folder and records eve
 A BepInEx someone else installed is kept (only our plugin is added). Uninstall removes only what we placed, plus
 BepInEx's own cache/config/logs when the loader is ours. Other people's plugins are never touched.
 
+## Modifier deck odds (house rule, bit 20, display only)
+
+`DeckOdds` adds a line to the game's attack modifier pop-out by the hand (`ModifiersDisplayController.Display`, which
+already shows each value as left / used): the odds of the card that settles the next attack (rolling cards keep the draw
+going, so it is the first non-rolling card left; every non-rolling card left is equally likely), the chance of a rolling
+bonus, and whether the deck reshuffles at the end of the round; the same for the enemy monster deck
+(`MonsterClassManager.EnemyMonsterAttackModifierDeck`). Curses count as nulls, blesses as x2s. If no non-rolling card is
+left, the whole deck counts (it reshuffles mid-draw). A small component refreshes the line while the pop-out is open.
+
 ## Battle stats (house rule, bit 22, display only)
 
 With the **Battle stats** rule on, the post-scenario Statistics page (the screen with XP and accolades) gets about 40 extra rows in six sections
