@@ -1,4 +1,4 @@
-# Co-op test: House Rules, Tradeable resources and equipment, Share duplicate loot (v0.3.0)
+# Co-op test: the Frosthaven Mods house rules (v0.4.0)
 
 Two players: **Host** (runs the campaign) and **Client** (joins). Takes about an hour. Have voice chat open, since
 some steps are done at the same moment.
@@ -11,6 +11,9 @@ some steps are done at the same moment.
 4. Nothing desyncs afterwards: saving, reloading, shopping, crafting, donating, a scenario.
 5. The battle stats (extra rows and the Campaign view on the post-scenario Statistics page) show the same numbers on
    both PCs.
+6. Event previews (Reveal event outcomes) show the same thing on both PCs, and the result matches the preview.
+7. Rules that change play are locked during online scenarios, and the co-op desync fixes (Game bug fixes) hold up:
+   no desync, including after short rests.
 
 ## How we check
 
@@ -34,14 +37,17 @@ some steps are done at the same moment.
 4. Spend some of that gold so the characters own items (the shop, or the Craftsman):
    - every character owns **at least 2 items**, and at least one of them is **worn** (equipped);
    - **two characters own the same item** (e.g. both buy the same cheap item). That's for the "already owns" check.
-5. Optional, solo: test duplicate loot (see the end of this file). Then save and quit to the main menu.
+5. In Options > **Custom Rules**, turn on all five mod rules: **Tradeable resources and equipment**, **Share duplicate
+   loot**, **Reveal event outcomes**, **Dwarf's balance changes** and **Game bug fixes**.
+6. Optional, solo: test duplicate loot and battle stats (see the end of this file). Then save and quit to the main
+   menu.
 
 **Both players:**
-6. Close Frosthaven and run the installer (`Install Frosthaven Mods.exe`, from the
+7. Close Frosthaven and run the installer (`Install Frosthaven Mods.exe`, from the
    [latest release](https://github.com/Kalarian/Frosthaven-Mods/releases/latest)). Click **Install / Update**. The
-   window must say **v0.3.0** for both of you.
+   window must say **v0.4.0** for both of you.
    - If Windows shows a warning, click "More info", then "Run anyway".
-7. Start the game.
+8. Start the game.
 
 ## A. Join and assign characters
 
@@ -49,7 +55,7 @@ some steps are done at the same moment.
 |---|---|---|---|
 | A1 | Host | Load the test campaign as a multiplayer game. Client joins. | The join works. |
 | A2 | Host | Give the client 2 of the 4 characters (the game's party slot / player assignment). | Each player controls 2 characters. Write down which ones: Host = **H1, H2**, Client = **C1, C2**. Also note which two own the same item. |
-| A3 | Both | Options > **Custom Rules**. | Both see "Mod pack rules" with **Tradeable resources and equipment** and **Share duplicate loot**, both Active. On the client they're greyed out (only the host can change them). |
+| A3 | Both | Options > **Custom Rules**. | Both see "Mod pack rules" with the five mod rules, all Active. On the client they're greyed out (only the host can change them). |
 | A4 | Both | **CHECKPOINT** (#1) | |
 
 ## B. House rules sync
@@ -130,13 +136,25 @@ To check an item on a character: select them and open their equipment / item scr
 
 | # | Who | Do | Expected |
 |---|---|---|---|
-| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows both rules on, for both players. |
+| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows all five rules on, for both players. |
 | I2 | Both | **CHECKPOINT** (#9) | Identical to #8. |
-| I3 | Both | Start any scenario together, bringing **given** items, and play 2–3 rounds normally. Use a given item if you can. | **No desync message.** The given items work. (The Give button is hidden during scenarios.) |
+| I3 | Both | Start any scenario together, bringing **given** items, and play 3–4 rounds normally. Use a given item if you can. **Each player short rests at least once** (with Restful Slippers if anyone owns them). | **No desync message.** The given items work. (The Give button is hidden during scenarios.) |
+| I3b | Host | During the scenario, open Options > **Custom Rules**. | **Share duplicate loot**, **Dwarf's balance changes** and **Game bug fixes** are greyed out with "Locked during online scenarios" in their description. **Tradeable resources** and **Reveal event outcomes** can still be switched. Close without changing anything. |
 | I4 | Both | Finish the scenario (win if you can; a loss also works). On the post-scenario screen, open the **Statistics** tab (crossed swords). | Under the game's 8 rows: section titles (OFFENSE, DEFENSE, ...) with no bars, and rows with icons, no white boxes. **Both PCs show the same number in every row.** Take a screenshot on each PC (scroll down for the rest). |
 | I5 | Both | Click **Campaign** (top right of the Statistics page), then **This scenario**. | The buttons don't overlap the title. Campaign shows a **Scenarios played** row and totals; each player's count is the number of scenarios they've finished with the mod (they can differ if one played more solo). This scenario switches back. |
 | I6 | Host | Continue back to the outpost. | If someone looted a copy of an item they already own, the item reward window opens with nothing assigned. The host (party leader) left-clicks one character, then another: the item moves in one click, on both screens. Done assigns it (Share duplicate loot). |
 | I7 | Both | **CHECKPOINT** (#10) | |
+
+## J. Events (whenever one comes up)
+
+Town events come at the start of an outpost phase, road events while travelling to a scenario. If one appears at any
+point in the session, do this before the host chooses:
+
+| # | Who | Do | Expected |
+|---|---|---|---|
+| J1 | Both | Read the line under each option (gold, damage, morale, "Outpost attack!", "Then: …"). | **The same line on both PCs.** |
+| J2 | Both | Hover over each option. | The outcome text appears. |
+| J3 | Host | Choose an option. | The result (outcome text and effects) matches what the preview showed, on both PCs. Note the event ID (e.g. SO-12) if anything differs. |
 
 ## After the test
 
