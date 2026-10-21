@@ -102,6 +102,24 @@ character (class + name), sums for counts, bests for "biggest" rows, campaign-wi
 records (`CPlayerRecords`) are never updated by the game, so totals start with the mod. Each scenario's raw records
 also go to `<game>\FrosthavenMods\stats\scenario-*.txt` for checking.
 
+## Desync recorder (always on in online games, logging only)
+
+`DesyncRecorder` logs what's needed to find the cause of a co-op desync, on every player's PC, into
+`<game>\FrosthavenMods\desync\<launch time>\` (last 10 launches kept):
+- `timeline.txt`: every game action sent / queued / applied (`[player:n]` IDs), side actions, the game's state
+  fingerprints at each checkpoint (`DesyncDetector.GenerateStateDumpAndFastAutoSave`: important + full MD5) with the
+  positions of the scenario's four RNGs, outpost commands (from `CoopLog`), sync checks and desync events.
+- `steps.txt`: every rules-engine message the PC processes (`Choreographer.ProcessMessage`), the finest order.
+- On a desync: this PC's state dump, the game's own dumps and one-line diff (the game builds them but its
+  `StateDumper.SaveStateDump` is empty in retail), and a copy of `Player.log`. A "desync now" signal rides on the
+  game's `LogReproStep` text message, so every player saves their state at the same moment (the host relays it; only
+  clients run the game's check). At most 5 captures per launch.
+
+Ctrl+F7 zips the newest 3 launches + `coop-log.txt` + `Player.log` / `Player-prev.log` to the desktop.
+`python tools/desync_compare.py <zip> <zip> [...]` lines the players up: desync events, the first checkpoint whose
+fingerprints differ, the first difference in applied-action order and in rules-engine steps, and the differing lines
+of the state dumps.
+
 ## Co-op testing
 
 `docs/COOP_TEST.md` is the two-player test script. The mod logs every outpost command, rule change, gift (resources

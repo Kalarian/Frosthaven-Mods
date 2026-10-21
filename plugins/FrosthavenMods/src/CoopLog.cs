@@ -40,6 +40,7 @@ namespace FrosthavenMods
         public static void Write(string line)
         {
             Plugin.Log.LogInfo("Coop " + line);
+            DesyncRecorder.Note("OUTPOST " + line);
             if (_file == null) return;
             try { File.AppendAllText(_file, $"{DateTime.Now:HH:mm:ss.fff} {line}\n"); } catch { }
         }

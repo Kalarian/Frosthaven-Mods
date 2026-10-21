@@ -21,7 +21,8 @@ some steps are done at the same moment.
   (`C:\Program Files (x86)\Steam\steamapps\common\Frosthaven\FrosthavenMods\coop-log.txt` by default). After the test,
   `python tools/coop_compare.py host.txt client.txt` compares the two files checkpoint by checkpoint.
 - **Desyncs:** if the game ever shows a **desync / out of sync** message, stop. Note the step number, take a
-  screenshot, and skip ahead to "After the test".
+  screenshot, and **everyone presses Ctrl+F7** (before closing the game): it zips the desync recordings to your desktop
+  (`Frosthaven-desync-<name>-<time>.zip`) and opens the folder. Then skip ahead to "After the test".
 
 ## Before the session
 
@@ -139,10 +140,11 @@ To check an item on a character: select them and open their equipment / item scr
 
 ## After the test
 
-1. Both close the game.
-2. The **client** sends their `coop-log.txt` to the host.
-3. The host gives Claude both files (or runs
-   `python tools/coop_compare.py <host coop-log.txt> <client coop-log.txt>`).
+1. **Both press Ctrl+F7** in game: a `Frosthaven-desync-<name>-<time>.zip` appears on your desktop (it includes
+   `coop-log.txt`, the desync recorder's files and the game's own log). Then close the game.
+2. The **client** sends their zip to the host.
+3. The host gives Claude both zips (or runs `python tools/coop_compare.py` on the two `coop-log.txt` files, and
+   `python tools/desync_compare.py <host zip> <client zip>`).
 4. Also send the newest `FrosthavenMods\stats\scenario-*.txt` from each PC (the raw battle records), to check the
    stats match between players.
 5. Also note anything odd from the tables above: what you expected and what happened.
