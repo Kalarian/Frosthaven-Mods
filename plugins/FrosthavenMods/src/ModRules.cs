@@ -71,8 +71,7 @@ namespace FrosthavenMods
                               "the Barracks at level 1, the outpost event is WO-20, the Barracks upgrade event.\n" +
                               "- PQ 07 (Aesther Outpost): its two 6-week waits are 5 weeks. PQ 15: the goal is 60 gold.\n" +
                               "- Scenario 14: also kill all Abael Herders to win; Piranha Pigs spawn only on odd rounds " +
-                              "and Lightning Eels only on even rounds, alternating spawn points.
-" +
+                              "and Lightning Eels only on even rounds, alternating spawn points.\n" +
                               "- Boneshaper's first mastery (kill 15 of your summons) counts over any number of scenarios.",
             },
         };
