@@ -29,3 +29,5 @@ installer/obj/
 tools/__pycache__/
 mods/**/bin/
 mods/**/obj/
+tools/**/bin/
+tools/**/obj/

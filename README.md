@@ -221,6 +221,15 @@ what it leads to and what it locks out, with its whole chain highlighted; `#28` 
 scenarios stay reachable, what each option gives up, and the best combination), Notes. Four scenarios (81, 123,
 127, 135) have no unlock anywhere in the game's data or code as of this game version and are marked as untraced.
 
+`tools/hookcheck` (C#, .NET 9 SDK): run after every game update, before a session. `dotnet run --project
+tools/hookcheck -c Release` loads the game's code without starting the game and checks the built plugin against it:
+every patched game method still exists, the game fields and parameter names the patches read are still there, each
+transpiler (the bug fixes that rewrite game code) still finds the code it replaces, and the members the plugin looks
+up by name exist. It prints `N ok, 0 failed` (`-v` lists each check); `--game PATH` for another install. Rebuild the
+plugin first, so a game change that breaks compilation shows up too. To see whether a patch fixed one of the bugs in
+`docs/GAME_BUGS.md`, decompile the changed game DLLs (`ilspycmd -p`) and diff them with the decompile of the build
+before; the decompiles stay on this machine.
+
 ## Ruleset format
 
 Reverse-engineered from `FH.YML.RulebaseFile` in `Assembly-CSharp.dll`:
