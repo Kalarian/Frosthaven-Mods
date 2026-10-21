@@ -56,7 +56,7 @@ some steps are done at the same moment.
 |---|---|---|---|
 | A1 | Host | Load the test campaign as a multiplayer game. Client joins. | The join works. |
 | A2 | Host | Give the client 2 of the 4 characters (the game's party slot / player assignment). | Each player controls 2 characters. Write down which ones: Host = **H1, H2**, Client = **C1, C2**. Also note which two own the same item. |
-| A3 | Both | Options > **Custom Rules**. | Both see "Mod pack rules" with the five mod rules, all Active. On the client they're greyed out (only the host can change them). |
+| A3 | Both | Options > **Custom Rules**. | Both see "Mod pack rules" with all ten mod rules, all Active. On the client they're greyed out (only the host can change them). |
 | A4 | Both | **CHECKPOINT** (#1) | |
 
 ## B. House rules sync
