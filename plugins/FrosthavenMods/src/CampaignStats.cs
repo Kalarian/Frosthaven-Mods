@@ -26,6 +26,11 @@ namespace FrosthavenMods
     /// player keeps their own totals. A character is "class|name", so a retired character and a later one of the same
     /// class stay apart. The game's own lifetime records (CPlayerRecords) are never updated by the game (its UpdateStats
     /// has no callers), so there was nothing to seed from: totals start with the first scenario played with the mod.
+    ///
+    /// History, for tools/campaign_stats.py (the campaign stats page): each scenario also gets a "game" line (key, time,
+    /// level ID, result, rounds, scenario level) and one "perf" line per character and row (key, character, character
+    /// level, row, numerator, denominator). "label" lines name the game's own rows; "row" lines (rewritten on every save)
+    /// describe our rows: section, how they add up over a campaign, number format, whether they're a ratio.
     /// </summary>
     [HarmonyPatch]
     internal static class CampaignStats
@@ -35,6 +40,14 @@ namespace FrosthavenMods
         private static string _file;
         private static readonly HashSet<string> Counted = new HashSet<string>();
         private static readonly Dictionary<string, Dictionary<string, double>> Totals = new Dictionary<string, Dictionary<string, double>>();
+        private static readonly List<string> History = new List<string>();
+        private static readonly Dictionary<string, string> Labels = new Dictionary<string, string>();
+        private static EResult _outcome;
+
+        /// <summary>The scenario's result, as the game passes it when it builds the results screen.</summary>
+        [HarmonyPatch(typeof(ScenarioResultViewService), nameof(ScenarioResultViewService.GetBattleResultDTO))]
+        [HarmonyPrefix]
+        private static void RememberOutcome(EResult outcome) => _outcome = outcome;
 
         // The current Statistics page: its columns and the game's own rows, to build the campaign table from.
         private static List<string> _characters = new List<string>();
@@ -71,6 +84,7 @@ namespace FrosthavenMods
                         if (row.Den != null) Add(t, row.Label + "/den", row.Den(s), BattleStats.Agg.Sum);
                     }
                 }
+                AddHistory(key, results, columns);
                 Counted.Add(key);
                 Save();
                 Plugin.Log.LogInfo($"Battle stats: scenario added to the campaign totals ({Counted.Count} so far)");
@@ -78,6 +92,31 @@ namespace FrosthavenMods
             catch (Exception e)
             {
                 Plugin.Log.LogError("Battle stats: could not update the campaign totals: " + e);
+            }
+        }
+
+        private static string Num(double v) => v.ToString(CultureInfo.InvariantCulture);
+
+        private static string Clean(string s) => (s ?? "").Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' ');
+
+        private static void AddHistory(string key, BattleResultDTO results, List<CPlayerStatsScenario> columns)
+        {
+            ScenarioState state = ScenarioManager.CurrentScenarioState;
+            History.Add(string.Join("\t", "game", key, DateTime.Now.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
+                Clean(state?.ID), _outcome.ToString(), state?.RoundNumber ?? 0, state?.Level ?? 0));
+            for (int i = 0; i < _vanillaHeaders.Count && i < _vanillaKeys.Count; i++)
+                Labels[Vanilla + _vanillaKeys[i]] = Clean(_vanillaHeaders[i].Text);
+            for (int c = 0; c < _characters.Count; c++)
+            {
+                CPlayerStatsScenario s = c < columns.Count ? columns[c] : null;
+                if (s == null) continue;
+                string ch = _characters[c], level = (results.IndividualRewards[c].CharacterDTO?.Level ?? 0).ToString(CultureInfo.InvariantCulture);
+                void Perf(string row, double num, double? den) =>
+                    History.Add(string.Join("\t", "perf", key, ch, level, row, Num(num), den.HasValue ? Num(den.Value) : ""));
+                foreach (HeroBattleStatDTO.BattleStat b in results.IndividualRewards[c].BattleStats?.GetBattleStats() ?? Enumerable.Empty<HeroBattleStatDTO.BattleStat>())
+                    Perf(Vanilla + b.NameKey, b.Current, null);
+                foreach (BattleStats.Row row in BattleStats.AllRows.Where(r => !r.Section))
+                    Perf(row.Label, row.Num(s), row.Den != null ? row.Den(s) : (double?)null);
             }
         }
 
@@ -120,11 +159,15 @@ namespace FrosthavenMods
             _file = file;
             Counted.Clear();
             Totals.Clear();
+            History.Clear();
+            Labels.Clear();
             if (!File.Exists(file)) return;
             foreach (string line in File.ReadAllLines(file))
             {
                 string[] p = line.Split('\t');
                 if (p.Length == 2 && p[0] == "scenario") Counted.Add(p[1]);
+                else if (p[0] == "game" || p[0] == "perf") History.Add(line);
+                else if (p.Length == 3 && p[0] == "label") Labels[p[1]] = p[2];
                 else if (p.Length == 4 && p[0] == "stat" && double.TryParse(p[3], NumberStyles.Float, CultureInfo.InvariantCulture, out double v))
                     For(p[1])[p[2]] = v;
             }
@@ -140,6 +183,14 @@ namespace FrosthavenMods
                 foreach (var stat in character.Value)
                     sb.Append("stat\t").Append(character.Key).Append('\t').Append(stat.Key).Append('\t')
                         .AppendLine(stat.Value.ToString(CultureInfo.InvariantCulture));
+            foreach (var label in Labels) sb.Append("label\t").Append(label.Key).Append('\t').AppendLine(label.Value);
+            string section = "";
+            foreach (BattleStats.Row row in BattleStats.AllRows)
+            {
+                if (row.Section) { section = row.Label; continue; }
+                sb.AppendLine(string.Join("\t", "row", row.Label, section, row.Agg.ToString(), row.Format, row.Den != null ? "ratio" : "count"));
+            }
+            foreach (string line in History) sb.AppendLine(line);
             File.WriteAllText(_file, sb.ToString());
         }
 
