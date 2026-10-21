@@ -15,6 +15,7 @@ namespace FrosthavenMods
             ["FHMODS_GIVE_TITLE"] = "Give Resources",
             ["FHMODS_GIVE_ITEMS_TITLE"] = "Give Items",
             ["FHMODS_GIVE"] = "Give",
+            ["FHMODS_S14_HERDERS"] = "Kill all Abael Herders",
             ["FHMODS_GIVE_HINT"] = "Give",
         };
 

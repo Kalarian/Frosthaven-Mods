@@ -117,6 +117,69 @@ namespace FrosthavenMods
             if ((id == "95.4" || id == "29.3") && week > 0) week -= 1;
         }
 
+        // ---- Scenario 14 (Jagged Shoals) rework
+        // The map, spawners and goals are in a binary level file (FS_014_Jagged_Shoals.lvldat), deserialized fresh by
+        // CSRLYML.GetCustomLevel every time the scenario is set up, on every peer. Spawners: [0] pigs (d), [1] pigs (b),
+        // [2]/[4] eels (e), [3]/[5] eels (c); today both kinds spawn every round (the script adds b + c on round 1).
+        // Dwarf: pigs only on odd rounds, alternating b / d; eels only on even rounds, alternating c / e; and the
+        // Abael Herders must die too. So: automatic spawning off, the scenario's script spawns by round number, and a
+        // second win goal (all win goals are needed unless one is "enough alone", which the snow rock's isn't).
+
+        [HarmonyPatch(typeof(CSRLYML), nameof(CSRLYML.GetCustomLevel))]
+        [HarmonyPostfix]
+        private static void ReworkScenario14(string name, ScenarioRuleLibrary.CustomLevels.CCustomLevelData __result)
+        {
+            if (!On || name == null || !name.Contains("FS_014_") || __result?.ScenarioState == null) return;
+            try
+            {
+                ScenarioRuleLibrary.ScenarioState state = __result.ScenarioState;
+                foreach (ScenarioRuleLibrary.CSpawner spawner in state.Spawners)
+                    spawner.SpawnerData.SpawnRoundInterval = spawner.SpawnerData.SpawnRoundInterval.Select(_ => 0).ToList();
+                if (!state.WinObjectives.Any(o => o is ScenarioRuleLibrary.CObjective_KillAllEnemies))
+                    state.WinObjectives.Add(new ScenarioRuleLibrary.CObjective_KillAllEnemies(ScenarioRuleLibrary.EObjectiveResult.Win,
+                        new ScenarioRuleLibrary.CObjectiveFilter(filterEnemyClassIDs: new List<string> { "AbaelHerderID" }),
+                        hideCounter: false, customLoc: "FHMODS_S14_HERDERS"));
+                Plugin.Log.LogInfo($"Dwarf's balance changes: Scenario 14 reworked ({state.Spawners.Count} spawners by round, Abael Herders goal)");
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError("Dwarf's balance changes: Scenario 14 left as is: " + e);
+            }
+        }
+
+        private static readonly MethodInfo OncePerRound = AccessTools.Method(typeof(ScenarioRuleLibrary.ScenarioScript), "OncePerRound");
+
+        [HarmonyPatch(typeof(ScenarioRuleLibrary.ScenarioScript_FH014), "TickStartRound")]
+        [HarmonyPrefix]
+        private static bool Scenario14Spawns(ScenarioRuleLibrary.ScenarioScript_FH014 __instance)
+        {
+            if (!On) return true;
+            try
+            {
+                var script = Traverse.Create(__instance);
+                if ((bool)OncePerRound.Invoke(__instance, null))
+                {
+                    int round = ScenarioRuleLibrary.ScenarioScript.RoundNumber, size = ScenarioRuleLibrary.ScenarioScript.PartySize;
+                    List<ScenarioRuleLibrary.CSpawner> spawners = ScenarioRuleLibrary.ScenarioManager.CurrentScenarioState.Spawners;
+                    void Spawn(string field) => script.Field(field).GetValue<ScenarioRuleLibrary.CSpawner>()?.SpawnUnit(size, treatAsSummon: false, initial: false, startRound: true);
+                    switch (round % 4)
+                    {
+                        case 1: Spawn("_bSpawner"); break;                                                   // pigs at b
+                        case 2: Spawn("_cSpawner1"); Spawn("_cSpawner2"); break;                             // eels at c
+                        case 3: if (spawners.Count > 0) spawners[0].SpawnUnit(size, false, false, true); break; // pigs at d
+                        case 0: Spawn("_eSpawner1"); Spawn("_eSpawner2"); break;                             // eels at e
+                    }
+                }
+                script.Field("_damagedThisRound").SetValue(false);
+                return false;
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError("Dwarf's balance changes: Scenario 14 spawns fell back to the game's: " + e);
+                return true;
+            }
+        }
+
         // ---- PQ 15: goal 60 instead of 70
 
         [HarmonyPatch(typeof(PQ_15), nameof(PQ_15.CalcProgress))]

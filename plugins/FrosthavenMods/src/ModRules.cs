@@ -69,7 +69,9 @@ namespace FrosthavenMods
                               "Stables (88) are dealt first, and new deals prefer quests that still unlock something new.\n" +
                               "- Early Barracks: in Winter of year 1 (from week 2, every 2 weeks), with morale 10+ and " +
                               "the Barracks at level 1, the outpost event is WO-20, the Barracks upgrade event.\n" +
-                              "- PQ 07 (Aesther Outpost): its two 6-week waits are 5 weeks. PQ 15: the goal is 60 gold.",
+                              "- PQ 07 (Aesther Outpost): its two 6-week waits are 5 weeks. PQ 15: the goal is 60 gold.\n" +
+                              "- Scenario 14: also kill all Abael Herders to win; Piranha Pigs spawn only on odd rounds " +
+                              "and Lightning Eels only on even rounds, alternating spawn points.",
             },
         };
 

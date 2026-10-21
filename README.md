@@ -79,6 +79,15 @@ Mod layout, `mods/<Name>/`:
     for source `"scenario_loot"` puts the duplicate in the game's own items-to-gain list (`ItemToGainIDs` +
     `GainItem` unresolved action), so the outpost opens the usual item reward window. Falls back to the auto-sell when
     nobody else can own it or the reward window couldn't hand out every pending item.
+  - **Reveal event outcomes** (bit 28; `EventPreview`): each event option is played out on a throwaway copy of the
+    campaign (`FHGlue` binary state copy + its own `CampaignController`) and shows its effects under the option and its
+    outcome text on hover; random outcomes show the actual roll.
+  - **Dwarf's balance changes** (bit 29; `DwarfTweaks`), from Dwarf74's Unofficial Frosthaven Campaign Tweaks:
+    personal quest deal order (`GetAvailablePersonalQuests`: after 4 completed PQs, PQ_3/4/7/8 and PQ_9/10 first; quests
+    that unlock something new before ones that don't), early Barracks (WO-20 drawn in year 1 winter from week 12 every 2
+    weeks with Barracks level 1 and morale 10+, once), PQ 07 waits 5 weeks, PQ 15 goal 60, Scenario 14 rework (Abael
+    Herders goal added to the level data in `CSRLYML.GetCustomLevel`; automatic spawners off, `ScenarioScript_FH014`
+    spawns pigs on odd rounds b/d and eels on even rounds c/e).
   - Item reward window (all item rewards, not a switch; `RewardWindowPatches`): opens with nothing assigned instead of
     the game's pre-assignment, and left-clicking another character moves an assigned item there in one click
     (unassign + assign through the window's own synced `UpdateItemsDistribution`).
