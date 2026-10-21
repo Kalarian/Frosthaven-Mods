@@ -84,8 +84,8 @@ Mod layout, `mods/<Name>/`:
     `GainItem` unresolved action), so the outpost opens the usual item reward window. Falls back to the auto-sell when
     nobody else can own it or the reward window couldn't hand out every pending item.
   - **Reveal event outcomes** (bit 28; `EventPreview`): each event option is played out on a throwaway copy of the
-    campaign (`FHGlue` binary state copy + its own `CampaignController`) and shows its effects under the option and its
-    outcome text on hover; random outcomes show the actual roll.
+    campaign (`FHGlue` binary state copy + its own `CampaignController`) and shows its outcome text and effects in a tooltip
+    on hover (opaque, above the option, left-aligned with it); random outcomes show the actual roll.
   - **Dwarf's balance changes** (bit 29; `DwarfTweaks`), from Dwarf74's Unofficial Frosthaven Campaign Tweaks:
     personal quest deal order (`GetAvailablePersonalQuests`: once one PQ per party member (2-4) is complete, PQ_3/4/7/8 and PQ_9/10 first; quests
     that unlock something new before ones that don't), early Barracks (WO-20 drawn in year 1 winter from week 12 every 2

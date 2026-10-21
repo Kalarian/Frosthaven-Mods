@@ -13,8 +13,8 @@ using UnityEngine.UI;
 namespace FrosthavenMods
 {
     /// <summary>
-    /// House rule "Reveal event outcomes": on a town, road or boat event, each option shows what it will do (a line of
-    /// effects under the option) and its outcome text (on hover). Board game rule bent (p. 12): pick an option, then
+    /// House rule "Reveal event outcomes": on a town, road or boat event, hovering over an option shows what it will do:
+    /// its outcome text, then its effects. Board game rule bent (p. 12): pick an option, then
     /// read only that outcome.
     ///
     /// Outcomes are not data: each event is a class (FHRL.OutpostEvents.*_OutpostEventDef) whose ApplyOption works the
@@ -30,8 +30,8 @@ namespace FrosthavenMods
     {
         private sealed class Preview
         {
-            public string Summary;   // one line under the option
-            public string Outcome;   // the outcome text (hover)
+            public string Summary;   // the effects (tooltip, after the outcome)
+            public string Outcome;   // the outcome text (tooltip)
         }
 
         private static string _key;
@@ -47,10 +47,8 @@ namespace FrosthavenMods
                 var map = Singleton<FHMapChoreographer>.InstanceFast;
                 CampaignController live = map?.View?.GameController;
                 if (live == null || _event == null || live.OutpostEventController.EventToResolve != _event) return;
+                // shown in each option's tooltip (AddTooltips); the option buttons keep the game's own text
                 Predict(map, _event, __result.Options.Select(o => o.ID).ToList());
-                foreach (OutpostEventDTO.Option option in __result.Options)
-                    if (Previews.TryGetValue(option.ID, out Preview p) && !string.IsNullOrEmpty(p.Summary))
-                        option.Text += "\n<size=72%><color=#E6D3A3>" + p.Summary + "</color></size>";
             }
             catch (Exception e)
             {
@@ -173,7 +171,8 @@ namespace FrosthavenMods
                     if (button == null) continue;
                     var tip = button.GetComponent<UITextTooltipTarget>();
                     Preview p = null;
-                    bool has = on && i < data.Options.Count && Previews.TryGetValue(data.Options[i].ID, out p) && !string.IsNullOrEmpty(p.Outcome);
+                    bool has = on && i < data.Options.Count && Previews.TryGetValue(data.Options[i].ID, out p)
+                               && (!string.IsNullOrEmpty(p.Outcome) || !string.IsNullOrEmpty(p.Summary));
                     if (!has) { if (tip != null) tip.enabled = false; continue; }
                     if (tip == null)
                     {
@@ -182,10 +181,66 @@ namespace FrosthavenMods
                         // means "fit the text" (true keeps the last height, so the framed background collapses).
                         tip.Initialize(UITooltipManager.Corner.Auto, Vector2.zero, false, 560f, 50f, autoAdjustHeight: false, hideBackground: false);
                     }
+                    OurTips.Add(button.transform.GetInstanceID());
                     tip.enabled = true;
-                    tip.SetText(p.Outcome + "\n\n<color=#E6D3A3>" + p.Summary + "</color>");
+                    string effects = string.IsNullOrEmpty(p.Summary) ? "" : "<color=#E6D3A3>" + p.Summary + "</color>";
+                    tip.SetText(string.IsNullOrEmpty(p.Outcome) ? effects : effects.Length == 0 ? p.Outcome : p.Outcome + "\n\n" + effects);
                 }
             });
+        }
+
+        // ---- where the tooltip sits and its background, for these tooltips only
+
+        /// <summary>The option buttons that carry an outcome tooltip (transform instance IDs).</summary>
+        private static readonly HashSet<int> OurTips = new HashSet<int>();
+
+        private static readonly Color PanelColor = new Color(0.075f, 0.09f, 0.12f, 1f);
+        private const float Gap = 8f;
+
+        /// <summary>The game places a tooltip by a corner of the target, so "above the option, left edges lined up"
+        /// isn't one of its choices: put it there after the game positions it. The game's framed background is partly
+        /// see-through, so an opaque panel goes behind the text; it's switched off again for every other tooltip.</summary>
+        [HarmonyPatch(typeof(UITooltipManager), nameof(UITooltipManager.UpdatePositionAndPivot))]
+        [HarmonyPostfix]
+        private static void PlaceTooltip(UITooltipManager __instance, RectTransform ___m_AnchorToTarget, GameObject ___m_Background)
+        {
+            try
+            {
+                bool ours = ___m_AnchorToTarget != null && OurTips.Contains(___m_AnchorToTarget.GetInstanceID());
+                SetPanel(___m_Background, ours);
+                if (!ours) return;
+                var rect = (RectTransform)__instance.transform;
+                rect.pivot = Vector2.zero;
+                var corners = new Vector3[4];
+                ___m_AnchorToTarget.GetWorldCorners(corners); // 0 bottom-left, 1 top-left, 2 top-right, 3 bottom-right
+                rect.position = corners[1] + ___m_AnchorToTarget.TransformVector(new Vector3(0f, Gap, 0f));
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogWarning("Reveal event outcomes: could not place the tooltip: " + e.Message);
+            }
+        }
+
+        private static void SetPanel(GameObject background, bool on)
+        {
+            if (background == null) return;
+            Transform existing = background.transform.Find("FrosthavenMods Opaque");
+            if (existing == null)
+            {
+                if (!on) return;
+                var go = new GameObject("FrosthavenMods Opaque", typeof(RectTransform), typeof(Image));
+                go.transform.SetParent(background.transform, false);
+                go.transform.SetAsFirstSibling(); // over the background's own image, under its frame ornaments
+                var r = (RectTransform)go.transform;
+                r.anchorMin = Vector2.zero;
+                r.anchorMax = Vector2.one;
+                r.offsetMin = r.offsetMax = Vector2.zero;
+                var image = go.GetComponent<Image>();
+                image.color = PanelColor;
+                image.raycastTarget = false;
+                existing = go.transform;
+            }
+            existing.gameObject.SetActive(on);
         }
     }
 }

@@ -1,4 +1,4 @@
-# Co-op test: the Frosthaven Mods house rules (v0.6.1)
+# Co-op test: the Frosthaven Mods house rules (v0.6.2)
 
 Two players: **Host** (runs the campaign) and **Client** (joins). Takes about an hour. Have voice chat open, since
 some steps are done at the same moment.
@@ -46,7 +46,7 @@ some steps are done at the same moment.
 **Both players:**
 7. Close Frosthaven and run the installer (`Install Frosthaven Mods.exe`, from the
    [latest release](https://github.com/Kalarian/Frosthaven-Mods/releases/latest)). Click **Install / Update**. The
-   window must say **v0.6.1** for both of you.
+   window must say **v0.6.2** for both of you.
    - If Windows shows a warning, click "More info", then "Run anyway".
 8. Start the game.
 
@@ -154,8 +154,8 @@ point in the session, do this before the host chooses:
 
 | # | Who | Do | Expected |
 |---|---|---|---|
-| J1 | Both | Read the line under each option (gold, damage, morale, "Outpost attack!", "Then: …"). | **The same line on both PCs.** |
-| J2 | Both | Hover over each option. | The outcome text appears in a framed box, readable over the other buttons. |
+| J1 | Both | Hover over each option. | A solid box appears just above the option, its left edge lined up with the option's: the outcome text, then the effects (gold, damage, morale, "Outpost attack!", "Then: …"). The option buttons show only the game's own text. |
+| J2 | Both | Compare what each option's box says. | **The same text on both PCs.** |
 | J3 | Host | Choose an option. | The result (outcome text and effects) matches what the preview showed, on both PCs. Note the event ID (e.g. SO-12) if anything differs. |
 | J4 | Both | If it's an outpost attack from **WO-33, WO-34, WO-35, WO-71 or SO-23**, note the order buildings are attacked in. | It follows the card (Game bug fixes): WO-33 even-numbered buildings from highest number down, WO-34 buildings 1–40 from highest number down, WO-35 highest level first, WO-71 lowest level first, SO-23 only even-numbered buildings. Same on both PCs. |
 
