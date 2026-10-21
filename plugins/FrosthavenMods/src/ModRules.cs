@@ -25,6 +25,7 @@ namespace FrosthavenMods
         public const ERulesFlag Trading = (ERulesFlag)(1 << 24);
         public const ERulesFlag ShareDuplicateLoot = (ERulesFlag)(1 << 26);
         // Bit 27 was "Always allocate scenario loot" (tried and removed 2026-10-20): unused, harmless if a save has it.
+        public const ERulesFlag RevealEvents = (ERulesFlag)(1 << 28);
 
         public static readonly List<Rule> All = new List<Rule>
         {
@@ -47,6 +48,15 @@ namespace FrosthavenMods
                               "If nobody else in the party can take it, it is still sold.\n\n" +
                               "Board game rule restored: the looter gives it to another character or sells it. To sell, " +
                               "the new owner sells it in Downtime for the same gold.",
+            },
+            new Rule
+            {
+                Flag = RevealEvents,
+                Name = "Reveal event outcomes (mod)",
+                Description = "On town, road and boat events, each option shows what it will do for your party (gold, " +
+                              "damage, morale, choices you'll make, an outpost attack) before you pick it. Hover over an " +
+                              "option for its outcome text. Random outcomes show the roll you would actually get.\n\n" +
+                              "Board game rule bent: you normally read only the outcome of the option you chose.",
             },
         };
 

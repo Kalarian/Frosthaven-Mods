@@ -12,6 +12,7 @@ namespace FrosthavenDevTools
     /// Testing shortcuts for the author's own machine. NOT part of the mod pack (lives in devtools/, never packed).
     /// Solo games only. They call the game's own debug console commands, which ship in the retail build but have no
     /// console to type them into:
+    ///   Ctrl+F6   draw the next town event of the current season (to test the mod's Reveal event outcomes)
     ///   Ctrl+F9   +100 gold and +10 lumber/metal/hide per party member, +10 of each herb to the Frosthaven supply
     ///   Ctrl+F10  "win"            DebugMenu.WinScenarioCommand: wins the current scenario
     ///   Ctrl+F11  "skip_prologue"  FHMapChoreographer.SkipPrologue: ends the prologue (map only), lands in the outpost
@@ -22,7 +23,7 @@ namespace FrosthavenDevTools
     /// The game destroys BepInEx's plugin object soon after startup (as in Stolen Realm), so the plugin's own Update
     /// never runs; the keys are polled from postfixes on the game's own per-frame methods instead.
     /// </summary>
-    [BepInPlugin("frosthaven.devtools", "Frosthaven Dev Tools", "0.1.9")]
+    [BepInPlugin("frosthaven.devtools", "Frosthaven Dev Tools", "0.2.0")]
     public class DevTools : BaseUnityPlugin
     {
         internal static ManualLogSource _log;
@@ -60,6 +61,7 @@ namespace FrosthavenDevTools
             }
             Keyboard kb = Keyboard.current;
             if (kb == null || !kb.ctrlKey.isPressed) return;
+            if (kb.f6Key.wasPressedThisFrame) Run("draw a town event", DrawEvent);
             if (kb.f9Key.wasPressedThisFrame) Run("+100 gold, +10 of each material and herb", AddGold);
             if (kb.f10Key.wasPressedThisFrame) Run("win scenario", () => Win.Invoke(null, new object[] { null, -1 }));
             if (kb.f11Key.wasPressedThisFrame) Run("skip prologue", DoSkipPrologue);
@@ -109,6 +111,16 @@ namespace FrosthavenDevTools
             map.View.RefreshView();
         }
 
+        private static void DrawEvent()
+        {
+            var map = Singleton<FHMapChoreographer>.InstanceFast;
+            if (map == null || map.GameState == null) throw new InvalidOperationException("only works in the outpost");
+            if (map.GameController.OutpostEventController.HasEventToResolve) throw new InvalidOperationException("an event is already open");
+            map.ExecuteCommand(DevCommands.DrawEventPath);
+            PushActiveEvent?.Invoke(map.View, new object[] { false });
+            map.View.RefreshView();
+        }
+
         private static void DoSkipPrologue()
         {
             var map = Singleton<FHMapChoreographer>.InstanceFast;
@@ -137,6 +149,8 @@ namespace FrosthavenDevTools
     {
         public const string Path = "FrosthavenDevTools.Grant";
         public const string FakeLootPath = "FrosthavenDevTools.FakeDuplicateLoot";
+        public const string DrawEventPath = "FrosthavenDevTools.DrawEvent";
+        private static readonly MethodInfo ActivateOutpostEvent = AccessTools.Method(typeof(FHRL.OutpostEventController), "Action_ActivateEventForOutpost");
         private static readonly MethodInfo GainItem = AccessTools.Method(typeof(FHRL.CharacterController), "Action_GainItem",
             new[] { typeof(FHRL.CharacterState), typeof(FHRL.ItemDef), typeof(string) });
         private static readonly MethodInfo BeginResult = AccessTools.Method(typeof(FHRL.CampaignController), "BeginResult");
@@ -148,13 +162,14 @@ namespace FrosthavenDevTools
             new System.Runtime.CompilerServices.ConditionalWeakTable<FHRL.MultiplayerGameController, DevCommands>();
         private static readonly MethodInfo GrantMethod = typeof(DevCommands).GetMethod(nameof(Grant));
         private static readonly MethodInfo FakeLootMethod = typeof(DevCommands).GetMethod(nameof(FakeDuplicateLoot));
+        private static readonly MethodInfo DrawEventMethod = typeof(DevCommands).GetMethod(nameof(DrawEvent));
 
         private readonly FHRL.MultiplayerGameController _game;
         public DevCommands(FHRL.MultiplayerGameController game) { _game = game; }
 
         public static bool Resolve(FHRL.MultiplayerGameController __instance, string path, ref ValueTuple<object, MethodInfo> __result)
         {
-            MethodInfo method = path == Path ? GrantMethod : path == FakeLootPath ? FakeLootMethod : null;
+            MethodInfo method = path == Path ? GrantMethod : path == FakeLootPath ? FakeLootMethod : path == DrawEventPath ? DrawEventMethod : null;
             if (method == null) return true;
             __result = (Handlers.GetValue(__instance, g => new DevCommands(g)), method);
             return false;
@@ -185,6 +200,15 @@ namespace FrosthavenDevTools
                 throw new FHRL.FHGameException("unknown character or item");
             BeginResult.Invoke(campaign, null);
             GainItem.Invoke(campaign.CharacterController, new object[] { c, item, "scenario_loot" });
+            return (FHRL.CampaignController.Result)EndResult.Invoke(campaign, null);
+        }
+
+        [FHRL.MultiplayerCommand(FHRL.MultiplayerCommandExecType.Everybody)]
+        public FHRL.CampaignController.Result DrawEvent()
+        {
+            FHRL.CampaignController campaign = _game.CampaignController;
+            BeginResult.Invoke(campaign, null);
+            ActivateOutpostEvent.Invoke(campaign.OutpostEventController, new object[] { !campaign.State.Outpost.Calendar.IsSummer });
             return (FHRL.CampaignController.Result)EndResult.Invoke(campaign, null);
         }
     }
