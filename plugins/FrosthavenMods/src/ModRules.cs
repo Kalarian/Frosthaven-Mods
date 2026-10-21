@@ -65,7 +65,7 @@ namespace FrosthavenMods
                 Name = "Dwarf's balance changes (mod)",
                 Description = "Tweaks from Dwarf74's Unofficial Frosthaven Campaign Tweaks (he maintains the official FAQ " +
                               "and was a main campaign playtester):\n" +
-                              "- Personal quests: once four are complete, the ones that unlock the Tavern (74) and the " +
+                              "- Personal quests: once one per party member is complete (2 to 4), the ones that unlock the Tavern (74) and the " +
                               "Stables (88) are dealt first, and new deals prefer quests that still unlock something new.\n" +
                               "- Early Barracks: in Winter of year 1 (from week 2, every 2 weeks), with morale 10+ and " +
                               "the Barracks at level 1, the outpost event is WO-20, the Barracks upgrade event.\n" +

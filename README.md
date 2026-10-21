@@ -83,7 +83,7 @@ Mod layout, `mods/<Name>/`:
     campaign (`FHGlue` binary state copy + its own `CampaignController`) and shows its effects under the option and its
     outcome text on hover; random outcomes show the actual roll.
   - **Dwarf's balance changes** (bit 29; `DwarfTweaks`), from Dwarf74's Unofficial Frosthaven Campaign Tweaks:
-    personal quest deal order (`GetAvailablePersonalQuests`: after 4 completed PQs, PQ_3/4/7/8 and PQ_9/10 first; quests
+    personal quest deal order (`GetAvailablePersonalQuests`: once one PQ per party member (2-4) is complete, PQ_3/4/7/8 and PQ_9/10 first; quests
     that unlock something new before ones that don't), early Barracks (WO-20 drawn in year 1 winter from week 12 every 2
     weeks with Barracks level 1 and morale 10+, once), PQ 07 waits 5 weeks, PQ 15 goal 60, Scenario 14 rework (Abael
     Herders goal added to the level data in `CSRLYML.GetCustomLevel`; automatic spawners off, `ScenarioScript_FH014`

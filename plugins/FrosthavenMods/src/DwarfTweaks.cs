@@ -13,7 +13,8 @@ namespace FrosthavenMods
     /// own commands (the personal quest deal, the outpost phase, scenario conclusions), from campaign state alone, so
     /// every co-op peer gets the same result.
     /// - Personal quest priority: PQ 03/04 (unlock Tavern 74) and PQ 07/08 (unlock Stables 88), plus PQ 09/10, are dealt
-    ///   first once four personal quests are complete; and a deal prefers quests that still unlock something new.
+    ///   first once as many personal quests are complete as there are characters in the party (2 to 4; Dwarf: "the 4th
+    ///   (or 2nd or 3rd, depending on party size)"); and a deal prefers quests that still unlock something new.
     /// - Early Barracks: from Winter of year 1, week 2, every 2 weeks: with the Barracks at level 1 and morale 10+, the
     ///   week's outpost event is WO-20 (the Barracks upgrade event); once only.
     /// - PQ 07 (Aesther Outpost): its two 6-week waits (sections 95.4 and 29.3) are 5 weeks.
@@ -43,10 +44,11 @@ namespace FrosthavenMods
                 CampaignState state = campaign.State;
                 List<PersonalQuestID> available = __result.ToList();
 
-                // The priority group, once four personal quests are complete. PQ 09 and 10 count while both are still
+                // The priority group, once one personal quest per party member (2 to 4) is complete. PQ 09 and 10 count while both are still
                 // in the deck ("either one"); once one of them is taken, the other is an ordinary quest.
                 var priority = new HashSet<PersonalQuestID>();
-                if (state.CompletedPersonalQuests.Count >= 4)
+                int trigger = Math.Max(2, Math.Min(4, state.PartyCharacters.Count()));
+                if (state.CompletedPersonalQuests.Count >= trigger)
                 {
                     foreach (PersonalQuestID id in Priority)
                         if (state.PersonalQuestDeckIDs.Contains(id)) priority.Add(id);
