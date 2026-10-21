@@ -43,6 +43,7 @@ namespace FrosthavenMods
         private static string _dir;
         private static StreamWriter _timeline, _steps;
         private static int _stepsSinceFlush, _lastPollFrame = -1;
+        private static bool _meKnown;
         private static float _lastFlush;
         private static readonly HashSet<string> Handled = new HashSet<string>();
 
@@ -67,6 +68,7 @@ namespace FrosthavenMods
                 Directory.CreateDirectory(_dir);
                 _timeline = new StreamWriter(Path.Combine(_dir, "timeline.txt"), true, Encoding.UTF8) { AutoFlush = true };
                 _steps = new StreamWriter(Path.Combine(_dir, "steps.txt"), true, Encoding.UTF8);
+                _meKnown = Me() != "?";
                 _timeline.WriteLine($"===== {DateTime.Now:yyyy-MM-dd HH:mm:ss} Frosthaven Mods {Plugin.Version}, game {Application.version}, " +
                                     $"role={CoopLog.Role()} me={Me()} =====");
                 return true;
@@ -98,7 +100,18 @@ namespace FrosthavenMods
             lock (Gate)
             {
                 if (!Open()) return;
-                try { _timeline.WriteLine($"{DateTime.Now:HH:mm:ss.fff} [{Me()}] {Where()} {line}"); } catch { }
+                try
+                {
+                    string me = Me();
+                    // A client's session starts before it has joined, so its header says me=?: name the player once known.
+                    if (!_meKnown && me != "?")
+                    {
+                        _meKnown = true;
+                        _timeline.WriteLine($"{DateTime.Now:HH:mm:ss.fff} [{me}] PLAYER me={me}");
+                    }
+                    _timeline.WriteLine($"{DateTime.Now:HH:mm:ss.fff} [{me}] {Where()} {line}");
+                }
+                catch { }
             }
         }
 

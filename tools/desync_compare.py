@@ -12,7 +12,8 @@ Report:
 2. checkpoints: the game's state fingerprints at each turn / rest / round start, compared across players; the first
    checkpoint where they differ (important = HP, positions, conditions, cards, decks, elements; full = also the
    random number generators, whose positions are listed too)
-3. applied actions: the order each PC applied the players' inputs in; the first place they differ
+3. scenario actions: the order each PC ran the players' inputs in, actions one PC ran and another didn't, actions the
+   game's queue dropped; the first place the order differs
 4. rules-engine steps: the first message where the PCs' sequences differ, with context
 5. state dumps saved at the desync: the first lines that differ between players (same desync ID)
 """
@@ -27,13 +28,18 @@ from pathlib import Path
 
 CHECK = re.compile(r"CHECKPOINT round=(?P<round>-?\d+) phase=(?P<phase>\S+) actor=(?P<actor>\S+) action#(?P<action>-?\d+) "
                    r"lastGameAction=(?P<last>-?\d+) important=(?P<important>\S+) full=(?P<full>\S+) rng=(?P<rng>.*)$")
-APPLY = re.compile(r"APPLY (\[\d+:\d+\] \S+\(\[[^\]]*\] \S+)")
+# A logged game action: SENT / QUEUED / APPLY [player:n] GameAction([type] Name @ PHASE) ...
+ACTION = re.compile(r" (?P<kind>SENT|QUEUED|APPLY) \[(?P<player>\d+):(?P<n>\d+)\] GameAction\(\[\d+\] (?P<name>\S+) @ (?P<phase>[^)]*)\)")
+# Outpost commands: the host checks a client's command and re-sends it under its own ID, so IDs differ per PC
+# (tools/coop_compare.py compares the outpost instead).
+OUTPOST_ACTIONS = {"FHMultiplayerCommand"}
 
 
 class Player:
     def __init__(self, label):
         self.label = label
         self.files = {}  # name -> text
+        self.me = None  # player number
 
     def get(self, suffix):
         return next((t for n, t in self.files.items() if n.endswith(suffix)), "")
@@ -65,11 +71,40 @@ def load(path, session):
     names = sorted(found, reverse=True)
     name = names[min(session - 1, len(names) - 1)]
     timeline = found[name].get("timeline.txt", "")
-    header = timeline.splitlines()[0] if timeline else ""
-    me = re.search(r"me=(\S+)", header)
+    # The header says me=? when the session started before joining; the PLAYER line (or any line's tag) has it then.
+    me = re.search(r"me=((?:host|client)\d+)", timeline) or re.search(r"^\S+ \[((?:host|client)\d+)\]", timeline, re.M)
     p = Player(f"{Path(path).stem} [{me.group(1) if me else '?'}] session {name}")
+    p.me = int(re.sub(r"\D", "", me.group(1))) if me else None
     p.files = found[name]
     return p
+
+
+def applied_order(p):
+    """The scenario actions in the order this PC ran them. A PC runs its own actions directly (only actions from others
+    go through the game's action queue), so its own actions come from its SENT lines; an own action the host checks
+    first comes back and is applied from the queue, and that APPLY is where it ran. Returns (order, dropped): order is a
+    list of (id, label); dropped lists actions from others that were queued but never applied (the game's queue drops
+    actions it finds out of phase)."""
+    seen, sent, queued, order = set(), {}, {}, []
+    lines = p.get("timeline.txt").splitlines()
+    applied = {f"{m['player']}:{m['n']}" for m in map(ACTION.search, lines) if m and m["kind"] == "APPLY"}
+    for line in lines:
+        m = ACTION.search(line)
+        if not m or m["name"] in OUTPOST_ACTIONS:
+            continue
+        aid, label = f"{m['player']}:{m['n']}", f"[{m['player']}:{m['n']}] {m['name']}@{m['phase']}"
+        if m["kind"] == "QUEUED":
+            queued.setdefault(aid, label)
+        elif m["kind"] == "SENT":
+            sent.setdefault(aid, label)
+            if p.me is not None and int(m["player"]) == p.me and aid not in applied and aid not in seen:
+                seen.add(aid)
+                order.append((aid, label))
+        elif aid not in seen:
+            seen.add(aid)
+            order.append((aid, label))
+    dropped = [label for aid, label in queued.items() if aid not in seen]
+    return order, dropped
 
 
 def section(title):
@@ -125,17 +160,36 @@ def main():
         if previous:
             print(f"   last matching checkpoint: {previous[-1]}")
 
-    section("3. Order of applied actions")
-    orders = [[m.group(1) for m in map(APPLY.search, p.get("timeline.txt").splitlines()) if m] for p in players]
-    print(f"actions applied per player: {[len(o) for o in orders]}")
-    n = min(map(len, orders)) if orders else 0
-    split = next((i for i in range(n) if len({o[i] for o in orders}) > 1), None)
-    if split is None:
-        print("same order on every PC" + (" (one PC applied more: the session continued or ended differently)" if len({len(o) for o in orders}) > 1 else ""))
+    section("3. Scenario actions: the order each PC ran them in (outpost commands: see coop_compare.py)")
+    if any(p.me is None for p in players):
+        print("(a PC's player number is unknown: its own actions are left out)")
+    results = [applied_order(p) for p in players]
+    orders = [o for o, _ in results]
+    print(f"actions run per player: {[len(o) for o in orders]}")
+    for i, (_, dropped) in enumerate(results):
+        if dropped:
+            print(f"P{i + 1} QUEUED BUT NEVER RAN {len(dropped)} (dropped by the game's queue, or still queued at the end): "
+                  + ", ".join(dropped[:15]))
+    ids = [{aid for aid, _ in o} for o in orders]
+    everywhere = set.intersection(*ids) if ids else set()
+    # An action missing on one PC only matters if that PC carried on past it (otherwise its session just ended sooner).
+    for i, o in enumerate(orders):
+        last = max((k for k, (aid, _) in enumerate(o) if aid in everywhere), default=-1)
+        only = [label for aid, label in o[:last + 1] if aid not in everywhere]
+        if only:
+            print(f"P{i + 1} RAN {len(only)} THAT ANOTHER PC NEVER RAN (before their last shared action): " + ", ".join(only[:15]))
+    common = [[label for aid, label in o if aid in everywhere] for o in orders]
+    n = len(everywhere)
+    split = next((k for k in range(n) if len({c[k] for c in common}) > 1), None)
+    if not n:
+        print("no actions in common" if any(orders) else "no scenario actions recorded")
+    elif split is None:
+        print(f"the {n} actions every PC ran were run in the same order")
     else:
-        print(f"FIRST DIFFERENCE at action {split + 1}:")
-        for i, o in enumerate(orders):
-            print(f"   P{i + 1}: " + " | ".join(o[max(0, split - 2): split + 3]))
+        print(f"ORDER DIFFERS at shared action {split + 1} of {n} (harmless if players acted at the same moment, e.g. "
+              "picking cards; suspicious if the checkpoints split right after):")
+        for i, c in enumerate(common):
+            print(f"   P{i + 1}: " + " | ".join(c[max(0, split - 2): split + 3]))
 
     section("4. Rules-engine steps")
     steps = [[l for l in p.get("steps.txt").splitlines() if l.strip()] for p in players]
