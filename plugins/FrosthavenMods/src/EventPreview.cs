@@ -133,7 +133,14 @@ namespace FrosthavenMods
             }
         }
 
-        private static string Clean(string text) => text.Replace("\n", " ").Trim();
+        /// <summary>One line, without the game's size/font/style tags (e.g. "New quest unlocked!" sets the quest name in
+        /// a large title font, which overrode the small preview size and shrank the whole option button).</summary>
+        private static string Clean(string text) =>
+            LayoutTags.Replace(text, "").Replace("\n", " ").Trim();
+
+        private static readonly System.Text.RegularExpressions.Regex LayoutTags = new System.Text.RegularExpressions.Regex(
+            "</?(size|font|style|voffset|line-height|cspace|mspace|allcaps|uppercase|lowercase|smallcaps|align|indent|margin|pos|width)(=[^>]*)?>",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
 
         /// <summary>"Event_EverybodyChooseLoseUpToGold" -> "everybody choose lose up to gold".</summary>
         private static string Words(string name)
@@ -171,7 +178,9 @@ namespace FrosthavenMods
                     if (tip == null)
                     {
                         tip = button.gameObject.AddComponent<UITextTooltipTarget>();
-                        tip.Initialize(UITooltipManager.Corner.Auto, Vector2.zero, false, 560f, 50f, true, false);
+                        // autoAdjustHeight false, as in all of the game's own text tooltips: for this tooltip type it
+                        // means "fit the text" (true keeps the last height, so the framed background collapses).
+                        tip.Initialize(UITooltipManager.Corner.Auto, Vector2.zero, false, 560f, 50f, autoAdjustHeight: false, hideBackground: false);
                     }
                     tip.enabled = true;
                     tip.SetText(p.Outcome + "\n\n<color=#E6D3A3>" + p.Summary + "</color>");
