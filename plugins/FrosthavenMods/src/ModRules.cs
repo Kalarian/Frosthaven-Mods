@@ -36,6 +36,7 @@ namespace FrosthavenMods
         public const ERulesFlag RevealEvents = (ERulesFlag)(1 << 28);
         public const ERulesFlag DwarfTweaks = (ERulesFlag)(1 << 29);
         public const ERulesFlag BugFixes = (ERulesFlag)(1 << 30);
+        public const ERulesFlag MilestoneSaves = (ERulesFlag)(1 << 23);
 
         public static readonly List<Rule> All = new List<Rule>
         {
@@ -102,6 +103,17 @@ namespace FrosthavenMods
                               "discount is charged as shown; PQ 14 needs five different areas; the last week of a season " +
                               "counts as week 10 (not 0); SO-10's delivery arrives in later years too; rolling modifiers " +
                               "aren't duplicated by a mid-attack reshuffle.",
+            },
+            new Rule
+            {
+                Flag = MilestoneSaves,
+                Name = "Milestone saves (mod)",
+                Description = "The host's game makes a named save at the start of each scenario and of each outpost phase " +
+                              "(\"Mod backup - week 23 - scenario 14 start\", \"Mod backup - week 24 - outpost\"). They are " +
+                              "in the usual Load list. The newest " + FrosthavenMods.MilestoneSaves.Keep + " are kept; your own " +
+                              "named saves and the game's autosaves are never touched.\n\n" +
+                              "The game keeps only its last 15 autosaves (about the last hour or two of play). To go back " +
+                              "in co-op, the host loads a backup on their own, then hosts again. Not available in Iron Man.",
             },
         };
 

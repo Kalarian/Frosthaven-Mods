@@ -37,8 +37,8 @@ some steps are done at the same moment.
 4. Spend some of that gold so the characters own items (the shop, or the Craftsman):
    - every character owns **at least 2 items**, and at least one of them is **worn** (equipped);
    - **two characters own the same item** (e.g. both buy the same cheap item). That's for the "already owns" check.
-5. In Options > **Custom Rules**, turn on all five mod rules: **Tradeable resources and equipment**, **Share duplicate
-   loot**, **Reveal event outcomes**, **Dwarf's balance changes** and **Game bug fixes**.
+5. In Options > **Custom Rules**, turn on all six mod rules: **Tradeable resources and equipment**, **Share duplicate
+   loot**, **Reveal event outcomes**, **Dwarf's balance changes**, **Game bug fixes** and **Milestone saves**.
 6. Optional, solo: test duplicate loot and battle stats (see the end of this file). Then save and quit to the main
    menu.
 
@@ -136,7 +136,7 @@ To check an item on a character: select them and open their equipment / item scr
 
 | # | Who | Do | Expected |
 |---|---|---|---|
-| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows all five rules on, for both players. |
+| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows all six rules on, for both players. |
 | I2 | Both | **CHECKPOINT** (#9) | Identical to #8. |
 | I3 | Both | Start any scenario together, bringing **given** items, and play 3–4 rounds normally. Use a given item if you can. **Each player short rests at least once** (with Restful Slippers if anyone owns them). | **No desync message.** The given items work. (The Give button is hidden during scenarios.) |
 | I3b | Host | During the scenario, open Options > **Custom Rules**. | **Share duplicate loot**, **Dwarf's balance changes** and **Game bug fixes** are greyed out with "Locked during online scenarios" in their description. **Tradeable resources** and **Reveal event outcomes** can still be switched. Close without changing anything. |
@@ -144,6 +144,7 @@ To check an item on a character: select them and open their equipment / item scr
 | I5 | Both | Click **Campaign** (top right of the Statistics page), then **This scenario**. | The buttons don't overlap the title. Campaign shows a **Scenarios played** row and totals; each player's count is the number of scenarios they've finished with the mod (they can differ if one played more solo). This scenario switches back. |
 | I6 | Host | Continue back to the outpost. | If someone looted a copy of an item they already own, the item reward window opens with nothing assigned. The host (party leader) left-clicks one character, then another: the item moves in one click, on both screens. Done assigns it (Share duplicate loot). |
 | I7 | Both | **CHECKPOINT** (#10) | |
+| I8 | Host | Later, solo (not now: loading is blocked online): open the Load list. | It has **Mod backup - week N - scenario X start** (from I3) and **Mod backup - week N - outpost** (from I6). The client's Load list has none (backups are host only). |
 
 ## J. Events (whenever one comes up)
 
@@ -189,3 +190,13 @@ A duplicate drop is rare, so the dev tools can fake one (solo only, test campaig
    icon. Note anything memorable (a crit, a null, a summon, a heal) and check the matching rows.
 3. Click **Campaign**: Scenarios played goes up by one for every scenario finished with the mod. Click
    **This scenario** to switch back.
+
+## Solo: milestone saves (host, any time)
+
+1. Turn on **Milestone saves** in Custom Rules. Start a scenario: once the first round starts, the Load list (from
+   the main menu, or in the outpost) has **Mod backup - week N - scenario X start**.
+2. Finish the scenario (Ctrl+F10 wins it) and continue to the outpost: once the game autosaves there (it does after
+   the scenario screens), the Load list also has **Mod backup - week N - outpost**.
+3. Load the scenario-start backup: the scenario starts again from round 1, as it was.
+4. Restarting a scenario doesn't add a second backup for it. The 21st backup removes the oldest one; your own named
+   saves (like "Mid Battle") stay.

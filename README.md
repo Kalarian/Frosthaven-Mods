@@ -38,7 +38,7 @@ Mod layout, `mods/<Name>/`:
 `loader/` (see its README). Every code feature is a **campaign house rule**:
 - The game has a House Rules screen (Options > House Rules), but it's hidden in this build because
   `GameSettingsService.ValidCampaignRules` is `None`. The plugin shows it for campaigns and adds our own switches.
-- Our rules are extra bits (from `1 << 24` up) in the game's own campaign rules number (`PartyAdventureData.Rules`).
+- Our rules are extra bits (`1 << 23` and up) in the game's own campaign rules number (`PartyAdventureData.Rules`).
   The game saves that number in the save header and sends it to co-op players (join token + `ChangeHouseRuleSettings`),
   so the host's choice reaches everyone and is stored in the campaign. The vanilla game ignores unknown bits.
 - The plugin fixes three game bugs on the way:
@@ -102,6 +102,11 @@ Mod layout, `mods/<Name>/`:
     when buying (`GetDiscountedCost(applyPerc)` inside `BuyItem`); PQ 14 trackers capped at 1 per area; season week
     `(Week - 1) % 10 + 1`; SO-10 delivery in week 2 of the right next summer; mid-chain reshuffles match in-use rolling
     copies to their discarded originals.
+  - **Milestone saves** (bit 23; `MilestoneSaves`): after the game's own autosave at the start of a scenario (round
+    0/1) and the first one in the outpost after a scenario ends, the host (or solo player) makes a named save with the
+    game's Save menu call (`SaveData.ManualSaveCurrentAdventureData`): "Mod backup - week N - scenario X start" /
+    "... - outpost". The game trims its autosaves to 15 but never deletes named saves; we keep our newest 20. Not in
+    Iron Man. Nothing is sent to other players.
   - Rules marked `AffectsScenarios` (duplicate loot, Dwarf's changes, bug fixes) are locked during online scenarios:
     a rule change travels outside the scenario lockstep and could land at different moments on different PCs.
   - Item reward window (all item rewards, not a switch; `RewardWindowPatches`): opens with nothing assigned instead of
