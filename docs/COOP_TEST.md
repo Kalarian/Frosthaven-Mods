@@ -156,6 +156,7 @@ point in the session, do this before the host chooses:
 | J1 | Both | Read the line under each option (gold, damage, morale, "Outpost attack!", "Then: …"). | **The same line on both PCs.** |
 | J2 | Both | Hover over each option. | The outcome text appears. |
 | J3 | Host | Choose an option. | The result (outcome text and effects) matches what the preview showed, on both PCs. Note the event ID (e.g. SO-12) if anything differs. |
+| J4 | Both | If it's an outpost attack from **WO-33, WO-34, WO-35, WO-71 or SO-23**, note the order buildings are attacked in. | It follows the card (Game bug fixes): WO-33 even-numbered buildings from highest number down, WO-34 buildings 1–40 from highest number down, WO-35 highest level first, WO-71 lowest level first, SO-23 only even-numbered buildings. Same on both PCs. |
 
 ## After the test
 

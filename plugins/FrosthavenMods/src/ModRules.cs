@@ -102,7 +102,11 @@ namespace FrosthavenMods
                               "- Gameplay fixes: rebuilding costs no extra morale; morale can't go below 0; the Jeweler " +
                               "discount is charged as shown; PQ 14 needs five different areas; the last week of a season " +
                               "counts as week 10 (not 0); SO-10's delivery arrives in later years too; rolling modifiers " +
-                              "aren't duplicated by a mid-attack reshuffle.",
+                              "aren't duplicated by a mid-attack reshuffle; the loot deck gets its fair share of " +
+                              "\"+2 at 2-3 players\" material cards, and Restful Slippers offers fairly picked cards.\n" +
+                              "- Outpost attacks: events that give a target order (WO-33, WO-34, WO-35, WO-71) follow it, " +
+                              "SO-23 spares odd-numbered buildings, and WO-33's threat cards go back into the town guard " +
+                              "deck instead of being lost for the campaign.",
             },
             new Rule
             {

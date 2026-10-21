@@ -102,6 +102,10 @@ Mod layout, `mods/<Name>/`:
     when buying (`GetDiscountedCost(applyPerc)` inside `BuyItem`); PQ 14 trackers capped at 1 per area; season week
     `(Week - 1) % 10 + 1`; SO-10 delivery in week 2 of the right next summer; mid-chain reshuffles match in-use rolling
     copies to their discarded originals.
+    Batch 3: the loot deck's and Restful Slippers' calls to the off-by-one `Extensions.Shuffle<T>` are swapped for a
+    fair shuffle with the same dice (transpilers); WO-33's "threat" town guard draws (`DrawTownGuardCard(dontUse)`) are
+    filed with the used cards so the next reshuffle returns them; WO-33/34/35/71 and SO-23 attack targets are re-ordered
+    (and SO-23 filtered to even IDs) to match the cards.
   - **Milestone saves** (bit 23; `MilestoneSaves`): after the game's own autosave at the start of a scenario (round
     0/1) and the first one in the outpost after a scenario ends, the host (or solo player) makes a named save with the
     game's Save menu call (`SaveData.ManualSaveCurrentAdventureData`): "Mod backup - week N - scenario X start" /

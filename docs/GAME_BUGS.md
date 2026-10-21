@@ -31,9 +31,9 @@ Fixed by the mod pack's **Game bug fixes** rule are marked ✅.
 | # | Bug | Status | Effect |
 |---|---|---|---|
 | R1 ✅ | Attack modifier shuffle is off by one (Sattolo) and new decks always have a +0 at the bottom | verified | Nulls and x2s ~6.25% of draws each instead of ~6.0% (`tools/amd_sim.py`) |
-| R2 | The same off-by-one shuffle biases the loot deck and Restful Slippers choices | confirmed | Small parties get noticeably fewer "+2 at 2-3 players" material loot cards |
-| R3 | WO-33 option A permanently deletes town guard cards drawn "for threat" | confirmed | Up to 8 cards gone per attack, possibly Success/Wrecked cards |
-| R4 | Attack targets shuffled although the card gives a fixed order (WO-33/34/35/71; SO-23 also hits odd buildings) | confirmed | Wrong buildings attacked |
+| R2 ✅ | The same off-by-one shuffle biases the loot deck and Restful Slippers choices | confirmed | Small parties get noticeably fewer "+2 at 2-3 players" material loot cards |
+| R3 ✅ | WO-33 option A permanently deletes town guard cards drawn "for threat" | confirmed | Up to 8 cards gone per attack, possibly Success/Wrecked cards |
+| R4 ✅ | Attack targets shuffled although the card gives a fixed order (WO-33/34/35/71; SO-23 also hits odd buildings) | confirmed | Wrong buildings attacked |
 | R5 | SO-51 bet: 51% win chance instead of 50%; guaranteed with an Algox or Inox | confirmed | Low |
 | R6 | Monster wild elements are picked at random; the rules let the party decide | confirmed | Low |
 | R7 | Challenge deck reset without a shuffle (after 190.1) | likely | Challenges return in the order completed |
@@ -71,7 +71,7 @@ Fixed by the mod pack's **Game bug fixes** rule are marked ✅.
 | O2 ✅ | PQ 14 ("a quest in each of 5 areas") completes with 5 quests in one area | confirmed | Quest done too early |
 | O3 ✅ | Morale can go below 0 | confirmed | |
 | O4 ✅ | Jeweler discount shown and checked but never charged; also limited to Jeweler items (text: all small items; the fix charges what's shown, Jeweler items only) | confirmed | Players pay full price |
-| O5 | Inn allows 5 / 9 purchases a week at level 2 / 3 instead of 2 / 3 | confirmed | Too generous |
+| O5 | Inn allows 5 / 9 purchases a week at level 2 / 3 instead of 2 / 3 | verified | Too generous (left unfixed on purpose: it makes the game easier, and parties run out of gold first) |
 | O6 ✅ | "Week in this season" is `Week % 10`: the last week of each season is week 0 | verified | SO-28 wrecks 2 buildings in week 10; next-summer retirement sections land in winter |
 | O7 ✅ | SO-10 merchant delivery is lost in year 2+ after paying 15 gold | confirmed | Gold lost for nothing |
 | O8 | Crafted items sell for their whole component tree, not 2 gold per resource or item | confirmed (maybe intended) | Crafted items sell for more |

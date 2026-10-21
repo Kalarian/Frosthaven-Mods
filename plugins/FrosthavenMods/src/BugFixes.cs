@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using HarmonyLib;
 using ScenarioRuleLibrary;
 using ScenarioRuleLibrary.YML;
@@ -274,5 +275,108 @@ namespace FrosthavenMods
 
         private static SharedLibrary.Random InfuseRandom() =>
             On && ScenarioManager.CurrentScenarioState?.ScenarioRNG != null ? ScenarioManager.CurrentScenarioState.ScenarioRNG : SharedLibrary.Client.SharedClient.GlobalRNG;
+
+        // ---- batch 3 (docs/GAME_BUGS.md)
+
+        // R2: the loot deck takes the first k cards of each material's / coin's shuffled pool, and the game's off-by-one
+        // shuffle never leaves a card where it was, so the pool's first cards (the "+2 at 2-3 players" materials) were
+        // drawn less often: with 2 lumber in the loot table, 0.57 of those cards per scenario instead of 0.75. The same
+        // shuffle picks the 3 cards a Restful Slippers short rest offers. Both now use a fair shuffle with the same dice.
+        private static readonly System.Reflection.MethodInfo GameShuffle = AccessTools.FirstMethod(typeof(Extensions),
+            m => m.Name == nameof(Extensions.Shuffle) && m.IsGenericMethodDefinition && m.GetParameters().Length == 2);
+
+        private static void Shuffle<T>(IList<T> list, SharedLibrary.Random rng)
+        {
+            if (!On || list == null) { list.Shuffle(rng); return; }
+            rng = rng ?? ScenarioManager.CurrentScenarioState.ScenarioRNG;
+            for (int i = list.Count - 1; i > 0; i--)
+            {
+                int j = rng.Next(i + 1);
+                T t = list[i];
+                list[i] = list[j];
+                list[j] = t;
+            }
+        }
+
+        /// <summary>Replaces every call of the game's generic shuffle in a method with our <see cref="Shuffle{T}"/>.</summary>
+        private static IEnumerable<CodeInstruction> FairShuffles(IEnumerable<CodeInstruction> code, string what)
+        {
+            int swapped = 0;
+            foreach (CodeInstruction ins in code)
+            {
+                if (ins.opcode == System.Reflection.Emit.OpCodes.Call && ins.operand is System.Reflection.MethodInfo m
+                    && m.IsGenericMethod && m.GetGenericMethodDefinition() == GameShuffle)
+                {
+                    ins.operand = AccessTools.Method(typeof(BugFixes), nameof(Shuffle)).MakeGenericMethod(m.GetGenericArguments());
+                    swapped++;
+                }
+                yield return ins;
+            }
+            if (swapped == 0) Plugin.Log.LogWarning($"Game bug fixes: '{what}' not applied (the game's code changed)");
+        }
+
+        [HarmonyPatch(typeof(CLootDeck), nameof(CLootDeck.Generate))]
+        [HarmonyTranspiler]
+        private static IEnumerable<CodeInstruction> FairLootDeck(IEnumerable<CodeInstruction> code) => FairShuffles(code, "fair loot deck");
+
+        [HarmonyPatch]
+        private static class FairShortRestChoices
+        {
+            private static System.Reflection.MethodBase TargetMethod() =>
+                AccessTools.EnumeratorMoveNext(AccessTools.Method(typeof(CardsHandUI), "PerformImprovedShortRestCoroutine"));
+
+            private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> code) => FairShuffles(code, "fair Restful Slippers choices");
+        }
+
+        // R3: WO-33 option A draws a town guard card per target "for threat" with dontUse, which took it out of the deck
+        // without filing it with the used cards, so the reshuffle at the next attack never brought it back: up to 8 cards
+        // (possibly the Success or Wrecked card) lost for the rest of the campaign. File it with the used cards.
+        [HarmonyPatch(typeof(FHRL.AttackController), "DrawTownGuardCard")]
+        [HarmonyPostfix]
+        private static void ReturnThreatCard(FHRL.AttackController __instance, bool dontUse, FHRL.TownGuardAttackModifierDef __result)
+        {
+            if (!On || !dontUse || __result == null) return;
+            FHRL.OutpostState outpost = __instance.CampaignController?.State?.Outpost;
+            outpost?.TownGuardUsedDeckIDs.Add(__result.ID);
+        }
+
+        // R4: attack events whose card gives a target order shuffled their targets anyway (and SO-23 also took
+        // odd-numbered buildings). The attack drops unbuilt and wrecked buildings from the list afterwards. Ties ("players
+        // break ties") keep the game's random order; SO-23's "closest to the Workshop" stays random, as the game does for
+        // every "closest to" event.
+        [HarmonyPatch(typeof(FHRL.OutpostEvents.WO_33_OutpostEventDef), nameof(FHRL.OutpostEventDef.GenerateAttackTargets))]
+        [HarmonyPostfix]
+        private static void WO33Targets(ref List<FHRL.BuildingState> __result) // even-numbered, descending
+        {
+            if (On && __result != null) __result = __result.OrderByDescending(b => b.ID.ID).ToList();
+        }
+
+        [HarmonyPatch(typeof(FHRL.OutpostEvents.WO_34_OutpostEventDef), nameof(FHRL.OutpostEventDef.GenerateAttackTargets))]
+        [HarmonyPostfix]
+        private static void WO34Targets(ref List<FHRL.BuildingState> __result) // 1 to 40, descending
+        {
+            if (On && __result != null) __result = __result.OrderByDescending(b => b.ID.ID).ToList();
+        }
+
+        [HarmonyPatch(typeof(FHRL.OutpostEvents.WO_35_OutpostEventDef), nameof(FHRL.OutpostEventDef.GenerateAttackTargets))]
+        [HarmonyPostfix]
+        private static void WO35Targets(ref List<FHRL.BuildingState> __result) // highest level first
+        {
+            if (On && __result != null) __result = __result.OrderByDescending(b => b.Level).ToList();
+        }
+
+        [HarmonyPatch(typeof(FHRL.OutpostEvents.WO_71_OutpostEventDef), nameof(FHRL.OutpostEventDef.GenerateAttackTargets))]
+        [HarmonyPostfix]
+        private static void WO71Targets(ref List<FHRL.BuildingState> __result) // lowest level first
+        {
+            if (On && __result != null) __result = __result.OrderBy(b => b.Level).ToList();
+        }
+
+        [HarmonyPatch(typeof(FHRL.OutpostEvents.SO_23_OutpostEventDef), nameof(FHRL.OutpostEventDef.GenerateAttackTargets))]
+        [HarmonyPostfix]
+        private static void SO23Targets(ref List<FHRL.BuildingState> __result) // even-numbered only
+        {
+            if (On && __result != null) __result = __result.Where(b => b.IsEvenID).ToList();
+        }
     }
 }
