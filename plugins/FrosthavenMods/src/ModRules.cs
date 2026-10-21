@@ -94,7 +94,10 @@ namespace FrosthavenMods
                               "- Fair attack modifier shuffles. The game's shuffle is off by one (a card can never stay " +
                               "where it was) and new decks always put a +0 at the bottom, which makes nulls and x2s " +
                               "slightly more frequent (about 6.25% of draws each instead of 6%). With this on, player " +
-                              "and monster decks are shuffled fairly.",
+                              "and monster decks are shuffled fairly.\n" +
+                              "- Co-op desync fixes: a failed outpost command no longer freezes that player's outpost; " +
+                              "the Strategy favor draws the same cards for everyone; a Restful Slippers short rest no " +
+                              "longer puts the players' dice out of step; \"infuse any element\" uses the shared dice.",
             },
         };
 

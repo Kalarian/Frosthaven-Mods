@@ -94,6 +94,10 @@ Mod layout, `mods/<Name>/`:
     (never the bottom: a +0 is always the bottom card of a new deck). Nulls and x2s come up ~6.25% of draws each instead
     of ~6.0% (`tools/amd_sim.py` simulates both). The mod adds a correct Fisher-Yates shuffle from the scenario RNG after
     every build / reshuffle of player and monster decks.
+    Co-op desync fixes (see `docs/GAME_BUGS.md`): a finalizer on `MultiplayerGameController.ApplyCommand` clears
+    `CampaignController._currentResult` after a failed command; transpilers swap the Strategy favor's clock-seeded
+    `new FHRandom()` for the campaign RNG, Restful Slippers' `ScenarioRNG` (UI code, one PC only) for a local
+    generator, and "infuse any"'s `SharedClient.GlobalRNG` for `ScenarioRNG`.
   - Rules marked `AffectsScenarios` (duplicate loot, Dwarf's changes, bug fixes) are locked during online scenarios:
     a rule change travels outside the scenario lockstep and could land at different moments on different PCs.
   - Item reward window (all item rewards, not a switch; `RewardWindowPatches`): opens with nothing assigned instead of

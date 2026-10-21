@@ -11,16 +11,16 @@ Fixed by the mod pack's **Game bug fixes** rule are marked ✅.
 
 | # | Bug | Where | Status | Effect |
 |---|---|---|---|---|
-| D1 | A failed outpost command never clears the "command in progress" marker | `CampaignController.BeginResult/EndResult`, `MultiplayerGameController.ApplyCommand` (no try/finally) | verified | That PC's outpost rejects every later command until restart; partial changes stay |
-| D2 | Restful Slippers / improved short rest draws from the scenario dice in UI code on the resting player's PC only | `CardsHandUI.PerformImprovedShortRestCoroutine` | confirmed | The dice drift apart, so later shuffles and draws differ: desync |
+| D1 ✅ | A failed outpost command never clears the "command in progress" marker | `CampaignController.BeginResult/EndResult`, `MultiplayerGameController.ApplyCommand` (no try/finally) | verified | That PC's outpost rejects every later command until restart; partial changes stay |
+| D2 ✅ | Restful Slippers / improved short rest draws from the scenario dice in UI code on the resting player's PC only | `CardsHandUI.PerformImprovedShortRestCoroutine` | confirmed | The dice drift apart, so later shuffles and draws differ: desync |
 | D3 | Short rest's random card is drawn in UI code, with incomplete compensation on other PCs | `CardsHandUI` short rest | confirmed (path-dependent) | Same as D2 in some paths |
-| D4 | The Strategy favor draws monster cards with an unseeded random generator inside a command every PC runs | campaign favor code | confirmed | Each player sees different cards; campaign state diverges |
+| D4 ✅ | The Strategy favor draws monster cards with an unseeded random generator inside a command every PC runs | campaign favor code | confirmed | Each player sees different cards; campaign state diverges |
 | D5 | Client rollback/replay can lose the client's own confirmed outpost commands | `FHMultiplayerClient` | confirmed | Client's outpost silently differs from the host's |
 | D6 | Gameplay actions dropped on a phase mismatch (use item, select target, augments, waypoints) | `ActionProcessor` | confirmed | One PC applies an action another skipped |
 | D7 | Receivers replay some actions through their own UI (ShortRest clicks a button on whatever dialog is open) | proxies | likely | Wrong choice applied on a receiving PC |
 | D8 | Main thread changes rules state while the rules worker thread runs | `Choreographer` / element and RNG changes | likely | Timing-dependent divergence |
 | D9 | Level events run on local UI events and an 8 ms per-frame budget | `LevelEventsController` | likely | Event effects can apply at different points on different PCs |
-| D10 | "Infuse any element" without a picker uses each PC's own random generator | `CAbilityInfuse` | verified; latent (all current cards show the picker) | Different element per PC |
+| D10 ✅ | "Infuse any element" without a picker uses each PC's own random generator | `CAbilityInfuse` | verified; latent (all current cards show the picker) | Different element per PC |
 | D11 | Entering a scenario advances the campaign dice outside any command | `FHGlue.SetCurrentScenario` | likely | Drift if a client skips or rolls back |
 | D12 | Prop rotations from each PC's own random generator are stored in synced state | `CAbilityCreate` etc. | confirmed | Harmless "Minor desync" noise that masks real drift (only the first minor desync is reported) |
 | D13 | Closing a story popup resumes the rules engine on that PC only | story messages | confirmed | Low |
