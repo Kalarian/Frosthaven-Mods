@@ -7,9 +7,9 @@ read and the effect follows from it; **likely** = the code path is clear but the
 
 Fixed by the mod pack's **Game bug fixes** rule are marked ✅.
 
-**Rechecked on 1.0.34121** (Steam patch of 2026-10-21, compared file by file with the 1.0.34058 decompile): the patch
-changed none of the code behind the bugs below, so every one is still present and every ✅ fix is still needed. The
-patch reworked how finished active bonuses are cleaned up, movement limits, doors with a figure in them during
+**Rechecked on 1.0.34121** (Steam patch of 2026-10-21, compared file by file with the 1.0.34058 decompile): the code
+behind every ✅ bug is unchanged, so every fix is still needed. None of the patch's changes addresses one of the other
+bugs either (they weren't each re-traced). The patch reworked how finished active bonuses are cleaned up, movement limits, doors with a figure in them during
 pathfinding, lootable-hex detection, scenario scripts 34, 64, 67, 108, 136 and RFS-7, and made a co-op client wait for
 the take-damage window before applying that action (near D6, not the same case). It also raised the save version
 from 88 to 89.
