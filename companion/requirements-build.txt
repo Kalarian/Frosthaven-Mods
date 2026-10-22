@@ -1,0 +1,18 @@
+# The build stack (the same pins MnM Meter is built and tested with, 2026-09-24). build.ps1 installs exactly these;
+# to move to a newer stack, change a pin on purpose and rebuild.
+pyinstaller==6.22.3
+pyinstaller-hooks-contrib==2026.7
+pywebview==6.2.1
+pythonnet==3.1.0
+clr_loader==0.3.1
+# Their dependencies, pinned too so a rebuild resolves to the same set (pip itself is not: it never ships).
+altgraph==0.17.5
+bottle==0.13.4
+cffi==2.1.1
+packaging==26.3
+pefile==2024.8.26
+proxy_tools==0.1.0
+pycparser==3.0
+pywin32-ctypes==0.2.3
+setuptools==84.0.0
+typing_extensions==4.16.0

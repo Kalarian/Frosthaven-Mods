@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frosthaven Companion</title>
+<link rel="icon" href="/web/icon.ico">
+<style>
+:root {
+  --bg: #12151a; --panel: #1b2027; --panel2: #222832; --line: #2f3742; --text: #e8e2d4; --dim: #a59f92;
+  --gold: #e3c98b; --gold2: #c9a75a; --ok: #7fc48a; --warn: #e6b35a; --bad: #e07a6a; --link: #8fc3e8;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 15px/1.5 "Segoe UI", system-ui, sans-serif; }
+body { display: flex; flex-direction: column; }
+header { display: flex; align-items: center; gap: 20px; padding: 0 16px; height: 52px; background: #0d1014; border-bottom: 1px solid var(--line); flex: none; }
+header h1 { font: 600 17px Cambria, Georgia, serif; color: var(--gold); margin: 0; letter-spacing: .3px; white-space: nowrap; }
+nav { display: flex; gap: 4px; height: 100%; overflow-x: auto; }
+nav button { background: none; border: 0; border-bottom: 2px solid transparent; color: var(--dim); font: inherit; padding: 0 14px; cursor: pointer; white-space: nowrap; }
+nav button:hover { color: var(--text); }
+nav button.on { color: var(--gold); border-bottom-color: var(--gold); }
+nav button .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--warn); margin-left: 6px; vertical-align: 2px; }
+.spacer { flex: 1; }
+.ver { color: var(--dim); font-size: 12px; white-space: nowrap; }
+main { flex: 1; position: relative; min-height: 0; }
+.view { position: absolute; inset: 0; display: none; }
+.view.on { display: flex; flex-direction: column; }
+iframe { border: 0; width: 100%; flex: 1; background: var(--bg); }
+.bar { display: flex; align-items: center; gap: 10px; padding: 8px 16px; border-bottom: 1px solid var(--line); background: var(--panel); flex: none; font-size: 13px; color: var(--dim); }
+.bar select { background: var(--panel2); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; font: inherit; }
+
+/* Mods */
+#mods { overflow-y: auto; }
+.wrap { max-width: 860px; width: 100%; margin: 0 auto; padding: 28px 24px 48px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px 22px; margin-bottom: 16px; }
+.headline { display: flex; align-items: flex-start; gap: 14px; }
+.badge { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 20px; }
+.badge.ok { background: #1f3a26; color: var(--ok); }
+.badge.warn { background: #3d3119; color: var(--warn); }
+.badge.bad { background: #3e211d; color: var(--bad); }
+.headline h2 { margin: 0 0 2px; font: 600 21px Cambria, Georgia, serif; }
+.headline p { margin: 0; color: var(--dim); }
+.facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; margin: 18px 0 0; font-size: 14px; }
+.facts dt { color: var(--dim); }
+.facts dd { margin: 0; overflow-wrap: anywhere; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+button.btn { font: inherit; font-size: 14px; border-radius: 7px; padding: 8px 16px; cursor: pointer; border: 1px solid var(--line); background: var(--panel2); color: var(--text); }
+button.btn:hover:not(:disabled) { border-color: var(--gold2); }
+button.btn.primary { background: var(--gold); color: #1b1608; border-color: var(--gold); font-weight: 600; }
+button.btn.primary:hover:not(:disabled) { background: #f0d79c; }
+button.btn.danger:hover:not(:disabled) { border-color: var(--bad); color: var(--bad); }
+button.btn:disabled { opacity: .45; cursor: not-allowed; }
+.note { font-size: 13px; color: var(--dim); margin-top: 14px; }
+.banner { border-radius: 8px; padding: 10px 14px; margin-top: 16px; font-size: 14px; }
+.banner.warn { background: #3d3119; color: #f3d9a2; }
+.banner.bad { background: #3e211d; color: #f4c0b6; }
+.banner.ok { background: #1f3a26; color: #bfe6c6; }
+h3 { font: 600 16px Cambria, Georgia, serif; color: var(--gold); margin: 0 0 10px; }
+.notes { white-space: pre-wrap; font-size: 14px; color: var(--text); }
+details summary { cursor: pointer; color: var(--dim); font-size: 13px; margin-top: 10px; }
+pre.log { background: #0d1014; border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; font: 12px/1.45 Consolas, monospace; white-space: pre-wrap; max-height: 320px; overflow: auto; color: #cfc8b8; }
+.spin { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--gold2); border-right-color: transparent; border-radius: 50%; animation: spin .8s linear infinite; vertical-align: -2px; margin-right: 8px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+a { color: var(--link); cursor: pointer; }
+.empty { padding: 48px 24px; text-align: center; color: var(--dim); }
+@media (max-width: 640px) { header h1 { display: none; } .facts { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Frosthaven Companion</h1>
+  <nav id="nav">
+    <button data-v="mods">Mods<span class="dot" id="moddot" hidden></span></button>
+    <button data-v="map">Scenario map</button>
+    <button data-v="player">Player guide</button>
+    <button data-v="play" id="playtab">Play guide</button>
+  </nav>
+  <div class="spacer"></div>
+  <span class="ver" id="ver"></span>
+</header>
+<main>
+  <section class="view" id="mods"><div class="wrap" id="modsbody"><div class="empty">Loading…</div></div></section>
+  <section class="view" id="map">
+    <div class="bar" id="mapbar" hidden>Campaign <select id="campaign"></select><span>Updates by itself when the game autosaves.</span></div>
+    <iframe id="mapframe" title="Scenario map"></iframe>
+  </section>
+  <section class="view" id="player"><iframe id="playerframe" title="Player guide"></iframe></section>
+  <section class="view" id="play"><iframe id="playframe" title="Play guide"></iframe></section>
+</main>
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const FRAMES = {map: "#mapframe", player: "#playerframe", play: "#playframe"};
+const SRC = {map: () => "/map?campaign=" + encodeURIComponent($("#campaign").value || ""), player: () => "/guide/player", play: () => "/guide/play"};
+let S = null, view = "mods", busyAction = null, flash = null;
+
+function show(v) {
+  view = v;
+  for (const b of document.querySelectorAll("#nav button")) b.classList.toggle("on", b.dataset.v === v);
+  for (const s of document.querySelectorAll(".view")) s.classList.toggle("on", s.id === v);
+  const f = FRAMES[v] && $(FRAMES[v]);
+  if (f && !f.src) f.src = SRC[v]();            // each page loads once, and keeps its place when you switch back
+  try { localStorage.setItem("companion-tab", v); } catch (e) {}
+}
+$("#nav").onclick = e => { const b = e.target.closest("button"); if (b) show(b.dataset.v); };
+
+async function api(path, post) {
+  const r = await fetch(path, post ? {method: "POST", headers: {"X-Companion": "1"}} : {cache: "no-store"});
+  return r.json();
+}
+
+function headline(s) {
+  const inst = s.installed, lat = s.latest || {};
+  switch (s.state) {
+    case "no-game": return ["bad", "!", "Frosthaven wasn't found", "Install the game through Steam, then click Check again."];
+    case "not-installed": return ["warn", "+", "The mod pack isn't installed", lat.version ? `Install v${lat.version} to play with your friends.` : "Install it to play with your friends."];
+    case "update": return ["warn", "↑", `Update available: v${lat.version}`, `You have v${inst}. Everyone in a co-op game needs the same version.`];
+    case "ahead": return ["ok", "✓", `You have v${inst}`, `That's newer than the latest release (v${lat.version}).`];
+    case "unknown": return ["ok", "✓", `You have v${inst}`, "GitHub couldn't be reached, so newer versions can't be checked right now."];
+    default: return ["ok", "✓", `Up to date: v${inst}`, "Everyone in a co-op game needs the same version."];
+  }
+}
+
+function renderMods() {
+  const s = S; if (!s) return;
+  const job = s.job || {}, running = s.game.running, working = job.running;
+  const [tone, mark, title, sub] = headline(s);
+  const lat = s.latest || {};
+  const installLabel = s.state === "not-installed" ? `Install v${lat.version || ""}`.trim() : s.state === "update" ? `Update to v${lat.version}` : "Reinstall";
+  const canAct = !!s.game.dir && !running && !working;
+  let jobHtml = "";
+  if (working) jobHtml = `<div class="banner warn"><span class="spin"></span>${job.action === "uninstall" ? "Removing the mods…" : "Installing the mod pack…"} This takes a few seconds.</div>`;
+  else if (job.action && job.finished) {
+    const ok = job.code === 0;
+    jobHtml = `<div class="banner ${ok ? "ok" : "bad"}">${ok ? (job.action === "uninstall" ? "The mods were removed. The game is back to normal." : "Done. Start Frosthaven to play with the mods.") : "That didn't work. The details are below."}</div>` +
+      `<details${ok ? "" : " open"}><summary>Installer log</summary><pre class="log">${esc(job.log)}</pre></details>`;
+  }
+  $("#modsbody").innerHTML = `
+  ${s.app.newer ? `<div class="banner warn" style="margin:0 0 16px">A newer companion (v${esc(s.app.latest)}) is out. <a data-open="${esc(lat.url)}">Download it from GitHub</a>, unzip it over this folder and start it again.</div>` : ""}
+  <div class="card">
+    <div class="headline"><div class="badge ${tone}">${mark}</div><div><h2>${esc(title)}</h2><p>${esc(sub)}</p></div></div>
+    ${running ? `<div class="banner warn">Frosthaven is running. Close it to install, update or remove the mods.</div>` : ""}
+    ${flash ? `<div class="banner bad">${esc(flash)}</div>` : ""}
+    ${jobHtml}
+    <div class="actions">
+      <button class="btn${s.state === "update" || s.state === "not-installed" ? " primary" : ""}" id="install" ${canAct ? "" : "disabled"}>${esc(installLabel)}</button>
+      ${s.installed ? `<button class="btn danger" id="uninstall" ${canAct ? "" : "disabled"}>Remove the mods</button>` : ""}
+      <button class="btn" id="check" ${working ? "disabled" : ""}>Check again</button>
+    </div>
+    <dl class="facts">
+      <dt>Installed</dt><dd>${s.installed ? "v" + esc(s.installed) : "none"}</dd>
+      <dt>Latest release</dt><dd>${lat.version ? "v" + esc(lat.version) + (lat.published ? " · " + esc(lat.published.slice(0, 10)) : "") : lat.error ? "couldn't check" : "…"}</dd>
+      <dt>Game folder</dt><dd>${esc(s.game.dir || "not found")}</dd>
+    </dl>
+    <p class="note">Updating keeps your saves and campaign settings. The house rules are switched on in the game (Options, Custom Rules), by the host.</p>
+  </div>
+  ${lat.notes ? `<div class="card"><h3>What's in v${esc(lat.version)}</h3><div class="notes">${esc(lat.notes)}</div>
+    <p class="note"><a data-open="${esc(lat.url)}">Release page on GitHub</a></p></div>` : ""}`;
+  $("#install").onclick = () => act("install");
+  $("#uninstall") && ($("#uninstall").onclick = () => {
+    if (confirm("Remove the mod pack? The game goes back to normal; your saves are kept.")) act("uninstall");
+  });
+  $("#check").onclick = async () => { flash = null; S = await api("/api/check", true); render(); };
+}
+
+async function act(action) {
+  flash = null;
+  const r = await fetch("/api/mods/" + action, {method: "POST", headers: {"X-Companion": "1"}}).then(r => r.json());
+  if (!r.ok) flash = r.message;
+  await refresh();
+}
+
+function renderMap() {
+  const cs = (S && S.campaigns) || [], sel = $("#campaign"), cur = sel.value;
+  $("#mapbar").hidden = cs.length < 2;
+  const names = cs.map(c => c.name).join("\n");
+  if (sel.dataset.names !== names) {
+    sel.dataset.names = names;
+    sel.innerHTML = cs.map(c => `<option>${esc(c.name)}</option>`).join("");
+    if (cs.some(c => c.name === cur)) sel.value = cur;
+  }
+}
+$("#campaign").onchange = () => { $("#mapframe").src = SRC.map(); };
+
+function render() {
+  if (!S) return;
+  $("#ver").textContent = `v${S.app.version}`;
+  $("#moddot").hidden = !(S.state === "update" || S.state === "not-installed");
+  $("#playtab").hidden = !S.playGuide;
+  renderMods();
+  renderMap();
+}
+
+async function refresh() {
+  try { S = await api("/api/status"); } catch (e) { return; }
+  render();
+}
+
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-open]"); if (!a) return;
+  e.preventDefault();
+  fetch("/api/open?url=" + encodeURIComponent(a.dataset.open), {method: "POST", headers: {"X-Companion": "1"}});
+});
+
+let first = "mods";
+try { first = localStorage.getItem("companion-tab") || "mods"; } catch (e) {}
+refresh().then(() => show((first in SRC && (first !== "play" || (S && S.playGuide))) ? first : "mods"));
+setInterval(() => { if (view === "mods" || (S && S.job && S.job.running)) refresh(); }, 3000);
+setInterval(() => fetch("/api/ping", {cache: "no-store"}).catch(() => {}), 15000);   // keeps a browser-only companion alive
+</script>
+</body>
+</html>

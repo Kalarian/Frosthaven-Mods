@@ -31,3 +31,13 @@ mods/**/bin/
 mods/**/obj/
 tools/**/bin/
 tools/**/obj/
+!companion/
+!companion/**
+companion/.venv-build/
+companion/build/
+companion/build-res/
+companion/dist/
+companion/logs/
+companion/webview2/
+companion/cache/
+companion/**/__pycache__/
