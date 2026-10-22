@@ -42,6 +42,8 @@ namespace FrosthavenMods
         public const ERulesFlag DeckOdds = (ERulesFlag)(1 << 20);
         public const ERulesFlag ScenarioMap = (ERulesFlag)(1 << 19);
         public const ERulesFlag StoryEvents = (ERulesFlag)(1 << 18);
+        public const ERulesFlag QuestRewards = (ERulesFlag)(1 << 17);
+        public const ERulesFlag KeepMasteries = (ERulesFlag)(1 << 16);
 
         public static readonly List<Rule> All = new List<Rule>
         {
@@ -77,6 +79,17 @@ namespace FrosthavenMods
             },
             new Rule
             {
+                Flag = QuestRewards,
+                Name = "Show personal quest rewards (mod)",
+                Description = "When a new character picks a personal quest (or a retirement draws an extra one), each " +
+                              "quest card shows the building it unlocks when that character retires, what it unlocks " +
+                              "instead if that building is unlocked first, and whether another party member's quest " +
+                              "would unlock the same building.\n\n" +
+                              "Board game rule restored: the quest card lists the building envelopes it unlocks. " +
+                              "Display only: it changes nothing in play.",
+            },
+            new Rule
+            {
                 Flag = DwarfTweaks,
                 AffectsScenarios = true,
                 Name = "Dwarf's balance changes (mod)",
@@ -90,6 +103,16 @@ namespace FrosthavenMods
                               "- Scenario 14: also kill all Abael Herders to win; Piranha Pigs spawn only on odd rounds " +
                               "and Lightning Eels only on even rounds, alternating spawn points.\n" +
                               "- Boneshaper's first mastery (kill 15 of your summons) counts over any number of scenarios.",
+            },
+            new Rule
+            {
+                Flag = KeepMasteries,
+                AffectsScenarios = true,
+                Name = "Masteries carry over (mod)",
+                Description = "Once a character earns a mastery, every later character of that class starts with it " +
+                              "already completed and gets its perk mark when created. Only masteries earned while this " +
+                              "rule is on count.\n\n" +
+                              "Board game rule bent: masteries belong to the character who earned them.",
             },
             new Rule
             {

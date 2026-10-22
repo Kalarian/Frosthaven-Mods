@@ -42,13 +42,16 @@ Mod layout, `mods/<Name>/`:
 `loader/` (see its README). Every code feature is a **campaign house rule**:
 - The game has a House Rules screen (Options > House Rules), but it's hidden in this build because
   `GameSettingsService.ValidCampaignRules` is `None`. The plugin shows it for campaigns and adds our own switches.
-- Our rules are extra bits (`1 << 18` to `1 << 30`) in the game's own campaign rules number (`PartyAdventureData.Rules`).
+- Our rules are extra bits (`1 << 16` to `1 << 30`) in the game's own campaign rules number (`PartyAdventureData.Rules`).
   The game saves that number in the save header and sends it to co-op players (join token + `ChangeHouseRuleSettings`),
   so the host's choice reaches everyone and is stored in the campaign. The vanilla game ignores unknown bits.
 - The plugin fixes three game bugs on the way:
   - `ApplyHeader` never reads the rules back, so they reset to off on every reload.
   - The screen's callbacks capture the rules from when the window opened, so flipping two switches undid the first.
   - The window's row list is never emptied.
+- The window's scroll view points at the wrong object (`Content_CampaignSpesific`, empty in game, instead of their
+  sized parent `Content`), so with our rules the last rows were cut off with no scrollbar or wheel. `RulesScroll`
+  repoints it when the window opens, and in game pins our heading and its note above the scrolling switches.
 - Rules so far:
   - **Tradeable resources and equipment** (bit 24; released in v0.2.0 as "Shared gold", then built as two rules,
     Give resources and Item trading, merged into one; bit 25 is unused). In the outpost, Ctrl+left-click the portrait
@@ -102,6 +105,17 @@ Mod layout, `mods/<Name>/`:
     buildings to construct, shop and craftable items, town guard cards and perks, personal quests, classes, puzzles,
     job postings, stickers. A failed play-out keeps the card. Each decision goes to the co-op log (`STORY:`), and the
     Ctrl+F5 event dump shows the verdict for every town event.
+  - **Masteries carry over** (bit 16; `KeepMasteries`): a postfix on `ScenarioController.CompleteActiveScenario` (the
+    scenario result every peer applies) records each mastery the game just awarded as a marker in
+    `CampaignState.LootedChestTreasureTableIDs` (`FHMODS:Mastery:<id>`); a postfix on
+    `CharacterController.Action_FinishCreateCharater` (both character-creation commands end there) gives a new
+    character of that class the recorded masteries as completed, with their perk marks through the game's
+    `Action_AddPerkMarks`. Only masteries earned while the rule is on count. Locked during online scenarios.
+  - **Show personal quest rewards** (bit 17; `QuestRewards`): a postfix on `UIPersonalQuestCard.Init` (the cards a new
+    character picks from, and the extra quest of a 15-inspiration retirement) adds a line under the goal: the building
+    the quest unlocks on retirement, worked out as `CharacterController.Action_ApplyPersonalQuestRewards` does (its first
+    `GetAvailableRewardIDs` envelope not yet open, else a random side scenario and item blueprint), the next one if that
+    building is unlocked first, and any party member's quest that would open the same envelope first. Display only.
   - **Game bug fixes** (bit 30; `BugFixes`): fair attack modifier shuffles. The game's `Extensions.Shuffle` is off
     by one (Sattolo's algorithm: no card stays put) and decks are built / reshuffled by inserting at `Next(0, Count)`
     (never the bottom: a +0 is always the bottom card of a new deck). Nulls and x2s come up ~6.25% of draws each instead

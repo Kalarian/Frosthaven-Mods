@@ -14,6 +14,10 @@ namespace FrosthavenDevTools
     /// console to type them into:
     ///   Ctrl+F5   write every event's Reveal event outcomes preview to <game>\FrosthavenMods\event-previews.txt
     ///   Ctrl+F6   draw the next town event of the current season (to test the mod's Reveal event outcomes)
+    ///   Ctrl+F8   the next won scenario (Ctrl+F10) also completes every party member's uncompleted masteries: they're
+    ///             added to the win's result, which the game then awards its normal way (to test the mod's Masteries
+    ///             carry over). Topping up the in-scenario trackers doesn't work: the game recounts them from the
+    ///             scenario's stats when it ends.
     ///   Ctrl+F9   +100 gold and +10 lumber/metal/hide per party member, +10 of each herb to the Frosthaven supply
     ///   Ctrl+F10  "win"            DebugMenu.WinScenarioCommand: wins the current scenario
     ///   Ctrl+F11  "skip_prologue"  FHMapChoreographer.SkipPrologue: ends the prologue (map only), lands in the outpost
@@ -47,6 +51,8 @@ namespace FrosthavenDevTools
             }
             harmony.Patch(AccessTools.Method(typeof(FHRL.MultiplayerGameController), "GetExectionContext"),
                 prefix: new HarmonyMethod(typeof(DevCommands), nameof(DevCommands.Resolve)));
+            harmony.Patch(AccessTools.Method(typeof(FHRL.ScenarioController), nameof(FHRL.ScenarioController.CompleteActiveScenario)),
+                prefix: new HarmonyMethod(typeof(DevCommands), nameof(DevCommands.AddMasteries)));
             _log.LogInfo($"Dev tools loaded (solo only, {hooks} frame hooks): Ctrl+F10 = win scenario [{(Win != null ? "ok" : "MISSING")}], " +
                          $"Ctrl+F11 = skip prologue [{(SkipPrologue != null ? "ok" : "MISSING")}]");
         }
@@ -60,10 +66,16 @@ namespace FrosthavenDevTools
                 _listeningVia = __originalMethod.DeclaringType?.Name;
                 _log.LogInfo("Dev tools: listening for keys (via " + _listeningVia + ")");
             }
+            if (DevCommands.ForceMasteries && DevCommands.ForcedFrame >= 0 && Time.frameCount > DevCommands.ForcedFrame)
+            {
+                DevCommands.ForceMasteries = false;
+                DevCommands.ForcedFrame = -1;
+            }
             Keyboard kb = Keyboard.current;
             if (kb == null || !kb.ctrlKey.isPressed) return;
             if (kb.f5Key.wasPressedThisFrame) Run("write all event previews", DumpEventPreviews);
             if (kb.f6Key.wasPressedThisFrame) Run("draw a town event", DrawEvent);
+            if (kb.f8Key.wasPressedThisFrame) Run("the next win completes every mastery", () => DevCommands.ForceMasteries = true);
             if (kb.f9Key.wasPressedThisFrame) Run("+100 gold, +10 of each material and herb", AddGold);
             if (kb.f10Key.wasPressedThisFrame) Run("win scenario", () => Win.Invoke(null, new object[] { null, -1 }));
             if (kb.f11Key.wasPressedThisFrame) Run("skip prologue", DoSkipPrologue);
@@ -177,6 +189,31 @@ namespace FrosthavenDevTools
 
         private readonly FHRL.MultiplayerGameController _game;
         public DevCommands(FHRL.MultiplayerGameController game) { _game = game; }
+
+        /// <summary>Armed by Ctrl+F8 (solo only), used up by the next won scenario.</summary>
+        internal static bool ForceMasteries;
+        internal static int ForcedFrame = -1;
+
+        /// <summary>Prefix on the win's campaign command: each party member's uncompleted masteries join the result, so
+        /// the game checks and awards them (perk marks, completed list) as if earned in play.</summary>
+        public static void AddMasteries(FHRL.ScenarioController __instance, FHRL.ScenarioResult result)
+        {
+            if (!ForceMasteries || result == null || !result.ScenarioWon || result.isRestarting) return;
+            // disarmed by the next frame's key poll, not here: the command may run on more than one copy of the campaign
+            ForcedFrame = Time.frameCount;
+            FHRL.CampaignController campaign = __instance.CampaignController;
+            foreach (FHRL.ScenarioResult.CharacterResult r in result.Characters)
+            {
+                FHRL.CharacterState c = r.GetCharacter(campaign.State);
+                if (c == null) continue;
+                foreach (FHRL.MasteryDef m in campaign.CharacterController.GetUncompletedMasteries(c))
+                {
+                    if (r.MasteriesCompleted.Contains(m.ID)) continue;
+                    r.MasteriesCompleted.Add(m.ID);
+                    DevTools._log.LogInfo($"Dev tools: {c.Name} completes {m.ID.ID} with this win.");
+                }
+            }
+        }
 
         public static bool Resolve(FHRL.MultiplayerGameController __instance, string path, ref ValueTuple<object, MethodInfo> __result)
         {

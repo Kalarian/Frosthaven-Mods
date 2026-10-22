@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using FHGUI;
 using FHGUI.DTO;
@@ -44,7 +45,8 @@ namespace FrosthavenMods
                     NameLocalized = "Everyone in a co-op game needs the same mod pack version. Only the host can change these.",
                     IsDescription = true,
                 });
-                foreach (ModRules.Rule rule in ModRules.All)
+                // listed by name, whatever order they're defined in
+                foreach (ModRules.Rule rule in ModRules.All.OrderBy(x => x.Name, StringComparer.OrdinalIgnoreCase))
                 {
                     ModRules.Rule r = rule;
                     var dto = new CampaignSettingDTO

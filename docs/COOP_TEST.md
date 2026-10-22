@@ -38,11 +38,11 @@ some steps are done at the same moment.
 4. Spend some of that gold so the characters own items (the shop, or the Craftsman):
    - every character owns **at least 2 items**, and at least one of them is **worn** (equipped);
    - **two characters own the same item** (e.g. both buy the same cheap item). That's for the "already owns" check.
-5. In Options > **Custom Rules**, turn on all eleven mod rules: **Tradeable resources and equipment**, **Share duplicate
-   loot**, **Reveal event outcomes**, **Dwarf's balance changes**, **More story events**, **Game bug fixes**,
+5. In Options > **Custom Rules**, turn on all thirteen mod rules: **Tradeable resources and equipment**, **Share duplicate
+   loot**, **Reveal event outcomes**, **Show personal quest rewards**, **Masteries carry over**, **Dwarf's balance changes**, **More story events**, **Game bug fixes**,
    **Milestone saves**, **Battle stats**, **Easier item reward window**, **Modifier deck odds** and **Scenario map
    file**.
-6. Optional, solo: test duplicate loot, battle stats, milestone saves and more story events (see the end of this
+6. Optional, solo: test duplicate loot, battle stats, milestone saves, more story events, personal quest rewards and masteries carry over (see the end of this
    file). Then save and quit to the main menu.
 
 **Both players:**
@@ -58,7 +58,7 @@ some steps are done at the same moment.
 |---|---|---|---|
 | A1 | Host | Load the test campaign as a multiplayer game. Client joins. | The join works. |
 | A2 | Host | Give the client 2 of the 4 characters (the game's party slot / player assignment). | Each player controls 2 characters. Write down which ones: Host = **H1, H2**, Client = **C1, C2**. Also note which two own the same item. |
-| A3 | Both | Options > **Custom Rules**. | Both see "Mod pack rules" with all eleven mod rules, all Active. On the client they're greyed out (only the host can change them). |
+| A3 | Both | Options > **Custom Rules**. | Both see "Mod pack rules" with all thirteen mod rules, all Active. On the client they're greyed out (only the host can change them). |
 | A4 | Both | **CHECKPOINT** (#1) | |
 
 ## B. House rules sync
@@ -139,10 +139,10 @@ To check an item on a character: select them and open their equipment / item scr
 
 | # | Who | Do | Expected |
 |---|---|---|---|
-| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows all eleven rules on, for both players. |
+| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows all thirteen rules on, for both players. |
 | I2 | Both | **CHECKPOINT** (#9) | Identical to #8. |
 | I3 | Both | Start any scenario together, bringing **given** items, and play 3–4 rounds normally. Use a given item if you can. **Each player short rests at least once** (with Restful Slippers if anyone owns them). | **No desync message.** The given items work. (The Give button is hidden during scenarios.) |
-| I3b | Host | During the scenario, open Options > **Custom Rules**. | **Share duplicate loot**, **Dwarf's balance changes** and **Game bug fixes** are greyed out with "Locked during online scenarios" in their description. **Tradeable resources** and **Reveal event outcomes** can still be switched. Close without changing anything. |
+| I3b | Host | During the scenario, open Options > **Custom Rules**. | **Share duplicate loot**, **Masteries carry over**, **Dwarf's balance changes** and **Game bug fixes** are greyed out with "Locked during online scenarios" in their description. **Tradeable resources** and **Reveal event outcomes** can still be switched. Close without changing anything. |
 | I4 | Both | Finish the scenario (win if you can; a loss also works). On the post-scenario screen, open the **Statistics** tab (crossed swords). | Under the game's 8 rows: section titles (OFFENSE, DEFENSE, ...) with no bars, and rows with icons, no white boxes. **Both PCs show the same number in every row.** Take a screenshot on each PC (scroll down for the rest). |
 | I5 | Both | Click **Campaign** (top right of the Statistics page), then **This scenario**. | The buttons don't overlap the title. Campaign shows a **Scenarios played** row and totals; each player's count is the number of scenarios they've finished with the mod (they can differ if one played more solo). This scenario switches back. |
 | I6 | Host | Continue back to the outpost. | If someone looted a copy of an item they already own, the item reward window opens with nothing assigned. The host (party leader) left-clicks one character, then another: the item moves in one click, on both screens. Done assigns it (Share duplicate loot). |
@@ -212,6 +212,34 @@ Use the test campaign: drawing an event takes it out of the deck, as a real draw
    top card was kept (and is the event on screen), or it went to the bottom and the next card is the one on screen.
    Resolve it, and draw a few more the same way.
 4. Turn the rule off and press **Ctrl+F6** again: no `STORY:` line, and the top card is drawn as usual.
+
+## Solo: personal quest rewards (host, any time)
+
+1. Turn on **Show personal quest rewards**. In the outpost, start creating a new character and go to the personal
+   quest step (you can cancel afterwards). Under each quest's goal there's a line starting **On retirement:** with a
+   building and what it's for, e.g. "unlocks Enhancer (enhance cards).", then a smaller line: what you'd get instead
+   if that building is unlocked first, or which one is already unlocked.
+2. If a party member's quest unlocks the same building first, a third line names them: "...'s quest also unlocks
+   ...: whoever retires second gets ...".
+3. The card grows to fit the text, and nothing overlaps the button or the card below. Send Claude a screenshot and
+   `BepInEx\LogOutput.log` (each card logs a "Show personal quest rewards:" line).
+4. Turn the rule off and open the step again: the cards are as before.
+
+## Solo: masteries carry over (host, test campaign only)
+
+This deletes a character, so use the test campaign.
+
+1. Turn on **Masteries carry over**. Start a scenario with a Deathwalker in the party. Press **Ctrl+F8** (dev tools:
+   the next win also completes every party member's uncompleted masteries; `BepInEx\LogOutput.log` lists each one),
+   then **Ctrl+F10** to win.
+2. On the results screen the masteries are completed (+1 perk mark each). `FrosthavenMods\coop-log.txt` has a line
+   per mastery, e.g. `MASTERY: ... earned Deathwalker_MASTERY_2; later Deathwalkers start with it`.
+3. In the outpost, delete the Deathwalker (party roster, Delete character), then create a new Deathwalker. Its
+   character sheet shows both masteries already completed, and it has two more perk marks than a new character
+   normally gets. The coop log has `MASTERY: ... starts with Deathwalker_MASTERY_1 (+1 perk mark)` and the same for
+   `_MASTERY_2`.
+4. Turn the rule off, delete and create a Deathwalker again: no mastery is completed and there are no extra
+   perk marks.
 
 ## Solo: milestone saves (host, any time)
 
