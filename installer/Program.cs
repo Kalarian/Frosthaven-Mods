@@ -840,9 +840,16 @@ namespace FrosthavenInstaller
 
             string found = null;
             try { found = Pack.FindGameFolder(); } catch { }
-            if (found != null) { _path.Text = found; Log("Found the game at " + found + "\r\nInstalled now: " + Pack.InstalledVersion(found)); }
-            else Log("Could not find the game on its own. Use Browse... to pick the folder that contains 'Frosthaven.exe'\r\n(Steam: right-click the game -> Manage -> Browse local files).");
-            Log("Playing online? Everyone in the group needs the same mod pack version.");
+            if (found != null) { _path.Text = found; SetResult(Installed(found)); }
+            else SetResult("Could not find the game on its own. Use Browse... to pick the folder that contains 'Frosthaven.exe'\r\n(Steam: right-click the game -> Manage -> Browse local files).");
+        }
+
+        private static string V(string version) => version == "none" ? version : "v" + version;
+
+        private static string Installed(string dir)
+        {
+            string v = Pack.InstalledVersion(dir);
+            return v == "none" ? "No mods installed." : "Installed: " + V(v);
         }
 
         private void Browse()
@@ -874,23 +881,29 @@ namespace FrosthavenInstaller
             var log = new StringBuilder();
             try
             {
+                string before = Pack.InstalledVersion(dir);
                 string zip = uninstall ? null : Updater.FetchNewerZip(dir, log);
                 int code = uninstall ? Pack.Uninstall(dir, log) : Pack.Install(dir, log, zip);
-                Log(log.ToString().TrimEnd());
-                if (code == 0 && !uninstall) Log("You can close this window and start the game.");
+                string after = Pack.InstalledVersion(dir);
+                // just the outcome; the step-by-step log only when something went wrong
+                if (code != 0) SetResult("Didn't work:\r\n" + log.ToString().TrimEnd());
+                else if (uninstall) SetResult(before == "none" ? "No mods were installed." : "Mods removed.");
+                else if (before == "none") SetResult("Installed " + V(after) + ".");
+                else if (before == after) SetResult("Already up to date (" + V(after) + "). No update needed.");
+                else SetResult("Updated from " + V(before) + " to " + V(after) + ".");
             }
             catch (Exception e)
             {
-                Log(log.ToString().TrimEnd());
-                Log("Something went wrong: " + e.Message);
+                SetResult("Something went wrong: " + e.Message + "\r\n" + log.ToString().TrimEnd());
                 MessageBox.Show(this, "Something went wrong:\n" + e.Message + "\n\nSend a screenshot of this window.", "Frosthaven Mods", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally { _install.Enabled = _remove.Enabled = true; Cursor = Cursors.Default; }
         }
 
-        private void Log(string s)
+        /// <summary>Replaces the box's text: it always shows the result of the last thing done, not a running log.</summary>
+        private void SetResult(string s)
         {
-            _log.AppendText((_log.TextLength > 0 ? "\r\n" : "") + s.Replace("\r\n", "\n").Replace("\n", "\r\n"));
+            _log.Text = s.Replace("\r\n", "\n").Replace("\n", "\r\n");
         }
     }
 }
