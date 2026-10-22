@@ -25,7 +25,7 @@ New-Item -ItemType Directory -Force "$res\guides", "$res\installer" | Out-Null
 $installer = "..\dist\Install Frosthaven Mods.exe"
 if (-not (Test-Path $installer)) { throw "no ${installer}: build the mod pack installer first" }
 Copy-Item $installer "$res\installer\"
-Copy-Item "..\docs\guide\guide.html" "$res\guides\player-guide.html"
+Copy-Item "..\docs\guide\guide.html" "$res\guides\mod-guide.html"
 Copy-Item "..\VERSION" "$res\VERSION"
 $playGuide = "C:\Claude\FrosthavenGuide\frosthaven-play-guide.html"
 if (Test-Path $playGuide) { Copy-Item $playGuide "$res\guides\play-guide.html" }

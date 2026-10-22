@@ -11,7 +11,7 @@ Mods for the digital Frosthaven (Snapshot Games, Steam app 2347080), made for a 
 Install / Update. Each run checks GitHub, so the same exe always installs the newest pack. "Remove mods" puts the
 game's original rules back. Saves are never touched.
 
-**What the mods do:** [Frosthaven-Mods-Guide.pdf](docs/Frosthaven-Mods-Guide.pdf), a short player guide (also attached
+**What the mods do:** [Frosthaven-Mods-Guide.pdf](docs/Frosthaven-Mods-Guide.pdf), a short mod guide (also attached
 to every release). Its source is `docs/guide/guide.html`; `tools/publish.sh` rebuilds the PDF for each release
 (`python tools/build_guide.py`, headless Chrome or Edge). When a mod is added or changed, update the guide too.
 

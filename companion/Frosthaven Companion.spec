@@ -7,7 +7,7 @@
 #
 # What goes in: app.py and what it imports, with ..\tools on the path for the scenario map (scenario_map,
 # fh_ruleset), pywebview's WinForms/WebView2 backend (picked at run time, so named as hidden imports), web\ (the
-# page and icon) and build-res\ (the player guide, the play guide when there is one, the mod pack installer, VERSION).
+# page and icon) and build-res\ (the mod guide, the play guide when there is one, the mod pack installer, VERSION).
 ICON = "web/icon.ico"
 
 a = Analysis(

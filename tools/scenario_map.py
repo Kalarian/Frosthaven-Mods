@@ -764,7 +764,7 @@ def page_data(g, a, prog):
 
 def build(data):
     payload = json.dumps(data, separators=(",", ":"), ensure_ascii=False).replace("</", "<\\/")
-    title = f"{data['party']}: scenario map" if data["has"] else "Frosthaven scenario map"
+    title = f"Campaign: {data['party']}" if data["has"] else "Frosthaven scenario map"
     return PAGE.replace("__TITLE__", html.escape(title)).replace("__DATA__", payload)
 
 
@@ -870,7 +870,7 @@ const go = id => `<a class="go" data-go="${id}">${esc(name(id))}</a>`;
 const goText = t => esc(t).replace(/#(\d+)/g, (m, i) => N.has(+i) ? `<a class="go" data-go="${i}">${m}</a>` : m);
 
 // ---- header
-$("#title").textContent = D.has ? `${D.party}: scenario map` : "Frosthaven scenario map";
+$("#title").textContent = D.has ? `Campaign: ${D.party}` : "Frosthaven scenario map";
 const c = D.counts;
 $("#sub").textContent = D.has
   ? `Week ${D.week ?? "?"} · ${c.done || 0} done · ${c.open || 0} available · ${c.coming || 0} on the calendar · ${c.later || 0} still reachable · ${(c.locked || 0) + (c.lost || 0)} out of reach · best case ${D.best.total} of ${D.total}`

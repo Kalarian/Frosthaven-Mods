@@ -45,10 +45,14 @@ def status():
     }
 
 
-# The player guide is laid out for printing (the PDF's page margins come from @page): on screen it gets its own margins,
-# a readable width and a slightly larger font.
-SCREEN_GUIDE_CSS = ("<style>@media screen { body { max-width: 1000px; margin: 0 auto; padding: 28px 36px 56px; "
-                    "font-size: 11pt; } html { background: #f4f1ea; } }</style>")
+# The mod guide is laid out for printing (the PDF). Inside the Mods tab it's shown below the status card, in the app's
+# dark colours (its colours are CSS variables), without its own title (the tab has one), sized by the tab to fit.
+EMBED_GUIDE_CSS = ("<style>:root { --ink:#e8e2d4; --muted:#a59f92; --line:#2f3742; --accent:#e3c98b; --soft:#1b2027; "
+                   "--good:#7fc48a; --tag:#2a313b; } html, body { background: transparent; } "
+                   "body { font-size: 14px; line-height: 1.5; margin: 0; } h1, .subtitle { display: none; } "
+                   ".mod { background: #1b2027; } .mod .tag.play { background: #3e2a1f; color: #f0b79c; } "
+                   ".mod .tag.look { background: #1f3a26; color: #9fd8aa; } "
+                   "kbd { background: #222832; border-color: #4a5360; color: #e8e2d4; } a { color: #8fc3e8; }</style>")
 
 
 def guide(path, screen_css=""):
@@ -112,10 +116,10 @@ class Handler(BaseHTTPRequestHandler):
             return self._json({"stamp": mapview.stamp(q.get("campaign", ""))})
         if p == "/map":
             return self._html(mapview.render(q.get("campaign", "")))
-        if p == "/guide/player":
-            text = guide(paths.PLAYER_GUIDE, SCREEN_GUIDE_CSS)
+        if p == "/guide/mods":
+            text = guide(paths.MOD_GUIDE, EMBED_GUIDE_CSS)
             return self._html(text) if text is not None else self._html(mapview._message(
-                "No player guide", "This copy of the companion was built without it."), 404)
+                "No mod guide", "This copy of the companion was built without it."), 404)
         if p == "/guide/play":
             text = guide(paths.PLAY_GUIDE)
             return self._html(text) if text is not None else self._html(mapview._message(

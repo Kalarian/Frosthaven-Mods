@@ -1,4 +1,4 @@
-"""Build the player guide PDF (docs/Frosthaven-Mods-Guide.pdf) from docs/guide/guide.html.
+"""Build the mod guide PDF (docs/Frosthaven-Mods-Guide.pdf) from docs/guide/guide.html.
 
 Prints the page with Chrome or Edge in headless mode (no window), with the version from VERSION filled in.
 tools/publish.sh runs it for every release and attaches the PDF to the GitHub release.

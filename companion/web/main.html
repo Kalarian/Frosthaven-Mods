@@ -33,7 +33,9 @@ iframe { border: 0; width: 100%; flex: 1; background: var(--bg); }
 
 /* Mods */
 #mods { overflow-y: auto; }
-.wrap { max-width: 860px; width: 100%; margin: 0 auto; padding: 28px 24px 48px; }
+.card.guide { padding-bottom: 8px; }
+#guideframe { display: block; width: 100%; height: 600px; flex: none; background: transparent; }
+.wrap { max-width: 980px; width: 100%; margin: 0 auto; padding: 28px 24px 48px; }
 .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px 22px; margin-bottom: 16px; }
 .headline { display: flex; align-items: flex-start; gap: 14px; }
 .badge { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 20px; }
@@ -74,14 +76,17 @@ a { color: var(--link); cursor: pointer; }
   <nav id="nav">
     <button data-v="mods">Mods<span class="dot" id="moddot" hidden></span></button>
     <button data-v="map">Scenario map</button>
-    <button data-v="player">Player guide</button>
     <button data-v="play" id="playtab">Play guide</button>
   </nav>
   <div class="spacer"></div>
   <span class="ver" id="ver"></span>
 </header>
 <main>
-  <section class="view" id="mods"><div class="wrap" id="modsbody"><div class="empty">Loading…</div></div></section>
+  <section class="view" id="mods"><div class="wrap">
+    <div id="modsbody"><div class="empty">Loading…</div></div>
+    <div class="card guide"><h3 id="guidetitle">Mod guide</h3><p class="note" style="margin-top:0">What each mod does and how to use it. The host turns them on in the game: Options, Custom Rules.</p>
+      <iframe id="guideframe" title="Mod guide" src="/guide/mods" scrolling="no"></iframe></div>
+  </div></section>
   <section class="view" id="map">
     <div class="bar" id="mapbar">
       <span id="campwrap" hidden>Campaign <select id="campaign"></select></span>
@@ -90,14 +95,13 @@ a { color: var(--link); cursor: pointer; }
     </div>
     <iframe id="mapframe" title="Scenario map"></iframe>
   </section>
-  <section class="view" id="player"><iframe id="playerframe" title="Player guide"></iframe></section>
   <section class="view" id="play"><iframe id="playframe" title="Play guide"></iframe></section>
 </main>
 <script>
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
-const FRAMES = {map: "#mapframe", player: "#playerframe", play: "#playframe"};
-const SRC = {map: () => "/map?campaign=" + encodeURIComponent($("#campaign").value || ""), player: () => "/guide/player", play: () => "/guide/play"};
+const FRAMES = {map: "#mapframe", play: "#playframe"};
+const SRC = {map: () => "/map?campaign=" + encodeURIComponent($("#campaign").value || ""), play: () => "/guide/play"};
 let S = null, view = "mods", busyAction = null, flash = null;
 
 function show(v) {
@@ -214,6 +218,25 @@ async function refresh() {
   try { S = await api("/api/status"); } catch (e) { return; }
   render();
 }
+
+// the mod guide grows to its full height, so the Mods tab scrolls as one page
+function fitGuide() {
+  const f = $("#guideframe");
+  try { const d = f.contentDocument; if (d && d.body) f.style.height = d.documentElement.scrollHeight + "px"; } catch (e) {}
+}
+$("#guideframe").addEventListener("load", () => {
+  fitGuide();
+  // links in the guide open in the system browser, not inside the app
+  try {
+    $("#guideframe").contentDocument.addEventListener("click", e => {
+      const a = e.target.closest("a[href^='http']"); if (!a) return;
+      e.preventDefault();
+      fetch("/api/open?url=" + encodeURIComponent(a.href), {method: "POST", headers: {"X-Companion": "1"}});
+    });
+  } catch (e) {}
+});
+window.addEventListener("resize", fitGuide);
+setInterval(() => { if (view === "mods") fitGuide(); }, 2000);
 
 document.addEventListener("click", e => {
   const a = e.target.closest("[data-open]"); if (!a) return;

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Publish a new mod pack release to GitHub (public repo Kalarian/Frosthaven-Mods).
 # Usage: bash tools/publish.sh <version> "<one-line release notes>"
-# Steps: write VERSION (and the plugin version), build the player guide PDF (docs/Frosthaven-Mods-Guide.pdf), pack the zip (fails if any patch no longer applies to the game), rebuild the installer
+# Steps: write VERSION (and the plugin version), build the mod guide PDF (docs/Frosthaven-Mods-Guide.pdf), pack the zip (fails if any patch no longer applies to the game), rebuild the installer
 # (embeds the zip), write SHA256SUMS.txt, commit + tag, create the GitHub release with the zip, installer and checksums.
 # Friends' installers ask GitHub for the latest release and download the zip when it is newer than the one they carry.
 set -e

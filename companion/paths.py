@@ -46,14 +46,14 @@ def _res(frozen_rel, source_path):
     return os.path.join(RES_DIR, frozen_rel) if FROZEN else source_path
 
 
-PLAYER_GUIDE = _res(r"guides\player-guide.html", os.path.join(REPO_DIR, "docs", "guide", "guide.html"))
+MOD_GUIDE = _res(r"guides\mod-guide.html", os.path.join(REPO_DIR, "docs", "guide", "guide.html"))
 PLAY_GUIDE = _res(r"guides\play-guide.html", r"C:\Claude\FrosthavenGuide\frosthaven-play-guide.html")
 INSTALLER = _res(r"installer\Install Frosthaven Mods.exe", os.path.join(REPO_DIR, "dist", "Install Frosthaven Mods.exe"))
 PACK_VERSION_FILE = _res("VERSION", os.path.join(REPO_DIR, "VERSION"))
 
 
 def pack_version():
-    """The mod pack version this companion was built with (the player guide's __VERSION__)."""
+    """The mod pack version this companion was built with (the mod guide's __VERSION__)."""
     try:
         with open(PACK_VERSION_FILE, encoding="utf-8") as f:
             return f.read().strip()

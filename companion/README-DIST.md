@@ -5,11 +5,11 @@ An optional helper for the Frosthaven mod pack. You don't need it to play with t
 "Install Frosthaven Mods.exe" installer does everything the game needs. The companion adds:
 
 - Mods: which mod pack version you have, whether there's a newer one, and one-click update, reinstall or
-  removal (it runs the same installer for you). It won't change anything while Frosthaven is running.
+  removal (it runs the same installer for you). It won't change anything while Frosthaven is running. Below
+  that, the mod guide: what each mod does and how to use it.
 - Scenario map: every scenario, what unlocks it and what you've done, coloured by your campaign. It updates by
   itself when the game autosaves. The host needs the "Scenario map file" house rule on (Options, Custom Rules).
   Spoilers: it shows every scenario's name.
-- Player guide: what each mod does and how to use it.
 - Play guide: strategy notes for the campaign (buildings, personal quests, classes).
 
 Starting it
