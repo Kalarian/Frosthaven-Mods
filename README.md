@@ -52,7 +52,8 @@ Mod layout, `mods/<Name>/`:
 - The window's scroll view points at the wrong object (`Content_CampaignSpesific`, empty in game, instead of their
   sized parent `Content`), so with our rules the last rows were cut off with no scrollbar or wheel. `RulesScroll`
   repoints it each time the window builds its rows (on open and on every switch change), pads the rows clear of the
-  scrollbar, keeps their tooltips on screen, and starts the list at the top when the window is shown. The rules are
+  scrollbar, keeps their tooltips on screen (opening left of the row, on an opaque background; other tooltips are
+  untouched), and starts the list at the top when the window is shown. The rules are
   listed alphabetically.
 - Rules so far:
   - **Tradeable resources and equipment** (bit 24; released in v0.2.0 as "Shared gold", then built as two rules,

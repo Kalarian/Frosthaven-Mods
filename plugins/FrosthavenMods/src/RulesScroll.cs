@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using FHGUI;
 using HarmonyLib;
 using UnityEngine;
@@ -77,6 +78,82 @@ namespace FrosthavenMods
             {
                 Plugin.Log.LogError("Rules list scrolling: not reset: " + e);
             }
+        }
+
+        private static readonly MethodInfo SetPivot = AccessTools.Method(typeof(UITooltipManager), "SetPivot");
+        private static readonly Dictionary<Image, float> BackgroundAlpha = new Dictionary<Image, float>();
+        private const string BackingName = "FrosthavenMods_SolidBacking";
+
+        /// <summary>A rule's tooltip opens to the left of its row (top edges level) instead of over the rule's name, on a
+        /// fully opaque background. Every other tooltip in the game is left as it was.</summary>
+        [HarmonyPatch(typeof(UITooltipManager), nameof(UITooltipManager.UpdatePositionAndPivot))]
+        [HarmonyPostfix]
+        private static void PlaceTooltip(UITooltipManager __instance, RectTransform ___m_AnchorToTarget, RectTransform ___m_Rect,
+            GameObject ___m_Background)
+        {
+            try
+            {
+                bool ours = ___m_AnchorToTarget != null && ___m_AnchorToTarget.GetComponentInParent<UICampaignSettingsWindow>() != null;
+                Opaque(___m_Background, ___m_Rect, ours);
+                if (!ours) return;
+                SetPivot.Invoke(__instance, new object[] { UITooltipManager.Corner.TopRight });
+                var corners = new Vector3[4];
+                ___m_AnchorToTarget.GetWorldCorners(corners); // bottom left, top left, top right, bottom right
+                float gap = 12f * ___m_Rect.lossyScale.x;
+                ___m_Rect.position = new Vector3(corners[1].x - gap, corners[1].y, ___m_Rect.position.z);
+                UiDump.Once("Rule tooltip", ___m_Rect);
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError("Rules list scrolling: tooltip left where the game put it: " + e);
+            }
+        }
+
+        /// <summary>Full alpha on the tooltip background's images, plus a solid panel behind it (the background sprite
+        /// itself is partly see-through), for our tooltips; the game's own values back for any other.</summary>
+        private static void Opaque(GameObject background, RectTransform tooltip, bool on)
+        {
+            if (background == null) return;
+            foreach (Image image in background.GetComponentsInChildren<Image>(true))
+            {
+                if (image.name == BackingName) continue;
+                if (!BackgroundAlpha.TryGetValue(image, out float alpha)) BackgroundAlpha[image] = alpha = image.color.a;
+                Color c = image.color;
+                c.a = on ? 1f : alpha;
+                image.color = c;
+            }
+            var bg = (RectTransform)background.transform;
+            // behind the background: its sibling, or the tooltip's first child if the background is the tooltip itself
+            bool isRoot = bg == tooltip;
+            Transform holder = isRoot ? bg : bg.parent;
+            Transform backing = holder.Find(BackingName);
+            if (backing == null)
+            {
+                if (!on) return;
+                var go = new GameObject(BackingName, typeof(RectTransform));
+                go.AddComponent<LayoutElement>().ignoreLayout = true;
+                go.AddComponent<Image>().color = new Color(0.06f, 0.07f, 0.08f, 1f);
+                backing = go.transform;
+                backing.SetParent(holder, false);
+            }
+            var rt = (RectTransform)backing;
+            if (isRoot)
+            {
+                rt.SetSiblingIndex(0);
+                rt.anchorMin = Vector2.zero;
+                rt.anchorMax = Vector2.one;
+                rt.offsetMin = rt.offsetMax = Vector2.zero;
+            }
+            else
+            {
+                rt.SetSiblingIndex(bg.GetSiblingIndex());
+                rt.anchorMin = bg.anchorMin;
+                rt.anchorMax = bg.anchorMax;
+                rt.pivot = bg.pivot;
+                rt.offsetMin = bg.offsetMin;
+                rt.offsetMax = bg.offsetMax;
+            }
+            backing.gameObject.SetActive(on && background.activeSelf);
         }
 
         /// <summary>The window's scroll view, and the viewport's child holding both lists (Content).</summary>
