@@ -537,7 +537,6 @@ namespace FrosthavenInstaller
                 }
             }
             log.AppendLine("Done. Launch the game from Steam as usual.");
-            log.AppendLine("Playing online: everyone in the group needs the same mod pack version, or the game will desync mid-scenario.");
             return 0;
         }
 
