@@ -131,7 +131,8 @@ BepInEx's own cache/config/logs when the loader is ours. Other people's plugins 
 (`UIGeneralInfoCharacter` / `UIGeneralInfoMonster.ShowStatusTab`, which already show each value as left / used): the
 odds of the card that settles the next attack (rolling cards keep the draw going, so it is the first non-rolling card
 left; every non-rolling card left is equally likely), the chance of a rolling bonus, and whether the deck reshuffles at
-the end of the round. A character shows their own deck; a monster shows the deck it draws from
+the end of the round. A small tag on each modifier icon gives that card's own chance (settling the attack, or for a
+rolling card, starting the draw). A character shows their own deck; a monster shows the deck it draws from
 (`MonsterClassManager.GetAttackModifiersDeck`: enemy, ally, neutral...). Curses count as nulls, blesses as x2s. If no
 non-rolling card is left, the whole deck counts (it reshuffles mid-draw). Up to v0.6.5 the line went in the pop-out by
 the hand (`ModifiersDisplayController`), which the game keeps in a hidden group, so it never showed.

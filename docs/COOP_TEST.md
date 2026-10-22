@@ -209,6 +209,7 @@ A duplicate drop is rare, so the dev tools can fake one (solo only, test campaig
 
 1. Turn on **Modifier deck odds**. In a scenario, right-click a character: under Attack Modifiers, a "Next draw" line
    with the number of cards left, then Null, -1/-2, +0, +1 or more, x2 (and Rolling, if the deck has rolling cards).
+   Each modifier icon has a small % tag on its top edge; the -1 and -2 tags add up to the -1/-2 figure.
 2. Check one number by hand: Null % = nulls left / (cards left - rolling cards left). At the start of a scenario with
    a 20-card deck with no perks it's 1/20 = 5%.
 3. Right-click a monster: a "Next monster draw" line for the monster deck.

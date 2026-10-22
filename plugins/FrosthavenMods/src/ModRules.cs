@@ -147,7 +147,7 @@ namespace FrosthavenMods
                 Name = "Modifier deck odds (mod)",
                 Description = "In scenarios, right-click a character: under Attack Modifiers (which already shows how many " +
                               "of each card are left), it also shows the odds of their next draw: null, -1/-2, +0, +1 or " +
-                              "more, x2 and a rolling bonus. Right-click a monster for the monster deck. It notes when a " +
+                              "more, x2 and a rolling bonus, plus each card's own chance on its icon. Right-click a monster for the monster deck. It notes when a " +
                               "deck will reshuffle at the end of the round. Curses count as nulls and blesses as x2s.\n\n" +
                               "Display only: it changes nothing in play, and it only does the math on the counts the " +
                               "game already shows.",

@@ -15,7 +15,7 @@ namespace FrosthavenMods
     /// House rule "Modifier deck odds": adds the odds of the next attack modifier draw under the Attack Modifiers section
     /// of the game's info panel (right-click a character or monster in a scenario; UIGeneralInfoCharacter /
     /// UIGeneralInfoMonster, which already show each value as left / used): a character's own deck, or the deck that
-    /// monster draws from (enemy, ally, neutral...).
+    /// monster draws from (enemy, ally, neutral...), plus a tag on each modifier icon with that card's own chance.
     ///
     /// Odds are for the card that settles the attack: rolling cards keep the draw going, so the settling card is the
     /// first non-rolling card left in the deck, and by symmetry every non-rolling card left is equally likely to be it.
@@ -47,6 +47,7 @@ namespace FrosthavenMods
                 string text = c == null ? null : Describe("Next draw", Compute(c.AttackModifierCards, c.DiscardedAttackModifierCards,
                     c.m_ShuffleAttackModifierCards));
                 Show(____attackModifiersContainer, text);
+                ShowPerCard(____attackModifiersContainer, ____data.AttackModifiers, c?.AttackModifierCards, c?.DiscardedAttackModifierCards);
             }
             catch (Exception e)
             {
@@ -68,6 +69,7 @@ namespace FrosthavenMods
                 string text = deck == null ? null : Describe("Next monster draw", Compute(deck.AttackModifierCards,
                     deck.DiscardedAttackModifierCards, MonsterReshuffle(deck)));
                 Show(____attackModifiersContainer, text);
+                ShowPerCard(____attackModifiersContainer, ____data.AttackModifiers, deck?.AttackModifierCards, deck?.DiscardedAttackModifierCards);
             }
             catch (Exception e)
             {
@@ -91,6 +93,77 @@ namespace FrosthavenMods
             line.transform.SetAsLastSibling();
             line.text = text;
             UiDump.Once("Info panel attack modifiers (with odds)", section.transform);
+        }
+
+        /// <summary>
+        /// A small tag across the top edge of each modifier icon with that card's own chance: for a normal card, the chance
+        /// it settles the next attack; for a rolling card, the chance the draw starts with it. The container's elements
+        /// are in the same order as the panel data's AttackModifiers (ListContainerBase.Init), one per card name.
+        /// </summary>
+        private static void ShowPerCard(UIGeneralInfoSection section, AttackModifierInfo[] infos, List<AttackModifierYMLData> pile,
+            List<AttackModifierYMLData> discard)
+        {
+            UIAttackModifiersContainer container = section != null ? section.GetComponentInChildren<UIAttackModifiersContainer>(true) : null;
+            if (container == null) return;
+            bool show = On && infos != null && pile != null;
+            List<AttackModifierYMLData> cards = show ? Drawable(pile, discard) : null;
+            int all = cards?.Count ?? 0, settling = cards?.Count(c => c != null && !c.Rolling) ?? 0;
+            int i = 0;
+            foreach (UIAttackModifierElement element in container.Elements)
+            {
+                Transform existing = element.transform.Find(Name);
+                if (!show || i >= infos.Length)
+                {
+                    if (existing != null) existing.gameObject.SetActive(false);
+                    i++;
+                    continue;
+                }
+                string name = infos[i++].DescriptionLocKey;
+                List<AttackModifierYMLData> same = cards.Where(c => c != null && c.Name == name).ToList();
+                int of = same.Count > 0 && same[0].Rolling ? all : settling;
+                TextMeshProUGUI tag = existing != null ? existing.GetComponentInChildren<TextMeshProUGUI>() : CreateTag(element.transform, section);
+                if (tag == null) continue;
+                tag.transform.parent.gameObject.SetActive(true);
+                tag.transform.parent.SetAsLastSibling();
+                tag.text = of <= 0 ? "-" : $"{Math.Round(100.0 * same.Count / of):0}%";
+                tag.alpha = same.Count > 0 ? 1f : 0.45f;
+            }
+        }
+
+        private static TextMeshProUGUI CreateTag(Transform element, UIGeneralInfoSection section)
+        {
+            TextMeshProUGUI template = section.GetComponentsInChildren<TextMeshProUGUI>(true).FirstOrDefault();
+            // a dark pill centred on the icon's top edge: half in the gap above the row, half over the icon's rim
+            var pill = new GameObject(Name, typeof(RectTransform));
+            pill.transform.SetParent(element, false);
+            var rt = (RectTransform)pill.transform;
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 1f);
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.sizeDelta = new Vector2(40f, 15f);
+            rt.anchoredPosition = new Vector2(0f, 1f);
+            pill.AddComponent<LayoutElement>().ignoreLayout = true;
+            var bg = pill.AddComponent<Image>();
+            bg.color = new Color(0.075f, 0.09f, 0.12f, 0.92f);
+            bg.raycastTarget = false;
+            var go = new GameObject("Text", typeof(RectTransform));
+            go.transform.SetParent(pill.transform, false);
+            var trt = (RectTransform)go.transform;
+            trt.anchorMin = Vector2.zero;
+            trt.anchorMax = Vector2.one;
+            trt.offsetMin = trt.offsetMax = Vector2.zero;
+            var text = go.AddComponent<TextMeshProUGUI>();
+            if (template != null)
+            {
+                text.font = template.font;
+                text.fontSharedMaterial = template.fontSharedMaterial;
+            }
+            text.color = template != null ? template.color : Color.white;
+            text.fontSize = 12f;
+            text.fontStyle = FontStyles.Bold;
+            text.enableWordWrapping = false;
+            text.alignment = TextAlignmentOptions.Center;
+            text.raycastTarget = false;
+            return text;
         }
 
         private static TextMeshProUGUI Create(UIGeneralInfoSection section)
@@ -131,10 +204,8 @@ namespace FrosthavenMods
 
         internal static Odds Compute(List<AttackModifierYMLData> pile, List<AttackModifierYMLData> discard, bool reshuffle)
         {
-            IEnumerable<AttackModifierYMLData> cards = pile ?? new List<AttackModifierYMLData>();
-            if (!cards.Any(c => c != null && !c.Rolling)) cards = cards.Concat(discard ?? new List<AttackModifierYMLData>());
             var o = new Odds { Reshuffle = reshuffle };
-            foreach (AttackModifierYMLData c in cards)
+            foreach (AttackModifierYMLData c in Drawable(pile, discard))
             {
                 if (c == null) continue;
                 o.Cards++;
@@ -146,6 +217,15 @@ namespace FrosthavenMods
                 else o.Zero++;
             }
             return o;
+        }
+
+        /// <summary>The cards the next draw can reach: the pile, or pile and discard if the pile holds only rolling cards (it
+        /// reshuffles mid-draw).</summary>
+        private static List<AttackModifierYMLData> Drawable(List<AttackModifierYMLData> pile, List<AttackModifierYMLData> discard)
+        {
+            var cards = new List<AttackModifierYMLData>(pile ?? new List<AttackModifierYMLData>());
+            if (!cards.Any(c => c != null && !c.Rolling)) cards.AddRange(discard ?? new List<AttackModifierYMLData>());
+            return cards;
         }
 
         /// <summary>Two short lines, in the order of the game's modifier icons (null first, x2 last).</summary>
