@@ -205,6 +205,7 @@ document.addEventListener("click", e => {
 
 let first = "mods";
 try { first = localStorage.getItem("companion-tab") || "mods"; } catch (e) {}
+if (location.hash.length > 1) first = location.hash.slice(1);     // /#map opens on that tab
 refresh().then(() => show((first in SRC && (first !== "play" || (S && S.playGuide))) ? first : "mods"));
 setInterval(() => { if (view === "mods" || (S && S.job && S.job.running)) refresh(); }, 3000);
 setInterval(() => fetch("/api/ping", {cache: "no-store"}).catch(() => {}), 15000);   // keeps a browser-only companion alive

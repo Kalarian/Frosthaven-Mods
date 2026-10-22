@@ -45,13 +45,20 @@ def status():
     }
 
 
-def guide(path):
+# The player guide is laid out for printing (the PDF's page margins come from @page): on screen it gets its own margins,
+# a readable width and a slightly larger font.
+SCREEN_GUIDE_CSS = ("<style>@media screen { body { max-width: 1000px; margin: 0 auto; padding: 28px 36px 56px; "
+                    "font-size: 11pt; } html { background: #f4f1ea; } }</style>")
+
+
+def guide(path, screen_css=""):
     try:
         with open(path, encoding="utf-8") as f:
             text = f.read()
     except OSError:
         return None
-    return text.replace("__VERSION__", game.installed_version() or paths.pack_version())
+    text = text.replace("__VERSION__", game.installed_version() or paths.pack_version())
+    return text.replace("</head>", screen_css + "</head>", 1) if screen_css else text
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -106,7 +113,7 @@ class Handler(BaseHTTPRequestHandler):
         if p == "/map":
             return self._html(mapview.render(q.get("campaign", "")))
         if p == "/guide/player":
-            text = guide(paths.PLAYER_GUIDE)
+            text = guide(paths.PLAYER_GUIDE, SCREEN_GUIDE_CSS)
             return self._html(text) if text is not None else self._html(mapview._message(
                 "No player guide", "This copy of the companion was built without it."), 404)
         if p == "/guide/play":
