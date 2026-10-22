@@ -109,8 +109,9 @@ namespace FrosthavenMods
             }
         }
 
-        /// <summary>Full alpha on the tooltip background's images, plus a solid panel behind it (the background sprite
-        /// itself is partly see-through), for our tooltips; the game's own values back for any other.</summary>
+        /// <summary>Full alpha on the tooltip background's images, plus a solid dark panel over it, under the text (the
+        /// background sprite itself is partly see-through, with ragged edges), for our tooltips; the game's own look
+        /// back for any other.</summary>
         private static void Opaque(GameObject background, RectTransform tooltip, bool on)
         {
             if (background == null) return;
@@ -123,7 +124,7 @@ namespace FrosthavenMods
                 image.color = c;
             }
             var bg = (RectTransform)background.transform;
-            // behind the background: its sibling, or the tooltip's first child if the background is the tooltip itself
+            // next to the background (its sibling), or the tooltip's first child if the background is the tooltip itself
             bool isRoot = bg == tooltip;
             Transform holder = isRoot ? bg : bg.parent;
             Transform backing = holder.Find(BackingName);
@@ -146,7 +147,10 @@ namespace FrosthavenMods
             }
             else
             {
-                rt.SetSiblingIndex(bg.GetSiblingIndex());
+                // straight after the background (over it, under the text). Moving one shifts the other, so place it
+                // from where it is now; a plain "at the background's index" swapped the two on every hover.
+                int at = bg.GetSiblingIndex(), now = rt.GetSiblingIndex();
+                if (now != at + 1) rt.SetSiblingIndex(now < at ? at : at + 1);
                 rt.anchorMin = bg.anchorMin;
                 rt.anchorMax = bg.anchorMax;
                 rt.pivot = bg.pivot;
