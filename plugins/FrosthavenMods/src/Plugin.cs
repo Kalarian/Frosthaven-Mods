@@ -12,7 +12,7 @@ namespace FrosthavenMods
     public class Plugin : BaseUnityPlugin
     {
         public const string Guid = "frosthaven.mods";
-        public const string Version = "0.6.5";
+        public const string Version = "0.6.6";
 
         internal static ManualLogSource Log;
 
