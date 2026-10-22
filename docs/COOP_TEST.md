@@ -207,14 +207,13 @@ A duplicate drop is rare, so the dev tools can fake one (solo only, test campaig
 
 ## Solo: modifier deck odds (host, any time)
 
-1. Turn on **Modifier deck odds**. In a scenario, open the attack modifier panel by your hand (the game's left / used
-   counters): under them, a "Next draw" line with Null, x2, -1/-2, +0, +1/+2 (and Rolling, if your deck has rolling
-   cards), and a "Monsters" line.
+1. Turn on **Modifier deck odds**. In a scenario, right-click a character: under Attack Modifiers, a "Next draw" line
+   with the number of cards left, then Null, -1/-2, +0, +1 or more, x2 (and Rolling, if the deck has rolling cards).
 2. Check one number by hand: Null % = nulls left / (cards left - rolling cards left). At the start of a scenario with
    a 20-card deck with no perks it's 1/20 = 5%.
-3. Attack until a null or x2 comes up, then open the panel: "(reshuffles at the end of the round)" appears; after the
-   round, it's gone and the counts are back to full.
-4. Keep the panel open while a monster attacks: the Monsters line updates by itself.
+3. Right-click a monster: a "Next monster draw" line for the monster deck.
+4. Attack until a null or x2 comes up, then right-click that character: "Reshuffles at the end of the round" appears;
+   after the round, it's gone and the counts are back to full.
 5. Turn the rule off: the extra lines are gone; the game's counters are unchanged.
 
 ## Solo: scenario map file (host, any time)

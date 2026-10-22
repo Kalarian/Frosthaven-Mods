@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FHGUI.Common;
 using HarmonyLib;
 using ScenarioRuleLibrary;
 using ScenarioRuleLibrary.YML;
@@ -11,15 +12,19 @@ using UnityEngine.UI;
 namespace FrosthavenMods
 {
     /// <summary>
-    /// House rule "Modifier deck odds": adds the odds of the next attack modifier draw to the game's own modifier panel
-    /// (the pop-out by the hand, ModifiersDisplayController, which already shows each value as left / used): for the
-    /// character, and for the monster deck.
+    /// House rule "Modifier deck odds": adds the odds of the next attack modifier draw under the Attack Modifiers section
+    /// of the game's info panel (right-click a character or monster in a scenario; UIGeneralInfoCharacter /
+    /// UIGeneralInfoMonster, which already show each value as left / used): a character's own deck, or the deck that
+    /// monster draws from (enemy, ally, neutral...).
     ///
     /// Odds are for the card that settles the attack: rolling cards keep the draw going, so the settling card is the
     /// first non-rolling card left in the deck, and by symmetry every non-rolling card left is equally likely to be it.
     /// "Rolling" is the chance the draw starts with a rolling card (an extra bonus on top). If no non-rolling card is
     /// left, the deck is reshuffled mid-draw, so the whole deck counts. Curses count as nulls and blesses as x2s, as they
     /// play. Display only: reads the decks, changes nothing.
+    ///
+    /// (Until v0.6.5 the line went in the pop-out by the hand, ModifiersDisplayController, but the game keeps that
+    /// pop-out in a hidden group, so it never showed.)
     /// </summary>
     [HarmonyPatch]
     internal static class DeckOdds
@@ -31,24 +36,17 @@ namespace FrosthavenMods
         private static readonly AccessTools.FieldRef<CMonsterAttackModifierDeck, bool> MonsterReshuffle =
             AccessTools.FieldRefAccess<CMonsterAttackModifierDeck, bool>("m_ShuffleAttackModifierCards");
 
-        [HarmonyPatch(typeof(ModifiersDisplayController), nameof(ModifiersDisplayController.Display))]
+        [HarmonyPatch(typeof(UIGeneralInfoCharacter), "ShowStatusTab")]
         [HarmonyPostfix]
-        private static void AddOdds(ModifiersDisplayController __instance, CCharacterClass characterClass, VerticalLayoutGroup ___popupGroup)
+        private static void CharacterOdds(UIGeneralInfoCharacter.PlayerCharacterGeneralInfoData ____data,
+            UIGeneralInfoSection ____attackModifiersContainer)
         {
             try
             {
-                Transform existing = ___popupGroup != null ? ___popupGroup.transform.Find(Name) : null;
-                if (!On || characterClass == null || ___popupGroup == null)
-                {
-                    if (existing != null) existing.gameObject.SetActive(false);
-                    return;
-                }
-                OddsLine line = existing != null ? existing.GetComponent<OddsLine>() : Create(___popupGroup.transform);
-                if (line == null) return;
-                line.gameObject.SetActive(true);
-                line.transform.SetAsLastSibling();
-                line.Show(__instance, characterClass);
-                UiDump.Once("Modifier panel (with odds)", ___popupGroup.transform);
+                CCharacterClass c = ____data.Actor?.CharacterClass;
+                string text = c == null ? null : Describe("Next draw", Compute(c.AttackModifierCards, c.DiscardedAttackModifierCards,
+                    c.m_ShuffleAttackModifierCards));
+                Show(____attackModifiersContainer, text);
             }
             catch (Exception e)
             {
@@ -56,26 +54,71 @@ namespace FrosthavenMods
             }
         }
 
-        private static OddsLine Create(Transform parent)
+        [HarmonyPatch(typeof(UIGeneralInfoMonster), "ShowStatusTab")]
+        [HarmonyPostfix]
+        private static void MonsterOdds(UIGeneralInfoMonster.MonsterGeneralInfoData ____data, UIGeneralInfoSection ____attackModifiersContainer)
         {
-            TextMeshProUGUI template = parent.GetComponentsInChildren<TextMeshProUGUI>(true).FirstOrDefault();
+            try
+            {
+                CMonsterAttackModifierDeck deck = null;
+                if (On && !string.IsNullOrEmpty(____data.ActorGuid) && ScenarioManager.Scenario != null)
+                    deck = ScenarioManager.Scenario.AllActors.FirstOrDefault(a => a.ActorGuid == ____data.ActorGuid) is CEnemyActor enemy
+                        ? MonsterClassManager.GetAttackModifiersDeck(enemy)
+                        : MonsterClassManager.EnemyMonsterAttackModifierDeck;
+                string text = deck == null ? null : Describe("Next monster draw", Compute(deck.AttackModifierCards,
+                    deck.DiscardedAttackModifierCards, MonsterReshuffle(deck)));
+                Show(____attackModifiersContainer, text);
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogWarning("Modifier deck odds: " + e.Message);
+            }
+        }
+
+        /// <summary>Puts the odds text as the last line of the section (a vertical layout: label, then the modifier grid).</summary>
+        private static void Show(UIGeneralInfoSection section, string text)
+        {
+            if (section == null) return;
+            Transform existing = section.transform.Find(Name);
+            if (!On || string.IsNullOrEmpty(text))
+            {
+                if (existing != null) existing.gameObject.SetActive(false);
+                return;
+            }
+            TextMeshProUGUI line = existing != null ? existing.GetComponent<TextMeshProUGUI>() : Create(section);
+            if (line == null) return;
+            line.gameObject.SetActive(true);
+            line.transform.SetAsLastSibling();
+            line.text = text;
+            UiDump.Once("Info panel attack modifiers (with odds)", section.transform);
+        }
+
+        private static TextMeshProUGUI Create(UIGeneralInfoSection section)
+        {
+            TextMeshProUGUI template = section.GetComponentsInChildren<TextMeshProUGUI>(true).FirstOrDefault();
             var go = new GameObject(Name, typeof(RectTransform));
-            go.transform.SetParent(parent, false);
+            go.transform.SetParent(section.transform, false);
             var text = go.AddComponent<TextMeshProUGUI>();
             if (template != null)
             {
                 text.font = template.font;
                 text.fontSharedMaterial = template.fontSharedMaterial;
                 text.color = template.color;
-                text.fontSize = Math.Max(12f, template.fontSize * 0.75f);
+                text.fontSize = Math.Max(14f, template.fontSize * 0.8f);
             }
-            else text.fontSize = 16f;
+            else text.fontSize = 18f;
             text.enableWordWrapping = true;
-            text.alignment = TextAlignmentOptions.Left;
+            text.alignment = TextAlignmentOptions.TopLeft;
             text.raycastTarget = false;
+            // as wide as the modifier grid; the section's layout may or may not size its children, so set both ways
+            float width = section.Content != null && section.Content.rect.width > 0 ? section.Content.rect.width : 350f;
+            ((RectTransform)go.transform).sizeDelta = new Vector2(width, 0f);
             var layout = go.AddComponent<LayoutElement>();
-            layout.minWidth = 220f;
-            return go.AddComponent<OddsLine>();
+            layout.preferredWidth = width;
+            VerticalLayoutGroup group = section.GetComponent<VerticalLayoutGroup>();
+            if (group == null || !group.childControlHeight)
+                go.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+            return text;
         }
 
         // ---- the odds
@@ -105,68 +148,17 @@ namespace FrosthavenMods
             return o;
         }
 
+        /// <summary>Two short lines, in the order of the game's modifier icons (null first, x2 last).</summary>
         internal static string Describe(string who, Odds o)
         {
             int settling = o.Cards - o.Rolling;
             if (settling <= 0) return $"<b>{who}:</b> no cards";
             string P(int n) => $"{Math.Round(100.0 * n / settling):0}%";
-            string line = $"<b>{who}</b> ({o.Cards} left): Null {P(o.Null)} | x2 {P(o.X2)} | -1/-2 {P(o.Minus)} | +0 {P(o.Zero)} | +1/+2 {P(o.Plus)}";
-            if (o.Rolling > 0) line += $" | Rolling {Math.Round(100.0 * o.Rolling / o.Cards):0}%";
-            if (o.Reshuffle) line += " <i>(reshuffles at the end of the round)</i>";
-            return line;
-        }
-
-        internal static string Text(CCharacterClass character)
-        {
-            string text = Describe("Next draw", Compute(character.AttackModifierCards, character.DiscardedAttackModifierCards,
-                character.m_ShuffleAttackModifierCards));
-            CMonsterAttackModifierDeck monsters = MonsterClassManager.EnemyMonsterAttackModifierDeck;
-            if (monsters != null)
-                text += "\n" + Describe("Monsters", Compute(monsters.AttackModifierCards, monsters.DiscardedAttackModifierCards,
-                    MonsterReshuffle(monsters)));
+            string text = $"<b>{who}</b> ({o.Cards} cards left)\n" +
+                          $"Null {P(o.Null)}   -1/-2 {P(o.Minus)}   +0 {P(o.Zero)}   +1 or more {P(o.Plus)}   x2 {P(o.X2)}";
+            if (o.Rolling > 0) text += $"   Rolling {Math.Round(100.0 * o.Rolling / o.Cards):0}%";
+            if (o.Reshuffle) text += "\n<i>Reshuffles at the end of the round</i>";
             return text;
-        }
-
-        /// <summary>Keeps the line current while the panel is open (the game fills its counters only when it opens).</summary>
-        internal sealed class OddsLine : MonoBehaviour
-        {
-            private ModifiersDisplayController _panel;
-            private CCharacterClass _character;
-            private TextMeshProUGUI _text;
-            private string _key;
-
-            public void Show(ModifiersDisplayController panel, CCharacterClass character)
-            {
-                _panel = panel;
-                _character = character;
-                _key = null;
-                Refresh();
-            }
-
-            private void Update()
-            {
-                if (_panel != null && _panel.IsOpen()) Refresh();
-            }
-
-            private void Refresh()
-            {
-                try
-                {
-                    if (_character == null) return;
-                    if (_text == null) _text = GetComponent<TextMeshProUGUI>();
-                    CMonsterAttackModifierDeck m = MonsterClassManager.EnemyMonsterAttackModifierDeck;
-                    string key = $"{_character.AttackModifierCards.Count}/{_character.DiscardedAttackModifierCards.Count}/{_character.m_ShuffleAttackModifierCards}" +
-                                 (m == null ? "" : $"/{m.AttackModifierCards.Count}/{m.DiscardedAttackModifierCards.Count}/{MonsterReshuffle(m)}");
-                    if (key == _key) return;
-                    _key = key;
-                    _text.text = Text(_character);
-                }
-                catch (Exception e)
-                {
-                    Plugin.Log.LogWarning("Modifier deck odds: " + e.Message);
-                    enabled = false;
-                }
-            }
         }
     }
 }
