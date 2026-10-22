@@ -46,10 +46,11 @@ def status():
 
 
 # The mod guide is laid out for printing (the PDF). Inside the Mods tab it's shown below the status card, in the app's
-# dark colours (its colours are CSS variables), without its own title (the tab has one), sized by the tab to fit.
+# dark colours (its colours are CSS variables), without its own title (the tab has one) or its install steps (the
+# tab's buttons do that), sized by the tab to fit.
 EMBED_GUIDE_CSS = ("<style>:root { --ink:#e8e2d4; --muted:#a59f92; --line:#2f3742; --accent:#e3c98b; --soft:#1b2027; "
                    "--good:#7fc48a; --tag:#2a313b; } html, body { background: transparent; } "
-                   "body { font-size: 14px; line-height: 1.5; margin: 0; } h1, .subtitle { display: none; } "
+                   "body { font-size: 14px; line-height: 1.5; margin: 0; } h1, .subtitle, .install { display: none; } "
                    ".mod { background: #1b2027; } .mod .tag.play { background: #3e2a1f; color: #f0b79c; } "
                    ".mod .tag.look { background: #1f3a26; color: #9fd8aa; } "
                    "kbd { background: #222832; border-color: #4a5360; color: #e8e2d4; } a { color: #8fc3e8; }</style>")
