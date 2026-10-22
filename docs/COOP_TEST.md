@@ -1,4 +1,4 @@
-# Co-op test: the Frosthaven Mods house rules (v0.6.3)
+# Co-op test: the Frosthaven Mods house rules (v0.6.4)
 
 Two players: **Host** (runs the campaign) and **Client** (joins). Takes about an hour. Have voice chat open, since
 some steps are done at the same moment.
@@ -46,7 +46,7 @@ some steps are done at the same moment.
 **Both players:**
 7. Close Frosthaven and run the installer (`Install Frosthaven Mods.exe`, from the
    [latest release](https://github.com/Kalarian/Frosthaven-Mods/releases/latest)). Click **Install / Update**. The
-   window must say **v0.6.3** for both of you.
+   window must say **v0.6.4** for both of you.
    - If Windows shows a warning, click "More info", then "Run anyway".
 8. Start the game.
 

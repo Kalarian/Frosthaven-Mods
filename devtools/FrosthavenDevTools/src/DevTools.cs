@@ -12,6 +12,7 @@ namespace FrosthavenDevTools
     /// Testing shortcuts for the author's own machine. NOT part of the mod pack (lives in devtools/, never packed).
     /// Solo games only. They call the game's own debug console commands, which ship in the retail build but have no
     /// console to type them into:
+    ///   Ctrl+F5   write every event's Reveal event outcomes preview to <game>\FrosthavenMods\event-previews.txt
     ///   Ctrl+F6   draw the next town event of the current season (to test the mod's Reveal event outcomes)
     ///   Ctrl+F9   +100 gold and +10 lumber/metal/hide per party member, +10 of each herb to the Frosthaven supply
     ///   Ctrl+F10  "win"            DebugMenu.WinScenarioCommand: wins the current scenario
@@ -61,6 +62,7 @@ namespace FrosthavenDevTools
             }
             Keyboard kb = Keyboard.current;
             if (kb == null || !kb.ctrlKey.isPressed) return;
+            if (kb.f5Key.wasPressedThisFrame) Run("write all event previews", DumpEventPreviews);
             if (kb.f6Key.wasPressedThisFrame) Run("draw a town event", DrawEvent);
             if (kb.f9Key.wasPressedThisFrame) Run("+100 gold, +10 of each material and herb", AddGold);
             if (kb.f10Key.wasPressedThisFrame) Run("win scenario", () => Win.Invoke(null, new object[] { null, -1 }));
@@ -109,6 +111,15 @@ namespace FrosthavenDevTools
             // The outpost shows pending rewards when it loads; ask it to look now.
             PushActiveEvent?.Invoke(map.View, new object[] { false });
             map.View.RefreshView();
+        }
+
+        /// <summary>Ctrl+F5: the mod's preview of every event option, for checking the wording (the mod does the work).
+        /// Looked up on the key press: the dev tools load before the mod.</summary>
+        private static void DumpEventPreviews()
+        {
+            MethodInfo DumpPreviews = AccessTools.Method("FrosthavenMods.EventPreview:DumpAll");
+            if (DumpPreviews == null) throw new InvalidOperationException("the installed Frosthaven Mods has no event preview dump");
+            _log.LogInfo("Dev tools: event previews written to " + DumpPreviews.Invoke(null, null));
         }
 
         private static void DrawEvent()
