@@ -51,7 +51,9 @@ Mod layout, `mods/<Name>/`:
   - The window's row list is never emptied.
 - The window's scroll view points at the wrong object (`Content_CampaignSpesific`, empty in game, instead of their
   sized parent `Content`), so with our rules the last rows were cut off with no scrollbar or wheel. `RulesScroll`
-  repoints it when the window opens, and in game pins our heading and its note above the scrolling switches.
+  repoints it each time the window builds its rows (on open and on every switch change), pads the rows clear of the
+  scrollbar, keeps their tooltips on screen, and starts the list at the top when the window is shown. The rules are
+  listed alphabetically.
 - Rules so far:
   - **Tradeable resources and equipment** (bit 24; released in v0.2.0 as "Shared gold", then built as two rules,
     Give resources and Item trading, merged into one; bit 25 is unused). In the outpost, Ctrl+left-click the portrait
