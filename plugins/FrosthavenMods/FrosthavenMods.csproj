@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>frosthaven.mods</AssemblyName>
     <Product>FrosthavenMods</Product>
-    <Version>0.6.7</Version>
+    <Version>0.6.8</Version>
     <RootNamespace>FrosthavenMods</RootNamespace>
     <LangVersion>latest</LangVersion>
     <Nullable>disable</Nullable>
