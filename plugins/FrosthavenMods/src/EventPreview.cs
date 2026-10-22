@@ -343,7 +343,8 @@ namespace FrosthavenMods
 
         /// <summary>Checking aid (the dev tools' Ctrl+F5 calls it): every event's options played out on copies of the
         /// current campaign, written to <game>\FrosthavenMods\event-previews.txt exactly as the tooltips would show
-        /// them. Display only: the live campaign is not touched. Returns the file's path.</summary>
+        /// them, with More story events' verdict on each town event. Display only: the live campaign is not touched.
+        /// Returns the file's path.</summary>
         public static string DumpAll()
         {
             var map = Singleton<FHMapChoreographer>.InstanceFast;
@@ -358,6 +359,19 @@ namespace FrosthavenMods
             {
                 events++;
                 sb.AppendLine().AppendLine($"{def.ID.ID} ({def.Type})");
+                if (def.Type == OutpostEventType.Outpost)
+                {
+                    // what More story events would decide if this were the top card now
+                    string story;
+                    try
+                    {
+                        story = !def.AttackInfo.IsEmpty ? "attack: never put back"
+                            : StoryEvents.UnlocksSomethingNew(map.View.GameController, def, out string what) ? "kept: " + what
+                            : "nothing new: would go to the bottom";
+                    }
+                    catch (Exception e) { story = "check failed: " + (e.InnerException ?? e).Message; }
+                    sb.AppendLine("  story check: " + story);
+                }
                 List<uint> ids;
                 try
                 {

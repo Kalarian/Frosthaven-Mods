@@ -1,4 +1,4 @@
-# Co-op test: the Frosthaven Mods house rules (v0.6.6)
+# Co-op test: the Frosthaven Mods house rules (v0.6.7)
 
 Two players: **Host** (runs the campaign) and **Client** (joins). Takes about an hour. Have voice chat open, since
 some steps are done at the same moment.
@@ -12,6 +12,7 @@ some steps are done at the same moment.
 5. The battle stats (extra rows and the Campaign view on the post-scenario Statistics page) show the same numbers on
    both PCs.
 6. Event previews (Reveal event outcomes) show the same thing on both PCs, and the result matches the preview.
+   More story events puts back the same card on both PCs (the same town event comes up for both).
 7. Rules that change play are locked during online scenarios, and the co-op desync fixes (Game bug fixes) hold up:
    no desync, including after short rests.
 
@@ -37,16 +38,17 @@ some steps are done at the same moment.
 4. Spend some of that gold so the characters own items (the shop, or the Craftsman):
    - every character owns **at least 2 items**, and at least one of them is **worn** (equipped);
    - **two characters own the same item** (e.g. both buy the same cheap item). That's for the "already owns" check.
-5. In Options > **Custom Rules**, turn on all ten mod rules: **Tradeable resources and equipment**, **Share duplicate
-   loot**, **Reveal event outcomes**, **Dwarf's balance changes**, **Game bug fixes**, **Milestone saves**, **Battle
-   stats**, **Easier item reward window**, **Modifier deck odds** and **Scenario map file**.
-6. Optional, solo: test duplicate loot, battle stats and milestone saves (see the end of this file). Then save and quit to the main
-   menu.
+5. In Options > **Custom Rules**, turn on all eleven mod rules: **Tradeable resources and equipment**, **Share duplicate
+   loot**, **Reveal event outcomes**, **Dwarf's balance changes**, **More story events**, **Game bug fixes**,
+   **Milestone saves**, **Battle stats**, **Easier item reward window**, **Modifier deck odds** and **Scenario map
+   file**.
+6. Optional, solo: test duplicate loot, battle stats, milestone saves and more story events (see the end of this
+   file). Then save and quit to the main menu.
 
 **Both players:**
 7. Close Frosthaven and run the installer (`Install Frosthaven Mods.exe`, from the
    [latest release](https://github.com/Kalarian/Frosthaven-Mods/releases/latest)). Click **Install / Update**. The
-   window must say **v0.6.6** for both of you.
+   window must say **v0.6.7** for both of you.
    - If Windows shows a warning, click "More info", then "Run anyway".
 8. Start the game.
 
@@ -56,7 +58,7 @@ some steps are done at the same moment.
 |---|---|---|---|
 | A1 | Host | Load the test campaign as a multiplayer game. Client joins. | The join works. |
 | A2 | Host | Give the client 2 of the 4 characters (the game's party slot / player assignment). | Each player controls 2 characters. Write down which ones: Host = **H1, H2**, Client = **C1, C2**. Also note which two own the same item. |
-| A3 | Both | Options > **Custom Rules**. | Both see "Mod pack rules" with all ten mod rules, all Active. On the client they're greyed out (only the host can change them). |
+| A3 | Both | Options > **Custom Rules**. | Both see "Mod pack rules" with all eleven mod rules, all Active. On the client they're greyed out (only the host can change them). |
 | A4 | Both | **CHECKPOINT** (#1) | |
 
 ## B. House rules sync
@@ -137,7 +139,7 @@ To check an item on a character: select them and open their equipment / item scr
 
 | # | Who | Do | Expected |
 |---|---|---|---|
-| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows all ten rules on, for both players. |
+| I1 | Host | Save. Both quit to the main menu. Host reloads the campaign online, client rejoins. | The join works. Gold, materials and items are as before. Custom Rules still shows all eleven rules on, for both players. |
 | I2 | Both | **CHECKPOINT** (#9) | Identical to #8. |
 | I3 | Both | Start any scenario together, bringing **given** items, and play 3–4 rounds normally. Use a given item if you can. **Each player short rests at least once** (with Restful Slippers if anyone owns them). | **No desync message.** The given items work. (The Give button is hidden during scenarios.) |
 | I3b | Host | During the scenario, open Options > **Custom Rules**. | **Share duplicate loot**, **Dwarf's balance changes** and **Game bug fixes** are greyed out with "Locked during online scenarios" in their description. **Tradeable resources** and **Reveal event outcomes** can still be switched. Close without changing anything. |
@@ -158,6 +160,7 @@ point in the session, do this before the host chooses:
 | J2 | Both | Compare what each option's box says. | **The same text on both PCs.** |
 | J3 | Host | Choose an option. | The result (outcome text and effects) matches what the preview showed, on both PCs. Note the event ID (e.g. SO-12) if anything differs. |
 | J4 | Both | If it's an outpost attack from **WO-33, WO-34, WO-35, WO-71 or SO-23**, note the order buildings are attacked in. | It follows the card (Game bug fixes): WO-33 even-numbered buildings from highest number down, WO-34 buildings 1–40 from highest number down, WO-35 highest level first, WO-71 lowest level first, SO-23 only even-numbered buildings. Same on both PCs. |
+| J5 | Both | For a **town** event: note its ID (e.g. SO-12) and whether its options unlock anything (a "New event", "Calendar: section", "New quest unlocked"... line in the previews). | **The same event on both PCs.** It's usually one that unlocks something, but not always: the redraw happens only once, and an attack is never put back (More story events). The coop logs record each decision as a `STORY:` line; they're compared after the test. |
 
 ## After the test
 
@@ -194,6 +197,21 @@ A duplicate drop is rare, so the dev tools can fake one (solo only, test campaig
    icon. Note anything memorable (a crit, a null, a summon, a heal) and check the matching rows.
 3. Click **Campaign**: Scenarios played goes up by one for every scenario finished with the mod. Click
    **This scenario** to switch back.
+
+## Solo: more story events (host, before the session)
+
+Use the test campaign: drawing an event takes it out of the deck, as a real draw does.
+
+1. Turn on **More story events**. In the outpost, with no event open, press **Ctrl+F5**. The file
+   `FrosthavenMods\event-previews.txt` (in the game folder) now has a **story check:** line under every town event
+   (SO-.. and WO-..): **kept: option N: ...** (what it would unlock, e.g. `event:SO-40` or `section:180.1`),
+   **nothing new: would go to the bottom**, or **attack: never put back**.
+2. Spot-check a few: an event whose options show "New event", "Calendar: section" or "New quest unlocked" should say
+   **kept**; one that only gives or takes gold, materials or morale should say **nothing new**. Send Claude the file.
+3. Press **Ctrl+F6** to draw a town event. `FrosthavenMods\coop-log.txt` gets a `STORY: week N: ...` line: either the
+   top card was kept (and is the event on screen), or it went to the bottom and the next card is the one on screen.
+   Resolve it, and draw a few more the same way.
+4. Turn the rule off and press **Ctrl+F6** again: no `STORY:` line, and the top card is drawn as usual.
 
 ## Solo: milestone saves (host, any time)
 

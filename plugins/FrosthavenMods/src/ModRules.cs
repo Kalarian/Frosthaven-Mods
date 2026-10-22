@@ -41,6 +41,7 @@ namespace FrosthavenMods
         public const ERulesFlag RewardWindow = (ERulesFlag)(1 << 21);
         public const ERulesFlag DeckOdds = (ERulesFlag)(1 << 20);
         public const ERulesFlag ScenarioMap = (ERulesFlag)(1 << 19);
+        public const ERulesFlag StoryEvents = (ERulesFlag)(1 << 18);
 
         public static readonly List<Rule> All = new List<Rule>
         {
@@ -89,6 +90,18 @@ namespace FrosthavenMods
                               "- Scenario 14: also kill all Abael Herders to win; Piranha Pigs spawn only on odd rounds " +
                               "and Lightning Eels only on even rounds, alternating spawn points.\n" +
                               "- Boneshaper's first mastery (kill 15 of your summons) counts over any number of scenarios.",
+            },
+            new Rule
+            {
+                Flag = StoryEvents,
+                Name = "More story events (mod)",
+                Description = "When the week's town event is drawn, if none of its options could unlock anything new (a " +
+                              "scenario, a section, another event, a building, an item, a quest...), it goes to the " +
+                              "bottom of the deck and the next card is drawn instead. Only once a week: the second card " +
+                              "is kept, whatever it is. Outpost attacks are never put back.\n\n" +
+                              "Roughly half of summer weeks and a quarter of winter weeks bring something new, instead " +
+                              "of about a third and a seventh.\n" +
+                              "Board game rule bent: the top card of the event deck is always the one you read.",
             },
             new Rule
             {

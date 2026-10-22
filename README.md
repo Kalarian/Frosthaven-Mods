@@ -42,7 +42,7 @@ Mod layout, `mods/<Name>/`:
 `loader/` (see its README). Every code feature is a **campaign house rule**:
 - The game has a House Rules screen (Options > House Rules), but it's hidden in this build because
   `GameSettingsService.ValidCampaignRules` is `None`. The plugin shows it for campaigns and adds our own switches.
-- Our rules are extra bits (`1 << 19` to `1 << 30`) in the game's own campaign rules number (`PartyAdventureData.Rules`).
+- Our rules are extra bits (`1 << 18` to `1 << 30`) in the game's own campaign rules number (`PartyAdventureData.Rules`).
   The game saves that number in the save header and sends it to co-op players (join token + `ChangeHouseRuleSettings`),
   so the host's choice reaches everyone and is stored in the campaign. The vanilla game ignores unknown bits.
 - The plugin fixes three game bugs on the way:
@@ -93,6 +93,15 @@ Mod layout, `mods/<Name>/`:
     Herders goal added to the level data in `CSRLYML.GetCustomLevel`; automatic spawners off, `ScenarioScript_FH014`
     spawns pigs on odd rounds b/d and eels on even rounds c/e), Boneshaper mastery 1 career-long (summon kills from each `ScenarioResult` added up in a marker in
     `CampaignState.LootedChestTreasureTableIDs`; at 15 on a win the mastery is added to `MasteriesCompleted`).
+  - **More story events** (bit 18; `StoryEvents`): a prefix on `OutpostEventController.Action_ActivateEventForOutpost`
+    (the weekly town event draw, inside the phase command every peer runs). If the top valid card is not an attack and
+    none of its options would unlock anything new, it moves to the bottom of the deck and the game draws the next valid
+    card (once a week). Events are code, so each option is played out on a clone of the campaign
+    (`StateSerializer<CampaignState>.Clone`, as `FHMultiplayerClient` copies it), the party's steps taken as done, and
+    the clone is compared with the campaign: scenarios, sections (read, pending, calendar), events in any deck,
+    buildings to construct, shop and craftable items, town guard cards and perks, personal quests, classes, puzzles,
+    job postings, stickers. A failed play-out keeps the card. Each decision goes to the co-op log (`STORY:`), and the
+    Ctrl+F5 event dump shows the verdict for every town event.
   - **Game bug fixes** (bit 30; `BugFixes`): fair attack modifier shuffles. The game's `Extensions.Shuffle` is off
     by one (Sattolo's algorithm: no card stays put) and decks are built / reshuffled by inserting at `Next(0, Count)`
     (never the bottom: a +0 is always the bottom card of a new deck). Nulls and x2s come up ~6.25% of draws each instead
