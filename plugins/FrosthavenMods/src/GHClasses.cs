@@ -1,9 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using BepInEx;
 using HarmonyLib;
+using Newtonsoft.Json.Linq;
 using ScenarioRuleLibrary;
+using ScenarioRuleLibrary.YML;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace FrosthavenMods
 {
@@ -14,10 +19,17 @@ namespace FrosthavenMods
     ///   - 3D model: Frosthaven ships no hero bundle for Gloomhaven models, and asking for one is a null-reference crash
     ///     (AssetBundleManager.BundleConfigForPrefab finds no config). Until the real model loads from Gloomhaven's
     ///     bundles (stage 2), any hero model without a bundle borrows the Drifter's (an Inox, like the Brute).
+    ///   - UI config: Frosthaven keeps one CharacterConfigUI per hero (portraits, icons, class colour, card skin, where the
+    ///     model stands on the character screen). A class without one gets the Banner Spear's for most lookups and null
+    ///     for the 3D preview, which parks the model half-way into the floor. Each ported class gets a copy of the
+    ///     Drifter's config with its own name, colour and whatever 2D art the player's Gloomhaven install has for it.
+    ///   - Cards: card IDs of 10000 and more select the Gloomhaven-era card prefab, which Frosthaven ships without its
+    ///     background sprites (a white rectangle with two red "lost" tiles). Gloomhaven classes' cards are drawn with a
+    ///     Frosthaven card prefab instead, through the same generated-layout code the game uses for its long rest card.
     ///   - Text: keys Frosthaven lacks ($ABILITY_CARD_Trample$, PERK_Brute_01...) are answered from
     ///     FrosthavenMods\ghclasses\strings.tsv; Frosthaven's own translation wins wherever it has the key.
-    /// Inert without converted data: no strings file means no text answers, and Frosthaven's own heroes all have
-    /// bundles, so the stand-in never applies to them.
+    /// Inert without converted data: no ruleset class with a Gloomhaven model means no config copy and no card
+    /// redirect, no strings file means no text answers, and Frosthaven's own heroes all have bundles.
     /// </summary>
     [HarmonyPatch]
     internal static class GHClasses
@@ -27,6 +39,13 @@ namespace FrosthavenMods
         private static Dictionary<string, string> _strings;
         private static readonly Dictionary<string, bool> GameHasKey = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
         private static readonly HashSet<string> Reported = new HashSet<string>();
+        private static bool _quitting;
+
+        static GHClasses()
+        {
+            // Pooled cards are torn down at quit after the UI tools are gone; see NotWhileQuitting.
+            Application.quitting += () => _quitting = true;
+        }
 
         private static Dictionary<string, string> Strings
         {
@@ -52,14 +71,29 @@ namespace FrosthavenMods
             }
         }
 
+        /// <summary>True for Gloomhaven's and Jaws of the Lion's heroes: the enum entries before Frosthaven's first, the
+        /// Infuser. The game compares class names case-insensitively, so this does too.</summary>
+        private static bool IsGloomhavenClass(string name, out ECharacter model)
+        {
+            model = ECharacter.None;
+            return !string.IsNullOrEmpty(name) && Enum.TryParse(name, true, out model) && Enum.IsDefined(typeof(ECharacter), model)
+                   && model != ECharacter.None && model < ECharacter.Infuser;
+        }
+
+        /// <summary>The ruleset class whose model is <paramref name="model"/>, or null: only ported classes get treatment.
+        /// (Vanilla code asks about ECharacter.Elementalist as a placeholder; it must keep getting the game's own answer.)</summary>
+        private static CCharacterClass PortedClass(ECharacter model) =>
+            CharacterClassManager.Classes?.FirstOrDefault(c => c != null && c.CharacterModel == model);
+
+        private static CCharacterClass ClassById(string classId) =>
+            classId == null ? null : CharacterClassManager.Classes?.FirstOrDefault(c => c != null && c.ID == classId);
+
         // ------------------------------------------------------------------ 3D model stand-in
 
         /// <summary>The hero model to load instead of <paramref name="prefabName"/>, or null to load it as asked.</summary>
         private static string StandIn(string prefabName)
         {
-            // Only Gloomhaven's and Jaws of the Lion's heroes (the enum entries before Frosthaven's first, the Infuser)
-            if (string.IsNullOrEmpty(prefabName) || !Enum.TryParse(prefabName, out ECharacter model) ||
-                model == ECharacter.None || model >= ECharacter.Infuser) return null;
+            if (!IsGloomhavenClass(prefabName, out _)) return null;
             AssetBundleManager abm = AssetBundleManager.Instance;
             if (abm == null || abm.AssetBundleExists("hero_" + prefabName.ToLowerInvariant().Replace(" ", ""))) return null;
             if (Reported.Add(prefabName)) Plugin.Log.LogInfo($"Gloomhaven classes: no 3D model for {prefabName} yet, using the {StandInModel}'s");
@@ -110,6 +144,233 @@ namespace FrosthavenMods
             if (swapped != null) charactersNeeded = swapped;
         }
 
+        // ------------------------------------------------------------------ class UI config (portraits, icons, colour, 3D placement)
+
+        /// <summary>Gloomhaven's own class colours (from its CharacterConfigUI assets; not stored in a loadable bundle).</summary>
+        private static readonly Dictionary<ECharacter, Color> ClassColours = new Dictionary<ECharacter, Color>
+        {
+            { ECharacter.Brute, new Color(0.451f, 0.659f, 1f) },
+        };
+
+        /// <summary>
+        /// UIInfoTools.characterConfigsUI holds one config per Frosthaven hero (the Banner Spear's first). For any other
+        /// name GetCharacterConfigUI returns that first entry, or null when the caller says so; the 3D preview is such a
+        /// caller and, with no placement to use, drops the model to half its height below the floor. UIInfoTools only
+        /// exists once the game's loading screen has built it, so the copies are added here, on the first lookup of each
+        /// ported class, after which the game's own search finds them like any other entry (never twice: an entry is
+        /// added only when the search found nothing for that name, and SingleOrDefault would throw on a duplicate).
+        /// </summary>
+        [HarmonyPatch(typeof(UIInfoTools), nameof(UIInfoTools.GetCharacterConfigUI), new[] { typeof(string), typeof(bool), typeof(string) })]
+        [HarmonyPostfix]
+        private static void Config(UIInfoTools __instance, string character, string customConfigID, ref CharacterConfigUI __result)
+        {
+            if (customConfigID != null || string.IsNullOrEmpty(character) || __instance == null || __instance.characterConfigsUI == null) return;
+            string name = character.EndsWith("ID", StringComparison.Ordinal) ? character.Substring(0, character.Length - 2) : character;  // the game strips "ID$" too
+            if (__result != null && string.Equals(__result.character.ToString(), name, StringComparison.OrdinalIgnoreCase)) return;  // found its own
+            if (!IsGloomhavenClass(name, out ECharacter model) || PortedClass(model) == null) return;
+            List<CharacterConfigUI> list = __instance.characterConfigsUI;
+            if (list.Exists(c => c != null && c.character == model)) return;
+            CharacterConfigUI source = list.Find(c => c != null && c.character.ToString() == StandInModel);
+            if (source == null) return;
+            CharacterConfigUI config;
+            try { config = MakeConfig(source, model); }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError($"Gloomhaven classes: could not make a UI config for {model}: {e}");
+                return;
+            }
+            list.Add(config);
+            __result = config;
+        }
+
+        /// <summary>A copy of the stand-in's config for <paramref name="model"/>. Instantiate deep-copies the serialized data
+        /// (placements, colours, lists) and shares the sprites; the Drifter's own asset is never changed.</summary>
+        private static CharacterConfigUI MakeConfig(CharacterConfigUI source, ECharacter model)
+        {
+            CharacterConfigUI cfg = UnityEngine.Object.Instantiate(source);
+            cfg.name = model.ToString();
+            cfg.hideFlags = HideFlags.DontUnloadUnusedAsset;
+            cfg.character = model;                                         // what GetCharacterConfigUI matches; left as Drifter it would break every Drifter lookup
+            cfg.ID = model.ToString();
+            cfg.Cards = new CharacterConfigUI.AbilityCardConfigUI[0];      // the Drifter's pre-built card prefabs and headers are hers
+            if (ClassColours.TryGetValue(model, out Color colour) && cfg.questConfig != null) cfg.questConfig.color = colour;
+            // Kept from the Drifter: the 3D placement on the character screen (it is the Drifter model that stands there),
+            // card skin and card prefab (see CardPrefab), gender, tab icon, map marker, active-bonus background, tokens.
+            int loaded = GHArt(cfg, source, model);
+            Plugin.Log.LogInfo($"Gloomhaven classes: {model} gets its own UI config (a copy of the {StandInModel}'s" +
+                               (loaded > 0 ? $", {loaded} pictures from the player's Gloomhaven)" : "; no Gloomhaven pictures loaded)"));
+            return cfg;
+        }
+
+        // ------------------------------------------------------------------ 2D art from the player's Gloomhaven install
+
+        private static JObject _source;
+        private static readonly Dictionary<string, AssetBundle> GHBundles = new Dictionary<string, AssetBundle>(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>ghclasses\source.json, written by tools/gh_port.py: where the player's Gloomhaven is.</summary>
+        private static JObject Source
+        {
+            get
+            {
+                if (_source != null) return _source;
+                _source = new JObject();
+                string file = Path.Combine(Folder, "source.json");
+                try { if (File.Exists(file)) _source = JObject.Parse(File.ReadAllText(file)); }
+                catch (Exception e) { Plugin.Log.LogError("Gloomhaven classes: could not read " + file + ": " + e); }
+                return _source;
+            }
+        }
+
+        /// <summary>Puts the class's Gloomhaven pictures on the config where Gloomhaven stores them as one-asset bundles
+        /// (named after the class for every hero): class icons, the painted portrait and the small stat-panel portrait.
+        /// Each picture is cut to the shape and native size of the Drifter's picture it replaces, so Frosthaven's layouts
+        /// treat it exactly like hers. Anything that fails to load keeps the Drifter's. Returns how many loaded.</summary>
+        private static int GHArt(CharacterConfigUI cfg, CharacterConfigUI like, ECharacter model)
+        {
+            string name = model.ToString(), low = name.ToLowerInvariant();
+            int n = 0;
+            Sprite icon = GHSprite($"character_gui_classicons_assets_{low}_icon.bundle", name + "_Icon");
+            if (icon != null) { cfg.iconClass = icon; n++; }
+            Sprite glow = GHSprite($"character_gui_classicons_assets_{low}glow_icon.bundle", name + "Glow_Icon");
+            if (glow != null) { cfg.iconClassHighlight = glow; n++; }
+            Sprite gold = GHSprite($"character_gui_classicons_assets_assembleparty_{low}icon.bundle", "AssembleParty_" + name + "Icon");
+            if (gold != null) { cfg.iconClassGold = gold; n++; }
+            Sprite portrait = GHSprite("misc_characterportraits_assets_all.bundle", low);   // 512x512 painted bust
+            if (portrait != null)
+            {
+                n++;
+                cfg.illustration = Fit(portrait, like.illustration);
+                cfg.InfoIllustration = Fit(portrait, like.InfoIllustration);
+                cfg.newAdventurePortrait = Fit(portrait, like.newAdventurePortrait);
+                cfg.newHighlightAdventurePortrait = Fit(portrait, like.newHighlightAdventurePortrait);
+                cfg.scenarioPortrait = Fit(portrait, like.scenarioPortrait);
+                cfg.assemblyPortrait = Fit(portrait, like.assemblyPortrait);
+            }
+            Sprite small = GHSprite($"actor_portrats_assets_portrait_{low}.bundle", "Portrait_" + name);   // 94x118 stat-panel portrait
+            if (small != null) { cfg.distributionPortrait = Fit(small, like.distributionPortrait); n++; }
+            return n;
+        }
+
+        /// <summary>A sprite showing as much of <paramref name="picture"/> as fits the shape of <paramref name="like"/>, with
+        /// the same native size as <paramref name="like"/> (layouts that call SetNativeSize or read the offset tuned for the
+        /// Drifter's picture then behave the same). Wide cuts keep more of the top, where a portrait's face is.</summary>
+        private static Sprite Fit(Sprite picture, Sprite like)
+        {
+            if (picture == null) return null;
+            if (like == null || like.rect.width <= 0 || like.rect.height <= 0) return picture;
+            Rect src = picture.rect;
+            float aspect = like.rect.width / like.rect.height;
+            float w = src.width, h = w / aspect;
+            if (h > src.height) { h = src.height; w = h * aspect; }
+            float x = src.x + (src.width - w) / 2f;
+            float y = src.y + (src.height - h) * 0.7f;                  // 70% of the spare height below the cut, 30% above
+            float ppu = like.pixelsPerUnit * w / like.rect.width;        // same on-screen native size as the Drifter's picture
+            Sprite cut = Sprite.Create(picture.texture, new Rect(x, y, w, h), new Vector2(0.5f, 0.5f), ppu, 0, SpriteMeshType.FullRect);
+            cut.name = picture.name + " as " + like.name;
+            cut.hideFlags = HideFlags.DontUnloadUnusedAsset;
+            return cut;
+        }
+
+        /// <summary>A sprite from one of the player's Gloomhaven bundles, or null (never throws).</summary>
+        private static Sprite GHSprite(string bundleFile, string assetName)
+        {
+            try
+            {
+                AssetBundle bundle = GHBundle(bundleFile);
+                if (bundle == null) return null;
+                Sprite sprite = bundle.LoadAsset<Sprite>(assetName);
+                if (sprite == null)
+                {
+                    // by full path: Gloomhaven's keys are "assets/.../<name>.png", lower-cased
+                    string want = "/" + assetName.ToLowerInvariant() + ".";
+                    string path = Array.Find(bundle.GetAllAssetNames(), p => p.Contains(want));
+                    if (path != null) sprite = bundle.LoadAsset<Sprite>(path);
+                }
+                if (sprite == null)
+                {
+                    Plugin.Log.LogWarning($"Gloomhaven classes: no picture {assetName} in {bundleFile}, keeping the {StandInModel}'s");
+                    return null;
+                }
+                sprite.hideFlags = HideFlags.DontUnloadUnusedAsset;
+                if (sprite.texture != null) sprite.texture.hideFlags = HideFlags.DontUnloadUnusedAsset;
+                return sprite;
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogWarning($"Gloomhaven classes: {assetName} from {bundleFile} failed ({e.Message}), keeping the {StandInModel}'s");
+                return null;
+            }
+        }
+
+        /// <summary>Opens a Gloomhaven (Unity 2021) bundle in this Unity 2022 player. One attempt per file, failures
+        /// remembered (Unity returns null for a second LoadFromFile of an already open bundle); never unloaded.</summary>
+        private static AssetBundle GHBundle(string bundleFile)
+        {
+            if (GHBundles.TryGetValue(bundleFile, out AssetBundle bundle)) return bundle;
+            bundle = null;
+            try
+            {
+                string root = Source["gloomhaven"]?.ToString();
+                string path = string.IsNullOrEmpty(root) ? null
+                    : Path.Combine(root, "GH_Data", "StreamingAssets", "aa", "StandaloneWindows64", bundleFile);
+                if (path == null) Plugin.Log.LogWarning("Gloomhaven classes: no Gloomhaven folder in source.json, no pictures");
+                else if (!File.Exists(path)) Plugin.Log.LogWarning($"Gloomhaven classes: no such bundle {path}");
+                else
+                {
+                    bundle = AssetBundle.LoadFromFile(path);   // null (with Unity's own error line) if this player can't read it
+                    if (bundle == null) Plugin.Log.LogWarning($"Gloomhaven classes: Unity could not open {bundleFile}");
+                }
+            }
+            catch (Exception e) { Plugin.Log.LogWarning($"Gloomhaven classes: {bundleFile}: {e.Message}"); }
+            GHBundles[bundleFile] = bundle;
+            return bundle;
+        }
+
+        // ------------------------------------------------------------------ ability cards
+
+        /// <summary>A card ID of 10000 or more selects the Gloomhaven-era "AbilityCard" prefab without looking at the
+        /// class (PersistentData.GetAbilityCardPrefabInfo). Frosthaven ships that prefab with its background sprites
+        /// stripped: a null sprite draws as solid white, the generated text is white, and its two "lost" tiles (red X)
+        /// are permanently on because nothing switches them off. A Gloomhaven class's cards use a Frosthaven card
+        /// prefab instead: the one its config names (the Drifter's, by the copy above), else the generic one. It is the
+        /// path the game itself takes for its long rest card and in the level editor.</summary>
+        [HarmonyPatch(typeof(PersistentData), nameof(PersistentData.GetAbilityCardPrefabInfo))]
+        [HarmonyPostfix]
+        private static void CardPrefab(AbilityCardYMLData abilityCard, ref CCharacterClass playerClass, ref CharacterConfigUI config, ref string __result)
+        {
+            if (abilityCard == null || abilityCard.ID == -1 || playerClass == null || !IsGloomhavenClass(playerClass.AbilityCardArt, out _)) return;
+            UIInfoTools ui = UIInfoTools.Instance;
+            CharacterConfigUI cfg = ui == null ? null
+                : ui.GetCharacterConfigUI(playerClass.AbilityCardArt, useDefault: false) ?? ui.GetCharacterConfigUI(StandInModel, useDefault: true);
+            if (cfg != null) config = cfg;
+            __result = cfg?.customCardPrefab?.name ?? "AbilityCard-FH";
+            if (Reported.Add("cards " + playerClass.AbilityCardArt))
+                Plugin.Log.LogInfo($"Gloomhaven classes: {playerClass.AbilityCardArt} cards are drawn with the {__result} prefab");
+        }
+
+        /// <summary>Frosthaven's card prefabs are templates whose hand-card picture is a Banner Spear painting
+        /// (Image_CardArt); the game's own cards replace it from their class bundles, a generated card never does.
+        /// Gloomhaven cards have no picture, so hide it.</summary>
+        [HarmonyPatch(typeof(AbilityCardUI), nameof(AbilityCardUI.MakeAbilityCard))]
+        [HarmonyPostfix]
+        private static void NoBorrowedArt(AbilityCardUI __instance, AbilityCardYMLData cardData)
+        {
+            if (cardData?.CharacterID == null || __instance.miniAbilityCard == null) return;
+            CCharacterClass cls = ClassById(cardData.CharacterID);
+            if (cls == null || !IsGloomhavenClass(cls.AbilityCardArt, out _)) return;
+            Transform art = __instance.miniAbilityCard.transform.Find("Container_CardArt/Mask_CardArt/Image_CardArt");
+            Image image = art != null ? art.GetComponent<Image>() : null;
+            if (image != null) image.enabled = false;
+            else if (Reported.Add("no Image_CardArt"))
+                Plugin.Log.LogWarning("Gloomhaven classes: the mini card has no Container_CardArt/Mask_CardArt/Image_CardArt; its template painting stays");
+        }
+
+        /// <summary>At quit the pooled cards are recycled after UIInfoTools is gone, and clearing a generated card's
+        /// area hexes and enhancement slots then logs errors (caught by the game, noise only). Skip it while quitting.</summary>
+        [HarmonyPatch(typeof(AbilityCardUI), "ClearEnhancements")]
+        [HarmonyPrefix]
+        private static bool NotWhileQuitting() => !_quitting;
+
         // ------------------------------------------------------------------ class definitions
 
         /// <summary>A class without masteries: the game's YAML reader can't read an empty list ("MasteryIDs: []" fails
@@ -121,6 +382,18 @@ namespace FrosthavenMods
         {
             foreach (FHRL.CharacterClassDef def in __instance.DefRepository.CharacterClasses.Values)
                 if (def.MasteryIDs == null) def.MasteryIDs = new FHRL.MasteryID[0];
+        }
+
+        /// <summary>The "Hero intro" button shows for every class outside the game mode's starting list and plays
+        /// StreamingAssets\Movies\HeroIntroductions\FH_HeroIntroduction_&lt;Class&gt;_4k.mov; a Gloomhaven class has
+        /// none, so the button did nothing. Hide it.</summary>
+        [HarmonyPatch(typeof(FHGUI.Services.CharacterDetailsViewService), nameof(FHGUI.Services.CharacterDetailsViewService.CharacterHasIntroVideo))]
+        [HarmonyPostfix]
+        private static void IntroVideo(FHRL.CharacterClassID classID, ref bool __result)
+        {
+            if (!__result) return;
+            CCharacterClass cls = ClassById(classID.ID);
+            if (cls != null && IsGloomhavenClass(cls.CharacterModel.ToString(), out _)) __result = false;
         }
 
         // ------------------------------------------------------------------ text

@@ -5,7 +5,8 @@ Nothing from Gloomhaven is stored in this repo or shipped: this script reads the
 Frosthaven's format and writes the result to <Frosthaven>\\FrosthavenMods\\ghclasses\\ on the same PC:
 
     ghclasses\\ruleset\\Global\\Characters\\<Class>\\...   new ruleset files (fh_mods.py install --gh adds them)
-    ghclasses\\strings.tsv                               key<TAB>English text (the plugin answers keys the game lacks)
+    ghclasses\\strings.tsv                               key<TAB>English text (the plugin answers keys the game lacks;
+                                                         also <Class>_FullName, CODEX_HeroInfo_<Class>, Event__Text)
     ghclasses\\source.json                               where it came from (Gloomhaven folder + Steam build)
 
 Conversion (see the research notes in the gloomhaven-class-port memory):
@@ -252,6 +253,16 @@ def main():
         gh_key = key[3:] if key.startswith("GH_") else key
         if gh_key in strings:
             table[key] = strings[gh_key]
+    # Keys Frosthaven derives from a class ID and expects in its own text: the full class name (FHMapView), the codex
+    # hero description (FHUICodexHeroEntry), both from Gloomhaven's own text; and the retirement story of a class with
+    # no Frosthaven retirement section, whose key comes out as "Event_" + "" + "_Text" (our line, no Gloomhaven text).
+    for cls in args.classes:
+        if cls in strings:
+            table.setdefault(f"{cls}_FullName", strings[cls])
+        if f"{cls}_DESCRIPTION" in strings:
+            table.setdefault(f"CODEX_HeroInfo_{cls}", strings[f"{cls}_DESCRIPTION"])
+    table.setdefault("Event__Text", "Their personal quest complete, the mercenary leaves Frosthaven for good. "
+                                    "Someone else will take up the fight.")
     missing = sorted(k for k in used_keys if k not in table)
     lines = [f"{k}\t{v.replace(chr(13), '').replace(chr(10), chr(92) + 'n')}" for k, v in table.items()]
     (args.out / "strings.tsv").write_text("\n".join(lines) + "\n", encoding="utf-8")
