@@ -188,14 +188,15 @@ records (`CPlayerRecords`) are never updated by the game, so totals start with t
 also go to `<game>\FrosthavenMods\stats\scenario-*.txt` for checking.
 
 `StatsExport` writes each finished scenario's full record as JSON for the companion's Stats tab
-(`stats\runs\<campaign>\<time>-<scenario>-<hash>.json`): every `CPlayerStats` list of every character, the summon pool
+(`stats\runs\<campaign>\<time>-<scenario>-<hash>.json.gz`, gzipped: ~2 MB of repetitive JSON per scenario becomes
+~80 KB): every `CPlayerStats` list of every character, the summon pool
 and the monsters (flattened records: round, event order, actors, card, ability, amounts, conditions), each character's
 modifier deck and the monster deck (no blesses/curses), and the scenario, campaign, outcome and rounds. Only real play
 is kept: the source is the game's `ScenarioState.Stats`, saved with the scenario, so a load rewinds it and a restart
 resets it. A record is staged on the results screen (`PartyAdventureData.ScrapeStats`, Win/Lose/Resign) and written
 only when the game commits the outcome (`SaveData.EndScenario`) or a loss is retried (`UIManager.RestartScenarioFromInitial`);
 quitting or crashing there writes nothing. During a scenario, each of the game's autosaves rewrites
-`stats\live-<campaign>.json` (the same record, `inProgress: true`), removed on commit and at any autosave outside a
+`stats\live-<campaign>.json.gz` (the same record, `inProgress: true`), removed on commit and at any autosave outside a
 scenario.
 
 ## Desync recorder (always on in online games, logging only)
