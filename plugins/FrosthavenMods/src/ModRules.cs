@@ -35,7 +35,10 @@ namespace FrosthavenMods
         }
 
         /// <summary>The note added to a locked rule's description while it is locked.</summary>
-        public const string LockedNote = "\n\n(Locked during online scenarios: change it in the outpost.)";
+        public static readonly string LockedNote = "\n\n" + Red("(Locked during online scenarios: change it in the outpost.)");
+
+        /// <summary>Text in the warning red the rules screen uses for "can't change this now" notes (TextMeshPro rich text).</summary>
+        public static string Red(string text) => "<color=#FF6B6B>" + text + "</color>";
 
         // Bit 24 was first released as "Shared gold", then "Give resources"; it now means Tradeable resources and
         // equipment (a save with it on keeps it on). Bit 25 was "Item trading" before the two were merged: unused now,

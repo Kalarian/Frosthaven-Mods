@@ -133,7 +133,7 @@ namespace FrosthavenMods
             }
         }
 
-        private static string Note(string blocked) => blocked == null ? "" : "\n\n(" + blocked + ")";
+        private static string Note(string blocked) => blocked == null ? "" : "\n\n" + ModRules.Red("(" + blocked + ")");
 
         /// <summary>Flip a rule in the current campaign, after the backup save a rule may ask for when it goes on.</summary>
         private static async void Change(ModRules.Rule r, bool on)
