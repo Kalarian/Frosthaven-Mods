@@ -6,7 +6,9 @@ Zip layout:
     version.txt
     mods/<Name>/{mod.json, patches/..., files/...}   ruleset mods (every enabled mod by default)
     game/...                                        files copied into the game folder as-is: the BepInEx loader
-                                                    (loader/BepInEx_*) and each code plugin (plugins/<Name>, built here)
+                                                    (loader/BepInEx_*), each code plugin (plugins/<Name>, built here)
+                                                    and each content pack's extras (FrosthavenMods/packs/<Name>/:
+                                                    pack.json, strings.tsv, art/)
 
 Before writing, the ruleset mods are built against the vanilla backup, so a patch that no longer applies stops the
 release. The zip is deterministic (fixed timestamps, sorted entries), so an unchanged pack has an unchanged checksum.
@@ -74,6 +76,8 @@ def main():
             files = [d / "mod.json"] + fh_mods.sorted_files(d / "patches", ".diff") + fh_mods.sorted_files(d / "files")
             for p in files:
                 add(f"mods/{d.name}/{p.relative_to(d).as_posix()}", p.read_bytes())
+            # a content pack's extras go into the game folder for the plugin, like any game/ file
+            game_files += [(f"FrosthavenMods/packs/{d.name}/{rel}", p) for rel, p in fh_mods.pack_extras(d)]
         for rel, p in sorted(game_files, key=lambda t: t[0].lower()):
             add("game/" + rel, p.read_bytes())
     print(f"wrote {out} (v{version}, ruleset mods: {', '.join(d.name for d, _ in mods) or 'none'}; "

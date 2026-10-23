@@ -2,16 +2,21 @@
 
 Nothing from Gloomhaven is stored in this repo or shipped: this script reads the player's Gloomhaven rule files
 (plain zip archives under <Gloomhaven>\\Rulebase) and English text (LanguageExport.csv), converts one class to
-Frosthaven's format and writes the result as the "gloomhaven" content pack, <Frosthaven>\\FrosthavenMods\\packs\\gloomhaven\\:
+Frosthaven's format and writes the result as the "gloomhaven" content pack, a mod folder in this repo (mods\\gloomhaven\\)
+that the release zip and the installer carry like every other mod:
 
-    ruleset\\Global\\Characters\\<Class>\\...   new ruleset files (fh_mods.py install --packs adds them)
+    mod.json                                  the mod entry (name, enabled)
+    files\\Global\\Characters\\<Class>\\...     new ruleset files (added to Base.ruleset like any mod's files)
     strings.tsv                               key<TAB>English text (the plugin answers keys the game lacks;
                                               also <Class>_FullName, CODEX_HeroInfo_<Class>, Event__Text)
     art\\<Class>\\*.png                         the class's pictures in Frosthaven's shapes (gh_art.py)
     pack.json                                 manifest: name, version, classes, data_sha (plugin + co-op check), source
 
-A content pack is data the game loads at startup: every PC needs it installed before launch, and a campaign that has
-used it (the "Gloomhaven classes" house rule on, a character created) needs it for good. See GHClasses.cs.
+strings.tsv, art\\ and pack.json are copied into the game folder as <Frosthaven>\\FrosthavenMods\\packs\\<name>\\ (by
+fh_mods.py install here, by the installer on the friends' PCs through the zip's game/ files). A content pack is data
+the game loads at startup: every PC needs the same one before launch, and a campaign that has used it (the
+"Gloomhaven classes" house rule on, a character created) needs it for good. The author builds it from their own
+Gloomhaven; the friends get the built pack with the release. See GHClasses.cs.
 
 Conversion (see the research notes in the gloomhaven-class-port memory):
     - ability card IDs become 20000 + the Gloomhaven ID (Frosthaven uses 1-504; saves store card IDs, so this
@@ -46,10 +51,12 @@ import fh_ruleset as rs  # noqa: E402
 GH_APP_ID = "780290"
 CARD_ID_OFFSET = 20000
 PACK = "gloomhaven"
-PACK_TITLE = "Gloomhaven classes"
+PACK_TITLE = "Gloomhaven classes (content pack)"
 # Bump when the conversion changes in a way that matters in play (card data, IDs): co-op peers must match.
 PACK_VERSION = 1
-OUT = fh_mods.PACKS / PACK
+# The pack is a mod folder in the repo like any other (mod.json + files/), plus its extras (strings.tsv, art/, pack.json)
+# that the release copies into the game folder under FrosthavenMods\packs\<name>\ for the plugin.
+OUT = fh_mods.MODS / PACK
 
 # Frosthaven-only character fields, per class. Race and traits from Cephalofair's crossover sheets; hero stats and
 # complexity are our estimate for the class-select screen (0-6 and 1-5).
@@ -228,7 +235,14 @@ def main():
             if m:
                 fh_card_ids.add(int(m.group(1)))
 
-    out_ruleset = args.out / "ruleset"
+    out_ruleset = args.out / "files"
+    args.out.mkdir(parents=True, exist_ok=True)
+    (args.out / "mod.json").write_text(json.dumps({
+        "name": PACK_TITLE,
+        "description": "Gloomhaven's classes (" + ", ".join(args.classes) + ") converted from the author's own Gloomhaven; "
+                       "unlocked in a campaign by the house rule of the same name.",
+        "enabled": True,
+    }, indent=2) + "\n", encoding="utf-8")
     written, warnings, used_keys = [], [], set()
 
     def write(rel, s):
@@ -309,7 +323,7 @@ def main():
         digest.update(rel.lower().encode("utf-8") + b"\0" + (out_ruleset / rel).read_bytes() + b"\0")
     digest.update((args.out / "strings.tsv").read_bytes())
     (args.out / "pack.json").write_text(json.dumps({
-        "name": PACK, "title": PACK_TITLE, "version": PACK_VERSION, "classes": args.classes, "files": "ruleset",
+        "name": PACK, "title": PACK_TITLE, "version": PACK_VERSION, "classes": args.classes, "files": "files",
         "data_sha": digest.hexdigest(), "source": {"gloomhaven": str(gh), "buildid": build, "files": len(written)},
     }, indent=2) + "\n", encoding="utf-8")
 

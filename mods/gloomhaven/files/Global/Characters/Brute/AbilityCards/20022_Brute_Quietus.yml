@@ -1,0 +1,43 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Quietus$
+Character: BruteID
+ID: 20022
+Level: 6
+Initiative: 57
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TKill:
+                Kill: True
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: Normal
+                    TargetHasNegativeCondition: Stun
+                AnimOverload: HeavyFatalAdvance
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BAttack:
+                Attack: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "$GH_022_T$"
+        - Row: "<size=20%> "
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BAttack
+            Icon: "Damage"
+            ListLayout: "$GH_013_B$"
+            Layout: "$GH_013_B$"
+        - Row: "<size=20%> "
+        - Duration: Round

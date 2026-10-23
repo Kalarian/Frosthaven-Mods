@@ -1,0 +1,39 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Juggernaut$
+Character: BruteID
+ID: 20015
+Level: 2
+Initiative: 34
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+    Bottom:
+        Abilities:
+            BPrevent:
+                PreventDamage: 3
+                ActiveBonus:
+                    Duration: Persistent
+                    XPTracker: [1,1,1]
+                AnimOverload: PowerUpShield
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+    Bottom:
+        - Active:
+            Ability: BPrevent
+            ListLayout: "$GH_015_B$"
+            Layout: "$GH_015_B$"
+            Icon: "Immune"
+        - Row: "<size=50%> "
+        - XPTracker: BPrevent

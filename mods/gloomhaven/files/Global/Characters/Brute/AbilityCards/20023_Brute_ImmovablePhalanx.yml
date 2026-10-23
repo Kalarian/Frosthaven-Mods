@@ -1,0 +1,60 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ImmovablePhalanx$
+Character: BruteID
+ID: 20023
+Level: 6
+Initiative: 17
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+            TShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                AnimOverload: PowerUpShield
+                ActiveBonusDuration: Round
+    Bottom:
+        Abilities:
+            BAbilityOverrideAbilityType:
+                AddActiveBonus:
+                    Attack: 0
+                PreviewEffectText: "<sprite name=Move> / <sprite name=Attack>"
+                ActiveBonus:
+                    Behaviour: OverrideMoveAbility
+                    Duration: Persistent
+                    ValidAbilityType: Move
+                    IsToggleBonus: True
+                    ActiveBonusAbilityOverrides:
+                        BCTypeOverride:
+                            AbilityType: Attack
+                            Target: 1
+                            Range: 1
+                            RangeIsBase: True
+                            TargetIsBase: True
+                            Filter: Enemy
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TShield
+            Icon: "Shield"
+            ListLayout: "$Shield$ <sprite name=Shield> *TShield*, $Self$"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+                - Row: "$Self$"
+        - Row: "<size=50%> "
+        - Duration: Round
+    Bottom:
+        - Active:
+            Ability: BAbilityOverrideAbilityType
+            ListLayout: "$GH_023_B$"
+            Layout: "$GH_023_B$"
+            Icon: Damage
+        - Row: "<size=50%> "
+        - Duration: Persistent

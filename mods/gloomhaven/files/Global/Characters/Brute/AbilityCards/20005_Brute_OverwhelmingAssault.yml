@@ -1,0 +1,34 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_OverwhelmingAssault$
+Character: BruteID
+ID: 20005
+Level: 1
+Initiative: 61
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 6
+                    DiamondEnhancements: 2
+                AnimOverload: HeavyMeleeAttack
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 3
+            BPush:
+                Push:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AnimOverload: TargetedShout
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Push$ <sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"
+        - Row: "$Target_OneAdjacentEnemy$"

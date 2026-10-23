@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SelfishRetribution$
+Character: BruteID
+ID: 20027
+Level: 8
+Initiative: 12
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 1
+                    CircleEnhancements: 1
+            TLoot:
+                Loot: 2
+                Target: -1
+                AnimOverload: Loot
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BRetaliate:
+                Retaliate:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *TLoot*"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BRetaliate
+            Icon: Retaliate
+            ListLayout: "$Retaliate$ <sprite name=Retaliate> *BRetaliate*, $Self$"
+            Layout:
+                - Row: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
+                - Row: "$Self$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+            - Column:
+                - Duration: Round

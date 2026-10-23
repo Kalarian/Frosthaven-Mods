@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EyeforanEye$
+Character: BruteID
+ID: 20002
+Level: 1
+Initiative: 18
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TRetaliate:
+                Retaliate:
+                    Amount: 2
+                    SquareEnhancements: 1
+                ActiveBonus:
+                    Duration: Round
+                    ProcXP: 1
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 2
+                    DiamondPlusEnhancements: 2
+                Range: 1
+                Filter: [Ally, Self]
+                AnimOverload: Heal
+        Infuse: Earth
+Layout:
+    Top:
+        - Active:
+            Ability: TRetaliate
+            Icon: "Retaliate"
+            ListLayout: "$Retaliate$ <sprite name=Retaliate> *TRetaliate*, $Self$, $GH_002_T$"
+            Layout:
+                - Row: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
+                - Row: "$Self$"
+                - Row: "<size=20%> "
+                - Row: "$GH_002_T$"
+        - Row: "<size=20%> "
+        - Duration: Round
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Range$ <sprite name=Range> *BHeal.Range* @BHeal.Range@"
+        - Row: "<size=20%> "
+        - Infuse: Earth

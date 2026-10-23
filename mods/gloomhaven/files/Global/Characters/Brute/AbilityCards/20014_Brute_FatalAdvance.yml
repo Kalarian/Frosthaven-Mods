@@ -1,0 +1,29 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FatalAdvance$
+Character: BruteID
+ID: 20014
+Level: 2
+Initiative: 40
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TKill:
+                Kill: True
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: Normal
+                AnimOverload: HeavyFatalAdvance
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "$Kill_OneAdjacentNormalEnemy$"
+        - Row: "<size=20%> "
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

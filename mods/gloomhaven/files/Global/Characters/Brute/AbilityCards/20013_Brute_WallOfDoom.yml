@@ -1,0 +1,62 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WallofDoom$
+Character: BruteID
+ID: 20013
+Level: X
+Initiative: 20
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TRetaliate:
+                Retaliate:
+                    Amount: 2
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+            TRetaliateSubShield:
+                Shield:
+                    Amount: 2
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Active:
+            Ability: TRetaliate
+            Icon: Retaliate
+            ListLayout: "$Retaliate$ <sprite name=Retaliate> *TRetaliate*, $Self$"
+            Layout:
+                - Row: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
+                - Row: "$Self$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TRetaliateSubShield
+            Icon: Shield
+            ListLayout: "$Shield$ <sprite name=Shield> *TRetaliateSubShield*, $Self$"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *TRetaliateSubShield* <size=100%><voffset=1>@TRetaliateSubShield@"
+                - Row: "$Self$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+            - Column:
+                - Duration: Round
+    Bottom:
+        - Active:
+            Ability: BAttack
+            Icon: "Damage"
+            ListLayout: "$GH_013_B$"
+            Layout: "$GH_013_B$"
+        - Row: "<size=20%> "
+        - Duration: Round

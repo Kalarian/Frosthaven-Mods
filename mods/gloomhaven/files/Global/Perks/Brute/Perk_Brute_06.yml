@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Brute06
+Name: PERK_Brute_06
+Description: PERK_Brute_06_Desc
+CharacterID: BruteID
+Available: 1
+CardsToAdd: [AMC_Pierce3_R,AMC_Pierce3_R]

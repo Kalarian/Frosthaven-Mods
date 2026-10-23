@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Brute11
+Name: PERK_Brute_11
+Description: PERK_Brute_11_Desc
+CharacterID: BruteID
+Available: 1
+CardsToAdd: [AMC_Basic_P1]
+Flags: [Passive, IgnoreNegativeItemEffects]

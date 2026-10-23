@@ -1,0 +1,98 @@
+ABILITY_CARD_BalancedMeasure	Balanced Measure
+ABILITY_CARD_BruteForce	Brute Force
+ABILITY_CARD_CripplingOffensive	Crippling Offensive
+ABILITY_CARD_DefensiveTactics	Defensive Tactics
+ABILITY_CARD_DevastatingHack	Devastating Hack
+ABILITY_CARD_EyeforanEye	Eye for an Eye
+ABILITY_CARD_FaceYourEnd	Face Your End
+ABILITY_CARD_FatalAdvance	Fatal Advance
+ABILITY_CARD_FrenziedOnslaught	Frenzied Onslaught
+ABILITY_CARD_GrabandGo	Grab and Go
+ABILITY_CARD_HookandChain	Hook and Chain
+ABILITY_CARD_ImmovablePhalanx	Immovable Phalanx
+ABILITY_CARD_Juggernaut	Juggernaut
+ABILITY_CARD_KingoftheHill	King of the Hill
+ABILITY_CARD_LeapingCleave	Leaping Cleave
+ABILITY_CARD_OverwhelmingAssault	Overwhelming Assault
+ABILITY_CARD_ProvokingRoar	Provoking Roar
+ABILITY_CARD_Quietus	Quietus
+ABILITY_CARD_SelfishRetribution	Selfish Retribution
+ABILITY_CARD_ShieldBash	Shield Bash
+ABILITY_CARD_Skewer	Skewer
+ABILITY_CARD_SkirmishingManeuver	Skirmishing Maneuver
+ABILITY_CARD_SpareDagger	Spare Dagger
+ABILITY_CARD_SweepingBlow	Sweeping Blow
+ABILITY_CARD_Trample	Trample
+ABILITY_CARD_UnstoppableCharge	Unstoppable Charge
+ABILITY_CARD_WallofDoom	Wall of Doom
+ABILITY_CARD_WardingStrength	Warding Strength
+ABILITY_CARD_Whirlwind	Whirlwind
+Attack	Attack
+Brute	Brute
+Brute_ADVENTURE_DESCRIPTION	The Brute employs his great size and strength to earn a living by wielding his huge sword and impressive shield for those who pay the most.\nBrutes are best used as front line melee troops, absorbing damage and protecting the more fragile ranged damage dealers, and are best equipped with items that keep them alive longer!
+Brute_DESCRIPTION	The Brute employs his great size and strength to earn a living by wielding his huge sword and impressive shield for those who pay the most.
+Brute_ROLE	Melee Damage/Tank
+Brute_STRENGTHS	- <indent=%15>High health and defensive abilities make him more durable than some</indent>\n- <indent=%15>Access to early Disarm and Stun</indent>\n- <indent=%15>Great at pushing enemies about</indent>
+Brute_WEAKNESSES	- <indent=%15>Low mobility</indent>\n- <indent=%15>Poor ranged attack options</indent>\n- <indent=%15>Not the greatest conversationalist</indent>
+DIFFICULTY_LOW	Low
+Disarm	DISARM
+GH_002_T	Gain <sprite name=XP1> for each time you Retaliate <nobr>this round.</nobr>
+GH_004_B	Any enemy who targets one of your adjacent allies with an attack this round targets you with that attack instead, regardless of the attack's range.
+GH_007_B	On the next six sources of damage from attacks targeting you, gain <nobr>Shield <sprite name=Shield> *BShield*.</nobr>
+GH_013_B	Add <nobr>+1 Attack <sprite name=Attack></nobr> to all of your attacks this round.
+GH_015_B	On the next three sources of damage to you, suffer no damage instead.
+GH_016_B	If the movement was in a straight line, perform
+GH_022_T	Kill one adjacent normal enemy <nobr>with  STUN <sprite name=Stun></nobr>.
+GH_023_B	You may treat all <nobr>Move <sprite name=Move></nobr> abilities as <nobr>Attack <sprite name=Attack></nobr> abilities of equal value.
+GH_026_B	Add +3 <nobr>Attack <sprite name=Attack></nobr> to all your attacks targeting enemies with <nobr>DISARM <sprite name=Disarm></nobr>, <nobr>IMMOBILIZE <sprite name=Immobilize></nobr> or <nobr>STUN <sprite name=Stun></nobr> this round.
+Heal	Heal
+Immobilize	IMMOBILIZE
+Jump	Jump
+Kill_OneAdjacentEnemy	Kill one adjacent normal or elite enemy.
+Kill_OneAdjacentNormalEnemy	Kill one adjacent normal enemy.
+Loot	Loot
+Move	Move
+Muddle	MUDDLE
+PERK_Brute_01	Consistency
+PERK_Brute_01_Desc	Remove two <color="purple">-1</color> cards
+PERK_Brute_02	Focus
+PERK_Brute_02_Desc	Replace one <color="purple">-1</color> card with a <color="orange">+1</color> card
+PERK_Brute_03	Power
+PERK_Brute_03_Desc	Add two <color="orange">+1</color> cards
+PERK_Brute_04	Outburst
+PERK_Brute_04_Desc	Add one <color="orange">+3</color> card
+PERK_Brute_05	Thrust
+PERK_Brute_05_Desc	Add three <sprite name=Rolling> <nobr>PUSH <sprite name=Push> 1 cards
+PERK_Brute_06	Stab
+PERK_Brute_06_Desc	Add two <sprite name=Rolling> PIERCE <sprite name=Pierce> 3 cards
+PERK_Brute_07	Bludgeon
+PERK_Brute_07_Desc	Add one <sprite name=Rolling> STUN <sprite name=Stun> card
+PERK_Brute_08	Pacify
+PERK_Brute_08_Desc	Add one <sprite name=Rolling> DISARM <sprite name=Disarm> card and one <sprite name=Rolling> MUDDLE <sprite name=Muddle> card
+PERK_Brute_09	Sweep
+PERK_Brute_09_Desc	Add one <sprite name=Rolling> ADD TARGET <sprite name=Target> card
+PERK_Brute_10	Bulwark
+PERK_Brute_10_Desc	Add one <color="orange">+1</color> Shield <sprite name=Shield> 1, Self card
+PERK_Brute_11	Fortitude
+PERK_Brute_11_Desc	Ignore negative item effects and add one <color="orange">+1</color> card
+Pierce	PIERCE
+Pull	PULL
+Push	PUSH
+Range	Range
+Retaliate	Retaliate
+Self	Self
+Shield	Shield
+Stun	STUN
+Target	Target
+Target_AllAdjacentEnemies	Target all adjacent enemies
+Target_AllEnemiesMovedThrough	Target all enemies moved through
+Target_OneAdjacentEnemy	Target one adjacent enemy
+Wound	WOUND
+XP_PerEnemy	Gain <sprite name=XP1> for each enemy targeted.
+Xis_DamageInflictedThisTurn	where X is the amount of damage you have inflicted so far this turn.
+Xis_HexesMovedThisAction	where X is the number of hexes you moved with this action.
+Xis_HexesMovedThisTurn	where X is the number of hexes you have moved so far this turn.
+and	and
+Brute_FullName	Brute
+CODEX_HeroInfo_Brute	The Brute employs his great size and strength to earn a living by wielding his huge sword and impressive shield for those who pay the most.
+Event__Text	Their personal quest complete, the mercenary leaves Frosthaven for good. Someone else will take up the fight.

@@ -1,0 +1,50 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BruteForce$
+Character: BruteID
+ID: 20017
+Level: 3
+Initiative: 51
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Conditions: Muddle
+                AreaEffect: "0,0,G|-1,1,E|1,1,R|2,0,R|1,-1,R|-1,-1,E"
+                AnimOverload: RadialAttack
+                MultiPassAttack: False
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 2
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUpShield
+Layout:
+    Top:
+        - ColumnWidths: "65,25"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "$Muddle$ <sprite name=Muddle>"
+            - Row: "<size=20%> "
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BShield
+            Icon: "Shield"
+            ListLayout: "$Shield$ <sprite name=Shield> *BShield*, $Self$"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "$Self$"
+        - Row: "<size=20%> "
+        - Duration: Round

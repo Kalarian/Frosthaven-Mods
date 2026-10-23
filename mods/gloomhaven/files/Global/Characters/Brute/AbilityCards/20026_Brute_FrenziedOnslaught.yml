@@ -1,0 +1,59 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FrenziedOnslaught$
+Character: BruteID
+ID: 20026
+Level: 8
+Initiative: 41
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TMove1:
+                Move:
+                    Amount: 2
+            TAttack1:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+            TMove2:
+                Move:
+                    Amount: 2
+            TAttack2:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+    Bottom:
+        Abilities:
+            BAttackBuff:
+                Attack: 0
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                AttackEffect:
+                    Type: BuffIfAnyConditionsOnTarget
+                    Strength: 3
+                    Conditions: [Disarm, Stun, Immobilize]
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove1*"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove2*"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+    Bottom:
+        - Active:
+            Ability: BAttackBuff
+            ListLayout: "$GH_026_B$"
+            Layout: "$GH_026_B$"
+            Icon: "Damage"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+            - Column:
+                - Duration: Round

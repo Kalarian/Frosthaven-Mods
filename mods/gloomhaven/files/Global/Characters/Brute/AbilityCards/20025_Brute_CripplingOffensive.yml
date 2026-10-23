@@ -1,0 +1,41 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CripplingOffensive$
+Character: BruteID
+ID: 20025
+Level: 7
+Initiative: 33
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 6
+                    DiamondEnhancements: 2
+                Conditions: [Wound, Stun]
+                AnimOverload: HeavyMeleeAttack
+        XP: 3
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BImmobilize:
+                AnimOverload: TargetedShout
+                Immobilize: True
+                Filter: Enemy
+                SubAbilities:
+                    BImmobilizeSubPush:
+                        Push: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Wound$ <sprite name=Wound>"
+        - Row: "$Stun$ <sprite name=Stun>"
+        - Row: "<size=20%> "
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Immobilize$ <sprite name=Immobilize> $and$ <nobr>$Push$ <sprite name=Push> *BImmobilizeSubPush*</nobr>"
+        - Row: "$Target_OneAdjacentEnemy$"

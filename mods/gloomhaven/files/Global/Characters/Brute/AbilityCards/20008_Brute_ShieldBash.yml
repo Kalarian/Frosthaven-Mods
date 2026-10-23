@@ -1,0 +1,39 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ShieldBash$
+Character: BruteID
+ID: 20008
+Level: 1
+Initiative: 15
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 2
+                Conditions: Stun
+        XP: 2
+    Bottom:
+        Abilities:
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 2
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUpShield
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Stun$ <sprite name=Stun>"
+        - Row: "<size=20%> "
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: "Shield"
+            ListLayout: "$Shield$ <sprite name=Shield> *BShield*, $Self$"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "$Self$"
+        - Row: "<size=20%> "
+        - Duration: Round

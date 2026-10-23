@@ -1,0 +1,62 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DefensiveTactics$
+Character: BruteID
+ID: 20024
+Level: 7
+Initiative: 26
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 3
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Conditions: Immobilize
+                AnimOverload: RangedAttack
+        XP: 1
+    Bottom:
+        Abilities:
+            BRetaliate:
+                Retaliate: 1
+                ActiveBonusDuration: Persistent
+                AnimOverload: PowerUp
+            BShield:
+                Shield: 1
+                ActiveBonusDuration: Persistent
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target* <size=100%><voffset=1>@TAttack.Target@"
+        - Row: "<size=0%> "
+        - Row: "$Immobilize$ <sprite name=Immobilize>"
+        - Row: "<size=20%> "
+    Bottom:
+        - Active:
+            Ability: BRetaliate
+            Icon: Retaliate
+            ListLayout: "$Retaliate$ <sprite name=Retaliate> *BRetaliate*, $Self$"
+            Layout:
+                - Row: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *BRetaliate*"
+                - Row: "$Self$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BShield
+            Icon: Shield
+            ListLayout: "$Shield$ <sprite name=Shield> *BShield*, $Self$"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield*"
+                - Row: "$Self$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+            - Column:
+                - Duration: Persistent

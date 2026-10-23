@@ -1,0 +1,43 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Trample$
+Character: BruteID
+ID: 20001
+Level: 1
+Initiative: 72
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                    Pierce: 2
+                    PierceEnhancements: 1
+    Bottom:
+        Abilities:
+            BMoveAttack:
+                MergedMoveAttack:
+                    Abilities:
+                        BMove:
+                            Move:
+                                Amount: 4
+                                Jump: True
+                                CircleEnhancements: 1
+                        BAttack:
+                            Attack:
+                                Amount: 2
+                                DiamondEnhancements: 2
+                            AllTargetsOnMovePath: True
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce* @TAttack.Pierce@"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Target_AllEnemiesMovedThrough$"
+        - Row: "<size=20%> "

@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Brute02
+Name: PERK_Brute_02
+Description: PERK_Brute_02_Desc
+CharacterID: BruteID
+Available: 1
+CardsToAdd: [AMC_Basic_P1]
+CardsToRemove: [AMC_Basic_M1]

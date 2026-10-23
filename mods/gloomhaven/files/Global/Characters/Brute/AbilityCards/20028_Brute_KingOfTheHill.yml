@@ -1,0 +1,41 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_KingoftheHill$
+Character: BruteID
+ID: 20028
+Level: 9
+Initiative: 39
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 6
+                    DiamondEnhancements: 2
+                Target: -1
+                MultiPassAttack: False
+                AnimOverload: RadialAttack
+                XPPerTarget: 1
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 1
+                        IsInlineSubAbility: True
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 5
+                    DiamondPlusEnhancements: 1
+                Range: 1
+                Filter: [Self]
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Push$ <sprite name=Push> *TAttackSubPush* @TAttackSubPush@"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "$XP_PerEnemy$"
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Self$"

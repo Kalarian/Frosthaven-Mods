@@ -1,0 +1,28 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DevastatingHack$
+Character: BruteID
+ID: 20019
+Level: 4
+Initiative: 27
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 8
+                    DiamondEnhancements: 2
+                AnimOverload: HeavyMeleeAttack
+        XP: 3
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+    Bottom:
+        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *BLoot*"

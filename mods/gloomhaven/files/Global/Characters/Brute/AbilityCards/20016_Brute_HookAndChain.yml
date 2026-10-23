@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HookandChain$
+Character: BruteID
+ID: 20016
+Level: 3
+Initiative: 42
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 2
+                Range: 3
+                SubAbilities:
+                    TAttackSubPull:
+                        Pull: 2
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+            BAttack:
+                Attack:
+                    Amount: 0
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: HexesMovedThisAction
+                StartAbilityRequirements:
+                    Type: PreviousAbility
+                    MoveWasStraightLine: True
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Pull$ <sprite name=Pull> 2"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"
+        - Row: "<size=20%> "
+        - Row: "$GH_016_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> X"
+        - Row: "<size=20%> "
+        - Row: "$Xis_HexesMovedThisAction$"

@@ -15,8 +15,8 @@ Building and testing:
     python tools/fh_mods.py install [--mod NAME ...]               build + install into the game, vanilla backed up
     python tools/fh_mods.py restore                                put the vanilla Base.ruleset back
     python tools/fh_mods.py status
-    build/install --packs   also add the content packs built on this PC (FrosthavenMods\\packs\\*, e.g. the Gloomhaven
-                            classes from tools/gh_port.py; never packed into a release)
+    A content pack (a mod folder with a pack.json, e.g. mods/gloomhaven from tools/gh_port.py) is installed like any
+    mod; its extras (pack.json, strings.tsv, art/) also go to <game>\\FrosthavenMods\\packs\\<folder>\\ for the plugin.
 """
 
 import argparse
@@ -38,7 +38,7 @@ VANILLA_EXTRACT = ROOT / "extracted" / "Base"
 GAME = Path(r"C:\Program Files (x86)\Steam\steamapps\common\Frosthaven")
 # Shared with the installer exe: vanilla backup + state live in the game folder, so both tools always agree.
 BACKUP = GAME / "FrosthavenMods"
-PACKS = BACKUP / "packs"  # content packs built on this PC (tools/gh_port.py), each with a pack.json
+PACKS = BACKUP / "packs"  # the installed content packs' plugin files (pack.json, strings.tsv, art), per mod folder
 STATE = BACKUP / "state.json"
 GAME_RULESET = GAME / "Frosthaven_Data" / "StreamingAssets" / "Rulebase" / "Base.ruleset"
 APP_MANIFEST = GAME.parent.parent / "appmanifest_2347080.acf"
@@ -154,20 +154,29 @@ def sorted_files(folder, suffix=""):
     return sorted(files, key=lambda p: p.relative_to(folder).as_posix().lower())
 
 
-def pack_mods():
-    """The content packs built on this PC (<game>\\FrosthavenMods\\packs\\<name>\\pack.json, e.g. the Gloomhaven classes
-    tools/gh_port.py converted from this PC's own Gloomhaven install), as files-only mods. Local to this machine, never
-    packed into a release: a pack is built from data the player owns."""
-    packs = []
-    for manifest in sorted(PACKS.glob("*/pack.json")):
-        meta = json.loads(manifest.read_text(encoding="utf-8"))
-        folder = manifest.parent
-        if not (folder / meta.get("files", "ruleset")).exists():
-            sys.exit(f"pack {folder.name} has no {meta.get('files', 'ruleset')} folder")
-        packs.append((folder, {"files": meta.get("files", "ruleset")}))
-    if not packs:
-        sys.exit(f"no content packs in {PACKS}: run tools/gh_port.py <Class> first")
-    return packs
+def pack_extras(mod_dir):
+    """A content pack's files for the plugin, beside its ruleset files: [(path relative to the pack folder, file)] for
+    pack.json, strings.tsv and art/**; empty for an ordinary mod (no pack.json). They go to <game>\\FrosthavenMods\\
+    packs\\<mod folder>\\ (here: install_pack_extras; friends: the zip's game/ files)."""
+    if not (mod_dir / "pack.json").exists():
+        return []
+    out = [(p.name, p) for p in (mod_dir / "pack.json", mod_dir / "strings.tsv") if p.exists()]
+    out += [(p.relative_to(mod_dir).as_posix(), p) for p in sorted_files(mod_dir / "art")]
+    return out
+
+
+def install_pack_extras(mods):
+    """Replace <game>\\FrosthavenMods\\packs with the extras of the installed mods (same result as the installer)."""
+    if PACKS.exists():
+        shutil.rmtree(PACKS)
+    n = 0
+    for d, _ in mods:
+        for rel, p in pack_extras(d):
+            dst = PACKS / d.name / rel
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(p, dst)
+            n += 1
+    return n
 
 
 def build(vanilla_bytes, mods):
@@ -286,23 +295,24 @@ def vanilla_backup():
 
 
 def cmd_build(args):
-    data = build(vanilla_backup(), load_mods(args.mod) + (pack_mods() if args.packs else []))
+    data = build(vanilla_backup(), load_mods(args.mod))
     Path(args.out).write_bytes(data)
     print(f"wrote {args.out} ({len(data):,} bytes)")
 
 
 def cmd_install(args):
-    mods = load_mods(args.mod) + (pack_mods() if args.packs else [])
+    mods = load_mods(args.mod)
     vanilla = vanilla_backup()
     data = build(vanilla, mods)
     rs.read_ruleset(data)  # sanity re-read
     tmp = GAME_RULESET.with_suffix(".ruleset.tmp")
     tmp.write_bytes(data)
     tmp.replace(GAME_RULESET)
+    extras = install_pack_extras(mods)
     state = read_state()
     state.update(installed_sha=sha(data), mods=[d.name for d, _ in mods], version="dev")
     STATE.write_text(json.dumps(state, indent=2), encoding="utf-8")
-    print(f"installed {len(mods)} mod(s): {', '.join(state['mods']) or '(none)'}")
+    print(f"installed {len(mods)} mod(s): {', '.join(state['mods']) or '(none)'}" + (f"; {extras} content pack file(s)" if extras else ""))
 
 
 def cmd_restore(args):
@@ -314,6 +324,8 @@ def cmd_restore(args):
         return
     data = vanilla_backup()
     GAME_RULESET.write_bytes(data)
+    if PACKS.exists():
+        shutil.rmtree(PACKS)  # a pack's plugin files without its rules would only confuse the plugin
     state.update(installed_sha=None, mods=[], version=None)
     STATE.write_text(json.dumps(state, indent=2), encoding="utf-8")
     print("restored vanilla Base.ruleset")
@@ -341,7 +353,6 @@ def main():
         if name == "build":
             p.add_argument("out")
         p.add_argument("--mod", action="append", help="build only these mods (repeatable)")
-        p.add_argument("--packs", action="store_true", help="also add the content packs built on this PC (FrosthavenMods\\packs)")
         p.set_defaults(fn=fn)
     sub.add_parser("restore").set_defaults(fn=cmd_restore)
     sub.add_parser("status").set_defaults(fn=cmd_status)

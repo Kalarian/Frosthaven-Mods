@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WardingStrength$
+Character: BruteID
+ID: 20007
+Level: 1
+Initiative: 32
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 2
+                            SquareEnhancements: 1
+                        AnimOverload: None
+                        IsInlineSubAbility: True
+                        #AnimOverload: TargetedShout
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 1
+                AttackSourcesOnly: True
+                AnimOverload: PowerUpShield
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: ShieldIncomingAttacks
+                    XPTracker: [0,1,0,1,0,1]
+                    IsToggleBonus: True
+                    ValidAbilityType: Attack                        
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Push$ <sprite name=Push> *TAttackSubPush* @TAttackSubPush@"
+    Bottom:
+        - Active:
+            Ability: BShield
+            ListLayout: "$GH_007_B$"
+            Layout: "$GH_007_B$"
+            Icon: "Shield"
+        - Row: "<size=50%> "
+        - XPTracker: BShield
