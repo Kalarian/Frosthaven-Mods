@@ -27,6 +27,13 @@ It opens in its own window. If the window can't open (very old Windows 10 withou
 opens in your web browser instead and tells you why; it then closes by itself a minute or so after you close
 that browser tab.
 
+Updating
+--------
+When a newer companion is out, the Mods tab says so: click "Update the app". It downloads the new version from the
+mod pack's GitHub release, checks it against the release's checksums, replaces its own files (your logs and
+settings stay), and reopens by itself. (Version 0.1.0 can't do this yet: unzip 0.1.1 over it once by hand.)
+If the folder can't be written to (under Program Files, say), it links to the release page instead.
+
 Files it writes
 ---------------
 - logs\companion.log next to the exe: what it did, and any errors. Send this if something goes wrong.

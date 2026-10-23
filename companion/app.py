@@ -10,6 +10,8 @@ import threading
 import time
 import webbrowser
 
+import os
+
 import paths
 import window
 
@@ -33,8 +35,25 @@ def _serve_while_open():
     window.log("no page open any more: quitting")
 
 
+def quit_app():
+    """End this process (the self-update has started the new version): close the window, and make sure."""
+    window.close_main_window()
+    threading.Timer(5.0, lambda: os._exit(0)).start()
+
+
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
+    if "--finish-update" in argv:
+        # step 2 of a self-update (updater.py), in the new copy: no window, no server, no single-instance lock
+        import updater
+        i = argv.index("--finish-update")
+        try:
+            updater.finish(argv[i + 1], argv[i + 2], restart="--no-restart" not in argv, log=window.log)   # --no-restart: tests
+        except Exception as ex:
+            window.log(f"update failed: {type(ex).__name__}: {ex}")
+            window.message_box(f"The companion couldn't finish updating: {ex}\n\nDownload the new zip from GitHub "
+                               "instead and unzip it over the old folder.", window.MB_ICONERROR)
+        return
     if "--check" in argv:
         # loads the window's parts (pywebview, pythonnet, WebView2) without opening anything, for testing a build
         ok = window.webview_available()
@@ -56,6 +75,10 @@ def main(argv=None):
     import server
     url = server.start()
     window.log(f"serving {url}")
+    if "--cleanup-update" in argv:
+        import updater
+        updater.cleanup(argv[argv.index("--cleanup-update") + 1], log=window.log)
+    server.on_quit = quit_app
     if "--browser" in argv or not window.webview_available():
         webbrowser.open(url)
         window.show_help(window.unavailable_kind)

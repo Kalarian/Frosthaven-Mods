@@ -209,7 +209,7 @@ function renderMods() {
       `<details${ok ? "" : " open"}><summary>Installer log</summary><pre class="log">${esc(job.log)}</pre></details>`;
   }
   $("#modsbody").innerHTML = `
-  ${s.app.newer ? `<div class="banner warn" style="margin:0 0 16px">A newer companion (v${esc(s.app.latest)}) is out. <a data-open="${esc(lat.url)}">Download it from GitHub</a>, unzip it over this folder and start it again.</div>` : ""}
+  ${appBanner(s, lat)}
   <div class="card">
     <div class="headline"><div class="badge ${tone}">${mark}</div><div><h2>${esc(title)}</h2><p>${esc(sub)}</p></div></div>
     ${running ? `<div class="banner warn">Frosthaven is running. Close it to install, update or remove the mods.</div>` : ""}
@@ -236,6 +236,28 @@ function renderMods() {
   });
   $("#check").onclick = async () => { flash = null; S = await api("/api/check", true); render(); };
 }
+
+// a newer companion: one click updates it (updater.py), or the GitHub link when this copy can't update itself
+function appBanner(s, lat) {
+  const a = s.app, u = a.update || {};
+  if (u.state && u.state !== "error") {
+    const done = u.state === "restarting";
+    return `<div class="banner ${done ? "ok" : "warn"}" style="margin:0 0 16px">${done ? "" : '<span class="spin"></span>'}${esc(u.message || "Updating…")}${done ? " The window closes and the new version opens by itself." : ""}</div>`;
+  }
+  if (!a.newer) return u.state === "error" ? `<div class="banner bad" style="margin:0 0 16px">${esc(u.message)}</div>` : "";
+  const err = u.state === "error" ? `<div class="note" style="margin-top:6px">${esc(u.message)}</div>` : "";
+  if (a.canUpdate) return `<div class="banner warn" style="margin:0 0 16px">A newer companion (v${esc(a.latest)}) is out. ${esc(a.canUpdate)} <a data-open="${esc(lat.url)}">Release page</a>${err}</div>`;
+  return `<div class="banner warn" style="margin:0 0 16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap">` +
+    `<span>A newer companion (v${esc(a.latest)}) is out.</span><button class="btn primary" id="appupdate">Update the app</button>` +
+    `<a data-open="${esc(lat.url)}">What's new</a>${err}</div>`;
+}
+document.addEventListener("click", async e => {
+  if (!e.target.closest("#appupdate")) return;
+  e.target.disabled = true;
+  const r = await fetch("/api/app/update", {method: "POST", headers: {"X-Companion": "1"}}).then(r => r.json()).catch(() => ({ok: false, message: "The companion didn't answer."}));
+  if (!r.ok) flash = r.message;
+  refresh();
+});
 
 async function act(action) {
   flash = null;
@@ -344,7 +366,7 @@ let first = "mods";
 try { first = localStorage.getItem("companion-tab") || "mods"; } catch (e) {}
 if (location.hash.length > 1) first = location.hash.slice(1).split("/")[0];     // /#map opens on that tab
 refresh().then(() => show((first === "stats" || (first in SRC && (first !== "play" || (S && S.playGuide)))) ? first : "mods"));
-setInterval(() => { if (view === "mods" || (S && S.job && S.job.running)) refresh(); }, 3000);
+setInterval(() => { if (view === "mods" || (S && S.job && S.job.running) || (S && S.app.update && S.app.update.state)) refresh(); }, 3000);
 setInterval(() => { if (view === "stats") Stats.load(campaign); }, 5000);   // new records, and the live scenario
 setInterval(() => fetch("/api/ping", {cache: "no-store"}).catch(() => {}), 15000);   // keeps a browser-only companion alive
 </script>

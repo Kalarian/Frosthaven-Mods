@@ -17,8 +17,10 @@ import mapview
 import mods
 import paths
 import stats
+import updater
 
 LOCAL_HOSTS = ("127.0.0.1", "localhost")
+on_quit = lambda: None            # app.py sets it: how the self-update closes this app once the new one runs
 last_request = time.time()        # the browser fallback quits when no page has asked for anything in a while
 OPENABLE = ("https://github.com/",)       # what /api/open may hand to the system browser
 
@@ -35,7 +37,8 @@ def status():
                        for m in [re.fullmatch(r"Frosthaven-Companion-([0-9.]+)\.zip", n or "")] if m), None)
     return {
         "app": {"name": paths.APP_NAME, "version": paths.VERSION, "latest": app_latest,
-                "newer": bool(app_latest) and game.version_key(app_latest) > game.version_key(paths.VERSION)},
+                "newer": bool(app_latest) and game.version_key(app_latest) > game.version_key(paths.VERSION),
+                "canUpdate": updater.can_update(), "update": updater.job()},
         "game": {"dir": gdir, "running": game.is_running() if gdir else False},
         "installed": installed,
         "latest": latest,
@@ -142,6 +145,9 @@ class Handler(BaseHTTPRequestHandler):
         p = url.path
         if p in ("/api/mods/install", "/api/mods/uninstall"):
             ok, msg = mods.start(p.rsplit("/", 1)[1])
+            return self._json({"ok": ok, "message": msg}, 200 if ok else 409)
+        if p == "/api/app/update":
+            ok, msg = updater.start(lambda: on_quit())
             return self._json({"ok": ok, "message": msg}, 200 if ok else 409)
         if p == "/api/check":
             game.latest_release(force=True)

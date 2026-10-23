@@ -193,6 +193,16 @@ def _watch_load(w, on_stuck):
     threading.Thread(target=watch, name="window-watchdog", daemon=True).start()
 
 
+def close_main_window():
+    """Close the window from another thread (the self-update's restart); the program ends when it's gone."""
+    try:
+        import webview
+        for w in list(getattr(webview, "windows", [])):
+            w.destroy()
+    except Exception as ex:
+        log(f"window: couldn't close ({type(ex).__name__}: {ex})")
+
+
 def run(url, on_stuck=None):
     """Show `url` in a WebView2 window on this thread; return when it's closed. Raises when it can't open."""
     import webview
