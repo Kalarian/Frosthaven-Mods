@@ -22,6 +22,12 @@ import fh_ruleset
 import game
 import scenario_map
 
+# conditions, as the game names the abilities that apply them: buffs help their target, debuffs hurt it
+BUFFS = ("Bless", "Strengthen", "Invisible", "Regenerate", "Ward", "Safeguard", "Shield", "Retaliate")
+DEBUFFS = ("Poison", "Wound", "Muddle", "Immobilize", "Disarm", "Stun", "Curse", "Brittle", "Bane", "Impair",
+           "Infect", "Rupture")
+CONDITIONS = BUFFS + DEBUFFS
+
 NULL_X2_WORTH = 3       # what a null (and a x2) is worth in modifier points: about a typical attack's damage
 
 _lock = threading.Lock()
@@ -195,6 +201,30 @@ def run_key(rec):
     return "|".join(str(x) for x in [sc.get("id"), sc.get("seed"), sc.get("rounds"), rec.get("outcome"), ",".join(party), *totals])
 
 
+def _conditions(actors, party_ids):
+    """Conditions applied, from every ability that applies one (cards, and attack-modifier perks: those show as the
+    game's 'dummy' cards). Per party member: what they applied, split by target (an enemy, themselves, an ally, a
+    summon), and what they received, with who applied it (a monster type, an ally, themselves)."""
+    applied = {c: defaultdict(lambda: defaultdict(int)) for c in party_ids}
+    received = {c: defaultdict(lambda: defaultdict(int)) for c in party_ids}
+    for who, a in actors.items():
+        for e in a.get("Abilities", []):
+            cond = e.get("AbilityType")
+            if cond not in CONDITIONS:
+                continue
+            caster, target = e.get("MainActorClassID"), e.get("SecondaryActorClassID")
+            ttype, ctype = e.get("SecondaryActorType"), e.get("MainActorType")
+            if who in party_ids and caster == who:
+                kind = ("self" if target == who else "enemy" if ttype == "Enemy" else "summon" if ttype == "HeroSummon"
+                        else "ally" if ttype == "Player" else "other")
+                applied[who][cond][kind] += 1
+            if ttype == "Player" and target in party_ids:
+                src = ("self" if caster == target else class_name(caster) if ctype == "Enemy" else "ally:" + (caster or "?"))
+                received[target][cond][src] += 1
+    plain = lambda d: {k: dict(v) for k, v in d.items()}
+    return {c: {"applied": plain(applied[c]), "received": plain(received[c])} for c in party_ids}
+
+
 def summarize(rec, path=None):
     nm = names()
     sc = rec.get("scenario") or {}
@@ -291,8 +321,10 @@ def summarize(rec, path=None):
                        if e.get("ActorWhoReceivedDamageType") == "Enemy")
 
     order = _turn_order(actors, rounds)
+    conds = _conditions(actors, set(chars))
     for cls, c in chars.items():
         c["turnOrder"] = order.get(cls, [])
+        c["conditions"] = conds.get(cls, {"applied": {}, "received": {}})
 
     key = run_key(rec)
 

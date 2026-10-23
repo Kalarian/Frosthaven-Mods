@@ -13,7 +13,9 @@
   const SURFACE = "#1b2027", GRID = "#2c333d", AXIS = "#8d877b", INK = "#e8e2d4", DIM = "#a59f92";
   const ELEMENTS = ["Fire", "Ice", "Air", "Earth", "Light", "Dark"];
   const VIEWS = [["overview", "Overview"], ["scenario", "Scenario"], ["luck", "Luck"], ["damage", "Damage"],
-    ["cards", "Cards & elements"], ["monsters", "Monsters"], ["records", "Records"]];
+    ["conditions", "Conditions"], ["cards", "Cards & elements"], ["monsters", "Monsters"], ["records", "Records"]];
+  const BUFFS = ["Bless", "Strengthen", "Invisible", "Regenerate", "Ward", "Safeguard", "Shield", "Retaliate"];
+  const DEBUFFS = ["Poison", "Wound", "Muddle", "Immobilize", "Disarm", "Stun", "Curse", "Brittle", "Bane", "Impair", "Infect", "Rupture"];
 
   const $ = s => document.querySelector(s);
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
@@ -231,7 +233,7 @@
     for (const r of rs) for (const p of r.party) {
       const c = r.chars[p.cls]; if (!c) continue;
       const k = ckey(p);
-      const a = t.get(k) || {key: k, runs: 0, rounds: 0, dealt: 0, taken: 0, healed: 0, kills: 0, hits: 0, biggest: 0, overkill: 0, melee: 0, ranged: 0, summons: 0, poison: 0, shielded: 0, noFields: 0, exhausted: 0, draws: [], deckN: 0, deckNulls: 0, deckX2: 0, luck: 0, lostToAvoid: 0, xp: 0, infused: {}, consumed: {}, cards: {}, cardDamage: {}};
+      const a = t.get(k) || {key: k, runs: 0, rounds: 0, dealt: 0, taken: 0, healed: 0, kills: 0, hits: 0, biggest: 0, overkill: 0, melee: 0, ranged: 0, summons: 0, poison: 0, shielded: 0, noFields: 0, exhausted: 0, draws: [], deckN: 0, deckNulls: 0, deckX2: 0, luck: 0, lostToAvoid: 0, xp: 0, infused: {}, consumed: {}, cards: {}, cardDamage: {}, applied: {}, received: {}};
       a.runs++; a.rounds += r.rounds || 0; a.exhausted += p.exhausted ? 1 : 0;
       for (const f of ["dealt", "taken", "healed", "kills", "hits", "overkill", "summons", "lostToAvoid"]) a[f] += c[f] || 0;
       a.xp += c.xpEarned || 0;
@@ -241,6 +243,9 @@
       for (const [e, n] of Object.entries(c.infused || {})) a.infused[e] = (a.infused[e] || 0) + n;
       for (const [e, n] of Object.entries(c.consumed || {})) a.consumed[e] = (a.consumed[e] || 0) + n;
       for (const [id, v] of Object.entries(c.cards || {})) { const x = a.cards[id] || (a.cards[id] = {name: v.name, plays: 0, lost: 0}); x.plays += v.plays; x.lost += v.lost; }
+      const cond = c.conditions || {};
+      for (const [k, by] of Object.entries(cond.applied || {})) { const x = a.applied[k] || (a.applied[k] = {}); for (const [t, n] of Object.entries(by)) x[t] = (x[t] || 0) + n; }
+      for (const [k, by] of Object.entries(cond.received || {})) { const x = a.received[k] || (a.received[k] = {}); for (const [t, n] of Object.entries(by)) x[t] = (x[t] || 0) + n; }
       for (const [id, v] of Object.entries(c.cardDamage || {})) { const x = a.cardDamage[id] || (a.cardDamage[id] = {name: v.name, top: 0, bottom: 0, other: 0, hits: 0}); for (const f of ["top", "bottom", "other", "hits"]) x[f] += v[f] || 0; }
       t.set(k, a);
     }
@@ -340,6 +345,46 @@
     return h;
   }
 
+  function viewConditions() {
+    const rs = runs();
+    if (!rs.length) return empty("No scenarios recorded yet.");
+    const ts = totals(rs);
+    const series = ts.map(t => ({name: who(t.c), color: t.c.color}));
+    const count = (t, field, cond, pick) => Object.entries((t[field][cond] || {})).filter(([k]) => pick(k)).reduce((a, [, n]) => a + n, 0);
+    // rows: conditions that happened at all, most first
+    const rowsFor = (list, field, pick) => list.map(cond => ({label: cond, values: ts.map(t => count(t, field, cond, pick))}))
+      .filter(r => sum(r.values) > 0).sort((a, b) => sum(b.values) - sum(a.values));
+    const tableFor = (rows) => table(["Condition", ...ts.map(t => t.c.name)], rows.map(r => [esc(r.label), ...r.values.map(fmt)]), ts.map((_, i) => i + 1));
+    let h = `<div class="card"><p class="note" style="margin:0">Every condition applied by an ability: from cards, and from attack modifier perks such as "+1 muddle". Shield and Retaliate count each time they're gained. Summons' own abilities aren't included yet.</p></div>`;
+
+    const onEnemies = rowsFor(DEBUFFS, "applied", k => k === "enemy");
+    h += card("Debuffs the party put on monsters", "Split by who applied them.", onEnemies.length ? hbars({rows: onEnemies, series, unit: "times"}) : `<p class="note">None yet.</p>`, onEnemies.length ? tableFor(onEnemies) : "");
+
+    const given = rowsFor(BUFFS, "applied", () => true);
+    const givenTable = ts.flatMap(t => BUFFS.filter(b => t.applied[b]).map(b => {
+      const x = t.applied[b];
+      return [esc(who(t.c)), esc(b), fmt(x.self || 0), fmt(x.ally || 0), fmt(x.summon || 0), fmt(sum(Object.values(x)))];
+    }));
+    h += card("Buffs the party gave", "Split by who gave them: to themselves, to another character, or to a summon.", given.length ? hbars({rows: given, series, unit: "times"}) : `<p class="note">None yet.</p>`,
+      givenTable.length ? table(["Character", "Buff", "Themselves", "Another character", "A summon", "Total"], givenTable, [2, 3, 4, 5]) : "");
+
+    const suffered = rowsFor(DEBUFFS, "received", k => k !== "self");
+    const sources = new Map();
+    for (const t of ts) for (const [cond, by] of Object.entries(t.received)) {
+      if (!DEBUFFS.includes(cond)) continue;
+      for (const [src, n] of Object.entries(by)) {
+        if (src === "self") continue;
+        const name = src.startsWith("ally:") ? (charOrder.find(c => c.cls === src.slice(5)) || {name: src.slice(5)}).name : src;
+        const k = JSON.stringify([cond, name]);
+        sources.set(k, (sources.get(k) || 0) + n);
+      }
+    }
+    const srcRows = [...sources.entries()].sort((a, b) => b[1] - a[1]).map(([k, n]) => { const [cond, name] = JSON.parse(k); return [esc(cond), esc(name), fmt(n)]; });
+    h += card("Debuffs the party received", "Split by who suffered them. The table shows which monsters applied them.", suffered.length ? hbars({rows: suffered, series, unit: "times"}) : `<p class="note">None yet.</p>`,
+      srcRows.length ? table(["Condition", "Applied by", "Times"], srcRows, [2]) : "");
+    return h;
+  }
+
   function viewCards() {
     const rs = runs();
     if (!rs.length) return empty("No scenarios recorded yet.");
@@ -427,11 +472,11 @@
     indexCharacters([...(D.runs || []), ...(D.live ? [D.live] : [])]);
     const nav = `<div class="sfilters"><div class="spills">${VIEWS.map(([k, l]) => `<button data-sv="${k}" class="${k === view ? "on" : ""}">${esc(l)}${k === "scenario" && D.live ? ' <span class="livedot" title="A scenario is being played"></span>' : ""}</button>`).join("")}</div>` +
       (view !== "scenario" ? `<label class="sfil">Scenarios <select id="soutcome"><option value="all">All</option><option value="win">Won</option><option value="other">Lost or resigned</option></select></label>` : "") +
-      `<span class="sgrow"></span><button class="btn small" id="sexport" title="Save this campaign's records as one zip, to send to a friend who missed a scenario">Export records</button>` +
-      `<button class="btn small" id="simport" title="Add the records from a friend's export: scenarios you already have are skipped">Import records</button>` +
+      `<span class="sgrow"></span><button class="btn small" id="sexport" title="Save this campaign's records as one zip, to send to a friend who missed a scenario">Export</button>` +
+      `<button class="btn small" id="simport" title="Add the records from a friend's export: scenarios you already have are skipped">Import</button>` +
       `<input type="file" id="simportfile" accept=".zip,.gz,.json" hidden></div>` +
       (notice ? `<div class="banner ${notice.tone}" style="margin:0 0 16px">${notice.html} <a id="snoticex">Dismiss</a></div>` : "");
-    const body = {overview: viewOverview, scenario: viewScenario, luck: viewLuck, damage: viewDamage, cards: viewCards, monsters: viewMonsters, records: viewRecords}[view] || viewOverview;
+    const body = {overview: viewOverview, scenario: viewScenario, luck: viewLuck, damage: viewDamage, conditions: viewConditions, cards: viewCards, monsters: viewMonsters, records: viewRecords}[view] || viewOverview;
     let html;
     try { html = body(); } catch (e) { html = empty("This view couldn't be drawn: " + esc(e.message)); console.error(e); }
     root.innerHTML = nav + html;
