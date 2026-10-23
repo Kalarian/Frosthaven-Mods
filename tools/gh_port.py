@@ -10,10 +10,13 @@ that the release zip and the installer carry like every other mod:
     strings.tsv                               key<TAB>English text (the plugin answers keys the game lacks;
                                               also <Class>_FullName, CODEX_HeroInfo_<Class>, Event__Text)
     art\\<Class>\\*.png                         the class's pictures in Frosthaven's shapes (gh_art.py)
-    pack.json                                 manifest: name, version, classes, data_sha (plugin + co-op check), source
+    bundles\\hero_<class>_assets_all.bundle     the class's 3D model, Gloomhaven's own asset bundle copied as is
+                                              (gh_model.py; 83 MB for the Brute, so git-ignored: the release carries it)
+    pack.json                                 manifest: name, version, classes, data_sha (plugin + co-op check), source,
+                                              and a "model" entry per class telling the plugin what is in the bundle
 
-strings.tsv, art\\ and pack.json are copied into the game folder as <Frosthaven>\\FrosthavenMods\\packs\\<name>\\ (by
-fh_mods.py install here, by the installer on the friends' PCs through the zip's game/ files). A content pack is data
+strings.tsv, art\\, bundles\\ and pack.json are copied into the game folder as <Frosthaven>\\FrosthavenMods\\packs\\<name>\\
+(by fh_mods.py install here, by the installer on the friends' PCs through the zip's game/ files). A content pack is data
 the game loads at startup: every PC needs the same one before launch, and a campaign that has used it (the
 "Gloomhaven classes" house rule on, a character created) needs it for good. The author builds it from their own
 Gloomhaven; the friends get the built pack with the release. See GHClasses.cs.
@@ -243,7 +246,7 @@ def main():
                        "unlocked in a campaign by the house rule of the same name.",
         "enabled": True,
     }, indent=2) + "\n", encoding="utf-8")
-    written, warnings, used_keys = [], [], set()
+    written, warnings, used_keys, models = [], [], set(), {}
 
     def write(rel, s):
         if rel.lower() in fh_names:
@@ -298,6 +301,22 @@ def main():
             except Exception as e:  # noqa: BLE001 - art is cosmetic, never block the data
                 warnings.append(f"{cls}: pictures failed: {e}")
 
+        # the 3D model: Gloomhaven's own bundle plus what the plugin needs to know about it (see gh_model.py);
+        # optional, the plugin keeps the Drifter's model without
+        try:
+            import gh_model
+        except ImportError as e:
+            warnings.append(f"{cls}: no 3D model ({e})")
+        else:
+            try:
+                models[cls] = gh_model.export(gh, fh_mods.GAME, cls, args.out)
+                anim = models[cls]["animation"]
+                print(f"{cls}: 3D model from {models[cls]['bundle']} ({models[cls]['size'] // 1048576} MB, "
+                      f"{len(models[cls]['materials'])} materials, {len(models[cls]['weapons'])} weapons, "
+                      f"{len(anim['clips'])} clips swapped on the {anim['base']}'s animator)")
+            except Exception as e:  # noqa: BLE001 - the model is cosmetic, never block the data
+                warnings.append(f"{cls}: 3D model not copied: {e}")
+
     table = {}
     for key in sorted(used_keys):
         gh_key = key[3:] if key.startswith("GH_") else key
@@ -322,9 +341,11 @@ def main():
     for rel in sorted(written, key=str.lower):
         digest.update(rel.lower().encode("utf-8") + b"\0" + (out_ruleset / rel).read_bytes() + b"\0")
     digest.update((args.out / "strings.tsv").read_bytes())
+    # The "model" entries are visual only (not in data_sha): a PC without the bundle shows the Drifter's model instead.
     (args.out / "pack.json").write_text(json.dumps({
         "name": PACK, "title": PACK_TITLE, "version": PACK_VERSION, "classes": args.classes, "files": "files",
         "data_sha": digest.hexdigest(), "source": {"gloomhaven": str(gh), "buildid": build, "files": len(written)},
+        "model": models,
     }, indent=2) + "\n", encoding="utf-8")
 
     for w in warnings:

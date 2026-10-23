@@ -11,5 +11,301 @@
     "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
     "buildid": "20286313",
     "files": 41
+  },
+  "model": {
+    "Brute": {
+      "prefab": "Assets/Content/Characters/Heroes/HE_Brute/HE_Brute_PR.prefab",
+      "animator": "HE_Brute",
+      "body_mesh": "HE_Brute_Mesh",
+      "target_bone": "C_spineChestHook_LOC",
+      "gh_height": 1.87,
+      "height": 2.26,
+      "hit_radius": 0.1,
+      "trail_points": [
+        "C_headSkel01_JNT",
+        "R_armSkel03_JNT",
+        "L_armSkel03_JNT",
+        "R_legSkel03_JNT",
+        "L_legSkel03_JNT"
+      ],
+      "projectile_anchor": "R_weaponPropHook_LOC",
+      "weapons": [
+        {
+          "list": "BruteSword",
+          "bone": "R_weaponSkel_JNT",
+          "root": "Brute Sword",
+          "type": "Melee"
+        },
+        {
+          "list": "BruteShield",
+          "bone": "L_weaponSkel_JNT",
+          "root": "Brute Shield",
+          "type": "Cosmetic"
+        }
+      ],
+      "materials": {
+        "HE_Brute_MAT": {
+          "albedo": "InoxBrute_d",
+          "mask": "InoxBrute_MRAO",
+          "normal": "InoxBrute_n",
+          "emissive": null,
+          "cutout": false,
+          "cutoff": 0.5,
+          "emissive_boost": 1.0,
+          "two_sided": false
+        },
+        "HE_Brute_Fur_MAT": {
+          "albedo": "InoxBrute_fur_d",
+          "mask": "CH_Proxy_MRAO",
+          "normal": "CH_Proxy_Norm",
+          "emissive": null,
+          "cutout": true,
+          "cutoff": 0.5,
+          "emissive_boost": 1.0,
+          "two_sided": false
+        },
+        "HE_Brute_MAT_2Side": {
+          "albedo": "InoxBrute_d",
+          "mask": "InoxBrute_MRAO",
+          "normal": "InoxBrute_n",
+          "emissive": "InoxBrute_Em",
+          "cutout": false,
+          "cutoff": 0.5,
+          "emissive_boost": 1.0,
+          "two_sided": true
+        },
+        "WP_Brute_Weapons_Mat": {
+          "albedo": "WP_InoxBrute_d",
+          "mask": "WP_InoxBrute_mf",
+          "normal": "WP_InoxBrute_n",
+          "emissive": null,
+          "cutout": false,
+          "cutoff": 0.5,
+          "emissive_boost": 1.0,
+          "two_sided": false
+        }
+      },
+      "animation": {
+        "base": "Drifter",
+        "clips": {
+          "Drifter_Calm_Idle": "HE_Brute_Idle_v001",
+          "Drifter_Alert_Idle": "HE_Brute_Idle_v001",
+          "Drifter_Cast": "HE_Brute_PowerUp_v001",
+          "Drifter_Loot": "HE_Brute_Loot_v001",
+          "Drifter_Use_Item": "HE_Brute_Use_Item_v001",
+          "Drifter_Attack_Melee": "HE_Brute_Melee_Attack_v001",
+          "Drifter_Ranged_Attack": "HE_Brute_Throw_Dagger_v001",
+          "Drifter_Hurt": "HE_Brute_OnHit_v001",
+          "Drifter_Exhausted": "HE_Brute_OnExhausted_v001",
+          "Drifter_JumpLoop": "Brute_Jump_Move",
+          "Drifter_JumpEnd": "Brute_Jump_Out",
+          "Drifter_JumpStart": "Brute_Jump_Into",
+          "Drifter_Ranged_Area_Attack": "HE_Brute_Targeted_Roar_v001",
+          "Drifter_Attack_Melee_Strong": "HE_Brute_Heavy_Melee_Attack_v001",
+          "Drifter_Calm_Rare": "HE_Brute_Idle_v001",
+          "Drifter_Calm_Poisoned": "HE_Brute_Idle_v001",
+          "Drifter_Alert_Rare": "HE_Brute_Idle_v001",
+          "Drifter_Calm_wounded": "HE_Brute_Idle_v001",
+          "Drifter_Alert_Poison": "HE_Brute_Idle_v001",
+          "Drifter_Alert_Wounded": "HE_Brute_Idle_v001",
+          "Drifter_MoveLoop": "HE_Brute_Run_v001",
+          "Drifter_Power_Cast": "HE_Brute_PowerUp_VAR_v001",
+          "Drifter_Screen Selection": "HE_Brute_Idle_v001",
+          "Drifter_Defeated": "HE_Brute_OnExhausted_v001",
+          "Drifter_Celebration": "HE_Brute_Radial_Roar_v001"
+        },
+        "states": {
+          "Base Layer.Idle-Run": {
+            "scale": 0.2778
+          },
+          "Base Layer.PowerUp": {
+            "scale": 1.17,
+            "gh": {
+              "progress": 2.33
+            }
+          },
+          "Base Layer.Loot": {
+            "scale": 1.8333
+          },
+          "Base Layer.UseItem": {
+            "scale": 2.2286,
+            "gh": {
+              "progress": 2.8
+            }
+          },
+          "Base Layer.Attack": {
+            "scale": 0.7625
+          },
+          "Base Layer.RangedAttack": {
+            "scale": 0.6923,
+            "gh": {
+              "fire": 1.66
+            },
+            "fh": {
+              "fire": 2.6
+            }
+          },
+          "Base Layer.Hit": {
+            "scale": 1.2
+          },
+          "Base Layer.Death": {
+            "scale": 0.6556
+          },
+          "Base Layer.Jump": {
+            "scale": 0.0991
+          },
+          "Base Layer.Jump Outof": {
+            "scale": 0.9333
+          },
+          "Base Layer.Jump Into": {
+            "scale": 0.4
+          },
+          "Base Layer.PushPull": {
+            "scale": 1.2
+          },
+          "Base Layer.RangedAttack_AOE": {
+            "scale": 0.5929
+          },
+          "Base Layer.Attack_AOE_Cone": {
+            "scale": 0.96
+          },
+          "Base Layer.Push": {
+            "scale": 1.17
+          },
+          "Base Layer.RareIdle": {
+            "scale": 0.4167
+          },
+          "Base Layer.RareIdle-Poison": {
+            "scale": 0.5
+          },
+          "Base Layer.AlertRareIdle": {
+            "scale": 0.625
+          },
+          "Base Layer.RareIdle-Wound": {
+            "scale": 0.3571
+          },
+          "Base Layer.AlertRareIdle-Poison": {
+            "scale": 0.5
+          },
+          "Base Layer.AlertRareIdle-Wound": {
+            "scale": 0.3333
+          },
+          "Base Layer.Run": {
+            "scale": 0.9333
+          },
+          "Base Layer.Persistent Buff": {
+            "scale": 0.9452,
+            "gh": {
+              "progress": 1.66
+            }
+          },
+          "Base Layer.Pull": {
+            "scale": 1.17
+          },
+          "Base Layer.Selection Screen": {
+            "scale": 0.0312
+          },
+          "Base Layer.Attack_Enhanced": {
+            "scale": 0.7625
+          },
+          "Base Layer.Attack_AOE_Cone_Enhanced": {
+            "scale": 0.96
+          },
+          "Base Layer.Attack_AOE_Radial_Enhanced": {
+            "scale": 0.96
+          },
+          "Base Layer.Attack_AOE_Radial": {
+            "scale": 0.96
+          },
+          "Base Layer.DangerArea": {
+            "scale": 1.17
+          },
+          "Base Layer.Heal": {
+            "scale": 1.17,
+            "gh": {
+              "progress": 1.0
+            }
+          },
+          "Base Layer.Heal_Enhanced": {
+            "scale": 1.17,
+            "gh": {
+              "progress": 1.0
+            }
+          },
+          "Base Layer.RangedAttack_Enhanced": {
+            "scale": 0.6923,
+            "gh": {
+              "fire": 1.66
+            },
+            "fh": {
+              "fire": 2.6
+            }
+          },
+          "Base Layer.RangedAttack_AOE_Enhanced": {
+            "scale": 0.5929
+          },
+          "Base Layer.PowerUp_No_VFX": {
+            "scale": 1.17,
+            "gh": {
+              "progress": 2.33
+            }
+          },
+          "Base Layer.Defeat": {
+            "scale": 0.1229
+          },
+          "Base Layer.Celebration": {
+            "scale": 0.581,
+            "gh": {
+              "hit": 1.4,
+              "progress": 1.4
+            }
+          },
+          "Base Layer.RangedAttack_AOE_NonArea": {
+            "scale": 0.5929
+          },
+          "Base Layer.RangedAttack_AOE_NonArea_Enhanced": {
+            "scale": 0.5929
+          }
+        },
+        "projectiles": [
+          "Drifter_arrow"
+        ],
+        "melee_weapon": "Drifter_club",
+        "silence": [
+          "Drifter_Exhaust",
+          "Drifter_Hurt"
+        ]
+      },
+      "bundle": "hero_brute_assets_all.bundle",
+      "bundle_name": "eedd4518c1eafd6f0484107f4fa71e1f.bundle",
+      "size": 83229021,
+      "sha256": "04b2a0419654e4efee2f0cc94a56262a3b41ded1589763b35f103b8aacfb2701",
+      "not_shipped": [
+        "7c79e4fec988dbd61eedc6188355414e_unitybuiltinshaders.bundle",
+        "misc_high_shaders_assets_all.bundle",
+        "misc_shaders_assets_all.bundle",
+        "pcg_materials_assets_brute_heal_bits_mat.bundle",
+        "pcg_materials_assets_brute_positive_bits_mat.bundle",
+        "pcg_materials_assets_coinpilemat_lcm.bundle",
+        "pcg_materials_assets_cragheartcastshieldcloudmat.bundle",
+        "pcg_materials_assets_deathdissolvefogmat.bundle",
+        "pcg_materials_assets_deathdissolveparticlesmat.bundle",
+        "pcg_materials_assets_explosionfogaddmat.bundle",
+        "pcg_materials_assets_explosionfogbrightmat.bundle",
+        "pcg_materials_assets_explosionsmokemultmat.bundle",
+        "pcg_materials_assets_hm_mo_livingbones_mat_lcm.bundle",
+        "pcg_materials_assets_invisibletexmat.bundle",
+        "pcg_materials_assets_lightboltdissolve_mat.bundle",
+        "pcg_materials_assets_mapmarker_bosscenter_mat.bundle",
+        "pcg_materials_assets_particletrail_lightexplosion_mat.bundle",
+        "pcg_materials_assets_particletrailmat.bundle",
+        "pcg_materials_assets_particletrailpositiveweakmat.bundle",
+        "pcg_materials_assets_shoutcircle_mat.bundle",
+        "pcg_materials_assets_spark_bits_mat.bundle",
+        "pcg_materials_assets_sparks_gpu_mat.bundle",
+        "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
+        "pcg_materials_assets_wp_banditguard_knife_01_mat.bundle"
+      ]
+    }
   }
 }

@@ -19,8 +19,9 @@ namespace FrosthavenMods
     /// player's own Gloomhaven install into new ruleset files, its English text and its pictures; this side makes the
     /// game cope with a class it has no art of its own for:
     ///   - 3D model: Frosthaven ships no hero bundle for Gloomhaven models, and asking for one is a null-reference crash
-    ///     (AssetBundleManager.BundleConfigForPrefab finds no config). Until the real model loads from Gloomhaven's
-    ///     bundles (stage 2), any hero model without a bundle borrows the Drifter's (an Inox, like the Brute).
+    ///     (AssetBundleManager.BundleConfigForPrefab finds no config). A pack that brings the class's Gloomhaven bundle
+    ///     gets its real model, adopted at runtime (GHModel); any other hero model without a bundle borrows the
+    ///     Drifter's (an Inox, like the Brute). Either way the Drifter's bundle is the one the game loads for the class.
     ///   - UI config: Frosthaven keeps one CharacterConfigUI per hero (portraits, icons, class colour, card skin, where the
     ///     model stands on the character screen). A class without one gets the Banner Spear's for most lookups and null
     ///     for the 3D preview, which parks the model half-way into the floor. Each ported class gets a copy of the
@@ -39,7 +40,7 @@ namespace FrosthavenMods
     [HarmonyPatch]
     internal static class GHClasses
     {
-        private const string StandInModel = "Drifter";
+        internal const string StandInModel = "Drifter";
         private static string _packsFolder;
         private static string PacksFolder => _packsFolder ?? (_packsFolder = Path.Combine(Paths.GameRootPath, "FrosthavenMods", "packs"));  // lazy: tools/hookcheck runs the static init outside the game
         private static Dictionary<string, string> _strings;
@@ -137,7 +138,7 @@ namespace FrosthavenMods
 
         /// <summary>True for Gloomhaven's and Jaws of the Lion's heroes: the enum entries before Frosthaven's first, the
         /// Infuser. The game compares class names case-insensitively, so this does too.</summary>
-        private static bool IsGloomhavenClass(string name, out ECharacter model)
+        internal static bool IsGloomhavenClass(string name, out ECharacter model)
         {
             model = ECharacter.None;
             return !string.IsNullOrEmpty(name) && Enum.TryParse(name, true, out model) && Enum.IsDefined(typeof(ECharacter), model)
@@ -161,32 +162,47 @@ namespace FrosthavenMods
         // The switch itself, its guard and the command that unlocks the classes on every PC: GHClassesRule.cs. The
         // co-op join check: PackGate.cs.
 
-        // ------------------------------------------------------------------ 3D model stand-in
+        // ------------------------------------------------------------------ 3D model: the pack's own, or the stand-in
 
-        /// <summary>The hero model to load instead of <paramref name="prefabName"/>, or null to load it as asked.</summary>
+        /// <summary>The hero model whose bundle to load instead of <paramref name="prefabName"/>'s, or null to load it as
+        /// asked. The Drifter's bundle is what a Gloomhaven class loads either way: it is the stand-in model, and the
+        /// pack's own model is built around her wrapper and animator (GHModel).</summary>
         private static string StandIn(string prefabName)
         {
-            if (!IsGloomhavenClass(prefabName, out _)) return null;
+            if (!IsGloomhavenClass(prefabName, out ECharacter model)) return null;
             AssetBundleManager abm = AssetBundleManager.Instance;
             if (abm == null || abm.AssetBundleExists("hero_" + prefabName.ToLowerInvariant().Replace(" ", ""))) return null;
-            if (Reported.Add(prefabName)) Plugin.Log.LogInfo($"Gloomhaven classes: no 3D model for {prefabName} yet, using the {StandInModel}'s");
+            if (Reported.Add(prefabName))
+                Plugin.Log.LogInfo(GHModel.EntryFor(model) != null
+                    ? $"Gloomhaven classes: {prefabName} brings its own 3D model; the {StandInModel}'s bundle carries it"
+                    : $"Gloomhaven classes: no 3D model for {prefabName}, using the {StandInModel}'s");
             return StandInModel;
         }
 
+        /// <summary>The game asks for a hero prefab here from every path (class screen, scenario, results). A Gloomhaven
+        /// class with a model in its pack gets the adopted model; without one, the Drifter's prefab under her name.</summary>
         [HarmonyPatch(typeof(AssetBundleManager), nameof(AssetBundleManager.GetCharacterPrefabFromBundle))]
         [HarmonyPrefix]
-        private static void Prefab(CActor.EType type, ref string prefabName, ref string skinString)
+        private static bool Prefab(CActor.EType type, ref string prefabName, ref string skinString, ref GameObject __result)
         {
-            if (type != CActor.EType.Player) return;
+            if (type != CActor.EType.Player) return true;
             string standIn = StandIn(prefabName);
-            if (standIn == null) return;
+            if (standIn == null) return true;
+            GameObject own = IsGloomhavenClass(prefabName, out ECharacter model) ? GHModel.Template(model) : null;
+            if (own != null) { __result = own; return false; }
             prefabName = standIn;
             skinString = null;
+            return true;
         }
 
         [HarmonyPatch(typeof(AssetBundleManager), nameof(AssetBundleManager.GetCharacterPrefabFromBundleAsync))]
         [HarmonyPrefix]
-        private static void PrefabAsync(CActor.EType type, ref string prefabName, ref string skinString) => Prefab(type, ref prefabName, ref skinString);
+        private static bool PrefabAsync(CActor.EType type, ref string prefabName, ref string skinString, ref System.Threading.Tasks.Task<GameObject> __result)
+        {
+            GameObject own = null;
+            if (!Prefab(type, ref prefabName, ref skinString, ref own)) { __result = System.Threading.Tasks.Task.FromResult(own); return false; }
+            return true;
+        }
 
         [HarmonyPatch(typeof(AssetBundleManager), nameof(AssetBundleManager.EnsureActorPrefabBundlesLoadedBeforeAction))]
         [HarmonyPrefix]
