@@ -10,6 +10,10 @@ An optional helper for the Frosthaven mod pack. You don't need it to play with t
 - Scenario map: every scenario, what unlocks it and what you've done, coloured by your campaign. It updates by
   itself when the game autosaves. The host needs the "Scenario map file" house rule on (Options, Custom Rules).
   Spoilers: it shows every scenario's name.
+- Stats: the whole party's battles over the campaign: damage round by round, modifier luck, how damage was dealt,
+  most played cards, elements, which monsters hurt you most, and records. A scenario counts once it's finished
+  (won, lost or resigned); a scenario being played shows as "Live now" and updates every round. The host needs the
+  "Battle stats" house rule on.
 - Play guide: strategy notes for the campaign (buildings, personal quests, classes).
 
 Starting it

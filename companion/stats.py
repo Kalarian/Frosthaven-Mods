@@ -105,6 +105,19 @@ def _per_round(events, rounds, amount):
     return out
 
 
+def _hand(abilities, rounds):
+    """Cards still available each round (hand + discard pile, after that round's two were picked), from the
+    character's first ability of the round: the game records both counts on every ability (its Hand list holds only
+    the scenario's end). Resting moves cards between the two, so only losses lower the total; under 2, exhaustion."""
+    first = {}
+    for e in sorted(abilities, key=lambda e: e.get("EventOrder") or 0):
+        r = e.get("Round")
+        if r and r not in first and e.get("CardsInHandCount") is not None and not e.get("PerformedBySummons"):
+            first[r] = (e["CardsInHandCount"], e.get("CardsInDiscardCount") or 0)
+    return [{"r": r, "hand": first[r][0], "discard": first[r][1], "available": sum(first[r])}
+            for r in sorted(first) if r <= max(rounds, 1)]
+
+
 def summarize(rec, path=None):
     nm = names()
     sc = rec.get("scenario") or {}
@@ -171,8 +184,7 @@ def summarize(rec, path=None):
             "draws": draws,
             "infused": dict(Counter(e.get("Element") for e in a.get("Infusions", []) if e.get("Element"))),
             "consumed": dict(Counter(e.get("Element") for e in a.get("Consumed", []) if e.get("Element"))),
-            "hand": sorted(({"r": h.get("Round"), "hand": h.get("HandSize"), "discard": h.get("DiscardSize")}
-                            for h in a.get("Hand", [])), key=lambda h: h["r"] or 0),
+            "hand": _hand(a.get("Abilities", []), rounds),
             "initiative": [{"r": s.get("Round"), "cards": s.get("RoundCardsInitiative") or []}
                            for s in a.get("StartTurn", []) if s.get("RoundCardsInitiative")],
             "cards": {str(cid): {**v, "name": (nm["cards"].get(cid) or {}).get("name") or f"card {cid}"}

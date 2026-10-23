@@ -72,6 +72,60 @@ pre.log { background: #0d1014; border: 1px solid var(--line); border-radius: 6px
 @keyframes spin { to { transform: rotate(360deg); } }
 a { color: var(--link); cursor: pointer; }
 .empty { padding: 48px 24px; text-align: center; color: var(--dim); }
+/* Stats */
+#stats { overflow-y: auto; }
+.swrap { max-width: 1180px; width: 100%; margin: 0 auto; padding: 20px 24px 48px; }
+.sfilters { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 16px; }
+.spills { display: flex; flex-wrap: wrap; gap: 6px; }
+.spills button { font: inherit; font-size: 13px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); color: var(--dim); cursor: pointer; }
+.spills button:hover { color: var(--text); }
+.spills button.on { background: var(--gold); color: #1b1608; border-color: var(--gold); font-weight: 600; }
+.sfil { font-size: 13px; color: var(--dim); display: flex; gap: 8px; align-items: center; }
+.sfil select, .sbar2 select { background: var(--panel2); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; font: inherit; font-size: 13px; }
+.sbar2 { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 12px; }
+.livedot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); margin-left: 4px; vertical-align: 1px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.tile, .rec { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin: 0; }
+.tl { font-size: 12px; color: var(--dim); }
+.tv { font-size: 26px; font-weight: 600; margin-top: 2px; }
+.ts { font-size: 12px; color: var(--dim); margin-top: 2px; }
+.scard h3 { display: flex; align-items: center; gap: 8px; }
+.schart { width: 100%; height: auto; display: block; margin-top: 6px; }
+.schart .tick { fill: #8d877b; font-size: 11px; font-variant-numeric: tabular-nums; }
+.schart .lbl { fill: var(--text); font-size: 12px; }
+.schart .hit { fill: transparent; }
+.schart .hit:hover { fill: rgba(255,255,255,0.04); }
+.slegend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--dim); margin-top: 8px; }
+.slegend span { display: inline-flex; align-items: center; gap: 6px; }
+i.sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; flex: none; }
+i.ln { display: inline-block; width: 14px; height: 2px; border-radius: 1px; flex: none; }
+.hbars { display: grid; gap: 6px; margin-top: 10px; }
+.hrow { display: grid; grid-template-columns: minmax(120px, 230px) 1fr 52px; align-items: center; gap: 10px; font-size: 13px; padding: 2px 0; }
+.hrow:hover { background: rgba(255,255,255,0.03); }
+.hl { color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hb { display: flex; gap: 2px; height: 14px; }
+.hb i { display: block; height: 100%; }
+.hb i:last-child { border-radius: 0 4px 4px 0; }
+.hv { text-align: right; color: var(--dim); font-variant-numeric: tabular-nums; }
+.stable { border-collapse: collapse; width: 100%; font-size: 13px; margin-top: 8px; }
+.stable th { text-align: left; color: var(--dim); font-weight: 600; font-size: 12px; padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.stable td { padding: 6px 8px; border-bottom: 1px solid #252b34; vertical-align: middle; }
+.stable .n { text-align: right; font-variant-numeric: tabular-nums; }
+.stable a { cursor: pointer; }
+details.stbl { margin-top: 8px; }
+.pill { display: inline-block; font-size: 11px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--dim); }
+.pill.win { color: #bfe6c6; border-color: #2f5b3a; }
+.pill.loss { color: #f4c0b6; border-color: #6b3128; }
+.pill.live { color: #bfe6c6; border-color: #2f5b3a; }
+.cgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 0 16px; }
+.recs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.rec .ts { display: flex; align-items: center; gap: 6px; }
+.stip { position: fixed; z-index: 50; pointer-events: none; background: #0d1014; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 12px; box-shadow: 0 6px 20px rgba(0,0,0,.4); max-width: 320px; }
+.stip-h { color: var(--dim); margin-bottom: 4px; }
+.stip-r { display: flex; align-items: center; gap: 8px; }
+.stip-r b { color: var(--text); font-variant-numeric: tabular-nums; }
+.stip-r span { color: var(--dim); }
+.stip-k { display: inline-block; width: 12px; height: 2px; border-radius: 1px; }
 @media (max-width: 640px) { header h1 { display: none; } .facts { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -82,6 +136,7 @@ a { color: var(--link); cursor: pointer; }
   <nav id="nav">
     <button data-v="mods">Mods<span class="dot" id="moddot" hidden></span></button>
     <button data-v="map">Scenario map</button>
+    <button data-v="stats">Stats</button>
     <button data-v="play" id="playtab">Play guide</button>
   </nav>
   <div class="spacer"></div>
@@ -100,8 +155,10 @@ a { color: var(--link); cursor: pointer; }
     </div>
     <iframe id="mapframe" title="Scenario map"></iframe>
   </section>
+  <section class="view" id="stats"><div class="swrap" id="statsbody"></div></section>
   <section class="view" id="play"><iframe id="playframe" title="Play guide"></iframe></section>
 </main>
+<script src="/web/stats.js"></script>
 <script>
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
@@ -115,6 +172,7 @@ function show(v) {
   for (const s of document.querySelectorAll(".view")) s.classList.toggle("on", s.id === v);
   const f = FRAMES[v] && $(FRAMES[v]);
   if (f && !f.src) f.src = SRC[v]();            // each page loads once, and keeps its place when you switch back
+  if (v === "stats") Stats.load(campaign);
   try { localStorage.setItem("companion-tab", v); } catch (e) {}
 }
 $("#nav").onclick = e => { const b = e.target.closest("button"); if (b) show(b.dataset.v); };
@@ -207,6 +265,8 @@ $("#campaign").onchange = () => {
   campaign = $("#campaign").value;
   try { localStorage.setItem("companion-campaign", campaign); } catch (e) {}
   for (const v of Object.keys(FRAMES)) if (v !== "play" && $(FRAMES[v]).src) $(FRAMES[v]).src = SRC[v]();   // campaign pages reload
+  Stats.reset();
+  if (view === "stats") Stats.load(campaign);
   render();
 };
 
@@ -282,9 +342,10 @@ document.addEventListener("click", e => {
 
 let first = "mods";
 try { first = localStorage.getItem("companion-tab") || "mods"; } catch (e) {}
-if (location.hash.length > 1) first = location.hash.slice(1);     // /#map opens on that tab
-refresh().then(() => show((first in SRC && (first !== "play" || (S && S.playGuide))) ? first : "mods"));
+if (location.hash.length > 1) first = location.hash.slice(1).split("/")[0];     // /#map opens on that tab
+refresh().then(() => show((first === "stats" || (first in SRC && (first !== "play" || (S && S.playGuide)))) ? first : "mods"));
 setInterval(() => { if (view === "mods" || (S && S.job && S.job.running)) refresh(); }, 3000);
+setInterval(() => { if (view === "stats") Stats.load(campaign); }, 5000);   // new records, and the live scenario
 setInterval(() => fetch("/api/ping", {cache: "no-store"}).catch(() => {}), 15000);   // keeps a browser-only companion alive
 </script>
 </body>

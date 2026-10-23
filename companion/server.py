@@ -16,6 +16,7 @@ import game
 import mapview
 import mods
 import paths
+import stats
 
 LOCAL_HOSTS = ("127.0.0.1", "localhost")
 last_request = time.time()        # the browser fallback quits when no page has asked for anything in a while
@@ -115,6 +116,10 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(mods.job())
         if p == "/api/map-stamp":
             return self._json({"stamp": mapview.stamp(q.get("campaign", ""))})
+        if p == "/api/stats":
+            return self._json(stats.campaign_stats(q.get("campaign", "")))
+        if p == "/api/stats-stamp":
+            return self._json({"stamp": stats.stamp(q.get("campaign", ""))})
         if p == "/map":
             return self._html(mapview.render(q.get("campaign", "")))
         if p == "/guide/mods":
