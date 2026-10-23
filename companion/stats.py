@@ -6,12 +6,15 @@ plugins/FrosthavenMods/src/StatsExport.cs). Only finished scenarios are ever rec
 restarts), so every file here counts. Summaries are cached by file (path, size, time), so the page stays quick as a
 campaign grows. Names (classes, monsters, ability cards, scenarios) come from the game's own Base.ruleset.
 """
+import datetime as dt
 import glob
 import gzip
+import io
 import json
 import os
 import re
 import threading
+import zipfile
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -177,6 +180,21 @@ def _element_flow(actors, party_ids):
     return [{"from": f, "to": t, "element": el, "n": n} for (f, t, el), n in flow.most_common()]
 
 
+def run_key(rec):
+    """One play-through, the same on every PC that recorded it: the scenario, its random seed (shared in co-op),
+    rounds, outcome, the party and its totals. (Files differ between PCs: a few event timestamps are local times.)"""
+    sc = rec.get("scenario") or {}
+    actors = rec.get("actors") or {}
+    party = sorted(p.get("class") or "" for p in rec.get("party") or [])
+    totals = []
+    for cls in party:
+        a = actors.get(cls) or {}
+        totals.append(sum(e.get("FinalDamageAmount", 0) or 0 for e in a.get("DamageDealt", [])))
+        totals.append(sum(e.get("FinalDamageAmount", 0) or 0 for e in a.get("DamageReceived", [])))
+        totals.append(len(a.get("Modifiers", [])))
+    return "|".join(str(x) for x in [sc.get("id"), sc.get("seed"), sc.get("rounds"), rec.get("outcome"), ",".join(party), *totals])
+
+
 def summarize(rec, path=None):
     nm = names()
     sc = rec.get("scenario") or {}
@@ -276,7 +294,10 @@ def summarize(rec, path=None):
     for cls, c in chars.items():
         c["turnOrder"] = order.get(cls, [])
 
+    key = run_key(rec)
+
     return {
+        "key": key,
         "elementFlow": _element_flow(actors, set(chars)),
         "file": os.path.basename(path) if path else None,
         "live": bool(rec.get("inProgress")),
@@ -332,7 +353,13 @@ def campaign_stats(campaign):
     """{'runs': [summary, ...] oldest first, 'live': summary or None} for a campaign."""
     runs_dir, live = _folder(campaign)
     files = sorted(glob.glob(os.path.join(runs_dir, "*.json*"))) if runs_dir else []
-    runs = [s for s in (_summary(f) for f in files if not f.endswith(".tmp")) if s]
+    runs, seen = [], set()
+    for s in (_summary(f) for f in files if not f.endswith(".tmp")):
+        if not s or (s.get("key") and s["key"] in seen):
+            continue                     # the same play-through recorded twice (an import of a friend's copy, say)
+        seen.add(s.get("key"))
+        runs.append(s)
+    runs.sort(key=lambda r: r.get("written") or "")
     return {"campaign": campaign, "runs": runs, "live": _summary(live) if live else None}
 
 
@@ -341,3 +368,95 @@ def stamp(campaign):
     runs_dir, live = _folder(campaign)
     files = glob.glob(os.path.join(runs_dir, "*.json*")) if runs_dir else []
     return f"{len(files)}:{max((os.path.getmtime(f) for f in files), default=0)}:{os.path.getmtime(live) if live else 0}"
+
+
+# ---- sharing records between players (Stats tab: Export / Import)
+
+MAX_IMPORT = 200 * 1024 * 1024     # bytes a zip may unpack to
+
+
+def _safe(name):
+    return re.sub(r'[<>:"/\\|?*]', "_", name or "").strip() or "campaign"
+
+
+def export_zip(campaign):
+    """Every finished-scenario record of a campaign, as one zip in the Downloads folder. Returns its path."""
+    runs_dir, _ = _folder(campaign)
+    files = sorted(glob.glob(os.path.join(runs_dir, "*.json*"))) if runs_dir else []
+    files = [f for f in files if not f.endswith(".tmp")]
+    if not files:
+        raise ValueError("This campaign has no recorded scenarios to export yet.")
+    out_dir = os.path.join(os.environ.get("USERPROFILE", ""), "Downloads")
+    if not os.path.isdir(out_dir):
+        out_dir = os.path.expanduser("~")
+    path = os.path.join(out_dir, f"Frosthaven stats - {_safe(campaign)} - {dt.date.today():%Y-%m-%d}.zip")
+    with zipfile.ZipFile(path, "w", zipfile.ZIP_STORED) as z:          # the records are gzipped already
+        for f in files:
+            z.write(f, os.path.basename(f))
+    return path, len(files)
+
+
+def _records_in(data, filename):
+    """(name, record) for each record in an upload: a zip of records, or one .json.gz / .json record."""
+    def parse(name, raw):
+        try:
+            if raw[:2] == b"\x1f\x8b":
+                raw = gzip.decompress(raw)
+            rec = json.loads(raw.decode("utf-8"))
+        except (OSError, ValueError, EOFError):
+            raise ValueError("not a readable battle record") from None
+        if not isinstance(rec, dict) or not rec.get("scenario") or not rec.get("actors"):
+            raise ValueError("not a battle record")
+        if rec.get("inProgress"):
+            raise ValueError("an unfinished scenario")
+        return rec
+    if data[:2] == b"PK":
+        with zipfile.ZipFile(io.BytesIO(data)) as z:
+            if sum(i.file_size for i in z.infolist()) > MAX_IMPORT:
+                raise ValueError("That zip is too big to be battle records.")
+            for info in z.infolist():
+                base = os.path.basename(info.filename.replace("\\", "/"))
+                if info.is_dir() or not (base.endswith(".json.gz") or base.endswith(".json")):
+                    continue
+                try:
+                    yield base, parse(base, z.read(info))
+                except Exception as ex:
+                    yield base, ex
+    else:
+        base = os.path.basename(filename or "record.json.gz")
+        try:
+            yield base, parse(base, data)
+        except Exception as ex:
+            yield base, ex
+
+
+def import_records(campaign, data, filename):
+    """Adds the records in an upload to a campaign, skipping play-throughs it already has. Returns a summary."""
+    if not campaign:
+        raise ValueError("Pick a campaign at the top first.")
+    d = game.mods_dir()
+    if not d:
+        raise ValueError("Frosthaven wasn't found.")
+    runs_dir, _ = _folder(campaign)
+    runs_dir = runs_dir or os.path.join(d, "stats", "runs", _safe(campaign))
+    os.makedirs(runs_dir, exist_ok=True)
+    have = {s.get("key") for s in campaign_stats(campaign)["runs"]}
+    added, skipped, bad, other = [], 0, [], set()
+    for name, rec in _records_in(data, filename):
+        if isinstance(rec, Exception):
+            bad.append(f"{name}: {rec}")
+            continue
+        key = run_key(rec)
+        if key in have:
+            skipped += 1
+            continue
+        if rec.get("campaign") and game._key(rec["campaign"]) != game._key(campaign):
+            other.add(rec["campaign"])
+        base = re.sub(r"\.json(\.gz)?$", "", name)
+        target = os.path.join(runs_dir, "imported-" + _safe(base) + ".json.gz")
+        with gzip.open(target, "wt", encoding="utf-8") as f:
+            json.dump(rec, f, separators=(",", ":"))
+        have.add(key)
+        s = summarize(rec)
+        added.append(f"#{s.get('num') or '?'} {s.get('name')} ({s.get('outcome')})")
+    return {"added": added, "skipped": skipped, "bad": bad, "otherCampaigns": sorted(other)}

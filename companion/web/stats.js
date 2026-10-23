@@ -22,6 +22,7 @@
   const sum = xs => xs.reduce((a, b) => a + (b || 0), 0);
 
   let D = null, stamp = null, view = "overview", runKey = null, outcome = "all", loading = false;
+  let notice = null;           // {tone, html}: the result of an export or import, shown above the view
   try { view = localStorage.getItem("stats-view") || "overview"; } catch (e) {}
   if (/^#stats\/\w+/.test(location.hash)) view = location.hash.split("/")[1];      // /#stats/luck opens that view
 
@@ -425,7 +426,11 @@
     if (!D) { root.innerHTML = `<div class="empty">Loading…</div>`; return; }
     indexCharacters([...(D.runs || []), ...(D.live ? [D.live] : [])]);
     const nav = `<div class="sfilters"><div class="spills">${VIEWS.map(([k, l]) => `<button data-sv="${k}" class="${k === view ? "on" : ""}">${esc(l)}${k === "scenario" && D.live ? ' <span class="livedot" title="A scenario is being played"></span>' : ""}</button>`).join("")}</div>` +
-      (view !== "scenario" ? `<label class="sfil">Scenarios <select id="soutcome"><option value="all">All</option><option value="win">Won</option><option value="other">Lost or resigned</option></select></label>` : "") + `</div>`;
+      (view !== "scenario" ? `<label class="sfil">Scenarios <select id="soutcome"><option value="all">All</option><option value="win">Won</option><option value="other">Lost or resigned</option></select></label>` : "") +
+      `<span class="sgrow"></span><button class="btn small" id="sexport" title="Save this campaign's records as one zip, to send to a friend who missed a scenario">Export records</button>` +
+      `<button class="btn small" id="simport" title="Add the records from a friend's export: scenarios you already have are skipped">Import records</button>` +
+      `<input type="file" id="simportfile" accept=".zip,.gz,.json" hidden></div>` +
+      (notice ? `<div class="banner ${notice.tone}" style="margin:0 0 16px">${notice.html} <a id="snoticex">Dismiss</a></div>` : "");
     const body = {overview: viewOverview, scenario: viewScenario, luck: viewLuck, damage: viewDamage, cards: viewCards, monsters: viewMonsters, records: viewRecords}[view] || viewOverview;
     let html;
     try { html = body(); } catch (e) { html = empty("This view couldn't be drawn: " + esc(e.message)); console.error(e); }
@@ -438,7 +443,35 @@
     const a = e.target.closest("[data-run]");
     if (a) { runKey = a.dataset.run; view = "scenario"; render(); }
   });
+  async function exportRecords() {
+    const r = await fetch("/api/stats/export?campaign=" + encodeURIComponent(D.campaign || ""), {method: "POST", headers: {"X-Companion": "1"}}).then(r => r.json()).catch(() => ({ok: false, message: "The companion didn't answer."}));
+    notice = r.ok ? {tone: "ok", html: `Saved ${r.count} scenario record${r.count === 1 ? "" : "s"} to <b>${esc(r.path)}</b>. It's open in Explorer: send it to whoever missed a scenario, and they click <b>Import records</b>.`}
+                  : {tone: "bad", html: esc(r.message)};
+    render();
+  }
+  async function importRecords(file) {
+    notice = {tone: "warn", html: `<span class="spin"></span>Importing ${esc(file.name)}…`};
+    render();
+    const body = await file.arrayBuffer();
+    const r = await fetch(`/api/stats/import?campaign=${encodeURIComponent(D.campaign || "")}&name=${encodeURIComponent(file.name)}`,
+      {method: "POST", headers: {"X-Companion": "1", "Content-Type": "application/octet-stream"}, body}).then(r => r.json()).catch(() => ({ok: false, message: "The companion didn't answer."}));
+    if (!r.ok) { notice = {tone: "bad", html: esc(r.message)}; render(); return; }
+    const parts = [];
+    parts.push(r.added.length ? `Added ${r.added.length} scenario${r.added.length === 1 ? "" : "s"} to <b>${esc(D.campaign)}</b>: ${r.added.map(esc).join(", ")}.` : `Nothing new: you already had ${r.skipped === 1 ? "that scenario" : "all of those scenarios"}.`);
+    if (r.added.length && r.skipped) parts.push(`Skipped ${r.skipped} you already had.`);
+    if (r.otherCampaigns.length) parts.push(`Note: the records say they're from <b>${r.otherCampaigns.map(esc).join(", ")}</b>; they were added to the campaign picked at the top.`);
+    if (r.bad.length) parts.push(`Couldn't read: ${r.bad.map(esc).join("; ")}.`);
+    notice = {tone: r.bad.length ? "warn" : "ok", html: parts.join(" ")};
+    await load(D.campaign, true);
+    render();
+  }
+  document.addEventListener("click", e => {
+    if (e.target.id === "sexport") exportRecords();
+    if (e.target.id === "simport") $("#simportfile").click();
+    if (e.target.id === "snoticex") { notice = null; render(); }
+  });
   document.addEventListener("change", e => {
+    if (e.target.id === "simportfile" && e.target.files.length) importRecords(e.target.files[0]);
     if (e.target.id === "soutcome") { outcome = e.target.value; render(); }
     if (e.target.id === "srun") { runKey = e.target.value; render(); }
   });
@@ -456,5 +489,5 @@
     } catch (e) { /* the next poll tries again */ }
     loading = false;
   }
-  window.Stats = {load, render, reset: () => { D = null; stamp = null; runKey = null; render(); }};
+  window.Stats = {load, render, reset: () => { D = null; stamp = null; runKey = null; notice = null; render(); }};
 })();

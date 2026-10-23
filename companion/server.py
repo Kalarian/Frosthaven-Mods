@@ -3,6 +3,7 @@ and a small JSON API the page calls. Requests are refused unless they name a loc
 every request that changes something must carry the X-Companion header, which a page on another site can't add
 without the browser asking this server first (it never agrees), so only our own page can start an install."""
 import json
+import subprocess
 import re
 import mimetypes
 import os
@@ -146,6 +147,26 @@ class Handler(BaseHTTPRequestHandler):
         if p in ("/api/mods/install", "/api/mods/uninstall"):
             ok, msg = mods.start(p.rsplit("/", 1)[1])
             return self._json({"ok": ok, "message": msg}, 200 if ok else 409)
+        if p == "/api/stats/export":
+            try:
+                path, n = stats.export_zip(q.get("campaign", ""))
+            except ValueError as ex:
+                return self._json({"ok": False, "message": str(ex)}, 409)
+            # show it in Explorer, selected, ready to drag into a chat
+            subprocess.Popen(f'explorer /select,"{path}"')
+            return self._json({"ok": True, "path": path, "count": n})
+        if p == "/api/stats/import":
+            size = int(self.headers.get("Content-Length") or 0)
+            if size <= 0 or size > stats.MAX_IMPORT:
+                return self._json({"ok": False, "message": "That file is empty or too big."}, 400)
+            data = self.rfile.read(size)
+            try:
+                result = stats.import_records(q.get("campaign", ""), data, q.get("name", ""))
+            except (ValueError, OSError) as ex:
+                return self._json({"ok": False, "message": str(ex)}, 409)
+            except Exception as ex:
+                return self._json({"ok": False, "message": f"That file couldn't be read ({type(ex).__name__})."}, 400)
+            return self._json({"ok": True, **result})
         if p == "/api/app/update":
             ok, msg = updater.start(lambda: on_quit())
             return self._json({"ok": ok, "message": msg}, 200 if ok else 409)
