@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using BepInEx;
 using HarmonyLib;
 using ScenarioRuleLibrary;
@@ -24,7 +25,8 @@ namespace FrosthavenMods
     ///     Drifter's config with its own name and colour and the pictures the converter prepared (ghclasses\art).
     ///   - Cards: card IDs of 10000 and more select the Gloomhaven-era card prefab, which Frosthaven ships without its
     ///     background sprites (a white rectangle with two red "lost" tiles). Gloomhaven classes' cards are drawn with a
-    ///     Frosthaven card prefab instead, through the same generated-layout code the game uses for its long rest card.
+    ///     Frosthaven card prefab instead, through the same generated-layout code the game uses for its long rest card,
+    ///     with the corner badge of a real Frosthaven card in place of the template's older one.
     ///   - Text: keys Frosthaven lacks ($ABILITY_CARD_Trample$, PERK_Brute_01...) are answered from
     ///     FrosthavenMods\ghclasses\strings.tsv; Frosthaven's own translation wins wherever it has the key.
     /// Inert without converted data: no ruleset class with a Gloomhaven model means no config copy and no card
@@ -34,7 +36,8 @@ namespace FrosthavenMods
     internal static class GHClasses
     {
         private const string StandInModel = "Drifter";
-        private static readonly string Folder = Path.Combine(Paths.GameRootPath, "FrosthavenMods", "ghclasses");
+        private static string _folder;
+        private static string Folder => _folder ?? (_folder = Path.Combine(Paths.GameRootPath, "FrosthavenMods", "ghclasses"));  // lazy: tools/hookcheck runs the static init outside the game
         private static Dictionary<string, string> _strings;
         private static readonly Dictionary<string, bool> GameHasKey = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
         private static readonly HashSet<string> Reported = new HashSet<string>();
@@ -304,6 +307,71 @@ namespace FrosthavenMods
             if (image != null) image.enabled = false;
             else if (Reported.Add("no Image_CardArt"))
                 Plugin.Log.LogWarning("Gloomhaven classes: the mini card has no Container_CardArt/Mask_CardArt/Image_CardArt; its template painting stays");
+        }
+
+        // ---- the corner badge (lost / persistent / round / XP icons) of each card half
+
+        /// <summary>FullAbilityCardAction's private array of corner badges (tools/hookcheck verifies the name).</summary>
+        private static readonly FieldInfo SummaryContainers = typeof(FullAbilityCardAction).GetField("actionSummaryContainers", BindingFlags.Instance | BindingFlags.NonPublic);
+        private static CardActionSummary _cornerDonor;
+
+        /// <summary>The template the Gloomhaven cards are built from still carries an older corner badge: 20 px icons
+        /// with fire effects on a class-coloured "mandatory" banner (the "!" box). Frosthaven's own cards use a newer
+        /// piece (ExperienceActiveBonuses: 24-28 px icons, newer sprites, a soft dark gradient). Before the game lays a
+        /// Gloomhaven card half out, swap in a copy of that piece taken from one of the stand-in class's real card
+        /// prefabs, placed where the template's badge was; the game's own code then fills, fits and colours it exactly
+        /// as it does on her cards.</summary>
+        [HarmonyPatch(typeof(FullAbilityCardAction), nameof(FullAbilityCardAction.MakeAbilityAction))]
+        [HarmonyPrefix]
+        private static void CornerBadge(FullAbilityCardAction __instance, AbilityCardYMLData card)
+        {
+            if (card == null || card.ID == -1 || SummaryContainers == null) return;
+            CCharacterClass cls = ClassById(card.CharacterID);
+            if (cls == null || !IsGloomhavenClass(cls.AbilityCardArt, out _)) return;
+            try
+            {
+                var containers = SummaryContainers.GetValue(__instance) as CardActionSummary[];
+                if (containers == null || containers.Length != 1 || containers[0] == null || !containers[0].name.StartsWith("BottomCorner")) return;
+                CardActionSummary donor = CornerDonor();
+                if (donor == null) return;
+                CardActionSummary old = containers[0];
+                RectTransform oldRect = (RectTransform)old.transform;
+                CardActionSummary fresh = UnityEngine.Object.Instantiate(donor, oldRect.parent);
+                fresh.name = donor.name;
+                RectTransform rect = (RectTransform)fresh.transform;
+                rect.anchorMin = oldRect.anchorMin;
+                rect.anchorMax = oldRect.anchorMax;
+                rect.pivot = oldRect.pivot;
+                rect.anchoredPosition = oldRect.anchoredPosition;
+                rect.localScale = Vector3.one;
+                rect.SetSiblingIndex(oldRect.GetSiblingIndex());
+                fresh.gameObject.SetActive(true);
+                SummaryContainers.SetValue(__instance, new[] { fresh });
+                old.gameObject.SetActive(false);        // the card pool clones this card this frame: hide first, destroy after
+                UnityEngine.Object.Destroy(old.gameObject);
+            }
+            catch (Exception e)
+            {
+                if (Reported.Add("corner")) Plugin.Log.LogWarning($"Gloomhaven classes: could not restyle a card's corner badge: {e}");
+            }
+        }
+
+        /// <summary>The corner badge of one of the stand-in class's real card prefabs (loaded the way the game loads her
+        /// cards), or null if it isn't available yet; looked up again on the next card until found.</summary>
+        private static CardActionSummary CornerDonor()
+        {
+            if (_cornerDonor != null) return _cornerDonor;
+            CCharacterClass standIn = CharacterClassManager.Classes?.FirstOrDefault(c => c != null && c.CharacterModel.ToString() == StandInModel);
+            CAbilityCard sample = standIn == null ? null
+                : CharacterClassManager.AllAbilityCards?.FirstOrDefault(c => c?.GetAbilityCardYML != null && c.GetAbilityCardYML.ID != -1 && c.GetAbilityCardYML.CharacterID == standIn.ID);
+            GameObject prefab = sample == null ? null : PersistentData.GetAbilityCardPrefab(sample.GetAbilityCardYML, standIn);
+            CardActionSummary[] summaries = prefab == null ? null : prefab.GetComponentsInChildren<CardActionSummary>(true);
+            _cornerDonor = summaries?.FirstOrDefault(s => s != null && !s.name.StartsWith("BottomCorner"));
+            if (_cornerDonor == null && Reported.Add("no corner donor"))
+                Plugin.Log.LogWarning($"Gloomhaven classes: no {StandInModel} card prefab to borrow the corner badge from; the template's stays");
+            else if (_cornerDonor != null)
+                Plugin.Log.LogInfo($"Gloomhaven classes: card corner badges copied from the {StandInModel}'s {prefab.name}");
+            return _cornerDonor;
         }
 
         /// <summary>At quit the pooled cards are recycled after UIInfoTools is gone, and clearing a generated card's
