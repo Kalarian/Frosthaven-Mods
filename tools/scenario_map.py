@@ -696,7 +696,7 @@ def layout(g, nodes):
     depth = {}
     for n in reversed(order):
         depth[n] = max((depth[p] + 1 for p in parents[n] if p in depth), default=0)
-    col, row, lane_gap, cap = 210, 38, 26, 6  # cap: rows per column in a lane before it wraps into another column
+    col, row, lane_gap, cap = 260, 38, 26, 6  # col: 176-wide boxes plus room for the wires; cap: rows per column in a lane before it wraps into another column
     pos, lanes, y0 = {}, [], 0
     chain_of = {n: g.scen[int(n[1:])]["chain"] for n in nodes}
     count = defaultdict(int)
