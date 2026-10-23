@@ -7,7 +7,9 @@
   "use strict";
   // categorical slots (dark steps, validated on the card surface #1b2027): one per character, in order of first appearance
   const COLORS = ["#3987e5", "#d95926", "#199e70", "#c98500", "#d55181", "#008300", "#9085e9", "#e66767"];
-  const OTHER = "#6b7480";
+  const OTHER = "#4f5762";        // "other"/"lost" fills: separates from every slot (validated); recessive by design
+  const MONSTER_LINE = "#9aa1ab";  // the monsters' luck line: a lighter grey, so a 2px line stays visible
+  const TOP = "#9085e9", BOTTOM = "#199e70";   // a card's top / bottom half (validated with OTHER)
   const SURFACE = "#1b2027", GRID = "#2c333d", AXIS = "#8d877b", INK = "#e8e2d4", DIM = "#a59f92";
   const ELEMENTS = ["Fire", "Ice", "Air", "Earth", "Light", "Dark"];
   const VIEWS = [["overview", "Overview"], ["scenario", "Scenario"], ["luck", "Luck"], ["damage", "Damage"],
@@ -167,6 +169,30 @@
     }
     return legend(series, "line") + `<svg viewBox="0 0 ${W} ${H}" class="schart" role="img">${g}${paths}${ends}${hits}</svg>`;
   }
+  // turn position by round: x = round, y = place in that round's turn order (1st at the top); a dot per turn
+  const ordinal = n => n + (n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][n % 10] || "th");
+  function bump({rounds, series, height = 240}) {
+    const W = 900, H = height, L = 44, T = 22, B = 26, PW = W - L - 100, PH = H - T - B;
+    const maxPos = Math.max(2, ...series.flatMap(s => s.points.map(p => p.of)));
+    const X = r => L + (rounds === 1 ? PW / 2 : PW * (r - 1) / (rounds - 1)), Y = pos => T + PH * (pos - 1) / (maxPos - 1);
+    const {step} = scale(maxPos, true);
+    let g = "";
+    for (let v = 1; v <= maxPos; v += Math.max(1, step)) g += `<line x1="${L}" x2="${L + PW}" y1="${Y(v)}" y2="${Y(v)}" stroke="${GRID}" stroke-width="1"/><text x="${L - 6}" y="${Y(v) + 4}" text-anchor="end" class="tick">${ordinal(v)}</text>`;
+    let marks = "", hits = "";
+    for (const s of series) {
+      const pts = s.points.filter(p => p.r >= 1 && p.r <= rounds);
+      if (!pts.length) continue;
+      marks += `<path d="${pts.map((p, i) => (i ? "L" : "M") + X(p.r) + "," + Y(p.pos)).join(" ")}" fill="none" stroke="${s.color}" stroke-width="2" stroke-linejoin="round" opacity="0.55"/>`;
+      for (const p of pts) {
+        marks += `<circle cx="${X(p.r)}" cy="${Y(p.pos)}" r="4" fill="${s.color}" stroke="${SURFACE}" stroke-width="2"/>`;
+        hits += `<circle class="hit" data-t="${tipRef(`Round ${p.r}`, [[`${ordinal(p.pos)} of ${p.of} turns`, s.name, s.color], [p.inits.join(" and ") || "—", "initiatives of the two cards", null]])}" cx="${X(p.r)}" cy="${Y(p.pos)}" r="12"/>`;
+      }
+    }
+    let labels = "";
+    const every = Math.ceil(rounds / 24);
+    for (let r = 1; r <= rounds; r += every) labels += `<text x="${X(r)}" y="${H - 6}" text-anchor="middle" class="tick">R${r}</text>`;
+    return legend(series, "line") + `<svg viewBox="0 0 ${W} ${H}" class="schart" role="img">${g}${marks}${labels}${hits}</svg>`;
+  }
   // horizontal stacked bars: one row per label, value at the tip
   function hbars({rows, series, unit = ""}) {
     const max = niceMax(Math.max(...rows.map(r => sum(r.values)), 0));
@@ -204,7 +230,7 @@
     for (const r of rs) for (const p of r.party) {
       const c = r.chars[p.cls]; if (!c) continue;
       const k = ckey(p);
-      const a = t.get(k) || {key: k, runs: 0, rounds: 0, dealt: 0, taken: 0, healed: 0, kills: 0, hits: 0, biggest: 0, overkill: 0, melee: 0, ranged: 0, summons: 0, poison: 0, shielded: 0, noFields: 0, exhausted: 0, draws: [], deckN: 0, deckNulls: 0, deckX2: 0, luck: 0, lostToAvoid: 0, xp: 0, infused: {}, consumed: {}, cards: {}};
+      const a = t.get(k) || {key: k, runs: 0, rounds: 0, dealt: 0, taken: 0, healed: 0, kills: 0, hits: 0, biggest: 0, overkill: 0, melee: 0, ranged: 0, summons: 0, poison: 0, shielded: 0, noFields: 0, exhausted: 0, draws: [], deckN: 0, deckNulls: 0, deckX2: 0, luck: 0, lostToAvoid: 0, xp: 0, infused: {}, consumed: {}, cards: {}, cardDamage: {}};
       a.runs++; a.rounds += r.rounds || 0; a.exhausted += p.exhausted ? 1 : 0;
       for (const f of ["dealt", "taken", "healed", "kills", "hits", "overkill", "summons", "lostToAvoid"]) a[f] += c[f] || 0;
       a.xp += c.xpEarned || 0;
@@ -214,6 +240,7 @@
       for (const [e, n] of Object.entries(c.infused || {})) a.infused[e] = (a.infused[e] || 0) + n;
       for (const [e, n] of Object.entries(c.consumed || {})) a.consumed[e] = (a.consumed[e] || 0) + n;
       for (const [id, v] of Object.entries(c.cards || {})) { const x = a.cards[id] || (a.cards[id] = {name: v.name, plays: 0, lost: 0}); x.plays += v.plays; x.lost += v.lost; }
+      for (const [id, v] of Object.entries(c.cardDamage || {})) { const x = a.cardDamage[id] || (a.cardDamage[id] = {name: v.name, top: 0, bottom: 0, other: 0, hits: 0}); for (const f of ["top", "bottom", "other", "hits"]) x[f] += v[f] || 0; }
       t.set(k, a);
     }
     return charOrder.filter(c => t.has(c.key)).map(c => Object.assign(t.get(c.key), {c}));
@@ -261,6 +288,10 @@
     const hand = party.map(x => ({name: who(x), short: x.name, color: x.color, values: (x.c.hand || []).map(hh => hh.available ?? hh.hand)})).filter(s => s.values.length);
     if (hand.length) h += card("Cards still available", "Hand plus discard pile each round, after its two cards were picked. Resting only moves cards between them, so this drops as cards are lost; below 2, the character exhausts.", lines({series: hand, unit: "cards", xTitle: i => "Round " + (i + 1)}),
       table(["Round", ...hand.map(s => s.short)], Array.from({length: Math.max(...hand.map(s => s.values.length))}, (_, i) => [String(i + 1), ...hand.map(s => fmt(s.values[i]))]), hand.map((_, i) => i + 1)));
+    const order = party.filter(x => (x.c.turnOrder || []).length);
+    if (order.length) h += card("Turn order", "Where each character's turn fell in each round, counting every monster's and summon's turn too. Hover for that round's two initiatives.",
+      bump({rounds: r.rounds || 1, series: order.map(x => ({name: who(x), short: x.name, color: x.color, points: x.c.turnOrder}))}),
+      table(["Round", ...order.map(x => x.name)], Array.from({length: r.rounds || 1}, (_, i) => [String(i + 1), ...order.map(x => { const t = x.c.turnOrder.find(t => t.r === i + 1); return t ? `${t.pos} of ${t.of} <span class="note">(${t.inits.join(", ")})</span>` : "—"; })]), order.map((_, i) => i + 1)));
     h += `<div class="card scard"><h3>The party</h3>` + table(["", "Character", "Level", "Damage dealt", "Taken", "Healing", "Kills", "Biggest hit", "Overkill", "Luck", "Cards lost to avoid damage", "XP"],
       party.map(x => [dot(x), esc(who(x)) + (x.p.exhausted ? ' <span class="pill loss">exhausted</span>' : ""), fmt(x.p.level), fmt(x.c.dealt), fmt(x.c.taken), fmt(x.c.healed), fmt(x.c.kills), fmt(x.c.biggest), fmt(x.c.overkill),
         signed(sum((x.c.draws || []).map(d => d.luck))), fmt(x.c.lostToAvoid), fmt(x.p.xp)]), [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) + `</div>`;
@@ -274,7 +305,7 @@
     const run = []; let acc = 0;
     const series = ts.map(t => { let a = 0; return {name: who(t.c), short: t.c.name, color: t.c.color, values: t.draws.map(d => (a += d.luck))}; });
     for (const r of rs) for (const d of r.monsters.draws || []) run.push((acc += d.luck));
-    if (run.length) series.push({name: "Monsters", short: "Monsters", color: OTHER, values: run});
+    if (run.length) series.push({name: "Monsters", short: "Monsters", color: MONSTER_LINE, values: run});
     let h = `<div class="card"><p class="note" style="margin:0">Luck compares every modifier card drawn with the average card of the deck it came from. A <b>+1</b> drawn from a deck averaging +0 is +1 lucky. A null counts as −3 and a x2 as +3, about what they're worth on a typical attack. Above 0 means the draws beat the deck; it's not a skill score. Blesses and curses count as x2 and null draws.</p></div>`;
     h += card("Running luck over the campaign", "Each line adds up one character's draws, in order. The monsters' deck is the grey line.", lines({series, unit: "modifier points vs. the deck", zero: true, xTitle: i => `Draw ${i + 1}`}));
     const rows = ts.map(t => {
@@ -290,6 +321,13 @@
     if (!rs.length) return empty("No scenarios recorded yet.");
     const ts = totals(rs);
     const kinds = [{name: "Melee", color: COLORS[0]}, {name: "Ranged", color: COLORS[1]}, {name: "Summons", color: COLORS[2]}, {name: "Other (retaliate, traps, effects)", color: OTHER}];
+    const byCard = ts.map(t => {
+      const cs = Object.values(t.cardDamage).filter(c => c.top + c.bottom + c.other > 0).sort((a, b) => (b.top + b.bottom + b.other) - (a.top + a.bottom + a.other)).slice(0, 10);
+      if (!cs.length) return "";
+      return `<div class="card scard"><h3>${dot(t.c)} ${esc(who(t.c))}</h3><p class="note">Damage by card, split by the half that dealt it.</p>` +
+        hbars({rows: cs.map(c => ({label: c.name, values: [c.top, c.bottom, c.other]})), series: [{name: "Top", color: TOP}, {name: "Bottom", color: BOTTOM}, {name: "No card half (basic attack, summons, effects)", color: OTHER}], unit: "damage"}) +
+        `<details class="stbl"><summary>Table</summary>${table(["Card", "Top", "Bottom", "Other", "Hits"], cs.map(c => [esc(c.name), fmt(c.top), fmt(c.bottom), fmt(c.other), fmt(c.hits)]), [1, 2, 3, 4])}</details></div>`;
+    }).join("");
     const rows = ts.map(t => { const other = Math.max(0, t.dealt - t.melee - t.ranged - t.summons); return {label: who(t.c), values: [t.melee, t.ranged, t.summons, other]}; });
     const old = ts.some(t => t.noFields);
     let h = card("How the damage was dealt", (old ? "Scenarios recorded before melee/ranged were tracked count under Other. " : "") + "Summons count for their owner.", hbars({rows, series: kinds, unit: "damage"}),
@@ -297,6 +335,7 @@
     h += `<div class="card scard"><h3>Per character</h3>` + table(["", "Character", "Scenarios", "Damage dealt", "Per round", "Hits", "Per hit", "Biggest hit", "Overkill (wasted)", "Poison bonus", "Damage taken", "Shield blocked"],
       ts.map(t => [dot(t.c), esc(who(t.c)), fmt(t.runs), fmt(t.dealt), fmt(t.dealt / Math.max(t.rounds, 1)), fmt(t.hits), fmt(t.dealt / Math.max(t.hits, 1)), fmt(t.biggest), fmt(t.overkill), t.noFields === t.runs ? "—" : fmt(t.poison), fmt(t.taken), t.noFields === t.runs ? "—" : fmt(t.shielded)]),
       [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) + `</div>`;
+    if (byCard) h += `<div class="cgrid">${byCard}</div>`;
     return h;
   }
 
@@ -314,6 +353,16 @@
     const inf = e => sum(ts.map(t => t.infused[e] || 0)), con = e => sum(ts.map(t => t.consumed[e] || 0));
     h += card("Elements", "How often the party made and used each element.", columns({cats: ELEMENTS, series: [{name: "Infused", color: COLORS[2], values: ELEMENTS.map(inf)}, {name: "Consumed", color: COLORS[3], values: ELEMENTS.map(con)}], unit: "times", height: 220, grouped: true}),
       table(["Character", ...ELEMENTS.flatMap(e => [e + " made", e + " used"])], ts.map(t => [esc(who(t.c)), ...ELEMENTS.flatMap(e => [fmt(t.infused[e] || 0), fmt(t.consumed[e] || 0)])]), ELEMENTS.flatMap((_, i) => [2 * i + 1, 2 * i + 2])));
+    // who fed whom: each element a party member used, credited to whoever made it last (party, summons or monsters)
+    const flow = new Map();
+    const nameOf = (id, r) => { if (id === "_monsters") return "Monsters"; if (id === "_summons") return "Summons"; if (id === "_unknown") return "Already on the board"; const p = r.party.find(p => p.cls === id); return p ? who(charOf(ckey(p))) : id; };
+    for (const r of rs) for (const f of r.elementFlow || []) {
+      const k = JSON.stringify([nameOf(f.from, r), nameOf(f.to, r), f.element]);
+      flow.set(k, (flow.get(k) || 0) + f.n);
+    }
+    const frows = [...flow.entries()].sort((a, b) => b[1] - a[1]).map(([k, n]) => { const [from, to, el] = JSON.parse(k); return [esc(from), esc(to), esc(el), fmt(n)]; });
+    h += `<div class="card scard"><h3>Who fed whom</h3><p class="note">Every element a character used, credited to whoever made it last: another character, a summon, or the monsters.</p>` +
+      (frows.length ? table(["Made by", "Used by", "Element", "Times"], frows, [3]) : `<p class="note">No elements used yet.</p>`) + `</div>`;
     return h;
   }
 

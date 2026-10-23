@@ -118,6 +118,65 @@ def _hand(abilities, rounds):
             for r in sorted(first) if r <= max(rounds, 1)]
 
 
+def _card_damage(dealt, cards):
+    """Damage by where it came from: each ability card (split top / bottom: the game names the half, TAttack / BAttack),
+    the basic Attack 2 (DefaultAttack), summons' own attacks, and anything else (retaliate, traps, effects)."""
+    out = {}
+    for e in dealt:
+        amt = e.get("FinalDamageAmount", 0) or 0
+        cid, act = e.get("CardID") or 0, (e.get("ActingAbilityName") or "")
+        if e.get("PerformedBySummons") and act == "DefaultAttack":
+            key, name, half = "summons", "Summons' own attacks", "other"
+        elif cid and cid != 2147483647 and e.get("CardType") == "CharacterAbility":
+            key, name = str(cid), (cards.get(cid) or {}).get("name") or f"card {cid}"
+            half = "top" if act.startswith("T") else "bottom" if act.startswith("B") else "other"
+        elif act == "DefaultAttack":
+            key, name, half = "basic", "Basic attack (Attack 2)", "other"
+        else:
+            key, name, half = "other", "Other (retaliate, traps, effects)", "other"
+        d = out.setdefault(key, {"name": name, "top": 0, "bottom": 0, "other": 0, "hits": 0})
+        d[half] += amt
+        d["hits"] += 1
+    return out
+
+
+def _turn_order(actors, rounds):
+    """Each round's turns in the order they happened (every actor's turn start, by event order): for each party member,
+    its place in that order, out of how many turns, and its two cards' initiatives (stored low to high, so which one
+    led isn't known: a Blinkblade that went slow, say)."""
+    turns = defaultdict(list)
+    for who, a in actors.items():
+        for e in a.get("StartTurn", []):
+            if e.get("Round"):
+                turns[e["Round"]].append((e.get("EventOrder") or 0, who, e.get("MainActorClassID"), e.get("RoundCardsInitiative") or []))
+    out = defaultdict(list)
+    for r, ts in turns.items():
+        ts.sort()
+        for pos, (_, who, cls, inits) in enumerate(ts, 1):
+            if not who.startswith("_") and cls == who:
+                out[who].append({"r": r, "pos": pos, "of": len(ts), "inits": inits})
+    return {k: sorted(v, key=lambda x: x["r"]) for k, v in out.items()}
+
+
+def _element_flow(actors, party_ids):
+    """Who fed whom: each time a party member consumed an element, the last infusion of that element before it, by
+    anyone (a party member, a summon, a monster). [{'from', 'to', 'element', 'n'}]."""
+    events = []
+    for who, a in actors.items():
+        src = who if who in party_ids else "_summons" if who == "_summons" else "_monsters"
+        for e in a.get("Infusions", []):
+            events.append((e.get("EventOrder") or 0, 0, e.get("Element"), src))
+        for e in a.get("Consumed", []):
+            events.append((e.get("EventOrder") or 0, 1, e.get("Element"), src))
+    last, flow = {}, Counter()
+    for _, consumed, el, who in sorted(events):
+        if not consumed:
+            last[el] = who
+        elif who in party_ids:
+            flow[(last.get(el, "_unknown"), who, el)] += 1
+    return [{"from": f, "to": t, "element": el, "n": n} for (f, t, el), n in flow.most_common()]
+
+
 def summarize(rec, path=None):
     nm = names()
     sc = rec.get("scenario") or {}
@@ -189,6 +248,7 @@ def summarize(rec, path=None):
                            for s in a.get("StartTurn", []) if s.get("RoundCardsInitiative")],
             "cards": {str(cid): {**v, "name": (nm["cards"].get(cid) or {}).get("name") or f"card {cid}"}
                       for cid, v in cards.items()},
+            "cardDamage": _card_damage(dealt, nm["cards"]),
             "lostToAvoid": len(a.get("LoseCards", [])),
             "items": [e.get("ItemName") for e in a.get("Items", []) if e.get("ItemName")],
             "xpEarned": sum(e.get("XPEarned", 0) for e in a.get("XP", [])),
@@ -212,7 +272,12 @@ def summarize(rec, path=None):
     summon_dealt = sum(e.get("FinalDamageAmount", 0) for e in (actors.get("_summons") or {}).get("DamageDealt", [])
                        if e.get("ActorWhoReceivedDamageType") == "Enemy")
 
+    order = _turn_order(actors, rounds)
+    for cls, c in chars.items():
+        c["turnOrder"] = order.get(cls, [])
+
     return {
+        "elementFlow": _element_flow(actors, set(chars)),
         "file": os.path.basename(path) if path else None,
         "live": bool(rec.get("inProgress")),
         "id": sid, "num": num, "name": nm["scen"].get(num) or re.sub(r"^FS_\d+_", "", sid).replace("_", " "),
