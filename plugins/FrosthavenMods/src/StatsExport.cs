@@ -18,7 +18,8 @@ namespace FrosthavenMods
     /// <summary>
     /// Part of the Battle stats rule: each finished scenario's full battle record, as JSON, for the companion app's Stats
     /// tab (FrosthavenMods\stats\runs\&lt;campaign&gt;\*.json), plus a live snapshot during a scenario
-    /// (FrosthavenMods\stats\live-&lt;campaign&gt;.json).
+    /// (FrosthavenMods\stats\live-&lt;campaign&gt;.json.gz). Gzipped: a scenario's records are ~2 MB of very repetitive
+    /// JSON (every event carries both actors' class, health and surroundings), about a tenth of that compressed.
     ///
     /// Only real play is kept. The source is the game's own per-scenario records (ScenarioState.Stats), which are saved
     /// with the scenario: loading a save (after a crash, or by choice) rewinds them to that save, and a restart starts
@@ -96,13 +97,13 @@ namespace FrosthavenMods
                 string body = _staged.ToString(Formatting.None);
                 string hash = Hash((string)_staged["scenario"]?["id"] + "|" + (string)_staged["scenario"]?["seed"] + "|" + body.Length + "|" +
                                    _staged["actors"]?.ToString(Formatting.None));
-                if (Directory.GetFiles(dir, "*-" + hash + ".json").Any())
+                if (Directory.GetFiles(dir, "*-" + hash + ".json*").Any())
                 {
                     Plugin.Log.LogInfo("Battle stats: scenario record already written");
                     return;
                 }
-                string name = $"{DateTime.Now:yyyyMMdd-HHmmss}-{Safe((string)_staged["scenario"]?["id"] ?? "scenario")}-{hash}.json";
-                File.WriteAllText(Path.Combine(dir, name), body, new UTF8Encoding(false));
+                string name = $"{DateTime.Now:yyyyMMdd-HHmmss}-{Safe((string)_staged["scenario"]?["id"] ?? "scenario")}-{hash}.json.gz";
+                WriteGz(Path.Combine(dir, name), body);
                 DeleteLive(campaign);
                 Plugin.Log.LogInfo($"Battle stats: {_stagedOutcome} recorded ({why}): {name}");
             }
@@ -127,7 +128,7 @@ namespace FrosthavenMods
                     return;
                 }
                 Directory.CreateDirectory(StatsDir);
-                File.WriteAllText(LivePath(campaign), Record("InProgress", inProgress: true).ToString(Formatting.None), new UTF8Encoding(false));
+                WriteGz(LivePath(campaign), Record("InProgress", inProgress: true).ToString(Formatting.None));
             }
             catch (Exception e)
             {
@@ -135,7 +136,21 @@ namespace FrosthavenMods
             }
         }
 
-        private static string LivePath(string campaign) => Path.Combine(StatsDir, $"live-{Safe(campaign)}.json");
+        private static string LivePath(string campaign) => Path.Combine(StatsDir, $"live-{Safe(campaign)}.json.gz");
+
+        /// <summary>Writes gzipped UTF-8 to a temporary file, then swaps it in, so a reader never sees half a file.</summary>
+        private static void WriteGz(string path, string text)
+        {
+            string tmp = path + ".tmp";
+            using (var file = File.Create(tmp))
+            using (var gz = new System.IO.Compression.GZipStream(file, System.IO.Compression.CompressionLevel.Optimal))
+            {
+                byte[] bytes = new UTF8Encoding(false).GetBytes(text);
+                gz.Write(bytes, 0, bytes.Length);
+            }
+            if (File.Exists(path)) File.Delete(path);
+            File.Move(tmp, path);
+        }
 
         private static void DeleteLive(string campaign)
         {
