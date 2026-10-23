@@ -15,6 +15,7 @@ Building and testing:
     python tools/fh_mods.py install [--mod NAME ...]               build + install into the game, vanilla backed up
     python tools/fh_mods.py restore                                put the vanilla Base.ruleset back
     python tools/fh_mods.py status
+    build/install --gh   also add the Gloomhaven classes tools/gh_port.py converted on this PC (never packed)
 """
 
 import argparse
@@ -151,6 +152,15 @@ def sorted_files(folder, suffix=""):
     return sorted(files, key=lambda p: p.relative_to(folder).as_posix().lower())
 
 
+def gh_mod():
+    """The Gloomhaven classes tools/gh_port.py converted from this PC's own Gloomhaven install, as a files-only mod
+    (local to this machine, never packed: it is Gloomhaven's data)."""
+    folder = BACKUP / "ghclasses"
+    if not (folder / "ruleset").exists():
+        sys.exit("no converted Gloomhaven classes yet: run tools/gh_port.py <Class> first")
+    return folder, {"files": "ruleset"}
+
+
 def build(vanilla_bytes, mods):
     entries = rs.read_ruleset(vanilla_bytes)
     by_name = {e["name"].lower(): e for e in entries}
@@ -161,8 +171,9 @@ def build(vanilla_bytes, mods):
             if e is None:
                 raise ValueError(f"{d.name}: patch target {rel} is not in the game's ruleset")
             e["data"] = apply_diff(e["data"], p.read_bytes(), f"{d.name}: {rel}")
-        for p in sorted_files(d / "files"):
-            rel = p.relative_to(d / "files").as_posix()
+        files = d / meta.get("files", "files")
+        for p in sorted_files(files):
+            rel = p.relative_to(files).as_posix()
             e = by_name.get(rel.lower())
             if e is not None:
                 e["data"] = p.read_bytes()  # whole-file replacement
@@ -266,13 +277,13 @@ def vanilla_backup():
 
 
 def cmd_build(args):
-    data = build(vanilla_backup(), load_mods(args.mod))
+    data = build(vanilla_backup(), load_mods(args.mod) + ([gh_mod()] if args.gh else []))
     Path(args.out).write_bytes(data)
     print(f"wrote {args.out} ({len(data):,} bytes)")
 
 
 def cmd_install(args):
-    mods = load_mods(args.mod)
+    mods = load_mods(args.mod) + ([gh_mod()] if args.gh else [])
     vanilla = vanilla_backup()
     data = build(vanilla, mods)
     rs.read_ruleset(data)  # sanity re-read
@@ -321,6 +332,7 @@ def main():
         if name == "build":
             p.add_argument("out")
         p.add_argument("--mod", action="append", help="build only these mods (repeatable)")
+        p.add_argument("--gh", action="store_true", help="also add the Gloomhaven classes from tools/gh_port.py")
         p.set_defaults(fn=fn)
     sub.add_parser("restore").set_defaults(fn=cmd_restore)
     sub.add_parser("status").set_defaults(fn=cmd_status)
