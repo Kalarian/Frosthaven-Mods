@@ -302,10 +302,15 @@ namespace FrosthavenMods
             animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;        // Frosthaven's heroes; the game samples clips on the object
             animator.applyRootMotion = false;                                // the scenario forces this off itself; the class screen does not
 
-            // 5. the carrier: the Drifter's wrapper, pointed at the visual
-            GameObject carrier = UnityEngine.Object.Instantiate(drifter, Holder);
-            carrier.name = e.Model.ToString();                               // pool container "Brute Pool", clones "Brute(Clone)"
-            CharacterManager cm = carrier.GetComponent<CharacterManager>();
+            // 5. the carrier: a wrapper like the Drifter's, pointed at the visual. Built with AddComponent and the Drifter's
+            // field values, never as an Instantiate copy of her prefab: a copy's components keep pointing at the script
+            // stubs inside her bundle, and when the game unloads that bundle after a scenario they turn into "missing
+            // script" slots, so the next clone has no CharacterManager at all (a black screen on the character view).
+            var carrier = new GameObject(e.Model.ToString());                // pool container "Brute Pool", clones "Brute(Clone)"
+            carrier.transform.SetParent(Holder, false);
+            carrier.layer = drifter.layer;
+            CopyComponent<UnityGameEditorObject>(drifter, carrier);          // the Choreographer dereferences it on the root
+            CharacterManager cm = CopyComponent<CharacterManager>(drifter, carrier);
             cm.CharacterChildPrefab = visual;
             cm.CharacterMenuModelPrefab = null;
             if (!string.IsNullOrEmpty(e.TargetBone)) cm.TargetBone = e.TargetBone;
@@ -701,6 +706,19 @@ namespace FrosthavenMods
         {
             if (from == null || to == null) return;
             foreach (FieldInfo f in fields) if (f != null) f.SetValue(to, f.GetValue(from));
+        }
+
+        /// <summary>A fresh component of type <typeparamref name="T"/> on <paramref name="to"/> with the serialized field
+        /// values of the one on <paramref name="from"/> (public instance fields not marked NonSerialized). The new component
+        /// belongs to the game's own script registry, not to the bundle the source came from.</summary>
+        private static T CopyComponent<T>(GameObject from, GameObject to) where T : Component
+        {
+            T src = from.GetComponent<T>();
+            T dst = to.AddComponent<T>();
+            if (src == null) return dst;
+            foreach (FieldInfo f in typeof(T).GetFields(BindingFlags.Instance | BindingFlags.Public))
+                if (!f.IsNotSerialized && !f.IsInitOnly && !f.IsLiteral) f.SetValue(dst, f.GetValue(src));
+            return dst;
         }
 
         private static Transform Find(Transform root, string name) =>
