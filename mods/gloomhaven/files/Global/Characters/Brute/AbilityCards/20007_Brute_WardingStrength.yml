@@ -34,13 +34,18 @@ Data:
                     ValidAbilityType: Attack                        
 Layout:
     Top:
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "$Push$ <sprite name=Push> *TAttackSubPush* @TAttackSubPush@"
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Push>*TAttackSubPush* @TAttackSubPush@"
+            - Column:
     Bottom:
         - Active:
             Ability: BShield
             ListLayout: "$GH_007_B$"
             Layout: "$GH_007_B$"
-            Icon: "Shield"
+            Icon: Positive_Shield
         - Row: "<size=50%> "
         - XPTracker: BShield

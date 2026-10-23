@@ -30,11 +30,11 @@ Data:
                 AnimOverload: TargetedShout
 Layout:
     Top:
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "$Target_AllAdjacentEnemies$"
         - Row: "$XP_PerEnemy$"
     Bottom:
-        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
-        - Row: "<size=50%> "
-        - Row: "<b><size=130%>$Push$ <sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"
         - Row: "$Target_OneAdjacentEnemy$"

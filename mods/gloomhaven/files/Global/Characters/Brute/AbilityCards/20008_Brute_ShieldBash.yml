@@ -24,16 +24,17 @@ Data:
                 AnimOverload: Persistent Buff
 Layout:
     Top:
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "$Stun$ <sprite name=Stun>"
-        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Stun></size>"
+            - Column:
     Bottom:
         - Active:
             Ability: BShield
-            Icon: "Shield"
-            ListLayout: "$Shield$ <sprite name=Shield> *BShield*, $Self$"
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
             Layout:
-                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
-                - Row: "$Self$"
-        - Row: "<size=20%> "
-        - Duration: Round
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"

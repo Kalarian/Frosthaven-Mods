@@ -30,17 +30,19 @@ Layout:
     Top:
         - Active:
             Ability: TRetaliate
-            Icon: "Retaliate"
-            ListLayout: "$Retaliate$ <sprite name=Retaliate> *TRetaliate*, $Self$, $GH_002_T$"
+            Icon: Positive_Retaliate
+            ListLayout: "<sprite name=Retaliate> *TRetaliate*, $GH_002_T$"
             Layout:
-                - Row: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
-                - Row: "$Self$"
+                - Row: "<b><size=130%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
                 - Row: "<size=20%> "
                 - Row: "$GH_002_T$"
-        - Row: "<size=20%> "
-        - Duration: Round
     Bottom:
-        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
-        - Row: "$Range$ <sprite name=Range> *BHeal.Range* @BHeal.Range@"
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<sprite name=Range>*BHeal.Range* @BHeal.Range@"
+            - Column:
         - Row: "<size=20%> "
         - Infuse: Earth

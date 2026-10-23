@@ -30,12 +30,15 @@ Data:
                         Push: 1
 Layout:
     Top:
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "$Wound$ <sprite name=Wound>"
-        - Row: "$Stun$ <sprite name=Stun>"
-        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Wound></size>, <size=130%><sprite name=Stun></size>"
+            - Column:
     Bottom:
-        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
-        - Row: "<size=50%> "
-        - Row: "<b><size=130%>$Immobilize$ <sprite name=Immobilize> $and$ <nobr>$Push$ <sprite name=Push> *BImmobilizeSubPush*</nobr>"
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Immobilize>, <nobr><sprite name=Push> *BImmobilizeSubPush*</nobr>"
         - Row: "$Target_OneAdjacentEnemy$"

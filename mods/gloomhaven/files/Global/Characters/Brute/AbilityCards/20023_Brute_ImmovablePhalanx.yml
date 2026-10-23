@@ -39,22 +39,17 @@ Data:
                             Filter: Enemy
 Layout:
     Top:
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Divider:
         - Active:
             Ability: TShield
-            Icon: "Shield"
-            ListLayout: "$Shield$ <sprite name=Shield> *TShield*, $Self$"
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *TShield*"
             Layout:
-                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
-                - Row: "$Self$"
-        - Row: "<size=50%> "
-        - Duration: Round
+                - Row: "<b><size=130%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
     Bottom:
         - Active:
             Ability: BAbilityOverrideAbilityType
             ListLayout: "$GH_023_B$"
             Layout: "$GH_023_B$"
-            Icon: Damage
-        - Row: "<size=50%> "
-        - Duration: Persistent
+            Icon: Positive_Damage_Move

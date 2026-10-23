@@ -31,23 +31,15 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
-        - Row: "<size=50%> "
-        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *TLoot*"
+        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
     Bottom:
-        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
-        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
         - Active:
             Ability: BRetaliate
-            Icon: Retaliate
-            ListLayout: "$Retaliate$ <sprite name=Retaliate> *BRetaliate*, $Self$"
+            Icon: Positive_Retaliate
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*"
             Layout:
-                - Row: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
-                - Row: "$Self$"
-        - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-            - Column:
-                - Duration: Round
+                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"

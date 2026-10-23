@@ -31,20 +31,17 @@ Layout:
     Top:
         - ColumnWidths: "65,25"
         - Column:
-            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-            - Row: "$Muddle$ <sprite name=Muddle>"
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Muddle>"
             - Row: "<size=20%> "
         - Column:
             - Row: "£Area£"
     Bottom:
-        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"
-        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Divider:
         - Active:
             Ability: BShield
-            Icon: "Shield"
-            ListLayout: "$Shield$ <sprite name=Shield> *BShield*, $Self$"
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
             Layout:
-                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
-                - Row: "$Self$"
-        - Row: "<size=20%> "
-        - Duration: Round
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"

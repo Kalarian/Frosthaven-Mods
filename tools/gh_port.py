@@ -30,6 +30,8 @@ Conversion (see the research notes in the gloomhaven-class-port memory):
     - a class on Frosthaven's official crossover sheet gets that sheet's perks and masteries (gh_crossover.py) in place
       of Gloomhaven's perks; otherwise Gloomhaven's perks are converted (keys Frosthaven's parser doesn't know, such
       as IgnoreNegativeItemEffects: True, become Frosthaven perk Flags)
+    - the card's Layout is rewritten in the form Frosthaven's own cards use (gh_layout.py: icons without the word,
+      modifiers beside the ability, dividers between abilities, Frosthaven's active-bonus icons)
     - the "- XP: N" layout element goes (Frosthaven shows a card's experience in the corner badge, from the data)
     - a card's AnimOverload (a Gloomhaven animator state) becomes the Drifter-animator state the plugin plays the
       matching Gloomhaven clip in (ANIM_OVERLOADS); unknown names fall back to the game's default animation
@@ -56,6 +58,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import fh_mods  # noqa: E402
 import fh_ruleset as rs  # noqa: E402
 import gh_crossover  # noqa: E402
+import gh_layout  # noqa: E402
 
 GH_APP_ID = "780290"
 CARD_ID_OFFSET = 20000
@@ -75,6 +78,15 @@ CLASS_EXTRAS = {
         "Traits": "[ Armored, Intimidating, Strong ]",
         "Complexity": "1",
         "HeroStats": {"Melee": 5, "Ranged": 1, "Mobility": 3, "Support": 1, "Defense": 5, "Control": 3},
+    },
+}
+
+# Active-bonus icons for the actives gh_layout's general mapping (Shield, Retaliate...) doesn't fit: {ability: icon},
+# from the Frosthaven icon names in misc_globalsettings (ActiveAbilityDataSO)
+CLASS_ICONS = {
+    "Brute": {
+        "BRedirect": "Positive_Redirect_Ally_Attack_Aura",   # Provoking Roar: attacks on adjacent allies target you
+        "BAbilityOverrideAbilityType": "Positive_Damage_Move",  # Immovable Phalanx: moves count as attacks
     },
 }
 
@@ -181,7 +193,7 @@ def convert_anim_overloads(s):
     return ANIM_OVERLOAD_LINE.sub(lambda m: m.group(1) + ANIM_OVERLOADS.get(m.group(2), m.group(2)), s)
 
 
-def convert_card(name, s, warn):
+def convert_card(name, s, warn, icons=None):
     m = re.search(r"^ID:\s*(\d+)\s*$", s, re.M)
     if not m:
         raise ValueError(f"{name}: no card ID")
@@ -191,6 +203,7 @@ def convert_card(name, s, warn):
     s = convert_anim_overloads(s)
     s = CARD_TEXT_KEY.sub(lambda k: f"$GH_{k.group(1)}$", s)
     s = convert_layout(s)
+    s = gh_layout.convert(s, icons, lambda w: warn(f"{name}: {w}"))
     return new_id, s
 
 
@@ -303,7 +316,7 @@ def main():
         cards = sorted(n for n, d in files.items() if n.startswith("AbilityCard/") and
                        re.search(rf"^Character:\s*{re.escape(char_id)}\s*$", text(d), re.M))
         for n in cards:
-            new_id, s = convert_card(n, text(files[n]), warnings.append)
+            new_id, s = convert_card(n, text(files[n]), warnings.append, CLASS_ICONS.get(cls))
             if new_id in fh_card_ids:
                 sys.exit(f"{n}: card ID {new_id} is taken in Frosthaven")
             stem = re.sub(r"^\d+", str(new_id), Path(n).name)

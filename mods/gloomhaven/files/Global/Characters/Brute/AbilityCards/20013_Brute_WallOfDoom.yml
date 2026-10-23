@@ -32,31 +32,20 @@ Layout:
     Top:
         - Active:
             Ability: TRetaliate
-            Icon: Retaliate
-            ListLayout: "$Retaliate$ <sprite name=Retaliate> *TRetaliate*, $Self$"
+            Icon: Positive_Retaliate
+            ListLayout: "<sprite name=Retaliate> *TRetaliate*"
             Layout:
-                - Row: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
-                - Row: "$Self$"
-        - Row: "<size=50%> "
+                - Row: "<b><size=130%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
+        - Divider:
         - Active:
             Ability: TRetaliateSubShield
-            Icon: Shield
-            ListLayout: "$Shield$ <sprite name=Shield> *TRetaliateSubShield*, $Self$"
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *TRetaliateSubShield*"
             Layout:
-                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *TRetaliateSubShield* <size=100%><voffset=1>@TRetaliateSubShield@"
-                - Row: "$Self$"
-        - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-            - Column:
-                - Duration: Round
+                - Row: "<b><size=130%><sprite name=Shield> *TRetaliateSubShield* <size=100%><voffset=1>@TRetaliateSubShield@"
     Bottom:
         - Active:
             Ability: BAttack
-            Icon: "Damage"
+            Icon: Positive_AttackPlus
             ListLayout: "$GH_013_B$"
             Layout: "$GH_013_B$"
-        - Row: "<size=20%> "
-        - Duration: Round

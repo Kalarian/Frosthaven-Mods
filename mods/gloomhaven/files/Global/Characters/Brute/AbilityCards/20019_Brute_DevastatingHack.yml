@@ -22,7 +22,6 @@ Data:
                 AnimOverload: Loot
 Layout:
     Top:
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
     Bottom:
-        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *BLoot*"
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"

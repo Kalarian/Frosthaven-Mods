@@ -27,12 +27,16 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack1*"
-        - Row: "<size=50%> "
-        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
-        - Row: "<size=50%> "
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack2*"
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack1*"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack2*"
     Bottom:
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
-        - Row: "$Range$ <sprite name=Range> *BAttack.Range*"
-        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
+            - Column:

@@ -26,14 +26,14 @@ Data:
                 AnimOverload: Persistent Buff
 Layout:
     Top:
-        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
-        - Row: "<size=50%> "
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
     Bottom:
         - Active:
             Ability: BPrevent
             ListLayout: "$GH_015_B$"
             Layout: "$GH_015_B$"
-            Icon: "Immune"
+            Icon: Positive_DamagePrevent
         - Row: "<size=50%> "
         - XPTracker: BPrevent

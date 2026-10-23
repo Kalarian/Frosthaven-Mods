@@ -22,13 +22,16 @@ Data:
                 AnimOverload: PowerUp
 Layout:
     Top:
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "$Disarm$ <sprite name=Disarm>"
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Disarm></size>"
+            - Column:
     Bottom:
         - Active:
             Ability: BRedirect
             ListLayout: "$GH_004_B$"
             Layout: "$GH_004_B$"
-            Icon: "Brute"
-        - Row: "<size=20%> "
-        - Duration: Round
+            Icon: Positive_Redirect_Ally_Attack_Aura

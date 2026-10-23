@@ -27,7 +27,6 @@ ABILITY_CARD_UnstoppableCharge	Unstoppable Charge
 ABILITY_CARD_WallofDoom	Wall of Doom
 ABILITY_CARD_WardingStrength	Warding Strength
 ABILITY_CARD_Whirlwind	Whirlwind
-Attack	Attack
 Brute	Brute
 Brute_ADVENTURE_DESCRIPTION	The Brute employs his great size and strength to earn a living by wielding his huge sword and impressive shield for those who pay the most.\nBrutes are best used as front line melee troops, absorbing damage and protecting the more fragile ranged damage dealers, and are best equipped with items that keep them alive longer!
 Brute_DESCRIPTION	The Brute employs his great size and strength to earn a living by wielding his huge sword and impressive shield for those who pay the most.
@@ -35,7 +34,6 @@ Brute_ROLE	Melee Damage/Tank
 Brute_STRENGTHS	- <indent=%15>High health and defensive abilities make him more durable than some</indent>\n- <indent=%15>Access to early Disarm and Stun</indent>\n- <indent=%15>Great at pushing enemies about</indent>
 Brute_WEAKNESSES	- <indent=%15>Low mobility</indent>\n- <indent=%15>Poor ranged attack options</indent>\n- <indent=%15>Not the greatest conversationalist</indent>
 DIFFICULTY_LOW	Low
-Disarm	DISARM
 GH_002_T	Gain <sprite name=XP1> for each time you Retaliate <nobr>this round.</nobr>
 GH_004_B	Any enemy who targets one of your adjacent allies with an attack this round targets you with that attack instead, regardless of the attack's range.
 GH_007_B	On the next six sources of damage from attacks targeting you, gain <nobr>Shield <sprite name=Shield> *BShield*.</nobr>
@@ -45,14 +43,8 @@ GH_016_B	If the movement was in a straight line, perform
 GH_022_T	Kill one adjacent normal enemy <nobr>with  STUN <sprite name=Stun></nobr>.
 GH_023_B	You may treat all <nobr>Move <sprite name=Move></nobr> abilities as <nobr>Attack <sprite name=Attack></nobr> abilities of equal value.
 GH_026_B	Add +3 <nobr>Attack <sprite name=Attack></nobr> to all your attacks targeting enemies with <nobr>DISARM <sprite name=Disarm></nobr>, <nobr>IMMOBILIZE <sprite name=Immobilize></nobr> or <nobr>STUN <sprite name=Stun></nobr> this round.
-Heal	Heal
-Immobilize	IMMOBILIZE
-Jump	Jump
 Kill_OneAdjacentEnemy	Kill one adjacent normal or elite enemy.
 Kill_OneAdjacentNormalEnemy	Kill one adjacent normal enemy.
-Loot	Loot
-Move	Move
-Muddle	MUDDLE
 PERK_Brute_01_Desc	Replace one <sprite name="-1"> with one <sprite name="+1">
 PERK_Brute_02_Desc	Replace one <sprite name="-1"> with three <sprite name="0"> <sprite name=Push> 1 <sprite name=Rolling>
 PERK_Brute_03_Desc	Replace two <sprite name="0"> with two <sprite name="0"> <sprite name=Pierce> 3 <sprite name=Rolling>
@@ -63,24 +55,13 @@ PERK_Brute_07_Desc	Add one <sprite name="0"> <sprite name=Disarm> <sprite name=R
 PERK_Brute_08_Desc	Add one <sprite name="+3">
 PERK_Brute_09_Desc	Ignore item <sprite name="-1"> effects and add one <sprite name="+1"> <sprite name=Shield> 1
 PERK_Brute_10_Desc	Whenever you long rest, add +1 <sprite name=Move> to your first move ability the following round
-Pierce	PIERCE
-Pull	PULL
-Push	PUSH
-Range	Range
-Retaliate	Retaliate
-Self	Self
-Shield	Shield
-Stun	STUN
-Target	Target
 Target_AllAdjacentEnemies	Target all adjacent enemies
 Target_AllEnemiesMovedThrough	Target all enemies moved through
 Target_OneAdjacentEnemy	Target one adjacent enemy
-Wound	WOUND
 XP_PerEnemy	Gain <sprite name=XP1> for each enemy targeted.
 Xis_DamageInflictedThisTurn	where X is the amount of damage you have inflicted so far this turn.
 Xis_HexesMovedThisAction	where X is the number of hexes you moved with this action.
 Xis_HexesMovedThisTurn	where X is the number of hexes you have moved so far this turn.
-and	and
 PERK_Brute_10_Bonus	Rested and Ready: +1 <sprite name=Move> to your next move ability
 PERK_Brute_01_Name	Precision
 PERK_Brute_02_Name	Shove

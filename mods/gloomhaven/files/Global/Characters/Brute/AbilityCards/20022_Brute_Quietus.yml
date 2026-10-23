@@ -30,14 +30,11 @@ Data:
 Layout:
     Top:
         - Row: "$GH_022_T$"
-        - Row: "<size=20%> "
     Bottom:
-        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
-        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
         - Active:
             Ability: BAttack
-            Icon: "Damage"
+            Icon: Positive_AttackPlus
             ListLayout: "$GH_013_B$"
             Layout: "$GH_013_B$"
-        - Row: "<size=20%> "
-        - Duration: Round

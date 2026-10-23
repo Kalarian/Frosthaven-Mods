@@ -20,6 +20,6 @@ Data:
                     CircleEnhancements: 2
 Layout:
     Top:
-        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *TLoot*"
+        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
     Bottom:
-        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

@@ -31,32 +31,26 @@ Data:
         XP: 2
 Layout:
     Top:
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
-        - Row: "$Target$ <sprite name=Target> *TAttack.Target* <size=100%><voffset=1>@TAttack.Target@"
-        - Row: "<size=0%> "
-        - Row: "$Immobilize$ <sprite name=Immobilize>"
-        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - Row: "<sprite name=Target>*TAttack.Target* <size=100%><voffset=1>@TAttack.Target@"
+                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+            - Column:
     Bottom:
         - Active:
             Ability: BRetaliate
-            Icon: Retaliate
-            ListLayout: "$Retaliate$ <sprite name=Retaliate> *BRetaliate*, $Self$"
+            Icon: Positive_Retaliate
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*"
             Layout:
-                - Row: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *BRetaliate*"
-                - Row: "$Self$"
-        - Row: "<size=50%> "
+                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate*"
+        - Divider:
         - Active:
             Ability: BShield
-            Icon: Shield
-            ListLayout: "$Shield$ <sprite name=Shield> *BShield*, $Self$"
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
             Layout:
-                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield*"
-                - Row: "$Self$"
-        - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-            - Column:
-                - Duration: Persistent
+                - Row: "<b><size=130%><sprite name=Shield> *BShield*"

@@ -33,14 +33,19 @@ Data:
                     MoveWasStraightLine: True
 Layout:
     Top:
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
-        - Row: "$Pull$ <sprite name=Pull> 2"
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - AddedEffect: "<sprite name=Pull>2"
+            - Column:
     Bottom:
-        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
         - Row: "<size=20%> "
         - Row: "$GH_016_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> X"
+        - Row: "<b><size=130%><sprite name=Attack> X"
         - Row: "<size=20%> "
         - Row: "$Xis_HexesMovedThisAction$"

@@ -37,23 +37,16 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove1*"
-        - Row: "<size=20%> "
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
-        - Row: "<size=20%> "
-        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove2*"
-        - Row: "<size=20%> "
-        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+        - Row: "<b><size=130%><sprite name=Move> *TMove1*"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Move> *TMove2*"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
     Bottom:
         - Active:
             Ability: BAttackBuff
             ListLayout: "$GH_026_B$"
             Layout: "$GH_026_B$"
-            Icon: "Damage"
-        - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-            - Column:
-                - Duration: Round
+            Icon: Positive_AttackPlus
