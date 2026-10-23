@@ -774,13 +774,13 @@ PAGE = r"""<!doctype html>
 <style>
 :root { --bg:#f6f4ef; --card:#fff; --ink:#1d1d20; --muted:#666; --line:#ddd6c8; --accent:#7a5a1e; --good:#2e8b45; --bad:#c0392b; --lane:#efebe2; --edge:#9b9384; --hl:#7a5a1e;
   --done:#cfe8d4; --done-b:#2e8b45; --open:#f6e2b0; --open-b:#b8860b; --coming:#d6e4f5; --coming-b:#3a6fb0; --later:#fff; --later-b:#bdb6a6;
-  --lost:#e4e2de; --lost-b:#a8a49c; --locked:#f3d3cf; --locked-b:#c0392b; --untraced:#fff; --untraced-b:#a8a49c; }
+  --lost:#f7e6e3; --lost-b:#d98a7f; --locked:#f3d3cf; --locked-b:#c0392b; --untraced:#fff; --untraced-b:#a8a49c; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#16171a; --card:#202226; --ink:#e8e6e1; --muted:#9a9a9a; --line:#33363c; --accent:#d9b56a; --lane:#1c1e21; --edge:#5f636b; --hl:#d9b56a;
   --done:#1f3a27; --done-b:#5cc27a; --open:#43391a; --open-b:#e0b440; --coming:#1d2d44; --coming-b:#6aa0e0; --later:#202226; --later-b:#4a4e56;
-  --lost:#232427; --lost-b:#44474d; --locked:#45211d; --locked-b:#e5735f; --untraced:#202226; --untraced-b:#55585e; } }
+  --lost:#2c1b19; --lost-b:#9c4c40; --locked:#45211d; --locked-b:#e5735f; --untraced:#202226; --untraced-b:#55585e; } }
 :root[data-theme="dark"] { --bg:#16171a; --card:#202226; --ink:#e8e6e1; --muted:#9a9a9a; --line:#33363c; --accent:#d9b56a; --lane:#1c1e21; --edge:#5f636b; --hl:#d9b56a;
   --done:#1f3a27; --done-b:#5cc27a; --open:#43391a; --open-b:#e0b440; --coming:#1d2d44; --coming-b:#6aa0e0; --later:#202226; --later-b:#4a4e56;
-  --lost:#232427; --lost-b:#44474d; --locked:#45211d; --locked-b:#e5735f; --untraced:#202226; --untraced-b:#55585e; }
+  --lost:#2c1b19; --lost-b:#9c4c40; --locked:#45211d; --locked-b:#e5735f; --untraced:#202226; --untraced-b:#55585e; }
 * { box-sizing:border-box; }
 html, body { height:100%; }
 body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, Segoe UI, sans-serif; display:flex; flex-direction:column; }
@@ -861,8 +861,8 @@ const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;
 const N = new Map(D.nodes.map(n => [n.id, n]));
 const STATUS = {
   done: ["Done", "--done"], open: ["Available now", "--open"], coming: ["On the calendar", "--coming"],
-  later: [D.has ? "Still reachable" : "Reachable", "--later"], locked: ["Locked out", "--locked"],
-  lost: ["Out of reach (choices made)", "--lost"], untraced: ["Unlock not traced", "--untraced"],
+  later: [D.has ? "Still reachable" : "Reachable", "--later"], locked: ["Locked out (by a choice)", "--locked"],
+  lost: ["Out of reach (its unlocks are gone)", "--lost"], untraced: ["Unlock not traced", "--untraced"],
 };
 const sw = st => `style="--f:var(${STATUS[st][1]});--b:var(${STATUS[st][1]}-b)"`;
 const name = id => { const n = N.get(id); return n ? `#${id} ${n.name}` : `#${id}`; };

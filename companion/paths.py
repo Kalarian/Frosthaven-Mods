@@ -12,6 +12,7 @@ APP_NAME = "Frosthaven Companion"
 VERSION = "0.1.0"
 MUTEX = r"Local\FrosthavenCompanion"
 PORT = 7788
+TEST_PORT = 7888          # app.py --serve (tests): never the port a running companion uses
 
 FROZEN = bool(getattr(sys, "frozen", False))
 SOURCE_DIR = os.path.dirname(os.path.abspath(__file__))

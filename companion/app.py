@@ -40,18 +40,22 @@ def main(argv=None):
         ok = window.webview_available()
         window.log(f"check: window {'available' if ok else 'unavailable (' + (window.unavailable_kind or 'source run') + ')'}")
         return
+    if "--serve" in argv:
+        # tests: a server only, on its own port and without the one-companion lock, so it never touches (or opens
+        # the browser for) a companion the user is running
+        import server
+        window.log(f"test server {server.start(paths.TEST_PORT)}")
+        try:
+            while True:
+                time.sleep(3600)
+        except KeyboardInterrupt:
+            return
     if not window.single_instance():
         webbrowser.open(f"http://127.0.0.1:{paths.PORT}/")
         return
     import server
     url = server.start()
     window.log(f"serving {url}")
-    if "--serve" in argv:
-        try:
-            while True:
-                time.sleep(3600)
-        except KeyboardInterrupt:
-            return
     if "--browser" in argv or not window.webview_available():
         webbrowser.open(url)
         window.show_help(window.unavailable_kind)
