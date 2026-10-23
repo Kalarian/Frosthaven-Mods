@@ -148,14 +148,14 @@ def load_defs(source):
     files = []  # (parser, text)
     if source.is_dir():
         for sub, kind in (("Outpost/Scenarios", "FHScenario"), ("Outpost/Sections", "CampaignSection"),
-                          ("Outpost/GameMode", "GameMode"), ("Global/Characters", "Character")):
+                          ("Outpost/GameMode", "GameMode"), ("Global/Characters", "Character"), ("Outpost/Items", "FHItem")):
             files += [(kind, p.read_text("utf-8-sig", "replace")) for p in sorted((source / sub).rglob("*.yml"))]
     else:
         for e in fh_ruleset.read_ruleset(source.read_bytes()):
             kind = fh_ruleset.PARSER_TYPES.get(e["parser"])
-            if kind in ("FHScenario", "CampaignSection", "GameMode", "Character") and not e["binary"]:
+            if kind in ("FHScenario", "CampaignSection", "GameMode", "Character", "FHItem") and not e["binary"]:
                 files.append((kind, e["data"].decode("utf-8-sig", "replace")))
-    defs = {"scen": {}, "sect": {}, "start": [], "retire": {}}
+    defs = {"scen": {}, "sect": {}, "start": [], "retire": {}, "items": {}}
     for kind, text in files:
         head, conclusions, lists = parse_yml(text)
         if head.get("Parser") != kind or ("ID" not in head and kind != "GameMode"):
@@ -173,6 +173,9 @@ def load_defs(source):
                                         "cond": lists["ConditionalEffects"]}
         elif kind == "GameMode" and head.get("Name") == "Frosthaven":
             defs["start"] = lists["StartingCampaignEffects"]
+        elif kind == "FHItem":
+            if head["ID"].isdigit() and head.get("Name"):
+                defs["items"][int(head["ID"])] = head["Name"]
         elif kind == "Character" and head.get("RetireCampaignSection"):
             defs["retire"][humanize(head["ID"].removesuffix("ID"))] = head["RetireCampaignSection"]
     return defs
@@ -367,6 +370,80 @@ def relevant(effect):
     t = effect["Type"]
     return (t in SCENARIO_UNLOCKS or "Section" in t or "Scenario" in t or t in
             ("UnlockPuzzle", "EnableEvent", "ActivateEvent", "AddAncientCoin", "AddBrummix"))
+
+
+def _n(p, i=0):
+    try:
+        return int(p[i])
+    except (IndexError, ValueError):
+        return 0
+
+
+def _s(n, word):
+    return f"{n} {word}{'' if n == 1 else 's'}"
+
+
+HERBS = ("Axenut", "Arrowvine", "Corpsecap", "Flamefruit", "Rockroot", "Snowthistle")
+
+
+def reward_text(effect, items):
+    """What a scenario conclusion effect gives the party, in a few words; None for unlocks (shown as links instead)
+    and for bookkeeping effects. Rewards marked "FSnnConclusionEffect" are worked out by the game from the scenario's
+    own count (gold per something, tiers of rewards), so they're described, not totalled."""
+    t, p = effect["Type"], [effect.get(f"Param{i}", "") for i in (1, 2, 3)]
+    item = lambda i: items.get(_n([i]), f"item {i}")
+    simple = {
+        "AllCharactersGainExperience": lambda: f"{p[0]} XP each",
+        "AllCharactersGainGold": lambda: f"{p[0]} gold each",
+        "GainGold": lambda: f"{p[0]} gold",
+        "LoseGold": lambda: f"lose {p[0]} gold",
+        "AllCharactersAddPerkCheck": lambda: f"{_s(_n(p), 'perk checkmark')} each",
+        "GainMorale": lambda: f"+{p[0]} morale", "LoseMorale": lambda: f"−{p[0]} morale",
+        "AddProsperity": lambda: f"+{p[0]} prosperity", "LoseProsperity": lambda: f"−{p[0]} prosperity",
+        "GainInspiration": lambda: f"+{p[0]} inspiration", "LoseInspiration": lambda: f"−{p[0]} inspiration",
+        "GainLumber": lambda: f"{p[0]} lumber", "GainMetal": lambda: f"{p[0]} metal", "GainHide": lambda: f"{p[0]} hide",
+        "GainHerbs": lambda: f"{p[0]} herbs of your choice",
+        "GainItem": lambda: f"item: {item(p[0])}",
+        "GainItemBlueprint": lambda: f"blueprint: {item(p[0])}",
+        "GainRandomItemBlueprint": lambda: "a random item blueprint",
+        "UnlockClass": lambda: f"unlocks the {humanize(p[0].removesuffix('ID'))} class",
+        "UnlockClassChoise": lambda: f"unlocks the {humanize(p[0].removesuffix('ID'))} or "
+                                     f"{humanize(p[1].removesuffix('ID'))} class (your choice)",
+        "AddItemsToShop": lambda: "adds to the shop: " + ", ".join(
+            items.get(i, f"item {i}") for i in range(_n(p, 0), _n(p, 1) + 1) if i in items),
+        "AddTownGuardMod": lambda: "adds a town guard card",
+        "AddCoralShard": lambda: "a coral shard",
+        "AddAncientCoin": lambda: "an ancient coin",
+        "AddBrummix": lambda: "a Brummix sticker",
+        "GainCampaignSticker": lambda: f"campaign sticker: {humanize(p[0])}",
+        "AddLootCardBonus": lambda: f"{humanize(p[0]).lower()} loot cards are worth +{p[1]}",
+        "PartyCurse": lambda: "the party starts the next scenario with a curse",
+        "PartyMuddle": lambda: "the party starts the next scenario muddled",
+        "WreckAnyOneEvenBuildingBetween": lambda: "wrecks one of your buildings",
+    }
+    for herb in HERBS:
+        simple[f"Gain{herb}"] = lambda herb=herb: f"{p[0]} {herb.lower()}"
+    if t in simple:
+        return simple[t]()
+    if re.fullmatch(r"R?FS\d+ConclusionEffect", t):
+        return "plus a reward based on how the scenario went"
+    return None
+
+
+def rewards(endings, items):
+    """[{label, items}] for the scenario's rewards: one entry when every ending gives the same, else one per ending."""
+    based = "plus a reward based on how the scenario went"
+    per = [[r for r in (reward_text(e, items) for e in c["effects"]) if r] for c in endings]
+    per = [sorted(dict.fromkeys(r), key=lambda x: x == based) for r in per]   # the scenario-dependent part last
+    if not any(per):
+        return []
+    if all(r == per[0] for r in per):
+        return [{"label": None, "items": per[0]}]
+
+    def label(c, i):
+        lab = ending_label(c, i)
+        return lab if len(lab) <= 60 else f"Ending {i + 1}"   # some endings carry a developer's note as their label
+    return [{"label": label(c, i), "items": r} for i, (c, r) in enumerate(zip(endings, per)) if r]
 
 
 def ending_label(conclusion, i):
@@ -707,7 +784,7 @@ def page_data(g, a, prog):
         x, y = pos[n]
         out_nodes.append({
             "id": int(n[1:]), "name": s["name"], "chain": CHAINS.get(s["chain"], s["chain"]), "loc": s["location"],
-            "x": x, "y": y, "status": status(n), "needs": needs,
+            "x": x, "y": y, "status": status(n), "needs": needs, "rewards": rewards(s["endings"], g.defs["items"]),
             "from": froms[n], "to": tos[n],
             "locks": [{"id": t, "pre": pre} for t, pre in sorted(locks[n])], "lockedBy": sorted(locked_by[n]),
             "by": st["by"] if st else None,
@@ -982,6 +1059,8 @@ function details(n) {
   if (n.ending) h += ` <span class="small muted">Ended with: ${esc(n.ending)}</span>`;
   if (n.status === "untraced") h += `<p class="small">${esc(D.untracedNote)}</p>`;
   if (n.needs.length) h += `<h4>Needs</h4><div class="small">${n.needs.map(esc).join(", ")}</div>`;
+  if (n.rewards.length) h += `<h4>Rewards</h4>` + n.rewards.map(r => (r.label ? `<div class="small muted">${esc(r.label)}</div>` : "")
+    + li(r.items.map(x => `<li>${esc(x)}</li>`))).join("");
   if (n.from.length) h += `<h4>Unlocked by</h4>` + li(n.from.map(f => `<li>${f.from ? go(f.from) : esc(f.src)}<div class="small muted">${goText(f.t)}</div></li>`));
   if (n.by) h += `<div class="small muted">In this campaign it was unlocked by ${go(n.by)}.</div>`;
   if (n.to.length) h += `<h4>Leads to</h4>` + li(n.to.map(t => `<li>${go(t.to)}<div class="small muted">${goText(t.t)}</div></li>`));
