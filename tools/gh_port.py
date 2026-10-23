@@ -27,7 +27,9 @@ Conversion (see the research notes in the gloomhaven-class-port memory):
     - Gloomhaven's plain "Enhancements: N" (Frosthaven reads it as diamond-plus) becomes the slot shape Frosthaven's
       own cards use for that ability: attack diamond, move circle, heal diamond-plus, everything else square
     - card-specific text keys ($013_B$) get a GH_ prefix so they can never meet a Frosthaven key
-    - perk keys Frosthaven's parser doesn't know (IgnoreNegativeItemEffects: True) become Frosthaven perk Flags
+    - a class on Frosthaven's official crossover sheet gets that sheet's perks and masteries (gh_crossover.py) in place
+      of Gloomhaven's perks; otherwise Gloomhaven's perks are converted (keys Frosthaven's parser doesn't know, such
+      as IgnoreNegativeItemEffects: True, become Frosthaven perk Flags)
     - the "- XP: N" layout element goes (Frosthaven shows a card's experience in the corner badge, from the data)
     - a card's AnimOverload (a Gloomhaven animator state) becomes the Drifter-animator state the plugin plays the
       matching Gloomhaven clip in (ANIM_OVERLOADS); unknown names fall back to the game's default animation
@@ -45,6 +47,7 @@ import hashlib
 import io
 import json
 import re
+import shutil
 import sys
 import zipfile
 from pathlib import Path
@@ -52,6 +55,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import fh_mods  # noqa: E402
 import fh_ruleset as rs  # noqa: E402
+import gh_crossover  # noqa: E402
 
 GH_APP_ID = "780290"
 CARD_ID_OFFSET = 20000
@@ -220,6 +224,9 @@ def convert_character(cls, s):
     lines = s.rstrip("\r\n").splitlines()
     present = {ln.split(":", 1)[0] for ln in lines if ":" in ln and not ln.startswith((" ", "#"))}
     at = next(i for i, ln in enumerate(lines) if ln.startswith("Model:")) + 1
+    masteries = gh_crossover.mastery_ids(cls)
+    if masteries:
+        extras = dict(extras, MasteryIDs="[ " + ", ".join(masteries) + " ]")
     todo = {k: v for k, v in extras.items() if k not in present}
     lines[at:at] = [f"{k}: {v}" for k, v in todo.items() if not isinstance(v, dict)]
     for key, value in todo.items():
@@ -262,6 +269,8 @@ def main():
 
     out_ruleset = args.out / "files"
     args.out.mkdir(parents=True, exist_ok=True)
+    if out_ruleset.exists():
+        shutil.rmtree(out_ruleset)   # generated from scratch each run: nothing from an earlier conversion may linger
     (args.out / "mod.json").write_text(json.dumps({
         "name": PACK_TITLE,
         "description": "Gloomhaven's classes (" + ", ".join(args.classes) + ") converted from the author's own Gloomhaven; "
@@ -300,16 +309,27 @@ def main():
             stem = re.sub(r"^\d+", str(new_id), Path(n).name)
             write(f"{base}/AbilityCards/{stem}", s)
 
-        perks = sorted(n for n, d in files.items() if n.startswith("Perk/") and
-                       re.search(rf"^CharacterID:\s*{re.escape(char_id)}\s*$", text(d), re.M))
-        for n in perks:
-            s = convert_perk(text(files[n]))
-            for amc in re.findall(r"AMC_\w+", s):
-                if amc not in fh_amcs:
-                    warnings.append(f"{n}: attack modifier {amc} isn't in Frosthaven")
-            write(f"Global/Perks/{cls}/{Path(n).name}", s)
+        crossover = gh_crossover.files(cls)
+        if crossover:
+            # Frosthaven's own sheet for the class: its perks and masteries, not Gloomhaven's perks
+            for rel, s in crossover:
+                for amc in re.findall(r"AMC_\w+", s):
+                    if amc not in fh_amcs:
+                        warnings.append(f"{rel}: attack modifier {amc} isn't in Frosthaven")
+                write(rel, s)
+            perks = [rel for rel, _ in crossover if "/Perks/" in rel]
+        else:
+            perks = sorted(n for n, d in files.items() if n.startswith("Perk/") and
+                           re.search(rf"^CharacterID:\s*{re.escape(char_id)}\s*$", text(d), re.M))
+            for n in perks:
+                s = convert_perk(text(files[n]))
+                for amc in re.findall(r"AMC_\w+", s):
+                    if amc not in fh_amcs:
+                        warnings.append(f"{n}: attack modifier {amc} isn't in Frosthaven")
+                write(f"Global/Perks/{cls}/{Path(n).name}", s)
 
-        print(f"{cls}: 1 character, {len(cards)} cards (IDs {CARD_ID_OFFSET + 1}..), {len(perks)} perks")
+        print(f"{cls}: 1 character, {len(cards)} cards (IDs {CARD_ID_OFFSET + 1}..), {len(perks)} perks"
+              + (f" and {len(crossover) - len(perks)} masteries from Frosthaven's crossover sheet" if crossover else " from Gloomhaven"))
 
         # pictures, composed into Frosthaven's shapes (see gh_art.py); optional, the plugin keeps stand-in art without
         try:
@@ -348,6 +368,7 @@ def main():
     # hero description (FHUICodexHeroEntry), both from Gloomhaven's own text; and the retirement story of a class with
     # no Frosthaven retirement section, whose key comes out as "Event_" + "" + "_Text" (our line, no Gloomhaven text).
     for cls in args.classes:
+        table.update(gh_crossover.strings(cls))   # our English for the crossover perks and masteries
         if cls in strings:
             table.setdefault(f"{cls}_FullName", strings[cls])
         if f"{cls}_DESCRIPTION" in strings:

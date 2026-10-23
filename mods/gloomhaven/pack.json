@@ -6,11 +6,11 @@
     "Brute"
   ],
   "files": "files",
-  "data_sha": "5867b91bfb1b42c1629d2e2f4ffa6cab330704cab730c2a23929de0adcb59f4c",
+  "data_sha": "02b3d8f0dc01d4de56216456e21e2c3baa49240bc4423856d4b1256c7f4db2aa",
   "source": {
     "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
     "buildid": "20286313",
-    "files": 41
+    "files": 42
   },
   "model": {
     "Brute": {

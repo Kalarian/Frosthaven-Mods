@@ -1,0 +1,19 @@
+Parser: Mastery
+ID: Brute_MASTERY_2
+LocalisedName: Brute_MASTERY_2_Name
+LocalisedDescription: Brute_MASTERY_2_Desc
+PerkPoints: 1
+# Three rounds in a row with at least 6 damage to enemies on each of the Brute's turns and six different ability cards
+# played over the three. No built-in filter checks rounds in a row: the Frosthaven Mods plugin answers this target
+# (the marker in EnemyFamilies, GHMasteries.cs) from the damage and ability records. Value = rounds in a row,
+# Amount = damage per turn, Targets = different cards. Without the plugin it reads as "play three rounds".
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_DamageStreak]
+        CharacterIDs:
+            ActorID: BruteID
+        Value: 3
+        Amount: 6
+        Targets: 6

@@ -53,28 +53,16 @@ Kill_OneAdjacentNormalEnemy	Kill one adjacent normal enemy.
 Loot	Loot
 Move	Move
 Muddle	MUDDLE
-PERK_Brute_01	Consistency
-PERK_Brute_01_Desc	Remove two <color="purple">-1</color> cards
-PERK_Brute_02	Focus
-PERK_Brute_02_Desc	Replace one <color="purple">-1</color> card with a <color="orange">+1</color> card
-PERK_Brute_03	Power
-PERK_Brute_03_Desc	Add two <color="orange">+1</color> cards
-PERK_Brute_04	Outburst
-PERK_Brute_04_Desc	Add one <color="orange">+3</color> card
-PERK_Brute_05	Thrust
-PERK_Brute_05_Desc	Add three <sprite name=Rolling> <nobr>PUSH <sprite name=Push> 1 cards
-PERK_Brute_06	Stab
-PERK_Brute_06_Desc	Add two <sprite name=Rolling> PIERCE <sprite name=Pierce> 3 cards
-PERK_Brute_07	Bludgeon
-PERK_Brute_07_Desc	Add one <sprite name=Rolling> STUN <sprite name=Stun> card
-PERK_Brute_08	Pacify
-PERK_Brute_08_Desc	Add one <sprite name=Rolling> DISARM <sprite name=Disarm> card and one <sprite name=Rolling> MUDDLE <sprite name=Muddle> card
-PERK_Brute_09	Sweep
-PERK_Brute_09_Desc	Add one <sprite name=Rolling> ADD TARGET <sprite name=Target> card
-PERK_Brute_10	Bulwark
-PERK_Brute_10_Desc	Add one <color="orange">+1</color> Shield <sprite name=Shield> 1, Self card
-PERK_Brute_11	Fortitude
-PERK_Brute_11_Desc	Ignore negative item effects and add one <color="orange">+1</color> card
+PERK_Brute_01_Desc	Replace one <sprite name="-1"> with one <sprite name="+1">
+PERK_Brute_02_Desc	Replace one <sprite name="-1"> with three <sprite name="0"> <sprite name=Push> 1 <sprite name=Rolling>
+PERK_Brute_03_Desc	Replace two <sprite name="0"> with two <sprite name="0"> <sprite name=Pierce> 3 <sprite name=Rolling>
+PERK_Brute_04_Desc	Replace one <sprite name="0"> with two <sprite name="+1">
+PERK_Brute_05_Desc	Replace one <sprite name="0"> with one <sprite name="0"> "+1 <sprite name=Target>" <sprite name=Rolling>
+PERK_Brute_06_Desc	Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>
+PERK_Brute_07_Desc	Add one <sprite name="0"> <sprite name=Disarm> <sprite name=Rolling> and one <sprite name="0"> <sprite name=Muddle> <sprite name=Rolling>
+PERK_Brute_08_Desc	Add one <sprite name="+3">
+PERK_Brute_09_Desc	Ignore item <sprite name="-1"> effects and add one <sprite name="+1"> <sprite name=Shield> 1
+PERK_Brute_10_Desc	Whenever you long rest, add +1 <sprite name=Move> to your first move ability the following round
 Pierce	PIERCE
 Pull	PULL
 Push	PUSH
@@ -93,6 +81,21 @@ Xis_DamageInflictedThisTurn	where X is the amount of damage you have inflicted s
 Xis_HexesMovedThisAction	where X is the number of hexes you moved with this action.
 Xis_HexesMovedThisTurn	where X is the number of hexes you have moved so far this turn.
 and	and
+PERK_Brute_10_Bonus	Rested and Ready: +1 <sprite name=Move> to your next move ability
+PERK_Brute_01_Name	Precision
+PERK_Brute_02_Name	Shove
+PERK_Brute_03_Name	Skewering Blows
+PERK_Brute_04_Name	Heavy Hands
+PERK_Brute_05_Name	Wide Swing
+PERK_Brute_06_Name	Stunning Blow
+PERK_Brute_07_Name	Dirty Tricks
+PERK_Brute_08_Name	Overpower
+PERK_Brute_09_Name	Hardened
+PERK_Brute_10_Name	Rested and Ready
+Brute_MASTERY_1_Name	Living Wall
+Brute_MASTERY_1_Desc	Cause enemies to suffer a total of at least <sprite name=Damage> 12 from retaliate during attacks targeting you in a single round
+Brute_MASTERY_2_Name	Relentless Onslaught
+Brute_MASTERY_2_Desc	Across three consecutive rounds, play six different ability cards and cause enemies to suffer at least <sprite name=Damage> 6 on each of your turns
 Brute_FullName	Brute
 CODEX_HeroInfo_Brute	The Brute employs his great size and strength to earn a living by wielding his huge sword and impressive shield for those who pay the most.
 Event__Text	Their personal quest complete, the mercenary leaves Frosthaven for good. Someone else will take up the fight.

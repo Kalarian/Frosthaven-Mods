@@ -1,0 +1,14 @@
+Parser: Mastery
+ID: Brute_MASTERY_1
+LocalisedName: Brute_MASTERY_1_Name
+LocalisedDescription: Brute_MASTERY_1_Desc
+PerkPoints: 1
+# the retaliate damage the Brute dealt, summed per round (DealDamage with AbilityTypes keeps only retaliate records)
+BattleGoalCondition:
+    - Targets:
+        Filter: DealDamage
+        SubFilter: RoundCharactersOnly
+        AbilityTypes: [Retaliate]
+        CharacterIDs:
+            ActorID: BruteID
+        Value: 12
