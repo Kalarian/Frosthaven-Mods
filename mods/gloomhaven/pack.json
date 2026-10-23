@@ -15,6 +15,7 @@
   "model": {
     "Brute": {
       "prefab": "Assets/Content/Characters/Heroes/HE_Brute/HE_Brute_PR.prefab",
+      "hero_prefab": "Assets/_AssetBundles/heroes/Brute.prefab",
       "animator": "HE_Brute",
       "body_mesh": "HE_Brute_Mesh",
       "target_bone": "C_spineChestHook_LOC",
@@ -52,7 +53,12 @@
           "cutout": false,
           "cutoff": 0.5,
           "emissive_boost": 1.0,
-          "two_sided": false
+          "two_sided": false,
+          "mask_mode": "flat",
+          "metallic": 0.0,
+          "smoothness": 0.3,
+          "ao": 1.0,
+          "brightness": 1.0
         },
         "HE_Brute_Fur_MAT": {
           "albedo": "InoxBrute_fur_d",
@@ -62,7 +68,8 @@
           "cutout": true,
           "cutoff": 0.5,
           "emissive_boost": 1.0,
-          "two_sided": false
+          "two_sided": false,
+          "mask_mode": "texture"
         },
         "HE_Brute_MAT_2Side": {
           "albedo": "InoxBrute_d",
@@ -72,7 +79,12 @@
           "cutout": false,
           "cutoff": 0.5,
           "emissive_boost": 1.0,
-          "two_sided": true
+          "two_sided": true,
+          "mask_mode": "flat",
+          "metallic": 0.0,
+          "smoothness": 0.3,
+          "ao": 1.0,
+          "brightness": 1.0
         },
         "WP_Brute_Weapons_Mat": {
           "albedo": "WP_InoxBrute_d",
@@ -82,7 +94,8 @@
           "cutout": false,
           "cutoff": 0.5,
           "emissive_boost": 1.0,
-          "two_sided": false
+          "two_sided": false,
+          "mask_mode": "texture"
         }
       },
       "animation": {

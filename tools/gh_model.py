@@ -13,8 +13,9 @@ still goes into the entry ("not_shipped") for reference.
 What the plugin does with the entry (GHModel.cs): the model's Animator object becomes the visual of a copy of the
 Drifter's hero wrapper; the Drifter's animator controller drives it with every Drifter clip swapped for the clip this
 module picked from the Gloomhaven controller ("animation.clips"), its hit/fire moments scaled to the new clip lengths
-("animation.states"); the materials are rebuilt from the textures named here ("materials"); the sword and shield are
-re-equipped on the bones named here ("weapons").
+("animation.states"); the materials are rebuilt from the textures named here ("materials", with flat mask values where
+Gloomhaven's mask would blacken the model); the sword and shield are re-equipped on the bones named here ("weapons").
+Only the two prefabs have addresses in the bundle; clips, textures and weapon objects are reached through them.
 
 Needs the Frosthaven install too (the Drifter's bundle, for her controller's states and clips): fh_mods.GAME.
 """
@@ -40,6 +41,17 @@ BASE_HERO = "Drifter"  # the Frosthaven hero whose wrapper, animator controller 
 WEAPON_TYPES = {0: "Melee", 1: "Projectile", 2: "Cosmetic"}  # Weapon.WeaponTypes, the same enum in both games
 TEXTURE_SLOTS = {"_Diffuse": "albedo", "_MRAO": "mask", "_NormalMap": "normal", "_EmissiveMap": "emissive"}
 CUTOUT_FRACTION = 0.05  # an albedo with more than this share of texels below half alpha is a cutout (fur cards)
+# Gloomhaven's mask textures (R metallic, G smoothness, B occlusion) are not always what Frosthaven's shader expects:
+# the Brute's has R = G = 0 everywhere and a B channel that is black over large areas, which Frosthaven multiplies into
+# the albedo (a near-black hero). A mask whose B is darker than this on average, or black over more than this share of
+# texels, is replaced by flat values; a sane one (the weapons') is used as it is.
+AO_MEAN_MIN, AO_DARK_MAX, SMOOTHNESS_MIN = 0.7, 0.1, 0.3
+# Per-material look tweaks, by Gloomhaven material name: "brightness" multiplies the albedo (the shader's _Value, 1 =
+# as authored). Gloomhaven's shader lit the Brute far lighter than his albedo texture; tune after an in-game look.
+MATERIAL_TWEAKS = {
+    "HE_Brute_MAT": {"brightness": 1.0},
+    "HE_Brute_MAT_2Side": {"brightness": 1.0},
+}
 
 # Frosthaven's Drifter states -> the Gloomhaven states whose clip fits, tried in order; "@idle" and "@run" are the two
 # halves of Gloomhaven's Idle-Run blend. A state not listed tries its own name, then idles. Several Drifter states share
@@ -311,7 +323,7 @@ def describe(bundle_path, cls, fh_bundle_path):
 
     animation = _animation(b, fh_bundle_path)
     return {
-        "prefab": model_path, "animator": animator_go, "body_mesh": body[0],
+        "prefab": model_path, "hero_prefab": hero_path, "animator": animator_go, "body_mesh": body[0],
         "target_bone": cm["TargetBone"], "gh_height": round(cm["Height"], 3), "height": round(top, 2),
         "hit_radius": round(cm["HitRadius"], 3), "trail_points": trail_points, "projectile_anchor": anchor,
         "weapons": kept, "materials": materials, "animation": animation,
@@ -348,8 +360,28 @@ def _materials(b, pptrs, out):
         entry["cutoff"] = round(floats.get("_Cutoff", 0.5), 3)
         entry["emissive_boost"] = round(floats.get("_EmissiveMapBoost", 1.0), 3)
         entry["two_sided"] = mt["m_Name"].endswith("_2Side")
+        entry.update(_mask_mode(texs.get("_MRAO"), mt["m_Name"]))
+        entry.update(MATERIAL_TWEAKS.get(mt["m_Name"], {}))
         out[mt["m_Name"]] = entry
     return ok
+
+
+def _mask_mode(tex, material):
+    """Whether the plugin uses the mask texture or flat values (see AO_MEAN_MIN): {"mask_mode": "texture"} or
+    {"mask_mode": "flat", "metallic": r, "smoothness": g, "ao": 1}."""
+    if tex is None:
+        return {"mask_mode": "flat", "metallic": 0.0, "smoothness": SMOOTHNESS_MIN, "ao": 1.0}
+    try:
+        im = tex.read().image.convert("RGB").resize((256, 256))
+    except Exception as e:  # noqa: BLE001
+        print(f"warning: could not read the mask of {material}: {e}")
+        return {"mask_mode": "texture"}
+    means = [sum(h[i] * i for i in range(256)) / (256 * 256 * 255) for h in (im.getchannel(c).histogram() for c in "RGB")]
+    dark = sum(im.getchannel("B").histogram()[:26]) / (256 * 256)
+    if means[2] >= AO_MEAN_MIN and dark <= AO_DARK_MAX:
+        return {"mask_mode": "texture"}
+    print(f"note: {material}: mask occlusion averages {means[2]:.2f} with {dark:.0%} black texels; using flat values instead")
+    return {"mask_mode": "flat", "metallic": round(means[0], 3), "smoothness": round(max(means[1], SMOOTHNESS_MIN), 3), "ao": 1.0}
 
 
 def _is_cutout(tex):

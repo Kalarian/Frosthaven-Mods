@@ -89,28 +89,49 @@ namespace FrosthavenMods
         {
             var m = new Material(template) { name = gh.name + " (Frosthaven)", hideFlags = HideFlags.DontUnloadUnusedAsset };
             Texture albedo = Pick(spec?.Albedo, gh, "_Diffuse", texture);
-            Texture mask = Pick(spec?.Mask, gh, "_MRAO", texture);
+            Texture mask = spec != null && spec.FlatMask ? Flat(spec.Metallic, spec.Smoothness, spec.Ao) : Linear(Pick(spec?.Mask, gh, "_MRAO", texture));
             Texture normal = Pick(spec?.Normal, gh, "_NormalMap", texture);
-            Texture emissive = spec != null ? (spec.Emissive != null ? texture(spec.Emissive) : null) : Pick(null, gh, "_EmissiveMap", texture);
+            Texture emissive = spec != null ? (spec.Emissive != null ? Pick(spec.Emissive, gh, "_EmissiveMap", texture) : null) : Pick(null, gh, "_EmissiveMap", texture);
             m.SetTexture("_Albedo", albedo);
-            m.SetTexture("_MetallicSmoothnessAO", Linear(mask));
+            m.SetTexture("_MetallicSmoothnessAO", mask);
             m.SetTexture("_NormalMap", normal);
             m.SetTexture("_EmissiveMap", emissive);
             if (m.HasProperty("_EmissiveBoost")) m.SetFloat("_EmissiveBoost", spec?.EmissiveBoost ?? 1f);
+            if (spec != null && spec.Brightness != 1f && m.HasProperty("_Value")) m.SetFloat("_Value", m.GetFloat("_Value") * spec.Brightness);
             if (m.HasProperty("_AlphaClipThreshold")) m.SetFloat("_AlphaClipThreshold", spec?.Cutoff ?? 0.5f);
             if (m.HasProperty("_CULL_MODE")) m.SetFloat("_CULL_MODE", (float)CullMode.Off);
             if (albedo == null) Plugin.Log.LogWarning($"Gloomhaven model: {gh.name} has no albedo texture; it renders white");
             return m;
         }
 
+        /// <summary>The Gloomhaven texture for a slot: what the old material still holds (its property sheet outlives
+        /// the lost shader), else the texture of the pack's name among the loaded objects.</summary>
         private static Texture Pick(string name, Material gh, string ghSlot, Func<string, Texture2D> texture)
         {
-            Texture t = name != null ? texture(name) : null;
-            if (t == null && gh != null)
+            Texture t = null;
+            if (gh != null)
             {
-                try { t = gh.GetTexture(ghSlot); }   // the property sheet usually outlives the lost shader
+                try { t = gh.GetTexture(ghSlot); }
                 catch (Exception) { t = null; }
             }
+            if (t == null && name != null) t = texture(name);
+            return t;
+        }
+
+        private static readonly Dictionary<(float, float, float), Texture2D> Flats = new Dictionary<(float, float, float), Texture2D>();
+
+        /// <summary>A flat metallic / smoothness / occlusion texture (linear, as the shader reads that slot).</summary>
+        internal static Texture2D Flat(float metallic, float smoothness, float ao)
+        {
+            var key = (metallic, smoothness, ao);
+            if (Flats.TryGetValue(key, out Texture2D done) && done != null) return done;
+            var t = new Texture2D(4, 4, TextureFormat.RGBA32, false, true) { name = $"flat mask {metallic:0.00}/{smoothness:0.00}/{ao:0.00}", hideFlags = HideFlags.DontUnloadUnusedAsset, wrapMode = TextureWrapMode.Repeat };
+            var c = new Color(metallic, smoothness, ao, 1f);
+            var px = new Color[16];
+            for (int i = 0; i < px.Length; i++) px[i] = c;
+            t.SetPixels(px);
+            t.Apply(false, true);
+            Flats[key] = t;
             return t;
         }
 
@@ -118,7 +139,7 @@ namespace FrosthavenMods
         /// mask Gloomhaven read raw in its gamma project is read raw here too. One copy per texture.</summary>
         internal static Texture Linear(Texture src)
         {
-            if (!(src is Texture2D t)) return src;
+            if (src == null || !(src is Texture2D t)) return src;
             if (LinearCopies.TryGetValue(src, out Texture done) && done != null) return done;
             try
             {

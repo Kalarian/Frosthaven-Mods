@@ -47,7 +47,14 @@ namespace FrosthavenMods
 
         internal sealed class WeaponSpec { public string List, Bone, Root; public Weapon.WeaponTypes Type; }
 
-        internal sealed class MaterialSpec { public string Albedo, Mask, Normal, Emissive; public bool Cutout; public float Cutoff = 0.5f, EmissiveBoost = 1f; }
+        /// <summary>One Gloomhaven material: its texture names, and whether its mask texture (metallic / smoothness /
+        /// occlusion) is used or replaced by flat values (tools/gh_model.py decides: the Brute's mask would blacken him).</summary>
+        internal sealed class MaterialSpec
+        {
+            public string Albedo, Mask, Normal, Emissive;
+            public bool Cutout, FlatMask;
+            public float Cutoff = 0.5f, EmissiveBoost = 1f, Metallic, Smoothness = 0.3f, Ao = 1f, Brightness = 1f;
+        }
 
         /// <summary>How one of the Drifter's animator states is retimed for the clip that replaces hers: the behaviours'
         /// moments (impact, progress, projectile release) scaled by the clip-length ratio, or Gloomhaven's own value for
@@ -67,7 +74,7 @@ namespace FrosthavenMods
         internal sealed class Entry
         {
             public ECharacter Model;
-            public string Folder, Bundle, BundleName, Prefab, AnimatorObject, BodyMesh, TargetBone, ProjectileAnchor;
+            public string Folder, Bundle, BundleName, Prefab, HeroPrefab, AnimatorObject, BodyMesh, TargetBone, ProjectileAnchor;
             public float Height = 2f, HitRadius = 0.1f;
             public string[] TrailPoints = new string[0];
             public List<WeaponSpec> Weapons = new List<WeaponSpec>();
@@ -79,7 +86,7 @@ namespace FrosthavenMods
                 var e = new Entry
                 {
                     Model = model, Folder = folder,
-                    Bundle = (string)j["bundle"], BundleName = (string)j["bundle_name"], Prefab = (string)j["prefab"],
+                    Bundle = (string)j["bundle"], BundleName = (string)j["bundle_name"], Prefab = (string)j["prefab"], HeroPrefab = (string)j["hero_prefab"],
                     AnimatorObject = (string)j["animator"], BodyMesh = (string)j["body_mesh"],
                     TargetBone = (string)j["target_bone"], ProjectileAnchor = (string)j["projectile_anchor"],
                     Height = (float?)j["height"] ?? 2f, HitRadius = (float?)j["hit_radius"] ?? 0.1f,
@@ -100,6 +107,9 @@ namespace FrosthavenMods
                     {
                         Albedo = (string)v["albedo"], Mask = (string)v["mask"], Normal = (string)v["normal"], Emissive = (string)v["emissive"],
                         Cutout = (bool?)v["cutout"] ?? false, Cutoff = (float?)v["cutoff"] ?? 0.5f, EmissiveBoost = (float?)v["emissive_boost"] ?? 1f,
+                        FlatMask = (string)v["mask_mode"] == "flat",
+                        Metallic = (float?)v["metallic"] ?? 0f, Smoothness = (float?)v["smoothness"] ?? 0.3f, Ao = (float?)v["ao"] ?? 1f,
+                        Brightness = (float?)v["brightness"] ?? 1f,
                     };
                 }
                 if (j["animation"] is JObject a)
@@ -247,6 +257,7 @@ namespace FrosthavenMods
 
             // 3. Frosthaven's helpers, on the Animator's object where its code looks for them
             Animator animator = visual.GetComponent<Animator>();
+            bundle.AddClips(animator.runtimeAnimatorController);            // the Gloomhaven controller's clips: the ones the pack's table names
             var vfx = visual.AddComponent<VFXLookup>();                     // RequireComponent adds the AnimFXTrigger with it
             vfx.CharacterRenderers = skins.Cast<Renderer>().ToList();
             vfx.CharacterBodyMesh = body;
@@ -281,6 +292,7 @@ namespace FrosthavenMods
             var built = new Built { Entry = e, Bundle = bundle, Visual = visual };
             built.Override = MakeOverride(built, drifterVisual.GetComponent<Animator>()?.runtimeAnimatorController);
             animator.runtimeAnimatorController = built.Override;
+            Plugin.Log.LogInfo($"Gloomhaven model: {e.Model} animator lists {string.Join(", ", built.Override.animationClips.Where(c => c != null).Select(c => c.name).Distinct().Take(6))}...");
             animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;        // Frosthaven's heroes; the game samples clips on the object
             animator.applyRootMotion = false;                                // the scenario forces this off itself; the class screen does not
 
@@ -442,34 +454,45 @@ namespace FrosthavenMods
 
         // ------------------------------------------------------------------ the bundle
 
-        /// <summary>One opened Gloomhaven bundle and its assets by name (clips, textures, root objects).</summary>
+        /// <summary>One opened Gloomhaven bundle and its assets by name. Only the two prefabs have addresses in an
+        /// Addressables bundle (LoadAllAssets returns just those), so clips, textures and the weapon objects are reached
+        /// through what loading the prefabs brought into memory: the controller's clip list, the materials' textures,
+        /// and the hero prefab's weapon roots (found among all loaded objects by name).</summary>
         internal sealed class Loaded
         {
             public AssetBundle Bundle;
+            public string HeroPrefab;
             public readonly Dictionary<string, AnimationClip> Clips = new Dictionary<string, AnimationClip>(StringComparer.Ordinal);
-            private Dictionary<string, Texture2D> _textures;
             private Dictionary<string, GameObject> _roots;
 
-            public AnimationClip Clip(string name) => name != null && Clips.TryGetValue(name, out AnimationClip c) ? c : null;
-
-            public Texture2D Texture(string name)
+            public void AddClips(RuntimeAnimatorController controller)
             {
-                if (_textures == null)
-                {
-                    _textures = new Dictionary<string, Texture2D>(StringComparer.Ordinal);
-                    foreach (Texture2D t in Bundle.LoadAllAssets<Texture2D>()) if (t != null && !_textures.ContainsKey(t.name)) _textures[t.name] = t;
-                }
-                return name != null && _textures.TryGetValue(name, out Texture2D tex) ? tex : null;
+                if (controller == null) return;
+                foreach (AnimationClip c in controller.animationClips) if (c != null && !Clips.ContainsKey(c.name)) Clips[c.name] = c;
             }
 
-            /// <summary>A root object of the bundle by name (the weapons have no address of their own).</summary>
+            public AnimationClip Clip(string name)
+            {
+                if (name == null) return null;
+                if (Clips.TryGetValue(name, out AnimationClip c)) return c;
+                c = Resources.FindObjectsOfTypeAll<AnimationClip>().FirstOrDefault(x => x != null && x.name == name);
+                if (c != null) Clips[name] = c;
+                return c;
+            }
+
+            /// <summary>A texture loaded with the prefab, by name (an asset, not a scene object).</summary>
+            public Texture2D Texture(string name) =>
+                name == null ? null : Resources.FindObjectsOfTypeAll<Texture2D>().FirstOrDefault(t => t != null && t.name == name);
+
+            /// <summary>A root object of the bundle by name: loading the hero prefab brings its weapons along.</summary>
             public GameObject Root(string name)
             {
                 if (_roots == null)
                 {
                     _roots = new Dictionary<string, GameObject>(StringComparer.Ordinal);
-                    foreach (GameObject g in Bundle.LoadAllAssets<GameObject>())
-                        if (g != null && g.transform.parent == null && !_roots.ContainsKey(g.name)) _roots[g.name] = g;
+                    if (!string.IsNullOrEmpty(HeroPrefab)) Bundle.LoadAsset<GameObject>(HeroPrefab);
+                    foreach (GameObject g in Resources.FindObjectsOfTypeAll<GameObject>())
+                        if (g != null && g.transform.parent == null && !g.scene.IsValid() && !_roots.ContainsKey(g.name)) _roots[g.name] = g;
                 }
                 return name != null && _roots.TryGetValue(name, out GameObject go) ? go : null;
             }
@@ -485,10 +508,9 @@ namespace FrosthavenMods
             AssetBundle bundle = AssetBundle.LoadFromFile(path)
                                  ?? AssetBundle.GetAllLoadedAssetBundles().FirstOrDefault(b => b != null && b.name == e.BundleName);   // opened before (a second open fails)
             if (bundle == null) throw new InvalidOperationException("could not open " + path);
-            loaded = new Loaded { Bundle = bundle };
-            foreach (AnimationClip c in bundle.LoadAllAssets<AnimationClip>()) if (c != null && !loaded.Clips.ContainsKey(c.name)) loaded.Clips[c.name] = c;
+            loaded = new Loaded { Bundle = bundle, HeroPrefab = e.HeroPrefab };
             Bundles[path] = loaded;
-            Plugin.Log.LogInfo($"Gloomhaven model: opened {e.Bundle} ({loaded.Clips.Count} animation clips)");
+            Plugin.Log.LogInfo($"Gloomhaven model: opened {e.Bundle}");
             return loaded;
         }
 
