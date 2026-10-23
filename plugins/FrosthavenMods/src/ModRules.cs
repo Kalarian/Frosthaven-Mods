@@ -183,8 +183,8 @@ namespace FrosthavenMods
             {
                 Flag = MilestoneSaves,
                 Name = "Milestone saves (mod)",
-                Description = "The host's game makes a named save at the start of each scenario and of each outpost phase " +
-                              "(\"Mod backup - week 23 - scenario 14 start\", \"Mod backup - week 24 - outpost\"). They are " +
+                Description = "The host's game makes a named save at the start of each scenario and when the outpost opens " +
+                              "after one (\"Mod backup - week 23 - scenario 14 start\", \"Mod backup - week 23 - after scenario 14\"). They are " +
                               "in the usual Load list. The newest " + FrosthavenMods.MilestoneSaves.Keep + " are kept; your own " +
                               "named saves and the game's autosaves are never touched.\n\n" +
                               "The game keeps only its last 15 autosaves (about the last hour or two of play). To go back " +
