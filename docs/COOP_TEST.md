@@ -198,6 +198,23 @@ A duplicate drop is rare, so the dev tools can fake one (solo only, test campaig
 3. Click **Campaign**: Scenarios played goes up by one for every scenario finished with the mod. Click
    **This scenario** to switch back.
 
+## Solo: battle records for the companion's Stats tab (host, test campaign)
+
+With **Battle stats** on. Files are in the game folder under `FrosthavenMods\stats\`; `BepInEx\LogOutput.log` has a
+"Battle stats:" line for each step.
+
+1. Start a scenario and play two or three rounds. `live-<campaign>.json` appears and changes after each round (the game
+   autosaves at each round).
+2. Restart the scenario from the menu. The live file starts over (round 1); nothing appears in `runs\<campaign>\`.
+3. Play a round, then load the autosave from the start of that round (as after a crash). The live file goes back to
+   that round.
+4. Win the scenario (play it out, or Ctrl+F10) and continue to the outpost. One new file appears in `runs\<campaign>\`
+   ("Win recorded"), and the live file is gone.
+5. Lose a scenario (or resign), then press **Retry** on the results screen: a "Lose recorded (a lost scenario was
+   retried)" file appears, and the retried attempt starts a new live file.
+6. Win again, but quit the game on the results screen before continuing: no new file (the game didn't record that
+   win either). Load the autosave, finish it, continue: one file.
+
 ## Solo: more story events (host, before the session)
 
 Use the test campaign: drawing an event takes it out of the deck, as a real draw does.

@@ -165,7 +165,9 @@ namespace FrosthavenMods
                 Name = "Battle stats (mod)",
                 Description = "After each scenario, the Statistics tab gets about 40 more rows (offense, defense, support, " +
                               "luck, cards and elements, exploration), with summons counted for their owner, and a " +
-                              "Campaign button with each character's totals over every scenario played with this on.\n\n" +
+                              "Campaign button with each character's totals over every scenario played with this on.\n" +
+                              "Each finished scenario's full battle record is also saved for the companion app's Stats " +
+                              "tab (wins, losses and resigns; never restarts or unfinished runs).\n\n" +
                               "Display only: it changes nothing in play.",
             },
             new Rule

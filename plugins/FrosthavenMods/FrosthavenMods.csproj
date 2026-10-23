@@ -36,6 +36,7 @@
     <Reference Include="MapRuleLibrary"><HintPath>$(GameManaged)\MapRuleLibrary.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="SharedLibrary"><HintPath>$(GameManaged)\SharedLibrary.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="ScenarioRuleLibrary"><HintPath>$(GameManaged)\ScenarioRuleLibrary.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Newtonsoft.Json"><HintPath>$(GameManaged)\Newtonsoft.Json.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="Unity.InputSystem"><HintPath>$(GameManaged)\Unity.InputSystem.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine"><HintPath>$(GameManaged)\UnityEngine.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine.UI"><HintPath>$(GameManaged)\UnityEngine.UI.dll</HintPath><Private>false</Private></Reference>
