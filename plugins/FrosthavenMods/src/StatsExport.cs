@@ -36,7 +36,7 @@ namespace FrosthavenMods
     [HarmonyPatch]
     internal static class StatsExport
     {
-        private const int Format = 1;
+        private const int Format = 2;   // 2: public fields too (melee, shields, poison, avoided damage...); 1 had properties only
         private static bool On => ModRules.IsOn(ModRules.BattleStats);
 
         private static JObject _staged;
@@ -248,20 +248,27 @@ namespace FrosthavenMods
             return o;
         }
 
+        /// <summary>An event's plain values: its public properties and public fields (some records keep values such as
+        /// IsMelee, Shielded and PoisonDamage as fields).</summary>
         private static JObject Flatten(object item, int depth)
         {
             var j = new JObject();
-            foreach (PropertyInfo p in item.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            Type type = item.GetType();
+            var members = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.GetIndexParameters().Length == 0)
+                .Select(p => (p.Name, (Func<object>)(() => p.GetValue(item))))
+                .Concat(type.GetFields(BindingFlags.Public | BindingFlags.Instance)
+                    .Select(f => (f.Name, (Func<object>)(() => f.GetValue(item)))));
+            foreach ((string name, Func<object> get) in members)
             {
-                if (p.GetIndexParameters().Length > 0) continue;
                 object v;
-                try { v = p.GetValue(item); } catch { continue; }
+                try { v = get(); } catch { continue; }
                 JToken t = Value(v, depth);
                 if (t == null) continue;
                 // the shared base data (round, event order) and action data (actors, card, ability) are lifted to the top
-                if (t is JObject inner && (p.Name == "BaseData" || p.Name == "ActionData"))
+                if (t is JObject inner && (name == "BaseData" || name == "ActionData"))
                     foreach (JProperty ip in inner.Properties()) j[ip.Name] = ip.Value;
-                else j[p.Name] = t;
+                else j[name] = t;
             }
             return j;
         }
