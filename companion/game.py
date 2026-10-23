@@ -1,10 +1,12 @@
 """The game install and the mod pack's state: where Frosthaven is, whether it's running, which pack version is
 installed, which one GitHub has, and the campaigns the Scenario map file rule has written. Mirrors the installer's
 own lookups (installer\\Program.cs: FindGameFolder, SteamLibraries, Updater.Check) so both agree on the answers."""
+import glob
 import json
 import os
 import re
 import string
+import struct
 import subprocess
 import threading
 import time
@@ -157,3 +159,61 @@ def campaigns(gdir=None):
             path = os.path.join(folder, name)
             out.append({"name": name[len("progress-"):-len(".txt")], "path": path, "mtime": os.path.getmtime(path)})
     return sorted(out, key=lambda c: -c["mtime"])
+
+
+# ---- campaigns (each one is a folder of saves; every tab shows one campaign at a time)
+
+SAVE_ROOT = os.path.join(os.environ.get("USERPROFILE", ""), "AppData", "LocalLow", "Snapshot Games Inc", "Frosthaven")
+NAME_AT, NAME_LEN, RULES_AT = 20, 128, 720     # in a save's header (after "SSGK"): the party name, the house rules number
+
+# The mod pack's house rules, by their bit in the campaign's rules number (plugins/FrosthavenMods/src/ModRules.cs).
+MOD_RULES = {
+    16: "Masteries carry over", 17: "Show personal quest rewards", 18: "More story events", 19: "Scenario map file",
+    20: "Modifier deck odds", 21: "Easier item reward window", 22: "Battle stats", 23: "Milestone saves",
+    24: "Tradeable resources and equipment", 26: "Share duplicate loot", 28: "Reveal event outcomes",
+    29: "Dwarf's balance changes", 30: "Game bug fixes",
+}
+
+
+def _header(path):
+    """(party name, rules number) from a save file's header, or (None, None)."""
+    try:
+        with open(path, "rb") as f:
+            d = f.read(RULES_AT + 4)
+        if d[:4] != b"SSGK" or len(d) < RULES_AT + 4:
+            return None, None
+        name = d[NAME_AT:NAME_AT + NAME_LEN].split(b"\0", 1)[0].decode("utf-8", "replace").strip()
+        return name or None, struct.unpack_from("<I", d, RULES_AT)[0]
+    except OSError:
+        return None, None
+
+
+def _key(name):
+    return re.sub(r"[\s_]+", " ", (name or "").strip()).lower()
+
+
+def all_campaigns(gdir=None):
+    """Every campaign: the game's save folders (newest save gives the name and the house rules), plus any campaign the
+    mod has written progress or battle records for. [{'name', 'lastPlayed', 'rules', 'hasMap', 'records'}], most
+    recently played first."""
+    found = {}
+    for folder in glob.glob(os.path.join(SAVE_ROOT, "*", "*", "Campaign", "*")):
+        saves = sorted(glob.glob(os.path.join(folder, "*.dat")), key=os.path.getmtime, reverse=True)
+        if not saves:
+            continue
+        name, rules = _header(saves[0])
+        name = name or os.path.basename(folder).replace("_", " ")
+        found[_key(name)] = {"name": name, "lastPlayed": os.path.getmtime(saves[0]),
+                             "rules": [MOD_RULES[b] for b in sorted(MOD_RULES) if rules is not None and rules >> b & 1]
+                             if rules is not None else None, "hasMap": False, "records": 0}
+    for c in campaigns(gdir):
+        e = found.setdefault(_key(c["name"]), {"name": c["name"], "lastPlayed": c["mtime"], "rules": None, "records": 0})
+        e["hasMap"], e["mapSaved"] = True, c["mtime"]
+    d = mods_dir(gdir)
+    for folder in glob.glob(os.path.join(d, "stats", "runs", "*")) if d else []:
+        name = os.path.basename(folder)
+        e = found.setdefault(_key(name), {"name": name, "lastPlayed": os.path.getmtime(folder), "rules": None,
+                                          "hasMap": False, "records": 0})
+        e["records"] = len(glob.glob(os.path.join(folder, "*.json")))
+    return sorted(found.values(), key=lambda c: -c["lastPlayed"])
+

@@ -51,7 +51,7 @@ def find(campaign):
     """The campaign's progress file entry, by name (default: the most recently saved one), or None."""
     found = game.campaigns()
     if campaign:
-        return next((c for c in found if c["name"] == campaign), None)
+        return next((c for c in found if game._key(c["name"]) == game._key(campaign)), None)
     return found[0] if found else None
 
 

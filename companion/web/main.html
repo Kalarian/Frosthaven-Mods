@@ -16,6 +16,11 @@ html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
 body { display: flex; flex-direction: column; }
 header { display: flex; align-items: center; gap: 20px; padding: 0 16px; height: 52px; background: #0d1014; border-bottom: 1px solid var(--line); flex: none; }
 header h1 { font: 600 17px Cambria, Georgia, serif; color: var(--gold); margin: 0; letter-spacing: .3px; white-space: nowrap; }
+.camp { display: flex; align-items: center; gap: 8px; color: var(--dim); font-size: 13px; white-space: nowrap; padding: 0 4px 0 18px; border-left: 1px solid var(--line); height: 28px; }
+.camp select { background: var(--panel2); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; font: inherit; font-size: 14px; max-width: 220px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.chip { font-size: 12px; padding: 3px 9px; border-radius: 999px; background: var(--panel2); border: 1px solid var(--line); color: var(--dim); }
+.chip.on { background: #2a2617; border-color: #5a4c25; color: var(--gold); }
 nav { display: flex; gap: 4px; height: 100%; overflow-x: auto; }
 nav button { background: none; border: 0; border-bottom: 2px solid transparent; color: var(--dim); font: inherit; padding: 0 14px; cursor: pointer; white-space: nowrap; }
 nav button:hover { color: var(--text); }
@@ -73,6 +78,7 @@ a { color: var(--link); cursor: pointer; }
 <body>
 <header>
   <h1>Frosthaven Companion</h1>
+  <label class="camp" id="campbox" hidden>Campaign <select id="campaign" title="Every tab shows this campaign"></select></label>
   <nav id="nav">
     <button data-v="mods">Mods<span class="dot" id="moddot" hidden></span></button>
     <button data-v="map">Scenario map</button>
@@ -89,7 +95,6 @@ a { color: var(--link); cursor: pointer; }
   </div></section>
   <section class="view" id="map">
     <div class="bar" id="mapbar">
-      <span id="campwrap" hidden>Campaign <select id="campaign"></select></span>
       <button class="btn small" id="maprefresh" title="Rebuild the map from the campaign's latest progress file">Refresh</button>
       <span id="mapsaved"></span>
     </div>
@@ -101,7 +106,7 @@ a { color: var(--link); cursor: pointer; }
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
 const FRAMES = {map: "#mapframe", play: "#playframe"};
-const SRC = {map: () => "/map?campaign=" + encodeURIComponent($("#campaign").value || ""), play: () => "/guide/play"};
+const SRC = {map: () => "/map?campaign=" + encodeURIComponent(campaign || ""), play: () => "/guide/play"};
 let S = null, view = "mods", busyAction = null, flash = null;
 
 function show(v) {
@@ -164,6 +169,7 @@ function renderMods() {
     </dl>
     <p class="note">Updating keeps your saves and campaign settings. The house rules are switched on in the game (Options, Custom Rules), by the host.</p>
   </div>
+  ${campaignCard(s)}
   ${lat.notes ? `<div class="card"><h3>What's in v${esc(lat.version)}</h3><div class="notes">${esc(lat.notes)}</div>
     <p class="note"><a data-open="${esc(lat.url)}">Release page on GitHub</a></p></div>` : ""}`;
   $("#install").onclick = () => act("install");
@@ -180,20 +186,49 @@ async function act(action) {
   await refresh();
 }
 
-function renderMap() {
-  const cs = (S && S.campaigns) || [], sel = $("#campaign"), cur = sel.value;
-  $("#campwrap").hidden = cs.length < 2;
-  const c = cs.find(c => c.name === (sel.value || (cs[0] && cs[0].name)));
-  $("#mapsaved").textContent = c ? `Progress saved ${new Date(c.mtime * 1000).toLocaleString([], {weekday: "short", hour: "numeric", minute: "2-digit"})}. Updates by itself when the game autosaves.`
-    : "No campaign progress yet: the host turns on Scenario map file (Options, Custom Rules), then plays until the game autosaves.";
-  const names = cs.map(c => c.name).join("\n");
+// ---- the campaign every tab shows (remembered between runs; the most recently played one at first)
+let campaign = null;
+try { campaign = localStorage.getItem("companion-campaign"); } catch (e) {}
+const camp = () => ((S && S.campaigns) || []).find(c => c.name === campaign) || null;
+const when = t => new Date(t * 1000).toLocaleString([], {weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit"});
+
+function renderCampaigns() {
+  const cs = (S && S.campaigns) || [], sel = $("#campaign");
+  if (!cs.some(c => c.name === campaign)) campaign = cs.length ? cs[0].name : null;
+  $("#campbox").hidden = !cs.length;
+  const names = cs.map(c => c.name).join("|");
   if (sel.dataset.names !== names) {
     sel.dataset.names = names;
     sel.innerHTML = cs.map(c => `<option>${esc(c.name)}</option>`).join("");
-    if (cs.some(c => c.name === cur)) sel.value = cur;
   }
+  if (campaign) sel.value = campaign;
 }
-$("#campaign").onchange = () => { $("#mapframe").src = SRC.map(); renderMap(); };
+$("#campaign").onchange = () => {
+  campaign = $("#campaign").value;
+  try { localStorage.setItem("companion-campaign", campaign); } catch (e) {}
+  for (const v of Object.keys(FRAMES)) if (v !== "play" && $(FRAMES[v]).src) $(FRAMES[v]).src = SRC[v]();   // campaign pages reload
+  render();
+};
+
+function campaignCard(s) {
+  const c = camp();
+  if (!c) return "";
+  const on = new Set(c.rules || []);
+  const all = ["Battle stats", "Dwarf's balance changes", "Easier item reward window", "Game bug fixes", "Masteries carry over",
+    "Milestone saves", "Modifier deck odds", "More story events", "Reveal event outcomes", "Scenario map file",
+    "Share duplicate loot", "Show personal quest rewards", "Tradeable resources and equipment"];
+  return `<div class="card"><h3>Campaign: ${esc(c.name)}</h3>
+    <p class="note" style="margin-top:0">Last played ${esc(when(c.lastPlayed))}.${c.rules ? ` ${on.size} of ${all.length} mod rules on (the host changes them in the game: Options, Custom Rules).` : ""}</p>
+    ${c.rules ? `<div class="chips">${all.map(r => `<span class="chip${on.has(r) ? " on" : ""}" title="${on.has(r) ? "On" : "Off"} in this campaign">${esc(r)}</span>`).join("")}</div>` : ""}
+  </div>`;
+}
+
+function renderMap() {
+  const c = camp(), saved = c && S.campaigns && c.hasMap;
+  $("#mapsaved").textContent = saved
+    ? `Progress saved ${when(c.mapSaved)}. Updates by itself when the game autosaves.`
+    : "No progress for this campaign yet: the host turns on Scenario map file (Options, Custom Rules), then plays until the game autosaves.";
+}
 $("#maprefresh").onclick = () => {
   const f = $("#mapframe");
   try {
@@ -210,6 +245,7 @@ function render() {
   $("#ver").textContent = `v${S.app.version}`;
   $("#moddot").hidden = !(S.state === "update" || S.state === "not-installed");
   $("#playtab").hidden = !S.playGuide;
+  renderCampaigns();
   renderMods();
   renderMap();
 }

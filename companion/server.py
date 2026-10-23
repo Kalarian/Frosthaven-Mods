@@ -40,7 +40,7 @@ def status():
         "latest": latest,
         "state": state,
         "job": mods.job(),
-        "campaigns": [{"name": c["name"], "mtime": c["mtime"]} for c in game.campaigns()],
+        "campaigns": game.all_campaigns(),
         "playGuide": os.path.exists(paths.PLAY_GUIDE),
     }
 
