@@ -12,10 +12,8 @@ namespace FrosthavenDevTools
     /// Testing shortcuts for the author's own machine. NOT part of the mod pack (lives in devtools/, never packed).
     /// Solo games only. They call the game's own debug console commands, which ship in the retail build but have no
     /// console to type them into:
-    ///   Ctrl+F4   unlock every Gloomhaven class tools/gh_port.py added to the ruleset (the Brute...) in the loaded
-    ///             campaign, outpost only. THROWAWAY CAMPAIGNS ONLY: once a save has a class the game doesn't know,
-    ///             Frosthaven without that data can't load it (and its error button moves the save to the corrupted
-    ///             saves folder).
+    ///   (Ctrl+F4 used to unlock the Gloomhaven classes; the mod's "Gloomhaven classes (content pack)" house rule does
+    ///   that now, with its guards.)
     ///   Ctrl+F5   write every event's Reveal event outcomes preview to <game>\FrosthavenMods\event-previews.txt
     ///   Ctrl+F6   draw the next town event of the current season (to test the mod's Reveal event outcomes)
     ///   Ctrl+F8   the next won scenario (Ctrl+F10) also completes every party member's uncompleted masteries: they're
@@ -77,7 +75,6 @@ namespace FrosthavenDevTools
             }
             Keyboard kb = Keyboard.current;
             if (kb == null || !kb.ctrlKey.isPressed) return;
-            if (kb.f4Key.wasPressedThisFrame) Run("unlock the Gloomhaven classes", UnlockGHClasses);
             if (kb.f5Key.wasPressedThisFrame) Run("write all event previews", DumpEventPreviews);
             if (kb.f6Key.wasPressedThisFrame) Run("draw a town event", DrawEvent);
             if (kb.f8Key.wasPressedThisFrame) Run("the next win completes every mastery", () => DevCommands.ForceMasteries = true);
@@ -97,32 +94,6 @@ namespace FrosthavenDevTools
             if (map == null || map.GameState == null) throw new InvalidOperationException("only works in the outpost, not inside a scenario");
             map.ExecuteCommand(DevCommands.Path, 100, 10);
             map.View.RefreshView();
-        }
-
-        /// <summary>Ctrl+F4: the game's own unlock_class console command, for each Gloomhaven / Jaws of the Lion class the
-        /// ruleset has (only ported ones are there). A local state edit like the console's: solo only.</summary>
-        private static void UnlockGHClasses()
-        {
-            var map = Singleton<FHMapChoreographer>.InstanceFast;
-            if (map == null || map.GameState == null) throw new InvalidOperationException("only works in the outpost, not inside a scenario");
-            var unlocked = new System.Collections.Generic.List<string>();
-            foreach (FHRL.CharacterClassDef def in map.DefRepo.CharacterClasses.Values)
-            {
-                string model = def.ID.ID.EndsWith("ID") ? def.ID.ID.Substring(0, def.ID.ID.Length - 2) : def.ID.ID;
-                if (!Enum.TryParse(model, out ScenarioRuleLibrary.ECharacter e) || e == ScenarioRuleLibrary.ECharacter.None ||
-                    e >= ScenarioRuleLibrary.ECharacter.Infuser) continue;
-                if (System.Linq.Enumerable.Any(map.GameState.UnlockedClassIDs, id => id == def.ID)) continue;
-                map.GameState.UnlockedClassIDs.Add(def.ID);
-                unlocked.Add(def.ID.ID);
-            }
-            string msg = unlocked.Count > 0
-                ? "Unlocked " + string.Join(", ", unlocked) + ". Create the character from the party screen as usual. " +
-                  "This campaign now needs the Gloomhaven class data to load: use it for testing only."
-                : "No Gloomhaven classes to unlock: none are in the ruleset (run tools/gh_port.py and fh_mods.py install --gh), " +
-                  "or they're already unlocked.";
-            map.View.PushState(new FHGUI.States.GenericModalViewState(msg, "Dev tools: Gloomhaven classes", null, canCancel: false));
-            map.View.RefreshView();
-            _log.LogInfo("Dev tools: " + msg);
         }
 
         private static readonly MethodInfo PushActiveEvent = AccessTools.Method(typeof(FHGUI.FHMapView), "TryPushActiveEvent");

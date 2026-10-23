@@ -15,7 +15,8 @@ Building and testing:
     python tools/fh_mods.py install [--mod NAME ...]               build + install into the game, vanilla backed up
     python tools/fh_mods.py restore                                put the vanilla Base.ruleset back
     python tools/fh_mods.py status
-    build/install --gh   also add the Gloomhaven classes tools/gh_port.py converted on this PC (never packed)
+    build/install --packs   also add the content packs built on this PC (FrosthavenMods\\packs\\*, e.g. the Gloomhaven
+                            classes from tools/gh_port.py; never packed into a release)
 """
 
 import argparse
@@ -37,6 +38,7 @@ VANILLA_EXTRACT = ROOT / "extracted" / "Base"
 GAME = Path(r"C:\Program Files (x86)\Steam\steamapps\common\Frosthaven")
 # Shared with the installer exe: vanilla backup + state live in the game folder, so both tools always agree.
 BACKUP = GAME / "FrosthavenMods"
+PACKS = BACKUP / "packs"  # content packs built on this PC (tools/gh_port.py), each with a pack.json
 STATE = BACKUP / "state.json"
 GAME_RULESET = GAME / "Frosthaven_Data" / "StreamingAssets" / "Rulebase" / "Base.ruleset"
 APP_MANIFEST = GAME.parent.parent / "appmanifest_2347080.acf"
@@ -152,13 +154,20 @@ def sorted_files(folder, suffix=""):
     return sorted(files, key=lambda p: p.relative_to(folder).as_posix().lower())
 
 
-def gh_mod():
-    """The Gloomhaven classes tools/gh_port.py converted from this PC's own Gloomhaven install, as a files-only mod
-    (local to this machine, never packed: it is Gloomhaven's data)."""
-    folder = BACKUP / "ghclasses"
-    if not (folder / "ruleset").exists():
-        sys.exit("no converted Gloomhaven classes yet: run tools/gh_port.py <Class> first")
-    return folder, {"files": "ruleset"}
+def pack_mods():
+    """The content packs built on this PC (<game>\\FrosthavenMods\\packs\\<name>\\pack.json, e.g. the Gloomhaven classes
+    tools/gh_port.py converted from this PC's own Gloomhaven install), as files-only mods. Local to this machine, never
+    packed into a release: a pack is built from data the player owns."""
+    packs = []
+    for manifest in sorted(PACKS.glob("*/pack.json")):
+        meta = json.loads(manifest.read_text(encoding="utf-8"))
+        folder = manifest.parent
+        if not (folder / meta.get("files", "ruleset")).exists():
+            sys.exit(f"pack {folder.name} has no {meta.get('files', 'ruleset')} folder")
+        packs.append((folder, {"files": meta.get("files", "ruleset")}))
+    if not packs:
+        sys.exit(f"no content packs in {PACKS}: run tools/gh_port.py <Class> first")
+    return packs
 
 
 def build(vanilla_bytes, mods):
@@ -277,13 +286,13 @@ def vanilla_backup():
 
 
 def cmd_build(args):
-    data = build(vanilla_backup(), load_mods(args.mod) + ([gh_mod()] if args.gh else []))
+    data = build(vanilla_backup(), load_mods(args.mod) + (pack_mods() if args.packs else []))
     Path(args.out).write_bytes(data)
     print(f"wrote {args.out} ({len(data):,} bytes)")
 
 
 def cmd_install(args):
-    mods = load_mods(args.mod) + ([gh_mod()] if args.gh else [])
+    mods = load_mods(args.mod) + (pack_mods() if args.packs else [])
     vanilla = vanilla_backup()
     data = build(vanilla, mods)
     rs.read_ruleset(data)  # sanity re-read
@@ -332,7 +341,7 @@ def main():
         if name == "build":
             p.add_argument("out")
         p.add_argument("--mod", action="append", help="build only these mods (repeatable)")
-        p.add_argument("--gh", action="store_true", help="also add the Gloomhaven classes from tools/gh_port.py")
+        p.add_argument("--packs", action="store_true", help="also add the content packs built on this PC (FrosthavenMods\\packs)")
         p.set_defaults(fn=fn)
     sub.add_parser("restore").set_defaults(fn=cmd_restore)
     sub.add_parser("status").set_defaults(fn=cmd_status)

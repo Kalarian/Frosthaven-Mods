@@ -3,11 +3,16 @@
 // The reader is stricter than YAML: e.g. an empty list "[]" fails the whole file.
 //
 //   dotnet run --project tools/ymlcheck -c Release [-- <folder or .yml> ...]
-//   (default: <game>\FrosthavenMods\ghclasses\ruleset, the Gloomhaven classes tools/gh_port.py converted)
+//   (default: the ruleset folder of every content pack in <game>\FrosthavenMods\packs, e.g. the Gloomhaven classes
+//   tools/gh_port.py converted)
 using YamlFormats;
 
 string game = @"C:\Program Files (x86)\Steam\steamapps\common\Frosthaven";
-var targets = args.Length > 0 ? args : new[] { Path.Combine(game, "FrosthavenMods", "ghclasses", "ruleset") };
+string packs = Path.Combine(game, "FrosthavenMods", "packs");
+var targets = args.Length > 0 ? args
+    : Directory.Exists(packs) ? Directory.GetDirectories(packs).Select(p => Path.Combine(p, "ruleset")).Where(Directory.Exists).ToArray()
+    : new string[0];
+if (targets.Length == 0) { Console.WriteLine($"nothing to check: no content pack under {packs}"); return 1; }
 int ok = 0, failed = 0;
 foreach (string target in targets)
 {

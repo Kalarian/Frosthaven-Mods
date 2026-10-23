@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,6 +23,15 @@ namespace FrosthavenMods
             /// outside the scenario's lockstep, so these are locked during online scenarios (a change landing at
             /// different moments on different PCs would desync them). Display-only and outpost-only rules aren't.</summary>
             public bool AffectsScenarios;
+
+            /// <summary>Why the switch can't be moved to <c>wantOn</c> right now (it is shown greyed, with the reason), or
+            /// null. Content packs use it: the pack must be installed to turn on, and nothing in the campaign may still
+            /// use it to turn off.</summary>
+            public Func<bool, string> Blocked;
+
+            /// <summary>A named save the host's game makes just before this rule goes on (a point to go back to when the
+            /// rule commits the campaign to something, as a content pack does).</summary>
+            public string BackupBeforeOn;
         }
 
         /// <summary>The note added to a locked rule's description while it is locked.</summary>
@@ -44,9 +54,27 @@ namespace FrosthavenMods
         public const ERulesFlag StoryEvents = (ERulesFlag)(1 << 18);
         public const ERulesFlag QuestRewards = (ERulesFlag)(1 << 17);
         public const ERulesFlag KeepMasteries = (ERulesFlag)(1 << 16);
+        public const ERulesFlag GloomhavenClasses = (ERulesFlag)(1 << 15);
 
         public static readonly List<Rule> All = new List<Rule>
         {
+            new Rule
+            {
+                Flag = GloomhavenClasses,
+                Name = "Gloomhaven classes (content pack)",
+                Description = "Adds Gloomhaven's classes to this campaign (the Brute for now), each built on a player's PC " +
+                              "from their own copy of Gloomhaven. Turning this on unlocks them for new characters (in a " +
+                              "solo scenario, at the next outpost).\n\n" +
+                              "This is a content pack, not a rule: every PC in the game needs the same pack installed before " +
+                              "the game starts (see the mod guide). A player without it is refused when they try to join; " +
+                              "a player without the mod at all only sees their join window reset, so tell them. Once a " +
+                              "character of one of these classes has been created, the campaign needs the pack for good: " +
+                              "this switch locks on, and the campaign must never be opened in a game without the pack (the " +
+                              "game would move the save to its corrupted folder). The host's game makes a backup save the " +
+                              "moment this is turned on.",
+                Blocked = GHClassesRule.WhyBlocked,
+                BackupBeforeOn = "Mod backup - before Gloomhaven classes",
+            },
             new Rule
             {
                 Flag = Trading,
@@ -220,5 +248,14 @@ namespace FrosthavenMods
         }
 
         public static string Describe() => All.Count + " defined";
+
+        /// <summary>Runs exactly once per rule change on every PC, host and clients, after the campaign's rules number
+        /// changed (RuleChangePatches in GHClassesRule.cs). Features that must react to a change hook in here.</summary>
+        public static void Applied(ERulesFlag before, ERulesFlag after)
+        {
+            if (before == after) return;
+            CoopLog.Write($"RULES APPLIED here: {(int)before:X} -> {(int)after:X} ({Describe(after)}) role={CoopLog.Role()}");
+            GHClassesRule.OnRulesApplied(before, after);
+        }
     }
 }

@@ -49,16 +49,18 @@ namespace FrosthavenMods
                 foreach (ModRules.Rule rule in ModRules.All.OrderBy(x => x.Name, StringComparer.OrdinalIgnoreCase))
                 {
                     ModRules.Rule r = rule;
+                    bool isOn = (rules & r.Flag) == r.Flag;
+                    string blocked = Blocked(r, !isOn);
                     var dto = new CampaignSettingDTO
                     {
                         NameLocalized = r.Name,
-                        DescriptionLocalized = r.Description,
-                        TooltipLocalized = r.Description,
-                        Value = new CampaignSettingDTO.SettingValue((rules & r.Flag) == r.Flag, false),
-                        Interactable = interactable,
+                        DescriptionLocalized = r.Description + Note(blocked),
+                        TooltipLocalized = r.Description + Note(blocked),
+                        Value = new CampaignSettingDTO.SettingValue(isOn, false),
+                        Interactable = interactable && blocked == null,
                         OnValueChange = result =>
                         {
-                            if (result is bool on) onRuleChangeCallback?.Invoke(r.Flag, on);
+                            if (result is bool on && Blocked(r, on) == null) onRuleChangeCallback?.Invoke(r.Flag, on);
                         },
                     };
                     Ours.Add(dto, r);
@@ -104,24 +106,59 @@ namespace FrosthavenMods
             {
                 if (!Ours.TryGetValue(dto, out ModRules.Rule r)) continue;
                 bool locked = r.AffectsScenarios && onlineScenario;
-                dto.Interactable = canChange && !locked;
-                if (locked)
-                {
-                    dto.DescriptionLocalized += ModRules.LockedNote;
-                    dto.TooltipLocalized += ModRules.LockedNote;
-                }
+                string blocked = locked ? null : Blocked(r, !ModRules.IsOn(r.Flag));
+                dto.Interactable = canChange && !locked && blocked == null;
+                // AddOurRules built these texts from the rules as they were then; rebuild them for now
+                string note = locked ? ModRules.LockedNote : Note(blocked);
+                dto.DescriptionLocalized = r.Description + note;
+                dto.TooltipLocalized = r.Description + note;
                 dto.OnValueChange = result =>
                 {
                     if (!(result is bool on)) return;
                     if (r.AffectsScenarios && OnlineScenario()) return; // locked (see ModRules.Rule.AffectsScenarios)
-                    PartyAdventureData data = SaveData.Instance?.Global?.CurrentAdventureData;
-                    if (data == null) return;
-                    ERulesFlag next = on ? data.Rules | r.Flag : data.Rules & ~r.Flag;
-                    CoopLog.Write($"RULES CHANGED here: '{r.Name}' -> {(on ? "on" : "off")} (rules {(int)data.Rules:X} -> {(int)next:X}: {ModRules.Describe(next)}) role={CoopLog.Role()}");
-                    data.ChangeCampaignRules(next);
-                    CoopLog.Snapshot("after rule change");
+                    if (Blocked(r, on) != null) return;                  // greyed out (see ModRules.Rule.Blocked)
+                    Change(r, on);
                 };
             }
+        }
+
+        /// <summary>Why <paramref name="r"/> can't be switched to <paramref name="wantOn"/> now, or null (never throws).</summary>
+        private static string Blocked(ModRules.Rule r, bool wantOn)
+        {
+            try { return r.Blocked?.Invoke(wantOn); }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError($"House rules: the guard of '{r.Name}' failed: {e}");
+                return "This switch can't be checked right now.";
+            }
+        }
+
+        private static string Note(string blocked) => blocked == null ? "" : "\n\n(" + blocked + ")";
+
+        /// <summary>Flip a rule in the current campaign, after the backup save a rule may ask for when it goes on.</summary>
+        private static async void Change(ModRules.Rule r, bool on)
+        {
+            try
+            {
+                PartyAdventureData data = SaveData.Instance?.Global?.CurrentAdventureData;
+                if (data == null) return;
+                if (on && r.BackupBeforeOn != null && !data.IsIronMan)
+                {
+                    try
+                    {
+                        await SaveData.Instance.ManualSaveCurrentAdventureData(r.BackupBeforeOn);
+                        CoopLog.Write($"BACKUP SAVE '{r.BackupBeforeOn}' before '{r.Name}' goes on");
+                    }
+                    catch (Exception e) { Plugin.Log.LogWarning($"House rules: the backup save before '{r.Name}' failed: {e.Message}"); }
+                    data = SaveData.Instance?.Global?.CurrentAdventureData;
+                    if (data == null) return;
+                }
+                ERulesFlag next = on ? data.Rules | r.Flag : data.Rules & ~r.Flag;
+                CoopLog.Write($"RULES CHANGED here: '{r.Name}' -> {(on ? "on" : "off")} (rules {(int)data.Rules:X} -> {(int)next:X}: {ModRules.Describe(next)}) role={CoopLog.Role()}");
+                data.ChangeCampaignRules(next);
+                CoopLog.Snapshot("after rule change");
+            }
+            catch (Exception e) { Plugin.Log.LogError($"House rules: could not change '{r.Name}': {e}"); }
         }
 
         /// <summary>Game bug: the rules are written to the save header but ApplyHeader never reads them back, so every

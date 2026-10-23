@@ -2,13 +2,16 @@
 
 Nothing from Gloomhaven is stored in this repo or shipped: this script reads the player's Gloomhaven rule files
 (plain zip archives under <Gloomhaven>\\Rulebase) and English text (LanguageExport.csv), converts one class to
-Frosthaven's format and writes the result to <Frosthaven>\\FrosthavenMods\\ghclasses\\ on the same PC:
+Frosthaven's format and writes the result as the "gloomhaven" content pack, <Frosthaven>\\FrosthavenMods\\packs\\gloomhaven\\:
 
-    ghclasses\\ruleset\\Global\\Characters\\<Class>\\...   new ruleset files (fh_mods.py install --gh adds them)
-    ghclasses\\strings.tsv                               key<TAB>English text (the plugin answers keys the game lacks;
-                                                         also <Class>_FullName, CODEX_HeroInfo_<Class>, Event__Text)
-    ghclasses\\art\\<Class>\\*.png                         the class's pictures in Frosthaven's shapes (gh_art.py)
-    ghclasses\\source.json                               where it came from (Gloomhaven folder + Steam build)
+    ruleset\\Global\\Characters\\<Class>\\...   new ruleset files (fh_mods.py install --packs adds them)
+    strings.tsv                               key<TAB>English text (the plugin answers keys the game lacks;
+                                              also <Class>_FullName, CODEX_HeroInfo_<Class>, Event__Text)
+    art\\<Class>\\*.png                         the class's pictures in Frosthaven's shapes (gh_art.py)
+    pack.json                                 manifest: name, version, classes, data_sha (plugin + co-op check), source
+
+A content pack is data the game loads at startup: every PC needs it installed before launch, and a campaign that has
+used it (the "Gloomhaven classes" house rule on, a character created) needs it for good. See GHClasses.cs.
 
 Conversion (see the research notes in the gloomhaven-class-port memory):
     - ability card IDs become 20000 + the Gloomhaven ID (Frosthaven uses 1-504; saves store card IDs, so this
@@ -28,6 +31,7 @@ Usage:
 
 import argparse
 import csv
+import hashlib
 import io
 import json
 import re
@@ -41,7 +45,11 @@ import fh_ruleset as rs  # noqa: E402
 
 GH_APP_ID = "780290"
 CARD_ID_OFFSET = 20000
-OUT = fh_mods.BACKUP / "ghclasses"
+PACK = "gloomhaven"
+PACK_TITLE = "Gloomhaven classes"
+# Bump when the conversion changes in a way that matters in play (card data, IDs): co-op peers must match.
+PACK_VERSION = 1
+OUT = fh_mods.PACKS / PACK
 
 # Frosthaven-only character fields, per class. Race and traits from Cephalofair's crossover sheets; hero stats and
 # complexity are our estimate for the class-select screen (0-6 and 1-5).
@@ -294,8 +302,16 @@ def main():
     missing = sorted(k for k in used_keys if k not in table)
     lines = [f"{k}\t{v.replace(chr(13), '').replace(chr(10), chr(92) + 'n')}" for k, v in table.items()]
     (args.out / "strings.tsv").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    (args.out / "source.json").write_text(json.dumps(
-        {"gloomhaven": str(gh), "buildid": build, "classes": args.classes, "files": len(written)}, indent=2), encoding="utf-8")
+    # The pack manifest the plugin and installer read. data_sha covers everything that matters in play (the ruleset
+    # files and the text), so two PCs with the same sha have identical packs whatever Gloomhaven build they came from.
+    digest = hashlib.sha256()
+    for rel in sorted(written, key=str.lower):
+        digest.update(rel.lower().encode("utf-8") + b"\0" + (out_ruleset / rel).read_bytes() + b"\0")
+    digest.update((args.out / "strings.tsv").read_bytes())
+    (args.out / "pack.json").write_text(json.dumps({
+        "name": PACK, "title": PACK_TITLE, "version": PACK_VERSION, "classes": args.classes, "files": "ruleset",
+        "data_sha": digest.hexdigest(), "source": {"gloomhaven": str(gh), "buildid": build, "files": len(written)},
+    }, indent=2) + "\n", encoding="utf-8")
 
     for w in warnings:
         print("warning:", w)

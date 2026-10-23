@@ -4,7 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using BepInEx;
+using FHRL;
 using HarmonyLib;
+using Newtonsoft.Json.Linq;
 using ScenarioRuleLibrary;
 using ScenarioRuleLibrary.YML;
 using UnityEngine;
@@ -27,18 +29,74 @@ namespace FrosthavenMods
     ///     background sprites (a white rectangle with two red "lost" tiles). Gloomhaven classes' cards are drawn with a
     ///     Frosthaven card prefab instead, through the same generated-layout code the game uses for its long rest card,
     ///     with the corner badge of a real Frosthaven card in place of the template's older one.
-    ///   - Text: keys Frosthaven lacks ($ABILITY_CARD_Trample$, PERK_Brute_01...) are answered from
-    ///     FrosthavenMods\ghclasses\strings.tsv; Frosthaven's own translation wins wherever it has the key.
-    /// Inert without converted data: no ruleset class with a Gloomhaven model means no config copy and no card
-    /// redirect, no strings file means no text answers, and Frosthaven's own heroes all have bundles.
+    ///   - Text: keys Frosthaven lacks ($ABILITY_CARD_Trample$, PERK_Brute_01...) are answered from the packs'
+    ///     strings.tsv; Frosthaven's own translation wins wherever it has the key.
+    /// The data is a content pack: FrosthavenMods\packs\&lt;name&gt;\ (ruleset files, strings.tsv, art\, pack.json), built
+    /// on each PC by tools/gh_port.py from the player's own Gloomhaven and added to Base.ruleset by the installer or
+    /// fh_mods.py install --packs. Inert without one: no ruleset class with a Gloomhaven model means no config copy and
+    /// no card redirect, no strings means no text answers, and Frosthaven's own heroes all have bundles.
     /// </summary>
     [HarmonyPatch]
     internal static class GHClasses
     {
         private const string StandInModel = "Drifter";
-        private static string _folder;
-        private static string Folder => _folder ?? (_folder = Path.Combine(Paths.GameRootPath, "FrosthavenMods", "ghclasses"));  // lazy: tools/hookcheck runs the static init outside the game
+        private static string _packsFolder;
+        private static string PacksFolder => _packsFolder ?? (_packsFolder = Path.Combine(Paths.GameRootPath, "FrosthavenMods", "packs"));  // lazy: tools/hookcheck runs the static init outside the game
         private static Dictionary<string, string> _strings;
+        private static List<Pack> _packs;
+
+        /// <summary>A content pack built on this PC: FrosthavenMods\packs\&lt;name&gt;\ with the manifest pack.json that
+        /// tools/gh_port.py writes (name, version, classes, data_sha over the data that matters in play).</summary>
+        internal sealed class Pack
+        {
+            public string Name, Title, DataSha, Folder;
+            public int Version;
+            public string[] Classes = new string[0];
+
+            /// <summary>What two co-op peers must agree on: same pack, same version, same data.</summary>
+            public string Stamp => $"{Name}/{Version}/{DataSha}";
+            public override string ToString() => $"{Title ?? Name} v{Version}";
+        }
+
+        /// <summary>The packs installed on this PC (manifests read once; none is fine).</summary>
+        internal static List<Pack> Packs
+        {
+            get
+            {
+                if (_packs != null) return _packs;
+                _packs = new List<Pack>();
+                try
+                {
+                    if (Directory.Exists(PacksFolder))
+                        foreach (string file in Directory.GetFiles(PacksFolder, "pack.json", SearchOption.AllDirectories))
+                        {
+                            try
+                            {
+                                JObject j = JObject.Parse(File.ReadAllText(file));
+                                _packs.Add(new Pack
+                                {
+                                    Folder = Path.GetDirectoryName(file),
+                                    Name = (string)j["name"] ?? Path.GetFileName(Path.GetDirectoryName(file)),
+                                    Title = (string)j["title"],
+                                    Version = (int?)j["version"] ?? 0,
+                                    DataSha = (string)j["data_sha"] ?? "",
+                                    Classes = j["classes"]?.Select(c => (string)c).Where(c => c != null).ToArray() ?? new string[0],
+                                });
+                            }
+                            catch (Exception e) { Plugin.Log.LogError($"Content packs: could not read {file}: {e.Message}"); }
+                        }
+                    _packs.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase));
+                    Plugin.Log.LogInfo(_packs.Count == 0 ? "Content packs: none installed" : "Content packs: " + string.Join(", ", _packs.Select(p => p.ToString())));
+                }
+                catch (Exception e) { Plugin.Log.LogError("Content packs: could not list " + PacksFolder + ": " + e); }
+                return _packs;
+            }
+        }
+
+        /// <summary>The pack that brings <paramref name="model"/>'s class, or null.</summary>
+        internal static Pack PackOf(ECharacter model) =>
+            Packs.FirstOrDefault(p => p.Classes.Any(c => string.Equals(c, model.ToString(), StringComparison.OrdinalIgnoreCase)))
+            ?? Packs.FirstOrDefault(p => Directory.Exists(Path.Combine(p.Folder, "art", model.ToString())));
         private static readonly Dictionary<string, bool> GameHasKey = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
         private static readonly HashSet<string> Reported = new HashSet<string>();
         private static bool _quitting;
@@ -55,20 +113,24 @@ namespace FrosthavenMods
             {
                 if (_strings != null) return _strings;
                 _strings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-                string file = Path.Combine(Folder, "strings.tsv");
-                try
+                foreach (Pack pack in Packs)
                 {
-                    if (File.Exists(file))
+                    string file = Path.Combine(pack.Folder, "strings.tsv");
+                    try
                     {
+                        if (!File.Exists(file)) continue;
+                        int n = 0;
                         foreach (string line in File.ReadAllLines(file))
                         {
                             int tab = line.IndexOf('\t');
-                            if (tab > 0) _strings[line.Substring(0, tab)] = line.Substring(tab + 1).Replace("\\n", "\n");
+                            if (tab <= 0) continue;
+                            _strings[line.Substring(0, tab)] = line.Substring(tab + 1).Replace("\\n", "\n");
+                            n++;
                         }
-                        Plugin.Log.LogInfo($"Gloomhaven classes: {_strings.Count} text keys from {file}");
+                        Plugin.Log.LogInfo($"Content packs: {n} text keys from {pack}");
                     }
+                    catch (Exception e) { Plugin.Log.LogError("Content packs: could not read " + file + ": " + e); }
                 }
-                catch (Exception e) { Plugin.Log.LogError("Gloomhaven classes: could not read " + file + ": " + e); }
                 return _strings;
             }
         }
@@ -89,6 +151,15 @@ namespace FrosthavenMods
 
         private static CCharacterClass ClassById(string classId) =>
             classId == null ? null : CharacterClassManager.Classes?.FirstOrDefault(c => c != null && c.ID == classId);
+
+        // ------------------------------------------------------------------ the pack's classes
+
+        /// <summary>The ruleset classes a content pack brought: their model is one of Gloomhaven's or Jaws of the Lion's.</summary>
+        internal static List<CCharacterClass> PackClasses() =>
+            (CharacterClassManager.Classes ?? new List<CCharacterClass>()).Where(c => c != null && IsGloomhavenClass(c.CharacterModel.ToString(), out _)).ToList();
+
+        // The switch itself, its guard and the command that unlocks the classes on every PC: GHClassesRule.cs. The
+        // co-op join check: PackGate.cs.
 
         // ------------------------------------------------------------------ 3D model stand-in
 
@@ -213,10 +284,11 @@ namespace FrosthavenMods
         /// behave the same. A missing file keeps the Drifter's picture. Returns how many loaded.</summary>
         private static int Pictures(CharacterConfigUI cfg, CharacterConfigUI like, ECharacter model)
         {
-            string dir = Path.Combine(Folder, "art", model.ToString());
-            if (!Directory.Exists(dir))
+            Pack pack = PackOf(model);
+            string dir = pack == null ? null : Path.Combine(pack.Folder, "art", model.ToString());
+            if (dir == null || !Directory.Exists(dir))
             {
-                Plugin.Log.LogWarning($"Gloomhaven classes: no pictures for {model} ({dir}): rerun tools/gh_port.py with UnityPy and Pillow installed");
+                Plugin.Log.LogWarning($"Gloomhaven classes: no pictures for {model} ({dir ?? "no pack lists it"}): rerun tools/gh_port.py with UnityPy and Pillow installed");
                 return 0;
             }
             int n = 0;
