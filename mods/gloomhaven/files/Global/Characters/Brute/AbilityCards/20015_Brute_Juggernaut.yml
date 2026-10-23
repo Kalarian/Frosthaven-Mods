@@ -23,7 +23,7 @@ Data:
                 ActiveBonus:
                     Duration: Persistent
                     XPTracker: [1,1,1]
-                AnimOverload: PowerUpShield
+                AnimOverload: Persistent Buff
 Layout:
     Top:
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"

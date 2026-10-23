@@ -29,7 +29,7 @@ Data:
                 Filter:
                     TargetType: Enemy
                     EnemyType: [Normal, Elite]
-                AnimOverload: HeavyFatalAdvance
+                AnimOverload: Attack_AOE_Cone
         XP: 2
 Layout:
     Top:

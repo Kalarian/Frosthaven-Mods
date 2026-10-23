@@ -21,7 +21,7 @@ Data:
                     Amount: 1
                     SquareEnhancements: 2
                 ActiveBonusDuration: Round
-                AnimOverload: PowerUpShield
+                AnimOverload: Persistent Buff
 Layout:
     Top:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"

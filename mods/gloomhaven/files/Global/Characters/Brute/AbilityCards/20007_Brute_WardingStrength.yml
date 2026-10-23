@@ -25,7 +25,7 @@ Data:
             BShield:
                 Shield: 1
                 AttackSourcesOnly: True
-                AnimOverload: PowerUpShield
+                AnimOverload: Persistent Buff
                 ActiveBonus:
                     Duration: Persistent
                     Behaviour: ShieldIncomingAttacks

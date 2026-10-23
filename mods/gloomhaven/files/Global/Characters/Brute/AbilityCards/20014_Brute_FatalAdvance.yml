@@ -13,7 +13,7 @@ Data:
                 Filter:
                     TargetType: Enemy
                     EnemyType: Normal
-                AnimOverload: HeavyFatalAdvance
+                AnimOverload: Attack_AOE_Cone
         XP: 2
     Bottom:
         Abilities:

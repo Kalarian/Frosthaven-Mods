@@ -14,7 +14,7 @@ Data:
                     TargetType: Enemy
                     EnemyType: Normal
                     TargetHasNegativeCondition: Stun
-                AnimOverload: HeavyFatalAdvance
+                AnimOverload: Attack_AOE_Cone
         XP: 1
     Bottom:
         Abilities:

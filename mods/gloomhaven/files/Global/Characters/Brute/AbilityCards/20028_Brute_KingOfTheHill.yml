@@ -14,7 +14,7 @@ Data:
                     DiamondEnhancements: 2
                 Target: -1
                 MultiPassAttack: False
-                AnimOverload: RadialAttack
+                AnimOverload: Attack_AOE_Radial
                 XPPerTarget: 1
                 SubAbilities:
                     TAttackSubPush:

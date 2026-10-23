@@ -13,7 +13,7 @@ Data:
                     Amount: 6
                     DiamondEnhancements: 2
                 Conditions: [Wound, Stun]
-                AnimOverload: HeavyMeleeAttack
+                AnimOverload: Attack_AOE_Cone
         XP: 3
     Bottom:
         Abilities:

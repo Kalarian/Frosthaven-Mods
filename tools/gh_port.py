@@ -29,6 +29,8 @@ Conversion (see the research notes in the gloomhaven-class-port memory):
     - card-specific text keys ($013_B$) get a GH_ prefix so they can never meet a Frosthaven key
     - perk keys Frosthaven's parser doesn't know (IgnoreNegativeItemEffects: True) become Frosthaven perk Flags
     - the "- XP: N" layout element goes (Frosthaven shows a card's experience in the corner badge, from the data)
+    - a card's AnimOverload (a Gloomhaven animator state) becomes the Drifter-animator state the plugin plays the
+      matching Gloomhaven clip in (ANIM_OVERLOADS); unknown names fall back to the game's default animation
     - the character gets Frosthaven's extra fields from the official crossover sheet (race, traits). No MasteryIDs
       or ElementalAffinities until there are some: the game's YAML reader fails a whole file on an empty list ([]),
       and the plugin gives a class without masteries an empty list (null crashes the scenario results screen)
@@ -82,6 +84,19 @@ DEFAULT_SLOT = "SquareEnhancements"
 
 # Gloomhaven perk keys Frosthaven's perk parser rejects -> Frosthaven perk flag
 PERK_FLAG_KEYS = ("IgnoreNegativeItemEffects", "IgnoreNegativeScenarioEffects")
+
+# A card's AnimOverload names a state of the hero's animator. The plugin drives a Gloomhaven model with the Drifter's
+# animator (gh_model.py), so Gloomhaven state names are rewritten to the Drifter state whose clip slot gets the matching
+# Gloomhaven clip: the heavy two-hand swing and the shield power-up then show. Names left out fall back to the game's
+# defaults (Attack / PowerUp) exactly as an unknown name does; the shouts stay out on purpose (the Drifter's Push and
+# DangerArea states would add her push effects while still playing the plain cast clip).
+ANIM_OVERLOADS = {
+    "HeavyMeleeAttack": "Attack_AOE_Cone",
+    "HeavyFatalAdvance": "Attack_AOE_Cone",
+    "RadialAttack": "Attack_AOE_Radial",
+    "PowerUpShield": "Persistent Buff",
+}
+ANIM_OVERLOAD_LINE = re.compile(r"^([ \t]*AnimOverload:[ \t]*)(\w+)(?=[ \t]*\r?$)", re.M)
 
 KEY_RE = re.compile(r"\$([A-Za-z0-9_]+)\$")
 CARD_TEXT_KEY = re.compile(r"\$(\d{3}_[TB][A-Za-z0-9_]*)\$")
@@ -156,6 +171,12 @@ def convert_layout(s):
     return head + layout
 
 
+def convert_anim_overloads(s):
+    """Gloomhaven animator state names -> the Drifter-controller states the plugin fills with the Gloomhaven clips (see
+    ANIM_OVERLOADS); each line keeps its own ending (the files are CRLF)."""
+    return ANIM_OVERLOAD_LINE.sub(lambda m: m.group(1) + ANIM_OVERLOADS.get(m.group(2), m.group(2)), s)
+
+
 def convert_card(name, s, warn):
     m = re.search(r"^ID:\s*(\d+)\s*$", s, re.M)
     if not m:
@@ -163,6 +184,7 @@ def convert_card(name, s, warn):
     new_id = CARD_ID_OFFSET + int(m.group(1))
     s = s[:m.start(1)] + str(new_id) + s[m.end(1):]
     s = convert_enhancements(s, lambda w: warn(f"{name}: {w}"))
+    s = convert_anim_overloads(s)
     s = CARD_TEXT_KEY.sub(lambda k: f"$GH_{k.group(1)}$", s)
     s = convert_layout(s)
     return new_id, s

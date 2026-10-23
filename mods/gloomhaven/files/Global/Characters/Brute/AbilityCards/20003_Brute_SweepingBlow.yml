@@ -13,7 +13,7 @@ Data:
                     Amount: 2
                     DiamondEnhancements: 1
                 AreaEffect: "0,0,G|1,1,R|2,0,R|1,-1,R|-1,1,E"
-                AnimOverload: RadialAttack
+                AnimOverload: Attack_AOE_Radial
                 MultiPassAttack: false
     Bottom:
         Abilities:

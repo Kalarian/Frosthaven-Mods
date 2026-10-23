@@ -16,7 +16,7 @@ Data:
                 Shield:
                     Amount: 1
                     SquareEnhancements: 1
-                AnimOverload: PowerUpShield
+                AnimOverload: Persistent Buff
                 ActiveBonusDuration: Round
     Bottom:
         Abilities:

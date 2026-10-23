@@ -6,7 +6,7 @@
     "Brute"
   ],
   "files": "files",
-  "data_sha": "da864bda4528718c51dfcf4f59a82e887295d290cee0ce90b191b8dd8b3c6252",
+  "data_sha": "5867b91bfb1b42c1629d2e2f4ffa6cab330704cab730c2a23929de0adcb59f4c",
   "source": {
     "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
     "buildid": "20286313",
@@ -285,6 +285,7 @@
         ],
         "melee_weapon": "Drifter_club",
         "silence": [
+          "Drifter_Celebrate",
           "Drifter_Exhaust",
           "Drifter_Hurt"
         ]

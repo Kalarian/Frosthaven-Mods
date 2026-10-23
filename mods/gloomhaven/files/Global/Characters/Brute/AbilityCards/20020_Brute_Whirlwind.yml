@@ -14,7 +14,7 @@ Data:
                     DiamondEnhancements: 1
                 Range: 1
                 Target: -1
-                AnimOverload: RadialAttack
+                AnimOverload: Attack_AOE_Radial
                 MultiPassAttack: false
                 XPPerTarget: 1
     Bottom:

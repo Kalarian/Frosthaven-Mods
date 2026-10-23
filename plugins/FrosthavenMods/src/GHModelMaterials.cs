@@ -14,10 +14,12 @@ namespace FrosthavenMods
     /// character lights); or Amp_Char_Shader_Transparent, the one that clips on alpha, for cutout textures (the Brute's
     /// fur cards; the Universal shader ignores its _AlphaCutoff). The four texture slots map by name (_Diffuse ->
     /// _Albedo, _MRAO -> _MetallicSmoothnessAO, _NormalMap, _EmissiveMap) and the lighting numbers come from the Drifter's
-    /// body material. Both games pack metallic, smoothness and ambient occlusion in RGB, but Gloomhaven ran in gamma
-    /// colour space and flagged its mask textures sRGB, which Frosthaven (linear) would decode on sampling: the mask
-    /// goes in through a linear copy (a GPU copy in the same compressed format), so the shader sees the numbers
-    /// Gloomhaven's did. The textures themselves come from the pack's bundle, by the names tools/gh_model.py wrote down.
+    /// body material. Both games pack metallic, smoothness and ambient occlusion in RGB. Gloomhaven's mask textures are
+    /// flagged sRGB (it ran in gamma colour space and read them raw), so Frosthaven's linear pipeline decodes them on
+    /// sampling and reads the occlusion a little darker than Gloomhaven did; a GPU copy into a linear texture can't fix
+    /// that here, because these textures stream their mips and Graphics.CopyTexture copies only the mips already
+    /// loaded. The pack's build step replaces a mask that would blacken the model with flat values (the Brute's body);
+    /// the others (the weapons') are used as they are. The textures are what loading the prefab brought into memory.
     /// </summary>
     internal static class GHModelMaterials
     {
@@ -36,8 +38,6 @@ namespace FrosthavenMods
             ("_BlinnLightPositionMain", new Vector4(0.5548f, 3.0574f, 1.1711f, 0f)),
             ("_BlinnLightPositionRim", new Vector4(-0.674f, 2.9271f, -0.8143f, 0f)),
         };
-
-        private static readonly Dictionary<Texture, Texture> LinearCopies = new Dictionary<Texture, Texture>();
 
         /// <summary>One of Frosthaven's character shaders. Shader.Find sees it once anything has used it; the always-loaded
         /// shader bundle is the fallback.</summary>
@@ -89,7 +89,7 @@ namespace FrosthavenMods
         {
             var m = new Material(template) { name = gh.name + " (Frosthaven)", hideFlags = HideFlags.DontUnloadUnusedAsset };
             Texture albedo = Pick(spec?.Albedo, gh, "_Diffuse", texture);
-            Texture mask = spec != null && spec.FlatMask ? Flat(spec.Metallic, spec.Smoothness, spec.Ao) : Linear(Pick(spec?.Mask, gh, "_MRAO", texture));
+            Texture mask = spec != null && spec.FlatMask ? Flat(spec.Metallic, spec.Smoothness, spec.Ao) : Pick(spec?.Mask, gh, "_MRAO", texture);
             Texture normal = Pick(spec?.Normal, gh, "_NormalMap", texture);
             Texture emissive = spec != null ? (spec.Emissive != null ? Pick(spec.Emissive, gh, "_EmissiveMap", texture) : null) : Pick(null, gh, "_EmissiveMap", texture);
             m.SetTexture("_Albedo", albedo);
@@ -135,24 +135,5 @@ namespace FrosthavenMods
             return t;
         }
 
-        /// <summary>A linear-colour-space copy of a texture (same size, format and mips; a GPU copy, no conversion), so a
-        /// mask Gloomhaven read raw in its gamma project is read raw here too. One copy per texture.</summary>
-        internal static Texture Linear(Texture src)
-        {
-            if (src == null || !(src is Texture2D t)) return src;
-            if (LinearCopies.TryGetValue(src, out Texture done) && done != null) return done;
-            try
-            {
-                var copy = new Texture2D(t.width, t.height, t.format, t.mipmapCount, true) { name = t.name + " (linear)", hideFlags = HideFlags.DontUnloadUnusedAsset };
-                Graphics.CopyTexture(t, copy);
-                LinearCopies[src] = copy;
-                return copy;
-            }
-            catch (Exception e)
-            {
-                Plugin.Log.LogWarning($"Gloomhaven model: could not make a linear copy of {t.name} ({e.Message}); the mask reads a little dark");
-                return src;
-            }
-        }
     }
 }

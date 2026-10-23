@@ -14,7 +14,7 @@ Data:
                     DiamondEnhancements: 1
                 AreaEffect: "0,0,G|2,0,R|4,0,R|6,0,E"
                 AreaEffectLayoutOverride: "0,0,G|1,1,R|2,2,R|3,3,E"
-                AnimOverload: RadialAttack
+                AnimOverload: Attack_AOE_Radial
                 MultiPassAttack: False
         Consumes:
             TCAir:

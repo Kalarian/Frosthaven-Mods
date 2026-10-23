@@ -196,12 +196,14 @@ namespace FrosthavenMods
             if (e == null) return null;
             if (Templates.TryGetValue(model, out Built b) && b.Carrier != null && b.Visual != null)
             {
-                Refresh(b);
+                try { Refresh(b); }
+                catch (Exception ex) { if (Reported.Add("refresh " + model)) Plugin.Log.LogWarning($"Gloomhaven model: could not refresh the {model}'s animator: {ex}"); }
                 return b.Carrier;
             }
             try
             {
                 b = Build(e);
+                if (b == null) return null;           // the Drifter's prefab wasn't there this time: try again on the next call
                 Templates[model] = b;
                 return b.Carrier;
             }
@@ -223,7 +225,11 @@ namespace FrosthavenMods
             GameObject ghPrefab = bundle.Bundle.LoadAsset<GameObject>(e.Prefab);
             if (ghPrefab == null) throw new InvalidOperationException(e.Prefab + " is not in " + e.Bundle);
             GameObject drifter = DrifterPrefab(e.Animation);
-            if (drifter == null) throw new InvalidOperationException("the " + e.Animation.Base + "'s hero prefab did not load");
+            if (drifter == null)
+            {
+                if (Reported.Add("no base " + e.Model)) Plugin.Log.LogWarning($"Gloomhaven model: the {e.Animation.Base}'s hero prefab is not loaded yet; the {e.Model} waits for the next request");
+                return null;
+            }
             CharacterManager drifterCm = drifter.GetComponent<CharacterManager>();
             GameObject drifterVisual = drifterCm?.CharacterChildPrefab;
             if (drifterVisual == null) throw new InvalidOperationException("the " + e.Animation.Base + "'s hero prefab has no model");
@@ -315,7 +321,8 @@ namespace FrosthavenMods
         }
 
         /// <summary>Re-points what the template borrows from the Drifter's bundle, which the game unloads between scenes:
-        /// the base of the override controller (its clips are the pack's and survive).</summary>
+        /// the base of the override controller (its clips are the pack's and survive). The override object itself is
+        /// kept and re-based in place, so pooled clones from an earlier scene that still hold it are mended too.</summary>
         private static void Refresh(Built b)
         {
             Animator animator = b.Visual.GetComponent<Animator>();
@@ -325,16 +332,14 @@ namespace FrosthavenMods
             RuntimeAnimatorController baseController = drifter?.GetComponent<CharacterManager>()?.CharacterChildPrefab?.GetComponent<Animator>()?.runtimeAnimatorController;
             if (baseController == null)
             {
-                Plugin.Log.LogWarning($"Gloomhaven model: the {b.Entry.Animation.Base}'s animator is not loaded; the {b.Entry.Model} keeps its old one");
+                if (Reported.Add("no base " + b.Entry.Model)) Plugin.Log.LogWarning($"Gloomhaven model: the {b.Entry.Animation.Base}'s animator is not loaded; the {b.Entry.Model} keeps its old one");
                 return;
             }
-            AnimatorOverrideController old = b.Override;
-            b.Override = MakeOverride(b, baseController);
+            b.Override = MakeOverride(b, baseController, b.Override);
             animator.runtimeAnimatorController = b.Override;
-            if (old != null) UnityEngine.Object.Destroy(old);
             DeathDissolve dissolve = b.Visual.GetComponent<DeathDissolve>();
             if (dissolve != null && dissolve.Particles == null) dissolve.Particles = DissolveParticles(drifter.GetComponent<CharacterManager>()?.CharacterChildPrefab?.GetComponent<DeathDissolve>());
-            Plugin.Log.LogInfo($"Gloomhaven model: {b.Entry.Model} animator rebuilt on the reloaded {baseController.name}");
+            Plugin.Log.LogInfo($"Gloomhaven model: {b.Entry.Model} animator re-based on the reloaded {baseController.name}");
         }
 
         /// <summary>The death dissolve particles: the game's default (always loaded, with the children DeathDissolve.Play
@@ -348,8 +353,8 @@ namespace FrosthavenMods
 
         /// <summary>The Drifter's controller with each of her clips replaced by the pack's clip for it; a clip the pack
         /// doesn't name gets the one most of hers got (the idle), never nothing: an un-overridden clip binds bones the
-        /// Gloomhaven rig lacks and would freeze it.</summary>
-        private static AnimatorOverrideController MakeOverride(Built b, RuntimeAnimatorController baseController)
+        /// Gloomhaven rig lacks and would freeze it. Given an existing override, re-bases it in place (same object).</summary>
+        private static AnimatorOverrideController MakeOverride(Built b, RuntimeAnimatorController baseController, AnimatorOverrideController existing = null)
         {
             if (baseController == null) throw new InvalidOperationException("no base animator controller");
             AnimationSpec anim = b.Entry.Animation;
@@ -377,7 +382,9 @@ namespace FrosthavenMods
                 else if (u.Value.All(o => IsRunClip(o.name)) && !IsRunClip(u.Key.name))
                     u.Key.name += "_MoveLoop";
             }
-            var ovr = new AnimatorOverrideController(baseController) { name = baseController.name + " (" + b.Entry.Model + ")", hideFlags = HideFlags.DontUnloadUnusedAsset };
+            AnimatorOverrideController ovr = existing;
+            if (ovr != null) ovr.runtimeAnimatorController = baseController;
+            else ovr = new AnimatorOverrideController(baseController) { name = baseController.name + " (" + b.Entry.Model + ")", hideFlags = HideFlags.DontUnloadUnusedAsset };
             ovr.ApplyOverrides(pairs);
             if (missing.Count > 0) Plugin.Log.LogWarning($"Gloomhaven model: {b.Entry.Model}: no clip for {string.Join(", ", missing)}; they idle");
             return ovr;
@@ -392,11 +399,12 @@ namespace FrosthavenMods
         private static List<CharacterManager.CharacterWeaponList> Weapons(Entry e, Loaded bundle, MaterialSet materials, CharacterManager drifterCm)
         {
             var lists = new List<CharacterManager.CharacterWeaponList>();
+            if (e.Weapons.Count == 0) return lists;
             GameObject sounds = WeaponSounds(drifterCm);
+            Dictionary<string, GameObject> roots = bundle.Roots();   // a local lookup: nothing keeps the bundle's other prefabs alive afterwards
             foreach (WeaponSpec w in e.Weapons)
             {
-                GameObject root = bundle.Root(w.Root);
-                if (root == null) { Plugin.Log.LogWarning($"Gloomhaven model: weapon {w.Root} is not in {e.Bundle}, skipped"); continue; }
+                if (w.Root == null || !roots.TryGetValue(w.Root, out GameObject root)) { Plugin.Log.LogWarning($"Gloomhaven model: weapon {w.Root} is not in {e.Bundle}, skipped"); continue; }
                 if (string.IsNullOrEmpty(w.Bone)) continue;
                 GameObject weapon = UnityEngine.Object.Instantiate(root, Holder);
                 weapon.name = w.Type == Weapon.WeaponTypes.Melee && sounds != null && !string.IsNullOrEmpty(e.Animation.MeleeWeapon) ? e.Animation.MeleeWeapon : root.name;
@@ -463,7 +471,6 @@ namespace FrosthavenMods
             public AssetBundle Bundle;
             public string HeroPrefab;
             public readonly Dictionary<string, AnimationClip> Clips = new Dictionary<string, AnimationClip>(StringComparer.Ordinal);
-            private Dictionary<string, GameObject> _roots;
 
             public void AddClips(RuntimeAnimatorController controller)
             {
@@ -484,17 +491,16 @@ namespace FrosthavenMods
             public Texture2D Texture(string name) =>
                 name == null ? null : Resources.FindObjectsOfTypeAll<Texture2D>().FirstOrDefault(t => t != null && t.name == name);
 
-            /// <summary>A root object of the bundle by name: loading the hero prefab brings its weapons along.</summary>
-            public GameObject Root(string name)
+            /// <summary>The loaded prefab roots by name, after loading the hero prefab (which brings its weapons along).
+            /// Not kept: the game's Resources.UnloadUnusedAssets at the next loading screen then frees what the templates
+            /// don't use (the Gloomhaven effects, the lower LODs, the unused textures).</summary>
+            public Dictionary<string, GameObject> Roots()
             {
-                if (_roots == null)
-                {
-                    _roots = new Dictionary<string, GameObject>(StringComparer.Ordinal);
-                    if (!string.IsNullOrEmpty(HeroPrefab)) Bundle.LoadAsset<GameObject>(HeroPrefab);
-                    foreach (GameObject g in Resources.FindObjectsOfTypeAll<GameObject>())
-                        if (g != null && g.transform.parent == null && !g.scene.IsValid() && !_roots.ContainsKey(g.name)) _roots[g.name] = g;
-                }
-                return name != null && _roots.TryGetValue(name, out GameObject go) ? go : null;
+                var roots = new Dictionary<string, GameObject>(StringComparer.Ordinal);
+                if (!string.IsNullOrEmpty(HeroPrefab)) Bundle.LoadAsset<GameObject>(HeroPrefab);
+                foreach (GameObject g in Resources.FindObjectsOfTypeAll<GameObject>())
+                    if (g != null && g.transform.parent == null && !g.scene.IsValid() && !roots.ContainsKey(g.name)) roots[g.name] = g;
+                return roots;
             }
         }
 
@@ -581,7 +587,10 @@ namespace FrosthavenMods
                 if (animator == null) return;
                 if (b.Override != null && animator.runtimeAnimatorController != b.Override) animator.runtimeAnimatorController = b.Override;
                 foreach (Renderer r in clone.GetComponentsInChildren<Renderer>(true)) r.SetPropertyBlock(null);   // the class screen's lighting tweak, kept by the pool
-                Retime(animator, b.Entry.Animation);
+                // The behaviours exist once the Animator has bound its controller; a clone spawned under an inactive
+                // holder (the class screen) binds later, so wait for it then (the game's own preview code does the same).
+                if (animator.isInitialized && Retime(animator, b.Entry.Animation) > 0) return;
+                if (Plugin.Instance != null) Plugin.Instance.StartCoroutine(RetimeWhenReady(animator, b.Entry));
             }
             catch (Exception e)
             {
@@ -589,15 +598,31 @@ namespace FrosthavenMods
             }
         }
 
+        private static System.Collections.IEnumerator RetimeWhenReady(Animator animator, Entry e)
+        {
+            for (int i = 0; i < 600 && animator != null; i++)
+            {
+                yield return null;
+                if (!animator.isInitialized || !animator.gameObject.activeInHierarchy) continue;
+                int n;
+                try { n = Retime(animator, e.Animation); }
+                catch (Exception ex) { if (Reported.Add("retime")) Plugin.Log.LogWarning($"Gloomhaven model: could not retime a spawned {e.Model}: {ex}"); yield break; }
+                if (n > 0) yield break;
+            }
+            if (animator != null && Reported.Add("no behaviours " + e.Model))
+                Plugin.Log.LogWarning($"Gloomhaven model: a spawned {e.Model} exposed no animator behaviours to retime; the {e.Animation.Base}'s timings stay");
+        }
+
         private static readonly HashSet<string> Reported = new HashSet<string>();
 
         /// <summary>The Drifter's state behaviours keep their moments in seconds from the state's start, tuned to her clips.
         /// Each is reset from the value it was authored with (the behaviours remember it), scaled by the clip-length
         /// ratio or set to Gloomhaven's own moment for that beat, so doing this again changes nothing. Her voice is
-        /// blanked (an empty event is skipped).</summary>
-        private static void Retime(Animator animator, AnimationSpec anim)
+        /// blanked (an empty event is skipped). Returns how many behaviours were seen (0: the Animator wasn't bound yet).</summary>
+        private static int Retime(Animator animator, AnimationSpec anim)
         {
-            if (anim == null || anim.States.Count == 0) return;
+            if (anim == null || anim.States.Count == 0) return 0;
+            int seen = 0;
             foreach (KeyValuePair<string, StateTiming> state in anim.States)
             {
                 StateTiming t = state.Value;
@@ -605,6 +630,7 @@ namespace FrosthavenMods
                 try { behaviours = animator.GetBehaviours(Animator.StringToHash(state.Key), 0); }
                 catch (Exception) { continue; }
                 if (behaviours == null) continue;
+                seen += behaviours.Length;
                 foreach (StateMachineBehaviour smb in behaviours)
                 {
                     if (smb is CastEffectsSMB cast)
@@ -615,7 +641,14 @@ namespace FrosthavenMods
                         Retime(cast.AuraEffects, t);
                         if (cast.CasterEffects != null)
                             foreach (VFXShared.SpawnedEffect fx in cast.CasterEffects)
-                                if (fx != null && (fx.OriginalStartTime > 0f || fx.StartTime <= 0f)) fx.StartTime = fx.OriginalStartTime * t.Scale;
+                            {
+                                if (fx == null || (fx.OriginalStartTime <= 0f && fx.StartTime > 0f)) continue;
+                                // an effect riding the projectile (the arrow's trail) leaves when the projectile does
+                                bool rides = t.GhFire.HasValue && !fx.AttachToRoot && Array.IndexOf(anim.Projectiles, fx.EffectAttachPoint) >= 0;
+                                fx.StartTime = rides
+                                    ? Mathf.Max(0f, t.GhFire.Value + (t.FhFire.HasValue ? fx.OriginalStartTime - t.FhFire.Value : 0f))
+                                    : fx.OriginalStartTime * t.Scale;
+                            }
                         if (cast.ProgressChoreographer != null)
                             foreach (VFXShared.Progress p in cast.ProgressChoreographer)
                                 if (p != null && (p.OriginalProgressTime > 0f || p.ProgressTime <= 0f)) p.ProgressTime = t.GhProgress ?? p.OriginalProgressTime * t.Scale;
@@ -626,20 +659,28 @@ namespace FrosthavenMods
                         if (t.GhFire.HasValue) fire.FireTime = t.GhFire.Value;
                         else if (t.FhFire.HasValue) fire.FireTime = t.FhFire.Value * t.Scale;
                     }
+                    else if (smb is AudioSMB audio && !string.IsNullOrEmpty(audio.AudioEvent) && anim.Silence.Contains(audio.AudioEvent))
+                    {
+                        audio.AudioEvent = "";   // skipped when empty; the game logs one line if this pooled clone is initialised again
+                    }
                 }
             }
+            return seen;
         }
 
         private static void Retime(VFXShared.TargetHexEffects hex, StateTiming t)
         {
             if (hex == null || (hex.OriginalHitTime <= 0f && hex.HitTime > 0f)) return;   // nothing to do, or not awake yet
-            float hit = t.GhHit ?? hex.OriginalHitTime * t.Scale;
+            // Gloomhaven's beat for the impact: its hit, else its progress moment (a cast that resolves by progress alone,
+            // the heal, lands its impact effect when the ability resolves)
+            float? ghHit = t.GhHit ?? t.GhProgress;
+            float hit = ghHit ?? hex.OriginalHitTime * t.Scale;
             if (hex.OriginalHitTime > 0f) hex.HitTime = hit;
             if (hex.Effects == null) return;
             foreach (VFXShared.BasicEffectTyped fx in hex.Effects)
             {
                 if (fx == null) continue;
-                fx.StartTime = t.GhHit.HasValue && hex.OriginalHitTime > 0f
+                fx.StartTime = ghHit.HasValue && hex.OriginalHitTime > 0f
                     ? Mathf.Max(0f, fx.OriginalStartTime + (hit - hex.OriginalHitTime))   // keep the effect's offset from the hit
                     : fx.OriginalStartTime * t.Scale;
             }

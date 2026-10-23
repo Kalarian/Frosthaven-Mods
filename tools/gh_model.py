@@ -451,6 +451,10 @@ def _animation(b, fh_bundle_path):
                     melee_weapon = f["impactWeaponName"]
             elif smb["class"] == "FireEquippedProjectileSMB" and f.get("Projectile") and f["Projectile"] not in projectiles:
                 projectiles.append(f["Projectile"])
+            elif smb["class"] == "AudioSMB":
+                ev = f.get("AudioEvent") or ""
+                if ev.startswith(BASE_HERO + "_") and any(w in ev for w in VOICE_WORDS):
+                    silence.add(ev)
     missing = sorted(c for c in fh_ctrl["clips"] if c not in clips)
     if missing:
         print(f"warning: Drifter clips with no Gloomhaven clip (they will idle): {', '.join(missing)}")

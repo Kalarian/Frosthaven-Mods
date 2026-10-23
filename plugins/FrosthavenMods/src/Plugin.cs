@@ -15,9 +15,12 @@ namespace FrosthavenMods
         public const string Version = "0.6.9";
 
         internal static ManualLogSource Log;
+        /// <summary>The plugin's own MonoBehaviour (BepInEx keeps it alive across scenes), for coroutines.</summary>
+        internal static Plugin Instance;
 
         private void Awake()
         {
+            Instance = this;
             Log = Logger;
             CoopLog.SessionStart();
             var harmony = new Harmony(Guid);

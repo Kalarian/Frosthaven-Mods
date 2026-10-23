@@ -12,7 +12,7 @@ Data:
                 Attack:
                     Amount: 5
                     DiamondEnhancements: 1
-                AnimOverload: HeavyMeleeAttack
+                AnimOverload: Attack_AOE_Cone
         XP: 1
     Bottom:
         Abilities:

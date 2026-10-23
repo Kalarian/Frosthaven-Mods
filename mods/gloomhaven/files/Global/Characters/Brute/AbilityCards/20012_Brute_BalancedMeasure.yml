@@ -11,7 +11,7 @@ Data:
             TAttack:
                 Attack:
                     Amount: 0
-                AnimOverload: HeavyMeleeAttack
+                AnimOverload: Attack_AOE_Cone
                 StatIsBasedOnX:
                     Strength:
                         BasedOn: HexesMovedThisTurn
