@@ -826,6 +826,12 @@ namespace FrosthavenInstaller
             browse.Click += (s, e) => Browse();
 
             _install.Text = "Install / Update"; _install.SetBounds(18, 152, 150, 34); _install.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
+            FormClosing += (s, e) =>
+            {
+                if (_busy && MessageBox.Show(this, "The mods are still being installed. Closing now can leave the game half updated.\n\nClose anyway?",
+                        "Frosthaven Mods", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+                    e.Cancel = true;
+            };
             _install.Click += (s, e) => Run(false);
             _remove.Text = "Remove mods"; _remove.SetBounds(176, 152, 120, 34);
             _remove.Click += (s, e) => Run(true);
@@ -860,7 +866,9 @@ namespace FrosthavenInstaller
             }
         }
 
-        private void Run(bool uninstall)
+        private bool _busy;
+
+        private async void Run(bool uninstall)
         {
             string dir = _path.Text.Trim().Trim('"');
             if (!Directory.Exists(dir) || !File.Exists(Path.Combine(dir, Program.GameExe)))
@@ -876,13 +884,19 @@ namespace FrosthavenInstaller
             if (uninstall && MessageBox.Show(this, "Remove the mods and put the game's original rules back?\n\nSaves are not touched.", "Remove mods", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
 
             _install.Enabled = _remove.Enabled = false;
+            _busy = true;
             Cursor = Cursors.WaitCursor;
+            SetResult(uninstall ? "Removing the mods..." : "Checking for the newest version and installing. The pack is about 80 MB, so a download can take a few minutes. Keep this window open.");
             var log = new StringBuilder();
             try
             {
                 string before = Pack.InstalledVersion(dir);
-                string zip = uninstall ? null : Updater.FetchNewerZip(dir, log);
-                int code = uninstall ? Pack.Uninstall(dir, log) : Pack.Install(dir, log, zip);
+                // the download and the install run off the window's thread, so the window keeps responding meanwhile
+                int code = await System.Threading.Tasks.Task.Run(() =>
+                {
+                    string zip = uninstall ? null : Updater.FetchNewerZip(dir, log);
+                    return uninstall ? Pack.Uninstall(dir, log) : Pack.Install(dir, log, zip);
+                });
                 string after = Pack.InstalledVersion(dir);
                 // just the outcome; the step-by-step log only when something went wrong
                 if (code != 0) SetResult("Didn't work:\r\n" + log.ToString().TrimEnd());
@@ -896,7 +910,7 @@ namespace FrosthavenInstaller
                 SetResult("Something went wrong: " + e.Message + "\r\n" + log.ToString().TrimEnd());
                 MessageBox.Show(this, "Something went wrong:\n" + e.Message + "\n\nSend a screenshot of this window.", "Frosthaven Mods", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally { _install.Enabled = _remove.Enabled = true; Cursor = Cursors.Default; }
+            finally { _busy = false; _install.Enabled = _remove.Enabled = true; Cursor = Cursors.Default; }
         }
 
         /// <summary>Replaces the box's text: it always shows the result of the last thing done, not a running log.</summary>
