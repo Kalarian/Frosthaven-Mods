@@ -12,8 +12,12 @@ namespace FrosthavenDevTools
     /// Testing shortcuts for the author's own machine. NOT part of the mod pack (lives in devtools/, never packed).
     /// Solo games only. They call the game's own debug console commands, which ship in the retail build but have no
     /// console to type them into:
+    ///   Ctrl+F3   +3 perk marks for every party member (to try perks without levelling)
     ///   (Ctrl+F4 used to unlock the Gloomhaven classes; the mod's "Gloomhaven classes (content pack)" house rule does
     ///   that now, with its guards.)
+    ///   Ctrl+F7   every character (party and bench, not retired) gets the experience for the top level. The game levels
+    ///             them up on the spot when it allows level-ups (the outpost's downtime), else at the next downtime;
+    ///             each level brings its card pick and perk mark as usual.
     ///   Ctrl+F5   write every event's Reveal event outcomes preview to <game>\FrosthavenMods\event-previews.txt
     ///   Ctrl+F6   draw the next town event of the current season (to test the mod's Reveal event outcomes)
     ///   Ctrl+F8   the next won scenario (Ctrl+F10) also completes every party member's uncompleted masteries: they're
@@ -75,6 +79,8 @@ namespace FrosthavenDevTools
             }
             Keyboard kb = Keyboard.current;
             if (kb == null || !kb.ctrlKey.isPressed) return;
+            if (kb.f3Key.wasPressedThisFrame) Run("+3 perk marks for the party", () => Outpost().ExecuteCommand(DevCommands.PerksPath, 3));
+            if (kb.f7Key.wasPressedThisFrame) Run("every character to the top level", MaxLevel);
             if (kb.f5Key.wasPressedThisFrame) Run("write all event previews", DumpEventPreviews);
             if (kb.f6Key.wasPressedThisFrame) Run("draw a town event", DrawEvent);
             if (kb.f8Key.wasPressedThisFrame) Run("the next win completes every mastery", () => DevCommands.ForceMasteries = true);
@@ -94,6 +100,24 @@ namespace FrosthavenDevTools
             if (map == null || map.GameState == null) throw new InvalidOperationException("only works in the outpost, not inside a scenario");
             map.ExecuteCommand(DevCommands.Path, 100, 10);
             map.View.RefreshView();
+        }
+
+        private static FHMapChoreographer Outpost()
+        {
+            var map = Singleton<FHMapChoreographer>.InstanceFast;
+            if (map == null || map.GameState == null) throw new InvalidOperationException("only works in the outpost, not inside a scenario");
+            return map;
+        }
+
+        private static void MaxLevel()
+        {
+            FHMapChoreographer map = Outpost();
+            map.ExecuteCommand(DevCommands.MaxLevelPath);
+            map.View.RefreshView();
+            FHRL.CharacterController cc = map.GameController.CharacterController;
+            foreach (FHRL.CharacterState c in map.GameState.AllCharacters)
+                _log.LogInfo($"Dev tools: {c.Name}: level {c.Level}, {c.Experience} XP" +
+                             (c.Level < cc.GetMaxLevel() ? " (levels up at the next downtime)" : ""));
         }
 
         private static readonly MethodInfo PushActiveEvent = AccessTools.Method(typeof(FHGUI.FHMapView), "TryPushActiveEvent");
@@ -175,6 +199,12 @@ namespace FrosthavenDevTools
         public const string Path = "FrosthavenDevTools.Grant";
         public const string FakeLootPath = "FrosthavenDevTools.FakeDuplicateLoot";
         public const string DrawEventPath = "FrosthavenDevTools.DrawEvent";
+        public const string PerksPath = "FrosthavenDevTools.AddPerkMarks";
+        public const string MaxLevelPath = "FrosthavenDevTools.MaxLevel";
+        private static readonly MethodInfo AddPerkMarksAction = AccessTools.Method(typeof(FHRL.CharacterController), "Action_AddPerkMarks");
+        private static readonly MethodInfo AddExperience = AccessTools.Method(typeof(FHRL.CharacterController), "Action_AddExperience");
+        private static readonly MethodInfo PerksMethod = typeof(DevCommands).GetMethod(nameof(AddPerkMarks));
+        private static readonly MethodInfo MaxLevelMethod = typeof(DevCommands).GetMethod(nameof(MaxLevel));
         private static readonly MethodInfo ActivateOutpostEvent = AccessTools.Method(typeof(FHRL.OutpostEventController), "Action_ActivateEventForOutpost");
         private static readonly MethodInfo GainItem = AccessTools.Method(typeof(FHRL.CharacterController), "Action_GainItem",
             new[] { typeof(FHRL.CharacterState), typeof(FHRL.ItemDef), typeof(string) });
@@ -219,7 +249,8 @@ namespace FrosthavenDevTools
 
         public static bool Resolve(FHRL.MultiplayerGameController __instance, string path, ref ValueTuple<object, MethodInfo> __result)
         {
-            MethodInfo method = path == Path ? GrantMethod : path == FakeLootPath ? FakeLootMethod : path == DrawEventPath ? DrawEventMethod : null;
+            MethodInfo method = path == Path ? GrantMethod : path == FakeLootPath ? FakeLootMethod : path == DrawEventPath ? DrawEventMethod
+                : path == PerksPath ? PerksMethod : path == MaxLevelPath ? MaxLevelMethod : null;
             if (method == null) return true;
             __result = (Handlers.GetValue(__instance, g => new DevCommands(g)), method);
             return false;
@@ -250,6 +281,30 @@ namespace FrosthavenDevTools
                 throw new FHRL.FHGameException("unknown character or item");
             BeginResult.Invoke(campaign, null);
             GainItem.Invoke(campaign.CharacterController, new object[] { c, item, "scenario_loot" });
+            return (FHRL.CampaignController.Result)EndResult.Invoke(campaign, null);
+        }
+
+        [FHRL.MultiplayerCommand(FHRL.MultiplayerCommandExecType.Everybody)]
+        public FHRL.CampaignController.Result AddPerkMarks(int marks)
+        {
+            FHRL.CampaignController campaign = _game.CampaignController;
+            BeginResult.Invoke(campaign, null);
+            foreach (FHRL.CharacterState c in System.Linq.Enumerable.ToList(campaign.State.PartyCharacters))
+                AddPerkMarksAction.Invoke(campaign.CharacterController, new object[] { c, marks });
+            return (FHRL.CampaignController.Result)EndResult.Invoke(campaign, null);
+        }
+
+        /// <summary>The experience for the top level to every character (the game's own add-experience action, which
+        /// levels up when the game allows it and otherwise leaves it for the next downtime).</summary>
+        [FHRL.MultiplayerCommand(FHRL.MultiplayerCommandExecType.Everybody)]
+        public FHRL.CampaignController.Result MaxLevel()
+        {
+            FHRL.CampaignController campaign = _game.CampaignController;
+            FHRL.CharacterController cc = campaign.CharacterController;
+            uint top = cc.GetExperienceForLevel(cc.GetMaxLevel());
+            BeginResult.Invoke(campaign, null);
+            foreach (FHRL.CharacterState c in System.Linq.Enumerable.ToList(campaign.State.AllCharacters))
+                if (c.Experience < top) AddExperience.Invoke(cc, new object[] { c, (int)(top - c.Experience) });
             return (FHRL.CampaignController.Result)EndResult.Invoke(campaign, null);
         }
 
