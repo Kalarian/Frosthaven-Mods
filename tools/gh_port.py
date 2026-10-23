@@ -7,6 +7,7 @@ Frosthaven's format and writes the result to <Frosthaven>\\FrosthavenMods\\ghcla
     ghclasses\\ruleset\\Global\\Characters\\<Class>\\...   new ruleset files (fh_mods.py install --gh adds them)
     ghclasses\\strings.tsv                               key<TAB>English text (the plugin answers keys the game lacks;
                                                          also <Class>_FullName, CODEX_HeroInfo_<Class>, Event__Text)
+    ghclasses\\art\\<Class>\\*.png                         the class's pictures in Frosthaven's shapes (gh_art.py)
     ghclasses\\source.json                               where it came from (Gloomhaven folder + Steam build)
 
 Conversion (see the research notes in the gloomhaven-class-port memory):
@@ -16,6 +17,7 @@ Conversion (see the research notes in the gloomhaven-class-port memory):
       own cards use for that ability: attack diamond, move circle, heal diamond-plus, everything else square
     - card-specific text keys ($013_B$) get a GH_ prefix so they can never meet a Frosthaven key
     - perk keys Frosthaven's parser doesn't know (IgnoreNegativeItemEffects: True) become Frosthaven perk Flags
+    - the "- XP: N" layout element goes (Frosthaven shows a card's experience in the corner badge, from the data)
     - the character gets Frosthaven's extra fields from the official crossover sheet (race, traits). No MasteryIDs
       or ElementalAffinities until there are some: the game's YAML reader fails a whole file on an empty list ([]),
       and the plugin gives a class without masteries an empty list (null crashes the scenario results screen)
@@ -123,6 +125,19 @@ def convert_enhancements(s, warn):
     return "".join(lines)
 
 
+def convert_layout(s):
+    """Gloomhaven layouts place an "- XP: N" element under an ability; Frosthaven draws that element as its XP
+    tracker bar (teal pips) and shows a card's experience in the corner badge from the card data instead, as none
+    of its own layouts use it. Drop the lines (an element list left empty is fine: Gloomhaven's own layouts have
+    empty columns)."""
+    m = re.search(r"^Layout:\s*$", s, re.M)
+    if not m:
+        return s
+    head, layout = s[:m.end()], s[m.end():]
+    layout = re.sub(r"^[ \t]*- XP:[^\n]*(\n|$)", "", layout, flags=re.M)  # also the file's last line
+    return head + layout
+
+
 def convert_card(name, s, warn):
     m = re.search(r"^ID:\s*(\d+)\s*$", s, re.M)
     if not m:
@@ -131,6 +146,7 @@ def convert_card(name, s, warn):
     s = s[:m.start(1)] + str(new_id) + s[m.end(1):]
     s = convert_enhancements(s, lambda w: warn(f"{name}: {w}"))
     s = CARD_TEXT_KEY.sub(lambda k: f"$GH_{k.group(1)}$", s)
+    s = convert_layout(s)
     return new_id, s
 
 
@@ -247,6 +263,18 @@ def main():
             write(f"Global/Perks/{cls}/{Path(n).name}", s)
 
         print(f"{cls}: 1 character, {len(cards)} cards (IDs {CARD_ID_OFFSET + 1}..), {len(perks)} perks")
+
+        # pictures, composed into Frosthaven's shapes (see gh_art.py); optional, the plugin keeps stand-in art without
+        try:
+            import gh_art
+        except ImportError as e:
+            warnings.append(f"{cls}: no pictures ({e})")
+        else:
+            try:
+                files, roles = gh_art.export(gh, cls, args.out / "art" / cls)
+                print(f"{cls}: {len(files)} pictures from Gloomhaven's {len(roles)}")
+            except Exception as e:  # noqa: BLE001 - art is cosmetic, never block the data
+                warnings.append(f"{cls}: pictures failed: {e}")
 
     table = {}
     for key in sorted(used_keys):

@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using BepInEx;
 using HarmonyLib;
-using Newtonsoft.Json.Linq;
 using ScenarioRuleLibrary;
 using ScenarioRuleLibrary.YML;
 using UnityEngine;
@@ -14,15 +13,15 @@ namespace FrosthavenMods
 {
     /// <summary>
     /// Gloomhaven classes in Frosthaven (stage 1 spike, the author's PC only). tools/gh_port.py converts a class from the
-    /// player's own Gloomhaven install into new ruleset files plus its English text; this side makes the game cope with
-    /// a class it has no art for:
+    /// player's own Gloomhaven install into new ruleset files, its English text and its pictures; this side makes the
+    /// game cope with a class it has no art of its own for:
     ///   - 3D model: Frosthaven ships no hero bundle for Gloomhaven models, and asking for one is a null-reference crash
     ///     (AssetBundleManager.BundleConfigForPrefab finds no config). Until the real model loads from Gloomhaven's
     ///     bundles (stage 2), any hero model without a bundle borrows the Drifter's (an Inox, like the Brute).
     ///   - UI config: Frosthaven keeps one CharacterConfigUI per hero (portraits, icons, class colour, card skin, where the
     ///     model stands on the character screen). A class without one gets the Banner Spear's for most lookups and null
     ///     for the 3D preview, which parks the model half-way into the floor. Each ported class gets a copy of the
-    ///     Drifter's config with its own name, colour and whatever 2D art the player's Gloomhaven install has for it.
+    ///     Drifter's config with its own name and colour and the pictures the converter prepared (ghclasses\art).
     ///   - Cards: card IDs of 10000 and more select the Gloomhaven-era card prefab, which Frosthaven ships without its
     ///     background sprites (a white rectangle with two red "lost" tiles). Gloomhaven classes' cards are drawn with a
     ///     Frosthaven card prefab instead, through the same generated-layout code the game uses for its long rest card.
@@ -195,135 +194,77 @@ namespace FrosthavenMods
             cfg.Cards = new CharacterConfigUI.AbilityCardConfigUI[0];      // the Drifter's pre-built card prefabs and headers are hers
             if (ClassColours.TryGetValue(model, out Color colour) && cfg.questConfig != null) cfg.questConfig.color = colour;
             // Kept from the Drifter: the 3D placement on the character screen (it is the Drifter model that stands there),
-            // card skin and card prefab (see CardPrefab), gender, tab icon, map marker, active-bonus background, tokens.
-            int loaded = GHArt(cfg, source, model);
-            Plugin.Log.LogInfo($"Gloomhaven classes: {model} gets its own UI config (a copy of the {StandInModel}'s" +
-                               (loaded > 0 ? $", {loaded} pictures from the player's Gloomhaven)" : "; no Gloomhaven pictures loaded)"));
+            // card skin and card prefab (see CardPrefab), gender, active-bonus sidebar, highlight frame, tokens.
+            int loaded = Pictures(cfg, source, model);
+            Plugin.Log.LogInfo($"Gloomhaven classes: {model} gets its own UI config (a copy of the {StandInModel}'s, {loaded} of its own pictures)");
             return cfg;
         }
 
-        // ------------------------------------------------------------------ 2D art from the player's Gloomhaven install
+        // ------------------------------------------------------------------ pictures prepared by tools/gh_art.py
 
-        private static JObject _source;
-        private static readonly Dictionary<string, AssetBundle> GHBundles = new Dictionary<string, AssetBundle>(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<string, Sprite> PictureCache = new Dictionary<string, Sprite>(StringComparer.OrdinalIgnoreCase);
 
-        /// <summary>ghclasses\source.json, written by tools/gh_port.py: where the player's Gloomhaven is.</summary>
-        private static JObject Source
+        /// <summary>Puts the class's own pictures on the config: ghclasses\art\&lt;Model&gt;\&lt;role&gt;.png, which
+        /// tools/gh_art.py composed from the player's Gloomhaven into the shapes of the Drifter's pictures. Each gets the
+        /// Drifter picture's on-screen native size, so layouts that call SetNativeSize or carry offsets tuned for hers
+        /// behave the same. A missing file keeps the Drifter's picture. Returns how many loaded.</summary>
+        private static int Pictures(CharacterConfigUI cfg, CharacterConfigUI like, ECharacter model)
         {
-            get
+            string dir = Path.Combine(Folder, "art", model.ToString());
+            if (!Directory.Exists(dir))
             {
-                if (_source != null) return _source;
-                _source = new JObject();
-                string file = Path.Combine(Folder, "source.json");
-                try { if (File.Exists(file)) _source = JObject.Parse(File.ReadAllText(file)); }
-                catch (Exception e) { Plugin.Log.LogError("Gloomhaven classes: could not read " + file + ": " + e); }
-                return _source;
+                Plugin.Log.LogWarning($"Gloomhaven classes: no pictures for {model} ({dir}): rerun tools/gh_port.py with UnityPy and Pillow installed");
+                return 0;
             }
-        }
-
-        /// <summary>Puts the class's Gloomhaven pictures on the config where Gloomhaven stores them as one-asset bundles
-        /// (named after the class for every hero): class icons, the painted portrait and the small stat-panel portrait.
-        /// Each picture is cut to the shape and native size of the Drifter's picture it replaces, so Frosthaven's layouts
-        /// treat it exactly like hers. Anything that fails to load keeps the Drifter's. Returns how many loaded.</summary>
-        private static int GHArt(CharacterConfigUI cfg, CharacterConfigUI like, ECharacter model)
-        {
-            string name = model.ToString(), low = name.ToLowerInvariant();
             int n = 0;
-            Sprite icon = GHSprite($"character_gui_classicons_assets_{low}_icon.bundle", name + "_Icon");
-            if (icon != null) { cfg.iconClass = icon; n++; }
-            Sprite glow = GHSprite($"character_gui_classicons_assets_{low}glow_icon.bundle", name + "Glow_Icon");
-            if (glow != null) { cfg.iconClassHighlight = glow; n++; }
-            Sprite gold = GHSprite($"character_gui_classicons_assets_assembleparty_{low}icon.bundle", "AssembleParty_" + name + "Icon");
-            if (gold != null) { cfg.iconClassGold = gold; n++; }
-            Sprite portrait = GHSprite("misc_characterportraits_assets_all.bundle", low);   // 512x512 painted bust
-            if (portrait != null)
+            Sprite p;
+            if ((p = Picture(dir, "iconClass", like.iconClass)) != null) { cfg.iconClass = p; n++; }
+            if ((p = Picture(dir, "iconClassHighlight", like.iconClassHighlight)) != null) { cfg.iconClassHighlight = p; n++; }
+            if ((p = Picture(dir, "iconClassGold", like.iconClassGold)) != null) { cfg.iconClassGold = p; n++; }
+            if ((p = Picture(dir, "illustration", like.illustration)) != null) { cfg.illustration = p; cfg.distributionPortrait = p; n++; }  // the Drifter uses one picture for both
+            if ((p = Picture(dir, "InfoIllustration", like.InfoIllustration)) != null) { cfg.InfoIllustration = p; n++; }
+            if ((p = Picture(dir, "newAdventurePortrait", like.newAdventurePortrait)) != null) { cfg.newAdventurePortrait = p; n++; }
+            // newHighlightAdventurePortrait stays the Drifter's: it is a generic glow frame, not a portrait
+            if ((p = Picture(dir, "scenarioPortrait", like.scenarioPortrait)) != null) { cfg.scenarioPortrait = p; cfg.assemblyPortrait = p; n++; }
+            if (cfg.questConfig != null && (p = Picture(dir, "marker", like.questConfig?.marker)) != null) { cfg.questConfig.marker = p; n++; }
+            if (cfg.tabIconConfig != null)
             {
-                n++;
-                cfg.illustration = Fit(portrait, like.illustration);
-                cfg.InfoIllustration = Fit(portrait, like.InfoIllustration);
-                cfg.newAdventurePortrait = Fit(portrait, like.newAdventurePortrait);
-                cfg.newHighlightAdventurePortrait = Fit(portrait, like.newHighlightAdventurePortrait);
-                cfg.scenarioPortrait = Fit(portrait, like.scenarioPortrait);
-                cfg.assemblyPortrait = Fit(portrait, like.assemblyPortrait);
+                if ((p = Picture(dir, "tabNormal", like.tabIconConfig?.normalIcon)) != null) { cfg.tabIconConfig.normalIcon = p; n++; }
+                if ((p = Picture(dir, "tabSelected", like.tabIconConfig?.selectedIcon)) != null) { cfg.tabIconConfig.selectedIcon = p; n++; }
             }
-            Sprite small = GHSprite($"actor_portrats_assets_portrait_{low}.bundle", "Portrait_" + name);   // 94x118 stat-panel portrait
-            if (small != null) { cfg.distributionPortrait = Fit(small, like.distributionPortrait); n++; }
+            if ((p = Picture(dir, "activeAbility", like.activeAbility)) != null) { cfg.activeAbility = p; n++; }
             return n;
         }
 
-        /// <summary>A sprite showing as much of <paramref name="picture"/> as fits the shape of <paramref name="like"/>, with
-        /// the same native size as <paramref name="like"/> (layouts that call SetNativeSize or read the offset tuned for the
-        /// Drifter's picture then behave the same). Wide cuts keep more of the top, where a portrait's face is.</summary>
-        private static Sprite Fit(Sprite picture, Sprite like)
+        /// <summary>The sprite for &lt;dir&gt;\&lt;role&gt;.png with the on-screen native size of <paramref name="like"/>, or
+        /// null when there is no such file or it can't be read (never throws). One texture per file.</summary>
+        private static Sprite Picture(string dir, string role, Sprite like)
         {
-            if (picture == null) return null;
-            if (like == null || like.rect.width <= 0 || like.rect.height <= 0) return picture;
-            Rect src = picture.rect;
-            float aspect = like.rect.width / like.rect.height;
-            float w = src.width, h = w / aspect;
-            if (h > src.height) { h = src.height; w = h * aspect; }
-            float x = src.x + (src.width - w) / 2f;
-            float y = src.y + (src.height - h) * 0.7f;                  // 70% of the spare height below the cut, 30% above
-            float ppu = like.pixelsPerUnit * w / like.rect.width;        // same on-screen native size as the Drifter's picture
-            Sprite cut = Sprite.Create(picture.texture, new Rect(x, y, w, h), new Vector2(0.5f, 0.5f), ppu, 0, SpriteMeshType.FullRect);
-            cut.name = picture.name + " as " + like.name;
-            cut.hideFlags = HideFlags.DontUnloadUnusedAsset;
-            return cut;
-        }
-
-        /// <summary>A sprite from one of the player's Gloomhaven bundles, or null (never throws).</summary>
-        private static Sprite GHSprite(string bundleFile, string assetName)
-        {
+            string file = Path.Combine(dir, role + ".png");
+            if (PictureCache.TryGetValue(file, out Sprite cached)) return cached;
+            Sprite sprite = null;
             try
             {
-                AssetBundle bundle = GHBundle(bundleFile);
-                if (bundle == null) return null;
-                Sprite sprite = bundle.LoadAsset<Sprite>(assetName);
-                if (sprite == null)
+                if (File.Exists(file))
                 {
-                    // by full path: Gloomhaven's keys are "assets/.../<name>.png", lower-cased
-                    string want = "/" + assetName.ToLowerInvariant() + ".";
-                    string path = Array.Find(bundle.GetAllAssetNames(), p => p.Contains(want));
-                    if (path != null) sprite = bundle.LoadAsset<Sprite>(path);
-                }
-                if (sprite == null)
-                {
-                    Plugin.Log.LogWarning($"Gloomhaven classes: no picture {assetName} in {bundleFile}, keeping the {StandInModel}'s");
-                    return null;
-                }
-                sprite.hideFlags = HideFlags.DontUnloadUnusedAsset;
-                if (sprite.texture != null) sprite.texture.hideFlags = HideFlags.DontUnloadUnusedAsset;
-                return sprite;
-            }
-            catch (Exception e)
-            {
-                Plugin.Log.LogWarning($"Gloomhaven classes: {assetName} from {bundleFile} failed ({e.Message}), keeping the {StandInModel}'s");
-                return null;
-            }
-        }
-
-        /// <summary>Opens a Gloomhaven (Unity 2021) bundle in this Unity 2022 player. One attempt per file, failures
-        /// remembered (Unity returns null for a second LoadFromFile of an already open bundle); never unloaded.</summary>
-        private static AssetBundle GHBundle(string bundleFile)
-        {
-            if (GHBundles.TryGetValue(bundleFile, out AssetBundle bundle)) return bundle;
-            bundle = null;
-            try
-            {
-                string root = Source["gloomhaven"]?.ToString();
-                string path = string.IsNullOrEmpty(root) ? null
-                    : Path.Combine(root, "GH_Data", "StreamingAssets", "aa", "StandaloneWindows64", bundleFile);
-                if (path == null) Plugin.Log.LogWarning("Gloomhaven classes: no Gloomhaven folder in source.json, no pictures");
-                else if (!File.Exists(path)) Plugin.Log.LogWarning($"Gloomhaven classes: no such bundle {path}");
-                else
-                {
-                    bundle = AssetBundle.LoadFromFile(path);   // null (with Unity's own error line) if this player can't read it
-                    if (bundle == null) Plugin.Log.LogWarning($"Gloomhaven classes: Unity could not open {bundleFile}");
+                    var texture = new Texture2D(2, 2, TextureFormat.RGBA32, true) { name = role, wrapMode = TextureWrapMode.Clamp, hideFlags = HideFlags.DontUnloadUnusedAsset };
+                    if (ImageConversion.LoadImage(texture, File.ReadAllBytes(file), true))
+                    {
+                        float ppu = like != null && like.rect.width > 0 ? like.pixelsPerUnit * texture.width / like.rect.width : 100f;
+                        sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), ppu, 0, SpriteMeshType.FullRect);
+                        sprite.name = role;
+                        sprite.hideFlags = HideFlags.DontUnloadUnusedAsset;
+                    }
+                    else
+                    {
+                        UnityEngine.Object.Destroy(texture);
+                        Plugin.Log.LogWarning($"Gloomhaven classes: {file} is not a PNG Unity can read");
+                    }
                 }
             }
-            catch (Exception e) { Plugin.Log.LogWarning($"Gloomhaven classes: {bundleFile}: {e.Message}"); }
-            GHBundles[bundleFile] = bundle;
-            return bundle;
+            catch (Exception e) { Plugin.Log.LogWarning($"Gloomhaven classes: {file}: {e.Message}"); }
+            PictureCache[file] = sprite;
+            return sprite;
         }
 
         // ------------------------------------------------------------------ ability cards
