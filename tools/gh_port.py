@@ -15,8 +15,9 @@ Conversion (see the research notes in the gloomhaven-class-port memory):
       own cards use for that ability: attack diamond, move circle, heal diamond-plus, everything else square
     - card-specific text keys ($013_B$) get a GH_ prefix so they can never meet a Frosthaven key
     - perk keys Frosthaven's parser doesn't know (IgnoreNegativeItemEffects: True) become Frosthaven perk Flags
-    - the character gets Frosthaven's extra fields from the official crossover sheet (race, traits) and an empty
-      mastery list (a missing one crashes the scenario results screen)
+    - the character gets Frosthaven's extra fields from the official crossover sheet (race, traits). No MasteryIDs
+      or ElementalAffinities until there are some: the game's YAML reader fails a whole file on an empty list ([]),
+      and the plugin gives a class without masteries an empty list (null crashes the scenario results screen)
 
 Usage:
     python tools/gh_port.py Brute [--gh <Gloomhaven folder>] [--out <dir>]
@@ -46,8 +47,6 @@ CLASS_EXTRAS = {
         "Race": "Inox",
         "Traits": "[ Armored, Intimidating, Strong ]",
         "Complexity": "1",
-        "ElementalAffinities": "[]",
-        "MasteryIDs": "[]",
         "HeroStats": {"Melee": 5, "Ranged": 1, "Mobility": 3, "Support": 1, "Defense": 5, "Control": 3},
     },
 }
@@ -210,6 +209,8 @@ def main():
     def write(rel, s):
         if rel.lower() in fh_names:
             sys.exit(f"{rel} already exists in Frosthaven's ruleset")
+        if re.search(r"^[^#\n]*:\s*\[\s*\]", s, re.M):
+            sys.exit(f"{rel}: empty list ([]): the game's YAML reader rejects the whole file")
         p = out_ruleset / rel
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_bytes(s.encode("utf-8"))

@@ -110,6 +110,19 @@ namespace FrosthavenMods
             if (swapped != null) charactersNeeded = swapped;
         }
 
+        // ------------------------------------------------------------------ class definitions
+
+        /// <summary>A class without masteries: the game's YAML reader can't read an empty list ("MasteryIDs: []" fails
+        /// the whole file), and a missing one leaves the definition's MasteryIDs null, which the scenario results screen
+        /// reads without a check (ScenarioResultViewService: masteryIDs.Length). Give such classes an empty array.</summary>
+        [HarmonyPatch(typeof(FH.YML.YMLDefRepository), "ApplyVerticalChunkPatches")]
+        [HarmonyPostfix]
+        private static void NoMasteries(FH.YML.YMLDefRepository __instance)
+        {
+            foreach (FHRL.CharacterClassDef def in __instance.DefRepository.CharacterClasses.Values)
+                if (def.MasteryIDs == null) def.MasteryIDs = new FHRL.MasteryID[0];
+        }
+
         // ------------------------------------------------------------------ text
 
         private static bool TryOurs(string term, out string text)

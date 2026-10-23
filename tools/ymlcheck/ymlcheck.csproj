@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Offline check that rule files parse with the game's own YAML reader (YamlFormats.YamlParser in SharedLibrary),
+       so a file the game would reject is caught before launching it. See Program.cs. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <NoWarn>$(NoWarn);MSB3277</NoWarn>
+    <GamePath Condition="'$(GamePath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Frosthaven</GamePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="SharedLibrary"><HintPath>$(GamePath)\Frosthaven_Data\Managed\SharedLibrary.dll</HintPath><Private>true</Private></Reference>
+  </ItemGroup>
+
+</Project>
