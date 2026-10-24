@@ -175,6 +175,27 @@ MOD_RULES = {
 }
 
 
+# A content pack is data the game loads at startup (FrosthavenMods\packs\<name>\pack.json); its house rule bit unlocks it
+# in a campaign. Packs by their rule bit:
+PACK_RULES = {"gloomhaven": 15}
+
+
+def installed_packs(gdir=None):
+    """The content packs installed in the game: [{'name', 'title', 'version', 'classes', 'rule'}] from each pack.json."""
+    d = mods_dir(gdir)
+    out = []
+    for path in sorted(glob.glob(os.path.join(d, "packs", "*", "pack.json"))) if d else []:
+        try:
+            with open(path, encoding="utf-8") as f:
+                p = json.load(f)
+        except (OSError, ValueError):
+            continue
+        name = p.get("name") or os.path.basename(os.path.dirname(path))
+        out.append({"name": name, "title": p.get("title") or name, "version": p.get("version"),
+                    "classes": p.get("classes") or [], "rule": MOD_RULES.get(PACK_RULES.get(name))})
+    return out
+
+
 def _header(path):
     """(party name, rules number) from a save file's header, or (None, None)."""
     try:

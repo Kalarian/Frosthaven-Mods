@@ -38,6 +38,8 @@ iframe { border: 0; width: 100%; flex: 1; background: var(--bg); }
 
 /* Mods */
 #mods { overflow-y: auto; }
+.card h4 { margin: 14px 0 6px; font-size: 14px; letter-spacing: .02em; }
+.pack { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 6px 0; }
 .card.guide { padding-bottom: 8px; }
 #guideframe { display: block; width: 100%; height: 600px; flex: none; background: transparent; }
 .wrap { max-width: 980px; width: 100%; margin: 0 auto; padding: 28px 24px 48px; }
@@ -301,9 +303,20 @@ function campaignCard(s) {
   const all = ["Battle stats", "Dwarf's balance changes", "Easier item reward window", "Game bug fixes", "Masteries carry over",
     "Milestone saves", "Modifier deck odds", "More story events", "Reveal event outcomes", "Scenario map file",
     "Share duplicate loot", "Show personal quest rewards", "Tradeable resources and equipment"];
+  const ruled = all.filter(r => on.has(r)).length;
+  // content packs: new classes the game loads at startup; each has its own switch, which locks on once used
+  const packs = (s.packs || []).map(p => {
+    const lit = c.rules && p.rule && on.has(p.rule);
+    const state = !c.rules ? "" : lit ? `<span class="chip on">On in this campaign</span>` : `<span class="chip">Off in this campaign</span>`;
+    return `<div class="pack"><div><b>${esc(p.title)}</b> <span class="note">v${esc(p.version ?? "?")}${p.classes.length ? " · adds " + esc(p.classes.join(", ")) : ""}</span></div>${state}</div>`;
+  }).join("");
   return `<div class="card"><h3>Campaign: ${esc(c.name)}</h3>
-    <p class="note" style="margin-top:0">Last played ${esc(when(c.lastPlayed))}.${c.rules ? ` ${on.size} of ${all.length} mod rules on (the host changes them in the game: Options, Custom Rules).` : ""}</p>
-    ${c.rules ? `<div class="chips">${all.map(r => `<span class="chip${on.has(r) ? " on" : ""}" title="${on.has(r) ? "On" : "Off"} in this campaign">${esc(r)}</span>`).join("")}</div>` : ""}
+    <p class="note" style="margin-top:0">Last played ${esc(when(c.lastPlayed))}. The host changes these in the game: Options, Custom Rules.</p>
+    <h4>House rules${c.rules ? ` <span class="note">${ruled} of ${all.length} on</span>` : ""}</h4>
+    ${c.rules ? `<div class="chips">${all.map(r => `<span class="chip${on.has(r) ? " on" : ""}" title="${on.has(r) ? "On" : "Off"} in this campaign">${esc(r)}</span>`).join("")}</div>` : `<p class="note">Not known until the campaign has been saved with the mods.</p>`}
+    <h4>Content packs</h4>
+    ${packs || `<p class="note">None installed.</p>`}
+    ${packs ? `<p class="note">A pack adds new classes. Once someone in a campaign has played one, that campaign needs the pack for good.</p>` : ""}
   </div>`;
 }
 

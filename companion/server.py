@@ -46,6 +46,7 @@ def status():
         "state": state,
         "job": mods.job(),
         "campaigns": game.all_campaigns(),
+        "packs": game.installed_packs(gdir),
         "playGuide": os.path.exists(paths.PLAY_GUIDE),
     }
 
