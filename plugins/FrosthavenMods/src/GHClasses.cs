@@ -444,9 +444,65 @@ namespace FrosthavenMods
                 number.color = ClassColours.TryGetValue(model, out Color tint) ? new Color(tint.r * 0.4f, tint.g * 0.4f, tint.b * 0.4f) : InitiativeInk;
                 number.fontSize = 26f;   // the real cards' 28 at 316 wide, scaled to this template's 294; the template says 35
             }
+            TopRim(full.Find("Header"));
         }
 
         private static readonly Color InitiativeInk = new Color(0.13f, 0.09f, 0.05f);
+
+        /// <summary>The template's card painting (Header's sprite, Kro_HUD_Card_Test_*) has a rim along the bottom
+        /// edge with cut corners and up the sides as far as the smoke at the top, and a plain right-angled top edge;
+        /// Frosthaven's own cards are rimmed all round. The rim is drawn at the top by mirroring the painting
+        /// vertically in three masked windows along the top and the upper sides: a flipped copy of the whole picture
+        /// under each window, so only the painting's bottom rim and its lower side rims show, upside down. The windows
+        /// stop short of the inner frame (17 units in from the bottom edge) and of the band.</summary>
+        private static void TopRim(Transform header)
+        {
+            Image painting = header != null ? header.GetComponent<Image>() : null;
+            Sprite sprite = painting != null ? painting.overrideSprite ?? painting.sprite : null;
+            if (sprite == null) return;
+            Rect card = ((RectTransform)header).rect;
+            const float edge = 12f, side = 6f;
+            float sideLength = card.height / 2f - 23f - edge;   // down to the top half's frame bottom, above the band
+            Window(header, "GH rim top", sprite, card, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 1f), Vector2.zero, new Vector2(0f, edge), 0f);
+            Window(header, "GH rim left", sprite, card, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, -edge), new Vector2(side, sideLength), 0f);
+            Window(header, "GH rim right", sprite, card, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(0f, -edge), new Vector2(side, sideLength), card.width - side);
+        }
+
+        /// <summary>A masked window on the card (anchored to its top edge) showing the card painting flipped
+        /// vertically and aligned with the card; <paramref name="windowLeft"/> is the window's left edge from the
+        /// card's left edge, so the copy can be shifted back to line up.</summary>
+        private static void Window(Transform header, string name, Sprite sprite, Rect card, Vector2 anchorMin, Vector2 anchorMax, Vector2 pivot, Vector2 position, Vector2 size, float windowLeft)
+        {
+            Transform window = header.Find(name);
+            if (window == null)
+            {
+                var go = new GameObject(name, typeof(RectTransform), typeof(RectMask2D));
+                window = go.transform;
+                window.SetParent(header, false);
+                var copy = new GameObject("painting", typeof(RectTransform), typeof(Image));
+                copy.transform.SetParent(window, false);
+                Image image = copy.GetComponent<Image>();
+                image.sprite = sprite;
+                image.type = Image.Type.Simple;
+                image.preserveAspect = false;
+                image.raycastTarget = false;
+                var c = (RectTransform)copy.transform;
+                c.anchorMin = c.anchorMax = new Vector2(0f, 1f);  // the window's top-left corner
+                c.pivot = new Vector2(0f, 0f);                     // flipped about its bottom-left: the picture hangs down from there
+                c.localScale = new Vector3(1f, -1f, 1f);
+            }
+            var w = (RectTransform)window;
+            w.anchorMin = anchorMin;
+            w.anchorMax = anchorMax;
+            w.pivot = pivot;
+            w.anchoredPosition = position;
+            w.sizeDelta = size;
+            window.SetSiblingIndex(0);                             // under the title and the card picture mask
+            var p = (RectTransform)window.GetChild(0);
+            p.sizeDelta = new Vector2(card.width, card.height);
+            // the copy's pivot (its visual top edge) must sit at the card's top-left corner, measured from the window
+            p.anchoredPosition = new Vector2(-windowLeft, -position.y);
+        }
 
         /// <summary>The card skin (AbilityCardUI.SetSkin, after MakeAbilityCard) is where the template's bar sprites
         /// come back onto the two buttons, so the band is laid out again after skinning.</summary>
