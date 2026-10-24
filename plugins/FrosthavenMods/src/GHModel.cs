@@ -69,6 +69,8 @@ namespace FrosthavenMods
             public string[] Projectiles = new string[0];                                                           // "Drifter_arrow": child names her ranged states look for
             public string MeleeWeapon;                                                                             // "Drifter_club": the name her melee states' impact sounds look for
             public HashSet<string> Silence = new HashSet<string>(StringComparer.Ordinal);                          // her voice events, blanked
+            public Dictionary<string, string> StateClips = new Dictionary<string, string>(StringComparer.Ordinal); // her state -> the clip it plays
+            public Dictionary<string, string> GhStates = new Dictionary<string, string>(StringComparer.Ordinal);   // Gloomhaven-only state -> its clip
         }
 
         internal sealed class Entry
@@ -129,6 +131,8 @@ namespace FrosthavenMods
                     e.Animation.Projectiles = Strings(a["projectiles"]);
                     e.Animation.MeleeWeapon = (string)a["melee_weapon"];
                     foreach (string s in Strings(a["silence"])) e.Animation.Silence.Add(s);
+                    foreach (JProperty c in (a["state_clips"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>()) e.Animation.StateClips[c.Name] = (string)c.Value;
+                    foreach (JProperty c in (a["gh_states"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>()) e.Animation.GhStates[c.Name] = (string)c.Value;
                 }
                 return e;
             }
@@ -624,6 +628,74 @@ namespace FrosthavenMods
         /// Each is reset from the value it was authored with (the behaviours remember it), scaled by the clip-length
         /// ratio or set to Gloomhaven's own moment for that beat, so doing this again changes nothing. Her voice is
         /// blanked (an empty event is skipped). Returns how many behaviours were seen (0: the Animator wasn't bound yet).</summary>
+        // ------------------------------------------------------------------ Gloomhaven-only card animations
+
+        private static AnimatorOverrideController _lentOn;
+        private static AnimationClip _lentSlot, _lentBefore;
+
+        /// <summary>A card can ask for an animation the Drifter's animator has no state for (the Brute's shouts:
+        /// "TargetedShout", "RadialShout"); the game then plays the next state on its list ("Push", "PowerUp"), whose clip
+        /// is shared with other states (her cast). For that one play, the fallback state's clip slot is lent the
+        /// Gloomhaven state's clip, and given back once the animator has left the state. The state, its timing and its
+        /// events stay the ones the game expects, so nothing waits on an event that never comes.</summary>
+        [HarmonyPatch(typeof(Choreographer), "PlayFirstAvailableAnimationStateOnObject")]
+        [HarmonyPrefix]
+        private static void LendClip(GameObject objectToAnimate, List<string> statesToTry)
+        {
+            GiveBack();
+            if (objectToAnimate == null || statesToTry == null) return;
+            try
+            {
+                Animator animator = MF.GetGameObjectAnimator(objectToAnimate);
+                if (!(animator != null && animator.runtimeAnimatorController is AnimatorOverrideController ovr)) return;
+                Built b = Templates.Values.FirstOrDefault(t => t != null && t.Override == ovr);
+                if (b == null) return;
+                AnimationSpec anim = b.Entry.Animation;
+                bool Has(string n) => n != null && animator.HasState(0, Animator.StringToHash(n));
+                int at = statesToTry.FindIndex(n => n != null && anim.GhStates.ContainsKey(n) && !Has(n));
+                if (at < 0) return;
+                string fallback = statesToTry.Skip(at + 1).FirstOrDefault(Has);
+                if (fallback == null || !anim.StateClips.TryGetValue(fallback, out string herClip)) return;
+                AnimationClip gh = b.Bundle?.Clip(anim.GhStates[statesToTry[at]]);
+                AnimationClip slot = ovr.runtimeAnimatorController?.animationClips.FirstOrDefault(c => c != null && c.name == herClip);
+                if (gh == null || slot == null) return;
+                _lentOn = ovr;
+                _lentSlot = slot;
+                _lentBefore = ovr[slot];
+                ovr[slot] = gh;
+                Plugin.Instance.StartCoroutine(GiveBackAfter(animator, fallback));
+            }
+            catch (Exception e)
+            {
+                if (Reported.Add("lend clip")) Plugin.Log.LogWarning($"Gloomhaven model: could not play a Gloomhaven-only card animation: {e.Message}");
+            }
+        }
+
+        /// <summary>Gives the lent clip slot its own clip back once the animator has left the state (and any
+        /// transition out of it), or after 10 seconds.</summary>
+        private static System.Collections.IEnumerator GiveBackAfter(Animator animator, string state)
+        {
+            AnimationClip slot = _lentSlot;
+            var hashes = new HashSet<int> { Animator.StringToHash(state), Animator.StringToHash(state + "-1"), Animator.StringToHash(state + "-2") };
+            float until = Time.realtimeSinceStartup + 10f;
+            yield return null;
+            yield return null;
+            while (animator != null && Time.realtimeSinceStartup < until
+                   && (hashes.Contains(animator.GetCurrentAnimatorStateInfo(0).shortNameHash) || animator.IsInTransition(0)))
+                yield return null;
+            if (_lentSlot == slot) GiveBack();
+        }
+
+        private static void GiveBack()
+        {
+            if (_lentOn != null && _lentSlot != null)
+            {
+                try { _lentOn[_lentSlot] = _lentBefore; } catch (Exception) { /* the controller died with the scene */ }
+            }
+            _lentOn = null;
+            _lentSlot = _lentBefore = null;
+        }
+
         private static int Retime(Animator animator, AnimationSpec anim)
         {
             if (anim == null || anim.States.Count == 0) return 0;

@@ -104,8 +104,9 @@ PERK_FLAG_KEYS = ("IgnoreNegativeItemEffects", "IgnoreNegativeScenarioEffects")
 # A card's AnimOverload names a state of the hero's animator. The plugin drives a Gloomhaven model with the Drifter's
 # animator (gh_model.py), so Gloomhaven state names are rewritten to the Drifter state whose clip slot gets the matching
 # Gloomhaven clip: the heavy two-hand swing and the shield power-up then show. Names left out fall back to the game's
-# defaults (Attack / PowerUp) exactly as an unknown name does; the shouts stay out on purpose (the Drifter's Push and
-# DangerArea states would add her push effects while still playing the plain cast clip).
+# defaults (Attack / PowerUp) exactly as an unknown name does. The shouts keep their Gloomhaven names on purpose (the
+# Drifter's Push and DangerArea states play her plain cast clip): the plugin lends the roar clip to the state the game
+# falls back to for that one play (GHModel.LendClip, from the model entry's gh_states).
 ANIM_OVERLOADS = {
     "HeavyMeleeAttack": "Attack_AOE_Cone",
     "HeavyFatalAdvance": "Attack_AOE_Cone",

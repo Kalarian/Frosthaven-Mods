@@ -458,8 +458,13 @@ def _animation(b, fh_bundle_path):
     missing = sorted(c for c in fh_ctrl["clips"] if c not in clips)
     if missing:
         print(f"warning: Drifter clips with no Gloomhaven clip (they will idle): {', '.join(missing)}")
+    # for card animations the Drifter's animator has no state for (a Gloomhaven card's "TargetedShout"): the clip each
+    # Gloomhaven state plays, and the clip each of her states plays, so the plugin can lend the Gloomhaven clip to the
+    # state the game falls back to, for that one play (GHModel.LendClip)
+    state_clips = {s["name"]: s["clips"][0] for s in fh_ctrl["states"] if s["clips"]}
+    gh_states = {s["name"]: s["clips"][0] for s in gh_ctrl["states"] if s["clips"] and s["name"] not in state_clips}
     return {"base": BASE_HERO, "clips": clips, "states": states, "projectiles": projectiles,
-            "melee_weapon": melee_weapon, "silence": sorted(silence)}
+            "melee_weapon": melee_weapon, "silence": sorted(silence), "state_clips": state_clips, "gh_states": gh_states}
 
 
 def _smb_times(smbs):
