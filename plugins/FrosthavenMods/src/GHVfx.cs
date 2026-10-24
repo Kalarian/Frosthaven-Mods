@@ -1,0 +1,499 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using HarmonyLib;
+using Newtonsoft.Json.Linq;
+using ScenarioRuleLibrary;
+using UnityEngine;
+
+namespace FrosthavenMods
+{
+    /// <summary>
+    /// A Gloomhaven class's own ability effects, played in place of the Drifter's on the moves that had them in
+    /// Gloomhaven. The effect prefabs ride in the class's hero bundle (loading the model brings them into memory);
+    /// tools/gh_vfx.py records what the plugin must do to each one, and tools/gh_model.py which effect each animator
+    /// state plays and when (StateTiming.Effects, AnimationSpec.GhEffects).
+    ///
+    /// Per effect, a template is made once (an inactive-parented copy, like the model's): its materials are rebuilt on
+    /// Frosthaven's copy of the same shader (the two games share their effect shaders by name; Unity's legacy particle
+    /// shaders, which Frosthaven still carries, stand in for the few Gloomhaven-only ones), slots that came up empty
+    /// (materials Gloomhaven kept in bundles of their own, shipped with the pack) are filled by name, and the effect
+    /// scripts Frosthaven has too are re-added with their recorded fields. The templates then go into the Drifter's
+    /// cast behaviours as the effects to spawn (GHModel.Retime, LendClip), where the game plays them its usual way:
+    /// pooled, at the recorded moment, on the recorded bone or hex.
+    /// </summary>
+    internal static class GHVfx
+    {
+        // ------------------------------------------------------------------ pack data
+
+        internal sealed class ObjectSpec
+        {
+            public string[] Materials;            // per renderer slot; null: left as it is
+            public string TrailMaterial;
+            public string[] Loaded;               // a MaterialLoader's materials for this renderer
+            public bool KeepExisting;
+            public List<KeyValuePair<string, JObject>> Components = new List<KeyValuePair<string, JObject>>();
+        }
+
+        internal sealed class EffectSpec
+        {
+            public string Name;
+            public Dictionary<string, ObjectSpec> Objects = new Dictionary<string, ObjectSpec>(StringComparer.Ordinal);   // path under the prefab ("" = root)
+        }
+
+        internal sealed class MaterialSpec
+        {
+            public string Name, Shader, Bundle;
+            public Dictionary<string, float> Floats = new Dictionary<string, float>(StringComparer.Ordinal);
+            public Dictionary<string, Color> Colors = new Dictionary<string, Color>(StringComparer.Ordinal);
+            public Dictionary<string, string> Textures = new Dictionary<string, string>(StringComparer.Ordinal);
+            public string[] Keywords = new string[0];
+            public int Queue = -1;
+        }
+
+        internal sealed class BundleSpec { public string File, Name; }
+
+        internal sealed class Caster { public string Effect, Attach; public float Start; public bool Root; }
+        internal sealed class HexEffect { public string Effect; public float Start; public int TargetType; }
+        internal sealed class Hex { public float Hit; public List<HexEffect> Effects = new List<HexEffect>(); }
+
+        /// <summary>What a state plays: effects on the caster, and on the target / area / central hexes or as an aura,
+        /// with the area alignment flags when any hex list is set.</summary>
+        internal sealed class Play
+        {
+            public List<Caster> Caster = new List<Caster>();
+            public Hex Target, Area, Central, Aura;
+            public int Alignment;
+            public bool CasterCentre, Adjacent;
+            public bool AnyHex => Target != null || Area != null || Central != null || Aura != null;
+        }
+
+        internal static Dictionary<string, EffectSpec> ParseEffects(JToken j)
+        {
+            var out_ = new Dictionary<string, EffectSpec>(StringComparer.Ordinal);
+            foreach (JProperty p in (j as JObject)?.Properties() ?? Enumerable.Empty<JProperty>())
+            {
+                var spec = new EffectSpec { Name = p.Name };
+                foreach (JProperty o in (p.Value?["objects"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>())
+                {
+                    var v = o.Value as JObject;
+                    if (v == null) continue;
+                    var os = new ObjectSpec
+                    {
+                        Materials = v["materials"] is JArray ma ? ma.Select(x => (string)x).ToArray() : null,
+                        TrailMaterial = (string)v["trail_material"],
+                        Loaded = v["loaded"]?["materials"] is JArray la ? la.Select(x => (string)x).ToArray() : null,
+                        KeepExisting = (bool?)v["loaded"]?["keep"] ?? false,
+                    };
+                    foreach (JObject c in v["components"]?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
+                        if ((string)c["type"] != null) os.Components.Add(new KeyValuePair<string, JObject>((string)c["type"], c["fields"] as JObject ?? new JObject()));
+                    spec.Objects[o.Name] = os;
+                }
+                out_[p.Name] = spec;
+            }
+            return out_;
+        }
+
+        internal static Dictionary<string, MaterialSpec> ParseMaterials(JToken j)
+        {
+            var out_ = new Dictionary<string, MaterialSpec>(StringComparer.Ordinal);
+            foreach (JProperty p in (j as JObject)?.Properties() ?? Enumerable.Empty<JProperty>())
+            {
+                var v = p.Value as JObject;
+                if (v == null) continue;
+                var spec = new MaterialSpec { Name = p.Name, Shader = (string)v["shader"], Bundle = (string)v["bundle"], Queue = (int?)v["queue"] ?? -1 };
+                foreach (JProperty f in (v["floats"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>()) spec.Floats[f.Name] = (float)f.Value;
+                foreach (JProperty c in (v["colors"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>())
+                    if (c.Value is JArray a && a.Count == 4) spec.Colors[c.Name] = new Color((float)a[0], (float)a[1], (float)a[2], (float)a[3]);
+                foreach (JProperty t in (v["textures"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>()) spec.Textures[t.Name] = (string)t.Value;
+                spec.Keywords = (v["keywords"] as JArray)?.Select(x => (string)x).Where(x => !string.IsNullOrEmpty(x)).ToArray() ?? new string[0];
+                out_[p.Name] = spec;
+            }
+            return out_;
+        }
+
+        internal static List<BundleSpec> ParseBundles(JToken j) =>
+            (j as JArray)?.OfType<JObject>().Select(b => new BundleSpec { File = (string)b["file"], Name = (string)b["name"] })
+                .Where(b => !string.IsNullOrEmpty(b.File)).ToList() ?? new List<BundleSpec>();
+
+        internal static Play ParsePlay(JToken j)
+        {
+            var v = j as JObject;
+            if (v == null) return null;
+            var play = new Play
+            {
+                Alignment = (int?)v["alignment"] ?? 0, CasterCentre = (bool?)v["caster_centre"] ?? false, Adjacent = (bool?)v["adjacent"] ?? false,
+                Target = ParseHex(v["target"]), Area = ParseHex(v["area"]), Central = ParseHex(v["central"]), Aura = ParseHex(v["aura"]),
+            };
+            foreach (JObject c in v["caster"]?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
+                if ((string)c["effect"] != null)
+                    play.Caster.Add(new Caster { Effect = (string)c["effect"], Start = (float?)c["start"] ?? 0f, Attach = (string)c["attach"] ?? "", Root = (bool?)c["root"] ?? false });
+            return play.Caster.Count > 0 || play.AnyHex ? play : null;
+        }
+
+        private static Hex ParseHex(JToken j)
+        {
+            var v = j as JObject;
+            if (v == null) return null;
+            var hex = new Hex { Hit = (float?)v["hit"] ?? 0f };
+            foreach (JObject x in v["effects"]?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
+                if ((string)x["effect"] != null)
+                    hex.Effects.Add(new HexEffect { Effect = (string)x["effect"], Start = (float?)x["start"] ?? 0f, TargetType = (int?)x["target_type"] ?? 0 });
+            return hex.Effects.Count > 0 ? hex : null;
+        }
+
+        // ------------------------------------------------------------------ our entries in the Drifter's behaviours
+
+        /// <summary>Marked, so GHModel.Retime leaves their Gloomhaven moments alone (they are on the Gloomhaven clip's
+        /// own timeline; hers are rescaled to it).</summary>
+        internal sealed class GhSpawned : VFXShared.SpawnedEffect { }
+
+        internal sealed class GhHexEffect : VFXShared.BasicEffectTyped
+        {
+            public GhHexEffect(GameObject fx, float start, VFXShared.ActorType targets, CActor.EType caster) : base(fx, start, targets, caster) { OriginalStartTime = start; }
+        }
+
+        internal sealed class GhHex : VFXShared.TargetHexEffects { }
+
+        /// <summary>What a cast behaviour had before Apply, for LendClip to put back.</summary>
+        internal sealed class Kept
+        {
+            public List<VFXShared.SpawnedEffect> Caster;
+            public VFXShared.TargetHexEffects Target, Area, Central, Aura;
+            public VFXShared.AreaEffectAlignments Alignment;
+            public bool Centre, Adjacent;
+        }
+
+        internal static Kept Keep(CastEffectsSMB c) => new Kept
+        {
+            Caster = c.CasterEffects, Target = c.TargetHexEffects, Area = c.AreaHexEffects, Central = c.AreaCentralHexEffects, Aura = c.AuraEffects,
+            Alignment = c.AreaEffectAlignment, Centre = c.CasterIsCentre, Adjacent = c.AreaEffectAdjacentToTargets,
+        };
+
+        internal static void Restore(CastEffectsSMB c, Kept k)
+        {
+            if (c == null || k == null) return;
+            c.CasterEffects = k.Caster;
+            c.TargetHexEffects = k.Target;
+            c.AreaHexEffects = k.Area;
+            c.AreaCentralHexEffects = k.Central;
+            c.AuraEffects = k.Aura;
+            c.AreaEffectAlignment = k.Alignment;
+            c.CasterIsCentre = k.Centre;
+            c.AreaEffectAdjacentToTargets = k.Adjacent;
+        }
+
+        /// <summary>Puts the Gloomhaven effects of <paramref name="play"/> on the behaviour: the caster list when the
+        /// state had one; the hex lists and alignment when it had any (an empty list where it had none, so the Drifter's
+        /// hex effect doesn't land beside his), her aura kept unless he brings one (a persistent shield ring the game
+        /// expects). Nothing of hers is removed when his templates aren't there.</summary>
+        internal static void Apply(CastEffectsSMB cast, Play play, GHModel.Entry e)
+        {
+            if (cast == null || play == null || e == null) return;
+            if (play.Caster.Count > 0)
+            {
+                var list = new List<VFXShared.SpawnedEffect>();
+                foreach (Caster c in play.Caster)
+                {
+                    GameObject t = Template(e, c.Effect);
+                    if (t == null) continue;
+                    list.Add(new GhSpawned { Effect = t, StartTime = c.Start, OriginalStartTime = c.Start, AttachToRoot = c.Root, EffectAttachPoint = c.Attach ?? "" });
+                }
+                if (list.Count > 0) cast.CasterEffects = list;
+            }
+            if (!play.AnyHex) return;
+            float beat = new[] { play.Target, play.Area, play.Central, play.Aura }.Where(h => h != null).Max(h => h.Hit);
+            VFXShared.TargetHexEffects target = MakeHex(play.Target, beat, e), area = MakeHex(play.Area, beat, e), central = MakeHex(play.Central, beat, e);
+            if (!HasAny(target) && !HasAny(area) && !HasAny(central) && (play.Aura == null || !HasAny(MakeHex(play.Aura, beat, e)))) return;   // no template came out: hers stay
+            cast.TargetHexEffects = target;
+            cast.AreaHexEffects = area;
+            cast.AreaCentralHexEffects = central;
+            if (play.Aura != null) cast.AuraEffects = MakeHex(play.Aura, beat, e);
+            cast.AreaEffectAlignment = (VFXShared.AreaEffectAlignments)play.Alignment;
+            cast.CasterIsCentre = play.CasterCentre;
+            cast.AreaEffectAdjacentToTargets = play.Adjacent;
+        }
+
+        private static bool HasAny(VFXShared.TargetHexEffects h) => h?.Effects != null && h.Effects.Count > 0;
+
+        private static GhHex MakeHex(Hex h, float beat, GHModel.Entry e)
+        {
+            var hex = new GhHex { HitTime = h?.Hit ?? beat, OriginalHitTime = h?.Hit ?? beat, Effects = new List<VFXShared.BasicEffectTyped>() };
+            if (h == null) return hex;
+            foreach (HexEffect x in h.Effects)
+            {
+                GameObject t = Template(e, x.Effect);
+                if (t != null) hex.Effects.Add(new GhHexEffect(t, x.Start, (VFXShared.ActorType)x.TargetType, CActor.EType.Player));
+            }
+            return hex;
+        }
+
+        // ------------------------------------------------------------------ templates
+
+        private sealed class Set
+        {
+            public readonly Dictionary<string, GameObject> Templates = new Dictionary<string, GameObject>(StringComparer.Ordinal);
+            public readonly Dictionary<string, Material> Made = new Dictionary<string, Material>(StringComparer.Ordinal);       // Gloomhaven material name -> Frosthaven material
+            public readonly Dictionary<string, Material> Gloomhaven = new Dictionary<string, Material>(StringComparer.Ordinal); // from the shipped material bundles
+            public Dictionary<string, Texture> Textures;                                                                          // every loaded texture by name, on demand
+        }
+
+        private static readonly Dictionary<string, Set> Sets = new Dictionary<string, Set>(StringComparer.OrdinalIgnoreCase);   // by model (its looks share the effects)
+        private static readonly Dictionary<string, Shader> Shaders = new Dictionary<string, Shader>(StringComparer.Ordinal);
+        private static readonly HashSet<string> Reported = new HashSet<string>();
+
+        /// <summary>The template of one of the model's effects, or null (not in the pack, or its build failed: logged once).</summary>
+        internal static GameObject Template(GHModel.Entry e, string name)
+        {
+            if (e == null || string.IsNullOrEmpty(name) || !Sets.TryGetValue(e.Model.ToString(), out Set set)) return null;
+            if (set.Templates.TryGetValue(name, out GameObject t) && t != null) return t;
+            if (Reported.Add("missing " + name)) Plugin.Log.LogWarning($"Gloomhaven effects: {e.Model} has no template for {name}; the Drifter's effect plays there");
+            return null;
+        }
+
+        /// <summary>Builds the model's effect templates once the bundle is open (GHModel.Build). Never throws: a model
+        /// without working effects keeps the Drifter's.</summary>
+        internal static void Prepare(GHModel.Entry e, GHModel.Loaded bundle)
+        {
+            if (e == null || e.Effects.Count == 0 || bundle?.Bundle == null) return;
+            string key = e.Model.ToString();
+            if (Sets.TryGetValue(key, out Set set) && set.Templates.Count > 0 && set.Templates.Values.All(t => t != null)) return;
+            set = new Set();
+            Sets[key] = set;
+            try
+            {
+                Dictionary<string, GameObject> roots = bundle.Roots();
+                LoadMaterialBundles(e, set);
+                var stateAudio = new HashSet<string>(e.Animation.States.Values.Select(t => t.Audio).Concat(e.Animation.GhAudio.Values).Where(a => !string.IsNullOrEmpty(a)), StringComparer.Ordinal);
+                var missing = new List<string>();
+                foreach (EffectSpec spec in e.Effects.Values)
+                {
+                    if (!roots.TryGetValue(spec.Name, out GameObject root) || root == null) { missing.Add(spec.Name); continue; }
+                    GameObject t = UnityEngine.Object.Instantiate(root, GHModel.Holder);
+                    t.name = spec.Name;
+                    t.SetActive(true);                                       // activeSelf under the inactive holder: pooled copies come out active, like a prefab's
+                    try { Dress(t, spec, e, set, stateAudio); }
+                    catch (Exception ex) { Plugin.Log.LogWarning($"Gloomhaven effects: {spec.Name} is only partly set up: {ex.Message}"); }
+                    set.Templates[spec.Name] = t;
+                }
+                Plugin.Log.LogInfo($"Gloomhaven effects: {set.Templates.Count} of {e.Model}'s effects ready, {set.Made.Values.Count(m => m != null)} materials rebuilt on Frosthaven's shaders"
+                                   + (missing.Count > 0 ? $"; not in the bundle: {string.Join(", ", missing)}" : ""));
+            }
+            catch (Exception ex)
+            {
+                Plugin.Log.LogError($"Gloomhaven effects: could not set up {e.Model}'s effects, the Drifter's stay: {ex}");
+            }
+        }
+
+        private static void LoadMaterialBundles(GHModel.Entry e, Set set)
+        {
+            foreach (BundleSpec b in e.EffectBundles)
+            {
+                AssetBundle ab = !string.IsNullOrEmpty(b.Name) ? AssetBundle.GetAllLoadedAssetBundles().FirstOrDefault(x => x != null && x.name == b.Name) : null;
+                if (ab == null)
+                {
+                    string path = Path.Combine(e.Folder, "bundles", b.File);
+                    if (!File.Exists(path)) { if (Reported.Add("no bundle " + b.File)) Plugin.Log.LogWarning($"Gloomhaven effects: the pack has no {b.File}; some effects will have holes"); continue; }
+                    ab = AssetBundle.LoadFromFile(path);
+                    if (ab == null) { Plugin.Log.LogWarning($"Gloomhaven effects: could not open {b.File}"); continue; }
+                }
+                foreach (Material m in ab.LoadAllAssets<Material>())
+                    if (m != null && !set.Gloomhaven.ContainsKey(m.name)) set.Gloomhaven[m.name] = m;
+            }
+        }
+
+        /// <summary>Materials, loader-fed slots and carried scripts, object by object.</summary>
+        private static void Dress(GameObject template, EffectSpec spec, GHModel.Entry e, Set set, HashSet<string> stateAudio)
+        {
+            foreach (KeyValuePair<string, ObjectSpec> kv in spec.Objects)
+            {
+                Transform tr = kv.Key.Length == 0 ? template.transform : template.transform.Find(kv.Key);
+                if (tr == null) { if (Reported.Add(spec.Name + "/" + kv.Key)) Plugin.Log.LogWarning($"Gloomhaven effects: {spec.Name} has no {kv.Key}"); continue; }
+                ObjectSpec o = kv.Value;
+                var r = tr.GetComponent<Renderer>();
+                if (r != null && (o.Materials != null || o.Loaded != null))
+                {
+                    Material[] current = r.sharedMaterials;
+                    var slots = new List<Material>(current);
+                    if (o.Materials != null)
+                        for (int i = 0; i < o.Materials.Length; i++)
+                        {
+                            Material m = Rebuild(set, e, o.Materials[i], i < current.Length ? current[i] : null);
+                            if (i < slots.Count) slots[i] = m; else slots.Add(m);
+                        }
+                    if (o.Loaded != null)
+                    {
+                        // as Gloomhaven's MaterialLoaderData did it: the loaded ones first, then each kept slot back at its own index
+                        var loaded = o.Loaded.Select(n => Rebuild(set, e, n, null)).ToList();
+                        if (o.KeepExisting)
+                        {
+                            var merged = new List<Material>(loaded);
+                            while (merged.Count < loaded.Count + slots.Count(m => m != null)) merged.Add(null);
+                            for (int i = 0; i < slots.Count; i++) if (slots[i] != null && i < merged.Count) merged[i] = slots[i];
+                            slots = merged;
+                        }
+                        else slots = loaded;
+                    }
+                    r.sharedMaterials = slots.ToArray();
+                    if (r is ParticleSystemRenderer psr && o.TrailMaterial != null) psr.trailMaterial = Rebuild(set, e, o.TrailMaterial, psr.trailMaterial);
+                }
+                foreach (KeyValuePair<string, JObject> c in o.Components) AddScript(tr.gameObject, c.Key, c.Value, set, stateAudio);
+            }
+            if (template.GetComponent<EffectOnEnable>() == null) template.AddComponent<EffectOnEnable>().LifeTime = EffectOnEnable.DefaultLifeTime;   // the game warns without one
+        }
+
+        // ------------------------------------------------------------------ materials
+
+        /// <summary>Frosthaven's version of a Gloomhaven effect material: the recorded values on Frosthaven's copy of
+        /// the shader, its textures from the Gloomhaven material (its own bundle keeps them). Null stays null.</summary>
+        private static Material Rebuild(Set set, GHModel.Entry e, string name, Material gh)
+        {
+            if (string.IsNullOrEmpty(name)) return gh;
+            if (set.Made.TryGetValue(name, out Material made)) return made ?? gh;
+            if (gh == null) set.Gloomhaven.TryGetValue(name, out gh);
+            if (!e.EffectMaterials.TryGetValue(name, out MaterialSpec spec)) { set.Made[name] = gh; return gh; }
+            Shader shader = ShaderFor(spec);
+            if (shader == null)
+            {
+                if (Reported.Add("shader " + spec.Shader)) Plugin.Log.LogWarning($"Gloomhaven effects: Frosthaven has no shader for {spec.Shader} ({name}); that part stays as it is");
+                set.Made[name] = gh;
+                return gh;
+            }
+            var m = new Material(shader) { name = name + " (Frosthaven)", hideFlags = HideFlags.DontUnloadUnusedAsset };
+            foreach (KeyValuePair<string, float> f in spec.Floats) if (m.HasProperty(f.Key)) m.SetFloat(f.Key, f.Value);
+            foreach (KeyValuePair<string, Color> c in spec.Colors) if (m.HasProperty(c.Key)) m.SetColor(c.Key, c.Value);
+            foreach (KeyValuePair<string, string> t in spec.Textures)
+            {
+                if (!m.HasProperty(t.Key)) continue;
+                Texture tex = gh != null ? gh.GetTexture(t.Key) : null;
+                if (tex == null) tex = FindTexture(set, t.Value);
+                if (tex == null) continue;
+                m.SetTexture(t.Key, tex);
+                if (gh != null)
+                {
+                    m.SetTextureScale(t.Key, gh.GetTextureScale(t.Key));
+                    m.SetTextureOffset(t.Key, gh.GetTextureOffset(t.Key));
+                }
+            }
+            foreach (string kw in spec.Keywords) m.EnableKeyword(kw);
+            if (spec.Queue >= 0) m.renderQueue = spec.Queue;
+            set.Made[name] = m;
+            return m;
+        }
+
+        /// <summary>Frosthaven's shader for a Gloomhaven effect material: the same name (the shared VFX library), or a
+        /// stand-in for the Gloomhaven-only ones: KriptoFX's particle shader becomes Unity's legacy particle shader of
+        /// the same blend, the lit standard particle shader its unlit sibling.</summary>
+        private static Shader ShaderFor(MaterialSpec spec)
+        {
+            string name = spec.Shader;
+            if (string.IsNullOrEmpty(name)) return null;
+            if (name == "KriptoFX/RFX4/Particle")
+            {
+                float src = spec.Floats.TryGetValue("SrcMode", out float s) ? s : 1f, dst = spec.Floats.TryGetValue("DstMode", out float d) ? d : 1f;
+                name = dst == 1f ? "Legacy Shaders/Particles/Additive"
+                     : src == 1f ? "Legacy Shaders/Particles/Alpha Blended Premultiply" : "Legacy Shaders/Particles/Alpha Blended";
+            }
+            else if (name == "Particles/Standard Surface") name = "Particles/Standard Unlit";
+            return FindShader(name);
+        }
+
+        private static Shader FindShader(string name)
+        {
+            if (Shaders.TryGetValue(name, out Shader s) && s != null) return s;
+            s = Shader.Find(name);
+            if (s == null)
+            {
+                // Frosthaven's effect shaders live in its misc_shaders bundles (always loaded with the game); Shader.Find
+                // only sees a shader once something has used it
+                foreach (AssetBundle b in AssetBundle.GetAllLoadedAssetBundles().Where(b => b != null && b.name.StartsWith("misc_shaders", StringComparison.Ordinal)))
+                {
+                    s = b.LoadAllAssets<Shader>().FirstOrDefault(x => x != null && x.name == name);
+                    if (s != null) break;
+                }
+            }
+            if (s == null) s = Resources.FindObjectsOfTypeAll<Shader>().FirstOrDefault(x => x != null && x.name == name);
+            if (s != null) Shaders[name] = s;
+            return s;
+        }
+
+        private static Texture FindTexture(Set set, string name)
+        {
+            if (string.IsNullOrEmpty(name)) return null;
+            if (set.Textures == null)
+            {
+                set.Textures = new Dictionary<string, Texture>(StringComparer.Ordinal);
+                foreach (Texture t in Resources.FindObjectsOfTypeAll<Texture>()) if (t != null && !set.Textures.ContainsKey(t.name)) set.Textures[t.name] = t;
+            }
+            return set.Textures.TryGetValue(name, out Texture tex) ? tex : null;
+        }
+
+        // ------------------------------------------------------------------ the carried scripts
+
+        /// <summary>Frosthaven's component of the same class, with the recorded fields. A sound script is added only
+        /// for an event the pack registered (GHSound) that no state plays itself already (the roar would sound twice).</summary>
+        private static void AddScript(GameObject go, string type, JObject fields, Set set, HashSet<string> stateAudio)
+        {
+            if (type == "SFXOnEnable")
+            {
+                string ev = (string)fields["m_AudioEvent"];
+                if (string.IsNullOrEmpty(ev) || !GHSound.Playable(ev) || stateAudio.Contains(ev)) return;
+            }
+            Type t = AccessTools.TypeByName(type);
+            if (t == null || !typeof(Component).IsAssignableFrom(t)) { if (Reported.Add("type " + type)) Plugin.Log.LogWarning($"Gloomhaven effects: Frosthaven has no {type} script"); return; }
+            if (typeof(EffectOnEnable).IsAssignableFrom(t) && go.GetComponent<EffectOnEnable>() != null) return;
+            Component c = go.AddComponent(t);
+            foreach (JProperty f in fields.Properties())
+            {
+                FieldInfo field = AccessTools.Field(t, f.Name);
+                if (field == null) continue;
+                try
+                {
+                    object value = Convert(field.FieldType, f.Value, set);
+                    if (value != null || !field.FieldType.IsValueType) field.SetValue(c, value);
+                }
+                catch (Exception ex) { Plugin.Log.LogWarning($"Gloomhaven effects: {type}.{f.Name} not set: {ex.Message}"); }
+            }
+        }
+
+        /// <summary>A recorded field value (a type tree with references as names) as the field's type.</summary>
+        private static object Convert(Type type, JToken j, Set set)
+        {
+            if (j == null || j.Type == JTokenType.Null) return null;
+            if (type == typeof(float)) return (float)j;
+            if (type == typeof(double)) return (double)j;
+            if (type == typeof(int)) return (int)j;
+            if (type == typeof(uint)) return (uint)j;
+            if (type == typeof(bool)) return j.Type == JTokenType.Boolean ? (bool)j : (int)j != 0;
+            if (type == typeof(string)) return (string)j;
+            if (type.IsEnum) return Enum.ToObject(type, j.Type == JTokenType.String ? (object)Enum.Parse(type, (string)j) : (int)j);
+            if (type == typeof(Color) && j is JObject c) return new Color((float?)c["r"] ?? 0f, (float?)c["g"] ?? 0f, (float?)c["b"] ?? 0f, (float?)c["a"] ?? 1f);
+            if (type == typeof(Vector2) && j is JObject v2) return new Vector2((float?)v2["x"] ?? 0f, (float?)v2["y"] ?? 0f);
+            if (type == typeof(Vector3) && j is JObject v3) return new Vector3((float?)v3["x"] ?? 0f, (float?)v3["y"] ?? 0f, (float?)v3["z"] ?? 0f);
+            if (type == typeof(Vector4) && j is JObject v4) return new Vector4((float?)v4["x"] ?? 0f, (float?)v4["y"] ?? 0f, (float?)v4["z"] ?? 0f, (float?)v4["w"] ?? 0f);
+            if (type == typeof(Quaternion) && j is JObject q) return new Quaternion((float?)q["x"] ?? 0f, (float?)q["y"] ?? 0f, (float?)q["z"] ?? 0f, (float?)q["w"] ?? 1f);
+            if (type == typeof(AnimationCurve) && j is JObject cv) return Curve(cv);
+            if (type == typeof(GameObject) && j.Type == JTokenType.String) return set.Templates.TryGetValue((string)j, out GameObject t) ? t : null;
+            return null;   // other references (a material, a light): left at the component's default
+        }
+
+        private static AnimationCurve Curve(JObject j)
+        {
+            var keys = new List<Keyframe>();
+            foreach (JObject k in j["m_Curve"]?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
+            {
+                var key = new Keyframe((float?)k["time"] ?? 0f, (float?)k["value"] ?? 0f, (float?)k["inSlope"] ?? 0f, (float?)k["outSlope"] ?? 0f,
+                                       (float?)k["inWeight"] ?? 0f, (float?)k["outWeight"] ?? 0f) { weightedMode = (WeightedMode)((int?)k["weightedMode"] ?? 0) };
+                keys.Add(key);
+            }
+            // Unity stores a curve's ends as 2 for "clamp" (the usual), anything else loops
+            return new AnimationCurve(keys.ToArray())
+            {
+                preWrapMode = ((int?)j["m_PreInfinity"] ?? 2) == 2 ? WrapMode.ClampForever : WrapMode.Loop,
+                postWrapMode = ((int?)j["m_PostInfinity"] ?? 2) == 2 ? WrapMode.ClampForever : WrapMode.Loop,
+            };
+        }
+    }
+}

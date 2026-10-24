@@ -48,10 +48,9 @@ SOUNDS = {
     },
 }
 
-# Gloomhaven states whose behaviours name no sound, by class: state -> event (from SOUNDS)
-STATE_EVENTS = {
-    "Brute": {"TargetedShout": "PlaySound_BruteShoutAttack", "RangedAreaAttack": "PlaySound_BruteShoutAttack"},
-}
+# Gloomhaven states whose behaviours name no sound, by class: state -> event (from SOUNDS). The Brute's targeted
+# shout is not here: its roar is on the effect itself (SFXOnEnable on P_Brute_Shout), which the plugin re-adds.
+STATE_EVENTS = {}
 
 
 def _mono(wav_bytes):

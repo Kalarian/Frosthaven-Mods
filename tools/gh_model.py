@@ -431,7 +431,7 @@ def _animation(b, fh_bundle_path):
                 return g["clips"][0], g
         return gh_idle, idle_state
 
-    clips, states, silence, projectiles, melee_weapon = {}, {}, set(), [], None
+    clips, states, silence, projectiles, melee_weapon, lent = {}, {}, set(), [], None, {}
     for s in fh_ctrl["states"]:
         target, g = resolve(s)
         for c in s["clips"]:
@@ -450,7 +450,20 @@ def _animation(b, fh_bundle_path):
         gh_sound = _smb_sound(g["smbs"]) if g is not None and playing == target else None
         if gh_sound:
             timing["audio"] = gh_sound   # the Gloomhaven event this state's clip played with (GHSound registers it)
+        gh_fx = _smb_effects(g["smbs"], s["name"] in CASTER_ONLY) if g is not None and playing == target else None
+        if gh_fx:
+            timing["effects"] = gh_fx    # the Gloomhaven effects this state's clip played with (GHVfx plays them)
         states[s["fullPath"]] = timing
+        if g is not None and g is not idle_state and playing != target:
+            # her clip slot went to another state sharing the clip (the radial attack shares the heavy swing's): the
+            # plugin lends this state its own Gloomhaven clip for one play (GHModel.LendClip), with that state's
+            # sound and effects
+            lend = {"clip": target}
+            if _smb_sound(g["smbs"]):
+                lend["audio"] = _smb_sound(g["smbs"])
+            if _smb_effects(g["smbs"], s["name"] in CASTER_ONLY):
+                lend["effects"] = _smb_effects(g["smbs"], s["name"] in CASTER_ONLY)
+            lent[s["name"]] = lend
         for smb in s["smbs"]:
             f = smb["fields"]
             if smb["class"] == "CastEffectsSMB":
@@ -474,9 +487,10 @@ def _animation(b, fh_bundle_path):
     state_clips = {s["name"]: s["clips"][0] for s in fh_ctrl["states"] if s["clips"]}
     gh_states = {s["name"]: s["clips"][0] for s in gh_ctrl["states"] if s["clips"] and s["name"] not in state_clips}
     gh_audio = {s["name"]: _smb_sound(s["smbs"]) for s in gh_ctrl["states"] if s["name"] in gh_states and _smb_sound(s["smbs"])}
+    gh_effects = {s["name"]: _smb_effects(s["smbs"]) for s in gh_ctrl["states"] if s["name"] in gh_states and _smb_effects(s["smbs"])}
     return {"base": BASE_HERO, "clips": clips, "states": states, "projectiles": projectiles,
             "melee_weapon": melee_weapon, "silence": sorted(silence), "state_clips": state_clips, "gh_states": gh_states,
-            "gh_audio": gh_audio}
+            "gh_audio": gh_audio, "gh_effects": gh_effects, "lent_states": lent}
 
 
 def _smb_sound(smbs):
@@ -506,6 +520,43 @@ def _smb_times(smbs):
         elif smb["class"] == "FireEquippedProjectileSMB" and (f.get("FireTime") or 0) > 0:
             out["fire"] = round(f["FireTime"], 3)
     return out
+
+
+HEX_LISTS = (("TargetHexEffects", "target"), ("AreaHexEffects", "area"), ("AreaCentralHexEffects", "central"),
+             ("AuraEffects", "aura"))
+# Drifter states played without a target (the end-of-scenario cheer, the class screen): a Gloomhaven shout's ring
+# on the caster is wanted there, its hex effects are not
+CASTER_ONLY = {"Celebration", "Defeat", "Death", "Selection Screen"}
+
+
+def _smb_effects(smbs, caster_only=False):
+    """The effects a state's cast behaviour plays, by prefab name, with their moments (seconds into the clip): on the
+    caster (attached to a bone, or to the root), on the target hex, on the area hexes, as an aura; with the area
+    alignment flags when any hex list is set. None when the state plays none (the Drifter's then stay)."""
+    for smb in smbs:
+        if smb["class"] != "CastEffectsSMB":
+            continue
+        f = smb["fields"]
+        out = {}
+        caster = [{"effect": c["Effect"], "start": round(c.get("StartTime") or 0, 3),
+                   "attach": c.get("EffectAttachPoint") or "", "root": bool(c.get("AttachToRoot"))}
+                  for c in f.get("CasterEffects") or [] if c.get("Effect")]
+        if caster:
+            out["caster"] = caster
+        if not caster_only:
+            for key, name in HEX_LISTS:
+                hexes = f.get(key) or {}
+                effects = [{"effect": x["Effect"], "start": round(x.get("StartTime") or 0, 3), "target_type": x.get("TargetType") or 0}
+                           for x in hexes.get("Effects") or [] if x.get("Effect")]
+                if effects:
+                    out[name] = {"hit": round(hexes.get("HitTime") or 0, 3), "effects": effects}
+            if any(name in out for _, name in HEX_LISTS):
+                out["alignment"] = f.get("AreaEffectAlignment") or 0
+                out["caster_centre"] = bool(f.get("CasterIsCentre"))
+                out["adjacent"] = bool(f.get("AreaEffectAdjacentToTargets"))
+        if out:
+            return out
+    return None
 
 
 # ---------------------------------------------------------------- the pack build step

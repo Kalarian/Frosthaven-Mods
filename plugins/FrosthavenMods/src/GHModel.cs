@@ -59,7 +59,7 @@ namespace FrosthavenMods
         /// <summary>How one of the Drifter's animator states is retimed for the clip that replaces hers: the behaviours'
         /// moments (impact, progress, projectile release) scaled by the clip-length ratio, or Gloomhaven's own value for
         /// that beat when its state had one.</summary>
-        internal sealed class StateTiming { public float Scale = 1f; public float? FhFire, GhHit, GhProgress, GhFire; public string Audio; }
+        internal sealed class StateTiming { public float Scale = 1f; public float? FhFire, GhHit, GhProgress, GhFire; public string Audio; public GHVfx.Play Effects; }
 
         internal sealed class AnimationSpec
         {
@@ -72,7 +72,13 @@ namespace FrosthavenMods
             public Dictionary<string, string> StateClips = new Dictionary<string, string>(StringComparer.Ordinal); // her state -> the clip it plays
             public Dictionary<string, string> GhStates = new Dictionary<string, string>(StringComparer.Ordinal);   // Gloomhaven-only state -> its clip
             public Dictionary<string, string> GhAudio = new Dictionary<string, string>(StringComparer.Ordinal);    // Gloomhaven-only state -> its sound event
+            public Dictionary<string, GHVfx.Play> GhEffects = new Dictionary<string, GHVfx.Play>(StringComparer.Ordinal);   // Gloomhaven-only state -> its effects
+            public Dictionary<string, Lent> LentStates = new Dictionary<string, Lent>(StringComparer.Ordinal);         // her state whose own Gloomhaven clip lost the slot -> what to lend it
         }
+
+        /// <summary>What a state of hers is lent for one play when its own Gloomhaven clip went to another state that
+        /// shares her clip (the radial attack shares the heavy swing's): the clip, its sound, its effects.</summary>
+        internal sealed class Lent { public string Clip, Audio; public GHVfx.Play Effects; }
 
         internal sealed class Entry
         {
@@ -85,6 +91,9 @@ namespace FrosthavenMods
             public AnimationSpec Animation = new AnimationSpec();
             public string Skin;                                                                    // null: the base look
             public Dictionary<string, Entry> Skins = new Dictionary<string, Entry>(StringComparer.OrdinalIgnoreCase);   // "ALT" -> that look
+            public Dictionary<string, GHVfx.EffectSpec> Effects = new Dictionary<string, GHVfx.EffectSpec>(StringComparer.Ordinal);          // its ability effects (GHVfx)
+            public Dictionary<string, GHVfx.MaterialSpec> EffectMaterials = new Dictionary<string, GHVfx.MaterialSpec>(StringComparer.Ordinal);
+            public List<GHVfx.BundleSpec> EffectBundles = new List<GHVfx.BundleSpec>();
 
             public static Entry Parse(ECharacter model, JObject j, string folder, string skin = null)
             {
@@ -96,6 +105,7 @@ namespace FrosthavenMods
                     TargetBone = (string)j["target_bone"], ProjectileAnchor = (string)j["projectile_anchor"],
                     Height = (float?)j["height"] ?? 2f, HitRadius = (float?)j["hit_radius"] ?? 0.1f,
                     TrailPoints = Strings(j["trail_points"]),
+                    Effects = GHVfx.ParseEffects(j["effects"]), EffectMaterials = GHVfx.ParseMaterials(j["effect_materials"]), EffectBundles = GHVfx.ParseBundles(j["effect_bundles"]),
                 };
                 if (string.IsNullOrEmpty(e.Bundle) || string.IsNullOrEmpty(e.Prefab)) throw new FormatException("no bundle or prefab");
                 foreach (JObject w in j["weapons"]?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
@@ -129,7 +139,7 @@ namespace FrosthavenMods
                         {
                             Scale = (float?)v["scale"] ?? 1f, FhFire = (float?)v["fh"]?["fire"],
                             GhHit = (float?)v["gh"]?["hit"], GhProgress = (float?)v["gh"]?["progress"], GhFire = (float?)v["gh"]?["fire"],
-                            Audio = (string)v["audio"],
+                            Audio = (string)v["audio"], Effects = GHVfx.ParsePlay(v["effects"]),
                         };
                     }
                     e.Animation.Projectiles = Strings(a["projectiles"]);
@@ -138,6 +148,14 @@ namespace FrosthavenMods
                     foreach (JProperty c in (a["state_clips"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>()) e.Animation.StateClips[c.Name] = (string)c.Value;
                     foreach (JProperty c in (a["gh_states"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>()) e.Animation.GhStates[c.Name] = (string)c.Value;
                     foreach (JProperty c in (a["gh_audio"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>()) e.Animation.GhAudio[c.Name] = (string)c.Value;
+                    foreach (JProperty c in (a["gh_effects"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>())
+                    {
+                        GHVfx.Play play = GHVfx.ParsePlay(c.Value);
+                        if (play != null) e.Animation.GhEffects[c.Name] = play;
+                    }
+                    foreach (JProperty c in (a["lent_states"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>())
+                        if (c.Value is JObject l && !string.IsNullOrEmpty((string)l["clip"]))
+                            e.Animation.LentStates[c.Name] = new Lent { Clip = (string)l["clip"], Audio = (string)l["audio"], Effects = GHVfx.ParsePlay(l["effects"]) };
                 }
                 e.Skin = skin;
                 // the class's alternative looks: the base entry with what the skin changes (its prefabs, meshes, materials)
@@ -195,7 +213,7 @@ namespace FrosthavenMods
 
         /// <summary>The templates' parent: inactive and kept across scenes, so nothing here updates or renders while the
         /// children stay activeSelf and their pooled copies come out active, like a prefab's.</summary>
-        private static Transform Holder
+        internal static Transform Holder
         {
             get
             {
@@ -343,6 +361,7 @@ namespace FrosthavenMods
             cm.StandardHitEffect = cm.ShieldHitEffect = cm.CriticalHitEffect = null;   // the game's defaults
             cm.WeaponLists = Weapons(e, bundle, materials, drifterCm);
             built.Carrier = carrier;
+            GHVfx.Prepare(e, bundle);                                        // his ability effects (never fails the model)
             Plugin.Log.LogInfo($"Gloomhaven model: {e.Model} built from {e.Bundle} ({skins.Length} meshes, {materials.Count} materials, " +
                                $"{cm.WeaponLists.Count} weapons, height {e.Height}; {built.Override.name})");
             return built;
@@ -618,7 +637,7 @@ namespace FrosthavenMods
                 foreach (Renderer r in clone.GetComponentsInChildren<Renderer>(true)) r.SetPropertyBlock(null);   // the class screen's lighting tweak, kept by the pool
                 // The behaviours exist once the Animator has bound its controller; a clone spawned under an inactive
                 // holder (the class screen) binds later, so wait for it then (the game's own preview code does the same).
-                if (animator.isInitialized && Retime(animator, b.Entry.Animation) > 0) return;
+                if (animator.isInitialized && Retime(animator, b.Entry) > 0) return;
                 if (Plugin.Instance != null) Plugin.Instance.StartCoroutine(RetimeWhenReady(animator, b.Entry));
             }
             catch (Exception e)
@@ -634,7 +653,7 @@ namespace FrosthavenMods
                 yield return null;
                 if (!animator.isInitialized || !animator.gameObject.activeInHierarchy) continue;
                 int n;
-                try { n = Retime(animator, e.Animation); }
+                try { n = Retime(animator, e); }
                 catch (Exception ex) { if (Reported.Add("retime")) Plugin.Log.LogWarning($"Gloomhaven model: could not retime a spawned {e.Model}: {ex}"); yield break; }
                 if (n > 0) yield break;
             }
@@ -654,12 +673,17 @@ namespace FrosthavenMods
         private static AnimationClip _lentSlot, _lentBefore;
         private static CastEffectsSMB _lentSound;
         private static string _lentSoundBefore;
+        private static CastEffectsSMB _lentFx;
+        private static GHVfx.Kept _lentFxBefore;
 
         /// <summary>A card can ask for an animation the Drifter's animator has no state for (the Brute's shouts:
         /// "TargetedShout", "RadialShout"); the game then plays the next state on its list ("Push", "PowerUp"), whose clip
         /// is shared with other states (her cast). For that one play, the fallback state's clip slot is lent the
         /// Gloomhaven state's clip, and given back once the animator has left the state. The state, its timing and its
-        /// events stay the ones the game expects, so nothing waits on an event that never comes.</summary>
+        /// events stay the ones the game expects, so nothing waits on an event that never comes. A state of hers whose
+        /// own Gloomhaven clip lost its slot to another state sharing her clip (the radial attack and the heavy swing
+        /// both play her strong melee clip) is lent the same way (AnimationSpec.LentStates). The lent state's Gloomhaven
+        /// sound and effects ride along on its cast behaviour.</summary>
         [HarmonyPatch(typeof(Choreographer), "PlayFirstAvailableAnimationStateOnObject")]
         [HarmonyPrefix]
         private static void LendClip(GameObject objectToAnimate, List<string> statesToTry)
@@ -674,27 +698,46 @@ namespace FrosthavenMods
                 if (b == null) return;
                 AnimationSpec anim = b.Entry.Animation;
                 bool Has(string n) => n != null && animator.HasState(0, Animator.StringToHash(n));
+                string fallback, clipName, sound;
+                GHVfx.Play play;
                 int at = statesToTry.FindIndex(n => n != null && anim.GhStates.ContainsKey(n) && !Has(n));
-                if (at < 0) return;
-                string fallback = statesToTry.Skip(at + 1).FirstOrDefault(Has);
+                if (at >= 0)
+                {
+                    fallback = statesToTry.Skip(at + 1).FirstOrDefault(Has);
+                    clipName = anim.GhStates[statesToTry[at]];
+                    anim.GhAudio.TryGetValue(statesToTry[at], out sound);
+                    anim.GhEffects.TryGetValue(statesToTry[at], out play);
+                }
+                else
+                {
+                    fallback = statesToTry.FirstOrDefault(Has);
+                    if (fallback == null || !anim.LentStates.TryGetValue(fallback, out Lent lent)) return;
+                    clipName = lent.Clip;
+                    sound = lent.Audio;
+                    play = lent.Effects;
+                }
                 if (fallback == null || !anim.StateClips.TryGetValue(fallback, out string herClip)) return;
-                AnimationClip gh = b.Bundle?.Clip(anim.GhStates[statesToTry[at]]);
+                AnimationClip gh = b.Bundle?.Clip(clipName);
                 AnimationClip slot = ovr.runtimeAnimatorController?.animationClips.FirstOrDefault(c => c != null && c.name == herClip);
                 if (gh == null || slot == null) return;
                 _lentOn = ovr;
                 _lentSlot = slot;
                 _lentBefore = ovr[slot];
                 ovr[slot] = gh;
-                // and its sound (the roar), on the fallback state's cast behaviour
-                if (anim.GhAudio.TryGetValue(statesToTry[at], out string sound) && GHSound.Playable(sound))
+                CastEffectsSMB cast = animator.GetBehaviours(Animator.StringToHash("Base Layer." + fallback), 0)?.OfType<CastEffectsSMB>().FirstOrDefault();
+                if (cast != null && !string.IsNullOrEmpty(sound) && GHSound.Playable(sound))
                 {
-                    CastEffectsSMB cast = animator.GetBehaviours(Animator.StringToHash("Base Layer." + fallback), 0)?.OfType<CastEffectsSMB>().FirstOrDefault();
-                    if (cast != null)
-                    {
-                        _lentSound = cast;
-                        _lentSoundBefore = cast.AbilityAudioEvent;
-                        cast.AbilityAudioEvent = sound;
-                    }
+                    // its sound (the roar, the quake), on the state's cast behaviour
+                    _lentSound = cast;
+                    _lentSoundBefore = cast.AbilityAudioEvent;
+                    cast.AbilityAudioEvent = sound;
+                }
+                if (cast != null && play != null)
+                {
+                    // and its effects (the shout's ring, the wave through the hexes)
+                    _lentFx = cast;
+                    _lentFxBefore = GHVfx.Keep(cast);
+                    GHVfx.Apply(cast, play, b.Entry);
                 }
                 Plugin.Instance.StartCoroutine(GiveBackAfter(animator, fallback));
             }
@@ -726,14 +769,18 @@ namespace FrosthavenMods
                 try { _lentOn[_lentSlot] = _lentBefore; } catch (Exception) { /* the controller died with the scene */ }
             }
             if (_lentSound != null) _lentSound.AbilityAudioEvent = _lentSoundBefore;
+            if (_lentFx != null) GHVfx.Restore(_lentFx, _lentFxBefore);
+            _lentFx = null;
+            _lentFxBefore = null;
             _lentOn = null;
             _lentSlot = _lentBefore = null;
             _lentSound = null;
             _lentSoundBefore = null;
         }
 
-        private static int Retime(Animator animator, AnimationSpec anim)
+        private static int Retime(Animator animator, Entry e)
         {
+            AnimationSpec anim = e?.Animation;
             if (anim == null || anim.States.Count == 0) return 0;
             int seen = 0;
             foreach (KeyValuePair<string, StateTiming> state in anim.States)
@@ -755,7 +802,7 @@ namespace FrosthavenMods
                         if (cast.CasterEffects != null)
                             foreach (VFXShared.SpawnedEffect fx in cast.CasterEffects)
                             {
-                                if (fx == null || (fx.OriginalStartTime <= 0f && fx.StartTime > 0f)) continue;
+                                if (fx == null || fx is GHVfx.GhSpawned || (fx.OriginalStartTime <= 0f && fx.StartTime > 0f)) continue;   // his effects keep their own moments
                                 // an effect riding the projectile (the arrow's trail) leaves when the projectile does
                                 bool rides = t.GhFire.HasValue && !fx.AttachToRoot && Array.IndexOf(anim.Projectiles, fx.EffectAttachPoint) >= 0;
                                 fx.StartTime = rides
@@ -767,6 +814,7 @@ namespace FrosthavenMods
                                 if (p != null && (p.OriginalProgressTime > 0f || p.ProgressTime <= 0f)) p.ProgressTime = t.GhProgress ?? p.OriginalProgressTime * t.Scale;
                         if (!string.IsNullOrEmpty(cast.AbilityAudioEvent) && anim.Silence.Contains(cast.AbilityAudioEvent)) cast.AbilityAudioEvent = "";
                         if (GHSound.Playable(t.Audio)) cast.AbilityAudioEvent = t.Audio;   // the class's own sound for this move
+                        if (t.Effects != null) GHVfx.Apply(cast, t.Effects, e);             // the class's own effects for this move
                     }
                     else if (smb is FireEquippedProjectileSMB fire)
                     {
@@ -786,7 +834,7 @@ namespace FrosthavenMods
 
         private static void Retime(VFXShared.TargetHexEffects hex, StateTiming t)
         {
-            if (hex == null || (hex.OriginalHitTime <= 0f && hex.HitTime > 0f)) return;   // nothing to do, or not awake yet
+            if (hex == null || hex is GHVfx.GhHex || (hex.OriginalHitTime <= 0f && hex.HitTime > 0f)) return;   // nothing to do, his already, or not awake yet
             // Gloomhaven's beat for the impact: its hit, else its progress moment (a cast that resolves by progress alone,
             // the heal, lands its impact effect when the ability resolves)
             float? ghHit = t.GhHit ?? t.GhProgress;

@@ -12,6 +12,7 @@ that the release zip and the installer carry like every other mod:
     art\\<Class>\\*.png                         the class's pictures in Frosthaven's shapes (gh_art.py)
     sounds\\<Class>\\*.wav                      the class's own sounds, under their Gloomhaven event names (gh_sound.py)
     bundles\\hero_<class>_assets_all.bundle     the class's 3D model, Gloomhaven's own asset bundle copied as is
+    bundles\\pcg_materials_assets_*.bundle etc.  the materials of the class's ability effects (gh_vfx.py), as is
                                               (gh_model.py; 83 MB for the Brute, so git-ignored: the release carries it)
     pack.json                                 manifest: name, version, classes, data_sha (plugin + co-op check), source,
                                               and a "model" entry per class telling the plugin what is in the bundle
@@ -292,7 +293,7 @@ def main():
                        "unlocked in a campaign by the house rule of the same name.",
         "enabled": True,
     }, indent=2) + "\n", encoding="utf-8")
-    written, warnings, used_keys, models = [], [], set(), {}
+    written, warnings, used_keys, models, anim_names = [], [], set(), {}, set()
 
     def write(rel, s):
         if rel.lower() in fh_names:
@@ -319,6 +320,7 @@ def main():
                        re.search(rf"^Character:\s*{re.escape(char_id)}\s*$", text(d), re.M))
         for n in cards:
             new_id, s = convert_card(n, text(files[n]), warnings.append, CLASS_ICONS.get(cls))
+            anim_names.update(m.group(2) for m in ANIM_OVERLOAD_LINE.finditer(s))
             if new_id in fh_card_ids:
                 sys.exit(f"{n}: card ID {new_id} is taken in Frosthaven")
             stem = re.sub(r"^\d+", str(new_id), Path(n).name)
@@ -373,6 +375,23 @@ def main():
                       f"{len(anim['clips'])} clips swapped on the {anim['base']}'s animator)")
             except Exception as e:  # noqa: BLE001 - the model is cosmetic, never block the data
                 warnings.append(f"{cls}: 3D model not copied: {e}")
+
+        # the class's own ability effects (see gh_vfx.py); optional, the plugin keeps the Drifter's without
+        if cls in models:
+            try:
+                import gh_vfx
+            except ImportError as e:
+                warnings.append(f"{cls}: no ability effects ({e})")
+            else:
+                try:
+                    fx = gh_vfx.export(gh, cls, args.out, models[cls], warn=lambda m: warnings.append(m), wanted=anim_names)
+                    models[cls].update(fx)
+                    if fx:
+                        mb = sum(b["size"] for b in fx["effect_bundles"]) / 1048576
+                        print(f"{cls}: {len(fx['effects'])} ability effects, {len(fx['effect_materials'])} materials rebuilt "
+                              f"on Frosthaven's shaders, {len(fx['effect_bundles'])} material bundles ({mb:.1f} MB)")
+                except Exception as e:  # noqa: BLE001 - effects are cosmetic, never block the data
+                    warnings.append(f"{cls}: ability effects not exported: {e}")
 
         # the names of its alternative looks, for the party screen's skin toggle ("Brute_SKIN_ALT": Boneguard)
         for skin in models.get(cls, {}).get("skins", {}):
