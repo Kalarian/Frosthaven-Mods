@@ -16,6 +16,9 @@
 
     <!-- Override with: dotnet build -c Release -p:GamePath="D:\Games\Frosthaven" -->
     <GamePath Condition="'$(GamePath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Frosthaven</GamePath>
+    <!-- Test keys (src\DevKeys.cs) for the author's own install only: dotnet build -c Release -p:Dev=true.
+         Release builds (publish.sh, tools/build_installer.sh) never pass it, so no dev tool ever ships. -->
+    <DefineConstants Condition="'$(Dev)' == 'true'">$(DefineConstants);DEV</DefineConstants>
     <GameManaged>$(GamePath)\Frosthaven_Data\Managed</GameManaged>
   </PropertyGroup>
 
