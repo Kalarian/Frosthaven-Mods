@@ -174,6 +174,8 @@ namespace FrosthavenMods
 
         private static readonly System.Reflection.FieldInfo EffectsInitiative = AccessTools.Field(typeof(CardEffects), "initiativeTxt");
         private static readonly System.Reflection.FieldInfo EffectsTexts = AccessTools.Field(typeof(CardEffects), "txtComp");
+        private static readonly System.Reflection.FieldInfo EffectsOverlay = AccessTools.Field(typeof(CardEffects), "fgFx");
+        private static readonly System.Reflection.FieldInfo EffectsSmoke = AccessTools.Field(typeof(CardEffects), "fx_Smoke");
 
         /// <summary>How a card the character can't take yet looks (the New Cards screen: UIOutpostCardSlot). The game
         /// greys a card through an ImageMaterialSwapper on the full card, which every real card prefab carries and the
@@ -201,6 +203,19 @@ namespace FrosthavenMods
             CardEffects effects = full.GetComponent<CardEffects>();
             if (effects == null) return;
             EffectsInitiative?.SetValue(effects, null);
+            // the template's ghost-out also rings the card with animated smoke (its overlay UIFX_Overlay and a smoke
+            // particle system); the real cards' CardEffects have neither (every slot empty), so their locked and
+            // discarded cards show none
+            if (EffectsOverlay?.GetValue(effects) is Image overlay)
+            {
+                overlay.gameObject.SetActive(false);
+                EffectsOverlay.SetValue(effects, null);
+            }
+            if (EffectsSmoke?.GetValue(effects) is Component smoke)   // a ParticleSystem (its module isn't referenced)
+            {
+                smoke.gameObject.SetActive(false);
+                EffectsSmoke.SetValue(effects, null);
+            }
             if (EffectsTexts?.GetValue(effects) is TextMeshProUGUI[] texts && texts.Length > 5) texts[5] = null;   // already initialised
         }
 
