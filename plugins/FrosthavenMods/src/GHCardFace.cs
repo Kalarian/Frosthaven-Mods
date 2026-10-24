@@ -161,6 +161,29 @@ namespace FrosthavenMods
             }
             Level(full);
             Band(full, model);
+            Locked(full);
+        }
+
+        private static readonly System.Reflection.FieldInfo EffectsInitiative = AccessTools.Field(typeof(CardEffects), "initiativeTxt");
+        private static readonly System.Reflection.FieldInfo EffectsTexts = AccessTools.Field(typeof(CardEffects), "txtComp");
+
+        /// <summary>How a card the character can't take yet looks (the New Cards screen: UIOutpostCardSlot). The game
+        /// greys a card through an ImageMaterialSwapper on the full card, which every real card prefab carries and the
+        /// template lacks, so the card gets one with the real cards' greyscale material. And it plays the card's
+        /// ghost-out effect, which on the template fades the initiative to white; the real cards keep theirs in the
+        /// class's ink, so the initiative is taken out of the effect.</summary>
+        private static void Locked(RectTransform full)
+        {
+            if (full.GetComponent<ImageMaterialSwapper>() == null && Art.Greyscale != null)
+            {
+                ImageMaterialSwapper swapper = full.gameObject.AddComponent<ImageMaterialSwapper>();
+                swapper.TargetMaterial = Art.Greyscale;
+                swapper.UseChildImages = true;
+            }
+            CardEffects effects = full.GetComponent<CardEffects>();
+            if (effects == null) return;
+            EffectsInitiative?.SetValue(effects, null);
+            if (EffectsTexts?.GetValue(effects) is TextMeshProUGUI[] texts && texts.Length > 5) texts[5] = null;   // already initialised
         }
 
         private static readonly Color LevelYellow = new Color(1f, 0.87f, 0.3f);
@@ -345,6 +368,11 @@ namespace FrosthavenMods
         private static class Art
         {
             internal static Sprite Card, TitleLine, LevelTag, Ornament, Hex;
+            private static Material _greyscale;
+
+            /// <summary>The real cards' greyscale material for locked cards (a copy of ours), else the game's own
+            /// disabled-greyscale material.</summary>
+            internal static Material Greyscale => _greyscale != null ? _greyscale : UIInfoTools.Instance != null ? UIInfoTools.Instance.disabledGrayscaleMaterial : null;
             private static readonly Dictionary<ECharacter, Sprite> TitleBands = new Dictionary<ECharacter, Sprite>();
             private static readonly HashSet<ECharacter> Skinned = new HashSet<ECharacter>();
             private static readonly Dictionary<ECharacter, Sprite> Banners = new Dictionary<ECharacter, Sprite>();
@@ -451,6 +479,8 @@ namespace FrosthavenMods
                     _glow = Pixels.Read(GlobalSprite("FH_UI_CARD_Selection"));
                     _pillNeutral = Pixels.Read(GlobalSprite("FH_UI_CARD_DEFAction_BGR_Inactive"))?.Fit(_pill?.W ?? 0, _pill?.H ?? 0);
                     _pillFrame = Pixels.Read(GlobalSprite("FH_UI_CARD_DEFAction_Frame_Active")) ?? Pixels.Read(Of("Frame"));
+                    Material grey = prefab.GetComponentInChildren<ImageMaterialSwapper>(true)?.TargetMaterial;
+                    if (grey != null) _greyscale = new Material(grey) { name = "GH card greyscale", hideFlags = HideFlags.DontUnloadUnusedAsset };
                     Ornament = GlobalSprite("FH_UI_CARD_Initiative_Ornament");
                     Hex = GlobalSprite("FH_UI_CARD_Initiative");
                 }
