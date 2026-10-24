@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using FHGUI;
+using FHGUI.Elements;
 using FHRL;
 using GLOOM.MainMenu;
 using HarmonyLib;
@@ -18,10 +19,14 @@ using UnityEngine.UI;
 namespace FrosthavenMods
 {
     /// <summary>
-    /// The way out of a campaign that used the Gloomhaven pack: a copy of the current campaign with every trace of the
-    /// pack removed, saved as a NEW campaign "&lt;name&gt; (no Gloomhaven)" that a game without the pack (or without the
-    /// mods at all) loads. A "Copy without Gloomhaven" button in the Save Game window does it (host or solo, in the
-    /// outpost). The live campaign is never changed.
+    /// The way out of a campaign that used a content pack: a copy of the campaign with every trace of pack content
+    /// removed, saved as a NEW campaign "&lt;name&gt; (no content packs)" that a game without the pack (or without the
+    /// mods at all) loads. Needs the mods, never the pack: it strips whatever the installed rules don't know, so it
+    /// works after the pack is gone, on a save the game itself can no longer open. Three doors:
+    /// - the Save Game window in the outpost: "Copy without content packs" copies the live campaign (host or solo);
+    /// - the Load Game window: the same button on any saved campaign that carries pack content, read from its file;
+    /// - a guard on loading: a save that names content the rules lack is stopped with an offer to make the copy, instead
+    ///   of failing inside the game, whose error button moves the save to the corrupted folder.
     ///
     /// What a pack-less game chokes on is every lookup of a pack definition: a character's class (CharacterState.ClassDef
     /// indexes the definition repository), its cards, perks and masteries, enhancements on pack cards, the "class
@@ -29,22 +34,26 @@ namespace FrosthavenMods
     /// (CMapCharacter, keyed by class ID) the save also carries. The copy drops them all: pack characters are deleted the
     /// way the game deletes one (items back to the shop, gold and resources gone, their personal quest back in the deck),
     /// retired pack characters leave the retired roster, everything else is filtered. The copy is then checked against a
-    /// repository with the pack removed (every definition the save can reach is resolved), written as a new campaign
-    /// through the game's own save writer, read back from disk and checked again. The copy's rules keep only the game's
-    /// own switches.
+    /// repository with the installed packs removed (every definition the save can reach is resolved), written as a new
+    /// campaign through the game's own save writer, read back from disk and checked again. The copy's rules keep only
+    /// the game's own switches. The source campaign is never changed.
     /// </summary>
     [HarmonyPatch]
     internal static class GHSaveStrip
     {
-        public const string Suffix = " (no Gloomhaven)";
-        public const string FileName = "No Gloomhaven";
-        private const string ButtonName = "FrosthavenMods_StripSave";
-        private const string Marker = "FHMODS:";   // the pack's own markers in LootedChestTreasureTableIDs (GHLooks)
+        public const string Suffix = " (no content packs)";
+        public const string FileName = "No content packs";
+        private const string SaveButtonName = "FrosthavenMods_StripSave";
+        private const string LoadButtonName = "FrosthavenMods_StripLoad";
+        private const string Marker = "FHMODS:";   // the mods' own markers in LootedChestTreasureTableIDs (GHLooks, Bone kills)
 
         // the game's own rule bits: everything else is a mod switch and goes
         private static readonly ERulesFlag VanillaRules = Enum.GetValues(typeof(ERulesFlag)).Cast<ERulesFlag>().Aggregate(ERulesFlag.None, (a, b) => a | b);
 
         private static readonly FieldInfo NewSaveField = AccessTools.Field(typeof(FHUISaveGame), "newSave");
+        private static readonly FieldInfo SaveInfoField = AccessTools.Field(typeof(FHUILoadGame), "saveInfo");
+        private static readonly FieldInfo InvalidateField = AccessTools.Field(typeof(FHUILoadGame), "_invalidate");
+        private static readonly FieldInfo ActionButtonField = AccessTools.Field(typeof(FHUIGameSaveData), "actionButton");
         private static readonly MethodInfo SaveToFile = AccessTools.Method(typeof(PartyAdventureData), "SaveGameStateToFile");
         private static readonly MethodInfo LoadFromFile = AccessTools.Method(typeof(PartyAdventureData), "LoadGameStateFromFile");
         private static readonly MethodInfo BeginResult = AccessTools.Method(typeof(CampaignController), "BeginResult");
@@ -59,6 +68,11 @@ namespace FrosthavenMods
         private static readonly FieldInfo RepoMasteries = AccessTools.Field(typeof(DefRepository), nameof(DefRepository.MasteryDefs));
         private static readonly MethodInfo ShallowClone = typeof(object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
 
+        private static bool _bypass;        // the load guard lets a load it has already checked through
+        private static int _selectSeq;      // the Load window's selection the file check belongs to
+        private static Transform _loadButton;
+        private static PartyAdventureData _loadButtonSave;
+
         internal sealed class Report
         {
             public readonly List<string> Removed = new List<string>();
@@ -66,57 +80,36 @@ namespace FrosthavenMods
             public string Path;
         }
 
-        // ------------------------------------------------------------------ the button in the Save Game window
+        private static DefRepository Repo => GHClassesRule.LiveRepo;
+
+        // ================================================================== the Save Game window (live campaign)
 
         [HarmonyPatch(typeof(FHUISaveGame), nameof(FHUISaveGame.Show), typeof(IGameModeService))]
         [HarmonyPostfix]
-        private static void AddButton(FHUISaveGame __instance)
+        private static void AddSaveButton(FHUISaveGame __instance)
         {
-            GiveResourcesPatches.Safe("add the Copy without Gloomhaven button", () =>
+            GiveResourcesPatches.Safe("add the Copy without content packs button (save window)", () =>
             {
                 var template = NewSaveField.GetValue(__instance) as FHButton;
                 if (template == null) return;
                 Transform parent = template.transform.parent;
-                bool show = Wanted();
-                Transform existing = parent.Find(ButtonName);
+                bool show = WantedLive();
+                Transform existing = parent.Find(SaveButtonName);
                 if (existing == null)
                 {
                     if (!show) return;
                     UiDump.Once("Save window buttons", parent);
-                    FHButton button = ButtonCopy.Make(template, parent, ButtonName, Text.Get("FHMODS_STRIP"), OnClick);
+                    FHButton button = ButtonCopy.Make(template, parent, SaveButtonName, Text.Get("FHMODS_STRIP"), OnClickLive);
                     if (button == null) return;
-                    Place((RectTransform)button.transform, (RectTransform)template.transform);
+                    PlaceBeside((RectTransform)button.transform, (RectTransform)template.transform);
                     existing = button.transform;
                 }
                 existing.gameObject.SetActive(show);
             });
         }
 
-        /// <summary>Left of "New save": in a layout group by sibling order, else by position. Wide enough for the label.</summary>
-        private static void Place(RectTransform rt, RectTransform template)
-        {
-            rt.SetSiblingIndex(template.GetSiblingIndex());
-            float width = Mathf.Max(template.rect.width * 2.4f, 300f);
-            if (template.parent.GetComponent<LayoutGroup>() != null)
-            {
-                LayoutElement le = rt.GetComponent<LayoutElement>() ?? rt.gameObject.AddComponent<LayoutElement>();
-                le.preferredWidth = width;
-                le.minWidth = width;
-            }
-            else
-            {
-                rt.sizeDelta = new Vector2(width, template.sizeDelta.y);
-                rt.anchoredPosition = template.anchoredPosition - new Vector2((template.rect.width + width) / 2f + 16f, 0f);
-            }
-            foreach (TMP_Text t in rt.GetComponentsInChildren<TMP_Text>(true))
-            {
-                t.enableWordWrapping = false;
-                t.overflowMode = TextOverflowModes.Overflow;
-            }
-        }
-
         /// <summary>Show the button to the host or solo player in the outpost when the campaign has (or can get) pack content.</summary>
-        private static bool Wanted()
+        private static bool WantedLive()
         {
             FHMapChoreographer map = Singleton<FHMapChoreographer>.InstanceFast;
             CampaignState state = map?.GameState;
@@ -127,26 +120,16 @@ namespace FrosthavenMods
             return GHClassesRule.On || Traces(state, repo).Any();
         }
 
-        private static void OnClick()
+        private static void OnClickLive()
         {
-            string why = WhyNot(out FHMapChoreographer map);
+            string why = WhyNotLive(out FHMapChoreographer map);
             if (why != null) { Info(why); return; }
             PartyAdventureData live = SaveData.Instance.Global.CurrentAdventureData;
-            List<string> traces = Traces(map.GameState, map.GameController.DefRepository).ToList();
-            string what = traces.Count == 0
-                ? "This campaign has no Gloomhaven characters or unlocks yet, so the copy only loses the pack's switch."
-                : "The copy will not have:\n- " + string.Join("\n- ", traces) + "\n\nTheir items go back to the shop; their gold and resources are lost.";
-            string text = $"A copy of this campaign is saved as a new campaign, \"{live.PartyName}{Suffix}\", that loads in a game without the " +
-                          $"Gloomhaven pack (or without the mods). This campaign itself is not changed.\n\n{what}\n\n" +
-                          "The copy keeps only the game's own house rules.";
-            Singleton<UIConfirmationBoxManager>.Instance.ShowGenericConfirmation(Text.Get("FHMODS_STRIP_TITLE"), text, () => Run(map));
+            Confirm(live, Traces(map.GameState, map.GameController.DefRepository).ToList(), () => RunLive(map));
         }
 
-        private static void Info(string text) =>
-            Singleton<UIConfirmationBoxManager>.Instance.ShowGenericInfo(Text.Get("FHMODS_STRIP_TITLE"), text, null, "GUI_CONTINUE");
-
-        /// <summary>Why the copy can't be made right now, or null.</summary>
-        private static string WhyNot(out FHMapChoreographer map)
+        /// <summary>Why the live copy can't be made right now, or null.</summary>
+        private static string WhyNotLive(out FHMapChoreographer map)
         {
             map = Singleton<FHMapChoreographer>.InstanceFast;
             if (SaveData.Instance?.Global?.CurrentAdventureData?.FrosthavenSaveData == null) return "No campaign is open.";
@@ -161,28 +144,215 @@ namespace FrosthavenMods
             return null;
         }
 
-        private static async void Run(FHMapChoreographer map)
+        private static async void RunLive(FHMapChoreographer map)
+        {
+            Singleton<FHUISaveGame>.Instance?.Hide();
+            await Run(() => CopyLive(map));
+        }
+
+        /// <summary>The live campaign, after the game's own pre-save sync, as a deep copy.</summary>
+        private static async Task<Report> CopyLive(FHMapChoreographer map)
+        {
+            PartyAdventureData live = SaveData.Instance.Global.CurrentAdventureData;
+            CampaignController controller = map.GameController;
+            DefRepository repo = controller.DefRepository;
+            try { map.GameClient.SyncCharacters(); }   // the legacy party mirror, the party slots and the save's state reference
+            catch (Exception e) { Plugin.Log.LogWarning("Copy without content packs: the pre-save sync failed, continuing: " + e.Message); }
+            FHSaveData data = await live.FrosthavenSaveData.DeepCopySerializableObject<FHSaveData>();
+            var serializer = new StateSerializer<CampaignState>(repo) { StateResolveAction = s => s.ResolveDefs(repo) };
+            data.GameState = serializer.Clone(controller.State);
+            return await Finish(data, live, repo);
+        }
+
+        // ================================================================== the Load Game window (any saved campaign)
+
+        [HarmonyPatch(typeof(FHUILoadGame), "SelectSave")]
+        [HarmonyPostfix]
+        private static void LoadWindowSelected(FHUILoadGame __instance, IGameSaveData saveData)
+        {
+            GiveResourcesPatches.Safe("the Load window's content-pack check", () =>
+            {
+                int seq = ++_selectSeq;
+                if (_loadButton != null) _loadButton.gameObject.SetActive(false);
+                _loadButtonSave = null;
+                PartyAdventureData save = saveData?.PartyAdventureData;
+                if (save == null || saveData.GameMode != EGameMode.Campaign || Repo == null) return;
+                var panel = SaveInfoField.GetValue(__instance) as FHUIGameSaveData;
+                var template = panel == null ? null : ActionButtonField.GetValue(panel) as Button;
+                if (template == null) return;
+                CheckSelected(save, template, seq);
+            });
+        }
+
+        private static async void CheckSelected(PartyAdventureData save, Button template, int seq)
+        {
+            List<string> traces;
+            try
+            {
+                FHSaveData data = await ReadSave(save);
+                traces = Traces(data.GameState, Repo).ToList();
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogWarning($"Copy without content packs: could not check '{save.PartyName}/{save.SaveFileName}': {e.Message}");
+                return;
+            }
+            if (seq != _selectSeq || traces.Count == 0) return;   // another save was picked meanwhile, or nothing to strip
+            GiveResourcesPatches.Safe("add the Copy without content packs button (load window)", () =>
+            {
+                if (_loadButton == null || _loadButton.parent != template.transform.parent)
+                {
+                    UiDump.Once("Load window save panel buttons", template.transform.parent);
+                    FHButton made = ButtonCopy.Make(template as FHButton ?? template.GetComponent<FHButton>(), template.transform.parent, LoadButtonName,
+                                                    Text.Get("FHMODS_STRIP"), OnClickFile);
+                    if (made == null) return;
+                    PlaceAbove((RectTransform)made.transform, (RectTransform)template.transform);
+                    _loadButton = made.transform;
+                }
+                _loadButtonSave = save;
+                _loadButton.gameObject.SetActive(true);
+            });
+        }
+
+        private static void OnClickFile()
+        {
+            PartyAdventureData save = _loadButtonSave;
+            if (save == null) return;
+            ConfirmFile(save);
+        }
+
+        private static async void ConfirmFile(PartyAdventureData save)
+        {
+            List<string> traces;
+            try { traces = Traces((await ReadSave(save)).GameState, Repo).ToList(); }
+            catch (Exception e) { Info("This save could not be read: " + e.Message); return; }
+            Confirm(save, traces, () => RunFile(save));
+        }
+
+        private static async void RunFile(PartyAdventureData save)
+        {
+            await Run(() => CopyFile(save));
+            if (Singleton<FHUILoadGame>.Instance != null) InvalidateField.SetValue(Singleton<FHUILoadGame>.Instance, true);   // relist
+        }
+
+        /// <summary>A saved campaign, read from its file; outpost saves only (a save made during a scenario carries
+        /// the scenario's actors as well).</summary>
+        private static async Task<Report> CopyFile(PartyAdventureData save)
+        {
+            if (save.CurrentScenarioID.HasValue)
+                throw new Exception("this save was made during a scenario; pick one made in the outpost (an autosave or a Mod backup after the scenario)");
+            FHSaveData data = await ReadSave(save);
+            return await Finish(data, save, Repo);
+        }
+
+        private static async Task<FHSaveData> ReadSave(PartyAdventureData save)
+        {
+            string path = await save.PartyMainSaveFile;
+            var loaded = await (Task<(FHSaveData data, bool gameClosedWhileSaving)>)LoadFromFile.Invoke(null, new object[] { path, false, save.IsOldSaveFileFormat });
+            if (loaded.data?.GameState == null) throw new Exception("the save file could not be read");
+            return loaded.data;
+        }
+
+        // ================================================================== the load guard
+
+        [HarmonyPatch(typeof(CampaignLoadService), nameof(CampaignLoadService.LoadGame))]
+        [HarmonyPrefix]
+        private static bool GuardLoad(CampaignLoadService __instance, IGameSaveData gameData, ref Task __result)
+        {
+            if (_bypass || gameData?.PartyAdventureData == null || gameData.GameMode != EGameMode.Campaign || Repo == null) return true;
+            PartyAdventureData save = gameData.PartyAdventureData;
+            __result = Guarded(save, () =>
+            {
+                _bypass = true;
+                try { return __instance.LoadGame(gameData); }
+                finally { _bypass = false; }
+            });
+            return false;
+        }
+
+        [HarmonyPatch(typeof(CampaignModeService), nameof(CampaignModeService.ResumeLastGame))]
+        [HarmonyPrefix]
+        private static bool GuardResume(CampaignModeService __instance)
+        {
+            if (_bypass || Repo == null) return true;
+            GuardedResume(__instance);
+            return false;
+        }
+
+        private static async void GuardedResume(CampaignModeService service)
+        {
+            PartyAdventureData resume = null;
+            try { resume = await SaveData.Instance.Global.GetResumeCampaign(); }
+            catch (Exception e) { Plugin.Log.LogWarning("Copy without content packs: no resume campaign to check: " + e.Message); }
+            await Guarded(resume, () =>
+            {
+                _bypass = true;
+                try { service.ResumeLastGame(); }
+                finally { _bypass = false; }
+                return Task.CompletedTask;
+            });
+        }
+
+        /// <summary>Let the load go ahead unless the save names content the installed rules lack; then offer the copy.</summary>
+        private static async Task Guarded(PartyAdventureData save, Func<Task> proceed)
+        {
+            List<string> missing = new List<string>();
+            if (save != null && save.GameMode == EGameMode.Campaign)
+            {
+                try { missing = Missing((await ReadSave(save)).GameState, Repo); }
+                catch (Exception e) { Plugin.Log.LogWarning($"Copy without content packs: could not check '{save.PartyName}' before loading: {e.Message}"); }
+            }
+            if (missing.Count == 0)
+            {
+                await proceed();
+                return;
+            }
+            CoopLog.Write($"STRIP GUARD '{save.PartyName}/{save.SaveFileName}' names missing content: {string.Join(", ", missing)}");
+            string text = $"\"{save.PartyName}\" uses content that isn't installed in this game: {string.Join(", ", missing)}.\n\n" +
+                          "Loaded as it is, it would fail, and the game would move the save to its corrupted folder. Install that " +
+                          "content pack again, or make a copy of the campaign without it: it appears in Load game as " +
+                          $"\"{save.PartyName}{Suffix}\", with those characters and unlocks removed.";
+            Singleton<UIConfirmationBoxManager>.Instance.ShowGenericConfirmation(Text.Get("FHMODS_STRIP_MISSING"), text,
+                () => RunFile(save), null, "FHMODS_STRIP_DO", "GUI_CANCEL");
+        }
+
+        // ================================================================== shared UI
+
+        private static void Confirm(PartyAdventureData save, List<string> traces, Action go)
+        {
+            string what = traces.Count == 0
+                ? "This campaign has no content-pack characters or unlocks, so the copy only loses the pack's switch."
+                : "The copy will not have:\n- " + string.Join("\n- ", traces) + "\n\nTheir items go back to the shop; their gold and resources are lost.";
+            string text = $"A copy of the campaign is saved as a new campaign, \"{save.PartyName}{Suffix}\", that loads in a game without " +
+                          $"content packs (or without the mods). The campaign itself is not changed.\n\n{what}\n\n" +
+                          "The copy keeps only the game's own house rules.";
+            Singleton<UIConfirmationBoxManager>.Instance.ShowGenericConfirmation(Text.Get("FHMODS_STRIP_TITLE"), text, () => go());
+        }
+
+        private static void Info(string text) =>
+            Singleton<UIConfirmationBoxManager>.Instance.ShowGenericInfo(Text.Get("FHMODS_STRIP_TITLE"), text, null, "GUI_CONTINUE");
+
+        private static async Task Run(Func<Task<Report>> make)
         {
             var gate = SavingLock.GetValue(SaveData.Instance) as SemaphoreSlim;
             bool held = false;
             try
             {
-                Singleton<FHUISaveGame>.Instance?.Hide();
                 if (gate != null)
                 {
                     held = await gate.WaitAsync(TimeSpan.FromSeconds(10));
                     if (!held) throw new Exception("another save is still running");
                 }
-                Report report = await Copy(map);
+                Report report = await make();
                 CoopLog.Write($"STRIP COPY written: {report.Path} removed=[{string.Join("; ", report.Removed)}]");
                 string removed = report.Removed.Count == 0 ? "Nothing had to be removed." : "Removed from the copy:\n- " + string.Join("\n- ", report.Removed);
                 Info($"Saved as the campaign \"{report.Campaign}\" (save \"{FileName}\"). It is in Load game, and opens in a game " +
-                     $"without the Gloomhaven pack.\n\n{removed}");
+                     $"without content packs.\n\n{removed}");
             }
             catch (Exception e)
             {
-                Plugin.Log.LogError("Copy without Gloomhaven: failed: " + e);
-                Info("The copy was not made: " + (e.InnerException ?? e).Message + "\n\nThis campaign was not changed.");
+                Plugin.Log.LogError("Copy without content packs: failed: " + e);
+                Info("The copy was not made: " + (e.InnerException ?? e).Message + "\n\nNothing was changed.");
             }
             finally
             {
@@ -190,41 +360,76 @@ namespace FrosthavenMods
             }
         }
 
-        // ------------------------------------------------------------------ the copy
-
-        /// <summary>Make, check, write and re-check the pack-free copy. Throws with a plain-English reason on any failure;
-        /// a written file that fails its read-back check is deleted again.</summary>
-        internal static async Task<Report> Copy(FHMapChoreographer map)
+        /// <summary>Left of the template: in a layout group by sibling order, else by position. Wide enough for the label.</summary>
+        private static void PlaceBeside(RectTransform rt, RectTransform template)
         {
-            PartyAdventureData live = SaveData.Instance.Global.CurrentAdventureData;
-            CampaignController controller = map.GameController;
-            DefRepository repo = controller.DefRepository;
+            rt.SetSiblingIndex(template.GetSiblingIndex());
+            float width = Mathf.Max(template.rect.width * 2.4f, 300f);
+            if (template.parent.GetComponent<LayoutGroup>() != null)
+            {
+                LayoutElement le = rt.GetComponent<LayoutElement>() ?? rt.gameObject.AddComponent<LayoutElement>();
+                le.preferredWidth = width;
+                le.minWidth = width;
+            }
+            else
+            {
+                rt.sizeDelta = new Vector2(width, template.sizeDelta.y);
+                rt.anchoredPosition = template.anchoredPosition - new Vector2((template.rect.width + width) / 2f + 16f, 0f);
+            }
+            NoWrap(rt);
+        }
 
-            // the game's own pre-save sync: the legacy party mirror, the party slots and the save's state reference
-            try { map.GameClient.SyncCharacters(); }
-            catch (Exception e) { Plugin.Log.LogWarning("Copy without Gloomhaven: the pre-save sync failed, continuing: " + e.Message); }
+        /// <summary>Above the template (the Load window's Load button has Delete beside it), same width as the label needs.</summary>
+        private static void PlaceAbove(RectTransform rt, RectTransform template)
+        {
+            rt.SetSiblingIndex(template.GetSiblingIndex());
+            float width = Mathf.Max(template.rect.width * 2.4f, 300f);
+            if (template.parent.GetComponent<LayoutGroup>() != null)
+            {
+                LayoutElement le = rt.GetComponent<LayoutElement>() ?? rt.gameObject.AddComponent<LayoutElement>();
+                le.preferredWidth = width;
+                le.minWidth = width;
+            }
+            else
+            {
+                rt.sizeDelta = new Vector2(width, template.sizeDelta.y);
+                rt.anchoredPosition = template.anchoredPosition + new Vector2(0f, template.rect.height + 12f);
+            }
+            NoWrap(rt);
+        }
 
-            FHSaveData data = await live.FrosthavenSaveData.DeepCopySerializableObject<FHSaveData>();
-            var serializer = new StateSerializer<CampaignState>(repo) { StateResolveAction = s => s.ResolveDefs(repo) };
-            data.GameState = serializer.Clone(controller.State);
+        private static void NoWrap(RectTransform rt)
+        {
+            foreach (TMP_Text t in rt.GetComponentsInChildren<TMP_Text>(true))
+            {
+                t.enableWordWrapping = false;
+                t.overflowMode = TextOverflowModes.Overflow;
+            }
+        }
+
+        // ================================================================== the copy
+
+        /// <summary>Strip, check, write and re-check. Throws with a plain-English reason on any failure; a written file
+        /// that fails its read-back check is deleted again.</summary>
+        private static async Task<Report> Finish(FHSaveData data, PartyAdventureData source, DefRepository repo)
+        {
             data.ResolveDefs(repo);
-
             List<CharacterClassID> pack = GHClassesRule.PackClassIDs(repo);
             var report = new Report();
             Strip(data, repo, pack, report);
 
             DefRepository packless = Packless(repo, pack);
             string leftover = Verify(data, packless);
-            if (leftover != null) throw new Exception("the copy would still refer to the pack (" + leftover + ")");
+            if (leftover != null) throw new Exception("the copy would still refer to pack content (" + leftover + ")");
             data.ResolveDefs(repo);
 
-            string name = live.PartyName + Suffix;
+            string name = source.PartyName + Suffix;
             if (name.Length >= PartyAdventureData.Header.CampaignNameSizeLimit)
-                name = live.PartyName.Substring(0, PartyAdventureData.Header.CampaignNameSizeLimit - Suffix.Length - 1) + Suffix;
-            var copy = new PartyAdventureData(data, name, live.Owner ?? new SaveOwner(), live.GameMode, live.Rules & VanillaRules, live.IsIronMan)
+                name = source.PartyName.Substring(0, PartyAdventureData.Header.CampaignNameSizeLimit - Suffix.Length - 1) + Suffix;
+            var copy = new PartyAdventureData(data, name, source.Owner ?? new SaveOwner(), source.GameMode, source.Rules & VanillaRules, source.IsIronMan)
             {
                 SaveFileName = FileName,
-                TimeActiveSecRunLTD = live.TimeActiveSecRunLTD,
+                TimeActiveSecRunLTD = source.TimeActiveSecRunLTD,
             };
             string path = await copy.PartyMainSaveFile;
             bool ok = await (Task<bool>)SaveToFile.Invoke(copy, new object[] { path });
@@ -236,17 +441,17 @@ namespace FrosthavenMods
             string problem = back == null ? "the written file could not be read back" : Verify(back, packless);
             if (problem != null)
             {
-                try { File.Delete(path); } catch (Exception e) { Plugin.Log.LogWarning("Copy without Gloomhaven: could not delete the bad copy: " + e.Message); }
+                try { File.Delete(path); } catch (Exception e) { Plugin.Log.LogWarning("Copy without content packs: could not delete the bad copy: " + e.Message); }
                 throw new Exception(problem);
             }
 
-            // the Load screen's picture, if the live campaign has one
+            // the Load screen's picture, if the source has one
             try
             {
-                string shot = await live.ScreenShotFile;
+                string shot = await source.ScreenShotFile;
                 if (File.Exists(shot)) File.Copy(shot, await copy.ScreenShotFile, true);
             }
-            catch (Exception e) { Plugin.Log.LogWarning("Copy without Gloomhaven: no screenshot for the copy: " + e.Message); }
+            catch (Exception e) { Plugin.Log.LogWarning("Copy without content packs: no screenshot for the copy: " + e.Message); }
 
             report.Campaign = name;
             report.Path = path;
@@ -256,13 +461,33 @@ namespace FrosthavenMods
         private static string Short(CharacterClassID id) =>
             id.ID != null && id.ID.EndsWith("ID", StringComparison.Ordinal) ? id.ID.Substring(0, id.ID.Length - 2) : id.ID ?? "?";
 
-        /// <summary>A class the pack-less game lacks: one of the pack's, or one these rules don't know either.</summary>
+        private static string Short(string id) => Short(new CharacterClassID(id));
+
+        /// <summary>A class the pack-less game lacks: one of the installed packs', or one these rules don't know at all.</summary>
         private static bool Foreign(CharacterClassID id, List<CharacterClassID> pack, DefRepository repo) =>
             id.ID != null && (pack.Contains(id) || !repo.CharacterClasses.ContainsKey(id));
 
-        private static string Short(string id) => Short(new CharacterClassID(id));
+        /// <summary>The classes a save names that the installed rules don't know (the load guard's question).</summary>
+        private static List<string> Missing(CampaignState state, DefRepository repo)
+        {
+            var none = new List<CharacterClassID>();
+            var ids = new List<string>();
+            void Add(CharacterClassID id) { if (Foreign(id, none, repo) && !ids.Contains(Short(id))) ids.Add(Short(id)); }
+            foreach (CharacterState c in state.AllCharacters.Concat(state.RetiredCharacters)) if (c != null) Add(c.ClassID);
+            foreach (CharacterClassID id in state.UnlockedClassIDs) Add(id);
+            foreach (CharacterClassDef d in state.UnresolvedActionChosenCharacters) if (d != null) Add(d.ID);
+            foreach (CampaignUnresolvedAction a in state.UnresolvedActions.Where(a => a.Type == CampaignInteractionType.SelectClassUnlock))
+                foreach (string p in a.GetStringParams()) if (!string.IsNullOrEmpty(p)) Add(new CharacterClassID(p));
+            if (state.Outpost?.EventLog != null)
+                foreach (OutpostEventLogState.EventLogData.ClassUnlocked e in state.Outpost.EventLog.GetAllEventsOfType<OutpostEventLogState.EventLogData.ClassUnlocked>())
+                    if (e != null) Add(e.ClassID);
+            if (state.ClassCardModifications.Any(m => m != null && !repo.ClassCards.ContainsKey(m.CardID)) && !ids.Contains("cards of a missing class"))
+                ids.Add("cards of a missing class");
+            return ids;
+        }
 
-        /// <summary>What the copy will lose, for the confirmation and the button's visibility.</summary>
+        /// <summary>What the copy will lose, for the confirmation and the buttons' visibility: installed packs' content
+        /// and content these rules don't know.</summary>
         private static IEnumerable<string> Traces(CampaignState state, DefRepository repo)
         {
             List<CharacterClassID> pack = GHClassesRule.PackClassIDs(repo);
@@ -274,7 +499,7 @@ namespace FrosthavenMods
             List<string> unlocked = state.UnlockedClassIDs.Where(IsPack).Select(Short).ToList();
             if (unlocked.Count > 0) yield return "the unlocked class" + (unlocked.Count > 1 ? "es " : " ") + string.Join(", ", unlocked);
             int enhanced = state.ClassCardModifications.Count(m => m != null && m.EnhancedSlots.Count > 0 &&
-                                                                 repo.ClassCards.TryGetValue(m.CardID, out ClassCardDef card) && card != null && IsPack(card.ClassID));
+                                                                 (!repo.ClassCards.TryGetValue(m.CardID, out ClassCardDef card) || card == null || IsPack(card.ClassID)));
             if (enhanced > 0) yield return $"enhancements on {enhanced} of their cards";
             if (state.Outpost?.EventLog != null &&
                 state.Outpost.EventLog.GetAllEventsOfType<OutpostEventLogState.EventLogData.ClassUnlocked>().Any(e => e != null && IsPack(e.ClassID)))
@@ -399,8 +624,9 @@ namespace FrosthavenMods
             return who != null && ids.Any(i => i == who);
         }
 
-        /// <summary>The live definitions minus the pack: a shallow clone with the four dictionaries the pack extends replaced
-        /// by filtered copies (classes, their cards, perks and masteries).</summary>
+        /// <summary>The installed definitions minus the installed packs: a shallow clone with the four dictionaries a pack
+        /// extends replaced by filtered copies (classes, their cards, perks and masteries). With no pack installed it is
+        /// the installed rules as they are, which is exactly what a pack-less game has.</summary>
         private static DefRepository Packless(DefRepository repo, List<CharacterClassID> pack)
         {
             var clone = (DefRepository)ShallowClone.Invoke(repo, null);
@@ -450,7 +676,7 @@ namespace FrosthavenMods
                         _ = vanilla.CharacterClasses[e.ClassID];
                 where = "quest deck"; state.PersonalQuestDeck.ToList();
                 where = "shop"; state.Outpost.PurchasableItems.ToList(); state.Outpost.CraftableItems.ToList();
-                where = "look markers";
+                where = "mod markers";
                 if (state.LootedChestTreasureTableIDs.Any(s => s != null && s.StartsWith(Marker, StringComparison.Ordinal))) return where;
                 where = "party slots";
                 if (data.SlotAssignments != null)
