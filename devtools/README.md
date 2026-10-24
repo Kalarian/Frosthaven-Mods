@@ -2,6 +2,9 @@
 
 `FrosthavenDevTools/` is a BepInEx plugin for testing on the author's machine. It is never packed or released
 (`tools/pack_zip.py` only packs `plugins/`). It works in solo games only:
+- **Ctrl+F4** retires the selected character (open their sheet in the outpost first): their personal quest is
+  completed with the game's own cheat and the retirement starts as the Retire button would; the game's own screens
+  follow. Permanent in that save, so save first.
 - **Ctrl+F9** gives each party member +100 gold and +10 lumber, metal and hide, and the Frosthaven supply +10 of
   each herb. It's one synced command (outpost only).
 - **Ctrl+F10** wins the current scenario (the game's own `win` debug command).

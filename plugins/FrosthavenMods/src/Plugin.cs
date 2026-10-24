@@ -34,10 +34,6 @@ namespace FrosthavenMods
             int n = 0;
             foreach (var _ in harmony.GetPatchedMethods()) n++;
             Log.LogInfo($"Frosthaven Mods {Version} loaded: {n} game methods patched. House rules: {ModRules.Describe()}");
-#if DEV
-            gameObject.AddComponent<DevKeys>();
-            Log.LogWarning("DEV BUILD: test keys active (" + DevKeys.Help + "). Never release this DLL.");
-#endif
         }
     }
 }

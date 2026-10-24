@@ -13,8 +13,13 @@ namespace FrosthavenDevTools
     /// Solo games only. They call the game's own debug console commands, which ship in the retail build but have no
     /// console to type them into:
     ///   Ctrl+F3   +3 perk marks for every party member (to try perks without levelling)
-    ///   (Ctrl+F4 used to unlock the Gloomhaven classes; the mod's "Gloomhaven classes (content pack)" house rule does
-    ///   that now, with its guards.)
+    ///   Ctrl+F4   retire the selected character (a character sheet open in the outpost): their personal quest is
+    ///             marked complete with the game's own cheat (the one behind its console command
+    ///             complete_personal_quest, processed the same way so the quest-complete notification shows) and the
+    ///             retirement starts exactly as the roster's Retire button would; the game's own screens follow
+    ///             (rewards, confirmation, resource hand-out, the retirement story). Permanent in that save.
+    ///             (Ctrl+F4 used to unlock the Gloomhaven classes; the mod's "Gloomhaven classes (content pack)" house
+    ///             rule does that now, with its guards.)
     ///   Ctrl+F7   every character (party and bench, not retired) gets the experience for the top level. The game levels
     ///             them up on the spot when it allows level-ups (the outpost's downtime), else at the next downtime;
     ///             each level brings its card pick and perk mark as usual.
@@ -40,6 +45,8 @@ namespace FrosthavenDevTools
         internal static ManualLogSource _log;
         private static readonly MethodInfo Win = AccessTools.Method("DebugMenu:WinScenarioCommand");
         private static readonly MethodInfo SkipPrologue = AccessTools.Method("FHMapChoreographer:SkipPrologue");
+        private static readonly MethodInfo ProcessResult =
+            AccessTools.Method(typeof(FHMapChoreographer), "ProcessResultFromCommand", new[] { typeof(FHRL.CampaignController.Result), typeof(bool) });
         private static int _lastFrame = -1;
         private static string _listeningVia;
 
@@ -80,6 +87,7 @@ namespace FrosthavenDevTools
             Keyboard kb = Keyboard.current;
             if (kb == null || !kb.ctrlKey.isPressed) return;
             if (kb.f3Key.wasPressedThisFrame) Run("+3 perk marks for the party", () => Outpost().ExecuteCommand(DevCommands.PerksPath, 3));
+            if (kb.f4Key.wasPressedThisFrame) Run("retire the selected character", RetireSelected);
             if (kb.f7Key.wasPressedThisFrame) Run("every character to the top level", MaxLevel);
             if (kb.f5Key.wasPressedThisFrame) Run("write all event previews", DumpEventPreviews);
             if (kb.f6Key.wasPressedThisFrame) Run("draw a town event", DrawEvent);
@@ -107,6 +115,27 @@ namespace FrosthavenDevTools
             var map = Singleton<FHMapChoreographer>.InstanceFast;
             if (map == null || map.GameState == null) throw new InvalidOperationException("only works in the outpost, not inside a scenario");
             return map;
+        }
+
+        /// <summary>Ctrl+F4: the selected character's quest is completed (the game's own cheat, its result processed like
+        /// the console command's so the notification shows) and their retirement starts as the roster's Retire button
+        /// would. Everything after that is the game's own flow, so the retirement story and rewards are the real thing.</summary>
+        private static void RetireSelected()
+        {
+            FHMapChoreographer map = Outpost();
+            if (map.GameState.ActiveScenario != null) throw new InvalidOperationException("not during a scenario");
+            FHRL.CharacterState c = map.View.SelectedCharacter ?? throw new InvalidOperationException("open a character's sheet first");
+            if (c.PersonalQuest == null) throw new InvalidOperationException($"{c.Name} has no personal quest");
+            FHRL.CharacterController characters = map.GameController.CharacterController;
+            if (!characters.IsPersonalQuestCompleted(c))
+            {
+                if (ProcessResult == null) throw new InvalidOperationException("the game's ProcessResultFromCommand is gone");
+                ProcessResult.Invoke(null, new object[] { characters.Cheat_CompletePersonalQuest(c), false });
+                _log.LogInfo($"Dev tools: {c.Name}'s personal quest marked complete");
+            }
+            if (c.PartyState == FHRL.CharacterPartyStateType.RetireProcess) throw new InvalidOperationException($"{c.Name} is already retiring");
+            map.View.GetService<FHGUI.Services.RosterViewService>().StartCharacterRetirement(c.ID);
+            _log.LogInfo($"Dev tools: retirement started for {c.Name} the {c.ClassID.ID}");
         }
 
         private static void MaxLevel()
