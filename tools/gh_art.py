@@ -10,6 +10,7 @@ framing, so each picture is composed, not copied:
                                       that strip with the face centred
     InfoIllustration.png    888x1048  info panels and results: the square bust, scaled up, edges faded like Frosthaven's
     newAdventurePortrait.png 300x290  Gloomhaven's own portrait for that slot (<Class>_Normal, same layout in both games)
+    cardBanner.png          600x158   the ability cards' banner strip (GHCardFace): eyes and brow of the square bust
     scenarioPortrait.png    196x278   scenario HUD and roster: the tall portrait cut to Frosthaven's pennant shape
     iconClass.png, iconClassHighlight.png, iconClassGold.png, marker.png, tabNormal.png, tabSelected.png,
     activeAbility.png                 Gloomhaven's own icons (the class glyph in white, glow and gold, the map marker,
@@ -33,6 +34,8 @@ SHARED = Path("GH_Data") / "sharedassets1.assets"
 
 # the class-select column shows this window of the 1200x820 illustration (measured on Frosthaven's own heroes)
 STRIP_LEFT, STRIP_RIGHT, STRIP_BOTTOM = 425, 775, 650
+# the ability cards' banner (GHCardFace: 300 x 79 on the card, drawn from twice that), centred on the eyes in InfoIllustration
+BANNER, BANNER_EYES = (600, 158), 430
 
 
 def _sprites(env, names):
@@ -194,6 +197,14 @@ def compose(pics, out):
         big = _feather(big, left=70, right=70, top=50, bottom=90)
         canvas.paste(big, (0, 56), big)
         save("InfoIllustration", canvas)
+        # ability card banner: Frosthaven's cards open with a 300 x 79 picture strip; a strip across the eyes and brow of
+        # the square bust (inside its faded edges), at twice the on-card size, on dark where the painting is faded
+        w = 740
+        h = round(w * BANNER[1] / BANNER[0])
+        strip = canvas.crop(((888 - w) // 2, BANNER_EYES - h // 2, (888 - w) // 2 + w, BANNER_EYES - h // 2 + h))
+        banner = Image.new("RGBA", strip.size, (20, 20, 24, 255))
+        banner.alpha_composite(strip)
+        save("cardBanner", banner.resize(BANNER, Image.LANCZOS))
     if "adventure" in pics:
         save("newAdventurePortrait", fit(pics["adventure"], 300, 290))
     for role, size in (("iconClass", 128), ("iconClassGold", 216), ("marker", 140), ("tabNormal", 124), ("tabSelected", 124), ("activeAbility", 64)):

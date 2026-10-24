@@ -99,7 +99,7 @@ namespace FrosthavenMods
             Packs.FirstOrDefault(p => p.Classes.Any(c => string.Equals(c, model.ToString(), StringComparison.OrdinalIgnoreCase)))
             ?? Packs.FirstOrDefault(p => Directory.Exists(Path.Combine(p.Folder, "art", model.ToString())));
         private static readonly Dictionary<string, bool> GameHasKey = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
-        private static readonly HashSet<string> Reported = new HashSet<string>();
+        internal static readonly HashSet<string> Reported = new HashSet<string>();
         private static bool _quitting;
 
         static GHClasses()
@@ -150,7 +150,7 @@ namespace FrosthavenMods
         private static CCharacterClass PortedClass(ECharacter model) =>
             CharacterClassManager.Classes?.FirstOrDefault(c => c != null && c.CharacterModel == model);
 
-        private static CCharacterClass ClassById(string classId) =>
+        internal static CCharacterClass ClassById(string classId) =>
             classId == null ? null : CharacterClassManager.Classes?.FirstOrDefault(c => c != null && c.ID == classId);
 
         // ------------------------------------------------------------------ the pack's classes
@@ -236,7 +236,7 @@ namespace FrosthavenMods
         // ------------------------------------------------------------------ class UI config (portraits, icons, colour, 3D placement)
 
         /// <summary>Gloomhaven's own class colours (from its CharacterConfigUI assets; not stored in a loadable bundle).</summary>
-        private static readonly Dictionary<ECharacter, Color> ClassColours = new Dictionary<ECharacter, Color>
+        internal static readonly Dictionary<ECharacter, Color> ClassColours = new Dictionary<ECharacter, Color>
         {
             { ECharacter.Brute, new Color(0.451f, 0.659f, 1f) },
         };
@@ -272,6 +272,8 @@ namespace FrosthavenMods
             __result = config;
         }
 
+        internal static string SkinName(ECharacter model) => model + "_GH_CardSkinConfig";
+
         /// <summary>A copy of the stand-in's config for <paramref name="model"/>. Instantiate deep-copies the serialized data
         /// (placements, colours, lists) and shares the sprites; the Drifter's own asset is never changed.</summary>
         private static CharacterConfigUI MakeConfig(CharacterConfigUI source, ECharacter model)
@@ -282,6 +284,13 @@ namespace FrosthavenMods
             cfg.character = model;                                         // what GetCharacterConfigUI matches; left as Drifter it would break every Drifter lookup
             cfg.ID = model.ToString();
             cfg.Cards = new CharacterConfigUI.AbilityCardConfigUI[0];      // the Drifter's pre-built card prefabs and headers are hers
+            if (cfg.cardSkin != null)
+            {
+                // a skin of its own: GHCardFace gives it the class's card halves and pills (the Drifter's stays hers)
+                cfg.cardSkin = UnityEngine.Object.Instantiate(cfg.cardSkin);
+                cfg.cardSkin.name = SkinName(model);
+                cfg.cardSkin.hideFlags = HideFlags.DontUnloadUnusedAsset;
+            }
             if (ClassColours.TryGetValue(model, out Color colour) && cfg.questConfig != null) cfg.questConfig.color = colour;
             // Kept from the Drifter: the 3D placement on the character screen (it is the Drifter model that stands there),
             // card skin and card prefab (see CardPrefab), gender, active-bonus sidebar, highlight frame, tokens.
@@ -329,7 +338,7 @@ namespace FrosthavenMods
 
         /// <summary>The sprite for &lt;dir&gt;\&lt;role&gt;.png with the on-screen native size of <paramref name="like"/>, or
         /// null when there is no such file or it can't be read (never throws). One texture per file.</summary>
-        private static Sprite Picture(string dir, string role, Sprite like)
+        internal static Sprite Picture(string dir, string role, Sprite like)
         {
             string file = Path.Combine(dir, role + ".png");
             if (PictureCache.TryGetValue(file, out Sprite cached)) return cached;
@@ -395,221 +404,7 @@ namespace FrosthavenMods
             if (image != null) image.enabled = false;
             else if (Reported.Add("no Image_CardArt"))
                 Plugin.Log.LogWarning("Gloomhaven classes: the mini card has no Container_CardArt/Mask_CardArt/Image_CardArt; its template painting stays");
-            DefaultActionsInTheMiddle(__instance, model);
-        }
-
-        /// <summary>Frosthaven's own cards (one prefab per card in hero_&lt;class&gt;cards) draw the middle band as a
-        /// gold initiative hex with chevrons either side and the two basic actions, Attack 2 and Move 2, as framed
-        /// slanted pills left and right of it. The generated-card template (AbilityCard-FH*) keeps the same two buttons,
-        /// with the same children (icon, number, hover highlight), but as a vertical strip hanging off the card's right
-        /// edge, painted with tall bar artwork (Kro_HUD_Card_AltBtns_*, Kro_HUD_Card_Test_DEF_Actions*) that smears
-        /// when the rectangle is laid flat; the card skin and every select/deselect put those bar sprites back. So a
-        /// Gloomhaven class's card gets: the bar artwork drawn clear (the images stay, catching clicks and taking the
-        /// skin's sprite swaps invisibly), the template's own icon and number switched on, and the band's artwork from
-        /// misc_globalsettings, a bundle the game keeps loaded: the hex (FH_UI_CARD_Initiative) and chevrons
-        /// (FH_UI_CARD_Initiative_Ornament) behind the initiative, and each pill's fill (FH_UI_CARD_DEFAction_BGR_Inactive)
-        /// and gold frame (FH_UI_CARD_DEFAction_Frame_Active), mirrored on the right so the slants face the hex. Sizes
-        /// follow the real cards scaled to this template's width (294 against 316).</summary>
-        private static void DefaultActionsInTheMiddle(AbilityCardUI card, ECharacter model, bool warn = true)
-        {
-            Transform full = card.transform.Find("Full");
-            Transform group = full != null ? full.Find("Default action buttons") : null;
-            if (group == null)
-            {
-                if (warn && Reported.Add("no default action buttons"))
-                    Plugin.Log.LogWarning("Gloomhaven classes: the card has no Full/Default action buttons; its basic actions stay where the template puts them");
-                return;
-            }
-            var centre = new Vector2(0.5f, 0.5f);
-            Place(group, centre, centre, new Vector2(0f, -36f), new Vector2(270f, 50f));
-            Invisible(group);
-            Invisible(group.Find("Default action text"));
-            Pill(group.Find("Default action top"), -84f, false);
-            Pill(group.Find("Default action button"), 84f, true);
-
-            // the initiative's hex and chevrons, drawn right under the initiative text (ornament first, hex over it)
-            Transform initiative = full.Find("Initiative text");
-            Transform ornament = Decor(full, "GH initiative ornament", "FH_UI_CARD_Initiative_Ornament", new Vector2(0f, -36f), new Vector2(110f, 45f), false, -1);
-            Transform hex = Decor(full, "GH initiative hex", "FH_UI_CARD_Initiative", new Vector2(0f, -36f), new Vector2(68f, 34f), false, -1);
-            if (initiative != null)
-            {
-                Beneath(ornament, initiative);
-                Beneath(hex, initiative);
-            }
-            // the skin paints the number in the Drifter's gold, invisible on the gold hex. The real cards ink it in a
-            // dark shade of the class's colour (the Drifter's dark green), so: the class colour at under half brightness
-            TMPro.TMP_Text number = initiative != null ? initiative.GetComponent<TMPro.TMP_Text>() : null;
-            if (number != null)
-            {
-                number.color = ClassColours.TryGetValue(model, out Color tint) ? new Color(tint.r * 0.4f, tint.g * 0.4f, tint.b * 0.4f) : InitiativeInk;
-                number.fontSize = 26f;   // the real cards' 28 at 316 wide, scaled to this template's 294; the template says 35
-            }
-            TopRim(full.Find("Header"));
-        }
-
-        private static readonly Color InitiativeInk = new Color(0.13f, 0.09f, 0.05f);
-
-        /// <summary>The template's card painting (Header's sprite, Kro_HUD_Card_Test_*) has a rim along the bottom
-        /// edge with cut corners and up the sides as far as the smoke at the top, and a plain right-angled top edge;
-        /// Frosthaven's own cards are rimmed all round. The rim is drawn at the top by mirroring the painting
-        /// vertically in three masked windows along the top and the upper sides: a flipped copy of the whole picture
-        /// under each window, so only the painting's bottom rim and its lower side rims show, upside down. The windows
-        /// stop short of the inner frame (17 units in from the bottom edge) and of the band.</summary>
-        private static void TopRim(Transform header)
-        {
-            Image painting = header != null ? header.GetComponent<Image>() : null;
-            Sprite sprite = painting != null ? painting.overrideSprite ?? painting.sprite : null;
-            if (sprite == null) return;
-            Rect card = ((RectTransform)header).rect;
-            const float edge = 12f, side = 6f;
-            float sideLength = card.height / 2f - 23f - edge;   // down to the top half's frame bottom, above the band
-            Window(header, "GH rim top", sprite, card, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 1f), Vector2.zero, new Vector2(0f, edge), 0f);
-            Window(header, "GH rim left", sprite, card, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, -edge), new Vector2(side, sideLength), 0f);
-            Window(header, "GH rim right", sprite, card, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(0f, -edge), new Vector2(side, sideLength), card.width - side);
-        }
-
-        /// <summary>A masked window on the card (anchored to its top edge) showing the card painting flipped
-        /// vertically and aligned with the card; <paramref name="windowLeft"/> is the window's left edge from the
-        /// card's left edge, so the copy can be shifted back to line up.</summary>
-        private static void Window(Transform header, string name, Sprite sprite, Rect card, Vector2 anchorMin, Vector2 anchorMax, Vector2 pivot, Vector2 position, Vector2 size, float windowLeft)
-        {
-            Transform window = header.Find(name);
-            if (window == null)
-            {
-                var go = new GameObject(name, typeof(RectTransform), typeof(RectMask2D));
-                window = go.transform;
-                window.SetParent(header, false);
-                var copy = new GameObject("painting", typeof(RectTransform), typeof(Image));
-                copy.transform.SetParent(window, false);
-                Image image = copy.GetComponent<Image>();
-                image.sprite = sprite;
-                image.type = Image.Type.Simple;
-                image.preserveAspect = false;
-                image.raycastTarget = false;
-                var c = (RectTransform)copy.transform;
-                c.anchorMin = c.anchorMax = new Vector2(0f, 1f);  // the window's top-left corner
-                c.pivot = new Vector2(0f, 0f);                     // flipped about its bottom-left: the picture hangs down from there
-                c.localScale = new Vector3(1f, -1f, 1f);
-            }
-            var w = (RectTransform)window;
-            w.anchorMin = anchorMin;
-            w.anchorMax = anchorMax;
-            w.pivot = pivot;
-            w.anchoredPosition = position;
-            w.sizeDelta = size;
-            window.SetSiblingIndex(0);                             // under the title and the card picture mask
-            var p = (RectTransform)window.GetChild(0);
-            p.sizeDelta = new Vector2(card.width, card.height);
-            // the copy's pivot (its visual top edge) must sit at the card's top-left corner, measured from the window
-            p.anchoredPosition = new Vector2(-windowLeft, -position.y);
-        }
-
-        /// <summary>The card skin (AbilityCardUI.SetSkin, after MakeAbilityCard) is where the template's bar sprites
-        /// come back onto the two buttons and the initiative turns gold again, so the band is laid out again after
-        /// skinning. The overload taking the class's name is patched: the character screen skins its cards before the
-        /// card knows its ClassID, and the name is what the skin is chosen by.</summary>
-        [HarmonyPatch(typeof(AbilityCardUI), "SetSkin", typeof(string), typeof(string))]
-        [HarmonyPostfix]
-        private static void DefaultActionsAfterSkin(AbilityCardUI __instance, string playerName)
-        {
-            if (playerName == null || !IsGloomhavenClass(playerName, out ECharacter model)) return;
-            DefaultActionsInTheMiddle(__instance, model, warn: false);
-        }
-
-        /// <summary>One basic-action button as a framed slanted pill centred at <paramref name="x"/> on the band.</summary>
-        private static void Pill(Transform pill, float x, bool mirrored)
-        {
-            if (pill == null) return;
-            var centre = new Vector2(0.5f, 0.5f);
-            var size = new Vector2(96f, 27f);
-            Place(pill, centre, centre, new Vector2(x, 0f), size);
-            Invisible(pill);
-            Decor(pill, "GH pill fill", "FH_UI_CARD_DEFAction_BGR_Inactive", Vector2.zero, size, mirrored, 0);
-            Decor(pill, "GH pill frame", "FH_UI_CARD_DEFAction_Frame_Active", Vector2.zero, size, mirrored, 1);
-            Transform icon = pill.Find("Image"), number = pill.Find("TextMeshPro Text"), highlight = pill.Find("InteractabilityHighlight");
-            // the real cards write the pill as white "icon 2" at 18 pt (cream icon); the template's gold 21 pt is larger
-            if (icon is RectTransform i)
-            {
-                i.gameObject.SetActive(true); i.anchorMin = i.anchorMax = centre; i.anchoredPosition = new Vector2(-11f, 0f);
-                Image picture = i.GetComponent<Image>();
-                if (picture != null) picture.color = new Color(1f, 0.96f, 0.73f);
-            }
-            if (number is RectTransform n)
-            {
-                n.gameObject.SetActive(true); n.anchorMin = n.anchorMax = centre; n.anchoredPosition = new Vector2(10f, 0f);
-                TMPro.TMP_Text text = n.GetComponent<TMPro.TMP_Text>();
-                if (text != null) { text.fontSize = 17f; text.color = Color.white; }
-            }
-            if (highlight is RectTransform h) { h.anchoredPosition = Vector2.zero; h.sizeDelta = Vector2.zero; }
-        }
-
-        private static void Invisible(Transform t)
-        {
-            Image image = t != null ? t.GetComponent<Image>() : null;
-            if (image != null) image.color = Color.clear;
-        }
-
-        /// <summary>Moves <paramref name="t"/> to just before <paramref name="above"/> in draw order if it isn't already
-        /// earlier (Unity's SetSiblingIndex counts after removing the moved child, so a child already in front must
-        /// stay put or it would land behind).</summary>
-        private static void Beneath(Transform t, Transform above)
-        {
-            if (t != null && t.GetSiblingIndex() > above.GetSiblingIndex()) t.SetSiblingIndex(above.GetSiblingIndex());
-        }
-
-        /// <summary>A plain picture under <paramref name="parent"/> (found again by name when the band is laid out a
-        /// second time), centred at <paramref name="position"/>, drawn at <paramref name="siblingIndex"/> (-1: left
-        /// where it is, at the end when new).</summary>
-        private static Transform Decor(Transform parent, string name, string sprite, Vector2 position, Vector2 size, bool mirrored, int siblingIndex)
-        {
-            Sprite picture = UiSprite(sprite);
-            if (picture == null) return null;
-            Transform t = parent.Find(name);
-            if (t == null)
-            {
-                var go = new GameObject(name, typeof(RectTransform), typeof(Image));
-                t = go.transform;
-                t.SetParent(parent, false);
-                Image image = go.GetComponent<Image>();
-                image.sprite = picture;
-                image.raycastTarget = false;
-            }
-            var centre = new Vector2(0.5f, 0.5f);
-            Place(t, centre, centre, position, size);
-            t.localScale = new Vector3(mirrored ? -1f : 1f, 1f, 1f);
-            if (siblingIndex >= 0) t.SetSiblingIndex(Mathf.Clamp(siblingIndex, 0, parent.childCount - 1));
-            return t;
-        }
-
-        private static readonly Dictionary<string, Sprite> UiSprites = new Dictionary<string, Sprite>();
-
-        /// <summary>A sprite of misc_globalsettings (loaded for the whole session) by name.</summary>
-        private static Sprite UiSprite(string name)
-        {
-            if (UiSprites.TryGetValue(name, out Sprite cached)) return cached;
-            Sprite sprite = null;
-            foreach (AssetBundle bundle in AssetBundle.GetAllLoadedAssetBundles())
-            {
-                if (bundle == null || bundle.name != "misc_globalsettings") continue;
-                sprite = bundle.LoadAsset<Sprite>(name);
-                break;
-            }
-            if (sprite == null)
-                sprite = Resources.FindObjectsOfTypeAll<Sprite>().FirstOrDefault(s => s != null && s.name == name);
-            if (sprite == null && Reported.Add("no sprite " + name))
-                Plugin.Log.LogWarning($"Gloomhaven classes: the game has no {name} sprite loaded; that piece of the card band is left out");
-            if (sprite != null) UiSprites[name] = sprite;
-            return sprite;
-        }
-
-        private static void Place(Transform t, Vector2 anchor, Vector2 pivot, Vector2 position, Vector2 size)
-        {
-            if (!(t is RectTransform rect)) return;
-            rect.anchorMin = anchor;
-            rect.anchorMax = anchor;
-            rect.pivot = pivot;
-            rect.anchoredPosition = position;
-            rect.sizeDelta = size;
+            GHCardFace.Dress(__instance, model);
         }
 
         // ---- the corner badge (lost / persistent / round / XP icons) of each card half
@@ -645,10 +440,10 @@ namespace FrosthavenMods
                 rect.anchorMin = oldRect.anchorMin;
                 rect.anchorMax = oldRect.anchorMax;
                 rect.pivot = oldRect.pivot;
-                // the template hangs the badge 5 units below its half; on the top half that is under the band's pill
-                // (DefaultActionsInTheMiddle, pill top at -22.5 against the badge's bottom near -27), so lift it clear
+                // inside the half's frame, clear of its cut corner (GHCardFace lays the halves out like the real cards;
+                // the template hangs the top badge 5 units below its content)
                 bool topHalf = __instance.name.StartsWith("Top", StringComparison.OrdinalIgnoreCase);
-                rect.anchoredPosition = oldRect.anchoredPosition + (topHalf ? new Vector2(0f, 8f) : Vector2.zero);
+                rect.anchoredPosition = oldRect.anchoredPosition + new Vector2(-6f, topHalf ? 5f : 4f);
                 rect.localScale = Vector3.one;
                 rect.SetSiblingIndex(oldRect.GetSiblingIndex());
                 fresh.gameObject.SetActive(true);
@@ -667,10 +462,7 @@ namespace FrosthavenMods
         private static CardActionSummary CornerDonor()
         {
             if (_cornerDonor != null) return _cornerDonor;
-            CCharacterClass standIn = CharacterClassManager.Classes?.FirstOrDefault(c => c != null && c.CharacterModel.ToString() == StandInModel);
-            CAbilityCard sample = standIn == null ? null
-                : CharacterClassManager.AllAbilityCards?.FirstOrDefault(c => c?.GetAbilityCardYML != null && c.GetAbilityCardYML.ID != -1 && c.GetAbilityCardYML.CharacterID == standIn.ID);
-            GameObject prefab = sample == null ? null : PersistentData.GetAbilityCardPrefab(sample.GetAbilityCardYML, standIn);
+            GameObject prefab = StandInCardPrefab();
             CardActionSummary[] summaries = prefab == null ? null : prefab.GetComponentsInChildren<CardActionSummary>(true);
             _cornerDonor = summaries?.FirstOrDefault(s => s != null && !s.name.StartsWith("BottomCorner"));
             if (_cornerDonor == null && Reported.Add("no corner donor"))
@@ -678,6 +470,17 @@ namespace FrosthavenMods
             else if (_cornerDonor != null)
                 Plugin.Log.LogInfo($"Gloomhaven classes: card corner badges copied from the {StandInModel}'s {prefab.name}");
             return _cornerDonor;
+        }
+
+        /// <summary>One of the stand-in class's real card prefabs, loaded the way the game loads her cards (from
+        /// hero_&lt;class&gt;cards, which the game may unload again: copy what you need, keep no references). Null when
+        /// the classes or the bundle aren't available yet.</summary>
+        internal static GameObject StandInCardPrefab()
+        {
+            CCharacterClass standIn = CharacterClassManager.Classes?.FirstOrDefault(c => c != null && c.CharacterModel.ToString() == StandInModel);
+            CAbilityCard sample = standIn == null ? null
+                : CharacterClassManager.AllAbilityCards?.FirstOrDefault(c => c?.GetAbilityCardYML != null && c.GetAbilityCardYML.ID != -1 && c.GetAbilityCardYML.CharacterID == standIn.ID);
+            return sample == null ? null : PersistentData.GetAbilityCardPrefab(sample.GetAbilityCardYML, standIn);
         }
 
         /// <summary>At quit the pooled cards are recycled after UIInfoTools is gone, and clearing a generated card's
