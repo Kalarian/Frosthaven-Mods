@@ -135,7 +135,8 @@
             "scale": 1.17,
             "gh": {
               "progress": 2.33
-            }
+            },
+            "audio": "PlaySound_BruteCastPositive"
           },
           "Base Layer.Loot": {
             "scale": 1.8333
@@ -144,10 +145,12 @@
             "scale": 2.2286,
             "gh": {
               "progress": 2.8
-            }
+            },
+            "audio": "PlaySound_BruteUseItem"
           },
           "Base Layer.Attack": {
-            "scale": 0.7625
+            "scale": 0.7625,
+            "audio": "PlaySound_BruteStandardMeleeAttack"
           },
           "Base Layer.RangedAttack": {
             "scale": 0.6923,
@@ -156,13 +159,16 @@
             },
             "fh": {
               "fire": 2.6
-            }
+            },
+            "audio": "PlaySound_BruteStandardRangedAttack_Throw"
           },
           "Base Layer.Hit": {
-            "scale": 1.2
+            "scale": 1.2,
+            "audio": "PlaySound_BruteOnHit"
           },
           "Base Layer.Death": {
-            "scale": 0.6556
+            "scale": 0.6556,
+            "audio": "PlaySound_BruteOnExhausted"
           },
           "Base Layer.Jump": {
             "scale": 0.0991
@@ -174,13 +180,15 @@
             "scale": 0.4
           },
           "Base Layer.PushPull": {
-            "scale": 1.2
+            "scale": 1.2,
+            "audio": "PlaySound_BruteOnHit"
           },
           "Base Layer.RangedAttack_AOE": {
             "scale": 0.5929
           },
           "Base Layer.Attack_AOE_Cone": {
-            "scale": 0.96
+            "scale": 0.96,
+            "audio": "PlaySound_BruteOverwhelmingAssault"
           },
           "Base Layer.Push": {
             "scale": 1.17
@@ -210,7 +218,8 @@
             "scale": 0.9452,
             "gh": {
               "progress": 1.66
-            }
+            },
+            "audio": "PlaySound_BruteShieldPowerUp"
           },
           "Base Layer.Pull": {
             "scale": 1.17
@@ -219,10 +228,12 @@
             "scale": 0.0312
           },
           "Base Layer.Attack_Enhanced": {
-            "scale": 0.7625
+            "scale": 0.7625,
+            "audio": "PlaySound_BruteStandardMeleeAttack"
           },
           "Base Layer.Attack_AOE_Cone_Enhanced": {
-            "scale": 0.96
+            "scale": 0.96,
+            "audio": "PlaySound_BruteOverwhelmingAssault"
           },
           "Base Layer.Attack_AOE_Radial_Enhanced": {
             "scale": 0.96
@@ -237,13 +248,15 @@
             "scale": 1.17,
             "gh": {
               "progress": 1.0
-            }
+            },
+            "audio": "PlaySound_BruteCastHeal"
           },
           "Base Layer.Heal_Enhanced": {
             "scale": 1.17,
             "gh": {
               "progress": 1.0
-            }
+            },
+            "audio": "PlaySound_BruteCastHeal"
           },
           "Base Layer.RangedAttack_Enhanced": {
             "scale": 0.6923,
@@ -252,7 +265,8 @@
             },
             "fh": {
               "fire": 2.6
-            }
+            },
+            "audio": "PlaySound_BruteStandardRangedAttack_Throw"
           },
           "Base Layer.RangedAttack_AOE_Enhanced": {
             "scale": 0.5929
@@ -261,17 +275,20 @@
             "scale": 1.17,
             "gh": {
               "progress": 2.33
-            }
+            },
+            "audio": "PlaySound_BruteCastPositive"
           },
           "Base Layer.Defeat": {
-            "scale": 0.1229
+            "scale": 0.1229,
+            "audio": "PlaySound_BruteOnExhausted"
           },
           "Base Layer.Celebration": {
             "scale": 0.581,
             "gh": {
               "hit": 1.4,
               "progress": 1.4
-            }
+            },
+            "audio": "PlaySound_BruteShoutRadialAttack"
           },
           "Base Layer.RangedAttack_AOE_NonArea": {
             "scale": 0.5929
@@ -347,6 +364,20 @@
           "RangedAreaAttack": "HE_Brute_Targeted_Roar_v001",
           "RadialBuff": "HE_Brute_PowerUp_v001",
           "GivePackAdjacent": "HE_Brute_Use_Item_v001"
+        },
+        "gh_audio": {
+          "RadialShout": "PlaySound_BruteShoutRadialAttack",
+          "HeavyMeleeAttack": "PlaySound_BruteOverwhelmingAssault",
+          "RadialAttack": "PlaySound_BruteEarthquakeHex",
+          "HeavyFatalAdvance": "PlaySound_BruteOverwhelmingAssault",
+          "PowerUpShield": "PlaySound_BruteShieldPowerUp",
+          "DisarmTrap": "PlaySound_BruteUseItem",
+          "DestroyObstacle": "PlaySound_BruteUseItem",
+          "Summon": "PlaySound_BruteUseItem",
+          "DefaultRadialAttack": "PlaySound_BruteEarthquakeHex",
+          "HalberdUseItem": "PlaySound_BruteUseItem",
+          "TargetedShout": "PlaySound_BruteShoutAttack",
+          "RangedAreaAttack": "PlaySound_BruteShoutAttack"
         }
       },
       "bundle": "hero_brute_assets_all.bundle",
@@ -378,7 +409,49 @@
         "pcg_materials_assets_sparks_gpu_mat.bundle",
         "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
         "pcg_materials_assets_wp_banditguard_knife_01_mat.bundle"
-      ]
+      ],
+      "sounds": {
+        "PlaySound_BruteStandardMeleeAttack": [
+          "Brute_Melee_Attackv2.wav"
+        ],
+        "PlaySound_BruteOverwhelmingAssault": [
+          "Brute_Overwhelming_Assault_v2.wav"
+        ],
+        "PlaySound_BruteEarthquakeHex": [
+          "Brute_Earthquake_-_new_timing.wav"
+        ],
+        "PlaySound_BruteStandardRangedAttack_Throw": [
+          "Gloomhaven_Brute_Ranged_Weapon_Trail_THROW_FINAL3.wav"
+        ],
+        "PlaySound_BruteCastPositive": [
+          "Brute_Cast_Positive.wav"
+        ],
+        "PlaySound_BruteCastHeal": [
+          "BruteCastHeal.wav"
+        ],
+        "PlaySound_BruteShieldPowerUp": [
+          "Brute_Shield_PowerUp_Final.wav",
+          "Brute_Shield_PowerUp__Variation_2.wav",
+          "Brute_Shield_PowerUp__Variation_3.wav",
+          "Brute_Shield_PowerUp__Variation_4.wav"
+        ],
+        "PlaySound_BruteShoutRadialAttack": [
+          "Brute_Shout_Radial_Attack_v2.wav"
+        ],
+        "PlaySound_BruteShoutAttack": [
+          "Brute_Shout_Attack_v2.wav"
+        ],
+        "PlaySound_BruteUseItem": [
+          "Brute_ItemUse_no_grunt.wav"
+        ],
+        "PlaySound_BruteOnHit": [
+          "Brute_On_Hit_V1.wav",
+          "Brute_On_Hit_V2.wav"
+        ],
+        "PlaySound_BruteOnExhausted": [
+          "Brute_On_Exhausted_v2.wav"
+        ]
+      }
     }
   }
 }

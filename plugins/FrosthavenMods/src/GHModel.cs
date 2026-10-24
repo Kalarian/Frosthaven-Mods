@@ -59,7 +59,7 @@ namespace FrosthavenMods
         /// <summary>How one of the Drifter's animator states is retimed for the clip that replaces hers: the behaviours'
         /// moments (impact, progress, projectile release) scaled by the clip-length ratio, or Gloomhaven's own value for
         /// that beat when its state had one.</summary>
-        internal sealed class StateTiming { public float Scale = 1f; public float? FhFire, GhHit, GhProgress, GhFire; }
+        internal sealed class StateTiming { public float Scale = 1f; public float? FhFire, GhHit, GhProgress, GhFire; public string Audio; }
 
         internal sealed class AnimationSpec
         {
@@ -71,6 +71,7 @@ namespace FrosthavenMods
             public HashSet<string> Silence = new HashSet<string>(StringComparer.Ordinal);                          // her voice events, blanked
             public Dictionary<string, string> StateClips = new Dictionary<string, string>(StringComparer.Ordinal); // her state -> the clip it plays
             public Dictionary<string, string> GhStates = new Dictionary<string, string>(StringComparer.Ordinal);   // Gloomhaven-only state -> its clip
+            public Dictionary<string, string> GhAudio = new Dictionary<string, string>(StringComparer.Ordinal);    // Gloomhaven-only state -> its sound event
         }
 
         internal sealed class Entry
@@ -126,6 +127,7 @@ namespace FrosthavenMods
                         {
                             Scale = (float?)v["scale"] ?? 1f, FhFire = (float?)v["fh"]?["fire"],
                             GhHit = (float?)v["gh"]?["hit"], GhProgress = (float?)v["gh"]?["progress"], GhFire = (float?)v["gh"]?["fire"],
+                            Audio = (string)v["audio"],
                         };
                     }
                     e.Animation.Projectiles = Strings(a["projectiles"]);
@@ -133,6 +135,7 @@ namespace FrosthavenMods
                     foreach (string s in Strings(a["silence"])) e.Animation.Silence.Add(s);
                     foreach (JProperty c in (a["state_clips"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>()) e.Animation.StateClips[c.Name] = (string)c.Value;
                     foreach (JProperty c in (a["gh_states"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>()) e.Animation.GhStates[c.Name] = (string)c.Value;
+                    foreach (JProperty c in (a["gh_audio"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>()) e.Animation.GhAudio[c.Name] = (string)c.Value;
                 }
                 return e;
             }
@@ -594,6 +597,7 @@ namespace FrosthavenMods
                 GameObject clone = __instance.CharacterChildPrefabInstance;
                 Animator animator = clone?.GetComponent<Animator>();
                 if (animator == null) return;
+                GHSound.Ensure(b.Entry.Model, b.Entry.Folder);
                 if (b.Override != null && animator.runtimeAnimatorController != b.Override) animator.runtimeAnimatorController = b.Override;
                 foreach (Renderer r in clone.GetComponentsInChildren<Renderer>(true)) r.SetPropertyBlock(null);   // the class screen's lighting tweak, kept by the pool
                 // The behaviours exist once the Animator has bound its controller; a clone spawned under an inactive
@@ -632,6 +636,8 @@ namespace FrosthavenMods
 
         private static AnimatorOverrideController _lentOn;
         private static AnimationClip _lentSlot, _lentBefore;
+        private static CastEffectsSMB _lentSound;
+        private static string _lentSoundBefore;
 
         /// <summary>A card can ask for an animation the Drifter's animator has no state for (the Brute's shouts:
         /// "TargetedShout", "RadialShout"); the game then plays the next state on its list ("Push", "PowerUp"), whose clip
@@ -663,6 +669,17 @@ namespace FrosthavenMods
                 _lentSlot = slot;
                 _lentBefore = ovr[slot];
                 ovr[slot] = gh;
+                // and its sound (the roar), on the fallback state's cast behaviour
+                if (anim.GhAudio.TryGetValue(statesToTry[at], out string sound) && GHSound.Playable(sound))
+                {
+                    CastEffectsSMB cast = animator.GetBehaviours(Animator.StringToHash("Base Layer." + fallback), 0)?.OfType<CastEffectsSMB>().FirstOrDefault();
+                    if (cast != null)
+                    {
+                        _lentSound = cast;
+                        _lentSoundBefore = cast.AbilityAudioEvent;
+                        cast.AbilityAudioEvent = sound;
+                    }
+                }
                 Plugin.Instance.StartCoroutine(GiveBackAfter(animator, fallback));
             }
             catch (Exception e)
@@ -692,8 +709,11 @@ namespace FrosthavenMods
             {
                 try { _lentOn[_lentSlot] = _lentBefore; } catch (Exception) { /* the controller died with the scene */ }
             }
+            if (_lentSound != null) _lentSound.AbilityAudioEvent = _lentSoundBefore;
             _lentOn = null;
             _lentSlot = _lentBefore = null;
+            _lentSound = null;
+            _lentSoundBefore = null;
         }
 
         private static int Retime(Animator animator, AnimationSpec anim)
@@ -730,6 +750,7 @@ namespace FrosthavenMods
                             foreach (VFXShared.Progress p in cast.ProgressChoreographer)
                                 if (p != null && (p.OriginalProgressTime > 0f || p.ProgressTime <= 0f)) p.ProgressTime = t.GhProgress ?? p.OriginalProgressTime * t.Scale;
                         if (!string.IsNullOrEmpty(cast.AbilityAudioEvent) && anim.Silence.Contains(cast.AbilityAudioEvent)) cast.AbilityAudioEvent = "";
+                        if (GHSound.Playable(t.Audio)) cast.AbilityAudioEvent = t.Audio;   // the class's own sound for this move
                     }
                     else if (smb is FireEquippedProjectileSMB fire)
                     {
@@ -738,7 +759,9 @@ namespace FrosthavenMods
                     }
                     else if (smb is AudioSMB audio && !string.IsNullOrEmpty(audio.AudioEvent) && anim.Silence.Contains(audio.AudioEvent))
                     {
-                        audio.AudioEvent = "";   // skipped when empty; the game logs one line if this pooled clone is initialised again
+                        // a voice line of hers: the class's own sound when the state has no cast behaviour to carry it
+                        // (her Celebration), else skipped (the game logs one line if this pooled clone is initialised again)
+                        audio.AudioEvent = GHSound.Playable(t.Audio) && !behaviours.Any(x => x is CastEffectsSMB) ? t.Audio : "";
                     }
                 }
             }

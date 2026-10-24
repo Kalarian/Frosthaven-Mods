@@ -156,7 +156,7 @@ def sorted_files(folder, suffix=""):
 
 def pack_extras(mod_dir):
     """A content pack's files for the plugin, beside its ruleset files: [(path relative to the pack folder, file)] for
-    pack.json, strings.tsv, art/** and bundles/** (the 3D models, git-ignored, built by gh_port.py); empty for an
+    pack.json, strings.tsv, art/**, bundles/** (the 3D models, git-ignored, built by gh_port.py) and sounds/**; empty for an
     ordinary mod (no pack.json). They go to <game>\\FrosthavenMods\\packs\\<mod folder>\\ (here: install_pack_extras;
     friends: the zip's game/ files)."""
     if not (mod_dir / "pack.json").exists():
@@ -164,6 +164,7 @@ def pack_extras(mod_dir):
     out = [(p.name, p) for p in (mod_dir / "pack.json", mod_dir / "strings.tsv") if p.exists()]
     out += [(p.relative_to(mod_dir).as_posix(), p) for p in sorted_files(mod_dir / "art")]
     out += [(p.relative_to(mod_dir).as_posix(), p) for p in sorted_files(mod_dir / "bundles")]
+    out += [(p.relative_to(mod_dir).as_posix(), p) for p in sorted_files(mod_dir / "sounds")]
     return out
 
 

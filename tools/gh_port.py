@@ -10,6 +10,7 @@ that the release zip and the installer carry like every other mod:
     strings.tsv                               key<TAB>English text (the plugin answers keys the game lacks;
                                               also <Class>_FullName, CODEX_HeroInfo_<Class>, Event__Text)
     art\\<Class>\\*.png                         the class's pictures in Frosthaven's shapes (gh_art.py)
+    sounds\\<Class>\\*.wav                      the class's own sounds, under their Gloomhaven event names (gh_sound.py)
     bundles\\hero_<class>_assets_all.bundle     the class's 3D model, Gloomhaven's own asset bundle copied as is
                                               (gh_model.py; 83 MB for the Brute, so git-ignored: the release carries it)
     pack.json                                 manifest: name, version, classes, data_sha (plugin + co-op check), source,
@@ -372,6 +373,22 @@ def main():
                       f"{len(anim['clips'])} clips swapped on the {anim['base']}'s animator)")
             except Exception as e:  # noqa: BLE001 - the model is cosmetic, never block the data
                 warnings.append(f"{cls}: 3D model not copied: {e}")
+
+        # the class's own sounds (see gh_sound.py); optional, the plugin keeps the Drifter's without
+        if cls in models:
+            try:
+                import gh_sound
+            except ImportError as e:
+                warnings.append(f"{cls}: no sounds ({e})")
+            else:
+                try:
+                    events = gh_sound.export(gh, cls, args.out)
+                    anim = models[cls]["animation"]
+                    anim["gh_audio"] = {**anim.get("gh_audio", {}), **gh_sound.STATE_EVENTS.get(cls, {})}
+                    models[cls]["sounds"] = events
+                    print(f"{cls}: {sum(len(v) for v in events.values())} sounds for {len(events)} Gloomhaven events")
+                except Exception as e:  # noqa: BLE001 - sounds are cosmetic, never block the data
+                    warnings.append(f"{cls}: sounds not exported: {e}")
 
     table = {}
     for key in sorted(used_keys):

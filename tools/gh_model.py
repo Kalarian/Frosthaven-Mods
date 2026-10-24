@@ -440,6 +440,9 @@ def _animation(b, fh_bundle_path):
         fh_values = _smb_times(s["smbs"])
         if "fire" in fh_values:
             timing["fh"] = {"fire": fh_values["fire"]}
+        gh_sound = _smb_sound(g["smbs"]) if g is not None and playing == target else None
+        if gh_sound:
+            timing["audio"] = gh_sound   # the Gloomhaven event this state's clip played with (GHSound registers it)
         states[s["fullPath"]] = timing
         for smb in s["smbs"]:
             f = smb["fields"]
@@ -463,8 +466,21 @@ def _animation(b, fh_bundle_path):
     # state the game falls back to, for that one play (GHModel.LendClip)
     state_clips = {s["name"]: s["clips"][0] for s in fh_ctrl["states"] if s["clips"]}
     gh_states = {s["name"]: s["clips"][0] for s in gh_ctrl["states"] if s["clips"] and s["name"] not in state_clips}
+    gh_audio = {s["name"]: _smb_sound(s["smbs"]) for s in gh_ctrl["states"] if s["name"] in gh_states and _smb_sound(s["smbs"])}
     return {"base": BASE_HERO, "clips": clips, "states": states, "projectiles": projectiles,
-            "melee_weapon": melee_weapon, "silence": sorted(silence), "state_clips": state_clips, "gh_states": gh_states}
+            "melee_weapon": melee_weapon, "silence": sorted(silence), "state_clips": state_clips, "gh_states": gh_states,
+            "gh_audio": gh_audio}
+
+
+def _smb_sound(smbs):
+    """The audio event a state's behaviours play (its cast event, else its first AudioSMB event), or None."""
+    for smb in smbs:
+        if smb["class"] == "CastEffectsSMB" and smb["fields"].get("AbilityAudioEvent"):
+            return smb["fields"]["AbilityAudioEvent"]
+    for smb in smbs:
+        if smb["class"] == "AudioSMB" and smb["fields"].get("AudioEvent"):
+            return smb["fields"]["AudioEvent"]
+    return None
 
 
 def _smb_times(smbs):
