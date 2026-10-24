@@ -438,7 +438,11 @@ namespace FrosthavenMods
             }
             // the skin paints the number in the Drifter's gold, invisible on the gold hex: dark ink, as the real cards
             TMPro.TMP_Text number = initiative != null ? initiative.GetComponent<TMPro.TMP_Text>() : null;
-            if (number != null) number.color = InitiativeInk;
+            if (number != null)
+            {
+                number.color = InitiativeInk;
+                number.fontSize = 26f;   // the real cards' 28 at 316 wide, scaled to this template's 294; the template says 35
+            }
         }
 
         private static readonly Color InitiativeInk = new Color(0.13f, 0.09f, 0.05f);
@@ -465,8 +469,19 @@ namespace FrosthavenMods
             Decor(pill, "GH pill fill", "FH_UI_CARD_DEFAction_BGR_Inactive", Vector2.zero, size, mirrored, 0);
             Decor(pill, "GH pill frame", "FH_UI_CARD_DEFAction_Frame_Active", Vector2.zero, size, mirrored, 1);
             Transform icon = pill.Find("Image"), number = pill.Find("TextMeshPro Text"), highlight = pill.Find("InteractabilityHighlight");
-            if (icon is RectTransform i) { i.gameObject.SetActive(true); i.anchorMin = i.anchorMax = centre; i.anchoredPosition = new Vector2(-11f, 0f); }
-            if (number is RectTransform n) { n.gameObject.SetActive(true); n.anchorMin = n.anchorMax = centre; n.anchoredPosition = new Vector2(10f, 0f); }
+            // the real cards write the pill as white "icon 2" at 18 pt (cream icon); the template's gold 21 pt is larger
+            if (icon is RectTransform i)
+            {
+                i.gameObject.SetActive(true); i.anchorMin = i.anchorMax = centre; i.anchoredPosition = new Vector2(-11f, 0f);
+                Image picture = i.GetComponent<Image>();
+                if (picture != null) picture.color = new Color(1f, 0.96f, 0.73f);
+            }
+            if (number is RectTransform n)
+            {
+                n.gameObject.SetActive(true); n.anchorMin = n.anchorMax = centre; n.anchoredPosition = new Vector2(10f, 0f);
+                TMPro.TMP_Text text = n.GetComponent<TMPro.TMP_Text>();
+                if (text != null) { text.fontSize = 17f; text.color = Color.white; }
+            }
             if (highlight is RectTransform h) { h.anchoredPosition = Vector2.zero; h.sizeDelta = Vector2.zero; }
         }
 
