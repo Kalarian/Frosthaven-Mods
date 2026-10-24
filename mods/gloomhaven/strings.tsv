@@ -78,6 +78,9 @@ Brute_MASTERY_1_Name	Living Wall
 Brute_MASTERY_1_Desc	Cause enemies to suffer a total of at least <sprite name=Damage> 12 from retaliate during attacks targeting you in a single round
 Brute_MASTERY_2_Name	Relentless Onslaught
 Brute_MASTERY_2_Desc	Across three consecutive rounds, play six different ability cards and cause enemies to suffer at least <sprite name=Damage> 6 on each of your turns
+Event_GH.Brute_Text	You find the Brute at the main gate at dawn, pack strapped on and shield across his back. He has been quieter than usual these past weeks, which for the Brute is saying something.\n"Job's done," he says when you ask. "Came north for the pay. Stayed for..." He gestures at the wall, the gate, the people hauling lumber behind you, and leaves it at that.\nHe unslings the shield and props it against the gatehouse. "Guard can use it more than I can." A long pause. "Nothing wrong with a wall that holds."\nYou ask where he will go. He shrugs toward the south: the Frozen Pass, and past it a long walk home to the Great Grove, or to Gloomhaven, or wherever the next quiet place is. You point out he has never been good at quiet. For the first time you can remember, the Brute laughs.\nHe walks out through the gate without looking back. Behind you, the guards take turns trying to lift the shield.
+Event_GH.Brute_Name	Brute Retires
 Brute_FullName	Brute
-CODEX_HeroInfo_Brute	The Brute employs his great size and strength to earn a living by wielding his huge sword and impressive shield for those who pay the most.
+CODEX_Hero_Brute_Title	Brute
+CODEX_HeroInfo_Brute	<b>Role:</b> Melee Damage/Tank\n<b>Difficulty:</b> Low\n\nBrutes are best used as front line melee troops, absorbing damage and protecting the more fragile ranged damage dealers, and are best equipped with items that keep them alive longer!
 Event__Text	Their personal quest complete, the mercenary leaves Frosthaven for good. Someone else will take up the fight.

@@ -57,6 +57,9 @@ namespace FrosthavenMods
             public bool Envelopes;
             /// <summary>The classes (by model name) that open the moment the pack's switch is on.</summary>
             public string[] Starting = new string[0];
+            /// <summary>The campaign sections the pack adds (its classes' retirement stories, gh_story.py): what "Copy
+            /// without content packs" has to take out of a save besides the classes (GHSaveStrip).</summary>
+            public string[] Sections = new string[0];
 
             /// <summary>What two co-op peers must agree on: same pack, same version, same data.</summary>
             public string Stamp => $"{Name}/{Version}/{DataSha}";
@@ -92,6 +95,7 @@ namespace FrosthavenMods
                                 JToken unlock = j["unlock"];
                                 pack.Envelopes = (bool?)unlock?["envelopes"] ?? false;
                                 pack.Starting = unlock?["starting"]?.Select(c => (string)c).Where(c => c != null).ToArray() ?? pack.Classes;
+                                pack.Sections = j["sections"]?.Select(c => (string)c).Where(c => !string.IsNullOrEmpty(c)).ToArray() ?? new string[0];
                                 _packs.Add(pack);
                             }
                             catch (Exception e) { Plugin.Log.LogError($"Content packs: could not read {file}: {e.Message}"); }
@@ -531,6 +535,9 @@ namespace FrosthavenMods
         }
 
         // ------------------------------------------------------------------ text
+
+        /// <summary>Whether an installed pack brings text for <paramref name="key"/>.</summary>
+        internal static bool HasString(string key) => !string.IsNullOrEmpty(key) && Strings.ContainsKey(key);
 
         private static bool TryOurs(string term, out string text)
         {

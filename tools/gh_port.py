@@ -7,8 +7,11 @@ that the release zip and the installer carry like every other mod:
 
     mod.json                                  the mod entry (name, enabled)
     files\\Global\\Characters\\<Class>\\...     new ruleset files (added to Base.ruleset like any mod's files)
+    files\\Outpost\\Sections\\...               the class's retirement story section (gh_story.py)
     strings.tsv                               key<TAB>English text (the plugin answers keys the game lacks;
-                                              also <Class>_FullName, CODEX_HeroInfo_<Class>, Event__Text)
+                                              also <Class>_FullName, CODEX_Hero_<Class>_Title, CODEX_HeroInfo_<Class>
+                                              from Gloomhaven digital's role/difficulty/play notes, the story's
+                                              Event_GH.<Class>_Text, and Event__Text for a class without a story)
     art\\<Class>\\*.png                         the class's pictures in Frosthaven's shapes (gh_art.py)
     sounds\\<Class>\\*.wav                      the class's own sounds, under their Gloomhaven event names (gh_sound.py)
     bundles\\hero_<class>_assets_all.bundle     the class's 3D model, Gloomhaven's own asset bundle copied as is
@@ -38,6 +41,8 @@ Conversion (see the research notes in the gloomhaven-class-port memory):
     - the "- XP: N" layout element goes (Frosthaven shows a card's experience in the corner badge, from the data)
     - a card's AnimOverload (a Gloomhaven animator state) becomes the Drifter-animator state the plugin plays the
       matching Gloomhaven clip in (ANIM_OVERLOADS); unknown names fall back to the game's default animation
+    - a class with a retirement story (gh_story.py) gets Frosthaven's RetireCampaignSection and the section file, so
+      its first retirement plays a story and leaves a mark on the campaign like Frosthaven's own classes do
     - the character gets Frosthaven's extra fields from the official crossover sheet (race, traits). No MasteryIDs
       or ElementalAffinities until there are some: the game's YAML reader fails a whole file on an empty list ([]),
       and the plugin gives a class without masteries an empty list (null crashes the scenario results screen)
@@ -62,6 +67,7 @@ import fh_mods  # noqa: E402
 import fh_ruleset as rs  # noqa: E402
 import gh_crossover  # noqa: E402
 import gh_layout  # noqa: E402
+import gh_story  # noqa: E402
 
 GH_APP_ID = "780290"
 CARD_ID_OFFSET = 20000
@@ -250,6 +256,9 @@ def convert_character(cls, s):
     masteries = gh_crossover.mastery_ids(cls)
     if masteries:
         extras = dict(extras, MasteryIDs="[ " + ", ".join(masteries) + " ]")
+    section = gh_story.section_id(cls)
+    if section:   # the class's own retirement story, played like Frosthaven's (gh_story.py)
+        extras = dict(extras, RetireCampaignSection=section)
     todo = {k: v for k, v in extras.items() if k not in present}
     lines[at:at] = [f"{k}: {v}" for k, v in todo.items() if not isinstance(v, dict)]
     for key, value in todo.items():
@@ -352,8 +361,13 @@ def main():
                         warnings.append(f"{n}: attack modifier {amc} isn't in Frosthaven")
                 write(f"Global/Perks/{cls}/{Path(n).name}", s)
 
+        story = gh_story.files(cls)   # the retirement story: a campaign section like Frosthaven's "<Class> Retires"
+        for rel, s in story:
+            write(rel, s)
+
         print(f"{cls}: 1 character, {len(cards)} cards (IDs {CARD_ID_OFFSET + 1}..), {len(perks)} perks"
-              + (f" and {len(crossover) - len(perks)} masteries from Frosthaven's crossover sheet" if crossover else " from Gloomhaven"))
+              + (f" and {len(crossover) - len(perks)} masteries from Frosthaven's crossover sheet" if crossover else " from Gloomhaven")
+              + (f", retirement story (section {gh_story.section_id(cls)})" if story else ", no retirement story yet"))
 
         # pictures, composed into Frosthaven's shapes (see gh_art.py); optional, the plugin keeps stand-in art without
         try:
@@ -430,9 +444,23 @@ def main():
     # no Frosthaven retirement section, whose key comes out as "Event_" + "" + "_Text" (our line, no Gloomhaven text).
     for cls in args.classes:
         table.update(gh_crossover.strings(cls))   # our English for the crossover perks and masteries
+        table.update(gh_story.strings(cls))       # the retirement story (Event_<section>_Text and _Name)
         if cls in strings:
             table.setdefault(f"{cls}_FullName", strings[cls])
-        if f"{cls}_DESCRIPTION" in strings:
+            table.setdefault(f"CODEX_Hero_{cls}_Title", strings[cls])   # the codex page's title (GHCodex.cs)
+        # Gloomhaven digital's own class guidance, from its mercenary screen. Its adventure description opens with the
+        # lore paragraph (the class description for the classes without the separate one-liner: only the six starters
+        # and the Elementalist have <Class>_DESCRIPTION); its role and difficulty, then any play-advice paragraphs, make
+        # the codex "mechanics" text, CODEX_HeroInfo_<Class>, which the class info screen shows too.
+        paragraphs = [p.strip() for p in strings.get(f"{cls}_ADVENTURE_DESCRIPTION", "").replace("\r", "").split("\n") if p.strip()]
+        if paragraphs and f"{cls}_DESCRIPTION" not in strings:
+            table.setdefault(f"{cls}_DESCRIPTION", paragraphs[0])
+        head = [f"<b>{label}:</b> {strings[key]}" for label, key in (("Role", f"{cls}_ROLE"), ("Difficulty", f"{cls}_DIFFICULTY"))
+                if strings.get(key)]
+        info = "\n\n".join((["\n".join(head)] if head else []) + paragraphs[1:])
+        if info:
+            table.setdefault(f"CODEX_HeroInfo_{cls}", info)
+        elif f"{cls}_DESCRIPTION" in strings:
             table.setdefault(f"CODEX_HeroInfo_{cls}", strings[f"{cls}_DESCRIPTION"])
     table.setdefault("Event__Text", "Their personal quest complete, the mercenary leaves Frosthaven for good. "
                                     "Someone else will take up the fight.")
@@ -453,6 +481,8 @@ def main():
     (args.out / "pack.json").write_text(json.dumps({
         "name": PACK, "title": PACK_TITLE, "version": PACK_VERSION, "classes": args.classes, "files": "files",
         "unlock": unlock,
+        # the retirement-story sections the pack adds (gh_story.py); the plugin takes them out of a pack-free copy
+        "sections": [s for s in (gh_story.section_id(c) for c in args.classes) if s],
         "data_sha": digest.hexdigest(), "source": {"gloomhaven": str(gh), "buildid": build, "files": len(written)},
         "model": models,
     }, indent=2) + "\n", encoding="utf-8")

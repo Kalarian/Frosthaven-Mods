@@ -12,11 +12,14 @@
       "Brute"
     ]
   },
-  "data_sha": "eb5fdfb98ccce4af1f32c09bdeb789f263545b3e49f9c085fc4630c1a2d4fed7",
+  "sections": [
+    "GH.Brute"
+  ],
+  "data_sha": "c71e217323fdf2f4aa623815474982344f57d629feb864a850eb78e34d227f1c",
   "source": {
     "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
     "buildid": "20286313",
-    "files": 42
+    "files": 43
   },
   "model": {
     "Brute": {
