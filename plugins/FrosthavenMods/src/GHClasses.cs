@@ -188,7 +188,8 @@ namespace FrosthavenMods
             if (type != CActor.EType.Player) return true;
             string standIn = StandIn(prefabName);
             if (standIn == null) return true;
-            GameObject own = IsGloomhavenClass(prefabName, out ECharacter model) ? GHModel.Template(model, skinString) : null;
+            // no skin named (scenarios, previews): the look the party member of this class has chosen (GHLooks)
+            GameObject own = IsGloomhavenClass(prefabName, out ECharacter model) ? GHModel.Template(model, skinString ?? GHLooks.PartyLook(model)) : null;
             if (own != null) { __result = own; return false; }
             prefabName = standIn;
             skinString = null;
