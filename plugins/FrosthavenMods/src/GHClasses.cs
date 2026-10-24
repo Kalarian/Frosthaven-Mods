@@ -389,13 +389,13 @@ namespace FrosthavenMods
         {
             if (cardData?.CharacterID == null || __instance.miniAbilityCard == null) return;
             CCharacterClass cls = ClassById(cardData.CharacterID);
-            if (cls == null || !IsGloomhavenClass(cls.AbilityCardArt, out _)) return;
+            if (cls == null || !IsGloomhavenClass(cls.AbilityCardArt, out ECharacter model)) return;
             Transform art = __instance.miniAbilityCard.transform.Find("Container_CardArt/Mask_CardArt/Image_CardArt");
             Image image = art != null ? art.GetComponent<Image>() : null;
             if (image != null) image.enabled = false;
             else if (Reported.Add("no Image_CardArt"))
                 Plugin.Log.LogWarning("Gloomhaven classes: the mini card has no Container_CardArt/Mask_CardArt/Image_CardArt; its template painting stays");
-            DefaultActionsInTheMiddle(__instance);
+            DefaultActionsInTheMiddle(__instance, model);
         }
 
         /// <summary>Frosthaven's own cards (one prefab per card in hero_&lt;class&gt;cards) draw the middle band as a
@@ -410,7 +410,7 @@ namespace FrosthavenMods
         /// (FH_UI_CARD_Initiative_Ornament) behind the initiative, and each pill's fill (FH_UI_CARD_DEFAction_BGR_Inactive)
         /// and gold frame (FH_UI_CARD_DEFAction_Frame_Active), mirrored on the right so the slants face the hex. Sizes
         /// follow the real cards scaled to this template's width (294 against 316).</summary>
-        private static void DefaultActionsInTheMiddle(AbilityCardUI card, bool warn = true)
+        private static void DefaultActionsInTheMiddle(AbilityCardUI card, ECharacter model, bool warn = true)
         {
             Transform full = card.transform.Find("Full");
             Transform group = full != null ? full.Find("Default action buttons") : null;
@@ -436,11 +436,12 @@ namespace FrosthavenMods
                 Beneath(ornament, initiative);
                 Beneath(hex, initiative);
             }
-            // the skin paints the number in the Drifter's gold, invisible on the gold hex: dark ink, as the real cards
+            // the skin paints the number in the Drifter's gold, invisible on the gold hex. The real cards ink it in a
+            // dark shade of the class's colour (the Drifter's dark green), so: the class colour at under half brightness
             TMPro.TMP_Text number = initiative != null ? initiative.GetComponent<TMPro.TMP_Text>() : null;
             if (number != null)
             {
-                number.color = InitiativeInk;
+                number.color = ClassColours.TryGetValue(model, out Color tint) ? new Color(tint.r * 0.4f, tint.g * 0.4f, tint.b * 0.4f) : InitiativeInk;
                 number.fontSize = 26f;   // the real cards' 28 at 316 wide, scaled to this template's 294; the template says 35
             }
         }
@@ -454,8 +455,8 @@ namespace FrosthavenMods
         private static void DefaultActionsAfterSkin(AbilityCardUI __instance)
         {
             CCharacterClass cls = __instance.ClassID != null ? ClassById(__instance.ClassID) : null;
-            if (cls == null || !IsGloomhavenClass(cls.AbilityCardArt, out _)) return;
-            DefaultActionsInTheMiddle(__instance, warn: false);
+            if (cls == null || !IsGloomhavenClass(cls.AbilityCardArt, out ECharacter model)) return;
+            DefaultActionsInTheMiddle(__instance, model, warn: false);
         }
 
         /// <summary>One basic-action button as a framed slanted pill centred at <paramref name="x"/> on the band.</summary>
