@@ -18,6 +18,8 @@ namespace FrosthavenMods
             ["FHMODS_S14_HERDERS"] = "Kill all Abael Herders",
             ["FHMODS_GIVE_HINT"] = "Give",
             ["FHMODS_LOOK"] = "Skin: {0}",
+            ["FHMODS_STRIP"] = "Copy without Gloomhaven",
+            ["FHMODS_STRIP_TITLE"] = "Copy without the Gloomhaven pack",
         };
 
         public static string Get(string key) => Strings.TryGetValue(key, out string text) ? text : key;

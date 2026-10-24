@@ -74,7 +74,9 @@ namespace FrosthavenMods
                               "character of one of these classes has been created, the campaign needs the pack for good: " +
                               "this switch locks on, and the campaign must never be opened in a game without the pack (the " +
                               "game would move the save to its corrupted folder). The host's game makes a backup save the " +
-                              "moment this is turned on.",
+                              "moment this is turned on.\n\n" +
+                              "The way out: the Save Game window's \"Copy without Gloomhaven\" button saves a copy of the " +
+                              "campaign as a new campaign without the pack's characters and unlocks, which any game loads.",
                 Blocked = GHClassesRule.WhyBlocked,
                 BackupBeforeOn = "Mod backup - before Gloomhaven classes",
             },
