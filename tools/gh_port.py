@@ -15,7 +15,8 @@ that the release zip and the installer carry like every other mod:
     bundles\\pcg_materials_assets_*.bundle etc.  the materials of the class's ability effects (gh_vfx.py), as is
                                               (gh_model.py; 83 MB for the Brute, so git-ignored: the release carries it)
     pack.json                                 manifest: name, version, classes, data_sha (plugin + co-op check), source,
-                                              and a "model" entry per class telling the plugin what is in the bundle
+                                              "unlock" (which classes open at once, whether the rest come through
+                                              retirement envelopes) and a "model" entry per class for the plugin
 
 strings.tsv, art\\, bundles\\ and pack.json are copied into the game folder as <Frosthaven>\\FrosthavenMods\\packs\\<name>\\
 (by fh_mods.py install here, by the installer on the friends' PCs through the zip's game/ files). A content pack is data
@@ -68,6 +69,12 @@ PACK = "gloomhaven"
 PACK_TITLE = "Gloomhaven classes (content pack)"
 # Bump when the conversion changes in a way that matters in play (card data, IDs): co-op peers must match.
 PACK_VERSION = 1
+# Which classes a campaign opens the moment the pack's switch is on. The others wait in envelopes: each retirement in
+# the campaign opens one, and the party picks one of two (plugin: GHEnvelopes.cs). ALL_CLASSES_OPEN hands every class
+# out at once (while we test the classes themselves); set it False to deal the rest through retirements. Both go into
+# data_sha, so co-op peers must agree on them like on the cards.
+ALL_CLASSES_OPEN = True
+STARTING_CLASSES = {"Demolitionist", "Hatchet", "RedGuard", "Voidwarden"}   # Jaws of the Lion: Gloomhaven digital's own starters
 # The pack is a mod folder in the repo like any other (mod.json + files/), plus its extras (strings.tsv, art/, pack.json)
 # that the release copies into the game folder under FrosthavenMods\packs\<name>\ for the plugin.
 OUT = fh_mods.MODS / PACK
@@ -438,9 +445,14 @@ def main():
     for rel in sorted(written, key=str.lower):
         digest.update(rel.lower().encode("utf-8") + b"\0" + (out_ruleset / rel).read_bytes() + b"\0")
     digest.update((args.out / "strings.tsv").read_bytes())
+    # How the classes reach a campaign (see ALL_CLASSES_OPEN): part of what co-op peers must agree on.
+    unlock = {"envelopes": not ALL_CLASSES_OPEN,
+              "starting": [c for c in args.classes if ALL_CLASSES_OPEN or c in STARTING_CLASSES]}
+    digest.update(json.dumps(unlock, sort_keys=True).encode("utf-8"))
     # The "model" entries are visual only (not in data_sha): a PC without the bundle shows the Drifter's model instead.
     (args.out / "pack.json").write_text(json.dumps({
         "name": PACK, "title": PACK_TITLE, "version": PACK_VERSION, "classes": args.classes, "files": "files",
+        "unlock": unlock,
         "data_sha": digest.hexdigest(), "source": {"gloomhaven": str(gh), "buildid": build, "files": len(written)},
         "model": models,
     }, indent=2) + "\n", encoding="utf-8")

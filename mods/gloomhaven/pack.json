@@ -6,7 +6,13 @@
     "Brute"
   ],
   "files": "files",
-  "data_sha": "585081f87bc6d9cc765cd0d6750f59d3157c3ade61984b709bda517ba6b3f8ec",
+  "unlock": {
+    "envelopes": false,
+    "starting": [
+      "Brute"
+    ]
+  },
+  "data_sha": "eb5fdfb98ccce4af1f32c09bdeb789f263545b3e49f9c085fc4630c1a2d4fed7",
   "source": {
     "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
     "buildid": "20286313",

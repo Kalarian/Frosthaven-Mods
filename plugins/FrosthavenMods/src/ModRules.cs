@@ -66,8 +66,10 @@ namespace FrosthavenMods
                 Flag = GloomhavenClasses,
                 Name = "Gloomhaven classes (content pack)",
                 Description = "Adds Gloomhaven's classes to this campaign (the Brute for now), each built on a player's PC " +
-                              "from their own copy of Gloomhaven. Turning this on unlocks them for new characters (in a " +
-                              "solo scenario, at the next outpost).\n\n" +
+                              "from their own copy of Gloomhaven. Turning this on opens the pack's starting classes for new " +
+                              "characters (in a solo scenario, at the next outpost). A pack can keep its other classes in " +
+                              "envelopes: each retirement in the campaign then opens one, and the party picks one of two " +
+                              "classes to unlock, on the game's own class-choice screen.\n\n" +
                               "This is a content pack, not a rule: every PC in the game needs the same pack installed before " +
                               "the game starts (see the mod guide). A player without it is refused when they try to join; " +
                               "a player without the mod at all only sees their join window reset, so tell them. Once a " +

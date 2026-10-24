@@ -53,6 +53,10 @@ namespace FrosthavenMods
             public string Name, Title, DataSha, Folder;
             public int Version;
             public string[] Classes = new string[0];
+            /// <summary>Deal the classes not in <see cref="Starting"/> out through retirement envelopes (GHEnvelopes).</summary>
+            public bool Envelopes;
+            /// <summary>The classes (by model name) that open the moment the pack's switch is on.</summary>
+            public string[] Starting = new string[0];
 
             /// <summary>What two co-op peers must agree on: same pack, same version, same data.</summary>
             public string Stamp => $"{Name}/{Version}/{DataSha}";
@@ -74,7 +78,7 @@ namespace FrosthavenMods
                             try
                             {
                                 JObject j = JObject.Parse(File.ReadAllText(file));
-                                _packs.Add(new Pack
+                                var pack = new Pack
                                 {
                                     Folder = Path.GetDirectoryName(file),
                                     Name = (string)j["name"] ?? Path.GetFileName(Path.GetDirectoryName(file)),
@@ -82,7 +86,13 @@ namespace FrosthavenMods
                                     Version = (int?)j["version"] ?? 0,
                                     DataSha = (string)j["data_sha"] ?? "",
                                     Classes = j["classes"]?.Select(c => (string)c).Where(c => c != null).ToArray() ?? new string[0],
-                                });
+                                };
+                                // "unlock": which classes open at once and whether the rest come through envelopes;
+                                // a manifest without it (an older pack) opens everything at once
+                                JToken unlock = j["unlock"];
+                                pack.Envelopes = (bool?)unlock?["envelopes"] ?? false;
+                                pack.Starting = unlock?["starting"]?.Select(c => (string)c).Where(c => c != null).ToArray() ?? pack.Classes;
+                                _packs.Add(pack);
                             }
                             catch (Exception e) { Plugin.Log.LogError($"Content packs: could not read {file}: {e.Message}"); }
                         }

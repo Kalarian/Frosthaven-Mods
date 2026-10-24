@@ -122,6 +122,30 @@ namespace FrosthavenMods
             return list;
         }
 
+        /// <summary>The pack classes that open the moment the switch is on: a pack's "starting" classes, or all of a
+        /// pack's classes when it doesn't deal them out through envelopes.</summary>
+        public static List<CharacterClassID> StartingClassIDs(DefRepository repo) => Select(repo, starting: true);
+
+        /// <summary>The pack classes that wait in retirement envelopes (GHEnvelopes).</summary>
+        public static List<CharacterClassID> EnvelopeClassIDs(DefRepository repo) => Select(repo, starting: false);
+
+        private static List<CharacterClassID> Select(DefRepository repo, bool starting)
+        {
+            var list = new List<CharacterClassID>();
+            if (repo == null) return list;
+            foreach (ScenarioRuleLibrary.CCharacterClass c in GHClasses.PackClasses())
+            {
+                if (string.IsNullOrEmpty(c.ID)) continue;
+                string model = c.CharacterModel.ToString();
+                GHClasses.Pack pack = GHClasses.PackOf(c.CharacterModel);
+                bool opensAtStart = pack == null || !pack.Envelopes || pack.Starting.Any(s => string.Equals(s, model, StringComparison.OrdinalIgnoreCase));
+                if (opensAtStart != starting) continue;
+                var id = new CharacterClassID(c.ID);
+                if (repo.CharacterClasses.ContainsKey(id) && !list.Contains(id)) list.Add(id);
+            }
+            return list;
+        }
+
         private static string ShortName(CharacterClassID id) =>
             id.ID != null && id.ID.EndsWith("ID", StringComparison.Ordinal) ? id.ID.Substring(0, id.ID.Length - 2) : id.ID;
 
@@ -237,7 +261,9 @@ namespace FrosthavenMods
             List<CharacterClassID> pack = PackClassIDs(repo);
             if (pack.Count == 0) return true;
             bool on = On;
-            bool allIn = pack.All(state.UnlockedClassIDs.Contains);
+            // on: open the pack's starting classes (its envelope classes arrive through retirements, GHEnvelopes); off: lock them all
+            List<CharacterClassID> want = on ? StartingClassIDs(repo) : pack;
+            bool allIn = want.All(state.UnlockedClassIDs.Contains);
             bool anyIn = pack.Any(state.UnlockedClassIDs.Contains);
             if (on ? allIn : !anyIn) return true;
             if (!on)
@@ -250,7 +276,7 @@ namespace FrosthavenMods
                 }
             }
             if (_failures >= MaxFailures) { CoopLog.Write("PACK CLASSES: giving up after repeated command failures"); return true; }
-            Issue(view, on, pack);
+            Issue(view, on, want);
             return true;
         }
 
