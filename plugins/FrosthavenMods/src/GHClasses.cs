@@ -505,13 +505,14 @@ namespace FrosthavenMods
         }
 
         /// <summary>The card skin (AbilityCardUI.SetSkin, after MakeAbilityCard) is where the template's bar sprites
-        /// come back onto the two buttons, so the band is laid out again after skinning.</summary>
-        [HarmonyPatch(typeof(AbilityCardUI), "SetSkin", typeof(AbilityCardUISkin))]
+        /// come back onto the two buttons and the initiative turns gold again, so the band is laid out again after
+        /// skinning. The overload taking the class's name is patched: the character screen skins its cards before the
+        /// card knows its ClassID, and the name is what the skin is chosen by.</summary>
+        [HarmonyPatch(typeof(AbilityCardUI), "SetSkin", typeof(string), typeof(string))]
         [HarmonyPostfix]
-        private static void DefaultActionsAfterSkin(AbilityCardUI __instance)
+        private static void DefaultActionsAfterSkin(AbilityCardUI __instance, string playerName)
         {
-            CCharacterClass cls = __instance.ClassID != null ? ClassById(__instance.ClassID) : null;
-            if (cls == null || !IsGloomhavenClass(cls.AbilityCardArt, out ECharacter model)) return;
+            if (playerName == null || !IsGloomhavenClass(playerName, out ECharacter model)) return;
             DefaultActionsInTheMiddle(__instance, model, warn: false);
         }
 
