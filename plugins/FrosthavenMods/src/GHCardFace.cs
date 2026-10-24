@@ -128,8 +128,11 @@ namespace FrosthavenMods
             if (!(card.transform.Find("Full") is RectTransform full)) return;
             Shape(card);
             Transform header = full.Find("Header");
+            // the template's one-picture card: drawn clear (the game switches the image back on, but leaves its colour;
+            // its title is a child and stays), and its shape no longer used for the unfocused-card dimming
             Image painting = header != null ? header.GetComponent<Image>() : null;
-            if (painting != null) painting.enabled = false;   // the template's one-picture card; its title stays (a child)
+            if (painting != null) painting.color = Color.clear;
+            if (full.Find("UnfocusedMask")?.GetComponent<Image>() is Image dimming && Art.Card != null) dimming.sprite = Art.Card;
 
             // under everything: card, banner, title band and line, level tag (in that order)
             Transform below = full.Find("FX_Underneath_Full");
