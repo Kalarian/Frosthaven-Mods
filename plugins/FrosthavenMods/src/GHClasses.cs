@@ -399,13 +399,14 @@ namespace FrosthavenMods
         }
 
         /// <summary>Frosthaven's own cards (one prefab per card in hero_&lt;class&gt;cards) show the basic Attack 2 and
-        /// Move 2 buttons as two small pills in the middle band, above-left and below-right of the initiative. The
-        /// generated-card template (AbilityCard-FH*) keeps the same two buttons, with the same children, but anchored
-        /// as a vertical strip hanging off the card's right edge. The sibling Gloomhaven-era "AbilityCard" template in
-        /// misc_gui still has them laid out as the horizontal pills (its "Default action buttons" group: centred
-        /// 270x50, top pill at its top-left 95x21, bottom pill at its bottom-right 94x20.5), so a Gloomhaven class's
-        /// card gets those rectangles, with the group moved down so that it is centred on this template's initiative
-        /// (y -36 against -23.4 inside the Gloomhaven group).</summary>
+        /// Move 2 buttons as two small pills on the middle line, left and right of the initiative. The generated-card
+        /// template (AbilityCard-FH*) keeps the same two buttons, with the same children (icon, number, hover highlight),
+        /// but as a vertical strip hanging off the card's right edge, painted with tall bar artwork
+        /// (Kro_HUD_Card_AltBtns_*, Kro_HUD_Card_Test_DEF_Actions*) that smears when the rectangle is laid flat. The
+        /// Gloomhaven-era "AbilityCard" template in misc_gui draws the same buttons as plain horizontal pills with no
+        /// background at all (icon, number and the highlight only), so a Gloomhaven class's card gets that: the bar
+        /// artwork off, the two pills 90x22 either side of the initiative (whose text sits at y -36 in Full), icon and
+        /// number centred in each.</summary>
         private static void DefaultActionsInTheMiddle(AbilityCardUI card)
         {
             Transform group = card.transform.Find("Full/Default action buttons");
@@ -415,10 +416,32 @@ namespace FrosthavenMods
                     Plugin.Log.LogWarning("Gloomhaven classes: the card has no Full/Default action buttons; its basic actions stay where the template puts them");
                 return;
             }
-            Place(group, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0f, -36f + 23.4f), new Vector2(270f, 50f));
-            Transform top = group.Find("Default action top"), bottom = group.Find("Default action button");
-            if (top != null) Place(top, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(7f, -35.62f), new Vector2(95f, 21f));
-            if (bottom != null) Place(bottom, new Vector2(1f, 0f), new Vector2(1f, 0f), new Vector2(-8.75f, -12.58f), new Vector2(93.7f, 20.5f));
+            var centre = new Vector2(0.5f, 0.5f);
+            Place(group, centre, centre, new Vector2(0f, -36f), new Vector2(270f, 50f));
+            Background(group, false);
+            Background(group.Find("Default action text"), false);
+            Transform attack = group.Find("Default action top"), move = group.Find("Default action button");
+            Pill(attack, -78f);
+            Pill(move, 78f);
+        }
+
+        /// <summary>One basic-action button as a flat pill centred at <paramref name="x"/> on the group's middle line.</summary>
+        private static void Pill(Transform pill, float x)
+        {
+            if (pill == null) return;
+            var centre = new Vector2(0.5f, 0.5f);
+            Place(pill, centre, centre, new Vector2(x, 0f), new Vector2(90f, 22f));
+            Background(pill, false);
+            Transform icon = pill.Find("Image"), number = pill.Find("TextMeshPro Text"), highlight = pill.Find("InteractabilityHighlight");
+            if (icon is RectTransform i) { i.anchorMin = i.anchorMax = centre; i.anchoredPosition = new Vector2(-11f, 0f); }
+            if (number is RectTransform n) { n.anchorMin = n.anchorMax = centre; n.anchoredPosition = new Vector2(10f, 0f); }
+            if (highlight is RectTransform h) { h.anchoredPosition = Vector2.zero; h.sizeDelta = Vector2.zero; }
+        }
+
+        private static void Background(Transform t, bool on)
+        {
+            Image image = t != null ? t.GetComponent<Image>() : null;
+            if (image != null) image.enabled = on;
         }
 
         private static void Place(Transform t, Vector2 anchor, Vector2 pivot, Vector2 position, Vector2 size)
