@@ -38,6 +38,9 @@ namespace FrosthavenMods
         // ------------------------------------------------------------------ geometry (real card units, from the top left)
 
         private const float CardW = 316f, CardH = 550f;
+        // the card background picture has a soft shadow round it: drawn 12 units past the card on every side, as the
+        // real card draws it (cardBackground: stretched, size +24), its body fills the card exactly
+        private static readonly Rect CardBody = new Rect(-12, -12, CardW + 24, CardH + 24);
         private static readonly Rect Banner = new Rect(8, 8, 300, 79);
         private static readonly Rect TitleBand = new Rect(8, 87, 300, 30);
         private static readonly Rect TitleLine = new Rect(6, 84, 304, 18);
@@ -137,7 +140,7 @@ namespace FrosthavenMods
             // under everything: card, banner, title band and line, level tag (in that order)
             Transform below = full.Find("FX_Underneath_Full");
             int at = below != null ? below.GetSiblingIndex() + 1 : 0;
-            Picture(full, "GH card", Art.Card, new Rect(0, 0, CardW, CardH), at++);
+            Picture(full, "GH card", Art.Card, CardBody, at++);
             Masked(full, "GH banner", Art.Banner(model), Banner, at++);
             Picture(full, "GH title band", Art.TitleBandOf(model), TitleBand, at++);
             Picture(full, "GH title line", Art.TitleLine, TitleLine, at++);
@@ -565,9 +568,14 @@ namespace FrosthavenMods
 
             internal Pixels Turned() => new Pixels(W, H, Enumerable.Reverse(Px).ToArray());
 
-            /// <summary>Same brightness, the class's hue (the title band).</summary>
+            /// <summary>Same brightness, half way to the class's hue (the title band; the real ones are only faintly
+            /// tinted).</summary>
             internal Pixels Recolour(Color tint) =>
-                new Pixels(W, H, Px.Select(c => { float l = Lum(c); return new Color(Mathf.Clamp01(l * tint.r), Mathf.Clamp01(l * tint.g), Mathf.Clamp01(l * tint.b), c.a); }).ToArray());
+                new Pixels(W, H, Px.Select(c =>
+                {
+                    float l = Lum(c);
+                    return new Color(Mathf.Clamp01(l * Mathf.Lerp(1f, tint.r, 0.5f)), Mathf.Clamp01(l * Mathf.Lerp(1f, tint.g, 0.5f)), Mathf.Clamp01(l * Mathf.Lerp(1f, tint.b, 0.5f)), c.a);
+                }).ToArray());
 
             /// <summary>The neutral background plus the stand-in's glow (how much brighter its version is) in the
             /// class's hue.</summary>
