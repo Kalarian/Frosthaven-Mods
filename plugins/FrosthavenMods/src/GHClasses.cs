@@ -391,7 +391,7 @@ namespace FrosthavenMods
 
         /// <summary>Frosthaven's card prefabs are templates whose hand-card picture is a Banner Spear painting
         /// (Image_CardArt); the game's own cards replace it from their class bundles, a generated card never does.
-        /// Gloomhaven cards have no picture, so hide it.</summary>
+        /// A Gloomhaven card shows its class's banner there (GHCardFace.MiniArt), or nothing without one.</summary>
         [HarmonyPatch(typeof(AbilityCardUI), nameof(AbilityCardUI.MakeAbilityCard))]
         [HarmonyPostfix]
         private static void NoBorrowedArt(AbilityCardUI __instance, AbilityCardYMLData cardData)
@@ -401,7 +401,8 @@ namespace FrosthavenMods
             if (cls == null || !IsGloomhavenClass(cls.AbilityCardArt, out ECharacter model)) return;
             Transform art = __instance.miniAbilityCard.transform.Find("Container_CardArt/Mask_CardArt/Image_CardArt");
             Image image = art != null ? art.GetComponent<Image>() : null;
-            if (image != null) image.enabled = false;
+            if (GHCardFace.MiniArt(__instance, model)) { /* the class's banner, as the real rows show the card's picture */ }
+            else if (image != null) image.enabled = false;
             else if (Reported.Add("no Image_CardArt"))
                 Plugin.Log.LogWarning("Gloomhaven classes: the mini card has no Container_CardArt/Mask_CardArt/Image_CardArt; its template painting stays");
             GHCardFace.Dress(__instance, model);

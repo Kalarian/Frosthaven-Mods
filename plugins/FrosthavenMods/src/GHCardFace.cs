@@ -92,6 +92,26 @@ namespace FrosthavenMods
             if (playerName != null && GHClasses.IsGloomhavenClass(playerName, out ECharacter model)) Dress(__instance, model);
         }
 
+        // ------------------------------------------------------------------ the hand list's row (mini card)
+
+        /// <summary>Frosthaven's hand-list rows show the card's picture at their right end (Mask_CardArt, a window
+        /// over the right half of the row). The template's is a Banner Spear painting; a Gloomhaven card shows the
+        /// class's banner instead, fitted to the window (the slot is sized for the real cards' tall header pictures).
+        /// False when there is no banner (the caller hides the template's painting).</summary>
+        internal static bool MiniArt(AbilityCardUI card, ECharacter model)
+        {
+            Transform art = card.miniAbilityCard != null ? card.miniAbilityCard.transform.Find("Container_CardArt/Mask_CardArt/Image_CardArt") : null;
+            Sprite banner = Art.Banner(model);
+            if (!(art is RectTransform rect) || banner == null || !(art.GetComponent<Image>() is Image image)) return false;
+            image.sprite = banner;
+            image.preserveAspect = false;
+            image.enabled = true;
+            rect.anchorMin = new Vector2(-0.06f, -0.1f);
+            rect.anchorMax = new Vector2(1.06f, 1.1f);
+            rect.offsetMin = rect.offsetMax = Vector2.zero;
+            return true;
+        }
+
         // ------------------------------------------------------------------ layout
 
         private static void Shape(AbilityCardUI card)
@@ -481,8 +501,38 @@ namespace FrosthavenMods
                     skin.defaultBottomActionDisabledSprite = dim.Turned().ToSprite($"GH {model} move pill off");
                 }
                 skin.initiativeColor = Ink(model);
+                Plates(skin, model);
                 Skinned.Add(model);
                 Plugin.Log.LogInfo($"Gloomhaven classes: {model} card skin made from the {GHClasses.StandInModel}'s card pieces, in the class's colour");
+            }
+
+            /// <summary>The hand list's row plate and its initiative diamond are flat shapes in the class's colour
+            /// (the Drifter's brown, the Boneshaper's green, all about as dark): the stand-in's, repainted in the class's
+            /// colour at the same darkness.</summary>
+            private static void Plates(AbilityCardUISkin skin, ECharacter model)
+            {
+                if (!GHClasses.ClassColours.TryGetValue(model, out Color colour)) return;
+                var made = new Dictionary<Sprite, Sprite>();
+                Sprite Repaint(Sprite source)
+                {
+                    if (source == null) return null;
+                    if (made.TryGetValue(source, out Sprite done)) return done;
+                    Pixels px = Pixels.Read(source);
+                    Sprite sprite = px == null ? source : px.Plate(colour).ToSprite($"GH {model} {source.name}");
+                    made[source] = sprite;
+                    return sprite;
+                }
+                try
+                {
+                    foreach (var field in typeof(AbilityCardUISkin).GetFields())
+                        if (field.FieldType == typeof(Sprite) && field.Name.EndsWith("PreviewBackground") && !field.Name.StartsWith("longRest"))
+                            field.SetValue(skin, Repaint((Sprite)field.GetValue(skin)));
+                    skin.initiativeBackground = Repaint(skin.initiativeBackground);
+                }
+                catch (Exception e)
+                {
+                    Plugin.Log.LogWarning($"Gloomhaven classes: could not repaint {model}'s hand-list plates: {e.Message}");
+                }
             }
 
             /// <summary>The pieces, by the real card's object names (the same in every class's prefab), plus the
@@ -660,6 +710,20 @@ namespace FrosthavenMods
                     if (keep < 1f) px[y * W + x].a *= keep;
                 }
                 return new Pixels(W, H, px);
+            }
+
+            /// <summary>A flat-coloured shape repainted in <paramref name="colour"/>, at the shape's own darkness (its
+            /// shading kept: each pixel's brightness relative to the shape's typical colour).</summary>
+            internal Pixels Plate(Color colour)
+            {
+                // the shape's typical colour: the brightness most of its opaque pixels have
+                float typical = Px.Where(c => c.a > 0.9f).Select(Lum).DefaultIfEmpty(0.33f).OrderBy(l => l).ElementAt(Px.Count(c => c.a > 0.9f) / 2);
+                Color target = colour * (typical / Mathf.Max(0.01f, Lum(colour)));
+                return new Pixels(W, H, Px.Select(c =>
+                {
+                    float k = Lum(c) / Mathf.Max(0.01f, typical);
+                    return new Color(Mathf.Clamp01(target.r * k), Mathf.Clamp01(target.g * k), Mathf.Clamp01(target.b * k), c.a);
+                }).ToArray());
             }
 
             internal Pixels Darken(float f) => new Pixels(W, H, Px.Select(c => new Color(c.r * f, c.g * f, c.b * f, c.a)).ToArray());
