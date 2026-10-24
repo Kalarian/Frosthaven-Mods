@@ -644,7 +644,10 @@ namespace FrosthavenMods
                 rect.anchorMin = oldRect.anchorMin;
                 rect.anchorMax = oldRect.anchorMax;
                 rect.pivot = oldRect.pivot;
-                rect.anchoredPosition = oldRect.anchoredPosition;
+                // the template hangs the badge 5 units below its half; on the top half that is under the band's pill
+                // (DefaultActionsInTheMiddle, pill top at -22.5 against the badge's bottom near -27), so lift it clear
+                bool topHalf = __instance.name.StartsWith("Top", StringComparison.OrdinalIgnoreCase);
+                rect.anchoredPosition = oldRect.anchoredPosition + (topHalf ? new Vector2(0f, 8f) : Vector2.zero);
                 rect.localScale = Vector3.one;
                 rect.SetSiblingIndex(oldRect.GetSiblingIndex());
                 fresh.gameObject.SetActive(true);
