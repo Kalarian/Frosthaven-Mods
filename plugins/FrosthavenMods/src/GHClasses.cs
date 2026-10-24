@@ -436,6 +436,31 @@ namespace FrosthavenMods
                 Beneath(ornament, initiative);
                 Beneath(hex, initiative);
             }
+            // the template's card art has a rim along the bottom and sides but none around the title; the real cards
+            // have a thin gold border with cut corners all round. The monster cards' border (misc_gui, 9-sliced) does
+            // the same job stretched over the card, drawn right over the art, at half its pixel size for a thin line.
+            Transform header = full.Find("Header");
+            Transform border = full.Find("GH card border");
+            Sprite rim = UiSprite("FH_UI_HUD_FOECARDS_Border");
+            if (border == null && rim != null)
+            {
+                var go = new GameObject("GH card border", typeof(RectTransform), typeof(Image));
+                border = go.transform;
+                border.SetParent(full, false);
+                Image image = go.GetComponent<Image>();
+                image.sprite = rim;
+                image.type = Image.Type.Sliced;
+                image.pixelsPerUnitMultiplier = 2f;
+                image.raycastTarget = false;
+                var rect = (RectTransform)border;
+                rect.anchorMin = Vector2.zero;
+                rect.anchorMax = Vector2.one;
+                rect.anchoredPosition = Vector2.zero;
+                rect.sizeDelta = new Vector2(-4f, -4f);
+            }
+            if (border != null && header != null && border.GetSiblingIndex() != header.GetSiblingIndex() + 1)
+                border.SetSiblingIndex(header.GetSiblingIndex() + 1);
+
             // the skin paints the number in the Drifter's gold, invisible on the gold hex. The real cards ink it in a
             // dark shade of the class's colour (the Drifter's dark green), so: the class colour at under half brightness
             TMPro.TMP_Text number = initiative != null ? initiative.GetComponent<TMPro.TMP_Text>() : null;
