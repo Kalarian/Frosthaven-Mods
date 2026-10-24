@@ -17,7 +17,7 @@ namespace FrosthavenMods
             ["FHMODS_GIVE"] = "Give",
             ["FHMODS_S14_HERDERS"] = "Kill all Abael Herders",
             ["FHMODS_GIVE_HINT"] = "Give",
-            ["FHMODS_LOOK"] = "Look: {0}",
+            ["FHMODS_LOOK"] = "Skin: {0}",
         };
 
         public static string Get(string key) => Strings.TryGetValue(key, out string text) ? text : key;

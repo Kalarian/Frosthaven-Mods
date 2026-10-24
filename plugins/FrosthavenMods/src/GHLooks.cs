@@ -166,35 +166,41 @@ namespace FrosthavenMods
 
         // ------------------------------------------------------------------ the button
 
-        /// <summary>A "Look: …" button over the sheet's name plate, for a character of a class with another look, shown to
-        /// the player who controls them, outside scenarios. Each click moves to the next look.</summary>
+        /// <summary>A "Skin: …" button under the character's name at the bottom of the sheet (above the tab icons), for a
+        /// character of a class with another look, shown to the player who controls them, outside scenarios. Each click
+        /// moves to the next look.</summary>
         [HarmonyPatch(typeof(EditCharacterViewState), nameof(EditCharacterViewState.OnShow))]
         [HarmonyPostfix]
         private static void SheetShown(EditCharacterViewState __instance)
         {
-            GiveResourcesPatches.Safe("show the look button", () =>
+            GiveResourcesPatches.Safe("show the skin button", () =>
             {
                 FHMapView view = __instance.View;
-                CharacterDetailsScreenModule screen = view == null ? null : view.Modules.Characters.MainScreen;
-                if (screen == null) return;
-                Transform button = Button(view, screen, create: false);
+                CharacterPreviewModule preview = view == null ? null : view.Modules.Characters.CharacterPreview;
+                if (preview == null) return;
+                Transform button = preview.transform.Find(ButtonName);
                 CharacterState c = SheetCharacter(view);
                 List<string> looks = c == null ? null : Looks(ModelOf(c));
                 bool show = looks != null && looks.Count > 0 && view.GameState?.ActiveScenario == null &&
                             (view.IsSoloGame || view.PlayerCharacters.Contains(c));
                 if (!show) { button?.gameObject.SetActive(false); return; }
-                if (button == null) button = Button(view, screen, create: true);
+                if (button == null) button = Create(view, preview);
                 if (button == null) return;
                 button.gameObject.SetActive(true);
                 button.GetComponent<FHButton>()?.SetNonLocalizedText(string.Format(Text.Get("FHMODS_LOOK"), LookName(ModelOf(c), LookOf(view.GameState, c.ID))));
+                if (Plugin.Instance != null) Plugin.Instance.StartCoroutine(PlaceNextFrame(view, preview, button, c.Name));
             });
         }
 
         /// <summary>Every screen that uses the details module clears it first; the button goes with it.</summary>
         [HarmonyPatch(typeof(CharacterDetailsScreenModule), nameof(CharacterDetailsScreenModule.ClearAll))]
         [HarmonyPostfix]
-        private static void Cleared(CharacterDetailsScreenModule __instance) =>
-            __instance?._heroClassIcon?.transform.parent?.Find(ButtonName)?.gameObject.SetActive(false);
+        private static void Cleared()
+        {
+            FHMapView view = Singleton<FHMapChoreographer>.InstanceFast?.View;
+            CharacterPreviewModule preview = view == null ? null : view.Modules.Characters.CharacterPreview;
+            if (preview != null) preview.transform.Find(ButtonName)?.gameObject.SetActive(false);
+        }
 
         private static CharacterState SheetCharacter(FHMapView view)
         {
@@ -202,24 +208,61 @@ namespace FrosthavenMods
             return c != null && c.PartyState != CharacterPartyStateType.CreationProcess ? c : null;
         }
 
-        private static Transform Button(FHMapView view, CharacterDetailsScreenModule screen, bool create)
+        private static Transform Create(FHMapView view, CharacterPreviewModule preview)
         {
-            Transform plate = screen._heroClassIcon?.transform.parent;
-            if (plate == null) return null;
-            Transform existing = plate.Find(ButtonName);
-            if (existing != null || !create) return existing;
-            UiDump.Once("Character sheet name plate", plate);
-            FHButton button = ButtonCopy.Make(view, plate, ButtonName, "", OnClick);
+            UiDump.Once("Character sheet preview (name)", preview.transform);
+            FHButton button = ButtonCopy.Make(view, preview.transform, ButtonName, "", OnClick);
             if (button == null) return null;
             var rt = (RectTransform)button.transform;
-            rt.anchorMin = new Vector2(0.5f, 1f);
-            rt.anchorMax = new Vector2(0.5f, 1f);
-            rt.pivot = new Vector2(0.5f, 0f);
-            rt.anchoredPosition = new Vector2(0f, 6f);
+            rt.anchorMin = rt.anchorMax = rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.sizeDelta = new Vector2(Mathf.Max(rt.sizeDelta.x * 1.9f, 330f), rt.sizeDelta.y);   // "Skin: Boneguard" on one line
             rt.localScale = new Vector3(Scale, Scale, 1f);
-            button.gameObject.AddComponent<LayoutElement>().ignoreLayout = true;   // the plate may lay its children out
+            foreach (TMPro.TMP_Text label in button.GetComponentsInChildren<TMPro.TMP_Text>(true)) label.enableWordWrapping = false;
+            button.gameObject.AddComponent<LayoutElement>().ignoreLayout = true;   // the module may lay its children out
             return button.transform;
         }
+
+        /// <summary>Centred under the name, halfway down to the tab icons (measured once the screen has laid out).</summary>
+        private static System.Collections.IEnumerator PlaceNextFrame(FHMapView view, CharacterPreviewModule preview, Transform button, string name)
+        {
+            yield return null;
+            GiveResourcesPatches.Safe("place the skin button", () =>
+            {
+                if (button == null || preview == null) return;
+                Canvas.ForceUpdateCanvases();
+                string want = (name ?? "").Trim();
+                TMPro.TMP_Text nameText = preview.GetComponentsInChildren<TMPro.TMP_Text>(false)
+                    .Where(t => t.transform.parent != button && !t.transform.IsChildOf(button))
+                    .FirstOrDefault(t => want.Length > 0 && string.Equals(t.text?.Trim(), want, StringComparison.OrdinalIgnoreCase));
+                Component bar = view.Modules.QuickAccessBar;   // the character tab icons along the bottom
+                var corners = new Vector3[4];
+                Vector3 under;
+                if (nameText != null)
+                {
+                    nameText.ForceMeshUpdate();
+                    Bounds b = nameText.textBounds;
+                    under = nameText.transform.TransformPoint(new Vector3(b.center.x, b.min.y, 0f));
+                }
+                else
+                {
+                    ((RectTransform)preview.transform).GetWorldCorners(corners);
+                    under = (corners[0] + corners[3]) / 2f;
+                }
+                ((RectTransform)button).GetWorldCorners(corners);
+                float y = under.y - (corners[1].y - corners[0].y) / 2f - 4f;   // just under the name
+                if (bar != null && bar.gameObject.activeInHierarchy)
+                {
+                    ((RectTransform)bar.transform).GetWorldCorners(corners);
+                    float barTop = corners[1].y;
+                    if (barTop < under.y) y = (under.y + barTop) / 2f;
+                }
+                button.position = new Vector3(under.x, y, button.position.z);
+                if (Reported.Add("placed"))
+                    Plugin.Log.LogInfo($"Gloomhaven looks: skin button placed at {button.position} (name {(nameText != null ? "found" : "not found")} at {under}, icon bar {(bar != null ? bar.transform.position.ToString() : "not found")})");
+            });
+        }
+
+        private static readonly HashSet<string> Reported = new HashSet<string>();
 
         private static void OnClick()
         {
