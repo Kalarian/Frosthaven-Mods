@@ -260,12 +260,19 @@ def _plain(b, v):
 
 # ---------------------------------------------------------------- the model entry
 
-def describe(bundle_path, cls, fh_bundle_path):
+# Gloomhaven's skin names (its heroes' <cls>_<SKIN>.prefab); Frosthaven toggles between the base and the first
+SKINS = ("ALT",)
+
+
+def describe(bundle_path, cls, fh_bundle_path, skin=None, animation=None):
     """What the plugin needs to know about the bundle, read from it: prefab paths, the Animator object, bones, height,
-    weapons, materials and their textures, and the Drifter-clip -> Gloomhaven-clip table with the per-state timings."""
+    weapons, materials and their textures, and the Drifter-clip -> Gloomhaven-clip table with the per-state timings.
+    With <skin> ("ALT"), the same for the skin's prefabs (<cls>_ALT.prefab, HE_<cls>_Alt_PR.prefab), reusing
+    <animation> (a skin is the same rig and animator with other meshes and materials)."""
     b = Bundle(bundle_path)
-    hero_path = f"Assets/_AssetBundles/heroes/{cls}.prefab"
-    model_path = next((p for p in b.container if p.lower().endswith(f"/he_{cls.lower()}_pr.prefab")), None)
+    suffix = f"_{skin}" if skin else ""
+    hero_path = f"Assets/_AssetBundles/heroes/{cls}{suffix}.prefab"
+    model_path = next((p for p in b.container if p.lower().endswith(f"/he_{cls.lower()}{suffix.lower()}_pr.prefab")), None)
     if hero_path not in b.container or model_path is None:
         raise ValueError(f"{bundle_path.name} lacks {hero_path} or HE_{cls}_PR.prefab; has {sorted(b.container)}")
     hero_go, model_go = b.container[hero_path], b.container[model_path]
@@ -321,7 +328,7 @@ def describe(bundle_path, cls, fh_bundle_path):
     anchor = next((n for n in sorted(bones) if "weaponPropHook" in n and n.startswith("R_")), None) \
         or next((n for n in sorted(bones) if "weaponPropHook" in n), None) or melee_bone or ""
 
-    animation = _animation(b, fh_bundle_path)
+    animation = animation if animation is not None else _animation(b, fh_bundle_path)
     return {
         "prefab": model_path, "hero_prefab": hero_path, "animator": animator_go, "body_mesh": body[0],
         "target_bone": cm["TargetBone"], "gh_height": round(cm["Height"], 3), "height": round(top, 2),
@@ -516,6 +523,16 @@ def export(gh, fh, cls, out):
     if not fh_bundle.exists():
         raise FileNotFoundError(f"Frosthaven's {BASE_HERO} bundle missing: {fh_bundle}")
     entry = describe(src, cls, fh_bundle)
+    # the class's alternative looks (Frosthaven's skin toggle; Gloomhaven's "<cls>_ALT"): what differs from the base
+    skins = {}
+    for skin in SKINS:
+        try:
+            alt = describe(src, cls, fh_bundle, skin, entry["animation"])
+        except ValueError:
+            continue
+        skins[skin] = {k: v for k, v in alt.items() if k != "animation" and v != entry.get(k)}
+    if skins:
+        entry["skins"] = skins
     dst = out / "bundles" / hero
     dst.parent.mkdir(parents=True, exist_ok=True)
     if not dst.exists() or dst.stat().st_size != src.stat().st_size:

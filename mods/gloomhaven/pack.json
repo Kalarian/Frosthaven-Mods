@@ -6,7 +6,7 @@
     "Brute"
   ],
   "files": "files",
-  "data_sha": "f8899a0aaa85d63a6888bcc13f349e10679454465d9787f2a3384a80c2a3e211",
+  "data_sha": "585081f87bc6d9cc765cd0d6750f59d3157c3ade61984b709bda517ba6b3f8ec",
   "source": {
     "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
     "buildid": "20286313",
@@ -378,6 +378,91 @@
           "HalberdUseItem": "PlaySound_BruteUseItem",
           "TargetedShout": "PlaySound_BruteShoutAttack",
           "RangedAreaAttack": "PlaySound_BruteShoutAttack"
+        }
+      },
+      "skins": {
+        "ALT": {
+          "prefab": "Assets/Content/Characters/Heroes/HE_Brute/HE_Brute_Alt_PR.prefab",
+          "hero_prefab": "Assets/_AssetBundles/heroes/Brute_ALT.prefab",
+          "animator": "HE_Brute_Alt",
+          "body_mesh": "HE_Brute_Alt_Mesh",
+          "materials": {
+            "HE_Brute_Alt_02_MAT": {
+              "albedo": "InoxBrute_alt_map2_d",
+              "mask": "InoxBrute_alt_map2_mf",
+              "normal": "InoxBrute_alt_map2_n",
+              "emissive": null,
+              "cutout": false,
+              "cutoff": 0.5,
+              "emissive_boost": 1.0,
+              "two_sided": false,
+              "mask_mode": "flat",
+              "metallic": 0.0,
+              "smoothness": 0.3,
+              "ao": 1.0
+            },
+            "HE_Brute_Fur_MAT": {
+              "albedo": "InoxBrute_fur_d",
+              "mask": "CH_Proxy_MRAO",
+              "normal": "CH_Proxy_Norm",
+              "emissive": null,
+              "cutout": true,
+              "cutoff": 0.5,
+              "emissive_boost": 1.0,
+              "two_sided": false,
+              "mask_mode": "texture"
+            },
+            "HE_Brute_Alt_01_MAT": {
+              "albedo": "InoxBrute_alt_map1_d",
+              "mask": "InoxBrute_alt_map1_mf",
+              "normal": "InoxBrute_alt_map1_n",
+              "emissive": null,
+              "cutout": false,
+              "cutoff": 0.5,
+              "emissive_boost": 1.0,
+              "two_sided": false,
+              "mask_mode": "flat",
+              "metallic": 0.0,
+              "smoothness": 0.3,
+              "ao": 1.0
+            },
+            "HE_Brute_Alt_Skirt_MAT": {
+              "albedo": "HE_Brute_Alt_Cloth",
+              "mask": "CH_Proxy_MRAO",
+              "normal": "HE_Brute_Alt_Cloth_N",
+              "emissive": null,
+              "cutout": true,
+              "cutoff": 0.5,
+              "emissive_boost": 1.0,
+              "two_sided": false,
+              "mask_mode": "texture"
+            },
+            "HE_Brute_Alt_02_MAT_2Side": {
+              "albedo": "InoxBrute_alt_map2_d",
+              "mask": "InoxBrute_alt_map2_mf",
+              "normal": "InoxBrute_alt_map2_n",
+              "emissive": null,
+              "cutout": false,
+              "cutoff": 0.5,
+              "emissive_boost": 1.0,
+              "two_sided": true,
+              "mask_mode": "flat",
+              "metallic": 0.0,
+              "smoothness": 0.3,
+              "ao": 1.0
+            },
+            "WP_Brute_Weapons_Mat": {
+              "albedo": "WP_InoxBrute_d",
+              "mask": "WP_InoxBrute_mf",
+              "normal": "WP_InoxBrute_n",
+              "emissive": null,
+              "cutout": false,
+              "cutoff": 0.5,
+              "emissive_boost": 1.0,
+              "two_sided": false,
+              "mask_mode": "texture"
+            }
+          }
         }
       },
       "bundle": "hero_brute_assets_all.bundle",

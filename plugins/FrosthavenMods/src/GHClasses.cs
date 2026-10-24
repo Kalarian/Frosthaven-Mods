@@ -188,7 +188,7 @@ namespace FrosthavenMods
             if (type != CActor.EType.Player) return true;
             string standIn = StandIn(prefabName);
             if (standIn == null) return true;
-            GameObject own = IsGloomhavenClass(prefabName, out ECharacter model) ? GHModel.Template(model) : null;
+            GameObject own = IsGloomhavenClass(prefabName, out ECharacter model) ? GHModel.Template(model, skinString) : null;
             if (own != null) { __result = own; return false; }
             prefabName = standIn;
             skinString = null;
@@ -284,6 +284,9 @@ namespace FrosthavenMods
             cfg.character = model;                                         // what GetCharacterConfigUI matches; left as Drifter it would break every Drifter lookup
             cfg.ID = model.ToString();
             cfg.Cards = new CharacterConfigUI.AbilityCardConfigUI[0];      // the Drifter's pre-built card prefabs and headers are hers
+            // the skin toggle on the party screen offers the class's own alternative looks (the Drifter's would be hers)
+            GHModel.Entry looks = GHModel.EntryFor(model);
+            cfg.alternativeSkins = looks != null ? looks.Skins.Keys.ToList() : new List<string>();
             if (cfg.cardSkin != null)
             {
                 // a skin of its own: GHCardFace gives it the class's card halves and pills (the Drifter's stays hers)

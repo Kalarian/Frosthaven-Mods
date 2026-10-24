@@ -374,6 +374,10 @@ def main():
             except Exception as e:  # noqa: BLE001 - the model is cosmetic, never block the data
                 warnings.append(f"{cls}: 3D model not copied: {e}")
 
+        # the names of its alternative looks, for the party screen's skin toggle ("Brute_SKIN_ALT": Boneguard)
+        for skin in models.get(cls, {}).get("skins", {}):
+            used_keys.add(f"{cls}_SKIN_{skin}")
+
         # the class's own sounds (see gh_sound.py); optional, the plugin keeps the Drifter's without
         if cls in models:
             try:

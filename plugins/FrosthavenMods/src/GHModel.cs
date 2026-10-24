@@ -83,8 +83,10 @@ namespace FrosthavenMods
             public List<WeaponSpec> Weapons = new List<WeaponSpec>();
             public Dictionary<string, MaterialSpec> Materials = new Dictionary<string, MaterialSpec>(StringComparer.Ordinal);
             public AnimationSpec Animation = new AnimationSpec();
+            public string Skin;                                                                    // null: the base look
+            public Dictionary<string, Entry> Skins = new Dictionary<string, Entry>(StringComparer.OrdinalIgnoreCase);   // "ALT" -> that look
 
-            public static Entry Parse(ECharacter model, JObject j, string folder)
+            public static Entry Parse(ECharacter model, JObject j, string folder, string skin = null)
             {
                 var e = new Entry
                 {
@@ -137,6 +139,18 @@ namespace FrosthavenMods
                     foreach (JProperty c in (a["gh_states"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>()) e.Animation.GhStates[c.Name] = (string)c.Value;
                     foreach (JProperty c in (a["gh_audio"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>()) e.Animation.GhAudio[c.Name] = (string)c.Value;
                 }
+                e.Skin = skin;
+                // the class's alternative looks: the base entry with what the skin changes (its prefabs, meshes, materials)
+                if (skin == null && j["skins"] is JObject skins)
+                    foreach (JProperty sk in skins.Properties())
+                    {
+                        if (!(sk.Value is JObject changes)) continue;
+                        var merged = (JObject)j.DeepClone();
+                        merged.Remove("skins");
+                        foreach (JProperty c in changes.Properties()) merged[c.Name] = c.Value.DeepClone();
+                        try { e.Skins[sk.Name] = Parse(model, merged, folder, sk.Name); }
+                        catch (Exception ex) { Plugin.Log.LogWarning($"Gloomhaven model: {model}'s {sk.Name} look is unusable: {ex.Message}"); }
+                    }
                 return e;
             }
 
@@ -175,8 +189,8 @@ namespace FrosthavenMods
             public AnimatorOverrideController Override;
         }
 
-        private static readonly Dictionary<ECharacter, Built> Templates = new Dictionary<ECharacter, Built>();
-        private static readonly HashSet<ECharacter> Failed = new HashSet<ECharacter>();
+        private static readonly Dictionary<string, Built> Templates = new Dictionary<string, Built>(StringComparer.OrdinalIgnoreCase);   // "Brute", "Brute_ALT"
+        private static readonly HashSet<string> Failed = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         private static GameObject _holder, _weaponSounds;
 
         /// <summary>The templates' parent: inactive and kept across scenes, so nothing here updates or renders while the
@@ -196,12 +210,14 @@ namespace FrosthavenMods
         /// <summary>The hero template for <paramref name="model"/>: built on first use, refreshed on each (the Drifter's
         /// controller it overrides dies with her bundle between scenes). Null when the pack brings no model or the build
         /// failed (logged once): the caller falls back to the Drifter stand-in.</summary>
-        internal static GameObject Template(ECharacter model)
+        internal static GameObject Template(ECharacter model, string skin = null)
         {
-            if (Failed.Contains(model)) return null;
             Entry e = EntryFor(model);
             if (e == null) return null;
-            if (Templates.TryGetValue(model, out Built b) && b.Carrier != null && b.Visual != null)
+            if (!string.IsNullOrEmpty(skin) && e.Skins.TryGetValue(skin, out Entry look)) e = look;   // an unknown skin: the base look
+            string key = e.Skin == null ? model.ToString() : model + "_" + e.Skin;
+            if (Failed.Contains(key)) return null;
+            if (Templates.TryGetValue(key, out Built b) && b.Carrier != null && b.Visual != null)
             {
                 try { Refresh(b); }
                 catch (Exception ex) { if (Reported.Add("refresh " + model)) Plugin.Log.LogWarning($"Gloomhaven model: could not refresh the {model}'s animator: {ex}"); }
@@ -211,13 +227,13 @@ namespace FrosthavenMods
             {
                 b = Build(e);
                 if (b == null) return null;           // the Drifter's prefab wasn't there this time: try again on the next call
-                Templates[model] = b;
+                Templates[key] = b;
                 return b.Carrier;
             }
             catch (Exception ex)
             {
-                Failed.Add(model);
-                Plugin.Log.LogError($"Gloomhaven model: could not build the {model}'s model, keeping the {GHClasses.StandInModel}'s: {ex}");
+                Failed.Add(key);
+                Plugin.Log.LogError($"Gloomhaven model: could not build the {key} model, keeping the {GHClasses.StandInModel}'s: {ex}");
                 return null;
             }
         }
