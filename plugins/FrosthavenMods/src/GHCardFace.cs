@@ -44,7 +44,7 @@ namespace FrosthavenMods
         private static readonly Rect Banner = new Rect(8, 8, 300, 79);
         private static readonly Rect TitleBand = new Rect(8, 87, 300, 30);
         private static readonly Rect TitleLine = new Rect(6, 84, 304, 18);
-        private static readonly Rect LevelTag = new Rect(268, 69, 39, 17);
+        private static readonly Rect LevelTag = new Rect(270, 68, 37, 14);   // clear of the banner's bottom line (y 85)
         private static readonly Rect TopHalf = new Rect(8, 117, 300, 191);
         private static readonly Rect BottomHalf = new Rect(8, 352, 300, 190);
         private static readonly Rect AttackPill = new Rect(8, 307, 118, 34);
@@ -155,22 +155,29 @@ namespace FrosthavenMods
                     text.fontSizeMin = 11f;
                     text.fontSizeMax = 19f;
                     text.alignment = TextAlignmentOptions.Center;
-                    text.color = new Color(0.96f, 0.93f, 0.86f);
+                    text.fontStyle = FontStyles.UpperCase | FontStyles.Bold;
+                    text.color = Color.white;
                 }
             }
             Level(full);
             Band(full, model);
         }
 
+        private static readonly Color LevelYellow = new Color(1f, 0.87f, 0.3f);
+
         /// <summary>"LVL 3" in the tag at the banner's corner: the template's own level number (the game writes it),
         /// and a small "LVL" before it.</summary>
         private static void Level(RectTransform full)
         {
             if (!(full.Find("LevelText") is RectTransform level) || !(level.GetComponent<TMP_Text>() is TMP_Text number)) return;
-            TopLeft(level, new Rect(LevelTag.x + 20, LevelTag.y, 17, LevelTag.height));
+            // the real tag writes both in the card's sans font (the template's level is in the title's serif), yellow
+            TMP_FontAsset sans = full.Find("Default action buttons/Default action top/TextMeshPro Text")?.GetComponent<TMP_Text>()?.font;
+            TopLeft(level, new Rect(LevelTag.x + 21, LevelTag.y, 15, LevelTag.height));
+            if (sans != null) number.font = sans;
             number.fontSize = 12f;
+            number.fontStyle = FontStyles.Bold;
             number.alignment = TextAlignmentOptions.Center;
-            number.color = new Color(1f, 0.85f, 0.35f);
+            number.color = LevelYellow;
             Transform t = full.Find("GH level label");
             if (t == null)
             {
@@ -178,14 +185,18 @@ namespace FrosthavenMods
                 t = go.transform;
                 t.SetParent(full, false);
                 var label = go.AddComponent<TextMeshProUGUI>();
-                label.font = number.font;
                 label.text = "LVL";
-                label.fontSize = 7f;
-                label.alignment = TextAlignmentOptions.Right;
-                label.color = new Color(0.86f, 0.86f, 0.82f);
                 label.raycastTarget = false;
             }
-            TopLeft(t, new Rect(LevelTag.x + 2, LevelTag.y, 18, LevelTag.height));
+            if (t.GetComponent<TMP_Text>() is TMP_Text lvl)
+            {
+                lvl.font = number.font;
+                lvl.fontSize = 8f;
+                lvl.fontStyle = FontStyles.Bold;
+                lvl.alignment = TextAlignmentOptions.Right;
+                lvl.color = LevelYellow;
+            }
+            TopLeft(t, new Rect(LevelTag.x + 2, LevelTag.y + 1, 19, LevelTag.height - 1));
             t.SetSiblingIndex(level.GetSiblingIndex());
         }
 
@@ -369,7 +380,7 @@ namespace FrosthavenMods
                 if (!Sources()) return;
                 Color tint = TintOf(model);
                 if (!TitleBands.ContainsKey(model))
-                    TitleBands[model] = _title == null ? null : _title.Recolour(tint).ToSprite($"GH {model} title band");
+                    TitleBands[model] = _title == null ? null : _title.Recolour(tint).Faint().ToSprite($"GH {model} title band");
 
                 CharacterConfigUI cfg = UIInfoTools.Instance != null ? UIInfoTools.Instance.GetCharacterConfigUI(model.ToString(), useDefault: false) : null;
                 AbilityCardUISkin skin = cfg?.cardSkin?.Skin;
@@ -576,6 +587,17 @@ namespace FrosthavenMods
                     float l = Lum(c);
                     return new Color(Mathf.Clamp01(l * Mathf.Lerp(1f, tint.r, 0.5f)), Mathf.Clamp01(l * Mathf.Lerp(1f, tint.g, 0.5f)), Mathf.Clamp01(l * Mathf.Lerp(1f, tint.b, 0.5f)), c.a);
                 }).ToArray());
+
+            /// <summary>Only the lighter middle: transparent where the picture is at its darkest (its edges), opaque
+            /// where it is lightest, smoothly in between. The real title band is opaque but its edges are the card's
+            /// own colour, so it shows as a faint glow; recoloured, the edges would show as a box.</summary>
+            internal Pixels Faint()
+            {
+                float lo = float.MaxValue, hi = float.MinValue;
+                foreach (Color c in Px) { float l = Lum(c); if (l < lo) lo = l; if (l > hi) hi = l; }
+                float range = Mathf.Max(0.001f, hi - lo);
+                return new Pixels(W, H, Px.Select(c => new Color(c.r, c.g, c.b, c.a * Mathf.SmoothStep(0f, 1f, (Lum(c) - lo) / range))).ToArray());
+            }
 
             /// <summary>The neutral background plus the stand-in's glow (how much brighter its version is) in the
             /// class's hue.</summary>
