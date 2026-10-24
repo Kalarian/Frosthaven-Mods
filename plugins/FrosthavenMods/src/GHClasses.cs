@@ -427,11 +427,15 @@ namespace FrosthavenMods
             Pill(group.Find("Default action top"), -84f, false);
             Pill(group.Find("Default action button"), 84f, true);
 
-            // the initiative's hex and chevrons, under the initiative text and under the unfocused mask
-            Transform mask = full.Find("UnfocusedMask"), initiative = full.Find("Initiative text");
-            int at = mask != null ? mask.GetSiblingIndex() : initiative != null ? initiative.GetSiblingIndex() : full.childCount;
-            Decor(full, "GH initiative ornament", "FH_UI_CARD_Initiative_Ornament", new Vector2(0f, -36f), new Vector2(110f, 45f), false, at);
-            Decor(full, "GH initiative hex", "FH_UI_CARD_Initiative", new Vector2(0f, -36f), new Vector2(68f, 34f), false, at + 1);
+            // the initiative's hex and chevrons, drawn right under the initiative text (ornament first, hex over it)
+            Transform initiative = full.Find("Initiative text");
+            Transform ornament = Decor(full, "GH initiative ornament", "FH_UI_CARD_Initiative_Ornament", new Vector2(0f, -36f), new Vector2(110f, 45f), false, -1);
+            Transform hex = Decor(full, "GH initiative hex", "FH_UI_CARD_Initiative", new Vector2(0f, -36f), new Vector2(68f, 34f), false, -1);
+            if (initiative != null)
+            {
+                Beneath(ornament, initiative);
+                Beneath(hex, initiative);
+            }
             // the skin paints the number in the Drifter's gold, invisible on the gold hex: dark ink, as the real cards
             TMPro.TMP_Text number = initiative != null ? initiative.GetComponent<TMPro.TMP_Text>() : null;
             if (number != null) number.color = InitiativeInk;
@@ -472,12 +476,21 @@ namespace FrosthavenMods
             if (image != null) image.color = Color.clear;
         }
 
+        /// <summary>Moves <paramref name="t"/> to just before <paramref name="above"/> in draw order if it isn't already
+        /// earlier (Unity's SetSiblingIndex counts after removing the moved child, so a child already in front must
+        /// stay put or it would land behind).</summary>
+        private static void Beneath(Transform t, Transform above)
+        {
+            if (t != null && t.GetSiblingIndex() > above.GetSiblingIndex()) t.SetSiblingIndex(above.GetSiblingIndex());
+        }
+
         /// <summary>A plain picture under <paramref name="parent"/> (found again by name when the band is laid out a
-        /// second time), centred at <paramref name="position"/>, drawn at <paramref name="siblingIndex"/>.</summary>
-        private static void Decor(Transform parent, string name, string sprite, Vector2 position, Vector2 size, bool mirrored, int siblingIndex)
+        /// second time), centred at <paramref name="position"/>, drawn at <paramref name="siblingIndex"/> (-1: left
+        /// where it is, at the end when new).</summary>
+        private static Transform Decor(Transform parent, string name, string sprite, Vector2 position, Vector2 size, bool mirrored, int siblingIndex)
         {
             Sprite picture = UiSprite(sprite);
-            if (picture == null) return;
+            if (picture == null) return null;
             Transform t = parent.Find(name);
             if (t == null)
             {
@@ -491,7 +504,8 @@ namespace FrosthavenMods
             var centre = new Vector2(0.5f, 0.5f);
             Place(t, centre, centre, position, size);
             t.localScale = new Vector3(mirrored ? -1f : 1f, 1f, 1f);
-            t.SetSiblingIndex(Mathf.Clamp(siblingIndex, 0, parent.childCount - 1));
+            if (siblingIndex >= 0) t.SetSiblingIndex(Mathf.Clamp(siblingIndex, 0, parent.childCount - 1));
+            return t;
         }
 
         private static readonly Dictionary<string, Sprite> UiSprites = new Dictionary<string, Sprite>();
