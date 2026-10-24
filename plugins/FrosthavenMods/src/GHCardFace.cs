@@ -225,11 +225,14 @@ namespace FrosthavenMods
             EffectsInitiative?.SetValue(effects, null);
             // the template's ghost-out also rings the card with animated smoke (its overlay UIFX_Overlay and a smoke
             // particle system); the real cards' CardEffects have neither (every slot empty), so their locked and
-            // discarded cards show none
+            // discarded cards show none. The overlay stays assigned (the ghost-out coroutine sets its material unchecked)
+            // and is hidden by a transparent canvas group, which the effect's SetActive and enable toggles don't undo.
             if (EffectsOverlay?.GetValue(effects) is Image overlay)
             {
-                overlay.gameObject.SetActive(false);
-                EffectsOverlay.SetValue(effects, null);
+                CanvasGroup hide = overlay.GetComponent<CanvasGroup>() ?? overlay.gameObject.AddComponent<CanvasGroup>();
+                hide.alpha = 0f;
+                hide.blocksRaycasts = false;
+                hide.interactable = false;
             }
             if (EffectsSmoke?.GetValue(effects) is Component smoke)   // a ParticleSystem (its module isn't referenced)
             {

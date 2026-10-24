@@ -287,6 +287,7 @@ namespace FrosthavenMods
             // the skin toggle on the party screen offers the class's own alternative looks (the Drifter's would be hers)
             GHModel.Entry looks = GHModel.EntryFor(model);
             cfg.alternativeSkins = looks != null ? looks.Skins.Keys.ToList() : new List<string>();
+            Plugin.Log.LogInfo($"Gloomhaven classes: {model}'s skin toggle offers {(cfg.alternativeSkins.Count > 0 ? string.Join(", ", cfg.alternativeSkins) : "no other looks")}");
             if (cfg.cardSkin != null)
             {
                 // a skin of its own: GHCardFace gives it the class's card halves and pills (the Drifter's stays hers)

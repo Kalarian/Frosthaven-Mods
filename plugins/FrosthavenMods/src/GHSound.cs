@@ -57,6 +57,9 @@ namespace FrosthavenMods
                 {
                     Name = ev.Key,
                     subItems = ev.Value.Select(c => new AudioSubItem { Clip = c, Volume = 1f }).ToArray(),
+                    // the copy constructor leaves these null, and playing reads stopEvents unchecked
+                    stopEvents = new AudioStopEvent[0],
+                    blockEvents = new AudioStopEvent[0],
                 };
                 AudioController.AddToCategory(like.category, item);
                 added++;
