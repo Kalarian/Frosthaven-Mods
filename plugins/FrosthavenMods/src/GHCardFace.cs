@@ -215,8 +215,8 @@ namespace FrosthavenMods
                 TopLeft(group, new Rect(0, 0, CardW, CardH));
                 Clear(group);
                 Clear(group.Find("Default action text"));
-                Pill(group.Find("Default action top"), AttackPill, -9f);
-                Pill(group.Find("Default action button"), MovePill, 9f);
+                Pill(group.Find("Default action top"), AttackPill, -9f, Art.GuiSprite("misc_gui", "Attack"));   // the template shows "Damage"
+                Pill(group.Find("Default action button"), MovePill, 9f, null);
             }
 
             Transform initiative = full.Find("Initiative text");
@@ -235,7 +235,7 @@ namespace FrosthavenMods
 
         /// <summary>A basic-action button at <paramref name="at"/>: its own image shows the skin's pill, its icon and
         /// number (switched off in the template) sit in the middle of the pill's straight part.</summary>
-        private static void Pill(Transform pill, Rect at, float shift)
+        private static void Pill(Transform pill, Rect at, float shift, Sprite iconSprite)
         {
             if (pill == null) return;
             TopLeft(pill, at);
@@ -248,7 +248,11 @@ namespace FrosthavenMods
                 icon.anchorMin = icon.anchorMax = icon.pivot = centre;
                 icon.anchoredPosition = new Vector2(shift - 10f, 0f);
                 icon.sizeDelta = new Vector2(18f, 18f);
-                if (icon.GetComponent<Image>() is Image picture) picture.color = Color.white;
+                if (icon.GetComponent<Image>() is Image picture)
+                {
+                    picture.color = Color.white;
+                    if (iconSprite != null) picture.sprite = iconSprite;
+                }
             }
             if (pill.Find("TextMeshPro Text") is RectTransform number)
             {
@@ -367,6 +371,8 @@ namespace FrosthavenMods
                 GHClasses.Pack pack = GHClasses.PackOf(model);
                 string dir = pack == null ? null : Path.Combine(pack.Folder, "art", model.ToString());
                 s = dir == null ? null : GHClasses.Picture(dir, "cardBanner", null);
+                // the real banner's mask (FH_UI_CARD_ImageMask) cuts its two top corners at 45 degrees, about 3.5 units
+                if (s != null) s = Pixels.Read(s).Bevel(Mathf.RoundToInt(3.5f * s.rect.width / GHCardFace.Banner.width)).ToSprite($"GH {model} banner");
                 if (s == null && GHClasses.Reported.Add("no banner " + model))
                     Plugin.Log.LogWarning($"Gloomhaven classes: no cardBanner.png for {model}; its cards have no banner picture (rerun tools/gh_port.py)");
                 Banners[model] = s;
@@ -459,13 +465,17 @@ namespace FrosthavenMods
             private static readonly Dictionary<string, Sprite> GlobalSprites = new Dictionary<string, Sprite>();
 
             /// <summary>A sprite of misc_globalsettings (loaded for the whole session) by name.</summary>
-            internal static Sprite GlobalSprite(string name)
+            internal static Sprite GlobalSprite(string name) => GuiSprite("misc_globalsettings", name);
+
+            /// <summary>A sprite of one of the bundles the game keeps loaded for the whole session, by name.</summary>
+            internal static Sprite GuiSprite(string bundleName, string name)
             {
-                if (GlobalSprites.TryGetValue(name, out Sprite cached)) return cached;
+                string key = bundleName + "/" + name;
+                if (GlobalSprites.TryGetValue(key, out Sprite cached)) return cached;
                 Sprite sprite = null;
                 foreach (AssetBundle bundle in AssetBundle.GetAllLoadedAssetBundles())
                 {
-                    if (bundle == null || bundle.name != "misc_globalsettings") continue;
+                    if (bundle == null || bundle.name != bundleName) continue;
                     sprite = bundle.LoadAsset<Sprite>(name);
                     break;
                 }
@@ -473,7 +483,7 @@ namespace FrosthavenMods
                     sprite = Resources.FindObjectsOfTypeAll<Sprite>().FirstOrDefault(s => s != null && s.name == name);
                 if (sprite == null && GHClasses.Reported.Add("no sprite " + name))
                     Plugin.Log.LogWarning($"Gloomhaven classes: the game has no {name} sprite loaded; that piece of the card is left out");
-                GlobalSprites[name] = sprite;
+                GlobalSprites[key] = sprite;
                 return sprite;
             }
         }
@@ -571,6 +581,20 @@ namespace FrosthavenMods
                     Color b = Px[i], t = top.Px[i];
                     float a = t.a + b.a * (1f - t.a);
                     px[i] = a <= 0f ? Color.clear : new Color((t.r * t.a + b.r * b.a * (1f - t.a)) / a, (t.g * t.a + b.g * b.a * (1f - t.a)) / a, (t.b * t.a + b.b * b.a * (1f - t.a)) / a, a);
+                }
+                return new Pixels(W, H, px);
+            }
+
+            /// <summary>The two top corners cut off at 45 degrees, <paramref name="cut"/> pixels deep (row 0 is the bottom).</summary>
+            internal Pixels Bevel(int cut)
+            {
+                var px = (Color[])Px.Clone();
+                for (int y = Math.Max(0, H - cut - 1); y < H; y++)
+                for (int x = 0; x < W; x++)
+                {
+                    float d = Mathf.Min(H - 1 - y + x, H - 1 - y + (W - 1 - x));   // steps from the nearer top corner
+                    float keep = Mathf.Clamp01(d - cut + 1f);
+                    if (keep < 1f) px[y * W + x].a *= keep;
                 }
                 return new Pixels(W, H, px);
             }
