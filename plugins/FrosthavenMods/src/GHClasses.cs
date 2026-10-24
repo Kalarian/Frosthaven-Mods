@@ -432,7 +432,12 @@ namespace FrosthavenMods
             int at = mask != null ? mask.GetSiblingIndex() : initiative != null ? initiative.GetSiblingIndex() : full.childCount;
             Decor(full, "GH initiative ornament", "FH_UI_CARD_Initiative_Ornament", new Vector2(0f, -36f), new Vector2(110f, 45f), false, at);
             Decor(full, "GH initiative hex", "FH_UI_CARD_Initiative", new Vector2(0f, -36f), new Vector2(68f, 34f), false, at + 1);
+            // the skin paints the number in the Drifter's gold, invisible on the gold hex: dark ink, as the real cards
+            TMPro.TMP_Text number = initiative != null ? initiative.GetComponent<TMPro.TMP_Text>() : null;
+            if (number != null) number.color = InitiativeInk;
         }
+
+        private static readonly Color InitiativeInk = new Color(0.13f, 0.09f, 0.05f);
 
         /// <summary>The card skin (AbilityCardUI.SetSkin, after MakeAbilityCard) is where the template's bar sprites
         /// come back onto the two buttons, so the band is laid out again after skinning.</summary>
