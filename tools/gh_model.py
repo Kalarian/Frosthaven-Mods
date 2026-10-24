@@ -23,6 +23,7 @@ Needs the Frosthaven install too (the Drifter's bundle, for her controller's sta
 import base64
 import hashlib
 import json
+import re
 import shutil
 import struct
 import sys
@@ -114,7 +115,10 @@ def _catalog(gh):
 
 
 def bundles_for(gh, cls):
-    """The bundle files the catalog lists for the class's hero prefab (the hero bundle among them)."""
+    """The bundle files the catalog lists for the class's hero prefab (the hero bundle among them). The base game's
+    heroes are keyed "Assets/_AssetBundles/heroes/<Class>.prefab" with a dependency list; a DLC hero (Jaws of the
+    Lion) is keyed by its bundle's own name, dlc_<dlc>_hero_<class>_assets_all_<hash>.bundle, and is self-contained
+    (no dependency list, no externals)."""
     ids, buckets, entries = _catalog(gh)
     want = f"Assets/_AssetBundles/heroes/{cls}.prefab"
     for k, ents in buckets:
@@ -123,7 +127,11 @@ def bundles_for(gh, cls):
             if entry[2] < 0:
                 raise ValueError(f"{want}: no dependency list in catalog.json")
             return [Path(ids[entries[dep][0]].replace(RUNTIME_PATH, "")).name for dep in buckets[entry[2]][1]]
-    raise ValueError(f"no Gloomhaven hero {cls!r} in catalog.json (looked for {want})")
+    dlc = re.compile(rf"^dlc_\w+?_hero_{re.escape(cls.lower())}_assets_all_[0-9a-f]+\.bundle$")
+    for k, ents in buckets:
+        if isinstance(k, str) and dlc.match(k):
+            return [Path(ids[entries[ents[0]][0]].replace(RUNTIME_PATH, "")).name]
+    raise ValueError(f"no Gloomhaven hero {cls!r} in catalog.json (looked for {want} and a dlc_*_hero_{cls.lower()}_* bundle)")
 
 
 # ---------------------------------------------------------------- reading a bundle
@@ -271,10 +279,11 @@ def describe(bundle_path, cls, fh_bundle_path, skin=None, animation=None):
     <animation> (a skin is the same rig and animator with other meshes and materials)."""
     b = Bundle(bundle_path)
     suffix = f"_{skin}" if skin else ""
-    hero_path = f"Assets/_AssetBundles/heroes/{cls}{suffix}.prefab"
+    # the hero wrapper: Assets/_AssetBundles/heroes/<cls>.prefab in the base game, .../CharacterPrefabs/<cls>.prefab in a DLC
+    hero_path = next((p for p in b.container if p.lower().endswith(f"/{cls.lower()}{suffix.lower()}.prefab")), None)
     model_path = next((p for p in b.container if p.lower().endswith(f"/he_{cls.lower()}{suffix.lower()}_pr.prefab")), None)
-    if hero_path not in b.container or model_path is None:
-        raise ValueError(f"{bundle_path.name} lacks {hero_path} or HE_{cls}_PR.prefab; has {sorted(b.container)}")
+    if hero_path is None or model_path is None:
+        raise ValueError(f"{bundle_path.name} lacks {cls}{suffix}.prefab or HE_{cls}{suffix}_PR.prefab; has {sorted(b.container)}")
     hero_go, model_go = b.container[hero_path], b.container[model_path]
 
     cm = next(t for n, t in b.components(hero_go) if n == "CharacterManager")
@@ -564,9 +573,9 @@ def _smb_effects(smbs, caster_only=False):
 def export(gh, fh, cls, out):
     """Copy the class's hero bundle into <out>/bundles and return the pack.json "model" entry for the class."""
     names = bundles_for(gh, cls)
-    hero = next((n for n in names if n.startswith(f"hero_{cls.lower()}_")), None)
+    hero = next((n for n in names if f"hero_{cls.lower()}_" in n), None)
     if hero is None:
-        raise ValueError(f"{cls}: catalog lists no hero_{cls.lower()}_* bundle among {names}")
+        raise ValueError(f"{cls}: catalog lists no *hero_{cls.lower()}_* bundle among {names}")
     src = gh / BUNDLES / hero
     if not src.exists():
         raise FileNotFoundError(f"{cls}: Gloomhaven bundle missing: {src}")
