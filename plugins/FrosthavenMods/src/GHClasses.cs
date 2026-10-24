@@ -398,50 +398,116 @@ namespace FrosthavenMods
             DefaultActionsInTheMiddle(__instance);
         }
 
-        /// <summary>Frosthaven's own cards (one prefab per card in hero_&lt;class&gt;cards) show the basic Attack 2 and
-        /// Move 2 buttons as two small pills on the middle line, left and right of the initiative. The generated-card
-        /// template (AbilityCard-FH*) keeps the same two buttons, with the same children (icon, number, hover highlight),
-        /// but as a vertical strip hanging off the card's right edge, painted with tall bar artwork
-        /// (Kro_HUD_Card_AltBtns_*, Kro_HUD_Card_Test_DEF_Actions*) that smears when the rectangle is laid flat. The
-        /// Gloomhaven-era "AbilityCard" template in misc_gui draws the same buttons as plain horizontal pills with no
-        /// background at all (icon, number and the highlight only), so a Gloomhaven class's card gets that: the bar
-        /// artwork off, the two pills 90x22 either side of the initiative (whose text sits at y -36 in Full), icon and
-        /// number centred in each.</summary>
-        private static void DefaultActionsInTheMiddle(AbilityCardUI card)
+        /// <summary>Frosthaven's own cards (one prefab per card in hero_&lt;class&gt;cards) draw the middle band as a
+        /// gold initiative hex with chevrons either side and the two basic actions, Attack 2 and Move 2, as framed
+        /// slanted pills left and right of it. The generated-card template (AbilityCard-FH*) keeps the same two buttons,
+        /// with the same children (icon, number, hover highlight), but as a vertical strip hanging off the card's right
+        /// edge, painted with tall bar artwork (Kro_HUD_Card_AltBtns_*, Kro_HUD_Card_Test_DEF_Actions*) that smears
+        /// when the rectangle is laid flat; the card skin and every select/deselect put those bar sprites back. So a
+        /// Gloomhaven class's card gets: the bar artwork drawn clear (the images stay, catching clicks and taking the
+        /// skin's sprite swaps invisibly), the template's own icon and number switched on, and the band's artwork from
+        /// misc_globalsettings, a bundle the game keeps loaded: the hex (FH_UI_CARD_Initiative) and chevrons
+        /// (FH_UI_CARD_Initiative_Ornament) behind the initiative, and each pill's fill (FH_UI_CARD_DEFAction_BGR_Inactive)
+        /// and gold frame (FH_UI_CARD_DEFAction_Frame_Active), mirrored on the right so the slants face the hex. Sizes
+        /// follow the real cards scaled to this template's width (294 against 316).</summary>
+        private static void DefaultActionsInTheMiddle(AbilityCardUI card, bool warn = true)
         {
-            Transform group = card.transform.Find("Full/Default action buttons");
+            Transform full = card.transform.Find("Full");
+            Transform group = full != null ? full.Find("Default action buttons") : null;
             if (group == null)
             {
-                if (Reported.Add("no default action buttons"))
+                if (warn && Reported.Add("no default action buttons"))
                     Plugin.Log.LogWarning("Gloomhaven classes: the card has no Full/Default action buttons; its basic actions stay where the template puts them");
                 return;
             }
             var centre = new Vector2(0.5f, 0.5f);
             Place(group, centre, centre, new Vector2(0f, -36f), new Vector2(270f, 50f));
-            Background(group, false);
-            Background(group.Find("Default action text"), false);
-            Transform attack = group.Find("Default action top"), move = group.Find("Default action button");
-            Pill(attack, -78f);
-            Pill(move, 78f);
+            Invisible(group);
+            Invisible(group.Find("Default action text"));
+            Pill(group.Find("Default action top"), -84f, false);
+            Pill(group.Find("Default action button"), 84f, true);
+
+            // the initiative's hex and chevrons, under the initiative text and under the unfocused mask
+            Transform mask = full.Find("UnfocusedMask"), initiative = full.Find("Initiative text");
+            int at = mask != null ? mask.GetSiblingIndex() : initiative != null ? initiative.GetSiblingIndex() : full.childCount;
+            Decor(full, "GH initiative ornament", "FH_UI_CARD_Initiative_Ornament", new Vector2(0f, -36f), new Vector2(110f, 45f), false, at);
+            Decor(full, "GH initiative hex", "FH_UI_CARD_Initiative", new Vector2(0f, -36f), new Vector2(68f, 34f), false, at + 1);
         }
 
-        /// <summary>One basic-action button as a flat pill centred at <paramref name="x"/> on the group's middle line.</summary>
-        private static void Pill(Transform pill, float x)
+        /// <summary>The card skin (AbilityCardUI.SetSkin, after MakeAbilityCard) is where the template's bar sprites
+        /// come back onto the two buttons, so the band is laid out again after skinning.</summary>
+        [HarmonyPatch(typeof(AbilityCardUI), "SetSkin", typeof(AbilityCardUISkin))]
+        [HarmonyPostfix]
+        private static void DefaultActionsAfterSkin(AbilityCardUI __instance)
+        {
+            CCharacterClass cls = __instance.ClassID != null ? ClassById(__instance.ClassID) : null;
+            if (cls == null || !IsGloomhavenClass(cls.AbilityCardArt, out _)) return;
+            DefaultActionsInTheMiddle(__instance, warn: false);
+        }
+
+        /// <summary>One basic-action button as a framed slanted pill centred at <paramref name="x"/> on the band.</summary>
+        private static void Pill(Transform pill, float x, bool mirrored)
         {
             if (pill == null) return;
             var centre = new Vector2(0.5f, 0.5f);
-            Place(pill, centre, centre, new Vector2(x, 0f), new Vector2(90f, 22f));
-            Background(pill, false);
+            var size = new Vector2(96f, 27f);
+            Place(pill, centre, centre, new Vector2(x, 0f), size);
+            Invisible(pill);
+            Decor(pill, "GH pill fill", "FH_UI_CARD_DEFAction_BGR_Inactive", Vector2.zero, size, mirrored, 0);
+            Decor(pill, "GH pill frame", "FH_UI_CARD_DEFAction_Frame_Active", Vector2.zero, size, mirrored, 1);
             Transform icon = pill.Find("Image"), number = pill.Find("TextMeshPro Text"), highlight = pill.Find("InteractabilityHighlight");
-            if (icon is RectTransform i) { i.anchorMin = i.anchorMax = centre; i.anchoredPosition = new Vector2(-11f, 0f); }
-            if (number is RectTransform n) { n.anchorMin = n.anchorMax = centre; n.anchoredPosition = new Vector2(10f, 0f); }
+            if (icon is RectTransform i) { i.gameObject.SetActive(true); i.anchorMin = i.anchorMax = centre; i.anchoredPosition = new Vector2(-11f, 0f); }
+            if (number is RectTransform n) { n.gameObject.SetActive(true); n.anchorMin = n.anchorMax = centre; n.anchoredPosition = new Vector2(10f, 0f); }
             if (highlight is RectTransform h) { h.anchoredPosition = Vector2.zero; h.sizeDelta = Vector2.zero; }
         }
 
-        private static void Background(Transform t, bool on)
+        private static void Invisible(Transform t)
         {
             Image image = t != null ? t.GetComponent<Image>() : null;
-            if (image != null) image.enabled = on;
+            if (image != null) image.color = Color.clear;
+        }
+
+        /// <summary>A plain picture under <paramref name="parent"/> (found again by name when the band is laid out a
+        /// second time), centred at <paramref name="position"/>, drawn at <paramref name="siblingIndex"/>.</summary>
+        private static void Decor(Transform parent, string name, string sprite, Vector2 position, Vector2 size, bool mirrored, int siblingIndex)
+        {
+            Sprite picture = UiSprite(sprite);
+            if (picture == null) return;
+            Transform t = parent.Find(name);
+            if (t == null)
+            {
+                var go = new GameObject(name, typeof(RectTransform), typeof(Image));
+                t = go.transform;
+                t.SetParent(parent, false);
+                Image image = go.GetComponent<Image>();
+                image.sprite = picture;
+                image.raycastTarget = false;
+            }
+            var centre = new Vector2(0.5f, 0.5f);
+            Place(t, centre, centre, position, size);
+            t.localScale = new Vector3(mirrored ? -1f : 1f, 1f, 1f);
+            t.SetSiblingIndex(Mathf.Clamp(siblingIndex, 0, parent.childCount - 1));
+        }
+
+        private static readonly Dictionary<string, Sprite> UiSprites = new Dictionary<string, Sprite>();
+
+        /// <summary>A sprite of misc_globalsettings (loaded for the whole session) by name.</summary>
+        private static Sprite UiSprite(string name)
+        {
+            if (UiSprites.TryGetValue(name, out Sprite cached)) return cached;
+            Sprite sprite = null;
+            foreach (AssetBundle bundle in AssetBundle.GetAllLoadedAssetBundles())
+            {
+                if (bundle == null || bundle.name != "misc_globalsettings") continue;
+                sprite = bundle.LoadAsset<Sprite>(name);
+                break;
+            }
+            if (sprite == null)
+                sprite = Resources.FindObjectsOfTypeAll<Sprite>().FirstOrDefault(s => s != null && s.name == name);
+            if (sprite == null && Reported.Add("no sprite " + name))
+                Plugin.Log.LogWarning($"Gloomhaven classes: the game has no {name} sprite loaded; that piece of the card band is left out");
+            if (sprite != null) UiSprites[name] = sprite;
+            return sprite;
         }
 
         private static void Place(Transform t, Vector2 anchor, Vector2 pivot, Vector2 position, Vector2 size)
