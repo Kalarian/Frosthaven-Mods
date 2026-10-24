@@ -395,6 +395,40 @@ namespace FrosthavenMods
             if (image != null) image.enabled = false;
             else if (Reported.Add("no Image_CardArt"))
                 Plugin.Log.LogWarning("Gloomhaven classes: the mini card has no Container_CardArt/Mask_CardArt/Image_CardArt; its template painting stays");
+            DefaultActionsInTheMiddle(__instance);
+        }
+
+        /// <summary>Frosthaven's own cards (one prefab per card in hero_&lt;class&gt;cards) show the basic Attack 2 and
+        /// Move 2 buttons as two small pills in the middle band, above-left and below-right of the initiative. The
+        /// generated-card template (AbilityCard-FH*) keeps the same two buttons, with the same children, but anchored
+        /// as a vertical strip hanging off the card's right edge. The sibling Gloomhaven-era "AbilityCard" template in
+        /// misc_gui still has them laid out as the horizontal pills (its "Default action buttons" group: centred
+        /// 270x50, top pill at its top-left 95x21, bottom pill at its bottom-right 94x20.5), so a Gloomhaven class's
+        /// card gets those rectangles, with the group moved down so that it is centred on this template's initiative
+        /// (y -36 against -23.4 inside the Gloomhaven group).</summary>
+        private static void DefaultActionsInTheMiddle(AbilityCardUI card)
+        {
+            Transform group = card.transform.Find("Full/Default action buttons");
+            if (group == null)
+            {
+                if (Reported.Add("no default action buttons"))
+                    Plugin.Log.LogWarning("Gloomhaven classes: the card has no Full/Default action buttons; its basic actions stay where the template puts them");
+                return;
+            }
+            Place(group, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0f, -36f + 23.4f), new Vector2(270f, 50f));
+            Transform top = group.Find("Default action top"), bottom = group.Find("Default action button");
+            if (top != null) Place(top, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(7f, -35.62f), new Vector2(95f, 21f));
+            if (bottom != null) Place(bottom, new Vector2(1f, 0f), new Vector2(1f, 0f), new Vector2(-8.75f, -12.58f), new Vector2(93.7f, 20.5f));
+        }
+
+        private static void Place(Transform t, Vector2 anchor, Vector2 pivot, Vector2 position, Vector2 size)
+        {
+            if (!(t is RectTransform rect)) return;
+            rect.anchorMin = anchor;
+            rect.anchorMax = anchor;
+            rect.pivot = pivot;
+            rect.anchoredPosition = position;
+            rect.sizeDelta = size;
         }
 
         // ---- the corner badge (lost / persistent / round / XP icons) of each card half
