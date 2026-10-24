@@ -52,21 +52,21 @@ SOUNDS = {
 # shout is not here: its roar is on the effect itself (SFXOnEnable on P_Brute_Shout), which the plugin re-adds.
 STATE_EVENTS = {}
 
-# Per-clip gain (linear, before the peak clamp). Gloomhaven's per-event volume settings are in its unreadable audio
-# table; a clip it plainly played louder than its file is boosted here. The earthquake is a 7-second rumble almost
-# entirely below 200 Hz: at its file level it hides under the swing and hit sounds.
-GAIN = {"Brute_Earthquake_-_new_timing": 1.8}
+# Every clip is levelled to this peak. Gloomhaven's per-event volume settings are in its unreadable audio table, and
+# its files sit anywhere between 0.35 (the shield power-up) and 0.8; played as they are at one volume, the quiet ones
+# (the roars, the shield power-up) were lost under the game's own hit and step sounds.
+PEAK = 0.9
 
 
-def _mono(wav_bytes, gain=1.0):
+def _mono(wav_bytes):
     data, rate = soundfile.read(io.BytesIO(wav_bytes), dtype="float32", always_2d=True)
-    mono = data.mean(axis=1) * gain
+    mono = data.mean(axis=1)
     if rate != RATE:
         n = int(round(len(mono) * RATE / rate))
         mono = np.interp(np.linspace(0, len(mono) - 1, n), np.arange(len(mono)), mono).astype("float32")
     peak = float(np.abs(mono).max()) if len(mono) else 0.0
-    if peak > 0.98:
-        mono *= 0.98 / peak
+    if peak > 0.0:
+        mono *= PEAK / peak
     return mono
 
 
@@ -89,7 +89,7 @@ def export(gh, cls, out):
         if name not in wanted or name in written:
             continue
         for _, wav in o.read().samples.items():
-            soundfile.write(folder / f"{name}.wav", _mono(wav, GAIN.get(name, 1.0)), RATE, subtype="PCM_16")
+            soundfile.write(folder / f"{name}.wav", _mono(wav), RATE, subtype="PCM_16")
             written.add(name)
             break
     missing = sorted(wanted - written)

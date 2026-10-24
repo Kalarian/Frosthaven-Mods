@@ -56,6 +56,7 @@ namespace FrosthavenMods
                 var item = new AudioItem(like)
                 {
                     Name = ev.Key,
+                    Volume = 1f,   // the stand-in event's own level is hers; the clips are levelled by the pack build (gh_sound.py)
                     subItems = ev.Value.Select(c => new AudioSubItem { Clip = c, Volume = 1f }).ToArray(),
                     // the copy constructor leaves these null, and playing reads stopEvents unchecked
                     stopEvents = new AudioStopEvent[0],

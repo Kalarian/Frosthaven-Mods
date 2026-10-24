@@ -277,6 +277,8 @@ namespace FrosthavenMods
                     t.SetActive(true);                                       // activeSelf under the inactive holder: pooled copies come out active, like a prefab's
                     try { Dress(t, spec, e, set, stateAudio); }
                     catch (Exception ex) { Plugin.Log.LogWarning($"Gloomhaven effects: {spec.Name} is only partly set up: {ex.Message}"); }
+                    try { Audit(t, spec.Name, set); }
+                    catch (Exception ex) { Plugin.Log.LogWarning($"Gloomhaven effects: {spec.Name} could not be audited: {ex.Message}"); }
                     set.Templates[spec.Name] = t;
                 }
                 Plugin.Log.LogInfo($"Gloomhaven effects: {set.Templates.Count} of {e.Model}'s effects ready, {set.Made.Values.Count(m => m != null)} materials rebuilt on Frosthaven's shaders"
@@ -387,8 +389,65 @@ namespace FrosthavenMods
             }
             foreach (string kw in spec.Keywords) m.EnableKeyword(kw);
             if (spec.Queue >= 0) m.renderQueue = spec.Queue;
+            if (spec.Shader == "VFX/ParticleMasterUnlitAdd_Shd" || spec.Shader == "VFX/SimpleInvisibleShd")
+            {
+                Additive(m);
+                if (spec.Shader == "VFX/SimpleInvisibleShd") m.SetColor("_Color", Color.clear);
+            }
             set.Made[name] = m;
             return m;
+        }
+
+        /// <summary>The unlit particle shader's additive mode, as the sparks' material records it (a variant the game
+        /// ships, since its own effects use it).</summary>
+        private static void Additive(Material m)
+        {
+            m.SetFloat("_Mode", 4f);
+            m.SetFloat("_SrcBlend", 5f);   // SrcAlpha
+            m.SetFloat("_DstBlend", 1f);   // One
+            m.SetFloat("_ZWrite", 0f);
+            m.SetFloat("_Cull", 0f);
+            m.EnableKeyword("_ALPHABLEND_ON");
+            m.renderQueue = 3000;
+        }
+
+        /// <summary>One log line per renderer of a template, listing what each slot ended up with, so a pink or black part
+        /// can be traced to its material. A slot whose shader the game cannot run (a Gloomhaven-only one that slipped
+        /// through) gets an additive unlit stand-in with the same texture; a renderer left with nothing usable is turned off.</summary>
+        private static void Audit(GameObject template, string name, Set set)
+        {
+            foreach (Renderer r in template.GetComponentsInChildren<Renderer>(true))
+            {
+                Material[] mats = r.sharedMaterials;
+                var parts = new List<string>();
+                bool changed = false, usable = false;
+                for (int i = 0; i < mats.Length; i++)
+                {
+                    Material m = mats[i];
+                    if (m == null) { parts.Add("-"); continue; }
+                    Shader sh = m.shader;
+                    bool ok = sh != null && sh.isSupported && sh.name != "Hidden/InternalErrorShader";
+                    if (!ok)
+                    {
+                        Shader unlit = FindShader("Particles/Standard Unlit");
+                        if (unlit != null)
+                        {
+                            var fix = new Material(unlit) { name = m.name + " (stand-in)", hideFlags = HideFlags.DontUnloadUnusedAsset, mainTexture = m.mainTexture };
+                            Additive(fix);
+                            mats[i] = fix;
+                            changed = true;
+                            ok = true;
+                        }
+                    }
+                    usable |= ok;
+                    parts.Add($"{m.name} [{(sh != null ? sh.name : "no shader")}{(ok ? "" : " UNSUPPORTED")}{(m.mainTexture != null ? ", " + m.mainTexture.name : "")}]");
+                }
+                if (changed) r.sharedMaterials = mats;
+                if (!usable && mats.Length > 0) r.enabled = false;
+                string path = r.transform == template.transform ? "." : r.transform.name;
+                string mode = r is ParticleSystemRenderer psr ? " " + psr.renderMode : "";
+                Plugin.Log.LogInfo($"Gloomhaven effects: {name}/{path}{mode}{(r.enabled ? "" : " (off)")}: {string.Join("; ", parts)}");
+            }
         }
 
         /// <summary>Frosthaven's shader for a Gloomhaven effect material: the same name (the shared VFX library), or a
@@ -405,6 +464,10 @@ namespace FrosthavenMods
                      : src == 1f ? "Legacy Shaders/Particles/Alpha Blended Premultiply" : "Legacy Shaders/Particles/Alpha Blended";
             }
             else if (name == "Particles/Standard Surface") name = "Particles/Standard Unlit";
+            // Frosthaven's copy of the additive unlit shader drew the dagger glint on an opaque black square, and its
+            // "invisible" shader is not to be trusted either: both become the unlit particle shader in its additive mode,
+            // the one the sparks use (Additive below), the invisible one with a clear colour
+            else if (name == "VFX/ParticleMasterUnlitAdd_Shd" || name == "VFX/SimpleInvisibleShd") name = "Particles/Standard Unlit";
             else if (name == "VFX/LitDissolveShd")
                 // the one lit (surface) shader among them: Frosthaven's copy draws magenta under its render pipeline
                 // (the earthquake's flying rocks); the pipeline's own lit shader instead, plain rocks without the dissolve

@@ -638,7 +638,7 @@ namespace FrosthavenMods
                 // The behaviours exist once the Animator has bound its controller; a clone spawned under an inactive
                 // holder (the class screen) binds later, so wait for it then (the game's own preview code does the same).
                 if (animator.isInitialized && Retime(animator, b.Entry) > 0) return;
-                if (Plugin.Instance != null) Plugin.Instance.StartCoroutine(RetimeWhenReady(animator, b.Entry));
+                CoroutineHost.Get().StartCoroutine(RetimeWhenReady(animator, b.Entry));
             }
             catch (Exception e)
             {
@@ -670,6 +670,9 @@ namespace FrosthavenMods
         // ------------------------------------------------------------------ Gloomhaven-only card animations
 
         private static AnimatorOverrideController _lentOn;
+        private static Animator _lentAnimator;
+        private static HashSet<int> _lentHashes;
+        private static float _lentAt;
         private static AnimationClip _lentSlot, _lentBefore;
         private static CastEffectsSMB _lentSound;
         private static string _lentSoundBefore;
@@ -688,12 +691,14 @@ namespace FrosthavenMods
         [HarmonyPrefix]
         private static void LendClip(GameObject objectToAnimate, List<string> statesToTry)
         {
-            GiveBack();
-            if (objectToAnimate == null || statesToTry == null) return;
+            Animator animator = objectToAnimate != null ? MF.GetGameObjectAnimator(objectToAnimate) : null;
+            // a lend still playing is given back only when its own animator asks for its next animation; another actor's
+            // request (the pushed enemy's hurt) must not cut the roar short
+            if (_lentOn != null && (animator == null || animator == _lentAnimator || !StillLent())) GiveBack();
+            if (animator == null || statesToTry == null) return;
             try
             {
-                Animator animator = MF.GetGameObjectAnimator(objectToAnimate);
-                if (!(animator != null && animator.runtimeAnimatorController is AnimatorOverrideController ovr)) return;
+                if (!(animator.runtimeAnimatorController is AnimatorOverrideController ovr)) return;
                 Built b = Templates.Values.FirstOrDefault(t => t != null && t.Override == ovr);
                 if (b == null) return;
                 AnimationSpec anim = b.Entry.Animation;
@@ -721,6 +726,9 @@ namespace FrosthavenMods
                 AnimationClip slot = ovr.runtimeAnimatorController?.animationClips.FirstOrDefault(c => c != null && c.name == herClip);
                 if (gh == null || slot == null) return;
                 _lentOn = ovr;
+                _lentAnimator = animator;
+                _lentHashes = new HashSet<int> { Animator.StringToHash(fallback), Animator.StringToHash(fallback + "-1"), Animator.StringToHash(fallback + "-2") };
+                _lentAt = Time.realtimeSinceStartup;
                 _lentSlot = slot;
                 _lentBefore = ovr[slot];
                 ovr[slot] = gh;
@@ -739,25 +747,33 @@ namespace FrosthavenMods
                     _lentFxBefore = GHVfx.Keep(cast);
                     GHVfx.Apply(cast, play, b.Entry);
                 }
-                Plugin.Instance.StartCoroutine(GiveBackAfter(animator, fallback));
+                CoroutineHost.Get().StartCoroutine(GiveBackAfter(animator));
             }
             catch (Exception e)
             {
-                if (Reported.Add("lend clip")) Plugin.Log.LogWarning($"Gloomhaven model: could not play a Gloomhaven-only card animation: {e.Message}");
+                if (Reported.Add("lend clip")) Plugin.Log.LogWarning($"Gloomhaven model: could not play a Gloomhaven-only card animation: {e}");
             }
+        }
+
+        /// <summary>Whether the lent play is still going: the lending animator is in the state (or in a transition), or
+        /// the lend is too fresh for the animator to have entered it yet.</summary>
+        private static bool StillLent()
+        {
+            if (_lentAnimator == null || _lentHashes == null) return false;
+            if (Time.realtimeSinceStartup - _lentAt < 0.3f) return true;
+            if (Time.realtimeSinceStartup - _lentAt > 10f) return false;
+            try { return _lentHashes.Contains(_lentAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash) || _lentAnimator.IsInTransition(0); }
+            catch (Exception) { return false; }
         }
 
         /// <summary>Gives the lent clip slot its own clip back once the animator has left the state (and any
         /// transition out of it), or after 10 seconds.</summary>
-        private static System.Collections.IEnumerator GiveBackAfter(Animator animator, string state)
+        private static System.Collections.IEnumerator GiveBackAfter(Animator animator)
         {
             AnimationClip slot = _lentSlot;
-            var hashes = new HashSet<int> { Animator.StringToHash(state), Animator.StringToHash(state + "-1"), Animator.StringToHash(state + "-2") };
-            float until = Time.realtimeSinceStartup + 10f;
             yield return null;
             yield return null;
-            while (animator != null && Time.realtimeSinceStartup < until
-                   && (hashes.Contains(animator.GetCurrentAnimatorStateInfo(0).shortNameHash) || animator.IsInTransition(0)))
+            while (_lentSlot == slot && animator != null && StillLent())
                 yield return null;
             if (_lentSlot == slot) GiveBack();
         }
@@ -773,6 +789,8 @@ namespace FrosthavenMods
             _lentFx = null;
             _lentFxBefore = null;
             _lentOn = null;
+            _lentAnimator = null;
+            _lentHashes = null;
             _lentSlot = _lentBefore = null;
             _lentSound = null;
             _lentSoundBefore = null;
