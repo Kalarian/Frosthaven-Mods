@@ -164,6 +164,14 @@ namespace FrosthavenMods
             Locked(full);
         }
 
+        /// <summary>An effect or highlight layer (or inside one), not card art.</summary>
+        private static bool Effect(Transform t, Transform full)
+        {
+            for (; t != null && t != full; t = t.parent)
+                if (t.name.StartsWith("FX_") || t.name.StartsWith("UIFX") || t.name.Contains("Highlight") || t.name == "UnfocusedMask") return true;
+            return false;
+        }
+
         private static readonly System.Reflection.FieldInfo EffectsInitiative = AccessTools.Field(typeof(CardEffects), "initiativeTxt");
         private static readonly System.Reflection.FieldInfo EffectsTexts = AccessTools.Field(typeof(CardEffects), "txtComp");
 
@@ -174,11 +182,21 @@ namespace FrosthavenMods
         /// class's ink, so the initiative is taken out of the effect.</summary>
         private static void Locked(RectTransform full)
         {
-            if (full.GetComponent<ImageMaterialSwapper>() == null && Art.Greyscale != null)
+            ImageMaterialSwapper swapper = full.GetComponent<ImageMaterialSwapper>();
+            if (swapper == null && Art.Greyscale != null)
             {
-                ImageMaterialSwapper swapper = full.gameObject.AddComponent<ImageMaterialSwapper>();
+                swapper = full.gameObject.AddComponent<ImageMaterialSwapper>();
                 swapper.TargetMaterial = Art.Greyscale;
-                swapper.UseChildImages = true;
+            }
+            if (swapper != null)
+            {
+                // only the card's artwork: the template also holds effect layers drawn as plain white rectangles that their
+                // own material keeps invisible (UIFX_Overlay, FX_*, highlights), and images drawn clear; in greyscale both
+                // would show as a grey sheet over the card. The real cards' swapper takes all child images (they have none)
+                swapper.UseChildImages = false;
+                swapper.Images = full.GetComponentsInChildren<Image>(true)
+                    .Where(i => i.sprite != null && i.color.a > 0f && !i.TryGetComponent<Mask>(out _) && !Effect(i.transform, full))
+                    .ToArray();
             }
             CardEffects effects = full.GetComponent<CardEffects>();
             if (effects == null) return;
