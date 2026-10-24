@@ -264,6 +264,7 @@ namespace FrosthavenMods
             Sets[key] = set;
             try
             {
+                GHSound.Ensure(e.Model, e.Folder);   // an effect's own sound script is kept only for a registered event: register first
                 Dictionary<string, GameObject> roots = bundle.Roots();
                 LoadMaterialBundles(e, set);
                 var stateAudio = new HashSet<string>(e.Animation.States.Values.Select(t => t.Audio).Concat(e.Animation.GhAudio.Values).Where(a => !string.IsNullOrEmpty(a)), StringComparer.Ordinal);
@@ -362,19 +363,26 @@ namespace FrosthavenMods
                 return gh;
             }
             var m = new Material(shader) { name = name + " (Frosthaven)", hideFlags = HideFlags.DontUnloadUnusedAsset };
-            foreach (KeyValuePair<string, float> f in spec.Floats) if (m.HasProperty(f.Key)) m.SetFloat(f.Key, f.Value);
+            // Blend-mode floats are real only on the Standard-family shaders. On Gloomhaven's VFX shaders they are
+            // leftovers from an earlier shader of the material (its additive glint recorded _SrcBlend 1, _DstBlend 0,
+            // ZWrite on), and Frosthaven's copy of the shader may expose them: applied, they turned the glint opaque
+            // (a black square round each sparkle).
+            bool blendReal = BlendFloatsAreReal(spec.Shader);
+            foreach (KeyValuePair<string, float> f in spec.Floats)
+                if (m.HasProperty(f.Key) && (blendReal || !BlendFloats.Contains(f.Key))) m.SetFloat(f.Key, f.Value);
             foreach (KeyValuePair<string, Color> c in spec.Colors) if (m.HasProperty(c.Key)) m.SetColor(c.Key, c.Value);
             foreach (KeyValuePair<string, string> t in spec.Textures)
             {
-                if (!m.HasProperty(t.Key)) continue;
+                string key = m.HasProperty(t.Key) ? t.Key : Alias(m, t.Key);   // a stand-in shader names its slots differently
+                if (key == null) continue;
                 Texture tex = gh != null ? gh.GetTexture(t.Key) : null;
                 if (tex == null) tex = FindTexture(set, t.Value);
                 if (tex == null) continue;
-                m.SetTexture(t.Key, tex);
+                m.SetTexture(key, tex);
                 if (gh != null)
                 {
-                    m.SetTextureScale(t.Key, gh.GetTextureScale(t.Key));
-                    m.SetTextureOffset(t.Key, gh.GetTextureOffset(t.Key));
+                    m.SetTextureScale(key, gh.GetTextureScale(t.Key));
+                    m.SetTextureOffset(key, gh.GetTextureOffset(t.Key));
                 }
             }
             foreach (string kw in spec.Keywords) m.EnableKeyword(kw);
@@ -397,7 +405,33 @@ namespace FrosthavenMods
                      : src == 1f ? "Legacy Shaders/Particles/Alpha Blended Premultiply" : "Legacy Shaders/Particles/Alpha Blended";
             }
             else if (name == "Particles/Standard Surface") name = "Particles/Standard Unlit";
+            else if (name == "VFX/LitDissolveShd")
+                // the one lit (surface) shader among them: Frosthaven's copy draws magenta under its render pipeline
+                // (the earthquake's flying rocks); the pipeline's own lit shader instead, plain rocks without the dissolve
+                return FindShader("Universal Render Pipeline/Simple Lit") ?? FindShader("Universal Render Pipeline/Lit") ?? FindShader("Particles/Standard Unlit");
             return FindShader(name);
+        }
+
+        private static readonly HashSet<string> BlendFloats = new HashSet<string>(StringComparer.Ordinal)
+            { "_SrcBlend", "_DstBlend", "_ZWrite", "_ZTest", "_Mode", "_Cull", "_BlendOp", "_Surface", "_Blend", "_AlphaClip" };
+
+        private static bool BlendFloatsAreReal(string ghShader) =>
+            ghShader != null && (ghShader == "Standard" || ghShader.StartsWith("Particles/Standard", StringComparison.Ordinal)
+                                 || ghShader.StartsWith("Universal Render Pipeline/", StringComparison.Ordinal));
+
+        /// <summary>The texture slot a stand-in shader has for a Gloomhaven one (the render pipeline's lit shader names
+        /// them differently), or null when it has none.</summary>
+        private static string Alias(Material m, string property)
+        {
+            string[] names;
+            switch (property)
+            {
+                case "_DiffuseMap": case "_MainTex": names = new[] { "_BaseMap" }; break;
+                case "_NormalMap": names = new[] { "_BumpMap" }; break;
+                case "_GlowMap": names = new[] { "_EmissionMap" }; break;
+                default: return null;
+            }
+            return names.FirstOrDefault(m.HasProperty);
         }
 
         private static Shader FindShader(string name)

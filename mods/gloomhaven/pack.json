@@ -490,7 +490,8 @@
           "DestroyObstacle": "PlaySound_BruteUseItem",
           "Summon": "PlaySound_BruteUseItem",
           "DefaultRadialAttack": "PlaySound_BruteEarthquakeHex",
-          "HalberdUseItem": "PlaySound_BruteUseItem"
+          "HalberdUseItem": "PlaySound_BruteUseItem",
+          "TargetedShout": "PlaySound_BruteShoutAttack"
         },
         "gh_effects": {
           "RadialShout": {
@@ -539,7 +540,8 @@
                   "root": true
                 }
               ]
-            }
+            },
+            "audio": "PlaySound_BruteShoutAttack"
           },
           "Pull": {
             "clip": "HE_Brute_Targeted_Roar_v001",
@@ -552,7 +554,8 @@
                   "root": true
                 }
               ]
-            }
+            },
+            "audio": "PlaySound_BruteShoutAttack"
           },
           "Attack_AOE_Radial_Enhanced": {
             "clip": "HE_Brute_Radial_Attack_v001",

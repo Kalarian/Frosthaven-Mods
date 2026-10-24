@@ -347,6 +347,44 @@ def _effects_in(play):
             yield x["effect"]
 
 
+def _effect_sound(effects, play):
+    """The audio event a play's caster effects carry (an SFXOnEnable script on any of their objects), or None."""
+    for c in play.get("caster") or []:
+        for o in (effects.get(c["effect"]) or {}).get("objects", {}).values():
+            for comp in o.get("components", []):
+                if comp.get("type") == "SFXOnEnable" and comp.get("fields", {}).get("m_AudioEvent"):
+                    return comp["fields"]["m_AudioEvent"]
+    return None
+
+
+def _assign_sounds(anim, effects):
+    """Gloomhaven plays some of a class's sounds from the effect prefab (a sound script on the Brute's roar and heal
+    effects), not from the animator state. Give those states the event, so the plugin plays it the way it plays every
+    other state sound (GHModel), and the plugin's copy of the effect's sound script steps aside (GHVfx skips the script
+    for an event the state plays itself). Returns how many states gained a sound."""
+    n = 0
+    for timing in anim["states"].values():
+        if not timing.get("audio") and timing.get("effects"):
+            event = _effect_sound(effects, timing["effects"])
+            if event:
+                timing["audio"] = event
+                n += 1
+    for lend in anim.get("lent_states", {}).values():
+        if not lend.get("audio") and lend.get("effects"):
+            event = _effect_sound(effects, lend["effects"])
+            if event:
+                lend["audio"] = event
+                n += 1
+    gh_audio = anim.setdefault("gh_audio", {})
+    for state, play in anim.get("gh_effects", {}).items():
+        if not gh_audio.get(state):
+            event = _effect_sound(effects, play)
+            if event:
+                gh_audio[state] = event
+                n += 1
+    return n
+
+
 # ---------------------------------------------------------------- the pack build step
 
 def export(gh, cls, out, entry, warn=print, wanted=None):
@@ -380,6 +418,9 @@ def export(gh, cls, out, entry, warn=print, wanted=None):
         if name in dupes:
             warn(f"{cls} effects: {hero} holds more than one prefab named {name}; the first is used")
         effects[name] = describe(world, root, collector, loader_table)
+    sounds = _assign_sounds(anim, effects)
+    if sounds:
+        print(f"{cls}: {sounds} state sounds taken from the effects' own sound scripts")
     bundles = []
     for b in sorted(collector.shipped):
         src = gh / BUNDLES / b

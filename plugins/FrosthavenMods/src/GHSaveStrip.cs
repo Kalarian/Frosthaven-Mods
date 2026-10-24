@@ -201,13 +201,16 @@ namespace FrosthavenMods
             if (seq != _selectSeq || traces.Count == 0) return;   // another save was picked meanwhile, or nothing to strip
             GiveResourcesPatches.Safe("add the Copy without content packs button (load window)", () =>
             {
-                if (_loadButton == null || _loadButton.parent != template.transform.parent)
+                // The Load button sits in a row (Delete | Load) laid out horizontally; a third button in that row pushes
+                // the Load button out of the panel. Ours goes under the row, as wide as the row.
+                Transform row = template.transform.parent, panel = row.parent;
+                if (_loadButton == null || _loadButton.parent != panel)
                 {
-                    UiDump.Once("Load window save panel buttons", template.transform.parent);
-                    FHButton made = ButtonCopy.Make(template as FHButton ?? template.GetComponent<FHButton>(), template.transform.parent, LoadButtonName,
+                    UiDump.Once("Load window save panel buttons", row);
+                    FHButton made = ButtonCopy.Make(template as FHButton ?? template.GetComponent<FHButton>(), panel, LoadButtonName,
                                                     Text.Get("FHMODS_STRIP"), OnClickFile);
                     if (made == null) return;
-                    PlaceAbove((RectTransform)made.transform, (RectTransform)template.transform);
+                    PlaceBelow((RectTransform)made.transform, (RectTransform)row);
                     _loadButton = made.transform;
                 }
                 _loadButtonSave = save;
@@ -381,21 +384,17 @@ namespace FrosthavenMods
         }
 
         /// <summary>Above the template (the Load window's Load button has Delete beside it), same width as the label needs.</summary>
-        private static void PlaceAbove(RectTransform rt, RectTransform template)
+        /// <summary>Under <paramref name="row"/> (the Load window's Delete | Load row), with the row's anchors and width,
+        /// one row height plus a gap lower; outside any layout the panel may run.</summary>
+        private static void PlaceBelow(RectTransform rt, RectTransform row)
         {
-            rt.SetSiblingIndex(template.GetSiblingIndex());
-            float width = Mathf.Max(template.rect.width * 2.4f, 300f);
-            if (template.parent.GetComponent<LayoutGroup>() != null)
-            {
-                LayoutElement le = rt.GetComponent<LayoutElement>() ?? rt.gameObject.AddComponent<LayoutElement>();
-                le.preferredWidth = width;
-                le.minWidth = width;
-            }
-            else
-            {
-                rt.sizeDelta = new Vector2(width, template.sizeDelta.y);
-                rt.anchoredPosition = template.anchoredPosition + new Vector2(0f, template.rect.height + 12f);
-            }
+            rt.anchorMin = row.anchorMin;
+            rt.anchorMax = row.anchorMax;
+            rt.pivot = row.pivot;
+            rt.sizeDelta = new Vector2(row.sizeDelta.x, row.rect.height);
+            rt.anchoredPosition = row.anchoredPosition - new Vector2(0f, row.rect.height + 10f);
+            LayoutElement le = rt.GetComponent<LayoutElement>();
+            if (le != null) le.ignoreLayout = true;
             NoWrap(rt);
         }
 
