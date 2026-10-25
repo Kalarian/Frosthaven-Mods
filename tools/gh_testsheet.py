@@ -4,9 +4,13 @@ card half, and a column for what Frosthaven showed. Built from the pack itself, 
   - the class's cards (mods/gloomhaven/files/.../AbilityCards) and what each half plays (its AnimOverload, or the
     game's default for the ability: Attack, RangedAttack, Loot, Heal, PowerUp);
   - pack.json's animation table: the effects and the sound of each animator state;
-  - tools/gh_tests/<Class>.json, hand-written: the test hand in play order ("turns"), a plain description of each
+  - tools/gh_tests/<Class>.json, hand-written: the test hand in play order ("turns"; a long rest is
+    {"rest": "long", "lose": <card>}), cards the hand holds but never plays ("spare"), a plain description of each
     state ("states"), what the last in-game run found ("status"), and the effects that are not on a card ("actions").
     Without it, the hand is picked to cover every state once and the descriptions are generated from the data.
+    plan_of() checks every plan before a sheet is written: the hand is exactly the class's hand size
+    (NumberAbilityCardsInBattle: 9 to 11, not always 10), and turn by turn each card is in hand when played (lost
+    halves lose their card, rests name the card they lose).
 
     python tools/gh_testsheet.py build Brute        -> tests/Brute effects test.xlsx (an existing file is kept: --force)
     python tools/gh_testsheet.py read Brute         -> the rows whose result is not "Matches", with the notes
@@ -69,9 +73,11 @@ def cards(cls):
     for f in sorted((PACK / "files" / "Global" / "Characters" / cls / "AbilityCards").glob("*.yml")):
         text = f.read_text(encoding="utf-8")
         key = re.search(r"^Name:\s*\$ABILITY_CARD_(\w+)\$", text, re.M).group(1)
+        discard = [d.strip() for d in re.search(r"^Discard:\s*\[([^\]]*)\]", text, re.M).group(1).split(",")]
         card = {"key": key, "name": names.get("ABILITY_CARD_" + key, key),
                 "level": re.search(r"^Level:\s*(\w+)", text, re.M).group(1),
                 "initiative": int(re.search(r"^Initiative:\s*(\d+)", text, re.M).group(1)),
+                "lost": {"Top": "Lost" in discard[0], "Bottom": "Lost" in discard[-1]},   # playing that half loses the card
                 "halves": {"Top": [], "Bottom": []}}
         half, ab = None, None
         for line in text.splitlines():
@@ -196,17 +202,81 @@ def summary(abilities):
     return "; ".join(out)
 
 
-def pick_hand(all_cards):
-    """Without a hand-written plan: cards picked greedily until every state any half plays is covered, ten at most."""
+def hand_size(cls):
+    """The class's hand size: the number of cards it takes into a scenario (NumberAbilityCardsInBattle)."""
+    text = (PACK / "files" / "Global" / "Characters" / cls / f"{cls}.yml").read_text(encoding="utf-8")
+    return int(re.search(r"^NumberAbilityCardsInBattle:\s*(\d+)", text, re.M).group(1))
+
+
+def pick_hand(all_cards, size):
+    """Without a hand-written plan: cards picked greedily until every state any half plays is covered, up to the hand
+    size; one card per turn half, no rest. Returns (turns, spare cards)."""
     want = {s for c in all_cards for h in c["halves"].values() for a in h for s in states_of(a)} - {"Movement"}
     hand, covered = [], set()
-    while want - covered and len(hand) < 10:
+    while want - covered and len(hand) < size:
         best = max(all_cards, key=lambda c: len({s for h in c["halves"].values() for a in h for s in states_of(a)} - covered))
         hand.append(best)
         covered |= {s for h in best["halves"].values() for a in h for s in states_of(a)}
-    if len(hand) % 2:   # a turn needs two cards: the lowest-level card not yet taken
-        hand.append(next(c for c in all_cards if c not in hand))
-    return [{"top": hand[i]["key"], "bottom": hand[i + 1]["key"], "order": "", "setup": ""} for i in range(0, len(hand), 2)]
+    for c in all_cards:   # fill the hand: the lowest-level cards not yet taken
+        if len(hand) >= size:
+            break
+        if c not in hand:
+            hand.append(c)
+    pairs = len(hand) // 2
+    turns = [{"top": hand[2 * i]["key"], "bottom": hand[2 * i + 1]["key"], "order": "", "setup": ""} for i in range(pairs)]
+    return turns, [c["key"] for c in hand[2 * pairs:]]
+
+
+def rest_text(turn, by_key):
+    """What a long rest in the plan asks for."""
+    lose = by_key.get((turn.get("lose") or "").lower())
+    return ("Long rest: the discarded cards come back (lost ones don't)"
+            + (f"; when the game asks which discarded card to lose, lose {lose['name']}." if lose else "."))
+
+
+def plan_of(cls, spec, all_cards):
+    """The test plan (turns, spare cards), checked against the rules of a scenario. The hand is every card the turns
+    play plus the spec's "spare" ones, and must be exactly the class's hand size. Played turn by turn, each turn takes
+    a top and a bottom half from two different cards in hand; a half marked lost loses its card, the other goes to the
+    discard pile; a long rest ({"rest": "long", "lose": card}) needs two discarded cards, loses the named one of them
+    and returns the rest to the hand. Any break exits with the reasons, so a plan the game can't play never ships."""
+    size = hand_size(cls)
+    if not spec.get("turns"):
+        return pick_hand(all_cards, size)
+    turns, spare = spec["turns"], spec.get("spare", [])
+    by_key = {c["key"].lower(): c for c in all_cards}
+    errors = []
+    played = list(dict.fromkeys(k for t in turns if "rest" not in t for k in (t["top"], t["bottom"])))
+    hand_keys = list(dict.fromkeys(played + spare))
+    unknown = [k for k in hand_keys if k.lower() not in by_key]
+    if unknown:
+        sys.exit(f"{cls}: plan names cards the class doesn't have: {unknown}")
+    if len(hand_keys) != size:
+        errors.append(f"the hand has {len(hand_keys)} cards ({', '.join(hand_keys)}); the {cls} takes {size}")
+    hand, discard = {k.lower() for k in hand_keys}, []
+    for i, t in enumerate(turns, 1):
+        if "rest" in t:
+            lose = (t.get("lose") or "").lower()
+            if len(discard) < 2:
+                errors.append(f"turn {i}: a long rest needs two discarded cards, there are {len(discard)}")
+            if lose not in discard:
+                errors.append(f"turn {i}: the rest must name a discarded card to lose (\"lose\"); discarded: {discard}")
+            hand |= {k for k in discard if k != lose}
+            discard = []
+            continue
+        top, bottom = t["top"].lower(), t["bottom"].lower()
+        if top == bottom:
+            errors.append(f"turn {i}: top and bottom from the same card ({t['top']})")
+        for key, half in ((top, "Top"), (bottom, "Bottom")):
+            if key not in hand:
+                errors.append(f"turn {i}: {by_key[key]['name']} isn't in hand for its {half.lower()} half")
+                continue
+            hand.discard(key)
+            if not by_key[key]["lost"][half]:
+                discard.append(key)
+    if errors:
+        sys.exit(f"{cls}: the test plan doesn't work:\n  " + "\n  ".join(errors))
+    return turns, spare
 
 
 def version():
@@ -258,7 +328,7 @@ def build(cls, force=False):
     all_cards = cards(cls)
     by_key = {c["key"].lower(): c for c in all_cards}
     anim = animation(cls)
-    turns = spec.get("turns") or pick_hand(all_cards)
+    turns, spare = plan_of(cls, spec, all_cards)
     notes, status = spec.get("states", {}), spec.get("status", {})
     built = version()
 
@@ -276,6 +346,8 @@ def build(cls, force=False):
                    "Status before this run", "Result in Frosthaven", "Notes"], [5, 6, 20, 8, 22, 18, 60, 26, 14, 40])
     seen, n = {}, 0
     for t, turn in enumerate(turns, 1):
+        if "rest" in turn:
+            continue
         for half, key in (("Top", turn["top"]), ("Bottom", turn["bottom"])):
             card = by_key[key.lower()]
             abilities = card["halves"][half]
@@ -314,7 +386,12 @@ def build(cls, force=False):
     # Turn plan
     _sheet(plan, ["Turn", "Top", "Bottom", "Order", "Setup"], [6, 22, 22, 55, 40])
     for t, turn in enumerate(turns, 1):
+        if "rest" in turn:
+            _row(plan, [t, "Long rest", "", rest_text(turn, by_key), ""])
+            continue
         _row(plan, [t, by_key[turn["top"].lower()]["name"], by_key[turn["bottom"].lower()]["name"], turn.get("order", ""), turn.get("setup", "")])
+    for key in spare:
+        _row(plan, ["", by_key[key.lower()]["name"], "", "In the hand but not played (the hand must be full).", ""])
 
     # How to use
     guide.column_dimensions["A"].width = 110
@@ -322,7 +399,7 @@ def build(cls, force=False):
         (f"{cls}: effects test", Font(name=FONT, size=14, bold=True)),
         (f"Built {datetime.date.today():%d %b %Y} for mods {built}. Rebuilt from the pack when the class changes.", None),
         ("", None),
-        ("1. Take the ten cards on the Turn plan sheet into a scenario with plenty of normal enemies, at a low scenario level.", None),
+        (f"1. Take the {hand_size(cls)} cards on the Turn plan sheet (the {cls}'s hand size) into a scenario with plenty of normal enemies, at a low scenario level.", None),
         ("2. Play the turns in order. Each Tests row is one card half; the moves are checked once, on the Movement row.", None),
         ("3. For each row, fill the yellow cells: Result (pick from the list) and Notes (what was different, louder or quieter, colours).", None),
         ("   Matches: looks and sounds like Gloomhaven.  Differs: something is off.  Missing: nothing played.  Not seen: didn't get to it.", None),
@@ -517,14 +594,14 @@ def _spec(cls):
 
 
 def _plays(cls, spec, all_cards, anim):
-    """Per turn (None for a rest), the card halves a class plays, and for each half its states and expected text."""
+    """Per turn ({"rest": turn} for a long rest), the card halves a class plays, and for each half its states and expected text."""
     by_key = {c["key"].lower(): c for c in all_cards}
     notes, status = spec.get("states", {}), spec.get("status", {})
-    turns = spec.get("turns") or pick_hand(all_cards)
+    turns, _ = plan_of(cls, spec, all_cards)
     out = []
     for turn in turns:
         if "rest" in turn:
-            out.append(None)
+            out.append({"rest": turn})
             continue
         halves = []
         for half, key in (("Top", turn["top"]), ("Bottom", turn["bottom"])):
@@ -548,6 +625,7 @@ def build_party(classes, name, force=False):
         all_cards = cards(cls)
         data[cls] = {"spec": _spec(cls), "cards": all_cards, "anim": animation(cls)}
         data[cls]["plays"] = _plays(cls, data[cls]["spec"], all_cards, data[cls]["anim"])
+        data[cls]["spare"] = plan_of(cls, data[cls]["spec"], all_cards)[1]
     built = version()
     wb = Workbook()
     guide = wb.active
@@ -567,16 +645,18 @@ def build_party(classes, name, force=False):
                  "outpost's downtime, picking the cards listed. Ctrl+F9 gives gold for items. Ctrl+F3 gives 3 perk marks each "
                  "(optional: to try the perks).",
                  "A scenario with plenty of normal enemies, a trap if possible, at a low scenario level. Four characters in "
-                 "the party. Everyone takes a long rest on the turn marked so."])
+                 "the party. Each character takes a long rest on the turn marked in their own column."])
 
-    # Hands: the ten cards per character and what each half is for
+    # Hands: each character's full hand (its hand size) and what each half is for
     _sheet(hands, ["Character", "Card", "Level", "Initiative", "Top", "Bottom", "In the plan"], [16, 24, 7, 10, 30, 30, 24])
     for cls in classes:
         used = {}
         for i, p in enumerate(data[cls]["plays"], 1):
-            if p:
+            if p and "halves" in p:
                 for h in p["halves"]:
                     used.setdefault(h["card"]["key"], []).append(f"turn {i} {h['half'].lower()}")
+        for key in data[cls]["spare"]:
+            used.setdefault(next(c["key"] for c in data[cls]["cards"] if c["key"].lower() == key.lower()), ["not played: it fills the hand"])
         for key, where in used.items():
             card = next(c for c in data[cls]["cards"] if c["key"] == key)
             _row(hands, [cls, card["name"], card["level"], card["initiative"], summary(card["halves"]["Top"]), summary(card["halves"]["Bottom"]), ", ".join(where)])
@@ -594,8 +674,9 @@ def build_party(classes, name, force=False):
         for cls in classes:
             plays = data[cls]["plays"]
             p = plays[i] if i < len(plays) else None
-            if i < len(plays) and p is None:
-                row += ["Long rest", "", "Everyone rests: the discarded cards come back (lost ones don't)."]
+            if p is not None and "rest" in p:
+                by_key = {c["key"].lower(): c for c in data[cls]["cards"]}
+                row += ["Long rest", "", rest_text(p["rest"], by_key)]
             elif p is None:
                 row += ["-", "", "nothing more planned"]
             else:
@@ -610,7 +691,7 @@ def build_party(classes, name, force=False):
     for cls in classes:
         seen = {}
         for i, p in enumerate(data[cls]["plays"], 1):
-            if p is None:
+            if "rest" in p:
                 continue
             for h in p["halves"]:
                 n += 1
@@ -674,9 +755,9 @@ def build_party(classes, name, force=False):
         (f"Built {datetime.date.today():%d %b %Y} for mods {built}. Classes: {', '.join(classes)}.", None),
         ("", None),
         ("1. Setup sheet: create the four characters, level them up with the dev keys and pick the listed cards.", None),
-        ("2. Hands sheet: the ten cards each character takes into the scenario, and which turn uses which half.", None),
-        ("3. Turn plan sheet: one row per turn; every character plays the two cards named, in the order given. The row "
-         "marked Long rest is a rest for everyone.", None),
+        ("2. Hands sheet: the cards each character takes into the scenario (exactly their hand size), and which turn uses which half.", None),
+        ("3. Turn plan sheet: one row per turn; every character plays the two cards named, in the order given. A "
+         "character whose column says Long rest rests that turn and loses the card named.", None),
         ("4. Tests sheet: one row per card half played, grouped by character. Fill the yellow cells: Result (from the list) "
          "and Notes. Compare against Gloomhaven digital when unsure (Ctrl+F8 and Ctrl+F9 there).", None),
         ("5. Rewards review sheet: each character's retirement events and the proposed Frosthaven effects; give each option a "

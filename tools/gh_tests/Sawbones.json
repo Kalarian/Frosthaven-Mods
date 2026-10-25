@@ -8,7 +8,7 @@
     {"top": "Vaccine", "bottom": "BoosterShot", "order": "Top: the ranged area attack (Attack 1, range 3). Bottom: Shield 1 on an adjacent ally.", "setup": "Enemies within 3; an ally adjacent."},
     {"top": "PreventionisKey", "bottom": "HandoftheSurgeon", "order": "Top: disarm the adjacent enemies (the radial debuff). Bottom: his persistent bonus (the power-up).", "setup": "Enemies adjacent."},
     {"top": "BattlefieldMedicine", "bottom": "MobileResponse", "order": "Bottom first: move 5 next to enemies and wound them (the radial debuff), then give an adjacent ally a Large Medical Pack.", "setup": "Enemies and an ally adjacent after the move."},
-    {"rest": "long"},
+    {"rest": "long", "lose": "Vaccine"},
     {"top": "VitalStrike", "bottom": "BloodySaw", "order": "Top: the heavy saw swing (Attack 7). Bottom: Loot 1.", "setup": "An enemy adjacent; a coin adjacent."},
     {"top": "CurativeMixture", "bottom": "PreventionisKey", "order": "Top: Heal 3 on an adjacent ally. Bottom: Shield 1 on the adjacent allies (the radial buff).", "setup": "Allies adjacent."},
     {"top": "HandoftheSurgeon", "bottom": "FirstAid", "order": "Top: the plain attack (Attack 4). Bottom: Move 4.", "setup": "An enemy adjacent."}

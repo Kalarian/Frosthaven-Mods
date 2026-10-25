@@ -1,18 +1,16 @@
 {
   "_about": "Test notes for the Quartermaster's effects workbook (tools/gh_testsheet.py). turns: the test hand in play order; an entry with \"rest\" is a long rest for the whole party. picks: the level-up card picks the hand needs. states: what Gloomhaven shows per animator state, where known; the rest is generated from the pack data.",
   "picks": ["Level 3: Scroll of Lightning", "Level 5: Scroll of Judgment", "Other levels: anything"],
-  "setup": "His refresh abilities need spent items: give him and an ally a potion each (Ctrl+F9 for gold) and use them before turns 4 and 7, so there is something to refresh.",
+  "setup": "His hand is 9 cards. Restock refreshes an ally's spent item on turn 8: give the ally who stays near him a potion (Ctrl+F9 for gold) and have them use it before then.",
   "turns": [
     {"top": "CleavingAxe", "bottom": "CrushingHammer", "order": "Bottom first: move 2 next to enemies and shield up (the power-up), then the axe sweep (Attack 2 on the area).", "setup": "Enemies adjacent after the move."},
-    {"top": "CripplingBow", "bottom": "ScrollofLightning", "order": "Bottom first: move 3 and push the adjacent enemies with the lightning scroll, then the bow shot (Attack 3, range 3).", "setup": "Enemies adjacent after the move; one within 3."},
-    {"top": "IronBulwark", "bottom": "ScrollofRecall", "order": "Bottom first: pull an enemy from range 3 (the targeted scroll), then the plain attack (Attack 3).", "setup": "An enemy within 3 hexes."},
-    {"top": "Restock", "bottom": "CleavingAxe", "order": "Top: refresh a spent item on an ally within 2 (the refresh). Bottom: Move 4.", "setup": "An ally within 2 who has used an item this scenario."},
-    {"top": "ScrollofJudgment", "bottom": "SharpeningKit", "order": "Top: the radial judgment scroll on enemies within 4. Bottom: his ranged attack bonus (the power-up).", "setup": "Enemies within 4."},
-    {"rest": "long"},
-    {"top": "OversizedPack", "bottom": "CleavingAxe", "order": "Top: Loot 2. Bottom: Move 4.", "setup": "Coins within 2."},
-    {"top": "CrushingHammer", "bottom": "IronBulwark", "order": "Top: the heavy hammer blow (Attack 3). Bottom: Shield 1 on the adjacent allies (the radial buff).", "setup": "An enemy and allies adjacent."},
-    {"top": "ScrollofLightning", "bottom": "CripplingBow", "order": "Top: the lightning scroll at an enemy within 3 (Attack 5). Bottom: the bow shot (Attack 1, range 4).", "setup": "Enemies within 3 and 4."},
-    {"top": "SharpeningKit", "bottom": "ScrollofRecall", "order": "Top: Heal 4 on himself or an adjacent ally. Bottom: pull an enemy from range 3.", "setup": "An enemy within 3."}
+    {"top": "ScrollofLightning", "bottom": "CripplingBow", "order": "Bottom first: the bow shot (Attack 1) at an enemy within 4, then the lightning scroll (Attack 5) at one within 3.", "setup": "Enemies within 3 and 4 hexes."},
+    {"top": "SharpeningKit", "bottom": "ScrollofJudgment", "order": "Bottom first: move 2 and stun an adjacent enemy (the targeted scroll), then Heal 4 on himself or an ally.", "setup": "An enemy to end next to."},
+    {"top": "OversizedPack", "bottom": "Restock", "order": "Bottom: the plain attack (Attack 3) on an adjacent enemy. Top: Loot 2.", "setup": "An adjacent enemy; coins within 2 hexes."},
+    {"rest": "long", "lose": "CripplingBow"},
+    {"top": "ScrollofJudgment", "bottom": "ScrollofLightning", "order": "Bottom first: move 3 next to enemies and the lightning pushes the adjacent ones, then the judgment scroll on enemies within 4. Scroll of Judgment is lost.", "setup": "Enemies adjacent after the move and within 4."},
+    {"top": "CrushingHammer", "bottom": "IronBulwark", "order": "Top: the heavy hammer blow (Attack 3) on an adjacent enemy; Crushing Hammer is lost. Bottom: Shield 1 on the adjacent allies (the radial buff).", "setup": "An enemy and allies adjacent."},
+    {"top": "Restock", "bottom": "SharpeningKit", "order": "Top: refresh the ally's spent potion (the refresh); Restock is lost. Bottom: his ranged attack bonus (the power-up).", "setup": "The ally who used their potion, within 2 hexes."}
   ],
   "states": {
     "Attack": "A sword swing with his melee attack sound and the weapon impact.",
