@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>gloomhaven.devtools</AssemblyName>
+    <Product>GloomhavenDevTools</Product>
+    <Version>0.1.0</Version>
+    <RootNamespace>GloomhavenDevTools</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591;MSB3277</NoWarn>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+
+    <!-- Gloomhaven digital (Steam app 780290), NOT Frosthaven. Override with: dotnet build -c Release -p:GamePath="D:\Games\Gloomhaven" -->
+    <GamePath Condition="'$(GamePath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Gloomhaven</GamePath>
+    <GameManaged>$(GamePath)\GH_Data\Managed</GameManaged>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="src\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- BepInEx 5 (Mono) + HarmonyX come from the BepInEx NuGet feed (see nuget.config). -->
+    <PackageReference Include="BepInEx.Core" Version="5.4.21" ExcludeAssets="runtime" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Game assemblies, referenced from the install so versions always match. Private=false keeps them out of bin. -->
+    <Reference Include="GH.Runtime"><HintPath>$(GameManaged)\GH.Runtime.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="GH.Shared"><HintPath>$(GameManaged)\GH.Shared.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="MapRuleLibrary"><HintPath>$(GameManaged)\MapRuleLibrary.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="ScenarioRuleLibrary"><HintPath>$(GameManaged)\ScenarioRuleLibrary.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="SharedLibrary"><HintPath>$(GameManaged)\SharedLibrary.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.Addressables"><HintPath>$(GameManaged)\Unity.Addressables.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.ResourceManager"><HintPath>$(GameManaged)\Unity.ResourceManager.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.InputSystem"><HintPath>$(GameManaged)\Unity.InputSystem.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(GameManaged)\UnityEngine.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(GameManaged)\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+
+</Project>
