@@ -15,7 +15,9 @@ var positional = args.Where((a, i) => !a.StartsWith("-") && (i == 0 || args[i - 
 int gameArg = Array.IndexOf(args, "--game");
 string Game = gameArg >= 0 && gameArg + 1 < args.Length ? args[gameArg + 1] : @"C:\Program Files (x86)\Steam\steamapps\common\Frosthaven";
 string pluginPath = Path.GetFullPath(positional.FirstOrDefault() ?? @"plugins\FrosthavenMods\bin\Release\frosthaven.mods.dll");
-string[] dirs = { Game + @"\Frosthaven_Data\Managed", Game + @"\BepInEx\core" };
+// the game's Managed folder (Frosthaven_Data, or GH_Data for Gloomhaven digital when checking the test harness) and BepInEx
+string[] dirs = Directory.GetDirectories(Game, "*_Data").Select(d => Path.Combine(d, "Managed")).Where(Directory.Exists)
+    .Append(Game + @"\BepInEx\core").ToArray();
 AssemblyLoadContext.Default.Resolving += (ctx, name) =>
 {
     foreach (var d in dirs) { var p = Path.Combine(d, name.Name + ".dll"); if (File.Exists(p)) return ctx.LoadFromAssemblyPath(p); }
@@ -130,6 +132,7 @@ void Member(string label, Type t, string name, bool property = false)
     var m = property ? (MemberInfo)AccessTools.Property(t, name) : AccessTools.Field(t, name);
     if (m == null) Bad($"{label}: {t.Name}.{name} not found"); else Ok($"{label}: {t.Name}.{name}");
 }
+if (plugin.GetType("FrosthavenMods.Plugin") != null)   // the mods plugin's reflection-only members; not for other plugins
 {
     var rowHeaders = AccessTools.Field(T("UIDebriefingTable") ?? T("DebriefingTable"), "m_RowHeaders");
     if (rowHeaders == null) Bad("BattleStats: m_RowHeaders owner not found (checked via its patch above)"); else Member("BattleStats Icon", ElementOf(rowHeaders.FieldType), "Icon");
