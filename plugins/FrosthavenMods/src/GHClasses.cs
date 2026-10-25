@@ -297,6 +297,27 @@ namespace FrosthavenMods
             __result = config;
         }
 
+        /// <summary>
+        /// Frosthaven draws a perk's activate-bar toggle with the perk's own picture (PerksUIData, one per Frosthaven perk)
+        /// when the bonus doesn't name an icon, and a ported class's perks have none: a white box. The perk files name
+        /// one (MiscVars OverrideIcon), but a scenario saved before they did keeps the bonus as it was, so the gap is
+        /// filled here too: the perk's current OverrideIcon, else the class's own active-ability icon.
+        /// </summary>
+        [HarmonyPatch(typeof(UIInfoTools), nameof(UIInfoTools.GetPerkIcon), new[] { typeof(string), typeof(bool) })]
+        [HarmonyPostfix]
+        private static void PerkIcon(UIInfoTools __instance, string perkId, ref Sprite __result)
+        {
+            if ((__result != null && __result != __instance.MissingSpriteIcon) || string.IsNullOrEmpty(perkId)) return;
+            PerksYMLData perk = ScenarioRuleClient.SRLYML?.Perks?.FirstOrDefault(p => p != null && p.ID == perkId);
+            CCharacterClass cls = ClassById(perk?.CharacterID);
+            if (cls == null || !IsGloomhavenClass(cls.CharacterModel.ToString(), out ECharacter model)) return;
+            string icon = null;
+            try { icon = perk.Abilities?.FirstOrDefault()?.ActiveBonusData?.GetMiscVar("OverrideIcon").GetString(); } catch (Exception) { }
+            Sprite sprite = string.IsNullOrEmpty(icon) ? null : __instance.GetActiveAbilityIcon(icon, null, displayError: false);
+            sprite = sprite ?? __instance.GetCharacterActiveAbilityIcon(model.ToString());
+            if (sprite != null) __result = sprite;
+        }
+
         internal static string SkinName(ECharacter model) => model + "_GH_CardSkinConfig";
 
         /// <summary>A copy of the stand-in's config for <paramref name="model"/>. Instantiate deep-copies the serialized data
