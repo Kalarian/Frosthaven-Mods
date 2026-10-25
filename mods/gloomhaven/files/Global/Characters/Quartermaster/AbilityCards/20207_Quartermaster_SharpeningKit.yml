@@ -42,5 +42,5 @@ Layout:
         - Active:
             Ability: BAttackBuff
             Icon: Attack
-            ListLayout: "<b><sprite name=Aura>:</b> $GH_207_B$"
-            Layout: "<b><sprite name=Aura>:</b> $GH_207_B$"
+            ListLayout: "<b></b> $GH_207_B$"
+            Layout: "<b></b> $GH_207_B$"

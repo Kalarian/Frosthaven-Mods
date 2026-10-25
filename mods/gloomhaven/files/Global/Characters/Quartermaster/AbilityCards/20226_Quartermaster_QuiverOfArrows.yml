@@ -33,7 +33,7 @@ Layout:
         - Active:
             Ability: TActive
             Icon: Target
-            ListLayout: "<b><sprite name=Aura>:</b> $GH_226_T$"
-            Layout: "<b><sprite name=Aura>:</b> $GH_226_T$"
+            ListLayout: "<b></b> $GH_226_T$"
+            Layout: "<b></b> $GH_226_T$"
     Bottom:
         - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

@@ -36,8 +36,8 @@ Layout:
         - Active:
             Ability: BPrevent
             Icon: Positive_DamagePrevent
-            ListLayout: "<b><sprite name=Aura>:</b> $GH_179_B$"
-            Layout: "<b><sprite name=Aura>:</b> $GH_179_B$"
+            ListLayout: "<b></b> $GH_179_B$"
+            Layout: "<b></b> $GH_179_B$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "20,20,20,20"

@@ -46,8 +46,8 @@ Layout:
         - Active:
             Ability: BDisadvantage
             Icon: Disadvantage
-            ListLayout: "<b><sprite name=Aura>:</b> $GH_194_B$"
-            Layout: "<b><sprite name=Aura>:</b> $GH_194_B$"
+            ListLayout: "<b></b> $GH_194_B$"
+            Layout: "<b></b> $GH_194_B$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"

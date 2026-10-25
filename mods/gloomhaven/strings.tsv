@@ -206,7 +206,7 @@ GH_178_T_2	Up to three discarded cards instead, <sprite name=XP1>.
 GH_179_B	You and all adjacent allies suffer no damage this round.
 GH_184_B	Deduct -1 Move <sprite name=Move> from all your moves.
 GH_185_T	Heal all damage on one <nobr>adjacent ally.</nobr>
-GH_187_B	<line-height=110%>At the end of your next five turns when <size=150%><voffset=-3><sprite name=Light></voffset></size> is not Strong, infuse <size=150%><voffset=-3><sprite name=Light></voffset></size>.
+GH_187_B	<line-height=110%>At the end of your next five turns when <size=150%><voffset=-3><sprite name=Light></voffset></size> is not Strong, infuse <size=150%><voffset=-3><sprite name=CreateLight></voffset></size>.
 GH_190_T	One adjacent ally may immediately perform one extra turn by playing two cards from their hand.
 GH_192_B	All allies within <nobr>Range <sprite name=Range> 5</nobr> <nobr>may perform</nobr>
 GH_194_B	All attacks targeting you or any ally within <nobr>Range <sprite name=Range> 4</nobr> of you gain Disadvantage this round.
@@ -219,15 +219,15 @@ GH_202_T	Kill one normal or elite enemy instead, <sprite name=XP1>
 GH_203_T	On your next four Attack actions, add <nobr>+3 Attack <sprite name=Attack></nobr>, <nobr>WOUND <sprite name=Wound></nobr>, and gain Advantage.
 GH_204_T	When any ally suffers damage, you may suffer that damage reduced by 1 instead.
 GH_205_T	All allies within <nobr>Range <sprite name=Range> 2</nobr> <nobr>Refresh <sprite name=Refresh></nobr> one of their spent or consumed items.
-GH_206_B	<nobr>Refresh <sprite name=Refresh></nobr> all of your consumed <nobr>Small Items <sprite name=InvSmallItem></nobr>.
+GH_206_B	<nobr>Refresh <sprite name=Refresh></nobr> all of your consumed <nobr>Small Items <sprite name=SmallItem></nobr>.
 GH_207_B	You and all allies within <nobr>Range <sprite name=Range> 2</nobr> add <nobr>+1 Attack <sprite name=Attack></nobr> to all your attacks this round.
 GH_208_T	Once during each of your Attack actions, if you use an item, add <nobr>+1 Attack <sprite name=Attack></nobr> to the entire Attack action.
-GH_215_T	<nobr>Refresh <sprite name=Refresh></nobr> one of your consumed <nobr>Small Items <sprite name=InvSmallItem></nobr>.
+GH_215_T	<nobr>Refresh <sprite name=Refresh></nobr> one of your consumed <nobr>Small Items <sprite name=SmallItem></nobr>.
 GH_216_T	One adjacent ally may <nobr>Refresh <sprite name=Refresh></nobr> all of their spent items.
 GH_217_B	<nobr>Recover <sprite name=Recover></nobr> up to two of your discarded cards.
-GH_217_T	You or one adjacent ally may <nobr>Refresh <sprite name=Refresh></nobr> one spent or consumed <nobr>One-Hand Item <sprite name=InvOneHand></nobr> or <nobr>Two-Hand Item <sprite name=InvTwoHands></nobr>.
+GH_217_T	You or one adjacent ally may <nobr>Refresh <sprite name=Refresh></nobr> one spent or consumed <nobr>One-Hand Item <sprite name=OneHandItem></nobr> or <nobr>Two-Hand Item <sprite name=TwoHandsItem></nobr>.
 GH_219_B	<nobr>Recover <sprite name=Recover></nobr> up to two of your burned cards.
-GH_219_T	At the end of each of your turns, you may discard a card to allow an adjacent ally to <nobr>Refresh <sprite name=Refresh></nobr> one of their consumed <nobr>Small Items <sprite name=InvSmallItem></nobr>.
+GH_219_T	At the end of each of your turns, you may discard a card to allow an adjacent ally to <nobr>Refresh <sprite name=Refresh></nobr> one of their consumed <nobr>Small Items <sprite name=SmallItem></nobr>.
 GH_221_T	One adjacent ally may <nobr>Refresh <sprite name=Refresh></nobr> all of their spent and consumed items.
 GH_223_T	At the end of each round, <nobr>Refresh <sprite name=Refresh></nobr> one of your spent items.
 GH_224_T	You and all enemies with <nobr>Range <sprite name=Range> 4</nobr> suffer 2 damage.
@@ -238,7 +238,7 @@ GH_228_T	Each time you long rest, <nobr>Refresh <sprite name=Refresh></nobr> one
 GH_229_B	During all your attacks this round, ignore the Shield values of all your targets.
 GH_230_T	At the end of your next five turns, perform a "<nobr>Heal <sprite name=Heal> 2</nobr>, Affect all adjacent allies" action.
 GH_231_T	Kill one adjacent normal or elite enemy.
-GH_232_B	You and all adjacent allies may <nobr>Refresh <sprite name=Refresh></nobr> all of your consumed <nobr>Small Items <sprite name=InvSmallItem></nobr>.
+GH_232_B	You and all adjacent allies may <nobr>Refresh <sprite name=Refresh></nobr> all of your consumed <nobr>Small Items <sprite name=SmallItem></nobr>.
 GH_343_B	You are immune to all negative conditions.
 GH_371_B	All allies within <nobr>Range <sprite name=Range> 3</nobr> <nobr>may perform</nobr>
 GH_407_T	Give one adjacent ally one “<nobr>Medical Pack</nobr>” ability card.

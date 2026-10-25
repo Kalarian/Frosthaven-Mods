@@ -33,5 +33,5 @@ Layout:
         - Active:
             Ability: BImmunity
             Icon: Positive_DamagePrevent
-            ListLayout: "<b><sprite name=Aura>:</b> $GH_414_B$"
-            Layout: "<b><sprite name=Aura>:</b> $GH_414_B$"
+            ListLayout: "<b></b> $GH_414_B$"
+            Layout: "<b></b> $GH_414_B$"

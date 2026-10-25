@@ -46,7 +46,7 @@ Layout:
         - Row: "<size=20%> "
         - Consume:
             Name: TCDark
-            Text: "+1 <sprite name=Attack>, <size=150%><voffset=-1.5><sprite name=Light></voffset></size>, <sprite name=XP1>"
+            Text: "+1 <sprite name=Attack>, <size=150%><voffset=-1.5><sprite name=CreateLight></voffset></size>, <sprite name=XP1>"
     Bottom:
         - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:

@@ -65,6 +65,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import fh_mods  # noqa: E402
 import fh_ruleset as rs  # noqa: E402
+import fh_sprites  # noqa: E402
 import gh_crossover  # noqa: E402
 import gh_layout  # noqa: E402
 import gh_story  # noqa: E402
@@ -364,6 +365,9 @@ def main():
     written, warnings, used_keys, models, anim_names = [], [], set(), {}, set()
 
     def write(rel, s):
+        s = fh_sprites.to_fh(s)   # Frosthaven's icons: item slots, no Aura icon, infused elements as CreateX
+        for name in fh_sprites.check(s):
+            warnings.append(f"{rel}: <sprite name={name}> isn't one of Frosthaven's icons (it would show as raw text)")
         if rel.lower() in fh_names:
             sys.exit(f"{rel} already exists in Frosthaven's ruleset")
         if re.search(r"^[^#\n]*:\s*\[\s*\]", s, re.M):
@@ -536,6 +540,10 @@ def main():
     table.setdefault("Event__Text", "Their personal quest complete, the mercenary leaves Frosthaven for good. "
                                     "Someone else will take up the fight.")
     missing = sorted(k for k in used_keys if k not in table)
+    table = {k: fh_sprites.to_fh(v) for k, v in table.items()}
+    for k, v in table.items():
+        for name in fh_sprites.check(v):
+            warnings.append(f"strings.tsv {k}: <sprite name={name}> isn't one of Frosthaven's icons (it would show as raw text)")
     lines = [f"{k}\t{v.replace(chr(13), '').replace(chr(10), chr(92) + 'n')}" for k, v in table.items()]
     (args.out / "strings.tsv").write_text("\n".join(lines) + "\n", encoding="utf-8")
     # The pack manifest the plugin and installer read. data_sha covers everything that matters in play (the ruleset
