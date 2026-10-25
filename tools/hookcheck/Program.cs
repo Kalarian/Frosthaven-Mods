@@ -31,7 +31,10 @@ void Bad(string s) { bad++; Console.WriteLine("  FAIL " + s); }
 var warnings = new List<string>();
 var log = new BepInEx.Logging.ManualLogSource("check");
 log.LogEvent += (_, e) => { if (e.Level <= BepInEx.Logging.LogLevel.Warning) warnings.Add(e.Data?.ToString()); };
-plugin.GetType("FrosthavenMods.Plugin").GetField("Log", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public).SetValue(null, log);
+// (the mods plugin's, or any plugin type with a static ManualLogSource "Log" field: the test harness has one too)
+var logField = (plugin.GetType("FrosthavenMods.Plugin") ?? plugin.GetTypes().FirstOrDefault(t => t.GetField("Log", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)?.FieldType == typeof(BepInEx.Logging.ManualLogSource)))
+    ?.GetField("Log", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+logField?.SetValue(null, log);
 
 const BindingFlags All = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance | BindingFlags.DeclaredOnly;
 string[] kinds = { "Prefix", "Postfix", "Transpiler", "Finalizer" };
