@@ -76,7 +76,7 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            Icon: Heal
+            Icon: Positive_Heal
             ListLayout: "$GH_416_T$"
             Layout: "$GH_416_T$"
     Bottom:

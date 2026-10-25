@@ -18,5 +18,7 @@ Abilities:
             XPTracker: [0]
             IsToggleBonus: True
             Hidden: True
-            ListLayoutOverride: [$PERK_Scoundrel_10_Desc$, Positive_Unique_Campaign]
+            ListLayoutOverride: [$PERK_Scoundrel_10_Desc$, Invisible]
+            MiscVars:
+                OverrideIcon: "'Invisible'"
         AnimOverload: PowerUp

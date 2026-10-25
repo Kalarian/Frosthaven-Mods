@@ -32,7 +32,13 @@ ICONS = {
     "Retaliate": "Positive_Retaliate",
     "Immune": "Positive_DamagePrevent",
     "Damage": "Positive_AttackPlus",
+    "Heal": "Positive_Heal",
+    "Attack": "Positive_AttackPlus",
 }
+# Gloomhaven also names an active after its class ("Sunkeeper": the class icon); Frosthaven has no such icon for a
+# ported class, so gh_port's CLASS_ICONS gives each of those an icon for what the card does. Every icon written is
+# checked against Frosthaven's list (fh_sprites.check_icons): the game looks an unknown name up by substring and draws
+# whatever icon comes first, or a white box when nothing matches.
 # conditions are drawn larger in an AddedEffect (Frosthaven: "<size=130%><sprite name=Poison></size>")
 CONDITIONS = {"Poison", "Wound", "Muddle", "Immobilize", "Disarm", "Stun", "Curse", "Bless", "Strengthen", "Invisible",
               "Regenerate", "Ward", "Brittle", "Bane", "Impair", "Rupture"}
@@ -183,13 +189,17 @@ def convert_active(a, icons):
                     f.value = f.value.replace(", $Self$", "")
 
 
-def convert_half(items, icons):
-    for n in items:
+def _actives(nodes):
+    """Every Active under these nodes, at any depth (rows inside columns inside rows)."""
+    for n in nodes:
         if n.key == "Active":
-            convert_active(n, icons)
-        for c in n.children:  # actives inside rows and columns
-            if c.key == "Active":
-                convert_active(c, icons)
+            yield n
+        yield from _actives(n.children)
+
+
+def convert_half(items, icons):
+    for a in list(_actives(items)):
+        convert_active(a, icons)
     if any(n.key == "ColumnWidths" for n in items):
         return items  # the half itself is split into columns (an area picture beside the ability): leave its shape
 

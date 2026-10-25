@@ -60,11 +60,10 @@ Layout:
             - Column:
                 - Active:
                     Ability: BShield
-                    Icon: "Shield"
-                    ListLayout: "<sprite name=Shield> *BShield*, $Self$"
+                    Icon: Positive_Shield
+                    ListLayout: "<sprite name=Shield> *BShield*"
                     Layout:
                         - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
-                        - Row: "$Self$"
             - Column:
                 - Duration: Persistent
         - Row: "<size=20%> "

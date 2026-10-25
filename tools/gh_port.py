@@ -151,6 +151,10 @@ CLASS_ICONS = {
         "BRedirect": "Positive_Redirect_Ally_Attack_Aura",   # Provoking Roar: attacks on adjacent allies target you
         "BAbilityOverrideAbilityType": "Positive_Damage_Move",  # Immovable Phalanx: moves count as attacks
     },
+    # Gloomhaven's class-named actives (its class icon), by what the card does
+    "Sunkeeper": {"BInfuse": "Positive_Infusion"},                       # Beacon of Light: infuse Light each turn
+    "Sawbones": {"TAbilityOverrideAbilityType": "Positive_Heal"},        # Prep for Surgery: moves and attacks as heals
+    "Quartermaster": {"TActive": "Refresh"},                             # Refreshment: refresh an item on each long rest
 }
 
 # Slot shape for "Enhancements: N", by the ability key it sits under (from counting Frosthaven's own cards).
@@ -368,6 +372,8 @@ def main():
         s = fh_sprites.to_fh(s)   # Frosthaven's icons: item slots, no Aura icon, infused elements as CreateX
         for name in fh_sprites.check(s):
             warnings.append(f"{rel}: <sprite name={name}> isn't one of Frosthaven's icons (it would show as raw text)")
+        for name in fh_sprites.check_icons(s):
+            warnings.append(f"{rel}: active-bonus icon {name} isn't one of Frosthaven's (it would draw as a white box)")
         if rel.lower() in fh_names:
             sys.exit(f"{rel} already exists in Frosthaven's ruleset")
         if re.search(r"^[^#\n]*:\s*\[\s*\]", s, re.M):

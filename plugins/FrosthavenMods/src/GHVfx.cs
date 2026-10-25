@@ -277,7 +277,7 @@ namespace FrosthavenMods
                     t.SetActive(true);                                       // activeSelf under the inactive holder: pooled copies come out active, like a prefab's
                     try { Dress(t, spec, e, set, stateAudio); }
                     catch (Exception ex) { Plugin.Log.LogWarning($"Gloomhaven effects: {spec.Name} is only partly set up: {ex.Message}"); }
-                    try { Audit(t, spec.Name, set); }
+                    try { Audit(t, spec.Name, set, e); }
                     catch (Exception ex) { Plugin.Log.LogWarning($"Gloomhaven effects: {spec.Name} could not be audited: {ex.Message}"); }
                     set.Templates[spec.Name] = t;
                 }
@@ -315,6 +315,22 @@ namespace FrosthavenMods
                 Transform tr = kv.Key.Length == 0 ? template.transform : template.transform.Find(kv.Key);
                 if (tr == null) { if (Reported.Add(spec.Name + "/" + kv.Key)) Plugin.Log.LogWarning($"Gloomhaven effects: {spec.Name} has no {kv.Key}"); continue; }
                 ObjectSpec o = kv.Value;
+                // An effect can hold two objects of the same name (the Quartermaster's radial buff has two "MeshEmitterBits (2)");
+                // the pack's spec is keyed by name, so it applies to every one of them (left undressed, the second kept
+                // Gloomhaven's material and drew untextured white over the screen for the aura's whole round)
+                var targets = new List<Transform> { tr };
+                if (kv.Key.Length > 0 && kv.Key.IndexOf('/') < 0)
+                    targets.AddRange(template.GetComponentsInChildren<Transform>(true).Where(x => x != tr && x.name == kv.Key));
+                foreach (Transform same in targets)
+                    DressRenderer(same, o, e, set);
+                foreach (KeyValuePair<string, JObject> c in o.Components) AddScript(tr.gameObject, c.Key, c.Value, set, stateAudio);
+            }
+            if (template.GetComponent<EffectOnEnable>() == null) template.AddComponent<EffectOnEnable>().LifeTime = EffectOnEnable.DefaultLifeTime;   // the game warns without one
+        }
+
+        private static void DressRenderer(Transform tr, ObjectSpec o, GHModel.Entry e, Set set)
+        {
+            {
                 var r = tr.GetComponent<Renderer>();
                 if (r != null && (o.Materials != null || o.Loaded != null))
                 {
@@ -342,9 +358,7 @@ namespace FrosthavenMods
                     r.sharedMaterials = slots.ToArray();
                     if (r is ParticleSystemRenderer psr && o.TrailMaterial != null) psr.trailMaterial = Rebuild(set, e, o.TrailMaterial, psr.trailMaterial);
                 }
-                foreach (KeyValuePair<string, JObject> c in o.Components) AddScript(tr.gameObject, c.Key, c.Value, set, stateAudio);
             }
-            if (template.GetComponent<EffectOnEnable>() == null) template.AddComponent<EffectOnEnable>().LifeTime = EffectOnEnable.DefaultLifeTime;   // the game warns without one
         }
 
         // ------------------------------------------------------------------ materials
@@ -413,8 +427,12 @@ namespace FrosthavenMods
 
         /// <summary>One log line per renderer of a template, listing what each slot ended up with, so a pink or black part
         /// can be traced to its material. A slot whose shader the game cannot run (a Gloomhaven-only one that slipped
-        /// through) gets an additive unlit stand-in with the same texture; a renderer left with nothing usable is turned off.</summary>
-        private static void Audit(GameObject template, string name, Set set)
+        /// through) is rebuilt from the pack's description of its material when there is one; otherwise a part with a
+        /// texture gets an unlit stand-in drawing that texture, and a part without one (or a decal: Frosthaven has no
+        /// decal shader, and a decal volume drawn as a mesh is a solid sphere or box) is dropped. A renderer left with
+        /// nothing usable is turned off: an untextured stand-in drew as solid white (the Sawbones' medical-pack decals,
+        /// spheres round both heroes).</summary>
+        private static void Audit(GameObject template, string name, Set set, GHModel.Entry e)
         {
             foreach (Renderer r in template.GetComponentsInChildren<Renderer>(true))
             {
@@ -426,21 +444,37 @@ namespace FrosthavenMods
                     Material m = mats[i];
                     if (m == null) { parts.Add("-"); continue; }
                     Shader sh = m.shader;
-                    bool ok = sh != null && sh.isSupported && sh.name != "Hidden/InternalErrorShader";
+                    bool ok = Usable(m);
+                    string fate = "";
+                    if (!ok && e != null && e.EffectMaterials.ContainsKey(m.name))
+                    {
+                        Material rebuilt = Rebuild(set, e, m.name, m);
+                        if (rebuilt != null && rebuilt != m && Usable(rebuilt)) { mats[i] = rebuilt; changed = true; ok = true; fate = " -> rebuilt"; }
+                    }
                     if (!ok)
                     {
-                        Shader unlit = FindShader("Particles/Standard Unlit");
+                        Texture tex = AnyTexture(m);
+                        bool decal = (sh != null && sh.name.IndexOf("Decal", StringComparison.OrdinalIgnoreCase) >= 0) || m.name.IndexOf("Decal", StringComparison.OrdinalIgnoreCase) >= 0;
+                        Shader unlit = tex != null && !decal ? FindShader("Particles/Standard Unlit") : null;
                         if (unlit != null)
                         {
-                            var fix = new Material(unlit) { name = m.name + " (stand-in)", hideFlags = HideFlags.DontUnloadUnusedAsset, mainTexture = m.mainTexture };
-                            Additive(fix);
+                            var fix = new Material(unlit) { name = m.name + " (stand-in)", hideFlags = HideFlags.DontUnloadUnusedAsset, mainTexture = tex };
+                            if (!(r is MeshRenderer) && !(r is SkinnedMeshRenderer)) Additive(fix);   // particles glow; a prop mesh keeps its look
                             mats[i] = fix;
                             changed = true;
                             ok = true;
+                            fate = " -> stand-in";
+                        }
+                        else
+                        {
+                            mats[i] = null;
+                            changed = true;
+                            fate = decal ? " -> dropped (decal)" : " -> dropped (no texture)";
                         }
                     }
                     usable |= ok;
-                    parts.Add($"{m.name} [{(sh != null ? sh.name : "no shader")}{(ok ? "" : " UNSUPPORTED")}{(m.mainTexture != null ? ", " + m.mainTexture.name : "")}]");
+                    Texture shown = m.HasProperty("_MainTex") ? m.mainTexture : null;   // asking a shader without the slot logs an error
+                    parts.Add($"{m.name} [{(sh != null ? sh.name : "no shader")}{(shown != null ? ", " + shown.name : "")}]{fate}");
                 }
                 if (changed) r.sharedMaterials = mats;
                 if (!usable && mats.Length > 0) r.enabled = false;
@@ -448,6 +482,22 @@ namespace FrosthavenMods
                 string mode = r is ParticleSystemRenderer psr ? " " + psr.renderMode : "";
                 Plugin.Log.LogInfo($"Gloomhaven effects: {name}/{path}{mode}{(r.enabled ? "" : " (off)")}: {string.Join("; ", parts)}");
             }
+        }
+
+        private static bool Usable(Material m) =>
+            m != null && m.shader != null && m.shader.isSupported && m.shader.name != "Hidden/InternalErrorShader";
+
+        /// <summary>The first texture a material still holds in any slot (a lost shader keeps the property sheet: the
+        /// weapon prop's _Diffuse survives on the error shader), or null.</summary>
+        private static Texture AnyTexture(Material m)
+        {
+            if (m.HasProperty("_MainTex") && m.mainTexture != null) return m.mainTexture;
+            foreach (string slot in m.GetTexturePropertyNames())
+            {
+                Texture t = m.GetTexture(slot);
+                if (t != null && !slot.StartsWith("unity_", StringComparison.Ordinal)) return t;
+            }
+            return null;
         }
 
         /// <summary>Frosthaven's shader for a Gloomhaven effect material: the same name (the shared VFX library), or a

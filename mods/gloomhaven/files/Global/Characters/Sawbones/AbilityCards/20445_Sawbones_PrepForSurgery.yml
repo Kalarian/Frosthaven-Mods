@@ -44,7 +44,7 @@ Layout:
     Top:
         - Active:
             Ability: TAbilityOverrideAbilityType
-            Icon: Sawbones
+            Icon: Positive_Heal
             ListLayout: "$GH_445_T_1$ $GH_445_T_2$"
             Layout:
                 - Row: "$GH_445_T_1$"

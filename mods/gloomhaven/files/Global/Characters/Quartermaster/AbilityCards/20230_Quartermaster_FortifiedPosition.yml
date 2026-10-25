@@ -40,7 +40,7 @@ Layout:
             Ability: TActive
             ListLayout: "$GH_230_T$"
             Layout: "$GH_230_T$"
-            Icon: Heal
+            Icon: Refresh
         - Row: "<size=50%> "
         - XPTracker: TActive
     Bottom:

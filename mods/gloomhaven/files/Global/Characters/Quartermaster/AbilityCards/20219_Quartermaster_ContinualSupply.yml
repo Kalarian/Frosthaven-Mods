@@ -42,6 +42,6 @@ Layout:
             Ability: TActive
             ListLayout: "$GH_219_T$"
             Layout: "$GH_219_T$"
-            Icon: SmallItem
+            Icon: Refresh
     Bottom:
         - Row: "$GH_219_B$"

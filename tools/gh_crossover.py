@@ -91,7 +91,9 @@ BattleGoalCondition:
 def _once_per_quest(desc_key, icon, inner):
     """A "once each quest, during your turn" perk, Frosthaven's own pattern (Perk_BannerSpear_10, the Deepwraith's Skull
     Collection): a persistent toggle bonus added at scenario start; its AddActiveBonus content is the ability performed
-    when the player toggles it during their turn; XPTracker [0] gives it a single use."""
+    when the player toggles it during their turn; XPTracker [0] gives it a single use. The toggle's button in the
+    "activate" bar takes its picture from the perk icon list by perk ID, which has no entry for a ported perk (it drew
+    a white box), so the bonus names an active-ability icon itself (MiscVars OverrideIcon, as Skull Collection does)."""
     return f"""\
     TActive:
         AutoTrigger: True
@@ -105,6 +107,8 @@ def _once_per_quest(desc_key, icon, inner):
             IsToggleBonus: True
             Hidden: True
             ListLayoutOverride: [${desc_key}$, {icon}]
+            MiscVars:
+                OverrideIcon: "'{icon}'"
         AnimOverload: PowerUp"""
 
 
@@ -129,7 +133,7 @@ SCOUNDREL_PERKS = [
      {"Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
     (1, "Cloak of Invisibility", 'Once each quest, during your turn, perform <sprite name=Invisible>, self',
      {"Cost": 2, "Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]",
-      "Abilities": _once_per_quest("PERK_Scoundrel_10_Desc", "Positive_Unique_Campaign", "            Invisible: True")}),
+      "Abilities": _once_per_quest("PERK_Scoundrel_10_Desc", "Invisible", "            Invisible: True")}),
 ]
 
 SCOUNDREL_MASTERIES = [
@@ -284,7 +288,7 @@ QUARTERMASTER_PERKS = [
     # the sheet also asks for a persistent Quartermaster card in the active area; not enforced here (noted in the guide)
     (1, "Well Supplied", 'Once each quest, during your turn, <sprite name=RecoverIcon> up to four cards from your discard pile',
      {"Cost": 2, "Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]",
-      "Abilities": _once_per_quest("PERK_Quartermaster_09_Desc", "RecoverIcon", "            RecoverDiscardedCards: 4")}),
+      "Abilities": _once_per_quest("PERK_Quartermaster_09_Desc", "Recover", "            RecoverDiscardedCards: 4")}),
 ]
 
 QUARTERMASTER_MASTERIES = [

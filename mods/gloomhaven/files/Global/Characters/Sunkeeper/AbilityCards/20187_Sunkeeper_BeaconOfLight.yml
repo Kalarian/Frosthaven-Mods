@@ -35,6 +35,6 @@ Layout:
             Ability: BInfuse
             ListLayout: "$GH_187_B$"
             Layout: "$GH_187_B$"
-            Icon: Sunkeeper
+            Icon: Positive_Infusion
         - Row: "<size=50%> "
         - XPTracker: BInfuse

@@ -89,6 +89,27 @@ def fh_names(game=None):
     return frozenset(n for n in names if n)
 
 
+ICON_FIELDS = re.compile(r'^\s*(?:Icon|OverrideIcon):\s*"?\'?([A-Za-z0-9_]+)|ListLayoutOverride:\s*\[[^,\]]*,\s*([A-Za-z0-9_]+)\s*\]', re.M)
+
+
+@lru_cache(maxsize=1)
+def active_icons():
+    """Frosthaven's active-ability icon names (ActiveAbilityDataSO in misc_globalsettings, saved in
+    tools/data/fh_active_icons.json): what an active bonus's Icon, ListLayoutOverride icon and OverrideIcon can name.
+    A perk toggle naming anything else drew a white box in the activate bar."""
+    p = Path(__file__).resolve().parent / "data" / "fh_active_icons.json"
+    import json
+    return frozenset(json.loads(p.read_text(encoding="utf-8"))) if p.exists() else frozenset()
+
+
+def check_icons(text):
+    """The active-bonus icon names in a ruleset file that Frosthaven doesn't have (empty when the list is missing)."""
+    known = active_icons()
+    if not known:
+        return []
+    return sorted({n for m in ICON_FIELDS.finditer(text) for n in m.groups() if n and n not in known})
+
+
 def check(text):
     """The sprite names in the text that Frosthaven can't draw (empty when the game's list isn't available)."""
     known = fh_names()

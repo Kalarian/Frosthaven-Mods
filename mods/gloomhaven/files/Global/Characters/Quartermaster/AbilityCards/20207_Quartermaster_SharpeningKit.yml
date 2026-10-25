@@ -41,6 +41,6 @@ Layout:
     Bottom:
         - Active:
             Ability: BAttackBuff
-            Icon: Attack
+            Icon: Positive_AttackPlus
             ListLayout: "<b></b> $GH_207_B$"
             Layout: "<b></b> $GH_207_B$"

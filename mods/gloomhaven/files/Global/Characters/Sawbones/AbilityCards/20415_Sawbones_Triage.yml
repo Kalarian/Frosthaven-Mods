@@ -32,7 +32,7 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            Icon: Heal
+            Icon: Positive_Heal
             ListLayout: "$GH_415_T$"
             Layout: "$GH_415_T$"
         - Row: "<size=50%> "

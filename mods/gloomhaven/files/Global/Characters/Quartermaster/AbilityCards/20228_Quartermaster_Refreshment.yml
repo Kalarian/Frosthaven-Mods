@@ -34,7 +34,7 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            Icon: Quartermaster
+            Icon: Refresh
             ListLayout: "$GH_228_T$"
             Layout: "$GH_228_T$"
     Bottom:

@@ -29,7 +29,7 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            Icon: Heal
+            Icon: Positive_Heal
             ListLayout: "$GH_441_T$"
             Layout: "$GH_441_T$"
         - Row: "<size=50%> "
@@ -37,6 +37,6 @@ Layout:
     Bottom:
         - Active:
             Ability: BHealBuff
-            Icon: Heal
+            Icon: Positive_Heal
             ListLayout: "$GH_441_B$"
             Layout: "$GH_441_B$"

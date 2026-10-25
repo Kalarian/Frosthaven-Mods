@@ -333,7 +333,6 @@ Scoundrel_ROLE	Melee Damage
 Scoundrel_SKIN_ALT	Nightcrawler
 Scoundrel_STRENGTHS	- <indent=%15>High mobility</indent>\n- <indent=%15>Potential for high melee Damage</indent>\n- <indent=%15>Can afflict enemies with Poison</indent>
 Scoundrel_WEAKNESSES	- <indent=%15>Little in the way of effects that assist teammates</indent>\n- <indent=%15>Few defensive abilities and low health</indent>\n- <indent=%15>Will try and take ALL the gold</indent>
-Self	Self
 Suffer_2Damage	Suffer 2 damage.
 Suffer_3Damage	Suffer 3 damage.
 Sunkeeper	Sunkeeper

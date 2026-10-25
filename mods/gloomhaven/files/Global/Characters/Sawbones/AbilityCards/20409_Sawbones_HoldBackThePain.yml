@@ -46,6 +46,6 @@ Layout:
     Bottom:
         - Active:
             Ability: BActive
-            Icon: Attack
+            Icon: Positive_AttackPlus
             ListLayout: "$GH_409_B$"
             Layout: "$GH_409_B$"

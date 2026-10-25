@@ -34,6 +34,6 @@ Layout:
     Bottom:
         - Active:
             Ability: BActive
-            Icon: Heal
+            Icon: Positive_Heal
             ListLayout: "$GH_408_B$"
             Layout: "$GH_408_B$"

@@ -30,6 +30,6 @@ Layout:
             Ability: TAttackBuff
             ListLayout: "$GH_208_T$"
             Layout: "$GH_208_T$"
-            Icon: Attack
+            Icon: Positive_AttackPlus
     Bottom:
         - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

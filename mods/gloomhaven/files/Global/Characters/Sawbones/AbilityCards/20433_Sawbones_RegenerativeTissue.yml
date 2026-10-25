@@ -50,6 +50,6 @@ Layout:
         - Row: "<size=50%> "
         - Active:
             Ability: BActive
-            Icon: Heal
+            Icon: Positive_Heal
             ListLayout: "$GH_433_B$"
             Layout: "$GH_433_B$"

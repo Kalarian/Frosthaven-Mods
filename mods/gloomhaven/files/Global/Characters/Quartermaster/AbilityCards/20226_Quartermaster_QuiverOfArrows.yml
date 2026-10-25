@@ -32,7 +32,7 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            Icon: Target
+            Icon: Refresh
             ListLayout: "<b></b> $GH_226_T$"
             Layout: "<b></b> $GH_226_T$"
     Bottom:

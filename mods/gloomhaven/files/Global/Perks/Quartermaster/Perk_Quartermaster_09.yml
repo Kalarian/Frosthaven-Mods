@@ -18,5 +18,7 @@ Abilities:
             XPTracker: [0]
             IsToggleBonus: True
             Hidden: True
-            ListLayoutOverride: [$PERK_Quartermaster_09_Desc$, RecoverIcon]
+            ListLayoutOverride: [$PERK_Quartermaster_09_Desc$, Recover]
+            MiscVars:
+                OverrideIcon: "'Recover'"
         AnimOverload: PowerUp
