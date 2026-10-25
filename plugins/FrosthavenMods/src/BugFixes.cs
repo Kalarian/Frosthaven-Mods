@@ -378,5 +378,35 @@ namespace FrosthavenMods
         {
             if (On && __result != null) __result = __result.Where(b => b.IsEvenID).ToList();
         }
+
+        /// <summary>The Load window's preview showed heroes at the level (and gold) they had when they were last put in
+        /// their party slots or went to a scenario. The save's summary (PartyAdventureData.GenerateHeader) reads the
+        /// Gloomhaven-era copy of the party (MapParty.SelectedCharactersArray), which Frosthaven rebuilds from its own
+        /// character records only on slot assignment, on heading to the scenario map, and after a scenario's results,
+        /// not when a hero levels up or earns gold in the outpost. So a party levelled and then saved in the outpost
+        /// showed level 1. This writes each summary hero's level and gold from Frosthaven's own record, matched by
+        /// class. Display only: the summary feeds the save list, nothing in play.</summary>
+        [HarmonyPatch(typeof(PartyAdventureData), "GenerateHeader")]
+        [HarmonyPostfix]
+        private static void SavePreviewLevels(PartyAdventureData __instance, ref PartyAdventureData.Header __result)
+        {
+            if (!On || __result.LastSavedCharacterInfo == null) return;
+            try
+            {
+                IEnumerable<FHRL.CharacterState> party = __instance.FrosthavenCampaign?.PartyCharacters;
+                if (party == null) return;
+                PartyAdventureData.Header.HeaderCharacterInfo[] heroes = __result.LastSavedCharacterInfo;
+                for (int i = 0; i < heroes.Length; i++)
+                {
+                    if (!heroes[i].IsValid) continue;
+                    string id = heroes[i].ID;
+                    FHRL.CharacterState real = party.FirstOrDefault(c => c != null && c.ClassID.ID == id);
+                    if (real == null) continue;
+                    heroes[i].Level = (int)real.Level;
+                    heroes[i].Gold = (int)real.Gold;
+                }
+            }
+            catch (Exception e) { Plugin.Log.LogError("Game bug fixes: save preview levels skipped: " + e); }
+        }
     }
 }
