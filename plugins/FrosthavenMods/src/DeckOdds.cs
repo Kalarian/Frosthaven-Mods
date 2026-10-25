@@ -210,8 +210,10 @@ namespace FrosthavenMods
                 if (c == null) continue;
                 o.Cards++;
                 if (c.Rolling) { o.Rolling++; continue; }
-                if (c.IsCurse || c.MathModifier == "*0") o.Null++;
-                else if (c.IsBless || c.MathModifier == "*2") o.X2++;
+                // by what the card does: with Reduced randomness a curse is a -2 and a bless a +2
+                bool noMath = string.IsNullOrEmpty(c.MathModifier);
+                if (c.MathModifier == "*0" || (c.IsCurse && noMath)) o.Null++;
+                else if (c.MathModifier == "*2" || (c.IsBless && noMath)) o.X2++;
                 else if (AttackModifierYMLData.TryParseMathModifier(c.MathModifier, out char op, out int value) && op == '-' && value > 0) o.Minus++;
                 else if (AttackModifierYMLData.TryParseMathModifier(c.MathModifier, out op, out value) && op == '+' && value > 0) o.Plus++;
                 else o.Zero++;

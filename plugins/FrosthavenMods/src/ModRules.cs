@@ -58,6 +58,11 @@ namespace FrosthavenMods
         public const ERulesFlag QuestRewards = (ERulesFlag)(1 << 17);
         public const ERulesFlag KeepMasteries = (ERulesFlag)(1 << 16);
         public const ERulesFlag GloomhavenClasses = (ERulesFlag)(1 << 15);
+        // Two of the game's own rule bits, which it never shows on its rules screen: their effects are the game's own
+        // (ReducedRandomness.cs passes the first to the scenario rules; the game applies the second itself, in
+        // PartyAdventureData.ChangeCampaignRules, on every PC). A save keeps them without the mods too.
+        public const ERulesFlag ReducedRandomness = ERulesFlag.ReducedRandomness;
+        public const ERulesFlag RespecAnywhere = ERulesFlag.CanRespecCharacters;
 
         public static readonly List<Rule> All = new List<Rule>
         {
@@ -186,6 +191,29 @@ namespace FrosthavenMods
             },
             new Rule
             {
+                Flag = ReducedRandomness,
+                AffectsScenarios = true,
+                Name = "Reduced randomness (mod)",
+                Description = "Gloomhaven digital's house rule, which this game carries but never offers: every attack " +
+                              "modifier deck, players' and monsters', has a -2 instead of the null and a +2 instead of the " +
+                              "x2, and both still reshuffle the deck at the end of the round. Curses are -2 and blesses +2 " +
+                              "(instead of null and x2). No more wasted attacks or huge spikes.\n\n" +
+                              "Takes effect when the next scenario starts. Perks work as usual (removing a -2 takes the plain " +
+                              "one).\n" +
+                              "Board game rule bent: the null and the x2 are part of every modifier deck.",
+            },
+            new Rule
+            {
+                Flag = RespecAnywhere,
+                Name = "Respec without the Library (mod)",
+                Description = "Characters can respec before the Library is built: the Respec button on the level-up card " +
+                              "screen resets the cards a character chose at level 2 and up, to choose again. It costs 10 " +
+                              "gold per character level (a wrecked Library's price; once the Library is built, its own " +
+                              "lower price applies: 8 per level at level 1, less higher up). Perks are not reset.\n\n" +
+                              "The game's own rule, which it never shows. Board game rule bent: respec needs the Library.",
+            },
+            new Rule
+            {
                 Flag = MilestoneSaves,
                 Name = "Milestone saves (mod)",
                 Description = "The host's game makes a named save at the start of each scenario and when the outpost opens " +
@@ -222,7 +250,7 @@ namespace FrosthavenMods
                 Description = "In scenarios, right-click a character: under Attack Modifiers (which already shows how many " +
                               "of each card are left), it also shows the odds of their next draw: null, -1/-2, +0, +1 or " +
                               "more, x2 and a rolling bonus, plus each card's own chance on its icon. Right-click a monster for the monster deck. It notes when a " +
-                              "deck will reshuffle at the end of the round. Curses count as nulls and blesses as x2s.\n\n" +
+                              "deck will reshuffle at the end of the round. Curses count as nulls and blesses as x2s (as -2 and +2 under Reduced randomness).\n\n" +
                               "Display only: it changes nothing in play, and it only does the math on the counts the " +
                               "game already shows.",
             },
