@@ -86,6 +86,7 @@ namespace FrosthavenMods
             public string Folder, Bundle, BundleName, Prefab, HeroPrefab, AnimatorObject, BodyMesh, TargetBone, ProjectileAnchor;
             public float Height = 2f, HitRadius = 0.1f;
             public string[] TrailPoints = new string[0];
+            public string[] Feet = new string[0];                                                  // the bones the footstep dust spawns on: left, right
             public List<WeaponSpec> Weapons = new List<WeaponSpec>();
             public Dictionary<string, MaterialSpec> Materials = new Dictionary<string, MaterialSpec>(StringComparer.Ordinal);
             public AnimationSpec Animation = new AnimationSpec();
@@ -104,7 +105,7 @@ namespace FrosthavenMods
                     AnimatorObject = (string)j["animator"], BodyMesh = (string)j["body_mesh"],
                     TargetBone = (string)j["target_bone"], ProjectileAnchor = (string)j["projectile_anchor"],
                     Height = (float?)j["height"] ?? 2f, HitRadius = (float?)j["hit_radius"] ?? 0.1f,
-                    TrailPoints = Strings(j["trail_points"]),
+                    TrailPoints = Strings(j["trail_points"]), Feet = Strings(j["feet"]),
                     Effects = GHVfx.ParseEffects(j["effects"]), EffectMaterials = GHVfx.ParseMaterials(j["effect_materials"]), EffectBundles = GHVfx.ParseBundles(j["effect_bundles"]),
                 };
                 if (string.IsNullOrEmpty(e.Bundle) || string.IsNullOrEmpty(e.Prefab)) throw new FormatException("no bundle or prefab");
@@ -325,8 +326,9 @@ namespace FrosthavenMods
             var idle = visual.AddComponent<IdleAnimParams>();
             IdleAnimParams idleLike = drifterVisual.GetComponent<IdleAnimParams>();
             if (idleLike != null) { idle.MinIdleCyclesToRare = idleLike.MinIdleCyclesToRare; idle.MaxIdleCyclesToRare = idleLike.MaxIdleCyclesToRare; }
-            var feet = visual.AddComponent<FootstepSound>();                // receives the run clip's footstep events; the Drifter's sound events, no particles
+            var feet = visual.AddComponent<FootstepSound>();                // receives the run clip's footstep events: the Drifter's step sounds and her footstep dust
             CopyFields(drifterVisual.GetComponent<FootstepSound>(), feet, FootstepFields);
+            SetFeet(feet, visual.transform, e);
             foreach (string projectile in e.Animation.Projectiles)
             {
                 // the Drifter's ranged states fire a child of this name: an empty one lets them run (the trail flies, the hit lands)
@@ -374,9 +376,15 @@ namespace FrosthavenMods
         {
             Animator animator = b.Visual.GetComponent<Animator>();
             if (animator == null) return;
-            if (b.Override != null && b.Override.runtimeAnimatorController != null && animator.runtimeAnimatorController == b.Override) return;
+            bool rebase = !(b.Override != null && b.Override.runtimeAnimatorController != null && animator.runtimeAnimatorController == b.Override);
+            FootstepSound feet = b.Visual.GetComponent<FootstepSound>();
+            bool dust = DustGone(feet);   // her footstep dust prefab went with her bundle too
+            if (!rebase && !dust) return;
             GameObject drifter = DrifterPrefab(b.Entry.Animation);
-            RuntimeAnimatorController baseController = drifter?.GetComponent<CharacterManager>()?.CharacterChildPrefab?.GetComponent<Animator>()?.runtimeAnimatorController;
+            GameObject drifterVisual = drifter?.GetComponent<CharacterManager>()?.CharacterChildPrefab;
+            if (dust && drifterVisual != null) CopyFields(drifterVisual.GetComponent<FootstepSound>(), feet, new[] { FootstepDust });
+            if (!rebase) return;
+            RuntimeAnimatorController baseController = drifterVisual?.GetComponent<Animator>()?.runtimeAnimatorController;
             if (baseController == null)
             {
                 if (Reported.Add("no base " + b.Entry.Model)) Plugin.Log.LogWarning($"Gloomhaven model: the {b.Entry.Animation.Base}'s animator is not loaded; the {b.Entry.Model} keeps its old one");
@@ -635,6 +643,9 @@ namespace FrosthavenMods
                 GHSound.Ensure(b.Entry.Model, b.Entry.Folder);
                 if (b.Override != null && animator.runtimeAnimatorController != b.Override) animator.runtimeAnimatorController = b.Override;
                 foreach (Renderer r in clone.GetComponentsInChildren<Renderer>(true)) r.SetPropertyBlock(null);   // the class screen's lighting tweak, kept by the pool
+                FootstepSound cloneFeet = clone.GetComponent<FootstepSound>();
+                if (DustGone(cloneFeet) && !DustGone(b.Visual.GetComponent<FootstepSound>()))                  // a pooled clone from an earlier scene: the template's dust was reloaded since
+                    FootstepDust.SetValue(cloneFeet, FootstepDust.GetValue(b.Visual.GetComponent<FootstepSound>()));
                 // The behaviours exist once the Animator has bound its controller; a clone spawned under an inactive
                 // holder (the class screen) binds later, so wait for it then (the game's own preview code does the same).
                 if (animator.isInitialized && Retime(animator, b.Entry) > 0) return;
@@ -870,14 +881,50 @@ namespace FrosthavenMods
 
         // ------------------------------------------------------------------ helpers
 
-        /// <summary>FootstepSound's sound-event names (private, serialized): copied from the Drifter's; its particle
-        /// prefabs stay null, which makes it skip its feet lookup.</summary>
+        /// <summary>FootstepSound's private serialized fields: the footstep dust prefab (the puff every Frosthaven hero
+        /// leaves at a footfall; it lives in the Drifter's bundle, so it is re-copied when it has died), and the feet it
+        /// spawns on (the run clip's footstep events index them: 1 left, 2 right). Without both, the component skips the
+        /// dust and only plays the step sound.</summary>
+        private static readonly FieldInfo FootstepDust = typeof(FootstepSound).GetField("m_PFXPrefab", BindingFlags.Instance | BindingFlags.NonPublic);
+        private static readonly FieldInfo FootstepFeet = typeof(FootstepSound).GetField("m_FeetArray", BindingFlags.Instance | BindingFlags.NonPublic);
+
+        /// <summary>What a ported hero's FootstepSound copies from the Drifter's: her step and cloth sound events and her
+        /// footstep dust. Her enhanced-steps dust is hers alone and stays null (the component then uses the plain dust).</summary>
         private static readonly FieldInfo[] FootstepFields =
         {
             typeof(FootstepSound).GetField("m_FootstepAudioEvent", BindingFlags.Instance | BindingFlags.NonPublic),
             typeof(FootstepSound).GetField("m_ClothAudioEvent", BindingFlags.Instance | BindingFlags.NonPublic),
             typeof(FootstepSound).GetField("m_ClothAudioEnhanced", BindingFlags.Instance | BindingFlags.NonPublic),
+            FootstepDust,
         };
+
+        /// <summary>The bones the footstep dust spawns on, left then right: the pack's names (the Gloomhaven model's own
+        /// FootstepSound feet, recorded by tools/gh_model.py), else the first bone named for each foot.</summary>
+        private static void SetFeet(FootstepSound feet, Transform visual, Entry e)
+        {
+            if (feet == null || FootstepFeet == null) return;
+            List<Transform> bones = e.Feet.Select(n => Find(visual, n)).Where(t => t != null).ToList();
+            if (bones.Count == 0)
+            {
+                Transform[] all = visual.GetComponentsInChildren<Transform>(true);
+                foreach (string side in new[] { "L_", "R_" })
+                {
+                    Transform foot = all.FirstOrDefault(t => t.name.StartsWith(side, StringComparison.OrdinalIgnoreCase) && t.name.IndexOf("foot", StringComparison.OrdinalIgnoreCase) >= 0);
+                    if (foot != null) bones.Add(foot);
+                }
+            }
+            if (bones.Count == 0)
+            {
+                if (Reported.Add("feet " + e.Model)) Plugin.Log.LogWarning($"Gloomhaven model: no foot bones found on the {e.Model}; it leaves no footstep dust");
+                return;
+            }
+            FootstepFeet.SetValue(feet, bones.ToArray());
+        }
+
+        /// <summary>True when the footstep dust prefab on <paramref name="feet"/> is gone (never set, or unloaded with the
+        /// Drifter's bundle).</summary>
+        private static bool DustGone(FootstepSound feet) =>
+            feet != null && FootstepDust != null && (FootstepDust.GetValue(feet) as UnityEngine.Object) == null;
 
         private static void CopyFields(Component from, Component to, FieldInfo[] fields)
         {

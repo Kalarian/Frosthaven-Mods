@@ -39,6 +39,10 @@
         "L_legSkel03_JNT"
       ],
       "projectile_anchor": "R_weaponPropHook_LOC",
+      "feet": [
+        "L_footSkel01_JNT",
+        "R_footSkel01_JNT"
+      ],
       "weapons": [
         {
           "list": "BruteSword",

@@ -297,7 +297,7 @@ def describe(bundle_path, cls, fh_bundle_path, skin=None, animation=None):
                         "type": WEAPON_TYPES.get(wtype, "Cosmetic"), "_go": root})
 
     # the model: the Animator's GameObject, its VFX anchors, the skinned meshes, their materials and textures
-    animator_go, body, top, trail_points, materials, bones = None, (None, -1), 0.0, [], {}, set()
+    animator_go, body, top, trail_points, feet, materials, bones = None, (None, -1), 0.0, [], [], {}, set()
     for go in b.walk(model_go):
         gname = go.read_typetree()["m_Name"]
         bones.add(gname)
@@ -306,6 +306,9 @@ def describe(bundle_path, cls, fh_bundle_path, skin=None, animation=None):
                 animator_go = gname
             elif n == "VFXLookup":
                 trail_points = [x for x in (b.name(p) for p in t.get("TrailPoints", [])) if x]
+            elif n == "FootstepSound":
+                # the bones its footstep dust spawns on (left foot, right foot: the run clip's events index them)
+                feet = [x for x in (b.name(p) for p in t.get("m_FeetArray", [])) if x]
             elif n == "SkinnedMeshRenderer":
                 mesh = b.obj(t["m_Mesh"])
                 if mesh is None:
@@ -341,7 +344,7 @@ def describe(bundle_path, cls, fh_bundle_path, skin=None, animation=None):
     return {
         "prefab": model_path, "hero_prefab": hero_path, "animator": animator_go, "body_mesh": body[0],
         "target_bone": cm["TargetBone"], "gh_height": round(cm["Height"], 3), "height": round(top, 2),
-        "hit_radius": round(cm["HitRadius"], 3), "trail_points": trail_points, "projectile_anchor": anchor,
+        "hit_radius": round(cm["HitRadius"], 3), "trail_points": trail_points, "projectile_anchor": anchor, "feet": feet,
         "weapons": kept, "materials": materials, "animation": animation,
     }
 

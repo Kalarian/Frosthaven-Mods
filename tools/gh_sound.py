@@ -6,9 +6,11 @@ names an audio event ("PlaySound_BruteStandardMeleeAttack"), the controller play
 has none of Gloomhaven's events, so the class's clips are exported here and the plugin (GHSound.cs) registers them
 under their Gloomhaven event names at runtime; gh_model.py records which event each animator state plays.
 
-Gloomhaven's event -> clip table (its AudioController) is stored without type information and can't be read, so the
-events are matched to the clips by name, per class (SOUNDS). The clips are written as mono 16-bit WAV at 32 kHz
-(sounds\\<Class>\\<clip>.wav): small, and read by the plugin synchronously, with no decoder.
+Gloomhaven's event -> clip table (its AudioController, in GH_Data/resources.assets) is stored without type information;
+it can be read with a type tree generated from the game's assemblies (UnityPy's TypeTreeGenerator), which is how the
+volumes noted at LEVELLING were checked, but the events are matched to the clips by name, per class (SOUNDS). The clips
+are written as mono 16-bit WAV at 32 kHz (sounds\\<Class>\\<clip>.wav): small, and read by the plugin synchronously,
+with no decoder.
 
     sounds.json   {"<event>": ["<clip>.wav", ...]}  (several clips: the toolkit picks one at random)
 """
@@ -52,10 +54,74 @@ SOUNDS = {
 # shout is not here: its roar is on the effect itself (SFXOnEnable on P_Brute_Shout), which the plugin re-adds.
 STATE_EVENTS = {}
 
-# Every clip is levelled to this peak. Gloomhaven's per-event volume settings are in its unreadable audio table, and
-# its files sit anywhere between 0.35 (the shield power-up) and 0.8; played as they are at one volume, the quiet ones
-# (the roars, the shield power-up) were lost under the game's own hit and step sounds.
-PEAK = 0.9
+# LEVELLING. Gloomhaven's own table plays the Brute's attack events at item volume 1.0 in its Brute_SFX category (0.76;
+# heal 0.84, cast positive 0.71, on-hit 0.60), i.e. the clips at their natural levels, which sit anywhere between peak
+# 0.35 (the shield power-up) and 0.8. Played like that at one volume in Frosthaven, the quiet ones (the roars, the
+# shield power-up) were lost under the game's own hit and step sounds, so every clip is levelled. Levelling to one PEAK
+# left the dull, sustained sounds (the heavy swing, the quake, the throw) 2-4 dB under the bright ones (the roars, the
+# shield), which the in-game comparison with Gloomhaven confirmed; so the clips are levelled by loudness instead:
+# K-weighted (ITU-R BS.1770) over the loudest 400 ms, to TARGET_LUFS, with a look-ahead limiter holding the peaks
+# under CEILING. The gain is bounded (GAIN_DB) so a near-silent clip is never blown up.
+TARGET_LUFS = -12.5
+CEILING = 0.95
+GAIN_DB = (-12.0, 12.0)
+
+
+def _biquad(x, b0, b1, b2, a1, a2):
+    """A direct-form biquad over a float32 array (no scipy here)."""
+    out, x1, x2, y1, y2 = [], 0.0, 0.0, 0.0, 0.0
+    for v in x.tolist():
+        y = b0 * v + b1 * x1 + b2 * x2 - a1 * y1 - a2 * y2
+        x2, x1, y2, y1 = x1, v, y1, y
+        out.append(y)
+    return np.asarray(out, dtype="float32")
+
+
+def _k_weighting(rate):
+    """The two BS.1770 pre-filters for <rate>: a +4 dB high shelf (the head) and a 38 Hz high-pass (RLB)."""
+    import math
+    A, w0, q = 10 ** (3.99 / 40), 2 * math.pi * 1681.97 / rate, 0.7072
+    cw, sw = math.cos(w0), math.sin(w0)
+    alpha = sw / (2 * q)
+    a0 = (A + 1) - (A - 1) * cw + 2 * math.sqrt(A) * alpha
+    shelf = (A * ((A + 1) + (A - 1) * cw + 2 * math.sqrt(A) * alpha) / a0, -2 * A * ((A - 1) + (A + 1) * cw) / a0,
+             A * ((A + 1) + (A - 1) * cw - 2 * math.sqrt(A) * alpha) / a0,
+             2 * ((A - 1) - (A + 1) * cw) / a0, ((A + 1) - (A - 1) * cw - 2 * math.sqrt(A) * alpha) / a0)
+    w0, q = 2 * math.pi * 38.13 / rate, 0.5003
+    cw, sw = math.cos(w0), math.sin(w0)
+    alpha = sw / (2 * q)
+    a0 = 1 + alpha
+    highpass = ((1 + cw) / 2 / a0, -(1 + cw) / a0, (1 + cw) / 2 / a0, -2 * cw / a0, (1 - alpha) / a0)
+    return shelf, highpass
+
+
+def loudness(mono, rate=RATE):
+    """K-weighted loudness of the loudest 400 ms of <mono>, in LUFS (-99 for silence)."""
+    import math
+    shelf, highpass = _k_weighting(rate)
+    k = _biquad(_biquad(mono, *shelf), *highpass)
+    sq = k.astype("float64") ** 2
+    win = int(0.4 * rate)
+    if len(sq) <= win:
+        ms = float(sq.mean()) if len(sq) else 0.0
+    else:
+        c = np.concatenate(([0.0], np.cumsum(sq)))
+        ms = float((c[win:] - c[:-win]).max()) / win
+    return -0.691 + 10 * math.log10(ms) if ms > 0 else -99.0
+
+
+def _limit(x, ceiling=CEILING, lookahead=0.003, release=0.08, rate=RATE):
+    """A look-ahead peak limiter: the gain is already down when a peak arrives and recovers over <release> seconds."""
+    need = np.minimum(1.0, ceiling / np.maximum(np.abs(x), 1e-9))
+    env = need.copy()
+    for k in range(1, max(1, int(lookahead * rate)) + 1):   # the minimum over the next <lookahead> samples
+        env[:-k] = np.minimum(env[:-k], need[k:])
+    r = 1.0 - np.exp(-1.0 / (release * rate))
+    gain, g = [], 1.0
+    for e in env.tolist():
+        g = e if e < g else g + (1.0 - g) * r
+        gain.append(g)
+    return np.clip(x * np.asarray(gain, dtype="float32"), -1.0, 1.0).astype("float32")
 
 
 def _mono(wav_bytes):
@@ -64,10 +130,10 @@ def _mono(wav_bytes):
     if rate != RATE:
         n = int(round(len(mono) * RATE / rate))
         mono = np.interp(np.linspace(0, len(mono) - 1, n), np.arange(len(mono)), mono).astype("float32")
-    peak = float(np.abs(mono).max()) if len(mono) else 0.0
-    if peak > 0.0:
-        mono *= PEAK / peak
-    return mono
+    if len(mono) == 0:
+        return mono
+    gain_db = min(GAIN_DB[1], max(GAIN_DB[0], TARGET_LUFS - loudness(mono)))
+    return _limit(mono * np.float32(10 ** (gain_db / 20)))
 
 
 def export(gh, cls, out):
