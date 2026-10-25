@@ -82,14 +82,14 @@ EVENTS = {
                  "gh": "+1 reputation, +1 prosperity",
                  "fh": [("GainMorale", 1), ("AddProsperity", 1)],
                  "note": "Reputation -> morale. The Blinkblade's SO-64 gives +1 prosperity and +1 inspiration the same way.",
-                 "status": "proposed"},
+                 "status": "approved"},
                 {"text": "Tell this kid that he must have the wrong group of adventurers.",
                  "outcome": ("You shake your head and avert your gaze. You claim that the kid must have you confused with a "
                              "different adventuring party. He looks crushed as you walk away."),
                  "gh": "-1 reputation",
                  "fh": [("LoseMorale", 1)],
                  "note": "Reputation -> morale.",
-                 "status": "proposed"},
+                 "status": "approved"},
             ],
         },
         {
@@ -113,7 +113,7 @@ EVENTS = {
                  "gh": "start the scenario with 3 cards discarded",
                  "fh": [("PartyDiscardCards", 2)],
                  "note": "Frosthaven's road events discard 1 or 2, never 3: lowered to its largest.",
-                 "status": "proposed"},
+                 "status": "approved"},
                 {"text": "Regretfully leave the Brute to his duties and continue on your way.",
                  "outcome": ("You explain to the Brute that you have a long day’s travel ahead of you and cannot take the "
                              "time to travel in the other direction. As you make your good-byes, a shadow falls over him. He "
@@ -121,7 +121,7 @@ EVENTS = {
                  "gh": "add road event 60 to the deck",
                  "fh": [("EnableEvent", "GH.Brute-3")],
                  "note": "The follow-up event, as in Gloomhaven. No effect now.",
-                 "status": "proposed"},
+                 "status": "approved"},
             ],
         },
         {
@@ -142,7 +142,7 @@ EVENTS = {
                  "gh": "+1 reputation",
                  "fh": [("GainMorale", 1)],
                  "note": "Reputation -> morale.",
-                 "status": "proposed"},
+                 "status": "approved"},
                 {"text": "Take what you can find and move on.",
                  "outcome": ("Near the corpse of the Brute, you find an axe, presumably the weapon he threw away. There’s "
                              "really nothing else among the debris, so you wordlessly pick it up and move on."),
@@ -150,7 +150,7 @@ EVENTS = {
                  "fh": [("GainItem", 136)],
                  "note": "Frosthaven has the same item: Battle Axe (136), a two-handed weapon, 20 gold. Goes to the first "
                          "character who can take it; sold for gold if every copy is owned.",
-                 "status": "proposed"},
+                 "status": "approved"},
             ],
         },
     ],

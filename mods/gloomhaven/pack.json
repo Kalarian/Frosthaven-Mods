@@ -24,11 +24,25 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "GainMorale",
+              1
+            ],
+            [
+              "AddProsperity",
+              1
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "LoseMorale",
+              1
+            ]
+          ]
         }
       ]
     },
@@ -40,7 +54,12 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "PartyDiscardCards",
+              2
+            ]
+          ]
         },
         {
           "id": 2,
@@ -61,16 +80,26 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "GainMorale",
+              1
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "GainItem",
+              136
+            ]
+          ]
         }
       ]
     }
   ],
-  "data_sha": "268b2b2e25ba9ad6139239dc42006b06636b2c726319df900cdc5e0a03dc7063",
+  "data_sha": "f261570fd8e72e96cdd9ecae308bbd37a012a646d7c5e0d687b754ac3d59b48c",
   "source": {
     "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
     "buildid": "20286313",
