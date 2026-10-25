@@ -25,6 +25,9 @@ namespace FrosthavenDevTools
     ///             each level brings its card pick and perk mark as usual.
     ///   Ctrl+F5   write every event's Reveal event outcomes preview to <game>\FrosthavenMods\event-previews.txt
     ///   Ctrl+F6   draw the next town event of the current season (to test the mod's Reveal event outcomes)
+    ///   Ctrl+Shift+F6  open the next Gloomhaven class event in any deck (IDs "GH.*": a ported class's retirement
+    ///             events, enabled by its retirement), outpost or road, whatever the season (to test them without waiting
+    ///             for a draw). Like a draw, it leaves its deck.
     ///   Ctrl+F8   the next won scenario (Ctrl+F10) also completes every party member's uncompleted masteries: they're
     ///             added to the win's result, which the game then awards its normal way (to test the mod's Masteries
     ///             carry over). Topping up the in-scenario trackers doesn't work: the game recounts them from the
@@ -90,7 +93,8 @@ namespace FrosthavenDevTools
             if (kb.f4Key.wasPressedThisFrame) Run("retire the selected character", RetireSelected);
             if (kb.f7Key.wasPressedThisFrame) Run("every character to the top level", MaxLevel);
             if (kb.f5Key.wasPressedThisFrame) Run("write all event previews", DumpEventPreviews);
-            if (kb.f6Key.wasPressedThisFrame) Run("draw a town event", DrawEvent);
+            if (kb.f6Key.wasPressedThisFrame && kb.shiftKey.isPressed) Run("open a Gloomhaven class event", () => DrawEvent(DevCommands.DrawPackEventPath));
+            else if (kb.f6Key.wasPressedThisFrame) Run("draw a town event", () => DrawEvent(DevCommands.DrawEventPath));
             if (kb.f8Key.wasPressedThisFrame) Run("the next win completes every mastery", () => DevCommands.ForceMasteries = true);
             if (kb.f9Key.wasPressedThisFrame) Run("+100 gold, +10 of each material and herb", AddGold);
             if (kb.f10Key.wasPressedThisFrame) Run("win scenario", () => Win.Invoke(null, new object[] { null, -1 }));
@@ -189,12 +193,14 @@ namespace FrosthavenDevTools
             _log.LogInfo("Dev tools: event previews written to " + DumpPreviews.Invoke(null, null));
         }
 
-        private static void DrawEvent()
+        private static void DrawEvent(string command)
         {
             var map = Singleton<FHMapChoreographer>.InstanceFast;
             if (map == null || map.GameState == null) throw new InvalidOperationException("only works in the outpost");
             if (map.GameController.OutpostEventController.HasEventToResolve) throw new InvalidOperationException("an event is already open");
-            map.ExecuteCommand(DevCommands.DrawEventPath);
+            if (command == DevCommands.DrawPackEventPath && DevCommands.NextPackEvent(map.GameState) == null)
+                throw new InvalidOperationException("no Gloomhaven class event is in any deck (retire a ported class first: Ctrl+F4)");
+            map.ExecuteCommand(command);
             PushActiveEvent?.Invoke(map.View, new object[] { false });
             map.View.RefreshView();
         }
@@ -228,6 +234,7 @@ namespace FrosthavenDevTools
         public const string Path = "FrosthavenDevTools.Grant";
         public const string FakeLootPath = "FrosthavenDevTools.FakeDuplicateLoot";
         public const string DrawEventPath = "FrosthavenDevTools.DrawEvent";
+        public const string DrawPackEventPath = "FrosthavenDevTools.DrawPackEvent";
         public const string PerksPath = "FrosthavenDevTools.AddPerkMarks";
         public const string MaxLevelPath = "FrosthavenDevTools.MaxLevel";
         private static readonly MethodInfo AddPerkMarksAction = AccessTools.Method(typeof(FHRL.CharacterController), "Action_AddPerkMarks");
@@ -247,6 +254,8 @@ namespace FrosthavenDevTools
         private static readonly MethodInfo GrantMethod = typeof(DevCommands).GetMethod(nameof(Grant));
         private static readonly MethodInfo FakeLootMethod = typeof(DevCommands).GetMethod(nameof(FakeDuplicateLoot));
         private static readonly MethodInfo DrawEventMethod = typeof(DevCommands).GetMethod(nameof(DrawEvent));
+        private static readonly MethodInfo DrawPackEventMethod = typeof(DevCommands).GetMethod(nameof(DrawPackEvent));
+        private static readonly MethodInfo ActivateEvent = AccessTools.Method(typeof(FHRL.OutpostEventController), "Action_ActivateEvent");
 
         private readonly FHRL.MultiplayerGameController _game;
         public DevCommands(FHRL.MultiplayerGameController game) { _game = game; }
@@ -278,7 +287,7 @@ namespace FrosthavenDevTools
 
         public static bool Resolve(FHRL.MultiplayerGameController __instance, string path, ref ValueTuple<object, MethodInfo> __result)
         {
-            MethodInfo method = path == Path ? GrantMethod : path == FakeLootPath ? FakeLootMethod : path == DrawEventPath ? DrawEventMethod
+            MethodInfo method = path == Path ? GrantMethod : path == FakeLootPath ? FakeLootMethod : path == DrawEventPath ? DrawEventMethod : path == DrawPackEventPath ? DrawPackEventMethod
                 : path == PerksPath ? PerksMethod : path == MaxLevelPath ? MaxLevelMethod : null;
             if (method == null) return true;
             __result = (Handlers.GetValue(__instance, g => new DevCommands(g)), method);
@@ -334,6 +343,31 @@ namespace FrosthavenDevTools
             BeginResult.Invoke(campaign, null);
             foreach (FHRL.CharacterState c in System.Linq.Enumerable.ToList(campaign.State.AllCharacters))
                 if (c.Experience < top) AddExperience.Invoke(cc, new object[] { c, (int)(top - c.Experience) });
+            return (FHRL.CampaignController.Result)EndResult.Invoke(campaign, null);
+        }
+
+        /// <summary>The first Gloomhaven class event in the decks (summer outpost, winter outpost, summer road, winter road,
+        /// boat), or null.</summary>
+        internal static FHRL.OutpostEventID? NextPackEvent(FHRL.CampaignState state)
+        {
+            FHRL.OutpostState o = state.Outpost;
+            foreach (var deck in new[] { o.SummerOutpostEventDeckIDs, o.WinterOutpostEventDeckIDs, o.SummerRoadEventDeckIDs, o.WinterRoadEventDeckIDs, o.BoatEventDeckIDs })
+                foreach (FHRL.OutpostEventID id in deck)
+                    if (id.ID != null && id.ID.StartsWith("GH.", StringComparison.Ordinal)) return id;
+            return null;
+        }
+
+        [FHRL.MultiplayerCommand(FHRL.MultiplayerCommandExecType.Everybody)]
+        public FHRL.CampaignController.Result DrawPackEvent()
+        {
+            FHRL.CampaignController campaign = _game.CampaignController;
+            BeginResult.Invoke(campaign, null);
+            FHRL.OutpostEventID? id = NextPackEvent(campaign.State);
+            if (id.HasValue)
+            {
+                DevTools._log.LogInfo("Dev tools: opening " + id.Value.ID);
+                ActivateEvent.Invoke(campaign.OutpostEventController, new object[] { id.Value });
+            }
             return (FHRL.CampaignController.Result)EndResult.Invoke(campaign, null);
         }
 

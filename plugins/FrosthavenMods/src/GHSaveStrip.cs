@@ -67,6 +67,7 @@ namespace FrosthavenMods
         private static readonly FieldInfo RepoPerks = AccessTools.Field(typeof(DefRepository), nameof(DefRepository.Perks));
         private static readonly FieldInfo RepoMasteries = AccessTools.Field(typeof(DefRepository), nameof(DefRepository.MasteryDefs));
         private static readonly FieldInfo RepoSections = AccessTools.Field(typeof(DefRepository), nameof(DefRepository.CampaignSections));
+        private static readonly FieldInfo RepoEvents = AccessTools.Field(typeof(DefRepository), nameof(DefRepository.OutpostEvents));
         private static readonly MethodInfo ShallowClone = typeof(object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
 
         private static bool _bypass;        // the load guard lets a load it has already checked through
@@ -498,6 +499,31 @@ namespace FrosthavenMods
                 if (e != null) yield return e.CampaignSectionID;
         }
 
+        /// <summary>Every event a save names: in the five decks, drawn so far, being resolved, in the log.</summary>
+        private static IEnumerable<OutpostEventID> Events(CampaignState state)
+        {
+            OutpostState o = state.Outpost;
+            if (o == null) yield break;
+            foreach (List<OutpostEventID> deck in Decks(o)) foreach (OutpostEventID id in deck) yield return id;
+            foreach (OutpostEventState e in o.ActivatedEvents) if (e != null) yield return e.ID;
+            if (o.ActiveEventID.HasValue) yield return o.ActiveEventID.Value;
+            if (o.EventLog == null) yield break;
+            foreach (OutpostEventLogState.EventLogData.OutpostEventTriggered e in o.EventLog.GetAllEventsOfType<OutpostEventLogState.EventLogData.OutpostEventTriggered>())
+                if (e != null) yield return e.EventID;
+        }
+
+        private static List<OutpostEventID>[] Decks(OutpostState o) => new[]
+        {
+            o.SummerOutpostEventDeckIDs, o.WinterOutpostEventDeckIDs, o.SummerRoadEventDeckIDs, o.WinterRoadEventDeckIDs, o.BoatEventDeckIDs,
+        };
+
+        /// <summary>An event the pack-less game lacks: one of the installed packs' (their classes' retirement events), or
+        /// one these rules don't know.</summary>
+        private static bool ForeignEvent(OutpostEventID id, List<OutpostEventID> pack, DefRepository repo) =>
+            id.ID != null && (pack.Contains(id) || !repo.OutpostEvents.ContainsKey(id));
+
+        private static string EventName(OutpostEventID id, DefRepository repo) => GHEvents.Describe(id, repo) ?? "the event " + id.ID;
+
         /// <summary>"the Brute's retirement story" for a class's retirement section, else the section by ID.</summary>
         private static string StoryName(CampaignSectionID s, DefRepository repo)
         {
@@ -514,6 +540,9 @@ namespace FrosthavenMods
             void Add(CharacterClassID id) { if (Foreign(id, none, repo) && !ids.Contains(Short(id))) ids.Add(Short(id)); }
             foreach (CampaignSectionID s in Sections(state))
                 if (ForeignSection(s, noSections, repo) && !ids.Contains("story section " + s.ID)) ids.Add("story section " + s.ID);
+            var noEvents = new List<OutpostEventID>();
+            foreach (OutpostEventID e in Events(state))
+                if (ForeignEvent(e, noEvents, repo) && !ids.Contains("event " + e.ID)) ids.Add("event " + e.ID);
             foreach (CharacterState c in state.AllCharacters.Concat(state.RetiredCharacters)) if (c != null) Add(c.ClassID);
             foreach (CharacterClassID id in state.UnlockedClassIDs) Add(id);
             foreach (CharacterClassDef d in state.UnresolvedActionChosenCharacters) if (d != null) Add(d.ID);
@@ -551,6 +580,9 @@ namespace FrosthavenMods
             List<CampaignSectionID> sections = PackSections(repo, pack);
             foreach (string s in Sections(state).Where(s => ForeignSection(s, sections, repo)).Select(s => s.ID).Distinct().ToList())
                 yield return StoryName(new CampaignSectionID(s), repo);
+            List<OutpostEventID> events = GHEvents.PackEventIDs();
+            foreach (string e in Events(state).Where(e => ForeignEvent(e, events, repo)).Select(e => e.ID).Distinct().ToList())
+                yield return EventName(new OutpostEventID(e), repo);
         }
 
         /// <summary>Remove every pack reference from the copy. Characters go through the game's own delete action inside
@@ -610,6 +642,19 @@ namespace FrosthavenMods
             state.PendingCampaignSectionIDs.RemoveAll(IsPackSection);
             state.Outpost?.CalendarEvents.RemoveAll(e => e == null || IsPackSection(e.SectionID));
             state.Outpost?.JobPostings.RemoveAll(IsPackSection);
+            // the packs' events (a class's retirement events): in the decks, drawn, logged; one being resolved can't go
+            List<OutpostEventID> events = GHEvents.PackEventIDs();
+            bool IsPackEvent(OutpostEventID id) => ForeignEvent(id, events, repo);
+            OutpostState outpost = state.Outpost;
+            if (outpost != null)
+            {
+                if (outpost.ActiveEventID.HasValue && IsPackEvent(outpost.ActiveEventID.Value))
+                    throw new Exception("one of the pack's events is being resolved in this save; finish it in the game first");
+                foreach (string e in Events(state).Where(IsPackEvent).Select(e => e.ID).Distinct().ToList())
+                    report.Removed.Add(EventName(new OutpostEventID(e), repo));
+                foreach (List<OutpostEventID> deck in Decks(outpost)) deck.RemoveAll(IsPackEvent);
+                outpost.ActivatedEvents.RemoveAll(e => e == null || IsPackEvent(e.ID));
+            }
             int enhanced = state.ClassCardModifications.Count(m => m != null && m.EnhancedSlots.Count > 0 &&
                                                                  (!repo.ClassCards.TryGetValue(m.CardID, out ClassCardDef card) || card == null || IsPack(card.ClassID)));
             if (enhanced > 0) report.Removed.Add($"enhancements on {enhanced} of their cards");
@@ -620,6 +665,7 @@ namespace FrosthavenMods
                 log.RemoveAll(e => e == null || (e is OutpostEventLogState.EventLogData.ClassUnlocked cu && IsPack(cu.ClassID))
                                    || (e is OutpostEventLogState.EventLogData.CampaignSectionTriggered st && IsPackSection(st.SectionID))
                                    || (e is OutpostEventLogState.EventLogData.NewJobPosting jp && IsPackSection(jp.CampaignSectionID))
+                                   || (e is OutpostEventLogState.EventLogData.OutpostEventTriggered et && IsPackEvent(et.EventID))
                                    || Mentions(e, removed));
             state.ActiveScenario?.CharacterScenarioSettings.RemoveAll(cs => cs?.CharacterID != null && removed.Any(r => r == cs.CharacterID));
 
@@ -681,7 +727,7 @@ namespace FrosthavenMods
         }
 
         /// <summary>The installed definitions minus the installed packs: a shallow clone with the five dictionaries a pack
-        /// extends replaced by filtered copies (classes, their cards, perks, masteries and story sections). With no pack
+        /// extends replaced by filtered copies (classes, their cards, perks, masteries, story sections and events). With no pack
         /// installed it is the installed rules as they are, which is exactly what a pack-less game has.</summary>
         private static DefRepository Packless(DefRepository repo, List<CharacterClassID> pack)
         {
@@ -689,6 +735,8 @@ namespace FrosthavenMods
             var classes = new HashSet<CharacterClassID>(pack);
             var sections = new HashSet<CampaignSectionID>(PackSections(repo, pack));
             RepoSections.SetValue(clone, repo.CampaignSections.Where(kv => !sections.Contains(kv.Key)).ToDictionary(kv => kv.Key, kv => kv.Value));
+            var events = new HashSet<OutpostEventID>(GHEvents.PackEventIDs());
+            RepoEvents.SetValue(clone, repo.OutpostEvents.Where(kv => !events.Contains(kv.Key) && !(kv.Value is GHEvents.PackEventDef)).ToDictionary(kv => kv.Key, kv => kv.Value));
             List<CharacterClassDef> defs = pack.Where(repo.CharacterClasses.ContainsKey).Select(id => repo.CharacterClasses[id]).Where(d => d != null).ToList();
             var perks = new HashSet<PerkID>(defs.SelectMany(d => d.Perks ?? new List<PerkID>()));
             var masteries = new HashSet<MasteryID>(defs.SelectMany(d => d.MasteryIDs ?? new MasteryID[0]));
@@ -733,6 +781,7 @@ namespace FrosthavenMods
                     foreach (OutpostEventLogState.EventLogData.ClassUnlocked e in state.Outpost.EventLog.GetAllEventsOfType<OutpostEventLogState.EventLogData.ClassUnlocked>())
                         _ = vanilla.CharacterClasses[e.ClassID];
                 where = "story sections"; foreach (CampaignSectionID s in Sections(state)) _ = vanilla.CampaignSections[s];
+                foreach (OutpostEventID e in Events(state)) { where = "event " + e.ID; _ = vanilla.OutpostEvents[e]; }
                 where = "quest deck"; state.PersonalQuestDeck.ToList();
                 where = "shop"; state.Outpost.PurchasableItems.ToList(); state.Outpost.CraftableItems.ToList();
                 where = "mod markers";

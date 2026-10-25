@@ -15,7 +15,62 @@
   "sections": [
     "GH.Brute"
   ],
-  "data_sha": "c71e217323fdf2f4aa623815474982344f57d629feb864a850eb78e34d227f1c",
+  "events": [
+    {
+      "id": "GH.Brute-1",
+      "type": "Outpost",
+      "winter": false,
+      "class": "Brute",
+      "options": [
+        {
+          "id": 1,
+          "effects": []
+        },
+        {
+          "id": 2,
+          "effects": []
+        }
+      ]
+    },
+    {
+      "id": "GH.Brute-2",
+      "type": "Road",
+      "winter": false,
+      "class": "Brute",
+      "options": [
+        {
+          "id": 1,
+          "effects": []
+        },
+        {
+          "id": 2,
+          "effects": [
+            [
+              "EnableEvent",
+              "GH.Brute-3"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GH.Brute-3",
+      "type": "Road",
+      "winter": false,
+      "class": "Brute",
+      "options": [
+        {
+          "id": 1,
+          "effects": []
+        },
+        {
+          "id": 2,
+          "effects": []
+        }
+      ]
+    }
+  ],
+  "data_sha": "268b2b2e25ba9ad6139239dc42006b06636b2c726319df900cdc5e0a03dc7063",
   "source": {
     "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
     "buildid": "20286313",

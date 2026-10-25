@@ -5,6 +5,9 @@
 - **Ctrl+F4** retires the selected character (open their sheet in the outpost first): their personal quest is
   completed with the game's own cheat and the retirement starts as the Retire button would; the game's own screens
   follow. Permanent in that save, so save first.
+- **Ctrl+Shift+F6** opens the next Gloomhaven class event in any deck (a ported class's retirement events, which its
+  retirement puts in the decks), outpost or road, whatever the season, so they can be tested without waiting for a
+  draw. Like a draw, the event leaves its deck. Retire a ported class first (Ctrl+F4).
 - **Ctrl+F9** gives each party member +100 gold and +10 lumber, metal and hide, and the Frosthaven supply +10 of
   each herb. It's one synced command (outpost only).
 - **Ctrl+F10** wins the current scenario (the game's own `win` debug command).

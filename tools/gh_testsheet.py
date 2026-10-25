@@ -10,6 +10,9 @@ card half, and a column for what Frosthaven showed. Built from the pack itself, 
 
     python tools/gh_testsheet.py build Brute        -> tests/Brute effects test.xlsx (an existing file is kept: --force)
     python tools/gh_testsheet.py read Brute         -> the rows whose result is not "Matches", with the notes
+    python tools/gh_testsheet.py rewards Brute      -> tests/Brute rewards review.xlsx: the retirement events' rewards,
+                                                       Gloomhaven's and the proposed Frosthaven version, for a verdict
+    python tools/gh_testsheet.py read-rewards Brute -> the verdicts
 
 The workbook is the player's: tests/ is not published (the repo is a whitelist). Needs openpyxl.
 """
@@ -27,7 +30,9 @@ from openpyxl.formatting.rule import FormulaRule
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.worksheet.datavalidation import DataValidation
 
-ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))   # gh_events, fh_mods, fh_ruleset beside this file
+
+ROOT =Path(__file__).resolve().parent.parent
 PACK = ROOT / "mods" / "gloomhaven"
 SPECS = Path(__file__).resolve().parent / "gh_tests"
 OUT = ROOT / "tests"
@@ -354,10 +359,156 @@ def read(cls):
               f" | {row[col['Notes']] or ''}")
 
 
+# ---------------------------------------------------------------- the reward review (gh_events.py)
+
+VERDICTS = ["Approve", "Change", "Reject"]
+DECK_NAMES = {"SummerOutpost": "summer outpost", "WinterOutpost": "winter outpost", "SummerRoad": "summer road",
+              "WinterRoad": "winter road"}
+
+
+def _items():
+    """{item ID: (name, gold cost or None)} from the player's vanilla Base.ruleset."""
+    import fh_mods
+    import fh_ruleset as rs
+    out = {}
+    for e in rs.read_ruleset(fh_mods.vanilla_backup()):
+        if not e["name"].startswith("Outpost/Items/"):
+            continue
+        t = e["data"].decode("utf-8", "replace")
+        i = re.search(r"^ID:\s*(\d+)", t, re.M)
+        n = re.search(r"^Name:\s*(.+?)\s*$", t, re.M)
+        c = re.search(r"^GoldCost:\s*(\d+)", t, re.M)
+        if i:
+            out[int(i.group(1))] = (n.group(1) if n else "?", int(c.group(1)) if c else None)
+    return out
+
+
+def _effect_text(kind, params, items, deck_of):
+    p = params[0] if params else None
+    if kind == "GainItem":
+        name, cost = items.get(int(p), ("?", None))
+        return f"gain {name} (item {p}, {cost if cost is not None else '?'} gold)"
+    words = {
+        "GainMorale": f"+{p} morale", "LoseMorale": f"-{p} morale", "AddProsperity": f"+{p} prosperity",
+        "LoseProsperity": f"-{p} prosperity", "GainInspiration": f"+{p} inspiration", "GainGold": f"+{p} gold",
+        "LoseGold": f"-{p} gold", "PartyDiscardCards": f"each character discards {p} ability cards",
+        "PartyDamage": f"each character suffers {p} damage", "PartyBless": f"each character gains {p} bless",
+        "PartyCurse": f"each character gains {p} curse",
+        "EnableEvent": f"adds event {p} to the {deck_of.get(p, '?')} deck",
+    }
+    return words.get(kind, f"{kind} {' '.join(str(x) for x in params)}")
+
+
+def _baseline(kind, params):
+    import gh_events
+    b = gh_events.FH_BASELINE.get(kind)
+    if not b:
+        return "Not among Frosthaven's common event effects"
+    if kind == "GainItem":
+        return f"{b['a specific item']} Frosthaven events give a specific item"
+    if kind == "EnableEvent":
+        return "Structure, not a reward (Frosthaven's events chain the same way)"
+    n = b.get(params[0] if params else None)
+    sizes = ", ".join(f"{k}: {v}" for k, v in b.items())
+    return (f"{n} Frosthaven events give exactly this" if n else "No Frosthaven event gives this size") + f" (by size: {sizes})"
+
+
+def build_rewards(cls, force=False):
+    import gh_events
+    evs = gh_events.events(cls)
+    if not evs:
+        sys.exit(f"{cls} has no events in tools/gh_events.py")
+    items = _items()
+    costs = {i: c for i, (_, c) in items.items() if c is not None}
+    deck_of = {e["id"]: DECK_NAMES[e["deck"]] for e in evs}
+    wb = Workbook()
+    guide = wb.active
+    guide.title = "How to use"
+    review = wb.create_sheet("Review")
+    rules = wb.create_sheet("Guidelines")
+    text = wb.create_sheet("Event text")
+
+    _sheet(review, ["#", "Event", "Deck", "From Gloomhaven", "Option", "Gloomhaven gives", "Frosthaven version",
+                    "Inside the guidelines?", "How common in Frosthaven", "Why", "Status", "Your verdict", "Your notes"],
+           [4, 12, 16, 14, 34, 22, 30, 20, 30, 34, 10, 12, 34])
+    n = 0
+    for e in evs:
+        how = " (from retirement)" if e["start"] == "retire" else " (from another event)"
+        for i, o in enumerate(e["options"], 1):
+            n += 1
+            fh = "\n".join(_effect_text(k, ps, items, deck_of) for k, *ps in o["fh"]) or "nothing"
+            common = "\n".join(_baseline(k, ps) for k, *ps in o["fh"])
+            why = gh_events.check(o, costs)
+            r = _row(review, [n, e["id"], deck_of[e["id"]] + how, e["gh"], f"{i}. {o['text']}", o["gh"], fh,
+                              "Yes" if not why else "No: " + why, common, o["note"], o.get("status", "proposed"), None, None],
+                     inputs=(12, 13))
+            if why:
+                review.cell(r, 8).fill = RETEST
+    last = review.max_row
+    dv = DataValidation(type="list", formula1='"' + ",".join(VERDICTS) + '"', allow_blank=True, promptTitle="Verdict",
+                        prompt="Approve: ship it. Change: say what in the notes. Reject: no reward for this option.")
+    review.add_data_validation(dv)
+    dv.add(f"L2:L{last}")
+    for value, colour in (("Approve", "C6EFCE"), ("Change", "FFEB9C"), ("Reject", "FFC7CE")):
+        review.conditional_formatting.add(f"L2:L{last}", FormulaRule(formula=[f'$L2="{value}"'], fill=PatternFill("solid", fgColor=colour)))
+    review.auto_filter.ref = f"A1:M{last}"
+
+    _sheet(rules, ["Guideline"], [120])
+    for g in gh_events.GUIDELINES:
+        _row(rules, [g])
+    _row(rules, ["Per-option limits: " + ", ".join(f"{k} {v}" for k, v in gh_events.LIMITS.items())
+                 + f"; items up to {gh_events.ITEM_COST_LIMIT} gold. Never: " + ", ".join(sorted(gh_events.NEVER)) + "."])
+
+    _sheet(text, ["Event", "Part", "Text"], [12, 26, 110])
+    for e in evs:
+        _row(text, [e["id"], f"Card front (changed from Gloomhaven: {e.get('edits', 'none')})", e["front"]])
+        for i, o in enumerate(e["options"], 1):
+            _row(text, [e["id"], f"Option {i}", o["text"]])
+            _row(text, [e["id"], f"Option {i} outcome", o["outcome"]])
+
+    guide.column_dimensions["A"].width = 110
+    lines = [
+        (f"{cls}: retirement rewards review", Font(name=FONT, size=14, bold=True)),
+        (f"Built {datetime.date.today():%d %b %Y} for mods {version()}.", None),
+        ("", None),
+        (f"When a {cls} retires, his Gloomhaven city and road events go into Frosthaven's event decks, the way Frosthaven "
+         "rewards five of its own classes. Each option's Gloomhaven effect has to be translated; this sheet is where you "
+         "decide each translation.", None),
+        ("1. Read the Review sheet, one row per event option: what Gloomhaven gives, the proposed Frosthaven version, "
+         "whether it fits the Guidelines sheet, and how often Frosthaven's own events give the same thing.", None),
+        ("2. Pick a verdict in the yellow column for every row (Approve, Change or Reject) and add notes where you want "
+         "something different, including the deck (season) if you'd rather have it elsewhere.", None),
+        ("3. The Event text sheet has the full text, with any wording changed from Gloomhaven noted.", None),
+        ("4. Save and tell Claude the review is done. Until an option is approved it ships with its text and no effect.", None),
+    ]
+    for line, font in lines:
+        guide.append([line])
+        c = guide.cell(guide.max_row, 1)
+        c.font = font or Font(name=FONT, size=11)
+        c.alignment = Alignment(wrap_text=True)
+    wb.active = wb.sheetnames.index("Review")
+    OUT.mkdir(exist_ok=True)
+    path = OUT / f"{cls} rewards review.xlsx"
+    if path.exists() and not force:
+        sys.exit(f"{path} exists (it may hold your verdicts); pass --force to replace it")
+    wb.save(path)
+    print(f"wrote {path}: {n} options in {len(evs)} events")
+
+
+def read_rewards(cls):
+    ws = load_workbook(OUT / f"{cls} rewards review.xlsx", data_only=True)["Review"]
+    head = [c.value for c in ws[1]]
+    col = {h: i for i, h in enumerate(head)}
+    for row in ws.iter_rows(min_row=2, values_only=True):
+        print(f"  #{row[col['#']]} {row[col['Event']]} {str(row[col['Option']])[:50]}: {row[col['Your verdict']] or '(blank)'}"
+              f" | {row[col['Your notes']] or ''}")
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("command", choices=["build", "read"])
+    ap.add_argument("command", choices=["build", "read", "rewards", "read-rewards"])
     ap.add_argument("cls")
     ap.add_argument("--force", action="store_true")
     args = ap.parse_args()
-    build(args.cls, args.force) if args.command == "build" else read(args.cls)
+    {"build": lambda: build(args.cls, args.force), "read": lambda: read(args.cls),
+     "rewards": lambda: build_rewards(args.cls, args.force), "read-rewards": lambda: read_rewards(args.cls)}[args.command]()

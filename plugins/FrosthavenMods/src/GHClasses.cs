@@ -61,6 +61,10 @@ namespace FrosthavenMods
             /// without content packs" has to take out of a save besides the classes (GHSaveStrip).</summary>
             public string[] Sections = new string[0];
 
+            /// <summary>The events the pack adds (its classes' retirement events, gh_events.py): pack.json "events", which
+            /// GHEvents turns into event definitions.</summary>
+            public JArray Events = new JArray();
+
             /// <summary>What two co-op peers must agree on: same pack, same version, same data.</summary>
             public string Stamp => $"{Name}/{Version}/{DataSha}";
             public override string ToString() => $"{Title ?? Name} v{Version}";
@@ -96,6 +100,7 @@ namespace FrosthavenMods
                                 pack.Envelopes = (bool?)unlock?["envelopes"] ?? false;
                                 pack.Starting = unlock?["starting"]?.Select(c => (string)c).Where(c => c != null).ToArray() ?? pack.Classes;
                                 pack.Sections = j["sections"]?.Select(c => (string)c).Where(c => !string.IsNullOrEmpty(c)).ToArray() ?? new string[0];
+                                pack.Events = j["events"] as JArray ?? new JArray();
                                 _packs.Add(pack);
                             }
                             catch (Exception e) { Plugin.Log.LogError($"Content packs: could not read {file}: {e.Message}"); }
@@ -538,6 +543,10 @@ namespace FrosthavenMods
 
         /// <summary>Whether an installed pack brings text for <paramref name="key"/>.</summary>
         internal static bool HasString(string key) => !string.IsNullOrEmpty(key) && Strings.ContainsKey(key);
+
+        /// <summary>The installed packs' text keys starting with <paramref name="prefix"/> (an event's keys, GHEvents).</summary>
+        internal static IEnumerable<KeyValuePair<string, string>> StringsStartingWith(string prefix) =>
+            Strings.Where(kv => kv.Key.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));
 
         private static bool TryOurs(string term, out string text)
         {

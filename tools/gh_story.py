@@ -13,15 +13,20 @@ Frosthaven's own: second person, present tense, a concrete spot in the outpost, 
 gh_port.py: section_id(cls), files(cls) -> [(path, text)], strings(cls) -> {key: English}. The pack manifest lists the
 section IDs so the plugin's "Copy without content packs" can take them out of a save (GHSaveStrip).
 
+The reward is the class's own Gloomhaven events (gh_events.py: EnableEvent per event), the way Frosthaven
+rewards its Blinkblade, Deepwraith, HIVE, Pain Conduit and Crashing Tide.
+
 A section ID is any string (Frosthaven has "CampaignWon" beside its "48.3"s); "GH.<Class>" keeps ours apart from
 every number the game will ever use.
 """
 
+import gh_events  # noqa: E402
+
 STORIES = {
     "Brute": {
         "name": "Brute Retires",
-        # his shield stays with the town guard: the Banner Spear's own reward, a +20 card in the town guard deck
-        "effects": [("AddTownGuardMod", "P20")],
+        # the reward: his own Gloomhaven city and road events (gh_events.py), not a Frosthaven class's reward
+        "effects": [],
         "text": (
             "You find the Brute at the main gate at dawn, pack strapped on and shield across his back. He has been quieter "
             "than usual these past weeks, which for the Brute is saying something.\n"
@@ -51,9 +56,10 @@ def files(cls):
     sid = section_id(cls)
     lines = ["Parser: CampaignSection", f"ID: {sid}", f"Name: {story['name']}", "SkipNarration: True",
              "SkipCompletedNotification: False"]
-    if story["effects"]:
+    effects = gh_events.retirement_effects(cls) or story["effects"]   # the class's own events, when it has them
+    if effects:
         lines.append("Effects:")
-        for kind, *params in story["effects"]:
+        for kind, *params in effects:
             lines.append(f"    - Type: {kind}")
             lines += [f"      Param{i}: {p}" for i, p in enumerate(params, start=1)]
     return [(f"Outpost/Sections/CampaignSection_{sid}.yml", "\n".join(lines) + "\n")]

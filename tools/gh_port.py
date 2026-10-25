@@ -68,6 +68,7 @@ import fh_ruleset as rs  # noqa: E402
 import gh_crossover  # noqa: E402
 import gh_layout  # noqa: E402
 import gh_story  # noqa: E402
+import gh_events  # noqa: E402
 
 GH_APP_ID = "780290"
 CARD_ID_OFFSET = 20000
@@ -445,6 +446,7 @@ def main():
     for cls in args.classes:
         table.update(gh_crossover.strings(cls))   # our English for the crossover perks and masteries
         table.update(gh_story.strings(cls))       # the retirement story (Event_<section>_Text and _Name)
+        table.update(gh_events.strings(cls))      # its retirement events' text (<ID>_Front, _Option_<n>, _Outcome)
         if cls in strings:
             table.setdefault(f"{cls}_FullName", strings[cls])
             table.setdefault(f"CODEX_Hero_{cls}_Title", strings[cls])   # the codex page's title (GHCodex.cs)
@@ -477,12 +479,18 @@ def main():
     unlock = {"envelopes": not ALL_CLASSES_OPEN,
               "starting": [c for c in args.classes if ALL_CLASSES_OPEN or c in STARTING_CLASSES]}
     digest.update(json.dumps(unlock, sort_keys=True).encode("utf-8"))
+    # the classes' retirement events (gh_events.py): which deck, which options, what they do
+    events = [e for c in args.classes for e in gh_events.manifest(c)]
+    digest.update(json.dumps(events, sort_keys=True).encode("utf-8"))
     # The "model" entries are visual only (not in data_sha): a PC without the bundle shows the Drifter's model instead.
     (args.out / "pack.json").write_text(json.dumps({
         "name": PACK, "title": PACK_TITLE, "version": PACK_VERSION, "classes": args.classes, "files": "files",
         "unlock": unlock,
         # the retirement-story sections the pack adds (gh_story.py); the plugin takes them out of a pack-free copy
         "sections": [s for s in (gh_story.section_id(c) for c in args.classes) if s],
+        # the retirement events the pack adds (gh_events.py): the plugin defines them (GHEvents) and takes them out of a
+        # pack-free copy
+        "events": events,
         "data_sha": digest.hexdigest(), "source": {"gloomhaven": str(gh), "buildid": build, "files": len(written)},
         "model": models,
     }, indent=2) + "\n", encoding="utf-8")

@@ -4,5 +4,7 @@ Name: Brute Retires
 SkipNarration: True
 SkipCompletedNotification: False
 Effects:
-    - Type: AddTownGuardMod
-      Param1: P20
+    - Type: EnableEvent
+      Param1: GH.Brute-1
+    - Type: EnableEvent
+      Param1: GH.Brute-2
