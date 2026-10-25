@@ -54,4 +54,4 @@ Layout:
         - Row: "<size=20%> "
         - Consume:
             Name: BCAny
-            Text: +1 <sprite name=Heal>, <size=150%><voffset=-1.5><sprite name=CreateLight></voffset></size>
+            Text: +1 <sprite name=Heal>, <sprite name=CreateLight>

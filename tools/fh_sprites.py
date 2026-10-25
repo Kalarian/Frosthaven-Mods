@@ -14,7 +14,13 @@ module rewrites ported text the way Frosthaven's own cards write it:
   - elements: Frosthaven's cards draw an element being infused as CreateX (the element with a plus), a consumed one
     as ConsumeX, and the bare element X only for its state ("when Light is not Strong"). Gloomhaven writes the bare
     element for infusions too (a consume's reward "+1 Attack, Light", "infuse Light"), so a bare element becomes
-    CreateX unless the words after it are "is"/"are" (a state).
+    CreateX unless the words after it are "is"/"are" (a state). Element icons drop Gloomhaven's enlarging
+    (<size=150%><voffset=..>): Frosthaven draws them at the text's size. (A standalone infusion, "- Infuse: Light" in
+    a layout, is the generator's element icon on both games' cards; an infusion inside a consume's reward is this text
+    icon. Two different pictures for the two cases is Frosthaven's own design.)
+  - recover: Frosthaven's text puts RecoverIcon in place of the word ("<icon> four lost cards"); Gloomhaven writes
+    "Recover <icon>";
+  - wording: Gloomhaven digital's "burned" cards are Frosthaven's "lost" cards.
 
 check() lists the sprite names a text uses that Frosthaven doesn't have, from the game's own sprite assets, so a
 port warns instead of shipping raw markup. Used by gh_port.py on every converted file and string.
@@ -34,13 +40,27 @@ AURA = re.compile(r'<sprite name="?Aura"?>\s*:?\s*')
 BARE_ELEMENT = re.compile(r'<sprite name="?(' + "|".join(ELEMENTS) + r')"?>((?:\s*</?[a-z]+[^>]*>)*)(?!(?:\s*</?[a-z]+[^>]*>)*\s*(?:is|are)\b)')
 
 
+ELEMENT_FAMILY = r'(?:Create|Consume)?(?:' + "|".join(ELEMENTS) + r'|Any|Wild)'
+# Gloomhaven enlarges and nudges element icons in text (<size=150%><voffset=-1.5>...); Frosthaven's cards draw them at
+# the text's own size (35 of its 36 infusions in consume text)
+SIZED_ELEMENT = re.compile(r'<size=\d+%>\s*(?:<voffset=[^>]*>)?\s*(<sprite name="?' + ELEMENT_FAMILY + r'"?>)\s*(?:</voffset>)?\s*</size>')
+# Gloomhaven writes "Recover [icon]"; Frosthaven's text uses the icon in place of the word ("[icon] four lost cards")
+RECOVER = re.compile(r'(?:<nobr>)?[Rr]ecover\s*<sprite name="?Recover"?>(?:</nobr>)?')
+# Gloomhaven digital's "burned" cards are Frosthaven's "lost" cards (its text never says burned)
+BURNED = re.compile(r'\bburned(?=\s+cards?\b|\s+to\b)|(?<=\bbe )burned\b')
+
+
 def to_fh(text):
-    """Ported text with Frosthaven's icons (see the module notes)."""
+    """Ported text with Frosthaven's icons and card wording (see the module notes)."""
+    text = BURNED.sub("lost", text)
     if "<sprite" not in text:
         return text
     text = SPRITE.sub(lambda m: f"<sprite name={RENAMED[m.group(1)]}>" if m.group(1) in RENAMED else m.group(0), text)
     text = AURA.sub("", text)
-    return BARE_ELEMENT.sub(lambda m: f"<sprite name=Create{m.group(1)}>{m.group(2)}", text)
+    text = RECOVER.sub("<sprite name=RecoverIcon>", text)
+    text = re.sub(r'<sprite name="?Recover"?>', "<sprite name=RecoverIcon>", text)
+    text = BARE_ELEMENT.sub(lambda m: f"<sprite name=Create{m.group(1)}>{m.group(2)}", text)
+    return SIZED_ELEMENT.sub(r"\1", text)
 
 
 @lru_cache(maxsize=1)

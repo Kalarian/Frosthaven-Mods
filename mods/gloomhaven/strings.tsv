@@ -200,13 +200,13 @@ GH_115_T	Add <nobr>POISON <sprite name=Poison></nobr> and <nobr>WOUND <sprite na
 GH_157_B	One ally within <nobr>Range <sprite name=Range> 3</nobr> <nobr>may perform</nobr>
 GH_157_T	One adjacent ally may perform
 GH_175_T	On the next five melee attacks targeting you, gain <nobr>Retaliate <sprite name=Retaliate> *TRetaliate*.</nobr>
-GH_177_T	One adjacent ally may <nobr>Recover <sprite name=Recover></nobr> one of their burned cards.
-GH_178_T_1	One adjacent ally may <nobr>Recover <sprite name=Recover></nobr> two of their discarded cards.
+GH_177_T	One adjacent ally may <sprite name=RecoverIcon> one of their lost cards.
+GH_178_T_1	One adjacent ally may <sprite name=RecoverIcon> two of their discarded cards.
 GH_178_T_2	Up to three discarded cards instead, <sprite name=XP1>.
 GH_179_B	You and all adjacent allies suffer no damage this round.
 GH_184_B	Deduct -1 Move <sprite name=Move> from all your moves.
 GH_185_T	Heal all damage on one <nobr>adjacent ally.</nobr>
-GH_187_B	<line-height=110%>At the end of your next five turns when <size=150%><voffset=-3><sprite name=Light></voffset></size> is not Strong, infuse <size=150%><voffset=-3><sprite name=CreateLight></voffset></size>.
+GH_187_B	<line-height=110%>At the end of your next five turns when <sprite name=Light> is not Strong, infuse <sprite name=CreateLight>.
 GH_190_T	One adjacent ally may immediately perform one extra turn by playing two cards from their hand.
 GH_192_B	All allies within <nobr>Range <sprite name=Range> 5</nobr> <nobr>may perform</nobr>
 GH_194_B	All attacks targeting you or any ally within <nobr>Range <sprite name=Range> 4</nobr> of you gain Disadvantage this round.
@@ -214,7 +214,7 @@ GH_196_T	Deduct <nobr>-1 Attack <sprite name=Attack></nobr> from all your attack
 GH_197_B	All allies add <nobr>+2 Move <sprite name=Move></nobr> to all their moves this round.
 GH_197_T	All allies add <nobr>+1 Attack <sprite name=Attack></nobr> to all their attacks this round.
 GH_199_T	During any of your Attack actions, you may <sprite name=ConsumeLight> to add <nobr>+2 Attack <sprite name=Attack></nobr>, gain Advantage and <sprite name=XP1>.
-GH_200_B	Up to two burned cards instead, <sprite name=XP1>
+GH_200_B	Up to two lost cards instead, <sprite name=XP1>
 GH_202_T	Kill one normal or elite enemy instead, <sprite name=XP1>
 GH_203_T	On your next four Attack actions, add <nobr>+3 Attack <sprite name=Attack></nobr>, <nobr>WOUND <sprite name=Wound></nobr>, and gain Advantage.
 GH_204_T	When any ally suffers damage, you may suffer that damage reduced by 1 instead.
@@ -224,16 +224,16 @@ GH_207_B	You and all allies within <nobr>Range <sprite name=Range> 2</nobr> add 
 GH_208_T	Once during each of your Attack actions, if you use an item, add <nobr>+1 Attack <sprite name=Attack></nobr> to the entire Attack action.
 GH_215_T	<nobr>Refresh <sprite name=Refresh></nobr> one of your consumed <nobr>Small Items <sprite name=SmallItem></nobr>.
 GH_216_T	One adjacent ally may <nobr>Refresh <sprite name=Refresh></nobr> all of their spent items.
-GH_217_B	<nobr>Recover <sprite name=Recover></nobr> up to two of your discarded cards.
+GH_217_B	<sprite name=RecoverIcon> up to two of your discarded cards.
 GH_217_T	You or one adjacent ally may <nobr>Refresh <sprite name=Refresh></nobr> one spent or consumed <nobr>One-Hand Item <sprite name=OneHandItem></nobr> or <nobr>Two-Hand Item <sprite name=TwoHandsItem></nobr>.
-GH_219_B	<nobr>Recover <sprite name=Recover></nobr> up to two of your burned cards.
+GH_219_B	<sprite name=RecoverIcon> up to two of your lost cards.
 GH_219_T	At the end of each of your turns, you may discard a card to allow an adjacent ally to <nobr>Refresh <sprite name=Refresh></nobr> one of their consumed <nobr>Small Items <sprite name=SmallItem></nobr>.
 GH_221_T	One adjacent ally may <nobr>Refresh <sprite name=Refresh></nobr> all of their spent and consumed items.
 GH_223_T	At the end of each round, <nobr>Refresh <sprite name=Refresh></nobr> one of your spent items.
 GH_224_T	You and all enemies with <nobr>Range <sprite name=Range> 4</nobr> suffer 2 damage.
 GH_225_B	You and all normal enemies within the targeted area suffer 7 damage.
 GH_226_T	If any adjacent ally performs a ranged attack action, that ally gains <nobr>ADD TARGET<sprite name=Target></nobr> for the attack.
-GH_228_B	Any one ally may <nobr>Recover <sprite name=Recover></nobr> all of their discarded cards.
+GH_228_B	Any one ally may <sprite name=RecoverIcon> all of their discarded cards.
 GH_228_T	Each time you long rest, <nobr>Refresh <sprite name=Refresh></nobr> one of your consumed items.
 GH_229_B	During all your attacks this round, ignore the Shield values of all your targets.
 GH_230_T	At the end of your next five turns, perform a "<nobr>Heal <sprite name=Heal> 2</nobr>, Affect all adjacent allies" action.
@@ -252,7 +252,7 @@ GH_414_T	Give one adjacent ally one “Large Medical Pack” ability card.
 GH_415_T	Once during each of your next four turns, perform a “Heal 2, Range 1” action.
 GH_416_T	At the start of each of your turns, remove one negative condition from any one of your allies.
 GH_429_B	All adjacent allies may perform a “<nobr>Move <sprite name=Move> 2</nobr>” action.
-GH_429_T	You and all adjacent allies may <nobr>Recover <sprite name=Recover></nobr> an amount of discarded cards up to the number of allies adjacent to you.
+GH_429_T	You and all adjacent allies may <sprite name=RecoverIcon> an amount of discarded cards up to the number of allies adjacent to you.
 GH_433_B	At the start of each of your turns, perform a “<nobr>Heal <sprite name=Heal> 1</nobr>, Self” action.
 GH_437_T	Remove all negative conditions on all adjacent allies.
 GH_439_T	Kill one adjacent normal enemy with at least two negative conditions.
@@ -260,14 +260,14 @@ GH_440_B	Give all adjacent allies one “Large Medical Pack” ability card.
 GH_440_T	Give all adjacent allies one “<nobr>Medical Pack</nobr>” ability card.
 GH_441_B	Add <nobr>+4 Heal <sprite name=Heal></nobr> to all your Heal actions this round.
 GH_441_T	Before your next six Heal abilities, remove all negative conditions on the Heal targets.
-GH_443_B	One adjacent ally may <nobr>Recover <sprite name=Recover></nobr> up to two of their discarded cards.
+GH_443_B	One adjacent ally may <sprite name=RecoverIcon> up to two of their discarded cards.
 GH_443_T	Remove all negative conditions on the healed target and give them one “Large Medical Pack” ability card.
 GH_445_T_1	All of your <nobr>Attack <sprite name=Attack></nobr> and <nobr>Move <sprite name=Move></nobr> abilities may be performed as <nobr>Heal <sprite name=Heal></nobr> abilities of an equal value plus one.
 GH_445_T_2	In such cases, the <nobr>Range <sprite name=Range></nobr> is 1 unless otherwise specified, and ignore all conditions applied by the <nobr>Attack <sprite name=Attack></nobr> abilities.
 GH_446_T	Kill all normal or elite enemies in the targeted area suffering from 10 or more damage.
 Kill_OneAdjacentEnemy	Kill one adjacent normal or elite enemy.
 Kill_OneAdjacentNormalEnemy	Kill one adjacent normal enemy.
-MedPack	This card cannot be burned to avoid suffering damage. When this card is discarded for any reason, return it to the Sawbone's supply.
+MedPack	This card cannot be lost to avoid suffering damage. When this card is discarded for any reason, return it to the Sawbone's supply.
 PERK_Brute_01_Desc	Replace one <sprite name="-1"> with one <sprite name="+1">
 PERK_Brute_02_Desc	Replace one <sprite name="-1"> with three <sprite name="0"> <sprite name=Push> 1 <sprite name=Rolling>
 PERK_Brute_03_Desc	Replace two <sprite name="0"> with two <sprite name="0"> <sprite name=Pierce> 3 <sprite name=Rolling>
