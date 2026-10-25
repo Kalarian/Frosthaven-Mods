@@ -1,5 +1,5 @@
 {
-  "_about": "Test notes for the Scoundrel's effects workbook (tools/gh_testsheet.py). turns: the test hand in play order; an entry with \"rest\" is a long rest for the whole party. picks: the level-up card picks the hand needs (Ctrl+F7 gives the experience; pick these at the level-ups). states: what Gloomhaven shows per animator state, where known; the rest is generated from the pack data.",
+  "_about": "Test notes for the Scoundrel's effects workbook (tools/gh_testsheet.py). turns: the test hand in play order; an entry with \"rest\" is a long rest for the whole party. picks: the cards above level 1 in the hand (Ctrl+F2 in the outpost unlocks every card and perk). states: what Gloomhaven shows per animator state, where known; the rest is generated from the pack data.",
   "picks": ["Level 2: Flintlock", "Level 4: Flurry of Blades", "Level 5: Visage of the Inevitable", "Level 6: Burning Oil", "Level 9: Watch It Burn", "Levels 3, 7 and 8: anything"],
   "setup": "Her hand is 9 cards. Pick a scenario with a trap within reach for Thief's Knack on turn 4 (no trap: play its top as the default Attack 2 and mark Disarm Not seen). She wants enemies at range 3 for the knives and the pistol, adjacent ones for the kills, and coins nearby for the loots.",
   "turns": [

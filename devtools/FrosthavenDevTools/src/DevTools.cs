@@ -20,9 +20,11 @@ namespace FrosthavenDevTools
     ///             (rewards, confirmation, resource hand-out, the retirement story). Permanent in that save.
     ///             (Ctrl+F4 used to unlock the Gloomhaven classes; the mod's "Gloomhaven classes (content pack)" house
     ///             rule does that now, with its guards.)
-    ///   Ctrl+F7   every character (party and bench, not retired) gets the experience for the top level. The game levels
-    ///             them up on the spot when it allows level-ups (the outpost's downtime), else at the next downtime;
-    ///             each level brings its card pick and perk mark as usual.
+    ///   Ctrl+F2   every character (party and bench) to the top level, fully built: the experience for level 9, levelled
+    ///             up on the spot (outside downtime too), every class card up to their level added to their cards (no
+    ///             picks left to make) and every perk learned as many times as the class allows (no marks left to
+    ///             spend). For testing classes; permanent in that save. (Was Ctrl+F7, which is the mod's desync export:
+    ///             never bind a dev key to Ctrl+F7.)
     ///   Ctrl+F5   write every event's Reveal event outcomes preview to <game>\FrosthavenMods\event-previews.txt
     ///   Ctrl+F6   draw the next town event of the current season (to test the mod's Reveal event outcomes)
     ///   Ctrl+Shift+F6  open the next Gloomhaven class event in any deck (IDs "GH.*": a ported class's retirement
@@ -91,7 +93,7 @@ namespace FrosthavenDevTools
             if (kb == null || !kb.ctrlKey.isPressed) return;
             if (kb.f3Key.wasPressedThisFrame) Run("+3 perk marks for the party", () => Outpost().ExecuteCommand(DevCommands.PerksPath, 3));
             if (kb.f4Key.wasPressedThisFrame) Run("retire the selected character", RetireSelected);
-            if (kb.f7Key.wasPressedThisFrame) Run("every character to the top level", MaxLevel);
+            if (kb.f2Key.wasPressedThisFrame) Run("every character to the top level with every card and perk", MaxLevel);
             if (kb.f5Key.wasPressedThisFrame) Run("write all event previews", DumpEventPreviews);
             if (kb.f6Key.wasPressedThisFrame && kb.shiftKey.isPressed) Run("open a Gloomhaven class event", () => DrawEvent(DevCommands.DrawPackEventPath));
             else if (kb.f6Key.wasPressedThisFrame) Run("draw a town event", () => DrawEvent(DevCommands.DrawEventPath));
@@ -149,8 +151,8 @@ namespace FrosthavenDevTools
             map.View.RefreshView();
             FHRL.CharacterController cc = map.GameController.CharacterController;
             foreach (FHRL.CharacterState c in map.GameState.AllCharacters)
-                _log.LogInfo($"Dev tools: {c.Name}: level {c.Level}, {c.Experience} XP" +
-                             (c.Level < cc.GetMaxLevel() ? " (levels up at the next downtime)" : ""));
+                _log.LogInfo($"Dev tools: {c.Name} the {c.ClassID.ID}: level {c.Level}, {System.Linq.Enumerable.Count(c.OwnedCards)} cards, " +
+                             $"{c.PerkIDs.Count} perks learned");
         }
 
         private static readonly MethodInfo PushActiveEvent = AccessTools.Method(typeof(FHGUI.FHMapView), "TryPushActiveEvent");
@@ -239,6 +241,10 @@ namespace FrosthavenDevTools
         public const string MaxLevelPath = "FrosthavenDevTools.MaxLevel";
         private static readonly MethodInfo AddPerkMarksAction = AccessTools.Method(typeof(FHRL.CharacterController), "Action_AddPerkMarks");
         private static readonly MethodInfo AddExperience = AccessTools.Method(typeof(FHRL.CharacterController), "Action_AddExperience");
+        private static readonly MethodInfo LevelUpCheck = AccessTools.Method(typeof(FHRL.CharacterController), "Action_LevelUpCheck");
+        private static readonly MethodInfo GainCard = AccessTools.Method(typeof(FHRL.CharacterController), "Action_GainCard");
+        private static readonly MethodInfo AddCardUnlocks = AccessTools.Method(typeof(FHRL.CharacterController), "Action_AddCardUnlocks");
+        private static readonly MethodInfo NotifyEvent = AccessTools.Method(typeof(FHRL.CampaignController), "Notify", new[] { typeof(FHRL.CampaignEvent) });
         private static readonly MethodInfo PerksMethod = typeof(DevCommands).GetMethod(nameof(AddPerkMarks));
         private static readonly MethodInfo MaxLevelMethod = typeof(DevCommands).GetMethod(nameof(MaxLevel));
         private static readonly MethodInfo ActivateOutpostEvent = AccessTools.Method(typeof(FHRL.OutpostEventController), "Action_ActivateEventForOutpost");
@@ -332,8 +338,12 @@ namespace FrosthavenDevTools
             return (FHRL.CampaignController.Result)EndResult.Invoke(campaign, null);
         }
 
-        /// <summary>The experience for the top level to every character (the game's own add-experience action, which
-        /// levels up when the game allows it and otherwise leaves it for the next downtime).</summary>
+        /// <summary>Every character to the top level, fully built, with the game's own actions inside one result: the
+        /// experience for the top level, the level-up check (run here even outside downtime, where adding experience
+        /// alone would wait for the next one), every class card up to the new level gained, the card picks that are
+        /// left cleared, every perk learned up to its "Available" count (as LearnPerk does: the perk added and the
+        /// learned-perk event sent; LearnPerk itself can't run inside this result, results don't nest), and the perk
+        /// marks that are left cleared. Runs on every peer, like the game's commands.</summary>
         [FHRL.MultiplayerCommand(FHRL.MultiplayerCommandExecType.Everybody)]
         public FHRL.CampaignController.Result MaxLevel()
         {
@@ -342,7 +352,20 @@ namespace FrosthavenDevTools
             uint top = cc.GetExperienceForLevel(cc.GetMaxLevel());
             BeginResult.Invoke(campaign, null);
             foreach (FHRL.CharacterState c in System.Linq.Enumerable.ToList(campaign.State.AllCharacters))
+            {
                 if (c.Experience < top) AddExperience.Invoke(cc, new object[] { c, (int)(top - c.Experience) });
+                LevelUpCheck.Invoke(cc, new object[] { c });
+                foreach (FHRL.ClassCardDef card in System.Linq.Enumerable.ToList(c.PassedCards))
+                    GainCard.Invoke(cc, new object[] { c, card });
+                if (c.CardUnlocks > 0) AddCardUnlocks.Invoke(cc, new object[] { c, -(int)c.CardUnlocks });
+                foreach (FHRL.PerkDef perk in System.Linq.Enumerable.ToList(cc.GetAvailabelPerks(c)))
+                    for (int n = cc.GetAvailablePerkInstancesCount(perk, c); n > 0; n--)
+                    {
+                        c.PerkIDs.Add(perk.ID);
+                        NotifyEvent.Invoke(campaign, new object[] { new FHRL.CampaignEvent.CharacterLearnedPerk { Character = c, Perk = perk } });
+                    }
+                if (c.PerkMarks > 0) AddPerkMarksAction.Invoke(cc, new object[] { c, -(int)c.PerkMarks });
+            }
             return (FHRL.CampaignController.Result)EndResult.Invoke(campaign, null);
         }
 

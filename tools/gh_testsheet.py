@@ -637,13 +637,12 @@ def build_party(classes, name, force=False):
     review = wb.create_sheet("Rewards review")
 
     # Setup: the characters, their level-up picks, what the scenario needs
-    _sheet(setup, ["Character", "Create as", "Level-up picks the hand needs", "What the scenario needs for them"], [16, 22, 44, 70])
+    _sheet(setup, ["Character", "Create as", "Higher-level cards in the hand", "What the scenario needs for them"], [16, 22, 44, 70])
     for cls in classes:
         spec = data[cls]["spec"]
         _row(setup, [cls, f"a {cls}, any name", "\n".join(spec.get("picks", ["any"])), spec.get("setup", "")])
-    _row(setup, ["Everyone", "", "Ctrl+F7 gives every character the experience for the top level; level them up in the "
-                 "outpost's downtime, picking the cards listed. Ctrl+F9 gives gold for items. Ctrl+F3 gives 3 perk marks each "
-                 "(optional: to try the perks).",
+    _row(setup, ["Everyone", "", "In the outpost, Ctrl+F2 (dev tools) takes every character to level 9 with every card up to their level "
+                 "and every perk learned. Then build each hand from the Hands sheet. Ctrl+F9 gives gold for items.",
                  "A scenario with plenty of normal enemies, a trap if possible, at a low scenario level. Four characters in "
                  "the party. Each character takes a long rest on the turn marked in their own column."])
 
