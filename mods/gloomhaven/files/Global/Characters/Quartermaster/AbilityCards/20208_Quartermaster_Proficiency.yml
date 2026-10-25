@@ -1,0 +1,35 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Proficiency$
+Character: QuartermasterID
+ID: 20208
+Level: 1
+Initiative: 62
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttackBuff:
+                Attack: 0
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                AttackEffect:
+                    Type: BuffIfAnItemUsedInAction
+                    Strength: 1
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TAttackBuff
+            ListLayout: "$GH_208_T$"
+            Layout: "$GH_208_T$"
+            Icon: Attack
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

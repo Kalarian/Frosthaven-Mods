@@ -1,0 +1,40 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BeaconofLight$
+Character: SunkeeperID
+ID: 20187
+Level: X
+Initiative: 36
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                AnimOverload: PositiveBuffRadial
+                Heal: 1
+                Range: 4
+                Target: -1
+                Filter: [Self, Ally]
+    Bottom:
+        Abilities:
+            BInfuse:
+                AddActiveBonus:
+                    Infuse: Light
+                    InfuseIfNotStrong: True
+                    Filter: Self
+                    AnimOverload: None
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [1,0,1,0,1]
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Affect_SelfAndAllAllies$ $within$ <nobr><sprite name=Range> *THeal.Range*</nobr>"
+    Bottom:
+        - Active:
+            Ability: BInfuse
+            ListLayout: "$GH_187_B$"
+            Layout: "$GH_187_B$"
+            Icon: Sunkeeper
+        - Row: "<size=50%> "
+        - XPTracker: BInfuse

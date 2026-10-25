@@ -1,0 +1,77 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SinisterOpportunity$
+Character: ScoundrelID
+ID: 20097
+Level: X
+Initiative: 93
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                ConditionalOverrides:
+                    TAttackCO1:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentAllies: "> 0"
+                        AbilityOverrides:
+                            TAdjAllyBuff:
+                                StatIsBasedOnX:
+                                    Strength:
+                                        BasedOn: TargetAdjacentAllies
+                                        AddTo: True
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TAttack
+                        ConditionalOverrides:
+                            TDarkAttackCO1:
+                                Filter:
+                                    TargetType: Enemy
+                                    TargetAdjacentAllies: "> 0"
+                                AbilityOverrides:
+                                    TAdjAllyBuff:
+                                        StatIsBasedOnX:
+                                            Strength:
+                                                BasedOn: TargetAdjacentAllies
+                                                AddTo: True
+                                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BControlActor:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Move: 1
+                            StrengthIsBase: True
+                            RestrictRange: 1
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 1
+                Filter: Enemy
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$GH_097_T_1$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "$GH_097_T_2$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH_097_B_1$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Move> *EnemyWillDoThis* <size=100%>"
+        - Row: "<size=20%> "
+        - Row: "$GH_097_B_2$"

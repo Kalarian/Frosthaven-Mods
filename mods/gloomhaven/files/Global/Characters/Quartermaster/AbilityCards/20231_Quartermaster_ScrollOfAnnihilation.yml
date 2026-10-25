@@ -1,0 +1,39 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ScrollofAnnihilation$
+Character: QuartermasterID
+ID: 20231
+Level: 9
+Initiative: 56
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TKill:
+                Kill: True
+                Range: 1
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+                AnimOverload: TargetedScroll
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BDisarm:
+                Disarm: 
+                    SquareEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter: Enemy
+                AnimOverload: RadialScroll
+Layout:
+    Top:
+        - Row: "$GH_231_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Disarm> <size=100%><voffset=1>@BDisarm@"
+        - Row: "$Target_AllAdjacentEnemies$"

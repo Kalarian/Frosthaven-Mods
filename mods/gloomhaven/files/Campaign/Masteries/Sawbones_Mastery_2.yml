@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Sawbones_MASTERY_2
+LocalisedName: Sawbones_MASTERY_2_Name
+LocalisedDescription: Sawbones_MASTERY_2_Desc
+PerkPoints: 1
+# The damage one attack ability of hers caused to enemies, all its targets together. The plugin answers this target
+# (GHMasteries.cs) from the damage records, grouped by round, card and ability. Amount = the damage.
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_SingleAbilityDamage]
+        CharacterIDs:
+            ActorID: SawbonesID
+        Amount: 20
+        Value: 1

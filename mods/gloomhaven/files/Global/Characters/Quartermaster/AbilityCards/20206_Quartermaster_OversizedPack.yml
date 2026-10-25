@@ -1,0 +1,28 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_OversizedPack$
+Character: QuartermasterID
+ID: 20206
+Level: 1
+Initiative: 81
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TLoot:
+                Loot: 2
+                Target: -1
+                AnimOverload: Loot
+    Bottom:
+        Abilities:
+            BRefresh:
+                RefreshItems: All
+                SlotToRefresh: SmallItem
+                SlotStateToRefresh: Consumed
+                Filter: Self
+                AnimOverload: PowerUp
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
+    Bottom:
+        - Row: "$GH_206_B$"

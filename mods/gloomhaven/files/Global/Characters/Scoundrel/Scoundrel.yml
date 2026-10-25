@@ -1,0 +1,26 @@
+Parser: Character
+ID: ScoundrelID
+LocKey: $Scoundrel$
+Model: Scoundrel
+Race: Human
+Traits: [ Chaotic, Nimble, Resourceful ]
+Complexity: 1
+MasteryIDs: [ Scoundrel_MASTERY_1, Scoundrel_MASTERY_2 ]
+RetireCampaignSection: GH.Scoundrel
+DefaultSkin: 1
+# PlayerLevel:    [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
+HealthTable:      [  8,   9,  11,  12,  14,  15,  17,  18,  20 ]
+NumberAbilityCardsInBattle: 9
+Role: $Scoundrel_ROLE$
+Description: $Scoundrel_DESCRIPTION$
+Difficulty: $DIFFICULTY_LOW$
+Strengths: $Scoundrel_STRENGTHS$
+Weaknesses: $Scoundrel_WEAKNESSES$
+Adventure_Description: $Scoundrel_ADVENTURE_DESCRIPTION$
+HeroStats:
+    Melee: 6
+    Ranged: 2
+    Mobility: 4
+    Support: 1
+    Defense: 1
+    Control: 2

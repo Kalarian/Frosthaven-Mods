@@ -1,0 +1,37 @@
+{
+  "_about": "Test notes for the Quartermaster's effects workbook (tools/gh_testsheet.py). turns: the test hand in play order; an entry with \"rest\" is a long rest for the whole party. picks: the level-up card picks the hand needs. states: what Gloomhaven shows per animator state, where known; the rest is generated from the pack data.",
+  "picks": ["Level 3: Scroll of Lightning", "Level 5: Scroll of Judgment", "Other levels: anything"],
+  "setup": "His refresh abilities need spent items: give him and an ally a potion each (Ctrl+F9 for gold) and use them before turns 4 and 7, so there is something to refresh.",
+  "turns": [
+    {"top": "CleavingAxe", "bottom": "CrushingHammer", "order": "Bottom first: move 2 next to enemies and shield up (the power-up), then the axe sweep (Attack 2 on the area).", "setup": "Enemies adjacent after the move."},
+    {"top": "CripplingBow", "bottom": "ScrollofLightning", "order": "Bottom first: move 3 and push the adjacent enemies with the lightning scroll, then the bow shot (Attack 3, range 3).", "setup": "Enemies adjacent after the move; one within 3."},
+    {"top": "IronBulwark", "bottom": "ScrollofRecall", "order": "Bottom first: pull an enemy from range 3 (the targeted scroll), then the plain attack (Attack 3).", "setup": "An enemy within 3 hexes."},
+    {"top": "Restock", "bottom": "CleavingAxe", "order": "Top: refresh a spent item on an ally within 2 (the refresh). Bottom: Move 4.", "setup": "An ally within 2 who has used an item this scenario."},
+    {"top": "ScrollofJudgment", "bottom": "SharpeningKit", "order": "Top: the radial judgment scroll on enemies within 4. Bottom: his ranged attack bonus (the power-up).", "setup": "Enemies within 4."},
+    {"rest": "long"},
+    {"top": "OversizedPack", "bottom": "CleavingAxe", "order": "Top: Loot 2. Bottom: Move 4.", "setup": "Coins within 2."},
+    {"top": "CrushingHammer", "bottom": "IronBulwark", "order": "Top: the heavy hammer blow (Attack 3). Bottom: Shield 1 on the adjacent allies (the radial buff).", "setup": "An enemy and allies adjacent."},
+    {"top": "ScrollofLightning", "bottom": "CripplingBow", "order": "Top: the lightning scroll at an enemy within 3 (Attack 5). Bottom: the bow shot (Attack 1, range 4).", "setup": "Enemies within 3 and 4."},
+    {"top": "SharpeningKit", "bottom": "ScrollofRecall", "order": "Top: Heal 4 on himself or an adjacent ally. Bottom: pull an enemy from range 3.", "setup": "An enemy within 3."}
+  ],
+  "states": {
+    "Attack": "A sword swing with his melee attack sound and the weapon impact.",
+    "HeavyAttack": "The heavy two-handed blow with the heavy-attack sound.",
+    "SlamAttack": "The slam: a wide swing over the area with the radial-buff sound (Gloomhaven's own choice of sound for it).",
+    "RangedAttack": "The bow shot (the arrow stands in for Gloomhaven's bolt) with the stand-in's throw sound.",
+    "Refresh": "He reaches into his pack and the ally's item glows, with the refresh-ally sound.",
+    "TargetedScroll": "He reads a scroll and a magic effect hits the target, with the targeted-magic cast sound.",
+    "TargetedScrollLightning": "The scroll's lightning strikes the target, with the targeted-lightning cast sound.",
+    "RadialScroll": "The scroll's magic bursts over the enemies around, with the radial-magic cast sound.",
+    "RadialScrollLightning": "Lightning over the adjacent enemies, with the radial-lightning cast sound.",
+    "RadialBuff": "A ring over the adjacent allies with the radial-buff sound.",
+    "PowerUp": "The cast pose with his power-up sound.",
+    "Heal": "The cast pose with the heal animation.",
+    "Loot": "His loot stoop with the loot sound."
+  },
+  "actions": [
+    {"name": "Movement", "how": "Any move.", "expected": "His run cycle with footstep sounds and a dust puff at each footfall."},
+    {"name": "Item use", "how": "Use any item.", "expected": "His item animation with the item-use sound."},
+    {"name": "Taking a hit", "how": "Let an enemy hit him.", "expected": "Hit reaction with one of three grunts."}
+  ]
+}

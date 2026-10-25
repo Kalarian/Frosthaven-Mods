@@ -1,0 +1,36 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Euthanize$
+Character: SawbonesID
+ID: 20439
+Level: 6
+Initiative: 27
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TKill:
+                Kill: True
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: Normal
+                    TargetNegativeConditionCount: ">= 2"
+                AnimOverload: Attack_AOE_Cone
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Conditions: [Poison, Wound, Stun]
+Layout:
+    Top:
+        - Row: "$GH_439_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Poison></size>, <size=130%><sprite name=Wound></size>, <size=130%><sprite name=Stun></size>"
+            - Column:

@@ -1,0 +1,30 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Reforge$
+Character: QuartermasterID
+ID: 20217
+Level: 2
+Initiative: 95
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TRefresh:
+                RefreshItems: 1
+                SlotToRefresh: [OneHand, TwoHand]
+                SlotStateToRefresh: [Spent, Consumed]
+                Filter:
+                    TargetType: [Self, Ally]
+                    ActorType: Player
+                AnimOverload: Refresh
+        XP: 1
+    Bottom:
+        Abilities:
+            BRecover:
+                RecoverDiscardedCards: 2
+                Filter: Self
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "$GH_217_T$"
+    Bottom:
+        - Row: "$GH_217_B$"

@@ -1,0 +1,22 @@
+Parser: Perk
+ID: Scoundrel10
+Name: PERK_Scoundrel_10_Name
+Description: PERK_Scoundrel_10_Desc
+CharacterID: ScoundrelID
+Available: 1
+Cost: 2
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            Invisible: True
+            Filter: [Self]
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringTurnAbility
+            XPTracker: [0]
+            IsToggleBonus: True
+            Hidden: True
+            ListLayoutOverride: [$PERK_Scoundrel_10_Desc$, Positive_Unique_Campaign]
+        AnimOverload: PowerUp

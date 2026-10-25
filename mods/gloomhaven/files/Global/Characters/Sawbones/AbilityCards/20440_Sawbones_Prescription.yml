@@ -1,0 +1,33 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Prescription$
+Character: SawbonesID
+ID: 20440
+Level: 6
+Initiative: 6
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TGiveSupplyCard:
+                GiveSupplyCard: 417
+                Target: -1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: RadialBuff
+        XP: 1
+    Bottom:
+        Abilities:
+            TGiveSupplyCard:
+                GiveSupplyCard: 424
+                Target: -1  
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: RadialBuff
+        XP: 2
+Layout:
+    Top:
+        - Row: "$GH_440_T$"
+    Bottom:
+        - Row: "$GH_440_B$"

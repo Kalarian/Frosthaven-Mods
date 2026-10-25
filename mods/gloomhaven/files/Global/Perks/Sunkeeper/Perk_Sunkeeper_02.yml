@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Sunkeeper02
+Name: PERK_Sunkeeper_02_Name
+Description: PERK_Sunkeeper_02_Desc
+CharacterID: SunkeeperID
+Available: 2
+CardsToRemove: [AMC_Basic_M1]
+CardsToAdd: [AMC_Light_R, AMC_Light_R]

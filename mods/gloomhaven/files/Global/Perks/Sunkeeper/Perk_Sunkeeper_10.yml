@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Sunkeeper10
+Name: PERK_Sunkeeper_10_Name
+Description: PERK_Sunkeeper_10_Desc
+CharacterID: SunkeeperID
+Available: 1
+Cost: 2
+Flags: [Passive]

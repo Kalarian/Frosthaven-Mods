@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Quartermaster03
+Name: PERK_Quartermaster_03_Name
+Description: PERK_Quartermaster_03_Desc
+CharacterID: QuartermasterID
+Available: 1
+CardsToRemove: [AMC_Basic_P0]
+CardsToAdd: [AMC_AddTarget]

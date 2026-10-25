@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_UnwaveringMandate$
+Character: SunkeeperID
+ID: 20190
+Level: 2
+Initiative: 72
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TExtraTurn:
+                ExtraTurn: BothActions
+                Filter: Ally
+                PreviewEffectId: Sunkeeper
+                PreviewEffectText: 190_T
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+        XP: 2
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            BCLight:
+                Elements: Light
+                AbilityOverrides:
+                    BCLightTargetBuff:
+                        ParentName: BHeal
+                        Target: 1
+                XP: 1
+Layout:
+    Top:
+        - Row: "$GH_190_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<sprite name=Range>*BHeal.Range* @BHeal.Range@"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCLight
+            Text: "<sprite name=Target> 2, <sprite name=XP1>"

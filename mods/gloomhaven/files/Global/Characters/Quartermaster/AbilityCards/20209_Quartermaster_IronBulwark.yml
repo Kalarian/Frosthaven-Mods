@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_IronBulwark$
+Character: QuartermasterID
+ID: 20209
+Level: 1
+Initiative: 19
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                Condition: Muddle
+        XP: 1
+    Bottom:
+        Abilities:
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Self, Ally]
+                AnimOverload: RadialBuff
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Muddle></size>"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*, <b><sprite name=Aura>:</b> $Affect_SelfAndAllAdjacentAllies$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<b><sprite name=Aura>:</b> $Affect_SelfAndAllAdjacentAllies$"

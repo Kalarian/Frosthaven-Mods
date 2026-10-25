@@ -1,0 +1,22 @@
+Parser: Perk
+ID: Quartermaster09
+Name: PERK_Quartermaster_09_Name
+Description: PERK_Quartermaster_09_Desc
+CharacterID: QuartermasterID
+Available: 1
+Cost: 2
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            RecoverDiscardedCards: 4
+            Filter: [Self]
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringTurnAbility
+            XPTracker: [0]
+            IsToggleBonus: True
+            Hidden: True
+            ListLayoutOverride: [$PERK_Quartermaster_09_Desc$, RecoverIcon]
+        AnimOverload: PowerUp

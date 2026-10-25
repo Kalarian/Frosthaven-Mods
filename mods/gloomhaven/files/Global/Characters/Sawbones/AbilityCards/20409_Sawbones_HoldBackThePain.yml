@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HoldBackthePain$
+Character: SawbonesID
+ID: 20409
+Level: 1
+Initiative: 57
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 2
+                Range: 1
+                Filter: [Self, Ally]                
+                AnimOverload: Heal
+        XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Attack: 0
+                ActiveBonus:
+                    Behaviour: OverrideAbility
+                    Duration: Round
+                    ValidAbilityType: Attack
+                    AttackType: Melee
+                    ActiveBonusAbilityOverrides:
+                        BCTypeOverride:
+                            AbilityType: Attack
+                            Target: -1
+                            TargetIsBase: True
+                            MultiPassAttack: False
+                            AnimOverload: Attack_AOE_Cone
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*THeal.Range*</mark>"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Attack
+            ListLayout: "$GH_409_B$"
+            Layout: "$GH_409_B$"

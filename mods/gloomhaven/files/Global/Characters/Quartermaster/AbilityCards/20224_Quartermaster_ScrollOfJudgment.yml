@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ScrollofJudgment$
+Character: QuartermasterID
+ID: 20224
+Level: 5
+Initiative: 66
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TDamage:
+                Damage: 2
+                Range: 4
+                Target: -1
+                Filter: Enemy
+                AnimOverload: RadialScroll
+            TDamageSelf:
+                Damage: 2
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BStun:
+                Stun:
+                    SquareEnhancements: 1
+                Range: 1
+                Filter: Enemy
+                AnimOverload: TargetedScroll
+Layout:
+    Top:
+        - Row: "$GH_224_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Stun> <size=100%><voffset=1>@BStun@"
+        - Row: "$Target_OneAdjacentEnemy$"

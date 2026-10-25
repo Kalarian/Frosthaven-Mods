@@ -1,0 +1,56 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GloriousBolt$
+Character: SunkeeperID
+ID: 20188
+Level: X
+Initiative: 39
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 5
+                    DiamondPlusEnhancements: 2
+                Range: 3
+                Filter: [Self, Ally]
+        Consumes:
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    BCLightTargetBuff:
+                        ParentName: THeal
+                        Target: 1
+                XP: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                AnimOverload: RangedSmite
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 3
+                Condition: Muddle
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*THeal.Range*</mark>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCLight
+            Text: "<sprite name=Target> 2, <sprite name=XP1>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
+                - AddedEffect: "<size=130%><sprite name=Muddle></size>"
+            - Column:

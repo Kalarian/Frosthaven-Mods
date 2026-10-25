@@ -1,0 +1,30 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_QuickHands$
+Character: ScoundrelID
+ID: 20095
+Level: 1
+Initiative: 64
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 1
+                Target: -1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"

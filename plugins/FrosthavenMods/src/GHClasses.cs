@@ -259,6 +259,11 @@ namespace FrosthavenMods
         internal static readonly Dictionary<ECharacter, Color> ClassColours = new Dictionary<ECharacter, Color>
         {
             { ECharacter.Brute, new Color(0.451f, 0.659f, 1f) },
+            // the board game's class colours for the rest (green, gold, bone white, orange)
+            { ECharacter.Scoundrel, new Color(0.420f, 0.690f, 0.290f) },
+            { ECharacter.Sunkeeper, new Color(0.980f, 0.800f, 0.290f) },
+            { ECharacter.Sawbones, new Color(0.870f, 0.870f, 0.820f) },
+            { ECharacter.Quartermaster, new Color(0.910f, 0.540f, 0.220f) },
         };
 
         /// <summary>

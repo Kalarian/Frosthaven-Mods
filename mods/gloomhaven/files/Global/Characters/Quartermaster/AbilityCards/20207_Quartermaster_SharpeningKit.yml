@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SharpeningKit$
+Character: QuartermasterID
+ID: 20207
+Level: 1
+Initiative: 23
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 4
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 2
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttackBuff:
+                Attack: 1
+                Range: 2
+                Filter: Self
+                ActiveBonus:
+                    Behaviour: BuffAttack
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Self, Ally]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<sprite name=Range>*THeal.Range* @THeal.Range@"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BAttackBuff
+            Icon: Attack
+            ListLayout: "<b><sprite name=Aura>:</b> $GH_207_B$"
+            Layout: "<b><sprite name=Aura>:</b> $GH_207_B$"

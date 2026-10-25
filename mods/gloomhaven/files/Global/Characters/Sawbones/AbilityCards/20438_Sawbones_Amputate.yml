@@ -1,0 +1,45 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Amputate$
+Character: SawbonesID
+ID: 20438
+Level: 5
+Initiative: 86
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Conditions: [Wound, Immobilize]
+                AnimOverload: Attack_AOE_Cone
+        XP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 7
+                    DiamondPlusEnhancements: 2
+                Range: 1
+                Condition: Stun
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Wound></size>, <size=130%><sprite name=Immobilize></size>"
+            - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+                - AddedEffect: "<size=130%><sprite name=Stun></size>"
+            - Column:

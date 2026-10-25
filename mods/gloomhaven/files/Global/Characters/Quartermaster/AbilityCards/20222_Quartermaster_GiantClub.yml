@@ -1,0 +1,33 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GiantClub$
+Character: QuartermasterID
+ID: 20222
+Level: 4
+Initiative: 61
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 5
+                AnimOverload: HeavyAttack
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Condition: Muddle
+                AnimOverload: HeavyAttack
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Muddle></size>"
+            - Column:

@@ -1,0 +1,43 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GentlemansAnger$
+Character: SawbonesID
+ID: 20444
+Level: 8
+Initiative: 29
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Condition: Disarm
+                AnimOverload: Attack_AOE_Cone
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 5
+                AnimOverload: RangedAttack
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Disarm></size>"
+            - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
+            - Column:

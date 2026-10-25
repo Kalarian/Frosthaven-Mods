@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DefensiveStance$
+Character: SunkeeperID
+ID: 20184
+Level: 1
+Initiative: 65
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                AnimOverload: MeleeSmite
+        Consumes:
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    BCLightAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        AttackHasAdvantage: True
+                XP: 1
+    Bottom:
+        Abilities:
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Persistent
+                SubAbilities:
+                    BShieldSubMoveDebuff:
+                        Move: -1
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Persistent
+                            Behaviour: BuffMove
+                        AutoTrigger: True
+                        AnimOverload: None
+                AnimOverload: PowerUp
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCLight
+            Text: "+1 <sprite name=Attack>, $Advantage$, <sprite name=XP1>"
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*. $GH_184_B$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<size=50%> "
+                - Row: "$GH_184_B$"

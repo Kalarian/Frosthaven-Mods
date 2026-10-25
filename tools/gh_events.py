@@ -41,6 +41,9 @@ FH_BASELINE = {
     "PartyCurse": {1: 8, 2: 1},
     "GainItem": {"a specific item": 31},
     "EnableEvent": {"another event": 0},
+    "UnlockRandomSideScenario": {"a random side scenario": 2},
+    "AllCharactersGainGold": {5: 1, 10: 1},
+    "PartyPoison": {1: 4}, "PartyWound": {1: 6}, "PartyMuddle": {1: 3},
 }
 
 # THE GUIDELINES: a ported class's events may give what Frosthaven's own events give, at Frosthaven's own sizes, and
@@ -50,14 +53,19 @@ GUIDELINES = [
     "shop-level item. Nothing permanent in scenarios (no town guard cards, perk checks, extra item slots, class unlocks).",
     "At most Frosthaven's common sizes per option: +2 morale, +1 prosperity, +1 inspiration, 20 gold, a Frosthaven item "
     "costing 30 gold or less.",
-    "Penalties at Frosthaven's sizes too: -2 morale, discard 2, 3 damage, 15 gold.",
+    "Penalties at Frosthaven's sizes too: -2 morale, discard 2, 3 damage, a condition on the party, 30 gold at most "
+    "(and only when the option is a purchase the party chooses).",
+    "A Gloomhaven quest unlock becomes a random side scenario, the one-time unlock Frosthaven's own events give.",
     "Reputation becomes morale (Frosthaven has no reputation; morale is the outpost's standing). Gloomhaven items "
     "become the same item where Frosthaven has it, else one of similar cost and use.",
     "A class's events together should not outweigh one Frosthaven class reward: roughly one good option per event.",
 ]
 LIMITS = {"GainMorale": 2, "AddProsperity": 1, "GainInspiration": 1, "GainGold": 20, "AllCharactersGainGold": 10,
-          "LoseMorale": 2, "PartyDiscardCards": 2, "PartyDamage": 3, "LoseGold": 15, "PartyBless": 1, "PartyCurse": 1}
+          "LoseMorale": 2, "PartyDiscardCards": 2, "PartyDamage": 3, "LoseGold": 30, "PartyBless": 1, "PartyCurse": 1}
+# effects without an amount that Frosthaven's own events use: allowed as they are
+PLAIN_OK = {"EnableEvent", "UnlockRandomSideScenario", "PartyPoison", "PartyWound", "PartyMuddle"}
 ITEM_COST_LIMIT = 30
+BREWABLE = {83, 99}   # Healing Potion, Major Healing Potion: brewed from herbs in Frosthaven, no shop price
 NEVER = {"AddTownGuardMod", "AllCharactersAddPerkCheck", "UnlockClass", "UnlockClassChoise", "IncreaseMaxSmallItem",
          "AllCharactersGainExperience", "UnlockBuilding", "UpgradeBuilding", "OpenEnvelope"}
 
@@ -154,6 +162,354 @@ EVENTS = {
             ],
         },
     ],
+    "Scoundrel": [
+        {
+            "id": "GH.Scoundrel-1", "deck": "SummerOutpost", "start": "retire", "gh": "City event 45",
+            "front": (
+                "“You there! Stop!”\n\n"
+                "You turn to see a town guard walking briskly toward you.\n\n"
+                "“You are known associates of this woman, yes?” He holds up a crude sketch of the Scoundrel. “We believe she "
+                "is behind a number of high-profile robberies and demand that you give us any information you have on her "
+                "whereabouts and activities.”\n\n"
+                "His face softens a bit. “Look, I know you do a lot of good for the outpost, but the merchants are breathing "
+                "down my neck on this one, and I could really use a lead.”"),
+            "edits": "\"city guard\" -> \"town guard\"; \"the city\" -> \"the outpost\"; \"the merchant guild\" -> \"the merchants\".",
+            "options": [
+                {"text": "Cooperate with the guard and tell him everything you know.",
+                 "outcome": ("The guard taps his notes with a smile on his face.\n\n“This is great,” he says. “I understand that "
+                             "you haven’t seen her in a while, but the information you’ve provided should still be useful. Have "
+                             "a nice day!”"),
+                 "gh": "+1 reputation", "fh": [("GainMorale", 1)], "note": "Reputation -> morale.", "status": "proposed"},
+                {"text": "Be as vague and unhelpful as possible, giving no useful information.",
+                 "outcome": ("The guard scratches his head and looks down at his notes.\n\n“Well, that wasn’t very helpful,” he "
+                             "sighs. “But thanks for your time, I guess. Let me know if you remember anything or get any new "
+                             "information.”"),
+                 "gh": "adds city event 62 to the deck", "fh": [("EnableEvent", "GH.Scoundrel-3")],
+                 "note": "The follow-up event, as in Gloomhaven. No effect now.", "status": "proposed"},
+            ],
+        },
+        {
+            "id": "GH.Scoundrel-2", "deck": "SummerRoad", "start": "retire", "gh": "Road event 45",
+            "front": (
+                "Riding up on horses, a band of dirty, rough men quickly overtake and surround your group. They look hard and "
+                "dangerous, and you immediately pull out your weapons as they approach.\n\n"
+                "Then you hear a familiar laugh.\n\n"
+                "“Well, if it isn’t my old crew.” A woman in dark leather armor leaps off her horse to come greet you. “You "
+                "know what, boys? This lot gets a pass.”\n\n"
+                "She winks at you and turns around. “Plus, they’d probably kill you all if things turned ugly.”\n\n"
+                "Jumping back onto her horse, the Scoundrel looks back at you. “Well, it was nice seeing you. Just remember—you "
+                "never saw me.”"),
+            "edits": "\"to comes greet you\" -> \"to come greet you\" (Gloomhaven's typo).",
+            "options": [
+                {"text": "Attack. Friend or not, those who prey on the weak should be brought to justice.",
+                 "outcome": ("You see the bandits relax a little and begin to form up. That is when you strike. Some are scared "
+                             "off by the sudden attack, but others engage you hungrily. The Scoundrel throws a few good daggers, "
+                             "too, before she rides off, criticizing your poor decision-making."),
+                 "gh": "each character: Poison and 2 damage", "fh": [("PartyPoison",), ("PartyDamage", 2)],
+                 "note": "The same, both at Frosthaven's sizes (its road events deal 2 to the party often).", "status": "proposed"},
+                {"text": "Let the bandits go.",
+                 "outcome": "The bandits seem a little disappointed as they form up and ride off in the opposite direction.",
+                 "gh": "nothing", "fh": [], "note": "Nothing, as in Gloomhaven.", "status": "proposed"},
+            ],
+        },
+        {
+            "id": "GH.Scoundrel-3", "deck": "SummerOutpost", "start": "chain", "gh": "City event 62",
+            "front": (
+                "“So, I hear you stood up for me with the guards the other day. Such annoying pests, aren’t they?”\n\n"
+                "You turn around in the street to see the Scoundrel emerge from a dark alley with a smile on her face.\n\n"
+                "“I just wanted to thank you in person,” she says. “I’ve known quite a few persons who would have ratted me out "
+                "for their chance at a piece of gold. It’s good to know some friendships last.”\n\n"
+                "She looks over her shoulder. “Listen, I’m leaving town for a good long while. You wanna grab a drink before I "
+                "take off?”"),
+            "edits": "\"the city guards\" -> \"the guards\".",
+            "options": [
+                {"text": "Have a drink and reminisce about old times.",
+                 "outcome": ("You laugh for a while and trade tales. As the sun drops below the tavern windows, the Scoundrel "
+                             "gets up to leave.\n\n“Listen, I really did enjoy our time together, and, well, I just wanted to "
+                             "leave you with something to remember me by.”\n\nA piece of black cloth flutters down onto the "
+                             "table. When you look back up, the Scoundrel is gone."),
+                 "gh": "gain the Thief's Hood", "fh": [("GainItem", 10109)],
+                 "note": "Frosthaven has the same item: Thief's Hood (10109), head, 20 gold.", "status": "proposed"},
+                {"text": "Overpower the Scoundrel and deliver her to the guards.",
+                 "outcome": ("A look of horrid surprise flashes in the Scoundrel’s eyes as you leap forward and throw her to the "
+                             "ground. She doesn’t even speak as you bind her arms and take her to the guard. They thank you for "
+                             "your service, but their words aren’t much counter to the cold, angry stare of the Scoundrel as "
+                             "she’s taken away."),
+                 "gh": "+3 reputation", "fh": [("GainMorale", 2)],
+                 "note": "Reputation -> morale, at Frosthaven's largest common size (+2; +3 is rare there).", "status": "proposed"},
+            ],
+        },
+    ],
+    "Sunkeeper": [
+        {
+            "id": "GH.Sunkeeper-1", "deck": "SummerOutpost", "start": "retire", "gh": "City event 48",
+            "front": (
+                "You are haggling over the price of road rations with an irritating Valrath merchant when a messenger boy "
+                "approaches you holding a note.\n\n"
+                "“Sir, I have a pressing letter from an important Valrath Sunkeeper,” the messenger says. “I was told to "
+                "deliver it to you.”\n\n"
+                "You reach for it, but the messenger moves back a little. “Sir, this note has traveled a long distance to get "
+                "to you. If you could, please pay a small fee to take possession of it.”"),
+            "edits": "none",
+            "options": [
+                {"text": "Begrudgingly pay for the note.",
+                 "outcome": ("You throw the kid a few coins and grab the note. Enclosed with the note is a small medallion "
+                             "engraved with the image of the sun. Apparently the Sunkeeper thinks the object may help you at "
+                             "some point in the future. The note doesn’t say exactly how and the thing has no apparent use. You "
+                             "stow it away in your pack."),
+                 "gh": "-5 gold; the Sun-Blessed medallion (a Gloomhaven story token)",
+                 "fh": [("LoseGold", 5), ("GainInspiration", 1)],
+                 "note": "The medallion unlocks nothing in Frosthaven: a keepsake, so +1 inspiration for the 5 gold. Gloomhaven "
+                         "only offers the purchase to a party with 5 gold; here the gold goes negative at worst.",
+                 "status": "proposed"},
+                {"text": "Refuse to pay for the note.",
+                 "outcome": ("You laugh in indignation and push the messenger away. He opens his mouth to object, then thinks "
+                             "better of it and runs off. You turn back to bartering, now leveraging the proof of your extreme "
+                             "thriftiness against the merchant."),
+                 "gh": "+3 gold", "fh": [("GainGold", 3)], "note": "The same.", "status": "proposed"},
+            ],
+        },
+        {
+            "id": "GH.Sunkeeper-2", "deck": "SummerRoad", "start": "retire", "gh": "Road event 48",
+            "front": (
+                "You see them long before they get close to you—radiant balls of light blazing against the horizon.\n\n"
+                "Sun Demons.\n\n"
+                "As they approach, you prepare for an attack, but the demons have other plans. They menace you with their "
+                "glowing claws, but they would rather have information than kill you.\n\n"
+                "“Where is the one you call a Sunkeeper?” one of them hisses. “The Valrath neglects her duties, and now we must "
+                "resolve matters personally.”\n\n"
+                "You press for further information, but the demons get angry. “These are not your concerns! Tell us where she "
+                "is or die at our hands!”"),
+            "edits": "none",
+            "options": [
+                {"text": "Give them whatever information you can on the Sunkeeper’s whereabouts.",
+                 "outcome": ("You’re not sure exactly what happened to the Sunkeeper after she left the party, but you tell the "
+                             "demons everything you know.\nThey seem satisfied with your response and even offer a bitter thanks "
+                             "as they fly off to the west."),
+                 "gh": "adds road event 61 to the deck", "fh": [("EnableEvent", "GH.Sunkeeper-3")],
+                 "note": "The follow-up event, as in Gloomhaven.", "status": "proposed"},
+                {"text": "Attack the demons. There are a lot of them, but you do not take kindly to threats.",
+                 "outcome": ("Without even speaking, you draw your weapons and attack. The demons are caught off guard, but they "
+                             "bounce back with great ferocity. It is a long, brutal battle, and you continue on in your adventure "
+                             "greatly wounded and bloody."),
+                 "gh": "each character: Muddle, Wound and 3 damage",
+                 "fh": [("PartyMuddle",), ("PartyWound",), ("PartyDamage", 3)],
+                 "note": "The same; 3 damage is Frosthaven's largest.", "status": "proposed"},
+            ],
+        },
+        {
+            "id": "GH.Sunkeeper-3", "deck": "SummerRoad", "start": "chain", "gh": "Road event 61",
+            "front": (
+                "You are heading through a small forest when you hear the sound of a woman screaming off to the west. You "
+                "silently move closer, catching a glimpse of multiple radiant figures through the trees.\n\n"
+                "They are Sun Demons, perhaps the same ones who accosted you earlier. That suspicion is confirmed when you get "
+                "closer and see they are hovering around an armored Valrath woman bound to a tree, torturing her for "
+                "information.\n\n"
+                "“Don’t you see how important this is!” one of the demons says. “Give us the location of the temple!”\n\n"
+                "“Lies and tricks of a demon,” the Sunkeeper responds. “The temple is in no danger except from you.”"),
+            "edits": "none",
+            "options": [
+                {"text": "Leave the scene quietly and return to your own business.",
+                 "outcome": "Not wanting to get involved, you simply move on. Eventually the screams of the Sunkeeper fade away.",
+                 "gh": "adds road event 62 to the deck", "fh": [("EnableEvent", "GH.Sunkeeper-4")],
+                 "note": "The follow-up event, as in Gloomhaven.", "status": "proposed"},
+                {"text": "Attack the demons and free the Sunkeeper.",
+                 "outcome": ("You charge out of the trees and attack the Sun Demons. Fueled by righteous indignation and a bit of "
+                             "guilt, you slay them all. The battle leaves you wounded, but the Sunkeeper happily mends your wounds "
+                             "once you free her.\n\n“They seemed to think the Sun Temple is under attack by Night Demons,” she "
+                             "says. “I have no reason to believe them, but still, would you mind helping me look into it?”"),
+                 "gh": "nothing (the Sunkeeper heals you)", "fh": [("GainMorale", 1)],
+                 "note": "Gloomhaven gives nothing; a friend freed is worth +1 morale here, Frosthaven's commonest reward.",
+                 "status": "proposed"},
+            ],
+        },
+        {
+            "id": "GH.Sunkeeper-4", "deck": "SummerRoad", "start": "chain", "gh": "Road event 62",
+            "front": (
+                "By now, the Sun Demons cut a very recognizable portrait against the horizon as they move toward you. You "
+                "sincerely had hoped you were done with these creatures.\n\n"
+                "“We have urgent need of your assistance,” one of them starts. “Night Demons have infested the Sun Temple, "
+                "attempting to desecrate it and send the world into eternal darkness.\n\n"
+                "“We have tried to stop them, but they are too fortified inside the temple. We regrettably need more "
+                "strength.\n\n"
+                "“Please, you cannot want an absence of a sun on this plane any less than we do. It would be disastrous.”"),
+            "edits": "\"Sun Temple. attempting\" -> \"Sun Temple, attempting\" (Gloomhaven's typo).",
+            "options": [
+                {"text": "Agree to help the Sun Demons.",
+                 "outcome": ("You sigh and agree, warning them that this had better be the last time they ask you for a favor. "
+                             "They give you the location of the Sun Temple and implore you to hurry."),
+                 "gh": "unlocks Gloomhaven's scenario 85", "fh": [("UnlockRandomSideScenario",)],
+                 "note": "Frosthaven has no Sun Temple: a random side scenario instead, the one-time unlock its own events give.",
+                 "status": "proposed"},
+                {"text": "Attack the Sun Demons. It may be the only way to stop them from bothering you.",
+                 "outcome": ("Without even speaking, you draw your weapons and attack. The demons are caught off guard, but they "
+                             "bounce back with great ferocity. It is a long, brutal battle, and you continue on in your adventure "
+                             "greatly wounded and bloody."),
+                 "gh": "each character: Muddle, Wound and 3 damage; unlocks scenario 85 anyway",
+                 "fh": [("PartyMuddle",), ("PartyWound",), ("PartyDamage", 3), ("UnlockRandomSideScenario",)],
+                 "note": "The same conditions and damage; the scenario becomes a random side scenario.", "status": "proposed"},
+            ],
+        },
+    ],
+    "Sawbones": [
+        {
+            "id": "GH.Sawbones-1", "deck": "SummerOutpost", "start": "retire", "gh": "City event 56",
+            "front": (
+                "Looking for a little bit of variety, you head to the roughest table in the Tavern as night falls. After some "
+                "wait, you are surprised to see the Sawbones sitting near the back of the room by himself. Considering this "
+                "corner is about as seedy as Frosthaven gets, it is just about the last place you would expect to find him.\n\n"
+                "“I just...I don’t know what to do now,” the Sawbones confesses after you sit down. “I’d like to join the "
+                "sanctuary and lead a nice, quiet life, but after adventuring with all of you, that just doesn’t seem "
+                "fulfilling anymore.”\n\n"
+                "He shakes his head. “I don’t know. This life seems so boring now. What do you think?”"),
+            "edits": "Gloomhaven's bar \"the Brown Door\" -> the rough end of Frosthaven's Tavern.",
+            "options": [
+                {"text": "Tell him that joining the sanctuary is the right thing to do.",
+                 "outcome": ("“I guess you’re right,” he shrugs. “Here’s to one last night of freedom.” He lifts his glass and "
+                             "gulps down the contents. You follow his lead and the rest is a blur."),
+                 "gh": "+1 prosperity", "fh": [("AddProsperity", 1)], "note": "The same.", "status": "proposed"},
+                {"text": "Tell him to follow his dreams.",
+                 "outcome": ("“You’re right! I’m in command of my own life, and I’m going to do what I want with it. Maybe I’ll "
+                             "go to the Capital and start my own business or something. Who knows?”\n\nHe lifts his glass and "
+                             "looks at you. “To endless possibilities! The next round’s on me.”"),
+                 "gh": "adds city event 66 to the deck", "fh": [("EnableEvent", "GH.Sawbones-3")],
+                 "note": "The follow-up event, as in Gloomhaven.", "status": "proposed"},
+            ],
+        },
+        {
+            "id": "GH.Sawbones-2", "deck": "SummerRoad", "start": "retire", "gh": "Road event 56",
+            "front": (
+                "At first the man looks dead, with numerous open wounds and lying in a pool of blood in the dirt.\n\n"
+                "But then he coughs and whispers something unintelligible. The man looks pretty bad off, likely attacked by some "
+                "wild animal, but it’s possible he could be saved."),
+            "edits": "none",
+            "options": [
+                {"text": "Help the wounded man as best you can.",
+                 "outcome": ("The man’s wounds actually look worse than they really are, and your time with the Sawbones has "
+                             "given you some experience in what to do. You bind the wounds to stop the bleeding and then give him "
+                             "something to eat. He lost a lot of blood, but after some nursing, he’s able to stand and make his "
+                             "way back to Frosthaven, thanking you profusely in the process."),
+                 "gh": "+1 reputation", "fh": [("GainMorale", 1)],
+                 "note": "Reputation -> morale; \"Gloomhaven\" -> \"Frosthaven\".", "status": "proposed"},
+                {"text": "Let the man die and take his belongings.",
+                 "outcome": ("You riffle through the man’s pockets as he speaks his last words. They’re too soft to make out, but "
+                             "the tone is one of anger and disappointment. You make off with a decent amount of money and leave "
+                             "the corpse to rot."),
+                 "gh": "+3 gold per character", "fh": [("AllCharactersGainGold", 3)], "note": "The same.", "status": "proposed"},
+            ],
+        },
+        {
+            "id": "GH.Sawbones-3", "deck": "SummerOutpost", "start": "chain", "gh": "City event 66",
+            "front": (
+                "You head back to your rooms for the night when you see the Sawbones sitting in front of your doorstep, looking "
+                "rather dejected.\n\n"
+                "“I, uh, well, you see...” he stammers, “I followed your advice. Chased my dreams and all that, but I ended up "
+                "in debt to some rather unscrupulous people. They’ve threatened to kill me if I don’t pay them off, but, uh, but "
+                "I simply don’t have the money.”\n\n"
+                "He hesitates. “Seeing as how, uh, you bear some responsibility for setting me down this path, I was wondering "
+                "if you’d be willing to offer some assistance in getting me out of this mess?”"),
+            "edits": "none",
+            "options": [
+                {"text": "Offer to pay off the Sawbones’ debt.",
+                 "outcome": ("It’s a hefty chunk of money, but the Sawbones is incredibly grateful.\n\n“This is wonderful! I knew I "
+                             "could count on you. This should be enough to put this mess behind me and finally allow me to live "
+                             "free.”\n\nHe hands you a potion and thanks you once again for all your help."),
+                 "gh": "-40 gold (only if the party has it); a Super Healing Potion",
+                 "fh": [("LoseGold", 30), ("GainItem", 99)],
+                 "note": "Frosthaven's largest gold loss, and its Major Healing Potion (99, brewed, no shop price) for "
+                         "Gloomhaven's. The game lets the gold go negative if the party is short; Gloomhaven refuses the option.",
+                 "status": "proposed"},
+                {"text": "Get the Sawbones on a boat across the Misty Sea. New adventures surely await there.",
+                 "outcome": ("You flatly refuse to pay off the Sawbones’ debt and convince him the only way to escape his pursuers "
+                             "is to board a ship bound for the eastern continent, far out of their reach. He is reluctant, but "
+                             "eventually agrees when you remind him what unknown adventures await in the land across the ocean. "
+                             "You see him off in the night and desperately hope that is the last you hear of this situation."),
+                 "gh": "adds city event 67 to the deck", "fh": [("EnableEvent", "GH.Sawbones-4")],
+                 "note": "The follow-up event, as in Gloomhaven.", "status": "proposed"},
+            ],
+        },
+        {
+            "id": "GH.Sawbones-4", "deck": "SummerOutpost", "start": "chain", "gh": "City event 67",
+            "front": (
+                "You are trying to enjoy a relaxing drink in the Tavern when a number of large men and Inox burst in and "
+                "approach your table.\n\n"
+                "“So, you must be that little creep’s collateral,” one of the Inox says. “We’re here to collect.”\n\n"
+                "When you stare at her in silence, she tries again. “Little grey-bearded man. Wore symbols of the Great Oak. He "
+                "said you lot would pay off his debt if he couldn’t.”\n\n"
+                "She pats an axe at her side. “Now, seeing as how he apparently skipped town, you can pay us, or things are "
+                "gonna get ugly.”"),
+            "edits": "Gloomhaven's tavern \"the Sleeping Lion\" -> Frosthaven's Tavern; \"approaches\" -> \"approach\".",
+            "options": [
+                {"text": "Pay off the thugs.",
+                 "outcome": ("You sigh and hand over the Sawbones’ debt, plus interest. Though it feels terrible, the thugs are "
+                             "satisfied and walk out the same way they came in. At least it is over now."),
+                 "gh": "-60 gold (only if the party has it)", "fh": [("LoseGold", 30)],
+                 "note": "Halved to Frosthaven's largest gold loss. Gloomhaven refuses the option without the gold; here it goes "
+                         "negative at worst.", "status": "proposed"},
+                {"text": "Refuse to pay. You won’t be strongarmed by anyone.",
+                 "outcome": ("You laugh and wave your hand dismissively. There’s no way you will be paying such a large amount of "
+                             "money to these thugs. Unfortunately, the Inox is not amused.\n\n“Then your payment will be blood!” "
+                             "she says. “Meet us in the back alley, and we’ll see if we can’t come to terms.”"),
+                 "gh": "unlocks Gloomhaven's scenario 92 (the brawl)", "fh": [("UnlockRandomSideScenario",)],
+                 "note": "A random side scenario stands in for the brawl.", "status": "proposed"},
+            ],
+        },
+    ],
+    "Quartermaster": [
+        {
+            "id": "GH.Quartermaster-1", "deck": "SummerOutpost", "start": "retire", "gh": "City event 49",
+            "front": (
+                "“Your Quartermaster friend sent me.” You look quizzically at the Valrath standing at your door.\n\n"
+                "“I’m from the Capital, and I deal in arms and armor,” he says. “I’m looking to set up a contract with the "
+                "Frosthaven guard, and our friend says that you may have some contacts with them. He suggested I meet up with "
+                "you once I got here.”\n\n"
+                "The Valrath shifts his feet nervously. “So, can you help me?”"),
+            "edits": "\"the Gloomhaven military\" -> \"the Frosthaven guard\".",
+            "options": [
+                {"text": "Agree to help him make contact with the guard.",
+                 "outcome": ("You take the Valrath over to the Barracks, where you make introductions to the captain of the guard. "
+                             "The captain seems skeptical at first, but admits that they could use an additional supply of "
+                             "weapons. Terms are made, and a contract is signed."),
+                 "gh": "+1 prosperity", "fh": [("AddProsperity", 1)],
+                 "note": "The same. \"the Ghost Fortress\" -> \"the Barracks\".", "status": "proposed"},
+                {"text": "Demand a finder’s fee for setting him up with buyers.",
+                 "outcome": "The Valrath looks at you with trepidation, but after some persuasion, you get him to agree.",
+                 "gh": "+15 gold, but only with a Scoundrel, Sawbones or Soothsinger in the party; otherwise he storms off",
+                 "fh": [("GainGold", 15)],
+                 "note": "The party-composition condition is dropped (our events have one outcome per option): the fee is always "
+                         "paid. 15 gold is a common Frosthaven event sum.", "status": "proposed"},
+            ],
+        },
+        {
+            "id": "GH.Quartermaster-2", "deck": "SummerRoad", "start": "retire", "gh": "Road event 49",
+            "front": (
+                "You are approached on the road by a group of men on horseback. They don’t immediately seem menacing, but they "
+                "are formidable and well organized.\n\n"
+                "One of the men, who wears plate armor and has a sword at his side, addresses you coldly. “You hail from "
+                "Frosthaven, correct? What say you about the politics of the place? Are you for or against military rule in the "
+                "region? Do you think those fool merchants could do a better job, like they’re doing with the rest of this "
+                "doomed land?”\n\n"
+                "Looking closer, you see all the men wear the signet of a tower with an eye at its center."),
+            "edits": "\"Gloomhaven\" -> \"Frosthaven\".",
+            "options": [
+                {"text": "Claim allegiance to the military.",
+                 "outcome": ("The armored men seem satisfied with your response and take their hands off their weapons.\n\n“Good "
+                             "to find some fellow patriots,” the one in front says with a disturbing smile. “You know, we have a "
+                             "stronghold not far from here up in the mountains. Feel free to visit there if you ever get serious "
+                             "about your loyalties.”"),
+                 "gh": "unlocks Gloomhaven's scenario 80 (the stronghold)", "fh": [("UnlockRandomSideScenario",)],
+                 "note": "A random side scenario stands in for the stronghold.", "status": "proposed"},
+                {"text": "Claim allegiance to the merchant guilds.",
+                 "outcome": ("“Well then, today’s your unlucky day,” the man in front says. “Because we of the Vigil make it a "
+                             "point to execute any and all commerce sympathizers we can find in this land.”\n\nThe men grimly draw "
+                             "swords and advance. After a hard battle, the survivors retreat, leaving you to pick through the "
+                             "corpses. Among the loot you find a map."),
+                 "gh": "unlocks scenario 80; +5 gold per character; 4 damage each",
+                 "fh": [("UnlockRandomSideScenario",), ("AllCharactersGainGold", 5), ("PartyDamage", 3)],
+                 "note": "The map becomes a random side scenario; the damage drops to Frosthaven's largest (3).", "status": "proposed"},
+            ],
+        },
+    ],
 }
 
 DECKS = {"SummerOutpost": ("Outpost", False), "WinterOutpost": ("Outpost", True),
@@ -207,12 +563,12 @@ def check(option, item_costs=None):
             why.append(f"{kind} is never a ported reward")
         elif kind == "GainItem":
             cost = (item_costs or {}).get(int(params[0]))
-            if cost is None:
+            if cost is None and int(params[0]) not in BREWABLE:
                 why.append(f"item {params[0]}: price unknown")
-            elif cost > ITEM_COST_LIMIT:
+            elif cost is not None and cost > ITEM_COST_LIMIT:
                 why.append(f"item {params[0]} costs {cost} gold (limit {ITEM_COST_LIMIT})")
         elif kind in LIMITS and params and isinstance(params[0], int) and params[0] > LIMITS[kind]:
             why.append(f"{kind} {params[0]} (limit {LIMITS[kind]})")
-        elif kind not in LIMITS and kind not in ("EnableEvent",):
+        elif kind not in LIMITS and kind not in PLAIN_OK:
             why.append(f"{kind}: no guideline, needs a look")
     return "; ".join(why) or None

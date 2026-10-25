@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RegenerativeTissue$
+Character: SawbonesID
+ID: 20433
+Level: 3
+Initiative: 46
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 5
+                    DiamondPlusEnhancements: 2
+                Filter: Self
+                AnimOverload: Heal
+        XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Heal:
+                        Amount: 1
+                    Filter: Self
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                    GiveAbilityCardToActor: True
+                AnimOverload: BuffAdjacent
+        XP: 2
+                
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "88,12"
+            - Column:
+                - Row: "$GH_410_B$"
+            - Column:
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BActive
+            Icon: Heal
+            ListLayout: "$GH_433_B$"
+            Layout: "$GH_433_B$"

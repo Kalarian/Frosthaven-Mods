@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PainsEnd$
+Character: ScoundrelID
+ID: 20113
+Level: 8
+Initiative: 38
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 8
+                    DiamondPlusEnhancements: 2
+                Filter: Self
+                AnimOverload: Heal
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            TKill:
+                Kill: True
+                Filter:
+                    TargetType: Enemy
+                    Health: "<= 3"
+                AnimOverload: KillAdjacent
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH_113_B$"

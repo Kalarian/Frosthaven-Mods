@@ -1,0 +1,47 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HiddenDaggers$
+Character: ScoundrelID
+ID: 20102
+Level: 3
+Initiative: 85
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttackThrowingKnives
+        XP: 2
+    Bottom:
+        Abilities:
+            BInvisible:
+                Invisible:
+                    SquareEnhancements: 1
+                Filter: Self
+                AnimOverload: SelfPowderInvisibility
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
+                - Row: "<sprite name=Target>*TAttack.Target* <size=100%><voffset=1>@TAttack.Target@"
+            - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Invisible> <size=100%><voffset=1>@BInvisible@"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:

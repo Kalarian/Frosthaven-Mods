@@ -1,0 +1,44 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SurgeonsSatchel$
+Character: SawbonesID
+ID: 20442
+Level: 7
+Initiative: 10
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+            THeal:
+                Heal:
+                    Amount: 2
+                    DiamondPlusEnhancements: 1
+                Target: -1
+                Filter: Ally
+                AnimOverload: RadialBuff
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            TGiveSupplyCard:
+                GiveSupplyCard: 417
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player                
+                AnimOverload: GivePackAdjacent
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Affect_AllAdjacentAllies$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH_407_T$"

@@ -40,6 +40,67 @@ STORIES = {
             "He walks out through the gate without looking back. Behind you, the guards take turns trying to lift the shield."
         ),
     },
+    "Scoundrel": {
+        "name": "Scoundrel Retires",
+        "effects": [],
+        "text": (
+            "Nobody sees the Scoundrel leave. You find out the way you were always going to find out: her bunk is stripped, "
+            "the lock on the Trading Post's back door has been picked and relocked out of sheer habit, and on your table "
+            "sits a small, neat pile of everything she ever lifted from you. A coin purse. A whetstone. The good knife.\n"
+            "There is a note under the knife, in handwriting far better than she ever let on. \"Nothing personal. It never "
+            "was. Thanks for the company; it was more than I came for.\"\n"
+            "The guard at the gate swears he saw nothing all night. He is probably telling the truth. She was always better "
+            "than the people watching for her.\n"
+            "Weeks later a caravan master mentions a woman in dark leather who paid her way south and spent the whole trip "
+            "teaching the drivers to cheat at cards. You find you are smiling. Somewhere out there, the Scoundrel is doing "
+            "fine."
+        ),
+    },
+    "Sunkeeper": {
+        "name": "Sunkeeper Retires",
+        "effects": [],
+        "text": (
+            "The Sunkeeper asks you to meet her on the wall at sunrise. She is already there when you arrive, armor polished "
+            "to a mirror, watching the light come up over the ice. \"The temple has sent for me,\" she says. \"They need a "
+            "keeper, and there is no one else.\"\n"
+            "She does not pretend to be sorry to go, and you respect her for it. Instead she walks the length of the wall with "
+            "you, laying a gloved hand on each tower as she passes, speaking a few words under her breath. The guards on duty "
+            "stand a little straighter without quite knowing why.\n"
+            "At the gate she presses a small sun medallion into your palm, warm from her hand. \"For the dark months. It "
+            "will not do much. It will do enough.\"\n"
+            "Then she turns south and walks into the sunrise, which is exactly how she would have wanted it to look."
+        ),
+    },
+    "Sawbones": {
+        "name": "Sawbones Retires",
+        "effects": [],
+        "text": (
+            "You find the Sawbones in the Alchemist's back room, labeling jars. He has been at it for days: every salve, "
+            "splint and tincture he carried, written up in his cramped hand and shelved where anyone can find it.\n"
+            "\"Enough people know how to break things in this town,\" he says without looking up. \"Somebody ought to know "
+            "how to put them back together when I am gone.\" He closes the last jar, wipes his hands, and finally turns "
+            "around. \"The sanctuary wrote. A quiet post, inland. Warm. I said yes before I could talk myself out of it.\"\n"
+            "He leaves you his saw. Not as a weapon, he insists, though you both know how he used it. \"For the lumber. "
+            "Honestly.\"\n"
+            "The morning he goes, half the outpost turns out to see him off, every one of them someone he has stitched, "
+            "set or sobered up. He pretends to be annoyed about it the whole way to the gate."
+        ),
+    },
+    "Quartermaster": {
+        "name": "Quartermaster Retires",
+        "effects": [],
+        "text": (
+            "The Quartermaster spends his last week in Frosthaven doing inventory. Not his own: the outpost's. By the end of "
+            "it every storeroom has a ledger, every ledger has a system, and the Craftsman has stopped arguing and started "
+            "taking notes.\n"
+            "\"A party without supplies is a funeral with extra steps,\" he tells you over the last of his good wine. \"You "
+            "lot will be fine. You have the ledgers now.\" He taps the stack like a man patting a dog.\n"
+            "He has a contract waiting in the Capital, outfitting a merchant house, and he is honest enough to admit the pay "
+            "is obscene. He is also honest enough to look back at the walls for a long moment before he goes.\n"
+            "His pack is the last thing to leave, strapped to a sled and roped like a siege engine. The Craftsman swears the "
+            "storerooms have never been so tidy, and never will be again."
+        ),
+    },
 }
 
 

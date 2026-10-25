@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FlurryofBlades$
+Character: ScoundrelID
+ID: 20104
+Level: 4
+Initiative: 3
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Target: 3
+                AnimOverload: RangedAttackThrowingKnives
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BAdvantage:
+                Advantage:
+                    Amount: 1
+                    DecrementTrigger: Rounds
+                Filter: Self
+                AnimOverload: PowerUpFlurry
+                ActiveBonusDuration: Round
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<mark=#80919922><size=100%><sprite name=Target>*TAttack.Target*</mark>"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BAdvantage
+            ListLayout: "$GH_104_B$"
+            Layout: "$GH_104_B$"
+            Icon: Advantage

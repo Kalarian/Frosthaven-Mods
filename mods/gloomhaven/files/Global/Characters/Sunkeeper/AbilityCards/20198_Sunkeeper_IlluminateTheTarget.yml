@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_IlluminatetheTarget$
+Character: SunkeeperID
+ID: 20198
+Level: 6
+Initiative: 91
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                AnimOverload: MeleeSmite
+            TStrengthen:
+                Strengthen:
+                    SquareEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter: Ally
+                AnimOverload: PositiveBuffRadial
+        XP: 1
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 6
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                Filter: Ally
+                AnimOverload: ControlAlly
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Strengthen> @TStrengthen@"
+        - Row: "$Affect_AllAdjacentAllies$"
+    Bottom:
+        - Row: "$GH_157_T$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1> @BAllyAttack@"

@@ -1,0 +1,10 @@
+Parser: CampaignSection
+ID: GH.Quartermaster
+Name: Quartermaster Retires
+SkipNarration: True
+SkipCompletedNotification: False
+Effects:
+    - Type: EnableEvent
+      Param1: GH.Quartermaster-1
+    - Type: EnableEvent
+      Param1: GH.Quartermaster-2

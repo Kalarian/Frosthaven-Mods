@@ -1,0 +1,26 @@
+Parser: Mastery
+ID: Quartermaster_MASTERY_1
+LocalisedName: Quartermaster_MASTERY_1_Name
+LocalisedDescription: Quartermaster_MASTERY_1_Desc
+PerkPoints: 1
+# An item used or refreshed on every turn the Quartermaster takes (the plugin answers this target from the item and
+# ability records, GHMasteries.cs); failed the moment Reinforced Steel's top action (card 20223, abilities named T...)
+# is performed (the plugin's second marker; Amount = the card).
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ItemsEveryTurn]
+        CharacterIDs:
+            ActorID: QuartermasterID
+        Value: 1
+BattleGoalFailCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_UsedCardTop]
+        CharacterIDs:
+            ActorID: QuartermasterID
+        Amount: 20223
+        Value: 1

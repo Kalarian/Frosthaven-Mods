@@ -1,0 +1,17 @@
+Parser: Mastery
+ID: Sawbones_MASTERY_1
+LocalisedName: Sawbones_MASTERY_1_Name
+LocalisedDescription: Sawbones_MASTERY_1_Desc
+PerkPoints: 1
+# An ally helped on every turn the Sawbones takes: a heal, shield, supply card, buff or recovery ability of hers with
+# another character or summon among its targets. No built-in filter combines them: the Frosthaven Mods plugin answers
+# this target (GHMasteries.cs) from the ability records.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AllySupportEveryTurn]
+        CharacterIDs:
+            ActorID: SawbonesID
+        Value: 1

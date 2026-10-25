@@ -1,0 +1,57 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DivineIntervention$
+Character: SunkeeperID
+ID: 20204
+Level: 9
+Initiative: 9
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TPrevent:
+                PreventDamage: 1
+                Filter: [Self]
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: PreventAndApplyToActiveBonusCaster
+                    IsAura: True
+                    AuraFilter: [Ally]
+                    AuraTargeting: All
+                    ToggleIsOptional: True
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Target: -1
+                Targeting: All
+                Filter: [Self, Ally]
+                ActiveBonusDuration: Round
+                AnimOverload: Persistent Buff
+        Infuse: Light
+Layout:
+    Top:
+        - Active:
+            Ability: TPrevent
+            Icon: Positive_DamagePrevent
+            ListLayout: "$GH_204_T$"
+            Layout: "$GH_204_T$"
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*, $Affect_SelfAndAllAllies$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "$Affect_SelfAndAllAllies$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:
+                - Duration: Round

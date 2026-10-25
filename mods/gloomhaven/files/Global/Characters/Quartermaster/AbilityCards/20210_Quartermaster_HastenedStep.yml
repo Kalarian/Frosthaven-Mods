@@ -1,0 +1,35 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HastenedStep$
+Character: QuartermasterID
+ID: 20210
+Level: 1
+Initiative: 26
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack1:
+                Attack:
+                    Amount: 2
+            TMove:
+                Move:
+                    Amount: 1
+                    CircleEnhancements: 1
+            TAttack2:
+                Attack:
+                    Amount: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 5
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

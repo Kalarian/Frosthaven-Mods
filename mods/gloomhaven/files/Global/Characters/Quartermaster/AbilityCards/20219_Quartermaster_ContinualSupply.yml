@@ -1,0 +1,47 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ContinualSupply$
+Character: QuartermasterID
+ID: 20219
+Level: 3
+Initiative: 86
+Discard: [Lost,Permanently Lost]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    DiscardCards: 1
+                    Filter: Self
+                    NegativeAbilityIsOptional: True
+                    SubAbilities:
+                        TRefreshItem:
+                            RefreshItems: 1
+                            SlotToRefresh: SmallItem
+                            SlotStateToRefresh: Consumed
+                            Range: 1
+                            Filter:
+                                TargetType: Ally
+                                ActorType: Player
+                            TreatAsNonSubAbility: True
+                            StartAbilityRequirements:
+                                Type: PreviousAbility    
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BRecover:
+                RecoverLostCards: 2
+                Filter: Self
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH_219_T$"
+            Layout: "$GH_219_T$"
+            Icon: SmallItem
+    Bottom:
+        - Row: "$GH_219_B$"

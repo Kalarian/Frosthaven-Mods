@@ -1,0 +1,57 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PrepForSurgery$
+Character: SawbonesID
+ID: 20445
+Level: 9
+Initiative: 22
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAbilityOverrideAbilityType:
+                AddActiveBonus:
+                    Heal: 0
+                ActiveBonus:
+                    Behaviour: OverrideMoveAbility
+                    Duration: Persistent
+                    ValidAbilityType: [Move, Attack]
+                    IsToggleBonus: True
+                    ActiveBonusAbilityOverrides:
+                        BCTypeOverride:
+                            AbilityType: Heal
+                            Strength: 1
+                            RangeAtLeastOne: True
+                            TargetAtLeastOne: True
+                            Filter: [Ally, Self]
+                            AnimOverload: Heal
+                            RemoveConditionsOverride: True
+                PreviewEffectText: "<sprite name=Move> + <sprite name=Attack> / <sprite name=Heal>"
+                AnimOverload: PowerUp
+        XP: 2                
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BStun:
+                Stun:
+                    SquareEnhancements: 1
+                Range: 1
+                Filter: Enemy
+                AnimOverload: TargetedDebuff
+Layout:
+    Top:
+        - Active:
+            Ability: TAbilityOverrideAbilityType
+            Icon: Sawbones
+            ListLayout: "$GH_445_T_1$ $GH_445_T_2$"
+            Layout:
+                - Row: "$GH_445_T_1$"
+                - Row: "<size=20%> "
+                - Row: "$GH_445_T_2$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Stun> <size=100%><voffset=1>@BStun@"
+        - Row: "$Target_OneAdjacentEnemy$"

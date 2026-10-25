@@ -1,0 +1,44 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Syringe$
+Character: SawbonesID
+ID: 20413
+Level: 1
+Initiative: 15
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TShield:
+                Shield:
+                    Amount: 2
+                    SquareEnhancements: 1
+                ActiveBonus:
+                    Duration: Round
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: BuffAdjacent
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Conditions: [Poison, Stun]
+Layout:
+    Top:
+        - Active:
+            Ability: TShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *TShield*, $Target_OneAdjacentAlliedPlayer$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+                - Row: "$Target_OneAdjacentAlliedPlayer$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Poison></size>, <size=130%><sprite name=Stun></size>"
+            - Column:

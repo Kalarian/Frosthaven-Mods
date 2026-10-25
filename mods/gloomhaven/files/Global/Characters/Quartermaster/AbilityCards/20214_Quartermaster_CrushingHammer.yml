@@ -1,0 +1,47 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CrushingHammer$
+Character: QuartermasterID
+ID: 20214
+Level: X
+Initiative: 17
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 2
+                Condition: Stun
+                AnimOverload: HeavyAttack
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Stun></size>"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Divider:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"

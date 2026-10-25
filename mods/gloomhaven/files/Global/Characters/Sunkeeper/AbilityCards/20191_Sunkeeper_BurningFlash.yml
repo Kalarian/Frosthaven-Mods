@@ -1,0 +1,57 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BurningFlash$
+Character: SunkeeperID
+ID: 20191
+Level: 3
+Initiative: 51
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range: 1
+                Target: -1
+                XPPerTarget: 1
+                AnimOverload: RadialSmite
+                MultiPassAttack: False
+        Infuse: Light
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+        Consumes:
+            BCAny:
+                Elements: Any
+                Infuse: Light
+                AbilityOverrides:
+                    BCAnyHealBuff:
+                        ParentName: BHeal
+                        Strength: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "$XP_PerEnemy$"
+        - Row: "<size=50%> "
+        - Infuse: Light
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<sprite name=Range>*BHeal.Range* <size=100%><voffset=1>@BHeal.Range@"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCAny
+            Text: +1 <sprite name=Heal>, <size=150%><voffset=-1.5><sprite name=Light></voffset></size>

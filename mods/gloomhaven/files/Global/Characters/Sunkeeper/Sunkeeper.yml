@@ -1,0 +1,26 @@
+Parser: Character
+ID: SunkeeperID
+LocKey: $Sunkeeper$
+Model: Sunkeeper
+Race: Valrath
+Traits: [ Armored, Nimble, Persuasive ]
+Complexity: 1
+MasteryIDs: [ Sunkeeper_MASTERY_1, Sunkeeper_MASTERY_2 ]
+RetireCampaignSection: GH.Sunkeeper
+DefaultSkin: 1
+# PlayerLevel:    [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
+HealthTable:      [  10,  12,  14, 16,  18,  20,  22,  24,  26 ]
+NumberAbilityCardsInBattle: 11
+Role: $Sunkeeper_ROLE$
+Description: $Sunkeeper_DESCRIPTION$
+Difficulty: $DIFFICULTY_LOW$
+Strengths: $Sunkeeper_STRENGTHS$
+Weaknesses: $Sunkeeper_WEAKNESSES$
+Adventure_Description: $Sunkeeper_ADVENTURE_DESCRIPTION$
+HeroStats:
+    Melee: 4
+    Ranged: 1
+    Mobility: 2
+    Support: 4
+    Defense: 6
+    Control: 1

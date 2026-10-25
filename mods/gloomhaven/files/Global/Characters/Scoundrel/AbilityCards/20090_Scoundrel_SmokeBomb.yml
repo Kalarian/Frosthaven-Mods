@@ -1,0 +1,66 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SmokeBomb$
+Character: ScoundrelID
+ID: 20090
+Level: 1
+Initiative: 12
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TInvis:
+                Invisible:
+                    SquareEnhancements: 1
+                Filter: Self
+                AnimOverload: SelfPowderInvisibility
+                SubAbilities:
+                    TActive:
+                        Attack: 2
+                        ActiveBonus:
+                            Duration: Persistent
+                            Behaviour: BuffAttack
+                            StrengthIsScalar: True
+                            Filter:
+                                CasterHasPositiveConditions: [Invisible]
+                            XPTracker: [2]
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BPull:
+                Pull:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Invisible> <size=100%><voffset=1>@TInvis@"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+        - Divider:
+        - Active:
+            Ability: TActive
+            Icon: Invisible
+            ListLayout: "$GH_090_T$"
+            Layout: "$GH_090_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Duration: Persistent
+            - Column:
+                - Infuse: Dark
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Pull> *BPull* <size=100%><voffset=1>@BPull@"
+            - Column:
+                - Row: "<sprite name=Range>*BPull.Range* @BPull.Range@"
+            - Column:

@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FortifiedPosition$
+Character: QuartermasterID
+ID: 20230
+Level: 8
+Initiative: 10
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    Heal: 2
+                    Range: 1
+                    Target: -1
+                    Filter: Ally
+                    AnimOverload: Heal
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    StartsRestricted: True
+                    XPTracker: [1,0,1,0,1]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BShield:
+                Shield:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH_230_T$"
+            Layout: "$GH_230_T$"
+            Icon: Heal
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"

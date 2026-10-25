@@ -1,0 +1,40 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Precaution$
+Character: SawbonesID
+ID: 20432
+Level: 2
+Initiative: 9
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Filter: Ally
+                Targeting: All
+                Target: -1
+                ActiveBonus:
+                    Duration: Round
+                AnimOverload: RadialBuff
+    Bottom:
+        Abilities:
+            TGiveSupplyCard:
+                GiveSupplyCard: 417
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: GivePackAdjacent
+        XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *TShield*"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+                - Row: "$Affect_AllAllies$"
+    Bottom:
+        - Row: "$GH_407_T$"

@@ -1,0 +1,18 @@
+Parser: Mastery
+ID: Sunkeeper_MASTERY_2
+LocalisedName: Sunkeeper_MASTERY_2_Name
+LocalisedDescription: Sunkeeper_MASTERY_2_Desc
+PerkPoints: 1
+# Light infused or consumed on every turn the Sunkeeper takes. The game's filters count infusions or consumptions, not
+# either: the Frosthaven Mods plugin answers this target (GHMasteries.cs) from the element records, for the element(s)
+# in Elements, over the rounds with a turn of hers.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ElementEveryTurn]
+        Elements: Light
+        CharacterIDs:
+            ActorID: SunkeeperID
+        Value: 1

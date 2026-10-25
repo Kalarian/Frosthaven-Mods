@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CripplingPoison$
+Character: ScoundrelID
+ID: 20108
+Level: 6
+Initiative: 30
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 2
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    Filter:
+                        TargetType: Enemy
+                        TargetHasNegativeConditions: [Poison]
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Conditions: [Poison, Immobilize]
+        XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_108_T$"
+            Layout: "$GH_108_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Poison></size>, <size=130%><sprite name=Immobilize></size>"
+            - Column:

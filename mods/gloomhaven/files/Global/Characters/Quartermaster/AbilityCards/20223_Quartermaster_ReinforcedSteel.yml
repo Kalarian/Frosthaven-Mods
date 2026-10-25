@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ReinforcedSteel$
+Character: QuartermasterID
+ID: 20223
+Level: 5
+Initiative: 12
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    RefreshItems: 1
+                    SlotStateToRefresh: Spent
+                    Filter: Self
+                    Target: -1
+                    AnimOverload: Refresh
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndRoundAbility
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BShield:
+                Shield:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Self, Ally]
+                AnimOverload: RadialBuff
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH_223_T$"
+            Layout: "$GH_223_T$"
+            Icon: Refresh
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*, <b><sprite name=Aura>:</b> $Affect_SelfAndAllAdjacentAllies$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<b><sprite name=Aura>:</b> $Affect_SelfAndAllAdjacentAllies$"

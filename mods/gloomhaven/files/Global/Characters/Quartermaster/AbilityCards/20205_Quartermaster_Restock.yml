@@ -1,0 +1,31 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Restock$
+Character: QuartermasterID
+ID: 20205
+Level: 1
+Initiative: 73
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TRefresh:
+                RefreshItems: 1
+                SlotStateToRefresh: [Consumed, Spent]
+                Range: 2
+                Target: -1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: Refresh
+        XP: 2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+Layout:
+    Top:
+        - Row: "$GH_205_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

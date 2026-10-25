@@ -1,0 +1,35 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ThrowingKnives$
+Character: ScoundrelID
+ID: 20094
+Level: 1
+Initiative: 10
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Target: 2
+                AnimOverload: RangedAttackThrowingKnives
+        XP: 1
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 2
+                Target: -1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<mark=#80919922><size=100%><sprite name=Target>*TAttack.Target*</mark>"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"

@@ -1,0 +1,33 @@
+{
+  "_about": "Test notes for the Sawbones' effects workbook (tools/gh_testsheet.py). turns: the test hand in play order; an entry with \"rest\" is a long rest for the whole party. picks: the level-up card picks the hand needs. states: what Gloomhaven shows per animator state, where known; the rest is generated from the pack data.",
+  "picks": ["Level 3: Vital Strike", "Other levels: anything"],
+  "setup": "His medical packs go to adjacent allies: have the Scoundrel or the Quartermaster next to him on turns 1 and 5, and have them PLAY the Medical Pack card they receive (it appears in their hand) to check it heals and goes away.",
+  "turns": [
+    {"top": "FirstAid", "bottom": "VitalStrike", "order": "Bottom first: move 4 next to an ally, then give them a Medical Pack.", "setup": "An ally to end adjacent to."},
+    {"top": "BloodySaw", "bottom": "CurativeMixture", "order": "Bottom first: move 3 next to an ally and clear their conditions (the adjacent buff), then the plain saw attack on an enemy.", "setup": "An ally (with a condition, ideally) and an enemy adjacent."},
+    {"top": "Vaccine", "bottom": "BoosterShot", "order": "Top: the ranged area attack (Attack 1, range 3). Bottom: Shield 1 on an adjacent ally.", "setup": "Enemies within 3; an ally adjacent."},
+    {"top": "PreventionisKey", "bottom": "HandoftheSurgeon", "order": "Top: disarm the adjacent enemies (the radial debuff). Bottom: his persistent bonus (the power-up).", "setup": "Enemies adjacent."},
+    {"top": "BattlefieldMedicine", "bottom": "MobileResponse", "order": "Bottom first: move 5 next to enemies and wound them (the radial debuff), then give an adjacent ally a Large Medical Pack.", "setup": "Enemies and an ally adjacent after the move."},
+    {"rest": "long"},
+    {"top": "VitalStrike", "bottom": "BloodySaw", "order": "Top: the heavy saw swing (Attack 7). Bottom: Loot 1.", "setup": "An enemy adjacent; a coin adjacent."},
+    {"top": "CurativeMixture", "bottom": "PreventionisKey", "order": "Top: Heal 3 on an adjacent ally. Bottom: Shield 1 on the adjacent allies (the radial buff).", "setup": "Allies adjacent."},
+    {"top": "HandoftheSurgeon", "bottom": "FirstAid", "order": "Top: the plain attack (Attack 4). Bottom: Move 4.", "setup": "An enemy adjacent."}
+  ],
+  "states": {
+    "GivePackAdjacent": "He hands a pack to the adjacent ally, with the give-medipack sound; the ally gets the Medical Pack card in hand.",
+    "Attack": "A saw swing with his melee attack sound and the weapon impact.",
+    "Attack_AOE_Cone": "The heavy two-handed saw swing with the heavy-attack sound.",
+    "BuffAdjacent": "A quick treatment on the adjacent ally with the buff-adjacent sound.",
+    "RadialBuff": "A ring over the adjacent allies with the radial-buff sound.",
+    "RadialDebuff": "A cloud over the adjacent enemies with the radial-debuff sound.",
+    "RangedAreaAttack": "A thrown vial at the target area with the ranged-attack cast sound.",
+    "Heal": "The cast pose with his heal sound.",
+    "PowerUp": "The cast pose with his power-up sound.",
+    "Loot": "His loot stoop with the loot sound."
+  },
+  "actions": [
+    {"name": "Movement", "how": "Any move.", "expected": "His run cycle with footstep sounds and a dust puff at each footfall."},
+    {"name": "Item use", "how": "Use any item.", "expected": "His item animation with the item-use sound."},
+    {"name": "Taking a hit", "how": "Let an enemy hit him.", "expected": "Hit reaction with one of three grunts."}
+  ]
+}

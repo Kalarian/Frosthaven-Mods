@@ -1,0 +1,26 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ThiefsKnack$
+Character: ScoundrelID
+ID: 20092
+Level: 1
+Initiative: 23
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TDisarmTrap:
+                DisarmTrap: True
+                AnimOverload: DisarmTrap
+        XP: 2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+        XP: 1
+Layout:
+    Top:
+        - Row: "$GH_092_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

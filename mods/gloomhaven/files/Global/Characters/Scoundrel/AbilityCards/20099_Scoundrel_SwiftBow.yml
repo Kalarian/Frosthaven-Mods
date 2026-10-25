@@ -1,0 +1,41 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SwiftBow$
+Character: ScoundrelID
+ID: 20099
+Level: X
+Initiative: 36
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttackThrowingKnives
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BLoot:
+                Loot: 0
+                Target: -1
+                AllTargetsOnMovePath: True
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Row: "$GH_099_B$"

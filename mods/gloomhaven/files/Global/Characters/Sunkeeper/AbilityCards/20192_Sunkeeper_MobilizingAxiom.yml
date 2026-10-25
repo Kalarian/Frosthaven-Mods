@@ -1,0 +1,38 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MobilizingAxiom$
+Character: SunkeeperID
+ID: 20192
+Level: 3
+Initiative: 23
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                AnimOverload: MeleeSmite
+        Infuse: Light
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move: 4
+                            StrengthIsBase: True
+                Range: 5
+                Target: -1
+                Filter: Ally
+                AnimOverload: ControlAlly
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Infuse: Light
+    Bottom:
+        - Row: "$GH_192_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Move> *BAllyMove*"

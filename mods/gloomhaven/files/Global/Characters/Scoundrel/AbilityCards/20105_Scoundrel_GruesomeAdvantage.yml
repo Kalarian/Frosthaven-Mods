@@ -1,0 +1,45 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GruesomeAdvantage$
+Character: ScoundrelID
+ID: 20105
+Level: 4
+Initiative: 62
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 2
+                ConditionalOverrides:
+                    TAttackCO1:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentAlliesOfCaster: "> 0"
+                        XP: 1
+                        AbilityOverrides:
+                            TAdjBuff:
+                                Strength: 3
+                    TAttackCO2:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentAlliesOfTarget: "== 0"
+                        XP: 1
+                        AbilityOverrides:
+                            TAdjBuff:
+                                Strength: 3
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 7
+Layout:
+    Top:
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$GH_105_T_1$"
+        - Row: "<size=20%> "
+        - Row: "$GH_105_T_2$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"

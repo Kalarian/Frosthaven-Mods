@@ -1,0 +1,14 @@
+Parser: Mastery
+ID: Scoundrel_MASTERY_2
+LocalisedName: Scoundrel_MASTERY_2_Name
+LocalisedDescription: Scoundrel_MASTERY_2_Desc
+PerkPoints: 1
+# The opposite count, from the same records (GHMasteries.cs). Value = kills needed.
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_KillsAwayFromAllies]
+        CharacterIDs:
+            ActorID: ScoundrelID
+        Value: 6

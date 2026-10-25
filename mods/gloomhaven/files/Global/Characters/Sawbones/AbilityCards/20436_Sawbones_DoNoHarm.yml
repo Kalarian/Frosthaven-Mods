@@ -1,0 +1,56 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DoNoHarm$
+Character: SawbonesID
+ID: 20436
+Level: 4
+Initiative: 76
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TKill:
+                Kill: True
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+                SubAbilities:
+                    TKillSubDisarmImmobilize:
+                        Disarm: True
+                        Condition: Immobilize
+                        Filter: Self
+                        AnimOverload: SelfDebuff
+                AnimOverload: Attack_AOE_Cone
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+            BHeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 2
+                Range: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row: "$Kill_OneAdjacentEnemy$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><nobr><sprite name=Disarm></nobr>, <nobr><sprite name=Immobilize></nobr>"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+            - Column:

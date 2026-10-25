@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Quartermaster05
+Name: PERK_Quartermaster_05_Name
+Description: PERK_Quartermaster_05_Desc
+CharacterID: QuartermasterID
+Available: 3
+CardsToAdd: [AMC_RefreshItem]

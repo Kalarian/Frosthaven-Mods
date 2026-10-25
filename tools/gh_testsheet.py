@@ -13,6 +13,11 @@ card half, and a column for what Frosthaven showed. Built from the pack itself, 
     python tools/gh_testsheet.py rewards Brute      -> tests/Brute rewards review.xlsx: the retirement events' rewards,
                                                        Gloomhaven's and the proposed Frosthaven version, for a verdict
     python tools/gh_testsheet.py read-rewards Brute -> the verdicts
+    python tools/gh_testsheet.py party Scoundrel Sunkeeper Sawbones Quartermaster --name "Group 1"
+                                                    -> tests/Group 1 test script.xlsx: one workbook for a whole test
+                                                       party: setup, hands, the turn plan (turn x character), the
+                                                       tests and the rewards review of every class in it
+    python tools/gh_testsheet.py read-party --name "Group 1" Scoundrel   -> its results and verdicts
 
 The workbook is the player's: tests/ is not published (the repo is a whitelist). Needs openpyxl.
 """
@@ -504,11 +509,219 @@ def read_rewards(cls):
               f" | {row[col['Your notes']] or ''}")
 
 
+# ---------------------------------------------------------------- a party of classes in one workbook
+
+def _spec(cls):
+    f = SPECS / f"{cls}.json"
+    return json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
+
+
+def _plays(cls, spec, all_cards, anim):
+    """Per turn (None for a rest), the card halves a class plays, and for each half its states and expected text."""
+    by_key = {c["key"].lower(): c for c in all_cards}
+    notes, status = spec.get("states", {}), spec.get("status", {})
+    turns = spec.get("turns") or pick_hand(all_cards)
+    out = []
+    for turn in turns:
+        if "rest" in turn:
+            out.append(None)
+            continue
+        halves = []
+        for half, key in (("Top", turn["top"]), ("Bottom", turn["bottom"])):
+            card = by_key[key.lower()]
+            abilities = card["halves"][half]
+            states = [s for a in abilities for s in states_of(a) if s != "Movement"]
+            halves.append({"card": card, "half": half, "abilities": abilities, "states": list(dict.fromkeys(states)),
+                           "moveOnly": any(states_of(a) == ["Movement"] for a in abilities),
+                           "expected": [notes.get(s) or generated(anim, s, cls) for s in dict.fromkeys(states)],
+                           "status": [status[s] for s in dict.fromkeys(states) if status.get(s)]})
+        out.append({"turn": turn, "halves": halves})
+    return out
+
+
+def build_party(classes, name, force=False):
+    """One workbook for a whole test party: setup, the hands, the turn plan (turn x character), the tests, and the
+    retirement rewards review of every class in it."""
+    import gh_events
+    data = {}
+    for cls in classes:
+        all_cards = cards(cls)
+        data[cls] = {"spec": _spec(cls), "cards": all_cards, "anim": animation(cls)}
+        data[cls]["plays"] = _plays(cls, data[cls]["spec"], all_cards, data[cls]["anim"])
+    built = version()
+    wb = Workbook()
+    guide = wb.active
+    guide.title = "How to use"
+    setup = wb.create_sheet("Setup")
+    hands = wb.create_sheet("Hands")
+    plan = wb.create_sheet("Turn plan")
+    tests = wb.create_sheet("Tests")
+    review = wb.create_sheet("Rewards review")
+
+    # Setup: the characters, their level-up picks, what the scenario needs
+    _sheet(setup, ["Character", "Create as", "Level-up picks the hand needs", "What the scenario needs for them"], [16, 22, 44, 70])
+    for cls in classes:
+        spec = data[cls]["spec"]
+        _row(setup, [cls, f"a {cls}, any name", "\n".join(spec.get("picks", ["any"])), spec.get("setup", "")])
+    _row(setup, ["Everyone", "", "Ctrl+F7 gives every character the experience for the top level; level them up in the "
+                 "outpost's downtime, picking the cards listed. Ctrl+F9 gives gold for items. Ctrl+F3 gives 3 perk marks each "
+                 "(optional: to try the perks).",
+                 "A scenario with plenty of normal enemies, a trap if possible, at a low scenario level. Four characters in "
+                 "the party. Everyone takes a long rest on the turn marked so."])
+
+    # Hands: the ten cards per character and what each half is for
+    _sheet(hands, ["Character", "Card", "Level", "Initiative", "Top", "Bottom", "In the plan"], [16, 24, 7, 10, 30, 30, 24])
+    for cls in classes:
+        used = {}
+        for i, p in enumerate(data[cls]["plays"], 1):
+            if p:
+                for h in p["halves"]:
+                    used.setdefault(h["card"]["key"], []).append(f"turn {i} {h['half'].lower()}")
+        for key, where in used.items():
+            card = next(c for c in data[cls]["cards"] if c["key"] == key)
+            _row(hands, [cls, card["name"], card["level"], card["initiative"], summary(card["halves"]["Top"]), summary(card["halves"]["Bottom"]), ", ".join(where)])
+
+    # Turn plan: one row per turn, two columns per character
+    head = ["Turn"]
+    widths = [6]
+    for cls in classes:
+        head += [f"{cls} top", f"{cls} bottom", f"{cls}: order and setup"]
+        widths += [20, 20, 42]
+    _sheet(plan, head, widths)
+    rounds = max(len(d["plays"]) for d in data.values())
+    for i in range(rounds):
+        row = [i + 1]
+        for cls in classes:
+            plays = data[cls]["plays"]
+            p = plays[i] if i < len(plays) else None
+            if i < len(plays) and p is None:
+                row += ["Long rest", "", "Everyone rests: the discarded cards come back (lost ones don't)."]
+            elif p is None:
+                row += ["-", "", "nothing more planned"]
+            else:
+                row += [p["halves"][0]["card"]["name"], p["halves"][1]["card"]["name"],
+                        " ".join(x for x in (p["turn"].get("order", ""), p["turn"].get("setup", "")) if x)]
+        _row(plan, row)
+
+    # Tests: per character, one row per card half in play order, then the non-card actions
+    _sheet(tests, ["#", "Character", "Turn", "Card", "Half", "Ability", "Plays", "Expected (what Gloomhaven shows)",
+                   "Result in Frosthaven", "Notes"], [5, 14, 6, 22, 8, 24, 20, 60, 14, 40])
+    n = 0
+    for cls in classes:
+        seen = {}
+        for i, p in enumerate(data[cls]["plays"], 1):
+            if p is None:
+                continue
+            for h in p["halves"]:
+                n += 1
+                lines = []
+                for s, text in zip(h["states"], h["expected"]):
+                    if s in seen:
+                        lines.append(f"Same {s} as row {seen[s]}.")
+                    else:
+                        seen[s] = n
+                        lines.append(text)
+                if h["moveOnly"]:
+                    lines.append("The move: see the Movement row.")
+                _row(tests, [n, cls, i, h["card"]["name"], h["half"], summary(h["abilities"]), ", ".join(h["states"]) or "(move only)",
+                             "\n".join(lines) or "Nothing of its own.", None, None], inputs=(9, 10))
+        for action in data[cls]["spec"].get("actions", []):
+            n += 1
+            _row(tests, [n, cls, "", action["name"], "", action["how"], "", action["expected"], None, None], inputs=(9, 10))
+    n += 1
+    _row(tests, [n, "Everyone", "", "Scenario end", "", "Win the scenario.", "", "Each character's victory pose and sound.", None, None], inputs=(9, 10))
+    last = tests.max_row
+    tests.auto_filter.ref = f"A1:J{last}"
+    dv = DataValidation(type="list", formula1='"' + ",".join(RESULTS) + '"', allow_blank=True,
+                        promptTitle="Result", prompt="Matches, Differs, Missing (nothing played) or Not seen (didn't get to it)")
+    tests.add_data_validation(dv)
+    dv.add(f"I2:I{last}")
+    for value, colour in (("Matches", "C6EFCE"), ("Differs", "FFC7CE"), ("Missing", "FFC7CE"), ("Not seen", "EDEDED")):
+        tests.conditional_formatting.add(f"I2:I{last}", FormulaRule(formula=[f'$I2="{value}"'], fill=PatternFill("solid", fgColor=colour)))
+
+    # Rewards review: every class's retirement events
+    items = _items()
+    costs = {i: c for i, (_, c) in items.items() if c is not None}
+    _sheet(review, ["#", "Character", "Event", "Deck", "From Gloomhaven", "Option", "Gloomhaven gives", "Frosthaven version",
+                    "Inside the guidelines?", "Why", "Status", "Your verdict", "Your notes"],
+           [4, 14, 14, 16, 14, 34, 24, 30, 20, 34, 10, 12, 34])
+    m = 0
+    for cls in classes:
+        evs = gh_events.events(cls)
+        deck_of = {e["id"]: DECK_NAMES[e["deck"]] for e in evs}
+        for e in evs:
+            how = " (from retirement)" if e["start"] == "retire" else " (from another event)"
+            for i, o in enumerate(e["options"], 1):
+                m += 1
+                fh = "\n".join(_effect_text(k, ps, items, deck_of) for k, *ps in o["fh"]) or "nothing"
+                why = gh_events.check(o, costs)
+                r = _row(review, [m, cls, e["id"], deck_of[e["id"]] + how, e["gh"], f"{i}. {o['text']}", o["gh"], fh,
+                                  "Yes" if not why else "No: " + why, o["note"], o.get("status", "proposed"), None, None], inputs=(12, 13))
+                if why:
+                    review.cell(r, 9).fill = RETEST
+    if m:
+        dv2 = DataValidation(type="list", formula1='"' + ",".join(VERDICTS) + '"', allow_blank=True, promptTitle="Verdict",
+                             prompt="Approve: ship it. Change: say what in the notes. Reject: no reward for this option.")
+        review.add_data_validation(dv2)
+        dv2.add(f"L2:L{review.max_row}")
+        for value, colour in (("Approve", "C6EFCE"), ("Change", "FFEB9C"), ("Reject", "FFC7CE")):
+            review.conditional_formatting.add(f"L2:L{review.max_row}", FormulaRule(formula=[f'$L2="{value}"'], fill=PatternFill("solid", fgColor=colour)))
+        review.auto_filter.ref = f"A1:M{review.max_row}"
+
+    guide.column_dimensions["A"].width = 110
+    for line, font in [
+        (f"{name}: test script", Font(name=FONT, size=14, bold=True)),
+        (f"Built {datetime.date.today():%d %b %Y} for mods {built}. Classes: {', '.join(classes)}.", None),
+        ("", None),
+        ("1. Setup sheet: create the four characters, level them up with the dev keys and pick the listed cards.", None),
+        ("2. Hands sheet: the ten cards each character takes into the scenario, and which turn uses which half.", None),
+        ("3. Turn plan sheet: one row per turn; every character plays the two cards named, in the order given. The row "
+         "marked Long rest is a rest for everyone.", None),
+        ("4. Tests sheet: one row per card half played, grouped by character. Fill the yellow cells: Result (from the list) "
+         "and Notes. Compare against Gloomhaven digital when unsure (Ctrl+F8 and Ctrl+F9 there).", None),
+        ("5. Rewards review sheet: each character's retirement events and the proposed Frosthaven effects; give each option a "
+         "verdict in the yellow column.", None),
+        ("6. Save the file and tell Claude the results are in. Claude reads the sheet directly.", None),
+    ]:
+        guide.append([line])
+        c = guide.cell(guide.max_row, 1)
+        c.font = font or Font(name=FONT, size=11)
+        c.alignment = Alignment(wrap_text=True)
+    wb.active = wb.sheetnames.index("Turn plan")
+    OUT.mkdir(exist_ok=True)
+    path = OUT / f"{name} test script.xlsx"
+    if path.exists() and not force:
+        sys.exit(f"{path} exists (it may hold results); pass --force to replace it")
+    wb.save(path)
+    print(f"wrote {path}: {n} tests, {rounds} turns, {m} reward options, for mods {built}")
+
+
+def read_party(name):
+    ws = load_workbook(OUT / f"{name} test script.xlsx", data_only=True)["Tests"]
+    head = [c.value for c in ws[1]]
+    col = {h: i for i, h in enumerate(head)}
+    counts = {}
+    for row in ws.iter_rows(min_row=2, values_only=True):
+        result = row[col["Result in Frosthaven"]] or "(blank)"
+        counts[result] = counts.get(result, 0) + 1
+        if result != "Matches":
+            print(f"  #{row[col['#']]} {row[col['Character']]} {row[col['Card']]} {row[col['Half']] or ''}: {result} | {row[col['Notes']] or ''}")
+    print("totals: " + ", ".join(f"{k} {v}" for k, v in counts.items()))
+    rv = load_workbook(OUT / f"{name} test script.xlsx", data_only=True)["Rewards review"]
+    head = [c.value for c in rv[1]]
+    col = {h: i for i, h in enumerate(head)}
+    for row in rv.iter_rows(min_row=2, values_only=True):
+        print(f"  reward #{row[col['#']]} {row[col['Character']]} {row[col['Event']]} {str(row[col['Option']])[:40]}: {row[col['Your verdict']] or '(blank)'} | {row[col['Your notes']] or ''}")
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("command", choices=["build", "read", "rewards", "read-rewards"])
-    ap.add_argument("cls")
+    ap.add_argument("command", choices=["build", "read", "rewards", "read-rewards", "party", "read-party"])
+    ap.add_argument("cls", nargs="+", help="class name(s); for party/read-party: --name names the workbook")
+    ap.add_argument("--name", default="Party", help="party: the workbook's name (tests/<name> test script.xlsx)")
     ap.add_argument("--force", action="store_true")
     args = ap.parse_args()
-    {"build": lambda: build(args.cls, args.force), "read": lambda: read(args.cls),
-     "rewards": lambda: build_rewards(args.cls, args.force), "read-rewards": lambda: read_rewards(args.cls)}[args.command]()
+    first = args.cls[0]
+    {"build": lambda: build(first, args.force), "read": lambda: read(first),
+     "rewards": lambda: build_rewards(first, args.force), "read-rewards": lambda: read_rewards(first),
+     "party": lambda: build_party(args.cls, args.name, args.force), "read-party": lambda: read_party(args.name)}[args.command]()

@@ -1,0 +1,14 @@
+Parser: Mastery
+ID: Sunkeeper_MASTERY_1
+LocalisedName: Sunkeeper_MASTERY_1_Name
+LocalisedDescription: Sunkeeper_MASTERY_1_Desc
+PerkPoints: 1
+# The game's own filter: damage received that shields stopped, summed over a round (Amount = the total).
+BattleGoalCondition:
+    - Targets:
+        Filter: ShieldDamage
+        SubFilter: RoundCharactersOnly
+        CharacterIDs:
+            ActorID: SunkeeperID
+        Amount: 20
+        Value: 1

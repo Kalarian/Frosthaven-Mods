@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MasterPhysician$
+Character: SawbonesID
+ID: 20441
+Level: 7
+Initiative: 49
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddHeal: 0
+                ConditionsToRemoveFirst: [Poison, Wound, Immobilize, Disarm, Stun, Muddle]
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffHealPerAction
+                    XPTracker: [0,1,0,1,0,1]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BHealBuff:
+                AddHeal: 4
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Heal
+            ListLayout: "$GH_441_T$"
+            Layout: "$GH_441_T$"
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Active:
+            Ability: BHealBuff
+            Icon: Heal
+            ListLayout: "$GH_441_B$"
+            Layout: "$GH_441_B$"

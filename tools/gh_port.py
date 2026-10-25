@@ -154,6 +154,7 @@ ANIM_OVERLOADS = {
     "HeavyFatalAdvance": "Attack_AOE_Cone",
     "RadialAttack": "Attack_AOE_Radial",
     "PowerUpShield": "Persistent Buff",
+    "Persistent": "Persistent Buff",      # the Sunkeeper's Divine Intervention names a state Gloomhaven itself lacks
 }
 ANIM_OVERLOAD_LINE = re.compile(r"^([ \t]*AnimOverload:[ \t]*)(\w+)(?=[ \t]*\r?$)", re.M)
 
@@ -319,6 +320,7 @@ def main():
         gh, build = find_gloomhaven()
     files = gh_files(gh)
     strings = gh_strings(gh)
+    strings_ci = {k.lower(): k for k in strings}   # Gloomhaven's card files and its English text disagree on case now and then
     fh = rs.read_ruleset(fh_mods.vanilla_backup())
     fh_names = {e["name"].lower() for e in fh}
     fh_amcs = {Path(e["name"]).stem for e in fh if "/AttackModifiers/" in e["name"]}
@@ -456,8 +458,8 @@ def main():
                 warnings.append(f"{cls}: no sounds ({e})")
             else:
                 try:
-                    events = gh_sound.export(gh, cls, args.out)
                     anim = models[cls]["animation"]
+                    events = gh_sound.export(gh, cls, args.out, gh_sound.events_of(anim))
                     anim["gh_audio"] = {**anim.get("gh_audio", {}), **gh_sound.STATE_EVENTS.get(cls, {})}
                     models[cls]["sounds"] = events
                     print(f"{cls}: {sum(len(v) for v in events.values())} sounds for {len(events)} Gloomhaven events")
@@ -469,6 +471,8 @@ def main():
         gh_key = key[3:] if key.startswith("GH_") else key
         if gh_key in strings:
             table[key] = strings[gh_key]
+        elif gh_key.lower() in strings_ci:   # a card file and the English text disagree on case (PrepForSurgery / PrepforSurgery)
+            table[key] = strings[strings_ci[gh_key.lower()]]
     # Keys Frosthaven derives from a class ID and expects in its own text: the full class name (FHMapView), the codex
     # hero description (FHUICodexHeroEntry), both from Gloomhaven's own text; and the retirement story of a class with
     # no Frosthaven retirement section, whose key comes out as "Event_" + "" + "_Text" (our line, no Gloomhaven text).

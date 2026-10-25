@@ -1,0 +1,31 @@
+{
+  "_about": "Test notes for the Sunkeeper's effects workbook (tools/gh_testsheet.py). turns: the test hand in play order; an entry with \"rest\" is a long rest for the whole party. picks: the level-up card picks the hand needs. states: what Gloomhaven shows per animator state, where known; the rest is generated from the pack data.",
+  "picks": ["Level 3: Burning Flash", "Other levels: anything"],
+  "setup": "She needs allies next to her for the buffs and the heals, and an enemy or two adjacent for the smites. Daybreak and Burning Flash infuse Light: watch the element board.",
+  "turns": [
+    {"top": "Daybreak", "bottom": "HammerBlow", "order": "Bottom first: move 4 next to an enemy, then the smite (Attack 3, Light infused).", "setup": "An enemy within 4 hexes."},
+    {"top": "ProtectiveBlessing", "bottom": "HolyStrike", "order": "Bottom first: the ranged smite (Attack 5) at an enemy in range, then bless an ally within 3.", "setup": "An enemy in range, an ally within 3."},
+    {"top": "BurningFlash", "bottom": "DazzlingCharge", "order": "Bottom first: move 5 and stun an enemy (the ranged smite), then the radial smite on the adjacent ones.", "setup": "Enemies adjacent after the move."},
+    {"top": "PurifyingAura", "bottom": "EmpoweringCommand", "order": "Top: retaliate on herself (the power-up). Bottom: grant an adjacent ally a Move 4.", "setup": "An ally adjacent."},
+    {"top": "BrilliantPrayer", "bottom": "LayonHands", "order": "Top: an adjacent ally recovers a lost card (the targeted buff). Bottom: Loot 1.", "setup": "An ally adjacent who has lost a card; a coin adjacent."},
+    {"rest": "long"},
+    {"top": "HammerBlow", "bottom": "Daybreak", "order": "Bottom first: move 2 and bless an ally, then the smite (Attack 4).", "setup": "An ally and an enemy in reach."},
+    {"top": "LayonHands", "bottom": "ProtectiveBlessing", "order": "Top: the heal (she takes 3 damage for it). Bottom: the radial damage-prevention buff on adjacent allies. Her hand is spent after this turn: Empowering Command is the one card left.", "setup": "Allies adjacent."}
+  ],
+  "states": {
+    "MeleeSmite": "The hammer smite: an overhead hammer blow with a flash of light, with the melee-smite sound.",
+    "RangedSmite": "A thrown bolt of light at the target with the ranged-smite cast sound.",
+    "RadialSmite": "A ring of light bursts from her over the adjacent hexes, with the radial-smite sound.",
+    "PositiveBuffTargeted": "A beam of light to one ally with the targeted-buff sound.",
+    "PositiveBuffRadial": "A ring of light over the allies around her with the radial-buff sound.",
+    "ControlAlly": "She raises the hammer and the ally glows and acts, with the control-ally sound.",
+    "PowerUp": "The cast pose with her power-up sound.",
+    "Heal": "The cast pose with her heal sound.",
+    "Loot": "Her loot stoop with the loot sound."
+  },
+  "actions": [
+    {"name": "Movement", "how": "Any move.", "expected": "Her run cycle with footstep sounds and a dust puff at each footfall."},
+    {"name": "Item use", "how": "Use any item.", "expected": "Her item animation with the item-use sound."},
+    {"name": "Taking a hit", "how": "Let an enemy hit her.", "expected": "Hit reaction with one of three grunts."}
+  ]
+}

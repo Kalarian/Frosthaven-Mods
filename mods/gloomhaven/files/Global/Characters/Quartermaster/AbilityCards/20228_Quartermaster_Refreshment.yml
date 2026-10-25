@@ -1,0 +1,41 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Refreshment$
+Character: QuartermasterID
+ID: 20228
+Level: 7
+Initiative: 89
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    RefreshItems: 1
+                    SlotStateToRefresh: Consumed
+                    Filter: Self
+                    AnimOverload: Refresh
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnLongRest
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BRecover:
+                RecoverDiscardedCards: All
+                Target: 1
+                Targeting: All
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: Refresh
+        XP: 2
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Quartermaster
+            ListLayout: "$GH_228_T$"
+            Layout: "$GH_228_T$"
+    Bottom:
+        - Row: "$GH_228_B$"

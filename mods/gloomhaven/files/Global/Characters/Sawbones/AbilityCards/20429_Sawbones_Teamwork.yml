@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Teamwork$
+Character: SawbonesID
+ID: 20429
+Level: X
+Initiative: 89
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TRecover:
+                RecoverDiscardedCards: 0
+                Range: 1
+                Target: -1
+                Filter:
+                    TargetType: [Self, Ally]
+                    ActorType: Player
+                    CasterAdjacentAllies: "> 0"
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: CasterAdjacentAllies
+                AnimOverload: RadialBuff
+        XP: 2
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move: 2
+                            StrengthIsBase: True
+                Range: 1
+                Target: -1
+                Filter: Ally
+                # AnimOverload: RadialBuff
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "$GH_429_T$"
+    Bottom:
+        - Row: "$GH_429_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

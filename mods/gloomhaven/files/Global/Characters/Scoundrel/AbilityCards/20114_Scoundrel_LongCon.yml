@@ -1,0 +1,37 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LongCon$
+Character: ScoundrelID
+ID: 20114
+Level: 9
+Initiative: 2
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range: 1
+                Target: -1
+                Conditions: Disarm
+                AnimOverload: DefaultRadialAttack
+    Bottom:
+        Abilities:
+            TControl:
+                ControlActor:
+                    ControlDurationType: ControlForOneTurn
+                    ControlActorType: Player
+                AnimOverload: DefaultRadialAttack
+                Range: 1
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<sprite name=Disarm>"
+    Bottom:
+        - Row: "$GH_114_B$"

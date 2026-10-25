@@ -1,0 +1,32 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CleavingAxe$
+Character: QuartermasterID
+ID: 20211
+Level: 1
+Initiative: 52
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                AreaEffect: "0,0,G|1,1,R|2,0,R|1,-1,R|-1,1,E"
+                MultiPassAttack: False
+                AnimOverload: SlamAttack
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - ColumnWidths: "60,35"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<size=50%> "
+        - Column: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

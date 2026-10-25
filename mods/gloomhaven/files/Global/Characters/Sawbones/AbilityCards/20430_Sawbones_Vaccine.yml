@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Vaccine$
+Character: SawbonesID
+ID: 20430
+Level: X
+Initiative: 44
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Range: 3
+                Condition: Poison
+                AreaEffect: "0,0,R|2,0,R|1,1,R"
+                AnimOverload: RangedAreaAttack
+                MultiPassAttack: False
+        XP: 1
+    Bottom:
+        Abilities:
+            BImmune:
+                ImmunityTo: [Poison, Wound, Immobilize, Disarm, Stun, Muddle, Curse]
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                ActiveBonus:
+                    Duration: Persistent
+                    GiveAbilityCardToActor: True
+                AnimOverload: PowerUp
+        XP: 2
+Layout:
+    Top:
+        - ColumnWidths: "70,25"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Range> *TAttack.Range*"
+            - Row: "<sprite name=Poison>"
+            - Row: "<size=50%> "
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row:
+            - ColumnWidths: "88,12"
+            - Column:
+                - Row: "$GH_410_B$"
+            - Column:
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BImmune
+            Icon: Positive_DamagePrevent
+            ListLayout: "$GH_343_B$"
+            Layout: "$GH_343_B$"

@@ -1,0 +1,41 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SpecialMixture$
+Character: ScoundrelID
+ID: 20096
+Level: 1
+Initiative: 33
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Filter: Self
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BPoison:
+                Poison: True
+                Filter: Enemy
+                AnimOverload: AimedPowderPoison
+                Range: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Poison>"
+        - Row: "$Target_OneAdjacentEnemy$"

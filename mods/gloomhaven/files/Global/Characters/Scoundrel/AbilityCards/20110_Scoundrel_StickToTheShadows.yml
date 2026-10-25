@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SticktotheShadows$
+Character: ScoundrelID
+ID: 20110
+Level: 7
+Initiative: 26
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 2
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TAttack
+                        ConditionalOverrides:
+                            TCDarkAttackCO:
+                                Filter:
+                                    TargetType: Enemy
+                                    TargetAdjacentAllies: "> 0"
+                                AbilityOverrides:
+                                    TAdjBuff:
+                                        Strength: 4
+                                XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 2
+            BInvisible:
+                Invisible:
+                    SquareEnhancements: 1
+                Filter: Self
+                AnimOverload: SelfPowderInvisibility
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "$GH_110_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Invisible> <size=100%><voffset=1>@BInvisible@"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:

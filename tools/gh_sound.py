@@ -136,9 +136,41 @@ def _mono(wav_bytes):
     return _limit(mono * np.float32(10 ** (gain_db / 20)))
 
 
-def export(gh, cls, out):
-    """Write the class's clips to <out>/sounds/<cls>/ and return {event: [file names]} (empty without a table)."""
-    table = SOUNDS.get(cls)
+def events_of(animation):
+    """The sound events a class's animator states name, from gh_model's animation table: the states' own, the
+    Gloomhaven-only states' and the lent states'."""
+    animation = animation or {}
+    events = {t["audio"] for t in animation.get("states", {}).values() if t.get("audio")}
+    events.update(v for v in animation.get("gh_audio", {}).values() if v)
+    events.update(l["audio"] for l in animation.get("lent_states", {}).values() if l.get("audio"))
+    return sorted(events)
+
+
+def table_for(gh, cls, events):
+    """{event: [clip names]} for the class: the hand-typed SOUNDS table when there is one, else Gloomhaven's own audio
+    table (gh_audio.py) for the events the class's animations name."""
+    if cls in SOUNDS:
+        return SOUNDS[cls]
+    if not events:
+        return {}
+    import gh_audio
+    items = gh_audio.read_items(gh)
+    table, missing = {}, []
+    for event in events:
+        item = items.get(event)
+        if item and item["clips"]:
+            table[event] = [name for name, _ in item["clips"]]
+        else:
+            missing.append(event)
+    if missing:
+        print(f"warning: {cls}: sound events not in Gloomhaven's audio table: {', '.join(missing)}")
+    return table
+
+
+def export(gh, cls, out, events=None):
+    """Write the class's clips to <out>/sounds/<cls>/ and return {event: [file names]} (empty without a table).
+    <events>: the events the class's animations name (events_of); without them only a SOUNDS table serves."""
+    table = table_for(gh, cls, events)
     if not table:
         return {}
     wanted = {c for clips in table.values() for c in clips}

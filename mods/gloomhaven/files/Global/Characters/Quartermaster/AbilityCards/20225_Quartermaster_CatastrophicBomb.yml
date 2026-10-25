@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CatastrophicBomb$
+Character: QuartermasterID
+ID: 20225
+Level: 6
+Initiative: 46
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+                Range: 3
+                AreaEffect: "2,2,E|4,2,E|1,1,R|3,1,R|5,1,R|0,0,R|2,0,R|4,0,R|6,0,R|1,-1,R|3,-1,R|5,-1,R|2,-2,R|4,-2,R"
+                AnimOverload: SlamAttack
+                MultiPassAttack: False
+        XP: 1
+    Bottom:
+        Abilities:
+            BDamage:
+                Damage: 7
+                AreaEffect: "0,0,G|2,0,R|1,1,R"
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: Normal
+                AnimOverload: SlamAttack
+            BDamageSelf:
+                Damage: 7
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+        XP: 1
+Layout:
+    Top:
+        - ColumnWidths: "50,50"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Row: "<sprite name=Range> *TAttack.Range*"
+            - Row: "<size=50%> "
+        - Column: "£Area£"
+    Bottom:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "$GH_225_B$"
+            - Row: "<size=50%> "
+        - Column: "£Area£"

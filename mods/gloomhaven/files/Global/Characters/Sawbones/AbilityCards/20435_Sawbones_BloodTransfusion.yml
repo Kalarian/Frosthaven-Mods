@@ -1,0 +1,47 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BloodTransfusion$
+Character: SawbonesID
+ID: 20435
+Level: 4
+Initiative: 52
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 7
+                    DiamondPlusEnhancements: 1
+                Range: 1
+                Filter: Ally
+                AnimOverload: Heal
+                SubAbilities:
+                    THealSubDamage:
+                        Damage: 2
+                        Filter: Self
+                        AnimOverload: None
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+            BHeal:
+                Heal:
+                    Amount: 2
+                    DiamondPlusEnhancements: 1
+                Target: -1
+                Filter: Ally
+                AnimOverload: RadialBuff
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Affect_OneAdjacentAlly$"
+        - Row: "<size=50%> "
+        - Row: "$Suffer_2Damage$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Affect_AllAdjacentAllies$"

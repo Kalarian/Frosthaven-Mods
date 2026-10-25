@@ -1,0 +1,64 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ScalesofJustice$
+Character: SunkeeperID
+ID: 20196
+Level: 5
+Initiative: 68
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TRetaliate:
+                Retaliate:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: Self
+                ActiveBonusDuration: Persistent
+                SubAbilities:
+                    BShieldSubAttackDebuff:
+                        Attack: -1
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Persistent
+                            Behaviour: BuffAttack
+                        AnimOverload: None
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BStun:
+                AnimOverload: RangedSmite
+                Stun:
+                    SquareEnhancements: 1
+                Filter: Enemy
+        Consumes:
+            BCLight:
+                Elements: Light
+                AbilityOverrides:
+                    BCLightBuffMove:
+                        ParentName: BMove
+                        Strength: 2
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TRetaliate
+            Icon: Positive_Retaliate
+            ListLayout: "<sprite name=Retaliate> *TRetaliate*. $GH_196_T$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
+                - Row: "<size=50%> "
+                - Row: "$GH_196_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCLight
+            Text: "+2 <sprite name=Move>, <sprite name=XP1>"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Stun> <size=100%><voffset=1>@BStun@"
+        - Row: "$Target_OneAdjacentEnemy$"

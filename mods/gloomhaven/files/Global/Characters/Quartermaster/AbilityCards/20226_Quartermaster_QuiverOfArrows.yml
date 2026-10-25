@@ -1,0 +1,39 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_QuiverofArrows$
+Character: QuartermasterID
+ID: 20226
+Level: 6
+Initiative: 31
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddTarget: 1
+                Range: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffTarget
+                    AttackType: Ranged
+                    ValidAbilityType: Attack
+                    IsAura: True
+                    AuraFilter: [Ally]
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 6
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Target
+            ListLayout: "<b><sprite name=Aura>:</b> $GH_226_T$"
+            Layout: "<b><sprite name=Aura>:</b> $GH_226_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

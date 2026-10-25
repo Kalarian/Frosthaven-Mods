@@ -1,0 +1,27 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_VitalStrike$
+Character: SawbonesID
+ID: 20434
+Level: 3
+Initiative: 38
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 7
+                    DiamondEnhancements: 2
+                AnimOverload: Attack_AOE_Cone
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

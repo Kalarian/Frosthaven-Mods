@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Scoundrel_MASTERY_1
+LocalisedName: Scoundrel_MASTERY_1_Name
+LocalisedDescription: Scoundrel_MASTERY_1_Desc
+PerkPoints: 1
+# Kills of enemies that had another character next to them when they fell. No built-in filter looks at who stood next
+# to the victim: the Frosthaven Mods plugin answers this target (the marker in EnemyFamilies, GHMasteries.cs) from the
+# kill records, which carry the number of players adjacent to the dying enemy. Value = kills needed.
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_KillsNearAllies]
+        CharacterIDs:
+            ActorID: ScoundrelID
+        Value: 6

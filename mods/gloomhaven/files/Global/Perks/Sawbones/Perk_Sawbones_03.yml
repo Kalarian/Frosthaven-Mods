@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Sawbones03
+Name: PERK_Sawbones_03_Name
+Description: PERK_Sawbones_03_Desc
+CharacterID: SawbonesID
+Available: 2
+CardsToRemove: [AMC_Basic_P0]
+CardsToAdd: [AMC_Basic_P2]

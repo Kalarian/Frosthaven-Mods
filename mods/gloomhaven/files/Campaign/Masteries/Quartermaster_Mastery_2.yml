@@ -1,0 +1,13 @@
+Parser: Mastery
+ID: Quartermaster_MASTERY_2
+LocalisedName: Quartermaster_MASTERY_2_Name
+LocalisedDescription: Quartermaster_MASTERY_2_Desc
+PerkPoints: 1
+# The game's own filter: loot records in one round.
+BattleGoalCondition:
+    - Targets:
+        Filter: Loot
+        SubFilter: RoundCharactersOnly
+        CharacterIDs:
+            ActorID: QuartermasterID
+        Value: 6

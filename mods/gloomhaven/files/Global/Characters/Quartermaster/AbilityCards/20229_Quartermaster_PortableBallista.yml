@@ -1,0 +1,44 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PortableBallista$
+Character: QuartermasterID
+ID: 20229
+Level: 8
+Initiative: 41
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                AreaEffect: "0,0,G|2,0,R|4,0,R|6,0,R|8,0,R|10,0,R|9,-1,E|9,1,E"
+                AreaEffectLayoutOverride: "0,0,G|1,1,R|2,2,R|3,3,R|4,4,R|5,5,R|6,4,E|3,5,E"
+                AnimOverload: SlamAttack
+                MultiPassAttack: False
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttackBuff:
+                Attack: 0
+                AttackEffect:
+                    Type: StandardBuff
+                    Pierce: All
+                Filter: Self
+                ActiveBonus:
+                    Behaviour: BuffAttack
+                    Duration: Round
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<size=50%> "
+        - Column: "£Area£"
+    Bottom:
+        - Active:
+            Ability: BAttackBuff
+            Icon: Attack
+            ListLayout: "$GH_229_B$"
+            Layout: "$GH_229_B$"

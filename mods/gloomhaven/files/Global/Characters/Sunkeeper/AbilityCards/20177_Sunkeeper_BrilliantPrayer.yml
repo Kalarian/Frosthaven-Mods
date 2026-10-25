@@ -1,0 +1,47 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BrilliantPrayer$
+Character: SunkeeperID
+ID: 20177
+Level: 1
+Initiative: 27
+Discard: [Permanently Lost,Permanently Lost]
+Data:
+    Top:
+        Abilities:
+            TRecover:
+                RecoverLostCards: 1
+                Range: 1
+                AnimOverload: PositiveBuffTargeted
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+        XP: 2
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 5
+                    DiamondPlusEnhancements: 2
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: Light
+        XP: 2
+Layout:
+    Top:
+        - Row: "$GH_177_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:

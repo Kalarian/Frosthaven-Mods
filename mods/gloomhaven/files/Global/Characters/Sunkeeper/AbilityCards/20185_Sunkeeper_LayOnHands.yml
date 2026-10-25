@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LayonHands$
+Character: SunkeeperID
+ID: 20185
+Level: 1
+Initiative: 90
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal: 0
+                Range: 1
+                Filter: Ally
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: TargetDamageTaken
+                AnimOverload: Heal
+            TDamage:
+                Damage: 3
+                Filter: Self
+        Infuse: Light
+        XP: 2
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 1
+                Target: -1
+Layout:
+    Top:
+        - Row: "$GH_185_T$"
+        - Row: "<size=50%> "
+        - Row: "$Suffer_3Damage$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"

@@ -1,0 +1,44 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BladedBoomerang$
+Character: QuartermasterID
+ID: 20218
+Level: 2
+Initiative: 40
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Range: 3
+                Condition: Wound
+                AnimOverload: RangedAttack
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove1:
+                Move:
+                    Amount: 2
+            BAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+            BMove2:
+                Move:
+                    Amount: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - AddedEffect: "<size=130%><sprite name=Wound></size>"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove1*"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Move> *BMove2*"

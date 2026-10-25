@@ -1,0 +1,26 @@
+Parser: Character
+ID: SawbonesID
+LocKey: $Sawbones$
+Model: Sawbones
+Race: Human
+Traits: [ Educated, Persuasive, Resourceful ]
+Complexity: 1
+MasteryIDs: [ Sawbones_MASTERY_1, Sawbones_MASTERY_2 ]
+RetireCampaignSection: GH.Sawbones
+DefaultSkin: 1
+# PlayerLevel:    [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
+HealthTable:      [  8,  9,  11, 12,  14,  15,  17,  18,  20 ]
+NumberAbilityCardsInBattle: 10
+Role: $Sawbones_ROLE$
+Description: $Sawbones_DESCRIPTION$
+Difficulty: $DIFFICULTY_LOW$
+Strengths: $Sawbones_STRENGTHS$
+Weaknesses: $Sawbones_WEAKNESSES$
+Adventure_Description: $Sawbones_ADVENTURE_DESCRIPTION$
+HeroStats:
+    Melee: 4
+    Ranged: 1
+    Mobility: 2
+    Support: 6
+    Defense: 2
+    Control: 2

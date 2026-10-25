@@ -1,32 +1,158 @@
+ABILITY_CARD_Amputate	Amputate
+ABILITY_CARD_AngelicAscension	Angelic Ascension
+ABILITY_CARD_Backstab	Backstab
+ABILITY_CARD_BagofHolding	Bag of Holding
 ABILITY_CARD_BalancedMeasure	Balanced Measure
+ABILITY_CARD_BattlefieldMedicine	Battlefield Medicine
+ABILITY_CARD_BeaconofLight	Beacon of Light
+ABILITY_CARD_BedsideManner	Bedside Manner
+ABILITY_CARD_BladedBoomerang	Bladed Boomerang
+ABILITY_CARD_BloodTransfusion	Blood Transfusion
+ABILITY_CARD_BloodySaw	Bloody Saw
+ABILITY_CARD_BoosterShot	Booster Shot
+ABILITY_CARD_BrightAegis	Bright Aegis
+ABILITY_CARD_BrilliantPrayer	Brilliant Prayer
 ABILITY_CARD_BruteForce	Brute Force
+ABILITY_CARD_BurningFlash	Burning Flash
+ABILITY_CARD_BurningOil	Burning Oil
+ABILITY_CARD_CatastrophicBomb	Catastrophic Bomb
+ABILITY_CARD_CautiousAdvance	Cautious Advance
+ABILITY_CARD_CleansingForce	Cleansing Force
+ABILITY_CARD_CleavingAxe	Cleaving Axe
+ABILITY_CARD_ContinualSupply	Continual Supply
+ABILITY_CARD_CripplingBow	Crippling Bow
 ABILITY_CARD_CripplingOffensive	Crippling Offensive
+ABILITY_CARD_CripplingPoison	Crippling Poison
+ABILITY_CARD_CrushingHammer	Crushing Hammer
+ABILITY_CARD_CulltheWeak	Cull the Weak
+ABILITY_CARD_CurativeMixture	Curative Mixture
+ABILITY_CARD_Daybreak	Daybreak
+ABILITY_CARD_DazzlingCharge	Dazzling Charge
+ABILITY_CARD_DefensiveStance	Defensive Stance
 ABILITY_CARD_DefensiveTactics	Defensive Tactics
 ABILITY_CARD_DevastatingHack	Devastating Hack
+ABILITY_CARD_DivineIntervention	Divine Intervention
+ABILITY_CARD_DoNoHarm	Do No Harm
+ABILITY_CARD_DuelistsAdvance	Duelist's Advance
+ABILITY_CARD_EmpoweringCommand	Empowering Command
+ABILITY_CARD_EngulfingRadiance	Engulfing Radiance
+ABILITY_CARD_Euthanize	Euthanize
 ABILITY_CARD_EyeforanEye	Eye for an Eye
 ABILITY_CARD_FaceYourEnd	Face Your End
 ABILITY_CARD_FatalAdvance	Fatal Advance
+ABILITY_CARD_FirstAid	First Aid
+ABILITY_CARD_FlankingStrike	Flanking Strike
+ABILITY_CARD_Flintlock	Flintlock
+ABILITY_CARD_FlurryofBlades	Flurry of Blades
+ABILITY_CARD_FortifiedPosition	Fortified Position
 ABILITY_CARD_FrenziedOnslaught	Frenzied Onslaught
+ABILITY_CARD_GentlemansAnger	Gentleman's Anger
+ABILITY_CARD_GiantClub	Giant Club
+ABILITY_CARD_GloriousBolt	Glorious Bolt
 ABILITY_CARD_GrabandGo	Grab and Go
+ABILITY_CARD_GrislyTrauma	Grisly Trauma
+ABILITY_CARD_GruesomeAdvantage	Gruesome Advantage
+ABILITY_CARD_HammerBlow	Hammer Blow
+ABILITY_CARD_Hamstring	Hamstring
+ABILITY_CARD_HandoftheSurgeon	Hand of the Surgeon
+ABILITY_CARD_HastenedStep	Hastened Step
+ABILITY_CARD_HiddenDaggers	Hidden Daggers
+ABILITY_CARD_HoldBackthePain	Hold Back the Pain
+ABILITY_CARD_HolyStrike	Holy Strike
 ABILITY_CARD_HookandChain	Hook and Chain
+ABILITY_CARD_IlluminatetheTarget	Illuminate the Target
 ABILITY_CARD_ImmovablePhalanx	Immovable Phalanx
+ABILITY_CARD_ImpalingSpear	Impaling Spear
+ABILITY_CARD_InspiringSanctity	Inspiring Sanctity
+ABILITY_CARD_IronBulwark	Iron Bulwark
 ABILITY_CARD_Juggernaut	Juggernaut
 ABILITY_CARD_KingoftheHill	King of the Hill
+ABILITY_CARD_LargeMedicalPack	Large Medical Pack
+ABILITY_CARD_LayonHands	Lay on Hands
 ABILITY_CARD_LeapingCleave	Leaping Cleave
+ABILITY_CARD_LongCon	Long Con
+ABILITY_CARD_MasterPhysician	Master Physician
+ABILITY_CARD_MedicalPack	Medical Pack
+ABILITY_CARD_MobileResponse	Mobile Response
+ABILITY_CARD_MobilizingAxiom	Mobilizing Axiom
+ABILITY_CARD_OpenWound	Open Wound
+ABILITY_CARD_OversizedPack	Oversized Pack
 ABILITY_CARD_OverwhelmingAssault	Overwhelming Assault
+ABILITY_CARD_PainsEnd	Pain's End
+ABILITY_CARD_PathofGlory	Path of Glory
+ABILITY_CARD_PortableBallista	Portable Ballista
+ABILITY_CARD_PracticalPlans	Practical Plans
+ABILITY_CARD_Precaution	Precaution
+ABILITY_CARD_PrepForSurgery	Prep for Surgery
+ABILITY_CARD_Prescription	Prescription
+ABILITY_CARD_PreventionisKey	Prevention Is Key
+ABILITY_CARD_Proficiency	Proficiency
+ABILITY_CARD_ProtectiveBlessing	Protective Blessing
 ABILITY_CARD_ProvokingRoar	Provoking Roar
+ABILITY_CARD_PurifyingAura	Purifying Aura
+ABILITY_CARD_QuickHands	Quick Hands
 ABILITY_CARD_Quietus	Quietus
+ABILITY_CARD_QuiverofArrows	Quiver of Arrows
+ABILITY_CARD_Reforge	Reforge
+ABILITY_CARD_Refreshment	Refreshment
+ABILITY_CARD_RegenerativeTissue	Regenerative Tissue
+ABILITY_CARD_ReinforcedSteel	Reinforced Steel
+ABILITY_CARD_ResearchtheCure	Research the Cure
+ABILITY_CARD_ReservedEnergy	Reserved Energy
+ABILITY_CARD_Restock	Restock
+ABILITY_CARD_RighteousStrength	Righteous Strength
+ABILITY_CARD_ScalesofJustice	Scales of Justice
+ABILITY_CARD_ScrollofAnnihilation	Scroll of Annihilation
+ABILITY_CARD_ScrollofBlizzards	Scroll of Blizzards
+ABILITY_CARD_ScrollofJudgment	Scroll of Judgment
+ABILITY_CARD_ScrollofLightning	Scroll of Lightning
+ABILITY_CARD_ScrollofRecall	Scroll of Recall
 ABILITY_CARD_SelfishRetribution	Selfish Retribution
+ABILITY_CARD_SharpeningKit	Sharpening Kit
 ABILITY_CARD_ShieldBash	Shield Bash
+ABILITY_CARD_SidePouch	Side Pouch
+ABILITY_CARD_SingleOut	Single Out
+ABILITY_CARD_SinisterOpportunity	Sinister Opportunity
 ABILITY_CARD_Skewer	Skewer
 ABILITY_CARD_SkirmishingManeuver	Skirmishing Maneuver
+ABILITY_CARD_SmokeBomb	Smoke Bomb
 ABILITY_CARD_SpareDagger	Spare Dagger
+ABILITY_CARD_SpecialMixture	Special Mixture
+ABILITY_CARD_SpringtheTrap	Spring the Trap
+ABILITY_CARD_SticktotheShadows	Stick to the Shadows
+ABILITY_CARD_StilettoStorm	Stiletto Storm
+ABILITY_CARD_SupportiveChant	Supportive Chant
+ABILITY_CARD_SurgeonsSatchel	Surgeon's Satchel
 ABILITY_CARD_SweepingBlow	Sweeping Blow
+ABILITY_CARD_SwiftBow	Swift Bow
+ABILITY_CARD_Syringe	Syringe
+ABILITY_CARD_TacticalOrder	Tactical Order
+ABILITY_CARD_Teamwork	Teamwork
+ABILITY_CARD_ThiefsKnack	Thief's Knack
+ABILITY_CARD_ThrowingKnives	Throwing Knives
 ABILITY_CARD_Trample	Trample
+ABILITY_CARD_Triage	Triage
+ABILITY_CARD_TrickstersReversal	Trickster's Reversal
 ABILITY_CARD_UnstoppableCharge	Unstoppable Charge
+ABILITY_CARD_UnwaveringMandate	Unwavering Mandate
+ABILITY_CARD_Vaccine	Vaccine
+ABILITY_CARD_VenomShiv	Venom Shiv
+ABILITY_CARD_VisageoftheInevitable	Visage of the Inevitable
+ABILITY_CARD_VitalStrike	Vital Strike
 ABILITY_CARD_WallofDoom	Wall of Doom
 ABILITY_CARD_WardingStrength	Warding Strength
+ABILITY_CARD_WatchItBurn	Watch It Burn
+ABILITY_CARD_WeaponofPurity	Weapon of Purity
 ABILITY_CARD_Whirlwind	Whirlwind
+Advantage	Advantage
+Affect_AllAdjacentAllies	Affect all adjacent allies
+Affect_AllAllies	Affect all allies
+Affect_AllAlliesMovedThrough	Affect all allies moved through
+Affect_AllAlliesWithin	Affect all allies within
+Affect_OneAdjacentAlly	Affect one adjacent ally
+Affect_OneAllyWithinRange3	Affect one ally within <nobr>Range <sprite name=Range> 3</nobr>
+Affect_SelfAndAllAdjacentAllies	Affect self and all adjacent allies
+Affect_SelfAndAllAllies	Affect self and all allies
 Brute	Brute
 Brute_ADVENTURE_DESCRIPTION	The Brute employs his great size and strength to earn a living by wielding his huge sword and impressive shield for those who pay the most.\nBrutes are best used as front line melee troops, absorbing damage and protecting the more fragile ranged damage dealers, and are best equipped with items that keep them alive longer!
 Brute_DESCRIPTION	The Brute employs his great size and strength to earn a living by wielding his huge sword and impressive shield for those who pay the most.
@@ -35,6 +161,7 @@ Brute_SKIN_ALT	Boneguard
 Brute_STRENGTHS	- <indent=%15>High health and defensive abilities make him more durable than some</indent>\n- <indent=%15>Access to early Disarm and Stun</indent>\n- <indent=%15>Great at pushing enemies about</indent>
 Brute_WEAKNESSES	- <indent=%15>Low mobility</indent>\n- <indent=%15>Poor ranged attack options</indent>\n- <indent=%15>Not the greatest conversationalist</indent>
 DIFFICULTY_LOW	Low
+DIFFICULTY_MEDIUM	Medium
 GH_002_T	Gain <sprite name=XP1> for each time you Retaliate <nobr>this round.</nobr>
 GH_004_B	Any enemy who targets one of your adjacent allies with an attack this round targets you with that attack instead, regardless of the attack's range.
 GH_007_B	On the next six sources of damage from attacks targeting you, gain <nobr>Shield <sprite name=Shield> *BShield*.</nobr>
@@ -44,8 +171,103 @@ GH_016_B	If the movement was in a straight line, perform
 GH_022_T	Kill one adjacent normal enemy <nobr>with  STUN <sprite name=Stun></nobr>.
 GH_023_B	You may treat all <nobr>Move <sprite name=Move></nobr> abilities as <nobr>Attack <sprite name=Attack></nobr> abilities of equal value.
 GH_026_B	Add +3 <nobr>Attack <sprite name=Attack></nobr> to all your attacks targeting enemies with <nobr>DISARM <sprite name=Disarm></nobr>, <nobr>IMMOBILIZE <sprite name=Immobilize></nobr> or <nobr>STUN <sprite name=Stun></nobr> this round.
+GH_088_B	On your next four attacks targeting enemies adjacent to none of their allies, add <nobr>+2 Attack <sprite name=Attack>.</nobr>
+GH_088_T	Add <nobr>+2 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> when the target is adjacent to any <nobr>of your allies.</nobr>
+GH_090_T	On your next attack while <nobr>INVISIBLE <sprite name=Invisible></nobr>, double the value of the attack and gain <sprite name=XP2>.
+GH_091_T	Add <nobr>+2 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> when the target is adjacent to none of its allies.
+GH_092_T	Disarm one adjacent trap.
+GH_097_B_1	Force one adjacent enemy to perform
+GH_097_B_2	with you controlling the action, and ending in a hex adjacent to you.
+GH_097_T_1	Add <nobr>+1 Attack <sprite name=Attack></nobr> for each of your allies adjacent to the target.
+GH_097_T_2	Add <nobr>+2 Attack <sprite name=Attack></nobr> instead, <sprite name=XP1>.
+GH_098_B	The next time you suffer damage this round, suffer no damage instead.
+GH_098_T	Add +X Attack <sprite name=Attack> where X is double the Shield value of the target.
+GH_099_B	Loot <sprite name=Loot> every hex you enter with this action.
+GH_100_T	Add WOUND <sprite name=Wound> and gain <sprite name=XP1> when the target is adjacent to any <nobr>of your allies.</nobr>
+GH_103_B	Add +2 Attack <sprite name=Attack> to all your attacks this round targeting enemies adjacent to none of their allies.
+GH_104_B	Gain advantage on all of your attacks this round.
+GH_105_T_1	Add <nobr>+3 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> when the target is adjacent to any <nobr>of your allies.</nobr>
+GH_105_T_2	Add <nobr>+3 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> when the target is adjacent to none <nobr>of its allies.</nobr>
+GH_106_B	On your next six attacks targeting enemies with <nobr>DISARM <sprite name=Disarm></nobr>, <nobr>IMMOBILIZE <sprite name=Immobilize></nobr> or <nobr>STUN <sprite name=Stun></nobr>, <nobr>add +2 Attack <sprite name=Attack>.</nobr>
+GH_107_T	Kill one adjacent normal enemy that is adjacent to none of its allies and also adjacent to any <nobr>of your allies.</nobr>
+GH_108_T	Add <nobr>+2 Attack <sprite name=Attack></nobr> to all your attacks targeting enemies with <nobr>POISON <sprite name=Poison>.</nobr>
+GH_110_T	Add <nobr>+4 Attack <sprite name=Attack></nobr> and gain <sprite name=XP2> when the target is adjacent to any of your allies.
+GH_111_B	On your next attack targeting an enemy adjacent to none of its allies and also adjacent to any of your allies, double the value of the attack and gain <sprite name=XP2>.
+GH_111_T	Target one enemy within <nobr>Range <sprite name=Range> 3</nobr> to suffer the effects of the <nobr>disarmed trap</nobr>.
+GH_113_B	Kill one adjacent enemy whose current hit point value is equal or less than 3.
+GH_114_B	Force one adjacent normal or elite enemy to perform its turn this round as if its allies were enemies and its enemies were allies, with you controlling the actions.
+GH_115_T	Add <nobr>POISON <sprite name=Poison></nobr> and <nobr>WOUND <sprite name=Wound></nobr> to all your attacks.
+GH_157_B	One ally within <nobr>Range <sprite name=Range> 3</nobr> <nobr>may perform</nobr>
+GH_157_T	One adjacent ally may perform
+GH_175_T	On the next five melee attacks targeting you, gain <nobr>Retaliate <sprite name=Retaliate> *TRetaliate*.</nobr>
+GH_177_T	One adjacent ally may <nobr>Recover <sprite name=Recover></nobr> one of their burned cards.
+GH_178_T_1	One adjacent ally may <nobr>Recover <sprite name=Recover></nobr> two of their discarded cards.
+GH_178_T_2	Up to three discarded cards instead, <sprite name=XP1>.
+GH_179_B	You and all adjacent allies suffer no damage this round.
+GH_184_B	Deduct -1 Move <sprite name=Move> from all your moves.
+GH_185_T	Heal all damage on one <nobr>adjacent ally.</nobr>
+GH_187_B	<line-height=110%>At the end of your next five turns when <size=150%><voffset=-3><sprite name=Light></voffset></size> is not Strong, infuse <size=150%><voffset=-3><sprite name=Light></voffset></size>.
+GH_190_T	One adjacent ally may immediately perform one extra turn by playing two cards from their hand.
+GH_192_B	All allies within <nobr>Range <sprite name=Range> 5</nobr> <nobr>may perform</nobr>
+GH_194_B	All attacks targeting you or any ally within <nobr>Range <sprite name=Range> 4</nobr> of you gain Disadvantage this round.
+GH_196_T	Deduct <nobr>-1 Attack <sprite name=Attack></nobr> from all your attacks.
+GH_197_B	All allies add <nobr>+2 Move <sprite name=Move></nobr> to all their moves this round.
+GH_197_T	All allies add <nobr>+1 Attack <sprite name=Attack></nobr> to all their attacks this round.
+GH_199_T	During any of your Attack actions, you may <sprite name=ConsumeLight> to add <nobr>+2 Attack <sprite name=Attack></nobr>, gain Advantage and <sprite name=XP1>.
+GH_200_B	Up to two burned cards instead, <sprite name=XP1>
+GH_202_T	Kill one normal or elite enemy instead, <sprite name=XP1>
+GH_203_T	On your next four Attack actions, add <nobr>+3 Attack <sprite name=Attack></nobr>, <nobr>WOUND <sprite name=Wound></nobr>, and gain Advantage.
+GH_204_T	When any ally suffers damage, you may suffer that damage reduced by 1 instead.
+GH_205_T	All allies within <nobr>Range <sprite name=Range> 2</nobr> <nobr>Refresh <sprite name=Refresh></nobr> one of their spent or consumed items.
+GH_206_B	<nobr>Refresh <sprite name=Refresh></nobr> all of your consumed <nobr>Small Items <sprite name=InvSmallItem></nobr>.
+GH_207_B	You and all allies within <nobr>Range <sprite name=Range> 2</nobr> add <nobr>+1 Attack <sprite name=Attack></nobr> to all your attacks this round.
+GH_208_T	Once during each of your Attack actions, if you use an item, add <nobr>+1 Attack <sprite name=Attack></nobr> to the entire Attack action.
+GH_215_T	<nobr>Refresh <sprite name=Refresh></nobr> one of your consumed <nobr>Small Items <sprite name=InvSmallItem></nobr>.
+GH_216_T	One adjacent ally may <nobr>Refresh <sprite name=Refresh></nobr> all of their spent items.
+GH_217_B	<nobr>Recover <sprite name=Recover></nobr> up to two of your discarded cards.
+GH_217_T	You or one adjacent ally may <nobr>Refresh <sprite name=Refresh></nobr> one spent or consumed <nobr>One-Hand Item <sprite name=InvOneHand></nobr> or <nobr>Two-Hand Item <sprite name=InvTwoHands></nobr>.
+GH_219_B	<nobr>Recover <sprite name=Recover></nobr> up to two of your burned cards.
+GH_219_T	At the end of each of your turns, you may discard a card to allow an adjacent ally to <nobr>Refresh <sprite name=Refresh></nobr> one of their consumed <nobr>Small Items <sprite name=InvSmallItem></nobr>.
+GH_221_T	One adjacent ally may <nobr>Refresh <sprite name=Refresh></nobr> all of their spent and consumed items.
+GH_223_T	At the end of each round, <nobr>Refresh <sprite name=Refresh></nobr> one of your spent items.
+GH_224_T	You and all enemies with <nobr>Range <sprite name=Range> 4</nobr> suffer 2 damage.
+GH_225_B	You and all normal enemies within the targeted area suffer 7 damage.
+GH_226_T	If any adjacent ally performs a ranged attack action, that ally gains <nobr>ADD TARGET<sprite name=Target></nobr> for the attack.
+GH_228_B	Any one ally may <nobr>Recover <sprite name=Recover></nobr> all of their discarded cards.
+GH_228_T	Each time you long rest, <nobr>Refresh <sprite name=Refresh></nobr> one of your consumed items.
+GH_229_B	During all your attacks this round, ignore the Shield values of all your targets.
+GH_230_T	At the end of your next five turns, perform a "<nobr>Heal <sprite name=Heal> 2</nobr>, Affect all adjacent allies" action.
+GH_231_T	Kill one adjacent normal or elite enemy.
+GH_232_B	You and all adjacent allies may <nobr>Refresh <sprite name=Refresh></nobr> all of your consumed <nobr>Small Items <sprite name=InvSmallItem></nobr>.
+GH_343_B	You are immune to all negative conditions.
+GH_371_B	All allies within <nobr>Range <sprite name=Range> 3</nobr> <nobr>may perform</nobr>
+GH_407_T	Give one adjacent ally one “<nobr>Medical Pack</nobr>” ability card.
+GH_408_B	All your Heal actions this round affect you and all adjacent allies.
+GH_409_B	All your melee attacks this round target all adjacent enemies.
+GH_410_B	Place this card in one adjacent ally's active area and treat it as if they own the card.
+GH_412_B	Remove all negative conditions on one adjacent ally.
+GH_412_T	Remove all negative conditions on the healed target.
+GH_414_B	You and all allies are immune to all negative conditions this round.
+GH_414_T	Give one adjacent ally one “Large Medical Pack” ability card.
+GH_415_T	Once during each of your next four turns, perform a “Heal 2, Range 1” action.
+GH_416_T	At the start of each of your turns, remove one negative condition from any one of your allies.
+GH_429_B	All adjacent allies may perform a “<nobr>Move <sprite name=Move> 2</nobr>” action.
+GH_429_T	You and all adjacent allies may <nobr>Recover <sprite name=Recover></nobr> an amount of discarded cards up to the number of allies adjacent to you.
+GH_433_B	At the start of each of your turns, perform a “<nobr>Heal <sprite name=Heal> 1</nobr>, Self” action.
+GH_437_T	Remove all negative conditions on all adjacent allies.
+GH_439_T	Kill one adjacent normal enemy with at least two negative conditions.
+GH_440_B	Give all adjacent allies one “Large Medical Pack” ability card.
+GH_440_T	Give all adjacent allies one “<nobr>Medical Pack</nobr>” ability card.
+GH_441_B	Add <nobr>+4 Heal <sprite name=Heal></nobr> to all your Heal actions this round.
+GH_441_T	Before your next six Heal abilities, remove all negative conditions on the Heal targets.
+GH_443_B	One adjacent ally may <nobr>Recover <sprite name=Recover></nobr> up to two of their discarded cards.
+GH_443_T	Remove all negative conditions on the healed target and give them one “Large Medical Pack” ability card.
+GH_445_T_1	All of your <nobr>Attack <sprite name=Attack></nobr> and <nobr>Move <sprite name=Move></nobr> abilities may be performed as <nobr>Heal <sprite name=Heal></nobr> abilities of an equal value plus one.
+GH_445_T_2	In such cases, the <nobr>Range <sprite name=Range></nobr> is 1 unless otherwise specified, and ignore all conditions applied by the <nobr>Attack <sprite name=Attack></nobr> abilities.
+GH_446_T	Kill all normal or elite enemies in the targeted area suffering from 10 or more damage.
 Kill_OneAdjacentEnemy	Kill one adjacent normal or elite enemy.
 Kill_OneAdjacentNormalEnemy	Kill one adjacent normal enemy.
+MedPack	This card cannot be burned to avoid suffering damage. When this card is discarded for any reason, return it to the Sawbone's supply.
 PERK_Brute_01_Desc	Replace one <sprite name="-1"> with one <sprite name="+1">
 PERK_Brute_02_Desc	Replace one <sprite name="-1"> with three <sprite name="0"> <sprite name=Push> 1 <sprite name=Rolling>
 PERK_Brute_03_Desc	Replace two <sprite name="0"> with two <sprite name="0"> <sprite name=Pierce> 3 <sprite name=Rolling>
@@ -56,13 +278,80 @@ PERK_Brute_07_Desc	Add one <sprite name="0"> <sprite name=Disarm> <sprite name=R
 PERK_Brute_08_Desc	Add one <sprite name="+3">
 PERK_Brute_09_Desc	Ignore item <sprite name="-1"> effects and add one <sprite name="+1"> <sprite name=Shield> 1
 PERK_Brute_10_Desc	Whenever you long rest, add +1 <sprite name=Move> to your first move ability the following round
+PERK_Quartermaster_01_Desc	Remove two <sprite name="-1">
+PERK_Quartermaster_02_Desc	Replace two <sprite name="0"> with two <sprite name="0"> <sprite name=Pierce> 3 <sprite name=Rolling>
+PERK_Quartermaster_03_Desc	Replace one <sprite name="0"> with one <sprite name="0"> +1 <sprite name=Target>
+PERK_Quartermaster_04_Desc	Replace one <sprite name="0"> with one <sprite name="+2">
+PERK_Quartermaster_05_Desc	Add one <sprite name="0"> <sprite name=Refresh> one item
+PERK_Quartermaster_06_Desc	Add two <sprite name="+1"> <sprite name=Rolling>
+PERK_Quartermaster_07_Desc	Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>
+PERK_Quartermaster_08_Desc	Ignore item <sprite name="-1"> effects and add two <sprite name="+1">
+PERK_Quartermaster_09_Desc	Once each quest, during your turn, <sprite name=RecoverIcon> up to four cards from your discard pile
+PERK_Sawbones_01_Desc	Remove one <sprite name="-2">
+PERK_Sawbones_02_Desc	Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=Wound> <sprite name=Rolling>
+PERK_Sawbones_03_Desc	Replace one <sprite name="0"> with one <sprite name="+2">
+PERK_Sawbones_04_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Immobilize>
+PERK_Sawbones_05_Desc	Add one <sprite name="0"> <sprite name=Refresh> one item
+PERK_Sawbones_06_Desc	Add one <sprite name="+2"> <sprite name=Rolling>
+PERK_Sawbones_07_Desc	Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>
+PERK_Sawbones_08_Desc	Add one <sprite name="0"> <sprite name=Heal> 3, self <sprite name=Rolling>
+PERK_Sawbones_09_Desc	Whenever an ally performs the <sprite name=Heal> of Medical Pack or Large Medical Pack, that character first loses one negative condition
+PERK_Scoundrel_01_Desc	Remove two <sprite name="-1">
+PERK_Scoundrel_02_Desc	Replace one <sprite name="-1"> with one <sprite name="+1">
+PERK_Scoundrel_03_Desc	Replace one <sprite name="-1"> with two <sprite name="0"> <sprite name=Poison> <sprite name=Rolling>
+PERK_Scoundrel_04_Desc	Replace one <sprite name="-2"> with one <sprite name="0">
+PERK_Scoundrel_05_Desc	Replace one <sprite name="0"> with one <sprite name="+2">
+PERK_Scoundrel_06_Desc	Replace two <sprite name="0"> with one <sprite name="0"> <sprite name=Muddle> <sprite name=Rolling> and one <sprite name="0"> <sprite name=Pierce> 3 <sprite name=Rolling>
+PERK_Scoundrel_07_Desc	Add two <sprite name="+1"> <sprite name=Rolling>
+PERK_Scoundrel_08_Desc	Add one <sprite name="0"> <sprite name=Invisible>, self <sprite name=Rolling>
+PERK_Scoundrel_09_Desc	Ignore negative scenario effects
+PERK_Scoundrel_10_Desc	Once each quest, during your turn, perform <sprite name=Invisible>, self
+PERK_Sunkeeper_01_Desc	Remove four <sprite name="0">
+PERK_Sunkeeper_02_Desc	Replace one <sprite name="-1"> with two <sprite name="0"> <sprite name=CreateLight> <sprite name=Rolling>
+PERK_Sunkeeper_03_Desc	Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=Shield> 1 <sprite name=Rolling>
+PERK_Sunkeeper_04_Desc	Replace one <sprite name="0"> with one <sprite name="+2">
+PERK_Sunkeeper_05_Desc	Add two <sprite name="+1"> <sprite name=Rolling>
+PERK_Sunkeeper_06_Desc	Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>
+PERK_Sunkeeper_07_Desc	Add two <sprite name="0"> <sprite name=Heal> 1, self <sprite name=Rolling>
+PERK_Sunkeeper_08_Desc	Ignore item <sprite name="-1"> effects and add two <sprite name="+1">
+PERK_Sunkeeper_09_Desc	Ignore negative scenario effects
+PERK_Sunkeeper_10_Desc	Whenever one of your heals would raise an ally's hit points above their maximum, that ally gains <sprite name=Ward>
+Quartermaster	Quartermaster
+Quartermaster_ADVENTURE_DESCRIPTION	Skilled Valrath Quartermasters are known for aiding adventuring parties in maximizing the effectiveness of their equipment. After all, what is a warrior without a good sword at his side?
+Quartermaster_ROLE	Melee Damage/Support
+Quartermaster_STRENGTHS	- <indent=%15>Many item refreshing abilities</indent>\n- <indent=%15>Moderate offensive and defensive capabilities</indent>\n- <indent=%15>Jack of all trades</indent>
+Quartermaster_WEAKNESSES	- <indent=%15>Master of none</indent>\n- <indent=%15>Weaker when party lacks good equipment</indent>\n- <indent=%15>Always packs too much luggage</indent>
+Sawbones	Sawbones
+Sawbones_ADVENTURE_DESCRIPTION	Followers of the Oak are religious healers who do their best to ward off the pestilence and death that can manifest in larger human cities. Contrary to popular belief, however, there is nothing miraculous about their healing methods, as anyone who has come to them with a gangrenous leg knows all too well. The mystique of the profession can get lost amongst the screams when the Sawbones has to hack off a limb.
+Sawbones_ROLE	Melee Damage/Support
+Sawbones_STRENGTHS	- <indent=%15>Particularly efficient healer</indent>\n- <indent=%15>Has a number of decent melee attacks </indent>\n- <indent=%15>Medical Packs can also increase Ally's card counts</indent>
+Sawbones_WEAKNESSES	- <indent=%15>Poor ranged attacks</indent>\n- <indent=%15>Weaker in parties with fewer allies or lower max health</indent>\n- <indent=%15>Doesn't have as great an understanding of medical cleanliness as most doctors</indent>
+Scoundrel	Scoundrel
+Scoundrel_ADVENTURE_DESCRIPTION	Scoundrels are self-serving and opportunistic. They believe that everything is theirs and will do anything to make sure it becomes so.\nShe excels at high damage melee attacks, identifying lone targets and also gaining bonuses from working close to her team mates. She is a loner however, so don't expect her to help other party members apart from killing their attackers.
+Scoundrel_DESCRIPTION	Scoundrels are self-serving and opportunistic. They believe that everything is theirs and will do anything to make sure it becomes so.
+Scoundrel_ROLE	Melee Damage
+Scoundrel_SKIN_ALT	Nightcrawler
+Scoundrel_STRENGTHS	- <indent=%15>High mobility</indent>\n- <indent=%15>Potential for high melee Damage</indent>\n- <indent=%15>Can afflict enemies with Poison</indent>
+Scoundrel_WEAKNESSES	- <indent=%15>Little in the way of effects that assist teammates</indent>\n- <indent=%15>Few defensive abilities and low health</indent>\n- <indent=%15>Will try and take ALL the gold</indent>
+Self	Self
+Suffer_2Damage	Suffer 2 damage.
+Suffer_3Damage	Suffer 3 damage.
+Sunkeeper	Sunkeeper
+Sunkeeper_ADVENTURE_DESCRIPTION	Sunkeepers have been trained to tap into long-dormant demonic powers and harness them for the purpose of righteousness. The Sunkeeper has an assortment of Healing, Buffing and Card Recovery abilities and is a capable Melee fighter in her own right. She works best in the role of a Paladin, aiding the main damage dealers in combat while keeping them alive.
+Sunkeeper_ROLE	Melee Tank/Support
+Sunkeeper_STRENGTHS	- <indent=%15>Array of buff, heal and recovery options</indent>\n- <indent=%15>Competent melee combatant</indent>\n- <indent=%15>Uses Light to enhance her abilities</indent>
+Sunkeeper_WEAKNESSES	- <indent=%15>Can struggle against groups of smaller enemies</indent>\n- <indent=%15>Weaker with fewer allies</indent>\n- <indent=%15>Rather self-righteous a lot of the time</indent>
 Target_AllAdjacentEnemies	Target all adjacent enemies
 Target_AllEnemiesMovedThrough	Target all enemies moved through
+Target_OneAdjacentAlliedPlayer	Target one adjacent allied mercenary
 Target_OneAdjacentEnemy	Target one adjacent enemy
+XP_PerAttackPerformed	Gain <sprite name=XP1> for each attack performed.
 XP_PerEnemy	Gain <sprite name=XP1> for each enemy targeted.
 Xis_DamageInflictedThisTurn	where X is the amount of damage you have inflicted so far this turn.
 Xis_HexesMovedThisAction	where X is the number of hexes you moved with this action.
 Xis_HexesMovedThisTurn	where X is the number of hexes you have moved so far this turn.
+instead	instead
+within	within
 PERK_Brute_10_Bonus	Rested and Ready: +1 <sprite name=Move> to your next move ability
 PERK_Brute_01_Name	Precision
 PERK_Brute_02_Name	Shove
@@ -98,4 +387,146 @@ GH.Brute-3_Option_2_Outcome	Near the corpse of the Brute, you find an axe, presu
 Brute_FullName	Brute
 CODEX_Hero_Brute_Title	Brute
 CODEX_HeroInfo_Brute	<b>Role:</b> Melee Damage/Tank\n<b>Difficulty:</b> Low\n\nBrutes are best used as front line melee troops, absorbing damage and protecting the more fragile ranged damage dealers, and are best equipped with items that keep them alive longer!
+PERK_Scoundrel_01_Name	Light Step
+PERK_Scoundrel_02_Name	Steady Hand
+PERK_Scoundrel_03_Name	Venom Coating
+PERK_Scoundrel_04_Name	Composure
+PERK_Scoundrel_05_Name	Vital Strike
+PERK_Scoundrel_06_Name	Dirty Fighting
+PERK_Scoundrel_07_Name	Flurry
+PERK_Scoundrel_08_Name	Vanish
+PERK_Scoundrel_09_Name	Unfazed
+PERK_Scoundrel_10_Name	Cloak of Invisibility
+Scoundrel_MASTERY_1_Name	Pack Hunter
+Scoundrel_MASTERY_1_Desc	Kill at least six enemies that are adjacent to at least one of your allies
+Scoundrel_MASTERY_2_Name	Lone Wolf
+Scoundrel_MASTERY_2_Desc	Kill at least six enemies that are adjacent to none of your allies
+Event_GH.Scoundrel_Text	Nobody sees the Scoundrel leave. You find out the way you were always going to find out: her bunk is stripped, the lock on the Trading Post's back door has been picked and relocked out of sheer habit, and on your table sits a small, neat pile of everything she ever lifted from you. A coin purse. A whetstone. The good knife.\nThere is a note under the knife, in handwriting far better than she ever let on. "Nothing personal. It never was. Thanks for the company; it was more than I came for."\nThe guard at the gate swears he saw nothing all night. He is probably telling the truth. She was always better than the people watching for her.\nWeeks later a caravan master mentions a woman in dark leather who paid her way south and spent the whole trip teaching the drivers to cheat at cards. You find you are smiling. Somewhere out there, the Scoundrel is doing fine.
+Event_GH.Scoundrel_Name	Scoundrel Retires
+GH.Scoundrel-1_Front	“You there! Stop!”\n\nYou turn to see a town guard walking briskly toward you.\n\n“You are known associates of this woman, yes?” He holds up a crude sketch of the Scoundrel. “We believe she is behind a number of high-profile robberies and demand that you give us any information you have on her whereabouts and activities.”\n\nHis face softens a bit. “Look, I know you do a lot of good for the outpost, but the merchants are breathing down my neck on this one, and I could really use a lead.”
+GH.Scoundrel-1_Option_1	Cooperate with the guard and tell him everything you know.
+GH.Scoundrel-1_Option_1_Outcome	The guard taps his notes with a smile on his face.\n\n“This is great,” he says. “I understand that you haven’t seen her in a while, but the information you’ve provided should still be useful. Have a nice day!”
+GH.Scoundrel-1_Option_2	Be as vague and unhelpful as possible, giving no useful information.
+GH.Scoundrel-1_Option_2_Outcome	The guard scratches his head and looks down at his notes.\n\n“Well, that wasn’t very helpful,” he sighs. “But thanks for your time, I guess. Let me know if you remember anything or get any new information.”
+GH.Scoundrel-2_Front	Riding up on horses, a band of dirty, rough men quickly overtake and surround your group. They look hard and dangerous, and you immediately pull out your weapons as they approach.\n\nThen you hear a familiar laugh.\n\n“Well, if it isn’t my old crew.” A woman in dark leather armor leaps off her horse to come greet you. “You know what, boys? This lot gets a pass.”\n\nShe winks at you and turns around. “Plus, they’d probably kill you all if things turned ugly.”\n\nJumping back onto her horse, the Scoundrel looks back at you. “Well, it was nice seeing you. Just remember—you never saw me.”
+GH.Scoundrel-2_Option_1	Attack. Friend or not, those who prey on the weak should be brought to justice.
+GH.Scoundrel-2_Option_1_Outcome	You see the bandits relax a little and begin to form up. That is when you strike. Some are scared off by the sudden attack, but others engage you hungrily. The Scoundrel throws a few good daggers, too, before she rides off, criticizing your poor decision-making.
+GH.Scoundrel-2_Option_2	Let the bandits go.
+GH.Scoundrel-2_Option_2_Outcome	The bandits seem a little disappointed as they form up and ride off in the opposite direction.
+GH.Scoundrel-3_Front	“So, I hear you stood up for me with the guards the other day. Such annoying pests, aren’t they?”\n\nYou turn around in the street to see the Scoundrel emerge from a dark alley with a smile on her face.\n\n“I just wanted to thank you in person,” she says. “I’ve known quite a few persons who would have ratted me out for their chance at a piece of gold. It’s good to know some friendships last.”\n\nShe looks over her shoulder. “Listen, I’m leaving town for a good long while. You wanna grab a drink before I take off?”
+GH.Scoundrel-3_Option_1	Have a drink and reminisce about old times.
+GH.Scoundrel-3_Option_1_Outcome	You laugh for a while and trade tales. As the sun drops below the tavern windows, the Scoundrel gets up to leave.\n\n“Listen, I really did enjoy our time together, and, well, I just wanted to leave you with something to remember me by.”\n\nA piece of black cloth flutters down onto the table. When you look back up, the Scoundrel is gone.
+GH.Scoundrel-3_Option_2	Overpower the Scoundrel and deliver her to the guards.
+GH.Scoundrel-3_Option_2_Outcome	A look of horrid surprise flashes in the Scoundrel’s eyes as you leap forward and throw her to the ground. She doesn’t even speak as you bind her arms and take her to the guard. They thank you for your service, but their words aren’t much counter to the cold, angry stare of the Scoundrel as she’s taken away.
+Scoundrel_FullName	Scoundrel
+CODEX_Hero_Scoundrel_Title	Scoundrel
+CODEX_HeroInfo_Scoundrel	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> Low\n\nShe excels at high damage melee attacks, identifying lone targets and also gaining bonuses from working close to her team mates. She is a loner however, so don't expect her to help other party members apart from killing their attackers.
+PERK_Sunkeeper_01_Name	Focus
+PERK_Sunkeeper_02_Name	Radiance
+PERK_Sunkeeper_03_Name	Bulwark
+PERK_Sunkeeper_04_Name	Smite
+PERK_Sunkeeper_05_Name	Zeal
+PERK_Sunkeeper_06_Name	Dazzle
+PERK_Sunkeeper_07_Name	Mending Light
+PERK_Sunkeeper_08_Name	Well Armored
+PERK_Sunkeeper_09_Name	Unfazed
+PERK_Sunkeeper_10_Name	Shielding Light
+Sunkeeper_MASTERY_1_Name	Unbreakable
+Sunkeeper_MASTERY_1_Desc	Reduce attacks targeting you by a total of <sprite name=Shield> 20 or more in a single round
+Sunkeeper_MASTERY_2_Name	Child of the Sun
+Sunkeeper_MASTERY_2_Desc	Infuse or consume <sprite name=CreateLight> during each of your turns
+Event_GH.Sunkeeper_Text	The Sunkeeper asks you to meet her on the wall at sunrise. She is already there when you arrive, armor polished to a mirror, watching the light come up over the ice. "The temple has sent for me," she says. "They need a keeper, and there is no one else."\nShe does not pretend to be sorry to go, and you respect her for it. Instead she walks the length of the wall with you, laying a gloved hand on each tower as she passes, speaking a few words under her breath. The guards on duty stand a little straighter without quite knowing why.\nAt the gate she presses a small sun medallion into your palm, warm from her hand. "For the dark months. It will not do much. It will do enough."\nThen she turns south and walks into the sunrise, which is exactly how she would have wanted it to look.
+Event_GH.Sunkeeper_Name	Sunkeeper Retires
+GH.Sunkeeper-1_Front	You are haggling over the price of road rations with an irritating Valrath merchant when a messenger boy approaches you holding a note.\n\n“Sir, I have a pressing letter from an important Valrath Sunkeeper,” the messenger says. “I was told to deliver it to you.”\n\nYou reach for it, but the messenger moves back a little. “Sir, this note has traveled a long distance to get to you. If you could, please pay a small fee to take possession of it.”
+GH.Sunkeeper-1_Option_1	Begrudgingly pay for the note.
+GH.Sunkeeper-1_Option_1_Outcome	You throw the kid a few coins and grab the note. Enclosed with the note is a small medallion engraved with the image of the sun. Apparently the Sunkeeper thinks the object may help you at some point in the future. The note doesn’t say exactly how and the thing has no apparent use. You stow it away in your pack.
+GH.Sunkeeper-1_Option_2	Refuse to pay for the note.
+GH.Sunkeeper-1_Option_2_Outcome	You laugh in indignation and push the messenger away. He opens his mouth to object, then thinks better of it and runs off. You turn back to bartering, now leveraging the proof of your extreme thriftiness against the merchant.
+GH.Sunkeeper-2_Front	You see them long before they get close to you—radiant balls of light blazing against the horizon.\n\nSun Demons.\n\nAs they approach, you prepare for an attack, but the demons have other plans. They menace you with their glowing claws, but they would rather have information than kill you.\n\n“Where is the one you call a Sunkeeper?” one of them hisses. “The Valrath neglects her duties, and now we must resolve matters personally.”\n\nYou press for further information, but the demons get angry. “These are not your concerns! Tell us where she is or die at our hands!”
+GH.Sunkeeper-2_Option_1	Give them whatever information you can on the Sunkeeper’s whereabouts.
+GH.Sunkeeper-2_Option_1_Outcome	You’re not sure exactly what happened to the Sunkeeper after she left the party, but you tell the demons everything you know.\nThey seem satisfied with your response and even offer a bitter thanks as they fly off to the west.
+GH.Sunkeeper-2_Option_2	Attack the demons. There are a lot of them, but you do not take kindly to threats.
+GH.Sunkeeper-2_Option_2_Outcome	Without even speaking, you draw your weapons and attack. The demons are caught off guard, but they bounce back with great ferocity. It is a long, brutal battle, and you continue on in your adventure greatly wounded and bloody.
+GH.Sunkeeper-3_Front	You are heading through a small forest when you hear the sound of a woman screaming off to the west. You silently move closer, catching a glimpse of multiple radiant figures through the trees.\n\nThey are Sun Demons, perhaps the same ones who accosted you earlier. That suspicion is confirmed when you get closer and see they are hovering around an armored Valrath woman bound to a tree, torturing her for information.\n\n“Don’t you see how important this is!” one of the demons says. “Give us the location of the temple!”\n\n“Lies and tricks of a demon,” the Sunkeeper responds. “The temple is in no danger except from you.”
+GH.Sunkeeper-3_Option_1	Leave the scene quietly and return to your own business.
+GH.Sunkeeper-3_Option_1_Outcome	Not wanting to get involved, you simply move on. Eventually the screams of the Sunkeeper fade away.
+GH.Sunkeeper-3_Option_2	Attack the demons and free the Sunkeeper.
+GH.Sunkeeper-3_Option_2_Outcome	You charge out of the trees and attack the Sun Demons. Fueled by righteous indignation and a bit of guilt, you slay them all. The battle leaves you wounded, but the Sunkeeper happily mends your wounds once you free her.\n\n“They seemed to think the Sun Temple is under attack by Night Demons,” she says. “I have no reason to believe them, but still, would you mind helping me look into it?”
+GH.Sunkeeper-4_Front	By now, the Sun Demons cut a very recognizable portrait against the horizon as they move toward you. You sincerely had hoped you were done with these creatures.\n\n“We have urgent need of your assistance,” one of them starts. “Night Demons have infested the Sun Temple, attempting to desecrate it and send the world into eternal darkness.\n\n“We have tried to stop them, but they are too fortified inside the temple. We regrettably need more strength.\n\n“Please, you cannot want an absence of a sun on this plane any less than we do. It would be disastrous.”
+GH.Sunkeeper-4_Option_1	Agree to help the Sun Demons.
+GH.Sunkeeper-4_Option_1_Outcome	You sigh and agree, warning them that this had better be the last time they ask you for a favor. They give you the location of the Sun Temple and implore you to hurry.
+GH.Sunkeeper-4_Option_2	Attack the Sun Demons. It may be the only way to stop them from bothering you.
+GH.Sunkeeper-4_Option_2_Outcome	Without even speaking, you draw your weapons and attack. The demons are caught off guard, but they bounce back with great ferocity. It is a long, brutal battle, and you continue on in your adventure greatly wounded and bloody.
+Sunkeeper_FullName	Sunkeeper
+CODEX_Hero_Sunkeeper_Title	Sunkeeper
+Sunkeeper_DESCRIPTION	Sunkeepers have been trained to tap into long-dormant demonic powers and harness them for the purpose of righteousness. The Sunkeeper has an assortment of Healing, Buffing and Card Recovery abilities and is a capable Melee fighter in her own right. She works best in the role of a Paladin, aiding the main damage dealers in combat while keeping them alive.
+CODEX_HeroInfo_Sunkeeper	<b>Role:</b> Melee Tank/Support\n<b>Difficulty:</b> Low
+PERK_Sawbones_01_Name	Steady Hands
+PERK_Sawbones_02_Name	Open Wounds
+PERK_Sawbones_03_Name	Precise Cuts
+PERK_Sawbones_04_Name	Hamstring
+PERK_Sawbones_05_Name	Resupply
+PERK_Sawbones_06_Name	Surgical Strike
+PERK_Sawbones_07_Name	Anesthetic
+PERK_Sawbones_08_Name	Self-Care
+PERK_Sawbones_09_Name	Revitalizing Medicine
+Sawbones_MASTERY_1_Name	Bedside Manner
+Sawbones_MASTERY_1_Desc	On each of your turns, give an ally a card, heal an ally, grant an ally <sprite name=Shield>, or place a card in an ally's active area
+Sawbones_MASTERY_2_Name	Grievous Harm
+Sawbones_MASTERY_2_Desc	Deal at least <sprite name=Damage> 20 with a single attack ability
+Event_GH.Sawbones_Text	You find the Sawbones in the Alchemist's back room, labeling jars. He has been at it for days: every salve, splint and tincture he carried, written up in his cramped hand and shelved where anyone can find it.\n"Enough people know how to break things in this town," he says without looking up. "Somebody ought to know how to put them back together when I am gone." He closes the last jar, wipes his hands, and finally turns around. "The sanctuary wrote. A quiet post, inland. Warm. I said yes before I could talk myself out of it."\nHe leaves you his saw. Not as a weapon, he insists, though you both know how he used it. "For the lumber. Honestly."\nThe morning he goes, half the outpost turns out to see him off, every one of them someone he has stitched, set or sobered up. He pretends to be annoyed about it the whole way to the gate.
+Event_GH.Sawbones_Name	Sawbones Retires
+GH.Sawbones-1_Front	Looking for a little bit of variety, you head to the roughest table in the Tavern as night falls. After some wait, you are surprised to see the Sawbones sitting near the back of the room by himself. Considering this corner is about as seedy as Frosthaven gets, it is just about the last place you would expect to find him.\n\n“I just...I don’t know what to do now,” the Sawbones confesses after you sit down. “I’d like to join the sanctuary and lead a nice, quiet life, but after adventuring with all of you, that just doesn’t seem fulfilling anymore.”\n\nHe shakes his head. “I don’t know. This life seems so boring now. What do you think?”
+GH.Sawbones-1_Option_1	Tell him that joining the sanctuary is the right thing to do.
+GH.Sawbones-1_Option_1_Outcome	“I guess you’re right,” he shrugs. “Here’s to one last night of freedom.” He lifts his glass and gulps down the contents. You follow his lead and the rest is a blur.
+GH.Sawbones-1_Option_2	Tell him to follow his dreams.
+GH.Sawbones-1_Option_2_Outcome	“You’re right! I’m in command of my own life, and I’m going to do what I want with it. Maybe I’ll go to the Capital and start my own business or something. Who knows?”\n\nHe lifts his glass and looks at you. “To endless possibilities! The next round’s on me.”
+GH.Sawbones-2_Front	At first the man looks dead, with numerous open wounds and lying in a pool of blood in the dirt.\n\nBut then he coughs and whispers something unintelligible. The man looks pretty bad off, likely attacked by some wild animal, but it’s possible he could be saved.
+GH.Sawbones-2_Option_1	Help the wounded man as best you can.
+GH.Sawbones-2_Option_1_Outcome	The man’s wounds actually look worse than they really are, and your time with the Sawbones has given you some experience in what to do. You bind the wounds to stop the bleeding and then give him something to eat. He lost a lot of blood, but after some nursing, he’s able to stand and make his way back to Frosthaven, thanking you profusely in the process.
+GH.Sawbones-2_Option_2	Let the man die and take his belongings.
+GH.Sawbones-2_Option_2_Outcome	You riffle through the man’s pockets as he speaks his last words. They’re too soft to make out, but the tone is one of anger and disappointment. You make off with a decent amount of money and leave the corpse to rot.
+GH.Sawbones-3_Front	You head back to your rooms for the night when you see the Sawbones sitting in front of your doorstep, looking rather dejected.\n\n“I, uh, well, you see...” he stammers, “I followed your advice. Chased my dreams and all that, but I ended up in debt to some rather unscrupulous people. They’ve threatened to kill me if I don’t pay them off, but, uh, but I simply don’t have the money.”\n\nHe hesitates. “Seeing as how, uh, you bear some responsibility for setting me down this path, I was wondering if you’d be willing to offer some assistance in getting me out of this mess?”
+GH.Sawbones-3_Option_1	Offer to pay off the Sawbones’ debt.
+GH.Sawbones-3_Option_1_Outcome	It’s a hefty chunk of money, but the Sawbones is incredibly grateful.\n\n“This is wonderful! I knew I could count on you. This should be enough to put this mess behind me and finally allow me to live free.”\n\nHe hands you a potion and thanks you once again for all your help.
+GH.Sawbones-3_Option_2	Get the Sawbones on a boat across the Misty Sea. New adventures surely await there.
+GH.Sawbones-3_Option_2_Outcome	You flatly refuse to pay off the Sawbones’ debt and convince him the only way to escape his pursuers is to board a ship bound for the eastern continent, far out of their reach. He is reluctant, but eventually agrees when you remind him what unknown adventures await in the land across the ocean. You see him off in the night and desperately hope that is the last you hear of this situation.
+GH.Sawbones-4_Front	You are trying to enjoy a relaxing drink in the Tavern when a number of large men and Inox burst in and approach your table.\n\n“So, you must be that little creep’s collateral,” one of the Inox says. “We’re here to collect.”\n\nWhen you stare at her in silence, she tries again. “Little grey-bearded man. Wore symbols of the Great Oak. He said you lot would pay off his debt if he couldn’t.”\n\nShe pats an axe at her side. “Now, seeing as how he apparently skipped town, you can pay us, or things are gonna get ugly.”
+GH.Sawbones-4_Option_1	Pay off the thugs.
+GH.Sawbones-4_Option_1_Outcome	You sigh and hand over the Sawbones’ debt, plus interest. Though it feels terrible, the thugs are satisfied and walk out the same way they came in. At least it is over now.
+GH.Sawbones-4_Option_2	Refuse to pay. You won’t be strongarmed by anyone.
+GH.Sawbones-4_Option_2_Outcome	You laugh and wave your hand dismissively. There’s no way you will be paying such a large amount of money to these thugs. Unfortunately, the Inox is not amused.\n\n“Then your payment will be blood!” she says. “Meet us in the back alley, and we’ll see if we can’t come to terms.”
+Sawbones_FullName	Sawbones
+CODEX_Hero_Sawbones_Title	Sawbones
+Sawbones_DESCRIPTION	Followers of the Oak are religious healers who do their best to ward off the pestilence and death that can manifest in larger human cities. Contrary to popular belief, however, there is nothing miraculous about their healing methods, as anyone who has come to them with a gangrenous leg knows all too well. The mystique of the profession can get lost amongst the screams when the Sawbones has to hack off a limb.
+CODEX_HeroInfo_Sawbones	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Low
+PERK_Quartermaster_01_Name	Steady Supply
+PERK_Quartermaster_02_Name	Armor Piercing
+PERK_Quartermaster_03_Name	Sweeping Blow
+PERK_Quartermaster_04_Name	Heavy Hands
+PERK_Quartermaster_05_Name	Resupply
+PERK_Quartermaster_06_Name	Drilled
+PERK_Quartermaster_07_Name	Concussion
+PERK_Quartermaster_08_Name	Well Fitted
+PERK_Quartermaster_09_Name	Well Supplied
+Quartermaster_MASTERY_1_Name	Supply Lines
+Quartermaster_MASTERY_1_Desc	Spend, lose or refresh one or more items on each of your turns, without ever performing the top action of Reinforced Steel
+Quartermaster_MASTERY_2_Name	Pack Mule
+Quartermaster_MASTERY_2_Desc	Loot six or more loot tokens in a single turn
+Event_GH.Quartermaster_Text	The Quartermaster spends his last week in Frosthaven doing inventory. Not his own: the outpost's. By the end of it every storeroom has a ledger, every ledger has a system, and the Craftsman has stopped arguing and started taking notes.\n"A party without supplies is a funeral with extra steps," he tells you over the last of his good wine. "You lot will be fine. You have the ledgers now." He taps the stack like a man patting a dog.\nHe has a contract waiting in the Capital, outfitting a merchant house, and he is honest enough to admit the pay is obscene. He is also honest enough to look back at the walls for a long moment before he goes.\nHis pack is the last thing to leave, strapped to a sled and roped like a siege engine. The Craftsman swears the storerooms have never been so tidy, and never will be again.
+Event_GH.Quartermaster_Name	Quartermaster Retires
+GH.Quartermaster-1_Front	“Your Quartermaster friend sent me.” You look quizzically at the Valrath standing at your door.\n\n“I’m from the Capital, and I deal in arms and armor,” he says. “I’m looking to set up a contract with the Frosthaven guard, and our friend says that you may have some contacts with them. He suggested I meet up with you once I got here.”\n\nThe Valrath shifts his feet nervously. “So, can you help me?”
+GH.Quartermaster-1_Option_1	Agree to help him make contact with the guard.
+GH.Quartermaster-1_Option_1_Outcome	You take the Valrath over to the Barracks, where you make introductions to the captain of the guard. The captain seems skeptical at first, but admits that they could use an additional supply of weapons. Terms are made, and a contract is signed.
+GH.Quartermaster-1_Option_2	Demand a finder’s fee for setting him up with buyers.
+GH.Quartermaster-1_Option_2_Outcome	The Valrath looks at you with trepidation, but after some persuasion, you get him to agree.
+GH.Quartermaster-2_Front	You are approached on the road by a group of men on horseback. They don’t immediately seem menacing, but they are formidable and well organized.\n\nOne of the men, who wears plate armor and has a sword at his side, addresses you coldly. “You hail from Frosthaven, correct? What say you about the politics of the place? Are you for or against military rule in the region? Do you think those fool merchants could do a better job, like they’re doing with the rest of this doomed land?”\n\nLooking closer, you see all the men wear the signet of a tower with an eye at its center.
+GH.Quartermaster-2_Option_1	Claim allegiance to the military.
+GH.Quartermaster-2_Option_1_Outcome	The armored men seem satisfied with your response and take their hands off their weapons.\n\n“Good to find some fellow patriots,” the one in front says with a disturbing smile. “You know, we have a stronghold not far from here up in the mountains. Feel free to visit there if you ever get serious about your loyalties.”
+GH.Quartermaster-2_Option_2	Claim allegiance to the merchant guilds.
+GH.Quartermaster-2_Option_2_Outcome	“Well then, today’s your unlucky day,” the man in front says. “Because we of the Vigil make it a point to execute any and all commerce sympathizers we can find in this land.”\n\nThe men grimly draw swords and advance. After a hard battle, the survivors retreat, leaving you to pick through the corpses. Among the loot you find a map.
+Quartermaster_FullName	Quartermaster
+CODEX_Hero_Quartermaster_Title	Quartermaster
+Quartermaster_DESCRIPTION	Skilled Valrath Quartermasters are known for aiding adventuring parties in maximizing the effectiveness of their equipment. After all, what is a warrior without a good sword at his side?
+CODEX_HeroInfo_Quartermaster	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Medium
 Event__Text	Their personal quest complete, the mercenary leaves Frosthaven for good. Someone else will take up the fight.

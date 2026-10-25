@@ -1,0 +1,10 @@
+Parser: CampaignSection
+ID: GH.Sawbones
+Name: Sawbones Retires
+SkipNarration: True
+SkipCompletedNotification: False
+Effects:
+    - Type: EnableEvent
+      Param1: GH.Sawbones-1
+    - Type: EnableEvent
+      Param1: GH.Sawbones-2

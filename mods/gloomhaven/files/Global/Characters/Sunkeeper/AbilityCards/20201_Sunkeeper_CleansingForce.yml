@@ -1,0 +1,37 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CleansingForce$
+Character: SunkeeperID
+ID: 20201
+Level: 8
+Initiative: 25
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 6
+                    DiamondEnhancements: 2
+                Conditions: [Stun, Wound]
+                AnimOverload: MeleeSmite
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+        Infuse: Light
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Stun></size>, <size=130%><sprite name=Wound></size>"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Infuse: Light

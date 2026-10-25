@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EngulfingRadiance$
+Character: SunkeeperID
+ID: 20194
+Level: 4
+Initiative: 20
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                AnimOverload: PositiveBuffRadial
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Target: -1
+                Targeting: All
+                Filter: [Self, Ally]
+        Infuse: Light
+        XP: 2
+    Bottom:
+        Abilities:
+            BDisadvantage:
+                AnimOverload: PositiveBuffRadial
+                AttackersGainDisadvantage: 1
+                Range: 4
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Self, Ally]
+        Infuse: Light
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Affect_SelfAndAllAllies$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BDisadvantage
+            Icon: Disadvantage
+            ListLayout: "<b><sprite name=Aura>:</b> $GH_194_B$"
+            Layout: "<b><sprite name=Aura>:</b> $GH_194_B$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:
+                - Duration: Round

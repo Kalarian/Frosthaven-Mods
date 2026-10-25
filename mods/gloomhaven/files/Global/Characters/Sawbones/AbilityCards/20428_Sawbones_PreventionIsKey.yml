@@ -1,0 +1,43 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PreventionisKey$
+Character: SawbonesID
+ID: 20428
+Level: X
+Initiative: 13
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TDisarm:
+                Disarm:
+                    SquareEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter: Enemy
+                AnimOverload: RadialDebuff
+    Bottom:
+        Abilities:
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Self, Ally]
+                AnimOverload: RadialBuff
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Disarm> <size=100%><voffset=1>@TDisarm@"
+        - Row: "$Target_AllAdjacentEnemies$"
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*, <b><sprite name=Aura>:</b> $Affect_SelfAndAllAdjacentAllies$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<b><sprite name=Aura>:</b> $Affect_SelfAndAllAdjacentAllies$"

@@ -1,0 +1,37 @@
+{
+  "_about": "Test notes for the Scoundrel's effects workbook (tools/gh_testsheet.py). turns: the test hand in play order; an entry with \"rest\" is a long rest for the whole party. picks: the level-up card picks the hand needs (Ctrl+F7 gives the experience; pick these at the level-ups). states: what Gloomhaven shows per animator state, where known; the rest is generated from the pack data.",
+  "picks": ["Level 2: Flintlock", "Level 4: Flurry of Blades", "Level 5: Visage of the Inevitable", "Level 6: Burning Oil", "Level 8: Pain's End", "Level 9: Watch It Burn", "Levels 3 and 7: anything"],
+  "setup": "Pick a scenario with a trap within reach for Thief's Knack (or skip that half). She wants enemies at range 3 for the knives and the pistol, and adjacent ones for the kills.",
+  "turns": [
+    {"top": "ThrowingKnives", "bottom": "SpecialMixture", "order": "Bottom first: move 3 next to an enemy and throw the poison powder at it, then the knives at another within range 3.", "setup": "An enemy to end adjacent to; one within 3 hexes after the move."},
+    {"top": "SmokeBomb", "bottom": "Flintlock", "order": "Bottom first: the pistol shot at an enemy within range, then the smoke bomb (she turns invisible).", "setup": "An enemy within the pistol's range."},
+    {"top": "VisageoftheInevitable", "bottom": "FlurryofBlades", "order": "Bottom first: move 4 next to a normal enemy (the flurry buff plays), then the kill.", "setup": "A normal (not elite) enemy within reach."},
+    {"top": "BurningOil", "bottom": "WatchItBurn", "order": "Bottom first: move 5 next to enemies and throw the wounding powder, then the burning pistol shot at one in range.", "setup": "Enemies adjacent after the move; one within the pistol's range."},
+    {"top": "ThiefsKnack", "bottom": "PainsEnd", "order": "Top first if a trap is in reach: disarm it. Then the bottom: move 3 and kill an adjacent normal enemy.", "setup": "A trap within reach (else play Thief's Knack's bottom, a plain attack, instead). A normal enemy to end next to."},
+    {"rest": "long"},
+    {"top": "PainsEnd", "bottom": "ThrowingKnives", "order": "Top: Heal 8 on herself or an adjacent ally. Bottom: Loot 2.", "setup": "Coins within 2 hexes."},
+    {"top": "FlurryofBlades", "bottom": "ThiefsKnack", "order": "Bottom: the plain melee attack on an adjacent enemy. Top: the knives at one within range 3.", "setup": "An adjacent enemy and one in range."},
+    {"top": "SpecialMixture", "bottom": "BurningOil", "order": "Top: Heal 3 on an ally. Bottom: Loot 2.", "setup": "An ally adjacent, coins nearby."}
+  ],
+  "states": {
+    "Attack": "Plain dagger stab with her standard melee sound (one of two) and the weapon impact.",
+    "RangedAttackThrowingKnives": "Throwing knives: a flurry of knives flies to the target with the throw sound (one of three).",
+    "RangedAttackPistol": "The pistol: she draws and fires, muzzle flash, with the pistol shot sound.",
+    "RangedAttackPistolBurningOil": "The pistol again, with the burning-oil shot: fire on the target.",
+    "SelfPowderInvisibility": "She throws a powder down at her feet and vanishes in a puff (smoke), with the powder-throw sound.",
+    "AimedPowderPoison": "She throws a poison powder at the target hex, with the powder-throw sound.",
+    "SelfPowderWatchItBurn": "A powder thrown down around her: the wound cloud on the adjacent hexes.",
+    "SelfPowderVisage": "A powder thrown down around her: the poison cloud on the adjacent hexes.",
+    "KillAdjacent": "The execution: a quick lunge and stab, with its own kill sound.",
+    "PowerUpFlurry": "A quick power-up pose with the positive-buff cast sound.",
+    "PowerUp": "The plain cast pose with the positive-buff cast sound.",
+    "Heal": "The cast pose with her heal sound.",
+    "DisarmTrap": "She crouches at the trap and disarms it, with the trap-disarm sound.",
+    "Loot": "Her loot stoop. No effect or sound of her own."
+  },
+  "actions": [
+    {"name": "Movement", "how": "Any move.", "expected": "Her run cycle with footstep sounds and a dust puff at each footfall."},
+    {"name": "Item use", "how": "Use any item.", "expected": "Her item animation with the item-use sound."},
+    {"name": "Taking a hit", "how": "Let an enemy hit her.", "expected": "Hit reaction with one of three grunts."}
+  ]
+}

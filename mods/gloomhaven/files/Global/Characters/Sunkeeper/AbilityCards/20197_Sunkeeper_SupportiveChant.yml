@@ -1,0 +1,48 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SupportiveChant$
+Character: SunkeeperID
+ID: 20197
+Level: 6
+Initiative: 11
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    IsAura: True
+                    AuraFilter: [Ally]
+                    AuraTargeting: All
+                AnimOverload: PositiveBuffRadial
+        XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                Move: 2
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffMove
+                    IsAura: True
+                    AuraFilter: [Ally]
+                    AuraTargeting: All
+                AnimOverload: PositiveBuffRadial
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_197_T$"
+            Layout: "$GH_197_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Move
+            ListLayout: "$GH_197_B$"
+            Layout: "$GH_197_B$"

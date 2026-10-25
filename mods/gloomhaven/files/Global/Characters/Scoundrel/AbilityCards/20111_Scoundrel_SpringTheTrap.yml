@@ -1,0 +1,43 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SpringtheTrap$
+Character: ScoundrelID
+ID: 20111
+Level: 7
+Initiative: 13
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TDisarmTrap:
+                DisarmTrap: True
+                AnimOverload: DisarmTrap
+                TargetActorWithTrapEffects: True
+                TargetActorWithTrapEffectRange: 3
+                Filter: [Enemy]
+        XP: 2
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 2
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    StrengthIsScalar: True
+                    Filter:
+                        TargetType: Enemy
+                        TargetAdjacentAlliesOfTarget: "== 0"
+                        TargetAdjacentAlliesOfCaster: "> 0"
+                    XPTracker: [2]
+Layout:
+    Top:
+        - Row: "$GH_092_T$"
+        - Row: "<size=20%> "
+        - Row: "$GH_111_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$GH_111_B$"
+            Layout: "$GH_111_B$"
+            Icon: Positive_AttackPlus

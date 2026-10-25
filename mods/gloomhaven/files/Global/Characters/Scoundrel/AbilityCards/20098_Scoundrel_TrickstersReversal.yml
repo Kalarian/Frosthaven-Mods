@@ -1,0 +1,40 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TrickstersReversal$
+Character: ScoundrelID
+ID: 20098
+Level: X
+Initiative: 9
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 2
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter: Enemy
+                        AbilityOverrides:
+                            TTargetShieldBuff:
+                                AddTargetPropertyToStrength: Shield
+                                AddTargetPropertyToStrengthMultiplier: 2
+        XP: 2
+    Bottom:
+        Abilities:
+            BPrevent:
+                PreventDamage: 1
+                ActiveBonus:
+                    Duration: Round
+                    XPTracker: [0]
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$GH_098_T$"
+    Bottom:
+        - Active:
+            Ability: BPrevent
+            ListLayout: "$GH_098_B$"
+            Layout: "$GH_098_B$"
+            Icon: Positive_DamagePrevent

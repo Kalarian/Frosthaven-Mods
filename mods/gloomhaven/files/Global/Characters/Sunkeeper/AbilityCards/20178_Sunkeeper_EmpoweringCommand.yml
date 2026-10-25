@@ -1,0 +1,50 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EmpoweringCommand$
+Character: SunkeeperID
+ID: 20178
+Level: 1
+Initiative: 32
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TRecover:
+                RecoverDiscardedCards: 2
+                Range: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: PositiveBuffTargeted
+        Consumes:
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightRecoverBuff:
+                        ParentName: TRecover
+                        Strength: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 4
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                Range: 1
+                Filter: Ally
+                AnimOverload: ControlAlly
+Layout:
+    Top:
+        - Row: "$GH_178_T_1$"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: TCLight
+            Text: "$GH_178_T_2$"
+    Bottom:
+        - Row: "$GH_157_T$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

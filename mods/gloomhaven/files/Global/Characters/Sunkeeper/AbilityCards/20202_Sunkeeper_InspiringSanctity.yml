@@ -1,0 +1,68 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_InspiringSanctity$
+Character: SunkeeperID
+ID: 20202
+Level: 8
+Initiative: 79
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack: 8
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                Filter: Ally
+                AnimOverload: ControlAlly
+        Consumes:
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightKillInstead:
+                        ParentName: TAlly
+                        ControlActor:
+                            Abilities:
+                                TAllyKill:
+                                    Kill: True
+                                    RangeIsBase: True
+                                    TargetIsBase: True
+                                    Filter:
+                                        TargetType: Enemy
+                                        EnemyType: [Normal, Elite]
+                                    AbilityXP: 1
+                        Filter: Ally
+        XP: 2
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack: 4
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                            AbilityXP: 1
+                Range: 3
+                Target: -1
+                Filter: Ally
+                AnimOverload: ControlAlly
+Layout:
+    Top:
+        - Row: "$GH_157_T$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack*"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: TCLight
+            Text: $GH_202_T$
+    Bottom:
+        - Row: $GH_371_B$
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack*"
+        - Row: "<size=50%> "
+        - Row: "$XP_PerAttackPerformed$"

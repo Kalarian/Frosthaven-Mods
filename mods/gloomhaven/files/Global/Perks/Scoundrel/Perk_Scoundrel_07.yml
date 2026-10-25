@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Scoundrel07
+Name: PERK_Scoundrel_07_Name
+Description: PERK_Scoundrel_07_Desc
+CharacterID: ScoundrelID
+Available: 2
+CardsToAdd: [AMC_P1_R, AMC_P1_R]

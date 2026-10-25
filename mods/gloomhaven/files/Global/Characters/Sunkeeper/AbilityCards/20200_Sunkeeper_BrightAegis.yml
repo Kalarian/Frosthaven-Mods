@@ -1,0 +1,70 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BrightAegis$
+Character: SunkeeperID
+ID: 20200
+Level: 7
+Initiative: 14
+Discard: [Discard,Permanently Lost]
+Data:
+    Top:
+        Abilities:
+            TShield:
+                Shield:
+                    Amount: 2
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+            TRetaliate:
+                Retaliate:
+                    Amount: 1
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+        Infuse: Light
+    Bottom:
+        Abilities:
+            BRecover:
+                AnimOverload: PositiveBuffTargeted
+                RecoverLostCards: 1
+                Range: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+        Consumes:
+            BCLight:
+                Elements: Light
+                AbilityOverrides:
+                    BCLightRecoverBuff:
+                        ParentName: BRecover
+                        Strength: 1
+                XP: 1
+        XP: 2
+Layout:
+    Top:
+        - Active:
+            Ability: TShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *TShield*"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+        - Divider:
+        - Active:
+            Ability: TRetaliate
+            Icon: Positive_Retaliate
+            ListLayout: "<sprite name=Retaliate> *TRetaliate*"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:
+                - Duration: Round
+    Bottom:
+        - Row: "$GH_177_T$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCLight
+            Text: "$GH_200_B$"

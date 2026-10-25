@@ -1,0 +1,22 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PracticalPlans$
+Character: SunkeeperID
+ID: 20189
+Level: 2
+Initiative: 56
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 5
+                AnimOverload: MeleeSmite
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 5
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"

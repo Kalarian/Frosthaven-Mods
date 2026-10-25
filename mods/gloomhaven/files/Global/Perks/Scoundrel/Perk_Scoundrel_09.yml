@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Scoundrel09
+Name: PERK_Scoundrel_09_Name
+Description: PERK_Scoundrel_09_Desc
+CharacterID: ScoundrelID
+Available: 1
+Flags: [Passive, IgnoreNegativeScenarioEffects]
