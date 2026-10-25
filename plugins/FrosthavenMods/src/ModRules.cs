@@ -58,11 +58,10 @@ namespace FrosthavenMods
         public const ERulesFlag QuestRewards = (ERulesFlag)(1 << 17);
         public const ERulesFlag KeepMasteries = (ERulesFlag)(1 << 16);
         public const ERulesFlag GloomhavenClasses = (ERulesFlag)(1 << 15);
-        // Two of the game's own rule bits, which it never shows on its rules screen: their effects are the game's own
-        // (ReducedRandomness.cs passes the first to the scenario rules; the game applies the second itself, in
-        // PartyAdventureData.ChangeCampaignRules, on every PC). A save keeps them without the mods too.
+        // The game's own rule bit, which it never shows on its rules screen (ReducedRandomness.cs passes it to the
+        // scenario rules). A save keeps it without the mods too. (Its CanRespecCharacters bit was offered as "Respec
+        // without the Library" for a day and dropped, 2026-10-25: the Library's respec is enough.)
         public const ERulesFlag ReducedRandomness = ERulesFlag.ReducedRandomness;
-        public const ERulesFlag RespecAnywhere = ERulesFlag.CanRespecCharacters;
 
         public static readonly List<Rule> All = new List<Rule>
         {
@@ -201,16 +200,6 @@ namespace FrosthavenMods
                               "Takes effect when the next scenario starts. Perks work as usual (removing a -2 takes the plain " +
                               "one).\n" +
                               "Board game rule bent: the null and the x2 are part of every modifier deck.",
-            },
-            new Rule
-            {
-                Flag = RespecAnywhere,
-                Name = "Respec without the Library (mod)",
-                Description = "Characters can respec before the Library is built: the Respec button on the level-up card " +
-                              "screen resets the cards a character chose at level 2 and up, to choose again. It costs 10 " +
-                              "gold per character level (a wrecked Library's price; once the Library is built, its own " +
-                              "lower price applies: 8 per level at level 1, less higher up). Perks are not reset.\n\n" +
-                              "The game's own rule, which it never shows. Board game rule bent: respec needs the Library.",
             },
             new Rule
             {
