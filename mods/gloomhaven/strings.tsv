@@ -386,7 +386,7 @@ GH.Brute-3_Option_2	Take what you can find and move on.
 GH.Brute-3_Option_2_Outcome	Near the corpse of the Brute, you find an axe, presumably the weapon he threw away. There’s really nothing else among the debris, so you wordlessly pick it up and move on.
 Brute_FullName	Brute
 CODEX_Hero_Brute_Title	Brute
-CODEX_HeroInfo_Brute	<b>Role:</b> Melee Damage/Tank\n<b>Difficulty:</b> Low\n\nBrutes are best used as front line melee troops, absorbing damage and protecting the more fragile ranged damage dealers, and are best equipped with items that keep them alive longer!
+CODEX_HeroInfo_Brute	<b>Role:</b> Melee Damage/Tank\n<b>Difficulty:</b> Low\n\nBrutes are best used as front line melee troops, absorbing damage and protecting the more fragile ranged damage dealers, and are best equipped with items that keep them alive longer!\n\n<b>Strengths:</b>\n• High health and defensive abilities make him more durable than some\n• Access to early Disarm and Stun\n• Great at pushing enemies about\n\n<b>Weaknesses:</b>\n• Low mobility\n• Poor ranged attack options\n• Not the greatest conversationalist
 PERK_Scoundrel_01_Name	Light Step
 PERK_Scoundrel_02_Name	Steady Hand
 PERK_Scoundrel_03_Name	Venom Coating
@@ -420,7 +420,7 @@ GH.Scoundrel-3_Option_2	Overpower the Scoundrel and deliver her to the guards.
 GH.Scoundrel-3_Option_2_Outcome	A look of horrid surprise flashes in the Scoundrel’s eyes as you leap forward and throw her to the ground. She doesn’t even speak as you bind her arms and take her to the guard. They thank you for your service, but their words aren’t much counter to the cold, angry stare of the Scoundrel as she’s taken away.
 Scoundrel_FullName	Scoundrel
 CODEX_Hero_Scoundrel_Title	Scoundrel
-CODEX_HeroInfo_Scoundrel	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> Low\n\nShe excels at high damage melee attacks, identifying lone targets and also gaining bonuses from working close to her team mates. She is a loner however, so don't expect her to help other party members apart from killing their attackers.
+CODEX_HeroInfo_Scoundrel	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> Low\n\nShe excels at high damage melee attacks, identifying lone targets and also gaining bonuses from working close to her team mates. She is a loner however, so don't expect her to help other party members apart from killing their attackers.\n\n<b>Strengths:</b>\n• High mobility\n• Potential for high melee Damage\n• Can afflict enemies with Poison\n\n<b>Weaknesses:</b>\n• Little in the way of effects that assist teammates\n• Few defensive abilities and low health\n• Will try and take ALL the gold
 PERK_Sunkeeper_01_Name	Focus
 PERK_Sunkeeper_02_Name	Radiance
 PERK_Sunkeeper_03_Name	Bulwark
@@ -460,7 +460,7 @@ GH.Sunkeeper-4_Option_2_Outcome	Without even speaking, you draw your weapons and
 Sunkeeper_FullName	Sunkeeper
 CODEX_Hero_Sunkeeper_Title	Sunkeeper
 Sunkeeper_DESCRIPTION	Sunkeepers have been trained to tap into long-dormant demonic powers and harness them for the purpose of righteousness. The Sunkeeper has an assortment of Healing, Buffing and Card Recovery abilities and is a capable Melee fighter in her own right. She works best in the role of a Paladin, aiding the main damage dealers in combat while keeping them alive.
-CODEX_HeroInfo_Sunkeeper	<b>Role:</b> Melee Tank/Support\n<b>Difficulty:</b> Low
+CODEX_HeroInfo_Sunkeeper	<b>Role:</b> Melee Tank/Support\n<b>Difficulty:</b> Low\n\n<b>Strengths:</b>\n• Array of buff, heal and recovery options\n• Competent melee combatant\n• Uses Light to enhance her abilities\n\n<b>Weaknesses:</b>\n• Can struggle against groups of smaller enemies\n• Weaker with fewer allies\n• Rather self-righteous a lot of the time
 PERK_Sawbones_01_Name	Steady Hands
 PERK_Sawbones_02_Name	Open Wounds
 PERK_Sawbones_03_Name	Precise Cuts
@@ -499,7 +499,7 @@ GH.Sawbones-4_Option_2_Outcome	You laugh and wave your hand dismissively. There�
 Sawbones_FullName	Sawbones
 CODEX_Hero_Sawbones_Title	Sawbones
 Sawbones_DESCRIPTION	Followers of the Oak are religious healers who do their best to ward off the pestilence and death that can manifest in larger human cities. Contrary to popular belief, however, there is nothing miraculous about their healing methods, as anyone who has come to them with a gangrenous leg knows all too well. The mystique of the profession can get lost amongst the screams when the Sawbones has to hack off a limb.
-CODEX_HeroInfo_Sawbones	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Low
+CODEX_HeroInfo_Sawbones	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Low\n\n<b>Strengths:</b>\n• Particularly efficient healer\n• Has a number of decent melee attacks\n• Medical Packs can also increase Ally's card counts\n\n<b>Weaknesses:</b>\n• Poor ranged attacks\n• Weaker in parties with fewer allies or lower max health\n• Doesn't have as great an understanding of medical cleanliness as most doctors
 PERK_Quartermaster_01_Name	Steady Supply
 PERK_Quartermaster_02_Name	Armor Piercing
 PERK_Quartermaster_03_Name	Sweeping Blow
@@ -528,5 +528,5 @@ GH.Quartermaster-2_Option_2_Outcome	“Well then, today’s your unlucky day,”
 Quartermaster_FullName	Quartermaster
 CODEX_Hero_Quartermaster_Title	Quartermaster
 Quartermaster_DESCRIPTION	Skilled Valrath Quartermasters are known for aiding adventuring parties in maximizing the effectiveness of their equipment. After all, what is a warrior without a good sword at his side?
-CODEX_HeroInfo_Quartermaster	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Medium
+CODEX_HeroInfo_Quartermaster	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Medium\n\n<b>Strengths:</b>\n• Many item refreshing abilities\n• Moderate offensive and defensive capabilities\n• Jack of all trades\n\n<b>Weaknesses:</b>\n• Master of none\n• Weaker when party lacks good equipment\n• Always packs too much luggage
 Event__Text	Their personal quest complete, the mercenary leaves Frosthaven for good. Someone else will take up the fight.

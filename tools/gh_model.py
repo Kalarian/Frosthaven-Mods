@@ -573,6 +573,38 @@ def _smb_effects(smbs, caster_only=False):
 
 # ---------------------------------------------------------------- the pack build step
 
+def _streams(path):
+    """How many of the bundle's textures stream their mip levels."""
+    # read from memory: UnityPy keeps a file it loads by path open, and Windows then refuses to replace it
+    return sum(1 for o in UnityPy.load(Path(path).read_bytes()).objects
+               if o.type.name == "Texture2D" and o.read_typetree().get("m_StreamingMipmaps"))
+
+
+def copy_bundle(src, dst):
+    """Copy a Gloomhaven bundle into the pack with its textures' mipmap streaming switched off. Gloomhaven marks every
+    texture to stream its mip levels; Frosthaven marks none, and turns streaming on only at its top quality level
+    (Fantastic: a 900 MB budget). Over budget, Unity may shrink only the streaming textures, by up to two mip levels,
+    so on Fantastic a Gloomhaven hero could be drawn with a quarter-size texture (512 instead of 2048) beside heroes
+    drawn at full size. Unflagged, the textures load whole like Frosthaven's own. Only the flag changes (the pixel data
+    is kept as it is); the copy is rewritten when it is missing, older than the source, or still has streaming ones.
+    Returns the copy's path."""
+    src, dst = Path(src), Path(dst)
+    if dst.exists() and dst.stat().st_mtime >= src.stat().st_mtime and _streams(dst) == 0:
+        return dst
+    env = UnityPy.load(str(src))
+    for o in env.objects:
+        if o.type.name == "Texture2D":
+            t = o.read_typetree()
+            if t.get("m_StreamingMipmaps"):
+                t["m_StreamingMipmaps"] = False
+                o.save_typetree(t)
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    tmp = dst.with_name(dst.name + ".tmp")
+    tmp.write_bytes(env.file.save(packer="lz4"))
+    tmp.replace(dst)
+    return dst
+
+
 def export(gh, fh, cls, out):
     """Copy the class's hero bundle into <out>/bundles and return the pack.json "model" entry for the class."""
     names = bundles_for(gh, cls)
@@ -596,13 +628,10 @@ def export(gh, fh, cls, out):
         skins[skin] = {k: v for k, v in alt.items() if k != "animation" and v != entry.get(k)}
     if skins:
         entry["skins"] = skins
-    dst = out / "bundles" / hero
-    dst.parent.mkdir(parents=True, exist_ok=True)
-    if not dst.exists() or dst.stat().st_size != src.stat().st_size:
-        shutil.copyfile(src, dst)
+    dst = copy_bundle(src, out / "bundles" / hero)
     entry.update({
-        "bundle": hero, "bundle_name": Bundle(src).asset_bundle_name(), "size": src.stat().st_size,
-        "sha256": hashlib.sha256(src.read_bytes()).hexdigest(),
+        "bundle": hero, "bundle_name": Bundle(src).asset_bundle_name(), "size": dst.stat().st_size,
+        "sha256": hashlib.sha256(dst.read_bytes()).hexdigest(),
         "not_shipped": sorted(n for n in names if n != hero),  # shaders (built-in pipeline), VFX materials, the knife
     })
     return entry

@@ -107,6 +107,7 @@ CLASS_EXTRAS = {
         "Race": "Valrath",
         "Traits": "[ Armored, Nimble, Persuasive ]",
         "Complexity": "1",
+        "ElementalAffinities": "[ Light ]",   # 29 of her card abilities infuse Light (see AFFINITY_MIN)
         "HeroStats": {"Melee": 4, "Ranged": 1, "Mobility": 2, "Support": 4, "Defense": 6, "Control": 1},
     },
     "Sawbones": {   # Melee Damage/Support, Low
@@ -122,6 +123,25 @@ CLASS_EXTRAS = {
         "HeroStats": {"Melee": 5, "Ranged": 2, "Mobility": 2, "Support": 4, "Defense": 4, "Control": 2},
     },
 }
+
+# Frosthaven's element affinities (the codex and class screens' "Affinities") name the elements a class's cards infuse
+# often: every Frosthaven class that lists one infuses it 4 or more times, and the classes that infuse little (Drifter,
+# Trapper, Blinkblade: two each at most) list none. The port warns when CLASS_EXTRAS' ElementalAffinities and the
+# converted cards disagree by that rule.
+AFFINITY_MIN = 4
+ELEMENTS = ("Fire", "Ice", "Air", "Earth", "Light", "Dark")
+
+
+def infused_often(card_texts):
+    """The elements the cards infuse AFFINITY_MIN or more times, in Frosthaven's element order."""
+    counts = dict.fromkeys(ELEMENTS, 0)
+    for s in card_texts:
+        for m in re.finditer(r"^\s*(?:Infuse|ElementsToInfuse|InfuseElements?)\s*:\s*\[?([^\]\n#]*)", s, re.M):
+            for e in m.group(1).split(","):
+                if e.strip() in counts:
+                    counts[e.strip()] += 1
+    return [e for e in ELEMENTS if counts[e] >= AFFINITY_MIN]
+
 
 # Active-bonus icons for the actives gh_layout's general mapping (Shield, Retaliate...) doesn't fit: {ability: icon},
 # from the Frosthaven icon names in misc_globalsettings (ActiveAbilityDataSO)
@@ -366,6 +386,7 @@ def main():
         char_id = re.search(r"^ID:\s*(\S+)", text(files[char_path]), re.M).group(1)
         cards = sorted(n for n, d in files.items() if n.startswith("AbilityCard/") and
                        re.search(rf"^Character:\s*{re.escape(char_id)}\s*$", text(d), re.M))
+        converted = []
         for n in cards:
             new_id, s = convert_card(n, text(files[n]), warnings.append, CLASS_ICONS.get(cls))
             anim_names.update(m.group(2) for m in ANIM_OVERLOAD_LINE.finditer(s))
@@ -373,6 +394,12 @@ def main():
                 sys.exit(f"{n}: card ID {new_id} is taken in Frosthaven")
             stem = re.sub(r"^\d+", str(new_id), Path(n).name)
             write(f"{base}/AbilityCards/{stem}", s)
+            converted.append(s)
+        declared = re.findall(r"\w+", CLASS_EXTRAS[cls].get("ElementalAffinities", ""))
+        often = infused_often(converted)
+        if sorted(declared) != sorted(often):
+            warnings.append(f"{cls}: ElementalAffinities {declared or 'none'} in CLASS_EXTRAS, but its cards infuse "
+                            f"{often or 'no element'} {AFFINITY_MIN}+ times (Frosthaven's rule; see AFFINITY_MIN)")
 
         crossover = gh_crossover.files(cls)
         if crossover:
@@ -492,7 +519,16 @@ def main():
             table.setdefault(f"{cls}_DESCRIPTION", paragraphs[0])
         head = [f"<b>{label}:</b> {strings[key]}" for label, key in (("Role", f"{cls}_ROLE"), ("Difficulty", f"{cls}_DIFFICULTY"))
                 if strings.get(key)]
-        info = "\n\n".join((["\n".join(head)] if head else []) + paragraphs[1:])
+        # then its strengths and weaknesses lists (every class has both; Gloomhaven indents each "- " line with an
+        # <indent=%15> tag, which Frosthaven's text doesn't read, so they become plain bullets)
+        lists = []
+        for label, key in (("Strengths", f"{cls}_STRENGTHS"), ("Weaknesses", f"{cls}_WEAKNESSES")):
+            items = [re.sub(r"</?indent[^>]*>", "", ln).strip().lstrip("-").strip()
+                     for ln in strings.get(key, "").replace("\r", "").split("\n")]
+            items = [i for i in items if i]
+            if items:
+                lists.append(f"<b>{label}:</b>\n" + "\n".join(f"• {i}" for i in items))
+        info = "\n\n".join((["\n".join(head)] if head else []) + paragraphs[1:] + lists)
         if info:
             table.setdefault(f"CODEX_HeroInfo_{cls}", info)
         elif f"{cls}_DESCRIPTION" in strings:

@@ -344,7 +344,7 @@
       ]
     }
   ],
-  "data_sha": "febeed4f4ffaf67b041baca0b00589b95efa61c857b0dd731261a50c62ba7a09",
+  "data_sha": "020df952a0cd88550d5fd08d064c7e74ac5af61876f84f4a1eda3aaa5e9e26cc",
   "source": {
     "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
     "buildid": "20286313",
@@ -1060,8 +1060,8 @@
       },
       "bundle": "hero_brute_assets_all.bundle",
       "bundle_name": "eedd4518c1eafd6f0484107f4fa71e1f.bundle",
-      "size": 83229021,
-      "sha256": "04b2a0419654e4efee2f0cc94a56262a3b41ded1589763b35f103b8aacfb2701",
+      "size": 83403173,
+      "sha256": "29307ecf8ee4482278574c43550047f553205bc0009a2c06fe65fbc6141c72da",
       "not_shipped": [
         "7c79e4fec988dbd61eedc6188355414e_unitybuiltinshaders.bundle",
         "misc_high_shaders_assets_all.bundle",
@@ -3219,62 +3219,62 @@
         {
           "file": "cragheart_dustdevil_bits_assets_all.bundle",
           "name": "366628eaf17c112dd8bbf043aa7717b9.bundle",
-          "size": 160279,
-          "sha256": "42aaea43f8176544e276eb4728a3704168c1a6a18d0103f0ee0eafc68a39139c"
+          "size": 162227,
+          "sha256": "5ec09cf3081dc6de90fed5f38b744016063138b7f292aa8e0042ae53ff8817f0"
         },
         {
           "file": "cragheart_rock3_assets_all.bundle",
           "name": "d8b6ceb51661ea2c8b35c78d1e6e882c.bundle",
-          "size": 2082393,
-          "sha256": "a4a7c28525bc333df035f7635410616ceb9ac89408c5bbd23c4c06c0ea282102"
+          "size": 2090278,
+          "sha256": "1fd615dbbd974a9c683e04cdffc5368b5274befe49611e7a059baaaa85228f99"
         },
         {
           "file": "hitspike_general_mat_assets_all.bundle",
           "name": "ddd551d88d3fc1381eb8f147ade963a7.bundle",
-          "size": 328181,
-          "sha256": "153fe47f10a65ad15ab1449e93a9ba0f5562a9d0fc163ca591c5f4f0af2a8f60"
+          "size": 328224,
+          "sha256": "ca822a5af02cfdbdcbe1100e6092c588a5c5078f9bd87c0b60d55650e457f5ff"
         },
         {
           "file": "knife_pull_ring_mat_assets_all.bundle",
           "name": "c4745048f9082ec1c4eab46b5a2a5da3.bundle",
-          "size": 133625,
-          "sha256": "8fcedf99ddbb97b0e72165158a5247ef65eeb867a478d62bf6aaf33bf29a3a22"
+          "size": 135054,
+          "sha256": "9ff70c7b6330067e74e7c3c180c4459c62017ce455e5c17de2678d2caca00bce"
         },
         {
           "file": "obstacle_rock_assets_all.bundle",
           "name": "dc009238f542b0105f6755197cdf48cf.bundle",
-          "size": 578354,
-          "sha256": "b2d87e01403c55b72c0d3980695146a89a4e21ae75a97548ca5d41589ed703c2"
+          "size": 581102,
+          "sha256": "307cff7e66cd024bb371b631a6475f076c4d23a2498c094cc73520a6f76969d1"
         },
         {
           "file": "openchestrays_mat_assets_all.bundle",
           "name": "773baf9ca60a78151fd55225cd8603f2.bundle",
-          "size": 453903,
-          "sha256": "4a79242af83f0f52a0771ba11642853918571e2ba353c0b26f3b71600df6423b"
+          "size": 462967,
+          "sha256": "cad3019b92be70b7a1dc72278c4984bffb8abb1b24af6d092eaa85256e97edbe"
         },
         {
           "file": "pcg_materials_assets_brute_heal_bits_mat.bundle",
           "name": "cd26f1f5b8f6d86da594377596a2bb94.bundle",
-          "size": 156524,
-          "sha256": "43fea8c090210ca4d86244969c2615d5f2d34cde1c5c75b95b239a7251d6efbb"
+          "size": 156788,
+          "sha256": "1c24b571fafda2b48cc8e05dc4e4edeadde81f0609a0fb56d90a6f0ee3131941"
         },
         {
           "file": "pcg_materials_assets_brute_positive_bits_mat.bundle",
           "name": "e7c7ed614ec12337b0e9352b3bfb90b3.bundle",
-          "size": 156559,
-          "sha256": "ec9c8ab7f8b185251091449c97e1d3d20724587bafbb148a8a4ea263d847bd07"
+          "size": 156816,
+          "sha256": "7dbf271c4207fc3bf243635f4fc2d631f6387ff4ad3cf7e3e48330e3dc1a6ecb"
         },
         {
           "file": "pcg_materials_assets_cragheartcastshieldcloudmat.bundle",
           "name": "b276d46c68d761e0d378a5bedb1bc3da.bundle",
-          "size": 5814375,
-          "sha256": "eb79e6f1619355f426a571d1ca728fcd41dc6fc90a98b3d7c778e912878356f8"
+          "size": 5835349,
+          "sha256": "b5ec5eb4e5dc3cb8afda8dee588f876632d7a02fff94a18730ca2d604d1ffe62"
         },
         {
           "file": "pcg_materials_assets_deathdissolvefogmat.bundle",
           "name": "cc89b4017e363b83b335a7ecfcfc35d0.bundle",
-          "size": 718580,
-          "sha256": "3aebc06094ce21182c267dbf329f9cf076ea7ce5533adc92934797cd880a2302"
+          "size": 723186,
+          "sha256": "d5fa25795b3d6483fe41ec25774b6fb78cc41f26b83d29e3c0dc0f139e8f8946"
         },
         {
           "file": "pcg_materials_assets_invisibletexmat.bundle",
@@ -3285,14 +3285,14 @@
         {
           "file": "pcg_materials_assets_shoutcircle_mat.bundle",
           "name": "6599dd704149935cbf2a503c308e931e.bundle",
-          "size": 55912,
-          "sha256": "4cfe4495e42a0bdfdd2710c004800722a71392a6925e5865ad39f1f5d8251950"
+          "size": 56347,
+          "sha256": "c716bd5406df54669b1e256d3fb24a8f85c3a43d1b9589e1e6a21435e48a7694"
         },
         {
           "file": "pcg_materials_assets_sparks_gpu_mat.bundle",
           "name": "dbfcc32f5bc1dfc72296001467a099d0.bundle",
-          "size": 30844,
-          "sha256": "73088ba7e61237981f6f79e5f4f045dee0ec11658c906b165f917b195fb6a8e3"
+          "size": 31030,
+          "sha256": "2e3257eee5e69f76e801a4399a6757e82a093f2d138e42b4ad5c6e464ee541ef"
         },
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
@@ -4252,8 +4252,8 @@
       },
       "bundle": "hero_scoundrel_assets_all.bundle",
       "bundle_name": "fc68f2a8968e1aebc332c69e4e22d153.bundle",
-      "size": 60303267,
-      "sha256": "2b9aa01b18c6f4a3c3ce6ae791350ed55d152ca97f9d969498e81aabb258b7fe",
+      "size": 60472146,
+      "sha256": "f934215b91a25e3ce03cc0d63bb5f212c46d1177ba357d8c35d6ddba6285094c",
       "not_shipped": [
         "7c79e4fec988dbd61eedc6188355414e_unitybuiltinshaders.bundle",
         "misc_high_shaders_assets_all.bundle",
@@ -7499,62 +7499,62 @@
         {
           "file": "cragheart_dustdevil_bits_assets_all.bundle",
           "name": "366628eaf17c112dd8bbf043aa7717b9.bundle",
-          "size": 160279,
-          "sha256": "42aaea43f8176544e276eb4728a3704168c1a6a18d0103f0ee0eafc68a39139c"
+          "size": 162227,
+          "sha256": "5ec09cf3081dc6de90fed5f38b744016063138b7f292aa8e0042ae53ff8817f0"
         },
         {
           "file": "explosionsmall_muzzle_mat_assets_all.bundle",
           "name": "cf55877a5a8b1aaddb61787596bb9217.bundle",
-          "size": 727548,
-          "sha256": "9665b4705dc6e535036f917621f3b6d5ff8dced993d254a77f09482724b1bac4"
+          "size": 730036,
+          "sha256": "b19a1d45379628910b6e65974ef47be501ebae276314766c5ba121ed68ae3251"
         },
         {
           "file": "knife_pull_ring_mat_assets_all.bundle",
           "name": "c4745048f9082ec1c4eab46b5a2a5da3.bundle",
-          "size": 133625,
-          "sha256": "8fcedf99ddbb97b0e72165158a5247ef65eeb867a478d62bf6aaf33bf29a3a22"
+          "size": 135054,
+          "sha256": "9ff70c7b6330067e74e7c3c180c4459c62017ce455e5c17de2678d2caca00bce"
         },
         {
           "file": "openchestrays_mat_assets_all.bundle",
           "name": "773baf9ca60a78151fd55225cd8603f2.bundle",
-          "size": 453903,
-          "sha256": "4a79242af83f0f52a0771ba11642853918571e2ba353c0b26f3b71600df6423b"
+          "size": 462967,
+          "sha256": "cad3019b92be70b7a1dc72278c4984bffb8abb1b24af6d092eaa85256e97edbe"
         },
         {
           "file": "pcg_materials_assets_brute_heal_bits_mat.bundle",
           "name": "cd26f1f5b8f6d86da594377596a2bb94.bundle",
-          "size": 156524,
-          "sha256": "43fea8c090210ca4d86244969c2615d5f2d34cde1c5c75b95b239a7251d6efbb"
+          "size": 156788,
+          "sha256": "1c24b571fafda2b48cc8e05dc4e4edeadde81f0609a0fb56d90a6f0ee3131941"
         },
         {
           "file": "pcg_materials_assets_brute_positive_bits_mat.bundle",
           "name": "e7c7ed614ec12337b0e9352b3bfb90b3.bundle",
-          "size": 156559,
-          "sha256": "ec9c8ab7f8b185251091449c97e1d3d20724587bafbb148a8a4ea263d847bd07"
+          "size": 156816,
+          "sha256": "7dbf271c4207fc3bf243635f4fc2d631f6387ff4ad3cf7e3e48330e3dc1a6ecb"
         },
         {
           "file": "pcg_materials_assets_cragheartcastshieldcloudmat.bundle",
           "name": "b276d46c68d761e0d378a5bedb1bc3da.bundle",
-          "size": 5814375,
-          "sha256": "eb79e6f1619355f426a571d1ca728fcd41dc6fc90a98b3d7c778e912878356f8"
+          "size": 5835349,
+          "sha256": "b5ec5eb4e5dc3cb8afda8dee588f876632d7a02fff94a18730ca2d604d1ffe62"
         },
         {
           "file": "pcg_materials_assets_deathdissolvefogmat.bundle",
           "name": "cc89b4017e363b83b335a7ecfcfc35d0.bundle",
-          "size": 718580,
-          "sha256": "3aebc06094ce21182c267dbf329f9cf076ea7ce5533adc92934797cd880a2302"
+          "size": 723186,
+          "sha256": "d5fa25795b3d6483fe41ec25774b6fb78cc41f26b83d29e3c0dc0f139e8f8946"
         },
         {
           "file": "pcg_materials_assets_deathdissolveparticlesmat.bundle",
           "name": "ccef9b5e7c99f61140164a4b33f18390.bundle",
-          "size": 356621,
-          "sha256": "2ecf281532233acfa0457a638ea21fb868c42093b49fc0e49483713cebdbd1a0"
+          "size": 356845,
+          "sha256": "3c2304267befc14f9bbf9e2a425c9d7f420366e17ea2170818e5bc4d6e4fba3c"
         },
         {
           "file": "pcg_materials_assets_explosionfogbrightmat.bundle",
           "name": "7ec201d82179bc3637d058db2d4715d4.bundle",
-          "size": 623352,
-          "sha256": "ae4b1023e543b98b7eca664875e5638af7d19b07270217f195b48c0fc0edc4c8"
+          "size": 628111,
+          "sha256": "16544e1148ac26ae372c32ee9eb056667e52816f79e0fc26d92bb5d8a21449c1"
         },
         {
           "file": "pcg_materials_assets_invisibletexmat.bundle",
@@ -7565,32 +7565,32 @@
         {
           "file": "pcg_materials_assets_lightboltdissolve_mat.bundle",
           "name": "531e8918e4810fc24294aad5707a9ea0.bundle",
-          "size": 134950,
-          "sha256": "522b9b5b10f78f52e7e56bd4fd4a31ef40490ff7e701298120bd188bf115b266"
+          "size": 135109,
+          "sha256": "8fbaef78933b3716e926ba6b1f499fc153d6503d63aabfa8de53578a169bb864"
         },
         {
           "file": "pcg_materials_assets_scoundrelflashsphere_mat.bundle",
           "name": "0c9563f606e138060135ea9c4a9b07e7.bundle",
-          "size": 134790,
-          "sha256": "b96344db403d5b15e901e387c9dbf54d55bf54b573c4a3bb52f58aa514a94a73"
+          "size": 136667,
+          "sha256": "1af3b54b2574d56f9a714241f8678e18fa0b05e1c5d6996da5c274abb639771a"
         },
         {
           "file": "pcg_materials_assets_shoutcircle_mat.bundle",
           "name": "6599dd704149935cbf2a503c308e931e.bundle",
-          "size": 55912,
-          "sha256": "4cfe4495e42a0bdfdd2710c004800722a71392a6925e5865ad39f1f5d8251950"
+          "size": 56347,
+          "sha256": "c716bd5406df54669b1e256d3fb24a8f85c3a43d1b9589e1e6a21435e48a7694"
         },
         {
           "file": "pcg_materials_assets_smallflame_white.bundle",
           "name": "ae727d6de2f894bcd8beb3a099be4b16.bundle",
-          "size": 531439,
-          "sha256": "c367d829dcee355b65e81f4910d19e429d0cc9e842bd97abcac13f1bfdeedd88"
+          "size": 533641,
+          "sha256": "17e96abbfe056c8af40058f4b033edf1b1d82885c755bdc761655e94d49aa23d"
         },
         {
           "file": "pcg_materials_assets_sparks_gpu_mat.bundle",
           "name": "dbfcc32f5bc1dfc72296001467a099d0.bundle",
-          "size": 30844,
-          "sha256": "73088ba7e61237981f6f79e5f4f045dee0ec11658c906b165f917b195fb6a8e3"
+          "size": 31030,
+          "sha256": "2e3257eee5e69f76e801a4399a6757e82a093f2d138e42b4ad5c6e464ee541ef"
         },
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
@@ -7601,14 +7601,14 @@
         {
           "file": "positiveringmat_assets_all.bundle",
           "name": "3b783a6e849d51f98e9cfae3d21fd88e.bundle",
-          "size": 496453,
-          "sha256": "30df7ae58a0ffaa07d8b4a7608b8fe42ec147f349180c24f837f7cbdea8ca34e"
+          "size": 498514,
+          "sha256": "b324b26b8d6fb1abb6b17de228bb7ab4028e8bcf03227f7abf61d0517b4c6653"
         },
         {
           "file": "smallflame_assets_all.bundle",
           "name": "242eec81d1cb458afc79ce12a9604558.bundle",
-          "size": 672334,
-          "sha256": "18027c1c3f16342bfabb733f07705f3e0a2ccd1c4c5222e67b31f21b203d8cf5"
+          "size": 673916,
+          "sha256": "70729e293bd19783169824af5ce5b26fff556246691f1e1dd4bde87509c99d27"
         }
       ],
       "sounds": {
@@ -8325,8 +8325,8 @@
       },
       "bundle": "hero_sunkeeper_assets_all.bundle",
       "bundle_name": "fe532883b881e8b716bc266baddd7e29.bundle",
-      "size": 21977068,
-      "sha256": "04ae75ae2092388d5a0f81f694856abb0b9ebecc78234585e1c9e8bb7d24ae0b",
+      "size": 22124692,
+      "sha256": "34ff1b25ed0a6de060c09b08a41cc34bb6f330644d1ca00b35f201fc802eb7b6",
       "not_shipped": [
         "7c79e4fec988dbd61eedc6188355414e_unitybuiltinshaders.bundle",
         "misc_high_shaders_assets_all.bundle",
@@ -10848,38 +10848,38 @@
         {
           "file": "openchestrays_mat_assets_all.bundle",
           "name": "773baf9ca60a78151fd55225cd8603f2.bundle",
-          "size": 453903,
-          "sha256": "4a79242af83f0f52a0771ba11642853918571e2ba353c0b26f3b71600df6423b"
+          "size": 462967,
+          "sha256": "cad3019b92be70b7a1dc72278c4984bffb8abb1b24af6d092eaa85256e97edbe"
         },
         {
           "file": "pcg_materials_assets_brute_heal_bits_mat.bundle",
           "name": "cd26f1f5b8f6d86da594377596a2bb94.bundle",
-          "size": 156524,
-          "sha256": "43fea8c090210ca4d86244969c2615d5f2d34cde1c5c75b95b239a7251d6efbb"
+          "size": 156788,
+          "sha256": "1c24b571fafda2b48cc8e05dc4e4edeadde81f0609a0fb56d90a6f0ee3131941"
         },
         {
           "file": "pcg_materials_assets_brute_positive_bits_mat.bundle",
           "name": "e7c7ed614ec12337b0e9352b3bfb90b3.bundle",
-          "size": 156559,
-          "sha256": "ec9c8ab7f8b185251091449c97e1d3d20724587bafbb148a8a4ea263d847bd07"
+          "size": 156816,
+          "sha256": "7dbf271c4207fc3bf243635f4fc2d631f6387ff4ad3cf7e3e48330e3dc1a6ecb"
         },
         {
           "file": "pcg_materials_assets_cragheartcastshieldcloudmat.bundle",
           "name": "b276d46c68d761e0d378a5bedb1bc3da.bundle",
-          "size": 5814375,
-          "sha256": "eb79e6f1619355f426a571d1ca728fcd41dc6fc90a98b3d7c778e912878356f8"
+          "size": 5835349,
+          "sha256": "b5ec5eb4e5dc3cb8afda8dee588f876632d7a02fff94a18730ca2d604d1ffe62"
         },
         {
           "file": "pcg_materials_assets_deathdissolvefogmat.bundle",
           "name": "cc89b4017e363b83b335a7ecfcfc35d0.bundle",
-          "size": 718580,
-          "sha256": "3aebc06094ce21182c267dbf329f9cf076ea7ce5533adc92934797cd880a2302"
+          "size": 723186,
+          "sha256": "d5fa25795b3d6483fe41ec25774b6fb78cc41f26b83d29e3c0dc0f139e8f8946"
         },
         {
           "file": "pcg_materials_assets_deathdissolveparticlesmat.bundle",
           "name": "ccef9b5e7c99f61140164a4b33f18390.bundle",
-          "size": 356621,
-          "sha256": "2ecf281532233acfa0457a638ea21fb868c42093b49fc0e49483713cebdbd1a0"
+          "size": 356845,
+          "sha256": "3c2304267befc14f9bbf9e2a425c9d7f420366e17ea2170818e5bc4d6e4fba3c"
         },
         {
           "file": "pcg_materials_assets_invisibletexmat.bundle",
@@ -10890,14 +10890,14 @@
         {
           "file": "pcg_materials_assets_shoutcircle_mat.bundle",
           "name": "6599dd704149935cbf2a503c308e931e.bundle",
-          "size": 55912,
-          "sha256": "4cfe4495e42a0bdfdd2710c004800722a71392a6925e5865ad39f1f5d8251950"
+          "size": 56347,
+          "sha256": "c716bd5406df54669b1e256d3fb24a8f85c3a43d1b9589e1e6a21435e48a7694"
         },
         {
           "file": "pcg_materials_assets_spark_bits_mat.bundle",
           "name": "c47fdce0968ddcfde1623a12d14a8723.bundle",
-          "size": 38560,
-          "sha256": "f8e5d8163ea33a59bacc39d1bbc263de11864aa24921d64e86c67e7266a33753"
+          "size": 38672,
+          "sha256": "4d5c962759e9212e77ea616088de36587e0652961620872a71b5800bb91d7ff6"
         },
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
@@ -10908,8 +10908,8 @@
         {
           "file": "spellweaver_lightning_beam_mat_assets_all.bundle",
           "name": "b6d3020697740a25290b4dfec4b38cd0.bundle",
-          "size": 9712,
-          "sha256": "5eeddc6a456645050f00752782bd6b0a9d6b375daed26e1024118320aa300e73"
+          "size": 9727,
+          "sha256": "a15f9b34c7cfe9db26e31f2d2966fd134ffe3232ce1058e22b04eb4874fc184d"
         }
       ],
       "sounds": {
@@ -11971,8 +11971,8 @@
       },
       "bundle": "hero_sawbones_assets_all.bundle",
       "bundle_name": "21d6fbe36d1dbe87881799cd353aa2b9.bundle",
-      "size": 21495386,
-      "sha256": "557bb6662ee6c67eb8572202b9e3fd39e24083024865db11ac2a550de43f9468",
+      "size": 21614447,
+      "sha256": "47f8dd37ea8947419b38d3e209fcd7e11ed9922f4e3664d7ebff260f0fdf2b85",
       "not_shipped": [
         "7c79e4fec988dbd61eedc6188355414e_unitybuiltinshaders.bundle",
         "misc_high_shaders_assets_all.bundle",
@@ -16552,62 +16552,62 @@
         {
           "file": "firefly_harrower_mat_assets_all.bundle",
           "name": "b196f1b7c81b358102b976d14f35e976.bundle",
-          "size": 61531,
-          "sha256": "54e822ae1af46f65fe0ddeffeb7db6eab6a47e792c17d50aca4a15518a09c0e6"
+          "size": 61931,
+          "sha256": "ccd13eb4878b6a710591bb112974f7dd0921c249491fd72ec8f7a60d0aebfdf9"
         },
         {
           "file": "knife_pull_ring_mat_assets_all.bundle",
           "name": "c4745048f9082ec1c4eab46b5a2a5da3.bundle",
-          "size": 133625,
-          "sha256": "8fcedf99ddbb97b0e72165158a5247ef65eeb867a478d62bf6aaf33bf29a3a22"
+          "size": 135054,
+          "sha256": "9ff70c7b6330067e74e7c3c180c4459c62017ce455e5c17de2678d2caca00bce"
         },
         {
           "file": "openchestrays_mat_assets_all.bundle",
           "name": "773baf9ca60a78151fd55225cd8603f2.bundle",
-          "size": 453903,
-          "sha256": "4a79242af83f0f52a0771ba11642853918571e2ba353c0b26f3b71600df6423b"
+          "size": 462967,
+          "sha256": "cad3019b92be70b7a1dc72278c4984bffb8abb1b24af6d092eaa85256e97edbe"
         },
         {
           "file": "pcg_materials_assets_brute_heal_bits_mat.bundle",
           "name": "cd26f1f5b8f6d86da594377596a2bb94.bundle",
-          "size": 156524,
-          "sha256": "43fea8c090210ca4d86244969c2615d5f2d34cde1c5c75b95b239a7251d6efbb"
+          "size": 156788,
+          "sha256": "1c24b571fafda2b48cc8e05dc4e4edeadde81f0609a0fb56d90a6f0ee3131941"
         },
         {
           "file": "pcg_materials_assets_brute_positive_bits_mat.bundle",
           "name": "e7c7ed614ec12337b0e9352b3bfb90b3.bundle",
-          "size": 156559,
-          "sha256": "ec9c8ab7f8b185251091449c97e1d3d20724587bafbb148a8a4ea263d847bd07"
+          "size": 156816,
+          "sha256": "7dbf271c4207fc3bf243635f4fc2d631f6387ff4ad3cf7e3e48330e3dc1a6ecb"
         },
         {
           "file": "pcg_materials_assets_cragheartcastshieldcloudmat.bundle",
           "name": "b276d46c68d761e0d378a5bedb1bc3da.bundle",
-          "size": 5814375,
-          "sha256": "eb79e6f1619355f426a571d1ca728fcd41dc6fc90a98b3d7c778e912878356f8"
+          "size": 5835349,
+          "sha256": "b5ec5eb4e5dc3cb8afda8dee588f876632d7a02fff94a18730ca2d604d1ffe62"
         },
         {
           "file": "pcg_materials_assets_deathdissolvefogmat.bundle",
           "name": "cc89b4017e363b83b335a7ecfcfc35d0.bundle",
-          "size": 718580,
-          "sha256": "3aebc06094ce21182c267dbf329f9cf076ea7ce5533adc92934797cd880a2302"
+          "size": 723186,
+          "sha256": "d5fa25795b3d6483fe41ec25774b6fb78cc41f26b83d29e3c0dc0f139e8f8946"
         },
         {
           "file": "pcg_materials_assets_explosionfogaddmat.bundle",
           "name": "d5aaa833f63863433ee4741b27ceb403.bundle",
-          "size": 623359,
-          "sha256": "db4ec1e266757e4a92337dc892a36c7b5144e8042af16cb1e24dcdeff9f73b83"
+          "size": 628135,
+          "sha256": "8d4d350e3b5d3ccaaf26296ffa08cad44086f7643469a71fe1d3866f09334563"
         },
         {
           "file": "pcg_materials_assets_explosionfogbrightmat.bundle",
           "name": "7ec201d82179bc3637d058db2d4715d4.bundle",
-          "size": 623352,
-          "sha256": "ae4b1023e543b98b7eca664875e5638af7d19b07270217f195b48c0fc0edc4c8"
+          "size": 628111,
+          "sha256": "16544e1148ac26ae372c32ee9eb056667e52816f79e0fc26d92bb5d8a21449c1"
         },
         {
           "file": "pcg_materials_assets_explosionsmokemultmat.bundle",
           "name": "a359ae9846f5ec53cda39221d8cc426a.bundle",
-          "size": 3458464,
-          "sha256": "6f81dee5558ec7b524639d77fdb0ac46eda74bb3deca0c38fa6e0cb3cfbdca26"
+          "size": 3462803,
+          "sha256": "cebbf31cb64f4b67da584cf299b23ce0f7cd5f98c616659363765f58491e17ce"
         },
         {
           "file": "pcg_materials_assets_invisibletexmat.bundle",
@@ -16618,14 +16618,14 @@
         {
           "file": "pcg_materials_assets_lightboltdissolve_mat.bundle",
           "name": "531e8918e4810fc24294aad5707a9ea0.bundle",
-          "size": 134950,
-          "sha256": "522b9b5b10f78f52e7e56bd4fd4a31ef40490ff7e701298120bd188bf115b266"
+          "size": 135109,
+          "sha256": "8fbaef78933b3716e926ba6b1f499fc153d6503d63aabfa8de53578a169bb864"
         },
         {
           "file": "pcg_materials_assets_lightshaft_goalchest_mat.bundle",
           "name": "e9b45652499a96edb76dfbbeeac0e14c.bundle",
-          "size": 135602,
-          "sha256": "203518b02633b8b6385ef11cb5d582a8dad51055520ca28cf654a00ab1ccbc2e"
+          "size": 137461,
+          "sha256": "a7e8034b48dce80d847e04914aa78a3b936eed34a8d2fbab6d3719aacf18ecbd"
         },
         {
           "file": "pcg_materials_assets_mapmarker_bosscenter_mat.bundle",
@@ -16636,20 +16636,20 @@
         {
           "file": "pcg_materials_assets_particletrailmat.bundle",
           "name": "e47bccb7c34fc3c5d18fb252b0982348.bundle",
-          "size": 135009,
-          "sha256": "be95c7eed0b63ca1dda59a48989429c0e4c44f4c83bb7df12066141f956fe13a"
+          "size": 136877,
+          "sha256": "196e76a36fd67ca4df65c99b5fd6422d5eec6e19e65192504c87821f476a4bea"
         },
         {
           "file": "pcg_materials_assets_scoundrelflashsphere_mat.bundle",
           "name": "0c9563f606e138060135ea9c4a9b07e7.bundle",
-          "size": 134790,
-          "sha256": "b96344db403d5b15e901e387c9dbf54d55bf54b573c4a3bb52f58aa514a94a73"
+          "size": 136667,
+          "sha256": "1af3b54b2574d56f9a714241f8678e18fa0b05e1c5d6996da5c274abb639771a"
         },
         {
           "file": "pcg_materials_assets_spark_bits_mat.bundle",
           "name": "c47fdce0968ddcfde1623a12d14a8723.bundle",
-          "size": 38560,
-          "sha256": "f8e5d8163ea33a59bacc39d1bbc263de11864aa24921d64e86c67e7266a33753"
+          "size": 38672,
+          "sha256": "4d5c962759e9212e77ea616088de36587e0652961620872a71b5800bb91d7ff6"
         },
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_closesurface_mat.bundle",
@@ -16666,26 +16666,26 @@
         {
           "file": "quartermaster_rune_wheel_magic_mat_assets_all.bundle",
           "name": "d2fe9ad688f150c538209552d4582e6e.bundle",
-          "size": 485281,
-          "sha256": "b3e2f50e29710afb69167a97cb111ac630dc78adf0c18e4ad2828caa33aa101d"
+          "size": 488427,
+          "sha256": "c2b1de1e5353d532128261d9fb57f41092037e8784630ce63a1182700620d0a1"
         },
         {
           "file": "smallflame_assets_all.bundle",
           "name": "242eec81d1cb458afc79ce12a9604558.bundle",
-          "size": 672334,
-          "sha256": "18027c1c3f16342bfabb733f07705f3e0a2ccd1c4c5222e67b31f21b203d8cf5"
+          "size": 673916,
+          "sha256": "70729e293bd19783169824af5ce5b26fff556246691f1e1dd4bde87509c99d27"
         },
         {
           "file": "spellweaver_lightning_beam_mat_assets_all.bundle",
           "name": "b6d3020697740a25290b4dfec4b38cd0.bundle",
-          "size": 9712,
-          "sha256": "5eeddc6a456645050f00752782bd6b0a9d6b375daed26e1024118320aa300e73"
+          "size": 9727,
+          "sha256": "a15f9b34c7cfe9db26e31f2d2966fd134ffe3232ce1058e22b04eb4874fc184d"
         },
         {
           "file": "summoner_rune_magic_mat_assets_all.bundle",
           "name": "e327ba7c34a2ecf6398da49447ca6a6c.bundle",
-          "size": 121320,
-          "sha256": "4879c5c2ffa40ed004bd3a083ffcb854d21c8b805114915e6ef2647709a33b6f"
+          "size": 122248,
+          "sha256": "e6ef773ec761f0fa238eb0c068e623f29e2b3a744239929b4cc3e1974d6adbc6"
         }
       ],
       "sounds": {
@@ -17607,8 +17607,8 @@
       },
       "bundle": "hero_quartermaster_assets_all.bundle",
       "bundle_name": "ff168658fd8dcf0594d8bbcf761aaf8f.bundle",
-      "size": 25223592,
-      "sha256": "d0b0892c6e1aa38b2b9fc6d4be8f67e2ace9346f549d0e42f05015abaef8874d",
+      "size": 25330566,
+      "sha256": "2cde2dfd228476e08a826bf336864d3a86225fb71f463af9452fcb4742994d6e",
       "not_shipped": [
         "7c79e4fec988dbd61eedc6188355414e_unitybuiltinshaders.bundle",
         "misc_high_shaders_assets_all.bundle",
@@ -22744,62 +22744,62 @@
         {
           "file": "explosionsmall_muzzle_mat_assets_all.bundle",
           "name": "cf55877a5a8b1aaddb61787596bb9217.bundle",
-          "size": 727548,
-          "sha256": "9665b4705dc6e535036f917621f3b6d5ff8dced993d254a77f09482724b1bac4"
+          "size": 730036,
+          "sha256": "b19a1d45379628910b6e65974ef47be501ebae276314766c5ba121ed68ae3251"
         },
         {
           "file": "knife_pull_ring_mat_assets_all.bundle",
           "name": "c4745048f9082ec1c4eab46b5a2a5da3.bundle",
-          "size": 133625,
-          "sha256": "8fcedf99ddbb97b0e72165158a5247ef65eeb867a478d62bf6aaf33bf29a3a22"
+          "size": 135054,
+          "sha256": "9ff70c7b6330067e74e7c3c180c4459c62017ce455e5c17de2678d2caca00bce"
         },
         {
           "file": "openchestrays_mat_assets_all.bundle",
           "name": "773baf9ca60a78151fd55225cd8603f2.bundle",
-          "size": 453903,
-          "sha256": "4a79242af83f0f52a0771ba11642853918571e2ba353c0b26f3b71600df6423b"
+          "size": 462967,
+          "sha256": "cad3019b92be70b7a1dc72278c4984bffb8abb1b24af6d092eaa85256e97edbe"
         },
         {
           "file": "pcg_materials_assets_brute_heal_bits_mat.bundle",
           "name": "cd26f1f5b8f6d86da594377596a2bb94.bundle",
-          "size": 156524,
-          "sha256": "43fea8c090210ca4d86244969c2615d5f2d34cde1c5c75b95b239a7251d6efbb"
+          "size": 156788,
+          "sha256": "1c24b571fafda2b48cc8e05dc4e4edeadde81f0609a0fb56d90a6f0ee3131941"
         },
         {
           "file": "pcg_materials_assets_brute_positive_bits_mat.bundle",
           "name": "e7c7ed614ec12337b0e9352b3bfb90b3.bundle",
-          "size": 156559,
-          "sha256": "ec9c8ab7f8b185251091449c97e1d3d20724587bafbb148a8a4ea263d847bd07"
+          "size": 156816,
+          "sha256": "7dbf271c4207fc3bf243635f4fc2d631f6387ff4ad3cf7e3e48330e3dc1a6ecb"
         },
         {
           "file": "pcg_materials_assets_cragheartcastshieldcloudmat.bundle",
           "name": "b276d46c68d761e0d378a5bedb1bc3da.bundle",
-          "size": 5814375,
-          "sha256": "eb79e6f1619355f426a571d1ca728fcd41dc6fc90a98b3d7c778e912878356f8"
+          "size": 5835349,
+          "sha256": "b5ec5eb4e5dc3cb8afda8dee588f876632d7a02fff94a18730ca2d604d1ffe62"
         },
         {
           "file": "pcg_materials_assets_deathdissolvefogmat.bundle",
           "name": "cc89b4017e363b83b335a7ecfcfc35d0.bundle",
-          "size": 718580,
-          "sha256": "3aebc06094ce21182c267dbf329f9cf076ea7ce5533adc92934797cd880a2302"
+          "size": 723186,
+          "sha256": "d5fa25795b3d6483fe41ec25774b6fb78cc41f26b83d29e3c0dc0f139e8f8946"
         },
         {
           "file": "pcg_materials_assets_explosionfogaddmat.bundle",
           "name": "d5aaa833f63863433ee4741b27ceb403.bundle",
-          "size": 623359,
-          "sha256": "db4ec1e266757e4a92337dc892a36c7b5144e8042af16cb1e24dcdeff9f73b83"
+          "size": 628135,
+          "sha256": "8d4d350e3b5d3ccaaf26296ffa08cad44086f7643469a71fe1d3866f09334563"
         },
         {
           "file": "pcg_materials_assets_explosionfogbrightmat.bundle",
           "name": "7ec201d82179bc3637d058db2d4715d4.bundle",
-          "size": 623352,
-          "sha256": "ae4b1023e543b98b7eca664875e5638af7d19b07270217f195b48c0fc0edc4c8"
+          "size": 628111,
+          "sha256": "16544e1148ac26ae372c32ee9eb056667e52816f79e0fc26d92bb5d8a21449c1"
         },
         {
           "file": "pcg_materials_assets_explosionsmokemultmat.bundle",
           "name": "a359ae9846f5ec53cda39221d8cc426a.bundle",
-          "size": 3458464,
-          "sha256": "6f81dee5558ec7b524639d77fdb0ac46eda74bb3deca0c38fa6e0cb3cfbdca26"
+          "size": 3462803,
+          "sha256": "cebbf31cb64f4b67da584cf299b23ce0f7cd5f98c616659363765f58491e17ce"
         },
         {
           "file": "pcg_materials_assets_invisibletexmat.bundle",
@@ -22810,44 +22810,44 @@
         {
           "file": "pcg_materials_assets_leaves_white_mat.bundle",
           "name": "e4f8eeab43ec1ba5441528f1bd6dfcf2.bundle",
-          "size": 358774,
-          "sha256": "446681d01bd516c6579ad223d5e27b9f4a9d210c5f2bb0801b7afb87584e7a3b"
+          "size": 359836,
+          "sha256": "7ce3d56a296fee9ee0bea56f2b0abee8e80f0344548025d7abc22b126afd11a4"
         },
         {
           "file": "pcg_materials_assets_lightboltdissolve_mat.bundle",
           "name": "531e8918e4810fc24294aad5707a9ea0.bundle",
-          "size": 134950,
-          "sha256": "522b9b5b10f78f52e7e56bd4fd4a31ef40490ff7e701298120bd188bf115b266"
+          "size": 135109,
+          "sha256": "8fbaef78933b3716e926ba6b1f499fc153d6503d63aabfa8de53578a169bb864"
         },
         {
           "file": "pcg_materials_assets_particletrailmat.bundle",
           "name": "e47bccb7c34fc3c5d18fb252b0982348.bundle",
-          "size": 135009,
-          "sha256": "be95c7eed0b63ca1dda59a48989429c0e4c44f4c83bb7df12066141f956fe13a"
+          "size": 136877,
+          "sha256": "196e76a36fd67ca4df65c99b5fd6422d5eec6e19e65192504c87821f476a4bea"
         },
         {
           "file": "pcg_materials_assets_scoundrelflashsphere_mat.bundle",
           "name": "0c9563f606e138060135ea9c4a9b07e7.bundle",
-          "size": 134790,
-          "sha256": "b96344db403d5b15e901e387c9dbf54d55bf54b573c4a3bb52f58aa514a94a73"
+          "size": 136667,
+          "sha256": "1af3b54b2574d56f9a714241f8678e18fa0b05e1c5d6996da5c274abb639771a"
         },
         {
           "file": "pcg_materials_assets_shoutcircle_mat.bundle",
           "name": "6599dd704149935cbf2a503c308e931e.bundle",
-          "size": 55912,
-          "sha256": "4cfe4495e42a0bdfdd2710c004800722a71392a6925e5865ad39f1f5d8251950"
+          "size": 56347,
+          "sha256": "c716bd5406df54669b1e256d3fb24a8f85c3a43d1b9589e1e6a21435e48a7694"
         },
         {
           "file": "pcg_materials_assets_spark_bits_mat.bundle",
           "name": "c47fdce0968ddcfde1623a12d14a8723.bundle",
-          "size": 38560,
-          "sha256": "f8e5d8163ea33a59bacc39d1bbc263de11864aa24921d64e86c67e7266a33753"
+          "size": 38672,
+          "sha256": "4d5c962759e9212e77ea616088de36587e0652961620872a71b5800bb91d7ff6"
         },
         {
           "file": "pcg_materials_assets_sparks_gpu_mat.bundle",
           "name": "dbfcc32f5bc1dfc72296001467a099d0.bundle",
-          "size": 30844,
-          "sha256": "73088ba7e61237981f6f79e5f4f045dee0ec11658c906b165f917b195fb6a8e3"
+          "size": 31030,
+          "sha256": "2e3257eee5e69f76e801a4399a6757e82a093f2d138e42b4ad5c6e464ee541ef"
         },
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
@@ -22858,26 +22858,26 @@
         {
           "file": "positiveringmat_assets_all.bundle",
           "name": "3b783a6e849d51f98e9cfae3d21fd88e.bundle",
-          "size": 496453,
-          "sha256": "30df7ae58a0ffaa07d8b4a7608b8fe42ec147f349180c24f837f7cbdea8ca34e"
+          "size": 498514,
+          "sha256": "b324b26b8d6fb1abb6b17de228bb7ab4028e8bcf03227f7abf61d0517b4c6653"
         },
         {
           "file": "quartermaster_rune_wheel_magic_mat_assets_all.bundle",
           "name": "d2fe9ad688f150c538209552d4582e6e.bundle",
-          "size": 485281,
-          "sha256": "b3e2f50e29710afb69167a97cb111ac630dc78adf0c18e4ad2828caa33aa101d"
+          "size": 488427,
+          "sha256": "c2b1de1e5353d532128261d9fb57f41092037e8784630ce63a1182700620d0a1"
         },
         {
           "file": "smallflame_assets_all.bundle",
           "name": "242eec81d1cb458afc79ce12a9604558.bundle",
-          "size": 672334,
-          "sha256": "18027c1c3f16342bfabb733f07705f3e0a2ccd1c4c5222e67b31f21b203d8cf5"
+          "size": 673916,
+          "sha256": "70729e293bd19783169824af5ce5b26fff556246691f1e1dd4bde87509c99d27"
         },
         {
           "file": "spellweaver_lightning_beam_mat_assets_all.bundle",
           "name": "b6d3020697740a25290b4dfec4b38cd0.bundle",
-          "size": 9712,
-          "sha256": "5eeddc6a456645050f00752782bd6b0a9d6b375daed26e1024118320aa300e73"
+          "size": 9727,
+          "sha256": "a15f9b34c7cfe9db26e31f2d2966fd134ffe3232ce1058e22b04eb4874fc184d"
         }
       ],
       "sounds": {

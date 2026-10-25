@@ -5,6 +5,7 @@ Model: Sunkeeper
 Race: Valrath
 Traits: [ Armored, Nimble, Persuasive ]
 Complexity: 1
+ElementalAffinities: [ Light ]
 MasteryIDs: [ Sunkeeper_MASTERY_1, Sunkeeper_MASTERY_2 ]
 RetireCampaignSection: GH.Sunkeeper
 DefaultSkin: 1

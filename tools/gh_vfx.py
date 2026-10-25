@@ -424,10 +424,7 @@ def export(gh, cls, out, entry, warn=print, wanted=None):
     bundles = []
     for b in sorted(collector.shipped):
         src = gh / BUNDLES / b
-        dst = out / "bundles" / b
-        dst.parent.mkdir(parents=True, exist_ok=True)
-        if not dst.exists() or dst.stat().st_size != src.stat().st_size:
-            shutil.copyfile(src, dst)
+        dst = gh_model.copy_bundle(src, out / "bundles" / b)   # textures unflagged for mip streaming, like the hero's
         inner = next((Path(k).name for k in world.env.files if Path(k).name == b), b)
         name = None
         for cab, f in world.files.items():
@@ -436,7 +433,7 @@ def export(gh, cls, out, entry, warn=print, wanted=None):
                     if o.type.name == "AssetBundle":
                         name = world.tree(o).get("m_Name")
                         break
-        bundles.append({"file": inner, "name": name, "size": src.stat().st_size,
-                        "sha256": hashlib.sha256(src.read_bytes()).hexdigest()})
+        bundles.append({"file": inner, "name": name, "size": dst.stat().st_size,
+                        "sha256": hashlib.sha256(dst.read_bytes()).hexdigest()})
     entry["not_shipped"] = [n for n in entry.get("not_shipped", []) if n not in collector.shipped]
     return {"effects": effects, "effect_materials": collector.materials, "effect_bundles": bundles}
