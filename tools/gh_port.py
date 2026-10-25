@@ -95,6 +95,32 @@ CLASS_EXTRAS = {
         "Complexity": "1",
         "HeroStats": {"Melee": 5, "Ranged": 1, "Mobility": 3, "Support": 1, "Defense": 5, "Control": 3},
     },
+    # Group 1 (2026-10-25). Race and traits from the crossover sheets; complexity from Gloomhaven digital's own
+    # difficulty line (Low 1, Medium 2); hero stats our estimate from its role line and the cards.
+    "Scoundrel": {   # Melee Damage, Low
+        "Race": "Human",
+        "Traits": "[ Chaotic, Nimble, Resourceful ]",
+        "Complexity": "1",
+        "HeroStats": {"Melee": 6, "Ranged": 2, "Mobility": 4, "Support": 1, "Defense": 1, "Control": 2},
+    },
+    "Sunkeeper": {   # Melee Tank/Support, Low
+        "Race": "Valrath",
+        "Traits": "[ Armored, Nimble, Persuasive ]",
+        "Complexity": "1",
+        "HeroStats": {"Melee": 4, "Ranged": 1, "Mobility": 2, "Support": 4, "Defense": 6, "Control": 1},
+    },
+    "Sawbones": {   # Melee Damage/Support, Low
+        "Race": "Human",
+        "Traits": "[ Educated, Persuasive, Resourceful ]",
+        "Complexity": "1",
+        "HeroStats": {"Melee": 4, "Ranged": 1, "Mobility": 2, "Support": 6, "Defense": 2, "Control": 2},
+    },
+    "Quartermaster": {   # Melee Damage/Support, Medium
+        "Race": "Valrath",
+        "Traits": "[ Armored, Resourceful, Strong ]",
+        "Complexity": "2",
+        "HeroStats": {"Melee": 5, "Ranged": 2, "Mobility": 2, "Support": 4, "Defense": 4, "Control": 2},
+    },
 }
 
 # Active-bonus icons for the actives gh_layout's general mapping (Shield, Retaliate...) doesn't fit: {ability: icon},
@@ -211,10 +237,13 @@ def convert_anim_overloads(s):
 
 
 def convert_card(name, s, warn, icons=None):
-    m = re.search(r"^ID:\s*(\d+)\s*$", s, re.M)
+    # "ID: 417 # to 423": a supply card (the Sawbones' medical packs) notes the IDs of its copies after the ID
+    m = re.search(r"^ID:\s*(\d+)\s*(?:#\s*to\s*(\d+)\s*)?$", s, re.M)
     if not m:
         raise ValueError(f"{name}: no card ID")
     new_id = CARD_ID_OFFSET + int(m.group(1))
+    if m.group(2):
+        s = s[:m.start(2)] + str(CARD_ID_OFFSET + int(m.group(2))) + s[m.end(2):]
     s = s[:m.start(1)] + str(new_id) + s[m.end(1):]
     s = convert_enhancements(s, lambda w: warn(f"{name}: {w}"))
     s = convert_anim_overloads(s)
@@ -377,8 +406,8 @@ def main():
             warnings.append(f"{cls}: no pictures ({e})")
         else:
             try:
-                files, roles = gh_art.export(gh, cls, args.out / "art" / cls)
-                print(f"{cls}: {len(files)} pictures from Gloomhaven's {len(roles)}")
+                pictures, roles = gh_art.export(gh, cls, args.out / "art" / cls)
+                print(f"{cls}: {len(pictures)} pictures from Gloomhaven's {len(roles)}")
             except Exception as e:  # noqa: BLE001 - art is cosmetic, never block the data
                 warnings.append(f"{cls}: pictures failed: {e}")
 
