@@ -1,11 +1,36 @@
 {
   "_about": "Hand-written test notes for the Brute's effects workbook (tools/gh_testsheet.py). turns: the test hand in play order. states: what Gloomhaven shows for each animator state the cards play. status: what the last in-game run found per state (shown in the sheet so only the open checks need playing). actions: effects that are not on a card.",
   "turns": [
-    {"top": "SpareDagger", "bottom": "BruteForce", "order": "Bottom first: move 2 toward the enemies, shield up, then throw.", "setup": "An enemy within 3 hexes after the move."},
-    {"top": "SweepingBlow", "bottom": "UnstoppableCharge", "order": "Bottom first: move 4 next to as many enemies as you can, stun them, then the sweep.", "setup": "At least one adjacent enemy after the move."},
-    {"top": "DevastatingHack", "bottom": "OverwhelmingAssault", "order": "Top first: the swing, then move 3 to another enemy and push it.", "setup": "A second enemy still standing."},
-    {"top": "ShieldBash", "bottom": "Quietus", "order": "Bottom first: move 3 next to an enemy, the attack bonus, then the bash.", "setup": "An enemy within 3 hexes."},
-    {"top": "SelfishRetribution", "bottom": "EyeForAnEye", "order": "Bottom first: heal yourself (works at full health), then move 1 and loot.", "setup": "A coin within 2 hexes after the move."}
+    {
+      "top": "SpareDagger",
+      "bottom": "BruteForce",
+      "order": "Bottom first: move 2 toward the enemies, shield up, then throw.",
+      "setup": "An enemy within 3 hexes after the move."
+    },
+    {
+      "top": "SweepingBlow",
+      "bottom": "UnstoppableCharge",
+      "order": "Bottom first: move 4 next to as many enemies as you can, stun them, then the sweep.",
+      "setup": "At least one adjacent enemy after the move."
+    },
+    {
+      "top": "DevastatingHack",
+      "bottom": "OverwhelmingAssault",
+      "order": "Top first: the swing, then move 3 to another enemy and push it.",
+      "setup": "A second enemy still standing."
+    },
+    {
+      "top": "ShieldBash",
+      "bottom": "Quietus",
+      "order": "Bottom first: move 3 next to an enemy, the attack bonus, then the bash.",
+      "setup": "An enemy within 3 hexes."
+    },
+    {
+      "top": "SelfishRetribution",
+      "bottom": "EyeForAnEye",
+      "order": "Bottom first: heal yourself (works at full health), then move 1 and loot.",
+      "setup": "A coin within 2 hexes after the move."
+    }
   ],
   "states": {
     "Attack": "Plain one-handed sword swing with the Brute's standard swing sound and the weapon impact; the hit flash on the target.",
@@ -21,30 +46,54 @@
     "Jump": "A jump move: he leaps hex to hex (take-off, flight, landing), attacking each enemy he passes over with the plain swing."
   },
   "status": {
-    "Attack": "Passed 25 Oct. Re-levelled since (a little louder): quick listen.",
-    "Attack_AOE_Cone": "RETEST: was a little quiet; louder since 25 Oct.",
-    "Attack_AOE_Radial": "RETEST: was a little quiet; louder since 25 Oct.",
-    "RangedAttack": "Passed 25 Oct. Re-levelled since (a little louder): quick listen.",
-    "PowerUp": "Passed 25 Oct.",
-    "Persistent Buff": "Passed 25 Oct.",
-    "Heal": "Passed 25 Oct. Re-levelled since (a little louder): quick listen.",
-    "TargetedShout": "Passed 25 Oct.",
-    "RadialShout": "Passed 25 Oct.",
-    "Loot": "Not tested yet.",
-    "Jump": "Not tested yet.",
-    "Movement": "RETEST: dust was missing; added since 25 Oct.",
-    "Item use": "Not tested yet.",
-    "Taking a hit": "Not tested yet.",
-    "Being pushed or pulled": "Not tested yet.",
-    "Exhaustion": "Not tested yet.",
-    "Scenario end": "Not tested yet."
+    "Attack": "Passed 25 Oct (second run).",
+    "Attack_AOE_Cone": "Passed 25 Oct (second run).",
+    "Attack_AOE_Radial": "Passed 25 Oct (second run).",
+    "RangedAttack": "Passed 25 Oct (second run).",
+    "PowerUp": "Passed 25 Oct (second run).",
+    "Persistent Buff": "Passed 25 Oct (second run).",
+    "Heal": "Passed 25 Oct (second run).",
+    "TargetedShout": "Passed 25 Oct (second run).",
+    "RadialShout": "Passed 25 Oct (second run).",
+    "Loot": "Passed 25 Oct (second run).",
+    "Jump": "Passed 25 Oct (second run).",
+    "Movement": "Passed 25 Oct (second run).",
+    "Item use": "Passed 25 Oct (second run).",
+    "Taking a hit": "Passed 25 Oct (second run).",
+    "Being pushed or pulled": "Passed 25 Oct (second run).",
+    "Exhaustion": "Passed 25 Oct (second run).",
+    "Scenario end": "Passed 25 Oct (second run)."
   },
   "actions": [
-    {"name": "Movement", "how": "Any move.", "expected": "Run cycle with heavy footstep sounds and a dust puff at each footfall."},
-    {"name": "Item use", "how": "Use any item.", "expected": "He raises the item in his right hand (a small glow on the hand about 1.4 s in), then a burst at his feet as it takes effect about 3 s in, with the item-use sound (no grunt)."},
-    {"name": "Taking a hit", "how": "Let an enemy hit him.", "expected": "Hit reaction with one of two grunts, picked at random."},
-    {"name": "Being pushed or pulled", "how": "An enemy push or pull, if the scenario has one.", "expected": "He slides to the new hex with a dust trail under his feet and the hit grunt."},
-    {"name": "Exhaustion", "how": "Optional: let him exhaust.", "expected": "He falls with the exhausted groan, then the game's dissolve."},
-    {"name": "Scenario end", "how": "Win the scenario.", "expected": "Victory pose: the radial roar with its shout ring at his feet and the radial-shout sound."}
+    {
+      "name": "Movement",
+      "how": "Any move.",
+      "expected": "Run cycle with heavy footstep sounds and a dust puff at each footfall."
+    },
+    {
+      "name": "Item use",
+      "how": "Use any item.",
+      "expected": "He raises the item in his right hand (a small glow on the hand about 1.4 s in), then a burst at his feet as it takes effect about 3 s in, with the item-use sound (no grunt)."
+    },
+    {
+      "name": "Taking a hit",
+      "how": "Let an enemy hit him.",
+      "expected": "Hit reaction with one of two grunts, picked at random."
+    },
+    {
+      "name": "Being pushed or pulled",
+      "how": "An enemy push or pull, if the scenario has one.",
+      "expected": "He slides to the new hex with a dust trail under his feet and the hit grunt."
+    },
+    {
+      "name": "Exhaustion",
+      "how": "Optional: let him exhaust.",
+      "expected": "He falls with the exhausted groan, then the game's dissolve."
+    },
+    {
+      "name": "Scenario end",
+      "how": "Win the scenario.",
+      "expected": "Victory pose: the radial roar with its shout ring at his feet and the radial-shout sound."
+    }
   ]
 }
