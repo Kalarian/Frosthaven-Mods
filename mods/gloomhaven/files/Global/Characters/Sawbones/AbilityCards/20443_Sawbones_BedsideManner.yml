@@ -20,7 +20,7 @@ Data:
                         Conditions: [Poison, Wound, Immobilize, Disarm, Stun, Muddle]
                         AnimOverload: None
                     THealSubGiveSupplyCard:
-                        GiveSupplyCard: 424
+                        GiveSupplyCard: 20424
                         Filter:
                             TargetType: Ally
                             ActorType: Player                        

@@ -9,7 +9,7 @@ Data:
     Top:
         Abilities:
             TGiveSupplyCard:
-                GiveSupplyCard: 417
+                GiveSupplyCard: 20417
                 Target: -1
                 Filter:
                     TargetType: Ally
@@ -19,7 +19,7 @@ Data:
     Bottom:
         Abilities:
             TGiveSupplyCard:
-                GiveSupplyCard: 424
+                GiveSupplyCard: 20424
                 Target: -1  
                 Filter:
                     TargetType: Ally

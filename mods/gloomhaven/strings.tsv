@@ -529,3 +529,4 @@ CODEX_Hero_Quartermaster_Title	Quartermaster
 Quartermaster_DESCRIPTION	Skilled Valrath Quartermasters are known for aiding adventuring parties in maximizing the effectiveness of their equipment. After all, what is a warrior without a good sword at his side?
 CODEX_HeroInfo_Quartermaster	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Medium\n\n<b>Strengths:</b>\n• Many item refreshing abilities\n• Moderate offensive and defensive capabilities\n• Jack of all trades\n\n<b>Weaknesses:</b>\n• Master of none\n• Weaker when party lacks good equipment\n• Always packs too much luggage
 Event__Text	Their personal quest complete, the mercenary leaves Frosthaven for good. Someone else will take up the fight.
+GiveSupplyCard	Give Medical Pack

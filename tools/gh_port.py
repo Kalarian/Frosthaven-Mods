@@ -202,6 +202,8 @@ CARD_FIXES = {
 }
 TEXT_FIXES = {
     "GH_225_B": "You and all adjacent normal enemies suffer 7 damage.",
+    # the ability's name, which Frosthaven looks up when it shows the ability (no card of its own gives supply cards)
+    "GiveSupplyCard": "Give Medical Pack",
 }
 
 
@@ -301,6 +303,10 @@ def convert_card(name, s, warn, icons=None):
     if m.group(2):
         s = s[:m.start(2)] + str(CARD_ID_OFFSET + int(m.group(2))) + s[m.end(2):]
     s = s[:m.start(1)] + str(new_id) + s[m.end(1):]
+    # "GiveSupplyCard: 417" names a supply card by its card ID, which moves with the others: left as it was, the game
+    # finds no supply card of that ID and hands over nothing (First Aid's Medical Pack never arrived)
+    s = re.sub(r"^([ \t]*GiveSupplyCard:[ \t]*\[?)([0-9][0-9, ]*)",
+               lambda g: g.group(1) + ", ".join(str(CARD_ID_OFFSET + int(x)) for x in re.findall(r"\d+", g.group(2))), s, flags=re.M)
     s = convert_enhancements(s, lambda w: warn(f"{name}: {w}"))
     s = convert_anim_overloads(s)
     s = CARD_TEXT_KEY.sub(lambda k: f"$GH_{k.group(1)}$", s)

@@ -21,7 +21,7 @@ Data:
     Bottom:
         Abilities:
             TGiveSupplyCard:
-                GiveSupplyCard: 417
+                GiveSupplyCard: 20417
                 Filter:
                     TargetType: Ally
                     ActorType: Player

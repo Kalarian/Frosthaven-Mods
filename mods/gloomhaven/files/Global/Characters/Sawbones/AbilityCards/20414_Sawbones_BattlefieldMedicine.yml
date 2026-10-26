@@ -9,7 +9,7 @@ Data:
     Top:
         Abilities:
             TGiveSupplyCard:
-                GiveSupplyCard: 424
+                GiveSupplyCard: 20424
                 Filter:
                     TargetType: Ally
                     ActorType: Player
