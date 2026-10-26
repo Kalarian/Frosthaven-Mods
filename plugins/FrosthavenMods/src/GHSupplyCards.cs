@@ -111,7 +111,35 @@ namespace FrosthavenMods
             if (abilityCard == null || !abilityCard.SupplyCard || __instance.AllCards.Any(x => x.AbilityCard == abilityCard)) return true;
             CardsHandUI holder = Singleton<CardsHandManager>.Instance?.cardHandsUI?.FirstOrDefault(h => h != null && h != __instance && h.AllCards.Any(x => x.AbilityCard == abilityCard));
             if (holder == null) return true;
+            // used mid-turn by the hero acting: its card stays on screen until that turn ends. Removed at once, the turn's
+            // card controller lost the first card played and offered no half of the second (the turn locked up)
+            if (holder.PlayerActor != null && GameState.CurrentActor == holder.PlayerActor)
+            {
+                CoroutineHost.Get().StartCoroutine(AfterTurn(holder, abilityCard));
+                return false;
+            }
             holder.DestroyCardUI(abilityCard);
+            return false;
+        }
+
+        private static System.Collections.IEnumerator AfterTurn(CardsHandUI holder, CAbilityCard card)
+        {
+            CActor actor = holder.PlayerActor;
+            while (GameState.CurrentActor == actor && holder != null) yield return null;
+            if (holder != null && holder.AllCards.Any(x => x.AbilityCard == card)) holder.DestroyCardUI(card);
+        }
+
+        /// <summary>"View all cards" copies each card's state from the hand; a supply card already used is in no hand any
+        /// more, so the lookup came back empty and the window threw ("Could not find a card with ID 20417"). It shows as
+        /// discarded instead.</summary>
+        [HarmonyPatch(typeof(CardsHandPreviewUI), "CopyState")]
+        [HarmonyPrefix]
+        private static bool UsedSupplyCard(AbilityCardUI cardUI, CardsHandUI ___cardHand)
+        {
+            if (cardUI?.AbilityCard == null || !cardUI.AbilityCard.SupplyCard || ___cardHand == null) return true;
+            if (___cardHand.AllCards.Any(x => x.AbilityCard?.ID == cardUI.AbilityCard.ID)) return true;
+            cardUI.SetType(CardPileType.Discarded);
+            cardUI.UpdateCard();
             return false;
         }
 
