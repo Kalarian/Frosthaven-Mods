@@ -183,6 +183,36 @@ ANIM_OVERLOADS = {
 }
 ANIM_OVERLOAD_LINE = re.compile(r"^([ \t]*AnimOverload:[ \t]*)(\w+)(?=[ \t]*\r?$)", re.M)
 
+# Cards Frosthaven can't run as Gloomhaven wrote them, changed by decision (each change was the author's choice), by the
+# converted card ID: [(pattern, replacement)] on the converted file; a pattern that no longer matches stops the
+# conversion, so a fix never silently stops applying. TEXT_FIXES replace the card text to match.
+CARD_FIXES = {
+    # Catastrophic Bomb, bottom: "you and all normal enemies within the targeted area suffer 7 damage". Frosthaven has
+    # no aimed area for Damage abilities (no card of its own has one): its damage preview throws on it and the damage
+    # can't be confirmed. Decided 2026-10-26: Frosthaven's own pattern instead, all adjacent normal enemies (up to six
+    # hexes, where Gloomhaven's aimed area held two).
+    20225: [
+        (r'^([ \t]*)AreaEffect: "0,0,G\|2,0,R\|1,1,R"(\r?)$',
+         lambda m: "\n".join(f"{m.group(1)}{line}{m.group(2)}" for line in
+                             ("Range: 1", "Target: -1", "Targeting: Range", "AutoTrigger: True", "CanSkip: False"))),
+        (r'^([ \t]*)- ColumnWidths: "65,30"\r?\n[ \t]*- Column:\r?\n[ \t]*- Row: "\$GH_225_B\$"\r?\n'
+         r'[ \t]*- Row: "<size=50%> "\r?\n[ \t]*- Column: "£Area£"(?=\r?$)',
+         lambda m: f'{m.group(1)}- Row: "$GH_225_B$"'),
+    ],
+}
+TEXT_FIXES = {
+    "GH_225_B": "You and all adjacent normal enemies suffer 7 damage.",
+}
+
+
+def apply_card_fixes(new_id, s):
+    for pattern, repl in CARD_FIXES.get(new_id, []):
+        s, n = re.subn(pattern, repl, s, flags=re.M)
+        if n != 1:
+            sys.exit(f"card {new_id}: a CARD_FIXES pattern matched {n} times, not once (the source changed?): {pattern[:60]}")
+    return s
+
+
 KEY_RE = re.compile(r"\$([A-Za-z0-9_]+)\$")
 CARD_TEXT_KEY = re.compile(r"\$(\d{3}_[TB][A-Za-z0-9_]*)\$")
 
@@ -399,6 +429,12 @@ def main():
         converted = []
         for n in cards:
             new_id, s = convert_card(n, text(files[n]), warnings.append, CLASS_ICONS.get(cls))
+            s = apply_card_fixes(new_id, s)
+            # Frosthaven can't aim a Damage ability's area (none of its own cards has one; the preview throws and
+            # the damage can't be confirmed): such a card needs a CARD_FIXES entry
+            for blk in re.finditer(r"^( +)\w+:\r?\n((?:\1 +.*\r?\n)+)", s.split("\nLayout:")[0], re.M):
+                if re.search(r"^\s+Damage:", blk.group(2), re.M) and "AreaEffect" in blk.group(2):
+                    warnings.append(f"{n}: a Damage ability with an AreaEffect: Frosthaven can't aim it (add a CARD_FIXES entry)")
             anim_names.update(m.group(2) for m in ANIM_OVERLOAD_LINE.finditer(s))
             if new_id in fh_card_ids:
                 sys.exit(f"{n}: card ID {new_id} is taken in Frosthaven")
@@ -545,6 +581,7 @@ def main():
             table.setdefault(f"CODEX_HeroInfo_{cls}", strings[f"{cls}_DESCRIPTION"])
     table.setdefault("Event__Text", "Their personal quest complete, the mercenary leaves Frosthaven for good. "
                                     "Someone else will take up the fight.")
+    table.update(TEXT_FIXES)   # card text that follows a CARD_FIXES change
     missing = sorted(k for k in used_keys if k not in table)
     table = {k: fh_sprites.to_fh(v) for k, v in table.items()}
     for k, v in table.items():

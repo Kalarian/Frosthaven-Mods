@@ -231,7 +231,7 @@ GH_219_T	At the end of each of your turns, you may discard a card to allow an ad
 GH_221_T	One adjacent ally may <nobr>Refresh <sprite name=Refresh></nobr> all of their spent and consumed items.
 GH_223_T	At the end of each round, <nobr>Refresh <sprite name=Refresh></nobr> one of your spent items.
 GH_224_T	You and all enemies with <nobr>Range <sprite name=Range> 4</nobr> suffer 2 damage.
-GH_225_B	You and all normal enemies within the targeted area suffer 7 damage.
+GH_225_B	You and all adjacent normal enemies suffer 7 damage.
 GH_226_T	If any adjacent ally performs a ranged attack action, that ally gains <nobr>ADD TARGET<sprite name=Target></nobr> for the attack.
 GH_228_B	Any one ally may <sprite name=RecoverIcon> all of their discarded cards.
 GH_228_T	Each time you long rest, <nobr>Refresh <sprite name=Refresh></nobr> one of your consumed items.

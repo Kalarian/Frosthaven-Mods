@@ -19,7 +19,11 @@ Data:
         Abilities:
             BDamage:
                 Damage: 7
-                AreaEffect: "0,0,G|2,0,R|1,1,R"
+                Range: 1
+                Target: -1
+                Targeting: Range
+                AutoTrigger: True
+                CanSkip: False
                 Filter:
                     TargetType: Enemy
                     EnemyType: Normal
@@ -39,8 +43,4 @@ Layout:
             - Row: "<size=50%> "
         - Column: "£Area£"
     Bottom:
-        - ColumnWidths: "65,30"
-        - Column:
-            - Row: "$GH_225_B$"
-            - Row: "<size=50%> "
-        - Column: "£Area£"
+        - Row: "$GH_225_B$"
