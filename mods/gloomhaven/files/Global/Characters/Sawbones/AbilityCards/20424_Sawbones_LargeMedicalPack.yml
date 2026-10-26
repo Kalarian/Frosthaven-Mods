@@ -1,7 +1,7 @@
 Parser: AbilityCard
 Name: $ABILITY_CARD_LargeMedicalPack$
 Character: SawbonesID
-ID: 20424 # to 20427
+ID: 20424
 Level: X
 Initiative: 30
 SupplyCard: True

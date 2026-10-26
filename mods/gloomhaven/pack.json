@@ -344,11 +344,11 @@
       ]
     }
   ],
-  "data_sha": "9a6d7d75f210771cad8cf759a2df2c4d86913aa87c5be4ffd40fa324cb54f4ce",
+  "data_sha": "59e280291748adff23fb4f622ba8d6a7c893359a96af9b4ad44920c6f72388f9",
   "source": {
     "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
     "buildid": "20286313",
-    "files": 214
+    "files": 223
   },
   "model": {
     "Brute": {

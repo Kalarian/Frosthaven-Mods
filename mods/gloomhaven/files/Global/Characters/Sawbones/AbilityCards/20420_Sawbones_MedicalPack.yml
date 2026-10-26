@@ -1,0 +1,44 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MedicalPack$
+Character: SawbonesID
+ID: 20420
+Level: X
+Initiative: 50
+SupplyCard: True
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 4
+                Filter: Self
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 4
+                Filter: Self
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$MedPack$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$MedPack$"

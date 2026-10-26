@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FHGUI.DTO;
@@ -58,6 +59,60 @@ namespace FrosthavenMods
                 if (removed > 0)
                     Plugin.Log.LogInfo($"Gloomhaven supply cards: {removed} taken out of {character.CharacterID}'s hand before the scenario (a supply card is never held)");
             }
+        }
+
+        /// <summary>A supply card comes in copies, each a card of its own (Medical Pack 20417..20423), since two in one hand
+        /// may not share an ID (the hand UI looks cards up by ID and throws on a duplicate). The ability names the first
+        /// copy; it is given the first copy of that card that no hero holds right now, so every give is one card, as in
+        /// Gloomhaven. The ability object is reused, so its list is put back afterwards.</summary>
+        [HarmonyPatch(typeof(CAbilityGiveSupplyCard), nameof(CAbilityGiveSupplyCard.ApplyToActor))]
+        [HarmonyPrefix]
+        private static void FreeCopy(CAbilityGiveSupplyCard __instance, out List<int> __state)
+        {
+            __state = null;
+            if (!(__instance.TargetingActor is CPlayerActor giver) || __instance.SupplyCardIDs == null || Ids.Count == 0) return;
+            var held = new HashSet<int>();
+            foreach (CPlayerActor p in ScenarioManager.Scenario?.PlayerActors ?? new List<CPlayerActor>())
+            {
+                CCharacterClass cc = p?.CharacterClass;
+                if (cc == null) continue;
+                foreach (var pile in new[] { cc.HandAbilityCards, cc.RoundAbilityCards, cc.DiscardedAbilityCards, cc.LostAbilityCards, cc.ActivatedAbilityCards })
+                    foreach (CAbilityCard c in pile ?? new List<CAbilityCard>()) if (c != null) held.Add(c.ID);
+            }
+            var picked = new List<int>();
+            foreach (int id in __instance.SupplyCardIDs)
+            {
+                CAbilityCard named = giver.CharacterClass.SupplyCards.FirstOrDefault(c => c.ID == id);
+                CAbilityCard free = named == null ? null : giver.CharacterClass.SupplyCards
+                    .Where(c => c.Name == named.Name && !held.Contains(c.ID)).OrderBy(c => c.ID).FirstOrDefault();
+                picked.Add(free?.ID ?? id);
+                if (free != null) held.Add(free.ID);
+            }
+            __state = __instance.SupplyCardIDs;
+            __instance.SupplyCardIDs = picked;
+        }
+
+        [HarmonyPatch(typeof(CAbilityGiveSupplyCard), nameof(CAbilityGiveSupplyCard.ApplyToActor))]
+        [HarmonyFinalizer]
+        private static Exception PutBack(Exception __exception, CAbilityGiveSupplyCard __instance, List<int> __state)
+        {
+            if (__state != null) __instance.SupplyCardIDs = __state;
+            return __exception;
+        }
+
+        /// <summary>A used supply card is cleaned up through the class that owns it (the Sawbones), so the game removes its
+        /// card from the owner's hand on screen, while it sits in the receiver's: "Unable to find attached card UI to
+        /// destroy", and the game's error screen. Frosthaven never hands cards between heroes, so the path was never
+        /// walked. A supply card not in this hand is removed from whichever hand holds it.</summary>
+        [HarmonyPatch(typeof(CardsHandUI), nameof(CardsHandUI.DestroyCardUI))]
+        [HarmonyPrefix]
+        private static bool FromItsHolder(CardsHandUI __instance, CAbilityCard abilityCard)
+        {
+            if (abilityCard == null || !abilityCard.SupplyCard || __instance.AllCards.Any(x => x.AbilityCard == abilityCard)) return true;
+            CardsHandUI holder = Singleton<CardsHandManager>.Instance?.cardHandsUI?.FirstOrDefault(h => h != null && h != __instance && h.AllCards.Any(x => x.AbilityCard == abilityCard));
+            if (holder == null) return true;
+            holder.DestroyCardUI(abilityCard);
+            return false;
         }
 
         private static readonly HashSet<string> Reported = new HashSet<string>();

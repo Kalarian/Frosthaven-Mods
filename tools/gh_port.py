@@ -442,10 +442,17 @@ def main():
                 if re.search(r"^\s+Damage:", blk.group(2), re.M) and "AreaEffect" in blk.group(2):
                     warnings.append(f"{n}: a Damage ability with an AreaEffect: Frosthaven can't aim it (add a CARD_FIXES entry)")
             anim_names.update(m.group(2) for m in ANIM_OVERLOAD_LINE.finditer(s))
-            if new_id in fh_card_ids:
-                sys.exit(f"{n}: card ID {new_id} is taken in Frosthaven")
-            stem = re.sub(r"^\d+", str(new_id), Path(n).name)
-            write(f"{base}/AbilityCards/{stem}", s)
+            # "ID: 20417 # to 20423": a supply card with copies (the Sawbones' medical packs). Frosthaven reads the range
+            # as a comment, so one card stood for all of them and two in one hand shared an ID (the hand UI threw):
+            # each copy is a card of its own, and the plugin hands out a copy nobody holds (GHSupplyCards)
+            copies = re.search(r"^ID:\s*(\d+)\s*#\s*to\s*(\d+)\s*$", s, re.M)
+            ids = range(int(copies.group(1)), int(copies.group(2)) + 1) if copies else [new_id]
+            for cid in ids:
+                if cid in fh_card_ids:
+                    sys.exit(f"{n}: card ID {cid} is taken in Frosthaven")
+                one = s[:copies.start()] + f"ID: {cid}" + s[copies.end():] if copies else s
+                stem = re.sub(r"^\d+", str(cid), Path(n).name)
+                write(f"{base}/AbilityCards/{stem}", one)
             converted.append(s)
         declared = re.findall(r"\w+", CLASS_EXTRAS[cls].get("ElementalAffinities", ""))
         often = infused_often(converted)
