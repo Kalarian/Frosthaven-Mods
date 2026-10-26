@@ -648,6 +648,10 @@ def main():
         print(f"{len(missing)} text keys not in Gloomhaven's English text either (Frosthaven may have them): "
               + ", ".join(missing))
     print(f"wrote {len(written)} files + {len(table)} strings to {args.out}")
+    # the static checks (unknown ability keys, dead enhancement slots, empty halves) run on every conversion
+    import subprocess
+    if subprocess.call([sys.executable, str(Path(__file__).resolve().parent / "packcheck.py"), str(args.out)]) != 0:
+        sys.exit("packcheck found problems in the converted pack (above)")
 
 
 if __name__ == "__main__":

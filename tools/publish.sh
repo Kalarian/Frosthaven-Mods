@@ -16,6 +16,8 @@ echo "$VER" > VERSION
 sed -i -E "s#<Version>[^<]*</Version>#<Version>$VER</Version>#" plugins/FrosthavenMods/FrosthavenMods.csproj
 sed -i -E "s#(public const string Version = \")[^\"]*#\1$VER#" plugins/FrosthavenMods/src/Plugin.cs
 python -I tools/build_guide.py
+# the content pack's static checks (dead enhancement slots, unknown ability keys) gate the release
+python tools/packcheck.py mods/gloomhaven
 python -I tools/pack_zip.py
 # every game hook must still resolve against the installed game (pack_zip just built the plugin)
 dotnet run --project tools/hookcheck -c Release
