@@ -157,13 +157,21 @@ CLASS_ICONS = {
     "Quartermaster": {"TActive": "Refresh"},                             # Refreshment: refresh an item on each long rest
 }
 
-# Slot shape for "Enhancements: N", by the ability key it sits under (from counting Frosthaven's own cards).
+# Slot shape for "Enhancements: N", by the ability key it sits under, so a ported card enhances the way Frosthaven's
+# own cards do (counted over Frosthaven's ~700 slots: attack diamond, move circle, heal diamond-plus; shield, retaliate,
+# range, target, push and pull square; its Stun and Bane abilities diamond, Bless, Ward and Regenerate diamond-plus).
+# A condition ability has no number, so a square there (+1 only) would offer nothing: negative conditions get a
+# diamond, positive ones a diamond-plus.
 ENHANCEMENT_SLOT = {
     "Attack": "DiamondEnhancements",
     "Move": "CircleEnhancements",
     "Heal": "DiamondPlusEnhancements",
+    **dict.fromkeys(("Stun", "Immobilize", "Disarm", "Wound", "Poison", "Muddle", "Curse", "Bane"), "DiamondEnhancements"),
+    **dict.fromkeys(("Bless", "Strengthen", "Invisible", "Ward", "Regenerate"), "DiamondPlusEnhancements"),
 }
 DEFAULT_SLOT = "SquareEnhancements"
+# Frosthaven's own moves granted to an ally take a square (8 of 9)
+ALLY_MOVE_SLOT = "SquareEnhancements"
 
 # Gloomhaven perk keys Frosthaven's perk parser rejects -> Frosthaven perk flag
 PERK_FLAG_KEYS = ("IgnoreNegativeItemEffects", "IgnoreNegativeScenarioEffects")
@@ -262,13 +270,19 @@ def convert_enhancements(s, warn):
         if not m:
             continue
         indent = len(m.group(1))
-        parent = None
+        parent = ability = None
         for j in range(i - 1, -1, -1):
-            pm = re.match(r"^(\s*)([A-Za-z]+):", lines[j])
+            pm = re.match(r"^(\s*)(\w+):", lines[j])
             if pm and len(pm.group(1)) < indent:
-                parent = pm.group(2)
-                break
+                if parent is None:
+                    parent = pm.group(2)
+                else:
+                    ability = pm.group(2)   # the ability's own name (TAllyMove), one level up
+                    break
+                indent = len(pm.group(1))
         slot = ENHANCEMENT_SLOT.get(parent, DEFAULT_SLOT)
+        if parent == "Move" and ability and "Ally" in ability:
+            slot = ALLY_MOVE_SLOT
         if parent not in ENHANCEMENT_SLOT and parent not in ("Shield", "Retaliate", "Push", "Pull", "Target", "Range"):
             warn(f"enhancement under {parent!r}: using {slot}")
         lines[i] = ln.replace("Enhancements:", slot + ":", 1)

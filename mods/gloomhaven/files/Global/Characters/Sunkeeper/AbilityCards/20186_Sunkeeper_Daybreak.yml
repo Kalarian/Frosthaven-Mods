@@ -32,7 +32,7 @@ Data:
             BBless:
                 AnimOverload: PositiveBuffTargeted
                 Bless:
-                    SquareEnhancements: 1
+                    DiamondPlusEnhancements: 1
                 Filter: Ally
 Layout:
     Top:

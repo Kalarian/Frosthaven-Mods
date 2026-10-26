@@ -15,7 +15,7 @@ Data:
                 AnimOverload: MeleeSmite
             TStrengthen:
                 Strengthen:
-                    SquareEnhancements: 1
+                    DiamondPlusEnhancements: 1
                 Range: 1
                 Target: -1
                 Filter: Ally

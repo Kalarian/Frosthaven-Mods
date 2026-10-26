@@ -33,7 +33,7 @@ Data:
             BStun:
                 AnimOverload: RangedSmite
                 Stun:
-                    SquareEnhancements: 1
+                    DiamondEnhancements: 1
                 Filter: Enemy
         Consumes:
             BCLight:

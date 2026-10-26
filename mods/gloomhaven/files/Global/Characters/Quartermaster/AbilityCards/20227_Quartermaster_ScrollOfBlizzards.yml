@@ -21,7 +21,7 @@ Data:
         Abilities:
             BImmobilize:
                 Immobilize:
-                    SquareEnhancements: 1
+                    DiamondEnhancements: 1
                 Range: 1
                 Target: -1
                 Filter: Enemy

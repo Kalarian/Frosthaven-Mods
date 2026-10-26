@@ -28,7 +28,7 @@ Data:
                     CircleEnhancements: 1
             BStun:
                 Stun:
-                    SquareEnhancements: 1
+                    DiamondEnhancements: 1
                 Range: 1
                 Filter: Enemy
                 AnimOverload: TargetedScroll

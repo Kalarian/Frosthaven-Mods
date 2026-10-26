@@ -11,7 +11,7 @@ Data:
             TBless:
                 AnimOverload: PositiveBuffRadial
                 Bless:
-                    SquareEnhancements: 1
+                    DiamondPlusEnhancements: 1
                 Target: -1
                 Filter: Ally
         XP: 1

@@ -33,7 +33,7 @@ Data:
                 Move: 2
             BInvisible:
                 Invisible:
-                    SquareEnhancements: 1
+                    DiamondPlusEnhancements: 1
                 Filter: Self
                 AnimOverload: SelfPowderInvisibility
 Layout:

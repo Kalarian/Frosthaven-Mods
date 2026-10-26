@@ -10,7 +10,7 @@ Data:
         Abilities:
             TInvis:
                 Invisible:
-                    SquareEnhancements: 1
+                    DiamondPlusEnhancements: 1
                 Filter: Self
                 AnimOverload: SelfPowderInvisibility
                 SubAbilities:

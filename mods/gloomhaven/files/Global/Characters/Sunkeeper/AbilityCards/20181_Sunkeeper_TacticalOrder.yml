@@ -14,7 +14,7 @@ Data:
                         TAllyMove:
                             Move:
                                 Amount: 4
-                                CircleEnhancements: 1
+                                SquareEnhancements: 1
                             StrengthIsBase: True
                 Range: 3
                 Filter: Ally

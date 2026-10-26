@@ -24,7 +24,7 @@ Data:
         Abilities:
             BInvisible:
                 Invisible:
-                    SquareEnhancements: 1
+                    DiamondPlusEnhancements: 1
                 Filter: Self
                 AnimOverload: SelfPowderInvisibility
 Layout:

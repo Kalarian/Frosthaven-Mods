@@ -24,7 +24,7 @@ Data:
                     CircleEnhancements: 1
             BWound:
                 Wound:
-                    SquareEnhancements: 1
+                    DiamondEnhancements: 1
                 Target: -1
                 Filter: Enemy
                 AnimOverload: SelfPowderWatchItBurn

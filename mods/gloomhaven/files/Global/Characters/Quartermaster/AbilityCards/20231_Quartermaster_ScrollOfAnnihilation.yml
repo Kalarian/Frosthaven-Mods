@@ -24,7 +24,7 @@ Data:
                     CircleEnhancements: 1
             BDisarm:
                 Disarm: 
-                    SquareEnhancements: 1
+                    DiamondEnhancements: 1
                 Range: 1
                 Target: -1
                 Filter: Enemy
