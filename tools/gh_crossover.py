@@ -1297,7 +1297,8 @@ BattleGoalCondition:
         EnemyFamilies: [FrosthavenMods_LavaGolemAllScenario]
         CharacterIDs:
             ActorID: SummonerID
-        Value: 1"""),
+        Value: 1
+        Amount: 20236"""),
     ("Menagerie", "Perform the summon action of five different ability cards",
      """\
 # NEW TAG: Value different cards whose summon ability was performed (GHMasteries.cs)
