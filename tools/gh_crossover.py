@@ -835,6 +835,266 @@ BattleGoalCondition:
         Value: 6"""),
 ]
 
+# ---------------------------------------------------------------- group 4 (sheets read 2026-10-27, ahead of the port)
+# Spellweaver and Mindthief typed from the sheets (C:\Claude\crossover-sheets) and checked against Gloomhaven
+# Secretariat's transcription; their special perks that need the plugin (Etheric Bond, Lying Low) are text-only passives.
+
+SPELLWEAVER_PERKS = [
+    (1, "Composure", 'Remove one <sprite name="-2">',
+     {"CardsToRemove": "[AMC_Basic_M2]"}),
+    (2, "Focus", 'Replace one <sprite name="-1"> with one <sprite name="+1">',
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Basic_P1]"}),
+    (1, "Winds and Stone", 'Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=CreateAir> <sprite name=Rolling> and one <sprite name="0"> <sprite name=CreateEarth> <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Air_R, AMC_Earth_R]"}),
+    (1, "Light and Shadow", 'Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=CreateLight> <sprite name=Rolling> and one <sprite name="0"> <sprite name=CreateDark> <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Light_R, AMC_Dark_R]"}),
+    (1, "Searing Touch", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Wound>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Wound_P1]"}),
+    (1, "Binding Frost", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Immobilize>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Immobilize_P1]"}),
+    (1, "Thunderclap", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Stun>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Stun_P1]"}),
+    (1, "Hex", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Curse>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Curse_P1]"}),
+    (2, "Inferno", 'Add one <sprite name="+2"> <sprite name=CreateFire>',
+     {"CardsToAdd": "[AMC_Fire_P2]"}),
+    (2, "Blizzard", 'Add one <sprite name="+2"> <sprite name=CreateIce>',
+     {"CardsToAdd": "[AMC_Ice_P2]"}),
+    (1, "Unfazed", "Ignore negative scenario effects",
+     {"Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
+    # answered by the plugin when the class is ported (on a short rest, Reviving Ether comes back from the discard first)
+    (1, "Etheric Bond", "Whenever you short rest, if Reviving Ether is in your discard pile, first return it to your hand",
+     {"Flags": "[Passive]"}),
+]
+
+SPELLWEAVER_MASTERIES = [
+    ("Elemental Mastery", "Infuse and consume all six elements",
+     """\
+# NEW TAG: every element infused at least once and consumed at least once over the scenario (GHMasteries.cs, from the
+# infusion and consumption records)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AllElementsInfusedAndConsumed]
+        CharacterIDs:
+            ActorID: SpellweaverID
+        Value: 1"""),
+    ("Deep Reserves", "Perform four different loss actions twice each",
+     """\
+# NEW TAG: Value different card halves with a lost icon each performed Amount times (GHMasteries.cs, from the ability
+# records' discard type)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_LossActionsRepeated]
+        CharacterIDs:
+            ActorID: SpellweaverID
+        Value: 4
+        Amount: 2"""),
+]
+
+MINDTHIEF_PERKS = [
+    (1, "Nimble", 'Remove two <sprite name="-1">',
+     {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
+    (2, "Hobbling Bite", 'Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=Immobilize> <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Immobilize_R]"}),
+    (1, "Steadied", 'Replace one <sprite name="-2"> with one <sprite name="0">',
+     {"CardsToRemove": "[AMC_Basic_M2]", "CardsToAdd": "[AMC_Basic_P0]"}),
+    (1, "Mind Pull", 'Replace two <sprite name="0"> with three <sprite name="0"> <sprite name=Pull> 1 <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P0]", "CardsToAdd": "[AMC_Pull1_R, AMC_Pull1_R, AMC_Pull1_R]"}),
+    (1, "Confusion", 'Replace two <sprite name="0"> with three <sprite name="0"> <sprite name=Muddle> <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P0]", "CardsToAdd": "[AMC_Muddle_R, AMC_Muddle_R, AMC_Muddle_R]"}),
+    (1, "Sharpened Claws", 'Replace two <sprite name="+1"> with two <sprite name="+2">',
+     {"CardsToRemove": "[AMC_Basic_P1, AMC_Basic_P1]", "CardsToAdd": "[AMC_Basic_P2, AMC_Basic_P2]"}),
+    (2, "Cold Snap", 'Add one <sprite name="+2"> <sprite name=CreateIce>',
+     {"CardsToAdd": "[AMC_Ice_P2]"}),
+    (2, "Frenzy", 'Add two <sprite name="+1"> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_P1_R, AMC_P1_R]"}),
+    (1, "Stunning Blow", 'Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Stun_R]"}),
+    (1, "Disarming Trick", 'Add one <sprite name="0"> <sprite name=Disarm> <sprite name=Rolling> and one <sprite name="0"> <sprite name=Muddle> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Disarm_R, AMC_Muddle_R]"}),
+    (1, "Unfazed", "Ignore negative scenario effects",
+     {"Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
+    # answered by the plugin when the class is ported (monster focus treats her as last in initiative order)
+    (1, "Lying Low", "You are considered to be last in initiative order when determining monster focus",
+     {"Flags": "[Passive]"}),
+]
+
+MINDTHIEF_MASTERIES = [
+    ("Thought Thief", "Trigger the on-attack effect of four different Augments thrice each",
+     """\
+# NEW TAG: Value different augments whose on-attack abilities fired Amount times (GHMasteries.cs; the augment
+# processing in CAbilityAttack is hooked for it)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AugmentsTriggered]
+        CharacterIDs:
+            ActorID: MindthiefID
+        Value: 4
+        Amount: 3"""),
+    ("Untouchable", "Never be targeted by an attack",
+     """\
+# NEW TAG: no attack ever targeted the character (GHMasteries.cs: the attack-target records; a miss counts as targeted)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_NeverAttacked]
+        CharacterIDs:
+            ActorID: MindthiefID
+        Value: 1"""),
+]
+
+ELEMENTALIST_PERKS = [
+    (2, "Steady Hands", 'Remove two <sprite name="-1">',
+     {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
+    (1, "Composure", 'Remove one <sprite name="-2">',
+     {"CardsToRemove": "[AMC_Basic_M2]"}),
+    (1, "Trimmed Deck", 'Remove four <sprite name="0">',
+     {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P0, AMC_Basic_P0, AMC_Basic_P0]"}),
+    (1, "Wide Reach", 'Replace one <sprite name="-1"> with one <sprite name="0"> +1 <sprite name=Target>',
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_AddTarget]"}),
+    (1, "Thunderclap", 'Replace one <sprite name="0"> with one <sprite name="0"> <sprite name=Stun>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Stun_P0]"}),
+    (1, "Searing Touch", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Wound>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Wound_P1]"}),
+    (1, "Focused Power", 'Replace two <sprite name="+1"> with two <sprite name="+2">',
+     {"CardsToRemove": "[AMC_Basic_P1, AMC_Basic_P1]", "CardsToAdd": "[AMC_Basic_P2, AMC_Basic_P2]"}),
+    (1, "Fire Affinity", 'Add four <sprite name="0"> <sprite name=CreateFire>',
+     {"CardsToAdd": "[AMC_Fire, AMC_Fire, AMC_Fire, AMC_Fire]"}),
+    (1, "Ice Affinity", 'Add four <sprite name="0"> <sprite name=CreateIce>',
+     {"CardsToAdd": "[AMC_Ice, AMC_Ice, AMC_Ice, AMC_Ice]"}),
+    (1, "Air Affinity", 'Add four <sprite name="0"> <sprite name=CreateAir>',
+     {"CardsToAdd": "[AMC_Air, AMC_Air, AMC_Air, AMC_Air]"}),
+    (1, "Earth Affinity", 'Add four <sprite name="0"> <sprite name=CreateEarth>',
+     {"CardsToAdd": "[AMC_Earth, AMC_Earth, AMC_Earth, AMC_Earth]"}),
+    (1, "Unfazed", "Ignore negative scenario effects",
+     {"Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
+    # the long-rest half is the game's own perk hook (an infusion of any element, the picker); the scenario-start half
+    # needs the plugin when the class is ported (no perk flag runs abilities at scenario start)
+    (1, "Elemental Proficiency", "At the start of each scenario and whenever you long rest, infuse any one element",
+     {"Flags": "[Passive, ExecuteAbilitiesAfterLongRest]", "Abilities": """\
+    BInfuse:
+        Infuse: [Any]
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        CanUndo: False"""}),
+]
+
+ELEMENTALIST_MASTERIES = [
+    ("Elemental Focus", "Consume at least two different elements with each of four different attack abilities, without ever performing the bottom action of Formless Power or Shaping the Ether",
+     """\
+# NEW TAGS: Value different attack abilities each performed with two different elements consumed (GHMasteries.cs, the
+# consumption records of the attack's action); failed by the bottom of Formless Power (20449) or Shaping the Ether (20450)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AttacksConsumingTwoElements]
+        CharacterIDs:
+            ActorID: ElementalistID
+        Value: 4
+BattleGoalFailCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_UsedCardBottom]
+        CharacterIDs:
+            ActorID: ElementalistID
+        Amount: 20449
+        Value: 1
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_UsedCardBottom]
+        CharacterIDs:
+            ActorID: ElementalistID
+        Amount: 20450
+        Value: 1"""),
+    ("Elemental Surge", "Infuse five or more elements during one of your turns, then consume five or more elements during your following turn",
+     """\
+# NEW TAG: a turn with Amount infusions followed by the character's next turn with Amount consumptions (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_InfuseThenConsume]
+        CharacterIDs:
+            ActorID: ElementalistID
+        Value: 1
+        Amount: 5"""),
+]
+
+SOOTHSINGER_PERKS = [
+    (2, "Steady Voice", 'Remove two <sprite name="-1">',
+     {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
+    (1, "Composure", 'Remove one <sprite name="-2">',
+     {"CardsToRemove": "[AMC_Basic_M2]"}),
+    (1, "Stunning Note", 'Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=Stun>',
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Stun_P0]"}),
+    (1, "Binding Chord", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Immobilize>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Immobilize_P1]"}),
+    (1, "Disarming Tune", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Disarm>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Disarm_P1]"}),
+    (1, "Cutting Verse", 'Replace one <sprite name="0"> with one <sprite name="+2"> <sprite name=Wound>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Wound_P2]"}),
+    (1, "Venomous Verse", 'Replace one <sprite name="0"> with one <sprite name="+2"> <sprite name=Poison>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Poison_P2]"}),
+    (1, "Cursed Verse", 'Replace one <sprite name="0"> with one <sprite name="+2"> <sprite name=Curse>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Curse_P2]"}),
+    (1, "Maddening Verse", 'Replace one <sprite name="0"> with one <sprite name="+3"> <sprite name=Muddle>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Muddle_P3]"}),
+    (2, "Crescendo", 'Replace two <sprite name="+1"> with one <sprite name="+4">',
+     {"CardsToRemove": "[AMC_Basic_P1, AMC_Basic_P1]", "CardsToAdd": "[AMC_Basic_P4]"}),
+    (1, "Encore", 'Add three <sprite name="+1"> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_P1_R, AMC_P1_R, AMC_P1_R]"}),
+    (1, "Dirge", 'Add three <sprite name="0"> <sprite name=Curse> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Curse_R, AMC_Curse_R, AMC_Curse_R]"}),
+    # answered by the plugin when the class is ported (scenario end: 8 XP to every character if her battle goal was met)
+    (1, "Storyteller", "At the end of each scenario, each character in that scenario gains 8 experience if you successfully completed your battle goal",
+     {"Flags": "[Passive]"}),
+]
+
+SOOTHSINGER_MASTERIES = [
+    ("Set List", "On your first turn of the scenario and the turn after each of your rests, perform one Song action that you have not yet performed this scenario",
+     """\
+# NEW TAG: a new song on the first turn and on the turn after every rest (GHMasteries.cs, from the ability and rest records)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_NewSongAfterRests]
+        CharacterIDs:
+            ActorID: SoothsingerID
+        Value: 1"""),
+    ("Full Deck", "Have all 10 monster <sprite name=Curse> cards and all 10 <sprite name=Bless> cards in modifier decks at the same time",
+     """\
+# NEW TAG: a moment with every curse in the monsters' decks and every bless in the party's (GHMasteries.cs, checked at
+# each turn's end from the decks)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AllCursesAndBlessesOut]
+        CharacterIDs:
+            ActorID: SoothsingerID
+        Value: 1"""),
+]
+
 BERSERKER_PERKS = [
     (1, "Light Step", 'Remove two <sprite name="-1">',
      {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
@@ -917,6 +1177,10 @@ CROSSOVER = {
     "RedGuard": {"perks": REDGUARD_PERKS, "masteries": REDGUARD_MASTERIES},
     "Voidwarden": {"perks": VOIDWARDEN_PERKS, "masteries": VOIDWARDEN_MASTERIES},
     "Demolitionist": {"perks": DEMOLITIONIST_PERKS, "masteries": DEMOLITIONIST_MASTERIES},
+    "Spellweaver": {"perks": SPELLWEAVER_PERKS, "masteries": SPELLWEAVER_MASTERIES},
+    "Mindthief": {"perks": MINDTHIEF_PERKS, "masteries": MINDTHIEF_MASTERIES},
+    "Elementalist": {"perks": ELEMENTALIST_PERKS, "masteries": ELEMENTALIST_MASTERIES},
+    "Soothsinger": {"perks": SOOTHSINGER_PERKS, "masteries": SOOTHSINGER_MASTERIES},
 }
 
 
