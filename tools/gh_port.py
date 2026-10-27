@@ -246,6 +246,15 @@ ANIM_OVERLOAD_LINE = re.compile(r"^([ \t]*AnimOverload:[ \t]*)(\w+)(?=[ \t]*\r?$
 # converted card ID: [(pattern, replacement)] on the converted file; a pattern that no longer matches stops the
 # conversion, so a fix never silently stops applying. TEXT_FIXES replace the card text to match.
 CARD_FIXES = {
+    # Wings of the Night (Nightshroud), bottom: "persistent: before each of your attack actions, Move 2". Its active
+    # bonus behaviour StartActionAbility is one no Frosthaven card uses, and in Frosthaven the move it fires throws
+    # (NullReference in CAbilityMove.Perform as the next attack starts: the Group 2 pass, 2026-10-27, run 1 stopped).
+    # Frosthaven's own shape for "a move you take during your turn": a toggle bonus (DuringTurnAbility) the player
+    # activates before attacking, once per action.
+    20270: [
+        (r"^([ \t]*)Behaviour: StartActionAbility(\r?)$",
+         lambda m: f"{m.group(1)}Behaviour: DuringTurnAbility{m.group(2)}\n{m.group(1)}IsToggleBonus: True{m.group(2)}"),
+    ],
     # Pilfer (Mindthief), top: "Loot 1, +1 gold per adjacent enemy". Frosthaven's loot parser knows LootData but not
     # the value ExtraGoldPerAdjacentEnemy (appears nowhere in its code): the file fails to parse, and a failed card
     # file inside the game's parallel class loader took the whole load down ("Character 'QuartermasterID' has no
