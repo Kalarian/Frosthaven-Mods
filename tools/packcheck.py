@@ -51,7 +51,8 @@ ABILITY_TYPES = {
     "MergedDisarmTrapDestroyObstacles", "MergedKillCreate",
 }
 # the kind of an ability entry: the first property that names an ability type (the converter writes it first)
-KIND_KEYS = ABILITY_TYPES | {"RefreshItems"}
+KIND_KEYS = ABILITY_TYPES | {"RefreshItems", "MergedMoveAttack", "MergedCreateAttack", "MergedKillCreate", "MergedMoveObstacleAttack",
+                             "MergedDestroyObstacleAttack", "MergedDisarmTrapDestroyObstacle"}
 
 
 def kind_of(props):
@@ -70,10 +71,14 @@ def check_ability(path, where, props, problems, warnings):
         return
     kind = kind_of(props)
     for k, v in props.items():
+        if k is None:
+            continue   # a bare "~:" line (Gloomhaven's empty Null abilities; Frosthaven's own cards have 64 of them)
         if k not in KEYS and k not in EXTRA_KEYS and k not in ABILITY_TYPES:
             problems.append(f"{path}: {where}: unknown ability property {k!r} (the game drops it)")
-        if k == "Condition" and v not in ABILITY_TYPES:
-            problems.append(f"{path}: {where}: Condition {v!r} is no ability type")
+        if k == "Condition":
+            for c in (v if isinstance(v, list) else [v]):
+                if c not in ABILITY_TYPES:
+                    problems.append(f"{path}: {where}: Condition {c!r} is no ability type")
         if k in ("SquareEnhancements", "HexEnhancements", "CircleEnhancements", "DiamondEnhancements", "DiamondPlusEnhancements", "Enhancements"):
             problems.append(f"{path}: {where}: {k} sits on the ability itself; a slot belongs under its number (Attack: {{Amount, {k}}}) or is ignored")
     # slots under a number: {Amount: n, SquareEnhancements: 1}
@@ -121,6 +126,13 @@ def check_pack(pack):
                 warnings.append(f"{rel}: {half} has no abilities")
             for ab, props in abilities.items():
                 check_ability(rel, f"{half}/{ab}", props, problems, warnings)
+                # a summon's card is drawn from the summon's definition (CreateLayout.CreateSummon throws without it)
+                sid = props.get("Summon") if isinstance(props, dict) else None
+                sid = sid.get("ID") if isinstance(sid, dict) else sid
+                if isinstance(sid, str):
+                    defs = list((pack / "files" / "Global" / "HeroSummons").glob("*.yml"))
+                    if not any(re.search(rf"^ID:\s*{re.escape(sid)}(ID)?\s*$", d.read_text(encoding="utf-8-sig"), re.M) for d in defs):
+                        problems.append(f"{rel}: {half}/{ab}: summon {sid} has no definition in files/Global/HeroSummons (its card cannot be drawn)")
     return n, problems, warnings
 
 

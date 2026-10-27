@@ -129,12 +129,14 @@ CLASS_EXTRAS = {
         "Race": "Savvas",
         "Traits": "[ Armored, Outcast, Strong ]",
         "Complexity": "2",
+        "ElementalAffinities": "[ Earth ]",
         "HeroStats": {"Melee": 4, "Ranged": 4, "Mobility": 2, "Support": 3, "Defense": 4, "Control": 4},
     },
     "Plagueherald": {   # Ranged Damage/Support, Medium
         "Race": "Harrower",
         "Traits": "[ Arcane, Intimidating, Outcast ]",
         "Complexity": "2",
+        "ElementalAffinities": "[ Air, Dark ]",
         "HeroStats": {"Melee": 1, "Ranged": 5, "Mobility": 2, "Support": 3, "Defense": 2, "Control": 5},
     },
     "Nightshroud": {   # Melee Damage, Medium
@@ -148,6 +150,7 @@ CLASS_EXTRAS = {
         "Race": "Inox",
         "Traits": "[ Chaotic, Intimidating, Strong ]",
         "Complexity": "3",
+        "ElementalAffinities": "[ Fire ]",
         "HeroStats": {"Melee": 6, "Ranged": 1, "Mobility": 3, "Support": 1, "Defense": 3, "Control": 2},
     },
     # System probes (2026-10-27): placeholders so the classes convert for the song / doom / augment checks in game.
@@ -337,6 +340,9 @@ def convert_enhancements(s, warn):
         slot = ENHANCEMENT_SLOT.get(parent, DEFAULT_SLOT)
         if parent == "Move" and ability and "Ally" in ability:
             slot = ALLY_MOVE_SLOT
+        if parent == "RetaliateRange":   # Frosthaven sells no sticker for a retaliate's range: the slot would be dead
+            lines[i] = ""
+            continue
         if parent not in ENHANCEMENT_SLOT and parent not in ("Shield", "Retaliate", "Push", "Pull", "Target", "Range"):
             warn(f"enhancement under {parent!r}: using {slot}")
         lines[i] = ln.replace("Enhancements:", slot + ":", 1)
@@ -522,6 +528,22 @@ def main():
                 stem = re.sub(r"^\d+", str(cid), Path(n).name)
                 write(f"{base}/AbilityCards/{stem}", one)
             converted.append(s)
+        # The summons the class's cards name (Summon: BattleBoarID): Gloomhaven's HeroSummon defs in Frosthaven's own
+        # format (Global/HeroSummons/<Name>.yml, enhancement slots renamed). A card whose layout shows a summon is drawn
+        # from the def (CreateLayout.CreateSummon: null without it, the game's error screen; system probes 2026-10-27).
+        # The summon's MODEL (Model: BattleBoar -> bundle npc_battleboar) is not ported yet: see
+        # docs/reports/2026-10-27-summons.md; summoning one in play still fails until that step exists.
+        summon_ids = sorted({m.group(1) for s in converted for m in re.finditer(r"^\s*Summon:\s*(\w+?)(?:ID)?\s*$", s, re.M)})
+        for sid in summon_ids:
+            src = next((n for n in files if n.startswith("HeroSummon/") and re.search(rf"^ID:\s*{re.escape(sid)}ID\s*$", text(files[n]), re.M)), None)
+            if src is None:
+                warnings.append(f"{cls}: summon {sid}: no HeroSummon/{sid}.yml in Gloomhaven's data")
+                continue
+            summon = convert_enhancements(text(files[src]), lambda w: None)
+            used_keys.update(KEY_RE.findall(summon))
+            write(f"Global/HeroSummons/{Path(src).name}", summon)
+        if summon_ids:
+            print(f"{cls}: {len(summon_ids)} summon definition(s): {', '.join(summon_ids)} (models not ported yet)")
         declared = re.findall(r"\w+", CLASS_EXTRAS.get(cls, {}).get("ElementalAffinities", ""))
         often = infused_often(converted)
         if sorted(declared) != sorted(often):

@@ -282,6 +282,8 @@ def describe(bundle_path, cls, fh_bundle_path, skin=None, animation=None):
     # the hero wrapper: Assets/_AssetBundles/heroes/<cls>.prefab in the base game, .../CharacterPrefabs/<cls>.prefab in a DLC
     hero_path = next((p for p in b.container if p.lower().endswith(f"/{cls.lower()}{suffix.lower()}.prefab")), None)
     model_path = next((p for p in b.container if p.lower().endswith(f"/he_{cls.lower()}{suffix.lower()}_pr.prefab")), None)
+    if model_path is None:   # the Cragheart's base model is HE_Cragheart.prefab (its skin keeps the _PR suffix)
+        model_path = next((p for p in b.container if p.lower().endswith(f"/he_{cls.lower()}{suffix.lower()}.prefab")), None)
     if hero_path is None or model_path is None:
         raise ValueError(f"{bundle_path.name} lacks {cls}{suffix}.prefab or HE_{cls}{suffix}_PR.prefab; has {sorted(b.container)}")
     hero_go, model_go = b.container[hero_path], b.container[model_path]
