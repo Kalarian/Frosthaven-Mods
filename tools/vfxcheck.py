@@ -33,6 +33,7 @@ STAND_INS = {
     "Amp_Low/Amp_CharShader_Low": "Amp_Char_Shader_Universal",
     "Amp_Char_Shader": "Amp_Char_Shader_Universal",   # props inside effects (the Tinkerer's grenade, a coin pile, a bear trap)
     "Amp_Low/Amp_Basic_Prop_Shader_Low": "Amp_Basic_N_MRAO",
+    "CragHeartSummonShaftShd": "LightShaftShd",   # its own copy draws a solid pale cylinder (2026-10-27)
 }
 
 

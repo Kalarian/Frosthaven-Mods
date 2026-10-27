@@ -532,6 +532,11 @@ namespace FrosthavenMods
             // Jaws of the Lion's effects: Unity's built-in Standard (blood splats, black mattes; not in a URP build) and the
             // low-end variants of the two Gloomhaven surface shaders above (the mech bomb, the rubble)
             else if (name == "Standard") return FindShader("Universal Render Pipeline/Lit") ?? FindShader("Universal Render Pipeline/Simple Lit");
+            // the Cragheart's cast light shafts (positive, shield, heal): Frosthaven's copy of the Gloomhaven shaft shader
+            // drew a solid pale cylinder round the hero (the user's screenshot, 2026-10-27; fxhide on the shaft materials
+            // removed it); Frosthaven's own light-shaft shader takes the same properties (beam colour, noise mask,
+            // softness, thickness, rays) and is the one the Sawbones' chest shaft already draws with
+            else if (name == "CragHeartSummonShaftShd") return FindShader("LightShaftShd") ?? FindShader(name);
             else if (name == "Amp_Low/Amp_CharShader_Low" || name == "Amp_Char_Shader") return FindShader("Amp_Char_Shader_Universal") ?? FindShader("Universal Render Pipeline/Simple Lit");
             else if (name == "Amp_Low/Amp_Basic_Prop_Shader_Low") return FindShader("Amp_Basic_N_MRAO") ?? FindShader("Universal Render Pipeline/Simple Lit");
             return FindShader(name);
