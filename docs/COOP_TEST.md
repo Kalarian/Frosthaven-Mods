@@ -1,7 +1,7 @@
-# Co-op test: the Frosthaven Mods house rules (v0.6.7)
+# Co-op test: the Frosthaven Mods house rules and the Gloomhaven classes (v0.8.2)
 
-Two players: **Host** (runs the campaign) and **Client** (joins). Takes about an hour. Have voice chat open, since
-some steps are done at the same moment.
+Two players: **Host** (runs the campaign) and **Client** (joins). Takes about an hour and a half with the Gloomhaven
+section (K). Have voice chat open, since some steps are done at the same moment.
 
 ## What we're checking
 
@@ -15,6 +15,8 @@ some steps are done at the same moment.
    More story events puts back the same card on both PCs (the same town event comes up for both).
 7. Rules that change play are locked during online scenarios, and the co-op desync fixes (Game bug fixes) hold up:
    no desync, including after short rests.
+8. The Gloomhaven classes play the same on both PCs: cards, hand-overs between players (Medical Packs), control of an
+   enemy (Long Con), persistent cards and elements, with no desync (section K).
 
 ## How we check
 
@@ -32,9 +34,13 @@ some steps are done at the same moment.
 
 **Host, alone:**
 1. Use a **test campaign that's already past the prologue** (e.g. "Mod Test"), not your real campaign.
-2. The party needs **4 characters**: 2 for the host, 2 for the client.
+2. The party needs **4 characters**: 2 for the host, 2 for the client, and **two of them Gloomhaven classes**, one per
+   player (for section K: a **Scoundrel** and a **Sawbones** cover the two things that involve the other player's
+   character; the pack switch **Gloomhaven classes (content pack)** must be on in Options > Custom Rules to create
+   them, and every Gloomhaven class is open while we test).
 3. In solo, with the dev tools still installed, press **Ctrl+F9** once or twice so every party member has gold and
-   materials. The dev tools don't work online, which is intended.
+   materials, and **Ctrl+F2** once with the two Gloomhaven characters in the party, so they are level 9 with every
+   card (Long Con is a level-9 card). The dev tools don't work online, which is intended.
 4. Spend some of that gold so the characters own items (the shop, or the Craftsman):
    - every character owns **at least 2 items**, and at least one of them is **worn** (equipped);
    - **two characters own the same item** (e.g. both buy the same cheap item). That's for the "already owns" check.
@@ -48,7 +54,8 @@ some steps are done at the same moment.
 **Both players:**
 7. Close Frosthaven and run the installer (`Install Frosthaven Mods.exe`, from the
    [latest release](https://github.com/Kalarian/Frosthaven-Mods/releases/latest)). Click **Install / Update**. The
-   window must say **v0.6.7** for both of you.
+   window must say **v0.8.2** for both of you. The installer carries the Gloomhaven classes pack; a player whose pack
+   differs from the host's is refused when they try to join (the game says so), so both run the same installer.
    - If Windows shows a warning, click "More info", then "Run anyway".
 8. Start the game.
 
@@ -161,6 +168,22 @@ point in the session, do this before the host chooses:
 | J3 | Host | Choose an option. | The result (outcome text and effects) matches what the preview showed, on both PCs. Note the event ID (e.g. SO-12) if anything differs. |
 | J4 | Both | If it's an outpost attack from **WO-33, WO-34, WO-35, WO-71 or SO-23**, note the order buildings are attacked in. | It follows the card (Game bug fixes): WO-33 even-numbered buildings from highest number down, WO-34 buildings 1–40 from highest number down, WO-35 highest level first, WO-71 lowest level first, SO-23 only even-numbered buildings. Same on both PCs. |
 | J5 | Both | For a **town** event: note its ID (e.g. SO-12) and whether its options unlock anything (a "New event", "Calendar: section", "New quest unlocked"... line in the previews). | **The same event on both PCs.** It's usually one that unlocks something, but not always: the redraw happens only once, and an attack is never put back (More story events). The coop logs record each decision as a `STORY:` line; they're compared after the test. |
+
+## K. Gloomhaven classes (one scenario, both players)
+
+The ported classes have only ever been played solo. Online, every PC runs the same rules on its own copy, so the risk
+is a card that resolves differently on two PCs (a mid-scenario desync) or a screen the client never gets. Play one
+scenario with the Scoundrel on one PC and the Sawbones on the other, and do these deliberately:
+
+| # | Who | Do | Expected |
+|---|---|---|---|
+| K1 | Both | In the outpost, open the Gloomhaven character's sheet and card list, then the codex page of its class. | The cards look like Frosthaven's (frame, icons, hover highlights); the codex entry shows the class's picture and text, on **both** PCs. |
+| K2 | Both | Enter the scenario. In round 1, each player hovers over their Gloomhaven character's hand. | Hand looks the same as solo; a card half lights up on hover and dims once played. |
+| K3 | Sawbones' player | Play **First Aid** (top) with the other player's character as the target. | The **other** player gets a Medical Pack in hand (the card hand-over), can play it (Heal 4, self) on a later turn, and the heal shows on **both** PCs. |
+| K4 | Scoundrel's player | Play **Long Con** (bottom) on an adjacent normal or elite enemy. | The enemy can be targeted (v0.8.2 fix) and performs its own turn under the Scoundrel's control; the same move/attack on both PCs. |
+| K5 | Both | Play one persistent card (e.g. the Sawbones' **Booster Shot** bottom, which gives the shield as a card to an ally; the Scoundrel's **Single Out** bottom) and one with an element (**Burning Oil** infuses Fire). | The persistent card sits in the active area on both PCs; the element lights up for both. |
+| K6 | Both | **CHECKPOINT** at the end of round 3 (Ctrl+F8 together). Finish the scenario. | No desync message at any point. If one appears: stop, screenshot, **both press Ctrl+F7**, note the round and the last card played. |
+| K7 | Both | After the scenario, the Statistics page (Battle stats): the Gloomhaven characters' rows. | The same numbers on both PCs, and the Gloomhaven characters are listed like the others. |
 
 ## After the test
 
