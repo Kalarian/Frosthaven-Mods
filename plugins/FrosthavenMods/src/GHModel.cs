@@ -611,11 +611,15 @@ namespace FrosthavenMods
                         // invisibility change, so each null slot gets the opaque template material (the renderer never draws).
                         // An empty material array here crashed the game natively at scenario load (2026-10-27, two benches).
                         // (Rebuilding them like the cast effects: see the polish list.)
+                        // forceRenderingOff alone was not enough: the game clones the materials for its visibility toggles and
+                        // the particles drew as magenta patches round the hero (the harness's "pink" listed P_NightShroud_Idle,
+                        // P_PlagueHerald_Idle; Group 2 pass, 2026-10-27), so the particle objects are switched off outright
                         r.forceRenderingOff = true;
                         Material[] off = r.sharedMaterials;
                         bool holes = false;
                         for (int i = 0; i < off.Length; i++) if (off[i] == null) { off[i] = _opaque; holes = true; }
                         if (holes) r.sharedMaterials = off;
+                        if (r is ParticleSystemRenderer || r is TrailRenderer || r is LineRenderer) r.gameObject.SetActive(false);
                         continue;
                     }
                     Material[] slots = r.sharedMaterials;
