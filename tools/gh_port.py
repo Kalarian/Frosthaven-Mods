@@ -355,6 +355,10 @@ TEXT_FIXES = {
     "GH_225_B": "You and all adjacent normal enemies suffer 7 damage.",
     # the ability's name, which Frosthaven looks up when it shows the ability (no card of its own gives supply cards)
     "GiveSupplyCard": "Give Medical Pack",
+    # Stone Pummel bottom (Cragheart): the persistent "destroy an adjacent obstacle on a melee attack" bonus follows the
+    # Pyroclast's Obsidian Shield, whose help box names this key; without the text the game showed "UNDEFINED" while it
+    # waited for the obstacle (2026-10-27, Group 2 pass)
+    "GUI_StonePummel_Bottom_HelpBoxTooltip": "Stone Pummel: choose an adjacent obstacle to destroy for +3 Attack, or skip.",
 }
 
 
@@ -600,6 +604,10 @@ def main():
         used_keys.update(KEY_RE.findall(s))
         for m in re.finditer(r"^(?:Name|Description):\s*([A-Za-z0-9_]+)\s*$", s, re.M):
             used_keys.add(m.group(1))
+        # a help box's text key (HelpBoxTooltipLocKey: GUI_...) is looked up like any other; unlisted it shows "UNDEFINED"
+        for m in re.finditer(r"HelpBoxTooltipLocKey:\s*\"?\$?([A-Za-z0-9_/]+)\$?\"?\s*$", s, re.M):
+            if not m.group(1).startswith("FH/"):
+                used_keys.add(m.group(1))
 
     for cls in args.classes:
         char_path = f"Character/{cls}.yml"
