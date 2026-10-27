@@ -11,14 +11,8 @@
   ],
   "files": "files",
   "unlock": {
-    "envelopes": false,
-    "starting": [
-      "Brute",
-      "Scoundrel",
-      "Sunkeeper",
-      "Sawbones",
-      "Quartermaster"
-    ]
+    "envelopes": true,
+    "starting": []
   },
   "sections": [
     "GH.Brute",
@@ -344,7 +338,7 @@
       ]
     }
   ],
-  "data_sha": "6fa18c2e7cb4b496f3f9a21f859bfbea0d66a53ae008ec7e569a75f44d855bb8",
+  "data_sha": "665e97730d7cc1c95ad029ddf8f5f6bd8d2f5029598fbbd1556d327dab269ae5",
   "source": {
     "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
     "buildid": "20286313",

@@ -81,7 +81,7 @@ PACK_VERSION = 1
 # the campaign opens one, and the party picks one of two (plugin: GHEnvelopes.cs). ALL_CLASSES_OPEN hands every class
 # out at once (while we test the classes themselves); set it False to deal the rest through retirements. Both go into
 # data_sha, so co-op peers must agree on them like on the cards.
-ALL_CLASSES_OPEN = True
+ALL_CLASSES_OPEN = False
 STARTING_CLASSES = {"Demolitionist", "Hatchet", "RedGuard", "Voidwarden"}   # Jaws of the Lion: Gloomhaven digital's own starters
 # The pack is a mod folder in the repo like any other (mod.json + files/), plus its extras (strings.tsv, art/, pack.json)
 # that the release copies into the game folder under FrosthavenMods\packs\<name>\ for the plugin.

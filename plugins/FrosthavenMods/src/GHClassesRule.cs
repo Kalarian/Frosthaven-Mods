@@ -106,6 +106,13 @@ namespace FrosthavenMods
 
         public static bool On => ModRules.IsOn(Flag);
 
+        /// <summary>The "All Gloomhaven classes open" switch: every pack class opens at once, envelopes or not.</summary>
+        public static bool AllOpen => ModRules.IsOn(ModRules.AllGloomhavenClassesOpen);
+
+        /// <summary>The all-open switch needs the pack switch on first (off is always allowed).</summary>
+        public static string WhyAllOpenBlocked(bool wantOn) =>
+            wantOn && !On ? "Turn on \"Gloomhaven classes (content pack)\" first." : null;
+
         // ------------------------------------------------------------------ the pack's classes
 
         /// <summary>The pack classes as campaign IDs ("BruteID") the given rules know.</summary>
@@ -138,7 +145,7 @@ namespace FrosthavenMods
                 if (string.IsNullOrEmpty(c.ID)) continue;
                 string model = c.CharacterModel.ToString();
                 GHClasses.Pack pack = GHClasses.PackOf(c.CharacterModel);
-                bool opensAtStart = pack == null || !pack.Envelopes || pack.Starting.Any(s => string.Equals(s, model, StringComparison.OrdinalIgnoreCase));
+                bool opensAtStart = pack == null || !pack.Envelopes || AllOpen || pack.Starting.Any(s => string.Equals(s, model, StringComparison.OrdinalIgnoreCase));
                 if (opensAtStart != starting) continue;
                 var id = new CharacterClassID(c.ID);
                 if (repo.CharacterClasses.ContainsKey(id) && !list.Contains(id)) list.Add(id);
@@ -210,8 +217,10 @@ namespace FrosthavenMods
         /// decides whether this PC may act (host or solo, map shown, nobody joining).</summary>
         internal static void OnRulesApplied(ERulesFlag before, ERulesFlag after)
         {
-            if (((before ^ after) & Flag) == 0) return;
-            CoopLog.Write($"PACK CLASSES rule -> {((after & Flag) == Flag ? "on" : "off")} role={CoopLog.Role()}");
+            ERulesFlag both = Flag | ModRules.AllGloomhavenClassesOpen;
+            if (((before ^ after) & both) == 0) return;
+            CoopLog.Write($"PACK CLASSES rule -> {((after & Flag) == Flag ? "on" : "off")}, all open -> " +
+                          $"{((after & ModRules.AllGloomhavenClassesOpen) != 0 ? "on" : "off")} role={CoopLog.Role()}");
             RequestCheck();
         }
 

@@ -58,6 +58,8 @@ namespace FrosthavenMods
         public const ERulesFlag QuestRewards = (ERulesFlag)(1 << 17);
         public const ERulesFlag KeepMasteries = (ERulesFlag)(1 << 16);
         public const ERulesFlag GloomhavenClasses = (ERulesFlag)(1 << 15);
+        // under the pack rule: every pack class open at once instead of one envelope per retirement (2026-10-27)
+        public const ERulesFlag AllGloomhavenClassesOpen = (ERulesFlag)(1 << 14);
         // The game's own rule bit, which it never shows on its rules screen (ReducedRandomness.cs passes it to the
         // scenario rules). A save keeps it without the mods too. (Its CanRespecCharacters bit was offered as "Respec
         // without the Library" for a day and dropped, 2026-10-25: the Library's respec is enough.)
@@ -69,11 +71,12 @@ namespace FrosthavenMods
             {
                 Flag = GloomhavenClasses,
                 Name = "Gloomhaven classes (content pack)",
-                Description = "Adds Gloomhaven's classes to this campaign (the Brute for now), each built on a player's PC " +
-                              "from their own copy of Gloomhaven. Turning this on opens the pack's starting classes for new " +
-                              "characters (in a solo scenario, at the next outpost). A pack can keep its other classes in " +
-                              "envelopes: each retirement in the campaign then opens one, and the party picks one of two " +
-                              "classes to unlock, on the game's own class-choice screen.\n\n" +
+                Description = "Adds Gloomhaven's classes to this campaign (the Brute, Scoundrel, Sunkeeper, Sawbones and " +
+                              "Quartermaster so far), each built on a player's PC from their own copy of Gloomhaven. The " +
+                              "classes wait in envelopes: each retirement in the campaign opens one, and the party picks one " +
+                              "of two classes to unlock, on the game's own class-choice screen (a pack's starting classes, if " +
+                              "it has any, open the moment this is turned on; in a solo scenario, at the next outpost). " +
+                              "\"Gloomhaven classes: all open at once\" (the next switch) opens them all instead.\n\n" +
                               "This is a content pack, not a rule: every PC in the game needs the same pack installed before " +
                               "the game starts (see the mod guide). A player without it is refused when they try to join; " +
                               "a player without the mod at all only sees their join window reset, so tell them. Once a " +
@@ -86,6 +89,16 @@ namespace FrosthavenMods
                               "unlocks, which any game loads. It needs the mods, not the pack.",
                 Blocked = GHClassesRule.WhyBlocked,
                 BackupBeforeOn = "Mod backup - before Gloomhaven classes",
+            },
+            new Rule
+            {
+                Flag = AllGloomhavenClassesOpen,
+                Name = "Gloomhaven classes: all open at once (mod)",
+                Description = "With the Gloomhaven classes pack on: every installed Gloomhaven class is open for new " +
+                              "characters at once, instead of arriving one envelope per retirement. For testing the " +
+                              "classes, or a party that wants the whole roster from the start. Turning it off later keeps " +
+                              "the classes already open; the still-locked ones go back to waiting for retirements.",
+                Blocked = GHClassesRule.WhyAllOpenBlocked,
             },
             new Rule
             {
