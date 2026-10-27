@@ -242,6 +242,11 @@ CLASS_ICONS = {
     "Sunkeeper": {"BInfuse": "Positive_Infusion"},                       # Beacon of Light: infuse Light each turn
     "Sawbones": {"TAbilityOverrideAbilityType": "Positive_Heal"},        # Prep for Surgery: moves and attacks as heals
     "Quartermaster": {"TActive": "Refresh"},                             # Refreshment: refresh an item on each long rest
+    # Jaws of the Lion (its AA_<Class> actives)
+    "Hatchet": {"TActive": "Positive_AttackPlus"},                       # The Favorite / The New Favorite: +3 on the marked target
+    "RedGuard": {"TActive": "Positive_Retaliate",                        # Flame Shroud: enemies entering adjacent hexes suffer 2
+                 "TDamagedAfterEachAttackActive": "Positive_Wound"},     # Strangling Chain: the target suffers 1 each time it is attacked
+    "Demolitionist": {"TChangeCharacterModel": "Positive_Shield_Health"},  # Mech Suit: +5 hit points, Shield 1
 }
 
 # Slot shape for "Enhancements: N", by the ability key it sits under, so a ported card enhances the way Frosthaven's

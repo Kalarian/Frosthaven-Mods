@@ -34,6 +34,12 @@ ICONS = {
     "Damage": "Positive_AttackPlus",
     "Heal": "Positive_Heal",
     "Attack": "Positive_AttackPlus",
+    # Jaws of the Lion (2026-10-27): a summon's active, the Voidwarden's curse-every-turn and poison-reaction actives,
+    # her control; the condition icons are Frosthaven's plain ones
+    "Summon": "Positive_Summon",
+    "Curse": "Icon_Curse",
+    "Poison": "Icon_Poison",
+    "Control": "AA_Mind_Control",
 }
 # Gloomhaven also names an active after its class ("Sunkeeper": the class icon); Frosthaven has no such icon for a
 # ported class, so gh_port's CLASS_ICONS gives each of those an icon for what the card does. Every icon written is

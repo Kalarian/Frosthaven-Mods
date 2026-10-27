@@ -25,6 +25,7 @@ namespace FrosthavenMods
     ///                                      targets together
     ///   FrosthavenMods_ItemsEveryTurn      (Quartermaster) an item used or refreshed on every turn taken
     ///   FrosthavenMods_UsedCardTop         (Quartermaster, a fail condition) the top action of card Amount performed
+    ///   Group 2 and Group 3 markers are listed at their constants below.
     /// "Every turn taken" means every round in which the character started a turn, so a character who is exhausted
     /// stops being judged. Allies adjacent to a dying enemy are read from the kill record's count of players next to
     /// it, minus the killer when the killing blow was a melee attack; summons are not counted.
@@ -56,9 +57,12 @@ namespace FrosthavenMods
         internal const string ConditionEveryRoundTag = "FrosthavenMods_ConditionGivenEveryRound"; // (Voidwarden) one of the listed conditions given every round
         internal const string AttackActionsTag = "FrosthavenMods_AttackActionsWithDamage";    // (Demolitionist) Value different attack actions each dealing Amount
         internal const string ObstaclesTag = "FrosthavenMods_ObstaclesDestroyed";             // (Demolitionist) Value obstacles destroyed
-        // The Hatchet's two (FrosthavenMods_FavoriteEveryTurn, _FavoriteEveryRoundWithEnemies) need the Favorite's moves,
-        // which the statistics do not record: a runtime hook when the class is ported. Until then the game's own
-        // filter answers them (CountXRounds Value 1: a round played).
+        // The Hatchet's two need the Favorite's moves, which the statistics do not record: the resource hooks below note
+        // the round of every throw or recovery (the Hatchet's own resource count changes either way), and both tags
+        // ask for one in every round the Hatchet took a turn (the second's "with an enemy on the map at the start of
+        // the turn" is read as every turn: a scenario with no enemy left is over).
+        internal const string FavoriteEveryTurnTag = "FrosthavenMods_FavoriteEveryTurn";
+        internal const string FavoriteEveryRoundTag = "FrosthavenMods_FavoriteEveryRoundWithEnemies";
 
         private static readonly HashSet<CAbility.EAbilityType> SupportTypes = new HashSet<CAbility.EAbilityType>
         {
@@ -100,6 +104,7 @@ namespace FrosthavenMods
                 else if (tags.Contains(ConditionEveryRoundTag)) EveryTurn(stats, r => ConditionGivenInRound(tags, stats, r), ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(AttackActionsTag)) AttackActionsWithDamage(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(ObstaclesTag)) ObstaclesDestroyed(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(FavoriteEveryTurnTag) || tags.Contains(FavoriteEveryRoundTag)) EveryTurn(stats, r => FavoriteMovedInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
                 else return true;   // a marker of a newer pack this plugin doesn't know: the game's own filter answers
             }
             catch (Exception e)
@@ -463,6 +468,40 @@ namespace FrosthavenMods
             total = needed;
             met = Math.Min(count, needed);
             result = count >= needed;
+        }
+
+        // ---- the Favorite's moves (the Hatchet): resource changes on the player, by round, for the current scenario
+
+        private static readonly Dictionary<string, HashSet<int>> FavoriteMoves = new Dictionary<string, HashSet<int>>(StringComparer.Ordinal);
+        private static ScenarioState _favoriteScenario;
+
+        [HarmonyPatch(typeof(CActor), nameof(CActor.AddCharacterResource))]
+        [HarmonyPostfix]
+        private static void ResourceAdded(CActor __instance, string resourceID) => NoteFavorite(__instance, resourceID);
+
+        [HarmonyPatch(typeof(CActor), nameof(CActor.RemoveCharacterResource))]
+        [HarmonyPostfix]
+        private static void ResourceRemoved(CActor __instance, string resourceID) => NoteFavorite(__instance, resourceID);
+
+        private static void NoteFavorite(CActor actor, string resourceID)
+        {
+            try
+            {
+                if (!(actor is CPlayerActor) || string.IsNullOrEmpty(resourceID) || resourceID.IndexOf("Favorite", StringComparison.OrdinalIgnoreCase) < 0) return;
+                ScenarioState scenario = ScenarioManager.CurrentScenarioState;
+                if (scenario == null) return;
+                if (!ReferenceEquals(scenario, _favoriteScenario)) { FavoriteMoves.Clear(); _favoriteScenario = scenario; }
+                string guid = actor.ActorGuid ?? "";
+                if (!FavoriteMoves.TryGetValue(guid, out HashSet<int> rounds)) FavoriteMoves[guid] = rounds = new HashSet<int>();
+                rounds.Add(scenario.RoundNumber);
+            }
+            catch (Exception e) { if (Reported.Add("favorite")) Plugin.Log.LogError("Gloomhaven masteries: the Favorite's move was not noted: " + e); }
+        }
+
+        private static bool FavoriteMovedInRound(List<CPlayerStats> stats, int round)
+        {
+            string self = SelfGuid(stats);
+            return !string.IsNullOrEmpty(self) && FavoriteMoves.TryGetValue(self, out HashSet<int> rounds) && rounds.Contains(round);
         }
 
         private static bool IsAlly(string actorType) =>
