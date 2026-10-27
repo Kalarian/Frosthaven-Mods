@@ -154,6 +154,36 @@ CLASS_EXTRAS = {
         "ElementalAffinities": "[ Fire ]",
         "HeroStats": {"Melee": 6, "Ranged": 1, "Mobility": 3, "Support": 1, "Defense": 3, "Control": 2},
     },
+    # ---- Group 3: Jaws of the Lion (the user's DLC; crossover sheets read 2026-10-27). Race and traits from the
+    # sheets; complexity from the digital game's own difficulty line (Low 1, Medium 2, High 3).
+    "Hatchet": {   # Ranged Damage, Low
+        "Race": "Inox",
+        "Traits": "[ Intimidating, Resourceful, Strong ]",
+        "Complexity": "1",
+        "ElementalAffinities": "[ Air ]",
+        "HeroStats": {"Melee": 2, "Ranged": 6, "Mobility": 3, "Support": 1, "Defense": 2, "Control": 3},
+    },
+    "RedGuard": {   # Tank, Low
+        "Race": "Valrath",
+        "Traits": "[ Armored, Outcast, Persuasive ]",
+        "Complexity": "1",
+        "ElementalAffinities": "[ Fire, Light ]",
+        "HeroStats": {"Melee": 5, "Ranged": 2, "Mobility": 3, "Support": 2, "Defense": 6, "Control": 4},
+    },
+    "Voidwarden": {   # Crowd Control, High
+        "Race": "Human",
+        "Traits": "[ Arcane, Educated, Outcast ]",
+        "Complexity": "3",
+        "ElementalAffinities": "[ Ice, Dark ]",
+        "HeroStats": {"Melee": 1, "Ranged": 3, "Mobility": 2, "Support": 6, "Defense": 2, "Control": 6},
+    },
+    "Demolitionist": {   # Melee Damage, Medium
+        "Race": "Quatryl",
+        "Traits": "[ Chaotic, Nimble, Strong ]",
+        "Complexity": "2",
+        "ElementalAffinities": "[ Fire, Earth ]",
+        "HeroStats": {"Melee": 6, "Ranged": 2, "Mobility": 4, "Support": 1, "Defense": 2, "Control": 3},
+    },
     # System probes (2026-10-27): placeholders so the classes convert for the song / doom / augment checks in game.
     # Race from the board game; the rest is a first guess, to be done properly when each class is ported.
     "Soothsinger": {   # Ranged Support, High (probe placeholder)
@@ -445,11 +475,23 @@ def convert_character(cls, s):
 
 
 def gh_strings(gh):
-    with open(gh / "LanguageExport.csv", encoding="utf-8-sig", newline="") as f:
-        reader = csv.reader(f)
-        header = next(reader)
-        col = next(i for i, h in enumerate(header) if h.startswith("English"))
-        return {row[0]: row[col] for row in reader if len(row) > col and row[0]}
+    """Gloomhaven's English text: LanguageExport.csv, then each DLC's LangUpdate.csv over it (Jaws of the Lion: its
+    four classes' card names, class texts, perk texts). The Red Guard's class texts are keyed Redguard_* there while
+    the class is RedGuard everywhere else; both spellings are served."""
+    def read(path):
+        with open(path, encoding="utf-8-sig", newline="") as f:
+            reader = csv.reader(f)
+            header = next(reader)
+            col = next(i for i, h in enumerate(header) if h.startswith("English"))
+            return {row[0]: row[col] for row in reader if len(row) > col and row[0]}
+
+    table = read(gh / "LanguageExport.csv")
+    for extra in sorted((gh / "Rulebase" / "DLC").glob("*/LangUpdate.csv")):
+        table.update(read(extra))
+    for key in list(table):
+        if key.startswith("Redguard_"):
+            table.setdefault("RedGuard_" + key[len("Redguard_"):], table[key])
+    return table
 
 
 def main():

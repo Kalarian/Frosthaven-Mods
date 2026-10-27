@@ -130,8 +130,99 @@ def bundles_for(gh, cls):
     dlc = re.compile(rf"^dlc_\w+?_hero_{re.escape(cls.lower())}_assets_all_[0-9a-f]+\.bundle$")
     for k, ents in buckets:
         if isinstance(k, str) and dlc.match(k):
-            return [Path(ids[entries[ents[0]][0]].replace(RUNTIME_PATH, "")).name]
+            name = Path(ids[entries[ents[0]][0]].replace(RUNTIME_PATH, "")).name
+            return [name] + external_bundles(gh, name)
     raise ValueError(f"no Gloomhaven hero {cls!r} in catalog.json (looked for {want} and a dlc_*_hero_{cls.lower()}_* bundle)")
+
+
+# ---------------------------------------------------------------- which bundle holds which file (for the DLC heroes)
+
+def bundle_nodes(path):
+    """The file names inside a UnityFS bundle (its CAB-... serialized files and .resS blobs), read from the header's
+    directory alone: nothing else of the bundle is decompressed."""
+    import lz4.block
+    with open(path, "rb") as f:
+        head = f.read(64 * 1024)
+        pos = head.index(b"\0") + 1                              # signature "UnityFS"
+        version = struct.unpack_from(">I", head, pos)[0]; pos += 4
+        pos = head.index(b"\0", pos) + 1                         # unity version
+        pos = head.index(b"\0", pos) + 1                         # generator version
+        size, csize, usize, flags = struct.unpack_from(">qIII", head, pos); pos += 20
+        if version >= 7:
+            pos = (pos + 15) & ~15
+        if flags & 0x80:                                         # directory at the end of the file
+            f.seek(size - csize)
+            blob = f.read(csize)
+        else:
+            if pos + csize > len(head):
+                f.seek(pos)
+                blob = f.read(csize)
+            else:
+                blob = head[pos:pos + csize]
+    kind = flags & 0x3F
+    if kind in (2, 3):
+        blob = lz4.block.decompress(blob, uncompressed_size=usize)
+    elif kind == 1:
+        import lzma
+        blob = lzma.LZMADecompressor(lzma.FORMAT_ALONE).decompress(blob)
+    p = 16                                                       # hash
+    blocks = struct.unpack_from(">i", blob, p)[0]; p += 4 + blocks * 10
+    nodes = struct.unpack_from(">i", blob, p)[0]; p += 4
+    names = []
+    for _ in range(nodes):
+        p += 20                                                  # offset, size, flags
+        end = blob.index(b"\0", p)
+        names.append(blob[p:end].decode("utf-8", "replace"))
+        p = end + 1
+    return names
+
+
+def cab_index(gh):
+    """{file name inside a bundle (lower case): bundle file name} over every bundle in the game folder. Cached in
+    tools/data/cache/gh_cab_index.json; a bundle is read again only when its size or time changed."""
+    folder = gh / BUNDLES
+    cache = Path(__file__).resolve().parent / "data" / "cache" / "gh_cab_index.json"
+    old = json.loads(cache.read_text(encoding="utf-8")) if cache.exists() else {}
+    new, index = {}, {}
+    for p in sorted(folder.glob("*.bundle")):
+        st = p.stat()
+        key = [st.st_size, int(st.st_mtime)]
+        ent = old.get(p.name)
+        nodes = ent[2] if ent and ent[:2] == key else None
+        if nodes is None:
+            try:
+                nodes = bundle_nodes(p)
+            except Exception as e:  # noqa: BLE001 - one odd bundle must not stop the index
+                print(f"warning: could not read the directory of {p.name}: {e}")
+                nodes = []
+        new[p.name] = [key[0], key[1], nodes]
+        for n in nodes:
+            index.setdefault(n.lower(), p.name)
+    if new != old:
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        cache.write_text(json.dumps(new), encoding="utf-8")
+    return index
+
+
+def external_bundles(gh, bundle_name, depth=2):
+    """The bundles a DLC bundle reaches through its externals (the catalog calls it self-contained, but its effects'
+    materials and their shaders sit in the base game's pcg_materials bundles), through the CAB index, two levels deep."""
+    index = cab_index(gh)
+    seen, todo, out = {bundle_name}, [bundle_name], []
+    for _ in range(depth):
+        nxt = []
+        for b in todo:
+            env = UnityPy.load(str(gh / BUNDLES / b))
+            for f in env.files.values():
+                for ch in (getattr(f, "files", None) or {}).values():
+                    for ext in getattr(ch, "externals", None) or []:
+                        holder = index.get(str(ext.name).lower())
+                        if holder and holder not in seen:
+                            seen.add(holder)
+                            out.append(holder)
+                            nxt.append(holder)
+        todo = nxt
+    return out
 
 
 # ---------------------------------------------------------------- reading a bundle

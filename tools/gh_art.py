@@ -75,23 +75,35 @@ def load_gh_pictures(gh, cls):
         f"character_gui_classicons_assets_assembleparty_{low}icon.bundle": {f"AssembleParty_{cls}Icon": "iconClassGold"},
         "misc_characterportraits_assets_all.bundle": {low: "bust"},
     }
+    missing = {}   # sprite name -> role, for the DLC bundles (Jaws of the Lion keeps every picture of its four classes in one)
     for bundle, wanted in bundles.items():
         path = gh / BUNDLES / bundle
         if not path.exists():
-            print(f"warning: no Gloomhaven bundle {bundle}")
+            missing.update(wanted)
             continue
         for name, img in _sprites(UnityPy.load(str(path)), set(wanted)).items():
             pics[wanted[name]] = img
     shared = gh / SHARED
+    wanted = {low: "tall", f"{cls}_Normal": "adventure", f"Counter_{cls}": "tabNormal",
+              f"Counter_{cls}_Selected": "tabSelected", f"MapMarker_{cls}": "marker", f"Ability_{cls}_Icon": "activeAbility"}
     if shared.exists():
-        wanted = {low: "tall", f"{cls}_Normal": "adventure", f"Counter_{cls}": "tabNormal",
-                  f"Counter_{cls}_Selected": "tabSelected", f"MapMarker_{cls}": "marker", f"Ability_{cls}_Icon": "activeAbility"}
         for name, img in _sprites(UnityPy.load(str(shared)), set(wanted)).items():
             if name == f"{cls}_Normal" and img.height < 200:
                 continue  # the 588x91 preview plate of the same name
             pics[wanted[name]] = img
     else:
         print(f"warning: no {shared}")
+    missing.update({name: role for name, role in wanted.items() if role not in pics})
+    for dlc in sorted((gh / BUNDLES).glob("dlc_*_misc_gui_assets_all*.bundle")):
+        if not missing:
+            break
+        for name, img in _sprites(UnityPy.load(str(dlc)), set(missing)).items():
+            if name == f"{cls}_Normal" and img.height < 200:
+                continue
+            pics[missing.pop(name)] = img
+    for name, role in missing.items():
+        if role in ("iconClass", "iconClassHighlight", "iconClassGold", "bust"):
+            print(f"warning: no Gloomhaven picture {name} ({role})")
     return pics
 
 

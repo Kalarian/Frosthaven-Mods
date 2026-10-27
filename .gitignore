@@ -27,6 +27,7 @@ plugins/**/obj/
 installer/bin/
 installer/obj/
 tools/__pycache__/
+tools/data/cache/
 mods/**/bin/
 mods/**/obj/
 # content-pack 3D models: Gloomhaven's own bundles (tens of MB each), rebuilt by tools/gh_port.py, carried by the release zip

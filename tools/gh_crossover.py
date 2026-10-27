@@ -15,6 +15,8 @@ EnemyFamilies, a free-text list the game never validates, and the plugin's prefi
 and ability records. Without the plugin the condition reads as "play three rounds".
 """
 
+import re
+
 BRUTE_PERKS = [
     # (available, name, description, {perk fields})  -- Perk_Brute_01 .. _10, 15 checks in all, as on the sheet
     (2, "Precision", 'Replace one <sprite name="-1"> with one <sprite name="+1">',
@@ -527,6 +529,233 @@ BattleGoalCondition:
         Value: 1"""),
 ]
 
+# ---------------------------------------------------------------- group 3: Jaws of the Lion (crossover sheets read 2026-10-27)
+# The four JotL classes' Frosthaven sheets, against the digital game's own JotL perk texts (LangUpdate.csv). Icon
+# readings checked against the game's sprites (fh_conditions contact sheet) and Gloomhaven Secretariat's transcription
+# of the sheets (data/fh-crossover/label/en.json). The special perks (Hasty Pick-up, Brilliant Aegis, Grave Defense,
+# Remodeling) are text-only passives until the plugin answers them when each class is ported.
+
+# attack-modifier cards Frosthaven has no file for: written into the pack beside the perks (files())
+NEW_CARDS = {
+    "AMC_Stun_P1": 'MathModifier: "+1"\nAbilityOverrides:\n    NegCon:\n        ParentName: AMC_Stun_P1\n        Conditions: [Stun]\n',
+    "AMC_Air_P2": 'MathModifier: "+2"\nAbilities:\n    InfuseAbility:\n        Infuse: [Air]\n',
+    "AMC_Light_P2": 'MathModifier: "+2"\nAbilities:\n    InfuseAbility:\n        Infuse: [Light]\n',
+    "AMC_Earth_P2": 'MathModifier: "+2"\nAbilities:\n    InfuseAbility:\n        Infuse: [Earth]\n',
+    "AMC_Ice_P1": 'MathModifier: "+1"\nAbilities:\n    InfuseAbility:\n        Infuse: [Ice]\n',
+    "AMC_FireLight_P1": 'MathModifier: "+1"\nAbilities:\n    InfuseAbility:\n        Infuse: [Fire, Light]\n        ShowElementPicker: True\n',
+    "AMC_Heal1_1Ally_P1": 'MathModifier: "+1"\nControlTargetingActor: True\nAbilities:\n    AHeal:\n        Heal: 1\n        Filter: Ally\n        Targeting: Range\n        Range: 99\n        AnimOverload: Heal\n',
+}
+
+HATCHET_PERKS = [
+    (2, "Steady Hands", 'Remove two <sprite name="-1">',
+     {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
+    (1, "Stunning Blow", 'Replace one <sprite name="0"> with one <sprite name="0"> <sprite name=Stun>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Stun_P0]"}),
+    (1, "Stunning Strike", 'Replace one <sprite name="+1"> with one <sprite name="+1"> <sprite name=Stun>',
+     {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_Stun_P1]"}),
+    (1, "Jagged Edge", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Wound>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Wound_P1]"}),
+    (1, "Tainted Edge", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Poison>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Poison_P1]"}),
+    (1, "Pinning Throw", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Immobilize>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Immobilize_P1]"}),
+    (1, "Dizzying Blow", 'Replace one <sprite name="0"> with one <sprite name="+2"> <sprite name=Muddle>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Muddle_P2]"}),
+    (3, "Heavy Throw", 'Replace one <sprite name="+1"> with one <sprite name="+3">',
+     {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_Basic_P3]"}),
+    (3, "Whirling Axe", 'Add one <sprite name="+2"> <sprite name=CreateAir>',
+     {"CardsToAdd": "[AMC_Air_P2]"}),
+    # answered by the plugin when the class is ported (once each scenario: consume Air to return the Favorite to its card)
+    (1, "Hasty Pick-up", "Once each scenario, during your turn, if the Favorite is in a hex on the map, you may consume <sprite name=ConsumeAir> to return it to its ability card",
+     {"Flags": "[Passive]"}),
+]
+
+HATCHET_MASTERIES = [
+    ("Always Armed", "Throw or recover the Favorite during each of your turns",
+     """\
+# NEW TAG: the Favorite (the Hatchet's resource token: ResourcesToAddOnAbilityEnd puts it on the target,
+# ResourcesToTakeFromTargets takes it back) left or returned on every turn (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_FavoriteEveryTurn]
+        CharacterIDs:
+            ActorID: HatchetID
+        Value: 1"""),
+    ("Keep It Moving", "During each round in which there is at least one enemy on the map at the start of your turn, throw the Favorite at an enemy or return it to your ability card",
+     """\
+# NEW TAG: the same change of place, counted per round and only in rounds that start with an enemy on the map
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_FavoriteEveryRoundWithEnemies]
+        CharacterIDs:
+            ActorID: HatchetID
+        Value: 1"""),
+]
+
+REDGUARD_PERKS = [
+    (2, "Steady Guard", 'Remove two <sprite name="-1">',
+     {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
+    (1, "Unshaken", 'Remove one <sprite name="-2">',
+     {"CardsToRemove": "[AMC_Basic_M2]"}),
+    (1, "Barbed Sickle", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Wound>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Wound_P1]"}),
+    (1, "Chain Hold", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Immobilize>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Immobilize_P1]"}),
+    (1, "Shield Wall", 'Replace one <sprite name="0"> and one <sprite name="+1"> with two <sprite name="+1"> <sprite name=Shield> 1, self',
+     {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P1]", "CardsToAdd": "[AMC_Shield1_P1, AMC_Shield1_P1]"}),
+    (2, "Burning Blade", 'Replace one <sprite name="+1"> with one <sprite name="+2"> <sprite name=CreateFire>',
+     {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_Fire_P2]"}),
+    (2, "Radiant Blade", 'Replace one <sprite name="+1"> with one <sprite name="+2"> <sprite name=CreateLight>',
+     {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_Light_P2]"}),
+    (2, "Kindled Light", 'Add one <sprite name="+1"> <sprite name=CreateFire>/<sprite name=CreateLight>',
+     {"CardsToAdd": "[AMC_FireLight_P1]"}),
+    (1, "Heavy Armor", 'Ignore negative item effects and add two <sprite name="+1">',
+     {"CardsToAdd": "[AMC_Basic_P1, AMC_Basic_P1]", "Flags": "[Passive, IgnoreMinusOneItemEffects]"}),
+    # answered by the plugin when the class is ported (on being attacked: consume Light for Shield 1 and disadvantage)
+    (1, "Brilliant Aegis", "Whenever you are attacked, you may consume <sprite name=ConsumeLight> to gain <sprite name=Shield> 1 for the attack and have the attacker gain disadvantage for the attack",
+     {"Flags": "[Passive]"}),
+]
+
+REDGUARD_MASTERIES = [
+    ("Patient Guardian", "Kill at least five enemies during their turns",
+     """\
+# NEW TAG: kills the Red Guard caused on an enemy's turn (retaliate, wound, a trap it was pulled onto...) (GHMasteries.cs)
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_KillsDuringEnemyTurns]
+        CharacterIDs:
+            ActorID: RedGuardID
+        Value: 5"""),
+    ("Sickle and Chain", "Force each enemy in the scenario to move at least one hex, forcing at least six enemies to move",
+     """\
+# NEW TAG: enemies pushed or pulled by the Red Guard at least once; Value = enemies, and every enemy that was in the
+# scenario must be among them (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_EnemiesForcedToMove]
+        CharacterIDs:
+            ActorID: RedGuardID
+        Value: 6"""),
+]
+
+VOIDWARDEN_PERKS = [
+    (1, "Steady Will", 'Remove two <sprite name="-1">',
+     {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
+    (1, "Unwavering", 'Remove one <sprite name="-2">',
+     {"CardsToRemove": "[AMC_Basic_M2]"}),
+    (2, "Mending Touch", 'Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=Heal> 1, ally',
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Heal1_1Ally]"}),
+    (3, "Mending Hands", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Heal> 1, ally',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Heal1_1Ally_P1]"}),
+    (1, "Blight", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Poison>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Poison_P1]"}),
+    (2, "Hex", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Curse>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Curse_P1]"}),
+    (1, "Cold Void", 'Add two <sprite name="+1"> <sprite name=CreateIce>',
+     {"CardsToAdd": "[AMC_Ice_P1, AMC_Ice_P1]"}),
+    (1, "Dark Void", 'Add two <sprite name="+1"> <sprite name=CreateDark>',
+     {"CardsToAdd": "[AMC_Dark_P1, AMC_Dark_P1]"}),
+    (1, "Focused Will", 'Add one <sprite name="+3">',
+     {"CardsToAdd": "[AMC_Basic_P3]"}),
+    (1, "Unfazed", "Ignore negative scenario effects",
+     {"Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
+    # answered by the plugin when the class is ported (on rest: consume Ice or Dark to give Ward to a poisoned ally)
+    (1, "Grave Defense", "Whenever you rest, you may consume <sprite name=ConsumeIce> or <sprite name=ConsumeDark> to give <sprite name=Ward> to one ally who has <sprite name=Poison>",
+     {"Flags": "[Passive]"}),
+]
+
+VOIDWARDEN_MASTERIES = [
+    ("Puppet Master", "Cause enemies to suffer <sprite name=Damage> 20 or more in a single turn with granted or commanded attacks",
+     """\
+# NEW TAG: damage to enemies in one of the Voidwarden's turns by attacks she granted or commanded (ControlActor /
+# granted ability records), summed per turn (GHMasteries.cs)
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_CommandedDamageInTurn]
+        CharacterIDs:
+            ActorID: VoidwardenID
+        Value: 20"""),
+    ("Touched by the Void", "Give at least one ally or enemy <sprite name=Poison>, <sprite name=Strengthen>, <sprite name=Bless>, or <sprite name=Ward> each round",
+     """\
+# NEW TAG: one of the named conditions applied by the Voidwarden to anyone in every round she acts (the condition
+# names ride along in the marker list) (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ConditionGivenEveryRound, Poison, Strengthen, Bless, Ward]
+        CharacterIDs:
+            ActorID: VoidwardenID
+        Value: 1"""),
+]
+
+DEMOLITIONIST_PERKS = [
+    (2, "Steady Fuse", 'Remove two <sprite name="-1">',
+     {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
+    (1, "Trimmed Deck", 'Remove four <sprite name="0">',
+     {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P0, AMC_Basic_P0, AMC_Basic_P0]"}),
+    (1, "Toxic Fumes", 'Replace one <sprite name="-2"> with one <sprite name="0"> <sprite name=Poison>',
+     {"CardsToRemove": "[AMC_Basic_M2]", "CardsToAdd": "[AMC_Poison_P0]"}),
+    (2, "Concussion", 'Replace one <sprite name="0"> with one <sprite name="+2"> <sprite name=Muddle>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Muddle_P2]"}),
+    (1, "Bigger Blast", 'Replace one <sprite name="+1"> with two <sprite name="+2">',
+     {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_Basic_P2, AMC_Basic_P2]"}),
+    (2, "Incendiary", 'Replace one <sprite name="+1"> with one <sprite name="+2"> <sprite name=CreateFire>',
+     {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_Fire_P2]"}),
+    (2, "Seismic", 'Replace one <sprite name="+1"> with one <sprite name="+2"> <sprite name=CreateEarth>',
+     {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_Earth_P2]"}),
+    (1, "Shrapnel", 'Add two <sprite name="0"> all adjacent enemies suffer <sprite name=Damage> 1',
+     {"CardsToAdd": "[AMC_Damage1Range1_P0, AMC_Damage1Range1_P0]"}),
+    (1, "Hardened", 'Ignore negative scenario effects and remove one <sprite name="-1">',
+     {"CardsToRemove": "[AMC_Basic_M1]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
+    # answered by the plugin when the class is ported (on rest beside a wall or obstacle: place an obstacle within range 2)
+    (1, "Remodeling", "Whenever you rest while adjacent to a wall or obstacle, you may place an obstacle in an empty hex within <sprite name=Range> 2 (of you)",
+     {"Flags": "[Passive]"}),
+]
+
+DEMOLITIONIST_MASTERIES = [
+    ("Heavy Hitter", "Deal <sprite name=Damage> 10 or more with each of three different attack actions",
+     """\
+# NEW TAG: attack actions (a card half) whose total damage reached Amount, counted by distinct card half; Value =
+# different actions needed (GHMasteries.cs)
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AttackActionsWithDamage]
+        CharacterIDs:
+            ActorID: DemolitionistID
+        Value: 3
+        Amount: 10"""),
+    ("Clean Sweep", "Destroy at least six obstacles. End the scenario with no obstacles on the map other than ones placed by allies",
+     """\
+# NEW TAG: obstacles the Demolitionist destroyed (Value), and at the end no obstacle left that an ally did not place
+# (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ObstaclesDestroyed]
+        CharacterIDs:
+            ActorID: DemolitionistID
+        Value: 6"""),
+]
+
 BERSERKER_PERKS = [
     (1, "Light Step", 'Remove two <sprite name="-1">',
      {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
@@ -605,6 +834,10 @@ CROSSOVER = {
     "Plagueherald": {"perks": PLAGUEHERALD_PERKS, "masteries": PLAGUEHERALD_MASTERIES},
     "Nightshroud": {"perks": NIGHTSHROUD_PERKS, "masteries": NIGHTSHROUD_MASTERIES},
     "Berserker": {"perks": BERSERKER_PERKS, "masteries": BERSERKER_MASTERIES},
+    "Hatchet": {"perks": HATCHET_PERKS, "masteries": HATCHET_MASTERIES},
+    "RedGuard": {"perks": REDGUARD_PERKS, "masteries": REDGUARD_MASTERIES},
+    "Voidwarden": {"perks": VOIDWARDEN_PERKS, "masteries": VOIDWARDEN_MASTERIES},
+    "Demolitionist": {"perks": DEMOLITIONIST_PERKS, "masteries": DEMOLITIONIST_MASTERIES},
 }
 
 
@@ -630,6 +863,12 @@ def files(cls):
             lines.append("Abilities:")
             lines.append(fields["Abilities"])
         out.append((f"Global/Perks/{cls}/Perk_{cls}_{i:02d}.yml", "\n".join(lines) + "\n"))
+    # the attack-modifier cards those perks add that Frosthaven has no file for
+    added = set()
+    for _available, _name, _desc, fields in sheet["perks"]:
+        added.update(re.findall(r"\w+", fields.get("CardsToAdd", "")))
+    for card in sorted(added & set(NEW_CARDS)):
+        out.append((f"Global/AttackModifiers/{card}.yml", f"Parser: AttackModifier\nName: {card}\n{NEW_CARDS[card]}"))
     for i, (_name, _desc, body) in enumerate(sheet["masteries"], start=1):
         head = ["Parser: Mastery", f"ID: {cls}_MASTERY_{i}", f"LocalisedName: {cls}_MASTERY_{i}_Name",
                 f"LocalisedDescription: {cls}_MASTERY_{i}_Desc", "PerkPoints: 1"]
