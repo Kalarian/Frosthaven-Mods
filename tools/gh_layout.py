@@ -90,7 +90,9 @@ def parse(lines):
         while stack[-1][0] >= indent:
             stack.pop()
         parent = stack[-1][1]
-        if parent is not None and indent != stack[-1][0] + INDENT:
+        # Gloomhaven's own files are not always indented by four (the Elementalist's "- Infuse: Ice" sits 23 deep):
+        # anything deeper than its parent is the parent's child; the emitted layout is re-indented evenly
+        if parent is not None and indent <= stack[-1][0]:
             raise Unsupported(f"indent of {ln.strip()!r}")
         (root if parent is None else parent.children).append(node)
         stack.append((indent, node))
