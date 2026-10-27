@@ -49,6 +49,16 @@ namespace FrosthavenMods
         internal const string LoseHpEveryTurnTag = "FrosthavenMods_LoseHpEveryTurn";          // (Berserker) lost at least one hit point on every turn
         internal const string UsedCardBottomTag = "FrosthavenMods_UsedCardBottom";            // (Berserker, a fail condition) the bottom action of card Amount performed
         internal const string OneHpEveryTurnTag = "FrosthavenMods_OneHpEveryTurn";            // (Berserker) exactly one hit point at the end of every turn
+        // Group 3, Jaws of the Lion (2026-10-27; untested until the group is on the bench)
+        internal const string KillsEnemyTurnsTag = "FrosthavenMods_KillsDuringEnemyTurns";     // (Red Guard) Value kills that happened on someone else's turn
+        internal const string ForcedMovesTag = "FrosthavenMods_EnemiesForcedToMove";          // (Red Guard) Value distinct enemies pushed or pulled
+        internal const string CommandedDamageTag = "FrosthavenMods_CommandedDamageInTurn";    // (Voidwarden) Value damage in one round by controlled or granted attacks
+        internal const string ConditionEveryRoundTag = "FrosthavenMods_ConditionGivenEveryRound"; // (Voidwarden) one of the listed conditions given every round
+        internal const string AttackActionsTag = "FrosthavenMods_AttackActionsWithDamage";    // (Demolitionist) Value different attack actions each dealing Amount
+        internal const string ObstaclesTag = "FrosthavenMods_ObstaclesDestroyed";             // (Demolitionist) Value obstacles destroyed
+        // The Hatchet's two (FrosthavenMods_FavoriteEveryTurn, _FavoriteEveryRoundWithEnemies) need the Favorite's moves,
+        // which the statistics do not record: a runtime hook when the class is ported. Until then the game's own
+        // filter answers them (CountXRounds Value 1: a round played).
 
         private static readonly HashSet<CAbility.EAbilityType> SupportTypes = new HashSet<CAbility.EAbilityType>
         {
@@ -84,6 +94,12 @@ namespace FrosthavenMods
                 else if (tags.Contains(InvisibleEveryTurnTag)) EveryTurn(stats, r => InvisibleInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(LoseHpEveryTurnTag)) EveryTurn(stats, r => LostHpInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(OneHpEveryTurnTag)) EveryTurn(stats, r => EndedTurnAtOneHp(stats, r), ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(KillsEnemyTurnsTag)) KillsDuringOtherTurns(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(ForcedMovesTag)) EnemiesForcedToMove(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(CommandedDamageTag)) CommandedDamage(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(ConditionEveryRoundTag)) EveryTurn(stats, r => ConditionGivenInRound(tags, stats, r), ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(AttackActionsTag)) AttackActionsWithDamage(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(ObstaclesTag)) ObstaclesDestroyed(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else return true;   // a marker of a newer pack this plugin doesn't know: the game's own filter answers
             }
             catch (Exception e)
@@ -337,6 +353,117 @@ namespace FrosthavenMods
         /// <summary>The character's turn ended with exactly one hit point.</summary>
         private static bool EndedTurnAtOneHp(List<CPlayerStats> stats, int round) =>
             stats.SelectMany(s => s.EndTurn ?? Enumerable.Empty<CPlayerStatsEndTurn>()).Any(x => x != null && x.Round == round && x.ActionData != null && x.ActionData.MainActorHealth == 1);
+
+        // ------------------------------------------------------------------ Group 3, Jaws of the Lion (2026-10-27)
+
+        /// <summary>The character's own GUID, from its turn records.</summary>
+        private static string SelfGuid(List<CPlayerStats> stats) =>
+            stats.SelectMany(s => s.StartTurn ?? Enumerable.Empty<CPlayerStatsStartTurn>()).Select(x => x?.ActionData?.MainActorGUID).FirstOrDefault(g => !string.IsNullOrEmpty(g));
+
+        /// <summary>Value enemies the character killed on a turn that was not its own (retaliate, wound, a trap they were
+        /// pulled onto...): the kill record names whose turn it was.</summary>
+        private static void KillsDuringOtherTurns(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value), count = 0;
+            string self = SelfGuid(stats);
+            foreach (CPlayerStats s in stats)
+                foreach (CPlayerStatsKill k in s.Kills ?? Enumerable.Empty<CPlayerStatsKill>())
+                {
+                    if (k == null || !IsEnemy(k.ActorWhoDiedType) || k.ActionData == null) continue;
+                    string turn = k.ActionData.TurnActorGUID;
+                    if (!string.IsNullOrEmpty(turn) && turn != self) count++;
+                }
+            total = needed;
+            met = Math.Min(count, needed);
+            result = count >= needed;
+        }
+
+        /// <summary>Value distinct enemies the character pushed or pulled. (The sheet also asks that every enemy in the
+        /// scenario moved at least once; the statistics hold no roster of enemies, so the count stands for it.)</summary>
+        private static void EnemiesForcedToMove(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value);
+            var moved = new HashSet<string>();
+            foreach (CPlayerStats s in stats)
+                foreach (CPlayerStatsAbilities a in s.Abilities ?? Enumerable.Empty<CPlayerStatsAbilities>())
+                {
+                    if (a == null || a.ActionData == null || a.TargetGUIDs == null) continue;
+                    if (a.ActionData.AbilityType != CAbility.EAbilityType.Push && a.ActionData.AbilityType != CAbility.EAbilityType.Pull) continue;
+                    for (int i = 0; i < a.TargetGUIDs.Count; i++)
+                        if (!string.IsNullOrEmpty(a.TargetGUIDs[i]) && (a.TargetTypes == null || i >= a.TargetTypes.Count || a.TargetTypes[i] == CActor.EType.Enemy || a.TargetTypes[i] == CActor.EType.Enemy2))
+                            moved.Add(a.TargetGUIDs[i]);
+                }
+            total = needed;
+            met = Math.Min(moved.Count, needed);
+            result = moved.Count >= needed;
+        }
+
+        /// <summary>Value damage to enemies in one round from attacks the character did not make itself: an actor it
+        /// controlled (the record names the controlling class) or an ally attacking on the character's turn (granted).</summary>
+        private static void CommandedDamage(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value);
+            string self = SelfGuid(stats);
+            string selfClass = stats.SelectMany(s => s.StartTurn ?? Enumerable.Empty<CPlayerStatsStartTurn>()).Select(x => x?.ActionData?.MainActorClassID).FirstOrDefault(c => !string.IsNullOrEmpty(c));
+            var perRound = new Dictionary<int, int>();
+            foreach (CPlayerStats s in stats)
+                foreach (CPlayerStatsDamage d in s.DamageDealt ?? Enumerable.Empty<CPlayerStatsDamage>())
+                {
+                    if (d == null || d.ActionData == null || !IsEnemy(d.ActorWhoReceivedDamageType) || d.ActionData.AbilityType != CAbility.EAbilityType.Attack) continue;
+                    bool controlled = !string.IsNullOrEmpty(d.ActionData.ControlledByClassID) && d.ActionData.ControlledByClassID == selfClass;
+                    bool granted = !string.IsNullOrEmpty(self) && d.ActionData.TurnActorGUID == self && d.ActorWhoDealtDamageGUID != self;
+                    if (!controlled && !granted) continue;
+                    perRound[d.Round] = (perRound.TryGetValue(d.Round, out int sum) ? sum : 0) + d.FinalDamageAmount;
+                }
+            int best = perRound.Values.DefaultIfEmpty(0).Max();
+            total = needed;
+            met = Math.Min(best, needed);
+            result = best >= needed;
+        }
+
+        /// <summary>One of the conditions named beside the marker (Poison, Strengthen, Bless, Ward...) applied to someone by the
+        /// character in the round.</summary>
+        private static bool ConditionGivenInRound(List<string> tags, List<CPlayerStats> stats, int round)
+        {
+            var wanted = new HashSet<CAbility.EAbilityType>();
+            foreach (string tag in tags)
+                if (!string.IsNullOrEmpty(tag) && !tag.StartsWith("FrosthavenMods_", StringComparison.Ordinal) && Enum.TryParse(tag, true, out CAbility.EAbilityType type)) wanted.Add(type);
+            if (wanted.Count == 0) return false;
+            foreach (CPlayerStats s in stats)
+                foreach (CPlayerStatsAbilities a in s.Abilities ?? Enumerable.Empty<CPlayerStatsAbilities>())
+                    if (a != null && a.Round == round && a.ActionData != null && wanted.Contains(a.ActionData.AbilityType) && a.TargetGUIDs != null && a.TargetGUIDs.Any(g => !string.IsNullOrEmpty(g))) return true;
+            return false;
+        }
+
+        /// <summary>Value different attack actions (a card half) each of which dealt Amount damage to enemies in one performance.</summary>
+        private static void AttackActionsWithDamage(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value), amount = Math.Max(1, t.Amount);
+            var sums = new Dictionary<string, int>();
+            foreach (CPlayerStats s in stats)
+                foreach (CPlayerStatsDamage d in s.DamageDealt ?? Enumerable.Empty<CPlayerStatsDamage>())
+                {
+                    if (d == null || d.ActionData == null || !IsEnemy(d.ActorWhoReceivedDamageType) || d.ActionData.AbilityType != CAbility.EAbilityType.Attack) continue;
+                    string half = string.IsNullOrEmpty(d.ActionData.ActingAbilityName) ? "?" : d.ActionData.ActingAbilityName.Substring(0, 1);
+                    string key = $"{d.Round}/{d.ActionData.CardID}/{half}";
+                    sums[key] = (sums.TryGetValue(key, out int sum) ? sum : 0) + d.FinalDamageAmount;
+                }
+            var actions = new HashSet<string>(sums.Where(p => p.Value >= amount).Select(p => p.Key.Substring(p.Key.IndexOf('/') + 1)));
+            total = needed;
+            met = Math.Min(actions.Count, needed);
+            result = actions.Count >= needed;
+        }
+
+        /// <summary>Value obstacles destroyed by the character. (The sheet's second clause, no obstacle left at the end
+        /// but those allies placed, is not in the statistics; the count stands for the mastery.)</summary>
+        private static void ObstaclesDestroyed(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value);
+            int count = stats.Sum(s => (s.DestroyedObstacles ?? Enumerable.Empty<CPlayerStatsDestroyObstacle>()).Count(o => o != null));
+            total = needed;
+            met = Math.Min(count, needed);
+            result = count >= needed;
+        }
 
         private static bool IsAlly(string actorType) =>
             actorType == CActor.EType.Player.ToString() || actorType == CActor.EType.HeroSummon.ToString();

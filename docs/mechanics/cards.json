@@ -54085,7 +54085,7 @@
 "game": "GH",
 "class": "Hatchet",
 "id": 11027,
-"name": "Ripped From The Flesh",
+"name": "Ripped From the Flesh",
 "level": 4,
 "initiative": 20,
 "discard": [
@@ -58030,7 +58030,7 @@
 "game": "GH",
 "class": "Demolitionist",
 "id": 11084,
-"name": "Knock Out The Support",
+"name": "Knock Out the Support",
 "level": 1,
 "initiative": 20,
 "discard": [
@@ -59578,7 +59578,7 @@
 "game": "GH",
 "class": "Demolitionist",
 "id": 11097,
-"name": "Nowhere To Run",
+"name": "Nowhere to Run",
 "level": 3,
 "initiative": 39,
 "discard": [
@@ -60532,7 +60532,7 @@
 "game": "GH",
 "class": "Demolitionist",
 "id": 11105,
-"name": "Insult To Injury",
+"name": "Insult to Injury",
 "level": 7,
 "initiative": 64,
 "discard": [
@@ -63666,7 +63666,7 @@
 "game": "GH",
 "class": "Voidwarden",
 "id": 11151,
-"name": "Signs Of The Void",
+"name": "Signs of the Void",
 "level": 1,
 "initiative": 15,
 "discard": [
@@ -63796,7 +63796,7 @@
 "game": "GH",
 "class": "Voidwarden",
 "id": 11152,
-"name": "Close To The Abyss",
+"name": "Close to the Abyss",
 "level": 1,
 "initiative": 72,
 "discard": [
@@ -63903,7 +63903,7 @@
 "game": "GH",
 "class": "Voidwarden",
 "id": 11153,
-"name": "Gift Of The Void",
+"name": "Gift of the Void",
 "level": 1,
 "initiative": 89,
 "discard": [
@@ -64138,7 +64138,7 @@
 "game": "GH",
 "class": "Voidwarden",
 "id": 11155,
-"name": "Freeze The Soul",
+"name": "Freeze the Soul",
 "level": 1,
 "initiative": 58,
 "discard": [
@@ -64377,7 +64377,7 @@
 "game": "GH",
 "class": "Voidwarden",
 "id": 11157,
-"name": "Turn Out The Lights",
+"name": "Turn Out the Lights",
 "level": 1,
 "initiative": 49,
 "discard": [
@@ -64520,7 +64520,7 @@
 "game": "GH",
 "class": "Voidwarden",
 "id": 11158,
-"name": "Lure Of The Void",
+"name": "Lure of the Void",
 "level": 1,
 "initiative": 67,
 "discard": [
@@ -64676,7 +64676,7 @@
 "game": "GH",
 "class": "Voidwarden",
 "id": 11159,
-"name": "Grasp Of Doom",
+"name": "Grasp of Doom",
 "level": 1,
 "initiative": 36,
 "discard": [
@@ -65525,7 +65525,7 @@
 "game": "GH",
 "class": "Voidwarden",
 "id": 11165,
-"name": "Give And Take",
+"name": "Give and Take",
 "level": 2,
 "initiative": 21,
 "discard": [
@@ -66690,7 +66690,7 @@
 "game": "GH",
 "class": "Voidwarden",
 "id": 11174,
-"name": "Surge Of Power",
+"name": "Surge of Power",
 "level": 6,
 "initiative": 81,
 "discard": [
@@ -67325,7 +67325,7 @@
 "game": "GH",
 "class": "Voidwarden",
 "id": 11179,
-"name": "Eye Of The Void",
+"name": "Eye of the Void",
 "level": 9,
 "initiative": 19,
 "discard": [
@@ -70748,7 +70748,7 @@
 "game": "GH",
 "class": "RedGuard",
 "id": 11232,
-"name": "Shield Of The Desert",
+"name": "Shield of the Desert",
 "level": 1,
 "initiative": 10,
 "discard": [
@@ -70922,7 +70922,7 @@
 "game": "GH",
 "class": "RedGuard",
 "id": 11234,
-"name": "Warrior Of The Sun",
+"name": "Warrior of the Sun",
 "level": "X",
 "initiative": 13,
 "discard": [
@@ -71511,7 +71511,7 @@
 "game": "GH",
 "class": "RedGuard",
 "id": 11239,
-"name": "Warmth Of The Sun",
+"name": "Warmth of the Sun",
 "level": 3,
 "initiative": 23,
 "discard": [
@@ -71906,7 +71906,7 @@
 "game": "GH",
 "class": "RedGuard",
 "id": 11242,
-"name": "Burn Away The Dark",
+"name": "Burn Away the Dark",
 "level": 4,
 "initiative": 31,
 "discard": [
@@ -72571,7 +72571,7 @@
 "game": "GH",
 "class": "RedGuard",
 "id": 11248,
-"name": "Horns Of The Beast",
+"name": "Horns of the Beast",
 "level": 7,
 "initiative": "08",
 "discard": [

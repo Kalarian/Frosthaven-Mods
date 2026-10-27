@@ -90,6 +90,12 @@ OUT = fh_mods.MODS / PACK
 
 # Frosthaven-only character fields, per class. Race and traits from Cephalofair's crossover sheets; hero stats and
 # complexity are our estimate for the class-select screen (0-6 and 1-5).
+# A class's other 3D models, by their own ECharacter name (gh_model.export finds their hero bundle): the Demolitionist's
+# Mech Suit card swaps her model to DemolitionistMech (ChangeCharacterModel) for as long as the card is active.
+EXTRA_MODELS = {
+    "Demolitionist": ["DemolitionistMech"],
+}
+
 CLASS_EXTRAS = {
     "Brute": {
         "Race": "Inox",
@@ -673,6 +679,16 @@ def main():
                       f"{len(anim['clips'])} clips swapped on the {anim['base']}'s animator)")
             except Exception as e:  # noqa: BLE001 - the model is cosmetic, never block the data
                 warnings.append(f"{cls}: 3D model not copied: {e}")
+            # a class's other models (the Demolitionist's Mech Suit: ChangeCharacterModel -> DemolitionistMech, its own
+            # ECharacter and hero bundle), exported the same way under their own name; the game asks for the prefab by
+            # that name when the card swaps the model and the plugin builds it like a hero's (GHClasses.Prefab)
+            for extra in EXTRA_MODELS.get(cls, []):
+                try:
+                    models[extra] = gh_model.export(gh, fh_mods.GAME, extra, args.out)
+                    print(f"{cls}: model {extra} from {models[extra]['bundle']} ({models[extra]['size'] // 1048576} MB, "
+                          f"{len(models[extra]['animation']['clips'])} clips on the {models[extra]['animation']['base']}'s animator)")
+                except Exception as e:  # noqa: BLE001
+                    warnings.append(f"{cls}: model {extra} not copied: {e}")
 
         # the class's own ability effects (see gh_vfx.py); optional, the plugin keeps the Drifter's without
         if cls in models:
