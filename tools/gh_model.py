@@ -375,6 +375,13 @@ def describe(bundle_path, cls, fh_bundle_path, skin=None, animation=None):
     model_path = next((p for p in b.container if p.lower().endswith(f"/he_{cls.lower()}{suffix.lower()}_pr.prefab")), None)
     if model_path is None:   # the Cragheart's base model is HE_Cragheart.prefab (its skin keeps the _PR suffix)
         model_path = next((p for p in b.container if p.lower().endswith(f"/he_{cls.lower()}{suffix.lower()}.prefab")), None)
+    if model_path is None and not skin:
+        # named after the race or misspelt (HE_Aesther_Summoner_PR, HF_HE_Spellweaver, HE_SootheSinger_PR): the one model
+        # prefab under Characters/Heroes that is not a skin, preferring a name that starts like the class
+        heroes = [p for p in b.container if "/characters/heroes/" in p.lower() and p.lower().endswith(".prefab")
+                  and "_alt" not in p.lower() and (p.lower().endswith("_pr.prefab") or "/he_" in p.lower() or "/hf_he_" in p.lower())]
+        heroes.sort(key=lambda p: (cls.lower()[:4] not in Path(p).stem.lower(), len(Path(p).stem)))
+        model_path = heroes[0] if heroes else None
     if hero_path is None or model_path is None:
         raise ValueError(f"{bundle_path.name} lacks {cls}{suffix}.prefab or HE_{cls}{suffix}_PR.prefab; has {sorted(b.container)}")
     hero_go, model_go = b.container[hero_path], b.container[model_path]

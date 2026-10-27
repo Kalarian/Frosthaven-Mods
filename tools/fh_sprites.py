@@ -34,6 +34,8 @@ ELEMENTS = ("Fire", "Ice", "Air", "Earth", "Light", "Dark")
 RENAMED = {
     "InvSmallItem": "SmallItem", "InvOneHand": "OneHandItem", "InvTwoHands": "TwoHandsItem",
     "InvHead": "HeadItem", "InvBody": "BodyItem", "InvLegs": "FeetItem",
+    # the Elementalist's "add range / damage / health to the summon" icons: Frosthaven's plain ones
+    "AA_Add_Range": "Range", "AA_Add_Damage": "Damage", "AA_Add_Health": "Heal",
 }
 SPRITE = re.compile(r'<sprite name="?([^">]+)"?>')
 AURA = re.compile(r'<sprite name="?Aura"?>\s*:?\s*')

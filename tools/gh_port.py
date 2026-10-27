@@ -190,25 +190,60 @@ CLASS_EXTRAS = {
         "ElementalAffinities": "[ Fire, Earth ]",
         "HeroStats": {"Melee": 6, "Ranged": 2, "Mobility": 4, "Support": 1, "Defense": 2, "Control": 3},
     },
-    # System probes (2026-10-27): placeholders so the classes convert for the song / doom / augment checks in game.
-    # Race from the board game; the rest is a first guess, to be done properly when each class is ported.
-    "Soothsinger": {   # Ranged Support, High (probe placeholder)
+    # ---- Groups 4-6 (2026-10-27, ahead of their ports): race and traits from the crossover sheets, complexity from the
+    # digital game's difficulty line (Low 1, Medium 2, High 3, Very High 4), stats a first judgment, affinities from the
+    # port's own count (AFFINITY_MIN) when each class is first converted.
+    "Soothsinger": {   # Ranged Support, High
         "Race": "Quatryl",
-        "Traits": "[ Chaotic, Educated, Persuasive ]",
+        "Traits": "[ Educated, Nimble, Persuasive ]",
         "Complexity": "3",
         "HeroStats": {"Melee": 1, "Ranged": 3, "Mobility": 2, "Support": 6, "Defense": 1, "Control": 4},
     },
-    "Doomstalker": {   # Ranged Damage, Medium (probe placeholder)
+    "Doomstalker": {   # Ranged Damage/Support, Medium
         "Race": "Orchid",
-        "Traits": "[ Nimble, Outcast, Resourceful ]",
+        "Traits": "[ Chaotic, Intimidating, Nimble ]",
         "Complexity": "2",
         "HeroStats": {"Melee": 1, "Ranged": 6, "Mobility": 3, "Support": 2, "Defense": 1, "Control": 3},
     },
-    "Mindthief": {   # Melee Damage/Control, High (probe placeholder)
+    "Mindthief": {   # Melee Damage, High
         "Race": "Vermling",
-        "Traits": "[ Chaotic, Nimble, Outcast ]",
+        "Traits": "[ Arcane, Outcast, Persuasive ]",
         "Complexity": "3",
+        "ElementalAffinities": "[ Ice, Dark ]",
         "HeroStats": {"Melee": 4, "Ranged": 2, "Mobility": 4, "Support": 1, "Defense": 1, "Control": 5},
+    },
+    "Spellweaver": {   # Ranged Damage, High
+        "Race": "Orchid",
+        "Traits": "[ Arcane, Educated, Resourceful ]",
+        "Complexity": "3",
+        "ElementalAffinities": "[ Ice ]",
+        "HeroStats": {"Melee": 1, "Ranged": 6, "Mobility": 2, "Support": 2, "Defense": 1, "Control": 3},
+    },
+    "Elementalist": {   # Ranged Damage, Very High
+        "Race": "Savvas",
+        "Traits": "[ Arcane, Educated, Intimidating ]",
+        "Complexity": "4",
+        "ElementalAffinities": "[ Fire, Ice, Air, Earth, Light, Dark ]",   # every element 4+ times; check the sheet's room for six
+        "HeroStats": {"Melee": 3, "Ranged": 5, "Mobility": 2, "Support": 3, "Defense": 2, "Control": 4},
+    },
+    "Tinkerer": {   # Ranged Support, Medium
+        "Race": "Quatryl",
+        "Traits": "[ Educated, Nimble, Resourceful ]",
+        "Complexity": "2",
+        "HeroStats": {"Melee": 1, "Ranged": 4, "Mobility": 2, "Support": 6, "Defense": 2, "Control": 3},
+    },
+    "BeastTyrant": {   # Melee Damage/Summoner, Medium
+        "Race": "Vermling",
+        "Traits": "[ Armored, Outcast, Strong ]",
+        "Complexity": "2",
+        "ElementalAffinities": "[ Earth ]",
+        "HeroStats": {"Melee": 3, "Ranged": 2, "Mobility": 3, "Support": 3, "Defense": 2, "Control": 3},
+    },
+    "Summoner": {   # Summoner/Support, Medium
+        "Race": "Aesther",
+        "Traits": "[ Arcane, Chaotic, Resourceful ]",
+        "Complexity": "2",
+        "HeroStats": {"Melee": 1, "Ranged": 3, "Mobility": 2, "Support": 4, "Defense": 2, "Control": 3},
     },
 }
 

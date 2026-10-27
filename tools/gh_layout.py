@@ -40,6 +40,9 @@ ICONS = {
     "Curse": "Icon_Curse",
     "Poison": "Icon_Poison",
     "Control": "AA_Mind_Control",
+    # Groups 4-6 (seen in the 2026-10-27 trial port): a doom marks an enemy, the Summoner's damage prevention
+    "Doom": "Positive_Attack_Curse",
+    "Prevent": "Positive_DamagePrevent",
 }
 # Gloomhaven also names an active after its class ("Sunkeeper": the class icon); Frosthaven has no such icon for a
 # ported class, so gh_port's CLASS_ICONS gives each of those an icon for what the card does. Every icon written is
@@ -209,7 +212,7 @@ def _actives(nodes):
 # element (the song / doom is a persistent bonus with the ability's own layout), which is how the card then reads in
 # the hand; the in-play tracker is the game's own code. Augment keeps its element, only its class icon is mapped.
 TRACKERS = {
-    "Song": ("SongAbilityLayout", "Positive_Attack"),
+    "Song": ("SongAbilityLayout", "Positive_AttackPlus"),
     "Doom": ("DoomAbilityLayout", "Positive_AttackPlus"),
 }
 
@@ -232,7 +235,7 @@ def convert_trackers(items, icons):
         elif n.key == "Augment":
             for c in n.children:
                 if c.key == "AugmentIcon":
-                    c.value = icons.get(c.text(), ICONS.get(c.text(), "Positive_Attack"))
+                    c.value = icons.get(c.text(), ICONS.get(c.text(), "Positive_AttackPlus"))
             out.append(n)
         else:
             out.append(n)

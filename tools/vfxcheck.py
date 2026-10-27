@@ -31,6 +31,7 @@ STAND_INS = {
     # variants of the same two Gloomhaven surface shaders on the mech bomb and the rubble
     "Standard": "Universal Render Pipeline/Lit",
     "Amp_Low/Amp_CharShader_Low": "Amp_Char_Shader_Universal",
+    "Amp_Char_Shader": "Amp_Char_Shader_Universal",   # props inside effects (the Tinkerer's grenade, a coin pile, a bear trap)
     "Amp_Low/Amp_Basic_Prop_Shader_Low": "Amp_Basic_N_MRAO",
 }
 
