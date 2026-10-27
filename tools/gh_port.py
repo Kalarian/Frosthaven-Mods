@@ -583,6 +583,13 @@ def main():
 
     def write(rel, s):
         s = fh_sprites.to_fh(s)   # Frosthaven's icons: item slots, no Aura icon, infused elements as CreateX
+        # a sub-ability that hits everything next to its parent's targets (Massive Boulder top, Blind Destruction top):
+        # Gloomhaven marks it inline; Frosthaven's own player cards (Banner Spear's Incendiary Throw) make it fire on its
+        # own once the attack lands (TreatAsNonSubAbility + AutoTrigger + SubAbilityPreview). As inline it started and
+        # ended without touching the figure beside the target (2026-10-27, Group 2 pass, with one placed there)
+        s = re.sub(r"^([ \t]+)IsInlineSubAbility: True(\r?\n)((?:\1[^\r\n]*\r?\n)*?\1AllTargetsAdjacentToParentTargets: True\r?\n)",
+                   lambda m: (f"{m.group(1)}TreatAsNonSubAbility: True{m.group(2)}{m.group(1)}AutoTrigger: True{m.group(2)}"
+                              f"{m.group(1)}Flags: [SubAbilityPreview]{m.group(2)}{m.group(3)}"), s, flags=re.M)
         # active-bonus icons outside the card layout (an override list inside the card data, a summon's own icon) take the
         # same Frosthaven names as the layout's (gh_layout.ICONS)
         s = re.sub(r"(ListLayoutOverride:\s*\[[^\]\n]*,\s*)([A-Za-z0-9_]+)(\s*\])",
