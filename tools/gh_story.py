@@ -239,6 +239,78 @@ STORIES = {
             "mine, and the whole of Frosthaven looks up and smiles."
         ),
     },
+    # ---- Group 4 (drafted 2026-10-27 for the user's review, ahead of the ports; the reward is each class's own
+    # Gloomhaven events, which gh_events supplies when the class is ported)
+    "Spellweaver": {
+        "name": "Spellweaver Retires",
+        "effects": [],
+        "text": (
+            "The Spellweaver has been counting. You noticed it weeks ago: a small tally on the inside of her sleeve, "
+            "a mark for every time Reviving Ether brought her cards back from the fire. \"Thirty-one,\" she says, when "
+            "you finally ask. \"The sages say the ether forgives you nine times. After that, you are borrowing.\"\n"
+            "She is going home to the Orchid groves to pay it back, which as far as you can tell means sitting very "
+            "still for a very long time. She does not seem to mind. \"I have been loud enough,\" she says, and for a "
+            "woman who once set a frozen lake on fire from the far shore, it is true.\n"
+            "Before she goes she walks the Alchemist's garden with the keeper, touching each bed in turn. Nothing "
+            "visible happens. The following spring the garden comes up a week early and nobody can say why.\n"
+            "She leaves on foot, south, with a single staff and no coat, because the cold has never once been "
+            "allowed to touch her and she sees no reason to start now."
+        ),
+    },
+    "Mindthief": {
+        "name": "Mindthief Retires",
+        "effects": [],
+        "text": (
+            "The rats go first. For three days the outpost's granary is quieter than anyone can remember, and the "
+            "Craftsman, who has fought the vermin for years, walks around looking cheated. Then the Mindthief comes to "
+            "find you, a swarm's worth of small warm bodies gone from the folds of her cloak, and tells you she has "
+            "sent them ahead.\n"
+            "\"There is a nest in the Copperneck,\" she says, \"a big one. They have been talking about it for a "
+            "month.\" You ask who. She looks at you the way she looks at anyone who asks a question she has already "
+            "answered in their head. \"The rats.\"\n"
+            "She leaves you her blade, the thin wicked one, and with it a thought she presses into you so firmly that "
+            "you still feel it years later whenever you draw it: nothing in front of you is as dangerous as what is "
+            "behind it. You have never been sure whether it was advice or a joke at your expense.\n"
+            "By the time the Craftsman has finished celebrating, every rat in Frosthaven is back, and the granary is "
+            "exactly as it was. The Mindthief is not."
+        ),
+    },
+    "Elementalist": {
+        "name": "Elementalist Retires",
+        "effects": [],
+        "text": (
+            "The Elementalist calls it balancing the ledger. Six elements, drawn and spent and drawn again over a "
+            "winter of fighting, and the Savvas keep count of such things the way merchants keep count of coin. \"I "
+            "have taken more fire from this valley than I gave it,\" they say, standing at the frozen edge of the bay. "
+            "\"That is not a thing to leave behind.\"\n"
+            "So they give it back. For a week the outpost is warmer than it has any right to be in that season: the "
+            "ice in the harbour rots, the lumber yard's frozen stack comes loose with a sound like a sigh, and the "
+            "Infirmary's patients sleep without blankets for the first time since autumn.\n"
+            "Then the Elementalist takes the cold instead, folds it into themself with the same unhurried care, and "
+            "walks north into the white with it, toward wherever a Savvas goes to be respected. They do not say "
+            "goodbye. They have never seen the point.\n"
+            "The thaw they left lasts exactly as long as they said it would, to the day. Frosthaven learns to plan "
+            "around it, and nobody ever quite believes it was weather."
+        ),
+    },
+    "Soothsinger": {
+        "name": "Soothsinger Retires",
+        "effects": [],
+        "text": (
+            "The last song is in the Tavern, which is where all of them were, and the whole outpost is there to hear "
+            "it. The Soothsinger plays it twice: once the way she played it on the ice, fast and hard, the one that "
+            "put spine into the guard when the Algox came over the wall, and once slowly, so that everyone can learn "
+            "the words.\n"
+            "They do. By the end of the week the lumber crews are singing it on the road and getting it wrong, which "
+            "she says is the point. \"A song you have to be told is a song you forget,\" she tells you, packing the "
+            "lute with the care other people give to children. \"A song you get wrong is yours.\"\n"
+            "She is going south with the merchants, to the Capital, where there are halls with proper ceilings and "
+            "audiences who have never heard what a Quatryl can do with eight strings and a grudge. She expects to be "
+            "rich by midsummer. Knowing her, she will be.\n"
+            "The Tavern keeps the song. It is the one they play when the walls hold, and it is still, years on, "
+            "slightly wrong."
+        ),
+    },
 }
 
 
