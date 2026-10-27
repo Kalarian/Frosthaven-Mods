@@ -167,6 +167,78 @@ STORIES = {
             "and then she is gone into the white."
         ),
     },
+    # ---- Group 3, Jaws of the Lion (drafted 2026-10-27 for the user's review). These four have no Gloomhaven events
+    # of their own (gh_events.retirement_effects is None), so each story's lasting mark is a proposal in
+    # docs/reports: nothing is applied until the user picks one (effects stay empty).
+    "Hatchet": {
+        "name": "Hatchet Retires",
+        "effects": [],
+        "text": (
+            "The Hatchet has a new coat. It is dark green, cut in the Capital style, and entirely wrong for Frosthaven, "
+            "which he knows perfectly well. He wears it to the gate anyway, the Favorite hanging at his hip where the "
+            "fashion says a sword should go.\n"
+            "\"A troupe is going south with the caravan,\" he says. \"Knife throwers, fire eaters, that sort of thing. "
+            "They lost their axe man in a tavern in the Capital. I told them I could be worse.\" He grins, which the "
+            "coat was clearly bought for. \"Nobody in a crowd ever throws back. I could get used to that.\"\n"
+            "He looks at the wall for a moment, the way everyone does before they go, then pulls the Favorite and "
+            "throws it. It buries itself in the gatepost at head height, a hair from the guard's ear. The guard does "
+            "not flinch; the Hatchet taught him not to, over a long winter of exactly this.\n"
+            "He walks over, works the axe free, kisses the blade, and goes. The notch stays in the post. New recruits "
+            "are told to stand with their heads against it, and never told why."
+        ),
+    },
+    "RedGuard": {
+        "name": "Red Guard Retires",
+        "effects": [],
+        "text": (
+            "The Red Guard does not leave. That is the first thing she tells you, before you can ask. She has walked "
+            "the wall every night since the first attack, in the red armor that marks her as an exile from a city "
+            "that no longer wants her, and somewhere in all those nights the wall became hers.\n"
+            "\"In Jhinda the guard is a caste,\" she says. \"You are born to it or you are not. Here you are a guard "
+            "because you stand on the wall when it matters. I find I prefer that.\" The captain of the watch has "
+            "offered her a post, a bunk in the Barracks and the north tower. She has already moved her things.\n"
+            "She hands you the sickle and chain, the weapon she pulled a hundred enemies off their feet with. \"The "
+            "guard issues a spear. I would hate to be the one who makes an exception.\"\n"
+            "That night the torch in the north tower stays lit until dawn, and it does every night after. The "
+            "lumber crews stop asking who is up there. They just stop looking over their shoulders."
+        ),
+    },
+    "Voidwarden": {
+        "name": "Voidwarden Retires",
+        "effects": [],
+        "text": (
+            "The Voidwarden has been filling a jar with black sand. A pinch at a time, after every scenario, from "
+            "wherever the Void touched the world through her and left its coarse, dark residue behind. The jar is "
+            "nearly full. \"That is the measure of it,\" she says, turning it in the light. \"Everything I ever made "
+            "disappear. It does not look like much.\"\n"
+            "She is going to the Capital, to the archives, to write down what she knows. \"No one who touches the Void "
+            "lives long enough to teach the next one. I intend to be the exception.\" She says it without drama; the "
+            "scars down her left side say the rest.\n"
+            "She leaves the jar with the Alchemist, with a label in her small, exact hand: DO NOT OPEN. The "
+            "Alchemist, who has opened everything else anyone ever left her, puts it on the highest shelf and does "
+            "not touch it.\n"
+            "The morning the caravan goes, the sick in the Infirmary are quieter than usual, and the healers find "
+            "every one of them a little better than the day before. Nobody saw her go in."
+        ),
+    },
+    "Demolitionist": {
+        "name": "Demolitionist Retires",
+        "effects": [],
+        "text": (
+            "The explosion wakes the whole outpost an hour before dawn. By the time you reach the harbor the "
+            "Demolitionist is standing on the ice, or what is left of it, surrounded by delighted fishermen. The "
+            "channel that has been frozen shut since midwinter is open water.\n"
+            "\"You said the boats could not get out,\" she says, as if that settled it. The rocket boots are "
+            "smoking gently. The mech suit stands on the quay behind her like a patient dog.\n"
+            "The foreman from the mine has been watching from the harbor wall. He has a seam that will not open and "
+            "a crew that is tired of picks, and he offers her the job before the ice has stopped moving. She "
+            "considers it for as long as it takes to reload. \"Things that need breaking,\" she says. \"I can do "
+            "that.\"\n"
+            "She takes the suit up the mountain road the next day, the fists folded, the whole contraption leaving "
+            "prints like a bear in the snow. Twice a week, for years afterwards, a dull thump rolls down from the "
+            "mine, and the whole of Frosthaven looks up and smiles."
+        ),
+    },
 }
 
 

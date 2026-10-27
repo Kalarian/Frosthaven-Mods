@@ -52,7 +52,8 @@ ABILITY_TYPES = {
 }
 # the kind of an ability entry: the first property that names an ability type (the converter writes it first)
 KIND_KEYS = ABILITY_TYPES | {"RefreshItems", "MergedMoveAttack", "MergedCreateAttack", "MergedKillCreate", "MergedMoveObstacleAttack",
-                             "MergedDestroyObstacleAttack", "MergedDisarmTrapDestroyObstacle"}
+                             "MergedDestroyObstacleAttack", "MergedDisarmTrapDestroyObstacle",
+                             "AddModifiersToMonsterDeck"}   # the Voidwarden's Taunting Fate (CAbilityAddModifierToMonsterDeck reads it)
 
 
 def kind_of(props):

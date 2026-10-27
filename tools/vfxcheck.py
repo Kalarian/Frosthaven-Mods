@@ -27,6 +27,11 @@ STAND_INS = {
     "Amp_Basic_Prop_Shader": "Amp_Basic_N_MRAO",
     "Amp_Char_Shader_2Side": "Amp_Char_Shader_Universal",
     "OmniDecalSimple_Shd": "Shader Graphs/URPProjectionDecal_FX",
+    # Jaws of the Lion effects (2026-10-27): Unity's built-in Standard on blood splats and black mattes, the low-end
+    # variants of the same two Gloomhaven surface shaders on the mech bomb and the rubble
+    "Standard": "Universal Render Pipeline/Lit",
+    "Amp_Low/Amp_CharShader_Low": "Amp_Char_Shader_Universal",
+    "Amp_Low/Amp_Basic_Prop_Shader_Low": "Amp_Basic_N_MRAO",
 }
 
 

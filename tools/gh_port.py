@@ -566,7 +566,8 @@ def main():
             # Frosthaven can't aim a Damage ability's area (none of its own cards has one; the preview throws and
             # the damage can't be confirmed): such a card needs a CARD_FIXES entry
             for blk in re.finditer(r"^( +)\w+:\r?\n((?:\1 +.*\r?\n)+)", s.split("\nLayout:")[0], re.M):
-                if re.search(r"^\s+Damage:", blk.group(2), re.M) and "AreaEffect" in blk.group(2):
+                # the ability's own Damage line (a Damage sub-ability on the parent's tiles, UseParentTiles, is aimed by its attack)
+                if re.search(rf"^{blk.group(1)} {{4}}Damage:", blk.group(2), re.M) and "AreaEffect" in blk.group(2):
                     warnings.append(f"{n}: a Damage ability with an AreaEffect: Frosthaven can't aim it (add a CARD_FIXES entry)")
             anim_names.update(m.group(2) for m in ANIM_OVERLOAD_LINE.finditer(s))
             # "ID: 20417 # to 20423": a supply card with copies (the Sawbones' medical packs). Frosthaven reads the range
@@ -623,7 +624,7 @@ def main():
             # Frosthaven's own sheet for the class: its perks and masteries, not Gloomhaven's perks
             for rel, s in crossover:
                 for amc in re.findall(r"AMC_\w+", s):
-                    if amc not in fh_amcs:
+                    if amc not in fh_amcs and amc not in gh_crossover.NEW_CARDS:   # the pack writes NEW_CARDS itself
                         warnings.append(f"{rel}: attack modifier {amc} isn't in Frosthaven")
                 write(rel, s)
             perks = [rel for rel, _ in crossover if "/Perks/" in rel]

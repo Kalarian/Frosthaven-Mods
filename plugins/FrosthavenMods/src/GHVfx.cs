@@ -529,6 +529,11 @@ namespace FrosthavenMods
             else if (name == "Amp_Basic_Prop_Shader") return FindShader("Amp_Basic_N_MRAO") ?? FindShader("Universal Render Pipeline/Simple Lit");
             else if (name == "Amp_Char_Shader_2Side") return FindShader("Amp_Char_Shader_Universal") ?? FindShader("Universal Render Pipeline/Simple Lit");
             else if (name == "OmniDecalSimple_Shd") return FindShader("Shader Graphs/URPProjectionDecal_FX") ?? FindShader("Particles/Standard Unlit");
+            // Jaws of the Lion's effects: Unity's built-in Standard (blood splats, black mattes; not in a URP build) and the
+            // low-end variants of the two Gloomhaven surface shaders above (the mech bomb, the rubble)
+            else if (name == "Standard") return FindShader("Universal Render Pipeline/Lit") ?? FindShader("Universal Render Pipeline/Simple Lit");
+            else if (name == "Amp_Low/Amp_CharShader_Low") return FindShader("Amp_Char_Shader_Universal") ?? FindShader("Universal Render Pipeline/Simple Lit");
+            else if (name == "Amp_Low/Amp_Basic_Prop_Shader_Low") return FindShader("Amp_Basic_N_MRAO") ?? FindShader("Universal Render Pipeline/Simple Lit");
             return FindShader(name);
         }
 
