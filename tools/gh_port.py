@@ -325,13 +325,11 @@ CARD_FIXES = {
     # Rock Slide (Cragheart), top: "All allies and enemies adjacent to one or more of the created obstacles suffer 2
     # damage". Without AllTargetsAdjacentToParentTargets Frosthaven's damage sub-ability targets the create's own hexes
     # (CAbilityDamage: TilesInRange = ParentAbility.TilesSelected), which hold the new rocks and never a figure: the 2
-    # damage hit nobody in every bench (2026-10-27). Frosthaven's Ice Wall (Algox Icespeaker) is the same shape with it;
-    # fires on its own like the other adjacent-to-target sub-abilities.
+    # damage hit nobody in every bench (2026-10-27). Frosthaven's Ice Wall (Algox Icespeaker) is the same shape with it.
     20134: [
         (r"^([ \t]+)(\w+SubDamage|\w+):(\r?)\n([ \t]+)Damage: 2\r?\n(?=[ \t]+Range: 1\r?\n[ \t]+Target: -1)",
          lambda m: (f"{m.group(1)}{m.group(2)}:{m.group(3)}\n" + "".join(f"{m.group(4)}{x}{m.group(3)}\n" for x in
-                    ("TreatAsNonSubAbility: True", "AutoTrigger: True", "Flags: [SubAbilityPreview]",
-                     "AllTargetsAdjacentToParentTargets: True", "Damage: 2")))),
+                    ("AllTargetsAdjacentToParentTargets: True", "Damage: 2")))),
     ],
     # Wings of the Night (Nightshroud), bottom: "persistent: before each of your attack actions, Move 2". Its active
     # bonus behaviour StartActionAbility is one no Frosthaven card uses, and in Frosthaven the move it fires throws
@@ -594,13 +592,6 @@ def main():
 
     def write(rel, s):
         s = fh_sprites.to_fh(s)   # Frosthaven's icons: item slots, no Aura icon, infused elements as CreateX
-        # a sub-ability that hits everything next to its parent's targets (Massive Boulder top, Blind Destruction top):
-        # Gloomhaven marks it inline; Frosthaven's own player cards (Banner Spear's Incendiary Throw) make it fire on its
-        # own once the attack lands (TreatAsNonSubAbility + AutoTrigger + SubAbilityPreview). As inline it started and
-        # ended without touching the figure beside the target (2026-10-27, Group 2 pass, with one placed there)
-        s = re.sub(r"^([ \t]+)IsInlineSubAbility: True(\r?\n)((?:\1[^\r\n]*\r?\n)*?\1AllTargetsAdjacentToParentTargets: True\r?\n)",
-                   lambda m: (f"{m.group(1)}TreatAsNonSubAbility: True{m.group(2)}{m.group(1)}AutoTrigger: True{m.group(2)}"
-                              f"{m.group(1)}Flags: [SubAbilityPreview]{m.group(2)}{m.group(3)}"), s, flags=re.M)
         # active-bonus icons outside the card layout (an override list inside the card data, a summon's own icon) take the
         # same Frosthaven names as the layout's (gh_layout.ICONS)
         s = re.sub(r"(ListLayoutOverride:\s*\[[^\]\n]*,\s*)([A-Za-z0-9_]+)(\s*\])",
