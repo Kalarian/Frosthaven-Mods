@@ -544,6 +544,12 @@ def main():
 
     def write(rel, s):
         s = fh_sprites.to_fh(s)   # Frosthaven's icons: item slots, no Aura icon, infused elements as CreateX
+        # active-bonus icons outside the card layout (an override list inside the card data, a summon's own icon) take the
+        # same Frosthaven names as the layout's (gh_layout.ICONS)
+        s = re.sub(r"(ListLayoutOverride:\s*\[[^\]\n]*,\s*)([A-Za-z0-9_]+)(\s*\])",
+                   lambda m: m.group(1) + gh_layout.ICONS.get(m.group(2), m.group(2)) + m.group(3), s)
+        if rel.startswith("Global/HeroSummons/"):
+            s = re.sub(r"^(\s*Icon:\s*)([A-Za-z0-9_]+)\s*$", lambda m: m.group(1) + gh_layout.ICONS.get(m.group(2), m.group(2)), s, flags=re.M)
         for name in fh_sprites.check(s):
             warnings.append(f"{rel}: <sprite name={name}> isn't one of Frosthaven's icons (it would show as raw text)")
         for name in fh_sprites.check_icons(s):
