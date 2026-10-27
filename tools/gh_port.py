@@ -556,8 +556,12 @@ def main():
         # ... and their models: Gloomhaven's own summon bundles, built in play on a Frosthaven summon's template
         # (gh_model.export_npc, GHModel's summon templates; pack.json "summon_models", visual only like "model")
         shipped = []
+        try:
+            import gh_model   # also imported for the hero model below; the ImportError (UnityPy) is reported there
+        except ImportError:
+            gh_model = None
         for sid in summon_ids:
-            if sid in summon_models:
+            if sid in summon_models or gh_model is None:
                 continue
             try:
                 summon_models[sid] = gh_model.export_npc(gh, fh_mods.GAME, sid, args.out)

@@ -604,7 +604,15 @@ namespace FrosthavenMods
                 foreach (Renderer r in root.GetComponentsInChildren<Renderer>(true))
                 {
                     r.renderingLayerMask = uint.MaxValue;   // like Frosthaven's heroes; the game re-layers at runtime anyway
-                    if (!(r is SkinnedMeshRenderer) && !(r is MeshRenderer)) { r.forceRenderingOff = true; continue; }
+                    if (!(r is SkinnedMeshRenderer) && !(r is MeshRenderer))
+                    {
+                        // Gloomhaven fed these (the idle wisps, the fireflies) from a MaterialLoader at runtime, so their slots are null;
+                        // CharacterManager.RefreshVisibility logs "Null material found in ..." for every null slot at every glow or
+                        // invisibility change, so the slots go too. (Rebuilding them like the cast effects: see the polish list.)
+                        r.forceRenderingOff = true;
+                        r.sharedMaterials = new Material[0];
+                        continue;
+                    }
                     Material[] slots = r.sharedMaterials;
                     for (int i = 0; i < slots.Length; i++)
                     {
