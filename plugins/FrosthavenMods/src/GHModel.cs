@@ -608,9 +608,14 @@ namespace FrosthavenMods
                     {
                         // Gloomhaven fed these (the idle wisps, the fireflies) from a MaterialLoader at runtime, so their slots are null;
                         // CharacterManager.RefreshVisibility logs "Null material found in ..." for every null slot at every glow or
-                        // invisibility change, so the slots go too. (Rebuilding them like the cast effects: see the polish list.)
+                        // invisibility change, so each null slot gets the opaque template material (the renderer never draws).
+                        // An empty material array here crashed the game natively at scenario load (2026-10-27, two benches).
+                        // (Rebuilding them like the cast effects: see the polish list.)
                         r.forceRenderingOff = true;
-                        r.sharedMaterials = new Material[0];
+                        Material[] off = r.sharedMaterials;
+                        bool holes = false;
+                        for (int i = 0; i < off.Length; i++) if (off[i] == null) { off[i] = _opaque; holes = true; }
+                        if (holes) r.sharedMaterials = off;
                         continue;
                     }
                     Material[] slots = r.sharedMaterials;
