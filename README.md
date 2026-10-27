@@ -277,6 +277,12 @@ plugin first, so a game change that breaks compilation shows up too. To see whet
 `docs/GAME_BUGS.md`, decompile the changed game DLLs (`ilspycmd -p`) and diff them with the decompile of the build
 before; the decompiles stay on this machine.
 
+`tools/ilat` (C#, .NET 9 SDK): the game's stack traces give a method and an IL offset, never a line
+(`CAbilityAttack.StartAttackingActors () [0x00053]`). `dotnet run --project tools/ilat -c Release --
+ScenarioRuleLibrary CAbilityAttack::StartAttackingActors 0x53` prints the IL around that offset with every call and
+field named, so the decompiled source can be read against the exact statement that threw (Mono reports the start of
+the statement). A bare DLL name is taken from the game's Managed folder.
+
 ## Ruleset format
 
 Reverse-engineered from `FH.YML.RulebaseFile` in `Assembly-CSharp.dll`:
