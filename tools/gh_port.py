@@ -123,6 +123,53 @@ CLASS_EXTRAS = {
         "Complexity": "2",
         "HeroStats": {"Melee": 5, "Ranged": 2, "Mobility": 2, "Support": 4, "Defense": 4, "Control": 2},
     },
+    # Group 2 (2026-10-27): race and traits from the crossover sheets (scratchpad/crossover), complexity from Gloomhaven
+    # digital's difficulty line (Medium 2, High 3), hero stats our estimate from its role line and the cards.
+    "Cragheart": {   # Damage/Support, Medium
+        "Race": "Savvas",
+        "Traits": "[ Armored, Outcast, Strong ]",
+        "Complexity": "2",
+        "HeroStats": {"Melee": 4, "Ranged": 4, "Mobility": 2, "Support": 3, "Defense": 4, "Control": 4},
+    },
+    "Plagueherald": {   # Ranged Damage/Support, Medium
+        "Race": "Harrower",
+        "Traits": "[ Arcane, Intimidating, Outcast ]",
+        "Complexity": "2",
+        "HeroStats": {"Melee": 1, "Ranged": 5, "Mobility": 2, "Support": 3, "Defense": 2, "Control": 5},
+    },
+    "Nightshroud": {   # Melee Damage, Medium
+        "Race": "Aesther",
+        "Traits": "[ Chaotic, Intimidating, Nimble ]",
+        "Complexity": "2",
+        "ElementalAffinities": "[ Dark ]",
+        "HeroStats": {"Melee": 6, "Ranged": 1, "Mobility": 4, "Support": 1, "Defense": 2, "Control": 3},
+    },
+    "Berserker": {   # Melee Damage, High
+        "Race": "Inox",
+        "Traits": "[ Chaotic, Intimidating, Strong ]",
+        "Complexity": "3",
+        "HeroStats": {"Melee": 6, "Ranged": 1, "Mobility": 3, "Support": 1, "Defense": 3, "Control": 2},
+    },
+    # System probes (2026-10-27): placeholders so the classes convert for the song / doom / augment checks in game.
+    # Race from the board game; the rest is a first guess, to be done properly when each class is ported.
+    "Soothsinger": {   # Ranged Support, High (probe placeholder)
+        "Race": "Quatryl",
+        "Traits": "[ Chaotic, Educated, Persuasive ]",
+        "Complexity": "3",
+        "HeroStats": {"Melee": 1, "Ranged": 3, "Mobility": 2, "Support": 6, "Defense": 1, "Control": 4},
+    },
+    "Doomstalker": {   # Ranged Damage, Medium (probe placeholder)
+        "Race": "Orchid",
+        "Traits": "[ Nimble, Outcast, Resourceful ]",
+        "Complexity": "2",
+        "HeroStats": {"Melee": 1, "Ranged": 6, "Mobility": 3, "Support": 2, "Defense": 1, "Control": 3},
+    },
+    "Mindthief": {   # Melee Damage/Control, High (probe placeholder)
+        "Race": "Vermling",
+        "Traits": "[ Chaotic, Nimble, Outcast ]",
+        "Complexity": "3",
+        "HeroStats": {"Melee": 4, "Ranged": 2, "Mobility": 4, "Support": 1, "Defense": 1, "Control": 5},
+    },
 }
 
 # Frosthaven's element affinities (the codex and class screens' "Affinities") name the elements a class's cards infuse
@@ -195,6 +242,13 @@ ANIM_OVERLOAD_LINE = re.compile(r"^([ \t]*AnimOverload:[ \t]*)(\w+)(?=[ \t]*\r?$
 # converted card ID: [(pattern, replacement)] on the converted file; a pattern that no longer matches stops the
 # conversion, so a fix never silently stops applying. TEXT_FIXES replace the card text to match.
 CARD_FIXES = {
+    # Pilfer (Mindthief), top: "Loot 1, +1 gold per adjacent enemy". Frosthaven's loot parser knows LootData but not
+    # the value ExtraGoldPerAdjacentEnemy (appears nowhere in its code): the file fails to parse, and a failed card
+    # file inside the game's parallel class loader took the whole load down ("Character 'QuartermasterID' has no
+    # ability cards", system probes 2026-10-27). Until the plugin does the extra gold, the card loots plain.
+    20163: [
+        (r"^[ \t]*LootData:\r?\n[ \t]*AdditionalLootEffect: ExtraGoldPerAdjacentEnemy\r?\n", ""),
+    ],
     # Catastrophic Bomb, bottom: "you and all normal enemies within the targeted area suffer 7 damage". Frosthaven has
     # no aimed area for Damage abilities (no card of its own has one): its damage preview throws on it and the damage
     # can't be confirmed. Decided 2026-10-26: Frosthaven's own pattern instead, all adjacent normal enemies (up to six
@@ -468,7 +522,7 @@ def main():
                 stem = re.sub(r"^\d+", str(cid), Path(n).name)
                 write(f"{base}/AbilityCards/{stem}", one)
             converted.append(s)
-        declared = re.findall(r"\w+", CLASS_EXTRAS[cls].get("ElementalAffinities", ""))
+        declared = re.findall(r"\w+", CLASS_EXTRAS.get(cls, {}).get("ElementalAffinities", ""))
         often = infused_often(converted)
         if sorted(declared) != sorted(often):
             warnings.append(f"{cls}: ElementalAffinities {declared or 'none'} in CLASS_EXTRAS, but its cards infuse "

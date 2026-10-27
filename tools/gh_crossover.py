@@ -327,6 +327,273 @@ BattleGoalCondition:
         Value: 6"""),
 ]
 
+# ---------------------------------------------------------------- Group 2 (typed 2026-10-27 from the crossover sheets
+# in scratchpad/crossover/{cragheart,plagueherald,nightshroud,berserker}.jpg; names of the perks and masteries are ours,
+# the sheets have none). Icon readings to confirm on the sheets when the classes are ported: the Cragheart's second perk
+# (two +0 "push 2" rolling), the jagged diamond read as Curse (Plagueherald, Nightshroud), the "?" diamond as Muddle.
+# Masteries tagged FrosthavenMods_* that GHMasteries.cs doesn't answer yet are marked NEW TAG: the plugin learns them
+# with the class.
+
+def _room_revealed(inner):
+    """A perk acting on every enemy of a room the moment it is revealed: Frosthaven's own pattern (Perk_Snowdancer_09,
+    muddle on the revealed room), its TargetingVars expression copied as is."""
+    return f"""\
+    ARoom:
+{inner}
+        AutoTrigger: True
+        SkipAnim: True
+        Target: -1
+        Targeting: Custom
+        TargetingVars:
+            AddValidActorsInRange: TriggerMap?.Monsters?.Select(obj?.Actor)?.Where(obj != null) || AllEnemyMonsters"""
+
+
+CRAGHEART_PERKS = [
+    (3, "Steadfast", 'Replace one <sprite name="-1"> with one <sprite name="+1">',
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Basic_P1]"}),
+    (1, "Rockslide", 'Replace one <sprite name="0"> with two <sprite name="0"> <sprite name=Push> 2 <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Push2_R, AMC_Push2_R]"}),
+    (2, "Grasping Earth", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Immobilize>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Immobilize_P1]"}),
+    (2, "Crushing Blow", 'Replace one <sprite name="0"> with one <sprite name="+2">',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Basic_P2]"}),
+    (2, "Dust Storm", 'Add one <sprite name="+2"> <sprite name=Muddle> and one <sprite name="0"> <sprite name=CreateAir> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Muddle_P2, AMC_Air_R]"}),
+    (1, "Earthen Might", 'Add four <sprite name="0"> <sprite name=CreateEarth> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Earth_R, AMC_Earth_R, AMC_Earth_R, AMC_Earth_R]"}),
+    (1, "Thick Skin", 'Ignore item <sprite name="-1"> effects',
+     {"Flags": "[Passive, IgnoreMinusOneItemEffects]"}),
+    (1, "Unfazed", "Ignore negative scenario effects",
+     {"Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
+    # the revealed room's enemies are moved 1 as a controlled move (a controlled move always ends in an empty hex)
+    (1, "Earthquakes", "Whenever a new room is revealed, control all enemies in the newly revealed room: <sprite name=Move> 1, this movement must end in an empty hex",
+     {"Cost": 2, "Flags": "[Passive, ExecuteAbilitiesAfterRoomRevealed, ApplyActiveBonusesAtScenarioStart]",
+      "Abilities": _room_revealed("""\
+        ControlActor:
+            ControlActorType: Player
+            Abilities:
+                AQuake:
+                    Move: 1
+                    StrengthIsBase: True
+        Filter: Enemy""")}),
+]
+
+CRAGHEART_MASTERIES = [
+    ("Cornered", "Only attack enemies adjacent to obstacles or walls",
+     """\
+# NEW TAG: every attack's targets stood next to an obstacle or a wall (GHMasteries.cs, from the attack records and the map)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AttacksNearObstaclesOnly]
+        CharacterIDs:
+            ActorID: CragheartID
+        Value: 1"""),
+    ("Shaped by Stone", "Damage or heal at least one ally each round",
+     """\
+# NEW TAG: each round, an ally took damage from the Cragheart or was healed by them (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AllyDamageOrHealEveryRound]
+        CharacterIDs:
+            ActorID: CragheartID
+        Value: 1"""),
+]
+
+PLAGUEHERALD_PERKS = [
+    (1, "Steady Focus", 'Remove one <sprite name="-2">',
+     {"CardsToRemove": "[AMC_Basic_M2]"}),
+    (3, "Virulence", 'Replace one <sprite name="-1"> with one <sprite name="+1">',
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Basic_P1]"}),
+    (2, "Lethal Strain", 'Replace one <sprite name="0"> with one <sprite name="+2">',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Basic_P2]"}),
+    (1, "Airborne", 'Add three <sprite name="+1"> <sprite name=CreateAir>',
+     {"CardsToAdd": "[AMC_Air_P1, AMC_Air_P1, AMC_Air_P1]"}),
+    (1, "Toxic Touch", 'Add three <sprite name="0"> <sprite name=Poison> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Poison_R, AMC_Poison_R, AMC_Poison_R]"}),
+    (1, "Paralysis", 'Add two <sprite name="0"> <sprite name=Immobilize> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Immobilize_R, AMC_Immobilize_R]"}),
+    (2, "Numbing Agent", 'Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Stun_R]"}),
+    (1, "Hex", 'Add two <sprite name="0"> <sprite name=Curse> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Curse_R, AMC_Curse_R]"}),
+    (1, "Unfazed", 'Ignore negative scenario effects and add one <sprite name="+1">',
+     {"CardsToAdd": "[AMC_Basic_P1]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
+    (1, "Xorn's Boon", "Once each quest, during your turn, each enemy that has <sprite name=Poison> suffers <sprite name=Damage> 1 and gains <sprite name=Muddle>, and each ally who has <sprite name=Poison> suffers <sprite name=Damage> 1 and gains <sprite name=Strengthen>",
+     {"Cost": 2, "Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]",
+      "Abilities": _once_per_quest("PERK_Plagueherald_10_Desc", "Poison", """\
+            Damage: 1
+            Target: -1
+            Targeting: All
+            Filter:
+                TargetType: Enemy
+                TargetHasNegativeCondition: Poison
+            SubAbilities:
+                TMuddle:
+                    Muddle: True
+                    UseParentTargets: True
+                TAllies:
+                    Damage: 1
+                    Target: -1
+                    Targeting: All
+                    Filter:
+                        TargetType: Ally
+                        TargetHasNegativeCondition: Poison
+                    SubAbilities:
+                        TStrengthen:
+                            Strengthen: True
+                            UseParentTargets: True""")}),
+]
+
+PLAGUEHERALD_MASTERIES = [
+    ("Silent Killer", "Kill at least five enemies with non-attack abilities",
+     """\
+# NEW TAG: kills whose killing ability was not an attack (GHMasteries.cs, from the kill records). Value = kills needed.
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_KillsByNonAttack]
+        CharacterIDs:
+            ActorID: PlagueheraldID
+        Value: 5"""),
+    ("Pandemic", "Perform three different attack abilities that target at least four enemies each",
+     """\
+# NEW TAG: distinct attack abilities (by card and ability name) that targeted four or more enemies (GHMasteries.cs).
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AttacksWithFourTargets]
+        CharacterIDs:
+            ActorID: PlagueheraldID
+        Value: 3"""),
+]
+
+NIGHTSHROUD_PERKS = [
+    (2, "Light Step", 'Remove two <sprite name="-1">',
+     {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
+    (1, "Shadow Step", 'Replace one <sprite name="-2"> with one <sprite name="-1"> <sprite name=CreateDark>',
+     {"CardsToRemove": "[AMC_Basic_M2]", "CardsToAdd": "[AMC_Dark_M1]"}),
+    (1, "Wide Reach", 'Replace one <sprite name="0"> with one <sprite name="0"> +1 <sprite name=Target> <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_AddTarget_R]"}),
+    (2, "Confusion", 'Replace two <sprite name="0"> with three <sprite name="0"> <sprite name=Muddle> <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P0]", "CardsToAdd": "[AMC_Muddle_R, AMC_Muddle_R, AMC_Muddle_R]"}),
+    (2, "Fade", 'Replace one <sprite name="+1"> with one <sprite name="+1"> <sprite name=Invisible>',
+     {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_Invisible_P1]"}),
+    (2, "Nightfall", 'Add one <sprite name="+1"> <sprite name=CreateDark>',
+     {"CardsToAdd": "[AMC_Dark_P1]"}),
+    (1, "Hex", 'Add two <sprite name="0"> <sprite name=Curse> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Curse_R, AMC_Curse_R]"}),
+    (1, "Dark Vigor", 'Add two <sprite name="0"> <sprite name=Heal> 1, self <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Heal1_R, AMC_Heal1_R]"}),
+    (1, "Unfazed", 'Ignore negative scenario effects and add two <sprite name="+1">',
+     {"CardsToAdd": "[AMC_Basic_P1, AMC_Basic_P1]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
+    # answered by the plugin when the class is ported (a scenario-start choice: discard two, fetch a persistent card
+    # from the pool and play it); until then the perk is text only
+    (1, "Empowering Night", "At the start of the scenario, you may discard two cards to add a card with an action containing a persistent symbol from your pool to your hand and immediately play it, performing that action",
+     {"Cost": 2, "Flags": "[Passive]"}),
+]
+
+NIGHTSHROUD_MASTERIES = [
+    ("Unseen", "Have <sprite name=Invisible> at the start or end of each of your turns",
+     """\
+# NEW TAG: invisible at the start or the end of every turn (GHMasteries.cs, from the turn records)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_InvisibleEveryTurn]
+        CharacterIDs:
+            ActorID: NightshroudID
+        Value: 1"""),
+    ("Creature of the Night", "Infuse or consume <sprite name=CreateDark> during each of your turns",
+     """\
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ElementEveryTurn]
+        Elements: Dark
+        CharacterIDs:
+            ActorID: NightshroudID
+        Value: 1"""),
+]
+
+BERSERKER_PERKS = [
+    (1, "Light Step", 'Remove two <sprite name="-1">',
+     {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
+    (2, "Steady Hand", 'Replace one <sprite name="-1"> with one <sprite name="+1">',
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Basic_P1]"}),
+    (2, "Open Wounds", 'Replace one <sprite name="0"> with two <sprite name="0"> <sprite name=Wound> <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Wound_R, AMC_Wound_R]"}),
+    (2, "Reckless Swing", 'Replace one <sprite name="+1"> with one <sprite name="+2"> <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_P2_R]"}),
+    (2, "Burning Rage", 'Add one <sprite name="+2"> <sprite name=CreateFire>',
+     {"CardsToAdd": "[AMC_Fire_P2]"}),
+    (2, "Concussion", 'Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Stun_R]"}),
+    (1, "Disarming Blow", 'Add one <sprite name="+1"> <sprite name=Disarm> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Disarm_P1_R]"}),
+    (1, "Second Wind", 'Add two <sprite name="0"> <sprite name=Heal> 1, self <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Heal1_R, AMC_Heal1_R]"}),
+    (1, "Thick Skin", 'Ignore item <sprite name="-1"> effects',
+     {"Flags": "[Passive, IgnoreMinusOneItemEffects]"}),
+    # Frosthaven's own after-long-rest perks (Perk_BannerSpear_08) run their abilities the same way
+    (1, "Rapid Recovery", "Whenever you heal from a long rest, add +1 <sprite name=Heal>",
+     {"Flags": "[Passive, ExecuteAbilitiesAfterLongRest]",
+      "Abilities": """\
+    AHeal:
+        Heal: 1
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        CanUndo: False"""}),
+]
+
+BERSERKER_MASTERIES = [
+    ("Bloodlust", "Lose at least one hit point during each of your turns, without ever performing the bottom action of Blood Pact",
+     """\
+# NEW TAGS: lost hit points on every turn; failed by Blood Pact's bottom (card 20324) (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_LoseHpEveryTurn]
+        CharacterIDs:
+            ActorID: BerserkerID
+        Value: 1
+BattleGoalFailCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_UsedCardBottom]
+        CharacterIDs:
+            ActorID: BerserkerID
+        Amount: 20324
+        Value: 1"""),
+    ("Living on the Edge", "Have exactly one hit point at the end of each of your turns",
+     """\
+# NEW TAG: one hit point at the end of every turn (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_OneHpEveryTurn]
+        CharacterIDs:
+            ActorID: BerserkerID
+        Value: 1"""),
+]
+
 CROSSOVER = {
     "Brute": {"perks": BRUTE_PERKS, "masteries": BRUTE_MASTERIES,
               "strings": {"PERK_Brute_10_Bonus": "Rested and Ready: +1 <sprite name=Move> to your next move ability"}},
@@ -334,6 +601,10 @@ CROSSOVER = {
     "Sunkeeper": {"perks": SUNKEEPER_PERKS, "masteries": SUNKEEPER_MASTERIES},
     "Sawbones": {"perks": SAWBONES_PERKS, "masteries": SAWBONES_MASTERIES},
     "Quartermaster": {"perks": QUARTERMASTER_PERKS, "masteries": QUARTERMASTER_MASTERIES},
+    "Cragheart": {"perks": CRAGHEART_PERKS, "masteries": CRAGHEART_MASTERIES},
+    "Plagueherald": {"perks": PLAGUEHERALD_PERKS, "masteries": PLAGUEHERALD_MASTERIES},
+    "Nightshroud": {"perks": NIGHTSHROUD_PERKS, "masteries": NIGHTSHROUD_MASTERIES},
+    "Berserker": {"perks": BERSERKER_PERKS, "masteries": BERSERKER_MASTERIES},
 }
 
 

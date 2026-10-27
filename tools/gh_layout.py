@@ -197,7 +197,44 @@ def _actives(nodes):
         yield from _actives(n.children)
 
 
+# Gloomhaven's tracker layout elements. Frosthaven's layout reader still knows Song, Doom and Augment, but its GUI
+# bundle (misc_gui) only carries the AugmentContainer prefab: a Song or Doom element throws "Unable to find asset"
+# while the cards are generated at load (found by the system probes, 2026-10-27). Those two become a plain Active
+# element (the song / doom is a persistent bonus with the ability's own layout), which is how the card then reads in
+# the hand; the in-play tracker is the game's own code. Augment keeps its element, only its class icon is mapped.
+TRACKERS = {
+    "Song": ("SongAbilityLayout", "Positive_Attack"),
+    "Doom": ("DoomAbilityLayout", "Positive_AttackPlus"),
+}
+
+
+def convert_trackers(items, icons):
+    out = []
+    for n in items:
+        if n.key in TRACKERS:
+            fields = {c.key: c for c in n.children}
+            layout_key, default_icon = TRACKERS[n.key]
+            parent = fields.get("ParentAbility")
+            active = Node("Active")
+            active.children.append(Node("Ability", parent.value if parent else "", dash=False))
+            active.children.append(Node("Icon", icons.get(parent.text() if parent else "", default_icon), dash=False))
+            for src, dst in (("ActiveBonusLayout", "ListLayout"), (layout_key, "Layout")):
+                f = fields.get(src)
+                if f is not None:
+                    active.children.append(Node(dst, f.value, dash=False, children=list(f.children)))
+            out.append(active)
+        elif n.key == "Augment":
+            for c in n.children:
+                if c.key == "AugmentIcon":
+                    c.value = icons.get(c.text(), ICONS.get(c.text(), "Positive_Attack"))
+            out.append(n)
+        else:
+            out.append(n)
+    return out
+
+
 def convert_half(items, icons):
+    items = convert_trackers(items, icons)
     for a in list(_actives(items)):
         convert_active(a, icons)
     if any(n.key == "ColumnWidths" for n in items):

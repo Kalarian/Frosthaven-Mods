@@ -88,7 +88,7 @@ def check_ability(path, where, props, problems, warnings):
             if slot == "Enhancements":
                 warnings.append(f"{path}: {where}: plain 'Enhancements' on {k} (the game reads it as diamond-plus)")
     if kind is None and not any(k in props for k in ("SubAbilities", "ControlActor", "ActiveBonus", "AddActiveBonus")):
-        warnings.append(f"{path}: {where}: no ability kind found (keys: {', '.join(list(props)[:4])})")
+        warnings.append(f"{path}: {where}: no ability kind found (keys: {', '.join(str(k) for k in list(props)[:4])})")
     for sub, sp in (props.get("SubAbilities") or {}).items():
         check_ability(path, f"{where}/{sub}", sp, problems, warnings)
     ctl = props.get("ControlActor")
