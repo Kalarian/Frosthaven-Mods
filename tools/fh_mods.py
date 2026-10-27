@@ -285,6 +285,23 @@ def vanilla_backup():
     if state and game_sha != state.get("vanilla_sha") and steam_build_id() == state.get("buildid"):
         sys.exit("the game's Base.ruleset is neither vanilla nor our last install. Use Steam 'Verify integrity "
                  "of game files' to get a clean copy, then run again.")
+    # Steam moved to a new build while our install was still in place (2026-10-27: build 26217927 arrived mid-pass, the
+    # game's Base.ruleset was still the modded one): that file is not the new vanilla. Steam's update did not touch the
+    # ruleset (every vanilla entry matched the old backup), so the old backup is carried over; the game must be verified
+    # when the update did change it (the install then reads the entries and says so)
+    if state and game_sha == state.get("installed_sha") and (BACKUP / f"Base.ruleset.{state.get('buildid', '')}").exists():
+        old = (BACKUP / f"Base.ruleset.{state.get('buildid', '')}").read_bytes()
+        vanilla_entries = {e["name"]: e["data"] for e in rs.read_ruleset(old)}
+        current_entries = {e["name"]: e["data"] for e in rs.read_ruleset(game)}
+        if all(current_entries.get(n) == d for n, d in vanilla_entries.items()):
+            build_id = steam_build_id()
+            (BACKUP / f"Base.ruleset.{build_id}").write_bytes(old)
+            state.update({"buildid": build_id, "vanilla_sha": sha(old)})
+            STATE.write_text(json.dumps(state, indent=2), encoding="utf-8")
+            print(f"Steam build {build_id}: the game's ruleset is still our install and its vanilla entries are unchanged; the backup carries over")
+            return old
+        sys.exit("Steam's update changed the game's Base.ruleset while the mods were installed. Use Steam 'Verify integrity "
+                 "of game files' to get the new vanilla copy, then run again.")
     rs.read_ruleset(game)  # sanity: it is a ruleset
     build_id = steam_build_id()
     BACKUP.mkdir(exist_ok=True)
