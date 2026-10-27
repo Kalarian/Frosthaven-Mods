@@ -1210,6 +1210,108 @@ BattleGoalCondition:
         Value: 3"""),
 ]
 
+BEASTTYRANT_PERKS = [
+    (1, "Steady Hands", 'Remove two <sprite name="-1">',
+     {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
+    (3, "Trained Reflexes", 'Replace one <sprite name="-1"> with one <sprite name="+1">',
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Basic_P1]"}),
+    (2, "Savage Strike", 'Replace one <sprite name="0"> with one <sprite name="+2">',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Basic_P2]"}),
+    (2, "Rending Claws", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Wound>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Wound_P1]"}),
+    (1, "Pinning Bite", 'Add two <sprite name="+1"> <sprite name=Immobilize>',
+     {"CardsToAdd": "[AMC_Immobilize_P1, AMC_Immobilize_P1]"}),
+    (3, "Lick Wounds", 'Add two <sprite name="0"> <sprite name=Heal> 1, self <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Heal1_R, AMC_Heal1_R]"}),
+    (1, "Hardened", 'Ignore negative scenario effects and add two <sprite name="0"> <sprite name=CreateEarth> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Earth_R, AMC_Earth_R]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
+    # answered by the plugin when the class is ported (a long-rest round: the bear's turn at 99 becomes Move 3, Loot 1, Heal 3 self if it looted)
+    (1, "Bear Treat", "During each round in which you long rest, at initiative 99, you may skip the bear's normal turn to Command: <sprite name=Move> 3; <sprite name=Loot> 1; if the loot ability was performed: <sprite name=Heal> 3, self",
+     {"Flags": "[Passive]"}),
+]
+
+BEASTTYRANT_MASTERIES = [
+    ("Ferocious Companion", "Have your bear summon deal <sprite name=Damage> 10 or more in three consecutive rounds",
+     """\
+# NEW TAG: Value rounds in a row with Amount damage to enemies by the character's summons (the bear) (GHMasteries.cs)
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_SummonDamageStreak]
+        CharacterIDs:
+            ActorID: BeastTyrantID
+        Value: 3
+        Amount: 10"""),
+    ("Pack Tactics", "You or your summons must apply a negative condition to at least 10 different enemies",
+     """\
+# NEW TAG: Value distinct enemies given a negative condition by the character or its summons (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_EnemiesDebuffed]
+        CharacterIDs:
+            ActorID: BeastTyrantID
+        Value: 10"""),
+]
+
+# ---------------------------------------------------------------- group 6 (sheet read 2026-10-27, ahead of the port)
+
+SUMMONER_PERKS = [
+    (1, "Steady Hands", 'Remove two <sprite name="-1">',
+     {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
+    (3, "Focus", 'Replace one <sprite name="-1"> with one <sprite name="+1">',
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Basic_P1]"}),
+    (1, "Composure", 'Replace one <sprite name="-2"> with one <sprite name="0">',
+     {"CardsToRemove": "[AMC_Basic_M2]", "CardsToAdd": "[AMC_Basic_P0]"}),
+    (1, "Fire and Stone", 'Replace two <sprite name="0"> with one <sprite name="0"> <sprite name=CreateFire> <sprite name=Rolling> and one <sprite name="0"> <sprite name=CreateEarth> <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P0]", "CardsToAdd": "[AMC_Fire_R, AMC_Earth_R]"}),
+    (1, "Wind and Shadow", 'Replace two <sprite name="0"> with one <sprite name="0"> <sprite name=CreateAir> <sprite name=Rolling> and one <sprite name="0"> <sprite name=CreateDark> <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P0]", "CardsToAdd": "[AMC_Air_R, AMC_Dark_R]"}),
+    (1, "Empowered", 'Replace two <sprite name="+1"> with two <sprite name="+2">',
+     {"CardsToRemove": "[AMC_Basic_P1, AMC_Basic_P1]", "CardsToAdd": "[AMC_Basic_P2, AMC_Basic_P2]"}),
+    (1, "Rending Summons", 'Add two <sprite name="0"> <sprite name=Wound> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Wound_R, AMC_Wound_R]"}),
+    (1, "Venomous Summons", 'Add two <sprite name="0"> <sprite name=Poison> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Poison_R, AMC_Poison_R]"}),
+    (2, "Siphon", 'Add three <sprite name="0"> <sprite name=Heal> 1, self <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Heal1_R, AMC_Heal1_R, AMC_Heal1_R]"}),
+    (1, "Hardened", 'Ignore negative scenario effects and add two <sprite name="+1">',
+     {"CardsToAdd": "[AMC_Basic_P1, AMC_Basic_P1]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
+    # answered by the plugin when the class is ported (once a scenario, at initiative ordering, every summon turns invisible)
+    (1, "Phase Out", "Once each scenario, during ordering of initiative, after all ability cards have been revealed, all your summons gain <sprite name=Invisible>",
+     {"Flags": "[Passive]"}),
+]
+
+SUMMONER_MASTERIES = [
+    ("Golem Keeper", "Summon the Lava Golem on your first turn and keep it alive for the entire scenario",
+     """\
+# NEW TAG: the Lava Golem summoned on the first turn and never killed (GHMasteries.cs, from the ability and summon death records)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_LavaGolemAllScenario]
+        CharacterIDs:
+            ActorID: SummonerID
+        Value: 1"""),
+    ("Menagerie", "Perform the summon action of five different ability cards",
+     """\
+# NEW TAG: Value different cards whose summon ability was performed (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_SummonsFromDifferentCards]
+        CharacterIDs:
+            ActorID: SummonerID
+        Value: 5"""),
+]
+
 BERSERKER_PERKS = [
     (1, "Light Step", 'Remove two <sprite name="-1">',
      {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
@@ -1298,6 +1400,8 @@ CROSSOVER = {
     "Soothsinger": {"perks": SOOTHSINGER_PERKS, "masteries": SOOTHSINGER_MASTERIES},
     "Tinkerer": {"perks": TINKERER_PERKS, "masteries": TINKERER_MASTERIES},
     "Doomstalker": {"perks": DOOMSTALKER_PERKS, "masteries": DOOMSTALKER_MASTERIES},
+    "BeastTyrant": {"perks": BEASTTYRANT_PERKS, "masteries": BEASTTYRANT_MASTERIES},
+    "Summoner": {"perks": SUMMONER_PERKS, "masteries": SUMMONER_MASTERIES},
 }
 
 
