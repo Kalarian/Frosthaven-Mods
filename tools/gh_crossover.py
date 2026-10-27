@@ -565,9 +565,29 @@ HATCHET_PERKS = [
      {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_Basic_P3]"}),
     (3, "Whirling Axe", 'Add one <sprite name="+2"> <sprite name=CreateAir>',
      {"CardsToAdd": "[AMC_Air_P2]"}),
-    # answered by the plugin when the class is ported (once each scenario: consume Air to return the Favorite to its card)
-    (1, "Hasty Pick-up", "Once each scenario, during your turn, if the Favorite is in a hex on the map, you may consume <sprite name=ConsumeAir> to return it to its ability card",
-     {"Flags": "[Passive]"}),
+    # Frosthaven's once-per-scenario toggle (as the Scoundrel's and Quartermaster's): consume Air, then the same
+    # resource recovery Executioner's Axe performs (RecoverResources on the enemy holding either Favorite). Verify on the bench.
+    (1, "Hasty Pick-up", "Once each scenario, during your turn, if the Favorite is in a hex on the map, you may <sprite name=ConsumeAir> to return it to its ability card",
+     {"Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]",
+      "Abilities": _once_per_quest("PERK_Hatchet_10_Desc", "Recover", """\
+            Consume:
+                Elements: [Air]
+                Abilities:
+                    CRecover:
+                        RecoverResources: True
+                        Targeting: All
+                        Target: -1
+                        ResourcesToTakeFromTargets:
+                            - ["TheFavorite", 1]
+                            - ["TheNewFavorite", 1]
+                        FilterContainer:
+                            Filter1:
+                                TargetType: Enemy
+                                TargetHasCharacterResource: ["TheFavorite"]
+                            Filter2:
+                                TargetType: Enemy
+                                TargetHasCharacterResource: ["TheNewFavorite"]
+                        AnimOverload: PowerUp""")}),
 ]
 
 HATCHET_MASTERIES = [
@@ -617,9 +637,40 @@ REDGUARD_PERKS = [
      {"CardsToAdd": "[AMC_FireLight_P1]"}),
     (1, "Heavy Armor", 'Ignore negative item effects and add two <sprite name="+1">',
      {"CardsToAdd": "[AMC_Basic_P1, AMC_Basic_P1]", "Flags": "[Passive, IgnoreMinusOneItemEffects]"}),
-    # answered by the plugin when the class is ported (on being attacked: consume Light for Shield 1 and disadvantage)
-    (1, "Brilliant Aegis", "Whenever you are attacked, you may consume <sprite name=ConsumeLight> to gain <sprite name=Shield> 1 for the attack and have the attacker gain disadvantage for the attack",
-     {"Flags": "[Passive]"}),
+    # APPROXIMATION (the game has no "when attacked, you may" prompt for perks): a toggle the Red Guard may switch on
+    # during her turn, consuming Light, for Shield 1 and attackers' disadvantage until the round ends (Frosthaven's own
+    # AttackersGainDisadvantage bonus, the Deathwalker's). Verify on the bench; a plugin prompt later if the user wants the sheet's timing.
+    (1, "Brilliant Aegis", "During your turn, you may <sprite name=ConsumeLight> to gain <sprite name=Shield> 1 and have attackers gain disadvantage against you until the end of the round",
+     {"Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]", "Abilities": """\
+    TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            Consume:
+                Elements: [Light]
+                Abilities:
+                    CShield:
+                        Shield: 1
+                        Filter: Self
+                        ActiveBonusDuration: Round
+                        AnimOverload: PowerUp
+                    CDisadvantage:
+                        AttackersGainDisadvantage: 1
+                        Range: 0
+                        Target: -1
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Round
+                            Hidden: True
+            Filter: [Self]
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringTurnAbility
+            IsToggleBonus: True
+            Hidden: True
+            ListLayoutOverride: [$PERK_RedGuard_10_Desc$, Positive_Shield_Disadvantage]
+            MiscVars:
+                OverrideIcon: "'Positive_Shield_Disadvantage'"
+        AnimOverload: PowerUp"""}),
 ]
 
 REDGUARD_MASTERIES = [
@@ -670,9 +721,26 @@ VOIDWARDEN_PERKS = [
      {"CardsToAdd": "[AMC_Basic_P3]"}),
     (1, "Unfazed", "Ignore negative scenario effects",
      {"Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
-    # answered by the plugin when the class is ported (on rest: consume Ice or Dark to give Ward to a poisoned ally)
-    (1, "Grave Defense", "Whenever you rest, you may consume <sprite name=ConsumeIce> or <sprite name=ConsumeDark> to give <sprite name=Ward> to one ally who has <sprite name=Poison>",
-     {"Flags": "[Passive]"}),
+    # Frosthaven's after-rest perk hooks (both rests), a consume of Ice or Dark (the element picker) and a Ward on one
+    # poisoned ally; the ability can be skipped. Verify on the bench (the picker on a consume, the condition filter).
+    (1, "Grave Defense", "Whenever you rest, you may <sprite name=ConsumeIce> or <sprite name=ConsumeDark> to give <sprite name=Ward> to one ally who has <sprite name=Poison>",
+     {"Flags": "[Passive, ExecuteAbilitiesAfterShortRest, ExecuteAbilitiesAfterLongRest]", "Abilities": """\
+    BConsume:
+        Consume:
+            Elements: [Ice, Dark]
+            ShowElementPicker: True
+            Abilities:
+                CWard:
+                    Ward: True
+                    Filter:
+                        TargetType: Ally
+                        TargetHasNegativeConditions: [Poison]
+                    Range: 99
+                    Target: 1
+                    Targeting: Range
+                    AnimOverload: PowerUp
+        CanSkip: True
+        CanUndo: False"""}),
 ]
 
 VOIDWARDEN_MASTERIES = [
@@ -722,9 +790,20 @@ DEMOLITIONIST_PERKS = [
      {"CardsToAdd": "[AMC_Damage1Range1_P0, AMC_Damage1Range1_P0]"}),
     (1, "Hardened", 'Ignore negative scenario effects and remove one <sprite name="-1">',
      {"CardsToRemove": "[AMC_Basic_M1]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
-    # answered by the plugin when the class is ported (on rest beside a wall or obstacle: place an obstacle within range 2)
-    (1, "Remodeling", "Whenever you rest while adjacent to a wall or obstacle, you may place an obstacle in an empty hex within <sprite name=Range> 2 (of you)",
-     {"Flags": "[Passive]"}),
+    # Frosthaven's after-rest perk hooks and the Cragheart's obstacle creation (Create RockSingle, as Avalanche). The
+    # sheet's condition "while adjacent to a wall or obstacle" has no requirement key in the engine (the known ones:
+    # OccupyingObstacleHex, DoesntHaveNegativeCondition, MoveWasStraightLine...): APPROXIMATION, placed after any rest;
+    # a plugin check later if the user wants it exact. Verify on the bench.
+    (1, "Remodeling", "Whenever you rest, you may place an obstacle in an empty hex within <sprite name=Range> 2 (of you)",
+     {"Flags": "[Passive, ExecuteAbilitiesAfterShortRest, ExecuteAbilitiesAfterLongRest]", "Abilities": """\
+    BCreate:
+        Create: RockSingle
+        Range: 2
+        Target: 1
+        CanSkip: True
+        CanUndo: False
+        SpawnDelay: 2.9
+        AnimOverload: PowerUp"""}),
 ]
 
 DEMOLITIONIST_MASTERIES = [
