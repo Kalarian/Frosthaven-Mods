@@ -30,8 +30,8 @@ MECHANICS = {
         "while she is unseen.\n\n"
         "<sprite name=Poison> runs through the deck (Venom Shiv, Special Mixture, Crippling Poison's +2 against "
         "poisoned targets, Visage poisons every adjacent enemy, Watch It Burn adds poison and wound to every attack, "
-        "Cull the Weak adds 2 against any afflicted target). Her moves are long (5-7) and five cards loot, two of "
-        "them all adjacent coins. A handful of thrown attacks (range 3-4, two to four targets) and two trap tricks "
+        "Cull the Weak adds 2 against any afflicted target). Her moves are long (5-7) and five cards loot, most of "
+        "them every adjacent coin. A handful of thrown attacks (range 3-4, two to four targets) and two trap tricks "
         "(disarm, spring a trap on an enemy) round it out; defence is thin: one retaliate, one damage prevention, two "
         "self-heals."
     ),
@@ -39,7 +39,7 @@ MECHANICS = {
         "Everything runs on <sprite name=CreateLight>: thirteen cards infuse it and twelve consume it, and what Light "
         "buys is the class: +1 <sprite name=Attack> with advantage on her big melee swings (Hammer Blow, Defensive "
         "Stance, Path of Glory), an extra card recovered for an ally, an extra heal target, a longer strengthen, and "
-        "Beacon of Light keeps Light lit at the end of every turn. She commands allies as much as she fights: six cards "
+        "Beacon of Light keeps Light lit at the end of every turn. She commands allies as much as she fights: five cards "
         "let an ally <sprite name=Move> 4 or <sprite name=Attack> 4-8 on her turn (Tactical Order, Empowering Command, "
         "Mobilizing Axiom for all of them, Illuminate the Target, Inspiring Sanctity) and Unwavering Mandate hands an "
         "ally a whole extra turn.\n\n"
@@ -64,7 +64,7 @@ MECHANICS = {
         "allies, and Teamwork, which moves allies and recovers one card per ally beside him."
     ),
     "Quartermaster": (
-        "Items are his resource. Eleven cards refresh spent or consumed items, his own or the party's (Restock for "
+        "Items are his resource. Ten cards refresh spent or consumed items, his own or the party's (Restock for "
         "everyone in range 2, Side Pouch all of an ally's, Bag of Holding the party's small items, Reinforced Steel "
         "every round's end, Refreshment on each long rest, Continual Supply by discarding a card), and Proficiency "
         "makes every attack +1 in an action where an item was used. Three loots (2, 1 and 3 coins) keep the gold coming.\n\n"
@@ -92,7 +92,7 @@ MECHANICS = {
     ),
     "Plagueherald": (
         "A ranged caster whose attacks spread sickness. Fourteen of twenty-four attacks are ranged (3 is the usual "
-        "range) and six are 7- to 14-hex clouds that <sprite name=Poison>, <sprite name=Immobilize>, "
+        "range) and six are area attacks, most of them 7-hex clouds and one of 14, that <sprite name=Poison>, <sprite name=Immobilize>, "
         "<sprite name=Stun> or <sprite name=Muddle> everything in them. <sprite name=Poison> is the engine: he "
         "poisons on attacks, at range 5 (three targets), every enemy at once (Airborne Toxin), every adjacent figure "
         "after each move (Epidemic), and then collects: Succumb to the Gift kills a poisoned normal enemy, Accelerated "
@@ -123,7 +123,7 @@ MECHANICS = {
         "(Growing Rage, Final Fight's move), with being below half health (+2 <sprite name=Attack> on Defiance of "
         "Death, +2 <sprite name=Move> on Break the Chains, Seeing Red's persistent +1 and <sprite name=Shield> 1); "
         "Glass Hammer attacks for her current health and drops her to 1, Blood Pact hits 6 and costs half her health, "
-        "and Fatal Fury kills a normal enemy whose health is under half of what she has lost. Nine cards let her pay "
+        "and Fatal Fury kills a normal enemy whose health is under half of what she has lost. Eight cards let her pay "
         "1-2 damage to herself for +2 attack, +1 move, <sprite name=Stun>, pierce, extra targets (Reckless "
         "Offensive, Flurry of Axes, The Maw of Madness) or <sprite name=Shield>.\n\n"
         "What keeps her alive is built in: prevent 3 only when the hit would kill (Defiance of Death), prevent 5 "
