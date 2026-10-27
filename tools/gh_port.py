@@ -66,6 +66,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import fh_mods  # noqa: E402
 import fh_ruleset as rs  # noqa: E402
 import fh_sprites  # noqa: E402
+import gh_codex_text
 import gh_crossover  # noqa: E402
 import gh_layout  # noqa: E402
 import gh_story  # noqa: E402
@@ -677,7 +678,10 @@ def main():
             items = [i for i in items if i]
             if items:
                 lists.append(f"<b>{label}:</b>\n" + "\n".join(f"• {i}" for i in items))
-        info = "\n\n".join((["\n".join(head)] if head else []) + paragraphs[1:] + lists)
+        # our own mechanics text, written from the class's cards (gh_codex_text.py), in place of Gloomhaven's play
+        # paragraph (flavour that didn't describe the class; the user, 2026-10-27); classes without one keep Gloomhaven's
+        mechanics = [gh_codex_text.MECHANICS[cls]] if cls in gh_codex_text.MECHANICS else paragraphs[1:]
+        info = "\n\n".join((["\n".join(head)] if head else []) + mechanics + lists)
         if info:
             table.setdefault(f"CODEX_HeroInfo_{cls}", info)
         elif f"{cls}_DESCRIPTION" in strings:
