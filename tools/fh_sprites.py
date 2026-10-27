@@ -38,6 +38,9 @@ RENAMED = {
     "AA_Add_Range": "Range", "AA_Add_Damage": "Damage", "AA_Add_Health": "Heal",
 }
 SPRITE = re.compile(r'<sprite name="?([^">]+)"?>')
+# Gloomhaven's tracker icons (dooms, songs, augments, the Beast Tyrant's command) always follow the word that names them
+# ("Doomed <sprite name=Doom>"); Frosthaven has no such icons, so the word stands alone
+STRIPPED = re.compile(r'\s?<sprite name="?(?:Doom|Song|Augment|Command)"?>')
 AURA = re.compile(r'<sprite name="?Aura"?>\s*:?\s*')
 BARE_ELEMENT = re.compile(r'<sprite name="?(' + "|".join(ELEMENTS) + r')"?>((?:\s*</?[a-z]+[^>]*>)*)(?!(?:\s*</?[a-z]+[^>]*>)*\s*(?:is|are)\b)')
 
@@ -59,6 +62,7 @@ def to_fh(text):
         return text
     text = SPRITE.sub(lambda m: f"<sprite name={RENAMED[m.group(1)]}>" if m.group(1) in RENAMED else m.group(0), text)
     text = AURA.sub("", text)
+    text = STRIPPED.sub("", text)
     text = RECOVER.sub("<sprite name=RecoverIcon>", text)
     text = re.sub(r'<sprite name="?Recover"?>', "<sprite name=RecoverIcon>", text)
     text = BARE_ELEMENT.sub(lambda m: f"<sprite name=Create{m.group(1)}>{m.group(2)}", text)
