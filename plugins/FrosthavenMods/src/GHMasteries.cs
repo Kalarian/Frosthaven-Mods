@@ -40,6 +40,15 @@ namespace FrosthavenMods
         internal const string SingleAbilityTag = "FrosthavenMods_SingleAbilityDamage";
         internal const string ItemsTag = "FrosthavenMods_ItemsEveryTurn";
         internal const string UsedCardTopTag = "FrosthavenMods_UsedCardTop";
+        // Group 2 (2026-10-27)
+        internal const string NearObstaclesTag = "FrosthavenMods_AttacksNearObstaclesOnly";   // (Cragheart) every attack's targets stood next to an obstacle or a wall
+        internal const string AllyDamageOrHealTag = "FrosthavenMods_AllyDamageOrHealEveryRound"; // (Cragheart) an ally damaged or healed by the character every round
+        internal const string KillsNonAttackTag = "FrosthavenMods_KillsByNonAttack";          // (Plagueherald) Value kills by something other than an attack
+        internal const string FourTargetAttacksTag = "FrosthavenMods_AttacksWithFourTargets"; // (Plagueherald) Value distinct attack abilities with 4+ enemy targets
+        internal const string InvisibleEveryTurnTag = "FrosthavenMods_InvisibleEveryTurn";    // (Nightshroud) invisible at the start or the end of every turn
+        internal const string LoseHpEveryTurnTag = "FrosthavenMods_LoseHpEveryTurn";          // (Berserker) lost at least one hit point on every turn
+        internal const string UsedCardBottomTag = "FrosthavenMods_UsedCardBottom";            // (Berserker, a fail condition) the bottom action of card Amount performed
+        internal const string OneHpEveryTurnTag = "FrosthavenMods_OneHpEveryTurn";            // (Berserker) exactly one hit point at the end of every turn
 
         private static readonly HashSet<CAbility.EAbilityType> SupportTypes = new HashSet<CAbility.EAbilityType>
         {
@@ -66,7 +75,15 @@ namespace FrosthavenMods
                 else if (tags.Contains(AllySupportTag)) EveryTurn(stats, r => AllySupportInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(ItemsTag)) EveryTurn(stats, r => ItemsInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(SingleAbilityTag)) SingleAbility(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
-                else if (tags.Contains(UsedCardTopTag)) UsedCardTop(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(UsedCardTopTag)) UsedCard(unlockConditionTarget, stats, "T", ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(UsedCardBottomTag)) UsedCard(unlockConditionTarget, stats, "B", ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(NearObstaclesTag)) AttacksNearObstacles(stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(AllyDamageOrHealTag)) EveryTurn(stats, r => AllyDamagedOrHealedInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(KillsNonAttackTag)) KillsByNonAttack(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(FourTargetAttacksTag)) AttacksWithTargets(unlockConditionTarget, stats, 4, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(InvisibleEveryTurnTag)) EveryTurn(stats, r => InvisibleInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(LoseHpEveryTurnTag)) EveryTurn(stats, r => LostHpInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(OneHpEveryTurnTag)) EveryTurn(stats, r => EndedTurnAtOneHp(stats, r), ref totalConditions, ref conditionsMet, ref __result);
                 else return true;   // a marker of a newer pack this plugin doesn't know: the game's own filter answers
             }
             catch (Exception e)
@@ -220,15 +237,109 @@ namespace FrosthavenMods
             result = best >= needed;
         }
 
-        /// <summary>The top action of card Amount was performed (a fail condition).</summary>
-        private static void UsedCardTop(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        /// <summary>The top ("T") or bottom ("B") action of card Amount was performed (a fail condition).</summary>
+        private static void UsedCard(CUnlockConditionTarget t, List<CPlayerStats> stats, string side, ref int total, ref int met, ref bool result)
         {
             bool used = stats.SelectMany(s => s.Abilities ?? Enumerable.Empty<CPlayerStatsAbilities>()).Any(a => a != null && a.ActionData != null
-                && a.ActionData.CardID == t.Amount && !string.IsNullOrEmpty(a.ActionData.ActingAbilityName) && a.ActionData.ActingAbilityName.StartsWith("T", StringComparison.Ordinal));
+                && a.ActionData.CardID == t.Amount && !string.IsNullOrEmpty(a.ActionData.ActingAbilityName) && a.ActionData.ActingAbilityName.StartsWith(side, StringComparison.Ordinal));
             total = 1;
             met = used ? 1 : 0;
             result = used;
         }
+
+        // ------------------------------------------------------------------ Group 2 (2026-10-27)
+
+        /// <summary>Every enemy the character's attacks damaged stood next to an obstacle or a wall when hit (the damage
+        /// record carries the target's obstacle and wall adjacency); at least one such attack.</summary>
+        private static void AttacksNearObstacles(List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int attacks = 0, near = 0;
+            foreach (CPlayerStats s in stats)
+                foreach (CPlayerStatsDamage d in s.DamageDealt ?? Enumerable.Empty<CPlayerStatsDamage>())
+                {
+                    if (d == null || d.ActionData == null || !IsEnemy(d.ActorWhoReceivedDamageType) || d.ActionData.AbilityType != CAbility.EAbilityType.Attack) continue;
+                    attacks++;
+                    if (d.ActionData.MainActorObstacleAdjacent > 0 || d.ActionData.MainActorWallAdjacent) near++;
+                }
+            total = 1;
+            result = attacks > 0 && near == attacks;
+            met = result ? 1 : 0;
+        }
+
+        /// <summary>An ally (another player or a hero summon, not the character) took damage from the character or was healed by them in the round.</summary>
+        private static bool AllyDamagedOrHealedInRound(List<CPlayerStats> stats, int round)
+        {
+            foreach (CPlayerStats s in stats)
+            {
+                foreach (CPlayerStatsDamage d in s.DamageDealt ?? Enumerable.Empty<CPlayerStatsDamage>())
+                    if (d != null && d.Round == round && d.FinalDamageAmount > 0 && IsAlly(d.ActorWhoReceivedDamageType) && d.ActorWhoReceivedDamageGUID != d.ActorWhoDealtDamageGUID) return true;
+                foreach (CPlayerStatsHeal h in s.Heals ?? Enumerable.Empty<CPlayerStatsHeal>())
+                    if (h != null && h.Round == round && h.HealAmount > 0 && h.ActionData != null && IsAlly(h.ActionData.MainActorType) && h.ActionData.MainActorGUID != h.ActionData.SecondaryActorGUID) return true;
+            }
+            return false;
+        }
+
+        /// <summary>Value enemies killed by something other than an attack (a kill ability, damage, a trap...).</summary>
+        private static void KillsByNonAttack(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value), count = 0;
+            foreach (CPlayerStats s in stats)
+                foreach (CPlayerStatsKill k in s.Kills ?? Enumerable.Empty<CPlayerStatsKill>())
+                {
+                    if (k == null || !IsEnemy(k.ActorWhoDiedType)) continue;
+                    bool attack = k.ActionData != null && k.ActionData.AbilityType == CAbility.EAbilityType.Attack && k.CauseOfDeath != CActor.ECauseOfDeath.KillAbility;
+                    if (!attack) count++;
+                }
+            total = needed;
+            met = Math.Min(count, needed);
+            result = count >= needed;
+        }
+
+        /// <summary>Value distinct attack abilities (card + ability name) each performed against at least <paramref name="targets"/> enemies.</summary>
+        private static void AttacksWithTargets(CUnlockConditionTarget t, List<CPlayerStats> stats, int targets, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value);
+            var hit = new HashSet<string>();
+            foreach (CPlayerStats s in stats)
+                foreach (CPlayerStatsAbilities a in s.Abilities ?? Enumerable.Empty<CPlayerStatsAbilities>())
+                {
+                    if (a == null || a.ActionData == null || a.ActionData.AbilityType != CAbility.EAbilityType.Attack || a.TargetGUIDs == null) continue;
+                    int enemies = 0;
+                    for (int i = 0; i < a.TargetGUIDs.Count; i++)
+                        if (a.TargetTypes == null || i >= a.TargetTypes.Count || a.TargetTypes[i] == CActor.EType.Enemy || a.TargetTypes[i] == CActor.EType.Enemy2) enemies++;
+                    if (enemies >= targets) hit.Add($"{a.ActionData.CardID}/{a.ActionData.ActingAbilityName}");
+                }
+            total = needed;
+            met = Math.Min(hit.Count, needed);
+            result = hit.Count >= needed;
+        }
+
+        /// <summary>Invisible when the turn started or when it ended.</summary>
+        private static bool InvisibleInRound(List<CPlayerStats> stats, int round)
+        {
+            foreach (CPlayerStats s in stats)
+            {
+                foreach (CPlayerStatsStartTurn x in s.StartTurn ?? Enumerable.Empty<CPlayerStatsStartTurn>())
+                    if (x != null && x.Round == round && HasInvisible(x.ActionData)) return true;
+                foreach (CPlayerStatsEndTurn x in s.EndTurn ?? Enumerable.Empty<CPlayerStatsEndTurn>())
+                    if (x != null && x.Round == round && HasInvisible(x.ActionData)) return true;
+            }
+            return false;
+        }
+
+        private static bool HasInvisible(CPlayerStatsAction.CPlayerStatsActionData data) =>
+            data?.MainActorPositiveConditions != null && data.MainActorPositiveConditions.Any(p => p != null && p.PositiveCondition == CCondition.EPositiveCondition.Invisible);
+
+        /// <summary>The character lost at least one hit point during the round, from anything (an enemy, a card's own cost, a trap).</summary>
+        private static bool LostHpInRound(List<CPlayerStats> stats, int round) =>
+            stats.SelectMany(s => s.DamageReceived ?? Enumerable.Empty<CPlayerStatsDamage>()).Any(d => d != null && d.Round == round && d.FinalDamageAmount > 0);
+
+        /// <summary>The character's turn ended with exactly one hit point.</summary>
+        private static bool EndedTurnAtOneHp(List<CPlayerStats> stats, int round) =>
+            stats.SelectMany(s => s.EndTurn ?? Enumerable.Empty<CPlayerStatsEndTurn>()).Any(x => x != null && x.Round == round && x.ActionData != null && x.ActionData.MainActorHealth == 1);
+
+        private static bool IsAlly(string actorType) =>
+            actorType == CActor.EType.Player.ToString() || actorType == CActor.EType.HeroSummon.ToString();
 
         private static bool IsEnemy(string actorType) =>
             actorType == CActor.EType.Enemy.ToString() || actorType == CActor.EType.Enemy2.ToString();
