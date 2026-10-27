@@ -623,6 +623,178 @@ namespace FrosthavenMods
             }
         }
 
+        // ------------------------------------------------------------------ summons (2026-10-27)
+
+        // A Gloomhaven summon (pack.json "summon_models": the class's summons' own Gloomhaven bundles, gh_model.export_npc)
+        // is built the way a hero is: a Frosthaven summon's prefab is the template (its CharacterManager and controller,
+        // the entry's "animation.base", the Polar Cat), the Gloomhaven model and clips go in, its materials are rebuilt on
+        // Frosthaven's shaders. The game asks for the prefab by the summon's model name (CActor.GetPrefabName: the
+        // HeroSummon def's Model) and gets the template (GHClasses.Prefab); the bundle it would load first is the
+        // template's (GHClasses.EnsureActor). docs/reports/2026-10-27-summons.md.
+        private static readonly Dictionary<string, Entry> SummonEntries = new Dictionary<string, Entry>(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<string, Built> SummonTemplates = new Dictionary<string, Built>(StringComparer.OrdinalIgnoreCase);
+        private static readonly HashSet<string> SummonFailed = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>The pack entry for a summon model name ("BattleBoar"), or null when no installed pack carries it.</summary>
+        internal static Entry SummonEntryFor(string model)
+        {
+            if (string.IsNullOrEmpty(model)) return null;
+            if (SummonEntries.TryGetValue(model, out Entry cached)) return cached;
+            Entry e = null;
+            foreach (GHClasses.Pack pack in GHClasses.Packs ?? new List<GHClasses.Pack>())
+            {
+                try
+                {
+                    JObject j = JObject.Parse(File.ReadAllText(Path.Combine(pack.Folder, "pack.json")));
+                    var m = (j["summon_models"] as JObject)?.Properties().FirstOrDefault(p => string.Equals(p.Name, model, StringComparison.OrdinalIgnoreCase))?.Value as JObject;
+                    if (m == null) continue;
+                    e = Entry.Parse(default(ECharacter), m, pack.Folder);
+                    break;
+                }
+                catch (Exception ex) { Plugin.Log.LogError($"Gloomhaven summons: bad summon entry for {model} in {pack}: {ex.Message}"); }
+            }
+            SummonEntries[model] = e;
+            return e;
+        }
+
+        /// <summary>The summon's template prefab, built on first use (null: no entry, or the build failed, logged once).</summary>
+        internal static GameObject SummonTemplate(string model)
+        {
+            Entry e = SummonEntryFor(model);
+            if (e == null || SummonFailed.Contains(model)) return null;
+            if (SummonTemplates.TryGetValue(model, out Built b) && b.Carrier != null && b.Visual != null)
+            {
+                try { RefreshSummon(b, model); }
+                catch (Exception ex) { if (Reported.Add("refresh summon " + model)) Plugin.Log.LogWarning($"Gloomhaven summons: could not refresh the {model}'s animator: {ex}"); }
+                return b.Carrier;
+            }
+            try
+            {
+                b = BuildSummon(e, model);
+                if (b == null) return null;
+                SummonTemplates[model] = b;
+                return b.Carrier;
+            }
+            catch (Exception ex)
+            {
+                SummonFailed.Add(model);
+                Plugin.Log.LogError($"Gloomhaven summons: could not build the {model} model, keeping the {e.Animation.Base}'s: {ex}");
+                return null;
+            }
+        }
+
+        private static GameObject SummonTemplatePrefab(Entry e) =>
+            AssetBundleManager.Instance?.GetCharacterPrefabFromBundle(CActor.EType.HeroSummon, e.Animation.Base);
+
+        private static Built BuildSummon(Entry e, string model)
+        {
+            Loaded bundle = Open(e);
+            GameObject ghPrefab = bundle.Bundle.LoadAsset<GameObject>(e.Prefab);
+            if (ghPrefab == null) throw new InvalidOperationException(e.Prefab + " is not in " + e.Bundle);
+            GameObject template = SummonTemplatePrefab(e);
+            if (template == null)
+            {
+                if (Reported.Add("no summon base " + model)) Plugin.Log.LogWarning($"Gloomhaven summons: the {e.Animation.Base}'s prefab is not loaded yet; the {model} waits for the next request");
+                return null;
+            }
+            CharacterManager templateCm = template.GetComponent<CharacterManager>();
+            GameObject templateVisual = templateCm?.CharacterChildPrefab;
+            if (templateVisual == null) throw new InvalidOperationException("the " + e.Animation.Base + "'s prefab has no model");
+
+            // 1. the visual: the Gloomhaven model's Animator object
+            GameObject wrapper = UnityEngine.Object.Instantiate(ghPrefab, Holder);
+            Transform animatorTr = !string.IsNullOrEmpty(e.AnimatorObject) ? Find(wrapper.transform, e.AnimatorObject) : null;
+            if (animatorTr == null) animatorTr = wrapper.GetComponentInChildren<Animator>(true)?.transform;
+            if (animatorTr == null) throw new InvalidOperationException("no Animator under " + ghPrefab.name);
+            GameObject visual = animatorTr.gameObject;
+            if (visual != wrapper)
+            {
+                visual.transform.SetParent(Holder, false);
+                UnityEngine.Object.DestroyImmediate(wrapper);
+            }
+            visual.name = "SU_" + model;
+            visual.transform.localPosition = Vector3.zero;
+            visual.transform.localRotation = Quaternion.identity;
+            visual.transform.localScale = Vector3.one;
+            SetLayer(visual.transform, templateVisual.layer);
+            DropLods(visual);
+            SkinnedMeshRenderer[] skins = visual.GetComponentsInChildren<SkinnedMeshRenderer>(true);
+            if (skins.Length == 0) throw new InvalidOperationException("no skinned meshes under " + ghPrefab.name);
+            SkinnedMeshRenderer body = skins.FirstOrDefault(s => s.name == e.BodyMesh) ?? skins.OrderByDescending(s => s.bones.Length).First();
+
+            // 2. materials, on Frosthaven's shaders (the template's body material as the base)
+            Material[] templateMats = templateVisual.GetComponentsInChildren<SkinnedMeshRenderer>(true).SelectMany(r => r.sharedMaterials).Where(m => m != null).ToArray();
+            Material templateBody = templateMats.FirstOrDefault(m => m.shader != null && m.shader.name == GHModelMaterials.OpaqueShader) ?? templateMats.FirstOrDefault();
+            var materials = new MaterialSet(e, bundle, templateBody);
+            materials.Apply(visual);
+
+            // 3. Frosthaven's helpers on the Animator's object
+            Animator animator = visual.GetComponent<Animator>();
+            bundle.AddClips(animator.runtimeAnimatorController);
+            var vfx = visual.AddComponent<VFXLookup>();
+            vfx.CharacterRenderers = skins.Cast<Renderer>().ToList();
+            vfx.CharacterBodyMesh = body;
+            vfx.TrailPoints = new List<Transform>();
+            if (visual.GetComponent<AnimFXTrigger>() == null) visual.AddComponent<AnimFXTrigger>();
+            var dissolve = visual.AddComponent<DeathDissolve>();
+            DeathDissolve like = templateVisual.GetComponent<DeathDissolve>();
+            dissolve.Particles = DissolveParticles(like);
+            dissolve.ShowParticleEffect = dissolve.Particles != null;
+            dissolve.DissolveLifeTime = like != null ? like.DissolveLifeTime : 2.28f;
+            dissolve.DissolveInitialDelay = like != null ? like.DissolveInitialDelay : 1.08f;
+            if (like != null) { dissolve.dissolveCurve = like.dissolveCurve; dissolve.AnimStrength = like.AnimStrength; }
+            dissolve.CharacterMesh = body;
+            var outline = visual.AddComponent<Outlinable>();
+            outline.RenderStyle = RenderStyle.Single;
+            outline.AddAllChildRenderersToRenderingList(RenderersAddingMode.SkinnedMeshRenderer, "_Albedo");
+            outline.OutlineParameters.Enabled = true;
+            var idle = visual.AddComponent<IdleAnimParams>();
+            IdleAnimParams idleLike = templateVisual.GetComponent<IdleAnimParams>();
+            if (idleLike != null) { idle.MinIdleCyclesToRare = idleLike.MinIdleCyclesToRare; idle.MaxIdleCyclesToRare = idleLike.MaxIdleCyclesToRare; }
+            FootstepSound templateFeet = templateVisual.GetComponent<FootstepSound>();
+            if (templateFeet != null) CopyFields(templateFeet, visual.AddComponent<FootstepSound>(), FootstepFields);
+
+            // 4. the template's controller with the Gloomhaven clips (by state name: both games' NPCs share them)
+            var built = new Built { Entry = e, Bundle = bundle, Visual = visual };
+            built.Override = MakeOverride(built, templateVisual.GetComponent<Animator>()?.runtimeAnimatorController);
+            animator.runtimeAnimatorController = built.Override;
+            animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+            animator.applyRootMotion = false;
+
+            // 5. the carrier, with the template's CharacterManager values
+            var carrier = new GameObject(model);
+            carrier.transform.SetParent(Holder, false);
+            carrier.layer = template.layer;
+            if (template.GetComponent<UnityGameEditorObject>() != null) CopyComponent<UnityGameEditorObject>(template, carrier);
+            CharacterManager cm = CopyComponent<CharacterManager>(template, carrier);
+            cm.CharacterChildPrefab = visual;
+            cm.CharacterMenuModelPrefab = null;
+            if (!string.IsNullOrEmpty(e.TargetBone)) cm.TargetBone = e.TargetBone;
+            cm.Height = e.Height;
+            cm.HitRadius = e.HitRadius;
+            cm.WeaponLists = new List<CharacterManager.CharacterWeaponList>();
+            built.Carrier = carrier;
+            Plugin.Log.LogInfo($"Gloomhaven summons: {model} built from {e.Bundle} on the {e.Animation.Base}'s template ({skins.Length} meshes, {materials.Count} materials, height {e.Height}; {built.Override.name})");
+            return built;
+        }
+
+        /// <summary>Re-bases a summon template's override on the template NPC's controller after the game reloaded it.</summary>
+        private static void RefreshSummon(Built b, string model)
+        {
+            Animator animator = b.Visual.GetComponent<Animator>();
+            if (animator == null) return;
+            if (b.Override != null && b.Override.runtimeAnimatorController != null && animator.runtimeAnimatorController == b.Override) return;
+            GameObject template = SummonTemplatePrefab(b.Entry);
+            RuntimeAnimatorController baseController = template?.GetComponent<CharacterManager>()?.CharacterChildPrefab?.GetComponent<Animator>()?.runtimeAnimatorController;
+            if (baseController == null)
+            {
+                if (Reported.Add("no summon base " + model)) Plugin.Log.LogWarning($"Gloomhaven summons: the {b.Entry.Animation.Base}'s animator is not loaded; the {model} keeps its last controller");
+                return;
+            }
+            b.Override = MakeOverride(b, baseController, b.Override);
+            animator.runtimeAnimatorController = b.Override;
+        }
+
         // ------------------------------------------------------------------ each spawned copy
 
         /// <summary>Every clone the game spawns from a template passes through InitialiseCharacter: give it the current

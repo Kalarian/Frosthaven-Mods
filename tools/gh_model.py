@@ -639,6 +639,116 @@ def export(gh, fh, cls, out):
     return entry
 
 
+# ---------------------------------------------------------------- summons (NPC models), 2026-10-27
+# A Gloomhaven summon ships as one self-contained bundle in Frosthaven's own layout (npc_<model>_assets_all.bundle,
+# Assets/_AssetBundles/npcs/<Model>.prefab with the model prefab beside it) and its animator uses the same state names
+# as a Frosthaven NPC's (Idle-Run, Hit, Death, Attack, Summoned, PushPull, RangedAttack), so the clip table is by state
+# name. The plugin builds it like a hero: a Frosthaven summon's prefab is the template (its CharacterManager, controller
+# and helpers), the Gloomhaven model and clips go in (GHModel, "summon_models" in pack.json). See
+# docs/reports/2026-10-27-summons.md.
+NPC_TEMPLATE = "PolarCat"   # the Frosthaven summon whose prefab is the template (any; its controller has every NPC state)
+
+
+def npc_bundle_path(gh, model):
+    """The summon's Gloomhaven bundle (base game or the Jaws of the Lion DLC), or None."""
+    folder = gh / BUNDLES
+    for pattern in (f"npc_{model.lower()}_assets_all*.bundle", f"dlc_*_npc_{model.lower()}_assets_all*.bundle"):
+        hit = next(iter(sorted(folder.glob(pattern))), None)
+        if hit is not None:
+            return hit
+    return None
+
+
+def _animation_npc(b, fh_bundle_path):
+    """Frosthaven template clip -> Gloomhaven clip, by animator state name; a state the Gloomhaven controller lacks
+    plays its idle. Per-state timing scale like the hero path."""
+    fh = Bundle(fh_bundle_path)
+    fh_ctrls, fh_len = controllers(fh)
+    gh_ctrls, gh_len = controllers(b)
+    fh_ctrl = next(iter(fh_ctrls.values()))
+    gh_ctrl = next(iter(gh_ctrls.values()))
+    gh_by_name = {s["name"]: s for s in gh_ctrl["states"]}
+    idle = gh_by_name.get("Idle-Run") or gh_ctrl["states"][0]
+    gh_idle = idle["clips"][0]
+    gh_run = next((c for c in idle["clips"][1:] if "move" in c.lower() or "run" in c.lower() or "walk" in c.lower()), gh_idle)
+    aliases = {"Run": "@run", "Jump": "@run", "Jump Into": "@run", "Jump Outof": "@run", "Loot": "Attack"}
+    clips, states = {}, {}
+    for s in fh_ctrl["states"]:
+        want = aliases.get(s["name"], s["name"])
+        g = gh_by_name.get(want) if want not in ("@run",) else None
+        target = gh_run if want == "@run" else (g["clips"][0] if g and g["clips"] else gh_idle)
+        for c in s["clips"]:
+            clips.setdefault(c, target)
+        if s["clips"]:
+            fh_length, gh_length = fh_len.get(s["clips"][0]), gh_len.get(clips[s["clips"][0]])
+            timing = {"scale": round(gh_length / fh_length, 4) if fh_length and gh_length else 1.0}
+            gh_values = _smb_times(g["smbs"]) if g is not None else {}
+            if gh_values:
+                timing["gh"] = gh_values
+            states[s["fullPath"]] = timing
+    return {"base": NPC_TEMPLATE, "clips": clips, "states": states, "controller": next(iter(fh_ctrls)), "gh_controller": next(iter(gh_ctrls))}
+
+
+def describe_npc(bundle_path, model, fh_bundle_path):
+    """What the plugin needs to build the summon: the prefab paths, the Animator's object, the body mesh, materials with
+    their textures, the CharacterManager's measurements, and the clip table against the Frosthaven template."""
+    b = Bundle(bundle_path)
+    # the wrapper: Assets/_AssetBundles/npcs/<Model>.prefab in the base game, .../CharacterPrefabs/<Model>.prefab in a DLC
+    wrapper_path = next((p for p in b.container if p.lower().endswith(f"/{model.lower()}.prefab")), None)
+    if wrapper_path is None:
+        raise ValueError(f"{bundle_path.name} lacks npcs/{model}.prefab; has {sorted(b.container)}")
+    wrapper_go = b.container[wrapper_path]
+    cm = next((t for n, t in b.components(wrapper_go) if n == "CharacterManager"), None)
+    if cm is None:
+        raise ValueError(f"{model}: no CharacterManager on {wrapper_path}")
+    # the model prefab beside it (SU_<Model>_PR.prefab), walked from the container like the hero path
+    model_path = next((p for p in b.container if p.lower().endswith("_pr.prefab")), None)
+    model_go = b.container[model_path] if model_path else None
+    animator_go, body, top, materials = None, (None, -1), 0.0, {}
+    roots = [model_go] if model_go is not None else [wrapper_go]
+    for root in roots:
+        for go in b.walk(root):
+            gname = go.read_typetree()["m_Name"]
+            for n, t in b.components(go):
+                if n == "Animator" and animator_go is None:
+                    animator_go = gname
+                elif n == "SkinnedMeshRenderer":
+                    mesh = b.obj(t["m_Mesh"])
+                    if mesh is None:
+                        continue
+                    mt = mesh.read_typetree()
+                    if not mt["m_VertexData"]["m_VertexCount"]:
+                        continue
+                    if len(t["m_Bones"]) > body[1]:
+                        body = (gname, len(t["m_Bones"]))
+                    aabb = mt["m_LocalAABB"]
+                    top = max(top, aabb["m_Center"]["y"] + aabb["m_Extent"]["y"])
+                    _materials(b, t["m_Materials"], materials)
+    if animator_go is None:
+        raise ValueError(f"{model}: no Animator under {wrapper_path}")
+    return {
+        "kind": "summon", "model": model, "prefab": model_path or wrapper_path, "wrapper_prefab": wrapper_path,
+        "animator": animator_go, "body_mesh": body[0], "target_bone": cm.get("TargetBone"),
+        "gh_height": round(cm.get("Height", 1.0), 3), "height": round(top, 2), "hit_radius": round(cm.get("HitRadius", 0.1), 3),
+        "materials": materials, "animation": _animation_npc(b, fh_bundle_path),
+    }
+
+
+def export_npc(gh, fh, model, out):
+    """Copy the summon's bundle into <out>/bundles and return the pack.json "summon_models" entry for it."""
+    src = npc_bundle_path(gh, model)
+    if src is None:
+        raise FileNotFoundError(f"{model}: no npc_{model.lower()} bundle in {gh / BUNDLES}")
+    fh_bundle = fh / FH_BUNDLES / f"npc_{NPC_TEMPLATE.lower()}"
+    if not fh_bundle.exists():
+        raise FileNotFoundError(f"Frosthaven's {NPC_TEMPLATE} bundle missing: {fh_bundle}")
+    entry = describe_npc(src, model, fh_bundle)
+    dst = copy_bundle(src, out / "bundles" / src.name)
+    entry.update({"bundle": src.name, "bundle_name": Bundle(src).asset_bundle_name(), "size": dst.stat().st_size,
+                  "sha256": hashlib.sha256(dst.read_bytes()).hexdigest()})
+    return entry
+
+
 if __name__ == "__main__":
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     import fh_mods  # noqa: E402

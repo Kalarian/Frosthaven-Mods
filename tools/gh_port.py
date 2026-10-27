@@ -487,6 +487,7 @@ def main():
         "enabled": True,
     }, indent=2) + "\n", encoding="utf-8")
     written, warnings, used_keys, models, anim_names = [], [], set(), {}, set()
+    summon_models = {}   # the summons' models by model name (gh_model.export_npc), pack.json "summon_models"
 
     def write(rel, s):
         s = fh_sprites.to_fh(s)   # Frosthaven's icons: item slots, no Aura icon, infused elements as CreateX
@@ -552,8 +553,19 @@ def main():
             summon = convert_enhancements(text(files[src]), lambda w: None)
             used_keys.update(KEY_RE.findall(summon))
             write(f"Global/HeroSummons/{Path(src).name}", summon)
+        # ... and their models: Gloomhaven's own summon bundles, built in play on a Frosthaven summon's template
+        # (gh_model.export_npc, GHModel's summon templates; pack.json "summon_models", visual only like "model")
+        shipped = []
+        for sid in summon_ids:
+            if sid in summon_models:
+                continue
+            try:
+                summon_models[sid] = gh_model.export_npc(gh, fh_mods.GAME, sid, args.out)
+                shipped.append(sid)
+            except Exception as e:  # noqa: BLE001 - cosmetic, never block the data
+                warnings.append(f"{cls}: summon {sid}: model not copied: {e}")
         if summon_ids:
-            print(f"{cls}: {len(summon_ids)} summon definition(s): {', '.join(summon_ids)} (models not ported yet)")
+            print(f"{cls}: {len(summon_ids)} summon definition(s): {', '.join(summon_ids)}; models copied: {', '.join(shipped) or 'none'}")
         declared = re.findall(r"\w+", CLASS_EXTRAS.get(cls, {}).get("ElementalAffinities", ""))
         often = infused_often(converted)
         if sorted(declared) != sorted(often):
@@ -729,6 +741,7 @@ def main():
         "events": events,
         "data_sha": digest.hexdigest(), "source": {"gloomhaven": str(gh), "buildid": build, "files": len(written)},
         "model": models,
+        "summon_models": summon_models,
     }, indent=2) + "\n", encoding="utf-8")
 
     for w in warnings:

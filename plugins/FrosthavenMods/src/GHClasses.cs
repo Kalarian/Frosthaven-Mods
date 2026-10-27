@@ -198,13 +198,37 @@ namespace FrosthavenMods
             return StandInModel;
         }
 
+        /// <summary>The Frosthaven summon whose bundle to load instead of a pack summon's (the template its model is built
+        /// on, GHModel.SummonTemplate), or null when <paramref name="prefabName"/> is no pack summon or Frosthaven has
+        /// its own bundle for it (then the game's model is used, pack or no pack).</summary>
+        private static string SummonStandIn(string prefabName)
+        {
+            GHModel.Entry e = GHModel.SummonEntryFor(prefabName);
+            if (e == null) return null;
+            AssetBundleManager abm = AssetBundleManager.Instance;
+            if (abm == null || abm.AssetBundleExists("npc_" + prefabName.ToLowerInvariant().Replace(" ", ""))) return null;
+            if (Reported.Add("summon " + prefabName))
+                Plugin.Log.LogInfo($"Gloomhaven classes: the {prefabName} summon brings its own 3D model; the {e.Animation.Base}'s bundle carries it");
+            return e.Animation.Base;
+        }
+
         /// <summary>The game asks for a hero prefab here from every path (class screen, scenario, results). A Gloomhaven
-        /// class with a model in its pack gets the adopted model; without one, the Drifter's prefab under her name.</summary>
+        /// class with a model in its pack gets the adopted model; without one, the Drifter's prefab under her name. A
+        /// pack summon (Battle Boar, Sand Devil...) gets its model the same way, on a Frosthaven summon's template.</summary>
         [HarmonyPatch(typeof(AssetBundleManager), nameof(AssetBundleManager.GetCharacterPrefabFromBundle))]
         [HarmonyPrefix]
         private static bool Prefab(CActor.EType type, ref string prefabName, ref string skinString, ref GameObject __result)
         {
-            if (type != CActor.EType.Player) return true;
+            if (type != CActor.EType.Player)
+            {
+                string summonBase = SummonStandIn(prefabName);
+                if (summonBase == null) return true;
+                GameObject ownSummon = GHModel.SummonTemplate(prefabName);
+                if (ownSummon != null) { __result = ownSummon; return false; }
+                prefabName = summonBase;   // the build failed (logged): the template summon's own model stands in
+                skinString = null;
+                return true;
+            }
             string standIn = StandIn(prefabName);
             if (standIn == null) return true;
             // no skin named (scenarios, previews): the look the party member of this class has chosen (GHLooks)
@@ -226,7 +250,7 @@ namespace FrosthavenMods
 
         [HarmonyPatch(typeof(AssetBundleManager), nameof(AssetBundleManager.EnsureActorPrefabBundlesLoadedBeforeAction))]
         [HarmonyPrefix]
-        private static void EnsureActor(ref string actorPrefabName) => actorPrefabName = StandIn(actorPrefabName) ?? actorPrefabName;
+        private static void EnsureActor(ref string actorPrefabName) => actorPrefabName = StandIn(actorPrefabName) ?? SummonStandIn(actorPrefabName) ?? actorPrefabName;
 
         [HarmonyPatch(typeof(AssetBundleManager), nameof(AssetBundleManager.EnsureCharacterLoadedBeforeAction))]
         [HarmonyPrefix]
@@ -236,21 +260,36 @@ namespace FrosthavenMods
             if (standIn != null) characterToBeLoaded = (ECharacter)Enum.Parse(typeof(ECharacter), standIn);
         }
 
-        /// <summary>Scenario loading asks for the bundles of every party member's model up front.</summary>
+        /// <summary>Scenario loading asks for the bundles of every party member's model, and of every NPC model the
+        /// scenario state holds (the summons on the map included), up front.</summary>
         [HarmonyPatch(typeof(BundleLoadSettings), nameof(BundleLoadSettings.GetBundlesNeededForRequirements))]
         [HarmonyPrefix]
-        private static void Bundles(ref List<ECharacter> charactersNeeded)
+        private static void Bundles(ref List<ECharacter> charactersNeeded, ref List<CClass.ENPCModel> npcModelsNeeded)
         {
-            if (charactersNeeded == null) return;
-            List<ECharacter> swapped = null;
-            for (int i = 0; i < charactersNeeded.Count; i++)
+            if (charactersNeeded != null)
             {
-                string standIn = StandIn(charactersNeeded[i].ToString());
-                if (standIn == null) continue;
-                swapped = swapped ?? new List<ECharacter>(charactersNeeded);
-                swapped[i] = (ECharacter)Enum.Parse(typeof(ECharacter), standIn);
+                List<ECharacter> swapped = null;
+                for (int i = 0; i < charactersNeeded.Count; i++)
+                {
+                    string standIn = StandIn(charactersNeeded[i].ToString());
+                    if (standIn == null) continue;
+                    swapped = swapped ?? new List<ECharacter>(charactersNeeded);
+                    swapped[i] = (ECharacter)Enum.Parse(typeof(ECharacter), standIn);
+                }
+                if (swapped != null) charactersNeeded = swapped;
             }
-            if (swapped != null) charactersNeeded = swapped;
+            if (npcModelsNeeded != null)
+            {
+                List<CClass.ENPCModel> swapped = null;
+                for (int i = 0; i < npcModelsNeeded.Count; i++)
+                {
+                    string standIn = SummonStandIn(npcModelsNeeded[i].ToString());
+                    if (standIn == null || !Enum.TryParse(standIn, out CClass.ENPCModel template)) continue;
+                    swapped = swapped ?? new List<CClass.ENPCModel>(npcModelsNeeded);
+                    swapped[i] = template;
+                }
+                if (swapped != null) npcModelsNeeded = swapped;
+            }
         }
 
         // ------------------------------------------------------------------ class UI config (portraits, icons, colour, 3D placement)
