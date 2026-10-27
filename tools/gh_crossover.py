@@ -1095,6 +1095,121 @@ BattleGoalCondition:
         Value: 1"""),
 ]
 
+# ---------------------------------------------------------------- group 5 (sheets read 2026-10-27, ahead of the port)
+
+TINKERER_PERKS = [
+    (1, "Steady Hands", 'Remove two <sprite name="-1">',
+     {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
+    (2, "Fine Tuning", 'Replace one <sprite name="-1"> with one <sprite name="+1">',
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Basic_P1]"}),
+    (1, "Composure", 'Replace one <sprite name="-2"> with one <sprite name="0">',
+     {"CardsToRemove": "[AMC_Basic_M2]", "CardsToAdd": "[AMC_Basic_P0]"}),
+    (1, "Wide Reach", 'Replace one <sprite name="0"> with one <sprite name="0"> +1 <sprite name=Target>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_AddTarget]"}),
+    (2, "Jagged Gears", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Wound>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Wound_P1]"}),
+    (2, "Net Launcher", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Immobilize>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Immobilize_P1]"}),
+    (1, "Confusion", 'Replace two <sprite name="0"> with three <sprite name="0"> <sprite name=Muddle> <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P0]", "CardsToAdd": "[AMC_Muddle_R, AMC_Muddle_R, AMC_Muddle_R]"}),
+    (1, "Overcharge", 'Add one <sprite name="+3">',
+     {"CardsToAdd": "[AMC_Basic_P3]"}),
+    (1, "Restorative Tonic", 'Add two <sprite name="+1"> <sprite name=Heal> 2, self',
+     {"CardsToAdd": "[AMC_Heal2_Self_P1, AMC_Heal2_Self_P1]"}),
+    (1, "Hardened", 'Ignore negative scenario effects and add two <sprite name="0"> <sprite name=CreateFire> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_Fire_R, AMC_Fire_R]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
+    # the game's long-rest perk hook (as the Banner Spear's); Frosthaven's heal filter takes allies (self excluded: verify)
+    (1, "Rejuvenating Vapor", "Whenever you long rest, you may perform <sprite name=Heal> 2, <sprite name=Range> 3",
+     {"Flags": "[Passive, ExecuteAbilitiesAfterLongRest]", "Abilities": """\
+    BHeal:
+        Heal: 2
+        Range: 3
+        Target: 1
+        Targeting: Range
+        Filter: Ally
+        CanSkip: True
+        CanUndo: False
+        AnimOverload: Heal"""}),
+]
+
+TINKERER_MASTERIES = [
+    ("Field Medic", "Heal an ally or apply a negative condition to an enemy each turn",
+     """\
+# NEW TAG: every turn taken, an ally healed by the character or a negative condition applied to an enemy (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_HealOrDebuffEveryTurn]
+        CharacterIDs:
+            ActorID: TinkererID
+        Value: 1"""),
+    ("Spendthrift", "Perform two actions with lost icons before your first rest and then only rest after having played at least two actions with lost icons since your previous rest",
+     """\
+# NEW TAG: before every rest, at least Amount card halves with a lost icon performed since the previous rest (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_LossActionsBeforeRests]
+        CharacterIDs:
+            ActorID: TinkererID
+        Value: 1
+        Amount: 2"""),
+]
+
+DOOMSTALKER_PERKS = [
+    (1, "Composure", 'Remove one <sprite name="-2">',
+     {"CardsToRemove": "[AMC_Basic_M2]"}),
+    (4, "Steady Aim", 'Replace one <sprite name="-1"> with one <sprite name="+1">',
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Basic_P1]"}),
+    (2, "Wide Reach", 'Replace one <sprite name="0"> with one <sprite name="0"> +1 <sprite name=Target> <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_AddTarget_R]"}),
+    (1, "Stunning Shot", 'Replace one <sprite name="0"> with one <sprite name="0"> <sprite name=Stun>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Stun_P0]"}),
+    (1, "Barbed Arrow", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Wound>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Wound_P1]"}),
+    (1, "Venom Arrow", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Poison>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Poison_P1]"}),
+    (1, "Dizzying Shot", 'Replace one <sprite name="0"> with one <sprite name="+2"> <sprite name=Muddle>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Muddle_P2]"}),
+    (2, "Rapid Fire", 'Add two <sprite name="+1"> <sprite name=Rolling>',
+     {"CardsToAdd": "[AMC_P1_R, AMC_P1_R]"}),
+    (1, "Hardened", 'Ignore negative scenario effects and add one <sprite name="+1"> <sprite name=Immobilize>',
+     {"CardsToAdd": "[AMC_Immobilize_P1]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
+    # answered by the plugin when the class is ported (an ally shares the active Dooms' benefits on a long-rest round)
+    (1, "Marked for the Hunt", "At the beginning of each round in which you long rest, you may choose one ally to gain the benefits of any of your active Dooms as if the Dooms were in that ally's active area for the round",
+     {"Flags": "[Passive]"}),
+]
+
+DOOMSTALKER_MASTERIES = [
+    ("Fresh Quarry", "Never perform a Doom action that you have already performed in the scenario",
+     """\
+# NEW TAG: no doom card half performed twice (GHMasteries.cs, from the ability records; at least one doom performed)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_NoRepeatedDoom]
+        CharacterIDs:
+            ActorID: DoomstalkerID
+        Value: 1"""),
+    ("Cull the Herd", "Kill three Doomed enemies during one of your turns",
+     """\
+# NEW TAG: Value kills of doomed enemies (the kill record's Doom flag) in one of the character's turns (GHMasteries.cs)
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_DoomedKillsInTurn]
+        CharacterIDs:
+            ActorID: DoomstalkerID
+        Value: 3"""),
+]
+
 BERSERKER_PERKS = [
     (1, "Light Step", 'Remove two <sprite name="-1">',
      {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
@@ -1181,6 +1296,8 @@ CROSSOVER = {
     "Mindthief": {"perks": MINDTHIEF_PERKS, "masteries": MINDTHIEF_MASTERIES},
     "Elementalist": {"perks": ELEMENTALIST_PERKS, "masteries": ELEMENTALIST_MASTERIES},
     "Soothsinger": {"perks": SOOTHSINGER_PERKS, "masteries": SOOTHSINGER_MASTERIES},
+    "Tinkerer": {"perks": TINKERER_PERKS, "masteries": TINKERER_MASTERIES},
+    "Doomstalker": {"perks": DOOMSTALKER_PERKS, "masteries": DOOMSTALKER_MASTERIES},
 }
 
 
