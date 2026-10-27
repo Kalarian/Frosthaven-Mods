@@ -311,6 +311,76 @@ STORIES = {
             "slightly wrong."
         ),
     },
+    # ---- Groups 5 and 6 (drafted 2026-10-27 for the user's review, ahead of the ports)
+    "Tinkerer": {
+        "name": "Tinkerer Retires",
+        "effects": [],
+        "text": (
+            "The Tinkerer's workshop has taken over half the Craftsman's floor by the time he decides to leave it. "
+            "Nobody argues; the Craftsman has been using his drill press for a month and has no intention of giving it "
+            "back. \"Keep it,\" the Tinkerer says. \"Keep all of it. I am tired of carrying things.\"\n"
+            "He is going east, to look for the places the old maps mark and the new ones do not, with a bag of elixirs "
+            "and one battle bot that follows him like a dog and has never once worked properly. He says the not-working "
+            "is a feature. He has always said that.\n"
+            "The last thing he builds in Frosthaven is a lamp for the Infirmary that lights itself when someone comes "
+            "in after dark, so the healers stop knocking over the tray of knives. It works the first time. He looks "
+            "faintly disappointed.\n"
+            "A letter comes the next summer, smudged and full of diagrams. The Craftsman reads it twice and starts "
+            "building something. He will not say what."
+        ),
+    },
+    "Doomstalker": {
+        "name": "Doomstalker Retires",
+        "effects": [],
+        "text": (
+            "The Doomstalker has not spoken more than a sentence a week since he arrived, so when he asks you to walk "
+            "the north ridge with him at dawn, you go. He says nothing for an hour. Then he points, and you see the "
+            "tracks you have walked past a hundred times: something large, keeping its distance, watching the "
+            "outpost as patiently as he has.\n"
+            "\"I have marked it,\" he says. You do not ask what that means. You have seen what happens to things he "
+            "marks.\n"
+            "He leaves the bow with the guard captain, strung, with a single arrow laid beside it, and the captain "
+            "understands the arrangement without being told: the day the thing on the ridge comes closer, there is "
+            "one shot, and it will not miss. It never comes closer.\n"
+            "He goes north himself, after it or past it, with his animals ranging ahead of him in a loose silent "
+            "fan. For years after, the hunters swear the valley's wolves give the outpost a wider berth than any "
+            "other place on the pass, and nobody can tell them why."
+        ),
+    },
+    "BeastTyrant": {
+        "name": "Beast Tyrant Retires",
+        "effects": [],
+        "text": (
+            "You find the Beast Tyrant where you always find him: at the bear. It is sitting on its haunches at the "
+            "edge of the lumber yard, as it has every evening of the campaign, pretending not to watch the crews. The "
+            "crews pretend not to be watched. It is a comfortable arrangement and it is about to end.\n"
+            "\"The wild is going back to being wild,\" the Vermling says. \"Up past the pass, where the Algox do not "
+            "go. The bear wants it. I have never once told the bear no.\" He scratches the enormous head, which "
+            "leans into his hand with the whole of its weight. \"I am not starting now.\"\n"
+            "He leaves you his collection of totems, the wind one and the spirit banner, and a short list of which "
+            "animals in the valley are to be left alone, in an order that suggests the animals wrote it.\n"
+            "They go at dusk, the man and the bear and a loose tide of smaller things in the undergrowth around "
+            "them. The lumber yard is quiet for a week. Then the crews start leaving a cut of the day's catch at "
+            "the edge of the trees, and nobody admits to it."
+        ),
+    },
+    "Summoner": {
+        "name": "Summoner Retires",
+        "effects": [],
+        "text": (
+            "The Summoner has been bringing things through from the other side for as long as you have known her, "
+            "and sending them back when they were done, and you had assumed the arithmetic came out even. It does "
+            "not, she tells you, on the last night, sitting at the Alchemist's bench with the black unicorn asleep "
+            "across the doorway. \"Every crossing costs the crosser. The planes keep the change.\"\n"
+            "She is thinner than she was. The Aesther are hard to read, but even you can see that.\n"
+            "\"I am going to stop,\" she says, \"somewhere the boundary is thick and nothing can hear me call.\" She "
+            "has a place in mind, inland, where the ground is old and does not remember magic. She will not say where.\n"
+            "The unicorn goes back first, in the yard at dawn, unmade in a scatter of light that the children of the "
+            "outpost talk about for the rest of their lives. Then the lava golem, then the sprite. Then the Summoner "
+            "walks out of the gate on her own two feet, alone for the first time in years, and does not look as if "
+            "she minds."
+        ),
+    },
 }
 
 
