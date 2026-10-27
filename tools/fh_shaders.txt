@@ -1,0 +1,57 @@
+Amp_Basic_ForestTree_N_MRAO
+Amp_Basic_N_MRAO
+Amp_Basic_N_MRAO_Stamp
+Amp_Basic_OutpostProp_N_MRAO
+Amp_CharShader_Alpha_Ether
+Amp_CharShader_Blockout
+Amp_Char_Shader_Ghost
+Amp_Char_Shader_Transparent
+Amp_Char_Shader_Universal
+Amp_Forward_N_MRAO
+CragHeartSummonShaftShd
+Hidden/Shader Graph/FallbackError
+KriptoFX/BFX/BFX_Blood
+KriptoFX/BFX/BFX_Decal
+KriptoFX/RFX4/Decal/Mask
+KriptoFX/RFX4/DistortionParticles
+KriptoFX/RFX4/Ice
+KriptoFX/RFX4/Tornado
+LightShaftShd
+ParticleTrailShd
+Particles/Priority Additive
+Shader Graphs/KN_Blockout_VColor
+Shader Graphs/KN_Blockout_VizDev
+Shader Graphs/SG_Character_Placeholder_Lit
+Shader Graphs/SRP_BasicParticle
+Shader Graphs/SRP_BasicSurface
+Shader Graphs/URPProjectionDecal_FX
+Shader Graphs/URPProjectionDecal_ShaderGraph
+SimpleParticleAlphaDCutout
+SimpleParticleAlphaDFade
+Unlit/ManaSphere_Shd
+VFX/Beam_Shd
+VFX/BendyGlowPlane_Shd
+VFX/BendyGlowPlane_Shd_Dark
+VFX/Blend_WaveringSphere_Shd
+VFX/Cutout_Transmission_Shd
+VFX/ElectricTrail_Shd
+VFX/FluidHighlight_Shd
+VFX/GPU_Bits_Shd
+VFX/GPU_Bits_Unlit_Shd
+VFX/Gloo_Shd
+VFX/HitSpike_Shd
+VFX/LitDissolveShd
+VFX/ManaBoltTip_Shd
+VFX/MultiplySimple_Shd
+VFX/ParticleFlow_Blend_Shd
+VFX/ParticleMasterUnlitAdd_Shd
+VFX/ParticleMasterUnlitBlend_Shd
+VFX/ShoutCircle_Shd
+VFX/SimpleInvisibleShd
+VFX/SimpleMaskedSurface_Shd
+VFX/SphereIntersect_Shd
+VFX/UnlitAdd_WaveringSphere_Shd
+VFX/WingFlap_Shd
+VFX/glow_bowl_Shd
+VFX_SH_SimpleDistortion
+WeaponTrailShd

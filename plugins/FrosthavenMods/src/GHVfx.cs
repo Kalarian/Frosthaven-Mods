@@ -522,6 +522,13 @@ namespace FrosthavenMods
                 // the one lit (surface) shader among them: Frosthaven's copy draws magenta under its render pipeline
                 // (the earthquake's flying rocks); the pipeline's own lit shader instead, plain rocks without the dissolve
                 return FindShader("Universal Render Pipeline/Simple Lit") ?? FindShader("Universal Render Pipeline/Lit") ?? FindShader("Particles/Standard Unlit");
+            // Gloomhaven's own surface shaders on props and weapons inside effects, which Frosthaven never shipped: the
+            // Cragheart's Avalanche rock drew as a magenta block (Group 2 pass, 2026-10-27), the Sawbones' thrown bottle and
+            // the Quartermaster's scrolls would too. Frosthaven's nearest of the same family, else the pipeline's lit shader.
+            // (tools/vfxcheck.py carries the same table and flags any other such shader before the pack is built.)
+            else if (name == "Amp_Basic_Prop_Shader") return FindShader("Amp_Basic_N_MRAO") ?? FindShader("Universal Render Pipeline/Simple Lit");
+            else if (name == "Amp_Char_Shader_2Side") return FindShader("Amp_Char_Shader_Universal") ?? FindShader("Universal Render Pipeline/Simple Lit");
+            else if (name == "OmniDecalSimple_Shd") return FindShader("Shader Graphs/URPProjectionDecal_FX") ?? FindShader("Particles/Standard Unlit");
             return FindShader(name);
         }
 

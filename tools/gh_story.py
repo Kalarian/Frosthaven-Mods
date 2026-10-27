@@ -101,6 +101,72 @@ STORIES = {
             "storerooms have never been so tidy, and never will be again."
         ),
     },
+    # ---- Group 2 (drafted 2026-10-27 for the user's review; the reward is each class's own Gloomhaven events)
+    "Cragheart": {
+        "name": "Cragheart Retires",
+        "effects": [],
+        "text": (
+            "The Cragheart has been sitting on the same boulder outside the north wall for three days. Nobody thought much "
+            "of it; the Savvas sits still the way other people breathe. On the fourth morning the boulder is gone, and so is "
+            "a long stretch of the rubble that the last attack left along the palisade. In its place stands a wall: raw, "
+            "ugly, and a good deal thicker than the old one.\n"
+            "\"It was in the way,\" the Cragheart says when you find them at the gate, as if that explains the week of work. "
+            "They have never wasted a word on anything a stone could say for them.\n"
+            "They are going back to the mountains, they tell you, slowly, the way they say everything. Not to the Savvas, "
+            "who would not have them, but to the high country past the Frozen Pass, where the rock is older and quieter and "
+            "nobody asks it to fight.\n"
+            "They lay a hand flat against the new wall before they leave, as if listening. Whatever it says satisfies "
+            "them. The Cragheart walks north, and the ground under the gate does not shake once."
+        ),
+    },
+    "Plagueherald": {
+        "name": "Plagueherald Retires",
+        "effects": [],
+        "text": (
+            "The Alchemist finds you first, which tells you something has gone wrong before she says a word. \"Your Harrower "
+            "friend,\" she says, \"has been in my stillroom all night. I would like them out of it. I would also like to know "
+            "what they left in the third jar from the end.\"\n"
+            "You find the Plagueherald on the roof of the Alchemist's, the swarm settled over them like a shawl, watching "
+            "the sun come up over the bay. They do not turn around. \"The jar is a cure,\" they say. \"For the cough the "
+            "lumber crews have. She will work it out in a month; I have saved her the month.\"\n"
+            "They are leaving. The hive has decided, they explain, and a Harrower does not argue with the hive. Somewhere "
+            "warmer, somewhere with more rot to feed on; they say it the way someone else would mention the weather.\n"
+            "The swarm lifts off the roof all at once, a dark sheet that folds and is gone over the water. The cough is gone "
+            "from the crews by the end of the week. The Alchemist still will not open the third jar."
+        ),
+    },
+    "Nightshroud": {
+        "name": "Nightshroud Retires",
+        "effects": [],
+        "text": (
+            "You had agreed to meet the Nightshroud at the Barracks at dusk. You arrive early. He is already there, which "
+            "you only learn when he speaks from the shadow of the doorway you have been standing in for a minute.\n"
+            "\"I am going back,\" he says. Not to Gloomhaven; back, in the way the Aesther mean it, to whichever fold of "
+            "the world they step out of and into. He has found the edge of it here, in the long dark of the Frosthaven "
+            "winter. \"It is thin, this far north. I have been half through for weeks.\"\n"
+            "He hands you his knife, hilt first, the one you have watched end a dozen things before they knew they were in "
+            "danger. \"Keep it in the dark,\" he says, and for once you cannot tell whether it is advice or a joke.\n"
+            "Then the lamp in the doorway gutters, and when it steadies the shadow is only a shadow. The guards on the wall "
+            "swear nobody passed them. For the first night in months, nothing in the outpost moves that you did not see."
+        ),
+    },
+    "Berserker": {
+        "name": "Berserker Retires",
+        "effects": [],
+        "text": (
+            "The Berserker is in the Tavern, which is not news, and she is sober, which is. There is a bandage on her arm "
+            "and a letter on the table in front of her, read so many times the folds have gone soft.\n"
+            "\"My sister,\" she says, pushing it toward you. \"The clan is moving the herds south before the snows. She asks "
+            "if the one who ran off to get herself killed would like to come home instead.\" She takes the letter back "
+            "before you can finish it. \"She has a way with words.\"\n"
+            "You ask about the arm. She shrugs: it will heal, they always do, that was never the problem. The problem was "
+            "that for a long time she did not mind whether they did. \"Not any more,\" she says, and looks surprised to hear "
+            "it out loud.\n"
+            "She leaves the next morning with the trade caravan, walking beside the wagons rather than riding, because "
+            "sitting still was never going to happen. At the bend in the road she turns and raises the bandaged arm, once, "
+            "and then she is gone into the white."
+        ),
+    },
 }
 
 

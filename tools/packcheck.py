@@ -133,6 +133,11 @@ def check_pack(pack):
                     defs = list((pack / "files" / "Global" / "HeroSummons").glob("*.yml"))
                     if not any(re.search(rf"^ID:\s*{re.escape(sid)}(ID)?\s*$", d.read_text(encoding="utf-8-sig"), re.M) for d in defs):
                         problems.append(f"{rel}: {half}/{ab}: summon {sid} has no definition in files/Global/HeroSummons (its card cannot be drawn)")
+    # the effects' materials: a shader Frosthaven can't draw shows as a magenta block in game (tools/vfxcheck.py)
+    if (pack / "pack.json").exists():
+        import vfxcheck
+        for cls, shader, mat, effs in vfxcheck.check(pack):
+            problems.append(f"pack.json: {cls}: effect material {mat} on shader {shader!r} has no Frosthaven shader and no plugin stand-in (effects: {', '.join(effs) or '?'})")
     return n, problems, warnings
 
 
