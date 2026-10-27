@@ -261,4 +261,63 @@ MECHANICS = {
         "Rat King); long moves (4-5, two jumps that muddle or poison what they cross), invisibility on two bottoms, "
         "three loots (Pilfer's extra gold per adjacent enemy awaits the plugin)."
     ),
+    # ---- Groups 5 and 6, written ahead of their port, 2026-10-27
+    "Tinkerer": (
+        "A ranged healer with gadgets. Twelve heals, 2 to 6, most at range 3 for anyone (Energizing Tonic 5, Micro "
+        "Bots 6, Curative Aerosol two heals between two moves, Potent Potables +2 on every heal), and the cards that "
+        "keep a party going: an ally's whole discard pile back (Reinvigorating Elixir), a lost card back (Stamina "
+        "Booster), a discard back every turn (Gas Canister), two lost cards traded for two others (Chimeric Formula, "
+        "whose bottom raises an ally's hand size for good), a refreshed small item. Three traps and mines (6 damage, "
+        "a stun mine, a poison mine) plus two bombs on attacks.\n\n"
+        "His attacks are ranged (3-5) and area: Flamethrower 6 hexes with <sprite name=Wound>, Ink Bomb, Net Shooter "
+        "with <sprite name=Immobilize>, Noxious Vials with <sprite name=Poison>, Crank Bow 6 at range 5, Harsh "
+        "Stimulants 9 (for 2 of his own health). Disintegration Beam kills every enemy in its area with 5 health or "
+        "less, Lethal Injection kills one outright, Auto Turret fires a 2 at range 5 every turn. Three summons (Decoy, "
+        "Battlebot, Killbot) that Jet Propulsion moves together, +1 <sprite name=Attack> and <sprite name=Shield> 1 "
+        "auras, Stun and Muddle at range, two loots, and a jump of 8."
+    ),
+    "Doomstalker": (
+        "An archer who marks his prey. Range is his home: Solid Bow 3 at 5, Race to the Grave 5 at 5, Rising Momentum "
+        "6 at 5 with a push 3, Lead to Slaughter 4 at range 6, Rain of Arrows' persistent 2 at range 5, and Expose "
+        "gives advantage against the doomed. Dooms are the second card of nearly every level: eighteen bottoms place a "
+        "doom on an enemy, a persistent mark that works for him (attacks on it +1 or +2, pierce 2, advantage, "
+        "<sprite name=Curse> on it, +1 per hex of distance) or pays out when it dies (heal 4, 2 damage to its "
+        "neighbours, an attack 2 on three targets, a teleport, a controlled move, dooms passed to a neighbour), "
+        "Inescapable Fate kills the doomed enemy after a few turns and adds a doom slot, and seven attacks are +2 or "
+        "+3 against a doomed target (Swift Trickery, Press the Attack, Relentless Offensive, Impending End, Wild "
+        "Command on every doomed enemy).\n\n"
+        "Five animal summons (War Hawk, Battle Boar, Giant Toad, Spitting Cobra, Vicious Jackal) that Wild Command "
+        "drives, four bear traps (stun, wound, immobilize, 3 damage around), <sprite name=Invisible> twice "
+        "(Camouflage), retaliates at range, three loots and two self-heals. Almost no conditions on his own attacks: "
+        "the doom carries them."
+    ),
+    "BeastTyrant": (
+        "He fights through his bear. The bear is a companion present from the scenario start, and twenty-three of his "
+        "halves command it: <sprite name=Attack> 2-5 (Maul 4, Lash Out 4 on every adjacent enemy, Forceful Swipe and "
+        "Unstoppable Beast as 5-hex sweeps, Punch Through 3 pierce 4, Rampage a move-attack-move-attack), "
+        "<sprite name=Move> 2-5 with pushes, heal 4 itself, <sprite name=Strengthen>, <sprite name=Muddle> and "
+        "<sprite name=Immobilize> on a roar, and Jaws of Death kills a normal enemy with 6 health or less. Concentrated "
+        "Rage gives the bear his whole turn; Blood Hunger heals it after each attack; Borrowed Essence shares damage "
+        "between them; Primal Blessing and Spirit Swap swap places with it or with enemies.\n\n"
+        "Six more summons (Green Adder, Tattered Wolf, Swamp Lizard, Monolith, Wind Totem, Red Falcon, Spirit Banner) "
+        "with <sprite name=Shield>, <sprite name=Retaliate> and +1 <sprite name=Attack> auras for all of them, and "
+        "Tribal Sigil recovers two summon cards. His own attacks are small and ranged (1-3 at range 2-4, with "
+        "<sprite name=Poison>, <sprite name=Disarm>, <sprite name=Stun>), his heals reach allies (Natural Remedy 5, "
+        "Ancient Ward 4), <sprite name=CreateEarth> and <sprite name=CreateAir> on five cards."
+    ),
+    "Summoner": (
+        "Twelve summons, one per card (Iron Beast, Thorn Shooter, two Shadow Wolves, Lava Golem, Slime Spirit, Rock "
+        "Colossus, Healing Sprite, three Nail Spheres, Void Eater, Black Unicorn, Giant Bat, Living Bomb), and the "
+        "rest of the deck tends them: summons get a <sprite name=Shield> 1, <sprite name=Retaliate> 2, attackers' "
+        "disadvantage, prevent 3 (Intervening Apparition), heal 1, strengthen, a shared <sprite name=Move> 2 for "
+        "<sprite name=CreateEarth> (Earthen Steed), and nine cards let them act on her turn (Mighty Bond and Bonded "
+        "Might give one its move and attack, Divided Mind and Horned Majesty two or all, Strength in Numbers +1 each, "
+        "Otherworldly Rage an attack with poison and wound). Unending Dominance recovers four lost cards and "
+        "Interplanar Mastery two, so the summons come back.\n\n"
+        "Her own attacks are modest at range 3 (Staff of Visions 5 in melee; Tear the Fabric kills every adjacent "
+        "normal enemy with 5 health or less; Strength in Numbers attacks for the number of her summons) with "
+        "<sprite name=Curse>, <sprite name=Immobilize>, <sprite name=Stun> or <sprite name=Wound> from "
+        "<sprite name=CreateDark>, <sprite name=CreateFire> and <sprite name=CreateAir>. Heals 2-4, a controlled "
+        "enemy move, a swap with a summon, jumps of 4-6, two loots."
+    ),
 }
