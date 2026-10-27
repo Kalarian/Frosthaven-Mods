@@ -25,6 +25,8 @@ it ships with its Gloomhaven text and no effect, so the events can be tested in 
       gh:     the Gloomhaven event it comes from; "fh" effects as (CampaignEffectType, params...)
 """
 
+import json
+from pathlib import Path
 # How often Frosthaven's own events give each effect, by size (tallied from the game's 264 event classes,
 # FHRL.OutpostEvents, build 1.0.34121): the yardstick for the review.
 FH_BASELINE = {
@@ -517,7 +519,18 @@ DECKS = {"SummerOutpost": ("Outpost", False), "WinterOutpost": ("Outpost", True)
 
 
 def events(cls):
-    return EVENTS.get(cls, [])
+    """The class's events: the hand-written entry above, else the proposal tools/gh_rewards.py generated from Gloomhaven's
+    data (tools/gh_events_proposed.json, every option status "proposed" until the review)."""
+    if cls in EVENTS:
+        return EVENTS[cls]
+    proposed = Path(__file__).with_name("gh_events_proposed.json")
+    if proposed.exists():
+        data = json.loads(proposed.read_text(encoding="utf-8")).get(cls, [])
+        for e in data:
+            for o in e["options"]:
+                o["fh"] = [tuple(x) for x in o["fh"]]
+        return data
+    return []
 
 
 def retirement_effects(cls):

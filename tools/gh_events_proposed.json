@@ -1,0 +1,956 @@
+{
+ "BeastTyrant": [
+  {
+   "id": "GH.BeastTyrant-1",
+   "deck": "SummerOutpost",
+   "start": "retire",
+   "gh": "City event 58",
+   "front": "“There were fifty of them, I swear. Tearing my mates apart!”\n\nYou look over to the bar where a group of drunkards are all laughing at a disheveled man in the middle of a story.\n\n“And commanding them all, riding atop a giant armored bear, there was a Vermling with a staff that shot lightning!”\n\nAt this the crowd erupts into more laughter, drowning out the rest of the man’s story. “This man’s had too much to drink, I’d say,” ridicules one of the crowd. “Vermlings riding bears! I thought I’d heard of everything!”",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Join the crowd in laughing at the man.",
+     "outcome": "You move closer and join in on the fun. After a while, the man gives up and resigns himself to his glass. But his story provides entertainment for weeks.",
+     "gh": "+1 reputation",
+     "fh": [
+      [
+       "GainMorale",
+       1
+      ]
+     ],
+     "note": "reputation -> morale",
+     "status": "proposed"
+    },
+    {
+     "text": "Calm down the crowd and get more details from the man about the attack.",
+     "outcome": "It’s not easy, but you quiet down the crowd and take the staggering man over to a secluded corner of the tavern to get the full story out of him. Apparently he was part of a group of ruffians working to harvest the Dagger Forest for wood. In the middle of their logging expedition, however, they were attacked by the Beast Tyrant and an army of forest animals. Though he ran off in the middle of the fight, the man swears he also heard the howl of angry spirits in the chaos.",
+     "gh": "unlock scenario 091",
+     "fh": [
+      [
+       "UnlockRandomSideScenario"
+      ]
+     ],
+     "note": "a Gloomhaven scenario unlock -> a random side scenario",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.BeastTyrant-2",
+   "deck": "SummerRoad",
+   "start": "retire",
+   "gh": "Road event 58",
+   "front": "Despite your best efforts, you find yourself lost in a forest. You thought you were taking a shortcut, but then you got turned around and lost your bearings.\n\nAnd just when you think things couldn’t get worse, a wolf suddenly jumps out of the brush in front of you. Oddly, though, it doesn’t appear aggressive. \n\nIt howls once and then slowly and deliberately begins to walk through the trees in front of you, as if expecting you to follow it.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Follow the wolf.",
+     "outcome": "Miraculously, following the wolf leads you right to the edge of the forest and back on track to your destination. The wolf howls once more and then bounds off back into the brush. You can’t help but wonder who might have sent that wolf to assist you.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    },
+    {
+     "text": "Find your own way through the forest.",
+     "outcome": "Not willing to trust a wild animal, you refuse to go in the same direction as the wolf and continue down an ill-fated path of your own choosing. It doesn’t go well, and by the time you emerge from the dense forest and find your bearings, you are exhausted.",
+     "gh": "start the next scenario with 3 cards discarded",
+     "fh": [
+      [
+       "PartyDiscardCards",
+       2
+      ]
+     ],
+     "note": "discard 3 lowered to Frosthaven's largest, 2",
+     "status": "proposed"
+    }
+   ]
+  }
+ ],
+ "Berserker": [
+  {
+   "id": "GH.Berserker-1",
+   "deck": "SummerOutpost",
+   "start": "retire",
+   "gh": "City event 53",
+   "front": "Walking near the northern gates, you see some commotion as a group of wounded guards is ushered into town.\n\nThey look pretty bad off, suffering from many severe wounds. Some even have lost limbs.\n\nBringing up the rear, one guard is carried in by a couple of others. He’s missing a leg and has a vicious-looking axe embedded in his side. You realize that the axe looks kind of familiar.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Let the guards know you recognize the Berserker’s axe.",
+     "outcome": "You approach the wounded detail, explaining how that axe belonged to a former member of your party.\n\n“Yeah, we know,” one of them says with an icy stare. “Said we were desecrating her land or some such nonsense and just went crazy. But we weren’t doing anything but patrolling! Quite a piece of work your friend. Just take the axe if you want and get out of here.”",
+     "gh": "-1 reputation, gain Bloody Axe",
+     "fh": [
+      [
+       "LoseMorale",
+       1
+      ]
+     ],
+     "note": "reputation -> morale; ITEM TO CHOOSE: Frosthaven's axes: Flashing Axe (184, 20 gold) is the nearest shop axe; the Cleaving Axe (29) is a scenario reward",
+     "status": "proposed"
+    },
+    {
+     "text": "Stay silent and keep out of it.",
+     "outcome": "You casually move on, wondering how the guards found themselves on the wrong side of the Berserker’s rage. It probably wasn’t very difficult.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Berserker-2",
+   "deck": "SummerRoad",
+   "start": "retire",
+   "gh": "Road event 53",
+   "front": "You hear the distinctive sound of metal-on-metal in the distance and race up a hill in the road to investigate.\n\nIn front of you, you see a familiar female Inox in heated battle with a group of Gloomhaven guards. Though outnumbered and bloodied, you’ve never seen that stop the Berserker before. With every wound they inflict, she becomes more and more enraged, cleaving off limbs with the ease of cutting grass.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Help the Berserker fight off the guards.",
+     "outcome": "You enter the battle to aid the Berserker, but in her blood rage, she can’t distinguish friend from foe. She begins hacking away at you with her axe as much as she swings at the guards. You concentrate on taking out the remaining guards, but when you turn back to the Berserker, she seems to have vanished into the nearby forest.",
+     "gh": "each character suffers 3 damage",
+     "fh": [
+      [
+       "PartyDamage",
+       3
+      ]
+     ],
+     "note": "a straight copy",
+     "status": "proposed"
+    },
+    {
+     "text": "Wait and see what happens. It looks like she's handling herself well enough.",
+     "outcome": "After a brutal and bloody fight, only the Berserker remains standing. After her blood rage subsides, she collapses from exhaustion. You race to her side and attempt to revive her using a number of powerful potions. She finally awakes and expresses her begrudging gratitude. You ask about the fight, but she just shakes her head. She offers her axe as thanks and then dashes off into the forest.",
+     "gh": "gain Bloody Axe, each character consumes a small item item",
+     "fh": [],
+     "note": "ITEM TO CHOOSE: Frosthaven's axes: Flashing Axe (184, 20 gold) is the nearest shop axe; the Cleaving Axe (29) is a scenario reward; Frosthaven's events never consume items: nothing proposed",
+     "status": "proposed"
+    }
+   ]
+  }
+ ],
+ "Cragheart": [
+  {
+   "id": "GH.Cragheart-1",
+   "deck": "SummerOutpost",
+   "start": "retire",
+   "gh": "City event 46",
+   "front": "Anticipating an enjoyable night of drinks at the Sleeping Lion, you enter the tavern to see a familiar Savvas sitting at your usual table. The Cragheart stands and extends both its arms.\n\n“Ah, friends! So good to see you,” it says. “Sit! Have a drink with me!”",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Have a drink with the Cragheart.",
+     "outcome": "One drink turns into five, and five turns into even more. It is a great night of revelry at the Sleeping Lion. You see sadness in the Cragheart’s eyes when you finally stand up to leave. It tells you it’s been hard to find people to relate to since leaving the party and it thanks you for your continued friendship.",
+     "gh": "-5 gold each, +1 reputation",
+     "fh": [
+      [
+       "LoseGold",
+       5
+      ],
+      [
+       "GainMorale",
+       1
+      ]
+     ],
+     "note": "Frosthaven's LoseGold takes it from the party's total gold once (Gloomhaven took it from each character); reputation -> morale",
+     "status": "proposed"
+    },
+    {
+     "text": "Encourage the Cragheart to move on with its life.",
+     "outcome": "Not fitting in with its own kind or with a city of mostly humans, the Cragheart thought it could depend on a misfit group of mercenaries for friendship. It understands that its adventuring life is now in the past, though, and that it should go find a new place to belong. It sadly admits that it has no idea where that would be, but the Cragheart gets up and leaves the tavern nonetheless.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Cragheart-2",
+   "deck": "SummerRoad",
+   "start": "retire",
+   "gh": "Road event 46",
+   "front": "Walking among the foothills, you see a steep ridge in front of you, and on top of it, a very odd rock formation.\n\nThe formation calls to you somehow, but the way up is not readily apparent. In fact, climbing the ridge looks pretty dangerous, but you just feel like you need to get up there and look at the rocks.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Take the risk to climb to the ridge and investigate the rocks.",
+     "outcome": "Fearing the possibility of falling from a great height, you choose your steps carefully. Still, the climb to the top takes a long time and is exhausting. Reaching the top, you approach the unnatural rock formation, a giant mound of stones stacked one on top of another. At the base of the bottom stone, you see some strange runes and a small pile of gold.",
+     "gh": "+5 gold each",
+     "fh": [
+      [
+       "AllCharactersGainGold",
+       5
+      ]
+     ],
+     "note": "a straight copy",
+     "status": "proposed"
+    },
+    {
+     "text": "Forget about the rocks and continue on your journey.",
+     "outcome": "You shake your head and move past the ridge. You have more important things to do than climb rocks. Still, you feel the pull of the site, even after it fades from view. You get the feeling that this won’t be the last time you see it.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  }
+ ],
+ "Doomstalker": [
+  {
+   "id": "GH.Doomstalker-1",
+   "deck": "SummerOutpost",
+   "start": "retire",
+   "gh": "City event 55",
+   "front": "“Ah, they said I might find you here.” A portly Valrath woman looks down at you as you are enjoying a cold beverage at the Sleeping Lion.\n\n“A group of wild-looking Orchids came to the Temple of Coin today hoping to engage in trade with the merchants of the city. One particularly dour-looking one with a bow said you lot would vouch for them.\n\n“We’re always wary of traps and betrayal out here on the edge of the wilds, but if you think these Orchids can be trusted, then the Merchant’s Guild may consider opening trade with them.”",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Vouch for the Orchids.",
+     "outcome": "“Well, we’ll take it under advisement. Personally, I don’t even know why your opinion matters, but some people in the Merchant’s Guild seem to like you.\n\n“Anyway, feel free to get back to your life of consumption and murder.”",
+     "gh": "+1 prosperity",
+     "fh": [
+      [
+       "AddProsperity",
+       1
+      ]
+     ],
+     "note": "a straight copy",
+     "status": "proposed"
+    },
+    {
+     "text": "Advise against trading with the Orchids.",
+     "outcome": "The Valrath woman nods. “I agree. Orchids are not to be trusted. Personally, I thought you lacked the brains to make a proper decision, but I’m happy to be proven wrong.”",
+     "gh": "+1 reputation",
+     "fh": [
+      [
+       "GainMorale",
+       1
+      ]
+     ],
+     "note": "reputation -> morale",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Doomstalker-2",
+   "deck": "SummerRoad",
+   "start": "retire",
+   "gh": "Road event 55",
+   "front": "You come to a fork in the road. One path looks clear and easy, but the other path is overgrown with thorns and nettles. Either one will likely get you to where you are going.\n\nThe whole situation feels off, though—as if someone or something is watching you.\n\nStill, a decision must be made.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Take the clear path.",
+     "outcome": "You walk down the clear path for a few minutes, and, just when you think the whole weird feeling was your imagination, a group of human bandits jumps out at you from the nearby brush. Before they can engage, however, an arrow suddenly spears the chest of the closest bandit, followed very quickly by a second. The bandits have paused to look around in panic when a third arrow flies into another bandit’s skull. The bandits scatter and run off. You look around for the shooter, but no trace is found.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    },
+    {
+     "text": "Take the overgrown path.",
+     "outcome": "The trek through the overgrown path is unpleasant. You are constantly getting pricked by sharp thorns covered in a strange sap. You think you recognize them from a previous foray into harsh, unforgiving foliage. Sure enough, you start feeling sick pretty soon after you emerge from the bushes.",
+     "gh": "each character gains Poison",
+     "fh": [
+      [
+       "PartyPoison"
+      ]
+     ],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  }
+ ],
+ "Elementalist": [
+  {
+   "id": "GH.Elementalist-1",
+   "deck": "SummerOutpost",
+   "start": "retire",
+   "gh": "City event 57",
+   "front": "You are haggling over the price of road rations with an irritating Valrath merchant when a messenger boy approaches you holding a note.\n\n“Sir, I have a pressing letter written by a powerful Savvas that has come to you from all the way across the Misty Sea,” the messenger says. “I was told to deliver it directly.”\n\nYou reach for it, but the messenger moves back a little. “Sir, this note has traveled a very long distance to get to you. If you could, please pay a small fee to take possession of it.”",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Pay for the note.",
+     "outcome": "You reach into your pocket to pay the kid, but come up empty-handed. He slinks off in indignation.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    },
+    {
+     "text": "Refuse to pay for the note.",
+     "outcome": "You laugh in indignation and push the messenger away. He opens his mouth to object, then thinks better of it and runs off. You turn back to bartering, now leveraging the proof of your extreme thriftiness against the merchant.",
+     "gh": "+3 gold (party)",
+     "fh": [
+      [
+       "GainGold",
+       3
+      ]
+     ],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Elementalist-2",
+   "deck": "SummerRoad",
+   "start": "retire",
+   "gh": "Road event 57",
+   "front": "You are wandering through an abysmal fog, cursing the very fact you woke up this morning. You can’t see two feet in front of your face and everything is just so cold and damp.\n\nWalking down what you think is the road, you nearly bump into an elderly Savvas.\n\n“Ah, how fortuitous is such a meeting,” the Savvas says. “You look like the ones whom my protégé worked with for some time. Normally I would not give the lesser races a second glance, but the master of elements must have seen something in you.”\n\nIt stretches its joints and looks around. “Hmm, you must be having a rough time with this weather. I could offer you something that may help.”",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Accept the gift of the Savvas.",
+     "outcome": "The Savvas concentrates and lays its hand on you. You suddenly feel very warm and all the fog within ten feet of you dissipates.\n\n“There you go. That should make things easier. The effect should last for at least as long as the fog does. Have a pleasant day!”",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    },
+    {
+     "text": "Downplay your struggle and politely decline the Savvas's offer.",
+     "outcome": "“Ah, I see,” the Savvas says. “You’d rather grow from an experience than take the easy way out. A noble path.”\n\nThe Savvas slaps you on the back. “Well, get to it, then! It’s just fog after all. You’ll survive.\"",
+     "gh": "add road event 63 to the deck, start the next scenario with 2 cards discarded",
+     "fh": [
+      [
+       "EnableEvent",
+       "GH.Elementalist-3"
+      ],
+      [
+       "PartyDiscardCards",
+       2
+      ]
+     ],
+     "note": "the follow-up event, as in Gloomhaven",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Elementalist-3",
+   "deck": "SummerRoad",
+   "start": "chain",
+   "gh": "Road event 63",
+   "front": "As you walk through some foothills, the ground suddenly shakes violently beneath you. Two massive demons built of earth and stone rise up in front of you.\n\n“Today we shall feast on your flesh, foolish travelers!”\n\nJust as the demons take a step toward you, a massive ball of fire streaks through the air from behind and connects squarely with one of the demons, which erupts into a pillar of flame. Then lightning streaks toward the other, destroying one of its arms.\n\nLooking around, you see the old Savvas you met earlier, who continues to throw out powerful attacks until the demons are forced to retreat.\n\n“Well, fancy meeting you again!”",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Thank the Savvas for his timely assistance.",
+     "outcome": "“More and more demons around these parts these days. Stopping them from attacking travelers is becoming a time-intensive job, but at least it’s fun.”\n\nThe Savvas smiles at you and then turns to leave. “Have a pleasant day!”",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    },
+    {
+     "text": "Admonish the Savvas, claiming you could have handled the demons without his help.",
+     "outcome": "The Savvas adopts a look of serious contemplation. “You are right, of course. I presumed to think that a lesser race would need my help, but I forgot your dedication to growth and learning. I have made a grave mistake and must now beg your forgiveness.”\n\nIt holds out a small trinket toward you. “Please, accept this with my apologies.”",
+     "gh": "gain Sun Earring",
+     "fh": [],
+     "note": "ITEM TO CHOOSE: Frosthaven's Sun Earring (item 160) costs 35, over the 30 limit; the Moon Earring (156, 20 gold) is the nearest",
+     "status": "proposed"
+    }
+   ]
+  }
+ ],
+ "Mindthief": [
+  {
+   "id": "GH.Mindthief-1",
+   "deck": "SummerOutpost",
+   "start": "retire",
+   "gh": "City event 47",
+   "front": "Walking near Gloomhaven Square, you see a peculiar scene. A group of guards is dragging along a Vermling in tattered robes toward the Ghost Fortress. Getting a little closer, you\nrecognize the Mindthief.\n\n“Hssss,” she spits. “Why do you do this? I came to you! I tell you that this town is being poisoned, and you respond by imprisoning me?”\n\n“We’ll see what the Captain of the Guard has to say about this,” one of her captors says. “Keep moving!”",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Intervene with the guards and find out what is going on.",
+     "outcome": "The guards look incredibly perturbed when you step in front of them and ask that they leave the Mindthief to you. After some effort, they begrudgingly hand her over. The Mindthief thanks you, explaining that her colony in the sewers is being poisoned, and the poison is quickly migrating to the city’s water supply. She says she’s tracked the source to a small cove along the Hook Coast.",
+     "gh": "unlock scenario 087, -1 reputation, achievement ThePoisonsSource",
+     "fh": [
+      [
+       "UnlockRandomSideScenario"
+      ],
+      [
+       "LoseMorale",
+       1
+      ]
+     ],
+     "note": "a Gloomhaven scenario unlock -> a random side scenario; reputation -> morale; the Gloomhaven achievement (ThePoisonsSource) is a town record with no Frosthaven meaning: nothing proposed",
+     "status": "proposed"
+    },
+    {
+     "text": "Let the guards continue their business and just continue with yours.",
+     "outcome": "The Mindthief flicks her tail and throws insults around, but it doesn’t seem to have any positive effect. She is led away and out of view. You get about your business, hoping that bit about the town being poisoned wasn’t too serious.",
+     "gh": "add city event 63 to the deck",
+     "fh": [
+      [
+       "EnableEvent",
+       "GH.Mindthief-3"
+      ]
+     ],
+     "note": "the follow-up event, as in Gloomhaven",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Mindthief-2",
+   "deck": "SummerRoad",
+   "start": "retire",
+   "gh": "Road event 47",
+   "front": "A single Vermling jumps out of the brush at you, surprising you briefly. Within moments, though, you have your weapons out and pressed against his throat.\n\n“EEEEEEEeeeahh!” The Vermling drops his weapon and cowers. “No attack! My brothers in the bushes say you had stink of city-dwelling outcast on you. I wanted to be sure.”\n\nThe Vermling waves his hands. “It’s not bad! Just curious. Being stinky city-dwelling outcast is fine. Please, don’t hurt me!”",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Move on, leave the strange Vermling in peace.",
+     "outcome": "“Stink very faint,” the Vermling continues as you walk on. “Outcast no longer with you, but I still smell it!”\n\nHe then jumps back into the brush. Vermlings are very odd creatures.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    },
+    {
+     "text": "Kill the savage little beast.",
+     "outcome": "You attack the Vermling anyway, despite his protests. It turns out he wasn’t lying about his “brothers” nearby, though. As you wipe the blood from your blade, ten more of the little furry creatures jump out at you, brandishing small knives. They are not nearly as easy to dispatch.",
+     "gh": "each character gains Poison, each character suffers 2 damage",
+     "fh": [
+      [
+       "PartyPoison"
+      ],
+      [
+       "PartyDamage",
+       2
+      ]
+     ],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Mindthief-3",
+   "deck": "SummerOutpost",
+   "start": "chain",
+   "gh": "City event 63",
+   "front": "“I assume you are aware of an increased amount of sickness in the city.”\n\nYou were summoned to the Ghost Fortress and now stand before the Captain of the Guard.\n\n“We believe it could have something to do with a poisoning threat brought to our attention by your Mindthief friend a while ago. We ignored it, but now she is nowhere to be found, the Hook Coast is a bed of disease, and Gloomhaven proper is on its way there, too.”\n\nHe looks at you firmly. “I need you to head down to the Hook Coast and figure out what is going on. Then eliminate the source of the poison.\"",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Agree to help.",
+     "outcome": "The Hook Coast is outside the walls of Gloomhaven and can be a dangerous place. And since this spread of poison, the city has become even more defenseless than normal. You hope you’ll be able to find a solution to the problem quickly.",
+     "gh": "unlock scenario 086",
+     "fh": [
+      [
+       "UnlockRandomSideScenario"
+      ]
+     ],
+     "note": "a Gloomhaven scenario unlock -> a random side scenario",
+     "status": "proposed"
+    },
+    {
+     "text": "Tell the captain to fix his own problem.",
+     "outcome": "The Captain of the Guard sighs.\n\n“I really thought you were the ones for the job. What business could you possibly have that is more important than making sure this city is safe?”\n\nHe holds up his hand. “No matter. Fine, just get out of here! We will deal with this ourselves.”",
+     "gh": "-1 reputation, -1 prosperity",
+     "fh": [
+      [
+       "LoseMorale",
+       1
+      ],
+      [
+       "LoseProsperity",
+       1
+      ]
+     ],
+     "note": "reputation -> morale",
+     "status": "proposed"
+    }
+   ]
+  }
+ ],
+ "Nightshroud": [
+  {
+   "id": "GH.Nightshroud-1",
+   "deck": "SummerOutpost",
+   "start": "retire",
+   "gh": "City event 51",
+   "front": "You are wandering through the city streets late at night when you hear a terrifying scream high above you. You look up just in time to see a body falling toward you and jump out of the way.\n\nIt lands with a wet thud on the ground. You were not the only ones to hear the scream, and quickly a small crowd forms around the corpse, including a couple of city guards.\n\nThe body is clad in black leather armor, and a long, thin blade conspicuously protrudes from its back. You remark that the sword somehow looks familiar.\n\n“What?” asks a guard. “This is the third murder like this in a week. Tell me everything you know!”",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Tell the guard that the sword belongs to the Nightshroud, your former party member.",
+     "outcome": "You explain that you recognize the sword from the time you spent traveling with the Nightshroud. As a capable assassin, he is likely to be the one behind the murders. You explain, however, that since he left the group, you have no knowledge of his whereabouts or dealings. The guard thanks you for the information.",
+     "gh": "add city event 64 to the deck, +1 reputation",
+     "fh": [
+      [
+       "EnableEvent",
+       "GH.Nightshroud-3"
+      ],
+      [
+       "GainMorale",
+       1
+      ]
+     ],
+     "note": "the follow-up event, as in Gloomhaven; reputation -> morale",
+     "status": "proposed"
+    },
+    {
+     "text": "Lie and claim you know nothing.",
+     "outcome": "You laugh and make up some poor explanation about seeing a similar sword on a bandit in a crypt. The guard eyes you suspiciously.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Nightshroud-2",
+   "deck": "SummerRoad",
+   "start": "retire",
+   "gh": "Road event 51",
+   "front": "You reach a crossroads and decide to rest for a bit. As you eat some of your rations, something sticking up out of the ground in the distance catches your attention.\n\nYou move closer, and what you thought was a signpost turns out to be a human skull impaled on a spike.\n\nThere is something sticking out of the skull’s mouth.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Investigate further.",
+     "outcome": "You get closer to the pike. The skull looks pretty fresh. There are still bits of decayed flesh attached to the bone, and flies buzz around it. You can see there is a small paper card stuck in its mouth, so you carefully reach in and pull it out. The card is black and depicts a skull with blades running through it. Come to think of it, you remember rumors of an assassins’ guild that has been known to use the same imagery. You get out of the area as quickly as you can.",
+     "gh": "gain Black Card",
+     "fh": [],
+     "note": "ITEM TO CHOOSE: Frosthaven has no Black Card (a one-use curse-card item); its White Card (190, 20 gold) is the mirror image",
+     "status": "proposed"
+    },
+    {
+     "text": "Arm yourself and make a defensive retreat from the area.",
+     "outcome": "You remember rumors of an assassins’ guild that places a skull on a pike outside the houses of their victims before they strike. Fearing the worst, you pull out your weapons and survey the scene as you back away from the pike. Everything looks clear, so you quickly get as far away from the area as possible. Perhaps the skull was not meant for you.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Nightshroud-3",
+   "deck": "SummerOutpost",
+   "start": "chain",
+   "gh": "City event 64",
+   "front": "Late in the evening, you are returning to your rooms when you hear a cry for help coming from a nearby alleyway. Racing into the shadows, you expect to find someone in distress, but instead find a group of men clad in black leather armor eying you maliciously.\n\n“We have a message for your Nightshroud friend,” one of them says, drawing a wicked-looking curved blade. Suddenly, the Nightshroud appears among them in a flash of fatal sword strikes. Before the men even have a chance to react, half of them lie dead on the ground. The other half quickly flee.\n\n“Well, it looks like you’re into it now, too. Which is good, because I need help taking them down.”",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Stay and listen to what the Nightshroud has to say.",
+     "outcome": "The Nightshroud kicks one of the corpses. “This is the Sin-Ra Syndicate, a group of assassins trying to gain a foothold in the region. I’m trying to stop them, and somehow they found out you and I were friends. They decided to go after you as retribution. Lucky for you, I’ve located their hideout, so we’re going to sneak in there and end this whole business once and for all.”",
+     "gh": "unlock scenario 089, achievement SinRa",
+     "fh": [
+      [
+       "UnlockRandomSideScenario"
+      ]
+     ],
+     "note": "a Gloomhaven scenario unlock -> a random side scenario; the Gloomhaven achievement (SinRa) is a town record with no Frosthaven meaning: nothing proposed",
+     "status": "proposed"
+    },
+    {
+     "text": "Claim you want nothing to do with this and walk away.",
+     "outcome": "“The Sin-Ra Syndicate seems to think you have something to do with this,” the Nightshroud yells at you as you leave. “That’s all that matters! They’ll strike again, and I won’t be there to protect you!” You keep walking.",
+     "gh": "add road event 64 to the deck",
+     "fh": [
+      [
+       "EnableEvent",
+       "GH.Nightshroud-4"
+      ]
+     ],
+     "note": "the follow-up event, as in Gloomhaven",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Nightshroud-4",
+   "deck": "SummerRoad",
+   "start": "chain",
+   "gh": "Road event 64",
+   "front": "You reach a crossroads and decide to rest for a bit. As you eat some of your rations, something sticking up out of the ground in the distance catches your attention.\n\nYou move closer, and what you thought was a signpost turns out to be a human skull impaled on a spike.\n\nThere is something sticking out of the skull’s mouth.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Investigate further.",
+     "outcome": "Against your better judgment, you approach the skull, which looks suspiciously like the Sin-Ra’s calling card. Sure enough, a group of dark-clad warriors appears before you from out of thin air. Wordlessly, they draw their long, curved blades and attack. Caught by surprise, you don’t fare well in the battle. You do fight them off, but in the end, you are severely wounded, exhausted, and demoralized.",
+     "gh": "-1 perk check, each character suffers 4 damage, start the next scenario with 4 cards discarded",
+     "fh": [
+      [
+       "PartyDamage",
+       3
+      ],
+      [
+       "PartyDiscardCards",
+       2
+      ]
+     ],
+     "note": "perk checks are never a ported reward (they last the campaign): nothing proposed; damage 4 lowered to Frosthaven's largest, 3; discard 4 lowered to Frosthaven's largest, 2",
+     "status": "proposed"
+    },
+    {
+     "text": "Arm yourself and make a defensive retreat from the area.",
+     "outcome": "Recognizing the pike as a symbol of the Sin-Ra Syndicate, you arm yourself and run from the area. Unfortunately, you don’t make it far before you see a number of black-clad assassins bearing down on you. You move into a defensive position and prepare for battle. The fight is arduous, but in the end, the assassins are dead, and you hope they don’t come back.",
+     "gh": "-1 perk check, each character suffers 2 damage, start the next scenario with 2 cards discarded",
+     "fh": [
+      [
+       "PartyDamage",
+       2
+      ],
+      [
+       "PartyDiscardCards",
+       2
+      ]
+     ],
+     "note": "perk checks are never a ported reward (they last the campaign): nothing proposed",
+     "status": "proposed"
+    }
+   ]
+  }
+ ],
+ "Plagueherald": [
+  {
+   "id": "GH.Plagueherald-1",
+   "deck": "SummerOutpost",
+   "start": "retire",
+   "gh": "City event 52",
+   "front": "You have been hearing rumors in the bars: a pox is spreading through Gloomhaven, affecting lower class citizens—street urchins and backalley thugs.\n\nAnd then one night you see it: a Harrower dressed in a ragged green cloak holding a man down in an alley as its swarm spreads out and consumes him. The man’s screams are muffled as the insects skitter down his throat.\n\nKilling monsters and demons is one thing, but the Plagueherald shouldn’t be preying on people in the city. You approach it, intent on stopping its attack.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Calmly explain the situation to the Plagueherald, imploring it to move on.",
+     "outcome": "With the man dead at its feet, the Plagueherald makes a chittering sound that sounds almost like laughing.\n\n“You cannot see it, but this city needs to be cleansed. You will see, and you will thank me.”\n\nAt this, the Plagueherald bursts out into a massive swarm of insects and flies up into the sky.\n\nThe deaths continue, and new rumors start about how you are associated with the killer.",
+     "gh": "-2 reputation",
+     "fh": [
+      [
+       "LoseMorale",
+       2
+      ]
+     ],
+     "note": "reputation -> morale",
+     "status": "proposed"
+    },
+    {
+     "text": "Threaten the Plagueherald with retribution if it doesn’t stop attacking residents.",
+     "outcome": "The Plagueherald recoils at your threat, genuinely concerned that you would attack it.\n\n“But, the cleansing...the city isn’t ready.”\n\nYou shake your head, and the Harrower chitters in disappointment.\n\n“Very well, but you will be responsible when the Harbinger comes.” It turns and floats off into the darkness.",
+     "gh": "+1 prosperity",
+     "fh": [
+      [
+       "AddProsperity",
+       1
+      ]
+     ],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Plagueherald-2",
+   "deck": "SummerRoad",
+   "start": "retire",
+   "gh": "Road event 52",
+   "front": "You smell the corpses before you see them. A group of five or so, spread across the road, flies buzzing around in a frenzy.\n\nAs you get closer, you see the wretched, deformed looks on their faces and the boils covering their skin. You also see their crude armor and weapons—likely a group of cutthroats.\n\nWhat is truly odd, though, is that their weapons are out of their sheaths in the first place. It appears they were engaged in battle when they suddenly succumbed to some horrible disease.\n\nYou can think of at least one way that could have happened. Fine handiwork from the Plagueherald.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Leave the corpses alone.",
+     "outcome": "Knowing better than to get too close to the machinations of the Plagueherald, you keep a wide berth between you and the corpses and continue down the road.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    },
+    {
+     "text": "Inspect the corpses for valuables.",
+     "outcome": "You rifle through the corpses, grabbing stray coins and valuables as you go. You make off with a good haul, but you start feeling sick as soon as you’re done.",
+     "gh": "+10 gold (party), each character gains Curse",
+     "fh": [
+      [
+       "GainGold",
+       10
+      ],
+      [
+       "PartyCurse",
+       1
+      ]
+     ],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  }
+ ],
+ "Soothsinger": [
+  {
+   "id": "GH.Soothsinger-1",
+   "deck": "SummerOutpost",
+   "start": "retire",
+   "gh": "City event 54",
+   "front": "Posters spring up in town announcing the performance of a master Quatryl musician and her merry band of performers. Looking closely at the image, you’re pretty sure you recognize that foppish feathered hat.\n\nThe poster says the next show is tonight. You decide to attend for one purpose or another.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Go to the show and cheer on the Soothsinger.",
+     "outcome": "You go and enjoy the Soothsinger’s concert immensely. There is even a song or two about your party and its adventures around Gloomhaven.",
+     "gh": "+1 reputation",
+     "fh": [
+      [
+       "GainMorale",
+       1
+      ]
+     ],
+     "note": "reputation -> morale",
+     "status": "proposed"
+    },
+    {
+     "text": "Seems like a good opportunity to pick some pockets while people are distracted.",
+     "outcome": "You put forth a valiant effort, but, due to a lack of skill, you don’t make much headway parting people from their money. At least the music is good.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Soothsinger-2",
+   "deck": "SummerRoad",
+   "start": "retire",
+   "gh": "Road event 54",
+   "front": "Deep inside a dense forest, you begin to hear the jangling of bells and see a small troupe of performers approaching you through the trees.\n\n“Well, look who it is!” The small voice belongs to a garishly dressed female Quatryl with a lute and a feathered hat. “Fancy running into you out here.” \n\n“This actually may be a stroke of luck,” the Soothsinger says. “You see, my compatriots and I seem to be a bit lost. We were headed toward the Capital when my drummer said he knew a shortcut. Now here we are in the middle of a forest without an inkling of a clue. I don’t suppose you could find it in your heart to escort us back to the main road, could you?\"",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Take the time to escort the troupe back out of the forest.",
+     "outcome": "While escorting the Soothsinger and her troupe out of the forest, you are able to catch up a bit. She is very happy now as a traveling performer, playing to sold-out concerts across the land. When you reach the main road, you say your good-byes and then make the long trek back to where you were going.",
+     "gh": "+1 reputation, start the next scenario with 2 cards discarded",
+     "fh": [
+      [
+       "GainMorale",
+       1
+      ],
+      [
+       "PartyDiscardCards",
+       2
+      ]
+     ],
+     "note": "reputation -> morale",
+     "status": "proposed"
+    },
+    {
+     "text": "Give detailed directions about the way out and hope that is sufficient.",
+     "outcome": "You hem and haw and then give some vague directions back to the road. The Soothsinger looks at you skeptically and heads off.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  }
+ ],
+ "Spellweaver": [
+  {
+   "id": "GH.Spellweaver-1",
+   "deck": "SummerOutpost",
+   "start": "retire",
+   "gh": "City event 44",
+   "front": "In the very early morning, you are wakened by a knock at your door. Standing behind it is giant, dirty Inox wearing a leather apron.\n\n“Oh, uh...ahem,” he coughs. “Sorry, I was looking for a female Orchid. She used to help me on occasion with my forge. Her control over fire was astounding and I paid her well for her assistance completing some of my specialty work.”\n\nHe scratches his head. “I guess she’s not around anymore. You wouldn’t happen to know where I could find someone who could help me in her absence, would you?”",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Offer to help the blacksmith yourself.",
+     "outcome": "The Inox is completely dumbfounded when you walk all the way down to his forge and then proceed to exhibit zero aptitude at manipulating or controlling fire.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    },
+    {
+     "text": "Direct him to the Savvas Elemental Guild and go back to sleep.",
+     "outcome": "“Ah, yes, that is probably a good idea,” he says. “Thanks for your time and I hope your friend the Spellweaver is doing well!”",
+     "gh": "+1 reputation",
+     "fh": [
+      [
+       "GainMorale",
+       1
+      ]
+     ],
+     "note": "reputation -> morale",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Spellweaver-2",
+   "deck": "SummerRoad",
+   "start": "retire",
+   "gh": "Road event 44",
+   "front": "Due to a late start, night falls before you can get to where you are going. You are on your guard throughout the night, but nothing can quite prepare you for a Night Demon attack.\n\nThey come upon you silent and invisible, so you are unaware of their presence until their claws sink into your flesh.\n\nThe darkness erupts into chaos with flashing swords and horrific shrieks. And then a bolt of fire streaks through the darkness and incinerates one of the demons.\n\nSomeone else is out there.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Renew your efforts to slay the demons.",
+     "outcome": "With the help of the mysterious firecaster, the battle turns and the demons are slain without much pain. Out of the darkness steps the familiar face of a female Orchid.\n\n“Sorry about that. I think they were looking for this.” The Spellweaver holds up a black censer. “It’s a good thing I ran into you, though. I could use your help.”\n\nShe draws out a crude map. “Meet me here as soon as you can, and I’ll explain more.”",
+     "gh": "unlock scenario 090",
+     "fh": [
+      [
+       "UnlockRandomSideScenario"
+      ]
+     ],
+     "note": "a Gloomhaven scenario unlock -> a random side scenario",
+     "status": "proposed"
+    },
+    {
+     "text": "Use the distraction to disengage from the demons and run away.",
+     "outcome": "This mysterious third party seems to have things under control, and the demons appear more interested in them anyway. You take the opportunity to retreat from the fight and run off into the night. You don’t feel great about it, but at least you’re alive.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  }
+ ],
+ "Summoner": [
+  {
+   "id": "GH.Summoner-1",
+   "deck": "SummerOutpost",
+   "start": "retire",
+   "gh": "City event 50",
+   "front": "“A monstrous creature approaches the walls!” A guard with a truly terrified look runs toward you, waving his arms with manic energy. “Please! You must help!” Before you can even agree, he grabs you by the wrist and pulls you toward the East Gate.\n\nYou hear the beast before you see it, bellowing with rage and pounding at the gates. Each time it hits, the entire city shakes. You climb the ramparts and look down at the massive creature with six legs as thick as trees, two spiraling horns, and a spiked tail.\n\n“This is truly a demon from the abyss,” the guard laments. It must be from another plane, so he’s not too far off.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Attack the beast from the wall, shooting arrows at it until it stops moving.",
+     "outcome": "You grab a bow and start sending arrows down into the thing’s thick hide. Each individual arrow doesn’t do much, but over time the creature slows. By the time it manages to break through the gate, it has been considerably hobbled as black blood pours from its countless wounds. It charges forward, laying waste to a small shop, but as more arrows continue to rain down upon it, it soon stops and falls over lifeless.",
+     "gh": "+5 experience each, +1 reputation",
+     "fh": [
+      [
+       "GainMorale",
+       1
+      ]
+     ],
+     "note": "experience is never a ported reward (guidelines): nothing proposed; reputation -> morale",
+     "status": "proposed"
+    },
+    {
+     "text": "Work on reinforcing the walls. Hold it off for as long as possible.",
+     "outcome": "You set to work reinforcing the gate with anything you can find—planks of wood, carts full of stones, your own bodies. Due to your tremendous effort, the guards on the walls manage to bring down the beast before it breaks through. The various merchants of the Boiler’s District thank you for your valiant service.",
+     "gh": "+10 gold each",
+     "fh": [
+      [
+       "AllCharactersGainGold",
+       10
+      ]
+     ],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Summoner-2",
+   "deck": "SummerRoad",
+   "start": "retire",
+   "gh": "Road event 50",
+   "front": "Up ahead of you, you see a staff stuck in the very center of the road, pointing straight up out of the ground. You get closer, and an odd sense of foreboding comes over you.\n\nYou recognize the staff as the one wielded by the Summoner. The fact that it now in front of you with such a strange and ominous placement makes you very wary.\n\nYou quickly look around, but nothing else of note is in sight.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Take the staff and move on.",
+     "outcome": "You shrug and grab the staff, half expecting something exciting to happen when you do. Instead, nothing happens at all. In fact, the staff seems rather mundane. You feel no power running through it at all. Still, no sense in leaving it behind. It could be important.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    },
+    {
+     "text": "Investigate the area and get to the bottom of this.",
+     "outcome": "You spend a good hour looking over the area, scouring every bush and divot you can find. Unfortunately, you find no other clues about what happened here and end up just tiring yourself out.\n\nYou shrug and grab the staff, half expecting something exciting to happen when you do. Instead, nothing happens at all. In fact, the staff seems rather mundane. You feel no power running through it at all. Still, no sense in leaving it behind. It could be important.",
+     "gh": "start the next scenario with 2 cards discarded",
+     "fh": [
+      [
+       "PartyDiscardCards",
+       2
+      ]
+     ],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  }
+ ],
+ "Tinkerer": [
+  {
+   "id": "GH.Tinkerer-1",
+   "deck": "SummerOutpost",
+   "start": "retire",
+   "gh": "City event 43",
+   "front": "You return to your rooms for the evening to find a small note resting on the ground in front of your door.\n\nIt is from the Tinkerer, explaining that he has been pursuing further studies in flammable liquid delivery methods. He asks for your help in delivering to him a small robotic contraption that he absentmindedly left behind in a secret stash under the floorboards of his old room.\n\nHe details the device’s location and gives an address to deliver it to—some small village far to the northwest.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Oblige the Tinkerer and send along the contraption.",
+     "outcome": "You don’t have the money to send him the contraption, so you decide just to keep it for yourself.\n\nLike an eager treasure hunter, you pry up the floorboards in the Tinkerer’s old room and find a trove of useless junk, plus a detailed robotic spider that is anything but useless. You switch it on and let it scurry around the room. This could be a significant help in battle. No way it’s getting shipped off.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    },
+    {
+     "text": "You don’t want to pay for postage. Just keep the thing for yourself.",
+     "outcome": "Like an eager treasure hunter, you pry up the floorboards in the Tinkerer’s old room and find a trove of useless junk, plus a detailed robotic spider that is anything but useless. You switch it on and let it scurry around the room. This could be a significant help in battle. No way it’s getting shipped off.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "id": "GH.Tinkerer-2",
+   "deck": "SummerRoad",
+   "start": "retire",
+   "gh": "Road event 43",
+   "front": "You probably wouldn’t have normally noticed it, but sometimes nature calls and you need to head off the beaten path to get some privacy.\n\nHidden in the bushes, you come across the smoking wreckage of some crude machine. It looks to have broken down at some point and was left here to rust and decay.\n\nMost of it is scrap, but thanks to your time with the Tinkerer, you know a good power core when you see one. It’s a bit heavier than you’d hoped, but it should fetch a good price back in Gloomhaven.",
+   "edits": "none yet: Gloomhaven's place names stay until the text pass",
+   "options": [
+    {
+     "text": "Take the core with you.",
+     "outcome": "The core sure is heavy. You manage it rather well, but it will be a bit of hindrance in battle. You hope the payoff is worth the trouble.",
+     "gh": "add 3 x AMC_Basic_M1 to each modifier deck, +10 gold (party)",
+     "fh": [
+      [
+       "PartyCurse",
+       1
+      ],
+      [
+       "GainGold",
+       10
+      ]
+     ],
+     "note": "Gloomhaven's extra -1 cards sit in the deck until the next scenario ends; one curse card each is the Frosthaven event equivalent",
+     "status": "proposed"
+    },
+    {
+     "text": "Leave the core alone. You don't want anything weighing you down in battle.",
+     "outcome": "You decide the risk is not worth the reward and walk away from the contraption before you scratch yourself on the rusted metal and give yourself some foul disease. And just the thought of haggling with the Quatryls in the Mixed District about a fair price makes you tired and irritable.",
+     "gh": "nothing",
+     "fh": [],
+     "note": "a straight copy",
+     "status": "proposed"
+    }
+   ]
+  }
+ ]
+}
