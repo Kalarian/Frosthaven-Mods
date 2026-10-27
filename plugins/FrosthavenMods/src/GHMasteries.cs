@@ -63,6 +63,23 @@ namespace FrosthavenMods
         // the turn" is read as every turn: a scenario with no enemy left is over).
         internal const string FavoriteEveryTurnTag = "FrosthavenMods_FavoriteEveryTurn";
         internal const string FavoriteEveryRoundTag = "FrosthavenMods_FavoriteEveryRoundWithEnemies";
+        // Groups 4-6 (2026-10-27, written with the sheets, untested until each class is on the bench)
+        internal const string AllElementsTag = "FrosthavenMods_AllElementsInfusedAndConsumed";  // (Spellweaver) every element infused and consumed
+        internal const string LossRepeatedTag = "FrosthavenMods_LossActionsRepeated";          // (Spellweaver) Value lost halves performed Amount times each
+        internal const string AugmentsTriggeredTag = "FrosthavenMods_AugmentsTriggered";        // (Mindthief) Value augments fired Amount times each
+        internal const string NeverAttackedTag = "FrosthavenMods_NeverAttacked";               // (Mindthief) no attack ever targeted the character
+        internal const string TwoElementAttacksTag = "FrosthavenMods_AttacksConsumingTwoElements"; // (Elementalist) Value attack halves consuming two elements
+        internal const string InfuseThenConsumeTag = "FrosthavenMods_InfuseThenConsume";       // (Elementalist) Amount infusions in a turn, Amount consumptions the next
+        internal const string NewSongTag = "FrosthavenMods_NewSongAfterRests";                 // (Soothsinger) a new song on the first turn and after each rest
+        internal const string AllCursesBlessesTag = "FrosthavenMods_AllCursesAndBlessesOut";   // (Soothsinger) every curse and bless in the decks at once
+        internal const string HealOrDebuffTag = "FrosthavenMods_HealOrDebuffEveryTurn";        // (Tinkerer) an ally healed or an enemy debuffed every turn
+        internal const string LossBeforeRestsTag = "FrosthavenMods_LossActionsBeforeRests";    // (Tinkerer) Amount lost halves before every rest
+        internal const string NoRepeatedDoomTag = "FrosthavenMods_NoRepeatedDoom";             // (Doomstalker) no doom half performed twice
+        internal const string DoomedKillsTag = "FrosthavenMods_DoomedKillsInTurn";             // (Doomstalker) Value doomed enemies killed in one turn
+        internal const string SummonStreakTag = "FrosthavenMods_SummonDamageStreak";           // (Beast Tyrant) Value rounds in a row with Amount summon damage
+        internal const string EnemiesDebuffedTag = "FrosthavenMods_EnemiesDebuffed";           // (Beast Tyrant) Value distinct enemies given a negative condition
+        internal const string LavaGolemTag = "FrosthavenMods_LavaGolemAllScenario";            // (Summoner) the Lava Golem out on turn 1 and never killed
+        internal const string SummonCardsTag = "FrosthavenMods_SummonsFromDifferentCards";     // (Summoner) Value cards whose summon ability was performed
 
         private static readonly HashSet<CAbility.EAbilityType> SupportTypes = new HashSet<CAbility.EAbilityType>
         {
@@ -105,6 +122,22 @@ namespace FrosthavenMods
                 else if (tags.Contains(AttackActionsTag)) AttackActionsWithDamage(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(ObstaclesTag)) ObstaclesDestroyed(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(FavoriteEveryTurnTag) || tags.Contains(FavoriteEveryRoundTag)) EveryTurn(stats, r => FavoriteMovedInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(AllElementsTag)) AllElements(stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(LossRepeatedTag)) LossActionsRepeated(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(AugmentsTriggeredTag)) AugmentsTriggered(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(NeverAttackedTag)) NeverAttacked(stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(TwoElementAttacksTag)) AttacksConsumingTwo(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(InfuseThenConsumeTag)) InfuseThenConsume(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(NewSongTag)) NewSongAfterRests(stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(AllCursesBlessesTag)) NotAnsweredYet(ref totalConditions, ref conditionsMet, ref __result);   // needs the decks at runtime: with the Soothsinger's port
+                else if (tags.Contains(HealOrDebuffTag)) EveryTurn(stats, r => HealOrDebuffInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(LossBeforeRestsTag)) LossActionsBeforeRests(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(NoRepeatedDoomTag)) NoRepeatedDoom(stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(DoomedKillsTag)) DoomedKillsInTurn(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(SummonStreakTag)) SummonDamageStreak(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(EnemiesDebuffedTag)) EnemiesDebuffed(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(LavaGolemTag)) LavaGolemAllScenario(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(SummonCardsTag)) SummonsFromDifferentCards(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else return true;   // a marker of a newer pack this plugin doesn't know: the game's own filter answers
             }
             catch (Exception e)
@@ -502,6 +535,304 @@ namespace FrosthavenMods
         {
             string self = SelfGuid(stats);
             return !string.IsNullOrEmpty(self) && FavoriteMoves.TryGetValue(self, out HashSet<int> rounds) && rounds.Contains(round);
+        }
+
+        // ------------------------------------------------------------------ Groups 4-6 (2026-10-27)
+
+        private static readonly HashSet<CAbility.EAbilityType> NegativeConditionTypes = new HashSet<CAbility.EAbilityType>
+        {
+            CAbility.EAbilityType.Poison, CAbility.EAbilityType.Wound, CAbility.EAbilityType.Muddle, CAbility.EAbilityType.Immobilize,
+            CAbility.EAbilityType.Disarm, CAbility.EAbilityType.Stun, CAbility.EAbilityType.Curse, CAbility.EAbilityType.Bane,
+            CAbility.EAbilityType.Brittle, CAbility.EAbilityType.Impair,
+        };
+
+        private static readonly ElementInfusionBoardManager.EElement[] SixElements =
+        {
+            ElementInfusionBoardManager.EElement.Fire, ElementInfusionBoardManager.EElement.Ice, ElementInfusionBoardManager.EElement.Air,
+            ElementInfusionBoardManager.EElement.Earth, ElementInfusionBoardManager.EElement.Light, ElementInfusionBoardManager.EElement.Dark,
+        };
+
+        /// <summary>A condition this plugin cannot judge yet: not met, never a free pass.</summary>
+        private static void NotAnsweredYet(ref int total, ref int met, ref bool result) { total = 1; met = 0; result = false; }
+
+        private static IEnumerable<CPlayerStatsAbilities> AbilityRecords(List<CPlayerStats> stats) =>
+            stats.SelectMany(s => s.Abilities ?? Enumerable.Empty<CPlayerStatsAbilities>()).Where(a => a != null && a.ActionData != null);
+
+        /// <summary>"T"/"B" + card ID: the card half an ability record belongs to.</summary>
+        private static string Half(CPlayerStatsAction.CPlayerStatsActionData d) =>
+            (string.IsNullOrEmpty(d.ActingAbilityName) ? "?" : d.ActingAbilityName.Substring(0, 1)) + d.CardID;
+
+        private static bool IsEnemyTarget(CPlayerStatsAbilities a, int i) =>
+            a.TargetTypes == null || i >= a.TargetTypes.Count || a.TargetTypes[i] == CActor.EType.Enemy || a.TargetTypes[i] == CActor.EType.Enemy2;
+
+        /// <summary>The rounds in which the character rested, from its turn records.</summary>
+        private static List<int> RestRounds(List<CPlayerStats> stats) =>
+            stats.SelectMany(s => s.StartTurn ?? Enumerable.Empty<CPlayerStatsStartTurn>()).Concat<CPlayerStatsAction>(stats.SelectMany(s => s.EndTurn ?? Enumerable.Empty<CPlayerStatsEndTurn>()))
+                .Where(x => x != null && x.ActionData != null && x.ActionData.MainActorResting).Select(x => x.Round).Distinct().OrderBy(r => r).ToList();
+
+        private static List<int> TurnRounds(List<CPlayerStats> stats) =>
+            stats.SelectMany(s => s.StartTurn ?? Enumerable.Empty<CPlayerStatsStartTurn>()).Where(x => x != null && x.Round > 0).Select(x => x.Round).Distinct().OrderBy(r => r).ToList();
+
+        /// <summary>Every element infused at least once and consumed at least once (twelve conditions).</summary>
+        private static void AllElements(List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            var infused = new HashSet<ElementInfusionBoardManager.EElement>();
+            var consumed = new HashSet<ElementInfusionBoardManager.EElement>();
+            foreach (CPlayerStats s in stats)
+            {
+                foreach (CPlayerStatsElement e in s.Infusions ?? Enumerable.Empty<CPlayerStatsElement>())
+                    if (e != null) { infused.Add(e.Element); if (e.Infused != null) infused.UnionWith(e.Infused); }
+                foreach (CPlayerStatsElement e in s.Consumed ?? Enumerable.Empty<CPlayerStatsElement>())
+                    if (e != null) consumed.Add(e.Element);
+            }
+            total = 12;
+            met = SixElements.Count(infused.Contains) + SixElements.Count(consumed.Contains);
+            result = met == total;
+        }
+
+        /// <summary>Performances of each card half with a lost icon, counted by round.</summary>
+        private static Dictionary<string, HashSet<int>> LossPerformances(List<CPlayerStats> stats)
+        {
+            var perf = new Dictionary<string, HashSet<int>>(StringComparer.Ordinal);
+            foreach (CPlayerStatsAbilities a in AbilityRecords(stats))
+            {
+                if (a.ActionData.CardType != CBaseCard.ECardType.CharacterAbility || a.ActionData.CardID == int.MaxValue) continue;
+                if (a.DiscardType != DiscardType.Lost && a.DiscardType != DiscardType.PermanentlyLost) continue;
+                string half = Half(a.ActionData);
+                if (!perf.TryGetValue(half, out HashSet<int> rounds)) perf[half] = rounds = new HashSet<int>();
+                rounds.Add(a.Round);
+            }
+            return perf;
+        }
+
+        /// <summary>Value different lost halves each performed Amount times.</summary>
+        private static void LossActionsRepeated(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value), times = Math.Max(1, t.Amount);
+            int count = LossPerformances(stats).Values.Count(r => r.Count >= times);
+            total = needed; met = Math.Min(count, needed); result = count >= needed;
+        }
+
+        /// <summary>Value augments whose on-attack abilities fired Amount times each (the attack hook below counts them).</summary>
+        private static void AugmentsTriggered(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value), times = Math.Max(1, t.Amount);
+            string self = SelfGuid(stats);
+            int count = !string.IsNullOrEmpty(self) && AugmentFires.TryGetValue(self, out Dictionary<int, int> fires) ? fires.Values.Count(n => n >= times) : 0;
+            total = needed; met = Math.Min(count, needed); result = count >= needed;
+        }
+
+        /// <summary>No attack ever reached the character (a dodged or avoided attack still leaves a damage record).</summary>
+        private static void NeverAttacked(List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            bool attacked = stats.SelectMany(s => s.DamageReceived ?? Enumerable.Empty<CPlayerStatsDamage>())
+                .Any(d => d != null && d.ActionData != null && d.ActionData.AbilityType == CAbility.EAbilityType.Attack);
+            total = 1; met = attacked ? 0 : 1; result = !attacked;
+        }
+
+        /// <summary>Value different attack halves performed in a round in which two different elements were consumed (the
+        /// element records carry no card, so the round stands for the performance).</summary>
+        private static void AttacksConsumingTwo(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value);
+            var consumed = new Dictionary<int, HashSet<ElementInfusionBoardManager.EElement>>();
+            foreach (CPlayerStats s in stats)
+                foreach (CPlayerStatsElement e in s.Consumed ?? Enumerable.Empty<CPlayerStatsElement>())
+                {
+                    if (e == null) continue;
+                    if (!consumed.TryGetValue(e.Round, out HashSet<ElementInfusionBoardManager.EElement> set)) consumed[e.Round] = set = new HashSet<ElementInfusionBoardManager.EElement>();
+                    set.Add(e.Element);
+                }
+            var halves = new HashSet<string>(StringComparer.Ordinal);
+            foreach (CPlayerStatsAbilities a in AbilityRecords(stats))
+                if (a.ActionData.AbilityType == CAbility.EAbilityType.Attack && consumed.TryGetValue(a.Round, out HashSet<ElementInfusionBoardManager.EElement> set) && set.Count >= 2)
+                    halves.Add(Half(a.ActionData));
+            total = needed; met = Math.Min(halves.Count, needed); result = halves.Count >= needed;
+        }
+
+        /// <summary>A turn with Amount infusions followed by the character's next turn with Amount consumptions.</summary>
+        private static void InfuseThenConsume(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Amount);
+            var infusedIn = new Dictionary<int, int>();
+            var consumedIn = new Dictionary<int, int>();
+            foreach (CPlayerStats s in stats)
+            {
+                foreach (CPlayerStatsElement e in s.Infusions ?? Enumerable.Empty<CPlayerStatsElement>())
+                    if (e != null) infusedIn[e.Round] = (infusedIn.TryGetValue(e.Round, out int n) ? n : 0) + Math.Max(1, e.Infused?.Count ?? 0);
+                foreach (CPlayerStatsElement e in s.Consumed ?? Enumerable.Empty<CPlayerStatsElement>())
+                    if (e != null) consumedIn[e.Round] = (consumedIn.TryGetValue(e.Round, out int n) ? n : 0) + 1;
+            }
+            List<int> turns = TurnRounds(stats);
+            bool done = false;
+            for (int i = 0; i + 1 < turns.Count && !done; i++)
+                done = infusedIn.TryGetValue(turns[i], out int a) && a >= needed && consumedIn.TryGetValue(turns[i + 1], out int b) && b >= needed;
+            total = 2;
+            met = done ? 2 : (infusedIn.Values.Any(v => v >= needed) ? 1 : 0);
+            result = done;
+        }
+
+        /// <summary>On the first turn and on the turn after every rest, a song not sung before in the scenario.</summary>
+        private static void NewSongAfterRests(List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            List<int> turns = TurnRounds(stats);
+            List<int> rests = RestRounds(stats);
+            var songs = new List<(int round, string half)>();
+            foreach (CPlayerStatsAbilities a in AbilityRecords(stats))
+                if (a.ActionData.AbilityType == CAbility.EAbilityType.PlaySong) songs.Add((a.Round, Half(a.ActionData)));
+            var due = new List<int>();
+            if (turns.Count > 0) due.Add(turns[0]);
+            foreach (int r in rests) { int next = turns.FirstOrDefault(x => x > r); if (next > 0) due.Add(next); }
+            due = due.Distinct().OrderBy(r => r).ToList();
+            int ok = 0;
+            var sung = new HashSet<string>(StringComparer.Ordinal);
+            foreach (int r in turns)
+            {
+                bool fresh = false;
+                foreach ((int round, string half) in songs.Where(x => x.round == r)) fresh |= sung.Add(half);
+                if (due.Contains(r) && fresh) ok++;
+            }
+            total = Math.Max(1, due.Count); met = Math.Min(ok, total); result = due.Count > 0 && ok == due.Count;
+        }
+
+        /// <summary>An ally healed by the character, or an enemy given a negative condition, in the round.</summary>
+        private static bool HealOrDebuffInRound(List<CPlayerStats> stats, int round)
+        {
+            foreach (CPlayerStats s in stats)
+                foreach (CPlayerStatsHeal h in s.Heals ?? Enumerable.Empty<CPlayerStatsHeal>())
+                    if (h != null && h.Round == round && h.HealAmount > 0 && h.ActionData != null && IsAlly(h.ActionData.MainActorType) && h.ActionData.MainActorGUID != h.ActionData.SecondaryActorGUID) return true;
+            foreach (CPlayerStatsAbilities a in AbilityRecords(stats))
+            {
+                if (a.Round != round || !NegativeConditionTypes.Contains(a.ActionData.AbilityType) || a.TargetGUIDs == null) continue;
+                for (int i = 0; i < a.TargetGUIDs.Count; i++) if (!string.IsNullOrEmpty(a.TargetGUIDs[i]) && IsEnemyTarget(a, i)) return true;
+            }
+            return false;
+        }
+
+        /// <summary>Amount lost halves performed before the first rest and between every two rests.</summary>
+        private static void LossActionsBeforeRests(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Amount);
+            List<int> rests = RestRounds(stats);
+            List<int> lossRounds = LossPerformances(stats).Values.SelectMany(r => r).OrderBy(r => r).ToList();
+            int previous = 0, ok = 0;
+            foreach (int rest in rests)
+            {
+                if (lossRounds.Count(r => r > previous && r < rest) >= needed) ok++;
+                previous = rest;
+            }
+            if (rests.Count == 0) { total = 1; met = lossRounds.Count >= needed ? 1 : 0; result = met == 1; return; }
+            total = rests.Count; met = ok; result = ok == rests.Count;
+        }
+
+        /// <summary>At least one doom performed and no doom half performed in two different rounds.</summary>
+        private static void NoRepeatedDoom(List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            var rounds = new Dictionary<string, HashSet<int>>(StringComparer.Ordinal);
+            foreach (CPlayerStatsAbilities a in AbilityRecords(stats))
+            {
+                if (a.ActionData.AbilityType != CAbility.EAbilityType.AddDoom) continue;
+                string half = Half(a.ActionData);
+                if (!rounds.TryGetValue(half, out HashSet<int> set)) rounds[half] = set = new HashSet<int>();
+                set.Add(a.Round);
+            }
+            total = 1;
+            result = rounds.Count > 0 && rounds.Values.All(r => r.Count == 1);
+            met = result ? 1 : 0;
+        }
+
+        /// <summary>Value doomed enemies killed in one of the character's turns (the kill record's Doom flag).</summary>
+        private static void DoomedKillsInTurn(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value);
+            string self = SelfGuid(stats);
+            var perRound = new Dictionary<int, int>();
+            foreach (CPlayerStats s in stats)
+                foreach (CPlayerStatsKill k in s.Kills ?? Enumerable.Empty<CPlayerStatsKill>())
+                {
+                    if (k == null || !k.Doom || !IsEnemy(k.ActorWhoDiedType) || k.ActionData == null) continue;
+                    if (!string.IsNullOrEmpty(self) && !string.IsNullOrEmpty(k.ActionData.TurnActorGUID) && k.ActionData.TurnActorGUID != self) continue;
+                    perRound[k.Round] = (perRound.TryGetValue(k.Round, out int n) ? n : 0) + 1;
+                }
+            int best = perRound.Values.DefaultIfEmpty(0).Max();
+            total = needed; met = Math.Min(best, needed); result = best >= needed;
+        }
+
+        /// <summary>Value rounds in a row with Amount damage to enemies dealt by the character's summons.</summary>
+        private static void SummonDamageStreak(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int rounds = Math.Max(1, t.Value), amount = Math.Max(1, t.Amount);
+            var dealt = new Dictionary<int, int>();
+            foreach (CPlayerStats s in stats)
+                foreach (CPlayerStatsDamage d in s.DamageDealt ?? Enumerable.Empty<CPlayerStatsDamage>())
+                {
+                    if (d == null || d.ActionData == null || !IsEnemy(d.ActorWhoReceivedDamageType)) continue;
+                    if (!d.ActionData.PerformedBySummons && d.ActorWhoDealtDamageType != CActor.EType.HeroSummon.ToString()) continue;
+                    dealt[d.Round] = (dealt.TryGetValue(d.Round, out int n) ? n : 0) + d.FinalDamageAmount;
+                }
+            int last = dealt.Keys.DefaultIfEmpty(0).Max(), run = 0, best = 0;
+            for (int r = 1; r <= last; r++) { run = dealt.TryGetValue(r, out int n) && n >= amount ? run + 1 : 0; best = Math.Max(best, run); }
+            total = rounds; met = Math.Min(best, rounds); result = best >= rounds;
+        }
+
+        /// <summary>Value distinct enemies given a negative condition by the character or its summons.</summary>
+        private static void EnemiesDebuffed(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value);
+            var enemies = new HashSet<string>(StringComparer.Ordinal);
+            foreach (CPlayerStatsAbilities a in AbilityRecords(stats))
+            {
+                if (!NegativeConditionTypes.Contains(a.ActionData.AbilityType) || a.TargetGUIDs == null) continue;
+                for (int i = 0; i < a.TargetGUIDs.Count; i++) if (!string.IsNullOrEmpty(a.TargetGUIDs[i]) && IsEnemyTarget(a, i)) enemies.Add(a.TargetGUIDs[i]);
+            }
+            total = needed; met = Math.Min(enemies.Count, needed); result = enemies.Count >= needed;
+        }
+
+        /// <summary>The Lava Golem (its card is Amount) summoned on the character's first turn and no summon of that
+        /// name among the character's deaths.</summary>
+        private static void LavaGolemAllScenario(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            List<int> turns = TurnRounds(stats);
+            bool summoned = turns.Count > 0 && AbilityRecords(stats).Any(a => a.Round == turns[0] && a.ActionData.AbilityType == CAbility.EAbilityType.Summon && (t.Amount <= 0 || a.ActionData.CardID == t.Amount));
+            bool died = stats.SelectMany(s => s.Deaths ?? Enumerable.Empty<CPlayerStatsKill>()).Any(k => k != null && k.ActorWhoDiedType == CActor.EType.HeroSummon.ToString()
+                && !string.IsNullOrEmpty(k.ActorWhoDiedClassID) && k.ActorWhoDiedClassID.IndexOf("LavaGolem", StringComparison.OrdinalIgnoreCase) >= 0);
+            total = 2; met = (summoned ? 1 : 0) + (summoned && !died ? 1 : 0); result = summoned && !died;
+        }
+
+        /// <summary>Value different cards whose summon ability was performed.</summary>
+        private static void SummonsFromDifferentCards(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value);
+            var cards = new HashSet<int>(AbilityRecords(stats).Where(a => a.ActionData.AbilityType == CAbility.EAbilityType.Summon && a.ActionData.CardID != int.MaxValue).Select(a => a.ActionData.CardID));
+            total = needed; met = Math.Min(cards.Count, needed); result = cards.Count >= needed;
+        }
+
+        // ---- augment fires (the Mindthief): each time an attack's augment abilities are stacked, per augment, for the current scenario
+
+        private static readonly Dictionary<string, Dictionary<int, int>> AugmentFires = new Dictionary<string, Dictionary<int, int>>(StringComparer.Ordinal);
+        private static ScenarioState _augmentScenario;
+        private static readonly AccessTools.FieldRef<CAbility, List<CAugment>> AttackAugments = AccessTools.FieldRefAccess<CAbility, List<CAugment>>("m_AbilityAugments");
+
+        [HarmonyPatch(typeof(CAbilityAttack), "ProcessAbilityAugments")]
+        [HarmonyPostfix]
+        private static void AugmentsFired(CAbilityAttack __instance, bool __result)
+        {
+            try
+            {
+                if (!__result || __instance?.TargetingActor == null) return;
+                ScenarioState scenario = ScenarioManager.CurrentScenarioState;
+                if (scenario == null) return;
+                if (!ReferenceEquals(scenario, _augmentScenario)) { AugmentFires.Clear(); _augmentScenario = scenario; }
+                string guid = __instance.TargetingActor.ActorGuid ?? "";
+                if (!AugmentFires.TryGetValue(guid, out Dictionary<int, int> fires)) AugmentFires[guid] = fires = new Dictionary<int, int>();
+                foreach (CAugment augment in AttackAugments(__instance) ?? new List<CAugment>())
+                {
+                    if (augment == null) continue;
+                    int key = augment.RegisteredBaseCard != null ? augment.RegisteredBaseCard.ID : System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(augment);
+                    fires[key] = (fires.TryGetValue(key, out int n) ? n : 0) + 1;
+                }
+            }
+            catch (Exception e) { if (Reported.Add("augments")) Plugin.Log.LogError("Gloomhaven masteries: an augment's fire was not noted: " + e); }
         }
 
         private static bool IsAlly(string actorType) =>

@@ -801,6 +801,8 @@ def describe_npc(bundle_path, model, fh_bundle_path):
         raise ValueError(f"{model}: no CharacterManager on {wrapper_path}")
     # the model prefab beside it (SU_<Model>_PR.prefab), walked from the container like the hero path
     model_path = next((p for p in b.container if p.lower().endswith("_pr.prefab")), None)
+    if model_path is None:   # the Spellweaver's summons: HF_HE_Spellweaver_Mystic_Ally.prefab under Characters/Heroes, no _PR
+        model_path = next((p for p in b.container if p.lower().endswith(".prefab") and p != wrapper_path and "/characters/" in p.lower()), None)
     model_go = b.container[model_path] if model_path else None
     animator_go, body, top, materials = None, (None, -1), 0.0, {}
     roots = [model_go] if model_go is not None else [wrapper_go]
