@@ -322,6 +322,17 @@ ANIM_OVERLOAD_LINE = re.compile(r"^([ \t]*AnimOverload:[ \t]*)(\w+)(?=[ \t]*\r?$
 # converted card ID: [(pattern, replacement)] on the converted file; a pattern that no longer matches stops the
 # conversion, so a fix never silently stops applying. TEXT_FIXES replace the card text to match.
 CARD_FIXES = {
+    # Rock Slide (Cragheart), top: "All allies and enemies adjacent to one or more of the created obstacles suffer 2
+    # damage". Without AllTargetsAdjacentToParentTargets Frosthaven's damage sub-ability targets the create's own hexes
+    # (CAbilityDamage: TilesInRange = ParentAbility.TilesSelected), which hold the new rocks and never a figure: the 2
+    # damage hit nobody in every bench (2026-10-27). Frosthaven's Ice Wall (Algox Icespeaker) is the same shape with it;
+    # fires on its own like the other adjacent-to-target sub-abilities.
+    20134: [
+        (r"^([ \t]+)(\w+SubDamage|\w+):(\r?)\n([ \t]+)Damage: 2\r?\n(?=[ \t]+Range: 1\r?\n[ \t]+Target: -1)",
+         lambda m: (f"{m.group(1)}{m.group(2)}:{m.group(3)}\n" + "".join(f"{m.group(4)}{x}{m.group(3)}\n" for x in
+                    ("TreatAsNonSubAbility: True", "AutoTrigger: True", "Flags: [SubAbilityPreview]",
+                     "AllTargetsAdjacentToParentTargets: True", "Damage: 2")))),
+    ],
     # Wings of the Night (Nightshroud), bottom: "persistent: before each of your attack actions, Move 2". Its active
     # bonus behaviour StartActionAbility is one no Frosthaven card uses, and in Frosthaven the move it fires throws
     # (NullReference in CAbilityMove.Perform as the next attack starts: the Group 2 pass, 2026-10-27, run 1 stopped).
