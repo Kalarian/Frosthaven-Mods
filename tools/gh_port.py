@@ -639,7 +639,9 @@ def main():
         # from the def (CreateLayout.CreateSummon: null without it, the game's error screen; system probes 2026-10-27).
         # The summon's MODEL (Model: BattleBoar -> bundle npc_battleboar) is not ported yet: see
         # docs/reports/2026-10-27-summons.md; summoning one in play still fails until that step exists.
-        summon_ids = sorted({m.group(1) for s in converted for m in re.finditer(r"^\s*Summon:\s*(\w+?)(?:ID)?\s*$", s, re.M)})
+        # "Summon: BattleBoarID", or the block form "Summon:" / "ID: DoppelgangerID" (the Elementalist's Simulacrum)
+        summon_ids = sorted({m.group(1) for s in converted for m in re.finditer(r"^\s*Summon:\s*(\w+?)(?:ID)?\s*$", s, re.M)}
+                            | {m.group(1) for s in converted for m in re.finditer(r"^\s*Summon:\s*\r?\n\s*ID:\s*(\w+?)(?:ID)?\s*$", s, re.M)})
         for sid in summon_ids:
             src = next((n for n in files if n.startswith("HeroSummon/") and re.search(rf"^ID:\s*{re.escape(sid)}ID\s*$", text(files[n]), re.M)), None)
             if src is None:
