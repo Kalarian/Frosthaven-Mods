@@ -1,0 +1,21 @@
+Parser: CharacterResources
+
+TheFavorite:
+    ID: "TheFavorite"
+    Sprite: "HoverRelic"
+    LocKey: "$GH_THE_FAVORITE_EFFECT_TOOLTIP$"
+    ResourceModel: "FH_Scenario_Campaign_126_SCENARIO_OBJECT_1"
+    DropOnDeath: True
+    MaxAmount: 1
+    CanLootFilter:
+        PlayerClasses: HatchetID
+
+TheNewFavorite:
+    ID: "TheNewFavorite"
+    Sprite: "HoverRelic"
+    LocKey: "$GH_THE_NEW_FAVORITE_EFFECT_TOOLTIP$"
+    ResourceModel: "FH_Scenario_Campaign_126_SCENARIO_OBJECT_1"
+    DropOnDeath: True
+    MaxAmount: 1
+    CanLootFilter:
+        PlayerClasses: HatchetID

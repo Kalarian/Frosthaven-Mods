@@ -11,7 +11,7 @@ string root = @"C:\Claude\Frosthaven";
 string pack = args.Length > 0 ? args[0] : Path.Combine(root, @"mods\gloomhaven\files");
 string vanilla = Path.Combine(root, @"extracted\Base");
 // the loaders this check runs, in load order (YMLLoading); other parsers are skipped
-string[] order = { "AttackModifier", "AttackModifierDeck", "HeroSummon", "Character", "AbilityCard", "ItemCard", "Perk" };
+string[] order = { "CharacterResources", "AttackModifier", "AttackModifierDeck", "HeroSummon", "Character", "AbilityCard", "ItemCard", "Perk" };
 // ScenarioRuleClient.Initialise also starts the event log; only the rule data is wanted here
 typeof(ScenarioRuleClient).GetField("s_SRLYML", BindingFlags.NonPublic | BindingFlags.Static).SetValue(null, new CSRLYML());
 // Unity's Debug calls into the engine (ECall) outside the player: route its logger to this console instead

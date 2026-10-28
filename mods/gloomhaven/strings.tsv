@@ -620,6 +620,8 @@ GH_443_T	Remove all negative conditions on the healed target and give them one â
 GH_445_T_1	All of your <nobr>Attack <sprite name=Attack></nobr> and <nobr>Move <sprite name=Move></nobr> abilities may be performed as <nobr>Heal <sprite name=Heal></nobr> abilities of an equal value plus one.
 GH_445_T_2	In such cases, the <nobr>Range <sprite name=Range></nobr> is 1 unless otherwise specified, and ignore all conditions applied by the <nobr>Attack <sprite name=Attack></nobr> abilities.
 GH_446_T	Kill all normal or elite enemies in the targeted area suffering from 10 or more damage.
+GH_THE_FAVORITE_EFFECT_TOOLTIP	<color=#F3DDAB>The Favorite</color>: You may add +3 Attack to any of your ranged attacks. When an enemy targeted with the Favorite dies, you may loot the hatchet on the hex in which it died to recover this ability.
+GH_THE_NEW_FAVORITE_EFFECT_TOOLTIP	<color=#F3DDAB>The New Favorite</color>: You may add +3 Attack, <nobr>WOUND <sprite name=Wound></nobr>, and <nobr>PUSH <sprite name=Push> 1</nobr> to any of your ranged attacks. When an enemy targeted with the Favorite dies, you may loot the hatchet on the hex in which it died to recover this ability.
 GUI_ACTIVE_BONUS_SandDevil_ForceMove_TOOLTIP	Force the character occupying the Sand Devil's hex to move with it.\nYou cannot end the Force Move action on a hex accupied by another character.
 GUI_RippedFromTheFlesh_ReturnTheFavorite_TOOLTIP	Return the Favorite Mark to the Hatchet from an adjacent enemy
 GUI_SandDevil_OverrideMove_TOOLTIP	Choose to Move the Sand Devil or skip to start the Red Guard's turn

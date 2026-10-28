@@ -599,6 +599,7 @@ def main():
         "enabled": True,
     }, indent=2) + "\n", encoding="utf-8")
     written, warnings, used_keys, models, anim_names = [], [], set(), {}, set()
+    resources = {}   # Gloomhaven character resources the ported cards use (ID -> its YML block)
     summon_models = {}   # the summons' models by model name (gh_model.export_npc), pack.json "summon_models"
 
     def write(rel, s):
@@ -693,6 +694,15 @@ def main():
                 shipped.append(sid)
             except Exception as e:  # noqa: BLE001 - cosmetic, never block the data
                 warnings.append(f"{cls}: summon {sid}: model not copied: {e}")
+        # Character resources the cards name (the Hatchet's TheFavorite / TheNewFavorite): Gloomhaven defines them in
+        # CharacterResources/CharacterResources.yml, which Frosthaven lacks, so the first card that made one threw in
+        # CCharacterResource.set_Amount (no ResourceData; bench 2026-10-28, the game's error screen). Collected per class,
+        # written once after the loop (GH_RESOURCES).
+        gh_res = text(files["CharacterResources/CharacterResources.yml"]) if "CharacterResources/CharacterResources.yml" in files else ""
+        for m in re.finditer(r"^(\w+):\r?\n((?:[ \t]+.*\r?\n?|[ \t]*\r?\n)+)", gh_res, re.M):
+            rid = re.search(r'^\s*ID:\s*"?(\w+)"?', m.group(2), re.M)
+            if rid and any(f'"{rid.group(1)}"' in c for c in converted):
+                resources[rid.group(1)] = m.group(0).rstrip() + "\n"
         if summon_ids:
             print(f"{cls}: {len(summon_ids)} summon definition(s): {', '.join(summon_ids)}; models copied: {', '.join(shipped) or 'none'}")
         declared = re.findall(r"\w+", CLASS_EXTRAS.get(cls, {}).get("ElementalAffinities", ""))
@@ -802,6 +812,19 @@ def main():
                     print(f"{cls}: {sum(len(v) for v in events.values())} sounds for {len(events)} Gloomhaven events")
                 except Exception as e:  # noqa: BLE001 - sounds are cosmetic, never block the data
                     warnings.append(f"{cls}: sounds not exported: {e}")
+
+    if resources:
+        # Frosthaven has neither Gloomhaven's hover sprite nor its dropped-axe prop: the effects-bar icon and the prop a
+        # dying enemy drops take Frosthaven's relic (scenario 126's, also DropOnDeath). APPROXIMATION (looks only).
+        blocks = []
+        for rid, blk in resources.items():
+            blk = re.sub(r'^(\s*Sprite:\s*).*$', r'\1"HoverRelic"', blk, flags=re.M)
+            blk = re.sub(r'^(\s*ResourceModel:\s*).*$', r'\1"FH_Scenario_Campaign_126_SCENARIO_OBJECT_1"', blk, flags=re.M)
+            used_keys.update("GH_" + k for k in re.findall(r'^\s*LocKey:\s*"\$?(\w+)\$?"', blk, re.M))
+            blk = re.sub(r'^(\s*LocKey:\s*)"\$?(\w+)\$?"', r'\1"$GH_\2$"', blk, flags=re.M)
+            blocks.append(blk)
+        write("Global/Characters/CharacterResources_Gloomhaven.yml", "Parser: CharacterResources\n\n" + "\n".join(blocks))
+        print(f"character resources: {', '.join(resources)}")
 
     table = {}
     for key in sorted(used_keys):
