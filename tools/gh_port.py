@@ -333,6 +333,14 @@ CARD_FIXES = {
          lambda m: (f"{m.group(1)}{m.group(2)}:{m.group(3)}\n" + "".join(f"{m.group(4)}{x}{m.group(3)}\n" for x in
                     ("AllTargetsAdjacentToParentTargets: True", "Damage: 2")))),
     ],
+    # Care Package (Hatchet), top: "Attack 2, Range 3; Heal 2 targeting one ally adjacent to the target of the attack".
+    # Gloomhaven writes the heal inline (IsInlineSubAbility); Frosthaven's inline handling exists for damage only
+    # (CAbilityDamage.InlineSubAbilityTiles), so the inline heal aimed at the attacked enemy's own hex: "the game offers
+    # no target" on every bench (2026-10-28). Frosthaven's targeting reads AllTargetsAdjacentToParentTargets for any
+    # targeting ability (CAbilityTargeting: the parent's targets' neighbours), one target picked, as written.
+    31020: [
+        (r"^([ \t]+)IsInlineSubAbility: True(\r?)$", r"\1AllTargetsAdjacentToParentTargets: True\2"),
+    ],
     # Wings of the Night (Nightshroud), bottom: "persistent: before each of your attack actions, Move 2". Its active
     # bonus behaviour StartActionAbility is one no Frosthaven card uses, and in Frosthaven the move it fires throws
     # (NullReference in CAbilityMove.Perform as the next attack starts: the Group 2 pass, 2026-10-27, run 1 stopped).
@@ -341,6 +349,16 @@ CARD_FIXES = {
     20270: [
         (r"^([ \t]*)Behaviour: StartActionAbility(\r?)$",
          lambda m: f"{m.group(1)}Behaviour: DuringTurnAbility{m.group(2)}\n{m.group(1)}IsToggleBonus: True{m.group(2)}"),
+    ],
+    # Supportive Chant (Sunkeeper), bottom: "All allies add +2 Move to all their moves this round". Written as a Move 2
+    # carrying the aura bonus, Frosthaven offered it as a move of the Sunkeeper's own that can be skipped, and skipping
+    # (the G1 retest, 2026-10-28, twice) set no aura at all. Frosthaven's own shape for the same card, the Snowdancer's
+    # Birds In a Tempest bottom, triggers by itself and names the moves it buffs.
+    20197: [
+        (r"^([ \t]+)Move: 2(\r?)\n(?=[ \t]+Target: -1\r?\n[ \t]+Filter: Self\r?\n[ \t]+ActiveBonus:\r?\n[ \t]+Duration: Round\r?\n[ \t]+Behaviour: BuffMove)",
+         lambda m: f"{m.group(1)}Move: 2{m.group(2)}\n{m.group(1)}AutoTrigger: True{m.group(2)}\n"),
+        (r"^([ \t]+)Behaviour: BuffMove(\r?)\n(?=[ \t]+IsAura: True\r?\n[ \t]+AuraFilter: \[Ally\]\r?\n[ \t]+AuraTargeting: All\r?\n[ \t]+AnimOverload: PositiveBuffRadial)",
+         lambda m: f"{m.group(1)}Behaviour: BuffMove{m.group(2)}\n{m.group(1)}ValidAbilityType: Move{m.group(2)}\n"),
     ],
     # Pilfer (Mindthief), top: "Loot 1, +1 gold per adjacent enemy". Frosthaven's loot parser knows LootData but not
     # the value ExtraGoldPerAdjacentEnemy (appears nowhere in its code): the file fails to parse, and a failed card

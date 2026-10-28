@@ -21,7 +21,7 @@ Data:
                         Filter: Ally
                         Range: 1
                         TreatAsNonSubAbility: True
-                        IsInlineSubAbility: True
+                        AllTargetsAdjacentToParentTargets: True
                 AnimOverload: QuickRangedAttack
     Bottom:
         Abilities:
