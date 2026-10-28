@@ -583,7 +583,7 @@ namespace FrosthavenMods
         // ------------------------------------------------------------------ materials
 
         /// <summary>The rebuilt materials of one model, one Frosthaven material per Gloomhaven material (GHModelMaterials).</summary>
-        private sealed class MaterialSet
+        internal sealed class MaterialSet
         {
             private readonly Entry _entry;
             private readonly Loaded _bundle;
@@ -635,7 +635,8 @@ namespace FrosthavenMods
                         if (holes) r.sharedMaterials = off;
                         // the particles the pack recorded stay (hidden until GHVfx.DressHero gives them their rebuilt
                         // materials, after the effects are prepared); the rest are switched off as before
-                        bool recorded = _entry.HeroParticles != null && _entry.HeroParticles.Objects.ContainsKey(PathUnder(root.transform, r.transform));
+                        string here = PathUnder(root.transform, r.transform);
+                        bool recorded = _entry.HeroParticles != null && _entry.HeroParticles.Objects.Keys.Any(k => GHVfx.Under(k, root.transform) == here || (here.Length > 0 && k.EndsWith("/" + here, StringComparison.Ordinal)));
                         if (!recorded && (r is ParticleSystemRenderer || r is TrailRenderer || r is LineRenderer)) r.gameObject.SetActive(false);
                         continue;
                     }
@@ -647,7 +648,7 @@ namespace FrosthavenMods
                         if (!_made.TryGetValue(gh, out Material fh))
                         {
                             _entry.Materials.TryGetValue(gh.name, out MaterialSpec spec);
-                            fh = spec != null && spec.Hidden ? GHModelMaterials.Invisible(gh.name)
+                            fh = spec != null && spec.Hidden ? GHModelMaterials.Shadow(gh, _opaque)
                                 : GHModelMaterials.Rebuild(gh, spec, spec != null && spec.Cutout ? _cutout : _opaque, _bundle.Texture);
                             _made[gh] = fh;
                         }

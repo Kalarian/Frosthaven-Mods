@@ -104,22 +104,29 @@ namespace FrosthavenMods
             return m;
         }
 
-        /// <summary>A fully transparent material for a body part Frosthaven can't draw (the Nightshroud's distortion shell
-        /// over his legs, which drew solid white on the character shader, 2026-10-27): the unlit particle shader, additive,
-        /// clear colour. The game copies hero materials for its visibility toggles, and a copy stays transparent.</summary>
-        internal static Material Invisible(string ghName)
+        /// <summary>A body part Frosthaven can't draw as Gloomhaven did: the Nightshroud's legs are a distortion mesh
+        /// (Amp_CharDistort_Shd) that reads as black shadow in Gloomhaven; on the character shader with no texture it drew
+        /// white, fully transparent it left hollow legs with pale edges (the user's screenshots, 2026-10-27). The same
+        /// character shader as the body, on a flat near-black texture: dark legs, lit and outlined like the rest.</summary>
+        internal static Material Shadow(Material gh, Material template)
         {
-            Shader s = Shader.Find("Particles/Standard Unlit") ?? Shader.Find("Universal Render Pipeline/Particles/Unlit");
-            var m = new Material(s) { name = ghName + " (hidden)", hideFlags = HideFlags.DontUnloadUnusedAsset };
-            if (m.HasProperty("_Mode")) m.SetFloat("_Mode", 4f);
-            if (m.HasProperty("_SrcBlend")) m.SetFloat("_SrcBlend", 5f);
-            if (m.HasProperty("_DstBlend")) m.SetFloat("_DstBlend", 1f);
-            if (m.HasProperty("_ZWrite")) m.SetFloat("_ZWrite", 0f);
-            if (m.HasProperty("_Color")) m.SetColor("_Color", Color.clear);
-            if (m.HasProperty("_BaseColor")) m.SetColor("_BaseColor", Color.clear);
-            m.renderQueue = 3000;
+            var m = new Material(template) { name = gh.name + " (shadow)", hideFlags = HideFlags.DontUnloadUnusedAsset };
+            foreach (string slot in m.GetTexturePropertyNames()) m.SetTexture(slot, null);
+            if (_dark == null)
+            {
+                _dark = new Texture2D(4, 4, TextureFormat.RGBA32, false) { name = "flat shadow", hideFlags = HideFlags.DontUnloadUnusedAsset };
+                var px = new Color[16];
+                for (int i = 0; i < px.Length; i++) px[i] = new Color(0.035f, 0.035f, 0.05f, 1f);
+                _dark.SetPixels(px);
+                _dark.Apply();
+            }
+            m.SetTexture("_Albedo", _dark);
+            m.SetTexture("_MetallicSmoothnessAO", Flat(0f, 0.2f, 1f));
+            if (m.HasProperty("_CULL_MODE")) m.SetFloat("_CULL_MODE", (float)CullMode.Off);
             return m;
         }
+
+        private static Texture2D _dark;
 
         /// <summary>The Gloomhaven texture for a slot: what the old material still holds (its property sheet outlives
         /// the lost shader), else the texture of the pack's name among the loaded objects.</summary>

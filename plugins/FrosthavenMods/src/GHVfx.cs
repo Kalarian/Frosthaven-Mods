@@ -290,6 +290,16 @@ namespace FrosthavenMods
             }
         }
 
+        /// <summary>A recorded hero path relative to the model object the plugin works on: the pack records it from the
+        /// prefab's top object ("HE_Nightshroud/P_NightShroud_Idle/..."), the plugin's root is that object itself (every
+        /// lookup missed: "0 of Nightshroud's own particle object(s) dressed", 2026-10-27).</summary>
+        internal static string Under(string key, Transform root)
+        {
+            string name = root.name.Replace("(Clone)", "").Trim();
+            if (key == name) return "";
+            return key.StartsWith(name + "/", StringComparison.Ordinal) ? key.Substring(name.Length + 1) : key;
+        }
+
         /// <summary>The hero model's own particles (pack "hero_particles": the Nightshroud's wisps), dressed with the
         /// rebuilt materials like an effect's objects and shown; before this they were switched off (null materials,
         /// magenta patches). Runs after Prepare, which opens the material bundles. Never throws.</summary>
@@ -308,7 +318,14 @@ namespace FrosthavenMods
                 int dressed = 0;
                 foreach (KeyValuePair<string, ObjectSpec> kv in e.HeroParticles.Objects)
                 {
-                    Transform tr = kv.Key.Length == 0 ? visual.transform : visual.transform.Find(kv.Key);
+                    string rel = Under(kv.Key, visual.transform);
+                    Transform tr = rel.Length == 0 ? visual.transform : visual.transform.Find(rel);
+                    // the plugin's root may sit above or below the recorded top object: match the longest path ending
+                    if (tr == null && rel.Length > 0)
+                        tr = visual.GetComponentsInChildren<Transform>(true).Where(x => x != visual.transform)
+                            .Select(x => (x, p: GHModel.MaterialSet.PathUnder(visual.transform, x)))
+                            .Where(xp => rel.EndsWith(xp.p, StringComparison.Ordinal) || xp.p.EndsWith(rel, StringComparison.Ordinal))
+                            .OrderByDescending(xp => xp.p.Length).Select(xp => xp.x).FirstOrDefault();
                     if (tr == null) { if (Reported.Add("hero " + key + "/" + kv.Key)) Plugin.Log.LogWarning($"Gloomhaven effects: {e.Model}'s model has no {kv.Key}"); continue; }
                     DressRenderer(tr, kv.Value, e, set);
                     var r = tr.GetComponent<Renderer>();
