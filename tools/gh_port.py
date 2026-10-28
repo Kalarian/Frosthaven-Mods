@@ -368,6 +368,15 @@ CARD_FIXES = {
         (r"^([ \t]+)Filter: Self(\r?)\n(?=[ \t]+ActiveBonus:\r?\n[ \t]+Duration: Persistent\r?\n[ \t]+Behaviour: BuffMove\r?\n[ \t]+AnimOverload: PowerUp)",
          lambda m: f"{m.group(1)}Filter: Self{m.group(2)}\n{m.group(1)}AutoTrigger: True{m.group(2)}\n"),
     ],
+    # Virulent Strain (Plagueherald), bottom: "every enemy adjacent to a poisoned enemy gains Poison". Its Poison is a
+    # sub-ability of a NullTargeting parent; run as a sub-ability, Frosthaven's targeting takes the parent's target (the
+    # poisoned enemy) as the one to hit, offers its neighbours, then drops the parent's target as ignored at apply time:
+    # nobody was poisoned on any bench (CAbilityTargeting.Start, 2026-10-28 trace). Every Frosthaven card with "all
+    # targets adjacent to the parent's targets" also sets TreatAsNonSubAbility (Banner Spear's Incendiary Throw top,
+    # Snowdancer's Frigid Growth top under a non-attack parent): the neighbours are then found and hit normally.
+    20301: [
+        (r"^([ \t]+)AllTargetsAdjacentToParentTarget: True(\r?)$", r"\1AllTargetsAdjacentToParentTarget: True\2\n\1TreatAsNonSubAbility: True\2"),
+    ],
     # Pilfer (Mindthief), top: "Loot 1, +1 gold per adjacent enemy". Frosthaven's loot parser knows LootData but not
     # the value ExtraGoldPerAdjacentEnemy (appears nowhere in its code): the file fails to parse, and a failed card
     # file inside the game's parallel class loader took the whole load down ("Character 'QuartermasterID' has no
