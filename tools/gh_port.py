@@ -89,7 +89,7 @@ STARTING_CLASSES = {"Demolitionist", "Hatchet", "RedGuard", "Voidwarden"}   # Ja
 OUT = fh_mods.MODS / PACK
 
 # Frosthaven-only character fields, per class. Race and traits from Cephalofair's crossover sheets; hero stats and
-# complexity are our estimate for the class-select screen (0-6 and 1-5).
+# complexity are our estimate for the class-select screen (0-6, written out on Frosthaven's 0-5 web; complexity 1-5).
 # A class's other 3D models, by their own ECharacter name (gh_model.export finds their hero bundle): the Demolitionist's
 # Mech Suit card swaps her model to DemolitionistMech (ChangeCharacterModel) for as long as the card is active.
 EXTRA_MODELS = {
@@ -510,6 +510,10 @@ def convert_perk(s):
     return eol.join(out) + eol
 
 
+# our 0-6 hero-stat ratings on Frosthaven's 0-5 web (see convert_character)
+HERO_STAT_TO_FH = {0: 0, 1: 1, 2: 2, 3: 3, 4: 3, 5: 4, 6: 5}
+
+
 def convert_character(cls, s):
     extras = CLASS_EXTRAS.get(cls)
     if extras is None:
@@ -524,6 +528,11 @@ def convert_character(cls, s):
     section = gh_story.section_id(cls)
     if section:   # the class's own retirement story, played like Frosthaven's (gh_story.py)
         extras = dict(extras, RetireCampaignSection=section)
+    # Frosthaven's class screen draws each hero stat out of 5 (HeroClassStatsModule: MaxValue 5f); ours are rated
+    # 0-6, so a 6 drew past the web's outer ring and the shape didn't sit on its rings (the user's screenshots,
+    # 2026-10-27). Whole steps of Frosthaven's scale, so every corner lands on a ring.
+    if isinstance(extras.get("HeroStats"), dict):
+        extras = dict(extras, HeroStats={k: HERO_STAT_TO_FH.get(v, min(int(v), 5)) for k, v in extras["HeroStats"].items()})
     todo = {k: v for k, v in extras.items() if k not in present}
     lines[at:at] = [f"{k}: {v}" for k, v in todo.items() if not isinstance(v, dict)]
     for key, value in todo.items():
