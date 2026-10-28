@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Hatchet_MASTERY_2
+LocalisedName: Hatchet_MASTERY_2_Name
+LocalisedDescription: Hatchet_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: the same change of place, counted per round and only in rounds that start with an enemy on the map
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_FavoriteEveryRoundWithEnemies]
+        CharacterIDs:
+            ActorID: HatchetID
+        Value: 1

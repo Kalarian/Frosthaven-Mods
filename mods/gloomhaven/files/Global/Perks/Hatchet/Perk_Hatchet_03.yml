@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Hatchet03
+Name: PERK_Hatchet_03_Name
+Description: PERK_Hatchet_03_Desc
+CharacterID: HatchetID
+Available: 1
+CardsToRemove: [AMC_Basic_P1]
+CardsToAdd: [AMC_Stun_P1]

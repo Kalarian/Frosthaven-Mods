@@ -168,11 +168,11 @@ STORIES = {
         ),
     },
     # ---- Group 3, Jaws of the Lion (drafted 2026-10-27 for the user's review). These four have no Gloomhaven events
-    # of their own (gh_events.retirement_effects is None), so each story's lasting mark is a proposal in
-    # docs/reports: nothing is applied until the user picks one (effects stay empty).
+    # of their own (gh_events.retirement_effects is None), so each story's lasting mark is a campaign effect Frosthaven's
+    # own sections use (2026-10-28 defaults, pending the user's verdict; docs/reports/2026-10-27-status.md section 4).
     "Hatchet": {
         "name": "Hatchet Retires",
-        "effects": [],
+        "effects": [("AddTownGuardMod", "P20")],
         "text": (
             "The Hatchet has a new coat. It is dark green, cut in the Capital style, and entirely wrong for Frosthaven, "
             "which he knows perfectly well. He wears it to the gate anyway, the Favorite hanging at his hip where the "
@@ -189,7 +189,7 @@ STORIES = {
     },
     "RedGuard": {
         "name": "Red Guard Retires",
-        "effects": [],
+        "effects": [("AddSoldiers", 1)],
         "text": (
             "The Red Guard does not leave. That is the first thing she tells you, before you can ask. She has walked "
             "the wall every night since the first attack, in the red armor that marks her as an exile from a city "
@@ -205,7 +205,7 @@ STORIES = {
     },
     "Voidwarden": {
         "name": "Voidwarden Retires",
-        "effects": [],
+        "effects": [("AddProsperity", 1)],
         "text": (
             "The Voidwarden has been filling a jar with black sand. A pinch at a time, after every scenario, from "
             "wherever the Void touched the world through her and left its coarse, dark residue behind. The jar is "
@@ -223,7 +223,7 @@ STORIES = {
     },
     "Demolitionist": {
         "name": "Demolitionist Retires",
-        "effects": [],
+        "effects": [("GainMetal", 3)],
         "text": (
             "The explosion wakes the whole outpost an hour before dawn. By the time you reach the harbor the "
             "Demolitionist is standing on the ice, or what is left of it, surrounded by delighted fishermen. The "

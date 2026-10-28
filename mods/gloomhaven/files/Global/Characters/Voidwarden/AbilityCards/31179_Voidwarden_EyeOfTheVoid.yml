@@ -1,0 +1,86 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EyeOfTheVoid$
+Character: VoidwardenID
+ID: 31179
+Level: 9
+Initiative: 19
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TPoison: 
+                Poison: True
+                Range: 4
+                Filter: Enemy
+                AnimOverload: TargetedDebuff
+                SubAbilities:
+                    TControlAll:
+                        ControlActor:
+                            ControlActorType: Ally
+                            Abilities:
+                                EnemyWillDoThis:
+                                    Attack: 2
+                                    Range: 3
+                                    Target: 1
+                                    StrengthIsBase: True
+                                    TargetIsBase: True
+                                    RangeIsBase: True
+                                    AnimOverload: RangedAttack
+                            ControlDurationType: ControlForOneAction
+                            TreatControlAbilityParentAsParent: True
+                        Range: 3
+                        Target: -1
+                        Filter: Enemy
+                        AllTargetsAdjacentToParentTarget: True
+                        UseParentRangeType: True
+            # TODO: Force all other enemies within Range 3 of the target to perform Attack 2,
+            # Range 3 targeting that target
+        Infuse: Dark
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 
+                    Amount: 2
+                    CircleEnhancements: 1
+            BDamage:
+                Damage: 1
+                Range: 3
+                Target: -1
+                Filter: [Enemy, Ally]
+                AnimOverload: RadialPositive
+            BStrengthen:
+                Strengthen: True
+                Range: 3
+                Target: -1
+                Filter: Ally
+Layout:
+    Top:
+        - Row: "<size=10%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Poison>"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TPoison.Range*</mark>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$JOTL_179_T_1$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "15,70,15"
+            - Column:
+                - Infuse: Dark
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> 2"
+                - Row: "<sprite name=Range> 3"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$JOTL_179_T_2$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_179_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Strengthen>"
+        - Row: "$Target_AllAlliesWithin$ <nobr><sprite name=Range> 3</nobr>"

@@ -1,0 +1,73 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BurnAwayTheDark$
+Character: RedGuardID
+ID: 31242
+Level: 4
+Initiative: 31
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+                Range: 2
+                Target: -1  
+                TreatAsMelee: True
+                MultiPassAttack: False
+                AnimOverload: Attack_AOE_Radial
+        Consumes:
+            TCFire:
+                Elements: Fire 
+                AbilityOverrides:
+                    TCFireBuff:
+                        ParentName: TAttack
+                        Condition: Wound
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BDisarm:
+                Disarm: True
+                Filter: Enemy
+                AnimOverload: TargetedDebuff
+        Consumes:
+            BCIce:
+                Elements: Ice
+                Abilities:
+                    BCIceInfuse:
+                        Infuse: Fire
+            BCDark:
+                Elements: Dark
+                Abilities:
+                    BCDarkInfuse:
+                        Infuse: Light
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "$JOTL_242_T$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFire
+            Text: "<sprite name=Wound>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Disarm>"
+        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "10,40,40"
+            - Column:
+            - Column:
+                - Consume:
+                    Name: BCIce
+                    Text:
+                        - Infuse: Fire
+            - Column:
+                - Consume:
+                    Name: BCDark
+                    Text:
+                        - Infuse: Light

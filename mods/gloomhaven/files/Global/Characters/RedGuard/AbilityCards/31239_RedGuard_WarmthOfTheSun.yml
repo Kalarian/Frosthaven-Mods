@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WarmthOfTheSun$
+Character: RedGuardID
+ID: 31239
+Level: 3
+Initiative: 23
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                AreaEffect: "0,0,G|2,0,R|4,0,R|1,1,R|3,1,R|2,2,R"
+                MultiPassAttack: False
+                AnimOverload: AreaAttack
+        Consumes:
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Condition: Muddle
+                XP: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 4
+                Range:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: Light
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "65, 35"
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+                - Row: "<size=20%> "
+                - Consume:
+                    Name: TCLight
+                    Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Muddle></nobr>, <sprite name=XP1>"
+                - Row: "<size=50%> "
+            - Column:
+                - Row: "£Area£"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal*"
+            - Column:
+                - Row: "<sprite name=Range>*BHeal.Range* @BHeal.Range@"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Light

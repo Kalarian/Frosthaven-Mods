@@ -1,0 +1,96 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MechSuit$
+Character: DemolitionistID
+ID: 31101
+Level: 5
+Initiative: 80
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TChangeCharacterModel:
+                ChangeCharacterModel: DemolitionistMech
+                Filter: Self
+                AnimOverload: Mech_Summoned
+                ActiveBonus:
+                    Duration: Persistent
+                    ActiveBonusAnimOverload: Mech_LeaveMech
+                SubAbilities:
+                    TOverheal:
+                        AllowOverheal: 5
+                        Filter: Self
+                        AutoTrigger: True
+                        SkipAnim: True
+                        ActiveBonus:
+                            Duration: Persistent
+                            Behaviour: AddAccumulativeOverheal
+                    THeal:
+                        Heal: 5
+                        AdditionalHealData:
+                            IgnoreTokens: True
+                        Filter: Self
+                        AutoTrigger: True
+                        SkipAnim: True
+                    TRecover:
+                        RecoverDiscardedCards: All
+                        Filter: Self
+                        SkipAnim: True
+                        AutoTrigger: True
+                    TShield:
+                        Shield: 1
+                        Filter: Self
+                        ActiveBonusDuration: Persistent
+                        SkipAnim: True
+                        AutoTrigger: True
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BAttack:
+                Attack: 2
+                ConditionalOverrides:
+                    TAttackFavoriteCO:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentToWalls: "> 0"
+                        AbilityOverrides:
+                            COOverride1:
+                                SubAbilities:
+                                    BSubCreate:
+                                        Create: RockSingle
+                                        Range: 1
+                                        Target: 1
+                                        SpawnDelay: 2.9
+                                        AnimOverload: CreateObstacle
+                                        MultiPassAttack: False
+                                        IsInlineSubAbility: True
+                                        AllTargetsAdjacentToParentTarget: True
+
+Layout:
+    Top:
+        - Row: "<size=0%> "
+        - Active:
+            Ability: TChangeCharacterModel
+            ListLayout: "$JOTL_101_T_1$ $JOTL_101_T_2$ <nobr><sprite name=Shield> 1</nobr>, $Self$"
+            Icon: Positive_Shield_Health
+            Layout:
+                - Row: "$JOTL_101_T_1$"
+                - Row: "<size=50%> "
+                - Row: "$JOTL_101_T_2$"
+                - Row: "<size=50%> "
+                - Row: "<b><size=130%><sprite name=Shield> *TShield*"
+                - Row: "<size=20%> "
+                - Row:
+                    - ColumnWidths: "30,20,20"
+                    - Column:
+                    - Column:
+                    - Column:
+                        - Duration: Persistent
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack*"
+        - Row: "$JOTL_101_B_1$"

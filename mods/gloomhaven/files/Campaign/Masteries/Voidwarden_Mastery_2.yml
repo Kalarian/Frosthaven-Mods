@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Voidwarden_MASTERY_2
+LocalisedName: Voidwarden_MASTERY_2_Name
+LocalisedDescription: Voidwarden_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: one of the named conditions applied by the Voidwarden to anyone in every round she acts (the condition
+# names ride along in the marker list) (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ConditionGivenEveryRound, Poison, Strengthen, Bless, Ward]
+        CharacterIDs:
+            ActorID: VoidwardenID
+        Value: 1

@@ -38,6 +38,6 @@ Layout:
     Bottom:
         - Active:
             Ability: BImprovedShortRest
-            Icon: Berserker
+            Icon: Positive_Tide_Rest
             ListLayout: "$GH_341_B$"
             Layout: "$GH_341_B$"

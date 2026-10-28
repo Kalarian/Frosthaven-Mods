@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Camaraderie$
+Character: HatchetID
+ID: 31036
+Level: 8
+Initiative: 75
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal1:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Filter: Self
+                AnimOverload: Heal
+            THeal2:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Filter: Ally
+                AnimOverload: Heal
+        Infuse: Air
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 3
+            BActive:
+                Attack: 2
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    XPTracker: [0]
+                    Filter:
+                        CasterAdjacentAllies: "> 0"
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal1* <size=100%><voffset=1>@THeal1@"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Heal> *THeal2* <size=100%><voffset=1>@THeal2@"
+        - Row: "$Target_OneAdjacentAlly$"
+        - Row: "<size=50%> "
+        - Infuse: Air
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_036_B$"

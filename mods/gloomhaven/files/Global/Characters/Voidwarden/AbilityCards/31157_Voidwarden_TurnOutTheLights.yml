@@ -1,0 +1,87 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TurnOutTheLights$
+Character: VoidwardenID
+ID: 31157
+Level: 1
+Initiative: 49
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCIceBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Curse
+                XP: 1
+    Bottom:
+        Abilities:
+            BControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Attack:
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            Range: 3
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                            AnimOverload: RangedAttack
+                            SubAbilities:
+                                EnemyWillDoThis2:
+                                    Damage: 1
+                                    Filter: Self
+                                    AutoTrigger: True
+                                    StatIsBasedOnX:
+                                        Strength:
+                                            BasedOn: DamageInflictedByParent
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 3
+                Filter: Enemy
+                AnimOverload: ControlEnemy
+        Infuse: Ice
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Curse></nobr>, <sprite name=XP1>"
+    Bottom:
+        - Row: "$JOTL_157_B_1$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*EnemyWillDoThis.Range*</mark>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$JOTL_157_B_2$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30"
+            - Column:
+            - Column:
+                - Infuse: Ice
+            - Column:

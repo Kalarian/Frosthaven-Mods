@@ -1,0 +1,81 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CollateralDamage$
+Character: DemolitionistID
+ID: 31108
+Level: 9
+Initiative: 15
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TDestroyObstacleAttack:
+                MergedDestroyObstacleAttack:
+                    Abilities:
+                        TDestroyObstacle:
+                            DestroyObstacle: True
+                            DestroyObstacleData:
+                                CanDestroyObstaclesWithHP: True
+                            Target: 1
+                            SpawnDelay: 1.5
+                            AbilityXP: 1
+                            AnimOverload: None
+                        TAttack:
+                            Attack:
+                                Amount: 4
+                                DiamondEnhancements: 1
+                            AnimOverload: TargetedDemolition
+                            Range: 1
+                            Target: -1
+                            Filter: Enemy
+                            IgnoreParentAreaOfEffect: True
+                            SubAbilities:
+                                TAttackSubPush:
+                                    IsInlineSubAbility: True
+                                    Push: 2
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 
+                    Amount: 2
+                    CircleEnhancements: 1
+            BDestroyObstacle:
+                DestroyObstacle: True
+                SpawnDelay: 1.5
+                SubAbilities:
+                    BDestroyObstacleSubDamage:
+                        Damage: 2
+                        Target: -1
+                        Targeting: Room
+                        Filter: Enemy
+                        AbilityXP: 1
+                        TreatAsNonSubAbility: True
+                        AutoTrigger: True
+                AnimOverload: TargetedDemolition
+Layout:
+    Top:
+        - Row: "$JOTL_108_T_1$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<sprite name=Push>2"
+            - Column:
+        - Row: "$JOTL_108_T_2$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCEarth
+            Text: "<nobr>+2 <sprite name=Attack></nobr>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_108_B$"

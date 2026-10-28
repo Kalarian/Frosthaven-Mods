@@ -1,0 +1,64 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_InsultToInjury$
+Character: DemolitionistID
+ID: 31105
+Level: 7
+Initiative: 64
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive: 
+                Attack: 3
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    XPTracker: [1,1,1]
+                    Filter:
+                        TargetType: Enemy
+                        TargetAttackedByCasterThisRound: True
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 
+                    Amount: 4
+                    CircleEnhancements: 1
+            BActive: 
+                Attack: 0
+                Condition: Immobilize
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                AnimOverload: PowerUp
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    BCEarthBuff:
+                        ParentName: BActive
+                        Condition: Muddle
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$JOTL_105_T$"
+            Layout: "$JOTL_105_T$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BActive
+            ListLayout: "$JOTL_105_B_1$"
+            Layout: "$JOTL_105_B_1$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCEarth
+            Text: "$JOTL_105_B_2$"

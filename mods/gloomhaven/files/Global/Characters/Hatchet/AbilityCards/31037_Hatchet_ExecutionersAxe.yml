@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ExecutionersAxe$
+Character: HatchetID
+ID: 31037
+Level: 9
+Initiative: 79
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TDamage:
+                Damage: 12
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+                AnimOverload: Kill
+        Infuse: Dark
+        XP: 2
+    Bottom:
+        Abilities:
+            BNull:
+                RecoverResources: True
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    ActorsKilledThisRound: "> 0"
+                Targeting: All
+                Target: -1
+                ResourcesToTakeFromTargets: 
+                    - ["TheFavorite", 1]
+                    - ["TheNewFavorite", 1]
+                FilterContainer:
+                    Filter1:
+                        TargetType: Enemy
+                        TargetHasCharacterResource: ["TheFavorite"]
+                    Filter2:
+                        TargetType: Enemy
+                        TargetHasCharacterResource: ["TheNewFavorite"]
+                AnimOverload: PowerUp
+                AbilityXP: 1
+Layout:
+    Top:
+        - Row: "$JOTL_037_T$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:
+    Bottom:
+        - Row: "$JOTL_037_B$"

@@ -1,0 +1,40 @@
+Parser: Perk
+ID: Hatchet10
+Name: PERK_Hatchet_10_Name
+Description: PERK_Hatchet_10_Desc
+CharacterID: HatchetID
+Available: 1
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            Consume:
+                Elements: [Air]
+                Abilities:
+                    CRecover:
+                        RecoverResources: True
+                        Targeting: All
+                        Target: -1
+                        ResourcesToTakeFromTargets:
+                            - ["TheFavorite", 1]
+                            - ["TheNewFavorite", 1]
+                        FilterContainer:
+                            Filter1:
+                                TargetType: Enemy
+                                TargetHasCharacterResource: ["TheFavorite"]
+                            Filter2:
+                                TargetType: Enemy
+                                TargetHasCharacterResource: ["TheNewFavorite"]
+                        AnimOverload: PowerUp
+            Filter: [Self]
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringTurnAbility
+            XPTracker: [0]
+            IsToggleBonus: True
+            Hidden: True
+            ListLayoutOverride: [$PERK_Hatchet_10_Desc$, Recover]
+            MiscVars:
+                OverrideIcon: "'Recover'"
+        AnimOverload: PowerUp

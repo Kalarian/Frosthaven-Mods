@@ -1,0 +1,70 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Overwatch$
+Character: HatchetID
+ID: 31028
+Level: 4
+Initiative: 40
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack: 
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+        Consumes:
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Range: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Attack: 2
+                    Range: 5
+                    Filter: Enemy
+                    IsInlineSubAbility: True
+                    AnimOverload: RangedAttack
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnFinishedMovement
+                    XPTracker: [0,0,1,0,1]
+                    IsAura: True
+                    AuraTargeting: Range
+                    AuraFilter: Enemy
+                    TriggerOnCaster: True
+                    Restriction: OncePerAction
+                Range: 5
+                Target: -1
+                Filter: Self
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAir
+            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr>+1 <sprite name=Range></nobr>, <sprite name=XP1>"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$JOTL_028_B$"
+            Layout: "$JOTL_028_B$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=20%> "
+        - XPTracker: BActive

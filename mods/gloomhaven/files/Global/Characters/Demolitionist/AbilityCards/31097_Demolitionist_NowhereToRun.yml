@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NowhereToRun$
+Character: DemolitionistID
+ID: 31097
+Level: 3
+Initiative: 39
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                ConditionalOverrides:
+                    TAttackCO1:
+                        FilterContainer:
+                            FilterTiles:
+                                TargetType: Enemy
+                                TargetAdjacentValidTiles: "> 0"
+                                TargetAdjacentValidTilesFilter: ["Obstacle", "Trap", "Actor", "Wall"]
+                        AbilityOverrides:
+                            TAdjAllyBuff:
+                                StatIsBasedOnX:
+                                    Strength:
+                                        BasedOn: TargetAdjacentValidTiles
+                                        AddTo: True
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove: 
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+                SubAbilities:
+                    BMoveObstacle:
+                        MoveObstacle:
+                        ObstacleTypes: OneHexObstacle
+                        Target: 1
+                        Range: 1
+                        SpawnDelay: 2.6
+                        MoveObstacleRange: 1
+                        AllTargetsAdjacentToParentMovePath: True
+                        MovePathIndexFilter: "== 0"
+        Infuse: Earth
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*<size=100%><voffset=1>@TAttack@"
+        - Row: "$JOTL_097_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_097_B$"
+        - Row: "<size=50%> "
+        - Infuse: Earth

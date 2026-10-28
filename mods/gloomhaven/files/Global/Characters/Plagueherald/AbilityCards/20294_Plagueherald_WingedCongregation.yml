@@ -37,7 +37,7 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            Icon: Flying
+            Icon: AA_Flying
             ListLayout: "$Gain_Flying$"
             Layout: "<b><size=130%>$Gain_Flying$"
         - Row: "<size=50%> "

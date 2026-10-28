@@ -428,7 +428,7 @@ PLAGUEHERALD_PERKS = [
      {"CardsToAdd": "[AMC_Basic_P1]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
     (1, "Xorn's Boon", "Once each quest, during your turn, each enemy that has <sprite name=Poison> suffers <sprite name=Damage> 1 and gains <sprite name=Muddle>, and each ally who has <sprite name=Poison> suffers <sprite name=Damage> 1 and gains <sprite name=Strengthen>",
      {"Cost": 2, "Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]",
-      "Abilities": _once_per_quest("PERK_Plagueherald_10_Desc", "Poison", """\
+      "Abilities": _once_per_quest("PERK_Plagueherald_10_Desc", "Positive_Poison_Attack", """\
             Damage: 1
             Target: -1
             Targeting: All

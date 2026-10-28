@@ -1,0 +1,66 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DisorientingBarrage$
+Character: HatchetID
+ID: 31016
+Level: 1
+Initiative: 51
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Condition: Muddle
+                AnimOverload: QuickRangedAttack
+    Bottom:
+        Abilities:
+            BMove1:
+                Move: 2
+            BDamage1:
+                Damage: 1
+                Target: -1
+                Filter: Enemy
+                AnimOverload: RadialNegative
+            BMove2:
+                Move: 1
+            BDamage2:
+                Damage: 2
+                Target: -1
+                Filter: Enemy
+                AnimOverload: RadialNegative
+            BMove3:
+                Move: 1
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<sprite name=Target>*TAttack.Target* @TAttack.Target@"
+                - AddedEffect: "<size=130%><sprite name=Muddle></size>"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove1*"
+        - Row: "<size=20%> "
+        - Row: "$JOTL_016_B_1$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,60,20"
+            - Column:
+            - Column:
+                - Row: "<b><size=130%><sprite name=Move> *BMove2*"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$JOTL_016_B_2$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Move> *BMove3*"

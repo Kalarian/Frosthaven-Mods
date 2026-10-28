@@ -1,0 +1,81 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CommandingPresence$
+Character: VoidwardenID
+ID: 31168
+Level: 3
+Initiative: 75
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    ControlActor:
+                        Abilities:
+                            TAllyAttack:
+                                Attack: 2
+                                StrengthIsBase: True
+                                RangeIsBase: True
+                                TargetIsBase: True
+                    Range: 3
+                    Filter: Ally
+                    AnimOverload: ControlAlly
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                    XPTracker: [0,0,1,0,1]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BCurse:
+                Curse: True
+                Filter: Self 
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move:
+                                Amount: 3
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                Range: 3
+                Filter: Ally
+                AnimOverload: ControlAlly
+        Consumes:
+            BCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    BCCurseNullInstead:
+                        ParentName: BCurse
+                        Null: True
+                        AllowContinueForNullAbility: True
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$JOTL_168_T$"
+            Layout: "$JOTL_168_T$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=20%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Curse>"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+        - Consume:
+            Name: BCDark
+            Text: "$JOTL_168_B_1$"
+        - Row: "<size=20%> "
+        - Row: "$JOTL_168_B_2$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Move> *BAllyMove* @BAllyMove@"

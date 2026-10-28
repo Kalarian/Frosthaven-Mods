@@ -1,0 +1,67 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Brutalize$
+Character: HatchetID
+ID: 31034
+Level: 7
+Initiative: 22
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                ConditionalOverrides:
+                        TAttackFavoriteCO:
+                            Filter:
+                                TargetType: Enemy
+                                TargetHasCharacterResource: ["TheFavorite"]
+                            XP: 1
+                            AbilityOverrides:
+                                TAdjAllyBuff:
+                                    Strength: 2
+                                    ResourcesToTakeFromTargets:
+                                        - ["TheFavorite", 1]
+                        TAttackNewFavoriteCO:
+                            Filter:
+                                TargetType: Enemy
+                                TargetHasCharacterResource: ["TheNewFavorite"]
+                            XP: 1
+                            AbilityOverrides:
+                                TAdjAllyBuff:
+                                    Strength: 2
+                                    ResourcesToTakeFromTargets:
+                                        - ["TheNewFavorite", 1]
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range: 4
+                Condition: Stun
+                AnimOverload: HeavyRangedAttack
+        Infuse: Air
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$JOTL_034_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
+                - AddedEffect: "<size=130%><sprite name=Stun></size>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:

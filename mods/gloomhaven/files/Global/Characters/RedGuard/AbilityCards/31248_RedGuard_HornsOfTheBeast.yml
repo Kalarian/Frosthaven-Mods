@@ -1,0 +1,71 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HornsOfTheBeast$
+Character: RedGuardID
+ID: 31248
+Level: 7
+Initiative: 08
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 4
+                AreaEffect: "0,0,G|2,0,R|1,1,R"
+                MultiPassAttack: False
+                SubAbilities:
+                    TAttackSubPush:
+                        IsInlineSubAbility: True
+                        Push: 1
+                AnimOverload: AreaAttack
+        Infuse: Fire
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BShield:
+                Shield:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+        Consumes:
+            BCLight:
+                Elements: Light
+                AbilityOverrides:
+                    BCLightBuff:
+                        ParentName: BShield
+                        Strength: 1
+                XP: 1
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "70, 25"
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+                - Row: "<sprite name=Push> *TAttackSubPush*"
+            - Column:
+                - Row: "£Area£"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Fire
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BShield
+            ListLayout: "<b><size=130%><sprite name=Shield> *BShield*"
+            Layout: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+            Icon: Positive_Shield
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCLight
+            Text: "<nobr>+1 <sprite name=Shield></nobr>, <sprite name=XP1>"

@@ -1,0 +1,27 @@
+Parser: Character
+ID: HatchetID # TODO: Update ID
+LocKey: $Hatchet$
+Model: Hatchet
+Race: Inox
+Traits: [ Intimidating, Resourceful, Strong ]
+Complexity: 1
+ElementalAffinities: [ Air ]
+MasteryIDs: [ Hatchet_MASTERY_1, Hatchet_MASTERY_2 ]
+RetireCampaignSection: GH.Hatchet
+DefaultSkin: 1
+# PlayerLevel:    [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
+HealthTable:      [  8,   9,  11,  12,  14,  15,  17,  18,  20]
+NumberAbilityCardsInBattle: 10
+Role: $Hatchet_ROLE$
+Description: $Hatchet_DESCRIPTION$
+Difficulty: $DIFFICULTY_MEDIUM$
+Strengths: $Hatchet_STRENGTHS$
+Weaknesses: $Hatchet_WEAKNESSES$
+Adventure_Description: $Hatchet_ADVENTURE_DESCRIPTION$
+HeroStats:
+    Melee: 2
+    Ranged: 5
+    Mobility: 3
+    Support: 1
+    Defense: 2
+    Control: 3

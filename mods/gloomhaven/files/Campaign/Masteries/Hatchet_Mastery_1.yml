@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Hatchet_MASTERY_1
+LocalisedName: Hatchet_MASTERY_1_Name
+LocalisedDescription: Hatchet_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAG: the Favorite (the Hatchet's resource token: ResourcesToAddOnAbilityEnd puts it on the target,
+# ResourcesToTakeFromTargets takes it back) left or returned on every turn (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_FavoriteEveryTurn]
+        CharacterIDs:
+            ActorID: HatchetID
+        Value: 1

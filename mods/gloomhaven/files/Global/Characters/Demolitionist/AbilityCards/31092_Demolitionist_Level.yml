@@ -1,0 +1,44 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Level$
+Character: DemolitionistID
+ID: 31092
+Level: X
+Initiative: 61
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            TargetType: Enemy
+                            EnemyType: Object
+                        XP: 1
+                        AbilityOverrides:
+                            TAdjAllyBuff:
+                                Strength: 3
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    AttackType: Melee
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$JOTL_092_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$JOTL_092_B$"
+            Layout: "$JOTL_092_B$"
+            Icon: Positive_AttackPlus

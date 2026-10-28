@@ -1,0 +1,68 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TheBiggerOne$
+Character: DemolitionistID
+ID: 31107
+Level: 8
+Initiative: 31
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range: 2
+                AreaEffect: "1,-1,R|3,-1,R|5,-1,R|0,0,R|2,0,R|4,0,R|6,0,R|1,1,R|3,1,R|5,1,R|2,2,R|4,2,R"
+                MultiPassAttack: False
+                SubAbilities:
+                    TAttackSubDamage:
+                        Damage: 2
+                        Filter: Ally
+                        Target: -1
+                        UseParentTiles: True
+                    TAttackSubDestroy:
+                        DestroyObstacle: True
+                        SpawnDelay: 2.16
+                        Target: -1
+                        AutoTrigger: True
+                AnimOverload: AreaAttack
+        Infuse: [Fire, Earth]
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 3
+            BDamage:
+                Damage: 2
+                Range: 1
+                Target: -1
+                AnimOverload: RadialDebuff
+                Filter: 
+                    TargetType: Enemy
+                    TargetAdjacentToWalls: "> 0"
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "60,35"
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Row: "<sprite name=Range> *TAttack.Range*"
+                - Row: "<size=50%> "
+                - Row:
+                    - ColumnWidths: "2,32,32,32,2"
+                    - Column:
+                    - Column:
+                        - Infuse: Fire
+                    - Column:
+                        - Infuse: Earth
+                    - Column:
+                    - Column:
+            - Column:
+                - Row: "£Area£"
+        - Row: "<size=20%> "
+        - Row: "$JOTL_107_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_107_B$"

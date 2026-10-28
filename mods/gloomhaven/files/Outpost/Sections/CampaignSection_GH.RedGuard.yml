@@ -1,0 +1,8 @@
+Parser: CampaignSection
+ID: GH.RedGuard
+Name: Red Guard Retires
+SkipNarration: True
+SkipCompletedNotification: False
+Effects:
+    - Type: AddSoldiers
+      Param1: 1

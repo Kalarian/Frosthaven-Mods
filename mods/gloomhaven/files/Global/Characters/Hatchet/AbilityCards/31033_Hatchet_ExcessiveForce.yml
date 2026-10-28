@@ -1,0 +1,62 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ExcessiveForce$
+Character: HatchetID
+ID: 31033
+Level: 7
+Initiative: 47
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 2
+                Target: -1
+                Filter: [Self]
+                ActiveBonus:
+                    Behaviour: BuffAttack
+                    Duration: Persistent
+                    XPTracker: [1,0,1,0,1]
+                    FilterContainer:
+                        FilterFavorite:
+                            TargetHasCharacterResource: ["TheFavorite"]
+                        FilterNewFavorite:
+                            TargetHasCharacterResource: ["TheNewFavorite"]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 3
+            BNull:
+                Null: True
+        Consumes:
+            BCAir:
+                Elements: Air 
+                Abilities:
+                    BCAirAttack:
+                        ParentName: BNull
+                        Attack: 2
+                        Range: 2
+                        AnimOverload: QuickRangedAttack
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$JOTL_033_T$"
+            Layout: "$JOTL_033_T$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=20%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCAir
+            Text:
+                - Row:
+                    - ColumnWidths: "85,15"
+                    - Column:
+                        - Row: "<b><size=130%><sprite name=Attack> 2"
+                        - Row: "<sprite name=Range> 2"
+                    - Column:
+                        - Row: "<sprite name=XP1>"

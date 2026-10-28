@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Hatchet09
+Name: PERK_Hatchet_09_Name
+Description: PERK_Hatchet_09_Desc
+CharacterID: HatchetID
+Available: 3
+CardsToAdd: [AMC_Air_P2]

@@ -1,0 +1,61 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Ricochet$
+Character: HatchetID
+ID: 31024
+Level: 2
+Initiative: 56
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack1:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 3
+                SubAbilities:
+                    TAttack2:
+                        Attack:
+                            Amount: 2
+                            DiamondEnhancements: 1
+                        Range: 2
+                        IgnorePreviousAbilityTargets: TAttack1
+                        TreatAsNonSubAbility: True
+                        AnimOverload: QuickRangedAttack
+                AnimOverload: QuickRangedAttack
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Damage: 2
+                    TreatAsNonSubAbility: True
+                    IsInlineSubAbility: True
+                    Filter: Enemy
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnAttacking
+                    XPTracker: [0,1,0,1]
+                    UseTriggerAbilityAsParent: True
+                Target: -1
+                Filter: Self
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack1.Range*</mark>"
+            - Column:
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+        - Row: "$JOTL_024_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$JOTL_024_B$"
+            Layout: "$JOTL_024_B$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=20%> "
+        - XPTracker: BActive

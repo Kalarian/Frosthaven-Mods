@@ -1,0 +1,27 @@
+Parser: Character
+ID: VoidwardenID # TODO: Update ID
+LocKey: $Voidwarden$
+Model: Voidwarden
+Race: Human
+Traits: [ Arcane, Educated, Outcast ]
+Complexity: 3
+ElementalAffinities: [ Ice, Dark ]
+MasteryIDs: [ Voidwarden_MASTERY_1, Voidwarden_MASTERY_2 ]
+RetireCampaignSection: GH.Voidwarden
+DefaultSkin: 1
+# PlayerLevel:    [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
+HealthTable:      [  6,   7,   8,   9,   10,  11,  12,  13,  14]
+NumberAbilityCardsInBattle: 11
+Role: $Voidwarden_ROLE$
+Description: $Voidwarden_DESCRIPTION$
+Difficulty: $DIFFICULTY_MEDIUM$
+Strengths: $Voidwarden_STRENGTHS$
+Weaknesses: $Voidwarden_WEAKNESSES$
+Adventure_Description: $Voidwarden_ADVENTURE_DESCRIPTION$
+HeroStats:
+    Melee: 1
+    Ranged: 3
+    Mobility: 2
+    Support: 5
+    Defense: 2
+    Control: 5

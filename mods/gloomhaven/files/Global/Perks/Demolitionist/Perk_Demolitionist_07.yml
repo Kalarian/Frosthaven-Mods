@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Demolitionist07
+Name: PERK_Demolitionist_07_Name
+Description: PERK_Demolitionist_07_Desc
+CharacterID: DemolitionistID
+Available: 2
+CardsToRemove: [AMC_Basic_P1]
+CardsToAdd: [AMC_Earth_P2]

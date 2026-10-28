@@ -1,0 +1,95 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LureOfTheVoid$
+Character: VoidwardenID
+ID: 31158
+Level: 1
+Initiative: 67
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TDisarm:
+                Disarm: True
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: Enemy
+                SubAbilities:
+                    TDisarmSubControl:
+                        ControlActor:
+                            Abilities:
+                                EnemyWillDoThis:
+                                    Move: 1
+                                    StrengthIsBase: True
+                            ControlDurationType: ControlForOneAction
+                            ControlActorType: Player
+                        Range: 2
+                        Filter: Enemy
+                        IsInlineSubAbility: True
+                AnimOverload: TargetedDebuff
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkMoveBuff:
+                        ParentName: EnemyWillDoThis
+                        Strength: 2
+                XP: 1
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 5
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                            SubAbilities:
+                                BAllyAttackSubDamage:
+                                    Damage: 2
+                                    Filter: Self
+                                    AbilityXP: 1
+                Range: 3
+                Filter: Ally
+                AnimOverload: ControlAlly
+        Consumes:
+            BCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    BCDarkAttackBuff:
+                        ParentName: BAllyAttack
+                        Strength: 2
+                XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Disarm>"
+            - Column:
+                - Row: "<sprite name=Range>*TDisarm.Range* @TDisarm.Range@"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$JOTL_158_T$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Move> 1"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "<nobr>+2 <sprite name=Move></nobr>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Row: "$With_YouControllingActions$"
+    Bottom:
+        - Row: "$JOTL_158_B_1$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCDark
+            Text: "<nobr>+2 <sprite name=Attack></nobr>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Row: "$JOTL_158_B_2$"

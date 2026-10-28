@@ -38,7 +38,7 @@ Layout:
     Top:
         - Active:
             Ability: TInfuse
-            Icon: Nightshroud
+            Icon: Positive_Infusion
             ListLayout: "$GH_277_T$"
             Layout: "$GH_277_T$"
         - Row: "<size=50%> "

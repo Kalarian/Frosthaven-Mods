@@ -1,0 +1,78 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FlameShroud$
+Character: RedGuardID
+ID: 31230
+Level: 1
+Initiative: 06
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    Damage: 2
+                    Filter: Self
+                    IgnoreStun: True
+                    AutoTrigger: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnMoved
+                    XPTracker: [0,1,0,0,1]
+                    IsAura: True
+                    AuraTargeting: Range
+                    AuraFilter: 
+                        TargetType: Enemy
+                        UseTargetOriginalType: True
+                    Target: 1
+                Range: 1
+                Target: -1
+                Filter: Self
+                AnimOverload: PowerUp
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 
+                    Amount: 4
+                    CircleEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCFire:
+                Elements: Fire
+                Abilities:
+                    BCFireShield:
+                        ParentName: BNull
+                        Shield: 1
+                        Filter: Self
+                        ActiveBonusDuration: Round
+                        AnimOverload: PowerUp
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$JOTL_230_T$"
+            Layout: "$JOTL_230_T$"
+            Icon: Positive_Retaliate
+        - Row: "<size=20%> "
+        - XPTracker: TActive
+        - Row: "<size=50%> "
+        - Infuse: Fire
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCFire
+            Text:
+                - ColumnWidths: "85,15"
+                - Column:
+                    - Active:
+                        Ability: BCFireShield
+                        Icon: Positive_Shield
+                        ListLayout: "<sprite name=Shield> 1"
+                        Layout:
+                            - Row: "<b><size=130%><sprite name=Shield> 1"
+                            - Row: "<line-height=100%><size=100%>$Self$"
+                - Column:
+                    - Row: "<sprite name=XP1>"

@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FierceBrilliance$
+Character: RedGuardID
+ID: 31245
+Level: 6
+Initiative: 22
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    Disarm: True
+                    Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnMovedORCarried
+                    XPTracker: [0,1,0,1]
+                    IsAura: True
+                    AuraTargeting: Range
+                    OriginalTargetType: True
+                    AuraFilter: Enemy
+                    Target: 1
+                Range: 1
+                Target: -1
+                Filter: Self
+                AnimOverload: PowerUp
+        Infuse: Light
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 
+                    Amount: 2
+                    CircleEnhancements: 1
+            BDamage:
+                Damage: 2
+                Target: -1
+                Filter: Enemy
+                AnimOverload: Attack_AOE_Radial
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$JOTL_245_T$"
+            Layout: "$JOTL_245_T$"
+            Icon: Positive_Retaliate
+        - Row: "<size=20%> "
+        - XPTracker: TActive
+        - Row: "<size=50%> "
+        - Infuse: Light
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_245_B$"

@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Voidwarden_MASTERY_1
+LocalisedName: Voidwarden_MASTERY_1_Name
+LocalisedDescription: Voidwarden_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAG: damage to enemies in one of the Voidwarden's turns by attacks she granted or commanded (ControlActor /
+# granted ability records), summed per turn (GHMasteries.cs)
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_CommandedDamageInTurn]
+        CharacterIDs:
+            ActorID: VoidwardenID
+        Value: 20

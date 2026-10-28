@@ -1,0 +1,67 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Shrapnel$
+Character: HatchetID
+ID: 31035
+Level: 8
+Initiative: 37
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Target: 2
+                Condition: Wound
+                AnimOverload: QuickRangedAttack
+        Consumes:
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirBuff:
+                        ParentName: TAttack
+                        Target: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Damage: 2
+                    Range: 1
+                    Target: -1
+                    Filter: Enemy
+                    AutoTrigger: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnKill
+                    Requirement: 
+                        OnYourTurn: True
+                    UseTriggerAbilityAsParent: True
+                    Filter: Enemy
+                    XPTracker: [0,0,1,0,1]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<mark=#80919922><size=100%><sprite name=Target>*TAttack.Target*</mark>"
+                - AddedEffect: "<size=130%><sprite name=Wound></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAir
+            Text: "<nobr>+1 <sprite name=Target></nobr>, <sprite name=XP1>"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$JOTL_035_B$"
+            Layout: "$JOTL_035_B$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=20%>"
+        - XPTracker: BActive

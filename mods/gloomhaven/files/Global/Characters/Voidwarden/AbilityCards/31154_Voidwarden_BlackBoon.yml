@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BlackBoon$
+Character: VoidwardenID
+ID: 31154
+Level: 1
+Initiative: 43
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 5
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 3
+                Filter: [Self, Ally]
+                Conditions: Poison
+                AnimOverload: TargetedHeal
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 2
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                Range: 3
+                Filter: Ally
+                AnimOverload: ControlAlly
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*THeal.Range*</mark>"
+                - AddedEffect: "<size=130%><sprite name=Poison></size>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Dark
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_154_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"

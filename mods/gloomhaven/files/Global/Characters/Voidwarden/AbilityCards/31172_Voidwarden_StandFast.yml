@@ -1,0 +1,67 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StandFast$
+Character: VoidwardenID
+ID: 31172
+Level: 5
+Initiative: 90
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: WardID
+                AnimOverload: Summon
+        Infuse: Earth
+        XP: 2
+    Bottom:
+        Abilities:
+            BControl:
+                ControlActor:
+                    Abilities:
+                        TargetWillDoThis:
+                            Attack:
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            Range: 3
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                            AnimOverload: RangedAttack
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                    UseControllingActorPlayerControl: True
+                Range: 3
+                Filter: [Ally, Enemy]
+                AnimOverload: ControlAlly
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $Ward$
+                    HideSummonBoxes: True
+        - Row: "$JOTL_172_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,20,20,20"
+            - Column:
+            - Column:
+                - Infuse: Earth
+            - Column:
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Row: "$JOTL_172_B_1$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TargetWillDoThis* @TargetWillDoThis@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TargetWillDoThis.Range*</mark>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$JOTL_172_B_2$"

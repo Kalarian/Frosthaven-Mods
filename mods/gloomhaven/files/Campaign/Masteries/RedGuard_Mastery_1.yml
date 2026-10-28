@@ -1,0 +1,14 @@
+Parser: Mastery
+ID: RedGuard_MASTERY_1
+LocalisedName: RedGuard_MASTERY_1_Name
+LocalisedDescription: RedGuard_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAG: kills the Red Guard caused on an enemy's turn (retaliate, wound, a trap it was pulled onto...) (GHMasteries.cs)
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_KillsDuringEnemyTurns]
+        CharacterIDs:
+            ActorID: RedGuardID
+        Value: 5

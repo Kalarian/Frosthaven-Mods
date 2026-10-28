@@ -1,0 +1,28 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SandDevil$
+Character: RedGuardID
+ID: 31244
+Level: 5
+Initiative: 55
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: SandDevilID
+                AnimOverload: Summon 
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 5
+Layout:
+    Top:
+        - Row: "<size=20%> "
+        - Active:
+            Ability: TSummon
+            ListLayout: "$JOTL_244_T$"
+            Layout: "$JOTL_244_T$"
+            Icon: Positive_Summon
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"

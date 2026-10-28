@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Voidwarden02
+Name: PERK_Voidwarden_02_Name
+Description: PERK_Voidwarden_02_Desc
+CharacterID: VoidwardenID
+Available: 1
+CardsToRemove: [AMC_Basic_M2]

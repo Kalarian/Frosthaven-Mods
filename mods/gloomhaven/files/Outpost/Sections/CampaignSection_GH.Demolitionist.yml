@@ -1,0 +1,8 @@
+Parser: CampaignSection
+ID: GH.Demolitionist
+Name: Demolitionist Retires
+SkipNarration: True
+SkipCompletedNotification: False
+Effects:
+    - Type: GainMetal
+      Param1: 3

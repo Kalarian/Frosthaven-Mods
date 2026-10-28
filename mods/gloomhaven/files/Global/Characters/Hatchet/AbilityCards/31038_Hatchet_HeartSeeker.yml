@@ -1,0 +1,63 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HeartSeeker$
+Character: HatchetID
+ID: 31038
+Level: 9
+Initiative: 32
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range: 4
+                Condition: Stun
+                AnimOverload: HeavyRangedAttack
+        Consumes:
+            TCAir:
+                Elements: Air 
+                AbilityOverrides:
+                    TCAirBuff:
+                        ParentName: TAttack
+                        Condition: Wound
+                XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Heal: 3
+                    Range: 2
+                    Condition: Bless
+                    Filter: [Self, Ally]
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnKill
+                    Requirement: 
+                        OnYourTurn: True
+                    Filter: Enemy
+                    XPTracker: [0,1,0,1]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - AddedEffect: "<size=130%><sprite name=Stun></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAir
+            Text: "<nobr><sprite name=Wound></nobr>, <sprite name=XP1>"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$JOTL_038_B$"
+            Layout: "$JOTL_038_B$"
+            Icon: Positive_Heal
+        - Row: "<size=20%>"
+        - XPTracker: BActive

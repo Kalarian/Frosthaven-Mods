@@ -1,0 +1,99 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MasterInfluence$
+Character: VoidwardenID
+ID: 31160
+Level: 1
+Initiative: 83
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAdvantageAuraActive:
+                Attack: 0
+                AttackHasAdvantage: True
+                CanTargetInvisible: True
+                NotApplyEnemy: True
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    IsAura: True
+                    AuraFilter: [Ally, Enemy]
+                    AuraTargeting: All
+                    ValidAbilityType: Attack
+                    AttackType: Control
+                    Restriction: OncePerAction
+                AnimOverload: PowerUp
+                SubAbilities:
+                    TToggleAttackBuffActive:
+                        Attack: 1
+                        Filter: Self
+                        ActiveBonus:
+                            Behaviour: BuffAttack
+                            Duration: Persistent
+                            IsAura: True
+                            AuraFilter: [Ally, Enemy]
+                            AuraTargeting: All
+                            ValidAbilityType: Attack
+                            AttackType: Control
+                            Restriction: OncePerAction
+                            IsToggleBonus: True
+                            Consuming: Any
+                            ListLayoutOverride: [$JOTL_160_T$, AA_Mind_Control]
+                            Hidden: True
+                        AnimOverload: None
+                    TOverrideControlAbilityActive:
+                        AddActiveBonus:
+                            Attack: 0
+                        Filter: Self
+                        ActiveBonus:
+                            Behaviour: OverrideAbility
+                            Duration: Persistent
+                            ValidAbilityType: ControlActor
+                            ActiveBonusAbilityOverrides:
+                                TControlActorOverride:
+                                    ControlActor:
+                                        UseControllingActorModifierDeck: True
+                                        UseControllingActorModifierDeckFilter:
+                                            ActorType: [Enemy, Ally, Neutral, Enemy2]
+                            Hidden: True
+                        AnimOverload: None
+        XP: 2
+    Bottom:
+        Abilities:
+            BBless:
+                Bless: True
+                Range: 2
+                Filter: [Self, Ally]
+                AnimOverload: TargetedBuff
+            BPoison:
+                Poison: True
+                Range: 2
+                Filter: Enemy
+                AnimOverload: TargetedDebuff Poison
+        Infuse: Ice
+Layout:
+    Top:
+        - Active:
+            Ability: TAdvantageAuraActive
+            ListLayout: "$JOTL_160_T$"
+            Layout: "$JOTL_160_T$"
+            Icon: Positive_AttackPlus
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Bless>"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BBless.Range*</mark>"
+            - Column:
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Poison>"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BPoison.Range*</mark>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Ice

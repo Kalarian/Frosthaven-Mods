@@ -1,0 +1,78 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StranglingChain$
+Character: RedGuardID
+ID: 31240
+Level: 3
+Initiative: 19
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Condition: Immobilize
+                SubAbilities:
+                    TDamagedAfterEachAttackActive:
+                        AddActiveBonus:
+                            Damage: 1
+                            Filter: Self
+                            IgnoreStun: True
+                        ActiveBonus:
+                            Duration: Round
+                            Behaviour: DuringActionAbilityOnAttacked
+                        PreviewEffectText: JOTL_240_T_1
+                AnimOverload: AltAttack
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCAnyAttackBuff:
+                        ParentName: TAttack
+                        SubAbilities:
+                            TExtraDamageAfterEachAttackActive:
+                                AddActiveBonus:
+                                    Damage: 1
+                                    Filter: Self
+                                    IgnoreStun: True
+                                ActiveBonus:
+                                    Duration: Round
+                                    Behaviour: DuringActionAbilityOnAttacked
+                                    Hidden: True
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BImmobilize:
+                Immobilize: True
+                Target: -1
+                Filter: Enemy
+                AnimOverload: RadialDebuff
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+            - Column:
+        - Divider:
+        - Active:
+            Ability: TDamagedAfterEachAttackActive
+            ListLayout: "$JOTL_240_T_1$ $JOTL_240_T_3$"
+            Layout: "$JOTL_240_T_1$"
+            Icon: Positive_Wound
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFire
+            Text: "$JOTL_240_T_2$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Immobilize>"
+        - Row: "$Target_AllAdjacentEnemies$"

@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Demolitionist08
+Name: PERK_Demolitionist_08_Name
+Description: PERK_Demolitionist_08_Desc
+CharacterID: DemolitionistID
+Available: 1
+CardsToAdd: [AMC_Damage1Range1_P0, AMC_Damage1Range1_P0]

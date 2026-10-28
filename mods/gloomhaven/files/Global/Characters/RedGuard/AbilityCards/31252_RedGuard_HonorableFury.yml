@@ -1,0 +1,80 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HonorableFury$
+Character: RedGuardID
+ID: 31252
+Level: 9
+Initiative: 89
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range: 2
+                AnimOverload: AltRangedAttack
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Range: 2
+                        SubAbilities:
+                            TAttackSubDamage:
+                                IsInlineSubAbility: True
+                                Damage: 1
+                                Range: 1
+                                Target: -1
+                                Filter: Enemy
+                                AllTargetsAdjacentToParentTargets: True
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        AttackHasAdvantage: True
+                        Condition: Muddle
+    Bottom:
+        Abilities:
+            BNull:
+                Null: True
+            BDamage:
+                Damage: 3
+                Target: -1
+                Filter: Enemy
+                AnimOverload: Attack_AOE_Radial
+        Consumes:
+            BCLight:
+                Elements: Light
+                Abilities:
+                    BCLightMove:
+                        ParentName: BNull
+                        Move: 3
+                XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+            - Column:
+        - Row: "<size=50%> "
+        - Consume:
+            Name: TCFire
+            Text: "$JOTL_252_T$"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: TCLight
+            Text: "<nobr>+1 <sprite name=Attack></nobr>, $Advantage$, <nobr><sprite name=Muddle></nobr>"
+    Bottom:
+        - Consume:
+            Name: BCLight
+            Text: "<b><size=130%><sprite name=Move> 3, <size=100%><voffset=1><sprite name=XP1>"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_252_B$"

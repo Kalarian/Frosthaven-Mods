@@ -1,0 +1,70 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ShieldOfTheDesert$
+Character: RedGuardID
+ID: 31232
+Level: 1
+Initiative: 10
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireBuff:
+                        ParentName: TAttack
+                        AreaEffect: "0,0,G|2,0,R|1,1,R"
+                        MultiPassAttack: False
+                        AnimOverload: AreaAttack
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightBuff:
+                        ParentName: TAttack
+                        Strength: 1
+#                        AnimOverload: Push                        
+                        SubAbilities:
+                            TCLightBuffSubPush:
+                                Push: 1
+                                IsInlineSubAbility: True
+                XP: 1
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+        Infuse: [Fire, Light]
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFire
+            Text:
+                - Row: "£Area£"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCLight
+            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr>+1 <sprite name=Push></nobr>, <sprite name=XP1>"
+    Bottom:
+        - Active:
+            Ability: BShield
+            ListLayout: "<b><size=130%><sprite name=Shield> *BShield*"
+            Layout: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+            Icon: Positive_Shield
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Fire
+            - Column:
+                - Infuse: Light

@@ -1,0 +1,70 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SavageInstinct$
+Character: VoidwardenID
+ID: 31169
+Level: 4
+Initiative: 51
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Attack:
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            Range: 1
+                            Target: -1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                            SubAbilities:
+                                EnemyDamageSelf:
+                                    Damage: 1
+                                    Filter: Self
+                                    TreatAsNonSubAbility: True
+                                    StatIsBasedOnX:
+                                        Strength:
+                                            BasedOn: TargetsDamagedByPreviousAttackThisAction
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Ally
+                Range: 3
+                Filter: Enemy
+                AnimOverload: ControlEnemy
+        XP: 2
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 3 
+                Range: 3 
+                Conditions: [Strengthen, Poison]
+                Filter: [Self, Ally]
+                AnimOverload: TargetedHeal
+        Consumes:
+            BCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    BCIceHealBuff:
+                        ParentName: BHeal
+                        Conditions: Bless
+Layout:
+    Top:
+        - Row: "$JOTL_169_T_1$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@"
+        - Row: "$JOTL_169_T_2$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal*"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+                - AddedEffect: "<size=130%><sprite name=Strengthen></size>, <size=130%><sprite name=Poison></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCIce
+            Text: "<sprite name=Bless>"

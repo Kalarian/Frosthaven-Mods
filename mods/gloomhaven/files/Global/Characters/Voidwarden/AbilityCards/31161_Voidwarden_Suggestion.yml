@@ -1,0 +1,84 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Suggestion$
+Character: VoidwardenID
+ID: 31161
+Level: 1
+Initiative: 23
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis1:
+                            Move: 
+                                Amount: 3
+                                CircleEnhancements: 1
+                            StrengthIsBase: True
+                        EnemyWillDoThis2:
+                            Attack: 
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 4
+                Filter: Enemy
+                AnimOverload: ControlEnemy
+        Consumes:
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceStun:
+                        ParentName: TControl
+                        ControlActor:
+                            Abilities:
+                                EnemyWillDoThis3:
+                                    Stun: True
+                                    Filter: Self
+                                    AutoTrigger: True
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 3
+            BNull:
+                Null: True
+        Consumes:
+            BCDark:
+                Elements: Dark
+                Abilities:
+                    BCDarkCurse:
+                        ParentName: BNull
+                        Curse: True
+                        Range: 3
+                        Filter: Enemy
+                        AnimOverload: TargetedDebuff
+Layout:
+    Top:
+        - Row: "$JOTL_161_T_1$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "15,70,15"
+            - Column:
+            - Column:
+                - Row: "<b><size=130%><sprite name=Move> *EnemyWillDoThis1* <size=100%><voffset=1>@EnemyWillDoThis1@"
+                - Row: "<size=20%> "
+                - Row: "<b><size=130%><sprite name=Attack> *EnemyWillDoThis2* <size=100%><voffset=1>@EnemyWillDoThis2@"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$JOTL_161_T_2$ $With_YouControllingActions$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCIce
+            Text: "$JOTL_161_T_3$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCDark
+            Text:
+                - Row: "<nobr><b><size=130%><sprite name=Curse></nobr>"
+                - Row: "<sprite name=Range> *BCDarkCurse.Range*"

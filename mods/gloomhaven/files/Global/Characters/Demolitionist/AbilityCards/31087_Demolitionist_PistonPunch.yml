@@ -1,0 +1,66 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PistonPunch$
+Character: DemolitionistID
+ID: 31087
+Level: 1
+Initiative: 42
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                AnimOverload: QuickAttack
+                SubAbilities:
+                    TAttackSubPush:
+                        Push: 
+                            Amount: 2
+                            SquareEnhancements: 1
+                        IsInlineSubAbility: True
+        Consumes: 
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireBuff1:
+                        ParentName: TAttack
+                        Strength: 1
+                    TCFireBuff2:
+                        ParentName: TAttackSubPush
+                        Strength: 1
+                        IsInlineSubAbility: True
+                XP: 1
+    Bottom:
+        Abilities:
+            BStun:
+                Stun: True
+                Filter: Enemy
+                AnimOverload: TargetedDebuff
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    BCEarthBuff:
+                        ParentName: BStun
+                        Condition: Poison
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Push>*TAttackSubPush* @TAttackSubPush@"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFire
+            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr>+1 <sprite name=Push></nobr>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Stun>"
+        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCEarth
+            Text: "<sprite name=Poison>"

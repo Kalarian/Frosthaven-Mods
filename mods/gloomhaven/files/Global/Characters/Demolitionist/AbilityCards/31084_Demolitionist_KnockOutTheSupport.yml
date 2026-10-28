@@ -1,0 +1,65 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_KnockOutTheSupport$
+Character: DemolitionistID
+ID: 31084
+Level: 1
+Initiative: 20
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                AnimOverload: QuickAttack
+                SubAbilities:
+                    TSubBlockHeal:
+                        BlockHealing: True
+                        ActiveBonus:
+                            Duration: Round
+        Infuse: Earth
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BDestroyObstacle:
+                DestroyObstacle: True
+                SpawnDelay: 2.16
+                AnimOverload: DestroyObstacle
+                SubAbilities:
+                    BDestroyObstacleSubStrengthen:
+                        Strengthen: True
+                        Filter: Self
+                        AbilityXP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Divider:
+        - Active:
+            Ability: TSubBlockHeal
+            ListLayout: "$JOTL_084_T$"
+            Layout: "$JOTL_084_T$"
+            Icon: AA_BlockHealing
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Earth
+            - Column:
+                - Duration: Round
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_084_B$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Strengthen>"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:

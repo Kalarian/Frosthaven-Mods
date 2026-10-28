@@ -277,6 +277,8 @@ CLASS_ICONS = {
     "Sunkeeper": {"BInfuse": "Positive_Infusion"},                       # Beacon of Light: infuse Light each turn
     "Sawbones": {"TAbilityOverrideAbilityType": "Positive_Heal"},        # Prep for Surgery: moves and attacks as heals
     "Quartermaster": {"TActive": "Refresh"},                             # Refreshment: refresh an item on each long rest
+    "Nightshroud": {"TInfuse": "Positive_Infusion"},                     # Nightfall: infuse Dark at each turn's end
+    "Berserker": {"BImprovedShortRest": "Positive_Tide_Rest"},           # Unstoppable Destruction: better short rests
     # Jaws of the Lion (its AA_<Class> actives)
     "Hatchet": {"TActive": "Positive_AttackPlus"},                       # The Favorite / The New Favorite: +3 on the marked target
     "RedGuard": {"TActive": "Positive_Retaliate",                        # Flame Shroud: enemies entering adjacent hexes suffer 2

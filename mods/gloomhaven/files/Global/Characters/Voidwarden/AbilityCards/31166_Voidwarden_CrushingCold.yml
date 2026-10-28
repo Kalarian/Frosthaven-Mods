@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CrushingCold$
+Character: VoidwardenID
+ID: 31166
+Level: 2
+Initiative: 86
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack: 4
+                            Target: 2
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                Range: 3
+                Filter: Ally
+                AnimOverload: ControlAlly
+        Consumes:
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceBuff:
+                        ParentName: TAllyAttack
+                        Condition: Muddle
+                XP: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 3
+            BMuddle:
+                Muddle: 
+                    DiamondEnhancements: 1
+                Range: 3
+                Filter: Enemy
+                AnimOverload: TargetedDebuff
+        Infuse: Ice
+Layout:
+    Top:
+        - Row: "$JOTL_166_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAllyAttack*"
+            - Column:
+                - Row: "<sprite name=Target>*TAllyAttack.Target* @TAllyAttack.Target@"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCIce
+            Text: "<nobr><sprite name=Muddle></nobr>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Muddle> @BMuddle@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BMuddle.Range*</mark>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Ice

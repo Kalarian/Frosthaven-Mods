@@ -1,0 +1,59 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RemoteDetonation$
+Character: DemolitionistID
+ID: 31098
+Level: 4
+Initiative: 63
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TDestroyObstacleAttack:
+                MergedDestroyObstacleAttack:
+                    Abilities:
+                        TDestroyObstacle:
+                            DestroyObstacle:
+                            Range: 4
+                            Target: 1
+                            SpawnDelay: 1.5
+                            AnimOverload: None
+                        TAttack:
+                            Attack:
+                                Amount: 2
+                                DiamondEnhancements: 1
+                            Range: 1
+                            Target: -1
+                            Filter: Enemy
+                            IgnoreParentAreaOfEffect: True
+                            AnimOverload: TargetedDemolition
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BTrap:
+                Trap:
+                    TrapName: BombTrap
+                    Damage: 3
+                SpawnDelay: 1.8
+                Range: 4
+                Target: 3
+                AnimOverload: RangedTrap
+        XP: 2
+Layout:
+    Top:
+        - Row: "$JOTL_098_T_1$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$JOTL_098_T_2$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFire
+            Text: "<nobr>+1 <sprite name=Attack></nobr>, <sprite name=XP1>"
+    Bottom:
+        - Row: "$JOTL_098_B$"

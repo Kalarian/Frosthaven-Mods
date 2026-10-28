@@ -1,0 +1,60 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GutPunch$
+Character: DemolitionistID
+ID: 31106
+Level: 8
+Initiative: 26
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 5
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    BCEarthBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        SubAbilities:
+                            TAttackSubPush:
+                                Push: 2
+                                IsInlineSubAbility: True
+                XP: 1
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    BCEarthBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Condition: Immobilize
+                XP: 1
+
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Condition: Stun
+                AnimOverload: QuickAttack
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: TCEarth
+            Text: "<nobr>+1 <sprite name=Attack></nobr>,\n<nobr><sprite name=Push> 2</nobr>, <sprite name=XP1>"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: TCFire
+            Text: "<nobr>+1 <sprite name=Attack></nobr>,\n<nobr><sprite name=Immobilize></nobr>, <sprite name=XP1>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Stun></size>"
+            - Column:

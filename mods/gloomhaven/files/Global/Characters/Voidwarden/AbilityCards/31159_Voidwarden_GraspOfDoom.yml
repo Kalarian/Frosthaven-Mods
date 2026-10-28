@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GraspOfDoom$
+Character: VoidwardenID
+ID: 31159
+Level: 1
+Initiative: 36
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Conditions: [Poison, Wound, Curse, Stun]
+                AnimOverload: Attack Powered
+        Infuse: [Ice, Dark]
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+        Consumes:
+            BCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    BCDarkMoveBuff:
+                        ParentName: BMove
+                        Strength: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Poison></size>, <size=130%><sprite name=Wound></size>, <size=130%><sprite name=Curse></size>, <size=130%><sprite name=Stun></size>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,20,20,20"
+            - Column:
+            - Column:
+                - Infuse: Ice
+            - Column:
+                - Infuse: Dark
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCDark
+            Text: "<nobr>+2 <sprite name=Move></nobr>"

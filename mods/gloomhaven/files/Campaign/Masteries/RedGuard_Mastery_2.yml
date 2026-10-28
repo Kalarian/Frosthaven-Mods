@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: RedGuard_MASTERY_2
+LocalisedName: RedGuard_MASTERY_2_Name
+LocalisedDescription: RedGuard_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: enemies pushed or pulled by the Red Guard at least once; Value = enemies, and every enemy that was in the
+# scenario must be among them (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_EnemiesForcedToMove]
+        CharacterIDs:
+            ActorID: RedGuardID
+        Value: 6

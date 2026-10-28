@@ -1,0 +1,73 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FearsomeEfficiency$
+Character: HatchetID
+ID: 31025
+Level: 3
+Initiative: 58
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack: 
+                Attack:
+                    Amount: 6
+                    DiamondEnhancements: 1
+                Range: 
+                    Amount: 4
+                    SquareEnhancements: 1
+                SubAbilities:
+                    TSubDamage:
+                        Damage: 0
+                        Range: 1
+                        TreatAsNonSubAbility: True
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsKilledByAbility: "> 0"
+                        StatIsBasedOnX:
+                            Strength:
+                                BasedOn: ExcessDamageInflictedByParentOnLastTargetKilled
+                AnimOverload: HeavyRangedAttack
+        Infuse: Air
+        XP: 2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 1
+                Range: 3
+                ConditionalOverrides:
+                        BAttackCO:
+                            Requirement:
+                                ActorsKilledThisRound: "> 0"
+                            XP: 1
+                            AbilityOverrides:
+                                BBuff:
+                                    Strength: 2
+                AnimOverload: QuickRangedAttack
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$JOTL_025_T$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack*"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$JOTL_025_B$"

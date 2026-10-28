@@ -1,0 +1,72 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FollowThrough$
+Character: HatchetID
+ID: 31018
+Level: 1
+Initiative: 39
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack: 
+                Attack: 2
+                Range: 
+                    Amount: 4
+                    SquareEnhancements: 1
+                ConditionalOverrides:
+                        TAttackFavoriteCO:
+                            Filter:
+                                TargetType: Enemy
+                                TargetHasCharacterResource: ["TheFavorite"]
+                            XP: 1
+                            AbilityOverrides:
+                                TAdjAllyBuff:
+                                    Strength: 2
+                        TAttackNewFavoriteCO:
+                            Filter:
+                                TargetType: Enemy
+                                TargetHasCharacterResource: ["TheNewFavorite"]
+                            XP: 1
+                            AbilityOverrides:
+                                TAdjAllyBuff:
+                                    Strength: 2
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BMove: 
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BPush:
+                Push: 2
+                Filter: Enemy
+                AnimOverload: TargetedPush
+            BNull:
+                Null: True
+        Consumes:
+            BCAir:
+                Elements: Air 
+                Abilities:
+                    BCAirMove:
+                        ParentName: BNull
+                        Move: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$JOTL_018_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Push> *BPush*"
+        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCAir
+            Text: "<nobr><sprite name=Move> 2</nobr>"

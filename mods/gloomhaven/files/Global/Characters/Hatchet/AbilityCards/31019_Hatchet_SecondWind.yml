@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SecondWind$
+Character: HatchetID
+ID: 31019
+Level: 1
+Initiative: 18
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 6
+                    DiamondPlusEnhancements: 1
+                Filter: Self
+                AnimOverload: Heal
+        Infuse: Air 
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 3
+                ConditionalOverrides:
+                        BMoveCO:
+                            Self: True
+                            Requirement:
+                                ActorsKilledThisRound: "> 0"
+                            XP: 1
+                            AbilityOverrides:
+                                TBuff:
+                                    Strength: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=20%> "
+        - Row: "$JOTL_019_B$"

@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FlamingSickle$
+Character: RedGuardID
+ID: 31227
+Level: 1
+Initiative: 63
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 2
+                SubAbilities:
+                    TAttackSubPull:
+                        Pull: 1
+                AnimOverload: RangedAttack
+        Infuse: Fire                
+    Bottom:
+        Abilities:
+            BDamage:
+                Damage: 1
+                Range: 1
+                Target: -1
+                Filter: Enemy
+                AnimOverload: Attack_AOE_Radial        
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+        Infuse: Fire
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - Row: "<mark=#80919922><size=100%><sprite name=Pull>*TAttackSubPull*</mark>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Fire
+    Bottom:
+        - Row: "$JOTL_227_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
+        - Row: "<size=50%> "
+        - Infuse: Fire

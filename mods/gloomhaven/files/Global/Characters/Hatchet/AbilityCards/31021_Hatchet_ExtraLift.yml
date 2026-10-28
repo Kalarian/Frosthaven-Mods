@@ -1,0 +1,65 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ExtraLift$
+Character: HatchetID
+ID: 31021
+Level: X
+Initiative: 21
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+        Consumes:
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Range: 2
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+            BActive:
+                Move: 2
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffMove
+                    XPTracker: [0,1,0,1]
+                AnimOverload: PowerUp
+        Infuse: Air
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAir
+            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr>+2 <sprite name=Range></nobr>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Divider:
+        - Active:
+            Ability: BActive
+            ListLayout: "$JOTL_021_B$"
+            Layout: "$JOTL_021_B$"
+            Icon: Move
+        - Row: "<size=20%> "
+        - XPTracker: BActive
+        - Row: "<size=50%> "
+        - Infuse: Air

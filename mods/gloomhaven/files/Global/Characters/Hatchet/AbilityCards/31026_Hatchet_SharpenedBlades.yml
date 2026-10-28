@@ -1,0 +1,47 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SharpenedBlades$
+Character: HatchetID
+ID: 31026
+Level: 3
+Initiative: 44
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 1
+                Condition: Wound
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    XPTracker: [0,0,1,0,1]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 
+                    Amount: 4
+                    CircleEnhancements: 1
+        Consumes:
+            BCAir:
+                Elements: Air 
+                AbilityOverrides:
+                    BCAirBuff:
+                        ParentName: BMove
+                        Strength: 2
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$JOTL_026_T$"
+            Layout: "$JOTL_026_T$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=20%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCAir
+            Text: "<nobr>+2 <sprite name=Move></nobr>"

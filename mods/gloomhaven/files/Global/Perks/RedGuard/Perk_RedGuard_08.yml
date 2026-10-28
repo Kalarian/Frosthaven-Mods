@@ -1,0 +1,7 @@
+Parser: Perk
+ID: RedGuard08
+Name: PERK_RedGuard_08_Name
+Description: PERK_RedGuard_08_Desc
+CharacterID: RedGuardID
+Available: 2
+CardsToAdd: [AMC_FireLight_P1]

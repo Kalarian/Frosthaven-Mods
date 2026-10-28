@@ -1,0 +1,37 @@
+Parser: Perk
+ID: RedGuard10
+Name: PERK_RedGuard_10_Name
+Description: PERK_RedGuard_10_Desc
+CharacterID: RedGuardID
+Available: 1
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            Consume:
+                Elements: [Light]
+                Abilities:
+                    CShield:
+                        Shield: 1
+                        Filter: Self
+                        ActiveBonusDuration: Round
+                        AnimOverload: PowerUp
+                    CDisadvantage:
+                        AttackersGainDisadvantage: 1
+                        Range: 0
+                        Target: -1
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Round
+                            Hidden: True
+            Filter: [Self]
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringTurnAbility
+            IsToggleBonus: True
+            Hidden: True
+            ListLayoutOverride: [$PERK_RedGuard_10_Desc$, Positive_Shield_Disadvantage]
+            MiscVars:
+                OverrideIcon: "'Positive_Shield_Disadvantage'"
+        AnimOverload: PowerUp

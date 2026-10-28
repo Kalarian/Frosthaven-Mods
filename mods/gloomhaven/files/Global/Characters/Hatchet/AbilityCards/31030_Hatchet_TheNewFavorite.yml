@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TheNewFavorite$
+Character: HatchetID
+ID: 31030
+Level: 5
+Initiative: 15
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    Attack: 0
+                ActiveBonus:
+                    Behaviour: OverrideAbility
+                    Duration: Persistent
+                    ValidAbilityType: Attack
+                    AttackType: Ranged
+                    FullCopy: true
+                    RequiredResources:
+                        - ["TheNewFavorite", 1]
+                    IsToggleBonus: True
+                    IsSingleTargetBonus: True
+                    CancelActiveBonusesOnBaseCardIDs: 11010
+                    RemoveAllInstancesOfResourcesOnFinish: ["TheNewFavorite"]
+                    ActiveBonusAbilityOverrides:
+                        BCTypeOverride:
+                            AbilityType: Attack
+                            Strength: 3
+                            Condition: Wound
+                            SubAbilities:
+                                SubPush:
+                                    Push: 1
+                                    IsInlineSubAbility: True
+                            ResourcesToGiveToTargets: #Give to target of Attack with +3, Wound, Push
+                                - ["TheNewFavorite", 1]
+                ResourcesToAddOnAbilityEnd: #Give to the Hatchet on cast
+                                - ["TheNewFavorite", 1]
+                AnimOverload: PowerUpFavorite
+        XP: 2
+    Bottom:
+        Abilities:
+            BAttack: 
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Condition: Immobilize
+            BMove:
+                Move: 4
+        Infuse: Air
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$JOTL_030_T$"
+            Layout: "$JOTL_030_T$"
+            Icon: Positive_AttackPlus
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+            - Column:
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=50%> "
+        - Infuse: Air

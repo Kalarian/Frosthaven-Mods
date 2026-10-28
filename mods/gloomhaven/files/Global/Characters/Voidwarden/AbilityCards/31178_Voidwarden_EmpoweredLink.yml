@@ -1,0 +1,48 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EmpoweredLink$
+Character: VoidwardenID
+ID: 31178
+Level: 8
+Initiative: 59
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddTarget: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffTarget
+                    ValidAbilityType: Heal
+                    XPTracker: [1,0,1]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BBless:
+                Bless: True
+                Range: 1
+                Target: -1
+                Filter: [Self, Ally]
+                AnimOverload: RadialPositive
+        Infuse: Ice
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$JOTL_178_T$"
+            Layout: "$JOTL_178_T$"
+            Icon: Positive_Heal
+        - Row: "<size=20%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Bless>"
+        - Row: "$Target_SelfAndAllAdjacentAllies$"
+        - Row: "<size=50%> "
+        - Infuse: Ice

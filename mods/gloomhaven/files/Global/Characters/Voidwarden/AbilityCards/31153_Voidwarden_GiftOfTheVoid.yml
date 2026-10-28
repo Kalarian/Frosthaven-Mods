@@ -1,0 +1,79 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GiftOfTheVoid$
+Character: VoidwardenID
+ID: 31153
+Level: 1
+Initiative: 89
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPoison:
+                Poison: True
+                Range: 3
+                Filter: Enemy
+                AnimOverload: TargetedDebuff Poison
+                SubAbilities:
+                    TSubAlly:
+                        ControlActor:
+#                            TreatPreviousAbilityToControlAbilityAsParent: True
+                            UseControllingActorPlayerControl: True
+                            Abilities:
+                                TAllyAttack:
+                                    Attack: 3
+                                    Range: 4
+                                    StrengthIsBase: True
+                                    RangeIsBase: True
+                                    TargetIsBase: True
+                                    SubAbilities:
+                                        TAllyAttackSubDamage:
+                                            Damage: 2
+                                            Filter: Self
+#                                            TreatAsNonSubAbility: True
+                                            AutoTrigger: True
+                                    AnimOverload: RangedAttack
+                            ControlDurationType: ControlForOneAction
+                            ControlActorType: Player
+                        Range: 1
+                        Filter: Ally
+                        TreatAsNonSubAbility: True
+                        UseParentTiles: False
+                        AnimOverload: ControlAlly
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 2
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: TargetedHeal
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "15,70,15"
+            - Column:
+            - Column:
+                - Row: "<b><size=130%><sprite name=Poison>"
+                - Row: "<sprite name=Range> *TPoison.Range*"
+            - Column:
+                - Infuse: Dark
+        - Row: "<size=50%> "
+        - Row: "$JOTL_153_T_1$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> 3"
+            - Column:
+                - AddedEffect: "<sprite name=Range>4"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$With_YouControllingActions$ $JOTL_153_T_2$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+            - Column:

@@ -1,0 +1,76 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SapWarmth$
+Character: VoidwardenID
+ID: 31164
+Level: X
+Initiative: 59
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TPoison:
+                Poison:
+                    DiamondEnhancements: 1
+                Range: 3
+                Filter: Enemy
+                AnimOverload: TargetedDebuff Poison
+            TActive:
+                AddActiveBonus:
+                    Heal: 1
+                    Filter: Self
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnAttacking
+                    XPTracker: [0,0,1]
+                    IsAura: True
+                    AuraFilter: Ally
+                    AuraTargeting: All
+                    Filter:
+                        TargetHasNegativeConditions: [Poison]
+                AnimOverload: PowerUp
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BHeal:
+                Heal: 3
+                Range: 2
+                Target: -1
+                Filter: [Self, Ally]
+                AnimOverload: Radial Positive
+        Infuse: Ice
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "15,70,15"
+            - Column:
+            - Column:
+                - Row: "<b><size=130%><sprite name=Poison> @TPoison@"
+                - Row: "<sprite name=Range> *TPoison.Range*"
+            - Column:
+                - Infuse: Dark
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TActive
+            ListLayout: "$JOTL_164_T$"
+            Layout: "$JOTL_164_T$"
+            Icon: Positive_Heal
+        - Row: "<size=20%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Heal> *BHeal*"
+        - Row: "$Target_SelfAndAllAlliesWithin$ <nobr><sprite name=Range> *BHeal.Range*</nobr>"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,30,30"
+            - Column:
+            - Column:
+                - Infuse: Ice
+            - Column:

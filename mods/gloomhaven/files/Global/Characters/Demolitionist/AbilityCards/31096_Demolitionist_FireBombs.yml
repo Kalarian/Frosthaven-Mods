@@ -1,0 +1,56 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FireBombs$
+Character: DemolitionistID
+ID: 31096
+Level: 3
+Initiative: 24
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BDestroyObstacle:
+                DestroyObstacle: True
+                Range: 1
+                Target: 1
+                SpawnDelay: 2.16
+                AbilityXP: 1
+                AnimOverload: DestroyObstacleRadial
+                SubAbilities:
+                    TAttackSubDamage:
+                        Damage: 2
+                        Range: 1
+                        Target: -1
+                        Filter: [Enemy]
+                        AllTargetsAdjacentToParentTargets: True
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<sprite name=Target>*TAttack.Target* @TAttack.Target@"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Fire
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_096_B$"

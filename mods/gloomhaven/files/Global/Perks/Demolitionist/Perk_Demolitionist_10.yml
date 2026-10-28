@@ -1,0 +1,16 @@
+Parser: Perk
+ID: Demolitionist10
+Name: PERK_Demolitionist_10_Name
+Description: PERK_Demolitionist_10_Desc
+CharacterID: DemolitionistID
+Available: 1
+Flags: [Passive, ExecuteAbilitiesAfterShortRest, ExecuteAbilitiesAfterLongRest]
+Abilities:
+    BCreate:
+        Create: RockSingle
+        Range: 2
+        Target: 1
+        CanSkip: True
+        CanUndo: False
+        SpawnDelay: 2.9
+        AnimOverload: PowerUp

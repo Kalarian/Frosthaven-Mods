@@ -1,0 +1,85 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PossessedByFate$
+Character: VoidwardenID
+ID: 31180
+Level: 9
+Initiative: 66
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 2
+                Target: 3
+                Conditions: [Poison, Wound]
+                AnimOverload: RangedAttack Poison
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkBuff:
+                        ParentName: TAttack
+                        Conditions: Curse
+                XP: 1
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack: 8
+                            Range: 3
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                            SubAbilities:
+                                BAllyAttackSubPoison:
+                                    Poison: True
+                                    Filter: Self
+                                    AbilityXP: 1
+                            AnimOverload: RangedAttack
+                Range: 3
+                Filter: Ally
+                AnimOverload: ControlAlly
+        Consumes:
+            BCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCDarkBuff:
+                        ParentName: BAllyAttack
+                        Conditions: Stun
+                XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* @TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - Row: "<mark=#80919922><size=100%><sprite name=Target>*TAttack.Target*</mark>"
+                - AddedEffect: "<size=130%><sprite name=Poison></size>, <size=130%><sprite name=Wound></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "<nobr><sprite name=Curse></nobr>, <sprite name=XP1>"
+    Bottom:
+        - Row: "$JOTL_180_B_1$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAllyAttack*"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAllyAttack.Range*</mark>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCIce
+            Text: "<nobr><sprite name=Stun></nobr>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Row: "$JOTL_180_B_2$"

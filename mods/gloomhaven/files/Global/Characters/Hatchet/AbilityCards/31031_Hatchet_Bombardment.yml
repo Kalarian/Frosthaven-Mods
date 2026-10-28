@@ -1,0 +1,75 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Bombardment$
+Character: HatchetID
+ID: 31031
+Level: 6
+Initiative: 54
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack1:
+                Attack: 3
+                Range: 3 
+                AnimOverload: QuickRangedAttack
+            TAttack2:
+                Attack: 3
+                Range: 3
+                AnimOverload: QuickRangedAttack
+            TAttack3:
+                Attack: 3
+                Range: 3
+                AnimOverload: QuickRangedAttack
+        Infuse: Air
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BDamage:
+                Damage: 1
+                Target: -1
+                Filter: Enemy
+                AnimOverload: RadialNegative
+            BPush:
+                Push:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Target: -1
+                Filter: Enemy
+                AnimOverload: None
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack1.Range* @TAttack1.Range@"
+            - Column:
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,60,20"
+            - Column:
+                - Infuse: Air
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+                - Row: "<sprite name=Range> *TAttack2.Range* @TAttack2.Range@"
+            - Column:
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack3* <size=100%><voffset=1>@TAttack3@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack3.Range* @TAttack3.Range@"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_031_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"
+        - Row: "$Target_AllAdjacentEnemies$"

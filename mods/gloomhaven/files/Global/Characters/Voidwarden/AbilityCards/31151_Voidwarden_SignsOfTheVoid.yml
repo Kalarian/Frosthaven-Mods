@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SignsOfTheVoid$
+Character: VoidwardenID
+ID: 31151
+Level: 1
+Initiative: 15
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyShield:
+                            Shield:
+                                Amount: 1
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                            Filter: Self
+                            ActiveBonusDuration: Round
+                            UseOriginalActor: True
+                            AnimOverload: TargetedBuff
+                        TAllyMove:
+                            Move:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                Range: 3
+                Filter: Ally
+                AnimOverload: ControlAlly
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Curse: True
+                    Range: 2
+                    Filter: Enemy
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                    XPTracker: [0,0,1,0,1]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "$JOTL_151_T_1$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,60,20"
+            - Column:
+            - Column:
+                - Active:
+                    Ability: TAllyShield
+                    ListLayout: "<b><size=130%><sprite name=Shield> *TAllyShield*"
+                    Layout: "<b><size=130%><sprite name=Shield> *TAllyShield* <size=100%><voffset=1>@TAllyShield@"
+                    Icon: Positive_Shield
+            - Column:
+                - Duration: Round
+        - Row: "<size=20%> "
+        - Row: "$JOTL_151_T_2$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$JOTL_151_B$"
+            Layout: "$JOTL_151_B$"
+            Icon: Icon_Curse
+        - Row: "<size=50%> "
+        - XPTracker: BActive

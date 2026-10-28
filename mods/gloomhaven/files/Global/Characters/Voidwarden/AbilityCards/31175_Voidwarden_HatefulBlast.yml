@@ -1,0 +1,84 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HatefulBlast$
+Character: VoidwardenID
+ID: 31175
+Level: 7
+Initiative: 29
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range: 3
+                Condition: Muddle
+                AnimOverload: RangedAttack
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkBuff:
+                        ParentName: TAttack
+                        Condition: Wound
+                XP: 1
+    Bottom:
+        Abilities:
+            BControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Attack:
+                                Amount: 2
+                                DiamondEnhancements: 1
+                            Range: 2
+                            Target: 3
+                            Condition: Wound
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                            AnimOverload: RangedAttack
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 3
+                Filter: Enemy
+                AnimOverload: ControlEnemy
+        Consumes:
+            BCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    BCDarkBuff:
+                        ParentName: EnemyWillDoThis
+                        Range: 1
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* @TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - AddedEffect: "<size=130%><sprite name=Muddle></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "<nobr><sprite name=Wound></nobr>, <sprite name=XP1>"
+    Bottom:
+        - Row: "$JOTL_175_B$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *EnemyWillDoThis* @EnemyWillDoThis@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*EnemyWillDoThis.Range*</mark>"
+                - Row: "<mark=#80919922><size=100%><sprite name=Target>*EnemyWillDoThis.Target*</mark>"
+                - AddedEffect: "<size=130%><sprite name=Wound></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCDark
+            Text: "<nobr>+1 <sprite name=Range></nobr>"

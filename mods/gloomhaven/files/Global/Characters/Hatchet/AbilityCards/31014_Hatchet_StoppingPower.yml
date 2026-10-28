@@ -1,0 +1,77 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StoppingPower$
+Character: HatchetID
+ID: 31014
+Level: 1
+Initiative: 35
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+        Consumes:
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirBuff:
+                        ParentName: TAttack
+                        Range: 1
+                        SubAbilities:
+                            TAttackSubPush:
+                                Push: 2
+                                IsInlineSubAbility: True
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+                    Jump: True
+                SubAbilities:
+                    BMoveSubImmobilize:
+                        Immobilize: True
+                        Range: 1
+                        Target: -1
+                        Filter: [Enemy]
+                        AllTargetsAdjacentToParentMovePath: true
+        Infuse: Air
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAir
+            Text: "<nobr>+1 <sprite name=Range></nobr>, <nobr><sprite name=Push> 2</nobr>, <sprite name=XP1>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - AddedEffect: "<sprite name=Jump>"
+            - Column:
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Immobilize>"
+        - Row: "$Target_AllEnemiesAdjacentToHexesMovedThrough$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:

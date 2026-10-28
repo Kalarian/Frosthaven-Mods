@@ -1,0 +1,57 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DoubleThrow$
+Character: HatchetID
+ID: 31015
+Level: 1
+Initiative: 64
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 4
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AnimOverload: QuickRangedAttack
+        Infuse: Air
+        XP: 2
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 2
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    StrengthIsScalar: True
+                    XPTracker: [0]
+                AnimOverload: PowerUp
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - Row: "<sprite name=Target>*TAttack.Target* @TAttack.Target@"
+            - Column:
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$JOTL_015_B$"
+            Layout: "$JOTL_015_B$"
+            Icon: Positive_AttackPlus

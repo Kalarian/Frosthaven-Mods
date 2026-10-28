@@ -1,0 +1,62 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NoFear$
+Character: RedGuardID
+ID: 31250
+Level: 8
+Initiative: 01
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TShield:
+                Shield: 0
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: TargetAdjacentEnemies
+                        MaxValue: 3
+                AttackSourcesOnly: True
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: ShieldIncomingAttacks
+                    Filter:
+                        TargetAdjacentEnemies: ">= 0"
+                    IsToggleBonus: False
+                    ValidAbilityType: Attack 
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Heal: 3
+                    Filter: Self
+                    AutoTrigger: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnMoved
+                    XPTracker: [0,1,0,1,0]
+                    IsAura: True
+                    AuraTargeting: Range
+                    AuraFilter: Enemy
+                    TriggerOnCaster: True
+                Range: 1
+                Target: -1
+                Filter: Self
+                AnimOverload: PowerUp
+        Infuse: Light
+Layout:
+    Top:
+        - Active:
+            Ability: TShield
+            ListLayout: "$JOTL_250_T$"
+            Layout: "$JOTL_250_T$"
+            Icon: Positive_Shield
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$JOTL_250_B$"
+            Layout: "$JOTL_250_B$"
+            Icon: Positive_Heal
+        - Row: "<size=20%> "
+        - XPTracker: BActive
+        - Row: "<size=50%> "
+        - Infuse: Light

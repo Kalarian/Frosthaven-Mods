@@ -10,20 +10,25 @@ ABILITY_CARD_BackupAmmunition	Backup Ammunition
 ABILITY_CARD_BagofHolding	Bag of Holding
 ABILITY_CARD_BalancedMeasure	Balanced Measure
 ABILITY_CARD_BanefulHex	Baneful Hex
+ABILITY_CARD_BarbaricInstincts	Barbaric Instincts
 ABILITY_CARD_BattlefieldMedicine	Battlefield Medicine
 ABILITY_CARD_BeaconofLight	Beacon of Light
 ABILITY_CARD_BedsideManner	Bedside Manner
 ABILITY_CARD_BitingGnats	Biting Gnats
 ABILITY_CARD_BlackArrow	Black Arrow
+ABILITY_CARD_BlackBoon	Black Boon
 ABILITY_CARD_BlackKnives	Black Knives
 ABILITY_CARD_BlackTides	Black Tides
+ABILITY_CARD_BladeDance	Blade Dance
 ABILITY_CARD_BladedBoomerang	Bladed Boomerang
 ABILITY_CARD_BlindDestruction	Blind Destruction
+ABILITY_CARD_BlindingSickle	Blinding Sickle
 ABILITY_CARD_BlisteringVortex	Blistering Vortex
 ABILITY_CARD_BloodPact	Blood Pact
 ABILITY_CARD_BloodTransfusion	Blood Transfusion
 ABILITY_CARD_BloodySaw	Bloody Saw
 ABILITY_CARD_BluntForce	Blunt Force
+ABILITY_CARD_Bombardment	Bombardment
 ABILITY_CARD_BoneBreaker	Bone Breaker
 ABILITY_CARD_BoosterShot	Booster Shot
 ABILITY_CARD_BounceBack	Bounce Back
@@ -31,30 +36,43 @@ ABILITY_CARD_BreaktheChains	Break the Chains
 ABILITY_CARD_BrightAegis	Bright Aegis
 ABILITY_CARD_BrilliantPrayer	Brilliant Prayer
 ABILITY_CARD_BrutalMomentum	Brutal Momentum
+ABILITY_CARD_Brutalize	Brutalize
 ABILITY_CARD_BruteForce	Brute Force
+ABILITY_CARD_BurnAwayTheDark	Burn Away the Dark
 ABILITY_CARD_BurningFlash	Burning Flash
 ABILITY_CARD_BurningHatred	Burning Hatred
 ABILITY_CARD_BurningOil	Burning Oil
+ABILITY_CARD_Camaraderie	Camaraderie
+ABILITY_CARD_CarePackage	Care Package
 ABILITY_CARD_CarelessCharge	Careless Charge
 ABILITY_CARD_Cataclysm	Cataclysm
 ABILITY_CARD_CatastrophicBomb	Catastrophic Bomb
 ABILITY_CARD_Cauterize	Cauterize
 ABILITY_CARD_CautiousAdvance	Cautious Advance
+ABILITY_CARD_CenterMass	Center Mass
 ABILITY_CARD_ClawsOfTheNight	Claws of the Night
 ABILITY_CARD_CleansingForce	Cleansing Force
 ABILITY_CARD_CleartheWay	Clear the Way
 ABILITY_CARD_CleavingAxe	Cleaving Axe
 ABILITY_CARD_CloakOfShade	Cloak of Shade
+ABILITY_CARD_CloseCuts	Close Cuts
+ABILITY_CARD_CloseToTheAbyss	Close to the Abyss
+ABILITY_CARD_ColdEmbrace	Cold Embrace
+ABILITY_CARD_CollateralDamage	Collateral Damage
+ABILITY_CARD_CommandingPresence	Commanding Presence
 ABILITY_CARD_ConcealedDominance	Concealed Dominance
 ABILITY_CARD_ContinualSupply	Continual Supply
 ABILITY_CARD_ConverttheFlock	Convert the Flock
+ABILITY_CARD_CrashProtocol	Crash Protocol
 ABILITY_CARD_Crater	Crater
 ABILITY_CARD_CreepingCurse	Creeping Curse
 ABILITY_CARD_CripplingBow	Crippling Bow
 ABILITY_CARD_CripplingOffensive	Crippling Offensive
 ABILITY_CARD_CripplingPoison	Crippling Poison
+ABILITY_CARD_CrushingCold	Crushing Cold
 ABILITY_CARD_CrushingGrasp	Crushing Grasp
 ABILITY_CARD_CrushingHammer	Crushing Hammer
+ABILITY_CARD_CrushingWeight	Crushing Weight
 ABILITY_CARD_CulltheWeak	Cull the Weak
 ABILITY_CARD_CurativeMixture	Curative Mixture
 ABILITY_CARD_DancingShadows	Dancing Shadows
@@ -65,127 +83,191 @@ ABILITY_CARD_DazzlingCharge	Dazzling Charge
 ABILITY_CARD_DefensiveStance	Defensive Stance
 ABILITY_CARD_DefensiveTactics	Defensive Tactics
 ABILITY_CARD_DefianceofDeath	Defiance of Death
+ABILITY_CARD_DesertNight	Desert Night
 ABILITY_CARD_DevastatingHack	Devastating Hack
 ABILITY_CARD_DevilHorns	Devil Horns
 ABILITY_CARD_DigPit	Dig Pit
 ABILITY_CARD_DirtTornado	Dirt Tornado
+ABILITY_CARD_DisorientingBarrage	Disorienting Barrage
 ABILITY_CARD_DivineIntervention	Divine Intervention
 ABILITY_CARD_DoNoHarm	Do No Harm
 ABILITY_CARD_DoomedBreeze	Doomed Breeze
+ABILITY_CARD_DoubleThrow	Double Throw
+ABILITY_CARD_DrillFist	Drill Fist
 ABILITY_CARD_DuelistsAdvance	Duelist's Advance
+ABILITY_CARD_DustCloud	Dust Cloud
 ABILITY_CARD_EarthenClod	Earthen Clod
+ABILITY_CARD_EmpoweredLink	Empowered Link
 ABILITY_CARD_EmpoweringCommand	Empowering Command
 ABILITY_CARD_EmpoweringVoid	Empowering Void
 ABILITY_CARD_EnervatingWound	Enervating Wound
 ABILITY_CARD_EngulfingRadiance	Engulfing Radiance
 ABILITY_CARD_Epidemic	Epidemic
 ABILITY_CARD_Euthanize	Euthanize
+ABILITY_CARD_ExcessiveForce	Excessive Force
+ABILITY_CARD_ExecutionersAxe	Executioners Axe
+ABILITY_CARD_Explode	Explode
+ABILITY_CARD_ExplosiveBlitz	Explosive Blitz
 ABILITY_CARD_ExplosivePunch	Explosive Punch
+ABILITY_CARD_ExtraFuel	Extra Fuel
+ABILITY_CARD_ExtraLift	Extra Lift
+ABILITY_CARD_EyeOfTheVoid	Eye of the Void
 ABILITY_CARD_EyeforanEye	Eye for an Eye
 ABILITY_CARD_EyesOfTheNight	Eyes of the Night
 ABILITY_CARD_FaceYourEnd	Face Your End
+ABILITY_CARD_FancyHat	Fancy Hat
 ABILITY_CARD_FatalAdvance	Fatal Advance
 ABILITY_CARD_FatalFury	Fatal Fury
+ABILITY_CARD_FearsomeEfficiency	Fearsome Efficiency
 ABILITY_CARD_FetidFlurry	Fetid Flurry
+ABILITY_CARD_FierceBrilliance	Fierce Brilliance
 ABILITY_CARD_FinalFight	Final Fight
+ABILITY_CARD_FireBombs	Fire Bombs
 ABILITY_CARD_FirstAid	First Aid
+ABILITY_CARD_FlameShroud	Flame Shroud
+ABILITY_CARD_FlamingSickle	Flaming Sickle
 ABILITY_CARD_FlankingStrike	Flanking Strike
 ABILITY_CARD_Flintlock	Flintlock
 ABILITY_CARD_FlurryofAxes	Flurry of Axes
 ABILITY_CARD_FlurryofBlades	Flurry of Blades
+ABILITY_CARD_FlyingSickle	Flying Sickle
+ABILITY_CARD_FollowThrough	Follow Through
 ABILITY_CARD_ForcefulStorm	Forceful Storm
 ABILITY_CARD_FortifiedPosition	Fortified Position
 ABILITY_CARD_FoulWind	Foul Wind
+ABILITY_CARD_FreezeTheSoul	Freeze the Soul
 ABILITY_CARD_FrenziedOnslaught	Frenzied Onslaught
 ABILITY_CARD_FromtheBrink	From the Brink
 ABILITY_CARD_FuriousAid	Furious Aid
 ABILITY_CARD_GatheringDoom	Gathering Doom
 ABILITY_CARD_GentlemansAnger	Gentleman's Anger
 ABILITY_CARD_GiantClub	Giant Club
+ABILITY_CARD_GiftOfTheVoid	Gift of the Void
+ABILITY_CARD_GiveAndTake	Give and Take
 ABILITY_CARD_GlassHammer	Glass Hammer
 ABILITY_CARD_GloomDarts	Gloom Darts
 ABILITY_CARD_GloriousBolt	Glorious Bolt
 ABILITY_CARD_GrabandGo	Grab and Go
+ABILITY_CARD_GraspOfDoom	Grasp of Doom
 ABILITY_CARD_GraspingVermin	Grasping Vermin
 ABILITY_CARD_GrimBargain	Grim Bargain
 ABILITY_CARD_GrimSustenance	Grim Sustenance
 ABILITY_CARD_GrislyTrauma	Grisly Trauma
 ABILITY_CARD_GrowingRage	Growing Rage
 ABILITY_CARD_GruesomeAdvantage	Gruesome Advantage
+ABILITY_CARD_GutPunch	Gut Punch
 ABILITY_CARD_HammerBlow	Hammer Blow
 ABILITY_CARD_Hamstring	Hamstring
 ABILITY_CARD_HandoftheSurgeon	Hand of the Surgeon
+ABILITY_CARD_HarvestSickle	Harvest Sickle
 ABILITY_CARD_HastenedStep	Hastened Step
+ABILITY_CARD_HatefulBlast	Hateful Blast
+ABILITY_CARD_HealingSands	Healing Sands
+ABILITY_CARD_HeartSeeker	Heart Seeker
 ABILITY_CARD_HeavingSwing	Heaving Swing
 ABILITY_CARD_HiddenDaggers	Hidden Daggers
 ABILITY_CARD_HoldBackthePain	Hold Back the Pain
 ABILITY_CARD_HolyStrike	Holy Strike
+ABILITY_CARD_HonorableFury	Honorable Fury
 ABILITY_CARD_HookandChain	Hook and Chain
+ABILITY_CARD_HornsOfTheBeast	Horns of the Beast
 ABILITY_CARD_IlluminatetheTarget	Illuminate the Target
 ABILITY_CARD_Immortality	Immortality
 ABILITY_CARD_ImmovablePhalanx	Immovable Phalanx
 ABILITY_CARD_ImpalingSpear	Impaling Spear
+ABILITY_CARD_Implode	Implode
 ABILITY_CARD_InspiringSanctity	Inspiring Sanctity
+ABILITY_CARD_InsultToInjury	Insult to Injury
 ABILITY_CARD_IronBulwark	Iron Bulwark
 ABILITY_CARD_Juggernaut	Juggernaut
 ABILITY_CARD_KineticAssault	Kinetic Assault
 ABILITY_CARD_KingoftheHill	King of the Hill
+ABILITY_CARD_KnockOutTheSupport	Knock Out the Support
 ABILITY_CARD_LargeMedicalPack	Large Medical Pack
 ABILITY_CARD_LayonHands	Lay on Hands
 ABILITY_CARD_LeapingCleave	Leaping Cleave
+ABILITY_CARD_Level	Level
+ABILITY_CARD_LobbedCharge	Lobbed Charge
 ABILITY_CARD_LongCon	Long Con
+ABILITY_CARD_LullIntoOblivion	Lull Into Oblivion
 ABILITY_CARD_LumberingBash	Lumbering Bash
+ABILITY_CARD_LureOfTheVoid	Lure of the Void
 ABILITY_CARD_LurkingRuin	Lurking Ruin
 ABILITY_CARD_MassExtinction	Mass Extinction
 ABILITY_CARD_MassiveBoulder	Massive Boulder
+ABILITY_CARD_MasterInfluence	Master Influence
 ABILITY_CARD_MasterPhysician	Master Physician
+ABILITY_CARD_MechSuit	Mech Suit
 ABILITY_CARD_MedicalPack	Medical Pack
 ABILITY_CARD_Meteor	Meteor
+ABILITY_CARD_MicroMissiles	Micro Missiles
 ABILITY_CARD_MobileResponse	Mobile Response
 ABILITY_CARD_MobilizingAxiom	Mobilizing Axiom
 ABILITY_CARD_NaturesLift	Nature's Lift
 ABILITY_CARD_Nightfall	Nightfall
 ABILITY_CARD_NightmarishAffliction	Nightmarish Affliction
+ABILITY_CARD_NoFear	No Fear
+ABILITY_CARD_NowhereToRun	Nowhere to Run
 ABILITY_CARD_NumbthePain	Numb the Pain
+ABILITY_CARD_OneTwoPunch	One Two Punch
 ABILITY_CARD_OpenWound	Open Wound
 ABILITY_CARD_OpposingStrike	Opposing Strike
 ABILITY_CARD_OversizedPack	Oversized Pack
+ABILITY_CARD_Overwatch	Overwatch
 ABILITY_CARD_OverwhelmingAssault	Overwhelming Assault
 ABILITY_CARD_PainsEnd	Pain's End
 ABILITY_CARD_ParalyzingBite	Paralyzing Bite
 ABILITY_CARD_PathofGlory	Path of Glory
 ABILITY_CARD_Petrify	Petrify
+ABILITY_CARD_PistonPunch	Piston Punch
 ABILITY_CARD_PortableBallista	Portable Ballista
+ABILITY_CARD_PossessedByFate	Possessed By Fate
+ABILITY_CARD_PowerPitch	Power Pitch
 ABILITY_CARD_PracticalPlans	Practical Plans
 ABILITY_CARD_Precaution	Precaution
+ABILITY_CARD_PrecisionStrike	Precision Strike
 ABILITY_CARD_PrepForSurgery	Prep for Surgery
 ABILITY_CARD_PrepareForTheKill	Prepare for the Kill
 ABILITY_CARD_Prescription	Prescription
 ABILITY_CARD_PreventionisKey	Prevention Is Key
+ABILITY_CARD_PrismaticSickle	Prismatic Sickle
 ABILITY_CARD_Proficiency	Proficiency
 ABILITY_CARD_ProtectiveBlessing	Protective Blessing
 ABILITY_CARD_ProvokingRoar	Provoking Roar
 ABILITY_CARD_Pulverize	Pulverize
 ABILITY_CARD_PurifyingAura	Purifying Aura
 ABILITY_CARD_QuickHands	Quick Hands
+ABILITY_CARD_QuickTurnaround	Quick Turnaround
 ABILITY_CARD_QuietFrenzy	Quiet Frenzy
 ABILITY_CARD_Quietus	Quietus
 ABILITY_CARD_QuiverofArrows	Quiver of Arrows
+ABILITY_CARD_RadiantSickle	Radiant Sickle
 ABILITY_CARD_RecklessOffensive	Reckless Offensive
 ABILITY_CARD_Reforge	Reforge
 ABILITY_CARD_Refreshment	Refreshment
 ABILITY_CARD_RegenerativeTissue	Regenerative Tissue
 ABILITY_CARD_ReinforcedSteel	Reinforced Steel
+ABILITY_CARD_RemoteDetonation	Remote Detonation
+ABILITY_CARD_RepeatShot	Repeat Shot
 ABILITY_CARD_ResearchtheCure	Research the Cure
 ABILITY_CARD_ReservedEnergy	Reserved Energy
+ABILITY_CARD_ResignedFrenzy	Resigned Frenzy
 ABILITY_CARD_ResoluteStand	Resolute Stand
 ABILITY_CARD_Restock	Restock
+ABILITY_CARD_Retrieval	Retrieval
+ABILITY_CARD_Ricochet	Ricochet
 ABILITY_CARD_RighteousStrength	Righteous Strength
+ABILITY_CARD_RippedFromTheFlesh	Ripped From the Flesh
+ABILITY_CARD_RoboticEnhancement	Robotic Enhancement
 ABILITY_CARD_RockSlide	Rock Slide
 ABILITY_CARD_RockTunnel	Rock Tunnel
 ABILITY_CARD_RockyEnd	Rocky End
 ABILITY_CARD_RotMaggots	Rot Maggots
+ABILITY_CARD_Rubble	Rubble
 ABILITY_CARD_RumblingAdvance	Rumbling Advance
+ABILITY_CARD_SandDevil	Sand Devil
+ABILITY_CARD_SapWarmth	Sap Warmth
+ABILITY_CARD_SavageInstinct	Savage Instinct
 ABILITY_CARD_ScalesofJustice	Scales of Justice
 ABILITY_CARD_ScatteredTerror	Scattered Terror
 ABILITY_CARD_ScrollofAnnihilation	Scroll of Annihilation
@@ -193,13 +275,20 @@ ABILITY_CARD_ScrollofBlizzards	Scroll of Blizzards
 ABILITY_CARD_ScrollofJudgment	Scroll of Judgment
 ABILITY_CARD_ScrollofLightning	Scroll of Lightning
 ABILITY_CARD_ScrollofRecall	Scroll of Recall
+ABILITY_CARD_SecondWind	Second Wind
 ABILITY_CARD_SeeingRed	Seeing Red
 ABILITY_CARD_SelfishRetribution	Selfish Retribution
 ABILITY_CARD_SentientGrowth	Sentient Growth
+ABILITY_CARD_SharpenedBlades	Sharpened Blades
 ABILITY_CARD_SharpeningKit	Sharpening Kit
 ABILITY_CARD_ShieldBash	Shield Bash
+ABILITY_CARD_ShieldOfTheDesert	Shield of the Desert
+ABILITY_CARD_ShieldSpikes	Shield Spikes
 ABILITY_CARD_ShinyDistraction	Shiny Distraction
+ABILITY_CARD_ShockingAdvance	Shocking Advance
+ABILITY_CARD_Shrapnel	Shrapnel
 ABILITY_CARD_SidePouch	Side Pouch
+ABILITY_CARD_SignsOfTheVoid	Signs of the Void
 ABILITY_CARD_SilentForce	Silent Force
 ABILITY_CARD_SingleOut	Single Out
 ABILITY_CARD_SinisterOpportunity	Sinister Opportunity
@@ -207,36 +296,52 @@ ABILITY_CARD_Skewer	Skewer
 ABILITY_CARD_SkirmishingManeuver	Skirmishing Maneuver
 ABILITY_CARD_SmokeBomb	Smoke Bomb
 ABILITY_CARD_SmokeStep	Smoke Step
+ABILITY_CARD_SoaringShield	Soaring Shield
 ABILITY_CARD_Soulfire	Soulfire
 ABILITY_CARD_SpareDagger	Spare Dagger
 ABILITY_CARD_SpecialMixture	Special Mixture
 ABILITY_CARD_SpikedArmor	Spiked Armor
+ABILITY_CARD_SpiritHunger	Spirit Hunger
 ABILITY_CARD_SpiritOfTheNight	Spirit of the Night
 ABILITY_CARD_SpreadingScourge	Spreading Scourge
 ABILITY_CARD_SpreadthePlague	Spread the Plague
 ABILITY_CARD_SpringtheTrap	Spring the Trap
+ABILITY_CARD_StandFast	Stand Fast
 ABILITY_CARD_SticktotheShadows	Stick to the Shadows
 ABILITY_CARD_StilettoStorm	Stiletto Storm
 ABILITY_CARD_StingingCloud	Stinging Cloud
 ABILITY_CARD_StonePummel	Stone Pummel
+ABILITY_CARD_StoppingPower	Stopping Power
 ABILITY_CARD_StormofWings	Storm of Wings
+ABILITY_CARD_StranglingChain	Strangling Chain
 ABILITY_CARD_StrengthinAgony	Strength in Agony
 ABILITY_CARD_SuccumbtotheGift	Succumb to the Gift
+ABILITY_CARD_Suggestion	Suggestion
 ABILITY_CARD_SupportiveChant	Supportive Chant
+ABILITY_CARD_SurgeOfPower	Surge of Power
 ABILITY_CARD_SurgeonsSatchel	Surgeon's Satchel
 ABILITY_CARD_SwallowedByFear	Swallowed by Fear
 ABILITY_CARD_SweepingBlow	Sweeping Blow
 ABILITY_CARD_SwiftBow	Swift Bow
+ABILITY_CARD_SwiftStrength	Swift Strength
 ABILITY_CARD_Syringe	Syringe
 ABILITY_CARD_TacticalOrder	Tactical Order
+ABILITY_CARD_TauntingFate	Taunting Fate
 ABILITY_CARD_Teamwork	Teamwork
 ABILITY_CARD_TerrorBlade	Terror Blade
+ABILITY_CARD_TheBigOne	The Big One
+ABILITY_CARD_TheBiggerOne	The Bigger One
+ABILITY_CARD_TheFavorite	The Favorite
+ABILITY_CARD_TheLastJourney	The Last Journey
 ABILITY_CARD_TheMawofMadness	The Maw of Madness
+ABILITY_CARD_TheNewFavorite	The New Favorite
 ABILITY_CARD_ThiefsKnack	Thief's Knack
 ABILITY_CARD_ThrowingKnives	Throwing Knives
 ABILITY_CARD_Trample	Trample
 ABILITY_CARD_Triage	Triage
 ABILITY_CARD_TrickstersReversal	Trickster's Reversal
+ABILITY_CARD_TurnOutTheLights	Turn Out the Lights
+ABILITY_CARD_TwirlingStabs	Twirling Stabs
 ABILITY_CARD_UnbridledPower	Unbridled Power
 ABILITY_CARD_UndertheSkin	Under the Skin
 ABILITY_CARD_UnseenDread	Unseen Dread
@@ -247,6 +352,7 @@ ABILITY_CARD_UnwaveringMandate	Unwavering Mandate
 ABILITY_CARD_Vaccine	Vaccine
 ABILITY_CARD_VengefulBarrage	Vengeful Barrage
 ABILITY_CARD_VenomShiv	Venom Shiv
+ABILITY_CARD_ViciousBallet	Vicious Ballet
 ABILITY_CARD_VilePestilence	Vile Pestilence
 ABILITY_CARD_VirulentStrain	Virulent Strain
 ABILITY_CARD_VisageoftheInevitable	Visage of the Inevitable
@@ -254,12 +360,18 @@ ABILITY_CARD_VitalStrike	Vital Strike
 ABILITY_CARD_VoiceOfTheNight	Voice of the Night
 ABILITY_CARD_WallofDoom	Wall of Doom
 ABILITY_CARD_WardingStrength	Warding Strength
+ABILITY_CARD_WarmthOfTheSun	Warmth of the Sun
+ABILITY_CARD_WarriorOfTheSun	Warrior of the Sun
 ABILITY_CARD_WatchItBurn	Watch It Burn
 ABILITY_CARD_WeaponofPurity	Weapon of Purity
 ABILITY_CARD_Whirlwind	Whirlwind
+ABILITY_CARD_WholesaleDestruction	Wholesale Destruction
+ABILITY_CARD_WickedScratch	Wicked Scratch
 ABILITY_CARD_WillingSacrifice	Willing Sacrifice
+ABILITY_CARD_Windup	Windup
 ABILITY_CARD_WingedCongregation	Winged Congregation
 ABILITY_CARD_WingsOfTheNight	Wings of the Night
+ABILITY_CARD_WitheringConviction	Withering Conviction
 ABILITY_CARD_WretchedSwarm	Wretched Swarm
 Advantage	Advantage
 Affect_AllAdjacentAllies	Affect all adjacent allies
@@ -293,6 +405,11 @@ DIFFICULTY_HIGH	High
 DIFFICULTY_LOW	Low
 DIFFICULTY_MEDIUM	Medium
 Damage	Damage
+Demolitionist	Demolitionist
+Demolitionist_ADVENTURE_DESCRIPTION	Even when augmenting themselves with machines of their own creation to destroy anything that stands in their path, Quatryls will still do it with charm and flair. Though they may be small, Demolitionists don't let that hold them back in the least. Between their rocket boots, multitude of bombs, and giant piston fists, they are a force to be reckoned with. Sometimes the only path forward is the one they create themselves. In such cases, it is best to get out of their way.
+Demolitionist_ROLE	Melee Damage 
+Demolitionist_STRENGTHS	- <indent=%15>Many Direct Damage abilities to smash through Shields</indent>\n- <indent=%15>Access to Abilities with STUN</indent>\n- <indent=%15>Great at affecting the combat area</indent>
+Demolitionist_WEAKNESSES	- <indent=%15>Small deck size</indent>\n- <indent=%15>Limited healing options</indent>\n- <indent=%15>Their gloves aren't the most practical everyday attire</indent>
 GH_002_T	Gain <sprite name=XP1> for each time you Retaliate <nobr>this round.</nobr>
 GH_004_B	Any enemy who targets one of your adjacent allies with an attack this round targets you with that attack instead, regardless of the attack's range.
 GH_007_B	On the next six sources of damage from attacks targeting you, gain <nobr>Shield <sprite name=Shield> *BShield*.</nobr>
@@ -503,8 +620,174 @@ GH_443_T	Remove all negative conditions on the healed target and give them one �
 GH_445_T_1	All of your <nobr>Attack <sprite name=Attack></nobr> and <nobr>Move <sprite name=Move></nobr> abilities may be performed as <nobr>Heal <sprite name=Heal></nobr> abilities of an equal value plus one.
 GH_445_T_2	In such cases, the <nobr>Range <sprite name=Range></nobr> is 1 unless otherwise specified, and ignore all conditions applied by the <nobr>Attack <sprite name=Attack></nobr> abilities.
 GH_446_T	Kill all normal or elite enemies in the targeted area suffering from 10 or more damage.
+GUI_ACTIVE_BONUS_SandDevil_ForceMove_TOOLTIP	Force the character occupying the Sand Devil's hex to move with it.\nYou cannot end the Force Move action on a hex accupied by another character.
+GUI_RippedFromTheFlesh_ReturnTheFavorite_TOOLTIP	Return the Favorite Mark to the Hatchet from an adjacent enemy
+GUI_SandDevil_OverrideMove_TOOLTIP	Choose to Move the Sand Devil or skip to start the Red Guard's turn
 GUI_StonePummel_Bottom_HelpBoxTooltip	Stone Pummel: choose an adjacent obstacle to destroy for +3 Attack, or skip.
+GUI_ViciousBallet_Tooltip	Select an adjacent ally to perform an Attack 3 action
+GUI_WitheringConviction_TOP_TOOLTIP	Select {CURRENT_TARGETS}/{TOTAL_TARGETS} allies to perform the action
 Gain_Flying	Gain <nobr>Flying <sprite name=Flying></nobr>
+Hatchet	Hatchet
+Hatchet_ADVENTURE_DESCRIPTION	While any normal Inox may be valued in Gloomhaven for their brute strength and endurance with manual labour, if you want to be a successful mercenary in the city, sometimes a little more finesse is required. Hatchets have fully embraced life in the city, outfitting themselves in the latest fashions. It is all a bit of a front though, as their true passion lies in their arsenal. No one is a better marksman with a throwing axe, and if anybody wants to challenge their claim, they had better be prepared for a duel to the death!
+Hatchet_ROLE	Ranged Damage
+Hatchet_STRENGTHS	- <indent=%15>Great Ranged Damage</indent>\n- <indent=%15>Reasonable array of varied secondary abilities</indent>\n- <indent=%15>Has a couple of Favourite Axes</indent>
+Hatchet_WEAKNESSES	- <indent=%15>Should try and keep out of the front line</indent>\n- <indent=%15>Needs to go pick his axes up after use</indent>\n- <indent=%15>Hasn't been able to remove their hat since childhood</indent>
+JOTL_010_T	You may add <nobr>+3 Attack <sprite name=Attack></nobr> to a single target of any of your ranged attacks by marking it with your Favorite. When that target dies, it will drop your Favorite. If you loot that hex, return your Favorite to this Active Ability.
+JOTL_011_T	If the target has your Favorite, return it to its Active Ability.
+JOTL_015_B	Double the value of your next attack this round.
+JOTL_016_B_1	All adjacent enemies suffer 1 damage.
+JOTL_016_B_2	All adjacent enemies suffer 2 damage.
+JOTL_018_T	Add <nobr>+2 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> if the target has your Favorite.
+JOTL_019_B	Add <nobr>+2 Move <sprite name=Move></nobr> and gain <sprite name=XP1> if you killed an enemy this round.
+JOTL_020_T	Target one ally adjacent to the target of the attack
+JOTL_021_B	On your next four Move abilities, add <nobr>+2 Move <sprite name=Move></nobr>.
+JOTL_022_B	Add <nobr>+1 Attack <sprite name=Attack></nobr> to all your attacks this round.
+JOTL_023_T	Add <nobr>+2 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> if the target has your Favorite.
+JOTL_024_B	On your next four attacks when possible, one enemy adjacent to the target suffers 2 damage.
+JOTL_024_T	Target a different enemy within <nobr>Range <sprite name=Range> 2</nobr> of the target of the previous Attack ability
+JOTL_025_B	Add <nobr>+2 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> if you killed an enemy this round.
+JOTL_025_T	If this attack kills the target, one enemy adjacent to the hex in which it died suffers X damage, where X is the amount of damage the target would have suffered in excess of what was needed to kill it.
+JOTL_026_T	On your next five attacks, add <nobr>+1 Attack <sprite name=Attack></nobr> and <nobr>WOUND <sprite name=Wound></nobr>.
+JOTL_027_B	Add <nobr>STRENGTHEN <sprite name=Strengthen></nobr> and gain <sprite name=XP1> if you killed an enemy this round.
+JOTL_027_T	If an adjacent enemy has your Favorite, you may return it to its Active Ability. If you do, the adjacent enemy suffers 2 damage and gains <nobr>WOUND <sprite name=Wound></nobr>.
+JOTL_028_B	The next five times an enemy ends a Move ability within <nobr>Range <sprite name=Range> 5</nobr>, perform an "<nobr>Attack <sprite name=Attack> 2</nobr>, <nobr>Range <sprite name=Range> 5</nobr>" action targeting that enemy.
+JOTL_030_T	You may add <nobr>+3 Attack <sprite name=Attack></nobr>, <nobr>WOUND <sprite name=Wound></nobr>, and <nobr>PUSH <sprite name=Push> 1</nobr> to a single target of any of your ranged attacks by marking it with your Favorite. When that target dies, it will drop your Favorite. If you loot that hex, return your Favorite to this Active Ability. This card cannot be active while "The Favorite" is active.
+JOTL_031_B	All adjacent enemies suffer 1 damage.
+JOTL_032_B	If your Favorite is in or adjacent to your hex, you may perform
+JOTL_033_T	On your next five attacks targeting an enemy that has your Favorite, add <nobr>+2 Attack <sprite name=Attack></nobr>.
+JOTL_034_T	Add <nobr>+2 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> if the target has your Favorite, then return the token to its card.
+JOTL_035_B	The next five times you kill an enemy, all enemies adjacent to the hex in which it died suffer 2 damage.
+JOTL_036_B	Add <nobr>+2 Attack <sprite name=Attack></nobr> to your next attack this turn if you are adjacent to an ally.
+JOTL_037_B	If you killed an enemy this round, return your Favorite to its Active Ability and gain <sprite name=XP1>.
+JOTL_037_T	One adjacent normal or elite enemy suffers 12 damage.
+JOTL_038_B	The next four times you kill an enemy, perform a "<nobr>Heal <sprite name=Heal> 3</nobr>, <nobr>Range <sprite name=Range> 2</nobr>, <nobr>BLESS <sprite name=Bless></nobr>" action.
+JOTL_082_B	Double the value of your next <nobr>Move.</nobr>
+JOTL_082_T	On your next two attacks, add <nobr>+2 Attack <sprite name=Attack></nobr>.
+JOTL_083_B	One adjacent enemy that is adjacent to a wall suffers 2 damage.
+JOTL_083_T	Add <nobr>+2 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> if the target is adjacent to a wall.
+JOTL_084_B	Destroy one adjacent obstacle. If you do, gain <sprite name=XP1> and perform
+JOTL_084_T	All heals targeting the attacked target have no effect this round.
+JOTL_085_T_1	Destroy one adjacent obstacle. If you do, gain <sprite name=XP2> and perform
+JOTL_085_T_2	Target all enemies adjacent to the destroyed obstacle
+JOTL_085_T_3	Each target suffers 2 damage.
+JOTL_086_B	Destroy one adjacent obstacle to create two single-hex obstacles in empty hexes adjacent to the original obstacle.
+JOTL_088_B	If you opened a door during the movement, perform
+JOTL_089_B	Destroy one adjacent obstacle. If you do, gain <sprite name=XP1> and perform
+JOTL_090_T	Add <nobr>PUSH <sprite name=Push> 2</nobr>, <nobr>MUDDLE <sprite name=Muddle></nobr> and gain <sprite name=XP1> if this attack targets the same enemy as the previous Attack ability.
+JOTL_091_B	If you are adjacent to a wall, create one single-hex obstacle in an empty hex that is adjacent you.
+JOTL_091_T	This movement may end in a hex containing an obstacle. If it does, gain <sprite name=XP1>, destroy the obstacle, and perform
+JOTL_092_B	Add <nobr>+1 Attack <sprite name=Attack></nobr> to all your melee attacks this round.
+JOTL_092_T	Add <nobr>+3 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> if the target is an object with health.
+JOTL_093_B_1	Choose one adjacent enemy. If each hex of the movement brought you closer to that enemy, perform
+JOTL_093_B_2	targeting that enemy, where X is the number of hexes you moved.
+JOTL_093_T	Create one 3-damage <nobr>MUDDLE <sprite name=Muddle></nobr> trap in an empty hex within <nobr>Range <sprite name=Range> 3</nobr>.
+JOTL_094_B	This movement is unaffected by difficult terrain.
+JOTL_095_B_1	Each time you enter a hex containing an obstacle with this movement, destroy that obstacle and add <nobr>+1 Move <sprite name=Move></nobr>.
+JOTL_095_B_2	All enemies moved through suffer 1 damage, <sprite name=XP1>.
+JOTL_095_T	On your next four attacks targeting enemies adjacent to a wall, add <nobr>+2 Attack <sprite name=Attack></nobr>.
+JOTL_096_B	Destroy one adjacent obstacle. If you do, gain <sprite name=XP1> and all enemies adjacent to the destroyed obstacle suffer 2 damage.
+JOTL_097_B	Move a single-hex obstacle adjacent to your starting hex to an empty hex adjacent to you.
+JOTL_097_T	Add +1 Attack for each wall hex, obstacle, object with health, character, or trap adjacent to the target.
+JOTL_098_B	Create three 3-damage traps in empty hexes within <nobr>Range <sprite name=Range> 4</nobr>.
+JOTL_098_T_1	Destroy one obstacle within <nobr>Range <sprite name=Range> 4</nobr>. If you do, perform
+JOTL_098_T_2	Target all enemies adjacent to the destroyed obstacle
+JOTL_099_T	Add <nobr>+2 Attack <sprite name=Attack></nobr>, <nobr>WOUND <sprite name=Wound></nobr> and gain <sprite name=XP1> if the target is adjacent to a wall.
+JOTL_101_B_1	If the target is adjacent to a wall, you may create one single-hex obstacle in an empty hex adjacent to the target.
+JOTL_101_T_1	Your current and maximum hit point values are increased by 5.
+JOTL_101_T_2	Recover all your discarded cards.
+JOTL_102_B	Destroy one adjacent obstacle. If you do, gain <sprite name=XP1> and perform
+JOTL_103_B	You and all allies may ignore the Shield value of target adjacent enemy this round.
+JOTL_103_T	Ignore the Shield value of the target, add <nobr>POISON <sprite name=Poison></nobr>, and gain <sprite name=XP1> if this attack targets the same enemy as the previous two Attack abilities.
+JOTL_104_B	Each object with health within <nobr>Range <sprite name=Range> 3</nobr> suffers 3 damage.
+JOTL_105_B_1	Add <nobr>IMMOBILIZE <sprite name=Immobilize></nobr> to all your attacks this round.
+JOTL_105_B_2	Also add <nobr>MUDDLE <sprite name=Muddle></nobr>, <sprite name=XP1>
+JOTL_105_T	On your next three attacks targeting enemies you attacked earlier in the same round, add <nobr>+3 Attack <sprite name=Attack></nobr>.
+JOTL_107_B	All adjacent enemies that are adjacent to a wall suffer 2 damage.
+JOTL_107_T	Destroy all obstacles in the targeted area. All allies in the targeted area suffer 2 damage.
+JOTL_108_B	Destroy one adjacent obstacle. If you do, gain <sprite name=XP1> and all enemies in the same room as the destroyed obstacle suffer 2 damage.
+JOTL_108_T_1	Destroy one adjacent obstacle or object with health. If you do, gain <sprite name=XP1> and perform
+JOTL_108_T_2	Target all enemies adjacent to the destroyed obstacle or object
+JOTL_109_B	You may perform any destroy obstacle ability as if one empty hex within range of the ability contains an obstacle.
+JOTL_151_B	At the start of your next five turns, perform a "<nobr>CURSE <sprite name=Curse></nobr>, <nobr>Range <sprite name=Range> 2</nobr>" action.
+JOTL_151_T_1	One ally within <nobr>Range <sprite name=Range> 3</nobr> may perform
+JOTL_151_T_2	That same ally may perform
+JOTL_152_B	Force all enemies within <nobr>Range <sprite name=Range> 3</nobr> to perform
+JOTL_152_T	All allies who remove <nobr>POISON <sprite name=Poison></nobr> with this heal gain <nobr>BLESS <sprite name=Bless></nobr>.
+JOTL_153_T_1	One adjacent ally may perform
+JOTL_153_T_2	targeting the target of the <nobr>POISON <sprite name=Poison></nobr>. If they do, the ally suffers 2 damage.
+JOTL_154_B	One ally within <nobr>Range <sprite name=Range> 3</nobr> may perform
+JOTL_155_B	Ignore the <nobr>CURSE <sprite name=Curse></nobr> instead.
+JOTL_156_T	One ally within <nobr>Range <sprite name=Range> 2</nobr> may perform
+JOTL_157_B_1	Force one enemy within <nobr>Range <sprite name=Range> 3</nobr> to perform
+JOTL_157_B_2	targeting an enemy of your choice. The acting enemy suffers damage equal to the damage suffered by the target.
+JOTL_158_B_1	One ally within <nobr>Range <sprite name=Range> 3</nobr> may perform
+JOTL_158_B_2	If they do, gain <sprite name=XP1> and that ally suffers 2 damage.
+JOTL_158_T	Force the target to perform
+JOTL_160_T	The first attack performed in each of your attack granting actions gains Advantage, and the target may consume any <nobr>element <sprite name=ConsumeAny></nobr> to add <nobr>+1 Attack <sprite name=Attack></nobr> to it. In addition, when you grant monsters attacks, they use your attack modifier deck.
+JOTL_161_T_1	Force one enemy within <nobr>Range <sprite name=Range> 4</nobr> to perform
+JOTL_161_T_2	targeting an enemy of your choice adjacent to them.
+JOTL_161_T_3	<nobr>STUN <sprite name=Stun></nobr> the acting enemy.
+JOTL_162_T_1	Force all enemies within <nobr>Range <sprite name=Range> 3</nobr> to perform
+JOTL_162_T_2	targeting enemies of your choice adjacent to them.
+JOTL_163_B	All adjacent allies suffer 1 damage.
+JOTL_164_T	The next three times after an ally attacks an enemy with <nobr>POISON <sprite name=Poison></nobr>, that ally may perform a "<nobr>Heal <sprite name=Heal> 1</nobr>, Self" action.
+JOTL_165_T_1	Target self or one ally within <nobr>Range <sprite name=Range> 2</nobr>
+JOTL_165_T_2	Target a different ally within <nobr>Range <sprite name=Range> 3</nobr>
+JOTL_166_T	One ally within <nobr>Range <sprite name=Range> 3</nobr> may perform
+JOTL_167_B_1	The next time you grant an attack this turn, add <nobr>+1 Attack <sprite name=Attack></nobr> to the entire Attack action.
+JOTL_167_B_2	Add <nobr>+2 Attack <sprite name=Attack></nobr> instead.
+JOTL_167_B_3	All attacks targeting you add <nobr>+2 Attack <sprite name=Attack></nobr> this round. This card cannot be discarded before the end of the round.
+JOTL_167_T	Shuffle one <nobr>BLESS <sprite name=Bless></nobr> card into the monster attack modifier deck.
+JOTL_168_B_1	Ignore the <nobr>CURSE <sprite name=Curse></nobr> instead.
+JOTL_168_B_2	One ally within <nobr>Range <sprite name=Range> 3</nobr> may perform
+JOTL_168_T	At the start of your next five turns, one ally within <nobr>Range <sprite name=Range> 3</nobr> may perform an "<nobr>+2 Attack <sprite name=Attack></nobr>" action.
+JOTL_169_T_1	Force one enemy within <nobr>Range <sprite name=Range> 3</nobr> to perform
+JOTL_169_T_2	targeting all other enemies adjacent to it. The acting enemy suffers 1 damage for each enemy targeted.
+JOTL_170_B_1	Force one adjacent enemy to perform
+JOTL_170_B_2	with you controlling the action. That enemy gains <nobr>IMMOBILIZE <sprite name=Immobilize></nobr>.
+JOTL_172_B_1	One ally or enemy within <nobr>Range <sprite name=Range> 3</nobr> may perform
+JOTL_172_B_2	targeting an enemy of your choice.
+JOTL_172_T	Place a Ward in an adjacent empty hex. It is considered a summon for all purposes. All enemies that enter a hex adjacent to the Ward gain <nobr>POISON <sprite name=Poison></nobr>. All enemies gain Disadvantage on all their attacks not granted by you while within <nobr>Range <sprite name=Range> 3</nobr> of the Ward.
+JOTL_173_B	Ignore the <nobr>CURSE <sprite name=Curse></nobr> instead.
+JOTL_173_T	Up to two allies within <nobr>Range <sprite name=Range> 2</nobr> each suffer 2 damage. Each ally who does then performs
+JOTL_174_B	Any time you or any ally loses <nobr>POISON <sprite name=Poison></nobr>, that figure gains <nobr>STRENGTHEN <sprite name=Strengthen></nobr>.
+JOTL_174_T	Heal all damage on one ally within <nobr>Range <sprite name=Range> 3</nobr>. If you do, that ally gains <nobr>MUDDLE <sprite name=Muddle></nobr>.
+JOTL_175_B	Force one enemy within <nobr>Range <sprite name=Range> 3</nobr> to perform
+JOTL_176_T_1	One ally within <nobr>Range <sprite name=Range> 2</nobr> may perform
+JOTL_176_T_2	If they do, that ally may perform
+JOTL_176_T_3	where X is the amount of damage suffered by the target of the attack.
+JOTL_177_B	You and all allies within <nobr>Range <sprite name=Range> 2</nobr> may perform
+JOTL_177_T	If either target suffers damage this round or this active effect is cancelled before the end of the round, both targets lose <nobr>STUN <sprite name=Stun></nobr>.
+JOTL_178_T	On your next three Heal abilities when possible, target an additional ally.
+JOTL_179_B	All allies and enemies within <nobr>Range <sprite name=Range> 3</nobr> suffer 1 damage.
+JOTL_179_T_1	Force all other enemies within <nobr>Range <sprite name=Range> 3</nobr> of the target to perform
+JOTL_179_T_2	targeting the target of the Poison ability.
+JOTL_180_B_1	One ally within <nobr>Range <sprite name=Range> 3</nobr> may perform
+JOTL_180_B_2	If they do, gain <sprite name=XP1> and that ally gains <nobr>POISON <sprite name=Poison></nobr>.
+JOTL_225_B	All attacks targeting you gain Disadvantage this round.
+JOTL_227_B	All adjacent enemies suffer 1 damage.
+JOTL_230_T	The next five times an enemy enters a hex adjacent to you, that enemy suffers 2 damage.
+JOTL_233_T	Target one enemy within 2 hexes
+JOTL_235_B_1	All enemies moved through suffer 1 damage.
+JOTL_235_B_2	2 damage instead, <sprite name=XP1>
+JOTL_236_T	Add <nobr>+3 Attack <sprite name=Attack></nobr> if the target has a negative condition.
+JOTL_237_B	<nobr>Loot <sprite name=Loot></nobr> each hex you enter with this movement.
+JOTL_238_T	All adjacent enemies suffer 1 damage.
+JOTL_240_T_1	Each time the target is attacked this round, it suffers 1 damage.
+JOTL_240_T_2	2 damage instead, <sprite name=XP1>
+JOTL_240_T_3	If Fire was consumed, 2 damage instead.
+JOTL_241_T	All enemies adjacent to the target suffer 1 damage.
+JOTL_242_T	Target all enemies within 2 hexes
+JOTL_244_T	Place the Sand Devil in an adjacent empty hex. It is considered a trap for the purposes of monster focusing and movement. At the start of each of your turns, you may move it up to 2 hexes, and you may force any character on it to move with it. Any time a character moves onto it or vice versa (not when moving together), that character suffers 1 damage and gains <nobr>MUDDLE <sprite name=Muddle></nobr>.
+JOTL_245_B	All adjacent enemies suffer 2 damage.
+JOTL_245_T	The next four times an enemy enters a hex adjacent to you, that enemy gains <nobr>DISARM <sprite name=Disarm></nobr>.
+JOTL_247_B	One adjacent enemy suffers 1 damage.
+JOTL_247_T_1	One adjacent ally may perform an "<nobr>Attack <sprite name=Attack> 3</nobr>" action, <sprite name=XP1>.
+JOTL_247_T_2	One different adjacent ally may perform an "<nobr>Attack <sprite name=Attack> 3</nobr>" action, <sprite name=XP1>.
+JOTL_250_B	The next five times an enemy enters a hex adjacent to you, perform a "<nobr>Heal <sprite name=Heal> 3</nobr>, Self" action.
+JOTL_250_T	Any time you are attacked this round, gain <nobr>Shield <sprite name=Shield> X</nobr> for the attack, where X is the number of enemies adjacent to you at the time of the attack, up to a maximum of 3.
+JOTL_252_B	All adjacent enemies suffer 3 damage.
+JOTL_252_T	<nobr>+1 Attack <sprite name=Attack></nobr>, <nobr>+2 Range <sprite name=Range></nobr>, all enemies adjacent to the target suffer 1 damage
 Jump	Jump
 Kill_OneAdjacentEnemy	Kill one adjacent normal or elite enemy.
 Kill_OneAdjacentNormalEnemy	Kill one adjacent normal enemy.
@@ -544,6 +827,26 @@ PERK_Cragheart_06_Desc	Add four <sprite name="0"> <sprite name=CreateEarth> <spr
 PERK_Cragheart_07_Desc	Ignore item <sprite name="-1"> effects
 PERK_Cragheart_08_Desc	Ignore negative scenario effects
 PERK_Cragheart_09_Desc	Whenever a new room is revealed, control all enemies in the newly revealed room: <sprite name=Move> 1, this movement must end in an empty hex
+PERK_Demolitionist_01_Desc	Remove two <sprite name="-1">
+PERK_Demolitionist_02_Desc	Remove four <sprite name="0">
+PERK_Demolitionist_03_Desc	Replace one <sprite name="-2"> with one <sprite name="0"> <sprite name=Poison>
+PERK_Demolitionist_04_Desc	Replace one <sprite name="0"> with one <sprite name="+2"> <sprite name=Muddle>
+PERK_Demolitionist_05_Desc	Replace one <sprite name="+1"> with two <sprite name="+2">
+PERK_Demolitionist_06_Desc	Replace one <sprite name="+1"> with one <sprite name="+2"> <sprite name=CreateFire>
+PERK_Demolitionist_07_Desc	Replace one <sprite name="+1"> with one <sprite name="+2"> <sprite name=CreateEarth>
+PERK_Demolitionist_08_Desc	Add two <sprite name="0"> all adjacent enemies suffer <sprite name=Damage> 1
+PERK_Demolitionist_09_Desc	Ignore negative scenario effects and remove one <sprite name="-1">
+PERK_Demolitionist_10_Desc	Whenever you rest, you may place an obstacle in an empty hex within <sprite name=Range> 2 (of you)
+PERK_Hatchet_01_Desc	Remove two <sprite name="-1">
+PERK_Hatchet_02_Desc	Replace one <sprite name="0"> with one <sprite name="0"> <sprite name=Stun>
+PERK_Hatchet_03_Desc	Replace one <sprite name="+1"> with one <sprite name="+1"> <sprite name=Stun>
+PERK_Hatchet_04_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Wound>
+PERK_Hatchet_05_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Poison>
+PERK_Hatchet_06_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Immobilize>
+PERK_Hatchet_07_Desc	Replace one <sprite name="0"> with one <sprite name="+2"> <sprite name=Muddle>
+PERK_Hatchet_08_Desc	Replace one <sprite name="+1"> with one <sprite name="+3">
+PERK_Hatchet_09_Desc	Add one <sprite name="+2"> <sprite name=CreateAir>
+PERK_Hatchet_10_Desc	Once each scenario, during your turn, if the Favorite is in a hex on the map, you may <sprite name=ConsumeAir> to return it to its ability card
 PERK_Nightshroud_01_Desc	Remove two <sprite name="-1">
 PERK_Nightshroud_02_Desc	Replace one <sprite name="-2"> with one <sprite name="-1"> <sprite name=CreateDark>
 PERK_Nightshroud_03_Desc	Replace one <sprite name="0"> with one <sprite name="0"> +1 <sprite name=Target> <sprite name=Rolling>
@@ -573,6 +876,16 @@ PERK_Quartermaster_06_Desc	Add two <sprite name="+1"> <sprite name=Rolling>
 PERK_Quartermaster_07_Desc	Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>
 PERK_Quartermaster_08_Desc	Ignore item <sprite name="-1"> effects and add two <sprite name="+1">
 PERK_Quartermaster_09_Desc	Once each quest, during your turn, <sprite name=RecoverIcon> up to four cards from your discard pile
+PERK_RedGuard_01_Desc	Remove two <sprite name="-1">
+PERK_RedGuard_02_Desc	Remove one <sprite name="-2">
+PERK_RedGuard_03_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Wound>
+PERK_RedGuard_04_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Immobilize>
+PERK_RedGuard_05_Desc	Replace one <sprite name="0"> and one <sprite name="+1"> with two <sprite name="+1"> <sprite name=Shield> 1, self
+PERK_RedGuard_06_Desc	Replace one <sprite name="+1"> with one <sprite name="+2"> <sprite name=CreateFire>
+PERK_RedGuard_07_Desc	Replace one <sprite name="+1"> with one <sprite name="+2"> <sprite name=CreateLight>
+PERK_RedGuard_08_Desc	Add one <sprite name="+1"> <sprite name=CreateFire>/<sprite name=CreateLight>
+PERK_RedGuard_09_Desc	Ignore negative item effects and add two <sprite name="+1">
+PERK_RedGuard_10_Desc	During your turn, you may <sprite name=ConsumeLight> to gain <sprite name=Shield> 1 and have attackers gain disadvantage against you until the end of the round
 PERK_Sawbones_01_Desc	Remove one <sprite name="-2">
 PERK_Sawbones_02_Desc	Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=Wound> <sprite name=Rolling>
 PERK_Sawbones_03_Desc	Replace one <sprite name="0"> with one <sprite name="+2">
@@ -602,6 +915,15 @@ PERK_Sunkeeper_07_Desc	Add two <sprite name="0"> <sprite name=Heal> 1, self <spr
 PERK_Sunkeeper_08_Desc	Ignore item <sprite name="-1"> effects and add two <sprite name="+1">
 PERK_Sunkeeper_09_Desc	Ignore negative scenario effects
 PERK_Sunkeeper_10_Desc	Whenever one of your heals would raise an ally's hit points above their maximum, that ally gains <sprite name=Ward>
+PERK_Voidwarden_01_Desc	Remove two <sprite name="-1">
+PERK_Voidwarden_02_Desc	Remove one <sprite name="-2">
+PERK_Voidwarden_03_Desc	Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=Heal> 1, ally
+PERK_Voidwarden_04_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Heal> 1, ally
+PERK_Voidwarden_05_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Poison>
+PERK_Voidwarden_06_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Curse>
+PERK_Voidwarden_07_Desc	Add two <sprite name="+1"> <sprite name=CreateIce>
+PERK_Voidwarden_08_Desc	Add two <sprite name="+1"> <sprite name=CreateDark>
+PERK_Voidwarden_09_Desc	Add one <sprite name="+3">
 Plagueherald	Plagueherald
 Plagueherald_ADVENTURE_DESCRIPTION	Either misguided or ignorant of other races’ physiology, Plagueheralds believe that the spread of disease throughout a society will strengthen it and propel it towards great things. One should be wary of allying with a Plagueherald. Their ability to spread decay and death across both sides of a battlefield is a terrifying thing to behold.
 Plagueherald_ROLE	Ranged Damage/Support
@@ -613,7 +935,13 @@ Quartermaster_ROLE	Melee Damage/Support
 Quartermaster_STRENGTHS	- <indent=%15>Many item refreshing abilities</indent>\n- <indent=%15>Moderate offensive and defensive capabilities</indent>\n- <indent=%15>Jack of all trades</indent>
 Quartermaster_WEAKNESSES	- <indent=%15>Master of none</indent>\n- <indent=%15>Weaker when party lacks good equipment</indent>\n- <indent=%15>Always packs too much luggage</indent>
 Range	Range
+RedGuard	Red Guard
+RedGuard_ADVENTURE_DESCRIPTION	There is a specific caste in the Valrath capital of Jhinda tasked with protecting the city. It is a prestigious position and one not easily lived up to. Outcast from Jhinda for unknown crimes, the Red Guard found it too difficult to part from their identity as a protector, keeping the distinctive red armor, as well as their chained sickle and shield. The only place to find work was as a mercenary in Gloomhaven, and maybe, just maybe, by standing on the front lines and keeping their allies from harm, the Red Guard will find some way to redeem themselves. Not in the eyes of the Jhinda culture, which has permanently turned its back, but at least within their own esteem.
+RedGuard_ROLE	Tank
+RedGuard_STRENGTHS	- <indent=%15>Array of Melee attacks plus some Ranged</indent>\n- <indent=%15>Combination of Shield and direct damage dealing close up</indent>\n- <indent=%15>Wide Initiative range enables 'double turns'</indent>
+RedGuard_WEAKNESSES	- <indent=%15>Outside of damage, doesn't have many options</indent>\n- <indent=%15>May struggle against single larger enemies</indent>\n- <indent=%15>Really, and I mean REALLY, likes the colour Red</indent>
 Retaliate	Retaliate
+SandDevil	Sand Devil
 Sawbones	Sawbones
 Sawbones_ADVENTURE_DESCRIPTION	Followers of the Oak are religious healers who do their best to ward off the pestilence and death that can manifest in larger human cities. Contrary to popular belief, however, there is nothing miraculous about their healing methods, as anyone who has come to them with a gangrenous leg knows all too well. The mystique of the profession can get lost amongst the screams when the Sawbones has to hack off a limb.
 Sawbones_ROLE	Melee Damage/Support
@@ -629,21 +957,36 @@ Scoundrel_WEAKNESSES	- <indent=%15>Little in the way of effects that assist team
 Self	Self
 Suffer_2Damage	Suffer 2 damage.
 Suffer_3Damage	Suffer 3 damage.
+SummonAbility_WardDisadvantage	All enemies within <nobr>Range <sprite name=Range> 3</nobr> of the Ward gain Disadvantage on all their attacks not granted by Voidwarden.
+SummonAbility_WardPoison	All enemies that enter a hex adjacent to the Ward gain <nobr>POISON <sprite name=Poison></nobr>.
 Sunkeeper	Sunkeeper
 Sunkeeper_ADVENTURE_DESCRIPTION	Sunkeepers have been trained to tap into long-dormant demonic powers and harness them for the purpose of righteousness. The Sunkeeper has an assortment of Healing, Buffing and Card Recovery abilities and is a capable Melee fighter in her own right. She works best in the role of a Paladin, aiding the main damage dealers in combat while keeping them alive.
 Sunkeeper_ROLE	Melee Tank/Support
 Sunkeeper_STRENGTHS	- <indent=%15>Array of buff, heal and recovery options</indent>\n- <indent=%15>Competent melee combatant</indent>\n- <indent=%15>Uses Light to enhance her abilities</indent>
 Sunkeeper_WEAKNESSES	- <indent=%15>Can struggle against groups of smaller enemies</indent>\n- <indent=%15>Weaker with fewer allies</indent>\n- <indent=%15>Rather self-righteous a lot of the time</indent>
+Target_AllAdjacentAllies	Target all adjacent allies.
 Target_AllAdjacentEnemies	Target all adjacent enemies
 Target_AllAlliesAndEnemies	Target all allies and enemies
+Target_AllAlliesWithin	Target all allies within
 Target_AllEnemies	Target all enemies
 Target_AllEnemiesAdjacentToEnemiesWith	Target all enemies adjacent to enemies with
+Target_AllEnemiesAdjacentToHexesMovedThrough	Target all enemies adjacent to any hexes moved through
 Target_AllEnemiesMovedThrough	Target all enemies moved through
 Target_AllEnemiesWithin	Target all enemies within
 Target_CanNoLongerFly	Target can no longer fly.
 Target_OneAdjacentAlliedPlayer	Target one adjacent allied mercenary
+Target_OneAdjacentAlly	Target one adjacent ally
 Target_OneAdjacentEnemy	Target one adjacent enemy
+Target_SelfAndAllAdjacentAllies	Target self and all adjacent allies
+Target_SelfAndAllAlliesWithin	Target self and all allies within
 Target_TwoHexInstead	Target all enemies up to two hexes away instead
+Voidwarden	Voidwarden
+Voidwarden_ADVENTURE_DESCRIPTION	The Void is a dangerous and terrible place. Anything that enters it dissolves into a coarse, black sand without explanation or remorse. After a near-death experience with the Void as a child which scarred the left side of their body, the Voidwarden made it their duty to protect others from a similar fate. Being touched by the Void has left more than just physical scars however. They can channel the power behind the Void to manipulate the thoughts and actions of both allies and foes. The Voidwarden can also offer powerful boons of healing and stamina, but those gifts comes at a terrible price.
+Voidwarden_ROLE	Crowd Control
+Voidwarden_STRENGTHS	- <indent=%15>Large starting hand size</indent>\n- <indent=%15>Works better in larger parties</indent>\n- <indent=%15>Wide array of bottom half abilities</indent>
+Voidwarden_WEAKNESSES	- <indent=%15>Generally slow character</indent>\n- <indent=%15>Reasonably squishy</indent>\n- <indent=%15>Complicated skincare regime</indent>
+Ward	Ward
+With_YouControllingActions	with you controlling the actions.
 XP_Per5Damage	Gain <sprite name=XP1> for every 5 damage dealt.
 XP_PerAttackPerformed	Gain <sprite name=XP1> for each attack performed.
 XP_PerEnemy	Gain <sprite name=XP1> for each enemy targeted.
@@ -654,6 +997,7 @@ Xis_HPDiff	where X is the difference between your maximum hit point value and cu
 Xis_HexesMovedThisAction	where X is the number of hexes you moved with this action.
 Xis_HexesMovedThisTurn	where X is the number of hexes you have moved so far this turn.
 Xis_LostCardCount	where X is the number of cards you have burned.
+Xis_Shield	where X is your current Shield value.
 instead	instead
 with	with
 within	within
@@ -962,5 +1306,88 @@ Berserker_FullName	Berserker
 CODEX_Hero_Berserker_Title	Berserker
 Berserker_DESCRIPTION	Berserkers are Inox warriors who have embraced their strength and fury. The Berserker will go to any lengths to keep her friends safe, including sacrificing her own life. Her abilities revolve around high damage output with the option of self-damage to push to even higher amounts. This makes her an extremely dangerous combatant, both to her enemies and herself.
 CODEX_HeroInfo_Berserker	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> High\n\nYour health is a resource, not just a lifeline. Many of your attacks get stronger the more health you have lost, or once you drop below half, and several cards let you suffer a little damage to make an attack hit harder.\n\nYour defences are built for living on the edge: <i>Defiance of Death</i> softens a blow that would knock you out, and other cards boost the healing you receive or strike back whenever you are hurt. Keep a healer close, or plan your own heals.\n\n<sprite name=CreateFire> powers some of your attacks, and your blows often add <sprite name=Wound>.\n\n<b>Strengths:</b>\n• One of the highest damage-dealing classes\n• Gets even stronger on lower health\n• Can lead the front line and draw enemy fire\n\n<b>Weaknesses:</b>\n• Little in the way of abilities that help allies\n• Operating on low health can lead to premature demise\n• Has anger management issues
+PERK_Hatchet_01_Name	Steady Hands
+PERK_Hatchet_02_Name	Stunning Blow
+PERK_Hatchet_03_Name	Stunning Strike
+PERK_Hatchet_04_Name	Jagged Edge
+PERK_Hatchet_05_Name	Tainted Edge
+PERK_Hatchet_06_Name	Pinning Throw
+PERK_Hatchet_07_Name	Dizzying Blow
+PERK_Hatchet_08_Name	Heavy Throw
+PERK_Hatchet_09_Name	Whirling Axe
+PERK_Hatchet_10_Name	Hasty Pick-up
+Hatchet_MASTERY_1_Name	Always Armed
+Hatchet_MASTERY_1_Desc	Throw or recover the Favorite during each of your turns
+Hatchet_MASTERY_2_Name	Keep It Moving
+Hatchet_MASTERY_2_Desc	During each round in which there is at least one enemy on the map at the start of your turn, throw the Favorite at an enemy or return it to your ability card
+Event_GH.Hatchet_Text	The Hatchet has a new coat. It is dark green, cut in the Capital style, and entirely wrong for Frosthaven, which he knows perfectly well. He wears it to the gate anyway, the Favorite hanging at his hip where the fashion says a sword should go.\n"A troupe is going south with the caravan," he says. "Knife throwers, fire eaters, that sort of thing. They lost their axe man in a tavern in the Capital. I told them I could be worse." He grins, which the coat was clearly bought for. "Nobody in a crowd ever throws back. I could get used to that."\nHe looks at the wall for a moment, the way everyone does before they go, then pulls the Favorite and throws it. It buries itself in the gatepost at head height, a hair from the guard's ear. The guard does not flinch; the Hatchet taught him not to, over a long winter of exactly this.\nHe walks over, works the axe free, kisses the blade, and goes. The notch stays in the post. New recruits are told to stand with their heads against it, and never told why.
+Event_GH.Hatchet_Name	Hatchet Retires
+Hatchet_FullName	Hatchet
+CODEX_Hero_Hatchet_Title	Hatchet
+Hatchet_DESCRIPTION	While any normal Inox may be valued in Gloomhaven for their brute strength and endurance with manual labour, if you want to be a successful mercenary in the city, sometimes a little more finesse is required. Hatchets have fully embraced life in the city, outfitting themselves in the latest fashions. It is all a bit of a front though, as their true passion lies in their arsenal. No one is a better marksman with a throwing axe, and if anybody wants to challenge their claim, they had better be prepared for a duel to the death!
+CODEX_HeroInfo_Hatchet	<b>Role:</b> Ranged Damage\n<b>Difficulty:</b> Low\n\nYour signature is <b>The Favorite</b>, your best axe. Some attacks throw it at an enemy, where it stays: your attacks against that enemy are stronger while it carries the axe, and a few cards let you take it back.\n\nYou fight from range, throwing axes at 3 or 4 hexes. <sprite name=CreateAir> extends your range and adds pushes, extra movement or a second attack.\n\nKilling an enemy fuels your next moves: several cards give you extra movement, healing or <sprite name=Strengthen> after a kill. Your attacks can also <sprite name=Wound>, and you have good loot.\n\n<b>Strengths:</b>\n• Great Ranged Damage\n• Reasonable array of varied secondary abilities\n• Has a couple of Favourite Axes\n\n<b>Weaknesses:</b>\n• Should try and keep out of the front line\n• Needs to go pick his axes up after use\n• Hasn't been able to remove their hat since childhood
+PERK_RedGuard_01_Name	Steady Guard
+PERK_RedGuard_02_Name	Unshaken
+PERK_RedGuard_03_Name	Barbed Sickle
+PERK_RedGuard_04_Name	Chain Hold
+PERK_RedGuard_05_Name	Shield Wall
+PERK_RedGuard_06_Name	Burning Blade
+PERK_RedGuard_07_Name	Radiant Blade
+PERK_RedGuard_08_Name	Kindled Light
+PERK_RedGuard_09_Name	Heavy Armor
+PERK_RedGuard_10_Name	Brilliant Aegis
+RedGuard_MASTERY_1_Name	Patient Guardian
+RedGuard_MASTERY_1_Desc	Kill at least five enemies during their turns
+RedGuard_MASTERY_2_Name	Sickle and Chain
+RedGuard_MASTERY_2_Desc	Force each enemy in the scenario to move at least one hex, forcing at least six enemies to move
+Event_GH.RedGuard_Text	The Red Guard does not leave. That is the first thing she tells you, before you can ask. She has walked the wall every night since the first attack, in the red armor that marks her as an exile from a city that no longer wants her, and somewhere in all those nights the wall became hers.\n"In Jhinda the guard is a caste," she says. "You are born to it or you are not. Here you are a guard because you stand on the wall when it matters. I find I prefer that." The captain of the watch has offered her a post, a bunk in the Barracks and the north tower. She has already moved her things.\nShe hands you the sickle and chain, the weapon she pulled a hundred enemies off their feet with. "The guard issues a spear. I would hate to be the one who makes an exception."\nThat night the torch in the north tower stays lit until dawn, and it does every night after. The lumber crews stop asking who is up there. They just stop looking over their shoulders.
+Event_GH.RedGuard_Name	Red Guard Retires
+RedGuard_FullName	Red Guard
+CODEX_Hero_RedGuard_Title	Red Guard
+RedGuard_DESCRIPTION	There is a specific caste in the Valrath capital of Jhinda tasked with protecting the city. It is a prestigious position and one not easily lived up to. Outcast from Jhinda for unknown crimes, the Red Guard found it too difficult to part from their identity as a protector, keeping the distinctive red armor, as well as their chained sickle and shield. The only place to find work was as a mercenary in Gloomhaven, and maybe, just maybe, by standing on the front lines and keeping their allies from harm, the Red Guard will find some way to redeem themselves. Not in the eyes of the Jhinda culture, which has permanently turned its back, but at least within their own esteem.
+CODEX_HeroInfo_RedGuard	<b>Role:</b> Tank\n<b>Difficulty:</b> Low\n\nYou hold the front line with shield and sickle. Your sickle attacks reach two hexes and often <sprite name=Pull> enemies to you or <sprite name=Immobilize> them, and many cards give you <sprite name=Shield> or hurt every enemy standing next to you.\n\nYou use two elements. <sprite name=CreateFire> adds <sprite name=Wound>, larger areas and stronger pulls; <sprite name=CreateLight> adds attack, shields, <sprite name=Muddle> and extra movement. Keep both flowing.\n\nPull enemies into your reach and keep them busy so your allies do not have to.\n\n<b>Strengths:</b>\n• Array of Melee attacks plus some Ranged\n• Combination of Shield and direct damage dealing close up\n• Wide Initiative range enables 'double turns'\n\n<b>Weaknesses:</b>\n• Outside of damage, doesn't have many options\n• May struggle against single larger enemies\n• Really, and I mean REALLY, likes the colour Red
+PERK_Voidwarden_01_Name	Steady Will
+PERK_Voidwarden_02_Name	Unwavering
+PERK_Voidwarden_03_Name	Mending Touch
+PERK_Voidwarden_04_Name	Mending Hands
+PERK_Voidwarden_05_Name	Blight
+PERK_Voidwarden_06_Name	Hex
+PERK_Voidwarden_07_Name	Cold Void
+PERK_Voidwarden_08_Name	Dark Void
+PERK_Voidwarden_09_Name	Focused Will
+PERK_Voidwarden_10_Name	Unfazed
+PERK_Voidwarden_10_Desc	Ignore negative scenario effects
+PERK_Voidwarden_11_Name	Grave Defense
+PERK_Voidwarden_11_Desc	Whenever you rest, you may <sprite name=ConsumeIce> or <sprite name=ConsumeDark> to give <sprite name=Ward> to one ally who has <sprite name=Poison>
+Voidwarden_MASTERY_1_Name	Puppet Master
+Voidwarden_MASTERY_1_Desc	Cause enemies to suffer <sprite name=Damage> 20 or more in a single turn with granted or commanded attacks
+Voidwarden_MASTERY_2_Name	Touched by the Void
+Voidwarden_MASTERY_2_Desc	Give at least one ally or enemy <sprite name=Poison>, <sprite name=Strengthen>, <sprite name=Bless>, or <sprite name=Ward> each round
+Event_GH.Voidwarden_Text	The Voidwarden has been filling a jar with black sand. A pinch at a time, after every scenario, from wherever the Void touched the world through her and left its coarse, dark residue behind. The jar is nearly full. "That is the measure of it," she says, turning it in the light. "Everything I ever made disappear. It does not look like much."\nShe is going to the Capital, to the archives, to write down what she knows. "No one who touches the Void lives long enough to teach the next one. I intend to be the exception." She says it without drama; the scars down her left side say the rest.\nShe leaves the jar with the Alchemist, with a label in her small, exact hand: DO NOT OPEN. The Alchemist, who has opened everything else anyone ever left her, puts it on the highest shelf and does not touch it.\nThe morning the caravan goes, the sick in the Infirmary are quieter than usual, and the healers find every one of them a little better than the day before. Nobody saw her go in.
+Event_GH.Voidwarden_Name	Voidwarden Retires
+Voidwarden_FullName	Voidwarden
+CODEX_Hero_Voidwarden_Title	Voidwarden
+Voidwarden_DESCRIPTION	The Void is a dangerous and terrible place. Anything that enters it dissolves into a coarse, black sand without explanation or remorse. After a near-death experience with the Void as a child which scarred the left side of their body, the Voidwarden made it their duty to protect others from a similar fate. Being touched by the Void has left more than just physical scars however. They can channel the power behind the Void to manipulate the thoughts and actions of both allies and foes. The Voidwarden can also offer powerful boons of healing and stamina, but those gifts comes at a terrible price.
+CODEX_HeroInfo_Voidwarden	<b>Role:</b> Crowd Control\n<b>Difficulty:</b> High\n\nYou rarely attack yourself. Instead you take control of enemies, making them move or attack their own allies for an action, and you command your allies to <sprite name=Attack> or <sprite name=Move> on your turn.\n\nYour power has a price. Many of your heals and blessings also <sprite name=Poison> the ally you help, and some cards <sprite name=Curse> you unless you spend <sprite name=CreateDark>. Plan who you heal and when.\n\nYou create <sprite name=CreateDark> and <sprite name=CreateIce>; Ice makes your heals stronger. Your own few attacks pile on several conditions at once.\n\n<b>Strengths:</b>\n• Large starting hand size\n• Works better in larger parties\n• Wide array of bottom half abilities\n\n<b>Weaknesses:</b>\n• Generally slow character\n• Reasonably squishy\n• Complicated skincare regime
+PERK_Demolitionist_01_Name	Steady Fuse
+PERK_Demolitionist_02_Name	Trimmed Deck
+PERK_Demolitionist_03_Name	Toxic Fumes
+PERK_Demolitionist_04_Name	Concussion
+PERK_Demolitionist_05_Name	Bigger Blast
+PERK_Demolitionist_06_Name	Incendiary
+PERK_Demolitionist_07_Name	Seismic
+PERK_Demolitionist_08_Name	Shrapnel
+PERK_Demolitionist_09_Name	Hardened
+PERK_Demolitionist_10_Name	Remodeling
+Demolitionist_MASTERY_1_Name	Heavy Hitter
+Demolitionist_MASTERY_1_Desc	Deal <sprite name=Damage> 10 or more with each of three different attack actions
+Demolitionist_MASTERY_2_Name	Clean Sweep
+Demolitionist_MASTERY_2_Desc	Destroy at least six obstacles. End the scenario with no obstacles on the map other than ones placed by allies
+Event_GH.Demolitionist_Text	The explosion wakes the whole outpost an hour before dawn. By the time you reach the harbor the Demolitionist is standing on the ice, or what is left of it, surrounded by delighted fishermen. The channel that has been frozen shut since midwinter is open water.\n"You said the boats could not get out," she says, as if that settled it. The rocket boots are smoking gently. The mech suit stands on the quay behind her like a patient dog.\nThe foreman from the mine has been watching from the harbor wall. He has a seam that will not open and a crew that is tired of picks, and he offers her the job before the ice has stopped moving. She considers it for as long as it takes to reload. "Things that need breaking," she says. "I can do that."\nShe takes the suit up the mountain road the next day, the fists folded, the whole contraption leaving prints like a bear in the snow. Twice a week, for years afterwards, a dull thump rolls down from the mine, and the whole of Frosthaven looks up and smiles.
+Event_GH.Demolitionist_Name	Demolitionist Retires
+Demolitionist_FullName	Demolitionist
+CODEX_Hero_Demolitionist_Title	Demolitionist
+Demolitionist_DESCRIPTION	Even when augmenting themselves with machines of their own creation to destroy anything that stands in their path, Quatryls will still do it with charm and flair. Though they may be small, Demolitionists don't let that hold them back in the least. Between their rocket boots, multitude of bombs, and giant piston fists, they are a force to be reckoned with. Sometimes the only path forward is the one they create themselves. In such cases, it is best to get out of their way.
+CODEX_HeroInfo_Demolitionist	<b>Role:</b> Melee Damage \n<b>Difficulty:</b> Medium\n\nWalls and obstacles are your playground. Many of your cards destroy obstacles, and each destruction pays off with damage, <sprite name=Strengthen>, <sprite name=Bless> or <sprite name=Shield>. Enemies standing next to a wall also take extra damage from several of your attacks.\n\nAt level 5 you gain the <b>Mech Suit</b>, a lasting transformation: you change shape, gain extra health and a shield, and recover cards.\n\n<sprite name=CreateFire> and <sprite name=CreateEarth> add damage, <sprite name=Muddle>, <sprite name=Poison> and pushes. Your attacks are mostly up close, and some can <sprite name=Stun>.\n\n<b>Strengths:</b>\n• Many Direct Damage abilities to smash through Shields\n• Access to Abilities with STUN\n• Great at affecting the combat area\n\n<b>Weaknesses:</b>\n• Small deck size\n• Limited healing options\n• Their gloves aren't the most practical everyday attire
 Event__Text	Their personal quest complete, the mercenary leaves Frosthaven for good. Someone else will take up the fight.
 GiveSupplyCard	Give Medical Pack

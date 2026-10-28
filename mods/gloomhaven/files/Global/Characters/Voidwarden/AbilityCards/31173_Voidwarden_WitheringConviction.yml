@@ -1,0 +1,84 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WitheringConviction$
+Character: VoidwardenID
+ID: 31173
+Level: 6
+Initiative: 44
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyDamage:
+                            Damage: 2
+                            Filter: Self
+                            AutoTrigger: True
+                            SubAbilities:
+                                TAllyDamageSubAttack:
+                                    Attack: 6
+                                    Range: 3
+                                    Filter: Enemy
+                                    StrengthIsBase: True
+                                    RangeIsBase: True
+                                    TargetIsBase: True
+                                    TreatAsNonSubAbility: True
+                                    AnimOverload: RangedAttack
+                Range: 2
+                Target: 2
+                Filter: Ally
+                AnimOverload: ControlAlly
+                HelpBoxTooltipLocKey: GUI_WitheringConviction_TOP_TOOLTIP
+        XP: 2
+    Bottom:
+        Abilities:
+            BCurse1:
+                Curse: True
+                Filter: Self
+            BCurse2:
+                Curse:
+                    DiamondEnhancements: 1
+                Range: 4
+                Target: 2 
+                Filter: Enemy
+                AnimOverload: TargetedDebuff
+        Consumes:
+            BCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    BCCurseNullInstead:
+                        ParentName: BCurse1
+                        Null: True
+                        AllowContinueForNullAbility: True
+Layout:
+    Top:
+        - Row: "$JOTL_173_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> 6"
+            - Column:
+                - AddedEffect: "<sprite name=Range>3"
+            - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Curse>"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+        - Consume:
+            Name: BCDark
+            Text: "$JOTL_173_B$"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Curse> @BCurse2@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BCurse2.Range*</mark>"
+                - Row: "<mark=#80919922><size=100%><sprite name=Target>*BCurse2.Target*</mark>"
+            - Column:

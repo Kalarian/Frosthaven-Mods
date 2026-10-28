@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FancyHat$
+Character: HatchetID
+ID: 31022
+Level: X
+Initiative: 12
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move: 3
+            TShield:
+                Shield:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+        Infuse: Dark
+        XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Move> *TMove*"
+        - Divider:
+        - Active:
+            Ability: TShield
+            ListLayout: "<b><size=130%><sprite name=Shield> *TShield*"
+            Layout: "<b><size=130%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+            Icon: Positive_Shield
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,20,20,20"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:
+            - Column:
+                - Duration: Round
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$JOTL_022_B$"
+            Layout: "$JOTL_022_B$"
+            Icon: Positive_AttackPlus

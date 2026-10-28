@@ -28,6 +28,7 @@ INDENT = 4
 
 # active-bonus icon names: Gloomhaven's -> the Frosthaven icon its own cards use for the same effect
 ICONS = {
+    "Flying": "AA_Flying",   # Winged Congregation: gain flying (white box until 2026-10-28)
     "Shield": "Positive_Shield",
     "Retaliate": "Positive_Retaliate",
     "Immune": "Positive_DamagePrevent",

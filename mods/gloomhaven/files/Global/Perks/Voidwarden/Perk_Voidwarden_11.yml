@@ -1,0 +1,24 @@
+Parser: Perk
+ID: Voidwarden11
+Name: PERK_Voidwarden_11_Name
+Description: PERK_Voidwarden_11_Desc
+CharacterID: VoidwardenID
+Available: 1
+Flags: [Passive, ExecuteAbilitiesAfterShortRest, ExecuteAbilitiesAfterLongRest]
+Abilities:
+    BConsume:
+        Consume:
+            Elements: [Ice, Dark]
+            ShowElementPicker: True
+            Abilities:
+                CWard:
+                    Ward: True
+                    Filter:
+                        TargetType: Ally
+                        TargetHasNegativeConditions: [Poison]
+                    Range: 99
+                    Target: 1
+                    Targeting: Range
+                    AnimOverload: PowerUp
+        CanSkip: True
+        CanUndo: False

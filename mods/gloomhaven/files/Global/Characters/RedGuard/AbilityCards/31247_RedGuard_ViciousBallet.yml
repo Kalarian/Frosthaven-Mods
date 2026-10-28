@@ -1,0 +1,96 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ViciousBallet$
+Character: RedGuardID
+ID: 31247
+Level: 7
+Initiative: 28
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                AnimOverload: AltAttack
+            TNull1:
+                Null: True
+            TNull2:
+                Null: True
+        Consumes:
+            TCFire:
+                Elements: Fire
+                Abilities:
+                    TCFireAlly:
+                        ParentName: TNull1
+                        ControlActor:
+                            Abilities:
+                                TCFireAllyAttack:
+                                    Attack: 3
+                                    StrengthIsBase: True
+                                    RangeIsBase: True
+                                    TargetIsBase: True
+                        Range: 1
+                        Filter: Ally
+                        AnimOverload: CommandAlly
+                        HelpBoxTooltipLocKey: GUI_ViciousBallet_Tooltip
+                XP: 1
+            TCLight:
+                Elements: Light
+                Abilities:
+                    TCLightAlly:
+                        ParentName: TNull2
+                        ControlActor:
+                            Abilities:
+                                TCLightAllyAttack:
+                                    Attack: 3
+                                    StrengthIsBase: True
+                                    RangeIsBase: True
+                                    TargetIsBase: True
+                        Range: 1
+                        Filter: Ally
+                        IgnorePreviousAbilityTargets: TCFireAlly
+                        AnimOverload: CommandAlly
+                        HelpBoxTooltipLocKey: GUI_ViciousBallet_Tooltip
+                XP: 1
+    Bottom:
+        Abilities:
+            BDamage1:
+                Damage: 1
+                Filter: Enemy
+                AnimOverload: TargetedDebuffQuick
+            BMove1:
+                Move: 2
+            BDamage2:
+                Damage: 1
+                Filter: Enemy
+                AnimOverload: TargetedDebuffQuick
+            BMove2:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BDamage3:
+                Damage: 1
+                Filter: Enemy
+                AnimOverload: TargetedDebuffQuick
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: TCFire
+            Text: "$JOTL_247_T_1$"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: TCLight
+            Text: "$JOTL_247_T_2$"
+    Bottom:
+        - Row: "$JOTL_247_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Move> *BMove1*"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_247_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Move> *BMove2* <size=100%><voffset=1>@BMove2@"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_247_B$"

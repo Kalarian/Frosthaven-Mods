@@ -1,0 +1,43 @@
+Parser: HeroSummon
+ID: WardID
+LocKey: $Ward$
+Model: Ward
+Health: 1
+Move: 0
+Attack: 0
+Range: 0
+Untargetable: True
+Invulnerable: True
+DoesNotBlock: True
+OnSummonAbilities:
+    APoisonAura:
+        AddActiveBonus:
+            Poison: True
+            UseOriginalActor: true
+            Filter: Self
+            SkipAnim: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringActionAbilityOnMoved
+            IsAura: True
+            AuraTargeting: Range
+            AuraFilter: Enemy
+            OriginalTargetType: true
+            Target: 1
+            ListLayoutOverride: [$SummonAbility_WardPoison$, Icon_Poison]
+        Range: 1
+        Target: -1
+        Filter: Self
+    ADisadvantageAura:
+        Attack: 0
+        AttackHasDisadvantage: True
+        Range: 3
+        Target: -1
+        ActiveBonus:
+            Behaviour: BuffAttack
+            Duration: Persistent
+            IsAura: True
+            AuraFilter: [Enemy]
+            ListLayoutOverride: [$SummonAbility_WardDisadvantage$, Disadvantage]
+        Filter: Self
+        AnimOverload: None

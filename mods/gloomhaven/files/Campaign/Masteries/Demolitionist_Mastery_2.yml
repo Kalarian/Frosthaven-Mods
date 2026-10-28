@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Demolitionist_MASTERY_2
+LocalisedName: Demolitionist_MASTERY_2_Name
+LocalisedDescription: Demolitionist_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: obstacles the Demolitionist destroyed (Value), and at the end no obstacle left that an ally did not place
+# (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ObstaclesDestroyed]
+        CharacterIDs:
+            ActorID: DemolitionistID
+        Value: 6

@@ -1,0 +1,80 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SpiritHunger$
+Character: VoidwardenID
+ID: 31176
+Level: 7
+Initiative: 68
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack: 
+                                Amount: 5 
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                            SubAbilities:
+                                TAllyAttackSubHeal:
+                                    Heal: 0
+                                    Filter: [Self]
+                                    StatIsBasedOnX:
+                                        Strength:
+                                            BasedOn: DamageInflictedByParentOnLastTarget
+                Range: 2
+                Filter: Ally
+                AnimOverload: ControlAlly
+            # TODO: Controlled actor Heal X, where X is damage 
+            # suffered by target of prior attack
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4 
+            BHeal:
+                Heal: 2 
+                Range: 2
+                Filter: [Self, Ally]
+                AnimOverload: TargetedHeal
+        Consumes:
+            BCIce:
+                Elements: Ice 
+                AbilityOverrides:
+                    BCIceBuff:
+                        ParentName: BHeal
+                        Strength: 1
+                        Range: 1
+Layout:
+    Top:
+        - Row: "$JOTL_176_T_1$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack* @TAllyAttack@"
+        - Row: "<size=20%> "
+        - Row: "$JOTL_176_T_2$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,60,20"
+            - Column:
+            - Column:
+                - Row: "<b><size=130%><sprite name=Heal> X"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$JOTL_176_T_3$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal*"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCIce
+            Text: "<nobr>+1 <sprite name=Heal></nobr>, <nobr>+1 <sprite name=Range></nobr>"

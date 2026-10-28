@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TwirlingStabs$
+Character: RedGuardID
+ID: 31229
+Level: 1
+Initiative: 38
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack: 
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Target: -1
+                MultiPassAttack: False
+                AnimOverload: Attack_AOE_Radial
+        Consumes:
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightBuff:
+                        ParentName: TAttack
+                        Strength: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 2
+        Consumes:
+            BCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCLightBuff:
+                        ParentName: BAttack
+                        Condition: Wound
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCLight
+            Text: "<nobr>+1 <sprite name=Attack></nobr>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCFire
+            Text: "<nobr><sprite name=Wound></nobr>, <sprite name=XP1>"

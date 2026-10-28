@@ -1,0 +1,57 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CloseToTheAbyss$
+Character: VoidwardenID
+ID: 31152
+Level: 1
+Initiative: 72
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal: 2
+                AdditionalHealData:
+                    ConditionsToAddIfHealRemovesPoison: Bless
+                    ApplyConditionsOnRemovingPoisonFilter:
+                        Filter1: Ally
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1 
+                Filter: [Self, Ally]
+                # TODO: ApplyIfPoisonRemoved: Bless
+                AnimOverload: TargetedHeal
+    Bottom:
+        Abilities:
+            BControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Move: 1
+                            StrengthIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 3
+                Target: -1
+                Filter: Enemy
+                AnimOverload: RadialNegative
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<sprite name=Range>*THeal.Range* @THeal.Range@"
+                - Row: "<sprite name=Target>*THeal.Target* @THeal.Target@"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$JOTL_152_T$"
+    Bottom:
+        - Row: "$JOTL_152_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Move> 1"
+        - Row: "<size=20%> "
+        - Row: "$With_YouControllingActions$"

@@ -1,0 +1,78 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FreezeTheSoul$
+Character: VoidwardenID
+ID: 31155
+Level: 1
+Initiative: 58
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Conditions: Poison
+                AnimOverload: Attack Powered
+        Consumes:
+            TCFire:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Muddle
+                XP: 1
+    Bottom:
+        Abilities:
+            BStun:
+                Stun: True
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: Enemy
+                AnimOverload: TargetedDebuff
+            BCurse:
+                Curse: True
+                Filter: Self
+        Consumes:
+            BCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    BCCurseNullInstead:
+                        ParentName: BCurse
+                        Null: True
+                        AllowContinueForNullAbility: True
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Poison></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFire
+            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Muddle></nobr>, <sprite name=XP1>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Stun>"
+            - Column:
+                - Row: "<sprite name=Range>*BStun.Range* @BStun.Range@"
+            - Column:
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Curse>"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCDark
+            Text: "$JOTL_155_B$"

@@ -1,0 +1,8 @@
+Parser: CampaignSection
+ID: GH.Voidwarden
+Name: Voidwarden Retires
+SkipNarration: True
+SkipCompletedNotification: False
+Effects:
+    - Type: AddProsperity
+      Param1: 1

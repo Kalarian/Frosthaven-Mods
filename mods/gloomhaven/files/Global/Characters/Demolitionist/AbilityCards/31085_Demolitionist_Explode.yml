@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Explode$
+Character: DemolitionistID
+ID: 31085
+Level: 1
+Initiative: 28
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TDestroyObstacleDamage:
+                DestroyObstacle: True
+                Range: 1
+                Target: 1
+                SpawnDelay: 2.16
+                AbilityXP: 2
+                AnimOverload: DestroyObstacleRadial
+                SubAbilities:
+                    TAttackSubDamage:
+                        Damage: 2
+                        Condition: Stun
+                        Range: 1
+                        Target: -1
+                        Filter: [Enemy]
+                        AllTargetsAdjacentToParentTargets: True
+    Bottom:
+        Abilities:
+            BMove: 
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+        Consumes:
+            BCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    BCFireBuff:
+                        ParentName: BMove
+                        Strength: 2
+Layout:
+    Top:
+        - Row: "$JOTL_085_T_1$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Stun>"
+        - Row: "$JOTL_085_T_2$"
+        - Row: "<size=20%> "
+        - Row: "$JOTL_085_T_3$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCFire
+            Text: "<nobr>+2 <sprite name=Move></nobr>"

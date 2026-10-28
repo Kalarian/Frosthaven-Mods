@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WholesaleDestruction$
+Character: DemolitionistID
+ID: 31109
+Level: 9
+Initiative: 34
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack1:
+                Attack: 2
+                AnimOverload: QuickAttack
+            TAttack2:
+                Attack: 2
+                AnimOverload: QuickAttack
+            TMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            TAttack3:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                AnimOverload: QuickAttack
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireBuff:
+                        ParentName: TAttack3
+                        Strength: 1
+                        Condition: Wound
+                XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    DestroyObstacle: 0
+                ActiveBonus:
+                    Behaviour: OverrideAbility
+                    Duration: Persistent
+                    ValidAbilityType: DestroyObstacle
+                    ActiveBonusAbilityOverrides:
+                        BCTypeOverride:
+                            DestroyObstacleData:
+                                CanTargetEmptyHexes: True
+                AnimOverload: PowerUp
+        XP: 2
+Layout:
+    Top:
+        - Row: "<size=0%> "
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack1*"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack2*"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack3* <size=100%><voffset=1>@TAttack3@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFire
+            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Wound></nobr>"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$JOTL_109_B$"
+            Layout: "$JOTL_109_B$"
+            Icon: Positive_AttackPlus

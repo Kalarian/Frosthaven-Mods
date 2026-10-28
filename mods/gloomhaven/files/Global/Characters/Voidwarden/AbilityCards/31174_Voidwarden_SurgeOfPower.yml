@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SurgeOfPower$
+Character: VoidwardenID
+ID: 31174
+Level: 6
+Initiative: 81
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal: 0
+                Range: 3
+                Filter: Ally
+                Condition: Muddle
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: TargetDamageTaken
+                AnimOverload: TargetedHeal
+        Infuse: Dark
+        XP: 2
+    Bottom:
+        Abilities:
+            BActive:
+                AddCondition: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    ValidConditions: Poison
+                    Behaviour: ApplyConditionOnLoseCondition
+                    #Filter: [Self, Ally]
+                    IsAura: True
+                    AuraFilter: [Self, Ally]
+                    AuraTargeting: All
+                    AbilityData:
+                        Null: True
+                        Conditions: Strengthen
+                AnimOverload: PowerUp
+        XP: 2
+Layout:
+    Top:
+        - Row: "$JOTL_174_T$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$JOTL_174_B$"
+            Layout: "$JOTL_174_B$"
+            Icon: Icon_Poison

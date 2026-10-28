@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Voidwarden05
+Name: PERK_Voidwarden_05_Name
+Description: PERK_Voidwarden_05_Desc
+CharacterID: VoidwardenID
+Available: 1
+CardsToRemove: [AMC_Basic_P0]
+CardsToAdd: [AMC_Poison_P1]

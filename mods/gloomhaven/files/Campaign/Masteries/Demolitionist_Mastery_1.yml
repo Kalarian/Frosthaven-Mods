@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Demolitionist_MASTERY_1
+LocalisedName: Demolitionist_MASTERY_1_Name
+LocalisedDescription: Demolitionist_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAG: attack actions (a card half) whose total damage reached Amount, counted by distinct card half; Value =
+# different actions needed (GHMasteries.cs)
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AttackActionsWithDamage]
+        CharacterIDs:
+            ActorID: DemolitionistID
+        Value: 3
+        Amount: 10

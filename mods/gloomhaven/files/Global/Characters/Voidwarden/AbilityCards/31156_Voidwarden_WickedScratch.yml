@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WickedScratch$
+Character: VoidwardenID
+ID: 31156
+Level: 1
+Initiative: 68
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack:
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                Range: 2
+                Filter: Ally
+                AnimOverload: ControlAlly
+        Infuse: Dark
+        XP: 1
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+            BStrengthen:
+                Strengthen: True
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: TargetedBuff
+Layout:
+    Top:
+        - Row: "$JOTL_156_T$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack* @TAllyAttack@"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,30,30"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Strengthen>"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BStrengthen.Range*</mark>"
+            - Column:

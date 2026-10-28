@@ -1,0 +1,59 @@
+Parser: HeroSummon
+ID: SandDevilID
+LocKey: $SandDevil$
+Model: SandDevil
+Health: 1
+Move: 2
+Attack: 0
+Range: 0
+Untargetable: True
+Invulnerable: True
+PlayerControlled: True
+IgnoreActorCollision: True
+DoesNotBlock: True
+TreatAsTrap: True
+OnSummonAbilities:
+    AApplyMuddleAura:
+        AddActiveBonus:
+            Muddle: True
+            IgnoreStun: true
+            Filter: Self
+            SkipAnim: True
+            AutoTrigger: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringActionAbilityOnMovedIntoCasterHex
+            Hidden: True
+            IsAura: True
+            AuraTargeting: All
+            AuraFilter:
+                TargetType: ["Self", "Enemy", "Ally"]
+    AApplyDamage:
+        AddActiveBonus:
+            Damage: 1
+            IgnoreStun: true
+            Filter: Self
+            AutoTrigger: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringActionAbilityOnMovedIntoCasterHex
+            Hidden: True
+            IsAura: True
+            AuraTargeting: All
+            AuraFilter:
+                TargetType: ["Self", "Enemy", "Ally"]
+    AOverrideMove:
+        HelpBoxTooltipLocKey: GUI_SandDevil_OverrideMove_TOOLTIP
+        Text: $GUI_ACTIVE_BONUS_SandDevil_ForceMove_TOOLTIP$
+        AddActiveBonus:
+            Move: 0
+            Filter: Self
+        ActiveBonus:
+            Behaviour: OverrideAbility
+            Duration: Persistent
+            ValidAbilityType: Move
+            Hidden: True
+            IsToggleBonus: True
+            ActiveBonusAbilityOverrides:
+                MoveOverride:
+                    CarryOtherActorsOnHex: True

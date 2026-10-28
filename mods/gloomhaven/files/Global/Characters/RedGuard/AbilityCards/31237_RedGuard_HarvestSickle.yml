@@ -1,0 +1,47 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HarvestSickle$
+Character: RedGuardID
+ID: 31237
+Level: 2
+Initiative: 52
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range: 2
+                AnimOverload: AltRangedAttack
+        Infuse: [Earth, Light]
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 5
+            BLoot:
+                Loot: 0
+                Target: -1
+                AllTargetsOnMovePath: True
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Earth
+            - Column:
+                - Infuse: Light
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=20%> "
+        - Row: "$JOTL_237_B$"

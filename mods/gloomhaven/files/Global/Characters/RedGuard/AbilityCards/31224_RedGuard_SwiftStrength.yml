@@ -1,0 +1,60 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SwiftStrength$
+Character: RedGuardID
+ID: 31224
+Level: 1
+Initiative: 16
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 2
+                Target: 2
+                SubAbilities:
+                    TAttackSubPull:
+                        Pull: 1
+                        IsInlineSubAbility: True
+                        AnimOverload: TargetedPull
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    Jump: True
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - Row: "<mark=#80919922><size=100%><sprite name=Target>*TAttack.Target*</mark>"
+                - Row: "<mark=#80919922><size=100%><sprite name=Pull>*TAttackSubPull*</mark>"
+            - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Move> *BMove*"
+            - Column:
+                - AddedEffect: "<sprite name=Jump>"
+            - Column:
+        - Divider:
+        - Active:
+            Ability: BShield
+            ListLayout: "<b><size=130%><sprite name=Shield> *BShield*"
+            Layout: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+            Icon: Positive_Shield

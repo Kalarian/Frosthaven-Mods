@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RepeatShot$
+Character: HatchetID
+ID: 31023
+Level: 2
+Initiative: 31
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                Range: 3
+                ConditionalOverrides:
+                        TAttackFavoriteCO:
+                            Filter:
+                                TargetType: Enemy
+                                TargetHasCharacterResource: ["TheFavorite"]
+                            XP: 1
+                            AbilityOverrides:
+                                TAdjAllyBuff:
+                                    Strength: 2
+                        TAttackNewFavoriteCO:
+                            Filter:
+                                TargetType: Enemy
+                                TargetHasCharacterResource: ["TheNewFavorite"]
+                            XP: 1
+                            AbilityOverrides:
+                                TAdjAllyBuff:
+                                    Strength: 2
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: HeavyRangedAttack
+        Infuse: Air
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$JOTL_023_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*BAttack.Range* @BAttack.Range@"
+            - Column:
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:

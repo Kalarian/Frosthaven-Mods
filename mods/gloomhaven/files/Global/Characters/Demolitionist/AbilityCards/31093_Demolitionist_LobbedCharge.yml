@@ -1,0 +1,60 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LobbedCharge$
+Character: DemolitionistID
+ID: 31093
+Level: X
+Initiative: 52
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TTrap:
+                Trap:
+                    TrapName: BombTrap
+                    Damage: 3
+                    Conditions: Muddle
+                SpawnDelay: 1.85
+                Range: 3
+                Target: 1
+                AnimOverload: RangedTrap
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BAttack:
+                Attack: 0
+                AnimOverload: QuickAttack
+                Filter:
+                    TargetType: Enemy
+                    CasterPreviousMovementEachHexCloserToTarget: True
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: HexesMovedThisTurn
+                SubAbilities:
+                    BAttackSubPush:
+                        Push: 2
+                        IsInlineSubAbility: True
+        XP: 1
+Layout:
+    Top:
+        - Row: "$JOTL_093_T$"
+        - Row: "<size=50%> "
+        - Infuse: Fire
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_093_B_1$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20, 40, 20, 40"
+            - Column:
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> X"
+                - Row: "<sprite name=Push> *BAttackSubPush*"
+            - Column:
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$JOTL_093_B_2$"

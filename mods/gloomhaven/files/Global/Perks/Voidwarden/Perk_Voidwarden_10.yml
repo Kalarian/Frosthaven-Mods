@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Voidwarden10
+Name: PERK_Voidwarden_10_Name
+Description: PERK_Voidwarden_10_Desc
+CharacterID: VoidwardenID
+Available: 1
+Flags: [Passive, IgnoreNegativeScenarioEffects]

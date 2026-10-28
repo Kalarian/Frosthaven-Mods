@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Demolitionist03
+Name: PERK_Demolitionist_03_Name
+Description: PERK_Demolitionist_03_Desc
+CharacterID: DemolitionistID
+Available: 1
+CardsToRemove: [AMC_Basic_M2]
+CardsToAdd: [AMC_Poison_P0]

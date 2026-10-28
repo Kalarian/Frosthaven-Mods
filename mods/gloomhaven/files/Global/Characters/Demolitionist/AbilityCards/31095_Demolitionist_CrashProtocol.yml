@@ -1,0 +1,70 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CrashProtocol$
+Character: DemolitionistID
+ID: 31095
+Level: 2
+Initiative: 74
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 2
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    Filter:
+                        TargetType: Enemy
+                        TargetAdjacentToWalls: "> 0"
+                    XPTracker: [0,1,0,1]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+                    Jump: True
+                    IgnoreBlockedTileMoveCost: True
+                SubAbilities:
+                    BDestroyObstacle:
+                        DestroyObstacle:
+                        CanSkip: false
+                        Target: -1
+                        AllTargetsOnMovePath: True
+                        SpawnDelay: 0.2
+                        SkipAnim: True
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                Abilities:
+                    BCEarthDamage:
+                        ParentName: BMove
+                        Damage: 1
+                        Target: -1
+                        AllTargetsOnMovePath: True
+                        AutoTrigger: True
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$JOTL_095_T$"
+            Layout: "$JOTL_095_T$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=20%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Move> *BMove* <voffset=1>@BMove@"
+            - Column:
+                - AddedEffect: "<sprite name=Jump>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$JOTL_095_B_1$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCEarth
+            Text: "$JOTL_095_B_2$"

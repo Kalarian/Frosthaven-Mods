@@ -38,7 +38,7 @@ Abilities:
             XPTracker: [0]
             IsToggleBonus: True
             Hidden: True
-            ListLayoutOverride: [$PERK_Plagueherald_10_Desc$, Icon_Poison]
+            ListLayoutOverride: [$PERK_Plagueherald_10_Desc$, Positive_Poison_Attack]
             MiscVars:
-                OverrideIcon: "'Poison'"
+                OverrideIcon: "'Positive_Poison_Attack'"
         AnimOverload: PowerUp

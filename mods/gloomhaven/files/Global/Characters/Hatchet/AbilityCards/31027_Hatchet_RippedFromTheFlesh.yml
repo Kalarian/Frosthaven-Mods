@@ -1,0 +1,65 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RippedFromTheFlesh$
+Character: HatchetID
+ID: 31027
+Level: 4
+Initiative: 20
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+            TDamage:
+                Damage: 2
+                Condition: Wound
+                HelpBoxTooltipLocKey: GUI_RippedFromTheFlesh_ReturnTheFavorite_TOOLTIP
+                ResourcesToTakeFromTargets:
+                    - ["TheFavorite", 1]
+                    - ["TheNewFavorite", 1]
+                FilterContainer:
+                    Filter1:
+                        TargetType: Enemy
+                        TargetHasCharacterResource: "TheFavorite"
+                    Filter2:
+                        TargetType: Enemy
+                        TargetHasCharacterResource: "TheNewFavorite"
+                AnimOverload: RadialNegative
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range: 2
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+                ConditionalOverrides:
+                        BHealCO:
+                            Self: True
+                            Requirement:
+                                ActorsKilledThisRound: "> 0"
+                            XP: 1
+                            AbilityOverrides:
+                                BBuff:
+                                    Condition: Strengthen
+        Infuse: Air
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
+        - Row: "<size=50%> "
+        - Row: "$JOTL_027_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$JOTL_027_B$"
+        - Row: "<size=50%> "
+        - Infuse: Air

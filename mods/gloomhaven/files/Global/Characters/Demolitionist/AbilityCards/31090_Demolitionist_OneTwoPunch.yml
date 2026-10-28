@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_OneTwoPunch$
+Character: DemolitionistID
+ID: 31090
+Level: 1
+Initiative: 66
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack1:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                AnimOverload: QuickAttack
+            TAttack2:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                ConditionalOverrides:
+                        TAttackFavoriteCO:
+                            Filter:
+                                TargetType: Enemy
+                                TargetTargetedByCasterPreviousAbility: True
+                                SpecificAbilityNames: "TAttack1"
+                            XP: 1
+                            AbilityOverrides:
+                                TSameTargetBuff:
+                                    Condition: Muddle
+                                    SubAbilities:
+                                        TCOSubPush:
+                                            Push: 2
+                                            IsInlineSubAbility: True
+                AnimOverload: QuickAttack
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 1
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+        - Row: "$JOTL_090_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack*"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"

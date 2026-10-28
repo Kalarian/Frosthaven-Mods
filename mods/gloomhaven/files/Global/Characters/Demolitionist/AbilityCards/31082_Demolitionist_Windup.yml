@@ -1,0 +1,44 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Windup$
+Character: DemolitionistID
+ID: 31082
+Level: 1
+Initiative: 77
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 2
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    XPTracker: [0,1]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BActive:
+                Move: 2
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffMove
+                    XPTracker: [0]
+                    StrengthIsScalar: True
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$JOTL_082_T$"
+            Layout: "$JOTL_082_T$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=20%> "
+        - XPTracker: TActive
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$JOTL_082_B$"
+            Layout: "$JOTL_082_B$"
+            Icon: Move

@@ -1,0 +1,57 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ResignedFrenzy$
+Character: VoidwardenID
+ID: 31162
+Level: X
+Initiative: 26
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Attack:
+                                Amount: 2
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 3
+                Target: -1
+                Filter: Enemy
+                AnimOverload: RadialNegative
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+        Consumes:
+            BCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    BCDarkMoveDebuff:
+                        ParentName: BMove
+                        Strength: -1
+                Abilities:
+                    BCDarkAttack:
+                        Attack: 2
+                        Filter: Enemy
+                XP: 1
+Layout:
+    Top:
+        - Row: "$JOTL_162_T_1$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *EnemyWillDoThis* @EnemyWillDoThis@"
+        - Row: "$JOTL_162_T_2$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCDark
+            Text:
+                - Row: "<nobr>-1 <sprite name=Move></nobr>, <sprite name=XP1>"
+                - Row: "<size=20%> "
+                - Row: "<nobr><b><size=130%><sprite name=Attack> 2</nobr>"

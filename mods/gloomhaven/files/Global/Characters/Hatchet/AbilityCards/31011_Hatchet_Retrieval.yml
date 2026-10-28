@@ -1,0 +1,34 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Retrieval$
+Character: HatchetID
+ID: 31011
+Level: 1
+Initiative: 46
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                ResourcesToTakeFromTargets:
+                    - ["TheFavorite", 1]
+                    - ["TheNewFavorite", 1]
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 1
+            BLoot:
+                Loot: 1
+                Target: -1 
+                AnimOverload: Loot
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$JOTL_011_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
