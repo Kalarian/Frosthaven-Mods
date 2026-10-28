@@ -604,7 +604,24 @@ namespace FrosthavenMods
                 set.Textures = new Dictionary<string, Texture>(StringComparer.Ordinal);
                 foreach (Texture t in Resources.FindObjectsOfTypeAll<Texture>()) if (t != null && !set.Textures.ContainsKey(t.name)) set.Textures[t.name] = t;
             }
-            return set.Textures.TryGetValue(name, out Texture tex) ? tex : null;
+            if (set.Textures.TryGetValue(name, out Texture tex)) return tex;
+            // not loaded when the list was taken (the Cragheart's shaft noise, noise_01, lives in his rock bundles,
+            // loaded later for the same effect: the shaft stood static without it, 2026-10-27): the textures loaded
+            // now, then the loaded bundles; a texture still missing is reported once
+            foreach (Texture t in Resources.FindObjectsOfTypeAll<Texture>()) if (t != null && !set.Textures.ContainsKey(t.name)) set.Textures[t.name] = t;
+            if (set.Textures.TryGetValue(name, out tex)) return tex;
+            foreach (AssetBundle b in AssetBundle.GetAllLoadedAssetBundles())
+            {
+                try
+                {
+                    if (b == null || b.isStreamedSceneAssetBundle) continue;
+                    tex = b.LoadAsset<Texture>(name);
+                    if (tex != null) { set.Textures[name] = tex; return tex; }
+                }
+                catch (Exception) { }
+            }
+            if (Reported.Add("texture " + name)) Plugin.Log.LogWarning($"Gloomhaven effects: texture {name} not found; the material draws without it");
+            return null;
         }
 
         // ------------------------------------------------------------------ the carried scripts
