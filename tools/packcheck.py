@@ -104,6 +104,54 @@ def check_ability(path, where, props, problems, warnings):
             check_ability(path, f"{where}/{sub}", sp, problems, warnings)
 
 
+ID_LINE = re.compile(r'^\s*ID:\s*"?([A-Za-z0-9_.]+)"?\s*$', re.M)
+
+
+def _ids(folders):
+    """Every 'ID:' line (top level, or under a named entry of a multi-entry file) in the rule files of those folders."""
+    out = set()
+    for folder in folders:
+        for f in Path(folder).glob("**/*.yml"):
+            out.update(ID_LINE.findall(f.read_text(encoding="utf-8-sig", errors="replace")))
+    return out
+
+
+def references(pack, problems):
+    """Every piece of data the pack's files name must exist: in Frosthaven's own rules (extracted/Base), in the pack, or
+    in the mod's code. A name that resolves nowhere is found by the game only when the card is played (The Favorite,
+    2026-10-28: its resource was defined in a Gloomhaven file the port never carried; the first play crashed the rules
+    engine). Checked: character resources, hero summons, attack modifier cards a perk adds, and the mastery tags the
+    plugin must answer."""
+    base = ROOT / "extracted" / "Base" / "Global"
+    files = pack / "files"
+    resources = _ids([base / "Characters", files / "Global" / "Characters"])
+    summons = _ids([base / "HeroSummons", files / "Global" / "HeroSummons"])
+    modifiers = {p.stem for p in (base / "AttackModifiers").glob("*.yml")} | {p.stem for p in (files / "Global" / "AttackModifiers").glob("*.yml")}
+    plugin = "\n".join(p.read_text(encoding="utf-8", errors="replace") for p in (ROOT / "plugins" / "FrosthavenMods" / "src").glob("*.cs"))
+    resource_block = re.compile(r"^(\s*)(ResourcesToAddOnAbilityEnd|ResourcesToTakeFromTargets|ResourcesToGiveToTargets):\s*\r?\n((?:\1\s+-.*\r?\n?)+)", re.M)
+    for f in sorted(files.glob("**/*.yml")):
+        rel = f.relative_to(pack).as_posix()
+        text = f.read_text(encoding="utf-8-sig", errors="replace")
+        for blk in resource_block.finditer(text):
+            for rid in re.findall(r'\[\s*"?([A-Za-z0-9_]+)"?\s*,', blk.group(3)):
+                if rid not in resources:
+                    problems.append(f"{rel}: {blk.group(2)} names resource {rid!r}, which no CharacterResources file defines (the game throws when the card makes it)")
+        for lst in re.findall(r"TargetHasCharacterResource:\s*\[([^\]]*)\]", text):
+            for rid in re.findall(r'"?([A-Za-z0-9_]+)"?', lst):
+                if rid not in resources:
+                    problems.append(f"{rel}: a filter names resource {rid!r}, which no CharacterResources file defines")
+        for sid in re.findall(r"^\s*Summon:\s*([A-Za-z0-9_]+)\s*$", text, re.M):
+            if not ({sid, sid + "ID", sid.removesuffix("ID")} & summons):
+                problems.append(f"{rel}: summon {sid!r} has no HeroSummon definition in Frosthaven or the pack")
+        for lst in re.findall(r"CardsToAdd:\s*\[([^\]]*)\]", text):
+            for card in re.findall(r"[A-Za-z0-9_]+", lst):
+                if card not in modifiers:
+                    problems.append(f"{rel}: CardsToAdd names attack modifier {card!r}, which neither Frosthaven nor the pack defines")
+        for tag in set(re.findall(r"FrosthavenMods_[A-Za-z0-9_]+", text)):
+            if tag not in plugin:
+                problems.append(f"{rel}: mastery tag {tag} is answered nowhere in the plugin (the mastery could never complete)")
+
+
 def check_pack(pack):
     problems, warnings, n = [], [], 0
     for f in sorted((pack / "files" / "Global" / "Characters").glob("*/AbilityCards/*.yml")):
@@ -135,6 +183,7 @@ def check_pack(pack):
                     defs = list((pack / "files" / "Global" / "HeroSummons").glob("*.yml"))
                     if not any(re.search(rf"^ID:\s*{re.escape(sid)}(ID)?\s*$", d.read_text(encoding="utf-8-sig"), re.M) for d in defs):
                         problems.append(f"{rel}: {half}/{ab}: summon {sid} has no definition in files/Global/HeroSummons (its card cannot be drawn)")
+    references(pack, problems)
     # the effects' materials: a shader Frosthaven can't draw shows as a magenta block in game (tools/vfxcheck.py)
     if (pack / "pack.json").exists():
         import vfxcheck

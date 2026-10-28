@@ -75,6 +75,22 @@ def halves(path):
         yield half.lower(), feats
 
 
+def perk_features(path):
+    """A perk's shape: its flags and its abilities' features (Grave Defense, 2026-10-28: a perk shape the census never
+    read put the game on its error screen at start-up)."""
+    d = load_yaml(path.read_text(encoding="utf-8-sig"))
+    if not d or d.get("Parser") != "Perk":
+        return set()
+    feats = set()
+    flags = d.get("Flags")
+    for fl in (flags if isinstance(flags, list) else str(flags or "").strip("[]").split(",")):
+        if str(fl).strip():
+            feats.add(("perk flag", str(fl).strip()))
+    for props in (d.get("Abilities") or {}).values():
+        feats.update(features(props))
+    return feats
+
+
 def census(files):
     seen = collections.Counter()
     for p in files:
@@ -102,7 +118,23 @@ def main():
             new = sorted(f for f in feats if f not in fh)
             if new:
                 rows.append((cls, p.stem, half, new))
-    lines = [f"# Shapes no Frosthaven card has ({len(rows)} halves)", "",
+    fh_perks = collections.Counter()
+    for p in sorted((FH_CARDS.parent / "Perks").glob("*/*.yml")):
+        try:
+            fh_perks.update(perk_features(p))
+        except Exception:
+            continue
+    for p in sorted((a.files / "Global" / "Perks").glob("*/*.yml")):
+        cls = p.parent.name
+        if a.classes and cls not in a.classes:
+            continue
+        try:
+            new = sorted(f for f in perk_features(p) if f not in fh_perks and f not in fh)
+        except Exception as e:
+            new = [("unreadable", str(e)[:60])]
+        if new:
+            rows.append((cls, p.stem, "perk", new))
+    lines = [f"# Shapes no Frosthaven card or perk has ({len(rows)} halves and perks)", "",
              "Bench each alone before the full pass; a shape Frosthaven never runs is where Group 2's port bugs hid.", "",
              "| Class | Card | Half | New to Frosthaven |", "|---|---|---|---|"]
     for cls, card, half, new in rows:
