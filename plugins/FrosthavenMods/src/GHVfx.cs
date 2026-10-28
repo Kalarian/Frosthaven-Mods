@@ -401,6 +401,16 @@ namespace FrosthavenMods
                     m.SetTextureOffset(key, gh.GetTextureOffset(t.Key));
                 }
             }
+            // the Gloomhaven shaft shader multiplies its beam colour by _Intensity (4 on the Cragheart's shafts);
+            // Frosthaven's LightShaftShd, which draws them now, has no such property, so the dim beam colour
+            // (0.39, 0.39, 0.21) left the shaft invisible (the user's Sentient Growth screenshot, 2026-10-27):
+            // the intensity goes into the colour, alpha kept
+            if (spec.Shader == "CragHeartSummonShaftShd" && m.HasProperty("_BeamColor") && !m.HasProperty("_Intensity")
+                && spec.Floats.TryGetValue("_Intensity", out float intensity) && intensity > 0f)
+            {
+                Color beam = m.GetColor("_BeamColor");
+                m.SetColor("_BeamColor", new Color(beam.r * intensity, beam.g * intensity, beam.b * intensity, beam.a));
+            }
             foreach (string kw in spec.Keywords) m.EnableKeyword(kw);
             if (spec.Queue >= 0) m.renderQueue = spec.Queue;
             if (spec.Shader == "VFX/ParticleMasterUnlitAdd_Shd" || spec.Shader == "VFX/SimpleInvisibleShd")
