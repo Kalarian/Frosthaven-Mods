@@ -52,7 +52,7 @@ namespace FrosthavenMods
         internal sealed class MaterialSpec
         {
             public string Albedo, Mask, Normal, Emissive;
-            public bool Cutout, FlatMask;
+            public bool Cutout, FlatMask, Hidden;   // Hidden: a distortion shell Frosthaven can't draw (pack "hidden")
             public float Cutoff = 0.5f, EmissiveBoost = 1f, Metallic, Smoothness = 0.3f, Ao = 1f, Brightness = 1f;
         }
 
@@ -126,6 +126,7 @@ namespace FrosthavenMods
                         FlatMask = (string)v["mask_mode"] == "flat",
                         Metallic = (float?)v["metallic"] ?? 0f, Smoothness = (float?)v["smoothness"] ?? 0.3f, Ao = (float?)v["ao"] ?? 1f,
                         Brightness = (float?)v["brightness"] ?? 1f,
+                        Hidden = (bool?)v["hidden"] ?? false,
                     };
                 }
                 if (j["animation"] is JObject a)
@@ -630,7 +631,8 @@ namespace FrosthavenMods
                         if (!_made.TryGetValue(gh, out Material fh))
                         {
                             _entry.Materials.TryGetValue(gh.name, out MaterialSpec spec);
-                            fh = GHModelMaterials.Rebuild(gh, spec, spec != null && spec.Cutout ? _cutout : _opaque, _bundle.Texture);
+                            fh = spec != null && spec.Hidden ? GHModelMaterials.Invisible(gh.name)
+                                : GHModelMaterials.Rebuild(gh, spec, spec != null && spec.Cutout ? _cutout : _opaque, _bundle.Texture);
                             _made[gh] = fh;
                         }
                         slots[i] = fh;

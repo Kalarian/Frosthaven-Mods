@@ -479,6 +479,12 @@ def _materials(b, pptrs, out):
         entry["cutoff"] = round(floats.get("_Cutoff", 0.5), 3)
         entry["emissive_boost"] = round(floats.get("_EmissiveMapBoost", 1.0), 3)
         entry["two_sided"] = mt["m_Name"].endswith("_2Side")
+        # a distortion shell over part of the body (the Nightshroud's legs: Amp_CharDistort_Shd, a _DistortMap and no
+        # colour texture). In Gloomhaven it only bends what is behind it; on Frosthaven's character shader it drew solid
+        # white over his legs (the user's screenshot, 2026-10-27): the plugin draws it fully transparent
+        distort = any(slot == "_DistortMap" and v["m_Texture"]["m_PathID"] for slot, v in props["m_TexEnvs"])
+        if distort and "_Diffuse" not in texs:
+            entry["hidden"] = True
         entry.update(_mask_mode(texs.get("_MRAO"), mt["m_Name"]))
         entry.update(MATERIAL_TWEAKS.get(mt["m_Name"], {}))
         out[mt["m_Name"]] = entry

@@ -104,6 +104,23 @@ namespace FrosthavenMods
             return m;
         }
 
+        /// <summary>A fully transparent material for a body part Frosthaven can't draw (the Nightshroud's distortion shell
+        /// over his legs, which drew solid white on the character shader, 2026-10-27): the unlit particle shader, additive,
+        /// clear colour. The game copies hero materials for its visibility toggles, and a copy stays transparent.</summary>
+        internal static Material Invisible(string ghName)
+        {
+            Shader s = Shader.Find("Particles/Standard Unlit") ?? Shader.Find("Universal Render Pipeline/Particles/Unlit");
+            var m = new Material(s) { name = ghName + " (hidden)", hideFlags = HideFlags.DontUnloadUnusedAsset };
+            if (m.HasProperty("_Mode")) m.SetFloat("_Mode", 4f);
+            if (m.HasProperty("_SrcBlend")) m.SetFloat("_SrcBlend", 5f);
+            if (m.HasProperty("_DstBlend")) m.SetFloat("_DstBlend", 1f);
+            if (m.HasProperty("_ZWrite")) m.SetFloat("_ZWrite", 0f);
+            if (m.HasProperty("_Color")) m.SetColor("_Color", Color.clear);
+            if (m.HasProperty("_BaseColor")) m.SetColor("_BaseColor", Color.clear);
+            m.renderQueue = 3000;
+            return m;
+        }
+
         /// <summary>The Gloomhaven texture for a slot: what the old material still holds (its property sheet outlives
         /// the lost shader), else the texture of the pack's name among the loaded objects.</summary>
         private static Texture Pick(string name, Material gh, string ghSlot, Func<string, Texture2D> texture)
