@@ -350,6 +350,38 @@ CARD_FIXES = {
         (r"^([ \t]+)Behaviour: BuffMove(\r?)\n(?=[ \t]+IsAura: True\r?\n[ \t]+AuraFilter: \[Ally\]\r?\n[ \t]+AuraTargeting: All\r?\n[ \t]+AnimOverload: PositiveBuffRadial)",
          lambda m: f"{m.group(1)}Behaviour: BuffMove{m.group(2)}\n{m.group(1)}ValidAbilityType: Move{m.group(2)}\n"),
     ],
+    # Winged Congregation (Plagueherald), top: "all your moves gain Flying" (persistent). Written as a Move 0 with Fly
+    # carrying the move bonus, Frosthaven offered it as a move of the Plagueherald's own; a Move 0 can only be skipped,
+    # and a skipped move sets no bonus (the G2 regression, 2026-10-28, twice). The same fix as Supportive Chant bottom:
+    # the bonus triggers by itself.
+    20294: [
+        (r"^([ \t]+)Filter: Self(\r?)\n(?=[ \t]+ActiveBonus:\r?\n[ \t]+Duration: Persistent\r?\n[ \t]+Behaviour: BuffMove\r?\n[ \t]+AnimOverload: PowerUp)",
+         lambda m: f"{m.group(1)}Filter: Self{m.group(2)}\n{m.group(1)}AutoTrigger: True{m.group(2)}\n"),
+    ],
+    # Virulent Strain (Plagueherald), bottom: "every enemy adjacent to a poisoned enemy gains Poison". Its Poison is a
+    # sub-ability of a NullTargeting parent; run as a sub-ability, Frosthaven's targeting takes the parent's target (the
+    # poisoned enemy) as the one to hit, offers its neighbours, then drops the parent's target as ignored at apply time:
+    # nobody was poisoned on any bench (CAbilityTargeting.Start, 2026-10-28 trace). Every Frosthaven card with "all
+    # targets adjacent to the parent's targets" also sets TreatAsNonSubAbility (Banner Spear's Incendiary Throw top,
+    # Snowdancer's Frigid Growth top under a non-attack parent): the neighbours are then found and hit normally.
+    20301: [
+        (r"^([ \t]+)AllTargetsAdjacentToParentTarget: True(\r?)$", r"\1AllTargetsAdjacentToParentTarget: True\2\n\1TreatAsNonSubAbility: True\2"),
+    ],
+    # Petrify (Cragheart), top: "kill one normal enemy within range 4 and place a one-hex obstacle in its hex". As a
+    # MergedKillCreate the kill waits for its animation while the create spawns the rock and steps the phase on, which
+    # ends both parts: the rock appeared and the enemy lived (G2 regression, 2026-10-28; CAbilityMergedKillCreate.cs
+    # 133-141, CAbilityCreate.cs 298). Frosthaven's own shape for "an obstacle on the hex the parent chose" (Pyroclast's
+    # Cooling top): a plain Kill with a create sub-ability on ParentAbility.m_TilesSelected[0], run only once the kill
+    # has happened.
+    20136: [
+        (r"^[ \t]+TKillCreateAttack:(\r?)\n[ \t]+MergedKillCreate:\r?\n(?:[ \t]+.*\r?\n)*?[ \t]+UseMergedWithAbilityTiles: True\r?\n[ \t]+AutoTrigger: True\r?$",
+         lambda m: "".join(f"{' ' * n}{t}\n" for n, t in (
+             (12, "TKill:"), (16, "Kill: True"), (16, "Filter:"), (20, "TargetType: Enemy"), (20, "EnemyType: Normal"),
+             (16, "AnimOverload: ObstaclePetrify"), (16, "Range: 4"), (16, "SubAbilities:"), (20, "TCreate:"),
+             (24, "Create: RockSingle"), (24, "Target: 1"), (24, "TreatAsNonSubAbility: True"), (24, "AutoTrigger: True"),
+             (24, "Targeting: Custom"), (24, "TargetingVars:"), (28, "ParentTile: ParentAbility.m_TilesSelected[0]"),
+             (28, "AddTileInRange: ParentTile"), (24, "SpawnDelay: 3.06"), (24, "AnimOverload: None"))).rstrip("\n").replace("\n", m.group(1) + "\n") + m.group(1)),
+    ],
     # Pilfer (Mindthief), top: "Loot 1, +1 gold per adjacent enemy". Frosthaven's loot parser knows LootData but not
     # the value ExtraGoldPerAdjacentEnemy (appears nowhere in its code): the file fails to parse, and a failed card
     # file inside the game's parallel class loader took the whole load down ("Character 'QuartermasterID' has no

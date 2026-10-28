@@ -8,23 +8,25 @@ Discard: [Lost,Discard]
 Data:
     Top:
         Abilities:
-             TKillCreateAttack:
-                MergedKillCreate:
-                    Abilities:
-                        TKill:
-                            Kill: True
-                            Filter:
-                                TargetType: Enemy
-                                EnemyType: Normal
-                            AnimOverload: ObstaclePetrify
-                            Range: 4
-                            IgnoreMergedAbilityTargetSelection: True
-                        TCreate:
-                            Create: RockSingle
-                            SpawnDelay: 3.06
-                            AnimOverload: None
-                            UseMergedWithAbilityTiles: True
-                            AutoTrigger: True
+            TKill:
+                Kill: True
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: Normal
+                AnimOverload: ObstaclePetrify
+                Range: 4
+                SubAbilities:
+                    TCreate:
+                        Create: RockSingle
+                        Target: 1
+                        TreatAsNonSubAbility: True
+                        AutoTrigger: True
+                        Targeting: Custom
+                        TargetingVars:
+                            ParentTile: ParentAbility.m_TilesSelected[0]
+                            AddTileInRange: ParentTile
+                        SpawnDelay: 3.06
+                        AnimOverload: None
         Infuse: Earth
         XP: 2
     Bottom:
