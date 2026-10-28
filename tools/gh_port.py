@@ -360,6 +360,14 @@ CARD_FIXES = {
         (r"^([ \t]+)Behaviour: BuffMove(\r?)\n(?=[ \t]+IsAura: True\r?\n[ \t]+AuraFilter: \[Ally\]\r?\n[ \t]+AuraTargeting: All\r?\n[ \t]+AnimOverload: PositiveBuffRadial)",
          lambda m: f"{m.group(1)}Behaviour: BuffMove{m.group(2)}\n{m.group(1)}ValidAbilityType: Move{m.group(2)}\n"),
     ],
+    # Winged Congregation (Plagueherald), top: "all your moves gain Flying" (persistent). Written as a Move 0 with Fly
+    # carrying the move bonus, Frosthaven offered it as a move of the Plagueherald's own; a Move 0 can only be skipped,
+    # and a skipped move sets no bonus (the G2 regression, 2026-10-28, twice). The same fix as Supportive Chant bottom:
+    # the bonus triggers by itself.
+    20294: [
+        (r"^([ \t]+)Filter: Self(\r?)\n(?=[ \t]+ActiveBonus:\r?\n[ \t]+Duration: Persistent\r?\n[ \t]+Behaviour: BuffMove\r?\n[ \t]+AnimOverload: PowerUp)",
+         lambda m: f"{m.group(1)}Filter: Self{m.group(2)}\n{m.group(1)}AutoTrigger: True{m.group(2)}\n"),
+    ],
     # Pilfer (Mindthief), top: "Loot 1, +1 gold per adjacent enemy". Frosthaven's loot parser knows LootData but not
     # the value ExtraGoldPerAdjacentEnemy (appears nowhere in its code): the file fails to parse, and a failed card
     # file inside the game's parallel class loader took the whole load down ("Character 'QuartermasterID' has no

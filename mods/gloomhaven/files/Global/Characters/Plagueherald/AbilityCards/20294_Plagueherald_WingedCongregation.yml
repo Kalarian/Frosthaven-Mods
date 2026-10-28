@@ -13,6 +13,7 @@ Data:
                     Amount: 0
                     Fly: True
                 Filter: Self
+                AutoTrigger: True
                 ActiveBonus:
                     Duration: Persistent
                     Behaviour: BuffMove
