@@ -34,7 +34,7 @@ cd ..
 git add -A
 git commit -q -m "Release v$VER: $NOTES" || echo "(nothing new to commit)"
 git tag -f "v$VER"
-git push -q origin main
+git push -q origin "HEAD:${PUBLISH_BRANCH:-main}"   # PUBLISH_BRANCH: a release from another branch (v0.9.1 from release-0.9, main holding unreleased classes)
 "$GH" release delete "v$VER" --yes --cleanup-tag 2>/dev/null || true   # re-publishing the same version replaces the release
 git push -q -f origin "v$VER"
 "$GH" release create "v$VER" "dist/Frosthaven-Mods-pack.zip" "dist/Install Frosthaven Mods.exe" "dist/$COMPANION" "dist/SHA256SUMS.txt" "docs/Frosthaven-Mods-Guide.pdf" --title "Frosthaven Mods v$VER" --notes "$NOTES"

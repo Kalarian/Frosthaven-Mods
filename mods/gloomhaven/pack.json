@@ -516,7 +516,7 @@
       ]
     }
   ],
-  "data_sha": "1790ee38dccc459ba5c1b1932a74e48a1ff525085ab8439dac36932deefadf65",
+  "data_sha": "1b420a95932102d5493a139d551a5767912c469e17caae8ab0a8530c1b151fa0",
   "source": {
     "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
     "buildid": "20286313",
@@ -3451,8 +3451,8 @@
         {
           "file": "pcg_materials_assets_invisibletexmat.bundle",
           "name": "e27ce3919361f4bb76766771eab3a7c4.bundle",
-          "size": 2676,
-          "sha256": "3a428a6210ddebfefcd5880a85308c7db2ce65213a460c43913645d96b7c2f16"
+          "size": 2681,
+          "sha256": "6e32c955c5ec358ab8f74f778a96f996f3e58864aef39bf31326d77017b498a6"
         },
         {
           "file": "pcg_materials_assets_shoutcircle_mat.bundle",
@@ -3469,8 +3469,8 @@
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
           "name": "05b0f0ceb09d28825095acb4e2b85127.bundle",
-          "size": 12744,
-          "sha256": "67c3c1eb9cdf98fda9085d5af0f9d5e9363886549186a280d2c6e0a59bf50462"
+          "size": 12789,
+          "sha256": "d64ffc89afc9c64b6d1c4124332507f20d460fb3adf3f91506b2e46c8d1268ed"
         }
       ],
       "sounds": {
@@ -7736,8 +7736,8 @@
         {
           "file": "pcg_materials_assets_invisibletexmat.bundle",
           "name": "e27ce3919361f4bb76766771eab3a7c4.bundle",
-          "size": 2676,
-          "sha256": "3a428a6210ddebfefcd5880a85308c7db2ce65213a460c43913645d96b7c2f16"
+          "size": 2681,
+          "sha256": "6e32c955c5ec358ab8f74f778a96f996f3e58864aef39bf31326d77017b498a6"
         },
         {
           "file": "pcg_materials_assets_lightboltdissolve_mat.bundle",
@@ -7772,8 +7772,8 @@
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
           "name": "05b0f0ceb09d28825095acb4e2b85127.bundle",
-          "size": 12744,
-          "sha256": "67c3c1eb9cdf98fda9085d5af0f9d5e9363886549186a280d2c6e0a59bf50462"
+          "size": 12789,
+          "sha256": "d64ffc89afc9c64b6d1c4124332507f20d460fb3adf3f91506b2e46c8d1268ed"
         },
         {
           "file": "positiveringmat_assets_all.bundle",
@@ -11061,8 +11061,8 @@
         {
           "file": "pcg_materials_assets_invisibletexmat.bundle",
           "name": "e27ce3919361f4bb76766771eab3a7c4.bundle",
-          "size": 2676,
-          "sha256": "3a428a6210ddebfefcd5880a85308c7db2ce65213a460c43913645d96b7c2f16"
+          "size": 2681,
+          "sha256": "6e32c955c5ec358ab8f74f778a96f996f3e58864aef39bf31326d77017b498a6"
         },
         {
           "file": "pcg_materials_assets_shoutcircle_mat.bundle",
@@ -11079,8 +11079,8 @@
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
           "name": "05b0f0ceb09d28825095acb4e2b85127.bundle",
-          "size": 12744,
-          "sha256": "67c3c1eb9cdf98fda9085d5af0f9d5e9363886549186a280d2c6e0a59bf50462"
+          "size": 12789,
+          "sha256": "d64ffc89afc9c64b6d1c4124332507f20d460fb3adf3f91506b2e46c8d1268ed"
         },
         {
           "file": "spellweaver_lightning_beam_mat_assets_all.bundle",
@@ -16789,8 +16789,8 @@
         {
           "file": "pcg_materials_assets_invisibletexmat.bundle",
           "name": "e27ce3919361f4bb76766771eab3a7c4.bundle",
-          "size": 2676,
-          "sha256": "3a428a6210ddebfefcd5880a85308c7db2ce65213a460c43913645d96b7c2f16"
+          "size": 2681,
+          "sha256": "6e32c955c5ec358ab8f74f778a96f996f3e58864aef39bf31326d77017b498a6"
         },
         {
           "file": "pcg_materials_assets_lightboltdissolve_mat.bundle",
@@ -16807,8 +16807,8 @@
         {
           "file": "pcg_materials_assets_mapmarker_bosscenter_mat.bundle",
           "name": "b1b1899339c648fa197abe0fafe8a993.bundle",
-          "size": 2760,
-          "sha256": "d343323f130f2ffba6c4669e2c38f26eed791c41540597257477e7d0199b7364"
+          "size": 2768,
+          "sha256": "a64003ce05bb043221f081b85ca31afee8046d1af7743666b0280cc18d0af1a8"
         },
         {
           "file": "pcg_materials_assets_particletrailmat.bundle",
@@ -16831,14 +16831,14 @@
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_closesurface_mat.bundle",
           "name": "2c3e294a5eeabff4c25a4901fe79ed54.bundle",
-          "size": 12759,
-          "sha256": "372f4313615dab47083935a8b17e6a1a9b479a0a150f69fab29b1af0e2cf387d"
+          "size": 12806,
+          "sha256": "af5282194f180cd3db62e355327b4506d1a65338047f6baa695b3e109575bbd2"
         },
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
           "name": "05b0f0ceb09d28825095acb4e2b85127.bundle",
-          "size": 12744,
-          "sha256": "67c3c1eb9cdf98fda9085d5af0f9d5e9363886549186a280d2c6e0a59bf50462"
+          "size": 12789,
+          "sha256": "d64ffc89afc9c64b6d1c4124332507f20d460fb3adf3f91506b2e46c8d1268ed"
         },
         {
           "file": "quartermaster_rune_wheel_magic_mat_assets_all.bundle",
@@ -22981,8 +22981,8 @@
         {
           "file": "pcg_materials_assets_invisibletexmat.bundle",
           "name": "e27ce3919361f4bb76766771eab3a7c4.bundle",
-          "size": 2676,
-          "sha256": "3a428a6210ddebfefcd5880a85308c7db2ce65213a460c43913645d96b7c2f16"
+          "size": 2681,
+          "sha256": "6e32c955c5ec358ab8f74f778a96f996f3e58864aef39bf31326d77017b498a6"
         },
         {
           "file": "pcg_materials_assets_leaves_white_mat.bundle",
@@ -23029,8 +23029,8 @@
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
           "name": "05b0f0ceb09d28825095acb4e2b85127.bundle",
-          "size": 12744,
-          "sha256": "67c3c1eb9cdf98fda9085d5af0f9d5e9363886549186a280d2c6e0a59bf50462"
+          "size": 12789,
+          "sha256": "d64ffc89afc9c64b6d1c4124332507f20d460fb3adf3f91506b2e46c8d1268ed"
         },
         {
           "file": "positiveringmat_assets_all.bundle",
@@ -30191,8 +30191,8 @@
         {
           "file": "pcg_materials_assets_invisibletexmat.bundle",
           "name": "e27ce3919361f4bb76766771eab3a7c4.bundle",
-          "size": 2676,
-          "sha256": "3a428a6210ddebfefcd5880a85308c7db2ce65213a460c43913645d96b7c2f16"
+          "size": 2681,
+          "sha256": "6e32c955c5ec358ab8f74f778a96f996f3e58864aef39bf31326d77017b498a6"
         },
         {
           "file": "pcg_materials_assets_lightboltdissolve_mat.bundle",
@@ -30203,8 +30203,8 @@
         {
           "file": "pcg_materials_assets_mapmarker_bosscenter_mat.bundle",
           "name": "b1b1899339c648fa197abe0fafe8a993.bundle",
-          "size": 2760,
-          "sha256": "d343323f130f2ffba6c4669e2c38f26eed791c41540597257477e7d0199b7364"
+          "size": 2768,
+          "sha256": "a64003ce05bb043221f081b85ca31afee8046d1af7743666b0280cc18d0af1a8"
         },
         {
           "file": "pcg_materials_assets_particletrailmat.bundle",
@@ -30221,8 +30221,8 @@
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
           "name": "05b0f0ceb09d28825095acb4e2b85127.bundle",
-          "size": 12744,
-          "sha256": "67c3c1eb9cdf98fda9085d5af0f9d5e9363886549186a280d2c6e0a59bf50462"
+          "size": 12789,
+          "sha256": "d64ffc89afc9c64b6d1c4124332507f20d460fb3adf3f91506b2e46c8d1268ed"
         },
         {
           "file": "quartermaster_rune_wheel_magic_mat_assets_all.bundle",
@@ -37180,8 +37180,8 @@
         {
           "file": "pcg_materials_assets_invisibletexmat.bundle",
           "name": "e27ce3919361f4bb76766771eab3a7c4.bundle",
-          "size": 2676,
-          "sha256": "3a428a6210ddebfefcd5880a85308c7db2ce65213a460c43913645d96b7c2f16"
+          "size": 2681,
+          "sha256": "6e32c955c5ec358ab8f74f778a96f996f3e58864aef39bf31326d77017b498a6"
         },
         {
           "file": "pcg_materials_assets_leaves_white_mat.bundle",
@@ -37198,8 +37198,8 @@
         {
           "file": "pcg_materials_assets_mapmarker_bosscenter_mat.bundle",
           "name": "b1b1899339c648fa197abe0fafe8a993.bundle",
-          "size": 2760,
-          "sha256": "d343323f130f2ffba6c4669e2c38f26eed791c41540597257477e7d0199b7364"
+          "size": 2768,
+          "sha256": "a64003ce05bb043221f081b85ca31afee8046d1af7743666b0280cc18d0af1a8"
         },
         {
           "file": "pcg_materials_assets_particletrailmat.bundle",
@@ -37240,8 +37240,8 @@
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
           "name": "05b0f0ceb09d28825095acb4e2b85127.bundle",
-          "size": 12744,
-          "sha256": "67c3c1eb9cdf98fda9085d5af0f9d5e9363886549186a280d2c6e0a59bf50462"
+          "size": 12789,
+          "sha256": "d64ffc89afc9c64b6d1c4124332507f20d460fb3adf3f91506b2e46c8d1268ed"
         },
         {
           "file": "quartermaster_rune_wheel_magic_mat_assets_all.bundle",
@@ -43059,8 +43059,8 @@
         {
           "file": "pcg_materials_assets_invisibletexmat.bundle",
           "name": "e27ce3919361f4bb76766771eab3a7c4.bundle",
-          "size": 2676,
-          "sha256": "3a428a6210ddebfefcd5880a85308c7db2ce65213a460c43913645d96b7c2f16"
+          "size": 2681,
+          "sha256": "6e32c955c5ec358ab8f74f778a96f996f3e58864aef39bf31326d77017b498a6"
         },
         {
           "file": "pcg_materials_assets_leaves_white_mat.bundle",
@@ -43077,8 +43077,8 @@
         {
           "file": "pcg_materials_assets_mapmarker_bosscenter_mat.bundle",
           "name": "b1b1899339c648fa197abe0fafe8a993.bundle",
-          "size": 2760,
-          "sha256": "d343323f130f2ffba6c4669e2c38f26eed791c41540597257477e7d0199b7364"
+          "size": 2768,
+          "sha256": "a64003ce05bb043221f081b85ca31afee8046d1af7743666b0280cc18d0af1a8"
         },
         {
           "file": "pcg_materials_assets_particletrailmat.bundle",
@@ -43113,8 +43113,8 @@
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
           "name": "05b0f0ceb09d28825095acb4e2b85127.bundle",
-          "size": 12744,
-          "sha256": "67c3c1eb9cdf98fda9085d5af0f9d5e9363886549186a280d2c6e0a59bf50462"
+          "size": 12789,
+          "sha256": "d64ffc89afc9c64b6d1c4124332507f20d460fb3adf3f91506b2e46c8d1268ed"
         },
         {
           "file": "quartermaster_rune_wheel_magic_mat_assets_all.bundle",
@@ -48972,8 +48972,8 @@
         {
           "file": "pcg_materials_assets_invisibletexmat.bundle",
           "name": "e27ce3919361f4bb76766771eab3a7c4.bundle",
-          "size": 2676,
-          "sha256": "3a428a6210ddebfefcd5880a85308c7db2ce65213a460c43913645d96b7c2f16"
+          "size": 2681,
+          "sha256": "6e32c955c5ec358ab8f74f778a96f996f3e58864aef39bf31326d77017b498a6"
         },
         {
           "file": "pcg_materials_assets_lightboltdissolve_mat.bundle",
@@ -48984,8 +48984,8 @@
         {
           "file": "pcg_materials_assets_mapmarker_bosscenter_mat.bundle",
           "name": "b1b1899339c648fa197abe0fafe8a993.bundle",
-          "size": 2760,
-          "sha256": "d343323f130f2ffba6c4669e2c38f26eed791c41540597257477e7d0199b7364"
+          "size": 2768,
+          "sha256": "a64003ce05bb043221f081b85ca31afee8046d1af7743666b0280cc18d0af1a8"
         },
         {
           "file": "pcg_materials_assets_particletrailmat.bundle",
@@ -49014,8 +49014,8 @@
         {
           "file": "pcg_materials_assets_spellweaver_waveringsphere_mat.bundle",
           "name": "05b0f0ceb09d28825095acb4e2b85127.bundle",
-          "size": 12744,
-          "sha256": "67c3c1eb9cdf98fda9085d5af0f9d5e9363886549186a280d2c6e0a59bf50462"
+          "size": 12789,
+          "sha256": "d64ffc89afc9c64b6d1c4124332507f20d460fb3adf3f91506b2e46c8d1268ed"
         },
         {
           "file": "quartermaster_rune_wheel_magic_mat_assets_all.bundle",

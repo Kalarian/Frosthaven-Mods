@@ -340,6 +340,16 @@ CARD_FIXES = {
         (r"^([ \t]*)Behaviour: StartActionAbility(\r?)$",
          lambda m: f"{m.group(1)}Behaviour: DuringTurnAbility{m.group(2)}\n{m.group(1)}IsToggleBonus: True{m.group(2)}"),
     ],
+    # Supportive Chant (Sunkeeper), bottom: "All allies add +2 Move to all their moves this round". Written as a Move 2
+    # carrying the aura bonus, Frosthaven offered it as a move of the Sunkeeper's own that can be skipped, and skipping
+    # (the G1 retest, 2026-10-28, twice) set no aura at all. Frosthaven's own shape for the same card, the Snowdancer's
+    # Birds In a Tempest bottom, triggers by itself and names the moves it buffs.
+    20197: [
+        (r"^([ \t]+)Move: 2(\r?)\n(?=[ \t]+Target: -1\r?\n[ \t]+Filter: Self\r?\n[ \t]+ActiveBonus:\r?\n[ \t]+Duration: Round\r?\n[ \t]+Behaviour: BuffMove)",
+         lambda m: f"{m.group(1)}Move: 2{m.group(2)}\n{m.group(1)}AutoTrigger: True{m.group(2)}\n"),
+        (r"^([ \t]+)Behaviour: BuffMove(\r?)\n(?=[ \t]+IsAura: True\r?\n[ \t]+AuraFilter: \[Ally\]\r?\n[ \t]+AuraTargeting: All\r?\n[ \t]+AnimOverload: PositiveBuffRadial)",
+         lambda m: f"{m.group(1)}Behaviour: BuffMove{m.group(2)}\n{m.group(1)}ValidAbilityType: Move{m.group(2)}\n"),
+    ],
     # Pilfer (Mindthief), top: "Loot 1, +1 gold per adjacent enemy". Frosthaven's loot parser knows LootData but not
     # the value ExtraGoldPerAdjacentEnemy (appears nowhere in its code): the file fails to parse, and a failed card
     # file inside the game's parallel class loader took the whole load down ("Character 'QuartermasterID' has no
