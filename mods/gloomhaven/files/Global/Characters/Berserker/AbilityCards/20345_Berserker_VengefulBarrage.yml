@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_VengefulBarrage$
+Character: BerserkerID
+ID: 20345
+Level: 8
+Initiative: 38
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    Attack: 3
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnDamaged
+                    XPTracker: [1,0,1,0,1]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCFire:
+                Elements: Fire
+                Abilities:
+                    BCFireAttackBuff:
+                        ParentName: BNull
+                        Attack: 1
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Round
+                            Behaviour: BuffAttack
+                        AnimOverload: PowerUp
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH_345_T$"
+            Layout: "$GH_345_T$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCFire
+            Text:
+                - Active:
+                    Ability: BCFireAttackBuff
+                    Icon: Positive_AttackPlus
+                    ListLayout: "$GH_345_B$"
+                    Layout: "$GH_345_B$"

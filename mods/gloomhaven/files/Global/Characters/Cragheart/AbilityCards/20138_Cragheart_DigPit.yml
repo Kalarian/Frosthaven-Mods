@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DigPit$
+Character: CragheartID
+ID: 20138
+Level: 6
+Initiative: 78
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TTrap:
+                Trap:
+                    TrapName: BearTrap
+                    Damage: 2
+                    Conditions: Stun
+                SpawnDelay: 2.8
+                Target: 1
+                AnimOverload: ObstacleDigPit
+            TMuddle:
+                Muddle: True
+                Range: 1
+                Target: -1
+                Filter: Enemy
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BInvis:
+                Invisible: True
+                Filter: Self
+                AnimOverload: TurnInvisible
+Layout:
+    Top:
+        - Row: "$GH_138_T$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Muddle>"
+        - Row: "$Target_AllAdjacentEnemies$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Invisible>"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:

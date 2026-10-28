@@ -1,0 +1,37 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DevilHorns$
+Character: BerserkerID
+ID: 20340
+Level: 6
+Initiative: 31
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                AreaEffect: "0,0,G|1,1,R|2,0,R|1,-1,R|-1,1,E"
+                AnimOverload: AreaSlam
+                MultiPassAttack: False
+                Conditions: Wound
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+        XP: 1
+Layout:
+    Top:
+        - ColumnWidths: "60,35"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Wound>"
+            - Row: "<size=50%> "
+            - Infuse: Fire
+        - Column: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

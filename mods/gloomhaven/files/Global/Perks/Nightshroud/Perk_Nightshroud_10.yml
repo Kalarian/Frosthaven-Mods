@@ -1,0 +1,34 @@
+Parser: Perk
+ID: Nightshroud10
+Name: PERK_Nightshroud_10_Name
+Description: PERK_Nightshroud_10_Desc
+CharacterID: NightshroudID
+Available: 1
+Cost: 2
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            DiscardCards: 2
+            SubAbilities:
+                EPlay:
+                    AutoTrigger: True
+                    Filter: Self
+                    SelectAndPlayCard:
+                        CardPile: OwnedUnused
+                        Amount: 1
+                        MinRequiredCards: 1
+                    MiscVars:
+                        IsActionValid: Action.Abilities.Any(obj.AbilityType == CAbility.EAbilityType.AddActiveBonus)
+            Filter: [Self]
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringTurnAbility
+            XPTracker: [0]
+            IsToggleBonus: True
+            Hidden: True
+            ListLayoutOverride: [$PERK_Nightshroud_10_Desc$, Recover]
+            MiscVars:
+                OverrideIcon: "'Recover'"
+        AnimOverload: PowerUp

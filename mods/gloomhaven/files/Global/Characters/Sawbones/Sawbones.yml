@@ -18,9 +18,9 @@ Strengths: $Sawbones_STRENGTHS$
 Weaknesses: $Sawbones_WEAKNESSES$
 Adventure_Description: $Sawbones_ADVENTURE_DESCRIPTION$
 HeroStats:
-    Melee: 4
+    Melee: 3
     Ranged: 1
     Mobility: 2
-    Support: 6
+    Support: 5
     Defense: 2
     Control: 2

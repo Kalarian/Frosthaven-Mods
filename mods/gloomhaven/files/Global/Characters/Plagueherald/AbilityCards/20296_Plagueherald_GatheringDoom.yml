@@ -1,0 +1,44 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GatheringDoom$
+Character: PlagueheraldID
+ID: 20296
+Level: 1
+Initiative: 76
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 3
+                Condition: Curse
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 2
+                Target: -1
+                AnimOverload: Loot
+        Infuse: Air
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - AddedEffect: "<size=130%><sprite name=Curse></size>"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:

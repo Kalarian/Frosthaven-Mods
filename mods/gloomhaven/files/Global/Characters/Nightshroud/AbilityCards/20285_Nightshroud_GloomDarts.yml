@@ -1,0 +1,50 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GloomDarts$
+Character: NightshroudID
+ID: 20285
+Level: 8
+Initiative: 78
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                Conditions: [Poison, Curse]
+                AnimOverload: RangedAttack
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TAttack
+                        Target: 2
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 2
+        Infuse: Dark
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
+                - AddedEffect: "<size=130%><sprite name=Poison></size>, <size=130%><sprite name=Curse></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "<sprite name=Target> 3, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Infuse: Dark

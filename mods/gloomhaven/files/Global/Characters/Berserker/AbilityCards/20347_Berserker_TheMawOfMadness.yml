@@ -1,0 +1,105 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TheMawofMadness$
+Character: BerserkerID
+ID: 20347
+Level: 9
+Initiative: 10
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 1
+                Target: -1
+                Condition: Muddle
+                MultiPassAttack: False
+                AnimOverload: AreaSlam
+                SubAbilities:
+                    TAttackSubHeal:
+                        Heal: 2
+                        Filter: Self
+                        PerformXTimesBasedOn: TargetsDamagedByPreviousAttackThisAction
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Condition: Immobilize
+        Consumes:
+            BCDamage1:
+                ConsumeGroup: CGMaw
+                CostAbility:
+                    ParentName: BAttack
+                    Damage: 1
+                    Filter: Self
+                AbilityOverrides:
+                    BCTargetBuff1:
+                        ParentName: BAttack
+                        Strength: 1
+            BCDamage2:
+                ConsumeGroup: CGMaw
+                CostAbility:
+                    ParentName: BAttack
+                    Damage: 2
+                    Filter: Self
+                AbilityOverrides:
+                    BCTargetBuff1:
+                        ParentName: BAttack
+                        Strength: 2
+            BCDamage3:
+                ConsumeGroup: CGMaw
+                CostAbility:
+                    ParentName: BAttack
+                    Damage: 3
+                    Filter: Self
+                AbilityOverrides:
+                    BCTargetBuff1:
+                        ParentName: BAttack
+                        Strength: 3
+            BCDamage4:
+                ConsumeGroup: CGMaw
+                CostAbility:
+                    ParentName: BAttack
+                    Damage: 4
+                    Filter: Self
+                AbilityOverrides:
+                    BCTargetBuff1:
+                        ParentName: BAttack
+                        Strength: 4
+            BCDamage5:
+                ConsumeGroup: CGMaw
+                CostAbility:
+                    ParentName: BAttack
+                    Damage: 5
+                    Filter: Self
+                AbilityOverrides:
+                    BCTargetBuff1:
+                        ParentName: BAttack
+                        Strength: 5
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<sprite name=Muddle>"
+        - Row: "<size=50%> "
+        - Row: "$GH_347_T$"
+    Bottom:
+        - Row: "$GH_347_B$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack*+X <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*BAttack.Range* @BAttack.Range@"
+                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$Xis_AmountOfDamageYouSuffered$"

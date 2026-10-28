@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StonePummel$
+Character: CragheartID
+ID: 20137
+Level: 5
+Initiative: 32
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Conditions: Muddle
+                AreaEffect: "-3,-1,E|-1,-1,R|-2,0,R|0,0,G|2,0,R|1,1,R|3,1,E"
+                AnimOverload: OppositeStonePummel
+                MultiPassAttack: False
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttackBuff:
+                Attack: 0
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    AbilityData:
+                        DestroyObstacle:
+                        HelpBoxTooltipLocKey: GUI_StonePummel_Bottom_HelpBoxTooltip
+                        SpawnDelay: 2.16
+                    XPTracker: [1,1,1,1]
+                AttackEffect:
+                    Type: BuffIfCanPerformSubAbility
+                    AttackType: Melee
+                    Strength: 3
+        XP: 1
+Layout:
+    Top:
+        - ColumnWidths: "60,35"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Muddle>"
+            - Row: "<size=20%> "
+        - Column: "£Area£"
+    Bottom:
+        - Active:
+            Ability: BAttackBuff
+            ListLayout: "$GH_137_B$"
+            Layout: "$GH_137_B$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=50%> "
+        - XPTracker: BAttackBuff

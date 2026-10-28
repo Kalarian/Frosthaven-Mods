@@ -1,0 +1,47 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RockSlide$
+Character: CragheartID
+ID: 20134
+Level: 4
+Initiative: 81
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TCreate:
+                Create: RockSingle
+                Range: 4
+                Target: 3
+                SpawnDelay: 2.9
+                AnimOverload: ObstacleAvalanche
+                MultiPassAttack: False
+                SubAbilities:
+                    TCreateSubDamage:
+                        AllTargetsAdjacentToParentTargets: True
+                        Damage: 2
+                        Range: 1
+                        Target: -1
+                        Filter: [Enemy, Ally]
+        Infuse: Earth
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 6
+                MoveRestrictionType: StraightLineOnly
+Layout:
+    Top:
+        - Row: "$GH_134_T_1$"
+        - Row: "<size=50%> "
+        - Row: "$GH_134_T_2$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Earth
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=20%> "
+        - Row: "$Move_StraightLine$"

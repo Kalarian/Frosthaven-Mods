@@ -1,0 +1,64 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BlackArrow$
+Character: NightshroudID
+ID: 20280
+Level: 5
+Initiative: 11
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 4
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                Conditions: [Muddle, Curse]
+                AnimOverload: RangedAttack
+        XP: 1
+    Bottom:
+        Abilities:
+            BInvis:
+                Invisible: True
+                Filter: Self
+                AnimOverload: TurnInvisible
+            BNull:
+                Null: True
+        Consumes: 
+            BCDark:
+                Elements: Dark
+                Abilities:
+                    BCDarkAttack:
+                        ParentName: BNull
+                        Attack: 3
+                        Range: 3
+                        AnimOverload: RangedAttack
+                XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
+                - AddedEffect: "<size=130%><sprite name=Muddle></size>, <size=130%><sprite name=Curse></size>"
+            - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Invisible>"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCDark
+            Text:
+                - ColumnWidths: "80,20"
+                - ColumnSpacing: 150
+                - Column:
+                    - Row: "<b><size=100%><sprite name=Attack> *BCDarkAttack*"
+                    - Row: "<sprite name=Range> *BCDarkAttack.Range*"
+                - Column:

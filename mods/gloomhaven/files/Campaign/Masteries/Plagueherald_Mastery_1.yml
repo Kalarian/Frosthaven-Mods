@@ -1,0 +1,14 @@
+Parser: Mastery
+ID: Plagueherald_MASTERY_1
+LocalisedName: Plagueherald_MASTERY_1_Name
+LocalisedDescription: Plagueherald_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAG: kills whose killing ability was not an attack (GHMasteries.cs, from the kill records). Value = kills needed.
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_KillsByNonAttack]
+        CharacterIDs:
+            ActorID: PlagueheraldID
+        Value: 5

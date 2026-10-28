@@ -1,0 +1,43 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BanefulHex$
+Character: PlagueheraldID
+ID: 20314
+Level: 7
+Initiative: 33
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Damage: 3
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DamageOnCurseModApplied
+                    Filter: Enemy
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+            BCurse:
+                Curse:
+                    DiamondEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter: Enemy
+                AnimOverload: RadialNegative
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Icon_Curse
+            ListLayout: "$GH_314_T$"
+            Layout: "$GH_314_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Curse> <size=100%><voffset=1>@BCurse@"
+        - Row: "$Target_AllAdjacentEnemies$"

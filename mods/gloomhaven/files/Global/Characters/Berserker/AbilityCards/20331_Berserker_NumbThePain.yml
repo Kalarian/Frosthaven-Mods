@@ -1,0 +1,59 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NumbthePain$
+Character: BerserkerID
+ID: 20331
+Level: X
+Initiative: 35
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+        Consumes:
+            TCDamage:
+                CostAbility:
+                    ParentName: TAttack
+                    Damage: 2
+                    Filter: Self
+                Abilities:
+                    TCDamageShield:
+                        Shield: 1
+                        Filter: Self
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCDamage:
+                CostAbility:
+                    ParentName: BNull
+                    Damage: 2
+                    Filter: Self
+                Abilities:
+                    BCDamageStun:
+                        ParentName: BNull
+                        Stun: True
+                        Range: 1
+                        Filter: Enemy
+                        AnimOverload: AdjacentShove
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: TCDamage
+            Text: "$GH_331_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCDamage
+            Text: "$GH_331_B$"

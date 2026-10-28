@@ -1,0 +1,48 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GrimSustenance$
+Character: NightshroudID
+ID: 20278
+Level: 4
+Initiative: 29
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            CasterHasPositiveConditions: Invisible
+                        AbilityOverrides:
+                            TAttackCOBuff:
+                                Strength: 2
+                        XP: 1
+            TInvis:
+                Invisible: True
+                Filter: Self
+                AnimOverload: TurnInvisible
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+        Infuse: Dark
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=20%> "
+        - Row: "$GH_268_T$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Invisible>"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
+        - Row: "<size=50%> "
+        - Infuse: Dark

@@ -1,0 +1,40 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_VilePestilence$
+Character: PlagueheraldID
+ID: 20289
+Level: 1
+Initiative: 61
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+                Range: 2
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,R|-1,-1,R|1,-1,R"
+                MultiPassAttack: False
+                SubAbilities:
+                    TAttackSubPoison:
+                        Poison: True
+                        Filter: [Enemy, Ally]
+                        CanTargetInvisible: true
+                AnimOverload: AreaDisease
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "65,25"
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+                - Row: "<sprite name=Range> *TAttack.Range*"
+            - Column:
+                - Row: "£Area£"
+        - Row: "<size=50%>"
+        - Row: "$GH_289_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Plagueherald07
+Name: PERK_Plagueherald_07_Name
+Description: PERK_Plagueherald_07_Desc
+CharacterID: PlagueheraldID
+Available: 2
+CardsToAdd: [AMC_Stun_R]

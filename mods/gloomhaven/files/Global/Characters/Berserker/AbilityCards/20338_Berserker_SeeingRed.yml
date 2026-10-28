@@ -1,0 +1,48 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SeeingRed$
+Character: BerserkerID
+ID: 20338
+Level: 5
+Initiative: 22
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 2
+                AnimOverload: MeleeAttackAlt                    
+            TShield:
+                Shield: 1
+                ActiveBonusDuration: Round
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    HPPercentOfMax: "< 50%"
+                    XP: 1
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    Filter:
+                        TargetType: Enemy
+                        HealthSelf: "< 50%"
+                AnimOverload: PowerUp
+        XP: 2
+Layout:
+    Top:
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Row: "$GH_338_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$GH_338_B$"
+            Layout: "$GH_338_B$"
+            Icon: Positive_AttackPlus

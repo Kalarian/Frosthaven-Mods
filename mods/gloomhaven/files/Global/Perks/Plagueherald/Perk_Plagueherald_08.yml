@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Plagueherald08
+Name: PERK_Plagueherald_08_Name
+Description: PERK_Plagueherald_08_Desc
+CharacterID: PlagueheraldID
+Available: 1
+CardsToAdd: [AMC_Curse_R, AMC_Curse_R]

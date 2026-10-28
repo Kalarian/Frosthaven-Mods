@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Berserker07
+Name: PERK_Berserker_07_Name
+Description: PERK_Berserker_07_Desc
+CharacterID: BerserkerID
+Available: 1
+CardsToAdd: [AMC_Disarm_P1_R]

@@ -1,0 +1,27 @@
+Parser: Character
+ID: PlagueheraldID
+LocKey: $Plagueherald$
+Model: Plagueherald
+Race: Harrower
+Traits: [ Arcane, Intimidating, Outcast ]
+Complexity: 2
+ElementalAffinities: [ Air, Dark ]
+MasteryIDs: [ Plagueherald_MASTERY_1, Plagueherald_MASTERY_2 ]
+RetireCampaignSection: GH.Plagueherald
+DefaultSkin: 1
+# PlayerLevel:    [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
+HealthTable:      [  6,  7,  8, 9,  10,  11,  12,  13,  14 ]
+NumberAbilityCardsInBattle: 11
+Role: $Plagueherald_ROLE$
+Description: $Plagueherald_DESCRIPTION$
+Difficulty: $DIFFICULTY_MEDIUM$
+Strengths: $Plagueherald_STRENGTHS$
+Weaknesses: $Plagueherald_WEAKNESSES$
+Adventure_Description: $Plagueherald_ADVENTURE_DESCRIPTION$
+HeroStats:
+    Melee: 1
+    Ranged: 4
+    Mobility: 2
+    Support: 3
+    Defense: 2
+    Control: 4

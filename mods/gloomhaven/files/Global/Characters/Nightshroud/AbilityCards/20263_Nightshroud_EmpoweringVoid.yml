@@ -1,0 +1,75 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EmpoweringVoid$
+Character: NightshroudID
+ID: 20263
+Level: 1
+Initiative: 21
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+            TNull:
+                Null: True
+        Consumes:
+            TCDark:
+                Elements: Dark
+                Abilities:
+                    TCDarkDoubleMove:
+                        ParentName: TNull
+                        Move: 2
+                        Range: 1
+                        Target: -1
+                        Filter: [Self]
+                        ActiveBonus:
+                            Duration: Turn
+                            Behaviour: BuffMove
+                            StrengthIsScalar: True
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+            BNull:
+                Null: True
+        Consumes:
+            BCDark:
+                Elements: Dark
+                Abilities:
+                    BCDarkDoubleAttack:
+                        ParentName: BNull
+                        Attack: 2
+                        Range: 1
+                        Target: -1
+                        Filter: [Self]
+                        ActiveBonus:
+                            Duration: Turn
+                            Behaviour: BuffAttack
+                            AbilityStrengthIsScalar: True
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: TCDark
+            Text:
+                - Active:
+                    Ability: "TCDarkDoubleMove"
+                    Icon: Move
+                    ListLayout: "$GH_263_T$"
+                    Layout: "$GH_263_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCDark
+            Text:
+                - Active:
+                    Ability: "BCDarkDoubleAttack"
+                    Icon: Positive_AttackPlus
+                    ListLayout: "$GH_263_B$"
+                    Layout: "$GH_263_B$"

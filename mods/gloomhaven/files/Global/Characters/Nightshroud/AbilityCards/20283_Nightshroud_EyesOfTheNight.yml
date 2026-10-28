@@ -1,0 +1,61 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EyesOfTheNight$
+Character: NightshroudID
+ID: 20283
+Level: 7
+Initiative: 35
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 0
+                AttackHasAdvantage: True
+                CanTargetInvisible: True
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 5
+            BNull:
+                Null: True
+        Consumes:
+            BCLight:
+                Elements: Light
+                Abilities:
+                    BCLightMuddle:
+                        ParentName: BNull
+                        Muddle: True
+                        Range: 1
+                        Target: -1
+                        AnimOverload: WeakRadial
+                        Filter: Enemy
+                Infuse: Dark
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH_283_T_1$\n\n$GH_283_T_2$"
+            Icon: Positive_AttackPlus
+            Layout:
+                - Row: "$GH_283_T_1$"
+                - Row: "<size=50%> "
+                - Row: "$GH_283_T_2$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=100%> "
+        - Consume:
+            Name: BCLight
+            Text:
+                - ColumnWidths: "75,25"
+                - Column:
+                    - Row: "<nobr><b><size=130%><sprite name=Muddle></nobr>"
+                    - Row: "$Target_AllAdjacentEnemies$"
+                - Column:
+                    - Row: "<nobr><sprite name=CreateDark>, <sprite name=XP1></nobr>"

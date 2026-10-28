@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Soulfire$
+Character: NightshroudID
+ID: 20274
+Level: 2
+Initiative: 85
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Condition: Wound
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            CasterHasPositiveConditions: Invisible
+                        AbilityOverrides:
+                            TAttackCOBuff:
+                                Condition: Stun
+                        XP: 1
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 6
+                    DiamondEnhancements: 2
+                Condition: Curse
+                AnimOverload: HeavyAttack
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
+                - AddedEffect: "<size=130%><sprite name=Wound></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$GH_274_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Curse></size>"
+            - Column:

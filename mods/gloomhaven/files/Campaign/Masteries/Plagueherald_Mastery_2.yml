@@ -1,0 +1,14 @@
+Parser: Mastery
+ID: Plagueherald_MASTERY_2
+LocalisedName: Plagueherald_MASTERY_2_Name
+LocalisedDescription: Plagueherald_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: distinct attack abilities (by card and ability name) that targeted four or more enemies (GHMasteries.cs).
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AttacksWithFourTargets]
+        CharacterIDs:
+            ActorID: PlagueheraldID
+        Value: 3

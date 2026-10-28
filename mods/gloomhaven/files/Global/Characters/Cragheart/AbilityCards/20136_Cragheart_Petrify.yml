@@ -1,0 +1,59 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Petrify$
+Character: CragheartID
+ID: 20136
+Level: 5
+Initiative: 47
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+             TKillCreateAttack:
+                MergedKillCreate:
+                    Abilities:
+                        TKill:
+                            Kill: True
+                            Filter:
+                                TargetType: Enemy
+                                EnemyType: Normal
+                            AnimOverload: ObstaclePetrify
+                            Range: 4
+                            IgnoreMergedAbilityTargetSelection: True
+                        TCreate:
+                            Create: RockSingle
+                            SpawnDelay: 3.06
+                            AnimOverload: None
+                            UseMergedWithAbilityTiles: True
+                            AutoTrigger: True
+        Infuse: Earth
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BImmo:
+                Immobilize: True
+                Filter: Enemy
+                Range: 1
+                Target: -1
+                AnimOverload: Footstomp
+Layout:
+    Top:
+        - Row: "$GH_136_T_1$"
+        - Row: "<size=20%> "
+        - Row: "<size=50%>"
+        - Row: "$GH_136_T_2$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Earth
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Immobilize>"
+        - Row: "$Target_AllAdjacentEnemies$"

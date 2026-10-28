@@ -1,0 +1,57 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ScatteredTerror$
+Character: PlagueheraldID
+ID: 20299
+Level: 1
+Initiative: 11
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                    Pierce: 2
+                    PierceEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 3
+                    SquareEnhancements: 1
+                MultiPassAttack: False                    
+                AnimOverload: RadialNegativeTarget
+        Infuse: Air
+        XP: 2
+    Bottom:
+        Abilities:
+            BDisadvantage:
+                AttackersGainDisadvantage: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
+                - Row: "<sprite name=Target>*TAttack.Target* <size=100%><voffset=1>@TAttack.Target@"
+                - Row: "<sprite name=Pierce>*TAttack.Pierce* <size=100%><voffset=1>@TAttack.Pierce@"
+            - Column:
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BDisadvantage
+            Icon: Disadvantage
+            ListLayout: "$GH_337_B_2$"
+            Layout: "$GH_337_B_2$"

@@ -1,0 +1,39 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FoulWind$
+Character: PlagueheraldID
+ID: 20298
+Level: 1
+Initiative: 35
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    ValidAbilityTypes: Attack
+                    Consuming: Air
+                    XPTracker: [0,1,0,1,0,1]
+                    IsToggleBonus: True
+                    EntireAction: True
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_298_T$"
+            Layout: "$GH_298_T$"
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"

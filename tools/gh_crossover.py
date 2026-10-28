@@ -496,10 +496,24 @@ NIGHTSHROUD_PERKS = [
      {"CardsToAdd": "[AMC_Heal1_R, AMC_Heal1_R]"}),
     (1, "Unfazed", 'Ignore negative scenario effects and add two <sprite name="+1">',
      {"CardsToAdd": "[AMC_Basic_P1, AMC_Basic_P1]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
-    # answered by the plugin when the class is ported (a scenario-start choice: discard two, fetch a persistent card
-    # from the pool and play it); until then the perk is text only
-    (1, "Empowering Night", "At the start of the scenario, you may discard two cards to add a card with an action containing a persistent symbol from your pool to your hand and immediately play it, performing that action",
-     {"Cost": 2, "Flags": "[Passive]"}),
+    # Frosthaven's own pieces (2026-10-27): a once-per-scenario toggle (as the Scoundrel's), DiscardCards for the cost,
+    # then SelectAndPlayCard from the pool (the OwnedUnused pile: the class's cards not taken into the hand) limited to
+    # actions with an active bonus, as Hail of Spears limits its pick to summon actions. APPROXIMATION: used during the
+    # Nightshroud's turn rather than at scenario start, and any active-bonus action qualifies, not only persistent ones.
+    (1, "Empowering Night", "Once each scenario, during your turn, you may discard two cards to add a card with an action containing a persistent symbol from your pool to your hand and immediately play it, performing that action",
+     {"Cost": 2, "Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]",
+      "Abilities": _once_per_quest("PERK_Nightshroud_10_Desc", "Recover", """\
+            DiscardCards: 2
+            SubAbilities:
+                EPlay:
+                    AutoTrigger: True
+                    Filter: Self
+                    SelectAndPlayCard:
+                        CardPile: OwnedUnused
+                        Amount: 1
+                        MinRequiredCards: 1
+                    MiscVars:
+                        IsActionValid: Action.Abilities.Any(obj.AbilityType == CAbility.EAbilityType.AddActiveBonus)""")}),
 ]
 
 NIGHTSHROUD_MASTERIES = [

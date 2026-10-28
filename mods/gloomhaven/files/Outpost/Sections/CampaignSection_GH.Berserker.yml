@@ -1,0 +1,10 @@
+Parser: CampaignSection
+ID: GH.Berserker
+Name: Berserker Retires
+SkipNarration: True
+SkipCompletedNotification: False
+Effects:
+    - Type: EnableEvent
+      Param1: GH.Berserker-1
+    - Type: EnableEvent
+      Param1: GH.Berserker-2

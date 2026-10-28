@@ -1,0 +1,35 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FuriousAid$
+Character: BerserkerID
+ID: 20327
+Level: 1
+Initiative: 43
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TLoot:
+                Loot: 2
+                Target: -1
+        XP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 3
+                Filter: [Ally, Self]
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+            - Column:

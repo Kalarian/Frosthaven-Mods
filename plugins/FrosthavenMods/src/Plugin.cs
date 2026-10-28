@@ -12,7 +12,7 @@ namespace FrosthavenMods
     public class Plugin : BaseUnityPlugin
     {
         public const string Guid = "frosthaven.mods";
-        public const string Version = "0.8.2";
+        public const string Version = "0.9.0";
 
         internal static ManualLogSource Log;
         /// <summary>The plugin's own MonoBehaviour (BepInEx keeps it alive across scenes), for coroutines.</summary>

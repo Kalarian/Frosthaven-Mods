@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Plagueherald06
+Name: PERK_Plagueherald_06_Name
+Description: PERK_Plagueherald_06_Desc
+CharacterID: PlagueheraldID
+Available: 1
+CardsToAdd: [AMC_Immobilize_R, AMC_Immobilize_R]

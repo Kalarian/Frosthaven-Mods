@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ForcefulStorm$
+Character: CragheartID
+ID: 20128
+Level: X
+Initiative: 53
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 3
+                Conditions: Disarm
+                AnimOverload: TargetedForcefulStorm
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,E"
+                XPPerTarget: 1
+                MultiPassAttack: False
+        Infuse: Air
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 2
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    AttackType: Melee
+                    Behaviour: BuffAttack
+Layout:
+    Top:
+        - ColumnWidths: "70,25"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Range> *TAttack.Range*"
+            - Row: "<sprite name=Disarm>"
+            - Row: "<size=20%> "
+            - Row: "<line-height=100%>$XP_PerEnemy$"
+        - Column:
+            - Row: "£Area£"
+            - Row: "<size=50%> "
+            - Infuse: Air
+    Bottom:
+        - Active:
+            Ability: BAttack
+            ListLayout: "$GH_128_B$"
+            Layout: "$GH_128_B$"
+            Icon: Positive_AttackPlus

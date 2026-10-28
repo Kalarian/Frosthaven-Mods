@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NaturesLift$
+Character: CragheartID
+ID: 20129
+Level: X
+Initiative: 64
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 2
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                MultiPassAttack: False
+    Bottom:
+        Abilities:
+            BActive:
+                AddRange: 2
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    AttackType: Ranged
+                    Behaviour: BuffRange
+                    Consuming: Air
+                    XPTracker: [0,1,0,1,0,1]
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<sprite name=Range>*THeal.Range* @THeal.Range@"
+                - Row: "<sprite name=Target>*THeal.Target* @THeal.Target@"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$GH_129_B$"
+            Layout: "$GH_129_B$"
+            Icon: Target
+        - Row: "<size=50%> "
+        - XPTracker: BActive

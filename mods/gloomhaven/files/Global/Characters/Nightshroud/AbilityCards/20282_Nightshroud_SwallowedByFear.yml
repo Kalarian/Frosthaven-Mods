@@ -1,0 +1,48 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SwallowedByFear$
+Character: NightshroudID
+ID: 20282
+Level: 6
+Initiative: 90
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+        Consumes:
+            TCDarkAny:
+                Elements: [Dark, Any]
+                AbilityOverrides:
+                    TCDarkKillInstead:
+                        ParentName: TAttack
+                        Kill: True
+                        Filter:
+                            TargetType: Enemy
+                            EnemyType: [Normal, Elite]
+                        AbilityXP: 1
+                        AnimOverload: Kill
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 3
+            BPush:
+                Push: 2
+                Range: 1
+                Target: -1
+                AnimOverload: WeakRadial
+                MultiPassAttack: false
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDarkAny
+            Text: "$GH_202_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Push> *BPush*"
+        - Row: "$Target_AllAdjacentEnemies$"

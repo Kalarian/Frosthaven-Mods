@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GrowingRage$
+Character: BerserkerID
+ID: 20320
+Level: 1
+Initiative: 85
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 0
+                    DiamondEnhancements: 1
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: LostCardCount
+                AnimOverload: HeavyAttack     
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BAttack:
+                Attack: 2
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    HPPercentOfMax: "< 50" # i.e. < 50%
+                    XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> X <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$Xis_LostCardCount$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH_320_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack*"

@@ -1,0 +1,74 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GrimBargain$
+Character: PlagueheraldID
+ID: 20316
+Level: 8
+Initiative: 46
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddTarget: 2
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffTarget
+                    Restriction: OncePerAction
+                    ValidAbilityType: Attack
+                    IsToggleBonus: True
+                    XPTracker: [0,1,0,1,0,1]
+                    CostAbility:
+                        Curse: True
+                        Range: 2
+                        Filter: Ally
+                        AnimOverload: TargetedDebuff
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMuddle:
+                Muddle: True
+                Filter: Self
+                SubAbilities:
+                    BMuddleSubActive:
+                        Attack: 2
+                        ActiveBonus:
+                            Duration: Round
+                            Behaviour: BuffAttack
+                            StrengthIsScalar: True
+                            XPTracker: [0]
+                AnimOverload: PowerUp
+        Infuse: Dark
+        XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Target
+            ListLayout: "$GH_316_T$"
+            Layout: "$GH_316_T$"
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Muddle>"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+        - Divider:
+        - Active:
+            Ability: BMuddleSubActive
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_316_B$"
+            Layout: "$GH_316_B$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,20,20,20"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:
+            - Column:
+                - Duration: Round

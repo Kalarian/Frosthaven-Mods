@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_UnstableUpheaval$
+Character: CragheartID
+ID: 20123
+Level: 1
+Initiative: 13
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                AnimOverload: MeleeSmashUnstableUpheaval
+                Target: -1
+                MultiPassAttack: False
+                TreatAsMelee: True
+            TDamage:
+                Damage: 2
+                Range: 1
+                Target: -1
+                Filter: Ally
+                AnimOverload: Footstomp
+                SkipAnim: True
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthRangeBuff:
+                        ParentName: TAttack
+                        Range: 1
+                XP: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 2
+                Target: -1
+                Filter: Ally
+                Targeting: All
+                AnimOverload: TargetedUnstableUpheavalBottom
+                ActiveBonusDuration: Round
+                SubAbilities:
+                    BShieldSubDamage:
+                        Damage: 1
+                        Target: -1
+                        UseParentTiles: True
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCEarth
+            Text: "$Target_TwoHexInstead$, <sprite name=XP1>"
+        - Row: "<size=50%> "
+        - Row: "$GH_123_T_2$"
+    Bottom:
+        - Row: "$GH_123_B$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*, $Affect_AllAllies$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield*"
+                - Row: "$Affect_AllAllies$"

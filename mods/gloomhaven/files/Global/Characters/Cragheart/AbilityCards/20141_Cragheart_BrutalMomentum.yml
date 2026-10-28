@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BrutalMomentum$
+Character: CragheartID
+ID: 20141
+Level: 7
+Initiative: 52
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 2
+                            SquareEnhancements: 1
+                        IsInlineSubAbility: True
+                        AdditionalPushEffect: TrackBlocked
+                        AdditionalPushEffectDamage: 2
+                        AdditionalPushEffectXP: 1
+    Bottom:
+        Abilities:
+            BAttackBuff:
+                Attack: 0
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                AttackEffect:
+                    Type: StandardBuff
+                    Strength: 1
+                    AttackType: Ranged
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthRangeBuff:
+                        ParentName: BAttackBuff
+                        AttackEffect:
+                            Type: StandardBuff
+                            Strength: 1
+                            AttackType: Ranged
+                            XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Push>*TAttackSubPush* @TAttackSubPush@"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$GH_141_T$"
+    Bottom:
+        - Active:
+            Ability: BAttackBuff
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_141_B_1$"
+            ListLayoutAlt: "$GH_141_B_1_Alt$"
+            Layout: "$GH_141_B_1$"
+            LayoutAlt: "$GH_141_B_1_Alt$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCEarth
+            Text: "$GH_141_B_2$"

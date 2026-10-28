@@ -1,0 +1,50 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_VirulentStrain$
+Character: PlagueheraldID
+ID: 20301
+Level: X
+Initiative: 50
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TRemoveConditions:
+                RemoveConditions: All
+                Condition: Poison
+                Target: 1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    TargetHasNegativeCondition: Poison
+                SubAbilities:
+                    BRemoveConditionsSubDamage:
+                        Damage: 3
+                        AnimOverload: None
+                        UseParentTargets: True
+                        TreatAsNonSubAbility: False
+                AnimOverload: TargetedDebuff
+        XP: 1
+    Bottom:
+        Abilities:
+            BNull:
+                NullTargeting: True
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    TargetHasNegativeCondition: Poison
+                AnimOverload: RadialNegative
+                SubAbilities:
+                    BNullSubPoison:
+                        Poison: True
+                        Range: 1
+                        Target: -1
+                        Filter: Enemy
+                        AllTargetsAdjacentToParentTarget: True
+                        AnimOverload: None
+Layout:
+    Top:
+        - Row: "$GH_301_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Poison>"
+        - Row: "$Target_AllEnemiesAdjacentToEnemiesWith$ <nobr><sprite name=Poison></nobr>"

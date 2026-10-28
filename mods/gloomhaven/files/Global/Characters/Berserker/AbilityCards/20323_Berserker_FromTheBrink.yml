@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FromtheBrink$
+Character: BerserkerID
+ID: 20323
+Level: 1
+Initiative: 24
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal: 0
+                Range: 2
+                Filter: [Ally, Self]
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: HPDifference
+                AnimOverload: Heal
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BPush:
+                Push:
+                    Amount: 1
+                    SquareEnhancements: 1
+                AnimOverload: AdjacentShove
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> X <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*THeal.Range*</mark>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$Xis_HPDiff$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"
+        - Row: "$Target_OneAdjacentEnemy$"

@@ -1,0 +1,10 @@
+Parser: CampaignSection
+ID: GH.Nightshroud
+Name: Nightshroud Retires
+SkipNarration: True
+SkipCompletedNotification: False
+Effects:
+    - Type: EnableEvent
+      Param1: GH.Nightshroud-1
+    - Type: EnableEvent
+      Param1: GH.Nightshroud-2

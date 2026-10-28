@@ -1,0 +1,72 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Immortality$
+Character: BerserkerID
+ID: 20346
+Level: 9
+Initiative: 33
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TPrevent:
+                PreventDamage: 5
+                ActiveBonus:
+                    Duration: Persistent
+                    XPTracker: [1,0,1,0,1]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BShield:
+                Shield:
+                    Amount: 2
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+            BNull:
+                Null: True
+        Consumes:
+            BCFire:
+                Elements: Fire
+                Abilities:
+                    BCFireReta:
+                        ParentName: BNull
+                        Retaliate: 2
+                        ActiveBonusDuration: Round
+Layout:
+    Top:
+        - Active:
+            Ability: TPrevent
+            ListLayout: "$GH_346_T$"
+            Layout: "$GH_346_T$"
+            Icon: Positive_DamagePrevent
+        - Row: "<size=50%> "
+        - XPTracker: TPrevent
+    Bottom:
+        - ColumnWidths: "80,20"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Row: "<size=50%> "
+            - Active:
+                Ability: BShield
+                Icon: Positive_Shield
+                ListLayout: "<sprite name=Shield> *BShield*"
+                Layout:
+                    - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+            - Row: "<size=50%> "
+            - Consume:
+                Name: BCFire
+                Text:
+                    - Active:
+                        Ability: BCFireReta
+                        Icon: Positive_Retaliate
+                        ListLayout: "<sprite name=Retaliate> 2"
+                        Layout:
+                            - Row: "<b><size=130%><sprite name=Retaliate> 2"
+                            - Row: "<line-height=100%><size=100%>$Self$"
+        - Column:
+            - Row: "<size=100%> "
+            - Duration: Round

@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GraspingVermin$
+Character: PlagueheraldID
+ID: 20290
+Level: 1
+Initiative: 69
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 0
+                Range: 3
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,R|-1,-1,R|1,-1,R"
+                Condition: Immobilize
+                MultiPassAttack: False
+                AnimOverload: AreaDisease
+    Bottom:
+        Abilities:
+            BShield:
+                Shield:
+                    Amount: 1
+                Filter: Self
+                ActiveBonusDuration: Persistent
+                SubAbilities:
+                    BShieldSubRangeDebuff:
+                        AddRange: -1
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Persistent
+                            Behaviour: BuffRange
+                            AttackType: Ranged
+                        AutoTrigger: True
+                        AnimOverload: None
+                AnimOverload: PowerUp
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "65,30"
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+                - Row: "<sprite name=Range> *TAttack.Range*"
+                - Row: "<sprite name=Immobilize>"
+            - Column:
+                - Row: "£Area£"
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*. $GH_290_B$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield*"
+                - Row: "<size=50%> "
+                - Row: "$GH_290_B$"

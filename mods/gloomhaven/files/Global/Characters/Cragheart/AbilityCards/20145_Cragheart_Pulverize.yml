@@ -1,0 +1,76 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Pulverize$
+Character: CragheartID
+ID: 20145
+Level: 9
+Initiative: 31
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Target: -1
+                AnimOverload: MeleeSmash
+                MultiPassAttack: False
+                TreatAsMelee: True
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 2
+                            SquareEnhancements: 1
+                        AdditionalPushEffect: IntoObstacles
+                        AdditionalPushEffectDamage: 2
+                        AdditionalPushEffectXP: 1
+                        IsInlineSubAbility: True
+    Bottom:
+        Abilities:
+            BAttack1:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Target: -1
+                MultiPassAttack: False
+                TreatAsMelee: True
+                AnimOverload: MeleeSmash
+            BMove:
+                Move:
+                    Amount: 5
+                    Jump: True
+            BAttack2:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                AnimOverload: MeleeSmash
+                Target: -1
+                MultiPassAttack: False
+                TreatAsMelee: True
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Push>*TAttackSubPush* @TAttackSubPush@"
+            - Column:
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<size=20%> "
+        - Row: "$GH_145_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack1* <size=100%><voffset=1>@BAttack1@"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20, 60, 20"
+            - Column:
+            - Column:
+                - Row: "<b><size=130%><sprite name=Move> *BMove*"
+                - Row: "<sprite name=Jump>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack2* <size=100%><voffset=1>@BAttack2@"
+        - Row: "$Target_AllAdjacentEnemies$"

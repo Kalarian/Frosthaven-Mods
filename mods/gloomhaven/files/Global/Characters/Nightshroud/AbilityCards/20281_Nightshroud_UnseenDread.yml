@@ -1,0 +1,35 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_UnseenDread$
+Character: NightshroudID
+ID: 20281
+Level: 6
+Initiative: 5
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 2
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 6
+                    CircleEnhancements: 1
+                    Jump: True
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Infuse: Dark
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - AddedEffect: "<sprite name=Jump>"
+            - Column:

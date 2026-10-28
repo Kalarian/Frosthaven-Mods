@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Cragheart03
+Name: PERK_Cragheart_03_Name
+Description: PERK_Cragheart_03_Desc
+CharacterID: CragheartID
+Available: 2
+CardsToRemove: [AMC_Basic_P0]
+CardsToAdd: [AMC_Immobilize_P1]

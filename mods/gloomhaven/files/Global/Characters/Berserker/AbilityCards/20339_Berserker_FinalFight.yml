@@ -1,0 +1,50 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FinalFight$
+Character: BerserkerID
+ID: 20339
+Level: 5
+Initiative: 89
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TKill:
+                Kill: True
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+                ExhaustSelf: True
+                AnimOverload: SuperHeavyAttack
+        XP: 3
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 0
+                    CircleEnhancements: 1
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: LostCardCount
+            BNull:
+                Null: True
+        Consumes:
+            BCFire:
+                Elements: Fire
+                Abilities:
+                    BCFireAttack:
+                        ParentName: BNull
+                        Attack: 3
+                        AnimOverload: MeleeAttackAlt
+Layout:
+    Top:
+        - Row: "$Kill_OneAdjacentEnemy$"
+        - Row: "<size=20%> "
+        - Row: "$GH_339_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> X <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Row: "$Xis_LostCardCount$"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCFire
+            Text: "<b><size=130%><sprite name=Attack> 3"

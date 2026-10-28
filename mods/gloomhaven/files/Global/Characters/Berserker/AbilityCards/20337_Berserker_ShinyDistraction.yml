@@ -1,0 +1,60 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ShinyDistraction$
+Character: BerserkerID
+ID: 20337
+Level: 4
+Initiative: 8
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TLoot:
+                Loot: 1
+                Target: -1
+            TShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BDisadvantage:
+                AttackersGainDisadvantage: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+            BAdvantage:
+                Advantage: True
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+        Infuse: Fire
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
+        - Divider:
+        - Active:
+            Ability: TShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *TShield*"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+    Bottom:
+        - Active:
+            Ability: [BDisadvantage, BAdvantage]
+            Icon: Disadvantage
+            ListLayout: "$GH_337_B_1$ $GH_337_B_2$"
+            Layout:
+                - Row: "$GH_337_B_1$"
+                - Row: "<size=50%> "
+                - Row: "$GH_337_B_2$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Fire
+            - Column:
+                - Duration: Round

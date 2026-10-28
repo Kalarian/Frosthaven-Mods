@@ -1,0 +1,56 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WingedCongregation$
+Character: PlagueheraldID
+ID: 20294
+Level: 1
+Initiative: 16
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Move:
+                    Amount: 0
+                    Fly: True
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffMove
+                AnimOverload: PowerUp
+        Infuse: Air
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BHeal:
+                Heal:
+                    Amount: 1
+                    DiamondPlusEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter: Ally
+                AnimOverload: RadialPositive
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Flying
+            ListLayout: "$Gain_Flying$"
+            Layout: "<b><size=130%>$Gain_Flying$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,20,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Affect_AllAdjacentAllies$"

@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HeavingSwing$
+Character: CragheartID
+ID: 20127
+Level: X
+Initiative: 57
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 1
+                            SquareEnhancements: 1
+                        IsInlineSubAbility: True
+                        AdditionalPushEffect: IntoObstacles
+                        AdditionalPushEffectDamage: 2
+                        AdditionalPushEffectXP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    AttackType: Ranged
+                    Behaviour: BuffAttack
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Push>*TAttackSubPush* @TAttackSubPush@"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$GH_127_T$"
+    Bottom:
+        - Active:
+            Ability: BAttack
+            ListLayout: "$GH_127_B$"
+            Layout: "$GH_127_B$"
+            Icon: Positive_AttackPlus

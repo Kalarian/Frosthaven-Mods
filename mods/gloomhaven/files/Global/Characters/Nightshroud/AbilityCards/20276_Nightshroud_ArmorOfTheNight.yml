@@ -1,0 +1,62 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ArmorOfTheNight$
+Character: NightshroudID
+ID: 20276
+Level: 3
+Initiative: 23
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 4
+            TNull:
+                Null: True
+        Consumes:
+            TCDark:
+                Elements: Dark
+                Abilities:
+                    TCDarkHeal:
+                        ParentName: TNull
+                        Heal: 4
+                        Filter: Self
+                        AnimOverload: Heal
+                XP: 1
+    Bottom:
+        Abilities:
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 2
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+        Infuse: Dark
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: TCDark
+            Text:
+                - ColumnWidths: "80,20"
+                - ColumnSpacing: 100
+                - Column:
+                    - Row: "<b><size=130%><sprite name=Heal> *TCDarkHeal*"
+                    - Row: "$Self$"
+                - Column:
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:
+                - Duration: Round

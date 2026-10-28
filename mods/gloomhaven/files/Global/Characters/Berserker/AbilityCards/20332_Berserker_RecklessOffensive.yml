@@ -1,0 +1,86 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RecklessOffensive$
+Character: BerserkerID
+ID: 20332
+Level: 2
+Initiative: 21
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 2
+                Target: 0
+                ConsiderMultiTargetForEnhancements: true
+        Consumes:
+            TCDamage1:
+                ConsumeGroup: CGReckless
+                CostAbility:
+                    ParentName: TAttack
+                    Damage: 1
+                    Filter: Self
+                AbilityOverrides:
+                    TCTargetBuff1:
+                        ParentName: TAttack
+                        Target: 1
+            TCDamage2:
+                ConsumeGroup: CGReckless
+                CostAbility:
+                    ParentName: TAttack
+                    Damage: 2
+                    Filter: Self
+                AbilityOverrides:
+                    TCTargetBuff2:
+                        ParentName: TAttack
+                        Target: 2
+            TCDamage3:
+                ConsumeGroup: CGReckless
+                CostAbility:
+                    ParentName: TAttack
+                    Damage: 3
+                    Filter: Self
+                AbilityOverrides:
+                    TCTargetBuff3:
+                        ParentName: TAttack
+                        Target: 3
+    Bottom:
+        Abilities:
+            BRetaliate:
+                Retaliate: 2
+                Filter: Self
+                ActiveBonusDuration: Persistent
+                AnimOverload: PowerUp
+                SubAbilities:
+                    BRetaliateSubEnemyAttackBuff:
+                        Attack: 1
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Persistent
+                            AttackType: Melee
+                            Behaviour: BuffIncomingAttacks
+                        AnimOverload: None
+Layout:
+    Top:
+        - Row: "<size=10%> "
+        - Row: "$GH_332_T$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<sprite name=Target>X"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$Xis_AmountOfDamageYouSuffered$"
+    Bottom:
+        - Row: "$GH_332_B$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BRetaliate
+            Icon: Positive_Retaliate
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*. $GH_332_B$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"

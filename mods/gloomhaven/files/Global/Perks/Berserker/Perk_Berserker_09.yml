@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Berserker09
+Name: PERK_Berserker_09_Name
+Description: PERK_Berserker_09_Desc
+CharacterID: BerserkerID
+Available: 1
+Flags: [Passive, IgnoreMinusOneItemEffects]

@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DefianceofDeath$
+Character: BerserkerID
+ID: 20322
+Level: 1
+Initiative: 31
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 2
+                AnimOverload: HeavyAttack                                     
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            HealthSelf: "< 50%"
+                        XP: 1
+                        AbilityOverrides:
+                            TAttackBuff:
+                                Strength: 2
+    Bottom:
+        Abilities:
+            BPrevent:
+                PreventDamage: 3
+                PreventOnlyIfLethal: True
+                ActiveBonus:
+                    Duration: Persistent
+                    XPTracker: [1,1,1]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<size=20%> "
+            - Row: "$GH_322_T$"
+    Bottom:
+        - Active:
+            Ability: BPrevent
+            ListLayout: "$GH_322_B$"
+            Layout: "$GH_322_B$"
+            Icon: Positive_DamagePrevent
+        - Row: "<size=50%> "
+        - XPTracker: BPrevent

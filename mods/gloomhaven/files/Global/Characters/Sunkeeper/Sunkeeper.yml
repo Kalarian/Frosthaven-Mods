@@ -19,9 +19,9 @@ Strengths: $Sunkeeper_STRENGTHS$
 Weaknesses: $Sunkeeper_WEAKNESSES$
 Adventure_Description: $Sunkeeper_ADVENTURE_DESCRIPTION$
 HeroStats:
-    Melee: 4
+    Melee: 3
     Ranged: 1
     Mobility: 2
-    Support: 4
-    Defense: 6
+    Support: 3
+    Defense: 5
     Control: 1

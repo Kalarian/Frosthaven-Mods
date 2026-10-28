@@ -1,0 +1,24 @@
+Parser: Mastery
+ID: Berserker_MASTERY_1
+LocalisedName: Berserker_MASTERY_1_Name
+LocalisedDescription: Berserker_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAGS: lost hit points on every turn; failed by Blood Pact's bottom (card 20324) (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_LoseHpEveryTurn]
+        CharacterIDs:
+            ActorID: BerserkerID
+        Value: 1
+BattleGoalFailCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_UsedCardBottom]
+        CharacterIDs:
+            ActorID: BerserkerID
+        Amount: 20324
+        Value: 1

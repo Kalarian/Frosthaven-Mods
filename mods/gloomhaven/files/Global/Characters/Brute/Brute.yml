@@ -18,9 +18,9 @@ Strengths: $Brute_STRENGTHS$
 Weaknesses: $Brute_WEAKNESSES$
 Adventure_Description: $Brute_ADVENTURE_DESCRIPTION$
 HeroStats:
-    Melee: 5
+    Melee: 4
     Ranged: 1
     Mobility: 3
     Support: 1
-    Defense: 5
+    Defense: 4
     Control: 3

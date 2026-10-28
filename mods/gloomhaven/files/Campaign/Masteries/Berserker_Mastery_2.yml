@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Berserker_MASTERY_2
+LocalisedName: Berserker_MASTERY_2_Name
+LocalisedDescription: Berserker_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: one hit point at the end of every turn (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_OneHpEveryTurn]
+        CharacterIDs:
+            ActorID: BerserkerID
+        Value: 1

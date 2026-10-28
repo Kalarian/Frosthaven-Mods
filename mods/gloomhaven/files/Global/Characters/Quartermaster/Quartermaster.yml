@@ -18,9 +18,9 @@ Strengths: $Quartermaster_STRENGTHS$
 Weaknesses: $Quartermaster_WEAKNESSES$
 Adventure_Description: $Quartermaster_ADVENTURE_DESCRIPTION$
 HeroStats:
-    Melee: 5
+    Melee: 4
     Ranged: 2
     Mobility: 2
-    Support: 4
-    Defense: 4
+    Support: 3
+    Defense: 3
     Control: 2

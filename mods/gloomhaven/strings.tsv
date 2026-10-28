@@ -1,149 +1,266 @@
+ABILITY_CARD_AcceleratedEnd	Accelerated End
+ABILITY_CARD_AirborneToxin	Airborne Toxin
 ABILITY_CARD_Amputate	Amputate
+ABILITY_CARD_AngelOfDeath	Angel of Death
 ABILITY_CARD_AngelicAscension	Angelic Ascension
+ABILITY_CARD_ArmorOfTheNight	Armor of the Night
+ABILITY_CARD_Avalanche	Avalanche
 ABILITY_CARD_Backstab	Backstab
+ABILITY_CARD_BackupAmmunition	Backup Ammunition
 ABILITY_CARD_BagofHolding	Bag of Holding
 ABILITY_CARD_BalancedMeasure	Balanced Measure
+ABILITY_CARD_BanefulHex	Baneful Hex
 ABILITY_CARD_BattlefieldMedicine	Battlefield Medicine
 ABILITY_CARD_BeaconofLight	Beacon of Light
 ABILITY_CARD_BedsideManner	Bedside Manner
+ABILITY_CARD_BitingGnats	Biting Gnats
+ABILITY_CARD_BlackArrow	Black Arrow
+ABILITY_CARD_BlackKnives	Black Knives
+ABILITY_CARD_BlackTides	Black Tides
 ABILITY_CARD_BladedBoomerang	Bladed Boomerang
+ABILITY_CARD_BlindDestruction	Blind Destruction
+ABILITY_CARD_BlisteringVortex	Blistering Vortex
+ABILITY_CARD_BloodPact	Blood Pact
 ABILITY_CARD_BloodTransfusion	Blood Transfusion
 ABILITY_CARD_BloodySaw	Bloody Saw
+ABILITY_CARD_BluntForce	Blunt Force
+ABILITY_CARD_BoneBreaker	Bone Breaker
 ABILITY_CARD_BoosterShot	Booster Shot
+ABILITY_CARD_BounceBack	Bounce Back
+ABILITY_CARD_BreaktheChains	Break the Chains
 ABILITY_CARD_BrightAegis	Bright Aegis
 ABILITY_CARD_BrilliantPrayer	Brilliant Prayer
+ABILITY_CARD_BrutalMomentum	Brutal Momentum
 ABILITY_CARD_BruteForce	Brute Force
 ABILITY_CARD_BurningFlash	Burning Flash
+ABILITY_CARD_BurningHatred	Burning Hatred
 ABILITY_CARD_BurningOil	Burning Oil
+ABILITY_CARD_CarelessCharge	Careless Charge
+ABILITY_CARD_Cataclysm	Cataclysm
 ABILITY_CARD_CatastrophicBomb	Catastrophic Bomb
+ABILITY_CARD_Cauterize	Cauterize
 ABILITY_CARD_CautiousAdvance	Cautious Advance
+ABILITY_CARD_ClawsOfTheNight	Claws of the Night
 ABILITY_CARD_CleansingForce	Cleansing Force
+ABILITY_CARD_CleartheWay	Clear the Way
 ABILITY_CARD_CleavingAxe	Cleaving Axe
+ABILITY_CARD_CloakOfShade	Cloak of Shade
+ABILITY_CARD_ConcealedDominance	Concealed Dominance
 ABILITY_CARD_ContinualSupply	Continual Supply
+ABILITY_CARD_ConverttheFlock	Convert the Flock
+ABILITY_CARD_Crater	Crater
+ABILITY_CARD_CreepingCurse	Creeping Curse
 ABILITY_CARD_CripplingBow	Crippling Bow
 ABILITY_CARD_CripplingOffensive	Crippling Offensive
 ABILITY_CARD_CripplingPoison	Crippling Poison
+ABILITY_CARD_CrushingGrasp	Crushing Grasp
 ABILITY_CARD_CrushingHammer	Crushing Hammer
 ABILITY_CARD_CulltheWeak	Cull the Weak
 ABILITY_CARD_CurativeMixture	Curative Mixture
+ABILITY_CARD_DancingShadows	Dancing Shadows
+ABILITY_CARD_DarkCloud	Dark Cloud
 ABILITY_CARD_Daybreak	Daybreak
+ABILITY_CARD_DazingWound	Dazing Wound
 ABILITY_CARD_DazzlingCharge	Dazzling Charge
 ABILITY_CARD_DefensiveStance	Defensive Stance
 ABILITY_CARD_DefensiveTactics	Defensive Tactics
+ABILITY_CARD_DefianceofDeath	Defiance of Death
 ABILITY_CARD_DevastatingHack	Devastating Hack
+ABILITY_CARD_DevilHorns	Devil Horns
+ABILITY_CARD_DigPit	Dig Pit
+ABILITY_CARD_DirtTornado	Dirt Tornado
 ABILITY_CARD_DivineIntervention	Divine Intervention
 ABILITY_CARD_DoNoHarm	Do No Harm
+ABILITY_CARD_DoomedBreeze	Doomed Breeze
 ABILITY_CARD_DuelistsAdvance	Duelist's Advance
+ABILITY_CARD_EarthenClod	Earthen Clod
 ABILITY_CARD_EmpoweringCommand	Empowering Command
+ABILITY_CARD_EmpoweringVoid	Empowering Void
+ABILITY_CARD_EnervatingWound	Enervating Wound
 ABILITY_CARD_EngulfingRadiance	Engulfing Radiance
+ABILITY_CARD_Epidemic	Epidemic
 ABILITY_CARD_Euthanize	Euthanize
+ABILITY_CARD_ExplosivePunch	Explosive Punch
 ABILITY_CARD_EyeforanEye	Eye for an Eye
+ABILITY_CARD_EyesOfTheNight	Eyes of the Night
 ABILITY_CARD_FaceYourEnd	Face Your End
 ABILITY_CARD_FatalAdvance	Fatal Advance
+ABILITY_CARD_FatalFury	Fatal Fury
+ABILITY_CARD_FetidFlurry	Fetid Flurry
+ABILITY_CARD_FinalFight	Final Fight
 ABILITY_CARD_FirstAid	First Aid
 ABILITY_CARD_FlankingStrike	Flanking Strike
 ABILITY_CARD_Flintlock	Flintlock
+ABILITY_CARD_FlurryofAxes	Flurry of Axes
 ABILITY_CARD_FlurryofBlades	Flurry of Blades
+ABILITY_CARD_ForcefulStorm	Forceful Storm
 ABILITY_CARD_FortifiedPosition	Fortified Position
+ABILITY_CARD_FoulWind	Foul Wind
 ABILITY_CARD_FrenziedOnslaught	Frenzied Onslaught
+ABILITY_CARD_FromtheBrink	From the Brink
+ABILITY_CARD_FuriousAid	Furious Aid
+ABILITY_CARD_GatheringDoom	Gathering Doom
 ABILITY_CARD_GentlemansAnger	Gentleman's Anger
 ABILITY_CARD_GiantClub	Giant Club
+ABILITY_CARD_GlassHammer	Glass Hammer
+ABILITY_CARD_GloomDarts	Gloom Darts
 ABILITY_CARD_GloriousBolt	Glorious Bolt
 ABILITY_CARD_GrabandGo	Grab and Go
+ABILITY_CARD_GraspingVermin	Grasping Vermin
+ABILITY_CARD_GrimBargain	Grim Bargain
+ABILITY_CARD_GrimSustenance	Grim Sustenance
 ABILITY_CARD_GrislyTrauma	Grisly Trauma
+ABILITY_CARD_GrowingRage	Growing Rage
 ABILITY_CARD_GruesomeAdvantage	Gruesome Advantage
 ABILITY_CARD_HammerBlow	Hammer Blow
 ABILITY_CARD_Hamstring	Hamstring
 ABILITY_CARD_HandoftheSurgeon	Hand of the Surgeon
 ABILITY_CARD_HastenedStep	Hastened Step
+ABILITY_CARD_HeavingSwing	Heaving Swing
 ABILITY_CARD_HiddenDaggers	Hidden Daggers
 ABILITY_CARD_HoldBackthePain	Hold Back the Pain
 ABILITY_CARD_HolyStrike	Holy Strike
 ABILITY_CARD_HookandChain	Hook and Chain
 ABILITY_CARD_IlluminatetheTarget	Illuminate the Target
+ABILITY_CARD_Immortality	Immortality
 ABILITY_CARD_ImmovablePhalanx	Immovable Phalanx
 ABILITY_CARD_ImpalingSpear	Impaling Spear
 ABILITY_CARD_InspiringSanctity	Inspiring Sanctity
 ABILITY_CARD_IronBulwark	Iron Bulwark
 ABILITY_CARD_Juggernaut	Juggernaut
+ABILITY_CARD_KineticAssault	Kinetic Assault
 ABILITY_CARD_KingoftheHill	King of the Hill
 ABILITY_CARD_LargeMedicalPack	Large Medical Pack
 ABILITY_CARD_LayonHands	Lay on Hands
 ABILITY_CARD_LeapingCleave	Leaping Cleave
 ABILITY_CARD_LongCon	Long Con
+ABILITY_CARD_LumberingBash	Lumbering Bash
+ABILITY_CARD_LurkingRuin	Lurking Ruin
+ABILITY_CARD_MassExtinction	Mass Extinction
+ABILITY_CARD_MassiveBoulder	Massive Boulder
 ABILITY_CARD_MasterPhysician	Master Physician
 ABILITY_CARD_MedicalPack	Medical Pack
+ABILITY_CARD_Meteor	Meteor
 ABILITY_CARD_MobileResponse	Mobile Response
 ABILITY_CARD_MobilizingAxiom	Mobilizing Axiom
+ABILITY_CARD_NaturesLift	Nature's Lift
+ABILITY_CARD_Nightfall	Nightfall
+ABILITY_CARD_NightmarishAffliction	Nightmarish Affliction
+ABILITY_CARD_NumbthePain	Numb the Pain
 ABILITY_CARD_OpenWound	Open Wound
+ABILITY_CARD_OpposingStrike	Opposing Strike
 ABILITY_CARD_OversizedPack	Oversized Pack
 ABILITY_CARD_OverwhelmingAssault	Overwhelming Assault
 ABILITY_CARD_PainsEnd	Pain's End
+ABILITY_CARD_ParalyzingBite	Paralyzing Bite
 ABILITY_CARD_PathofGlory	Path of Glory
+ABILITY_CARD_Petrify	Petrify
 ABILITY_CARD_PortableBallista	Portable Ballista
 ABILITY_CARD_PracticalPlans	Practical Plans
 ABILITY_CARD_Precaution	Precaution
 ABILITY_CARD_PrepForSurgery	Prep for Surgery
+ABILITY_CARD_PrepareForTheKill	Prepare for the Kill
 ABILITY_CARD_Prescription	Prescription
 ABILITY_CARD_PreventionisKey	Prevention Is Key
 ABILITY_CARD_Proficiency	Proficiency
 ABILITY_CARD_ProtectiveBlessing	Protective Blessing
 ABILITY_CARD_ProvokingRoar	Provoking Roar
+ABILITY_CARD_Pulverize	Pulverize
 ABILITY_CARD_PurifyingAura	Purifying Aura
 ABILITY_CARD_QuickHands	Quick Hands
+ABILITY_CARD_QuietFrenzy	Quiet Frenzy
 ABILITY_CARD_Quietus	Quietus
 ABILITY_CARD_QuiverofArrows	Quiver of Arrows
+ABILITY_CARD_RecklessOffensive	Reckless Offensive
 ABILITY_CARD_Reforge	Reforge
 ABILITY_CARD_Refreshment	Refreshment
 ABILITY_CARD_RegenerativeTissue	Regenerative Tissue
 ABILITY_CARD_ReinforcedSteel	Reinforced Steel
 ABILITY_CARD_ResearchtheCure	Research the Cure
 ABILITY_CARD_ReservedEnergy	Reserved Energy
+ABILITY_CARD_ResoluteStand	Resolute Stand
 ABILITY_CARD_Restock	Restock
 ABILITY_CARD_RighteousStrength	Righteous Strength
+ABILITY_CARD_RockSlide	Rock Slide
+ABILITY_CARD_RockTunnel	Rock Tunnel
+ABILITY_CARD_RockyEnd	Rocky End
+ABILITY_CARD_RotMaggots	Rot Maggots
+ABILITY_CARD_RumblingAdvance	Rumbling Advance
 ABILITY_CARD_ScalesofJustice	Scales of Justice
+ABILITY_CARD_ScatteredTerror	Scattered Terror
 ABILITY_CARD_ScrollofAnnihilation	Scroll of Annihilation
 ABILITY_CARD_ScrollofBlizzards	Scroll of Blizzards
 ABILITY_CARD_ScrollofJudgment	Scroll of Judgment
 ABILITY_CARD_ScrollofLightning	Scroll of Lightning
 ABILITY_CARD_ScrollofRecall	Scroll of Recall
+ABILITY_CARD_SeeingRed	Seeing Red
 ABILITY_CARD_SelfishRetribution	Selfish Retribution
+ABILITY_CARD_SentientGrowth	Sentient Growth
 ABILITY_CARD_SharpeningKit	Sharpening Kit
 ABILITY_CARD_ShieldBash	Shield Bash
+ABILITY_CARD_ShinyDistraction	Shiny Distraction
 ABILITY_CARD_SidePouch	Side Pouch
+ABILITY_CARD_SilentForce	Silent Force
 ABILITY_CARD_SingleOut	Single Out
 ABILITY_CARD_SinisterOpportunity	Sinister Opportunity
 ABILITY_CARD_Skewer	Skewer
 ABILITY_CARD_SkirmishingManeuver	Skirmishing Maneuver
 ABILITY_CARD_SmokeBomb	Smoke Bomb
+ABILITY_CARD_SmokeStep	Smoke Step
+ABILITY_CARD_Soulfire	Soulfire
 ABILITY_CARD_SpareDagger	Spare Dagger
 ABILITY_CARD_SpecialMixture	Special Mixture
+ABILITY_CARD_SpikedArmor	Spiked Armor
+ABILITY_CARD_SpiritOfTheNight	Spirit of the Night
+ABILITY_CARD_SpreadingScourge	Spreading Scourge
+ABILITY_CARD_SpreadthePlague	Spread the Plague
 ABILITY_CARD_SpringtheTrap	Spring the Trap
 ABILITY_CARD_SticktotheShadows	Stick to the Shadows
 ABILITY_CARD_StilettoStorm	Stiletto Storm
+ABILITY_CARD_StingingCloud	Stinging Cloud
+ABILITY_CARD_StonePummel	Stone Pummel
+ABILITY_CARD_StormofWings	Storm of Wings
+ABILITY_CARD_StrengthinAgony	Strength in Agony
+ABILITY_CARD_SuccumbtotheGift	Succumb to the Gift
 ABILITY_CARD_SupportiveChant	Supportive Chant
 ABILITY_CARD_SurgeonsSatchel	Surgeon's Satchel
+ABILITY_CARD_SwallowedByFear	Swallowed by Fear
 ABILITY_CARD_SweepingBlow	Sweeping Blow
 ABILITY_CARD_SwiftBow	Swift Bow
 ABILITY_CARD_Syringe	Syringe
 ABILITY_CARD_TacticalOrder	Tactical Order
 ABILITY_CARD_Teamwork	Teamwork
+ABILITY_CARD_TerrorBlade	Terror Blade
+ABILITY_CARD_TheMawofMadness	The Maw of Madness
 ABILITY_CARD_ThiefsKnack	Thief's Knack
 ABILITY_CARD_ThrowingKnives	Throwing Knives
 ABILITY_CARD_Trample	Trample
 ABILITY_CARD_Triage	Triage
 ABILITY_CARD_TrickstersReversal	Trickster's Reversal
+ABILITY_CARD_UnbridledPower	Unbridled Power
+ABILITY_CARD_UndertheSkin	Under the Skin
+ABILITY_CARD_UnseenDread	Unseen Dread
+ABILITY_CARD_UnstableUpheaval	Unstable Upheaval
 ABILITY_CARD_UnstoppableCharge	Unstoppable Charge
+ABILITY_CARD_UnstoppableDestruction	Unstoppable Destruction
 ABILITY_CARD_UnwaveringMandate	Unwavering Mandate
 ABILITY_CARD_Vaccine	Vaccine
+ABILITY_CARD_VengefulBarrage	Vengeful Barrage
 ABILITY_CARD_VenomShiv	Venom Shiv
+ABILITY_CARD_VilePestilence	Vile Pestilence
+ABILITY_CARD_VirulentStrain	Virulent Strain
 ABILITY_CARD_VisageoftheInevitable	Visage of the Inevitable
 ABILITY_CARD_VitalStrike	Vital Strike
+ABILITY_CARD_VoiceOfTheNight	Voice of the Night
 ABILITY_CARD_WallofDoom	Wall of Doom
 ABILITY_CARD_WardingStrength	Warding Strength
 ABILITY_CARD_WatchItBurn	Watch It Burn
 ABILITY_CARD_WeaponofPurity	Weapon of Purity
 ABILITY_CARD_Whirlwind	Whirlwind
+ABILITY_CARD_WillingSacrifice	Willing Sacrifice
+ABILITY_CARD_WingedCongregation	Winged Congregation
+ABILITY_CARD_WingsOfTheNight	Wings of the Night
+ABILITY_CARD_WretchedSwarm	Wretched Swarm
 Advantage	Advantage
 Affect_AllAdjacentAllies	Affect all adjacent allies
 Affect_AllAllies	Affect all allies
@@ -153,6 +270,11 @@ Affect_OneAdjacentAlly	Affect one adjacent ally
 Affect_OneAllyWithinRange3	Affect one ally within <nobr>Range <sprite name=Range> 3</nobr>
 Affect_SelfAndAllAdjacentAllies	Affect self and all adjacent allies
 Affect_SelfAndAllAllies	Affect self and all allies
+Berserker	Berserker
+Berserker_ADVENTURE_DESCRIPTION	Berserkers are Inox warriors who have embraced their strength and fury. The Berserker will go to any lengths to keep her friends safe, including sacrificing her own life. Her abilities revolve around high damage output with the option of self-damage to push to even higher amounts. This makes her an extremely dangerous combatant, both to her enemies and herself.
+Berserker_ROLE	Melee Damage
+Berserker_STRENGTHS	- <indent=%15>One of the highest damage-dealing classes</indent>\n- <indent=%15>Gets even stronger on lower health</indent>\n- <indent=%15>Can lead the front line and draw enemy fire</indent>
+Berserker_WEAKNESSES	- <indent=%15>Little in the way of abilities that help allies</indent>\n- <indent=%15>Operating on low health can lead to premature demise</indent>\n- <indent=%15>Has anger management issues</indent>
 Brute	Brute
 Brute_ADVENTURE_DESCRIPTION	The Brute employs his great size and strength to earn a living by wielding his huge sword and impressive shield for those who pay the most.\nBrutes are best used as front line melee troops, absorbing damage and protecting the more fragile ranged damage dealers, and are best equipped with items that keep them alive longer!
 Brute_DESCRIPTION	The Brute employs his great size and strength to earn a living by wielding his huge sword and impressive shield for those who pay the most.
@@ -160,8 +282,17 @@ Brute_ROLE	Melee Damage/Tank
 Brute_SKIN_ALT	Boneguard
 Brute_STRENGTHS	- <indent=%15>High health and defensive abilities make him more durable than some</indent>\n- <indent=%15>Access to early Disarm and Stun</indent>\n- <indent=%15>Great at pushing enemies about</indent>
 Brute_WEAKNESSES	- <indent=%15>Low mobility</indent>\n- <indent=%15>Poor ranged attack options</indent>\n- <indent=%15>Not the greatest conversationalist</indent>
+Cragheart	Cragheart
+Cragheart_ADVENTURE_DESCRIPTION	Craghearts are Savvas who were exiled for being incapable of mastering an element. Their core is shattered to mark them for life.\nThey have a wide range of abilities and reasonable health meaning they can be used in a defensive melee role, as a ranged damage dealer or even a healer in a pinch. Prioritise using Earth Mana to get the most out of their abilities.
+Cragheart_DESCRIPTION	Craghearts are Savvas who were exiled for being incapable of mastering an element. Their core is shattered to mark them for life.
+Cragheart_ROLE	Damage/Support
+Cragheart_SKIN_ALT	Boulderfist
+Cragheart_STRENGTHS	- <indent=%15>Can place and interact with obstacles</indent>\n- <indent=%15>Versatile with melee & ranged options</indent>\n- <indent=%15>Lots of direct damage abilities to dodge Shield and Disadvantage</indent>
+Cragheart_WEAKNESSES	- <indent=%15>Doesn't quite excel in any one aspect</indent>\n- <indent=%15>Some abilities require obstacles in specific locations to function</indent>\n- <indent=%15>Hard-to-read facial expressions</indent>
+DIFFICULTY_HIGH	High
 DIFFICULTY_LOW	Low
 DIFFICULTY_MEDIUM	Medium
+Damage	Damage
 GH_002_T	Gain <sprite name=XP1> for each time you Retaliate <nobr>this round.</nobr>
 GH_004_B	Any enemy who targets one of your adjacent allies with an attack this round targets you with that attack instead, regardless of the attack's range.
 GH_007_B	On the next six sources of damage from attacks targeting you, gain <nobr>Shield <sprite name=Shield> *BShield*.</nobr>
@@ -171,6 +302,7 @@ GH_016_B	If the movement was in a straight line, perform
 GH_022_T	Kill one adjacent normal enemy <nobr>with  STUN <sprite name=Stun></nobr>.
 GH_023_B	You may treat all <nobr>Move <sprite name=Move></nobr> abilities as <nobr>Attack <sprite name=Attack></nobr> abilities of equal value.
 GH_026_B	Add +3 <nobr>Attack <sprite name=Attack></nobr> to all your attacks targeting enemies with <nobr>DISARM <sprite name=Disarm></nobr>, <nobr>IMMOBILIZE <sprite name=Immobilize></nobr> or <nobr>STUN <sprite name=Stun></nobr> this round.
+GH_062_T	Additionally, target all enemies <nobr>on the path</nobr> to the primary target.
 GH_088_B	On your next four attacks targeting enemies adjacent to none of their allies, add <nobr>+2 Attack <sprite name=Attack>.</nobr>
 GH_088_T	Add <nobr>+2 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> when the target is adjacent to any <nobr>of your allies.</nobr>
 GH_090_T	On your next attack while <nobr>INVISIBLE <sprite name=Invisible></nobr>, double the value of the attack and gain <sprite name=XP2>.
@@ -197,6 +329,47 @@ GH_111_T	Target one enemy within <nobr>Range <sprite name=Range> 3</nobr> to suf
 GH_113_B	Kill one adjacent enemy whose current hit point value is equal or less than 3.
 GH_114_B	Force one adjacent normal or elite enemy to perform its turn this round as if its allies were enemies and its enemies were allies, with you controlling the actions.
 GH_115_T	Add <nobr>POISON <sprite name=Poison></nobr> and <nobr>WOUND <sprite name=Wound></nobr> to all your attacks.
+GH_116_B	On the next six melee attacks targeting you, gain <nobr>Retaliate <sprite name=Retaliate> *BRetaliate*.</nobr>
+GH_118_B	Create two single-hex obstacles in empty hexes adjacent to you.
+GH_119_B	All adjacent allies and enemies suffer *BDamage* damage.
+GH_120_T	All allies and enemies adjacent to the target suffer 1 damage.
+GH_121_T	On your next four ranged Attack actions, gain ADD TARGET <sprite name=Target>.
+GH_122_T	Destroy one adjacent obstacle.
+GH_123_B	All allies suffer<nobr> *BShieldSubDamage* damage</nobr>.
+GH_123_T_2	All adjacent allies suffer <nobr>*TDamage* damage</nobr>.
+GH_124_B_1	All adjacent allies and enemies suffer <nobr>*BDamage1* damage</nobr>.
+GH_124_B_2	All adjacent allies and enemies suffer <nobr>*BDamage2* damage</nobr>.
+GH_124_B_3	<nobr>2 damage instead, <sprite name=XP1></nobr>
+GH_125_T	<nobr>MUDDLE <sprite name=Muddle></nobr> all allies and enemies in the targeted area.
+GH_127_B	Add +1 Attack <sprite name=Attack> to all of your ranged attacks this round.
+GH_127_T	You may push the target into hexes containing obstacles. In each case, destroy the obstacle, the target suffers 2 damage, and you gain <sprite name=XP1>.
+GH_128_B	Add +2 Attack <sprite name=Attack> to all of your melee attacks this round.
+GH_129_B	On your next six ranged Attack actions while <nobr>Air <sprite name=Air></nobr> is currently infused, consume <nobr>Air <sprite name=ConsumeAir></nobr> to add <nobr>+2 Range <sprite name=Range></nobr> to the entire Attack action.
+GH_130_T	Target all enemies adjacent to the destroyed obstacle
+GH_131_T	Affect all allies in the targeted area
+GH_132_B	Destroy all obstacles and disarm all traps moved through.
+GH_132_T_1	Move one adjacent single-hex obstacle to an empty hex within <nobr>Range <sprite name=Range> 4</nobr>.
+GH_132_T_2	Target all enemies adjacent to the moved obstacle
+GH_134_T_1	Create three single-hex obstacles in empty hexes within <nobr>Range <sprite name=Range> 4</nobr>.
+GH_134_T_2	All allies and enemies adjacent to one or more of the created obstacles suffer 2 damage.
+GH_136_T_1	Kill one normal enemy within <nobr>Range <sprite name=Range> 4.</nobr>
+GH_136_T_2	Create one single-hex obstacle in the hex in which the enemy died.
+GH_137_B	On your next four melee attacks, when possible, destroy an adjacent obstacle to add <nobr>+3 Attack <sprite name=Attack></nobr>.
+GH_138_T	Create one 2 damage STUN <sprite name=Stun> trap in an adjacent empty hex.
+GH_139_T	IMMOBILIZE <sprite name=Immobilize> all allies and enemies in the targeted area.
+GH_140_T_1	Create one three-hex triangular obstacle in empty hexes within <nobr>Range <sprite name=Range> 3</nobr>.
+GH_140_T_2	Target all enemies adjacent to the obstacle
+GH_141_B_1	Add +1 Attack <sprite name=Attack> to all of your ranged attacks this round.
+GH_141_B_1_Alt	Add +2 Attack <sprite name=Attack> to all of your ranged attacks this round.
+GH_141_B_2	Add +2 Attack <sprite name=Attack> instead, <sprite name=XP1>.
+GH_141_T	For each hex you cannot push the target because of a wall or obstacle, the target suffers 2 damage and you gain <sprite name=XP1>.
+GH_142_B	The movement must end in a hex adjacent to an obstacle.
+GH_142_T_1	Destroy all obstacles within <nobr>Range <sprite name=Range> 2.</nobr>
+GH_142_T_2	where X is twice the number of hexes the destroyed obstacles occupied.
+GH_143_B	At the start of your next five turns, perform a <nobr>"Heal <sprite name=Heal> 2,</nobr> <nobr>Range <sprite name=Range> 2" action.</nobr>
+GH_144_B	All allies and enemies adjacent to any hexes you enter during the movement suffer <nobr>2 damage.</nobr>
+GH_144_T	All allies and enemies adjacent to the target suffer damage equal to the damage the target suffered.
+GH_145_T	You may push the targets into hexes containing obstacles. In each case, the obstacle is destroyed, the target suffers 2 damage, and you gain <sprite name=XP1>.
 GH_157_B	One ally within <nobr>Range <sprite name=Range> 3</nobr> <nobr>may perform</nobr>
 GH_157_T	One adjacent ally may perform
 GH_175_T	On the next five melee attacks targeting you, gain <nobr>Retaliate <sprite name=Retaliate> *TRetaliate*.</nobr>
@@ -239,7 +412,72 @@ GH_229_B	During all your attacks this round, ignore the Shield values of all you
 GH_230_T	At the end of your next five turns, perform a "<nobr>Heal <sprite name=Heal> 2</nobr>, Affect all adjacent allies" action.
 GH_231_T	Kill one adjacent normal or elite enemy.
 GH_232_B	You and all adjacent allies may <nobr>Refresh <sprite name=Refresh></nobr> all of your consumed <nobr>Small Items <sprite name=SmallItem></nobr>.
+GH_261_T	During your next four Attack actions while <nobr>INVISIBLE <sprite name=Invisible></nobr>, perform "<nobr>Attack <sprite name=Attack> 2</nobr>, <nobr>Range <sprite name=Range> 3</nobr>" as the final part of the action.
+GH_263_B	Double the value of all your <nobr>Attack <sprite name=Attack></nobr> abilities this turn, <sprite name=XP1>.
+GH_263_T	Double the value of all your <nobr>Move <sprite name=Move></nobr> abilities this turn, <sprite name=XP1>.
+GH_266_T	Kill one normal target instead, <sprite name=XP1>.
+GH_268_T	Add <nobr>+2 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> if you are <nobr>INVISIBLE <sprite name=Invisible></nobr>.
+GH_270_B	During your next four Attack actions, perform "<nobr>Move <sprite name=Move> 2</nobr>" as the first part of the action.
+GH_271_B	Move to any unoccupied hex. You cannot move through a closed door.
+GH_274_T	Add <nobr>STUN <sprite name=Stun></nobr> and gain <sprite name=XP1> if you are <nobr>INVISIBLE <sprite name=Invisible></nobr>.
+GH_277_T	<line-height=110%>At the end of your next three turns when <sprite name=Dark> is not Strong, infuse <sprite name=CreateDark>.
+GH_279_B	During your next four Move actions while <nobr>INVISIBLE <sprite name=Invisible></nobr>, perform "<nobr>Attack <sprite name=Attack> 2</nobr>, Target all adjacent enemies" as the final part of the action.
+GH_283_T_1	Gain advantage on all of your attacks.
+GH_283_T_2	You can target <nobr>INVISIBLE <sprite name=Invisible></nobr> enemies.
+GH_286_T	Add <nobr>POISON <sprite name=Poison></nobr>, <nobr>MUDDLE <sprite name=Muddle></nobr>, <nobr>WOUND <sprite name=Wound></nobr> and gain <sprite name=XP1> if you are <nobr>INVISIBLE <sprite name=Invisible></nobr>.
+GH_287_B	Kill one adjacent normal enemy, <sprite name=XP1>.
+GH_287_T	Kill all normal targets instead, <sprite name=XP2>.
+GH_288_T	On your next five attacks while <nobr>INVISIBLE <sprite name=Invisible></nobr>, add <nobr>STUN <sprite name=Stun></nobr> to the attack.
+GH_289_T	<nobr>POISON <sprite name=Poison></nobr> all allies and enemies in the targeted area.
+GH_290_B	Deduct <nobr>-1 Range <sprite name=Range></nobr> from all your ranged attacks.
+GH_292_T	Once during each of your Attack actions, you may <nobr>POISON <sprite name=Poison></nobr> one ally within <nobr>Range <sprite name=Range> 2</nobr> (or deal 3 damage if the ally already has <nobr>POISON <sprite name=Poison></nobr>) to add <nobr>+1 Attack <sprite name=Attack></nobr> to the entire Attack action.
+GH_298_T	On your next six Attack actions while <nobr>Air <sprite name=Air></nobr> is currently infused, consume <nobr>Air <sprite name=ConsumeAir></nobr> to add <nobr>+1 Attack <sprite name=Attack></nobr> to the entire Attack action.
+GH_300_B	After each of your Move actions, <nobr>POISON <sprite name=Poison></nobr> all adjacent allies and enemies.
+GH_301_T	Remove <nobr>POISON <sprite name=Poison></nobr> from any one enemy to cause it to suffer <nobr>3 damage</nobr>.
+GH_304_T	<nobr>POISON <sprite name=Poison></nobr> all allies adjacent to <nobr>the target.</nobr>
+GH_305_T	Kill one normal enemy with <nobr>POISON <sprite name=Poison></nobr> within <nobr>Range <sprite name=Range> 3.</nobr>
+GH_309_T	All enemies with <nobr>POISON <sprite name=Poison></nobr> suffer <nobr>1 damage.</nobr>
+GH_310_B	All allies with <nobr>POISON <sprite name=Poison></nobr> may <sprite name=RecoverIcon> up to two of their discarded cards.
+GH_310_T	Once during each of your Move actions, you may suffer 1 damage to deal 3 damage to any one enemy with <nobr>POISON <sprite name=Poison></nobr>.
+GH_314_T	If a <nobr>CURSE <sprite name=Curse></nobr> causes an enemy to deal no damage during its attack, that enemy suffers <nobr>3 damage.</nobr>
+GH_316_B	Double the value of your next Attack action this round.
+GH_316_T	During your next six Attack actions, <nobr>CURSE <sprite name=Curse></nobr> one ally within <nobr>Range <sprite name=Range> 2</nobr> to gain two <nobr>ADD TARGET <sprite name=Target></nobr> effects.
+GH_317_B	All enemies with <nobr>POISON <sprite name=Poison></nobr> suffer <nobr>2 damage.</nobr>
+GH_318_B_1	All allies with <nobr>POISON <sprite name=Poison></nobr> suffer <nobr>2 damage.</nobr>
+GH_318_B_2	For each two allies damaged, add <nobr>+1 Attack <sprite name=Attack></nobr> to all your attacks this round and gain <sprite name=XP1>.
+GH_320_B	If you have fewer hit points than half your maximum hit point value (rounded up), gain <sprite name=XP1> and perform
+GH_321_T	You may suffer 2 damage to add <nobr>+2 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1>.
+GH_322_B	On the next three sources of damage to you that would reduce you to less than 1 hit point, suffer <nobr>no damage instead.</nobr>
+GH_322_T	Add <nobr>+2 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> if your current hit point value is less than half your maximum hit point value (rounded up).
+GH_324_B_1	Add <nobr>+1 Attack <sprite name=Attack></nobr> to all your attacks.
+GH_324_B_2	Suffer 1 damage at the start of each of your turns.
+GH_324_T	Suffer damage equal to half of your current hit point value (rounded up).
+GH_325_B	The next four times you are healed, add <nobr>+2 Heal <sprite name=Heal></nobr>.
+GH_326_T	You may suffer 2 damage to add <nobr>STUN <sprite name=Stun></nobr> and gain <sprite name=XP1>.
+GH_329_B	You may overheal to a maximum of 26 hit points, but your maximum hit point value remains the same for the purpose of all ability effects.
+GH_330_T	Reduce your current hit points to 1.<br>This is not considered damage.
+GH_331_B	You may suffer 2 damage to <nobr>STUN <sprite name=Stun></nobr> one adjacent enemy.
+GH_331_T	You may suffer 2 damage to gain <nobr>Shield <sprite name=Shield> 1, <sprite name=XP1></nobr>.
+GH_332_B	All melee attacks targeting you add <nobr>+1 Attack <sprite name=Attack></nobr>.
+GH_332_T	You may suffer up to 3 damage.
+GH_333_B	Add <nobr>+2 Move <sprite name=Move></nobr> if you have fewer hit points than half of your maximum hit point value <nobr>(rounded up).</nobr>
+GH_334_T	Increase the value of each of your <nobr>Retaliate <sprite name=Retaliate></nobr> abilities by 2 this round.
+GH_335_T	Kill one adjacent normal enemy whose current hit point value is less than half the difference between your maximum hit point value and current hit point value.
+GH_336_T	You may suffer up to 4 damage.
+GH_337_B_1	Gain advantage on all of your attacks this round.
+GH_337_B_2	All attacks targeting you gain Disadvantage this round.
+GH_338_B	Add <nobr>+1 Attack <sprite name=Attack></nobr> to all your attacks when you have fewer hit points than half of your maximum hit point value <nobr>(rounded up).</nobr>
+GH_338_T	Gain <nobr>Shield <sprite name=Shield> 1</nobr> and <sprite name=XP1> if you have fewer hit points than half of your maximum hit point value <nobr>(rounded up).</nobr>
+GH_339_T	You immediately become exhausted.
+GH_341_B	If you short rest during your next turn, gain all the benefits of a <nobr>long rest</nobr>.
+GH_341_T	You may suffer 2 damage to ignore the target's Shield value and gain <sprite name=XP1>.
 GH_343_B	You are immune to all negative conditions.
+GH_343_T	<nobr>WOUND <sprite name=Wound></nobr> self and all adjacent allies to add <nobr>PUSH <sprite name=Push> 2,</nobr> <nobr>IMMOBILIZE <sprite name=Immobilize>.</nobr>
+GH_345_B	Add <nobr>+1 Attack <sprite name=Attack></nobr> to all your attacks this round, <sprite name=XP1>.
+GH_345_T	On the next five sources of damage to you, perform an <nobr>"Attack <sprite name=Attack> 3"</nobr> action.
+GH_346_T	On the next five sources of damage to you, suffer no damage instead.
+GH_347_B	You may suffer up to 5 damage.
+GH_347_T	Perform a "<nobr>Heal <sprite name=Heal> 2</nobr>, Self" action for each enemy damaged.
 GH_371_B	All allies within <nobr>Range <sprite name=Range> 3</nobr> <nobr>may perform</nobr>
 GH_407_T	Give one adjacent ally one “<nobr>Medical Pack</nobr>” ability card.
 GH_408_B	All your Heal actions this round affect you and all adjacent allies.
@@ -265,9 +503,28 @@ GH_443_T	Remove all negative conditions on the healed target and give them one �
 GH_445_T_1	All of your <nobr>Attack <sprite name=Attack></nobr> and <nobr>Move <sprite name=Move></nobr> abilities may be performed as <nobr>Heal <sprite name=Heal></nobr> abilities of an equal value plus one.
 GH_445_T_2	In such cases, the <nobr>Range <sprite name=Range></nobr> is 1 unless otherwise specified, and ignore all conditions applied by the <nobr>Attack <sprite name=Attack></nobr> abilities.
 GH_446_T	Kill all normal or elite enemies in the targeted area suffering from 10 or more damage.
+GUI_StonePummel_Bottom_HelpBoxTooltip	Stone Pummel: choose an adjacent obstacle to destroy for +3 Attack, or skip.
+Gain_Flying	Gain <nobr>Flying <sprite name=Flying></nobr>
+Jump	Jump
 Kill_OneAdjacentEnemy	Kill one adjacent normal or elite enemy.
 Kill_OneAdjacentNormalEnemy	Kill one adjacent normal enemy.
 MedPack	This card cannot be lost to avoid suffering damage. When this card is discarded for any reason, return it to the Sawbone's supply.
+Move_StraightLine	The movement must be in a straight line.
+Nightshroud	Nightshroud
+Nightshroud_ADVENTURE_DESCRIPTION	With the ability to cloak themselves in shadow and pass through the world unseen, Nightshrouds are deadly stalkers, using blades and stealth to eliminate any target. Rather than working with other races to gather knowledge, Nightshrouds prefer to pry the knowledge from their cold, dead fingers.
+Nightshroud_ROLE	Melee Damage
+Nightshroud_STRENGTHS	- <indent=%15>Powerful execution abilities</indent>\n- <indent=%15>Can use Invisibility to avoid damage</indent>\n- <indent=%15>Uses Dark to enhance his abilities</indent>
+Nightshroud_WEAKNESSES	- <indent=%15>Poor ranged options</indent>\n- <indent=%15>Doesn't assist allies much</indent>\n- <indent=%15>Finds making friends difficult</indent>
+PERK_Berserker_01_Desc	Remove two <sprite name="-1">
+PERK_Berserker_02_Desc	Replace one <sprite name="-1"> with one <sprite name="+1">
+PERK_Berserker_03_Desc	Replace one <sprite name="0"> with two <sprite name="0"> <sprite name=Wound> <sprite name=Rolling>
+PERK_Berserker_04_Desc	Replace one <sprite name="+1"> with one <sprite name="+2"> <sprite name=Rolling>
+PERK_Berserker_05_Desc	Add one <sprite name="+2"> <sprite name=CreateFire>
+PERK_Berserker_06_Desc	Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>
+PERK_Berserker_07_Desc	Add one <sprite name="+1"> <sprite name=Disarm> <sprite name=Rolling>
+PERK_Berserker_08_Desc	Add two <sprite name="0"> <sprite name=Heal> 1, self <sprite name=Rolling>
+PERK_Berserker_09_Desc	Ignore item <sprite name="-1"> effects
+PERK_Berserker_10_Desc	Whenever you heal from a long rest, add +1 <sprite name=Heal>
 PERK_Brute_01_Desc	Replace one <sprite name="-1"> with one <sprite name="+1">
 PERK_Brute_02_Desc	Replace one <sprite name="-1"> with three <sprite name="0"> <sprite name=Push> 1 <sprite name=Rolling>
 PERK_Brute_03_Desc	Replace two <sprite name="0"> with two <sprite name="0"> <sprite name=Pierce> 3 <sprite name=Rolling>
@@ -278,6 +535,35 @@ PERK_Brute_07_Desc	Add one <sprite name="0"> <sprite name=Disarm> <sprite name=R
 PERK_Brute_08_Desc	Add one <sprite name="+3">
 PERK_Brute_09_Desc	Ignore item <sprite name="-1"> effects and add one <sprite name="+1"> <sprite name=Shield> 1
 PERK_Brute_10_Desc	Whenever you long rest, add +1 <sprite name=Move> to your first move ability the following round
+PERK_Cragheart_01_Desc	Replace one <sprite name="-1"> with one <sprite name="+1">
+PERK_Cragheart_02_Desc	Replace one <sprite name="0"> with two <sprite name="0"> <sprite name=Push> 2 <sprite name=Rolling>
+PERK_Cragheart_03_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Immobilize>
+PERK_Cragheart_04_Desc	Replace one <sprite name="0"> with one <sprite name="+2">
+PERK_Cragheart_05_Desc	Add one <sprite name="+2"> <sprite name=Muddle> and one <sprite name="0"> <sprite name=CreateAir> <sprite name=Rolling>
+PERK_Cragheart_06_Desc	Add four <sprite name="0"> <sprite name=CreateEarth> <sprite name=Rolling>
+PERK_Cragheart_07_Desc	Ignore item <sprite name="-1"> effects
+PERK_Cragheart_08_Desc	Ignore negative scenario effects
+PERK_Cragheart_09_Desc	Whenever a new room is revealed, control all enemies in the newly revealed room: <sprite name=Move> 1, this movement must end in an empty hex
+PERK_Nightshroud_01_Desc	Remove two <sprite name="-1">
+PERK_Nightshroud_02_Desc	Replace one <sprite name="-2"> with one <sprite name="-1"> <sprite name=CreateDark>
+PERK_Nightshroud_03_Desc	Replace one <sprite name="0"> with one <sprite name="0"> +1 <sprite name=Target> <sprite name=Rolling>
+PERK_Nightshroud_04_Desc	Replace two <sprite name="0"> with three <sprite name="0"> <sprite name=Muddle> <sprite name=Rolling>
+PERK_Nightshroud_05_Desc	Replace one <sprite name="+1"> with one <sprite name="+1"> <sprite name=Invisible>
+PERK_Nightshroud_06_Desc	Add one <sprite name="+1"> <sprite name=CreateDark>
+PERK_Nightshroud_07_Desc	Add two <sprite name="0"> <sprite name=Curse> <sprite name=Rolling>
+PERK_Nightshroud_08_Desc	Add two <sprite name="0"> <sprite name=Heal> 1, self <sprite name=Rolling>
+PERK_Nightshroud_09_Desc	Ignore negative scenario effects and add two <sprite name="+1">
+PERK_Nightshroud_10_Desc	Once each scenario, during your turn, you may discard two cards to add a card with an action containing a persistent symbol from your pool to your hand and immediately play it, performing that action
+PERK_Plagueherald_01_Desc	Remove one <sprite name="-2">
+PERK_Plagueherald_02_Desc	Replace one <sprite name="-1"> with one <sprite name="+1">
+PERK_Plagueherald_03_Desc	Replace one <sprite name="0"> with one <sprite name="+2">
+PERK_Plagueherald_04_Desc	Add three <sprite name="+1"> <sprite name=CreateAir>
+PERK_Plagueherald_05_Desc	Add three <sprite name="0"> <sprite name=Poison> <sprite name=Rolling>
+PERK_Plagueherald_06_Desc	Add two <sprite name="0"> <sprite name=Immobilize> <sprite name=Rolling>
+PERK_Plagueherald_07_Desc	Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>
+PERK_Plagueherald_08_Desc	Add two <sprite name="0"> <sprite name=Curse> <sprite name=Rolling>
+PERK_Plagueherald_09_Desc	Ignore negative scenario effects and add one <sprite name="+1">
+PERK_Plagueherald_10_Desc	Once each quest, during your turn, each enemy that has <sprite name=Poison> suffers <sprite name=Damage> 1 and gains <sprite name=Muddle>, and each ally who has <sprite name=Poison> suffers <sprite name=Damage> 1 and gains <sprite name=Strengthen>
 PERK_Quartermaster_01_Desc	Remove two <sprite name="-1">
 PERK_Quartermaster_02_Desc	Replace two <sprite name="0"> with two <sprite name="0"> <sprite name=Pierce> 3 <sprite name=Rolling>
 PERK_Quartermaster_03_Desc	Replace one <sprite name="0"> with one <sprite name="0"> +1 <sprite name=Target>
@@ -316,11 +602,18 @@ PERK_Sunkeeper_07_Desc	Add two <sprite name="0"> <sprite name=Heal> 1, self <spr
 PERK_Sunkeeper_08_Desc	Ignore item <sprite name="-1"> effects and add two <sprite name="+1">
 PERK_Sunkeeper_09_Desc	Ignore negative scenario effects
 PERK_Sunkeeper_10_Desc	Whenever one of your heals would raise an ally's hit points above their maximum, that ally gains <sprite name=Ward>
+Plagueherald	Plagueherald
+Plagueherald_ADVENTURE_DESCRIPTION	Either misguided or ignorant of other races’ physiology, Plagueheralds believe that the spread of disease throughout a society will strengthen it and propel it towards great things. One should be wary of allying with a Plagueherald. Their ability to spread decay and death across both sides of a battlefield is a terrifying thing to behold.
+Plagueherald_ROLE	Ranged Damage/Support
+Plagueherald_STRENGTHS	- <indent=%15>Can often target multiple enemies</indent>\n- <indent=%15>Effective at range</indent>\n- <indent=%15>Powerful debuffs utilizing Curse and Poison</indent>
+Plagueherald_WEAKNESSES	- <indent=%15>High potential for friendly fire</indent>\n- <indent=%15>Low effectiveness versus single large targets</indent>\n- <indent=%15>Harrower mating rituals are... unpleasant</indent>
 Quartermaster	Quartermaster
 Quartermaster_ADVENTURE_DESCRIPTION	Skilled Valrath Quartermasters are known for aiding adventuring parties in maximizing the effectiveness of their equipment. After all, what is a warrior without a good sword at his side?
 Quartermaster_ROLE	Melee Damage/Support
 Quartermaster_STRENGTHS	- <indent=%15>Many item refreshing abilities</indent>\n- <indent=%15>Moderate offensive and defensive capabilities</indent>\n- <indent=%15>Jack of all trades</indent>
 Quartermaster_WEAKNESSES	- <indent=%15>Master of none</indent>\n- <indent=%15>Weaker when party lacks good equipment</indent>\n- <indent=%15>Always packs too much luggage</indent>
+Range	Range
+Retaliate	Retaliate
 Sawbones	Sawbones
 Sawbones_ADVENTURE_DESCRIPTION	Followers of the Oak are religious healers who do their best to ward off the pestilence and death that can manifest in larger human cities. Contrary to popular belief, however, there is nothing miraculous about their healing methods, as anyone who has come to them with a gangrenous leg knows all too well. The mystique of the profession can get lost amongst the screams when the Sawbones has to hack off a limb.
 Sawbones_ROLE	Melee Damage/Support
@@ -333,6 +626,7 @@ Scoundrel_ROLE	Melee Damage
 Scoundrel_SKIN_ALT	Nightcrawler
 Scoundrel_STRENGTHS	- <indent=%15>High mobility</indent>\n- <indent=%15>Potential for high melee Damage</indent>\n- <indent=%15>Can afflict enemies with Poison</indent>
 Scoundrel_WEAKNESSES	- <indent=%15>Little in the way of effects that assist teammates</indent>\n- <indent=%15>Few defensive abilities and low health</indent>\n- <indent=%15>Will try and take ALL the gold</indent>
+Self	Self
 Suffer_2Damage	Suffer 2 damage.
 Suffer_3Damage	Suffer 3 damage.
 Sunkeeper	Sunkeeper
@@ -341,15 +635,27 @@ Sunkeeper_ROLE	Melee Tank/Support
 Sunkeeper_STRENGTHS	- <indent=%15>Array of buff, heal and recovery options</indent>\n- <indent=%15>Competent melee combatant</indent>\n- <indent=%15>Uses Light to enhance her abilities</indent>
 Sunkeeper_WEAKNESSES	- <indent=%15>Can struggle against groups of smaller enemies</indent>\n- <indent=%15>Weaker with fewer allies</indent>\n- <indent=%15>Rather self-righteous a lot of the time</indent>
 Target_AllAdjacentEnemies	Target all adjacent enemies
+Target_AllAlliesAndEnemies	Target all allies and enemies
+Target_AllEnemies	Target all enemies
+Target_AllEnemiesAdjacentToEnemiesWith	Target all enemies adjacent to enemies with
 Target_AllEnemiesMovedThrough	Target all enemies moved through
+Target_AllEnemiesWithin	Target all enemies within
+Target_CanNoLongerFly	Target can no longer fly.
 Target_OneAdjacentAlliedPlayer	Target one adjacent allied mercenary
 Target_OneAdjacentEnemy	Target one adjacent enemy
+Target_TwoHexInstead	Target all enemies up to two hexes away instead
+XP_Per5Damage	Gain <sprite name=XP1> for every 5 damage dealt.
 XP_PerAttackPerformed	Gain <sprite name=XP1> for each attack performed.
 XP_PerEnemy	Gain <sprite name=XP1> for each enemy targeted.
+Xis_AmountOfDamageYouSuffered	where X is the amount of damage you suffered.
+Xis_CurrentHP	where X is your current hit point value.
 Xis_DamageInflictedThisTurn	where X is the amount of damage you have inflicted so far this turn.
+Xis_HPDiff	where X is the difference between your maximum hit point value and current hit point value.
 Xis_HexesMovedThisAction	where X is the number of hexes you moved with this action.
 Xis_HexesMovedThisTurn	where X is the number of hexes you have moved so far this turn.
+Xis_LostCardCount	where X is the number of cards you have burned.
 instead	instead
+with	with
 within	within
 PERK_Brute_10_Bonus	Rested and Ready: +1 <sprite name=Move> to your next move ability
 PERK_Brute_01_Name	Precision
@@ -385,7 +691,7 @@ GH.Brute-3_Option_2	Take what you can find and move on.
 GH.Brute-3_Option_2_Outcome	Near the corpse of the Brute, you find an axe, presumably the weapon he threw away. There’s really nothing else among the debris, so you wordlessly pick it up and move on.
 Brute_FullName	Brute
 CODEX_Hero_Brute_Title	Brute
-CODEX_HeroInfo_Brute	<b>Role:</b> Melee Damage/Tank\n<b>Difficulty:</b> Low\n\nBrutes are best used as front line melee troops, absorbing damage and protecting the more fragile ranged damage dealers, and are best equipped with items that keep them alive longer!\n\n<b>Strengths:</b>\n• High health and defensive abilities make him more durable than some\n• Access to early Disarm and Stun\n• Great at pushing enemies about\n\n<b>Weaknesses:</b>\n• Low mobility\n• Poor ranged attack options\n• Not the greatest conversationalist
+CODEX_HeroInfo_Brute	<b>Role:</b> Melee Damage/Tank\n<b>Difficulty:</b> Low\n\nYou are at your best in the middle of a crowd. Many of your attacks hit every adjacent enemy or sweep through an area, so move in where several enemies stand together and hit them all at once.\n\nYour hits can <sprite name=Push>, <sprite name=Pull>, <sprite name=Stun>, <sprite name=Immobilize> and <sprite name=Disarm>, and a few cards kill a normal enemy outright. Your bottom actions are mostly moves that attack along the way, like <i>Balanced Measure</i>, which turns movement into damage.\n\nYou have plenty of health, and round-long <sprite name=Shield> and <sprite name=Retaliate> to hold the line, so you can afford to take the first hit for your party.\n\n<b>Strengths:</b>\n• High health and defensive abilities make him more durable than some\n• Access to early Disarm and Stun\n• Great at pushing enemies about\n\n<b>Weaknesses:</b>\n• Low mobility\n• Poor ranged attack options\n• Not the greatest conversationalist
 PERK_Scoundrel_01_Name	Light Step
 PERK_Scoundrel_02_Name	Steady Hand
 PERK_Scoundrel_03_Name	Venom Coating
@@ -419,7 +725,7 @@ GH.Scoundrel-3_Option_2	Overpower the Scoundrel and deliver her to the guards.
 GH.Scoundrel-3_Option_2_Outcome	A look of horrid surprise flashes in the Scoundrel’s eyes as you leap forward and throw her to the ground. She doesn’t even speak as you bind her arms and take her to the guard. They thank you for your service, but their words aren’t much counter to the cold, angry stare of the Scoundrel as she’s taken away.
 Scoundrel_FullName	Scoundrel
 CODEX_Hero_Scoundrel_Title	Scoundrel
-CODEX_HeroInfo_Scoundrel	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> Low\n\nShe excels at high damage melee attacks, identifying lone targets and also gaining bonuses from working close to her team mates. She is a loner however, so don't expect her to help other party members apart from killing their attackers.\n\n<b>Strengths:</b>\n• High mobility\n• Potential for high melee Damage\n• Can afflict enemies with Poison\n\n<b>Weaknesses:</b>\n• Little in the way of effects that assist teammates\n• Few defensive abilities and low health\n• Will try and take ALL the gold
+CODEX_HeroInfo_Scoundrel	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> Low\n\nPosition is everything for you. Many of your attacks grow stronger when the target is next to one of your allies, and others when the target stands alone with no allies of its own nearby. Look at where your friends are before you pick a target, and work with them to flank enemies.\n\nYou can also become <sprite name=Invisible>, and some attacks, like <i>Smoke Bomb</i>, hit harder while you are unseen. Your attacks often add <sprite name=Poison> and <sprite name=Wound>, and poisoned enemies take extra damage from several of your cards.\n\nYou move far and loot well, but you are fragile, with little to protect yourself. Strike and step away.\n\n<b>Strengths:</b>\n• High mobility\n• Potential for high melee Damage\n• Can afflict enemies with Poison\n\n<b>Weaknesses:</b>\n• Little in the way of effects that assist teammates\n• Few defensive abilities and low health\n• Will try and take ALL the gold
 PERK_Sunkeeper_01_Name	Focus
 PERK_Sunkeeper_02_Name	Radiance
 PERK_Sunkeeper_03_Name	Bulwark
@@ -459,7 +765,7 @@ GH.Sunkeeper-4_Option_2_Outcome	Without even speaking, you draw your weapons and
 Sunkeeper_FullName	Sunkeeper
 CODEX_Hero_Sunkeeper_Title	Sunkeeper
 Sunkeeper_DESCRIPTION	Sunkeepers have been trained to tap into long-dormant demonic powers and harness them for the purpose of righteousness. The Sunkeeper has an assortment of Healing, Buffing and Card Recovery abilities and is a capable Melee fighter in her own right. She works best in the role of a Paladin, aiding the main damage dealers in combat while keeping them alive.
-CODEX_HeroInfo_Sunkeeper	<b>Role:</b> Melee Tank/Support\n<b>Difficulty:</b> Low\n\n<b>Strengths:</b>\n• Array of buff, heal and recovery options\n• Competent melee combatant\n• Uses Light to enhance her abilities\n\n<b>Weaknesses:</b>\n• Can struggle against groups of smaller enemies\n• Weaker with fewer allies\n• Rather self-righteous a lot of the time
+CODEX_HeroInfo_Sunkeeper	<b>Role:</b> Melee Tank/Support\n<b>Difficulty:</b> Low\n\nLight is your fuel. Most of your cards create <sprite name=CreateLight> or spend it for stronger attacks, extra healing and longer buffs. <i>Beacon of Light</i> keeps Light glowing every turn.\n\nYou lead from the front: several cards let an ally <sprite name=Move> or <sprite name=Attack> on your turn, and your heals, <sprite name=Bless> and <sprite name=Strengthen> keep the party going. You also give allies <sprite name=Shield> and <sprite name=Retaliate>, and can take damage meant for them.\n\nYou are tough and can <sprite name=Stun> with your own attacks, so stand next to your allies where you can protect and command them at the same time.\n\n<b>Strengths:</b>\n• Array of buff, heal and recovery options\n• Competent melee combatant\n• Uses Light to enhance her abilities\n\n<b>Weaknesses:</b>\n• Can struggle against groups of smaller enemies\n• Weaker with fewer allies\n• Rather self-righteous a lot of the time
 PERK_Sawbones_01_Name	Steady Hands
 PERK_Sawbones_02_Name	Open Wounds
 PERK_Sawbones_03_Name	Precise Cuts
@@ -498,7 +804,7 @@ GH.Sawbones-4_Option_2_Outcome	You laugh and wave your hand dismissively. There�
 Sawbones_FullName	Sawbones
 CODEX_Hero_Sawbones_Title	Sawbones
 Sawbones_DESCRIPTION	Followers of the Oak are religious healers who do their best to ward off the pestilence and death that can manifest in larger human cities. Contrary to popular belief, however, there is nothing miraculous about their healing methods, as anyone who has come to them with a gangrenous leg knows all too well. The mystique of the profession can get lost amongst the screams when the Sawbones has to hack off a limb.
-CODEX_HeroInfo_Sawbones	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Low\n\n<b>Strengths:</b>\n• Particularly efficient healer\n• Has a number of decent melee attacks\n• Medical Packs can also increase Ally's card counts\n\n<b>Weaknesses:</b>\n• Poor ranged attacks\n• Weaker in parties with fewer allies or lower max health\n• Doesn't have as great an understanding of medical cleanliness as most doctors
+CODEX_HeroInfo_Sawbones	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Low\n\nSome of your abilities give a <b>Medical Pack</b> card to yourself or an ally. It goes into that character's hand, and they can play it on their turn to heal themselves. Hand them out before the fight gets rough.\n\nYou are the party's doctor: strong heals that often also remove every negative condition, and cards that keep allies <sprite name=Shield>ed or immune to conditions for a while. <i>Triage</i> lets you heal a little every turn on top of your other actions.\n\nYour few attacks are nasty: they can <sprite name=Wound>, <sprite name=Poison>, <sprite name=Immobilize>, <sprite name=Stun> or <sprite name=Disarm>, and a couple of them kill an enemy outright when it is already in bad shape.\n\n<b>Strengths:</b>\n• Particularly efficient healer\n• Has a number of decent melee attacks\n• Medical Packs can also increase Ally's card counts\n\n<b>Weaknesses:</b>\n• Poor ranged attacks\n• Weaker in parties with fewer allies or lower max health\n• Doesn't have as great an understanding of medical cleanliness as most doctors
 PERK_Quartermaster_01_Name	Steady Supply
 PERK_Quartermaster_02_Name	Armor Piercing
 PERK_Quartermaster_03_Name	Sweeping Blow
@@ -527,6 +833,134 @@ GH.Quartermaster-2_Option_2_Outcome	“Well then, today’s your unlucky day,”
 Quartermaster_FullName	Quartermaster
 CODEX_Hero_Quartermaster_Title	Quartermaster
 Quartermaster_DESCRIPTION	Skilled Valrath Quartermasters are known for aiding adventuring parties in maximizing the effectiveness of their equipment. After all, what is a warrior without a good sword at his side?
-CODEX_HeroInfo_Quartermaster	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Medium\n\n<b>Strengths:</b>\n• Many item refreshing abilities\n• Moderate offensive and defensive capabilities\n• Jack of all trades\n\n<b>Weaknesses:</b>\n• Master of none\n• Weaker when party lacks good equipment\n• Always packs too much luggage
+CODEX_HeroInfo_Quartermaster	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Medium\n\nItems are your resource. Many of your cards refresh spent items, for you or for the whole party, so do not be shy about using them. <i>Proficiency</i> makes your attacks stronger in any action where you used an item.\n\nYour weapons are your cards: axe and spear sweeps up close, a bow at range, and one-use scrolls with the biggest effects in your deck. Save those scrolls for the moments that matter, since they are lost once used.\n\nYou also support the party with <sprite name=Attack> and <sprite name=Shield> bonuses, healing, and cards that give allies their discarded cards back.\n\n<b>Strengths:</b>\n• Many item refreshing abilities\n• Moderate offensive and defensive capabilities\n• Jack of all trades\n\n<b>Weaknesses:</b>\n• Master of none\n• Weaker when party lacks good equipment\n• Always packs too much luggage
+PERK_Cragheart_01_Name	Steadfast
+PERK_Cragheart_02_Name	Rockslide
+PERK_Cragheart_03_Name	Grasping Earth
+PERK_Cragheart_04_Name	Crushing Blow
+PERK_Cragheart_05_Name	Dust Storm
+PERK_Cragheart_06_Name	Earthen Might
+PERK_Cragheart_07_Name	Thick Skin
+PERK_Cragheart_08_Name	Unfazed
+PERK_Cragheart_09_Name	Earthquakes
+Cragheart_MASTERY_1_Name	Cornered
+Cragheart_MASTERY_1_Desc	Only attack enemies adjacent to obstacles or walls
+Cragheart_MASTERY_2_Name	Shaped by Stone
+Cragheart_MASTERY_2_Desc	Damage or heal at least one ally each round
+Event_GH.Cragheart_Text	The Cragheart has been sitting on the same boulder outside the north wall for three days. Nobody thought much of it; the Savvas sits still the way other people breathe. On the fourth morning the boulder is gone, and so is a long stretch of the rubble that the last attack left along the palisade. In its place stands a wall: raw, ugly, and a good deal thicker than the old one.\n"It was in the way," the Cragheart says when you find them at the gate, as if that explains the week of work. They have never wasted a word on anything a stone could say for them.\nThey are going back to the mountains, they tell you, slowly, the way they say everything. Not to the Savvas, who would not have them, but to the high country past the Frozen Pass, where the rock is older and quieter and nobody asks it to fight.\nThey lay a hand flat against the new wall before they leave, as if listening. Whatever it says satisfies them. The Cragheart walks north, and the ground under the gate does not shake once.
+Event_GH.Cragheart_Name	Cragheart Retires
+GH.Cragheart-1_Front	Anticipating an enjoyable night of drinks at the Sleeping Lion, you enter the tavern to see a familiar Savvas sitting at your usual table. The Cragheart stands and extends both its arms.\n\n“Ah, friends! So good to see you,” it says. “Sit! Have a drink with me!”
+GH.Cragheart-1_Option_1	Have a drink with the Cragheart.
+GH.Cragheart-1_Option_1_Outcome	One drink turns into five, and five turns into even more. It is a great night of revelry at the Sleeping Lion. You see sadness in the Cragheart’s eyes when you finally stand up to leave. It tells you it’s been hard to find people to relate to since leaving the party and it thanks you for your continued friendship.
+GH.Cragheart-1_Option_2	Encourage the Cragheart to move on with its life.
+GH.Cragheart-1_Option_2_Outcome	Not fitting in with its own kind or with a city of mostly humans, the Cragheart thought it could depend on a misfit group of mercenaries for friendship. It understands that its adventuring life is now in the past, though, and that it should go find a new place to belong. It sadly admits that it has no idea where that would be, but the Cragheart gets up and leaves the tavern nonetheless.
+GH.Cragheart-2_Front	Walking among the foothills, you see a steep ridge in front of you, and on top of it, a very odd rock formation.\n\nThe formation calls to you somehow, but the way up is not readily apparent. In fact, climbing the ridge looks pretty dangerous, but you just feel like you need to get up there and look at the rocks.
+GH.Cragheart-2_Option_1	Take the risk to climb to the ridge and investigate the rocks.
+GH.Cragheart-2_Option_1_Outcome	Fearing the possibility of falling from a great height, you choose your steps carefully. Still, the climb to the top takes a long time and is exhausting. Reaching the top, you approach the unnatural rock formation, a giant mound of stones stacked one on top of another. At the base of the bottom stone, you see some strange runes and a small pile of gold.
+GH.Cragheart-2_Option_2	Forget about the rocks and continue on your journey.
+GH.Cragheart-2_Option_2_Outcome	You shake your head and move past the ridge. You have more important things to do than climb rocks. Still, you feel the pull of the site, even after it fades from view. You get the feeling that this won’t be the last time you see it.
+Cragheart_FullName	Cragheart
+CODEX_Hero_Cragheart_Title	Cragheart
+CODEX_HeroInfo_Cragheart	<b>Role:</b> Damage/Support\n<b>Difficulty:</b> Medium\n\nYou shape the battlefield with rock. Many of your cards create obstacles, destroy them for extra effects, or push enemies into them for more damage. <i>Rock Slide</i> drops boulders that hurt everyone standing next to them.\n\n<sprite name=CreateEarth> powers your bigger attacks, extra movement and <sprite name=Immobilize>. Many of your attacks hit several enemies at once, often in large areas.\n\nBe careful: several of your abilities also damage allies standing next to you, so warn your party before you use them. You are tough, jump well, and have a little healing for yourself and your friends.\n\n<b>Strengths:</b>\n• Can place and interact with obstacles\n• Versatile with melee & ranged options\n• Lots of direct damage abilities to dodge Shield and Disadvantage\n\n<b>Weaknesses:</b>\n• Doesn't quite excel in any one aspect\n• Some abilities require obstacles in specific locations to function\n• Hard-to-read facial expressions
+PERK_Plagueherald_01_Name	Steady Focus
+PERK_Plagueherald_02_Name	Virulence
+PERK_Plagueherald_03_Name	Lethal Strain
+PERK_Plagueherald_04_Name	Airborne
+PERK_Plagueherald_05_Name	Toxic Touch
+PERK_Plagueherald_06_Name	Paralysis
+PERK_Plagueherald_07_Name	Numbing Agent
+PERK_Plagueherald_08_Name	Hex
+PERK_Plagueherald_09_Name	Unfazed
+PERK_Plagueherald_10_Name	Xorn's Boon
+Plagueherald_MASTERY_1_Name	Silent Killer
+Plagueherald_MASTERY_1_Desc	Kill at least five enemies with non-attack abilities
+Plagueherald_MASTERY_2_Name	Pandemic
+Plagueherald_MASTERY_2_Desc	Perform three different attack abilities that target at least four enemies each
+Event_GH.Plagueherald_Text	The Alchemist finds you first, which tells you something has gone wrong before she says a word. "Your Harrower friend," she says, "has been in my stillroom all night. I would like them out of it. I would also like to know what they left in the third jar from the end."\nYou find the Plagueherald on the roof of the Alchemist's, the swarm settled over them like a shawl, watching the sun come up over the bay. They do not turn around. "The jar is a cure," they say. "For the cough the lumber crews have. She will work it out in a month; I have saved her the month."\nThey are leaving. The hive has decided, they explain, and a Harrower does not argue with the hive. Somewhere warmer, somewhere with more rot to feed on; they say it the way someone else would mention the weather.\nThe swarm lifts off the roof all at once, a dark sheet that folds and is gone over the water. The cough is gone from the crews by the end of the week. The Alchemist still will not open the third jar.
+Event_GH.Plagueherald_Name	Plagueherald Retires
+GH.Plagueherald-1_Front	You have been hearing rumors in the bars: a pox is spreading through Gloomhaven, affecting lower class citizens—street urchins and backalley thugs.\n\nAnd then one night you see it: a Harrower dressed in a ragged green cloak holding a man down in an alley as its swarm spreads out and consumes him. The man’s screams are muffled as the insects skitter down his throat.\n\nKilling monsters and demons is one thing, but the Plagueherald shouldn’t be preying on people in the city. You approach it, intent on stopping its attack.
+GH.Plagueherald-1_Option_1	Calmly explain the situation to the Plagueherald, imploring it to move on.
+GH.Plagueherald-1_Option_1_Outcome	With the man dead at its feet, the Plagueherald makes a chittering sound that sounds almost like laughing.\n\n“You cannot see it, but this city needs to be cleansed. You will see, and you will thank me.”\n\nAt this, the Plagueherald bursts out into a massive swarm of insects and flies up into the sky.\n\nThe deaths continue, and new rumors start about how you are associated with the killer.
+GH.Plagueherald-1_Option_2	Threaten the Plagueherald with retribution if it doesn’t stop attacking residents.
+GH.Plagueherald-1_Option_2_Outcome	The Plagueherald recoils at your threat, genuinely concerned that you would attack it.\n\n“But, the cleansing...the city isn’t ready.”\n\nYou shake your head, and the Harrower chitters in disappointment.\n\n“Very well, but you will be responsible when the Harbinger comes.” It turns and floats off into the darkness.
+GH.Plagueherald-2_Front	You smell the corpses before you see them. A group of five or so, spread across the road, flies buzzing around in a frenzy.\n\nAs you get closer, you see the wretched, deformed looks on their faces and the boils covering their skin. You also see their crude armor and weapons—likely a group of cutthroats.\n\nWhat is truly odd, though, is that their weapons are out of their sheaths in the first place. It appears they were engaged in battle when they suddenly succumbed to some horrible disease.\n\nYou can think of at least one way that could have happened. Fine handiwork from the Plagueherald.
+GH.Plagueherald-2_Option_1	Leave the corpses alone.
+GH.Plagueherald-2_Option_1_Outcome	Knowing better than to get too close to the machinations of the Plagueherald, you keep a wide berth between you and the corpses and continue down the road.
+GH.Plagueherald-2_Option_2	Inspect the corpses for valuables.
+GH.Plagueherald-2_Option_2_Outcome	You rifle through the corpses, grabbing stray coins and valuables as you go. You make off with a good haul, but you start feeling sick as soon as you’re done.
+Plagueherald_FullName	Plagueherald
+CODEX_Hero_Plagueherald_Title	Plagueherald
+Plagueherald_DESCRIPTION	Either misguided or ignorant of other races’ physiology, Plagueheralds believe that the spread of disease throughout a society will strengthen it and propel it towards great things. One should be wary of allying with a Plagueherald. Their ability to spread decay and death across both sides of a battlefield is a terrifying thing to behold.
+CODEX_HeroInfo_Plagueherald	<b>Role:</b> Ranged Damage/Support\n<b>Difficulty:</b> Medium\n\nSickness is your weapon. You attack from range, often in large clouds, and most of your attacks <sprite name=Poison>, <sprite name=Immobilize>, <sprite name=Stun> or <sprite name=Muddle> everything they touch.\n\nSpread <sprite name=Poison> first, then cash it in: cards like <i>Succumb to the Gift</i> kill a poisoned enemy outright, and others deal damage to every poisoned enemy at once. <sprite name=Curse> is your second tool, and <sprite name=CreateAir> powers a few of your strongest effects.\n\nYou are fragile and have little protection, so keep your distance and let the poison do the work.\n\n<b>Strengths:</b>\n• Can often target multiple enemies\n• Effective at range\n• Powerful debuffs utilizing Curse and Poison\n\n<b>Weaknesses:</b>\n• High potential for friendly fire\n• Low effectiveness versus single large targets\n• Harrower mating rituals are... unpleasant
+PERK_Nightshroud_01_Name	Light Step
+PERK_Nightshroud_02_Name	Shadow Step
+PERK_Nightshroud_03_Name	Wide Reach
+PERK_Nightshroud_04_Name	Confusion
+PERK_Nightshroud_05_Name	Fade
+PERK_Nightshroud_06_Name	Nightfall
+PERK_Nightshroud_07_Name	Hex
+PERK_Nightshroud_08_Name	Dark Vigor
+PERK_Nightshroud_09_Name	Unfazed
+PERK_Nightshroud_10_Name	Empowering Night
+Nightshroud_MASTERY_1_Name	Unseen
+Nightshroud_MASTERY_1_Desc	Have <sprite name=Invisible> at the start or end of each of your turns
+Nightshroud_MASTERY_2_Name	Creature of the Night
+Nightshroud_MASTERY_2_Desc	Infuse or consume <sprite name=CreateDark> during each of your turns
+Event_GH.Nightshroud_Text	You had agreed to meet the Nightshroud at the Barracks at dusk. You arrive early. He is already there, which you only learn when he speaks from the shadow of the doorway you have been standing in for a minute.\n"I am going back," he says. Not to Gloomhaven; back, in the way the Aesther mean it, to whichever fold of the world they step out of and into. He has found the edge of it here, in the long dark of the Frosthaven winter. "It is thin, this far north. I have been half through for weeks."\nHe hands you his knife, hilt first, the one you have watched end a dozen things before they knew they were in danger. "Keep it in the dark," he says, and for once you cannot tell whether it is advice or a joke.\nThen the lamp in the doorway gutters, and when it steadies the shadow is only a shadow. The guards on the wall swear nobody passed them. For the first night in months, nothing in the outpost moves that you did not see.
+Event_GH.Nightshroud_Name	Nightshroud Retires
+GH.Nightshroud-1_Front	You are wandering through the city streets late at night when you hear a terrifying scream high above you. You look up just in time to see a body falling toward you and jump out of the way.\n\nIt lands with a wet thud on the ground. You were not the only ones to hear the scream, and quickly a small crowd forms around the corpse, including a couple of city guards.\n\nThe body is clad in black leather armor, and a long, thin blade conspicuously protrudes from its back. You remark that the sword somehow looks familiar.\n\n“What?” asks a guard. “This is the third murder like this in a week. Tell me everything you know!”
+GH.Nightshroud-1_Option_1	Tell the guard that the sword belongs to the Nightshroud, your former party member.
+GH.Nightshroud-1_Option_1_Outcome	You explain that you recognize the sword from the time you spent traveling with the Nightshroud. As a capable assassin, he is likely to be the one behind the murders. You explain, however, that since he left the group, you have no knowledge of his whereabouts or dealings. The guard thanks you for the information.
+GH.Nightshroud-1_Option_2	Lie and claim you know nothing.
+GH.Nightshroud-1_Option_2_Outcome	You laugh and make up some poor explanation about seeing a similar sword on a bandit in a crypt. The guard eyes you suspiciously.
+GH.Nightshroud-2_Front	You reach a crossroads and decide to rest for a bit. As you eat some of your rations, something sticking up out of the ground in the distance catches your attention.\n\nYou move closer, and what you thought was a signpost turns out to be a human skull impaled on a spike.\n\nThere is something sticking out of the skull’s mouth.
+GH.Nightshroud-2_Option_1	Investigate further.
+GH.Nightshroud-2_Option_1_Outcome	You get closer to the pike. The skull looks pretty fresh. There are still bits of decayed flesh attached to the bone, and flies buzz around it. You can see there is a small paper card stuck in its mouth, so you carefully reach in and pull it out. The card is black and depicts a skull with blades running through it. Come to think of it, you remember rumors of an assassins’ guild that has been known to use the same imagery. You get out of the area as quickly as you can.
+GH.Nightshroud-2_Option_2	Arm yourself and make a defensive retreat from the area.
+GH.Nightshroud-2_Option_2_Outcome	You remember rumors of an assassins’ guild that places a skull on a pike outside the houses of their victims before they strike. Fearing the worst, you pull out your weapons and survey the scene as you back away from the pike. Everything looks clear, so you quickly get as far away from the area as possible. Perhaps the skull was not meant for you.
+GH.Nightshroud-3_Front	Late in the evening, you are returning to your rooms when you hear a cry for help coming from a nearby alleyway. Racing into the shadows, you expect to find someone in distress, but instead find a group of men clad in black leather armor eying you maliciously.\n\n“We have a message for your Nightshroud friend,” one of them says, drawing a wicked-looking curved blade. Suddenly, the Nightshroud appears among them in a flash of fatal sword strikes. Before the men even have a chance to react, half of them lie dead on the ground. The other half quickly flee.\n\n“Well, it looks like you’re into it now, too. Which is good, because I need help taking them down.”
+GH.Nightshroud-3_Option_1	Stay and listen to what the Nightshroud has to say.
+GH.Nightshroud-3_Option_1_Outcome	The Nightshroud kicks one of the corpses. “This is the Sin-Ra Syndicate, a group of assassins trying to gain a foothold in the region. I’m trying to stop them, and somehow they found out you and I were friends. They decided to go after you as retribution. Lucky for you, I’ve located their hideout, so we’re going to sneak in there and end this whole business once and for all.”
+GH.Nightshroud-3_Option_2	Claim you want nothing to do with this and walk away.
+GH.Nightshroud-3_Option_2_Outcome	“The Sin-Ra Syndicate seems to think you have something to do with this,” the Nightshroud yells at you as you leave. “That’s all that matters! They’ll strike again, and I won’t be there to protect you!” You keep walking.
+GH.Nightshroud-4_Front	You reach a crossroads and decide to rest for a bit. As you eat some of your rations, something sticking up out of the ground in the distance catches your attention.\n\nYou move closer, and what you thought was a signpost turns out to be a human skull impaled on a spike.\n\nThere is something sticking out of the skull’s mouth.
+GH.Nightshroud-4_Option_1	Investigate further.
+GH.Nightshroud-4_Option_1_Outcome	Against your better judgment, you approach the skull, which looks suspiciously like the Sin-Ra’s calling card. Sure enough, a group of dark-clad warriors appears before you from out of thin air. Wordlessly, they draw their long, curved blades and attack. Caught by surprise, you don’t fare well in the battle. You do fight them off, but in the end, you are severely wounded, exhausted, and demoralized.
+GH.Nightshroud-4_Option_2	Arm yourself and make a defensive retreat from the area.
+GH.Nightshroud-4_Option_2_Outcome	Recognizing the pike as a symbol of the Sin-Ra Syndicate, you arm yourself and run from the area. Unfortunately, you don’t make it far before you see a number of black-clad assassins bearing down on you. You move into a defensive position and prepare for battle. The fight is arduous, but in the end, the assassins are dead, and you hope they don’t come back.
+Nightshroud_FullName	Nightshroud
+CODEX_Hero_Nightshroud_Title	Nightshroud
+Nightshroud_DESCRIPTION	With the ability to cloak themselves in shadow and pass through the world unseen, Nightshrouds are deadly stalkers, using blades and stealth to eliminate any target. Rather than working with other races to gather knowledge, Nightshrouds prefer to pry the knowledge from their cold, dead fingers.
+CODEX_HeroInfo_Nightshroud	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> Medium\n\nDarkness is your fuel. Most of your cards create <sprite name=CreateDark> or spend it, and spending it is what turns a good turn into a great one. <i>Nightfall</i> keeps Dark flowing every turn, so it is worth getting out early.\n\nYour other tool is <sprite name=Invisible>. Many of your attacks hit harder or add effects while you are unseen, so plan your turns around becoming invisible, striking, and slipping away before enemies can answer.\n\nYour attacks can <sprite name=Muddle>, <sprite name=Poison>, <sprite name=Curse> and <sprite name=Stun> enemies, and a few Dark-fuelled ones, like <i>Spirit of the Night</i>, kill a normal enemy outright. You fight up close and are fairly fragile, so use your long moves and jumps to pick your fights, and avoid crowds while you can be seen.\n\n<b>Strengths:</b>\n• Powerful execution abilities\n• Can use Invisibility to avoid damage\n• Uses Dark to enhance his abilities\n\n<b>Weaknesses:</b>\n• Poor ranged options\n• Doesn't assist allies much\n• Finds making friends difficult
+PERK_Berserker_01_Name	Light Step
+PERK_Berserker_02_Name	Steady Hand
+PERK_Berserker_03_Name	Open Wounds
+PERK_Berserker_04_Name	Reckless Swing
+PERK_Berserker_05_Name	Burning Rage
+PERK_Berserker_06_Name	Concussion
+PERK_Berserker_07_Name	Disarming Blow
+PERK_Berserker_08_Name	Second Wind
+PERK_Berserker_09_Name	Thick Skin
+PERK_Berserker_10_Name	Rapid Recovery
+Berserker_MASTERY_1_Name	Bloodlust
+Berserker_MASTERY_1_Desc	Lose at least one hit point during each of your turns, without ever performing the bottom action of Blood Pact
+Berserker_MASTERY_2_Name	Living on the Edge
+Berserker_MASTERY_2_Desc	Have exactly one hit point at the end of each of your turns
+Event_GH.Berserker_Text	The Berserker is in the Tavern, which is not news, and she is sober, which is. There is a bandage on her arm and a letter on the table in front of her, read so many times the folds have gone soft.\n"My sister," she says, pushing it toward you. "The clan is moving the herds south before the snows. She asks if the one who ran off to get herself killed would like to come home instead." She takes the letter back before you can finish it. "She has a way with words."\nYou ask about the arm. She shrugs: it will heal, they always do, that was never the problem. The problem was that for a long time she did not mind whether they did. "Not any more," she says, and looks surprised to hear it out loud.\nShe leaves the next morning with the trade caravan, walking beside the wagons rather than riding, because sitting still was never going to happen. At the bend in the road she turns and raises the bandaged arm, once, and then she is gone into the white.
+Event_GH.Berserker_Name	Berserker Retires
+GH.Berserker-1_Front	Walking near the northern gates, you see some commotion as a group of wounded guards is ushered into town.\n\nThey look pretty bad off, suffering from many severe wounds. Some even have lost limbs.\n\nBringing up the rear, one guard is carried in by a couple of others. He’s missing a leg and has a vicious-looking axe embedded in his side. You realize that the axe looks kind of familiar.
+GH.Berserker-1_Option_1	Let the guards know you recognize the Berserker’s axe.
+GH.Berserker-1_Option_1_Outcome	You approach the wounded detail, explaining how that axe belonged to a former member of your party.\n\n“Yeah, we know,” one of them says with an icy stare. “Said we were desecrating her land or some such nonsense and just went crazy. But we weren’t doing anything but patrolling! Quite a piece of work your friend. Just take the axe if you want and get out of here.”
+GH.Berserker-1_Option_2	Stay silent and keep out of it.
+GH.Berserker-1_Option_2_Outcome	You casually move on, wondering how the guards found themselves on the wrong side of the Berserker’s rage. It probably wasn’t very difficult.
+GH.Berserker-2_Front	You hear the distinctive sound of metal-on-metal in the distance and race up a hill in the road to investigate.\n\nIn front of you, you see a familiar female Inox in heated battle with a group of Gloomhaven guards. Though outnumbered and bloodied, you’ve never seen that stop the Berserker before. With every wound they inflict, she becomes more and more enraged, cleaving off limbs with the ease of cutting grass.
+GH.Berserker-2_Option_1	Help the Berserker fight off the guards.
+GH.Berserker-2_Option_1_Outcome	You enter the battle to aid the Berserker, but in her blood rage, she can’t distinguish friend from foe. She begins hacking away at you with her axe as much as she swings at the guards. You concentrate on taking out the remaining guards, but when you turn back to the Berserker, she seems to have vanished into the nearby forest.
+GH.Berserker-2_Option_2	Wait and see what happens. It looks like she's handling herself well enough.
+GH.Berserker-2_Option_2_Outcome	After a brutal and bloody fight, only the Berserker remains standing. After her blood rage subsides, she collapses from exhaustion. You race to her side and attempt to revive her using a number of powerful potions. She finally awakes and expresses her begrudging gratitude. You ask about the fight, but she just shakes her head. She offers her axe as thanks and then dashes off into the forest.
+Berserker_FullName	Berserker
+CODEX_Hero_Berserker_Title	Berserker
+Berserker_DESCRIPTION	Berserkers are Inox warriors who have embraced their strength and fury. The Berserker will go to any lengths to keep her friends safe, including sacrificing her own life. Her abilities revolve around high damage output with the option of self-damage to push to even higher amounts. This makes her an extremely dangerous combatant, both to her enemies and herself.
+CODEX_HeroInfo_Berserker	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> High\n\nYour health is a resource, not just a lifeline. Many of your attacks get stronger the more health you have lost, or once you drop below half, and several cards let you suffer a little damage to make an attack hit harder.\n\nYour defences are built for living on the edge: <i>Defiance of Death</i> softens a blow that would knock you out, and other cards boost the healing you receive or strike back whenever you are hurt. Keep a healer close, or plan your own heals.\n\n<sprite name=CreateFire> powers some of your attacks, and your blows often add <sprite name=Wound>.\n\n<b>Strengths:</b>\n• One of the highest damage-dealing classes\n• Gets even stronger on lower health\n• Can lead the front line and draw enemy fire\n\n<b>Weaknesses:</b>\n• Little in the way of abilities that help allies\n• Operating on low health can lead to premature demise\n• Has anger management issues
 Event__Text	Their personal quest complete, the mercenary leaves Frosthaven for good. Someone else will take up the fight.
 GiveSupplyCard	Give Medical Pack

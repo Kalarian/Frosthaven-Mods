@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Nightshroud06
+Name: PERK_Nightshroud_06_Name
+Description: PERK_Nightshroud_06_Desc
+CharacterID: NightshroudID
+Available: 2
+CardsToAdd: [AMC_Dark_P1]

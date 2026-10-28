@@ -1,0 +1,36 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DarkCloud$
+Character: NightshroudID
+ID: 20272
+Level: X
+Initiative: 74
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                Condition: Curse
+    Bottom:
+        Abilities:
+            BMuddle:
+                Muddle: True
+                Range: 1
+                Target: -1
+                Filter: Enemy
+                AnimOverload: WeakRadial
+        Infuse: Dark
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Curse></size>"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Muddle>"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<size=50%> "
+        - Infuse: Dark

@@ -1,0 +1,41 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SilentForce$
+Character: NightshroudID
+ID: 20268
+Level: 1
+Initiative: 91
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            CasterHasPositiveConditions: Invisible
+                        AbilityOverrides:
+                            TAttackCOBuff:
+                                Strength: 2
+                        XP: 1
+                AnimOverload: HeavyAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 6
+                    CircleEnhancements: 1
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=20%> "
+        - Row: "$GH_268_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"

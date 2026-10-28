@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StingingCloud$
+Character: PlagueheraldID
+ID: 20311
+Level: 6
+Initiative: 66
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Range: 3
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,R|-1,-1,R|1,-1,R"
+                MultiPassAttack: False
+                AnimOverload: AreaDisease
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TAttack
+                        Condition: Muddle
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "65,35"
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+                - Row: "<sprite name=Range> *TAttack.Range*"
+                - Consume:
+                    Name: TCDark
+                    Text: "<nobr><sprite name=Muddle>, <sprite name=XP1></nobr>"
+            - Column:
+                - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"

@@ -1,0 +1,66 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ClawsOfTheNight$
+Character: NightshroudID
+ID: 20279
+Level: 5
+Initiative: 26
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack: 
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Condition: Poison
+                AreaEffect: "0,0,G|2,0,R|1,1,R"
+                AnimOverload: AdjacentAreaAttack
+                MultiPassAttack: false
+        Consumes:
+            TCAny:
+                Elements: Any
+                AbilityOverrides:
+                    TCAnyAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                Infuse: Dark
+                XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Attack: 2
+                    Range: 1
+                    Target: -1
+                    MultiPassAttack: False
+                    AnimOverload: Attack_AOE_Radial
+                ActiveBonus:
+                    Duration: Persistent
+                    Restriction: OncePerAction
+                    Behaviour: DuringActionAbilityOnMoved
+                    Filter:
+                        CasterHasPositiveConditions: [Invisible]
+                    XPTracker: [1,1,1,1]
+                Targeting: All
+                Target: -1
+                Filter: Self
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - ColumnWidths: "70,25"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Poison>"
+            - Row: "<size=20%> "
+            - Consume:
+                Name: TCAny
+                Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=CreateDark>, <sprite name=XP1></nobr>"
+        - Column: "£Area£"
+    Bottom:
+        - Active:
+            Ability: "BActive"
+            Icon: Invisible
+            ListLayout: "$GH_279_B$"
+            Layout: "$GH_279_B$"
+        - Row: "<size=50%> "
+        - XPTracker: BActive

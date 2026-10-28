@@ -1,0 +1,27 @@
+Parser: Character
+ID: CragheartID
+LocKey: $Cragheart$
+Model: Cragheart
+Race: Savvas
+Traits: [ Armored, Outcast, Strong ]
+Complexity: 2
+ElementalAffinities: [ Earth ]
+MasteryIDs: [ Cragheart_MASTERY_1, Cragheart_MASTERY_2 ]
+RetireCampaignSection: GH.Cragheart
+DefaultSkin: 1
+# PlayerLevel:    [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
+HealthTable:      [  10,  12,  14, 16,  18,  20,  22,  24,  26 ]
+NumberAbilityCardsInBattle: 11
+Role: $Cragheart_ROLE$
+Description: $Cragheart_DESCRIPTION$
+Difficulty: $DIFFICULTY_MEDIUM$
+Strengths: $Cragheart_STRENGTHS$
+Weaknesses: $Cragheart_WEAKNESSES$
+Adventure_Description: $Cragheart_ADVENTURE_DESCRIPTION$
+HeroStats:
+    Melee: 3
+    Ranged: 3
+    Mobility: 2
+    Support: 3
+    Defense: 3
+    Control: 3

@@ -1,0 +1,44 @@
+Parser: Perk
+ID: Plagueherald10
+Name: PERK_Plagueherald_10_Name
+Description: PERK_Plagueherald_10_Desc
+CharacterID: PlagueheraldID
+Available: 1
+Cost: 2
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            Damage: 1
+            Target: -1
+            Targeting: All
+            Filter:
+                TargetType: Enemy
+                TargetHasNegativeCondition: Poison
+            SubAbilities:
+                TMuddle:
+                    Muddle: True
+                    UseParentTargets: True
+                TAllies:
+                    Damage: 1
+                    Target: -1
+                    Targeting: All
+                    Filter:
+                        TargetType: Ally
+                        TargetHasNegativeCondition: Poison
+                    SubAbilities:
+                        TStrengthen:
+                            Strengthen: True
+                            UseParentTargets: True
+            Filter: [Self]
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringTurnAbility
+            XPTracker: [0]
+            IsToggleBonus: True
+            Hidden: True
+            ListLayoutOverride: [$PERK_Plagueherald_10_Desc$, Icon_Poison]
+            MiscVars:
+                OverrideIcon: "'Poison'"
+        AnimOverload: PowerUp

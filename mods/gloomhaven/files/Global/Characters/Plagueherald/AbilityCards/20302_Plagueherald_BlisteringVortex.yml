@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BlisteringVortex$
+Character: PlagueheraldID
+ID: 20302
+Level: X
+Initiative: 21
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 3
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,E"
+                MultiPassAttack: False
+                AnimOverload: AreaDisease
+        Infuse: Air
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "65,25"
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Row: "<sprite name=Range> *TAttack.Range*"
+            - Column:
+                - Row: "£Area£"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"

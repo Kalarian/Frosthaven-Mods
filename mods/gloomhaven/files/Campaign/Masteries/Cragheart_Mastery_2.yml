@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Cragheart_MASTERY_2
+LocalisedName: Cragheart_MASTERY_2_Name
+LocalisedDescription: Cragheart_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: each round, an ally took damage from the Cragheart or was healed by them (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AllyDamageOrHealEveryRound]
+        CharacterIDs:
+            ActorID: CragheartID
+        Value: 1

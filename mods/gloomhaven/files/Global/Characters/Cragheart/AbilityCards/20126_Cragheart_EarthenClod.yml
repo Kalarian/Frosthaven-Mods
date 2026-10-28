@@ -1,0 +1,56 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EarthenClod$
+Character: CragheartID
+ID: 20126
+Level: 1
+Initiative: 38
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 5
+                AnimOverload: ObstacleEarthenClod
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthImmo:
+                        ParentName: TAttack
+                        Conditions: Immobilize
+                XP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 2
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCEarth
+            Text: "<sprite name=Immobilize>, <sprite name=XP1>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<sprite name=Range>*BHeal.Range* @BHeal.Range@"
+            - Column:

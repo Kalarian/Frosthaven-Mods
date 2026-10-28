@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_AcceleratedEnd$
+Character: PlagueheraldID
+ID: 20309
+Level: 5
+Initiative: 62
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TDamage:
+                Damage: 1
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    TargetHasNegativeCondition: Poison
+                MultiPassAttack: False                    
+                AnimOverload: RadialNegativeMajor
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TDamage
+                        Strength: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BPoison:
+                Poison: True
+                Range: 5
+                Target:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: Enemy
+                MultiPassAttack: False
+                AnimOverload: RadialNegativeTarget
+Layout:
+    Top:
+        - Row: "$GH_309_T$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "$GH_124_B_3$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Poison>"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BPoison.Range*</mark>"
+                - Row: "<sprite name=Target>*BPoison.Target* <size=100%><voffset=1>@BPoison.Target@"
+            - Column:

@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Nightshroud_MASTERY_1
+LocalisedName: Nightshroud_MASTERY_1_Name
+LocalisedDescription: Nightshroud_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAG: invisible at the start or the end of every turn (GHMasteries.cs, from the turn records)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_InvisibleEveryTurn]
+        CharacterIDs:
+            ActorID: NightshroudID
+        Value: 1

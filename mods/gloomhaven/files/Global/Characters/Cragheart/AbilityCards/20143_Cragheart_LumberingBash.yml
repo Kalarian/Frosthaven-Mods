@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LumberingBash$
+Character: CragheartID
+ID: 20143
+Level: 8
+Initiative: 85
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+        Infuse: Earth
+        XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Heal: 2
+                    Range: 2
+                    Filter: [Self, Ally]
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                    XPTracker: [1,0,1,0,1]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Earth
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$GH_143_B$"
+            Layout: "$GH_143_B$"
+            Icon: Positive_Heal
+        - Row: "<size=50%> "
+        - XPTracker: BActive

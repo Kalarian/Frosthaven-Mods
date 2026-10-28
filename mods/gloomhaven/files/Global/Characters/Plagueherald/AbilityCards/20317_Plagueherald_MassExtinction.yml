@@ -1,0 +1,65 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MassExtinction$
+Character: PlagueheraldID
+ID: 20317
+Level: 9
+Initiative: 94
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TCurseWound:
+                Curse: True
+                Condition: Wound
+                Target: -1
+                Targeting: All
+                Filter: [Enemy, Ally]
+                AnimOverload: RadialNegativeMajor
+        Infuse: [Air, Dark]
+    Bottom:
+        Abilities:
+            BDamage:
+                Damage: 2
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    TargetHasNegativeCondition: Poison
+                AnimOverload: RadialNegativeMajor
+        Consumes:
+            BCAir:
+                Elements: Air
+                AbilityOverrides:
+                    BCAirBuff:
+                        ParentName: BDamage
+                        Strength: 1
+                XP: 1
+            BCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    BCDarkBuff:
+                        ParentName: BDamage
+                        Strength: 1
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><nobr><sprite name=Curse></nobr>, <nobr><sprite name=Wound></nobr>"
+        - Row: "$Target_AllAlliesAndEnemies$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:
+                - Infuse: Dark
+    Bottom:
+        - Row: "$GH_317_B$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCAir
+            Text: "<nobr>+1 $Damage$, <sprite name=XP1></nobr>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCDark
+            Text: "<nobr>+1 $Damage$, <sprite name=XP1></nobr>"

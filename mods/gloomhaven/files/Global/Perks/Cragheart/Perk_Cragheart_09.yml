@@ -1,0 +1,23 @@
+Parser: Perk
+ID: Cragheart09
+Name: PERK_Cragheart_09_Name
+Description: PERK_Cragheart_09_Desc
+CharacterID: CragheartID
+Available: 1
+Cost: 2
+Flags: [Passive, ExecuteAbilitiesAfterRoomRevealed, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    ARoom:
+        ControlActor:
+            ControlActorType: Player
+            Abilities:
+                AQuake:
+                    Move: 1
+                    StrengthIsBase: True
+        Filter: Enemy
+        AutoTrigger: True
+        SkipAnim: True
+        Target: -1
+        Targeting: Custom
+        TargetingVars:
+            AddValidActorsInRange: TriggerMap?.Monsters?.Select(obj?.Actor)?.Where(obj != null) || AllEnemyMonsters

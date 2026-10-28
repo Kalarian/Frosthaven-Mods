@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ConcealedDominance$
+Character: NightshroudID
+ID: 20271
+Level: X
+Initiative: 35
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 4
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAreaBuff:
+                        ParentName: TAttack
+                        AreaEffect: "-2,0,G|0,0,R|2,0,R|-1,1,R|1,1,R|-1,-1,R|1,-1,R"
+                        AnimOverload: AdjacentAreaAttack
+                        MultiPassAttack: false
+                XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+        Consumes:
+            BCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    BCTeleportInstead:
+                        ParentName: BMove
+                        Teleport: True
+                        Targeting: AllConnectedRooms
+                        Filter: Self
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text:
+                - ColumnWidths: "70,30"
+                - Column:
+                    - Row: "£Area£"
+                - Column:
+                    - Row: "<sprite name=XP2>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCDark
+            Text: "$GH_271_B$"

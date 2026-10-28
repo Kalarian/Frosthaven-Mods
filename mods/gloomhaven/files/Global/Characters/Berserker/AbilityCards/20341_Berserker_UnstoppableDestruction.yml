@@ -1,0 +1,43 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_UnstoppableDestruction$
+Character: BerserkerID
+ID: 20341
+Level: 6
+Initiative: 57
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+        Consumes:
+            TCDamage:
+                CostAbility:
+                    ParentName: TAttack
+                    Damage: 2
+                    Filter: Self
+                AbilityOverrides:
+                    TCAttackBuff:
+                        ParentName: TAttack
+                        Pierce: All
+                XP: 1
+    Bottom:
+        Abilities:
+            BImprovedShortRest:
+                ImprovedShortRest: True
+                Filter: Self
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDamage
+            Text: "$GH_341_T$"
+    Bottom:
+        - Active:
+            Ability: BImprovedShortRest
+            Icon: Berserker
+            ListLayout: "$GH_341_B$"
+            Layout: "$GH_341_B$"

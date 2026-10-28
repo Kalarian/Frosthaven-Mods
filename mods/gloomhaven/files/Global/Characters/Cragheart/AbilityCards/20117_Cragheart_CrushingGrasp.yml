@@ -1,0 +1,35 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CrushingGrasp$
+Character: CragheartID
+ID: 20117
+Level: 1
+Initiative: 35
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Conditions: Immobilize
+        Infuse: Earth
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Earth
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"

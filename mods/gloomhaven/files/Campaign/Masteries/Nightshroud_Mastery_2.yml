@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Nightshroud_MASTERY_2
+LocalisedName: Nightshroud_MASTERY_2_Name
+LocalisedDescription: Nightshroud_MASTERY_2_Desc
+PerkPoints: 1
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ElementEveryTurn]
+        Elements: Dark
+        CharacterIDs:
+            ActorID: NightshroudID
+        Value: 1

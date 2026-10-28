@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Cragheart_MASTERY_1
+LocalisedName: Cragheart_MASTERY_1_Name
+LocalisedDescription: Cragheart_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAG: every attack's targets stood next to an obstacle or a wall (GHMasteries.cs, from the attack records and the map)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AttacksNearObstaclesOnly]
+        CharacterIDs:
+            ActorID: CragheartID
+        Value: 1

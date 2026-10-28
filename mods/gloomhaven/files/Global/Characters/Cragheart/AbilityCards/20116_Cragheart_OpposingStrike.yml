@@ -1,0 +1,45 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_OpposingStrike$
+Character: CragheartID
+ID: 20116
+Level: 1
+Initiative: 46
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 2
+                AreaEffect: "-2,0,R|0,0,G|2,0,R"
+                AreaEffectLayoutOverride: "-1,-1,R|0,0,G|1,1,R"
+                AnimOverload: OppositeOpposingStrike
+                MultiPassAttack: False
+        XP: 1
+    Bottom:
+        Abilities:
+            BRetaliate:
+                Retaliate: 2
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    AttackType: Melee
+                    Behaviour: Retaliate
+                    XPTracker: [0,1,0,1,0,1]
+Layout:
+    Top:
+        - ColumnWidths: "65,35"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<size=20%> "
+        - Column: "£Area£"
+    Bottom:
+        - Active:
+            Ability: BRetaliate
+            ListLayout: "$GH_116_B$"
+            Layout: "$GH_116_B$"
+            Icon: Positive_Retaliate
+        - Row: "<size=50%> "
+        - XPTracker: BRetaliate

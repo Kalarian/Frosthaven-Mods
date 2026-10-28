@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WingsOfTheNight$
+Character: NightshroudID
+ID: 20270
+Level: X
+Initiative: 24
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+            TInvis:
+                Invisible: True
+                Filter: Self
+                AnimOverload: TurnInvisible
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Move: 2
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringTurnAbility
+                    IsToggleBonus: True
+                    Restriction: OncePerAction
+                    ValidAbilityType: Attack
+                    XPTracker: [1,1,1,1]
+                Targeting: All
+                Target: -1
+                Filter: Self
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Invisible>"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: "BActive"
+            Icon: Move
+            ListLayout: "$GH_270_B$"
+            Layout: "$GH_270_B$"
+        - Row: "<size=50%> "
+        - XPTracker: BActive

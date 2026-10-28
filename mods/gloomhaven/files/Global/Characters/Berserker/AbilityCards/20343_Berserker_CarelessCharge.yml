@@ -1,0 +1,59 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CarelessCharge$
+Character: BerserkerID
+ID: 20343
+Level: 7
+Initiative: 20
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+        Consumes:
+            TCWound:
+                CostAbility:
+                    ParentName: TAttack
+                    Wound: True
+                    Filter: [Self, Ally]
+                    Range: 1
+                    Target: -1
+                AbilityOverrides:
+                    TCAttackBuff:
+                        ParentName: TAttack
+                        Conditions: Immobilize
+                        SubAbilities:
+                            TCAttackSubPush:
+                                Push:
+                                    Amount: 2
+                                IsInlineSubAbility: True
+                                AnimOverload: None
+    Bottom:
+        Abilities:
+            BImmunity:
+                ImmunityTo: [Poison, Wound, Stun, Disarm, Immobilize, Muddle, Curse]
+                Filter: Self
+                ActiveBonusDuration: Persistent
+                AnimOverload: PowerUp
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCWound
+            Text: "$GH_343_T$"
+    Bottom:
+        - Active:
+            Ability: BImmunity
+            Icon: Positive_DamagePrevent
+            ListLayout: "$GH_343_B$"
+            Layout: "$GH_343_B$"

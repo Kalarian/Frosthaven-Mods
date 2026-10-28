@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BluntForce$
+Character: CragheartID
+ID: 20133
+Level: 3
+Initiative: 21
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 2
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthAttackBuff:
+                        ParentName: TAttack
+                        Strength: 4
+                XP: 2
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BRetaliate:
+                Retaliate:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonusDuration: Round
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Consume:
+            Name: TCEarth
+            Text: "+4 <sprite name=Attack>, <sprite name=XP2>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BRetaliate
+            Icon: Positive_Retaliate
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"

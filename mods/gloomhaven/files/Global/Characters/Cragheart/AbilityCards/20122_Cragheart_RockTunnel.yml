@@ -1,0 +1,39 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RockTunnel$
+Character: CragheartID
+ID: 20122
+Level: 1
+Initiative: 41
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TDestroyObstacle:
+                DestroyObstacle: True
+                SpawnDelay: 2.16
+                AnimOverload: MeleeSmashRockTunnel
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 5
+                    Jump: True
+                    CircleEnhancements: 1
+                AllTargetsOnMovePath: True
+                Conditions: Immobilize
+        XP: 1
+Layout:
+    Top:
+        - Row: "$GH_122_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - AddedEffect: "<sprite name=Jump>"
+            - Column:
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Immobilize>"
+        - Row: "$Target_AllEnemiesMovedThrough$"

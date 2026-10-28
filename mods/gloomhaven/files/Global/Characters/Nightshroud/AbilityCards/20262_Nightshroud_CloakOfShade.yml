@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CloakOfShade$
+Character: NightshroudID
+ID: 20262
+Level: 1
+Initiative: 13
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 2
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+            BNull:
+                Null: True
+        Consumes:
+            BCDark:
+                Elements: Dark
+                Abilities:
+                    BCDarkInvis:
+                        ParentName: BNull
+                        Invisible: True
+                        Filter: Self
+                        AnimOverload: TurnInvisible
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Infuse: Dark
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCDark
+            Text:
+                - ColumnWidths: "80,20"
+                - ColumnSpacing: 50
+                - Column:
+                    - Row: "<b><size=130%><nobr><sprite name=Invisible></nobr>"
+                    - Row: "$Self$"
+                - Column:

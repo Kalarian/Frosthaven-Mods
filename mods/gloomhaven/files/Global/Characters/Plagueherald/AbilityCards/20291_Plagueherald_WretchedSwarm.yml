@@ -1,0 +1,39 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WretchedSwarm$
+Character: PlagueheraldID
+ID: 20291
+Level: 1
+Initiative: 84
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Range: 3
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,R|-1,-1,R|1,-1,R"
+                Condition: Stun
+                MultiPassAttack: False
+                AnimOverload: AreaDisease
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "65,30"
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Row: "<sprite name=Range> *TAttack.Range*"
+                - Row: "<sprite name=Stun>"
+                - Row: "<size=50%> "
+            - Column:
+                - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

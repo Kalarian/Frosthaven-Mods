@@ -1,0 +1,59 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RotMaggots$
+Character: PlagueheraldID
+ID: 20304
+Level: 2
+Initiative: 69
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range: 2
+                Condition: Poison
+                SubAbilities:
+                    TAttackSubPoison:
+                        Poison: True
+                        Range: 1
+                        Target: -1
+                        Filter: Ally
+                        AllTargetsAdjacentToParentTarget: True
+                        AnimOverload: None
+                AnimOverload: RangedAttack
+        XP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 2
+                Range: 
+                    Amount: 3
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]                    
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - AddedEffect: "<size=130%><sprite name=Poison></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$GH_304_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal*"
+            - Column:
+                - Row: "<sprite name=Range>*BHeal.Range* <size=100%><voffset=1>@BHeal.Range@"
+                - Row: "<sprite name=Target>*BHeal.Target* <size=100%><voffset=1>@BHeal.Target@"
+            - Column:

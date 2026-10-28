@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_KineticAssault$
+Character: CragheartID
+ID: 20135
+Level: 4
+Initiative: 19
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 1
+                    CircleEnhancements: 1
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+    Bottom:
+        Abilities:
+            BRetaliate:
+                Retaliate:
+                    Amount: 3
+                    SquareEnhancements: 1
+                RetaliateRange:
+                    Amount: 3
+                AnimOverload: PowerUp
+                ActiveBonusDuration: Round
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+    Bottom:
+        - Active:
+            Ability: BRetaliate
+            Icon: Positive_Retaliate
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*, <sprite name=Range> *BRetaliate.RetaliateRange*"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
+                - Row: "$Retaliate$ <sprite name=Range> *BRetaliate.RetaliateRange* <size=100%><voffset=1>@BRetaliate.RetaliateRange@"

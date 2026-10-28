@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Plagueherald01
+Name: PERK_Plagueherald_01_Name
+Description: PERK_Plagueherald_01_Desc
+CharacterID: PlagueheraldID
+Available: 1
+CardsToRemove: [AMC_Basic_M2]

@@ -1,0 +1,44 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DancingShadows$
+Character: NightshroudID
+ID: 20267
+Level: 1
+Initiative: 9
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            TAttack:
+                Attack:
+                    Amount: 1
+    Bottom:
+        Abilities:
+            BDisadvantage:
+                AttackersGainDisadvantage: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+        Infuse: Dark
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+    Bottom:
+        - Active:
+            Ability: BDisadvantage
+            Icon: Disadvantage
+            ListLayout: "$GH_337_B_2$"
+            Layout: "$GH_337_B_2$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:
+                - Duration: Round

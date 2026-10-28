@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Berserker08
+Name: PERK_Berserker_08_Name
+Description: PERK_Berserker_08_Desc
+CharacterID: BerserkerID
+Available: 1
+CardsToAdd: [AMC_Heal1_R, AMC_Heal1_R]

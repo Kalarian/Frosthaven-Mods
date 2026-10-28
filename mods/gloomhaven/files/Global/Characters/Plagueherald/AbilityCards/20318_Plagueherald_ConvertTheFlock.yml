@@ -1,0 +1,63 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ConverttheFlock$
+Character: PlagueheraldID
+ID: 20318
+Level: 9
+Initiative: 29
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Condition: Curse
+                AnimOverload: RadialNegativeMajor
+                MultiPassAttack: False                    
+                
+        XP: 2
+    Bottom:
+        Abilities:
+            BDamage:
+                Damage: 2
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Ally
+                    TargetHasNegativeCondition: Poison
+                AnimOverload: RadialNegativeMajor
+                SubAbilities:
+                    BDamageSubAttackBuff:
+                        Attack: 1
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Round
+                        AbilityXP: 1
+                        PerformXTimesBasedOn: HalfTargetsDamagedByPreviousDamageAbilityThisAction
+                        AnimOverload: None
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<sprite name=Target>*TAttack.Target* @TAttack.Target@"
+                - AddedEffect: "<size=130%><sprite name=Curse></size>"
+            - Column:
+    Bottom:
+        - Row: "$GH_318_B_1$"
+        - Row: "<size=20%> "
+        - Active:
+            Ability: BDamageSubAttackBuff
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_318_B_2$"
+            Layout: "$GH_318_B_2$"

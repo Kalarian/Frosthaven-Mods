@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SpiritOfTheNight$
+Character: NightshroudID
+ID: 20266
+Level: 1
+Initiative: 84
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+        Consumes:
+            TCDark:
+                Element: Dark
+                AbilityOverrides:
+                    TCDarkKillInstead:
+                        ParentName: TAttack
+                        Kill: True
+                        Filter:
+                            TargetType: Enemy
+                            EnemyType: Normal
+                        AbilityXP: 1
+                        AnimOverload: Kill
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 6
+                    CircleEnhancements: 2
+        Infuse: Dark
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "$GH_266_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:

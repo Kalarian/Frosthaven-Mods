@@ -1,0 +1,68 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_VoiceOfTheNight$
+Character: NightshroudID
+ID: 20288
+Level: 9
+Initiative: 6
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 0
+                Condition: Stun
+                Filter: Self
+                Target: -1
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    Filter:
+                        CasterHasPositiveConditions: [Invisible]
+                    XPTracker: [1,0,1,0,1]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 
+                    Amount: 2
+                    CircleEnhancements: 1
+            BAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCAny:
+                Elements: Any
+                Abilities:
+                    BCAnyInvis:
+                        ParentName: BNull
+                        Invisible: True
+                        Filter: Self
+                        AnimOverload: TurnInvisible
+                Infuse: Dark
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_288_T$"
+            Layout: "$GH_288_T$"
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCAny
+            Text:
+                - ColumnWidths: "70,30"
+                - Column:
+                    - Row: "<nobr><b><size=130%><sprite name=Invisible></nobr>"
+                    - Row: "$Self$"
+                - Column:
+                    - Row: "<sprite name=CreateDark>, <sprite name=XP1>"

@@ -1,0 +1,44 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BoneBreaker$
+Character: BerserkerID
+ID: 20344
+Level: 8
+Initiative: 41
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Conditions: [Wound, Immobilize]
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 4
+                Conditions: [StopFlying]
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Wound></size>, <size=130%><sprite name=Immobilize></size>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Fire
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
+            - Column:
+        - Row: "$Target_CanNoLongerFly$"

@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Nightshroud08
+Name: PERK_Nightshroud_08_Name
+Description: PERK_Nightshroud_08_Desc
+CharacterID: NightshroudID
+Available: 1
+CardsToAdd: [AMC_Heal1_R, AMC_Heal1_R]

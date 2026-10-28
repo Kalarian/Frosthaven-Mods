@@ -1,0 +1,50 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Avalanche$
+Character: CragheartID
+ID: 20118
+Level: 1
+Initiative: 75
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                AnimOverload: MeleeSmashAvalanche
+                AreaEffect: "0,0,G|2,0,R|1,1,R|-1,1,E"
+                MultiPassAttack: False
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                XP: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BCreate:
+                Create: RockSingle
+                Range: 1
+                Target: 2
+                SpawnDelay: 2.9
+                AnimOverload: ObstacleAvalanche
+                MultiPassAttack: False
+        Infuse: Earth
+Layout:
+    Top:
+        - ColumnWidths: "70,25"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<size=0%> "
+            - Consume:
+                Name: TCEarth
+                Text: "+1 <sprite name=Attack>, <sprite name=XP1>"
+        - Column: "£Area£"
+    Bottom:
+        - Row: "$GH_118_B$"
+        - Row: "<size=20%> "
+        - Infuse: Earth

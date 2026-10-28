@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ExplosivePunch$
+Character: CragheartID
+ID: 20130
+Level: 2
+Initiative: 28
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TDestroyObstacleAttack:
+                MergedDestroyObstacleAttack:
+                    Abilities:
+                        TDestroyObstacle:
+                            DestroyObstacle:
+                            Range: 1
+                            Target: 1
+                            AnimOverload: None
+                            SpawnDelay: 2.16
+                        TAttack:
+                            Attack:
+                                Amount: 4
+                                DiamondEnhancements: 1
+                            Range: 1
+                            Target: -1
+                            Filter: Enemy
+                            IgnoreParentAreaOfEffect: true
+                            AnimOverload: MeleeSmashExplosivePunch
+        Infuse: Earth
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "$GH_122_T$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=100%> $GH_130_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Earth
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

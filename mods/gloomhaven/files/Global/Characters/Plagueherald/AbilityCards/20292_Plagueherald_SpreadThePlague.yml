@@ -1,0 +1,50 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SpreadthePlague$
+Character: PlagueheraldID
+ID: 20292
+Level: 1
+Initiative: 27
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 1
+                Filter: [Self]
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    ValidAbilityType: Attack
+                    Restriction: OncePerAction
+                    IsToggleBonus: True
+                    CostAbility:
+                        Poison: True
+                        AlreadyHasConditionDamageInstead: 3
+                        Range: 2
+                        Filter: Ally
+        XP: 2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_292_T$"
+            Layout: "$GH_292_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*BAttack.Range* @BAttack.Range@"
+            - Column:

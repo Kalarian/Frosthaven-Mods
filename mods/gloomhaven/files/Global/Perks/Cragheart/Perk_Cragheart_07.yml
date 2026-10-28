@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Cragheart07
+Name: PERK_Cragheart_07_Name
+Description: PERK_Cragheart_07_Desc
+CharacterID: CragheartID
+Available: 1
+Flags: [Passive, IgnoreMinusOneItemEffects]

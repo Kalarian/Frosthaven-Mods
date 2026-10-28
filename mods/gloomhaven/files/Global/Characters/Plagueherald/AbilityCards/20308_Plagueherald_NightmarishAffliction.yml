@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NightmarishAffliction$
+Character: PlagueheraldID
+ID: 20308
+Level: 4
+Initiative: 43
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Range: 3
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Condition: [Poison, Curse]
+                AnimOverload: RangedAttack
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BImmobilize:
+                Immobilize: True
+                Range: 3
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: Enemy
+                MultiPassAttack: False                    
+                AnimOverload: RadialNegative
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - Row: "<sprite name=Target>*TAttack.Target* <size=100%><voffset=1>@TAttack.Target@"
+                - AddedEffect: "<size=130%><sprite name=Poison></size>, <size=130%><sprite name=Curse></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Dark
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Immobilize>"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BImmobilize.Range*</mark>"
+                - Row: "<sprite name=Target>*BImmobilize.Target* <size=100%><voffset=1>@BImmobilize.Target@"
+            - Column:

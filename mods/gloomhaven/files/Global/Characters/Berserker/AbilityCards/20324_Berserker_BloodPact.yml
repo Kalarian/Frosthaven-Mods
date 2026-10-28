@@ -1,0 +1,56 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BloodPact$
+Character: BerserkerID
+ID: 20324
+Level: 1
+Initiative: 76
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 6
+                    DiamondEnhancements: 1
+                AnimOverload: HeavyAttack
+                SubAbilities:
+                    TAttackSubDamage:
+                        Damage: 0
+                        StatIsBasedOnX:
+                            Strength:
+                                BasedOn: PercentageOfCurrentHP
+                                Multiplier: 0.5 # 50%
+                        Filter: Self
+        XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                AnimOverload: PowerUp
+                SubAbilities:
+                    BActiveSub:
+                        AddActiveBonus:
+                            Damage: 1
+                            Filter: Self
+                        ActiveBonus:
+                            Duration: Persistent
+                            Behaviour: StartTurnAbility
+        XP: 2                            
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Row: "$GH_324_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$GH_324_B_1$ $GH_324_B_2$"
+            Layout:
+                - Row: "$GH_324_B_1$"
+                - Row: "<size=50%> "
+                - Row: "$GH_324_B_2$"
+            Icon: Positive_AttackPlus

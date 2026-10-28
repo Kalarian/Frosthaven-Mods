@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Berserker05
+Name: PERK_Berserker_05_Name
+Description: PERK_Berserker_05_Desc
+CharacterID: BerserkerID
+Available: 2
+CardsToAdd: [AMC_Fire_P2]

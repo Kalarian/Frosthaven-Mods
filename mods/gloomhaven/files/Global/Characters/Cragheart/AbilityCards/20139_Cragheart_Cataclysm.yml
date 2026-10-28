@@ -1,0 +1,61 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Cataclysm$
+Character: CragheartID
+ID: 20139
+Level: 6
+Initiative: 26
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                AnimOverload: TargetedCataclysm
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,G|-1,-1,R|1,-1,R"
+                MultiPassAttack: False
+                SubAbilities:
+                    TAttackSubImmo:
+                        Immobilize: True
+                        Filter: [Enemy, Ally]
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthAttackBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    BCEarthMoveBuff:
+                        ParentName: BMove
+                        Strength: 3
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "64,36"
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Consume:
+                    Name: TCEarth
+                    Text: "+2 <sprite name=Attack>, <sprite name=XP2>"
+            - Column:
+                - Row: "£Area£"
+        - Row: "<size=50%> "
+        - Row: "$GH_139_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCEarth
+            Text: "+3 <sprite name=Move>"

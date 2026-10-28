@@ -18,9 +18,9 @@ Strengths: $Scoundrel_STRENGTHS$
 Weaknesses: $Scoundrel_WEAKNESSES$
 Adventure_Description: $Scoundrel_ADVENTURE_DESCRIPTION$
 HeroStats:
-    Melee: 6
+    Melee: 5
     Ranged: 2
-    Mobility: 4
+    Mobility: 3
     Support: 1
     Defense: 1
     Control: 2

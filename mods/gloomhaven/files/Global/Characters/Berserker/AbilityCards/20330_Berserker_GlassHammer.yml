@@ -1,0 +1,38 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GlassHammer$
+Character: BerserkerID
+ID: 20330
+Level: X
+Initiative: 11
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 0
+                    DiamondEnhancements: 1
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: PercentageOfCurrentHP
+                        Multiplier: 1.0 # 100%
+                GainXPPerXDamageDealt: 5
+                SetHPTo: 1
+                AnimOverload: SuperHeavyAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> X <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$Xis_CurrentHP$"
+        - Row: "<size=20%> "
+        - Row: "$XP_Per5Damage$"
+        - Row: "<size=50%> "
+        - Row: "$GH_330_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Nightfall$
+Character: NightshroudID
+ID: 20277
+Level: 4
+Initiative: 73
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TInfuse:
+                AddActiveBonus:
+                    Infuse: Dark
+                    InfuseIfNotStrong: True
+                    Filter: Self
+                    AnimOverload: None
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [1,1,1]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 3
+            BAttack:
+                Attack: 2
+        Consumes:
+            BCLight:
+                Elements: Light
+                AbilityOverrides:
+                    BCLightAttackBuff:
+                        ParentName: BAttack
+                        Strength: 1
+                Infuse: Dark
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TInfuse
+            Icon: Nightshroud
+            ListLayout: "$GH_277_T$"
+            Layout: "$GH_277_T$"
+        - Row: "<size=50%> "
+        - XPTracker: TInfuse
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCLight
+            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=CreateDark>, <sprite name=XP1></nobr>"

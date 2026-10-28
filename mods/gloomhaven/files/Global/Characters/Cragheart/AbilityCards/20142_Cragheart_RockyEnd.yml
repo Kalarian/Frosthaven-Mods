@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RockyEnd$
+Character: CragheartID
+ID: 20142
+Level: 8
+Initiative: 37
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TDestroyObstacleAttack:
+                MergedDestroyObstacleAttack:
+                    Abilities:
+                        TDestroyObstacle:
+                            DestroyObstacle:
+                            Range: 2
+                            Target: -1
+                            AnimOverload: MeleeSmashRockyEnd
+                            SpawnDelay: 2.16
+                        TAttack:
+                            Attack:
+                                Amount: 0
+                            StatIsBasedOnX:
+                                Strength:
+                                    BasedOn: ObstaclesToBeDestroyedByMergedAbility
+                                    Multiplier: 2
+                            IgnoreMergedAbilityTargetSelection: True
+                            AnimOverload: None
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthRangeBuff:
+                        ParentName: TDestroyObstacle
+                        Range: 1
+                XP: 1
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 6
+                MoveRestrictionType: MustEndNextToObstacle
+Layout:
+    Top:
+        - Row: "$GH_142_T_1$"
+        - Consume:
+            Name: TCEarth
+            Text: "+1 <sprite name=Range>, <sprite name=XP1>"
+        - Row:
+            - ColumnWidths: "20, 60, 20"
+            - Column:
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> X"
+            - Column:
+        - Row: "$GH_142_T_2$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "$GH_142_B$"

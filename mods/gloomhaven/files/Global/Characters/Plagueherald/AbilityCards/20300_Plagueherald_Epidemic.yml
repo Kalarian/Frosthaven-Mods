@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Epidemic$
+Character: PlagueheraldID
+ID: 20300
+Level: X
+Initiative: 43
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 2
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+        XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    CanUndo: False
+                    Poison: True
+                    Range: 1
+                    Target: -1
+                    Filter: [Enemy, Ally]
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndActionAbility
+                    ValidAbilityType: Move
+                AnimOverload: PowerUp
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - Row: "<sprite name=Target>*TAttack.Target* <size=100%><voffset=1>@TAttack.Target@"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Icon_Poison
+            ListLayout: "$GH_300_B$"
+            Layout: "$GH_300_B$"

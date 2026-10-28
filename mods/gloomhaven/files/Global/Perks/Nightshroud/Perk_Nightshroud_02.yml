@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Nightshroud02
+Name: PERK_Nightshroud_02_Name
+Description: PERK_Nightshroud_02_Desc
+CharacterID: NightshroudID
+Available: 1
+CardsToRemove: [AMC_Basic_M2]
+CardsToAdd: [AMC_Dark_M1]

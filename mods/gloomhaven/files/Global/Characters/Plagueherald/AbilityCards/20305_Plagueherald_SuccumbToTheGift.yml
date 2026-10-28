@@ -1,0 +1,36 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SuccumbtotheGift$
+Character: PlagueheraldID
+ID: 20305
+Level: 3
+Initiative: 70
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TKill:
+                Kill: True
+                Range: 3
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: Normal
+                    TargetHasNegativeCondition: Poison
+                AnimOverload: TargetedDebuff
+        XP: 2
+    Bottom:
+        Abilities:
+            BBless:
+                Bless:
+                    DiamondPlusEnhancements: 1
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Ally
+                    TargetHasNegativeCondition: Poison
+                AnimOverload: RadialPositive
+Layout:
+    Top:
+        - Row: "$GH_305_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Bless> <size=100%><voffset=1>@BBless@"
+        - Row: "$Affect_AllAllies$ $with$ <nobr><sprite name=Poison></nobr>"

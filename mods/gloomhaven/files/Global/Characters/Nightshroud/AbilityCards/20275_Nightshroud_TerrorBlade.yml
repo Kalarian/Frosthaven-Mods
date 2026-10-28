@@ -1,0 +1,45 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TerrorBlade$
+Character: NightshroudID
+ID: 20275
+Level: 3
+Initiative: 17
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 3
+                            SquareEnhancements: 1
+                        IsInlineSubAbility: True
+                AnimOverload: HeavyAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+            BDisadvantage:
+                AttackersGainDisadvantage: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Push>*TAttackSubPush* <size=100%><voffset=1>@TAttackSubPush@"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Divider:
+        - Active:
+            Ability: BDisadvantage
+            Icon: Disadvantage
+            ListLayout: "$GH_337_B_2$"
+            Layout: "$GH_337_B_2$"
