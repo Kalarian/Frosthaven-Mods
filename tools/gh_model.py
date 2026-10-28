@@ -490,7 +490,8 @@ def _materials(b, pptrs, out):
             entry["emissive_tint"] = [round(glow["r"], 3), round(glow["g"], 3), round(glow["b"], 3)]
         if entry.get("emissive") and entry.get("emissive_tint") and floats.get("_Animate_Emissive", 0.0):
             lo, hi = floats.get("_Emissive_Anim_Min", 0.0), floats.get("_Emissive_Anim_Max", 1.0)
-            entry["emissive_boost"] = round(entry["emissive_boost"] * (lo + hi) / 2, 3)
+            # x0.7 on top: the user found the halved glow still too contrasty next to the dark cloth (2026-10-27)
+            entry["emissive_boost"] = round(entry["emissive_boost"] * (lo + hi) / 2 * 0.7, 3)
         entry["two_sided"] = mt["m_Name"].endswith("_2Side")
         # a distortion shell over part of the body (the Nightshroud's legs: Amp_CharDistort_Shd, a _DistortMap and no
         # colour texture). In Gloomhaven it only bends what is behind it; on Frosthaven's character shader it drew solid
