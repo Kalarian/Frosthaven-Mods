@@ -72,8 +72,34 @@ def names():
                                               "init": int(head["Initiative"]) if head.get("Initiative", "").isdigit() else None}
                 elif kind == "FHScenario" and head.get("ID", "").isdigit():
                     scen[int(head["ID"])] = head.get("Name") or re.sub(r"^FS_\d+_", "", head.get("LevelID", "")).replace("_", " ")
+        # cards of an installed content pack (the Gloomhaven classes) have no prefab and name their card by a text key
+        # ("$ABILITY_CARD_EyeforanEye$") that the pack's own strings.tsv answers, not the game's text (the stats
+        # page showed the raw keys, 2026-10-27)
+        pack = _pack_strings(ruleset)
+        for c in cards.values():
+            m = re.fullmatch(r"\$([^$]+)\$", c["name"] or "")
+            if m:
+                k = m.group(1)
+                c["name"] = pack.get(k) or _humanize(re.sub(r"^ABILITY_CARD_", "", k))
         _names.update(key=key, cards=cards, scen=scen)
         return _names
+
+
+def _pack_strings(ruleset):
+    """{key: English text} from every installed content pack's strings.tsv (<game>/FrosthavenMods/packs/*/)."""
+    out = {}
+    if not ruleset:
+        return out
+    gdir = Path(ruleset).parents[3]   # <game>/Frosthaven_Data/StreamingAssets/Rulebase/Base.ruleset
+    for f in sorted((gdir / "FrosthavenMods" / "packs").glob("*/strings.tsv")):
+        try:
+            for line in f.read_text(encoding="utf-8-sig", errors="replace").splitlines():
+                k, sep, v = line.partition("\t")
+                if sep and k and k not in out:
+                    out[k] = v.replace("\\n", " ").strip()
+        except OSError:
+            continue
+    return out
 
 
 # ---- one record -> one summary
