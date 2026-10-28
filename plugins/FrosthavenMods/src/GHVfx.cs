@@ -410,6 +410,9 @@ namespace FrosthavenMods
             {
                 Color beam = m.GetColor("_BeamColor");
                 m.SetColor("_BeamColor", new Color(beam.r * intensity, beam.g * intensity, beam.b * intensity, beam.a));
+                // and it follows its particle's colour and fade as Frosthaven's own shafts do (the Sawbones' chest shaft
+                // records _EnableParticleControls 1); without it the cone stood static at full strength (2026-10-27)
+                if (m.HasProperty("_EnableParticleControls")) m.SetFloat("_EnableParticleControls", 1f);
             }
             foreach (string kw in spec.Keywords) m.EnableKeyword(kw);
             if (spec.Queue >= 0) m.renderQueue = spec.Queue;
