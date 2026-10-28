@@ -418,6 +418,39 @@ def export(gh, cls, out, entry, warn=print, wanted=None):
         if name in dupes:
             warn(f"{cls} effects: {hero} holds more than one prefab named {name}; the first is used")
         effects[name] = describe(world, root, collector, loader_table)
+    # the hero's own particles (the Nightshroud's swirling wisps, the fireflies): Gloomhaven feeds them from a
+    # MaterialLoader at runtime, so the model's renderers hold no material; recorded like an effect, the plugin
+    # dresses them instead of switching them off (the user's Nightshroud screenshot, 2026-10-27)
+    hero_particles = {}
+    model_root = roots.get(Path(entry.get("prefab", "")).stem)
+    if model_root is not None:
+        d = describe(world, model_root, collector, loader_table)
+        parts = set()
+
+        def mark(go, path):
+            for cname, _co, _t in world.components(go):
+                if cname in ("ParticleSystemRenderer", "TrailRenderer", "LineRenderer"):
+                    parts.add(path)
+            for ch in world.children(go):
+                n = world.tree(ch).get("m_Name") or "?"
+                mark(ch, f"{path}/{n}" if path else n)
+
+        mark(model_root, "")
+        objs = {k: v for k, v in d["objects"].items() if k in parts and (v.get("loaded") or any(v.get("materials") or []))}
+        if objs:
+            hero_particles = {"objects": objs}
+            print(f"{cls}: {len(objs)} particle object(s) on the hero model recorded")
+        # describing the whole model also collected the body's own materials (the Nightshroud's distortion boots,
+        # which packcheck refused): only materials an effect or a recorded particle uses stay
+        used = set()
+        for spec in list(effects.values()) + ([hero_particles] if hero_particles else []):
+            for o in spec["objects"].values():
+                used.update(m for m in (o.get("materials") or []) if m)
+                used.update(m for m in ((o.get("loaded") or {}).get("materials") or []) if m)
+                if o.get("trail_material"):
+                    used.add(o["trail_material"])
+        for name in [n for n in collector.materials if n not in used]:
+            del collector.materials[name]
     sounds = _assign_sounds(anim, effects)
     if sounds:
         print(f"{cls}: {sounds} state sounds taken from the effects' own sound scripts")
@@ -436,4 +469,7 @@ def export(gh, cls, out, entry, warn=print, wanted=None):
         bundles.append({"file": inner, "name": name, "size": dst.stat().st_size,
                         "sha256": hashlib.sha256(dst.read_bytes()).hexdigest()})
     entry["not_shipped"] = [n for n in entry.get("not_shipped", []) if n not in collector.shipped]
-    return {"effects": effects, "effect_materials": collector.materials, "effect_bundles": bundles}
+    out = {"effects": effects, "effect_materials": collector.materials, "effect_bundles": bundles}
+    if hero_particles:
+        out["hero_particles"] = hero_particles
+    return out

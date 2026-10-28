@@ -94,6 +94,7 @@ namespace FrosthavenMods
             public Dictionary<string, Entry> Skins = new Dictionary<string, Entry>(StringComparer.OrdinalIgnoreCase);   // "ALT" -> that look
             public Dictionary<string, GHVfx.EffectSpec> Effects = new Dictionary<string, GHVfx.EffectSpec>(StringComparer.Ordinal);          // its ability effects (GHVfx)
             public Dictionary<string, GHVfx.MaterialSpec> EffectMaterials = new Dictionary<string, GHVfx.MaterialSpec>(StringComparer.Ordinal);
+            public GHVfx.EffectSpec HeroParticles;   // the model's own particles (pack "hero_particles"), dressed like an effect
             public List<GHVfx.BundleSpec> EffectBundles = new List<GHVfx.BundleSpec>();
 
             public static Entry Parse(ECharacter model, JObject j, string folder, string skin = null)
@@ -108,6 +109,8 @@ namespace FrosthavenMods
                     TrailPoints = Strings(j["trail_points"]), Feet = Strings(j["feet"]),
                     Effects = GHVfx.ParseEffects(j["effects"]), EffectMaterials = GHVfx.ParseMaterials(j["effect_materials"]), EffectBundles = GHVfx.ParseBundles(j["effect_bundles"]),
                 };
+                if (j["hero_particles"] is JObject hp)
+                    e.HeroParticles = GHVfx.ParseEffects(new JObject { ["hero"] = hp }).TryGetValue("hero", out GHVfx.EffectSpec hs) ? hs : null;
                 if (string.IsNullOrEmpty(e.Bundle) || string.IsNullOrEmpty(e.Prefab)) throw new FormatException("no bundle or prefab");
                 foreach (JObject w in j["weapons"]?.OfType<JObject>() ?? Enumerable.Empty<JObject>())
                     e.Weapons.Add(new WeaponSpec
@@ -365,6 +368,7 @@ namespace FrosthavenMods
             cm.WeaponLists = Weapons(e, bundle, materials, drifterCm);
             built.Carrier = carrier;
             GHVfx.Prepare(e, bundle);                                        // his ability effects (never fails the model)
+            GHVfx.DressHero(e, visual);                                      // his own particles, on the effects' rebuilt materials
             Plugin.Log.LogInfo($"Gloomhaven model: {e.Model} built from {e.Bundle} ({skins.Length} meshes, {materials.Count} materials, " +
                                $"{cm.WeaponLists.Count} weapons, height {e.Height}; {built.Override.name})");
             return built;
@@ -600,6 +604,15 @@ namespace FrosthavenMods
 
             /// <summary>Every mesh renderer under <paramref name="root"/> gets Frosthaven materials; any other renderer
             /// (Gloomhaven effects) is switched off for good.</summary>
+            /// <summary>A transform's path under the root ("a/b/c"; "" for the root), as the pack records objects.</summary>
+            internal static string PathUnder(Transform root, Transform t)
+            {
+                var names = new List<string>();
+                for (Transform x = t; x != null && x != root; x = x.parent) names.Add(x.name);
+                names.Reverse();
+                return string.Join("/", names);
+            }
+
             public void Apply(GameObject root)
             {
                 foreach (Renderer r in root.GetComponentsInChildren<Renderer>(true))
@@ -620,7 +633,10 @@ namespace FrosthavenMods
                         bool holes = false;
                         for (int i = 0; i < off.Length; i++) if (off[i] == null) { off[i] = _opaque; holes = true; }
                         if (holes) r.sharedMaterials = off;
-                        if (r is ParticleSystemRenderer || r is TrailRenderer || r is LineRenderer) r.gameObject.SetActive(false);
+                        // the particles the pack recorded stay (hidden until GHVfx.DressHero gives them their rebuilt
+                        // materials, after the effects are prepared); the rest are switched off as before
+                        bool recorded = _entry.HeroParticles != null && _entry.HeroParticles.Objects.ContainsKey(PathUnder(root.transform, r.transform));
+                        if (!recorded && (r is ParticleSystemRenderer || r is TrailRenderer || r is LineRenderer)) r.gameObject.SetActive(false);
                         continue;
                     }
                     Material[] slots = r.sharedMaterials;

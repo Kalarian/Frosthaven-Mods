@@ -290,6 +290,36 @@ namespace FrosthavenMods
             }
         }
 
+        /// <summary>The hero model's own particles (pack "hero_particles": the Nightshroud's wisps), dressed with the
+        /// rebuilt materials like an effect's objects and shown; before this they were switched off (null materials,
+        /// magenta patches). Runs after Prepare, which opens the material bundles. Never throws.</summary>
+        internal static void DressHero(GHModel.Entry e, GameObject visual)
+        {
+            if (e?.HeroParticles == null || visual == null) return;
+            try
+            {
+                string key = e.Model.ToString();
+                if (!Sets.TryGetValue(key, out Set set))
+                {
+                    set = new Set();
+                    Sets[key] = set;
+                    LoadMaterialBundles(e, set);
+                }
+                int dressed = 0;
+                foreach (KeyValuePair<string, ObjectSpec> kv in e.HeroParticles.Objects)
+                {
+                    Transform tr = kv.Key.Length == 0 ? visual.transform : visual.transform.Find(kv.Key);
+                    if (tr == null) { if (Reported.Add("hero " + key + "/" + kv.Key)) Plugin.Log.LogWarning($"Gloomhaven effects: {e.Model}'s model has no {kv.Key}"); continue; }
+                    DressRenderer(tr, kv.Value, e, set);
+                    var r = tr.GetComponent<Renderer>();
+                    if (r != null) r.forceRenderingOff = false;
+                    dressed++;
+                }
+                Plugin.Log.LogInfo($"Gloomhaven effects: {dressed} of {e.Model}'s own particle object(s) dressed");
+            }
+            catch (Exception ex) { Plugin.Log.LogWarning($"Gloomhaven effects: {e.Model}'s own particles stay off: {ex.Message}"); }
+        }
+
         private static void LoadMaterialBundles(GHModel.Entry e, Set set)
         {
             foreach (BundleSpec b in e.EffectBundles)
