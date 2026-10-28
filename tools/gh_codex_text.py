@@ -106,17 +106,15 @@ MECHANICS = {
         "thin defence of shield 1s and attacker disadvantage."
     ),
     "Nightshroud": (
-        "<sprite name=CreateDark> is the whole class: thirteen cards infuse it, eighteen consume it, and Nightfall "
-        "relights it at the end of every turn. Spending Dark buys <sprite name=Invisible>, instant kills (Spirit of "
-        "the Night a normal enemy, Swallowed by Fear a normal or elite, Angel of Death every adjacent normal enemy and "
-        "one more on the bottom), +2 <sprite name=Move> and +2 <sprite name=Attack> at once (Smoke Step), a heal 4, a "
-        "second attack, a 7-hex area, a second target, and a teleport to any connected room (Concealed Dominance).\n\n"
-        "Invisibility is the other half: four cards make him <sprite name=Invisible> (more with Dark), and six attacks "
-        "pay out while he is unseen: +2 <sprite name=Attack> (Silent Force, Grim Sustenance, Quiet Frenzy), "
-        "<sprite name=Stun> (Soulfire), poison + muddle + wound (Lurking Ruin), a bonus <sprite name=Attack> 2 after "
-        "each attack (Black Knives) and a persistent stun on attacks (Voice of the Night). All of it is melee (a few "
-        "range-3/4 throws with <sprite name=Curse>, <sprite name=Muddle> or <sprite name=Poison>), on long moves and "
-        "jumps (6 twice), with attackers at disadvantage as the defence. Two loots."
+        # the user, 2026-10-27: simpler, like Frosthaven's own Frozen Fist entry (a card or two by name, a couple of
+        # recommendations, the elements and conditions), not card counts and lists
+        "Darkness is your fuel. Most of your cards create <sprite name=CreateDark> or spend it, and spending it is what "
+        "turns a good turn into a great one. <i>Nightfall</i> keeps Dark flowing every turn, so it is worth getting out early.\n\n"
+        "Your other tool is <sprite name=Invisible>. Many of your attacks hit harder or add effects while you are unseen, "
+        "so plan your turns around becoming invisible, striking, and slipping away before enemies can answer.\n\n"
+        "Your attacks can <sprite name=Muddle>, <sprite name=Poison>, <sprite name=Curse> and <sprite name=Stun> enemies, "
+        "and a few Dark-fuelled ones, like <i>Spirit of the Night</i>, kill a normal enemy outright. You fight up close "
+        "and are fairly fragile, so use your long moves and jumps to pick your fights, and avoid crowds while you can be seen."
     ),
     "Berserker": (
         "Her health is her resource. Attacks scale with the health she has lost (Resolute Stand), with lost cards "
