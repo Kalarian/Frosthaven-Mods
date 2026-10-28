@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Offline check that a pack's rule files load with the game's own rule loaders (ScenarioRuleLibrary), after
+       Frosthaven's own files, so a file the game rejects at start-up (the error screen) is caught before launching it.
+       ymlcheck only runs the YAML reader; this runs the loaders behind it. See Program.cs. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <NoWarn>$(NoWarn);MSB3277;CS0618</NoWarn>
+    <GamePath Condition="'$(GamePath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Frosthaven</GamePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="SharedLibrary"><HintPath>$(GamePath)\Frosthaven_Data\Managed\SharedLibrary.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="ScenarioRuleLibrary"><HintPath>$(GamePath)\Frosthaven_Data\Managed\ScenarioRuleLibrary.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(GamePath)\Frosthaven_Data\Managed\UnityEngine.CoreModule.dll</HintPath><Private>true</Private></Reference>
+  </ItemGroup>
+
+</Project>

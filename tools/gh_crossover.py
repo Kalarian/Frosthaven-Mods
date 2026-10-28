@@ -736,13 +736,14 @@ VOIDWARDEN_PERKS = [
     (1, "Unfazed", "Ignore negative scenario effects",
      {"Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
     # Frosthaven's after-rest perk hooks (both rests), a consume of Ice or Dark (the element picker) and a Ward on one
-    # poisoned ally; the ability can be skipped. Verify on the bench (the picker on a consume, the condition filter).
+    # poisoned ally; the ability can be skipped. The picker sits on the ability beside the Consume, as Perk_Frozenfist_10
+    # (inside it the reader refused the whole file: 'Invalid consume entry ShowElementPicker', 2026-10-28 error screen).
     (1, "Grave Defense", "Whenever you rest, you may <sprite name=ConsumeIce> or <sprite name=ConsumeDark> to give <sprite name=Ward> to one ally who has <sprite name=Poison>",
      {"Flags": "[Passive, ExecuteAbilitiesAfterShortRest, ExecuteAbilitiesAfterLongRest]", "Abilities": """\
     BConsume:
+        ShowElementPicker: True
         Consume:
             Elements: [Ice, Dark]
-            ShowElementPicker: True
             Abilities:
                 CWard:
                     Ward: True

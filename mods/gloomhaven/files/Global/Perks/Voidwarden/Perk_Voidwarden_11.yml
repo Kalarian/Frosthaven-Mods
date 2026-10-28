@@ -7,9 +7,9 @@ Available: 1
 Flags: [Passive, ExecuteAbilitiesAfterShortRest, ExecuteAbilitiesAfterLongRest]
 Abilities:
     BConsume:
+        ShowElementPicker: True
         Consume:
             Elements: [Ice, Dark]
-            ShowElementPicker: True
             Abilities:
                 CWard:
                     Ward: True

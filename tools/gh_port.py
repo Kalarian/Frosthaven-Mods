@@ -893,6 +893,11 @@ def main():
     import subprocess
     if subprocess.call([sys.executable, str(Path(__file__).resolve().parent / "packcheck.py"), str(args.out)]) != 0:
         sys.exit("packcheck found problems in the converted pack (above)")
+    # the game's own rule loaders over Frosthaven's files then the pack's (a file they reject is the start-up error
+    # screen: Grave Defense's picker inside its Consume, 2026-10-28)
+    if subprocess.call(["dotnet", "run", "--project", str(Path(__file__).resolve().parent / "rulecheck"), "-c", "Release",
+                        "--", str(args.out / "files")]) != 0:
+        sys.exit("rulecheck: the game's loaders reject a converted file (above)")
 
 
 if __name__ == "__main__":
