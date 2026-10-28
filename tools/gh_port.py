@@ -377,6 +377,21 @@ CARD_FIXES = {
     20301: [
         (r"^([ \t]+)AllTargetsAdjacentToParentTarget: True(\r?)$", r"\1AllTargetsAdjacentToParentTarget: True\2\n\1TreatAsNonSubAbility: True\2"),
     ],
+    # Petrify (Cragheart), top: "kill one normal enemy within range 4 and place a one-hex obstacle in its hex". As a
+    # MergedKillCreate the kill waits for its animation while the create spawns the rock and steps the phase on, which
+    # ends both parts: the rock appeared and the enemy lived (G2 regression, 2026-10-28; CAbilityMergedKillCreate.cs
+    # 133-141, CAbilityCreate.cs 298). Frosthaven's own shape for "an obstacle on the hex the parent chose" (Pyroclast's
+    # Cooling top): a plain Kill with a create sub-ability on ParentAbility.m_TilesSelected[0], run only once the kill
+    # has happened.
+    20136: [
+        (r"^[ \t]+TKillCreateAttack:(\r?)\n[ \t]+MergedKillCreate:\r?\n(?:[ \t]+.*\r?\n)*?[ \t]+UseMergedWithAbilityTiles: True\r?\n[ \t]+AutoTrigger: True\r?$",
+         lambda m: "".join(f"{' ' * n}{t}\n" for n, t in (
+             (12, "TKill:"), (16, "Kill: True"), (16, "Filter:"), (20, "TargetType: Enemy"), (20, "EnemyType: Normal"),
+             (16, "AnimOverload: ObstaclePetrify"), (16, "Range: 4"), (16, "SubAbilities:"), (20, "TCreate:"),
+             (24, "Create: RockSingle"), (24, "Target: 1"), (24, "TreatAsNonSubAbility: True"), (24, "AutoTrigger: True"),
+             (24, "Targeting: Custom"), (24, "TargetingVars:"), (28, "ParentTile: ParentAbility.m_TilesSelected[0]"),
+             (28, "AddTileInRange: ParentTile"), (24, "SpawnDelay: 3.06"), (24, "AnimOverload: None"))).rstrip("\n").replace("\n", m.group(1) + "\n") + m.group(1)),
+    ],
     # Pilfer (Mindthief), top: "Loot 1, +1 gold per adjacent enemy". Frosthaven's loot parser knows LootData but not
     # the value ExtraGoldPerAdjacentEnemy (appears nowhere in its code): the file fails to parse, and a failed card
     # file inside the game's parallel class loader took the whole load down ("Character 'QuartermasterID' has no
