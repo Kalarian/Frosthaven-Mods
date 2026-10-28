@@ -95,6 +95,7 @@ namespace FrosthavenMods
             m.SetTexture("_Albedo", albedo);
             m.SetTexture("_MetallicSmoothnessAO", mask);
             m.SetTexture("_NormalMap", normal);
+            if (emissive != null && spec?.EmissiveTint is Color tint) emissive = Tinted(emissive, tint);
             m.SetTexture("_EmissiveMap", emissive);
             if (m.HasProperty("_EmissiveBoost")) m.SetFloat("_EmissiveBoost", spec?.EmissiveBoost ?? 1f);
             if (spec != null && spec.Brightness != 1f && m.HasProperty("_Value")) m.SetFloat("_Value", m.GetFloat("_Value") * spec.Brightness);
@@ -127,6 +128,24 @@ namespace FrosthavenMods
         }
 
         private static Texture2D _dark;
+
+        private static readonly Dictionary<(Texture, Color), Texture> TintedMaps = new Dictionary<(Texture, Color), Texture>();
+
+        /// <summary>A glow map multiplied by Gloomhaven's glow colour, on the GPU (the bundle's textures aren't readable):
+        /// the Nightshroud's white markings become Gloomhaven's blue (2026-10-27). Made once per map and colour.</summary>
+        internal static Texture Tinted(Texture map, Color tint)
+        {
+            if (TintedMaps.TryGetValue((map, tint), out Texture done) && done != null) return done;
+            Shader s = Shader.Find("Sprites/Default") ?? Shader.Find("Unlit/Texture");
+            if (s == null) return map;
+            var mat = new Material(s) { color = tint };
+            var rt = new RenderTexture(map.width, map.height, 0, RenderTextureFormat.ARGB32) { name = map.name + " (tinted)", hideFlags = HideFlags.DontUnloadUnusedAsset };
+            rt.Create();
+            Graphics.Blit(map, rt, mat);
+            UnityEngine.Object.Destroy(mat);
+            TintedMaps[(map, tint)] = rt;
+            return rt;
+        }
 
         /// <summary>The Gloomhaven texture for a slot: what the old material still holds (its property sheet outlives
         /// the lost shader), else the texture of the pack's name among the loaded objects.</summary>

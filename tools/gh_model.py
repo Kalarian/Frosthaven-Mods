@@ -478,6 +478,19 @@ def _materials(b, pptrs, out):
         entry["cutout"] = _is_cutout(texs.get("_Diffuse"))
         entry["cutoff"] = round(floats.get("_Cutoff", 0.5), 3)
         entry["emissive_boost"] = round(floats.get("_EmissiveMapBoost", 1.0), 3)
+        # Gloomhaven tints a white glow map with _GlowColor and animates it (noise between _Emissive_Anim_Min and Max):
+        # the Nightshroud's claw and arm markings are white in the map, blue and flickering in Gloomhaven, and drew
+        # solid white at x10 in Frosthaven (the user's screenshot, 2026-10-27). The tint is recorded; an animated glow's
+        # boost is halved (its average over the flicker)
+        colors = {k: v for k, v in props["m_Colors"]}
+        glow = colors.get("_GlowColor")
+        # (only for a glow map Gloomhaven strengthens, _EmissiveMapBoost > 1: the other heroes' maps carry their own
+        # colour and their default _GlowColor would turn approved looks blue)
+        if entry.get("emissive") and glow and entry["emissive_boost"] > 1 and (glow["r"], glow["g"], glow["b"]) != (1.0, 1.0, 1.0):
+            entry["emissive_tint"] = [round(glow["r"], 3), round(glow["g"], 3), round(glow["b"], 3)]
+        if entry.get("emissive") and entry.get("emissive_tint") and floats.get("_Animate_Emissive", 0.0):
+            lo, hi = floats.get("_Emissive_Anim_Min", 0.0), floats.get("_Emissive_Anim_Max", 1.0)
+            entry["emissive_boost"] = round(entry["emissive_boost"] * (lo + hi) / 2, 3)
         entry["two_sided"] = mt["m_Name"].endswith("_2Side")
         # a distortion shell over part of the body (the Nightshroud's legs: Amp_CharDistort_Shd, a _DistortMap and no
         # colour texture). In Gloomhaven it only bends what is behind it; on Frosthaven's character shader it drew solid

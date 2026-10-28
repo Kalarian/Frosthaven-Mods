@@ -54,6 +54,7 @@ namespace FrosthavenMods
             public string Albedo, Mask, Normal, Emissive;
             public bool Cutout, FlatMask, Hidden;   // Hidden: a distortion shell Frosthaven can't draw (pack "hidden")
             public float Cutoff = 0.5f, EmissiveBoost = 1f, Metallic, Smoothness = 0.3f, Ao = 1f, Brightness = 1f;
+            public Color? EmissiveTint;   // Gloomhaven's _GlowColor over a white glow map (pack "emissive_tint")
         }
 
         /// <summary>How one of the Drifter's animator states is retimed for the clip that replaces hers: the behaviours'
@@ -130,6 +131,7 @@ namespace FrosthavenMods
                         Metallic = (float?)v["metallic"] ?? 0f, Smoothness = (float?)v["smoothness"] ?? 0.3f, Ao = (float?)v["ao"] ?? 1f,
                         Brightness = (float?)v["brightness"] ?? 1f,
                         Hidden = (bool?)v["hidden"] ?? false,
+                        EmissiveTint = v["emissive_tint"] is JArray et && et.Count >= 3 ? new Color((float)et[0], (float)et[1], (float)et[2], 1f) : (Color?)null,
                     };
                 }
                 if (j["animation"] is JObject a)
