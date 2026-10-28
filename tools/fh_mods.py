@@ -330,7 +330,9 @@ def cmd_install(args):
     tmp.replace(GAME_RULESET)
     extras = install_pack_extras(mods)
     state = read_state()
-    state.update(installed_sha=sha(data), mods=[d.name for d, _ in mods], version="dev")
+    state.update(installed_sha=sha(data), mods=[d.name for d, _ in mods],
+                 # the repo's release number (VERSION), so the companion doesn't offer the release this build already is
+                 version=(ROOT / "VERSION").read_text().strip())
     STATE.write_text(json.dumps(state, indent=2), encoding="utf-8")
     print(f"installed {len(mods)} mod(s): {', '.join(state['mods']) or '(none)'}" + (f"; {extras} content pack file(s)" if extras else ""))
 
