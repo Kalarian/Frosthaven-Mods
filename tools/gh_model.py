@@ -471,10 +471,19 @@ def _materials(b, pptrs, out):
                 ok = False
                 continue
             texs[slot] = b.byid[p["m_PathID"]]
+        # a material on another of Gloomhaven's shaders names its colour map _MainTex (the low-end and ether shaders,
+        # Unity's Standard): without it the slot stayed empty and the part drew white (the Mystic Ally, the user's
+        # manual test 2026-10-29; the Voidwarden's and Soothsinger's "renders white" warnings)
+        for slot, v in props["m_TexEnvs"]:
+            p = v["m_Texture"]
+            if slot in ("_MainTex", "_BumpMap") and p["m_PathID"] and p["m_FileID"] == 0 and p["m_PathID"] in b.byid:
+                texs.setdefault("_Diffuse" if slot == "_MainTex" else "_NormalMap", b.byid[p["m_PathID"]])
         floats = dict(props["m_Floats"])
         entry = {TEXTURE_SLOTS[s]: (texs[s].read_typetree()["m_Name"] if s in texs else None) for s in TEXTURE_SLOTS}
         if not floats.get("_UseEmissiveMap", 1.0):
             entry["emissive"] = None  # the material had an emissive map it never used
+        if entry.get("emissive") == "white":
+            entry["emissive"] = None  # Unity's default white map: the whole model glowed white (the Decoy, 2026-10-29)
         entry["cutout"] = _is_cutout(texs.get("_Diffuse"))
         entry["cutoff"] = round(floats.get("_Cutoff", 0.5), 3)
         entry["emissive_boost"] = round(floats.get("_EmissiveMapBoost", 1.0), 3)
@@ -829,8 +838,11 @@ def describe_npc(bundle_path, model, fh_bundle_path):
     for root in roots:
         for go in b.walk(root):
             gname = go.read_typetree()["m_Name"]
-            for n, t in b.components(go):
-                if n == "Animator" and animator_go is None:
+            comps = list(b.components(go))
+            for n, t in comps:
+                # the body's Animator, not an effect's (the Mana Sphere's swirl, ManaSphere_FX, has one too and came first:
+                # the summon was built on the swirl and lost its sphere)
+                if n == "Animator" and animator_go is None and not any(c == "ParticleSystem" for c, _ in comps):
                     animator_go = gname
                 elif n == "SkinnedMeshRenderer":
                     mesh = b.obj(t["m_Mesh"])

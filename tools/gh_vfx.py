@@ -387,6 +387,111 @@ def _assign_sounds(anim, effects):
 
 # ---------------------------------------------------------------- the pack build step
 
+def _particle_paths(world, root):
+    """Paths (as describe keys them) of the objects under <root> that draw particles, trails or lines."""
+    parts = set()
+
+    def mark(go, path):
+        for cname, _co, _t in world.components(go):
+            if cname in ("ParticleSystemRenderer", "TrailRenderer", "LineRenderer"):
+                parts.add(path)
+        for ch in world.children(go):
+            n = world.tree(ch).get("m_Name") or "?"
+            mark(ch, f"{path}/{n}" if path else n)
+
+    mark(root, "")
+    return parts
+
+
+def _ship(gh, world, collector, out):
+    """Copy the bundles the collected materials live in into <out>/bundles; their pack.json "effect_bundles" rows."""
+    bundles = []
+    for b in sorted(collector.shipped):
+        src = gh / BUNDLES / b
+        dst = gh_model.copy_bundle(src, out / "bundles" / b)   # textures unflagged for mip streaming, like the hero's
+        inner = next((Path(k).name for k in world.env.files if Path(k).name == b), b)
+        name = None
+        for cab, f in world.files.items():
+            if world.file_bundle.get(cab) == b:
+                for o in f.objects.values():
+                    if o.type.name == "AssetBundle":
+                        name = world.tree(o).get("m_Name")
+                        break
+        bundles.append({"file": inner, "name": name, "size": dst.stat().st_size,
+                        "sha256": hashlib.sha256(dst.read_bytes()).hexdigest()})
+    return bundles
+
+
+# Gloomhaven body shaders Frosthaven ships under the same name (its misc_shaders bundles), with the same properties: a
+# summon body on one of them is drawn with Frosthaven's copy and Gloomhaven's own values instead of being rebuilt on the
+# plain character shader. The ether shader is the see-through glowing look of the Mystic Ally, the Burning Avatar, the
+# Doppelganger and the Sand Devil's body (on the character shader the first two drew solid white and the Sand Devil
+# nothing; the user's manual test, 2026-10-29); the mana sphere shader the Mana Sphere's and Nail Sphere's swirl.
+NATIVE_BODY_SHADERS = {
+    "Amp_CharShader_Alpha_Ether": "Amp_CharShader_Alpha_Ether",
+    "Amp_Low/Amp_CharShader_Alpha_Ether_Low": "Amp_CharShader_Alpha_Ether",
+    "Unlit/ManaSphere_Shd": "Unlit/ManaSphere_Shd",
+}
+
+
+def _native_materials(world, bundle, entry):
+    """Marks entry["materials"] rows whose Gloomhaven shader Frosthaven ships by name ("native": the shader, values,
+    texture names by slot, keywords)."""
+    mats = entry.get("materials") or {}
+    for cab, f in world.files.items():
+        if world.file_bundle.get(cab) != bundle:
+            continue
+        for o in f.objects.values():
+            if o.type.name != "Material":
+                continue
+            t = world.tree(o)
+            if t.get("m_Name") not in mats:
+                continue
+            fh = NATIVE_BODY_SHADERS.get(world.name(world.obj(o, t.get("m_Shader"))))
+            if fh is None:
+                continue
+            spec = _material_spec(world, o, bundle)
+            mats[t["m_Name"]]["native"] = {"shader": fh, "floats": spec["floats"], "colors": spec["colors"],
+                                           "textures": {k: v for k, v in spec["textures"].items() if v},
+                                           "keywords": spec["keywords"]}
+
+
+def export_npc(gh, model, out, entry, warn=print):
+    """A summon's own particles (the Ward's torch flame, the Sand Devil's whirlwind, the Mystic Ally's glow), recorded
+    like a hero's "hero_particles" so the plugin dresses them on the summon's model instead of switching them off (the
+    user's manual test, 2026-10-29: the Sand Devil showed nothing at all, the Ward no flame). Returns the summon
+    entry's additions ("hero_particles", "effect_materials", "effect_bundles"), empty when the model has none."""
+    bundle = entry["bundle"]
+    world = World(gh, [bundle] + gh_model.external_bundles(gh, bundle))
+    loader_table = _loader_table(gh, _loader_guids(world, bundle))
+    extra = sorted({b for _, b in loader_table.values()} - set(world.bundle_files))
+    if extra:
+        world = World(gh, world.bundle_files + extra)
+    _native_materials(world, bundle, entry)
+    roots, _dupes = world.roots(bundle)
+    root = roots.get(Path(entry["prefab"]).stem)
+    if root is None:
+        return {}
+    collector = Collector(world, bundle, lambda m: warn(f"{model} particles: {m}"))
+    d = describe(world, root, collector, loader_table)
+    parts = _particle_paths(world, root)
+    objs = {k: v for k, v in d["objects"].items() if k in parts and (v.get("loaded") or any(v.get("materials") or []))}
+    if not objs:
+        return {}
+    used = set()
+    for o in objs.values():
+        used.update(m for m in (o.get("materials") or []) if m)
+        used.update(m for m in ((o.get("loaded") or {}).get("materials") or []) if m)
+        if o.get("trail_material"):
+            used.add(o["trail_material"])
+    for name in [n for n in collector.materials if n not in used]:
+        del collector.materials[name]
+    collector.shipped = {m["bundle"] for m in collector.materials.values() if m.get("bundle")}
+    print(f"{model}: {len(objs)} particle object(s) on the summon recorded")
+    return {"hero_particles": {"objects": objs}, "effect_materials": collector.materials,
+            "effect_bundles": _ship(gh, world, collector, out)}
+
+
 def export(gh, cls, out, entry, warn=print, wanted=None):
     """Describe the effects the class's states play (entry["animation"]) and copy the bundles their materials need
     into <out>/bundles; returns the pack.json additions (empty when the states play none). <wanted>: the animation

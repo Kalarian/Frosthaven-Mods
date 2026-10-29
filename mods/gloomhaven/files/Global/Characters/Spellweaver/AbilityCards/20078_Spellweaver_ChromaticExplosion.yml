@@ -24,7 +24,15 @@ Data:
                 Move:
                     Amount: 2
                     CircleEnhancements: 1
-        Infuse: Any
+            BInfuse:
+                CanUndo: False
+                CanSkip: False
+                Infuse: [Any]
+                ShowElementPicker: True
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)
 Layout:
     Top:
         - ColumnWidths: "65,30"

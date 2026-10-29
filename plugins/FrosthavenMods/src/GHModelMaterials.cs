@@ -105,6 +105,31 @@ namespace FrosthavenMods
             return m;
         }
 
+        /// <summary>A body drawn with Frosthaven's copy of its own Gloomhaven shader (the ether look of the Mystic Ally,
+        /// Burning Avatar, Doppelganger and the Sand Devil's body; the Mana Sphere's swirl): Gloomhaven's recorded values
+        /// and textures on it. The low-end ether shader named its colour map _MainTex; Frosthaven's names it _Diffuse.
+        /// Null (the caller rebuilds it on the character shader) when Frosthaven's shader isn't loaded.</summary>
+        internal static Material Native(Material gh, GHModel.NativeSpec spec, Func<string, Texture2D> texture)
+        {
+            Shader s = FindShader(spec.Shader);
+            if (s == null) { Plugin.Log.LogWarning($"Gloomhaven model: {spec.Shader} is not loaded; {gh.name} is drawn on the character shader"); return null; }
+            var m = new Material(s) { name = gh.name + " (Frosthaven)", hideFlags = HideFlags.DontUnloadUnusedAsset };
+            foreach (KeyValuePair<string, float> f in spec.Floats) if (m.HasProperty(f.Key)) m.SetFloat(f.Key, f.Value);
+            foreach (KeyValuePair<string, Color> c in spec.Colors) if (m.HasProperty(c.Key)) m.SetColor(c.Key, c.Value);
+            foreach (KeyValuePair<string, string> t in spec.Textures)
+            {
+                string slot = m.HasProperty(t.Key) ? t.Key : t.Key == "_MainTex" && m.HasProperty("_Diffuse") ? "_Diffuse" : null;
+                if (slot == null) continue;
+                Texture tex = null;
+                try { tex = gh.GetTexture(t.Key); } catch (Exception) { }
+                if (tex == null) tex = texture(t.Value) ?? Resources.FindObjectsOfTypeAll<Texture>().FirstOrDefault(x => x != null && x.name == t.Value);
+                if (tex == null) { Plugin.Log.LogWarning($"Gloomhaven model: {gh.name}: texture {t.Value} not found; {slot} stays empty"); continue; }
+                m.SetTexture(slot, tex);
+            }
+            foreach (string kw in spec.Keywords) m.EnableKeyword(kw);
+            return m;
+        }
+
         /// <summary>A body part Frosthaven can't draw as Gloomhaven did: the Nightshroud's legs are a distortion mesh
         /// (Amp_CharDistort_Shd) that reads as black shadow in Gloomhaven; on the character shader with no texture it drew
         /// white, fully transparent it left hollow legs with pale edges (the user's screenshots, 2026-10-27). The same

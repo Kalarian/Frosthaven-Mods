@@ -16,7 +16,7 @@ Data:
         Abilities:
             TTrap:
                 Trap:
-                    TrapName: StunMine
+                    TrapName: Trap
                     Damage: 0
                     Conditions: Stun
                 SpawnDelay: 2.2

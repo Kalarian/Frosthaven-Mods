@@ -10,7 +10,7 @@ Data:
         Abilities:
             TTrap:
                 Trap:
-                    TrapName: PoisonMine
+                    TrapName: Trap
                     Damage: 2
                     Conditions: Poison
                 SpawnDelay: 2.2

@@ -12,3 +12,4 @@ Move:
 #    Behaviour: CastAbilityFromSummon
 #    ValidAbilityType: Attack
 #    IsToggleBonus: True
+Range: 0

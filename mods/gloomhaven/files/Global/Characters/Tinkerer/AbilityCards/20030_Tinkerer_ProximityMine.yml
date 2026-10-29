@@ -10,7 +10,7 @@ Data:
         Abilities:
             TTrap:
                 Trap:
-                    TrapName: DamageMine
+                    TrapName: Trap
                     Damage: 6  
                     TriggeredXP: 2
                 SpawnDelay: 2.2

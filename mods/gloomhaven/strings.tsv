@@ -623,6 +623,7 @@ AtEndOfTurn	at end of turn
 Augment_OnYourMeleeAttacks	On your melee attacks:
 BattleBoar	Battle Boar
 Battlebot	Battle Bot
+BearTrap	Trap
 BeastTyrant	Beast Tyrant
 BeastTyrantBear	Beast Tyrant's Bear
 BeastTyrant_ADVENTURE_DESCRIPTION	Vermlings that rise above their baser instincts find that there is much to be gained in exerting their will over beasts of the wilds. These Beast Tyrants can amass incredible armies of fangs, claws and talons to become formidible opponents in battle.
@@ -635,6 +636,7 @@ Berserker_ROLE	Melee Damage
 Berserker_STRENGTHS	- <indent=%15>One of the highest damage-dealing classes</indent>\n- <indent=%15>Gets even stronger on lower health</indent>\n- <indent=%15>Can lead the front line and draw enemy fire</indent>
 Berserker_WEAKNESSES	- <indent=%15>Little in the way of abilities that help allies</indent>\n- <indent=%15>Operating on low health can lead to premature demise</indent>\n- <indent=%15>Has anger management issues</indent>
 BlackUnicorn	Black Unicorn
+BombTrap	Bomb Trap
 Brute	Brute
 Brute_ADVENTURE_DESCRIPTION	The Brute employs his great size and strength to earn a living by wielding his huge sword and impressive shield for those who pay the most.\nBrutes are best used as front line melee troops, absorbing damage and protecting the more fragile ranged damage dealers, and are best equipped with items that keep them alive longer!
 Brute_DESCRIPTION	The Brute employs his great size and strength to earn a living by wielding his huge sword and impressive shield for those who pay the most.
@@ -1085,7 +1087,7 @@ JOTL_026_T	On your next five attacks, add <nobr>+1 Attack <sprite name=Attack></
 JOTL_027_B	Add <nobr>STRENGTHEN <sprite name=Strengthen></nobr> and gain <sprite name=XP1> if you killed an enemy this round.
 JOTL_027_T	If an adjacent enemy has your Favorite, you may return it to its Active Ability. If you do, the adjacent enemy suffers 2 damage and gains <nobr>WOUND <sprite name=Wound></nobr>.
 JOTL_028_B	The next five times an enemy ends a Move ability within <nobr>Range <sprite name=Range> 5</nobr>, perform an "<nobr>Attack <sprite name=Attack> 2</nobr>, <nobr>Range <sprite name=Range> 5</nobr>" action targeting that enemy.
-JOTL_030_T	You may add <nobr>+3 Attack <sprite name=Attack></nobr>, <nobr>WOUND <sprite name=Wound></nobr>, and <nobr>PUSH <sprite name=Push> 1</nobr> to a single target of any of your ranged attacks by marking it with your Favorite. When that target dies, it will drop your Favorite. If you loot that hex, return your Favorite to this Active Ability. This card cannot be active while "The Favorite" is active.
+JOTL_030_T	<size=85%>You may add <nobr>+3 Attack <sprite name=Attack></nobr>, <nobr>WOUND <sprite name=Wound></nobr>, and <nobr>PUSH <sprite name=Push> 1</nobr> to a single target of any of your ranged attacks by marking it with your Favorite. When that target dies, it will drop your Favorite. If you loot that hex, return your Favorite to this Active Ability. This card cannot be active while "The Favorite" is active.</size>
 JOTL_031_B	All adjacent enemies suffer 1 damage.
 JOTL_032_B	If your Favorite is in or adjacent to your hex, you may perform
 JOTL_033_T	On your next five attacks targeting an enemy that has your Favorite, add <nobr>+2 Attack <sprite name=Attack></nobr>.
@@ -1212,7 +1214,7 @@ JOTL_240_T_2	2 damage instead, <sprite name=XP1>
 JOTL_240_T_3	If Fire was consumed, 2 damage instead.
 JOTL_241_T	All enemies adjacent to the target suffer 1 damage.
 JOTL_242_T	Target all enemies within 2 hexes
-JOTL_244_T	Place the Sand Devil in an adjacent empty hex. It is considered a trap for the purposes of monster focusing and movement. At the start of each of your turns, you may move it up to 2 hexes, and you may force any character on it to move with it. Any time a character moves onto it or vice versa (not when moving together), that character suffers 1 damage and gains <nobr>MUDDLE <sprite name=Muddle></nobr>.
+JOTL_244_T	<size=85%>Place the Sand Devil in an adjacent empty hex. It is considered a trap for the purposes of monster focusing and movement. At the start of each of your turns, you may move it up to 2 hexes, and you may force any character on it to move with it. Any time a character moves onto it or vice versa (not when moving together), that character suffers 1 damage and gains <nobr>MUDDLE <sprite name=Muddle></nobr>.</size>
 JOTL_245_B	All adjacent enemies suffer 2 damage.
 JOTL_245_T	The next four times an enemy enters a hex adjacent to you, that enemy gains <nobr>DISARM <sprite name=Disarm></nobr>.
 JOTL_247_B	One adjacent enemy suffers 1 damage.
@@ -1557,6 +1559,7 @@ Tinkerer_ROLE	Ranged Support
 Tinkerer_SKIN_ALT	Mastermind
 Tinkerer_STRENGTHS	- <indent=%15>Decent ranged abilities</indent>\n- <indent=%15>Effective healer</indent>\n- <indent=%15>Wide range of options</indent>
 Tinkerer_WEAKNESSES	- <indent=%15>Very fragile</indent>\n- <indent=%15>Weaker in smaller teams</indent>\n- <indent=%15>Has trouble opening tight jars</indent>
+Trap	Trap
 ViciousJackal	Vicious Jackal
 VoidEater	Void Eater
 Voidwarden	Voidwarden
@@ -2231,6 +2234,13 @@ Summoner_FullName	Summoner
 CODEX_Hero_Summoner_Title	Summoner
 Summoner_DESCRIPTION	With the proper concentration, an Aesther Summoner can pull anything she wishes across the planar boundaries. With infinite planes comes infinite possibilities. Such efforts can be incredibly taxing, however, and a Summoner finds it much easier to transport living things or raw energy.
 CODEX_HeroInfo_Summoner	<b>Role:</b> Summoner/Support\n<b>Difficulty:</b> Medium\n\nYou fight through your <b>summons</b>. Most of your cards call a creature to fight beside you, and the rest protect them, heal them, or let them act on your turn. Summons stay until they are defeated; some cards let you bring lost summon cards back.\n\nYour own attacks are modest and mostly at range, adding <sprite name=Curse>, <sprite name=Immobilize>, <sprite name=Stun> or <sprite name=Wound> when you spend <sprite name=CreateDark>, <sprite name=CreateFire> or <sprite name=CreateAir>.\n\nSpread your summons around the enemies and let them take the hits while you stay back.\n\n<b>Strengths:</b>\n• Wide array of creatures to summon\n• Support abilities for all allies\n• Reasonable ranged abilities\n\n<b>Weaknesses:</b>\n• Low damage dealing capacity\n• Too many active summons can leave too few cards\n• Expensive to make all the art for in a computer game!
+Augment	Augment
+Augment_DiscardReminder	When another <nobr><color=#A7B3D2>Augment</color></nobr> is played, discard this card.
+Glossary_Augment	Augment: An active Augment's effects will be applied whenever the Mindthief uses a melee attacks.
+Song	Song
+Song_DiscardReminder	When another <color=#EBB0AA>Song</color> is played, discard this card.
+Song_XPText	Gain <size=130%><voffset=-2><sprite name=XP1></voffset></size> at the beginning of each of your turns.
+Glossary_Song	Song: An active Song's effects will be persistently applied until another Song is played.
 TransferDooms	Transfer Dooms
 Event__Text	Their personal quest complete, the mercenary leaves Frosthaven for good. Someone else will take up the fight.
 GiveSupplyCard	Give Medical Pack

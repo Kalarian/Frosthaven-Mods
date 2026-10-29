@@ -10,7 +10,7 @@ Data:
         Abilities:
             TTrap:
                 Trap:
-                    TrapName: PoisonMine
+                    TrapName: Trap
                     Damage: 4
                     Conditions: Muddle
                 SpawnDelay: 2.8

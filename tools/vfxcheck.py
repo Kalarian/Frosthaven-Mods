@@ -34,6 +34,7 @@ STAND_INS = {
     "Amp_Char_Shader": "Amp_Char_Shader_Universal",   # props inside effects (the Tinkerer's grenade, a coin pile, a bear trap)
     "Amp_Low/Amp_Basic_Prop_Shader_Low": "Amp_Basic_N_MRAO",
     "CragHeartSummonShaftShd": "LightShaftShd",   # its own copy draws a solid pale cylinder (2026-10-27)
+    "zephyr_shd": "KriptoFX/RFX4/Tornado",        # the Sand Devil's whirlwind (Jaws of the Lion's own shader, 2026-10-29)
 }
 
 
@@ -41,9 +42,10 @@ def check(pack):
     """[(class, shader, material, effects)] for every effect material whose shader Frosthaven can't draw."""
     manifest = json.loads((Path(pack) / "pack.json").read_text(encoding="utf-8"))
     out = []
-    for cls, model in (manifest.get("model") or {}).items():
+    # the heroes' effects, and the summons' own particles (gh_vfx.export_npc, 2026-10-29)
+    for cls, model in list((manifest.get("model") or {}).items()) + list((manifest.get("summon_models") or {}).items()):
         users = {}
-        for eff, e in (model.get("effects") or {}).items():
+        for eff, e in list((model.get("effects") or {}).items()) + ([("own particles", model["hero_particles"])] if model.get("hero_particles") else []):
             for o in (e.get("objects") or {}).values():
                 for mat in (o.get("materials") or []) + ((o.get("loaded") or {}).get("materials") or []):
                     if mat:

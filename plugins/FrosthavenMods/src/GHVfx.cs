@@ -247,7 +247,7 @@ namespace FrosthavenMods
         /// <summary>The template of one of the model's effects, or null (not in the pack, or its build failed: logged once).</summary>
         internal static GameObject Template(GHModel.Entry e, string name)
         {
-            if (e == null || string.IsNullOrEmpty(name) || !Sets.TryGetValue(e.Model.ToString(), out Set set)) return null;
+            if (e == null || string.IsNullOrEmpty(name) || !Sets.TryGetValue(e.Key, out Set set)) return null;
             if (set.Templates.TryGetValue(name, out GameObject t) && t != null) return t;
             if (Reported.Add("missing " + name)) Plugin.Log.LogWarning($"Gloomhaven effects: {e.Model} has no template for {name}; the Drifter's effect plays there");
             return null;
@@ -258,7 +258,7 @@ namespace FrosthavenMods
         internal static void Prepare(GHModel.Entry e, GHModel.Loaded bundle)
         {
             if (e == null || e.Effects.Count == 0 || bundle?.Bundle == null) return;
-            string key = e.Model.ToString();
+            string key = e.Key;
             if (Sets.TryGetValue(key, out Set set) && set.Templates.Count > 0 && set.Templates.Values.All(t => t != null)) return;
             set = new Set();
             Sets[key] = set;
@@ -308,7 +308,7 @@ namespace FrosthavenMods
             if (e?.HeroParticles == null || visual == null) return;
             try
             {
-                string key = e.Model.ToString();
+                string key = e.Key;
                 if (!Sets.TryGetValue(key, out Set set))
                 {
                     set = new Set();
@@ -326,15 +326,20 @@ namespace FrosthavenMods
                             .Select(x => (x, p: GHModel.MaterialSet.PathUnder(visual.transform, x)))
                             .Where(xp => rel.EndsWith(xp.p, StringComparison.Ordinal) || xp.p.EndsWith(rel, StringComparison.Ordinal))
                             .OrderByDescending(xp => xp.p.Length).Select(xp => xp.x).FirstOrDefault();
-                    if (tr == null) { if (Reported.Add("hero " + key + "/" + kv.Key)) Plugin.Log.LogWarning($"Gloomhaven effects: {e.Model}'s model has no {kv.Key}"); continue; }
-                    DressRenderer(tr, kv.Value, e, set);
-                    var r = tr.GetComponent<Renderer>();
-                    if (r != null) r.forceRenderingOff = false;
+                    if (tr == null) { if (Reported.Add("hero " + key + "/" + kv.Key)) Plugin.Log.LogWarning($"Gloomhaven effects: {e.Key}'s model has no {kv.Key}"); continue; }
+                    // and its namesakes under the same parent (the Nail Sphere's two "Particle System"s: the second kept
+                    // Gloomhaven's material and drew magenta, 2026-10-29), as the effects' Dress does
+                    foreach (Transform same in tr.parent == null ? new[] { tr } : tr.parent.Cast<Transform>().Where(x => x.name == tr.name).ToArray())
+                    {
+                        DressRenderer(same, kv.Value, e, set);
+                        var r = same.GetComponent<Renderer>();
+                        if (r != null) r.forceRenderingOff = false;
+                    }
                     dressed++;
                 }
-                Plugin.Log.LogInfo($"Gloomhaven effects: {dressed} of {e.Model}'s own particle object(s) dressed");
+                Plugin.Log.LogInfo($"Gloomhaven effects: {dressed} of {e.Key}'s own particle object(s) dressed");
             }
-            catch (Exception ex) { Plugin.Log.LogWarning($"Gloomhaven effects: {e.Model}'s own particles stay off: {ex.Message}"); }
+            catch (Exception ex) { Plugin.Log.LogWarning($"Gloomhaven effects: {e.Key}'s own particles stay off: {ex.Message}"); }
         }
 
         private static void LoadMaterialBundles(GHModel.Entry e, Set set)
@@ -461,6 +466,7 @@ namespace FrosthavenMods
                 // records _EnableParticleControls 1); without it the cone stood static at full strength (2026-10-27)
                 if (m.HasProperty("_EnableParticleControls")) m.SetFloat("_EnableParticleControls", 1f);
             }
+            if (spec.Shader == "zephyr_shd") Zephyr(m, spec, set, gh);
             foreach (string kw in spec.Keywords) m.EnableKeyword(kw);
             if (spec.Queue >= 0) m.renderQueue = spec.Queue;
             if (spec.Shader == "VFX/ParticleMasterUnlitAdd_Shd" || spec.Shader == "VFX/SimpleInvisibleShd")
@@ -470,6 +476,19 @@ namespace FrosthavenMods
             }
             set.Made[name] = m;
             return m;
+        }
+
+        /// <summary>The Sand Devil's whirlwind on the tornado stand-in: Gloomhaven drew the streak mask (_OpacityMask) in its
+        /// sand colours; the stand-in takes the streaks as its texture and the main sand colour as its tint.</summary>
+        private static void Zephyr(Material m, MaterialSpec spec, Set set, Material gh)
+        {
+            if (spec.Textures.TryGetValue("_OpacityMask", out string mask) && m.HasProperty("_MainTex"))
+            {
+                Texture tex = (gh != null && gh.HasProperty("_OpacityMask") ? gh.GetTexture("_OpacityMask") : null) ?? FindTexture(set, mask);
+                if (tex != null) m.SetTexture("_MainTex", tex);
+            }
+            if (spec.Colors.TryGetValue("_Color_Main", out Color sand) && m.HasProperty("_TintColor"))
+                m.SetColor("_TintColor", new Color(sand.r, sand.g, sand.b, 0.6f));
         }
 
         /// <summary>The unlit particle shader's additive mode, as the sparks' material records it (a variant the game
@@ -597,6 +616,9 @@ namespace FrosthavenMods
             // removed it); Frosthaven's own light-shaft shader takes the same properties (beam colour, noise mask,
             // softness, thickness, rays) and is the one the Sawbones' chest shaft already draws with
             else if (name == "CragHeartSummonShaftShd") return FindShader("LightShaftShd") ?? FindShader(name);
+            // the Sand Devil's whirlwind (Jaws of the Lion's own shader, which Frosthaven never had): Frosthaven's tornado
+            // shader, with the wind streaks and the sand colour (Zephyr below)
+            else if (name == "zephyr_shd") return FindShader("KriptoFX/RFX4/Tornado") ?? FindShader("Legacy Shaders/Particles/Alpha Blended");
             else if (name == "Amp_Low/Amp_CharShader_Low" || name == "Amp_Char_Shader") return FindShader("Amp_Char_Shader_Universal") ?? FindShader("Universal Render Pipeline/Simple Lit");
             else if (name == "Amp_Low/Amp_Basic_Prop_Shader_Low") return FindShader("Amp_Basic_N_MRAO") ?? FindShader("Universal Render Pipeline/Simple Lit");
             return FindShader(name);

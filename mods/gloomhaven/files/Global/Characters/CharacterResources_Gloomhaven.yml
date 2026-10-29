@@ -2,7 +2,7 @@ Parser: CharacterResources
 
 TheFavorite:
     ID: "TheFavorite"
-    Sprite: "HoverRelic"
+    Sprite: "GHClass_Hatchet"
     LocKey: "$GH_THE_FAVORITE_EFFECT_TOOLTIP$"
     ResourceModel: "FH_Scenario_Campaign_126_SCENARIO_OBJECT_1"
     DropOnDeath: True
@@ -12,7 +12,7 @@ TheFavorite:
 
 TheNewFavorite:
     ID: "TheNewFavorite"
-    Sprite: "HoverRelic"
+    Sprite: "GHClass_Hatchet"
     LocKey: "$GH_THE_NEW_FAVORITE_EFFECT_TOOLTIP$"
     ResourceModel: "FH_Scenario_Campaign_126_SCENARIO_OBJECT_1"
     DropOnDeath: True

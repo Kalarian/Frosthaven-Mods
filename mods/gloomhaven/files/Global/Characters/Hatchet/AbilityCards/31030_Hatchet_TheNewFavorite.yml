@@ -21,7 +21,7 @@ Data:
                         - ["TheNewFavorite", 1]
                     IsToggleBonus: True
                     IsSingleTargetBonus: True
-                    CancelActiveBonusesOnBaseCardIDs: 11010
+                    CancelActiveBonusesOnBaseCardIDs: 31010
                     RemoveAllInstancesOfResourcesOnFinish: ["TheNewFavorite"]
                     ActiveBonusAbilityOverrides:
                         BCTypeOverride:

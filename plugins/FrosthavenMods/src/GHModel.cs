@@ -55,6 +55,29 @@ namespace FrosthavenMods
             public bool Cutout, FlatMask, Hidden;   // Hidden: a distortion shell Frosthaven can't draw (pack "hidden")
             public float Cutoff = 0.5f, EmissiveBoost = 1f, Metallic, Smoothness = 0.3f, Ao = 1f, Brightness = 1f;
             public Color? EmissiveTint;   // Gloomhaven's _GlowColor over a white glow map (pack "emissive_tint")
+            public NativeSpec Native;     // drawn with Frosthaven's copy of Gloomhaven's own shader (pack "native")
+        }
+
+        /// <summary>A body material whose Gloomhaven shader Frosthaven ships by name (the ether look, the mana sphere's
+        /// swirl; gh_vfx.NATIVE_BODY_SHADERS): that shader with Gloomhaven's recorded values and textures.</summary>
+        internal sealed class NativeSpec
+        {
+            public string Shader;
+            public Dictionary<string, float> Floats = new Dictionary<string, float>(StringComparer.Ordinal);
+            public Dictionary<string, Color> Colors = new Dictionary<string, Color>(StringComparer.Ordinal);
+            public Dictionary<string, string> Textures = new Dictionary<string, string>(StringComparer.Ordinal);
+            public string[] Keywords = new string[0];
+
+            public static NativeSpec Parse(JObject j)
+            {
+                if (j == null || string.IsNullOrEmpty((string)j["shader"])) return null;
+                var n = new NativeSpec { Shader = (string)j["shader"], Keywords = j["keywords"]?.Select(x => (string)x).Where(x => !string.IsNullOrEmpty(x)).ToArray() ?? new string[0] };
+                foreach (JProperty p in (j["floats"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>()) n.Floats[p.Name] = (float)p.Value;
+                foreach (JProperty p in (j["colors"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>())
+                    if (p.Value is JArray c && c.Count >= 4) n.Colors[p.Name] = new Color((float)c[0], (float)c[1], (float)c[2], (float)c[3]);
+                foreach (JProperty p in (j["textures"] as JObject)?.Properties() ?? Enumerable.Empty<JProperty>()) n.Textures[p.Name] = (string)p.Value;
+                return n;
+            }
         }
 
         /// <summary>How one of the Drifter's animator states is retimed for the clip that replaces hers: the behaviours'
@@ -84,6 +107,8 @@ namespace FrosthavenMods
         internal sealed class Entry
         {
             public ECharacter Model;
+            public string Name;                                                                    // a summon's model name ("Ward"); null for a hero
+            public string Key => Name ?? Model.ToString();                                         // what its effects and particles are filed under
             public string Folder, Bundle, BundleName, Prefab, HeroPrefab, AnimatorObject, BodyMesh, TargetBone, ProjectileAnchor;
             public float Height = 2f, HitRadius = 0.1f;
             public string[] TrailPoints = new string[0];
@@ -132,6 +157,7 @@ namespace FrosthavenMods
                         Brightness = (float?)v["brightness"] ?? 1f,
                         Hidden = (bool?)v["hidden"] ?? false,
                         EmissiveTint = v["emissive_tint"] is JArray et && et.Count >= 3 ? new Color((float)et[0], (float)et[1], (float)et[2], 1f) : (Color?)null,
+                        Native = NativeSpec.Parse(v["native"] as JObject),
                     };
                 }
                 if (j["animation"] is JObject a)
@@ -189,7 +215,13 @@ namespace FrosthavenMods
         {
             if (Entries.TryGetValue(model, out Entry cached)) return cached;
             Entry e = null;
-            GHClasses.Pack pack = GHClasses.PackOf(model);
+            // a class's second model (the Demolitionist's mech, gh_port EXTRA_MODELS) is no class of the pack's: the pack
+            // whose manifest has a model of that name (the lookup found none and the mech fell back to the Drifter)
+            GHClasses.Pack pack = GHClasses.PackOf(model) ?? (GHClasses.Packs ?? new List<GHClasses.Pack>()).FirstOrDefault(p =>
+            {
+                try { return (JObject.Parse(File.ReadAllText(Path.Combine(p.Folder, "pack.json")))["model"] as JObject)?.Properties().Any(x => string.Equals(x.Name, model.ToString(), StringComparison.OrdinalIgnoreCase)) == true; }
+                catch (Exception) { return false; }
+            });
             if (pack != null)
             {
                 try
@@ -267,6 +299,19 @@ namespace FrosthavenMods
         private static GameObject DrifterPrefab(AnimationSpec anim) =>
             AssetBundleManager.Instance?.GetCharacterPrefabFromBundle(CActor.EType.Player, anim?.Base ?? GHClasses.StandInModel);
 
+        /// <summary>A model's own particles may sit beside the Animator's object, held to a bone by a ParentConstraint (the
+        /// Ward's torch flame, the Mana Sphere's swirl, the Summoner's and Elementalist's idle glow): when the pack recorded
+        /// particles, those branches move under it before the rest of the prefab goes ("Summoner's model has no
+        /// P_Summoner_Idle", 2026-10-29).</summary>
+        private static void KeepParticles(Entry e, GameObject wrapper, Transform animatorTr)
+        {
+            if (e.HeroParticles == null) return;
+            foreach (Transform top in wrapper.GetComponentsInChildren<Transform>(true)
+                         .Where(t => t.parent != null && animatorTr.IsChildOf(t.parent) && !animatorTr.IsChildOf(t))   // a branch beside the Animator's
+                         .Where(t => t.GetComponentsInChildren<ParticleSystem>(true).Length > 0).ToList())
+                top.SetParent(animatorTr, true);
+        }
+
         private static Built Build(Entry e)
         {
             Loaded bundle = Open(e);
@@ -290,6 +335,7 @@ namespace FrosthavenMods
             GameObject visual = animatorTr.gameObject;
             if (visual != wrapper)
             {
+                KeepParticles(e, wrapper, animatorTr);
                 visual.transform.SetParent(Holder, false);
                 UnityEngine.Object.DestroyImmediate(wrapper);
             }
@@ -651,7 +697,8 @@ namespace FrosthavenMods
                         {
                             _entry.Materials.TryGetValue(gh.name, out MaterialSpec spec);
                             fh = spec != null && spec.Hidden ? GHModelMaterials.Shadow(gh, _opaque)
-                                : GHModelMaterials.Rebuild(gh, spec, spec != null && spec.Cutout ? _cutout : _opaque, _bundle.Texture);
+                                : (spec?.Native != null ? GHModelMaterials.Native(gh, spec.Native, _bundle.Texture) : null)
+                                  ?? GHModelMaterials.Rebuild(gh, spec, spec != null && spec.Cutout ? _cutout : _opaque, _bundle.Texture);
                             _made[gh] = fh;
                         }
                         slots[i] = fh;
@@ -687,6 +734,7 @@ namespace FrosthavenMods
                     var m = (j["summon_models"] as JObject)?.Properties().FirstOrDefault(p => string.Equals(p.Name, model, StringComparison.OrdinalIgnoreCase))?.Value as JObject;
                     if (m == null) continue;
                     e = Entry.Parse(default(ECharacter), m, pack.Folder);
+                    e.Name = model;
                     break;
                 }
                 catch (Exception ex) { Plugin.Log.LogError($"Gloomhaven summons: bad summon entry for {model} in {pack}: {ex.Message}"); }
@@ -747,6 +795,7 @@ namespace FrosthavenMods
             GameObject visual = animatorTr.gameObject;
             if (visual != wrapper)
             {
+                KeepParticles(e, wrapper, animatorTr);
                 visual.transform.SetParent(Holder, false);
                 UnityEngine.Object.DestroyImmediate(wrapper);
             }
@@ -765,6 +814,7 @@ namespace FrosthavenMods
             Material templateBody = templateMats.FirstOrDefault(m => m.shader != null && m.shader.name == GHModelMaterials.OpaqueShader) ?? templateMats.FirstOrDefault();
             var materials = new MaterialSet(e, bundle, templateBody);
             materials.Apply(visual);
+            GHVfx.DressHero(e, visual);                                      // its own particles, on rebuilt materials
 
             // 3. Frosthaven's helpers on the Animator's object
             Animator animator = visual.GetComponent<Animator>();

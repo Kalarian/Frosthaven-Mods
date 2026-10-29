@@ -489,6 +489,11 @@ CARD_FIXES = {
          lambda m: f'{m.group(1)}- Row: "$GH_225_B$"'),
     ],
 }
+# Gloomhaven text keys Frosthaven's card face and figure UI ask for by name for Gloomhaven-only card elements (no card
+# file names them): the augment and song banners and reminders
+UI_TEXT_KEYS = ("Augment", "Augment_DiscardReminder", "Augment_OnYourMeleeAttacks", "Glossary_Augment",
+                "Song", "Song_DiscardReminder", "Song_XPText", "Glossary_Song")
+LONG_TEXT, LONG_TEXT_SIZE = 280, 85   # visible letters past which a card half's text is drawn smaller, and how small
 TEXT_FIXES = {
     "GH_225_B": "You and all adjacent normal enemies suffer 7 damage.",
     # the ability's name, which Frosthaven looks up when it shows the ability (no card of its own gives supply cards)
@@ -618,14 +623,57 @@ def convert_card(name, s, warn, icons=None):
     s = s[:m.start(1)] + str(new_id) + s[m.end(1):]
     # "GiveSupplyCard: 417" names a supply card by its card ID, which moves with the others: left as it was, the game
     # finds no supply card of that ID and hands over nothing (First Aid's Medical Pack never arrived)
+    # so does "CancelActiveBonusesOnBaseCardIDs: 11030" (The Favorite and The New Favorite cancel each other: left as it
+    # was, playing one left the other's bonus up)
+    s = re.sub(r"^([ \t]*CancelActiveBonusesOnBaseCardIDs:[ \t]*\[?)([0-9][0-9, ]*)",
+               lambda g: g.group(1) + ", ".join(str(CARD_ID_OFFSET + int(x)) for x in re.findall(r"\d+", g.group(2))), s, flags=re.M)
     s = re.sub(r"^([ \t]*GiveSupplyCard:[ \t]*\[?)([0-9][0-9, ]*)",
                lambda g: g.group(1) + ", ".join(str(CARD_ID_OFFSET + int(x)) for x in re.findall(r"\d+", g.group(2))), s, flags=re.M)
     s = convert_enhancements(s, lambda w: warn(f"{name}: {w}"))
     s = convert_anim_overloads(s)
+    s = convert_any_infusion(s)
+    s = convert_traps(s)
     s = CARD_TEXT_KEY.sub(lambda k: f"$GH_{k.group(1)}$", s)
     s = convert_layout(s)
     s = gh_layout.convert(s, icons, lambda w: warn(f"{name}: {w}"))
     return new_id, s
+
+
+# (a line is [^\r\n]* then its end: ".*\r?\n" could take the \r either way, and on a card without the pattern the
+# search backtracked without end: the 2026-10-29 port sat on the Scoundrel for an hour)
+HALF_INFUSE_ANY = re.compile(r"^(?P<half>    (?P<name>Top|Bottom):\r?\n(?:(?! {0,4}\S)[^\r\n]*\r?\n)*?)"
+                             r"(?P<line>        Infuse:[ \t]*(?P<els>\[[^\]\r\n]*\bAny\b[^\]\r\n]*\]|Any)[ \t]*\r?\n)", re.M)
+
+
+def convert_any_infusion(s):
+    """A half that infuses "any element" (Gloomhaven writes it on the half: "Infuse: [Any, Any, Any]") becomes an Infuse
+    ability with the element picker, as Frosthaven's own cards write it (Frozen Fist's Seeing Stars). Frosthaven only
+    asks for a half-level "Any" through an older card-face path that never offers it: the player's infusion stayed
+    "Any" ("Red Guard is infusing Any", no picker; Prismatic Sickle top, the user's manual test 2026-10-29). The ability
+    goes at the end of the half's abilities, so it comes after the action as the half's infusion did."""
+    def one(m):
+        if not re.match(r"^ {12}\S", m.group("half").splitlines()[-1]) and not re.match(r"^ {16,}", m.group("half").splitlines()[-1]):
+            return m.group(0)   # the line before isn't part of the abilities block: left as it was (none of the ported cards)
+        eol = "\r\n" if m.group("line").endswith("\r\n") else "\n"
+        els = m.group("els") if m.group("els").startswith("[") else "[Any]"
+        key = ("T" if m.group("name") == "Top" else "B") + "Infuse"
+        block = [f"            {key}:", "                CanUndo: False", "                CanSkip: False",
+                 f"                Infuse: {els}", "                ShowElementPicker: True",
+                 "                StartAbilityRequirements:", "                    Type: ThisAbility", "                    Vars:",
+                 "                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)"]
+        return m.group("half") + eol.join(block) + eol
+    return HALF_INFUSE_ANY.sub(one, s)
+
+
+# Gloomhaven's mines have no model of their own in Frosthaven: its prop slot for DamageMine holds a one-shot effect and
+# PoisonMine / StunMine are empty (the Proximity Mine lay invisible, "UNDEFINED DAMAGEMINE", the user's manual test
+# 2026-10-29; an empty slot throws "Unable to find prop"). They are laid as Frosthaven's generic trap, which its own
+# items lay with the same damage and conditions (Dangerous Gear, Ooze Vial); the trap's name and rules don't depend on it.
+TRAP_STAND_INS = {"DamageMine": "Trap", "PoisonMine": "Trap", "StunMine": "Trap"}
+
+
+def convert_traps(s):
+    return re.sub(r"^([ \t]*TrapName:[ \t]*)(\w+)", lambda m: m.group(1) + TRAP_STAND_INS.get(m.group(2), m.group(2)), s, flags=re.M)
 
 
 def convert_perk(s):
@@ -737,7 +785,7 @@ def main():
         "enabled": True,
     }, indent=2) + "\n", encoding="utf-8")
     written, warnings, used_keys, models, anim_names = [], [], set(), {}, set()
-    resources = {}   # Gloomhaven character resources the ported cards use (ID -> its YML block)
+    resources = {}   # Gloomhaven character resources the ported cards use (ID -> (class, its YML block))
     summon_models = {}   # the summons' models by model name (gh_model.export_npc), pack.json "summon_models"
 
     def write(rel, s):
@@ -761,6 +809,8 @@ def main():
         p.write_bytes(s.encode("utf-8"))
         written.append(rel)
         used_keys.update(KEY_RE.findall(s))
+        # a trap's hover name is its TrapName looked up as text (the Demolitionist's BombTrap; Frosthaven's own text wins)
+        used_keys.update(re.findall(r"^\s*TrapName:\s*(\w+)", s, re.M))
         for m in re.finditer(r"^(?:Name|Description):\s*([A-Za-z0-9_]+)\s*$", s, re.M):
             used_keys.add(m.group(1))
         # a help box's text key (HelpBoxTooltipLocKey: GUI_...) is looked up like any other; unlisted it shows "UNDEFINED"
@@ -818,6 +868,11 @@ def main():
                 warnings.append(f"{cls}: summon {sid}: no HeroSummon/{sid}.yml in Gloomhaven's data")
                 continue
             summon = convert_enhancements(text(files[src]), lambda w: None)
+            # A summon without a Range has range 0 in Gloomhaven and 1 in Frosthaven (HeroSummonYMLData's default), and
+            # the Doppelganger's range is added to the Elementalist's attacks made from its hex: Shaping the Ether reached 4,
+            # not 3 (the user's manual test, 2026-10-29). Gloomhaven's own default, written out.
+            if not re.search(r"^Range:", summon, re.M):
+                summon = summon.rstrip("\r\n") + eol_of(summon) + "Range: 0" + eol_of(summon)
             used_keys.update(KEY_RE.findall(summon))
             write(f"Global/HeroSummons/{Path(src).name}", summon)
         # ... and their models: Gloomhaven's own summon bundles, built in play on a Frosthaven summon's template
@@ -835,6 +890,14 @@ def main():
                 shipped.append(sid)
             except Exception as e:  # noqa: BLE001 - cosmetic, never block the data
                 warnings.append(f"{cls}: summon {sid}: model not copied: {e}")
+                continue
+            # its own particles and the bodies drawn with a shader Frosthaven ships by name (gh_vfx.export_npc)
+            try:
+                import gh_vfx
+                summon_models[sid].update(gh_vfx.export_npc(gh, sid, args.out, summon_models[sid],
+                                                            warn=lambda m: warnings.append(m)))
+            except Exception as e:  # noqa: BLE001 - cosmetic: the summon keeps its plain body
+                warnings.append(f"{cls}: summon {sid}: own particles not recorded: {e}")
         # Character resources the cards name (the Hatchet's TheFavorite / TheNewFavorite): Gloomhaven defines them in
         # CharacterResources/CharacterResources.yml, which Frosthaven lacks, so the first card that made one threw in
         # CCharacterResource.set_Amount (no ResourceData; bench 2026-10-28, the game's error screen). Collected per class,
@@ -843,7 +906,7 @@ def main():
         for m in re.finditer(r"^(\w+):\r?\n((?:[ \t]+.*\r?\n?|[ \t]*\r?\n)+)", gh_res, re.M):
             rid = re.search(r'^\s*ID:\s*"?(\w+)"?', m.group(2), re.M)
             if rid and any(f'"{rid.group(1)}"' in c for c in converted):
-                resources[rid.group(1)] = m.group(0).rstrip() + "\n"
+                resources[rid.group(1)] = (cls, m.group(0).rstrip() + "\n")
         if summon_ids:
             print(f"{cls}: {len(summon_ids)} summon definition(s): {', '.join(summon_ids)}; models copied: {', '.join(shipped) or 'none'}")
         declared = re.findall(r"\w+", CLASS_EXTRAS.get(cls, {}).get("ElementalAffinities", ""))
@@ -955,11 +1018,13 @@ def main():
                     warnings.append(f"{cls}: sounds not exported: {e}")
 
     if resources:
-        # Frosthaven has neither Gloomhaven's hover sprite nor its dropped-axe prop: the effects-bar icon and the prop a
-        # dying enemy drops take Frosthaven's relic (scenario 126's, also DropOnDeath). APPROXIMATION (looks only).
+        # Frosthaven has neither Gloomhaven's hover sprite nor its dropped-axe prop. The status-row icon is the class's own
+        # active-ability picture (the Hatchet's axe; "GHClass_<Class>", GHStatusIcons; it was Frosthaven's relic, and the
+        # user saw no mark on the enemy, 2026-10-29); the prop a dying enemy drops takes Frosthaven's relic (scenario
+        # 126's, also DropOnDeath). APPROXIMATION (looks only).
         blocks = []
-        for rid, blk in resources.items():
-            blk = re.sub(r'^(\s*Sprite:\s*).*$', r'\1"HoverRelic"', blk, flags=re.M)
+        for rid, (owner, blk) in resources.items():
+            blk = re.sub(r'^(\s*Sprite:\s*).*$', lambda g: f'{g.group(1)}"GHClass_{owner}"', blk, flags=re.M)
             blk = re.sub(r'^(\s*ResourceModel:\s*).*$', r'\1"FH_Scenario_Campaign_126_SCENARIO_OBJECT_1"', blk, flags=re.M)
             used_keys.update("GH_" + k for k in re.findall(r'^\s*LocKey:\s*"\$?(\w+)\$?"', blk, re.M))
             blk = re.sub(r'^(\s*LocKey:\s*)"\$?(\w+)\$?"', r'\1"$GH_\2$"', blk, flags=re.M)
@@ -1010,11 +1075,22 @@ def main():
             table.setdefault(f"CODEX_HeroInfo_{cls}", info)
         elif f"{cls}_DESCRIPTION" in strings:
             table.setdefault(f"CODEX_HeroInfo_{cls}", strings[f"{cls}_DESCRIPTION"])
+    # Keys the card face itself asks for, which no card file names (Frosthaven's augment and song card elements: the
+    # Mindthief's augments read "UNDEFINED Augment" and "UNDEFINED Augment_DiscardReminder", the user's manual test
+    # 2026-10-29), from Gloomhaven's own text
+    for key in UI_TEXT_KEYS:
+        if key in strings:
+            table.setdefault(key, strings[key])
     table.setdefault("GH_Command", "<b>Command:</b>")
     table.setdefault("TransferDooms", "Transfer Dooms")   # the combat log names the ability by its type (Lead to Slaughter bottom: "UNDEFINED TransferDooms")   # gh_layout's stand-in for Gloomhaven's Command banner
     table.setdefault("Event__Text", "Their personal quest complete, the mercenary leaves Frosthaven for good. "
                                     "Someone else will take up the fight.")
     table.update(TEXT_FIXES)   # card text that follows a CARD_FIXES change
+    # A card half's text too long for Frosthaven's card at its normal size ran into the half's icons (Sand Devil top,
+    # 371 letters; the user's manual test 2026-10-29): the longest ones are drawn smaller
+    for k, v in table.items():
+        if re.match(r"^(GH|JOTL)_\d+_[TB]$", k) and len(re.sub(r"<[^>]+>", "", v)) > LONG_TEXT and not v.startswith("<size="):
+            table[k] = f"<size={LONG_TEXT_SIZE}%>{v}</size>"
     missing = sorted(k for k in used_keys if k not in table)
     table = {k: fh_sprites.to_fh(v) for k, v in table.items()}
     for k, v in table.items():
