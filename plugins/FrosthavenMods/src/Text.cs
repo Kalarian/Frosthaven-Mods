@@ -18,6 +18,8 @@ namespace FrosthavenMods
             ["FHMODS_S14_HERDERS"] = "Kill all Abael Herders",
             ["FHMODS_GIVE_HINT"] = "Give",
             ["FHMODS_LOOK"] = "Skin: {0}",
+            // GHBrilliantAegis's prompt ({0}: the Red Guard)
+            ["FHMODS_AEGIS_HELPBOX"] = "{0} is attacked: use Brilliant Aegis? Consume Light for Shield 1 and attackers' disadvantage until the end of the round.",
             ["FHMODS_STRIP"] = "Copy without content packs",
             ["FHMODS_STRIP_TITLE"] = "Copy without content packs",
             ["FHMODS_STRIP_MISSING"] = "Content pack missing",

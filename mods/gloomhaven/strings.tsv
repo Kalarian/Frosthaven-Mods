@@ -1383,7 +1383,7 @@ PERK_RedGuard_06_Desc	Replace one <sprite name="+1"> with one <sprite name="+2">
 PERK_RedGuard_07_Desc	Replace one <sprite name="+1"> with one <sprite name="+2"> <sprite name=CreateLight>
 PERK_RedGuard_08_Desc	Add one <sprite name="+1"> <sprite name=CreateFire>/<sprite name=CreateLight>
 PERK_RedGuard_09_Desc	Ignore negative item effects and add two <sprite name="+1">
-PERK_RedGuard_10_Desc	During your turn, you may <sprite name=ConsumeLight> to gain <sprite name=Shield> 1 and have attackers gain disadvantage against you until the end of the round
+PERK_RedGuard_10_Desc	Whenever you are attacked, you may <sprite name=ConsumeLight> to gain <sprite name=Shield> 1 and have attackers gain disadvantage against you until the end of the round
 PERK_Sawbones_01_Desc	Remove one <sprite name="-2">
 PERK_Sawbones_02_Desc	Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=Wound> <sprite name=Rolling>
 PERK_Sawbones_03_Desc	Replace one <sprite name="0"> with one <sprite name="+2">

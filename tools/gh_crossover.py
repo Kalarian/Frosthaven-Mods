@@ -651,34 +651,20 @@ REDGUARD_PERKS = [
      {"CardsToAdd": "[AMC_FireLight_P1]"}),
     (1, "Heavy Armor", 'Ignore negative item effects and add two <sprite name="+1">',
      {"CardsToAdd": "[AMC_Basic_P1, AMC_Basic_P1]", "Flags": "[Passive, IgnoreMinusOneItemEffects]"}),
-    # APPROXIMATION (the game has no "when attacked, you may" prompt for perks): a toggle the Red Guard may switch on
-    # during her turn, consuming Light, for Shield 1 and attackers' disadvantage until the round ends (Frosthaven's own
-    # AttackersGainDisadvantage bonus, the Deathwalker's). Verify on the bench; a plugin prompt later if the user wants the sheet's timing.
-    (1, "Brilliant Aegis", "During your turn, you may <sprite name=ConsumeLight> to gain <sprite name=Shield> 1 and have attackers gain disadvantage against you until the end of the round",
+    # The sheet's timing, like Leather Armor (the user, 2026-10-29): when she is attacked and Light is available, she is
+    # asked before the modifiers are drawn; used, Light is consumed and she gains Shield 1 and attackers' disadvantage
+    # until the round ends, this attack included. Perks have no "when attacked" trigger: this bonus is an inert marker
+    # (no Behaviour: it never acts or shows in her own-turn bar) that the plugin offers through the game's own
+    # defender prompt (GHBrilliantAegis.cs).
+    (1, "Brilliant Aegis", "Whenever you are attacked, you may <sprite name=ConsumeLight> to gain <sprite name=Shield> 1 and have attackers gain disadvantage against you until the end of the round",
      {"Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]", "Abilities": """\
-    TActive:
+    BrilliantAegis:
         AutoTrigger: True
         AddActiveBonus:
-            Consume:
-                Elements: [Light]
-                Abilities:
-                    CShield:
-                        Shield: 1
-                        Filter: Self
-                        ActiveBonusDuration: Round
-                        AnimOverload: PowerUp
-                    CDisadvantage:
-                        AttackersGainDisadvantage: 1
-                        Range: 0
-                        Target: -1
-                        Filter: Self
-                        ActiveBonus:
-                            Duration: Round
-                            Hidden: True
-            Filter: [Self]
+            Shield: 1
+            Filter: Self
         ActiveBonus:
             Duration: Persistent
-            Behaviour: DuringTurnAbility
             IsToggleBonus: True
             Hidden: True
             ListLayoutOverride: [$PERK_RedGuard_10_Desc$, Positive_Shield_Disadvantage]
