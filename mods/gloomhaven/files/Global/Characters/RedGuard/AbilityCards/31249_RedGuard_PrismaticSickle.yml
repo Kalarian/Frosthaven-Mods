@@ -17,7 +17,25 @@ Data:
             TInfuse:
                 CanUndo: False
                 CanSkip: False
-                Infuse: [Any, Any, Any]
+                Infuse: [Any]
+                ShowElementPicker: True
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)
+            TInfuse2:
+                CanUndo: False
+                CanSkip: False
+                Infuse: [Any]
+                ShowElementPicker: True
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)
+            TInfuse3:
+                CanUndo: False
+                CanSkip: False
+                Infuse: [Any]
                 ShowElementPicker: True
                 StartAbilityRequirements:
                     Type: ThisAbility

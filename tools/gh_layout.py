@@ -235,6 +235,16 @@ def convert_trackers(items, icons):
                 f = fields.get(src)
                 if f is not None:
                     active.children.append(Node(dst, f.value, dash=False, children=list(f.children)))
+            if n.key == "Doom":
+                # the Doom element drew its own header and discard line (Gloomhaven's CreateLayout: Doom_MarkText,
+                # Doom_DiscardReminderText); a plain Active has only the card's text, and every doom card face lost
+                # "Doom: mark any one enemy" (the user's manual test, 2026-10-29). The Active's Layout takes rows.
+                layout = next((c for c in active.children if c.key == "Layout"), None)
+                if layout is not None:
+                    rows = [Node("Row", layout.value)] if layout.value else list(layout.children)
+                    layout.value = ""
+                    layout.children = ([Node("Row", '"$Doom_MarkText$"')] + rows
+                                       + [Node("Row", '"<size=70%>$Doom_DiscardReminderText$"')])
             out.append(active)
         elif n.key == "Command":
             # Gloomhaven's "Command" banner (the Beast Tyrant orders the bear: the half is a ControlActor on the

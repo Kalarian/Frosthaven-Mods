@@ -51,4 +51,7 @@ Layout:
             Ability: BDoom
             Icon: Positive_AttackPlus
             ListLayout: "$GH_380_B$"
-            Layout: "$GH_380_B$"
+            Layout:
+                - Row: "$Doom_MarkText$"
+                - Row: "$GH_380_B$"
+                - Row: "<size=70%>$Doom_DiscardReminderText$"

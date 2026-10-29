@@ -663,6 +663,8 @@ Demolitionist_ADVENTURE_DESCRIPTION	Even when augmenting themselves with machine
 Demolitionist_ROLE	Melee Damage 
 Demolitionist_STRENGTHS	- <indent=%15>Many Direct Damage abilities to smash through Shields</indent>\n- <indent=%15>Access to Abilities with STUN</indent>\n- <indent=%15>Great at affecting the combat area</indent>
 Demolitionist_WEAKNESSES	- <indent=%15>Small deck size</indent>\n- <indent=%15>Limited healing options</indent>\n- <indent=%15>Their gloves aren't the most practical everyday attire</indent>
+Doom_DiscardReminderText	When this enemy dies or another <nobr><b><color=#39BEED>Doom</color></b></nobr> is played, discard this card.
+Doom_MarkText	Mark any one enemy as <b><color=#39BEED>Doomed</color>.
 Doomstalker	Doomstalker
 Doomstalker_ADVENTURE_DESCRIPTION	Orchid Doomstalkers are tasked with keeping various Orchid settlements safe in the wilds around Gloomhaven. The calm mind of the Orchid makes the Doomstalker an excellent bow hunter. He never misses a shot.
 Doomstalker_ROLE	Ranged Damage/Support
@@ -1587,6 +1589,64 @@ Xis_Shield	where X is your current Shield value.
 instead	instead
 with	with
 within	within
+PERK_BeastTyrant_01_Name	Steady Hands
+PERK_BeastTyrant_02_Name	Trained Reflexes
+PERK_BeastTyrant_03_Name	Savage Strike
+PERK_BeastTyrant_04_Name	Rending Claws
+PERK_BeastTyrant_05_Name	Pinning Bite
+PERK_BeastTyrant_06_Name	Lick Wounds
+PERK_BeastTyrant_07_Name	Hardened
+PERK_BeastTyrant_08_Name	Bear Treat
+BeastTyrant_MASTERY_1_Name	Ferocious Companion
+BeastTyrant_MASTERY_1_Desc	Have your bear summon deal <sprite name=Damage> 10 or more in three consecutive rounds
+BeastTyrant_MASTERY_2_Name	Pack Tactics
+BeastTyrant_MASTERY_2_Desc	You or your summons must apply a negative condition to at least 10 different enemies
+Event_GH.BeastTyrant_Text	You find the Beast Tyrant where you always find him: at the bear. It is sitting on its haunches at the edge of the lumber yard, as it has every evening of the campaign, pretending not to watch the crews. The crews pretend not to be watched. It is a comfortable arrangement and it is about to end.\n"The wild is going back to being wild," the Vermling says. "Up past the pass, where the Algox do not go. The bear wants it. I have never once told the bear no." He scratches the enormous head, which leans into his hand with the whole of its weight. "I am not starting now."\nHe leaves you his collection of totems, the wind one and the spirit banner, and a short list of which animals in the valley are to be left alone, in an order that suggests the animals wrote it.\nThey go at dusk, the man and the bear and a loose tide of smaller things in the undergrowth around them. The lumber yard is quiet for a week. Then the crews start leaving a cut of the day's catch at the edge of the trees, and nobody admits to it.
+Event_GH.BeastTyrant_Name	Beast Tyrant Retires
+GH.BeastTyrant-1_Front	“There were fifty of them, I swear. Tearing my mates apart!”\n\nYou look over to the bar where a group of drunkards are all laughing at a disheveled man in the middle of a story.\n\n“And commanding them all, riding atop a giant armored bear, there was a Vermling with a staff that shot lightning!”\n\nAt this the crowd erupts into more laughter, drowning out the rest of the man’s story. “This man’s had too much to drink, I’d say,” ridicules one of the crowd. “Vermlings riding bears! I thought I’d heard of everything!”
+GH.BeastTyrant-1_Option_1	Join the crowd in laughing at the man.
+GH.BeastTyrant-1_Option_1_Outcome	You move closer and join in on the fun. After a while, the man gives up and resigns himself to his glass. But his story provides entertainment for weeks.
+GH.BeastTyrant-1_Option_2	Calm down the crowd and get more details from the man about the attack.
+GH.BeastTyrant-1_Option_2_Outcome	It’s not easy, but you quiet down the crowd and take the staggering man over to a secluded corner of the tavern to get the full story out of him. Apparently he was part of a group of ruffians working to harvest the Dagger Forest for wood. In the middle of their logging expedition, however, they were attacked by the Beast Tyrant and an army of forest animals. Though he ran off in the middle of the fight, the man swears he also heard the howl of angry spirits in the chaos.
+GH.BeastTyrant-2_Front	Despite your best efforts, you find yourself lost in a forest. You thought you were taking a shortcut, but then you got turned around and lost your bearings.\n\nAnd just when you think things couldn’t get worse, a wolf suddenly jumps out of the brush in front of you. Oddly, though, it doesn’t appear aggressive. \n\nIt howls once and then slowly and deliberately begins to walk through the trees in front of you, as if expecting you to follow it.
+GH.BeastTyrant-2_Option_1	Follow the wolf.
+GH.BeastTyrant-2_Option_1_Outcome	Miraculously, following the wolf leads you right to the edge of the forest and back on track to your destination. The wolf howls once more and then bounds off back into the brush. You can’t help but wonder who might have sent that wolf to assist you.
+GH.BeastTyrant-2_Option_2	Find your own way through the forest.
+GH.BeastTyrant-2_Option_2_Outcome	Not willing to trust a wild animal, you refuse to go in the same direction as the wolf and continue down an ill-fated path of your own choosing. It doesn’t go well, and by the time you emerge from the dense forest and find your bearings, you are exhausted.
+BeastTyrant_FullName	Beast Tyrant
+CODEX_Hero_BeastTyrant_Title	Beast Tyrant
+BeastTyrant_DESCRIPTION	Vermlings that rise above their baser instincts find that there is much to be gained in exerting their will over beasts of the wilds. These Beast Tyrants can amass incredible armies of fangs, claws and talons to become formidible opponents in battle.
+CODEX_HeroInfo_BeastTyrant	<b>Role:</b> Melee Damage/Summoner\n<b>Difficulty:</b> Medium\n\nYou fight alongside your <b>bear</b>. It joins you at the start of every scenario, and many of your cards command it to <sprite name=Attack>, <sprite name=Move>, heal or roar. Keep it alive, since much of your power comes through it.\n\nYou can summon more animals and spirits, and give your summons <sprite name=Shield>, <sprite name=Retaliate> and attack bonuses.\n\nYour own attacks are small and ranged, adding <sprite name=Poison>, <sprite name=Disarm> or <sprite name=Stun>. You can heal your allies. <sprite name=CreateEarth> and <sprite name=CreateAir> boost a few cards.\n\n<b>Strengths:</b>\n• Starts with strong Bear ally\n• Combines well with all allied summons\n• Wide array of multi-use abilities\n\n<b>Weaknesses:</b>\n• Weak if Bear is ever exhausted\n• Should stay out of melee combat\n• Clothes tend to smell a bit 'meaty'
+PERK_Berserker_01_Name	Light Step
+PERK_Berserker_02_Name	Steady Hand
+PERK_Berserker_03_Name	Open Wounds
+PERK_Berserker_04_Name	Reckless Swing
+PERK_Berserker_05_Name	Burning Rage
+PERK_Berserker_06_Name	Concussion
+PERK_Berserker_07_Name	Disarming Blow
+PERK_Berserker_08_Name	Second Wind
+PERK_Berserker_09_Name	Thick Skin
+PERK_Berserker_10_Name	Rapid Recovery
+Berserker_MASTERY_1_Name	Bloodlust
+Berserker_MASTERY_1_Desc	Lose at least one hit point during each of your turns, without ever performing the bottom action of Blood Pact
+Berserker_MASTERY_2_Name	Living on the Edge
+Berserker_MASTERY_2_Desc	Have exactly one hit point at the end of each of your turns
+Event_GH.Berserker_Text	The Berserker is in the Tavern, which is not news, and she is sober, which is. There is a bandage on her arm and a letter on the table in front of her, read so many times the folds have gone soft.\n"My sister," she says, pushing it toward you. "The clan is moving the herds south before the snows. She asks if the one who ran off to get herself killed would like to come home instead." She takes the letter back before you can finish it. "She has a way with words."\nYou ask about the arm. She shrugs: it will heal, they always do, that was never the problem. The problem was that for a long time she did not mind whether they did. "Not any more," she says, and looks surprised to hear it out loud.\nShe leaves the next morning with the trade caravan, walking beside the wagons rather than riding, because sitting still was never going to happen. At the bend in the road she turns and raises the bandaged arm, once, and then she is gone into the white.
+Event_GH.Berserker_Name	Berserker Retires
+GH.Berserker-1_Front	Walking near the northern gates, you see some commotion as a group of wounded guards is ushered into town.\n\nThey look pretty bad off, suffering from many severe wounds. Some even have lost limbs.\n\nBringing up the rear, one guard is carried in by a couple of others. He’s missing a leg and has a vicious-looking axe embedded in his side. You realize that the axe looks kind of familiar.
+GH.Berserker-1_Option_1	Let the guards know you recognize the Berserker’s axe.
+GH.Berserker-1_Option_1_Outcome	You approach the wounded detail, explaining how that axe belonged to a former member of your party.\n\n“Yeah, we know,” one of them says with an icy stare. “Said we were desecrating her land or some such nonsense and just went crazy. But we weren’t doing anything but patrolling! Quite a piece of work your friend. Just take the axe if you want and get out of here.”
+GH.Berserker-1_Option_2	Stay silent and keep out of it.
+GH.Berserker-1_Option_2_Outcome	You casually move on, wondering how the guards found themselves on the wrong side of the Berserker’s rage. It probably wasn’t very difficult.
+GH.Berserker-2_Front	You hear the distinctive sound of metal-on-metal in the distance and race up a hill in the road to investigate.\n\nIn front of you, you see a familiar female Inox in heated battle with a group of Gloomhaven guards. Though outnumbered and bloodied, you’ve never seen that stop the Berserker before. With every wound they inflict, she becomes more and more enraged, cleaving off limbs with the ease of cutting grass.
+GH.Berserker-2_Option_1	Help the Berserker fight off the guards.
+GH.Berserker-2_Option_1_Outcome	You enter the battle to aid the Berserker, but in her blood rage, she can’t distinguish friend from foe. She begins hacking away at you with her axe as much as she swings at the guards. You concentrate on taking out the remaining guards, but when you turn back to the Berserker, she seems to have vanished into the nearby forest.
+GH.Berserker-2_Option_2	Wait and see what happens. It looks like she's handling herself well enough.
+GH.Berserker-2_Option_2_Outcome	After a brutal and bloody fight, only the Berserker remains standing. After her blood rage subsides, she collapses from exhaustion. You race to her side and attempt to revive her using a number of powerful potions. She finally awakes and expresses her begrudging gratitude. You ask about the fight, but she just shakes her head. She offers her axe as thanks and then dashes off into the forest.
+Berserker_FullName	Berserker
+CODEX_Hero_Berserker_Title	Berserker
+Berserker_DESCRIPTION	Berserkers are Inox warriors who have embraced their strength and fury. The Berserker will go to any lengths to keep her friends safe, including sacrificing her own life. Her abilities revolve around high damage output with the option of self-damage to push to even higher amounts. This makes her an extremely dangerous combatant, both to her enemies and herself.
+CODEX_HeroInfo_Berserker	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> High\n\nYour health is a resource, not just a lifeline. Many of your attacks get stronger the more health you have lost, or once you drop below half, and several cards let you suffer a little damage to make an attack hit harder.\n\nYour defences are built for living on the edge: <i>Defiance of Death</i> softens a blow that would knock you out, and other cards boost the healing you receive or strike back whenever you are hurt. Keep a healer close, or plan your own heals.\n\n<sprite name=CreateFire> powers some of your attacks, and your blows often add <sprite name=Wound>.\n\n<b>Strengths:</b>\n• One of the highest damage-dealing classes\n• Gets even stronger on lower health\n• Can lead the front line and draw enemy fire\n\n<b>Weaknesses:</b>\n• Little in the way of abilities that help allies\n• Operating on low health can lead to premature demise\n• Has anger management issues
 PERK_Brute_10_Bonus	Rested and Ready: +1 <sprite name=Move> to your next move ability
 PERK_Brute_01_Name	Precision
 PERK_Brute_02_Name	Shove
@@ -1622,148 +1682,6 @@ GH.Brute-3_Option_2_Outcome	Near the corpse of the Brute, you find an axe, presu
 Brute_FullName	Brute
 CODEX_Hero_Brute_Title	Brute
 CODEX_HeroInfo_Brute	<b>Role:</b> Melee Damage/Tank\n<b>Difficulty:</b> Low\n\nYou are at your best in the middle of a crowd. Many of your attacks hit every adjacent enemy or sweep through an area, so move in where several enemies stand together and hit them all at once.\n\nYour hits can <sprite name=Push>, <sprite name=Pull>, <sprite name=Stun>, <sprite name=Immobilize> and <sprite name=Disarm>, and a few cards kill a normal enemy outright. Your bottom actions are mostly moves that attack along the way, like <i>Balanced Measure</i>, which turns movement into damage.\n\nYou have plenty of health, and round-long <sprite name=Shield> and <sprite name=Retaliate> to hold the line, so you can afford to take the first hit for your party.\n\n<b>Strengths:</b>\n• High health and defensive abilities make him more durable than some\n• Access to early Disarm and Stun\n• Great at pushing enemies about\n\n<b>Weaknesses:</b>\n• Low mobility\n• Poor ranged attack options\n• Not the greatest conversationalist
-PERK_Scoundrel_01_Name	Light Step
-PERK_Scoundrel_02_Name	Steady Hand
-PERK_Scoundrel_03_Name	Venom Coating
-PERK_Scoundrel_04_Name	Composure
-PERK_Scoundrel_05_Name	Vital Strike
-PERK_Scoundrel_06_Name	Dirty Fighting
-PERK_Scoundrel_07_Name	Flurry
-PERK_Scoundrel_08_Name	Vanish
-PERK_Scoundrel_09_Name	Unfazed
-PERK_Scoundrel_10_Name	Cloak of Invisibility
-Scoundrel_MASTERY_1_Name	Pack Hunter
-Scoundrel_MASTERY_1_Desc	Kill at least six enemies that are adjacent to at least one of your allies
-Scoundrel_MASTERY_2_Name	Lone Wolf
-Scoundrel_MASTERY_2_Desc	Kill at least six enemies that are adjacent to none of your allies
-Event_GH.Scoundrel_Text	Nobody sees the Scoundrel leave. You find out the way you were always going to find out: her bunk is stripped, the lock on the Trading Post's back door has been picked and relocked out of sheer habit, and on your table sits a small, neat pile of everything she ever lifted from you. A coin purse. A whetstone. The good knife.\nThere is a note under the knife, in handwriting far better than she ever let on. "Nothing personal. It never was. Thanks for the company; it was more than I came for."\nThe guard at the gate swears he saw nothing all night. He is probably telling the truth. She was always better than the people watching for her.\nWeeks later a caravan master mentions a woman in dark leather who paid her way south and spent the whole trip teaching the drivers to cheat at cards. You find you are smiling. Somewhere out there, the Scoundrel is doing fine.
-Event_GH.Scoundrel_Name	Scoundrel Retires
-GH.Scoundrel-1_Front	“You there! Stop!”\n\nYou turn to see a town guard walking briskly toward you.\n\n“You are known associates of this woman, yes?” He holds up a crude sketch of the Scoundrel. “We believe she is behind a number of high-profile robberies and demand that you give us any information you have on her whereabouts and activities.”\n\nHis face softens a bit. “Look, I know you do a lot of good for the outpost, but the merchants are breathing down my neck on this one, and I could really use a lead.”
-GH.Scoundrel-1_Option_1	Cooperate with the guard and tell him everything you know.
-GH.Scoundrel-1_Option_1_Outcome	The guard taps his notes with a smile on his face.\n\n“This is great,” he says. “I understand that you haven’t seen her in a while, but the information you’ve provided should still be useful. Have a nice day!”
-GH.Scoundrel-1_Option_2	Be as vague and unhelpful as possible, giving no useful information.
-GH.Scoundrel-1_Option_2_Outcome	The guard scratches his head and looks down at his notes.\n\n“Well, that wasn’t very helpful,” he sighs. “But thanks for your time, I guess. Let me know if you remember anything or get any new information.”
-GH.Scoundrel-2_Front	Riding up on horses, a band of dirty, rough men quickly overtake and surround your group. They look hard and dangerous, and you immediately pull out your weapons as they approach.\n\nThen you hear a familiar laugh.\n\n“Well, if it isn’t my old crew.” A woman in dark leather armor leaps off her horse to come greet you. “You know what, boys? This lot gets a pass.”\n\nShe winks at you and turns around. “Plus, they’d probably kill you all if things turned ugly.”\n\nJumping back onto her horse, the Scoundrel looks back at you. “Well, it was nice seeing you. Just remember—you never saw me.”
-GH.Scoundrel-2_Option_1	Attack. Friend or not, those who prey on the weak should be brought to justice.
-GH.Scoundrel-2_Option_1_Outcome	You see the bandits relax a little and begin to form up. That is when you strike. Some are scared off by the sudden attack, but others engage you hungrily. The Scoundrel throws a few good daggers, too, before she rides off, criticizing your poor decision-making.
-GH.Scoundrel-2_Option_2	Let the bandits go.
-GH.Scoundrel-2_Option_2_Outcome	The bandits seem a little disappointed as they form up and ride off in the opposite direction.
-GH.Scoundrel-3_Front	“So, I hear you stood up for me with the guards the other day. Such annoying pests, aren’t they?”\n\nYou turn around in the street to see the Scoundrel emerge from a dark alley with a smile on her face.\n\n“I just wanted to thank you in person,” she says. “I’ve known quite a few persons who would have ratted me out for their chance at a piece of gold. It’s good to know some friendships last.”\n\nShe looks over her shoulder. “Listen, I’m leaving town for a good long while. You wanna grab a drink before I take off?”
-GH.Scoundrel-3_Option_1	Have a drink and reminisce about old times.
-GH.Scoundrel-3_Option_1_Outcome	You laugh for a while and trade tales. As the sun drops below the tavern windows, the Scoundrel gets up to leave.\n\n“Listen, I really did enjoy our time together, and, well, I just wanted to leave you with something to remember me by.”\n\nA piece of black cloth flutters down onto the table. When you look back up, the Scoundrel is gone.
-GH.Scoundrel-3_Option_2	Overpower the Scoundrel and deliver her to the guards.
-GH.Scoundrel-3_Option_2_Outcome	A look of horrid surprise flashes in the Scoundrel’s eyes as you leap forward and throw her to the ground. She doesn’t even speak as you bind her arms and take her to the guard. They thank you for your service, but their words aren’t much counter to the cold, angry stare of the Scoundrel as she’s taken away.
-Scoundrel_FullName	Scoundrel
-CODEX_Hero_Scoundrel_Title	Scoundrel
-CODEX_HeroInfo_Scoundrel	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> Low\n\nPosition is everything for you. Many of your attacks grow stronger when the target is next to one of your allies, and others when the target stands alone with no allies of its own nearby. Look at where your friends are before you pick a target, and work with them to flank enemies.\n\nYou can also become <sprite name=Invisible>, and some attacks, like <i>Smoke Bomb</i>, hit harder while you are unseen. Your attacks often add <sprite name=Poison> and <sprite name=Wound>, and poisoned enemies take extra damage from several of your cards.\n\nYou move far and loot well, but you are fragile, with little to protect yourself. Strike and step away.\n\n<b>Strengths:</b>\n• High mobility\n• Potential for high melee Damage\n• Can afflict enemies with Poison\n\n<b>Weaknesses:</b>\n• Little in the way of effects that assist teammates\n• Few defensive abilities and low health\n• Will try and take ALL the gold
-PERK_Sunkeeper_01_Name	Focus
-PERK_Sunkeeper_02_Name	Radiance
-PERK_Sunkeeper_03_Name	Bulwark
-PERK_Sunkeeper_04_Name	Smite
-PERK_Sunkeeper_05_Name	Zeal
-PERK_Sunkeeper_06_Name	Dazzle
-PERK_Sunkeeper_07_Name	Mending Light
-PERK_Sunkeeper_08_Name	Well Armored
-PERK_Sunkeeper_09_Name	Unfazed
-PERK_Sunkeeper_10_Name	Shielding Light
-Sunkeeper_MASTERY_1_Name	Unbreakable
-Sunkeeper_MASTERY_1_Desc	Reduce attacks targeting you by a total of <sprite name=Shield> 20 or more in a single round
-Sunkeeper_MASTERY_2_Name	Child of the Sun
-Sunkeeper_MASTERY_2_Desc	Infuse or consume <sprite name=CreateLight> during each of your turns
-Event_GH.Sunkeeper_Text	The Sunkeeper asks you to meet her on the wall at sunrise. She is already there when you arrive, armor polished to a mirror, watching the light come up over the ice. "The temple has sent for me," she says. "They need a keeper, and there is no one else."\nShe does not pretend to be sorry to go, and you respect her for it. Instead she walks the length of the wall with you, laying a gloved hand on each tower as she passes, speaking a few words under her breath. The guards on duty stand a little straighter without quite knowing why.\nAt the gate she presses a small sun medallion into your palm, warm from her hand. "For the dark months. It will not do much. It will do enough."\nThen she turns south and walks into the sunrise, which is exactly how she would have wanted it to look.
-Event_GH.Sunkeeper_Name	Sunkeeper Retires
-GH.Sunkeeper-1_Front	You are haggling over the price of road rations with an irritating Valrath merchant when a messenger boy approaches you holding a note.\n\n“Sir, I have a pressing letter from an important Valrath Sunkeeper,” the messenger says. “I was told to deliver it to you.”\n\nYou reach for it, but the messenger moves back a little. “Sir, this note has traveled a long distance to get to you. If you could, please pay a small fee to take possession of it.”
-GH.Sunkeeper-1_Option_1	Begrudgingly pay for the note.
-GH.Sunkeeper-1_Option_1_Outcome	You throw the kid a few coins and grab the note. Enclosed with the note is a small medallion engraved with the image of the sun. Apparently the Sunkeeper thinks the object may help you at some point in the future. The note doesn’t say exactly how and the thing has no apparent use. You stow it away in your pack.
-GH.Sunkeeper-1_Option_2	Refuse to pay for the note.
-GH.Sunkeeper-1_Option_2_Outcome	You laugh in indignation and push the messenger away. He opens his mouth to object, then thinks better of it and runs off. You turn back to bartering, now leveraging the proof of your extreme thriftiness against the merchant.
-GH.Sunkeeper-2_Front	You see them long before they get close to you—radiant balls of light blazing against the horizon.\n\nSun Demons.\n\nAs they approach, you prepare for an attack, but the demons have other plans. They menace you with their glowing claws, but they would rather have information than kill you.\n\n“Where is the one you call a Sunkeeper?” one of them hisses. “The Valrath neglects her duties, and now we must resolve matters personally.”\n\nYou press for further information, but the demons get angry. “These are not your concerns! Tell us where she is or die at our hands!”
-GH.Sunkeeper-2_Option_1	Give them whatever information you can on the Sunkeeper’s whereabouts.
-GH.Sunkeeper-2_Option_1_Outcome	You’re not sure exactly what happened to the Sunkeeper after she left the party, but you tell the demons everything you know.\nThey seem satisfied with your response and even offer a bitter thanks as they fly off to the west.
-GH.Sunkeeper-2_Option_2	Attack the demons. There are a lot of them, but you do not take kindly to threats.
-GH.Sunkeeper-2_Option_2_Outcome	Without even speaking, you draw your weapons and attack. The demons are caught off guard, but they bounce back with great ferocity. It is a long, brutal battle, and you continue on in your adventure greatly wounded and bloody.
-GH.Sunkeeper-3_Front	You are heading through a small forest when you hear the sound of a woman screaming off to the west. You silently move closer, catching a glimpse of multiple radiant figures through the trees.\n\nThey are Sun Demons, perhaps the same ones who accosted you earlier. That suspicion is confirmed when you get closer and see they are hovering around an armored Valrath woman bound to a tree, torturing her for information.\n\n“Don’t you see how important this is!” one of the demons says. “Give us the location of the temple!”\n\n“Lies and tricks of a demon,” the Sunkeeper responds. “The temple is in no danger except from you.”
-GH.Sunkeeper-3_Option_1	Leave the scene quietly and return to your own business.
-GH.Sunkeeper-3_Option_1_Outcome	Not wanting to get involved, you simply move on. Eventually the screams of the Sunkeeper fade away.
-GH.Sunkeeper-3_Option_2	Attack the demons and free the Sunkeeper.
-GH.Sunkeeper-3_Option_2_Outcome	You charge out of the trees and attack the Sun Demons. Fueled by righteous indignation and a bit of guilt, you slay them all. The battle leaves you wounded, but the Sunkeeper happily mends your wounds once you free her.\n\n“They seemed to think the Sun Temple is under attack by Night Demons,” she says. “I have no reason to believe them, but still, would you mind helping me look into it?”
-GH.Sunkeeper-4_Front	By now, the Sun Demons cut a very recognizable portrait against the horizon as they move toward you. You sincerely had hoped you were done with these creatures.\n\n“We have urgent need of your assistance,” one of them starts. “Night Demons have infested the Sun Temple, attempting to desecrate it and send the world into eternal darkness.\n\n“We have tried to stop them, but they are too fortified inside the temple. We regrettably need more strength.\n\n“Please, you cannot want an absence of a sun on this plane any less than we do. It would be disastrous.”
-GH.Sunkeeper-4_Option_1	Agree to help the Sun Demons.
-GH.Sunkeeper-4_Option_1_Outcome	You sigh and agree, warning them that this had better be the last time they ask you for a favor. They give you the location of the Sun Temple and implore you to hurry.
-GH.Sunkeeper-4_Option_2	Attack the Sun Demons. It may be the only way to stop them from bothering you.
-GH.Sunkeeper-4_Option_2_Outcome	Without even speaking, you draw your weapons and attack. The demons are caught off guard, but they bounce back with great ferocity. It is a long, brutal battle, and you continue on in your adventure greatly wounded and bloody.
-Sunkeeper_FullName	Sunkeeper
-CODEX_Hero_Sunkeeper_Title	Sunkeeper
-Sunkeeper_DESCRIPTION	Sunkeepers have been trained to tap into long-dormant demonic powers and harness them for the purpose of righteousness. The Sunkeeper has an assortment of Healing, Buffing and Card Recovery abilities and is a capable Melee fighter in her own right. She works best in the role of a Paladin, aiding the main damage dealers in combat while keeping them alive.
-CODEX_HeroInfo_Sunkeeper	<b>Role:</b> Melee Tank/Support\n<b>Difficulty:</b> Low\n\nLight is your fuel. Most of your cards create <sprite name=CreateLight> or spend it for stronger attacks, extra healing and longer buffs. <i>Beacon of Light</i> keeps Light glowing every turn.\n\nYou lead from the front: several cards let an ally <sprite name=Move> or <sprite name=Attack> on your turn, and your heals, <sprite name=Bless> and <sprite name=Strengthen> keep the party going. You also give allies <sprite name=Shield> and <sprite name=Retaliate>, and can take damage meant for them.\n\nYou are tough and can <sprite name=Stun> with your own attacks, so stand next to your allies where you can protect and command them at the same time.\n\n<b>Strengths:</b>\n• Array of buff, heal and recovery options\n• Competent melee combatant\n• Uses Light to enhance her abilities\n\n<b>Weaknesses:</b>\n• Can struggle against groups of smaller enemies\n• Weaker with fewer allies\n• Rather self-righteous a lot of the time
-PERK_Sawbones_01_Name	Steady Hands
-PERK_Sawbones_02_Name	Open Wounds
-PERK_Sawbones_03_Name	Precise Cuts
-PERK_Sawbones_04_Name	Hamstring
-PERK_Sawbones_05_Name	Resupply
-PERK_Sawbones_06_Name	Surgical Strike
-PERK_Sawbones_07_Name	Anesthetic
-PERK_Sawbones_08_Name	Self-Care
-PERK_Sawbones_09_Name	Revitalizing Medicine
-Sawbones_MASTERY_1_Name	Bedside Manner
-Sawbones_MASTERY_1_Desc	On each of your turns, give an ally a card, heal an ally, grant an ally <sprite name=Shield>, or place a card in an ally's active area
-Sawbones_MASTERY_2_Name	Grievous Harm
-Sawbones_MASTERY_2_Desc	Deal at least <sprite name=Damage> 20 with a single attack ability
-Event_GH.Sawbones_Text	You find the Sawbones in the Alchemist's back room, labeling jars. He has been at it for days: every salve, splint and tincture he carried, written up in his cramped hand and shelved where anyone can find it.\n"Enough people know how to break things in this town," he says without looking up. "Somebody ought to know how to put them back together when I am gone." He closes the last jar, wipes his hands, and finally turns around. "The sanctuary wrote. A quiet post, inland. Warm. I said yes before I could talk myself out of it."\nHe leaves you his saw. Not as a weapon, he insists, though you both know how he used it. "For the lumber. Honestly."\nThe morning he goes, half the outpost turns out to see him off, every one of them someone he has stitched, set or sobered up. He pretends to be annoyed about it the whole way to the gate.
-Event_GH.Sawbones_Name	Sawbones Retires
-GH.Sawbones-1_Front	Looking for a little bit of variety, you head to the roughest table in the Tavern as night falls. After some wait, you are surprised to see the Sawbones sitting near the back of the room by himself. Considering this corner is about as seedy as Frosthaven gets, it is just about the last place you would expect to find him.\n\n“I just...I don’t know what to do now,” the Sawbones confesses after you sit down. “I’d like to join the sanctuary and lead a nice, quiet life, but after adventuring with all of you, that just doesn’t seem fulfilling anymore.”\n\nHe shakes his head. “I don’t know. This life seems so boring now. What do you think?”
-GH.Sawbones-1_Option_1	Tell him that joining the sanctuary is the right thing to do.
-GH.Sawbones-1_Option_1_Outcome	“I guess you’re right,” he shrugs. “Here’s to one last night of freedom.” He lifts his glass and gulps down the contents. You follow his lead and the rest is a blur.
-GH.Sawbones-1_Option_2	Tell him to follow his dreams.
-GH.Sawbones-1_Option_2_Outcome	“You’re right! I’m in command of my own life, and I’m going to do what I want with it. Maybe I’ll go to the Capital and start my own business or something. Who knows?”\n\nHe lifts his glass and looks at you. “To endless possibilities! The next round’s on me.”
-GH.Sawbones-2_Front	At first the man looks dead, with numerous open wounds and lying in a pool of blood in the dirt.\n\nBut then he coughs and whispers something unintelligible. The man looks pretty bad off, likely attacked by some wild animal, but it’s possible he could be saved.
-GH.Sawbones-2_Option_1	Help the wounded man as best you can.
-GH.Sawbones-2_Option_1_Outcome	The man’s wounds actually look worse than they really are, and your time with the Sawbones has given you some experience in what to do. You bind the wounds to stop the bleeding and then give him something to eat. He lost a lot of blood, but after some nursing, he’s able to stand and make his way back to Frosthaven, thanking you profusely in the process.
-GH.Sawbones-2_Option_2	Let the man die and take his belongings.
-GH.Sawbones-2_Option_2_Outcome	You riffle through the man’s pockets as he speaks his last words. They’re too soft to make out, but the tone is one of anger and disappointment. You make off with a decent amount of money and leave the corpse to rot.
-GH.Sawbones-3_Front	You head back to your rooms for the night when you see the Sawbones sitting in front of your doorstep, looking rather dejected.\n\n“I, uh, well, you see...” he stammers, “I followed your advice. Chased my dreams and all that, but I ended up in debt to some rather unscrupulous people. They’ve threatened to kill me if I don’t pay them off, but, uh, but I simply don’t have the money.”\n\nHe hesitates. “Seeing as how, uh, you bear some responsibility for setting me down this path, I was wondering if you’d be willing to offer some assistance in getting me out of this mess?”
-GH.Sawbones-3_Option_1	Offer to pay off the Sawbones’ debt.
-GH.Sawbones-3_Option_1_Outcome	It’s a hefty chunk of money, but the Sawbones is incredibly grateful.\n\n“This is wonderful! I knew I could count on you. This should be enough to put this mess behind me and finally allow me to live free.”\n\nHe hands you a potion and thanks you once again for all your help.
-GH.Sawbones-3_Option_2	Get the Sawbones on a boat across the Misty Sea. New adventures surely await there.
-GH.Sawbones-3_Option_2_Outcome	You flatly refuse to pay off the Sawbones’ debt and convince him the only way to escape his pursuers is to board a ship bound for the eastern continent, far out of their reach. He is reluctant, but eventually agrees when you remind him what unknown adventures await in the land across the ocean. You see him off in the night and desperately hope that is the last you hear of this situation.
-GH.Sawbones-4_Front	You are trying to enjoy a relaxing drink in the Tavern when a number of large men and Inox burst in and approach your table.\n\n“So, you must be that little creep’s collateral,” one of the Inox says. “We’re here to collect.”\n\nWhen you stare at her in silence, she tries again. “Little grey-bearded man. Wore symbols of the Great Oak. He said you lot would pay off his debt if he couldn’t.”\n\nShe pats an axe at her side. “Now, seeing as how he apparently skipped town, you can pay us, or things are gonna get ugly.”
-GH.Sawbones-4_Option_1	Pay off the thugs.
-GH.Sawbones-4_Option_1_Outcome	You sigh and hand over the Sawbones’ debt, plus interest. Though it feels terrible, the thugs are satisfied and walk out the same way they came in. At least it is over now.
-GH.Sawbones-4_Option_2	Refuse to pay. You won’t be strongarmed by anyone.
-GH.Sawbones-4_Option_2_Outcome	You laugh and wave your hand dismissively. There’s no way you will be paying such a large amount of money to these thugs. Unfortunately, the Inox is not amused.\n\n“Then your payment will be blood!” she says. “Meet us in the back alley, and we’ll see if we can’t come to terms.”
-Sawbones_FullName	Sawbones
-CODEX_Hero_Sawbones_Title	Sawbones
-Sawbones_DESCRIPTION	Followers of the Oak are religious healers who do their best to ward off the pestilence and death that can manifest in larger human cities. Contrary to popular belief, however, there is nothing miraculous about their healing methods, as anyone who has come to them with a gangrenous leg knows all too well. The mystique of the profession can get lost amongst the screams when the Sawbones has to hack off a limb.
-CODEX_HeroInfo_Sawbones	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Low\n\nSome of your abilities give a <b>Medical Pack</b> card to yourself or an ally. It goes into that character's hand, and they can play it on their turn to heal themselves. Hand them out before the fight gets rough.\n\nYou are the party's doctor: strong heals that often also remove every negative condition, and cards that keep allies <sprite name=Shield>ed or immune to conditions for a while. <i>Triage</i> lets you heal a little every turn on top of your other actions.\n\nYour few attacks are nasty: they can <sprite name=Wound>, <sprite name=Poison>, <sprite name=Immobilize>, <sprite name=Stun> or <sprite name=Disarm>, and a couple of them kill an enemy outright when it is already in bad shape.\n\n<b>Strengths:</b>\n• Particularly efficient healer\n• Has a number of decent melee attacks\n• Medical Packs can also increase Ally's card counts\n\n<b>Weaknesses:</b>\n• Poor ranged attacks\n• Weaker in parties with fewer allies or lower max health\n• Doesn't have as great an understanding of medical cleanliness as most doctors
-PERK_Quartermaster_01_Name	Steady Supply
-PERK_Quartermaster_02_Name	Armor Piercing
-PERK_Quartermaster_03_Name	Sweeping Blow
-PERK_Quartermaster_04_Name	Heavy Hands
-PERK_Quartermaster_05_Name	Resupply
-PERK_Quartermaster_06_Name	Drilled
-PERK_Quartermaster_07_Name	Concussion
-PERK_Quartermaster_08_Name	Well Fitted
-PERK_Quartermaster_09_Name	Well Supplied
-Quartermaster_MASTERY_1_Name	Supply Lines
-Quartermaster_MASTERY_1_Desc	Spend, lose or refresh one or more items on each of your turns, without ever performing the top action of Reinforced Steel
-Quartermaster_MASTERY_2_Name	Pack Mule
-Quartermaster_MASTERY_2_Desc	Loot six or more loot tokens in a single turn
-Event_GH.Quartermaster_Text	The Quartermaster spends his last week in Frosthaven doing inventory. Not his own: the outpost's. By the end of it every storeroom has a ledger, every ledger has a system, and the Craftsman has stopped arguing and started taking notes.\n"A party without supplies is a funeral with extra steps," he tells you over the last of his good wine. "You lot will be fine. You have the ledgers now." He taps the stack like a man patting a dog.\nHe has a contract waiting in the Capital, outfitting a merchant house, and he is honest enough to admit the pay is obscene. He is also honest enough to look back at the walls for a long moment before he goes.\nHis pack is the last thing to leave, strapped to a sled and roped like a siege engine. The Craftsman swears the storerooms have never been so tidy, and never will be again.
-Event_GH.Quartermaster_Name	Quartermaster Retires
-GH.Quartermaster-1_Front	“Your Quartermaster friend sent me.” You look quizzically at the Valrath standing at your door.\n\n“I’m from the Capital, and I deal in arms and armor,” he says. “I’m looking to set up a contract with the Frosthaven guard, and our friend says that you may have some contacts with them. He suggested I meet up with you once I got here.”\n\nThe Valrath shifts his feet nervously. “So, can you help me?”
-GH.Quartermaster-1_Option_1	Agree to help him make contact with the guard.
-GH.Quartermaster-1_Option_1_Outcome	You take the Valrath over to the Barracks, where you make introductions to the captain of the guard. The captain seems skeptical at first, but admits that they could use an additional supply of weapons. Terms are made, and a contract is signed.
-GH.Quartermaster-1_Option_2	Demand a finder’s fee for setting him up with buyers.
-GH.Quartermaster-1_Option_2_Outcome	The Valrath looks at you with trepidation, but after some persuasion, you get him to agree.
-GH.Quartermaster-2_Front	You are approached on the road by a group of men on horseback. They don’t immediately seem menacing, but they are formidable and well organized.\n\nOne of the men, who wears plate armor and has a sword at his side, addresses you coldly. “You hail from Frosthaven, correct? What say you about the politics of the place? Are you for or against military rule in the region? Do you think those fool merchants could do a better job, like they’re doing with the rest of this doomed land?”\n\nLooking closer, you see all the men wear the signet of a tower with an eye at its center.
-GH.Quartermaster-2_Option_1	Claim allegiance to the military.
-GH.Quartermaster-2_Option_1_Outcome	The armored men seem satisfied with your response and take their hands off their weapons.\n\n“Good to find some fellow patriots,” the one in front says with a disturbing smile. “You know, we have a stronghold not far from here up in the mountains. Feel free to visit there if you ever get serious about your loyalties.”
-GH.Quartermaster-2_Option_2	Claim allegiance to the merchant guilds.
-GH.Quartermaster-2_Option_2_Outcome	“Well then, today’s your unlucky day,” the man in front says. “Because we of the Vigil make it a point to execute any and all commerce sympathizers we can find in this land.”\n\nThe men grimly draw swords and advance. After a hard battle, the survivors retreat, leaving you to pick through the corpses. Among the loot you find a map.
-Quartermaster_FullName	Quartermaster
-CODEX_Hero_Quartermaster_Title	Quartermaster
-Quartermaster_DESCRIPTION	Skilled Valrath Quartermasters are known for aiding adventuring parties in maximizing the effectiveness of their equipment. After all, what is a warrior without a good sword at his side?
-CODEX_HeroInfo_Quartermaster	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Medium\n\nItems are your resource. Many of your cards refresh spent items, for you or for the whole party, so do not be shy about using them. <i>Proficiency</i> makes your attacks stronger in any action where you used an item.\n\nYour weapons are your cards: axe and spear sweeps up close, a bow at range, and one-use scrolls with the biggest effects in your deck. Save those scrolls for the moments that matter, since they are lost once used.\n\nYou also support the party with <sprite name=Attack> and <sprite name=Shield> bonuses, healing, and cards that give allies their discarded cards back.\n\n<b>Strengths:</b>\n• Many item refreshing abilities\n• Moderate offensive and defensive capabilities\n• Jack of all trades\n\n<b>Weaknesses:</b>\n• Master of none\n• Weaker when party lacks good equipment\n• Always packs too much luggage
 PERK_Cragheart_01_Name	Steadfast
 PERK_Cragheart_02_Name	Rockslide
 PERK_Cragheart_03_Name	Grasping Earth
@@ -1792,36 +1710,149 @@ GH.Cragheart-2_Option_2_Outcome	You shake your head and move past the ridge. You
 Cragheart_FullName	Cragheart
 CODEX_Hero_Cragheart_Title	Cragheart
 CODEX_HeroInfo_Cragheart	<b>Role:</b> Damage/Support\n<b>Difficulty:</b> Medium\n\nYou shape the battlefield with rock. Many of your cards create obstacles, destroy them for extra effects, or push enemies into them for more damage. <i>Rock Slide</i> drops boulders that hurt everyone standing next to them.\n\n<sprite name=CreateEarth> powers your bigger attacks, extra movement and <sprite name=Immobilize>. Many of your attacks hit several enemies at once, often in large areas.\n\nBe careful: several of your abilities also damage allies standing next to you, so warn your party before you use them. You are tough, jump well, and have a little healing for yourself and your friends.\n\n<b>Strengths:</b>\n• Can place and interact with obstacles\n• Versatile with melee & ranged options\n• Lots of direct damage abilities to dodge Shield and Disadvantage\n\n<b>Weaknesses:</b>\n• Doesn't quite excel in any one aspect\n• Some abilities require obstacles in specific locations to function\n• Hard-to-read facial expressions
-PERK_Plagueherald_01_Name	Steady Focus
-PERK_Plagueherald_02_Name	Virulence
-PERK_Plagueherald_03_Name	Lethal Strain
-PERK_Plagueherald_04_Name	Airborne
-PERK_Plagueherald_05_Name	Toxic Touch
-PERK_Plagueherald_06_Name	Paralysis
-PERK_Plagueherald_07_Name	Numbing Agent
-PERK_Plagueherald_08_Name	Hex
-PERK_Plagueherald_09_Name	Unfazed
-PERK_Plagueherald_10_Name	Xorn's Boon
-Plagueherald_MASTERY_1_Name	Silent Killer
-Plagueherald_MASTERY_1_Desc	Kill at least five enemies with non-attack abilities
-Plagueherald_MASTERY_2_Name	Pandemic
-Plagueherald_MASTERY_2_Desc	Perform three different attack abilities that target at least four enemies each
-Event_GH.Plagueherald_Text	The Alchemist finds you first, which tells you something has gone wrong before she says a word. "Your Harrower friend," she says, "has been in my stillroom all night. I would like them out of it. I would also like to know what they left in the third jar from the end."\nYou find the Plagueherald on the roof of the Alchemist's, the swarm settled over them like a shawl, watching the sun come up over the bay. They do not turn around. "The jar is a cure," they say. "For the cough the lumber crews have. She will work it out in a month; I have saved her the month."\nThey are leaving. The hive has decided, they explain, and a Harrower does not argue with the hive. Somewhere warmer, somewhere with more rot to feed on; they say it the way someone else would mention the weather.\nThe swarm lifts off the roof all at once, a dark sheet that folds and is gone over the water. The cough is gone from the crews by the end of the week. The Alchemist still will not open the third jar.
-Event_GH.Plagueherald_Name	Plagueherald Retires
-GH.Plagueherald-1_Front	You have been hearing rumors in the bars: a pox is spreading through Gloomhaven, affecting lower class citizens—street urchins and backalley thugs.\n\nAnd then one night you see it: a Harrower dressed in a ragged green cloak holding a man down in an alley as its swarm spreads out and consumes him. The man’s screams are muffled as the insects skitter down his throat.\n\nKilling monsters and demons is one thing, but the Plagueherald shouldn’t be preying on people in the city. You approach it, intent on stopping its attack.
-GH.Plagueherald-1_Option_1	Calmly explain the situation to the Plagueherald, imploring it to move on.
-GH.Plagueherald-1_Option_1_Outcome	With the man dead at its feet, the Plagueherald makes a chittering sound that sounds almost like laughing.\n\n“You cannot see it, but this city needs to be cleansed. You will see, and you will thank me.”\n\nAt this, the Plagueherald bursts out into a massive swarm of insects and flies up into the sky.\n\nThe deaths continue, and new rumors start about how you are associated with the killer.
-GH.Plagueherald-1_Option_2	Threaten the Plagueherald with retribution if it doesn’t stop attacking residents.
-GH.Plagueherald-1_Option_2_Outcome	The Plagueherald recoils at your threat, genuinely concerned that you would attack it.\n\n“But, the cleansing...the city isn’t ready.”\n\nYou shake your head, and the Harrower chitters in disappointment.\n\n“Very well, but you will be responsible when the Harbinger comes.” It turns and floats off into the darkness.
-GH.Plagueherald-2_Front	You smell the corpses before you see them. A group of five or so, spread across the road, flies buzzing around in a frenzy.\n\nAs you get closer, you see the wretched, deformed looks on their faces and the boils covering their skin. You also see their crude armor and weapons—likely a group of cutthroats.\n\nWhat is truly odd, though, is that their weapons are out of their sheaths in the first place. It appears they were engaged in battle when they suddenly succumbed to some horrible disease.\n\nYou can think of at least one way that could have happened. Fine handiwork from the Plagueherald.
-GH.Plagueherald-2_Option_1	Leave the corpses alone.
-GH.Plagueherald-2_Option_1_Outcome	Knowing better than to get too close to the machinations of the Plagueherald, you keep a wide berth between you and the corpses and continue down the road.
-GH.Plagueherald-2_Option_2	Inspect the corpses for valuables.
-GH.Plagueherald-2_Option_2_Outcome	You rifle through the corpses, grabbing stray coins and valuables as you go. You make off with a good haul, but you start feeling sick as soon as you’re done.
-Plagueherald_FullName	Plagueherald
-CODEX_Hero_Plagueherald_Title	Plagueherald
-Plagueherald_DESCRIPTION	Either misguided or ignorant of other races’ physiology, Plagueheralds believe that the spread of disease throughout a society will strengthen it and propel it towards great things. One should be wary of allying with a Plagueherald. Their ability to spread decay and death across both sides of a battlefield is a terrifying thing to behold.
-CODEX_HeroInfo_Plagueherald	<b>Role:</b> Ranged Damage/Support\n<b>Difficulty:</b> Medium\n\nSickness is your weapon. You attack from range, often in large clouds, and most of your attacks <sprite name=Poison>, <sprite name=Immobilize>, <sprite name=Stun> or <sprite name=Muddle> everything they touch.\n\nSpread <sprite name=Poison> first, then cash it in: cards like <i>Succumb to the Gift</i> kill a poisoned enemy outright, and others deal damage to every poisoned enemy at once. <sprite name=Curse> is your second tool, and <sprite name=CreateAir> powers a few of your strongest effects.\n\nYou are fragile and have little protection, so keep your distance and let the poison do the work.\n\n<b>Strengths:</b>\n• Can often target multiple enemies\n• Effective at range\n• Powerful debuffs utilizing Curse and Poison\n\n<b>Weaknesses:</b>\n• High potential for friendly fire\n• Low effectiveness versus single large targets\n• Harrower mating rituals are... unpleasant
+PERK_Demolitionist_01_Name	Steady Fuse
+PERK_Demolitionist_02_Name	Trimmed Deck
+PERK_Demolitionist_03_Name	Toxic Fumes
+PERK_Demolitionist_04_Name	Concussion
+PERK_Demolitionist_05_Name	Bigger Blast
+PERK_Demolitionist_06_Name	Incendiary
+PERK_Demolitionist_07_Name	Seismic
+PERK_Demolitionist_08_Name	Shrapnel
+PERK_Demolitionist_09_Name	Hardened
+PERK_Demolitionist_10_Name	Remodeling
+Demolitionist_MASTERY_1_Name	Heavy Hitter
+Demolitionist_MASTERY_1_Desc	Deal <sprite name=Damage> 10 or more with each of three different attack actions
+Demolitionist_MASTERY_2_Name	Clean Sweep
+Demolitionist_MASTERY_2_Desc	Destroy at least six obstacles. End the scenario with no obstacles on the map other than ones placed by allies
+Event_GH.Demolitionist_Text	The explosion wakes the whole outpost an hour before dawn. By the time you reach the harbor the Demolitionist is standing on the ice, or what is left of it, surrounded by delighted fishermen. The channel that has been frozen shut since midwinter is open water.\n"You said the boats could not get out," she says, as if that settled it. The rocket boots are smoking gently. The mech suit stands on the quay behind her like a patient dog.\nThe foreman from the mine has been watching from the harbor wall. He has a seam that will not open and a crew that is tired of picks, and he offers her the job before the ice has stopped moving. She considers it for as long as it takes to reload. "Things that need breaking," she says. "I can do that."\nShe takes the suit up the mountain road the next day, the fists folded, the whole contraption leaving prints like a bear in the snow. Twice a week, for years afterwards, a dull thump rolls down from the mine, and the whole of Frosthaven looks up and smiles.
+Event_GH.Demolitionist_Name	Demolitionist Retires
+Demolitionist_FullName	Demolitionist
+CODEX_Hero_Demolitionist_Title	Demolitionist
+Demolitionist_DESCRIPTION	Even when augmenting themselves with machines of their own creation to destroy anything that stands in their path, Quatryls will still do it with charm and flair. Though they may be small, Demolitionists don't let that hold them back in the least. Between their rocket boots, multitude of bombs, and giant piston fists, they are a force to be reckoned with. Sometimes the only path forward is the one they create themselves. In such cases, it is best to get out of their way.
+CODEX_HeroInfo_Demolitionist	<b>Role:</b> Melee Damage \n<b>Difficulty:</b> Medium\n\nWalls and obstacles are your playground. Many of your cards destroy obstacles, and each destruction pays off with damage, <sprite name=Strengthen>, <sprite name=Bless> or <sprite name=Shield>. Enemies standing next to a wall also take extra damage from several of your attacks.\n\nAt level 5 you gain the <b>Mech Suit</b>, a lasting transformation: you change shape, gain extra health and a shield, and recover cards.\n\n<sprite name=CreateFire> and <sprite name=CreateEarth> add damage, <sprite name=Muddle>, <sprite name=Poison> and pushes. Your attacks are mostly up close, and some can <sprite name=Stun>.\n\n<b>Strengths:</b>\n• Many Direct Damage abilities to smash through Shields\n• Access to Abilities with STUN\n• Great at affecting the combat area\n\n<b>Weaknesses:</b>\n• Small deck size\n• Limited healing options\n• Their gloves aren't the most practical everyday attire
+PERK_Doomstalker_01_Name	Composure
+PERK_Doomstalker_02_Name	Steady Aim
+PERK_Doomstalker_03_Name	Wide Reach
+PERK_Doomstalker_04_Name	Stunning Shot
+PERK_Doomstalker_05_Name	Barbed Arrow
+PERK_Doomstalker_06_Name	Venom Arrow
+PERK_Doomstalker_07_Name	Dizzying Shot
+PERK_Doomstalker_08_Name	Rapid Fire
+PERK_Doomstalker_09_Name	Hardened
+PERK_Doomstalker_10_Name	Marked for the Hunt
+Doomstalker_MASTERY_1_Name	Fresh Quarry
+Doomstalker_MASTERY_1_Desc	Never perform a Doom action that you have already performed in the scenario
+Doomstalker_MASTERY_2_Name	Cull the Herd
+Doomstalker_MASTERY_2_Desc	Kill three Doomed enemies during one of your turns
+Event_GH.Doomstalker_Text	The Doomstalker has not spoken more than a sentence a week since he arrived, so when he asks you to walk the north ridge with him at dawn, you go. He says nothing for an hour. Then he points, and you see the tracks you have walked past a hundred times: something large, keeping its distance, watching the outpost as patiently as he has.\n"I have marked it," he says. You do not ask what that means. You have seen what happens to things he marks.\nHe leaves the bow with the guard captain, strung, with a single arrow laid beside it, and the captain understands the arrangement without being told: the day the thing on the ridge comes closer, there is one shot, and it will not miss. It never comes closer.\nHe goes north himself, after it or past it, with his animals ranging ahead of him in a loose silent fan. For years after, the hunters swear the valley's wolves give the outpost a wider berth than any other place on the pass, and nobody can tell them why.
+Event_GH.Doomstalker_Name	Doomstalker Retires
+GH.Doomstalker-1_Front	“Ah, they said I might find you here.” A portly Valrath woman looks down at you as you are enjoying a cold beverage at the Sleeping Lion.\n\n“A group of wild-looking Orchids came to the Temple of Coin today hoping to engage in trade with the merchants of the city. One particularly dour-looking one with a bow said you lot would vouch for them.\n\n“We’re always wary of traps and betrayal out here on the edge of the wilds, but if you think these Orchids can be trusted, then the Merchant’s Guild may consider opening trade with them.”
+GH.Doomstalker-1_Option_1	Vouch for the Orchids.
+GH.Doomstalker-1_Option_1_Outcome	“Well, we’ll take it under advisement. Personally, I don’t even know why your opinion matters, but some people in the Merchant’s Guild seem to like you.\n\n“Anyway, feel free to get back to your life of consumption and murder.”
+GH.Doomstalker-1_Option_2	Advise against trading with the Orchids.
+GH.Doomstalker-1_Option_2_Outcome	The Valrath woman nods. “I agree. Orchids are not to be trusted. Personally, I thought you lacked the brains to make a proper decision, but I’m happy to be proven wrong.”
+GH.Doomstalker-2_Front	You come to a fork in the road. One path looks clear and easy, but the other path is overgrown with thorns and nettles. Either one will likely get you to where you are going.\n\nThe whole situation feels off, though—as if someone or something is watching you.\n\nStill, a decision must be made.
+GH.Doomstalker-2_Option_1	Take the clear path.
+GH.Doomstalker-2_Option_1_Outcome	You walk down the clear path for a few minutes, and, just when you think the whole weird feeling was your imagination, a group of human bandits jumps out at you from the nearby brush. Before they can engage, however, an arrow suddenly spears the chest of the closest bandit, followed very quickly by a second. The bandits have paused to look around in panic when a third arrow flies into another bandit’s skull. The bandits scatter and run off. You look around for the shooter, but no trace is found.
+GH.Doomstalker-2_Option_2	Take the overgrown path.
+GH.Doomstalker-2_Option_2_Outcome	The trek through the overgrown path is unpleasant. You are constantly getting pricked by sharp thorns covered in a strange sap. You think you recognize them from a previous foray into harsh, unforgiving foliage. Sure enough, you start feeling sick pretty soon after you emerge from the bushes.
+Doomstalker_FullName	Doomstalker
+CODEX_Hero_Doomstalker_Title	Doomstalker
+Doomstalker_DESCRIPTION	Orchid Doomstalkers are tasked with keeping various Orchid settlements safe in the wilds around Gloomhaven. The calm mind of the Orchid makes the Doomstalker an excellent bow hunter. He never misses a shot.
+CODEX_HeroInfo_Doomstalker	<b>Role:</b> Ranged Damage/Support\n<b>Difficulty:</b> Medium\n\nYou place <b>dooms</b> on enemies. A doom is a lasting mark that stays on its target: your attacks against it are stronger, and when the doomed enemy dies, the doom pays off with healing, damage around it, or another effect. You can normally keep one doom out at a time.\n\nYou are an archer who fights from far away, and several attacks hit harder against a doomed target. <i>Expose</i> gives you advantage against it.\n\nYou can summon animal companions and set bear traps. Your own attacks rarely add conditions: your dooms do that work.\n\n<b>Strengths:</b>\n• High ranged damage\n• Doom abilities allow wide array of secondary effects\n• Decent array of summons\n\n<b>Weaknesses:</b>\n• Generally wants to focus on one enemy at a time\n• Casting a Doom often involves skipping movement\n• Every visit to Gloomhaven ends up with some poor merchant getting Doomed over the price of an item
+PERK_Elementalist_01_Name	Steady Hands
+PERK_Elementalist_02_Name	Composure
+PERK_Elementalist_03_Name	Trimmed Deck
+PERK_Elementalist_04_Name	Wide Reach
+PERK_Elementalist_05_Name	Thunderclap
+PERK_Elementalist_06_Name	Searing Touch
+PERK_Elementalist_07_Name	Focused Power
+PERK_Elementalist_08_Name	Fire Affinity
+PERK_Elementalist_09_Name	Ice Affinity
+PERK_Elementalist_10_Name	Air Affinity
+PERK_Elementalist_11_Name	Earth Affinity
+PERK_Elementalist_12_Name	Unfazed
+PERK_Elementalist_13_Name	Elemental Proficiency
+Elementalist_MASTERY_1_Name	Elemental Focus
+Elementalist_MASTERY_1_Desc	Consume at least two different elements with each of four different attack abilities, without ever performing the bottom action of Formless Power or Shaping the Ether
+Elementalist_MASTERY_2_Name	Elemental Surge
+Elementalist_MASTERY_2_Desc	Infuse five or more elements during one of your turns, then consume five or more elements during your following turn
+Event_GH.Elementalist_Text	The Elementalist calls it balancing the ledger. Six elements, drawn and spent and drawn again over a winter of fighting, and the Savvas keep count of such things the way merchants keep count of coin. "I have taken more fire from this valley than I gave it," they say, standing at the frozen edge of the bay. "That is not a thing to leave behind."\nSo they give it back. For a week the outpost is warmer than it has any right to be in that season: the ice in the harbour rots, the lumber yard's frozen stack comes loose with a sound like a sigh, and the Infirmary's patients sleep without blankets for the first time since autumn.\nThen the Elementalist takes the cold instead, folds it into themself with the same unhurried care, and walks north into the white with it, toward wherever a Savvas goes to be respected. They do not say goodbye. They have never seen the point.\nThe thaw they left lasts exactly as long as they said it would, to the day. Frosthaven learns to plan around it, and nobody ever quite believes it was weather.
+Event_GH.Elementalist_Name	Elementalist Retires
+GH.Elementalist-1_Front	You are haggling over the price of road rations with an irritating Valrath merchant when a messenger boy approaches you holding a note.\n\n“Sir, I have a pressing letter written by a powerful Savvas that has come to you from all the way across the Misty Sea,” the messenger says. “I was told to deliver it directly.”\n\nYou reach for it, but the messenger moves back a little. “Sir, this note has traveled a very long distance to get to you. If you could, please pay a small fee to take possession of it.”
+GH.Elementalist-1_Option_1	Pay for the note.
+GH.Elementalist-1_Option_1_Outcome	You reach into your pocket to pay the kid, but come up empty-handed. He slinks off in indignation.
+GH.Elementalist-1_Option_2	Refuse to pay for the note.
+GH.Elementalist-1_Option_2_Outcome	You laugh in indignation and push the messenger away. He opens his mouth to object, then thinks better of it and runs off. You turn back to bartering, now leveraging the proof of your extreme thriftiness against the merchant.
+GH.Elementalist-2_Front	You are wandering through an abysmal fog, cursing the very fact you woke up this morning. You can’t see two feet in front of your face and everything is just so cold and damp.\n\nWalking down what you think is the road, you nearly bump into an elderly Savvas.\n\n“Ah, how fortuitous is such a meeting,” the Savvas says. “You look like the ones whom my protégé worked with for some time. Normally I would not give the lesser races a second glance, but the master of elements must have seen something in you.”\n\nIt stretches its joints and looks around. “Hmm, you must be having a rough time with this weather. I could offer you something that may help.”
+GH.Elementalist-2_Option_1	Accept the gift of the Savvas.
+GH.Elementalist-2_Option_1_Outcome	The Savvas concentrates and lays its hand on you. You suddenly feel very warm and all the fog within ten feet of you dissipates.\n\n“There you go. That should make things easier. The effect should last for at least as long as the fog does. Have a pleasant day!”
+GH.Elementalist-2_Option_2	Downplay your struggle and politely decline the Savvas's offer.
+GH.Elementalist-2_Option_2_Outcome	“Ah, I see,” the Savvas says. “You’d rather grow from an experience than take the easy way out. A noble path.”\n\nThe Savvas slaps you on the back. “Well, get to it, then! It’s just fog after all. You’ll survive."
+GH.Elementalist-3_Front	As you walk through some foothills, the ground suddenly shakes violently beneath you. Two massive demons built of earth and stone rise up in front of you.\n\n“Today we shall feast on your flesh, foolish travelers!”\n\nJust as the demons take a step toward you, a massive ball of fire streaks through the air from behind and connects squarely with one of the demons, which erupts into a pillar of flame. Then lightning streaks toward the other, destroying one of its arms.\n\nLooking around, you see the old Savvas you met earlier, who continues to throw out powerful attacks until the demons are forced to retreat.\n\n“Well, fancy meeting you again!”
+GH.Elementalist-3_Option_1	Thank the Savvas for his timely assistance.
+GH.Elementalist-3_Option_1_Outcome	“More and more demons around these parts these days. Stopping them from attacking travelers is becoming a time-intensive job, but at least it’s fun.”\n\nThe Savvas smiles at you and then turns to leave. “Have a pleasant day!”
+GH.Elementalist-3_Option_2	Admonish the Savvas, claiming you could have handled the demons without his help.
+GH.Elementalist-3_Option_2_Outcome	The Savvas adopts a look of serious contemplation. “You are right, of course. I presumed to think that a lesser race would need my help, but I forgot your dedication to growth and learning. I have made a grave mistake and must now beg your forgiveness.”\n\nIt holds out a small trinket toward you. “Please, accept this with my apologies.”
+Elementalist_FullName	Elementalist
+CODEX_Hero_Elementalist_Title	Elementalist
+CODEX_HeroInfo_Elementalist	<b>Role:</b> Ranged Damage\n<b>Difficulty:</b> Very High\n\nAlmost every one of your abilities changes with the element you spend. The same attack can push, stun, pierce or hit harder depending on whether you spend <sprite name=CreateFire>, <sprite name=CreateIce>, <sprite name=CreateAir>, <sprite name=CreateEarth> or <sprite name=CreateDark>.\n\nPlan your turns around which elements are strong, and make the ones you need. <i>Formless Power</i> lets you create an element of your choice at the end of each turn.\n\nWithout elements your attacks are weak, so keep them flowing. You can also heal and shield your allies, and summon helpers.\n\n<b>Strengths:</b>\n• Abilities have wide array of options\n• Very effective at range\n• Great at infusing elements\n\n<b>Weaknesses:</b>\n• Weak with no other element infusers\n• Can have turns where not much is possible\n• Reading his ability cards can cause migraines
+PERK_Hatchet_01_Name	Steady Hands
+PERK_Hatchet_02_Name	Stunning Blow
+PERK_Hatchet_03_Name	Stunning Strike
+PERK_Hatchet_04_Name	Jagged Edge
+PERK_Hatchet_05_Name	Tainted Edge
+PERK_Hatchet_06_Name	Pinning Throw
+PERK_Hatchet_07_Name	Dizzying Blow
+PERK_Hatchet_08_Name	Heavy Throw
+PERK_Hatchet_09_Name	Whirling Axe
+PERK_Hatchet_10_Name	Hasty Pick-up
+Hatchet_MASTERY_1_Name	Always Armed
+Hatchet_MASTERY_1_Desc	Throw or recover the Favorite during each of your turns
+Hatchet_MASTERY_2_Name	Keep It Moving
+Hatchet_MASTERY_2_Desc	During each round in which there is at least one enemy on the map at the start of your turn, throw the Favorite at an enemy or return it to your ability card
+Event_GH.Hatchet_Text	The Hatchet has a new coat. It is dark green, cut in the Capital style, and entirely wrong for Frosthaven, which he knows perfectly well. He wears it to the gate anyway, the Favorite hanging at his hip where the fashion says a sword should go.\n"A troupe is going south with the caravan," he says. "Knife throwers, fire eaters, that sort of thing. They lost their axe man in a tavern in the Capital. I told them I could be worse." He grins, which the coat was clearly bought for. "Nobody in a crowd ever throws back. I could get used to that."\nHe looks at the wall for a moment, the way everyone does before they go, then pulls the Favorite and throws it. It buries itself in the gatepost at head height, a hair from the guard's ear. The guard does not flinch; the Hatchet taught him not to, over a long winter of exactly this.\nHe walks over, works the axe free, kisses the blade, and goes. The notch stays in the post. New recruits are told to stand with their heads against it, and never told why.
+Event_GH.Hatchet_Name	Hatchet Retires
+Hatchet_FullName	Hatchet
+CODEX_Hero_Hatchet_Title	Hatchet
+Hatchet_DESCRIPTION	While any normal Inox may be valued in Gloomhaven for their brute strength and endurance with manual labour, if you want to be a successful mercenary in the city, sometimes a little more finesse is required. Hatchets have fully embraced life in the city, outfitting themselves in the latest fashions. It is all a bit of a front though, as their true passion lies in their arsenal. No one is a better marksman with a throwing axe, and if anybody wants to challenge their claim, they had better be prepared for a duel to the death!
+CODEX_HeroInfo_Hatchet	<b>Role:</b> Ranged Damage\n<b>Difficulty:</b> Low\n\nYour signature is <b>The Favorite</b>, your best axe. Some attacks throw it at an enemy, where it stays: your attacks against that enemy are stronger while it carries the axe, and a few cards let you take it back.\n\nYou fight from range, throwing axes at 3 or 4 hexes. <sprite name=CreateAir> extends your range and adds pushes, extra movement or a second attack.\n\nKilling an enemy fuels your next moves: several cards give you extra movement, healing or <sprite name=Strengthen> after a kill. Your attacks can also <sprite name=Wound>, and you have good loot.\n\n<b>Strengths:</b>\n• Great Ranged Damage\n• Reasonable array of varied secondary abilities\n• Has a couple of Favourite Axes\n\n<b>Weaknesses:</b>\n• Should try and keep out of the front line\n• Needs to go pick his axes up after use\n• Hasn't been able to remove their hat since childhood
+PERK_Mindthief_01_Name	Nimble
+PERK_Mindthief_02_Name	Hobbling Bite
+PERK_Mindthief_03_Name	Steadied
+PERK_Mindthief_04_Name	Mind Pull
+PERK_Mindthief_05_Name	Confusion
+PERK_Mindthief_06_Name	Sharpened Claws
+PERK_Mindthief_07_Name	Cold Snap
+PERK_Mindthief_08_Name	Frenzy
+PERK_Mindthief_09_Name	Stunning Blow
+PERK_Mindthief_10_Name	Disarming Trick
+PERK_Mindthief_11_Name	Unfazed
+PERK_Mindthief_12_Name	Lying Low
+Mindthief_MASTERY_1_Name	Thought Thief
+Mindthief_MASTERY_1_Desc	Trigger the on-attack effect of four different Augments thrice each
+Mindthief_MASTERY_2_Name	Untouchable
+Mindthief_MASTERY_2_Desc	Never be targeted by an attack
+Event_GH.Mindthief_Text	The rats go first. For three days the outpost's granary is quieter than anyone can remember, and the Craftsman, who has fought the vermin for years, walks around looking cheated. Then the Mindthief comes to find you, a swarm's worth of small warm bodies gone from the folds of her cloak, and tells you she has sent them ahead.\n"There is a nest in the Copperneck," she says, "a big one. They have been talking about it for a month." You ask who. She looks at you the way she looks at anyone who asks a question she has already answered in their head. "The rats."\nShe leaves you her blade, the thin wicked one, and with it a thought she presses into you so firmly that you still feel it years later whenever you draw it: nothing in front of you is as dangerous as what is behind it. You have never been sure whether it was advice or a joke at your expense.\nBy the time the Craftsman has finished celebrating, every rat in Frosthaven is back, and the granary is exactly as it was. The Mindthief is not.
+Event_GH.Mindthief_Name	Mindthief Retires
+GH.Mindthief-1_Front	Walking near Gloomhaven Square, you see a peculiar scene. A group of guards is dragging along a Vermling in tattered robes toward the Ghost Fortress. Getting a little closer, you\nrecognize the Mindthief.\n\n“Hssss,” she spits. “Why do you do this? I came to you! I tell you that this town is being poisoned, and you respond by imprisoning me?”\n\n“We’ll see what the Captain of the Guard has to say about this,” one of her captors says. “Keep moving!”
+GH.Mindthief-1_Option_1	Intervene with the guards and find out what is going on.
+GH.Mindthief-1_Option_1_Outcome	The guards look incredibly perturbed when you step in front of them and ask that they leave the Mindthief to you. After some effort, they begrudgingly hand her over. The Mindthief thanks you, explaining that her colony in the sewers is being poisoned, and the poison is quickly migrating to the city’s water supply. She says she’s tracked the source to a small cove along the Hook Coast.
+GH.Mindthief-1_Option_2	Let the guards continue their business and just continue with yours.
+GH.Mindthief-1_Option_2_Outcome	The Mindthief flicks her tail and throws insults around, but it doesn’t seem to have any positive effect. She is led away and out of view. You get about your business, hoping that bit about the town being poisoned wasn’t too serious.
+GH.Mindthief-2_Front	A single Vermling jumps out of the brush at you, surprising you briefly. Within moments, though, you have your weapons out and pressed against his throat.\n\n“EEEEEEEeeeahh!” The Vermling drops his weapon and cowers. “No attack! My brothers in the bushes say you had stink of city-dwelling outcast on you. I wanted to be sure.”\n\nThe Vermling waves his hands. “It’s not bad! Just curious. Being stinky city-dwelling outcast is fine. Please, don’t hurt me!”
+GH.Mindthief-2_Option_1	Move on, leave the strange Vermling in peace.
+GH.Mindthief-2_Option_1_Outcome	“Stink very faint,” the Vermling continues as you walk on. “Outcast no longer with you, but I still smell it!”\n\nHe then jumps back into the brush. Vermlings are very odd creatures.
+GH.Mindthief-2_Option_2	Kill the savage little beast.
+GH.Mindthief-2_Option_2_Outcome	You attack the Vermling anyway, despite his protests. It turns out he wasn’t lying about his “brothers” nearby, though. As you wipe the blood from your blade, ten more of the little furry creatures jump out at you, brandishing small knives. They are not nearly as easy to dispatch.
+GH.Mindthief-3_Front	“I assume you are aware of an increased amount of sickness in the city.”\n\nYou were summoned to the Ghost Fortress and now stand before the Captain of the Guard.\n\n“We believe it could have something to do with a poisoning threat brought to our attention by your Mindthief friend a while ago. We ignored it, but now she is nowhere to be found, the Hook Coast is a bed of disease, and Gloomhaven proper is on its way there, too.”\n\nHe looks at you firmly. “I need you to head down to the Hook Coast and figure out what is going on. Then eliminate the source of the poison."
+GH.Mindthief-3_Option_1	Agree to help.
+GH.Mindthief-3_Option_1_Outcome	The Hook Coast is outside the walls of Gloomhaven and can be a dangerous place. And since this spread of poison, the city has become even more defenseless than normal. You hope you’ll be able to find a solution to the problem quickly.
+GH.Mindthief-3_Option_2	Tell the captain to fix his own problem.
+GH.Mindthief-3_Option_2_Outcome	The Captain of the Guard sighs.\n\n“I really thought you were the ones for the job. What business could you possibly have that is more important than making sure this city is safe?”\n\nHe holds up his hand. “No matter. Fine, just get out of here! We will deal with this ourselves.”
+Mindthief_FullName	Mindthief
+CODEX_Hero_Mindthief_Title	Mindthief
+CODEX_HeroInfo_Mindthief	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> High\n\nYou use <b>augments</b>: lasting cards that add an effect to every melee attack you make, such as extra damage, healing, <sprite name=Shield>, <sprite name=Poison> or <sprite name=Stun>. Only a limited number can be active at once, so choose the ones that suit the fight.\n\nYour other strength is control. Several cards make an enemy attack itself or its neighbour, or move where you want it, and a few let you command an ally.\n\nYour attacks hit harder against enemies with negative conditions. <sprite name=CreateIce> and <sprite name=CreateDark> add stuns and extra attacks. You move fast and can summon rats, but you are fragile.\n\n<b>Strengths:</b>\n• Powerful Augment effects on melee attacks\n• Mind-control powers\n• Access to summons\n\n<b>Weaknesses:</b>\n• Fragile melee character\n• Managing Augments can be fiddly\n• Often confused for a giant rat
 PERK_Nightshroud_01_Name	Light Step
 PERK_Nightshroud_02_Name	Shadow Step
 PERK_Nightshroud_03_Name	Wide Reach
@@ -1862,56 +1893,65 @@ Nightshroud_FullName	Nightshroud
 CODEX_Hero_Nightshroud_Title	Nightshroud
 Nightshroud_DESCRIPTION	With the ability to cloak themselves in shadow and pass through the world unseen, Nightshrouds are deadly stalkers, using blades and stealth to eliminate any target. Rather than working with other races to gather knowledge, Nightshrouds prefer to pry the knowledge from their cold, dead fingers.
 CODEX_HeroInfo_Nightshroud	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> Medium\n\nDarkness is your fuel. Most of your cards create <sprite name=CreateDark> or spend it, and spending it is what turns a good turn into a great one. <i>Nightfall</i> keeps Dark flowing every turn, so it is worth getting out early.\n\nYour other tool is <sprite name=Invisible>. Many of your attacks hit harder or add effects while you are unseen, so plan your turns around becoming invisible, striking, and slipping away before enemies can answer.\n\nYour attacks can <sprite name=Muddle>, <sprite name=Poison>, <sprite name=Curse> and <sprite name=Stun> enemies, and a few Dark-fuelled ones, like <i>Spirit of the Night</i>, kill a normal enemy outright. You fight up close and are fairly fragile, so use your long moves and jumps to pick your fights, and avoid crowds while you can be seen.\n\n<b>Strengths:</b>\n• Powerful execution abilities\n• Can use Invisibility to avoid damage\n• Uses Dark to enhance his abilities\n\n<b>Weaknesses:</b>\n• Poor ranged options\n• Doesn't assist allies much\n• Finds making friends difficult
-PERK_Berserker_01_Name	Light Step
-PERK_Berserker_02_Name	Steady Hand
-PERK_Berserker_03_Name	Open Wounds
-PERK_Berserker_04_Name	Reckless Swing
-PERK_Berserker_05_Name	Burning Rage
-PERK_Berserker_06_Name	Concussion
-PERK_Berserker_07_Name	Disarming Blow
-PERK_Berserker_08_Name	Second Wind
-PERK_Berserker_09_Name	Thick Skin
-PERK_Berserker_10_Name	Rapid Recovery
-Berserker_MASTERY_1_Name	Bloodlust
-Berserker_MASTERY_1_Desc	Lose at least one hit point during each of your turns, without ever performing the bottom action of Blood Pact
-Berserker_MASTERY_2_Name	Living on the Edge
-Berserker_MASTERY_2_Desc	Have exactly one hit point at the end of each of your turns
-Event_GH.Berserker_Text	The Berserker is in the Tavern, which is not news, and she is sober, which is. There is a bandage on her arm and a letter on the table in front of her, read so many times the folds have gone soft.\n"My sister," she says, pushing it toward you. "The clan is moving the herds south before the snows. She asks if the one who ran off to get herself killed would like to come home instead." She takes the letter back before you can finish it. "She has a way with words."\nYou ask about the arm. She shrugs: it will heal, they always do, that was never the problem. The problem was that for a long time she did not mind whether they did. "Not any more," she says, and looks surprised to hear it out loud.\nShe leaves the next morning with the trade caravan, walking beside the wagons rather than riding, because sitting still was never going to happen. At the bend in the road she turns and raises the bandaged arm, once, and then she is gone into the white.
-Event_GH.Berserker_Name	Berserker Retires
-GH.Berserker-1_Front	Walking near the northern gates, you see some commotion as a group of wounded guards is ushered into town.\n\nThey look pretty bad off, suffering from many severe wounds. Some even have lost limbs.\n\nBringing up the rear, one guard is carried in by a couple of others. He’s missing a leg and has a vicious-looking axe embedded in his side. You realize that the axe looks kind of familiar.
-GH.Berserker-1_Option_1	Let the guards know you recognize the Berserker’s axe.
-GH.Berserker-1_Option_1_Outcome	You approach the wounded detail, explaining how that axe belonged to a former member of your party.\n\n“Yeah, we know,” one of them says with an icy stare. “Said we were desecrating her land or some such nonsense and just went crazy. But we weren’t doing anything but patrolling! Quite a piece of work your friend. Just take the axe if you want and get out of here.”
-GH.Berserker-1_Option_2	Stay silent and keep out of it.
-GH.Berserker-1_Option_2_Outcome	You casually move on, wondering how the guards found themselves on the wrong side of the Berserker’s rage. It probably wasn’t very difficult.
-GH.Berserker-2_Front	You hear the distinctive sound of metal-on-metal in the distance and race up a hill in the road to investigate.\n\nIn front of you, you see a familiar female Inox in heated battle with a group of Gloomhaven guards. Though outnumbered and bloodied, you’ve never seen that stop the Berserker before. With every wound they inflict, she becomes more and more enraged, cleaving off limbs with the ease of cutting grass.
-GH.Berserker-2_Option_1	Help the Berserker fight off the guards.
-GH.Berserker-2_Option_1_Outcome	You enter the battle to aid the Berserker, but in her blood rage, she can’t distinguish friend from foe. She begins hacking away at you with her axe as much as she swings at the guards. You concentrate on taking out the remaining guards, but when you turn back to the Berserker, she seems to have vanished into the nearby forest.
-GH.Berserker-2_Option_2	Wait and see what happens. It looks like she's handling herself well enough.
-GH.Berserker-2_Option_2_Outcome	After a brutal and bloody fight, only the Berserker remains standing. After her blood rage subsides, she collapses from exhaustion. You race to her side and attempt to revive her using a number of powerful potions. She finally awakes and expresses her begrudging gratitude. You ask about the fight, but she just shakes her head. She offers her axe as thanks and then dashes off into the forest.
-Berserker_FullName	Berserker
-CODEX_Hero_Berserker_Title	Berserker
-Berserker_DESCRIPTION	Berserkers are Inox warriors who have embraced their strength and fury. The Berserker will go to any lengths to keep her friends safe, including sacrificing her own life. Her abilities revolve around high damage output with the option of self-damage to push to even higher amounts. This makes her an extremely dangerous combatant, both to her enemies and herself.
-CODEX_HeroInfo_Berserker	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> High\n\nYour health is a resource, not just a lifeline. Many of your attacks get stronger the more health you have lost, or once you drop below half, and several cards let you suffer a little damage to make an attack hit harder.\n\nYour defences are built for living on the edge: <i>Defiance of Death</i> softens a blow that would knock you out, and other cards boost the healing you receive or strike back whenever you are hurt. Keep a healer close, or plan your own heals.\n\n<sprite name=CreateFire> powers some of your attacks, and your blows often add <sprite name=Wound>.\n\n<b>Strengths:</b>\n• One of the highest damage-dealing classes\n• Gets even stronger on lower health\n• Can lead the front line and draw enemy fire\n\n<b>Weaknesses:</b>\n• Little in the way of abilities that help allies\n• Operating on low health can lead to premature demise\n• Has anger management issues
-PERK_Hatchet_01_Name	Steady Hands
-PERK_Hatchet_02_Name	Stunning Blow
-PERK_Hatchet_03_Name	Stunning Strike
-PERK_Hatchet_04_Name	Jagged Edge
-PERK_Hatchet_05_Name	Tainted Edge
-PERK_Hatchet_06_Name	Pinning Throw
-PERK_Hatchet_07_Name	Dizzying Blow
-PERK_Hatchet_08_Name	Heavy Throw
-PERK_Hatchet_09_Name	Whirling Axe
-PERK_Hatchet_10_Name	Hasty Pick-up
-Hatchet_MASTERY_1_Name	Always Armed
-Hatchet_MASTERY_1_Desc	Throw or recover the Favorite during each of your turns
-Hatchet_MASTERY_2_Name	Keep It Moving
-Hatchet_MASTERY_2_Desc	During each round in which there is at least one enemy on the map at the start of your turn, throw the Favorite at an enemy or return it to your ability card
-Event_GH.Hatchet_Text	The Hatchet has a new coat. It is dark green, cut in the Capital style, and entirely wrong for Frosthaven, which he knows perfectly well. He wears it to the gate anyway, the Favorite hanging at his hip where the fashion says a sword should go.\n"A troupe is going south with the caravan," he says. "Knife throwers, fire eaters, that sort of thing. They lost their axe man in a tavern in the Capital. I told them I could be worse." He grins, which the coat was clearly bought for. "Nobody in a crowd ever throws back. I could get used to that."\nHe looks at the wall for a moment, the way everyone does before they go, then pulls the Favorite and throws it. It buries itself in the gatepost at head height, a hair from the guard's ear. The guard does not flinch; the Hatchet taught him not to, over a long winter of exactly this.\nHe walks over, works the axe free, kisses the blade, and goes. The notch stays in the post. New recruits are told to stand with their heads against it, and never told why.
-Event_GH.Hatchet_Name	Hatchet Retires
-Hatchet_FullName	Hatchet
-CODEX_Hero_Hatchet_Title	Hatchet
-Hatchet_DESCRIPTION	While any normal Inox may be valued in Gloomhaven for their brute strength and endurance with manual labour, if you want to be a successful mercenary in the city, sometimes a little more finesse is required. Hatchets have fully embraced life in the city, outfitting themselves in the latest fashions. It is all a bit of a front though, as their true passion lies in their arsenal. No one is a better marksman with a throwing axe, and if anybody wants to challenge their claim, they had better be prepared for a duel to the death!
-CODEX_HeroInfo_Hatchet	<b>Role:</b> Ranged Damage\n<b>Difficulty:</b> Low\n\nYour signature is <b>The Favorite</b>, your best axe. Some attacks throw it at an enemy, where it stays: your attacks against that enemy are stronger while it carries the axe, and a few cards let you take it back.\n\nYou fight from range, throwing axes at 3 or 4 hexes. <sprite name=CreateAir> extends your range and adds pushes, extra movement or a second attack.\n\nKilling an enemy fuels your next moves: several cards give you extra movement, healing or <sprite name=Strengthen> after a kill. Your attacks can also <sprite name=Wound>, and you have good loot.\n\n<b>Strengths:</b>\n• Great Ranged Damage\n• Reasonable array of varied secondary abilities\n• Has a couple of Favourite Axes\n\n<b>Weaknesses:</b>\n• Should try and keep out of the front line\n• Needs to go pick his axes up after use\n• Hasn't been able to remove their hat since childhood
+PERK_Plagueherald_01_Name	Steady Focus
+PERK_Plagueherald_02_Name	Virulence
+PERK_Plagueherald_03_Name	Lethal Strain
+PERK_Plagueherald_04_Name	Airborne
+PERK_Plagueherald_05_Name	Toxic Touch
+PERK_Plagueherald_06_Name	Paralysis
+PERK_Plagueherald_07_Name	Numbing Agent
+PERK_Plagueherald_08_Name	Hex
+PERK_Plagueherald_09_Name	Unfazed
+PERK_Plagueherald_10_Name	Xorn's Boon
+Plagueherald_MASTERY_1_Name	Silent Killer
+Plagueherald_MASTERY_1_Desc	Kill at least five enemies with non-attack abilities
+Plagueherald_MASTERY_2_Name	Pandemic
+Plagueherald_MASTERY_2_Desc	Perform three different attack abilities that target at least four enemies each
+Event_GH.Plagueherald_Text	The Alchemist finds you first, which tells you something has gone wrong before she says a word. "Your Harrower friend," she says, "has been in my stillroom all night. I would like them out of it. I would also like to know what they left in the third jar from the end."\nYou find the Plagueherald on the roof of the Alchemist's, the swarm settled over them like a shawl, watching the sun come up over the bay. They do not turn around. "The jar is a cure," they say. "For the cough the lumber crews have. She will work it out in a month; I have saved her the month."\nThey are leaving. The hive has decided, they explain, and a Harrower does not argue with the hive. Somewhere warmer, somewhere with more rot to feed on; they say it the way someone else would mention the weather.\nThe swarm lifts off the roof all at once, a dark sheet that folds and is gone over the water. The cough is gone from the crews by the end of the week. The Alchemist still will not open the third jar.
+Event_GH.Plagueherald_Name	Plagueherald Retires
+GH.Plagueherald-1_Front	You have been hearing rumors in the bars: a pox is spreading through Gloomhaven, affecting lower class citizens—street urchins and backalley thugs.\n\nAnd then one night you see it: a Harrower dressed in a ragged green cloak holding a man down in an alley as its swarm spreads out and consumes him. The man’s screams are muffled as the insects skitter down his throat.\n\nKilling monsters and demons is one thing, but the Plagueherald shouldn’t be preying on people in the city. You approach it, intent on stopping its attack.
+GH.Plagueherald-1_Option_1	Calmly explain the situation to the Plagueherald, imploring it to move on.
+GH.Plagueherald-1_Option_1_Outcome	With the man dead at its feet, the Plagueherald makes a chittering sound that sounds almost like laughing.\n\n“You cannot see it, but this city needs to be cleansed. You will see, and you will thank me.”\n\nAt this, the Plagueherald bursts out into a massive swarm of insects and flies up into the sky.\n\nThe deaths continue, and new rumors start about how you are associated with the killer.
+GH.Plagueherald-1_Option_2	Threaten the Plagueherald with retribution if it doesn’t stop attacking residents.
+GH.Plagueherald-1_Option_2_Outcome	The Plagueherald recoils at your threat, genuinely concerned that you would attack it.\n\n“But, the cleansing...the city isn’t ready.”\n\nYou shake your head, and the Harrower chitters in disappointment.\n\n“Very well, but you will be responsible when the Harbinger comes.” It turns and floats off into the darkness.
+GH.Plagueherald-2_Front	You smell the corpses before you see them. A group of five or so, spread across the road, flies buzzing around in a frenzy.\n\nAs you get closer, you see the wretched, deformed looks on their faces and the boils covering their skin. You also see their crude armor and weapons—likely a group of cutthroats.\n\nWhat is truly odd, though, is that their weapons are out of their sheaths in the first place. It appears they were engaged in battle when they suddenly succumbed to some horrible disease.\n\nYou can think of at least one way that could have happened. Fine handiwork from the Plagueherald.
+GH.Plagueherald-2_Option_1	Leave the corpses alone.
+GH.Plagueherald-2_Option_1_Outcome	Knowing better than to get too close to the machinations of the Plagueherald, you keep a wide berth between you and the corpses and continue down the road.
+GH.Plagueherald-2_Option_2	Inspect the corpses for valuables.
+GH.Plagueherald-2_Option_2_Outcome	You rifle through the corpses, grabbing stray coins and valuables as you go. You make off with a good haul, but you start feeling sick as soon as you’re done.
+Plagueherald_FullName	Plagueherald
+CODEX_Hero_Plagueherald_Title	Plagueherald
+Plagueherald_DESCRIPTION	Either misguided or ignorant of other races’ physiology, Plagueheralds believe that the spread of disease throughout a society will strengthen it and propel it towards great things. One should be wary of allying with a Plagueherald. Their ability to spread decay and death across both sides of a battlefield is a terrifying thing to behold.
+CODEX_HeroInfo_Plagueherald	<b>Role:</b> Ranged Damage/Support\n<b>Difficulty:</b> Medium\n\nSickness is your weapon. You attack from range, often in large clouds, and most of your attacks <sprite name=Poison>, <sprite name=Immobilize>, <sprite name=Stun> or <sprite name=Muddle> everything they touch.\n\nSpread <sprite name=Poison> first, then cash it in: cards like <i>Succumb to the Gift</i> kill a poisoned enemy outright, and others deal damage to every poisoned enemy at once. <sprite name=Curse> is your second tool, and <sprite name=CreateAir> powers a few of your strongest effects.\n\nYou are fragile and have little protection, so keep your distance and let the poison do the work.\n\n<b>Strengths:</b>\n• Can often target multiple enemies\n• Effective at range\n• Powerful debuffs utilizing Curse and Poison\n\n<b>Weaknesses:</b>\n• High potential for friendly fire\n• Low effectiveness versus single large targets\n• Harrower mating rituals are... unpleasant
+PERK_Quartermaster_01_Name	Steady Supply
+PERK_Quartermaster_02_Name	Armor Piercing
+PERK_Quartermaster_03_Name	Sweeping Blow
+PERK_Quartermaster_04_Name	Heavy Hands
+PERK_Quartermaster_05_Name	Resupply
+PERK_Quartermaster_06_Name	Drilled
+PERK_Quartermaster_07_Name	Concussion
+PERK_Quartermaster_08_Name	Well Fitted
+PERK_Quartermaster_09_Name	Well Supplied
+Quartermaster_MASTERY_1_Name	Supply Lines
+Quartermaster_MASTERY_1_Desc	Spend, lose or refresh one or more items on each of your turns, without ever performing the top action of Reinforced Steel
+Quartermaster_MASTERY_2_Name	Pack Mule
+Quartermaster_MASTERY_2_Desc	Loot six or more loot tokens in a single turn
+Event_GH.Quartermaster_Text	The Quartermaster spends his last week in Frosthaven doing inventory. Not his own: the outpost's. By the end of it every storeroom has a ledger, every ledger has a system, and the Craftsman has stopped arguing and started taking notes.\n"A party without supplies is a funeral with extra steps," he tells you over the last of his good wine. "You lot will be fine. You have the ledgers now." He taps the stack like a man patting a dog.\nHe has a contract waiting in the Capital, outfitting a merchant house, and he is honest enough to admit the pay is obscene. He is also honest enough to look back at the walls for a long moment before he goes.\nHis pack is the last thing to leave, strapped to a sled and roped like a siege engine. The Craftsman swears the storerooms have never been so tidy, and never will be again.
+Event_GH.Quartermaster_Name	Quartermaster Retires
+GH.Quartermaster-1_Front	“Your Quartermaster friend sent me.” You look quizzically at the Valrath standing at your door.\n\n“I’m from the Capital, and I deal in arms and armor,” he says. “I’m looking to set up a contract with the Frosthaven guard, and our friend says that you may have some contacts with them. He suggested I meet up with you once I got here.”\n\nThe Valrath shifts his feet nervously. “So, can you help me?”
+GH.Quartermaster-1_Option_1	Agree to help him make contact with the guard.
+GH.Quartermaster-1_Option_1_Outcome	You take the Valrath over to the Barracks, where you make introductions to the captain of the guard. The captain seems skeptical at first, but admits that they could use an additional supply of weapons. Terms are made, and a contract is signed.
+GH.Quartermaster-1_Option_2	Demand a finder’s fee for setting him up with buyers.
+GH.Quartermaster-1_Option_2_Outcome	The Valrath looks at you with trepidation, but after some persuasion, you get him to agree.
+GH.Quartermaster-2_Front	You are approached on the road by a group of men on horseback. They don’t immediately seem menacing, but they are formidable and well organized.\n\nOne of the men, who wears plate armor and has a sword at his side, addresses you coldly. “You hail from Frosthaven, correct? What say you about the politics of the place? Are you for or against military rule in the region? Do you think those fool merchants could do a better job, like they’re doing with the rest of this doomed land?”\n\nLooking closer, you see all the men wear the signet of a tower with an eye at its center.
+GH.Quartermaster-2_Option_1	Claim allegiance to the military.
+GH.Quartermaster-2_Option_1_Outcome	The armored men seem satisfied with your response and take their hands off their weapons.\n\n“Good to find some fellow patriots,” the one in front says with a disturbing smile. “You know, we have a stronghold not far from here up in the mountains. Feel free to visit there if you ever get serious about your loyalties.”
+GH.Quartermaster-2_Option_2	Claim allegiance to the merchant guilds.
+GH.Quartermaster-2_Option_2_Outcome	“Well then, today’s your unlucky day,” the man in front says. “Because we of the Vigil make it a point to execute any and all commerce sympathizers we can find in this land.”\n\nThe men grimly draw swords and advance. After a hard battle, the survivors retreat, leaving you to pick through the corpses. Among the loot you find a map.
+Quartermaster_FullName	Quartermaster
+CODEX_Hero_Quartermaster_Title	Quartermaster
+Quartermaster_DESCRIPTION	Skilled Valrath Quartermasters are known for aiding adventuring parties in maximizing the effectiveness of their equipment. After all, what is a warrior without a good sword at his side?
+CODEX_HeroInfo_Quartermaster	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Medium\n\nItems are your resource. Many of your cards refresh spent items, for you or for the whole party, so do not be shy about using them. <i>Proficiency</i> makes your attacks stronger in any action where you used an item.\n\nYour weapons are your cards: axe and spear sweeps up close, a bow at range, and one-use scrolls with the biggest effects in your deck. Save those scrolls for the moments that matter, since they are lost once used.\n\nYou also support the party with <sprite name=Attack> and <sprite name=Shield> bonuses, healing, and cards that give allies their discarded cards back.\n\n<b>Strengths:</b>\n• Many item refreshing abilities\n• Moderate offensive and defensive capabilities\n• Jack of all trades\n\n<b>Weaknesses:</b>\n• Master of none\n• Weaker when party lacks good equipment\n• Always packs too much luggage
 PERK_RedGuard_01_Name	Steady Guard
 PERK_RedGuard_02_Name	Unshaken
 PERK_RedGuard_03_Name	Barbed Sickle
@@ -1932,118 +1972,79 @@ RedGuard_FullName	Red Guard
 CODEX_Hero_RedGuard_Title	Red Guard
 RedGuard_DESCRIPTION	There is a specific caste in the Valrath capital of Jhinda tasked with protecting the city. It is a prestigious position and one not easily lived up to. Outcast from Jhinda for unknown crimes, the Red Guard found it too difficult to part from their identity as a protector, keeping the distinctive red armor, as well as their chained sickle and shield. The only place to find work was as a mercenary in Gloomhaven, and maybe, just maybe, by standing on the front lines and keeping their allies from harm, the Red Guard will find some way to redeem themselves. Not in the eyes of the Jhinda culture, which has permanently turned its back, but at least within their own esteem.
 CODEX_HeroInfo_RedGuard	<b>Role:</b> Tank\n<b>Difficulty:</b> Low\n\nYou hold the front line with shield and sickle. Your sickle attacks reach two hexes and often <sprite name=Pull> enemies to you or <sprite name=Immobilize> them, and many cards give you <sprite name=Shield> or hurt every enemy standing next to you.\n\nYou use two elements. <sprite name=CreateFire> adds <sprite name=Wound>, larger areas and stronger pulls; <sprite name=CreateLight> adds attack, shields, <sprite name=Muddle> and extra movement. Keep both flowing.\n\nPull enemies into your reach and keep them busy so your allies do not have to.\n\n<b>Strengths:</b>\n• Array of Melee attacks plus some Ranged\n• Combination of Shield and direct damage dealing close up\n• Wide Initiative range enables 'double turns'\n\n<b>Weaknesses:</b>\n• Outside of damage, doesn't have many options\n• May struggle against single larger enemies\n• Really, and I mean REALLY, likes the colour Red
-PERK_Voidwarden_01_Name	Steady Will
-PERK_Voidwarden_02_Name	Unwavering
-PERK_Voidwarden_03_Name	Mending Touch
-PERK_Voidwarden_04_Name	Mending Hands
-PERK_Voidwarden_05_Name	Blight
-PERK_Voidwarden_06_Name	Hex
-PERK_Voidwarden_07_Name	Cold Void
-PERK_Voidwarden_08_Name	Dark Void
-PERK_Voidwarden_09_Name	Focused Will
-PERK_Voidwarden_10_Name	Unfazed
-PERK_Voidwarden_10_Desc	Ignore negative scenario effects
-PERK_Voidwarden_11_Name	Grave Defense
-PERK_Voidwarden_11_Desc	Whenever you rest, you may <sprite name=ConsumeIce> or <sprite name=ConsumeDark> to give <sprite name=Ward> to one ally who has <sprite name=Poison>
-Voidwarden_MASTERY_1_Name	Puppet Master
-Voidwarden_MASTERY_1_Desc	Cause enemies to suffer <sprite name=Damage> 20 or more in a single turn with granted or commanded attacks
-Voidwarden_MASTERY_2_Name	Touched by the Void
-Voidwarden_MASTERY_2_Desc	Give at least one ally or enemy <sprite name=Poison>, <sprite name=Strengthen>, <sprite name=Bless>, or <sprite name=Ward> each round
-Event_GH.Voidwarden_Text	The Voidwarden has been filling a jar with black sand. A pinch at a time, after every scenario, from wherever the Void touched the world through her and left its coarse, dark residue behind. The jar is nearly full. "That is the measure of it," she says, turning it in the light. "Everything I ever made disappear. It does not look like much."\nShe is going to the Capital, to the archives, to write down what she knows. "No one who touches the Void lives long enough to teach the next one. I intend to be the exception." She says it without drama; the scars down her left side say the rest.\nShe leaves the jar with the Alchemist, with a label in her small, exact hand: DO NOT OPEN. The Alchemist, who has opened everything else anyone ever left her, puts it on the highest shelf and does not touch it.\nThe morning the caravan goes, the sick in the Infirmary are quieter than usual, and the healers find every one of them a little better than the day before. Nobody saw her go in.
-Event_GH.Voidwarden_Name	Voidwarden Retires
-Voidwarden_FullName	Voidwarden
-CODEX_Hero_Voidwarden_Title	Voidwarden
-Voidwarden_DESCRIPTION	The Void is a dangerous and terrible place. Anything that enters it dissolves into a coarse, black sand without explanation or remorse. After a near-death experience with the Void as a child which scarred the left side of their body, the Voidwarden made it their duty to protect others from a similar fate. Being touched by the Void has left more than just physical scars however. They can channel the power behind the Void to manipulate the thoughts and actions of both allies and foes. The Voidwarden can also offer powerful boons of healing and stamina, but those gifts comes at a terrible price.
-CODEX_HeroInfo_Voidwarden	<b>Role:</b> Crowd Control\n<b>Difficulty:</b> High\n\nYou rarely attack yourself. Instead you take control of enemies, making them move or attack their own allies for an action, and you command your allies to <sprite name=Attack> or <sprite name=Move> on your turn.\n\nYour power has a price. Many of your heals and blessings also <sprite name=Poison> the ally you help, and some cards <sprite name=Curse> you unless you spend <sprite name=CreateDark>. Plan who you heal and when.\n\nYou create <sprite name=CreateDark> and <sprite name=CreateIce>; Ice makes your heals stronger. Your own few attacks pile on several conditions at once.\n\n<b>Strengths:</b>\n• Large starting hand size\n• Works better in larger parties\n• Wide array of bottom half abilities\n\n<b>Weaknesses:</b>\n• Generally slow character\n• Reasonably squishy\n• Complicated skincare regime
-PERK_Demolitionist_01_Name	Steady Fuse
-PERK_Demolitionist_02_Name	Trimmed Deck
-PERK_Demolitionist_03_Name	Toxic Fumes
-PERK_Demolitionist_04_Name	Concussion
-PERK_Demolitionist_05_Name	Bigger Blast
-PERK_Demolitionist_06_Name	Incendiary
-PERK_Demolitionist_07_Name	Seismic
-PERK_Demolitionist_08_Name	Shrapnel
-PERK_Demolitionist_09_Name	Hardened
-PERK_Demolitionist_10_Name	Remodeling
-Demolitionist_MASTERY_1_Name	Heavy Hitter
-Demolitionist_MASTERY_1_Desc	Deal <sprite name=Damage> 10 or more with each of three different attack actions
-Demolitionist_MASTERY_2_Name	Clean Sweep
-Demolitionist_MASTERY_2_Desc	Destroy at least six obstacles. End the scenario with no obstacles on the map other than ones placed by allies
-Event_GH.Demolitionist_Text	The explosion wakes the whole outpost an hour before dawn. By the time you reach the harbor the Demolitionist is standing on the ice, or what is left of it, surrounded by delighted fishermen. The channel that has been frozen shut since midwinter is open water.\n"You said the boats could not get out," she says, as if that settled it. The rocket boots are smoking gently. The mech suit stands on the quay behind her like a patient dog.\nThe foreman from the mine has been watching from the harbor wall. He has a seam that will not open and a crew that is tired of picks, and he offers her the job before the ice has stopped moving. She considers it for as long as it takes to reload. "Things that need breaking," she says. "I can do that."\nShe takes the suit up the mountain road the next day, the fists folded, the whole contraption leaving prints like a bear in the snow. Twice a week, for years afterwards, a dull thump rolls down from the mine, and the whole of Frosthaven looks up and smiles.
-Event_GH.Demolitionist_Name	Demolitionist Retires
-Demolitionist_FullName	Demolitionist
-CODEX_Hero_Demolitionist_Title	Demolitionist
-Demolitionist_DESCRIPTION	Even when augmenting themselves with machines of their own creation to destroy anything that stands in their path, Quatryls will still do it with charm and flair. Though they may be small, Demolitionists don't let that hold them back in the least. Between their rocket boots, multitude of bombs, and giant piston fists, they are a force to be reckoned with. Sometimes the only path forward is the one they create themselves. In such cases, it is best to get out of their way.
-CODEX_HeroInfo_Demolitionist	<b>Role:</b> Melee Damage \n<b>Difficulty:</b> Medium\n\nWalls and obstacles are your playground. Many of your cards destroy obstacles, and each destruction pays off with damage, <sprite name=Strengthen>, <sprite name=Bless> or <sprite name=Shield>. Enemies standing next to a wall also take extra damage from several of your attacks.\n\nAt level 5 you gain the <b>Mech Suit</b>, a lasting transformation: you change shape, gain extra health and a shield, and recover cards.\n\n<sprite name=CreateFire> and <sprite name=CreateEarth> add damage, <sprite name=Muddle>, <sprite name=Poison> and pushes. Your attacks are mostly up close, and some can <sprite name=Stun>.\n\n<b>Strengths:</b>\n• Many Direct Damage abilities to smash through Shields\n• Access to Abilities with STUN\n• Great at affecting the combat area\n\n<b>Weaknesses:</b>\n• Small deck size\n• Limited healing options\n• Their gloves aren't the most practical everyday attire
-PERK_Spellweaver_01_Name	Composure
-PERK_Spellweaver_02_Name	Focus
-PERK_Spellweaver_03_Name	Winds and Stone
-PERK_Spellweaver_04_Name	Light and Shadow
-PERK_Spellweaver_05_Name	Searing Touch
-PERK_Spellweaver_06_Name	Binding Frost
-PERK_Spellweaver_07_Name	Thunderclap
-PERK_Spellweaver_08_Name	Hex
-PERK_Spellweaver_09_Name	Inferno
-PERK_Spellweaver_10_Name	Blizzard
-PERK_Spellweaver_11_Name	Unfazed
-PERK_Spellweaver_12_Name	Etheric Bond
-PERK_Spellweaver_12_Desc	Whenever you short rest, if Reviving Ether is in your discard pile, first return it to your hand
-Spellweaver_MASTERY_1_Name	Elemental Mastery
-Spellweaver_MASTERY_1_Desc	Infuse and consume all six elements
-Spellweaver_MASTERY_2_Name	Deep Reserves
-Spellweaver_MASTERY_2_Desc	Perform four different loss actions twice each
-Event_GH.Spellweaver_Text	The Spellweaver has been counting. You noticed it weeks ago: a small tally on the inside of her sleeve, a mark for every time Reviving Ether brought her cards back from the fire. "Thirty-one," she says, when you finally ask. "The sages say the ether forgives you nine times. After that, you are borrowing."\nShe is going home to the Orchid groves to pay it back, which as far as you can tell means sitting very still for a very long time. She does not seem to mind. "I have been loud enough," she says, and for a woman who once set a frozen lake on fire from the far shore, it is true.\nBefore she goes she walks the Alchemist's garden with the keeper, touching each bed in turn. Nothing visible happens. The following spring the garden comes up a week early and nobody can say why.\nShe leaves on foot, south, with a single staff and no coat, because the cold has never once been allowed to touch her and she sees no reason to start now.
-Event_GH.Spellweaver_Name	Spellweaver Retires
-GH.Spellweaver-1_Front	In the very early morning, you are wakened by a knock at your door. Standing behind it is giant, dirty Inox wearing a leather apron.\n\n“Oh, uh...ahem,” he coughs. “Sorry, I was looking for a female Orchid. She used to help me on occasion with my forge. Her control over fire was astounding and I paid her well for her assistance completing some of my specialty work.”\n\nHe scratches his head. “I guess she’s not around anymore. You wouldn’t happen to know where I could find someone who could help me in her absence, would you?”
-GH.Spellweaver-1_Option_1	Offer to help the blacksmith yourself.
-GH.Spellweaver-1_Option_1_Outcome	The Inox is completely dumbfounded when you walk all the way down to his forge and then proceed to exhibit zero aptitude at manipulating or controlling fire.
-GH.Spellweaver-1_Option_2	Direct him to the Savvas Elemental Guild and go back to sleep.
-GH.Spellweaver-1_Option_2_Outcome	“Ah, yes, that is probably a good idea,” he says. “Thanks for your time and I hope your friend the Spellweaver is doing well!”
-GH.Spellweaver-2_Front	Due to a late start, night falls before you can get to where you are going. You are on your guard throughout the night, but nothing can quite prepare you for a Night Demon attack.\n\nThey come upon you silent and invisible, so you are unaware of their presence until their claws sink into your flesh.\n\nThe darkness erupts into chaos with flashing swords and horrific shrieks. And then a bolt of fire streaks through the darkness and incinerates one of the demons.\n\nSomeone else is out there.
-GH.Spellweaver-2_Option_1	Renew your efforts to slay the demons.
-GH.Spellweaver-2_Option_1_Outcome	With the help of the mysterious firecaster, the battle turns and the demons are slain without much pain. Out of the darkness steps the familiar face of a female Orchid.\n\n“Sorry about that. I think they were looking for this.” The Spellweaver holds up a black censer. “It’s a good thing I ran into you, though. I could use your help.”\n\nShe draws out a crude map. “Meet me here as soon as you can, and I’ll explain more.”
-GH.Spellweaver-2_Option_2	Use the distraction to disengage from the demons and run away.
-GH.Spellweaver-2_Option_2_Outcome	This mysterious third party seems to have things under control, and the demons appear more interested in them anyway. You take the opportunity to retreat from the fight and run off into the night. You don’t feel great about it, but at least you’re alive.
-Spellweaver_FullName	Spellweaver
-CODEX_Hero_Spellweaver_Title	Spellweaver
-CODEX_HeroInfo_Spellweaver	<b>Role:</b> Ranged Damage\n<b>Difficulty:</b> High\n\nYour strongest spells are lost once you cast them. <i>Reviving Ether</i> brings every lost card back into your hand, so you can cast them all again; time it well, since it is lost too.\n\nYou use every element. Create them with your spells, then spend them for stronger attacks, <sprite name=Wound>, <sprite name=Stun>, extra healing, or invisibility.\n\nMost of your attacks are at range and many hit whole areas. You are fragile, so stay back and let your spells do the work.\n\n<b>Strengths:</b>\n• Good ranged damage dealing\n• Can recover Burned cards with Reviving Ether\n• Access to decent early ranged summon\n\n<b>Weaknesses:</b>\n• Low health, can die very fast\n• Requires complex Ability management for new Players\n• Crystal skin makes it difficult to find a good tailor
-PERK_Elementalist_01_Name	Steady Hands
-PERK_Elementalist_02_Name	Composure
-PERK_Elementalist_03_Name	Trimmed Deck
-PERK_Elementalist_04_Name	Wide Reach
-PERK_Elementalist_05_Name	Thunderclap
-PERK_Elementalist_06_Name	Searing Touch
-PERK_Elementalist_07_Name	Focused Power
-PERK_Elementalist_08_Name	Fire Affinity
-PERK_Elementalist_09_Name	Ice Affinity
-PERK_Elementalist_10_Name	Air Affinity
-PERK_Elementalist_11_Name	Earth Affinity
-PERK_Elementalist_12_Name	Unfazed
-PERK_Elementalist_13_Name	Elemental Proficiency
-Elementalist_MASTERY_1_Name	Elemental Focus
-Elementalist_MASTERY_1_Desc	Consume at least two different elements with each of four different attack abilities, without ever performing the bottom action of Formless Power or Shaping the Ether
-Elementalist_MASTERY_2_Name	Elemental Surge
-Elementalist_MASTERY_2_Desc	Infuse five or more elements during one of your turns, then consume five or more elements during your following turn
-Event_GH.Elementalist_Text	The Elementalist calls it balancing the ledger. Six elements, drawn and spent and drawn again over a winter of fighting, and the Savvas keep count of such things the way merchants keep count of coin. "I have taken more fire from this valley than I gave it," they say, standing at the frozen edge of the bay. "That is not a thing to leave behind."\nSo they give it back. For a week the outpost is warmer than it has any right to be in that season: the ice in the harbour rots, the lumber yard's frozen stack comes loose with a sound like a sigh, and the Infirmary's patients sleep without blankets for the first time since autumn.\nThen the Elementalist takes the cold instead, folds it into themself with the same unhurried care, and walks north into the white with it, toward wherever a Savvas goes to be respected. They do not say goodbye. They have never seen the point.\nThe thaw they left lasts exactly as long as they said it would, to the day. Frosthaven learns to plan around it, and nobody ever quite believes it was weather.
-Event_GH.Elementalist_Name	Elementalist Retires
-GH.Elementalist-1_Front	You are haggling over the price of road rations with an irritating Valrath merchant when a messenger boy approaches you holding a note.\n\n“Sir, I have a pressing letter written by a powerful Savvas that has come to you from all the way across the Misty Sea,” the messenger says. “I was told to deliver it directly.”\n\nYou reach for it, but the messenger moves back a little. “Sir, this note has traveled a very long distance to get to you. If you could, please pay a small fee to take possession of it.”
-GH.Elementalist-1_Option_1	Pay for the note.
-GH.Elementalist-1_Option_1_Outcome	You reach into your pocket to pay the kid, but come up empty-handed. He slinks off in indignation.
-GH.Elementalist-1_Option_2	Refuse to pay for the note.
-GH.Elementalist-1_Option_2_Outcome	You laugh in indignation and push the messenger away. He opens his mouth to object, then thinks better of it and runs off. You turn back to bartering, now leveraging the proof of your extreme thriftiness against the merchant.
-GH.Elementalist-2_Front	You are wandering through an abysmal fog, cursing the very fact you woke up this morning. You can’t see two feet in front of your face and everything is just so cold and damp.\n\nWalking down what you think is the road, you nearly bump into an elderly Savvas.\n\n“Ah, how fortuitous is such a meeting,” the Savvas says. “You look like the ones whom my protégé worked with for some time. Normally I would not give the lesser races a second glance, but the master of elements must have seen something in you.”\n\nIt stretches its joints and looks around. “Hmm, you must be having a rough time with this weather. I could offer you something that may help.”
-GH.Elementalist-2_Option_1	Accept the gift of the Savvas.
-GH.Elementalist-2_Option_1_Outcome	The Savvas concentrates and lays its hand on you. You suddenly feel very warm and all the fog within ten feet of you dissipates.\n\n“There you go. That should make things easier. The effect should last for at least as long as the fog does. Have a pleasant day!”
-GH.Elementalist-2_Option_2	Downplay your struggle and politely decline the Savvas's offer.
-GH.Elementalist-2_Option_2_Outcome	“Ah, I see,” the Savvas says. “You’d rather grow from an experience than take the easy way out. A noble path.”\n\nThe Savvas slaps you on the back. “Well, get to it, then! It’s just fog after all. You’ll survive."
-GH.Elementalist-3_Front	As you walk through some foothills, the ground suddenly shakes violently beneath you. Two massive demons built of earth and stone rise up in front of you.\n\n“Today we shall feast on your flesh, foolish travelers!”\n\nJust as the demons take a step toward you, a massive ball of fire streaks through the air from behind and connects squarely with one of the demons, which erupts into a pillar of flame. Then lightning streaks toward the other, destroying one of its arms.\n\nLooking around, you see the old Savvas you met earlier, who continues to throw out powerful attacks until the demons are forced to retreat.\n\n“Well, fancy meeting you again!”
-GH.Elementalist-3_Option_1	Thank the Savvas for his timely assistance.
-GH.Elementalist-3_Option_1_Outcome	“More and more demons around these parts these days. Stopping them from attacking travelers is becoming a time-intensive job, but at least it’s fun.”\n\nThe Savvas smiles at you and then turns to leave. “Have a pleasant day!”
-GH.Elementalist-3_Option_2	Admonish the Savvas, claiming you could have handled the demons without his help.
-GH.Elementalist-3_Option_2_Outcome	The Savvas adopts a look of serious contemplation. “You are right, of course. I presumed to think that a lesser race would need my help, but I forgot your dedication to growth and learning. I have made a grave mistake and must now beg your forgiveness.”\n\nIt holds out a small trinket toward you. “Please, accept this with my apologies.”
-Elementalist_FullName	Elementalist
-CODEX_Hero_Elementalist_Title	Elementalist
-CODEX_HeroInfo_Elementalist	<b>Role:</b> Ranged Damage\n<b>Difficulty:</b> Very High\n\nAlmost every one of your abilities changes with the element you spend. The same attack can push, stun, pierce or hit harder depending on whether you spend <sprite name=CreateFire>, <sprite name=CreateIce>, <sprite name=CreateAir>, <sprite name=CreateEarth> or <sprite name=CreateDark>.\n\nPlan your turns around which elements are strong, and make the ones you need. <i>Formless Power</i> lets you create an element of your choice at the end of each turn.\n\nWithout elements your attacks are weak, so keep them flowing. You can also heal and shield your allies, and summon helpers.\n\n<b>Strengths:</b>\n• Abilities have wide array of options\n• Very effective at range\n• Great at infusing elements\n\n<b>Weaknesses:</b>\n• Weak with no other element infusers\n• Can have turns where not much is possible\n• Reading his ability cards can cause migraines
+PERK_Sawbones_01_Name	Steady Hands
+PERK_Sawbones_02_Name	Open Wounds
+PERK_Sawbones_03_Name	Precise Cuts
+PERK_Sawbones_04_Name	Hamstring
+PERK_Sawbones_05_Name	Resupply
+PERK_Sawbones_06_Name	Surgical Strike
+PERK_Sawbones_07_Name	Anesthetic
+PERK_Sawbones_08_Name	Self-Care
+PERK_Sawbones_09_Name	Revitalizing Medicine
+Sawbones_MASTERY_1_Name	Bedside Manner
+Sawbones_MASTERY_1_Desc	On each of your turns, give an ally a card, heal an ally, grant an ally <sprite name=Shield>, or place a card in an ally's active area
+Sawbones_MASTERY_2_Name	Grievous Harm
+Sawbones_MASTERY_2_Desc	Deal at least <sprite name=Damage> 20 with a single attack ability
+Event_GH.Sawbones_Text	You find the Sawbones in the Alchemist's back room, labeling jars. He has been at it for days: every salve, splint and tincture he carried, written up in his cramped hand and shelved where anyone can find it.\n"Enough people know how to break things in this town," he says without looking up. "Somebody ought to know how to put them back together when I am gone." He closes the last jar, wipes his hands, and finally turns around. "The sanctuary wrote. A quiet post, inland. Warm. I said yes before I could talk myself out of it."\nHe leaves you his saw. Not as a weapon, he insists, though you both know how he used it. "For the lumber. Honestly."\nThe morning he goes, half the outpost turns out to see him off, every one of them someone he has stitched, set or sobered up. He pretends to be annoyed about it the whole way to the gate.
+Event_GH.Sawbones_Name	Sawbones Retires
+GH.Sawbones-1_Front	Looking for a little bit of variety, you head to the roughest table in the Tavern as night falls. After some wait, you are surprised to see the Sawbones sitting near the back of the room by himself. Considering this corner is about as seedy as Frosthaven gets, it is just about the last place you would expect to find him.\n\n“I just...I don’t know what to do now,” the Sawbones confesses after you sit down. “I’d like to join the sanctuary and lead a nice, quiet life, but after adventuring with all of you, that just doesn’t seem fulfilling anymore.”\n\nHe shakes his head. “I don’t know. This life seems so boring now. What do you think?”
+GH.Sawbones-1_Option_1	Tell him that joining the sanctuary is the right thing to do.
+GH.Sawbones-1_Option_1_Outcome	“I guess you’re right,” he shrugs. “Here’s to one last night of freedom.” He lifts his glass and gulps down the contents. You follow his lead and the rest is a blur.
+GH.Sawbones-1_Option_2	Tell him to follow his dreams.
+GH.Sawbones-1_Option_2_Outcome	“You’re right! I’m in command of my own life, and I’m going to do what I want with it. Maybe I’ll go to the Capital and start my own business or something. Who knows?”\n\nHe lifts his glass and looks at you. “To endless possibilities! The next round’s on me.”
+GH.Sawbones-2_Front	At first the man looks dead, with numerous open wounds and lying in a pool of blood in the dirt.\n\nBut then he coughs and whispers something unintelligible. The man looks pretty bad off, likely attacked by some wild animal, but it’s possible he could be saved.
+GH.Sawbones-2_Option_1	Help the wounded man as best you can.
+GH.Sawbones-2_Option_1_Outcome	The man’s wounds actually look worse than they really are, and your time with the Sawbones has given you some experience in what to do. You bind the wounds to stop the bleeding and then give him something to eat. He lost a lot of blood, but after some nursing, he’s able to stand and make his way back to Frosthaven, thanking you profusely in the process.
+GH.Sawbones-2_Option_2	Let the man die and take his belongings.
+GH.Sawbones-2_Option_2_Outcome	You riffle through the man’s pockets as he speaks his last words. They’re too soft to make out, but the tone is one of anger and disappointment. You make off with a decent amount of money and leave the corpse to rot.
+GH.Sawbones-3_Front	You head back to your rooms for the night when you see the Sawbones sitting in front of your doorstep, looking rather dejected.\n\n“I, uh, well, you see...” he stammers, “I followed your advice. Chased my dreams and all that, but I ended up in debt to some rather unscrupulous people. They’ve threatened to kill me if I don’t pay them off, but, uh, but I simply don’t have the money.”\n\nHe hesitates. “Seeing as how, uh, you bear some responsibility for setting me down this path, I was wondering if you’d be willing to offer some assistance in getting me out of this mess?”
+GH.Sawbones-3_Option_1	Offer to pay off the Sawbones’ debt.
+GH.Sawbones-3_Option_1_Outcome	It’s a hefty chunk of money, but the Sawbones is incredibly grateful.\n\n“This is wonderful! I knew I could count on you. This should be enough to put this mess behind me and finally allow me to live free.”\n\nHe hands you a potion and thanks you once again for all your help.
+GH.Sawbones-3_Option_2	Get the Sawbones on a boat across the Misty Sea. New adventures surely await there.
+GH.Sawbones-3_Option_2_Outcome	You flatly refuse to pay off the Sawbones’ debt and convince him the only way to escape his pursuers is to board a ship bound for the eastern continent, far out of their reach. He is reluctant, but eventually agrees when you remind him what unknown adventures await in the land across the ocean. You see him off in the night and desperately hope that is the last you hear of this situation.
+GH.Sawbones-4_Front	You are trying to enjoy a relaxing drink in the Tavern when a number of large men and Inox burst in and approach your table.\n\n“So, you must be that little creep’s collateral,” one of the Inox says. “We’re here to collect.”\n\nWhen you stare at her in silence, she tries again. “Little grey-bearded man. Wore symbols of the Great Oak. He said you lot would pay off his debt if he couldn’t.”\n\nShe pats an axe at her side. “Now, seeing as how he apparently skipped town, you can pay us, or things are gonna get ugly.”
+GH.Sawbones-4_Option_1	Pay off the thugs.
+GH.Sawbones-4_Option_1_Outcome	You sigh and hand over the Sawbones’ debt, plus interest. Though it feels terrible, the thugs are satisfied and walk out the same way they came in. At least it is over now.
+GH.Sawbones-4_Option_2	Refuse to pay. You won’t be strongarmed by anyone.
+GH.Sawbones-4_Option_2_Outcome	You laugh and wave your hand dismissively. There’s no way you will be paying such a large amount of money to these thugs. Unfortunately, the Inox is not amused.\n\n“Then your payment will be blood!” she says. “Meet us in the back alley, and we’ll see if we can’t come to terms.”
+Sawbones_FullName	Sawbones
+CODEX_Hero_Sawbones_Title	Sawbones
+Sawbones_DESCRIPTION	Followers of the Oak are religious healers who do their best to ward off the pestilence and death that can manifest in larger human cities. Contrary to popular belief, however, there is nothing miraculous about their healing methods, as anyone who has come to them with a gangrenous leg knows all too well. The mystique of the profession can get lost amongst the screams when the Sawbones has to hack off a limb.
+CODEX_HeroInfo_Sawbones	<b>Role:</b> Melee Damage/Support\n<b>Difficulty:</b> Low\n\nSome of your abilities give a <b>Medical Pack</b> card to yourself or an ally. It goes into that character's hand, and they can play it on their turn to heal themselves. Hand them out before the fight gets rough.\n\nYou are the party's doctor: strong heals that often also remove every negative condition, and cards that keep allies <sprite name=Shield>ed or immune to conditions for a while. <i>Triage</i> lets you heal a little every turn on top of your other actions.\n\nYour few attacks are nasty: they can <sprite name=Wound>, <sprite name=Poison>, <sprite name=Immobilize>, <sprite name=Stun> or <sprite name=Disarm>, and a couple of them kill an enemy outright when it is already in bad shape.\n\n<b>Strengths:</b>\n• Particularly efficient healer\n• Has a number of decent melee attacks\n• Medical Packs can also increase Ally's card counts\n\n<b>Weaknesses:</b>\n• Poor ranged attacks\n• Weaker in parties with fewer allies or lower max health\n• Doesn't have as great an understanding of medical cleanliness as most doctors
+PERK_Scoundrel_01_Name	Light Step
+PERK_Scoundrel_02_Name	Steady Hand
+PERK_Scoundrel_03_Name	Venom Coating
+PERK_Scoundrel_04_Name	Composure
+PERK_Scoundrel_05_Name	Vital Strike
+PERK_Scoundrel_06_Name	Dirty Fighting
+PERK_Scoundrel_07_Name	Flurry
+PERK_Scoundrel_08_Name	Vanish
+PERK_Scoundrel_09_Name	Unfazed
+PERK_Scoundrel_10_Name	Cloak of Invisibility
+Scoundrel_MASTERY_1_Name	Pack Hunter
+Scoundrel_MASTERY_1_Desc	Kill at least six enemies that are adjacent to at least one of your allies
+Scoundrel_MASTERY_2_Name	Lone Wolf
+Scoundrel_MASTERY_2_Desc	Kill at least six enemies that are adjacent to none of your allies
+Event_GH.Scoundrel_Text	Nobody sees the Scoundrel leave. You find out the way you were always going to find out: her bunk is stripped, the lock on the Trading Post's back door has been picked and relocked out of sheer habit, and on your table sits a small, neat pile of everything she ever lifted from you. A coin purse. A whetstone. The good knife.\nThere is a note under the knife, in handwriting far better than she ever let on. "Nothing personal. It never was. Thanks for the company; it was more than I came for."\nThe guard at the gate swears he saw nothing all night. He is probably telling the truth. She was always better than the people watching for her.\nWeeks later a caravan master mentions a woman in dark leather who paid her way south and spent the whole trip teaching the drivers to cheat at cards. You find you are smiling. Somewhere out there, the Scoundrel is doing fine.
+Event_GH.Scoundrel_Name	Scoundrel Retires
+GH.Scoundrel-1_Front	“You there! Stop!”\n\nYou turn to see a town guard walking briskly toward you.\n\n“You are known associates of this woman, yes?” He holds up a crude sketch of the Scoundrel. “We believe she is behind a number of high-profile robberies and demand that you give us any information you have on her whereabouts and activities.”\n\nHis face softens a bit. “Look, I know you do a lot of good for the outpost, but the merchants are breathing down my neck on this one, and I could really use a lead.”
+GH.Scoundrel-1_Option_1	Cooperate with the guard and tell him everything you know.
+GH.Scoundrel-1_Option_1_Outcome	The guard taps his notes with a smile on his face.\n\n“This is great,” he says. “I understand that you haven’t seen her in a while, but the information you’ve provided should still be useful. Have a nice day!”
+GH.Scoundrel-1_Option_2	Be as vague and unhelpful as possible, giving no useful information.
+GH.Scoundrel-1_Option_2_Outcome	The guard scratches his head and looks down at his notes.\n\n“Well, that wasn’t very helpful,” he sighs. “But thanks for your time, I guess. Let me know if you remember anything or get any new information.”
+GH.Scoundrel-2_Front	Riding up on horses, a band of dirty, rough men quickly overtake and surround your group. They look hard and dangerous, and you immediately pull out your weapons as they approach.\n\nThen you hear a familiar laugh.\n\n“Well, if it isn’t my old crew.” A woman in dark leather armor leaps off her horse to come greet you. “You know what, boys? This lot gets a pass.”\n\nShe winks at you and turns around. “Plus, they’d probably kill you all if things turned ugly.”\n\nJumping back onto her horse, the Scoundrel looks back at you. “Well, it was nice seeing you. Just remember—you never saw me.”
+GH.Scoundrel-2_Option_1	Attack. Friend or not, those who prey on the weak should be brought to justice.
+GH.Scoundrel-2_Option_1_Outcome	You see the bandits relax a little and begin to form up. That is when you strike. Some are scared off by the sudden attack, but others engage you hungrily. The Scoundrel throws a few good daggers, too, before she rides off, criticizing your poor decision-making.
+GH.Scoundrel-2_Option_2	Let the bandits go.
+GH.Scoundrel-2_Option_2_Outcome	The bandits seem a little disappointed as they form up and ride off in the opposite direction.
+GH.Scoundrel-3_Front	“So, I hear you stood up for me with the guards the other day. Such annoying pests, aren’t they?”\n\nYou turn around in the street to see the Scoundrel emerge from a dark alley with a smile on her face.\n\n“I just wanted to thank you in person,” she says. “I’ve known quite a few persons who would have ratted me out for their chance at a piece of gold. It’s good to know some friendships last.”\n\nShe looks over her shoulder. “Listen, I’m leaving town for a good long while. You wanna grab a drink before I take off?”
+GH.Scoundrel-3_Option_1	Have a drink and reminisce about old times.
+GH.Scoundrel-3_Option_1_Outcome	You laugh for a while and trade tales. As the sun drops below the tavern windows, the Scoundrel gets up to leave.\n\n“Listen, I really did enjoy our time together, and, well, I just wanted to leave you with something to remember me by.”\n\nA piece of black cloth flutters down onto the table. When you look back up, the Scoundrel is gone.
+GH.Scoundrel-3_Option_2	Overpower the Scoundrel and deliver her to the guards.
+GH.Scoundrel-3_Option_2_Outcome	A look of horrid surprise flashes in the Scoundrel’s eyes as you leap forward and throw her to the ground. She doesn’t even speak as you bind her arms and take her to the guard. They thank you for your service, but their words aren’t much counter to the cold, angry stare of the Scoundrel as she’s taken away.
+Scoundrel_FullName	Scoundrel
+CODEX_Hero_Scoundrel_Title	Scoundrel
+CODEX_HeroInfo_Scoundrel	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> Low\n\nPosition is everything for you. Many of your attacks grow stronger when the target is next to one of your allies, and others when the target stands alone with no allies of its own nearby. Look at where your friends are before you pick a target, and work with them to flank enemies.\n\nYou can also become <sprite name=Invisible>, and some attacks, like <i>Smoke Bomb</i>, hit harder while you are unseen. Your attacks often add <sprite name=Poison> and <sprite name=Wound>, and poisoned enemies take extra damage from several of your cards.\n\nYou move far and loot well, but you are fragile, with little to protect yourself. Strike and step away.\n\n<b>Strengths:</b>\n• High mobility\n• Potential for high melee Damage\n• Can afflict enemies with Poison\n\n<b>Weaknesses:</b>\n• Little in the way of effects that assist teammates\n• Few defensive abilities and low health\n• Will try and take ALL the gold
 PERK_Soothsinger_01_Name	Steady Voice
 PERK_Soothsinger_02_Name	Composure
 PERK_Soothsinger_03_Name	Stunning Note
@@ -2078,130 +2079,38 @@ Soothsinger_FullName	Soothsinger
 CODEX_Hero_Soothsinger_Title	Soothsinger
 Soothsinger_DESCRIPTION	Quatryls are not only master Engineers, but their impressive manual dexterity allows them to also become excellent Bards. These "Soothsingers" are able to empower their allies to great feats and bring their enemies low with a single strum of their lute. Their Song system works in a similar way to the Mindthief's Augments, and she is especially powerful in larger parties, but has low damage output.
 CODEX_HeroInfo_Soothsinger	<b>Role:</b> Ranged Support\n<b>Difficulty:</b> High\n\nYou play <b>songs</b>. A song is a lasting card that helps every ally while it plays: more attack or range, healing each turn, <sprite name=Shield>, or making every enemy attack at disadvantage. Only one song plays at a time; playing a new one ends the old, unless a card lets you sing two at once.\n\nYour other cards work at range on whole groups: you <sprite name=Stun>, <sprite name=Disarm>, <sprite name=Immobilize> and <sprite name=Curse> enemies, <sprite name=Bless> allies, and command allies to attack or move on your turn.\n\nYour own attacks are weak, so stay out of reach and let your party do the hitting.\n\n<b>Strengths:</b>\n• Wide range of powerful buffs\n• Varied selection of lower half abilities\n• Effective at crowd control\n\n<b>Weaknesses:</b>\n• Poor damage dealer\n• Weaker in smaller parties\n• Dubious fashion sense
-PERK_Mindthief_01_Name	Nimble
-PERK_Mindthief_02_Name	Hobbling Bite
-PERK_Mindthief_03_Name	Steadied
-PERK_Mindthief_04_Name	Mind Pull
-PERK_Mindthief_05_Name	Confusion
-PERK_Mindthief_06_Name	Sharpened Claws
-PERK_Mindthief_07_Name	Cold Snap
-PERK_Mindthief_08_Name	Frenzy
-PERK_Mindthief_09_Name	Stunning Blow
-PERK_Mindthief_10_Name	Disarming Trick
-PERK_Mindthief_11_Name	Unfazed
-PERK_Mindthief_12_Name	Lying Low
-Mindthief_MASTERY_1_Name	Thought Thief
-Mindthief_MASTERY_1_Desc	Trigger the on-attack effect of four different Augments thrice each
-Mindthief_MASTERY_2_Name	Untouchable
-Mindthief_MASTERY_2_Desc	Never be targeted by an attack
-Event_GH.Mindthief_Text	The rats go first. For three days the outpost's granary is quieter than anyone can remember, and the Craftsman, who has fought the vermin for years, walks around looking cheated. Then the Mindthief comes to find you, a swarm's worth of small warm bodies gone from the folds of her cloak, and tells you she has sent them ahead.\n"There is a nest in the Copperneck," she says, "a big one. They have been talking about it for a month." You ask who. She looks at you the way she looks at anyone who asks a question she has already answered in their head. "The rats."\nShe leaves you her blade, the thin wicked one, and with it a thought she presses into you so firmly that you still feel it years later whenever you draw it: nothing in front of you is as dangerous as what is behind it. You have never been sure whether it was advice or a joke at your expense.\nBy the time the Craftsman has finished celebrating, every rat in Frosthaven is back, and the granary is exactly as it was. The Mindthief is not.
-Event_GH.Mindthief_Name	Mindthief Retires
-GH.Mindthief-1_Front	Walking near Gloomhaven Square, you see a peculiar scene. A group of guards is dragging along a Vermling in tattered robes toward the Ghost Fortress. Getting a little closer, you\nrecognize the Mindthief.\n\n“Hssss,” she spits. “Why do you do this? I came to you! I tell you that this town is being poisoned, and you respond by imprisoning me?”\n\n“We’ll see what the Captain of the Guard has to say about this,” one of her captors says. “Keep moving!”
-GH.Mindthief-1_Option_1	Intervene with the guards and find out what is going on.
-GH.Mindthief-1_Option_1_Outcome	The guards look incredibly perturbed when you step in front of them and ask that they leave the Mindthief to you. After some effort, they begrudgingly hand her over. The Mindthief thanks you, explaining that her colony in the sewers is being poisoned, and the poison is quickly migrating to the city’s water supply. She says she’s tracked the source to a small cove along the Hook Coast.
-GH.Mindthief-1_Option_2	Let the guards continue their business and just continue with yours.
-GH.Mindthief-1_Option_2_Outcome	The Mindthief flicks her tail and throws insults around, but it doesn’t seem to have any positive effect. She is led away and out of view. You get about your business, hoping that bit about the town being poisoned wasn’t too serious.
-GH.Mindthief-2_Front	A single Vermling jumps out of the brush at you, surprising you briefly. Within moments, though, you have your weapons out and pressed against his throat.\n\n“EEEEEEEeeeahh!” The Vermling drops his weapon and cowers. “No attack! My brothers in the bushes say you had stink of city-dwelling outcast on you. I wanted to be sure.”\n\nThe Vermling waves his hands. “It’s not bad! Just curious. Being stinky city-dwelling outcast is fine. Please, don’t hurt me!”
-GH.Mindthief-2_Option_1	Move on, leave the strange Vermling in peace.
-GH.Mindthief-2_Option_1_Outcome	“Stink very faint,” the Vermling continues as you walk on. “Outcast no longer with you, but I still smell it!”\n\nHe then jumps back into the brush. Vermlings are very odd creatures.
-GH.Mindthief-2_Option_2	Kill the savage little beast.
-GH.Mindthief-2_Option_2_Outcome	You attack the Vermling anyway, despite his protests. It turns out he wasn’t lying about his “brothers” nearby, though. As you wipe the blood from your blade, ten more of the little furry creatures jump out at you, brandishing small knives. They are not nearly as easy to dispatch.
-GH.Mindthief-3_Front	“I assume you are aware of an increased amount of sickness in the city.”\n\nYou were summoned to the Ghost Fortress and now stand before the Captain of the Guard.\n\n“We believe it could have something to do with a poisoning threat brought to our attention by your Mindthief friend a while ago. We ignored it, but now she is nowhere to be found, the Hook Coast is a bed of disease, and Gloomhaven proper is on its way there, too.”\n\nHe looks at you firmly. “I need you to head down to the Hook Coast and figure out what is going on. Then eliminate the source of the poison."
-GH.Mindthief-3_Option_1	Agree to help.
-GH.Mindthief-3_Option_1_Outcome	The Hook Coast is outside the walls of Gloomhaven and can be a dangerous place. And since this spread of poison, the city has become even more defenseless than normal. You hope you’ll be able to find a solution to the problem quickly.
-GH.Mindthief-3_Option_2	Tell the captain to fix his own problem.
-GH.Mindthief-3_Option_2_Outcome	The Captain of the Guard sighs.\n\n“I really thought you were the ones for the job. What business could you possibly have that is more important than making sure this city is safe?”\n\nHe holds up his hand. “No matter. Fine, just get out of here! We will deal with this ourselves.”
-Mindthief_FullName	Mindthief
-CODEX_Hero_Mindthief_Title	Mindthief
-CODEX_HeroInfo_Mindthief	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> High\n\nYou use <b>augments</b>: lasting cards that add an effect to every melee attack you make, such as extra damage, healing, <sprite name=Shield>, <sprite name=Poison> or <sprite name=Stun>. Only a limited number can be active at once, so choose the ones that suit the fight.\n\nYour other strength is control. Several cards make an enemy attack itself or its neighbour, or move where you want it, and a few let you command an ally.\n\nYour attacks hit harder against enemies with negative conditions. <sprite name=CreateIce> and <sprite name=CreateDark> add stuns and extra attacks. You move fast and can summon rats, but you are fragile.\n\n<b>Strengths:</b>\n• Powerful Augment effects on melee attacks\n• Mind-control powers\n• Access to summons\n\n<b>Weaknesses:</b>\n• Fragile melee character\n• Managing Augments can be fiddly\n• Often confused for a giant rat
-PERK_Tinkerer_01_Name	Steady Hands
-PERK_Tinkerer_02_Name	Fine Tuning
-PERK_Tinkerer_03_Name	Composure
-PERK_Tinkerer_04_Name	Wide Reach
-PERK_Tinkerer_05_Name	Jagged Gears
-PERK_Tinkerer_06_Name	Net Launcher
-PERK_Tinkerer_07_Name	Confusion
-PERK_Tinkerer_08_Name	Overcharge
-PERK_Tinkerer_09_Name	Restorative Tonic
-PERK_Tinkerer_10_Name	Hardened
-PERK_Tinkerer_11_Name	Rejuvenating Vapor
-Tinkerer_MASTERY_1_Name	Field Medic
-Tinkerer_MASTERY_1_Desc	Heal an ally or apply a negative condition to an enemy each turn
-Tinkerer_MASTERY_2_Name	Spendthrift
-Tinkerer_MASTERY_2_Desc	Perform two actions with lost icons before your first rest and then only rest after having played at least two actions with lost icons since your previous rest
-Event_GH.Tinkerer_Text	The Tinkerer's workshop has taken over half the Craftsman's floor by the time he decides to leave it. Nobody argues; the Craftsman has been using his drill press for a month and has no intention of giving it back. "Keep it," the Tinkerer says. "Keep all of it. I am tired of carrying things."\nHe is going east, to look for the places the old maps mark and the new ones do not, with a bag of elixirs and one battle bot that follows him like a dog and has never once worked properly. He says the not-working is a feature. He has always said that.\nThe last thing he builds in Frosthaven is a lamp for the Infirmary that lights itself when someone comes in after dark, so the healers stop knocking over the tray of knives. It works the first time. He looks faintly disappointed.\nA letter comes the next summer, smudged and full of diagrams. The Craftsman reads it twice and starts building something. He will not say what.
-Event_GH.Tinkerer_Name	Tinkerer Retires
-GH.Tinkerer-1_Front	You return to your rooms for the evening to find a small note resting on the ground in front of your door.\n\nIt is from the Tinkerer, explaining that he has been pursuing further studies in flammable liquid delivery methods. He asks for your help in delivering to him a small robotic contraption that he absentmindedly left behind in a secret stash under the floorboards of his old room.\n\nHe details the device’s location and gives an address to deliver it to—some small village far to the northwest.
-GH.Tinkerer-1_Option_1	Oblige the Tinkerer and send along the contraption.
-GH.Tinkerer-1_Option_1_Outcome	You don’t have the money to send him the contraption, so you decide just to keep it for yourself.\n\nLike an eager treasure hunter, you pry up the floorboards in the Tinkerer’s old room and find a trove of useless junk, plus a detailed robotic spider that is anything but useless. You switch it on and let it scurry around the room. This could be a significant help in battle. No way it’s getting shipped off.
-GH.Tinkerer-1_Option_2	You don’t want to pay for postage. Just keep the thing for yourself.
-GH.Tinkerer-1_Option_2_Outcome	Like an eager treasure hunter, you pry up the floorboards in the Tinkerer’s old room and find a trove of useless junk, plus a detailed robotic spider that is anything but useless. You switch it on and let it scurry around the room. This could be a significant help in battle. No way it’s getting shipped off.
-GH.Tinkerer-2_Front	You probably wouldn’t have normally noticed it, but sometimes nature calls and you need to head off the beaten path to get some privacy.\n\nHidden in the bushes, you come across the smoking wreckage of some crude machine. It looks to have broken down at some point and was left here to rust and decay.\n\nMost of it is scrap, but thanks to your time with the Tinkerer, you know a good power core when you see one. It’s a bit heavier than you’d hoped, but it should fetch a good price back in Gloomhaven.
-GH.Tinkerer-2_Option_1	Take the core with you.
-GH.Tinkerer-2_Option_1_Outcome	The core sure is heavy. You manage it rather well, but it will be a bit of hindrance in battle. You hope the payoff is worth the trouble.
-GH.Tinkerer-2_Option_2	Leave the core alone. You don't want anything weighing you down in battle.
-GH.Tinkerer-2_Option_2_Outcome	You decide the risk is not worth the reward and walk away from the contraption before you scratch yourself on the rusted metal and give yourself some foul disease. And just the thought of haggling with the Quatryls in the Mixed District about a fair price makes you tired and irritable.
-Tinkerer_FullName	Tinkerer
-CODEX_Hero_Tinkerer_Title	Tinkerer
-CODEX_HeroInfo_Tinkerer	<b>Role:</b> Ranged Support\n<b>Difficulty:</b> Medium\n\nYou are the party's support from range. Your heals reach any ally within a few hexes, and other cards give allies their discarded or lost cards back, or even raise an ally's hand size.\n\nYour attacks are ranged and often hit areas, adding <sprite name=Wound>, <sprite name=Immobilize> or <sprite name=Poison>. You can also lay traps and mines, and summon gadgets like a decoy or a battlebot.\n\nStay behind your allies: you are fragile, but you keep everyone else in the fight much longer.\n\n<b>Strengths:</b>\n• Decent ranged abilities\n• Effective healer\n• Wide range of options\n\n<b>Weaknesses:</b>\n• Very fragile\n• Weaker in smaller teams\n• Has trouble opening tight jars
-PERK_Doomstalker_01_Name	Composure
-PERK_Doomstalker_02_Name	Steady Aim
-PERK_Doomstalker_03_Name	Wide Reach
-PERK_Doomstalker_04_Name	Stunning Shot
-PERK_Doomstalker_05_Name	Barbed Arrow
-PERK_Doomstalker_06_Name	Venom Arrow
-PERK_Doomstalker_07_Name	Dizzying Shot
-PERK_Doomstalker_08_Name	Rapid Fire
-PERK_Doomstalker_09_Name	Hardened
-PERK_Doomstalker_10_Name	Marked for the Hunt
-Doomstalker_MASTERY_1_Name	Fresh Quarry
-Doomstalker_MASTERY_1_Desc	Never perform a Doom action that you have already performed in the scenario
-Doomstalker_MASTERY_2_Name	Cull the Herd
-Doomstalker_MASTERY_2_Desc	Kill three Doomed enemies during one of your turns
-Event_GH.Doomstalker_Text	The Doomstalker has not spoken more than a sentence a week since he arrived, so when he asks you to walk the north ridge with him at dawn, you go. He says nothing for an hour. Then he points, and you see the tracks you have walked past a hundred times: something large, keeping its distance, watching the outpost as patiently as he has.\n"I have marked it," he says. You do not ask what that means. You have seen what happens to things he marks.\nHe leaves the bow with the guard captain, strung, with a single arrow laid beside it, and the captain understands the arrangement without being told: the day the thing on the ridge comes closer, there is one shot, and it will not miss. It never comes closer.\nHe goes north himself, after it or past it, with his animals ranging ahead of him in a loose silent fan. For years after, the hunters swear the valley's wolves give the outpost a wider berth than any other place on the pass, and nobody can tell them why.
-Event_GH.Doomstalker_Name	Doomstalker Retires
-GH.Doomstalker-1_Front	“Ah, they said I might find you here.” A portly Valrath woman looks down at you as you are enjoying a cold beverage at the Sleeping Lion.\n\n“A group of wild-looking Orchids came to the Temple of Coin today hoping to engage in trade with the merchants of the city. One particularly dour-looking one with a bow said you lot would vouch for them.\n\n“We’re always wary of traps and betrayal out here on the edge of the wilds, but if you think these Orchids can be trusted, then the Merchant’s Guild may consider opening trade with them.”
-GH.Doomstalker-1_Option_1	Vouch for the Orchids.
-GH.Doomstalker-1_Option_1_Outcome	“Well, we’ll take it under advisement. Personally, I don’t even know why your opinion matters, but some people in the Merchant’s Guild seem to like you.\n\n“Anyway, feel free to get back to your life of consumption and murder.”
-GH.Doomstalker-1_Option_2	Advise against trading with the Orchids.
-GH.Doomstalker-1_Option_2_Outcome	The Valrath woman nods. “I agree. Orchids are not to be trusted. Personally, I thought you lacked the brains to make a proper decision, but I’m happy to be proven wrong.”
-GH.Doomstalker-2_Front	You come to a fork in the road. One path looks clear and easy, but the other path is overgrown with thorns and nettles. Either one will likely get you to where you are going.\n\nThe whole situation feels off, though—as if someone or something is watching you.\n\nStill, a decision must be made.
-GH.Doomstalker-2_Option_1	Take the clear path.
-GH.Doomstalker-2_Option_1_Outcome	You walk down the clear path for a few minutes, and, just when you think the whole weird feeling was your imagination, a group of human bandits jumps out at you from the nearby brush. Before they can engage, however, an arrow suddenly spears the chest of the closest bandit, followed very quickly by a second. The bandits have paused to look around in panic when a third arrow flies into another bandit’s skull. The bandits scatter and run off. You look around for the shooter, but no trace is found.
-GH.Doomstalker-2_Option_2	Take the overgrown path.
-GH.Doomstalker-2_Option_2_Outcome	The trek through the overgrown path is unpleasant. You are constantly getting pricked by sharp thorns covered in a strange sap. You think you recognize them from a previous foray into harsh, unforgiving foliage. Sure enough, you start feeling sick pretty soon after you emerge from the bushes.
-Doomstalker_FullName	Doomstalker
-CODEX_Hero_Doomstalker_Title	Doomstalker
-Doomstalker_DESCRIPTION	Orchid Doomstalkers are tasked with keeping various Orchid settlements safe in the wilds around Gloomhaven. The calm mind of the Orchid makes the Doomstalker an excellent bow hunter. He never misses a shot.
-CODEX_HeroInfo_Doomstalker	<b>Role:</b> Ranged Damage/Support\n<b>Difficulty:</b> Medium\n\nYou place <b>dooms</b> on enemies. A doom is a lasting mark that stays on its target: your attacks against it are stronger, and when the doomed enemy dies, the doom pays off with healing, damage around it, or another effect. You can normally keep one doom out at a time.\n\nYou are an archer who fights from far away, and several attacks hit harder against a doomed target. <i>Expose</i> gives you advantage against it.\n\nYou can summon animal companions and set bear traps. Your own attacks rarely add conditions: your dooms do that work.\n\n<b>Strengths:</b>\n• High ranged damage\n• Doom abilities allow wide array of secondary effects\n• Decent array of summons\n\n<b>Weaknesses:</b>\n• Generally wants to focus on one enemy at a time\n• Casting a Doom often involves skipping movement\n• Every visit to Gloomhaven ends up with some poor merchant getting Doomed over the price of an item
-PERK_BeastTyrant_01_Name	Steady Hands
-PERK_BeastTyrant_02_Name	Trained Reflexes
-PERK_BeastTyrant_03_Name	Savage Strike
-PERK_BeastTyrant_04_Name	Rending Claws
-PERK_BeastTyrant_05_Name	Pinning Bite
-PERK_BeastTyrant_06_Name	Lick Wounds
-PERK_BeastTyrant_07_Name	Hardened
-PERK_BeastTyrant_08_Name	Bear Treat
-BeastTyrant_MASTERY_1_Name	Ferocious Companion
-BeastTyrant_MASTERY_1_Desc	Have your bear summon deal <sprite name=Damage> 10 or more in three consecutive rounds
-BeastTyrant_MASTERY_2_Name	Pack Tactics
-BeastTyrant_MASTERY_2_Desc	You or your summons must apply a negative condition to at least 10 different enemies
-Event_GH.BeastTyrant_Text	You find the Beast Tyrant where you always find him: at the bear. It is sitting on its haunches at the edge of the lumber yard, as it has every evening of the campaign, pretending not to watch the crews. The crews pretend not to be watched. It is a comfortable arrangement and it is about to end.\n"The wild is going back to being wild," the Vermling says. "Up past the pass, where the Algox do not go. The bear wants it. I have never once told the bear no." He scratches the enormous head, which leans into his hand with the whole of its weight. "I am not starting now."\nHe leaves you his collection of totems, the wind one and the spirit banner, and a short list of which animals in the valley are to be left alone, in an order that suggests the animals wrote it.\nThey go at dusk, the man and the bear and a loose tide of smaller things in the undergrowth around them. The lumber yard is quiet for a week. Then the crews start leaving a cut of the day's catch at the edge of the trees, and nobody admits to it.
-Event_GH.BeastTyrant_Name	Beast Tyrant Retires
-GH.BeastTyrant-1_Front	“There were fifty of them, I swear. Tearing my mates apart!”\n\nYou look over to the bar where a group of drunkards are all laughing at a disheveled man in the middle of a story.\n\n“And commanding them all, riding atop a giant armored bear, there was a Vermling with a staff that shot lightning!”\n\nAt this the crowd erupts into more laughter, drowning out the rest of the man’s story. “This man’s had too much to drink, I’d say,” ridicules one of the crowd. “Vermlings riding bears! I thought I’d heard of everything!”
-GH.BeastTyrant-1_Option_1	Join the crowd in laughing at the man.
-GH.BeastTyrant-1_Option_1_Outcome	You move closer and join in on the fun. After a while, the man gives up and resigns himself to his glass. But his story provides entertainment for weeks.
-GH.BeastTyrant-1_Option_2	Calm down the crowd and get more details from the man about the attack.
-GH.BeastTyrant-1_Option_2_Outcome	It’s not easy, but you quiet down the crowd and take the staggering man over to a secluded corner of the tavern to get the full story out of him. Apparently he was part of a group of ruffians working to harvest the Dagger Forest for wood. In the middle of their logging expedition, however, they were attacked by the Beast Tyrant and an army of forest animals. Though he ran off in the middle of the fight, the man swears he also heard the howl of angry spirits in the chaos.
-GH.BeastTyrant-2_Front	Despite your best efforts, you find yourself lost in a forest. You thought you were taking a shortcut, but then you got turned around and lost your bearings.\n\nAnd just when you think things couldn’t get worse, a wolf suddenly jumps out of the brush in front of you. Oddly, though, it doesn’t appear aggressive. \n\nIt howls once and then slowly and deliberately begins to walk through the trees in front of you, as if expecting you to follow it.
-GH.BeastTyrant-2_Option_1	Follow the wolf.
-GH.BeastTyrant-2_Option_1_Outcome	Miraculously, following the wolf leads you right to the edge of the forest and back on track to your destination. The wolf howls once more and then bounds off back into the brush. You can’t help but wonder who might have sent that wolf to assist you.
-GH.BeastTyrant-2_Option_2	Find your own way through the forest.
-GH.BeastTyrant-2_Option_2_Outcome	Not willing to trust a wild animal, you refuse to go in the same direction as the wolf and continue down an ill-fated path of your own choosing. It doesn’t go well, and by the time you emerge from the dense forest and find your bearings, you are exhausted.
-BeastTyrant_FullName	Beast Tyrant
-CODEX_Hero_BeastTyrant_Title	Beast Tyrant
-BeastTyrant_DESCRIPTION	Vermlings that rise above their baser instincts find that there is much to be gained in exerting their will over beasts of the wilds. These Beast Tyrants can amass incredible armies of fangs, claws and talons to become formidible opponents in battle.
-CODEX_HeroInfo_BeastTyrant	<b>Role:</b> Melee Damage/Summoner\n<b>Difficulty:</b> Medium\n\nYou fight alongside your <b>bear</b>. It joins you at the start of every scenario, and many of your cards command it to <sprite name=Attack>, <sprite name=Move>, heal or roar. Keep it alive, since much of your power comes through it.\n\nYou can summon more animals and spirits, and give your summons <sprite name=Shield>, <sprite name=Retaliate> and attack bonuses.\n\nYour own attacks are small and ranged, adding <sprite name=Poison>, <sprite name=Disarm> or <sprite name=Stun>. You can heal your allies. <sprite name=CreateEarth> and <sprite name=CreateAir> boost a few cards.\n\n<b>Strengths:</b>\n• Starts with strong Bear ally\n• Combines well with all allied summons\n• Wide array of multi-use abilities\n\n<b>Weaknesses:</b>\n• Weak if Bear is ever exhausted\n• Should stay out of melee combat\n• Clothes tend to smell a bit 'meaty'
+PERK_Spellweaver_01_Name	Composure
+PERK_Spellweaver_02_Name	Focus
+PERK_Spellweaver_03_Name	Winds and Stone
+PERK_Spellweaver_04_Name	Light and Shadow
+PERK_Spellweaver_05_Name	Searing Touch
+PERK_Spellweaver_06_Name	Binding Frost
+PERK_Spellweaver_07_Name	Thunderclap
+PERK_Spellweaver_08_Name	Hex
+PERK_Spellweaver_09_Name	Inferno
+PERK_Spellweaver_10_Name	Blizzard
+PERK_Spellweaver_11_Name	Unfazed
+PERK_Spellweaver_12_Name	Etheric Bond
+PERK_Spellweaver_12_Desc	Whenever you short rest, if Reviving Ether is in your discard pile, first return it to your hand
+Spellweaver_MASTERY_1_Name	Elemental Mastery
+Spellweaver_MASTERY_1_Desc	Infuse and consume all six elements
+Spellweaver_MASTERY_2_Name	Deep Reserves
+Spellweaver_MASTERY_2_Desc	Perform four different loss actions twice each
+Event_GH.Spellweaver_Text	The Spellweaver has been counting. You noticed it weeks ago: a small tally on the inside of her sleeve, a mark for every time Reviving Ether brought her cards back from the fire. "Thirty-one," she says, when you finally ask. "The sages say the ether forgives you nine times. After that, you are borrowing."\nShe is going home to the Orchid groves to pay it back, which as far as you can tell means sitting very still for a very long time. She does not seem to mind. "I have been loud enough," she says, and for a woman who once set a frozen lake on fire from the far shore, it is true.\nBefore she goes she walks the Alchemist's garden with the keeper, touching each bed in turn. Nothing visible happens. The following spring the garden comes up a week early and nobody can say why.\nShe leaves on foot, south, with a single staff and no coat, because the cold has never once been allowed to touch her and she sees no reason to start now.
+Event_GH.Spellweaver_Name	Spellweaver Retires
+GH.Spellweaver-1_Front	In the very early morning, you are wakened by a knock at your door. Standing behind it is giant, dirty Inox wearing a leather apron.\n\n“Oh, uh...ahem,” he coughs. “Sorry, I was looking for a female Orchid. She used to help me on occasion with my forge. Her control over fire was astounding and I paid her well for her assistance completing some of my specialty work.”\n\nHe scratches his head. “I guess she’s not around anymore. You wouldn’t happen to know where I could find someone who could help me in her absence, would you?”
+GH.Spellweaver-1_Option_1	Offer to help the blacksmith yourself.
+GH.Spellweaver-1_Option_1_Outcome	The Inox is completely dumbfounded when you walk all the way down to his forge and then proceed to exhibit zero aptitude at manipulating or controlling fire.
+GH.Spellweaver-1_Option_2	Direct him to the Savvas Elemental Guild and go back to sleep.
+GH.Spellweaver-1_Option_2_Outcome	“Ah, yes, that is probably a good idea,” he says. “Thanks for your time and I hope your friend the Spellweaver is doing well!”
+GH.Spellweaver-2_Front	Due to a late start, night falls before you can get to where you are going. You are on your guard throughout the night, but nothing can quite prepare you for a Night Demon attack.\n\nThey come upon you silent and invisible, so you are unaware of their presence until their claws sink into your flesh.\n\nThe darkness erupts into chaos with flashing swords and horrific shrieks. And then a bolt of fire streaks through the darkness and incinerates one of the demons.\n\nSomeone else is out there.
+GH.Spellweaver-2_Option_1	Renew your efforts to slay the demons.
+GH.Spellweaver-2_Option_1_Outcome	With the help of the mysterious firecaster, the battle turns and the demons are slain without much pain. Out of the darkness steps the familiar face of a female Orchid.\n\n“Sorry about that. I think they were looking for this.” The Spellweaver holds up a black censer. “It’s a good thing I ran into you, though. I could use your help.”\n\nShe draws out a crude map. “Meet me here as soon as you can, and I’ll explain more.”
+GH.Spellweaver-2_Option_2	Use the distraction to disengage from the demons and run away.
+GH.Spellweaver-2_Option_2_Outcome	This mysterious third party seems to have things under control, and the demons appear more interested in them anyway. You take the opportunity to retreat from the fight and run off into the night. You don’t feel great about it, but at least you’re alive.
+Spellweaver_FullName	Spellweaver
+CODEX_Hero_Spellweaver_Title	Spellweaver
+CODEX_HeroInfo_Spellweaver	<b>Role:</b> Ranged Damage\n<b>Difficulty:</b> High\n\nYour strongest spells are lost once you cast them. <i>Reviving Ether</i> brings every lost card back into your hand, so you can cast them all again; time it well, since it is lost too.\n\nYou use every element. Create them with your spells, then spend them for stronger attacks, <sprite name=Wound>, <sprite name=Stun>, extra healing, or invisibility.\n\nMost of your attacks are at range and many hit whole areas. You are fragile, so stay back and let your spells do the work.\n\n<b>Strengths:</b>\n• Good ranged damage dealing\n• Can recover Burned cards with Reviving Ether\n• Access to decent early ranged summon\n\n<b>Weaknesses:</b>\n• Low health, can die very fast\n• Requires complex Ability management for new Players\n• Crystal skin makes it difficult to find a good tailor
 PERK_Summoner_01_Name	Steady Hands
 PERK_Summoner_02_Name	Focus
 PERK_Summoner_03_Name	Composure
@@ -2234,6 +2143,99 @@ Summoner_FullName	Summoner
 CODEX_Hero_Summoner_Title	Summoner
 Summoner_DESCRIPTION	With the proper concentration, an Aesther Summoner can pull anything she wishes across the planar boundaries. With infinite planes comes infinite possibilities. Such efforts can be incredibly taxing, however, and a Summoner finds it much easier to transport living things or raw energy.
 CODEX_HeroInfo_Summoner	<b>Role:</b> Summoner/Support\n<b>Difficulty:</b> Medium\n\nYou fight through your <b>summons</b>. Most of your cards call a creature to fight beside you, and the rest protect them, heal them, or let them act on your turn. Summons stay until they are defeated; some cards let you bring lost summon cards back.\n\nYour own attacks are modest and mostly at range, adding <sprite name=Curse>, <sprite name=Immobilize>, <sprite name=Stun> or <sprite name=Wound> when you spend <sprite name=CreateDark>, <sprite name=CreateFire> or <sprite name=CreateAir>.\n\nSpread your summons around the enemies and let them take the hits while you stay back.\n\n<b>Strengths:</b>\n• Wide array of creatures to summon\n• Support abilities for all allies\n• Reasonable ranged abilities\n\n<b>Weaknesses:</b>\n• Low damage dealing capacity\n• Too many active summons can leave too few cards\n• Expensive to make all the art for in a computer game!
+PERK_Sunkeeper_01_Name	Focus
+PERK_Sunkeeper_02_Name	Radiance
+PERK_Sunkeeper_03_Name	Bulwark
+PERK_Sunkeeper_04_Name	Smite
+PERK_Sunkeeper_05_Name	Zeal
+PERK_Sunkeeper_06_Name	Dazzle
+PERK_Sunkeeper_07_Name	Mending Light
+PERK_Sunkeeper_08_Name	Well Armored
+PERK_Sunkeeper_09_Name	Unfazed
+PERK_Sunkeeper_10_Name	Shielding Light
+Sunkeeper_MASTERY_1_Name	Unbreakable
+Sunkeeper_MASTERY_1_Desc	Reduce attacks targeting you by a total of <sprite name=Shield> 20 or more in a single round
+Sunkeeper_MASTERY_2_Name	Child of the Sun
+Sunkeeper_MASTERY_2_Desc	Infuse or consume <sprite name=CreateLight> during each of your turns
+Event_GH.Sunkeeper_Text	The Sunkeeper asks you to meet her on the wall at sunrise. She is already there when you arrive, armor polished to a mirror, watching the light come up over the ice. "The temple has sent for me," she says. "They need a keeper, and there is no one else."\nShe does not pretend to be sorry to go, and you respect her for it. Instead she walks the length of the wall with you, laying a gloved hand on each tower as she passes, speaking a few words under her breath. The guards on duty stand a little straighter without quite knowing why.\nAt the gate she presses a small sun medallion into your palm, warm from her hand. "For the dark months. It will not do much. It will do enough."\nThen she turns south and walks into the sunrise, which is exactly how she would have wanted it to look.
+Event_GH.Sunkeeper_Name	Sunkeeper Retires
+GH.Sunkeeper-1_Front	You are haggling over the price of road rations with an irritating Valrath merchant when a messenger boy approaches you holding a note.\n\n“Sir, I have a pressing letter from an important Valrath Sunkeeper,” the messenger says. “I was told to deliver it to you.”\n\nYou reach for it, but the messenger moves back a little. “Sir, this note has traveled a long distance to get to you. If you could, please pay a small fee to take possession of it.”
+GH.Sunkeeper-1_Option_1	Begrudgingly pay for the note.
+GH.Sunkeeper-1_Option_1_Outcome	You throw the kid a few coins and grab the note. Enclosed with the note is a small medallion engraved with the image of the sun. Apparently the Sunkeeper thinks the object may help you at some point in the future. The note doesn’t say exactly how and the thing has no apparent use. You stow it away in your pack.
+GH.Sunkeeper-1_Option_2	Refuse to pay for the note.
+GH.Sunkeeper-1_Option_2_Outcome	You laugh in indignation and push the messenger away. He opens his mouth to object, then thinks better of it and runs off. You turn back to bartering, now leveraging the proof of your extreme thriftiness against the merchant.
+GH.Sunkeeper-2_Front	You see them long before they get close to you—radiant balls of light blazing against the horizon.\n\nSun Demons.\n\nAs they approach, you prepare for an attack, but the demons have other plans. They menace you with their glowing claws, but they would rather have information than kill you.\n\n“Where is the one you call a Sunkeeper?” one of them hisses. “The Valrath neglects her duties, and now we must resolve matters personally.”\n\nYou press for further information, but the demons get angry. “These are not your concerns! Tell us where she is or die at our hands!”
+GH.Sunkeeper-2_Option_1	Give them whatever information you can on the Sunkeeper’s whereabouts.
+GH.Sunkeeper-2_Option_1_Outcome	You’re not sure exactly what happened to the Sunkeeper after she left the party, but you tell the demons everything you know.\nThey seem satisfied with your response and even offer a bitter thanks as they fly off to the west.
+GH.Sunkeeper-2_Option_2	Attack the demons. There are a lot of them, but you do not take kindly to threats.
+GH.Sunkeeper-2_Option_2_Outcome	Without even speaking, you draw your weapons and attack. The demons are caught off guard, but they bounce back with great ferocity. It is a long, brutal battle, and you continue on in your adventure greatly wounded and bloody.
+GH.Sunkeeper-3_Front	You are heading through a small forest when you hear the sound of a woman screaming off to the west. You silently move closer, catching a glimpse of multiple radiant figures through the trees.\n\nThey are Sun Demons, perhaps the same ones who accosted you earlier. That suspicion is confirmed when you get closer and see they are hovering around an armored Valrath woman bound to a tree, torturing her for information.\n\n“Don’t you see how important this is!” one of the demons says. “Give us the location of the temple!”\n\n“Lies and tricks of a demon,” the Sunkeeper responds. “The temple is in no danger except from you.”
+GH.Sunkeeper-3_Option_1	Leave the scene quietly and return to your own business.
+GH.Sunkeeper-3_Option_1_Outcome	Not wanting to get involved, you simply move on. Eventually the screams of the Sunkeeper fade away.
+GH.Sunkeeper-3_Option_2	Attack the demons and free the Sunkeeper.
+GH.Sunkeeper-3_Option_2_Outcome	You charge out of the trees and attack the Sun Demons. Fueled by righteous indignation and a bit of guilt, you slay them all. The battle leaves you wounded, but the Sunkeeper happily mends your wounds once you free her.\n\n“They seemed to think the Sun Temple is under attack by Night Demons,” she says. “I have no reason to believe them, but still, would you mind helping me look into it?”
+GH.Sunkeeper-4_Front	By now, the Sun Demons cut a very recognizable portrait against the horizon as they move toward you. You sincerely had hoped you were done with these creatures.\n\n“We have urgent need of your assistance,” one of them starts. “Night Demons have infested the Sun Temple, attempting to desecrate it and send the world into eternal darkness.\n\n“We have tried to stop them, but they are too fortified inside the temple. We regrettably need more strength.\n\n“Please, you cannot want an absence of a sun on this plane any less than we do. It would be disastrous.”
+GH.Sunkeeper-4_Option_1	Agree to help the Sun Demons.
+GH.Sunkeeper-4_Option_1_Outcome	You sigh and agree, warning them that this had better be the last time they ask you for a favor. They give you the location of the Sun Temple and implore you to hurry.
+GH.Sunkeeper-4_Option_2	Attack the Sun Demons. It may be the only way to stop them from bothering you.
+GH.Sunkeeper-4_Option_2_Outcome	Without even speaking, you draw your weapons and attack. The demons are caught off guard, but they bounce back with great ferocity. It is a long, brutal battle, and you continue on in your adventure greatly wounded and bloody.
+Sunkeeper_FullName	Sunkeeper
+CODEX_Hero_Sunkeeper_Title	Sunkeeper
+Sunkeeper_DESCRIPTION	Sunkeepers have been trained to tap into long-dormant demonic powers and harness them for the purpose of righteousness. The Sunkeeper has an assortment of Healing, Buffing and Card Recovery abilities and is a capable Melee fighter in her own right. She works best in the role of a Paladin, aiding the main damage dealers in combat while keeping them alive.
+CODEX_HeroInfo_Sunkeeper	<b>Role:</b> Melee Tank/Support\n<b>Difficulty:</b> Low\n\nLight is your fuel. Most of your cards create <sprite name=CreateLight> or spend it for stronger attacks, extra healing and longer buffs. <i>Beacon of Light</i> keeps Light glowing every turn.\n\nYou lead from the front: several cards let an ally <sprite name=Move> or <sprite name=Attack> on your turn, and your heals, <sprite name=Bless> and <sprite name=Strengthen> keep the party going. You also give allies <sprite name=Shield> and <sprite name=Retaliate>, and can take damage meant for them.\n\nYou are tough and can <sprite name=Stun> with your own attacks, so stand next to your allies where you can protect and command them at the same time.\n\n<b>Strengths:</b>\n• Array of buff, heal and recovery options\n• Competent melee combatant\n• Uses Light to enhance her abilities\n\n<b>Weaknesses:</b>\n• Can struggle against groups of smaller enemies\n• Weaker with fewer allies\n• Rather self-righteous a lot of the time
+PERK_Tinkerer_01_Name	Steady Hands
+PERK_Tinkerer_02_Name	Fine Tuning
+PERK_Tinkerer_03_Name	Composure
+PERK_Tinkerer_04_Name	Wide Reach
+PERK_Tinkerer_05_Name	Jagged Gears
+PERK_Tinkerer_06_Name	Net Launcher
+PERK_Tinkerer_07_Name	Confusion
+PERK_Tinkerer_08_Name	Overcharge
+PERK_Tinkerer_09_Name	Restorative Tonic
+PERK_Tinkerer_10_Name	Hardened
+PERK_Tinkerer_11_Name	Rejuvenating Vapor
+Tinkerer_MASTERY_1_Name	Field Medic
+Tinkerer_MASTERY_1_Desc	Heal an ally or apply a negative condition to an enemy each turn
+Tinkerer_MASTERY_2_Name	Spendthrift
+Tinkerer_MASTERY_2_Desc	Perform two actions with lost icons before your first rest and then only rest after having played at least two actions with lost icons since your previous rest
+Event_GH.Tinkerer_Text	The Tinkerer's workshop has taken over half the Craftsman's floor by the time he decides to leave it. Nobody argues; the Craftsman has been using his drill press for a month and has no intention of giving it back. "Keep it," the Tinkerer says. "Keep all of it. I am tired of carrying things."\nHe is going east, to look for the places the old maps mark and the new ones do not, with a bag of elixirs and one battle bot that follows him like a dog and has never once worked properly. He says the not-working is a feature. He has always said that.\nThe last thing he builds in Frosthaven is a lamp for the Infirmary that lights itself when someone comes in after dark, so the healers stop knocking over the tray of knives. It works the first time. He looks faintly disappointed.\nA letter comes the next summer, smudged and full of diagrams. The Craftsman reads it twice and starts building something. He will not say what.
+Event_GH.Tinkerer_Name	Tinkerer Retires
+GH.Tinkerer-1_Front	You return to your rooms for the evening to find a small note resting on the ground in front of your door.\n\nIt is from the Tinkerer, explaining that he has been pursuing further studies in flammable liquid delivery methods. He asks for your help in delivering to him a small robotic contraption that he absentmindedly left behind in a secret stash under the floorboards of his old room.\n\nHe details the device’s location and gives an address to deliver it to—some small village far to the northwest.
+GH.Tinkerer-1_Option_1	Oblige the Tinkerer and send along the contraption.
+GH.Tinkerer-1_Option_1_Outcome	You don’t have the money to send him the contraption, so you decide just to keep it for yourself.\n\nLike an eager treasure hunter, you pry up the floorboards in the Tinkerer’s old room and find a trove of useless junk, plus a detailed robotic spider that is anything but useless. You switch it on and let it scurry around the room. This could be a significant help in battle. No way it’s getting shipped off.
+GH.Tinkerer-1_Option_2	You don’t want to pay for postage. Just keep the thing for yourself.
+GH.Tinkerer-1_Option_2_Outcome	Like an eager treasure hunter, you pry up the floorboards in the Tinkerer’s old room and find a trove of useless junk, plus a detailed robotic spider that is anything but useless. You switch it on and let it scurry around the room. This could be a significant help in battle. No way it’s getting shipped off.
+GH.Tinkerer-2_Front	You probably wouldn’t have normally noticed it, but sometimes nature calls and you need to head off the beaten path to get some privacy.\n\nHidden in the bushes, you come across the smoking wreckage of some crude machine. It looks to have broken down at some point and was left here to rust and decay.\n\nMost of it is scrap, but thanks to your time with the Tinkerer, you know a good power core when you see one. It’s a bit heavier than you’d hoped, but it should fetch a good price back in Gloomhaven.
+GH.Tinkerer-2_Option_1	Take the core with you.
+GH.Tinkerer-2_Option_1_Outcome	The core sure is heavy. You manage it rather well, but it will be a bit of hindrance in battle. You hope the payoff is worth the trouble.
+GH.Tinkerer-2_Option_2	Leave the core alone. You don't want anything weighing you down in battle.
+GH.Tinkerer-2_Option_2_Outcome	You decide the risk is not worth the reward and walk away from the contraption before you scratch yourself on the rusted metal and give yourself some foul disease. And just the thought of haggling with the Quatryls in the Mixed District about a fair price makes you tired and irritable.
+Tinkerer_FullName	Tinkerer
+CODEX_Hero_Tinkerer_Title	Tinkerer
+CODEX_HeroInfo_Tinkerer	<b>Role:</b> Ranged Support\n<b>Difficulty:</b> Medium\n\nYou are the party's support from range. Your heals reach any ally within a few hexes, and other cards give allies their discarded or lost cards back, or even raise an ally's hand size.\n\nYour attacks are ranged and often hit areas, adding <sprite name=Wound>, <sprite name=Immobilize> or <sprite name=Poison>. You can also lay traps and mines, and summon gadgets like a decoy or a battlebot.\n\nStay behind your allies: you are fragile, but you keep everyone else in the fight much longer.\n\n<b>Strengths:</b>\n• Decent ranged abilities\n• Effective healer\n• Wide range of options\n\n<b>Weaknesses:</b>\n• Very fragile\n• Weaker in smaller teams\n• Has trouble opening tight jars
+PERK_Voidwarden_01_Name	Steady Will
+PERK_Voidwarden_02_Name	Unwavering
+PERK_Voidwarden_03_Name	Mending Touch
+PERK_Voidwarden_04_Name	Mending Hands
+PERK_Voidwarden_05_Name	Blight
+PERK_Voidwarden_06_Name	Hex
+PERK_Voidwarden_07_Name	Cold Void
+PERK_Voidwarden_08_Name	Dark Void
+PERK_Voidwarden_09_Name	Focused Will
+PERK_Voidwarden_10_Name	Unfazed
+PERK_Voidwarden_10_Desc	Ignore negative scenario effects
+PERK_Voidwarden_11_Name	Grave Defense
+PERK_Voidwarden_11_Desc	Whenever you rest, you may <sprite name=ConsumeIce> or <sprite name=ConsumeDark> to give <sprite name=Ward> to one ally who has <sprite name=Poison>
+Voidwarden_MASTERY_1_Name	Puppet Master
+Voidwarden_MASTERY_1_Desc	Cause enemies to suffer <sprite name=Damage> 20 or more in a single turn with granted or commanded attacks
+Voidwarden_MASTERY_2_Name	Touched by the Void
+Voidwarden_MASTERY_2_Desc	Give at least one ally or enemy <sprite name=Poison>, <sprite name=Strengthen>, <sprite name=Bless>, or <sprite name=Ward> each round
+Event_GH.Voidwarden_Text	The Voidwarden has been filling a jar with black sand. A pinch at a time, after every scenario, from wherever the Void touched the world through her and left its coarse, dark residue behind. The jar is nearly full. "That is the measure of it," she says, turning it in the light. "Everything I ever made disappear. It does not look like much."\nShe is going to the Capital, to the archives, to write down what she knows. "No one who touches the Void lives long enough to teach the next one. I intend to be the exception." She says it without drama; the scars down her left side say the rest.\nShe leaves the jar with the Alchemist, with a label in her small, exact hand: DO NOT OPEN. The Alchemist, who has opened everything else anyone ever left her, puts it on the highest shelf and does not touch it.\nThe morning the caravan goes, the sick in the Infirmary are quieter than usual, and the healers find every one of them a little better than the day before. Nobody saw her go in.
+Event_GH.Voidwarden_Name	Voidwarden Retires
+Voidwarden_FullName	Voidwarden
+CODEX_Hero_Voidwarden_Title	Voidwarden
+Voidwarden_DESCRIPTION	The Void is a dangerous and terrible place. Anything that enters it dissolves into a coarse, black sand without explanation or remorse. After a near-death experience with the Void as a child which scarred the left side of their body, the Voidwarden made it their duty to protect others from a similar fate. Being touched by the Void has left more than just physical scars however. They can channel the power behind the Void to manipulate the thoughts and actions of both allies and foes. The Voidwarden can also offer powerful boons of healing and stamina, but those gifts comes at a terrible price.
+CODEX_HeroInfo_Voidwarden	<b>Role:</b> Crowd Control\n<b>Difficulty:</b> High\n\nYou rarely attack yourself. Instead you take control of enemies, making them move or attack their own allies for an action, and you command your allies to <sprite name=Attack> or <sprite name=Move> on your turn.\n\nYour power has a price. Many of your heals and blessings also <sprite name=Poison> the ally you help, and some cards <sprite name=Curse> you unless you spend <sprite name=CreateDark>. Plan who you heal and when.\n\nYou create <sprite name=CreateDark> and <sprite name=CreateIce>; Ice makes your heals stronger. Your own few attacks pile on several conditions at once.\n\n<b>Strengths:</b>\n• Large starting hand size\n• Works better in larger parties\n• Wide array of bottom half abilities\n\n<b>Weaknesses:</b>\n• Generally slow character\n• Reasonably squishy\n• Complicated skincare regime
 Augment	Augment
 Augment_DiscardReminder	When another <nobr><color=#A7B3D2>Augment</color></nobr> is played, discard this card.
 Glossary_Augment	Augment: An active Augment's effects will be applied whenever the Mindthief uses a melee attacks.
@@ -2241,6 +2243,13 @@ Song	Song
 Song_DiscardReminder	When another <color=#EBB0AA>Song</color> is played, discard this card.
 Song_XPText	Gain <size=130%><voffset=-2><sprite name=XP1></voffset></size> at the beginning of each of your turns.
 Glossary_Song	Song: An active Song's effects will be persistently applied until another Song is played.
+Doom	Doom
+GUI_TOOLTIP_ADD_DOOM	Playing a Doom will remove any other active Dooms and discard them.
+GUI_TOOLTIP_TRANSFER_DOOM	Transfer one Doom from a deceased enemy to another target.
+COMBAT_LOG_DOOM	{0} applies Doom to {1}
+AddDoom	Doom
+ChooseAbility	Doom
+AddSong	Song
 TransferDooms	Transfer Dooms
 Event__Text	Their personal quest complete, the mercenary leaves Frosthaven for good. Someone else will take up the fight.
 GiveSupplyCard	Give Medical Pack

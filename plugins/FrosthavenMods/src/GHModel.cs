@@ -310,6 +310,16 @@ namespace FrosthavenMods
                          .Where(t => t.parent != null && animatorTr.IsChildOf(t.parent) && !animatorTr.IsChildOf(t))   // a branch beside the Animator's
                          .Where(t => t.GetComponentsInChildren<ParticleSystem>(true).Length > 0).ToList())
                 top.SetParent(animatorTr, true);
+            // Gloomhaven's ground glow under a summon (OmniDec_<Model>, an OmniDecal box) comes along with the particles; its
+            // shader isn't in Frosthaven and the box drew as a mirrored ball over the Black Unicorn (the user's manual test,
+            // 2026-10-29). Hidden until the VFX pass gives it a Frosthaven decal.
+            foreach (MeshRenderer r in animatorTr.GetComponentsInChildren<MeshRenderer>(true)
+                         .Where(r => r.name.StartsWith("OmniDec", StringComparison.Ordinal)
+                                     || r.sharedMaterials.Any(m => m != null && m.name.IndexOf("OmniDecal", StringComparison.Ordinal) >= 0)))
+            {
+                r.enabled = false;
+                if (Reported.Add("omnidecal " + e.Key)) Plugin.Log.LogInfo($"Gloomhaven model: {e.Key}'s ground decal {r.name} hidden (no Frosthaven shader)");
+            }
         }
 
         private static Built Build(Entry e)

@@ -490,9 +490,12 @@ CARD_FIXES = {
     ],
 }
 # Gloomhaven text keys Frosthaven's card face and figure UI ask for by name for Gloomhaven-only card elements (no card
-# file names them): the augment and song banners and reminders
+# file names them): the augment and song banners and reminders, the doom header and discard line (gh_layout) and the doom
+# help texts (the action box read "UNDEFINED GUI_TOOLTIP_ADD_DOOM", the user's manual test 2026-10-29)
 UI_TEXT_KEYS = ("Augment", "Augment_DiscardReminder", "Augment_OnYourMeleeAttacks", "Glossary_Augment",
-                "Song", "Song_DiscardReminder", "Song_XPText", "Glossary_Song")
+                "Song", "Song_DiscardReminder", "Song_XPText", "Glossary_Song",
+                "Doom", "Doom_MarkText", "Doom_DiscardReminderText", "GUI_TOOLTIP_ADD_DOOM", "GUI_TOOLTIP_TRANSFER_DOOM",
+                "COMBAT_LOG_DOOM")
 LONG_TEXT, LONG_TEXT_SIZE = 280, 85   # visible letters past which a card half's text is drawn smaller, and how small
 TEXT_FIXES = {
     "GH_225_B": "You and all adjacent normal enemies suffer 7 damage.",
@@ -650,17 +653,24 @@ def convert_any_infusion(s):
     ability with the element picker, as Frosthaven's own cards write it (Frozen Fist's Seeing Stars). Frosthaven only
     asks for a half-level "Any" through an older card-face path that never offers it: the player's infusion stayed
     "Any" ("Red Guard is infusing Any", no picker; Prismatic Sickle top, the user's manual test 2026-10-29). The ability
-    goes at the end of the half's abilities, so it comes after the action as the half's infusion did."""
+    goes at the end of the half's abilities, so it comes after the action as the half's infusion did.
+    Each element is its own one-element picker, one after the other: Frosthaven's cards only ever ask for one, and its
+    picker given [Any, Any, Any] showed two slots, infused one element, then reopened and ended the action with the
+    rest unused (Prismatic Sickle top, the user's manual test 2026-10-29; their choice: pick one, three times)."""
     def one(m):
         if not re.match(r"^ {12}\S", m.group("half").splitlines()[-1]) and not re.match(r"^ {16,}", m.group("half").splitlines()[-1]):
             return m.group(0)   # the line before isn't part of the abilities block: left as it was (none of the ported cards)
         eol = "\r\n" if m.group("line").endswith("\r\n") else "\n"
-        els = m.group("els") if m.group("els").startswith("[") else "[Any]"
+        els = re.findall(r"\w+", m.group("els"))
         key = ("T" if m.group("name") == "Top" else "B") + "Infuse"
-        block = [f"            {key}:", "                CanUndo: False", "                CanSkip: False",
-                 f"                Infuse: {els}", "                ShowElementPicker: True",
-                 "                StartAbilityRequirements:", "                    Type: ThisAbility", "                    Vars:",
-                 "                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)"]
+        block = []
+        for i, el in enumerate(els):
+            block += [f"            {key}{i + 1 if i else ''}:", "                CanUndo: False", "                CanSkip: False",
+                      f"                Infuse: [{el}]"]
+            if el == "Any":
+                block.append("                ShowElementPicker: True")
+            block += ["                StartAbilityRequirements:", "                    Type: ThisAbility", "                    Vars:",
+                      "                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)"]
         return m.group("half") + eol.join(block) + eol
     return HALF_INFUSE_ANY.sub(one, s)
 
@@ -1082,6 +1092,12 @@ def main():
         if key in strings:
             table.setdefault(key, strings[key])
     table.setdefault("GH_Command", "<b>Command:</b>")
+    # the action box names the ability by its type ("Rain of Arrows: UNDEFINED" = AddDoom, "UNDEFINED AddSong"); the doom
+    # help box's title is ChooseAbility, where Gloomhaven had Doom (Frosthaven uses that key for dooms only).
+    # Gloomhaven's own AddSong text means something else ("Additional Song Capacity")
+    table.setdefault("AddDoom", "Doom")
+    table.setdefault("ChooseAbility", "Doom")
+    table.setdefault("AddSong", "Song")
     table.setdefault("TransferDooms", "Transfer Dooms")   # the combat log names the ability by its type (Lead to Slaughter bottom: "UNDEFINED TransferDooms")   # gh_layout's stand-in for Gloomhaven's Command banner
     table.setdefault("Event__Text", "Their personal quest complete, the mercenary leaves Frosthaven for good. "
                                     "Someone else will take up the fight.")

@@ -54,6 +54,8 @@ Layout:
             Icon: Positive_AttackPlus
             ListLayout: "$GH_397_B$"
             Layout:
+                - Row: "$Doom_MarkText$"
                 - Row: "$GH_397_B$"
                 - Row: "<size=20%> "
                 - XPTracker: BDoomStartTurnAbilityAfterXCasterTurns
+                - Row: "<size=70%>$Doom_DiscardReminderText$"

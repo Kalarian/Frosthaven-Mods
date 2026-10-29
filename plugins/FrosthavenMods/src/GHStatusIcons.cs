@@ -117,6 +117,31 @@ namespace FrosthavenMods
             catch (Exception e) { if (GHClasses.Reported.Add("song refresh")) Plugin.Log.LogWarning("Gloomhaven songs: refresh: " + e); }
         }
 
+        /// <summary>A doomed enemy shows the doom on its status row. Frosthaven draws it only from the bonus's list layout
+        /// (EffectsBar.ToggleDoomEffect, nothing when it's missing), which only Gloomhaven's Doom card element filled in:
+        /// the ported card face is a plain Active, so the Algox Priest Rain of Arrows doomed showed nothing (the user's
+        /// manual test, 2026-10-29). The game's own generator (the doom branch: the class icon, the card's name) runs
+        /// first, with the card half's text as the doom's layout. Every Gloomhaven doom is on a bottom half.</summary>
+        [HarmonyPatch(typeof(EffectsBar), nameof(EffectsBar.ToggleDoomEffect), new[] { typeof(string), typeof(CActiveBonus) })]
+        [HarmonyPrefix]
+        private static void DoomRow(CActiveBonus bonus)
+        {
+            try
+            {
+                if (bonus == null || !bonus.IsDoom || bonus.BaseCard == null || bonus.BaseCard.ID < 20000 || bonus.BaseCard.ID >= 30000) return;
+                if (bonus.Layout?.ListLayouts != null && bonus.Layout.ListLayouts.Count > 0 && bonus.Layout.ListLayouts[0] != null) return;
+                string text = "$GH_" + (bonus.BaseCard.ID - 20000) + "_B$";
+                CDoom doom = bonus.Caster?.Dooms?.FirstOrDefault(d => d.DoomAbilities.Any(a => a == bonus.Ability));
+                if (doom != null && string.IsNullOrEmpty(doom.ActiveBonusLayout)) doom.ActiveBonusLayout = text;
+                ActiveBonusUIUtils.CheckForLayoutToGenerate(bonus, out _);
+                if (bonus.Layout?.ListLayouts == null) return;
+                if (bonus.Layout.ListLayouts.Count == 0) bonus.Layout.ListLayouts.Add(text);
+                else if (bonus.Layout.ListLayouts[0] == null) bonus.Layout.ListLayouts[0] = text;
+                if (GHClasses.Reported.Add("doom row " + bonus.BaseCard.ID)) Plugin.Log.LogInfo($"Gloomhaven dooms: {bonus.BaseCard.Name} shows on the doomed figure");
+            }
+            catch (Exception e) { if (GHClasses.Reported.Add("doom row")) Plugin.Log.LogWarning("Gloomhaven dooms: status row: " + e); }
+        }
+
         /// <summary>The inspect panel lists the songs on the figure with its other bonuses, as Gloomhaven does.</summary>
         [HarmonyPatch(typeof(ActorStatPanel), "GetAllActiveBonuses")]
         [HarmonyPostfix]
