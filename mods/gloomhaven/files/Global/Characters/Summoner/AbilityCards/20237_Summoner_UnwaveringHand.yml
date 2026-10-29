@@ -1,0 +1,48 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_UnwaveringHand$
+Character: SummonerID
+ID: 20237
+Level: 1
+Initiative: 31
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 2
+                Range:
+                    Amount: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        XP: 1                
+    Bottom:
+        Abilities:
+            TControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Move: 1
+                            StrengthIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 4
+                Target: 1
+                Filter: Enemy
+                AnimOverload: MindControl
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*THeal.Range*</mark>"
+            - Column:
+    Bottom:
+        - Row: "$GH_152_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Move> 1"
+        - Row: "<size=20%> "
+        - Row: "$With_YouControllingActions$"

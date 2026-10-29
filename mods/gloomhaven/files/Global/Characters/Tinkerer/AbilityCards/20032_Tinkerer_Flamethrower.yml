@@ -1,0 +1,57 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Flamethrower$
+Character: TinkererID
+ID: 20032
+Level: 1
+Initiative: 47
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Conditions: Wound
+                AreaEffect: "0,0,G|2,0,R|1,1,R|3,1,R|2,2,E|4,0,E"
+                AnimOverload: LeftWristFlameThrower
+                MultiPassAttack: False
+        Infuse: Fire
+        XP: 2
+    Bottom:
+        Abilities:
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter: [Self]
+                AnimOverload: FlamethrowerField
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Self, Ally]
+Layout:
+    Top:
+        - ColumnWidths: "70,25"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Wound>"
+            - Row: "<size=20%> "
+            - Row:
+                - ColumnWidths: "30,20,20"
+                - Column:
+                - Column:
+                - Column:
+                    - Infuse: Fire
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*, <b></b> $Affect_SelfAndAllAdjacentAllies$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<b></b> $Affect_SelfAndAllAdjacentAllies$"

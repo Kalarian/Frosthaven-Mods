@@ -1,0 +1,8 @@
+Parser: HeroSummon
+ID: BeastTyrantBearID
+LocKey: $BeastTyrantBear$
+Model: BeastTyrantBear
+HealthTable: [  10,   12,   14,   16,  18,  20,  22,  24,  26 ]
+Move: 3
+Attack: 2
+Range: 1

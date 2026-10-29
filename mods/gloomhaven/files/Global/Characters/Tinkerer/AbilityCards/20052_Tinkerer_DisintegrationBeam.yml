@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DisintegrationBeam$
+Character: TinkererID
+ID: 20052
+Level: 5
+Initiative: 36
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TKill:
+                Kill: True
+                Filter:
+                    TargetType: Enemy
+                    Health: "<= 5"
+                AnimOverload: LeftWristTechDisintegrationBeam
+                AreaEffect: "0,0,G|2,0,R|4,0,R|6,0,R|8,0,E"
+                AreaEffectLayoutOverride: "0,0,G|1,1,R|2,2,R|3,3,R|4,4,E"
+                MultiPassAttack: False
+                XPPerTarget: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BDisarm:
+                Disarm:
+                    DiamondEnhancements: 1
+
+                Filter: Enemy
+                AnimOverload: HarmRadialAdjacentDisorientingFlash
+                Target: 1
+#                Enhancements: 1
+Layout:
+    Top:
+        - ColumnWidths: "5,60,35"
+        - Column:
+        - Column:
+            - Row: "<size=0%> "
+            - Row: "$GH_052_T_1$"
+            - Row: "<size=20%> "
+            - Row: "$GH_052_T_2$"
+            - Row: "<size=0%> "
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Disarm> @BDisarm@"
+        - Row: "$Target_OneAdjacentEnemy$"

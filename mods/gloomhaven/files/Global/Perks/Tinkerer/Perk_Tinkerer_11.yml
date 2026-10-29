@@ -1,0 +1,17 @@
+Parser: Perk
+ID: Tinkerer11
+Name: PERK_Tinkerer_11_Name
+Description: PERK_Tinkerer_11_Desc
+CharacterID: TinkererID
+Available: 1
+Flags: [Passive, ExecuteAbilitiesAfterLongRest]
+Abilities:
+    BHeal:
+        Heal: 2
+        Range: 3
+        Target: 1
+        Targeting: Range
+        Filter: Ally
+        CanSkip: True
+        CanUndo: False
+        AnimOverload: Heal

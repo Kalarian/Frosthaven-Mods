@@ -1,0 +1,48 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_AutoTurret$
+Character: TinkererID
+ID: 20054
+Level: 6
+Initiative: 34
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    Attack: 2
+                    Range: 5
+                    AnimOverload: RangedAttack
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [1,0,1,0,1]
+                AnimOverload: PowerUpPotent
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH_054_T$"
+            Layout: "$GH_054_T$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<sprite name=Range>*BHeal.Range* @BHeal.Range@"
+            - Column:

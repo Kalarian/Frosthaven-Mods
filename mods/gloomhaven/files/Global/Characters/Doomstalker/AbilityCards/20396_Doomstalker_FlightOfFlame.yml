@@ -1,0 +1,41 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FlightofFlame$
+Character: DoomstalkerID
+ID: 20396
+Level: 4
+Initiative: 53
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TTrap:
+                Trap:
+                    TrapName: BearTrap
+                    Damage: 2
+                    Conditions: Wound
+                    AdjacentRange: 1
+                    AdjacentConditions: Wound
+                    AdjacentFilter: Enemy
+                Target: 1
+                SpawnDelay: 2.8
+                AnimOverload: LayTrap
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 5
+                    CircleEnhancements: 1
+                    Jump: True
+Layout:
+    Top:
+        - Row: "$GH_396_T_1$"
+        - Row: "<size=20%> "
+        - Row: "$GH_396_T_2$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - AddedEffect: "<sprite name=Jump>"
+            - Column:

@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Doomstalker04
+Name: PERK_Doomstalker_04_Name
+Description: PERK_Doomstalker_04_Desc
+CharacterID: DoomstalkerID
+Available: 1
+CardsToRemove: [AMC_Basic_P0]
+CardsToAdd: [AMC_Stun_P0]

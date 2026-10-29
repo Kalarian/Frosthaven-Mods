@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HowlingBolts$
+Character: BeastTyrantID
+ID: 20486
+Level: 1
+Initiative: 47
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+                Range: 4
+                Target:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move: 
+                                Amount: 5
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - Row: "<sprite name=Target>*TAttack.Target* @TAttack.Target@"
+            - Column:
+    Bottom:
+        - Row: "$GH_Command$"
+        - Row: "<b><size=130%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"

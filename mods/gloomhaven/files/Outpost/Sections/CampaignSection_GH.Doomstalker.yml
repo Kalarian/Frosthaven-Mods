@@ -1,0 +1,10 @@
+Parser: CampaignSection
+ID: GH.Doomstalker
+Name: Doomstalker Retires
+SkipNarration: True
+SkipCompletedNotification: False
+Effects:
+    - Type: EnableEvent
+      Param1: GH.Doomstalker-1
+    - Type: EnableEvent
+      Param1: GH.Doomstalker-2

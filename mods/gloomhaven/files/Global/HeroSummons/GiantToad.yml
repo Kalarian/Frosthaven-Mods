@@ -1,0 +1,16 @@
+Parser: HeroSummon
+ID: GiantToadID
+LocKey: $GiantToad$
+Model: GiantToad
+Health:
+    Amount: 7
+    SquareEnhancements: 1
+Move:
+    Amount: 1
+    CircleEnhancements: 1
+Attack:
+    Amount: 1
+    DiamondEnhancements: 1
+Range:
+    Amount: 1
+OnAttackCondition: Stun

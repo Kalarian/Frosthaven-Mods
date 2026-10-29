@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GasCanister$
+Character: TinkererID
+ID: 20053
+Level: 6
+Initiative: 71
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TTrap:
+                Trap:
+                    TrapName: PoisonMine
+                    Damage: 4
+                    Conditions: Muddle
+                SpawnDelay: 2.8
+                Target: 1
+                AnimOverload: GadgetAdjacentNetShooter
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    RecoverDiscardedCards: 1
+                    Range:
+                        Amount: 3
+                    Filter:
+                       TargetType: Ally
+                       ActorType: Player
+                    AnimOverload: TargetRecover
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [0,1,0,1]
+                AnimOverload: PowerUpPotent
+
+Layout:
+    Top:
+        - Row: "$GH_053_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$GH_053_B$"
+            Layout: "$GH_053_B$"
+            Icon: Recover
+        - Row: "<size=50%> "
+        - XPTracker: BActive

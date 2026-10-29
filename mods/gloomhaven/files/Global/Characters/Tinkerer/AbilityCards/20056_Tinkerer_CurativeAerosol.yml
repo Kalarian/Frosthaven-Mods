@@ -1,0 +1,75 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CurativeAerosol$
+Character: TinkererID
+ID: 20056
+Level: 7
+Initiative: 21
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TMove1:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            THeal1:
+                Heal:
+                    Amount: 2
+                    DiamondPlusEnhancements: 1
+                Range: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+            TMove2:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            THeal2:
+                Heal:
+                    Amount: 2
+                    DiamondPlusEnhancements: 1
+                Range: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 4
+                    DiamondPlusEnhancements: 1
+                Range: 3
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Move> *TMove1*"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal1* <size=100%><voffset=1>@THeal1@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*THeal1.Range*</mark>"
+            - Column:
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Move> *TMove2*"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal2* <size=100%><voffset=1>@THeal2@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*THeal2.Range*</mark>"
+            - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+                - Row: "<sprite name=Target>*BHeal.Target* @BHeal.Target@"
+            - Column:

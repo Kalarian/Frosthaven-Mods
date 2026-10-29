@@ -1,0 +1,14 @@
+Parser: HeroSummon
+ID: RockColossusID
+LocKey: $RockColossus$
+Model: RockColossus
+Health:
+    Amount: 7
+    SquareEnhancements: 1
+Move:
+    Amount: 1
+    CircleEnhancements: 1
+Attack:
+    Amount: 3
+    Infuse: Earth
+Range: 1

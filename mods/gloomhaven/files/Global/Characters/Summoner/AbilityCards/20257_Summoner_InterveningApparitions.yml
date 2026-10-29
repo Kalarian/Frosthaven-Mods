@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_InterveningApparitions$
+Character: SummonerID
+ID: 20257
+Level: 8
+Initiative: 68
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                PreventDamage: 3
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter:
+                        TargetType: Ally
+                        ActorType: Summon
+                    XPTracker: [1,1,1]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                RemoveConditions: All
+                Conditions: [Curse]
+                Filter: Self
+                SubAbilities:
+                    BRemoveConditionsSubShuffleModDeck:
+                        ShuffleModifierDeck: True
+                AnimOverload: PowerUp
+        Infuse: Light
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Positive_DamagePrevent
+            ListLayout: "$GH_257_T$"
+            Layout: "$GH_257_T$"
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "$GH_257_B$"
+        - Row: "<size=50%> "
+        - Infuse: Light

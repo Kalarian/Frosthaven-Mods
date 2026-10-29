@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DarkenedSkies$
+Character: DoomstalkerID
+ID: 20393
+Level: 3
+Initiative: 25
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 3
+                Target: -1
+                XPPerTarget: 1
+                XPPerTargetPerEnemyCount: 2
+                AnimOverload: Attack_AOE_Radial
+                MultiPassAttack: False
+                
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomOnDeath:
+                                AddActiveBonus:
+                                    Attack: 2
+                                    Range: 3
+                                    Target: 3
+                                    AnimOverload: RangedAttack
+                                ActiveBonus:
+                                    Behaviour: DuringActionAbilityOnDeath
+                                    TriggerOnCaster: True
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> *TAttack.Range*</nobr>"
+        - Row: "<size=20%> "
+        - Row: "$XP_PerTwoEnemiesTargeted$"
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_393_B$"
+            Layout: "$GH_393_B$"

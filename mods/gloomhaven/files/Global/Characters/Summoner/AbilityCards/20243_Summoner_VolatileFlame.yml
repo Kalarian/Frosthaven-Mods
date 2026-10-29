@@ -1,0 +1,47 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_VolatileFlame$
+Character: SummonerID
+ID: 20243
+Level: X
+Initiative: 94
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: LivingBombID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 3
+                AnimOverload: RangedAttackFlame
+        Infuse: Fire
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $LivingBomb$
+                    SpecialText:
+                        - Row: "$OnDeath$"
+                        - Row: "<size=20%> "
+                        - Row: "<nobr><b>Attack <sprite name=Attack> 3</nobr> <sprite name=CreateFire>"
+                        - Row: "$Target_AllEnemiesWithin$ $Range$ 2"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Fire

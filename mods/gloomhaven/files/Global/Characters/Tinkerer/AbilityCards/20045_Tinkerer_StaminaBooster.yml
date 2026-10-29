@@ -1,0 +1,39 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StaminaBooster$
+Character: TinkererID
+ID: 20045
+Level: 2
+Initiative: 48
+Discard: [Discard,Permanently Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 4
+                    DiamondPlusEnhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BRecover:
+                RecoverLostCards: 1
+                Range:
+                    Amount: 3
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: TargetRecover
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*THeal.Range*</mark>"
+            - Column:
+    Bottom:
+        - Row: "$GH_045_B$"

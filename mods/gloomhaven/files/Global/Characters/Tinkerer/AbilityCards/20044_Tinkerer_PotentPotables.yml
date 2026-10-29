@@ -1,0 +1,35 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PotentPotables$
+Character: TinkererID
+ID: 20044
+Level: X
+Initiative: 46
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddHeal: 2
+                Filter: Self
+                AnimOverload: PowerUpPotent
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffHealPerAction
+                    XPTracker: [0,1,0,1]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH_044_T$"
+            Layout: "$GH_044_T$"
+            Icon: Positive_Heal
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

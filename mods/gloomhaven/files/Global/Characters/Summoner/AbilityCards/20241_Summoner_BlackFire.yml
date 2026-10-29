@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BlackFire$
+Character: SummonerID
+ID: 20241
+Level: 1
+Initiative: 24
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 5
+                AnimOverload: RangedAttackFlame
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireWound:
+                        ParentName: TAttack
+                        Conditions: Wound
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BMuddle:
+                Muddle: True
+                Range: 1
+                Target: -1
+                AnimOverload: RadialDebuff
+                Filter: [Enemy]
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* @TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - Row: "<sprite name=Target>*TAttack.Target* @TAttack.Target@"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFire
+            Text: "<sprite name=Wound>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Muddle>"
+        - Row: "$Target_AllAdjacentEnemies$"

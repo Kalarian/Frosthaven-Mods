@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StoneSigil$
+Character: BeastTyrantID
+ID: 20497
+Level: 5
+Initiative: 95
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: MonolithID
+                AnimOverload: Summon
+        XP: 2
+        Infuse: Earth
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move: 
+                                Amount: 5
+                                SquareEnhancements: 2
+                            StrengthIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $Monolith$
+                    SpecialText: "<nobr><sprite name=Shield> 2</nobr>"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,20,20,20"
+            - Column:
+            - Column:
+                - Infuse: Earth
+            - Column:
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Row: "$GH_Command$"
+        - Row: "<b><size=130%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"

@@ -1,0 +1,50 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TyrannicalForce$
+Character: BeastTyrantID
+ID: 20501
+Level: 7
+Initiative: 37
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Conditions: Stun
+                AnimOverload: RangedAttack
+        Infuse: Earth
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move: -1
+                    ControlActorType: Player
+                Range: 3
+                Target: -1
+                Filter:
+                    ActorType: Summon
+                    TargetType: Ally
+                AnimOverload: Command
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - AddedEffect: "<size=130%><sprite name=Stun></size>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Earth
+    Bottom:
+        - Row: "$GH_501_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Move> -1"
+        - Row: "<size=50%> "
+        - Row: "$With_YouControllingActions$"

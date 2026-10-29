@@ -1,0 +1,26 @@
+Parser: Character
+ID: DoomstalkerID
+LocKey: $Doomstalker$
+Model: Doomstalker
+Race: Orchid
+Traits: [ Chaotic, Intimidating, Nimble ]
+Complexity: 2
+MasteryIDs: [ Doomstalker_MASTERY_1, Doomstalker_MASTERY_2 ]
+RetireCampaignSection: GH.Doomstalker
+DefaultSkin: 1
+# PlayerLevel:    [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
+HealthTable:      [  8,  9,  11, 12,  14,  15,  17,  18,  20 ]
+NumberAbilityCardsInBattle: 12
+Role: $Doomstalker_ROLE$
+Description: $Doomstalker_DESCRIPTION$
+Difficulty: $DIFFICULTY_MEDIUM$
+Strengths: $Doomstalker_STRENGTHS$
+Weaknesses: $Doomstalker_WEAKNESSES$
+Adventure_Description: $Doomstalker_ADVENTURE_DESCRIPTION$
+HeroStats:
+    Melee: 1
+    Ranged: 5
+    Mobility: 3
+    Support: 2
+    Defense: 1
+    Control: 3

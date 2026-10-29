@@ -1,0 +1,9 @@
+Parser: HeroSummon
+ID: MonolithID
+LocKey: $Monolith$
+Model: Monolith
+Health: 15
+Move: 0
+Attack: 0
+Range: 0
+Shield: 2

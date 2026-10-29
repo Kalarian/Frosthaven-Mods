@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ImpendingEnd$
+Character: DoomstalkerID
+ID: 20401
+Level: 7
+Initiative: 47
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                SubAbilities:
+                    TAttackSubKill:
+                        Kill: True
+                        AbilityXP: 1
+                        Filter: 
+                            Health: "<= 2"
+                        AnimOverload: None
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BAttackBuff:
+                Attack: 3
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    Filter:
+                        IsDoomed: True
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$GH_401_T$"
+    Bottom:
+        - Active:
+            Ability: BAttackBuff
+            ListLayout: "$GH_401_B$"
+            Layout: "$GH_401_B$"
+            Icon: Positive_AttackPlus

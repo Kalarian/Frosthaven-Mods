@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StormSigil$
+Character: BeastTyrantID
+ID: 20500
+Level: 7
+Initiative: 93
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: WindTotemID
+                AnimOverload: Summon
+        XP: 2
+        Infuse: Air
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 4
+                                DiamondEnhancements: 2
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $WindTotem$
+                    SpecialText:
+                        - Row: "$Target_AllAdjacentEnemies$,"
+                        - Row: "<nobr><sprite name=Push> 2</nobr>"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,20,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Row: "$GH_Command$"
+        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

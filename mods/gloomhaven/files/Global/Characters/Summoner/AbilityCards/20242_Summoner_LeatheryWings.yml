@@ -1,0 +1,37 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LeatheryWings$
+Character: SummonerID
+ID: 20242
+Level: X
+Initiative: 90
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: GiantBatID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BStrengthen:
+                Strengthen:
+                    DiamondPlusEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter: Ally
+                AnimOverload: RadialBuff
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GiantBat$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Flying></nobr>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Strengthen> <size=100%><voffset=1>@BStrengthen@"
+        - Row: "$Affect_AllAdjacentAllies$"

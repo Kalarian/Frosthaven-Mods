@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Summoner_MASTERY_1
+LocalisedName: Summoner_MASTERY_1_Name
+LocalisedDescription: Summoner_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAG: the Lava Golem summoned on the first turn and never killed (GHMasteries.cs, from the ability and summon death records)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_LavaGolemAllScenario]
+        CharacterIDs:
+            ActorID: SummonerID
+        Value: 1
+        Amount: 20236

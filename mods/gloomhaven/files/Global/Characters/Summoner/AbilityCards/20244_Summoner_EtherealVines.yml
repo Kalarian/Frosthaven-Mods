@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EtherealVines$
+Character: SummonerID
+ID: 20244
+Level: X
+Initiative: 30
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Range: 3
+                Conditions: Immobilize
+                AreaEffect: "0,0,R|2,0,R|1,1,R"
+                MultiPassAttack: False
+                AnimOverload: AreaEtherealVines
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BHeal:
+                Heal:
+                    Amount: 1
+                    DiamondPlusEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter:
+                    ActorType: Summon
+                    TargetType: Ally
+                AnimOverload: RadialBuff
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Range> *TAttack.Range*"
+            - Row: "<sprite name=Immobilize>"
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Affect_AllAdjacentSummonedAllies$"

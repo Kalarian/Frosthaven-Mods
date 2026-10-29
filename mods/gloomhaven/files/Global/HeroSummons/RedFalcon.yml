@@ -1,0 +1,14 @@
+Parser: HeroSummon
+ID: RedFalconID
+LocKey: $RedFalcon$
+Model: RedFalcon
+Health:
+    Amount: 2
+    SquareEnhancements: 1
+Move:
+    Amount: 4
+    CircleEnhancements: 1
+Attack:
+    Amount: 2
+Range: 1
+Flying: True

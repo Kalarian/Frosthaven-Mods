@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HarshStimulants$
+Character: TinkererID
+ID: 20058
+Level: 8
+Initiative: 27
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 9
+                    DiamondEnhancements: 2
+                AnimOverload: HarshStimulantsAttack
+            TDamage:
+                Damage: 2
+                Filter: Self
+                AnimOverload: None
+                AutoTrigger: True
+        XP: 2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 2
+                Range: 1
+                Target: -1
+                Filter: [Self]
+                ActiveBonus:
+                    Behaviour: BuffAttack
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Ally]
+                AnimOverload: StimulantField
+                SubAbilities:
+                    TBuffSubDamage:
+                        Damage: 2
+                        Range: 1
+                        Target: -1
+                        Filter: [Ally]
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Row: "$GH_058_T$"
+    Bottom:
+        - Active:
+            Ability: BAttack
+            ListLayout: "<b></b> $GH_058_B_1$"
+            Layout: "<b></b> $GH_058_B_1$"
+            Icon: Positive_AttackPlus_Ally_Aura
+        - Row: "<size=50%> "
+        - Row: "$GH_058_B_2$"

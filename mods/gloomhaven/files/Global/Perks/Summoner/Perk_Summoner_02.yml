@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Summoner02
+Name: PERK_Summoner_02_Name
+Description: PERK_Summoner_02_Desc
+CharacterID: SummonerID
+Available: 3
+CardsToRemove: [AMC_Basic_M1]
+CardsToAdd: [AMC_Basic_P1]

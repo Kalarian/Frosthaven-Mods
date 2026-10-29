@@ -1,0 +1,31 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ProximityMine$
+Character: TinkererID
+ID: 20030
+Level: 1
+Initiative: 62
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TTrap:
+                Trap:
+                    TrapName: DamageMine
+                    Damage: 6  
+                    TriggeredXP: 2
+                SpawnDelay: 2.2
+                Target: 1
+                AnimOverload: LayTrap
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "$GH_030_T_1$"
+        - Row: "<size=50%> "
+        - Row: "$GH_030_T_2$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

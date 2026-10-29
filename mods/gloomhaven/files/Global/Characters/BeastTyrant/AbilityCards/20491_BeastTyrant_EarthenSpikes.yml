@@ -1,0 +1,67 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EarthenSpikes$
+Character: BeastTyrantID
+ID: 20491
+Level: 2
+Initiative: 11
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Conditions: Immobilize
+                AnimOverload: RangedAttack
+        Infuse: Earth
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 2
+                Target: -1
+                Targeting: All
+                Filter:
+                    ActorType: Summon
+                    TargetType: Ally
+                ActiveBonusDuration: Round
+                AnimOverload: RadialBeneficial
+            BRetaliate:
+                Retaliate: 2
+                Target: -1
+                Targeting: All
+                Filter:
+                    ActorType: Summon
+                    TargetType: Ally
+                ActiveBonusDuration: Round
+                AnimOverload: RadialBeneficial
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Earth
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*, $Affect_AllSummonedAllies$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield*"
+                - Row: "$Affect_AllSummonedAllies$"
+        - Divider:
+        - Active:
+            Ability: BRetaliate
+            Icon: Positive_Retaliate
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*, $Affect_AllSummonedAllies$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate*"
+                - Row: "$Affect_AllSummonedAllies$"

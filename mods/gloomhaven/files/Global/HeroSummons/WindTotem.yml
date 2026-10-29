@@ -1,0 +1,15 @@
+Parser: HeroSummon
+ID: WindTotemID
+LocKey: $WindTotem$
+Model: WindTotem
+Health: 8
+Move: 0
+Attack: 1
+Range: 1
+AttackOverride:
+    ParentName: DefaultAttack
+    AreaEffect: "0,0,G|2,0,R|1,1,R|-1,1,R|-2,0,R|-1,-1,R|1,-1,R"
+    MultiPassAttack: False
+    SubAbilities:
+        AttackOverrideSubPush:
+            Push: 2

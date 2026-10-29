@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ReinvigoratingElixir$
+Character: TinkererID
+ID: 20037
+Level: 1
+Initiative: 37
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BRecover:
+                RecoverDiscardedCards: All
+                Range:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: TargetRecover
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<sprite name=Range>*THeal.Range* @THeal.Range@"
+            - Column:
+    Bottom:
+        - Row: "$GH_037_B$"

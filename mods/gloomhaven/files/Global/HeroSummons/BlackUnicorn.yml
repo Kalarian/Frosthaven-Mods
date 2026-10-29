@@ -1,0 +1,16 @@
+Parser: HeroSummon
+ID: BlackUnicornID
+LocKey: $BlackUnicorn$
+Model: BlackUnicorn
+Health:
+    Amount: 6
+    SquareEnhancements: 1
+Move:
+    Amount: 4
+    CircleEnhancements: 1
+Attack:
+    Amount: 4
+    DiamondEnhancements: 1
+Range:
+    Amount: 1
+Pierce: 3

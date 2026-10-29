@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: BeastTyrant_MASTERY_2
+LocalisedName: BeastTyrant_MASTERY_2_Name
+LocalisedDescription: BeastTyrant_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: Value distinct enemies given a negative condition by the character or its summons (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_EnemiesDebuffed]
+        CharacterIDs:
+            ActorID: BeastTyrantID
+        Value: 10

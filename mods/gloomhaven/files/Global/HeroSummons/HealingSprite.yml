@@ -1,0 +1,20 @@
+Parser: HeroSummon
+ID: HealingSpriteID
+LocKey: $HealingSprite$
+Model: HealingSprite
+Health:
+    Amount: 2
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    CircleEnhancements: 1
+Attack:
+    Amount: 1
+Range: 
+    Amount: 3
+    SquareEnhancements: 1
+SpecialAbilities:
+    AHeal:
+        Heal: 2
+        Range: 2
+        Filter: [Self,Ally]

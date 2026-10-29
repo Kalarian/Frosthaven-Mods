@@ -1,0 +1,7 @@
+Parser: Perk
+ID: BeastTyrant06
+Name: PERK_BeastTyrant_06_Name
+Description: PERK_BeastTyrant_06_Desc
+CharacterID: BeastTyrantID
+Available: 3
+CardsToAdd: [AMC_Heal1_R, AMC_Heal1_R]

@@ -1,0 +1,60 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StrengthinNumbers$
+Character: SummonerID
+ID: 20251
+Level: 5
+Initiative: 45
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move: +1
+                        BAllyAttack:
+                            Attack: +1
+                            Range: +0
+                    ControlActorType: Player
+                Range: 1
+                Filter:
+                    ActorType: Summon
+                    TargetType: Ally
+                AnimOverload: MindControl
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 0
+                Range: 0
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: ActorCount
+                        Filter:
+                            ActorType: Summon
+                            TargetType: Ally
+                    Range:
+                        BasedOn: ActorCount
+                        Filter:
+                            ActorType: Summon
+                            TargetType: Ally
+                AnimOverload: RangedAttackAir
+Layout:
+    Top:
+        - Row: "$GH_238_T$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Move> +1"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> +1"
+        - Row: "<size=20%> "
+        - Row: "$With_YouControllingActions$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> X"
+            - Column:
+                - AddedEffect: "<sprite name=Range>X"
+            - Column:
+        - Row: "$Xis_NumberOfSummonedAllies$"

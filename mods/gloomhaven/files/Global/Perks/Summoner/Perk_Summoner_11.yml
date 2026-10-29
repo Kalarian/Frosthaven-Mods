@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Summoner11
+Name: PERK_Summoner_11_Name
+Description: PERK_Summoner_11_Desc
+CharacterID: SummonerID
+Available: 1
+Flags: [Passive]

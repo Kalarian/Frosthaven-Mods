@@ -1,0 +1,10 @@
+Parser: CampaignSection
+ID: GH.BeastTyrant
+Name: Beast Tyrant Retires
+SkipNarration: True
+SkipCompletedNotification: False
+Effects:
+    - Type: EnableEvent
+      Param1: GH.BeastTyrant-1
+    - Type: EnableEvent
+      Param1: GH.BeastTyrant-2

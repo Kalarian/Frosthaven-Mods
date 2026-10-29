@@ -1,0 +1,62 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RainofArrows$
+Character: DoomstalkerID
+ID: 20376
+Level: 1
+Initiative: 33
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    Attack: 2
+                    Range: 5
+                    AnimOverload: RangedAttack
+                    HelpBoxTooltipLocKey: GUI_ABILITY_CARD_RainofArrows_TOP_HELPBOX
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnDeath
+                    TriggerOnCaster: True
+                    IsAura: True
+                    AuraFilter: 
+                        IsDoomed: True
+                        TargetType: Enemy
+                    AuraTargeting: All
+                    XPTracker: [1,0,1,0]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomAttackDebuff:
+                                Attack: 2
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    Filter:
+                                        PlayerClasses: DoomstalkerID
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTargetAlt
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH_376_T$"
+            Layout: "$GH_376_T$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_376_B$"
+            Layout: "$GH_376_B$"

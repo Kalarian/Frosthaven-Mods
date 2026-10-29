@@ -1,0 +1,14 @@
+Parser: HeroSummon
+ID: NailSphereID
+LocKey: $NailSphere$
+Model: NailSphere
+Health:
+    Amount: 4
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    CircleEnhancements: 1
+Attack: 0
+Range: 0
+Shield: 1
+Retaliate: 2    

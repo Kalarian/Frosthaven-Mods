@@ -1,0 +1,10 @@
+Parser: HeroSummon
+ID: DecoyID
+LocKey: $Decoy$
+Model: Decoy
+Health:
+    Amount: 6
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    CircleEnhancements: 1

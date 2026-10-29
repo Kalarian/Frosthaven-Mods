@@ -1,0 +1,39 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_AMomentsPeace$
+Character: DoomstalkerID
+ID: 20386
+Level: 1
+Initiative: 88
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BHeal:
+                Heal:
+                    Amount: 2
+                    DiamondPlusEnhancements: 1
+                Filter: Self
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:

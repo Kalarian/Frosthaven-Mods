@@ -1,0 +1,14 @@
+Parser: HeroSummon
+ID: TatteredWolfID
+LocKey: $TatteredWolf$
+Model: TatteredWolf
+Health:
+    Amount: 4
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+    CircleEnhancements: 1
+Attack:
+    Amount: 2
+    DiamondEnhancements: 1
+Range: 1

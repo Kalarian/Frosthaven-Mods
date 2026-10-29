@@ -1,0 +1,59 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_InescapableFate$
+Character: DoomstalkerID
+ID: 20397
+Level: 5
+Initiative: 97
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAddDoomSlot:
+                AddDoomSlot: 1
+                Filter: Self
+                ActiveBonusDuration: Persistent
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomStartTurnAbilityAfterXCasterTurns:
+                                AddActiveBonus:
+                                    Kill: True
+                                    Filter: Self
+                                    IgnoreStun: True
+                                    AnimOverload: Hit
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: StartTurnAbilityAfterXCasterTurns
+                                    XPTracker: [0,0,0]
+                                    Requirement: 
+                                        ActiveBonusAtTrackerIndex: 2
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Active:
+            Ability: TAddDoomSlot
+            Icon: Positive_Attack_Curse
+            ListLayout: "$GH_397_T_1$ $GH_397_T_2$"
+            Layout:
+                - Row: "$GH_397_T_1$"
+                - Row: "<size=20%> "
+                - Row: "$GH_397_T_2$"
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_397_B$"
+            Layout:
+                - Row: "$GH_397_B$"
+                - Row: "<size=20%> "
+                - XPTracker: BDoomStartTurnAbilityAfterXCasterTurns

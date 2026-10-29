@@ -1,0 +1,31 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RelentlessAlly$
+Character: BeastTyrantID
+ID: 20480
+Level: 1
+Initiative: 81
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: TatteredWolfID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 5
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $TatteredWolf$
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

@@ -1,0 +1,14 @@
+Parser: Mastery
+ID: Doomstalker_MASTERY_2
+LocalisedName: Doomstalker_MASTERY_2_Name
+LocalisedDescription: Doomstalker_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: Value kills of doomed enemies (the kill record's Doom flag) in one of the character's turns (GHMasteries.cs)
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_DoomedKillsInTurn]
+        CharacterIDs:
+            ActorID: DoomstalkerID
+        Value: 3

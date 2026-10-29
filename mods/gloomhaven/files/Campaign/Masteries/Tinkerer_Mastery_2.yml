@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Tinkerer_MASTERY_2
+LocalisedName: Tinkerer_MASTERY_2_Name
+LocalisedDescription: Tinkerer_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: before every rest, at least Amount card halves with a lost icon performed since the previous rest (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_LossActionsBeforeRests]
+        CharacterIDs:
+            ActorID: TinkererID
+        Value: 1
+        Amount: 2

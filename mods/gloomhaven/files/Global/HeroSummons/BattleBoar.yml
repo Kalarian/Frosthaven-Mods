@@ -1,0 +1,16 @@
+Parser: HeroSummon
+ID: BattleBoarID
+LocKey: $BattleBoar$
+Model: BattleBoar
+Health:
+    Amount: 7
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+    CircleEnhancements: 1
+Attack:
+    Amount: 1
+    DiamondEnhancements: 1
+
+Range:
+    Amount: 1

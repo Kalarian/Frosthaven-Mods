@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NegativeEnergy$
+Character: SummonerID
+ID: 20255
+Level: 7
+Initiative: 95
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: VoidEaterID
+                AnimOverload: Summon
+        XP: 3
+    Bottom:
+        Abilities:
+            BNull:
+                NullTargeting: True
+                Targeting: All
+                Filter:
+                    ActorType: Summon
+                    TargetType: Ally
+                SubAbilities:
+                    BNullSubCurse:
+                        Curse: True
+                        Range: 1
+                        Target: -1
+                        Filter: Enemy
+                        AllTargetsAdjacentToParentTarget: True
+        Infuse: Dark
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $VoidEater$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Curse></nobr>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Curse>"
+        - Row: "$Target_AllEnemiesAdjacentToAnyOneSummonedAlly$"
+        - Row: "<size=50%> "
+        - Infuse: Dark

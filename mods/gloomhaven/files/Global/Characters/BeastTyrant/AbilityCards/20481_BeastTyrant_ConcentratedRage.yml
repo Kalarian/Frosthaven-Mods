@@ -1,0 +1,59 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ConcentratedRage$
+Character: BeastTyrantID
+ID: 20481
+Level: 1
+Initiative: 51
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                Conditions: Disarm
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BActive:
+                ForgoActionsForCompanion:
+                    TopActionAbility:
+                        BCompanionActiveAttack:
+                            Attack: 3
+                            ActiveBonus:
+                                Duration: Round
+                                Hidden: True
+                    BottomActionAbility:
+                        BCompanionActiveMove:
+                            Move: 3
+                            ActiveBonus:
+                                Duration: Round
+                                Hidden: True
+                ActiveBonus:
+                    Duration: Persistent
+                    ValidAbilityTypes: ForgoActionsForCompanion
+                Filter: Self
+                Target: -1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - AddedEffect: "<size=130%><sprite name=Disarm></size>"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: "BActive"
+            Icon: Positive_AttackPlus_Ally
+            ListLayout: "$GH_481_B_1$\n\n$GH_481_B_2$"
+            Layout:
+                - Row: "$GH_481_B_1$"
+                - Row: "<size=50%> "
+                - Row: "$GH_481_B_2$"

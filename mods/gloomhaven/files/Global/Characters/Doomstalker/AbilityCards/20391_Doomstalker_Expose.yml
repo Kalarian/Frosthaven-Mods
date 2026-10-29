@@ -1,0 +1,83 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Expose$
+Character: DoomstalkerID
+ID: 20391
+Level: 2
+Initiative: 13
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAdvantage:
+                Attack: 0
+                AttackHasAdvantage: True
+                Filter: [Self]
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    ValidAbilityType: Attack
+                    Restriction: OncePerTurn
+                    IsToggleBonus: True
+                    Filter:
+                        IsDoomed: True
+                AnimOverload: PowerUp
+            TImmunity:
+                ImmunityTo: [Invisible]
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    IsAura: True
+                    AuraFilter: Enemy
+                    AuraTargeting: All
+                AnimOverload: PowerUp
+            TRemoveConditions:
+                RemoveConditions: All
+                Condition: Invisible
+                Target: -1
+                Targeting: All
+                CanTargetInvisible: True
+                Filter: Enemy
+                AutoTrigger: True
+                AnimOverload: None
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomAttackDebuff:
+                                Attack: 0
+                                AttackEffect:
+                                    Type: StandardBuff
+                                    Pierce: 2
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    Filter:
+                                        ActorType: [Player, Summon, Ally]
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTargetAlt
+Layout:
+    Top:
+        - Active:
+            Ability: TAdvantage
+            ListLayout: "$GH_391_T_1$"
+            Layout: "$GH_391_T_1$"
+            Icon: Advantage
+        - Divider:
+        - Active:
+            Ability: TImmunity
+            ListLayout: "$GH_391_T_2$"
+            Layout: "$GH_391_T_2$"
+            Icon: Invisible
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_391_B$"
+            Layout: "$GH_391_B$"

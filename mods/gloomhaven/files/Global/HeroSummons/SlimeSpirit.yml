@@ -1,0 +1,17 @@
+Parser: HeroSummon
+ID: SlimeSpiritID
+LocKey: $SlimeSpirit$
+Model: SlimeSpirit
+Health:
+    Amount: 4
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+    CircleEnhancements: 1
+Attack:
+    Amount: 1
+    DiamondEnhancements: 1
+Range:
+    Amount: 1
+OnAttackCondition: Muddle    
+Shield: 2

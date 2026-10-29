@@ -1,0 +1,10 @@
+Parser: CampaignSection
+ID: GH.Summoner
+Name: Summoner Retires
+SkipNarration: True
+SkipCompletedNotification: False
+Effects:
+    - Type: EnableEvent
+      Param1: GH.Summoner-1
+    - Type: EnableEvent
+      Param1: GH.Summoner-2

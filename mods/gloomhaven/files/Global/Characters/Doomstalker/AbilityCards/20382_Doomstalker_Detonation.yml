@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Detonation$
+Character: DoomstalkerID
+ID: 20382
+Level: 1
+Initiative: 54
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TTrap:
+                Trap:
+                    TrapName: BearTrap
+                    Damage: 3
+                    AdjacentRange: 1
+                    AdjacentDamage: 2
+                    AdjacentFilter: Enemy
+                    TriggeredXP: 2
+                Target: 1
+                SpawnDelay: 2.8
+                AnimOverload: LayTrap
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomOnDeath:
+                                AddActiveBonus:
+                                    Damage: 3
+                                    Range: 1
+                                    Target: -1
+                                    Filter:
+                                        ActorType: [Enemy, Enemy2]
+                                    IsInlineSubAbility: True
+                                    AllTargetsAdjacentToParentTarget: True
+                                    IgnoreStun: True
+                                ActiveBonus:
+                                    Behaviour: DuringActionAbilityOnDeath
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Row: "$GH_382_T_1$"
+        - Row: "<size=20%> "
+        - Row: "$GH_382_T_2$"
+        - Row: "<size=20%> "
+        - Row: "$GH_382_T_3$"
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_382_B$"
+            Layout: "$GH_382_B$"

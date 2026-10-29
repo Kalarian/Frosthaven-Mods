@@ -1,0 +1,41 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ChimericFormula$
+Character: TinkererID
+ID: 20060
+Level: 9
+Initiative: 43
+Discard: [Discard,Permanently Lost]
+Data:
+    Top:
+        Abilities:
+            TRecover:
+              RecoverLostCards: 2
+              Range: 1
+              Filter:
+                TargetType: Ally
+                ActorType: Player
+              AnimOverload: TargetRecover
+              SubAbilities:
+                TSubLoseCards:
+                  LoseCards: 2
+                  Range: 1
+                  Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                  AnimOverload: TargetRecover
+    Bottom:
+        Abilities:
+            BIncreaseCardLimit:
+                IncreaseCardLimit: 1
+                Range:
+                    Amount: 3
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: TargetRecover
+        XP: 2
+Layout:
+    Top:
+        - Row: "$GH_060_T$"
+    Bottom:
+        - Row: "$GH_060_B$"

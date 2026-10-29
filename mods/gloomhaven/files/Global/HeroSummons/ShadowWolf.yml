@@ -1,0 +1,15 @@
+Parser: HeroSummon
+ID: ShadowWolfID
+LocKey: $ShadowWolf$
+Model: ShadowWolf
+Health:
+    Amount: 3
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+Attack:
+    Amount: 2
+    DiamondEnhancements: 1
+Range:
+    Amount: 1
+Pierce: 2

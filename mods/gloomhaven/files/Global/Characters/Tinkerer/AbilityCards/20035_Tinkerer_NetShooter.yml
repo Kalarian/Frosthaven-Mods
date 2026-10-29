@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NetShooter$
+Character: TinkererID
+ID: 20035
+Level: 1
+Initiative: 19
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                Range: 3
+                Conditions: Immobilize
+                AnimOverload: LeftWristTechNetShooter
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,E"
+                MultiPassAttack: false
+                XPPerTarget: 1
+    Bottom:
+        Abilities:
+            BImmobilize:
+                Immobilize:
+                    DiamondEnhancements: 1 # TODO enable enhancements for conditions
+                Filter: Enemy
+                Range: 1
+                AnimOverload: GadgetAdjacentNetShooter
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - ColumnWidths: "70,25"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Range> *TAttack.Range*"
+            - Row: "<sprite name=Immobilize> "
+            - Row: "<line-height=100%> $XP_PerEnemy$"
+            - Row: "<size=10%> "
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Immobilize> @BImmobilize@"
+        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

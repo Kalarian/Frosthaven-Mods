@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_OtherworldlyRage$
+Character: SummonerID
+ID: 20258
+Level: 8
+Initiative: 35
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack: +2
+                            Range: +0
+                            Conditions: [Poison, Wound]
+                    ControlActorType: Player
+                Range: 3
+                Filter:
+                    ActorType: Summon
+                    TargetType: Ally
+                AnimOverload: MindControl
+        XP: 1
+    Bottom:
+        Abilities:
+            BSwap:
+                Swap:
+                    FirstTargetFilter: Self
+                    SecondTargetFilter:
+                        ActorType: Summon
+                        TargetType: Ally
+                Targeting: All
+                AnimOverload: MindControl
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "$GH_258_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> +2"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Wound></size>, <size=130%><sprite name=Poison></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$With_YouControllingActions$"
+    Bottom:
+        - Row: "$GH_258_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

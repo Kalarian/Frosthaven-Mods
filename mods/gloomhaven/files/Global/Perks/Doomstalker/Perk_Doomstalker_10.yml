@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Doomstalker10
+Name: PERK_Doomstalker_10_Name
+Description: PERK_Doomstalker_10_Desc
+CharacterID: DoomstalkerID
+Available: 1
+Flags: [Passive]

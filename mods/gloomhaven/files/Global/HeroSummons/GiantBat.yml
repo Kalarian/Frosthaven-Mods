@@ -1,0 +1,17 @@
+Parser: HeroSummon
+ID: GiantBatID
+LocKey: $GiantBat$
+Model: GiantBat
+Health:
+    Amount: 4
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    CircleEnhancements: 1
+Attack:
+    Amount: 2
+    Infuse: Air
+Range:
+    Amount: 1
+
+Flying: True

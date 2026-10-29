@@ -1,0 +1,47 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HornedMajesty$
+Character: SummonerID
+ID: 20260
+Level: 9
+Initiative: 80
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: BlackUnicornID
+                AnimOverload: Summon
+        XP: 3
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack: +0
+                            Range: +0
+                    ControlActorType: Player
+                Range: 3
+                Target: -1
+                Filter:
+                    ActorType: Summon
+                    TargetType: Ally
+                AnimOverload: MindControl
+        XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $BlackUnicorn$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Pierce> 3</nobr>"
+    Bottom:
+        - Row: "$GH_260_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> +0"
+        - Row: "<size=20%> "
+        - Row: "$With_YouControllingActions$"

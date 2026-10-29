@@ -1,0 +1,16 @@
+Parser: HeroSummon
+ID: GreenAdderID
+LocKey: $GreenAdder$
+Model: GreenAdder
+Health:
+    Amount: 4
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    CircleEnhancements: 1
+Attack:
+    Amount: 1
+    DiamondEnhancements: 1
+Range: 1
+OnAttackCondition: Poison
+#AttackAnimOverload: PoisonAttack

@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LeadtoSlaughter$
+Character: DoomstalkerID
+ID: 20406
+Level: 9
+Initiative: 40
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range: 
+                    Amount: 6
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+                SubAbilities:
+                    BSubControlActor:
+                        ControlActor:
+                            Abilities:
+                                EnemyWillDoThis:
+                                    Move: 3
+                                    StrengthIsBase: True
+                            ControlDurationType: ControlForOneAction
+                            ControlActorType: Enemy
+                        Filter: Enemy
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BTransferDooms:
+                TransferDooms: -1 #-1 = all dooms
+                Range: 4
+                Filter: Enemy
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$GH_406_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH_406_B$"

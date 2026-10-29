@@ -1,0 +1,75 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_JawsofDeath$
+Character: BeastTyrantID
+ID: 20504
+Level: 9
+Initiative: 48
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyKill:
+                            Kill: True
+                            Range: 1
+                            RangeIsBase: True
+                            Filter: 
+                                TargetType: Enemy
+                                EnemyType: Normal
+                                Health: "<= 6"
+                            AnimOverload: Kill
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 1
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack1:
+                            Attack:
+                                Amount: 2
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            SubAbilities:
+                                BAllyAttack1SubPush:
+                                    Push: 3
+                                    AnimOverload: None
+                        BAllyMove1:
+                            Move:
+                                Amount: 3
+                            StrengthIsBase: True
+                        BAllyAttack2:
+                            Attack:
+                                Amount: 2
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 1
+Layout:
+    Top:
+        - Row: "$GH_Command$"
+        - Row: "$GH_504_T$"
+    Bottom:
+        - ColumnWidths: "20,60,20"
+        - Column:
+            - Row: "$GH_Command$"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack1* <size=100%><voffset=1>@BAllyAttack1@"
+            - Row: "<sprite name=Push> 3"
+            - Row: "<size=50%> "
+            - Row: "<b><size=130%><sprite name=Move> *BAllyMove1*"
+            - Row: "<size=50%> "
+            - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack2* <size=100%><voffset=1>@BAllyAttack2@"
+        - Column:

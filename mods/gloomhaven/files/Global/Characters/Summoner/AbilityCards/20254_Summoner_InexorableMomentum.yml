@@ -1,0 +1,65 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_InexorableMomentum$
+Character: SummonerID
+ID: 20254
+Level: 6
+Initiative: 32
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                    Pierce: 3
+                    PierceEnhancements: 1
+                Range: 3
+                AnimOverload: RangedAttackAir
+                MultiPassAttack: False
+        Consumes:
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirPush:
+                        ParentName: TAttack
+                        Strength: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move:
+                                Amount: 3
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                Range: 1
+                Filter:
+                    ActorType: Summon
+                    TargetType: Ally
+                AnimOverload: MindControl
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - Row: "<sprite name=Pierce>*TAttack.Pierce* <size=100%><voffset=1>@TAttack.Pierce@"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAir
+            Text: "+2 <sprite name=Attack>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH_238_T$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"

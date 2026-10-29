@@ -1,0 +1,7 @@
+Parser: Perk
+ID: BeastTyrant08
+Name: PERK_BeastTyrant_08_Name
+Description: PERK_BeastTyrant_08_Desc
+CharacterID: BeastTyrantID
+Available: 1
+Flags: [Passive]

@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Doomstalker06
+Name: PERK_Doomstalker_06_Name
+Description: PERK_Doomstalker_06_Desc
+CharacterID: DoomstalkerID
+Available: 1
+CardsToRemove: [AMC_Basic_P0]
+CardsToAdd: [AMC_Poison_P1]

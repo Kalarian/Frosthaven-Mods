@@ -1,0 +1,18 @@
+Parser: HeroSummon
+ID: LavaGolemID
+LocKey: $LavaGolem$
+Model: LavaGolem
+Health:
+    Amount: 7
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    CircleEnhancements: 1
+Attack:
+    Amount: 3
+    Infuse: Fire
+Range:
+    Amount: 1
+OnAttackCondition: Wound
+Retaliate: 2
+RetaliateRange: 2  

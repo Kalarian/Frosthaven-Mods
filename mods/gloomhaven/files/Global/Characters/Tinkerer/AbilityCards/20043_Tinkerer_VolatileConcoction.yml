@@ -1,0 +1,45 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_VolatileConcoction$
+Character: TinkererID
+ID: 20043
+Level: X
+Initiative: 76
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TTrap:
+                Trap:
+                    TrapName: PoisonMine
+                    Damage: 2
+                    Conditions: Poison
+                SpawnDelay: 2.2
+                Target: 1
+                AnimOverload: LayTrap
+    Bottom:
+        Abilities:
+            BRecover:
+                RecoverDiscardedCards: 1
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter:
+                   TargetType: Ally
+                   ActorType: Player
+                AnimOverload: TargetRecover
+        Consumes:
+            BCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCAnyRecoverBuff:
+                        ParentName: BRecover
+                        Strength: 1
+Layout:
+    Top:
+        - Row: "$GH_043_T$"
+    Bottom:
+        - Row: "$GH_043_B_1$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCIce
+            Text: "$GH_043_B_2$"

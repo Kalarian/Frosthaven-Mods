@@ -1,0 +1,36 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EnergizingTonic$
+Character: TinkererID
+ID: 20039
+Level: 1
+Initiative: 16
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 5
+                    DiamondPlusEnhancements: 2
+                Range: 2
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 6
+                    CircleEnhancements: 1
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*THeal.Range*</mark>"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

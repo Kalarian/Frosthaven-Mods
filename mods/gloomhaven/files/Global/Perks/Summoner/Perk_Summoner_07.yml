@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Summoner07
+Name: PERK_Summoner_07_Name
+Description: PERK_Summoner_07_Desc
+CharacterID: SummonerID
+Available: 1
+CardsToAdd: [AMC_Wound_R, AMC_Wound_R]

@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EndlessSpikes$
+Character: SummonerID
+ID: 20253
+Level: 6
+Initiative: 97
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: NailSphereID
+                Target: 3
+                AnimOverload: Summon
+        XP: 3
+    Bottom:
+        Abilities:
+            BRetaliate:
+                Retaliate: 2
+                Target: -1
+                Targeting: All
+                Filter:
+                    ActorType: Summon
+                    TargetType: Ally
+                ActiveBonusDuration: Round
+                AnimOverload: RadialBuff
+Layout:
+    Top:
+        - Active:
+            Ability: TSummon
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH_253_T$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Retaliate> 2</nobr>"
+                        - Row: "<nobr><sprite name=Shield> 1</nobr>"
+    Bottom:
+        - Active:
+            Ability: BRetaliate
+            Icon: Positive_Retaliate
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*, $Affect_AllSummonedAllies$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate*"
+                - Row: "$Affect_AllSummonedAllies$"

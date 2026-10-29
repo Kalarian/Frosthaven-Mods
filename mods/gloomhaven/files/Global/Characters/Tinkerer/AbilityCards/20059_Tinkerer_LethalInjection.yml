@@ -1,0 +1,36 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LethalInjection$
+Character: TinkererID
+ID: 20059
+Level: 9
+Initiative: 85
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TKill:
+                Kill: True
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+                AnimOverload: GadgetAdjacentLethalInjection
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BPoison:
+                Poison: True
+                Filter: Enemy
+                AnimOverload: HarmRadialLethalInjection
+                Target: -1
+Layout:
+    Top:
+        - Row: "$Kill_OneAdjacentEnemy$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Poison>"
+        - Row: "$Target_AllAdjacentEnemies$"

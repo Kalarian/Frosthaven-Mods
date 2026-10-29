@@ -1,0 +1,29 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TinkerersTools$
+Character: TinkererID
+ID: 20047
+Level: 3
+Initiative: 26
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TDisarmTrap:
+                DisarmTrap: True
+                AnimOverload: DisarmTrap
+        XP: 1
+    Bottom:
+        Abilities:
+            TTrap:
+                Trap:
+                    TrapName: StunMine
+                    Damage: 0
+                    Conditions: Stun
+                SpawnDelay: 2.2
+                Target: 1
+                AnimOverload: LayTrap
+Layout:
+    Top:
+        - Row: "$GH_092_T$"
+    Bottom:
+        - Row: "$GH_047_B$"

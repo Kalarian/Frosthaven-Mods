@@ -1,0 +1,45 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NoxiousVials$
+Character: TinkererID
+ID: 20051
+Level: 5
+Initiative: 75
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            BRefreshItems:
+                RefreshItems: 1
+                SlotToRefresh: SmallItem
+                SlotStateToRefresh: Consumed
+                Range:
+                    Amount: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: TargetRecover
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 3
+                Conditions: Poison
+                AnimOverload: LeftWristTechNoxiousVial
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,E"
+                MultiPassAttack: false
+                XPPerTarget: 1
+Layout:
+    Top:
+        - Row: "$GH_051_T$"
+    Bottom:
+        - ColumnWidths: "70,25"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Row: "<sprite name=Range> *BAttack.Range*"
+            - Row: "<sprite name=Poison>"
+            - Row: "<line-height=100%> $XP_PerEnemy$"
+            - Row: "<size=10%> "
+        - Column:
+            - Row: "£Area£"

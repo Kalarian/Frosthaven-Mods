@@ -1,0 +1,7 @@
+Parser: Perk
+ID: BeastTyrant05
+Name: PERK_BeastTyrant_05_Name
+Description: PERK_BeastTyrant_05_Desc
+CharacterID: BeastTyrantID
+Available: 1
+CardsToAdd: [AMC_Immobilize_P1, AMC_Immobilize_P1]

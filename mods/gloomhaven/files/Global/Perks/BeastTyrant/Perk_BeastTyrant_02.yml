@@ -1,0 +1,8 @@
+Parser: Perk
+ID: BeastTyrant02
+Name: PERK_BeastTyrant_02_Name
+Description: PERK_BeastTyrant_02_Desc
+CharacterID: BeastTyrantID
+Available: 3
+CardsToRemove: [AMC_Basic_M1]
+CardsToAdd: [AMC_Basic_P1]

@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NaturesHunger$
+Character: DoomstalkerID
+ID: 20399
+Level: 6
+Initiative: 82
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: GiantToadID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomOnDeath:
+                                AddActiveBonus:
+                                    Heal: 2
+                                    Filter: Self
+                                Target: -1
+                                Targeting: All
+                                ActiveBonus:
+                                    Behaviour: DuringActionAbilityOnDeath
+                                    Filter:
+                                        ActorType: [Player, Summon, Ally]
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GiantToad$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Stun></nobr>"
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_399_B$"
+            Layout: "$GH_399_B$"

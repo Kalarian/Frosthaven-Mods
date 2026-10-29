@@ -1,0 +1,23 @@
+Parser: HeroSummon
+ID: LivingBombID
+LocKey: $LivingBomb$
+Model: LivingBomb
+Health:
+    Amount: 1
+Move:
+    Amount: 3
+    CircleEnhancements: 1
+Attack:
+    Amount: 2
+    DiamondEnhancements: 1
+Range:
+    Amount: 1
+OnDeathAbilities:
+    AOnDeathAttack:
+        Attack: 3
+        Range: 2
+        Target: -1
+        OnAttackInfuse: Fire
+        MultiPassAttack: False
+        OnDeath: True
+        AnimOverload: DeathAttack

@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DisorientingRoar$
+Character: BeastTyrantID
+ID: 20477
+Level: 1
+Initiative: 17
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyMuddle:
+                            Muddle: True
+                            Conditions: Immobilize
+                            Range: 2
+                            Target: -1
+                            Filter: Enemy
+                            RangeIsBase: True
+                            TargetIsBase: True
+                            AnimOverload: RadialRoar
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 1
+    Bottom:
+        Abilities:
+            BSwap:
+                Swap: True
+                Targeting: All
+                AnimOverload: RadialBeneficial
+Layout:
+    Top:
+        - Row: "$GH_Command$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Muddle>, <nobr><sprite name=Immobilize></nobr>"
+        - Row: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> *TAllyMuddle.Range*</nobr>"
+    Bottom:
+        - Row: $GH_477_B$

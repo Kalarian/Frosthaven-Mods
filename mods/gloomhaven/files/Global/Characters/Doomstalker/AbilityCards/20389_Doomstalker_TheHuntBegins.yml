@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TheHuntBegins$
+Character: DoomstalkerID
+ID: 20389
+Level: X
+Initiative: 71
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: ViciousJackalID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomAttackDebuff:
+                                Attack: 2
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    Filter:
+                                        ActorType: Summon
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTargetAlt
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $ViciousJackal$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Retaliate> 1</nobr>"
+                        - Row: "<nobr><sprite name=Wound></nobr>"
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_389_B$"
+            Layout: "$GH_389_B$"

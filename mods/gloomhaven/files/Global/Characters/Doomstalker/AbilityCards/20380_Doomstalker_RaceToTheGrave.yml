@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RacetotheGrave$
+Character: DoomstalkerID
+ID: 20380
+Level: 1
+Initiative: 9
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 2
+                Range:
+                    Amount: 5
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomDamage:
+                                AddActiveBonus:
+                                    Damage: 2
+                                    Filter: Self
+                                    IgnoreStun: True
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: StartTurnAbility
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_380_B$"
+            Layout: "$GH_380_B$"

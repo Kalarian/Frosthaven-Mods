@@ -1,0 +1,39 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HookGun$
+Character: TinkererID
+ID: 20033
+Level: 1
+Initiative: 72
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                AnimOverload: RangedAttack
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                SubAbilities:
+                    TAttackSubPull:
+                        Pull:
+                            Amount: 2
+                            SquareEnhancements: 1
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 2
+                Target: -1
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<sprite name=Pull>*TAttackSubPull* @TAttackSubPull@"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"

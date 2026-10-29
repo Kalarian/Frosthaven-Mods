@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Doomstalker08
+Name: PERK_Doomstalker_08_Name
+Description: PERK_Doomstalker_08_Desc
+CharacterID: DoomstalkerID
+Available: 2
+CardsToAdd: [AMC_P1_R, AMC_P1_R]

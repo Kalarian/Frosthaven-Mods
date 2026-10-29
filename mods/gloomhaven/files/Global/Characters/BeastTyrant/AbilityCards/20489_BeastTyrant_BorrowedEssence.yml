@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BorrowedEssence$
+Character: BeastTyrantID
+ID: 20489
+Level: X
+Initiative: 56
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 3
+                AnimOverload: RangedAttack
+            THeal:
+                Heal:
+                    Amount: 2
+                    DiamondPlusEnhancements: 1
+                Filter: Self
+                AnimOverload: Heal
+        Consumes:
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCEarthHealBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 1
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthHealBuff:
+                        ParentName: THeal
+                        Strength: 2
+                XP: 1
+    Bottom:
+        Abilities: 
+            BRedistributeDamage:
+                RedistributeDamage: True
+                PreviewEffectId: BorrowedEssenceBottom
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+            - Column:
+        - Consume:
+            Name: TCAir
+            Text: "<nobr>+2 <sprite name=Attack>, <sprite name=XP1></nobr>"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+        - Consume:
+            Name: TCEarth
+            Text: "<nobr>+2 <sprite name=Heal>, <sprite name=XP1></nobr>"
+    Bottom:
+        - Row: "$GH_489_B_1$"
+        - Row: "<size=20%> "
+        - Row: "$GH_489_B_2$"

@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LivingNight$
+Character: SummonerID
+ID: 20235
+Level: 1
+Initiative: 82
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: ShadowWolfID
+                Target: 2
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BDisadvantage:
+                AttackersGainDisadvantage: 1
+                Target: -1
+                Targeting: All
+                FilterContainer:
+                    Filter1:
+                        TargetType: Self
+                    Filter2:
+                        TargetType: Ally
+                        ActorType: Summon
+                ActiveBonusDuration: Round
+                AnimOverload: RadialBuff
+        Infuse: Dark
+Layout:
+    Top:
+        - Active:
+            Ability: TSummon
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH_235_T$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Pierce> 2</nobr>"
+    Bottom:
+        - Active:
+            Ability: BDisadvantage
+            Icon: Disadvantage
+            ListLayout: "$GH_235_B$"
+            Layout: "$GH_235_B$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:
+                - Duration: Round

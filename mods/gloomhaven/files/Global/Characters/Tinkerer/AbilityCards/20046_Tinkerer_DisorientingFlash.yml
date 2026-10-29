@@ -1,0 +1,48 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DisorientingFlash$
+Character: TinkererID
+ID: 20046
+Level: 2
+Initiative: 73
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TStun:
+                Stun: True
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AnimOverload: PowerUpDisorientingFlash
+                Filter: [Enemy]
+        XP: 2
+    Bottom:
+        Abilities:
+            BMuddle:
+                Muddle: True
+                Range: 1
+                Target: -1
+                AnimOverload: PowerUpDisorientingFlash
+                Filter: [Enemy]
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Stun>"
+            - Column:
+                - Row: "<sprite name=Range>*TStun.Range* @TStun.Range@"
+                - Row: "<sprite name=Target>*TStun.Target* @TStun.Target@"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Muddle>"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

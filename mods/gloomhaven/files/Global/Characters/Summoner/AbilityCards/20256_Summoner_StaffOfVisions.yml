@@ -1,0 +1,59 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StaffofVisions$
+Character: SummonerID
+ID: 20256
+Level: 7
+Initiative: 27
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 2
+                Conditions: Muddle
+                Range: 1
+                AnimOverload: HeavyStaffAttack
+                MultiPassAttack: False
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireWound:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Wound
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+        Abilities:
+            BStrengthen:
+                Strengthen:
+                    DiamondPlusEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter: Ally
+                AnimOverload: RadialBuff
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Muddle></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFire
+            Text: "+1 <sprite name=Attack>, <sprite name=Wound>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Strengthen> <size=100%><voffset=1>@BStrengthen@"
+        - Row: "$Affect_AllAdjacentAllies$"

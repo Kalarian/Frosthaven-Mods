@@ -1,0 +1,62 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MultiProngedAssault$
+Character: DoomstalkerID
+ID: 20381
+Level: 1
+Initiative: 14
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomAttackDebuff:
+                                Attack: 1
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    FilterContainer:
+                                        Filter1:
+                                            ActorType: [Player, Summon, Ally]
+                                        Filter2:
+                                            PlayerClasses: DoomstalkerID
+                                            Invert: True
+                                        AndLogic: True
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTargetAlt
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<sprite name=Target>*TAttack.Target* @TAttack.Target@"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_381_B$"
+            Layout: "$GH_381_B$"

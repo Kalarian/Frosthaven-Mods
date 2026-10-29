@@ -1,0 +1,17 @@
+Parser: HeroSummon
+ID: ViciousJackalID
+LocKey: $ViciousJackal$
+Model: ViciousJackal
+Health:
+    Amount: 5
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    CircleEnhancements: 1
+Attack:
+    Amount: 1
+    DiamondEnhancements: 1
+Range:
+    Amount: 1
+Retaliate: 1 
+OnAttackCondition: Wound   

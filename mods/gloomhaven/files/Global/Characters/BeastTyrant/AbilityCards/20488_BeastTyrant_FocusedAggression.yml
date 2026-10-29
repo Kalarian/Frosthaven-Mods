@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FocusedAggression$
+Character: BeastTyrantID
+ID: 20488
+Level: X
+Initiative: 31
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 5
+                                DiamondEnhancements: 2
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        Infuse: Earth
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+            - Column:
+    Bottom:
+        - Row: "$GH_Command$"
+        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Earth
+            - Column:

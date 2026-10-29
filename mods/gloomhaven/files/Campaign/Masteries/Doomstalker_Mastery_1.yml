@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Doomstalker_MASTERY_1
+LocalisedName: Doomstalker_MASTERY_1_Name
+LocalisedDescription: Doomstalker_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAG: no doom card half performed twice (GHMasteries.cs, from the ability records; at least one doom performed)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_NoRepeatedDoom]
+        CharacterIDs:
+            ActorID: DoomstalkerID
+        Value: 1

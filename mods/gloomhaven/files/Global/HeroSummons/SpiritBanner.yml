@@ -1,0 +1,21 @@
+Parser: HeroSummon
+ID: SpiritBannerID
+LocKey: $SpiritBanner$
+Model: SpiritBanner
+Health: 8
+Move: 0
+Attack: 0
+Range: 0
+OnSummonAbilities:
+    AAura:
+        Attack: 2
+        Range: 1
+        Target: -1
+        ActiveBonus:
+            Behaviour: BuffAttack
+            Duration: Persistent
+            IsAura: True
+            AuraFilter: [Ally]
+        Filter: Self
+        Text: "$505_T$"
+        AnimOverload: None

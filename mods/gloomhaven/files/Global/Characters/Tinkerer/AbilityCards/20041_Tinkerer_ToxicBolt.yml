@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ToxicBolt$
+Character: TinkererID
+ID: 20041
+Level: 1
+Initiative: 18
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Conditions: Poison
+                AnimOverload: LeftWristTechToxicBolt
+        Infuse: Earth
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - AddedEffect: "<size=130%><sprite name=Poison></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Earth
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*BAttack.Range* @BAttack.Range@"
+            - Column:

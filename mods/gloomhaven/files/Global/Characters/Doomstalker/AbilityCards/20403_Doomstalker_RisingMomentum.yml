@@ -1,0 +1,66 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RisingMomentum$
+Character: DoomstalkerID
+ID: 20403
+Level: 8
+Initiative: 12
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 6
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 5
+                    SquareEnhancements: 1
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 3
+                            SquareEnhancements: 1
+                        AnimOverload: None
+                        IsInlineSubAbility: True
+                AnimOverload: RangedAttack
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BTransferDoomOnDeath:
+                                AddActiveBonus:
+                                    TransferDooms: -1 #-1 = all dooms
+                                    Range: 2
+                                    Target: 1
+                                    Filter: Enemy
+                                    AnimOverload: DoomTarget
+                                    AllTargetsAdjacentToParentTarget: True
+                                ActiveBonus:
+                                    Behaviour: DuringActionAbilityOnDeath
+                                    UseTriggerAbilityAsParent: True
+                                    TriggerOnCaster: True
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<sprite name=Push>*TAttackSubPush* @TAttackSubPush@"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_403_B$"
+            Layout: "$GH_403_B$"

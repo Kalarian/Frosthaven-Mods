@@ -1,0 +1,34 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TribalSigil$
+Character: BeastTyrantID
+ID: 20505
+Level: 9
+Initiative: 91
+Discard: [Permanently Lost,Permanently Lost]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: SpiritBannerID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BRecover:
+                RecoverLostCards:
+                    Strength: 2
+                    RecoverCardsWithAbilityOfTypeFilter: [Summon]
+                Filter: Self
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $SpiritBanner$
+                    SpecialText: "$GH_505_T$"
+    Bottom:
+        - Row: "$GH_505_B$"

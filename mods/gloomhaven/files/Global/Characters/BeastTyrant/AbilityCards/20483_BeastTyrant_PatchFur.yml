@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PatchFur$
+Character: BeastTyrantID
+ID: 20483
+Level: 1
+Initiative: 20
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TShield:
+                Shield: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter:
+                        ActorType: Summon
+                        TargetType: Ally
+                AnimOverload: RadialBeneficial
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyHeal:
+                            Heal: 
+                                Amount: 4
+                                DiamondPlusEnhancements: 2
+                            Filter: Self
+                            AnimOverload: Heal
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *TShield*, <b></b> $Affect_AllSummonedAllies$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *TShield*"
+                - Row: "<b></b> $Affect_AllSummonedAllies$"
+    Bottom:
+        - Row: "$GH_Command$"
+        - Row: "<size=130%><b><sprite name=Heal> *BAllyHeal* <size=100%><voffset=1>@BAllyHeal@"
+        - Row: "$Self$"

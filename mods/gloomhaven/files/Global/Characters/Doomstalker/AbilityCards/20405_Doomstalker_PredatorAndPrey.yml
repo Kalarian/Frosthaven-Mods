@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PredatorandPrey$
+Character: DoomstalkerID
+ID: 20405
+Level: 9
+Initiative: 86
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: SpittingCobraID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomAttackDebuff:
+                                Attack: 0
+                                StatIsBasedOnX:
+                                    Strength:
+                                        BasedOn: TargetDistanceRangeDiff
+                                        AddTo: True
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $SpittingCobra$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Poison></nobr>"
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_405_B$"
+            Layout: "$GH_405_B$"

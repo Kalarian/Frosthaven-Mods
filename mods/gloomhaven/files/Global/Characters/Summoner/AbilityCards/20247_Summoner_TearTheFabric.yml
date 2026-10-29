@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TeartheFabric$
+Character: SummonerID
+ID: 20247
+Level: 3
+Initiative: 41
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TKill:
+                Kill: True
+                Range: 1
+                Target: -1
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: Normal
+                    Health: "<= 5"
+                AnimOverload: RadialKill
+                MultiPassAttack: False
+        XP: 2
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 4
+                    DiamondPlusEnhancements: 2
+                Filter: Self
+                AnimOverload: PowerUp
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthHealBuff:
+                        ParentName: BHeal
+                        Strength: 2
+                XP: 1
+Layout:
+    Top:
+        - Row: "$GH_247_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCEarth
+            Text: "<nobr>+2 <sprite name=Heal>, <sprite name=XP1></nobr>"

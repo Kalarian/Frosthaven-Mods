@@ -1,0 +1,86 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Rampage$
+Character: BeastTyrantID
+ID: 20496
+Level: 5
+Initiative: 34
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack1:
+                            Attack:
+                                Amount: 2
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                        TAllyMove1:
+                            Move:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                        TAllyAttack2:
+                            Attack:
+                                Amount: 2
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                        TAllyMove2:
+                            Move:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                        TAllyAttack3:
+                            Attack:
+                                Amount: 2
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 2
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move: +0
+                        BAllyAttack:
+                            Attack: +0
+                            Range: +0
+                    ControlActorType: Player
+                Targeting: All
+                Filter:
+                    ActorType: Summon
+                    TargetType: Ally
+                AnimOverload: Command
+Layout:
+    Top:
+        - Row: "$GH_Command$"
+        - Row: "<size=120%> "
+        - Row:
+            - ColumnWidths: "20,60,20"
+            - Column:
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack1*"
+                - Row: "<size=50%> "
+                - Row: "<b><size=130%><sprite name=Move> *TAllyMove1* <size=100%><voffset=1>@TAllyMove1@"
+                - Row: "<size=50%> "
+                - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack2*"
+                - Row: "<size=50%> "
+                - Row: "<b><size=130%><sprite name=Move> *TAllyMove2* <size=100%><voffset=1>@TAllyMove2@"
+                - Row: "<size=50%> "
+                - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack3*"
+            - Column:
+    Bottom:
+        - Row: "$GH_496_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Move> +0"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> +0"
+        - Row: "<size=50%> "
+        - Row: "$With_YouControllingActions$"

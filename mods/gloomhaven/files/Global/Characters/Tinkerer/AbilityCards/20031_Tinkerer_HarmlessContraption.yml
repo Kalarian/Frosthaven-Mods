@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HarmlessContraption$
+Character: TinkererID
+ID: 20031
+Level: 1
+Initiative: 74
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: DecoyID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 2
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $Decoy$
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<sprite name=Range>*BHeal.Range* @BHeal.Range@"
+            - Column:

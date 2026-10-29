@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SapLife$
+Character: DoomstalkerID
+ID: 20388
+Level: X
+Initiative: 14
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TRetaliate:
+                Retaliate:
+                    Amount: 3
+                    SquareEnhancements: 1
+                RetaliateRange: 
+                    Amount: 4
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomOnDeath:
+                                AddActiveBonus:
+                                    Heal: 2
+                                    Filter: Self
+                                ActiveBonus:
+                                    Behaviour: DuringActionAbilityOnDamaged
+                                    TriggerOnCaster: True
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Active:
+            Ability: TRetaliate
+            Icon: Positive_Retaliate
+            ListLayout: "<sprite name=Retaliate> *TRetaliate*, <sprite name=Range> *TRetaliate.RetaliateRange*"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
+                - Row: "$Retaliate$ <sprite name=Range> *TRetaliate.RetaliateRange* <size=100%><voffset=1>@TRetaliate.RetaliateRange@"
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_388_B$"
+            Layout: "$GH_388_B$"

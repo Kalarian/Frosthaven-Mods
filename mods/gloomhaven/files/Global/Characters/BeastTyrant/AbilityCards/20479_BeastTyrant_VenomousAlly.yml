@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_VenomousAlly$
+Character: BeastTyrantID
+ID: 20479
+Level: 1
+Initiative: 79
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: GreenAdderID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 2
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                Conditions: Poison
+                AnimOverload: RangedAttack
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GreenAdder$
+                    SpecialText: "<sprite name=Poison>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*BAttack.Range* @BAttack.Range@"
+                - AddedEffect: "<size=130%><sprite name=Poison></size>"
+            - Column:

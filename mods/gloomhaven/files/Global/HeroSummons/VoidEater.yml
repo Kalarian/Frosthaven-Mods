@@ -1,0 +1,17 @@
+Parser: HeroSummon
+ID: VoidEaterID
+LocKey: $VoidEater$
+Model: VoidEater
+Health:
+    Amount: 5
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+    CircleEnhancements: 1
+Attack:
+    Amount: 2
+    DiamondEnhancements: 1
+Range: 
+    Amount: 2
+    SquareEnhancements: 1
+OnAttackCondition: Curse

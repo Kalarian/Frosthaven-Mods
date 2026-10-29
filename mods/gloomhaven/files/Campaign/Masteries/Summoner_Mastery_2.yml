@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Summoner_MASTERY_2
+LocalisedName: Summoner_MASTERY_2_Name
+LocalisedDescription: Summoner_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: Value different cards whose summon ability was performed (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_SummonsFromDifferentCards]
+        CharacterIDs:
+            ActorID: SummonerID
+        Value: 5

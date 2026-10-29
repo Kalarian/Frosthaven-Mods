@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Tinkerer08
+Name: PERK_Tinkerer_08_Name
+Description: PERK_Tinkerer_08_Desc
+CharacterID: TinkererID
+Available: 1
+CardsToAdd: [AMC_Basic_P3]

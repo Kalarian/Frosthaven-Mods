@@ -1,0 +1,59 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ForgedFerocity$
+Character: SummonerID
+ID: 20233
+Level: 1
+Initiative: 96
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: IronBeastID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Target: -1
+                Targeting: All
+                FilterContainer:
+                    Filter1:
+                      TargetType: Self
+                    Filter2:
+                      TargetType: Ally
+                      ActorType: Summon
+                ActiveBonusDuration: Round
+                AnimOverload: RadialBuff
+        Infuse: Earth
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $IronBeast$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Retaliate> 1</nobr>"
+                        - Row: "<nobr><sprite name=Shield> 1</nobr>"
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*, $Affect_AllSummonedAllies$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "$Affect_SelfAndAllSummonedAllies$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Earth
+            - Column:
+                - Duration: Round

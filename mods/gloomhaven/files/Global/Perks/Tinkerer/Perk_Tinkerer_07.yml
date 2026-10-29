@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Tinkerer07
+Name: PERK_Tinkerer_07_Name
+Description: PERK_Tinkerer_07_Desc
+CharacterID: TinkererID
+Available: 1
+CardsToRemove: [AMC_Basic_P0, AMC_Basic_P0]
+CardsToAdd: [AMC_Muddle_R, AMC_Muddle_R, AMC_Muddle_R]

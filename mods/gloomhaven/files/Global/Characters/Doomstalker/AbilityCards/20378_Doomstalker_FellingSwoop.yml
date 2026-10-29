@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FellingSwoop$
+Character: DoomstalkerID
+ID: 20378
+Level: 1
+Initiative: 75
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: WarHawkID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomOnDeath:
+                                AddActiveBonus:
+                                    Teleport: True
+                                    Targeting: AllConnectedRooms
+                                    Filter: Self
+                                    IsInlineSubAbility: True
+                                ActiveBonus:
+                                    Behaviour: DuringActionAbilityOnDeath
+                                    TriggerOnCaster: True
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTargetAlt
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $WarHawk$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Flying></nobr>"
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_378_B$"
+            Layout: "$GH_378_B$"

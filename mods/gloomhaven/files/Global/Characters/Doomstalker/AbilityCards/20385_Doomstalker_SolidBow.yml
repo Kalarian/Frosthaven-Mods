@@ -1,0 +1,35 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SolidBow$
+Character: DoomstalkerID
+ID: 20385
+Level: 1
+Initiative: 31
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 5
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

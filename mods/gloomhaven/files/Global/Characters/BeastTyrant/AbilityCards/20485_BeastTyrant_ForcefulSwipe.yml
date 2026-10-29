@@ -1,0 +1,67 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ForcefulSwipe$
+Character: BeastTyrantID
+ID: 20485
+Level: 1
+Initiative: 35
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack:
+                                Amount: 2
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            AreaEffect: "0,0,G|1,-1,R|2,0,R|1,1,R|-1,1,E"
+                            MultiPassAttack: false
+                            AnimOverload: ConeAttack
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 1
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move: 
+                                Amount: 3
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                        BAllyPush:
+                            Push:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            Range: 1
+                            RangeIsBase: True
+                            Filter: Enemy
+                            AnimOverload: Push
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 1
+Layout:
+    Top:
+        - ColumnWidths: "70,25"
+        - Column:
+            - Row: "$GH_Command$"
+            - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+            - Row: "<size=50%> "
+        - Column: "£Area£"
+    Bottom:
+        - Row: "$GH_Command$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Push> *BAllyPush* <size=100%><voffset=1>@BAllyPush@"
+        - Row: "$Target_OneAdjacentEnemy$"

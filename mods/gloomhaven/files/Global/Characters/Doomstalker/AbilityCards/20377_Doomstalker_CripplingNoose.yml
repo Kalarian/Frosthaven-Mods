@@ -1,0 +1,56 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CripplingNoose$
+Character: DoomstalkerID
+ID: 20377
+Level: 1
+Initiative: 57
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TTrap:
+                Trap:
+                    TrapName: BearTrap
+                    Damage: 4
+                    Conditions: Stun
+                    TriggeredXP: 2
+                Target: 1
+                SpawnDelay: 2.8
+                AnimOverload: LayTrap
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomMoveDebuff:
+                                Move: -1
+                                ActiveBonus:
+                                    Behaviour: BuffMove
+                                AutoTrigger: True
+                            BDoomAttackDebuff:
+                                Attack: -1
+                                ActiveBonus:
+                                    Behaviour: BuffAttack
+                            BDoomRangeDebuff:
+                                AddRange: -1
+                                ActiveBonus:
+                                    AttackType: Ranged
+                                    Behaviour: BuffRange
+                Filter: 
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Row: "$GH_377_T_1$"
+        - Row: "<size=50%> "
+        - Row: "$GH_377_T_2$"
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_377_B$"
+            Layout: "$GH_377_B$"

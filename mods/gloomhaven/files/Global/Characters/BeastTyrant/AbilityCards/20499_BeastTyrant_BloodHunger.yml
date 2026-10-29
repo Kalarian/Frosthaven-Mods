@@ -1,0 +1,64 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BloodHunger$
+Character: BeastTyrantID
+ID: 20499
+Level: 6
+Initiative: 42
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    Heal: 2
+                    Filter: Self
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnAttackAbilityFinished
+                    XPTracker: [1,0,1,0,1]
+                    IsAura: True
+                    Filter:
+                        HeroSummonClasses: [BeastTyrantBearID]
+                    AuraFilter:
+                        HeroSummonClasses: [BeastTyrantBearID]
+                    AuraTargeting: All
+                AnimOverload: RadialBeneficial
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                        BAllyHeal:
+                            Heal: 
+                                Amount: 3
+                                DiamondPlusEnhancements: 1
+                            Filter: Self
+                            AnimOverload: Heal
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: "TActive"
+            Icon: Positive_Heal
+            ListLayout: "$GH_499_T$"
+            Layout: "$GH_499_T$"
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "$GH_Command$"
+        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
+        - Row: "<size=50%> "
+        - Row: "<size=130%><b><sprite name=Heal> *BAllyHeal* <size=100%><voffset=1>@BAllyHeal@"
+        - Row: "$Self$"

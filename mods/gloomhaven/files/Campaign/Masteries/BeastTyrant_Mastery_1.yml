@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: BeastTyrant_MASTERY_1
+LocalisedName: BeastTyrant_MASTERY_1_Name
+LocalisedDescription: BeastTyrant_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAG: Value rounds in a row with Amount damage to enemies by the character's summons (the bear) (GHMasteries.cs)
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_SummonDamageStreak]
+        CharacterIDs:
+            ActorID: BeastTyrantID
+        Value: 3
+        Amount: 10

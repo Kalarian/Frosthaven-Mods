@@ -1,0 +1,17 @@
+Parser: HeroSummon
+ID: IronBeastID
+LocKey: $IronBeast$
+Model: IronBeast
+Health:
+    Amount: 5
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    CircleEnhancements: 1
+Attack:
+    Amount: 1
+    DiamondEnhancements: 1
+Range:
+    Amount: 1
+Shield: 1
+Retaliate: 1    
