@@ -384,6 +384,25 @@ CARD_FIXES = {
         (r"^([ \t]+)AllTargetsAdjacentToParentTarget: True(\r?)$",
          lambda m: f"{m.group(1)}AllTargetsAdjacentToParentTarget: True{m.group(2)}\n{m.group(1)}TreatAsNonSubAbility: True{m.group(2)}"),
     ],
+    # Lead to Slaughter (Doomstalker), top: "force the target to move up to three hexes directly toward the closest hex
+    # adjacent to one of its enemies". The controlled monster's move runs through the monster AI, which stops once it
+    # could reach its focus within the move's range (2 here, inherited): it never moved (2026-10-29). Range 1 is "adjacent";
+    # UseParentTargets keeps the control on the attack's own target, as Frosthaven's Lurker Mindsnipper Turn the Weak.
+    20406: [
+        (r"^([ \t]+)StrengthIsBase: True(\r?)$",
+         lambda m: f"{m.group(1)}StrengthIsBase: True{m.group(2)}\n{m.group(1)}Range: 1{m.group(2)}\n{m.group(1)}RangeIsBase: True{m.group(2)}"),
+        (r"^( {24})Filter: Enemy(\r?)$",
+         lambda m: f"{m.group(1)}Filter: Enemy{m.group(2)}\n{m.group(1)}UseParentTargets: True{m.group(2)}\n{m.group(1)}Target: 1{m.group(2)}"),
+    ],
+    # Rot Maggots (Plagueherald), top: "Poison all allies adjacent to the target" (the target's allies: the monsters
+    # beside it). A filter is always from the hero's side, so Ally rejected the enemy target, and without
+    # TreatAsNonSubAbility the sub kept the parent's (now empty) target list: it never poisoned anyone (session
+    # 20261028-150904: start, perform, end, no apply; engine reading 2026-10-29). Enemy + TreatAsNonSubAbility, as Frosthaven
+    # writes "the enemies beside the target".
+    20304: [
+        (r"^([ \t]+)Filter: Ally(\r?)$",
+         lambda m: f"{m.group(1)}Filter: Enemy{m.group(2)}\n{m.group(1)}TreatAsNonSubAbility: True{m.group(2)}"),
+    ],
     # Blade Dance (Red Guard), bottom: "Move 4, Jump; all enemies moved through suffer 1 damage". The same targeting
     # trap as Trample bottom (CAbilityDamage asks GetValidActorsInRange, whose move-path branch needs Targeting other
     # than Range): Targeting All.
@@ -991,7 +1010,8 @@ def main():
             table.setdefault(f"CODEX_HeroInfo_{cls}", info)
         elif f"{cls}_DESCRIPTION" in strings:
             table.setdefault(f"CODEX_HeroInfo_{cls}", strings[f"{cls}_DESCRIPTION"])
-    table.setdefault("GH_Command", "<b>Command:</b>")   # gh_layout's stand-in for Gloomhaven's Command banner
+    table.setdefault("GH_Command", "<b>Command:</b>")
+    table.setdefault("TransferDooms", "Transfer Dooms")   # the combat log names the ability by its type (Lead to Slaughter bottom: "UNDEFINED TransferDooms")   # gh_layout's stand-in for Gloomhaven's Command banner
     table.setdefault("Event__Text", "Their personal quest complete, the mercenary leaves Frosthaven for good. "
                                     "Someone else will take up the fight.")
     table.update(TEXT_FIXES)   # card text that follows a CARD_FIXES change
