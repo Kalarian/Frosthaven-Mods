@@ -105,7 +105,8 @@ After a Steam update to Frosthaven, run the installer again.
 ---
 
 Frosthaven Mods is a fan project. It isn't made or supported by Snapshot Games or Cephalofair Games. Frosthaven,
-Gloomhaven and their content belong to their owners. Dwarf's balance changes are based on Dwarf74's Unofficial
-Frosthaven Campaign Tweaks.
+Gloomhaven and their content belong to their owners. The Gloomhaven classes are shared with the community's OK from
+the official Frosthaven and Gloomhaven Discords. If the classes are ever officially brought to Frosthaven, the class
+pack will step aside. Dwarf's balance changes are based on Dwarf74's Unofficial Frosthaven Campaign Tweaks.
 
 The tools and patches are MIT-licensed. Developer notes, including how the mods are built: [docs/DEVELOPING.md](docs/DEVELOPING.md).
