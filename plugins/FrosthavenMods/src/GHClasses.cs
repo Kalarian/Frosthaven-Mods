@@ -199,14 +199,16 @@ namespace FrosthavenMods
         }
 
         /// <summary>The Frosthaven summon whose bundle to load instead of a pack summon's (the template its model is built
-        /// on, GHModel.SummonTemplate), or null when <paramref name="prefabName"/> is no pack summon or Frosthaven has
-        /// its own bundle for it (then the game's model is used, pack or no pack).</summary>
+        /// on, GHModel.SummonTemplate), or null when <paramref name="prefabName"/> is no pack summon.</summary>
         private static string SummonStandIn(string prefabName)
         {
             GHModel.Entry e = GHModel.SummonEntryFor(prefabName);
             if (e == null) return null;
             AssetBundleManager abm = AssetBundleManager.Instance;
-            if (abm == null || abm.AssetBundleExists("npc_" + prefabName.ToLowerInvariant().Replace(" ", ""))) return null;
+            // (the pack's model wins over a game bundle of the same name: Frosthaven ships an empty leftover npc_gianttoad,
+            // whose prefab has no character child, and summoning the Doomstalker's Giant Toad on it showed the error screen
+            // "Could not Create Character", 2026-10-29; no other pack summon shares a name with a game bundle)
+            if (abm == null) return null;
             if (Reported.Add("summon " + prefabName))
                 Plugin.Log.LogInfo($"Gloomhaven classes: the {prefabName} summon brings its own 3D model; the {e.Animation.Base}'s bundle carries it");
             return e.Animation.Base;
