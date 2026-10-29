@@ -290,6 +290,9 @@ CLASS_ICONS = {
     "Soothsinger": {"TAddSong": "Positive_Cards"},                       # Melody and Harmony: two songs active at once
     "Mindthief": {"BAugment": "Positive_Cards",                          # Mass Hysteria: two augments active at once
                   "BOverrideAugmentAttackType": "Positive_Cards_RangedForm"},  # Psychic Projection: ranged attacks take the augments
+    # Groups 5-6
+    "Tinkerer": {"BAttack": "Positive_AttackPlus_Ally_Aura"},           # Harsh Stimulants: adjacent allies +2 Attack this round
+    "BeastTyrant": {"BActive": "Positive_AttackPlus_Ally"},             # Concentrated Rage: the bear's attacks or moves boosted
 }
 
 # Slot shape for "Enhancements: N", by the ability key it sits under, so a ported card enhances the way Frosthaven's
@@ -778,7 +781,10 @@ def main():
         # docs/reports/2026-10-27-summons.md; summoning one in play still fails until that step exists.
         # "Summon: BattleBoarID", or the block form "Summon:" / "ID: DoppelgangerID" (the Elementalist's Simulacrum)
         summon_ids = sorted({m.group(1) for s in converted for m in re.finditer(r"^\s*Summon:\s*(\w+?)(?:ID)?\s*$", s, re.M)}
-                            | {m.group(1) for s in converted for m in re.finditer(r"^\s*Summon:\s*\r?\n\s*ID:\s*(\w+?)(?:ID)?\s*$", s, re.M)})
+                            | {m.group(1) for s in converted for m in re.finditer(r"^\s*Summon:\s*\r?\n\s*ID:\s*(\w+?)(?:ID)?\s*$", s, re.M)}
+                            # the class's own companion (the Beast Tyrant's bear: CompanionSummonData in the class
+                            # file, no card names it; without its def the class file fails to load, 2026-10-29)
+                            | {m.group(1) for m in re.finditer(r"^CompanionSummonData:\s*(\w+?)(?:ID)?\s*$", text(files[char_path]), re.M)})
         for sid in summon_ids:
             src = next((n for n in files if n.startswith("HeroSummon/") and re.search(rf"^ID:\s*{re.escape(sid)}ID\s*$", text(files[n]), re.M)), None)
             if src is None:
@@ -977,6 +983,7 @@ def main():
             table.setdefault(f"CODEX_HeroInfo_{cls}", info)
         elif f"{cls}_DESCRIPTION" in strings:
             table.setdefault(f"CODEX_HeroInfo_{cls}", strings[f"{cls}_DESCRIPTION"])
+    table.setdefault("GH_Command", "<b>Command:</b>")   # gh_layout's stand-in for Gloomhaven's Command banner
     table.setdefault("Event__Text", "Their personal quest complete, the mercenary leaves Frosthaven for good. "
                                     "Someone else will take up the fight.")
     table.update(TEXT_FIXES)   # card text that follows a CARD_FIXES change

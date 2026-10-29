@@ -222,6 +222,7 @@ TRACKERS = {
 
 def convert_trackers(items, icons):
     out = []
+    command = False
     for n in items:
         if n.key in TRACKERS:
             fields = {c.key: c for c in n.children}
@@ -235,6 +236,11 @@ def convert_trackers(items, icons):
                 if f is not None:
                     active.children.append(Node(dst, f.value, dash=False, children=list(f.children)))
             out.append(active)
+        elif n.key == "Command":
+            # Gloomhaven's "Command" banner (the Beast Tyrant orders the bear: the half is a ControlActor on the
+            # companion). Frosthaven's layout reader has no such element and rejects the whole card (rulecheck,
+            # 2026-10-29: 19 Beast Tyrant cards): a text row in its place
+            command = True
         elif n.key == "Augment":
             for c in n.children:
                 if c.key == "AugmentIcon":
@@ -242,6 +248,15 @@ def convert_trackers(items, icons):
             out.append(n)
         else:
             out.append(n)
+    if command:
+        # Rows and Columns can't share a level (the game's warning): a half split into columns gets the text at the
+        # top of its first column
+        row = Node("Row", '"$GH_Command$"')
+        col = next((n for n in out if n.key == "Column"), None)
+        if any(n.key == "ColumnWidths" for n in out) and col is not None:
+            col.children.insert(0, row)
+        else:
+            out.insert(0, row)
     return out
 
 
