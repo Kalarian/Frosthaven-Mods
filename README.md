@@ -37,12 +37,13 @@ Every mod is a switch. Nothing changes until you turn it on, and your saves are 
 Play Gloomhaven's classes in Frosthaven, each with its own cards, 3D model, animations, effects, sounds and portraits.
 Perks and masteries come from Cephalofair's official Gloomhaven-to-Frosthaven conversion sheets.
 
-- **In this release:** Brute, Scoundrel, Sunkeeper, Sawbones, Quartermaster, Cragheart, Plagueherald, Nightshroud and
-  Berserker.
-- **In testing:** the remaining eight Gloomhaven classes and the four from Jaws of the Lion.
+- **All 21:** the 17 Gloomhaven classes (Brute, Scoundrel, Spellweaver, Tinkerer, Cragheart, Mindthief, Sunkeeper,
+  Quartermaster, Summoner, Nightshroud, Plagueherald, Berserker, Soothsinger, Doomstalker, Sawbones, Elementalist and
+  Beast Tyrant) and the four from Jaws of the Lion (Demolitionist, Hatchet, Red Guard and Voidwarden).
 
-By default the classes arrive gradually: each retirement in your campaign lets the party pick one of two new Gloomhaven
-classes. If you'd rather have them all at once, there's a switch for that.
+The four Jaws of the Lion classes are open from the start. The others arrive gradually by default: each retirement in
+your campaign lets the party pick one of two new Gloomhaven classes. If you'd rather have them all at once, there's a
+switch for that.
 
 You don't need to own Gloomhaven; the installer brings everything.
 
