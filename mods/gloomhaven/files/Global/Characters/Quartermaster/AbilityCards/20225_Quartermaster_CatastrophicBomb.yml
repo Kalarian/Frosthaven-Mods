@@ -22,7 +22,6 @@ Data:
                 Range: 1
                 Target: -1
                 Targeting: Range
-                AutoTrigger: True
                 CanSkip: False
                 Filter:
                     TargetType: Enemy

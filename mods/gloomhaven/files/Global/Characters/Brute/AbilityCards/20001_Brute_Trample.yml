@@ -16,19 +16,18 @@ Data:
                     PierceEnhancements: 1
     Bottom:
         Abilities:
-            BMoveAttack:
-                MergedMoveAttack:
-                    Abilities:
-                        BMove:
-                            Move:
-                                Amount: 4
-                                Jump: True
-                                CircleEnhancements: 1
-                        BAttack:
-                            Attack:
-                                Amount: 2
-                                DiamondEnhancements: 2
-                            AllTargetsOnMovePath: True
+            BMove:
+                Move:
+                    Amount: 4
+                    Jump: True
+                    CircleEnhancements: 1
+            BAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 2
+                AllTargetsOnMovePath: True
+                Targeting: All
+                Target: -1
         XP: 2
 Layout:
     Top:

@@ -24,7 +24,6 @@ Data:
         Abilities:
             BActive:
                 Move: 2
-                AutoTrigger: True
                 Target: -1
                 Filter: Self
                 ActiveBonus:
