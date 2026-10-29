@@ -19,7 +19,8 @@ Data:
                         Poison: True
                         Range: 1
                         Target: -1
-                        Filter: Ally
+                        Filter: Enemy
+                        TreatAsNonSubAbility: True
                         AllTargetsAdjacentToParentTarget: True
                         AnimOverload: None
                 AnimOverload: RangedAttack

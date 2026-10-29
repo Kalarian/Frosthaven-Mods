@@ -23,9 +23,13 @@ Data:
                                 EnemyWillDoThis:
                                     Move: 3
                                     StrengthIsBase: True
+                                    Range: 1
+                                    RangeIsBase: True
                             ControlDurationType: ControlForOneAction
                             ControlActorType: Enemy
                         Filter: Enemy
+                        UseParentTargets: True
+                        Target: 1
     Bottom:
         Abilities:
             BMove:
