@@ -350,23 +350,13 @@ CARD_FIXES = {
         (r"^([ \t]*)Behaviour: StartActionAbility(\r?)$",
          lambda m: f"{m.group(1)}Behaviour: DuringTurnAbility{m.group(2)}\n{m.group(1)}IsToggleBonus: True{m.group(2)}"),
     ],
-    # Supportive Chant (Sunkeeper), bottom: "All allies add +2 Move to all their moves this round". Written as a Move 2
-    # carrying the aura bonus, Frosthaven offered it as a move of the Sunkeeper's own that can be skipped, and skipping
-    # (the G1 retest, 2026-10-28, twice) set no aura at all. Frosthaven's own shape for the same card, the Snowdancer's
-    # Birds In a Tempest bottom, triggers by itself and names the moves it buffs.
+    # Supportive Chant (Sunkeeper), bottom: "All allies add +2 Move to all their moves this round". The aura names the
+    # moves it buffs, as Frosthaven's Birds In a Tempest bottom does. No AutoTrigger: like Frosthaven's own lone buffs
+    # (Blinkblade's Borrowed Time bottom) it waits for the player's confirm, with undo and skip (the user, 2026-10-28:
+    # AutoTrigger played it on the click with no confirm; the skipped aura in the G1 retest was the driver's skip).
     20197: [
-        (r"^([ \t]+)Move: 2(\r?)\n(?=[ \t]+Target: -1\r?\n[ \t]+Filter: Self\r?\n[ \t]+ActiveBonus:\r?\n[ \t]+Duration: Round\r?\n[ \t]+Behaviour: BuffMove)",
-         lambda m: f"{m.group(1)}Move: 2{m.group(2)}\n{m.group(1)}AutoTrigger: True{m.group(2)}\n"),
         (r"^([ \t]+)Behaviour: BuffMove(\r?)\n(?=[ \t]+IsAura: True\r?\n[ \t]+AuraFilter: \[Ally\]\r?\n[ \t]+AuraTargeting: All\r?\n[ \t]+AnimOverload: PositiveBuffRadial)",
          lambda m: f"{m.group(1)}Behaviour: BuffMove{m.group(2)}\n{m.group(1)}ValidAbilityType: Move{m.group(2)}\n"),
-    ],
-    # Winged Congregation (Plagueherald), top: "all your moves gain Flying" (persistent). Written as a Move 0 with Fly
-    # carrying the move bonus, Frosthaven offered it as a move of the Plagueherald's own; a Move 0 can only be skipped,
-    # and a skipped move sets no bonus (the G2 regression, 2026-10-28, twice). The same fix as Supportive Chant bottom:
-    # the bonus triggers by itself.
-    20294: [
-        (r"^([ \t]+)Filter: Self(\r?)\n(?=[ \t]+ActiveBonus:\r?\n[ \t]+Duration: Persistent\r?\n[ \t]+Behaviour: BuffMove\r?\n[ \t]+AnimOverload: PowerUp)",
-         lambda m: f"{m.group(1)}Filter: Self{m.group(2)}\n{m.group(1)}AutoTrigger: True{m.group(2)}\n"),
     ],
     # Virulent Strain (Plagueherald), bottom: "every enemy adjacent to a poisoned enemy gains Poison". Its Poison is a
     # sub-ability of a NullTargeting parent; run as a sub-ability, Frosthaven's targeting takes the parent's target (the
@@ -402,11 +392,12 @@ CARD_FIXES = {
     # Catastrophic Bomb, bottom: "you and all normal enemies within the targeted area suffer 7 damage". Frosthaven has
     # no aimed area for Damage abilities (no card of its own has one): its damage preview throws on it and the damage
     # can't be confirmed. Decided 2026-10-26: Frosthaven's own pattern instead, all adjacent normal enemies (up to six
-    # hexes, where Gloomhaven's aimed area held two).
+    # hexes, where Gloomhaven's aimed area held two). No AutoTrigger: the player confirms it (every half gets the
+    # standard confirm, the user 2026-10-28); no skip, as the damage isn't optional.
     20225: [
         (r'^([ \t]*)AreaEffect: "0,0,G\|2,0,R\|1,1,R"(\r?)$',
          lambda m: "\n".join(f"{m.group(1)}{line}{m.group(2)}" for line in
-                             ("Range: 1", "Target: -1", "Targeting: Range", "AutoTrigger: True", "CanSkip: False"))),
+                             ("Range: 1", "Target: -1", "Targeting: Range", "CanSkip: False"))),
         (r'^([ \t]*)- ColumnWidths: "65,30"\r?\n[ \t]*- Column:\r?\n[ \t]*- Row: "\$GH_225_B\$"\r?\n'
          r'[ \t]*- Row: "<size=50%> "\r?\n[ \t]*- Column: "£Area£"(?=\r?$)',
          lambda m: f'{m.group(1)}- Row: "$GH_225_B$"'),

@@ -174,6 +174,11 @@ def check_pack(pack):
             abilities = h.get("Abilities") or {}
             if not abilities and not h.get("LongRest") and not h.get("ShortRest"):
                 warnings.append(f"{rel}: {half} has no abilities")
+            # the half's first ability must wait for the player's confirm (undo, confirm, skip), as Frosthaven's own do;
+            # AutoTrigger plays it on the click (Supportive Chant bottom, Winged Congregation top: the user, 2026-10-28)
+            first = next(iter(abilities.values()), None) if isinstance(abilities, dict) else None
+            if isinstance(first, dict) and first.get("AutoTrigger") is True:
+                problems.append(f"{rel}: {half}/{next(iter(abilities))}: AutoTrigger on the half's first ability (played on the click, no confirm, undo or skip)")
             for ab, props in abilities.items():
                 check_ability(rel, f"{half}/{ab}", props, problems, warnings)
                 # a summon's card is drawn from the summon's definition (CreateLayout.CreateSummon throws without it)
