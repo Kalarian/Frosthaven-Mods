@@ -357,15 +357,20 @@ CARD_FIXES = {
     # and a sub-ability attack under a non-attack parent gets a made-up area whose hex flags are never filled
     # (CAbilityAttack.Perform "SubAbilityAttackArea"; CAttackSummary.UpdateTargetData KeyNotFound, the error screen,
     # bench 2026-10-28 23:28). No Frosthaven card forces an attack under a parent-as-parent control. Without it the
-    # attack is a plain monster attack, as Frosthaven's Lurker Mindsnipper Turn the Weak; APPROXIMATION (the user to
-    # confirm): it may target any POISONED enemy within range 3, which always includes the just-poisoned target.
+    # attack is a plain monster attack, as Frosthaven's Lurker Mindsnipper Turn the Weak. Hands-free, as the user asked
+    # (2026-10-29: picking each enemy and the attacks' targets was busywork, and the last Hound hit a poisoned decoy):
+    # the control takes every enemy within 3 by itself (AutoTrigger, as Frosthaven's Snowdancer White Winds controls its
+    # allies; CAbilityTargeting's auto path), the AI drives each forced attack (ControlActorType Ally), and the attack
+    # may target only the poison's target (TargetTargetedByCasterPreviousAbility + SpecificAbilityNames [TPoison]:
+    # CAbilityFilter checks the action's earlier TPoison targets; the Vars filter it replaces was never consulted there).
     31179: [
         (r"^([ \t]+)UseParentRangeType: True(\r?)$",
-         lambda m: f"{m.group(1)}TreatAsNonSubAbility: True{m.group(2)}"),
+         lambda m: f"{m.group(1)}TreatAsNonSubAbility: True{m.group(2)}\n{m.group(1)}AutoTrigger: True{m.group(2)}"),
         (r"^([ \t]+)TargetIsBase: True(\r?)$",
          lambda m: (f"{m.group(1)}TargetIsBase: True{m.group(2)}\n{m.group(1)}Filter:{m.group(2)}\n"
-                    f"{m.group(1)}    TargetType: Enemy{m.group(2)}\n{m.group(1)}    Vars:{m.group(2)}\n"
-                    f"{m.group(1)}        ValidatePoisoned: target.Tokens.HasKey(CCondition.ENegativeCondition.Poison){m.group(2)}")),
+                    f"{m.group(1)}    TargetType: Enemy{m.group(2)}\n"
+                    f"{m.group(1)}    TargetTargetedByCasterPreviousAbility: True{m.group(2)}\n"
+                    f"{m.group(1)}    SpecificAbilityNames: [TPoison]{m.group(2)}")),
         (r"^[ \t]+TreatControlAbilityParentAsParent: True\r?\n", ""),
     ],
     # Collateral Damage (Demolitionist), top: "Destroy one adjacent obstacle. If you do, Attack 4 on all adjacent enemies,

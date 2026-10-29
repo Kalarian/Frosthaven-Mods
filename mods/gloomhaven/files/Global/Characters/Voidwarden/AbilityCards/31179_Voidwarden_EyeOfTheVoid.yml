@@ -26,8 +26,8 @@ Data:
                                     TargetIsBase: True
                                     Filter:
                                         TargetType: Enemy
-                                        Vars:
-                                            ValidatePoisoned: target.Tokens.HasKey(CCondition.ENegativeCondition.Poison)
+                                        TargetTargetedByCasterPreviousAbility: True
+                                        SpecificAbilityNames: [TPoison]
                                     RangeIsBase: True
                                     AnimOverload: RangedAttack
                             ControlDurationType: ControlForOneAction
@@ -36,6 +36,7 @@ Data:
                         Filter: Enemy
                         AllTargetsAdjacentToParentTarget: True
                         TreatAsNonSubAbility: True
+                        AutoTrigger: True
             # TODO: Force all other enemies within Range 3 of the target to perform Attack 2,
             # Range 3 targeting that target
         Infuse: Dark
