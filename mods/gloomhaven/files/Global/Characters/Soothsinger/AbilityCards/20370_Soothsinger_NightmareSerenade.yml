@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NightmareSerenade$
+Character: SoothsingerID
+ID: 20370
+Level: 7
+Initiative: 13
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPlaySong:
+                PlaySong: 1
+                Filter: Self
+                Song:
+                    Filter: Self
+                    SongEffect:
+                        Abilities:
+                            TCurse:
+                                Curse: True
+                                Range: 5
+                                Filter: Enemy
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                AnimOverload: PlaySongConfuse2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Range: 3
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,E"
+                Conditions: Curse
+                MultiPassAttack: False
+                AnimOverload: AggressiveTargetedShout
+        XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TPlaySong
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_370_T$"
+            Layout: "$GH_370_T$"
+    Bottom:
+        - ColumnWidths: "70,20"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Row: "<sprite name=Range> *BAttack.Range*"
+            - Row: "<sprite name=Curse>"
+            - Row: "<size=50%> "
+        - Column: "£Area£"

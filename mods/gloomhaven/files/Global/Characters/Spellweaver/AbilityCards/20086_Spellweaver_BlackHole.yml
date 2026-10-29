@@ -1,0 +1,62 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BlackHole$
+Character: SpellweaverID
+ID: 20086
+Level: 9
+Initiative: 41
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+             TAttack:
+                Attack:
+                    Amount: 4
+                Range: 3
+                AreaEffect: "0,0,R|-1,1,R|1,1,R"
+                AreaEffectLayoutOverride: "0,0,R|2,0,R|1,1,R"
+                MultiPassAttack: False
+                XPPerTarget: 1
+                AnimOverload: RadialBlackHoleDamage
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkKillInstead:
+                        ParentName: TAttack
+                        SubAbilities:
+                            TAttackSubKill:
+                                Kill: True
+                                Filter:
+                                    TargetType: Enemy
+                                    EnemyType: Normal
+                                AnimOverload: None
+    Bottom:
+        Abilities:
+            BPull:
+                Pull:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 4
+                Target:
+                    Amount: -1
+                PullType: PullTowardsTile
+                AnimOverload: RadialBlackHolePull
+Layout:
+    Top:
+        - ColumnWidths: "75,25"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Range> *TAttack.Range*"
+            - Row: "<size=20%> "
+            - Row: "<line-height=100%>$XP_PerEnemy$"
+            - Row: "<size=50%> "
+            - Consume:
+                Name: TCDark
+                Text: "$Kill_AllNormalEnemiesInTargetedArea$"
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "$GH_086_B_1$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Pull> *BPull* <size=100%><voffset=1>@BPull@"
+        - Row: "$GH_086_B_2$"

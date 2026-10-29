@@ -1,0 +1,83 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StoneFists$
+Character: SpellweaverID
+ID: 20083
+Level: 7
+Initiative: 62
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 6
+                Range: 1
+                AnimOverload: RadialStoneFists
+                MultiPassAttack: False
+                Conditions: Immobilize
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 2
+                            SquareEnhancements: 1
+                        IsInlineSubAbility: True
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthTargetBuff:
+                        ParentName: TAttack
+                        Target: 1
+                XP: 1
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    BCEarthMoveBuff:
+                        ParentName: BMove
+                        Strength: 1
+                    BCEarthShieldBuff:
+                        ParentName: BShield
+                        Strength: 1
+                XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<sprite name=Push>*TAttackSubPush* @TAttackSubPush@"
+                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+            - Column:
+        - Consume:
+            Name: TCEarth
+            Text: "<sprite name=Target> 2, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BShield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            ListLayoutAlt: "<sprite name=Shield> 2, $Self$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+            LayoutAlt:
+                - Row: "<b><size=130%><sprite name=Shield> 2 <size=100%><voffset=1>@BShield@"
+                - Row: "$Self$"
+            Icon: Positive_Shield
+        - Consume:
+            Name: BCEarth
+            Text: "+1 <sprite name=Move>, +1 <sprite name=Shield>, <sprite name=XP1>"

@@ -1,0 +1,14 @@
+Parser: HeroSummon
+ID: DoppelgangerID
+LocKey: $Doppelganger$
+Model: Doppelganger
+Health:
+    Amount: 10
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    CircleEnhancements: 1
+#ActiveBonusData:
+#    Behaviour: CastAbilityFromSummon
+#    ValidAbilityType: Attack
+#    IsToggleBonus: True

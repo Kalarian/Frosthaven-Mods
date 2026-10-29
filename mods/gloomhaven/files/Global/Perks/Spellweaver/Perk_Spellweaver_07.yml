@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Spellweaver07
+Name: PERK_Spellweaver_07_Name
+Description: PERK_Spellweaver_07_Desc
+CharacterID: SpellweaverID
+Available: 1
+CardsToRemove: [AMC_Basic_P0]
+CardsToAdd: [AMC_Stun_P1]

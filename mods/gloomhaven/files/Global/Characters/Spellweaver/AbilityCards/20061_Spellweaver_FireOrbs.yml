@@ -1,0 +1,45 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FireOrbs$
+Character: SpellweaverID
+ID: 20061
+Level: 1
+Initiative: 69
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 3
+                    SquareEnhancements: 1
+                MultiPassAttack: True
+                AnimOverload: SingleFireOrbs
+                XPPerTarget: 1
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<sprite name=Target>*TAttack.Target* @TAttack.Target@"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$XP_PerEnemy$"
+        - Infuse: Fire
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

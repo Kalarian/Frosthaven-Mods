@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CaptivatingPerformance$
+Character: SoothsingerID
+ID: 20374
+Level: 9
+Initiative: 25
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPlaySong:
+                PlaySong: 1
+                Filter: Self
+                Song:
+                    Filter: Ally
+                    SongEffect:
+                        AbilityType: Attack
+                        AttackType: Attack
+                        AbilityOverrides:
+                            TSongAttackBuff:
+                                ParentName: TSong
+                                Attack: 1
+                AnimOverload: PlaySongAttack3
+    Bottom:
+        Abilities:
+            BStun:
+                Stun:
+                    DiamondEnhancements: 1
+                Filter: Enemy
+                Range:
+                    Amount: 3
+                Target:
+                    Amount: 3
+                    SquareEnhancements: 1
+        XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TPlaySong
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_374_T$"
+            Layout: "$GH_374_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Stun> <size=100%><voffset=1>@BStun@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BStun.Range*</mark>"
+                - Row: "<sprite name=Target>*BStun.Target* <size=100%><voffset=1>@BStun.Target@"
+            - Column:

@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NimbleKnife$
+Character: SoothsingerID
+ID: 20359
+Level: X
+Initiative: 27
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Conditions: Curse
+            TBless:
+                Range: 1
+                Target: 1
+                Bless:
+                    DiamondPlusEnhancements: 1
+                Filter: Ally
+                AnimOverload: PlayPositiveTune
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Curse></size>"
+            - Column:
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Bless> @TBless@"
+        - Row: "$Affect_OneAdjacentAlly$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"

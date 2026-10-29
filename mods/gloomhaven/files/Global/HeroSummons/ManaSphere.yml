@@ -1,0 +1,16 @@
+Parser: HeroSummon
+ID: ManaSphereID
+LocKey: $ManaSphere$
+Model: ManaSphere
+Health:
+    Amount: 3
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+    CircleEnhancements: 1
+Attack:
+    Amount: 2
+    Infuse: Any
+Range:
+    Amount: 3
+    SquareEnhancements: 1

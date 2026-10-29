@@ -1,0 +1,15 @@
+Parser: HeroSummon
+ID: MysticAllyID
+LocKey: $MysticAlly$
+Model: MysticAlly
+Health:
+    Amount: 2
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    CircleEnhancements: 1
+Attack: 3
+Range:
+    Amount: 2
+    SquareEnhancements: 1
+AttackAnimOverload: TargetedManaBolt

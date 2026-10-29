@@ -1,0 +1,56 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ParasiticInfluence$
+Character: MindthiefID
+ID: 20152
+Level: 1
+Initiative: 71
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Augment:
+                    Type: Melee
+                    Abilities:
+                        TAugmentHeal:
+                            Heal: 2
+                            AnimOverload: Heal
+                            Filter: Self
+        XP: 1
+    Bottom:
+        Abilities:
+            TControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Move: 1
+                            StrengthIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 4
+                Target: 1
+                Filter: Enemy
+                AnimOverload: MindControl
+Layout:
+    Top:
+        - Augment:
+            AugmentIcon: Positive_AttackPlus
+            ParentAbility: TAttack
+            ActiveBonusLayout: "$Augment_OnYourMeleeAttacks$ <nobr><sprite name=Heal> *TAugmentHeal*,</nobr> $Self$"
+            AugmentAbilityLayout:
+                - Row: "<b><sprite name=Heal> *TAugmentHeal*"
+                - Row: "$Self$"
+            NormalContentLayout:
+                - ColumnWidths: "20,60,20"
+                - Column:
+                - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+    Bottom:
+        - Row: "$GH_152_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Move> 1"
+        - Row: "<size=20%> "
+        - Row: "$With_YouControllingActions$"

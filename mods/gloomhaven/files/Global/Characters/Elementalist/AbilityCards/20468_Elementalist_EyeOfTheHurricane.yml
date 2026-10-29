@@ -1,0 +1,81 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EyeoftheHurricane$
+Character: ElementalistID
+ID: 20468
+Level: 6
+Initiative: 29
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range: 4
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+                SubAbilities:
+                    THealSubAttack:
+                        AllTargetsAdjacentToParentTarget: True
+                        Attack:
+                            Amount: 2
+                            DiamondEnhancements: 1
+                        Range: 2
+                        Target: -1
+                        Filter: Enemy
+                        AnimOverload: RadialHexWind
+        XP: 1
+        Infuse: [Ice, Air]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+        Consumes:
+            BCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    BCFireMoveBuff:
+                        ParentName: BMove
+                        Strength: 3
+            BCAir:
+                Elements: Air
+                AbilityOverrides:
+                    BCAirJumpBuff:
+                        ParentName: BMove
+                        Jump: True
+                XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<sprite name=Range>*THeal.Range* <size=100%><voffset=1>@THeal.Range@"
+            - Column:
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *THealSubAttack* <size=100%><voffset=1>@THealSubAttack@"
+        - Row: "$GH_468_T$"
+        - Row: "<size=0%> "
+        - Row:
+            - ColumnWidths: "20, 20, 20, 20, 20"
+            - Column:
+            - Column:
+                - Infuse: Ice
+            - Column:
+                - Infuse: Air
+            - Column:
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCFire
+            Text: "+3 <sprite name=Move>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCAir
+            Text: "<sprite name=Jump>, <sprite name=XP1>"

@@ -1,0 +1,40 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CripplingChorus$
+Character: SoothsingerID
+ID: 20363
+Level: 3
+Initiative: 62
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TStun:
+                Range: 3
+                Target: -1
+                Stun:
+                    DiamondEnhancements: 1
+                Filter: Enemy
+                AnimOverload: AggressiveNonTargetedShout
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BDisarm:
+                Range: 1
+                Target: 1
+                Disarm:
+                    DiamondEnhancements: 1
+                Filter: Enemy
+                AnimOverload: AggressiveTargetedShout
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Stun> <size=100%><voffset=1>@TStun@"
+        - Row: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> *TStun.Range*</nobr>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Disarm> <size=100%><voffset=1>@BDisarm@"
+        - Row: "$Target_OneAdjacentEnemy$"

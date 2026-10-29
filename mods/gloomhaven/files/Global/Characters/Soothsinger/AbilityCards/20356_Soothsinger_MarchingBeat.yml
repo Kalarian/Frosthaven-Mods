@@ -1,0 +1,34 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MarchingBeat$
+Character: SoothsingerID
+ID: 20356
+Level: 1
+Initiative: 32
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyMove:
+                            Move:
+                                Amount: 4
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                Range: 3
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneMove
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "$GH_352_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"

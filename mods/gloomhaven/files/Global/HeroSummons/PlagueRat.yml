@@ -1,0 +1,16 @@
+Parser: HeroSummon
+ID: PlagueRatID
+LocKey: $PlagueRat$
+Model: PlagueRat
+Health:
+    Amount: 6
+    SquareEnhancements: 1
+Move:
+    Amount: 1
+    CircleEnhancements: 1
+Attack:
+    Amount: 2
+    DiamondEnhancements: 1
+Range: 1
+OnAttackCondition: Poison
+AttackAnimOverload: PoisonAttack

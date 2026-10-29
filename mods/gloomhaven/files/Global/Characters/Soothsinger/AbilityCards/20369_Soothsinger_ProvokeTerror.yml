@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ProvokeTerror$
+Character: SoothsingerID
+ID: 20369
+Level: 6
+Initiative: 60
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TStun:
+                Stun: True
+                Range: 4
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,E"
+                Filter: Enemy
+                AnimOverload: AggressiveTargetedShout
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 4
+                SubAbilities:
+                    BAttackSubPush:
+                        Push:
+                            Amount: 3
+                            SquareEnhancements: 1
+                        IsInlineSubAbility: True
+                AnimOverload: RangedAttack
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row:
+                - Data: "<nobr><b><size=130%><sprite name=Stun></nobr>"
+                - RowProperties:
+                    - Wrapping: False
+                    - AutoSize: True
+            - Row: "<sprite name=Range> *TStun.Range*"
+        - Column:
+            - Row: "<size=200%> "
+            - Row: "£Area£"
+            - Row: "<size=200%> "
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
+                - Row: "<sprite name=Push>*BAttackSubPush* @BAttackSubPush@"
+            - Column:

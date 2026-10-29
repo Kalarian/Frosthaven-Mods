@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FreezingNova$
+Character: SpellweaverID
+ID: 20064
+Level: 1
+Initiative: 21
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Conditions: Immobilize
+                AnimOverload: RadialFreezingNova
+                Target: -1
+                MultiPassAttack: False
+                TreatAsMelee: True
+        Consumes:
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 4
+                    DiamondPlusEnhancements: 2
+                Range: 4
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: Light
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<sprite name=Immobilize>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCIce
+            Text: "+1 <sprite name=Attack>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Light

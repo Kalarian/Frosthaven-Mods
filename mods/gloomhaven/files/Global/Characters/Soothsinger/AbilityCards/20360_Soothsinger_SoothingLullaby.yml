@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SoothingLullaby$
+Character: SoothsingerID
+ID: 20360
+Level: 2
+Initiative: 11
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPlaySong:
+                PlaySong: 1
+                Filter: Self
+                Song:
+                    Filter: Ally
+                    SongEffect:
+                        Abilities:
+                            THeal:
+                                Heal: 1
+                                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                AnimOverload: PlaySongHealing1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range: 4
+                Filter: [Self, Ally]
+                AnimOverload: PlayPositiveTune
+        XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TPlaySong
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_360_T$"
+            Layout: "$GH_360_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+            - Column:

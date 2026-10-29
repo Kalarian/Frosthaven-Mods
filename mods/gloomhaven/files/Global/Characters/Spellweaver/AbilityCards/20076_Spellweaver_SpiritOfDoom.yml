@@ -1,0 +1,70 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SpiritofDoom$
+Character: SpellweaverID
+ID: 20076
+Level: 4
+Initiative: 81
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TCurse:
+                Curse: True
+                Range: 4
+                Filter: Enemy
+                AnimOverload: PowerDown
+        Consumes:
+            TCDark:
+                Element: Dark
+                AbilityOverrides:
+                    TCDarkKillInstead:
+                        ParentName: TCurse
+                        AnimOverload: PowerDownUpgraded
+                        Kill: True
+                        Filter:
+                            TargetType: Enemy
+                            EnemyType: Normal
+                        AbilityXP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 0
+                Target: 1
+                Targeting: All
+                Filter: Ally
+                HealPercentageOfHealth: 0.5 # 50%
+        Consumes:
+            BCLight:
+                Element: Light
+                AbilityOverrides:
+                    BCLightHealFull:
+                        ParentName: BHeal
+                        HealPercentageOfHealth: 1 # 100%
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Curse>"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TCurse.Range*</mark>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "$Kill_OneNormal$ $instead$, <sprite name=XP1>."
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,60,20"
+            - Column:
+            - Column:
+                - Row: "<b><size=130%><sprite name=Heal> X"
+                - Row: "$Affect_AnyOneAlly$"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$GH_076_B_1$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCLight
+            Text: "$GH_076_B_2$"

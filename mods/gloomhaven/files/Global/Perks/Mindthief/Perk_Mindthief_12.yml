@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Mindthief12
+Name: PERK_Mindthief_12_Name
+Description: PERK_Mindthief_12_Desc
+CharacterID: MindthiefID
+Available: 1
+Flags: [Passive]

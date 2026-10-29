@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ChromaticExplosion$
+Character: SpellweaverID
+ID: 20078
+Level: 5
+Initiative: 71
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 3
+                AnimOverload: TargetedChromaticExplosion
+                AreaEffect: "0,0,R|2,0,R|1,1,R"
+                MultiPassAttack: False
+        Infuse: [Air, Ice, Fire, Earth, Light, Dark]
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+        Infuse: Any
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Range> *TAttack.Range*"
+            - Row: "<size=10%> "
+            - Infuse: [Air, Ice, Fire]
+            - Infuse: [Earth, Light, Dark]
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Infuse: Any

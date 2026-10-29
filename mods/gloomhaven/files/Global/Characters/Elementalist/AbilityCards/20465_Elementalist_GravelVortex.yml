@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GravelVortex$
+Character: ElementalistID
+ID: 20465
+Level: 4
+Initiative: 62
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 1
+                AnimOverload: RadialHexEarth
+                Target: -1
+                MultiPassAttack: False
+        Infuse: [Air, Earth]
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 1
+                AnimOverload: Loot
+                Target: -1
+        Consumes:
+            BCAnyAny:
+                Elements: [Any, Any]
+                AbilityOverrides:
+                    BCAnyAnyLootBuff:
+                        ParentName: BLoot
+                        Range: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30, 20, 20, 30"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:
+                - Infuse: Earth
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCAnyAny
+            Text: "<sprite name=Loot> 2 $instead$"

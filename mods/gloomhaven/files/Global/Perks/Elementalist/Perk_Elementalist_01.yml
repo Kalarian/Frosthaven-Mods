@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Elementalist01
+Name: PERK_Elementalist_01_Name
+Description: PERK_Elementalist_01_Desc
+CharacterID: ElementalistID
+Available: 2
+CardsToRemove: [AMC_Basic_M1, AMC_Basic_M1]

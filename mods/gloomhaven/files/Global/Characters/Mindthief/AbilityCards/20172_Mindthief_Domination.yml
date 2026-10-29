@@ -1,0 +1,43 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Domination$
+Character: MindthiefID
+ID: 20172
+Level: 8
+Initiative: 13
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack: 4
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    TransferAugments: True
+                Range: 1
+                Filter: Ally
+                AnimOverload: MindControl
+        XP: 1
+    Bottom:
+        Abilities:
+            TControl:
+                ControlActor:
+                    ControlDurationType: ControlForOneTurn
+                    ControlActorType: Player
+                Range: 5
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+                AnimOverload: MindControl
+        XP: 2
+Layout:
+    Top:
+        - Row: "$GH_157_T$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack*"
+        - Row: "<size=20%> "
+        - Row: "$GH_172_T$"
+    Bottom:
+        - Row: "$GH_172_B$"

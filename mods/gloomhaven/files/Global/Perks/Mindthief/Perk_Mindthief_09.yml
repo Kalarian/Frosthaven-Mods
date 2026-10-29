@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Mindthief09
+Name: PERK_Mindthief_09_Name
+Description: PERK_Mindthief_09_Desc
+CharacterID: MindthiefID
+Available: 1
+CardsToAdd: [AMC_Stun_R]

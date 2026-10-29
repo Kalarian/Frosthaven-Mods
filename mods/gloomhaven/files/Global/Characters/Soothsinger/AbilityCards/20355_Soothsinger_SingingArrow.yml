@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SingingArrow$
+Character: SoothsingerID
+ID: 20355
+Level: 1
+Initiative: 89
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TCurse:
+                Range: 3
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,E"
+                Curse: True
+                Filter: Enemy
+                AnimOverload: AggressiveTargetedShout
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Conditions: Wound
+                AnimOverload: RangedAttack
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<nobr><b><size=130%><sprite name=Curse></nobr>"
+            - Row: "<sprite name=Range> *TCurse.Range*"
+        - Column:
+            - Row: "<size=200%> "
+            - Row: "£Area£"
+            - Row: "<size=200%> "
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*BAttack.Range* @BAttack.Range@"
+                - AddedEffect: "<size=130%><sprite name=Wound></size>"
+            - Column:

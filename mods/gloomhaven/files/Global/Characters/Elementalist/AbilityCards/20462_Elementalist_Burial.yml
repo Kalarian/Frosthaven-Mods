@@ -1,0 +1,70 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Burial$
+Character: ElementalistID
+ID: 20462
+Level: 3
+Initiative: 65
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range: 4
+                AnimOverload: AreaHexEarth
+                AreaEffect: "0,0,R|2,0,R|1,1,R"
+                MultiPassAttack: False
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Immobilize
+                XP: 1
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Curse
+                XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 4
+                AnimOverload: TargetFloorObsidian
+        Infuse: Dark
+Layout:
+    Top:
+        - ColumnWidths: "70,30"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Range> *TAttack.Range*"
+            - Row: "<size=50%> "
+            - Consume:
+                Name: TCEarth
+                Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Immobilize>, <sprite name=XP1></nobr>"
+            - Row: "<size=50%> "
+            - Consume:
+                Name: TCDark
+                Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Curse>, <sprite name=XP1></nobr>"
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*BAttack.Range* @BAttack.Range@"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Dark

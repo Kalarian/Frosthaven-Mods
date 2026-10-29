@@ -1,0 +1,48 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SongofSpeed$
+Character: SoothsingerID
+ID: 20350
+Level: 1
+Initiative: 5
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPlaySong:
+                PlaySong: 1
+                Filter: Self
+                Song:
+                    Filter: Ally
+                    SongEffect:
+                        AbilityType: Move
+                        AbilityOverrides:
+                            TSongAttackBuff:
+                                ParentName: TSong
+                                Strength: 1
+                    SongEffect:
+                        AbilityType: Attack
+                        AttackType: Ranged
+                        AbilityOverrides:
+                            TSongAttackBuff:
+                                ParentName: TSong
+                                Range: 1
+                AnimOverload: PlaySongSpeed1
+    Bottom:
+        Abilities:
+            BMuddle:
+                Muddle: True
+                Filter: Enemy
+                Target: -1
+                Range: 4
+                AnimOverload: AggressiveNonTargetedShout
+        XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TPlaySong
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_350_T$"
+            Layout: "$GH_350_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Muddle>"
+        - Row: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> *BMuddle.Range*</nobr>"

@@ -1,0 +1,32 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Scurry$
+Character: MindthiefID
+ID: 20153
+Level: 1
+Initiative: 20
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 2
+                Target: -1
+                AnimOverload: Loot
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"

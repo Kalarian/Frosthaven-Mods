@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Elementalist_MASTERY_2
+LocalisedName: Elementalist_MASTERY_2_Name
+LocalisedDescription: Elementalist_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: a turn with Amount infusions followed by the character's next turn with Amount consumptions (GHMasteries.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_InfuseThenConsume]
+        CharacterIDs:
+            ActorID: ElementalistID
+        Value: 1
+        Amount: 5

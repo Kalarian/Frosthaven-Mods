@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HostileTakeover$
+Character: MindthiefID
+ID: 20160
+Level: 2
+Initiative: 9
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                Conditions: Immobilize
+                AnimOverload: MindAttack
+        Infuse: Ice
+        XP: 1
+    Bottom:
+        Abilities:
+            TControl:
+                ControlActor:
+                    ControlDurationType: ControlForOneTurn
+                    ControlActorType: Ally
+                AnimOverload: MindControl
+                Range: 3
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Ice
+            - Column:
+    Bottom:
+        - Row: "$GH_160_B$"

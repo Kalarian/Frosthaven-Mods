@@ -1,0 +1,68 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FrigidTorrent$
+Character: ElementalistID
+ID: 20456
+Level: 1
+Initiative: 35
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 1
+                AnimOverload: TargetFloorIce
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthPierceBuff:
+                        ParentName: TAttack
+                        Pierce: 2
+                        Target: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 3
+                AnimOverload: AreaHexIce
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,E"
+                MultiPassAttack: False
+                SubAbilities:
+                    TAttackSubPull:
+                        Pull:
+                            Amount: 2
+                            SquareEnhancements: 1
+        Infuse: Ice
+        Infuse: Air
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCEarth
+            Text: "<nobr><sprite name=Target> 2,</nobr> <nobr><sprite name=Pierce> 2, <sprite name=XP1></nobr>"
+    Bottom:
+        - ColumnWidths: "65,35"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Row: "<sprite name=Range> *BAttack.Range* @BAttack.Range@"
+            - Row: "<sprite name=Pull> *TAttackSubPull* <size=100%><voffset=1> @TAttackSubPull@"
+            - Row: "<size=20%> "
+            - Row:
+                - ColumnWidths: "5, 30, 30, 30, 5"
+                - Column:
+                - Column:
+                    - Infuse: Ice
+                - Column:
+                    - Infuse: Air
+                - Column:
+                - Column:
+        - Column:
+            - Row: "£Area£"

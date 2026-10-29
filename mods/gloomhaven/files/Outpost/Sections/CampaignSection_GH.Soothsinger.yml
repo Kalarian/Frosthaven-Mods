@@ -1,0 +1,10 @@
+Parser: CampaignSection
+ID: GH.Soothsinger
+Name: Soothsinger Retires
+SkipNarration: True
+SkipCompletedNotification: False
+Effects:
+    - Type: EnableEvent
+      Param1: GH.Soothsinger-1
+    - Type: EnableEvent
+      Param1: GH.Soothsinger-2

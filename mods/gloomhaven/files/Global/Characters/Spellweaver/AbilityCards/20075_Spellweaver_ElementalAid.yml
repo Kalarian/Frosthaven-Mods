@@ -1,0 +1,71 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ElementalAid$
+Character: SpellweaverID
+ID: 20075
+Level: 3
+Initiative: 84
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthHealBuff:
+                        ParentName: THeal
+                        Strength: 2
+                XP: 1
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 2
+                Targeting: All
+                Filter: Ally
+                ActiveBonusDuration: Round
+        Consumes:
+            BCAir:
+                Elements: Air
+                AbilityOverrides:
+                    BCAirShieldBuff:
+                        ParentName: BShield
+                        Target: -1
+                        TargetIsBase: True
+                        Filter: Ally
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<sprite name=Range>*THeal.Range* @THeal.Range@"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCEarth
+            Text: "+2 <sprite name=Heal>, <sprite name=XP1>"
+    Bottom:
+        - Active:
+            Ability: BShield
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield*"
+                - Row: "$Affect_AnyOneAlly$"
+            LayoutAlt:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield*"
+                - Row: "$Affect_AllAllies$"
+            ListLayout: "<b><size=130%><sprite name=Shield> *BShield*"
+            Icon: Positive_Shield
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCAir
+            Text: "$Affect_AllAllies$ $instead$"

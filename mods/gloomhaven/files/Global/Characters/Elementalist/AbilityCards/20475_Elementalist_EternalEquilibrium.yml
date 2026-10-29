@@ -1,0 +1,112 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EternalEquilibrium$
+Character: ElementalistID
+ID: 20475
+Level: 9
+Initiative: 27
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                AnimOverload: TargetFloorFireIce
+                Target: -1
+                Range: 3
+                MultiPassAttack: False
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Curse
+                XP: 1
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Muddle
+                XP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 4
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 4
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            BCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    BCFireRetaliateBuff:
+                        ParentName: BHeal
+                        SubAbilities:
+                            BCFireRetaliate:
+                                Retaliate: 2
+                                ActiveBonusDuration: Round
+                                SkipAnim: True
+                XP: 1
+            BCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    BCIceShieldBuff:
+                        ParentName: BHeal
+                        SubAbilities:
+                            BCIceShield:
+                                Shield: 2
+                                ActiveBonusDuration: Round
+                                SkipAnim: True
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> *TAttack.Range*</nobr>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr><sprite name=Curse>, <sprite name=XP1></nobr>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCLight
+            Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr><sprite name=Muddle>, <sprite name=XP1></nobr>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "16, 68, 16"
+            - Column:
+            - Column:
+                - Consume:
+                    Name: BCFire
+                    Text:
+                        - Active:
+                            Ability: BCFireRetaliate
+                            Icon: Positive_Retaliate
+                            ListLayout: "<sprite name=Retaliate> 2, <sprite name=XP1>"
+                            Layout: "<nobr><b><sprite name=Retaliate> 2, <sprite name=XP1></nobr>"
+                - Row: "<size=20%> "
+                - Consume:
+                    Name: BCIce
+                    Text:
+                        - Active:
+                            Ability: BCIceShield
+                            Icon: Positive_Shield
+                            ListLayout: "<sprite name=Shield> 2, <sprite name=XP1>"
+                            Layout: "<nobr><b><sprite name=Shield> 2, <sprite name=XP1></nobr>"
+            - Column:
+                - Duration: Round

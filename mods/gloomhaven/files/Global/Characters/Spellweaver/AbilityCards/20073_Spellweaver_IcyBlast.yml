@@ -1,0 +1,56 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_IcyBlast$
+Character: SpellweaverID
+ID: 20073
+Level: 2
+Initiative: 66
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 3
+                Conditions: Muddle
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,R|-1,-1,R|1,-1,R"
+                AnimOverload: TargetedIcyBlast
+                MultiPassAttack: False
+        Infuse: Ice
+        XP: 2
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 6
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+Layout:
+    Top:
+        - ColumnWidths: "60,35"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Range> *TAttack.Range*"
+            - Row: "<sprite name=Muddle>"
+            - Row: "<size=10%> "
+            - Row:
+                - ColumnWidths: "18,32,32"
+                - Column:
+                - Column:
+                    - Infuse: Ice
+                - Column:
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<sprite name=Range>*BHeal.Range* @BHeal.Range@"
+            - Column:

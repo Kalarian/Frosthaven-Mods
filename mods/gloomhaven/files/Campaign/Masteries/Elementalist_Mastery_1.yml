@@ -1,0 +1,33 @@
+Parser: Mastery
+ID: Elementalist_MASTERY_1
+LocalisedName: Elementalist_MASTERY_1_Name
+LocalisedDescription: Elementalist_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAGS: Value different attack abilities each performed with two different elements consumed (GHMasteries.cs, the
+# consumption records of the attack's action); failed by the bottom of Formless Power (20449) or Shaping the Ether (20450)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AttacksConsumingTwoElements]
+        CharacterIDs:
+            ActorID: ElementalistID
+        Value: 4
+BattleGoalFailCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_UsedCardBottom]
+        CharacterIDs:
+            ActorID: ElementalistID
+        Amount: 20449
+        Value: 1
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_UsedCardBottom]
+        CharacterIDs:
+            ActorID: ElementalistID
+        Amount: 20450
+        Value: 1

@@ -1,0 +1,80 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HardenedSpikes$
+Character: SpellweaverID
+ID: 20070
+Level: X
+Initiative: 26
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TRetaliate:
+                Retaliate:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Self, Ally]
+                AnimOverload: PowerUpHardenedSpikes
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthRetaBuff:
+                        ParentName: TRetaliate
+                        Strength: 1
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCIce:
+                Elements: Ice
+                Abilities:
+                    BCIceShield:
+                        ParentName: BNull
+                        Shield: 2
+                        ActiveBonusDuration: Round
+Layout:
+    Top:
+        - Active:
+            Ability: TRetaliate
+            Icon: Positive_Retaliate
+            ListLayout: "<sprite name=Retaliate> *TRetaliate*, <b></b> $Affect_SelfAndAllAdjacentAllies$"
+            ListLayoutAlt: "<sprite name=Retaliate> 3, <b></b> $Affect_SelfAndAllAdjacentAllies$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
+                - Row: "<b></b> $Affect_SelfAndAllAdjacentAllies$"
+            LayoutAlt:
+                - Row: "<b><size=130%><sprite name=Retaliate> 3 <size=100%><voffset=1>@TRetaliate@"
+                - Row: "<b></b> $Affect_SelfAndAllAdjacentAllies$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCEarth
+            Text: "+1 <sprite name=Retaliate>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCIce
+            Text:
+                - ColumnWidths: "80,20"
+                - Column:
+                    - Active:
+                        Ability: BCIceShield
+                        Icon: Positive_Shield
+                        ListLayout: "<sprite name=Shield> 2"
+                        Layout:
+                            - Row: "<b><size=130%><sprite name=Shield> 2"
+                            - Row: "<line-height=100%><size=100%>$Self$"
+                - Column:
+                    - Duration: Round

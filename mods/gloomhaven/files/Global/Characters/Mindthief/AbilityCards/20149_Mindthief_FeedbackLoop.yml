@@ -1,0 +1,63 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FeedbackLoop$
+Character: MindthiefID
+ID: 20149
+Level: 1
+Initiative: 79
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Augment:
+                    Type: Melee
+                    Abilities:
+                        TAugmentShield:
+                            Shield: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+                    Jump: True
+                AllTargetsOnMovePathSameStartAndEnd: True
+                Conditions: Muddle
+Layout:
+    Top:
+        - Augment:
+            AugmentIcon: Positive_AttackPlus
+            ParentAbility: TAttack
+            ActiveBonusLayout: "$Augment_OnYourMeleeAttacks$ $Gain$ <nobr><sprite name=Shield> *TAugmentShield*</nobr> <sprite name=Round>"
+            AugmentAbilityLayout:
+                - ColumnWidths: "70,25"
+                - Column:
+                    - Active:
+                        Ability: TAugmentShield
+                        Icon: Positive_Shield
+                        ListLayout: "<nobr><sprite name=Shield> *TAugmentShield*</nobr>"
+                        Layout: "$Gain$ <nobr><sprite name=Shield> *TAugmentShield*</nobr>"
+                - Column:
+                    - Duration: Round
+            NormalContentLayout:
+                - ColumnWidths: "20,60,20"
+                - Column:
+                - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - AddedEffect: "<sprite name=Jump>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$GH_149_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Muddle>"
+        - Row: "$Target_AllEnemiesMovedThrough$"

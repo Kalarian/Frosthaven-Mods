@@ -1,0 +1,28 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ChangeTempo$
+Character: SoothsingerID
+ID: 20361
+Level: 2
+Initiative: 91
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TImmobilize:
+                Range: 3
+                Target: -1
+                Immobilize: True
+                Filter: Enemy
+                AnimOverload: AggressiveNonTargetedShout
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 5
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Immobilize>"
+        - Row: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> *TImmobilize.Range*</nobr>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"

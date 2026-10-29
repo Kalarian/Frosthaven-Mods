@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Mindthief11
+Name: PERK_Mindthief_11_Name
+Description: PERK_Mindthief_11_Desc
+CharacterID: MindthiefID
+Available: 1
+Flags: [Passive, IgnoreNegativeScenarioEffects]

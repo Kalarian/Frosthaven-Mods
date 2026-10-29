@@ -1,0 +1,61 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FrozenNight$
+Character: SpellweaverID
+ID: 20081
+Level: 6
+Initiative: 46
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                XPPerTarget: 1
+                AreaEffect: "0,0,G|2,0,R|4,0,R|1,1,R|3,1,R|5,1,E|2,2,R|4,2,E"
+                AnimOverload: TargetedFrozenNight
+                MultiPassAttack: False
+        Infuse: Ice
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+        Consumes:
+            BCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    BCDarkMove:
+                        ParentName: BMove
+                        Strength: 2
+                Abilities:
+                    BCDarkInvis:
+                        Invisible: True
+                        Filter: Self
+                XP: 1
+Layout:
+    Top:
+        - ColumnWidths: "60,35"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<size=20%> "
+            - Row: "$XP_PerEnemy$"
+            - Row: "<size=20%> "
+            - Row: "<size=200%><sprite name=CreateIce>"
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCDark
+            Text:
+                - ColumnWidths: "82,18"
+                - ColumnSpacing: 100
+                - Column:
+                    - Row: "+2 <sprite name=Move>"
+                    - Row: "<b><sprite name=Invisible></b>"
+                    - Row: "<line-height=100%><size=100%>$Self$"
+                - Column:

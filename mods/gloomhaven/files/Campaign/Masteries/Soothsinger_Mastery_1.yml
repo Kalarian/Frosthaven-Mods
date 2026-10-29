@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Soothsinger_MASTERY_1
+LocalisedName: Soothsinger_MASTERY_1_Name
+LocalisedDescription: Soothsinger_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAG: a new song on the first turn and on the turn after every rest (GHMasteries.cs, from the ability and rest records)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_NewSongAfterRests]
+        CharacterIDs:
+            ActorID: SoothsingerID
+        Value: 1

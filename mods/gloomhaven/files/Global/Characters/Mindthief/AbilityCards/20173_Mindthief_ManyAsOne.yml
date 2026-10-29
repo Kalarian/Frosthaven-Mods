@@ -1,0 +1,50 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ManyasOne$
+Character: MindthiefID
+ID: 20173
+Level: 9
+Initiative: 91
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: RatKingID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 0
+                Range: 2
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Behaviour: BuffAttack
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Ally]
+                    Filter: 
+                        CasterAdjacentAllies: ">= 0"
+                        CheckAdjacentRange: 2
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: CasterAdjacentAllies
+        XP: 2
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $RatKing$
+                    SpecialText: "$GH_173_T_2$"
+    Bottom:
+        - Active:
+            Ability: BAttack
+            Icon: Positive_AttackPlus
+            ListLayout: "<b></b> $GH_173_B$"
+            Layout:
+                - Row: "<b></b> $GH_173_B$"

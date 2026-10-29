@@ -1,0 +1,67 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ObsidianShards$
+Character: ElementalistID
+ID: 20466
+Level: 5
+Initiative: 36
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 3
+                Target: 2
+                AnimOverload: TargetFloorObsidian
+                MultiPassAttack: False
+        Consumes:
+            TCFireEarth:
+                Elements: [Fire, Earth]
+                AbilityOverrides:
+                    TCFireEarthAttacl:
+                        ParentName: TAttack
+                        Strength: 3
+                XP: 1
+    Bottom:
+        Abilities:
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                AnimOverload: PowerUp
+                ActiveBonusDuration: Round
+        Infuse: [Ice, Dark]
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
+                - AddedEffect: "<sprite name=Target>2"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFireEarth
+            Text: "+3 <sprite name=Attack>, <sprite name=XP1>"
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20, 20, 20, 20, 20"
+            - Column:
+            - Column:
+                - Duration: Round
+            - Column:
+                - Infuse: Ice
+            - Column:
+                - Infuse: Dark
+            - Column:

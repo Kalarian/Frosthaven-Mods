@@ -1,0 +1,141 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MalleableEvocation$
+Character: ElementalistID
+ID: 20457
+Level: X
+Initiative: 50
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 0
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AnimOverload: TargetFloorMulti
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Wound
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Target: 1
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Immobilize
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Poison
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    BCFireMoveBuff:
+                        ParentName: BMove
+                        Strength: 3
+            BCAir:
+                Elements: Air
+                AbilityOverrides:
+                    BCAirJumpBuff:
+                        ParentName: BMove
+                        Jump: True
+            BCIce:
+                Elements: Ice
+                Abilities:
+                    BCIceHeal:
+                        ParentName: BNull
+                        Heal: 2
+                        Filter: Self
+            BCEarth:
+                Elements: Earth
+                Abilities:
+                    BCEarthShield:
+                        ParentName: BNull
+                        Shield: 1
+                        Filter: Self
+                        ActiveBonusDuration: Round
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20, 60, 20"
+            - Column:
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Row: "<sprite name=Range> *TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
+            - Column:
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "54, 46"
+            - Column:
+                - Consume:
+                    Name: TCFire
+                    Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr><sprite name=Wound></nobr>"
+                - Row: "<size=50%> "
+                - Consume:
+                    Name: TCIce
+                    Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr>$ImmobilizeShort$ <sprite name=Immobilize></nobr>"
+            - Column:
+                - Consume:
+                    Name: TCAir
+                    Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr><sprite name=Target> 2</nobr>"
+                - Row: "<size=50%> "
+                - Consume:
+                    Name: TCEarth
+                    Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr>$PoisonShort$ <sprite name=Poison></nobr>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "55, 45"
+            - Column:
+                - Consume:
+                    Name: BCFire
+                    Text: "<nobr>+3 <sprite name=Move></nobr>"
+                - Row: "<size=20%> "
+                - Consume:
+                    Name: BCIce
+                    Text:
+                        - Row: "<nobr><b><sprite name=Heal> 2</nobr>"
+                        - Row: "$Self$"
+            - Column:
+                - Consume:
+                    Name: BCAir
+                    Text: "<nobr><sprite name=Jump></nobr>"
+                - Row: "<size=20%> "
+                - Consume:
+                    Name: BCEarth
+                    Text:
+                        - Active:
+                            Ability: BCEarthShield
+                            Icon: Positive_Shield
+                            ListLayout: "<nobr><sprite name=Shield> 1</nobr>"
+                            Layout:
+                                - Row: "<nobr><b><sprite name=Shield> 1</nobr>"

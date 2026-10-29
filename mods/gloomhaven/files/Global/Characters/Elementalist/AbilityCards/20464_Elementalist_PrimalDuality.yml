@@ -1,0 +1,61 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PrimalDuality$
+Character: ElementalistID
+ID: 20464
+Level: 4
+Initiative: 15
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 2
+                Range: 4
+                AnimOverload: TargetFloorFireIce
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+        Infuse: Ice
+        Infuse: Fire
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+        Infuse: Light
+        Infuse: Dark
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - Row: "<sprite name=Target>*TAttack.Target* <size=100%><voffset=1>@TAttack.Target@"
+            - Column:
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20, 20, 20, 20, 20"
+            - Column:
+            - Column:
+                - Infuse: Ice
+            - Column:
+                - Infuse: Fire
+            - Column:
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30, 20, 20, 30"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:
+                - Infuse: Dark
+            - Column:

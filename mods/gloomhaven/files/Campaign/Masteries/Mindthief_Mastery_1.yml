@@ -1,0 +1,17 @@
+Parser: Mastery
+ID: Mindthief_MASTERY_1
+LocalisedName: Mindthief_MASTERY_1_Name
+LocalisedDescription: Mindthief_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAG: Value different augments whose on-attack abilities fired Amount times (GHMasteries.cs; the augment
+# processing in CAbilityAttack is hooked for it)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AugmentsTriggered]
+        CharacterIDs:
+            ActorID: MindthiefID
+        Value: 4
+        Amount: 3

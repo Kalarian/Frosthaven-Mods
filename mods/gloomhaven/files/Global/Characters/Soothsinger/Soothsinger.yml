@@ -1,0 +1,26 @@
+Parser: Character
+ID: SoothsingerID
+LocKey: $Soothsinger$
+Model: Soothsinger
+Race: Quatryl
+Traits: [ Educated, Nimble, Persuasive ]
+Complexity: 3
+MasteryIDs: [ Soothsinger_MASTERY_1, Soothsinger_MASTERY_2 ]
+RetireCampaignSection: GH.Soothsinger
+DefaultSkin: 1
+# PlayerLevel:  [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
+HealthTable:    [  6,   7,   8,   9,  10,  11,  12,  13,  14 ]
+NumberAbilityCardsInBattle: 9
+Role: $Soothsinger_ROLE$
+Description: $Soothsinger_DESCRIPTION$
+Difficulty: $DIFFICULTY_HIGH$
+Strengths: $Soothsinger_STRENGTHS$
+Weaknesses: $Soothsinger_WEAKNESSES$
+Adventure_Description: $Soothsinger_ADVENTURE_DESCRIPTION$
+HeroStats:
+    Melee: 1
+    Ranged: 3
+    Mobility: 2
+    Support: 5
+    Defense: 1
+    Control: 3

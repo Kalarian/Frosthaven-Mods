@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Spellweaver_MASTERY_1
+LocalisedName: Spellweaver_MASTERY_1_Name
+LocalisedDescription: Spellweaver_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAG: every element infused at least once and consumed at least once over the scenario (GHMasteries.cs, from the
+# infusion and consumption records)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AllElementsInfusedAndConsumed]
+        CharacterIDs:
+            ActorID: SpellweaverID
+        Value: 1

@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WitheringClaw$
+Character: MindthiefID
+ID: 20156
+Level: X
+Initiative: 77
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Augment:
+                    Type: Melee
+                    AbilityOverrides:
+                        TAugmentAddMuddlePoison:
+                            ParentName: TAttack
+                            Conditions: [Muddle, Poison]
+        XP: 1
+    Bottom:
+        Abilities:
+            BImmobilize:
+                Immobilize: True
+                Filter: Enemy
+            BMove:
+                Move: 3
+Layout:
+    Top:
+        - Augment:
+            AugmentIcon: Positive_AttackPlus
+            ParentAbility: TAttack
+            ActiveBonusLayout: "$Augment_OnYourMeleeAttacks$ $Add$ <nobr><sprite name=Muddle></nobr>, <nobr><sprite name=Poison></nobr>"
+            AugmentAbilityLayout:
+                - Row: "$Add$ <nobr><sprite name=Muddle></nobr>, <nobr><sprite name=Poison></nobr>"
+            NormalContentLayout:
+                - ColumnWidths: "20,60,20"
+                - Column:
+                - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Immobilize>"
+        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"

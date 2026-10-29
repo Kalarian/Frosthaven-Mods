@@ -1,0 +1,33 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RevivingEther$
+Character: SpellweaverID
+ID: 20063
+Level: 1
+Initiative: 80
+Discard: [Permanently Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            BRecover:
+                RecoverLostCards: All
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Jump: True
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "$GH_063_T$"
+        - Row: "<size=20%> "
+        - Infuse: Dark
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - AddedEffect: "<sprite name=Jump>"
+            - Column:

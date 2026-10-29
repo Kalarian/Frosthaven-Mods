@@ -1,0 +1,62 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BoilingArc$
+Character: ElementalistID
+ID: 20460
+Level: 2
+Initiative: 47
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                AreaEffect: "0,0,G|2,0,R|4,0,R|1,1,R|3,1,R|2,2,R"
+                AnimOverload: ElementalFlames
+                MultiPassAttack: False
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCFire:
+                Elements: Fire
+                Abilities:
+                    BCFireReta:
+                        ParentName: BNull
+                        Retaliate: 2
+                        RetaliateRange: 2
+                        ActiveBonusDuration: Round
+                        AnimOverload: PowerUp
+Layout:
+    Top:
+        - ColumnWidths: "60,35"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<size=20%> "
+            - Infuse: Fire
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCFire
+            Text:
+                - ColumnWidths: "80,20"
+                - Column:
+                    - Active:
+                        Ability: BCFireReta
+                        Icon: Positive_Retaliate
+                        ListLayout: "<sprite name=Retaliate> 2"
+                        Layout:
+                            - Row: "<b><sprite name=Retaliate> 2"
+                            - Row: "$Retaliate$ <sprite name=Range> *BCFireReta.RetaliateRange*"
+                - Column:
+                    - Duration: Round

@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Elementalist12
+Name: PERK_Elementalist_12_Name
+Description: PERK_Elementalist_12_Desc
+CharacterID: ElementalistID
+Available: 1
+Flags: [Passive, IgnoreNegativeScenarioEffects]

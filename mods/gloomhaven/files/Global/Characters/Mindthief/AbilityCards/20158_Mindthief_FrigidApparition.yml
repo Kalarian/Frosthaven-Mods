@@ -1,0 +1,45 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FrigidApparition$
+Character: MindthiefID
+ID: 20158
+Level: X
+Initiative: 29
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+        Consumes:
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceStun:
+                        ParentName: TAttack
+                        Conditions: Stun
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BStun:
+                Stun: True
+                AnimOverload: MindAttack
+                Filter: Enemy
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCIce
+            Text: "<sprite name=Stun>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Stun>"
+        - Row: "$Target_OneAdjacentEnemy$"

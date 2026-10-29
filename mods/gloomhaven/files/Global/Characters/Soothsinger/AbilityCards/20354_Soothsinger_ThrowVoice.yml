@@ -1,0 +1,50 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ThrowVoice$
+Character: SoothsingerID
+ID: 20354
+Level: 1
+Initiative: 44
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TDisarm:
+                Range: 3
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,E"
+                Disarm: True
+                Filter: Enemy
+                AnimOverload: AggressiveTargetedShout
+    Bottom:
+        Abilities:
+            BControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Move: 1
+                            StrengthIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 3
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,E"
+                Filter: Enemy
+                AnimOverload: PowerUp
+        XP: 1
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<nobr><b><size=130%><sprite name=Disarm></nobr>"
+            - Row: "<sprite name=Range> *TDisarm.Range*"
+        - Column:
+            - Row: "<size=200%> "
+            - Row: "£Area£"
+            - Row: "<size=200%> "
+    Bottom:
+        - ColumnWidths: "70,28"
+        - Column:
+            - Row: "<sprite name=Range> *BControl.Range*"
+            - Row: "<size=20%> "
+            - Row: "$GH_354_B$"
+        - Column:
+            - Row: "£Area£"
+            - Row: "<size=50%> "

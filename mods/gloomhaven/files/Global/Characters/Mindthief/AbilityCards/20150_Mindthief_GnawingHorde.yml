@@ -1,0 +1,32 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GnawingHorde$
+Character: MindthiefID
+ID: 20150
+Level: 1
+Initiative: 82
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: PlagueRatID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $PlagueRat$
+                    SpecialText: "<sprite name=Poison>"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

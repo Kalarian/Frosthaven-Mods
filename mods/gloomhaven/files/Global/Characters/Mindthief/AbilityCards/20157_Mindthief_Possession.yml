@@ -1,0 +1,41 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Possession$
+Character: MindthiefID
+ID: 20157
+Level: X
+Initiative: 51
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack: 6
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                Range: 1
+                Filter: Ally
+                AnimOverload: MindControl
+        XP: 2
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move: 4
+                            StrengthIsBase: True
+                Range: 3
+                Filter: Ally
+                AnimOverload: MindControl
+Layout:
+    Top:
+        - Row: "$GH_157_T$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack*"
+    Bottom:
+        - Row: "$GH_157_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Move> *BAllyMove*"

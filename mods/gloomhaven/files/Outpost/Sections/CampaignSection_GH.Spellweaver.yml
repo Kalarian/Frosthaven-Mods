@@ -1,0 +1,10 @@
+Parser: CampaignSection
+ID: GH.Spellweaver
+Name: Spellweaver Retires
+SkipNarration: True
+SkipCompletedNotification: False
+Effects:
+    - Type: EnableEvent
+      Param1: GH.Spellweaver-1
+    - Type: EnableEvent
+      Param1: GH.Spellweaver-2

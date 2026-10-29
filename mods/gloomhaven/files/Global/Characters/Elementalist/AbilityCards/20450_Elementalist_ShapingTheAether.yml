@@ -1,0 +1,108 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ShapingtheAether$
+Character: ElementalistID
+ID: 20450
+Level: 1
+Initiative: 54
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Range: 3
+                MultiPassAttack: False
+                AnimOverload: TargetFloorMulti
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireAttackBuff:
+                        ParentName: TAttack
+                        Strength: 2
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceStun:
+                        ParentName: TAttack
+                        Conditions: Stun
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirPush:
+                        ParentName: TAttack
+                        SubAbilities:
+                            TCAttackSubPush:
+                                Push: 3
+                                AnimOverload: None
+                                IsInlineSubAbility: True
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthTargetBuff:
+                        ParentName: TAttack
+                        Target: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Infuse: Any
+                    ShowElementPicker: True
+                    Filter: Self
+                    AnimOverload: None
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                SubAbilities:
+                    BSubAttackDebuff:
+                        Attack: -1
+                        ActiveBonus:
+                            Behaviour: BuffAttack
+                            Duration: Persistent
+                        AnimOverload: None
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20, 60, 20"
+            - Column:
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Row: "<sprite name=Range> *TAttack.Range*"
+            - Column:
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "52, 48"
+            - Column:
+                - Consume:
+                    Name: TCFire
+                    Text:
+                        - Row: "<nobr>+2 <sprite name=Attack></nobr>"
+                - Row: "<size=20%> "
+                - Consume:
+                    Name: TCAir
+                    Text:
+                        - Row: "<nobr><sprite name=Push> 3</nobr>"
+            - Column:
+                - Consume:
+                    Name: TCIce
+                    Text:
+                        - Row: "<nobr>$StunShort$ <sprite name=Stun></nobr>"
+                - Row: "<size=20%> "
+                - Consume:
+                    Name: TCEarth
+                    Text:
+                        - Row: "<nobr><sprite name=Target> 2</nobr>"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Positive_FireLightInfuse_Wild
+            ListLayout: "$GH_450_B_1$\n<size=10%>\n<size=100%>$GH_450_B_2$"
+            Layout:
+                - Row: "$GH_450_B_1$"
+                - Row: "<size=20%> "
+                - Row: "$GH_450_B_2$"
+                - Row: "<size=20%> "
+                - Duration: Persistent

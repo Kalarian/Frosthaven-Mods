@@ -1,0 +1,47 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EchoingAria$
+Character: SoothsingerID
+ID: 20362
+Level: 3
+Initiative: 8
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPlaySong:
+                Retaliate: 2
+                RetaliateRange: 2
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    OverrideAsSong: True
+                    Filter: Ally
+                AnimOverload: PlaySongShield2
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 2
+                Range: 3
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Ally]
+                AnimOverload: PowerUp
+        XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TPlaySong
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_362_T$"
+            Layout: "$GH_362_T$"
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*, <b></b> $Affect_AllAllies$ $within$ <nobr><sprite name=Range> *BShield.Range*</nobr>"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield*"
+                - Row: "<b></b> $Affect_AllAllies$ $within$ <nobr><sprite name=Range> *BShield.Range*</nobr>"

@@ -1,0 +1,16 @@
+Parser: HeroSummon
+ID: RatKingID
+LocKey: $RatKing$
+Model: RatKing
+Health:
+    Amount: 9
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    CircleEnhancements: 1
+Attack: -1 # For layout as X
+Range: 1
+StatIsBasedOnX:
+    Attack:
+        BasedOn: PercentageOfCurrentHP
+        Multiplier: 0.5

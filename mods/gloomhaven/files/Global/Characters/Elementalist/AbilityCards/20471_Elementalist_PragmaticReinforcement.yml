@@ -1,0 +1,127 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PragmaticReinforcement$
+Character: ElementalistID
+ID: 20471
+Level: 7
+Initiative: 56
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceShieldBuff:
+                        ParentName: THeal
+                        SubAbilities:
+                            TCIceShield:
+                                Shield: 1
+                                ActiveBonusDuration: Round
+                                SkipAnim: True
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthHealBuff:
+                        ParentName: THeal
+                        Strength: 2
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightRecoverBuff:
+                        ParentName: THeal
+                        SubAbilities:
+                            TCLightRecover:
+                                RecoverDiscardedCards: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                AnimOverload: TargetFloorMulti
+        Consumes:
+            BCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    BCFireAttackBuff:
+                        ParentName: BAttack
+                        Conditions: [Wound, Poison]
+            BCAir:
+                Elements: Air
+                AbilityOverrides:
+                    BCAirAttackBuff:
+                        ParentName: BAttack
+                        Range: 3
+            BCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    BCDarkAttackBuff:
+                        ParentName: BAttack
+                        Strength: 2
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20, 60, 20"
+            - Column:
+            - Column:
+                - Row: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+                - Row: "<sprite name=Range> *THeal.Range*"
+            - Column:
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "50, 50"
+            - Column:
+                - Consume:
+                    Name: TCIce
+                    Text:
+                        - Active:
+                            Ability: TCIceShield
+                            Icon: Positive_Shield
+                            ListLayout: "<sprite name=Shield> 1"
+                            Layout: "<nobr><sprite name=Shield> 1, <size=150%><voffset=-2><sprite name=Round></nobr>"
+            - Column:
+                - Consume:
+                    Name: TCEarth
+                    Text: "<nobr>+2 <sprite name=Heal></nobr>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCLight
+            Text: "$GH_471_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20, 60, 20"
+            - Column:
+            - Column:
+                - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+                - Row: "<sprite name=Range> *BAttack.Range*"
+            - Column:
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "50, 50"
+            - Column:
+                - Consume:
+                    Name: BCDark
+                    Text: "<nobr>+2 <sprite name=Attack></nobr>"
+            - Column:
+                - Consume:
+                    Name: BCAir
+                    Text: "<nobr>+3 <sprite name=Range></nobr>"
+        - Row: "<size=20%> "
+        - Row:
+            - Consume:
+                Name: BCFire
+                Text: "<nobr><sprite name=Poison>,</nobr> <nobr><sprite name=Wound></nobr>"

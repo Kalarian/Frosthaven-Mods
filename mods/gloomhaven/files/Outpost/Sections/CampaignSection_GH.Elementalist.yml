@@ -1,0 +1,10 @@
+Parser: CampaignSection
+ID: GH.Elementalist
+Name: Elementalist Retires
+SkipNarration: True
+SkipCompletedNotification: False
+Effects:
+    - Type: EnableEvent
+      Param1: GH.Elementalist-1
+    - Type: EnableEvent
+      Param1: GH.Elementalist-2

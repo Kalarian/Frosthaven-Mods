@@ -1,0 +1,67 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WintersEdge$
+Character: ElementalistID
+ID: 20467
+Level: 5
+Initiative: 43
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range: 2
+                AnimOverload: TargetFloorIce
+        Consumes:
+            TCIceAir:
+                Elements: [Ice, Air]
+                AbilityOverrides:
+                    TCIceAirAttack:
+                        ParentName: TAttack
+                        Range: 2
+                        Pierce: 4
+                XP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 2
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: [Fire, Light]
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range* <size=100%><voffset=1></mark>"
+            - Column:
+        - Row: "<size=50%> "
+        - Consume:
+            Name: TCIceAir
+            Text: "<nobr>+2 <sprite name=Range>,</nobr> <nobr><sprite name=Pierce> 4, <sprite name=XP1></nobr>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<sprite name=Range>*BHeal.Range* <size=100%><voffset=1>@BHeal.Range@"
+            - Column:
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30, 20, 20, 30"
+            - Column:
+            - Column:
+                - Infuse: Fire
+            - Column:
+                - Infuse: Light
+            - Column:

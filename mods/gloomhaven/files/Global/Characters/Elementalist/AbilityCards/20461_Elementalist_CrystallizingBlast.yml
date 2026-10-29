@@ -1,0 +1,65 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CrystallizingBlast$
+Character: ElementalistID
+ID: 20461
+Level: 2
+Initiative: 67
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,R|-1,-1,R|1,-1,R"
+                AnimOverload: TargetFloorIce
+                MultiPassAttack: False
+        Infuse: Ice
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCIce:
+                Elements: Ice
+                Abilities:
+                    BCIceShield:
+                        ParentName: BNull
+                        Shield: 2
+                        ActiveBonusDuration: Round
+                        AnimOverload: PowerUp
+Layout:
+    Top:
+        - ColumnWidths: "60,35"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Range> *TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
+            - Row: "<size=20%> "
+            - Infuse: Ice
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCIce
+            Text:
+                - ColumnWidths: "80,20"
+                - Column:
+                    - Active:
+                        Ability: BCIceShield
+                        Icon: Positive_Shield
+                        ListLayout: "<sprite name=Shield> 2"
+                        Layout:
+                            - Row: "<b><sprite name=Shield> 2"
+                            - Row: "<line-height=100%>$Self$"
+                - Column:
+                    - Duration: Round

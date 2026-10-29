@@ -1,0 +1,45 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_InspiringAnthem$
+Character: SoothsingerID
+ID: 20365
+Level: 4
+Initiative: 50
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyMove:
+                            Move:
+                                Amount: 5
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                Targeting: All
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneMove
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 5
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                Targeting: All
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneAttack
+Layout:
+    Top:
+        - Row: "$GH_365_T$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
+    Bottom:
+        - Row: "$GH_365_T$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

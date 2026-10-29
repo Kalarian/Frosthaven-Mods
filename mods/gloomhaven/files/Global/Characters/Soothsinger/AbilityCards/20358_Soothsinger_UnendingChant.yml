@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_UnendingChant$
+Character: SoothsingerID
+ID: 20358
+Level: X
+Initiative: 51
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddCondition: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    ValidAbilityType: Curse
+                    Behaviour: MultiplyAddedConditions
+                    XPTracker: [0,0,1,0,1]
+                    Filter: Enemy
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 2
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter: [Self]
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Ally]
+                AnimOverload: PlayPositiveTune
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH_358_T$"
+            Layout: "$GH_358_T$"
+            Icon: Icon_Curse
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Divider:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*, <b></b> $Affect_AllAdjacentAllies$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<b></b> $Affect_AllAdjacentAllies$"

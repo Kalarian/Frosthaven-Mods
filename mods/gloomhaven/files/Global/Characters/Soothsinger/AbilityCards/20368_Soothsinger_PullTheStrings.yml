@@ -1,0 +1,66 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PulltheStrings$
+Character: SoothsingerID
+ID: 20368
+Level: 6
+Initiative: 20
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPlaySong:
+                PlaySong: 1
+                Filter: Self
+                Song:
+                    Filter: Self
+                    SongEffect:
+                        Abilities:
+                            TControl:
+                                ControlActor:
+                                    Abilities:
+                                        EnemyWillDoThis:
+                                            Move: 2
+                                            StrengthIsBase: True
+                                    ControlDurationType: ControlForOneAction
+                                    ControlActorType: Player
+                                Range: 5
+                                Filter: Enemy
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                AnimOverload: PlaySongConfuse1
+    Bottom:
+        Abilities:
+            BControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Attack: 0
+                            Range: 0
+                            Target: 1
+                            TargetIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 5
+                Filter: Enemy
+                AnimOverload: AggressiveTargetedShout
+        XP: 1                
+Layout:
+    Top:
+        - Active:
+            Ability: TPlaySong
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_368_T$"
+            Layout: "$GH_368_T$"
+    Bottom:
+        - Row: "$GH_146_B_1$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> +0"
+            - Column:
+                - AddedEffect: "<sprite name=Range>+0"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$GH_146_B_2$"

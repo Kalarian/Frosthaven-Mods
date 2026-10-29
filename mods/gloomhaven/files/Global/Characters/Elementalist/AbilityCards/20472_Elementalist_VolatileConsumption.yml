@@ -1,0 +1,84 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_VolatileConsumption$
+Character: ElementalistID
+ID: 20472
+Level: 8
+Initiative: 64
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                ChooseAbility:
+                    Strength: 1
+                    Abilities:
+                        TChooseDamage:
+                            Damage: 1
+                            Range: 2
+                            Filter: Enemy
+                            PreviewEffectText: <size=200%><nobr>+1<sprite name=Damage></nobr><br><nobr>2<sprite name=Range></nobr></size>
+                            AnimOverload: ProjectilePure
+                        TChooseHeal:
+                            Heal: 1
+                            Range: 2
+                            Filter: [Self, Ally]
+                            PreviewEffectText: <size=200%><nobr>+1<sprite name=Heal></nobr><br><nobr>2<sprite name=Range></nobr></size>
+                            AnimOverload: Heal
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndActionAbility
+                    Restriction: OncePerAction
+                    Requirement: 
+                        ElementsConsumedThisAction: True
+                    IsToggleBonus: True
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Jump: True
+                    CircleEnhancements: 1
+        Consumes:
+            BCFireAny:
+                Elements: [Fire,Any]
+                AbilityOverrides:
+                    BCFireMoveBuff:
+                        ParentName: BMove
+                        AllTargetsOnMovePath: True
+                        Conditions: Wound
+                        Strength: 2                        
+                XP: 1
+            BCIceAny:
+                Elements: [Ice,Any]
+                AbilityOverrides:
+                    BCFireMoveBuff:
+                        ParentName: BMove
+                        AllTargetsOnMovePath: True
+                        Conditions: Immobilize
+                        Strength: 2                        
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Positive_Heal_IceAirConsume
+            ListLayout: "$GH_472_T$"
+            Layout: "$GH_472_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - AddedEffect: "<sprite name=Jump>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCFireAny
+            Text: "$GH_472_B_1$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCIceAny
+            Text: "$GH_472_B_2$"

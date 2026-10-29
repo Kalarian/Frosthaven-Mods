@@ -1,0 +1,19 @@
+Parser: HeroSummon
+ID: BurningAvatarID
+LocKey: $BurningAvatar$
+Model: BurningAvatar
+Health:
+    Amount: 2
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+    CircleEnhancements: 1
+Attack:
+    Amount: 2
+    Infuse: Fire
+Range:
+    Amount: 3
+    SquareEnhancements: 1
+AdjacentAttackOnDeath: 3
+AttackAnimOverload: TargetedGenericFlame
+AttackOnDeathAnimOverload: DeathAttack

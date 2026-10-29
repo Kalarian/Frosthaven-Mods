@@ -1,0 +1,59 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ShadowPuppets$
+Character: SoothsingerID
+ID: 20375
+Level: 9
+Initiative: 52
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 4
+                    Jump: True
+                    CircleEnhancements: 1
+            TControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Attack: 3
+                            Range: 1
+                            Target: 1
+                            StrengthIsBase: True
+                            TargetIsBase: True
+                            RangeIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Target: -1
+                Filter: Enemy
+                AllTargetsOnMovePath: True
+                AnimOverload: AggressiveTargetedShout
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack: 4
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                Range: 3
+                Target: 2
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneAttack
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+            - Column:
+                - AddedEffect: "<sprite name=Jump>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$GH_375_T$"
+    Bottom:
+        - Row: "$GH_375_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack*"

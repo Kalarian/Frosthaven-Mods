@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CommandingPresence$
+Character: SoothsingerID
+ID: 20373
+Level: 8
+Initiative: 59
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            BAllyMove:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack:
+                                Amount: 2
+                                DiamondEnhancements: 1
+                            Target: -1
+                            Range: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                            MultiPassAttack: False
+                            AnimOverload: Attack
+                Range: 3
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneAttack
+    Bottom:
+        Abilities:
+            BControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Move: 2
+                            StrengthIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 2
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,R|-1,-1,R|1,-1,R"
+                Filter: Enemy
+                AnimOverload: AggressiveTargetedShout
+        XP: 1
+Layout:
+    Top:
+        - Row: "$GH_352_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+        - Row: "$Target_AllAdjacentEnemies$"
+    Bottom:
+        - ColumnWidths: "68,30"
+        - Column:
+            - Row: "<sprite name=Range> *BControl.Range*"
+            - Row: "<size=20%> "
+            - Row: "$GH_373_B$"
+        - Column:
+            - Row: " "
+            - Row: "£Area£"
+            - Row: "<size=50%> "

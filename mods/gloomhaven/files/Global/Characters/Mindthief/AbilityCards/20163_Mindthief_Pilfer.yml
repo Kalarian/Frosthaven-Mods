@@ -1,0 +1,40 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Pilfer$
+Character: MindthiefID
+ID: 20163
+Level: 4
+Initiative: 68
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TLoot:
+                Loot: 1
+                Target: -1
+                Filter: Enemy
+    Bottom:
+        Abilities:
+            BAttack1:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BAttack2:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
+        - Row: "<size=20%>"
+        - Row: "$GH_163_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack1* <size=100%><voffset=1>@BAttack1@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Attack> *BAttack2* <size=100%><voffset=1>@BAttack2@"

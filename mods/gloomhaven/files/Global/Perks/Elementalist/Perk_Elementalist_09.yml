@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Elementalist09
+Name: PERK_Elementalist_09_Name
+Description: PERK_Elementalist_09_Desc
+CharacterID: ElementalistID
+Available: 1
+CardsToAdd: [AMC_Ice, AMC_Ice, AMC_Ice, AMC_Ice]

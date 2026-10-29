@@ -1,0 +1,72 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FormlessPower$
+Character: ElementalistID
+ID: 20449
+Level: 1
+Initiative: 45
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AnimOverload: ProjectileFormless
+        Consumes:
+            TCAnyXP:
+                PreviewEffectText: "+1<sprite name=Attack>\n+1<sprite name=Range>,<sprite name=XP1>"
+                Elements: Any
+                AbilityOverrides:
+                    TCAnyAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Range: 1
+                XP: 1
+            TCAnyNoXP:
+                Elements: Any
+                AbilityOverrides:
+                    TCAnyAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Range: 1
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 1
+                Filter: [Self]
+                ActiveBonus:
+                    Behaviour: BuffAttack
+                    Duration: Persistent
+                    ValidAbilityType: Attack
+                    Consuming: Any
+                    IsToggleBonus: True
+                    Restriction: OncePerAction
+                    EntireAction: True
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAnyXP
+            Text: "+1 <sprite name=Attack>, +1 <sprite name=Range>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAnyNoXP
+            Text: "+1 <sprite name=Attack>, +1 <sprite name=Range>"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$GH_449_B$"
+            Layout: "$GH_449_B$"
+            Icon: Positive_FireLightInfuse_Wild

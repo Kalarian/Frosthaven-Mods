@@ -1,0 +1,77 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ChainLightning$
+Character: ElementalistID
+ID: 20463
+Level: 3
+Initiative: 41
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                Target: 3
+                ChainAttack: True
+                ChainAttackRange: 2
+                ChainAttackDamageReduction: 1
+                AnimOverload: ChainLightning
+                MultiPassAttack: False
+        Consumes:
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Pierce: 2
+                XP: 1
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirAttackBuff:
+                        ParentName: TAttack
+                        Target: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range: 4
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: Light
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> X = *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+            - Column:
+        - Row: "$GH_463_T_1$"
+        - Row:
+            - Column:
+                - Consume:
+                    Name: TCLight
+                    Text: "+1 <sprite name=Attack>, <sprite name=Pierce> 2, <sprite name=XP1>"
+                - Consume:
+                    Name: TCAir
+                    Text:
+                        - Row: "$GH_463_T_2$, <sprite name=XP1>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Light

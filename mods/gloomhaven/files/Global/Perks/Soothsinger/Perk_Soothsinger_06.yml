@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Soothsinger06
+Name: PERK_Soothsinger_06_Name
+Description: PERK_Soothsinger_06_Desc
+CharacterID: SoothsingerID
+Available: 1
+CardsToRemove: [AMC_Basic_P0]
+CardsToAdd: [AMC_Wound_P2]

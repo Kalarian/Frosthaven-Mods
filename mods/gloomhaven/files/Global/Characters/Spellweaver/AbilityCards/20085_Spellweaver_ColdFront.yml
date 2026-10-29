@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ColdFront$
+Character: SpellweaverID
+ID: 20085
+Level: 8
+Initiative: 61
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AreaEffect: "0,0,R|1,1,R|2,2,R|3,3,R|4,4,R"
+                AnimOverload: TargetedIcyBlast
+                MultiPassAttack: False
+        Infuse: Ice
+        XP: 2
+    Bottom:
+        Abilities:
+            BPrevent:
+                PreventDamage: 3
+                AttackSourcesOnly: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: PreventAndRetaliate
+                    AbilityData:
+                        Retaliate: 3
+                        RetaliateRange: 3
+                    XPTracker: [1,1,1]
+                AnimOverload: PowerUpFrost
+Layout:
+    Top:
+        - ColumnWidths: "60,35"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Range> *TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
+            - Row: "<size=10%> "
+            - Row:
+                - ColumnWidths: "18,32,32"
+                - Column:
+                - Column:
+                    - Infuse: Ice
+                - Column:
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Active:
+            Ability: BPrevent
+            ListLayout: "$GH_085_B$"
+            Layout: "$GH_085_B$"
+            Icon: [Immune, Retaliate]
+        - Row: "<size=50%> "
+        - XPTracker: BPrevent

@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BoomingProclamation$
+Character: SoothsingerID
+ID: 20371
+Level: 7
+Initiative: 65
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Range: 2
+                Target: -1
+                Filter: Enemy
+                MultiPassAttack: False
+                AnimOverload: AggressiveNonTargetedShout
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 2
+                            SquareEnhancements: 1
+                        IsInlineSubAbility: True
+    Bottom:
+        Abilities:
+            BAllyMove:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                Range: 3
+                Target: -1
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneAttack
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> *TAttack.Range*</nobr>"
+        - Row: "<sprite name=Push> *TAttackSubPush* @TAttackSubPush@"
+    Bottom:
+        - Row: "$GH_371_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

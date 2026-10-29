@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MassHysteria$
+Character: MindthiefID
+ID: 20165
+Level: 5
+Initiative: 12
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                Range: 4
+                Target:
+                    Amount: 4
+                    SquareEnhancements: 1
+                Conditions: Muddle
+                AnimOverload: MindAttack
+        Infuse: Ice
+        XP: 1
+    Bottom:
+        Abilities:
+            BAugment:
+                AddAugment: 1
+                Filter: Self
+                ActiveBonusDuration: Persistent
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* "
+            - Column:
+                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<sprite name=Target>*TAttack.Target* @TAttack.Target@"
+                - AddedEffect: "<size=130%><sprite name=Muddle></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Ice
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BAugment
+            ListLayout: "$GH_165_B$"
+            Layout: "$GH_165_B$"
+            Icon: Positive_Cards

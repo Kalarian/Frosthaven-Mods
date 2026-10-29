@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Spellweaver11
+Name: PERK_Spellweaver_11_Name
+Description: PERK_Spellweaver_11_Desc
+CharacterID: SpellweaverID
+Available: 1
+Flags: [Passive, IgnoreNegativeScenarioEffects]

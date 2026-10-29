@@ -1,0 +1,48 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MelodyandHarmony$
+Character: SoothsingerID
+ID: 20366
+Level: 5
+Initiative: 78
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAddSong:
+                AddSong: 1
+                Filter: Self
+                ActiveBonusDuration: Persistent
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                AnimOverload: RangedAttack
+Layout:
+    Top:
+        - Active:
+            Ability: TAddSong
+            ListLayout: "$GH_366_T_1$ $GH_366_T_2$"
+            Layout:
+                - Row: "$GH_366_T_1$"
+                - Row: "<size=20%> "
+                - Row: "$GH_366_T_2$"
+            Icon: Positive_Cards
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* @BAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
+            - Column:

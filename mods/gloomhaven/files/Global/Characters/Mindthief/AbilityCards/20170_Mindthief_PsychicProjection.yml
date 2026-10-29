@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PsychicProjection$
+Character: MindthiefID
+ID: 20170
+Level: 7
+Initiative: 92
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 5
+                    DiamondPlusEnhancements: 1
+            TShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+            TStun:
+                Stun: True
+                Filter: Self
+    Bottom:
+        Abilities:
+            BOverrideAugmentAttackType:
+                OverrideAugmentAttackType: Ranged
+                Filter: Self
+                ActiveBonusDuration: Round
+Layout:
+    Top:
+        - Row: "<size=130%><b><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Self$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *TShield*"
+            Layout:
+                - Row:
+                    - ColumnWidths: "20,60,20"
+                    - Column:
+                    - Column:
+                        - Row: "<size=130%><b><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+                        - Row: "$Self$"
+                    - Column:
+                        - Duration: Round
+        - Row: "<size=50%> "
+        - Row: "<size=130%><b><sprite name=Stun>"
+        - Row: "$Self$"
+    Bottom:
+        - Active:
+            Ability: BOverrideAugmentAttackType
+            Icon: Positive_Cards_RangedForm
+            ListLayout: "$GH_170_B$"
+            Layout: "$GH_170_B$"

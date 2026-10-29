@@ -1,0 +1,38 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CalltoAction$
+Character: SoothsingerID
+ID: 20352
+Level: 1
+Initiative: 85
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TStrengthen:
+                Targeting: All
+                Target: -1
+                Strengthen: True
+                Filter: Ally
+                AnimOverload: PlayPositiveTune
+    Bottom:
+        Abilities:
+            BAllyMove:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 4
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                Range: 3
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneAttack
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Strengthen>"
+        - Row: "$Affect_AllAllies$"
+    Bottom:
+        - Row: "$GH_352_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

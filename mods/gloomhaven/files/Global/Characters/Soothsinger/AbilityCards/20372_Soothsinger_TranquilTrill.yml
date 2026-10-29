@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TranquilTrill$
+Character: SoothsingerID
+ID: 20372
+Level: 8
+Initiative: 10
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPlaySong:
+                PlaySong: 1
+                Filter: Self
+                Song:
+                    Filter: Ally
+                    SongEffect:
+                        Abilities:
+                            THeal:
+                                Heal: 2
+                                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                AnimOverload: PlaySongHealing2
+    Bottom:
+        Abilities:
+            BDisarm:
+                Disarm:
+                    DiamondEnhancements: 1
+                Target: -1
+                Filter: Enemy
+        XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TPlaySong
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_372_T$"
+            Layout: "$GH_372_T$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Disarm> <size=100%><voffset=1>@BDisarm@"
+        - Row: "$Target_AllAdjacentEnemies$"

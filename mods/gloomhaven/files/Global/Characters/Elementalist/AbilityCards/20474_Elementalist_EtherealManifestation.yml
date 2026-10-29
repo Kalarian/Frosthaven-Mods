@@ -1,0 +1,85 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EtherealManifestation$
+Character: ElementalistID
+ID: 20474
+Level: 9
+Initiative: 98
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: ManaSphereID
+                AnimOverload: Summon
+        XP: 1
+    Bottom:
+        Abilities:
+            BNull:
+                Null: True
+        Consumes:
+            BCFire:
+                Elements: Fire
+                Abilities:
+                    BCAttack:
+                        ParentName: BNull
+                        Attack: 3
+                        Range: 3
+                        Filter: Enemy
+                        AnimOverload: TargetFloorFireIce
+            BCAir:
+                Elements: Air             
+                Abilities:
+                    BCMove:
+                        ParentName: BNull
+                        Move: 3
+            BCIce:
+                Elements: Ice
+                Abilities:
+                    BCLoot:
+                        ParentName: BNull
+                        Loot: 1
+                        Target: -1
+            BCEarth:
+                Elements: Earth
+                Abilities:
+                    BCHeal:
+                        ParentName: BNull
+                        Heal: 3
+                        Range: 3
+                        Filter: [Self, Ally]
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $ManaSphere$
+    Bottom:
+        - Row: "$GH_474_B$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "55, 45"
+            - Column:
+                - Consume:
+                    Name: BCFire
+                    Text:
+                        - Row: "<nobr><b><sprite name=Attack> 3</nobr>"
+                        - Row: "<nobr><sprite name=Range> 3</nobr>"
+                - Row: "<size=20%> "
+                - Consume:
+                    Name: BCAir
+                    Text:
+                        - Row: "<nobr><b><sprite name=Move> 3</nobr>"
+            - Column:
+                - Consume:
+                    Name: BCIce
+                    Text:
+                        - Row: "<nobr><b><sprite name=Loot> 1</nobr>"
+                - Row: "<size=20%> "
+                - Consume:
+                    Name: BCEarth
+                    Text:
+                        - Row: "<nobr><b><sprite name=Heal> 3</nobr>"
+                        - Row: "<nobr><sprite name=Range> 3</nobr>"

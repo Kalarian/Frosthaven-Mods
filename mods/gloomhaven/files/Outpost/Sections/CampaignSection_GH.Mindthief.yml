@@ -1,0 +1,10 @@
+Parser: CampaignSection
+ID: GH.Mindthief
+Name: Mindthief Retires
+SkipNarration: True
+SkipCompletedNotification: False
+Effects:
+    - Type: EnableEvent
+      Param1: GH.Mindthief-1
+    - Type: EnableEvent
+      Param1: GH.Mindthief-2

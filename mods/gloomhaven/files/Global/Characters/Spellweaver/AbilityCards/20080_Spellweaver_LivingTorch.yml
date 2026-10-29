@@ -1,0 +1,63 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LivingTorch$
+Character: SpellweaverID
+ID: 20080
+Level: 6
+Initiative: 96
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range: 3
+                Conditions: Immobilize
+                AnimOverload: TargetedLivingTorch
+        Consumes:
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightAttack:
+                        ParentName: TAttack
+                        AnimOverload: TargetedLivingTorchPlus
+                        SubAbilities:
+                            TCLightDamage:
+                                Damage: 2
+                                Target: -1
+                                Filter: Enemy
+                XP: 1
+    Bottom:
+        Abilities:
+            BSummon:
+                Summon: BurningAvatarID
+                AnimOverload: Summon
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCLight
+            Text: "$GH_080_T$"
+    Bottom:
+        - Active:
+            Ability: "BSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: BSummon
+                    SummonName: $BurningAvatar$
+                    SpecialText:
+                        - Row: "$OnDeath$"
+                        - Row: "<size=10%> "
+                        - Row: "<b>Attack <sprite name=Attack> 3"
+                        - Row: "$Target_AllAdjacentEnemies$"

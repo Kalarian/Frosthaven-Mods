@@ -1,0 +1,63 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Inferno$
+Character: SpellweaverID
+ID: 20087
+Level: 9
+Initiative: 19
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                AnimOverload: RadialInferno
+                Attack: 3
+                Target: -1
+                Targeting: Room
+                MultiPassAttack: False
+                Filter: Enemy
+                TreatAsMelee: True
+            TSubDamage:
+                Damage: 2
+                Target: -1
+                Targeting: Room
+                Filter: Ally
+                AutoTrigger: True
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BRetaliate:
+                Retaliate:
+                    Amount: 2
+                    SquareEnhancements: 1
+                RetaliateRange: 3
+                Target: -1
+                Filter: [Self, Ally]
+                Targeting: All
+                AnimOverload: PowerUp
+                ActiveBonusDuration: Round
+Layout:
+    Top:
+        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "$GH_087_T_1$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFire
+            Text: "+1 <sprite name=Attack>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Row: "$GH_087_T_2$"
+    Bottom:
+        - Active:
+            Ability: BRetaliate
+            Icon: Positive_Retaliate
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*, $Retaliate$ <sprite name=Range> *BRetaliate.RetaliateRange* $Self$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
+                - Row: "$Retaliate$ <sprite name=Range> *BRetaliate.RetaliateRange*"
+                - Row: "$Affect_SelfAndAllAllies$"

@@ -1,0 +1,41 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_AidFromtheAether$
+Character: SpellweaverID
+ID: 20071
+Level: X
+Initiative: 91
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+    Bottom:
+        Abilities:
+            BSummon:
+                Summon: MysticAllyID
+                AnimOverload: Summon
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<sprite name=Range>*THeal.Range* @THeal.Range@"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: "BSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: BSummon
+                    SummonName: $MysticAlly$

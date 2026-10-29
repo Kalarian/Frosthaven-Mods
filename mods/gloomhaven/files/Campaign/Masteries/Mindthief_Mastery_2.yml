@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Mindthief_MASTERY_2
+LocalisedName: Mindthief_MASTERY_2_Name
+LocalisedDescription: Mindthief_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: no attack ever targeted the character (GHMasteries.cs: the attack-target records; a miss counts as targeted)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_NeverAttacked]
+        CharacterIDs:
+            ActorID: MindthiefID
+        Value: 1

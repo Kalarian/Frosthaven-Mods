@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Spellweaver10
+Name: PERK_Spellweaver_10_Name
+Description: PERK_Spellweaver_10_Desc
+CharacterID: SpellweaverID
+Available: 2
+CardsToAdd: [AMC_Ice_P2]

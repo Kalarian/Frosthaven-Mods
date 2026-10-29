@@ -1,0 +1,72 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CracklingAir$
+Character: SpellweaverID
+ID: 20069
+Level: X
+Initiative: 25
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    XPTracker: [0,1,0,1]
+        Consumes:
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirAttackBuff:
+                        ParentName: TActive
+                        Strength: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCFire:
+                Elements: Fire
+                Abilities:
+                    BCFireReta:
+                        ParentName: BNull
+                        Retaliate: 2
+                        ActiveBonusDuration: Round
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH_069_T_1$"
+            ListLayoutAlt: "$GH_069_T_1_Alt$"
+            Layout: "$GH_069_T_1$"
+            LayoutAlt: "$GH_069_T_1_Alt$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAir
+            Text: "$GH_069_T_2$"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCFire
+            Text:
+                - ColumnWidths: "80,20"
+                - Column:
+                    - Active:
+                        Ability: BCFireReta
+                        Icon: Positive_Retaliate
+                        ListLayout: "<sprite name=Retaliate> 2"
+                        Layout:
+                            - Row: "<b><size=130%><sprite name=Retaliate> 2"
+                            - Row: "<line-height=100%><size=100%>$Self$"
+                - Column:
+                    - Duration: Round

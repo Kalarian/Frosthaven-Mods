@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WistfulWounding$
+Character: SoothsingerID
+ID: 20357
+Level: X
+Initiative: 16
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPlaySong:
+                PlaySong: 1
+                Filter: Self
+                Song:
+                    Filter: Ally
+                    SongEffect:
+                        AbilityType: Attack
+                        AttackType: Attack
+                        AbilityOverrides:
+                            TSongAttackBuff:
+                                ParentName: TSong
+                                Conditions: Wound
+                AnimOverload: PlaySongAttack2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 1
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+        XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TPlaySong
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH_357_T$"
+            Layout: "$GH_357_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack*"
+            - Column:
+                - Row: "<sprite name=Range>*BAttack.Range* <size=100%><voffset=1>@BAttack.Range@"
+            - Column:
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"

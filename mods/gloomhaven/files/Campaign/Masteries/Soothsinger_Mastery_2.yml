@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Soothsinger_MASTERY_2
+LocalisedName: Soothsinger_MASTERY_2_Name
+LocalisedDescription: Soothsinger_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: a moment with every curse in the monsters' decks and every bless in the party's (GHMasteries.cs, checked at
+# each turn's end from the decks)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AllCursesAndBlessesOut]
+        CharacterIDs:
+            ActorID: SoothsingerID
+        Value: 1

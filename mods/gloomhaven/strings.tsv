@@ -1,4 +1,5 @@
 ABILITY_CARD_AcceleratedEnd	Accelerated End
+ABILITY_CARD_AidFromtheAether	Aid From the Ether
 ABILITY_CARD_AirborneToxin	Airborne Toxin
 ABILITY_CARD_Amputate	Amputate
 ABILITY_CARD_AngelOfDeath	Angel of Death
@@ -17,6 +18,7 @@ ABILITY_CARD_BedsideManner	Bedside Manner
 ABILITY_CARD_BitingGnats	Biting Gnats
 ABILITY_CARD_BlackArrow	Black Arrow
 ABILITY_CARD_BlackBoon	Black Boon
+ABILITY_CARD_BlackHole	Black Hole
 ABILITY_CARD_BlackKnives	Black Knives
 ABILITY_CARD_BlackTides	Black Tides
 ABILITY_CARD_BladeDance	Blade Dance
@@ -28,21 +30,28 @@ ABILITY_CARD_BloodPact	Blood Pact
 ABILITY_CARD_BloodTransfusion	Blood Transfusion
 ABILITY_CARD_BloodySaw	Bloody Saw
 ABILITY_CARD_BluntForce	Blunt Force
+ABILITY_CARD_BoilingArc	Boiling Arc
 ABILITY_CARD_Bombardment	Bombardment
 ABILITY_CARD_BoneBreaker	Bone Breaker
+ABILITY_CARD_BoomingProclamation	Booming Proclamation
 ABILITY_CARD_BoosterShot	Booster Shot
 ABILITY_CARD_BounceBack	Bounce Back
+ABILITY_CARD_BrainLeech	Brain Leech
 ABILITY_CARD_BreaktheChains	Break the Chains
 ABILITY_CARD_BrightAegis	Bright Aegis
+ABILITY_CARD_BrilliantFlash	Brilliant Flash
 ABILITY_CARD_BrilliantPrayer	Brilliant Prayer
 ABILITY_CARD_BrutalMomentum	Brutal Momentum
 ABILITY_CARD_Brutalize	Brutalize
 ABILITY_CARD_BruteForce	Brute Force
+ABILITY_CARD_Burial	Burial
 ABILITY_CARD_BurnAwayTheDark	Burn Away the Dark
 ABILITY_CARD_BurningFlash	Burning Flash
 ABILITY_CARD_BurningHatred	Burning Hatred
 ABILITY_CARD_BurningOil	Burning Oil
+ABILITY_CARD_CalltoAction	Call to Action
 ABILITY_CARD_Camaraderie	Camaraderie
+ABILITY_CARD_CaptivatingPerformance	Captivating Performance
 ABILITY_CARD_CarePackage	Care Package
 ABILITY_CARD_CarelessCharge	Careless Charge
 ABILITY_CARD_Cataclysm	Cataclysm
@@ -50,6 +59,9 @@ ABILITY_CARD_CatastrophicBomb	Catastrophic Bomb
 ABILITY_CARD_Cauterize	Cauterize
 ABILITY_CARD_CautiousAdvance	Cautious Advance
 ABILITY_CARD_CenterMass	Center Mass
+ABILITY_CARD_ChainLightning	Chain Lightning
+ABILITY_CARD_ChangeTempo	Change Tempo
+ABILITY_CARD_ChromaticExplosion	Chromatic Explosion
 ABILITY_CARD_ClawsOfTheNight	Claws of the Night
 ABILITY_CARD_CleansingForce	Cleansing Force
 ABILITY_CARD_CleartheWay	Clear the Way
@@ -58,28 +70,37 @@ ABILITY_CARD_CloakOfShade	Cloak of Shade
 ABILITY_CARD_CloseCuts	Close Cuts
 ABILITY_CARD_CloseToTheAbyss	Close to the Abyss
 ABILITY_CARD_ColdEmbrace	Cold Embrace
+ABILITY_CARD_ColdFire	Cold Fire
+ABILITY_CARD_ColdFront	Cold Front
 ABILITY_CARD_CollateralDamage	Collateral Damage
 ABILITY_CARD_CommandingPresence	Commanding Presence
 ABILITY_CARD_ConcealedDominance	Concealed Dominance
 ABILITY_CARD_ContinualSupply	Continual Supply
 ABILITY_CARD_ConverttheFlock	Convert the Flock
+ABILITY_CARD_CorruptingEmbrace	Corrupting Embrace
+ABILITY_CARD_CracklingAir	Crackling Air
+ABILITY_CARD_CraniumOverload	Cranium Overload
 ABILITY_CARD_CrashProtocol	Crash Protocol
 ABILITY_CARD_Crater	Crater
 ABILITY_CARD_CreepingCurse	Creeping Curse
 ABILITY_CARD_CripplingBow	Crippling Bow
+ABILITY_CARD_CripplingChorus	Crippling Chorus
 ABILITY_CARD_CripplingOffensive	Crippling Offensive
 ABILITY_CARD_CripplingPoison	Crippling Poison
 ABILITY_CARD_CrushingCold	Crushing Cold
 ABILITY_CARD_CrushingGrasp	Crushing Grasp
 ABILITY_CARD_CrushingHammer	Crushing Hammer
 ABILITY_CARD_CrushingWeight	Crushing Weight
+ABILITY_CARD_CrystallizingBlast	Crystallizing Blast
 ABILITY_CARD_CulltheWeak	Cull the Weak
 ABILITY_CARD_CurativeMixture	Curative Mixture
 ABILITY_CARD_DancingShadows	Dancing Shadows
 ABILITY_CARD_DarkCloud	Dark Cloud
+ABILITY_CARD_DarkFrenzy	Dark Frenzy
 ABILITY_CARD_Daybreak	Daybreak
 ABILITY_CARD_DazingWound	Dazing Wound
 ABILITY_CARD_DazzlingCharge	Dazzling Charge
+ABILITY_CARD_DefensiveDitty	Defensive Ditty
 ABILITY_CARD_DefensiveStance	Defensive Stance
 ABILITY_CARD_DefensiveTactics	Defensive Tactics
 ABILITY_CARD_DefianceofDeath	Defiance of Death
@@ -89,20 +110,30 @@ ABILITY_CARD_DevilHorns	Devil Horns
 ABILITY_CARD_DigPit	Dig Pit
 ABILITY_CARD_DirtTornado	Dirt Tornado
 ABILITY_CARD_DisorientingBarrage	Disorienting Barrage
+ABILITY_CARD_DisorientingDirge	Disorienting Dirge
 ABILITY_CARD_DivineIntervention	Divine Intervention
 ABILITY_CARD_DoNoHarm	Do No Harm
+ABILITY_CARD_Domination	Domination
 ABILITY_CARD_DoomedBreeze	Doomed Breeze
 ABILITY_CARD_DoubleThrow	Double Throw
 ABILITY_CARD_DrillFist	Drill Fist
 ABILITY_CARD_DuelistsAdvance	Duelist's Advance
 ABILITY_CARD_DustCloud	Dust Cloud
 ABILITY_CARD_EarthenClod	Earthen Clod
+ABILITY_CARD_EchoingAria	Echoing Aria
+ABILITY_CARD_ElementalAegis	Elemental Aegis
+ABILITY_CARD_ElementalAid	Elemental Aid
+ABILITY_CARD_EmpatheticAssault	Empathetic Assault
 ABILITY_CARD_EmpoweredLink	Empowered Link
 ABILITY_CARD_EmpoweringCommand	Empowering Command
 ABILITY_CARD_EmpoweringVoid	Empowering Void
+ABILITY_CARD_EncompassingShadow	Encompassing Shadow
 ABILITY_CARD_EnervatingWound	Enervating Wound
+ABILITY_CARD_EngulfedinFlames	Engulfed in Flames
 ABILITY_CARD_EngulfingRadiance	Engulfing Radiance
 ABILITY_CARD_Epidemic	Epidemic
+ABILITY_CARD_EternalEquilibrium	Eternal Equilibrium
+ABILITY_CARD_EtherealManifestation	Ethereal Manifestation
 ABILITY_CARD_Euthanize	Euthanize
 ABILITY_CARD_ExcessiveForce	Excessive Force
 ABILITY_CARD_ExecutionersAxe	Executioners Axe
@@ -113,31 +144,45 @@ ABILITY_CARD_ExtraFuel	Extra Fuel
 ABILITY_CARD_ExtraLift	Extra Lift
 ABILITY_CARD_EyeOfTheVoid	Eye of the Void
 ABILITY_CARD_EyeforanEye	Eye for an Eye
+ABILITY_CARD_EyeoftheHurricane	Eye of the Hurricane
 ABILITY_CARD_EyesOfTheNight	Eyes of the Night
 ABILITY_CARD_FaceYourEnd	Face Your End
 ABILITY_CARD_FancyHat	Fancy Hat
 ABILITY_CARD_FatalAdvance	Fatal Advance
 ABILITY_CARD_FatalFury	Fatal Fury
+ABILITY_CARD_FearsomeBlade	Fearsome Blade
 ABILITY_CARD_FearsomeEfficiency	Fearsome Efficiency
+ABILITY_CARD_FeedbackLoop	Feedback Loop
 ABILITY_CARD_FetidFlurry	Fetid Flurry
 ABILITY_CARD_FierceBrilliance	Fierce Brilliance
 ABILITY_CARD_FinalFight	Final Fight
 ABILITY_CARD_FireBombs	Fire Bombs
+ABILITY_CARD_FireOrbs	Fire Orbs
 ABILITY_CARD_FirstAid	First Aid
 ABILITY_CARD_FlameShroud	Flame Shroud
+ABILITY_CARD_FlameStrike	Flame Strike
 ABILITY_CARD_FlamingSickle	Flaming Sickle
 ABILITY_CARD_FlankingStrike	Flanking Strike
+ABILITY_CARD_FlashingBurst	Flashing Burst
 ABILITY_CARD_Flintlock	Flintlock
 ABILITY_CARD_FlurryofAxes	Flurry of Axes
 ABILITY_CARD_FlurryofBlades	Flurry of Blades
 ABILITY_CARD_FlyingSickle	Flying Sickle
 ABILITY_CARD_FollowThrough	Follow Through
 ABILITY_CARD_ForcefulStorm	Forceful Storm
+ABILITY_CARD_ForkedBeam	Forked Beam
+ABILITY_CARD_FormlessPower	Formless Power
 ABILITY_CARD_FortifiedPosition	Fortified Position
 ABILITY_CARD_FoulWind	Foul Wind
 ABILITY_CARD_FreezeTheSoul	Freeze the Soul
+ABILITY_CARD_FreezingNova	Freezing Nova
 ABILITY_CARD_FrenziedOnslaught	Frenzied Onslaught
+ABILITY_CARD_FrigidApparition	Frigid Apparition
+ABILITY_CARD_FrigidTorrent	Frigid Torrent
 ABILITY_CARD_FromtheBrink	From the Brink
+ABILITY_CARD_FrostArmor	Frost Armor
+ABILITY_CARD_FrozenMind	Frozen Mind
+ABILITY_CARD_FrozenNight	Frozen Night
 ABILITY_CARD_FuriousAid	Furious Aid
 ABILITY_CARD_GatheringDoom	Gathering Doom
 ABILITY_CARD_GentlemansAnger	Gentleman's Anger
@@ -147,9 +192,11 @@ ABILITY_CARD_GiveAndTake	Give and Take
 ABILITY_CARD_GlassHammer	Glass Hammer
 ABILITY_CARD_GloomDarts	Gloom Darts
 ABILITY_CARD_GloriousBolt	Glorious Bolt
+ABILITY_CARD_GnawingHorde	Gnawing Horde
 ABILITY_CARD_GrabandGo	Grab and Go
 ABILITY_CARD_GraspOfDoom	Grasp of Doom
 ABILITY_CARD_GraspingVermin	Grasping Vermin
+ABILITY_CARD_GravelVortex	Gravel Vortex
 ABILITY_CARD_GrimBargain	Grim Bargain
 ABILITY_CARD_GrimSustenance	Grim Sustenance
 ABILITY_CARD_GrislyTrauma	Grisly Trauma
@@ -159,6 +206,7 @@ ABILITY_CARD_GutPunch	Gut Punch
 ABILITY_CARD_HammerBlow	Hammer Blow
 ABILITY_CARD_Hamstring	Hamstring
 ABILITY_CARD_HandoftheSurgeon	Hand of the Surgeon
+ABILITY_CARD_HardenedSpikes	Hardened Spikes
 ABILITY_CARD_HarvestSickle	Harvest Sickle
 ABILITY_CARD_HastenedStep	Hastened Step
 ABILITY_CARD_HatefulBlast	Hateful Blast
@@ -171,44 +219,64 @@ ABILITY_CARD_HolyStrike	Holy Strike
 ABILITY_CARD_HonorableFury	Honorable Fury
 ABILITY_CARD_HookandChain	Hook and Chain
 ABILITY_CARD_HornsOfTheBeast	Horns of the Beast
+ABILITY_CARD_HostileTakeover	Hostile Takeover
+ABILITY_CARD_IceSpikes	Ice Spikes
+ABILITY_CARD_IcyBlast	Icy Blast
 ABILITY_CARD_IlluminatetheTarget	Illuminate the Target
 ABILITY_CARD_Immortality	Immortality
 ABILITY_CARD_ImmovablePhalanx	Immovable Phalanx
+ABILITY_CARD_ImpalingEruption	Impaling Eruption
 ABILITY_CARD_ImpalingSpear	Impaling Spear
 ABILITY_CARD_Implode	Implode
+ABILITY_CARD_InfernalVortex	Infernal Vortex
+ABILITY_CARD_Inferno	Inferno
+ABILITY_CARD_InspiringAnthem	Inspiring Anthem
 ABILITY_CARD_InspiringSanctity	Inspiring Sanctity
 ABILITY_CARD_InsultToInjury	Insult to Injury
+ABILITY_CARD_IntotheNight	Into The Night
 ABILITY_CARD_IronBulwark	Iron Bulwark
 ABILITY_CARD_Juggernaut	Juggernaut
 ABILITY_CARD_KineticAssault	Kinetic Assault
 ABILITY_CARD_KingoftheHill	King of the Hill
 ABILITY_CARD_KnockOutTheSupport	Knock Out the Support
 ABILITY_CARD_LargeMedicalPack	Large Medical Pack
+ABILITY_CARD_LavaEruption	Lava Eruption
 ABILITY_CARD_LayonHands	Lay on Hands
 ABILITY_CARD_LeapingCleave	Leaping Cleave
 ABILITY_CARD_Level	Level
+ABILITY_CARD_LivingTorch	Living Torch
 ABILITY_CARD_LobbedCharge	Lobbed Charge
 ABILITY_CARD_LongCon	Long Con
 ABILITY_CARD_LullIntoOblivion	Lull Into Oblivion
 ABILITY_CARD_LumberingBash	Lumbering Bash
 ABILITY_CARD_LureOfTheVoid	Lure of the Void
 ABILITY_CARD_LurkingRuin	Lurking Ruin
+ABILITY_CARD_MalleableEvocation	Malleable Evocation
+ABILITY_CARD_ManaBolt	Mana Bolt
+ABILITY_CARD_ManyasOne	Many As One
+ABILITY_CARD_MarchingBeat	Marching Beat
 ABILITY_CARD_MassExtinction	Mass Extinction
+ABILITY_CARD_MassHysteria	Mass Hysteria
 ABILITY_CARD_MassiveBoulder	Massive Boulder
 ABILITY_CARD_MasterInfluence	Master Influence
 ABILITY_CARD_MasterPhysician	Master Physician
 ABILITY_CARD_MechSuit	Mech Suit
 ABILITY_CARD_MedicalPack	Medical Pack
+ABILITY_CARD_MelodyandHarmony	Melody and Harmony
 ABILITY_CARD_Meteor	Meteor
 ABILITY_CARD_MicroMissiles	Micro Missiles
 ABILITY_CARD_MobileResponse	Mobile Response
 ABILITY_CARD_MobilizingAxiom	Mobilizing Axiom
+ABILITY_CARD_MobilizingMeasure	Mobilizing Measure
 ABILITY_CARD_NaturesLift	Nature's Lift
 ABILITY_CARD_Nightfall	Nightfall
+ABILITY_CARD_NightmareSerenade	Nightmare Serenade
 ABILITY_CARD_NightmarishAffliction	Nightmarish Affliction
+ABILITY_CARD_NimbleKnife	Nimble Knife
 ABILITY_CARD_NoFear	No Fear
 ABILITY_CARD_NowhereToRun	Nowhere to Run
 ABILITY_CARD_NumbthePain	Numb the Pain
+ABILITY_CARD_ObsidianShards	Obsidian Shards
 ABILITY_CARD_OneTwoPunch	One Two Punch
 ABILITY_CARD_OpenWound	Open Wound
 ABILITY_CARD_OpposingStrike	Opposing Strike
@@ -217,24 +285,36 @@ ABILITY_CARD_Overwatch	Overwatch
 ABILITY_CARD_OverwhelmingAssault	Overwhelming Assault
 ABILITY_CARD_PainsEnd	Pain's End
 ABILITY_CARD_ParalyzingBite	Paralyzing Bite
+ABILITY_CARD_ParasiticInfluence	Parasitic Influence
 ABILITY_CARD_PathofGlory	Path of Glory
+ABILITY_CARD_PerverseEdge	Perverse Edge
 ABILITY_CARD_Petrify	Petrify
+ABILITY_CARD_PhantasmalKiller	Phantasmal Killer
+ABILITY_CARD_Pilfer	Pilfer
 ABILITY_CARD_PistonPunch	Piston Punch
 ABILITY_CARD_PortableBallista	Portable Ballista
 ABILITY_CARD_PossessedByFate	Possessed By Fate
+ABILITY_CARD_Possession	Possession
+ABILITY_CARD_PowerBallad	Power Ballad
 ABILITY_CARD_PowerPitch	Power Pitch
 ABILITY_CARD_PracticalPlans	Practical Plans
+ABILITY_CARD_PragmaticReinforcement	Pragmatic Reinforcement
 ABILITY_CARD_Precaution	Precaution
 ABILITY_CARD_PrecisionStrike	Precision Strike
 ABILITY_CARD_PrepForSurgery	Prep for Surgery
 ABILITY_CARD_PrepareForTheKill	Prepare for the Kill
 ABILITY_CARD_Prescription	Prescription
 ABILITY_CARD_PreventionisKey	Prevention Is Key
+ABILITY_CARD_PrimalDuality	Primal Duality
 ABILITY_CARD_PrismaticSickle	Prismatic Sickle
 ABILITY_CARD_Proficiency	Proficiency
 ABILITY_CARD_ProtectiveBlessing	Protective Blessing
+ABILITY_CARD_ProvokeTerror	Provoke Terror
 ABILITY_CARD_ProvokingRoar	Provoking Roar
+ABILITY_CARD_PsychicProjection	Psychic Projection
+ABILITY_CARD_PulltheStrings	Pull the Strings
 ABILITY_CARD_Pulverize	Pulverize
+ABILITY_CARD_PureAugmentation	Pure Augmentation
 ABILITY_CARD_PurifyingAura	Purifying Aura
 ABILITY_CARD_QuickHands	Quick Hands
 ABILITY_CARD_QuickTurnaround	Quick Turnaround
@@ -242,6 +322,7 @@ ABILITY_CARD_QuietFrenzy	Quiet Frenzy
 ABILITY_CARD_Quietus	Quietus
 ABILITY_CARD_QuiverofArrows	Quiver of Arrows
 ABILITY_CARD_RadiantSickle	Radiant Sickle
+ABILITY_CARD_RawEnhancement	Raw Enhancement
 ABILITY_CARD_RecklessOffensive	Reckless Offensive
 ABILITY_CARD_Reforge	Reforge
 ABILITY_CARD_Refreshment	Refreshment
@@ -255,7 +336,9 @@ ABILITY_CARD_ResignedFrenzy	Resigned Frenzy
 ABILITY_CARD_ResoluteStand	Resolute Stand
 ABILITY_CARD_Restock	Restock
 ABILITY_CARD_Retrieval	Retrieval
+ABILITY_CARD_RevivingEther	Reviving Ether
 ABILITY_CARD_Ricochet	Ricochet
+ABILITY_CARD_RidetheWind	Ride the Wind
 ABILITY_CARD_RighteousStrength	Righteous Strength
 ABILITY_CARD_RippedFromTheFlesh	Ripped From the Flesh
 ABILITY_CARD_RoboticEnhancement	Robotic Enhancement
@@ -275,10 +358,14 @@ ABILITY_CARD_ScrollofBlizzards	Scroll of Blizzards
 ABILITY_CARD_ScrollofJudgment	Scroll of Judgment
 ABILITY_CARD_ScrollofLightning	Scroll of Lightning
 ABILITY_CARD_ScrollofRecall	Scroll of Recall
+ABILITY_CARD_Scurry	Scurry
 ABILITY_CARD_SecondWind	Second Wind
 ABILITY_CARD_SeeingRed	Seeing Red
 ABILITY_CARD_SelfishRetribution	Selfish Retribution
 ABILITY_CARD_SentientGrowth	Sentient Growth
+ABILITY_CARD_ShadowPuppets	Shadow Puppets
+ABILITY_CARD_ShapingtheAether	Shaping the Ether
+ABILITY_CARD_SharedNightmare	Shared Nightmare
 ABILITY_CARD_SharpenedBlades	Sharpened Blades
 ABILITY_CARD_SharpeningKit	Sharpening Kit
 ABILITY_CARD_ShieldBash	Shield Bash
@@ -290,6 +377,9 @@ ABILITY_CARD_Shrapnel	Shrapnel
 ABILITY_CARD_SidePouch	Side Pouch
 ABILITY_CARD_SignsOfTheVoid	Signs of the Void
 ABILITY_CARD_SilentForce	Silent Force
+ABILITY_CARD_SilentScream	Silent Scream
+ABILITY_CARD_Simulacrum	Simulacrum
+ABILITY_CARD_SingingArrow	Singing Arrow
 ABILITY_CARD_SingleOut	Single Out
 ABILITY_CARD_SinisterOpportunity	Sinister Opportunity
 ABILITY_CARD_Skewer	Skewer
@@ -297,12 +387,15 @@ ABILITY_CARD_SkirmishingManeuver	Skirmishing Maneuver
 ABILITY_CARD_SmokeBomb	Smoke Bomb
 ABILITY_CARD_SmokeStep	Smoke Step
 ABILITY_CARD_SoaringShield	Soaring Shield
+ABILITY_CARD_SongofSpeed	Song of Speed
+ABILITY_CARD_SoothingLullaby	Soothing Lullaby
 ABILITY_CARD_Soulfire	Soulfire
 ABILITY_CARD_SpareDagger	Spare Dagger
 ABILITY_CARD_SpecialMixture	Special Mixture
 ABILITY_CARD_SpikedArmor	Spiked Armor
 ABILITY_CARD_SpiritHunger	Spirit Hunger
 ABILITY_CARD_SpiritOfTheNight	Spirit of the Night
+ABILITY_CARD_SpiritofDoom	Spirit of Doom
 ABILITY_CARD_SpreadingScourge	Spreading Scourge
 ABILITY_CARD_SpreadthePlague	Spread the Plague
 ABILITY_CARD_SpringtheTrap	Spring the Trap
@@ -310,11 +403,14 @@ ABILITY_CARD_StandFast	Stand Fast
 ABILITY_CARD_SticktotheShadows	Stick to the Shadows
 ABILITY_CARD_StilettoStorm	Stiletto Storm
 ABILITY_CARD_StingingCloud	Stinging Cloud
+ABILITY_CARD_StokingHail	Stoking Hail
+ABILITY_CARD_StoneFists	Stone Fists
 ABILITY_CARD_StonePummel	Stone Pummel
 ABILITY_CARD_StoppingPower	Stopping Power
 ABILITY_CARD_StormofWings	Storm of Wings
 ABILITY_CARD_StranglingChain	Strangling Chain
 ABILITY_CARD_StrengthinAgony	Strength in Agony
+ABILITY_CARD_SubmissiveAffliction	Submissive Affliction
 ABILITY_CARD_SuccumbtotheGift	Succumb to the Gift
 ABILITY_CARD_Suggestion	Suggestion
 ABILITY_CARD_SupportiveChant	Supportive Chant
@@ -334,31 +430,42 @@ ABILITY_CARD_TheBiggerOne	The Bigger One
 ABILITY_CARD_TheFavorite	The Favorite
 ABILITY_CARD_TheLastJourney	The Last Journey
 ABILITY_CARD_TheMawofMadness	The Maw of Madness
+ABILITY_CARD_TheMindsWeakness	The Mind's Weakness
 ABILITY_CARD_TheNewFavorite	The New Favorite
 ABILITY_CARD_ThiefsKnack	Thief's Knack
+ABILITY_CARD_ThrowVoice	Throw Voice
 ABILITY_CARD_ThrowingKnives	Throwing Knives
 ABILITY_CARD_Trample	Trample
+ABILITY_CARD_TranquilTrill	Tranquil Trill
+ABILITY_CARD_TremulantCyclone	Tremulant Cyclone
 ABILITY_CARD_Triage	Triage
 ABILITY_CARD_TrickstersReversal	Trickster's Reversal
+ABILITY_CARD_TuningtheOutcome	Tuning the Outcome
 ABILITY_CARD_TurnOutTheLights	Turn Out the Lights
+ABILITY_CARD_TwinRestoration	Twin Restoration
 ABILITY_CARD_TwirlingStabs	Twirling Stabs
 ABILITY_CARD_UnbridledPower	Unbridled Power
 ABILITY_CARD_UndertheSkin	Under the Skin
+ABILITY_CARD_UnendingChant	Unending Chant
 ABILITY_CARD_UnseenDread	Unseen Dread
 ABILITY_CARD_UnstableUpheaval	Unstable Upheaval
 ABILITY_CARD_UnstoppableCharge	Unstoppable Charge
 ABILITY_CARD_UnstoppableDestruction	Unstoppable Destruction
 ABILITY_CARD_UnwaveringMandate	Unwavering Mandate
 ABILITY_CARD_Vaccine	Vaccine
+ABILITY_CARD_Vengeance	Vengeance
 ABILITY_CARD_VengefulBarrage	Vengeful Barrage
 ABILITY_CARD_VenomShiv	Venom Shiv
 ABILITY_CARD_ViciousBallet	Vicious Ballet
+ABILITY_CARD_ViciousBlood	Vicious Blood
 ABILITY_CARD_VilePestilence	Vile Pestilence
 ABILITY_CARD_VirulentStrain	Virulent Strain
 ABILITY_CARD_VisageoftheInevitable	Visage of the Inevitable
 ABILITY_CARD_VitalStrike	Vital Strike
 ABILITY_CARD_VoiceOfTheNight	Voice of the Night
+ABILITY_CARD_VolatileConsumption	Volatile Consumption
 ABILITY_CARD_WallofDoom	Wall of Doom
+ABILITY_CARD_WardingDagger	Warding Dagger
 ABILITY_CARD_WardingStrength	Warding Strength
 ABILITY_CARD_WarmthOfTheSun	Warmth of the Sun
 ABILITY_CARD_WarriorOfTheSun	Warrior of the Sun
@@ -371,17 +478,25 @@ ABILITY_CARD_WillingSacrifice	Willing Sacrifice
 ABILITY_CARD_Windup	Windup
 ABILITY_CARD_WingedCongregation	Winged Congregation
 ABILITY_CARD_WingsOfTheNight	Wings of the Night
+ABILITY_CARD_WintersEdge	Winter's Edge
+ABILITY_CARD_WistfulWounding	Wistful Wounding
+ABILITY_CARD_WitheringClaw	Withering Claw
 ABILITY_CARD_WitheringConviction	Withering Conviction
+ABILITY_CARD_WretchedCreature	Wretched Creature
 ABILITY_CARD_WretchedSwarm	Wretched Swarm
+ABILITY_CARD_ZephyrWings	Zephyr Wings
+Add	Add
 Advantage	Advantage
 Affect_AllAdjacentAllies	Affect all adjacent allies
 Affect_AllAllies	Affect all allies
 Affect_AllAlliesMovedThrough	Affect all allies moved through
 Affect_AllAlliesWithin	Affect all allies within
+Affect_AnyOneAlly	Affect any one ally
 Affect_OneAdjacentAlly	Affect one adjacent ally
 Affect_OneAllyWithinRange3	Affect one ally within <nobr>Range <sprite name=Range> 3</nobr>
 Affect_SelfAndAllAdjacentAllies	Affect self and all adjacent allies
 Affect_SelfAndAllAllies	Affect self and all allies
+Augment_OnYourMeleeAttacks	On your melee attacks:
 Berserker	Berserker
 Berserker_ADVENTURE_DESCRIPTION	Berserkers are Inox warriors who have embraced their strength and fury. The Berserker will go to any lengths to keep her friends safe, including sacrificing her own life. Her abilities revolve around high damage output with the option of self-damage to push to even higher amounts. This makes her an extremely dangerous combatant, both to her enemies and herself.
 Berserker_ROLE	Melee Damage
@@ -394,6 +509,7 @@ Brute_ROLE	Melee Damage/Tank
 Brute_SKIN_ALT	Boneguard
 Brute_STRENGTHS	- <indent=%15>High health and defensive abilities make him more durable than some</indent>\n- <indent=%15>Access to early Disarm and Stun</indent>\n- <indent=%15>Great at pushing enemies about</indent>
 Brute_WEAKNESSES	- <indent=%15>Low mobility</indent>\n- <indent=%15>Poor ranged attack options</indent>\n- <indent=%15>Not the greatest conversationalist</indent>
+BurningAvatar	Burning Avatar
 Cragheart	Cragheart
 Cragheart_ADVENTURE_DESCRIPTION	Craghearts are Savvas who were exiled for being incapable of mastering an element. Their core is shattered to mark them for life.\nThey have a wide range of abilities and reasonable health meaning they can be used in a defensive melee role, as a ranged damage dealer or even a healer in a pinch. Prioritise using Earth Mana to get the most out of their abilities.
 Cragheart_DESCRIPTION	Craghearts are Savvas who were exiled for being incapable of mastering an element. Their core is shattered to mark them for life.
@@ -404,12 +520,20 @@ Cragheart_WEAKNESSES	- <indent=%15>Doesn't quite excel in any one aspect</indent
 DIFFICULTY_HIGH	High
 DIFFICULTY_LOW	Low
 DIFFICULTY_MEDIUM	Medium
+DIFFICULTY_VERY_HIGH	Very High
 Damage	Damage
 Demolitionist	Demolitionist
 Demolitionist_ADVENTURE_DESCRIPTION	Even when augmenting themselves with machines of their own creation to destroy anything that stands in their path, Quatryls will still do it with charm and flair. Though they may be small, Demolitionists don't let that hold them back in the least. Between their rocket boots, multitude of bombs, and giant piston fists, they are a force to be reckoned with. Sometimes the only path forward is the one they create themselves. In such cases, it is best to get out of their way.
 Demolitionist_ROLE	Melee Damage 
 Demolitionist_STRENGTHS	- <indent=%15>Many Direct Damage abilities to smash through Shields</indent>\n- <indent=%15>Access to Abilities with STUN</indent>\n- <indent=%15>Great at affecting the combat area</indent>
 Demolitionist_WEAKNESSES	- <indent=%15>Small deck size</indent>\n- <indent=%15>Limited healing options</indent>\n- <indent=%15>Their gloves aren't the most practical everyday attire</indent>
+Doppelganger	Doppelganger
+Elementalist	Elementalist
+Elementalist_ADVENTURE_DESCRIPTION	Elementalists are particularly skilled Savvas who have gained mastery of multiple elements. They are respected above others, and can wield powerful magic.\nA complicated class with a lot of complicated abilities, the Elementalist generates and consumes elements at an alarming rate. They work well with other magic users, but if the lone element user in a team, they can be underpowered, best equip them with a way to generate elements if possible.
+Elementalist_DESCRIPTION	Elementalists are particularly skilled Savvas who have gained mastery of multiple elements, they are respected above others and can wield powerful magic.
+Elementalist_ROLE	Ranged Damage
+Elementalist_STRENGTHS	- <indent=%15>Abilities have wide array of options</indent>\n- <indent=%15>Very effective at range</indent>\n- <indent=%15>Great at infusing elements</indent>
+Elementalist_WEAKNESSES	- <indent=%15>Weak with no other element infusers</indent>\n- <indent=%15>Can have turns where not much is possible</indent>\n- <indent=%15>Reading his ability cards can cause migraines</indent>
 GH_002_T	Gain <sprite name=XP1> for each time you Retaliate <nobr>this round.</nobr>
 GH_004_B	Any enemy who targets one of your adjacent allies with an attack this round targets you with that attack instead, regardless of the attack's range.
 GH_007_B	On the next six sources of damage from attacks targeting you, gain <nobr>Shield <sprite name=Shield> *BShield*.</nobr>
@@ -420,6 +544,23 @@ GH_022_T	Kill one adjacent normal enemy <nobr>with  STUN <sprite name=Stun></nob
 GH_023_B	You may treat all <nobr>Move <sprite name=Move></nobr> abilities as <nobr>Attack <sprite name=Attack></nobr> abilities of equal value.
 GH_026_B	Add +3 <nobr>Attack <sprite name=Attack></nobr> to all your attacks targeting enemies with <nobr>DISARM <sprite name=Disarm></nobr>, <nobr>IMMOBILIZE <sprite name=Immobilize></nobr> or <nobr>STUN <sprite name=Stun></nobr> this round.
 GH_062_T	Additionally, target all enemies <nobr>on the path</nobr> to the primary target.
+GH_063_T	<sprite name=RecoverIcon> all of your <nobr>lost cards.</nobr>
+GH_066_B	On the next two sources of damage to you, suffer <nobr>no damage instead.</nobr>
+GH_069_T_1	On your next four attacks, <nobr>add +*TActive* Attack <sprite name=Attack>.</nobr>
+GH_069_T_1_Alt	On your next four attacks, <nobr>add +2 Attack <sprite name=Attack>.</nobr>
+GH_069_T_2	Add +2 Attack <sprite name=Attack> instead.
+GH_076_B_1	where X is half of that ally's maximum hit point value <nobr>(rounded down).</nobr>
+GH_076_B_2	X is that ally's maximum hit point value instead.
+GH_079_B	On the next five melee attacks targeting you, gain <nobr>Retaliate <sprite name=Retaliate> *BRetaliate*.</nobr>
+GH_080_T	All enemies adjacent to the <nobr>target suffer 2 damage, <sprite name=XP1>.</nobr>
+GH_082_T	<sprite name=RecoverIcon> up to two of your <nobr>lost cards.</nobr>
+GH_084_T_1	Loot <sprite name=Loot> 3 instead, <sprite name=XP1>
+GH_084_T_2	You may not loot more than four gold piles or treasure tiles with this action.
+GH_085_B	On the next three sources of damage from attacks targeting you, suffer no damage instead and gain <nobr>Retaliate <sprite name=Retaliate> 3,</nobr> <nobr>Range <sprite name=Range> 3.</nobr>
+GH_086_B_1	Choose a hex within <nobr>Range <sprite name=Range> 4.</nobr>
+GH_086_B_2	Target all enemies within <nobr>Range <sprite name=Range> 4</nobr> of the chosen hex and pull them toward it
+GH_087_T_1	Target all enemies in the same room as you
+GH_087_T_2	All allies in the same room as you suffer 2 damage.
 GH_088_B	On your next four attacks targeting enemies adjacent to none of their allies, add <nobr>+2 Attack <sprite name=Attack>.</nobr>
 GH_088_T	Add <nobr>+2 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> when the target is adjacent to any <nobr>of your allies.</nobr>
 GH_090_T	On your next attack while <nobr>INVISIBLE <sprite name=Invisible></nobr>, double the value of the attack and gain <sprite name=XP2>.
@@ -487,8 +628,25 @@ GH_143_B	At the start of your next five turns, perform a <nobr>"Heal <sprite nam
 GH_144_B	All allies and enemies adjacent to any hexes you enter during the movement suffer <nobr>2 damage.</nobr>
 GH_144_T	All allies and enemies adjacent to the target suffer damage equal to the damage the target suffered.
 GH_145_T	You may push the targets into hexes containing obstacles. In each case, the obstacle is destroyed, the target suffers 2 damage, and you gain <sprite name=XP1>.
+GH_146_B_1	Force one enemy within <nobr>Range <sprite name=Range> 5 </nobr> to perform
+GH_146_B_2	targeting another enemy with you controlling the action.
+GH_146_T	Add +1 Attack <sprite name=Attack> for each negative condition on the target.
+GH_149_B	If you end the movement in the same hex you started in, perform
+GH_152_B	Force one enemy within <nobr>Range <sprite name=Range> 4 </nobr> to perform
+GH_154_T	Add <nobr>+2 Attack <sprite name=Attack></nobr> and gain <sprite name=XP1> for each negative condition on the target.
 GH_157_B	One ally within <nobr>Range <sprite name=Range> 3</nobr> <nobr>may perform</nobr>
 GH_157_T	One adjacent ally may perform
+GH_160_B	Force one normal or elite enemy within <nobr>Range <sprite name=Range> 3</nobr> to perform its turn this round as if its allies were enemies and its enemies were allies.
+GH_163_T	Gain one additional gold pile for each adjacent enemy
+GH_164_T_1	Kill one normal enemy within <nobr>Range <sprite name=Range> 4.</nobr>
+GH_164_T_2	Target all enemies adjacent to the killed enemy
+GH_165_B	You may have two <nobr><color=#A7B3D2>Augments</color></nobr> active at once. If a third <nobr><color=#A7B3D2>Augment</color></nobr> is played, discard one of the others.
+GH_166_B	Force one enemy within <nobr>Range <sprite name=Range> 5 </nobr> to perform
+GH_170_B	All your ranged attacks gain the effects of your <nobr><color=#A7B3D2>Augments</color></nobr> this round. 
+GH_172_B	Force one normal or elite enemy within <nobr>Range <sprite name=Range> 5</nobr> to perform its turn this round as if its allies were enemies and its enemies were allies, with you controlling the actions.
+GH_172_T	This attack gains the effects of your <nobr> <color=#A7B3D2>Augments</color> </nobr>.
+GH_173_B	All allies within <nobr>Range <sprite name=Range> 2</nobr> add <nobr>+X Attack</nobr> to all their attacks this round, where X is the number of your allies within <nobr>Range <sprite name=Range> 2</nobr> of you.
+GH_173_T_2	X is half of <nobr>Rat King's</nobr> current health (rounded up).
 GH_175_T	On the next five melee attacks targeting you, gain <nobr>Retaliate <sprite name=Retaliate> *TRetaliate*.</nobr>
 GH_177_T	One adjacent ally may <sprite name=RecoverIcon> one of their lost cards.
 GH_178_T_1	One adjacent ally may <sprite name=RecoverIcon> two of their discarded cards.
@@ -595,7 +753,28 @@ GH_345_T	On the next five sources of damage to you, perform an <nobr>"Attack <sp
 GH_346_T	On the next five sources of damage to you, suffer no damage instead.
 GH_347_B	You may suffer up to 5 damage.
 GH_347_T	Perform a "<nobr>Heal <sprite name=Heal> 2</nobr>, Self" action for each enemy damaged.
+GH_348_T	All allies add +1 Attack <sprite name=Attack> to one of their attacks each turn.
+GH_349_B	The next time any ally within <nobr>Range <sprite name=Range> 2</nobr> suffers damage this round, they suffer no damage instead.
+GH_350_T	All allies add <nobr>+1 Move <sprite name=Move></nobr> to all their Move actions and add <nobr>+1 Range <sprite name=Range></nobr> to all their ranged attacks.
+GH_352_B	One ally within <nobr>Range <sprite name=Range> 3</nobr> <nobr>may perform</nobr>
+GH_354_B	Force all enemies in the targeted area to perform a <nobr>"Move <sprite name=Move> 1"</nobr> action with you controlling the actions.
+GH_357_T	All allies add <nobr>WOUND <sprite name=Wound></nobr> to all their attacks.
+GH_358_T	The next five times you <nobr>CURSE <sprite name=Curse></nobr> an enemy, <nobr>CURSE <sprite name=Curse></nobr> them an additional time.
+GH_360_T	All allies may perform a <nobr>"Heal <sprite name=Heal> 1, Self"</nobr> action at the beginning of each of their turns.
+GH_362_T	All allies gain <nobr>Retaliate <sprite name=Retaliate>2,</nobr> <nobr>Retaliate Range <sprite name=Range> 2</nobr>.
+GH_364_T	All enemies gain Disadvantage on all their attacks.
+GH_365_T	Any one ally may perform
+GH_366_T_1	You may have two <nobr><color=#EBB0AA>Songs</color> </nobr>active at once, but you only gain experience from one.
+GH_366_T_2	If a third <nobr><color=#EBB0AA>Song</color></nobr> is played, discard one of the others.
+GH_367_T	All allies may perform a <nobr>"Move <sprite name=Move> 1"</nobr> before any of their Attack actions.
+GH_368_T	At the beginning of each of your turns, you may force one enemy within <nobr>Range <sprite name=Range> 5</nobr> to perform a <nobr>"Move <sprite name=Move> 2"</nobr> action with you controlling the action.
+GH_370_T	At the beginning of each of your turns, <nobr>CURSE <sprite name=Curse></nobr> one enemy within <nobr>Range <sprite name=Range> 5</nobr>.
 GH_371_B	All allies within <nobr>Range <sprite name=Range> 3</nobr> <nobr>may perform</nobr>
+GH_372_T	All allies may perform a <nobr>"Heal <sprite name=Heal> 2, Self"</nobr> action at the beginning of each of their turns.
+GH_373_B	Force all enemies in the targeted area to perform a <nobr>"Move <sprite name=Move> 2"</nobr> action with you controlling the actions.
+GH_374_T	All allies add <nobr>+1 Attack <sprite name=Attack></nobr> to all their attacks.
+GH_375_B	Two allies within <nobr>Range <sprite name=Range> 3</nobr> <nobr>may perform</nobr>
+GH_375_T	Force all enemies moved through to perform an <nobr>"Attack <sprite name=Attack> 3"</nobr> action targeting another enemy with you controlling the actions.
 GH_407_T	Give one adjacent ally one “<nobr>Medical Pack</nobr>” ability card.
 GH_408_B	All your Heal actions this round affect you and all adjacent allies.
 GH_409_B	All your melee attacks this round target all adjacent enemies.
@@ -620,6 +799,20 @@ GH_443_T	Remove all negative conditions on the healed target and give them one �
 GH_445_T_1	All of your <nobr>Attack <sprite name=Attack></nobr> and <nobr>Move <sprite name=Move></nobr> abilities may be performed as <nobr>Heal <sprite name=Heal></nobr> abilities of an equal value plus one.
 GH_445_T_2	In such cases, the <nobr>Range <sprite name=Range></nobr> is 1 unless otherwise specified, and ignore all conditions applied by the <nobr>Attack <sprite name=Attack></nobr> abilities.
 GH_446_T	Kill all normal or elite enemies in the targeted area suffering from 10 or more damage.
+GH_449_B	Once during each of your Attack actions, you may <sprite name=ConsumeAny> to add +1 Attack <sprite name=Attack> to the entire Attack action.
+GH_450_B_1	<line-height=100%>At the end of each of your turns, you may generate <voffset=-3><sprite name=Any></voffset>.
+GH_450_B_2	Deduct -1 Attack <sprite name=Attack> from all your attacks.
+GH_459_B	All attacks targeting you gain Disadvantage this round.
+GH_463_T_1	Attack <sprite name=Attack> X-1 on a new enemy within <nobr>Range <sprite name=Range> 2</nobr> of the first target, then Attack <sprite name=Attack> X-2 on a third enemy within <nobr>Range <sprite name=Range> 2</nobr> of the second target
+GH_463_T_2	Attack <sprite name=Attack> X-3 on a fourth enemy within <nobr>Range <sprite name=Range> 2</nobr> of the third target
+GH_468_T	Target all enemies within <nobr>Range <sprite name=Range> 2</nobr> of the healed character.
+GH_469_B_2	You may perform Attack actions as if you occupy the summon's hex.
+GH_470_T	Kill all normal <nobr>targets instead, <sprite name=XP1></nobr>.
+GH_471_T	The healed character may <sprite name=RecoverIcon> one of their discarded cards.
+GH_472_B_1	<nobr>+2 Move <sprite name=Move>, WOUND <sprite name=Wound></nobr> <nobr>all enemies moved through, <sprite name=XP1></nobr>
+GH_472_B_2	<nobr>+2 Move <sprite name=Move>, IMMOBILIZE <sprite name=Immobilize></nobr> <nobr>all enemies moved through, <sprite name=XP1></nobr>
+GH_472_T	Once per action, if you consume an element during the action, you may cause one enemy within <nobr>Range <sprite name=Range> 2</nobr> to suffer 1 damage or you may perform a <nobr>"Heal <sprite name=Heal> 1, Range <sprite name=Range> 2"</nobr> action.
+GH_474_B	Perform any of the following abilities:
 GH_THE_FAVORITE_EFFECT_TOOLTIP	<color=#F3DDAB>The Favorite</color>: You may add +3 Attack to any of your ranged attacks. When an enemy targeted with the Favorite dies, you may loot the hatchet on the hex in which it died to recover this ability.
 GH_THE_NEW_FAVORITE_EFFECT_TOOLTIP	<color=#F3DDAB>The New Favorite</color>: You may add +3 Attack, <nobr>WOUND <sprite name=Wound></nobr>, and <nobr>PUSH <sprite name=Push> 1</nobr> to any of your ranged attacks. When an enemy targeted with the Favorite dies, you may loot the hatchet on the hex in which it died to recover this ability.
 GUI_ACTIVE_BONUS_SandDevil_ForceMove_TOOLTIP	Force the character occupying the Sand Devil's hex to move with it.\nYou cannot end the Force Move action on a hex accupied by another character.
@@ -628,12 +821,15 @@ GUI_SandDevil_OverrideMove_TOOLTIP	Choose to Move the Sand Devil or skip to star
 GUI_StonePummel_Bottom_HelpBoxTooltip	Stone Pummel: choose an adjacent obstacle to destroy for +3 Attack, or skip.
 GUI_ViciousBallet_Tooltip	Select an adjacent ally to perform an Attack 3 action
 GUI_WitheringConviction_TOP_TOOLTIP	Select {CURRENT_TARGETS}/{TOTAL_TARGETS} allies to perform the action
+Gain	Gain
 Gain_Flying	Gain <nobr>Flying <sprite name=Flying></nobr>
+GiantRat	Giant Rat
 Hatchet	Hatchet
 Hatchet_ADVENTURE_DESCRIPTION	While any normal Inox may be valued in Gloomhaven for their brute strength and endurance with manual labour, if you want to be a successful mercenary in the city, sometimes a little more finesse is required. Hatchets have fully embraced life in the city, outfitting themselves in the latest fashions. It is all a bit of a front though, as their true passion lies in their arsenal. No one is a better marksman with a throwing axe, and if anybody wants to challenge their claim, they had better be prepared for a duel to the death!
 Hatchet_ROLE	Ranged Damage
 Hatchet_STRENGTHS	- <indent=%15>Great Ranged Damage</indent>\n- <indent=%15>Reasonable array of varied secondary abilities</indent>\n- <indent=%15>Has a couple of Favourite Axes</indent>
 Hatchet_WEAKNESSES	- <indent=%15>Should try and keep out of the front line</indent>\n- <indent=%15>Needs to go pick his axes up after use</indent>\n- <indent=%15>Hasn't been able to remove their hat since childhood</indent>
+ImmobilizeShort	IMMOBILIZE
 JOTL_010_T	You may add <nobr>+3 Attack <sprite name=Attack></nobr> to a single target of any of your ranged attacks by marking it with your Favorite. When that target dies, it will drop your Favorite. If you loot that hex, return your Favorite to this Active Ability.
 JOTL_011_T	If the target has your Favorite, return it to its Active Ability.
 JOTL_015_B	Double the value of your next attack this round.
@@ -791,15 +987,27 @@ JOTL_250_T	Any time you are attacked this round, gain <nobr>Shield <sprite name=
 JOTL_252_B	All adjacent enemies suffer 3 damage.
 JOTL_252_T	<nobr>+1 Attack <sprite name=Attack></nobr>, <nobr>+2 Range <sprite name=Range></nobr>, all enemies adjacent to the target suffer 1 damage
 Jump	Jump
+Kill_AllNormalEnemiesInTargetedArea	Kill all normal enemies in the targeted area.
 Kill_OneAdjacentEnemy	Kill one adjacent normal or elite enemy.
 Kill_OneAdjacentNormalEnemy	Kill one adjacent normal enemy.
+Kill_OneNormal	Kill one normal target
+ManaSphere	Mana Sphere
 MedPack	This card cannot be lost to avoid suffering damage. When this card is discarded for any reason, return it to the Sawbone's supply.
+Mindthief	Mindthief
+Mindthief_ADVENTURE_DESCRIPTION	Mindthieves make terrifying opponents through the use of psychic assaults, sharp blades, and swarms of tiny teeth.\nThe Mindthief has a unique Augment system, allowing her to add effects to all of her melee attacks, and later her ranged also. She additionally can control enemies and summon minions to give access to a lot of different gameplay options. Be wary of her low health, however.
+Mindthief_DESCRIPTION	Mindthieves make terrifying opponents through the use of psychic assaults, sharp blades, and swarms of tiny teeth.
+Mindthief_ROLE	Melee Damage
+Mindthief_SKIN_ALT	Witch Doctor
+Mindthief_STRENGTHS	- <indent=%15>Powerful Augment effects on melee attacks</indent>\n- <indent=%15>Mind-control powers</indent>\n- <indent=%15>Access to summons</indent>
+Mindthief_WEAKNESSES	- <indent=%15>Fragile melee character</indent>\n- <indent=%15>Managing Augments can be fiddly</indent>\n- <indent=%15>Often confused for a giant rat</indent>
 Move_StraightLine	The movement must be in a straight line.
+MysticAlly	Mystic Ally
 Nightshroud	Nightshroud
 Nightshroud_ADVENTURE_DESCRIPTION	With the ability to cloak themselves in shadow and pass through the world unseen, Nightshrouds are deadly stalkers, using blades and stealth to eliminate any target. Rather than working with other races to gather knowledge, Nightshrouds prefer to pry the knowledge from their cold, dead fingers.
 Nightshroud_ROLE	Melee Damage
 Nightshroud_STRENGTHS	- <indent=%15>Powerful execution abilities</indent>\n- <indent=%15>Can use Invisibility to avoid damage</indent>\n- <indent=%15>Uses Dark to enhance his abilities</indent>
 Nightshroud_WEAKNESSES	- <indent=%15>Poor ranged options</indent>\n- <indent=%15>Doesn't assist allies much</indent>\n- <indent=%15>Finds making friends difficult</indent>
+OnDeath	On death:
 PERK_Berserker_01_Desc	Remove two <sprite name="-1">
 PERK_Berserker_02_Desc	Replace one <sprite name="-1"> with one <sprite name="+1">
 PERK_Berserker_03_Desc	Replace one <sprite name="0"> with two <sprite name="0"> <sprite name=Wound> <sprite name=Rolling>
@@ -839,6 +1047,19 @@ PERK_Demolitionist_07_Desc	Replace one <sprite name="+1"> with one <sprite name=
 PERK_Demolitionist_08_Desc	Add two <sprite name="0"> all adjacent enemies suffer <sprite name=Damage> 1
 PERK_Demolitionist_09_Desc	Ignore negative scenario effects and remove one <sprite name="-1">
 PERK_Demolitionist_10_Desc	Whenever you rest, you may place an obstacle in an empty hex within <sprite name=Range> 2 (of you)
+PERK_Elementalist_01_Desc	Remove two <sprite name="-1">
+PERK_Elementalist_02_Desc	Remove one <sprite name="-2">
+PERK_Elementalist_03_Desc	Remove four <sprite name="0">
+PERK_Elementalist_04_Desc	Replace one <sprite name="-1"> with one <sprite name="0"> +1 <sprite name=Target>
+PERK_Elementalist_05_Desc	Replace one <sprite name="0"> with one <sprite name="0"> <sprite name=Stun>
+PERK_Elementalist_06_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Wound>
+PERK_Elementalist_07_Desc	Replace two <sprite name="+1"> with two <sprite name="+2">
+PERK_Elementalist_08_Desc	Add four <sprite name="0"> <sprite name=CreateFire>
+PERK_Elementalist_09_Desc	Add four <sprite name="0"> <sprite name=CreateIce>
+PERK_Elementalist_10_Desc	Add four <sprite name="0"> <sprite name=CreateAir>
+PERK_Elementalist_11_Desc	Add four <sprite name="0"> <sprite name=CreateEarth>
+PERK_Elementalist_12_Desc	Ignore negative scenario effects
+PERK_Elementalist_13_Desc	At the start of each scenario and whenever you long rest, infuse any one element
 PERK_Hatchet_01_Desc	Remove two <sprite name="-1">
 PERK_Hatchet_02_Desc	Replace one <sprite name="0"> with one <sprite name="0"> <sprite name=Stun>
 PERK_Hatchet_03_Desc	Replace one <sprite name="+1"> with one <sprite name="+1"> <sprite name=Stun>
@@ -849,6 +1070,18 @@ PERK_Hatchet_07_Desc	Replace one <sprite name="0"> with one <sprite name="+2"> <
 PERK_Hatchet_08_Desc	Replace one <sprite name="+1"> with one <sprite name="+3">
 PERK_Hatchet_09_Desc	Add one <sprite name="+2"> <sprite name=CreateAir>
 PERK_Hatchet_10_Desc	Once each scenario, during your turn, if the Favorite is in a hex on the map, you may <sprite name=ConsumeAir> to return it to its ability card
+PERK_Mindthief_01_Desc	Remove two <sprite name="-1">
+PERK_Mindthief_02_Desc	Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=Immobilize> <sprite name=Rolling>
+PERK_Mindthief_03_Desc	Replace one <sprite name="-2"> with one <sprite name="0">
+PERK_Mindthief_04_Desc	Replace two <sprite name="0"> with three <sprite name="0"> <sprite name=Pull> 1 <sprite name=Rolling>
+PERK_Mindthief_05_Desc	Replace two <sprite name="0"> with three <sprite name="0"> <sprite name=Muddle> <sprite name=Rolling>
+PERK_Mindthief_06_Desc	Replace two <sprite name="+1"> with two <sprite name="+2">
+PERK_Mindthief_07_Desc	Add one <sprite name="+2"> <sprite name=CreateIce>
+PERK_Mindthief_08_Desc	Add two <sprite name="+1"> <sprite name=Rolling>
+PERK_Mindthief_09_Desc	Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>
+PERK_Mindthief_10_Desc	Add one <sprite name="0"> <sprite name=Disarm> <sprite name=Rolling> and one <sprite name="0"> <sprite name=Muddle> <sprite name=Rolling>
+PERK_Mindthief_11_Desc	Ignore negative scenario effects
+PERK_Mindthief_12_Desc	You are considered to be last in initiative order when determining monster focus
 PERK_Nightshroud_01_Desc	Remove two <sprite name="-1">
 PERK_Nightshroud_02_Desc	Replace one <sprite name="-2"> with one <sprite name="-1"> <sprite name=CreateDark>
 PERK_Nightshroud_03_Desc	Replace one <sprite name="0"> with one <sprite name="0"> +1 <sprite name=Target> <sprite name=Rolling>
@@ -907,6 +1140,29 @@ PERK_Scoundrel_07_Desc	Add two <sprite name="+1"> <sprite name=Rolling>
 PERK_Scoundrel_08_Desc	Add one <sprite name="0"> <sprite name=Invisible>, self <sprite name=Rolling>
 PERK_Scoundrel_09_Desc	Ignore negative scenario effects
 PERK_Scoundrel_10_Desc	Once each quest, during your turn, perform <sprite name=Invisible>, self
+PERK_Soothsinger_01_Desc	Remove two <sprite name="-1">
+PERK_Soothsinger_02_Desc	Remove one <sprite name="-2">
+PERK_Soothsinger_03_Desc	Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=Stun>
+PERK_Soothsinger_04_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Immobilize>
+PERK_Soothsinger_05_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Disarm>
+PERK_Soothsinger_06_Desc	Replace one <sprite name="0"> with one <sprite name="+2"> <sprite name=Wound>
+PERK_Soothsinger_07_Desc	Replace one <sprite name="0"> with one <sprite name="+2"> <sprite name=Poison>
+PERK_Soothsinger_08_Desc	Replace one <sprite name="0"> with one <sprite name="+2"> <sprite name=Curse>
+PERK_Soothsinger_09_Desc	Replace one <sprite name="0"> with one <sprite name="+3"> <sprite name=Muddle>
+PERK_Soothsinger_10_Desc	Replace two <sprite name="+1"> with one <sprite name="+4">
+PERK_Soothsinger_11_Desc	Add three <sprite name="+1"> <sprite name=Rolling>
+PERK_Soothsinger_12_Desc	Add three <sprite name="0"> <sprite name=Curse> <sprite name=Rolling>
+PERK_Spellweaver_01_Desc	Remove one <sprite name="-2">
+PERK_Spellweaver_02_Desc	Replace one <sprite name="-1"> with one <sprite name="+1">
+PERK_Spellweaver_03_Desc	Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=CreateAir> <sprite name=Rolling> and one <sprite name="0"> <sprite name=CreateEarth> <sprite name=Rolling>
+PERK_Spellweaver_04_Desc	Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=CreateLight> <sprite name=Rolling> and one <sprite name="0"> <sprite name=CreateDark> <sprite name=Rolling>
+PERK_Spellweaver_05_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Wound>
+PERK_Spellweaver_06_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Immobilize>
+PERK_Spellweaver_07_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Stun>
+PERK_Spellweaver_08_Desc	Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Curse>
+PERK_Spellweaver_09_Desc	Add one <sprite name="+2"> <sprite name=CreateFire>
+PERK_Spellweaver_10_Desc	Add one <sprite name="+2"> <sprite name=CreateIce>
+PERK_Spellweaver_11_Desc	Ignore negative scenario effects
 PERK_Sunkeeper_01_Desc	Remove four <sprite name="0">
 PERK_Sunkeeper_02_Desc	Replace one <sprite name="-1"> with two <sprite name="0"> <sprite name=CreateLight> <sprite name=Rolling>
 PERK_Sunkeeper_03_Desc	Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=Shield> 1 <sprite name=Rolling>
@@ -926,17 +1182,20 @@ PERK_Voidwarden_06_Desc	Replace one <sprite name="0"> with one <sprite name="+1"
 PERK_Voidwarden_07_Desc	Add two <sprite name="+1"> <sprite name=CreateIce>
 PERK_Voidwarden_08_Desc	Add two <sprite name="+1"> <sprite name=CreateDark>
 PERK_Voidwarden_09_Desc	Add one <sprite name="+3">
+PlagueRat	Plague Rat
 Plagueherald	Plagueherald
 Plagueherald_ADVENTURE_DESCRIPTION	Either misguided or ignorant of other races’ physiology, Plagueheralds believe that the spread of disease throughout a society will strengthen it and propel it towards great things. One should be wary of allying with a Plagueherald. Their ability to spread decay and death across both sides of a battlefield is a terrifying thing to behold.
 Plagueherald_ROLE	Ranged Damage/Support
 Plagueherald_STRENGTHS	- <indent=%15>Can often target multiple enemies</indent>\n- <indent=%15>Effective at range</indent>\n- <indent=%15>Powerful debuffs utilizing Curse and Poison</indent>
 Plagueherald_WEAKNESSES	- <indent=%15>High potential for friendly fire</indent>\n- <indent=%15>Low effectiveness versus single large targets</indent>\n- <indent=%15>Harrower mating rituals are... unpleasant</indent>
+PoisonShort	POISON
 Quartermaster	Quartermaster
 Quartermaster_ADVENTURE_DESCRIPTION	Skilled Valrath Quartermasters are known for aiding adventuring parties in maximizing the effectiveness of their equipment. After all, what is a warrior without a good sword at his side?
 Quartermaster_ROLE	Melee Damage/Support
 Quartermaster_STRENGTHS	- <indent=%15>Many item refreshing abilities</indent>\n- <indent=%15>Moderate offensive and defensive capabilities</indent>\n- <indent=%15>Jack of all trades</indent>
 Quartermaster_WEAKNESSES	- <indent=%15>Master of none</indent>\n- <indent=%15>Weaker when party lacks good equipment</indent>\n- <indent=%15>Always packs too much luggage</indent>
 Range	Range
+RatKing	Rat King
 RedGuard	Red Guard
 RedGuard_ADVENTURE_DESCRIPTION	There is a specific caste in the Valrath capital of Jhinda tasked with protecting the city. It is a prestigious position and one not easily lived up to. Outcast from Jhinda for unknown crimes, the Red Guard found it too difficult to part from their identity as a protector, keeping the distinctive red armor, as well as their chained sickle and shield. The only place to find work was as a mercenary in Gloomhaven, and maybe, just maybe, by standing on the front lines and keeping their allies from harm, the Red Guard will find some way to redeem themselves. Not in the eyes of the Jhinda culture, which has permanently turned its back, but at least within their own esteem.
 RedGuard_ROLE	Tank
@@ -957,6 +1216,18 @@ Scoundrel_SKIN_ALT	Nightcrawler
 Scoundrel_STRENGTHS	- <indent=%15>High mobility</indent>\n- <indent=%15>Potential for high melee Damage</indent>\n- <indent=%15>Can afflict enemies with Poison</indent>
 Scoundrel_WEAKNESSES	- <indent=%15>Little in the way of effects that assist teammates</indent>\n- <indent=%15>Few defensive abilities and low health</indent>\n- <indent=%15>Will try and take ALL the gold</indent>
 Self	Self
+Soothsinger	Soothsinger
+Soothsinger_ADVENTURE_DESCRIPTION	Quatryls are not only master Engineers, but their impressive manual dexterity allows them to also become excellent Bards. These "Soothsingers" are able to empower their allies to great feats and bring their enemies low with a single strum of their lute. Their Song system works in a similar way to the Mindthief's Augments, and she is especially powerful in larger parties, but has low damage output. 
+Soothsinger_ROLE	Ranged Support
+Soothsinger_STRENGTHS	- <indent=%15>Wide range of powerful buffs</indent>\n- <indent=%15>Varied selection of lower half abilities</indent>\n- <indent=%15>Effective at crowd control</indent>
+Soothsinger_WEAKNESSES	- <indent=%15>Poor damage dealer</indent>\n- <indent=%15>Weaker in smaller parties</indent>\n- <indent=%15>Dubious fashion sense</indent>
+Spellweaver	Spellweaver
+Spellweaver_ADVENTURE_DESCRIPTION	Spellweavers are Orchid sages able to draw forth powerful natural forces and craft them into concentrated attacks.\nThey are great at dealing out damage at range, but due to their low health are pretty fragile, so keep them out of combat. The Spellweaver's most important ability is Reviving Ether, allowing her to Burn more cards than other characters and recover them in an adventure, but be careful not to use it too early.
+Spellweaver_DESCRIPTION	Spellweavers are Orchid sages able to draw forth powerful natural forces and craft them into concentrated attacks.
+Spellweaver_ROLE	Ranged Damage
+Spellweaver_STRENGTHS	- <indent=%15>Good ranged damage dealing</indent>\n- <indent=%15>Can recover Burned cards with Reviving Ether</indent>\n- <indent=%15>Access to decent early ranged summon</indent>
+Spellweaver_WEAKNESSES	- <indent=%15>Low health, can die very fast</indent> \n- <indent=%15>Requires complex Ability management for new Players</indent>\n- <indent=%15>Crystal skin makes it difficult to find a good tailor</indent>
+StunShort	STUN
 Suffer_2Damage	Suffer 2 damage.
 Suffer_3Damage	Suffer 3 damage.
 SummonAbility_WardDisadvantage	All enemies within <nobr>Range <sprite name=Range> 3</nobr> of the Ward gain Disadvantage on all their attacks not granted by Voidwarden.
@@ -973,6 +1244,7 @@ Target_AllAlliesWithin	Target all allies within
 Target_AllEnemies	Target all enemies
 Target_AllEnemiesAdjacentToEnemiesWith	Target all enemies adjacent to enemies with
 Target_AllEnemiesAdjacentToHexesMovedThrough	Target all enemies adjacent to any hexes moved through
+Target_AllEnemiesAtExactly	Target all enemies at exactly
 Target_AllEnemiesMovedThrough	Target all enemies moved through
 Target_AllEnemiesWithin	Target all enemies within
 Target_CanNoLongerFly	Target can no longer fly.
@@ -1391,5 +1663,144 @@ Demolitionist_FullName	Demolitionist
 CODEX_Hero_Demolitionist_Title	Demolitionist
 Demolitionist_DESCRIPTION	Even when augmenting themselves with machines of their own creation to destroy anything that stands in their path, Quatryls will still do it with charm and flair. Though they may be small, Demolitionists don't let that hold them back in the least. Between their rocket boots, multitude of bombs, and giant piston fists, they are a force to be reckoned with. Sometimes the only path forward is the one they create themselves. In such cases, it is best to get out of their way.
 CODEX_HeroInfo_Demolitionist	<b>Role:</b> Melee Damage \n<b>Difficulty:</b> Medium\n\nWalls and obstacles are your playground. Many of your cards destroy obstacles, and each destruction pays off with damage, <sprite name=Strengthen>, <sprite name=Bless> or <sprite name=Shield>. Enemies standing next to a wall also take extra damage from several of your attacks.\n\nAt level 5 you gain the <b>Mech Suit</b>, a lasting transformation: you change shape, gain extra health and a shield, and recover cards.\n\n<sprite name=CreateFire> and <sprite name=CreateEarth> add damage, <sprite name=Muddle>, <sprite name=Poison> and pushes. Your attacks are mostly up close, and some can <sprite name=Stun>.\n\n<b>Strengths:</b>\n• Many Direct Damage abilities to smash through Shields\n• Access to Abilities with STUN\n• Great at affecting the combat area\n\n<b>Weaknesses:</b>\n• Small deck size\n• Limited healing options\n• Their gloves aren't the most practical everyday attire
+PERK_Spellweaver_01_Name	Composure
+PERK_Spellweaver_02_Name	Focus
+PERK_Spellweaver_03_Name	Winds and Stone
+PERK_Spellweaver_04_Name	Light and Shadow
+PERK_Spellweaver_05_Name	Searing Touch
+PERK_Spellweaver_06_Name	Binding Frost
+PERK_Spellweaver_07_Name	Thunderclap
+PERK_Spellweaver_08_Name	Hex
+PERK_Spellweaver_09_Name	Inferno
+PERK_Spellweaver_10_Name	Blizzard
+PERK_Spellweaver_11_Name	Unfazed
+PERK_Spellweaver_12_Name	Etheric Bond
+PERK_Spellweaver_12_Desc	Whenever you short rest, if Reviving Ether is in your discard pile, first return it to your hand
+Spellweaver_MASTERY_1_Name	Elemental Mastery
+Spellweaver_MASTERY_1_Desc	Infuse and consume all six elements
+Spellweaver_MASTERY_2_Name	Deep Reserves
+Spellweaver_MASTERY_2_Desc	Perform four different loss actions twice each
+Event_GH.Spellweaver_Text	The Spellweaver has been counting. You noticed it weeks ago: a small tally on the inside of her sleeve, a mark for every time Reviving Ether brought her cards back from the fire. "Thirty-one," she says, when you finally ask. "The sages say the ether forgives you nine times. After that, you are borrowing."\nShe is going home to the Orchid groves to pay it back, which as far as you can tell means sitting very still for a very long time. She does not seem to mind. "I have been loud enough," she says, and for a woman who once set a frozen lake on fire from the far shore, it is true.\nBefore she goes she walks the Alchemist's garden with the keeper, touching each bed in turn. Nothing visible happens. The following spring the garden comes up a week early and nobody can say why.\nShe leaves on foot, south, with a single staff and no coat, because the cold has never once been allowed to touch her and she sees no reason to start now.
+Event_GH.Spellweaver_Name	Spellweaver Retires
+GH.Spellweaver-1_Front	In the very early morning, you are wakened by a knock at your door. Standing behind it is giant, dirty Inox wearing a leather apron.\n\n“Oh, uh...ahem,” he coughs. “Sorry, I was looking for a female Orchid. She used to help me on occasion with my forge. Her control over fire was astounding and I paid her well for her assistance completing some of my specialty work.”\n\nHe scratches his head. “I guess she’s not around anymore. You wouldn’t happen to know where I could find someone who could help me in her absence, would you?”
+GH.Spellweaver-1_Option_1	Offer to help the blacksmith yourself.
+GH.Spellweaver-1_Option_1_Outcome	The Inox is completely dumbfounded when you walk all the way down to his forge and then proceed to exhibit zero aptitude at manipulating or controlling fire.
+GH.Spellweaver-1_Option_2	Direct him to the Savvas Elemental Guild and go back to sleep.
+GH.Spellweaver-1_Option_2_Outcome	“Ah, yes, that is probably a good idea,” he says. “Thanks for your time and I hope your friend the Spellweaver is doing well!”
+GH.Spellweaver-2_Front	Due to a late start, night falls before you can get to where you are going. You are on your guard throughout the night, but nothing can quite prepare you for a Night Demon attack.\n\nThey come upon you silent and invisible, so you are unaware of their presence until their claws sink into your flesh.\n\nThe darkness erupts into chaos with flashing swords and horrific shrieks. And then a bolt of fire streaks through the darkness and incinerates one of the demons.\n\nSomeone else is out there.
+GH.Spellweaver-2_Option_1	Renew your efforts to slay the demons.
+GH.Spellweaver-2_Option_1_Outcome	With the help of the mysterious firecaster, the battle turns and the demons are slain without much pain. Out of the darkness steps the familiar face of a female Orchid.\n\n“Sorry about that. I think they were looking for this.” The Spellweaver holds up a black censer. “It’s a good thing I ran into you, though. I could use your help.”\n\nShe draws out a crude map. “Meet me here as soon as you can, and I’ll explain more.”
+GH.Spellweaver-2_Option_2	Use the distraction to disengage from the demons and run away.
+GH.Spellweaver-2_Option_2_Outcome	This mysterious third party seems to have things under control, and the demons appear more interested in them anyway. You take the opportunity to retreat from the fight and run off into the night. You don’t feel great about it, but at least you’re alive.
+Spellweaver_FullName	Spellweaver
+CODEX_Hero_Spellweaver_Title	Spellweaver
+CODEX_HeroInfo_Spellweaver	<b>Role:</b> Ranged Damage\n<b>Difficulty:</b> High\n\nYour strongest spells are lost once you cast them. <i>Reviving Ether</i> brings every lost card back into your hand, so you can cast them all again; time it well, since it is lost too.\n\nYou use every element. Create them with your spells, then spend them for stronger attacks, <sprite name=Wound>, <sprite name=Stun>, extra healing, or invisibility.\n\nMost of your attacks are at range and many hit whole areas. You are fragile, so stay back and let your spells do the work.\n\n<b>Strengths:</b>\n• Good ranged damage dealing\n• Can recover Burned cards with Reviving Ether\n• Access to decent early ranged summon\n\n<b>Weaknesses:</b>\n• Low health, can die very fast\n• Requires complex Ability management for new Players\n• Crystal skin makes it difficult to find a good tailor
+PERK_Elementalist_01_Name	Steady Hands
+PERK_Elementalist_02_Name	Composure
+PERK_Elementalist_03_Name	Trimmed Deck
+PERK_Elementalist_04_Name	Wide Reach
+PERK_Elementalist_05_Name	Thunderclap
+PERK_Elementalist_06_Name	Searing Touch
+PERK_Elementalist_07_Name	Focused Power
+PERK_Elementalist_08_Name	Fire Affinity
+PERK_Elementalist_09_Name	Ice Affinity
+PERK_Elementalist_10_Name	Air Affinity
+PERK_Elementalist_11_Name	Earth Affinity
+PERK_Elementalist_12_Name	Unfazed
+PERK_Elementalist_13_Name	Elemental Proficiency
+Elementalist_MASTERY_1_Name	Elemental Focus
+Elementalist_MASTERY_1_Desc	Consume at least two different elements with each of four different attack abilities, without ever performing the bottom action of Formless Power or Shaping the Ether
+Elementalist_MASTERY_2_Name	Elemental Surge
+Elementalist_MASTERY_2_Desc	Infuse five or more elements during one of your turns, then consume five or more elements during your following turn
+Event_GH.Elementalist_Text	The Elementalist calls it balancing the ledger. Six elements, drawn and spent and drawn again over a winter of fighting, and the Savvas keep count of such things the way merchants keep count of coin. "I have taken more fire from this valley than I gave it," they say, standing at the frozen edge of the bay. "That is not a thing to leave behind."\nSo they give it back. For a week the outpost is warmer than it has any right to be in that season: the ice in the harbour rots, the lumber yard's frozen stack comes loose with a sound like a sigh, and the Infirmary's patients sleep without blankets for the first time since autumn.\nThen the Elementalist takes the cold instead, folds it into themself with the same unhurried care, and walks north into the white with it, toward wherever a Savvas goes to be respected. They do not say goodbye. They have never seen the point.\nThe thaw they left lasts exactly as long as they said it would, to the day. Frosthaven learns to plan around it, and nobody ever quite believes it was weather.
+Event_GH.Elementalist_Name	Elementalist Retires
+GH.Elementalist-1_Front	You are haggling over the price of road rations with an irritating Valrath merchant when a messenger boy approaches you holding a note.\n\n“Sir, I have a pressing letter written by a powerful Savvas that has come to you from all the way across the Misty Sea,” the messenger says. “I was told to deliver it directly.”\n\nYou reach for it, but the messenger moves back a little. “Sir, this note has traveled a very long distance to get to you. If you could, please pay a small fee to take possession of it.”
+GH.Elementalist-1_Option_1	Pay for the note.
+GH.Elementalist-1_Option_1_Outcome	You reach into your pocket to pay the kid, but come up empty-handed. He slinks off in indignation.
+GH.Elementalist-1_Option_2	Refuse to pay for the note.
+GH.Elementalist-1_Option_2_Outcome	You laugh in indignation and push the messenger away. He opens his mouth to object, then thinks better of it and runs off. You turn back to bartering, now leveraging the proof of your extreme thriftiness against the merchant.
+GH.Elementalist-2_Front	You are wandering through an abysmal fog, cursing the very fact you woke up this morning. You can’t see two feet in front of your face and everything is just so cold and damp.\n\nWalking down what you think is the road, you nearly bump into an elderly Savvas.\n\n“Ah, how fortuitous is such a meeting,” the Savvas says. “You look like the ones whom my protégé worked with for some time. Normally I would not give the lesser races a second glance, but the master of elements must have seen something in you.”\n\nIt stretches its joints and looks around. “Hmm, you must be having a rough time with this weather. I could offer you something that may help.”
+GH.Elementalist-2_Option_1	Accept the gift of the Savvas.
+GH.Elementalist-2_Option_1_Outcome	The Savvas concentrates and lays its hand on you. You suddenly feel very warm and all the fog within ten feet of you dissipates.\n\n“There you go. That should make things easier. The effect should last for at least as long as the fog does. Have a pleasant day!”
+GH.Elementalist-2_Option_2	Downplay your struggle and politely decline the Savvas's offer.
+GH.Elementalist-2_Option_2_Outcome	“Ah, I see,” the Savvas says. “You’d rather grow from an experience than take the easy way out. A noble path.”\n\nThe Savvas slaps you on the back. “Well, get to it, then! It’s just fog after all. You’ll survive."
+GH.Elementalist-3_Front	As you walk through some foothills, the ground suddenly shakes violently beneath you. Two massive demons built of earth and stone rise up in front of you.\n\n“Today we shall feast on your flesh, foolish travelers!”\n\nJust as the demons take a step toward you, a massive ball of fire streaks through the air from behind and connects squarely with one of the demons, which erupts into a pillar of flame. Then lightning streaks toward the other, destroying one of its arms.\n\nLooking around, you see the old Savvas you met earlier, who continues to throw out powerful attacks until the demons are forced to retreat.\n\n“Well, fancy meeting you again!”
+GH.Elementalist-3_Option_1	Thank the Savvas for his timely assistance.
+GH.Elementalist-3_Option_1_Outcome	“More and more demons around these parts these days. Stopping them from attacking travelers is becoming a time-intensive job, but at least it’s fun.”\n\nThe Savvas smiles at you and then turns to leave. “Have a pleasant day!”
+GH.Elementalist-3_Option_2	Admonish the Savvas, claiming you could have handled the demons without his help.
+GH.Elementalist-3_Option_2_Outcome	The Savvas adopts a look of serious contemplation. “You are right, of course. I presumed to think that a lesser race would need my help, but I forgot your dedication to growth and learning. I have made a grave mistake and must now beg your forgiveness.”\n\nIt holds out a small trinket toward you. “Please, accept this with my apologies.”
+Elementalist_FullName	Elementalist
+CODEX_Hero_Elementalist_Title	Elementalist
+CODEX_HeroInfo_Elementalist	<b>Role:</b> Ranged Damage\n<b>Difficulty:</b> Very High\n\nAlmost every one of your abilities changes with the element you spend. The same attack can push, stun, pierce or hit harder depending on whether you spend <sprite name=CreateFire>, <sprite name=CreateIce>, <sprite name=CreateAir>, <sprite name=CreateEarth> or <sprite name=CreateDark>.\n\nPlan your turns around which elements are strong, and make the ones you need. <i>Formless Power</i> lets you create an element of your choice at the end of each turn.\n\nWithout elements your attacks are weak, so keep them flowing. You can also heal and shield your allies, and summon helpers.\n\n<b>Strengths:</b>\n• Abilities have wide array of options\n• Very effective at range\n• Great at infusing elements\n\n<b>Weaknesses:</b>\n• Weak with no other element infusers\n• Can have turns where not much is possible\n• Reading his ability cards can cause migraines
+PERK_Soothsinger_01_Name	Steady Voice
+PERK_Soothsinger_02_Name	Composure
+PERK_Soothsinger_03_Name	Stunning Note
+PERK_Soothsinger_04_Name	Binding Chord
+PERK_Soothsinger_05_Name	Disarming Tune
+PERK_Soothsinger_06_Name	Cutting Verse
+PERK_Soothsinger_07_Name	Venomous Verse
+PERK_Soothsinger_08_Name	Cursed Verse
+PERK_Soothsinger_09_Name	Maddening Verse
+PERK_Soothsinger_10_Name	Crescendo
+PERK_Soothsinger_11_Name	Encore
+PERK_Soothsinger_12_Name	Dirge
+PERK_Soothsinger_13_Name	Storyteller
+PERK_Soothsinger_13_Desc	At the end of each scenario, each character in that scenario gains 8 experience if you successfully completed your battle goal
+Soothsinger_MASTERY_1_Name	Set List
+Soothsinger_MASTERY_1_Desc	On your first turn of the scenario and the turn after each of your rests, perform one Song action that you have not yet performed this scenario
+Soothsinger_MASTERY_2_Name	Full Deck
+Soothsinger_MASTERY_2_Desc	Have all 10 monster <sprite name=Curse> cards and all 10 <sprite name=Bless> cards in modifier decks at the same time
+Event_GH.Soothsinger_Text	The last song is in the Tavern, which is where all of them were, and the whole outpost is there to hear it. The Soothsinger plays it twice: once the way she played it on the ice, fast and hard, the one that put spine into the guard when the Algox came over the wall, and once slowly, so that everyone can learn the words.\nThey do. By the end of the week the lumber crews are singing it on the road and getting it wrong, which she says is the point. "A song you have to be told is a song you forget," she tells you, packing the lute with the care other people give to children. "A song you get wrong is yours."\nShe is going south with the merchants, to the Capital, where there are halls with proper ceilings and audiences who have never heard what a Quatryl can do with eight strings and a grudge. She expects to be rich by midsummer. Knowing her, she will be.\nThe Tavern keeps the song. It is the one they play when the walls hold, and it is still, years on, slightly wrong.
+Event_GH.Soothsinger_Name	Soothsinger Retires
+GH.Soothsinger-1_Front	Posters spring up in town announcing the performance of a master Quatryl musician and her merry band of performers. Looking closely at the image, you’re pretty sure you recognize that foppish feathered hat.\n\nThe poster says the next show is tonight. You decide to attend for one purpose or another.
+GH.Soothsinger-1_Option_1	Go to the show and cheer on the Soothsinger.
+GH.Soothsinger-1_Option_1_Outcome	You go and enjoy the Soothsinger’s concert immensely. There is even a song or two about your party and its adventures around Gloomhaven.
+GH.Soothsinger-1_Option_2	Seems like a good opportunity to pick some pockets while people are distracted.
+GH.Soothsinger-1_Option_2_Outcome	You put forth a valiant effort, but, due to a lack of skill, you don’t make much headway parting people from their money. At least the music is good.
+GH.Soothsinger-2_Front	Deep inside a dense forest, you begin to hear the jangling of bells and see a small troupe of performers approaching you through the trees.\n\n“Well, look who it is!” The small voice belongs to a garishly dressed female Quatryl with a lute and a feathered hat. “Fancy running into you out here.” \n\n“This actually may be a stroke of luck,” the Soothsinger says. “You see, my compatriots and I seem to be a bit lost. We were headed toward the Capital when my drummer said he knew a shortcut. Now here we are in the middle of a forest without an inkling of a clue. I don’t suppose you could find it in your heart to escort us back to the main road, could you?"
+GH.Soothsinger-2_Option_1	Take the time to escort the troupe back out of the forest.
+GH.Soothsinger-2_Option_1_Outcome	While escorting the Soothsinger and her troupe out of the forest, you are able to catch up a bit. She is very happy now as a traveling performer, playing to sold-out concerts across the land. When you reach the main road, you say your good-byes and then make the long trek back to where you were going.
+GH.Soothsinger-2_Option_2	Give detailed directions about the way out and hope that is sufficient.
+GH.Soothsinger-2_Option_2_Outcome	You hem and haw and then give some vague directions back to the road. The Soothsinger looks at you skeptically and heads off.
+Soothsinger_FullName	Soothsinger
+CODEX_Hero_Soothsinger_Title	Soothsinger
+Soothsinger_DESCRIPTION	Quatryls are not only master Engineers, but their impressive manual dexterity allows them to also become excellent Bards. These "Soothsingers" are able to empower their allies to great feats and bring their enemies low with a single strum of their lute. Their Song system works in a similar way to the Mindthief's Augments, and she is especially powerful in larger parties, but has low damage output.
+CODEX_HeroInfo_Soothsinger	<b>Role:</b> Ranged Support\n<b>Difficulty:</b> High\n\nYou play <b>songs</b>. A song is a lasting card that helps every ally while it plays: more attack or range, healing each turn, <sprite name=Shield>, or making every enemy attack at disadvantage. Only one song plays at a time; playing a new one ends the old, unless a card lets you sing two at once.\n\nYour other cards work at range on whole groups: you <sprite name=Stun>, <sprite name=Disarm>, <sprite name=Immobilize> and <sprite name=Curse> enemies, <sprite name=Bless> allies, and command allies to attack or move on your turn.\n\nYour own attacks are weak, so stay out of reach and let your party do the hitting.\n\n<b>Strengths:</b>\n• Wide range of powerful buffs\n• Varied selection of lower half abilities\n• Effective at crowd control\n\n<b>Weaknesses:</b>\n• Poor damage dealer\n• Weaker in smaller parties\n• Dubious fashion sense
+PERK_Mindthief_01_Name	Nimble
+PERK_Mindthief_02_Name	Hobbling Bite
+PERK_Mindthief_03_Name	Steadied
+PERK_Mindthief_04_Name	Mind Pull
+PERK_Mindthief_05_Name	Confusion
+PERK_Mindthief_06_Name	Sharpened Claws
+PERK_Mindthief_07_Name	Cold Snap
+PERK_Mindthief_08_Name	Frenzy
+PERK_Mindthief_09_Name	Stunning Blow
+PERK_Mindthief_10_Name	Disarming Trick
+PERK_Mindthief_11_Name	Unfazed
+PERK_Mindthief_12_Name	Lying Low
+Mindthief_MASTERY_1_Name	Thought Thief
+Mindthief_MASTERY_1_Desc	Trigger the on-attack effect of four different Augments thrice each
+Mindthief_MASTERY_2_Name	Untouchable
+Mindthief_MASTERY_2_Desc	Never be targeted by an attack
+Event_GH.Mindthief_Text	The rats go first. For three days the outpost's granary is quieter than anyone can remember, and the Craftsman, who has fought the vermin for years, walks around looking cheated. Then the Mindthief comes to find you, a swarm's worth of small warm bodies gone from the folds of her cloak, and tells you she has sent them ahead.\n"There is a nest in the Copperneck," she says, "a big one. They have been talking about it for a month." You ask who. She looks at you the way she looks at anyone who asks a question she has already answered in their head. "The rats."\nShe leaves you her blade, the thin wicked one, and with it a thought she presses into you so firmly that you still feel it years later whenever you draw it: nothing in front of you is as dangerous as what is behind it. You have never been sure whether it was advice or a joke at your expense.\nBy the time the Craftsman has finished celebrating, every rat in Frosthaven is back, and the granary is exactly as it was. The Mindthief is not.
+Event_GH.Mindthief_Name	Mindthief Retires
+GH.Mindthief-1_Front	Walking near Gloomhaven Square, you see a peculiar scene. A group of guards is dragging along a Vermling in tattered robes toward the Ghost Fortress. Getting a little closer, you\nrecognize the Mindthief.\n\n“Hssss,” she spits. “Why do you do this? I came to you! I tell you that this town is being poisoned, and you respond by imprisoning me?”\n\n“We’ll see what the Captain of the Guard has to say about this,” one of her captors says. “Keep moving!”
+GH.Mindthief-1_Option_1	Intervene with the guards and find out what is going on.
+GH.Mindthief-1_Option_1_Outcome	The guards look incredibly perturbed when you step in front of them and ask that they leave the Mindthief to you. After some effort, they begrudgingly hand her over. The Mindthief thanks you, explaining that her colony in the sewers is being poisoned, and the poison is quickly migrating to the city’s water supply. She says she’s tracked the source to a small cove along the Hook Coast.
+GH.Mindthief-1_Option_2	Let the guards continue their business and just continue with yours.
+GH.Mindthief-1_Option_2_Outcome	The Mindthief flicks her tail and throws insults around, but it doesn’t seem to have any positive effect. She is led away and out of view. You get about your business, hoping that bit about the town being poisoned wasn’t too serious.
+GH.Mindthief-2_Front	A single Vermling jumps out of the brush at you, surprising you briefly. Within moments, though, you have your weapons out and pressed against his throat.\n\n“EEEEEEEeeeahh!” The Vermling drops his weapon and cowers. “No attack! My brothers in the bushes say you had stink of city-dwelling outcast on you. I wanted to be sure.”\n\nThe Vermling waves his hands. “It’s not bad! Just curious. Being stinky city-dwelling outcast is fine. Please, don’t hurt me!”
+GH.Mindthief-2_Option_1	Move on, leave the strange Vermling in peace.
+GH.Mindthief-2_Option_1_Outcome	“Stink very faint,” the Vermling continues as you walk on. “Outcast no longer with you, but I still smell it!”\n\nHe then jumps back into the brush. Vermlings are very odd creatures.
+GH.Mindthief-2_Option_2	Kill the savage little beast.
+GH.Mindthief-2_Option_2_Outcome	You attack the Vermling anyway, despite his protests. It turns out he wasn’t lying about his “brothers” nearby, though. As you wipe the blood from your blade, ten more of the little furry creatures jump out at you, brandishing small knives. They are not nearly as easy to dispatch.
+GH.Mindthief-3_Front	“I assume you are aware of an increased amount of sickness in the city.”\n\nYou were summoned to the Ghost Fortress and now stand before the Captain of the Guard.\n\n“We believe it could have something to do with a poisoning threat brought to our attention by your Mindthief friend a while ago. We ignored it, but now she is nowhere to be found, the Hook Coast is a bed of disease, and Gloomhaven proper is on its way there, too.”\n\nHe looks at you firmly. “I need you to head down to the Hook Coast and figure out what is going on. Then eliminate the source of the poison."
+GH.Mindthief-3_Option_1	Agree to help.
+GH.Mindthief-3_Option_1_Outcome	The Hook Coast is outside the walls of Gloomhaven and can be a dangerous place. And since this spread of poison, the city has become even more defenseless than normal. You hope you’ll be able to find a solution to the problem quickly.
+GH.Mindthief-3_Option_2	Tell the captain to fix his own problem.
+GH.Mindthief-3_Option_2_Outcome	The Captain of the Guard sighs.\n\n“I really thought you were the ones for the job. What business could you possibly have that is more important than making sure this city is safe?”\n\nHe holds up his hand. “No matter. Fine, just get out of here! We will deal with this ourselves.”
+Mindthief_FullName	Mindthief
+CODEX_Hero_Mindthief_Title	Mindthief
+CODEX_HeroInfo_Mindthief	<b>Role:</b> Melee Damage\n<b>Difficulty:</b> High\n\nYou use <b>augments</b>: lasting cards that add an effect to every melee attack you make, such as extra damage, healing, <sprite name=Shield>, <sprite name=Poison> or <sprite name=Stun>. Only a limited number can be active at once, so choose the ones that suit the fight.\n\nYour other strength is control. Several cards make an enemy attack itself or its neighbour, or move where you want it, and a few let you command an ally.\n\nYour attacks hit harder against enemies with negative conditions. <sprite name=CreateIce> and <sprite name=CreateDark> add stuns and extra attacks. You move fast and can summon rats, but you are fragile.\n\n<b>Strengths:</b>\n• Powerful Augment effects on melee attacks\n• Mind-control powers\n• Access to summons\n\n<b>Weaknesses:</b>\n• Fragile melee character\n• Managing Augments can be fiddly\n• Often confused for a giant rat
 Event__Text	Their personal quest complete, the mercenary leaves Frosthaven for good. Someone else will take up the fight.
 GiveSupplyCard	Give Medical Pack

@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ColdFire$
+Character: SpellweaverID
+ID: 20074
+Level: 3
+Initiative: 67
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+                Range: 3
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,E"
+                MultiPassAttack: False
+                AnimOverload: TargetedColdFire
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireAttackBuff:
+                        ParentName: TAttack
+                        Strength: 2
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceStun:
+                        ParentName: TAttack
+                        Conditions: Stun
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 2
+                Target: -1
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Row: "<sprite name=Range> *TAttack.Range*"
+            - Row: "<size=20%> "
+            - Consume:
+                Name: TCFire
+                Text: "+2 <sprite name=Attack>"
+            - Row: "<size=20%> "
+            - Consume:
+                Name: TCIce
+                Text: "<sprite name=Stun>"
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"

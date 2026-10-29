@@ -1,0 +1,76 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PhantasmalKiller$
+Character: MindthiefID
+ID: 20174
+Level: 9
+Initiative: 67
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Augment:
+                    Type: Melee
+                    AugmentIsBonus: True
+                    Abilities:
+                        TAugment:
+                            AddActiveBonus:
+                                Attack: 0
+                            ActiveBonus:
+                                Consuming: Dark
+                                IsToggleBonus: True
+                                Behaviour: OverrideAbility
+                                AttackType: Melee
+                                ActiveBonusAbilityOverrides:
+                                    BCTypeOverride:
+                                        AbilityType: Kill
+                                        Filter:
+                                            TargetType: Enemy
+                                            EnemyType: Normal
+                            Augment:
+                                Type: Melee
+                            PreviewEffectText: "<sprite name=ConsumeDark>:<sprite name=AA_Kill>"
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BLoot:
+                Loot: 1
+                Target: -1                
+            BInvis:
+                Invisible:
+                Filter: Self
+        Infuse: Dark
+Layout:
+    Top:
+        - Augment:
+            AugmentIcon: Positive_AttackPlus
+            ParentAbility: TAugment
+            ActiveBonusLayout: "$Augment_OnYourMeleeAttacks$ <size=150%><voffset=-2><sprite name=ConsumeDark></voffset><size=80%>: Kill one normal target instead"
+            AugmentAbilityLayout:
+                - Row: "<sprite name=ConsumeDark><voffset=2>: Kill one normal target instead"
+            NormalContentLayout:
+                - ColumnWidths: "20,60,20"
+                - Column:
+                - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
+        - Divider:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Invisible>"
+            - Column:
+                - AddedEffect: "$FH/target_self$"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Dark

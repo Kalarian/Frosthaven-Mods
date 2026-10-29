@@ -1,0 +1,27 @@
+Parser: Character
+ID: SpellweaverID
+LocKey: $Spellweaver$
+Model: Spellweaver
+Race: Orchid
+Traits: [ Arcane, Educated, Resourceful ]
+Complexity: 3
+ElementalAffinities: [ Ice ]
+MasteryIDs: [ Spellweaver_MASTERY_1, Spellweaver_MASTERY_2 ]
+RetireCampaignSection: GH.Spellweaver
+DefaultSkin: 1
+# PlayerLevel:  [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
+HealthTable:    [  6,   7,   8,   9,  10,  11,  12,  13,  14 ]
+NumberAbilityCardsInBattle: 8
+Role: $Spellweaver_ROLE$
+Description: $Spellweaver_DESCRIPTION$
+Difficulty: $DIFFICULTY_HIGH$
+Strengths: $Spellweaver_STRENGTHS$
+Weaknesses: $Spellweaver_WEAKNESSES$
+Adventure_Description: $Spellweaver_ADVENTURE_DESCRIPTION$
+HeroStats:
+    Melee: 1
+    Ranged: 5
+    Mobility: 2
+    Support: 2
+    Defense: 1
+    Control: 3

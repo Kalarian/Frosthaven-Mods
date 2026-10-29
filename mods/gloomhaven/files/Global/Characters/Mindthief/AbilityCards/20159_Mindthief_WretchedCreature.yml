@@ -1,0 +1,47 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WretchedCreature$
+Character: MindthiefID
+ID: 20159
+Level: 2
+Initiative: 84
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: GiantRatID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCDark:
+                Elements: Dark
+                Abilities:
+                    BCDarkCurse:
+                        ParentName: BNull
+                        Curse: True
+                        Filter: Enemy
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GiantRat$
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCDark
+            Text:
+                - Row: "<b><size=130%><sprite name=Curse>"
+                - Row: "$Target_OneAdjacentEnemy$"

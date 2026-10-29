@@ -1,0 +1,72 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_IceSpikes$
+Character: ElementalistID
+ID: 20455
+Level: 1
+Initiative: 40
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Range: 3
+                AnimOverload: AreaHexIce
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,E"
+                MultiPassAttack: False
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Wound
+                XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: TargetFloorIce
+                Conditions: Immobilize
+        Infuse: Ice
+        Infuse: Earth
+        XP: 1
+Layout:
+    Top:
+        - ColumnWidths: "65,35"
+        - Column:
+            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<sprite name=Range> *TAttack.Range*"
+            - Row: "<size=50%> "
+            - Consume:
+                Name: TCFire
+                Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr><sprite name=Wound>, <size=130%> <sprite name=XP1></nobr>"
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<sprite name=Range>*BAttack.Range* @BAttack.Range@"
+                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "20, 20, 20, 20, 20"
+            - Column:
+            - Column:
+                - Infuse: Ice
+            - Column:
+                - Infuse: Earth
+            - Column:
+            - Column:

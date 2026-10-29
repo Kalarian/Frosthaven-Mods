@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WardingDagger$
+Character: SoothsingerID
+ID: 20353
+Level: 1
+Initiative: 56
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Conditions: Immobilize
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BShield:
+                Shield:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter: [Self]
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Ally]
+                AnimOverload: PlayPositiveTuneShield
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "20,30,30,20"
+            - Column:
+            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+            - Column:
+    Bottom:
+        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*, <b></b> $Affect_AllAdjacentAllies$"
+            Layout:
+                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<b></b> $Affect_AllAdjacentAllies$"
