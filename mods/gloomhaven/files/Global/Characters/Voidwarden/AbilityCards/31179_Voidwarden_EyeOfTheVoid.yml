@@ -23,12 +23,14 @@ Data:
                                     Range: 3
                                     Target: 1
                                     StrengthIsBase: True
-                                    Filter: Enemy
                                     TargetIsBase: True
+                                    Filter:
+                                        TargetType: Enemy
+                                        Vars:
+                                            ValidatePoisoned: target.Tokens.HasKey(CCondition.ENegativeCondition.Poison)
                                     RangeIsBase: True
                                     AnimOverload: RangedAttack
                             ControlDurationType: ControlForOneAction
-                            TreatControlAbilityParentAsParent: True
                         Range: 3
                         Target: -1
                         Filter: Enemy

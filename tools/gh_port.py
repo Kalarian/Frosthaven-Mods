@@ -284,6 +284,12 @@ CLASS_ICONS = {
     "RedGuard": {"TActive": "Positive_Retaliate",                        # Flame Shroud: enemies entering adjacent hexes suffer 2
                  "TDamagedAfterEachAttackActive": "Positive_Wound"},     # Strangling Chain: the target suffers 1 each time it is attacked
     "Demolitionist": {"TChangeCharacterModel": "Positive_Shield_Health"},  # Mech Suit: +5 hit points, Shield 1
+    # Group 4
+    "Elementalist": {"BActive": "Positive_FireLightInfuse_Wild",         # Shaping the Aether: infuse any element each turn
+                     "TActive": "Positive_Heal_IceAirConsume"},          # Volatile Consumption: a consume brings damage or a heal
+    "Soothsinger": {"TAddSong": "Positive_Cards"},                       # Melody and Harmony: two songs active at once
+    "Mindthief": {"BAugment": "Positive_Cards",                          # Mass Hysteria: two augments active at once
+                  "BOverrideAugmentAttackType": "Positive_Cards_RangedForm"},  # Psychic Projection: ranged attacks take the augments
 }
 
 # Slot shape for "Enhancements: N", by the ability key it sits under, so a ported card enhances the way Frosthaven's
@@ -344,11 +350,20 @@ CARD_FIXES = {
     # TreatAsNonSubAbility (Banner Spear Incendiary Throw, Deepwraith Slipping into Death, Snowdancer Frigid Growth),
     # which takes the path that rebuilds the list. UseParentRangeType is read only by attacks. The forced attack names
     # its filter so it takes the poison's target (CAbilityAttack: parent targets kept only when the filters match).
+    # With the control working, TreatControlAbilityParentAsParent made the forced attack a sub-ability of the poison,
+    # and a sub-ability attack under a non-attack parent gets a made-up area whose hex flags are never filled
+    # (CAbilityAttack.Perform "SubAbilityAttackArea"; CAttackSummary.UpdateTargetData KeyNotFound, the error screen,
+    # bench 2026-10-28 23:28). No Frosthaven card forces an attack under a parent-as-parent control. Without it the
+    # attack is a plain monster attack, as Frosthaven's Lurker Mindsnipper Turn the Weak; APPROXIMATION (the user to
+    # confirm): it may target any POISONED enemy within range 3, which always includes the just-poisoned target.
     31179: [
         (r"^([ \t]+)UseParentRangeType: True(\r?)$",
          lambda m: f"{m.group(1)}TreatAsNonSubAbility: True{m.group(2)}"),
         (r"^([ \t]+)TargetIsBase: True(\r?)$",
-         lambda m: f"{m.group(1)}Filter: Enemy{m.group(2)}\n{m.group(1)}TargetIsBase: True{m.group(2)}"),
+         lambda m: (f"{m.group(1)}TargetIsBase: True{m.group(2)}\n{m.group(1)}Filter:{m.group(2)}\n"
+                    f"{m.group(1)}    TargetType: Enemy{m.group(2)}\n{m.group(1)}    Vars:{m.group(2)}\n"
+                    f"{m.group(1)}        ValidatePoisoned: target.Tokens.HasKey(CCondition.ENegativeCondition.Poison){m.group(2)}")),
+        (r"^[ \t]+TreatControlAbilityParentAsParent: True\r?\n", ""),
     ],
     # Blade Dance (Red Guard), bottom: "Move 4, Jump; all enemies moved through suffer 1 damage". The same targeting
     # trap as Trample bottom (CAbilityDamage asks GetValidActorsInRange, whose move-path branch needs Targeting other
