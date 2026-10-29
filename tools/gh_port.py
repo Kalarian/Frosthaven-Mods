@@ -376,6 +376,14 @@ CARD_FIXES = {
         (r"^( {12})TDestroyObstacleAttack:\r?\n {16}MergedDestroyObstacleAttack:\r?\n {20}Abilities:\r?\n((?: {24,}.*\r?\n)+)",
          lambda m: _destroy_then_attack(m.group(2))),
     ],
+    # Negative Energy (Summoner), bottom: "Curse all enemies adjacent to your summons". The curse is a plain sub-ability
+    # aimed around its NullTargeting parent's targets: without TreatAsNonSubAbility the start copies the parent's own
+    # targets (the summons) and the adjacency rebuild never clears them, so nobody is cursed (the Eye of the Void
+    # finding, 2026-10-28). Virulent Strain bottom, the same shape with the flag, passed in the user's own play.
+    20255: [
+        (r"^([ \t]+)AllTargetsAdjacentToParentTarget: True(\r?)$",
+         lambda m: f"{m.group(1)}AllTargetsAdjacentToParentTarget: True{m.group(2)}\n{m.group(1)}TreatAsNonSubAbility: True{m.group(2)}"),
+    ],
     # Blade Dance (Red Guard), bottom: "Move 4, Jump; all enemies moved through suffer 1 damage". The same targeting
     # trap as Trample bottom (CAbilityDamage asks GetValidActorsInRange, whose move-path branch needs Targeting other
     # than Range): Targeting All.
