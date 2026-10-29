@@ -1,11 +1,11 @@
 Frosthaven Companion
 ====================
 
-An optional helper for the Frosthaven mod pack. You don't need it to play with the mods: the plain
-"Install Frosthaven Mods.exe" installer does everything the game needs. The companion adds:
+The way to install and update the Frosthaven mod pack (since v0.9.5 the release has no separate installer). It has:
 
-- Mods: which mod pack version you have, whether there's a newer one, and one-click update, reinstall or
-  removal (it runs the same installer for you). It won't change anything while Frosthaven is running. Below
+- Mods: which mod pack version you have, whether there's a newer one, and one-click install, update, reinstall or
+  removal. A new mod pack comes as a new companion: when the tab says a newer companion is out, click
+  "Update the app" first, then update the mods. It won't change anything while Frosthaven is running. Below
   that, the mod guide: what each mod does and how to use it.
 - Scenario map: every scenario, what unlocks it and what you've done, coloured by your campaign. It updates by
   itself when the game autosaves. The host needs the "Scenario map file" house rule on (Options, Custom Rules).

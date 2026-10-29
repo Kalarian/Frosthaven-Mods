@@ -45,7 +45,7 @@ The four Jaws of the Lion classes are open from the start. The others arrive gra
 your campaign lets the party pick one of two new Gloomhaven classes. If you'd rather have them all at once, there's a
 switch for that.
 
-You don't need to own Gloomhaven; the installer brings everything.
+You don't need to own Gloomhaven; the companion brings everything.
 
 ### Companion app (optional)
 
@@ -62,13 +62,14 @@ install. The mods work fine without it.
 
 ## Installing
 
-1. Download **`Install Frosthaven Mods.exe`** from the
-   [latest release](https://github.com/Kalarian/Frosthaven-Mods/releases/latest).
+1. Download **`Frosthaven-Companion-<version>.zip`** from the
+   [latest release](https://github.com/Kalarian/Frosthaven-Mods/releases/latest) and unzip it anywhere.
 2. Close Frosthaven.
-3. Run the installer and click **Install / Update**.
+3. Run **Frosthaven Companion.exe** and click **Install** in its Mods tab.
 
-That's it. The installer finds the game through Steam and always fetches the newest version, so the same file updates
-you later too. Windows may warn about an unknown publisher the first time; choose **More info > Run anyway**.
+That's it. The companion finds the game through Steam. When a new version is out, its Mods tab says so: click
+**Update the app**, then **Update**. Windows may warn about an unknown publisher the first time; choose **More info >
+Run anyway**. (The standalone installer of earlier releases is gone: the companion does everything it did.)
 
 ## Turning mods on
 
@@ -83,18 +84,18 @@ The [mod guide](docs/Frosthaven-Mods-Guide.pdf) explains each mod in a few lines
 ## Playing together
 
 **Everyone in a co-op session needs the same version of the mods.** The game doesn't check this when you join. A
-mismatch shows up later as an "out of sync" error mid-scenario. When in doubt, everyone runs the installer again before
-you play; it shows the version it installed.
+mismatch shows up later as an "out of sync" error mid-scenario. When in doubt, everyone opens the companion before you play:
+its Mods tab shows the installed version and offers any update.
 
 ## Removing the mods
 
-Run the installer and click **Remove mods**. It puts the game's original files back. Saves are never touched.
+In the companion's Mods tab, click **Remove the mods**. It puts the game's original files back. Saves are never touched.
 
 One exception: a campaign that has used the **Gloomhaven classes** needs the pack to load. To keep such a campaign
 playable without the mods, use **Copy without content packs** from the game's Save or Load window first. It makes a
 copy of the campaign that loads in the unmodded game.
 
-After a Steam update to Frosthaven, run the installer again.
+After a Steam update to Frosthaven, open the companion and click **Reinstall**.
 
 ## If something goes wrong
 

@@ -11,6 +11,7 @@ import urllib.request
 
 import game
 import paths
+import updater
 
 INSTALLER_NAME = "Install Frosthaven Mods.exe"
 _lock = threading.Lock()
@@ -50,6 +51,15 @@ def start(action):
         return False, "Frosthaven wasn't found. Is it installed through Steam?"
     if game.is_running():
         return False, "Close Frosthaven first: the mods can't be changed while the game is running."
+    # the companion installs the pack it carries (releases have no separate pack or installer since v0.9.5): a newer
+    # companion is the newer pack, so an install from this one would put the old pack back
+    if action == "install":
+        try:
+            newer = updater.available()
+        except Exception:
+            newer = None
+        if newer:
+            return False, f"Update the app first (Update the app, below): companion v{newer[0]} carries the newest mods."
     with _lock:
         if _job["running"]:
             return False, "Already working on it."
