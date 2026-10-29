@@ -27,6 +27,7 @@ Data:
                         Target: -1
                         Filter: Enemy
                         AllTargetsAdjacentToParentTarget: True
+                        TreatAsNonSubAbility: True
         Infuse: Dark
 Layout:
     Top:
