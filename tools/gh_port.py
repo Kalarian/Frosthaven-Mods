@@ -324,6 +324,25 @@ ANIM_OVERLOAD_LINE = re.compile(r"^([ \t]*AnimOverload:[ \t]*)(\w+)(?=[ \t]*\r?$
 # converted card ID: [(pattern, replacement)] on the converted file; a pattern that no longer matches stops the
 # conversion, so a fix never silently stops applying. TEXT_FIXES replace the card text to match.
 CARD_FIXES = {
+    # Trample (Brute), bottom: "Move 4, Jump; Attack 2 targeting all enemies moved through". As a merged move-attack,
+    # Frosthaven picks the attack's targets when the destination is clicked, before the walk (CAbilityMergedMoveAttack
+    # TileSelected), and by Range: the move-path branch of SharedAbilityTargeting.GetValidActorsInRange is reached only
+    # when Targeting isn't Range. So only the enemy beside the start hex was hit (the user, 2026-10-28, and every bench
+    # play), and a move cut short re-ran the finished attack (the one freeze). A plain Move, then its own Attack with
+    # Targeting All, reads the enemies the walk really passed.
+    20001: [
+        (r"^([ \t]+)BMoveAttack:\r?\n[ \t]+MergedMoveAttack:\r?\n[ \t]+Abilities:\r?\n((?:\1            .*\r?\n)+)",
+         lambda m: re.sub(r"^            ", "", m.group(2), flags=re.M)),
+        (r"^([ \t]+)AllTargetsOnMovePath: True(\r?)$",
+         lambda m: f"{m.group(1)}AllTargetsOnMovePath: True{m.group(2)}\n{m.group(1)}Targeting: All{m.group(2)}\n{m.group(1)}Target: -1{m.group(2)}"),
+    ],
+    # Blade Dance (Red Guard), bottom: "Move 4, Jump; all enemies moved through suffer 1 damage". The same targeting
+    # trap as Trample bottom (CAbilityDamage asks GetValidActorsInRange, whose move-path branch needs Targeting other
+    # than Range): Targeting All.
+    31235: [
+        (r"^([ \t]+)AllTargetsOnMovePath: True(\r?)$",
+         lambda m: f"{m.group(1)}AllTargetsOnMovePath: True{m.group(2)}\n{m.group(1)}Targeting: All{m.group(2)}"),
+    ],
     # Rock Slide (Cragheart), top: "All allies and enemies adjacent to one or more of the created obstacles suffer 2
     # damage". Without AllTargetsAdjacentToParentTargets Frosthaven's damage sub-ability targets the create's own hexes
     # (CAbilityDamage: TilesInRange = ParentAbility.TilesSelected), which hold the new rocks and never a figure: the 2

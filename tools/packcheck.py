@@ -179,6 +179,21 @@ def check_pack(pack):
             first = next(iter(abilities.values()), None) if isinstance(abilities, dict) else None
             if isinstance(first, dict) and first.get("AutoTrigger") is True:
                 problems.append(f"{rel}: {half}/{next(iter(abilities))}: AutoTrigger on the half's first ability (played on the click, no confirm, undo or skip)")
+            # an attack or damage on "every enemy moved through" reads the move's path only when its Targeting isn't
+            # Range (the default), and a merged move-attack picks its targets before the walk: only the enemy beside the
+            # start or end hex is hit (Trample bottom, the user 2026-10-28)
+            def path_targets(node, merged=False):
+                if not isinstance(node, dict):
+                    return
+                for k, v in node.items():
+                    if isinstance(v, dict):
+                        if v.get("AllTargetsOnMovePath") is True and ("Attack" in v or "Damage" in v):
+                            if merged:
+                                problems.append(f"{rel}: {half}/{k}: a path attack inside a merged move-attack (targets picked before the walk)")
+                            elif v.get("Targeting", "Range") == "Range":
+                                problems.append(f"{rel}: {half}/{k}: AllTargetsOnMovePath with Range targeting (only adjacent enemies are hit): add Targeting: All")
+                        path_targets(v, merged or k.startswith("MergedMove"))
+            path_targets(abilities)
             for ab, props in abilities.items():
                 check_ability(rel, f"{half}/{ab}", props, problems, warnings)
                 # a summon's card is drawn from the summon's definition (CreateLayout.CreateSummon throws without it)

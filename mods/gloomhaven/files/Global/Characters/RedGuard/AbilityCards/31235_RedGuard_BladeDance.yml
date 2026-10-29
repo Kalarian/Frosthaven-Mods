@@ -56,6 +56,7 @@ Data:
                 Damage: 1
                 Target: -1
                 AllTargetsOnMovePath: True
+                Targeting: All
                 Filter: Enemy
         Consumes:
             BCLight:
