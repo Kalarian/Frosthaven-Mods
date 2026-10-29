@@ -8,30 +8,30 @@ Discard: [Lost,Discard]
 Data:
     Top:
         Abilities:
-            TDestroyObstacleAttack:
-                MergedDestroyObstacleAttack:
-                    Abilities:
-                        TDestroyObstacle:
-                            DestroyObstacle: True
-                            DestroyObstacleData:
-                                CanDestroyObstaclesWithHP: True
-                            Target: 1
-                            SpawnDelay: 1.5
-                            AbilityXP: 1
-                            AnimOverload: None
-                        TAttack:
-                            Attack:
-                                Amount: 4
-                                DiamondEnhancements: 1
-                            AnimOverload: TargetedDemolition
-                            Range: 1
-                            Target: -1
-                            Filter: Enemy
-                            IgnoreParentAreaOfEffect: True
-                            SubAbilities:
-                                TAttackSubPush:
-                                    IsInlineSubAbility: True
-                                    Push: 2
+            TDestroyObstacle:
+                DestroyObstacle: True
+                DestroyObstacleData:
+                    CanDestroyObstaclesWithHP: True
+                Target: 1
+                SpawnDelay: 1.5
+                AbilityXP: 1
+                AnimOverload: None
+                SubAbilities:
+                    TAttack:
+                        Attack:
+                            Amount: 4
+                            DiamondEnhancements: 1
+                        AnimOverload: TargetedDemolition
+                        Range: 1
+                        Target: -1
+                        Filter: Enemy
+                        IgnoreParentAreaOfEffect: True
+                        SubAbilities:
+                            TAttackSubPush:
+                                IsInlineSubAbility: True
+                                Push: 2
+                        TreatAsNonSubAbility: True
+                        UseParentTiles: False
         Consumes:
             TCEarth:
                 Elements: Earth

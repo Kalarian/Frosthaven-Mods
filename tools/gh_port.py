@@ -365,6 +365,14 @@ CARD_FIXES = {
                     f"{m.group(1)}        ValidatePoisoned: target.Tokens.HasKey(CCondition.ENegativeCondition.Poison){m.group(2)}")),
         (r"^[ \t]+TreatControlAbilityParentAsParent: True\r?\n", ""),
     ],
+    # Collateral Damage (Demolitionist), top: "Destroy one adjacent obstacle. If you do, Attack 4 on all adjacent enemies,
+    # Push 2". No Frosthaven card uses a merged destroy-attack: CAbilityMergedDestroyAttack.TileSelected hands the
+    # obstacle's hex to the attack too, so the attack aimed at the rock and hit nobody (two benches, 2026-10-28). Written
+    # as Rubble top is (passes): the destroy, with the attack as its sub-ability (dropped when nothing was destroyed).
+    31108: [
+        (r"^( {12})TDestroyObstacleAttack:\r?\n {16}MergedDestroyObstacleAttack:\r?\n {20}Abilities:\r?\n((?: {24,}.*\r?\n)+)",
+         lambda m: _destroy_then_attack(m.group(2))),
+    ],
     # Blade Dance (Red Guard), bottom: "Move 4, Jump; all enemies moved through suffer 1 damage". The same targeting
     # trap as Trample bottom (CAbilityDamage asks GetValidActorsInRange, whose move-path branch needs Targeting other
     # than Range): Targeting All.
@@ -460,6 +468,17 @@ TEXT_FIXES = {
     # waited for the obstacle (2026-10-27, Group 2 pass)
     "GUI_StonePummel_Bottom_HelpBoxTooltip": "Stone Pummel: choose an adjacent obstacle to destroy for +3 Attack, or skip.",
 }
+
+
+def _destroy_then_attack(block):
+    """A merged destroy-attack's two parts (24-space names) as one destroy whose sub-ability is the attack."""
+    eol = "\r\n" if "\r\n" in block else "\n"
+    lines = block.split(eol)[:-1] if block.endswith(eol) else block.split(eol)
+    cut = next(i for i, ln in enumerate(lines) if i > 0 and re.match(r" {24}\S", ln))
+    destroy = [ln[12:] for ln in lines[:cut]]
+    attack = [ln[4:] for ln in lines[cut:]]
+    out = destroy + [" " * 16 + "SubAbilities:"] + attack + [" " * 24 + "TreatAsNonSubAbility: True", " " * 24 + "UseParentTiles: False"]
+    return eol.join(out) + eol
 
 
 def apply_card_fixes(new_id, s):
