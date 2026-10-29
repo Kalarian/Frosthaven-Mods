@@ -23,6 +23,7 @@ Data:
                                     Range: 3
                                     Target: 1
                                     StrengthIsBase: True
+                                    Filter: Enemy
                                     TargetIsBase: True
                                     RangeIsBase: True
                                     AnimOverload: RangedAttack
@@ -32,7 +33,7 @@ Data:
                         Target: -1
                         Filter: Enemy
                         AllTargetsAdjacentToParentTarget: True
-                        UseParentRangeType: True
+                        TreatAsNonSubAbility: True
             # TODO: Force all other enemies within Range 3 of the target to perform Attack 2,
             # Range 3 targeting that target
         Infuse: Dark

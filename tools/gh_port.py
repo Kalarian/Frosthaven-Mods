@@ -336,6 +336,20 @@ CARD_FIXES = {
         (r"^([ \t]+)AllTargetsOnMovePath: True(\r?)$",
          lambda m: f"{m.group(1)}AllTargetsOnMovePath: True{m.group(2)}\n{m.group(1)}Targeting: All{m.group(2)}\n{m.group(1)}Target: -1{m.group(2)}"),
     ],
+    # Eye of the Void (Voidwarden), top: "Poison, range 4; all other enemies within range 3 of the target perform Attack 2,
+    # range 3, targeting it". As a plain sub-ability the control copies the parent's target (the poisoned enemy) into its
+    # own list, adds that enemy to the ignore list, and the adjacency rebuild never clears the list, so every apply is
+    # filtered out and nobody is controlled (CAbilityTargeting Start: the parent copy, then the AllTargetsAdjacentTo...
+    # block; three benches, 2026-10-28). Every Frosthaven card with this flag on a non-attack sub-ability also has
+    # TreatAsNonSubAbility (Banner Spear Incendiary Throw, Deepwraith Slipping into Death, Snowdancer Frigid Growth),
+    # which takes the path that rebuilds the list. UseParentRangeType is read only by attacks. The forced attack names
+    # its filter so it takes the poison's target (CAbilityAttack: parent targets kept only when the filters match).
+    31179: [
+        (r"^([ \t]+)UseParentRangeType: True(\r?)$",
+         lambda m: f"{m.group(1)}TreatAsNonSubAbility: True{m.group(2)}"),
+        (r"^([ \t]+)TargetIsBase: True(\r?)$",
+         lambda m: f"{m.group(1)}Filter: Enemy{m.group(2)}\n{m.group(1)}TargetIsBase: True{m.group(2)}"),
+    ],
     # Blade Dance (Red Guard), bottom: "Move 4, Jump; all enemies moved through suffer 1 damage". The same targeting
     # trap as Trample bottom (CAbilityDamage asks GetValidActorsInRange, whose move-path branch needs Targeting other
     # than Range): Targeting All.
