@@ -535,6 +535,12 @@ def fh_text(t):
 LONG_TEXT, LONG_TEXT_SIZE = 280, 85   # visible letters past which a card half's text is drawn smaller, and how small
 TEXT_FIXES = {
     "GH_225_B": "You and all adjacent normal enemies suffer 7 damage.",
+    # Soothing Lullaby / Tranquil Trill top (the user, 2026-10-30): each ally heals themselves, shown with Frosthaven's
+    # heal in the sentence (an inline self box isn't drawable: the hidden card has no text layout yet)
+    "FHS_GH_360_T": "All <sprite name=Allies> may <nobr><sprite name=Heal> 1</nobr> "
+                    "at the beginning of each of their turns",
+    "FHS_GH_372_T": "All <sprite name=Allies> may <nobr><sprite name=Heal> 2</nobr> "
+                    "at the beginning of each of their turns",
     # Grim Bargain top: Gloomhaven's "two ADD TARGET effects" read "gain two +1<target> effects"; the user's wording
     # (2026-10-30): +2 targets, since it adds to multi-target attacks too
     "FHS_GH_316_T": "During your next six Attack actions, <nobr><sprite name=Curse></nobr> one <sprite name=Allies> within "

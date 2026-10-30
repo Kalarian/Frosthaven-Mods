@@ -944,7 +944,7 @@ FHS_GH_352_B	One <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr> 
 FHS_GH_354_B	Force all <sprite name=Enemy> in the targeted area to perform a <nobr>"<sprite name=Move> 1"</nobr> action with you controlling the actions
 FHS_GH_357_T	All <sprite name=Allies> add <nobr><sprite name=Wound></nobr> to all their attacks
 FHS_GH_358_T	The next five times you <nobr><sprite name=Curse></nobr> an <sprite name=Enemy>, <nobr><sprite name=Curse></nobr> them an additional time
-FHS_GH_360_T	All <sprite name=Allies> may perform a <nobr>"<sprite name=Heal> 1"</nobr> action at the beginning of each of their turns
+FHS_GH_360_T	All <sprite name=Allies> may <nobr><sprite name=Heal> 1</nobr> at the beginning of each of their turns
 FHS_GH_362_T	All <sprite name=Allies> gain <nobr><sprite name=Retaliate> 2,</nobr> <nobr>Retaliate <sprite name=Range> 2</nobr>
 FHS_GH_364_T	All <sprite name=Enemy> gain Disadvantage on all their attacks
 FHS_GH_365_T	Any one <sprite name=Allies> may perform
@@ -954,7 +954,7 @@ FHS_GH_367_T	All <sprite name=Allies> may perform a <nobr>"<sprite name=Move> 1"
 FHS_GH_368_T	At the beginning of each of your turns, you may force one <sprite name=Enemy> within <nobr><sprite name=Range> 5</nobr> to perform a <nobr>"<sprite name=Move> 2"</nobr> action with you controlling the action
 FHS_GH_370_T	At the beginning of each of your turns, <nobr><sprite name=Curse></nobr> one <sprite name=Enemy> within <nobr><sprite name=Range> 5</nobr>
 FHS_GH_371_B	All <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr> <nobr>may perform</nobr>
-FHS_GH_372_T	All <sprite name=Allies> may perform a <nobr>"<sprite name=Heal> 2"</nobr> action at the beginning of each of their turns
+FHS_GH_372_T	All <sprite name=Allies> may <nobr><sprite name=Heal> 2</nobr> at the beginning of each of their turns
 FHS_GH_373_B	Force all <sprite name=Enemy> in the targeted area to perform a <nobr>"<sprite name=Move> 2"</nobr> action with you controlling the actions
 FHS_GH_374_T	All <sprite name=Allies> add <nobr>+1 <sprite name=Attack></nobr> to all their attacks
 FHS_GH_375_B	Two <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr> <nobr>may perform</nobr>
