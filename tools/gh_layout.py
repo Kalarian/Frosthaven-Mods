@@ -422,6 +422,10 @@ def _pill_text(mods):
 
 def _pill_block(main, mods, self_box):
     main = main.strip('"')
+    # Frosthaven boxes what could reach others but is yours (a heal, invisible, a condition); a shield or retaliate is
+    # only ever yours and is never boxed (9 of 9 Frosthaven shield halves; Psychic Projection's was)
+    if re.search(r"<sprite name=(?:Shield|Retaliate)>", main):
+        self_box = False
     # a value in Frosthaven's self box is drawn at 20 (125%), not the main line's 24
     main = SELF_OPEN + main.replace(MAIN, "<size=125%>") + PILL_CLOSE if self_box else main
     if not mods:

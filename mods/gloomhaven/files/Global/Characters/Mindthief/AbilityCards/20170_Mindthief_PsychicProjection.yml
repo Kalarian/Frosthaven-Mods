@@ -38,7 +38,7 @@ Layout:
                     - ColumnWidths: "20,60,20"
                     - Column:
                     - Column:
-                        - Row: "<link=fhself><size=125%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@</link>"
+                        - Row: "<size=150%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
                     - Column:
         - Row: "<size=50%> "
         - Row: "<link=fhself><size=125%><sprite name=Stun></link>"
