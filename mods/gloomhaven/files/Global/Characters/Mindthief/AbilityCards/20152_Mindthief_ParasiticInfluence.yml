@@ -39,10 +39,9 @@ Layout:
         - Augment:
             AugmentIcon: Positive_AttackPlus
             ParentAbility: TAttack
-            ActiveBonusLayout: "$FHS_Augment_OnYourMeleeAttacks$ <nobr><sprite name=Heal> *TAugmentHeal*,</nobr> $FHS_Self$"
+            ActiveBonusLayout: "$FHS_Augment_OnYourMeleeAttacks$ <nobr><sprite name=Heal> *TAugmentHeal*</nobr>"
             AugmentAbilityLayout:
                 - Row: "<b><sprite name=Heal> *TAugmentHeal*"
-                - Row: "$FHS_Self$"
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:

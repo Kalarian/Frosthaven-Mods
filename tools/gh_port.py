@@ -519,6 +519,8 @@ def fh_text(t):
     # Gloomhaven's "ADD <target>" is Frosthaven's "+1<target>"; "consume Air <consume-air>" is the icon alone; a quoted
     # ability ("Heal 2, Range 1") is icons and values, an icon and its value a space apart (Frosthaven's pill spacing)
     t = re.sub(r"\bADD\s+(<sprite name=Target>)", r"+1\1", t)
+    # a quoted heal is yours unless it says otherwise: "<heal> 2, Self" is "<heal> 2" (the user, 2026-10-30)
+    t = re.sub(r"(<sprite name=(?:Heal|Shield|Retaliate|Invisible)>[^\"“”]*?),\s*Self(?=\s*(?:</nobr>)?\s*[\"”])", r"\1", t)
     t = re.sub(r"\bconsume\s+(<nobr>)?\s*(Fire|Ice|Air|Earth|Light|Dark)\s+(<sprite name=Consume\2>)", r"\1\3", t)
     t = re.sub(r"\b(Attack|Heal|Range|Move|Shield|Retaliate|Pierce|Push|Pull)\s+(\d+)\b", r"<sprite name=\1> \2", t)
     t = re.sub(r"(<sprite name=(?:Attack|Heal|Range|Move|Shield|Retaliate|Pierce|Push|Pull|Target)>)(\d)", r"\1 \2", t)

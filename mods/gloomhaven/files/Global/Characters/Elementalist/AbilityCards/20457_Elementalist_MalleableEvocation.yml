@@ -139,7 +139,7 @@ Layout:
                     Layout:
                         - Consume:
                             Name: BCIce
-                            Text: "<nobr><b><sprite name=Heal> 2</nobr> $FHS_Self$"
+                            Text: "<nobr><b><sprite name=Heal> 2</nobr>"
             - Column:
                 - Conditional:
                     Layout:

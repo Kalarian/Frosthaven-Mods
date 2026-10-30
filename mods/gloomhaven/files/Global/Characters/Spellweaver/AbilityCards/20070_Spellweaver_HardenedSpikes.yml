@@ -77,6 +77,5 @@ Layout:
                         ListLayout: "<sprite name=Shield> 2"
                         Layout:
                             - Row: "<size=150%><sprite name=Shield> 2"
-                            - Row: "<line-height=100%><size=100%>$FHS_Self$"
                 - Column:
                     - Duration: Round

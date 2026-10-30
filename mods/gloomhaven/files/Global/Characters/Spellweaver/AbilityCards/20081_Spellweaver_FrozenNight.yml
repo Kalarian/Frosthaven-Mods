@@ -57,5 +57,4 @@ Layout:
                 - Column:
                     - Row: "+2 <sprite name=Move>"
                     - Row: "<b><sprite name=Invisible></b>"
-                    - Row: "<line-height=100%><size=100%>$FHS_Self$"
                 - Column:

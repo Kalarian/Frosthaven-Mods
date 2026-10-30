@@ -74,7 +74,7 @@ Layout:
         - Row: "<size=0%> "
         - Active:
             Ability: TChangeCharacterModel
-            ListLayout: "$FHS_JOTL_101_T_1$ $FHS_JOTL_101_T_2$ <nobr><sprite name=Shield> 1</nobr>, $FHS_Self$"
+            ListLayout: "$FHS_JOTL_101_T_1$ $FHS_JOTL_101_T_2$ <nobr><sprite name=Shield> 1</nobr>"
             Icon: Positive_Shield_Health
             Layout:
                 - Row: "$FHS_JOTL_101_T_1$"

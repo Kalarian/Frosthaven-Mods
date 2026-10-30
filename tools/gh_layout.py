@@ -529,6 +529,27 @@ def _restyle_values(nodes):
         _restyle_values(n.children)
 
 
+SELF_DEFAULT = re.compile(r"<sprite name=(?:Heal|Shield|Retaliate|Invisible)>")
+SELF_WORD = re.compile(r"\s*,?\s*(?:<nobr>)?\s*\$(?:FHS_)?Self\$\s*(?:</nobr>)?")
+
+
+def _drop_self(items):
+    """Heal, shield, retaliate and invisible are yours unless the card says otherwise (the user, 2026-10-30: drop "Self"
+    on Crackling Air, Hardened Spikes, Frozen Night): a "Self" row under one goes, and ", Self" after one."""
+    out = []
+    for n in items:
+        t = n.text()
+        if (n.key == "Row" and not n.children and re.sub(r"<[^>]+>", "", t).strip() in ("$Self$", "$FHS_Self$")
+                and out and SELF_DEFAULT.search(out[-1].text() or "")):
+            continue
+        if t and SELF_DEFAULT.search(t) and SELF_WORD.search(t):
+            n.set_text(re.sub(r",\s*(</nobr>)\s*$", r"\1", SELF_WORD.sub("", t).rstrip(", ")))
+        if n.children:
+            n.children = _drop_self(n.children)
+        out.append(n)
+    return out
+
+
 def _flat(items):
     return [m for n in items for m in [n] + _flat(n.children)]
 
@@ -585,6 +606,6 @@ def fh_style(s, warn=print):
         return s
     for half in halves:
         half.children = _tracker_space(_drop_durations(half.children))
-        half.children = _style_items(half.children)
+        half.children = _drop_self(_style_items(half.children))
     _restyle_values(halves)
     return eol.join(lines[:at + 1]) + eol + "".join(emit(halves, 1, eol))

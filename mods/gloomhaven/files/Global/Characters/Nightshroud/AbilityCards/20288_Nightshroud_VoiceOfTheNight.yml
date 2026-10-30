@@ -63,6 +63,5 @@ Layout:
                 - ColumnWidths: "70,30"
                 - Column:
                     - Row: "<size=150%><nobr><sprite name=Invisible></nobr>"
-                    - Row: "$FHS_Self$"
                 - Column:
                     - Row: "<sprite name=CreateDark>, <sprite name=XP1>"

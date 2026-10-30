@@ -98,6 +98,5 @@ Layout:
                             Text: "<nobr><sprite name=Shield> 1</nobr>"
     Bottom:
         - Row: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
-        - Row: "<b>$FHS_Self$"
         - Row: "<size=20%> "
         - Infuse: Light

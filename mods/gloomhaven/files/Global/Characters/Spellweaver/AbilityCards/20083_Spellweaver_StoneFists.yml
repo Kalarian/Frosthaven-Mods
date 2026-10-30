@@ -73,12 +73,11 @@ Layout:
         - Active:
             Ability: BShield
             ListLayout: "<sprite name=Shield> *BShield*"
-            ListLayoutAlt: "<sprite name=Shield> 2, $FHS_Self$"
+            ListLayoutAlt: "<sprite name=Shield> 2"
             Layout:
                 - Row: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
             LayoutAlt:
                 - Row: "<size=150%><sprite name=Shield> 2 <size=100%><voffset=1>@BShield@"
-                - Row: "$FHS_Self$"
             Icon: Positive_Shield
         - Conditional:
             Layout:

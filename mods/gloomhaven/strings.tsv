@@ -936,7 +936,7 @@ FHS_GH_345_B	<nobr>+1<sprite name=Attack></nobr> to all your attacks this round,
 FHS_GH_345_T	On the next five sources of damage to you, perform an <nobr>"<sprite name=Attack> 3"</nobr> action
 FHS_GH_346_T	On the next five sources of damage to you, suffer no damage instead
 FHS_GH_347_B	You may suffer up to 5 damage
-FHS_GH_347_T	Perform a "<nobr><sprite name=Heal> 2</nobr>, Self" action for each <sprite name=Enemy> damaged
+FHS_GH_347_T	Perform a "<nobr><sprite name=Heal> 2</nobr>" action for each <sprite name=Enemy> damaged
 FHS_GH_348_T	All <sprite name=Allies> add +1 <sprite name=Attack> to one of their attacks each turn
 FHS_GH_349_B	The next time any <sprite name=Allies> within <nobr><sprite name=Range> 2</nobr> suffers damage this round, they suffer no damage instead
 FHS_GH_350_T	All <sprite name=Allies> add <nobr>+1 <sprite name=Move></nobr> to all their Move actions and add <nobr>+1 <sprite name=Range></nobr> to all their ranged attacks
@@ -944,7 +944,7 @@ FHS_GH_352_B	One <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr> 
 FHS_GH_354_B	Force all <sprite name=Enemy> in the targeted area to perform a <nobr>"<sprite name=Move> 1"</nobr> action with you controlling the actions
 FHS_GH_357_T	All <sprite name=Allies> add <nobr><sprite name=Wound></nobr> to all their attacks
 FHS_GH_358_T	The next five times you <nobr><sprite name=Curse></nobr> an <sprite name=Enemy>, <nobr><sprite name=Curse></nobr> them an additional time
-FHS_GH_360_T	All <sprite name=Allies> may perform a <nobr>"<sprite name=Heal> 1, Self"</nobr> action at the beginning of each of their turns
+FHS_GH_360_T	All <sprite name=Allies> may perform a <nobr>"<sprite name=Heal> 1"</nobr> action at the beginning of each of their turns
 FHS_GH_362_T	All <sprite name=Allies> gain <nobr><sprite name=Retaliate> 2,</nobr> <nobr>Retaliate <sprite name=Range> 2</nobr>
 FHS_GH_364_T	All <sprite name=Enemy> gain Disadvantage on all their attacks
 FHS_GH_365_T	Any one <sprite name=Allies> may perform
@@ -954,7 +954,7 @@ FHS_GH_367_T	All <sprite name=Allies> may perform a <nobr>"<sprite name=Move> 1"
 FHS_GH_368_T	At the beginning of each of your turns, you may force one <sprite name=Enemy> within <nobr><sprite name=Range> 5</nobr> to perform a <nobr>"<sprite name=Move> 2"</nobr> action with you controlling the action
 FHS_GH_370_T	At the beginning of each of your turns, <nobr><sprite name=Curse></nobr> one <sprite name=Enemy> within <nobr><sprite name=Range> 5</nobr>
 FHS_GH_371_B	All <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr> <nobr>may perform</nobr>
-FHS_GH_372_T	All <sprite name=Allies> may perform a <nobr>"<sprite name=Heal> 2, Self"</nobr> action at the beginning of each of their turns
+FHS_GH_372_T	All <sprite name=Allies> may perform a <nobr>"<sprite name=Heal> 2"</nobr> action at the beginning of each of their turns
 FHS_GH_373_B	Force all <sprite name=Enemy> in the targeted area to perform a <nobr>"<sprite name=Move> 2"</nobr> action with you controlling the actions
 FHS_GH_374_T	All <sprite name=Allies> add <nobr>+1 <sprite name=Attack></nobr> to all their attacks
 FHS_GH_375_B	Two <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr> <nobr>may perform</nobr>
@@ -965,7 +965,7 @@ FHS_GH_377_B	This <sprite name=Enemy>’s <nobr><sprite name=Attack></nobr>, <no
 FHS_GH_377_T_1	Create one 4 damage <nobr><sprite name=Stun></nobr> trap in an adjacent empty hex
 FHS_GH_377_T_2	Gain <sprite name=XP2> when the trap is sprung by an <sprite name=Enemy>
 FHS_GH_378_B	When this <sprite name=Enemy> dies, move to the hex in which it died
-FHS_GH_379_B	When this <sprite name=Enemy> dies, perform a “<nobr><sprite name=Heal> 4</nobr>, Self” action
+FHS_GH_379_B	When this <sprite name=Enemy> dies, perform a “<nobr><sprite name=Heal> 4</nobr>” action
 FHS_GH_380_B	This <sprite name=Enemy> suffers 2 damage at the start of each of its turns
 FHS_GH_381_B	All <sprite name=Allies> add <nobr>+1 <sprite name=Attack></nobr> to all their attacks targeting this <sprite name=Enemy>
 FHS_GH_382_B	When this <sprite name=Enemy> dies, all <sprite name=Enemy> adjacent to the hex in which it died suffer 3 damage
@@ -1012,7 +1012,7 @@ FHS_GH_415_T	Once during each of your next four turns, perform a “<sprite name
 FHS_GH_416_T	At the start of each of your turns, remove one negative condition from any one of your <sprite name=Allies>
 FHS_GH_429_B	All adjacent <sprite name=Allies> may perform a “<nobr><sprite name=Move> 2</nobr>” action
 FHS_GH_429_T	You and all adjacent <sprite name=Allies> may <nobr><sprite name=RecoverIcon></nobr> an amount of discarded cards up to the number of <sprite name=Allies> adjacent to you
-FHS_GH_433_B	At the start of each of your turns, perform a “<nobr><sprite name=Heal> 1</nobr>, Self” action
+FHS_GH_433_B	At the start of each of your turns, perform a “<nobr><sprite name=Heal> 1</nobr>” action
 FHS_GH_437_T	Remove all negative conditions on all adjacent <sprite name=Allies>
 FHS_GH_439_T	Kill one adjacent normal <sprite name=Enemy> with at least two negative conditions
 FHS_GH_440_B	Give all adjacent <sprite name=Allies> one “Large Medical Pack” ability card
@@ -1047,7 +1047,7 @@ FHS_GH_489_B_2	No character may end with more damage than their maximum hit poin
 FHS_GH_495_B	<nobr>+1<sprite name=Attack></nobr> to all your <nobr><color=#BF9C8B>Commands</color></nobr> this round
 FHS_GH_496_B	Any one summoned <sprite name=Allies> performs
 FHS_GH_498_B	Swap positions with your bear
-FHS_GH_499_T	After your bear's next five attacks, it performs a <nobr>"<sprite name=Heal> 2, Self"</nobr> action
+FHS_GH_499_T	After your bear's next five attacks, it performs a <nobr>"<sprite name=Heal> 2"</nobr> action
 FHS_GH_501_B	All summoned <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr> perform
 FHS_GH_504_T	Kill one adjacent normal <sprite name=Enemy> whose current hit point value is less than or equal to 6
 FHS_GH_505_B	<sprite name=RecoverIcon> up to two of your lost cards with Summon actions on them
@@ -1159,7 +1159,7 @@ FHS_JOTL_161_T_3	<nobr><sprite name=Stun></nobr> the acting <sprite name=Enemy>
 FHS_JOTL_162_T_1	Force all <sprite name=Enemy> within <nobr><sprite name=Range> 3</nobr> to perform
 FHS_JOTL_162_T_2	targeting <sprite name=Enemy> of your choice adjacent to them
 FHS_JOTL_163_B	All adjacent <sprite name=Allies> suffer 1 damage
-FHS_JOTL_164_T	The next three times after an <sprite name=Allies> attacks an <sprite name=Enemy> with <nobr><sprite name=Poison></nobr>, that <sprite name=Allies> may perform a "<nobr><sprite name=Heal> 1</nobr>, Self" action
+FHS_JOTL_164_T	The next three times after an <sprite name=Allies> attacks an <sprite name=Enemy> with <nobr><sprite name=Poison></nobr>, that <sprite name=Allies> may perform a "<nobr><sprite name=Heal> 1</nobr>" action
 FHS_JOTL_165_T_1	Target self or one <sprite name=Allies> within <nobr><sprite name=Range> 2</nobr>
 FHS_JOTL_165_T_2	Target a different <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr>
 FHS_JOTL_166_T	One <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr> may perform
@@ -1213,7 +1213,7 @@ FHS_JOTL_245_T	The next four times an <sprite name=Enemy> enters a hex adjacent 
 FHS_JOTL_247_B	One adjacent <sprite name=Enemy> suffers 1 damage
 FHS_JOTL_247_T_1	One adjacent <sprite name=Allies> may perform an "<nobr><sprite name=Attack> 3</nobr>" action, <sprite name=XP1>
 FHS_JOTL_247_T_2	One different adjacent <sprite name=Allies> may perform an "<nobr><sprite name=Attack> 3</nobr>" action, <sprite name=XP1>
-FHS_JOTL_250_B	The next five times an <sprite name=Enemy> enters a hex adjacent to you, perform a "<nobr><sprite name=Heal> 3</nobr>, Self" action
+FHS_JOTL_250_B	The next five times an <sprite name=Enemy> enters a hex adjacent to you, perform a "<nobr><sprite name=Heal> 3</nobr>" action
 FHS_JOTL_250_T	Any time you are attacked this round, gain <nobr><sprite name=Shield> X</nobr> for the attack, where X is the number of <sprite name=Enemy> adjacent to you at the time of the attack, up to a maximum of 3
 FHS_JOTL_252_B	All adjacent <sprite name=Enemy> suffer 3 damage
 FHS_JOTL_252_T	<nobr>+1 <sprite name=Attack></nobr>, <nobr>+2 <sprite name=Range></nobr>, all <sprite name=Enemy> adjacent to the target suffer 1 damage
@@ -1237,7 +1237,6 @@ FHS_RatKing	Rat King
 FHS_RedFalcon	Red Falcon
 FHS_Retaliate	Retaliate
 FHS_RockColossus	Rock Colossus
-FHS_Self	Self
 FHS_SlimeSpirit	Slime Spirit
 FHS_SpiritBanner	Spirit Banner
 FHS_SpittingCobra	Spitting Cobra

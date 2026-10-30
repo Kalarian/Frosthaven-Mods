@@ -45,5 +45,4 @@ Layout:
                 - ColumnSpacing: 50
                 - Column:
                     - Row: "<size=150%><nobr><sprite name=Invisible></nobr>"
-                    - Row: "$FHS_Self$"
                 - Column:

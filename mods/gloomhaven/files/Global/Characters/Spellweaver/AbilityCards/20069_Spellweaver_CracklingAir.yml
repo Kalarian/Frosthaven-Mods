@@ -69,6 +69,5 @@ Layout:
                         ListLayout: "<sprite name=Retaliate> 2"
                         Layout:
                             - Row: "<size=150%><sprite name=Retaliate> 2"
-                            - Row: "<line-height=100%><size=100%>$FHS_Self$"
                 - Column:
                     - Duration: Round

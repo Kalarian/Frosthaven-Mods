@@ -43,7 +43,6 @@ Layout:
                 - ColumnSpacing: 100
                 - Column:
                     - Row: "<size=150%><sprite name=Heal> *TCDarkHeal*"
-                    - Row: "$FHS_Self$"
                 - Column:
     Bottom:
         - Active:
