@@ -41,8 +41,8 @@ Layout:
                     - Active:
                         Ability: TAugmentRetaliate
                         Icon: Positive_Retaliate
-                        ListLayout: "<nobr>Retaliate <sprite name=Retaliate> *TAugmentRetaliate*</nobr>"
-                        Layout: "$FHS_Gain$ <nobr>Retaliate <sprite name=Retaliate> *TAugmentRetaliate*</nobr>"
+                        ListLayout: "<nobr><sprite name=Retaliate> *TAugmentRetaliate*</nobr>"
+                        Layout: "$FHS_Gain$ <nobr><sprite name=Retaliate> *TAugmentRetaliate*</nobr>"
                 - Column:
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"

@@ -33,7 +33,7 @@ Layout:
                     SpecialText:
                         - Row: "$FHS_OnDeath$"
                         - Row: "<size=20%> "
-                        - Row: "<nobr><b>Attack <sprite name=Attack> 3</nobr> <sprite name=CreateFire>"
+                        - Row: "<nobr><b><sprite name=Attack> 3</nobr> <sprite name=CreateFire>"
                         - Row: "$FHS_Target_AllEnemiesWithin$ $FHS_Range$ 2"
     Bottom:
         - Row:

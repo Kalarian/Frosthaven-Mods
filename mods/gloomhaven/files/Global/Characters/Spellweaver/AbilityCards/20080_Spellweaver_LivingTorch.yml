@@ -60,5 +60,5 @@ Layout:
                     SpecialText:
                         - Row: "$FHS_OnDeath$"
                         - Row: "<size=10%> "
-                        - Row: "<b>Attack <sprite name=Attack> 3"
+                        - Row: "<b><sprite name=Attack> 3"
                         - Row: "$FHS_Target_AllAdjacentEnemies$"

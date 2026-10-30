@@ -95,6 +95,7 @@ namespace FrosthavenMods
                     // an Augment half (Mindthief) has its own stacked layout: the fit passes slid it under the top rim
                     bool augment = rows.GetComponentsInChildren<Transform>(true).Any(c => c.name == "AugmentRow");
                     if (!augment) Margins(h, (RectTransform)rows, f);
+                    else AugmentLook(rows, model);
                     Slots(rows, f);
                     ConsumeSprites(h);
                     Pictures(h, tint);
@@ -626,6 +627,37 @@ namespace FrosthavenMods
         /// <summary>The XP / persistent / lost badges: Frosthaven's bar ends flush with the half's right edge, its bottom
         /// 6 px above the half's (Sodden Soil: the bar at 434..491 x, 448..486 y in a half 13..491 x, 188..492 y). The bar
         /// sizes itself (ContentSizeFitter), so it is anchored bottom-right and grows leftwards from there.</summary>
+        /// <summary>An Augment (Mindthief) in the user's look (2026-10-30): the class's own symbol after "Augment" (the
+        /// generator draws the card's active-bonus icon, a +attack), and no persistent icon beside the discard reminder:
+        /// every augment is persistent, which the badge bar says (AugmentSummary).</summary>
+        private static void AugmentLook(Transform rows, ECharacter model)
+        {
+            foreach (AugmentContainer ac in rows.GetComponentsInChildren<AugmentContainer>(true))
+            {
+                Sprite symbol = UIInfoTools.Instance?.GetCharacterActiveAbilityIcon(model.ToString());
+                if (symbol != null && ac.AugmentIcon != null)
+                {
+                    ac.AugmentIcon.sprite = symbol;
+                    ac.AugmentIcon.preserveAspect = true;
+                }
+                if (ac.PersistentIcon != null) ac.PersistentIcon.gameObject.SetActive(false);
+            }
+        }
+
+        /// <summary>The badge bar of a half with an augment: persistent, not round. The augment itself lasts until another
+        /// is played; a round-long effect it grants (Feedback Loop's shield) put the round badge on the card instead.</summary>
+        [HarmonyPatch(typeof(FullAbilityCardAction), "GetActionSummaryParams")]
+        [HarmonyPostfix]
+        private static void AugmentSummary(CAction actionData, bool isLost, bool isPermaLost, ref CardActionSummary.Params __result)
+        {
+            try
+            {
+                if (actionData == null || !CAbilityCard.GetActionAbilities(actionData).Any(a => a?.Augment != null)) return;
+                __result = new CardActionSummary.Params(isLost, isPermaLost, false, true, actionData.ActionXP);
+            }
+            catch (Exception e) { if (Reported.Add("augment")) Plugin.Log.LogWarning("Gloomhaven card style: augment badge: " + e); }
+        }
+
         private static void Badges(RectTransform half, float f)
         {
             var bar = half.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "FH_UI_HUD_CARD_A_ExperienceActiveBonuses") as RectTransform;

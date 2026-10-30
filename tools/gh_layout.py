@@ -561,6 +561,10 @@ def _drop_self(items):
         if (n.key == "Row" and not n.children and re.sub(r"<[^>]+>", "", t).strip() in ("$Self$", "$FHS_Self$")
                 and out and SELF_DEFAULT.search(out[-1].text() or "")):
             continue
+        # a word naming the icon after it goes, as in the card texts (Vicious Blood: "Retaliate <Retaliate> 2")
+        if t and re.search(r"\b([A-Z][a-z]+)\s+(<sprite name=\1>)", t):
+            t = re.sub(r"\b([A-Z][a-z]+)\s+(<sprite name=\1>)", r"\2", t)
+            n.set_text(t)
         if t and SELF_DEFAULT.search(t) and SELF_WORD.search(t):
             n.set_text(re.sub(r",\s*(</nobr>)\s*$", r"\1", SELF_WORD.sub("", t).rstrip(", ")))
         if n.children:
