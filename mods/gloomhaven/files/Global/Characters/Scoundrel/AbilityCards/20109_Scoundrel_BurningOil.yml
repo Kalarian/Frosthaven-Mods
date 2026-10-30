@@ -33,7 +33,7 @@ Layout:
             - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
                 - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
-                - Row: "<link=fhpill><sprite name=Wound></link>"
+                - Row: "<link=fhpill>, <sprite name=Wound></link>"
             - Column:
         - Row: "<size=20%> "
         - Row:

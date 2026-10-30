@@ -732,10 +732,10 @@ FHS_GH_086_B_1	Choose a hex within <nobr><sprite name=Range> 4</nobr>
 FHS_GH_086_B_2	Target all <sprite name=Enemy> within <nobr><sprite name=Range> 4</nobr> of the chosen hex and pull them toward it
 FHS_GH_087_T_1	Target all <sprite name=Enemy> in the same room as you
 FHS_GH_087_T_2	All <sprite name=Allies> in the same room as you suffer 2 damage
-FHS_GH_088_B	On your next four attacks targeting <sprite name=Enemy> adjacent to none of their <sprite name=Allies>, add <nobr>+2 <sprite name=Attack></nobr>
+FHS_GH_088_B	On your next four attacks targeting <sprite name=Enemy> adjacent to none of their allies, add <nobr>+2 <sprite name=Attack></nobr>
 FHS_GH_088_T	<nobr>+2<sprite name=Attack></nobr> and gain <sprite name=XP1> when the target is adjacent to any <nobr>of your <sprite name=Allies></nobr>
 FHS_GH_090_T	On your next attack while <nobr><sprite name=Invisible></nobr>, double the value of the attack and gain <sprite name=XP2>
-FHS_GH_091_T	<nobr>+2<sprite name=Attack></nobr> and gain <sprite name=XP1> when the target is adjacent to none of its <sprite name=Allies>
+FHS_GH_091_T	<nobr>+2<sprite name=Attack></nobr> and gain <sprite name=XP1> when the target is adjacent to none of its allies
 FHS_GH_092_T	Disarm one adjacent trap
 FHS_GH_097_B_1	Force one adjacent <sprite name=Enemy> to perform
 FHS_GH_097_B_2	with you controlling the action, and ending in a hex adjacent to you
@@ -745,18 +745,18 @@ FHS_GH_098_B	The next time you suffer damage this round, suffer no damage instea
 FHS_GH_098_T	Add +X <sprite name=Attack> where X is double the Shield value of the target
 FHS_GH_099_B	<sprite name=Loot> every hex you enter with this action
 FHS_GH_100_T	Add <sprite name=Wound> and gain <sprite name=XP1> when the target is adjacent to any <nobr>of your <sprite name=Allies></nobr>
-FHS_GH_103_B	+2<sprite name=Attack> to all your attacks this round targeting <sprite name=Enemy> adjacent to none of their <sprite name=Allies>
+FHS_GH_103_B	+2<sprite name=Attack> to all your attacks this round targeting <sprite name=Enemy> adjacent to none of their allies
 FHS_GH_104_B	Gain advantage on all of your attacks this round
 FHS_GH_105_T_1	<nobr>+3<sprite name=Attack></nobr> and gain <sprite name=XP1> when the target is adjacent to any <nobr>of your <sprite name=Allies></nobr>
-FHS_GH_105_T_2	<nobr>+3<sprite name=Attack></nobr> and gain <sprite name=XP1> when the target is adjacent to none <nobr>of its <sprite name=Allies></nobr>
+FHS_GH_105_T_2	<nobr>+3<sprite name=Attack></nobr> and gain <sprite name=XP1> when the target is adjacent to none <nobr>of its allies</nobr>
 FHS_GH_106_B	On your next six attacks targeting <sprite name=Enemy> with <nobr><sprite name=Disarm></nobr>, <nobr><sprite name=Immobilize></nobr> or <nobr><sprite name=Stun></nobr>, <nobr>add +2 <sprite name=Attack></nobr>
-FHS_GH_107_T	Kill one adjacent normal <sprite name=Enemy> that is adjacent to none of its <sprite name=Allies> and also adjacent to any <nobr>of your <sprite name=Allies></nobr>
+FHS_GH_107_T	Kill one adjacent normal <sprite name=Enemy> that is adjacent to none of its allies and also adjacent to any <nobr>of your <sprite name=Allies></nobr>
 FHS_GH_108_T	<nobr>+2<sprite name=Attack></nobr> to all your attacks targeting <sprite name=Enemy> with <nobr><sprite name=Poison></nobr>
 FHS_GH_110_T	<nobr>+4<sprite name=Attack></nobr> and gain <sprite name=XP2> when the target is adjacent to any of your <sprite name=Allies>
-FHS_GH_111_B	On your next attack targeting an <sprite name=Enemy> adjacent to none of its <sprite name=Allies> and also adjacent to any of your <sprite name=Allies>, double the value of the attack and gain <sprite name=XP2>
+FHS_GH_111_B	On your next attack targeting an <sprite name=Enemy> adjacent to none of its allies and also adjacent to any of your <sprite name=Allies>, double the value of the attack and gain <sprite name=XP2>
 FHS_GH_111_T	Target one <sprite name=Enemy> within <nobr><sprite name=Range> 3</nobr> to suffer the effects of the <nobr>disarmed trap</nobr>
 FHS_GH_113_B	Kill one adjacent <sprite name=Enemy> whose current hit point value is equal or less than 3
-FHS_GH_114_B	Force one adjacent normal or elite <sprite name=Enemy> to perform its turn this round as if its <sprite name=Allies> were <sprite name=Enemy> and its <sprite name=Enemy> were <sprite name=Allies>, with you controlling the actions
+FHS_GH_114_B	Force one adjacent normal or elite <sprite name=Enemy> to perform its turn this round as if its allies were enemies and its enemies were allies, with you controlling the actions
 FHS_GH_115_T	Add <nobr><sprite name=Poison></nobr> and <nobr><sprite name=Wound></nobr> to all your attacks
 FHS_GH_116_B	On the next six melee attacks targeting you, gain <nobr><sprite name=Retaliate> *BRetaliate*</nobr>
 FHS_GH_118_B	Create two single-hex obstacles in empty hexes adjacent to you
@@ -771,7 +771,7 @@ FHS_GH_124_B_2	All adjacent <sprite name=Allies> and <sprite name=Enemy> suffer 
 FHS_GH_124_B_3	<nobr>2 damage instead, <sprite name=XP1></nobr>
 FHS_GH_125_T	<nobr><sprite name=Muddle></nobr> all <sprite name=Allies> and <sprite name=Enemy> in the targeted area
 FHS_GH_127_B	+1<sprite name=Attack> to all of your ranged attacks this round
-FHS_GH_127_T	You may push the target into hexes containing obstacles. In each case, destroy the obstacle, the target suffers 2 damage, and you gain <sprite name=XP1>.
+FHS_GH_127_T	You may push the target into hexes containing obstacles. In each case, destroy the obstacle, the target suffers 2 damage, and you gain <sprite name=XP1>
 FHS_GH_128_B	+2<sprite name=Attack> to all of your melee attacks this round
 FHS_GH_129_B	On your next six ranged Attack actions while <nobr><sprite name=Air></nobr> is currently infused, <nobr><sprite name=ConsumeAir></nobr> to add <nobr>+2 <sprite name=Range></nobr> to the entire Attack action
 FHS_GH_130_T	Target all <sprite name=Enemy> adjacent to the destroyed obstacle
@@ -798,24 +798,24 @@ FHS_GH_142_T_2	where X is twice the number of hexes the destroyed obstacles occu
 FHS_GH_143_B	At the start of your next five turns, perform a <nobr>"<sprite name=Heal> 2,</nobr> <nobr><sprite name=Range> 2" action</nobr>
 FHS_GH_144_B	All <sprite name=Allies> and <sprite name=Enemy> adjacent to any hexes you enter during the movement suffer <nobr>2 damage</nobr>
 FHS_GH_144_T	All <sprite name=Allies> and <sprite name=Enemy> adjacent to the target suffer damage equal to the damage the target suffered
-FHS_GH_145_T	You may push the targets into hexes containing obstacles. In each case, the obstacle is destroyed, the target suffers 2 damage, and you gain <sprite name=XP1>.
-FHS_GH_146_B_1	Force one <sprite name=Enemy> within <nobr><sprite name=Range> 5 </nobr> to perform
+FHS_GH_145_T	You may push the targets into hexes containing obstacles. In each case, the obstacle is destroyed, the target suffers 2 damage, and you gain <sprite name=XP1>
+FHS_GH_146_B_1	Force one <sprite name=Enemy> within <nobr><sprite name=Range> 5</nobr> to perform
 FHS_GH_146_B_2	targeting another <sprite name=Enemy> with you controlling the action
 FHS_GH_146_T	+1<sprite name=Attack> for each negative condition on the target
 FHS_GH_149_B	If you end the movement in the same hex you started in, perform
-FHS_GH_152_B	Force one <sprite name=Enemy> within <nobr><sprite name=Range> 4 </nobr> to perform
+FHS_GH_152_B	Force one <sprite name=Enemy> within <nobr><sprite name=Range> 4</nobr> to perform
 FHS_GH_154_T	<nobr>+2<sprite name=Attack></nobr> and gain <sprite name=XP1> for each negative condition on the target
 FHS_GH_157_B	One <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr> <nobr>may perform</nobr>
 FHS_GH_157_T	One adjacent <sprite name=Allies> may perform
-FHS_GH_160_B	Force one normal or elite <sprite name=Enemy> within <nobr><sprite name=Range> 3</nobr> to perform its turn this round as if its <sprite name=Allies> were <sprite name=Enemy> and its <sprite name=Enemy> were <sprite name=Allies>
+FHS_GH_160_B	Force one normal or elite <sprite name=Enemy> within <nobr><sprite name=Range> 3</nobr> to perform its turn this round as if its allies were enemies and its enemies were allies
 FHS_GH_163_T	Gain one additional gold pile for each adjacent <sprite name=Enemy>
 FHS_GH_164_T_1	Kill one normal <sprite name=Enemy> within <nobr><sprite name=Range> 4</nobr>
 FHS_GH_164_T_2	Target all <sprite name=Enemy> adjacent to the killed <sprite name=Enemy>
 FHS_GH_165_B	You may have two <nobr><color=#A7B3D2>Augments</color></nobr> active at once. If a third <nobr><color=#A7B3D2>Augment</color></nobr> is played, discard one of the others.
-FHS_GH_166_B	Force one <sprite name=Enemy> within <nobr><sprite name=Range> 5 </nobr> to perform
+FHS_GH_166_B	Force one <sprite name=Enemy> within <nobr><sprite name=Range> 5</nobr> to perform
 FHS_GH_170_B	All your ranged attacks gain the effects of your <nobr><color=#A7B3D2>Augments</color></nobr> this round. 
-FHS_GH_172_B	Force one normal or elite <sprite name=Enemy> within <nobr><sprite name=Range> 5</nobr> to perform its turn this round as if its <sprite name=Allies> were <sprite name=Enemy> and its <sprite name=Enemy> were <sprite name=Allies>, with you controlling the actions
-FHS_GH_172_T	This attack gains the effects of your <nobr> <color=#A7B3D2>Augments</color> </nobr>
+FHS_GH_172_B	Force one normal or elite <sprite name=Enemy> within <nobr><sprite name=Range> 5</nobr> to perform its turn this round as if its allies were enemies and its enemies were allies, with you controlling the actions
+FHS_GH_172_T	This attack gains the effects of your<nobr> <color=#A7B3D2>Augments</color> </nobr>
 FHS_GH_173_B	All <sprite name=Allies> within <nobr><sprite name=Range> 2</nobr> add <nobr>+X Attack</nobr> to all their attacks this round, where X is the number of your <sprite name=Allies> within <nobr><sprite name=Range> 2</nobr> of you
 FHS_GH_173_T_2	X is half of <nobr>Rat King's</nobr> current health (rounded up)
 FHS_GH_175_T	On the next five melee attacks targeting you, gain <nobr><sprite name=Retaliate> *TRetaliate*</nobr>
@@ -823,13 +823,13 @@ FHS_GH_177_T	One adjacent <sprite name=Allies> may <nobr><sprite name=RecoverIco
 FHS_GH_178_T_1	One adjacent <sprite name=Allies> may <nobr><sprite name=RecoverIcon></nobr> two of their discarded cards
 FHS_GH_178_T_2	Up to three discarded cards instead, <sprite name=XP1>
 FHS_GH_179_B	You and all adjacent <sprite name=Allies> suffer no damage this round
-FHS_GH_184_B	Deduct -1 <sprite name=Move> from all your moves
+FHS_GH_184_B	-1 <sprite name=Move> from all your moves
 FHS_GH_185_T	Heal all damage on one <nobr>adjacent <sprite name=Allies></nobr>
 FHS_GH_187_B	<line-height=110%>At the end of your next five turns when <sprite name=Light> is not Strong, infuse <sprite name=CreateLight>
 FHS_GH_190_T	One adjacent <sprite name=Allies> may immediately perform one extra turn by playing two cards from their hand
 FHS_GH_192_B	All <sprite name=Allies> within <nobr><sprite name=Range> 5</nobr> <nobr>may perform</nobr>
 FHS_GH_194_B	All attacks targeting you or any <sprite name=Allies> within <nobr><sprite name=Range> 4</nobr> of you gain Disadvantage this round
-FHS_GH_196_T	Deduct <nobr>-1 <sprite name=Attack></nobr> from all your attacks
+FHS_GH_196_T	<nobr>-1 <sprite name=Attack></nobr> from all your attacks
 FHS_GH_197_B	All <sprite name=Allies> add <nobr>+2 <sprite name=Move></nobr> to all their moves this round
 FHS_GH_197_T	All <sprite name=Allies> add <nobr>+1 <sprite name=Attack></nobr> to all their attacks this round
 FHS_GH_199_T	During any of your Attack actions, you may <sprite name=ConsumeLight> to add <nobr>+2 <sprite name=Attack></nobr>, gain Advantage and <sprite name=XP1>
@@ -849,7 +849,7 @@ FHS_GH_219_B	<nobr><sprite name=RecoverIcon></nobr> up to two of your lost cards
 FHS_GH_219_T	At the end of each of your turns, you may discard a card to allow an adjacent <sprite name=Allies> to <nobr><sprite name=Refresh></nobr> one of their consumed <nobr>Small Items <sprite name=SmallItem></nobr>
 FHS_GH_221_T	One adjacent <sprite name=Allies> may <nobr><sprite name=Refresh></nobr> all of their spent and consumed items
 FHS_GH_223_T	At the end of each round, <nobr><sprite name=Refresh></nobr> one of your spent items
-FHS_GH_224_T	You and all <sprite name=Enemy> with <nobr><sprite name=Range> 4</nobr> suffer 2 damage
+FHS_GH_224_T	You and all <sprite name=Enemy> within <nobr><sprite name=Range> 4</nobr> suffer 2 damage
 FHS_GH_225_B	You and all normal <sprite name=Enemy> within the targeted area suffer 7 damage
 FHS_GH_226_T	If any adjacent <sprite name=Allies> performs a ranged attack action, that <sprite name=Allies> gains <nobr>+1<sprite name=Target></nobr> for the attack
 FHS_GH_228_B	Any one <sprite name=Allies> may <nobr><sprite name=RecoverIcon></nobr> all of their discarded cards
@@ -862,7 +862,7 @@ FHS_GH_235_B	All attacks targeting you and all summoned <sprite name=Allies> gai
 FHS_GH_235_T	2 Shadow Wolves
 FHS_GH_236_B	<sprite name=RecoverIcon> up to four of your <nobr>lost cards</nobr>
 FHS_GH_238_T	One adjacent summoned <sprite name=Allies> performs
-FHS_GH_245_T	On any of your Move actions, or the Move actions of any <sprite name=Allies> you have summoned, you may <sprite name=ConsumeEarth> to add <nobr>+2 <sprite name=Move> </nobr> and gain <sprite name=XP1>
+FHS_GH_245_T	On any of your Move actions, or the Move actions of any <sprite name=Allies> you have summoned, you may <sprite name=ConsumeEarth> to add <nobr>+2 <sprite name=Move></nobr> and gain <sprite name=XP1>
 FHS_GH_247_T	Kill all normal adjacent <sprite name=Enemy> whose current hit point value is less than or equal to 5
 FHS_GH_250_T	Two summoned <sprite name=Allies> within <nobr><sprite name=Range> 2</nobr> perform
 FHS_GH_253_T	3 Nail Spheres
@@ -888,7 +888,7 @@ FHS_GH_287_B	Kill one adjacent normal <sprite name=Enemy>, <sprite name=XP1>
 FHS_GH_287_T	Kill all normal targets instead, <sprite name=XP2>
 FHS_GH_288_T	On your next five attacks while <nobr><sprite name=Invisible></nobr>, add <nobr><sprite name=Stun></nobr> to the attack
 FHS_GH_289_T	<nobr><sprite name=Poison></nobr> all <sprite name=Allies> and <sprite name=Enemy> in the targeted area
-FHS_GH_290_B	Deduct <nobr>-1 <sprite name=Range></nobr> from all your ranged attacks
+FHS_GH_290_B	<nobr>-1 <sprite name=Range></nobr> from all your ranged attacks
 FHS_GH_292_T	Once during each of your Attack actions, you may <nobr><sprite name=Poison></nobr> one <sprite name=Allies> within <nobr><sprite name=Range> 2</nobr> (or deal 3 damage if the <sprite name=Allies> already has <nobr><sprite name=Poison></nobr>) to add <nobr>+1 <sprite name=Attack></nobr> to the entire Attack action
 FHS_GH_298_T	On your next six Attack actions while <nobr><sprite name=Air></nobr> is currently infused, <nobr><sprite name=ConsumeAir></nobr> to add <nobr>+1 <sprite name=Attack></nobr> to the entire Attack action
 FHS_GH_300_B	After each of your Move actions, <nobr><sprite name=Poison></nobr> all adjacent <sprite name=Allies> and <sprite name=Enemy>
@@ -976,7 +976,7 @@ FHS_GH_383_B	When this <sprite name=Enemy> dies, force all <sprite name=Enemy> a
 FHS_GH_383_T	The next three times a <nobr><b><color=#39BEED>Doomed</color></b></nobr> <sprite name=Enemy> dies within <nobr><sprite name=Range> 2</nobr> of another <sprite name=Enemy>, transfer one <nobr><b><color=#39BEED>Doom</color></b></nobr> to that <sprite name=Enemy> instead of discarding it
 FHS_GH_384_T	Create one 2 damage <nobr><sprite name=Immobilize></nobr> trap in an adjacent empty hex
 FHS_GH_387_T	<nobr>+2<sprite name=Attack></nobr> and gain <sprite name=XP1> if the target is <nobr><b><color=#39BEED>Doomed</color></b></nobr>
-FHS_GH_388_B	Each time this <sprite name=Enemy> suffers damage, perform a “<nobr><sprite name=Heal> 2</nobr>, Self“ action
+FHS_GH_388_B	Each time this <sprite name=Enemy> suffers damage, perform a “<nobr><sprite name=Heal> 2</nobr>” action
 FHS_GH_389_B	All summoned <sprite name=Allies> add <nobr>+2 <sprite name=Attack></nobr> to all their attacks targeting this <sprite name=Enemy>
 FHS_GH_390_T	<nobr>+2<sprite name=Attack></nobr> and gain <sprite name=XP1> if the target is undamaged
 FHS_GH_391_B	You and all <sprite name=Allies> gain <nobr><sprite name=Pierce> 2</nobr> on all your attacks targeting this <sprite name=Enemy>
@@ -992,14 +992,14 @@ FHS_GH_397_B	At the start of your next three turns, advance the tracker on this 
 FHS_GH_397_T_1	You may have two <nobr><b><color=#39BEED>Dooms</color></b></nobr> active on the same target
 FHS_GH_397_T_2	If a third <nobr><b><color=#39BEED>Doom</color></b></nobr> is played on the same target, discard one of the others, or if a third <nobr><b><color=#39BEED>Doom</color></b></nobr> is played on a different target, discard both of the others
 FHS_GH_398_B	Target one <nobr><b><color=#39BEED>Doomed</color></b></nobr> <sprite name=Enemy> at any range
-FHS_GH_399_B	When this <sprite name=Enemy> dies, you and all <sprite name=Allies> perform a “<nobr><sprite name=Heal> 2</nobr>, Self“ action
+FHS_GH_399_B	When this <sprite name=Enemy> dies, you and all <sprite name=Allies> perform a “<nobr><sprite name=Heal> 2</nobr>” action
 FHS_GH_401_B	+3<sprite name=Attack> to all your attacks targeting <nobr><b><color=#39BEED>Doomed</color></b></nobr> <sprite name=Enemy> this round
 FHS_GH_401_T	Kill the target and gain <sprite name=XP1> if its hit point value is less than or equal to 2 after the attack
 FHS_GH_402_B	You and all <sprite name=Allies> apply <sprite name=Curse> on all your attacks targeting this <sprite name=Enemy>
 FHS_GH_403_B	If this <sprite name=Enemy> dies within <nobr><sprite name=Range> 2</nobr> of another <sprite name=Enemy>, transfer this and any other <nobr><b><color=#39BEED>Doom</color></b></nobr> effects to that <sprite name=Enemy> instead of discarding them
 FHS_GH_405_B	You and all <sprite name=Allies> add <nobr>+X <sprite name=Attack></nobr> to all your attacks targeting this <sprite name=Enemy>, where X is the difference between the range of the attack and the number of hexes to the <sprite name=Enemy>
 FHS_GH_406_B	Transfer all active <nobr><b><color=#39BEED>Doom</color></b></nobr> effects from their current target to one <sprite name=Enemy> within <nobr><sprite name=Range> 4</nobr> of you
-FHS_GH_406_T	Force the target to move up to three hexes directly toward the closest hex adjacent to one of its <sprite name=Enemy>
+FHS_GH_406_T	Force the target to move up to three hexes directly toward the closest hex adjacent to one of its enemies
 FHS_GH_407_T	Give one adjacent <sprite name=Allies> one “<nobr>Medical Pack</nobr>” ability card
 FHS_GH_408_B	All your Heal actions this round affect you and all adjacent <sprite name=Allies>
 FHS_GH_409_B	All your melee attacks this round target all adjacent <sprite name=Enemy>
@@ -1026,7 +1026,7 @@ FHS_GH_445_T_2	In such cases, the <nobr><sprite name=Range></nobr> is 1 unless o
 FHS_GH_446_T	Kill all normal or elite <sprite name=Enemy> in the targeted area suffering from 10 or more damage
 FHS_GH_449_B	Once during each of your Attack actions, you may <sprite name=ConsumeAny> to add +1 <sprite name=Attack> to the entire Attack action
 FHS_GH_450_B_1	<line-height=100%>At the end of each of your turns, you may generate <voffset=-3><sprite name=Any></voffset>
-FHS_GH_450_B_2	Deduct -1 <sprite name=Attack> from all your attacks
+FHS_GH_450_B_2	-1 <sprite name=Attack> from all your attacks
 FHS_GH_459_B	All attacks targeting you gain Disadvantage this round
 FHS_GH_463_T_1	<sprite name=Attack> X-1 on a new <sprite name=Enemy> within <nobr><sprite name=Range> 2</nobr> of the first target, then <sprite name=Attack> X-2 on a third <sprite name=Enemy> within <nobr><sprite name=Range> 2</nobr> of the second target
 FHS_GH_463_T_2	<sprite name=Attack> X-3 on a fourth <sprite name=Enemy> within <nobr><sprite name=Range> 2</nobr> of the third target
@@ -1078,7 +1078,7 @@ FHS_JOTL_025_B	<nobr>+2<sprite name=Attack></nobr> and gain <sprite name=XP1> if
 FHS_JOTL_025_T	If this attack kills the target, one <sprite name=Enemy> adjacent to the hex in which it died suffers X damage, where X is the amount of damage the target would have suffered in excess of what was needed to kill it
 FHS_JOTL_026_T	On your next five attacks, add <nobr>+1 <sprite name=Attack></nobr> and <nobr><sprite name=Wound></nobr>
 FHS_JOTL_027_B	Add <nobr><sprite name=Strengthen></nobr> and gain <sprite name=XP1> if you killed an <sprite name=Enemy> this round
-FHS_JOTL_027_T	If an adjacent <sprite name=Enemy> has your Favorite, you may return it to its Active Ability. If you do, the adjacent <sprite name=Enemy> suffers 2 damage and gains <nobr><sprite name=Wound></nobr>.
+FHS_JOTL_027_T	If an adjacent <sprite name=Enemy> has your Favorite, you may return it to its Active Ability. If you do, the adjacent <sprite name=Enemy> suffers 2 damage and gains <nobr><sprite name=Wound></nobr>
 FHS_JOTL_028_B	The next five times an <sprite name=Enemy> ends a Move ability within <nobr><sprite name=Range> 5</nobr>, perform an "<nobr><sprite name=Attack> 2</nobr>, <nobr><sprite name=Range> 5</nobr>" action targeting that <sprite name=Enemy>
 FHS_JOTL_030_T	You may add <nobr>+3 <sprite name=Attack></nobr>, <nobr><sprite name=Wound></nobr>, and <nobr><sprite name=Push> 1</nobr> to a single target of any of your ranged attacks by marking it with your Favorite. When that target dies, it will drop your Favorite. If you loot that hex, return your Favorite to this Active Ability. This card cannot be active while "The Favorite" is active.
 FHS_JOTL_031_B	All adjacent <sprite name=Enemy> suffer 1 damage
@@ -1173,14 +1173,14 @@ FHS_JOTL_168_T	At the start of your next five turns, one <sprite name=Allies> wi
 FHS_JOTL_169_T_1	Force one <sprite name=Enemy> within <nobr><sprite name=Range> 3</nobr> to perform
 FHS_JOTL_169_T_2	targeting all other <sprite name=Enemy> adjacent to it. The acting <sprite name=Enemy> suffers 1 damage for each <sprite name=Enemy> targeted.
 FHS_JOTL_170_B_1	Force one adjacent <sprite name=Enemy> to perform
-FHS_JOTL_170_B_2	with you controlling the action. That <sprite name=Enemy> gains <nobr><sprite name=Immobilize></nobr>.
+FHS_JOTL_170_B_2	with you controlling the action. That <sprite name=Enemy> gains <nobr><sprite name=Immobilize></nobr>
 FHS_JOTL_172_B_1	One <sprite name=Allies> or <sprite name=Enemy> within <nobr><sprite name=Range> 3</nobr> may perform
 FHS_JOTL_172_B_2	targeting an <sprite name=Enemy> of your choice
 FHS_JOTL_172_T	Place a Ward in an adjacent empty hex. It is considered a summon for all purposes. All <sprite name=Enemy> that enter a hex adjacent to the Ward gain <nobr><sprite name=Poison></nobr>. All <sprite name=Enemy> gain Disadvantage on all their attacks not granted by you while within <nobr><sprite name=Range> 3</nobr> of the Ward.
 FHS_JOTL_173_B	Ignore the <nobr><sprite name=Curse></nobr> instead
 FHS_JOTL_173_T	Up to two <sprite name=Allies> within <nobr><sprite name=Range> 2</nobr> each suffer 2 damage. Each <sprite name=Allies> who does then performs
 FHS_JOTL_174_B	Any time you or any <sprite name=Allies> loses <nobr><sprite name=Poison></nobr>, that figure gains <nobr><sprite name=Strengthen></nobr>
-FHS_JOTL_174_T	Heal all damage on one <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr>. If you do, that <sprite name=Allies> gains <nobr><sprite name=Muddle></nobr>.
+FHS_JOTL_174_T	Heal all damage on one <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr>. If you do, that <sprite name=Allies> gains <nobr><sprite name=Muddle></nobr>
 FHS_JOTL_175_B	Force one <sprite name=Enemy> within <nobr><sprite name=Range> 3</nobr> to perform
 FHS_JOTL_176_T_1	One <sprite name=Allies> within <nobr><sprite name=Range> 2</nobr> may perform
 FHS_JOTL_176_T_2	If they do, that <sprite name=Allies> may perform
@@ -1207,7 +1207,7 @@ FHS_JOTL_240_T_2	2 damage instead, <sprite name=XP1>
 FHS_JOTL_240_T_3	If Fire was consumed, 2 damage instead
 FHS_JOTL_241_T	All <sprite name=Enemy> adjacent to the target suffer 1 damage
 FHS_JOTL_242_T	Target all <sprite name=Enemy> within 2 hexes
-FHS_JOTL_244_T	Place the Sand Devil in an adjacent empty hex. It is considered a trap for the purposes of monster focusing and movement. At the start of each of your turns, you may move it up to 2 hexes, and you may force any character on it to move with it. Any time a character moves onto it or vice versa (not when moving together), that character suffers 1 damage and gains <nobr><sprite name=Muddle></nobr>.
+FHS_JOTL_244_T	Place the Sand Devil in an adjacent empty hex. It is considered a trap for the purposes of monster focusing and movement. At the start of each of your turns, you may move it up to 2 hexes, and you may force any character on it to move with it. Any time a character moves onto it or vice versa (not when moving together), that character suffers 1 damage and gains <nobr><sprite name=Muddle></nobr>
 FHS_JOTL_245_B	All adjacent <sprite name=Enemy> suffer 2 damage
 FHS_JOTL_245_T	The next four times an <sprite name=Enemy> enters a hex adjacent to you, that <sprite name=Enemy> gains <nobr><sprite name=Disarm></nobr>
 FHS_JOTL_247_B	One adjacent <sprite name=Enemy> suffers 1 damage
@@ -1235,7 +1235,6 @@ FHS_PlagueRat	Plague Rat
 FHS_Range	Range
 FHS_RatKing	Rat King
 FHS_RedFalcon	Red Falcon
-FHS_Retaliate	Retaliate
 FHS_RockColossus	Rock Colossus
 FHS_SlimeSpirit	Slime Spirit
 FHS_SpiritBanner	Spirit Banner

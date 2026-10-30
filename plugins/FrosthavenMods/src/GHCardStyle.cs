@@ -37,27 +37,28 @@ namespace FrosthavenMods
         private const float HalfWidthPx = 478f;   // a card half, in the pixels the numbers below are measured in
 
         // Frosthaven's pill (Sodden Soil) and self box (Launch Pod)
-        private const float EdgeMargin = 14f, PillHeight = 39f, PillPad = 9.5f, PillGap = 7f, PillText = 18f, PillPpum = 2f;
+        private const float EdgeMargin = 14f, PillRim = 30f, PillHeight = 39f, PillPad = 9.5f, PillGap = 7f, PillGapBare = 14f, PillText = 18f, PillPpum = 2f;
         private const float SelfHeight = 41f, SelfPadLeft = 13f, SelfPadRight = 12f, SelfPpum = 2.4f;
         // infusions (Call of Doom, Primal Bellow)
         private const float BadgeBottom = 6f;
         private const float GeneratorElement = 51f, GeneratorSlot = 26f, SlotSize = 32f, SlotGap = 5f;
-        private const float PillSlotPull = 3f, PillSlotAfter = 21f, PillSlotEnd = 2f;
-        private const float InfuseSize = 48f, InfuseBottom = 11.5f, InfuseBand = 72f, ContentTop = 9f;
+        private const float PillSlotPull = 0f, PillSlotAfter = 11f, PillSlotEnd = 2f;   // slot to next icon: Exploding Decoy 12 px; 21 drew 22
+        private const float InfuseSize = 48f, InfuseBottom = 11.5f, InfuseBand = 72f, ContentTop = 20f;   // 9 crowded the rim (the visual review)
         // wrapped text keeps 24 px from the half's sides (Against All Odds: 26..27; the generator's rows run to 11); a
         // half that doesn't fit is scaled to keep FitEdge px from the sides, clear of the badges and the infusion band
         // an area beside its line keeps 20 px from the rim and 24 from the line, or goes under it (Frosthaven's 51 area halves)
-        private const float AreaRim = 20f, AreaGap = 24f, AreaBelow = 12f;
-        private const float TextMargin = 24f, FitEdge = 10f, FitMin = 0.6f, ConsumeMinText = 0.8f;
+        private const float AreaRim = 20f, AreaGap = 24f, AreaBelow = 12f, ColonGap = 6f;
+        private const float TextMargin = 24f, FitEdge = 14f, FitMin = 0.6f, BoxRim = 36f;
         private const bool FitTrace = false;   // true: log every half's measured content (the fit review)
         // hexes (Overwhelming Wave)
         private const float HexDot = 54f, HexColumn = 54.5f, HexWidth = 53f, HexRim = 3.2f, HexXHalf = 10.3f, HexXStroke = 2.8f;
 
         private static readonly Regex Consume = new Regex(@"^Consume(Fire|Ice|Air|Earth|Light|Dark|Any|Wild)$");
-        private static readonly Regex Create = new Regex(@"^Create(Fire|Ice|Air|Earth|Light|Dark|Any|Wild)(_Highlight)?$");
+        private static readonly Regex Create = new Regex(@"^Create(Fire|Ice|Air|Earth|Light|Dark|Any|Wild)(_\w+)?$");   // CreateIce_Ice: the ice infusion was the pale one
 
         private static Dictionary<string, Sprite> _atlas;
-        private static Sprite _pill, _self;
+        private static Sprite _pill, _self, _consumeAny;
+        private static float _anyRetry;
         private static readonly Dictionary<string, Sprite> HexSprites = new Dictionary<string, Sprite>();
         private static TMP_FontAsset _font;
         private static readonly HashSet<string> Reported = new HashSet<string>();
@@ -103,9 +104,11 @@ namespace FrosthavenMods
                     ConsumeSprites(h);
                     Pictures(h, tint);
                     Areas(rows, f);
-                    Pills(rows, tint, f);
                     ConsumeBoxes(rows, h, f);
                     if (!augment) Relayout(rows);
+                    // after Relayout: it stacks a column's rows again, and a pill cut into rows (one per slotted value:
+                    // Fire Orbs' target and range) is one pill only once Pills has joined them
+                    Pills(rows, h, tint, f);
                     SelfBoxes(rows, f);
                     AreaClear(h, (RectTransform)rows, f);
                     Trackers(h, (RectTransform)rows, f);
@@ -157,7 +160,10 @@ namespace FrosthavenMods
                 if (s.texture != null && s.texture.name == Atlas && !_atlas.ContainsKey(s.name)) _atlas[s.name] = s;
                 else if (s.name == "AddedEffectRoundedBorder" && _pill == null) _pill = s;
                 else if (s.name == "FH_UI_CARDS_PositiveEffectBackground" && _self == null) _self = s;
+                else if (s.name == "ConsumeAny" && _consumeAny == null) _consumeAny = s;   // not in the card atlas
             }
+            if (_atlas.TryGetValue("ConsumeAny", out Sprite inAtlas)) _consumeAny = inAtlas;
+            Plugin.Log.LogInfo($"Gloomhaven card style: consume-any {(_consumeAny != null ? _consumeAny.texture?.name : "MISSING")}");
             _font = Resources.FindObjectsOfTypeAll<TMP_FontAsset>().FirstOrDefault(f => f != null && f.name == "FH_Font_AbilityCards");
             Plugin.Log.LogInfo($"Gloomhaven card style: {_atlas.Count} card icons, pill {(_pill != null ? "ok" : "MISSING")}, self box {(_self != null ? "ok" : "MISSING")}, font {(_font != null ? "ok" : "MISSING")}");
         }
@@ -187,8 +193,20 @@ namespace FrosthavenMods
                 if (t.GetComponentsInParent<Transform>(true).Any(p => p.name == "ConditionalElement" || p.name == "Consume Button")) continue;
                 var rt = (RectTransform)t.transform;
                 Rect r = In(rt, half);
-                // a narrow column (Beast Tyrant's "Command" beside its ally's attack) would only break its word
-                if (r.width < 0.6f * half.rect.width) continue;
+                // a narrow column (Beast Tyrant's "Command" beside its ally's attack) would only break its word; a single
+                // word never wraps ("Comma / nd": Jaws of Death)
+                if (r.width < 0.6f * half.rect.width)
+                {
+                    if (!Regex.Replace(t.text, "<[^>]+>", "").Trim().Contains(" "))
+                    {
+                        t.enableWordWrapping = false;
+                        // and set small enough to stay in its column (unwrapped, "Command" ran past the rim)
+                        float pw = t.GetPreferredValues(t.text, float.PositiveInfinity, float.PositiveInfinity).x;
+                        float room = rt.rect.width - 4f;
+                        if (pw > room && pw > 0f) t.fontSize *= Mathf.Max(0.6f, room / pw);
+                    }
+                    continue;
+                }
                 float want = TextMargin * f;
                 float left = Mathf.Max(0f, half.rect.xMin + want - r.xMin), right = Mathf.Max(0f, r.xMax - (half.rect.xMax - want));
                 if (left < 0.5f * f && right < 0.5f * f) continue;
@@ -273,7 +291,22 @@ namespace FrosthavenMods
                 var copy = (Sprite[])list.Clone();
                 for (int i = 0; i < copy.Length; i++)
                     if (copy[i] != null && Consume.IsMatch(copy[i].name) && _atlas.TryGetValue(copy[i].name, out Sprite fh)) copy[i] = fh;
+                // the "not chosen yet" picture of a consume-any (index 6: Gloomhaven's down arrow over a colour wheel,
+                // Frost Armor, Mana Bolt) is Frosthaven's ConsumeAny
+                if (_consumeAny == null && Time.realtimeSinceStartup > _anyRetry)
+                {
+                    // its bundle isn't loaded when the cards are dressed at boot: looked for again, at most every 20 s
+                    _anyRetry = Time.realtimeSinceStartup + 20f;
+                    _consumeAny = Resources.FindObjectsOfTypeAll<Sprite>().FirstOrDefault(sp => sp != null && (sp.name == "ConsumeAny" || sp.name == "ConsumeWild"));
+                    if (_consumeAny != null) Plugin.Log.LogInfo("Gloomhaven card style: consume-any found later (" + _consumeAny.name + ")");
+                }
+                if (copy.Length > 6 && _consumeAny != null) copy[6] = _consumeAny;
                 field.SetValue(copy);
+                if (Traverse.Create(ce).Field("elementImage").GetValue() is Image shown && list.Length > 6 && shown.sprite == list[6])
+                {
+                    shown.sprite = copy[6];
+                    shown.preserveAspect = true;
+                }
             }
         }
 
@@ -391,35 +424,62 @@ namespace FrosthavenMods
 
         /// <summary>An ability with a pill: the value with its slots, 7 px, then the pill, the whole line centred in its row
         /// (the port's 4-column row: an empty column, the value's, the pill's, an empty one).</summary>
-        private static void Pills(Transform rows, Color tint, float f)
+        private static void Pills(Transform rows, RectTransform half, Color tint, float f)
         {
             foreach (TMP_Text t in rows.GetComponentsInChildren<TMP_Text>(true).Where(x => (x.text ?? "").Contains("<link=fhpill>")).ToList())
             {
                 if (!(t.transform.parent is RectTransform pillRow) || !(pillRow.parent is RectTransform pillCol) || !(pillCol.parent is RectTransform line)) continue;
                 if (pillCol.GetSiblingIndex() < 1) continue;
-                // the pill's text: Frosthaven's 18, one line
-                t.fontSize = PillText;
-                t.enableWordWrapping = false;
-                t.overflowMode = TextOverflowModes.Overflow;
-                t.ForceMeshUpdate();
+                // (each row's text is set to the pill's size below, with its pill's first row: set here, a later row
+                // was put back to full size after the first had shrunk the pill: Frigid Torrent's mixed sizes)
                 // the value's row: the column before the pill's (several pill rows of one ability share a column)
                 RectTransform mainRow = line.GetChild(pillCol.GetSiblingIndex() - 1).Cast<Transform>().OfType<RectTransform>().FirstOrDefault(r => r.gameObject.activeSelf);
                 if (mainRow == null) continue;
                 var pillRows = pillCol.Cast<Transform>().OfType<RectTransform>().Where(r => r.gameObject.activeSelf && Drawn(r, line).width > 0).ToList();
                 if (pillRows.IndexOf(pillRow) > 0) continue;   // handled with the first
+                // every row of the pill at the pill's size before anything is measured: a later row measured at the
+                // generator's size grew into its neighbour once its own turn came (Mass Hysteria: muddle on the range)
+                foreach (TMP_Text pt in pillRows.SelectMany(r => r.GetComponentsInChildren<TMP_Text>(true)))
+                {
+                    pt.fontSize = PillText;
+                    pt.enableWordWrapping = false;
+                    pt.overflowMode = TextOverflowModes.Overflow;
+                    pt.ForceMeshUpdate();
+                }
                 Rect main = Drawn(mainRow, line);
                 if (main.width <= 0) continue;
                 // a slot in the pill (Shard Launch, Exploding Decoy): 7 px after its number, not a value's 10; 15 px
                 // before the next icon; 9 px before the pill's end
                 var slotted = pillRows.Select(r => r.Cast<Transform>().FirstOrDefault(c => c.gameObject.activeSelf && c.name == "EnhancementContainer" && c.childCount > 0)).ToList();
                 foreach (Transform s in slotted.Where(s => s != null)) Shift(s, line, -PillSlotPull * f, 0);
-                float Gaps() => Enumerable.Range(0, pillRows.Count - 1).Sum(i => (slotted[i] != null ? PillSlotAfter : 4f) * f)
+                // the gap after part i: a part that starts with its comma (", <condition>") follows closely, so the comma
+                // doesn't float alone after a slot ("3 [slot]   , [stun]": Stun Shot)
+                bool[] comma = pillRows.Select(r => (r.GetComponentInChildren<TMP_Text>(true)?.text ?? "").Contains("<link=fhpill>, ")).ToArray();
+                // after a slot the slot is the separator: Frosthaven writes no comma there ("4 [slot], [muddle]" read odd)
+                for (int i = 1; i < pillRows.Count; i++)
+                {
+                    if (!comma[i] || slotted[i - 1] == null) continue;
+                    foreach (TMP_Text pt in pillRows[i].GetComponentsInChildren<TMP_Text>(true))
+                    {
+                        pt.text = pt.text.Replace("<link=fhpill>, ", "<link=fhpill>");
+                        pt.ForceMeshUpdate();
+                    }
+                    comma[i] = false;
+                }
+                float Gap(int i) => (i + 1 < pillRows.Count && comma[i + 1] ? 2f : slotted[i] != null ? PillSlotAfter : 4f) * f;
+                float Gaps() => Enumerable.Range(0, pillRows.Count - 1).Sum(Gap)
                                 + (slotted[pillRows.Count - 1] != null ? PillSlotEnd * f : 0f);
+                // a value without a slot of its own has the slot's room before its pill (Hook Gun: the pill butted the 2)
+                bool mainSlot = mainRow.GetComponentsInChildren<Transform>(true).Any(c => c.name == "EnhancementContainer" && c.childCount > 0 && c.gameObject.activeSelf);
+                float gap = (mainSlot ? PillGap : PillGapBare) * f;
                 var parts = pillRows.Select(r => Drawn(r, line)).ToList();
                 float pillW = parts.Sum(p => p.width) + Gaps() + 2 * PillPad * f;
-                float total = main.width + PillGap * f + pillW;
+                float total = main.width + gap + pillW;
                 // too long for the half: the pill's text shrinks, as Frosthaven's pill text does (auto 5-18)
-                float avail = line.rect.width - 2 * EdgeMargin * f;
+                // the half's width, not the line's: a line in a column beside an area is narrow, and the area may go under
+                // it (Icy Blast's pill shrank to nothing); 30 px from the rims (14 let pills touch them: King of the Hill)
+                float avail = half.InverseTransformVector(line.TransformVector(Vector3.right)).magnitude > 0
+                    ? line.InverseTransformVector(half.TransformVector(new Vector3(half.rect.width - 2 * PillRim * f, 0, 0))).magnitude : line.rect.width;
                 if (total > avail)
                 {
                     float textW = parts.Sum(p => p.width);
@@ -431,19 +491,19 @@ namespace FrosthavenMods
                     }
                     parts = pillRows.Select(r => Drawn(r, line)).ToList();
                     pillW = parts.Sum(p => p.width) + Gaps() + 2 * PillPad * f;
-                    total = main.width + PillGap * f + pillW;
+                    total = main.width + gap + pillW;
                 }
                 float left = line.rect.center.x - total / 2f;
                 float midY = main.center.y;
                 Shift(mainRow, line, left - main.xMin, 0);
-                float x = left + main.width + PillGap * f + PillPad * f;
+                float x = left + main.width + gap + PillPad * f;
                 for (int i = 0; i < pillRows.Count; i++)
                 {
                     Shift(pillRows[i], line, x - parts[i].xMin, midY - parts[i].center.y);
-                    x += parts[i].width + (slotted[i] != null ? PillSlotAfter : 4f) * f;
+                    x += parts[i].width + Gap(i);
                 }
                 Image bg = Background(pillRows[0], "FHPill", _pill, Image.Type.Tiled, PillPpum, tint);
-                float pillLeft = left + main.width + PillGap * f;
+                float pillLeft = left + main.width + gap;
                 Place(bg.rectTransform, line, new Rect(pillLeft, midY - PillHeight * f / 2f, pillW, PillHeight * f));
             }
         }
@@ -478,25 +538,34 @@ namespace FrosthavenMods
                 // a consume of two elements: the second (ConsumeButton.Element1) sits after the first, not on it (Obsidian Shards)
                 var second = button.Find("Element1") as RectTransform;
                 if (second != null && !second.gameObject.activeSelf) second = null;
-                float fixedW = (8f + 51f + 16f + 2f + 12f + (second != null ? 51f : 0f)) * u, th = 35f * u;
-                float maxW = box.InverseTransformVector(half.TransformVector(new Vector3(half.rect.width, 0, 0))).magnitude - 2f * EdgeMargin * u;
+                // a box with no element (a cost in words: Numb the Pain's "You may suffer 2 damage") is the text alone
+                bool hasElement = element.gameObject.activeSelf;
+                float fixedW = (hasElement ? 8f + 51f + ColonGap + 16f + 2f + 12f + (second != null ? 51f : 0f) : 16f + 16f) * u, th = 35f * u;
+                // the reward at the card's text size, wrapped like Frosthaven's (Tri-Thrust: two centred lines, never
+                // shrunk: the visual review found box text at half size on a dozen halves), the box 36 px from the rims
+                text.enableAutoSizing = false;
+                text.fontSize = Mathf.Max(text.fontSize, GlobalSettings.Instance.m_AbilityCardSettings.StandardFontSize);
+                pref = text.GetPreferredValues(text.text, float.PositiveInfinity, float.PositiveInfinity);
+                tw = pref.x * text.transform.lossyScale.x / box.lossyScale.x;
+                float maxW = box.InverseTransformVector(half.TransformVector(new Vector3(half.rect.width, 0, 0))).magnitude - 2f * BoxRim * u;
                 if (fixedW + tw > maxW)
                 {
-                    text.fontSize *= Mathf.Max(ConsumeMinText, (maxW - fixedW) / tw);
-                    pref = text.GetPreferredValues(text.text, float.PositiveInfinity, float.PositiveInfinity);
-                    tw = pref.x * text.transform.lossyScale.x / box.lossyScale.x;
-                    if (fixedW + tw > maxW)
-                    {
-                        tw = maxW - fixedW;
-                        text.enableWordWrapping = true;
-                        Vector2 two = text.GetPreferredValues(text.text, tw * box.lossyScale.x / text.transform.lossyScale.x, float.PositiveInfinity);
-                        th = Mathf.Max(th, two.y * text.transform.lossyScale.y / box.lossyScale.y);
-                    }
+                    text.enableWordWrapping = true;
+                    text.alignment = TextAlignmentOptions.Center;
+                    // as narrow as the lines allow: a balanced wrap, not a full first line and a stub
+                    float inner = (maxW - fixedW) * box.lossyScale.x / text.transform.lossyScale.x;
+                    Vector2 wrapped = text.GetPreferredValues(text.text, inner, float.PositiveInfinity);
+                    int lines = Mathf.Max(1, Mathf.RoundToInt(wrapped.y / Mathf.Max(1f, pref.y)));
+                    float balanced = Mathf.Min(inner, pref.x / lines * 1.12f);
+                    if (text.GetPreferredValues(text.text, balanced, float.PositiveInfinity).y > wrapped.y + 1f) balanced = inner;
+                    tw = balanced * text.transform.lossyScale.x / box.lossyScale.x;
+                    th = Mathf.Max(th, wrapped.y * text.transform.lossyScale.y / box.lossyScale.y);
                 }
                 float w = fixedW + tw, h = Mathf.Max(61f * u, th + 26f * u);
                 // the generator sized the box for its own (stacked, taller) layout: it takes the new height, centred, so
                 // Relayout closes the gap it left (Wretched Creature, Concealed Dominance: an empty middle)
-                if (Mathf.Approximately(box.anchorMin.y, box.anchorMax.y) && Mathf.Approximately(box.pivot.y, 0.5f) && box.rect.height > h + 8f * u)
+                // and a taller one (wrapped text) its height too: it overlapped the box below (Volatile Consumption)
+                if (Mathf.Approximately(box.anchorMin.y, box.anchorMax.y) && Mathf.Approximately(box.pivot.y, 0.5f) && Mathf.Abs(box.rect.height - (h + 8f * u)) > 1f * u)
                     box.sizeDelta = new Vector2(box.sizeDelta.x, h + 8f * u);
                 Rect old = new Rect(box.rect.center.x - w / 2f, box.rect.center.y - h / 2f, w, h);
                 // a box in a column (beside an area) may be centred too near the side: move it in
@@ -507,17 +576,22 @@ namespace FrosthavenMods
                 old.x += dx * u / f;
                 Image back = box.GetComponentsInChildren<Image>(true).FirstOrDefault(i => i.sprite != null && i.sprite.name == "ConditionalElement");
                 if (back != null) Place(back.rectTransform, box, old);
-                float x = old.xMin + 8f * u;
+                float x = old.xMin + (hasElement ? 8f : 16f) * u;
                 Place(button, box, old);
-                Place(element, box, new Rect(x, old.center.y - 25.5f * u, 51f * u, 51f * u));
-                x += 51f * u;
-                if (second != null)
+                if (hasElement)
                 {
-                    Place(second, box, new Rect(x, old.center.y - 25.5f * u, 51f * u, 51f * u));
+                    Place(element, box, new Rect(x, old.center.y - 25.5f * u, 51f * u, 51f * u));
                     x += 51f * u;
+                    if (second != null)
+                    {
+                        Place(second, box, new Rect(x, old.center.y - 25.5f * u, 51f * u, 51f * u));
+                        x += 51f * u;
+                    }
+                    x += ColonGap * u;   // Frosthaven leaves a gap before the colon (Malicious Conversion); ours touched the circle
+                    Place((RectTransform)colon.transform, box, new Rect(x, old.center.y - 25.5f * u, 16f * u, 51f * u));
+                    x += 18f * u;
                 }
-                Place((RectTransform)colon.transform, box, new Rect(x, old.center.y - 25.5f * u, 16f * u, 51f * u));
-                x += 18f * u;
+                else colon.gameObject.SetActive(false);
                 Place(desc, box, new Rect(x, old.center.y - th / 2f, tw, th));
                 foreach (RectTransform r in desc.GetComponentsInChildren<RectTransform>(true).Where(r => r != desc && r.name != "secondaryFX"))
                 {
@@ -534,8 +608,15 @@ namespace FrosthavenMods
                 if (!(t.transform.parent is RectTransform row)) continue;
                 Rect d = Drawn(row, row);
                 if (d.width <= 0) continue;
+                // the box as tall as what it holds (a condition's diamond is taller than a heal: it broke through the rim:
+                // Hidden Daggers, Energizing Strike), and centred on the line: the row centres its text, not text + slot
+                float hgt = Mathf.Max(SelfHeight * f, d.height + 8f * f);
+                Rect box = new Rect(d.xMin - SelfPadLeft * f, d.center.y - hgt / 2f, d.width + (SelfPadLeft + SelfPadRight) * f, hgt);
+                float dx = row.rect.center.x - box.center.x;
+                foreach (Transform c in row) if (c is RectTransform crt && c.name != "FHSelf") Shift(crt, row, dx, 0f);
+                box.x += dx;
                 Image bg = Background(row, "FHSelf", _self, Image.Type.Sliced, SelfPpum, Color.white);
-                Place(bg.rectTransform, row, new Rect(d.xMin - SelfPadLeft * f, d.center.y - SelfHeight * f / 2f, d.width + (SelfPadLeft + SelfPadRight) * f, SelfHeight * f));
+                Place(bg.rectTransform, row, box);
             }
         }
 
@@ -849,7 +930,11 @@ namespace FrosthavenMods
                 if (hexParts.Count == 0) continue;
                 Rect hex = hexParts.Aggregate((a, b) => Rect.MinMaxRect(Mathf.Min(a.xMin, b.xMin), Mathf.Min(a.yMin, b.yMin), Mathf.Max(a.xMax, b.xMax), Mathf.Max(a.yMax, b.yMax)));
                 var beside = line.Cast<Transform>().OfType<RectTransform>().Where(c => c != col && c.gameObject.activeSelf).ToList();
-                var all = beside.SelectMany(c => Extent(c, half)).ToList();
+                // the half's infusions don't count: they go to the half's bottom (The Bigger One's two elements made its
+                // short attack line look too wide for the area beside it)
+                var all = beside.SelectMany(c => c.GetComponentsInChildren<Graphic>(true)
+                    .Where(g => !g.GetComponentsInParent<Transform>(true).Any(pp => pp.name == "InfuseContainer"))
+                    .Select(g => Extent1(g, c, half)).Where(e => e.HasValue).Select(e => e.Value)).ToList();
                 if (all.Count == 0) continue;
                 Rect block = Union(all);
                 float lo = half.rect.xMin + FitEdge * f, hi = half.rect.xMax - AreaRim * f;
@@ -866,12 +951,45 @@ namespace FrosthavenMods
                     if (push > 0f) foreach (RectTransform c in beside) Shift(c, half, -push, 0f);
                     Shift(area, half, x - hex.xMin, 0f);
                 }
-                else
+                else if (beside.SelectMany(c => c.GetComponentsInChildren<TMP_Text>(true)).Any(t => (t.text ?? "").Contains("<link=fhpill>")))
                 {
                     // Frosthaven draws the area centred under a line too wide to leave room beside it (Blizzard, Dark Fog,
                     // Sweeping Aid): the line is centred on the half and the area goes under it
                     foreach (RectTransform c in beside) Shift(c, half, half.rect.center.x - block.center.x, 0f);
                     Shift(area, half, half.rect.center.x - hex.center.x, block.yMin - AreaBelow * f - hex.yMax);
+                    // the rows after this one make room for it (The Bigger One: its rule text was drawn over the hexes);
+                    // Fit brings the half back inside if that's now too tall
+                    Transform topRow = area;
+                    while (topRow.parent != null && topRow.parent != rows) topRow = topRow.parent;
+                    float areaBottom = In(area, half).yMin;
+                    var after = rows.Cast<Transform>().OfType<RectTransform>()
+                        .Where(r => r.gameObject.activeSelf && r.GetSiblingIndex() > topRow.GetSiblingIndex()).ToList();
+                    var afterParts = after.SelectMany(r => Extent(r, half)).ToList();
+                    if (afterParts.Count > 0)
+                    {
+                        float overlap = afterParts.Max(p => p.yMax) - (areaBottom - AreaBelow * f);
+                        if (overlap > 0f) foreach (RectTransform r in after) Shift(r, half, 0f, -overlap);
+                    }
+                }
+                else
+                {
+                    // beside text (no attack line: Disintegration Beam's rule text), Frosthaven keeps the area beside it
+                    // (Foxhole): the area at the rim margin, the text as far left as it goes, then the area smaller
+                    float x = hi - hex.width;
+                    float need = block.xMax + AreaGap * f - x;
+                    float push = Mathf.Clamp(need, 0f, block.xMin - lo);
+                    if (push > 0f) foreach (RectTransform c in beside) Shift(c, half, -push, 0f);
+                    Shift(area, half, x - hex.xMin, 0f);
+                    need -= push;
+                    if (need > 0f)
+                    {
+                        float k = Mathf.Max(0.6f, (hex.width - need) / hex.width);
+                        Vector2 anchor = new Vector2(hi, hex.center.y);   // the right edge stays at the margin
+                        Vector2 c0 = In(area, half).center;
+                        area.localScale = new Vector3(area.localScale.x * k, area.localScale.y * k, 1f);
+                        Vector2 c1 = anchor + (c0 - anchor) * k;
+                        Shift(area, half, c1.x - In(area, half).center.x, c1.y - In(area, half).center.y);
+                    }
                 }
             }
         }

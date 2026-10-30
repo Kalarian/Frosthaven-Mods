@@ -46,7 +46,7 @@ Layout:
             - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
                 - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
-                - Row: "<link=fhpill><sprite name=Disarm></link>"
+                - Row: "<link=fhpill>, <sprite name=Disarm></link>"
             - Column:
     Bottom:
         - Active:

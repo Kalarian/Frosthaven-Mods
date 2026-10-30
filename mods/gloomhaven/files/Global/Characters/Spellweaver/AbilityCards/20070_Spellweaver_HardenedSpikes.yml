@@ -78,4 +78,3 @@ Layout:
                         Layout:
                             - Row: "<size=150%><sprite name=Shield> 2"
                 - Column:
-                    - Duration: Round

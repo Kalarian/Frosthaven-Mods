@@ -66,4 +66,3 @@ Layout:
                         Layout:
                             - Row: "<b><sprite name=Shield> 2"
                 - Column:
-                    - Duration: Round

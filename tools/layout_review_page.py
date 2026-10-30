@@ -103,7 +103,7 @@ def main():
             fh.append(f'<figure><img src="{img}" alt=""><figcaption>{html.escape(m["class"])} · {html.escape(m["card"])} '
                       f'({m["half"]})</figcaption></figure>' if img else "")
         note_html = ("<ul>" + "".join(f"<li><b>{html.escape(n[:2])}</b> {html.escape(n[3:])}</li>" for n in notes) + "</ul>"
-                     if notes else '<p class="ok">Matches Frosthaven.</p>')
+                     if notes else '<p class="ok">Passes the layout rules (a data check; the image is judged by eye).</p>')
         rows.append(f'<section class="{"flag" if notes else "ok"}"><h3>{html.escape(p["card"])} <span>{p["half"]}</span></h3>'
                     f'<div class="cmp">' + (f'<figure class="before"><img src="{before}" alt=""><figcaption>{cls}: before</figcaption></figure>' if COMPARE and before else '') +
                     f'<figure class="mine"><img src="{mine}" alt=""><figcaption>{cls}: {"after" if COMPARE else "ported"}</figcaption></figure>'

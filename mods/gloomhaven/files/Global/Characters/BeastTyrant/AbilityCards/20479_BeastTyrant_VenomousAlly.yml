@@ -38,5 +38,5 @@ Layout:
             - Column: "<size=150%><sprite name=RangedAttack> *BAttack*"
             - Column:
                 - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* @BAttack.Range@</link>"
-                - Row: "<link=fhpill><sprite name=Poison></link>"
+                - Row: "<link=fhpill>, <sprite name=Poison></link>"
             - Column:

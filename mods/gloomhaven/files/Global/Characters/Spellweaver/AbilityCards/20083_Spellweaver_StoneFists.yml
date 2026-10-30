@@ -60,7 +60,7 @@ Layout:
             - Column: "<size=150%><sprite name=Attack> *TAttack*"
             - Column:
                 - Row: "<link=fhpill><sprite name=Push> *TAttackSubPush* @TAttackSubPush@</link>"
-                - Row: "<link=fhpill><sprite name=Immobilize></link>"
+                - Row: "<link=fhpill>, <sprite name=Immobilize></link>"
             - Column:
         - Conditional:
             Layout:

@@ -45,9 +45,8 @@ Layout:
             - Column:
             - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Range> *TAttack.Range*</link>"
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Range> *TAttack.Range* <sprite name=Push> *TAttackSubPush* @TAttackSubPush@</link>"
             - Column:
-        - Row: "<sprite name=Push> *TAttackSubPush* @TAttackSubPush@"
     Bottom:
         - Row: "$FHS_GH_371_B$"
         - Row: "<size=20%> "

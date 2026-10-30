@@ -58,7 +58,7 @@ Layout:
         - Active:
             Ability: BRetaliate
             Icon: Positive_Retaliate
-            ListLayout: "<sprite name=Retaliate> *BRetaliate*, $FHS_Retaliate$ <sprite name=Range> *BRetaliate.RetaliateRange*"
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*, <sprite name=Range> *BRetaliate.RetaliateRange*"
             Layout:
                 - Row:
                     - ColumnWidths: "10,35,45,10"

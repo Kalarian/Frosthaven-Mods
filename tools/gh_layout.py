@@ -410,10 +410,11 @@ def _pill_rank(m):
     return min(PILL_ORDER.index(k), 3) if k in PILL_ORDER[:5] else 4 if k == "Jump" else 5
 
 
-def _pill_text(mods):
+def _pill_text(mods, after=False):
+    """after: the pill continues a row before it (a slotted value ended that row), so a condition still takes its comma."""
     out = ""
     for i, m in enumerate(mods):
-        if i:
+        if i or (after and _pill_rank(m) >= 5):
             out += " " if _pill_rank(m) < 5 else ", "
         # an icon and its number a space apart, as Frosthaven's pills write them ("◎ 2 ⟨⟩ 3")
         out += re.sub(r"(<sprite name=\w+>)(?=[*\d])", r"\1 ", m)
@@ -446,7 +447,7 @@ def _pill_block(main, mods, self_box):
             cur = []
     if cur:
         parts.append(cur)
-    cols = [Node("Row", _pill_text(p)) for p in parts]
+    cols = [Node("Row", _pill_text(p, after=k > 0)) for k, p in enumerate(parts)]
     return Node("Row", children=[Node("ColumnWidths", STYLE_COLUMNS), Node("Column"), Node("Column", f'"{main}"'),
                                  Node("Column", children=cols), Node("Column")])
 
@@ -493,8 +494,16 @@ def _style_items(items):
                 j += 1
             self_box = any(m in ("$Self$", FH_SELF) for m in mods)
             mods = [m for m in mods if m not in ("$Self$", FH_SELF)]
-            while j < len(items) and is_row(items[j]) and _text_modifiers(items[j].text()) is not None:
-                mods += _text_modifiers(items[j].text())
+            # target text rows and modifier rows in any order: a condition after "all adjacent enemies" stayed on a row
+            # of its own under the pill (Freezing Nova, Long Con, Dust Cloud)
+            while j < len(items) and is_row(items[j]):
+                tm = _text_modifiers(items[j].text())
+                if tm is not None:
+                    mods += tm
+                elif is_modifier(items[j]):
+                    mods.append(_clean(items[j].text()))
+                else:
+                    break
                 j += 1
             out.append(_pill_block(main, mods, self_box))
             i = j
@@ -565,6 +574,14 @@ def _drop_self(items):
         if (n.key == "Row" and not n.children and re.sub(r"<[^>]+>", "", t).strip() in ("$Self$", "$FHS_Self$")
                 and out and SELF_DEFAULT.search(out[-1].text() or "")):
             continue
+        # a retaliate's range is the range icon alone ("<Retaliate> 2, Retaliate <Range> 2": Echoing Aria, Boiling Arc)
+        if t and re.search(r"\$(?:FHS_)?Retaliate\$\s*(?:<nobr>)?<sprite name=Range>", t):
+            t = re.sub(r"\$(?:FHS_)?Retaliate\$\s*((?:<nobr>)?<sprite name=Range>)", r"\1", t)
+            n.set_text(t)
+        # no full stop after a closing icon ("instead, <XP>.": Spirit of Doom's box)
+        if t and re.search(r"(<sprite name=\w+>(?:</nobr>)?)\.\s*$", t):
+            t = re.sub(r"(<sprite name=\w+>(?:</nobr>)?)\.\s*$", r"\1", t)
+            n.set_text(t)
         # a word naming the icon after it goes, as in the card texts (Vicious Blood: "Retaliate <Retaliate> 2")
         if t and re.search(r"\b([A-Z][a-z]+)\s+(<sprite name=\1>)", t):
             t = re.sub(r"\b([A-Z][a-z]+)\s+(<sprite name=\1>)", r"\2", t)
@@ -589,7 +606,10 @@ def _drop_durations(items):
     for n in items:
         if n.key == "Duration":
             continue
-        if n.children and n.key not in ("Consume", "Conditional"):
+        # inside a consume only when its reward isn't the text the dashed box takes: a boxed one keeps its icon, as
+        # Frosthaven's Shattering Blow; a bare one showed it twice (Crackling Air, Boiling Arc)
+        boxed = n.key == "Consume" and any(c.key == "Text" and not c.children for c in n.children)
+        if n.children and n.key != "Conditional" and not boxed:
             before = len(_flat(n.children))
             n.children = _drop_durations(n.children)
             if n.key == "Row" and len(_flat(n.children)) < before and all(c.key == "ColumnWidths" or (c.key == "Column" and not c.children and not c.text().strip())

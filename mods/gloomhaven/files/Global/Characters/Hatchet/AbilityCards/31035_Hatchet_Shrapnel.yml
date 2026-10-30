@@ -50,7 +50,7 @@ Layout:
             - Column: "<size=150%><sprite name=RangedAttack> *TAttack*"
             - Column:
                 - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
-                - Row: "<link=fhpill><sprite name=Wound></link>"
+                - Row: "<link=fhpill>, <sprite name=Wound></link>"
             - Column:
         - Row: "<size=20%> "
         - Conditional:

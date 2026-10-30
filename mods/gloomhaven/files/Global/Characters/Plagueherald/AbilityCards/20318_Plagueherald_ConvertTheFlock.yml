@@ -51,7 +51,7 @@ Layout:
             - Column:
                 - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* @TAttack.Target@</link>"
                 - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
-                - Row: "<link=fhpill><sprite name=Curse></link>"
+                - Row: "<link=fhpill>, <sprite name=Curse></link>"
             - Column:
     Bottom:
         - Row: "$FHS_GH_318_B_1$"

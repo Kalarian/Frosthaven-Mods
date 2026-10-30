@@ -519,14 +519,28 @@ def fh_text(t):
     # Gloomhaven's "ADD <target>" is Frosthaven's "+1<target>"; "consume Air <consume-air>" is the icon alone; a quoted
     # ability ("Heal 2, Range 1") is icons and values, an icon and its value a space apart (Frosthaven's pill spacing)
     t = re.sub(r"\bADD\s+(<sprite name=Target>)", r"+1\1", t)
+    # a quote closed with an opening mark ("Self“": Sap Life, Nature's Hunger) is a closing one
+    t = re.sub(r"“(\s*(?:</nobr>)?\s*action)", r"”\1", t)
     # a quoted heal is yours unless it says otherwise: "<heal> 2, Self" is "<heal> 2" (the user, 2026-10-30)
     t = re.sub(r"(<sprite name=(?:Heal|Shield|Retaliate|Invisible)>[^\"“”]*?),\s*Self(?=\s*(?:</nobr>)?\s*[\"”])", r"\1", t)
+    # the visual review, 2026-10-30: an opening quote hugs its icon; "Deduct -1" is "-1"; "with <range> 4" is "within";
+    # a sentence ending in an icon has no full stop after it
+    t = re.sub(r"([\"“])\s+((?:<nobr>)?<sprite)", r"\1\2", t)
+    t = re.sub(r"\bDeduct\s+((?:<nobr>)?\s*)-", r"\1-", t)
+    t = re.sub(r"\bwith(\s+(?:<nobr>)?<sprite name=Range>)", r"within\1", t)
+    t = re.sub(r"(<sprite name=\w+>(?:</nobr>)?)\.\s*$", r"\1", t)
     t = re.sub(r"\bconsume\s+(<nobr>)?\s*(Fire|Ice|Air|Earth|Light|Dark)\s+(<sprite name=Consume\2>)", r"\1\3", t)
     t = re.sub(r"\b(Attack|Heal|Range|Move|Shield|Retaliate|Pierce|Push|Pull)\s+(\d+)\b", r"<sprite name=\1> \2", t)
     t = re.sub(r"(<sprite name=(?:Attack|Heal|Range|Move|Shield|Retaliate|Pierce|Push|Pull|Target)>)(\d)", r"\1 \2", t)
-    t = re.sub(r"\benemies\b|\benemy\b", "<sprite name=Enemy>", t)
-    t = re.sub(r"\ballies\b|\bally\b", "<sprite name=Allies>", t)
+    # "its allies" / "their allies" are the enemy's (Backstab: "adjacent to none of its allies"; Domination: "as if its
+    # allies were enemies"): the ally icon means yours, so these stay words (the visual review, 2026-10-30)
+    t = re.sub(r"\b(its|their|were) (allies|ally|enemies|enemy)\b", lambda m: m.group(1) + " \x00" + m.group(2), t)
+    t = re.sub(r"(?<!\x00)\benemies\b|(?<!\x00)\benemy\b", "<sprite name=Enemy>", t)
+    t = re.sub(r"(?<!\x00)\ballies\b|(?<!\x00)\bally\b", "<sprite name=Allies>", t)
+    t = t.replace("\x00", "")
     t = re.sub(r"\s{2,}", " ", t)
+    # a space on both sides of a <nobr> tag is two on the card ("5  to perform": Pull the Strings)
+    t = re.sub(r"\s((?:</?nobr>)+)\s", r"\1 ", t)
     if re.sub(r"<[^>]*>", "", t).rstrip().endswith(".") and re.sub(r"<[^>]*>", "", t).count(". ") == 0:
         t = re.sub(r"\.(\s*(?:</\w+>)*\s*)$", r"\1", t)
     return t

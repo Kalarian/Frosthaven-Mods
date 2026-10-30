@@ -70,4 +70,3 @@ Layout:
                         Layout:
                             - Row: "<size=150%><sprite name=Retaliate> 2"
                 - Column:
-                    - Duration: Round

@@ -55,7 +55,7 @@ Layout:
             Layout:
                 - Consume:
                     Name: TCDark
-                    Text: "$FHS_Kill_OneNormal$ $FHS_instead$, <sprite name=XP1>."
+                    Text: "$FHS_Kill_OneNormal$ $FHS_instead$, <sprite name=XP1>"
     Bottom:
         - Row:
             - ColumnWidths: "20,60,20"

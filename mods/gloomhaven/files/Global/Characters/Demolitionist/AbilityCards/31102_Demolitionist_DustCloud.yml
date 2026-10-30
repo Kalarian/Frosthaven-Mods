@@ -42,10 +42,8 @@ Layout:
             - Column:
             - Column: "<size=150%><sprite name=Attack> *TAttack*"
             - Column:
-                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy> <sprite name=Push> *TAttackSubPush*, <sprite name=Muddle></link>"
             - Column:
-        - Row: "<sprite name=Push> *TAttackSubPush*"
-        - Row: "<sprite name=Muddle>"
         - Row: "<size=50%> "
         - Infuse: Earth
     Bottom:

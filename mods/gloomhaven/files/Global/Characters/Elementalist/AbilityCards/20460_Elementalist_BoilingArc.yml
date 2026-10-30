@@ -57,6 +57,5 @@ Layout:
                         ListLayout: "<sprite name=Retaliate> 2"
                         Layout:
                             - Row: "<b><sprite name=Retaliate> 2"
-                            - Row: "$FHS_Retaliate$ <sprite name=Range> *BCFireReta.RetaliateRange*"
+                            - Row: "<sprite name=Range> *BCFireReta.RetaliateRange*"
                 - Column:
-                    - Duration: Round
