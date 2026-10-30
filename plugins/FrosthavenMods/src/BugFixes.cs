@@ -408,5 +408,46 @@ namespace FrosthavenMods
             }
             catch (Exception e) { Plugin.Log.LogError("Game bug fixes: save preview levels skipped: " + e); }
         }
+
+        // ------------------------------------------------------------------ hand management: switching characters
+
+        /// <summary>Whether each hand management screen was opened editable (its constructor's readOnly).</summary>
+        private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<FHGUI.States.HandManagementViewState, object> EditableScreens =
+            new System.Runtime.CompilerServices.ConditionalWeakTable<FHGUI.States.HandManagementViewState, object>();
+
+        [HarmonyPatch(typeof(FHGUI.States.HandManagementViewState), MethodType.Constructor, new[] { typeof(FHGUI.DTO.CharacterDataDTO), typeof(bool) })]
+        [HarmonyPostfix]
+        private static void HandScreenOpened(FHGUI.States.HandManagementViewState __instance, bool readOnly)
+        {
+            if (!readOnly) EditableScreens.Add(__instance, true);
+        }
+
+        /// <summary>Clicking another party member on the hand management screen re-shows the screen with that character
+        /// selected, but the game's OnShow first marks the screen read-only because the selection differs from the
+        /// character shown, and only then checks "not read-only and the selection differs" to switch: the switch never
+        /// happens, and the first character's cards stay up, read-only, under the new character's header (the user,
+        /// 2026-10-29: Brute's hand under Drifty). Before OnShow, an editable screen whose character isn't the selected
+        /// one takes the selected character, as that dead branch meant to. Display only: no command, no co-op effect.</summary>
+        [HarmonyPatch(typeof(FHGUI.States.HandManagementViewState), nameof(FHGUI.States.HandManagementViewState.OnShow))]
+        [HarmonyPrefix]
+        private static void HandScreenFollowsSelection(FHGUI.States.HandManagementViewState __instance)
+        {
+            if (!On || !EditableScreens.TryGetValue(__instance, out _)) return;
+            try
+            {
+                var t = Traverse.Create(__instance);
+                var selected = t.Property("View").Property("SelectedCharacter").GetValue<FHRL.CharacterState>();
+                if (selected == null) return;
+                var args = new object[] { null };
+                bool known = (bool)AccessTools.Method(typeof(FHGUI.States.HandManagementViewState), "TryGetCharacterState").Invoke(__instance, args);
+                if (known && ReferenceEquals(args[0], selected)) return;
+                var details = t.Field("_characterDetailsService").GetValue<FHGUI.Services.CharacterDetailsViewService>();
+                if (details == null) return;
+                t.Field("_characterDataDto").SetValue(details.PopulateCharacterDTO(selected));
+                t.Field("_readOnly").SetValue(false);
+                t.Method("FillTempCardsFromCharacterDTO").GetValue();
+            }
+            catch (Exception e) { Plugin.Log.LogError("Game bug fixes: hand management switch: " + e); }
+        }
     }
 }
