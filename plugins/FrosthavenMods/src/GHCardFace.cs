@@ -41,15 +41,24 @@ namespace FrosthavenMods
         // the card background picture has a soft shadow round it: drawn 12 units past the card on every side, as the
         // real card draws it (cardBackground: stretched, size +24), its body fills the card exactly
         private static readonly Rect CardBody = new Rect(-12, -12, CardW + 24, CardH + 24);
-        private static readonly Rect Banner = new Rect(8, 8, 300, 79);
-        private static readonly Rect TitleBand = new Rect(8, 87, 300, 30);
-        private static readonly Rect TitleLine = new Rect(6, 84, 304, 18);
-        private static readonly Rect LevelTag = new Rect(270, 68, 37, 14);   // clear of the banner's bottom line (y 85)
-        private static readonly Rect TopHalf = new Rect(8, 117, 300, 191);
-        private static readonly Rect BottomHalf = new Rect(8, 352, 300, 190);
-        private static readonly Rect AttackPill = new Rect(8, 307, 118, 34);
-        private static readonly Rect MovePill = new Rect(190, 319, 118, 34);
-        private static readonly Vector2 Initiative = new Vector2(158, 330);   // centre
+        // Frosthaven's own card measured in game (harness carddump of Sodden Soil, 2026-10-29: pixels of a card 504 wide,
+        // times Px = 316 / 504 for the card's units)
+        private const float Px = CardW / 504f;
+        private const float PillIcon = 31.4f;   // the icon sprite's rect, in pixels: its art comes out 30 wide like Frosthaven's
+        private static Rect Measured(float x, float y, float w, float h) => new Rect(x * Px, y * Px, w * Px, h * Px);
+        private static readonly Rect Banner = Measured(13, 13, 478, 124);         // headerImage, shown down to the title band
+        private static readonly Rect TitleBand = Measured(13, 137, 478, 51);      // titleDarkeningBG
+        private static readonly Rect TitleLine = Measured(13, 135, 478, 29);      // titleDecoration
+        private static readonly Rect TitleText = Measured(21, 137, 463, 49);      // cardTitle
+        private static readonly Rect LevelTag = Measured(434, 111, 57, 25);       // Level (FH_UI_CARD_ActionTag)
+        private static readonly Rect LevelLabel = Measured(442, 111, 23, 25);     // "lvl", Sarala 10 bold small caps
+        private static readonly Rect LevelNumber = Measured(467, 111, 12, 25);    // the level, Sarala 13 bold small caps
+        private static readonly Rect TopHalf = Measured(13, 188, 478, 304);       // topFieldAttributes
+        private static readonly Rect BottomHalf = Measured(13, 559.5f, 478, 304);    // bottomFieldAttributes
+        private static readonly Rect AttackPill = Measured(13, 491.5f, 188, 54);     // defAction_Attack
+        private static readonly Rect MovePill = Measured(303, 506.5f, 188, 54);      // defAction_Move
+        private static readonly Rect InitiativeNumber = Measured(220, 503.5f, 64, 45);   // initiativeContent, NotoSerif 28 bold
+        private static readonly Vector2 Initiative = new Vector2(252.5f * Px, 526f * Px);   // centre (InitiativeBG)
         private static readonly Vector2 HalfContent = new Vector2(292, 176);
 
         // the template's effect overlays, scaled with the card (template card 294 x 450)
@@ -168,12 +177,14 @@ namespace FrosthavenMods
 
             if (header != null && header.Find("Title text") is RectTransform title)
             {
-                TopLeft(title, new Rect(TitleBand.x + 4, TitleBand.y, TitleBand.width - 8, TitleBand.height));
+                TopLeft(title, TitleText);
                 if (title.GetComponent<TMP_Text>() is TMP_Text text)
                 {
+                    // Frosthaven's title face: NotoSerifDisplay SemiCondensed with its title material, 20 down to 13
+                    FhFont(text, "NotoSerifDisplay_SemiCondensed-Medium SDF", "NotoSerifDisplay_SemiCondensed-Medium SDF Title Material");
                     text.enableAutoSizing = true;
-                    text.fontSizeMin = 11f;
-                    text.fontSizeMax = 19f;
+                    text.fontSizeMin = 13f;
+                    text.fontSizeMax = 20f;
                     text.alignment = TextAlignmentOptions.Center;
                     text.fontStyle = FontStyles.UpperCase | FontStyles.Bold;
                     text.color = Color.white;
@@ -249,12 +260,15 @@ namespace FrosthavenMods
         private static void Level(RectTransform full)
         {
             if (!(full.Find("LevelText") is RectTransform level) || !(level.GetComponent<TMP_Text>() is TMP_Text number)) return;
-            // the real tag writes both in the card's sans font (the template's level is in the title's serif), yellow
-            TMP_FontAsset sans = full.Find("Default action buttons/Default action top/TextMeshPro Text")?.GetComponent<TMP_Text>()?.font;
-            TopLeft(level, new Rect(LevelTag.x + 21, LevelTag.y, 15, LevelTag.height));
-            if (sans != null) number.font = sans;
-            number.fontSize = 12f;
-            number.fontStyle = FontStyles.Bold;
+            // Frosthaven's tag: "lvl" at 10 and the level at 13, both Sarala bold small caps, yellow
+            TMP_FontAsset sarala = Cached<TMP_FontAsset>("FH_Sarala-Regular");
+            TopLeft(level, LevelNumber);
+            if (sarala != null) number.font = sarala;
+            number.fontSize = 13f;
+            number.enableAutoSizing = false;
+            number.enableWordWrapping = false;
+            number.overflowMode = TextOverflowModes.Overflow;
+            number.fontStyle = FontStyles.Bold | FontStyles.SmallCaps;
             number.alignment = TextAlignmentOptions.Center;
             number.color = LevelYellow;
             Transform t = full.Find("GH level label");
@@ -264,19 +278,46 @@ namespace FrosthavenMods
                 t = go.transform;
                 t.SetParent(full, false);
                 var label = go.AddComponent<TextMeshProUGUI>();
-                label.text = "LVL";
                 label.raycastTarget = false;
             }
             if (t.GetComponent<TMP_Text>() is TMP_Text lvl)
             {
+                lvl.text = "lvl";
                 lvl.font = number.font;
-                lvl.fontSize = 8f;
-                lvl.fontStyle = FontStyles.Bold;
-                lvl.alignment = TextAlignmentOptions.Right;
+                lvl.fontSize = 10f;
+                lvl.enableWordWrapping = false;
+                lvl.fontStyle = FontStyles.Bold | FontStyles.SmallCaps;
+                lvl.alignment = TextAlignmentOptions.Center;
                 lvl.color = LevelYellow;
             }
-            TopLeft(t, new Rect(LevelTag.x + 2, LevelTag.y + 1, 19, LevelTag.height - 1));
+            TopLeft(t, LevelLabel);
             t.SetSiblingIndex(level.GetSiblingIndex());
+        }
+
+        /// <summary>A Frosthaven font (and its material, when named) by name, if the game has it loaded. Looked up once:
+        /// every card is dressed while the game loads, and a scan of all loaded materials per card stalled the loading
+        /// screen for minutes (2026-10-29).</summary>
+        private static readonly Dictionary<string, UnityEngine.Object> FontCache = new Dictionary<string, UnityEngine.Object>();
+        private static readonly Dictionary<string, float> FontMisses = new Dictionary<string, float>();
+
+        private static T Cached<T>(string name) where T : UnityEngine.Object
+        {
+            if (FontCache.TryGetValue(name, out UnityEngine.Object o) && o != null) return (T)o;
+            // a miss is looked up again only after 30 s (a font the card bundles bring in later)
+            if (FontMisses.TryGetValue(name, out float at) && Time.realtimeSinceStartup - at < 30f) return null;
+            T found = Resources.FindObjectsOfTypeAll<T>().FirstOrDefault(x => x != null && x.name == name);
+            if (found != null) FontCache[name] = found;
+            else FontMisses[name] = Time.realtimeSinceStartup;
+            return found;
+        }
+
+        private static void FhFont(TMP_Text text, string font, string material = null)
+        {
+            TMP_FontAsset f = Cached<TMP_FontAsset>(font);
+            if (f == null) { if (GHClasses.Reported.Add("font " + font)) Plugin.Log.LogInfo($"Gloomhaven card face: {font} isn't loaded; the template's font stays"); return; }
+            text.font = f;
+            Material m = material == null ? null : Cached<Material>(material);
+            if (m != null) text.fontSharedMaterial = m;
         }
 
         /// <summary>The middle band: the template's basic-action buttons as the real cards' pills (their sprites come
@@ -294,27 +335,32 @@ namespace FrosthavenMods
                 TopLeft(group, new Rect(0, 0, CardW, CardH));
                 Clear(group);
                 Clear(group.Find("Default action text"));
-                Pill(group.Find("Default action top"), AttackPill, -9f, Art.GuiSprite("misc_gui", "Attack"));   // the template shows "Damage"
-                Pill(group.Find("Default action button"), MovePill, 9f, null);
+                // glyph centres from the pill's centre, measured on Frosthaven's (Sodden Soil, Deadly Shot): Attack's icon
+                // -30, +0.5 and number +1, +1; Move's icon -1, +2 and number +30, +2.5 (pixels, y down)
+                Pill(group.Find("Default action top"), AttackPill, new Vector2(-29f, 0.5f), new Vector2(1.5f, 1f), Art.GuiSprite("misc_gui", "Attack"));   // the template shows "Damage"
+                Pill(group.Find("Default action button"), MovePill, new Vector2(-0.5f, 2f), new Vector2(30.5f, 2.5f), null);
             }
 
             Transform initiative = full.Find("Initiative text");
             Transform ornament = Picture(full, "GH initiative ornament", Art.Ornament, Centred(Initiative, 118, 62), -1);
             Transform hex = Picture(full, "GH initiative hex", Art.Hex, Centred(Initiative, 72, 36), -1);
             if (initiative == null) return;
-            TopLeft(initiative, Centred(Initiative, 60, 32));
+            TopLeft(initiative, InitiativeNumber);
             Beneath(ornament, initiative);
             Beneath(hex, initiative);
             if (initiative.GetComponent<TMP_Text>() is TMP_Text number)
             {
+                FhFont(number, "NotoSerif-Regular SDF", "NotoSerif-Regular SDF Shadow Material");
                 number.color = Art.Ink(model);
                 number.fontSize = 28f;
+                number.fontStyle = FontStyles.Bold;
+                number.alignment = TextAlignmentOptions.Center;
             }
         }
 
         /// <summary>A basic-action button at <paramref name="at"/>: its own image shows the skin's pill, its icon and
         /// number (switched off in the template) sit in the middle of the pill's straight part.</summary>
-        private static void Pill(Transform pill, Rect at, float shift, Sprite iconSprite)
+        private static void Pill(Transform pill, Rect at, Vector2 iconAt, Vector2 numberAt, Sprite iconSprite)
         {
             if (pill == null) return;
             TopLeft(pill, at);
@@ -325,8 +371,8 @@ namespace FrosthavenMods
             {
                 icon.gameObject.SetActive(true);
                 icon.anchorMin = icon.anchorMax = icon.pivot = centre;
-                icon.anchoredPosition = new Vector2(shift - 10f, 0f);
-                icon.sizeDelta = new Vector2(18f, 18f);
+                icon.anchoredPosition = new Vector2(iconAt.x, -iconAt.y) * Px;
+                icon.sizeDelta = new Vector2(PillIcon, PillIcon) * Px;   // drawn 30 px wide like Frosthaven's
                 if (icon.GetComponent<Image>() is Image picture)
                 {
                     picture.color = Color.white;
@@ -337,8 +383,12 @@ namespace FrosthavenMods
             {
                 number.gameObject.SetActive(true);
                 number.anchorMin = number.anchorMax = number.pivot = centre;
-                number.anchoredPosition = new Vector2(shift + 10f, 0f);
-                if (number.GetComponent<TMP_Text>() is TMP_Text text) { text.fontSize = 18f; text.color = Color.white; text.alignment = TextAlignmentOptions.Center; }
+                number.anchoredPosition = new Vector2(numberAt.x, -numberAt.y) * Px;
+                if (number.GetComponent<TMP_Text>() is TMP_Text text)
+                {
+                    FhFont(text, "NotoSans-Bold SDF");   // Frosthaven's defValue
+                    text.fontSize = 18f; text.enableVertexGradient = false; text.color = Color.white; text.alignment = TextAlignmentOptions.Center;   // white, as Frosthaven's (the template's gradient made it cream)
+                }
             }
             if (pill.Find("InteractabilityHighlight") is RectTransform highlight)
             {
