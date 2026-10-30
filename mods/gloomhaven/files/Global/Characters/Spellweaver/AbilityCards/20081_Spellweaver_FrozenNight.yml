@@ -49,12 +49,8 @@ Layout:
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
-        - Consume:
-            Name: BCDark
-            Text:
-                - ColumnWidths: "82,18"
-                - ColumnSpacing: 100
-                - Column:
-                    - Row: "+2 <sprite name=Move>"
-                    - Row: "<b><sprite name=Invisible></b>"
-                - Column:
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "+2 <sprite name=Move>, <sprite name=Invisible>"

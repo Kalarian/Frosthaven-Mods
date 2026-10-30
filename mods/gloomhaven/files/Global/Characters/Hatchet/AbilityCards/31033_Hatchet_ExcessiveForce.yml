@@ -50,13 +50,8 @@ Layout:
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=50%> "
-        - Consume:
-            Name: BCAir
-            Text:
-                - Row:
-                    - ColumnWidths: "85,15"
-                    - Column:
-                        - Row: "<size=150%><sprite name=Attack> 2"
-                        - Row: "<sprite name=Range> 2"
-                    - Column:
-                        - Row: "<sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCAir
+                    Text: "<sprite name=Attack> 2 <sprite name=Range> 2, <sprite name=XP1>"

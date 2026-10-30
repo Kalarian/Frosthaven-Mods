@@ -50,12 +50,8 @@ Layout:
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=100%> "
-        - Consume:
-            Name: BCLight
-            Text:
-                - ColumnWidths: "75,25"
-                - Column:
-                    - Row: "<size=150%><nobr><sprite name=Muddle></nobr>"
-                    - Row: "$FHS_Target_AllAdjacentEnemies$"
-                - Column:
-                    - Row: "<nobr><sprite name=CreateDark>, <sprite name=XP1></nobr>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "<nobr><sprite name=Muddle></nobr> $FHS_Target_AllAdjacentEnemies$, <nobr><sprite name=CreateDark>, <sprite name=XP1></nobr>"

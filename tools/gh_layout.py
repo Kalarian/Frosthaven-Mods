@@ -500,6 +500,20 @@ def _style_items(items):
                     if parts and len(parts) == len([r for r in c.children if not is_spacer(r)]) and not any("£" in x or VALUE_REF.search(x) for x in parts):
                         c.children = []
                         c.value = '"' + " ".join(parts) + '"'
+                    # the same reward laid out in columns, one part per row (Frozen Night: "+2 <Move>" over <Invisible>):
+                    # one line, its parts comma-separated, without the stacked rows' sizes
+                    elif {m.key for m in _flat(c.children)} <= {"Column", "ColumnWidths", "ColumnSpacing", "Row"}:
+                        cols = [m.text() for m in _flat(c.children) if m.key in ("Row", "Column") and not m.children
+                                and m.text().strip() and not SPACER.match(m.text())]
+                        cols = [re.sub(r"^(?:<(?:size|line-height)=[^>]*>|</?b>)+|</?b>", "", x).strip() for x in cols]
+                        if cols and not any("£" in x or VALUE_REF.search(x) for x in cols):
+                            # the pill's order rule: a target, range, pierce, push or pull follows its value with a space
+                            line = cols[0]
+                            for x in cols[1:]:
+                                mod = re.match(r"(?:<nobr>)?\s*(?:<sprite name=(?:Range|Target|Pierce|Push|Pull)>|\$(?:FHS_)?Target_)", x)
+                                line += (" " if mod else ", ") + x
+                            c.children = []
+                            c.value = '"' + line + '"'
             # only a reward of text goes in the dashed box: the box's layout looks up every row as text, and an area,
             # an infusion or an ability in it stops the game at load ("an error within one of the Rule Libraries":
             # Shield of the Desert, Burn Away the Dark, 2026-10-30)
