@@ -536,9 +536,9 @@ LONG_TEXT, LONG_TEXT_SIZE = 280, 85   # visible letters past which a card half's
 TEXT_FIXES = {
     "GH_225_B": "You and all adjacent normal enemies suffer 7 damage.",
     # Grim Bargain top: Gloomhaven's "two ADD TARGET effects" read "gain two +1<target> effects"; the user's wording
-    # (2026-10-30): three targets in all
+    # (2026-10-30): +2 targets, since it adds to multi-target attacks too
     "FHS_GH_316_T": "During your next six Attack actions, <nobr><sprite name=Curse></nobr> one <sprite name=Allies> within "
-                    "<nobr><sprite name=Range> 2</nobr> to gain 3<sprite name=Target>",
+                    "<nobr><sprite name=Range> 2</nobr> to gain +2<sprite name=Target>",
     # the ability's name, which Frosthaven looks up when it shows the ability (no card of its own gives supply cards)
     "GiveSupplyCard": "Give Medical Pack",
     # Stone Pummel bottom (Cragheart): the persistent "destroy an adjacent obstacle on a melee attack" bonus follows the
