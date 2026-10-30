@@ -47,7 +47,7 @@ Layout:
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
             - Column:
                 - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*, <sprite name=Immobilize></link>"
             - Column:

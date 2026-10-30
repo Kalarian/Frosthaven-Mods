@@ -57,7 +57,7 @@ Layout:
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<size=150%><sprite name=Attack> *TAttack* @TAttack@"
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* @TAttack@"
             - Column:
                 - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <sprite name=Range> *TAttack.Range*, <sprite name=Poison>, <sprite name=Wound></link>"
             - Column:
@@ -73,7 +73,7 @@ Layout:
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<size=150%><sprite name=Attack> *BAllyAttack*"
+            - Column: "<size=150%><sprite name=RangedAttack> *BAllyAttack*"
             - Column:
                 - Row: "<link=fhpill><sprite name=Range> *BAllyAttack.Range*</link>"
             - Column:

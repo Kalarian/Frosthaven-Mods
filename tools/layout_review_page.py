@@ -32,6 +32,14 @@ RULES = [
      "between the first four, a comma before the rest; a slot right after its own value (◎ 2 [slot] ⟨⟩ 3). All 118 "
      "Frosthaven halves with two or more modifiers in a pill follow it.",
      ["Snowdancer/Storm Wall", "Snowdancer/Whipping Gale", "Trapper/Exploding Decoy", "FrozenFist/Shard Launch"]),
+    ("R9", "Ranged attacks use the arrow",
+     "An attack whose line shows a range value is drawn with the arrow, a melee one with the sword. 248 of Frosthaven's "
+     "259 attack halves follow it; \"all enemies within X hexes\" keeps the sword (Against All Odds).",
+     ["Deathwalker/Dark Fog", "Drifter/Bloodletting", "Drifter/Against All Odds"]),
+    ("R10", "Areas beside the line, or under it",
+     "An area sits beside its attack line, 20 px from the rim; under a line whose pill carries a condition or element "
+     "(\"⟨⟩ 3, ?\") it is centred below the line. 43 of Frosthaven's 51 area halves are beside, 8 below.",
+     ["Snowdancer/Blizzard", "Deathwalker/Dark Fog", "Snowdancer/Tornado", "CrashingTide/Overwhelming Wave"]),
     ("R2", "Targets go in the pill; the default goes unsaid",
      "\"All adjacent enemies\" is the pill's target entry (◎ all adjacent ☠). A single adjacent target is the default "
      "and isn't printed (no \"Target one adjacent enemy\"). Targets that aren't a count (\"all enemies moved through\") "

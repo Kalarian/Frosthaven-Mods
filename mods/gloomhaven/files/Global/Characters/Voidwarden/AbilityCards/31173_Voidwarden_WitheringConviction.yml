@@ -58,7 +58,7 @@ Layout:
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<size=150%><sprite name=Attack> 6"
+            - Column: "<size=150%><sprite name=RangedAttack> 6"
             - Column:
                 - Row: "<link=fhpill><sprite name=Range> 3</link>"
             - Column:

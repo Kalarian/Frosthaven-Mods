@@ -58,7 +58,7 @@ Layout:
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<size=150%><sprite name=Attack> *TargetWillDoThis* @TargetWillDoThis@"
+            - Column: "<size=150%><sprite name=RangedAttack> *TargetWillDoThis* @TargetWillDoThis@"
             - Column:
                 - Row: "<link=fhpill><sprite name=Range> *TargetWillDoThis.Range*</link>"
             - Column:

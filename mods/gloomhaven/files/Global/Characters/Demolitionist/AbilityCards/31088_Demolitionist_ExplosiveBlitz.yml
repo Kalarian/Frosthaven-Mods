@@ -36,7 +36,7 @@ Layout:
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<size=150%><sprite name=Attack> *TAttack*"
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack*"
             - Column:
                 - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
             - Column:

@@ -427,6 +427,11 @@ def _pill_block(main, mods, self_box):
     if not mods:
         return Node("Row", f'"{main}"')
     mods = sorted(mods, key=_pill_rank)
+    # Frosthaven draws a ranged attack with the arrow, a melee one with the sword: 248 of its 259 attack halves follow
+    # "the line shows a range value" (the user, 2026-10-30); "all enemies within X" is the sword (Against All Odds)
+    if (re.search(r"<sprite name=Attack>", main) and any(re.match(r"<sprite name=Range>", m) for m in mods)
+            and not any(m.startswith("<sprite name=Target> all") for m in mods)):
+        main = main.replace("<sprite name=Attack>", "<sprite name=RangedAttack>", 1)
     # a slot sits right after its value, as Frosthaven's do ("◎2 [slot] ⟨⟩1"); a row draws one slot line, at its end,
     # so the pill is cut after each slotted value: one row each, the plugin joins them into one pill
     parts, cur = [], []

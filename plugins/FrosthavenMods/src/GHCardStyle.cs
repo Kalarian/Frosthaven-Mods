@@ -46,6 +46,8 @@ namespace FrosthavenMods
         private const float InfuseSize = 48f, InfuseBottom = 11.5f, InfuseBand = 72f, ContentTop = 9f;
         // wrapped text keeps 24 px from the half's sides (Against All Odds: 26..27; the generator's rows run to 11); a
         // half that doesn't fit is scaled to keep FitEdge px from the sides, clear of the badges and the infusion band
+        // an area beside its line keeps 20 px from the rim and 24 from the line, or goes under it (Frosthaven's 51 area halves)
+        private const float AreaRim = 20f, AreaGap = 24f, AreaBelow = 12f;
         private const float TextMargin = 24f, FitEdge = 10f, FitMin = 0.6f, ConsumeMinText = 0.8f;
         private const bool FitTrace = false;   // true: log every half's measured content (the fit review)
         // hexes (Overwhelming Wave)
@@ -759,27 +761,29 @@ namespace FrosthavenMods
                 if (hexParts.Count == 0) continue;
                 Rect hex = hexParts.Aggregate((a, b) => Rect.MinMaxRect(Mathf.Min(a.xMin, b.xMin), Mathf.Min(a.yMin, b.yMin), Mathf.Max(a.xMax, b.xMax), Mathf.Max(a.yMax, b.yMax)));
                 var beside = line.Cast<Transform>().OfType<RectTransform>().Where(c => c != col && c.gameObject.activeSelf).ToList();
-                var parts = beside.SelectMany(c => Extent(c, half)).Where(p => p.Overlaps(hex)).ToList();
-                if (parts.Count == 0) continue;
-                float need = parts.Max(p => p.xMax) - hex.xMin + 4f * f;
-                float right = Mathf.Clamp(half.rect.xMax - FitEdge * f - hex.xMax, 0f, need);
-                Shift(area, half, right, 0f);
-                need -= right;
-                if (need > 0f)
+                var all = beside.SelectMany(c => Extent(c, half)).ToList();
+                if (all.Count == 0) continue;
+                Rect block = Union(all);
+                float lo = half.rect.xMin + FitEdge * f, hi = half.rect.xMax - AreaRim * f;
+                // Frosthaven puts the area under a line whose pill carries a condition or element after a comma (Blizzard
+                // "range 3, muddle", Dark Fog, Sweeping Aid), beside one with a range only (Tornado, Inevitable Conclusion)
+                bool rider = beside.SelectMany(c => c.GetComponentsInChildren<TMP_Text>(true))
+                    .Any(t => (t.text ?? "").Contains("<link=fhpill>") && Regex.IsMatch(t.text, @",\s*(<nobr>)?<sprite"));
+                if (!rider && block.width + AreaGap * f + hex.width <= hi - lo)
                 {
-                    var all = beside.SelectMany(c => Extent(c, half)).ToList();
-                    float left = Mathf.Clamp(all.Min(p => p.xMin) - (half.rect.xMin + FitEdge * f), 0f, need);
-                    foreach (RectTransform c in beside) Shift(c, half, -left, 0f);
-                    need -= left;
+                    // beside: the area at least AreaGap after the line and AreaRim from the rim; the line moves left
+                    // when the two don't fit where they are
+                    float x = Mathf.Min(Mathf.Max(hex.xMin, block.xMax + AreaGap * f), hi - hex.width);
+                    float push = block.xMax + AreaGap * f - x;   // > 0: the line moves left (it fits: checked above)
+                    if (push > 0f) foreach (RectTransform c in beside) Shift(c, half, -push, 0f);
+                    Shift(area, half, x - hex.xMin, 0f);
                 }
-                if (need > 0f)
+                else
                 {
-                    float k = Mathf.Max(0.7f, (hex.width - need) / hex.width);
-                    Vector2 anchor = new Vector2(hex.xMax + right, hex.center.y);   // the area's right edge stays
-                    Vector2 c0 = In(area, half).center;
-                    area.localScale = new Vector3(area.localScale.x * k, area.localScale.y * k, 1f);
-                    Vector2 c1 = anchor + (c0 - anchor) * k;
-                    Shift(area, half, c1.x - In(area, half).center.x, c1.y - In(area, half).center.y);
+                    // Frosthaven draws the area centred under a line too wide to leave room beside it (Blizzard, Dark Fog,
+                    // Sweeping Aid): the line is centred on the half and the area goes under it
+                    foreach (RectTransform c in beside) Shift(c, half, half.rect.center.x - block.center.x, 0f);
+                    Shift(area, half, half.rect.center.x - hex.center.x, block.yMin - AreaBelow * f - hex.yMax);
                 }
             }
         }

@@ -73,7 +73,7 @@ Layout:
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<size=150%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
             - Column:
                 - Row: "<link=fhpill><sprite name=Range> *TAttack1.Range*</link>"
             - Column:
@@ -87,7 +87,7 @@ Layout:
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<size=150%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
             - Column:
                 - Row: "<link=fhpill><sprite name=Range> *TAttack2.Range*</link>"
             - Column:

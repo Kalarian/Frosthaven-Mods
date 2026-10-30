@@ -42,7 +42,7 @@ Layout:
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<size=150%><sprite name=Attack> 2"
+            - Column: "<size=150%><sprite name=RangedAttack> 2"
             - Column:
                 - Row: "<link=fhpill><sprite name=Range>+0</link>"
             - Column:
