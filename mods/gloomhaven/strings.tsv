@@ -677,15 +677,22 @@ Elementalist_DESCRIPTION	Elementalists are particularly skilled Savvas who have 
 Elementalist_ROLE	Ranged Damage
 Elementalist_STRENGTHS	- <indent=%15>Abilities have wide array of options</indent>\n- <indent=%15>Very effective at range</indent>\n- <indent=%15>Great at infusing elements</indent>
 Elementalist_WEAKNESSES	- <indent=%15>Weak with no other element infusers</indent>\n- <indent=%15>Can have turns where not much is possible</indent>\n- <indent=%15>Reading his ability cards can cause migraines</indent>
-GH_002_T	Gain <sprite name=XP1> for each time you Retaliate <nobr>this round.</nobr>
-GH_004_B	Any enemy who targets one of your adjacent allies with an attack this round targets you with that attack instead, regardless of the attack's range.
-GH_007_B	On the next six sources of damage from attacks targeting you, gain <nobr>Shield <sprite name=Shield> *BShield*.</nobr>
-GH_013_B	Add <nobr>+1 Attack <sprite name=Attack></nobr> to all of your attacks this round.
-GH_015_B	On the next three sources of damage to you, suffer no damage instead.
-GH_016_B	If the movement was in a straight line, perform
-GH_022_T	Kill one adjacent normal enemy <nobr>with  STUN <sprite name=Stun></nobr>.
-GH_023_B	You may treat all <nobr>Move <sprite name=Move></nobr> abilities as <nobr>Attack <sprite name=Attack></nobr> abilities of equal value.
-GH_026_B	Add +3 <nobr>Attack <sprite name=Attack></nobr> to all your attacks targeting enemies with <nobr>DISARM <sprite name=Disarm></nobr>, <nobr>IMMOBILIZE <sprite name=Immobilize></nobr> or <nobr>STUN <sprite name=Stun></nobr> this round.
+FHS_GH_002_T	Gain <sprite name=XP1> for each time you Retaliate <nobr>this round</nobr>
+FHS_GH_004_B	Any <sprite name=Enemy> who targets one of your adjacent <sprite name=Allies> with an attack this round targets you with that attack instead, regardless of the attack's range
+FHS_GH_007_B	On the next six sources of damage from attacks targeting you, gain <nobr><sprite name=Shield> *BShield*</nobr>
+FHS_GH_013_B	<nobr>+1<sprite name=Attack></nobr> to all of your attacks this round
+FHS_GH_015_B	On the next three sources of damage to you, suffer no damage instead
+FHS_GH_016_B	If the movement was in a straight line, perform
+FHS_GH_022_T	Kill one adjacent normal <sprite name=Enemy> <nobr>with <sprite name=Stun></nobr>
+FHS_GH_023_B	You may treat all <nobr><sprite name=Move></nobr> abilities as <nobr><sprite name=Attack></nobr> abilities of equal value
+FHS_GH_026_B	<nobr>+3<sprite name=Attack></nobr> to all your attacks targeting <sprite name=Enemy> with <nobr><sprite name=Disarm></nobr>, <nobr><sprite name=Immobilize></nobr> or <nobr><sprite name=Stun></nobr> this round
+FHS_Kill_OneAdjacentEnemy	Kill one adjacent normal or elite <sprite name=Enemy>
+FHS_Kill_OneAdjacentNormalEnemy	Kill one adjacent normal <sprite name=Enemy>
+FHS_Target_AllEnemiesMovedThrough	Target all <sprite name=Enemy> moved through
+FHS_XP_PerEnemy	Gain <sprite name=XP1> for each <sprite name=Enemy> targeted
+FHS_Xis_DamageInflictedThisTurn	where X is the amount of damage you have inflicted so far this turn
+FHS_Xis_HexesMovedThisAction	where X is the number of hexes you moved with this action
+FHS_Xis_HexesMovedThisTurn	where X is the number of hexes you have moved so far this turn
 GH_030_T_1	Create one 6 damage trap in an adjacent empty hex.
 GH_030_T_2	Gain <sprite name=XP2> when the trap is sprung by an enemy.
 GH_037_B	One adjacent ally may <sprite name=RecoverIcon> all their discarded cards.
@@ -1229,7 +1236,6 @@ JOTL_252_T	<nobr>+1 Attack <sprite name=Attack></nobr>, <nobr>+2 Range <sprite n
 Jump	Jump
 Kill_AllNormalEnemiesInTargetedArea	Kill all normal enemies in the targeted area.
 Kill_OneAdjacentEnemy	Kill one adjacent normal or elite enemy.
-Kill_OneAdjacentNormalEnemy	Kill one adjacent normal enemy.
 Kill_OneNormal	Kill one normal target
 Killbot	Kill Bot
 LavaGolem	Lava Golem
@@ -1579,10 +1585,7 @@ XP_PerEnemy	Gain <sprite name=XP1> for each enemy targeted.
 XP_PerTwoEnemiesTargeted	Gain <sprite name=XP1> for each two enemies targeted.
 Xis_AmountOfDamageYouSuffered	where X is the amount of damage you suffered.
 Xis_CurrentHP	where X is your current hit point value.
-Xis_DamageInflictedThisTurn	where X is the amount of damage you have inflicted so far this turn.
 Xis_HPDiff	where X is the difference between your maximum hit point value and current hit point value.
-Xis_HexesMovedThisAction	where X is the number of hexes you moved with this action.
-Xis_HexesMovedThisTurn	where X is the number of hexes you have moved so far this turn.
 Xis_LostCardCount	where X is the number of cards you have burned.
 Xis_NumberOfSummonedAllies	where X is the number of all summoned allies.
 Xis_Shield	where X is your current Shield value.

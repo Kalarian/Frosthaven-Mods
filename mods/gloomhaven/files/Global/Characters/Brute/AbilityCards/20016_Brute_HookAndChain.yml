@@ -34,18 +34,17 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
-                - AddedEffect: "<sprite name=Pull>2"
+                - Row: "<link=fhpill><sprite name=Range>*TAttack.Range*, <sprite name=Pull>2</link>"
             - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=20%> "
-        - Row: "$GH_016_B$"
+        - Row: "$FHS_GH_016_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> X"
+        - Row: "<size=150%><sprite name=Attack> X"
         - Row: "<size=20%> "
-        - Row: "$Xis_HexesMovedThisAction$"
+        - Row: "$FHS_Xis_HexesMovedThisAction$"

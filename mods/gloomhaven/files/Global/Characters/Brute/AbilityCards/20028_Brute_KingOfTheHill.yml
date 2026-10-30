@@ -33,19 +33,12 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Push>*TAttackSubPush* @TAttackSubPush@"
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy>, <sprite name=Push>*TAttackSubPush* @TAttackSubPush@</link>"
             - Column:
-        - Row: "$Target_AllAdjacentEnemies$"
-        - Row: "$XP_PerEnemy$"
+        - Row: "$FHS_XP_PerEnemy$"
     Bottom:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@</link>"

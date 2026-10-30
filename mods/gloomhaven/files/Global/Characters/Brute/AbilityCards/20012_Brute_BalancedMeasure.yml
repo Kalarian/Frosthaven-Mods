@@ -25,10 +25,10 @@ Data:
                         BasedOn: DamageInflictedThisTurn
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> X <size=100%>"
+        - Row: "<size=150%><sprite name=Attack> X <size=100%>"
         - Row: "<size=20%> "
-        - Row: "$Xis_HexesMovedThisTurn$"
+        - Row: "$FHS_Xis_HexesMovedThisTurn$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> X <size=100%>"
+        - Row: "<size=150%><sprite name=Move> X <size=100%>"
         - Row: "<size=20%> "
-        - Row: "$Xis_DamageInflictedThisTurn$"
+        - Row: "$FHS_Xis_DamageInflictedThisTurn$"

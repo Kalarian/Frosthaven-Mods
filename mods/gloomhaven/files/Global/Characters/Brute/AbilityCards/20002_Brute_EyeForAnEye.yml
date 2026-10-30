@@ -31,18 +31,18 @@ Layout:
         - Active:
             Ability: TRetaliate
             Icon: Positive_Retaliate
-            ListLayout: "<sprite name=Retaliate> *TRetaliate*, $GH_002_T$"
+            ListLayout: "<sprite name=Retaliate> *TRetaliate*, $FHS_GH_002_T$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
+                - Row: "<size=150%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
                 - Row: "<size=20%> "
-                - Row: "$GH_002_T$"
+                - Row: "$FHS_GH_002_T$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
             - Column:
-                - Row: "<sprite name=Range>*BHeal.Range* @BHeal.Range@"
+                - Row: "<link=fhpill><sprite name=Range>*BHeal.Range* @BHeal.Range@</link>"
             - Column:
         - Row: "<size=20%> "
         - Infuse: Earth

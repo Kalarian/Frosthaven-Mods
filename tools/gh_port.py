@@ -501,6 +501,27 @@ UI_TEXT_KEYS = ("Augment", "Augment_DiscardReminder", "Augment_OnYourMeleeAttack
                 "Song", "Song_DiscardReminder", "Song_XPText", "Glossary_Song",
                 "Doom", "Doom_MarkText", "Doom_DiscardReminderText", "GUI_TOOLTIP_ADD_DOOM", "GUI_TOOLTIP_TRANSFER_DOOM",
                 "COMBAT_LOG_DOOM")
+# Classes whose cards follow Frosthaven's card style (gh_layout.fh_style, the plugin's GHCardStyle; the user's layout
+# review, 2026-10-29): the Brute first, the others once the user has approved its before/after.
+FH_STYLE_CLASSES = {"Brute"}
+_ICON_WORD = re.compile(r"\b([A-Za-z]+)\s*(<sprite name=\"?(\w+)\"?>)")
+_CONDITION_WORDS = r"POISON|WOUND|STUN|DISARM|IMMOBILIZE|MUDDLE|CURSE|BLESS|STRENGTHEN|INVISIBLE|REGENERATE|WARD|BRITTLE|BANE|IMPAIR"
+
+
+def fh_text(t):
+    """A Gloomhaven card text in Frosthaven's words (rule R3 of the layout review): the word naming an icon goes
+    ("Attack <icon>" is the icon, "STUN <icon>" too), "Add +1 <icon>" is "+1<icon>", enemies and allies are
+    Frosthaven's icons, and a one-sentence line has no full stop."""
+    t = _ICON_WORD.sub(lambda m: m.group(2) if m.group(1).lower() == m.group(3).lower() or m.group(1).upper() in _CONDITION_WORDS.split("|") else m.group(0), t)
+    t = re.sub(r"\bAdd\s+(<nobr>)?\s*(\+\d+)\s*(<nobr>)?\s*(<sprite name=\w+>)", lambda m: (m.group(1) or "") + (m.group(3) or "") + m.group(2) + m.group(4), t)
+    t = re.sub(r"\benemies\b|\benemy\b", "<sprite name=Enemy>", t)
+    t = re.sub(r"\ballies\b|\bally\b", "<sprite name=Allies>", t)
+    t = re.sub(r"\s{2,}", " ", t)
+    if re.sub(r"<[^>]*>", "", t).rstrip().endswith(".") and re.sub(r"<[^>]*>", "", t).count(". ") == 0:
+        t = re.sub(r"\.(\s*(?:</\w+>)*\s*)$", r"\1", t)
+    return t
+
+
 LONG_TEXT, LONG_TEXT_SIZE = 280, 85   # visible letters past which a card half's text is drawn smaller, and how small
 TEXT_FIXES = {
     "GH_225_B": "You and all adjacent normal enemies suffer 7 damage.",
@@ -847,6 +868,8 @@ def main():
         for n in cards:
             new_id, s = convert_card(n, text(files[n]), warnings.append, CLASS_ICONS.get(cls))
             s = apply_card_fixes(new_id, s)
+            if cls in FH_STYLE_CLASSES:
+                s = gh_layout.fh_style(s, lambda w: warnings.append(f"{n}: {w}"))
             # Frosthaven can't aim a Damage ability's area (none of its own cards has one; the preview throws and
             # the damage can't be confirmed): such a card needs a CARD_FIXES entry
             for blk in re.finditer(r"^( +)\w+:\r?\n((?:\1 +.*\r?\n)+)", s.split("\nLayout:")[0], re.M):
@@ -1049,6 +1072,13 @@ def main():
 
     table = {}
     for key in sorted(used_keys):
+        if key.startswith("FHS_"):   # a Frosthaven-styled class's own copy of a text, in Frosthaven's words (fh_text)
+            base = key[4:]
+            gh_key = base[3:] if base.startswith("GH_") else base
+            found = strings.get(gh_key) or (strings[strings_ci[gh_key.lower()]] if gh_key.lower() in strings_ci else None)
+            if found is not None:
+                table[key] = fh_text(found)
+            continue
         gh_key = key[3:] if key.startswith("GH_") else key
         if gh_key in strings:
             table[key] = strings[gh_key]

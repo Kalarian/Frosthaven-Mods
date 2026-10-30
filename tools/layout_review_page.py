@@ -64,8 +64,13 @@ def crop(src, half, dst):
     return dst.relative_to(OUT).as_posix()
 
 
+COMPARE = False
+
+
 def main():
+    global COMPARE
     cls = sys.argv[1]
+    COMPARE = "--compare" in sys.argv
     data = json.loads(subprocess.run([sys.executable, str(Path(__file__).with_name("layout_review.py")), "match", cls, "2"],
                                      capture_output=True, text=True, encoding="utf-8").stdout)
     table = L.strings()
@@ -74,7 +79,11 @@ def main():
         p = e["port"]
         notes = L.check(p, table)
         flagged += bool(notes)
-        mine = crop(p.get("shot"), p["half"], OUT / "img" / cls / f"{p['card']}-{p['half']}.jpg")
+        mine = crop(p.get("shot"), p["half"], OUT / "img" / (f"{cls}-after" if COMPARE else cls) / f"{p['card']}-{p['half']}.jpg")
+        before = None
+        if COMPARE:
+            src = L.SHOTS / f"{cls}-before" / Path(p["shot"]).name if p.get("shot") else None
+            before = crop(str(src) if src and src.exists() else None, p["half"], OUT / "img" / f"{cls}-before" / f"{p['card']}-{p['half']}.jpg")
         fh = []
         for m in e["matches"]:
             img = crop(m.get("shot"), m["half"], OUT / "img" / m["class"] / f"{m['card']}-{m['half']}.jpg")
@@ -83,7 +92,8 @@ def main():
         note_html = ("<ul>" + "".join(f"<li><b>{html.escape(n[:2])}</b> {html.escape(n[3:])}</li>" for n in notes) + "</ul>"
                      if notes else '<p class="ok">Matches Frosthaven.</p>')
         rows.append(f'<section class="{"flag" if notes else "ok"}"><h3>{html.escape(p["card"])} <span>{p["half"]}</span></h3>'
-                    f'<div class="cmp"><figure class="mine"><img src="{mine}" alt=""><figcaption>Brute (ported)</figcaption></figure>'
+                    f'<div class="cmp">' + (f'<figure class="before"><img src="{before}" alt=""><figcaption>{cls}: before</figcaption></figure>' if COMPARE and before else '') +
+                    f'<figure class="mine"><img src="{mine}" alt=""><figcaption>{cls}: {"after" if COMPARE else "ported"}</figcaption></figure>'
                     f'{"".join(fh)}</div>{note_html}</section>')
     rules = "".join(f'<div class="rule"><h3>{r} · {html.escape(t)}</h3><p>{html.escape(d)}</p><p class="ev">Frosthaven: '
                     f'{html.escape(", ".join(x.split("/")[1] for x in ev))}</p></div>' for r, t, d, ev in RULES)
@@ -98,10 +108,10 @@ main{{max-width:1200px;margin:0 auto;padding:24px 16px}} h1{{font-size:26px;marg
 section{{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:8px;padding:12px 14px;margin:12px 0}}
 section.flag{{border-left-color:var(--flag)}} section h3{{margin:0 0 8px;font-size:16px}} section h3 span{{color:var(--muted);font-weight:400}}
 .cmp{{display:flex;gap:12px;flex-wrap:wrap}} figure{{margin:0;width:240px}} figure img{{width:100%;border-radius:6px;display:block}}
-figure.mine img{{outline:2px solid var(--flag)}} figcaption{{color:var(--muted);font-size:12px;margin-top:4px}}
+figure.mine img{{outline:2px solid var(--ok)}} figure.before img{{outline:2px solid #6b6f78;opacity:.9}} figcaption{{color:var(--muted);font-size:12px;margin-top:4px}}
 ul{{margin:10px 0 0;padding-left:20px}} .ok{{color:var(--ok);margin:8px 0 0}} .filters{{margin:8px 0}} label{{margin-right:14px}}
 </style></head><body><main>
-<h1>{cls}: card layout review</h1>
+<h1>{cls}: {"before, after and Frosthaven" if COMPARE else "card layout review"}</h1>
 <p class="sub">{len(data)} halves · {flagged} break a rule · each Brute half beside the two closest Frosthaven halves (by what the half does, then its layout).
 Frosthaven's cards are hand-made prefabs, so the rules come from how its cards look, not from its layout data.</p>
 <h2>Rules</h2><div class="rules">{rules}<div class="already"><h3>Already the same as Frosthaven</h3><ul>{"".join(f"<li>{html.escape(a)}</li>" for a in ALREADY)}</ul></div></div>
@@ -111,7 +121,7 @@ Frosthaven's cards are hand-made prefabs, so the rules come from how its cards l
 document.getElementById('only').addEventListener('change',e=>{{for(const s of document.querySelectorAll('section.ok'))s.style.display=e.target.checked?'none':''}});
 </script></body></html>"""
     OUT.mkdir(parents=True, exist_ok=True)
-    f = OUT / f"{cls.lower()}-layout-review.html"
+    f = OUT / f"{cls.lower()}-{'before-after' if COMPARE else 'layout-review'}.html"
     f.write_text(page, encoding="utf-8")
     print(f, f"{flagged} of {len(data)} halves flagged")
 

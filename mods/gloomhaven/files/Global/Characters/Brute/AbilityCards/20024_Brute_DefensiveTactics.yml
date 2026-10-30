@@ -32,13 +32,11 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
-                - Row: "<sprite name=Target>*TAttack.Target* <size=100%><voffset=1>@TAttack.Target@"
-                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+                - Row: "<link=fhpill><sprite name=Range>*TAttack.Range*, <sprite name=Immobilize>, <sprite name=Target>*TAttack.Target* <voffset=1>@TAttack.Target@</link>"
             - Column:
     Bottom:
         - Active:
@@ -46,11 +44,11 @@ Layout:
             Icon: Positive_Retaliate
             ListLayout: "<sprite name=Retaliate> *BRetaliate*"
             Layout:
-                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate*"
+                - Row: "<size=150%><sprite name=Retaliate> *BRetaliate*"
         - Divider:
         - Active:
             Ability: BShield
             Icon: Positive_Shield
             ListLayout: "<sprite name=Shield> *BShield*"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield*"
+                - Row: "<size=150%><sprite name=Shield> *BShield*"

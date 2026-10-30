@@ -35,17 +35,17 @@ Layout:
             Icon: Positive_Retaliate
             ListLayout: "<sprite name=Retaliate> *TRetaliate*"
             Layout:
-                - Row: "<b><size=130%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
+                - Row: "<size=150%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
         - Divider:
         - Active:
             Ability: TRetaliateSubShield
             Icon: Positive_Shield
             ListLayout: "<sprite name=Shield> *TRetaliateSubShield*"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *TRetaliateSubShield* <size=100%><voffset=1>@TRetaliateSubShield@"
+                - Row: "<size=150%><sprite name=Shield> *TRetaliateSubShield* <size=100%><voffset=1>@TRetaliateSubShield@"
     Bottom:
         - Active:
             Ability: BAttack
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_013_B$"
-            Layout: "$GH_013_B$"
+            ListLayout: "$FHS_GH_013_B$"
+            Layout: "$FHS_GH_013_B$"

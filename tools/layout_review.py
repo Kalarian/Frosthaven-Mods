@@ -248,10 +248,24 @@ def check(h, table):
     t, words, notes = h["layout_text"], re.sub(r"<[^>]*>", "", card_text(h, table)), []
     # a main line: the ability's own icon, value and enhancement slot (<size=130%>); anything else carrying a modifier
     # icon is a modifier line. Only AddedEffect draws the pill on a generated card (<mark> draws nothing visible)
-    main_rows = [l for l in t.splitlines() if "<size=130%>" in l and re.search(r"\*\w+\*", l)
+    main_rows = [l for l in t.splitlines() if ("<size=130%>" in l or "<size=150%>" in l) and re.search(r"\*\w+\*", l)
                  and re.search(r"sprite name=(Attack|Move|Heal|Shield|Retaliate|Push|Pull|Loot)\b", l)]
-    mod_lines = [l for l in t.splitlines() if re.search(r"sprite name=(" + MODS + r")\b", l) and l not in main_rows]
-    plain = [l for l in mod_lines if "AddedEffect" not in l]
+    # a condition that is an ability of its own (Unstoppable Charge's Stun: "<size=150%><sprite name=Stun>") is a main line
+    main_rows += [l for l in t.splitlines() if re.search(r"<size=1[35]0%>\s*<sprite name=(" + MODS + r")>\s*\"?\s*$", l.strip())]
+    # a consume's reward text is the dashed box's, not a modifier of the ability
+    in_consume, depth, kept = False, 0, []
+    for l in t.splitlines():
+        ind = len(l) - len(l.lstrip())
+        if in_consume and ind <= depth:
+            in_consume = False
+        if re.match(r"^\s*- Consume:", l):
+            in_consume, depth = True, ind
+            continue
+        if not in_consume:
+            kept.append(l)
+    mod_lines = [l for l in kept if re.search(r"sprite name=(" + MODS + r")\b", l) and l not in main_rows]
+    # a pill: an AddedEffect, or a row the plugin draws a pill behind (<link=fhpill>, Frosthaven-styled classes)
+    plain = [l for l in mod_lines if "AddedEffect" not in l and "<link=fhpill>" not in l]
     if len(mod_lines) > 1 and any("AddedEffect" in l for l in mod_lines) and plain:
         notes.append("R1 modifiers split between a pill and plain icons: one pill")
     elif len(plain) > 1:
@@ -275,7 +289,8 @@ def check(h, table):
         notes.append("R3 condition named in capitals: the icon alone")
     if re.search(r"^\s*- Consume:", t, re.M) and "Conditional" not in t:
         notes.append("R4 consume drawn bare: Frosthaven's dashed consume box")
-    if re.search(r"^\s*- Infuse:", t, re.M) and "MandatoryTrigger" not in t:
+    styled = "<size=150%>" in t   # a Frosthaven-styled class: the plugin moves its infusions to the bottom
+    if re.search(r"^\s*- Infuse:", t, re.M) and "MandatoryTrigger" not in t and not styled:
         notes.append("R5 infuse placed under the ability: Frosthaven centres the elements at the bottom of the half")
     if "$Self$" in t or re.search(r"\bself\b", words, re.I):
         notes.append("R7 'self' pill: Frosthaven outlines a self-targeted ability (to probe)")

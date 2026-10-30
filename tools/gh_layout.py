@@ -343,3 +343,141 @@ def convert(s, icons=None, warn=print):
     for half in halves:
         half.children = convert_half(half.children, icons or {})
     return eol.join(lines[:at + 1]) + eol + "".join(emit(halves, 1, eol))
+
+
+# ---------------------------------------------------------------- Frosthaven's card style (classes in FH_STYLE)
+#
+# Frosthaven's own cards are hand-made prefabs; these rules make a generated card look like them (the user's layout
+# review, 2026-10-29: docs in tools/layout_review_page.py RULES). The data side is here; the plugin (GHCardStyle.cs)
+# does what the layout can't say: Frosthaven's font and icon art, the pill and self backgrounds behind the rows marked
+# below, and the infusions at the bottom of the half.
+#   - a main line is Frosthaven's 24 (150% of the card's 16), not bold;
+#   - all of an ability's modifiers (target, range, pierce, push, pull, jump, conditions) are one pill row after the
+#     value, marked <link=fhpill>; the value with an enhancement slot goes last, so its slot ends the pill (a row
+#     draws one slot line);
+#   - "Target all adjacent enemies" is the pill's target entry; "Target one adjacent enemy" (the default) goes;
+#   - a self-targeted value loses its "self" label and is marked <link=fhself> (Frosthaven's outlined box);
+#   - a consume sits in Frosthaven's dashed box (Conditional);
+#   - every text key of the layout is the class's Frosthaven-worded copy, FHS_<key> (gh_port.fh_text).
+
+PILL_OPEN, PILL_CLOSE = "<link=fhpill>", "</link>"
+SELF_OPEN = "<link=fhself>"
+FH_MAIN = "<size=150%>"
+STYLE_COLUMNS = '"10,35,45,10"'
+TARGET_ALL_ADJACENT = "<sprite name=Target> all adjacent <sprite name=Enemy>"
+_KEY = re.compile(r"\$([A-Za-z0-9_]+)\$")
+
+
+def _main_text(n):
+    """The main value's text of an ability block (a bare main row, or with_modifiers' Row), else None."""
+    if is_main(n):
+        return n.value
+    if (n.key == "Row" and not n.value and len(n.children) == 5 and n.children[0].key == "ColumnWidths"
+            and n.children[0].value == MODIFIER_COLUMNS and n.children[2].value.strip('"').startswith(MAIN)):
+        return n.children[2].value
+    return None
+
+
+def _modifiers(n):
+    if n.key != "Row" or not n.children:
+        return []
+    out = []
+    for c in n.children[3].children:
+        t = c.text().strip()
+        if c.key == "AddedEffect":
+            out += [p.strip() for p in t.split(", ") if p.strip()]
+        elif t:
+            out.append(t)
+    return out
+
+
+def _clean(t):
+    t = re.sub(r"</?mark[^>]*>", "", t)
+    t = re.sub(r"<size=\d+%>|</size>", "", t)
+    return t.strip()
+
+
+def _pill_block(main, mods, self_box):
+    main = main.strip('"')
+    main = SELF_OPEN + main + PILL_CLOSE if self_box else main
+    slotted = [m for m in mods if "@" in m]
+    plain = [m for m in mods if "@" not in m]
+    if not mods:
+        return Node("Row", f'"{main}"')
+    if len(slotted) <= 1:
+        cols = [Node("Row", '"' + PILL_OPEN + ", ".join(plain + slotted) + PILL_CLOSE + '"')]
+    else:   # two values with slots: one column each (a row draws one slot line), the plugin joins their pills
+        cols = [Node("Row", '"' + PILL_OPEN + ", ".join(plain + [m]) + PILL_CLOSE + '"') for m in slotted[:1]] + \
+               [Node("Row", '"' + PILL_OPEN + m + PILL_CLOSE + '"') for m in slotted[1:]]
+    return Node("Row", children=[Node("ColumnWidths", STYLE_COLUMNS), Node("Column"), Node("Column", f'"{main}"'),
+                                 Node("Column", children=cols), Node("Column")])
+
+
+def _style_items(items):
+    out, i = [], 0
+    while i < len(items):
+        n = items[i]
+        main = _main_text(n)
+        if main is not None:
+            mods = [_clean(m) for m in _modifiers(n)]
+            j = i + 1
+            # modifier rows convert_half left ungrouped (an area attack's column: Brute Force's Muddle under its Attack)
+            while j < len(items) and _main_text(items[j]) is None and (is_modifier(items[j]) or (
+                    is_spacer(items[j]) and j + 1 < len(items) and is_modifier(items[j + 1]))):
+                if is_modifier(items[j]):
+                    mods.append(_clean(items[j].text()))
+                j += 1
+            self_box = any(m in ("$Self$", FH_SELF) for m in mods)
+            mods = [m for m in mods if m not in ("$Self$", FH_SELF)]
+            while j < len(items) and is_row(items[j], lambda t: t.startswith("$Target_")):
+                t = items[j].text()
+                if t == "$Target_AllAdjacentEnemies$":
+                    mods.insert(0, TARGET_ALL_ADJACENT)
+                elif t == "$Target_OneAdjacentEnemy$":
+                    pass
+                else:
+                    break
+                j += 1
+            out.append(_pill_block(main, mods, self_box))
+            i = j
+            continue
+        if n.key == "Consume" and n.dash:
+            out.append(Node("Conditional", children=[Node("Layout", dash=False, children=[n])]))
+            i += 1
+            continue
+        if n.children and n.key not in ("Consume",):
+            n.children = _style_items(n.children) if any(c.dash for c in n.children) else n.children
+            for c in n.children:
+                if c.key == "Layout" and c.children:
+                    c.children = _style_items(c.children)
+        out.append(n)
+        i += 1
+    return out
+
+
+def _restyle_values(nodes):
+    for n in nodes:
+        if n.value:
+            n.value = re.sub(r"<b>\s*<size=130%>", FH_MAIN, n.value)
+            n.value = _KEY.sub(lambda m: m.group(0) if m.group(1).startswith(("FH", "ABILITY_CARD")) else f"$FHS_{m.group(1)}$", n.value)
+        _restyle_values(n.children)
+
+
+def fh_style(s, warn=print):
+    """A converted card file in Frosthaven's card style (see above): the Layout section only."""
+    eol = "\r\n" if "\r\n" in s else "\n"
+    lines = s.splitlines()
+    try:
+        at = lines.index("Layout:")
+    except ValueError:
+        return s
+    body = [(len(ln) - len(ln.lstrip(" ")), ln) for ln in lines[at + 1:] if ln.strip() and not ln.lstrip().startswith("#")]
+    try:
+        halves = parse(body)
+    except Unsupported as e:
+        warn(f"Frosthaven style not applied ({e})")
+        return s
+    for half in halves:
+        half.children = _style_items(half.children)
+    _restyle_values(halves)
+    return eol.join(lines[:at + 1]) + eol + "".join(emit(halves, 1, eol))
