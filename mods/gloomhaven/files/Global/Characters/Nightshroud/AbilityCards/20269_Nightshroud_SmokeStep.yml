@@ -32,14 +32,16 @@ Data:
         Infuse: Dark
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Move> *TMove*"
+        - Row: "<size=150%><sprite name=Move> *TMove*"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=150%><sprite name=Attack> *TAttack*"
         - Row: "<size=50%> "
-        - Consume:
-            Name: TCDark
-            Text: "<nobr>+2 <sprite name=Move></nobr>, <nobr>+2 <sprite name=Attack></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "<nobr>+2 <sprite name=Move></nobr>, <nobr>+2 <sprite name=Attack></nobr>, <sprite name=XP1>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
         - Infuse: Dark

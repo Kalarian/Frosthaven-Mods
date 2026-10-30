@@ -31,13 +31,13 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Push>*TAttackSubPush* @TAttackSubPush@"
+                - Row: "<link=fhpill><sprite name=Push> *TAttackSubPush* @TAttackSubPush@</link>"
             - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

@@ -37,9 +37,9 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $WindTotem$
+                    SummonName: $FHS_WindTotem$
                     SpecialText:
-                        - Row: "$Target_AllAdjacentEnemies$,"
+                        - Row: "$FHS_Target_AllAdjacentEnemies$,"
                         - Row: "<nobr><sprite name=Push> 2</nobr>"
         - Row: "<size=20%> "
         - Row:
@@ -49,7 +49,6 @@ Layout:
                 - Infuse: Air
             - Column:
             - Column:
-                - Duration: Persistent
     Bottom:
-        - Row: "$GH_Command$"
-        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
+        - Row: "$FHS_GH_Command$"
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

@@ -35,15 +35,15 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column: "<size=150%><sprite name=Attack> *TAttack*"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
             - Column:
     Bottom:
-        - Row: "$GH_Command$"
-        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
+        - Row: "$FHS_GH_Command$"
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"

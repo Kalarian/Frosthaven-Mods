@@ -27,12 +27,12 @@ Data:
                     CircleEnhancements: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> X <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> X <size=100%><voffset=1>@TAttack@"
         - Row: "<size=20%> "
-        - Row: "$Xis_CurrentHP$"
+        - Row: "$FHS_Xis_CurrentHP$"
         - Row: "<size=20%> "
-        - Row: "$XP_Per5Damage$"
+        - Row: "$FHS_XP_Per5Damage$"
         - Row: "<size=50%> "
-        - Row: "$GH_330_T$"
+        - Row: "$FHS_GH_330_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

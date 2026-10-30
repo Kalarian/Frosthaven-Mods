@@ -36,14 +36,21 @@ Data:
                 AnimOverload: RadialBeneficial
 Layout:
     Top:
-        - Row: "<size=130%><b><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
-        - Row: "<sprite name=Range> *THeal.Range*"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
+            - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCAir
-            Text: "<nobr>+1 <sprite name=Heal></nobr>, <nobr>+1 <sprite name=Range></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "<nobr>+1 <sprite name=Heal></nobr>, <nobr>+1 <sprite name=Range></nobr>, <sprite name=XP1>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Strengthen>"
-        - Row: "$Affect_OneAdjacentAlly$"
+        - Row: "<size=150%><sprite name=Strengthen>"
+        - Row: "$FHS_Affect_OneAdjacentAlly$"

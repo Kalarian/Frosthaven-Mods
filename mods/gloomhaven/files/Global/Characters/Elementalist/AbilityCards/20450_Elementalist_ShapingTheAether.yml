@@ -69,40 +69,48 @@ Layout:
             - ColumnWidths: "20, 60, 20"
             - Column:
             - Column:
-                - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-                - Row: "<sprite name=Range> *TAttack.Range*"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+                    - Column:
             - Column:
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "52, 48"
             - Column:
-                - Consume:
-                    Name: TCFire
-                    Text:
-                        - Row: "<nobr>+2 <sprite name=Attack></nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCFire
+                            Text: "<nobr>+2 <sprite name=Attack></nobr>"
                 - Row: "<size=20%> "
-                - Consume:
-                    Name: TCAir
-                    Text:
-                        - Row: "<nobr><sprite name=Push> 3</nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCAir
+                            Text: "<nobr><sprite name=Push> 3</nobr>"
             - Column:
-                - Consume:
-                    Name: TCIce
-                    Text:
-                        - Row: "<nobr>$StunShort$ <sprite name=Stun></nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCIce
+                            Text: "<nobr><sprite name=Stun></nobr>"
                 - Row: "<size=20%> "
-                - Consume:
-                    Name: TCEarth
-                    Text:
-                        - Row: "<nobr><sprite name=Target> 2</nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCEarth
+                            Text: "<nobr><sprite name=Target> 2</nobr>"
     Bottom:
         - Active:
             Ability: BActive
             Icon: Positive_FireLightInfuse_Wild
-            ListLayout: "$GH_450_B_1$\n<size=10%>\n<size=100%>$GH_450_B_2$"
+            ListLayout: "$FHS_GH_450_B_1$\n<size=10%>\n<size=100%>$FHS_GH_450_B_2$"
             Layout:
-                - Row: "$GH_450_B_1$"
+                - Row: "$FHS_GH_450_B_1$"
                 - Row: "<size=20%> "
-                - Row: "$GH_450_B_2$"
+                - Row: "$FHS_GH_450_B_2$"
                 - Row: "<size=20%> "
-                - Duration: Persistent

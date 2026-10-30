@@ -34,24 +34,24 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Poison>"
-        - Row: "$JOTL_165_T_1$"
+        - Row: "<size=150%><sprite name=Poison>"
+        - Row: "$FHS_JOTL_165_T_1$"
         - Row: "<size=50%> "
-        - Row: "<b><size=130%><nobr><sprite name=Bless></nobr>, <nobr><sprite name=Strengthen></nobr>"
-        - Row: "$JOTL_165_T_2$"
+        - Row: "<size=150%><nobr><sprite name=Bless></nobr>, <nobr><sprite name=Strengthen></nobr>"
+        - Row: "$FHS_JOTL_165_T_2$"
         - Row: "<size=50%> "
         - Infuse: Dark
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *BMoveCurse* @BMoveCurse@"
+            - Column: "<size=150%><sprite name=Move> *BMoveCurse* @BMoveCurse@"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Divider:
-        - Row: "<b><size=130%><sprite name=Curse>"
-        - Row: "$Target_AllEnemiesMovedThrough$"
+        - Row: "<size=150%><sprite name=Curse>"
+        - Row: "$FHS_Target_AllEnemiesMovedThrough$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "20,20,20,20"

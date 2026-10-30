@@ -37,21 +37,15 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column: "<size=150%><sprite name=Attack> *TAttack*"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
-                - AddedEffect: "<size=130%><sprite name=Muddle></size>, <size=130%><sprite name=Curse></size>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <voffset=1>@TAttack.Range@</link>"
+                - Row: "<link=fhpill><sprite name=Muddle>, <sprite name=Curse></link>"
             - Column:
     Bottom:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Invisible>"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><sprite name=Invisible></link>"
         - Row: "<size=50%> "
         - Consume:
             Name: BCDark

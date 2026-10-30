@@ -25,11 +25,11 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
             - Column:
-                - Row: "<sprite name=Range>*THeal.Range* @THeal.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range* @THeal.Range@</link>"
             - Column:
     Bottom:
         - Active:
@@ -38,4 +38,4 @@ Layout:
             Layout:
                 - Summon:
                     Ability: BSummon
-                    SummonName: $MysticAlly$
+                    SummonName: $FHS_MysticAlly$

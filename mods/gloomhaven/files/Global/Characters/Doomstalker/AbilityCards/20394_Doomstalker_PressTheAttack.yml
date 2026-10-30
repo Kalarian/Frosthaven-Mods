@@ -39,19 +39,24 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$GH_394_T$"
+        - Row: "$FHS_GH_394_T$"
     Bottom:
         - Active:
             Ability: BRetaliate
             Icon: Positive_Retaliate
             ListLayout: "<sprite name=Retaliate> *BRetaliate*, <sprite name=Range> *BRetaliate.RetaliateRange*"
             Layout:
-                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
-                - Row: "$Retaliate$ <sprite name=Range> *BRetaliate.RetaliateRange*"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Range> *BRetaliate.RetaliateRange*</link>"
+                    - Column:

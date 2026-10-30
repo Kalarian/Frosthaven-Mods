@@ -36,11 +36,11 @@ Layout:
         - Active:
             Ability: TActive
             Icon: Positive_DamagePrevent
-            ListLayout: "$GH_257_T$"
-            Layout: "$GH_257_T$"
-        - Row: "<size=50%> "
+            ListLayout: "$FHS_GH_257_T$"
+            Layout: "$FHS_GH_257_T$"
+        - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
-        - Row: "$GH_257_B$"
+        - Row: "$FHS_GH_257_B$"
         - Row: "<size=50%> "
         - Infuse: Light

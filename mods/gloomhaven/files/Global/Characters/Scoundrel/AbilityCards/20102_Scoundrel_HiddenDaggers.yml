@@ -30,18 +30,12 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
-                - Row: "<sprite name=Target>*TAttack.Target* <size=100%><voffset=1>@TAttack.Target@"
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <voffset=1>@TAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <voffset=1>@TAttack.Range@</link>"
             - Column:
     Bottom:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Invisible> <size=100%><voffset=1>@BInvisible@"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><sprite name=Invisible> <size=100%><voffset=1>@BInvisible@</link>"

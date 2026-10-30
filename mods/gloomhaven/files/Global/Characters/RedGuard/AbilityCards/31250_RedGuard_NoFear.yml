@@ -47,16 +47,16 @@ Layout:
     Top:
         - Active:
             Ability: TShield
-            ListLayout: "$JOTL_250_T$"
-            Layout: "$JOTL_250_T$"
+            ListLayout: "$FHS_JOTL_250_T$"
+            Layout: "$FHS_JOTL_250_T$"
             Icon: Positive_Shield
     Bottom:
         - Active:
             Ability: BActive
-            ListLayout: "$JOTL_250_B$"
-            Layout: "$JOTL_250_B$"
+            ListLayout: "$FHS_JOTL_250_B$"
+            Layout: "$FHS_JOTL_250_B$"
             Icon: Positive_Heal
-        - Row: "<size=20%> "
+        - Row: "<size=100%> "
         - XPTracker: BActive
         - Row: "<size=50%> "
         - Infuse: Light

@@ -38,14 +38,14 @@ Layout:
         - Active:
             Ability: TPlaySong
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_374_T$"
-            Layout: "$GH_374_T$"
+            ListLayout: "$FHS_GH_374_T$"
+            Layout: "$FHS_GH_374_T$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Stun> <size=100%><voffset=1>@BStun@"
+            - Column: "<size=150%><sprite name=Stun> <size=100%><voffset=1>@BStun@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BStun.Range*</mark>"
-                - Row: "<sprite name=Target>*BStun.Target* <size=100%><voffset=1>@BStun.Target@"
+                - Row: "<link=fhpill><sprite name=Target> *BStun.Target* <voffset=1>@BStun.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *BStun.Range*</link>"
             - Column:

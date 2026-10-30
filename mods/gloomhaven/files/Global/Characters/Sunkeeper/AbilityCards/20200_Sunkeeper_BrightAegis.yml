@@ -46,14 +46,14 @@ Layout:
             Icon: Positive_Shield
             ListLayout: "<sprite name=Shield> *TShield*"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+                - Row: "<size=150%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
         - Divider:
         - Active:
             Ability: TRetaliate
             Icon: Positive_Retaliate
             ListLayout: "<sprite name=Retaliate> *TRetaliate*"
             Layout:
-                - Row: "<b><size=130%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
+                - Row: "<size=150%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -61,10 +61,11 @@ Layout:
             - Column:
                 - Infuse: Light
             - Column:
-                - Duration: Round
     Bottom:
-        - Row: "$GH_177_T$"
+        - Row: "$FHS_GH_177_T$"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCLight
-            Text: "$GH_200_B$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "$FHS_GH_200_B$"

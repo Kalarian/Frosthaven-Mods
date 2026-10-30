@@ -29,12 +29,12 @@ Data:
                     XPTracker: [0]
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=20%> "
-        - Row: "$GH_098_T$"
+        - Row: "$FHS_GH_098_T$"
     Bottom:
         - Active:
             Ability: BPrevent
-            ListLayout: "$GH_098_B$"
-            Layout: "$GH_098_B$"
+            ListLayout: "$FHS_GH_098_B$"
+            Layout: "$FHS_GH_098_B$"
             Icon: Positive_DamagePrevent

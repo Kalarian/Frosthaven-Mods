@@ -59,27 +59,29 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*THeal.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
             - Column:
         - Row: "<size=50%> "
-        - Row: "$JOTL_167_T$"
+        - Row: "$FHS_JOTL_167_T$"
     Bottom:
         - Active:
             Ability: BActive
-            ListLayout: "$JOTL_167_B_1$"
-            Layout: "$JOTL_167_B_1$"
+            ListLayout: "$FHS_JOTL_167_B_1$"
+            Layout: "$FHS_JOTL_167_B_1$"
             Icon: Positive_AttackPlus
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCIce
-            Text: "$JOTL_167_B_2$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCIce
+                    Text: "$FHS_JOTL_167_B_2$"
         - Divider:
         - Active:
             Ability: BActiveSubEnemyAttackBuff
-            ListLayout: "$JOTL_167_B_3$"
-            Layout: "$JOTL_167_B_3$"
+            ListLayout: "$FHS_JOTL_167_B_3$"
+            Layout: "$FHS_JOTL_167_B_3$"
             Icon: Positive_AttackPlus

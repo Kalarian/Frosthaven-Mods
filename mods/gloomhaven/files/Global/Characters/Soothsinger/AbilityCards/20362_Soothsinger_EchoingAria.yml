@@ -35,13 +35,13 @@ Layout:
         - Active:
             Ability: TPlaySong
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_362_T$"
-            Layout: "$GH_362_T$"
+            ListLayout: "$FHS_GH_362_T$"
+            Layout: "$FHS_GH_362_T$"
     Bottom:
         - Active:
             Ability: BShield
             Icon: Positive_Shield
-            ListLayout: "<sprite name=Shield> *BShield*, <b></b> $Affect_AllAllies$ $within$ <nobr><sprite name=Range> *BShield.Range*</nobr>"
+            ListLayout: "<sprite name=Shield> *BShield*, <b></b> $FHS_Affect_AllAllies$ $FHS_within$ <nobr><sprite name=Range> *BShield.Range*</nobr>"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield*"
-                - Row: "<b></b> $Affect_AllAllies$ $within$ <nobr><sprite name=Range> *BShield.Range*</nobr>"
+                - Row: "<size=150%><sprite name=Shield> *BShield*"
+                - Row: "<b></b> $FHS_Affect_AllAllies$ $FHS_within$ <nobr><sprite name=Range> *BShield.Range*</nobr>"

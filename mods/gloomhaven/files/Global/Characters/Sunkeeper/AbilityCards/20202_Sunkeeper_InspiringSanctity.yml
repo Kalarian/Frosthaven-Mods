@@ -53,16 +53,18 @@ Data:
                 AnimOverload: ControlAlly
 Layout:
     Top:
-        - Row: "$GH_157_T$"
+        - Row: "$FHS_GH_157_T$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack*"
+        - Row: "<size=150%><sprite name=Attack> *TAllyAttack*"
         - Row: "<size=50%> "
-        - Consume:
-            Name: TCLight
-            Text: $GH_202_T$
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCLight
+                    Text: $FHS_GH_202_T$
     Bottom:
-        - Row: $GH_371_B$
+        - Row: $FHS_GH_371_B$
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack*"
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack*"
         - Row: "<size=50%> "
-        - Row: "$XP_PerAttackPerformed$"
+        - Row: "$FHS_XP_PerAttackPerformed$"

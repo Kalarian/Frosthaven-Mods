@@ -43,18 +43,23 @@ Data:
                 AnimOverload: DoomTarget
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
         - Row: "<size=20%> "
-        - Row: "$XP_PerEnemy$"
+        - Row: "$FHS_XP_PerEnemy$"
     Bottom:
         - Active:
             Ability: BDoom
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_402_B$"
+            ListLayout: "$FHS_GH_402_B$"
             Layout:
-                - Row: "$Doom_MarkText$"
-                - Row: "$GH_402_B$"
-                - Row: "<size=70%>$Doom_DiscardReminderText$"
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH_402_B$"
+                - Row: "<size=70%>$FHS_Doom_DiscardReminderText$"

@@ -26,6 +26,6 @@ Data:
                     DiamondEnhancements: 1
 Layout:
     Top:
-        - Row: "$GH_205_T$"
+        - Row: "$FHS_GH_205_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

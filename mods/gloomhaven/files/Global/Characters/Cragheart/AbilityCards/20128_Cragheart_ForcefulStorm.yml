@@ -32,11 +32,15 @@ Layout:
     Top:
         - ColumnWidths: "70,25"
         - Column:
-            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-            - Row: "<sprite name=Range> *TAttack.Range*"
-            - Row: "<sprite name=Disarm>"
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Disarm></link>"
+                - Column:
             - Row: "<size=20%> "
-            - Row: "<line-height=100%>$XP_PerEnemy$"
+            - Row: "<line-height=100%>$FHS_XP_PerEnemy$"
         - Column:
             - Row: "£Area£"
             - Row: "<size=50%> "
@@ -44,6 +48,6 @@ Layout:
     Bottom:
         - Active:
             Ability: BAttack
-            ListLayout: "$GH_128_B$"
-            Layout: "$GH_128_B$"
+            ListLayout: "$FHS_GH_128_B$"
+            Layout: "$FHS_GH_128_B$"
             Icon: Positive_AttackPlus

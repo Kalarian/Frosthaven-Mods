@@ -40,19 +40,26 @@ Layout:
         - Row:
             - ColumnWidths: "65,35"
             - Column:
-                - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
-                - Row: "<sprite name=Range> *TAttack.Range*"
-                - Consume:
-                    Name: TCDark
-                    Text: "<nobr><sprite name=Muddle>, <sprite name=XP1></nobr>"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Attack> *TAttack*"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+                    - Column:
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCDark
+                            Text: "<nobr><sprite name=Muddle>, <sprite name=XP1></nobr>"
             - Column:
                 - Row: "£Area£"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
         - Active:
             Ability: BShield
             Icon: Positive_Shield
             ListLayout: "<sprite name=Shield> *BShield*"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"

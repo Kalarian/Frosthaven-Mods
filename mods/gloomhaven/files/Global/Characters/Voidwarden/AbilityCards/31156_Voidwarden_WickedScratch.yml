@@ -36,9 +36,9 @@ Data:
                 AnimOverload: TargetedBuff
 Layout:
     Top:
-        - Row: "$JOTL_156_T$"
+        - Row: "$FHS_JOTL_156_T$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack* @TAllyAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAllyAttack* @TAllyAttack@"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "20,30,30"
@@ -47,12 +47,12 @@ Layout:
                 - Infuse: Dark
             - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"
         - Divider:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Strengthen>"
+            - Column: "<size=150%><sprite name=Strengthen>"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BStrengthen.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *BStrengthen.Range*</link>"
             - Column:

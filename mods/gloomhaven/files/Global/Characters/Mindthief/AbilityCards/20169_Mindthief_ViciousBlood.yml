@@ -34,7 +34,7 @@ Layout:
         - Augment:
             AugmentIcon: Positive_AttackPlus
             ParentAbility: TAttack
-            ActiveBonusLayout: "$Augment_OnYourMeleeAttacks$ $Gain$ <nobr><sprite name=Retaliate> *TAugmentRetaliate*</nobr> <sprite name=Round>"
+            ActiveBonusLayout: "$FHS_Augment_OnYourMeleeAttacks$ $FHS_Gain$ <nobr><sprite name=Retaliate> *TAugmentRetaliate*</nobr> <sprite name=Round>"
             AugmentAbilityLayout:
                 - ColumnWidths: "70,25"
                 - Column:
@@ -42,15 +42,14 @@ Layout:
                         Ability: TAugmentRetaliate
                         Icon: Positive_Retaliate
                         ListLayout: "<nobr>Retaliate <sprite name=Retaliate> *TAugmentRetaliate*</nobr>"
-                        Layout: "$Gain$ <nobr>Retaliate <sprite name=Retaliate> *TAugmentRetaliate*</nobr>"
+                        Layout: "$FHS_Gain$ <nobr>Retaliate <sprite name=Retaliate> *TAugmentRetaliate*</nobr>"
                 - Column:
-                    - Duration: Round
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:
-                - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
                 - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

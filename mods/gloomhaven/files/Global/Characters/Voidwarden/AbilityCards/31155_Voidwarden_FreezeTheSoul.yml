@@ -46,33 +46,31 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Poison></size>"
+                - Row: "<link=fhpill><sprite name=Poison></link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCFire
-            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Muddle></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFire
+                    Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Muddle></nobr>, <sprite name=XP1>"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Stun>"
+            - Column: "<size=150%><sprite name=Stun>"
             - Column:
-                - Row: "<sprite name=Range>*BStun.Range* @BStun.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *BStun.Range* @BStun.Range@</link>"
             - Column:
         - Divider:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Curse>"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><sprite name=Curse></link>"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCDark
-            Text: "$JOTL_155_B$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "$FHS_JOTL_155_B$"

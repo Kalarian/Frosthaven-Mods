@@ -42,11 +42,11 @@ Data:
                 AnimOverload: Loot
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
-        - Row: "$JOTL_090_T$"
+        - Row: "<size=150%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+        - Row: "$FHS_JOTL_090_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Attack> *BAttack*"
+        - Row: "<size=150%><sprite name=Attack> *BAttack*"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"

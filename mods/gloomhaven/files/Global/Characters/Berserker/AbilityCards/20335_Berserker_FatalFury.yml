@@ -31,7 +31,7 @@ Data:
                 Attack: 2
 Layout:
     Top:
-        - Row: "$GH_335_T$"
+        - Row: "$FHS_GH_335_T$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -40,8 +40,8 @@ Layout:
                 - Infuse: Fire
             - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Attack> *BAttack1*"
+        - Row: "<size=150%><sprite name=Attack> *BAttack1*"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *BAttack2*"
+        - Row: "<size=150%><sprite name=Attack> *BAttack2*"

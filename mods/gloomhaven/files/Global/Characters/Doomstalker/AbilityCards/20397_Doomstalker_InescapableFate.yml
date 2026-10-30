@@ -43,19 +43,19 @@ Layout:
         - Active:
             Ability: TAddDoomSlot
             Icon: Positive_Attack_Curse
-            ListLayout: "$GH_397_T_1$ $GH_397_T_2$"
+            ListLayout: "$FHS_GH_397_T_1$ $FHS_GH_397_T_2$"
             Layout:
-                - Row: "$GH_397_T_1$"
+                - Row: "$FHS_GH_397_T_1$"
                 - Row: "<size=20%> "
-                - Row: "$GH_397_T_2$"
+                - Row: "$FHS_GH_397_T_2$"
     Bottom:
         - Active:
             Ability: BDoom
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_397_B$"
+            ListLayout: "$FHS_GH_397_B$"
             Layout:
-                - Row: "$Doom_MarkText$"
-                - Row: "$GH_397_B$"
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH_397_B$"
                 - Row: "<size=20%> "
                 - XPTracker: BDoomStartTurnAbilityAfterXCasterTurns
-                - Row: "<size=70%>$Doom_DiscardReminderText$"
+                - Row: "<size=70%>$FHS_Doom_DiscardReminderText$"

@@ -42,19 +42,21 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            ListLayout: "$GH_069_T_1$"
-            ListLayoutAlt: "$GH_069_T_1_Alt$"
-            Layout: "$GH_069_T_1$"
-            LayoutAlt: "$GH_069_T_1_Alt$"
+            ListLayout: "$FHS_GH_069_T_1$"
+            ListLayoutAlt: "$FHS_GH_069_T_1_Alt$"
+            Layout: "$FHS_GH_069_T_1$"
+            LayoutAlt: "$FHS_GH_069_T_1_Alt$"
             Icon: Positive_AttackPlus
-        - Row: "<size=50%> "
+        - Row: "<size=100%> "
         - XPTracker: TActive
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCAir
-            Text: "$GH_069_T_2$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "$FHS_GH_069_T_2$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
         - Consume:
             Name: BCFire
@@ -66,7 +68,7 @@ Layout:
                         Icon: Positive_Retaliate
                         ListLayout: "<sprite name=Retaliate> 2"
                         Layout:
-                            - Row: "<b><size=130%><sprite name=Retaliate> 2"
-                            - Row: "<line-height=100%><size=100%>$Self$"
+                            - Row: "<size=150%><sprite name=Retaliate> 2"
+                            - Row: "<line-height=100%><size=100%>$FHS_Self$"
                 - Column:
                     - Duration: Round

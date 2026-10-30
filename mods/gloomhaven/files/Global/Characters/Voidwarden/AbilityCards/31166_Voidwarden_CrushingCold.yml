@@ -42,28 +42,30 @@ Data:
         Infuse: Ice
 Layout:
     Top:
-        - Row: "$JOTL_166_T$"
+        - Row: "$FHS_JOTL_166_T$"
         - Row: "<size=20%> "
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAllyAttack*"
+            - Column: "<size=150%><sprite name=Attack> *TAllyAttack*"
             - Column:
-                - Row: "<sprite name=Target>*TAllyAttack.Target* @TAllyAttack.Target@"
+                - Row: "<link=fhpill><sprite name=Target> *TAllyAttack.Target* @TAllyAttack.Target@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCIce
-            Text: "<nobr><sprite name=Muddle></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCIce
+                    Text: "<nobr><sprite name=Muddle></nobr>, <sprite name=XP1>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Divider:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Muddle> @BMuddle@"
+            - Column: "<size=150%><sprite name=Muddle> @BMuddle@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BMuddle.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *BMuddle.Range*</link>"
             - Column:
         - Row: "<size=50%> "
         - Infuse: Ice

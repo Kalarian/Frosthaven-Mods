@@ -42,16 +42,21 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "$GH_352_B$"
+        - Row: "$FHS_GH_352_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
     Bottom:
         - ColumnWidths: "68,30"
         - Column:
             - Row: "<sprite name=Range> *BControl.Range*"
             - Row: "<size=20%> "
-            - Row: "$GH_373_B$"
+            - Row: "$FHS_GH_373_B$"
         - Column:
             - Row: " "
             - Row: "£Area£"

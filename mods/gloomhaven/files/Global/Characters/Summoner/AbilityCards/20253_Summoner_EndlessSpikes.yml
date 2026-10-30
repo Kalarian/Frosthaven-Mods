@@ -32,7 +32,7 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $GH_253_T$
+                    SummonName: $FHS_GH_253_T$
                     SpecialText:
                         - Row: "<nobr><sprite name=Retaliate> 2</nobr>"
                         - Row: "<nobr><sprite name=Shield> 1</nobr>"
@@ -40,7 +40,7 @@ Layout:
         - Active:
             Ability: BRetaliate
             Icon: Positive_Retaliate
-            ListLayout: "<sprite name=Retaliate> *BRetaliate*, $Affect_AllSummonedAllies$"
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*, $FHS_Affect_AllSummonedAllies$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate*"
-                - Row: "$Affect_AllSummonedAllies$"
+                - Row: "<size=150%><sprite name=Retaliate> *BRetaliate*"
+                - Row: "$FHS_Affect_AllSummonedAllies$"

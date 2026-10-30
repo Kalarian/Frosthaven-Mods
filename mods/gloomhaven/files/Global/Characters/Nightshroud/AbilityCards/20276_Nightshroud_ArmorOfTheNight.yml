@@ -34,7 +34,7 @@ Data:
         Infuse: Dark
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=150%><sprite name=Attack> *TAttack*"
         - Row: "<size=50%> "
         - Consume:
             Name: TCDark
@@ -42,8 +42,8 @@ Layout:
                 - ColumnWidths: "80,20"
                 - ColumnSpacing: 100
                 - Column:
-                    - Row: "<b><size=130%><sprite name=Heal> *TCDarkHeal*"
-                    - Row: "$Self$"
+                    - Row: "<size=150%><sprite name=Heal> *TCDarkHeal*"
+                    - Row: "$FHS_Self$"
                 - Column:
     Bottom:
         - Active:
@@ -51,7 +51,7 @@ Layout:
             Icon: Positive_Shield
             ListLayout: "<sprite name=Shield> *BShield*"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -59,4 +59,3 @@ Layout:
             - Column:
                 - Infuse: Dark
             - Column:
-                - Duration: Round

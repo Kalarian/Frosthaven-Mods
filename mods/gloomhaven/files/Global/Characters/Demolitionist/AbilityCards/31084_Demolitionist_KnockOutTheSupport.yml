@@ -36,12 +36,12 @@ Data:
                         AbilityXP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Divider:
         - Active:
             Ability: TSubBlockHeal
-            ListLayout: "$JOTL_084_T$"
-            Layout: "$JOTL_084_T$"
+            ListLayout: "$FHS_JOTL_084_T$"
+            Layout: "$FHS_JOTL_084_T$"
             Icon: AA_BlockHealing
         - Row: "<size=50%> "
         - Row:
@@ -50,16 +50,9 @@ Layout:
             - Column:
                 - Infuse: Earth
             - Column:
-                - Duration: Round
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
-        - Row: "$JOTL_084_B$"
+        - Row: "$FHS_JOTL_084_B$"
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Strengthen>"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><sprite name=Strengthen></link>"

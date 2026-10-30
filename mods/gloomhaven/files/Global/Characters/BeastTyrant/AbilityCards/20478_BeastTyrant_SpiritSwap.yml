@@ -31,8 +31,8 @@ Data:
                 AnimOverload: RadialBeneficial
 Layout:
     Top:
-        - Row: "$GH_Command$"
+        - Row: "$FHS_GH_Command$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
+        - Row: "<size=150%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
     Bottom:
-        - Row: "$GH_478_B$"
+        - Row: "$FHS_GH_478_B$"

@@ -30,9 +30,9 @@ Data:
                 AnimOverload: PlayPositiveTuneAttack
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Strengthen>"
-        - Row: "$Affect_AllAllies$"
+        - Row: "<size=150%><sprite name=Strengthen>"
+        - Row: "$FHS_Affect_AllAllies$"
     Bottom:
-        - Row: "$GH_352_B$"
+        - Row: "$FHS_GH_352_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

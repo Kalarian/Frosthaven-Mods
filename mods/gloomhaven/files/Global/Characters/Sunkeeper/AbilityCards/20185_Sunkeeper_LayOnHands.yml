@@ -28,9 +28,9 @@ Data:
                 Target: -1
 Layout:
     Top:
-        - Row: "$GH_185_T$"
+        - Row: "$FHS_GH_185_T$"
         - Row: "<size=50%> "
-        - Row: "$Suffer_3Damage$"
+        - Row: "$FHS_Suffer_3Damage$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -39,4 +39,4 @@ Layout:
                 - Infuse: Light
             - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"

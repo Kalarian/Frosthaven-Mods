@@ -29,10 +29,10 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=50%> "
         - Infuse: Light
     Bottom:
-        - Row: "$GH_192_B$"
+        - Row: "$FHS_GH_192_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> *BAllyMove*"
+        - Row: "<size=150%><sprite name=Move> *BAllyMove*"

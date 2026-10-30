@@ -48,21 +48,28 @@ Layout:
         - Augment:
             AugmentIcon: Positive_AttackPlus
             ParentAbility: TAttack
-            ActiveBonusLayout: "$Augment_OnYourMeleeAttacks$ <nobr><sprite name=Heal> *TAugmentHeal*,</nobr> <nobr><sprite name=Range> *TAugmentHeal.Range*</nobr>"
+            ActiveBonusLayout: "$FHS_Augment_OnYourMeleeAttacks$ <nobr><sprite name=Heal> *TAugmentHeal*,</nobr> <nobr><sprite name=Range> *TAugmentHeal.Range*</nobr>"
             AugmentAbilityLayout:
-                - Row: "<b><size=130%><sprite name=Heal> *TAugmentHeal*"
+                - Row: "<size=150%><sprite name=Heal> *TAugmentHeal*"
                 - Row: "<sprite name=Range> *TAugmentHeal.Range*"
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:
-                - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
                 - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCIce
-            Text: "+1 <sprite name=Push>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCIce
+                    Text: "+1 <sprite name=Push>, <sprite name=XP1>"

@@ -27,8 +27,8 @@ Data:
                     CircleEnhancements: 1
 Layout:
     Top:
-        - Row: "$GH_157_B$"
+        - Row: "$FHS_GH_157_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
+        - Row: "<size=150%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

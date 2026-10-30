@@ -40,10 +40,15 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> *TAttack.Range*</nobr>"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Range> *TAttack.Range*</link>"
+            - Column:
         - Row: "<sprite name=Push> *TAttackSubPush* @TAttackSubPush@"
     Bottom:
-        - Row: "$GH_371_B$"
+        - Row: "$FHS_GH_371_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

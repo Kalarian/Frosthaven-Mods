@@ -45,21 +45,20 @@ Layout:
     Top:
         - Row: "<size=10%> "
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *TMove*"
+            - Column: "<size=150%><sprite name=Move> *TMove*"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Divider:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column: "<size=150%><sprite name=Attack> *TAttack*"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Stun></size>"
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy>, <sprite name=Stun></link>"
             - Column:
-        - Row: "$Target_AllAdjacentEnemies$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -69,19 +68,21 @@ Layout:
             - Column:
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *BMove*"
+            - Column: "<size=150%><sprite name=Move> *BMove*"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Divider:
         - Active:
             Ability: BShield
-            ListLayout: "<b><size=130%><sprite name=Shield> *BShield*"
-            Layout: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+            ListLayout: "<size=150%><sprite name=Shield> *BShield*"
+            Layout: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
             Icon: Positive_Shield
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCAir
-            Text: "<nobr>+1 <sprite name=Shield></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCAir
+                    Text: "<nobr>+1 <sprite name=Shield></nobr>, <sprite name=XP1>"

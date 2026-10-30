@@ -43,12 +43,14 @@ Layout:
     Top:
         - ColumnWidths: "70,25"
         - Column:
-            - Row: "$GH_Command$"
-            - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+            - Row: "$FHS_GH_Command$"
+            - Row: "<size=150%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
             - Row: "<size=20%> "
-            - Consume:
-                Name: TCEarth
-                Text: "<nobr>+1 <sprite name=Attack>, <sprite name=XP1></nobr>"
+            - Conditional:
+                Layout:
+                    - Consume:
+                        Name: TCEarth
+                        Text: "<nobr>+1 <sprite name=Attack>, <sprite name=XP1></nobr>"
         - Column: "£Area£"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

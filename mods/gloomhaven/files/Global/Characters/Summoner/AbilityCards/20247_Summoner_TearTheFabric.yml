@@ -37,16 +37,12 @@ Data:
                 XP: 1
 Layout:
     Top:
-        - Row: "$GH_247_T$"
+        - Row: "$FHS_GH_247_T$"
     Bottom:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@</link>"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCEarth
-            Text: "<nobr>+2 <sprite name=Heal>, <sprite name=XP1></nobr>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCEarth
+                    Text: "<nobr>+2 <sprite name=Heal>, <sprite name=XP1></nobr>"

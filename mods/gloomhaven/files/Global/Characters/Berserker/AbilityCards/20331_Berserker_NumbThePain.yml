@@ -46,14 +46,18 @@ Data:
                         AnimOverload: AdjacentShove
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=50%> "
-        - Consume:
-            Name: TCDamage
-            Text: "$GH_331_T$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDamage
+                    Text: "$FHS_GH_331_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
-        - Consume:
-            Name: BCDamage
-            Text: "$GH_331_B$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDamage
+                    Text: "$FHS_GH_331_B$"

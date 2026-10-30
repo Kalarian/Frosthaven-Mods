@@ -45,13 +45,12 @@ Layout:
         - Active:
             Ability: TAbilityOverrideAbilityType
             Icon: Positive_Heal
-            ListLayout: "$GH_445_T_1$ $GH_445_T_2$"
+            ListLayout: "$FHS_GH_445_T_1$ $FHS_GH_445_T_2$"
             Layout:
-                - Row: "$GH_445_T_1$"
+                - Row: "$FHS_GH_445_T_1$"
                 - Row: "<size=20%> "
-                - Row: "$GH_445_T_2$"
+                - Row: "$FHS_GH_445_T_2$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Stun> <size=100%><voffset=1>@BStun@"
-        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=150%><sprite name=Stun> <size=100%><voffset=1>@BStun@"

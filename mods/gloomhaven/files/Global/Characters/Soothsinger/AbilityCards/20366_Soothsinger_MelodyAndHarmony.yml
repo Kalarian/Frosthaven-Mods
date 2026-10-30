@@ -30,19 +30,19 @@ Layout:
     Top:
         - Active:
             Ability: TAddSong
-            ListLayout: "$GH_366_T_1$ $GH_366_T_2$"
+            ListLayout: "$FHS_GH_366_T_1$ $FHS_GH_366_T_2$"
             Layout:
-                - Row: "$GH_366_T_1$"
+                - Row: "$FHS_GH_366_T_1$"
                 - Row: "<size=20%> "
-                - Row: "$GH_366_T_2$"
+                - Row: "$FHS_GH_366_T_2$"
             Icon: Positive_Cards
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* @BMove@"
         - Divider:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack* @BAttack@"
+            - Column: "<size=150%><sprite name=Attack> *BAttack* @BAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
             - Column:

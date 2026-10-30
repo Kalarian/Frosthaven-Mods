@@ -52,15 +52,15 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            ListLayout: "$JOTL_230_T$"
-            Layout: "$JOTL_230_T$"
+            ListLayout: "$FHS_JOTL_230_T$"
+            Layout: "$FHS_JOTL_230_T$"
             Icon: Positive_Retaliate
-        - Row: "<size=20%> "
+        - Row: "<size=100%> "
         - XPTracker: TActive
         - Row: "<size=50%> "
         - Infuse: Fire
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
         - Consume:
             Name: BCFire
@@ -72,7 +72,7 @@ Layout:
                         Icon: Positive_Shield
                         ListLayout: "<sprite name=Shield> 1"
                         Layout:
-                            - Row: "<b><size=130%><sprite name=Shield> 1"
-                            - Row: "<line-height=100%><size=100%>$Self$"
+                            - Row: "<size=150%><sprite name=Shield> 1"
+                            - Row: "<line-height=100%><size=100%>$FHS_Self$"
                 - Column:
                     - Row: "<sprite name=XP1>"

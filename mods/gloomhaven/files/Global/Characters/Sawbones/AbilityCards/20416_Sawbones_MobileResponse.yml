@@ -77,10 +77,15 @@ Layout:
         - Active:
             Ability: TActive
             Icon: Positive_Heal
-            ListLayout: "$GH_416_T$"
-            Layout: "$GH_416_T$"
+            ListLayout: "$FHS_GH_416_T$"
+            Layout: "$FHS_GH_416_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Wound>"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Wound>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:

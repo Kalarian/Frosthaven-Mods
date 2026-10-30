@@ -30,15 +30,15 @@ Data:
                 AnimOverload: AggressiveTargetedShout
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Bless> @TBless@"
-        - Row: "$Affect_AllAdjacentAllies$"
+        - Row: "<size=150%><sprite name=Bless> @TBless@"
+        - Row: "$FHS_Affect_AllAdjacentAllies$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* @BMove@"
         - Divider:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Curse> @BCurse@"
+            - Column: "<size=150%><sprite name=Curse> @BCurse@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BCurse.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *BCurse.Range*</link>"
             - Column:

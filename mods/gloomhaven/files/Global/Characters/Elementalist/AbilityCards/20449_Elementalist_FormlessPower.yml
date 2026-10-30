@@ -50,23 +50,27 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCAnyXP
-            Text: "+1 <sprite name=Attack>, +1 <sprite name=Range>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAnyXP
+                    Text: "+1 <sprite name=Attack>, +1 <sprite name=Range>, <sprite name=XP1>"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCAnyNoXP
-            Text: "+1 <sprite name=Attack>, +1 <sprite name=Range>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAnyNoXP
+                    Text: "+1 <sprite name=Attack>, +1 <sprite name=Range>"
     Bottom:
         - Active:
             Ability: BActive
-            ListLayout: "$GH_449_B$"
-            Layout: "$GH_449_B$"
+            ListLayout: "$FHS_GH_449_B$"
+            Layout: "$FHS_GH_449_B$"
             Icon: Positive_FireLightInfuse_Wild

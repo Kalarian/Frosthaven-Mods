@@ -55,29 +55,33 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column: "<size=150%><sprite name=Attack> *TAttack*"
             - Column:
-                - Row: "<sprite name=Push>*TAttackSubPush* @TAttackSubPush@"
-                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+                - Row: "<link=fhpill><sprite name=Push> *TAttackSubPush* @TAttackSubPush@</link>"
+                - Row: "<link=fhpill><sprite name=Immobilize></link>"
             - Column:
-        - Consume:
-            Name: TCEarth
-            Text: "<sprite name=Target> 2, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCEarth
+                    Text: "<sprite name=Target> 2, <sprite name=XP1>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
         - Active:
             Ability: BShield
             ListLayout: "<sprite name=Shield> *BShield*"
-            ListLayoutAlt: "<sprite name=Shield> 2, $Self$"
+            ListLayoutAlt: "<sprite name=Shield> 2, $FHS_Self$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
             LayoutAlt:
-                - Row: "<b><size=130%><sprite name=Shield> 2 <size=100%><voffset=1>@BShield@"
-                - Row: "$Self$"
+                - Row: "<size=150%><sprite name=Shield> 2 <size=100%><voffset=1>@BShield@"
+                - Row: "$FHS_Self$"
             Icon: Positive_Shield
-        - Consume:
-            Name: BCEarth
-            Text: "+1 <sprite name=Move>, +1 <sprite name=Shield>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCEarth
+                    Text: "+1 <sprite name=Move>, +1 <sprite name=Shield>, <sprite name=XP1>"

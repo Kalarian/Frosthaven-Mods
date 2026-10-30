@@ -48,17 +48,18 @@ Layout:
         - Active:
             Ability: TRetaliate
             Icon: Positive_Retaliate
-            ListLayout: "<sprite name=Retaliate> *TRetaliate*. $GH_196_T$"
+            ListLayout: "<sprite name=Retaliate> *TRetaliate*. $FHS_GH_196_T$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
+                - Row: "<size=150%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
                 - Row: "<size=50%> "
-                - Row: "$GH_196_T$"
+                - Row: "$FHS_GH_196_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCLight
-            Text: "+2 <sprite name=Move>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "+2 <sprite name=Move>, <sprite name=XP1>"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Stun> <size=100%><voffset=1>@BStun@"
-        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=150%><sprite name=Stun> <size=100%><voffset=1>@BStun@"

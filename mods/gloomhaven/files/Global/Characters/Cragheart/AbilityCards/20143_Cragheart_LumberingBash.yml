@@ -32,9 +32,9 @@ Data:
                 AnimOverload: PowerUp
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -45,8 +45,8 @@ Layout:
     Bottom:
         - Active:
             Ability: BActive
-            ListLayout: "$GH_143_B$"
-            Layout: "$GH_143_B$"
+            ListLayout: "$FHS_GH_143_B$"
+            Layout: "$FHS_GH_143_B$"
             Icon: Positive_Heal
-        - Row: "<size=50%> "
+        - Row: "<size=100%> "
         - XPTracker: BActive

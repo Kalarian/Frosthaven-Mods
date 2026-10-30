@@ -34,11 +34,11 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
+        - Row: "<size=150%><sprite name=Loot> *TLoot*"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
-        - Row: "$Affect_AllAdjacentAllies$"
+        - Row: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$FHS_Affect_AllAdjacentAllies$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
-        - Row: "$GH_407_T$"
+        - Row: "$FHS_GH_407_T$"

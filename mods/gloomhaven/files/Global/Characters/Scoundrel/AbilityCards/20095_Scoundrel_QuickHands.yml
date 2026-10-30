@@ -23,8 +23,8 @@ Data:
                 Target: -1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"

@@ -41,9 +41,9 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $Ward$
+                    SummonName: $FHS_Ward$
                     HideSummonBoxes: True
-        - Row: "$JOTL_172_T$"
+        - Row: "$FHS_JOTL_172_T$"
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "20,20,20,20"
@@ -52,16 +52,15 @@ Layout:
                 - Infuse: Earth
             - Column:
             - Column:
-                - Duration: Persistent
     Bottom:
-        - Row: "$JOTL_172_B_1$"
+        - Row: "$FHS_JOTL_172_B_1$"
         - Row: "<size=20%> "
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TargetWillDoThis* @TargetWillDoThis@"
+            - Column: "<size=150%><sprite name=Attack> *TargetWillDoThis* @TargetWillDoThis@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TargetWillDoThis.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *TargetWillDoThis.Range*</link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$JOTL_172_B_2$"
+        - Row: "$FHS_JOTL_172_B_2$"

@@ -64,26 +64,28 @@ Data:
         XP: 2
 Layout:
     Top:
-        - Row: "$GH_132_T_1$"
+        - Row: "$FHS_GH_132_T_1$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "15, 70, 15"
             - Column:
             - Column:
-                - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-                - Row: "$GH_132_T_2$"
+                - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Row: "$FHS_GH_132_T_2$"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCEarth
-            Text: "+1 <sprite name=Attack>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCEarth
+                    Text: "+1 <sprite name=Attack>, <sprite name=XP1>"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$GH_132_B$"
+        - Row: "$FHS_GH_132_B$"

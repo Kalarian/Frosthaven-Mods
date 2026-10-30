@@ -64,33 +64,40 @@ Layout:
                     Icon: Positive_Shield
                     ListLayout: "<sprite name=Shield> ^TShield^"
                     Layout:
-                        - Row: "<b><size=130%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+                        - Row: "<size=150%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
             - Column:
-                - Duration: Round
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "52, 48"
             - Column:
-                - Consume:
-                    Name: TCAny1
-                    Text: "<nobr><sprite name=Shield> 1, <size=100%><sprite name=XP1></nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCAny1
+                            Text: "<nobr><sprite name=Shield> 1, <size=100%><sprite name=XP1></nobr>"
             - Column:
-                - Consume:
-                    Name: TCAny2
-                    Text: "<nobr><sprite name=Shield> 1</nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCAny2
+                            Text: "<nobr><sprite name=Shield> 1</nobr>"
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "52, 48"
             - Column:
-                - Consume:
-                    Name: TCAny3
-                    Text: "<nobr><sprite name=Shield> 1, <size=100%><sprite name=XP1></nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCAny3
+                            Text: "<nobr><sprite name=Shield> 1, <size=100%><sprite name=XP1></nobr>"
             - Column:
-                - Consume:
-                    Name: TCAny4
-                    Text: "<nobr><sprite name=Shield> 1</nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCAny4
+                            Text: "<nobr><sprite name=Shield> 1</nobr>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
-        - Row: "<b>$Self$"
+        - Row: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "<b>$FHS_Self$"
         - Row: "<size=20%> "
         - Infuse: Light

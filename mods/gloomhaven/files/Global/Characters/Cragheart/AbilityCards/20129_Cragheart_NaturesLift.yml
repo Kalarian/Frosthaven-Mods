@@ -34,18 +34,18 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
             - Column:
-                - Row: "<sprite name=Range>*THeal.Range* @THeal.Range@"
-                - Row: "<sprite name=Target>*THeal.Target* @THeal.Target@"
+                - Row: "<link=fhpill><sprite name=Target> *THeal.Target* @THeal.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range* @THeal.Range@</link>"
             - Column:
     Bottom:
         - Active:
             Ability: BActive
-            ListLayout: "$GH_129_B$"
-            Layout: "$GH_129_B$"
+            ListLayout: "$FHS_GH_129_B$"
+            Layout: "$FHS_GH_129_B$"
             Icon: Target
-        - Row: "<size=50%> "
+        - Row: "<size=100%> "
         - XPTracker: BActive

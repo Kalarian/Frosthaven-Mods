@@ -44,17 +44,17 @@ Data:
                 AnimOverload: TargetedDebuff
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TDrillFistAttack1*"
+        - Row: "<size=150%><sprite name=Attack> *TDrillFistAttack1*"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *TDrillFistAttack2*"
+        - Row: "<size=150%><sprite name=Attack> *TDrillFistAttack2*"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *TDrillFistAttack3*"
-        - Row: "$JOTL_103_T$"
+        - Row: "<size=150%><sprite name=Attack> *TDrillFistAttack3*"
+        - Row: "$FHS_JOTL_103_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
         - Active:
             Ability: BNeutralizeShield
-            ListLayout: "$JOTL_103_B$"
-            Layout: "$JOTL_103_B$"
+            ListLayout: "$FHS_JOTL_103_B$"
+            Layout: "$FHS_JOTL_103_B$"
             Icon: AA_NeutralizeShield

@@ -41,26 +41,26 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column: "<size=150%><sprite name=Attack> *TAttack*"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
-                - Row: "<sprite name=Target>*TAttack.Target* @TAttack.Target@"
-                - AddedEffect: "<size=130%><sprite name=Muddle></size>"
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* @TAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+                - Row: "<link=fhpill><sprite name=Muddle></link>"
             - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove1*"
+        - Row: "<size=150%><sprite name=Move> *BMove1*"
         - Row: "<size=20%> "
-        - Row: "$JOTL_016_B_1$"
+        - Row: "$FHS_JOTL_016_B_1$"
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "20,60,20"
             - Column:
             - Column:
-                - Row: "<b><size=130%><sprite name=Move> *BMove2*"
+                - Row: "<size=150%><sprite name=Move> *BMove2*"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$JOTL_016_B_2$"
+        - Row: "$FHS_JOTL_016_B_2$"
         - Row: "<size=50%> "
-        - Row: "<b><size=130%><sprite name=Move> *BMove3*"
+        - Row: "<size=150%><sprite name=Move> *BMove3*"

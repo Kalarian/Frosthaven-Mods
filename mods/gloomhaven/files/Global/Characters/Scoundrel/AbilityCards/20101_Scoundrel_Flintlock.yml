@@ -24,12 +24,12 @@ Data:
         XP: 2
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
+        - Row: "<size=150%><sprite name=Loot> *TLoot*"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
             - Column:
-                - Row: "<sprite name=Range>*BAttack.Range* @BAttack.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* @BAttack.Range@</link>"
             - Column:

@@ -46,20 +46,21 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
-                - Row: "<sprite name=Pierce>*TAttack.Pierce* <size=100%><voffset=1>@TAttack.Pierce@"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <sprite name=Pierce> *TAttack.Pierce* <voffset=1>@TAttack.Pierce@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCAir
-            Text: "+2 <sprite name=Attack>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "+2 <sprite name=Attack>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
-        - Row: "$GH_238_T$"
+        - Row: "$FHS_GH_238_T$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
+        - Row: "<size=150%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"

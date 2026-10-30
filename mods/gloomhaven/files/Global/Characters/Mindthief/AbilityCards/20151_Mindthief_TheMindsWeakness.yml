@@ -31,19 +31,19 @@ Layout:
         - Augment:
             AugmentIcon: Positive_AttackPlus
             ParentAbility: TAttack
-            ActiveBonusLayout: "$Augment_OnYourMeleeAttacks$ $Add$ +2 <nobr><sprite name=Attack></nobr>"
+            ActiveBonusLayout: "$FHS_Augment_OnYourMeleeAttacks$ $FHS_Add$ +2 <nobr><sprite name=Attack></nobr>"
             AugmentAbilityLayout:
-                - Row: "$Add$ +2 <nobr><sprite name=Attack></nobr>"
+                - Row: "$FHS_Add$ +2 <nobr><sprite name=Attack></nobr>"
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:
-                - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
                 - Column:
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Wound></size>"
+                - Row: "<link=fhpill><sprite name=Wound></link>"
             - Column:

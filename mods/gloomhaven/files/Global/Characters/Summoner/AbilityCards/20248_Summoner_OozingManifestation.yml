@@ -38,21 +38,22 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $SlimeSpirit$
+                    SummonName: $FHS_SlimeSpirit$
                     SpecialText:
                         - Row: "<nobr><sprite name=Muddle></nobr>"
                         - Row: "<size=20%> "
                         - Row: "<nobr><sprite name=Shield> 2</nobr>"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
-                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*, <sprite name=Immobilize></link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCDark
-            Text: "<sprite name=Curse>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "<sprite name=Curse>, <sprite name=XP1>"

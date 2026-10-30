@@ -39,14 +39,14 @@ Data:
         XP: 1                
 Layout:
     Top:
-        - Row: "$GH_250_T$"
+        - Row: "$FHS_GH_250_T$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> +0"
+        - Row: "<size=150%><sprite name=Move> +0"
         - Row: "<size=20%> "
-        - Row: "$With_YouControllingActions$"
+        - Row: "$FHS_With_YouControllingActions$"
     Bottom:
-        - Row: "$GH_250_T$"
+        - Row: "$FHS_GH_250_T$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> +0"
+        - Row: "<size=150%><sprite name=Attack> +0"
         - Row: "<size=20%> "
-        - Row: "$With_YouControllingActions$"
+        - Row: "$FHS_With_YouControllingActions$"

@@ -85,21 +85,26 @@ Data:
                         Strength: 5
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
         - Row: "<sprite name=Muddle>"
         - Row: "<size=50%> "
-        - Row: "$GH_347_T$"
+        - Row: "$FHS_GH_347_T$"
     Bottom:
-        - Row: "$GH_347_B$"
+        - Row: "$FHS_GH_347_B$"
         - Row: "<size=50%> "
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack*+X <size=100%><voffset=1>@BAttack@"
+            - Column: "<size=150%><sprite name=Attack> *BAttack*+X <size=100%><voffset=1>@BAttack@"
             - Column:
-                - Row: "<sprite name=Range>*BAttack.Range* @BAttack.Range@"
-                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* @BAttack.Range@</link>"
+                - Row: "<link=fhpill><sprite name=Immobilize></link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$Xis_AmountOfDamageYouSuffered$"
+        - Row: "$FHS_Xis_AmountOfDamageYouSuffered$"

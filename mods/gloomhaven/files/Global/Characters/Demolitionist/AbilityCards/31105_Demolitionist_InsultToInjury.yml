@@ -45,20 +45,22 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            ListLayout: "$JOTL_105_T$"
-            Layout: "$JOTL_105_T$"
+            ListLayout: "$FHS_JOTL_105_T$"
+            Layout: "$FHS_JOTL_105_T$"
             Icon: Positive_AttackPlus
-        - Row: "<size=50%> "
+        - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
         - Active:
             Ability: BActive
-            ListLayout: "$JOTL_105_B_1$"
-            Layout: "$JOTL_105_B_1$"
+            ListLayout: "$FHS_JOTL_105_B_1$"
+            Layout: "$FHS_JOTL_105_B_1$"
             Icon: Positive_AttackPlus
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCEarth
-            Text: "$JOTL_105_B_2$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCEarth
+                    Text: "$FHS_JOTL_105_B_2$"

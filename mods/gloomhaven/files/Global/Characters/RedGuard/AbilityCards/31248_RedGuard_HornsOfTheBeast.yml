@@ -46,8 +46,13 @@ Layout:
         - Row:
             - ColumnWidths: "70, 25"
             - Column:
-                - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
-                - Row: "<sprite name=Push> *TAttackSubPush*"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Attack> *TAttack*"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Push> *TAttackSubPush*</link>"
+                    - Column:
             - Column:
                 - Row: "£Area£"
         - Row: "<size=50%> "
@@ -58,14 +63,16 @@ Layout:
                 - Infuse: Fire
             - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
         - Active:
             Ability: BShield
-            ListLayout: "<b><size=130%><sprite name=Shield> *BShield*"
-            Layout: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+            ListLayout: "<size=150%><sprite name=Shield> *BShield*"
+            Layout: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
             Icon: Positive_Shield
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCLight
-            Text: "<nobr>+1 <sprite name=Shield></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "<nobr>+1 <sprite name=Shield></nobr>, <sprite name=XP1>"

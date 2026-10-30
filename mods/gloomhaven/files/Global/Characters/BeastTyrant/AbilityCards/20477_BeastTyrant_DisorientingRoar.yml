@@ -34,9 +34,14 @@ Data:
                 AnimOverload: RadialBeneficial
 Layout:
     Top:
-        - Row: "$GH_Command$"
+        - Row: "$FHS_GH_Command$"
         - Row: "<size=50%> "
-        - Row: "<b><size=130%><sprite name=Muddle>, <nobr><sprite name=Immobilize></nobr>"
-        - Row: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> *TAllyMuddle.Range*</nobr>"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Muddle>, <nobr><sprite name=Immobilize></nobr>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Range> *TAllyMuddle.Range*</link>"
+            - Column:
     Bottom:
-        - Row: $GH_477_B$
+        - Row: $FHS_GH_477_B$

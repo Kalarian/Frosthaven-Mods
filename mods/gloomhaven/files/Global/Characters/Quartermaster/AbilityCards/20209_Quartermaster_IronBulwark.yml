@@ -30,17 +30,17 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Muddle></size>"
+                - Row: "<link=fhpill><sprite name=Muddle></link>"
             - Column:
     Bottom:
         - Active:
             Ability: BShield
             Icon: Positive_Shield
-            ListLayout: "<sprite name=Shield> *BShield*, <b></b> $Affect_SelfAndAllAdjacentAllies$"
+            ListLayout: "<sprite name=Shield> *BShield*, <b></b> $FHS_Affect_SelfAndAllAdjacentAllies$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
-                - Row: "<b></b> $Affect_SelfAndAllAdjacentAllies$"
+                - Row: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<b></b> $FHS_Affect_SelfAndAllAdjacentAllies$"

@@ -46,15 +46,15 @@ Data:
                 AnimOverload: RadialBeneficial
 Layout:
     Top:
-        - Row: "$GH_Command$"
+        - Row: "$FHS_GH_Command$"
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
             - Column:
-                - Row: "<sprite name=Pierce>*TAllyAttack.Pierce* <size=100%><voffset=1>@TAllyAttack.Pierce@"
+                - Row: "<link=fhpill><sprite name=Pierce> *TAllyAttack.Pierce* <voffset=1>@TAllyAttack.Pierce@</link>"
             - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
-        - Row: "$GH_495_B$"
+        - Row: "$FHS_GH_495_B$"

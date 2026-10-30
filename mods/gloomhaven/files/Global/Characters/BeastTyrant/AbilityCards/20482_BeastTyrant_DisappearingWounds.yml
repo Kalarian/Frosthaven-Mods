@@ -33,8 +33,7 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<size=130%><b><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
-        - Row: "$Self$"
+        - Row: "<link=fhself><size=125%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@</link>"
     Bottom:
-        - Row: "$GH_Command$"
-        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
+        - Row: "$FHS_GH_Command$"
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

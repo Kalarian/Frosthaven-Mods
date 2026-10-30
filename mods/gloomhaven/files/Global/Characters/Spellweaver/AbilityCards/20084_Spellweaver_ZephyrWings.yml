@@ -38,22 +38,26 @@ Data:
                         AbilityXP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
+        - Row: "<size=150%><sprite name=Loot> *TLoot*"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCAir
-            Text: "$GH_084_T_1$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "$FHS_GH_084_T_1$"
         - Row: "<size=20%> "
-        - Row: "$GH_084_T_2$"
+        - Row: "$FHS_GH_084_T_2$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCAir
-            Text: "+3 <sprite name=Move>, <sprite name=XP1> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCAir
+                    Text: "+3 <sprite name=Move>, <sprite name=XP1> "

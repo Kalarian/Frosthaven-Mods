@@ -34,13 +34,13 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
-                - Row: "<sprite name=Target>*TAttack.Target* <size=100%><voffset=1>@TAttack.Target@"
-                - Row: "<sprite name=Pierce>*TAttack.Pierce* <size=100%><voffset=1>@TAttack.Pierce@"
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <voffset=1>@TAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <voffset=1>@TAttack.Range@</link>"
+                - Row: "<link=fhpill><sprite name=Pierce> *TAttack.Pierce* <voffset=1>@TAttack.Pierce@</link>"
             - Column:
         - Row: "<size=50%> "
         - Row:
@@ -53,5 +53,5 @@ Layout:
         - Active:
             Ability: BDisadvantage
             Icon: Disadvantage
-            ListLayout: "$GH_337_B_2$"
-            Layout: "$GH_337_B_2$"
+            ListLayout: "$FHS_GH_337_B_2$"
+            Layout: "$FHS_GH_337_B_2$"

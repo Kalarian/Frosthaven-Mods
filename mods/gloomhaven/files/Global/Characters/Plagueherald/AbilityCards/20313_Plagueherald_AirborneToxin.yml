@@ -35,15 +35,22 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><nobr><sprite name=Curse></nobr>, <nobr><sprite name=Muddle></nobr>"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><nobr><sprite name=Curse></nobr>, <nobr><sprite name=Muddle></nobr>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
         - Row: "<size=50%> "
-        - Consume:
-            Name: TCAir
-            Text: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> 2</nobr> <nobr>$instead$, <sprite name=XP1></nobr>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "$FHS_Target_AllEnemiesWithin$ <nobr><sprite name=Range> 2</nobr> <nobr>$FHS_instead$, <sprite name=XP1></nobr>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Poison>"
-        - Row: "$Target_AllEnemies$"
+        - Row: "<size=150%><sprite name=Poison>"
+        - Row: "$FHS_Target_AllEnemies$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"

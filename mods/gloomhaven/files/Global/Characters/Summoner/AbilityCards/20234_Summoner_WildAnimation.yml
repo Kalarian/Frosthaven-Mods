@@ -27,10 +27,10 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $ThornShooter$
+                    SummonName: $FHS_ThornShooter$
                     SpecialText:
                         - Row: "<nobr><sprite name=Poison></nobr>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
         - Infuse: Air

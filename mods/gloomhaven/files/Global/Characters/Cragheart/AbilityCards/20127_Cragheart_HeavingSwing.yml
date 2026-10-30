@@ -33,17 +33,17 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Push>*TAttackSubPush* @TAttackSubPush@"
+                - Row: "<link=fhpill><sprite name=Push> *TAttackSubPush* @TAttackSubPush@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$GH_127_T$"
+        - Row: "$FHS_GH_127_T$"
     Bottom:
         - Active:
             Ability: BAttack
-            ListLayout: "$GH_127_B$"
-            Layout: "$GH_127_B$"
+            ListLayout: "$FHS_GH_127_B$"
+            Layout: "$FHS_GH_127_B$"
             Icon: Positive_AttackPlus

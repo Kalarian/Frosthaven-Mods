@@ -34,22 +34,16 @@ Data:
                 
 Layout:
     Top:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@</link>"
     Bottom:
         - Row:
             - ColumnWidths: "88,12"
             - Column:
-                - Row: "$GH_410_B$"
+                - Row: "$FHS_GH_410_B$"
             - Column:
         - Row: "<size=50%> "
         - Active:
             Ability: BActive
             Icon: Positive_Heal
-            ListLayout: "$GH_433_B$"
-            Layout: "$GH_433_B$"
+            ListLayout: "$FHS_GH_433_B$"
+            Layout: "$FHS_GH_433_B$"

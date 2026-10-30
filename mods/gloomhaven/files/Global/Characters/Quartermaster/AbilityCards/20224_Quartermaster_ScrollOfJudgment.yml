@@ -34,9 +34,8 @@ Data:
                 AnimOverload: TargetedScroll
 Layout:
     Top:
-        - Row: "$GH_224_T$"
+        - Row: "$FHS_GH_224_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Stun> <size=100%><voffset=1>@BStun@"
-        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=150%><sprite name=Stun> <size=100%><voffset=1>@BStun@"

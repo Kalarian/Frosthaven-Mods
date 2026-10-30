@@ -36,13 +36,20 @@ Data:
                 MultiPassAttack: false
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCDarkAny
-            Text: "$GH_202_T$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDarkAny
+                    Text: "$FHS_GH_202_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Push> *BPush*"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Push> *BPush*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:

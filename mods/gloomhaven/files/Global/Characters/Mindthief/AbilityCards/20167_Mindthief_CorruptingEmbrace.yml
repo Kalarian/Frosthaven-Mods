@@ -31,30 +31,30 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Poison></size>"
+                - Row: "<link=fhpill><sprite name=Poison></link>"
             - Column:
         - Divider:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Muddle></size>"
+                - Row: "<link=fhpill><sprite name=Muddle></link>"
             - Column:
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Divider:
-        - Row: "<b><size=130%><sprite name=Poison>"
-        - Row: "$Target_AllEnemiesMovedThrough$"
+        - Row: "<size=150%><sprite name=Poison>"
+        - Row: "$FHS_Target_AllEnemiesMovedThrough$"
         - Row: "<size=20%> "
         - Infuse: Dark

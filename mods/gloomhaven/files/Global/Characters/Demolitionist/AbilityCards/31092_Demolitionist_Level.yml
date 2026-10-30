@@ -33,12 +33,12 @@ Data:
                 AnimOverload: PowerUp
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=20%> "
-        - Row: "$JOTL_092_T$"
+        - Row: "$FHS_JOTL_092_T$"
     Bottom:
         - Active:
             Ability: BActive
-            ListLayout: "$JOTL_092_B$"
-            Layout: "$JOTL_092_B$"
+            ListLayout: "$FHS_JOTL_092_B$"
+            Layout: "$FHS_JOTL_092_B$"
             Icon: Positive_AttackPlus

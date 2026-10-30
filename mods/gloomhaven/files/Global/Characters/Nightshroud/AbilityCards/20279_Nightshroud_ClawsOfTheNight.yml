@@ -49,18 +49,25 @@ Layout:
     Top:
         - ColumnWidths: "70,25"
         - Column:
-            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-            - Row: "<sprite name=Poison>"
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Poison></link>"
+                - Column:
             - Row: "<size=20%> "
-            - Consume:
-                Name: TCAny
-                Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=CreateDark>, <sprite name=XP1></nobr>"
+            - Conditional:
+                Layout:
+                    - Consume:
+                        Name: TCAny
+                        Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=CreateDark>, <sprite name=XP1></nobr>"
         - Column: "£Area£"
     Bottom:
         - Active:
             Ability: "BActive"
             Icon: Invisible
-            ListLayout: "$GH_279_B$"
-            Layout: "$GH_279_B$"
-        - Row: "<size=50%> "
+            ListLayout: "$FHS_GH_279_B$"
+            Layout: "$FHS_GH_279_B$"
+        - Row: "<size=100%> "
         - XPTracker: BActive

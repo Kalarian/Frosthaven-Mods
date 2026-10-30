@@ -42,7 +42,7 @@ Data:
                 AnimOverload: PowerUp
 Layout:
     Top:
-        - Row: "$JOTL_151_T_1$"
+        - Row: "$FHS_JOTL_151_T_1$"
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "20,60,20"
@@ -50,20 +50,19 @@ Layout:
             - Column:
                 - Active:
                     Ability: TAllyShield
-                    ListLayout: "<b><size=130%><sprite name=Shield> *TAllyShield*"
-                    Layout: "<b><size=130%><sprite name=Shield> *TAllyShield* <size=100%><voffset=1>@TAllyShield@"
+                    ListLayout: "<size=150%><sprite name=Shield> *TAllyShield*"
+                    Layout: "<size=150%><sprite name=Shield> *TAllyShield* <size=100%><voffset=1>@TAllyShield@"
                     Icon: Positive_Shield
             - Column:
-                - Duration: Round
         - Row: "<size=20%> "
-        - Row: "$JOTL_151_T_2$"
+        - Row: "$FHS_JOTL_151_T_2$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
+        - Row: "<size=150%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
     Bottom:
         - Active:
             Ability: BActive
-            ListLayout: "$JOTL_151_B$"
-            Layout: "$JOTL_151_B$"
+            ListLayout: "$FHS_JOTL_151_B$"
+            Layout: "$FHS_JOTL_151_B$"
             Icon: Icon_Curse
-        - Row: "<size=50%> "
+        - Row: "<size=100%> "
         - XPTracker: BActive

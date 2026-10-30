@@ -78,8 +78,13 @@ Layout:
             - ColumnWidths: "20, 60, 20"
             - Column:
             - Column:
-                - Row: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
-                - Row: "<sprite name=Range> *THeal.Range*"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
+                    - Column:
             - Column:
         - Row: "<size=20%> "
         - Row:
@@ -94,34 +99,49 @@ Layout:
                             ListLayout: "<sprite name=Shield> 1"
                             Layout: "<nobr><sprite name=Shield> 1, <size=150%><voffset=-2><sprite name=Round></nobr>"
             - Column:
-                - Consume:
-                    Name: TCEarth
-                    Text: "<nobr>+2 <sprite name=Heal></nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCEarth
+                            Text: "<nobr>+2 <sprite name=Heal></nobr>"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCLight
-            Text: "$GH_471_T$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCLight
+                    Text: "$FHS_GH_471_T$"
     Bottom:
         - Row:
             - ColumnWidths: "20, 60, 20"
             - Column:
             - Column:
-                - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
-                - Row: "<sprite name=Range> *BAttack.Range*"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
+                    - Column:
             - Column:
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "50, 50"
             - Column:
-                - Consume:
-                    Name: BCDark
-                    Text: "<nobr>+2 <sprite name=Attack></nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: BCDark
+                            Text: "<nobr>+2 <sprite name=Attack></nobr>"
             - Column:
-                - Consume:
-                    Name: BCAir
-                    Text: "<nobr>+3 <sprite name=Range></nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: BCAir
+                            Text: "<nobr>+3 <sprite name=Range></nobr>"
         - Row: "<size=20%> "
         - Row:
-            - Consume:
-                Name: BCFire
-                Text: "<nobr><sprite name=Poison>,</nobr> <nobr><sprite name=Wound></nobr>"
+            - Conditional:
+                Layout:
+                    - Consume:
+                        Name: BCFire
+                        Text: "<nobr><sprite name=Poison>,</nobr> <nobr><sprite name=Wound></nobr>"

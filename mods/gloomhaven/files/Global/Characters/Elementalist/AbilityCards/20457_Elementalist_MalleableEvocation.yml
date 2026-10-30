@@ -88,47 +88,64 @@ Layout:
             - ColumnWidths: "20, 60, 20"
             - Column:
             - Column:
-                - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-                - Row: "<sprite name=Range> *TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <voffset=1>@TAttack.Range@</link>"
+                    - Column:
             - Column:
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "54, 46"
             - Column:
-                - Consume:
-                    Name: TCFire
-                    Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr><sprite name=Wound></nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCFire
+                            Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr><sprite name=Wound></nobr>"
                 - Row: "<size=50%> "
-                - Consume:
-                    Name: TCIce
-                    Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr>$ImmobilizeShort$ <sprite name=Immobilize></nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCIce
+                            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Immobilize></nobr>"
             - Column:
-                - Consume:
-                    Name: TCAir
-                    Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr><sprite name=Target> 2</nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCAir
+                            Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr><sprite name=Target> 2</nobr>"
                 - Row: "<size=50%> "
-                - Consume:
-                    Name: TCEarth
-                    Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr>$PoisonShort$ <sprite name=Poison></nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCEarth
+                            Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr><sprite name=Poison></nobr>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "55, 45"
             - Column:
-                - Consume:
-                    Name: BCFire
-                    Text: "<nobr>+3 <sprite name=Move></nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: BCFire
+                            Text: "<nobr>+3 <sprite name=Move></nobr>"
                 - Row: "<size=20%> "
-                - Consume:
-                    Name: BCIce
-                    Text:
-                        - Row: "<nobr><b><sprite name=Heal> 2</nobr>"
-                        - Row: "$Self$"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: BCIce
+                            Text: "<nobr><b><sprite name=Heal> 2</nobr> $FHS_Self$"
             - Column:
-                - Consume:
-                    Name: BCAir
-                    Text: "<nobr><sprite name=Jump></nobr>"
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: BCAir
+                            Text: "<nobr><sprite name=Jump></nobr>"
                 - Row: "<size=20%> "
                 - Consume:
                     Name: BCEarth

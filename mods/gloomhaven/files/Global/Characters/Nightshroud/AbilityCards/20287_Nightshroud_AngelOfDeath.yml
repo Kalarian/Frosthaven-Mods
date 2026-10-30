@@ -52,16 +52,30 @@ Data:
                 XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCDark
-            Text: "$GH_287_T$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "$FHS_GH_287_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
-        - Row: "$Jump$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
         - Row: "<size=50%> "
-        - Consume:
-            Name: BCDark
-            Text: "$GH_287_B$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "$FHS_GH_287_B$"

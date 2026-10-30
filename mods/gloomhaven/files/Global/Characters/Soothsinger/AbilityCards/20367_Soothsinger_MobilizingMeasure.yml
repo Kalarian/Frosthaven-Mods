@@ -35,7 +35,7 @@ Layout:
         - Active:
             Ability: TPlaySong
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_367_T$"
-            Layout: "$GH_367_T$"
+            ListLayout: "$FHS_GH_367_T$"
+            Layout: "$FHS_GH_367_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* @BMove@"

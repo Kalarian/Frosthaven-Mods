@@ -38,12 +38,17 @@ Layout:
     Top:
         - Active:
             Ability: TShield
-            ListLayout: "<b><size=130%><sprite name=Shield> *TShield*"
-            Layout: "<b><size=130%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+            ListLayout: "<size=150%><sprite name=Shield> *TShield*"
+            Layout: "<size=150%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
             Icon: Positive_Shield
         - Divider:
-        - Row: "<b><size=130%><sprite name=Immobilize>"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Immobilize>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -51,10 +56,11 @@ Layout:
             - Column:
                 - Infuse: Light
             - Column:
-                - Duration: Round
     Bottom:
-        - Row: "<b><size=130%><sprite name=Attack> *BAttack*"
+        - Row: "<size=150%><sprite name=Attack> *BAttack*"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCLight
-            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Muddle></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Muddle></nobr>, <sprite name=XP1>"

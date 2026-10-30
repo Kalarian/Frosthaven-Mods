@@ -28,7 +28,7 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $SpiritBanner$
-                    SpecialText: "$GH_505_T$"
+                    SummonName: $FHS_SpiritBanner$
+                    SpecialText: "$FHS_GH_505_T$"
     Bottom:
-        - Row: "$GH_505_B$"
+        - Row: "$FHS_GH_505_B$"

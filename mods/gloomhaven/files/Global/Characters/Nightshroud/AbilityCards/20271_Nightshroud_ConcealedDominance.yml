@@ -35,7 +35,7 @@ Data:
                         Filter: Self
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=150%><sprite name=Attack> *TAttack*"
         - Row: "<size=20%> "
         - Consume:
             Name: TCDark
@@ -46,8 +46,10 @@ Layout:
                 - Column:
                     - Row: "<sprite name=XP2>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCDark
-            Text: "$GH_271_B$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "$FHS_GH_271_B$"

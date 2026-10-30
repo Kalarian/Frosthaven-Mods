@@ -29,9 +29,8 @@ Data:
                     CircleEnhancements: 1
 Layout:
     Top:
-        - Row: "$GH_384_T$"
+        - Row: "$FHS_GH_384_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Immobilize>"
-        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=150%><sprite name=Immobilize>"
         - Row: "<size=50%> "
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

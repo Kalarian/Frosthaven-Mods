@@ -43,24 +43,28 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCIce
-            Text: "+2 <sprite name=Attack>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCIce
+                    Text: "+2 <sprite name=Attack>, <sprite name=XP1>"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCDark
-            Text: "+2 <sprite name=Attack>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "+2 <sprite name=Attack>, <sprite name=XP1>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
             - Column:
         - Row: "<size=20%> "
         - Row:

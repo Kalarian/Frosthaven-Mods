@@ -50,15 +50,15 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
             - Column:
-                - Row: "<sprite name=Range>*THeal.Range* <size=100%><voffset=1>@THeal.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range* <voffset=1>@THeal.Range@</link>"
             - Column:
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *THealSubAttack* <size=100%><voffset=1>@THealSubAttack@"
-        - Row: "$GH_468_T$"
+        - Row: "<size=150%><sprite name=Attack> *THealSubAttack* <size=100%><voffset=1>@THealSubAttack@"
+        - Row: "$FHS_GH_468_T$"
         - Row: "<size=0%> "
         - Row:
             - ColumnWidths: "20, 20, 20, 20, 20"
@@ -70,12 +70,16 @@ Layout:
             - Column:
             - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCFire
-            Text: "+3 <sprite name=Move>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCFire
+                    Text: "+3 <sprite name=Move>"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCAir
-            Text: "<sprite name=Jump>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCAir
+                    Text: "<sprite name=Jump>, <sprite name=XP1>"

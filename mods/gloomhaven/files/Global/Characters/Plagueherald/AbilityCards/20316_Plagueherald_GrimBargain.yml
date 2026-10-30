@@ -45,24 +45,18 @@ Layout:
         - Active:
             Ability: TActive
             Icon: Target
-            ListLayout: "$GH_316_T$"
-            Layout: "$GH_316_T$"
-        - Row: "<size=50%> "
+            ListLayout: "$FHS_GH_316_T$"
+            Layout: "$FHS_GH_316_T$"
+        - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Muddle>"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><sprite name=Muddle></link>"
         - Divider:
         - Active:
             Ability: BMuddleSubActive
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_316_B$"
-            Layout: "$GH_316_B$"
+            ListLayout: "$FHS_GH_316_B$"
+            Layout: "$FHS_GH_316_B$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "20,20,20,20"
@@ -71,4 +65,3 @@ Layout:
                 - Infuse: Dark
             - Column:
             - Column:
-                - Duration: Round

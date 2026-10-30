@@ -21,6 +21,6 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "$GH_092_T$"
+        - Row: "$FHS_GH_092_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

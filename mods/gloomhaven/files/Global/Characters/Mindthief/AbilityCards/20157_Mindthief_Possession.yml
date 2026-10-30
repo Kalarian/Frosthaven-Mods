@@ -32,10 +32,10 @@ Data:
                 AnimOverload: MindControl
 Layout:
     Top:
-        - Row: "$GH_157_T$"
+        - Row: "$FHS_GH_157_T$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack*"
+        - Row: "<size=150%><sprite name=Attack> *TAllyAttack*"
     Bottom:
-        - Row: "$GH_157_B$"
+        - Row: "$FHS_GH_157_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> *BAllyMove*"
+        - Row: "<size=150%><sprite name=Move> *BAllyMove*"

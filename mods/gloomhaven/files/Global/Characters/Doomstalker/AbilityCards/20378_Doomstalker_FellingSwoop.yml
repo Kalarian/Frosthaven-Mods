@@ -41,15 +41,15 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $WarHawk$
+                    SummonName: $FHS_WarHawk$
                     SpecialText:
                         - Row: "<nobr><sprite name=Flying></nobr>"
     Bottom:
         - Active:
             Ability: BDoom
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_378_B$"
+            ListLayout: "$FHS_GH_378_B$"
             Layout:
-                - Row: "$Doom_MarkText$"
-                - Row: "$GH_378_B$"
-                - Row: "<size=70%>$Doom_DiscardReminderText$"
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH_378_B$"
+                - Row: "<size=70%>$FHS_Doom_DiscardReminderText$"

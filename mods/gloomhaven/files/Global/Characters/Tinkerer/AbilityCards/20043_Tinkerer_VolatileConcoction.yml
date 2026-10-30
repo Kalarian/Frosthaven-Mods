@@ -36,10 +36,12 @@ Data:
                         Strength: 1
 Layout:
     Top:
-        - Row: "$GH_043_T$"
+        - Row: "$FHS_GH_043_T$"
     Bottom:
-        - Row: "$GH_043_B_1$"
+        - Row: "$FHS_GH_043_B_1$"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCIce
-            Text: "$GH_043_B_2$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCIce
+                    Text: "$FHS_GH_043_B_2$"

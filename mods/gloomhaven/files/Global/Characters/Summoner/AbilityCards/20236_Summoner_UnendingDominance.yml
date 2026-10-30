@@ -26,11 +26,11 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $LavaGolem$
+                    SummonName: $FHS_LavaGolem$
                     SpecialText:
                         - Row: "<nobr><sprite name=Wound></nobr>"
                         - Row: "<size=50%> "
                         - Row: "<nobr><b><sprite name=Retaliate> 2</b></nobr>"
                         - Row: "<nobr><sprite name=Range> 2</nobr>"
     Bottom:
-        - Row: "$GH_236_B$"
+        - Row: "$FHS_GH_236_B$"

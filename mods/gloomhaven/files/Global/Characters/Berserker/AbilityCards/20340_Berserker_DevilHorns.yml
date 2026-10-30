@@ -28,10 +28,15 @@ Layout:
     Top:
         - ColumnWidths: "60,35"
         - Column:
-            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-            - Row: "<sprite name=Wound>"
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Wound></link>"
+                - Column:
             - Row: "<size=50%> "
             - Infuse: Fire
         - Column: "£Area£"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

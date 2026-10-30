@@ -14,7 +14,7 @@ namespace FrosthavenMods
     /// <summary>
     /// A Gloomhaven card drawn in Frosthaven's style (the user's layout review, 2026-10-29). Frosthaven's own cards are
     /// hand-made prefabs; ours come from the card generator Frosthaven inherited from Gloomhaven digital, whose pieces
-    /// still carry Gloomhaven's look. After the game generates a card of a class in <see cref="Classes"/>, each half is
+    /// still carry Gloomhaven's look. After the game generates a Gloomhaven class's card (every class since 2026-10-30), each half is
     /// redrawn to Frosthaven's measured geometry (carddump of Sodden Soil, Launch Pod, Primal Bellow, Call of Doom,
     /// Overwhelming Wave; numbers below are Frosthaven's, in pixels of a card 504 wide, scaled to the card):
     ///   - text in Frosthaven's card font (FH_Font_AbilityCards), the ability rows only (the XP badge keeps Sarala-Bold);
@@ -32,7 +32,6 @@ namespace FrosthavenMods
     [HarmonyPatch]
     internal static class GHCardStyle
     {
-        internal static readonly HashSet<string> Classes = new HashSet<string> { "Brute" };
         private const string Atlas = "AbilityCardSpriteAtlas";
         private const float TintAlpha = 0x78 / 255f;
         private const float HalfWidthPx = 478f;   // a card half, in the pixels the numbers below are measured in
@@ -45,6 +44,10 @@ namespace FrosthavenMods
         private const float GeneratorElement = 51f, GeneratorSlot = 26f, SlotSize = 32f, SlotGap = 5f;
         private const float PillSlotPull = 3f, PillSlotAfter = 21f, PillSlotEnd = 2f;
         private const float InfuseSize = 48f, InfuseBottom = 11.5f, InfuseBand = 72f, ContentTop = 9f;
+        // wrapped text keeps 24 px from the half's sides (Against All Odds: 26..27; the generator's rows run to 11); a
+        // half that doesn't fit is scaled to keep FitEdge px from the sides, clear of the badges and the infusion band
+        private const float TextMargin = 24f, FitEdge = 10f, FitMin = 0.6f, ConsumeMinText = 0.8f;
+        private const bool FitTrace = false;   // true: log every half's measured content (the fit review)
         // hexes (Overwhelming Wave)
         private const float HexDot = 54f, HexColumn = 54.5f, HexWidth = 53f, HexRim = 3.2f, HexXHalf = 10.3f, HexXStroke = 2.8f;
 
@@ -87,15 +90,22 @@ namespace FrosthavenMods
                     Transform rows = h.Find("Content/Layout Parent");
                     if (rows == null) continue;
                     Fonts(rows);
+                    // an Augment half (Mindthief) has its own stacked layout: the fit passes slid it under the top rim
+                    bool augment = rows.GetComponentsInChildren<Transform>(true).Any(c => c.name == "AugmentRow");
+                    if (!augment) Margins(h, (RectTransform)rows, f);
                     Slots(rows, f);
                     ConsumeSprites(h);
                     Pictures(h, tint);
                     Areas(rows, f);
                     Pills(rows, tint, f);
-                    ConsumeBoxes(rows, f);
+                    ConsumeBoxes(rows, h, f);
+                    if (!augment) Relayout(rows);
                     SelfBoxes(rows, f);
+                    AreaClear(h, (RectTransform)rows, f);
+                    Trackers(h, (RectTransform)rows, f);
                     Infusions(h, rows as RectTransform, f);
                     Badges(h, f);
+                    if (!augment) Fit(h, (RectTransform)rows, f);
                 }
             }
             catch (Exception e) { if (Reported.Add("style")) Plugin.Log.LogWarning("Gloomhaven card style: " + e); }
@@ -128,7 +138,7 @@ namespace FrosthavenMods
             model = default;
             if (card == null || !Pending.TryGetValue(card, out AbilityCardYMLData data) || data?.CharacterID == null) return false;
             CCharacterClass cls = GHClasses.ClassById(data.CharacterID);
-            return cls != null && GHClasses.IsGloomhavenClass(cls.AbilityCardArt, out model) && Classes.Contains(model.ToString());
+            return cls != null && GHClasses.IsGloomhavenClass(cls.AbilityCardArt, out model);
         }
 
         private static void Load()
@@ -157,6 +167,93 @@ namespace FrosthavenMods
                     t.font = _font;
                     t.ForceMeshUpdate();
                 }
+        }
+
+        /// <summary>Text that runs closer than 24 px to the half's sides gets the difference as its margin, so it wraps where
+        /// Frosthaven's does; the rows are then laid out again (the generator's layout groups size each row by its text).
+        /// The dashed box, the pills and the self box are left alone: they are one line, placed below.</summary>
+        private static void Margins(RectTransform half, RectTransform rows, float f)
+        {
+            foreach (TMP_Text t in rows.GetComponentsInChildren<TMP_Text>(true))
+            {
+                if (!t.enableWordWrapping || !Shown(t.transform, rows) || string.IsNullOrWhiteSpace(t.text)) continue;
+                if (t.text.Contains("<link=fhpill>") || t.text.Contains("<link=fhself>")) continue;
+                if (t.GetComponentsInParent<Transform>(true).Any(p => p.name == "ConditionalElement" || p.name == "Consume Button")) continue;
+                var rt = (RectTransform)t.transform;
+                Rect r = In(rt, half);
+                // a narrow column (Beast Tyrant's "Command" beside its ally's attack) would only break its word
+                if (r.width < 0.6f * half.rect.width) continue;
+                float want = TextMargin * f;
+                float left = Mathf.Max(0f, half.rect.xMin + want - r.xMin), right = Mathf.Max(0f, r.xMax - (half.rect.xMax - want));
+                if (left < 0.5f * f && right < 0.5f * f) continue;
+                float k = rt.rect.width / Mathf.Max(r.width, 0.01f);   // the text's units per half unit
+                t.margin = new Vector4(left * k, t.margin.y, right * k, t.margin.w);
+                // a new margin doesn't mark the text's preferred height stale: without this the rows kept their one-line
+                // heights and a wrapped line ran into the next row (Rumbling Advance, Rocky End)
+                t.SetLayoutDirty();
+                t.ForceMeshUpdate(true, true);
+            }
+            // always: the generator sized its rows for Gloomhaven's font, and Frosthaven's is taller (a use tracker under a
+            // three-line text sat on its last line: Shrapnel, Heart Seeker)
+            Relayout(rows);
+        }
+
+        private static readonly HashSet<string> FixedHeight = new HashSet<string> { "Consume Button", "InfuseContainer", "SummonContainer",
+            "XPContainer", "IconContainer", "DividerCardElement", "MandatoryTrigger", "ConditionalElement", "BlinkbladeState_Fast",
+            "BlinkbladeState_Slow", "AddedEffect" };
+
+        /// <summary>The generator's own row sizing (CreateLayout.GetTotalHeight with andSet), run again for the new font and
+        /// margins: its rows are sized and stacked by hand, not by layout groups, so a wrapped line didn't grow its row
+        /// (Rumbling Advance, Rocky End). The generator's pass also reverses the children once (it builds them bottom-up);
+        /// that's done already, so this one keeps their order.</summary>
+        private static float Relayout(Transform parent)
+        {
+            return RelayoutRows(parent);
+        }
+
+        private static float RelayoutRows(Transform parent)
+        {
+            float spacing = GlobalSettings.Instance.m_AbilityCardSettings.RowSpacing;
+            var kids = parent.Cast<Transform>().ToList();
+            float total = 0f;
+            foreach (Transform child in kids)
+            {
+                float h = 0f;
+                if (child.name == "Column Container" || child.name == "Row Container")
+                {
+                    h = RelayoutRows(child);
+                    if (child.name == "Row Container" && child.Cast<Transform>().All(x => x.name == "Text Container")) h += spacing;
+                }
+                else if (child.name == "Text Container" && child.GetComponent<TextMeshProUGUI>() is TextMeshProUGUI t)
+                {
+                    t.SetLayoutDirty();   // the height cached for Gloomhaven's font is stale (Shrapnel: a line short)
+                    t.ForceMeshUpdate(true);
+                    h = t.preferredHeight;
+                }
+                else if (child.name == "AreaEffectContainer" && child.GetComponent<LayoutElement>() is LayoutElement le) h = le.preferredHeight;
+                else if (FixedHeight.Contains(child.name)) h = ((RectTransform)child).rect.height;
+                total = child.name == "Column Container" ? Mathf.Max(total, h) : total + h;
+            }
+            if (parent.name == "Row Container" && parent is RectTransform row)
+                row.sizeDelta = new Vector2(row.sizeDelta.x, total + (kids.All(x => x.name == "Text Container") ? spacing : 0f));
+            if (kids.Any(x => x.name == "Row Container"))
+            {
+                float y = total / 2f;
+                foreach (RectTransform c in kids.OfType<RectTransform>())
+                {
+                    c.anchoredPosition = new Vector2(c.anchoredPosition.x, y);
+                    y -= c.rect.height;
+                }
+            }
+            return total;
+        }
+
+        /// <summary>Active itself and up to (not including) the root: the card is built hidden, so activeInHierarchy is false.</summary>
+        private static bool Shown(Transform t, Transform root)
+        {
+            for (Transform p = t; p != null && p != root; p = p.parent)
+                if (!p.gameObject.activeSelf) return false;
+            return true;
         }
 
         /// <summary>A consume's element keeps its own list of pictures (ConsumeElement.elementSprites, Gloomhaven
@@ -348,7 +445,7 @@ namespace FrosthavenMods
         /// <summary>A consume in Frosthaven's dashed box (White Winds, Call of Doom): 61 px tall, 8 px, the crossed
         /// element (51), the tall colon (size 40, 16 wide), the reward on one line, 12 px. The generator balances the
         /// reward over two lines in a narrow column; it is laid out again here, centred where the box was.</summary>
-        private static void ConsumeBoxes(Transform rows, float f)
+        private static void ConsumeBoxes(Transform rows, RectTransform half, float f)
         {
             foreach (RectTransform box in rows.GetComponentsInChildren<Transform>(true).Where(t => t.name == "ConditionalElement").OfType<RectTransform>().ToList())
             {
@@ -371,17 +468,51 @@ namespace FrosthavenMods
                 // the box's own units per measured pixel
                 float u = box.InverseTransformVector(rows.TransformVector(new Vector3(f, 0, 0))).magnitude;
                 float tw = pref.x * (text.transform as RectTransform).lossyScale.x / box.lossyScale.x;
-                float w = (8f + 51f + 16f + 2f + 12f) * u + tw, h = 61f * u;
+                // the box stays inside the half: a long reward is set smaller (to 80%), then on two lines
+                // a consume of two elements: the second (ConsumeButton.Element1) sits after the first, not on it (Obsidian Shards)
+                var second = button.Find("Element1") as RectTransform;
+                if (second != null && !second.gameObject.activeSelf) second = null;
+                float fixedW = (8f + 51f + 16f + 2f + 12f + (second != null ? 51f : 0f)) * u, th = 35f * u;
+                float maxW = box.InverseTransformVector(half.TransformVector(new Vector3(half.rect.width, 0, 0))).magnitude - 2f * EdgeMargin * u;
+                if (fixedW + tw > maxW)
+                {
+                    text.fontSize *= Mathf.Max(ConsumeMinText, (maxW - fixedW) / tw);
+                    pref = text.GetPreferredValues(text.text, float.PositiveInfinity, float.PositiveInfinity);
+                    tw = pref.x * text.transform.lossyScale.x / box.lossyScale.x;
+                    if (fixedW + tw > maxW)
+                    {
+                        tw = maxW - fixedW;
+                        text.enableWordWrapping = true;
+                        Vector2 two = text.GetPreferredValues(text.text, tw * box.lossyScale.x / text.transform.lossyScale.x, float.PositiveInfinity);
+                        th = Mathf.Max(th, two.y * text.transform.lossyScale.y / box.lossyScale.y);
+                    }
+                }
+                float w = fixedW + tw, h = Mathf.Max(61f * u, th + 26f * u);
+                // the generator sized the box for its own (stacked, taller) layout: it takes the new height, centred, so
+                // Relayout closes the gap it left (Wretched Creature, Concealed Dominance: an empty middle)
+                if (Mathf.Approximately(box.anchorMin.y, box.anchorMax.y) && Mathf.Approximately(box.pivot.y, 0.5f) && box.rect.height > h + 8f * u)
+                    box.sizeDelta = new Vector2(box.sizeDelta.x, h + 8f * u);
                 Rect old = new Rect(box.rect.center.x - w / 2f, box.rect.center.y - h / 2f, w, h);
+                // a box in a column (beside an area) may be centred too near the side: move it in
+                float lo = half.InverseTransformPoint(box.TransformPoint(new Vector3(old.xMin, old.center.y, 0))).x;
+                float hi = half.InverseTransformPoint(box.TransformPoint(new Vector3(old.xMax, old.center.y, 0))).x;
+                float dx = lo < half.rect.xMin + EdgeMargin * f ? half.rect.xMin + EdgeMargin * f - lo
+                         : hi > half.rect.xMax - EdgeMargin * f ? half.rect.xMax - EdgeMargin * f - hi : 0f;
+                old.x += dx * u / f;
                 Image back = box.GetComponentsInChildren<Image>(true).FirstOrDefault(i => i.sprite != null && i.sprite.name == "ConditionalElement");
                 if (back != null) Place(back.rectTransform, box, old);
                 float x = old.xMin + 8f * u;
                 Place(button, box, old);
                 Place(element, box, new Rect(x, old.center.y - 25.5f * u, 51f * u, 51f * u));
                 x += 51f * u;
+                if (second != null)
+                {
+                    Place(second, box, new Rect(x, old.center.y - 25.5f * u, 51f * u, 51f * u));
+                    x += 51f * u;
+                }
                 Place((RectTransform)colon.transform, box, new Rect(x, old.center.y - 25.5f * u, 16f * u, 51f * u));
                 x += 18f * u;
-                Place(desc, box, new Rect(x, old.center.y - 17.5f * u, tw, 35f * u));
+                Place(desc, box, new Rect(x, old.center.y - th / 2f, tw, th));
                 foreach (RectTransform r in desc.GetComponentsInChildren<RectTransform>(true).Where(r => r != desc && r.name != "secondaryFX"))
                 {
                     r.anchorMin = Vector2.zero; r.anchorMax = Vector2.one; r.offsetMin = r.offsetMax = Vector2.zero;
@@ -409,24 +540,86 @@ namespace FrosthavenMods
         private static void Infusions(RectTransform half, RectTransform rows, float f)
         {
             if (rows == null) return;
-            var top = rows.Cast<Transform>().OfType<RectTransform>().Where(r => r.gameObject.activeSelf).ToList();
-            RectTransform infuseRow = top.FirstOrDefault(r => r.GetComponentsInChildren<Transform>(true).Any(c => c.name == "InfuseContainer"));
+            RectTransform infuseRow = InfuseRow(rows, half, out List<RectTransform> containers);
             if (infuseRow == null) return;
-            var container = (RectTransform)infuseRow.GetComponentsInChildren<Transform>(true).First(c => c.name == "InfuseContainer");
-            var element = container.Cast<Transform>().OfType<RectTransform>().FirstOrDefault();
             // the generator's element is 51 px, Frosthaven's 48 (absolute: a pooled card is generated again)
-            container.localScale = new Vector3(InfuseSize / GeneratorElement, InfuseSize / GeneratorElement, 1f);
+            foreach (RectTransform container in containers)
+                container.localScale = new Vector3(InfuseSize / GeneratorElement, InfuseSize / GeneratorElement, 1f);
             Rect halfRect = half.rect;
-            Rect cr = In(container, half);
-            Shift(infuseRow, half, halfRect.center.x - cr.center.x, halfRect.yMin + InfuseBottom * f - cr.yMin);
-            var others = top.Where(r => r != infuseRow && Drawn(r, half).height > 0 || (r != infuseRow && r.childCount > 0 && In(r, half).height > 12 * f)).ToList();
-            if (others.Count == 0) return;
-            float hi = others.Max(r => In(r, half).yMax), lo = others.Min(r => In(r, half).yMin);
-            float regionTop = halfRect.yMax - ContentTop * f, regionBottom = halfRect.yMin + InfuseBand * f;
-            float shift = (regionTop + regionBottom) / 2f - (hi + lo) / 2f;
-            shift = Mathf.Min(shift, regionTop - hi);
-            foreach (RectTransform r in others) Shift(r, half, 0, shift);
+            float band = Band(InfuseBottom * f + Union(containers.SelectMany(c => Icons(c, half))).height, f);
+            // the rest, centred above the band: whole top-level rows move (the infusions' own row is placed after)
+            var parts = Parts(rows, half, infuseRow);
+            if (parts.Count > 0)
+            {
+                Rect b = Union(parts);
+                float regionTop = halfRect.yMax - ContentTop * f, regionBottom = halfRect.yMin + band;
+                float shift = (regionTop + regionBottom) / 2f - b.center.y;
+                shift = Mathf.Min(shift, regionTop - b.yMax);
+                foreach (RectTransform r in rows.Cast<Transform>().OfType<RectTransform>().Where(r => r.gameObject.activeSelf && r != infuseRow))
+                    Shift(r, half, 0, shift);
+            }
+            PlaceInfusions(half, infuseRow, containers, f);
         }
+
+        /// <summary>The row of a half's own infusions (not a consume's reward): the highest container around them that holds
+        /// nothing else, so an infusion row inside a column beside an area moves alone (Frigid Torrent: the attack came
+        /// down with it).</summary>
+        private static RectTransform InfuseRow(RectTransform rows, RectTransform half, out List<RectTransform> containers)
+        {
+            containers = rows.GetComponentsInChildren<Transform>(true).Where(c => c.name == "InfuseContainer" && Shown(c, rows)
+                    && !c.GetComponentsInParent<Transform>(true).Any(p => p.name == "Consume Button" || p.name == "ConditionalElement"))
+                .OfType<RectTransform>().ToList();
+            if (containers.Count == 0) return null;
+            var all = containers;
+            // the lowest container around all of them (two infusions in columns of their own: Frigid Torrent's Ice, Air) ...
+            RectTransform row = containers[0];
+            while (!all.All(c => c.IsChildOf(row)) && row.parent is RectTransform up && row != rows) row = up;
+            if (row == rows) return null;
+            // ... then up while it holds nothing else
+            while (row.parent is RectTransform p && p != rows)
+            {
+                RectTransform mine = row;
+                if (p.Cast<Transform>().OfType<RectTransform>().Any(c => c != mine && c.gameObject.activeSelf && Extent(c, half).Any())) break;
+                row = p;
+            }
+            return row;
+        }
+
+        /// <summary>The infusions centred at the half's bottom, 11.5 px up (Call of Doom).</summary>
+        private static void PlaceInfusions(RectTransform half, RectTransform infuseRow, List<RectTransform> containers, float f)
+        {
+            Rect cr = Union(containers.SelectMany(c => Icons(c, half)));
+            Shift(infuseRow, half, half.rect.center.x - cr.center.x, half.rect.yMin + InfuseBottom * f - cr.yMin);
+        }
+
+        /// <summary>The elements themselves: six of them wrap to a second row below the container's own rect (Chromatic Explosion).</summary>
+        private static List<Rect> Icons(RectTransform container, RectTransform half)
+        {
+            // the container's rect is where Frosthaven's 11.5 px is measured from; an element's own rect sits lower than
+            // its circle, so only a wrapped row (wholly below the container's middle) is added
+            Rect box = In(container, half);
+            var rects = new List<Rect> { box };
+            rects.AddRange(container.Cast<Transform>().OfType<RectTransform>().Where(c => c.gameObject.activeSelf)
+                .Select(c => In(c, half)).Where(r => r.yMax < box.center.y));
+            return rects;
+        }
+
+        /// <summary>Everything the half draws except one subtree (its infusion row).</summary>
+        private static List<Rect> Parts(RectTransform rows, RectTransform half, Transform except)
+        {
+            var parts = new List<Rect>();
+            foreach (RectTransform r in rows.Cast<Transform>().OfType<RectTransform>().Where(r => r.gameObject.activeSelf))
+                foreach (Graphic g in r.GetComponentsInChildren<Graphic>(true))
+                    if ((except == null || !g.transform.IsChildOf(except)) && Extent1(g, r, half) is Rect e) parts.Add(e);
+            return parts;
+        }
+
+        private static Rect Union(IEnumerable<Rect> rects) =>
+            rects.Aggregate((a, b) => Rect.MinMaxRect(Mathf.Min(a.xMin, b.xMin), Mathf.Min(a.yMin, b.yMin), Mathf.Max(a.xMax, b.xMax), Mathf.Max(a.yMax, b.yMax)));
+
+        /// <summary>The band the infusions keep at the bottom: Frosthaven's 72 px for one row, more for elements that wrap to a
+        /// second (their top, given from the half's bottom, plus the same 12.5 px gap as one row has).</summary>
+        private static float Band(float infusionTop, float f) => Mathf.Max(InfuseBand * f, infusionTop + (InfuseBand - InfuseBottom - InfuseSize) * f);
 
         /// <summary>The XP / persistent / lost badges: Frosthaven's bar ends flush with the half's right edge, its bottom
         /// 6 px above the half's (Sodden Soil: the bar at 434..491 x, 448..486 y in a half 13..491 x, 188..492 y). The bar
@@ -435,10 +628,160 @@ namespace FrosthavenMods
         {
             var bar = half.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "FH_UI_HUD_CARD_A_ExperienceActiveBonuses") as RectTransform;
             if (bar == null || !(bar.parent is RectTransform parent)) return;
+            // its badges are laid out side by side; laid out now, not on the next frame (the X drawn over the infinity)
+            LayoutRebuilder.ForceRebuildLayoutImmediate(bar);
             Rect p = In(parent, half);   // the parent's rect in the half's space (the half's units are the parent's: no scale)
             bar.anchorMin = bar.anchorMax = new Vector2(1f, 0f);
             bar.pivot = new Vector2(1f, 0f);
             bar.anchoredPosition = new Vector2(half.rect.xMax - p.xMax, half.rect.yMin + BadgeBottom * f - p.yMin);
+        }
+
+        /// <summary>A half whose content is taller or wider than the half (long Gloomhaven texts, an area beside text) is
+        /// scaled down around its centre, never below 60%, and moved inside: 10 px from the sides, under the top, above the
+        /// infusion band, and above the badges when it reaches into them. Frosthaven's writers shortened such texts; ours
+        /// are Gloomhaven's words, so the font gives instead.</summary>
+        private static void Fit(RectTransform half, RectTransform rows, float f)
+        {
+            RectTransform infuseRow = InfuseRow(rows, half, out List<RectTransform> containers);
+            var others = rows.Cast<Transform>().OfType<RectTransform>().Where(r => r.gameObject.activeSelf && r != infuseRow).ToList();
+            var bar = half.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "FH_UI_HUD_CARD_A_ExperienceActiveBonuses") as RectTransform;
+            Rect badge = bar != null && Shown(bar, half) && bar.rect.width > 1f ? In(bar, half) : Rect.zero;
+            var parts = Parts(rows, half, infuseRow);
+            if (parts.Count == 0) return;
+            Rect b = Union(parts);
+            Rect hr = half.rect;
+            float bottom = infuseRow != null ? hr.yMin + Band(Union(containers.SelectMany(c => Icons(c, half))).yMax - hr.yMin, f)
+                         : badge.width > 0 && parts.Any(p => p.Overlaps(badge)) ? badge.yMax + 2f * f : hr.yMin + FitEdge * f;
+            Rect region = Rect.MinMaxRect(hr.xMin + FitEdge * f, bottom, hr.xMax - FitEdge * f, hr.yMax - ContentTop * f);
+            if (Plugin.Log != null && FitTrace)
+            {
+                var card = half.GetComponentInParent<FullAbilityCard>();
+                string name = card != null && Pending.TryGetValue(card, out AbilityCardYMLData d) ? d.Name : "?";
+                Plugin.Log.LogInfo($"Gloomhaven card style: check {name}/{half.name} parts {parts.Count} content {b.xMin:0},{b.yMin:0}..{b.xMax:0},{b.yMax:0} region {region.xMin:0},{region.yMin:0}..{region.xMax:0},{region.yMax:0} half {hr.xMin:0},{hr.yMin:0}..{hr.xMax:0},{hr.yMax:0}");
+            }
+            if (region.xMin <= b.xMin && b.xMax <= region.xMax && region.yMin <= b.yMin && b.yMax <= region.yMax) return;
+            float k = Mathf.Clamp(Mathf.Min(region.width / b.width, region.height / b.height), FitMin, 1f);
+            // after scaling around b's centre, the content's size is b * k; centre it in the region where it overflows
+            Vector2 c = b.center;
+            Vector2 size = b.size * k;
+            float cx = Mathf.Clamp(c.x, region.xMin + size.x / 2f, Mathf.Max(region.xMin + size.x / 2f, region.xMax - size.x / 2f));
+            float cy = Mathf.Clamp(c.y, region.yMin + size.y / 2f, Mathf.Max(region.yMin + size.y / 2f, region.yMax - size.y / 2f));
+            foreach (RectTransform r in others)
+            {
+                Vector2 rc = In(r, half).center;
+                Vector2 to = new Vector2(cx, cy) + (rc - c) * k;
+                r.localScale = new Vector3(r.localScale.x * k, r.localScale.y * k, 1f);
+                Shift(r, half, to.x - In(r, half).center.x, to.y - In(r, half).center.y);
+            }
+            // an infusion row inside a scaled column keeps Frosthaven's size and place
+            if (infuseRow != null && others.Any(r => infuseRow.IsChildOf(r)))
+            {
+                infuseRow.localScale = new Vector3(infuseRow.localScale.x / k, infuseRow.localScale.y / k, 1f);
+                PlaceInfusions(half, infuseRow, containers, f);
+            }
+            if (Reported.Add("fit:" + half.GetInstanceID()))
+                Plugin.Log.LogInfo($"Gloomhaven card style: fit {half.name} x{k:0.00} content {b.width:0}x{b.height:0} region {region.width:0}x{region.height:0}");
+        }
+
+        /// <summary>What a row draws, in the half's space, piece by piece: each text at its wrapped size (no mesh: the card
+        /// is built hidden), each visible picture (pills, boxes, hexes, slots, icons).</summary>
+        private static IEnumerable<Rect> Extent(RectTransform row, RectTransform half)
+        {
+            foreach (Graphic g in row.GetComponentsInChildren<Graphic>(true))
+                if (Extent1(g, row, half) is Rect r) yield return r;
+        }
+
+        private static Rect? Extent1(Graphic g, RectTransform row, RectTransform half)
+        {
+            if (!g.enabled || !Shown(g.transform, row.parent) || g.color.a < 0.05f) return null;
+            Rect box = In(g.rectTransform, half);
+            if (box.width <= 0.01f || box.height <= 0.01f) return null;
+            if (g is TMP_Text t)
+            {
+                // the text at its wrapped width and its row's height (Relayout sizes each row to its text), joined with
+                // the mesh's bounds where the hidden card has a mesh (often it has none); the width is capped to the rect
+                // (an uncapped preferred width read as twice the half's, 2026-10-30)
+                if (string.IsNullOrWhiteSpace(t.text)) return null;
+                float k = box.width / Mathf.Max(t.rectTransform.rect.width, 0.01f);
+                float inner = Mathf.Max(1f, t.rectTransform.rect.width - t.margin.x - t.margin.z);
+                Vector2 pref = t.GetPreferredValues(t.text, t.enableWordWrapping ? inner : float.PositiveInfinity, float.PositiveInfinity);
+                if (pref.x <= 0.01f) return null;
+                float w = Mathf.Min(pref.x, inner) * k, hgt = Mathf.Max(pref.y * k, box.height);
+                float mid = box.center.x + (t.margin.x - t.margin.z) * k / 2f;
+                float x0 = ((int)t.alignment & 0x1) != 0   /* a left alignment */ ? box.xMin + t.margin.x * k : mid - w / 2f;
+                Rect est = new Rect(x0, box.center.y - hgt / 2f, w, hgt);
+                t.ForceMeshUpdate(true);
+                Bounds tb = t.textBounds;
+                if (tb.size.x <= 0.01f || tb.size.y <= 0.01f) return est;
+                Vector3 a = half.InverseTransformPoint(t.transform.TransformPoint(tb.min)), c = half.InverseTransformPoint(t.transform.TransformPoint(tb.max));
+                return Union(new[] { est, Rect.MinMaxRect(Mathf.Min(a.x, c.x), Mathf.Min(a.y, c.y), Mathf.Max(a.x, c.x), Mathf.Max(a.y, c.y)) });
+            }
+            return g is Image img && img.sprite != null ? box : (Rect?)null;
+        }
+
+        /// <summary>A use tracker under an active bonus's text: the bonus's box keeps the height the generator gave it, and a
+        /// longer text in Frosthaven's font ran over the tracker (Shrapnel, Heart Seeker). The tracker's row and the rows
+        /// after it move down under the text; Fit brings the half back inside if that overflows.</summary>
+        private static void Trackers(RectTransform half, RectTransform rows, float f)
+        {
+            var top = rows.Cast<Transform>().OfType<RectTransform>().Where(r => r.gameObject.activeSelf).ToList();
+            for (int i = 1; i < top.Count; i++)
+            {
+                if (!top[i].GetComponentsInChildren<Transform>(true).Any(c => c.name == "XPContainer" && Shown(c, rows))) continue;
+                var mine = Extent(top[i], half).ToList();
+                if (mine.Count == 0) continue;
+                float yTop = mine.Max(p => p.yMax), x0 = mine.Min(p => p.xMin), x1 = mine.Max(p => p.xMax);
+                var above = top.Take(i).SelectMany(r => Extent(r, half)).Where(p => p.xMax > x0 && p.xMin < x1).ToList();
+                if (above.Count == 0) continue;
+                float dy = yTop + 3f * f - above.Min(p => p.yMin);
+                if (dy <= 0f) continue;
+                for (int j = i; j < top.Count; j++) Shift(top[j], half, 0f, -dy);
+            }
+        }
+
+        /// <summary>An area beside an ability: the pill drawn above is wider than the generator's column, and ran under the
+        /// hexes (Ink Bomb, Cold Front, Crystallizing Blast). The area moves right as far as the half allows, then the
+        /// columns beside it move left, then the area is drawn smaller (not below 70%).</summary>
+        private static void AreaClear(RectTransform half, RectTransform rows, float f)
+        {
+            foreach (RectTransform area in rows.GetComponentsInChildren<Transform>(true).Where(c => c.name == "AreaEffectContainer" && Shown(c, rows)).OfType<RectTransform>().ToList())
+            {
+                // the level where something sits beside the area: the area may be wrapped in a column or two
+                RectTransform col = area, line = null;
+                while (col.parent is RectTransform p)
+                {
+                    if (p.Cast<Transform>().OfType<RectTransform>().Any(c => c != col && c.gameObject.activeSelf && Extent(c, half).Any())) { line = p; break; }
+                    if (p == rows) break;
+                    col = p;
+                }
+                if (line == null) continue;
+                var hexParts = Extent(area, half).ToList();
+                if (hexParts.Count == 0) continue;
+                Rect hex = hexParts.Aggregate((a, b) => Rect.MinMaxRect(Mathf.Min(a.xMin, b.xMin), Mathf.Min(a.yMin, b.yMin), Mathf.Max(a.xMax, b.xMax), Mathf.Max(a.yMax, b.yMax)));
+                var beside = line.Cast<Transform>().OfType<RectTransform>().Where(c => c != col && c.gameObject.activeSelf).ToList();
+                var parts = beside.SelectMany(c => Extent(c, half)).Where(p => p.Overlaps(hex)).ToList();
+                if (parts.Count == 0) continue;
+                float need = parts.Max(p => p.xMax) - hex.xMin + 4f * f;
+                float right = Mathf.Clamp(half.rect.xMax - FitEdge * f - hex.xMax, 0f, need);
+                Shift(area, half, right, 0f);
+                need -= right;
+                if (need > 0f)
+                {
+                    var all = beside.SelectMany(c => Extent(c, half)).ToList();
+                    float left = Mathf.Clamp(all.Min(p => p.xMin) - (half.rect.xMin + FitEdge * f), 0f, need);
+                    foreach (RectTransform c in beside) Shift(c, half, -left, 0f);
+                    need -= left;
+                }
+                if (need > 0f)
+                {
+                    float k = Mathf.Max(0.7f, (hex.width - need) / hex.width);
+                    Vector2 anchor = new Vector2(hex.xMax + right, hex.center.y);   // the area's right edge stays
+                    Vector2 c0 = In(area, half).center;
+                    area.localScale = new Vector3(area.localScale.x * k, area.localScale.y * k, 1f);
+                    Vector2 c1 = anchor + (c0 - anchor) * k;
+                    Shift(area, half, c1.x - In(area, half).center.x, c1.y - In(area, half).center.y);
+                }
+            }
         }
 
         // ------------------------------------------------------------------ area hexes

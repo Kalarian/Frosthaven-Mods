@@ -30,14 +30,14 @@ Data:
         XP: 2
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Bless>, <size=130%><sprite name=Strengthen>"
-        - Row: "$Affect_OneAllyWithinRange3$"
+        - Row: "<size=150%><sprite name=Bless>, <size=130%><sprite name=Strengthen>"
+        - Row: "$FHS_Affect_OneAllyWithinRange3$"
     Bottom:
         - Active:
             Ability: BPrevent
             Icon: Positive_DamagePrevent
-            ListLayout: "<b></b> $GH_179_B$"
-            Layout: "<b></b> $GH_179_B$"
+            ListLayout: "<b></b> $FHS_GH_179_B$"
+            Layout: "<b></b> $FHS_GH_179_B$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "20,20,20,20"
@@ -46,4 +46,3 @@ Layout:
                 - Infuse: Light
             - Column:
             - Column:
-                - Duration: Round

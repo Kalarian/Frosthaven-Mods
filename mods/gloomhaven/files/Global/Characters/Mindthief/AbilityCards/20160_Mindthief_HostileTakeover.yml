@@ -34,12 +34,12 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
-                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+                - Row: "<link=fhpill><sprite name=Immobilize></link>"
             - Column:
         - Row: "<size=20%> "
         - Row:
@@ -49,4 +49,4 @@ Layout:
                 - Infuse: Ice
             - Column:
     Bottom:
-        - Row: "$GH_160_B$"
+        - Row: "$FHS_GH_160_B$"

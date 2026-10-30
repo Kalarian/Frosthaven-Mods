@@ -42,20 +42,20 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack1.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack1.Range*</link>"
             - Column:
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
-        - Row: "$JOTL_024_T$"
+        - Row: "<size=150%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+        - Row: "$FHS_JOTL_024_T$"
     Bottom:
         - Active:
             Ability: BActive
-            ListLayout: "$JOTL_024_B$"
-            Layout: "$JOTL_024_B$"
+            ListLayout: "$FHS_JOTL_024_B$"
+            Layout: "$FHS_JOTL_024_B$"
             Icon: Positive_AttackPlus
-        - Row: "<size=20%> "
+        - Row: "<size=100%> "
         - XPTracker: BActive

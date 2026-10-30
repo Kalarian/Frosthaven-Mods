@@ -28,10 +28,10 @@ Data:
                 AnimOverload: PowerUp
 Layout:
     Top:
-        - Row: "$GH_414_T$"
+        - Row: "$FHS_GH_414_T$"
     Bottom:
         - Active:
             Ability: BImmunity
             Icon: Positive_DamagePrevent
-            ListLayout: "<b></b> $GH_414_B$"
-            Layout: "<b></b> $GH_414_B$"
+            ListLayout: "<b></b> $FHS_GH_414_B$"
+            Layout: "<b></b> $FHS_GH_414_B$"

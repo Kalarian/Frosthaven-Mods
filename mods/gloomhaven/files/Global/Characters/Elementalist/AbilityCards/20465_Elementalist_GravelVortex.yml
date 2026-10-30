@@ -32,8 +32,13 @@ Data:
                         Range: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "30, 20, 20, 30"
@@ -44,8 +49,10 @@ Layout:
                 - Infuse: Earth
             - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCAnyAny
-            Text: "<sprite name=Loot> 2 $instead$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCAnyAny
+                    Text: "<sprite name=Loot> 2 $FHS_instead$"

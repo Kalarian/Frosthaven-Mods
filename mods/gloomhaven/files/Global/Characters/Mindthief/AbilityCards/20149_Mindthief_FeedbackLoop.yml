@@ -32,7 +32,7 @@ Layout:
         - Augment:
             AugmentIcon: Positive_AttackPlus
             ParentAbility: TAttack
-            ActiveBonusLayout: "$Augment_OnYourMeleeAttacks$ $Gain$ <nobr><sprite name=Shield> *TAugmentShield*</nobr> <sprite name=Round>"
+            ActiveBonusLayout: "$FHS_Augment_OnYourMeleeAttacks$ $FHS_Gain$ <nobr><sprite name=Shield> *TAugmentShield*</nobr> <sprite name=Round>"
             AugmentAbilityLayout:
                 - ColumnWidths: "70,25"
                 - Column:
@@ -40,24 +40,23 @@ Layout:
                         Ability: TAugmentShield
                         Icon: Positive_Shield
                         ListLayout: "<nobr><sprite name=Shield> *TAugmentShield*</nobr>"
-                        Layout: "$Gain$ <nobr><sprite name=Shield> *TAugmentShield*</nobr>"
+                        Layout: "$FHS_Gain$ <nobr><sprite name=Shield> *TAugmentShield*</nobr>"
                 - Column:
-                    - Duration: Round
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:
-                - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
                 - Column:
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$GH_149_B$"
+        - Row: "$FHS_GH_149_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Muddle>"
-        - Row: "$Target_AllEnemiesMovedThrough$"
+        - Row: "<size=150%><sprite name=Muddle>"
+        - Row: "$FHS_Target_AllEnemiesMovedThrough$"

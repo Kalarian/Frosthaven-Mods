@@ -49,21 +49,28 @@ Data:
         XP: 2
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCEarth
-            Text: "$Target_TwoHexInstead$, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCEarth
+                    Text: "$FHS_Target_TwoHexInstead$, <sprite name=XP1>"
         - Row: "<size=50%> "
-        - Row: "$GH_123_T_2$"
+        - Row: "$FHS_GH_123_T_2$"
     Bottom:
-        - Row: "$GH_123_B$"
+        - Row: "$FHS_GH_123_B$"
         - Row: "<size=50%> "
         - Active:
             Ability: BShield
             Icon: Positive_Shield
-            ListLayout: "<sprite name=Shield> *BShield*, $Affect_AllAllies$"
+            ListLayout: "<sprite name=Shield> *BShield*, $FHS_Affect_AllAllies$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield*"
-                - Row: "$Affect_AllAllies$"
+                - Row: "<size=150%><sprite name=Shield> *BShield*"
+                - Row: "$FHS_Affect_AllAllies$"

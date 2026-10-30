@@ -501,9 +501,8 @@ UI_TEXT_KEYS = ("Augment", "Augment_DiscardReminder", "Augment_OnYourMeleeAttack
                 "Song", "Song_DiscardReminder", "Song_XPText", "Glossary_Song",
                 "Doom", "Doom_MarkText", "Doom_DiscardReminderText", "GUI_TOOLTIP_ADD_DOOM", "GUI_TOOLTIP_TRANSFER_DOOM",
                 "COMBAT_LOG_DOOM")
-# Classes whose cards follow Frosthaven's card style (gh_layout.fh_style, the plugin's GHCardStyle; the user's layout
-# review, 2026-10-29): the Brute first, the others once the user has approved its before/after.
-FH_STYLE_CLASSES = {"Brute"}
+# Every class's cards follow Frosthaven's card style (gh_layout.fh_style, the plugin's GHCardStyle; the user's layout
+# review, 2026-10-29: the Brute first, every class from 2026-10-30).
 _ICON_WORD = re.compile(r"\b([A-Za-z]+)\s*(<sprite name=\"?(\w+)\"?>)")
 _CONDITION_WORDS = r"POISON|WOUND|STUN|DISARM|IMMOBILIZE|MUDDLE|CURSE|BLESS|STRENGTHEN|INVISIBLE|REGENERATE|WARD|BRITTLE|BANE|IMPAIR"
 
@@ -514,6 +513,15 @@ def fh_text(t):
     Frosthaven's icons, and a one-sentence line has no full stop."""
     t = _ICON_WORD.sub(lambda m: m.group(2) if m.group(1).lower() == m.group(3).lower() or m.group(1).upper() in _CONDITION_WORDS.split("|") else m.group(0), t)
     t = re.sub(r"\bAdd\s+(<nobr>)?\s*(\+\d+)\s*(<nobr>)?\s*(<sprite name=\w+>)", lambda m: (m.group(1) or "") + (m.group(3) or "") + m.group(2) + m.group(4), t)
+    # the same without the icon ("Add +3 Attack to all your attacks"), and a condition named alone ("apply CURSE")
+    t = re.sub(r"\bAdd\s+\+(\d+)\s+Attack\b(?!\s*<sprite)", r"+\1<sprite name=Attack>", t)
+    t = re.sub(r"\b(" + _CONDITION_WORDS + r")\b(?!\s*<sprite)", lambda m: f"<sprite name={m.group(1).capitalize()}>", t)
+    # Gloomhaven's "ADD <target>" is Frosthaven's "+1<target>"; "consume Air <consume-air>" is the icon alone; a quoted
+    # ability ("Heal 2, Range 1") is icons and values, an icon and its value a space apart (Frosthaven's pill spacing)
+    t = re.sub(r"\bADD\s+(<sprite name=Target>)", r"+1\1", t)
+    t = re.sub(r"\bconsume\s+(<nobr>)?\s*(Fire|Ice|Air|Earth|Light|Dark)\s+(<sprite name=Consume\2>)", r"\1\3", t)
+    t = re.sub(r"\b(Attack|Heal|Range|Move|Shield|Retaliate|Pierce|Push|Pull)\s+(\d+)\b", r"<sprite name=\1> \2", t)
+    t = re.sub(r"(<sprite name=(?:Attack|Heal|Range|Move|Shield|Retaliate|Pierce|Push|Pull|Target)>)(\d)", r"\1 \2", t)
     t = re.sub(r"\benemies\b|\benemy\b", "<sprite name=Enemy>", t)
     t = re.sub(r"\ballies\b|\bally\b", "<sprite name=Allies>", t)
     t = re.sub(r"\s{2,}", " ", t)
@@ -868,8 +876,7 @@ def main():
         for n in cards:
             new_id, s = convert_card(n, text(files[n]), warnings.append, CLASS_ICONS.get(cls))
             s = apply_card_fixes(new_id, s)
-            if cls in FH_STYLE_CLASSES:
-                s = gh_layout.fh_style(s, lambda w: warnings.append(f"{n}: {w}"))
+            s = gh_layout.fh_style(s, lambda w: warnings.append(f"{n}: {w}"))
             # Frosthaven can't aim a Damage ability's area (none of its own cards has one; the preview throws and
             # the damage can't be confirmed): such a card needs a CARD_FIXES entry
             for blk in re.finditer(r"^( +)\w+:\r?\n((?:\1 +.*\r?\n)+)", s.split("\nLayout:")[0], re.M):

@@ -22,7 +22,12 @@ Data:
                     CircleEnhancements: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Immobilize>"
-        - Row: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> *TImmobilize.Range*</nobr>"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Immobilize>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Range> *TImmobilize.Range*</link>"
+            - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* @BMove@"

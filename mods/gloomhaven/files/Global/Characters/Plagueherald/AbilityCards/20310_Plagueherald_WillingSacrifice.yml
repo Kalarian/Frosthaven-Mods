@@ -53,11 +53,13 @@ Layout:
         - Active:
             Ability: TActive
             Icon: Move
-            ListLayout: "$GH_310_T$"
-            Layout: "$GH_310_T$"
+            ListLayout: "$FHS_GH_310_T$"
+            Layout: "$FHS_GH_310_T$"
     Bottom:
-        - Row: "$GH_310_B$"
+        - Row: "$FHS_GH_310_B$"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCAir
-            Text: "$GH_178_T_2$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCAir
+                    Text: "$FHS_GH_178_T_2$"

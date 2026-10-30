@@ -50,17 +50,17 @@ Layout:
         - Active:
             Ability: TPlaySong
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_368_T$"
-            Layout: "$GH_368_T$"
+            ListLayout: "$FHS_GH_368_T$"
+            Layout: "$FHS_GH_368_T$"
     Bottom:
-        - Row: "$GH_146_B_1$"
+        - Row: "$FHS_GH_146_B_1$"
         - Row: "<size=20%> "
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> +0"
+            - Column: "<size=150%><sprite name=Attack> +0"
             - Column:
-                - AddedEffect: "<sprite name=Range>+0"
+                - Row: "<link=fhpill><sprite name=Range>+0</link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$GH_146_B_2$"
+        - Row: "$FHS_GH_146_B_2$"

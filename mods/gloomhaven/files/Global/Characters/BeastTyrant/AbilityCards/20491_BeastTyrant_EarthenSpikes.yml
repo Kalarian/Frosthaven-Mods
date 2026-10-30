@@ -40,12 +40,12 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column: "<size=150%><sprite name=Attack> *TAttack*"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
-                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+                - Row: "<link=fhpill><sprite name=Immobilize></link>"
             - Column:
         - Row: "<size=50%> "
         - Infuse: Earth
@@ -53,15 +53,15 @@ Layout:
         - Active:
             Ability: BShield
             Icon: Positive_Shield
-            ListLayout: "<sprite name=Shield> *BShield*, $Affect_AllSummonedAllies$"
+            ListLayout: "<sprite name=Shield> *BShield*, $FHS_Affect_AllSummonedAllies$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield*"
-                - Row: "$Affect_AllSummonedAllies$"
+                - Row: "<size=150%><sprite name=Shield> *BShield*"
+                - Row: "$FHS_Affect_AllSummonedAllies$"
         - Divider:
         - Active:
             Ability: BRetaliate
             Icon: Positive_Retaliate
-            ListLayout: "<sprite name=Retaliate> *BRetaliate*, $Affect_AllSummonedAllies$"
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*, $FHS_Affect_AllSummonedAllies$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate*"
-                - Row: "$Affect_AllSummonedAllies$"
+                - Row: "<size=150%><sprite name=Retaliate> *BRetaliate*"
+                - Row: "$FHS_Affect_AllSummonedAllies$"

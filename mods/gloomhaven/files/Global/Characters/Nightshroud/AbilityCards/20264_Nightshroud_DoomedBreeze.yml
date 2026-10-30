@@ -31,12 +31,12 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
-                - AddedEffect: "<size=130%><sprite name=Muddle></size>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <voffset=1>@TAttack.Range@</link>"
+                - Row: "<link=fhpill><sprite name=Muddle></link>"
             - Column:
         - Row: "<size=50%> "
         - Row:
@@ -46,7 +46,6 @@ Layout:
                 - Infuse: Dark
             - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Curse>"
-        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=150%><sprite name=Curse>"

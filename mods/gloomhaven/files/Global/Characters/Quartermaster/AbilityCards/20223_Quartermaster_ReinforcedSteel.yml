@@ -38,14 +38,14 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            ListLayout: "$GH_223_T$"
-            Layout: "$GH_223_T$"
+            ListLayout: "$FHS_GH_223_T$"
+            Layout: "$FHS_GH_223_T$"
             Icon: Refresh
     Bottom:
         - Active:
             Ability: BShield
             Icon: Positive_Shield
-            ListLayout: "<sprite name=Shield> *BShield*, <b></b> $Affect_SelfAndAllAdjacentAllies$"
+            ListLayout: "<sprite name=Shield> *BShield*, <b></b> $FHS_Affect_SelfAndAllAdjacentAllies$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
-                - Row: "<b></b> $Affect_SelfAndAllAdjacentAllies$"
+                - Row: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<b></b> $FHS_Affect_SelfAndAllAdjacentAllies$"

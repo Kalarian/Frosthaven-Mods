@@ -43,17 +43,24 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCEarth
-            Text: "<nobr><sprite name=Target> 2,</nobr> <nobr><sprite name=Pierce> 2, <sprite name=XP1></nobr>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCEarth
+                    Text: "<nobr><sprite name=Target> 2,</nobr> <nobr><sprite name=Pierce> 2, <sprite name=XP1></nobr>"
     Bottom:
         - ColumnWidths: "65,35"
         - Column:
-            - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
-            - Row: "<sprite name=Range> *BAttack.Range* @BAttack.Range@"
-            - Row: "<sprite name=Pull> *TAttackSubPull* <size=100%><voffset=1> @TAttackSubPull@"
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* @BAttack.Range@</link>"
+                    - Row: "<link=fhpill><sprite name=Pull> *TAttackSubPull* <voffset=1> @TAttackSubPull@</link>"
+                - Column:
             - Row: "<size=20%> "
             - Row:
                 - ColumnWidths: "5, 30, 30, 30, 5"

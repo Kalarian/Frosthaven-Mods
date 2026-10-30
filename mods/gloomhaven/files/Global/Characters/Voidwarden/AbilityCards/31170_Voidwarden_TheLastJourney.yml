@@ -40,20 +40,19 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* @TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* @TAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
-                - AddedEffect: "<size=130%><sprite name=Curse></size>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Curse></link>"
             - Column:
         - Row: "<size=50%> "
         - Infuse: Dark
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=50%> "
-        - Row: "$JOTL_170_B_1$"
+        - Row: "$FHS_JOTL_170_B_1$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> *EnemyWillDoThis*"
+        - Row: "<size=150%><sprite name=Move> *EnemyWillDoThis*"
         - Row: "<size=20%> "
-        - Row: "$JOTL_170_B_2$"
+        - Row: "$FHS_JOTL_170_B_2$"

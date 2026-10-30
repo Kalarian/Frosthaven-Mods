@@ -27,13 +27,13 @@ Data:
                 AnimOverload: TargetedScroll
 Layout:
     Top:
-        - Row: "$GH_215_T$"
+        - Row: "$FHS_GH_215_T$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Pull> *BPull* <size=100%><voffset=1>@BPull@"
+            - Column: "<size=150%><sprite name=Pull> *BPull* <size=100%><voffset=1>@BPull@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BPull.Range*</mark>"
-                - Row: "<sprite name=Target>*BPull.Target* @BPull.Target@"
+                - Row: "<link=fhpill><sprite name=Target> *BPull.Target* @BPull.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *BPull.Range*</link>"
             - Column:

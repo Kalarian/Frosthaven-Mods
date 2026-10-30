@@ -38,24 +38,24 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
             - Column:
         - Divider:
-        - Row: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
-        - Row: "$JOTL_020_T$"
+        - Row: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$FHS_JOTL_020_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Divider:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *BHeal*"
+            - Column: "<size=150%><sprite name=Heal> *BHeal*"
             - Column:
-                - Row: "<sprite name=Range>*BHeal.Range* @BHeal.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range* @BHeal.Range@</link>"
             - Column:
         - Row: "<size=50%> "
         - Infuse: Earth

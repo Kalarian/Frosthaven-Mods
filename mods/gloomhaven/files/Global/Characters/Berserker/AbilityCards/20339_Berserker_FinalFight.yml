@@ -37,14 +37,16 @@ Data:
                         AnimOverload: MeleeAttackAlt
 Layout:
     Top:
-        - Row: "$Kill_OneAdjacentEnemy$"
+        - Row: "$FHS_Kill_OneAdjacentEnemy$"
         - Row: "<size=20%> "
-        - Row: "$GH_339_T$"
+        - Row: "$FHS_GH_339_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> X <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> X <size=100%><voffset=1>@BMove@"
         - Row: "<size=20%> "
-        - Row: "$Xis_LostCardCount$"
+        - Row: "$FHS_Xis_LostCardCount$"
         - Row: "<size=50%> "
-        - Consume:
-            Name: BCFire
-            Text: "<b><size=130%><sprite name=Attack> 3"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCFire
+                    Text: "<size=150%><sprite name=Attack> 3"

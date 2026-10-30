@@ -35,5 +35,5 @@ Layout:
             ListLayout: "$FHS_GH_015_B$"
             Layout: "$FHS_GH_015_B$"
             Icon: Positive_DamagePrevent
-        - Row: "<size=50%> "
+        - Row: "<size=100%> "
         - XPTracker: BPrevent

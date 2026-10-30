@@ -34,10 +34,15 @@ Layout:
         - Active:
             Ability: TActive
             Icon: Icon_Curse
-            ListLayout: "$GH_314_T$"
-            Layout: "$GH_314_T$"
+            ListLayout: "$FHS_GH_314_T$"
+            Layout: "$FHS_GH_314_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Curse> <size=100%><voffset=1>@BCurse@"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Curse> <size=100%><voffset=1>@BCurse@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:

@@ -35,22 +35,16 @@ Data:
                 AnimOverload: Heal
 Layout:
     Top:
-        - Row: "$Kill_OneAdjacentEnemy$"
+        - Row: "$FHS_Kill_OneAdjacentEnemy$"
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><nobr><sprite name=Disarm></nobr>, <nobr><sprite name=Immobilize></nobr>"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><nobr><sprite name=Disarm></nobr>, <nobr><sprite name=Immobilize></nobr></link>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Divider:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range*</link>"
             - Column:

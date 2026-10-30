@@ -34,7 +34,7 @@ Layout:
         - ColumnWidths: "65,30"
         - Column:
             - Row:
-                - Data: "<nobr><b><size=130%><sprite name=Stun></nobr>"
+                - Data: "<size=150%><nobr><sprite name=Stun></nobr>"
                 - RowProperties:
                     - Wrapping: False
                     - AutoSize: True
@@ -45,10 +45,9 @@ Layout:
             - Row: "<size=200%> "
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
-                - Row: "<sprite name=Push>*BAttackSubPush* @BAttackSubPush@"
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* <sprite name=Push> *BAttackSubPush* @BAttackSubPush@</link>"
             - Column:

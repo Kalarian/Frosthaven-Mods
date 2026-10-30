@@ -36,25 +36,23 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
-                - Row: "<mark=#80919922><size=100%><sprite name=Target>*TAttack.Target*</mark>"
-                - Row: "<mark=#80919922><size=100%><sprite name=Pull>*TAttackSubPull*</mark>"
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <sprite name=Range> *TAttack.Range* <sprite name=Pull> *TAttackSubPull*</link>"
             - Column:
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *BMove*"
+            - Column: "<size=150%><sprite name=Move> *BMove*"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Divider:
         - Active:
             Ability: BShield
-            ListLayout: "<b><size=130%><sprite name=Shield> *BShield*"
-            Layout: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+            ListLayout: "<size=150%><sprite name=Shield> *BShield*"
+            Layout: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
             Icon: Positive_Shield

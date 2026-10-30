@@ -27,8 +27,7 @@ Data:
                 ActiveBonusDuration: Round
 Layout:
     Top:
-        - Row: "<size=130%><b><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
-        - Row: "$Self$"
+        - Row: "<link=fhself><size=125%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@</link>"
         - Row: "<size=50%> "
         - Active:
             Ability: TShield
@@ -39,16 +38,13 @@ Layout:
                     - ColumnWidths: "20,60,20"
                     - Column:
                     - Column:
-                        - Row: "<size=130%><b><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
-                        - Row: "$Self$"
+                        - Row: "<link=fhself><size=125%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@</link>"
                     - Column:
-                        - Duration: Round
         - Row: "<size=50%> "
-        - Row: "<size=130%><b><sprite name=Stun>"
-        - Row: "$Self$"
+        - Row: "<link=fhself><size=125%><sprite name=Stun></link>"
     Bottom:
         - Active:
             Ability: BOverrideAugmentAttackType
             Icon: Positive_Cards_RangedForm
-            ListLayout: "$GH_170_B$"
-            Layout: "$GH_170_B$"
+            ListLayout: "$FHS_GH_170_B$"
+            Layout: "$FHS_GH_170_B$"

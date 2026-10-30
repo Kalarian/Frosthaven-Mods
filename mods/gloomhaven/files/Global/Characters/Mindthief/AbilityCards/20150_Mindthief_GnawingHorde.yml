@@ -26,7 +26,7 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $PlagueRat$
+                    SummonName: $FHS_PlagueRat$
                     SpecialText: "<sprite name=Poison>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

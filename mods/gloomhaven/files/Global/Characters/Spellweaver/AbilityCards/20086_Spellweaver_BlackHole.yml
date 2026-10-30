@@ -45,18 +45,25 @@ Layout:
     Top:
         - ColumnWidths: "75,25"
         - Column:
-            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-            - Row: "<sprite name=Range> *TAttack.Range*"
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+                - Column:
             - Row: "<size=20%> "
-            - Row: "<line-height=100%>$XP_PerEnemy$"
+            - Row: "<line-height=100%>$FHS_XP_PerEnemy$"
             - Row: "<size=50%> "
-            - Consume:
-                Name: TCDark
-                Text: "$Kill_AllNormalEnemiesInTargetedArea$"
+            - Conditional:
+                Layout:
+                    - Consume:
+                        Name: TCDark
+                        Text: "$FHS_Kill_AllNormalEnemiesInTargetedArea$"
         - Column:
             - Row: "£Area£"
     Bottom:
-        - Row: "$GH_086_B_1$"
+        - Row: "$FHS_GH_086_B_1$"
         - Row: "<size=50%> "
-        - Row: "<b><size=130%><sprite name=Pull> *BPull* <size=100%><voffset=1>@BPull@"
-        - Row: "$GH_086_B_2$"
+        - Row: "<size=150%><sprite name=Pull> *BPull* <size=100%><voffset=1>@BPull@"
+        - Row: "$FHS_GH_086_B_2$"

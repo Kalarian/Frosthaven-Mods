@@ -23,14 +23,19 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column: "<size=150%><sprite name=Attack> *TAttack*"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Curse></size>"
+                - Row: "<link=fhpill><sprite name=Curse></link>"
             - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Muddle>"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Muddle>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
         - Row: "<size=50%> "
         - Infuse: Dark

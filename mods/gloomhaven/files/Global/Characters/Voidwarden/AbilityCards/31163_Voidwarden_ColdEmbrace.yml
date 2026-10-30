@@ -51,23 +51,27 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Curse>"
+            - Column: "<size=150%><sprite name=Curse>"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TCurse.Range*</mark>"
-                - Row: "<sprite name=Target>*TCurse.Target* @TCurse.Target@"
+                - Row: "<link=fhpill><sprite name=Target> *TCurse.Target* @TCurse.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TCurse.Range*</link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCDark
-            Text: "<nobr>+1 <sprite name=Range></nobr>, <nobr>+1 <sprite name=Target></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "<nobr>+1 <sprite name=Range></nobr>, <nobr>+1 <sprite name=Target></nobr>, <sprite name=XP1>"
     Bottom:
-        - Consume:
-            Name: BCIce
-            Text: "<b><size=130%><sprite name=Move> 3"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCIce
+                    Text: "<size=150%><sprite name=Move> 3"
         - Row: "<size=50%> "
-        - Row: "$JOTL_163_B$"
+        - Row: "$FHS_JOTL_163_B$"
         - Row: "<size=50%> "
-        - Row: "<b><size=130%><sprite name=Bless>"
-        - Row: "$Target_AllAdjacentAllies$"
+        - Row: "<size=150%><sprite name=Bless>"
+        - Row: "$FHS_Target_AllAdjacentAllies$"

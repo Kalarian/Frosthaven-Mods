@@ -17,6 +17,6 @@ Data:
                 Move: 5
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=150%><sprite name=Attack> *TAttack*"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"

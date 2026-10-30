@@ -57,25 +57,21 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            ListLayout: "$JOTL_168_T$"
-            Layout: "$JOTL_168_T$"
+            ListLayout: "$FHS_JOTL_168_T$"
+            Layout: "$FHS_JOTL_168_T$"
             Icon: Positive_AttackPlus
-        - Row: "<size=20%> "
+        - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* @BMove@"
         - Divider:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Curse>"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
-        - Consume:
-            Name: BCDark
-            Text: "$JOTL_168_B_1$"
+        - Row: "<link=fhself><size=125%><sprite name=Curse></link>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "$FHS_JOTL_168_B_1$"
         - Row: "<size=20%> "
-        - Row: "$JOTL_168_B_2$"
+        - Row: "$FHS_JOTL_168_B_2$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> *BAllyMove* @BAllyMove@"
+        - Row: "<size=150%><sprite name=Move> *BAllyMove* @BAllyMove@"

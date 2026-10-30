@@ -47,23 +47,25 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Push>*TAttackSubPush* @TAttackSubPush@"
+                - Row: "<link=fhpill><sprite name=Push> *TAttackSubPush* @TAttackSubPush@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$GH_141_T$"
+        - Row: "$FHS_GH_141_T$"
     Bottom:
         - Active:
             Ability: BAttackBuff
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_141_B_1$"
-            ListLayoutAlt: "$GH_141_B_1_Alt$"
-            Layout: "$GH_141_B_1$"
-            LayoutAlt: "$GH_141_B_1_Alt$"
+            ListLayout: "$FHS_GH_141_B_1$"
+            ListLayoutAlt: "$FHS_GH_141_B_1_Alt$"
+            Layout: "$FHS_GH_141_B_1$"
+            LayoutAlt: "$FHS_GH_141_B_1_Alt$"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCEarth
-            Text: "$GH_141_B_2$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCEarth
+                    Text: "$FHS_GH_141_B_2$"

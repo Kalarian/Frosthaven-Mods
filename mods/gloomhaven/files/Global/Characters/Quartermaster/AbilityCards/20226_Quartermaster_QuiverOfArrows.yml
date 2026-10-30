@@ -33,7 +33,7 @@ Layout:
         - Active:
             Ability: TActive
             Icon: Refresh
-            ListLayout: "<b></b> $GH_226_T$"
-            Layout: "<b></b> $GH_226_T$"
+            ListLayout: "<b></b> $FHS_GH_226_T$"
+            Layout: "<b></b> $FHS_GH_226_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

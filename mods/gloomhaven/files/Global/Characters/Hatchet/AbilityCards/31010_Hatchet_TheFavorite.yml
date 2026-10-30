@@ -49,17 +49,16 @@ Layout:
         - Row: "<size=0%>"
         - Active:
             Ability: TActive
-            ListLayout: "$JOTL_010_T$"
-            Layout: "$JOTL_010_T$"
+            ListLayout: "$FHS_JOTL_010_T$"
+            Layout: "$FHS_JOTL_010_T$"
             Icon: Positive_AttackPlus
     Bottom:
-        - Row: "<b><size=130%><sprite name=Wound>"
-        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=150%><sprite name=Wound>"
         - Row: "<size=50%> "
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:

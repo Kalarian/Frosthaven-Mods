@@ -53,27 +53,32 @@ Layout:
             - ColumnWidths: "15,70,15"
             - Column:
             - Column:
-                - Row: "<b><size=130%><sprite name=Poison>"
-                - Row: "<sprite name=Range> *TPoison.Range*"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Poison>"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Range> *TPoison.Range*</link>"
+                    - Column:
             - Column:
                 - Infuse: Dark
         - Row: "<size=50%> "
-        - Row: "$JOTL_153_T_1$"
+        - Row: "$FHS_JOTL_153_T_1$"
         - Row: "<size=20%> "
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> 3"
+            - Column: "<size=150%><sprite name=Attack> 3"
             - Column:
-                - AddedEffect: "<sprite name=Range>4"
+                - Row: "<link=fhpill><sprite name=Range> 4</link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$With_YouControllingActions$ $JOTL_153_T_2$"
+        - Row: "$FHS_With_YouControllingActions$ $FHS_JOTL_153_T_2$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range*</link>"
             - Column:

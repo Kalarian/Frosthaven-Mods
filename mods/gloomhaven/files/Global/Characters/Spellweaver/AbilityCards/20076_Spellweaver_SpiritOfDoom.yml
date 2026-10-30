@@ -44,27 +44,31 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Curse>"
+            - Column: "<size=150%><sprite name=Curse>"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TCurse.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *TCurse.Range*</link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCDark
-            Text: "$Kill_OneNormal$ $instead$, <sprite name=XP1>."
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "$FHS_Kill_OneNormal$ $FHS_instead$, <sprite name=XP1>."
     Bottom:
         - Row:
             - ColumnWidths: "20,60,20"
             - Column:
             - Column:
-                - Row: "<b><size=130%><sprite name=Heal> X"
-                - Row: "$Affect_AnyOneAlly$"
+                - Row: "<size=150%><sprite name=Heal> X"
+                - Row: "$FHS_Affect_AnyOneAlly$"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$GH_076_B_1$"
+        - Row: "$FHS_GH_076_B_1$"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCLight
-            Text: "$GH_076_B_2$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "$FHS_GH_076_B_2$"

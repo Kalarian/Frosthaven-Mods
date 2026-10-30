@@ -60,18 +60,20 @@ Data:
                 Filter: Enemy
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=20%> "
-        - Row: "$GH_097_T_1$"
+        - Row: "$FHS_GH_097_T_1$"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCDark
-            Text: "$GH_097_T_2$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "$FHS_GH_097_T_2$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
-        - Row: "$GH_097_B_1$"
+        - Row: "$FHS_GH_097_B_1$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> *EnemyWillDoThis* <size=100%>"
+        - Row: "<size=150%><sprite name=Move> *EnemyWillDoThis* <size=100%>"
         - Row: "<size=20%> "
-        - Row: "$GH_097_B_2$"
+        - Row: "$FHS_GH_097_B_2$"

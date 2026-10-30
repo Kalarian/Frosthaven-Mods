@@ -55,24 +55,31 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+                - Row: "<link=fhpill><sprite name=Immobilize></link>"
             - Column:
         - Divider:
         - Active:
             Ability: TDamagedAfterEachAttackActive
-            ListLayout: "$JOTL_240_T_1$ $JOTL_240_T_3$"
-            Layout: "$JOTL_240_T_1$"
+            ListLayout: "$FHS_JOTL_240_T_1$ $FHS_JOTL_240_T_3$"
+            Layout: "$FHS_JOTL_240_T_1$"
             Icon: Positive_Wound
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCFire
-            Text: "$JOTL_240_T_2$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFire
+                    Text: "$FHS_JOTL_240_T_2$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Immobilize>"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Immobilize>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:

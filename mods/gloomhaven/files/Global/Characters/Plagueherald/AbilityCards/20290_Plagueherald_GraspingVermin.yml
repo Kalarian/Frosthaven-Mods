@@ -39,17 +39,21 @@ Layout:
         - Row:
             - ColumnWidths: "65,30"
             - Column:
-                - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
-                - Row: "<sprite name=Range> *TAttack.Range*"
-                - Row: "<sprite name=Immobilize>"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Attack> *TAttack*"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Immobilize></link>"
+                    - Column:
             - Column:
                 - Row: "£Area£"
     Bottom:
         - Active:
             Ability: BShield
             Icon: Positive_Shield
-            ListLayout: "<sprite name=Shield> *BShield*. $GH_290_B$"
+            ListLayout: "<sprite name=Shield> *BShield*. $FHS_GH_290_B$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield*"
+                - Row: "<size=150%><sprite name=Shield> *BShield*"
                 - Row: "<size=50%> "
-                - Row: "$GH_290_B$"
+                - Row: "$FHS_GH_290_B$"

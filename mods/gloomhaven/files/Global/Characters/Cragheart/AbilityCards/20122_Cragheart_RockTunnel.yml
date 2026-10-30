@@ -25,15 +25,15 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "$GH_122_T$"
+        - Row: "$FHS_GH_122_T$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Divider:
-        - Row: "<b><size=130%><sprite name=Immobilize>"
-        - Row: "$Target_AllEnemiesMovedThrough$"
+        - Row: "<size=150%><sprite name=Immobilize>"
+        - Row: "$FHS_Target_AllEnemiesMovedThrough$"

@@ -31,9 +31,9 @@ Layout:
         - Active:
             Ability: TActive
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_298_T$"
-            Layout: "$GH_298_T$"
-        - Row: "<size=50%> "
+            ListLayout: "$FHS_GH_298_T$"
+            Layout: "$FHS_GH_298_T$"
+        - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
-        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"

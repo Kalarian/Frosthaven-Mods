@@ -50,23 +50,28 @@ Layout:
             - ColumnWidths: "15,70,15"
             - Column:
             - Column:
-                - Row: "<b><size=130%><sprite name=Poison> @TPoison@"
-                - Row: "<sprite name=Range> *TPoison.Range*"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Poison> @TPoison@"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Range> *TPoison.Range*</link>"
+                    - Column:
             - Column:
                 - Infuse: Dark
         - Row: "<size=50%> "
         - Active:
             Ability: TActive
-            ListLayout: "$JOTL_164_T$"
-            Layout: "$JOTL_164_T$"
+            ListLayout: "$FHS_JOTL_164_T$"
+            Layout: "$FHS_JOTL_164_T$"
             Icon: Positive_Heal
-        - Row: "<size=20%> "
+        - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* @BMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Heal> *BHeal*"
-        - Row: "$Target_SelfAndAllAlliesWithin$ <nobr><sprite name=Range> *BHeal.Range*</nobr>"
+        - Row: "<size=150%><sprite name=Heal> *BHeal*"
+        - Row: "$FHS_Target_SelfAndAllAlliesWithin$ <nobr><sprite name=Range> *BHeal.Range*</nobr>"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "20,30,30"

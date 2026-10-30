@@ -40,18 +40,18 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
             - Column:
-                - Row: "<sprite name=Range>*THeal.Range* @THeal.Range@"
-                - Row: "<sprite name=Target>*THeal.Target* @THeal.Target@"
+                - Row: "<link=fhpill><sprite name=Target> *THeal.Target* @THeal.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range* @THeal.Range@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$JOTL_152_T$"
+        - Row: "$FHS_JOTL_152_T$"
     Bottom:
-        - Row: "$JOTL_152_B$"
+        - Row: "$FHS_JOTL_152_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> 1"
+        - Row: "<size=150%><sprite name=Move> 1"
         - Row: "<size=20%> "
-        - Row: "$With_YouControllingActions$"
+        - Row: "$FHS_With_YouControllingActions$"

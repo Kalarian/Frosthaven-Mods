@@ -40,8 +40,8 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            ListLayout: "$GH_219_T$"
-            Layout: "$GH_219_T$"
+            ListLayout: "$FHS_GH_219_T$"
+            Layout: "$FHS_GH_219_T$"
             Icon: Refresh
     Bottom:
-        - Row: "$GH_219_B$"
+        - Row: "$FHS_GH_219_B$"

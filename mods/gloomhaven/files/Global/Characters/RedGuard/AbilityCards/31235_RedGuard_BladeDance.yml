@@ -71,38 +71,44 @@ Layout:
     Top:
         - Row: "<size=20%> "
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack1.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack1.Range*</link>"
             - Column:
-        - Consume:
-            Name: TCFire
-            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Pull> 2</nobr>, <sprite name=XP1>"
-        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFire
+                    Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Pull> 2</nobr>, <sprite name=XP1>"
+        - Row: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
         - Divider:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack2.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack2.Range*</link>"
             - Column:
-        - Consume:
-            Name: TCLight
-            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Pull> 2</nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCLight
+                    Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Pull> 2</nobr>, <sprite name=XP1>"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Row: "<size=50%> "
-        - Row: "$JOTL_235_B_1$"
+        - Row: "$FHS_JOTL_235_B_1$"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCLight
-            Text: "$JOTL_235_B_2$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "$FHS_JOTL_235_B_2$"

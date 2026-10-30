@@ -37,13 +37,13 @@ Layout:
         - Active:
             Ability: TPlaySong
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_360_T$"
-            Layout: "$GH_360_T$"
+            ListLayout: "$FHS_GH_360_T$"
+            Layout: "$FHS_GH_360_T$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range*</link>"
             - Column:

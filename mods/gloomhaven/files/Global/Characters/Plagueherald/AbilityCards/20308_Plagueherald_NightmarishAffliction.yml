@@ -33,22 +33,21 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
-                - Row: "<sprite name=Target>*TAttack.Target* <size=100%><voffset=1>@TAttack.Target@"
-                - AddedEffect: "<size=130%><sprite name=Poison></size>, <size=130%><sprite name=Curse></size>"
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <voffset=1>@TAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Poison>, <sprite name=Curse></link>"
             - Column:
         - Row: "<size=20%> "
         - Infuse: Dark
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Immobilize>"
+            - Column: "<size=150%><sprite name=Immobilize>"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BImmobilize.Range*</mark>"
-                - Row: "<sprite name=Target>*BImmobilize.Target* <size=100%><voffset=1>@BImmobilize.Target@"
+                - Row: "<link=fhpill><sprite name=Target> *BImmobilize.Target* <voffset=1>@BImmobilize.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *BImmobilize.Range*</link>"
             - Column:

@@ -36,18 +36,17 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*THeal.Range*</mark>"
-                - AddedEffect: "<size=130%><sprite name=Poison></size>"
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*, <sprite name=Poison></link>"
             - Column:
         - Row: "<size=50%> "
         - Infuse: Dark
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=50%> "
-        - Row: "$JOTL_154_B$"
+        - Row: "$FHS_JOTL_154_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
+        - Row: "<size=150%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"

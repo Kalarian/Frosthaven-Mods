@@ -40,18 +40,18 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
             - Column:
     Bottom:
         - Active:
             Ability: BDoom
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_380_B$"
+            ListLayout: "$FHS_GH_380_B$"
             Layout:
-                - Row: "$Doom_MarkText$"
-                - Row: "$GH_380_B$"
-                - Row: "<size=70%>$Doom_DiscardReminderText$"
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH_380_B$"
+                - Row: "<size=70%>$FHS_Doom_DiscardReminderText$"

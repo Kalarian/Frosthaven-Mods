@@ -34,15 +34,15 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            ListLayout: "$JOTL_178_T$"
-            Layout: "$JOTL_178_T$"
+            ListLayout: "$FHS_JOTL_178_T$"
+            Layout: "$FHS_JOTL_178_T$"
             Icon: Positive_Heal
-        - Row: "<size=20%> "
+        - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* @BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* @BMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Bless>"
-        - Row: "$Target_SelfAndAllAdjacentAllies$"
+        - Row: "<size=150%><sprite name=Bless>"
+        - Row: "$FHS_Target_SelfAndAllAdjacentAllies$"
         - Row: "<size=50%> "
         - Infuse: Ice

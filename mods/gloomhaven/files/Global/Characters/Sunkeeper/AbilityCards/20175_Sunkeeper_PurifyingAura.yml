@@ -37,15 +37,17 @@ Layout:
     Top:
         - Active:
             Ability: TRetaliate
-            ListLayout: "$GH_175_T$"
-            Layout: "$GH_175_T$"
+            ListLayout: "$FHS_GH_175_T$"
+            Layout: "$FHS_GH_175_T$"
             Icon: Positive_Retaliate
-        - Row: "<size=50%> "
+        - Row: "<size=100%> "
         - XPTracker: TRetaliate
     Bottom:
-        - Row: "<b><size=130%><sprite name=Strengthen> <size=100%><voffset=1>@BStrengthen@"
-        - Row: "$Affect_AllAdjacentAllies$"
+        - Row: "<size=150%><sprite name=Strengthen> <size=100%><voffset=1>@BStrengthen@"
+        - Row: "$FHS_Affect_AllAdjacentAllies$"
         - Row: "<size=50%> "
-        - Consume:
-            Name: BCLight
-            Text: "$Affect_AllAlliesWithin$ <nobr><sprite name=Range> 2</nobr> $instead$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "$FHS_Affect_AllAlliesWithin$ <nobr><sprite name=Range> 2</nobr> $FHS_instead$"

@@ -33,18 +33,18 @@ Data:
                 AnimOverload: MindControl
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=20%> "
-        - Row: "$GH_146_T$"
+        - Row: "$FHS_GH_146_T$"
     Bottom:
-        - Row: "$GH_146_B_1$"
+        - Row: "$FHS_GH_146_B_1$"
         - Row: "<size=20%> "
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> 2"
+            - Column: "<size=150%><sprite name=Attack> 2"
             - Column:
-                - AddedEffect: "<sprite name=Range>+0"
+                - Row: "<link=fhpill><sprite name=Range>+0</link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$GH_146_B_2$"
+        - Row: "$FHS_GH_146_B_2$"

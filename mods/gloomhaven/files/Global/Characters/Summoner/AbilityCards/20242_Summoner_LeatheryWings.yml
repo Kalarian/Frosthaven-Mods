@@ -29,9 +29,9 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $GiantBat$
+                    SummonName: $FHS_GiantBat$
                     SpecialText:
                         - Row: "<nobr><sprite name=Flying></nobr>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Strengthen> <size=100%><voffset=1>@BStrengthen@"
-        - Row: "$Affect_AllAdjacentAllies$"
+        - Row: "<size=150%><sprite name=Strengthen> <size=100%><voffset=1>@BStrengthen@"
+        - Row: "$FHS_Affect_AllAdjacentAllies$"

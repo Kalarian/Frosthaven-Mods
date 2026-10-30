@@ -29,16 +29,10 @@ Data:
                 AnimOverload: TurnInvisible
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=150%><sprite name=Attack> *TAttack*"
         - Row: "<size=20%> "
-        - Row: "$GH_286_T$"
+        - Row: "$FHS_GH_286_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Divider:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Invisible>"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><sprite name=Invisible></link>"

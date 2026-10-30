@@ -39,15 +39,17 @@ Layout:
         - Active:
             Ability: TInfuse
             Icon: Positive_Infusion
-            ListLayout: "$GH_277_T$"
-            Layout: "$GH_277_T$"
-        - Row: "<size=50%> "
+            ListLayout: "$FHS_GH_277_T$"
+            Layout: "$FHS_GH_277_T$"
+        - Row: "<size=100%> "
         - XPTracker: TInfuse
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *BAttack*"
+        - Row: "<size=150%><sprite name=Attack> *BAttack*"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCLight
-            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=CreateDark>, <sprite name=XP1></nobr>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=CreateDark>, <sprite name=XP1></nobr>"

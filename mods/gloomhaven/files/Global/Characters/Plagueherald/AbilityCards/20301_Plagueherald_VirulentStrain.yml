@@ -45,7 +45,7 @@ Data:
                         AnimOverload: None
 Layout:
     Top:
-        - Row: "$GH_301_T$"
+        - Row: "$FHS_GH_301_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Poison>"
-        - Row: "$Target_AllEnemiesAdjacentToEnemiesWith$ <nobr><sprite name=Poison></nobr>"
+        - Row: "<size=150%><sprite name=Poison>"
+        - Row: "$FHS_Target_AllEnemiesAdjacentToEnemiesWith$ <nobr><sprite name=Poison></nobr>"

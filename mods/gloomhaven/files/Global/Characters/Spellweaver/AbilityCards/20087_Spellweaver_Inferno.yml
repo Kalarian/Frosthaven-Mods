@@ -44,20 +44,27 @@ Data:
                 ActiveBonusDuration: Round
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
-        - Row: "$GH_087_T_1$"
+        - Row: "<size=150%><sprite name=Attack> *TAttack*"
+        - Row: "$FHS_GH_087_T_1$"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCFire
-            Text: "+1 <sprite name=Attack>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFire
+                    Text: "+1 <sprite name=Attack>, <sprite name=XP1>"
         - Row: "<size=20%> "
-        - Row: "$GH_087_T_2$"
+        - Row: "$FHS_GH_087_T_2$"
     Bottom:
         - Active:
             Ability: BRetaliate
             Icon: Positive_Retaliate
-            ListLayout: "<sprite name=Retaliate> *BRetaliate*, $Retaliate$ <sprite name=Range> *BRetaliate.RetaliateRange* $Self$"
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*, $FHS_Retaliate$ <sprite name=Range> *BRetaliate.RetaliateRange* $FHS_Self$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
-                - Row: "$Retaliate$ <sprite name=Range> *BRetaliate.RetaliateRange*"
-                - Row: "$Affect_SelfAndAllAllies$"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Range> *BRetaliate.RetaliateRange*</link>"
+                    - Column:
+                - Row: "$FHS_Affect_SelfAndAllAllies$"

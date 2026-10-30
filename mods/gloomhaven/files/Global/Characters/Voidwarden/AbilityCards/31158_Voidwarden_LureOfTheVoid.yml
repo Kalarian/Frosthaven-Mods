@@ -67,29 +67,33 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Disarm>"
+            - Column: "<size=150%><sprite name=Disarm>"
             - Column:
-                - Row: "<sprite name=Range>*TDisarm.Range* @TDisarm.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *TDisarm.Range* @TDisarm.Range@</link>"
             - Column:
         - Row: "<size=50%> "
-        - Row: "$JOTL_158_T$"
+        - Row: "$FHS_JOTL_158_T$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> 1"
+        - Row: "<size=150%><sprite name=Move> 1"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCDark
-            Text: "<nobr>+2 <sprite name=Move></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "<nobr>+2 <sprite name=Move></nobr>, <sprite name=XP1>"
         - Row: "<size=20%> "
-        - Row: "$With_YouControllingActions$"
+        - Row: "$FHS_With_YouControllingActions$"
     Bottom:
-        - Row: "$JOTL_158_B_1$"
+        - Row: "$FHS_JOTL_158_B_1$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack*"
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack*"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCDark
-            Text: "<nobr>+2 <sprite name=Attack></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "<nobr>+2 <sprite name=Attack></nobr>, <sprite name=XP1>"
         - Row: "<size=20%> "
-        - Row: "$JOTL_158_B_2$"
+        - Row: "$FHS_JOTL_158_B_2$"

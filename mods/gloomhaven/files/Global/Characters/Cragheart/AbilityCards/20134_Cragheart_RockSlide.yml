@@ -31,9 +31,9 @@ Data:
                 MoveRestrictionType: StraightLineOnly
 Layout:
     Top:
-        - Row: "$GH_134_T_1$"
+        - Row: "$FHS_GH_134_T_1$"
         - Row: "<size=50%> "
-        - Row: "$GH_134_T_2$"
+        - Row: "$FHS_GH_134_T_2$"
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -42,6 +42,6 @@ Layout:
                 - Infuse: Earth
             - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=20%> "
-        - Row: "$Move_StraightLine$"
+        - Row: "$FHS_Move_StraightLine$"

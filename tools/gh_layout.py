@@ -401,6 +401,7 @@ def _clean(t):
 # qualifiers, range, pierce, push or pull, then the rest (conditions, elements, XP) in the card's own order.
 # The first four are set apart by a space ("◎2 ⟨⟩3 ⇣2"), the rest by a comma ("◎all ⟨⟩2, ★").
 PILL_ORDER = ("Target", "Range", "Pierce", "Push", "Pull", "Jump")
+VALUE_REF = re.compile(r"\*[A-Za-z]\w*(\.\w+)?\*")   # an ability's value in text: "*BCDarkCurse.Range*"
 
 
 def _pill_rank(m):
@@ -441,6 +442,32 @@ def _pill_block(main, mods, self_box):
                                  Node("Column", children=cols), Node("Column")])
 
 
+# a text row under a value that Frosthaven writes as pill entries ("Target all enemies within <Range> 3" is "◎ all ⟨⟩ 3")
+_TEXT_TARGETS = {"Target_AllAdjacentEnemies": TARGET_ALL_ADJACENT, "Target_OneAdjacentEnemy": None,
+                 "Target_AllEnemiesWithin": "<sprite name=Target> all",
+                 "Target_AllAlliesWithin": "<sprite name=Target> all <sprite name=Allies>",
+                 "Retaliate": None,
+                 # a jump under a move is its pill's icon (Black Lance: Move 4 [jump])
+                 "Jump": "<sprite name=Jump>", "FHS_Jump": "<sprite name=Jump>"}
+
+
+def _text_modifiers(t):
+    """The pill entries a text row under a value stands for, or None when it is a sentence of its own."""
+    # the port's own keys and the word "Range" read the same ("$FHS_Target_AllEnemiesWithin$ $FHS_Range$ 3": Flurry of Axes)
+    t = re.sub(r"</?nobr>", "", t)
+    t = re.sub(r"\$(?:FHS_)?Range\$", "<sprite name=Range>", t)
+    t = re.sub(r"\$FHS_(\w+)\$", r"$\1$", t)
+    m = re.fullmatch(r"\$(\w+)\$\s*(?:<nobr>)?\s*(<sprite name=Range>.*?)?(?:</nobr>)?\s*", t)
+    if not m or m.group(1) not in _TEXT_TARGETS:
+        return None
+    # "Retaliate" and "... within" stand for a pill only with their range
+    if (m.group(1) == "Retaliate" or m.group(1).endswith("Within")) and not m.group(2):
+        return None
+    if m.group(1).endswith("Adjacent") and m.group(2):
+        return None
+    return [x for x in (_TEXT_TARGETS[m.group(1)], m.group(2) and _clean(m.group(2))) if x]
+
+
 def _style_items(items):
     out, i = [], 0
     while i < len(items):
@@ -457,14 +484,8 @@ def _style_items(items):
                 j += 1
             self_box = any(m in ("$Self$", FH_SELF) for m in mods)
             mods = [m for m in mods if m not in ("$Self$", FH_SELF)]
-            while j < len(items) and is_row(items[j], lambda t: t.startswith("$Target_")):
-                t = items[j].text()
-                if t == "$Target_AllAdjacentEnemies$":
-                    mods.insert(0, TARGET_ALL_ADJACENT)
-                elif t == "$Target_OneAdjacentEnemy$":
-                    pass
-                else:
-                    break
+            while j < len(items) and is_row(items[j]) and _text_modifiers(items[j].text()) is not None:
+                mods += _text_modifiers(items[j].text())
                 j += 1
             out.append(_pill_block(main, mods, self_box))
             i = j
@@ -474,10 +495,18 @@ def _style_items(items):
             for c in n.children:
                 if c.key == "Text" and c.children:
                     parts = [r.text().strip() for r in c.children if is_row(r) and not is_spacer(r)]
-                    if parts and len(parts) == len([r for r in c.children if not is_spacer(r)]):
+                    # an area picture ("£Area£") is a row of its own, never text; a value of the consume's own ability
+                    # ("*BCDarkCurse.Range*") is found only from its row (Suggestion: "Unable to find ability", 2026-10-30)
+                    if parts and len(parts) == len([r for r in c.children if not is_spacer(r)]) and not any("£" in x or VALUE_REF.search(x) for x in parts):
                         c.children = []
                         c.value = '"' + " ".join(parts) + '"'
-            out.append(Node("Conditional", children=[Node("Layout", dash=False, children=[n])]))
+            # only a reward of text goes in the dashed box: the box's layout looks up every row as text, and an area,
+            # an infusion or an ability in it stops the game at load ("an error within one of the Rule Libraries":
+            # Shield of the Desert, Burn Away the Dark, 2026-10-30)
+            text = next((c for c in n.children if c.key == "Text"), None)
+            out.append(Node("Conditional", children=[Node("Layout", dash=False, children=[n])])
+                       if text is not None and not text.children and "£" not in (text.value or "")
+                       and not VALUE_REF.search(text.value or "") else n)
             i += 1
             continue
         if n.children and n.key not in ("Consume",):
@@ -494,8 +523,47 @@ def _restyle_values(nodes):
     for n in nodes:
         if n.value:
             n.value = re.sub(r"<b>\s*<size=130%>", FH_MAIN, n.value)
+            # "STUN <Stun>": the icon alone (rule R3)
+            n.value = re.sub(r"\$(\w+?)Short\$\s*(<sprite name=\1>)", r"\2", n.value)
             n.value = _KEY.sub(lambda m: m.group(0) if m.group(1).startswith(("FH", "ABILITY_CARD")) else f"$FHS_{m.group(1)}$", n.value)
         _restyle_values(n.children)
+
+
+def _flat(items):
+    return [m for n in items for m in [n] + _flat(n.children)]
+
+
+def _drop_durations(items):
+    """Gloomhaven drew a round or persistent icon beside the ability; Frosthaven's badge bar at the bottom right already
+    shows it, so the card had it twice (Mech Suit, Winged Congregation). Frosthaven keeps one only inside a consume box
+    (Shattering Blow), so those stay. A row left with only empty columns goes too."""
+    out = []
+    for n in items:
+        if n.key == "Duration":
+            continue
+        if n.children and n.key not in ("Consume", "Conditional"):
+            before = len(_flat(n.children))
+            n.children = _drop_durations(n.children)
+            if n.key == "Row" and len(_flat(n.children)) < before and all(c.key == "ColumnWidths" or (c.key == "Column" and not c.children and not c.text().strip())
+                                      for c in n.children):
+                continue
+        out.append(n)
+    return out
+
+
+def _tracker_space(items):
+    """A use tracker right under an active bonus's text: the bonus keeps the height the generator gave it in
+    Gloomhaven's font, and in Frosthaven's its last line ran under the tracker (Shrapnel, Heart Seeker, Flame Shroud).
+    The spacer before the tracker is a full line."""
+    out = []
+    for n in items:
+        if n.key == "XPTracker" and any(o.key == "Active" for o in out[-2:]):
+            if out and out[-1].key == "Row" and is_spacer(out[-1]):
+                out[-1].set_text("<size=100%> ")
+            else:
+                out.append(Node("Row", '"<size=100%> "'))
+        out.append(n)
+    return out
 
 
 def fh_style(s, warn=print):
@@ -506,13 +574,17 @@ def fh_style(s, warn=print):
         at = lines.index("Layout:")
     except ValueError:
         return s
-    body = [(len(ln) - len(ln.lstrip(" ")), ln) for ln in lines[at + 1:] if ln.strip() and not ln.lstrip().startswith("#")]
+    # a hand-written layout (gh_port.CARD_FIXES) may open its main line the other way round, and a condition's main line
+    # may start inside its <nobr>
+    body = [(len(ln) - len(ln.lstrip(" ")), ln.replace("<size=130%><b>", MAIN).replace("<nobr>" + MAIN, MAIN + "<nobr>"))
+            for ln in lines[at + 1:] if ln.strip() and not ln.lstrip().startswith("#")]
     try:
         halves = parse(body)
     except Unsupported as e:
         warn(f"Frosthaven style not applied ({e})")
         return s
     for half in halves:
+        half.children = _tracker_space(_drop_durations(half.children))
         half.children = _style_items(half.children)
     _restyle_values(halves)
     return eol.join(lines[:at + 1]) + eol + "".join(emit(halves, 1, eol))

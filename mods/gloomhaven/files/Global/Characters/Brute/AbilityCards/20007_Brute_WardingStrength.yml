@@ -47,5 +47,5 @@ Layout:
             ListLayout: "$FHS_GH_007_B$"
             Layout: "$FHS_GH_007_B$"
             Icon: Positive_Shield
-        - Row: "<size=50%> "
+        - Row: "<size=100%> "
         - XPTracker: BShield

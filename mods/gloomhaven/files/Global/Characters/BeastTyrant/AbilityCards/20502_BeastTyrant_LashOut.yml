@@ -56,12 +56,22 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "$GH_Command$"
-        - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "$FHS_GH_Command$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
     Bottom:
-        - Row: "$GH_Command$"
-        - Row: "<b><size=130%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
+        - Row: "$FHS_GH_Command$"
+        - Row: "<size=150%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Push> *BAllyPush* <size=100%><voffset=1>@BAllyPush@"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Push> *BAllyPush* <size=100%><voffset=1>@BAllyPush@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:

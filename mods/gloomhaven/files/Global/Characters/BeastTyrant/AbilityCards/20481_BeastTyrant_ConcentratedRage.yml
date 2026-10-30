@@ -41,19 +41,19 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
-                - AddedEffect: "<size=130%><sprite name=Disarm></size>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+                - Row: "<link=fhpill><sprite name=Disarm></link>"
             - Column:
     Bottom:
         - Active:
             Ability: "BActive"
             Icon: Positive_AttackPlus_Ally
-            ListLayout: "$GH_481_B_1$\n\n$GH_481_B_2$"
+            ListLayout: "$FHS_GH_481_B_1$\n\n$FHS_GH_481_B_2$"
             Layout:
-                - Row: "$GH_481_B_1$"
+                - Row: "$FHS_GH_481_B_1$"
                 - Row: "<size=50%> "
-                - Row: "$GH_481_B_2$"
+                - Row: "$FHS_GH_481_B_2$"

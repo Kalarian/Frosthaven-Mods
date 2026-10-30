@@ -34,10 +34,10 @@ Data:
         XP: 2
 Layout:
     Top:
-        - Row: "$GH_157_T$"
+        - Row: "$FHS_GH_157_T$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack*"
+        - Row: "<size=150%><sprite name=Attack> *TAllyAttack*"
         - Row: "<size=20%> "
-        - Row: "$GH_172_T$"
+        - Row: "$FHS_GH_172_T$"
     Bottom:
-        - Row: "$GH_172_B$"
+        - Row: "$FHS_GH_172_B$"

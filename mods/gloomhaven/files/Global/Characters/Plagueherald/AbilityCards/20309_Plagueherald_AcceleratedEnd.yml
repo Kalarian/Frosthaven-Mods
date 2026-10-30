@@ -38,17 +38,19 @@ Data:
                 AnimOverload: RadialNegativeTarget
 Layout:
     Top:
-        - Row: "$GH_309_T$"
+        - Row: "$FHS_GH_309_T$"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCDark
-            Text: "$GH_124_B_3$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "$FHS_GH_124_B_3$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Poison>"
+            - Column: "<size=150%><sprite name=Poison>"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BPoison.Range*</mark>"
-                - Row: "<sprite name=Target>*BPoison.Target* <size=100%><voffset=1>@BPoison.Target@"
+                - Row: "<link=fhpill><sprite name=Target> *BPoison.Target* <voffset=1>@BPoison.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *BPoison.Range*</link>"
             - Column:

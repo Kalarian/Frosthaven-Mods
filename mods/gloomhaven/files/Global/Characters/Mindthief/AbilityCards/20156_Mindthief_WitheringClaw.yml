@@ -31,16 +31,15 @@ Layout:
         - Augment:
             AugmentIcon: Positive_AttackPlus
             ParentAbility: TAttack
-            ActiveBonusLayout: "$Augment_OnYourMeleeAttacks$ $Add$ <nobr><sprite name=Muddle></nobr>, <nobr><sprite name=Poison></nobr>"
+            ActiveBonusLayout: "$FHS_Augment_OnYourMeleeAttacks$ $FHS_Add$ <nobr><sprite name=Muddle></nobr>, <nobr><sprite name=Poison></nobr>"
             AugmentAbilityLayout:
-                - Row: "$Add$ <nobr><sprite name=Muddle></nobr>, <nobr><sprite name=Poison></nobr>"
+                - Row: "$FHS_Add$ <nobr><sprite name=Muddle></nobr>, <nobr><sprite name=Poison></nobr>"
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:
-                - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
                 - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Immobilize>"
-        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=150%><sprite name=Immobilize>"
         - Row: "<size=50%> "
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"

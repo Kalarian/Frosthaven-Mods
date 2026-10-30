@@ -33,18 +33,18 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column: "<size=150%><sprite name=Attack> *TAttack*"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
-                - AddedEffect: "<size=130%><sprite name=Stun></size>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+                - Row: "<link=fhpill><sprite name=Stun></link>"
             - Column:
         - Row: "<size=50%> "
         - Infuse: Earth
     Bottom:
-        - Row: "$GH_501_B$"
+        - Row: "$FHS_GH_501_B$"
         - Row: "<size=50%> "
-        - Row: "<b><size=130%><sprite name=Move> -1"
+        - Row: "<size=150%><sprite name=Move> -1"
         - Row: "<size=50%> "
-        - Row: "$With_YouControllingActions$"
+        - Row: "$FHS_With_YouControllingActions$"

@@ -43,16 +43,16 @@ Data:
                     CircleEnhancements: 1
 Layout:
     Top:
-        - Row: "$GH_140_T_1$"
+        - Row: "$FHS_GH_140_T_1$"
         - Row: "<size=50%> "
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+                - Row: "<link=fhpill><sprite name=Immobilize></link>"
             - Column:
-        - Row: "$GH_140_T_2$"
+        - Row: "$FHS_GH_140_T_2$"
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "30, 20, 20"
@@ -62,9 +62,9 @@ Layout:
             - Column:
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:

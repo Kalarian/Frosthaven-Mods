@@ -36,12 +36,12 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $BlackUnicorn$
+                    SummonName: $FHS_BlackUnicorn$
                     SpecialText:
                         - Row: "<nobr><sprite name=Pierce> 3</nobr>"
     Bottom:
-        - Row: "$GH_260_B$"
+        - Row: "$FHS_GH_260_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> +0"
+        - Row: "<size=150%><sprite name=Attack> +0"
         - Row: "<size=20%> "
-        - Row: "$With_YouControllingActions$"
+        - Row: "$FHS_With_YouControllingActions$"

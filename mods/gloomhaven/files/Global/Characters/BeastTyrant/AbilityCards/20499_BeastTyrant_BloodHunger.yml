@@ -52,13 +52,12 @@ Layout:
         - Active:
             Ability: "TActive"
             Icon: Positive_Heal
-            ListLayout: "$GH_499_T$"
-            Layout: "$GH_499_T$"
-        - Row: "<size=50%> "
+            ListLayout: "$FHS_GH_499_T$"
+            Layout: "$FHS_GH_499_T$"
+        - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
-        - Row: "$GH_Command$"
-        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
+        - Row: "$FHS_GH_Command$"
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
         - Row: "<size=50%> "
-        - Row: "<size=130%><b><sprite name=Heal> *BAllyHeal* <size=100%><voffset=1>@BAllyHeal@"
-        - Row: "$Self$"
+        - Row: "<link=fhself><size=125%><sprite name=Heal> *BAllyHeal* <size=100%><voffset=1>@BAllyHeal@</link>"

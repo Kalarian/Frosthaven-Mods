@@ -33,8 +33,13 @@ Layout:
     Top:
         - ColumnWidths: "65,30"
         - Column:
-            - Row: "<nobr><b><size=130%><sprite name=Disarm></nobr>"
-            - Row: "<sprite name=Range> *TDisarm.Range*"
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><nobr><sprite name=Disarm></nobr>"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *TDisarm.Range*</link>"
+                - Column:
         - Column:
             - Row: "<size=200%> "
             - Row: "£Area£"
@@ -44,7 +49,7 @@ Layout:
         - Column:
             - Row: "<sprite name=Range> *BControl.Range*"
             - Row: "<size=20%> "
-            - Row: "$GH_354_B$"
+            - Row: "$FHS_GH_354_B$"
         - Column:
             - Row: "£Area£"
             - Row: "<size=50%> "

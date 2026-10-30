@@ -53,32 +53,27 @@ Data:
                         AllowContinueForNullAbility: True
 Layout:
     Top:
-        - Row: "$JOTL_173_T$"
+        - Row: "$FHS_JOTL_173_T$"
         - Row: "<size=20%> "
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> 6"
+            - Column: "<size=150%><sprite name=Attack> 6"
             - Column:
-                - AddedEffect: "<sprite name=Range>3"
+                - Row: "<link=fhpill><sprite name=Range> 3</link>"
             - Column:
     Bottom:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Curse>"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
-        - Consume:
-            Name: BCDark
-            Text: "$JOTL_173_B$"
+        - Row: "<link=fhself><size=125%><sprite name=Curse></link>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "$FHS_JOTL_173_B$"
         - Divider:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Curse> @BCurse2@"
+            - Column: "<size=150%><sprite name=Curse> @BCurse2@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BCurse2.Range*</mark>"
-                - Row: "<mark=#80919922><size=100%><sprite name=Target>*BCurse2.Target*</mark>"
+                - Row: "<link=fhpill><sprite name=Target> *BCurse2.Target* <sprite name=Range> *BCurse2.Range*</link>"
             - Column:

@@ -38,13 +38,15 @@ Layout:
     Top:
         - ColumnWidths: "70,25"
         - Column:
-            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Row: "<size=0%> "
-            - Consume:
-                Name: TCEarth
-                Text: "+1 <sprite name=Attack>, <sprite name=XP1>"
+            - Conditional:
+                Layout:
+                    - Consume:
+                        Name: TCEarth
+                        Text: "+1 <sprite name=Attack>, <sprite name=XP1>"
         - Column: "£Area£"
     Bottom:
-        - Row: "$GH_118_B$"
+        - Row: "$FHS_GH_118_B$"
         - Row: "<size=20%> "
         - Infuse: Earth

@@ -165,6 +165,25 @@ def check_pack(pack):
         if not isinstance(d, dict) or d.get("Parser") != "AbilityCard":
             problems.append(f"{rel}: not an AbilityCard file")
             continue
+        # an area picture as a text value: the card generator can't localise it and the game stops at load with "an error
+        # within one of the Rule Libraries" (Shield of the Desert's consume, 2026-10-30); an area is a Row of its own
+        for m in re.finditer(r'^\s*(Text|Layout|ListLayout): "[^"]*£', f.read_text(encoding="utf-8-sig"), re.M):
+            problems.append(f"{rel}: an area (£...£) inside a {m.group(1)} text: the card can't be drawn (make it a Row)")
+        # the dashed consume box (Conditional) looks up each of its rows as text: only a text reward may go in it
+        def boxed(node):
+            if isinstance(node, dict):
+                for it in (node.get("Conditional") or {}).get("Layout") or [] if isinstance(node.get("Conditional"), dict) else []:
+                    if isinstance(it, dict) and isinstance(it.get("Consume"), dict) and not isinstance(it["Consume"].get("Text"), str):
+                        problems.append(f"{rel}: a consume box (Conditional) around a reward that isn't text (the game stops at load)")
+                    # a value of an ability ("*BCDarkCurse.Range*") isn't found from the box (Suggestion, 2026-10-30)
+                    elif isinstance(it, dict) and isinstance(it.get("Consume"), dict) and re.search(r"\*[A-Za-z]\w*(\.\w+)?\*", it["Consume"]["Text"]):
+                        problems.append(f"{rel}: a consume box (Conditional) whose text names an ability value (the game stops at load)")
+                for v in node.values():
+                    boxed(v)
+            elif isinstance(node, list):
+                for v in node:
+                    boxed(v)
+        boxed(d.get("Layout"))
         for half in ("Top", "Bottom"):
             h = (d.get("Data") or {}).get(half)
             if not isinstance(h, dict):

@@ -39,7 +39,7 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $ViciousJackal$
+                    SummonName: $FHS_ViciousJackal$
                     SpecialText:
                         - Row: "<nobr><sprite name=Retaliate> 1</nobr>"
                         - Row: "<nobr><sprite name=Wound></nobr>"
@@ -47,8 +47,8 @@ Layout:
         - Active:
             Ability: BDoom
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_389_B$"
+            ListLayout: "$FHS_GH_389_B$"
             Layout:
-                - Row: "$Doom_MarkText$"
-                - Row: "$GH_389_B$"
-                - Row: "<size=70%>$Doom_DiscardReminderText$"
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH_389_B$"
+                - Row: "<size=70%>$FHS_Doom_DiscardReminderText$"

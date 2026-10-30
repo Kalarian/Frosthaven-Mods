@@ -35,12 +35,12 @@ Data:
 
 Layout:
     Top:
-        - Row: "$GH_053_T$"
+        - Row: "$FHS_GH_053_T$"
     Bottom:
         - Active:
             Ability: BActive
-            ListLayout: "$GH_053_B$"
-            Layout: "$GH_053_B$"
+            ListLayout: "$FHS_GH_053_B$"
+            Layout: "$FHS_GH_053_B$"
             Icon: Recover
-        - Row: "<size=50%> "
+        - Row: "<size=100%> "
         - XPTracker: BActive

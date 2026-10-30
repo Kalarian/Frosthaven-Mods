@@ -35,14 +35,14 @@ Layout:
         - Active:
             Ability: TPlaySong
             Icon: Positive_AttackPlus
-            ListLayout: "<sprite name=Shield> 1, $Affect_AllAllies$"
+            ListLayout: "<sprite name=Shield> 1, $FHS_Affect_AllAllies$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> 1"
-                - Row: "$Affect_AllAllies$"
+                - Row: "<size=150%><sprite name=Shield> 1"
+                - Row: "$FHS_Affect_AllAllies$"
     Bottom:
         - Active:
             Ability: BPrevent
-            ListLayout: "<b></b> $GH_349_B$"
-            Layout: "<b></b> $GH_349_B$"
+            ListLayout: "<b></b> $FHS_GH_349_B$"
+            Layout: "<b></b> $FHS_GH_349_B$"
             Icon: Positive_DamagePrevent
             HideTracker: True

@@ -65,17 +65,17 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            ListLayout: "$GH_383_T$"
-            Layout: "$GH_383_T$"
+            ListLayout: "$FHS_GH_383_T$"
+            Layout: "$FHS_GH_383_T$"
             Icon: Positive_Attack_Curse
-        - Row: "<size=50%> "
+        - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
         - Active:
             Ability: BDoom
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_383_B$"
+            ListLayout: "$FHS_GH_383_B$"
             Layout:
-                - Row: "$Doom_MarkText$"
-                - Row: "$GH_383_B$"
-                - Row: "<size=70%>$Doom_DiscardReminderText$"
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH_383_B$"
+                - Row: "<size=70%>$FHS_Doom_DiscardReminderText$"

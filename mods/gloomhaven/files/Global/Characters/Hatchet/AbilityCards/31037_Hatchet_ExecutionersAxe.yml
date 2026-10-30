@@ -39,7 +39,7 @@ Data:
                 AbilityXP: 1
 Layout:
     Top:
-        - Row: "$JOTL_037_T$"
+        - Row: "$FHS_JOTL_037_T$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -48,4 +48,4 @@ Layout:
                 - Infuse: Dark
             - Column:
     Bottom:
-        - Row: "$JOTL_037_B$"
+        - Row: "$FHS_JOTL_037_B$"

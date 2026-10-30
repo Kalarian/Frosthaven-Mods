@@ -38,18 +38,18 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            ListLayout: "$GH_358_T$"
-            Layout: "$GH_358_T$"
+            ListLayout: "$FHS_GH_358_T$"
+            Layout: "$FHS_GH_358_T$"
             Icon: Icon_Curse
-        - Row: "<size=50%> "
+        - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Divider:
         - Active:
             Ability: BShield
             Icon: Positive_Shield
-            ListLayout: "<sprite name=Shield> *BShield*, <b></b> $Affect_AllAdjacentAllies$"
+            ListLayout: "<sprite name=Shield> *BShield*, <b></b> $FHS_Affect_AllAdjacentAllies$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
-                - Row: "<b></b> $Affect_AllAdjacentAllies$"
+                - Row: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<b></b> $FHS_Affect_AllAdjacentAllies$"

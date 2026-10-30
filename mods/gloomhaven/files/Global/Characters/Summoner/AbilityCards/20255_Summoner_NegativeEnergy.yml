@@ -37,11 +37,11 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $VoidEater$
+                    SummonName: $FHS_VoidEater$
                     SpecialText:
                         - Row: "<nobr><sprite name=Curse></nobr>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Curse>"
-        - Row: "$Target_AllEnemiesAdjacentToAnyOneSummonedAlly$"
+        - Row: "<size=150%><sprite name=Curse>"
+        - Row: "$FHS_Target_AllEnemiesAdjacentToAnyOneSummonedAlly$"
         - Row: "<size=50%> "
         - Infuse: Dark

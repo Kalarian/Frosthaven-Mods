@@ -51,14 +51,18 @@ Data:
 
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=150%><sprite name=Attack> *TAttack*"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCEarth
-            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Muddle></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCEarth
+                    Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Muddle></nobr>, <sprite name=XP1>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCBottomEarth
-            Text: "$JOTL_086_B$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCBottomEarth
+                    Text: "$FHS_JOTL_086_B$"

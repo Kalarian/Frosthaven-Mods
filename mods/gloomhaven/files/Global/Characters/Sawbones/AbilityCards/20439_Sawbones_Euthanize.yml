@@ -25,12 +25,12 @@ Data:
                 Conditions: [Poison, Wound, Stun]
 Layout:
     Top:
-        - Row: "$GH_439_T$"
+        - Row: "$FHS_GH_439_T$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Poison></size>, <size=130%><sprite name=Wound></size>, <size=130%><sprite name=Stun></size>"
+                - Row: "<link=fhpill><sprite name=Poison>, <sprite name=Wound>, <sprite name=Stun></link>"
             - Column:

@@ -40,13 +40,17 @@ Layout:
         - Active:
             Ability: TPlaySong
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_370_T$"
-            Layout: "$GH_370_T$"
+            ListLayout: "$FHS_GH_370_T$"
+            Layout: "$FHS_GH_370_T$"
     Bottom:
         - ColumnWidths: "70,20"
         - Column:
-            - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
-            - Row: "<sprite name=Range> *BAttack.Range*"
-            - Row: "<sprite name=Curse>"
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*, <sprite name=Curse></link>"
+                - Column:
             - Row: "<size=50%> "
         - Column: "£Area£"

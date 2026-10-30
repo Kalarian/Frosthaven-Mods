@@ -42,15 +42,15 @@ Data:
         XP: 2                            
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=50%> "
-        - Row: "$GH_324_T$"
+        - Row: "$FHS_GH_324_T$"
     Bottom:
         - Active:
             Ability: BActive
-            ListLayout: "$GH_324_B_1$ $GH_324_B_2$"
+            ListLayout: "$FHS_GH_324_B_1$ $FHS_GH_324_B_2$"
             Layout:
-                - Row: "$GH_324_B_1$"
+                - Row: "$FHS_GH_324_B_1$"
                 - Row: "<size=50%> "
-                - Row: "$GH_324_B_2$"
+                - Row: "$FHS_GH_324_B_2$"
             Icon: Positive_AttackPlus

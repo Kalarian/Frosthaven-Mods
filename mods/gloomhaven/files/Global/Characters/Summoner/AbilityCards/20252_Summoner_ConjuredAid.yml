@@ -26,11 +26,11 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $HealingSprite$
+                    SummonName: $FHS_HealingSprite$
                     SpecialText:
-                        - Row: "$Performs$"
-                        - Row: "<b><size=130%><sprite name=Heal> 2"
+                        - Row: "$FHS_Performs$"
+                        - Row: "<size=150%><sprite name=Heal> 2"
                         - Row: "<sprite name=Range> 2"
-                        - Row: "$AtEndOfTurn$"
+                        - Row: "$FHS_AtEndOfTurn$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

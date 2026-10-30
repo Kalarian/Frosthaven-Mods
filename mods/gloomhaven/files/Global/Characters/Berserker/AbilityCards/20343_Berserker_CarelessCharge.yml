@@ -44,16 +44,18 @@ Data:
         XP: 2
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCWound
-            Text: "$GH_343_T$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCWound
+                    Text: "$FHS_GH_343_T$"
     Bottom:
         - Active:
             Ability: BImmunity
             Icon: Positive_DamagePrevent
-            ListLayout: "$GH_343_B$"
-            Layout: "$GH_343_B$"
+            ListLayout: "$FHS_GH_343_B$"
+            Layout: "$FHS_GH_343_B$"

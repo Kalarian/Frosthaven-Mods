@@ -41,21 +41,21 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            ListLayout: "$GH_283_T_1$\n\n$GH_283_T_2$"
+            ListLayout: "$FHS_GH_283_T_1$\n\n$FHS_GH_283_T_2$"
             Icon: Positive_AttackPlus
             Layout:
-                - Row: "$GH_283_T_1$"
+                - Row: "$FHS_GH_283_T_1$"
                 - Row: "<size=50%> "
-                - Row: "$GH_283_T_2$"
+                - Row: "$FHS_GH_283_T_2$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=100%> "
         - Consume:
             Name: BCLight
             Text:
                 - ColumnWidths: "75,25"
                 - Column:
-                    - Row: "<nobr><b><size=130%><sprite name=Muddle></nobr>"
-                    - Row: "$Target_AllAdjacentEnemies$"
+                    - Row: "<size=150%><nobr><sprite name=Muddle></nobr>"
+                    - Row: "$FHS_Target_AllAdjacentEnemies$"
                 - Column:
                     - Row: "<nobr><sprite name=CreateDark>, <sprite name=XP1></nobr>"

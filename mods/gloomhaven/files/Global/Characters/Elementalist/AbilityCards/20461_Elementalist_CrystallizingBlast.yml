@@ -40,14 +40,19 @@ Layout:
     Top:
         - ColumnWidths: "60,35"
         - Column:
-            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-            - Row: "<sprite name=Range> *TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <voffset=1>@TAttack.Range@</link>"
+                - Column:
             - Row: "<size=20%> "
             - Infuse: Ice
         - Column:
             - Row: "£Area£"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
         - Consume:
             Name: BCIce
@@ -60,6 +65,6 @@ Layout:
                         ListLayout: "<sprite name=Shield> 2"
                         Layout:
                             - Row: "<b><sprite name=Shield> 2"
-                            - Row: "<line-height=100%>$Self$"
+                            - Row: "<line-height=100%>$FHS_Self$"
                 - Column:
                     - Duration: Round

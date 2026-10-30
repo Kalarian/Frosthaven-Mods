@@ -41,11 +41,10 @@ Layout:
         - Active:
             Ability: TShield
             Icon: Positive_Shield
-            ListLayout: "<sprite name=Shield> *TShield*, <b></b> $Affect_AllSummonedAllies$"
+            ListLayout: "<sprite name=Shield> *TShield*, <b></b> $FHS_Affect_AllSummonedAllies$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *TShield*"
-                - Row: "<b></b> $Affect_AllSummonedAllies$"
+                - Row: "<size=150%><sprite name=Shield> *TShield*"
+                - Row: "<b></b> $FHS_Affect_AllSummonedAllies$"
     Bottom:
-        - Row: "$GH_Command$"
-        - Row: "<size=130%><b><sprite name=Heal> *BAllyHeal* <size=100%><voffset=1>@BAllyHeal@"
-        - Row: "$Self$"
+        - Row: "$FHS_GH_Command$"
+        - Row: "<link=fhself><size=125%><sprite name=Heal> *BAllyHeal* <size=100%><voffset=1>@BAllyHeal@</link>"

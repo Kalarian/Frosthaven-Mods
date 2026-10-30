@@ -45,14 +45,19 @@ Layout:
             Icon: Positive_Retaliate
             ListLayout: "<sprite name=Retaliate> *TRetaliate*, <sprite name=Range> *TRetaliate.RetaliateRange*"
             Layout:
-                - Row: "<b><size=130%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
-                - Row: "$Retaliate$ <sprite name=Range> *TRetaliate.RetaliateRange* <size=100%><voffset=1>@TRetaliate.RetaliateRange@"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Range> *TRetaliate.RetaliateRange* <voffset=1>@TRetaliate.RetaliateRange@</link>"
+                    - Column:
     Bottom:
         - Active:
             Ability: BDoom
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_388_B$"
+            ListLayout: "$FHS_GH_388_B$"
             Layout:
-                - Row: "$Doom_MarkText$"
-                - Row: "$GH_388_B$"
-                - Row: "<size=70%>$Doom_DiscardReminderText$"
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH_388_B$"
+                - Row: "<size=70%>$FHS_Doom_DiscardReminderText$"

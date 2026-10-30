@@ -42,17 +42,19 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCLight
-            Text: "+1 <sprite name=Attack>, $Advantage$, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCLight
+                    Text: "+1 <sprite name=Attack>, $FHS_Advantage$, <sprite name=XP1>"
     Bottom:
         - Active:
             Ability: BShield
             Icon: Positive_Shield
-            ListLayout: "<sprite name=Shield> *BShield*. $GH_184_B$"
+            ListLayout: "<sprite name=Shield> *BShield*. $FHS_GH_184_B$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
                 - Row: "<size=50%> "
-                - Row: "$GH_184_B$"
+                - Row: "$FHS_GH_184_B$"

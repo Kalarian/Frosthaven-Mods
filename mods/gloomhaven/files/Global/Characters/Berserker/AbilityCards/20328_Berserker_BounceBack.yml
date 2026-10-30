@@ -32,16 +32,9 @@ Layout:
             Icon: Positive_Retaliate
             ListLayout: "<sprite name=Retaliate> *TRet*"
             Layout:
-                - Row: "<b><size=130%><sprite name=Retaliate> *TRet* <size=100%><voffset=1>@TRet@"
+                - Row: "<size=150%><sprite name=Retaliate> *TRet* <size=100%><voffset=1>@TRet@"
                 - Row: "<size=50%> "
-                - Duration: Round
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@</link>"

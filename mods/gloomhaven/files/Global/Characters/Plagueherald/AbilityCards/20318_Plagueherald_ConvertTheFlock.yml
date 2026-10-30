@@ -45,19 +45,19 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
-                - Row: "<sprite name=Target>*TAttack.Target* @TAttack.Target@"
-                - AddedEffect: "<size=130%><sprite name=Curse></size>"
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* @TAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+                - Row: "<link=fhpill><sprite name=Curse></link>"
             - Column:
     Bottom:
-        - Row: "$GH_318_B_1$"
+        - Row: "$FHS_GH_318_B_1$"
         - Row: "<size=20%> "
         - Active:
             Ability: BDamageSubAttackBuff
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_318_B_2$"
-            Layout: "$GH_318_B_2$"
+            ListLayout: "$FHS_GH_318_B_2$"
+            Layout: "$FHS_GH_318_B_2$"

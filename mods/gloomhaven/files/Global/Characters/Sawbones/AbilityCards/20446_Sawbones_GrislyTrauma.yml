@@ -35,13 +35,18 @@ Layout:
     Top:
         - ColumnWidths: "75,20"
         - Column:
-            - Row: "$GH_446_T$"
+            - Row: "$FHS_GH_446_T$"
             - Row: "<size=20%> "
             - Row: "<sprite name=Range> *TKill.Range*"
             - Row: "<size=50%> "
         - Column: "£Area£"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<b><size=130%><nobr><sprite name=Poison></nobr>, <nobr><sprite name=Wound></nobr>, <nobr><sprite name=Muddle></nobr> "
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><nobr><sprite name=Poison></nobr>, <nobr><sprite name=Wound></nobr>, <nobr><sprite name=Muddle></nobr> "
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:

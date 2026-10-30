@@ -44,21 +44,23 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=150%><sprite name=Attack> *TAttack*"
         - Row: "<size=20%> "
         - Consume:
             Name: TCFire
             Text:
                 - Row: "£Area£"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCLight
-            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr>+1 <sprite name=Push></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCLight
+                    Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr>+1 <sprite name=Push></nobr>, <sprite name=XP1>"
     Bottom:
         - Active:
             Ability: BShield
-            ListLayout: "<b><size=130%><sprite name=Shield> *BShield*"
-            Layout: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+            ListLayout: "<size=150%><sprite name=Shield> *BShield*"
+            Layout: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
             Icon: Positive_Shield
         - Row: "<size=50%> "
         - Row:

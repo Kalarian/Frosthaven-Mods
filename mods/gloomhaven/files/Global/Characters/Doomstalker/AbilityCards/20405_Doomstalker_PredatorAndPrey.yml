@@ -41,15 +41,15 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $SpittingCobra$
+                    SummonName: $FHS_SpittingCobra$
                     SpecialText:
                         - Row: "<nobr><sprite name=Poison></nobr>"
     Bottom:
         - Active:
             Ability: BDoom
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_405_B$"
+            ListLayout: "$FHS_GH_405_B$"
             Layout:
-                - Row: "$Doom_MarkText$"
-                - Row: "$GH_405_B$"
-                - Row: "<size=70%>$Doom_DiscardReminderText$"
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH_405_B$"
+                - Row: "<size=70%>$FHS_Doom_DiscardReminderText$"

@@ -48,18 +48,17 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><nobr><sprite name=Stun></nobr>, <nobr><sprite name=Curse></nobr>"
+            - Column: "<size=150%><nobr><sprite name=Stun></nobr>, <nobr><sprite name=Curse></nobr>"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TStunUntilDamaged.Range*</mark>"
-                - Row: "<mark=#80919922><size=100%><sprite name=Target>*TStunUntilDamaged.Target*</mark>"
+                - Row: "<link=fhpill><sprite name=Target> *TStunUntilDamaged.Target* <sprite name=Range> *TStunUntilDamaged.Range*</link>"
             - Column:
         - Divider:
         - Active:
             Ability: TStunUntilDamaged
-            ListLayout: "$JOTL_177_T$"
-            Layout: "$JOTL_177_T$"
+            ListLayout: "$FHS_JOTL_177_T$"
+            Layout: "$FHS_JOTL_177_T$"
             Icon: Icon_Stun
         - Row: "<size=50%> "
         - Row:
@@ -68,12 +67,13 @@ Layout:
             - Column:
                 - Infuse: Dark
             - Column:
-                - Duration: Round
     Bottom:
-        - Row: "$JOTL_177_B$"
+        - Row: "$FHS_JOTL_177_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> *BAllyMove* @BAllyMove@"
+        - Row: "<size=150%><sprite name=Move> *BAllyMove* @BAllyMove@"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCDark
-            Text: "<nobr>+1 <sprite name=Move></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "<nobr>+1 <sprite name=Move></nobr>, <sprite name=XP1>"

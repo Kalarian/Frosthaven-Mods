@@ -46,14 +46,14 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$JOTL_025_T$"
+        - Row: "$FHS_JOTL_025_T$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -63,11 +63,11 @@ Layout:
             - Column:
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack*"
+            - Column: "<size=150%><sprite name=Attack> *BAttack*"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$JOTL_025_B$"
+        - Row: "$FHS_JOTL_025_B$"

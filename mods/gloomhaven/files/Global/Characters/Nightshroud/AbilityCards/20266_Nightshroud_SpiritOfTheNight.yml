@@ -33,13 +33,15 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=150%><sprite name=Attack> *TAttack*"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCDark
-            Text: "$GH_266_T$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "$FHS_GH_266_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"

@@ -35,7 +35,7 @@ Layout:
         - Active:
             Ability: TActive
             Icon: Refresh
-            ListLayout: "$GH_228_T$"
-            Layout: "$GH_228_T$"
+            ListLayout: "$FHS_GH_228_T$"
+            Layout: "$FHS_GH_228_T$"
     Bottom:
-        - Row: "$GH_228_B$"
+        - Row: "$FHS_GH_228_B$"

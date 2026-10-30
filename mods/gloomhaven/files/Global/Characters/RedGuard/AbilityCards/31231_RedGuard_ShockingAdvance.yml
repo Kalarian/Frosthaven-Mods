@@ -36,11 +36,11 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+                - Row: "<link=fhpill><sprite name=Immobilize></link>"
             - Column:
         - Row: "<size=50%> "
         - Consume:
@@ -53,11 +53,11 @@ Layout:
                         Icon: Positive_Shield
                         ListLayout: "<sprite name=Shield> 1"
                         Layout:
-                            - Row: "<b><size=130%><sprite name=Shield> 1"
-                            - Row: "<line-height=100%><size=100%>$Self$"
+                            - Row: "<size=150%><sprite name=Shield> 1"
+                            - Row: "<line-height=100%><size=100%>$FHS_Self$"
                 - Column:
                     - Row: "<sprite name=XP1>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
         - Infuse: Light

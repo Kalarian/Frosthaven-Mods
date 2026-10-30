@@ -23,10 +23,15 @@ HALF_BOX = {"top": (12, 186, 492, 492), "bottom": (12, 560, 492, 866)}
 RULES = [
     ("R1", "One modifier pill per ability",
      "Every modifier of an ability (target, range, pierce, push, pull, jump, conditions) sits in one pill on that "
-     "ability's own line, after its value and enhancement slot, comma-separated, each value with its own slot. Never "
+     "ability's own line, after its value and enhancement slot, each value with its own slot. Never "
      "stacked in a column, never on rows of their own, never half pill and half plain.",
      ["Trapper/Exploding Decoy", "Infuser/Obsidian Spear", "Boneshaper/Twisted Decree", "Drifter/Deadly Shot",
       "Shattersong/Illuminative Tone", "CrashingTide/Tidal Blast"]),
+    ("R8", "Frosthaven's order inside a pill",
+     "Target (with all / one / ally / adjacent), range, pierce, push or pull, then conditions, elements and XP. A space "
+     "between the first four, a comma before the rest; a slot right after its own value (◎ 2 [slot] ⟨⟩ 3). All 118 "
+     "Frosthaven halves with two or more modifiers in a pill follow it.",
+     ["Snowdancer/Storm Wall", "Snowdancer/Whipping Gale", "Trapper/Exploding Decoy", "FrozenFist/Shard Launch"]),
     ("R2", "Targets go in the pill; the default goes unsaid",
      "\"All adjacent enemies\" is the pill's target entry (◎ all adjacent ☠). A single adjacent target is the default "
      "and isn't printed (no \"Target one adjacent enemy\"). Targets that aren't a count (\"all enemies moved through\") "
@@ -59,7 +64,7 @@ def crop(src, half, dst):
     if not src:
         return None
     dst.parent.mkdir(parents=True, exist_ok=True)
-    if not dst.exists():
+    if not dst.exists() or Path(src).stat().st_mtime > dst.stat().st_mtime:   # a recaptured card is cropped again
         Image.open(src).convert("RGB").crop(HALF_BOX[half]).save(dst, quality=90)
     return dst.relative_to(OUT).as_posix()
 
@@ -112,7 +117,7 @@ figure.mine img{{outline:2px solid var(--ok)}} figure.before img{{outline:2px so
 ul{{margin:10px 0 0;padding-left:20px}} .ok{{color:var(--ok);margin:8px 0 0}} .filters{{margin:8px 0}} label{{margin-right:14px}}
 </style></head><body><main>
 <h1>{cls}: {"before, after and Frosthaven" if COMPARE else "card layout review"}</h1>
-<p class="sub">{len(data)} halves · {flagged} break a rule · each Brute half beside the two closest Frosthaven halves (by what the half does, then its layout).
+<p class="sub">{len(data)} halves · {flagged} break a rule · each {cls} half beside the two closest Frosthaven halves (by what the half does, then its layout).
 Frosthaven's cards are hand-made prefabs, so the rules come from how its cards look, not from its layout data.</p>
 <h2>Rules</h2><div class="rules">{rules}<div class="already"><h3>Already the same as Frosthaven</h3><ul>{"".join(f"<li>{html.escape(a)}</li>" for a in ALREADY)}</ul></div></div>
 <h2>Halves</h2><div class="filters"><label><input type="checkbox" id="only"> Only halves that break a rule</label></div>

@@ -29,11 +29,11 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*THeal.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
             - Column:
     Bottom:
-        - Row: "$GH_045_B$"
+        - Row: "$FHS_GH_045_B$"

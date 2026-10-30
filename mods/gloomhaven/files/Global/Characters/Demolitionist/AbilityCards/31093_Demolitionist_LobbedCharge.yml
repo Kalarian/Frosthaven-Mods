@@ -40,21 +40,26 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "$JOTL_093_T$"
+        - Row: "$FHS_JOTL_093_T$"
         - Row: "<size=50%> "
         - Infuse: Fire
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <voffset=1>@BMove@"
         - Row: "<size=50%> "
-        - Row: "$JOTL_093_B_1$"
+        - Row: "$FHS_JOTL_093_B_1$"
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "20, 40, 20, 40"
             - Column:
             - Column:
-                - Row: "<b><size=130%><sprite name=Attack> X"
-                - Row: "<sprite name=Push> *BAttackSubPush*"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Attack> X"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Push> *BAttackSubPush*</link>"
+                    - Column:
             - Column:
             - Column:
         - Row: "<size=20%> "
-        - Row: "$JOTL_093_B_2$"
+        - Row: "$FHS_JOTL_093_B_2$"

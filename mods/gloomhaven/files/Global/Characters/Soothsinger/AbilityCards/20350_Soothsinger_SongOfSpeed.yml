@@ -41,8 +41,13 @@ Layout:
         - Active:
             Ability: TPlaySong
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_350_T$"
-            Layout: "$GH_350_T$"
+            ListLayout: "$FHS_GH_350_T$"
+            Layout: "$FHS_GH_350_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Muddle>"
-        - Row: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> *BMuddle.Range*</nobr>"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Muddle>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Range> *BMuddle.Range*</link>"
+            - Column:

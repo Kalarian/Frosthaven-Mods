@@ -31,13 +31,18 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Disarm> <size=100%><voffset=1>@TDisarm@"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Disarm> <size=100%><voffset=1>@TDisarm@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
     Bottom:
         - Active:
             Ability: BShield
             Icon: Positive_Shield
-            ListLayout: "<sprite name=Shield> *BShield*, <b></b> $Affect_SelfAndAllAdjacentAllies$"
+            ListLayout: "<sprite name=Shield> *BShield*, <b></b> $FHS_Affect_SelfAndAllAdjacentAllies$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
-                - Row: "<b></b> $Affect_SelfAndAllAdjacentAllies$"
+                - Row: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<b></b> $FHS_Affect_SelfAndAllAdjacentAllies$"

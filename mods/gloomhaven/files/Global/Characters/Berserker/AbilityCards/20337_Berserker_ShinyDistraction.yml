@@ -33,23 +33,23 @@ Data:
         Infuse: Fire
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
+        - Row: "<size=150%><sprite name=Loot> *TLoot*"
         - Divider:
         - Active:
             Ability: TShield
             Icon: Positive_Shield
             ListLayout: "<sprite name=Shield> *TShield*"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+                - Row: "<size=150%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
     Bottom:
         - Active:
             Ability: [BDisadvantage, BAdvantage]
             Icon: Disadvantage
-            ListLayout: "$GH_337_B_1$ $GH_337_B_2$"
+            ListLayout: "$FHS_GH_337_B_1$ $FHS_GH_337_B_2$"
             Layout:
-                - Row: "$GH_337_B_1$"
+                - Row: "$FHS_GH_337_B_1$"
                 - Row: "<size=50%> "
-                - Row: "$GH_337_B_2$"
+                - Row: "$FHS_GH_337_B_2$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -57,4 +57,3 @@ Layout:
             - Column:
                 - Infuse: Fire
             - Column:
-                - Duration: Round

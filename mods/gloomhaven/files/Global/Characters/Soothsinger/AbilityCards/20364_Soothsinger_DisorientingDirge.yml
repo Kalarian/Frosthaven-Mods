@@ -44,11 +44,21 @@ Layout:
         - Active:
             Ability: TPlaySong
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_364_T$"
-            Layout: "$GH_364_T$"
+            ListLayout: "$FHS_GH_364_T$"
+            Layout: "$FHS_GH_364_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Curse> <size=100%><voffset=1>@BCurse@"
-        - Row: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> *BCurse.Range*</nobr>"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Curse> <size=100%><voffset=1>@BCurse@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Range> *BCurse.Range*</link>"
+            - Column:
         - Row: "<size=50%> "
-        - Row: "<b><size=130%><sprite name=Bless> <size=100%><voffset=1>@BBless@"
-        - Row: "$Target_AllAlliesWithin$ <nobr><sprite name=Range> *BBless.Range*</nobr>"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Bless> <size=100%><voffset=1>@BBless@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies> <sprite name=Range> *BBless.Range*</link>"
+            - Column:

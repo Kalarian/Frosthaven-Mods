@@ -36,7 +36,7 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $Monolith$
+                    SummonName: $FHS_Monolith$
                     SpecialText: "<nobr><sprite name=Shield> 2</nobr>"
         - Row: "<size=20%> "
         - Row:
@@ -46,7 +46,6 @@ Layout:
                 - Infuse: Earth
             - Column:
             - Column:
-                - Duration: Persistent
     Bottom:
-        - Row: "$GH_Command$"
-        - Row: "<b><size=130%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
+        - Row: "$FHS_GH_Command$"
+        - Row: "<size=150%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"

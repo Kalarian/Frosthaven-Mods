@@ -24,6 +24,6 @@ Data:
                     CircleEnhancements: 1
 Layout:
     Top:
-        - Row: "$GH_216_T$"
+        - Row: "$FHS_GH_216_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

@@ -42,16 +42,21 @@ Data:
                 AnimOverload: DoomTarget
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-        - Row: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> *TAttack.Range*</nobr>"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Range> *TAttack.Range*</link>"
+            - Column:
         - Row: "<size=20%> "
-        - Row: "$XP_PerTwoEnemiesTargeted$"
+        - Row: "$FHS_XP_PerTwoEnemiesTargeted$"
     Bottom:
         - Active:
             Ability: BDoom
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_393_B$"
+            ListLayout: "$FHS_GH_393_B$"
             Layout:
-                - Row: "$Doom_MarkText$"
-                - Row: "$GH_393_B$"
-                - Row: "<size=70%>$Doom_DiscardReminderText$"
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH_393_B$"
+                - Row: "<size=70%>$FHS_Doom_DiscardReminderText$"

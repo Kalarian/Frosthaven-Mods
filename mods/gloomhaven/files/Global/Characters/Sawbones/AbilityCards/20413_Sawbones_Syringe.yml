@@ -30,15 +30,15 @@ Layout:
         - Active:
             Ability: TShield
             Icon: Positive_Shield
-            ListLayout: "<sprite name=Shield> *TShield*, $Target_OneAdjacentAlliedPlayer$"
+            ListLayout: "<sprite name=Shield> *TShield*, $FHS_Target_OneAdjacentAlliedPlayer$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
-                - Row: "$Target_OneAdjacentAlliedPlayer$"
+                - Row: "<size=150%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+                - Row: "$FHS_Target_OneAdjacentAlliedPlayer$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Poison></size>, <size=130%><sprite name=Stun></size>"
+                - Row: "<link=fhpill><sprite name=Poison>, <sprite name=Stun></link>"
             - Column:

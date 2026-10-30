@@ -40,21 +40,20 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
-                - AddedEffect: "<size=130%><sprite name=Poison></size>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Poison></link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$GH_304_T$"
+        - Row: "$FHS_GH_304_T$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *BHeal*"
+            - Column: "<size=150%><sprite name=Heal> *BHeal*"
             - Column:
-                - Row: "<sprite name=Range>*BHeal.Range* <size=100%><voffset=1>@BHeal.Range@"
-                - Row: "<sprite name=Target>*BHeal.Target* <size=100%><voffset=1>@BHeal.Target@"
+                - Row: "<link=fhpill><sprite name=Target> *BHeal.Target* <voffset=1>@BHeal.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range* <voffset=1>@BHeal.Range@</link>"
             - Column:

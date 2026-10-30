@@ -43,8 +43,8 @@ Data:
                 XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><nobr><sprite name=Curse></nobr>, <nobr><sprite name=Wound></nobr>"
-        - Row: "$Target_AllAlliesAndEnemies$"
+        - Row: "<size=150%><nobr><sprite name=Curse></nobr>, <nobr><sprite name=Wound></nobr>"
+        - Row: "$FHS_Target_AllAlliesAndEnemies$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -54,12 +54,16 @@ Layout:
             - Column:
                 - Infuse: Dark
     Bottom:
-        - Row: "$GH_317_B$"
+        - Row: "$FHS_GH_317_B$"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCAir
-            Text: "<nobr>+1 $Damage$, <sprite name=XP1></nobr>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCAir
+                    Text: "<nobr>+1 $FHS_Damage$, <sprite name=XP1></nobr>"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCDark
-            Text: "<nobr>+1 $Damage$, <sprite name=XP1></nobr>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "<nobr>+1 $FHS_Damage$, <sprite name=XP1></nobr>"

@@ -54,14 +54,13 @@ Layout:
     Top:
         - ColumnWidths: "70,25"
         - Column:
-            - Row: "$GH_Command$"
-            - Row: "<b><size=130%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+            - Row: "$FHS_GH_Command$"
+            - Row: "<size=150%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
             - Row: "<size=50%> "
         - Column: "£Area£"
     Bottom:
-        - Row: "$GH_Command$"
+        - Row: "$FHS_GH_Command$"
         - Row: "<size=50%> "
-        - Row: "<b><size=130%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
+        - Row: "<size=150%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Push> *BAllyPush* <size=100%><voffset=1>@BAllyPush@"
-        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=150%><sprite name=Push> *BAllyPush* <size=100%><voffset=1>@BAllyPush@"

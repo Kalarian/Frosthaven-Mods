@@ -33,8 +33,8 @@ Data:
         Infuse: Light
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
-        - Row: "$Affect_SelfAndAllAllies$"
+        - Row: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$FHS_Affect_SelfAndAllAllies$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -46,8 +46,8 @@ Layout:
         - Active:
             Ability: BDisadvantage
             Icon: Disadvantage
-            ListLayout: "<b></b> $GH_194_B$"
-            Layout: "<b></b> $GH_194_B$"
+            ListLayout: "<b></b> $FHS_GH_194_B$"
+            Layout: "<b></b> $FHS_GH_194_B$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -55,4 +55,3 @@ Layout:
             - Column:
                 - Infuse: Light
             - Column:
-                - Duration: Round

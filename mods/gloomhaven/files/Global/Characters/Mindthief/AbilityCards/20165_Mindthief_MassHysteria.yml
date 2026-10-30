@@ -29,13 +29,13 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* "
+            - Column: "<size=150%><sprite name=Attack> *TAttack* "
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
-                - Row: "<sprite name=Target>*TAttack.Target* @TAttack.Target@"
-                - AddedEffect: "<size=130%><sprite name=Muddle></size>"
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* @TAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+                - Row: "<link=fhpill><sprite name=Muddle></link>"
             - Column:
         - Row: "<size=20%> "
         - Row:
@@ -47,6 +47,6 @@ Layout:
     Bottom:
         - Active:
             Ability: BAugment
-            ListLayout: "$GH_165_B$"
-            Layout: "$GH_165_B$"
+            ListLayout: "$FHS_GH_165_B$"
+            Layout: "$FHS_GH_165_B$"
             Icon: Positive_Cards

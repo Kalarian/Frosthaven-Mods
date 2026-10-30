@@ -27,10 +27,10 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            ListLayout: "$GH_121_T$"
-            Layout: "$GH_121_T$"
+            ListLayout: "$FHS_GH_121_T$"
+            Layout: "$FHS_GH_121_T$"
             Icon: Target
-        - Row: "<size=50%> "
+        - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

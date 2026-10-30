@@ -39,13 +39,13 @@ Layout:
         - Active:
             Ability: TActiveMove
             Icon: Move
-            ListLayout: "$GH_245_T$"
-            Layout: "$GH_245_T$"
+            ListLayout: "$FHS_GH_245_T$"
+            Layout: "$FHS_GH_245_T$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:

@@ -51,20 +51,21 @@ Data:
                         Conditions: Bless
 Layout:
     Top:
-        - Row: "$JOTL_169_T_1$"
+        - Row: "$FHS_JOTL_169_T_1$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@"
-        - Row: "$JOTL_169_T_2$"
+        - Row: "<size=150%><sprite name=Attack> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@"
+        - Row: "$FHS_JOTL_169_T_2$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *BHeal*"
+            - Column: "<size=150%><sprite name=Heal> *BHeal*"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
-                - AddedEffect: "<size=130%><sprite name=Strengthen></size>, <size=130%><sprite name=Poison></size>"
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range*, <sprite name=Strengthen>, <sprite name=Poison></link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCIce
-            Text: "<sprite name=Bless>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCIce
+                    Text: "<sprite name=Bless>"

@@ -35,28 +35,24 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Stun></size>"
+                - Row: "<link=fhpill><sprite name=Stun></link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCFire
-            Text: "+2 <sprite name=Attack>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFire
+                    Text: "+2 <sprite name=Attack>"
     Bottom:
         - Active:
             Ability: BAllowOverheal
             Icon: Positive_Heal
-            ListLayout: "$GH_329_B$"
+            ListLayout: "$FHS_GH_329_B$"
             Layout:
-                - Row: "$GH_329_B$"
+                - Row: "$FHS_GH_329_B$"
         - Divider:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *BHeal*"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><sprite name=Heal> *BHeal*</link>"

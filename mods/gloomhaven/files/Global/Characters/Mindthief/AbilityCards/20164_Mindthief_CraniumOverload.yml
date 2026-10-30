@@ -35,11 +35,11 @@ Data:
                     CircleEnhancements: 1
 Layout:
     Top:
-        - Row: "$GH_164_T_1$"
+        - Row: "$FHS_GH_164_T_1$"
         - Row: "<size=50%> "
-        - Row: "<b><size=130%><sprite name=Attack> *TAttackRadial* <size=100%><voffset=1>@TAttackRadial@"
-        - Row: "$GH_164_T_2$"
+        - Row: "<size=150%><sprite name=Attack> *TAttackRadial* <size=100%><voffset=1>@TAttackRadial@"
+        - Row: "$FHS_GH_164_T_2$"
         - Row: "<size=20%> "
-        - Row: "$XP_PerEnemy$"
+        - Row: "$FHS_XP_PerEnemy$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

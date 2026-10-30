@@ -45,15 +45,15 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+            - Column: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Row: "<size=50%> "
-        - Row: "$GH_375_T$"
+        - Row: "$FHS_GH_375_T$"
     Bottom:
-        - Row: "$GH_375_B$"
+        - Row: "$FHS_GH_375_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack*"
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack*"

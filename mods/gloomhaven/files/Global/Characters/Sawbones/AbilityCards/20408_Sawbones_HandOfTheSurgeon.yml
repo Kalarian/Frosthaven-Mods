@@ -30,10 +30,10 @@ Data:
                 AnimOverload: PowerUp
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
     Bottom:
         - Active:
             Ability: BActive
             Icon: Positive_Heal
-            ListLayout: "$GH_408_B$"
-            Layout: "$GH_408_B$"
+            ListLayout: "$FHS_GH_408_B$"
+            Layout: "$FHS_GH_408_B$"

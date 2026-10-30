@@ -37,20 +37,21 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
-                - AddedEffect: "<sprite name=Pull>3"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <sprite name=Pull> 3</link>"
             - Column:
         - Row: "<size=50%> "
         - Infuse: Air
     Bottom:
-        - Row: "<b><size=130%><sprite name=Attack> *BAttack1*"
+        - Row: "<size=150%><sprite name=Attack> *BAttack1*"
         - Row: "<size=50%> "
-        - Consume:
-            Name: BCLight
-            Text: "<b><size=130%><sprite name=Move> 2, <size=100%><voffset=1><sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "<size=150%><sprite name=Move> 2, <size=100%><voffset=1><sprite name=XP1>"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *BAttack2*"
+        - Row: "<size=150%><sprite name=Attack> *BAttack2*"

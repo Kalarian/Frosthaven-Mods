@@ -45,20 +45,22 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack*"
+            - Column: "<size=150%><sprite name=Attack> *TAttack*"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
-                - Row: "<mark=#80919922><size=100%><sprite name=Push>*TAttackSubPush*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+                - Row: "<link=fhpill><sprite name=Push> *TAttackSubPush*</link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCAir
-            Text: "<nobr>+1 <sprite name=Range></nobr>, <nobr>+2 <sprite name=Push></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "<nobr>+1 <sprite name=Range></nobr>, <nobr>+2 <sprite name=Push></nobr>, <sprite name=XP1>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=50%> "
-        - Row: "$JOTL_032_B$"
+        - Row: "$FHS_JOTL_032_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"

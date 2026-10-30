@@ -36,14 +36,14 @@ Data:
                     Conditions: [Disarm, Stun, Immobilize]
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=20%> "
-        - Row: "$GH_088_T$"
+        - Row: "$FHS_GH_088_T$"
     Bottom:
         - Active:
             Ability: BAttackBuff
-            ListLayout: "$GH_106_B$"
-            Layout: "$GH_106_B$"
+            ListLayout: "$FHS_GH_106_B$"
+            Layout: "$FHS_GH_106_B$"
             Icon: Positive_AttackPlus
-        - Row: "<size=50%> "
+        - Row: "<size=100%> "
         - XPTracker: BAttackBuff

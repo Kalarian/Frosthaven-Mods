@@ -28,8 +28,8 @@ Layout:
     Top:
         - Active:
             Ability: TAttackBuff
-            ListLayout: "$GH_208_T$"
-            Layout: "$GH_208_T$"
+            ListLayout: "$FHS_GH_208_T$"
+            Layout: "$FHS_GH_208_T$"
             Icon: Positive_AttackPlus
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

@@ -32,11 +32,11 @@ Data:
                 XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=50%> "
         - Infuse: Dark
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=50%> "
         - Consume:
             Name: BCDark
@@ -44,6 +44,6 @@ Layout:
                 - ColumnWidths: "80,20"
                 - ColumnSpacing: 50
                 - Column:
-                    - Row: "<b><size=130%><nobr><sprite name=Invisible></nobr>"
-                    - Row: "$Self$"
+                    - Row: "<size=150%><nobr><sprite name=Invisible></nobr>"
+                    - Row: "$FHS_Self$"
                 - Column:

@@ -46,10 +46,10 @@ Layout:
         - Active:
             Ability: TPlaySong
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_348_T$"
-            Layout: "$GH_348_T$"
+            ListLayout: "$FHS_GH_348_T$"
+            Layout: "$FHS_GH_348_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Strengthen> @BStrengthen@"
-        - Row: "$Affect_AllAdjacentAllies$"
+        - Row: "<size=150%><sprite name=Strengthen> @BStrengthen@"
+        - Row: "$FHS_Affect_AllAdjacentAllies$"

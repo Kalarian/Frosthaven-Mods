@@ -42,16 +42,15 @@ Data:
                 XP: 1
 Layout:
     Top:
-        - Row: "$JOTL_162_T_1$"
+        - Row: "$FHS_JOTL_162_T_1$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *EnemyWillDoThis* @EnemyWillDoThis@"
-        - Row: "$JOTL_162_T_2$"
+        - Row: "<size=150%><sprite name=Attack> *EnemyWillDoThis* @EnemyWillDoThis@"
+        - Row: "$FHS_JOTL_162_T_2$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=50%> "
-        - Consume:
-            Name: BCDark
-            Text:
-                - Row: "<nobr>-1 <sprite name=Move></nobr>, <sprite name=XP1>"
-                - Row: "<size=20%> "
-                - Row: "<nobr><b><size=130%><sprite name=Attack> 2</nobr>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "<nobr>-1 <sprite name=Move></nobr>, <sprite name=XP1> <size=150%><nobr><sprite name=Attack> 2</nobr>"

@@ -39,13 +39,20 @@ Layout:
         - Row:
             - ColumnWidths: "65,35"
             - Column:
-                - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-                - Row: "<sprite name=Range> *TAttack.Range*\n<size=20%> "
-                - Consume:
-                    Name: TCEarth
-                    Text: "+1 <sprite name=Attack>, <sprite name=XP1>"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*\n</link>"
+                    - Column:
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCEarth
+                            Text: "+1 <sprite name=Attack>, <sprite name=XP1>"
             - Column:
                 - Row: "£Area£"
-        - Row: "<size=50%> \n<size=100%>$GH_125_T$"
+        - Row: "<size=50%> \n<size=100%>$FHS_GH_125_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

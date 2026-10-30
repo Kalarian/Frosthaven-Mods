@@ -23,22 +23,10 @@ Data:
                 AnimOverload: Heal
 Layout:
     Top:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@</link>"
         - Row: "<size=50%> "
-        - Row: "$MedPack$"
+        - Row: "$FHS_MedPack$"
     Bottom:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@</link>"
         - Row: "<size=50%> "
-        - Row: "$MedPack$"
+        - Row: "$FHS_MedPack$"

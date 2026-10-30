@@ -39,7 +39,7 @@ Data:
         XP: 2
 Layout:
     Top:
-        - Row: "$JOTL_174_T$"
+        - Row: "$FHS_JOTL_174_T$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -50,6 +50,6 @@ Layout:
     Bottom:
         - Active:
             Ability: BActive
-            ListLayout: "$JOTL_174_B$"
-            Layout: "$JOTL_174_B$"
+            ListLayout: "$FHS_JOTL_174_B$"
+            Layout: "$FHS_JOTL_174_B$"
             Icon: Icon_Poison

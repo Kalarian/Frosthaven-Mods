@@ -44,28 +44,32 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
             - Column:
-                - Row: "<sprite name=Range>*THeal.Range* @THeal.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range* @THeal.Range@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCEarth
-            Text: "+2 <sprite name=Heal>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCEarth
+                    Text: "+2 <sprite name=Heal>, <sprite name=XP1>"
     Bottom:
         - Active:
             Ability: BShield
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield*"
-                - Row: "$Affect_AnyOneAlly$"
+                - Row: "<size=150%><sprite name=Shield> *BShield*"
+                - Row: "$FHS_Affect_AnyOneAlly$"
             LayoutAlt:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield*"
-                - Row: "$Affect_AllAllies$"
-            ListLayout: "<b><size=130%><sprite name=Shield> *BShield*"
+                - Row: "<size=150%><sprite name=Shield> *BShield*"
+                - Row: "$FHS_Affect_AllAllies$"
+            ListLayout: "<size=150%><sprite name=Shield> *BShield*"
             Icon: Positive_Shield
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCAir
-            Text: "$Affect_AllAllies$ $instead$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCAir
+                    Text: "$FHS_Affect_AllAllies$ $FHS_instead$"

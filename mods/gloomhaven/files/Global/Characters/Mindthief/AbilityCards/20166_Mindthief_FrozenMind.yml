@@ -47,17 +47,17 @@ Layout:
         - Augment:
             AugmentIcon: Positive_AttackPlus
             ParentAbility: TAugment
-            ActiveBonusLayout: "$Augment_OnYourMeleeAttacks$ <size=130%><voffset=-1><sprite name=ConsumeIce></voffset>: <nobr><size=100%><sprite name=Stun></nobr>"
+            ActiveBonusLayout: "$FHS_Augment_OnYourMeleeAttacks$ <size=130%><voffset=-1><sprite name=ConsumeIce></voffset>: <nobr><size=100%><sprite name=Stun></nobr>"
             AugmentAbilityLayout:
                 - Row: "<size=130%><voffset=-1><sprite name=ConsumeIce></voffset>: <nobr><size=100%><sprite name=Stun></nobr>"
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:
-                - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
                 - Column:
     Bottom:
-        - Row: "$GH_166_B$"
+        - Row: "$FHS_GH_166_B$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> *EnemyWillDoThis*"
+        - Row: "<size=150%><sprite name=Move> *EnemyWillDoThis*"
         - Row: "<size=20%> "
-        - Row: "$With_YouControllingActions$"
+        - Row: "$FHS_With_YouControllingActions$"

@@ -21,8 +21,8 @@ Layout:
         - Row: "<size=20%> "
         - Active:
             Ability: TSummon
-            ListLayout: "$JOTL_244_T$"
-            Layout: "$JOTL_244_T$"
+            ListLayout: "$FHS_JOTL_244_T$"
+            Layout: "$FHS_JOTL_244_T$"
             Icon: Positive_Summon
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"

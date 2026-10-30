@@ -33,12 +33,12 @@ Layout:
     Top:
         - ColumnWidths: "65,30"
         - Column:
-            - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Row: "<size=50%> "
         - Column: "£Area£"
     Bottom:
         - Active:
             Ability: BAttackBuff
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_229_B$"
-            Layout: "$GH_229_B$"
+            ListLayout: "$FHS_GH_229_B$"
+            Layout: "$FHS_GH_229_B$"

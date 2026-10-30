@@ -35,14 +35,16 @@ Data:
                 Move: 3
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=150%><sprite name=Attack> *TAttack*"
         - Row: "<size=20%> "
-        - Row: "$GH_268_T$"
+        - Row: "$FHS_GH_268_T$"
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCDark
-            Text: "+3 <sprite name=Attack>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "+3 <sprite name=Attack>, <sprite name=XP1>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Attack> *BAttack*"
+        - Row: "<size=150%><sprite name=Attack> *BAttack*"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"

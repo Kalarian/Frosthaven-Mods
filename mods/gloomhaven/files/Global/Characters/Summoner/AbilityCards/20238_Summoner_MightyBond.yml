@@ -32,18 +32,18 @@ Data:
                     Jump: True
 Layout:
     Top:
-        - Row: "$GH_238_T$"
+        - Row: "$FHS_GH_238_T$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> +0"
+        - Row: "<size=150%><sprite name=Move> +0"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> +0"
+        - Row: "<size=150%><sprite name=Attack> +0"
         - Row: "<size=20%> "
-        - Row: "$With_YouControllingActions$"
+        - Row: "$FHS_With_YouControllingActions$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:

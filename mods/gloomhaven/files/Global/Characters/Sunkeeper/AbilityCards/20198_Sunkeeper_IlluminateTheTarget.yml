@@ -36,11 +36,11 @@ Data:
                 AnimOverload: ControlAlly
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Strengthen> @TStrengthen@"
-        - Row: "$Affect_AllAdjacentAllies$"
+        - Row: "<size=150%><sprite name=Strengthen> @TStrengthen@"
+        - Row: "$FHS_Affect_AllAdjacentAllies$"
     Bottom:
-        - Row: "$GH_157_T$"
+        - Row: "$FHS_GH_157_T$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1> @BAllyAttack@"
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1> @BAllyAttack@"

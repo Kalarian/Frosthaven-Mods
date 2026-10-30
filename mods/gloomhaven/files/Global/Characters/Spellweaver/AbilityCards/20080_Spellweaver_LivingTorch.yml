@@ -37,17 +37,18 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
-                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Immobilize></link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCLight
-            Text: "$GH_080_T$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCLight
+                    Text: "$FHS_GH_080_T$"
     Bottom:
         - Active:
             Ability: "BSummon"
@@ -55,9 +56,9 @@ Layout:
             Layout:
                 - Summon:
                     Ability: BSummon
-                    SummonName: $BurningAvatar$
+                    SummonName: $FHS_BurningAvatar$
                     SpecialText:
-                        - Row: "$OnDeath$"
+                        - Row: "$FHS_OnDeath$"
                         - Row: "<size=10%> "
                         - Row: "<b>Attack <sprite name=Attack> 3"
-                        - Row: "$Target_AllAdjacentEnemies$"
+                        - Row: "$FHS_Target_AllAdjacentEnemies$"

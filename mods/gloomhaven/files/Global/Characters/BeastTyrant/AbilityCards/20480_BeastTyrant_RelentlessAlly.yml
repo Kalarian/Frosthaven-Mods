@@ -26,6 +26,6 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $TatteredWolf$
+                    SummonName: $FHS_TatteredWolf$
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

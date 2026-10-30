@@ -35,8 +35,13 @@ Layout:
         - Active:
             Ability: TPlaySong
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_372_T$"
-            Layout: "$GH_372_T$"
+            ListLayout: "$FHS_GH_372_T$"
+            Layout: "$FHS_GH_372_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Disarm> <size=100%><voffset=1>@BDisarm@"
-        - Row: "$Target_AllAdjacentEnemies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Disarm> <size=100%><voffset=1>@BDisarm@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:

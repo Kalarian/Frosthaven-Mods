@@ -33,16 +33,16 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            ListLayout: "$GH_054_T$"
-            Layout: "$GH_054_T$"
+            ListLayout: "$FHS_GH_054_T$"
+            Layout: "$FHS_GH_054_T$"
             Icon: Positive_AttackPlus
-        - Row: "<size=50%> "
+        - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
             - Column:
-                - Row: "<sprite name=Range>*BHeal.Range* @BHeal.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range* @BHeal.Range@</link>"
             - Column:

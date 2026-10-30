@@ -30,12 +30,12 @@ Data:
                 AnimOverload: PowerUp
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Move> *TMove*"
+        - Row: "<size=150%><sprite name=Move> *TMove*"
         - Divider:
         - Active:
             Ability: TShield
-            ListLayout: "<b><size=130%><sprite name=Shield> *TShield*"
-            Layout: "<b><size=130%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+            ListLayout: "<size=150%><sprite name=Shield> *TShield*"
+            Layout: "<size=150%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
             Icon: Positive_Shield
         - Row: "<size=50%> "
         - Row:
@@ -45,10 +45,9 @@ Layout:
                 - Infuse: Dark
             - Column:
             - Column:
-                - Duration: Round
     Bottom:
         - Active:
             Ability: BActive
-            ListLayout: "$JOTL_022_B$"
-            Layout: "$JOTL_022_B$"
+            ListLayout: "$FHS_JOTL_022_B$"
+            Layout: "$FHS_JOTL_022_B$"
             Icon: Positive_AttackPlus

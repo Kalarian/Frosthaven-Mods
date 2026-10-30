@@ -39,11 +39,11 @@ Layout:
         - Active:
             Ability: TActive
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_197_T$"
-            Layout: "$GH_197_T$"
+            ListLayout: "$FHS_GH_197_T$"
+            Layout: "$FHS_GH_197_T$"
     Bottom:
         - Active:
             Ability: BActive
             Icon: Move
-            ListLayout: "$GH_197_B$"
-            Layout: "$GH_197_B$"
+            ListLayout: "$FHS_GH_197_B$"
+            Layout: "$FHS_GH_197_B$"

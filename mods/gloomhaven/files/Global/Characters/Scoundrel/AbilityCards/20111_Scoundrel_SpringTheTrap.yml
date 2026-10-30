@@ -32,12 +32,12 @@ Data:
                     XPTracker: [2]
 Layout:
     Top:
-        - Row: "$GH_092_T$"
+        - Row: "$FHS_GH_092_T$"
         - Row: "<size=20%> "
-        - Row: "$GH_111_T$"
+        - Row: "$FHS_GH_111_T$"
     Bottom:
         - Active:
             Ability: BActive
-            ListLayout: "$GH_111_B$"
-            Layout: "$GH_111_B$"
+            ListLayout: "$FHS_GH_111_B$"
+            Layout: "$FHS_GH_111_B$"
             Icon: Positive_AttackPlus

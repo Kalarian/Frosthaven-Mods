@@ -36,15 +36,15 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $GH_235_T$
+                    SummonName: $FHS_GH_235_T$
                     SpecialText:
                         - Row: "<nobr><sprite name=Pierce> 2</nobr>"
     Bottom:
         - Active:
             Ability: BDisadvantage
             Icon: Disadvantage
-            ListLayout: "$GH_235_B$"
-            Layout: "$GH_235_B$"
+            ListLayout: "$FHS_GH_235_B$"
+            Layout: "$FHS_GH_235_B$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -52,4 +52,3 @@ Layout:
             - Column:
                 - Infuse: Dark
             - Column:
-                - Duration: Round

@@ -61,28 +61,37 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* @TAttack.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCEarth
-            Text: "<sprite name=Push> 2, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCEarth
+                    Text: "<sprite name=Push> 2, <sprite name=XP1>"
     Bottom:
-        - Row: "$GH_124_B_1$"
+        - Row: "$FHS_GH_124_B_1$"
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "20,60,20"
             - Column:
             - Column:
-                - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
-                - Row: "<sprite name=Jump>"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Jump></link>"
+                    - Column:
             - Column:
         - Row: "<size=20%> "
-        - Row: "$GH_124_B_2$"
-        - Consume:
-            Name: BCEarth
-            Text: "$GH_124_B_3$"
+        - Row: "$FHS_GH_124_B_2$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCEarth
+                    Text: "$FHS_GH_124_B_3$"

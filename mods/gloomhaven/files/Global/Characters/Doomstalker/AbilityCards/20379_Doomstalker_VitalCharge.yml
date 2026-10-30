@@ -39,13 +39,13 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $BattleBoar$
+                    SummonName: $FHS_BattleBoar$
     Bottom:
         - Active:
             Ability: BDoom
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_379_B$"
+            ListLayout: "$FHS_GH_379_B$"
             Layout:
-                - Row: "$Doom_MarkText$"
-                - Row: "$GH_379_B$"
-                - Row: "<size=70%>$Doom_DiscardReminderText$"
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH_379_B$"
+                - Row: "<size=70%>$FHS_Doom_DiscardReminderText$"

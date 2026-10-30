@@ -29,19 +29,19 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $LivingBomb$
+                    SummonName: $FHS_LivingBomb$
                     SpecialText:
-                        - Row: "$OnDeath$"
+                        - Row: "$FHS_OnDeath$"
                         - Row: "<size=20%> "
                         - Row: "<nobr><b>Attack <sprite name=Attack> 3</nobr> <sprite name=CreateFire>"
-                        - Row: "$Target_AllEnemiesWithin$ $Range$ 2"
+                        - Row: "$FHS_Target_AllEnemiesWithin$ $FHS_Range$ 2"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BAttack.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
             - Column:
         - Row: "<size=50%> "
         - Infuse: Fire

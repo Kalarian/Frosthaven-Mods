@@ -61,16 +61,16 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *TMove* <voffset=1>@TMove@"
+            - Column: "<size=150%><sprite name=Move> *TMove* <voffset=1>@TMove@"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$JOTL_091_T$"
+        - Row: "$FHS_JOTL_091_T$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -79,8 +79,10 @@ Layout:
                 - Infuse: Earth
             - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <voffset=1>@BMove@"
         - Row: "<size=50%> "
-        - Consume:
-            Name: TCFire
-            Text: "$JOTL_091_B$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFire
+                    Text: "$FHS_JOTL_091_B$"

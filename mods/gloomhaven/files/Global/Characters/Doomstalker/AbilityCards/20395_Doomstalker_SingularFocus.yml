@@ -35,13 +35,13 @@ Data:
                 AnimOverload: DoomTargetAlt
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
+        - Row: "<size=150%><sprite name=Loot> *TLoot*"
     Bottom:
         - Active:
             Ability: BDoom
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_395_B$"
+            ListLayout: "$FHS_GH_395_B$"
             Layout:
-                - Row: "$Doom_MarkText$"
-                - Row: "$GH_395_B$"
-                - Row: "<size=70%>$Doom_DiscardReminderText$"
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH_395_B$"
+                - Row: "<size=70%>$FHS_Doom_DiscardReminderText$"

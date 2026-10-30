@@ -39,12 +39,12 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $RatKing$
-                    SpecialText: "$GH_173_T_2$"
+                    SummonName: $FHS_RatKing$
+                    SpecialText: "$FHS_GH_173_T_2$"
     Bottom:
         - Active:
             Ability: BAttack
             Icon: Positive_AttackPlus
-            ListLayout: "<b></b> $GH_173_B$"
+            ListLayout: "<b></b> $FHS_GH_173_B$"
             Layout:
-                - Row: "<b></b> $GH_173_B$"
+                - Row: "<b></b> $FHS_GH_173_B$"

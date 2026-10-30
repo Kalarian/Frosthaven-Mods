@@ -51,22 +51,28 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
             - Column:
         - Row: "<size=50%> "
-        - Consume:
-            Name: TCAnyAny1
-            Text: "<nobr>+3 <sprite name=Attack></nobr>, <sprite name=XP1>"
-        - Consume:
-            Name: TCAnyAny2
-            Text: "<nobr><sprite name=Target> 2</nobr>, <sprite name=XP1>"
-        - Consume:
-            Name: TCAnyAny3
-            Text: "<nobr><sprite name=Immobilize></nobr>, <nobr><sprite name=Muddle>, <sprite name=XP1></nobr>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAnyAny1
+                    Text: "<nobr>+3 <sprite name=Attack></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAnyAny2
+                    Text: "<nobr><sprite name=Target> 2</nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAnyAny3
+                    Text: "<nobr><sprite name=Immobilize></nobr>, <nobr><sprite name=Muddle>, <sprite name=XP1></nobr>"
     Bottom:
         - Active:
             Ability: BSummon
@@ -74,8 +80,8 @@ Layout:
             Layout:
                 - Summon:
                     Ability: BSummon
-                    SummonName: $Doppelganger$
-                    SpecialText: "$GH_469_B_2$"
+                    SummonName: $FHS_Doppelganger$
+                    SpecialText: "$FHS_GH_469_B_2$"
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "20,20,20,20,20"
@@ -84,5 +90,4 @@ Layout:
                 - Infuse: Earth
             - Column:
             - Column:
-                - Duration: Persistent
             - Column:

@@ -36,12 +36,12 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $GiantRat$
+                    SummonName: $FHS_GiantRat$
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
-        - Consume:
-            Name: BCDark
-            Text:
-                - Row: "<b><size=130%><sprite name=Curse>"
-                - Row: "$Target_OneAdjacentEnemy$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "<size=150%><sprite name=Curse> $FHS_Target_OneAdjacentEnemy$"

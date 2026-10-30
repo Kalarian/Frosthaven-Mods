@@ -27,6 +27,6 @@ Data:
         XP: 2
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Loot> *TLoot*"
+        - Row: "<size=150%><sprite name=Loot> *TLoot*"
     Bottom:
-        - Row: "$GH_232_B$"
+        - Row: "$FHS_GH_232_B$"

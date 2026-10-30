@@ -47,20 +47,23 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Push>*TAttackSubPush* @TAttackSubPush@"
+                - Row: "<link=fhpill><sprite name=Push> *TAttackSubPush* @TAttackSubPush@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCFire
-            Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr>+1 <sprite name=Push></nobr>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFire
+                    Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr>+1 <sprite name=Push></nobr>, <sprite name=XP1>"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Stun>"
-        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=150%><sprite name=Stun>"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCEarth
-            Text: "<sprite name=Poison>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCEarth
+                    Text: "<sprite name=Poison>"

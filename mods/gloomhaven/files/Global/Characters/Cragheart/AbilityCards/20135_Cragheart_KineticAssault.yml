@@ -29,14 +29,19 @@ Data:
         XP: 2
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
     Bottom:
         - Active:
             Ability: BRetaliate
             Icon: Positive_Retaliate
             ListLayout: "<sprite name=Retaliate> *BRetaliate*, <sprite name=Range> *BRetaliate.RetaliateRange*"
             Layout:
-                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
-                - Row: "$Retaliate$ <sprite name=Range> *BRetaliate.RetaliateRange* <size=100%><voffset=1>@BRetaliate.RetaliateRange@"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Range> *BRetaliate.RetaliateRange* <voffset=1>@BRetaliate.RetaliateRange@</link>"
+                    - Column:

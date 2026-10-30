@@ -52,25 +52,19 @@ Layout:
         - Augment:
             AugmentIcon: Positive_AttackPlus
             ParentAbility: TAugment
-            ActiveBonusLayout: "$Augment_OnYourMeleeAttacks$ <size=150%><voffset=-2><sprite name=ConsumeDark></voffset><size=80%>: Kill one normal target instead"
+            ActiveBonusLayout: "$FHS_Augment_OnYourMeleeAttacks$ <size=150%><voffset=-2><sprite name=ConsumeDark></voffset><size=80%>: Kill one normal target instead"
             AugmentAbilityLayout:
                 - Row: "<sprite name=ConsumeDark><voffset=2>: Kill one normal target instead"
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:
-                - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
                 - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Loot> *BLoot*"
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"
         - Divider:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Invisible>"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><sprite name=Invisible></link>"
         - Row: "<size=20%> "
         - Infuse: Dark

@@ -28,15 +28,15 @@ Data:
                 AnimOverload: GainDisadvantage
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Invisible>"
-        - Row: "$Affect_OneAllyWithinRange3$"
+        - Row: "<size=150%><sprite name=Invisible>"
+        - Row: "$FHS_Affect_OneAllyWithinRange3$"
         - Row: "<size=50%> "
         - Infuse: Dark
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
         - Active:
             Ability: BDisadvantage
-            ListLayout: "$GH_459_B$"
-            Layout: "$GH_459_B$"
+            ListLayout: "$FHS_GH_459_B$"
+            Layout: "$FHS_GH_459_B$"
             Icon: Disadvantage

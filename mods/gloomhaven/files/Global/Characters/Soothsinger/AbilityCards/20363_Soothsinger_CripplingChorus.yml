@@ -31,10 +31,14 @@ Data:
                 AnimOverload: AggressiveTargetedShout
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Stun> <size=100%><voffset=1>@TStun@"
-        - Row: "$Target_AllEnemiesWithin$ <nobr><sprite name=Range> *TStun.Range*</nobr>"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Stun> <size=100%><voffset=1>@TStun@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Range> *TStun.Range*</link>"
+            - Column:
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Disarm> <size=100%><voffset=1>@BDisarm@"
-        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "<size=150%><sprite name=Disarm> <size=100%><voffset=1>@BDisarm@"

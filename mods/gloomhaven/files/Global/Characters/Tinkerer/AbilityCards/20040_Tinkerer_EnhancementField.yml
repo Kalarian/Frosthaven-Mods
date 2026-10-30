@@ -30,15 +30,15 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TAttack.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
             - Column:
     Bottom:
         - Active:
             Ability: BAttack
-            ListLayout: "<b></b> $GH_040_B$"
-            Layout: "<b></b> $GH_040_B$"
+            ListLayout: "<b></b> $FHS_GH_040_B$"
+            Layout: "<b></b> $FHS_GH_040_B$"
             Icon: Positive_AttackPlus_Ally_Aura

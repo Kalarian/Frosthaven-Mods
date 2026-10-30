@@ -36,10 +36,10 @@ Data:
                 AnimOverload: PlayPositiveTuneAttack
 Layout:
     Top:
-        - Row: "$GH_365_T$"
+        - Row: "$FHS_GH_365_T$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
+        - Row: "<size=150%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
     Bottom:
-        - Row: "$GH_365_T$"
+        - Row: "$FHS_GH_365_T$"
         - Row: "<size=20%> "
-        - Row: "<b><size=130%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

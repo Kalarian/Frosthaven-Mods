@@ -45,15 +45,15 @@ Data:
                 AnimOverload: DoomTarget
 Layout:
     Top:
-        - Row: "$GH_377_T_1$"
+        - Row: "$FHS_GH_377_T_1$"
         - Row: "<size=50%> "
-        - Row: "$GH_377_T_2$"
+        - Row: "$FHS_GH_377_T_2$"
     Bottom:
         - Active:
             Ability: BDoom
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_377_B$"
+            ListLayout: "$FHS_GH_377_B$"
             Layout:
-                - Row: "$Doom_MarkText$"
-                - Row: "$GH_377_B$"
-                - Row: "<size=70%>$Doom_DiscardReminderText$"
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH_377_B$"
+                - Row: "<size=70%>$FHS_Doom_DiscardReminderText$"

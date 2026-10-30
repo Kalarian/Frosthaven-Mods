@@ -38,13 +38,13 @@ Layout:
         - Active:
             Ability: TActive
             Icon: Positive_AttackPlus
-            ListLayout: "$GH_292_T$"
-            Layout: "$GH_292_T$"
+            ListLayout: "$FHS_GH_292_T$"
+            Layout: "$FHS_GH_292_T$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
             - Column:
-                - Row: "<sprite name=Range>*BAttack.Range* @BAttack.Range@"
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* @BAttack.Range@</link>"
             - Column:

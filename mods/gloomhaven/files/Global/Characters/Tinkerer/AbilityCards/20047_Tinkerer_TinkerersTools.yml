@@ -24,6 +24,6 @@ Data:
                 AnimOverload: LayTrap
 Layout:
     Top:
-        - Row: "$GH_092_T$"
+        - Row: "$FHS_GH_092_T$"
     Bottom:
-        - Row: "$GH_047_B$"
+        - Row: "$FHS_GH_047_B$"

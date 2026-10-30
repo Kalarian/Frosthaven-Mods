@@ -29,14 +29,14 @@ Data:
         XP: 2
 Layout:
     Top:
-        - Row: "$GH_177_T$"
+        - Row: "$FHS_GH_177_T$"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*BHeal.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range*</link>"
             - Column:
         - Row: "<size=50%> "
         - Row:

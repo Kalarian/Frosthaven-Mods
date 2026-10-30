@@ -25,6 +25,6 @@ Data:
                 AnimOverload: PowerUp
 Layout:
     Top:
-        - Row: "$GH_217_T$"
+        - Row: "$FHS_GH_217_T$"
     Bottom:
-        - Row: "$GH_217_B$"
+        - Row: "$FHS_GH_217_B$"

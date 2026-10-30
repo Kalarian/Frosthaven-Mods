@@ -45,19 +45,19 @@ Layout:
     Top:
         - Active:
             Ability: TShield
-            ListLayout: "<b><size=130%><sprite name=Shield> *TShield*"
-            Layout: "<b><size=130%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+            ListLayout: "<size=150%><sprite name=Shield> *TShield*"
+            Layout: "<size=150%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
             Icon: Positive_Shield
         - Divider:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Pull> *TPull*"
+            - Column: "<size=150%><sprite name=Pull> *TPull*"
             - Column:
-                - Row: "<mark=#80919922><size=100%><sprite name=Range>*TPull.Range*</mark>"
+                - Row: "<link=fhpill><sprite name=Range> *TPull.Range*</link>"
             - Column:
         - Row: "<size=50%> "
-        - Row: "$JOTL_238_T$"
+        - Row: "$FHS_JOTL_238_T$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -65,16 +65,17 @@ Layout:
             - Column:
                 - Infuse: Fire
             - Column:
-                - Duration: Round
     Bottom:
-        - Consume:
-            Name: BCLight
-            Text: "<b><size=130%><sprite name=Move> 2, <size=100%><voffset=1><sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "<size=150%><sprite name=Move> 2, <size=100%><voffset=1><sprite name=XP1>"
         - Divider:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack*"
+            - Column: "<size=150%><sprite name=Attack> *BAttack*"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Wound></size>"
+                - Row: "<link=fhpill><sprite name=Wound></link>"
             - Column:

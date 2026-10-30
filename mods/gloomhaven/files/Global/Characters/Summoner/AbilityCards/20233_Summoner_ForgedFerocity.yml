@@ -37,7 +37,7 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $IronBeast$
+                    SummonName: $FHS_IronBeast$
                     SpecialText:
                         - Row: "<nobr><sprite name=Retaliate> 1</nobr>"
                         - Row: "<nobr><sprite name=Shield> 1</nobr>"
@@ -45,10 +45,10 @@ Layout:
         - Active:
             Ability: BShield
             Icon: Positive_Shield
-            ListLayout: "<sprite name=Shield> *BShield*, $Affect_AllSummonedAllies$"
+            ListLayout: "<sprite name=Shield> *BShield*, $FHS_Affect_AllSummonedAllies$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
-                - Row: "$Affect_SelfAndAllSummonedAllies$"
+                - Row: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "$FHS_Affect_SelfAndAllSummonedAllies$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -56,4 +56,3 @@ Layout:
             - Column:
                 - Infuse: Earth
             - Column:
-                - Duration: Round

@@ -29,12 +29,12 @@ Data:
                         TargetAdjacentAlliesOfTarget: "== 0"
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
     Bottom:
         - Active:
             Ability: BActive
-            ListLayout: "$GH_103_B$"
-            Layout: "$GH_103_B$"
+            ListLayout: "$FHS_GH_103_B$"
+            Layout: "$FHS_GH_103_B$"
             Icon: Positive_AttackPlus

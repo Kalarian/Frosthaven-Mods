@@ -38,8 +38,8 @@ Layout:
         - Active:
             Ability: TActive
             Icon: AA_Flying
-            ListLayout: "$Gain_Flying$"
-            Layout: "<b><size=130%>$Gain_Flying$"
+            ListLayout: "$FHS_Gain_Flying$"
+            Layout: "<size=150%>$FHS_Gain_Flying$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "20,20,20,20"
@@ -48,9 +48,8 @@ Layout:
                 - Infuse: Air
             - Column:
             - Column:
-                - Duration: Persistent
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<b><size=130%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
-        - Row: "$Affect_AllAdjacentAllies$"
+        - Row: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$FHS_Affect_AllAdjacentAllies$"

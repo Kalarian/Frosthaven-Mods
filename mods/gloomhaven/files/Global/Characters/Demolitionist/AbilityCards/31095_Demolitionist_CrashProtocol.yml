@@ -49,22 +49,24 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            ListLayout: "$JOTL_095_T$"
-            Layout: "$JOTL_095_T$"
+            ListLayout: "$FHS_JOTL_095_T$"
+            Layout: "$FHS_JOTL_095_T$"
             Icon: Positive_AttackPlus
-        - Row: "<size=20%> "
+        - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Move> *BMove* <voffset=1>@BMove@"
+            - Column: "<size=150%><sprite name=Move> *BMove* <voffset=1>@BMove@"
             - Column:
-                - AddedEffect: "<sprite name=Jump>"
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$JOTL_095_B_1$"
+        - Row: "$FHS_JOTL_095_B_1$"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCEarth
-            Text: "$JOTL_095_B_2$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCEarth
+                    Text: "$FHS_JOTL_095_B_2$"

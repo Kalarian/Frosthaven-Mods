@@ -36,6 +36,6 @@ Data:
         XP: 2
 Layout:
     Top:
-        - Row: "$GH_060_T$"
+        - Row: "$FHS_GH_060_T$"
     Bottom:
-        - Row: "$GH_060_B$"
+        - Row: "$FHS_GH_060_B$"

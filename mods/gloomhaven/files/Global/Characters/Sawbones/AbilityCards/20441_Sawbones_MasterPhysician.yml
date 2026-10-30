@@ -30,13 +30,13 @@ Layout:
         - Active:
             Ability: TActive
             Icon: Positive_Heal
-            ListLayout: "$GH_441_T$"
-            Layout: "$GH_441_T$"
-        - Row: "<size=50%> "
+            ListLayout: "$FHS_GH_441_T$"
+            Layout: "$FHS_GH_441_T$"
+        - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
         - Active:
             Ability: BHealBuff
             Icon: Positive_Heal
-            ListLayout: "$GH_441_B$"
-            Layout: "$GH_441_B$"
+            ListLayout: "$FHS_GH_441_B$"
+            Layout: "$FHS_GH_441_B$"

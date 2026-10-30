@@ -30,11 +30,16 @@ Layout:
         - Row:
             - ColumnWidths: "65,25"
             - Column:
-                - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
-                - Row: "<sprite name=Range> *TAttack.Range*"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Attack> *TAttack*"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+                    - Column:
             - Column:
                 - Row: "£Area£"
         - Row: "<size=50%>"
-        - Row: "$GH_289_T$"
+        - Row: "$FHS_GH_289_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

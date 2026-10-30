@@ -32,20 +32,14 @@ Data:
                 AnimOverload: PowerUp
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=150%><sprite name=Attack> *TAttack*"
         - Divider:
-        - Row:
-            - ColumnWidths: "20,30,30,20"
-            - Column:
-            - Column: "<b><size=130%><sprite name=Invisible>"
-            - Column:
-                - AddedEffect: "$FH/target_self$"
-            - Column:
+        - Row: "<link=fhself><size=125%><sprite name=Invisible></link>"
     Bottom:
         - Active:
             Ability: "BActive"
             Icon: Move
-            ListLayout: "$GH_270_B$"
-            Layout: "$GH_270_B$"
-        - Row: "<size=50%> "
+            ListLayout: "$FHS_GH_270_B$"
+            Layout: "$FHS_GH_270_B$"
+        - Row: "<size=100%> "
         - XPTracker: BActive

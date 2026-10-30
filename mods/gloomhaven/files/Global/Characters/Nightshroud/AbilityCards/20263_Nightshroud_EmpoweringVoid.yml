@@ -52,7 +52,7 @@ Data:
                 XP: 1
 Layout:
     Top:
-        - Row: "<b><size=130%><sprite name=Attack> *TAttack*"
+        - Row: "<size=150%><sprite name=Attack> *TAttack*"
         - Row: "<size=50%> "
         - Consume:
             Name: TCDark
@@ -60,10 +60,10 @@ Layout:
                 - Active:
                     Ability: "TCDarkDoubleMove"
                     Icon: Move
-                    ListLayout: "$GH_263_T$"
-                    Layout: "$GH_263_T$"
+                    ListLayout: "$FHS_GH_263_T$"
+                    Layout: "$FHS_GH_263_T$"
     Bottom:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=50%> "
         - Consume:
             Name: BCDark
@@ -71,5 +71,5 @@ Layout:
                 - Active:
                     Ability: "BCDarkDoubleAttack"
                     Icon: Positive_AttackPlus
-                    ListLayout: "$GH_263_B$"
-                    Layout: "$GH_263_B$"
+                    ListLayout: "$FHS_GH_263_B$"
+                    Layout: "$FHS_GH_263_B$"

@@ -64,23 +64,23 @@ Data:
 Layout:
     Top:
         - Row: "<size=10%> "
-        - Row: "$GH_332_T$"
+        - Row: "$FHS_GH_332_T$"
         - Row: "<size=50%> "
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - AddedEffect: "<sprite name=Target>X"
+                - Row: "<link=fhpill><sprite name=Target>X</link>"
             - Column:
         - Row: "<size=20%> "
-        - Row: "$Xis_AmountOfDamageYouSuffered$"
+        - Row: "$FHS_Xis_AmountOfDamageYouSuffered$"
     Bottom:
-        - Row: "$GH_332_B$"
+        - Row: "$FHS_GH_332_B$"
         - Row: "<size=50%> "
         - Active:
             Ability: BRetaliate
             Icon: Positive_Retaliate
-            ListLayout: "<sprite name=Retaliate> *BRetaliate*. $GH_332_B$"
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*. $FHS_GH_332_B$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
+                - Row: "<size=150%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"

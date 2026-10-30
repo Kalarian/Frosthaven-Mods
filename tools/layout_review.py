@@ -251,14 +251,21 @@ def check(h, table):
     main_rows = [l for l in t.splitlines() if ("<size=130%>" in l or "<size=150%>" in l) and re.search(r"\*\w+\*", l)
                  and re.search(r"sprite name=(Attack|Move|Heal|Shield|Retaliate|Push|Pull|Loot)\b", l)]
     # a condition that is an ability of its own (Unstoppable Charge's Stun: "<size=150%><sprite name=Stun>") is a main line
-    main_rows += [l for l in t.splitlines() if re.search(r"<size=1[35]0%>\s*<sprite name=(" + MODS + r")>\s*\"?\s*$", l.strip())]
-    # a consume's reward text is the dashed box's, not a modifier of the ability
+    # (with its slot, or in the self box: "<link=fhself><size=125%><sprite name=Invisible></link>")
+    main_rows += [l for l in t.splitlines() if re.search(r"<size=1[235][05]%>\s*<sprite name=(" + MODS + r")>(\s*<size=100%>)?"
+                                                         r"(\s*<voffset=1>)?\s*(@[\w.]+@)?\s*(</link>)?\s*\"?\s*$", l.strip())]
+    # a persistent ability's list line and a summon's special icons aren't drawn as the half's modifiers
+    main_rows += [l for l in t.splitlines() if re.match(r"\s*(ListLayout|SpecialText):", l)]
+    # a main line of conditions alone ("Curse, Muddle")
+    main_rows += [l for l in t.splitlines() if "<size=150%>" in l and not re.search(r"\*\w", l) and re.fullmatch(
+        r"(<[^>]*>|,|\s|@[\w.]+@)*", re.sub(r"^\s*- (Row|Column|Data): \"|\"\s*$", "", l))]
+    # a consume's reward text is the dashed box's, and a summon's special icons are its own, not modifiers of the ability
     in_consume, depth, kept = False, 0, []
     for l in t.splitlines():
         ind = len(l) - len(l.lstrip())
         if in_consume and ind <= depth:
             in_consume = False
-        if re.match(r"^\s*- Consume:", l):
+        if re.match(r"^\s*(- Consume|SpecialText):", l):
             in_consume, depth = True, ind
             continue
         if not in_consume:
@@ -289,10 +296,11 @@ def check(h, table):
         notes.append("R3 condition named in capitals: the icon alone")
     if re.search(r"^\s*- Consume:", t, re.M) and "Conditional" not in t:
         notes.append("R4 consume drawn bare: Frosthaven's dashed consume box")
-    styled = "<size=150%>" in t   # a Frosthaven-styled class: the plugin moves its infusions to the bottom
+    styled = True   # every Gloomhaven class is styled since 2026-10-30: the plugin moves a half's infusions to the bottom
     if re.search(r"^\s*- Infuse:", t, re.M) and "MandatoryTrigger" not in t and not styled:
         notes.append("R5 infuse placed under the ability: Frosthaven centres the elements at the bottom of the half")
-    if "$Self$" in t or re.search(r"\bself\b", words, re.I):
+    # a "Self" label left under a value (a rider sentence like "Affect self and all adjacent allies" is wording, not this)
+    if re.search(r"\$(FHS_)?Self\$", t):
         notes.append("R7 'self' pill: Frosthaven outlines a self-targeted ability (to probe)")
     # a pill's modifiers in Frosthaven's order (target, range, pierce, push/pull, then the rest); one pill's rows are
     # consecutive <link=fhpill> lines

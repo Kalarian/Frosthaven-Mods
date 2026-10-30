@@ -29,14 +29,14 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $GreenAdder$
+                    SummonName: $FHS_GreenAdder$
                     SpecialText: "<sprite name=Poison>"
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack*"
+            - Column: "<size=150%><sprite name=Attack> *BAttack*"
             - Column:
-                - Row: "<sprite name=Range>*BAttack.Range* @BAttack.Range@"
-                - AddedEffect: "<size=130%><sprite name=Poison></size>"
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* @BAttack.Range@</link>"
+                - Row: "<link=fhpill><sprite name=Poison></link>"
             - Column:

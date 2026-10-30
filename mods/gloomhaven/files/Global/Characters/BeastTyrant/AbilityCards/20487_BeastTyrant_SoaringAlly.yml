@@ -38,7 +38,7 @@ Layout:
             Layout:
                 - Summon:
                     Ability: TSummon
-                    SummonName: $RedFalcon$
+                    SummonName: $FHS_RedFalcon$
                     SpecialText: "<nobr><sprite name=Flying></nobr>"
         - Row: "<size=20%> "
         - Row:
@@ -48,7 +48,6 @@ Layout:
                 - Infuse: Air
             - Column:
             - Column:
-                - Duration: Persistent
     Bottom:
-        - Row: "$GH_Command$"
-        - Row: "<b><size=130%><sprite name=Loot> *BAllyLoot*"
+        - Row: "$FHS_GH_Command$"
+        - Row: "<size=150%><sprite name=Loot> *BAllyLoot*"

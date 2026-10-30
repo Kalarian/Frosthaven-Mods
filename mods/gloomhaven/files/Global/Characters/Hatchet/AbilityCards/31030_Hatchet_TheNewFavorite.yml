@@ -52,18 +52,18 @@ Layout:
     Top:
         - Active:
             Ability: TActive
-            ListLayout: "$JOTL_030_T$"
-            Layout: "$JOTL_030_T$"
+            ListLayout: "$FHS_JOTL_030_T$"
+            Layout: "$FHS_JOTL_030_T$"
             Icon: Positive_AttackPlus
     Bottom:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
             - Column:
-                - AddedEffect: "<size=130%><sprite name=Immobilize></size>"
+                - Row: "<link=fhpill><sprite name=Immobilize></link>"
             - Column:
         - Divider:
-        - Row: "<b><size=130%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=50%> "
         - Infuse: Air

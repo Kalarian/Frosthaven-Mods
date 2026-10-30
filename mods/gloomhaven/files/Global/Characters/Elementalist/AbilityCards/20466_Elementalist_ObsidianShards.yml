@@ -36,30 +36,30 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20,30,30,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<b><size=130%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<sprite name=Range>*TAttack.Range* <size=100%><voffset=1>@TAttack.Range@"
-                - AddedEffect: "<sprite name=Target>2"
+                - Row: "<link=fhpill><sprite name=Target> 2 <sprite name=Range> *TAttack.Range* <voffset=1>@TAttack.Range@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Consume:
-            Name: TCFireEarth
-            Text: "+3 <sprite name=Attack>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFireEarth
+                    Text: "+3 <sprite name=Attack>, <sprite name=XP1>"
     Bottom:
         - Active:
             Ability: BShield
             Icon: Positive_Shield
             ListLayout: "<sprite name=Shield> *BShield*"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
         - Row: "<size=20%> "
         - Row:
             - ColumnWidths: "20, 20, 20, 20, 20"
             - Column:
             - Column:
-                - Duration: Round
             - Column:
                 - Infuse: Ice
             - Column:

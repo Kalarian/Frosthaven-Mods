@@ -32,14 +32,18 @@ Data:
                 XPPerTarget: 1
 Layout:
     Top:
-        - Row: "$GH_051_T$"
+        - Row: "$FHS_GH_051_T$"
     Bottom:
         - ColumnWidths: "70,25"
         - Column:
-            - Row: "<b><size=130%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
-            - Row: "<sprite name=Range> *BAttack.Range*"
-            - Row: "<sprite name=Poison>"
-            - Row: "<line-height=100%> $XP_PerEnemy$"
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*, <sprite name=Poison></link>"
+                - Column:
+            - Row: "<line-height=100%> $FHS_XP_PerEnemy$"
             - Row: "<size=10%> "
         - Column:
             - Row: "£Area£"

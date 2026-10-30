@@ -37,16 +37,16 @@ Layout:
         - Active:
             Ability: TPrevent
             Icon: Positive_DamagePrevent
-            ListLayout: "$GH_204_T$"
-            Layout: "$GH_204_T$"
+            ListLayout: "$FHS_GH_204_T$"
+            Layout: "$FHS_GH_204_T$"
     Bottom:
         - Active:
             Ability: BShield
             Icon: Positive_Shield
-            ListLayout: "<sprite name=Shield> *BShield*, $Affect_SelfAndAllAllies$"
+            ListLayout: "<sprite name=Shield> *BShield*, $FHS_Affect_SelfAndAllAllies$"
             Layout:
-                - Row: "<b><size=130%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
-                - Row: "$Affect_SelfAndAllAllies$"
+                - Row: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+                - Row: "$FHS_Affect_SelfAndAllAllies$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"
@@ -54,4 +54,3 @@ Layout:
             - Column:
                 - Infuse: Light
             - Column:
-                - Duration: Round
