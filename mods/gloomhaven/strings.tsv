@@ -900,7 +900,7 @@ FHS_GH_310_B	All <sprite name=Allies> with <nobr><sprite name=Poison></nobr> may
 FHS_GH_310_T	Once during each of your Move actions, you may suffer 1 damage to deal 3 damage to any one <sprite name=Enemy> with <nobr><sprite name=Poison></nobr>
 FHS_GH_314_T	If a <nobr><sprite name=Curse></nobr> causes an <sprite name=Enemy> to deal no damage during its attack, that <sprite name=Enemy> suffers <nobr>3 damage</nobr>
 FHS_GH_316_B	Double the value of your next Attack action this round
-FHS_GH_316_T	During your next six Attack actions, <nobr><sprite name=Curse></nobr> one <sprite name=Allies> within <nobr><sprite name=Range> 2</nobr> to gain two <nobr>+1<sprite name=Target></nobr> effects
+FHS_GH_316_T	During your next six Attack actions, <nobr><sprite name=Curse></nobr> one <sprite name=Allies> within <nobr><sprite name=Range> 2</nobr> to gain 3<sprite name=Target>
 FHS_GH_317_B	All <sprite name=Enemy> with <nobr><sprite name=Poison></nobr> suffer <nobr>2 damage</nobr>
 FHS_GH_318_B_1	All <sprite name=Allies> with <nobr><sprite name=Poison></nobr> suffer <nobr>2 damage</nobr>
 FHS_GH_318_B_2	For each two <sprite name=Allies> damaged, add <nobr>+1 <sprite name=Attack></nobr> to all your attacks this round and gain <sprite name=XP1>
