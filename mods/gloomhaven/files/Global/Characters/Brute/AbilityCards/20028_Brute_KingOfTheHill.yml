@@ -41,4 +41,4 @@ Layout:
             - Column:
         - Row: "$FHS_XP_PerEnemy$"
     Bottom:
-        - Row: "<link=fhself><size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@</link>"
+        - Row: "<link=fhself><size=125%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@</link>"

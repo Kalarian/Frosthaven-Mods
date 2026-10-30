@@ -399,7 +399,8 @@ def _clean(t):
 
 def _pill_block(main, mods, self_box):
     main = main.strip('"')
-    main = SELF_OPEN + main + PILL_CLOSE if self_box else main
+    # a value in Frosthaven's self box is drawn at 20 (125%), not the main line's 24
+    main = SELF_OPEN + main.replace(MAIN, "<size=125%>") + PILL_CLOSE if self_box else main
     slotted = [m for m in mods if "@" in m]
     plain = [m for m in mods if "@" not in m]
     if not mods:
@@ -442,6 +443,13 @@ def _style_items(items):
             i = j
             continue
         if n.key == "Consume" and n.dash:
+            # the reward on one line, as Frosthaven writes it ("+1 <Attack>, <Push>1"); Gloomhaven stacked its parts
+            for c in n.children:
+                if c.key == "Text" and c.children:
+                    parts = [r.text().strip() for r in c.children if is_row(r) and not is_spacer(r)]
+                    if parts and len(parts) == len([r for r in c.children if not is_spacer(r)]):
+                        c.children = []
+                        c.value = '"' + " ".join(parts) + '"'
             out.append(Node("Conditional", children=[Node("Layout", dash=False, children=[n])]))
             i += 1
             continue
