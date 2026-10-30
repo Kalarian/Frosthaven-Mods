@@ -37,7 +37,7 @@ Layout:
             - Column:
             - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy>, <sprite name=Push>*TAttackSubPush* @TAttackSubPush@</link>"
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy> <sprite name=Push> *TAttackSubPush* @TAttackSubPush@</link>"
             - Column:
         - Row: "$FHS_XP_PerEnemy$"
     Bottom:

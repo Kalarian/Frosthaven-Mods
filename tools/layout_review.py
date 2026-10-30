@@ -294,6 +294,20 @@ def check(h, table):
         notes.append("R5 infuse placed under the ability: Frosthaven centres the elements at the bottom of the half")
     if "$Self$" in t or re.search(r"\bself\b", words, re.I):
         notes.append("R7 'self' pill: Frosthaven outlines a self-targeted ability (to probe)")
+    # a pill's modifiers in Frosthaven's order (target, range, pierce, push/pull, then the rest); one pill's rows are
+    # consecutive <link=fhpill> lines
+    pills, run = [], []
+    for l in t.splitlines() + [""]:
+        if "<link=fhpill>" in l:
+            run.append(l)
+        elif run:
+            pills.append(" ".join(run))
+            run = []
+    for p in pills:
+        ranks = [gh_layout._pill_rank(f"<sprite name={s}>") for s in re.findall(r"<sprite name=(" + MODS + r")>", p)]
+        if ranks != sorted(ranks):
+            notes.append("R8 pill out of Frosthaven's order: target, range, pierce, push/pull, then conditions")
+            break
     return notes
 
 

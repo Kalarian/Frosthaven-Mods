@@ -38,7 +38,8 @@ Layout:
             - Column:
             - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<link=fhpill><sprite name=Range>*TAttack.Range*, <sprite name=Pull>*TAttackSubPull*, <sprite name=Target>*TAttack.Target* <voffset=1>@TAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <voffset=1>@TAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <sprite name=Pull> *TAttackSubPull*</link>"
             - Column:
     Bottom:
         - Row: "$FHS_Kill_OneAdjacentEnemy$"

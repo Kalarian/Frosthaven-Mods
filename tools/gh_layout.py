@@ -352,9 +352,9 @@ def convert(s, icons=None, warn=print):
 # does what the layout can't say: Frosthaven's font and icon art, the pill and self backgrounds behind the rows marked
 # below, and the infusions at the bottom of the half.
 #   - a main line is Frosthaven's 24 (150% of the card's 16), not bold;
-#   - all of an ability's modifiers (target, range, pierce, push, pull, jump, conditions) are one pill row after the
-#     value, marked <link=fhpill>; the value with an enhancement slot goes last, so its slot ends the pill (a row
-#     draws one slot line);
+#   - all of an ability's modifiers (target, range, pierce, push, pull, jump, conditions) are one pill after the
+#     value, marked <link=fhpill>, in Frosthaven's order (PILL_ORDER); a slot follows its own value, so the pill is
+#     cut into rows after each slotted value (a row draws one slot line) and the plugin joins them;
 #   - "Target all adjacent enemies" is the pill's target entry; "Target one adjacent enemy" (the default) goes;
 #   - a self-targeted value loses its "self" label and is marked <link=fhself> (Frosthaven's outlined box);
 #   - a consume sits in Frosthaven's dashed box (Conditional);
@@ -397,19 +397,46 @@ def _clean(t):
     return t.strip()
 
 
+# Frosthaven's order inside a pill (all 118 of its halves with two or more modifiers, 2026-10-29): target with its
+# qualifiers, range, pierce, push or pull, then the rest (conditions, elements, XP) in the card's own order.
+# The first four are set apart by a space ("◎2 ⟨⟩3 ⇣2"), the rest by a comma ("◎all ⟨⟩2, ★").
+PILL_ORDER = ("Target", "Range", "Pierce", "Push", "Pull", "Jump")
+
+
+def _pill_rank(m):
+    s = re.match(r"<sprite name=(\w+)>", m)
+    k = s.group(1) if s else ""
+    return min(PILL_ORDER.index(k), 3) if k in PILL_ORDER[:5] else 4 if k == "Jump" else 5
+
+
+def _pill_text(mods):
+    out = ""
+    for i, m in enumerate(mods):
+        if i:
+            out += " " if _pill_rank(m) < 5 else ", "
+        # an icon and its number a space apart, as Frosthaven's pills write them ("◎ 2 ⟨⟩ 3")
+        out += re.sub(r"(<sprite name=\w+>)(?=[*\d])", r"\1 ", m)
+    return '"' + PILL_OPEN + out + PILL_CLOSE + '"'
+
+
 def _pill_block(main, mods, self_box):
     main = main.strip('"')
     # a value in Frosthaven's self box is drawn at 20 (125%), not the main line's 24
     main = SELF_OPEN + main.replace(MAIN, "<size=125%>") + PILL_CLOSE if self_box else main
-    slotted = [m for m in mods if "@" in m]
-    plain = [m for m in mods if "@" not in m]
     if not mods:
         return Node("Row", f'"{main}"')
-    if len(slotted) <= 1:
-        cols = [Node("Row", '"' + PILL_OPEN + ", ".join(plain + slotted) + PILL_CLOSE + '"')]
-    else:   # two values with slots: one column each (a row draws one slot line), the plugin joins their pills
-        cols = [Node("Row", '"' + PILL_OPEN + ", ".join(plain + [m]) + PILL_CLOSE + '"') for m in slotted[:1]] + \
-               [Node("Row", '"' + PILL_OPEN + m + PILL_CLOSE + '"') for m in slotted[1:]]
+    mods = sorted(mods, key=_pill_rank)
+    # a slot sits right after its value, as Frosthaven's do ("◎2 [slot] ⟨⟩1"); a row draws one slot line, at its end,
+    # so the pill is cut after each slotted value: one row each, the plugin joins them into one pill
+    parts, cur = [], []
+    for m in mods:
+        cur.append(m)
+        if "@" in m:
+            parts.append(cur)
+            cur = []
+    if cur:
+        parts.append(cur)
+    cols = [Node("Row", _pill_text(p)) for p in parts]
     return Node("Row", children=[Node("ColumnWidths", STYLE_COLUMNS), Node("Column"), Node("Column", f'"{main}"'),
                                  Node("Column", children=cols), Node("Column")])
 

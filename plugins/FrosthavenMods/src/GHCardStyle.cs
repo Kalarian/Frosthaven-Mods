@@ -43,6 +43,7 @@ namespace FrosthavenMods
         // infusions (Call of Doom, Primal Bellow)
         private const float BadgeBottom = 6f;
         private const float GeneratorElement = 51f, GeneratorSlot = 26f, SlotSize = 32f, SlotGap = 5f;
+        private const float PillSlotPull = 3f, PillSlotAfter = 21f, PillSlotEnd = 2f;
         private const float InfuseSize = 48f, InfuseBottom = 11.5f, InfuseBand = 72f, ContentTop = 9f;
         // hexes (Overwhelming Wave)
         private const float HexDot = 54f, HexColumn = 54.5f, HexWidth = 53f, HexRim = 3.2f, HexXHalf = 10.3f, HexXStroke = 2.8f;
@@ -305,8 +306,14 @@ namespace FrosthavenMods
                 if (pillRows.IndexOf(pillRow) > 0) continue;   // handled with the first
                 Rect main = Drawn(mainRow, line);
                 if (main.width <= 0) continue;
+                // a slot in the pill (Shard Launch, Exploding Decoy): 7 px after its number, not a value's 10; 15 px
+                // before the next icon; 9 px before the pill's end
+                var slotted = pillRows.Select(r => r.Cast<Transform>().FirstOrDefault(c => c.gameObject.activeSelf && c.name == "EnhancementContainer" && c.childCount > 0)).ToList();
+                foreach (Transform s in slotted.Where(s => s != null)) Shift(s, line, -PillSlotPull * f, 0);
+                float Gaps() => Enumerable.Range(0, pillRows.Count - 1).Sum(i => (slotted[i] != null ? PillSlotAfter : 4f) * f)
+                                + (slotted[pillRows.Count - 1] != null ? PillSlotEnd * f : 0f);
                 var parts = pillRows.Select(r => Drawn(r, line)).ToList();
-                float pillW = parts.Sum(p => p.width) + (parts.Count - 1) * 4f * f + 2 * PillPad * f;
+                float pillW = parts.Sum(p => p.width) + Gaps() + 2 * PillPad * f;
                 float total = main.width + PillGap * f + pillW;
                 // too long for the half: the pill's text shrinks, as Frosthaven's pill text does (auto 5-18)
                 float avail = line.rect.width - 2 * EdgeMargin * f;
@@ -320,7 +327,7 @@ namespace FrosthavenMods
                         pt.ForceMeshUpdate();
                     }
                     parts = pillRows.Select(r => Drawn(r, line)).ToList();
-                    pillW = parts.Sum(p => p.width) + (parts.Count - 1) * 4f * f + 2 * PillPad * f;
+                    pillW = parts.Sum(p => p.width) + Gaps() + 2 * PillPad * f;
                     total = main.width + PillGap * f + pillW;
                 }
                 float left = line.rect.center.x - total / 2f;
@@ -330,7 +337,7 @@ namespace FrosthavenMods
                 for (int i = 0; i < pillRows.Count; i++)
                 {
                     Shift(pillRows[i], line, x - parts[i].xMin, midY - parts[i].center.y);
-                    x += parts[i].width + 4f * f;
+                    x += parts[i].width + (slotted[i] != null ? PillSlotAfter : 4f) * f;
                 }
                 Image bg = Background(pillRows[0], "FHPill", _pill, Image.Type.Tiled, PillPpum, tint);
                 float pillLeft = left + main.width + PillGap * f;

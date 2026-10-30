@@ -42,7 +42,7 @@ Layout:
             - Column:
             - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
             - Column:
-                - Row: "<link=fhpill><sprite name=Range>*BHeal.Range* @BHeal.Range@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range* @BHeal.Range@</link>"
             - Column:
         - Row: "<size=20%> "
         - Infuse: Earth

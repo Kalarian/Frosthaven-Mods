@@ -38,7 +38,7 @@ Layout:
             - Column:
             - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<link=fhpill><sprite name=Range>*TAttack.Range*, <sprite name=Pull>2</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <sprite name=Pull> 2</link>"
             - Column:
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove*"
