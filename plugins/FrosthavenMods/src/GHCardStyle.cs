@@ -92,6 +92,9 @@ namespace FrosthavenMods
                     Transform rows = h.Find("Content/Layout Parent");
                     if (rows == null) continue;
                     Fonts(rows);
+                    Pending.TryGetValue(__instance, out AbilityCardYMLData cardData);
+                    CAction act = cardData == null ? null : half == __instance.topActionButton ? cardData.TopActionCardData : cardData.BottomActionCardData;
+                    SongTag(h, f, model, act?.Abilities?.Any(a => a?.AbilityType == CAbility.EAbilityType.PlaySong) == true);
                     // an Augment half (Mindthief) has its own stacked layout: the fit passes slid it under the top rim
                     bool augment = rows.GetComponentsInChildren<Transform>(true).Any(c => c.name == "AugmentRow");
                     if (!augment) Margins(h, (RectTransform)rows, f);
@@ -555,7 +558,7 @@ namespace FrosthavenMods
             if (parts.Count > 0)
             {
                 Rect b = Union(parts);
-                float regionTop = halfRect.yMax - ContentTop * f, regionBottom = halfRect.yMin + band;
+                float regionTop = halfRect.yMax - ContentTopOf(half, f), regionBottom = halfRect.yMin + band;
                 float shift = (regionTop + regionBottom) / 2f - b.center.y;
                 shift = Mathf.Min(shift, regionTop - b.yMax);
                 foreach (RectTransform r in rows.Cast<Transform>().OfType<RectTransform>().Where(r => r.gameObject.activeSelf && r != infuseRow))
@@ -627,6 +630,58 @@ namespace FrosthavenMods
         /// <summary>The XP / persistent / lost badges: Frosthaven's bar ends flush with the half's right edge, its bottom
         /// 6 px above the half's (Sodden Soil: the bar at 434..491 x, 448..486 y in a half 13..491 x, 188..492 y). The bar
         /// sizes itself (ContentSizeFitter), so it is anchored bottom-right and grows leftwards from there.</summary>
+        // the "Song" tag (Soothsinger): where Mindthief's "Augment" header sits, in the game's song colour (#EBB0AA)
+        private const float TagLeft = 18f, TagTop = 22f, TagText = 25f, TagIcon = 24f, TagGap = 6f, TagBand = 44f;
+        private static readonly Color SongColour = new Color(0xEB / 255f, 0xB0 / 255f, 0xAA / 255f);
+        private static readonly HashSet<int> Tagged = new HashSet<int>();
+
+        /// <summary>The top of a half's content: below the Song tag on a half that has one.</summary>
+        private static float ContentTopOf(RectTransform half, float f) => (ContentTop + (Tagged.Contains(half.GetInstanceID()) ? TagBand : 0f)) * f;
+
+        /// <summary>A half that plays a song gets "Song" and the class's symbol at its top left (the user, 2026-10-30: songs
+        /// weren't easy to pick out; Mindthief's augments carry "Augment" there). A pooled card is styled again, so an old
+        /// tag goes first.</summary>
+        private static void SongTag(RectTransform half, float f, ECharacter model, bool song)
+        {
+            Transform old = half.Find("GHSongTag");
+            if (old != null) UnityEngine.Object.DestroyImmediate(old.gameObject);
+            Tagged.Remove(half.GetInstanceID());
+            if (!song) return;
+            var tag = new GameObject("GHSongTag", typeof(RectTransform));
+            var rt = (RectTransform)tag.transform;
+            rt.SetParent(half, false);
+            rt.anchorMin = rt.anchorMax = rt.pivot = new Vector2(0f, 1f);
+            rt.anchoredPosition = new Vector2(TagLeft * f, -TagTop * f);
+            rt.sizeDelta = new Vector2(200f * f, TagIcon * f);
+            var text = new GameObject("Text", typeof(RectTransform), typeof(TextMeshProUGUI)).GetComponent<TextMeshProUGUI>();
+            text.rectTransform.SetParent(rt, false);
+            if (_font != null) text.font = _font;
+            text.fontSize = TagText * f;
+            text.fontStyle = FontStyles.Bold;
+            text.color = SongColour;
+            text.enableWordWrapping = false;
+            text.alignment = TextAlignmentOptions.MidlineLeft;
+            text.raycastTarget = false;
+            text.text = "Song";
+            float w = text.GetPreferredValues("Song").x;
+            text.rectTransform.anchorMin = text.rectTransform.anchorMax = text.rectTransform.pivot = new Vector2(0f, 0.5f);
+            text.rectTransform.anchoredPosition = Vector2.zero;
+            text.rectTransform.sizeDelta = new Vector2(w, TagIcon * f);
+            Sprite symbol = UIInfoTools.Instance?.GetCharacterActiveAbilityIcon(model.ToString());
+            if (symbol != null)
+            {
+                var icon = new GameObject("Icon", typeof(RectTransform), typeof(Image)).GetComponent<Image>();
+                icon.rectTransform.SetParent(rt, false);
+                icon.sprite = symbol;
+                icon.preserveAspect = true;
+                icon.raycastTarget = false;
+                icon.rectTransform.anchorMin = icon.rectTransform.anchorMax = icon.rectTransform.pivot = new Vector2(0f, 0.5f);
+                icon.rectTransform.anchoredPosition = new Vector2(w + TagGap * f, 0f);
+                icon.rectTransform.sizeDelta = new Vector2(TagIcon * f, TagIcon * f);
+            }
+            Tagged.Add(half.GetInstanceID());
+        }
+
         /// <summary>An Augment (Mindthief) in the user's look (2026-10-30): the class's own symbol after "Augment" (the
         /// generator draws the card's active-bonus icon, a +attack), and no persistent icon beside the discard reminder:
         /// every augment is persistent, which the badge bar says (AugmentSummary).</summary>
@@ -644,7 +699,8 @@ namespace FrosthavenMods
             }
         }
 
-        /// <summary>The badge bar of a half with an augment: persistent, not round. The augment itself lasts until another
+        /// <summary>The badge bar of a half with an augment or a song: persistent, not round (a song lasts until another is
+        /// played, like an augment; Power Ballad showed no badge at all). The augment itself lasts until another
         /// is played; a round-long effect it grants (Feedback Loop's shield) put the round badge on the card instead.</summary>
         [HarmonyPatch(typeof(FullAbilityCardAction), "GetActionSummaryParams")]
         [HarmonyPostfix]
@@ -652,7 +708,7 @@ namespace FrosthavenMods
         {
             try
             {
-                if (actionData == null || !CAbilityCard.GetActionAbilities(actionData).Any(a => a?.Augment != null)) return;
+                if (actionData == null || !CAbilityCard.GetActionAbilities(actionData).Any(a => a?.Augment != null || a?.AbilityType == CAbility.EAbilityType.PlaySong)) return;
                 __result = new CardActionSummary.Params(isLost, isPermaLost, false, true, actionData.ActionXP);
             }
             catch (Exception e) { if (Reported.Add("augment")) Plugin.Log.LogWarning("Gloomhaven card style: augment badge: " + e); }
@@ -686,7 +742,7 @@ namespace FrosthavenMods
             Rect hr = half.rect;
             float bottom = infuseRow != null ? hr.yMin + Band(Union(containers.SelectMany(c => Icons(c, half))).yMax - hr.yMin, f)
                          : badge.width > 0 && parts.Any(p => p.Overlaps(badge)) ? badge.yMax + 2f * f : hr.yMin + FitEdge * f;
-            Rect region = Rect.MinMaxRect(hr.xMin + FitEdge * f, bottom, hr.xMax - FitEdge * f, hr.yMax - ContentTop * f);
+            Rect region = Rect.MinMaxRect(hr.xMin + FitEdge * f, bottom, hr.xMax - FitEdge * f, hr.yMax - ContentTopOf(half, f));
             if (Plugin.Log != null && FitTrace)
             {
                 var card = half.GetComponentInParent<FullAbilityCard>();
