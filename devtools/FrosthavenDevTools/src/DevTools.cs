@@ -18,7 +18,7 @@ namespace FrosthavenDevTools
     ///             complete_personal_quest, processed the same way so the quest-complete notification shows) and the
     ///             retirement starts exactly as the roster's Retire button would; the game's own screens follow
     ///             (rewards, confirmation, resource hand-out, the retirement story). Permanent in that save.
-    ///             (Ctrl+F4 used to unlock the Gloomhaven classes; the mod's "Gloomhaven classes (content pack)" house
+    ///             (Ctrl+F4 used to unlock the Gloomhaven classes; the mod's "Gloomhaven classes (1st edition) [WIP]" house
     ///             rule does that now, with its guards.)
     ///   Ctrl+F2   every character (party and bench) to the top level, fully built: the experience for level 9, levelled
     ///             up on the spot (outside downtime too), every class card up to their level added to their cards (no

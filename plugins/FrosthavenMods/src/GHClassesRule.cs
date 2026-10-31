@@ -11,7 +11,7 @@ using UnityEngine;
 namespace FrosthavenMods
 {
     /// <summary>
-    /// The outpost command behind the "Gloomhaven classes (content pack)" house rule: unlocks or locks the pack's classes
+    /// The outpost command behind the "Gloomhaven classes (1st edition) [WIP]" house rule: unlocks or locks the pack's classes
     /// in the campaign. UnlockedClassIDs is campaign state, and the host holds three copies of it (its own view's copy,
     /// the host-check copy that joining players are served, and the save), so it only changes inside a host-checked
     /// multiplayer command, like the mod's Give commands (GiveResources.cs): every copy on every PC applies it in command
@@ -81,7 +81,7 @@ namespace FrosthavenMods
     }
 
     /// <summary>
-    /// The campaign side of the "Gloomhaven classes (content pack)" switch (GHClasses.cs is the data and art side).
+    /// The campaign side of the "Gloomhaven classes (1st edition) [WIP]" switch (GHClasses.cs is the data and art side).
     /// Keeps the campaign's unlocked classes in step with the switch: when the rule changes (on every PC, through
     /// ModRules.Applied) and each time the map is shown (load, join, back from a scenario), the host or solo player
     /// compares the switch with the unlocked list and, if they disagree, issues the PackClasses command once nobody is
@@ -111,7 +111,7 @@ namespace FrosthavenMods
 
         /// <summary>The all-open switch needs the pack switch on first (off is always allowed).</summary>
         public static string WhyAllOpenBlocked(bool wantOn) =>
-            wantOn && !On ? "Turn on \"Gloomhaven classes (content pack) [WIP]\" first." : null;
+            wantOn && !On ? "Turn on \"Gloomhaven classes (1st edition) [WIP]\" first." : null;
 
         // ------------------------------------------------------------------ the pack's classes
 

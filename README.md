@@ -55,7 +55,7 @@ When a new version is out, the Mods tab says so: click **Update the app**, then 
 | Modifier deck odds | Shows the odds of your next attack modifier draw | No |
 | Scenario map file | Saves your campaign progress for the companion app's scenario map | No |
 
-### Gloomhaven classes
+### Gloomhaven classes (1st edition)
 
 Play Gloomhaven's classes in Frosthaven, each with its own cards, 3D model, animations, effects, sounds and portraits.
 Perks and masteries come from Cephalofair's official Gloomhaven-to-Frosthaven conversion sheets.

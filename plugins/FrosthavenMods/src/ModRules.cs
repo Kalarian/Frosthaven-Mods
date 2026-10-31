@@ -70,14 +70,16 @@ namespace FrosthavenMods
             new Rule
             {
                 Flag = GloomhavenClasses,
-                Name = "Gloomhaven classes (content pack) [WIP]",
+                Name = "Gloomhaven classes (1st edition) [WIP]",
                 Description = "Adds Gloomhaven's 21 classes to this campaign: the 17 from Gloomhaven and the four from " +
                               "Jaws of the Lion, each with its own cards, 3D model, animations and sounds. [WIP]: the classes " +
                               "play in full, but some of their visual effects are still stand-ins. The four Jaws of the Lion " +
                               "classes open the moment this is turned on (in a solo scenario, at the next outpost). The " +
                               "others wait in envelopes: each retirement in the campaign opens one, and the party picks one " +
                               "of two classes to unlock, on the game's own class-choice screen. " +
-                              "\"Gloomhaven classes: all open at once\" (the next switch) opens them all instead.\n\n" +
+                              "\"Gloomhaven classes: all open at once\" (the next switch) opens them all instead. These are " +
+                              "the classes of Gloomhaven's first edition; its second edition's classes may come later as a " +
+                              "separate pack, which a campaign will use instead of this one, not alongside it.\n\n" +
                               "This is a content pack, not a rule: everyone in the game needs the same version of the mods " +
                               "(the companion installs the pack with them). A player without it is refused when they try to join; " +
                               "a player without the mod at all only sees their join window reset, so tell them. Once a " +

@@ -75,7 +75,7 @@ import gh_events  # noqa: E402
 GH_APP_ID = "780290"
 CARD_ID_OFFSET = 20000
 PACK = "gloomhaven"
-PACK_TITLE = "Gloomhaven classes (content pack)"
+PACK_TITLE = "Gloomhaven classes (1st edition) [WIP]"
 # Bump when the conversion changes in a way that matters in play (card data, IDs): co-op peers must match.
 PACK_VERSION = 1
 # Which classes a campaign opens the moment the pack's switch is on. The others wait in envelopes: each retirement in

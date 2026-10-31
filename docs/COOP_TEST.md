@@ -36,7 +36,7 @@ section (K). Have voice chat open, since some steps are done at the same moment.
 1. Use a **test campaign that's already past the prologue** (e.g. "Mod Test"), not your real campaign.
 2. The party needs **4 characters**: 2 for the host, 2 for the client, and **two of them Gloomhaven classes**, one per
    player (for section K: a **Scoundrel** and a **Sawbones** cover the two things that involve the other player's
-   character; the pack switch **Gloomhaven classes (content pack)** must be on in Options > Custom Rules to create
+   character; the pack switch **Gloomhaven classes (1st edition) [WIP]** must be on in Options > Custom Rules to create
    them, and every Gloomhaven class is open while we test).
 3. In solo, with the dev tools still installed, press **Ctrl+F9** once or twice so every party member has gold and
    materials, and **Ctrl+F2** once with the two Gloomhaven characters in the party, so they are level 9 with every
