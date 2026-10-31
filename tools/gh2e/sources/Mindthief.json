@@ -1,0 +1,1170 @@
+{
+ "class": "Mindthief",
+ "code": "MT2",
+ "model_from": "Mindthief",
+ "ghs_file": "mindthief",
+ "xipe_class": "Mindthief2",
+ "character": {
+  "name": "mindthief",
+  "characterClass": "vermling",
+  "gender": "f",
+  "icon": "gh-mindthief",
+  "edition": "gh2e",
+  "handSize": 10,
+  "traits": [
+   "nimble",
+   "outcast",
+   "persuasive"
+  ],
+  "color": "#6279a5",
+  "stats": [
+   {
+    "level": 1,
+    "health": 6
+   },
+   {
+    "level": 2,
+    "health": 7
+   },
+   {
+    "level": 3,
+    "health": 8
+   },
+   {
+    "level": 4,
+    "health": 9
+   },
+   {
+    "level": 5,
+    "health": 10
+   },
+   {
+    "level": 6,
+    "health": 11
+   },
+   {
+    "level": 7,
+    "health": 12
+   },
+   {
+    "level": 8,
+    "health": 13
+   },
+   {
+    "level": 9,
+    "health": 14
+   }
+  ],
+  "availableSummons": [
+   {
+    "name": "rat-swarm",
+    "cardId": "150",
+    "level": 1,
+    "health": 5,
+    "attack": 2,
+    "movement": 2,
+    "action": {
+     "type": "condition",
+     "value": "poison"
+    }
+   },
+   {
+    "name": "rat-monstrosity",
+    "cardId": "159",
+    "level": 5,
+    "health": 8,
+    "attack": 3,
+    "movement": 3,
+    "action": {
+     "type": "custom",
+     "value": "%data.custom.gh2e.mindthief.1%",
+     "small": true
+    }
+   },
+   {
+    "name": "rat-king",
+    "cardId": "173",
+    "level": 9,
+    "health": 10,
+    "attack": "X",
+    "movement": 3,
+    "action": {
+     "type": "custom",
+     "value": "%data.custom.gh2e.mindthief.2%",
+     "small": true
+    }
+   }
+  ],
+  "perks": [
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.mindthief.3%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.mindthief.4%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus2"
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "immobilize"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus2",
+       "effects": [
+        {
+         "type": "element",
+         "value": "ice"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "condition",
+         "value": "invisible",
+         "effects": [
+          {
+           "type": "specialTarget",
+           "value": "self"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "custom": "%game.custom.perks.ignoreScenario%",
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "rolling": true
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.mindthief.5%",
+    "count": 1
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.mindthief.6%",
+    "count": 1
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.mindthief.7%",
+    "count": 2,
+    "combined": true
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.mindthief.8%",
+   "%data.custom.gh2e.mindthief.9%"
+  ]
+ },
+ "cards": [
+  {
+   "name": "submissive affliction",
+   "level": "1",
+   "initiative": "48",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\submissive-affliction.jpeg",
+   "ghs": {
+    "name": "Submissive Affliction",
+    "number": 146,
+    "level": 1,
+    "initiative": 48,
+    "top": [
+     "Attack 2 [diamond] {\"Add Attack + 1 for each negative condition the target has.\"}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Control one enemy within Range 4:\" {Move 1}",
+     "consume ice {\"The controlled enemy suffers Damage 2\"; card: experience:1}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99146_Mindthief2_Submissive Affliction.yml",
+    "Level": "1",
+    "Initiative": "48",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                AttackEffect:\n                    Type: BuffForEachNegativeConditionOnTarget\n                    Strength: 1\n    Bottom:\n        Abilities:\n            BControlMove:\n                ControlActor:\n                    Abilities:\n                        EnemyWillDoThis:\n                            Move: 1\n                            StrengthIsBase: True\n                    ControlDurationType: ControlForOneAction\n                    ControlActorType: Player\n                Range: 4\n                Filter: Enemy\n                AnimOverload: MindControl\n        Consumes:\n            BCIce:\n                Elements: Ice\n                AbilityOverrides:\n                    BCIceStun:\n                        ParentName: BControlMove\n                        ControlActor:\n                            Abilities:\n                                EnemyWillDoThis:\n                                    Damage: 2\n                                    Filter: Self\n                                    AutoTrigger: True\n                        \n                XP: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$146_T$\"\n#         - Row: \"<size=20%> \"\n#     Bottom:\n#         - Row: \"<size=80%>Control one enemy within $Range$ <sprite name=Range> 4:\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@\"\n#         - Consume:\n#             Name: BCIce\n#             Text:\n#                 - Row: \"The controlled enemy suffers 2 damage, <sprite name=XP1></nobr>\""
+   }
+  },
+  {
+   "name": "hidden in the shadows",
+   "level": "1",
+   "initiative": "14",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\hidden-in-the-shadows.jpeg",
+   "ghs": {
+    "name": "Hidden in the Shadows",
+    "number": 147,
+    "level": 1,
+    "initiative": 14,
+    "top": [
+     "Attack 3 {\"advantage\"}",
+     "\"If the attack ability killed an enemy, perform:\" {Invisible [diamond] {target: self}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"If you have not moved this round, perform:\" {Invisible {target: self}}",
+     "(\"You cannot perform move abilities this round. At the end of the round, lose Invisible.\")"
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": {
+    "file": "99147_Mindthief2_Hidden in the Shadows.yml",
+    "Level": "1",
+    "Initiative": "14",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TActive:\n                AddActiveBonus:\n                    Invisible: True\n                    Filter: Self\n                    AnimOverload: TurnInvisible\n                ActiveBonus:\n                    Duration: Ability\n                    Behaviour: DuringActionAbilityOnKill\n                    Requirement: \n                        OnYourTurn: True\n                    Filter: Enemy \n                AutoTrigger: True #Check\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                AttackHasAdvantage: True\n     \n    Bottom:\n        Abilities:\n            BInvis:\n                Invisible: \n                    DecrementTrigger: Rounds\n                Filter: Self\n                AnimOverload: TurnInvisible\n                StartAbilityRequirements:\n                    Type: ThisAbility\n                    HexesMovedThisTurn: \"<= 0\"\n            BAbilityOverrideAbilityType:\n                AddActiveBonus:\n                    Attack: 0\n                #PreviewEffectText: \"<sprite name=Move> / <sprite name=Attack>\"\n                ActiveBonus:\n                    Behaviour: OverrideMoveAbility\n                    Duration: Round\n                    ValidAbilityType: Move\n                    #IsToggleBonus: True\n                    ActiveBonusAbilityOverrides:\n                        BCTypeOverride:\n                            AbilityType: Heal #Null throws exception\n                            Strength: 0\n                            Filter:\n                                ActorType: Summon\n                                TargetType: Ally\n                                HeroSummonClasses: [NullID]\n\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@ Advantage\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"If the attack ability killed an enemy, perform:\"\n#         - Row: \"<b><size=130%><sprite name=Invisible> $Self$\"\n#     Bottom:\n#         - Row: \"If you have not moved this round, perform:\"\n#         - Row: \"<b><size=130%><sprite name=Invisible> $Self$\"\n#         - Row: \"You cannot perform move abilities this round.\"\n#         - Row: \"At the end of the round, lose <nobr>INVISIBLE <sprite name=Invisible></nobr>\""
+   }
+  },
+  {
+   "name": "scurry",
+   "level": "1",
+   "initiative": "20",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\scurry.jpeg",
+   "ghs": {
+    "name": "Scurry",
+    "number": 148,
+    "level": 1,
+    "initiative": 20,
+    "top": [
+     "Move 3 [square]",
+     "Attack 2 [diamond]"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Loot 2"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=1"
+    ]
+   },
+   "xipe": {
+    "file": "99148_Mindthief2_Scurry.yml",
+    "Level": "1",
+    "Initiative": "20",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n    Bottom:\n        Abilities:\n            BLoot:\n                Loot: 2\n                Target: -1\n                AnimOverload: Loot\n        XP: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Loot$ <sprite name=Loot> *BLoot*\"\n#         - Row: \"<size=20%> \"\n#         - XP: 1"
+   }
+  },
+  {
+   "name": "withering claw",
+   "level": "1",
+   "initiative": "18",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\withering-claw.jpeg",
+   "ghs": {
+    "name": "Withering Claw",
+    "number": 149,
+    "level": 1,
+    "initiative": 18,
+    "top": [
+     "(\"Add Poison, Muddle to all your melee attacks.\")",
+     "Attack 2 [diamond] {Immobilize}"
+    ],
+    "top_flags": [
+     "persistent",
+     "xp=1"
+    ],
+    "bottom": [
+     "\"Control one enemy within Range 4:\" {Attack 2 [diamond]}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99149_Mindthief2_Withering Claw.yml",
+    "Level": "1",
+    "Initiative": "18",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Conditions: Immobilize\n                Augment:\n                    Type: Melee\n                    AbilityOverrides:\n                        TAugmentAddMuddlePoison:\n                            ParentName: TAttack\n                            Conditions: [Muddle, Poison]\n        XP: 1\n    Bottom:\n        Abilities:\n            BControl:\n                ControlActor:\n                    Abilities:\n                        EnemyWillDoThis:\n                            Attack: \n                                Amount: 2\n                                Enhancements: 1\n                            Range: 1\n                            Target: 1\n                            StrengthIsBase: True\n                            RangeIsBase: True\n                    ControlDurationType: ControlForOneAction\n                    ControlActorType: Player\n                Range: 4\n                Filter: Enemy\n                AnimOverload: MindControl\n# Layout:\n#     Top:\n#         - Augment:\n#             AugmentIcon: Mindthief\n#             ParentAbility: TAttack\n#             ActiveBonusLayout: \"$Augment_OnYourMeleeAttacks$ $Add$ <nobr>$Muddle$ <sprite name=Muddle></nobr> $and$ <nobr>$Poison$ <sprite name=Poison></nobr>\"\n#             AugmentAbilityLayout:\n#                 - Row: \"$Add$ <nobr>$Muddle$ <sprite name=Muddle></nobr> $and$ <nobr>$Poison$ <sprite name=Poison></nobr>\"\n#             NormalContentLayout:\n#                 - ColumnWidths: \"60,20,20\"\n#                 - Column: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#                 - Column: \"<sprite name=Immobilize>\"\n#                 - Column:\n#                     - XP: 1\n#     Bottom:\n#         - Row: \"<size=100%>Control one enemy within $Range$ <sprite name=Range> 4:\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@\""
+   }
+  },
+  {
+   "name": "frigid apparition",
+   "level": "1",
+   "initiative": "10",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\frigid-apparition.jpeg",
+   "ghs": {
+    "name": "Frigid Apparition",
+    "number": 150,
+    "level": 1,
+    "initiative": 10,
+    "top": [
+     "Attack 3 [diamond]",
+     "(infuse ice)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]",
+     "Attack 2 [diamond] {Stun}",
+     "(infuse ice)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=2"
+    ]
+   },
+   "xipe": {
+    "file": "99150_Mindthief2_Frigid Apparition.yml",
+    "Level": "1",
+    "Initiative": "10",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n        Infuse: Ice\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n            BAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Conditions: Stun\n                AnimOverload: MindAttack\n        Infuse: Ice\n        XP: 2\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"<size=20%> \"\n#         - Infuse: Ice\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"<b><size=130%>$Stun$ <sprite name=Stun>\"\n#         - Row: \"<size=20%> \"\n#         - Infuse: Ice\n#         - Row: \"<size=20%> \"\n#         - XP: 2"
+   }
+  },
+  {
+   "name": "the mind's weakness",
+   "level": "1",
+   "initiative": "75",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\the-minds-weakness.jpeg",
+   "ghs": {
+    "name": "The Mind's Weakness",
+    "number": 151,
+    "level": 1,
+    "initiative": 75,
+    "top": [
+     "(\"Add Attack + 1 to all your melee attacks.\")",
+     "Attack 2 [diamond]",
+     "\"Control the target of the attack ability:\" {Attack 2 [diamond]}"
+    ],
+    "top_flags": [
+     "persistent",
+     "xp=1"
+    ],
+    "bottom": [
+     "Attack 1 [square] {Wound}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99151_Mindthief2_The Minds Weakness.yml",
+    "Level": "1",
+    "Initiative": "75",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                SubAbilities:\n                    TControl:\n                        ControlActor:\n                            Abilities:\n                                EnemyWillDoThis:\n                                    Attack: 2\n                                    Range: 1\n                                    Target: 1\n                                    StrengthIsBase: True\n                                    RangeIsBase: True\n                            ControlDurationType: ControlForOneAction\n                            ControlActorType: Player\n                        UseParentTargets: True\n                        AnimOverload: MindControl\n                Augment:\n                    Type: Melee\n                    AbilityOverrides:\n                        TAugmentAttackBuff:\n                            ParentName: TAttack\n                            Attack: 1\n        XP: 1\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack:\n                    Amount: 1\n                    Enhancements: 1\n                Conditions: Wound\n# Layout:\n#     Top:\n#         - Augment:\n#             AugmentIcon: Mindthief\n#             ParentAbility: TAttack\n#             ActiveBonusLayout: \"$Augment_OnYourMeleeAttacks$ $Add$ +1 <nobr>$Attack$ <sprite name=Attack></nobr>\"\n#             AugmentAbilityLayout:\n#                 - Row: \"$Add$ +1 <nobr>$Attack$ <sprite name=Attack></nobr>\"\n#             NormalContentLayout:\n#                 - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#                 - Row: \"Control the target of the attack ability:\"\n#                 - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> 2, <sprite name=XP1></nobr>\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@\"\n#         - Row: \"$Wound$ <sprite name=Wound>\""
+   }
+  },
+  {
+   "name": "pilfer",
+   "level": "1",
+   "initiative": "79",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\pilfer.jpeg",
+   "ghs": {
+    "name": "Pilfer",
+    "number": 152,
+    "level": 1,
+    "initiative": 79,
+    "top": [
+     "(Attack 2 [diamond]; \"If this attack does not kill the target, gain a money token.\")",
+     "Loot 1"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99152_Mindthief2_Pilfer.yml",
+    "Level": "1",
+    "Initiative": "79",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n            TLoot:\n                Loot: 1\n                Target: -1\n                AnimOverload: Loot\n    Bottom:\n        Abilities:\n            BMove:\n                Move: 4\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Loot$ <sprite name=Loot> *TLoot*\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\""
+   }
+  },
+  {
+   "name": "perverse edge",
+   "level": "1",
+   "initiative": "8",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\perverse-edge.jpeg",
+   "ghs": {
+    "name": "Perverse Edge",
+    "number": 153,
+    "level": 1,
+    "initiative": 8,
+    "top": [
+     "Attack 3 [diamond] {\"Add Attack + 2 and gain Experience 1 for each negative condition the target has.\"}",
+     "(infuse dark)"
+    ],
+    "top_flags": [
+     "lost"
+    ],
+    "bottom": [
+     "consume ice {Stun {Range 1; card: experience:1}}",
+     "Move 3 [square]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99153_Mindthief2_Perverse Edge.yml",
+    "Level": "1",
+    "Initiative": "08",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                AttackEffect:\n                    Type: BuffForEachNegativeConditionOnTarget\n                    Strength: 2\n                    XP: 1\n        Infuse: Dark\n    Bottom:\n        Abilities:\n            BNull:\n                Null: True\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n        Consumes:\n            BCIce:\n                Elements: Ice\n                Abilities:\n                    BCStun:\n                        ParentName: BNull\n                        Stun: True\n                        Range: 1\n                        Filter: Enemy\n                XP: 1\n\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$154_T$\"\n#         - Infuse: Dark\n#     Bottom:\n#         - Consume:\n#             Name: BCIce\n#             Text: \"<sprite name=Stun> <sprite name=Range> 1, <sprite name=XP1></nobr>\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\""
+   }
+  },
+  {
+   "name": "empathetic assault",
+   "level": "1",
+   "initiative": "12",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\empathetic-assault.jpeg",
+   "ghs": {
+    "name": "Empathetic Assault",
+    "number": 154,
+    "level": 1,
+    "initiative": 12,
+    "top": [
+     "Attack 4 [diamond] {Range 5; Disarm}",
+     "(infuse ice)"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 2 [square]",
+     "Heal 2 [square] {target: self}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99154_Mindthief2_Empathetic Assault.yml",
+    "Level": "1",
+    "Initiative": "12",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                Range: 5\n                Conditions: Disarm\n                AnimOverload: MindAttack\n        Infuse: Ice\n        XP: 2\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            BHeal:\n                Heal: 2 #Remove enhancement to avoid strengthen here\n                AnimOverload: Heal\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@\"\n#         - Row: \"$Disarm$ <sprite name=Disarm>\"\n#         - Row: \"<size=20%> \"\n#         - Row:\n#             - ColumnWidths: \"30,20,20\"\n#             - Column:\n#             - Column:\n#                 - Infuse: Ice\n#             - Column:\n#                 - XP: 2\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@\"\n#         - Row: \"$Self$\""
+   }
+  },
+  {
+   "name": "psychic blade",
+   "level": "1",
+   "initiative": "77",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\psychic-blade.jpeg",
+   "ghs": {
+    "name": "Psychic Blade",
+    "number": 155,
+    "level": 1,
+    "initiative": 77,
+    "top": [
+     "(\"Your single-target melee attack abilities may target enemies within 2 hexes (of you).\")",
+     "Attack 3 [diamond] {Curse}",
+     "\"Control the target of the attack ability:\" {Move 1}"
+    ],
+    "top_flags": [
+     "persistent",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 3 [square]",
+     "\"Add Curse to all your melee attacks this round.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99155_Mindthief2_Psychic Blade.yml",
+    "Level": "1",
+    "Initiative": "77",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Conditions: Curse\n                SubAbilities:\n                    TControl:\n                        ControlActor:\n                            Abilities:\n                                EnemyWillDoThis:\n                                    Move: 1\n                                    StrengthIsBase: True\n                            ControlDurationType: ControlForOneAction\n                            ControlActorType: Player\n                        UseParentTargets: True\n                        AnimOverload: MindControl\n                Augment:\n                    Type: Melee\n                    AbilityOverrides:\n                        TAugmentAttackBuff:\n                            ParentName: TAttack\n                            Range: 1\n                            TreatAsMelee: True\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1 \n            BAttackBuff:\n                Attack: 0\n                Conditions: Curse\n                Filter: Self\n                ActiveBonus:\n                    Behaviour: BuffAttack\n                    Duration: Round\n                AnimOverload: PowerUp    \n            #BAttackBuff:\n#                Conditions: Curse\n#                Filter: Self\n#                ActiveBonus:\n#                    Duration: Round\n#                AnimOverload: PowerUp\n# Layout:\n#     Top:\n#         - Augment:\n#             AugmentIcon: Mindthief\n#             ParentAbility: TAttack\n#             ActiveBonusLayout: \"Your single-target melee attack abilities may target enemies within 2 hexes (of you)\"\n#             AugmentAbilityLayout:\n#                 - Row: \"Your single-target melee attack abilities may target enemies within 2 hexes (of you)\"\n#             NormalContentLayout:\n#                 - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@, <nobr>$Curse$ <sprite name=Curse></nobr>\"\n#                 - Row: \"Control the target of the attack ability:\"\n#                 - Row: \"<b><size=130%>$Move$ <sprite name=Move> 1 <size=100%><voffset=1>, <sprite name=XP1></nobr>\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=50%> \"\n#         - Active:\n#             Ability: BAttackBuff\n#             Icon: Attack\n#             ListLayout: \"Add <nobr>$Curse$ <sprite name=Curse></nobr> to all your melee attacks this round\"\n#             Layout:  \"Add <nobr>$Curse$ <sprite name=Curse></nobr> to all your melee attacks this round\"\n#         - Row: \"<size=50%> \"\n#         - Duration: Round"
+   }
+  },
+  {
+   "name": "feedback loops",
+   "level": "X",
+   "initiative": "51",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\feedback-loops.jpeg",
+   "ghs": {
+    "name": "Feedback Loop",
+    "number": 156,
+    "level": 1,
+    "initiative": 51,
+    "top": [
+     "(\"After each of your melee attack abilities, grant one of your summons:\"; Attack +0)",
+     "Attack 2 [square]",
+     "\"Grant one of your summons:\" {Move +0}"
+    ],
+    "top_flags": [
+     "persistent",
+     "xp=1"
+    ],
+    "bottom": [
+     "(Move 4 [square] {Jump}; \"If you end this movement in the same hex as you start, all enemies moved through gain Muddle.\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99156_Mindthief2_Feedback Loop.yml",
+    "Level": "X",
+    "Initiative": "51",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Augment:\n                    Type: Melee\n                    Abilities:\n                        TAugmentAlly:\n                            ControlActor:\n                                Abilities:\n                                    BAllyAttack:\n                                        Attack: +0\n                                        Range: +0\n                                ControlActorType: Player\n                            Targeting: All\n                            Filter:\n                                ActorType: Summon\n                                TargetType: Ally\n                                HeroSummonClasses: [PlagueRat2ID, RatKing2ID, GiantRat2ID,GanglingRatMonstrosityID]\n                            AnimOverload: MindControl\n            TAlly:\n                ControlActor:\n                    Abilities:\n                        BAllyMove:\n                            Move: 2\n                            StrengthIsBase: True\n                    ControlActorType: Player\n                Targeting: All\n                Filter:\n                    ActorType: Summon\n                    TargetType: Ally\n                    HeroSummonClasses: [PlagueRat2ID, RatKing2ID, GiantRat2ID,GanglingRatMonstrosityID]\n                AnimOverload: MindControl\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n                    Jump: True\n                AllTargetsOnMovePathSameStartAndEnd: True\n                Conditions: Muddle\n# Layout:\n#     Top:\n#         - Augment:\n#             AugmentIcon: Mindthief\n#             ParentAbility: TAttack\n#             ActiveBonusLayout: \"$Augment_OnYourMeleeAttacks$ Grant one of your summons $Attack$ <sprite name=Attack>+0\"\n#             AugmentAbilityLayout:\n#                 - Row: \"Grant one of your summons\"\n#                 - Row: \"$Attack$ <sprite name=Attack>+0\"\n#             NormalContentLayout:\n#                 - Row: \"<b>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#                 - Row: \"Grant one of your summons: $Move$ <sprite name=Move>+0, <sprite name=XP1></nobr>\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"$Jump$ <sprite name=Jump>\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$149_B$\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"<b><size=130%>$Muddle$ <sprite name=Muddle>\"\n#         - Row: \"$Target_AllEnemiesMovedThrough$\""
+   },
+   "matched_by_spelling": [
+    "ghs:feedbackloop",
+    "xipe:feedbackloop"
+   ]
+  },
+  {
+   "name": "possession",
+   "level": "X",
+   "initiative": "71",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\possession.jpeg",
+   "ghs": {
+    "name": "Possession",
+    "number": 157,
+    "level": "X",
+    "initiative": 71,
+    "top": [
+     "\"Control one enemy within Range 4:\" {Attack 3 [diamond] {Muddle}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [square]",
+     "\"Grant one of your summons:\" {Move 2 [square]}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99157_Mindthief2_Possession.yml",
+    "Level": "X",
+    "Initiative": "71",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TControl:\n                ControlActor:\n                    Abilities:\n                        EnemyWillDoThis:\n                            Attack: \n                                Amount: 3\n                                Enhancements: 1\n                            Range: 1\n                            Conditions: [Muddle]\n                            Target: 1\n                            StrengthIsBase: True\n                            RangeIsBase: True\n                    ControlDurationType: ControlForOneAction\n                    ControlActorType: Player\n                Range: 4\n                Filter: Enemy\n                AnimOverload: MindControl\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BAlly:\n                ControlActor:\n                    Abilities:\n                        BAllyMove:\n                            Move:\n                                Amount: 2\n                                Enhancements: 1\n                            StrengthIsBase: True\n                    ControlActorType: Player\n                Targeting: All\n                Filter:\n                    ActorType: Summon\n                    TargetType: Ally\n                    HeroSummonClasses: [RatKing2ID,PlagueRat2ID,GanglingRatMonstrosityID]\n                AnimOverload: MindControl\n# Layout:\n#     Top:\n#         - Row: \"<size=80%>Control one enemy within $Range$ <sprite name=Range> 4:\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@\"\n#         - Row: \"<sprite name=Muddle>\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"Grant one of your summons:\"\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@\""
+   }
+  },
+  {
+   "name": "gnawing horde",
+   "level": "X",
+   "initiative": "82",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\gnawing-horde.jpeg",
+   "ghs": {
+    "name": "Gnawing Horde",
+    "number": 158,
+    "level": "X",
+    "initiative": 82,
+    "top": [
+     "Summon {\"name\":\"rat-swarm\",\"health\":5,\"attack\":2,\"movement\":2,\"enhancements\":[\"heal\",\"attack\",\"move\"],\"action\":{\"type\":\"condition\",\"value\":\"poison\"}}"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 4"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99158_Mindthief2_Gnawing Horde.yml",
+    "Level": "X",
+    "Initiative": "82",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TSummon:\n                Summon: PlagueRat2ID\n                AnimOverload: Summon\n        XP: 2\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n# Layout:\n#     Top:\n#         - Active:\n#             Ability: \"TSummon\"\n#             Icon: \"Summon\"\n#             Layout:\n#                 - Summon:\n#                     Ability: TSummon\n#                     SummonName: $PlagueRat$\n#                     SpecialText: \"$Poison$ <sprite name=Poison>\"\n#         - Row: \"<size=20%> \"\n#         - Row:\n#             - ColumnWidths: \"30,20,20\"\n#             - Column:\n#             - Column:\n#                 - XP: 2\n#             - Column:\n#                 - Duration: Persistent\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\""
+   }
+  },
+  {
+   "name": "fearsome blade",
+   "level": "2",
+   "initiative": "27",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\fearsome-blade.jpeg",
+   "ghs": {
+    "name": "Fearsome Blade",
+    "number": 159,
+    "level": 2,
+    "initiative": 27,
+    "top": [
+     "Attack 2 [square] {Push 2 [square]; Curse; consume ice {Attack +2; card: experience:1}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Wound {Range 1}",
+     "Move 4"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99159_Mindthief2_Fearsome Blade.yml",
+    "Level": "2",
+    "Initiative": "27",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Conditions: Curse\n                SubAbilities:\n                    TAttackSubPush:\n                        Push:\n                            Amount: 2\n                            Enhancements: 1\n                        IsInlineSubAbility: True\n        Consumes:\n            TCIce:\n                Elements: Ice\n                AbilityOverrides:\n                    TCIceAttackBuff:\n                        ParentName: TAttack\n                        Strength: 2\n                XP: 1\n    Bottom:\n        Abilities:\n            BWound:\n                Wound: True\n                Filter: Enemy\n                AnimOverload: TargetedDebuff\n            BMove:\n                Move: 4\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Push$ <sprite name=Push> *TAttackSubPush* @TAttackSubPush@\"\n#         - Row: \"<b><size=100%>$Curse$ <sprite name=Curse>\"\n#         - Consume:\n#             Name: TCIce\n#             Text: \"<nobr>+2 $Attack$ <sprite name=Attack>, <sprite name=XP1></nobr>\" \n#     Bottom:\n#         - Row: \"<b><size=130%>$Wound$ <sprite name=Wound>\"\n#         - Row: \"$Target_OneAdjacentEnemy$\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\""
+   }
+  },
+  {
+   "name": "hostile takeover",
+   "level": "2",
+   "initiative": "9",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\hostile-takeover.jpeg",
+   "ghs": {
+    "name": "Hostile Takeover",
+    "number": 160,
+    "level": 2,
+    "initiative": 9,
+    "top": [
+     "Attack 2 [square] {Range 4; Immobilize}",
+     "(infuse ice)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Place a character token on a normal or elite enemy within Range 4. This round, during that enemy's turn, it treats its enemies as allies and its allies as enemies, with you controlling its abilities.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "round",
+     "xp=2"
+    ]
+   },
+   "xipe": {
+    "file": "99160_Mindthief2_Hostile Takeover.yml",
+    "Level": "2",
+    "Initiative": "09",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 4\n                Conditions: Immobilize\n        Infuse: Ice\n    Bottom:\n        Abilities:\n            TControl:\n                ControlActor:\n                    ControlDurationType: ControlForOneTurn\n                    ControlActorType: Ally\n                AnimOverload: MindControl\n                Range: 4\n                Filter:\n                    TargetType: Enemy\n                    EnemyType: [Normal, Elite]\n        Infuse: Dark\n        XP: 2"
+   }
+  },
+  {
+   "name": "brain leech",
+   "level": "3",
+   "initiative": "21",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\brain-leech.jpeg",
+   "ghs": {
+    "name": "Brain Leech",
+    "number": 161,
+    "level": 3,
+    "initiative": 21,
+    "top": [
+     "\"Control one enemy within Range 4:\" {Move 2 [square]; Attack 2 [diamond]; consume ice {Wound; card: experience:1}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Attack 1 [square]",
+     "\"If you performed the attack ability, perform:\" {Strengthen {target: self}}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99161_Mindthief2_Brain Leech.yml",
+    "Level": "3",
+    "Initiative": "21",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TControl:\n                ControlActor:\n                    Abilities:\n                        EnemyWillDoThis1:\n                            Move: \n                                Amount: 2\n                                Enhancements: 1\n                            StrengthIsBase: True\n                        EnemyWillDoThis2:\n                            Attack: \n                                Amount: 2\n                                Enhancements: 1\n                            StrengthIsBase: True\n                            RangeIsBase: True\n                    ControlDurationType: ControlForOneAction\n                    ControlActorType: Player\n                Range: 4\n                Filter: Enemy\n                AnimOverload: ControlEnemy\n        Consumes:\n            TCIce:\n                Elements: Ice\n                AbilityOverrides:\n                    TCIceWound:\n                        ParentName: TControl\n                        Conditions: Wound\n                XP: 1\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack:\n                    Amount: 1\n                    Enhancements: 1\n                Range: 1\n            BStrengthen: \n                Strengthen: True\n                Filter: Self\n                AnimOverload: PowerUp  \n                \n                # #Make it a subability?\n#                 \n#                 #ConditionalOverride like RippedFromTheFlesh\n#                 ConditionalOverrides:\n#                         BHealCO:\n#                             Self: True\n#                             Requirement:\n#                                 ActorsKilledThisRound: \"> 0\"\n#                             XP: 1\n#                             AbilityOverrides:\n#                                 BBuff:\n#                                     Condition: Strengthen\n# Layout:\n#     Top:\n#         - Row: \"$JOTL_161_T_1$\"\n#         - Row: \"<size=20%> \"\n#         - Row:\n#             - ColumnWidths: \"15,70,15\"\n#             - Column:\n#             - Column:\n#                 - Row: \"<b><size=130%>$Move$ <sprite name=Move> *EnemyWillDoThis1* <size=100%><voffset=1>@EnemyWillDoThis1@\"\n#                 - Row: \"<size=20%> \"\n#                 - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *EnemyWillDoThis2* <size=100%><voffset=1>@EnemyWillDoThis2@\"\n#             - Column:\n#         - Row: \"<size=20%> \"\n#         - Row: \"$JOTL_161_T_2$ $With_YouControllingActions$\"\n#         - Row: \"<size=20%> \"\n#         - Consume:\n#             Name: TCIce\n#             Text: \"$Wound$ <sprite name=Wound>, <sprite name=XP1></nobr>\" \n#     Bottom:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Strengthen$ <sprite name=Strengthen>\"\n#         - Row: \"$Self$\""
+   }
+  },
+  {
+   "name": "cranium overload",
+   "level": "3",
+   "initiative": "5",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\cranium-overload.jpeg",
+   "ghs": {
+    "name": "Cranium Overload",
+    "number": 162,
+    "level": 3,
+    "initiative": 5,
+    "top": [
+     "\"Designate a hex containing an enemy within Range 4 to perform:\" {Attack 6 {Target %data.custom.gh2e.mindthief.abilities.162.2%}}",
+     "\"If the attack ability killed an enemy, perform:\" {Attack 2 {Target %data.custom.gh2e.mindthief.abilities.162.4%}}"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 5 [circle] {Jump}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99162_Mindthief2_Cranium Overload.yml",
+    "Level": "3",
+    "Initiative": "05",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 6\n                Pierce: 5\n                Range: 4\n                Filter:\n                    TargetType: Enemy\n                AnimOverload: MindAttack\n                SubAbilities:\n                    TAttackRadial:\n                        Attack: 2\n                        Range: 1\n                        Target: -1\n                        Filter: Enemy\n                        StartAbilityRequirements:\n                            Type: SubAbility\n                            ActorsKilledByAbility: \"> 0\"\n                        AnimOverload: MindAttack\n                        AllTargetsAdjacentToParentTarget: True\n                        UseParentRangeType: True\n        XP: 2\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 5\n                    Enhancements: 1\n                Jump: True"
+   }
+  },
+  {
+   "name": "frozen shiv",
+   "level": "4",
+   "initiative": "16",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\frozen-shiv.jpeg",
+   "ghs": {
+    "name": "Frozen Shiv",
+    "number": 163,
+    "level": 4,
+    "initiative": 16,
+    "top": [
+     "Attack 4 [diamond] {Pierce 1 [square]}",
+     "(infuse ice)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Attack 3 [diamond]",
+     "Move 3 [circle]",
+     "Attack 3 [diamond]",
+     "(infuse ice)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=2"
+    ]
+   },
+   "xipe": {
+    "file": "99163_Mindthief2_Frozen Shiv.yml",
+    "Level": "4",
+    "Initiative": "16",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                    Pierce: 1\n        Infuse: Ice\n    Bottom:\n        Abilities:\n            BAttack1:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BAttack2:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n        XP: 2\n        Infuse: Ice\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\" \n#         - Row: \"$Pierce$ <sprite name=Pierce> *TAttack.Pierce* @TAttack.Pierce@\" \n#         - Infuse: Ice\n#     Bottom:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *BAttack1* <size=100%><voffset=1>@BAttack1@\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *BAttack2* <size=100%><voffset=1>@BAttack2@\"\n#         - Row: \"<size=20%> \"\n#         - Row:\n#             - ColumnWidths: \"30,20,20\"\n#             - Column:\n#             - Column:\n#                 - XP: 2\n#             - Column:\n#                 - Infuse: Ice"
+   }
+  },
+  {
+   "name": "silent scream",
+   "level": "4",
+   "initiative": "83",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\silent-scream.jpeg",
+   "ghs": {
+    "name": "Silent Scream",
+    "number": 164,
+    "level": 4,
+    "initiative": 83,
+    "top": [
+     "(\"After each of your melee attack abilities, perform:\"; Heal 2 {Range 2})",
+     "Attack 2 [diamond] {Disarm}"
+    ],
+    "top_flags": [
+     "persistent",
+     "xp=1"
+    ],
+    "bottom": [
+     "\"Control one enemy within Range 4:\" {Attack -1}",
+     "(infuse ice)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99164_Mindthief2_Silent Scream.yml",
+    "Level": "4",
+    "Initiative": "83",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Conditions: Disarm\n                Augment:\n                    Type: Melee\n                    Abilities:\n                        TAugmentHeal:\n                            Heal: 2\n                            Range: 2\n                            AnimOverload: Heal\n                            Filter: [Self, Ally]\n        XP: 1\n    Bottom:\n        Abilities:\n            TControl:\n                ControlActor:\n                    Abilities:\n                        EnemyWillDoThis:\n                            Attack: -1\n                            Range: 1\n                            RangeIsBase: True\n                            #StrengthIsBase: True\n                    ControlDurationType: ControlForOneAction\n                    ControlActorType: Player\n                Range: 4\n                Target: 1\n                Filter: Enemy\n                AnimOverload: MindControl\n        Infuse: Ice\n# Layout:\n#     Top:\n#         - Augment:\n#             AugmentIcon: Mindthief\n#             ParentAbility: TAttack\n#             ActiveBonusLayout: \"$Augment_OnYourMeleeAttacks$ <nobr>$Heal$ <sprite name=Heal> *TAugmentHeal*,</nobr> $Range$ <sprite name=Range> *TAugmentHeal.Range* @TAugmentHeal.Range@\"\n#             AugmentAbilityLayout:\n#                 - Row: \"<b>$Heal$ <sprite name=Heal> *TAugmentHeal*\"\n#                 - Row: \"$Range$ <sprite name=Range> *TAugmentHeal.Range* @TAugmentHeal.Range@\"\n#             NormalContentLayout:\n#                 - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#                 - Row: \"$Disarm$ <sprite name=Disarm>, <sprite name=XP1></nobr>\"\n#     Bottom:\n#         - Row: \"$152_B$\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> -1\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$With_YouControllingActions$\"\n#         - Infuse: Ice"
+   }
+  },
+  {
+   "name": "mass hysteria",
+   "level": "5",
+   "initiative": "11",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\mass-hysteria.jpeg",
+   "ghs": {
+    "name": "Mass Hysteria",
+    "number": 165,
+    "level": 5,
+    "initiative": 11,
+    "top": [
+     "Attack 1 {Target 4; Range 4; Pierce 3; Muddle}",
+     "(infuse ice)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(Move 3 [square] {Jump}; \"All enemies moved through gain Poison.\")",
+     "(infuse dark)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99165_Mindthief2_Mass Hysteria.yml",
+    "Level": "5",
+    "Initiative": "11",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 1\n                Range: 4\n                Pierce: 3\n                Target: 4\n                Conditions: Muddle\n                AnimOverload: MindAttack\n        Infuse: Ice\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Jump: True\n                    Enhancements: 1\n                AllTargetsOnMovePath: True\n                Conditions: Poison\n        Infuse: Dark\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* \"\n#         - Row: \"$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@\"\n#         - Row: \"$Target$ <sprite name=Target> *TAttack.Target* @TAttack.Target@\"\n#         - Row: \"$Pierce$ <sprite name=Pierce> *TAttack.Pierce* @TAttack.Pierce@\" \n#         - Row: \"$Muddle$ <sprite name=Muddle>\"\n#         - Row: \"<size=20%> \"\n#         - Infuse: Ice\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"$Jump$ <sprite name=Jump>\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Poison$ <sprite name=Poison>\"\n#         - Row: \"$Target_AllEnemiesMovedThrough$\"\n#         - Row: \"<size=20%> \"\n#         - Infuse: Dark"
+   }
+  },
+  {
+   "name": "gangling abomination",
+   "level": "5",
+   "initiative": "81",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\gangling-abomination.jpeg",
+   "ghs": {
+    "name": "Gangling Abomination",
+    "number": 166,
+    "level": 5,
+    "initiative": 81,
+    "top": [
+     "Summon {\"name\":\"rat-monstrosity\",\"health\":\"8\",\"attack\":\"3\",\"movement\":\"3\",\"count\":1,\"enhancements\":[\"heal\",\"move\",\"attack\"],\"action\":{\"type\":\"custom\",\"value\":\"%data.custom.gh2e.mindthief.abilities.166.1%\"}}"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 2 [circle]",
+     "Attack 2 [square]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99166_Mindthief2_Gangling Abomination.yml",
+    "Level": "5",
+    "Initiative": "81",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TSummon:\n                Summon: GanglingRatMonstrosityID\n                AnimOverload: Summon\n        XP: 2\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            BAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n# Layout:\n#     Top:\n#         - Active:\n#             Ability: \"TSummon\"\n#             Icon: \"Summon\"\n#             Layout: \n#                 - Summon: \n#                     Ability: TSummon\n#                     SummonName: $GanglingRatMonstrosity$\n#                     SpecialText: \"Add <nobr>+1 Attack <sprite name=Attack></nobr> if the target has a negative condition\"\n#         - Row: \"<size=20%> \"\n#         - Row:\n#             - ColumnWidths: \"30,20,20\"\n#             - Column:\n#             - Column:\n#                 - XP: 2\n#             - Column:\n#                 - Duration: Persistent\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\" \n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@\""
+   }
+  },
+  {
+   "name": "telepathic command",
+   "level": "6",
+   "initiative": "17",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\telepathic-command.jpeg",
+   "ghs": {
+    "name": "Telepathic Command",
+    "number": 167,
+    "level": 6,
+    "initiative": 17,
+    "top": [
+     "\"Grant one of your summons:\" {Attack +0; Invisible [diamond] {target: self}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]",
+     "\"Grant one of your summons:\" {Move 4 [square]}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99167_Mindthief2_Telepathic Command.yml",
+    "Level": "6",
+    "Initiative": "17",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAlly:\n                ControlActor:\n                    Abilities:\n                        TAllyAttack:\n                            Attack: +0\n                            Range: +0\n                            RangeIsBase: True\n                        TAllyInvisible:\n                            Invisible: True\n                    ControlActorType: Player\n                Range: 1\n                Filter:\n                    ActorType: Summon\n                    TargetType: Ally\n                    HeroSummonClasses: [PlagueRat2ID, RatKing2ID, GiantRat2ID,GanglingRatMonstrosityID]\n                AnimOverload: MindControl\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n            BAlly:\n                ControlActor:\n                    Abilities:\n                        BAllyMove:\n                            Move:\n                                Amount: 4\n                                Enhancements: 1\n                            StrengthIsBase: True\n                    ControlActorType: Player\n                Targeting: All\n                Filter:\n                    ActorType: Summon\n                    TargetType: Ally\n                    HeroSummonClasses: [PlagueRat2ID, RatKing2ID, GiantRat2ID,GanglingRatMonstrosityID]\n                AnimOverload: MindControl\n# Layout:\n#     Top:\n#         - Row: \"Grant one of your summons:\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> +0\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"<b><size=130%><sprite name=Invisible> $Self$\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"Grant one of your summons:\"\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@\""
+   }
+  },
+  {
+   "name": "dark frenzy",
+   "level": "6",
+   "initiative": "39",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\dark-frenzy.jpeg",
+   "ghs": {
+    "name": "Dark Frenzy",
+    "number": 168,
+    "level": 6,
+    "initiative": 39,
+    "top": [
+     "Attack 3 [diamond] {consume ice {(Attack +2; card: experience:1)}; consume dark {(Attack +2; card: experience:1)}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"Control two enemies within Range 4:\" {Move 1}",
+     "consume ice {\"The controlled enemies suffer Damage 1, Experience 1.\"}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99168_Mindthief2_Dark Frenzy.yml",
+    "Level": "6",
+    "Initiative": "39",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n        Consumes:\n            TCIce:\n                Elements: Ice\n                AbilityOverrides:\n                    TCIceAttackBuff:\n                        ParentName: TAttack\n                        Strength: 2\n                XP: 1\n            TCDark:\n                Elements: Dark\n                AbilityOverrides:\n                    TCDarkAttackBuff:\n                        ParentName: TAttack\n                        Strength: 2\n                XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BControlMove:\n                ControlActor:\n                    Abilities:\n                        EnemyWillDoThis:\n                            Move: 1\n                            StrengthIsBase: True\n                    ControlDurationType: ControlForOneAction\n                    ControlActorType: Player\n                Range: 4\n                Target: 2\n                Filter: Enemy\n                AnimOverload: MindControl\n        Consumes:\n            BCIce:\n                Elements: Ice\n                AbilityOverrides:\n                    BCIceStun:\n                        ParentName: BControlMove\n                        ControlActor:\n                            Abilities:\n                                EnemyWillDoThis:\n                                    Damage: 1\n                                    Filter: Self\n                                    AutoTrigger: True\n                        \n                XP: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"<size=20%> \"\n#         - Consume:\n#             Name: TCIce\n#             Text: \"+2 $Attack$ <sprite name=Attack>, <sprite name=XP1>\"\n#         - Row: \"<size=20%> \"\n#         - Consume:\n#             Name: TCDark\n#             Text: \"+2 $Attack$ <sprite name=Attack>, <sprite name=XP1>\"    \n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\" \n#         - Row: \"<size=20%> \"\n#         - Row: \"<size=80%>Control two enemies within $Range$ <sprite name=Range> 4:\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@\"\n#         - Consume:\n#             Name: BCIce\n#             Text:\n#                 - Row: \"The controlled enemies suffer 1 damage, <sprite name=XP1></nobr>\""
+   }
+  },
+  {
+   "name": "domination",
+   "level": "7",
+   "initiative": "13",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\domination.jpeg",
+   "ghs": {
+    "name": "Domination",
+    "number": 169,
+    "level": 7,
+    "initiative": 13,
+    "top": [
+     "\"Control two enemies within Range 4 that are adjacent to each other:\" {Attack 3 [diamond]}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"You may have two Customaction gh2e-augment active at once. If you play a third Customaction gh2e-augment, you must discard either of the other two. If you discard this card and you have two active Customaction gh2e-augment, you must discard one.\""
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": {
+    "file": "99169_Mindthief2_Domination.yml",
+    "Level": "7",
+    "Initiative": "13",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAlly:\n                ControlActor:\n                    Abilities:\n                        TAllyAttack:\n                            Attack: \n                                Amount: 3\n                                Enhancements: 1\n                            StrengthIsBase: True\n                            RangeIsBase: True\n                    TransferAugments: True\n                Range: 4\n                Target: 2\n                Filter: Ally\n                AnimOverload: MindControl\n    Bottom:\n        Abilities:\n            BAugment:\n                AddAugment: 1\n                Filter: Self\n                ActiveBonusDuration: Persistent\n                AnimOverload: PowerUp"
+   }
+  },
+  {
+   "name": "psychic projection",
+   "level": "7",
+   "initiative": "92",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\psychic-projection.jpeg",
+   "ghs": {
+    "name": "Psychic Projection",
+    "number": 170,
+    "level": 7,
+    "initiative": 92,
+    "top": [
+     "(\"Add Attack + 1 to your melee attacks for each negative condition the target has.\")",
+     "Pull 2 {Range 3}",
+     "Attack 3 [diamond]"
+    ],
+    "top_flags": [
+     "persistent",
+     "xp=1"
+    ],
+    "bottom": [
+     "\"Designate an unoccupied hex within Range 4.\"",
+     "(Attack 3 [square]; \"Perform this attack as though you occupied the designated hex.\")",
+     "(infuse dark)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99170_Mindthief2_Psychic Projection.yml",
+    "Level": "7",
+    "Initiative": "92",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TPull: #14503\n                Pull: 2\n                Range: 3\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Augment:\n                    Type: Melee\n                    AbilityOverrides:\n                        TAugmentAttackBuff:\n                            ParentName: TAttack\n                            AttackEffect:\n                                Type: BuffForEachNegativeConditionOnTarget\n                                Strength: 1\n        XP: 1\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 5\n                TreatAsMelee: True\n        Infuse: Dark"
+   }
+  },
+  {
+   "name": "shared nightmare",
+   "level": "8",
+   "initiative": "7",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\shared-nightmare.jpeg",
+   "ghs": {
+    "name": "Shared Nightmare",
+    "number": 171,
+    "level": 8,
+    "initiative": 7,
+    "top": [
+     "Attack 2 [square] {Target 2 [square]; Range 4; Poison; consume dark {(Curse; card: experience:1)}}",
+     "(infuse ice)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]",
+     "Attack 1 [diamond] {Range 2 [square]; consume ice {(Stun; card: experience:1)}}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99171_Mindthief2_Shared Nightmare.yml",
+    "Level": "8",
+    "Initiative": "07",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 4\n                Target:\n                    Amount: 2\n                    Enhancements: 1\n                Conditions: Poison\n                AnimOverload: MindAttack\n        Consumes:\n            TCDark:\n                Elements: Dark\n                AbilityOverrides:\n                    TCDarkCurse:\n                        ParentName: TAttack\n                        Conditions: Curse\n                XP: 1\n        Infuse: Ice\n    Bottom:\n        Abilities:\n            BMove:\n                Move: 4\n            BAttack:\n                Attack:\n                    Amount: 1\n                    Enhancements: 1\n                Range:\n                    Amount: 2\n                    Enhancements: 1\n        Consumes:\n            TCIce:\n                Elements: Ice\n                AbilityOverrides:\n                    TCIceStun:\n                        ParentName: BAttack\n                        Conditions: Stun\n                XP: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@\"\n#         - Row: \"$Target$ <sprite name=Target> *TAttack.Target* @TAttack.Target@\"\n#         - Row: \"$Poison$ <sprite name=Poison>\"\n#         - Row: \"<size=20%> \" \n#         - Consume:\n#             Name: TCDark\n#             Text: \"$Curse$ <sprite name=Curse>, <sprite name=XP1></nobr>\" \n#         - Infuse: Ice\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\" \n#         - Row: \"<size=20%> \"\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@\"\n#         - Row: \"$Range$ <sprite name=Range> *BAttack.Range* @BAttack.Range@\"\n#         - Consume:\n#             Name: TCIce\n#             Text: \"$Stun$ <sprite name=Stun>, <sprite name=XP1></nobr>\""
+   }
+  },
+  {
+   "name": "corrupting embrace",
+   "level": "8",
+   "initiative": "15",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\corrupting-embrace.jpeg",
+   "ghs": {
+    "name": "Corrupting Embrace",
+    "number": 172,
+    "level": 8,
+    "initiative": 15,
+    "top": [
+     "Attack 1 [square] {Wound}",
+     "Attack 2 [square] {Muddle}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4",
+     "\"On your next four melee attacks, add Stun, Curse to the attack.\"",
+     "(card: slotStart; card: slotXpFh:1; card: slot; card: slotEndXp:1)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent"
+    ]
+   },
+   "xipe": {
+    "file": "99172_Mindthief2_ Corrupting Embrace.yml",
+    "Level": "8",
+    "Initiative": "23",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack1:\n                Attack:\n                    Amount: 1\n                    Enhancements: 1\n                Conditions: Wound\n            TAttack2:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Conditions: Muddle\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n            BAttackBuff:\n                Attack: 0\n                Filter: Self\n                Conditions: [Stun, Curse]\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: BuffAttack\n                    AttackType: Melee\n                    XPTracker: [0,1,0,1]"
+   }
+  },
+  {
+   "name": "many as one",
+   "level": "9",
+   "initiative": "91",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\many-as-one.jpeg",
+   "ghs": {
+    "name": "Many as One",
+    "number": 173,
+    "level": 9,
+    "initiative": 91,
+    "top": [
+     "Summon {\"name\":\"rat-king\",\"health\":\"10\",\"attack\":\"X\",\"movement\":\"3\",\"count\":1,\"enhancements\":[\"heal\",\"move\"],\"action\":{\"type\":\"custom\",\"value\":\"%data.custom.gh2e.mindthief.abilities.173.1%\"}}"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "\"Each round, the first of your allies who performs a melee attack ability gains the effects of each of your active Customaction gh2e-augment for that attack ability.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ]
+   },
+   "xipe": {
+    "file": "99173_Mindthief2_Many as One.yml",
+    "Level": "9",
+    "Initiative": "91",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TSummon:\n                Summon: RatKing2ID\n                AnimOverload: Summon\n        XP: 2\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack: 0\n                Range: 2\n                Target: -1\n                Filter: Self\n                ActiveBonus:\n                    Behaviour: BuffAttack\n                    Duration: Round\n                    IsAura: True\n                    AuraFilter: [Ally]\n                    Filter: \n                        CasterAdjacentAllies: \">= 0\"\n                        CheckAdjacentRange: 2\n                StatIsBasedOnX:\n                    Strength:\n                        BasedOn: CasterAdjacentAllies\n        XP: 2\n# Layout:\n#     Top:\n#         - Active:\n#             Ability: \"TSummon\"\n#             Icon: \"Summon\"\n#             Layout:\n#                 - Summon:\n#                     Ability: TSummon\n#                     SummonName: $RatKing$\n#                     SpecialText: \"$173_T_2$\"\n#         - Row: \"<size=20%> \"\n#         - Row:\n#             - ColumnWidths: \"30,20,20\"\n#             - Column:\n#             - Column:\n#                 - XP: 2\n#             - Column:\n#                 - Duration: Persistent \n#     Bottom:\n#         - Active:\n#             Ability: BAttack\n#             Icon: \"Damage\"\n#             ListLayout: \"<b>$Aura$<sprite name=Aura>:</b> $173_B$\"\n#             Layout:\n#                 - Row: \"<b>$Aura$<sprite name=Aura>:</b> $173_B$\"\n#         - Row: \"<size=20%> \"\n#         - Row:\n#             - ColumnWidths: \"30,20,20\"\n#             - Column:\n#             - Column:\n#                 - XP: 2\n#             - Column:\n#                 - Duration: Round"
+   }
+  },
+  {
+   "name": "phantasmal killer",
+   "level": "9",
+   "initiative": "67",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\phantasmal-killer.jpeg",
+   "ghs": {
+    "name": "Phantasmal Killer",
+    "number": 174,
+    "level": 9,
+    "initiative": 67,
+    "top": [
+     "((\"After each of your melee attack abilities, control one target of the attack ability:\"; Attack 3); \"After each of your control abilities, you may perform:\" {consume dark {\"One controlled enemy suffers Damage 3.\"}})",
+     "Attack 3 {Wound}"
+    ],
+    "top_flags": [
+     "persistent",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 2 [circle]",
+     "Loot 1",
+     "Invisible {target: self}",
+     "(infuse dark)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99174_Mindthief2_Phantasmal Killer.yml",
+    "Level": "9",
+    "Initiative": "67",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Conditions: Wound\n                Augment:\n                    Type: Melee\n                    Abilities:\n                        TAugmentControl:\n                            ControlActor:\n                                Abilities:\n                                    EnemyWillDoThis:\n                                        Attack: 3\n                                        Range: 1\n                                        Target: 1\n                                        StrengthIsBase: True\n                                        RangeIsBase: True\n                                ControlDurationType: ControlForOneAction\n                                ControlActorType: Player\n                            UseParentTargets: True\n                            AnimOverload: MindControl\n        XP: 1\n\n        # Consumes:\n        #     TCDark:\n        #         Elements: Dark\n        #         SubAbilities:\n        #             TCDamage:\n        #                 Damage: 3\n        #                 Filter: Self\n        #                 TriggerOnAbilityEnd: True\n        #                 AnimOverload: None\n        #                 ParentName: EnemyWillDoThis\n                # XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            BLoot:\n                Loot: 1\n                Target: -1                \n            BInvis:\n                Invisible:\n                Filter: Self\n        Infuse: Dark"
+   }
+  }
+ ],
+ "unmatched_ghs": [],
+ "unmatched_xipe": []
+}

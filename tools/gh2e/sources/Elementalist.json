@@ -1,0 +1,1020 @@
+{
+ "class": "Elementalist",
+ "code": "EL2",
+ "model_from": "Elementalist",
+ "ghs_file": "triangles",
+ "xipe_class": "Elementalist2",
+ "character": {
+  "name": "triangles",
+  "characterClass": "savvas",
+  "icon": "gh-triangles",
+  "edition": "gh2e",
+  "handSize": 10,
+  "unlockEvent": "road:R-42|road:R-43",
+  "traits": [
+   "arcane",
+   "educated",
+   "intimidating"
+  ],
+  "color": "#dcdcdc",
+  "spoiler": true,
+  "specialActions": [
+   {
+    "name": "element_waning",
+    "perk": 12
+   }
+  ],
+  "stats": [
+   {
+    "level": 1,
+    "health": 6
+   },
+   {
+    "level": 2,
+    "health": 7
+   },
+   {
+    "level": 3,
+    "health": 8
+   },
+   {
+    "level": 4,
+    "health": 9
+   },
+   {
+    "level": 5,
+    "health": 10
+   },
+   {
+    "level": 6,
+    "health": 11
+   },
+   {
+    "level": 7,
+    "health": 12
+   },
+   {
+    "level": 8,
+    "health": 13
+   },
+   {
+    "level": 9,
+    "health": 14
+   }
+  ],
+  "availableSummons": [
+   {
+    "name": "chromatic-construct",
+    "thumbnail": true,
+    "level": 7,
+    "health": 7,
+    "movement": 3,
+    "action": {
+     "type": "custom",
+     "value": "%data.custom.gh2e.triangles.6%",
+     "small": true
+    }
+   },
+   {
+    "name": "elemental-conduit",
+    "thumbnail": true,
+    "level": 9,
+    "health": 3,
+    "attack": 2,
+    "movement": 3,
+    "range": 3,
+    "action": {
+     "type": "fly",
+     "value": ""
+    },
+    "additionalAction": {
+     "type": "custom",
+     "value": "%data.custom.gh2e.triangles.7%",
+     "small": true
+    }
+   }
+  ],
+  "perks": [
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "elementHalf",
+         "value": "fire|air"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "elementHalf",
+         "value": "fire|earth"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "elementHalf",
+         "value": "ice|air"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "elementHalf",
+         "value": "ice|earth"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "elementHalf",
+         "value": "fire|ice"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "elementHalf",
+         "value": "air|earth"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "elementHalf",
+         "value": "light|dark"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "element",
+         "value": "wild"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "custom": "%game.custom.perks.ignoreScenario%",
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "element",
+         "value": "wild"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%data.custom.gh2e.triangles.1%"
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%data.custom.gh2e.triangles.2%"
+   },
+   {
+    "type": "custom",
+    "count": 3,
+    "combined": true,
+    "custom": "%data.custom.gh2e.triangles.3%"
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.triangles.4%",
+   "%data.custom.gh2e.triangles.5%"
+  ]
+ },
+ "cards": [
+  {
+   "name": "ice spikes",
+   "level": "1",
+   "initiative": "48",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\ice-spikes.jpeg",
+   "ghs": {
+    "name": "Ice Spikes",
+    "number": 446,
+    "level": 1,
+    "initiative": 48,
+    "top": [
+     "Attack 3 [diamond] {Range 3 [square]; consume wild {infuse wild; card: experience:1}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Attack 5 [diamond] {Range 3 [square]; Immobilize}",
+     "(infuse ice:earth)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=2"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "malleable evocation",
+   "level": "1",
+   "initiative": "26",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\malleable-evocation.jpeg",
+   "ghs": {
+    "name": "Malleable Evocation",
+    "number": 447,
+    "level": 1,
+    "initiative": 26,
+    "top": [
+     "(Heal 2 [circle] {Range 3 [square]; (consume fire {Strengthen}; consume ice {Ward}; consume air {Bless}; consume earth {Safeguard})}; \"Add Target + 1 and gain Experience 1 if you consume two or more elements.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"Move one waning element to the strong column.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "formless power",
+   "level": "1",
+   "initiative": "45",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\formless-power.jpeg",
+   "ghs": {
+    "name": "Formless Power",
+    "number": 448,
+    "level": 1,
+    "initiative": 45,
+    "top": [
+     "Attack 2 [diamond] {Range 3; consume wild {Attack +1; Range +1; card: experience:1}; consume wild {Attack +1; Range +1}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"At the start of each of your turns, you may Wild minus to add Attack + 1 to all your attacks this turn.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "shaping the ether",
+   "level": "1",
+   "initiative": "54",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\shaping-the-ether.jpeg",
+   "ghs": {
+    "name": "Shaping the Ether",
+    "number": 449,
+    "level": 1,
+    "initiative": 54,
+    "top": [
+     "(Attack 2 [circle] {Range 3 [square]; (consume fire {Wound}; consume ice {Immobilize}; consume air {Push 3}; consume earth {Poison})}; \"Add Target + 1 and gain Experience 1 if you consume two or more elements.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "stoking hail",
+   "level": "1",
+   "initiative": "29",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\stoking-hail.jpeg",
+   "ghs": {
+    "name": "Stoking Hail",
+    "number": 450,
+    "level": 1,
+    "initiative": 29,
+    "top": [
+     "Attack 2 [diamond] {Range 3 [square]; consume ice {Attack +1; Pierce 2; infuse ice}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 2 [square]",
+     "\"Add Move + 1 if one or more elements are strong or waning.\"",
+     "(infuse air)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "magma scales",
+   "level": "1",
+   "initiative": "14",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\magma-scales.jpeg",
+   "ghs": {
+    "name": "Magma Scales",
+    "number": 451,
+    "level": 1,
+    "initiative": 14,
+    "top": [
+     "(\"Grant one ally within Range 3 Square :\" [square]; Move 2 [square] {Jump}; consume air {Disarm {Range 1}; infuse air})"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(\"Grant one ally within Range 3 Square :\"; Shield 2 [square]; Retaliate 2 [square])",
+     "(infuse fire:earth)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "round",
+     "xp=2"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "infernal vortex",
+   "level": "1",
+   "initiative": "35",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\infernal-vortex.jpeg",
+   "ghs": {
+    "name": "Infernal Vortex",
+    "number": 452,
+    "level": 1,
+    "initiative": 35,
+    "top": [
+     "Attack 1 [square] {target: all; Range 4}",
+     "(infuse fire:air)"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "(Move 2 [square]; \"Add Move + 1 if one or more elements are strong or waning.\")",
+     "(infuse earth)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "frigid torrent",
+   "level": "1",
+   "initiative": "39",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\frigid-torrent.jpeg",
+   "ghs": {
+    "name": "Frigid Torrent",
+    "number": 453,
+    "level": 1,
+    "initiative": 39,
+    "top": [
+     "Attack 5 [diamond] {Range 4; Disarm}",
+     "(infuse ice:air)"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "(Move 2 [square]; \"Add Move + 1 if one or more elements are strong or waning.\")",
+     "(infuse fire)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "pulsing cores",
+   "level": "1",
+   "initiative": "40",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\pulsing-cores.jpeg",
+   "ghs": {
+    "name": "Pulsing Cores",
+    "number": 454,
+    "level": 1,
+    "initiative": 40,
+    "top": [
+     "Attack 2 [diamond] {Range 3 [square]; consume fire {area (0,1,target)|(1,0,target)|(1,1,target); infuse fire}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(\"At the end of this and your next five turns, in order: Elementhalf fire|ice, Elementhalf air|earth, Elementhalf light|dark (repeat the same order for turns 4-6).\"; (card: slotStart; card: slotXpFh:1; card: slot; card: slotXpFh:1; card: slot; card: slotEndXp:1))"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "dual nature",
+   "level": "1",
+   "initiative": "27",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\dual-nature.jpeg",
+   "ghs": {
+    "name": "Dual Nature",
+    "number": 455,
+    "level": 1,
+    "initiative": 27,
+    "top": [
+     "Attack 2 [diamond] {Range 3 [square]}",
+     "consume earth {Heal 2 {Range 3}; infuse earth}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(Move 2 [square]; \"Add Move + 1 if one or more elements are strong or waning.\")",
+     "(infuse ice)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "lingering essence",
+   "level": "X",
+   "initiative": "50",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\lingering-essence.jpeg",
+   "ghs": {
+    "name": "Lingering Essence",
+    "number": 456,
+    "level": "X",
+    "initiative": 50,
+    "top": [
+     "\"Whenever an enemy consumes an element, you may infuse that element.\""
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Move 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "flash of brilliance",
+   "level": "X",
+   "initiative": "67",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\flash-of-brilliance.jpeg",
+   "ghs": {
+    "name": "Flash of Brilliance",
+    "number": 457,
+    "level": "X",
+    "initiative": 67,
+    "top": [
+     "\"You or one ally within Range 3 may Recover one level 1 card from the discard pile.\"",
+     "(infuse light)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Loot 1",
+     "Heal 1 [square] {target: self}",
+     "(infuse wild)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "encompassing shadow",
+   "level": "X",
+   "initiative": "12",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\encompassing-shadow.jpeg",
+   "ghs": {
+    "name": "Encompassing Shadow",
+    "number": 458,
+    "level": "X",
+    "initiative": 12,
+    "top": [
+     "Invisible {target: ally; Range 4 [square]}",
+     "(infuse dark)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"All attacks targeting you or adjacent allies this round gain disadvantage.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "gravel guard",
+   "level": "2",
+   "initiative": "10",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\gravel-guard.jpeg",
+   "ghs": {
+    "name": "Gravel Guard",
+    "number": 459,
+    "level": 2,
+    "initiative": 10,
+    "top": [
+     "(\"Grant one ally within Range 3 Square :\" [square]; Move 2 [square]; Shield 1 [square]; Muddle {target: all; Range 1})",
+     "(infuse earth)"
+    ],
+    "top_flags": [
+     "round"
+    ],
+    "bottom": [
+     "consume fire {\"Create one Damage 2 trap in an empty hex within Range 3. All enemies adjacent to the trap suffer Damage 1\"; infuse fire}",
+     "Move 2 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "wave of frost",
+   "level": "2",
+   "initiative": "47",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\wave-of-frost.jpeg",
+   "ghs": {
+    "name": "Wave of Frost",
+    "number": 460,
+    "level": 2,
+    "initiative": 47,
+    "top": [
+     "Attack 1 {area (0,0,enhance)|(0,1,target)|(1,0,target)|(1,1,target)|(1,2,target)|(1,3,enhance)|(2,2,target) [hex/hex]; Range 3}",
+     "(infuse ice)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle] {consume air {Move +2 {Jump}; infuse air}}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "arresting gale",
+   "level": "3",
+   "initiative": "65",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\arresting-gale.jpeg",
+   "ghs": {
+    "name": "Arresting Gale",
+    "number": 461,
+    "level": 3,
+    "initiative": 65,
+    "top": [
+     "Attack 1 [square] {Range 3 [square]; Stun}",
+     "(infuse air)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Ward [circle] {Range 3 [square]; consume earth {Target +1; infuse earth}}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "empowering flame",
+   "level": "3",
+   "initiative": "15",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\empowering-flame.jpeg",
+   "ghs": {
+    "name": "Empowering Flame",
+    "number": 462,
+    "level": 3,
+    "initiative": 15,
+    "top": [
+     "Attack 2 [diamond] {Range 3 [square]}",
+     "Strengthen [diamond_plus] {target: self}",
+     "(infuse fire)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"Grant one ally within Range 2:\" {consume ice {Retaliate 2 {Range 2}; infuse ice; card: round}}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "burial",
+   "level": "4",
+   "initiative": "77",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\burial.jpeg",
+   "ghs": {
+    "name": "Burial",
+    "number": 463,
+    "level": 4,
+    "initiative": 77,
+    "top": [
+     "Attack 4 [diamond] {area (0,0,target)|(0,1,target)|(0,2,target)|(1,1,target); Range 4; consume earth {Attack +1; Immobilize; card: experience:1}; consume dark {Attack +1; Curse; card: experience:1}}"
+    ],
+    "top_flags": [
+     "lost"
+    ],
+    "bottom": [
+     "Attack 2 [square] {Range 4}",
+     "(infuse dark)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "chain lightning",
+   "level": "4",
+   "initiative": "23",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\chain-lightning.jpeg",
+   "ghs": {
+    "name": "Chain Lightning",
+    "number": 464,
+    "level": 4,
+    "initiative": 23,
+    "top": [
+     "(Attack 4 [diamond] {Target 3; Range 4; consume air {Attack +1; Target +1; card: experience:1}; consume light {Attack +1; Pierce 2; card: experience:1}}; \"Add Attack + -1, Range + 2 to each attack for each enemy already attacked with this ability. Each target after the first must be within Range 2 of the previous target.\")"
+    ],
+    "top_flags": [
+     "lost"
+    ],
+    "bottom": [
+     "Heal 4 {Range 2 [square]}",
+     "(infuse light)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "obsidian shards",
+   "level": "5",
+   "initiative": "19",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\obsidian-shards.jpeg",
+   "ghs": {
+    "name": "Obsidian Shards",
+    "number": 465,
+    "level": 5,
+    "initiative": 19,
+    "top": [
+     "Attack 2 [diamond] {Target 2; Range 3 [square]; consume fire:earth {Attack +2; Muddle; card: experience:2}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "consume ice:earth {(\"On the next two sources of Damage you or an adjacent ally would suffer, negate the Damage.\"; (infuse ice/earth (one of); (card: slotStart; card: slotEndXp:1); card: persistent))}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "winter's edge",
+   "level": "5",
+   "initiative": "43",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\winters-edge.jpeg",
+   "ghs": {
+    "name": "Winter's Edge",
+    "number": 466,
+    "level": 5,
+    "initiative": 43,
+    "top": [
+     "Attack 5 [diamond] {Range 2 [square]; consume ice:air {Range +3; Pierce 4; card: experience:2}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "consume fire:air {((Strengthen; Bless {Target 2 allies; Range 3}); (infuse fire/air (one of); card: experience:1))}",
+     "\"Grant one ally within Range 3 Square :\" [square] {Attack 3 [diamond]}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "pragmatic reinforcement",
+   "level": "6",
+   "initiative": "13",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\pragmatic-reinforcement.jpeg",
+   "ghs": {
+    "name": "Pragmatic Reinforcement",
+    "number": 467,
+    "level": 6,
+    "initiative": 13,
+    "top": [
+     "Heal 3 [diamond_plus] {Range 4; consume light {\"The target may Recover one level 1 card from the discard pile, Elementhalf air|earth.\"}; consume air/earth (one of) {((\"Grant the target:\"; Shield 2); card: round)}}"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "(infuse ice/earth (one of))"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "duskstorm",
+   "level": "6",
+   "initiative": "17",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\duskstorm.jpeg",
+   "ghs": {
+    "name": "Duskstorm",
+    "number": 468,
+    "level": 6,
+    "initiative": 17,
+    "top": [
+     "Attack 2 [diamond] {area (0,1,target)|(1,0,target)|(1,1,target)|(2,0,enhance) [hex]; Range 4; consume dark {\"All allies in the red hexes gain Invisible.\"; infuse fire/ice (one of)}; consume fire/ice (one of) {Attack +1; Wound}}"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "(infuse fire/air (one of))"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "elemental juggernaut",
+   "level": "7",
+   "initiative": "94",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\elemental-juggernaut.jpeg",
+   "ghs": {
+    "name": "Elemental Juggernaut",
+    "number": 469,
+    "level": 7,
+    "initiative": 94,
+    "top": [
+     "Summon {\"name\":\"chromatic-construct\",\"thumbnail\":true,\"edition\":\"gh2e\",\"health\":\"7\",\"attack\":\"0 \",\"movement\":\"3\",\"count\":1,\"enhancements\":[\"heal\",\"move\"],\"action\":{\"type\":\"custom\",\"value\":\"%data.custom.gh2e.triangles.abilities.469.1%\",\"valueType\":\"fixed\",\"small\":true}}"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "(infuse ice/air (one of))"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "confluence of elements",
+   "level": "7",
+   "initiative": "64",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\confluence-of-elements.jpeg",
+   "ghs": {
+    "name": "Confluence of Elements",
+    "number": 470,
+    "level": 7,
+    "initiative": 64,
+    "top": [
+     "Attack 3 [diamond] {Range 3 [square]; consume wild:wild {Attack +2; card: experience:1}; consume wild:wild {Target +1; card: experience:1}; consume wild:wild {infuse wild; infuse wild}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "(infuse fire/earth (one of))"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "prismatic barrage",
+   "level": "8",
+   "initiative": "33",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\prismatic-barrage.jpeg",
+   "ghs": {
+    "name": "Prismatic Barrage",
+    "number": 471,
+    "level": 8,
+    "initiative": 33,
+    "top": [
+     "Attack 2 {Range 4; consume ice {Stun; card: experience:1}}",
+     "consume fire {Attack 2 {Range 4; \"Create one 1-hex hazardous terrain tile in the featureless hex occupied by the target, Experience 1.\"}}",
+     "consume earth {Attack 2 {Range 4; Push 3}; card: experience:1}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(Heal 2 {Range 3; consume ice {Ward; infuse ice}; consume air {Bless; infuse air}; consume earth {Safeguard; infuse earth}}; \"Add Heal + 1, gain Experience 1, and Light if you consume two or more elements.\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "eye of the hurricane",
+   "level": "8",
+   "initiative": "25",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\eye-of-the-hurricane.jpeg",
+   "ghs": {
+    "name": "Eye of the Hurricane",
+    "number": 472,
+    "level": 8,
+    "initiative": 25,
+    "top": [
+     "Heal 2 {Range 4; consume fire {Strengthen; card: experience:1}; consume ice {Attack 2 {Target %data.custom.gh2e.triangles.abilities.472.1%; Muddle; card: experience:1}}; consume air {Attack 1 {Target %data.custom.gh2e.triangles.abilities.472.2%; Pierce 3; card: experience:1}}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(Attack 2 {Range 3; consume fire {Wound; infuse fire}; consume air {Range +3; infuse air}; consume earth {Poison; infuse earth}}; \"Add Attack + 1, gain Experience 1, and Dark if you consume two or more elements.\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "ethereal manifestation",
+   "level": "9",
+   "initiative": "98",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\ethereal-manifestation.jpeg",
+   "ghs": {
+    "name": "Ethereal Manifestation",
+    "number": 473,
+    "level": 9,
+    "initiative": 98,
+    "top": [
+     "Summon {\"name\":\"elemental-conduit\",\"thumbnail\":true,\"edition\":\"gh2e\",\"health\":\"3\",\"attack\":\"2\",\"movement\":\"3\",\"range\":\"3\",\"count\":1,\"enhancements\":[\"heal\",\"move\"],\"action\":{\"type\":\"grid\",\"value\":1,\"subActions\":[{\"type\":\"fly\"},{\"type\":\"custom\",\"value\":\"%data.custom.gh2e.triangles.abilities.473.1%\",\"valueType\":\"fixed\",\"small\":true}]}}"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 4 [circle]",
+     "(infuse wild)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "primal duality",
+   "level": "9",
+   "initiative": "11",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\primal-duality.jpeg",
+   "ghs": {
+    "name": "Primal Duality",
+    "number": 474,
+    "level": 9,
+    "initiative": 11,
+    "top": [
+     "consume fire:ice {(Muddle {Range 4}; \"The target suffers Damage 5.\")}",
+     "consume air:earth {(\"Grant one ally within Range 4:\"; ((Shield 2; Retaliate 2); card: round))}",
+     "consume light:dark {Attack 2 {Target 2; Range 4; Curse; \"advantage\"}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "consume light {\"Recover one card from your discard pile, Dark.\"}",
+     "consume dark {Teleport 4; infuse light}",
+     "Loot 1 {consume wild:wild {Loot +1}}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  }
+ ],
+ "unmatched_ghs": [],
+ "unmatched_xipe": []
+}

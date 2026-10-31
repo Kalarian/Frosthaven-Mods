@@ -1,0 +1,505 @@
+{
+ "class": "Plagueherald",
+ "code": "PH2",
+ "model_from": "Plagueherald",
+ "ghs_file": "squidface",
+ "xipe_class": null,
+ "character": {
+  "name": "squidface",
+  "characterClass": "harrower",
+  "icon": "gh-squidface",
+  "edition": "gh2e",
+  "handSize": 10,
+  "unlockEvent": "city:C-76|city:C-77",
+  "traits": [
+   "arcane",
+   "intimidating",
+   "outcast"
+  ],
+  "color": "#72e0be",
+  "spoiler": true,
+  "stats": [
+   {
+    "level": 1,
+    "health": 6
+   },
+   {
+    "level": 2,
+    "health": 7
+   },
+   {
+    "level": 3,
+    "health": 8
+   },
+   {
+    "level": 4,
+    "health": 9
+   },
+   {
+    "level": 5,
+    "health": 10
+   },
+   {
+    "level": 6,
+    "health": 11
+   },
+   {
+    "level": 7,
+    "health": 12
+   },
+   {
+    "level": 8,
+    "health": 13
+   },
+   {
+    "level": 9,
+    "health": 14
+   }
+  ],
+  "availableSummons": [],
+  "perks": [
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.squidface.1%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "curse"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "immobilize"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     },
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus2"
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "stun"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "cards": [
+     {
+      "count": 3,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.squidface.2%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "heal",
+         "value": 1,
+         "effects": [
+          {
+           "type": "specialTarget",
+           "value": "allyShort"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "custom": "%game.custom.perks.ignoreScenario%",
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%data.custom.gh2e.squidface.3%"
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%data.custom.gh2e.squidface.4%"
+   },
+   {
+    "type": "custom",
+    "count": 2,
+    "combined": true,
+    "custom": "%data.custom.gh2e.squidface.5%"
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.squidface.6%",
+   "%data.custom.gh2e.squidface.7%"
+  ],
+  "specialConditions": [
+   "plague"
+  ]
+ },
+ "cards": [
+  {
+   "name": "comorbid sting",
+   "level": "1",
+   "initiative": "61",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\comorbid-sting.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "biting gnats",
+   "level": "1",
+   "initiative": "21",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\biting-gnats.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "virulent strain",
+   "level": "1",
+   "initiative": "72",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\virulent-strain.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "contagious corpse",
+   "level": "1",
+   "initiative": "16",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\contagious-corpse.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "path of the pox",
+   "level": "1",
+   "initiative": "31",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\path-of-the-pox.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "vile pestilence",
+   "level": "1",
+   "initiative": "27",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\vile-pestilence.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "blistering buboes",
+   "level": "1",
+   "initiative": "14",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\blistering-buboes.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "festering sores",
+   "level": "1",
+   "initiative": "11",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\festering-sores.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "wretched yield",
+   "level": "1",
+   "initiative": "84",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\wretched-yield.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "accelerated end",
+   "level": "1",
+   "initiative": "76",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\accelerated-end.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "deliriums danse",
+   "level": "X",
+   "initiative": "68",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\deliriums-danse.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "gift of rot",
+   "level": "X",
+   "initiative": "47",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\gift-of-rot.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "spread the plague",
+   "level": "X",
+   "initiative": "35",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\spread-the-plague.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "sickening strength",
+   "level": "2",
+   "initiative": "19",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\sickening-strength.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "rot maggots",
+   "level": "2",
+   "initiative": "69",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\rot-maggots.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "nightmarish affliction",
+   "level": "3",
+   "initiative": "43",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\nightmarish-affliction.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "cloying miasma",
+   "level": "3",
+   "initiative": "20",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\cloying-miasma.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "rabid bite",
+   "level": "4",
+   "initiative": "70",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\rabid-bite.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "unwilling sacrifice",
+   "level": "4",
+   "initiative": "29",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\unwilling-sacrifice.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "wilt and wither",
+   "level": "5",
+   "initiative": "91",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\wilt-and-wither.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "compounding infection",
+   "level": "5",
+   "initiative": "62",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\compounding-infection.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "crippling malady",
+   "level": "6",
+   "initiative": "26",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\crippling-malady.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "succumb to the gift",
+   "level": "6",
+   "initiative": "81",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\succumb-to-the-gift.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "mass extinction",
+   "level": "7",
+   "initiative": "94",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\mass-extinction.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "tainted offering",
+   "level": "7",
+   "initiative": "33",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\tainted-offering.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "creeping lethargy",
+   "level": "8",
+   "initiative": "13",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\creeping-lethargy.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "convert the flock",
+   "level": "8",
+   "initiative": "57",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\convert-the-flock.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "disease vector",
+   "level": "9",
+   "initiative": "64",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\disease-vector.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "xorns embrace",
+   "level": "9",
+   "initiative": "46",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\PH2\\xorns-embrace.jpeg",
+   "ghs": null,
+   "xipe": null
+  }
+ ],
+ "unmatched_ghs": [],
+ "unmatched_xipe": []
+}

@@ -1,0 +1,1063 @@
+{
+ "class": "SilentKnife",
+ "code": "SC2",
+ "model_from": "Scoundrel",
+ "ghs_file": "silent-knife",
+ "xipe_class": "Scoundrel2",
+ "character": {
+  "name": "silent-knife",
+  "characterClass": "human",
+  "gender": "f",
+  "icon": "gh-scoundrel",
+  "edition": "gh2e",
+  "handSize": 9,
+  "traits": [
+   "chaotic",
+   "nimble",
+   "resourceful"
+  ],
+  "color": "#9ecf5f",
+  "stats": [
+   {
+    "level": 1,
+    "health": 8
+   },
+   {
+    "level": 2,
+    "health": 9
+   },
+   {
+    "level": 3,
+    "health": 11
+   },
+   {
+    "level": 4,
+    "health": 12
+   },
+   {
+    "level": 5,
+    "health": 14
+   },
+   {
+    "level": 6,
+    "health": 15
+   },
+   {
+    "level": 7,
+    "health": 17
+   },
+   {
+    "level": 8,
+    "health": 18
+   },
+   {
+    "level": 9,
+    "health": 20
+   }
+  ],
+  "availableSummons": [],
+  "perks": [
+   {
+    "type": "remove",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus2"
+      }
+     }
+    ]
+   },
+   {
+    "type": "remove",
+    "count": 1,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.silent-knife.1%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus2"
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "condition",
+         "value": "invisible",
+         "effects": [
+          {
+           "type": "specialTarget",
+           "value": "self"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "disarm"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.silent-knife.2%",
+    "count": 1
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.silent-knife.3%",
+    "count": 1
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.silent-knife.4%",
+    "count": 2,
+    "combined": true
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.silent-knife.5%",
+   "%data.custom.gh2e.silent-knife.6%"
+  ]
+ },
+ "cards": [
+  {
+   "name": "single out",
+   "level": "1",
+   "initiative": "86",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\single-out.jpeg",
+   "ghs": {
+    "name": "Single Out",
+    "number": 88,
+    "level": 1,
+    "initiative": 86,
+    "top": [
+     "(Attack 3 [diamond]; \"Add Attack + 2 and gain Experience 1 if the target is adjacent to none of its allies.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"On your next four attacks targeting enemies adjacent to none of their allies, add Attack + 3\"",
+     "(card: slotStart; card: slotXpFh:1; card: slot; card: slotEndXp:1)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent"
+    ]
+   },
+   "xipe": {
+    "file": "99088_Scoundrel2_Single Out.yml",
+    "Level": "1",
+    "Initiative": "86",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                ConditionalOverrides:\n                    TAttackCO:\n                        Filter:\n                            TargetType: Enemy\n                            TargetAdjacentAlliesOfTarget: \"== 0\"\n                        XP: 1\n                        AbilityOverrides:\n                            TAdjAllyBuff:\n                                Strength: 2\n    Bottom:\n        Abilities:\n            BActive:\n                Attack: 3\n                Filter: Self\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: BuffAttack\n                    Filter:\n                        TargetType: Enemy\n                        TargetAdjacentAlliesOfTarget: \"<= 0\"\n                    XPTracker: [0,1,0,1]\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$99088_T$\" \n#     Bottom:\n#         - Active:\n#             Ability: BActive\n#             ListLayout: \"$088_B$\"\n#             Layout: \"$088_B$\"\n#             Icon: \"Damage\"\n#         - Row: \"<size=50%> \"\n#         - XPTracker: BActive"
+   }
+  },
+  {
+   "name": "flanking strike",
+   "level": "1",
+   "initiative": "4",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\flanking-strike.jpeg",
+   "ghs": {
+    "name": "Flanking Strike",
+    "number": 89,
+    "level": 1,
+    "initiative": 4,
+    "top": [
+     "(Attack 3 [diamond]; \"Add Attack + 2 and gain Experience 1 if the target is adjacent to any of your allies.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 5"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99089_Scoundrel2_Flanking Strike.yml",
+    "Level": "1",
+    "Initiative": "04",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                ConditionalOverrides:\n                    TAttackCO:\n                        Filter:\n                            TargetType: Enemy\n                            TargetAdjacentAllies: \"> 0\"\n                        XP: 1\n                        # Override the ability value on targets matching the filter\n                        AbilityOverrides:\n                            TAdjBuff:\n                                Strength: 2\n    Bottom:\n        Abilities:\n            BMove:\n                Move: 5\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$088_T$\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\""
+   }
+  },
+  {
+   "name": "swift bow",
+   "level": "1",
+   "initiative": "36",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\swift-bow.jpeg",
+   "ghs": {
+    "name": "Swift Bow",
+    "number": 90,
+    "level": 1,
+    "initiative": 36,
+    "top": [
+     "Attack 3 [diamond] {Range 4}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"Loot each hex you entered with the move ability.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99090_Scoundrel2_Swift Bow.yml",
+    "Level": "1",
+    "Initiative": "36",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 4\n                AnimOverload: RangedAttackThrowingKnives\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BLoot:\n                Loot: 0\n                Target: -1\n                AllTargetsOnMovePath: True\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$099_B$\""
+   }
+  },
+  {
+   "name": "quick hands",
+   "level": "1",
+   "initiative": "23",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\quick-hands.jpeg",
+   "ghs": {
+    "name": "Quick Hands",
+    "number": 91,
+    "level": 1,
+    "initiative": 23,
+    "top": [
+     "Loot 1",
+     "Move 2 [circle]"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Attack 3 [diamond]"
+    ],
+    "bottom_flags": [
+     "xp=1"
+    ]
+   },
+   "xipe": {
+    "file": "99091_Scoundrel2_Quick Hands.yml",
+    "Level": "1",
+    "Initiative": "23",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TLoot:\n                Loot: 1\n                Target: -1\n                AnimOverload: Loot\n            TMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n        XP: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Loot$ <sprite name=Loot> *TLoot*\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@\" \n#     Bottom:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@\"\n#         - Row: \"<size=20%> \"\n#         - XP: 1"
+   }
+  },
+  {
+   "name": "sinister opportunity",
+   "level": "1",
+   "initiative": "93",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\sinister-opportunity.jpeg",
+   "ghs": {
+    "name": "Sinister Opportunity",
+    "number": 92,
+    "level": 1,
+    "initiative": 93,
+    "top": [
+     "(Attack 3 [diamond]; \"Add Attack + 1 if the target is adjacent to any of your allies, add Attack + 1 if the target is adjacent to none of its allies, and gain advantage and Experience 1 if both are true.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 5"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99092_Scoundrel2_Sinister Opportunity.yml",
+    "Level": "1",
+    "Initiative": "93",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                ConditionalOverrides:\n                    TAttackCO1:\n                        Filter:\n                            TargetType: Enemy\n                            TargetAdjacentAlliesOfCaster: \"> 0\"\n                        AbilityOverrides:\n                            TAdjBuff:\n                                Strength: 1\n                    TAttackCO2:\n                        Filter:\n                            TargetType: Enemy\n                            TargetAdjacentAlliesOfTarget: \"== 0\"\n                        AbilityOverrides:\n                            TAdjBuff:\n                                Strength: 1\n                    TAttackCO3:\n                        Filter:\n                            TargetType: Enemy\n                            TargetAdjacentAlliesOfCaster: \"> 0\"\n                            TargetAdjacentAlliesOfTarget: \"== 0\"\n                        XP: 1\n                        AbilityOverrides:\n                            TAdjBuff:\n                                AttackHasAdvantage: True\n    Bottom:\n        Abilities:\n            BMove:\n                Move: 5\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$99092_T_1$\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$99092_T_2$\"\n#         - Row: \"<size=20%> \" \n#         - Row: \"$99092_T_3$\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\""
+   }
+  },
+  {
+   "name": "venom shiv",
+   "level": "1",
+   "initiative": "8",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\venom-shiv.jpeg",
+   "ghs": {
+    "name": "Venom Shiv",
+    "number": 93,
+    "level": 1,
+    "initiative": 8,
+    "top": [
+     "Attack 3 [diamond] {Pierce 1; Poison}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Add Pierce 2 to all your ranged attacks this round.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99093_Scoundrel2_Venom Shiv.yml",
+    "Level": "1",
+    "Initiative": "08",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                    Pierce: 1\n                Conditions: Poison\n    Bottom:\n        Abilities:\n            BAttackBuff:\n                Attack: 0\n                AttackEffect:\n                    Type: StandardBuff\n                    Pierce: 2\n                Filter: Self\n                ActiveBonus:\n                    Duration: Round\n                    Behaviour: BuffAttack\n                    AttackType: Ranged\n            \n            \n            #This works to add push\n           # BActive:\n#                AddActiveBonus:\n#                    Attack: 0\n#                ActiveBonus:\n#                    Behaviour: OverrideAbility\n#                    Duration: Round\n#                    ValidAbilityType: Attack\n#                    ActiveBonusAbilityOverrides:\n#                        BCTypeOverride:\n#                            AbilityType: Attack\n#                            Attack: 3\n#                            SubAbilities:\n#                                AttackSubPush:\n#                                    Push: 3\n#                                    IsInlineSubAbility: True\n                                    \n#            BActive:\n#                AddActiveBonus:\n#                    Attack: 0\n#                ActiveBonus:\n#                    Behaviour: OverrideAbility\n#                    Duration: Round\n#                    ValidAbilityType: Attack\n#                    ActiveBonusAbilityOverrides:\n#                        BCTypeOverride:\n#                            AbilityType: Attack\n#                            Attack: 0\n#                            Pierce: 0\n                            \n        #Abilities:\n#            BAttackBuff:\n#                Attack: 0\n#                Pierce: 2\n#                Filter: Self\n#                ActiveBonus:\n#                    Duration: Round\n#                    Behaviour: BuffAttack\n#                    AttackType: Ranged\n\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Pierce$ <sprite name=Pierce> *TAttack.Pierce* @TAttack.Pierce@\"\n#         - Row: \"$Poison$ <sprite name=Poison>\"\n#         - Row: \"<size=20%> \" \n#     Bottom:\n#         - Row: \"Add <nobr>PIERCE <sprite name=Pierce> 2</nobr> to all your ranged attacks this round\"\n#         #- Active:\n# #            Ability: BAttackBuff\n# #            ListLayout: \"Add Pierce 2 to all your ranged attacks this round\"\n# #            Layout: \"Add Pierce 2 to all your ranged attacks this round\"\n# #            Icon: \"Attack\"\n#         - Row: \"<size=50%> \"\n#         - Duration: Round"
+   }
+  },
+  {
+   "name": "throwing knives",
+   "level": "1",
+   "initiative": "10",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\throwing-knives.jpeg",
+   "ghs": {
+    "name": "Throwing Knives",
+    "number": 94,
+    "level": 1,
+    "initiative": 10,
+    "top": [
+     "Attack 2 {Target 2 [square]; Range 3 [square]}"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Pull 2 [square] {Range 3 [square]}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99094_Scoundrel2_Throwing Knives.yml",
+    "Level": "1",
+    "Initiative": "10",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 2\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Target:\n                    Amount: 2\n                    Enhancements: 1\n                AnimOverload: RangedAttackThrowingKnives\n        XP: 1\n    Bottom:\n        Abilities:\n            BPull:\n                Pull:\n                    Amount: 2\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*\"\n#         - Row: \"$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@\"\n#         - Row: \"$Target$ <sprite name=Target> *TAttack.Target* @TAttack.Target@\"\n#         - Row: \"<size=20%> \"\n#         - XP: 1\n#     Bottom:\n#         - Row: \"<b><size=130%>$Pull$ <sprite name=Pull> *BPull* <size=100%><voffset=1>@BPull@\"\n#         - Row: \"$Range$ <sprite name=Range> *BPull.Range* @BPull.Range@\""
+   }
+  },
+  {
+   "name": "practiced reflexes",
+   "level": "1",
+   "initiative": "64",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\practiced-reflexes.jpeg",
+   "ghs": {
+    "name": "Practiced Reflexes",
+    "number": 95,
+    "level": 1,
+    "initiative": 64,
+    "top": [
+     "Move 3 [circle]",
+     "Attack 3 [diamond]"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(Move 3 [circle]; \"You may choose not to spring traps in hexes you enter with this movement.\")",
+     "\"Destroy one trap in a hex you entered with the move ability to gain Experience 1.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99095_Scoundrel2_Practiced Reflexes.yml",
+    "Level": "1",
+    "Initiative": "64",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 2\n                Jump: True\n        XP: 2\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"$Jump$ <sprite name=Jump>\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Loot$ <sprite name=Loot> *BLoot*\"\n#         - XP: 2"
+   }
+  },
+  {
+   "name": "special mixture",
+   "level": "1",
+   "initiative": "33",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\special-mixture.jpeg",
+   "ghs": {
+    "name": "Special Mixture",
+    "number": 96,
+    "level": 1,
+    "initiative": 33,
+    "top": [
+     "Heal 3 [diamond_plus] {target: self}",
+     "(infuse dark)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "Poison [diamond] {Range 1}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99096_Scoundrel2_Special Mixture.yml",
+    "Level": "1",
+    "Initiative": "33",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            THeal:\n                Heal:\n                    Amount: 3\n                    Enhancements: 1\n                Filter: Self\n                AnimOverload: Heal\n        Infuse: Dark\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BPoison:\n                Poison: True\n                Filter: Enemy\n                AnimOverload: AimedPowderPoison\n                Range: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@\"\n#         - Row: \"$Self$\"\n#         - Infuse: Dark\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Poison$ <sprite name=Poison>\"\n#         - Row: \"$Target_OneAdjacentEnemy$\""
+   }
+  },
+  {
+   "name": "backstab",
+   "level": "X",
+   "initiative": "6",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\backstab.jpeg",
+   "ghs": {
+    "name": "Backstab",
+    "number": 97,
+    "level": "X",
+    "initiative": 6,
+    "top": [
+     "(Attack 5 [diamond] {consume dark {Attack +2; card: experience:1}}; \"Add Attack + 2 and gain Experience 1 if the target is adjacent to any of your allies.\")"
+    ],
+    "top_flags": [
+     "lost"
+    ],
+    "bottom": [
+     "Move 6"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99097_Scoundrel2_Backstab.yml",
+    "Level": "X",
+    "Initiative": "06",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 5\n                    Enhancements: 1\n                ConditionalOverrides:\n                    TAttackCO:\n                        Filter:\n                            TargetType: Enemy\n                            TargetAdjacentAllies: \"> 0\"\n                        XP: 1\n                        # Override the ability value on targets matching the filter\n                        AbilityOverrides:\n                            TAdjBuff:\n                                Strength: 2\n        Consumes:\n            TCDark:\n                Elements: Dark\n                AbilityOverrides:\n                    TCAnyAttackBuff:\n                        ParentName: TAttack\n                        Strength: 2\n                XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move: 6\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$088_T$\"\n#         - Consume:\n#             Name: TCDark\n#             Text: \"+2 $Attack$ <sprite name=Attack>, <sprite name=XP1>\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\""
+   }
+  },
+  {
+   "name": "smoke bomb",
+   "level": "X",
+   "initiative": "12",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\smoke-bomb.jpeg",
+   "ghs": {
+    "name": "Smoke Bomb",
+    "number": 98,
+    "level": "X",
+    "initiative": 12,
+    "top": [
+     "Invisible [diamond_plus] {target: self}",
+     "\"On your next attack while you have Invisible, double the value of the attack.\" {card: slotStartXp:2}",
+     "(infuse dark)"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent"
+    ],
+    "bottom": [
+     "Move 4",
+     "\"Control one adjacent enemy:\" {(Move 1; \"This movement must end in a hex adjacent to the Silent Knife.\")}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99098_Scoundrel2_Smoke Bomb.yml",
+    "Level": "X",
+    "Initiative": "12",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TInvis:\n                Invisible:\n                    Enhancements: 1\n                Filter: Self\n                AnimOverload: SelfPowderInvisibility\n                SubAbilities:\n                    TActive:\n                        Attack: 2\n                        ActiveBonus:\n                            Duration: Persistent\n                            Behaviour: BuffAttack\n                            StrengthIsScalar: True\n                            Filter:\n                                CasterHasPositiveConditions: [Invisible]\n                            XPTracker: [2]\n        Infuse: Dark\n    Bottom:\n#        Abilities:\n#            BMove:\n#                Move: 4\n#            BSwap:\n#                Swap:\n#                    FirstTargetFilter: Self\n#                    SecondTargetFilter: Enemy\n#                Range: 1\n        Abilities:\n            BMove:\n                Move: 4\n            BControlActor:\n                ControlActor:\n                    Abilities:\n                        EnemyWillDoThis:\n                            Move: 1\n                            StrengthIsBase: True\n                            RestrictRange: 1\n                    ControlDurationType: ControlForOneAction\n                    ControlActorType: Player\n                Range: 1\n                Filter: Enemy\n                #AnimOverload: SelfPowderSmokeBomb\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Invisible$ <sprite name=Invisible> <size=100%><voffset=1>@TInvis@\"\n#         - Row: \"$Self$\"\n#         - Row: \"<size=20%> \"\n#         - Active:\n#             Ability: TActive\n#             Icon: \"Invisible\"\n#             ListLayout: \"$090_T$\"\n#             Layout: \"$090_T$\"\n#         - Row: \"<size=20%> \"\n#         - Row:\n#             - ColumnWidths: \"30,20,20\"\n#             - Column:\n#             - Column:\n#                 - Duration: Persistent\n#             - Column:\n#                 - Infuse: Dark\n#      Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\" \n#         - Row: \"<size=20%> \"\n#         - Row: \"$99098_B$\"\n#         #- Row: \"<b><size=130%>$Move$ <sprite name=Move> 1\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$097_B_2$\"\n# #        - Row: \"Swap locations with an adjacent enemy\"\n#         #- Row: \"$99098_B$\"\n# #        #- Row: \"<b><size=130%>$Move$ <sprite name=Move> 1\"\n# #        - Row: \"<size=20%> \"\n# #        - Row: \"$With_YouControllingActions$\""
+   }
+  },
+  {
+   "name": "trickster's reversal",
+   "level": "X",
+   "initiative": "9",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\tricksters-reversal.jpeg",
+   "ghs": {
+    "name": "Trickster's Reversal",
+    "number": 99,
+    "level": "X",
+    "initiative": 9,
+    "top": [
+     "\"On your next melee attack targeting an enemy that has Shield, add +(X+2)Attack, where X is the Shield value of the target.\" {card: slotStartXp:1}"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "\"Negate the next Damage you would suffer this round.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99099_Scoundrel2_Trickster's Reversal.yml",
+    "Level": "X",
+    "Initiative": "09",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 0\n                    Enhancements: 1\n                    #Pierce: All\n                ConditionalOverrides:\n                    TAttackCO:\n                        Filter: Enemy\n                        AbilityOverrides:\n                            TTargetShieldBuff:\n                                AddTargetPropertyToStrength: Shield\n                                AddTargetPropertyToStrengthMultiplier: 2\n            \n            #TActive:\n#                AddActiveBonus:\n#                    Attack: 2\n#                ActiveBonus:\n#                    Behaviour: OverrideAbility\n#                    Duration: Persistent\n#                    XPTracker: [1]\n#                    ValidAbilityType: Attack\n#                    AttackType: Melee\n#                    #FullCopy: true\n#                    #IsSingleTargetBonus: True\n#                    ActiveBonusAbilityOverrides:\n#                        TTargetShieldBuff:\n#                            AddTargetPropertyToStrength: Shield\n            \n            \n#            TActive: #Only adds attack 2, not shield value\n#                Attack: 2\n#                Filter: Self\n#                ConditionalOverrides:\n#                    TAttackCO:\n#                        Filter: Enemy\n#                        AbilityOverrides:\n#                            TTargetShieldBuff:\n#                                AddTargetPropertyToStrength: Shield\n#                ActiveBonus:\n#                    Duration: Persistent\n#                    Behaviour: BuffAttack\n#                    XPTracker: [1]\n#                AnimOverload: PowerUp\n        \n        \n#            TAttack:\n#                Attack:\n#                    Amount: 2\n#                    Enhancements: 2\n#                ConditionalOverrides:\n#                    TAttackCO:\n#                        Filter: Enemy\n#                        AbilityOverrides:\n#                            TTargetShieldBuff:\n#                                AddTargetPropertyToStrength: Shield\n#                                AddTargetPropertyToStrengthMultiplier: 2\n\n#Combine ActiveBonus from Smoke Bomb, conditional override from 1.0 Trickster\n                         \n        #Abilities:\n#            TActive:\n#                Attack: 0\n#                Filter: Self\n#                ActiveBonus:\n#                    Duration: Persistent\n#                    Behaviour: BuffAttack\n#                    StrengthIsScalar: True\n#                    XPTracker: [1]\n#                AttackEffect:\n#                    Type: BuffIfAnyConditionsOnTarget\n#                    Strength: 3\n#                    Conditions: [Disarm, Stun, Immobilize]\n    Bottom:\n        Abilities:\n            BPrevent:\n                PreventDamage: 1\n                ActiveBonus:\n                    Duration: Round\n                    XPTracker: [0]\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$098_T$\"\n#         - Row: \"<size=20%> \"\n#         #- Active:\n# #            Ability: TActive\n# #            ListLayout: \"On your next attack, add 2 Attack and the Shield value of the target.\"\n# #            Layout: \"On your next attack, add 2 Attack and the Shield value of the target.\"\n# #            Icon: \"Immune\"\n# #        - Row: \"<size=20%> \"\n# #        - Duration: Round\n#     Bottom:\n#         - Active:\n#             Ability: BPrevent\n#             ListLayout: \"$098_B$\"\n#             Layout: \"$098_B$\"\n#             Icon: \"Immune\"\n#         - Row: \"<size=20%> \"\n#         - Duration: Round"
+   }
+  },
+  {
+   "name": "open wound",
+   "level": "2",
+   "initiative": "11",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\open-wound.jpeg",
+   "ghs": {
+    "name": "Open Wound",
+    "number": 100,
+    "level": 2,
+    "initiative": 11,
+    "top": [
+     "(Attack 4 [diamond]; \"Add Wound and gain Experience 1 if the target is adjacent to any of your allies.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 6"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99100_Scoundrel2_Open Wound.yml",
+    "Level": "2",
+    "Initiative": "11",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                ConditionalOverrides:\n                    TAttackCO:\n                        Filter:\n                            TargetType: Enemy\n                            TargetAdjacentAllies: \"> 0\"\n                        XP: 1\n                        AbilityOverrides:\n                            TAdjBuff:\n                                Conditions: Wound\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 6"
+   }
+  },
+  {
+   "name": "stick to the shadows",
+   "level": "2",
+   "initiative": "26",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\stick-to-the-shadows.jpeg",
+   "ghs": {
+    "name": "Stick to the Shadows",
+    "number": 101,
+    "level": 2,
+    "initiative": 26,
+    "top": [
+     "\"On your next tree attacks, add Attack + 1, Poison.\" {(card: slotStart; card: slotXpFh:1; card: slotEnd)}"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"If you are adjacent to no enemies, gain Invisible. At the end of the round, lose Invisible.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99101_Scoundrel2_Stick to the Shadows.yml",
+    "Level": "2",
+    "Initiative": "26",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TActive:\n                Attack: 1\n                Conditions: Poison\n                Filter: Self\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: BuffAttack\n                    XPTracker: [0,1,0]\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BInvis:\n                Invisible: True\n                Filter:\n                    TargetType: Self\n                    TargetAdjacentEnemiesOfCaster: \"== 0\"\n                AnimOverload: TurnInvisible\n\n\n#                                 #Invisible: True\n# #                                Invisible: \n# #                                    DecrementTrigger: Rounds\n#                 ActiveBonus:\n#                     Duration: Round\n#                     Behaviour: EndRoundAbility\n#                 RemoveConditions: 1\n#                 Condition: Invisible"
+   }
+  },
+  {
+   "name": "hidden daggers",
+   "level": "3",
+   "initiative": "39",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\hidden-daggers.jpeg",
+   "ghs": {
+    "name": "Hidden Daggers",
+    "number": 102,
+    "level": 3,
+    "initiative": 39,
+    "top": [
+     "Attack 2 {Range 3}",
+     "Attack 2 {Range 3}",
+     "Attack 2 {Range 3}",
+     "Attack 2 {Range 3}",
+     "Attack 2 {Range 3}"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "(Attack 1 {Target 2 [square]; Range 3 [square]}; \"Add Attack + 1 on each target that is adjacent to none of its allies.\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99102_Scoundrel2_Hidden Daggers.yml",
+    "Level": "3",
+    "Initiative": "39",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack1:\n                Attack: 2\n                Range: 3\n                AnimOverload: RangedAttackThrowingKnives\n            TAttack2:\n                Attack: 2\n                Range: 3\n                AnimOverload: RangedAttackThrowingKnives\n            TAttack3:\n                Attack: 2\n                Range: 3\n                AnimOverload: RangedAttackThrowingKnives\n            TAttack4:\n                Attack: 2\n                Range: 3\n                AnimOverload: RangedAttackThrowingKnives\n            TAttack5:\n                Attack: 2\n                Range: 3\n                AnimOverload: RangedAttackThrowingKnives\n        XP: 2\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Target:\n                    Amount: 2\n                    Enhancements: 1\n                ConditionalOverrides:\n                    TAttackCO:\n                        Filter:\n                            TargetType: Enemy\n                            TargetAdjacentAlliesOfTarget: \"== 0\"\n                        AbilityOverrides:\n                            TAdjAllyBuff:\n                                Strength: 1\n                AnimOverload: RangedAttackThrowingKnives"
+   }
+  },
+  {
+   "name": "flintlock",
+   "level": "3",
+   "initiative": "51",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\flintlock.jpeg",
+   "ghs": {
+    "name": "Flintlock",
+    "number": 103,
+    "level": 3,
+    "initiative": 51,
+    "top": [
+     "(Attack 3 [diamond] {Range 2; Muddle}; \"You may place one of your money tokens in the hex occupied by the target to add Attack + 2, Pierce 2.\")",
+     "(infuse fire)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 2 [circle]",
+     "(Loot 1; \"Create one Poison, Immobilize trap in the empty hex of one looted money token.\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99103_Scoundrel2_Flintlock.yml",
+    "Level": "3",
+    "Initiative": "51",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                    Pierce: 2\n                Range: 2\n                Conditions: Muddle\n#            TDamage:\n#                Damage: 2\n#                Filter: Self\n#                AnimOverload: None\n#                AutoTrigger: True\n        Infuse: Fire\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            BLoot:\n                Loot: 1\n                Target: -1\n            BTrap:\n                Trap:\n                    TrapName: BearTrap\n                    Conditions: [Poison,Immobilize]\n                Target: 1\n                SpawnDelay: 2.8\n                AnimOverload: LayTrap"
+   }
+  },
+  {
+   "name": "flurry of blades",
+   "level": "4",
+   "initiative": "16",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\flurry-of-blades.jpeg",
+   "ghs": {
+    "name": "Flurry of Blades",
+    "number": 104,
+    "level": 4,
+    "initiative": 16,
+    "top": [
+     "Attack 2 {Target 3 [square]; Range 3 [square]}"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 7 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99104_Scoundrel2_Flurry of Blades.yml",
+    "Level": "4",
+    "Initiative": "16",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 2\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Target:\n                    Amount: 3\n                    Enhancements: 1\n                AnimOverload: RangedAttackThrowingKnives\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 7\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "gruesome advantage",
+   "level": "4",
+   "initiative": "90",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\gruesome-advantage.jpeg",
+   "ghs": {
+    "name": "Gruesome Advantage",
+    "number": 105,
+    "level": 4,
+    "initiative": 90,
+    "top": [
+     "(Attack 4 [diamond]; \"Add Attack + 2 and gain Experience 1 if the target is adjacent to any of your allies or is adjacent to none of its allies.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"When you next perform a melee attack targeting an enemy that has Poison this round, after the attack ability, perform:\" {Attack 2 {Range 3; Poison}}"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99105_Scoundrel2_Gruesome Advantage.yml",
+    "Level": "4",
+    "Initiative": "90",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                ConditionalOverrides:\n                    TAttackCO1:\n                        Filter:\n                            TargetType: Enemy\n                            TargetAdjacentAlliesOfCaster: \"> 0\"\n                        AbilityOverrides:\n                            TAdjBuff:\n                                Strength: 2\n                    TAttackCO2:\n                        Filter:\n                            TargetType: Enemy\n                            TargetAdjacentAlliesOfTarget: \"== 0\"\n                        AbilityOverrides:\n                            TAdjBuff:\n                                Strength: 2\n                    TAttackCO3:\n                        Filter:\n                            TargetType: Enemy\n                            TargetAdjacentAlliesOfCaster: \"> 0\"\n                            TargetAdjacentAlliesOfTarget: \"== 0\"\n                        AbilityOverrides:\n                            TAdjBuff:\n                                Strength: -2\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BActive:\n                Attack: 2\n                Range: 3\n                Conditions: Poison\n                Filter: Self\n                ActiveBonus:\n                    Duration: Round\n                    Behaviour: EndActionAbility\n                    ValidAbilityType: Attack\n                    AttackType: Melee\n                    Filter:\n                        TargetType: Enemy\n                        TargetHasNegativeCondition: Poison\n                    ActiveBonusAbilityOverrides:\n                        BActiveAttack:\n                            Attack: 2\n                            Range: 3\n                            Conditions: Poison"
+   }
+  },
+  {
+   "name": "duelist's advantage",
+   "level": "5",
+   "initiative": "7",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\duelists-advantage.jpeg",
+   "ghs": {
+    "name": "Duelist's Advance",
+    "number": 106,
+    "level": 5,
+    "initiative": 7,
+    "top": [
+     "Move 3 [circle]",
+     "Attack 4 [diamond]",
+     "Move 2 [circle]"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]",
+     "Pull 1 [square] {Range 2 [square]}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99106_Scoundrel2_Duelist's Advance.yml",
+    "Level": "5",
+    "Initiative": "7",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TMove1:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n            TMove2:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n            BPull:\n                Pull:\n                    Amount: 1\n                    Enhancements: 1\n                Range:\n                    Amount: 2\n                    Enhancements: 1"
+   },
+   "matched_by_spelling": [
+    "ghs:duelistsadvance",
+    "xipe:duelistsadvance"
+   ]
+  },
+  {
+   "name": "serrated arrow",
+   "level": "5",
+   "initiative": "95",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\serrated-arrow.jpeg",
+   "ghs": {
+    "name": "Serrated Arrow",
+    "number": 107,
+    "level": 5,
+    "initiative": 95,
+    "top": [
+     "Attack 4 [diamond] {Range 3; Wound}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"On your next attack targeting an enemy that is both adjacent to any of your allies and none of its allies, double the value of the attack.\" {card: slotStartXp:2}"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent"
+    ]
+   },
+   "xipe": {
+    "file": "99107_Scoundrel2_Serrated Arrow.yml",
+    "Level": "5",
+    "Initiative": "95",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                Range: 3\n                Conditions: Wound\n                AnimOverload: RangedAttackPistolBurningOil\n    Bottom:\n        Abilities:\n            BActive:\n                Attack: 2\n                Filter: Self\n                AnimOverload: PowerUp\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: BuffAttack\n                    StrengthIsScalar: True\n                    Filter:\n                        TargetType: Enemy\n                        TargetAdjacentAlliesOfTarget: \"== 0\"\n                        TargetAdjacentAlliesOfCaster: \"> 0\"\n                    XPTracker: [2]"
+   }
+  },
+  {
+   "name": "dance of daggers",
+   "level": "6",
+   "initiative": "3",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\dance-of-daggers.jpeg",
+   "ghs": {
+    "name": "Dance of Daggers",
+    "number": 108,
+    "level": 6,
+    "initiative": 3,
+    "top": [
+     "\"Negate the Damage and added effects of all attacks targeting you this round.\"",
+     "\"Immediately after each attack ability targeting you this round, gain Experience 1 and perform:\" {Attack 2 {Target %data.custom.gh2e.silent-knife.abilities.108.3%}}"
+    ],
+    "top_flags": [
+     "lost",
+     "round"
+    ],
+    "bottom": [
+     "Move 4 [circle]",
+     "\"Gain advantage on all your attacks this round.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99109_Scoundrel2_Dance of Daggers.yml",
+    "Level": "6",
+    "Initiative": "03",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 5\n                    Enhancements: 1\n                ConditionalOverrides:\n                    TAttackCO:\n                        Filter:\n                            TargetType: Enemy\n                            EnemyType: Normal\n                        XP: 1\n                        AbilityOverrides:\n                            TAdjBuff:\n                                Strength: 1\n                                AttackHasAdvantage: True\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n            BActive:\n                Advantage: True\n                Filter: Self\n                ActiveBonusDuration: Round\n                AnimOverload: PowerUp"
+   }
+  },
+  {
+   "name": "cull the weak",
+   "level": "6",
+   "initiative": "62",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\cull-the-weak.jpeg",
+   "ghs": {
+    "name": "Cull the Weak",
+    "number": 109,
+    "level": 6,
+    "initiative": 62,
+    "top": [
+     "(Attack 5 [diamond])",
+     "\"Add Attack + 1 and gain advantage, Experience 1 if the target is a normal monster.\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Attack 2 {Target %data.custom.gh2e.silent-knife.abilities.109.2%}",
+     "Loot 2"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99108_Scoundrel2_Cull the Weak.yml",
+    "Level": "6",
+    "Initiative": "62",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 5\n                    Enhancements: 1\n                ConditionalOverrides:\n                    TAttackCO:\n                        Filter:\n                            TargetType: Enemy\n                            EnemyType: Normal\n                        XP: 1\n                        AbilityOverrides:\n                            TAdjBuff:\n                                Strength: 1\n                                AttackHasAdvantage: True\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack: 2\n                Range: 2\n                Target: 2\n                Filter:\n                    TargetType: Enemy\n                    EnemyType: Normal\n                    Health: \"<= 2\"\n            BLoot:\n                Loot: 2\n                Target: -1"
+   }
+  },
+  {
+   "name": "stiletto storm",
+   "level": "7",
+   "initiative": "80",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\stiletto-storm.jpeg",
+   "ghs": {
+    "name": "Stiletto Storm",
+    "number": 110,
+    "level": 7,
+    "initiative": 80,
+    "top": [
+     "Attack 2 {Target 2 [square]; Range 3 [square]}",
+     "\"If all the targets of the attack ability were adjacent to none of their allies, perform:\" {Attack 2 {Target 2 [square]; Range 3 [square]}}"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "Attack 3 [square]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99111_Scoundrel2_Stiletto Storm.yml",
+    "Level": "7",
+    "Initiative": "80",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Target:\n                    Amount: 2\n                    Enhancements: 1\n                ConditionalOverrides:\n                    TAttackCO:\n                        Filter:\n                            TargetType: Enemy\n                            TargetAdjacentAlliesOfTarget: \"== 0\"\n                        AbilityOverrides:\n                            TAttack2:\n                                Attack:\n                                    Amount: 2\n                                    Enhancements: 1\n                                Range:\n                                    Amount: 3\n                                    Enhancements: 1\n                                Target:\n                                    Amount: 2\n                                    Enhancements: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "spring the trap",
+   "level": "7",
+   "initiative": "13",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\spring-the-trap.jpeg",
+   "ghs": {
+    "name": "Spring the Trap",
+    "number": 111,
+    "level": 7,
+    "initiative": 13,
+    "top": [
+     "(\"This action my be performed while you have Stun.\"; \"Remove all negative conditions you have.\")",
+     "Heal 5 [diamond_plus] {target: self}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Designate one adjacent trap.\"",
+     "Move 5 [circle] {Jump}",
+     "\"Relocate the designated trap to an adjacent featureless hex. If that hex is occupied by an enemy, spring the trap on that enemy and gain Experience 1.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99110_Scoundrel2_Spring the Trap.yml",
+    "Level": "7",
+    "Initiative": "13",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TRemove:\n                RemoveConditions: All\n                Conditions: [Poison, Wound, Immobilize, Disarm, Stun, Muddle]\n                Filter: Self\n                IgnoreStun: True\n            THeal:\n                Heal:\n                    Amount: 5\n                    Enhancements: 1\n                Filter: Self\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 5\n                    Enhancements: 1\n                Jump: True"
+   }
+  },
+  {
+   "name": "visage of the inevitable",
+   "level": "8",
+   "initiative": "88",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\visage-of-the-inevitable.jpeg",
+   "ghs": {
+    "name": "Visage of the Inevitable",
+    "number": 112,
+    "level": 8,
+    "initiative": 88,
+    "top": [
+     "(Attack 4 [square]; \"Add Disarm and gain Invisible, Experience 1 if the target is both adjacent to any of your allies and none of its allies.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "Poison {target: all; Range 1}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99112_Scoundrel2_Visage of the Inevitable.yml",
+    "Level": "8",
+    "Initiative": "88",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                ConditionalOverrides:\n                    TAttackCO:\n                        Filter:\n                            TargetType: Enemy\n                            TargetAdjacentAlliesOfCaster: \"> 0\"\n                            TargetAdjacentAlliesOfTarget: \"== 0\"\n                        XP: 1\n                        AbilityOverrides:\n                            TAdjBuff:\n                                Conditions: Disarm\n                            TSelfBuff:\n                                Filter: Self\n                                Conditions: Invisible\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BPoison:\n                Attack: 0\n                Conditions: Poison\n                Range: 1\n                Target: -1\n                Filter:\n                    TargetType: Enemy"
+   }
+  },
+  {
+   "name": "crippling poison",
+   "level": "8",
+   "initiative": "4",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\crippling-poison.jpeg",
+   "ghs": {
+    "name": "Crippling Poison",
+    "number": 113,
+    "level": 8,
+    "initiative": 4,
+    "top": [
+     "\"Add Poison to all your attacks. Add Attack + 1 to all your attacks targeting enemies that have Poison.\""
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"Add Immobilize to all your attacks targeting enemies adjacent to none of their allies this round.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99113_Scoundrel2_Crippling Poison.yml",
+    "Level": "8",
+    "Initiative": "4",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            # TActive1:\n                # Attack: 0\n                # Conditions: [Poison]\n                # Filter: Self\n                # ActiveBonus:\n                    # Duration: Persistent\n                    # Behaviour: BuffAttack\n            # TActive2:\n                # Attack: 1\n                # Filter: Self\n                # ActiveBonus:\n                    # Duration: Persistent\n                    # Behaviour: BuffAttack\n                    # Filter:\n                        # TargetType: Enemy\n                        # TargetHasNegativeConditions: [Poison]\n            TActive:\n                Attack: 0\n                Conditions: [Poison]\n                Filter: Self\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: BuffAttack\n                ConditionalOverrides:\n                    TAttackCO:\n                        Filter:\n                            TargetType: Enemy\n                            TargetHasNegativeConditions: [Poison]\n                        AbilityOverrides:\n                            TPoisonBuff:\n                                Strength: 1\n        XP: 2\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BActive:\n                Attack: 0\n                Conditions: [Immobilize]\n                Filter: Self\n                ActiveBonus:\n                    Duration: Round\n                    Behaviour: BuffAttack\n                    Filter:\n                        TargetType: Enemy\n                        TargetAdjacentAlliesOfTarget: \"== 0\""
+   }
+  },
+  {
+   "name": "hired help",
+   "level": "9",
+   "initiative": "2",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\hired-help.jpeg",
+   "ghs": {
+    "name": "Hired Help",
+    "number": 114,
+    "level": 9,
+    "initiative": 2,
+    "top": [
+     "\"You may lose one of your money tokens to place a character token on an adjacent normal enemy. For the remainder of the scenario, that enemy is an ally to you and an enemy to all other monsters. You may replace its base with a blue base to more easily identify it. When that enemy dies, it drops an additional money token.\""
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 4 [circle]",
+     "Disarm {Range 1}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99114_Scoundrel2_Hired Help.yml",
+    "Level": "9",
+    "Initiative": "2",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TControl:\n                AddActiveBonus:\n                    ControlActor:\n                        ControlDurationType: ControlForOneTurn\n                        ControlActorType: Player\n                    AnimOverload: DefaultRadialAttack\n                    Range: 1\n                    Filter:\n                        TargetType: Enemy\n                        EnemyType: [Normal, Elite]\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: StartTurnAbility\n                    XPTracker: [2]\n        XP: 2\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n            BDisarm:\n                Disarm: True\n                Range:\n                    Amount: 1\n                    Enhancements: 1\n                AnimOverload: RangedAttack\n                Filter: [Enemy]"
+   }
+  },
+  {
+   "name": "watch it burn",
+   "level": "9",
+   "initiative": "98",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\watch-it-burn.jpeg",
+   "ghs": {
+    "name": "Watch It Burn",
+    "number": 115,
+    "level": 9,
+    "initiative": 98,
+    "top": [
+     "Attack 2 {target: enemiesAdjacent; Wound; Immobilize}",
+     "\"If you attacked at least three enemies with the attack ability, gain Experience 1 and perform:\" {Move 3 [circle] {Jump}}",
+     "(infuse fire)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"During you turn, you may play this card from your hand to perform this action (in addition to the two cards you have played for the round).\" {Attack 5 [diamond]}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99115_Scoundrel2_Watch it Burn.yml",
+    "Level": "9",
+    "Initiative": "98",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 1\n                Target: -1\n                Filter:\n                    TargetType: Enemy\n                Conditions: [Wound, Immobilize]\n                SubAbilities:\n                    TAttackSubMove:\n                        Move:\n                            Amount: 3\n                            Enhancements: 1\n                        Jump: True\n                        IsInlineSubAbility: True\n                        AutoTrigger: True\n        Infuse: Fire\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1"
+   }
+  }
+ ],
+ "unmatched_ghs": [],
+ "unmatched_xipe": []
+}

@@ -1,0 +1,1161 @@
+{
+ "class": "Bruiser",
+ "code": "BR2",
+ "model_from": "Brute",
+ "ghs_file": "bruiser",
+ "xipe_class": "Bruiser",
+ "character": {
+  "name": "bruiser",
+  "characterClass": "inox",
+  "gender": "m",
+  "icon": "gh-brute",
+  "edition": "gh2e",
+  "handSize": 10,
+  "traits": [
+   "intimidating",
+   "strong",
+   "armored"
+  ],
+  "color": "#35acd5",
+  "stats": [
+   {
+    "level": 1,
+    "health": 10
+   },
+   {
+    "level": 2,
+    "health": 12
+   },
+   {
+    "level": 3,
+    "health": 14
+   },
+   {
+    "level": 4,
+    "health": 16
+   },
+   {
+    "level": 5,
+    "health": 18
+   },
+   {
+    "level": 6,
+    "health": 20
+   },
+   {
+    "level": 7,
+    "health": 22
+   },
+   {
+    "level": 8,
+    "health": 24
+   },
+   {
+    "level": 9,
+    "health": 26
+   }
+  ],
+  "availableSummons": [],
+  "perks": [
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "shield",
+         "value": 1
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "active": true,
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.bruiser.1%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "stun"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "heal",
+         "value": 2,
+         "effects": [
+          {
+           "type": "specialTarget",
+           "value": "self"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus2",
+       "effects": [
+        {
+         "type": "push",
+         "value": 2
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus3"
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "condition",
+         "value": "disarm"
+        }
+       ]
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "condition",
+         "value": "muddle"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "custom": "%game.custom.perks.ignoreNegativeItemFh%",
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.bruiser.2%",
+    "count": 2,
+    "combined": true
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.bruiser.3%",
+    "count": 1
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.bruiser.4%",
+    "count": 1
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.bruiser.5%",
+   "%data.custom.gh2e.bruiser.6%"
+  ]
+ },
+ "cards": [
+  {
+   "name": "trample",
+   "level": "1",
+   "initiative": "72",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\trample.jpeg",
+   "ghs": {
+    "name": "Trample",
+    "number": 1,
+    "level": 1,
+    "initiative": 72,
+    "top": [
+     "Attack 3 [diamond] {Pierce 3}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [square] {Jump}",
+     "(Attack 3 {target: enemiesMovedThrough}; \"Gain Experience 1 for each enemy targeted.\")"
+    ],
+    "bottom_flags": [
+     "lost"
+    ]
+   },
+   "xipe": {
+    "file": "99001_Bruiser_Trample.yml",
+    "Level": "1",
+    "Initiative": "72",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                    Pierce: 3\n    Bottom:\n        Abilities:\n            BMoveAttack:\n                MergedMoveAttack:\n                    Abilities:\n                        BMove:\n                            Move:\n                                Amount: 4\n                                Jump: True\n                                Enhancements: 1\n                        BAttack:\n                            Attack: 3\n                            AllTargetsOnMovePath: True\n                            XPPerTarget: 1"
+   }
+  },
+  {
+   "name": "eye for an eye",
+   "level": "1",
+   "initiative": "13",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\eye-for-an-eye.jpeg",
+   "ghs": {
+    "name": "Eye for an Eye",
+    "number": 2,
+    "level": 1,
+    "initiative": 13,
+    "top": [
+     "Shield 1",
+     "(Retaliate 1; \"Gain Experience 1 the next time you retaliate this round.\")"
+    ],
+    "top_flags": [
+     "round"
+    ],
+    "bottom": [
+     "Heal 3 [square] {target: self}",
+     "(infuse earth)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99002_Bruiser_Eye for an Eye.yml",
+    "Level": "1",
+    "Initiative": "13",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TShield:\n                Shield: 1\n                ActiveBonusDuration: Round\n                AnimOverload: PowerUp\n            TRetaliate:\n                Retaliate: 1\n                #ActiveBonusDuration: Round\n                ActiveBonus:\n                    Duration: Round\n                    #XPTracker: [1]\n                    ProcXP: 1\n                    #Can either use XPTracker OR Duration: Round\n                AnimOverload: PowerUp\n            #TRetaliateXP:\n#                Retaliate: 0\n#                #ActiveBonusDuration: Round\n#                ActiveBonus:\n#                    Duration: Persistent\n#                    XPTracker: [1]\n#                AnimOverload: PowerUp\n    Bottom:\n        Abilities:\n            BHeal:\n                Heal:\n                    Amount: 3\n                    Enhancements: 1\n                Filter: Self\n                AnimOverload: Heal\n        Infuse: Earth\n# Layout:\n#     Top:\n#         - Active:\n#             Ability: TShield\n#             Icon: Shield\n#             ListLayout: \"$Shield$ <sprite name=Shield> *TShield*, $Self$\"\n#             Layout:\n#                 - Row: \"<b><size=130%>$Shield$ <sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@\"\n#                 - Row: \"$Self$\"\n#         - Row: \"<size=50%> \"\n#         - Active:\n#             Ability: TRetaliate\n#             Icon: Retaliate\n#             ListLayout: \"$Retaliate$ <sprite name=Retaliate> *TRetaliate*, $Self$, $002_T$\"\n#             Layout:\n#                 - Row: \"<b><size=130%>$Retaliate$ <sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@\"\n#                 - Row: \"$Self$\"\n#                 - Row: \"<size=20%> \"\n#                 - Row: \"$002_T$\"\n#         - Row: \"<size=50%> \"\n#         - Duration: Round\n#     Bottom:\n#         - Row: \"<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@\"\n#         - Row: \"$Self$\"\n#         - Row: \"<size=20%> \"\n#         - Infuse: Earth"
+   }
+  },
+  {
+   "name": "skewer",
+   "level": "1",
+   "initiative": "35",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\skewer.jpeg",
+   "ghs": {
+    "name": "Skewer",
+    "number": 3,
+    "level": 1,
+    "initiative": 35,
+    "top": [
+     "(Attack 3 [square] {consume air {Attack +1; Pierce 1; card: experience:1}}; area (1,1,target)|(1,2,active)|(2,0,target))"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 7 [square]"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=2"
+    ]
+   },
+   "xipe": {
+    "file": "99003_Bruiser_Skewer.yml",
+    "Level": "1",
+    "Initiative": "35",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                AreaEffect: \"0,0,G|2,0,R|4,0,R\"\n                AreaEffectLayoutOverride: \"0,0,G|1,1,R|2,2,R\"\n                AnimOverload: RadialAttack\n                MultiPassAttack: False\n        Consumes:\n            TCAir:\n                Elements: Air\n                AbilityOverrides:\n                    TCAirAttackBuff:\n                        ParentName: TAttack\n                        Attack:\n                            Amount: 1\n                            Pierce: 1\n                XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 7\n                    Enhancements: 1\n        XP: 2\n# Layout:\n#     Top:\n#         - ColumnWidths: \"65,30\"\n#         - Column:\n#             - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#             - Row: \"<size=20%> \"\n#             - Consume:\n#                 Name: TCAir\n#                 Text:\n#                     - Row: \"+1 $Attack$ <sprite name=Attack>, <sprite name=XP1>\"\n#                     - Row: \"<size=10%> \"\n#                     - Row: \"$Pierce$ <sprite name=Pierce> 1\"\n#             - Row: \"<size=20%> \"\n#         - Column: \"£Area£\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=50%> \"\n#         - XP: 2"
+   }
+  },
+  {
+   "name": "overwhelming assault",
+   "level": "1",
+   "initiative": "61",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\overwhelming-assault.jpeg",
+   "ghs": {
+    "name": "Overwhelming Assault",
+    "number": 4,
+    "level": 1,
+    "initiative": 61,
+    "top": [
+     "Attack 7 [diamond]"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 3 [square] {Jump}",
+     "(infuse air)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99004_Bruiser_Overwhelming Assault.yml",
+    "Level": "1",
+    "Initiative": "61",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 7\n                    Enhancements: 1\n                AnimOverload: HeavyMeleeAttack\n        XP: 2\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n                    Jump: True\n        Infuse: Air\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"<size=20%> \"\n#         - XP: 2\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"$Jump$ <sprite name=Jump>\"\n#         - Row: \"<size=20%> \"\n#         - Infuse: Air"
+   }
+  },
+  {
+   "name": "balanced measure",
+   "level": "1",
+   "initiative": "20",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\balanced-measure.jpeg",
+   "ghs": {
+    "name": "Balanced Measure",
+    "number": 5,
+    "level": 1,
+    "initiative": 20,
+    "top": [
+     "(Attack X; \"where X is the number of hexes you have moved this turn.\")"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "(Move X; \"where X is the amount of Damage you have dealt this turn.\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99005_Bruiser_Balanced Measure.yml",
+    "Level": "1",
+    "Initiative": "20",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 0\n                AnimOverload: HeavyMeleeAttack\n                StatIsBasedOnX:\n                    Strength:\n                        BasedOn: HexesMovedThisTurn\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move: 0\n                StatIsBasedOnX:\n                    Strength:\n                        BasedOn: DamageInflictedThisTurn\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> X <size=100%>\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$Xis_HexesMovedThisTurn$\"\n#         - Row: \"<size=50%> \"\n#         - XP: 1\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> X <size=100%>\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$Xis_DamageInflictedThisTurn$\""
+   }
+  },
+  {
+   "name": "grab and go",
+   "level": "1",
+   "initiative": "87",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\grab-and-go.jpeg",
+   "ghs": {
+    "name": "Grab and Go",
+    "number": 6,
+    "level": 1,
+    "initiative": 87,
+    "top": [
+     "Loot 1",
+     "Heal 2 [square] {target: self}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [square]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99006_Bruiser_Grab and Go.yml",
+    "Level": "1",
+    "Initiative": "87",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TLoot:\n                Loot: 1\n                Target: -1\n                AnimOverload: Loot\n            THeal:\n                Heal:\n                    Amount: 2\n                    Enhancements: 1\n                Filter: Self\n                AnimOverload: Heal\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Loot$ <sprite name=Loot> *TLoot*\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@\"\n#         - Row: \"$Self$\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\""
+   }
+  },
+  {
+   "name": "warding strength",
+   "level": "1",
+   "initiative": "32",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\warding-strength.jpeg",
+   "ghs": {
+    "name": "Warding Strength",
+    "number": 7,
+    "level": 1,
+    "initiative": 32,
+    "top": [
+     "Attack 2 [square] {Disarm}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"On the next six sources of Damage from attacks targeting you, gain Shield 1, Retaliate 1 for the attack.\"",
+     "(card: slotStartXp:1; card: slot; card: slotXpFh:1; card: slot; card: slotXpFh:1; card: slotEnd)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent"
+    ]
+   },
+   "xipe": {
+    "file": "99007_Bruiser_Warding Strength.yml",
+    "Level": "1",
+    "Initiative": "32",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Conditions: Disarm\n    Bottom:\n        Abilities:\n            BShield:\n                Shield: 1\n                #Retaliate: 1\n                AttackSourcesOnly: True\n                AnimOverload: PowerUpShield\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: ShieldAndRetaliate\n                    AbilityData:\n                        Retaliate: 1\n                    #Behaviour: ShieldIncomingAttacks\n                    XPTracker: [0,1,0,1,0,1]\n                    #IsToggleBonus: True\n                    ValidAbilityType: Attack \n            #BRetaliate:\n#                Retaliate: 1\n#                #AttackSourcesOnly: True\n#                Filter: Self\n#                AnimOverload: PowerUp\n#                ActiveBonus:\n#                    Duration: Persistent\n#                    AttackType: Melee\n#                    Behaviour: Retaliate\n#                    XPTracker: [0,0,0,0,0,0]                       \n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Disarm$ <sprite name=Disarm>\"\n#     Bottom:\n#         - Active:\n#             Ability: BShield\n#             ListLayout: \"$99007_B$\"\n#             Layout: \"$99007_B$\"\n#             Icon: \"Shield\"\n#         - Row: \"<size=50%> \"\n#         - XPTracker: BShield"
+   }
+  },
+  {
+   "name": "shield bash",
+   "level": "1",
+   "initiative": "15",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\shield-bash.jpeg",
+   "ghs": {
+    "name": "Shield Bash",
+    "number": 8,
+    "level": 1,
+    "initiative": 15,
+    "top": [
+     "Attack 4 [diamond] {Stun}"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 2 [square]",
+     "Shield 1"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99008_Bruiser_Shield Bash.yml",
+    "Level": "1",
+    "Initiative": "15",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                Conditions: Stun\n        XP: 2\n    Bottom:\n        Abilities:\n            BMove:\n                Move: 2\n            BShield:\n                Shield:\n                    Amount: 1\n                    Enhancements: 1\n                ActiveBonusDuration: Round\n                AnimOverload: PowerUpShield\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\" \n#         - Row: \"$Stun$ <sprite name=Stun>\"\n#         - XP: 2\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=50%> \"\n#         - Active:\n#             Ability: BShield\n#             Icon: \"Shield\"\n#             ListLayout: \"$Shield$ <sprite name=Shield> *BShield*, $Self$\"\n#             Layout:\n#                 - Row: \"<b><size=130%>$Shield$ <sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@\"\n#                 - Row: \"$Self$\"\n#         - Row: \"<size=20%> \"\n#         - Duration: Round"
+   }
+  },
+  {
+   "name": "leaping cleave",
+   "level": "1",
+   "initiative": "54",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\leaping-cleave.jpeg",
+   "ghs": {
+    "name": "Leaping Cleave",
+    "number": 9,
+    "level": 1,
+    "initiative": 54,
+    "top": [
+     "Attack 3 [square] {area (0,1,active)|(1,0,target)|(1,1,target)}"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 3 [square] {Jump}",
+     "Push 2 [square] {Range 1}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99009_Bruiser_Leaping Cleave.yml",
+    "Level": "1",
+    "Initiative": "54",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                AreaEffect: \"0,0,G|1,1,R|2,0,R|1,-1,E\"\n                AnimOverload: RadialAttack\n                MultiPassAttack: false\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n                Jump: True\n            BPush:\n                Push:\n                    Amount: 2\n                    Enhancements: 1\n                AnimOverload: TargetedShout\n# Layout:\n#     Top:\n#         - ColumnWidths: \"60,35\"\n#         - Column:\n#             - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#             - Row: \"<size=20%> \"\n#             - XP: 1\n#         - Column: \"£Area£\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"$Jump$ <sprite name=Jump>\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Push$ <sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@\"\n#         - Row: \"$Target_OneAdjacentEnemy$\""
+   }
+  },
+  {
+   "name": "spare dagger",
+   "level": "1",
+   "initiative": "27",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\spare-dagger.jpeg",
+   "ghs": {
+    "name": "Spare Dagger",
+    "number": 10,
+    "level": 1,
+    "initiative": 27,
+    "top": [
+     "Attack 3 {Range 3}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Attack 2 [diamond] {Pierce 1 [square]}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99010_Bruiser_Spare Dagger.yml",
+    "Level": "1",
+    "Initiative": "27",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 3\n                AnimOverload: RangedAttack\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack:\n                    Amount: 2\n                    Pierce: 1\n                    Enhancements: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Range$ <sprite name=Range> *TAttack.Range*\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@\"\n#         - Row: \"$Pierce$ <sprite name=Pierce> *BAttack.Pierce* @BAttack.Pierce@\""
+   }
+  },
+  {
+   "name": "sweeping blow",
+   "level": "X",
+   "initiative": "23",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\sweeping-blow.jpeg",
+   "ghs": {
+    "name": "Sweeping Blow",
+    "number": 11,
+    "level": "X",
+    "initiative": 23,
+    "top": [
+     "((Attack 2 {Muddle}; \"Add Attack + 1 on each undamaged target.\"); area (0,0,enhance)|(0,1,active)|(1,0,target)|(1,1,target)|(1,2,target) [hex])"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 4"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99011_Bruiser_Sweeping Blow.yml",
+    "Level": "X",
+    "Initiative": "23",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Conditions: Muddle\n                AreaEffect: \"0,0,G|1,1,R|2,0,R|1,-1,R|-1,1,E\"\n                AnimOverload: RadialAttack\n                MultiPassAttack: False\n                ConditionalOverrides:\n                    TAttackCO:\n                        Filter:\n                            Health: == 100%\n                        AbilityOverrides:\n                            TAdjAllyBuff:\n                                Strength: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move: 4\n# Layout:\n#     Top:\n#         - ColumnWidths: \"65,25\"\n#         - Column:\n#             - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#             - Row: \"$Muddle$ <sprite name=Muddle>\"\n#             - Row: \"<size=20%> \"\n#             - Row: \"Add <nobr>+1 Attack <sprite name=Attack></nobr> on each undamaged target\"\n#         - Column:\n#             - Row: \"£Area£\"\n#         #- Row: \"$99011_T$\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\""
+   }
+  },
+  {
+   "name": "fearsome taunt",
+   "level": "X",
+   "initiative": "10",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\fearsome-taunt.jpeg",
+   "ghs": {
+    "name": "Fearsome Taunt",
+    "number": 12,
+    "level": "X",
+    "initiative": 10,
+    "top": [
+     "Attack 3 [square] {Push 3 [square]}"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Shield 1",
+     "\"Whenever an enemy would attack one of your adjacent allies this round, you may have that attack target you instead, regardless of the attack's range and line-of-sight limitations.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99012_Bruiser_Fearsome Taunt.yml",
+    "Level": "X",
+    "Initiative": "10",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                SubAbilities:\n                    TAttackSubPush:\n                        Push: 3\n                        AnimOverload: None\n                        IsInlineSubAbility: True\n        XP: 1\n    Bottom:\n        Abilities:\n            BShield:\n                Shield: 1\n                Filter: Self\n                ActiveBonusDuration: Round\n                AnimOverload: PowerUp\n            BRedirect:\n                Redirect:\n                Filter: Self\n                ActiveBonusDuration: Round\n                AnimOverload: PowerUp\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Push$ <sprite name=Push> *TAttackSubPush* @TAttackSubPush@\"\n#         - XP: 1\n#     Bottom:\n#         - Active:\n#             Ability: BShield\n#             Icon: \"Shield\"\n#             ListLayout: \"$Shield$ <sprite name=Shield> *BShield*, $Self$\"\n#             Layout:\n#                 - Row: \"<b><size=130%>$Shield$ <sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@\"\n#                 - Row: \"$Self$\"\n#         - Row: \"<size=20%> \"\n#         - Active:\n#             Ability: BRedirect\n#             ListLayout: \"$004_B$\"\n#             Layout: \"$004_B$\"\n#             Icon: \"Brute\"\n#         - Row: \"<size=20%> \"\n#         - Duration: Round"
+   }
+  },
+  {
+   "name": "provoking roar",
+   "level": "X",
+   "initiative": "18",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\provoking-roar.jpeg",
+   "ghs": {
+    "name": "Wall of Doom",
+    "number": 13,
+    "level": "X",
+    "initiative": 18,
+    "top": [
+     "Pull 2 [square] {Range 3 [square]; Muddle}",
+     "(Retaliate 2; \"Gain Experience 1 the next time you retaliate this round.\")"
+    ],
+    "top_flags": [
+     "round"
+    ],
+    "bottom": [
+     "Move 2 [circle]",
+     "Pull 2 [square] {Range 3 [square]}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99013_Bruiser_Provoking Roar.yml",
+    "Level": "X",
+    "Initiative": "18",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TPull: #14503\n                Pull:\n                    Amount: 2\n                    Enhancements: 1\n                Range: \n                    Amount: 3\n                    Enhancements: 1\n                Conditions: Muddle\n                #Muddle: True\n                #Filter: [Enemy]\n            TRetaliate:\n                Retaliate: 2\n                ActiveBonus:\n                    Duration: Round\n                    ProcXP: 1\n                AnimOverload: PowerUp\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            BPull:\n                Pull:\n                    Amount: 2\n                    Enhancements: 1\n                Range: \n                    Amount: 3\n                    Enhancements: 1\n                Filter: [Enemy]\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Pull$ <sprite name=Pull> *TPull*\"\n#         - Row: \"$Range$ <sprite name=Range> *TPull.Range*\"\n#         - Row: \"$Muddle$ <sprite name=Muddle>\"\n#         - Active:\n#             Ability: TRetaliate\n#             Icon: \"Retaliate\"\n#             ListLayout: \"$Retaliate$ <sprite name=Retaliate> *TRetaliate*, $Self$, $002_T$\"\n#             Layout:\n#                 - Row: \"<b><size=130%>$Retaliate$ <sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@\"\n#                 - Row: \"$Self$\"\n#                 - Row: \"<size=20%> \"\n#                 - Row: \"$002_T$\"\n#         - Row: \"<size=20%> \"\n#         - Duration: Round\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"<b><size=130%>$Pull$ <sprite name=Pull> *BPull*\"\n#         - Row: \"$Range$ <sprite name=Range> *BPull.Range*\""
+   },
+   "matched_by_initiative": [
+    "ghs:wallofdoom"
+   ]
+  },
+  {
+   "name": "intimidating growl",
+   "level": "2",
+   "initiative": "51",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\intimidating-growl.jpeg",
+   "ghs": {
+    "name": "Intimidating Growl",
+    "number": 14,
+    "level": 2,
+    "initiative": 51,
+    "top": [
+     "Attack 2 [square] {area (0,1,active)|(1,0,target)|(1,1,target)|(2,0,target)|(2,1,enhance) [hex]; Push 2}"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 2 [circle]",
+     "\"On your nex two move abilities, add Move + 1.\" {(card: slotStart; card: slotEndXp:1)}"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99014_Bruiser_Intimidating Growl.yml",
+    "Level": "2",
+    "Initiative": "51",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                AreaEffect: \"0,0,G|2,0,R|1,1,R|3,1,R|2,2,E|4,0,E\"\n                MultiPassAttack: False\n                AnimOverload: TargetedShout\n                SubAbilities:\n                    TAttackSubPush:\n                        Push: 2\n                        AnimOverload: None\n                        IsInlineSubAbility: True\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            BActive:\n                Move: 1\n                Filter: Self\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: BuffMove\n                    ValidAbilityType: Move\n                    XPTracker: [0,1]\n                AutoTrigger: True\n                AnimOverload: None"
+   }
+  },
+  {
+   "name": "juggernaut",
+   "level": "2",
+   "initiative": "34",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\juggernaut.jpeg",
+   "ghs": {
+    "name": "Juggernaut",
+    "number": 15,
+    "level": 2,
+    "initiative": 34,
+    "top": [
+     "Move 2 [circle]",
+     "Attack 3 [diamond]"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"On the next four sources of Damage you would suffer, negate that Damage.\" {(card: slotStart; card: slotXpFh:1; card: slot; card: slotEndXp:1)}"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent"
+    ]
+   },
+   "xipe": {
+    "file": "99015_Bruiser_Juggernaut.yml",
+    "Level": "2",
+    "Initiative": "34",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n    Bottom:\n        Abilities:\n            BPrevent:\n                PreventDamage: 4\n                ActiveBonus:\n                    Duration: Persistent\n                    XPTracker: [0,1,0,1]\n                AnimOverload: PowerUpShield"
+   }
+  },
+  {
+   "name": "hook and chain",
+   "level": "3",
+   "initiative": "42",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\hook-and-chain.jpeg",
+   "ghs": {
+    "name": "Hook and Chain",
+    "number": 16,
+    "level": 3,
+    "initiative": 42,
+    "top": [
+     "Attack 3 {Range 4; Pull 3}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4",
+     "\"If you moved in a straight line in one direction with the move ability, perform:\" {Attack X; \"where X is the number of hexes you moved.\"}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99016_Bruiser_Hook and Chain.yml",
+    "Level": "3",
+    "Initiative": "42",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 3\n                Range: 4\n                SubAbilities:\n                    TAttackSubPull:\n                        Pull: 3\n                AnimOverload: RangedAttack\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n            BAttack:\n                Attack:\n                    Amount: 0\n                StatIsBasedOnX:\n                    Strength:\n                        BasedOn: HexesMovedThisAction\n                StartAbilityRequirements:\n                    Type: PreviousAbility\n                    MoveWasStraightLine: True"
+   }
+  },
+  {
+   "name": "unstoppable charge",
+   "level": "3",
+   "initiative": "86",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\unstoppable-charge.jpeg",
+   "ghs": {
+    "name": "Unstoppable Charge",
+    "number": 17,
+    "level": 3,
+    "initiative": 86,
+    "top": [
+     "(Attack 3 [diamond]; \"Add Attack + 2 and gain Experience 1 if you have moved this turn.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4",
+     "Stun [diamond] {target: all; Range 1}"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=2"
+    ]
+   },
+   "xipe": {
+    "file": "99017_Bruiser_Unstoppable Charge.yml",
+    "Level": "3",
+    "Initiative": "86",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TActive:\n                AddActiveBonus:\n                    Attack: 0\n                ActiveBonus:\n                    Duration: Round\n                    Behaviour: OverrideAbility\n                    XPTracker: [1]\n                    ValidAbilityType: Attack\n                    ActiveBonusAbilityOverrides:\n                        BCTypeOverride:\n                            AbilityType: Attack\n                            Attack: 2\n                StartAbilityRequirements:\n                    Type: ThisAbility\n                    HexesMovedThisTurn: \">= 1\"\n                    XP: 1\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                AnimOverload: HeavyMeleeAttack\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n            BStun:\n                Stun: True\n                Filter: Enemy\n                AnimOverload: RadialShout\n                Range: 1\n                Target: -1\n        XP: 2"
+   }
+  },
+  {
+   "name": "whirlwind",
+   "level": "4",
+   "initiative": "28",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\whirlwind.jpeg",
+   "ghs": {
+    "name": "Whirlwind",
+    "number": 18,
+    "level": 4,
+    "initiative": 28,
+    "top": [
+     "(Attack 5 [diamond] {target: enemiesAdjacent}; \"Gain Experience 1 for each enemy targeted.\")",
+     "(infuse air)"
+    ],
+    "top_flags": [
+     "lost"
+    ],
+    "bottom": [
+     "Move 4 [circle]",
+     "Push 3 [square] {target: all; Range 1}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99018_Bruiser_Whirlwind.yml",
+    "Level": "4",
+    "Initiative": "28",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 5\n                    Enhancements: 1\n                Range: 1\n                Target: -1\n                AnimOverload: RadialAttack\n                MultiPassAttack: false\n                XPPerTarget: 1\n        Infuse: Air\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n            BPush:\n                Push:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 1\n                Target: -1\n                AnimOverload: TargetedShout"
+   }
+  },
+  {
+   "name": "push through",
+   "level": "4",
+   "initiative": "57",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\push-through.jpeg",
+   "ghs": {
+    "name": "Push Through",
+    "number": 19,
+    "level": 4,
+    "initiative": 57,
+    "top": [
+     "Heal 5 [diamond] {target: self}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"During you next attack ability this round, add Attack + 1 to all attacks.\"",
+     "Move 3 [circle]"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99019_Bruiser_Push Through.yml",
+    "Level": "4",
+    "Initiative": "57",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            THeal:\n                Heal:\n                    Amount: 5\n                    Enhancements: 1\n                Filter: Self\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack: 1\n                Filter: Self\n                ActiveBonusDuration: Round\n                AnimOverload: PowerUp\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "skirmishing maneuver",
+   "level": "5",
+   "initiative": "29",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\skirmishing-maneuver.jpeg",
+   "ghs": {
+    "name": "Skirmishing Maneuver",
+    "number": 20,
+    "level": 5,
+    "initiative": 29,
+    "top": [
+     "Attack 2 [square]",
+     "Move 2 [circle]",
+     "Attack 2 [diamond]"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 5 [square] {Jump}",
+     "(infuse air)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99020_Bruiser_Skirmishing Maneuver.yml",
+    "Level": "5",
+    "Initiative": "29",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack1:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n            TMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            TAttack2:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 5\n                    Enhancements: 1\n                Jump: True\n        Infuse: Air"
+   }
+  },
+  {
+   "name": "defensive tactics",
+   "level": "5",
+   "initiative": "39",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\defensive-tactics.jpeg",
+   "ghs": {
+    "name": "Defensive Tactics",
+    "number": 21,
+    "level": 5,
+    "initiative": 39,
+    "top": [
+     "\"The first time each round that you gain Shield or Retaliate from one of your ability or attack modifier cards, gain Shield 1 and Retaliate 1 for the round.\""
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "Pull 2 {Target 2 [square]; Range 3}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99021_Bruiser_Defensive Tactics.yml",
+    "Level": "5",
+    "Initiative": "39",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TShield:\n                Shield: 1\n                Filter: Self\n                ActiveBonusDuration: Persistent\n                AnimOverload: PowerUp\n            TRetaliate:\n                Retaliate: 1\n                Filter: Self\n                ActiveBonusDuration: Persistent\n                AnimOverload: PowerUp\n        XP: 2\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BPull:\n                Pull: 2\n                Target: \n                    Amount: 2\n                    Enhancements: 1\n                Range: 3"
+   }
+  },
+  {
+   "name": "run through",
+   "level": "6",
+   "initiative": "33 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\run-through.jpeg",
+   "ghs": {
+    "name": "Run Through",
+    "number": 22,
+    "level": 6,
+    "initiative": 33,
+    "top": [
+     "Attack 3 [diamond] {area (0,3,target)|(0,4,active)|(1,1,target)|(1,2,target)|(2,0,enhance) [hex]; Pierce 2; \"Add Attack + 1 on each undamaged target.\"}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "Push 1 [square] {Range 1; Immobilize}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99022_Bruiser_Run Through.yml",
+    "Level": "6",
+    "Initiative": "33",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                    Pierce: 2\n                AreaEffect: \"0,0,G|2,0,R|4,0,R|6,0,R|6,0,E\"\n                AreaEffectLayoutOverride: \"0,0,G|1,1,R|2,2,R|3,3,R|4,4,E\"\n                AnimOverload: RadialAttack\n                MultiPassAttack: False\n                ConditionalOverrides:\n                    TAttackCO:\n                        Filter:\n                            Health: == 100%\n                        AbilityOverrides:\n                            TAdjAllyBuff:\n                                Strength: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            # BImmobilize:\n                # AnimOverload: TargetedShout\n                # Immobilize: True\n                # Filter: Enemy\n                # SubAbilities:\n                    # BImmobilizeSubPush:\n                        # Push:\n                            # Amount: 1\n                            # Enhancements: 1\n            BPush:\n                Push:\n                    Amount: 1\n                    Enhancements: 1\n                AnimOverload: TargetedShout\n                SubAbilities:\n                    BImmobilizeSubPush:\n                        Immobilize: True"
+   }
+  },
+  {
+   "name": "immovable phalanx",
+   "level": "6",
+   "initiative": "17",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\immovable-phalanx.jpeg",
+   "ghs": {
+    "name": "Immovable Phalanx",
+    "number": 23,
+    "level": 6,
+    "initiative": 17,
+    "top": [
+     "Attack 4 [diamond]",
+     "Shield 1 [square]"
+    ],
+    "top_flags": [
+     "round"
+    ],
+    "bottom": [
+     "\"Once each turn, you may treat one move ability from your ability cards as an attack ability of equal value.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ]
+   },
+   "xipe": {
+    "file": "99023_Bruiser_Immovable Phalanx.yml",
+    "Level": "6",
+    "Initiative": "17",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n            TShield:\n                Shield:\n                    Amount: 1\n                    Enhancements: 1\n                AnimOverload: PowerUpShield\n                ActiveBonusDuration: Round\n    Bottom:\n        Abilities:\n            BAbilityOverrideAbilityType:\n                AddActiveBonus:\n                    Attack: 0\n                PreviewEffectText: \"<sprite name=Move> / <sprite name=Attack>\"\n                ActiveBonus:\n                    Behaviour: OverrideMoveAbility\n                    Duration: Persistent\n                    ValidAbilityType: Move\n                    IsToggleBonus: True\n                    Restriction: OncePerTurn\n                    ActiveBonusAbilityOverrides:\n                        BCTypeOverride:\n                            AbilityType: Attack\n                            Target: 1\n                            Range: 1\n                            RangeIsBase: True\n                            TargetIsBase: True\n                            Filter: Enemy\n        XP: 2"
+   }
+  },
+  {
+   "name": "leg fly",
+   "level": "7",
+   "initiative": "19",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\leg-fly.jpeg",
+   "ghs": {
+    "name": "Let Fly",
+    "number": 24,
+    "level": 7,
+    "initiative": 19,
+    "top": [
+     "(Attack 4 [diamond] {Push 4; Wound; Stun}; \"Each enemy occupying a hex the target enters suffers Damage 4 and gains Wound.\")"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "Attack 2 [square] {Push 3}",
+     "Move 2 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null,
+   "matched_by_spelling": [
+    "ghs:letfly"
+   ]
+  },
+  {
+   "name": "selfish retribution",
+   "level": "7",
+   "initiative": "8",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\selfish-retribution.jpeg",
+   "ghs": {
+    "name": "Selfish Retribution",
+    "number": 25,
+    "level": 7,
+    "initiative": 8,
+    "top": [
+     "Move 1 [circle]",
+     "Loot 2"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "(Retaliate 2 [square]; \"Gain Experience 1 the next time you retaliate this round.\")"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99025_Bruiser_Selfish Retribution.yml",
+    "Level": "7",
+    "Initiative": "8",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TMove:\n                Move:\n                    Amount: 1\n                    Enhancements: 1\n            TLoot:\n                Loot: 2\n                Target: -1\n                AnimOverload: Loot\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            # BRetaliate:\n                # Retaliate:\n                    # Amount: 2\n                    # Enhancements: 1\n                # Filter: Self\n                # ActiveBonusDuration: Round\n            BRetaliate:\n                Retaliate:\n                    Amount: 2\n                    Enhancements: 1\n                ActiveBonus:\n                    Duration: Round\n                AnimOverload: PowerUp\n        XP: 1"
+   }
+  },
+  {
+   "name": "frenzied onslaught",
+   "level": "8",
+   "initiative": "41",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\frenzied-onslaught.jpeg",
+   "ghs": {
+    "name": "Frenzied Onslaught",
+    "number": 26,
+    "level": 8,
+    "initiative": 41,
+    "top": [
+     "Move 2 [circle]",
+     "Attack 3 [square]",
+     "Move 2 [circle]",
+     "Attack 3 [diamond]"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(Heal X {target: self}; \"where X is the amount of Damage you have dealt this turn.\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99026_Bruiser_Frenzied Onslaught.yml",
+    "Level": "8",
+    "Initiative": "41",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TMove1:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            TAttack1:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n            TMove2:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            TAttack2:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n    Bottom:\n        Abilities:\n            BHeal:\n                Heal: 0\n                StatIsBasedOnX:\n                    Strength:\n                        BasedOn: DamageInflictedThisTurn"
+   }
+  },
+  {
+   "name": "crippling offensive",
+   "level": "8",
+   "initiative": "16",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\crippling-offensive.jpeg",
+   "ghs": {
+    "name": "Crippling Offensive",
+    "number": 27,
+    "level": 8,
+    "initiative": 16,
+    "top": [
+     "Attack 2 [square] {Target 2; Range 3; Immobilize}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]",
+     "Muddle {target: all; Range 1}",
+     "Shield 1 [square]"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99027_Bruiser_Crippling Offensive.yml",
+    "Level": "8",
+    "Initiative": "16",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 3\n                Conditions: Immobilize\n                Target: 2\n                MultiPassAttack: True\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n            BMuddle:\n                Muddle: True\n                Range: 1\n                Target: -1\n                AnimOverload: TargetedShout\n                Filter: [Enemy]\n            BShield:\n                Shield:\n                    Amount: 1\n                    Enhancements: 1\n                ActiveBonusDuration: Round\n                AnimOverload: PowerUpShield"
+   }
+  },
+  {
+   "name": "brute force",
+   "level": "9",
+   "initiative": "9",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\brute-force.jpeg",
+   "ghs": {
+    "name": "Brute Force",
+    "number": 28,
+    "level": 9,
+    "initiative": 9,
+    "top": [
+     "Shield 2 [square]",
+     "(\"After each attack targeting you this round, perform:\"; Move 1; Push 2 {Target 1 ally or enemy; Range 1})"
+    ],
+    "top_flags": [
+     "round"
+    ],
+    "bottom": [
+     "\"Add Attack + 1 to each of your Push and Pull. Whenever you Push or Pull an enemy at least one hex, after the forced movement, that enemy and all enemies adjacent to it siffer Damage 1.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "face your end",
+   "level": "9",
+   "initiative": "67",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\face-your-end.jpeg",
+   "ghs": {
+    "name": "Face Your End",
+    "number": 29,
+    "level": 9,
+    "initiative": 67,
+    "top": [
+     "Attack 2 {Target 2; Range 3; Pull 2}",
+     "Attack 3 [diamond] {area (0,1,active)|(1,0,target)|(1,1,target)|(1,2,target)}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(Attack 4 [diamond]; \"Add Attack + 3 and gain Experience 1 if the target's current hit point value is lower than yours.\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99029_Bruiser_Face Your End.yml",
+    "Level": "9",
+    "Initiative": "67",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack1:\n                Attack: 2\n                AnimOverload: RangedAttack\n                Range: 3\n                Target: 2\n                SubAbilities:\n                    TAttackSubPull:\n                        Pull: 2\n                        IsInlineSubAbility: True\n            TAttack2:\n                Attack: \n                    Amount: 3\n                    Enhancements: 1\n                AreaEffect: \"0,0,G|1,1,R|2,0,R|1,-1,R\"\n                AnimOverload: RadialAttack\n                MultiPassAttack: False\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack: \n                    Amount: 4\n                    Enhancements: 1\n                ConditionalOverrides:\n                    BAttackCO:\n                        Filter:\n                            Health: \"<= 13\"\n                            #CompareTargetHPToYourMissingHP: < 100%\n                        AbilityOverrides:\n                            BAdjAllyBuff:\n                                Strength: 3\n                        XP: 1"
+   }
+  }
+ ],
+ "unmatched_ghs": [],
+ "unmatched_xipe": [
+  "letfly"
+ ]
+}

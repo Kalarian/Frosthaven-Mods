@@ -1,0 +1,1018 @@
+{
+ "class": "Quartermaster",
+ "code": "QM2",
+ "model_from": "Quartermaster",
+ "ghs_file": "three-spears",
+ "xipe_class": null,
+ "character": {
+  "name": "three-spears",
+  "characterClass": "valrath",
+  "icon": "gh-three-spears",
+  "edition": "gh2e",
+  "tokens": [
+   "supplies"
+  ],
+  "primaryToken": 0,
+  "handSize": 11,
+  "unlockEvent": "road:R-47|city:C-78",
+  "traits": [
+   "armored",
+   "resourceful",
+   "strong"
+  ],
+  "color": "#cd8229",
+  "spoiler": true,
+  "specialActions": [
+   {
+    "name": "supply_tokens_perk",
+    "perk": 11
+   },
+   {
+    "name": "supply_tokens_scenario"
+   }
+  ],
+  "stats": [
+   {
+    "level": 1,
+    "health": 10
+   },
+   {
+    "level": 2,
+    "health": 12
+   },
+   {
+    "level": 3,
+    "health": 14
+   },
+   {
+    "level": 4,
+    "health": 16
+   },
+   {
+    "level": 5,
+    "health": 18
+   },
+   {
+    "level": 6,
+    "health": 20
+   },
+   {
+    "level": 7,
+    "health": 22
+   },
+   {
+    "level": 8,
+    "health": 24
+   },
+   {
+    "level": 9,
+    "health": 26
+   }
+  ],
+  "availableSummons": [],
+  "perks": [
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "muddle"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.three-spears.1%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "pierce",
+         "value": 3
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     },
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.three-spears.2%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     },
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus2"
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.three-spears.3%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "condition",
+         "value": "stun"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "remove",
+    "count": 1,
+    "custom": "%game.custom.perks.ignoreNegativeItemFh%",
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%data.custom.gh2e.three-spears.4%"
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%data.custom.gh2e.three-spears.5%"
+   },
+   {
+    "type": "custom",
+    "count": 2,
+    "combined": true,
+    "custom": "%data.custom.gh2e.three-spears.6%"
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.three-spears.7%",
+   "%data.custom.gh2e.three-spears.8%"
+  ]
+ },
+ "cards": [
+  {
+   "name": "booster pack",
+   "level": "1",
+   "initiative": "73",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\booster-pack.jpeg",
+   "ghs": {
+    "name": "Booster Pack",
+    "number": 205,
+    "level": 1,
+    "initiative": 73,
+    "top": [
+     "\"Shuffle the data.action.custom.gh2e-supply-item item supply face-down and randomly draw five cards. Give the drawn items to any number of adjacent allies and self, giving no more than three of the items to yourself.\""
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "\"Recover one of your spent items.\"",
+     "Move 2 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "readied blade",
+   "level": "1",
+   "initiative": "98",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\readied-blade.jpeg",
+   "ghs": {
+    "name": "Readied Blade",
+    "number": 206,
+    "level": 1,
+    "initiative": 98,
+    "top": [
+     "((\"data.action.custom.gh2e-supplies-consume :\"; (\"Recover your items\"; card: experience:1)))",
+     "Attack 3 [diamond]"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "crushing hammer",
+   "level": "1",
+   "initiative": "33",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\crushing-hammer.jpeg",
+   "ghs": {
+    "name": "Crushing Hammer",
+    "number": 207,
+    "level": 1,
+    "initiative": 33,
+    "top": [
+     "(Attack 2 [diamond] {Stun}; area (0,1,target)|(0,2,active)|(1,0,enhance)|(1,1,target)|(1,2,target)|(2,2,enhance) [hex/hex])"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"Give one adjacent ally or self the <i>Iron Plate</i> item to gain Experience 1.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "hastened step",
+   "level": "1",
+   "initiative": "26",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\hastened-step.jpeg",
+   "ghs": {
+    "name": "Hastened Step",
+    "number": 208,
+    "level": 1,
+    "initiative": 26,
+    "top": [
+     "Attack 2 [diamond]",
+     "Move 1 [circle]",
+     "\"Give one adjacent ally the <i>Sharpened Dirk</i> item to gain Experience 1.\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "bladed boomerang",
+   "level": "1",
+   "initiative": "44",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\bladed-boomerang.jpeg",
+   "ghs": {
+    "name": "Bladed Boomerang",
+    "number": 209,
+    "level": 1,
+    "initiative": 44,
+    "top": [
+     "(Attack 2; area (0,1,target)|(1,0,target)|(1,2,active)|(2,0,target)|(2,1,target)|(2,2,target))"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 2 [circle]",
+     "\"Gain 10 data.action.custom.gh2e-supplies.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "impaling spear",
+   "level": "1",
+   "initiative": "62",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\impaling-spear.jpeg",
+   "ghs": {
+    "name": "Impaling Spear",
+    "number": 210,
+    "level": 1,
+    "initiative": 62,
+    "top": [
+     "(Attack 3 [square]; area (0,0,active)|(1,0,target)|(2,0,target))"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Attack 1 {Target %data.custom.gh2e.three-spears.abilities.210.1%; Wound}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "light javelin",
+   "level": "1",
+   "initiative": "81",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\light-javelin.jpeg",
+   "ghs": {
+    "name": "Light Javelin",
+    "number": 211,
+    "level": 1,
+    "initiative": 81,
+    "top": [
+     "Attack 3 [diamond] {Range 3 [square]}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Loot 2"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "cleave and thrust",
+   "level": "1",
+   "initiative": "39",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\cleave-and-thrust.jpeg",
+   "ghs": {
+    "name": "Cleave and Thrust",
+    "number": 212,
+    "level": 1,
+    "initiative": 39,
+    "top": [
+     "(Attack 4 [diamond]; area (0,1,active)|(1,0,target)|(1,1,target))",
+     "\"Give one ally within Range 2 the <i>Sturdy Spear</i> item to gain Experience 1.\""
+    ],
+    "top_flags": [
+     "lost"
+    ],
+    "bottom": [
+     "Move 2 [circle]",
+     "\"Gain 10 data.action.custom.gh2e-supplies.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "iron bulwark",
+   "level": "1",
+   "initiative": "17",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\iron-bulwark.jpeg",
+   "ghs": {
+    "name": "Iron Bulwark",
+    "number": 213,
+    "level": 1,
+    "initiative": 17,
+    "top": [
+     "((\"data.action.custom.gh2e-supplies-consume :\"; (\"Recover your items\"; card: experience:1)))",
+     "Shield 1 [square]"
+    ],
+    "top_flags": [
+     "round"
+    ],
+    "bottom": [
+     "\"Grant all adjacent allies and self:\" {Shield 1}"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "proficiency",
+   "level": "1",
+   "initiative": "52",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\proficiency.jpeg",
+   "ghs": {
+    "name": "Proficiency",
+    "number": 214,
+    "level": 1,
+    "initiative": 52,
+    "top": [
+     "\"During each of your turns, the first time you use an item with a Lost icon, add Attack + 1 to all your melee attacks for the turn.\"",
+     "\"Whenever you data.action.custom.gh2e-supplies-consume to Recover an item with a gold cost of 30 or greater, you may gain one random item from the data.action.custom.gh2e-supply-item item supply.\""
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "\"Add Retaliate + 1 to all <i>Barbed Strip</i> items and Shield + 1 to all <i>Iron Plate</i> items.\"",
+     "\"Whenever you rest, gain the <i>Barbed Strip</i> or <i>Iron Plate</i> item.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "provisions",
+   "level": "1",
+   "initiative": "48",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\provisions.jpeg",
+   "ghs": {
+    "name": "Provisions",
+    "number": 215,
+    "level": 1,
+    "initiative": 48,
+    "top": [
+     "\"Gain 10 data.action.custom.gh2e-supplies.\"",
+     "\"Gain the <i>Scroll of Relocation</i> item.\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "caustic bolt",
+   "level": "X",
+   "initiative": "88",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\caustic-bolt.jpeg",
+   "ghs": {
+    "name": "Caustic Bolt",
+    "number": 216,
+    "level": "X",
+    "initiative": 88,
+    "top": [
+     "Attack 2 [diamond] {Range 3 [square]; Pierce 2}",
+     "\"Give one adjacent ally the <i>Corrosive Coating</i> item.\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"One adjecent ally may Recover one of their spent items.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "scroll of recall",
+   "level": "X",
+   "initiative": "19",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\scroll-of-recall.jpeg",
+   "ghs": {
+    "name": "Scroll of Recall",
+    "number": 217,
+    "level": "X",
+    "initiative": 19,
+    "top": [
+     "Pull 2 [square] {target: ally; Range 3 [square]}",
+     "Heal 3 [diamond_plus] {Range 1 [square]}",
+     "(infuse earth)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Gain the <i>Barbed Strip</i> item.\"",
+     "Pull 2 {Target 2; Range 3; Muddle}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "sharpening kit",
+   "level": "X",
+   "initiative": "23",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\sharpening-kit.jpeg",
+   "ghs": {
+    "name": "Sharpening Kit",
+    "number": 218,
+    "level": "X",
+    "initiative": 23,
+    "top": [
+     "Heal 3 [diamond_plus] {target: ally; Range 1}",
+     "((\"data.action.custom.gh2e-supplies-consume :\"; (\"Recover the target's items.\"; card: experience:1)))"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"You and all adjacent allies add Attack + 1 to all attacks this round.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "scroll case",
+   "level": "2",
+   "initiative": "95",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\scroll-case.jpeg",
+   "ghs": {
+    "name": "Scroll Case",
+    "number": 219,
+    "level": 2,
+    "initiative": 95,
+    "top": [
+     "\"Gain 10 data.action.custom.gh2e-supplies.\"",
+     "\"Give one adjacent ally the <i>Scroll of Embers</i> item.\"",
+     "\"Give one adjacent ally the <i>Scroll of Foresight</i> item to gain Experience 1.\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"Give one adjacent ally the <i>Scroll of Relocation</i> item.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "lethal arsenal",
+   "level": "2",
+   "initiative": "18",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\lethal-arsenal.jpeg",
+   "ghs": {
+    "name": "Lethal Arsenal",
+    "number": 220,
+    "level": 2,
+    "initiative": 18,
+    "top": [
+     "Attack 3 [diamond]",
+     "\"Gain the <i>Sharpened Dirk</i> and <i>Sturdy Spear</i> items.\""
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "Attack 2 [square]",
+     "Move 1 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "quiver of arrows",
+   "level": "3",
+   "initiative": "61",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\quiver-of-arrows.jpeg",
+   "ghs": {
+    "name": "Quiver of Arrows",
+    "number": 221,
+    "level": 3,
+    "initiative": 61,
+    "top": [
+     "((\"data.action.custom.gh2e-supplies-consume :\"; (\"Recover your items\"; card: experience:1)))",
+     "Attack 2 [square] {Target 2 [square]; Range 4}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"On the next four ranged attack abilities performed by adjacent allies, add Target + 1.\"",
+     "(card: slotStart; card: slotXpFh:1; card: slot; card: slotEndXp:1)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "concussive snare",
+   "level": "3",
+   "initiative": "89",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\concussive-snare.jpeg",
+   "ghs": {
+    "name": "Concussive Snare",
+    "number": 222,
+    "level": 3,
+    "initiative": 89,
+    "top": [
+     "\"Give one adjacent ally the <i>Weighted Bolas</i> item to gain Experience 1.\"",
+     "Move 1 [circle]",
+     "Attack 3 [diamond] {Push 2 [square]}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"Gain 10 data.action.custom.gh2e-supplies.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "hammer and anvil",
+   "level": "4",
+   "initiative": "21",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\hammer-and-anvil.jpeg",
+   "ghs": {
+    "name": "Hammer and Anvil",
+    "number": 223,
+    "level": 4,
+    "initiative": 21,
+    "top": [
+     "\"Give one ally within Range 2 the <i>Sturdy Spear</i> item.\"",
+     "\"Gain the <i>Barbed Strip</i> or <i>Iron Plate</i> item.\"",
+     "Shield 1 [square]"
+    ],
+    "top_flags": [
+     "round"
+    ],
+    "bottom": [
+     "Move 5 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "giant club",
+   "level": "4",
+   "initiative": "40",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\giant-club.jpeg",
+   "ghs": {
+    "name": "Giant Club",
+    "number": 224,
+    "level": 4,
+    "initiative": 40,
+    "top": [
+     "Attack 5 [diamond] {Muddle}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 6 [circle]",
+     "\"You may give up to four items of your choice from the data.action.custom.gh2e-supply-item item supply to any allies occupying hexes adjacent to any hexes you entered during the move ability. Gain 10  data.action.custom.gh2e-supplies for each ally you gave an item.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=2"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "scroll of judgement",
+   "level": "5",
+   "initiative": "12",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\scroll-of-judgement.jpeg",
+   "ghs": {
+    "name": "Scroll of Judgment",
+    "number": 225,
+    "level": 5,
+    "initiative": 12,
+    "top": [
+     "(\"Suffer Damage 2.\")",
+     "\"All enemies within Range 4 suffer Damage 2.\""
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 2 [circle]",
+     "Shield 1 [square]",
+     "\"After the next attack targeting you this round, Recover one of your spent items and gain Experience 1.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null,
+   "matched_by_spelling": [
+    "ghs:scrollofjudgment"
+   ]
+  },
+  {
+   "name": "set up shop",
+   "level": "5",
+   "initiative": "41",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\set-up-shop.jpeg",
+   "ghs": {
+    "name": "Set Up Shop",
+    "number": 226,
+    "level": 5,
+    "initiative": 41,
+    "top": [
+     "\"At the end of each of your turns, gain 10 data.action.custom.gh2e-supplies.\"",
+     "\"Whenever an ally ends their move or teleport ability in a hex adjacent to you, you may data.action.custom.gh2e-supplies-consume to Recover that ally's items.\"",
+     "(\"You cannot perform move abilities.\")"
+    ],
+    "top_flags": [
+     "persistent",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 4 [circle]",
+     "\"Give one adjacent ally the <i>Scroll of Foresight</i> item.\"",
+     "\"At the end of the round, perform:\" {Heal 2 {target: allies; Range 1}}"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "scroll of lightning",
+   "level": "6",
+   "initiative": "77",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\scroll-of-lightning.jpeg",
+   "ghs": {
+    "name": "Scroll of Lightning",
+    "number": 227,
+    "level": 6,
+    "initiative": 77,
+    "top": [
+     "Attack 5 [diamond] {Range 3 [square]}",
+     "(\"All allies and enemies adjacent to the target suffer Damage 1.\")",
+     "(infuse air)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Gain the <i>Corrosive Coating</i> item.\"",
+     "Attack 2 [diamond] {Range 4; Pierce 1; Muddle}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "continual supply",
+   "level": "6",
+   "initiative": "86",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\continual-supply.jpeg",
+   "ghs": {
+    "name": "Continual Supply",
+    "number": 228,
+    "level": 6,
+    "initiative": 86,
+    "top": [
+     "\"Gain 20 data.action.custom.gh2e-supplies.\"",
+     "((\"data.action.custom.gh2e-supplies-consume :\"; (\"Recover your and adjacent allies' items, Experience 1.\")))"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"On your next three turns that you end with 0 data.action.custom.gh2e-supplies, gain 30 data.action.custom.gh2e-supplies.\"",
+     "(card: slotStartXp:1; card: slot; card: slotEndXp:1)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "twin lances",
+   "level": "7",
+   "initiative": "32",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\twin-lances.jpeg",
+   "ghs": {
+    "name": "Twin Lances",
+    "number": 229,
+    "level": 7,
+    "initiative": 32,
+    "top": [
+     "(Attack 3; area (0,1,target)|(0,2,active)|(1,0,target)|(1,2,target)|(2,2,target)|(3,2,enhance) [hex])"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "(Attack 2 [diamond]; area (0,0,active)|(1,0,target)|(2,0,target)|(3,0,enhance) [hex])",
+     "\"Give one adjacent ally the <i>Sturdy Spear</i> item.\""
+    ],
+    "bottom_flags": [
+     "xp=1"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "tools of war",
+   "level": "7",
+   "initiative": "84",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\tools-of-war.jpeg",
+   "ghs": {
+    "name": "Tools of War",
+    "number": 230,
+    "level": 7,
+    "initiative": 84,
+    "top": [
+     "\"One adjacent ally may Recover one of their spent items.\"",
+     "Move 1 [circle]",
+     "\"Give one adjacent ally the <i>Scroll of embers</i> and <i>Weighted Bolas</i> items to gain Experience 1.\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]",
+     "(Loot 1; \"If you loot at least one money token, gain 10 data.action.custom.gh2e-supplies.\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "scroll of blizzards",
+   "level": "8",
+   "initiative": "46",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\scroll-of-blizzards.jpeg",
+   "ghs": {
+    "name": "Scroll of Blizzards",
+    "number": 231,
+    "level": 8,
+    "initiative": 46,
+    "top": [
+     "(Attack 1 {Range 2}; area (0,3,target)|(1,1,target)|(1,2,target)|(1,3,target)|(2,0,enhance)|(2,1,target)|(2,2,target)|(3,0,enhance) [hex/hex])",
+     "(infuse ice)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "((\"data.action.custom.gh2e-supplies-consume :\"; (\"Recover your and adjacent allies' items, Experience 1.\")))",
+     "Move 2 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "armed to the teeth",
+   "level": "8",
+   "initiative": "10",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\armed-to-the-teeth.jpeg",
+   "ghs": {
+    "name": "Armed th the Teeth",
+    "number": 232,
+    "level": 8,
+    "initiative": 10,
+    "top": [
+     "\"Give one adjacent ally the <i>Barbed Strip</i> and <i>Sharpened Dirk</i> items to gain Experience 1.\"",
+     "\"Grant one adjacent ally or self:\" {Shield 2 [square]}"
+    ],
+    "top_flags": [
+     "round"
+    ],
+    "bottom": [
+     "\"Recover one of your spent items.\"",
+     "Move 3 [circle]",
+     "\"Gain the <i>Scroll of Foresight</i> item.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null,
+   "matched_by_spelling": [
+    "ghs:armedththeteeth"
+   ]
+  },
+  {
+   "name": "reinforced steel",
+   "level": "9",
+   "initiative": "56",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\reinforced-steel.jpeg",
+   "ghs": {
+    "name": "Reinforced Steel",
+    "number": 233,
+    "level": 9,
+    "initiative": 56,
+    "top": [
+     "\"At the end of each of your turns, you may shuffle the data.action.custom.gh2e-supply-item item supply face-down and draw one random card to give that item to an ally within Range 2.\""
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "\"At the end of each round, Recover one of your spent items.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "bag of holding",
+   "level": "9",
+   "initiative": "91",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\bag-of-holding.jpeg",
+   "ghs": {
+    "name": "Bag of Holding",
+    "number": 234,
+    "level": 9,
+    "initiative": 91,
+    "top": [
+     "Loot 3"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"Gain 20 data.action.custom.gh2e-supplies.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  }
+ ],
+ "unmatched_ghs": [],
+ "unmatched_xipe": []
+}

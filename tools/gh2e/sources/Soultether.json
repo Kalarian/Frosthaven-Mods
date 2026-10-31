@@ -1,0 +1,711 @@
+{
+ "class": "Soultether",
+ "code": "ST2",
+ "model_from": "Summoner",
+ "ghs_file": "circles",
+ "xipe_class": null,
+ "character": {
+  "name": "circles",
+  "characterClass": "aesther",
+  "gender": "f",
+  "icon": "gh-circles",
+  "edition": "gh2e",
+  "handSize": 12,
+  "unlockEvent": "road:R-44|road:R-45",
+  "traits": [
+   "arcane",
+   "chaotic",
+   "resourceful"
+  ],
+  "color": "#e570b3",
+  "spoiler": true,
+  "stats": [
+   {
+    "level": 1,
+    "health": 6
+   },
+   {
+    "level": 2,
+    "health": 7
+   },
+   {
+    "level": 3,
+    "health": 8
+   },
+   {
+    "level": 4,
+    "health": 9
+   },
+   {
+    "level": 5,
+    "health": 10
+   },
+   {
+    "level": 6,
+    "health": 11
+   },
+   {
+    "level": 7,
+    "health": 12
+   },
+   {
+    "level": 8,
+    "health": 13
+   },
+   {
+    "level": 9,
+    "health": 14
+   }
+  ],
+  "availableSummons": [
+   {
+    "name": "shadow-wolf",
+    "thumbnail": true,
+    "level": 1,
+    "health": 2,
+    "attack": 2,
+    "movement": 3,
+    "count": 2,
+    "action": {
+     "type": "pierce",
+     "value": "1"
+    }
+   },
+   {
+    "name": "iron-beast",
+    "thumbnail": true,
+    "level": 1,
+    "health": 7,
+    "attack": 1,
+    "movement": 2,
+    "action": {
+     "type": "shield",
+     "value": "1"
+    },
+    "additionalAction": {
+     "type": "retaliate",
+     "value": "1"
+    }
+   },
+   {
+    "name": "thorn-shooter",
+    "thumbnail": true,
+    "level": 1,
+    "health": 3,
+    "attack": "%game.condition.poison%",
+    "movement": 2,
+    "range": 4
+   },
+   {
+    "name": "rift-spirit",
+    "thumbnail": true,
+    "level": 1,
+    "health": 2,
+    "attack": "%game.condition.muddle%",
+    "movement": 2,
+    "range": 3,
+    "action": {
+     "type": "custom",
+     "value": "%data.custom.gh2e.circles.8%",
+     "small": true
+    }
+   },
+   {
+    "name": "floating-jellyfish",
+    "thumbnail": true,
+    "level": 1,
+    "health": 5,
+    "attack": 3,
+    "movement": 1,
+    "action": {
+     "type": "fly",
+     "value": ""
+    },
+    "additionalAction": {
+     "type": "custom",
+     "value": "%data.custom.gh2e.circles.9%",
+     "small": true
+    }
+   },
+   {
+    "name": "covetous-imp",
+    "thumbnail": true,
+    "level": 3,
+    "health": 5,
+    "attack": 3,
+    "movement": 3
+   },
+   {
+    "name": "ember-sprite",
+    "thumbnail": true,
+    "level": 4,
+    "health": 3,
+    "attack": 1,
+    "movement": 3,
+    "range": 3,
+    "action": {
+     "type": "fly",
+     "value": ""
+    },
+    "additionalAction": {
+     "type": "custom",
+     "value": "%data.custom.gh2e.circles.10%",
+     "small": true
+    }
+   },
+   {
+    "name": "rock-colossus",
+    "thumbnail": true,
+    "level": 5,
+    "health": 12,
+    "attack": 1,
+    "movement": 2,
+    "action": {
+     "type": "condition",
+     "value": "muddle"
+    },
+    "additionalAction": {
+     "type": "retaliate",
+     "value": "2"
+    }
+   },
+   {
+    "name": "slime-spirit",
+    "thumbnail": true,
+    "level": 6,
+    "health": 5,
+    "attack": 2,
+    "movement": 2,
+    "action": {
+     "type": "condition",
+     "value": "poison"
+    }
+   },
+   {
+    "name": "void-eater",
+    "thumbnail": true,
+    "level": 7,
+    "health": 6,
+    "attack": 4,
+    "movement": 3
+   },
+   {
+    "name": "fey-subjugator",
+    "thumbnail": true,
+    "level": 9,
+    "health": 4,
+    "attack": 1,
+    "movement": 2,
+    "range": 4,
+    "action": {
+     "type": "fly",
+     "value": ""
+    }
+   },
+   {
+    "name": "prismatic-unicorn",
+    "thumbnail": true,
+    "level": 9,
+    "health": 8,
+    "attack": 3,
+    "movement": 4,
+    "action": {
+     "type": "pierce",
+     "value": "2"
+    },
+    "additionalAction": {
+     "type": "custom",
+     "value": "%data.custom.gh2e.circles.11%",
+     "small": true
+    }
+   }
+  ],
+  "perks": [
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus2"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.circles.1%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "invisible",
+         "effects": [
+          {
+           "type": "custom",
+           "value": "%data.custom.gh2e.circles.2%"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "condition",
+         "value": "wound"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "condition",
+         "value": "poison"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     },
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "curse"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus2",
+       "effects": [
+        {
+         "type": "elementHalf",
+         "value": "fire|air"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus2",
+       "effects": [
+        {
+         "type": "elementHalf",
+         "value": "fire|dark"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus2",
+       "effects": [
+        {
+         "type": "elementHalf",
+         "value": "air|dark"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "custom": "%game.custom.perks.ignoreScenario%",
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%data.custom.gh2e.circles.3%"
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%data.custom.gh2e.circles.4%"
+   },
+   {
+    "type": "custom",
+    "count": 2,
+    "combined": true,
+    "custom": "%data.custom.gh2e.circles.5%"
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.circles.6%",
+   "%data.custom.gh2e.circles.7%"
+  ]
+ },
+ "cards": [
+  {
+   "name": "ethereal gust",
+   "level": "1",
+   "initiative": "14",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\ethereal-gust.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "forged ferocity",
+   "level": "1",
+   "initiative": "37",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\forged-ferocity.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "living night",
+   "level": "1",
+   "initiative": "96",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\living-night.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "wild animation",
+   "level": "1",
+   "initiative": "92",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\wild-animation.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "planar protection",
+   "level": "1",
+   "initiative": "94",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\planar-protection.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "mighty bond",
+   "level": "1",
+   "initiative": "51",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\mighty-bond.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "bonded might",
+   "level": "1",
+   "initiative": "61",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\bonded-might.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "burning passion",
+   "level": "1",
+   "initiative": "12",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\burning-passion.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "unending dominance",
+   "level": "1",
+   "initiative": "22",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\unending-dominance.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "shadow dart",
+   "level": "1",
+   "initiative": "28",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\shadow-dart.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "burning tether",
+   "level": "1",
+   "initiative": "43",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\burning-tether.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "primal assault",
+   "level": "1",
+   "initiative": "20",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\primal-assault.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "drifting stingers",
+   "level": "X",
+   "initiative": "90",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\drifting-stingers.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "biting wind",
+   "level": "X",
+   "initiative": "82",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\biting-wind.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "unwavering hand",
+   "level": "X",
+   "initiative": "31",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\unwavering-hand.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "intervening apparitions",
+   "level": "2",
+   "initiative": "34",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\intervening-apparitions.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "void imbuement",
+   "level": "2",
+   "initiative": "23",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\void-imbuement.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "shaping the void",
+   "level": "3",
+   "initiative": "41,",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\shaping-the-void.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "deadly mischief",
+   "level": "3",
+   "initiative": "81",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\deadly-mischief.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "strength in numbers",
+   "level": "4",
+   "initiative": "45",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\strength-in-numbers.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "volatile flame",
+   "level": "4",
+   "initiative": "97",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\volatile-flame.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "living mountain",
+   "level": "5",
+   "initiative": "19",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\living-mountain.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "primal infusion",
+   "level": "5",
+   "initiative": "88",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\primal-infusion.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "tear the fabric",
+   "level": "6",
+   "initiative": "11",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\tear-the-fabric.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "oozing manifestation",
+   "level": "6",
+   "initiative": "86",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\oozing-manifestation.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "divided mind",
+   "level": "7",
+   "initiative": "30",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\divided-mind.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "negative energy",
+   "level": "7",
+   "initiative": "95",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\negative-energy.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "otherworldly rage",
+   "level": "8",
+   "initiative": "35",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\otherworldly-rage.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "interplanar mastery",
+   "level": "8",
+   "initiative": "27",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\interplanar-mastery.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "imposed will",
+   "level": "9",
+   "initiative": "98",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\imposed-will.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "horned nightmare",
+   "level": "9",
+   "initiative": "80",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\horned-nightmare.jpeg",
+   "ghs": null,
+   "xipe": null
+  }
+ ],
+ "unmatched_ghs": [],
+ "unmatched_xipe": []
+}

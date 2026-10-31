@@ -1,0 +1,518 @@
+{
+ "class": "Wildfury",
+ "code": "WF2",
+ "model_from": "BeastTyrant",
+ "ghs_file": "two-mini",
+ "xipe_class": null,
+ "character": {
+  "name": "two-mini",
+  "characterClass": "vermling",
+  "icon": "gh-two-mini",
+  "edition": "gh2e",
+  "handSize": 10,
+  "unlockEvent": "road:R-52|road:R-53",
+  "traits": [
+   "armored",
+   "outcast",
+   "strong"
+  ],
+  "color": "#ca9789",
+  "spoiler": true,
+  "stats": [
+   {
+    "level": 1,
+    "health": 6
+   },
+   {
+    "level": 2,
+    "health": 7
+   },
+   {
+    "level": 3,
+    "health": 8
+   },
+   {
+    "level": 4,
+    "health": 9
+   },
+   {
+    "level": 5,
+    "health": 10
+   },
+   {
+    "level": 6,
+    "health": 11
+   },
+   {
+    "level": 7,
+    "health": 12
+   },
+   {
+    "level": 8,
+    "health": 13
+   },
+   {
+    "level": 9,
+    "health": 14
+   }
+  ],
+  "availableSummons": [
+   {
+    "name": "two-mini",
+    "thumbnail": true,
+    "health": "8+Lx2",
+    "attack": 2,
+    "movement": 3,
+    "special": true
+   },
+   {
+    "name": "wind-idol",
+    "thumbnail": true,
+    "level": 1,
+    "health": 1,
+    "action": {
+     "type": "custom",
+     "value": "%data.custom.gh2e.two-mini.7%",
+     "small": true
+    }
+   },
+   {
+    "name": "monolith",
+    "thumbnail": true,
+    "level": 3,
+    "health": 2,
+    "action": {
+     "type": "custom",
+     "value": "%data.custom.gh2e.two-mini.8%"
+    }
+   },
+   {
+    "name": "vital-force",
+    "thumbnail": true,
+    "level": 9,
+    "health": 3,
+    "action": {
+     "type": "custom",
+     "value": "%data.custom.gh2e.two-mini.9%",
+     "small": true
+    }
+   }
+  ],
+  "perks": [
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "heal",
+         "value": 2,
+         "effects": [
+          {
+           "type": "specialTarget",
+           "value": "%game.action.target% %data.action.custom.gh2e-bear-summon%"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "wound"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus2",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.two-mini.1%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus2"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus4"
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "elementHalf",
+         "value": "air|earth"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus2",
+       "effects": [
+        {
+         "type": "push",
+         "value": 2
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "custom": "%game.custom.perks.ignoreScenario%",
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "safeguard",
+         "effects": [
+          {
+           "type": "specialTarget",
+           "value": "allyShort"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%data.custom.gh2e.two-mini.2%"
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%data.custom.gh2e.two-mini.3%"
+   },
+   {
+    "type": "custom",
+    "count": 2,
+    "combined": true,
+    "custom": "%data.custom.gh2e.two-mini.4%"
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.two-mini.5%",
+   "%data.custom.gh2e.two-mini.6%"
+  ]
+ },
+ "cards": [
+  {
+   "name": "concentrated rage",
+   "level": "1",
+   "initiative": "51",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\concentrated-rage.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "maul",
+   "level": "1",
+   "initiative": "61",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\maul.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "howling bolts",
+   "level": "1",
+   "initiative": "31",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\howling-bolts.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "nature's gift",
+   "level": "1",
+   "initiative": "42",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\natures-gift.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "focused aggression",
+   "level": "1",
+   "initiative": "14",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\focused-aggression.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "gnaw",
+   "level": "1",
+   "initiative": "20",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\gnaw.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "disorienting roar",
+   "level": "1",
+   "initiative": "17",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\disorienting-roar.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "vitality siphon",
+   "level": "1",
+   "initiative": "56",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\vitality-siphon.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "spirit swap",
+   "level": "1",
+   "initiative": "27",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\spirit-swap.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "invocation of endurance",
+   "level": "1",
+   "initiative": "71",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\invocation-of-endurance.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "invocation of spirit",
+   "level": "X",
+   "initiative": "62",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\invocation-of-spirit.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "gust sigil",
+   "level": "X",
+   "initiative": "22",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\gust-sigil.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "forceful swipe",
+   "level": "X",
+   "initiative": "35",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\forceful-swipe.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "energizing strike",
+   "level": "2",
+   "initiative": "48",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\energizing-strike.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "earthen spikes",
+   "level": "2",
+   "initiative": "11",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\earthen-spikes.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "punch through",
+   "level": "3",
+   "initiative": "29",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\punch-through.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "stone sigil",
+   "level": "3",
+   "initiative": "15",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\stone-sigil.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "unstoppable beast",
+   "level": "4",
+   "initiative": "32",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\unstoppable-beast.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "forest's blessing",
+   "level": "4",
+   "initiative": "44",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\forests-blessing.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "rampage",
+   "level": "5",
+   "initiative": "16",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\rampage.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "invocation of domination",
+   "level": "5",
+   "initiative": "10",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\invocation-of-domination.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "blood hunger",
+   "level": "6",
+   "initiative": "41",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\blood-hunger.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "ancient ward",
+   "level": "6",
+   "initiative": "59",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\ancient-ward.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "invocation of absorption",
+   "level": "7",
+   "initiative": "24",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\invocation-of-absorption.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "unleashed fury",
+   "level": "7",
+   "initiative": "65",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\unleashed-fury.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "lash out",
+   "level": "8",
+   "initiative": "46",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\lash-out.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "unbreakable bond",
+   "level": "8",
+   "initiative": "55",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\unbreakable-bond.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "spirit sigil",
+   "level": "9",
+   "initiative": "85",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\spirit-sigil.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "jaws of death",
+   "level": "9",
+   "initiative": "18",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\jaws-of-death.jpeg",
+   "ghs": null,
+   "xipe": null
+  }
+ ],
+ "unmatched_ghs": [],
+ "unmatched_xipe": []
+}

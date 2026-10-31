@@ -1,0 +1,1127 @@
+{
+ "class": "Cragheart",
+ "code": "CH2",
+ "model_from": "Cragheart",
+ "ghs_file": "cragheart",
+ "xipe_class": "Cragheart2",
+ "character": {
+  "name": "cragheart",
+  "characterClass": "savvas",
+  "icon": "gh-cragheart",
+  "edition": "gh2e",
+  "handSize": 11,
+  "traits": [
+   "arcane",
+   "outcast",
+   "strong"
+  ],
+  "color": "#828b3b",
+  "stats": [
+   {
+    "level": 1,
+    "health": 10
+   },
+   {
+    "level": 2,
+    "health": 12
+   },
+   {
+    "level": 3,
+    "health": 14
+   },
+   {
+    "level": 4,
+    "health": 16
+   },
+   {
+    "level": 5,
+    "health": 18
+   },
+   {
+    "level": 6,
+    "health": 20
+   },
+   {
+    "level": 7,
+    "health": 22
+   },
+   {
+    "level": 8,
+    "health": 24
+   },
+   {
+    "level": 9,
+    "health": 26
+   }
+  ],
+  "availableSummons": [],
+  "perks": [
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus2"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.cragheart.1%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "push",
+         "value": 1
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus2",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "immobilize"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "custom": "%game.custom.perks.ignoreScenario%",
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "condition",
+         "value": "muddle"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%game.custom.perks.ignoreNegativeItemFh%"
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.cragheart.2%",
+    "count": 1
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.cragheart.3%",
+    "count": 1
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.cragheart.4%",
+    "count": 2,
+    "combined": true
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.cragheart.5%",
+   "%data.custom.gh2e.cragheart.6%"
+  ]
+ },
+ "cards": [
+  {
+   "name": "opposing strike",
+   "level": "1",
+   "initiative": "46",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\opposing-strike.jpeg",
+   "ghs": {
+    "name": "Opposing Strike",
+    "number": 116,
+    "level": 1,
+    "initiative": 46,
+    "top": [
+     "Attack 3 [diamond] {area (0,0,enhance)|(1,0,target)|(2,0,active)|(3,0,target)|(4,0,enhance) [hex/hex]; consume earth {Attack +1; Muddle; card: experience:1}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"At the end of this an your next four turns, perform:\" {Heal 2 {Range 3}; (card: slotStartXp:1; card: slot; card: slotXpFh:1; card: slot; card: slotEndXp:1)}"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent"
+    ]
+   },
+   "xipe": {
+    "file": "99116_Cragheart2_Opposing Strike.yml",
+    "Level": "1",
+    "Initiative": "46",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                AreaEffect: \"-4,0,E|-2,0,R|0,0,G|2,0,R|4,0,E\"\n                #AreaEffectLayoutOverride: \"-4,0,E|-2,0,R|0,0,G|2,0,R|4,0,E\"\n                AnimOverload: OppositeOpposingStrike\n                MultiPassAttack: False\n        Consumes:\n            TCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    TCAnyAttackBuff:\n                        ParentName: TAttack\n                        Strength: 1\n                        Conditions: Muddle\n                XP: 1\n    Bottom:\n        Abilities:\n            BActive:\n                AddActiveBonus:\n                    Heal: 2\n                    Range: 3\n                    Filter: [Self, Ally]\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: EndTurnAbility\n                    XPTracker: [1,0,1,0,1]\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"<size=20%> \"\n#         - Consume:\n#             Name: TCEarth\n#             Text: \"<nobr>+1 $Attack$ <sprite name=Attack>, $Muddle$ <sprite name=Muddle>, <sprite name=XP1></nobr>\"\n#         - Row: \"£Area£\"\n#     Bottom:\n#         - Active:\n#             Ability: BActive\n#             ListLayout: \"$99116_B$\"\n#             Layout: \"$99116_B$\"\n#             Icon: \"Heal\"\n#         - Row: \"<size=50%> \"\n#         - XPTracker: BActive"
+   }
+  },
+  {
+   "name": "crushing grasp",
+   "level": "1",
+   "initiative": "35",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\crushing-grasp.jpeg",
+   "ghs": {
+    "name": "Crushing Grasp",
+    "number": 117,
+    "level": 1,
+    "initiative": 35,
+    "top": [
+     "Attack 4 [diamond] {Immobilize}",
+     "(infuse earth)"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "\"Create a 1-hex obstacle tile in an adjacent empty hex. All allies an enemies adjacent to the created tile suffer Damage 1.\"",
+     "Loot 1",
+     "(infuse earth)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99117_Cragheart2_Crushing Grasp.yml",
+    "Level": "1",
+    "Initiative": "35",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                Conditions: Immobilize\n        Infuse: Earth\n        XP: 1\n    Bottom:\n        Abilities:\n            BCreate:\n                Create: RockSingle\n                Range: 1\n                Target: 1\n                SpawnDelay: 2.9\n                AnimOverload: ObstacleAvalanche\n                MultiPassAttack: False\n                SubAbilities:\n                    TCreateSubDamage:\n                        Damage: 1\n                        Range: 1\n                        Target: -1\n                        Filter: [Enemy, Ally]\n            BLoot:\n                Loot: 1\n                Target: -1\n                AnimOverload: Loot\n        Infuse: Earth\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Immobilize$ <sprite name=Immobilize>\"\n#         - Row: \"<size=20%> \"\n#         - Infuse: Earth\n#         - XP: 1\n#     Bottom:\n#         - Row: \"$99117_B$\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"<b><size=130%>$Loot$ <sprite name=Loot> *BLoot*\"\n#         - Infuse: Earth"
+   }
+  },
+  {
+   "name": "avalanche",
+   "level": "1",
+   "initiative": "75",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\avalanche.jpeg",
+   "ghs": {
+    "name": "Avalanche",
+    "number": 118,
+    "level": 1,
+    "initiative": 75,
+    "top": [
+     "Attack 4 [diamond] {area (0,1,active)|(1,0,target)|(1,1,target)|(2,0,enhance) [hex]; consume earth {Attack +2; card: experience:1}}"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "Heal 2 [square] {Range 3 [square]; consume earth {Range +2; card: experience:1}}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99118_Cragheart2_Avalanche.yml",
+    "Level": "1",
+    "Initiative": "75",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                AnimOverload: MeleeSmashAvalanche\n                AreaEffect: \"0,0,G|2,0,R|1,1,R|3,1,E\"\n                MultiPassAttack: False\n        Consumes:\n            TCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    TCEarthAttackBuff:\n                        ParentName: TAttack\n                        Strength: 2\n                XP: 1\n        XP: 1\n    Bottom:\n        Abilities:\n            BHeal:\n                Heal:\n                    Amount: 2\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Filter: [Self, Ally]\n                AnimOverload: Heal\n        Consumes:\n            BCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    BCEarthRangeBuff:\n                        ParentName: BHeal\n                        Range: 2\n                XP: 1\n# Layout:\n#     Top:\n#         - ColumnWidths: \"70,25\"\n#         - Column:\n#             - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#             - Row: \"<size=0%> \"\n#             - Consume:\n#                 Name: TCEarth\n#                 Text: \"+2 $Attack$ <sprite name=Attack>, <sprite name=XP1>\"\n#             - XP: 1\n#         - Column: \"£Area£\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@\"\n#         - Row: \"$Range$ <sprite name=Range> *BHeal.Range* @BHeal.Range@\"\n#         - Consume:\n#             Name: BCEarth\n#             Text: \"+2<sprite name=Range>, <sprite name=XP1>\""
+   }
+  },
+  {
+   "name": "rumbling advance",
+   "level": "1",
+   "initiative": "38",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\rumbling-advance.jpeg",
+   "ghs": {
+    "name": "Rumbling Advance",
+    "number": 119,
+    "level": 1,
+    "initiative": 38,
+    "top": [
+     "Heal 4 [diamond_plus] {Range 2 [square]}",
+     "(infuse earth)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 2 [circle]",
+     "(\"All adjacent allies and enemies suffer Damage 1.\")",
+     "(infuse earth)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99119_Cragheart2_Rumbling Advance.yml",
+    "Level": "1",
+    "Initiative": "38",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            THeal:\n                Heal:\n                    Amount: 4\n                    Enhancements: 1\n                Range:\n                    Amount: 2\n                    Enhancements: 1\n                Filter: [Self, Ally]\n                AnimOverload: Heal\n        Infuse: Earth\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            BDamage:\n                Damage: 1\n                Range: 1\n                Target: -1\n                Filter: [Enemy, Ally]\n                IgnoreStun: True\n                AnimOverload: Footstomp\n        Infuse: Earth\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@\"\n#         - Row: \"$Range$ <sprite name=Range> *THeal.Range* @THeal.Range@\"\n#         - Row: \"<size=20%> \"\n#         - Infuse: Earth\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=10%> \"\n#         - Row: \"$119_B$\"\n#         - Row: \"<size=20%> \"\n#         - Infuse: Earth"
+   }
+  },
+  {
+   "name": "massive boulder",
+   "level": "1",
+   "initiative": "87",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\massive-boulder.jpeg",
+   "ghs": {
+    "name": "Massive Boulder",
+    "number": 120,
+    "level": 1,
+    "initiative": 87,
+    "top": [
+     "(Attack 3 [diamond] {Range 2 [square]}; (\"All allies and enemies adjacent to the target suffer Damage 1.\"))",
+     "(infuse earth)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99120_Cragheart2_Massive Boulder.yml",
+    "Level": "1",
+    "Initiative": "87",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range:\n                    Amount: 2\n                    Enhancements: 1\n                AnimOverload: ObstacleMassiveBoulder\n                SubAbilities:\n                    TAttackSubDamage:\n                        Damage: 1\n                        Range: 1\n                        Target: -1\n                        Filter: [Enemy, Ally]\n                        IsInlineSubAbility: True\n                        AllTargetsAdjacentToParentTargets: True\n        Infuse: Earth\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$120_T$\"\n#         - Row: \"<size=20%> \"\n#         - Infuse: Earth\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\""
+   }
+  },
+  {
+   "name": "backup ammunition",
+   "level": "1",
+   "initiative": "77",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\backup-ammunition.jpeg",
+   "ghs": {
+    "name": "Backup Ammunition",
+    "number": 121,
+    "level": 1,
+    "initiative": 77,
+    "top": [
+     "\"On your next four single-target ranged attack abilities, add Target + 1.\"",
+     "(card: slotStart; card: slotXpFh:1; card: slot; card: slotEndXp:1)"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent"
+    ],
+    "bottom": [
+     "Move 3 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99121_Cragheart2_Backup Ammunition.yml",
+    "Level": "1",
+    "Initiative": "77",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TActive:\n                AddTarget: 1\n                Filter: Self\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: BuffTarget\n                    ValidAbilityType: Attack\n                    AttackType: Ranged\n                    XPTracker: [0,1,0,1]\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n# Layout:\n#     Top:\n#         - Active:\n#             Ability: TActive\n#             ListLayout: \"$121_T$\"\n#             Layout: \"$121_T$\"\n#             Icon: \"Target\"\n#         - Row: \"<size=50%> \"\n#         - XPTracker: TActive\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\""
+   }
+  },
+  {
+   "name": "earthen bulwark",
+   "level": "1",
+   "initiative": "41",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\earthen-bulwark.jpeg",
+   "ghs": {
+    "name": "Earthen Bulwark",
+    "number": 122,
+    "level": 1,
+    "initiative": 41,
+    "top": [
+     "\"Create two 1-hex obstacle tiles in empty hexes within Range 3 Square .\" [square] {consume earth {\"All allies adjacent to at least one created tile suffer Damage 1 and gain Ward, Experience 1.\"}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 2 [circle]",
+     "Heal 1 [square] {Range 2 [square]}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99122_Cragheart2_Earthen Bulwark.yml",
+    "Level": "1",
+    "Initiative": "41",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TCreate:\n                Create: RockSingle\n                Range: 3\n                Target: 2\n                SpawnDelay: 2.9\n                AnimOverload: ObstacleAvalanche\n                MultiPassAttack: False\n                SubAbilities:\n                    TCreateSubDamage:\n                        Damage: 1\n                        Range: 1\n                        Target: -1\n                        Filter: Ally\n                    TStregthenAlly:\n                        Strengthen: True\n                        Range: 1\n                        Target: -1\n                        Filter: Ally\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            BHeal:\n                Heal:\n                    Amount: 1\n                    Enhancements: 1\n                Range:\n                    Amount: 2\n                    Enhancements: 1\n                Filter: [Ally, Self]\n# Layout:\n#     Top:\n#         - Row: \"$99122_T_1$\"\n#         - Row: \"$99122_T_2$\"\n#         \n# #        - Consume:\n# #            Name: TCEarth\n# #            Text: \"$99122_T_2$, <sprite name=XP1>\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*\"\n#         - Row: \"$Range$ <sprite name=Range> *BHeal.Range* @BHeal.Range@\""
+   }
+  },
+  {
+   "name": "unstable upheaval",
+   "level": "1",
+   "initiative": "13",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\unstable-upheaval.jpeg",
+   "ghs": {
+    "name": "Unstable Upheaval",
+    "number": 123,
+    "level": 1,
+    "initiative": 13,
+    "top": [
+     "Attack 3 {target: enemiesAdjacent; consume earth {Target %data.custom.gh2e.cragheart.abilities.123.1%; card: experience:1}}",
+     "(\"All adjacent allies suffer Damage 2.\")"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 3"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99123_Cragheart2_Unstable Upheavel.yml",
+    "Level": "1",
+    "Initiative": "13",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 3\n                AnimOverload: MeleeSmashUnstableUpheaval\n                Target: -1\n                MultiPassAttack: False\n                TreatAsMelee: True\n            TDamage:\n                Damage: 2\n                Range: 1\n                Target: -1\n                Filter: Ally\n                AnimOverload: Footstomp\n                SkipAnim: True\n        Consumes:\n            TCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    TCEarthRangeBuff:\n                        ParentName: TAttack\n                        Range: 1\n                XP: 1\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move: 3\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Target_AllAdjacentEnemies$\"\n#         - Row: \"<size=20%> \"\n#         - Consume:\n#             Name: TCEarth\n#             Text: \"$Target_TwoHexInstead$, <sprite name=XP1>\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"$123_T_2$\"\n#         - Row: \"<size=20%> \"\n#         - XP: 1\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\""
+   },
+   "matched_by_spelling": [
+    "xipe:unstableupheavel"
+   ]
+  },
+  {
+   "name": "crater",
+   "level": "1",
+   "initiative": "61",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\crater.jpeg",
+   "ghs": {
+    "name": "Crater",
+    "number": 124,
+    "level": 1,
+    "initiative": 61,
+    "top": [
+     "Attack 3 [diamond] {Range 3 [square]; consume earth {Push 2; card: experience:1}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(\"All adjacent allies and enemies suffer Damage 1.\")",
+     "Move 4 [square] {Jump}",
+     "((\"All adjacent allies and enemies suffer Damage 1.\"); consume earth {Damage +1; card: experience:1})"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=1"
+    ]
+   },
+   "xipe": {
+    "file": "99124_Cragheart2_Crater.yml",
+    "Level": "1",
+    "Initiative": "61",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                AnimOverload: MeleeSmashCrater\n                MultiPassAttack: False\n        Consumes:\n            TCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    TCEarthPush:\n                        ParentName: TAttack\n                        SubAbilities:\n                            TCAttackSubPush:\n                                Push:\n                                    Amount: 2\n                                AnimOverload: None\n                                IsInlineSubAbility: True\n                XP: 1\n    Bottom:\n        Abilities:\n            BDamage1:\n                Damage: 1\n                Range: 1\n                Target: -1\n                Filter: [Enemy, Ally]\n                AnimOverload: FootstompCraterStart\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n                    Jump: True\n            BDamage2:\n                Damage: 1\n                Range: 1\n                Target: -1\n                Filter: [Enemy, Ally]\n                AnimOverload: FootstompCraterEnd\n        Consumes:\n            BCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    BCEarthDamageBuff2:\n                        ParentName: BDamage2\n                        Strength: 1\n                XP: 1\n        XP: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@\"\n#         - Row: \"<size=20%> \"\n#         - Consume:\n#             Name: TCEarth\n#             Text: \"$Push$ <sprite name=Push> 2, <sprite name=XP1>\"\n#     Bottom:\n#         - Row: \"$124_B_1$\"\n#         - Row: \"<size=20%> \"\n#         - Row:\n#             - ColumnWidths: \"20,60,20\"\n#             - Column:\n#                 - XP: 1\n#             - Column:\n#                 - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#                 - Row: \"$Jump$ <sprite name=Jump>\"\n#             - Column:\n#         - Row: \"<size=20%> \"\n#         - Row: \"$124_B_2$\"\n#         - Consume:\n#             Name: BCEarth\n#             Text: \"$124_B_3$\""
+   }
+  },
+  {
+   "name": "dirt tornado",
+   "level": "1",
+   "initiative": "82",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\dirt-tornado.jpeg",
+   "ghs": {
+    "name": "Dirt Tornado",
+    "number": 125,
+    "level": 1,
+    "initiative": 82,
+    "top": [
+     "Attack 1 {area (0,1,target)|(1,0,target)|(1,1,target)|(1,2,target)|(2,0,target)|(2,1,target)|(2,2,target); Range 2; Muddle; consume earth {Attack +1; card: experience:1}}",
+     "(Muddle {Target %data.custom.gh2e.cragheart.abilities.125.1%})"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99125_Cragheart2_Dirt Tornado.yml",
+    "Level": "1",
+    "Initiative": "82",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 1\n                Range: 2\n                AreaEffect: \"0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,R|-1,-1,R|1,-1,R\"\n                MultiPassAttack: False\n                SubAbilities:\n                    TAttackSubMuddle:\n                        Muddle: True\n                        Filter: [Enemy, Ally]\n                AnimOverload: TargetedDirtTornado\n        Consumes:\n            TCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    TCEarthAttackBuff:\n                        ParentName: TAttack\n                        Strength: 1\n                XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n# Layout:\n#     Top:\n#         - Row:\n#             - ColumnWidths: \"65,35\"\n#             - Column:\n#                 - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#                 - Row: \"$Range$ <sprite name=Range> *TAttack.Range*\\n<size=20%> \"\n#                 - Consume:\n#                     Name: TCEarth\n#                     Text: \"+1 $Attack$ <sprite name=Attack>, <sprite name=XP1>\"\n#             - Column:\n#                 - Row: \"£Area£\"\n#         - Row: \"<size=50%> \\n<size=100%>$125_T$\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n\n#Muddle isn't showing on main ability"
+   }
+  },
+  {
+   "name": "earthen clod",
+   "level": "1",
+   "initiative": "24",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\earthen-clod.jpeg",
+   "ghs": {
+    "name": "Earthen Clod",
+    "number": 126,
+    "level": 1,
+    "initiative": 29,
+    "top": [
+     "Attack 2 [square] {Range 5; consume earth {Immobilize; card: experience:1}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(Attack 3 [diamond] {Range 5}; \"Add Attack + 1 for each obstacle or objective adjacent to the target.\")"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=2"
+    ]
+   },
+   "xipe": {
+    "file": "99126_Cragheart2_Earthen Clod.yml",
+    "Level": "1",
+    "Initiative": "29",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 5\n                AnimOverload: ObstacleEarthenClod\n        Consumes:\n            TCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    TCEarthImmo:\n                        ParentName: TAttack\n                        Conditions: Immobilize\n                XP: 1\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 5\n                ConditionalOverrides:\n                    TAttackCO1:\n                        FilterContainer:\n                            FilterTiles:\n                                TargetType: Enemy\n                                TargetAdjacentValidTiles: \"> 0\"\n                                TargetAdjacentValidTilesFilter: [\"Obstacle\"]\n                        AbilityOverrides:\n                            TAdjAllyBuff:\n                                StatIsBasedOnX:\n                                    Strength:\n                                        BasedOn: TargetAdjacentValidTiles\n                                        AddTo: True\n        XP: 2\n\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Range$ <sprite name=Range> *TAttack.Range*\"\n#         - Row: \"<size=20%> \"\n#         - Consume:\n#             Name: TCEarth\n#             Text: \"$Immobilize$ <sprite name=Immobilize>, <sprite name=XP1>\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@\"\n#         - Row: \"$Range$ <sprite name=Range> *BAttack.Range*\"\n#         - Row: \"$99126_B$\"\n#         - XP: 2"
+   }
+  },
+  {
+   "name": "heaving swing",
+   "level": "X",
+   "initiative": "57",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\heaving-swing.jpeg",
+   "ghs": {
+    "name": "Heaving Swing",
+    "number": 127,
+    "level": "X",
+    "initiative": 57,
+    "top": [
+     "(Attack 3 [diamond] {Push 1 [square]}; \"You may push the target into hexes containing obstacles. In each case, destroy the obstacle, the target suffers Damage 2, and you gain Experience 1.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Destroy an adjacent obstacle or suffer Damage 1 to add Attack + 3 to your next melee attack this round.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99127_Cragheart2_Heaving Swing.yml",
+    "Level": "X",
+    "Initiative": "57",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                SubAbilities:\n                    TAttackSubPush:\n                        Push:\n                            Amount: 1\n                            Enhancements: 1\n                        IsInlineSubAbility: True\n                        AdditionalPushEffect: IntoObstacles\n                        AdditionalPushEffectDamage: 2\n                        AdditionalPushEffectXP: 1\n    Bottom:\n        Abilities:\n            BActive:\n                Attack: 3\n                Filter: Self\n                ActiveBonus:\n                    Duration: Round\n                    Behaviour: BuffAttack\n                AnimOverload: PowerUp\n                SubAbilities:\n                    BActiveSub:\n                        AddActiveBonus:\n                            Damage: 1\n                            Filter: Self\n                        ActiveBonus:\n                            Duration: Round\n                            Behaviour: StartActionAbility"
+   }
+  },
+  {
+   "name": "petrify",
+   "level": "X",
+   "initiative": "53",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\petrify.jpeg",
+   "ghs": {
+    "name": "Petrify",
+    "number": 128,
+    "level": "X",
+    "initiative": 53,
+    "top": [
+     "(Attack 4 [diamond] {area (0,1,target)|(1,0,target)|(1,1,target)|(2,0,enhance) [hex]; Range 3}; \"For each target killed, gain Experience 1 and create one 1-hex obstacle tile in the featureless hex they occupied.\")",
+     "(infuse earth)"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "Attack 2 [square] {Range 2 [square]; consume earth {Range +2; card: experience:1}}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99128_Cragheart2_Petrify.yml",
+    "Level": "X",
+    "Initiative": "53",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n             TKillCreateAttack:\n                MergedKillCreate:\n                    Abilities:\n                        TKill:\n                            Kill: True\n                            Filter:\n                                TargetType: Enemy\n                                EnemyType: Normal\n                            AnimOverload: ObstaclePetrify\n                            Range: 4\n                            IgnoreMergedAbilityTargetSelection: True\n                        TCreate:\n                            Create: RockSingle\n                            SpawnDelay: 3.06\n                            AnimOverload: None\n                            UseMergedWithAbilityTiles: True\n                            AutoTrigger: True\n        Infuse: Earth\n        XP: 2\n    # Top:\n#         Abilities:\n#              TKillCreateAttack:\n#                 MergedKillCreate:\n#                     Abilities:\n#                         TKill:\n#                             Kill: True\n#                             Filter:\n#                                 TargetType: Enemy\n#                                 #EnemyType: Normal\n#                                 Health: \"<= 4\"\n#                             AnimOverload: ObstaclePetrify\n#                             AreaEffect: \"0,0,R|2,0,R|1,1,R|-1,1,E\"\n#                             AreaEffectLayoutOverride: \"0,0,R|2,0,R|1,1,R|-1,1,E\"\n#                             MultiPassAttack: False\n#                             Range: 3\n#                             IgnoreMergedAbilityTargetSelection: True\n#                         TCreate:\n#                             Create: RockSingle\n#                             SpawnDelay: 3.06\n#                             AnimOverload: None\n#                             UseMergedWithAbilityTiles: True\n#                             AutoTrigger: True\n#         Infuse: Earth\n#         XP: 1\n    \n    #Top:\n#        Abilities:\n#             TKillCreateAttack:\n#                MergedKillCreate:\n#                    Abilities:\n#                        TKill:\n#                            Kill: True\n#                            Filter:\n#                                TargetType: Enemy\n#                                Health: \"<= 4\"\n#                            AnimOverload: ObstaclePetrify\n#                            AreaEffect: \"0,0,R|2,0,R|1,1,R|-1,1,E\"\n#                            MultiPassAttack: False\n#                            XPPerTarget: 1\n#                            Range: 3\n#                            IgnoreMergedAbilityTargetSelection: True\n#                        TCreate:\n#                            Create: RockSingle\n#                            SpawnDelay: 3.06\n#                            AnimOverload: None\n#                            UseMergedWithAbilityTiles: True\n#                            AutoTrigger: True\n#        Infuse: Earth\n#        XP: 1\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Range:\n                    Amount: 2\n                    Enhancements: 1\n        Consumes:\n            BCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    BCEarthRangeBuff:\n                        ParentName: BAttack\n                        Range: 2\n                XP: 1\n\n# Layout:\n#     Top:\n#         - Row: \"$136_T_1$\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"<size=50%>\"\n#         - Row: \"$136_T_2$\"\n#         - Row: \"<size=20%> \"\n#         - Row:\n#             - ColumnWidths: \"30,20,20\"\n#             - Column:\n#             - Column:\n#                 - Infuse: Earth\n#             - Column:\n#                 - XP: 2\n# #     Top:\n# #        - ColumnWidths: \"5,60,35\"\n# #        - Column:\n# #        - Column:\n# #            - Row: \"<size=0%> \"\n# #            - Row: \"$99128_T$\"\n# #        - Column:\n# #            - Row: \"£Area£\"\n# # #        - Infuse: Earth\n# # #        - XP: 1\n#     Bottom:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@\"\n#         - Row: \"$Range$ <sprite name=Range> *BAttack.Range* @BAttack.Range@\"\n#         - Row: \"<size=20%> \"\n#         #- Consume:\n# #            Name: BCEarth\n# #            Text: \"<nobr>+1 $Range$ <sprite name=Range>, <sprite name=XP1></nobr>\""
+   }
+  },
+  {
+   "name": "burrow",
+   "level": "X",
+   "initiative": "94",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\burrow.jpeg",
+   "ghs": {
+    "name": "Burrow",
+    "number": 129,
+    "level": "X",
+    "initiative": 94,
+    "top": [
+     "Heal 2 [square] {Target 2; Range 3}",
+     "(infuse earth)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 7 [square] {Jump}",
+     "consume earth {Immobilize {target: enemiesMovedThrough}; card: experience:1}"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=1"
+    ]
+   },
+   "xipe": {
+    "file": "99129_Cragheart2_Burrow.yml",
+    "Level": "X",
+    "Initiative": "64",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            THeal:\n                Heal:\n                    Amount: 2\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Target: 2\n                Filter: [Self, Ally]\n                MultiPassAttack: False\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 7\n                    Jump: True\n                    Enhancements: 1\n        Consumes:\n            BCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    BCAnyAttackBuff:\n                        ParentName: BMove\n                        AllTargetsOnMovePath: True\n                        Conditions: Immobilize\n                XP: 1\n        XP: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@\"\n#         - Row: \"$Range$ <sprite name=Range> *THeal.Range* @THeal.Range@\"\n#         - Row: \"$Target$ <sprite name=Target> *THeal.Target* @THeal.Target@\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=50%> \"\n#         - Consume:\n#             Name: BCEarth\n#             #Text: \"<b><size=130%>$Immobilize$ <sprite name=Immobilize>, <sprite name=XP1></nobr>\"\n#             #Text: \"$Target_AllEnemiesMovedThrough$\" \n#             Text: \"$99129_B$\" \n#         - Row: \"<size=50%> \"\n#         - XP: 1"
+   }
+  },
+  {
+   "name": "mud eruption",
+   "level": "2",
+   "initiative": "25",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\mud-eruption.jpeg",
+   "ghs": {
+    "name": "Mud Eruption",
+    "number": 130,
+    "level": 2,
+    "initiative": 25,
+    "top": [
+     "(Attack 3 [diamond] {Target %data.custom.gh2e.cragheart.abilities.130.1%; Push 1}; \"Create one 1-hex obstacle tile in the featureless hex each target previously occupied.\")",
+     "(infuse earth)"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99130_Cragheart2_Mud Eruption.yml",
+    "Level": "2",
+    "Initiative": "25",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 4\n                Target: 4\n                SubAbilities:\n                    TAttackSubPush:\n                        Push: 1\n                        AnimOverload: None\n                        IsInlineSubAbility: True\n            TCreate:\n                Create: RockSingle\n                Range: 4\n                Target: 1\n                SpawnDelay: 2.9\n                AnimOverload: ObstacleAvalanche\n                MultiPassAttack: False\n        Infuse: Earth\n        XP: 2\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@\"\n#         - Row: \"$Target$ <sprite name=Target> *TAttack.Target* @TAttack.Target@\"\n#         - Row: \"$Push$ <sprite name=Push> *TAttackSubPush* @TAttackSubPush@\"\n#         - Row: \"Create one obstacle tile within range 4\"\n#         - Row: \"<size=50%> \"\n#         - Row:\n#             - ColumnWidths: \"30,20,20\"\n#             - Column:\n#             - Column:\n#                 - Infuse: Earth\n#             - Column:\n#                 - XP: 2\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\""
+   }
+  },
+  {
+   "name": "sentient growth",
+   "level": "2",
+   "initiative": "78",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\sentient-growth.jpeg",
+   "ghs": {
+    "name": "Sentient Growth",
+    "number": 131,
+    "level": 2,
+    "initiative": 78,
+    "top": [
+     "Attack 2 [square] {area (0,1,target)|(1,0,target)|(1,1,target)|(2,0,enhance) [hex]; Range 3}",
+     "Heal 2 {Target %data.custom.gh2e.cragheart.abilities.131.1%}",
+     "(infuse earth)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 2",
+     "Heal 1 [square] {target: all; Range 1}",
+     "Attack 1 [square] {target: enemiesAdjacent}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99131_Cragheart2_Sentient Growth.yml",
+    "Level": "2",
+    "Initiative": "78",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 3\n                AreaEffect: \"0,0,R|2,0,R|1,1,R|3,1,E\"\n                AreaEffectLayoutOverride: \"0,0,R|2,0,R|1,1,R|3,1,E\"\n                AnimOverload: TargetedSentientGrowth\n                MultiPassAttack: False\n                SubAbilities:\n                    TAttackSubHeal:\n                        Heal:\n                            Amount: 2\n                            Enhancements: 1\n                        Filter: Ally\n        Infuse: Earth\n    Bottom:\n        Abilities:\n            BMove:\n                Move: 2\n            BHeal:\n                Heal:\n                    Amount: 1\n                    Enhancements: 1\n                Range: 1\n                Target: -1\n                Filter: Ally\n                AnimOverload: Heal\n            BAttack:\n                Attack:\n                    Amount: 1\n                    Enhancements: 1\n                Target: -1\n                MultiPassAttack: False\n                AnimOverload: FootstompSentientGrowth\n# Layout:\n#     Top:\n#         - ColumnWidths: \"70,25\"\n#         - Column:\n#             - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#             - Row: \"$Range$ <sprite name=Range> *TAttack.Range*\"\n#             - Row: \"<size=50%> \"\n#             - Row: \"<b><size=130%>$Heal$ <sprite name=Heal> *TAttackSubHeal* <size=100%><voffset=1>@TAttackSubHeal@\"\n#             - Row: \"$131_T$\"\n#             - Infuse: Earth\n#         - Column:\n#             - Row: \"£Area£\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove*\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@\"\n#         - Row: \"$Affect_AllAdjacentAllies$\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@\"\n#         - Row: \"$Target_AllAdjacentEnemies$\""
+   }
+  },
+  {
+   "name": "clear the way",
+   "level": "3",
+   "initiative": "30",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\clear-the-way.jpeg",
+   "ghs": {
+    "name": "Clear the Way",
+    "number": 132,
+    "level": 3,
+    "initiative": 30,
+    "top": [
+     "\"Relocate one adjacent 1-hex obstacle tile to an empty hex within Range 4 to perform:\" {Attack 2 [square] {Target %data.custom.gh2e.cragheart.abilities.132.2%; Pierce 1; consume earth {Attack +1; card: experience:1}}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(Move 3 [circle] {Jump}; \"Destroy all obstacles, hazardous terrain, difficult terrain, and traps in hexes you enter.\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99132_Cragheart2_Clear the Way.yml",
+    "Level": "3",
+    "Initiative": "30",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TMoveObstacleAttack:\n                MergedMoveObstacleAttack:\n                    Abilities:\n                        TMoveObstacle:\n                            MoveObstacle:\n                            ObstacleTypes: OneHexObstacle\n                            Target: 1\n                            Range: 1\n                            SpawnDelay: 2.6\n                            MoveObstacleRange: 4\n                            AnimOverload: MeleeSmashExplosivePunch\n                            MoveObstacleAnimOverload: ObstacleMeteor\n                        TAttack:\n                            Attack:\n                                Amount: 2\n                                Enhancements: 1\n                                Pierce: 1\n                            Range: 1\n                            Target: -1\n                            Filter: Enemy\n                            IgnoreParentAreaOfEffect: True\n                            UseParentRangeType: True\n                            AnimOverload: None\n                Range: 2 #Give the merged parent ability a Range for the Attack Ability UseParentRangeType to use\n        Consumes:\n            TCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    TCEarthAttackBuff:\n                        ParentName: TAttack\n                        Strength: 1\n                XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n                    Jump: True\n            BDisarmTrapDestroyObstacle:\n                MergedDisarmTrapDestroyObstacle:\n                    Abilities:\n                        BDisarmTrap:\n                            DisarmTrap: True\n                            AnimOverload: DisarmTrap\n                            Target: -1\n                            AllTargetsOnMovePath: True\n                        BDestroyObstacle:\n                            DestroyObstacle:\n                            Target: -1\n                            AllTargetsOnMovePath: True\n                            SpawnDelay: 0.2\n                            SkipAnim: True\n# Layout:\n#     Top:\n#         - Row: \"$132_T_1$\"\n#         - Row: \"<size=50%> \"\n#         - Row:\n#             - ColumnWidths: \"15, 70\"\n#             - Column:\n#             - Column:\n#                 - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#                 - Row: \"$Pierce$ <sprite name=Pierce> *TAttack.Pierce* @TAttack.Pierce@\"\n#                 - Row: \"$132_T_2$\"\n#         - Row: \"<size=20%> \"\n#         - Consume:\n#             Name: TCEarth\n#             Text: \"+1 $Attack$ <sprite name=Attack>, <sprite name=XP1>\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"$Jump$ <sprite name=Jump>\"\n#         - Row: \"<size=20%> \"\n#         - Row: \"$132_B$\""
+   }
+  },
+  {
+   "name": "blunt force",
+   "level": "3",
+   "initiative": "21",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\blunt-force.jpeg",
+   "ghs": {
+    "name": "Blunt Force",
+    "number": 133,
+    "level": 3,
+    "initiative": 21,
+    "top": [
+     "Attack 5 [diamond] {consume earth {Attack +5; card: experience:1}}"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 1 [circle]",
+     "Heal 2 [square] {target: self; consume earth {Ward; card: experience:1}}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99133_Cragheart2_Blunt Force.yml",
+    "Level": "3",
+    "Initiative": "21",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 5\n                    Enhancements: 1\n        Consumes:\n            TCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    TCEarthAttackBuff:\n                        ParentName: TAttack\n                        Strength: 5\n                XP: 1\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 1\n                    Enhancements: 1\n            BHeal:\n                Heal: 2\n                Filter: [Self]\n            BNull:\n                Null: True\n         Consumes:\n             BCEarth:\n                 Elements: Earth\n                 Abilities:\n                     BCEarthRetaliate:\n                         ParentName: BNull\n                         Retaliate: 1\n                         #Filter: Self\n                         AnimOverload: PowerUp\n                         ActiveBonusDuration: Round\n                 XP: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Consume:\n#             Name: TCEarth\n#             Text: \"+5 $Attack$ <sprite name=Attack>, <sprite name=XP1>\"\n#         - XP: 1\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*\"\n#         - Row: \"$Self$\"\n#         - Consume:\n#             Name: BCEarth\n#             Text:\n#                 - Active:\n#                     Ability: BCEarthRetaliate\n#                     Icon: \"Retaliate\"\n#                     ListLayout: \"$Retaliate$ <sprite name=Retaliate> 1, $Self$\"\n#                     Layout:\n#                         - Row: \"<b><size=130%>$Retaliate$ <sprite name=Retaliate> 1\"\n#                         - Row: \"<line-height=100%><size=100%>$Self$\"\n#                 - XP: 1\n#         - Row: \"<size=100%> \"\n#         - Duration: Round\n#         # - Active:\n# #             Ability: BRetaliate\n# #             Icon: \"Retaliate\"\n# #             ListLayout: \"$Retaliate$ <sprite name=Retaliate> *BCEarthRetaliate*, $Self$\"\n# #             Layout:\n# #                 - Row: \"<b><size=130%>$Retaliate$ <sprite name=Retaliate> *BCEarthRetaliate* <size=100%><voffset=1>@BCEarthRetaliate@\"\n# #                 - Row: \"$Self$\"\n# #         - Row: \"<size=20%> \"\n# #         - Row:\n# #             - ColumnWidths: \"30,20,20\"\n# #             - Column:\n# #             - Column:\n# #             - Column:\n# #                 - Duration: Round"
+   }
+  },
+  {
+   "name": "rock slide",
+   "level": "4",
+   "initiative": "81",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\rock-slide.jpeg",
+   "ghs": {
+    "name": "Rock Slide",
+    "number": 134,
+    "level": 4,
+    "initiative": 81,
+    "top": [
+     "(\"Create three 1-hex obstacle tiles in empty hexes within Range 3 Square .\" [square]; \"All allies and enemies adjacent to at least one created tile suffer Damage 1 and gain Muddle.\")",
+     "(infuse earth)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(\"Designate one enemy within Range 4. Destroy all obstacles within Range 2 of the designated enemy to perform:\"; Attack X {Target %data.custom.gh2e.cragheart.abilities.134.4%; Immobilize}; \"where X is twice the number of destroyed obstacles.\")"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=2"
+    ]
+   },
+   "xipe": {
+    "file": "99134_Cragheart2_Rock Slide.yml",
+    "Level": "4",
+    "Initiative": "81",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TCreate:\n                Create: RockSingle\n                Range: 3\n                Target: 3\n                SpawnDelay: 2.9\n                AnimOverload: ObstacleAvalanche\n                MultiPassAttack: False\n                SubAbilities:\n                    TCreateSubDamage:\n                        Damage: 1\n                        Conditions: Muddle\n                        Range: 1\n                        Target: -1\n                        Filter: [Enemy, Ally]\n        Infuse: Earth\n        XP: 1\n    Bottom:\n        Abilities:\n            BDestroyObstacleAttack:\n                MergedDestroyObstacleAttack:\n                    Abilities:\n                        BDestroyObstacle:\n                            DestroyObstacle:\n                            Range: 2\n                            Target: -1\n                            AnimOverload: MeleeSmashRockyEnd\n                            SpawnDelay: 2.16\n                        BAttack:\n                            Attack:\n                                Amount: 0\n                            Range: 4\n                            Conditions: Immobilize\n                            StatIsBasedOnX:\n                                Strength:\n                                    BasedOn: ObstaclesToBeDestroyedByMergedAbility\n                                    Multiplier: 2\n                            IgnoreMergedAbilityTargetSelection: True\n                            AnimOverload: None\n        XP: 2\n# Layout:\n#     Top: \n#         - Row: \"$99134_T_1$\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"$99134_T_2$\"\n#         - Row: \"<size=20%> \"\n#         - Infuse: Earth\n#     Bottom:\n#         - Row: \"$99142_T_1$\"\n#         - Row:\n#             - ColumnWidths: \"20, 60, 20\"\n#             - Column:\n#             - Column:\n#                 - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> X\"\n#                 - Row: \"$Range$ <sprite name=Range> *BAttack.Range* @BAttack.Range@\"\n#                 - Row: \"$Immobilize$ <sprite name=Immobilize> \"\n#             - Column:\n#                 - XP: 2\n#         - Row: \"$99142_T_2$\""
+   }
+  },
+  {
+   "name": "kinetic assault",
+   "level": "4",
+   "initiative": "19",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\kinetic-assault.jpeg",
+   "ghs": {
+    "name": "Kinetic Assault",
+    "number": 135,
+    "level": 4,
+    "initiative": 19,
+    "top": [
+     "Move 1 [circle]",
+     "(Attack 4 [diamond]; (\"All allies and enemies adjacent to the target suffer Damage 1.\"))"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "Ward [diamond_plus] {target: self}",
+     "Retaliate 3 [square] {Range 3}"
+    ],
+    "bottom_flags": [
+     "lost",
+     "round",
+     "xp=2"
+    ]
+   },
+   "xipe": {
+    "file": "99135_Cragheart2_Kinetic Assault.yml",
+    "Level": "4",
+    "Initiative": "19",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TMove:\n                Move:\n                    Amount: 1\n                    Enhancements: 1\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                SubAbilities:\n                    TAttackSubDamage:\n                        Damage: 1\n                        Range: 1\n                        Target: -1\n                        Filter: [Enemy, Ally]\n                        IsInlineSubAbility: True\n                        AllTargetsAdjacentToParentTargets: True\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BShield:\n                Shield:\n                    Amount: 1\n                    Enhancements: 1\n                ActiveBonusDuration: Round\n                AnimOverload: PowerUpShield\n            BRetaliate:\n                Retaliate:\n                    Amount: 3\n                    Enhancements: 1\n                RetaliateRange: 3\n        XP: 2\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$120_T$\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\" \n#         - Row: \"<size=20%> \"\n#         - Active:\n#             Ability: BShield\n#             Icon: \"Shield\"\n#             ListLayout: \"$Shield$ <sprite name=Shield> *BShield*, $Self$\"\n#             Layout:\n#                 - Row: \"<b><size=130%>$Shield$ <sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@\"\n#                 - Row: \"$Self$\"\n#         - Row: \"<size=20%> \"\n#         - Active:\n#             Ability: BRetaliate\n#             Icon: \"Retaliate\"\n#             ListLayout: \"$Retaliate$ <sprite name=Retaliate> *BRetaliate*, $Retaliate$ $Range$ <sprite name=Range> *BRetaliate.RetaliateRange* $Self$\"\n#             Layout:\n#                 - Row: \"<b><size=130%>$Retaliate$ <sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@\"\n#                 - Row: \"$Retaliate$ $Range$ <sprite name=Range> *BRetaliate.RetaliateRange*\"\n#         - Row: \"<size=20%> \"\n#         - Row:\n#             - ColumnWidths: \"30, 20, 20\"\n#             - Column:\n#             - Column:\n#                 - Duration: Round\n#             - Column:\n#                 - XP: 2"
+   }
+  },
+  {
+   "name": "solidify",
+   "level": "5",
+   "initiative": "17",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\solidify.jpeg",
+   "ghs": {
+    "name": "Solidify",
+    "number": 136,
+    "level": 5,
+    "initiative": 17,
+    "top": [
+     "Attack 3 [diamond] {Range 4; consume earth {Attack +2; card: experience:1}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(\"Grant one ally within Range 3:\"; (\"Suffer Damage 1.\"); Shield 2)"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99136_Cragheart2_Solidify.yml",
+    "Level": "5",
+    "Initiative": "17",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 4\n                AnimOverload: MeleeSmashCrater\n                MultiPassAttack: False\n        Consumes:\n            TCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    TCAnyAttackBuff:\n                        ParentName: TAttack\n                        Strength: 2\n                XP: 1\n    Bottom:\n        Abilities:\n            BShield:\n                Shield: 2\n                Range: 3\n                Filter: Ally\n                AnimOverload: TargetedUnstableUpheavalBottom\n                ActiveBonusDuration: Round\n                SubAbilities:\n                    BShieldSubDamage:\n                        Damage: 1\n                        #UseParentTiles: True\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#         - Row: \"$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@\"\n#         - Row: \"<size=20%> \"\n#         - Consume:\n#             Name: TCEarth\n#             Text: \"+2 $Attack$ <sprite name=Attack>, <sprite name=XP1>\"\n#     Bottom:\n#         - Row: \"$99123_B_1$\"\n#         - Row: \"<b><size=130%>$Shield$ <sprite name=Shield> 2\" \n#         - Row: \"$99123_B_2$\"\n#         # - Row: \"$123_B$\"\n# #         - Row: \"<size=50%> \"\n# #         - Active:\n# #             Ability: BShield\n# #             Icon: \"Shield\""
+   }
+  },
+  {
+   "name": "stone pummel",
+   "level": "5",
+   "initiative": "32",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\stone-pummel.jpeg",
+   "ghs": {
+    "name": "Stone Pummel",
+    "number": 137,
+    "level": 5,
+    "initiative": 32,
+    "top": [
+     "(Attack 4 [diamond]; area (0,1,target)|(0,2,enhance)|(1,1,active)|(1,2,target)|(2,0,target)|(2,1,target)|(3,0,enhance) [hex/hex])",
+     "(infuse earth)"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "\"Whenever you attack an adjacent enemy, you may destroy one 1-hex obstacle adjacent to both you and that enemy to add Attack + 2 to the attack.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ]
+   },
+   "xipe": {
+    "file": "99137_Cragheart2_Stone Pummel.yml",
+    "Level": "5",
+    "Initiative": "32",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                AreaEffect: \"-3,-1,E|-1,-1,R|-2,0,R|0,0,G|2,0,R|1,1,R|3,1,E\"\n                AnimOverload: OppositeStonePummel\n                MultiPassAttack: False\n        Infuse: Earth\n        XP: 1\n        \n    Bottom:\n        Abilities:\n            BAttackBuff:\n                Attack: 0\n                Filter: Self\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: BuffAttack\n                    AbilityData:\n                        DestroyObstacle:\n                        HelpBoxTooltipLocKey: GUI_StonePummel_Bottom_HelpBoxTooltip\n                        SpawnDelay: 2.16\n                AttackEffect:\n                    Type: BuffIfCanPerformSubAbility\n                    AttackType: Melee\n                    Strength: 2\n        XP: 2\n# Layout:\n#     Top:\n#         - ColumnWidths: \"60,35\"\n#         - Column:\n#             - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#             - Row: \"<size=20%> \"\n#             - Infuse: Earth\n#             - XP: 1\n#         - Column: \"£Area£\"\n#     Bottom:\n#         - Active:\n#             Ability: BAttackBuff\n#             ListLayout: \"$99137_B$\"\n#             Layout: \"$99137_B$\"\n#             Icon: \"Damage\"\n#         - Row: \"<size=50%> \"\n#         - Row:\n#             - ColumnWidths: \"30,20,20\"\n#             - Column:\n#             - Column:\n#                 - XP: 2\n#             - Column:\n#                 - Duration: Persistent"
+   }
+  },
+  {
+   "name": "dig pit",
+   "level": "6",
+   "initiative": "88",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\dig-pit.jpeg",
+   "ghs": {
+    "name": "Dig Pit",
+    "number": 138,
+    "level": 6,
+    "initiative": 88,
+    "top": [
+     "Push 2 [square] {Range 1}",
+     "\"Create one Damage 2, Stun trap in an adjacent empty hex.\"",
+     "\"Create one 1-hex obstacle tile in an empty hex adjacent to the created trap.\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Heal 3 [square] {Range 3 [square]; consume earth {Target +1; card: experience:1}}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99138_Cragheart2_Dig Pit.yml",
+    "Level": "6",
+    "Initiative": "88",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TPush:\n                Push:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 1\n                Filter: Enemy\n                AnimOverload: TargetedPull\n            TTrap:\n                Trap:\n                    TrapName: BearTrap\n                    Damage: 2\n                    Conditions: Stun\n                SpawnDelay: 2.8\n                Target: 1\n                AnimOverload: ObstacleDigPit\n            TCreate:\n                Create: RockSingle\n                Range: 1\n                Target: 1\n                SpawnDelay: 2.9\n                AnimOverload: ObstacleAvalanche\n                MultiPassAttack: False\n    Bottom:\n        Abilities:\n            BHeal:\n                Heal:\n                    Amount: 3\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Filter: [Self, Ally]\n                AnimOverload: Heal\n        Consumes:\n            BCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    BCEarthHealBuff:\n                        ParentName: BHeal\n                        Target: 2\n                XP: 1\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Push$ <sprite name=Push> *TPush*\"\n#         - Row: \"$Range$ <sprite name=Range> *TPush.Range*\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"$138_T$\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"$99138_B$\"\n#     Bottom:\n#         - Row: \"<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@\"\n#         - Row: \"$Range$ <sprite name=Range> *BHeal.Range* @BHeal.Range@\"\n#         - Row: \"<size=20%> \"\n#         - Consume:\n#             Name: BCEarth\n#             Text: \"+1 <sprite name=Target>, <sprite name=XP1>\""
+   }
+  },
+  {
+   "name": "cataclysm",
+   "level": "6",
+   "initiative": "26",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\cataclysm.jpeg",
+   "ghs": {
+    "name": "Cataclysm",
+    "number": 139,
+    "level": 6,
+    "initiative": 26,
+    "top": [
+     "(Attack 4 [diamond] {Immobilize; consume earth {Attack +2; card: experience:1}}; area (0,1,active)|(1,0,target)|(1,1,target)|(1,2,target)|(2,0,target)|(2,1,target)|(2,2,target)|(3,0,enhance)|(3,2,enhance) [hex/hex])",
+     "(Immobilize {Target %data.custom.gh2e.cragheart.abilities.139.1%})"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 3 [circle] {consume earth {Move +3; card: experience:1}}",
+     "(infuse earth)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99139_Cragheart2_Cataclysm.yml",
+    "Level": "6",
+    "Initiative": "26",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                AnimOverload: TargetedCataclysm\n                AreaEffect: \"0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,G|-1,-1,R|1,-1,R\"\n                MultiPassAttack: False\n                SubAbilities:\n                    TAttackSubImmo:\n                        Immobilize: True\n                        Filter: [Enemy, Ally]\n        Consumes:\n            TCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    TCEarthAttackBuff:\n                        ParentName: TAttack\n                        Strength: 2\n                XP: 1\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n        Consumes:\n            BCEarth:\n                Elements: Earth\n                AbilityOverrides:\n                    BCEarthMoveBuff:\n                        ParentName: BMove\n                        Strength: 3\n                XP: 1\n        Infuse: Earth\n# Layout:\n#     Top:\n#         - Row:\n#             - ColumnWidths: \"64,36\"\n#             - Column:\n#                 - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\"\n#                 - Consume:\n#                     Name: TCEarth\n#                     Text: \"+2 $Attack$ <sprite name=Attack>, <sprite name=XP1>\"\n#             - Column:\n#                 - Row: \"£Area£\"\n#         - Row: \"<size=50%> \"\n#         - Row: \"$139_T$\"\n#         - XP: 1\n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\"\n#         - Row: \"<size=20%> \"\n#         - Consume:\n#             Name: BCEarth\n#             Text: \"+3 $Move$ <sprite name=Move>, <sprite name=XP1>\"\n#         - Infuse: Earth"
+   }
+  },
+  {
+   "name": "meteor",
+   "level": "7",
+   "initiative": "85",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\meteor.jpeg",
+   "ghs": {
+    "name": "Meteor",
+    "number": 140,
+    "level": 7,
+    "initiative": 85,
+    "top": [
+     "consume earth {(\"Whenever you perform a ranged attack this round, all allies and enemies adjacent to the target suffer Damage 1, Experience 1.\"; card: round)}",
+     "\"Destroy any number of adjacent obstacles. For each obstacle destroyed, perform:\" {Attack 2 {Range 3}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle] {Jump}",
+     "(\"All adjacent allies and enemies suffer Damage 1.\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99140_Cragheart2_Meteor.yml",
+    "Level": "7",
+    "Initiative": "85",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TNull:\n                Null: True\n            TDestroyObstacleAttack:\n                MergedDestroyObstacleAttack:\n                    Abilities:\n                        TDestroyObstacle:\n                            DestroyObstacle:\n                            Range: 1\n                            Target: 1\n                            AnimOverload: None\n                            SpawnDelay: 2.16\n                        TAttack:\n                            Attack:\n                                Amount: 2\n                                Enhancements: 1\n                            Range: 3\n                            Filter: Enemy\n                            IgnoreParentAreaOfEffect: true\n                            #AnimOverload: MeleeSmashExplosivePunch\n        Consumes:\n            TCEarth:\n                Elements: Earth\n                Abilities:\n                    TCFireAlly:\n                        ParentName: TNull1\n                        ControlActor:\n                            Abilities:\n                                TCFireAllyAttack:\n                                    AddActiveBonus:\n                                        Attack: 0\n                                    ActiveBonus:\n                                        Behaviour: OverrideAbility\n                                        Duration: Round\n                                        ValidAbilityType: Attack\n                                        ActiveBonusAbilityOverrides:\n                                            BCTypeOverride:\n                                                AbilityType: Attack\n                                                Attack: 0\n                                                SubAbilities:\n                                                    AttackSubDamage:\n                                                        Damage: 1\n                                                        Range: 1\n                                                        Target: -1\n                                                        Filter: [Enemy, Ally]\n                                                        IsInlineSubAbility: True\n                                                        AllTargetsAdjacentToParentTargets: True                      \n                        Range: 1\n                        Filter: Ally\n                        AnimOverload: CommandAlly\n                        HelpBoxTooltipLocKey: GUI_ViciousBallet_Tooltip\n                XP: 1\n        Infuse: Earth\n        XP: 2\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n                    Jump: True\n            BDamage:\n                Damage: 1\n                Range: 1\n                Target: -1\n                Filter: [Enemy, Ally]\n                IgnoreStun: True\n                AnimOverload: Footstomp\n# Layout:\n#     Top:\n#         - Consume:\n#             Name: TCEarth\n#             Text: \"$99140T$\"\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\" \n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\" \n#         - Row: \"$Jump$ <sprite name=Jump>\"\n#         - Row: \"<size=10%> \"\n#         - Row: \"$119_B$\"\n#         - Row: \"<size=20%> \""
+   }
+  },
+  {
+   "name": "brutal momentum",
+   "level": "7",
+   "initiative": "37",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\brutal-momentum.jpeg",
+   "ghs": {
+    "name": "Brutal Momentum",
+    "number": 141,
+    "level": 7,
+    "initiative": 37,
+    "top": [
+     "(Attack 3 [diamond] {Push 2 [square]}; \"Add Attack + 1, Push + 1 for each hex containing an obstacle or wall adjacent to you.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(\"At the start of your next four turns, perform:\"; Move 3; \"Add Attack + 3 to your next melee attack this turn.\"; (card: slotStart; card: slotXpFh:1; card: slot; card: slotEndXp:1))"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent"
+    ]
+   },
+   "xipe": {
+    "file": "99141_Cragheart2_Brutal Momentum.yml",
+    "Level": "7",
+    "Initiative": "37",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                SubAbilities:\n                    TAttackSubPush:\n                        Push:\n                            Amount: 2\n                            Enhancements: 1\n                        AnimOverload: None\n                        IsInlineSubAbility: True\n                ConditionalOverrides:\n                    TAttackCO1:\n                        FilterContainer:\n                            FilterTiles:\n                                TargetType: Enemy\n                                TargetAdjacentValidTiles: \"> 0\"\n                                TargetAdjacentValidTilesFilter: [\"Obstacle\", \"Wall\"]\n                        AbilityOverrides:\n                            TAdjRockBuff:\n                                StatIsBasedOnX:\n                                    Strength:\n                                        BasedOn: TargetAdjacentValidTiles\n                                        AddTo: True\n    Bottom:\n        Abilities:\n            BMove:\n                Move: 3\n            BActive:\n                AddActiveBonus:\n                    Move: 3\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: StartTurnAbility\n                    XPTracker: [0,1,0,1]"
+   }
+  },
+  {
+   "name": "rocky end",
+   "level": "8",
+   "initiative": "31",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\rocky-end.jpeg",
+   "ghs": {
+    "name": "Rocky End",
+    "number": 142,
+    "level": 8,
+    "initiative": 31,
+    "top": [
+     "Attack 5 [diamond] {area (0,1,target)|(0,2,active)|(1,0,target)|(1,1,target)|(1,2,target)|(2,2,target); Muddle}",
+     "Heal 5 {Target %data.custom.gh2e.cragheart.abilities.142.1%}",
+     "consume earth {\"Create 1-hex obstacle tiles in each empty red hex of the attack ability, Experience 1.\"}"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "(Push 2 [square] {Range 3; Immobilize}; \"Create 1-hex obstacle tiles in each featureless hex the target exists with the push.\")",
+     "(infuse earth)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99142_Cragheart2_Rocky End.yml",
+    "Level": "8",
+    "Initiative": "31",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 5\n                    Enhancements: 1\n                Conditions: Muddle\n                AreaEffect: \"0,0,G|2,0,R|4,0,R|1,1,R|3,1,R|2,2,R\"\n                AnimOverload: TargetedSentientGrowth\n                MultiPassAttack: False\n                SubAbilities:\n                    TAttackSubHeal:\n                        Heal: 5\n                        Filter: Ally\n        XP: 1\n    Bottom:\n        Abilities:\n            BPush:\n                Push:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 3\n                Conditions: Immobilize\n        Infuse: Earth"
+   }
+  },
+  {
+   "name": "entomb",
+   "level": "8",
+   "initiative": "23",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\entomb.jpeg",
+   "ghs": {
+    "name": "Entomb",
+    "number": 143,
+    "level": 8,
+    "initiative": 23,
+    "top": [
+     "Attack 5 [diamond] {consume earth {\"Create two 1-hex obstacle tiles in empty hexes adjacent to the target but not adjacent to you. All allies and enemies adjacent to at least one created tile suffer Damage 1, Experience 1.\"}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"Create 1-hex obstacle tiles in an adjacent empty hex.\"",
+     "\"Destroy any number of obstacles within Range 3. For each obstacle destroyed, give Ward to one ally adjacent to the hex that obstacle occupied.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99143_Cragheart2_Entomb.yml",
+    "Level": "8",
+    "Initiative": "86",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 5\n                    Enhancements: 1\n        Consumes:\n            TCEarth:\n                Elements: Earth\n                Abilities:\n                    TCEarthObstacle:\n                        ParentName: TAttack\n                        Create: RockSingle\n                        TileFilter: EmptyHex\n                        Range: 3\n                        Target: 2\n                        SpawnDelay: 2.9\n                        AnimOverload: CreateObstacle\n                        MultiPassAttack: False\n                        # Filter:\n                        #     TargetAdjacentToCaster: False\n                        SubAbilities:\n                            TCreateSubDamage:\n                                Damage: 1\n                                Range: 1\n                                Target: -1\n                                Filter: [Enemy, Ally]\n                XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "wave of destruction",
+   "level": "9",
+   "initiative": "74",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\wave-of-destruction.jpeg",
+   "ghs": {
+    "name": "Wave of Destruction",
+    "number": 144,
+    "level": 9,
+    "initiative": 74,
+    "top": [
+     "(Attack 1; area (0,0,active)|(0,1,target)|(1,0,target)|(1,1,target)|(2,1,target)|(2,2,target)|(3,2,target)|(3,3,target)|(4,2,target)|(4,3,target)|(5,3,enhance)|(5,4,enhance) [hex/hex]; \"For each target, add +XAttack, where X is the Range to the target.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(Move 5 [circle]; \"You may enter hexes containing obstacles with this movement. When you do, destroy the obstacle.\")",
+     "\"Add +XAttack to your next attack this turn, where X is twice the number of obstacles destroyed with the move ability.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99144_Cragheart2_Wave of Destruction.yml",
+    "Level": "9",
+    "Initiative": "73",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 1\n                StatIsBasedOnX:\n                    Strength:\n                        BasedOn: TargetDistanceRangeDiff\n                        AddTo: True\n                AreaEffect: \"0,0,G|1,1,R|2,0,R|3,1,R|4,2,R|5,1,R|6,2,R|7,3,R|8,2,R|9,3,R|10,4,E|11,3,E\"\n                MultiPassAttack: False\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 5\n                    Enhancements: 1\n                    Jump: True\n            # BDestroyObstacleAttack:\n            #     MergedDestroyObstacleAttack:\n            #         Abilities:\n            #             BDestroyObstacle:\n            #                 DestroyObstacle:\n            #                 Target: -1\n            #                 AllTargetsOnMovePath: True\n            #                 SpawnDelay: 0.2\n            #                 SkipAnim: True\n            #             BAttackBuff:\n            #                 Attack: 0\n            #                 Filter: Self\n            #                 ActiveBonus:\n            #                     Duration: Round\n            #                     Behaviour: BuffAttack\n            #                     AbilityData:\n            #                         StatIsBasedOnX:\n            #                             Strength:\n            #                                 BasedOn: ObstaclesToBeDestroyedByMergedAbility\n            #                                 Multiplier: 2\n            #                     SpawnDelay: 2.16\n            #                 AttackEffect:\n            #                     Type: BuffIfCanPerformSubAbility\n            #                     AttackType: Melee\n            #                     Strength: 0\n# Layout:\n#     Top:\n#         - Row: \"<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@\" \n#     Bottom:\n#         - Row: \"<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@\""
+   }
+  },
+  {
+   "name": "earth's embrace",
+   "level": "9",
+   "initiative": "52",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\earths-embrace.jpeg",
+   "ghs": {
+    "name": "Earth's Embrace",
+    "number": 145,
+    "level": 9,
+    "initiative": 52,
+    "top": [
+     "(Attack 3 {target: enemiesAdjacent; Push 2}; \"You may push the targets into hexes containing obstacles. In each case, destroy the obstacle, the target suffers Damage 2, and you gain Experience 1.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(\"At the end of each of your turns, perform:\"; Heal X {target: self}; \"where X is the number of adjacent obstacles.\")"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ]
+   },
+   "xipe": {
+    "file": "99145_Cragheart2_Earth's Embrace.yml",
+    "Level": "9",
+    "Initiative": "52",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Target: -1\n                Range: 1\n                SubAbilities:\n                    TAttackSubPush:\n                        Push:\n                            Amount: 2\n                            Enhancements: 1\n                        IsInlineSubAbility: True\n                        AdditionalPushEffect: IntoObstacles\n                        AdditionalPushEffectDamage: 2\n                        AdditionalPushEffectXP: 1\n    Bottom:\n        Abilities:\n            BHeal:\n                Heal: 0\n                Filter: Self\n                StatIsBasedOnX:\n                    Strength:\n                        BasedOn: ObstaclesDestroyedThisTurn\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: EndTurnAbility\n        XP: 2"
+   }
+  }
+ ],
+ "unmatched_ghs": [],
+ "unmatched_xipe": []
+}

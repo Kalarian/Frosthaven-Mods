@@ -1,0 +1,1055 @@
+{
+ "class": "Doomstalker",
+ "code": "DS2",
+ "model_from": "Doomstalker",
+ "ghs_file": "angry-face",
+ "xipe_class": null,
+ "character": {
+  "name": "angry-face",
+  "characterClass": "orchid",
+  "gender": "m",
+  "icon": "gh-angry-face",
+  "edition": "gh2e",
+  "handSize": 11,
+  "unlockEvent": "city:C-74|city:C-75",
+  "traits": [
+   "chaotic",
+   "intimidating",
+   "nimble"
+  ],
+  "color": "#69cde0",
+  "spoiler": true,
+  "stats": [
+   {
+    "level": 1,
+    "health": 8
+   },
+   {
+    "level": 2,
+    "health": 9
+   },
+   {
+    "level": 3,
+    "health": 11
+   },
+   {
+    "level": 4,
+    "health": 12
+   },
+   {
+    "level": 5,
+    "health": 14
+   },
+   {
+    "level": 6,
+    "health": 15
+   },
+   {
+    "level": 7,
+    "health": 17
+   },
+   {
+    "level": 8,
+    "health": 18
+   },
+   {
+    "level": 9,
+    "health": 20
+   }
+  ],
+  "availableSummons": [
+   {
+    "name": "green-snake",
+    "thumbnail": true,
+    "level": 1,
+    "health": 5,
+    "attack": 2,
+    "movement": 3,
+    "action": {
+     "type": "custom",
+     "value": "%data.custom.gh2e.angry-face.8%",
+     "small": true
+    }
+   },
+   {
+    "name": "vicious-jackal",
+    "thumbnail": true,
+    "level": 1,
+    "health": 4,
+    "attack": 2,
+    "movement": 3,
+    "action": {
+     "type": "retaliate",
+     "value": 1
+    },
+    "additionalAction": {
+     "type": "condition",
+     "value": "wound"
+    }
+   },
+   {
+    "name": "battle-boar",
+    "thumbnail": true,
+    "level": 1,
+    "health": 7,
+    "attack": 2,
+    "movement": 2,
+    "action": {
+     "type": "custom",
+     "value": "%data.custom.gh2e.angry-face.9%",
+     "small": true
+    }
+   },
+   {
+    "name": "staunch-garralev",
+    "thumbnail": true,
+    "level": 3,
+    "health": 8,
+    "attack": 2,
+    "movement": 2,
+    "action": {
+     "type": "pierce",
+     "value": 3
+    }
+   },
+   {
+    "name": "war-raptor",
+    "thumbnail": true,
+    "level": 5,
+    "health": 6,
+    "attack": 3,
+    "movement": 5,
+    "action": {
+     "type": "fly",
+     "value": ""
+    }
+   },
+   {
+    "name": "horned-hristek",
+    "thumbnail": true,
+    "level": 7,
+    "health": 7,
+    "attack": 2,
+    "movement": 3,
+    "action": {
+     "type": "custom",
+     "value": "%data.custom.gh2e.angry-face.10%",
+     "small": true
+    }
+   },
+   {
+    "name": "great-archinotl",
+    "thumbnail": true,
+    "level": 9,
+    "health": 8,
+    "attack": 3,
+    "movement": 4
+   }
+  ],
+  "perks": [
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus2"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.angry-face.1%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.angry-face.2%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus3"
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "condition",
+         "value": "stun"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "custom": "%game.custom.perks.ignoreScenario%",
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "rolling": true
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%data.custom.gh2e.angry-face.3%"
+   },
+   {
+    "type": "custom",
+    "count": 2,
+    "combined": true,
+    "custom": "%data.custom.gh2e.angry-face.4%"
+   },
+   {
+    "type": "custom",
+    "count": 2,
+    "combined": true,
+    "custom": "%data.custom.gh2e.angry-face.5%"
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.angry-face.6%",
+   "%data.custom.gh2e.angry-face.7%"
+  ]
+ },
+ "cards": [
+  {
+   "name": "rain of arrows",
+   "level": "1",
+   "initiative": "9",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\rain-of-arrows.jpeg",
+   "ghs": {
+    "name": "Rain of Arrows",
+    "number": 381,
+    "level": 1,
+    "initiative": 9,
+    "top": [
+     "\"On the next four deaths of an enemy that has data.action.custom.gh2e-doom while there os another enemy within Range 4 (of you) perform Attack 3 Range 4\"",
+     "(card: slotStartXp:1; card: slot; card: slotXpFh:1; card: slotEnd)"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent"
+    ],
+    "bottom": [
+     "\"Add Pierce 2 to all your attacks targeting this enemy.\""
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "race to the grave",
+   "level": "1",
+   "initiative": "75",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\race-to-the-grave.jpeg",
+   "ghs": {
+    "name": "Race to the Grave",
+    "number": 382,
+    "level": 1,
+    "initiative": 75,
+    "top": [
+     "Summon {\"name\":\"vicious-jackal\",\"edition\":\"gh2e\",\"health\":4,\"attack\":2,\"movement\":3,\"enhancements\":[\"heal\",\"attack\",\"move\"],\"action\":{\"type\":\"grid\",\"value\":1,\"subActions\":[{\"type\":\"retaliate\",\"value\":1},{\"type\":\"condition\",\"value\":\"wound\"}]}}"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "\"This enemy suffers Damage 1 at the start of each of its turns.\""
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "gut shot",
+   "level": "1",
+   "initiative": "21",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\gut-shot.jpeg",
+   "ghs": {
+    "name": "Gut Shot",
+    "number": 383,
+    "level": 1,
+    "initiative": 21,
+    "top": [
+     "(Attack 2 [diamond] {Range 4 [square]}; \"Add Wound and gain Experience 1 if the target has data.action.custom.gh2e-doom.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "detonation",
+   "level": "1",
+   "initiative": "8",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\detonation.jpeg",
+   "ghs": {
+    "name": "Detonation",
+    "number": 384,
+    "level": 1,
+    "initiative": 8,
+    "top": [
+     "Attack 4 [diamond] {Target 2 [square]; Range 4 [square]}"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "\"When this enemy dies, all enemies adjacent to the hex it occupied suffer Damage 2.\""
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "murderous stalker",
+   "level": "1",
+   "initiative": "13",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\murderous-stalker.jpeg",
+   "ghs": {
+    "name": "Murderous Stalker",
+    "number": 385,
+    "level": 1,
+    "initiative": 13,
+    "top": [
+     "(Attack 6 [diamond] {Range 5}; \"If this attack kills an enemy, gain Experience 1 and you may play any one card from your hand or discard pile to perform a data.action.custom.gh2e-doom action of the card.\")"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 3 [circle] {Jump}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "a moment's peace",
+   "level": "1",
+   "initiative": "88",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\a-moments-peace.jpeg",
+   "ghs": {
+    "name": "A Moment's Peace",
+    "number": 386,
+    "level": 1,
+    "initiative": 88,
+    "top": [
+     "Loot 1",
+     "\"Reveal the top card of one monster within Range 5's ability card deck.\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "Heal 2 {Target %data.custom.gh2e.angry-face.abilities.386.2%; Range 1}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "the hunt begins",
+   "level": "1",
+   "initiative": "20",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\the-hunt-begins.jpeg",
+   "ghs": {
+    "name": "The Hunt Begins",
+    "number": 387,
+    "level": 1,
+    "initiative": 20,
+    "top": [
+     "(Attack 2 [diamond] {Range 4 [square]}; \"Add Attack + 2 and gain Experience 1 if the target is undamaged.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Your summons add Attack + 1 to all their attacks targeting this enemy. Your summons focus on this enemy.\""
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "solid bow",
+   "level": "1",
+   "initiative": "54",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\solid-bow.jpeg",
+   "ghs": {
+    "name": "Solid Bow",
+    "number": 388,
+    "level": 1,
+    "initiative": 54,
+    "top": [
+     "Attack 3 [diamond] {Range 5}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Whenever you or one of your summons damaged this enemy, you may perform:\" {Heal 2 {Target %data.custom.gh2e.angry-face.abilities.388.2%}}"
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "foot snare",
+   "level": "1",
+   "initiative": "14",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\foot-snare.jpeg",
+   "ghs": {
+    "name": "Foot Snare",
+    "number": 389,
+    "level": 1,
+    "initiative": 14,
+    "top": [
+     "(Attack 2 [diamond] {Range 4 [square]}; \"Add Immobilize and gain Experience 1 if the target has data.action.custom.gh2e-doom.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Immobilize {Range 1}",
+     "Move 3 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "forward momentum",
+   "level": "1",
+   "initiative": "11",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\forward-momentum.jpeg",
+   "ghs": {
+    "name": "Forward Momentum",
+    "number": 390,
+    "level": 1,
+    "initiative": 11,
+    "top": [
+     "\"Whenever an enemy that has data.action.custom.gh2e-doom dies, instead of moving any data.action.custom.gh2e-doom on the target to your discard pile, you may discard this card to perform the data.action.custom.gh2e-doom actions of the cards, targeting an enemy within Range 3 of the hex where the enemy died.\""
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Move 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "hidden danger",
+   "level": "1",
+   "initiative": "72",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\hidden-danger.jpeg",
+   "ghs": {
+    "name": "Hidden Danger",
+    "number": 391,
+    "level": 1,
+    "initiative": 72,
+    "top": [
+     "(Summon {\"name\":\"green-snake\",\"edition\":\"gh2e\",\"health\":\"5\",\"attack\":\"2\",\"movement\":\"3\",\"count\":1,\"enhancements\":[\"heal\",\"move\",\"attack\"],\"action\":{\"type\":\"custom\",\"value\":\"%data.custom.gh2e.angry-face.abilities.391.1%\"}}; \"This summon is considered to be last in initiative order when determining monster focus.\")"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "\"Add Attack + 1 to all your attacks targeting this enemy.\""
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "give chase",
+   "level": "X",
+   "initiative": "80",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\give-chase.jpeg",
+   "ghs": {
+    "name": "Give Chase",
+    "number": 392,
+    "level": "X",
+    "initiative": 80,
+    "top": [
+     "\"Your summons add Move + 2 and Jump to all their move abilities. Your summons focus on this enemy.\""
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Move 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "feral aid",
+   "level": "X",
+   "initiative": "35",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\feral-aid.jpeg",
+   "ghs": {
+    "name": "Feral Aid",
+    "number": 393,
+    "level": "X",
+    "initiative": 35,
+    "top": [
+     "(Attack 3 [diamond] {Range 4 [square]}; \"Add Attack + 2 and gain Experience 1 if the target is adjacent to one of your summons.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Attack 2 [diamond] {Range 4}",
+     "\"Grant one of your summons:\" {(Attack 3; Attack 3; \"This attack must target the target of the Doomstalker's attack ability.\")}"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=2"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "fierce fighter",
+   "level": "X",
+   "initiative": "78",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\fierce-fighter.jpeg",
+   "ghs": {
+    "name": "Fierce Fighter",
+    "number": 394,
+    "level": "X",
+    "initiative": 78,
+    "top": [
+     "Summon {\"name\":\"battle-boar\",\"edition\":\"gh2e\",\"health\":\"7\",\"attack\":\"2\",\"movement\":\"2\",\"count\":1,\"enhancements\":[\"heal\",\"move\",\"attack\"],\"action\":{\"type\":\"custom\",\"value\":\"%data.custom.gh2e.angry-face.abilities.394.1%\",\"valueType\":\"fixed\"}}"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "\"Gain advantage on all your attacks this round.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "relentless offensive",
+   "level": "2",
+   "initiative": "63",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\relentless-offensive.jpeg",
+   "ghs": {
+    "name": "Relentless Offensive",
+    "number": 395,
+    "level": 2,
+    "initiative": 63,
+    "top": [
+     "Attack 2 [square] {Range 4 [square]}",
+     "\"Grant one of your summons:\" {(Attack +0; \"This attack ability must target the target of the Doomstalker's attack ability.\")}"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "(\"Grant one of your summons:\"; Move +0; Attack +0; Move +0; Attack +0)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=2"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "dual shot",
+   "level": "2",
+   "initiative": "52",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\dual-shot.jpeg",
+   "ghs": {
+    "name": "Dual Shot",
+    "number": 396,
+    "level": 2,
+    "initiative": 52,
+    "top": [
+     "Attack 2 [square] {Target 2 [square]; Range 5}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Gain advantage on all your attacks targeting this enemy. When this enemy dies, shuffle one Curse card into the monster attack modifier deck.\""
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "walking bastion",
+   "level": "3",
+   "initiative": "90",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\walking-bastion.jpeg",
+   "ghs": {
+    "name": "Walking Bastion",
+    "number": 397,
+    "level": 3,
+    "initiative": 90,
+    "top": [
+     "(Summon {\"name\":\"staunch-garralev\",\"edition\":\"gh2e\",\"health\":8,\"attack\":2,\"movement\":2,\"enhancements\":[\"heal\",\"attack\",\"move\"],\"action\":{\"type\":\"pierce\",\"value\":3,\"valueType\":\"fixed\"}}; \"When you summon this summon, it gains Ward. Whenever you long rest, this summon gains Ward.\")"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "\"Your summons focus on this enemy. After one of your summons perform an attack targeting this enemy, triggering no more than once each round, grant that summon:\" {(Attack 1 {Pierce 2}; \"This attack must target the enemy that has data.action.custom.gh2e-doom.\")}"
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "swift trickery",
+   "level": "3",
+   "initiative": "10",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\swift-trickery.jpeg",
+   "ghs": {
+    "name": "Swift Trickery",
+    "number": 398,
+    "level": 3,
+    "initiative": 10,
+    "top": [
+     "Attack 2 [diamond] {Range 4 [square]}",
+     "\"Add Attack + 2 and gain Experience 1 if the target has data.action.custom.gh2e-doom.\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 5 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "camouflage",
+   "level": "4",
+   "initiative": "6",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\camouflage.jpeg",
+   "ghs": {
+    "name": "Camouflage",
+    "number": 399,
+    "level": 4,
+    "initiative": 6,
+    "top": [
+     "Attack 2 [diamond] {Range 4 [square]}",
+     "\"If you are adjacent to a wall but not occupying a corridor tile, gain data.condition.invisible. At the end of the round, lose data.condition.invisible.\""
+    ],
+    "top_flags": [
+     "round"
+    ],
+    "bottom": [
+     "Move 4 [circle]",
+     "\"All attacks targeting any summons adjacent to you this round gain disadvantage.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "coated arrows",
+   "level": "4",
+   "initiative": "25",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\coated-arrows.jpeg",
+   "ghs": {
+    "name": "Coated Arrows",
+    "number": 400,
+    "level": 4,
+    "initiative": 25,
+    "top": [
+     "\"On your next four ranged attacks, add Poison, then Wound, then Immobilize, then Disarm (one to each attack).\"",
+     "(card: slotStart; card: slot; card: slot; card: slotEndXp:1)"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "\"Add Attack + 2 to all your attacks targeting enemies that have data.action.custom.gh2e-doom this round.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "felling swoop",
+   "level": "5",
+   "initiative": "93",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\felling-swoop.jpeg",
+   "ghs": {
+    "name": "Falling Swoop",
+    "number": 401,
+    "level": 5,
+    "initiative": 93,
+    "top": [
+     "Summon {\"name\":\"war-raptor\",\"edition\":\"gh2e\",\"health\":6,\"attack\":3,\"movement\":5,\"enhancements\":[\"heal\",\"attack\",\"move\"],\"action\":{\"type\":\"fly\"}}"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 5 [circle] {Jump}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null,
+   "matched_by_spelling": [
+    "ghs:fallingswoop"
+   ]
+  },
+  {
+   "name": "expose",
+   "level": "5",
+   "initiative": "31",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\expose.jpeg",
+   "ghs": {
+    "name": "Expose",
+    "number": 402,
+    "level": 5,
+    "initiative": 31,
+    "top": [
+     "\"Gain advantage on your first attack targeting an enemy that has data.action.custom.gh2e-doom each turn.\"",
+     "\"All enemies lose Invisible and may no longer gain Invisible.\""
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "\"Your summons add Wound to and gain advantage on all their attacks targeting this enemy.\""
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "wild command",
+   "level": "6",
+   "initiative": "46",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\wild-command.jpeg",
+   "ghs": {
+    "name": "Wild Command",
+    "number": 403,
+    "level": 6,
+    "initiative": 46,
+    "top": [
+     "\"Grant one of your summons:\" {(Move +1; Attack +1)}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "Attack 2 {Target %data.custom.gh2e.angry-face.abilities.403.2%}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "impending end",
+   "level": "6",
+   "initiative": "47",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\impending-end.jpeg",
+   "ghs": {
+    "name": "Impending End",
+    "number": 404,
+    "level": 6,
+    "initiative": 47,
+    "top": [
+     "Attack 4 [diamond] {Range 5}",
+     "\"If this attack kills the target, instead of moving any data.action.custom.gh2e-doom on the target to your discard pile, you may perform the data.action.custom.gh2e-doom actions of the cards, targeting an enemy within Range 3 of the hex where the enemy died.\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Add Immobilize to your first attack targeting this enemy and add Attack + 2 to your second and third attacks targeting this enemy.\"",
+     "(card: slotStart; card: slot; card: slotEndXp:1)"
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "charging beast",
+   "level": "7",
+   "initiative": "82",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\charging-beast.jpeg",
+   "ghs": {
+    "name": "Charging Beast",
+    "number": 405,
+    "level": 7,
+    "initiative": 82,
+    "top": [
+     "(Summon {\"name\":\"horned-hristek\",\"edition\":\"gh2e\",\"health\":7,\"attack\":2,\"movement\":3,\"enhancements\":[\"heal\",\"attack\"],\"action\":{\"type\":\"custom\",\"value\":\"%data.custom.gh2e.angry-face.abilities.405.1%\",\"valueType\":\"fixed\",\"small\":true}}; \"Whenever this summon kills an enemy, grant it:\"; Move +0)"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "\"Your summons focus on this enemy. When this enemy dies, you an all allies may perform:\" {Heal 3 {target: self}}"
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "darkened skies",
+   "level": "7",
+   "initiative": "36",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\darkened-skies.jpeg",
+   "ghs": {
+    "name": "Darkened Skies",
+    "number": 406,
+    "level": 7,
+    "initiative": 36,
+    "top": [
+     "(Attack 3 {target: all; Range 4}; \"Gain Experience 1 for each two enemies targeted.\")"
+    ],
+    "top_flags": [
+     "lost",
+     "loss"
+    ],
+    "bottom": [
+     "\"When this enemy dies, you may perform:\" {Attack 2 {Target 3; Range 3}}"
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "feral instincts",
+   "level": "8",
+   "initiative": "17",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\feral-instincts.jpeg",
+   "ghs": {
+    "name": "Feral Instincts",
+    "number": 407,
+    "level": 8,
+    "initiative": 17,
+    "top": [
+     "Attack 3 [diamond] {Range 5}",
+     "(\"Grant one of your summons:\"; Move +0; \"This movement must end in a hex adjacent to an enemy that has data.action.custom.gh2e-doom.\"; Attack +0; \"This attack must target an enemy that has data.action.custom.gh2e-doom.\")"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 4 [circle]",
+     "Heal 4 {Target %data.custom.gh2e.angry-face.abilities.407.4%; Range 1}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "press the attack",
+   "level": "8",
+   "initiative": "22",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\press-the-attack.jpeg",
+   "ghs": {
+    "name": "Press the Attack",
+    "number": 408,
+    "level": 8,
+    "initiative": 22,
+    "top": [
+     "(Attack 3 [diamond] {Range 4 [square]}; \"Add Attack + 3 and gain Experience 1 if the target has data.action.custom.gh2e-doom.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Attack 3 [diamond] {Range 4; Poison}",
+     "Move 4 {Jump}",
+     "Attack 3 [diamond] {Range 4; Immobilize}",
+     "Move 4 [circle] {Jump}",
+     "Attack 3 {Range 4; Wound}"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=2"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "predator and prey",
+   "level": "9",
+   "initiative": "86",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\predator-and-prey.jpeg",
+   "ghs": {
+    "name": "Predator and Prey",
+    "number": 409,
+    "level": 9,
+    "initiative": 86,
+    "top": [
+     "(Summon {\"name\":\"great-archinotl\",\"edition\":\"gh2e\",\"health\":8,\"attack\":3,\"movement\":4,\"enhancements\":[\"heal\",\"attack\",\"move\"]}; \"At initiative 100 each round, this summon performs an additional turn.\")"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "\"Add +X Attack to all your attacks targeting this enemy, where X is the difference between the Range of the attack and the number of hexes to the enemy.\""
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "heart of doom",
+   "level": "9",
+   "initiative": "40",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\heart-of-doom.jpeg",
+   "ghs": {
+    "name": "Heart of Doom",
+    "number": 410,
+    "level": 9,
+    "initiative": 40,
+    "top": [
+     "\"You may immediately play a card from your hand to perform a data.action.custom.gh2e-doom action of the card.\"",
+     "Attack 3 {Target %data.custom.gh2e.angry-face.abilities.410.2%}",
+     "Attack 3 [diamond] {Range 5}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"You may have any number of data.action.custom.gh2e-doom active on the same target. If you discard this card, you must discard all but one active data.action.custom.gh2e-doom.\"",
+     "\"You may play one card from your hand or discard pile to perform a data.action.custom.gh2e-doom action of the card.\""
+    ],
+    "bottom_flags": [
+     "persistent"
+    ]
+   },
+   "xipe": null
+  }
+ ],
+ "unmatched_ghs": [],
+ "unmatched_xipe": []
+}

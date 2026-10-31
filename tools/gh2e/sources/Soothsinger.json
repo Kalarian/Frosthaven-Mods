@@ -1,0 +1,977 @@
+{
+ "class": "Soothsinger",
+ "code": "SS2",
+ "model_from": "Soothsinger",
+ "ghs_file": "music-note",
+ "xipe_class": null,
+ "character": {
+  "name": "music-note",
+  "characterClass": "quatryl",
+  "icon": "gh-music-note",
+  "edition": "gh2e",
+  "tokens": [
+   "high-note",
+   "low-note"
+  ],
+  "handSize": 11,
+  "unlockEvent": "road:R-49|city:C-80",
+  "traits": [
+   "educated",
+   "nimble",
+   "persuasive"
+  ],
+  "color": "#e3726b",
+  "spoiler": true,
+  "stats": [
+   {
+    "level": 1,
+    "health": 6
+   },
+   {
+    "level": 2,
+    "health": 7
+   },
+   {
+    "level": 3,
+    "health": 8
+   },
+   {
+    "level": 4,
+    "health": 9
+   },
+   {
+    "level": 5,
+    "health": 10
+   },
+   {
+    "level": 6,
+    "health": 11
+   },
+   {
+    "level": 7,
+    "health": 12
+   },
+   {
+    "level": 8,
+    "health": 13
+   },
+   {
+    "level": 9,
+    "health": 14
+   }
+  ],
+  "availableSummons": [],
+  "perks": [
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus2"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus2",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "bless",
+         "effects": [
+          {
+           "type": "specialTarget",
+           "value": "%game.action.target:2%"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.music-note.1%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "stun"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "strengthen",
+         "effects": [
+          {
+           "type": "specialTarget",
+           "value": "allyShort"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "replaceCount": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     },
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus2"
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.music-note.2%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "cards": [
+     {
+      "count": 3,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "condition",
+         "value": "curse"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%data.custom.gh2e.music-note.3%"
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%data.custom.gh2e.music-note.4%"
+   },
+   {
+    "type": "custom",
+    "count": 2,
+    "combined": true,
+    "custom": "%data.custom.gh2e.music-note.5%"
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.music-note.6%",
+   "%data.custom.gh2e.music-note.7%"
+  ]
+ },
+ "cards": [
+  {
+   "name": "mobilizing measure",
+   "level": "1",
+   "initiative": "8",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\mobilizing-measure.jpeg",
+   "ghs": {
+    "name": "Mobilizing Measure",
+    "number": 351,
+    "level": 1,
+    "initiative": 8,
+    "top": [
+     "(\"At the end of each of your turns, grant the ally closest to you:\"; Move 2; (card: slotStartXp:1; card: slot; card: slot; card: slotEnd))"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Move 3 [circle] {Jump}",
+     "\"Grant one adjacent ally:\" {Retaliate 1 [square]}"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "bewildering instrumental",
+   "level": "1",
+   "initiative": "11",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\bewildering-instrumental.jpeg",
+   "ghs": {
+    "name": "Bewildering Instrumental",
+    "number": 352,
+    "level": 1,
+    "initiative": 11,
+    "top": [
+     "(\"At the end of each of your turns, the enemy with the highest current hit point value suffers Damage 1 and gains Muddle.\"; (card: slotStartXp:1; card: slot; card: slot; card: slotEnd))"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"Grant one adjacent ally:\" {Shield 1}"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "wearying chant",
+   "level": "1",
+   "initiative": "19 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\wearying-chant.jpeg",
+   "ghs": {
+    "name": "Wearying Chant",
+    "number": 353,
+    "level": 1,
+    "initiative": 19,
+    "top": [
+     "(\"At the end of each of your turns, the closest enemy to you that does not have Disarm or Stun gains Disarm.\"; (card: slotStartXp:1; card: slotEnd))"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Heal 2 [square] {Range 3 [square]}",
+     "(\"Customaction gh2e-low-note\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "power ballad",
+   "level": "1",
+   "initiative": "12 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\power-ballad.jpeg",
+   "ghs": {
+    "name": "Power Ballad",
+    "number": 354,
+    "level": 1,
+    "initiative": 12,
+    "top": [
+     "(\"You and each ally add Attack + 1 to your first attack each turn.\"; (card: slotStartXp:1; card: slot; card: slotEndXp:1))"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Move 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "dissonant rhythm",
+   "level": "1",
+   "initiative": "14 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\dissonant-rhythm.jpeg",
+   "ghs": {
+    "name": "Dissonant Rhythm",
+    "number": 355,
+    "level": 1,
+    "initiative": 14,
+    "top": [
+     "(\"At the end of each of your turns, perform:\"; Attack 2 {Target %data.custom.gh2e.music-note.abilities.355.2%; Push 2; Pierce 2}; (card: slotStartXp:1; card: slot; card: slotEndXp:1))"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Muddle {Target 3 [square]; Range 3 [square]}",
+     "(\"Customaction gh2e-high-note\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "increase cadence",
+   "level": "1",
+   "initiative": "32 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\increase-cadence.jpeg",
+   "ghs": {
+    "name": "Increase Cadence",
+    "number": 356,
+    "level": 1,
+    "initiative": 32,
+    "top": [
+     "(Attack 2 [square] {Range 4; Muddle})",
+     "(\"Customaction gh2e-high-note\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"At the end of this an your next five turns, gain one Note of your choice in addition to any other Note gained.\"",
+     "(card: slotStartXp:1; card: slot; card: slotXpFh:1; card: slot; card: slotXpFh:1; card: slotEnd)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "intensifying amplitude",
+   "level": "1",
+   "initiative": "56 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\intensifying-amplitude.jpeg",
+   "ghs": {
+    "name": "Intensifying Amplitude",
+    "number": 357,
+    "level": 1,
+    "initiative": 56,
+    "top": [
+     "Attack 1 [square] {Range 3; Wound}",
+     "(\"Customaction gh2e-low-note\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"On your allies' next five attacks, add +XAttack where X is the number of use slots the character token has passed (0, 1, 2, 3, 4).\"",
+     "(card: slotStart; card: slotXpFh:1; card: slot; card: slotXpFh:1; card: slotEnd)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "marching beat",
+   "level": "1",
+   "initiative": "21 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\marching-beat.jpeg",
+   "ghs": {
+    "name": "Marching Beat",
+    "number": 358,
+    "level": 1,
+    "initiative": 21,
+    "top": [
+     "Strengthen [diamond_plus] {Target 2 [square]; Range 3 [square]}",
+     "(\"Customaction gh2e-high-note\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Grant one ally within Range 3 Square :\" [square] {Move 4 [square]}",
+     "(\"Customaction gh2e-low-note\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "tuning the outcome",
+   "level": "1",
+   "initiative": "44 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\tuning-the-outcome.jpeg",
+   "ghs": {
+    "name": "Tuning the Outcome",
+    "number": 359,
+    "level": 1,
+    "initiative": 44,
+    "top": [
+     "Bless [diamond_plus] {Target 2 [square]; Range 3 [square]}",
+     "(\"Customaction gh2e-low-note\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Curse {Range 3 [square]}",
+     "(\"Customaction gh2e-high-note\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "call to action",
+   "level": "1",
+   "initiative": "27 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\call-to-action.jpeg",
+   "ghs": {
+    "name": "Call to Action",
+    "number": 360,
+    "level": 1,
+    "initiative": 27,
+    "top": [
+     "\"Grant one ally within Range 3 Square :\" [square] {Move 3 [square]; Attack 2 [diamond]}",
+     "(\"Customaction gh2e-low-note\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "singing arrow",
+   "level": "1",
+   "initiative": "85 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\singing-arrow.jpeg",
+   "ghs": {
+    "name": "Singing Arrow",
+    "number": 361,
+    "level": 1,
+    "initiative": 85,
+    "top": [
+     "Attack 2 [square] {Range 3; Curse}",
+     "(\"Customaction gh2e-high-note\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Grant one ally within Range 3 Square :\" [diamond] {Attack 2 [diamond] {Range 3 [square]}}",
+     "(\"Customaction gh2e-low-note\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "defensive ditty",
+   "level": "X",
+   "initiative": "9 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\defensive-ditty.jpeg",
+   "ghs": {
+    "name": "Defensive Ditty",
+    "number": 362,
+    "level": "X",
+    "initiative": 9,
+    "top": [
+     "(\"You and all allies gain Shield 1.\"; (card: slotStartXp:1; card: slotEnd))"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Move 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "echoing aria",
+   "level": "X",
+   "initiative": "5 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\echoing-aria.jpeg",
+   "ghs": {
+    "name": "Echoing Aria",
+    "number": 363,
+    "level": "X",
+    "initiative": 5,
+    "top": [
+     "(\"You and all allies gain Retaliate 1 Range 2.\"; (card: slotStartXp:1; card: slot; card: slot; card: slotEnd))"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Attack 1 [square] {Range 4}",
+     "Loot 1",
+     "(\"Customaction gh2e-high-note\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "provoke terror",
+   "level": "X",
+   "initiative": "89 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\provoke-terror.jpeg",
+   "ghs": {
+    "name": "Provoke Terror",
+    "number": 364,
+    "level": "X",
+    "initiative": 89,
+    "top": [
+     "Push 2 [square] {area (0,0,enhance)|(0,1,target)|(1,0,target)|(1,1,target)|(2,0,target)|(2,1,enhance) [hex/hex]; Range 4; Stun}",
+     "(\"Customaction gh2e-low-note\")"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "onward to battle",
+   "level": "2",
+   "initiative": "91 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\onward-to-battle.jpeg",
+   "ghs": {
+    "name": "Onward to Battle",
+    "number": 365,
+    "level": 2,
+    "initiative": 91,
+    "top": [
+     "\"Grant one ally within Range 3 Square :\" [square] {Attack 4 [diamond]}",
+     "(\"Customaction gh2e-high-note\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 5 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "soothing lullaby",
+   "level": "2",
+   "initiative": "20 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\soothing-lullaby.jpeg",
+   "ghs": {
+    "name": "Soothing Lullaby",
+    "number": 366,
+    "level": 2,
+    "initiative": 20,
+    "top": [
+     "\"At the end of each of your turns, perform:\" {Heal 1 {target: all}; (card: slotStartXp:1; card: slot; card: slotEnd)}"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "\"Place your character token on a monster within Range 3. At the end of that enemy's turn this round, remove your character token and that enemy gains Disarm.\"",
+     "(\"Customaction gh2e-low-note\")"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "symphonic medley",
+   "level": "3",
+   "initiative": "62 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\symphonic-medley.jpeg",
+   "ghs": {
+    "name": "Symphonic Medley",
+    "number": 367,
+    "level": 3,
+    "initiative": 62,
+    "top": [
+     "Move 2 [circle]",
+     "Attack 3 {Range 2 [square]}",
+     "(\"Customaction gh2e-low-note\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"You may immediately play up to three cards from your hand to perform one 1-Note data.customAction:gh2e-song action, one 2-Note data.customAction:gh2e-song action, and one 3-Note data.customAction:gh2e-song action, ignoring the Note requirements of those actions.\"",
+     "(\"Customaction gh2e-low-note\")"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=1",
+     "loss"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "ode to the gambler",
+   "level": "3",
+   "initiative": "15 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\ode-to-the-gambler.jpeg",
+   "ghs": {
+    "name": "Ode to the Gambler",
+    "number": 368,
+    "level": 3,
+    "initiative": 15,
+    "top": [
+     "(\"You and each ally may individually choose (after revealing the card) to treat the first attack modifier card drawn each turn as Rolling.\"; (card: slotStartXp:1; card: slot; card: slot; card: slotEnd))"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Move 5 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "hymn of the oak",
+   "level": "4",
+   "initiative": "10 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\hymn-of-the-oak.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "alluring serenade",
+   "level": "4",
+   "initiative": "24 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\alluring-serenade.jpeg",
+   "ghs": {
+    "name": "Alluring Serenade",
+    "number": 370,
+    "level": 4,
+    "initiative": 24,
+    "top": [
+     "\"At the end of each of your turns, perform:\" {Pull 3 {Range 5; Curse}; (card: slotStartXp:1; card: slot; card: slotEnd)}"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Heal 3 [square] {Range 4; Pull 3}",
+     "(\"Customaction gh2e-high-note\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "change tempo",
+   "level": "5",
+   "initiative": "25 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\change-tempo.jpeg",
+   "ghs": {
+    "name": "Change Tempo",
+    "number": 371,
+    "level": 5,
+    "initiative": 25,
+    "top": [
+     "((Immobilize; Muddle {Range 4}); area (0,1,target)|(1,0,target)|(1,1,target)|(2,0,enhance) [hex])",
+     "\"Customaction gh2e-high-note\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Curse [diamond] {Range 4}",
+     "Bless [diamond_plus] {Range 4}",
+     "(\"Customaction gh2e-low-note\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "thrilling solo",
+   "level": "5",
+   "initiative": "60 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\thrilling-solo.jpeg",
+   "ghs": {
+    "name": "Thrilling Solo",
+    "number": 372,
+    "level": 5,
+    "initiative": 60,
+    "top": [
+     "\"Immediately after you perform your first attack ability from your ability cards each round, you may repeat that attack ability, adding Attack + 1 (you may choose a new target).\" {(card: slotStartXp:1; card: slot; card: slotXpFh:1; card: slotEnd)}"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Move 4 [circle]",
+     "(\"Customaction gh2e-low-note\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "pull the strings",
+   "level": "6",
+   "initiative": "34 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\pull-the-strings.jpeg",
+   "ghs": {
+    "name": "Pull the Strings",
+    "number": 373,
+    "level": 6,
+    "initiative": 34,
+    "top": [
+     "Attack 2 [diamond] {Range 4}",
+     "\"Control the target of the attach ability:\" {Move 2 [square]}",
+     "\"Customaction gh2e-high-note\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Control one enemy within Range 5:\" {Attack +0}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "disorienting dirge",
+   "level": "6",
+   "initiative": "13 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\disorienting-dirge.jpeg",
+   "ghs": {
+    "name": "Disorienting Dirge",
+    "number": 374,
+    "level": 6,
+    "initiative": 13,
+    "top": [
+     "\"All enemies gain disadvantage on all their attacks.\" {(card: slotStartXp:1; card: slot; card: slotEnd)}"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Move 2 [circle]",
+     "\"Negate the next Damage an ally within Range 2 would suffer this round.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "inspiring anthem",
+   "level": "7",
+   "initiative": "50 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\inspiring-anthem.jpeg",
+   "ghs": {
+    "name": "Inspiring Anthem",
+    "number": 375,
+    "level": 7,
+    "initiative": 50,
+    "top": [
+     "(\"Grant one ally:\"; Move 5 [square] {Jump}; Strengthen [diamond_plus] {target: self})",
+     "(\"Customaction gh2e-low-note\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Grant one ally:\" {Attack 5 [diamond]}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "wistful wounding",
+   "level": "7",
+   "initiative": "6 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\wistful-wounding.jpeg",
+   "ghs": {
+    "name": "Wistful Wounding",
+    "number": 376,
+    "level": 7,
+    "initiative": 6,
+    "top": [
+     "\"You and each ally add Wound to your first attack each turn.\" {(card: slotStartXp:1; card: slotEnd)}"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "\"Grant one ally within Range 3 Square :\" [square] {Retaliate 2 [square] {Range 2}}",
+     "(\"Customaction gh2e-high-note\")"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "commanding presence",
+   "level": "8",
+   "initiative": "65 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\commanding-presence.jpeg",
+   "ghs": {
+    "name": "Commanding Presence",
+    "number": 377,
+    "level": 8,
+    "initiative": 65,
+    "top": [
+     "(\"Grant one ally within Range 3 Square :\" [square]; Attack 3 {target: enemiesAdjacent})",
+     "(\"Customaction gh2e-high-note\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 6 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "toughening trill",
+   "level": "8",
+   "initiative": "78 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\toughening-trill.jpeg",
+   "ghs": {
+    "name": "Toughening Trill",
+    "number": 378,
+    "level": 8,
+    "initiative": 78,
+    "top": [
+     "\"You and all allies gain Shield 1 and Retaliate 1 Range 2.\" {(card: slotStartXp:1; card: slot; card: slot; card: slotEnd)}"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "Attack 2 [square] {Range 3}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "grand finale",
+   "level": "9",
+   "initiative": "46 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\grand-finale.jpeg",
+   "ghs": {
+    "name": "Grand Finale",
+    "number": 379,
+    "level": 9,
+    "initiative": 46,
+    "top": [
+     "Move 4 [circle] {Jump}",
+     "\"Control all enemies moved through with the move ability:\" {Attack 3 [diamond]}",
+     "\"Gain one Note of your choice in addition to any other Note you gain this round.\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]",
+     "\"You may immediately play any number of cards from your hand and discard pile to perform data.customAction:gh2e-song actions of the cards, ignoring all Note requirements. Skip moving your character token on active data.customAction:gh2e-song this round.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "round",
+     "loss"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "captivating performance",
+   "level": "9",
+   "initiative": "71 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\captivating-performance.jpeg",
+   "ghs": {
+    "name": "Captivating Performance",
+    "number": 380,
+    "level": 9,
+    "initiative": 71,
+    "top": [
+     "\"At the end of each of your turns, perform:\" {((Disarm {Range 3}; area (0,1,target)|(1,0,target)|(1,1,target)); (card: slotStartXp:1; card: slotEndXp:1))}"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Move 4 [circle]",
+     "\"Move you character tokens on each of your active data.customAction:gh2e-song abilities backward one slot.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  }
+ ],
+ "unmatched_ghs": [
+  "hymntotheoak"
+ ],
+ "unmatched_xipe": []
+}

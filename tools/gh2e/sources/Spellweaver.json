@@ -1,0 +1,1076 @@
+{
+ "class": "Spellweaver",
+ "code": "SW2",
+ "model_from": "Spellweaver",
+ "ghs_file": "spellweaver",
+ "xipe_class": "Spellweaver2",
+ "character": {
+  "name": "spellweaver",
+  "characterClass": "orchid",
+  "gender": "f",
+  "icon": "gh-spellweaver",
+  "edition": "gh2e",
+  "handSize": 8,
+  "traits": [
+   "arcane",
+   "educated",
+   "resourceful"
+  ],
+  "color": "#b28ac2",
+  "stats": [
+   {
+    "level": 1,
+    "health": 6
+   },
+   {
+    "level": 2,
+    "health": 7
+   },
+   {
+    "level": 3,
+    "health": 8
+   },
+   {
+    "level": 4,
+    "health": 9
+   },
+   {
+    "level": 5,
+    "health": 10
+   },
+   {
+    "level": 6,
+    "health": 11
+   },
+   {
+    "level": 7,
+    "health": 12
+   },
+   {
+    "level": 8,
+    "health": 13
+   },
+   {
+    "level": 9,
+    "health": 14
+   }
+  ],
+  "availableSummons": [],
+  "perks": [
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus2"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "element",
+         "value": "wild"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.spellweaver.1%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "curse"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "stun"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus2",
+       "effects": [
+        {
+         "type": "elementHalf",
+         "value": "fire|ice"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "remove",
+    "count": 1,
+    "custom": "%game.custom.perks.ignoreScenario%",
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.spellweaver.2%",
+    "count": 1
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.spellweaver.3%",
+    "count": 1
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.spellweaver.4%",
+    "count": 2,
+    "combined": true
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.spellweaver.5%",
+   "%data.custom.gh2e.spellweaver.6%"
+  ]
+ },
+ "cards": [
+  {
+   "name": "reviving ether",
+   "level": "1",
+   "initiative": "80",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\reviving-ether.jpeg",
+   "ghs": {
+    "name": "Reviving Ether",
+    "number": 61,
+    "level": 1,
+    "initiative": 80,
+    "top": [
+     "\"Recover all cards in your lost pile.\"",
+     "(infuse wild)"
+    ],
+    "top_flags": [
+     "lost",
+     "loss"
+    ],
+    "bottom": [
+     "Move 4 [square] {Jump}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99061_Spellweaver2_Reviving Ether.yml",
+    "Level": "1",
+    "Initiative": "80",
+    "Discard": "[Permanently Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            BRecover:\n                RecoverLostCards: All\n        Infuse: Any\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Jump: True\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "fire orbs",
+   "level": "1",
+   "initiative": "69",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\fire-orbs.jpeg",
+   "ghs": {
+    "name": "Fire Orbs",
+    "number": 62,
+    "level": 1,
+    "initiative": 69,
+    "top": [
+     "Attack 3 [diamond] {Target 3 [square]; Range 3}",
+     "(infuse fire)"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 4 [square]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99062_Spellweaver2_Fire Orbs.yml",
+    "Level": "1",
+    "Initiative": "69",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Target:\n                    Amount: 3\n                    Enhancements: 1\n                MultiPassAttack: True\n                AnimOverload: SingleFireOrbs\n        Infuse: Fire\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "arcane bolt",
+   "level": "1",
+   "initiative": "70",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\arcane-bolt.jpeg",
+   "ghs": {
+    "name": "Arcane Bolt",
+    "number": 63,
+    "level": 1,
+    "initiative": 70,
+    "top": [
+     "Attack 3 [diamond] {Range 3 [square]; consume wild {(Attack +1; card: experience:1)}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Attack 4 [diamond] {Range 3; consume fire {(Attack +1; Pierce 3; card: experience:1)}}"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=1"
+    ]
+   },
+   "xipe": {
+    "file": "99063_Spellweaver2_Arcane Bolt.yml",
+    "Level": "1",
+    "Initiative": "70",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                AnimOverload: TargetedManaBolt\n        Consumes:\n            TCAny:\n                Elements: Any\n                AbilityOverrides:\n                    TCAnyAttackBuff:\n                        ParentName: TAttack\n                        Strength: 1\n                XP: 1\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                Range: 3\n        Consumes:\n            BCFire:\n                Elements: Fire\n                AbilityOverrides:\n                    BCAnyAttackBuff:\n                        ParentName: BAttack\n                        Strength: 1\n                        Pierce: 3\n                XP: 1\n        XP: 1"
+   }
+  },
+  {
+   "name": "flame strike",
+   "level": "1",
+   "initiative": "26",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\flame-strike.jpeg",
+   "ghs": {
+    "name": "Flame Strike",
+    "number": 64,
+    "level": 1,
+    "initiative": 26,
+    "top": [
+     "Strengthen [diamond_plus] {target: self}",
+     "Loot 1"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Attack 1 [square] {Range 3 [square]; consume fire {(Attack +1; Wound; card: experience:1)}}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99064_Spellweaver2_Flame Strike.yml",
+    "Level": "1",
+    "Initiative": "26",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TStrengthen:\n                Strengthen: True\n                Filter: Self\n            TLoot:\n                Loot: 1\n                Target: -1\n                AnimOverload: Loot\n\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack:\n                    Amount: 1\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n        Consumes:\n            BCFire:\n                Elements: Fire\n                AbilityOverrides:\n                    BCAnyAttackBuff:\n                        ParentName: BAttack\n                        Strength: 1\n                        Conditions: Wound\n                XP: 1"
+   }
+  },
+  {
+   "name": "icy blast",
+   "level": "1",
+   "initiative": "20",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\icy-blast.jpeg",
+   "ghs": {
+    "name": "Icy Blast",
+    "number": 65,
+    "level": 1,
+    "initiative": 20,
+    "top": [
+     "Attack 2 [square] {area (0,1,target)|(1,0,target)|(1,1,target)|(1,2,target)|(2,0,target)|(2,1,target)|(2,2,target); Range 3; consume ice {Attack +1; Muddle; card: experience:1}}"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 4 [square]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99065_Spellweaver2_Icy Blast.yml",
+    "Level": "1",
+    "Initiative": "20",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 3 \n                AreaEffect: \"0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,R|-1,-1,R|1,-1,R\"\n                AnimOverload: TargetedIcyBlast\n                MultiPassAttack: False\n        Consumes:\n            TCIce:\n                Elements: Ice\n                AbilityOverrides:\n                    TCAnyAttackBuff:\n                        ParentName: TAttack\n                        Strength: 1\n                        Conditions: Muddle\n                XP: 1\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "aid from the ether",
+   "level": "1",
+   "initiative": "36",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\aid-from-the-ether.jpeg",
+   "ghs": {
+    "name": "Aid from the Ether",
+    "number": 66,
+    "level": 1,
+    "initiative": 36,
+    "top": [
+     "Heal 3 [diamond_plus] {Range 3; consume wild {(Heal +1; card: experience:1)}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [square]",
+     "\"When you next perform an action with Lost this round, Wild.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99066_Spellweaver2_Aid from the Ether.yml",
+    "Level": "1",
+    "Initiative": "36",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            THeal:\n                Heal:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 3\n                Filter: [Self, Ally]\n        Consumes:\n            TCAny:\n                Elements: Any\n                AbilityOverrides:\n                    TCAnyAttackBuff:\n                        ParentName: THeal\n                        Strength: 1\n                XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            BAttack:\n                Attack: 2\n                ConditionalOverrides:\n                    TAttackFavoriteCO:\n                        Filter:\n                            TargetType: Enemy\n                            TargetAdjacentToWalls: \"> 0\"\n                        AbilityOverrides:\n                            COOverride1:\n                                SubAbilities:\n                                    BSubCreate:\n                                        Infuse: Any\n                                        #TreatAsNonSubability: True\n                                        IsInlineSubAbility: True\n                                        #Create: RockSingle\n#                                        Range: 1\n#                                        Target: 1\n#                                        SpawnDelay: 2.9\n#                                        AnimOverload: CreateObstacle\n#                                        MultiPassAttack: False\n#                                        IsInlineSubAbility: True\n#                                        AllTargetsAdjacentToParentTarget: True\n          \n           #Complains about Infuse                     \n       # Abilities:\n#            BMove:\n#                Move:\n#                    Amount: 3\n#                    Enhancements: 1\n#                ConditionalOverrides:\n#                    BMoveCO:\n#                        Requirement:\n#                            ActorsKilledThisRound: \"> 0\"\n#                        AbilityOverrides:\n#                            BBuff:\n#                                Infuse: Any\n                    \n        #Infuse: Any\n                #ConditionalOverrides:\n#                        BMoveCO:\n#                            Self: True\n#                            Requirement:\n#                                ActorsKilledThisRound: \"> 0\"\n#                            AbilityOverrides:\n#                                BBuff:\n#                                    Infuse: Fire"
+   }
+  },
+  {
+   "name": "frost strike",
+   "level": "1",
+   "initiative": "78",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\frost-strike.jpeg",
+   "ghs": {
+    "name": "Frost Strike",
+    "number": 67,
+    "level": 1,
+    "initiative": 78,
+    "top": [
+     "Attack 2 [square] {Range 3 [square]; consume ice {Stun; card: experience:1}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [square]",
+     "consume fire {(\"Gain advantage on all your attacks this round, Experience 1.\"; card: round)}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99067_Spellweaver2_Frost Strike.yml",
+    "Level": "1",
+    "Initiative": "78",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n        Consumes:\n            TCIce:\n                Elements: Ice\n                AbilityOverrides:\n                    TCIceStun:\n                        ParentName: TAttack\n                        Conditions: Stun\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BNull:\n                Null: True\n        Consumes: #460\n            BCFire:\n                Elements: Fire\n                Abilities:\n                    BCFireAdvantage:\n                        ParentName: BNull\n                        Advantage:\n                            Amount: 1\n                            DecrementTrigger: Rounds\n                        Filter: Self\n                        ActiveBonusDuration: Round"
+   }
+  },
+  {
+   "name": "emberfrost",
+   "level": "1",
+   "initiative": "7",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\emberfrost.jpeg",
+   "ghs": {
+    "name": "Emberfrost",
+    "number": 68,
+    "level": 1,
+    "initiative": 7,
+    "top": [
+     "Attack 2 [square] {Range 4; Pierce 1 [square]}",
+     "(infuse fire)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(\"Grant one ally within Range 3 Square:\" [square]; Shield 1)",
+     "(infuse ice)"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99068_Spellweaver2_Emberfrost.yml",
+    "Level": "1",
+    "Initiative": "07",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                    Pierce: 1\n                Range: 4\n        Infuse: Fire\n    Bottom:\n        Abilities:\n            BAlly:\n                ControlActor:\n                    Abilities:\n                        BAllyShield:\n                            Shield: 1\n                            StrengthIsBase: True\n                            Filter: Self\n                            ActiveBonusDuration: Round\n                            UseOriginalActor: True\n                            AnimOverload: TargetedBuff\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Filter: Ally\n        Infuse: Ice"
+   }
+  },
+  {
+   "name": "flameswell",
+   "level": "X",
+   "initiative": "83",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\flameswell.jpeg",
+   "ghs": {
+    "name": "Flameswell",
+    "number": 69,
+    "level": "X",
+    "initiative": 83,
+    "top": [
+     "\"On your next four single-target ranged attack abilities, add Attack + 2 to the attack.\"",
+     "(card: slotStart; card: slotXpFh:1; card: slot; card: slotEndXp:1)",
+     "(infuse fire)"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent"
+    ],
+    "bottom": [
+     "Heal 2 [square] {Range 3 [square]; consume ice {(Ward; card: experience:1)}}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99069_Spellweaver2_Flameswell.yml",
+    "Level": "X",
+    "Initiative": "83",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TActive:\n                Attack: 2\n                Filter: Self\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: BuffAttack\n                    AttackType: Ranged\n                    IsSingleTargetBonus: True\n                    XPTracker: [0,1,0,1]\n        Infuse: Fire\n    Bottom:\n        Abilities:\n            BHeal:\n                Heal:\n                    Amount: 2\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Filter: [Self, Ally]\n                AnimOverload: Heal\n        Consumes:\n            BCIce:\n                Elements: Ice\n                AbilityOverrides:\n                    BCIceShieldBuff:\n                        ParentName: BHeal\n                        SubAbilities:\n                            BCIceShield:\n                                Shield: 1\n                                ActiveBonusDuration: Round\n                                SkipAnim: True\n                XP: 1"
+   }
+  },
+  {
+   "name": "ice armor",
+   "level": "X",
+   "initiative": "25",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\ice-armor.jpeg",
+   "ghs": {
+    "name": "Ice Armor",
+    "number": 70,
+    "level": "X",
+    "initiative": 25,
+    "top": [
+     "\"Place a character token on one ally within Range 3. On the next three sources of 2 or more Damage they would suffer, negate the Damage.\"",
+     "(card: slotStartXp:1; card: slot; card: slotEndXp:1)",
+     "(infuse ice)"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent"
+    ],
+    "bottom": [
+     "\"On the next tree sources of 2 or more Damage you would suffer, negate the Damage.\"",
+     "(card: slotStartXp:1; card: slot; card: slotEndXp:1)",
+     "(infuse ice)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent"
+    ]
+   },
+   "xipe": {
+    "file": "99070_Spellweaver2_Ice Armor.yml",
+    "Level": "9 #X",
+    "Initiative": "25",
+    "Discard": "[Lost,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TPrevent:\n                Shield:\n                    Amount: 1\n                Filter:\n                    TargetType: Ally\n                    ActorType: Player\n                ActiveBonus:\n                    Duration: Persistent\n                    XPTracker: [1,0,1]\n                    Behaviour: ShieldIncomingAttacks\n                    ValidAbilityType: Attack\n#                    Behaviour: DuringActionAbilityOnDamaged\n                    GiveAbilityCardToActor: True\n                    ToggleIsOptional: True\n                AnimOverload: BuffAdjacent\n        #Abilities:\n#            TPrevent:\n#                PreventDamage: 3\n#                Range: 3\n#                #PreventOnlyIfLethal: True\n#                Filter:\n#                    TargetType: Ally\n#                    ActorType: Player\n#                ActiveBonus:\n#                    Duration: Persistent\n#                    XPTracker: [1,0,1]\n#                    #Need Behavior?\n#                    Behaviour: DuringActionAbilityOnDamaged\n#                    GiveAbilityCardToActor: True\n#                    #IsAura: True\n#                    #AuraFilter: [Ally]\n#                    #AuraTargeting: All\n#                    ToggleIsOptional: True\n#                AnimOverload: PowerUpFrost\n        Infuse: Ice\n    Bottom:\n        Abilities:\n            BPrevent:\n                PreventDamage: 3\n                ActiveBonus:\n                    Duration: Persistent\n                    XPTracker: [1,0,1]\n                AnimOverload: PowerUpFrost\n        Infuse: Ice"
+   }
+  },
+  {
+   "name": "impaling eruption",
+   "level": "X",
+   "initiative": "91",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\impaling-eruption.jpeg",
+   "ghs": {
+    "name": "Impaling Eruption",
+    "number": 71,
+    "level": "X",
+    "initiative": 91,
+    "top": [
+     "(Attack 3 [diamond] {Immobilize}; area (0,1,active)|(1,1,target)|(2,0,target)|(2,1,target)|(3,0,enhance)|(3,1,target)|(3,2,enhance)|(4,1,target)|(4,2,target)|(5,1,enhance) [hex/hex/hex])",
+     "(infuse earth)"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 4 [square]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99071_Spellweaver2_Impaling Eruption.yml",
+    "Level": "X",
+    "Initiative": "91",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Conditions: Immobilize\n                AreaEffect: \"0,0,G|2,0,R|4,0,R|6,0,R|8,0,R|10,0,E|3,1,R|5,1,E|5,-1,E|7,-1,R\"\n                AnimOverload: TargetedImpalingEruption\n                MultiPassAttack: False\n        Infuse: Earth\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "freezing nova",
+   "level": "2",
+   "initiative": "22",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\freezing-nova.jpeg",
+   "ghs": {
+    "name": "Freezing Nova",
+    "number": 72,
+    "level": 2,
+    "initiative": 22,
+    "top": [
+     "Attack 2 [diamond] {Target %data.custom.gh2e.spellweaver.abilities.72.1%; Immobilize}",
+     "(infuse ice)"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 4 [square]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99072_Spellweaver2_Freezing Nova.yml",
+    "Level": "2",
+    "Initiative": "22",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Target: 4\n                Range: 5\n                Conditions: Immobilize\n                AnimOverload: RadialFreezingNova\n                MultiPassAttack: False\n        Infuse: Ice\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "etheric echo",
+   "level": "2",
+   "initiative": "50",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\etheric-echo.jpeg",
+   "ghs": {
+    "name": "Etheric Echo",
+    "number": 73,
+    "level": 2,
+    "initiative": 50,
+    "top": [
+     "\"Play one Level 1 card from your lost pile other than Reviving Ether to perform an action with Lost of the card.\"",
+     "(infuse wild)"
+    ],
+    "top_flags": [
+     "lost"
+    ],
+    "bottom": [
+     "Move 3 [square]",
+     "\"When you next perform an action with Lost this round, gain Ward.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99073_Spellweaver2_Etheric Echo.yml",
+    "Level": "9",
+    "Initiative": "50",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "heatwave",
+   "level": "3",
+   "initiative": "12",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\heatwave.jpeg",
+   "ghs": {
+    "name": "Heatwave",
+    "number": 74,
+    "level": 3,
+    "initiative": 12,
+    "top": [
+     "Attack 4 [diamond] {area (0,1,target)|(0,2,active)|(1,0,target)|(1,1,target)|(1,2,target)|(2,0,enhance)|(2,1,enhance)|(2,2,target) [hex/hex]}",
+     "(infuse fire)"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "(Strengthen [diamond_plus] {target: ally; Range 3 [square]}; \"The target add Attack + 2 to their next attack this round.\")",
+     "(infuse fire)"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99074_Spellweaver2_Heatwave.yml",
+    "Level": "3",
+    "Initiative": "12",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                AreaEffect: \"0,0,G|2,0,R|4,0,R|1,1,R|3,1,R|5,1,E|2,2,R|4,2,E\"\n                MultiPassAttack: False\n        Infuse: Fire\n        XP: 1\n    Bottom:\n        Abilities:\n            BStrengthen:\n                Strengthen:\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Target: 1\n                Filter: Ally\n                SubAbilities:\n                    BActive:\n                        Attack: 2\n                        ActiveBonus:\n                            Behaviour: BuffAttack\n                            Duration: Round\n                            XPTracker: [0]\n        Infuse: Fire"
+   }
+  },
+  {
+   "name": "arctic shards",
+   "level": "3",
+   "initiative": "24",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\arctic-shards.jpeg",
+   "ghs": {
+    "name": "Arctic Shards",
+    "number": 75,
+    "level": 3,
+    "initiative": 24,
+    "top": [
+     "Attack 2 [diamond] {Target 2 [square]; Range 3; Muddle}",
+     "(infuse ice)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Heal 10 [diamond_plus] {Range 3}",
+     "(infuse light)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=1"
+    ]
+   },
+   "xipe": {
+    "file": "99075_Spellweaver2_Arctic Shards.yml",
+    "Level": "3",
+    "Initiative": "24",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Target:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 3\n                Conditions: Muddle\n        Infuse: Ice\n    Bottom:\n        Abilities:\n            BHeal:\n                Heal:\n                    Amount: 10\n                    Enhancements: 1\n                Range: 3\n                Filter: [Self, Ally]\n                AnimOverload: Heal\n        Infuse: Light\n        XP: 1"
+   }
+  },
+  {
+   "name": "dancing gales",
+   "level": "4",
+   "initiative": "33",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\dancing-gales.jpeg",
+   "ghs": {
+    "name": "Dancing Gales",
+    "number": 76,
+    "level": 4,
+    "initiative": 33,
+    "top": [
+     "consume fire {Strengthen {target: self}}",
+     "Attack 3 [square] {Range 3}",
+     "consume ice {Attack 2 {Range 3; Muddle}}"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Attack 3 [diamond] {Range 3}",
+     "Move 3 [circle]",
+     "Attack 3 [diamond] {Range 3}",
+     "(infuse air)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=1"
+    ]
+   },
+   "xipe": {
+    "file": "99076_Spellweaver2_Dancing Gales.yml",
+    "Level": "4",
+    "Initiative": "33",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TNull:\n                Null: True\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 3\n            TNull2:\n                Null: True\n        Consumes:\n            TCFire:\n                Elements: Fire\n                Abilities:\n                    TCStrengthen:\n                        ParentName: TNull\n                        Strengthen: True\n                        Filter: Self\n            TCIce:\n                Elements: Ice\n                Abilities:\n                    TCAttack:\n                        ParentName: TNull2\n                        Attack: 2\n                        Range: 3\n                        Conditions: Muddle\n        XP: 1\n    Bottom:\n        Abilities:\n            BAttack1:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 3\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BAttack2:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 3\n                Conditions: Muddle\n        Infuse: Air\n        XP: 1"
+   }
+  },
+  {
+   "name": "cold fire",
+   "level": "4",
+   "initiative": "67",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\cold-fire.jpeg",
+   "ghs": {
+    "name": "Cold Fire",
+    "number": 77,
+    "level": 4,
+    "initiative": 67,
+    "top": [
+     "(Attack 1 {Range 3; consume fire {Attack +2}; consume ice {Immobilize}}; area (0,1,target)|(1,0,target)|(1,1,target)|(2,0,enhance) [hex])"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "consume wild {(\"Add Attack + 1 to all your attacks this round, Experience 1.\"; card: round)}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99077_Spellweaver2_Cold Fire.yml",
+    "Level": "4",
+    "Initiative": "67",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 1\n                Range: 3\n                AreaEffect: \"0,0,R|2,0,R|1,1,R|-1,1,E\"\n                MultiPassAttack: False\n                AnimOverload: TargetedColdFire\n        Consumes:\n            TCFire:\n                Elements: Fire\n                AbilityOverrides:\n                    TCFireAttackBuff:\n                        ParentName: TAttack\n                        Strength: 2\n            TCIce:\n                Elements: Ice\n                AbilityOverrides:\n                    TCIceStun:\n                        ParentName: TAttack\n                        Conditions: Immobilize\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BActive:\n                Attack: 0\n                Filter: Self\n                ActiveBonus:\n                    Duration: Round\n                    Behaviour: BuffAttack\n        Consumes:\n            BCAny:\n                Elements: Any\n                AbilityOverrides:\n                    BCAnyAttackBuff:\n                        ParentName: BActive\n                        Strength: 1\n                XP: 1"
+   }
+  },
+  {
+   "name": "warm up",
+   "level": "5",
+   "initiative": "60",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\warm-up.jpeg",
+   "ghs": {
+    "name": "Warm Up",
+    "number": 78,
+    "level": 5,
+    "initiative": 60,
+    "top": [
+     "Attack 3 [square] {Range 3 [square]}",
+     "\"On the next attack ability you perform from an action with Lost, add Attack + 1 to all your attacks.\"",
+     "card: slotStart",
+     "(infuse fire)"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Move 2 [circle]",
+     "Loot 2",
+     "(infuse wild)"
+    ],
+    "bottom_flags": [
+     "lost"
+    ]
+   },
+   "xipe": {
+    "file": "99078_Spellweaver2_Warm Up.yml",
+    "Level": "5",
+    "Initiative": "60",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n            TActive:\n                Attack: 1\n                Filter: Self\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: BuffAttack\n                    ToggleIsOptional: True\n                    XPTracker: [0]  \n                AnimOverload: PowerUp\n        Infuse: Fire\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            BLoot:\n                Loot: 2\n                Target: -1\n        Infuse: Any"
+   }
+  },
+  {
+   "name": "cool down",
+   "level": "5",
+   "initiative": "30",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\cool-down.jpeg",
+   "ghs": {
+    "name": "Cool Down",
+    "number": 79,
+    "level": 5,
+    "initiative": 30,
+    "top": [
+     "Heal 2 [square] {Target 2 [square]; Range 3; consume wild {Heal +1; Range +1; card: experience:1}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Attack 2 [square] {Range 4; Pierce 1 [square]}",
+     "(infuse ice)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99079_Spellweaver2_Cool Down.yml",
+    "Level": "5",
+    "Initiative": "30",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            THeal:\n                Heal:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 3\n                Target:\n                    Amount: 2\n                    Enhancements: 1\n                Filter: [Self, Ally]\n                AnimOverload: Heal\n        Consumes:\n            TCAny:\n                Elements: Any\n                AbilityOverrides:\n                    TCAnyHealBuff:\n                        ParentName: THeal\n                        Strength: 1\n                        Range: 1\n                XP: 1\n                        \n    Bottom:\n        Abilities:\n            BAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 4\n                Pierce: 1\n#                    Amount: 1\n#                    Enhancements: 1\n        Infuse: Ice"
+   }
+  },
+  {
+   "name": "elemental rays",
+   "level": "6",
+   "initiative": "15",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\elemental-rays.jpeg",
+   "ghs": {
+    "name": "Elemental Rays",
+    "number": 80,
+    "level": 6,
+    "initiative": 15,
+    "top": [
+     "Attack 2 [square] {Target 2; Range 3; consume wild {Attack +1; Range +1; card: experience:1}}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(Stun; Curse [diamond] {Target 3 [square]; Range 3})",
+     "(infuse dark)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=1"
+    ]
+   },
+   "xipe": {
+    "file": "99080_Spellweaver2_Elemental Rays.yml",
+    "Level": "6",
+    "Initiative": "10",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 3\n                Target: 2\n                AnimOverload: RadialForkedBeam\n                MultiPassAttack: False\n        Consumes:\n            TCAny:\n                Elements: Any\n                AbilityOverrides:\n                    TCAnyAttackBuff:\n                        ParentName: TAttack\n                        Strength: 1\n                        Range: 1\n                XP: 1\n    Bottom:\n        Abilities:\n            BStun:\n                # Stun: True\n                Curse:\n                    Enhancements: 1\n                Filter: Enemy\n                Target:\n                    Amount: 3\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                SubAbilities:\n                    BStun2:\n                        Stun: True\n        Infuse: Dark\n        XP: 1"
+   }
+  },
+  {
+   "name": "searing glacier",
+   "level": "6",
+   "initiative": "90",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\searing-glacier.jpeg",
+   "ghs": {
+    "name": "Searing Glacier",
+    "number": 81,
+    "level": 6,
+    "initiative": 90,
+    "top": [
+     "(Attack 5 [diamond] {Range 3; consume fire {Pierce 3; card: experience:1}}; area (0,1,target)|(1,2,target)|(1,3,target)|(2,4,target)|(2,5,target))",
+     "(infuse ice)"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"When you next perform an action with Lost this round, Recover one card from your discard pile.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99081_Spellweaver2_Searing Glacier.yml",
+    "Level": "6",
+    "Initiative": "90",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 5\n                    Enhancements: 1\n                Range: 3\n                AreaEffect: \"0,0,R|1,1,R|2,2,R|3,3,R|4,4,R\"\n                AnimOverload: TargetedIcyBlast\n                MultiPassAttack: False\n        Consumes:\n            TCFire:\n                Elements: Fire\n                AbilityOverrides:\n                    TCAnyAttackBuff:\n                        ParentName: TAttack\n                        Pierce: 3\n                XP: 1\n        Infuse: Ice\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BRecover:\n                RecoverDiscardedCards: 1"
+   }
+  },
+  {
+   "name": "spell mastery",
+   "level": "7",
+   "initiative": "71",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\spell-mastery.jpeg",
+   "ghs": {
+    "name": "Spell Mastery",
+    "number": 82,
+    "level": 7,
+    "initiative": 71,
+    "top": [
+     "Attack 3 [square] {Range 4 [square]}",
+     "\"You may play one card from your discard pile to perform an action with Lost of the card (the card is moved to your lost pile).\"",
+     "(infuse wild)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 5 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "chromatic explosion",
+   "level": "7",
+   "initiative": "10",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\chromatic-explosion.jpeg",
+   "ghs": {
+    "name": "Chromatic Explosion",
+    "number": 83,
+    "level": 7,
+    "initiative": 10,
+    "top": [
+     "(Attack 4 {Range 3; Poison; Muddle}; area (0,0,target)|(0,1,target)|(1,0,target)|(1,1,target)|(1,2,enhance) [hex])",
+     "Heal 4 {Target %data.custom.gh2e.spellweaver.abilities.83.1%; Strengthen; Bless}",
+     "(infuse fire:ice:air:earth:light:dark)"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "\"Choose an ally within Range 3. That ally gains Shield 3 for the next attack targeting them this round.\" {consume fire {\"The attacker suffers Damage 3, Experience 1.\"}; consume ice {Shield +3; card: experience:1}}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99083_Spellweaver2_Chromatic Explosion.yml",
+    "Level": "7",
+    "Initiative": "10",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 4\n                Conditions: [Poison, Muddle]\n                Range: 3\n                AnimOverload: TargetedChromaticExplosion\n                AreaEffect: \"0,0,R|2,0,R|1,1,R|-1,1,R|1,-1,E\"\n                MultiPassAttack: False\n                SubAbilities:\n                    TAttackSubHeal:\n                        Heal: 4\n                        Condition: [Strengthen, Bless]\n                        Filter: Ally\n        Infuse: [Air, Ice, Fire, Earth, Light, Dark]\n        XP: 1\n    Bottom:\n        Abilities:\n            BAlly:\n                ControlActor:\n                    Abilities:\n                        BAllyShield:\n                            Shield: 3\n                            StrengthIsBase: True\n                            Filter: Self\n                            ActiveBonusDuration: Round\n                            UseOriginalActor: True\n                            AnimOverload: TargetedBuff\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Filter: Ally"
+   }
+  },
+  {
+   "name": "frostflare orbs",
+   "level": "8",
+   "initiative": "46",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\frostflare-orbs.jpeg",
+   "ghs": {
+    "name": "Frostflare Orbs",
+    "number": 84,
+    "level": 8,
+    "initiative": 46,
+    "top": [
+     "Attack 5 [diamond] {Target 3 [square]; Range 4; consume ice {Stun; card: experience:1}}",
+     "(infuse fire)"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "(Attack 1 {Range 3; consume wild {Attack +1; card: experience:1}}; area (0,1,target)|(1,0,target)|(1,1,target)|(2,0,enhance) [hex])"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99084_Spellweaver2_Frostflare Orbs.yml",
+    "Level": "8",
+    "Initiative": "78",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 5\n                    Enhancements: 1\n                Range: 4\n                Target:\n                    Amount: 3\n                    Enhancements: 1\n                MultiPassAttack: True\n                AnimOverload: SingleFireOrbs\n        XP: 1\n        Infuse: Fire\n        Consumes:\n            TCIce:\n                Elements: Ice\n                AbilityOverrides:\n                    TCIceStunBuff:\n                        ParentName: TAttack\n                        Conditions: Stun\n                XP: 1\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack: 1\n                Range: 3\n                AreaEffect: \"0,0,R|2,0,R|1,1,R|-1,1,E\"\n                MultiPassAttack: False\n                AnimOverload: TargetedColdFire\n        Consumes:\n            TCAny:\n                Elements: Any\n                AbilityOverrides:\n                    TCAnyAttackBuff:\n                        ParentName: BAttack\n                        Strength: 1\n                XP: 1"
+   }
+  },
+  {
+   "name": "twin beams",
+   "level": "8",
+   "initiative": "19",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\twin-beams.jpeg",
+   "ghs": {
+    "name": "Twin Beams",
+    "number": 85,
+    "level": 8,
+    "initiative": 19,
+    "top": [
+     "Attack 1 [square] {area (0,0,active)|(1,0,target)|(2,0,target); consume fire {Attack +1; Wound}}",
+     "Attack 1 [diamond] {area (0,0,active)|(1,0,target)|(2,0,target); consume ice {Attack +1; Push 2; Muddle}}"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "(\"When you next perform an action with Lost this round, after the action perform:\"; Attack 3 {Range 3})"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99085_Spellweaver2_Twin Beams.yml",
+    "Level": "8",
+    "Initiative": "19",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack1:\n                Attack:\n                    Amount: 1\n                    Enhancements: 1\n                AreaEffect: \"0,0,G|2,0,R|4,0,R\"\n                # AnimOverload: TargetedIcyBlast\n                MultiPassAttack: False\n            TAttack2:\n                Attack:\n                    Amount: 1\n                    Enhancements: 1\n                AreaEffect: \"0,0,G|2,0,R|4,0,R\"\n                # AnimOverload: TargetedIcyBlast\n                MultiPassAttack: False\n        Consumes:\n            TCFire:\n                Elements: Fire\n                AbilityOverrides:\n                    TCFireAttackBuff:\n                        ParentName: TAttack1\n                        Strength: 1\n                        Conditions: Wound\n            TCIce:\n                Elements: Ice\n                AbilityOverrides:\n                    TCIceAttackBuff:\n                        ParentName: TAttack2\n                        Strength: 1\n                        Conditions: Muddle\n                        SubAbilities:\n                            TCAttackSubPush:\n                                Push: 2\n                                AnimOverload: None\n                                IsInlineSubAbility: True\n        XP: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BAttack:\n                Attack: 3\n                Range: 3"
+   }
+  },
+  {
+   "name": "freezing vortex",
+   "level": "9",
+   "initiative": "41",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\freezing-vortex.jpeg",
+   "ghs": {
+    "name": "Freezing Vortex",
+    "number": 86,
+    "level": 9,
+    "initiative": 41,
+    "top": [
+     "Attack 5 [square] {area (0,1,target)|(1,0,target)|(1,1,target)|(1,2,target)|(2,0,target)|(2,1,target)|(2,2,target); Range 3; \"After the attack ability, kill each target whose hit point value is 2 or less and create one 1-hex obstacle tile in the featureless hex they occupied.\"}",
+     "(infuse ice)"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=1"
+    ],
+    "bottom": [
+     "(\"Designate a hex within Range 4.\"; Pull 3 {Target %data.custom.gh2e.spellweaver.abilities.86.3%}; \"Pull toward the designated hex.\")",
+     "(infuse ice)"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99086_Spellweaver2_Freezing Vortex.yml",
+    "Level": "9",
+    "Initiative": "41",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 5\n                    Enhancements: 1\n                Range: 3 \n                AreaEffect: \"0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,R|-1,-1,R|1,-1,R\"\n                AnimOverload: TargetedIcyBlast\n                MultiPassAttack: False\n                SubAbilities:\n                    TAttackSubKill:\n                        Kill: True\n                        Filter: \n                            Health: \"<= 2\"\n                        AnimOverload: ObstaclePetrify\n                        IgnoreMergedAbilityTargetSelection: True\n                    TCreate:\n                        Create: RockSingle\n                        SpawnDelay: 3.06\n                        AnimOverload: None\n                        UseMergedWithAbilityTiles: True\n                        AutoTrigger: True\n        XP: 1\n        Infuse: Ice\n    Bottom:\n        Abilities:\n            BPull:\n                Pull: 3\n                Range: 4\n                Target:\n                    Amount: -1\n                PullType: PullTowardsTile\n                AnimOverload: RadialBlackHolePull\n        Infuse: Ice"
+   }
+  },
+  {
+   "name": "inferno",
+   "level": "9",
+   "initiative": "96",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SW2\\inferno.jpeg",
+   "ghs": {
+    "name": "Inferno",
+    "number": 87,
+    "level": 9,
+    "initiative": 96,
+    "top": [
+     "Attack 2 {Target %data.custom.gh2e.spellweaver.abilities.87.1%; Pierce 2}",
+     "(\"All allies within Range 2 suffer Damage 2.\")",
+     "(infuse fire)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"All allies and enemies in the same room as you suffer Damage 4.\"",
+     "(infuse fire)"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=1"
+    ]
+   },
+   "xipe": {
+    "file": "99087_Spellweaver2_Inferno.yml",
+    "Level": "9",
+    "Initiative": "96",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 2\n                Range: 2\n                Target: -1\n                Pierce: 2\n                MultiPassAttack: False\n                TreatAsMelee: True\n                AnimOverload: RadialInferno\n            TDamage:\n                Damage: 2\n                Range: 2\n                Target: -1\n                Filter: [Ally]\n                IgnoreStun: True\n                AutoTrigger: True\n        Infuse: Fire\n    Bottom:\n        Abilities:\n            TSubDamage:\n                Damage: 4\n                Target: -1\n                Targeting: Room\n                Filter: [Enemy, Ally]\n                AutoTrigger: True\n        Infuse: Fire\n        XP: 1"
+   }
+  }
+ ],
+ "unmatched_ghs": [],
+ "unmatched_xipe": [
+  "x"
+ ]
+}

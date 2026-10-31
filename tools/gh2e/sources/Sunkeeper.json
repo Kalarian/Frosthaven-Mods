@@ -1,0 +1,482 @@
+{
+ "class": "Sunkeeper",
+ "code": "SK2",
+ "model_from": "Sunkeeper",
+ "ghs_file": "sun",
+ "xipe_class": null,
+ "character": {
+  "name": "sun",
+  "characterClass": "valrath",
+  "icon": "gh-sun",
+  "edition": "gh2e",
+  "handSize": 11,
+  "unlockEvent": "road:R-50|road:R-51",
+  "traits": [
+   "armored",
+   "educated",
+   "persuasive"
+  ],
+  "color": "#fce434",
+  "spoiler": true,
+  "stats": [
+   {
+    "level": 1,
+    "health": 10
+   },
+   {
+    "level": 2,
+    "health": 12
+   },
+   {
+    "level": 3,
+    "health": 14
+   },
+   {
+    "level": 4,
+    "health": 16
+   },
+   {
+    "level": 5,
+    "health": 18
+   },
+   {
+    "level": 6,
+    "health": 20
+   },
+   {
+    "level": 7,
+    "health": 22
+   },
+   {
+    "level": 8,
+    "health": 24
+   },
+   {
+    "level": 9,
+    "health": 26
+   }
+  ],
+  "availableSummons": [],
+  "perks": [
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "element",
+         "value": "light"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "shield",
+         "value": 1
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus2"
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "heal",
+         "value": 1,
+         "effects": [
+          {
+           "type": "range",
+           "value": 3
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.sun.1%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "condition",
+         "value": "stun"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "custom": "%game.custom.perks.ignoreScenario%",
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     }
+    ]
+   },
+   {
+    "type": "remove",
+    "count": 1,
+    "custom": "%game.custom.perks.ignoreNegativeItemFh%",
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "count": 2,
+    "combined": true,
+    "custom": "%data.custom.gh2e.sun.2%"
+   },
+   {
+    "type": "custom",
+    "count": 1,
+    "custom": "%data.custom.gh2e.sun.3%"
+   },
+   {
+    "type": "custom",
+    "count": 2,
+    "combined": true,
+    "custom": "%data.custom.gh2e.sun.4%"
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.sun.5%",
+   "%data.custom.gh2e.sun.6%"
+  ]
+ },
+ "cards": [
+  {
+   "name": "hammer blow",
+   "level": "1",
+   "initiative": "55",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\hammer-blow.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "holy strike",
+   "level": "1",
+   "initiative": "65",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\holy-strike.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "empowering command",
+   "level": "1",
+   "initiative": "32",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\empowering-command.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "dazzling charge",
+   "level": "1",
+   "initiative": "36",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\dazzling-charge.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "lay on hands",
+   "level": "1",
+   "initiative": "90",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\lay-on-hands.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "tactical order",
+   "level": "1",
+   "initiative": "29",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\tactical-order.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "brilliant prayer",
+   "level": "1",
+   "initiative": "27",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\brilliant-prayer.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "soothing light",
+   "level": "1",
+   "initiative": "63",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\soothing-light.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "purifying aura",
+   "level": "1",
+   "initiative": "21",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\purifying-aura.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "protective blessing",
+   "level": "1",
+   "initiative": "16",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\protective-blessing.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "defensive stance",
+   "level": "1",
+   "initiative": "85",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\defensive-stance.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "daybreak",
+   "level": "X",
+   "initiative": "17",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\daybreak.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "sanctify",
+   "level": "X",
+   "initiative": "39",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\sanctify.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "beacon of light",
+   "level": "X",
+   "initiative": "80",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\beacon-of-light.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "holy defense",
+   "level": "2",
+   "initiative": "12",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\holy-defense.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "mobilizing axiom",
+   "level": "2",
+   "initiative": "23",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\mobilizing-axiom.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "engulfing radiance",
+   "level": "3",
+   "initiative": "15",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\engulfing-radiance.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "burning flash",
+   "level": "3",
+   "initiative": "51",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\burning-flash.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "righteous strength",
+   "level": "4",
+   "initiative": "72",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\righteous-strength.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "cautious advance",
+   "level": "4",
+   "initiative": "18 ",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\cautious-advance.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "arresting march",
+   "level": "5",
+   "initiative": "22",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\arresting-march.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "path of glory",
+   "level": "5",
+   "initiative": "48",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\path-of-glory.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "divine intervention",
+   "level": "6",
+   "initiative": "9",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\divine-intervention.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "scales of justice",
+   "level": "6",
+   "initiative": "30",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\scales-of-justice.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "bright aegis",
+   "level": "7",
+   "initiative": "14",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\bright-aegis.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "illuminate the target",
+   "level": "7",
+   "initiative": "91",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\illuminate-the-target.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "warding blow",
+   "level": "8",
+   "initiative": "25",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\warding-blow.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "supportive chant",
+   "level": "8",
+   "initiative": "11",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\supportive-chant.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "divine ascension",
+   "level": "9",
+   "initiative": "87",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\divine-ascension.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "solar bastion",
+   "level": "9",
+   "initiative": "10",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SK2\\solar-bastion.jpeg",
+   "ghs": null,
+   "xipe": null
+  }
+ ],
+ "unmatched_ghs": [],
+ "unmatched_xipe": []
+}

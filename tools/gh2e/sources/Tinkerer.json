@@ -1,0 +1,1211 @@
+{
+ "class": "Tinkerer",
+ "code": "TI2",
+ "model_from": "Tinkerer",
+ "ghs_file": "tinkerer",
+ "xipe_class": "Tinkerer2",
+ "character": {
+  "name": "tinkerer",
+  "characterClass": "quatryl",
+  "gender": "m",
+  "icon": "gh-tinkerer",
+  "edition": "gh2e",
+  "handSize": 12,
+  "traits": [
+   "educated",
+   "nimble",
+   "resourceful"
+  ],
+  "color": "#d1c3a2",
+  "stats": [
+   {
+    "level": 1,
+    "health": 8
+   },
+   {
+    "level": 2,
+    "health": 9
+   },
+   {
+    "level": 3,
+    "health": 11
+   },
+   {
+    "level": 4,
+    "health": 12
+   },
+   {
+    "level": 5,
+    "health": 14
+   },
+   {
+    "level": 6,
+    "health": 15
+   },
+   {
+    "level": 7,
+    "health": 17
+   },
+   {
+    "level": 8,
+    "health": 18
+   },
+   {
+    "level": 9,
+    "health": 20
+   }
+  ],
+  "availableSummons": [
+   {
+    "name": "decoy",
+    "cardId": "031",
+    "level": 1,
+    "health": 10,
+    "movement": 3
+   },
+   {
+    "name": "battle-bot",
+    "cardId": "049",
+    "level": 4,
+    "health": 7,
+    "attack": 3,
+    "movement": 3
+   },
+   {
+    "name": "kill-bot",
+    "cardId": "055",
+    "level": 7,
+    "health": 8,
+    "attack": 3,
+    "movement": 4,
+    "action": {
+     "type": "area",
+     "value": "(0,2,target)|(1,1,target)|(2,0,active)"
+    }
+   }
+  ],
+  "perks": [
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus2"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "heal",
+         "value": 1,
+         "effects": [
+          {
+           "type": "specialTarget",
+           "value": "allyShort"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "wound"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "poison"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "immobilize"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus2",
+       "effects": [
+        {
+         "type": "condition",
+         "value": "strengthen",
+         "effects": [
+          {
+           "type": "specialTarget",
+           "value": "allyShort"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 1,
+    "custom": "%game.custom.perks.ignoreScenario%",
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "effects": [
+        {
+         "type": "heal",
+         "value": 1,
+         "effects": [
+          {
+           "type": "specialTarget",
+           "value": "allyShort"
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.tinkerer.1%",
+    "count": 1
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.tinkerer.2%",
+    "count": 1
+   },
+   {
+    "type": "custom",
+    "custom": "%data.custom.gh2e.tinkerer.3%",
+    "count": 2,
+    "combined": true
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.tinkerer.4%",
+   "%data.custom.gh2e.tinkerer.5%"
+  ]
+ },
+ "cards": [
+  {
+   "name": "potent potables",
+   "level": "1",
+   "initiative": "46",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\potent-potables.jpeg",
+   "ghs": {
+    "name": "Potent Potables",
+    "number": 33,
+    "level": 1,
+    "initiative": 73,
+    "top": [
+     "(Stun [diamond] {Target 3 [square]; Range 3}; \"Gain Experience 1 for each enemy targeted.\")",
+     "(infuse light)"
+    ],
+    "top_flags": [
+     "lost"
+    ],
+    "bottom": [
+     "Heal 2 [circle] {Range 4}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99030_Tinkerer2_Potent Potables.yml",
+    "Level": "1",
+    "Initiative": "46",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Conditions: Muddle\n                Range: 3\n                AnimOverload: RangedAttack\n    Bottom:\n        Abilities:\n            BActive:\n                AddTarget: 1\n                Filter: Self\n                AnimOverload: PowerUpPotent\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: BuffTarget\n                    XPTracker: [1,1,1,0]\n                    IsSingleTargetBonus: True\n                    ValidAbilityType: Heal"
+   }
+  },
+  {
+   "name": "harmless contraption",
+   "level": "1",
+   "initiative": "74",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\harmless-contraption.jpeg",
+   "ghs": {
+    "name": "Harmless Contraption",
+    "number": 31,
+    "level": 1,
+    "initiative": 74,
+    "top": [
+     "Summon {\"name\":\"decoy\",\"health\":\"10\",\"movement\":\"3\",\"count\":1,\"enhancements\":[\"heal\",\"move\"]}"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=3"
+    ],
+    "bottom": [
+     "Move 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99031_Tinkerer2_Harmless Contraption.yml",
+    "Level": "1",
+    "Initiative": "74",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TSummon:\n                Summon: DecoyID\n                AnimOverload: Summon\n        XP: 3\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "flamethrower",
+   "level": "1",
+   "initiative": "16",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\flamethrower.jpeg",
+   "ghs": {
+    "name": "Flamethrower",
+    "number": 32,
+    "level": 1,
+    "initiative": 16,
+    "top": [
+     "Attack 3 [diamond] {area (0,1,target)|(0,2,active)|(1,0,enhance)|(1,1,target)|(1,2,target)|(2,2,enhance) [hex/hex]; Pierce 2; Wound}",
+     "(infuse fire)"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=3"
+    ],
+    "bottom": [
+     "\"Grant all adjacent allies and self:\" {Shield 1}"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99032_Tinkerer2_Flamethrower.yml",
+    "Level": "1",
+    "Initiative": "16",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                    Pierce: 2\n                Conditions: Wound\n                AreaEffect: \"0,0,G|2,0,R|1,1,R|3,1,R|2,2,E|4,0,E\"\n                AnimOverload: LeftWristFlameThrower\n                MultiPassAttack: False\n        Infuse: Fire\n        XP: 3\n    Bottom:\n        Abilities:\n            BAlly:\n                ControlActor:\n                    Abilities:\n                        BAllyShield:\n                            Shield: 1\n                            StrengthIsBase: True\n                            Filter: Self\n                            ActiveBonusDuration: Round\n                            #UseOriginalActor: True\n                            #AnimOverload: TargetedBuff\n                Range: 1\n                Target: -1\n                Filter: [Self, Ally]\n        \n       # Abilities:\n#            BShield:\n#                Shield: 1\n#                Range: 1\n#                Target: -1\n#                Filter: [Self]\n#                AnimOverload: FlamethrowerField\n#                ActiveBonus:\n#                    Duration: Round\n#                    IsAura: True\n#                    AuraFilter: [Self, Ally]"
+   }
+  },
+  {
+   "name": "disorienting flash",
+   "level": "1",
+   "initiative": "73",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\disorienting-flash.jpeg",
+   "ghs": null,
+   "xipe": {
+    "file": "99033_Tinkerer2_Disorienting Flash.yml",
+    "Level": "1",
+    "Initiative": "73",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TStun:\n                Stun: True\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Target:\n                    Amount: 3\n                    Enhancements: 1\n                AnimOverload: PowerUpDisorientingFlash\n                Filter: [Enemy]\n                XPPerTarget: 1\n        Infuse: Light\n    Bottom:\n        Abilities:\n            BHeal:\n                Heal:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 4\n                Filter: [Self, Ally]\n                AnimOverload: Heal"
+   }
+  },
+  {
+   "name": "ink bomb",
+   "level": "1",
+   "initiative": "80",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\ink-bomb.jpeg",
+   "ghs": {
+    "name": "Ink Bomb",
+    "number": 34,
+    "level": 1,
+    "initiative": 80,
+    "top": [
+     "(Attack 4 [diamond] {area (0,1,target)|(1,0,target)|(1,1,target)|(2,0,enhance) [hex]; Range 3; Muddle}; \"Gain Experience 1 for each enemy targeted.\")",
+     "(infuse dark)"
+    ],
+    "top_flags": [
+     "lost"
+    ],
+    "bottom": [
+     "Move 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99034_Tinkerer2_Ink Bomb.yml",
+    "Level": "1",
+    "Initiative": "80",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                Range: 3\n                Conditions: Muddle\n                AnimOverload: LeftWristGrenadeInkBomb\n                AreaEffect: \"0,0,R|2,0,R|1,1,R|3,1,E\"\n                MultiPassAttack: false\n                XPPerTarget: 1\n        Infuse: Dark\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "net shooter",
+   "level": "1",
+   "initiative": "19",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\net-shooter.jpeg",
+   "ghs": {
+    "name": "Net Shooter",
+    "number": 35,
+    "level": 1,
+    "initiative": 19,
+    "top": [
+     "(Attack 3 [diamond] {area (0,1,target)|(1,0,target)|(1,1,target)|(2,0,enhance) [hex]; Range 3; Immobilize}; \"Gain Experience 1 for each enemy targeted.\")"
+    ],
+    "top_flags": [
+     "lost"
+    ],
+    "bottom": [
+     "Immobilize [diamond] {Range 1}",
+     "Move 3 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99035_Tinkerer2_Net Shooter.yml",
+    "Level": "1",
+    "Initiative": "19",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 3\n                Conditions: Immobilize\n                AnimOverload: LeftWristTechNetShooter\n                AreaEffect: \"0,0,R|2,0,R|1,1,R|3,1,E\"\n                MultiPassAttack: false\n                XPPerTarget: 1\n    Bottom:\n        Abilities:\n            BImmobilize:\n                Immobilize:\n                    Enhancements: 1\n                Filter: Enemy\n                Range: 1\n                AnimOverload: GadgetAdjacentNetShooter\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "stun shot",
+   "level": "1",
+   "initiative": "20",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\stun-shot.jpeg",
+   "ghs": {
+    "name": "Stun Shot",
+    "number": 36,
+    "level": 1,
+    "initiative": 20,
+    "top": [
+     "Stun {Range 3}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 1",
+     "Loot 1"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99036_Tinkerer2_Stun Shot.yml",
+    "Level": "1",
+    "Initiative": "20",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TStun:\n                Stun: True\n                Range: 3\n                AnimOverload: RangedAttack\n                Filter: [Enemy]\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 1\n            BLoot:\n                Loot: 1\n                Target: -1\n                AnimOverload: Loot"
+   }
+  },
+  {
+   "name": "reinvigorating elixir",
+   "level": "1",
+   "initiative": "37",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\reinvigorating-elixir.jpeg",
+   "ghs": {
+    "name": "Reinvigorating Elixir",
+    "number": 37,
+    "level": 1,
+    "initiative": 37,
+    "top": [
+     "Heal 4 [diamond_plus] {Range 3}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"One ally within Range 3 may Recover all their cards from their discard pile.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=3",
+     "loss"
+    ]
+   },
+   "xipe": {
+    "file": "99037_Tinkerer2_Reinvigorating Elixir.yml",
+    "Level": "1",
+    "Initiative": "37",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            THeal:\n                Heal:\n                    Amount: 4\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Filter: [Self, Ally]\n                AnimOverload: Heal\n    Bottom:\n        Abilities:\n            BRecover:\n                RecoverDiscardedCards: All\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Filter:\n                    TargetType: Ally\n                    ActorType: Player\n                AnimOverload: TargetRecover\n        XP: 3"
+   }
+  },
+  {
+   "name": "restorative mist",
+   "level": "1",
+   "initiative": "17",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\restorative-mist.jpeg",
+   "ghs": {
+    "name": "Restorative Mist",
+    "number": 38,
+    "level": 1,
+    "initiative": 17,
+    "top": [
+     "Heal 4 [diamond_plus] {Range 3}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 2 [circle]",
+     "Heal 1 {target: allies; Range 1}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99038_Tinkerer2_Restorative Mist.yml",
+    "Level": "1",
+    "Initiative": "17",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            THeal:\n                Heal:\n                    Amount: 4\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Filter: [Self, Ally]\n                AnimOverload: Heal\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            BHeal:\n                Heal: 1\n                Range: 1\n                Target: -1\n                Filter: Ally\n                AnimOverload: RadialHeal"
+   }
+  },
+  {
+   "name": "jet propulsion",
+   "level": "1",
+   "initiative": "34",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\jet-propulsion.jpeg",
+   "ghs": {
+    "name": "Jet Propulsion",
+    "number": 39,
+    "level": 1,
+    "initiative": 34,
+    "top": [
+     "Attack 2 {Target 2; Range 3}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 8 [circle] {Jump}"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=2"
+    ]
+   },
+   "xipe": {
+    "file": "99039_Tinkerer2_Jet Propulsion.yml",
+    "Level": "1",
+    "Initiative": "34",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 2\n                Range: 3\n                Target: 2\n                AnimOverload: RangedAttack\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 8\n                    Enhancements: 1\n                    Jump: True\n        XP: 2"
+   }
+  },
+  {
+   "name": "enhancement field",
+   "level": "1",
+   "initiative": "61",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\enhancement-field.jpeg",
+   "ghs": {
+    "name": "Enhancement Field",
+    "number": 40,
+    "level": 1,
+    "initiative": 61,
+    "top": [
+     "\"Place the \"Enhancement Field\" token in an empty hex within Range 3.\"",
+     "\"Add Attack + 1 to all attacks you and all allies perform while within Range 1 of the token.\""
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=3"
+    ],
+    "bottom": [
+     "\"You and all adjacent allies add Attack + 1 to all attacks this round.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99040_Tinkerer2_Enhancement Field.yml",
+    "Level": "1",
+    "Initiative": "61",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TSummon:\n                Summon: EnhancementFieldID\n                AnimOverload: Summon\n            #Can move after placement, but only if you turn off untargetable\n            #TAlly:\n#                ControlActor:\n#                    Abilities:\n#                        BAllyMove:\n#                            Move: 2\n#                    ControlActorType: Summon\n#                Targeting: All\n#                Filter:\n#                    ActorType: Summon\n#                    TargetType: Ally\n#                    HeroSummonClasses: [EnhancementFieldID]\n        XP: 3\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack: 1\n                Range: 1\n                Target: -1\n                Filter: [Self]\n                ActiveBonus:\n                    Behaviour: BuffAttack\n                    Duration: Round\n                    IsAura: True\n                    AuraFilter: [Self, Ally]\n                AnimOverload: EnhancementField"
+   }
+  },
+  {
+   "name": "toxic bolt",
+   "level": "1",
+   "initiative": "76",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\toxic-bolt.jpeg",
+   "ghs": {
+    "name": "Toxic Bolt",
+    "number": 41,
+    "level": 1,
+    "initiative": 76,
+    "top": [
+     "Attack 2 [diamond] {Range 3 [square]; Poison}",
+     "(infuse earth)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Attack 6 [diamond] {Range 2 [square]}"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=3"
+    ]
+   },
+   "xipe": {
+    "file": "99041_Tinkerer2_Toxic Bolt.yml",
+    "Level": "1",
+    "Initiative": "76",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 2\n                    Enhancements: 1\n                Range:\n                    Amount: 3\n                    Enhancements: 1\n                Conditions: Poison\n                AnimOverload: LeftWristTechToxicBolt\n        Infuse: Earth\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack:\n                    Amount: 6\n                    Enhancements: 1\n                Range:\n                    Amount: 2\n                    Enhancements: 1\n                AnimOverload: RangedAttack\n        XP: 3"
+   }
+  },
+  {
+   "name": "gas canister",
+   "level": "X",
+   "initiative": "22",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\gas-canister.jpeg",
+   "ghs": {
+    "name": "Gas Canister",
+    "number": 42,
+    "level": "X",
+    "initiative": 22,
+    "top": [
+     "\"Create one Damage 4 Square ,Muddle trap in an adjacent empty hey.\" [square]"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99042_Tinkerer2_Gas Canister.yml",
+    "Level": "X",
+    "Initiative": "22",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TTrap:\n                Trap:\n                    TrapName: PoisonMine\n                    Damage: 4\n                    Conditions: Muddle\n                SpawnDelay: 2.8\n                Target: 1\n                AnimOverload: GadgetAdjacentNetShooter\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "volatile concoction",
+   "level": "X",
+   "initiative": "18",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\volatile-concoction.jpeg",
+   "ghs": {
+    "name": "Volatile Concoction",
+    "number": 43,
+    "level": "X",
+    "initiative": 18,
+    "top": [
+     "(Strengthen [diamond_plus] {target: ally; Range 3}; \"The target may Recover one level 1 card from their discard pile.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Create one Damage 2 Square ,Poison trap in an adjacent empty hey.\" [square]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99043_Tinkerer2_Volatile Concoction.yml",
+    "Level": "X",
+    "Initiative": "18",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TStrengthen:\n                Strengthen: True\n                Range: 3\n                Filter: Ally\n                SubAbilities:\n                    TRecover:\n                        RecoverDiscardedCards: 1\n                        UseParentTargets: True\n                        Filter:\n                            TargetType: Ally\n                            ActorType: Player\n    Bottom:\n        Abilities:\n            TTrap:\n                Trap:\n                    TrapName: PoisonMine\n                    Damage: 2\n                    Conditions: Poison\n                SpawnDelay: 2.2\n                Target: 1\n                AnimOverload: LayTrap"
+   }
+  },
+  {
+   "name": "hook gun",
+   "level": "X",
+   "initiative": "72",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\hook-gun.jpeg",
+   "ghs": {
+    "name": "Hook Gun",
+    "number": 44,
+    "level": "X",
+    "initiative": 72,
+    "top": [
+     "Attack 2 [diamond] {Range 3; Pull 2}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 2 [circle]",
+     "Loot 2"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=1"
+    ]
+   },
+   "xipe": {
+    "file": "99044_Tinkerer2_Hook Gun.yml",
+    "Level": "X",
+    "Initiative": "72",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 2\n                AnimOverload: RangedAttack\n                Range: 3\n                SubAbilities:\n                    TAttackSubPull:\n                        Pull: 2\n    Bottom:\n        Abilities:\n            BMove:\n                Move: \n                    Amount: 2\n                    Enhancements: 1\n            BLoot:\n                Loot: 2\n                Target: -1\n        XP: 1"
+   }
+  },
+  {
+   "name": "repulsor gun",
+   "level": "2",
+   "initiative": "35",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\repulsor-gun.jpeg",
+   "ghs": {
+    "name": "Repulsor Gun",
+    "number": 45,
+    "level": 2,
+    "initiative": 35,
+    "top": [
+     "Attack 3 {Range 3; Push 1 [square]}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 2 [circle]",
+     "Push 2 [square] {Range 2}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99045_Tinkerer2_Repulsor Gun.yml",
+    "Level": "2",
+    "Initiative": "35",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 3\n                AnimOverload: RangedAttack\n                Range: 3\n                SubAbilities:\n                    TAttackSubPush:\n                        Push:\n                            Amount: 1\n                            Enhancements: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            BPush:\n                Push:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 2"
+   }
+  },
+  {
+   "name": "crank bow",
+   "level": "2",
+   "initiative": "23",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\crank-bow.jpeg",
+   "ghs": {
+    "name": "Crank Bow",
+    "number": 46,
+    "level": 2,
+    "initiative": 23,
+    "top": [
+     "Attack 8 [diamond] {Range 5}"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=3"
+    ],
+    "bottom": [
+     "Heal 2 [square] {Target 2; Range 2}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99046_Tinkerer2_Crank Bow.yml",
+    "Level": "2",
+    "Initiative": "23",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 8\n                    Enhancements: 1\n                Range: 5\n        XP: 3\n    Bottom:\n        Abilities:\n            BHeal:\n                Heal:\n                    Amount: 2\n                    Enhancements: 1\n                Range: 3\n                Target: 2\n                Filter: [Self, Ally]\n                AnimOverload: Heal"
+   }
+  },
+  {
+   "name": "teleportation pad",
+   "level": "3",
+   "initiative": "62",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\teleportation-pad.jpeg",
+   "ghs": {
+    "name": "Teleportation Pad",
+    "number": 47,
+    "level": 3,
+    "initiative": 62,
+    "top": [
+     "\"Place two \"Teleportation Pad\" tokens in empty hexes within Range 5.\"",
+     "\"You and all allies may threat the two hexes containing the tokens as being adjacent to each other during move abilities.\""
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=3"
+    ],
+    "bottom": [
+     "Teleport 4 [circle]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99047_Tinkerer2_Teleportation Pad.yml",
+    "Level": "3",
+    "Initiative": "62",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n            #BTeleport:\n#                Teleport: True\n#                Targeting: \n#                    Range: 4\n#                Filter: Self"
+   }
+  },
+  {
+   "name": "stamina booster",
+   "level": "3",
+   "initiative": "48",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\stamina-booster.jpeg",
+   "ghs": {
+    "name": "Stamina Booster",
+    "number": 48,
+    "level": 3,
+    "initiative": 48,
+    "top": [
+     "Heal 5 [diamond_plus] {Range 3}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"One ally within Range 3 may Recover one card from their lost pile.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=3",
+     "loss"
+    ]
+   },
+   "xipe": {
+    "file": "99048_Tinkerer2_Stamina Booster.yml",
+    "Level": "3",
+    "Initiative": "48",
+    "Discard": "[Discard,Permanently Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            THeal:\n                Heal:\n                    Amount: 5\n                    Enhancements: 1\n                Range: 3\n                Filter: [Self, Ally]\n                AnimOverload: Heal\n    Bottom:\n        Abilities:\n            BRecover:\n                RecoverLostCards: 1\n                Range:\n                    Amount: 3\n                Filter:\n                    TargetType: Ally\n                    ActorType: Player\n                AnimOverload: TargetRecover\n        XP: 3"
+   }
+  },
+  {
+   "name": "dangerous contraption",
+   "level": "4",
+   "initiative": "10",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\dangerous-contraption.jpeg",
+   "ghs": {
+    "name": "Dangerous Contraption",
+    "number": 49,
+    "level": 4,
+    "initiative": 10,
+    "top": [
+     "Summon {\"name\":\"battle-bot\",\"health\":\"7\",\"attack\":\"3\",\"movement\":\"3\",\"count\":1,\"enhancements\":[\"heal\",\"move\",\"attack\"]}"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=3"
+    ],
+    "bottom": [
+     "Move 4 [circle]",
+     "\"Grant one adjacent ally:\" {Shield 1 [diamond_plus]}"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99049_Tinkerer2_Dangerous Contraption.yml",
+    "Level": "4",
+    "Initiative": "10",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TSummon:\n                Summon: Battlebot2ID\n                AnimOverload: Summon\n        XP: 3\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n            BShield:\n                Shield:\n                    Amount: 1\n                    Enhancements: 1\n                Range: 1\n                Filter: [Ally]\n                #AnimOverload: FlamethrowerField\n#                ActiveBonus:\n#                    Duration: Round\n#                    IsAura: True\n#                    AuraFilter: [Self, Ally]"
+   }
+  },
+  {
+   "name": "proximity mine",
+   "level": "4",
+   "initiative": "14",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\proximity-mine.jpeg",
+   "ghs": {
+    "name": "Proximity Mine",
+    "number": 50,
+    "level": 4,
+    "initiative": 14,
+    "top": [
+     "(Attack 4 [diamond] {Range 3}; \"All enemies adjacent to the target gain Muddle.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Create one Damage 2 Square ,Immobilize trap in an empty hey within Range 2 Square .\" [square/square]"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99050_Tinkerer2_Proximity Mine.yml",
+    "Level": "4",
+    "Initiative": "14",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 4\n                    Enhancements: 1\n                Range: 3\n                SubAbilities:\n                    TAttackSubMuddle:\n                        Damage: 0\n                        Conditions: Muddle\n                        Range: 1\n                        Target: -1\n                        Filter: [Enemy]\n                        IsInlineSubAbility: True\n                        AllTargetsAdjacentToParentTargets: True\n    Bottom:\n        Abilities:\n            BTrap:\n                Trap:\n                    TrapName: BearTrap\n                    Damage: 2\n                    Conditions: Immobilize\n                SpawnDelay: 1.8\n                Range: 2\n                AnimOverload: RangedTrap"
+   }
+  },
+  {
+   "name": "noxious vials",
+   "level": "5",
+   "initiative": "75",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\noxious-vials.jpeg",
+   "ghs": {
+    "name": "Noxious Vials",
+    "number": 51,
+    "level": 5,
+    "initiative": 75,
+    "top": [
+     "Attack 1 {Range 3; Wound; Disarm}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(Attack 3 [diamond] {area (0,1,target)|(1,0,target)|(1,1,target)|(2,0,enhance) [hex]; Range 3; Poison}; \"Gain Experience 1 for each enemy targeted.\")"
+    ],
+    "bottom_flags": [
+     "lost"
+    ]
+   },
+   "xipe": {
+    "file": "99051_Tinkerer2_Noxious Vials.yml",
+    "Level": "5",
+    "Initiative": "75",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack: 1\n                Range: 3\n                Conditions: [Wound, Disarm]\n                MultiPassAttack: False\n                AnimOverload: LeftWristTechNoxiousVial\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 3\n                Conditions: Poison\n                AnimOverload: LeftWristTechNoxiousVial\n                AreaEffect: \"0,0,R|2,0,R|1,1,R|-1,1,E\"\n                MultiPassAttack: false\n                XPPerTarget: 1"
+   }
+  },
+  {
+   "name": "disintegration beam",
+   "level": "5",
+   "initiative": "36",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\disintegration-beam.jpeg",
+   "ghs": {
+    "name": "Disintegration Beam",
+    "number": 52,
+    "level": 5,
+    "initiative": 36,
+    "top": [
+     "\"Kill all enemies in the targeted area whose current hit point value is less than or equal to 5. Gain Experience 1 for each enemy killed.\" {area (0,3,target)|(0,4,active)|(1,1,target)|(1,2,target)|(2,0,target)}"
+    ],
+    "top_flags": [
+     "lost"
+    ],
+    "bottom": [
+     "Attack 3 [square] {Range 3}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99052_Tinkerer2_Disintegration Beam.yml",
+    "Level": "5",
+    "Initiative": "36",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TKill:\n                Kill: True\n                Filter:\n                    TargetType: Enemy\n                    Health: \"<= 5\"\n                AnimOverload: LeftWristTechDisintegrationBeam\n                AreaEffect: \"0,0,G|2,0,R|4,0,R|6,0,R|8,0,R\"\n                AreaEffectLayoutOverride: \"0,0,G|1,1,R|2,2,R|3,3,R|4,4,R\"\n                MultiPassAttack: False\n                XPPerTarget: 1\n    Bottom:\n        Abilities:\n            BAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 3"
+   }
+  },
+  {
+   "name": "invigorating aerosol",
+   "level": "6",
+   "initiative": "21",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\invigorating-aerosol.jpeg",
+   "ghs": {
+    "name": "Invigorating Aerosol",
+    "number": 53,
+    "level": 6,
+    "initiative": 21,
+    "top": [
+     "Heal 3 [diamond_plus] {Range 2}",
+     "Move 2 [circle]",
+     "Heal 4 [diamond_plus] {Range 2}",
+     "(infuse air)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"At the end of this and your next four turns, perform:\" {Heal 2 {Range 5; Safeguard; Ward; Strengthen; Bless}; (card: slotStartXp:1; card: slot; card: slotXpFh:1; card: slot; card: slotEndXp:1)}"
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent"
+    ]
+   },
+   "xipe": {
+    "file": "99053_Tinkerer2_Invigorating Aerosol.yml",
+    "Level": "6",
+    "Initiative": "21",
+    "Discard": "[Discard,Lost]",
+    "data": "Data:\n    Top:\n        Abilities:\n            THeal1:\n                Heal:\n                    Amount: 3\n                    Enhancements: 1\n                Range: 2\n                Filter: [Self, Ally]\n                AnimOverload: Heal\n            TMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            THeal2:\n                Heal:\n                    Amount: 4\n                    Enhancements: 1\n                Range: 2\n                Filter: [Self, Ally]\n                AnimOverload: Heal\n        Infuse: Air\n    Bottom:\n        Abilities:\n            BActive:\n                AddActiveBonus:\n                    Heal: 3\n                    Range: 5\n                    Filter: [Self, Ally]\n                    Conditions: [Strengthen, Bless]\n                    AnimOverload: Heal\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: EndTurnAbility\n                    XPTracker: [1,0,1,0,1]\n                AnimOverload: PowerUpPotent"
+   }
+  },
+  {
+   "name": "auto turret",
+   "level": "6",
+   "initiative": "32",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\auto-turret.jpeg",
+   "ghs": {
+    "name": "Auto Turret",
+    "number": 54,
+    "level": 6,
+    "initiative": 32,
+    "top": [
+     "\"At the end of this and your next three turns, perform the following twice:\" {Attack 2 {Range 5; Pierce 1}; (card: slotStartXp:1; card: slotXpFh:1; card: slotXpFh:1; card: slotEnd)}"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent"
+    ],
+    "bottom": [
+     "Ward [diamond_plus] {Range 3}",
+     "Move 2 [circle]",
+     "Poison [diamond] {Range 3}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99054_Tinkerer2_Auto Turret.yml",
+    "Level": "6",
+    "Initiative": "32",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TActive:\n                AddActiveBonus:\n                    Attack: 2\n                    Range: 5\n                    Pierce: 1\n                    Target: 2\n                    AnimOverload: RangedAttack\n                ActiveBonus:\n                    Duration: Persistent\n                    Behaviour: EndTurnAbility\n                    XPTracker: [1,1,1,0]\n                AnimOverload: PowerUpPotent\n    Bottom:\n        Abilities:\n            # BShield:\n            #     Shield: 1\n            #     Range: 3\n            #     Filter: [Self, Ally]\n            #     AnimOverload: Shield\n            BMove:\n                Move:\n                    Amount: 2\n                    Enhancements: 1\n            # BPoison:\n            #     Conditions: Poison\n            #     Range: 3\n            #     Filter: Enemy\n            #     AnimOverload: RangedAttack"
+   }
+  },
+  {
+   "name": "murderous contraption",
+   "level": "7",
+   "initiative": "84",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\murderous-contraption.jpeg",
+   "ghs": {
+    "name": "Murderous Contraption",
+    "number": 55,
+    "level": 7,
+    "initiative": 84,
+    "top": [
+     "Summon {\"name\":\"kill-bot\",\"health\":\"8\",\"attack\":\"3\",\"movement\":\"4\",\"count\":1,\"enhancements\":[\"heal\",\"move\",\"attack\"],\"action\":{\"type\":\"area\",\"value\":\"(0,1,target)|(0,2,active)|(1,0,target)\"}}"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=3"
+    ],
+    "bottom": [
+     "Heal 5 [diamond_plus] {Range 3}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99055_Tinkerer2_Murderous Contraption.yml",
+    "Level": "7",
+    "Initiative": "84",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TSummon:\n                Summon: KillBotID\n                AnimOverload: Summon\n        XP: 3\n    Bottom:\n        Abilities:\n            BHeal:\n                Heal:\n                    Amount: 5\n                    Enhancements: 1\n                Range: 3\n                Filter: [Self, Ally]\n                AnimOverload: Heal"
+   }
+  },
+  {
+   "name": "pernicious fogger",
+   "level": "7",
+   "initiative": "71",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\pernicious-fogger.jpeg",
+   "ghs": {
+    "name": "Pernicious Fogger",
+    "number": 56,
+    "level": 7,
+    "initiative": 71,
+    "top": [
+     "\"Place the \"Pernicious Fogger\" token in an empty hex within Range 3.\"",
+     "(\"At the end of each of their turns, all allies and enemies within Range 1 of the token suffer Damage 2.\")"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=3"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "Strengthen [diamond_plus] {Range 3}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99056_Tinkerer2_Pernicious Fogger.yml",
+    "Level": "7",
+    "Initiative": "71",
+    "Discard": "[Lost,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TSummon:\n                Summon: PerniciousFoggerID\n                AnimOverload: Summon\n        XP: 3\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1\n            BStrengthen:\n                Strengthen: True\n                Range: 3\n                Filter: [Self, Ally]\n                AnimOverload: PowerUp"
+   }
+  },
+  {
+   "name": "cryonic snare",
+   "level": "8",
+   "initiative": "15",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\cryonic-snare.jpeg",
+   "ghs": {
+    "name": "Cryonic Snare",
+    "number": 57,
+    "level": 8,
+    "initiative": 15,
+    "top": [
+     "\"Create one Damage 4 Square ,Wound, Stun trap in an empty hey within Range 2 Square .\" [square/square]",
+     "(infuse ice)"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]",
+     "\"Grant one adjacent ally:\" {Retaliate 2 [diamond_plus]}"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": {
+    "file": "99057_Tinkerer2_Cryonic Snare.yml",
+    "Level": "8",
+    "Initiative": "15",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TTrap:\n                Trap:\n                    TrapName: PoisonMine\n                    Damage: 4\n                    Conditions: [Wound, Stun]\n                SpawnDelay: 2.8\n                Range: 2\n                Target: 1\n                AnimOverload: LeftWristTechNoxiousVial\n        Infuse: Ice\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 4\n                    Enhancements: 1\n            BRetaliate:\n                Retaliate:\n                    Amount: 2\n                Filter: Ally\n                Range: 1\n                AnimOverload: LeftWristTechNoxiousVial"
+   }
+  },
+  {
+   "name": "harsh stimulants",
+   "level": "8",
+   "initiative": "27",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\harsh-stimulants.jpeg",
+   "ghs": {
+    "name": "Harsh Stimulants",
+    "number": 58,
+    "level": 8,
+    "initiative": 27,
+    "top": [
+     "\"Grant one ally within Range 3:\" {((\"Suffer Damage 2.\"); Move 2 [square]; Attack 6 [square])}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"Control one enemy within Range 3Square :\" [square] {(Attack +2 {target: enemiesAdjacent}; \"then that enemy gains Stun.\")}"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=3"
+    ]
+   },
+   "xipe": {
+    "file": "99058_Tinkerer2_Harsh Stimulants.yml",
+    "Level": "8",
+    "Initiative": "27",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "gravity bomb",
+   "level": "9",
+   "initiative": "85",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\gravity-bomb.jpeg",
+   "ghs": {
+    "name": "Gravity Bomb",
+    "number": 59,
+    "level": 9,
+    "initiative": 85,
+    "top": [
+     "\"Place the \"Gravity Bomb\" token in an empty hex within Range 4. At the end of your next turn, perform:\" {(Pull 2 {Target %data.custom.gh2e.tinkerer.abilities.59.2%}; \"Pull toward the token. Then any enemy occupying the hex containing the token suffers Damage 5, all enemies occupying hexes adjacent to the token suffer Damage 1, and you discard this card.\")}"
+    ],
+    "top_flags": [
+     "persistent"
+    ],
+    "bottom": [
+     "Attack 2 {area (0,1,target)|(1,0,target)|(1,1,target); Range 3; Immobilize}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": {
+    "file": "99059_Tinkerer2_Gravity Bomb.yml",
+    "Level": "9",
+    "Initiative": "85",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1"
+   }
+  },
+  {
+   "name": "chimeric formula",
+   "level": "9",
+   "initiative": "33",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\TI2\\chimeric-formula.jpeg",
+   "ghs": {
+    "name": "Chimeric Formula",
+    "number": 60,
+    "level": 9,
+    "initiative": 33,
+    "top": [
+     "Heal 3 [diamond_plus] {target: ally; Range 3; Strengthen; Bless}",
+     "\"The target of the heal ability may immediately play up to two cards from their hand, performing at most one top and one bottom action of the cards.\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"One ally within Range 3 may Recover one card from the lost pile of one ally adjacent to them.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=3",
+     "loss"
+    ]
+   },
+   "xipe": {
+    "file": "99060_Tinkerer2_Chimeric Formula.yml",
+    "Level": "9",
+    "Initiative": "33",
+    "Discard": "[Discard,Discard]",
+    "data": "Data:\n    Top:\n        Abilities:\n            TAttack:\n                Attack:\n                    Amount: 3\n                    Enhancements: 1\n    Bottom:\n        Abilities:\n            BMove:\n                Move:\n                    Amount: 3\n                    Enhancements: 1"
+   }
+  }
+ ],
+ "unmatched_ghs": [
+  "potentpotable"
+ ],
+ "unmatched_xipe": []
+}

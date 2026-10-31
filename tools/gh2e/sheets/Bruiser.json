@@ -1,0 +1,598 @@
+{
+  "class": "Bruiser",
+  "read_by": "image reader, 2026-10-31",
+  "cards": [
+    {
+      "name": "Trample",
+      "number": "002",
+      "level": "1",
+      "initiative": 72,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Pierce 3"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [square]", "Jump",
+                  "Attack 3: target all enemies moved through with the move ability",
+                  "\"Gain XP 1 for each enemy targeted.\""],
+        "summary": ["lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: the attack targets all enemies moved through with the move ability (one linked move+attack)",
+                 "bottom: XP 1 for each enemy targeted"],
+      "summons": [],
+      "notes": "Class-wide: GHS numbers the cards 1-29, the printed numbers are 002-030 (offset by one on every card); not counted as a disagreement. Xipe: MergedMoveAttack + AllTargetsOnMovePath + XPPerTarget."
+    },
+    {
+      "name": "Eye for an Eye",
+      "number": "003",
+      "level": "1",
+      "initiative": 13,
+      "top": {
+        "lines": ["Shield 1", "Retaliate 1", "\"Gain XP 1 the next time you retaliate this round.\""],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["Heal 3 [square], self", "infuse Earth"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: XP 1 the next time you retaliate this round"],
+      "summons": [],
+      "notes": "Xipe: round Shield + round Retaliate with ProcXP 1."
+    },
+    {
+      "name": "Skewer",
+      "number": "004",
+      "level": "1",
+      "initiative": 35,
+      "top": {
+        "lines": ["Attack 3 [square]",
+                  "consume Air: +1 Attack, Pierce 1, XP 1",
+                  "area: grey (attacker) hex and 2 red hexes in a straight line running diagonally up-right from it [no hex mark]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 7 [square]"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": "Xipe area 0,0,G|2,0,R|4,0,R (2-hex line) with a diagonal layout override; consume Air adds +1 Attack, Pierce 1, XP 1."
+    },
+    {
+      "name": "Overwhelming Assault",
+      "number": "005",
+      "level": "1",
+      "initiative": 61,
+      "top": {
+        "lines": ["Attack 7 [diamond]"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]", "Jump", "infuse Air"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Balanced Measure",
+      "number": "006",
+      "level": "1",
+      "initiative": 20,
+      "top": {
+        "lines": ["Attack X", "\"where X is the number of hexes you have moved this turn.\""],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move X", "\"where X is the amount of damage you have dealt this turn.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: Attack X = hexes moved this turn", "bottom: Move X = damage dealt this turn"],
+      "summons": [],
+      "notes": "Xipe: StatIsBasedOnX HexesMovedThisTurn / DamageInflictedThisTurn."
+    },
+    {
+      "name": "Grab and Go",
+      "number": "007",
+      "level": "1",
+      "initiative": 87,
+      "top": {
+        "lines": ["Loot 1", "Heal 2 [square], self"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [square]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Warding Strength",
+      "number": "008",
+      "level": "1",
+      "initiative": 32,
+      "top": {
+        "lines": ["Attack 2 [square]", "Disarm"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"On the next six sources of damage from attacks targeting you, gain Shield 1, Retaliate 1 for the attacks.\"",
+                  "slots: 6 (XP 1 on slots 1, 3, 5), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": ["bottom: text ends \"for the attack.\"; the card prints \"for the attacks.\" (wording only)"],
+      "xipe": ["bottom: XPTracker [0,1,0,1,0,1] gives XP on slots 2, 4, 6; the card has XP on slots 1 (the dashed slot), 3, 5 (Xipe's Juggernaut [0,1,0,1] and Intimidating Growl [0,1] use the same indexing and match their cards, so this one is off)"],
+      "custom": ["bottom: use slots, one per source of damage from an attack targeting you: Shield 1 and Retaliate 1 against that attack"],
+      "summons": [],
+      "notes": "Xipe: persistent Shield 1 with Behaviour ShieldAndRetaliate (Retaliate 1), AttackSourcesOnly."
+    },
+    {
+      "name": "Shield Bash",
+      "number": "009",
+      "level": "1",
+      "initiative": 15,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Stun"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 2 [square]", "Shield 1"],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: enhancement on Shield 1 instead of Move 2 (card: Move 2 [square], Shield 1 unmarked)"],
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Leaping Cleave",
+      "number": "010",
+      "level": "1",
+      "initiative": 54,
+      "top": {
+        "lines": ["Attack 3 [square]",
+                  "area: grey (attacker) hex, red hex up-right of it, red hex right of it (triangle) [no hex mark]"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]", "Jump", "Push 2 [square], range 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: area has an enhancement hex (1,-1,E, down-right of the grey hex); the card has no hex mark"],
+      "custom": [],
+      "summons": [],
+      "notes": "Bottom Push is an own ability (push icon in a diamond) with range 1, not a rider on an attack."
+    },
+    {
+      "name": "Spare Dagger",
+      "number": "011",
+      "level": "1",
+      "initiative": 27,
+      "top": {
+        "lines": ["Attack 3", "Range 3"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 2 [diamond]", "Pierce 1 [square]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: Attack 3 has Enhancements: 1; the card has no mark on the top", "bottom: one enhancement only; the card has two (Attack 2 [diamond] and Pierce 1 [square])"],
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Sweeping Blow",
+      "number": "012",
+      "level": "X",
+      "initiative": 23,
+      "top": {
+        "lines": ["Attack 2", "Muddle", "\"Add +1 Attack on each undamaged target.\"",
+                  "area: grey (attacker) hex with 3 red hexes on its up-right, right and down-right sides [hex mark on the empty hex up-left of the grey hex]"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 4"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: Attack 2 has Enhancements: 1; the card's only mark on this half is the area hex mark (Xipe has that too, -1,1,E)", "top: 'undamaged' implemented as target Health == 100%"],
+      "custom": ["top: +1 Attack on each undamaged target"],
+      "summons": [],
+      "notes": "Muddle is printed as the brown diamond with a question mark (same icon as on Provoking Roar and Crippling Offensive; GHS and Xipe both read Muddle). 'Undamaged' = at full hit points is Xipe's reading; check the 2e rulebook."
+    },
+    {
+      "name": "Fearsome Taunt",
+      "number": "013",
+      "level": "X",
+      "initiative": 10,
+      "top": {
+        "lines": ["Attack 3 [square]", "Push 3 [square]"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Shield 1",
+                  "\"Whenever an enemy would attack one of your adjacent allies this round, you may have that attack target you instead, regardless of the attack's range and line-of-sight limitations.\""],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": ["top: Push 3 has no enhancement (card: Push 3 [square])", "bottom: redirect done with the Redirect ability (round); the 'you may' choice is not visible in the data"],
+      "custom": ["bottom: this round, may redirect attacks on adjacent allies to yourself, ignoring range and line of sight"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Provoking Roar",
+      "number": "014",
+      "level": "X",
+      "initiative": 18,
+      "top": {
+        "lines": ["Pull 2 [square]", "Range 3 [square]", "Muddle", "Retaliate 2",
+                  "\"Gain XP 1 the next time you retaliate this round.\""],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "Pull 2 [square]", "Range 3 [square]"],
+        "summary": []
+      },
+      "ghs": ["GHS names the card 'Wall of Doom' (matched by initiative 18); the card prints 'Provoking Roar'. Abilities, marks and flags agree."],
+      "xipe": "agrees",
+      "custom": ["top: XP 1 the next time you retaliate this round"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Intimidating Growl",
+      "number": "015",
+      "level": "2",
+      "initiative": 51,
+      "top": {
+        "lines": ["Attack 2 [square]", "Push 2",
+                  "area: grey (attacker) hex; red hexes right of it, up-right of it, and right of that up-right hex (4-hex rhombus; doubled coords y up: G 0,0; R 2,0 1,1 3,1) [hex marks on two empty hexes: 2,2 (above the join of the two upper reds) and 4,0 (right of the lower red)]"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "\"On your next two move abilities, add +1 Move.\"",
+                  "slots: 2 (XP 1 on slot 2), ends after the last"],
+        "summary": ["persistent"]
+      },
+      "ghs": ["top: area has one enhance hex (2,1); the card has two hex marks", "bottom: flag 'round'; the card shows the persistent icon (no round icon, not lost)", "bottom: text typo 'nex' (card: 'next')"],
+      "xipe": ["bottom: the move buff has AutoTrigger: True (second ability of the half, not the first)"],
+      "custom": ["bottom: use slots: +1 Move on your next two move abilities"],
+      "summons": [],
+      "notes": "Xipe area 0,0,G|2,0,R|1,1,R|3,1,R|2,2,E|4,0,E matches the picture, both hex marks included. The bottom's first slot is dashed (starts on play), so the Move 2 on the card already counts as the first move ability."
+    },
+    {
+      "name": "Juggernaut",
+      "number": "016",
+      "level": "2",
+      "initiative": 34,
+      "top": {
+        "lines": ["Move 2 [circle]", "Attack 3 [diamond]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"On the next four sources of damage you would suffer, negate the damage.\"",
+                  "slots: 4 (XP 1 on slots 2, 4), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": ["bottom: text 'negate that Damage'; the card prints 'negate the [damage]' (wording only)"],
+      "xipe": "agrees",
+      "custom": ["bottom: use slots: negate the next four sources of damage (any source, not only attacks)"],
+      "summons": [],
+      "notes": "Xipe: PreventDamage 4, persistent, XPTracker [0,1,0,1]."
+    },
+    {
+      "name": "Hook and Chain",
+      "number": "017",
+      "level": "3",
+      "initiative": 42,
+      "top": {
+        "lines": ["Attack 3", "Range 4", "Pull 3"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4",
+                  "\"If you moved in a straight line in one direction with the move ability, perform:\"",
+                  "Attack X", "\"where X is the number of hexes you moved.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: Attack X only if the move went in a straight line in one direction; X = hexes moved with that move"],
+      "summons": [],
+      "notes": "No enhancement marks anywhere on this card. Xipe: StatIsBasedOnX HexesMovedThisAction + MoveWasStraightLine requirement."
+    },
+    {
+      "name": "Unstoppable Charge",
+      "number": "018",
+      "level": "3",
+      "initiative": 86,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "\"Add +2 Attack and gain XP 1 if you have moved this turn.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [square]", "Stun [diamond]: target all, range 1"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": ["bottom: Move 4 has no mark; the card has Move 4 [square]"],
+      "xipe": ["bottom: Stun has no enhancement (card: Stun [diamond])", "top: the +2 Attack/XP 1 is a round active bonus gated on HexesMovedThisTurn >= 1, placed before the attack (same effect if it applies to this attack)"],
+      "custom": ["top: +2 Attack and XP 1 if you have moved this turn"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Whirlwind",
+      "number": "019",
+      "level": "4",
+      "initiative": 28,
+      "top": {
+        "lines": ["Attack 5 [diamond]: target all adjacent enemies", "\"Gain XP 1 for each enemy targeted.\"", "infuse Air"],
+        "summary": ["lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "Push 3 [square]: target all, range 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: XP 1 for each enemy targeted"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Push Through",
+      "number": "020",
+      "level": "4",
+      "initiative": 57,
+      "top": {
+        "lines": ["Heal 5 [diamond+], self"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"During your next attack ability this round, add +1 Attack to all attacks.\"", "Move 3 [circle]"],
+        "summary": ["round"]
+      },
+      "ghs": ["top: Heal 5 mark is [diamond]; the card's mark is a diamond with a plus inside [diamond+]", "bottom: text typo 'During you next' (card: 'your')"],
+      "xipe": ["bottom: simplified to +1 Attack for the whole round (round Attack bonus), not only during your next attack ability"],
+      "custom": ["bottom: +1 Attack to every attack of your next attack ability this round"],
+      "summons": [],
+      "notes": "Bottom: the text row is printed above the Move."
+    },
+    {
+      "name": "Skirmishing Maneuver",
+      "number": "021",
+      "level": "5",
+      "initiative": 29,
+      "top": {
+        "lines": ["Attack 2 [square]", "Move 2 [circle]", "Attack 3 [diamond]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 5 [square]", "Jump", "infuse Air"],
+        "summary": []
+      },
+      "ghs": ["top: last attack is Attack 2; the card prints Attack 3"],
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Defensive Tactics",
+      "number": "022",
+      "level": "5",
+      "initiative": 39,
+      "top": {
+        "lines": ["\"The first time each round that you gain Shield or Retaliate from one of your ability or attack modifier cards, gain Shield 1 and Retaliate 1 for the round.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Pull 2: Target 2 [square], range 3"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: simplified to a permanent Shield 1 and Retaliate 1 (persistent), not triggered by the first Shield/Retaliate gain each round"],
+      "custom": ["top: persistent trigger: first Shield/Retaliate gained each round from your ability or modifier cards adds Shield 1 and Retaliate 1 for the round"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Run Through",
+      "number": "023",
+      "level": "6",
+      "initiative": 33,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Pierce 2", "\"Add +1 Attack on each undamaged target.\"",
+                  "area: grey (attacker) hex and 3 red hexes in a straight line diagonally up-right from it [hex mark on the next hex in the line, beyond the last red]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Push 1 [square], range 1", "Immobilize"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: AreaEffect puts the enhancement hex on 6,0, the same hex as the last red target (the layout override draws it at 4,4, beyond the line, as on the card; AreaEffect should likely be 8,0,E)", "top: 'undamaged' implemented as target Health == 100%"],
+      "custom": ["top: +1 Attack on each undamaged target"],
+      "summons": [],
+      "notes": "Input initiative was \"33 \" (trailing space); printed 33. Bottom Push is its own ability (range 1) with Immobilize on the pushed target."
+    },
+    {
+      "name": "Immovable Phalanx",
+      "number": "024",
+      "level": "6",
+      "initiative": 17,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Shield 1 [square]"],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["\"Once each turn, you may treat one move ability from your ability cards as an attack ability of equal value.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: persistent: once per turn, a move ability from an ability card may be used as an attack of the same value"],
+      "summons": [],
+      "notes": "Xipe: toggle bonus OverrideMoveAbility, OncePerTurn, converted attack is melee range 1, 1 target."
+    },
+    {
+      "name": "Let Fly",
+      "number": "025",
+      "level": "7",
+      "initiative": 19,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Push 4", "Wound", "Stun",
+                  "\"Each enemy occupying a hex the target enters suffers damage 4 and gains Wound.\""],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["Attack 2 [square]", "Push 3", "Move 2 [circle]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["not matched by the source script: the card site's name is 'leg fly' (typo), Xipe's file is 99024_Bruiser_Let Fly.yml (listed in unmatched_xipe); compared by hand", "Initiative 33; the card prints 19", "top: the extra damage 4 + Wound hits all enemies adjacent to the attack target (AllTargetsAdjacentToParentTarget), not enemies in the hexes the pushed target enters (approximation)"],
+      "custom": ["top: each enemy in a hex the pushed target enters suffers damage 4 and gains Wound"],
+      "summons": [],
+      "notes": "Printed name is 'Let Fly'; the input/card-site name 'leg fly' is a typo (input flagged matched_by_spelling ghs:letfly, confirmed)."
+    },
+    {
+      "name": "Selfish Retribution",
+      "number": "026",
+      "level": "7",
+      "initiative": 8,
+      "top": {
+        "lines": ["Move 1 [circle]", "Loot 2"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Retaliate 2 [square]", "\"Gain XP 1 the next time you retaliate this round.\""],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: flat XP 1 for playing the bottom instead of XP 1 the next time you retaliate this round (no ProcXP on the Retaliate)"],
+      "custom": ["bottom: XP 1 the next time you retaliate this round"],
+      "summons": [],
+      "notes": "Initiative printed as '08'."
+    },
+    {
+      "name": "Frenzied Onslaught",
+      "number": "027",
+      "level": "8",
+      "initiative": 41,
+      "top": {
+        "lines": ["Move 2 [circle]", "Attack 3 [square]", "Move 2 [circle]", "Attack 3 [diamond]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Heal X, self", "\"where X is the amount of damage you have dealt this turn.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: Heal X = damage dealt this turn"],
+      "summons": [],
+      "notes": "Xipe's Heal has no Filter: Self (other Xipe self-heals set it); check the default target."
+    },
+    {
+      "name": "Crippling Offensive",
+      "number": "028",
+      "level": "8",
+      "initiative": 16,
+      "top": {
+        "lines": ["Attack 2 [square]", "Target 2", "Range 3", "Immobilize"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "Muddle: target all, range 1", "Shield 1 [square]"],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": ["Discard [Lost,Discard] makes the top lost; the card's top has no lost icon (no corner icons at all)"],
+      "custom": [],
+      "summons": [],
+      "notes": "Muddle is the brown question-mark diamond."
+    },
+    {
+      "name": "Brute Force",
+      "number": "029",
+      "level": "9",
+      "initiative": 9,
+      "top": {
+        "lines": ["Shield 2 [square]", "\"After each attack targeting you this round, perform:\"", "Move 1",
+                  "Push 2: target 1 ally or enemy, range 1"],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["\"Add +1 to each of your Push and Pull. Whenever you Push or Pull an enemy at least one hex, after the forced movement, that enemy and all enemies adjacent to it suffer damage 1.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "ghs": ["bottom: text reads 'Add Attack + 1 to each of your Push and Pull'; the card has no attack icon: '+1 to each of your Push and Pull'", "bottom: text typo 'siffer' (card: 'suffer')"],
+      "xipe": "missing",
+      "custom": ["top: this round, after each attack targeting you: Move 1, then Push 2 on 1 adjacent ally or enemy",
+                 "bottom: persistent: +1 to all your Push and Pull values; an enemy you push/pull at least one hex, and all enemies adjacent to it, suffer damage 1 after the forced movement"],
+      "summons": [],
+      "notes": "Initiative printed as '09'. The top's Push may target an ally."
+    },
+    {
+      "name": "Face Your End",
+      "number": "030",
+      "level": "9",
+      "initiative": 67,
+      "top": {
+        "lines": ["Attack 2", "Target 2", "Range 3", "Pull 2", "Attack 3 [diamond]",
+                  "area: grey (attacker) hex with 3 red hexes on its up-right, right and down-right sides [no hex mark]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 4 [diamond]", "\"Add +3 Attack and gain XP 1 if the target's current hit point value is lower than yours.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: condition simplified to target Health <= 13 (a fixed number), not lower than your current hit points"],
+      "custom": ["bottom: +3 Attack and XP 1 if the target's current hit points are lower than yours"],
+      "summons": [],
+      "notes": ""
+    }
+  ],
+  "summons": [],
+  "mechanics": [
+    "Round bonus 'gain XP 1 the next time you retaliate this round' (Eye for an Eye top, Provoking Roar top, Selfish Retribution bottom)",
+    "X values from turn history: hexes moved this turn (Balanced Measure top), damage dealt this turn (Balanced Measure bottom, Frenzied Onslaught bottom), hexes moved by a straight-line move (Hook and Chain bottom)",
+    "Linked move+attack that targets all enemies moved through, XP per target (Trample bottom); XP per enemy targeted (Whirlwind top)",
+    "Use-slot persistent cards counting sources of damage: Shield 1 + Retaliate 1 per attack (Warding Strength bottom, 6 slots, lost), negate damage (Juggernaut bottom, 4 slots, lost); +1 Move on next two move abilities (Intimidating Growl bottom, 2 slots, persistent but not lost)",
+    "Attack redirect: take attacks aimed at adjacent allies, ignoring range and line of sight (Fearsome Taunt bottom)",
+    "Bonus on undamaged targets (Sweeping Blow top, Run Through top)",
+    "Conditional attack bonuses: +2 Attack and XP 1 if you moved this turn (Unstoppable Charge top), +3 Attack and XP 1 if the target has fewer current HP than you (Face Your End bottom)",
+    "Next-attack-ability buff this round (Push Through bottom)",
+    "Triggered persistent: first Shield/Retaliate gained each round grants Shield 1 + Retaliate 1 for the round (Defensive Tactics top)",
+    "Treat a move ability as an attack of equal value once per turn (Immovable Phalanx bottom)",
+    "Push collision damage: enemies in hexes the pushed target enters suffer damage 4 + Wound (Let Fly top)",
+    "Reaction after each attack targeting you this round: Move 1, then Push 2 on an adjacent ally or enemy (Brute Force top)",
+    "+1 to all your Push and Pull, plus damage 1 to the moved enemy and its adjacent enemies after forced movement (Brute Force bottom)",
+    "No summons; no new conditions (Muddle, Disarm, Stun, Wound, Immobilize only); no Ward/Safeguard"
+  ],
+  "unclear": [
+    "Use-slot tracks (Warding Strength, Intimidating Growl, Juggernaut): the small red slash marks after the last slot appear on lost and non-lost cards alike, so I read them as 'end of track' and took the card's fate from the corner icons (Intimidating Growl: persistent only, so discarded, not lost)",
+    "Sweeping Blow / Run Through: what 'undamaged target' means (full hit points, or not yet damaged this turn) is a rules question, not a reading one; Xipe uses full hit points"
+  ]
+}

@@ -1,0 +1,986 @@
+{
+ "class": "Sawbones",
+ "code": "SB2",
+ "model_from": "Sawbones",
+ "ghs_file": "saw",
+ "xipe_class": null,
+ "character": {
+  "name": "saw",
+  "characterClass": "human",
+  "icon": "gh-saw",
+  "edition": "gh2e",
+  "handSize": 10,
+  "unlockEvent": "road:R-48|city:C-79",
+  "traits": [
+   "educated",
+   "persuasive",
+   "resourceful"
+  ],
+  "color": "#e3dfcf",
+  "spoiler": true,
+  "stats": [
+   {
+    "level": 1,
+    "health": 8
+   },
+   {
+    "level": 2,
+    "health": 9
+   },
+   {
+    "level": 3,
+    "health": 11
+   },
+   {
+    "level": 4,
+    "health": 12
+   },
+   {
+    "level": 5,
+    "health": 14
+   },
+   {
+    "level": 6,
+    "health": 15
+   },
+   {
+    "level": 7,
+    "health": 17
+   },
+   {
+    "level": 8,
+    "health": 18
+   },
+   {
+    "level": 9,
+    "health": 20
+   }
+  ],
+  "availableSummons": [],
+  "perks": [
+   {
+    "type": "remove",
+    "count": 1,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 1,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus2"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus2",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.saw.1%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 3,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "minus1"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1"
+      }
+     }
+    ]
+   },
+   {
+    "type": "replace",
+    "count": 2,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus0"
+      }
+     },
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.saw.2%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 2,
+      "attackModifier": {
+       "type": "plus1",
+       "effects": [
+        {
+         "type": "custom",
+         "value": "%data.custom.gh2e.saw.3%"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "add",
+    "count": 2,
+    "cards": [
+     {
+      "count": 1,
+      "attackModifier": {
+       "type": "plus0",
+       "rolling": true,
+       "effects": [
+        {
+         "type": "heal",
+         "value": 3,
+         "effects": [
+          {
+           "type": "range",
+           "value": 1
+          }
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "type": "custom",
+    "count": 2,
+    "combined": true,
+    "custom": "%data.custom.gh2e.saw.4%"
+   },
+   {
+    "type": "custom",
+    "count": 2,
+    "combined": true,
+    "custom": "%data.custom.gh2e.saw.5%"
+   },
+   {
+    "type": "custom",
+    "count": 3,
+    "combined": true,
+    "custom": "%data.custom.gh2e.saw.6%"
+   }
+  ],
+  "masteries": [
+   "%data.custom.gh2e.saw.7%",
+   "%data.custom.gh2e.saw.8%"
+  ]
+ },
+ "cards": [
+  {
+   "name": "battlefield medicine",
+   "level": "1",
+   "initiative": "83",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\battlefield-medicine.jpeg",
+   "ghs": {
+    "name": "Battlefield Medicine",
+    "number": 411,
+    "level": 1,
+    "initiative": 83,
+    "top": [
+     "Disarm {Range 1}",
+     "\"Give one adjacent ally one medical pack to gain Experience 1.\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 5"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "first aid",
+   "level": "1",
+   "initiative": "19",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\first-aid.jpeg",
+   "ghs": {
+    "name": "First Aid",
+    "number": 412,
+    "level": 1,
+    "initiative": 19,
+    "top": [
+     "Heal 4 [diamond_plus] {Range 1}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "curative mixture",
+   "level": "1",
+   "initiative": "8",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\curative-mixture.jpeg",
+   "ghs": {
+    "name": "Curative Mixture",
+    "number": 413,
+    "level": 1,
+    "initiative": 8,
+    "top": [
+     "(Heal 3 [diamond_plus] {Range 1}; \"Before the heal, remove one negative condition from the target.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"Remove one negative condition from one adjacent ally.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "bloody saw",
+   "level": "1",
+   "initiative": "25",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\bloody-saw.jpeg",
+   "ghs": {
+    "name": "Bloody Saw",
+    "number": 414,
+    "level": 1,
+    "initiative": 25,
+    "top": [
+     "(Attack 3 [diamond])",
+     "\"Add Attack + 1, Wound and gain Experience 1 if an ally has an active data.action.custom.gh2e-prescription.\""
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Safeguard [diamond_plus] {target: self}",
+     "Loot 1"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "prevention is key",
+   "level": "1",
+   "initiative": "13",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\prevention-is-key.jpeg",
+   "ghs": {
+    "name": "Prevention Is Key",
+    "number": 415,
+    "level": 1,
+    "initiative": 13,
+    "top": [
+     "(Wound; Disarm [diamond] {target: all; Range 1})",
+     "Safeguard [diamond_plus] {target: all; Range 1}"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"When you next perform a data.action.custom.gh2e-prescription action this round, grant all adjacent allies and self:\" {Shield 1}"
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "hand of the surgeon",
+   "level": "1",
+   "initiative": "62",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\hand-of-the-surgeon.jpeg",
+   "ghs": {
+    "name": "Hand of the Surgeon",
+    "number": 416,
+    "level": 1,
+    "initiative": 62,
+    "top": [
+     "Attack 4 [diamond]"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 1 [circle]",
+     "\"Give one adjacent ally one medical pack to gain Experience 1.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "booster shot",
+   "level": "1",
+   "initiative": "42",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\booster-shot.jpeg",
+   "ghs": {
+    "name": "Booster Shot",
+    "number": 417,
+    "level": 1,
+    "initiative": 42,
+    "top": [
+     "\"On the next four source of Damage from attacks targeting you, gain Shield 1 for the attack.\" {(card: slotStart; card: slot; card: slot; card: slotEnd)}"
+    ],
+    "top_flags": [
+     "persistent",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 2 [circle]",
+     "Strengthen [diamond_plus] {target: ally; Range 1}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "syringe",
+   "level": "1",
+   "initiative": "57",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\syringe.jpeg",
+   "ghs": {
+    "name": "Syringe",
+    "number": 418,
+    "level": 1,
+    "initiative": 57,
+    "top": [
+     "\"On the next four attacks, add Attack + 1.\" {(card: slotStart; card: slot; card: slot; card: slotEnd)}"
+    ],
+    "top_flags": [
+     "persistent",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "Wound {Range 1}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "needle gun",
+   "level": "1",
+   "initiative": "44",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\needle-gun.jpeg",
+   "ghs": {
+    "name": "Needle Gun",
+    "number": 419,
+    "level": 1,
+    "initiative": 44,
+    "top": [
+     "Attack 2 [diamond] {Range 3; Pierce 1 [square]; Poison}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Attack 1 [diamond] {Poison; Stun}",
+     "Attack 1 [diamond] {Poison; Stun}",
+     "Attack 1 {Poison; Stun}"
+    ],
+    "bottom_flags": [
+     "lost",
+     "xp=2"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "vital strikes",
+   "level": "1",
+   "initiative": "53",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\vital-strikes.jpeg",
+   "ghs": {
+    "name": "Vital Strikes",
+    "number": 420,
+    "level": 1,
+    "initiative": 53,
+    "top": [
+     "\"Add Attack + 1 to all your attacks targeting damaged enemies.\""
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 5"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "vaccine",
+   "level": "X",
+   "initiative": "15",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\vaccine.jpeg",
+   "ghs": {
+    "name": "Vaccine",
+    "number": 421,
+    "level": "X",
+    "initiative": 15,
+    "top": [
+     "(Attack 3 [square]; \"Add Target + 1 and gain Experience 1 if the target is damaged (for a maximum of one additional target).\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"On the next three negative conditions an enemy would apply to you, prevent the condition.\" {(card: slotStart; card: slot; card: slotEnd)}"
+    ],
+    "bottom_flags": [
+     "persistent",
+     "xp=1"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "teamwork",
+   "level": "X",
+   "initiative": "89",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\teamwork.jpeg",
+   "ghs": {
+    "name": "Teamwork",
+    "number": 422,
+    "level": "X",
+    "initiative": 89,
+    "top": [
+     "Attack 2 [square]",
+     "\"Grant one adjacent ally:\" {Attack 3 [diamond]}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 2 [circle]",
+     "\"Grant one adjacent ally:\" {Move 3 [square]}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "prep for surgery",
+   "level": "X",
+   "initiative": "22",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\prep-for-surgery.jpeg",
+   "ghs": {
+    "name": "Prep for Surgery",
+    "number": 423,
+    "level": "X",
+    "initiative": 22,
+    "top": [
+     "(Attack 2 [square]; \"Add Stun and gain Experience 1 if the target is damaged.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"You may treat all your attack abilities and move abilities from your ability cards as heal abilities of equal value plus one. In such cases, ignore all added effects of those abilities. When treating a move ability as a heal ability, it has Range 1.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "hamstring",
+   "level": "2",
+   "initiative": "72",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\hamstring.jpeg",
+   "ghs": {
+    "name": "Hamstring",
+    "number": 424,
+    "level": 2,
+    "initiative": 72,
+    "top": [
+     "Attack 4 [diamond] {Immobilize}"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 6",
+     "(Immobilize {target: self})"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "precaution",
+   "level": "2",
+   "initiative": "9",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\precaution.jpeg",
+   "ghs": {
+    "name": "Precaution",
+    "number": 425,
+    "level": 2,
+    "initiative": 9,
+    "top": [
+     "\"Grant all allies and self:\" {Shield 1}",
+     "\"Each ally may move the character token backward one slot on one active data.action.custom.gh2e-prescription they have.\""
+    ],
+    "top_flags": [
+     "round"
+    ],
+    "bottom": [
+     "Ward {Target 2; Range 1}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "regenerative tissue",
+   "level": "3",
+   "initiative": "52",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\regenerative-tissue.jpeg",
+   "ghs": {
+    "name": "Regenerative Tissue",
+    "number": 426,
+    "level": 3,
+    "initiative": 52,
+    "top": [
+     "Heal 4 [diamond_plus] {Range 1; Ward}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(\"At the start of your next three turns where your current hit point value is less than your maximum hit point value, perform:\"; Heal 2 {target: self}; (card: slotStart; card: slot; card: slotEnd))"
+    ],
+    "bottom_flags": [
+     "persistent",
+     "xp=1"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "blood transfusion",
+   "level": "3",
+   "initiative": "79",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\blood-transfusion.jpeg",
+   "ghs": {
+    "name": "Blood Transfusion",
+    "number": 427,
+    "level": 3,
+    "initiative": 79,
+    "top": [
+     "Attack 3 [diamond]",
+     "(Heal X {target: ally; Range 1}; \"Where X is the amount of Damage enemies suffered from the attack ability.\")"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(Safeguard {Range 1}; \"Remove all negative conditions from the target and give them one medical pack.\")"
+    ],
+    "bottom_flags": [
+     "xp=1"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "experimental stimulants",
+   "level": "4",
+   "initiative": "12",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\experimental-stimulants.jpeg",
+   "ghs": {
+    "name": "Experimental Stimulants",
+    "number": 428,
+    "level": 4,
+    "initiative": 12,
+    "top": [
+     "\"Grant one adjacent ally:\" {Retaliate 2 [square]}",
+     "\"If the target has an active data.action.custom.gh2e-prescription, gain Experience 1 and negate the next Damage they would suffer this round.\""
+    ],
+    "top_flags": [
+     "round"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "Heal 3 [square] {Range 1}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "do no harm",
+   "level": "4",
+   "initiative": "18",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\do-no-harm.jpeg",
+   "ghs": {
+    "name": "Do No Harm",
+    "number": 429,
+    "level": 4,
+    "initiative": 18,
+    "top": [
+     "(Attack 4 {Wound; Stun}; \"Place a character token on the target. The next three times they lose Stun, they gain Stun.\"; (card: slotStart; card: slot; card: slotEnd))",
+     "(Disarm {target: self})"
+    ],
+    "top_flags": [
+     "lost",
+     "persistent",
+     "xp=2"
+    ],
+    "bottom": [
+     "Attack 2 [diamond] {Poison}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "hack to bits",
+   "level": "5",
+   "initiative": "38",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\hack-to-bits.jpeg",
+   "ghs": {
+    "name": "Hack to Bits",
+    "number": 430,
+    "level": 5,
+    "initiative": 38,
+    "top": [
+     "Attack 2 [square]",
+     "(Attack 2 [diamond]; \"If this attack kills the target, all enemies adjacent to the hex the target occupied gain Wound.\")"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 4 [circle]",
+     "Muddle [diamond] {Range 1}",
+     "Strengthen [diamond_plus] {target: ally; Range 1}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "fortifying injection",
+   "level": "5",
+   "initiative": "5",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\fortifying-injection.jpeg",
+   "ghs": {
+    "name": "Fortifying Injection",
+    "number": 431,
+    "level": 5,
+    "initiative": 5,
+    "top": [
+     "(\"At the start of your next four turns where you do not have Ward, perform:\"; Ward {target: self}; (card: slotStart; card: slot; card: slot; card: slotEnd))"
+    ],
+    "top_flags": [
+     "persistent",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 5 [circle]",
+     "\"Whenever an adjacent ally would suffer Damage this round, negate the Damage.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "round",
+     "xp=2"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "amputate",
+   "level": "6",
+   "initiative": "86",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\amputate.jpeg",
+   "ghs": {
+    "name": "Amputate",
+    "number": 432,
+    "level": 6,
+    "initiative": 86,
+    "top": [
+     "Attack 4 [diamond] {Wound; Immobilize}"
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Heal 7 {Target %data.custom.gh2e.saw.abilities.432.1%; Range 1}",
+     "(Stun {Target %data.custom.gh2e.saw.abilities.432.2%})"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "return the favor",
+   "level": "6",
+   "initiative": "40",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\return-the-favor.jpeg",
+   "ghs": {
+    "name": "Return the Favor",
+    "number": 433,
+    "level": 6,
+    "initiative": 40,
+    "top": [
+     "Attack 3 [diamond]",
+     "\"Grant one adjacent ally who has an active data.action.custom.gh2e-prescription:\" {Move 3 [square]; Attack 3 [diamond]}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]",
+     "\"Remove one negative condition from one adjacent ally. If you do, gain Experience 1 and you may give one adjacent enemey the negative condition you removed.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "surgeons satchel",
+   "level": "7",
+   "initiative": "14",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\surgeons-satchel.jpeg",
+   "ghs": {
+    "name": "Surgeon's Satchel",
+    "number": 434,
+    "level": 7,
+    "initiative": 14,
+    "top": [
+     "Loot 1",
+     "Heal 3 {target: all; Range 1}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "Move 4 [circle]",
+     "\"Give one adjacent ally one medical pack to gain Experience 1.\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "exacting anger",
+   "level": "7",
+   "initiative": "49",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\exacting-anger.jpeg",
+   "ghs": {
+    "name": "Exacting Anger",
+    "number": 435,
+    "level": 7,
+    "initiative": 49,
+    "top": [
+     "Attack 4 [square] {Disarm}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "(\"At the start of your next three turns, perform:\"; Strengthen {target: self}; (card: slotStart; card: slot; card: slotEnd))"
+    ],
+    "bottom_flags": [
+     "persistent",
+     "xp=1"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "take your medicine",
+   "level": "8",
+   "initiative": "6",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\take-your-medicine.jpeg",
+   "ghs": {
+    "name": "Take Your Medicine",
+    "number": 436,
+    "level": 8,
+    "initiative": 6,
+    "top": [
+     "\"At the start of your next three turns, gain one medical pack.\" {(card: slotStart; card: slot; card: slotEnd)}"
+    ],
+    "top_flags": [
+     "persistent",
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"In initiative order, each of your allies may immediately play one \"Medical Pack\" ability card from their hand to perform one action of the card\""
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "euthanize",
+   "level": "8",
+   "initiative": "27",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\euthanize.jpeg",
+   "ghs": {
+    "name": "Euthanize",
+    "number": 437,
+    "level": 8,
+    "initiative": 27,
+    "top": [
+     "\"Kill one adjacent damaged enemy that has at least two negative conditions and whose current hit point value is 8 or less.\""
+    ],
+    "top_flags": [
+     "xp=1"
+    ],
+    "bottom": [
+     "Move 4 [circle]",
+     "((Wound; Poison; Muddle; Range 1); \"The target suffers Damage 1.\")"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null
+  },
+  {
+   "name": "secret of the oak",
+   "level": "9",
+   "initiative": "10",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\secret-of-the-oak.jpeg",
+   "ghs": {
+    "name": "Secret of the Oak",
+    "number": 438,
+    "level": 9,
+    "initiative": 10,
+    "top": [
+     "(Heal 6 [diamond_plus] {Range 1; Safeguard}; \"Before the heal, remove all negative conditions from the target.\")",
+     "\"If the target of the heal ability has an active data.action.custom.gh2e-prescription, gain Experience 1 and grant them:\" {Shield 2}"
+    ],
+    "top_flags": [
+     "round"
+    ],
+    "bottom": [
+     "\"Whenever you or an ally perform a heal ability on a \"Medical Pack\" ability card, that character may add Attack + 4 to their next attack that round of Move + 4 to their next move ability that round.\""
+    ],
+    "bottom_flags": [
+     "lost",
+     "round",
+     "xp=2"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "grisly trauma",
+   "level": "9",
+   "initiative": "81",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\grisly-trauma.jpeg",
+   "ghs": {
+    "name": "Grisly Trauma",
+    "number": 439,
+    "level": 9,
+    "initiative": 81,
+    "top": [
+     "Attack 5 [diamond] {target: enemiesAdjacent; Wound; Poison; Stun}"
+    ],
+    "top_flags": [
+     "lost",
+     "xp=2"
+    ],
+    "bottom": [
+     "Move 3 [circle]",
+     "\"Add Target + 1 to your next melee attack ability this round.\""
+    ],
+    "bottom_flags": [
+     "round"
+    ]
+   },
+   "xipe": null
+  },
+  {
+   "name": "medical pack 1",
+   "level": "M",
+   "initiative": "50",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\medical-pack-1.jpeg",
+   "ghs": {
+    "name": "Medical Pack",
+    "number": 445,
+    "level": "M",
+    "initiative": 50,
+    "top": [
+     "Heal 4 {target: self}"
+    ],
+    "top_flags": [],
+    "bottom": [
+     "\"data.custom.gh2e.saw.abilities.445.1\"",
+     "Heal 3 {target: self}"
+    ],
+    "bottom_flags": []
+   },
+   "xipe": null,
+   "matched_by_spelling": [
+    "ghs:medicalpack"
+   ]
+  },
+  {
+   "name": "medical pack 2",
+   "level": "M",
+   "initiative": "50",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\medical-pack-2.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "medical pack 3",
+   "level": "M",
+   "initiative": "50",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\medical-pack-3.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "medical pack 4",
+   "level": "M",
+   "initiative": "50",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\medical-pack-4.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "medical pack 5",
+   "level": "M",
+   "initiative": "50",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\medical-pack-5.jpeg",
+   "ghs": null,
+   "xipe": null
+  },
+  {
+   "name": "medical pack 6",
+   "level": "M",
+   "initiative": "50",
+   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\medical-pack-6.jpeg",
+   "ghs": null,
+   "xipe": null
+  }
+ ],
+ "unmatched_ghs": [],
+ "unmatched_xipe": []
+}
