@@ -11,6 +11,29 @@ Every mod is a switch. Nothing changes until you turn it on, and your saves are 
 
 ---
 
+## Getting started: the companion app
+
+The mods come with the **Frosthaven Companion**, a small Windows app that runs next to the game. It installs,
+updates and removes the mods, and it also gives you:
+- a list of the mods your campaign has on;
+- a live scenario map with every scenario's rewards;
+- detailed battle stats for your party.
+
+To install:
+
+1. Download **`Frosthaven-Companion-<version>.zip`** from the
+   [latest release](https://github.com/Kalarian/Frosthaven-Mods/releases/latest) and unzip it anywhere. There's
+   nothing to install.
+2. Close Frosthaven.
+3. Run **Frosthaven Companion.exe** and click **Install** in its Mods tab.
+
+That's it. The companion finds the game through Steam. Windows may warn about an unknown publisher the first time;
+choose **More info > Run anyway**.
+
+When a new version is out, the Mods tab says so: click **Update the app**, then **Update**.
+
+---
+
 ## What's in it
 
 ### House rules and quality of life
@@ -47,29 +70,7 @@ switch for that.
 
 You don't need to own Gloomhaven; the companion brings everything.
 
-### Companion app (optional)
-
-A small Windows app that runs next to the game:
-- install, update and remove the mods;
-- see which mods your campaign has on;
-- a live scenario map with every scenario's rewards;
-- detailed battle stats for your party.
-
-It's on the release page as `Frosthaven-Companion-<version>.zip`. Unzip it anywhere and run it; there's nothing to
-install. The mods work fine without it.
-
 ---
-
-## Installing
-
-1. Download **`Frosthaven-Companion-<version>.zip`** from the
-   [latest release](https://github.com/Kalarian/Frosthaven-Mods/releases/latest) and unzip it anywhere.
-2. Close Frosthaven.
-3. Run **Frosthaven Companion.exe** and click **Install** in its Mods tab.
-
-That's it. The companion finds the game through Steam. When a new version is out, its Mods tab says so: click
-**Update the app**, then **Update**. Windows may warn about an unknown publisher the first time; choose **More info >
-Run anyway**. (The standalone installer of earlier releases is gone: the companion does everything it did.)
 
 ## Turning mods on
 
