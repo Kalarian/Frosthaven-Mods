@@ -339,8 +339,8 @@ companion brings everything.</p>
       retirement screen. The reward is the class's own pair of events from Gloomhaven, an outpost event and a road event,
       some of which lead to further events (the Brute's caravan, the Sunkeeper's sun demons, the Sawbones' debts).
       Several Frosthaven classes are rewarded with events the same way. Their effects are Gloomhaven's, translated to
-      Frosthaven's sizes (reputation becomes morale, a Gloomhaven scenario becomes a random side scenario), and each one
-      is reviewed before it ships; until then an option tells its story with no effect. As with the game's own classes,
+      Frosthaven's sizes (reputation becomes morale, a Gloomhaven scenario becomes a random side scenario). The four
+      Jaws of the Lion classes had no retirement events in Gloomhaven, so they get Frosthaven-style rewards instead. As with the game's own classes,
       the events come with the first character of that class to retire in a campaign.</li>
   <li><b>Codex:</b> each Gloomhaven class has a hero page in the codex like the Frosthaven classes (Options &gt; Codex &gt; Heroes):
       portrait, description, health table, stats, traits, all its cards, and Gloomhaven digital's own role, difficulty
@@ -361,7 +361,9 @@ companion brings everything.</p>
       campaign is not touched. The copy is checked twice before it is offered, and the button refuses rather than
       writing a copy that might not load. Loading a save whose pack is missing is also stopped with the same offer,
       instead of failing inside the game (which would move the save to its corrupted folder).</li>
-  <li><b>Try it on a test campaign first.</b> Until we've played it together, keep it out of your main campaign.</li>
+  <li><b>Still a work in progress</b> (hence the <b>[WIP]</b> on the switch): every class plays in full, but some of
+      their visual effects are stand-ins until a visual pass. What hasn't been played by a person yet, and where a
+      class works differently from Gloomhaven, is in the table at the end of this section.</li>
   <li><b>Looks and sounds:</b> his model, animations (roars included), sounds and ability effects (the shout rings,
       the earthquake wave, his heal and power-up glows) come from Gloomhaven, the effects redrawn with Frosthaven's
       own effect shaders; hits, footsteps and weapon trails are Frosthaven's. His alternative look from Gloomhaven,
@@ -370,6 +372,34 @@ companion brings everything.</p>
       framed halves in his blue, the initiative hex, icons with numbers), but every card shares one banner picture of
       him, as Gloomhaven's cards never had paintings.</li>
 </ul>
+
+<h3 id="untested">Not tested yet, or not quite Gloomhaven</h3>
+<p>Everything in the pack has been played by the test bot, and most of it by people too. These are the things only
+the bot has seen, the ones nobody has managed to set up yet, and the places where a class knowingly works a little
+differently from Gloomhaven. If you play one of them, tell Kalarian how it went.</p>
+<table>
+  <tr><th>What</th><th>Status</th><th>What to expect</th></tr>
+  <tr><td>Hatchet, <i>Fearsome Efficiency</i> (top)</td><td>Not played yet</td><td>An overkill passes the leftover damage to an enemy next to the target</td></tr>
+  <tr><td>Demolitionist, <i>Explosive Blitz</i> (bottom)</td><td>Not played yet</td><td>Opening a door with the move stuns the enemies in the new room</td></tr>
+  <tr><td>Demolitionist, <i>Micro Missiles</i> (bottom)</td><td>Not played yet</td><td>An object with hit points in range takes 3 damage</td></tr>
+  <tr><td>Demolitionist, <i>The Bigger One</i> (top)</td><td>Not played yet</td><td>Obstacles in the area are destroyed; allies in it take 2 damage</td></tr>
+  <tr><td>Elementalist, <i>Ethereal Manifestation</i> (bottom)</td><td>Not played yet</td><td>Each element consumed gives its listed ability</td></tr>
+  <tr><td>Doomstalker, <i>Lead to Slaughter</i> (bottom)</td><td>Fixed, then only played by the bot</td><td>The dooms move to the new enemy and your turn ends normally (it once hung here)</td></tr>
+  <tr><td>Spellweaver, <i>Impaling Eruption</i> (top)</td><td>Not played yet</td><td>Enemies on the path to the target are hit too</td></tr>
+  <tr><td>Spellweaver, <i>Spirit of Doom</i> (top)</td><td>Not played yet</td><td>Curse; with Dark, kill the target instead</td></tr>
+  <tr><td>Soothsinger, <i>Shadow Puppets</i> (top)</td><td>Not played yet</td><td>The enemies you jump through attack another enemy</td></tr>
+  <tr><td>Beast Tyrant, <i>Jaws of Death</i>; <i>Rampage</i> (bottom)</td><td>Not played yet</td><td>As the cards say</td></tr>
+  <tr><td>Doomstalker, <i>Nature's Hunger</i> (top); <i>Wild Command</i> (top)</td><td>Not played yet</td><td>As the cards say</td></tr>
+  <tr><td>Tinkerer, <i>Harsh Stimulants</i> (bottom); <i>Jet Propulsion</i> (top)</td><td>Not played yet</td><td>As the cards say</td></tr>
+  <tr><td>Retirement events</td><td>Every kind of reward seen working; not every event played</td><td>The texts still use some Gloomhaven names (the Sleeping Lion, "the city")</td></tr>
+  <tr><td>Co-op with the Gloomhaven classes</td><td>Played with two players</td><td>Three or four players haven't played together with the pack yet</td></tr>
+  <tr><td>Visual effects</td><td>Work in progress</td><td>Some summons and spells use stand-in effects (the Sand Devil's whirlwind, for one)</td></tr>
+  <tr><td>Hatchet's axe</td><td>Stand-in</td><td>A dropped axe shows as Frosthaven's relic (Frosthaven has no axe model)</td></tr>
+  <tr><td>Doomstalker's dooms</td><td>Stand-in</td><td>The doom marker on an enemy uses the class icon (Frosthaven has no doom art)</td></tr>
+  <tr><td>Beast Tyrant's "Command" halves</td><td>Stand-in</td><td>A "Command" tag with the bear's face where Gloomhaven's cards have a banner</td></tr>
+  <tr><td>Tinkerer's mines; "infuse any elements" cards</td><td>Works differently</td><td>Mines are Frosthaven's ordinary traps; you pick the elements one at a time</td></tr>
+  <tr><td>A few long card texts</td><td>Works differently</td><td>Gloomhaven wrote some halves as long paragraphs; they're set in smaller text to fit</td></tr>
+</table>
 </div>
 
 <div class="keep">
