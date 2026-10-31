@@ -99,9 +99,14 @@ namespace FrosthavenMods
                 Name = "Gloomhaven classes: all open at once (mod)",
                 Description = "With the Gloomhaven classes pack on: every installed Gloomhaven class is open for new " +
                               "characters at once, instead of arriving one envelope per retirement. For testing the " +
-                              "classes, or a party that wants the whole roster from the start. Turning it off later puts " +
-                              "back into the envelopes every class only this switch opened that nobody has used; a class " +
-                              "with a character (playing or retired) or one a retirement unlocked stays open.",
+                              "classes, or a party that wants the whole roster from the start.\n\n" +
+                              "Turning it off again: every class that has been used stays open, which means one someone has " +
+                              "a character of (playing or retired), one a retirement already unlocked, or one with enhanced " +
+                              "cards. Every other class this switch opened goes back into the envelopes, and later " +
+                              "retirements deal them out again.\n\n" +
+                              "Example: the four Jaws of the Lion classes are open and a retirement unlocked the Berserker. " +
+                              "You turn this on, and someone makes a Cragheart. Turning it off leaves those six open and " +
+                              "puts the other 15 back into the envelopes.",
                 Blocked = GHClassesRule.WhyAllOpenBlocked,
             },
             new Rule
