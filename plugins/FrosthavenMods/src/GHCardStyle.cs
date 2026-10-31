@@ -47,7 +47,7 @@ namespace FrosthavenMods
         // wrapped text keeps 24 px from the half's sides (Against All Odds: 26..27; the generator's rows run to 11); a
         // half that doesn't fit is scaled to keep FitEdge px from the sides, clear of the badges and the infusion band
         // an area beside its line keeps 20 px from the rim and 24 from the line, or goes under it (Frosthaven's 51 area halves)
-        private const float AreaRim = 20f, AreaGap = 24f, AreaBelow = 12f, ColonGap = -1f, ColonToReward = 24f, DotsOffset = 4f;   // measured: Flesh Shield, Lacerating Eruption (4 px to the dots, 13 px after them)
+        private const float AreaRim = 20f, AreaGap = 24f, AreaBelow = 12f, ColonGap = -1f, ColonToReward = 24f, DotsOffset = 4f, DotsDrop = 6.5f;   // measured: Flesh Shield, Lacerating Eruption (4 px to the dots, 13 px after them)
         private const float TextMargin = 24f, FitEdge = 14f, FitMin = 0.6f, BoxRim = 36f;
         private const bool FitTrace = false;   // true: log every half's measured content (the fit review)
         // hexes (Overwhelming Wave)
@@ -377,11 +377,12 @@ namespace FrosthavenMods
                         Rect co = In(colon, half);
                         // the dots sit 4 px left of the colon text's centre (measured on the captures)
                         float dotsLeft = co.center.x - DotsOffset * f - 4f * f;
-                        Shift(colon, half, el.xMax + 7f * f - dotsLeft, el.center.y - co.center.y);   // 4 px past the red consume mark, which reaches 3 px past the element
+                        // and 6.5 px below its centre (measured: they sat 5.5 px under the element's middle, Frosthaven's 1 px over)
+                        Shift(colon, half, el.xMax + 7f * f - dotsLeft, el.center.y + (DotsDrop + 1f) * f - co.center.y);   // 4 px past the red consume mark, which reaches 3 px past the element
                     }
                 }
                 var headParts = heads.Where(r => r.gameObject.activeSelf && r != colon).SelectMany(r => Seen(r, button)).ToList();
-                { Rect co = In(colon, half); headParts.Add(new Rect(co.center.x - DotsOffset * f - 4f * f, co.center.y - 18f * f, 8f * f, 36f * f)); }
+                { Rect co = In(colon, half); headParts.Add(new Rect(co.center.x - DotsOffset * f - 4f * f, co.center.y - DotsDrop * f - 18f * f, 8f * f, 36f * f)); }
                 if (headParts.Count == 0) continue;
                 Rect head = Union(headParts);
                 // the reward's rows side by side, each at most the box's height (an area shrinks to it, as Lacerating
@@ -431,7 +432,7 @@ namespace FrosthavenMods
                     Shift(button, half, dx, 0f);
                     all.x += dx;
                 }
-                float hgt = Mathf.Max(54f * f, all.height + 12f * f);   // 61 made stacked boxes overlap (Eternal Equilibrium)
+                float hgt = Mathf.Max(51f * f, all.height + 9f * f);   // measured 55-56 vs Frosthaven 52-54 (Flesh Shield, Lacerating Eruption, Tri-Thrust)
                 Rect box = new Rect(all.xMin - 8f * f, all.center.y - hgt / 2f, all.width + 20f * f, hgt);
                 string boxName = "GHBareBox" + button.GetSiblingIndex();   // one per consume in a holder
                 Transform old = holder.Find(boxName);
