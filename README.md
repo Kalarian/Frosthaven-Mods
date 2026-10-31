@@ -70,6 +70,9 @@ switch for that.
 
 You don't need to own Gloomhaven; the companion brings everything.
 
+**Still a work in progress:** every class plays in full, but some of their visual effects are stand-ins for now. A
+visual pass is coming.
+
 ---
 
 ## Turning mods on

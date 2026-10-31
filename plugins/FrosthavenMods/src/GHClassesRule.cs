@@ -111,7 +111,7 @@ namespace FrosthavenMods
 
         /// <summary>The all-open switch needs the pack switch on first (off is always allowed).</summary>
         public static string WhyAllOpenBlocked(bool wantOn) =>
-            wantOn && !On ? "Turn on \"Gloomhaven classes (content pack)\" first." : null;
+            wantOn && !On ? "Turn on \"Gloomhaven classes (content pack) [WIP]\" first." : null;
 
         // ------------------------------------------------------------------ the pack's classes
 
