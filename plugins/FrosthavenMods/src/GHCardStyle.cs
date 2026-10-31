@@ -47,7 +47,7 @@ namespace FrosthavenMods
         // wrapped text keeps 24 px from the half's sides (Against All Odds: 26..27; the generator's rows run to 11); a
         // half that doesn't fit is scaled to keep FitEdge px from the sides, clear of the badges and the infusion band
         // an area beside its line keeps 20 px from the rim and 24 from the line, or goes under it (Frosthaven's 51 area halves)
-        private const float AreaRim = 20f, AreaGap = 24f, AreaBelow = 12f, ColonGap = 6f;
+        private const float AreaRim = 20f, AreaGap = 24f, AreaBelow = 12f, ColonGap = -1f, ColonToReward = 24f, DotsOffset = 4f;   // measured: Flesh Shield, Lacerating Eruption (4 px to the dots, 13 px after them)
         private const float TextMargin = 24f, FitEdge = 14f, FitMin = 0.6f, BoxRim = 36f;
         private const bool FitTrace = false;   // true: log every half's measured content (the fit review)
         // hexes (Overwhelming Wave)
@@ -363,14 +363,32 @@ namespace FrosthavenMods
                 float cap = 80f * f;
                 IEnumerable<Rect> Seen(Transform root, RectTransform within) => root.GetComponentsInChildren<Graphic>(true)
                     .Select(g => Extent1(g, within, half)).Where(e => e.HasValue && e.Value.height <= cap * 1.6f).Select(e => e.Value);
-                var headParts = heads.Where(r => r.gameObject.activeSelf).SelectMany(r => Seen(r, button)).ToList();
+                if (colon.GetComponent<TMP_Text>() is TMP_Text ct)
+                {
+                    // the colon at Frosthaven's size (8 px dots, 19 apart: it was half that) and 4 px after the element
+                    ct.enableAutoSizing = false;
+                    ct.fontSize = 40f;
+                    ct.alignment = TextAlignmentOptions.Center;
+                    ct.ForceMeshUpdate(true);
+                    var elParts = new[] { element, second }.Where(r => r != null && r.gameObject.activeSelf).SelectMany(r => Seen(r, button)).ToList();
+                    if (elParts.Count > 0)
+                    {
+                        Rect el = Union(elParts);
+                        Rect co = In(colon, half);
+                        // the dots sit 4 px left of the colon text's centre (measured on the captures)
+                        float dotsLeft = co.center.x - DotsOffset * f - 4f * f;
+                        Shift(colon, half, el.xMax + 7f * f - dotsLeft, el.center.y - co.center.y);   // 4 px past the red consume mark, which reaches 3 px past the element
+                    }
+                }
+                var headParts = heads.Where(r => r.gameObject.activeSelf && r != colon).SelectMany(r => Seen(r, button)).ToList();
+                { Rect co = In(colon, half); headParts.Add(new Rect(co.center.x - DotsOffset * f - 4f * f, co.center.y - 18f * f, 8f * f, 36f * f)); }
                 if (headParts.Count == 0) continue;
                 Rect head = Union(headParts);
                 // the reward's rows side by side, each at most the box's height (an area shrinks to it, as Lacerating
                 // Eruption's small area beside its XP), centred on the element, starting after the colon
                 Transform lp = desc.GetComponentsInChildren<Transform>(true).FirstOrDefault(c => c.name == "Layout Parent");
                 var pieces = (lp != null ? lp.Cast<Transform>() : desc.Cast<Transform>()).OfType<RectTransform>().Where(r => r.gameObject.activeSelf).ToList();
-                float x = head.xMax + 12f * f;
+                float x = head.xMax + 13f * f;   // measured: 13 px from the dots to the reward
                 bool any = false;
                 foreach (RectTransform piece in pieces)
                 {
@@ -378,6 +396,10 @@ namespace FrosthavenMods
                     var parts = piece.GetComponentsInChildren<Graphic>(true).Select(g => Extent1(g, piece, half)).Where(e => e.HasValue).Select(e => e.Value).ToList();
                     if (parts.Count == 0) continue;
                     Rect pr = Union(parts);
+                    // an infused element draws 48 px though its frame is 16 units (logged on Burn Away the Dark: it covered
+                    // the colon): measured from what is drawn
+                    if (piece.GetComponentsInChildren<Transform>(true).Any(c => c.name == "InfuseContainer"))
+                        pr = new Rect(pr.center.x - InfuseSize * f / 2f, pr.center.y - InfuseSize * f / 2f, InfuseSize * f, InfuseSize * f);
                     if (pr.height > 64f * f && areaHex != null)
                     {
                         float k = 64f * f / pr.height;
@@ -393,6 +415,12 @@ namespace FrosthavenMods
                 }
                 if (!any) continue;
                 var rewardParts = Seen(desc, desc).ToList();
+                foreach (Transform ic in desc.GetComponentsInChildren<Transform>(true).Where(c => c.name == "InfuseContainer" && c.gameObject.activeInHierarchy || c.name == "InfuseContainer"))
+                    foreach (Image el in ic.GetComponentsInChildren<Image>(true).Where(im => im.sprite != null && im.enabled))
+                    {
+                        Vector2 c = In(el.rectTransform, half).center;
+                        rewardParts.Add(new Rect(c.x - InfuseSize * f / 2f, c.y - InfuseSize * f / 2f, InfuseSize * f, InfuseSize * f));
+                    }
                 if (rewardParts.Count == 0) continue;
                 Rect all = Union(headParts.Concat(rewardParts));
                 // centred on the half when the consume has the line to itself (two side by side keep their columns:
@@ -644,7 +672,7 @@ namespace FrosthavenMods
                 if (second != null && !second.gameObject.activeSelf) second = null;
                 // a box with no element (a cost in words: Numb the Pain's "You may suffer 2 damage") is the text alone
                 bool hasElement = element.gameObject.activeSelf;
-                float fixedW = (hasElement ? 8f + 51f + ColonGap + 16f + 2f + 12f + (second != null ? 51f : 0f) : 16f + 16f) * u, th = 35f * u;
+                float fixedW = (hasElement ? 8f + 51f + ColonGap + ColonToReward + 12f + (second != null ? 51f : 0f) : 16f + 16f) * u, th = 35f * u;
                 // the reward at the card's text size, wrapped like Frosthaven's (Tri-Thrust: two centred lines, never
                 // shrunk: the visual review found box text at half size on a dozen halves), the box 36 px from the rims
                 text.enableAutoSizing = false;
@@ -693,7 +721,7 @@ namespace FrosthavenMods
                     }
                     x += ColonGap * u;   // Frosthaven leaves a gap before the colon (Malicious Conversion); ours touched the circle
                     Place((RectTransform)colon.transform, box, new Rect(x, old.center.y - 25.5f * u, 16f * u, 51f * u));
-                    x += 18f * u;
+                    x += ColonToReward * u;
                 }
                 else colon.gameObject.SetActive(false);
                 Place(desc, box, new Rect(x, old.center.y - th / 2f, tw, th));
@@ -853,17 +881,36 @@ namespace FrosthavenMods
             text.rectTransform.anchorMin = text.rectTransform.anchorMax = text.rectTransform.pivot = new Vector2(0f, 0.5f);
             text.rectTransform.anchoredPosition = Vector2.zero;
             text.rectTransform.sizeDelta = new Vector2(w, TagIcon * f);
-            Sprite symbol = UIInfoTools.Instance?.GetCharacterActiveAbilityIcon(model.ToString());
+            // Command: the class's own symbol (the Beast Tyrant's bear face, the user 2026-10-30: its active-ability icon
+            // is a club), gold on a black tile like the active-ability icons; Song and Augment keep theirs
+            Sprite gold = label == "Command" ? UIInfoTools.Instance?.GetCharacterConfigUI(model.ToString())?.iconClassGold : null;
+            Sprite symbol = gold ?? UIInfoTools.Instance?.GetCharacterActiveAbilityIcon(model.ToString());
             if (symbol != null)
             {
+                Vector2 at = new Vector2(w + TagGap * f, 0f);
+                if (gold != null)
+                {
+                    var tile = new GameObject("Tile", typeof(RectTransform), typeof(Image)).GetComponent<Image>();
+                    tile.rectTransform.SetParent(rt, false);
+                    tile.color = new Color(0.07f, 0.07f, 0.07f, 1f);
+                    tile.raycastTarget = false;
+                    tile.rectTransform.anchorMin = tile.rectTransform.anchorMax = tile.rectTransform.pivot = new Vector2(0f, 0.5f);
+                    tile.rectTransform.anchoredPosition = at;
+                    tile.rectTransform.sizeDelta = new Vector2(TagIcon * f, TagIcon * f);
+                    var rim = tile.gameObject.AddComponent<Outline>();
+                    rim.effectColor = new Color(0.78f, 0.64f, 0.36f, 1f);
+                    rim.effectDistance = new Vector2(1f * f, 1f * f);
+                }
                 var icon = new GameObject("Icon", typeof(RectTransform), typeof(Image)).GetComponent<Image>();
                 icon.rectTransform.SetParent(rt, false);
                 icon.sprite = symbol;
                 icon.preserveAspect = true;
                 icon.raycastTarget = false;
-                icon.rectTransform.anchorMin = icon.rectTransform.anchorMax = icon.rectTransform.pivot = new Vector2(0f, 0.5f);
-                icon.rectTransform.anchoredPosition = new Vector2(w + TagGap * f, 0f);
-                icon.rectTransform.sizeDelta = new Vector2(TagIcon * f, TagIcon * f);
+                icon.rectTransform.anchorMin = icon.rectTransform.anchorMax = icon.rectTransform.pivot = new Vector2(0.5f, 0.5f);
+                float s = gold != null ? TagIcon * 0.82f : TagIcon;
+                icon.rectTransform.anchorMin = icon.rectTransform.anchorMax = new Vector2(0f, 0.5f);
+                icon.rectTransform.anchoredPosition = at + new Vector2(TagIcon * f / 2f, 0f);
+                icon.rectTransform.sizeDelta = new Vector2(s * f, s * f);
             }
             Tagged.Add(half.GetInstanceID());
         }
