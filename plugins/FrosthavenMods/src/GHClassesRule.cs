@@ -99,7 +99,7 @@ namespace FrosthavenMods
         private static readonly ConditionalWeakTable<MultiplayerGameController, PackClassCommands> Handlers = new ConditionalWeakTable<MultiplayerGameController, PackClassCommands>();
         private static readonly MethodInfo Command = typeof(PackClassCommands).GetMethod(nameof(PackClassCommands.PackClasses));
 
-        private static bool _checkDue, _commandInFlight;
+        private static bool _checkDue, _commandInFlight, _relockSpare;
         private static float _nextCheck;
         private static int _failures;
         private static string _lastSkip;
@@ -219,6 +219,9 @@ namespace FrosthavenMods
         {
             ERulesFlag both = Flag | ModRules.AllGloomhavenClassesOpen;
             if (((before ^ after) & both) == 0) return;
+            // all open -> off: the classes only that switch opened go back into the envelopes (on this change only, not on
+            // every load: a campaign from before the envelopes had every class opened the same silent way)
+            if ((before & ModRules.AllGloomhavenClassesOpen) != 0 && (after & ModRules.AllGloomhavenClassesOpen) == 0) _relockSpare = true;
             CoopLog.Write($"PACK CLASSES rule -> {((after & Flag) == Flag ? "on" : "off")}, all open -> " +
                           $"{((after & ModRules.AllGloomhavenClassesOpen) != 0 ? "on" : "off")} role={CoopLog.Role()}");
             RequestCheck();
@@ -270,6 +273,21 @@ namespace FrosthavenMods
             List<CharacterClassID> pack = PackClassIDs(repo);
             if (pack.Count == 0) return true;
             bool on = On;
+            if (_relockSpare)
+            {
+                // an envelope class nothing in the campaign names (no character, retired character, enhanced card, pending
+                // choice, and no unlock line: a class a retirement opened has one, the switch's own unlocks don't)
+                List<CharacterClassID> spare = on && !AllOpen
+                    ? EnvelopeClassIDs(repo).Where(id => state.UnlockedClassIDs.Contains(id) && ClassInUse(state, repo, id) == null).ToList()
+                    : new List<CharacterClassID>();
+                _relockSpare = false;
+                if (spare.Count > 0)
+                {
+                    CoopLog.Write($"PACK CLASSES all open turned off: back into the envelopes: {string.Join(",", spare.Select(i => i.ID))}");
+                    Issue(view, false, spare);
+                    return false;   // the next poll checks the starting classes
+                }
+            }
             // on: open the pack's starting classes (its envelope classes arrive through retirements, GHEnvelopes); off: lock them all
             List<CharacterClassID> want = on ? StartingClassIDs(repo) : pack;
             bool allIn = want.All(state.UnlockedClassIDs.Contains);

@@ -99,8 +99,9 @@ namespace FrosthavenMods
                 Name = "Gloomhaven classes: all open at once (mod)",
                 Description = "With the Gloomhaven classes pack on: every installed Gloomhaven class is open for new " +
                               "characters at once, instead of arriving one envelope per retirement. For testing the " +
-                              "classes, or a party that wants the whole roster from the start. Turning it off later keeps " +
-                              "the classes already open; the still-locked ones go back to waiting for retirements.",
+                              "classes, or a party that wants the whole roster from the start. Turning it off later puts " +
+                              "back into the envelopes every class only this switch opened that nobody has used; a class " +
+                              "with a character (playing or retired) or one a retirement unlocked stays open.",
                 Blocked = GHClassesRule.WhyAllOpenBlocked,
             },
             new Rule
