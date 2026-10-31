@@ -38,20 +38,21 @@ namespace FrosthavenMods
 
         // Frosthaven's pill (Sodden Soil) and self box (Launch Pod)
         private const float EdgeMargin = 14f, PillRim = 30f, PillHeight = 39f, PillPad = 9.5f, PillGap = 7f, PillGapBare = 14f, PillText = 18f, PillPpum = 2f;
-        private const float SelfHeight = 41f, SelfPadLeft = 13f, SelfPadRight = 12f, SelfPpum = 2.4f;
+        private const float SelfHeight = 41f, SelfPadLeft = 13f, SelfPadRight = 12f, SelfPpum = 2.4f, SelfMinWidth = 102f, SelfIconBearing = 8f;   // 102: a short heal is centred in it (Fell Remedy, Storm Wall)
         // infusions (Call of Doom, Primal Bellow)
         private const float BadgeBottom = 6f;
-        private const float GeneratorElement = 51f, GeneratorSlot = 26f, SlotSize = 32f, SlotGap = 5f;
+        private const float GeneratorElement = 51f, GeneratorSlot = 26f, SlotSize = 32f, SlotGap = 5f, SlotPair = 10f, SlotPairDiamond = 7f;
         private const float PillSlotPull = 0f, PillSlotAfter = 11f, PillSlotEnd = 2f;   // slot to next icon: Exploding Decoy 12 px; 21 drew 22
-        private const float InfuseSize = 48f, InfuseBottom = 11.5f, InfuseBand = 72f, ContentTop = 20f;   // 9 crowded the rim (the visual review)
+        private const float InfuseSize = 48f, InfuseBottom = 11.5f, InfuseBand = 72f, InfuseStep = 60.5f, ContentTop = 20f;   // step: two infusions' centres (Frosthaven's 181; ours were 94 apart, in columns of their own)   // 9 crowded the rim (the visual review)
         // wrapped text keeps 24 px from the half's sides (Against All Odds: 26..27; the generator's rows run to 11); a
         // half that doesn't fit is scaled to keep FitEdge px from the sides, clear of the badges and the infusion band
-        // an area beside its line keeps 20 px from the rim and 24 from the line, or goes under it (Frosthaven's 51 area halves)
-        private const float AreaRim = 20f, AreaGap = 24f, AreaBelow = 12f, ColonGap = -1f, ColonToReward = 24f, DotsOffset = 4f, DotsDrop = 6.5f;   // measured: Flesh Shield, Lacerating Eruption (4 px to the dots, 13 px after them)
-        private const float TextMargin = 24f, FitEdge = 14f, FitMin = 0.6f, BoxRim = 36f;
+        // an area beside its line keeps 20 px from the rim and 24 from the line, or goes under it (Frosthaven's 51 area halves);
+        // beside, it keeps 39 px from the top rim (Frosthaven's nearest, White Winds; ours climbed to 25)
+        private const float AreaRim = 20f, AreaGap = 24f, AreaBelow = 12f, AreaTop = 39f, ColonGap = -1f, ColonToReward = 24f, DotsOffset = 4f, DotsDrop = 6.5f;   // measured: Flesh Shield, Lacerating Eruption (4 px to the dots, 13 px after them)
+        private const float TextMargin = 16f, TextLead = 5f, FitEdge = 14f, FitMin = 0.6f, BoxRim = 36f;   // 16: Frosthaven's multi-line texts, 354 measured: nearer margin median 28, 10% 16 (ours were 36 / 27 at 24)
         private const bool FitTrace = false;   // true: log every half's measured content (the fit review)
-        // hexes (Overwhelming Wave)
-        private const float HexDot = 54f, HexColumn = 54.5f, HexWidth = 53f, HexRim = 3.2f, HexXHalf = 10.3f, HexXStroke = 2.8f;
+        // hexes: Blizzard's in the card image, 53 apart, 52 wide and 58 tall with the rim (flatter than a regular hex), rows 45 apart
+        private const float HexDot = 54f, HexColumn = 53f, HexWidth = 52f, HexTall = 1.115f, HexRow = 0.851f, HexRim = 3.2f, HexXHalf = 10.3f, HexXStroke = 2.8f;
 
         private static readonly Regex Consume = new Regex(@"^Consume(Fire|Ice|Air|Earth|Light|Dark|Any|Wild)$");
         private static readonly Regex Create = new Regex(@"^Create(Fire|Ice|Air|Earth|Light|Dark|Any|Wild)(_\w+)?$");   // CreateIce_Ice: the ice infusion was the pale one
@@ -200,6 +201,15 @@ namespace FrosthavenMods
                 if (t.GetComponentsInParent<Transform>(true).Any(p => p.name == "ConditionalElement" || p.name == "Consume Button")) continue;
                 var rt = (RectTransform)t.transform;
                 Rect r = In(rt, half);
+                // Frosthaven's rule text runs 40 px from line to line, the generator's 35 at the same size (Tornado,
+                // Balanced Measure): the difference as line spacing (em / 100), absolute (a pooled card is generated again)
+                float lead = TextLead * f * rt.rect.width / Mathf.Max(r.width, 0.01f) / (t.fontSize * 0.01f);
+                if (t.fontSize > 0f && Mathf.Abs(t.lineSpacing - lead) > 0.1f)
+                {
+                    t.lineSpacing = lead;
+                    t.SetLayoutDirty();
+                    t.ForceMeshUpdate(true, true);
+                }
                 // a narrow column (Beast Tyrant's "Command" beside its ally's attack) would only break its word; a single
                 // word never wraps ("Comma / nd": Jaws of Death)
                 if (r.width < 0.6f * half.rect.width)
@@ -433,7 +443,7 @@ namespace FrosthavenMods
                     all.x += dx;
                 }
                 float hgt = Mathf.Max(51f * f, all.height + 9f * f);   // measured 55-56 vs Frosthaven 52-54 (Flesh Shield, Lacerating Eruption, Tri-Thrust)
-                Rect box = new Rect(all.xMin - 8f * f, all.center.y - hgt / 2f, all.width + 20f * f, hgt);
+                Rect box = new Rect(all.xMin - 8f * f, all.center.y - hgt / 2f, all.width + 24f * f, hgt);   // 16 px after the reward (Frosthaven 17, measured over 224 boxes)
                 string boxName = "GHBareBox" + button.GetSiblingIndex();   // one per consume in a holder
                 Transform old = holder.Find(boxName);
                 if (old != null) UnityEngine.Object.DestroyImmediate(old.gameObject);
@@ -546,9 +556,46 @@ namespace FrosthavenMods
                 Rect before = In(c, c.parent);
                 float k = SlotSize / GeneratorSlot;
                 c.localScale = new Vector3(k, k, 1f);
+                // slots side by side: Frosthaven leaves 7 px between two diamonds, 10 otherwise (Oscillating Entity, Accelerated
+                // Metabolism, Locust Host); the generator's spacing, scaled, left 4-5
+                // (the container's own layout group places them: moving a slot was undone at the next rebuild, so its spacing
+                // changes, and the container widens by as much)
+                var slots = c.Cast<Transform>().OfType<RectTransform>()
+                    .Where(s => s.gameObject.activeSelf && s.GetComponent<Image>() is Image si && si.sprite != null && si.sprite.name.Contains("nhancement"))
+                    .OrderBy(s => In(s, c).xMin).ToList();
+                if (slots.Count > 1 && c.GetComponent<HorizontalLayoutGroup>() is HorizontalLayoutGroup hlg)
+                {
+                    bool diamonds = slots.All(s => s.GetComponent<Image>().sprite.name.Contains("Diamond"));
+                    float want = c.InverseTransformVector(rows.TransformVector(new Vector3((diamonds ? SlotPairDiamond : SlotPair) * f, 0, 0))).magnitude;
+                    // absolute: the slots of a card built hidden aren't laid out yet (they overlapped and read a gap of -31)
+                    float dx = want - hlg.spacing;
+                    if (dx > 0f)
+                    {
+                        hlg.spacing = want;
+                        c.sizeDelta = new Vector2(c.sizeDelta.x + dx * (slots.Count - 1), c.sizeDelta.y);
+                        LayoutRebuilder.ForceRebuildLayoutImmediate(c);
+                    }
+                }
                 Rect after = In(c, c.parent);
-                float gap = c.parent.InverseTransformVector(rows.TransformVector(new Vector3(SlotGap * f, 0, 0))).magnitude;
+                // Frosthaven's gap from the value to its slot depends on the slot's shape (measured over its 819 slots, from
+                // the value's glyphs to the slot's frame: square 15, diamond 16, circle 23 px; ours were 13-14 for all)
+                bool inPill = c.parent.GetComponentsInChildren<TMP_Text>(true).Any(t => (t.text ?? "").Contains("<link=fhpill>"));
+                string shape = c.GetComponentsInChildren<Image>(true).Select(i => i.sprite != null ? i.sprite.name : "").FirstOrDefault(n => n.Contains("nhancement")) ?? "";
+                float extra = inPill ? 0f : shape.Contains("Circle") ? 10f : shape.Contains("Diamond") ? 2f : 1f;
+                float gap = c.parent.InverseTransformVector(rows.TransformVector(new Vector3((SlotGap + extra) * f, 0, 0))).magnitude;
                 c.localPosition += new Vector3(before.xMin - after.xMin + gap, (before.center.y - after.center.y), 0);
+                // the line is centred with its slots, as Frosthaven's (Flesh Shield: "retaliate 1 [slot]"); the generator
+                // centred the text alone and hung the slot off its right (the user, 2026-10-31: Crystallizing Blast,
+                // Flame Shroud). A line with a pill is centred by Pills, which counts its slots already.
+                if (c.parent is RectTransform line && !line.GetComponentsInChildren<TMP_Text>(true).Any(t => (t.text ?? "").Contains("<link=fhpill>")))
+                {
+                    Rect d = Drawn(line, line);
+                    if (d.width > 0)
+                    {
+                        float dx = line.rect.center.x - d.center.x;
+                        foreach (Transform ch in line) if (ch is RectTransform crt) Shift(crt, line, dx, 0f);
+                    }
+                }
             }
         }
 
@@ -673,7 +720,7 @@ namespace FrosthavenMods
                 if (second != null && !second.gameObject.activeSelf) second = null;
                 // a box with no element (a cost in words: Numb the Pain's "You may suffer 2 damage") is the text alone
                 bool hasElement = element.gameObject.activeSelf;
-                float fixedW = (hasElement ? 8f + 51f + ColonGap + ColonToReward + 12f + (second != null ? 51f : 0f) : 16f + 16f) * u, th = 35f * u;
+                float fixedW = (hasElement ? 8f + 51f + ColonGap + ColonToReward + 16f + (second != null ? 51f : 0f) : 16f + 16f) * u, th = 35f * u;
                 // the reward at the card's text size, wrapped like Frosthaven's (Tri-Thrust: two centred lines, never
                 // shrunk: the visual review found box text at half size on a dozen halves), the box 36 px from the rims
                 text.enableAutoSizing = false;
@@ -743,8 +790,13 @@ namespace FrosthavenMods
                 if (d.width <= 0) continue;
                 // the box as tall as what it holds (a condition's diamond is taller than a heal: it broke through the rim:
                 // Hidden Daggers, Energizing Strike), and centred on the line: the row centres its text, not text + slot
-                float hgt = Mathf.Max(SelfHeight * f, d.height + 8f * f);
-                Rect box = new Rect(d.xMin - SelfPadLeft * f, d.center.y - hgt / 2f, d.width + (SelfPadLeft + SelfPadRight) * f, hgt);
+                float hgt = SelfHeight * f;   // fixed 41: Frosthaven's 100 self boxes are all 41 tall, a condition's diamond sticks out (Experimental Adjustment)
+                // a heal, shield or retaliate icon starts 26 px into Frosthaven's box (its glyph's own bearing), a condition's
+                // diamond 14 (Systems Reboot, The Knife's Edge; Ever Forward); ours started all at 18
+                var first = Regex.Match(t.text, @"<sprite name=(\w+)>");
+                float padLeft = SelfPadLeft + (first.Success && (first.Groups[1].Value == "Heal" || first.Groups[1].Value == "Shield" || first.Groups[1].Value == "Retaliate") ? SelfIconBearing : 0f);
+                Rect box = new Rect(d.xMin - padLeft * f, d.center.y - hgt / 2f, d.width + (padLeft + SelfPadRight) * f, hgt);
+                if (box.width < SelfMinWidth * f) box = new Rect(d.center.x - SelfMinWidth * f / 2f, box.y, SelfMinWidth * f, hgt);
                 float dx = row.rect.center.x - box.center.x;
                 foreach (Transform c in row) if (c is RectTransform crt && c.name != "FHSelf") Shift(crt, row, dx, 0f);
                 box.x += dx;
@@ -775,6 +827,10 @@ namespace FrosthavenMods
                 float regionTop = halfRect.yMax - ContentTopOf(half, f), regionBottom = halfRect.yMin + band;
                 float shift = (regionTop + regionBottom) / 2f - b.center.y;
                 shift = Mathf.Min(shift, regionTop - b.yMax);
+                // an area keeps AreaTop from the top rim here too (Cold Front: centring lifted it back to 22 px)
+                var hexes = rows.GetComponentsInChildren<Transform>(true).Where(c => c.name == "AreaEffectContainer" && Shown(c, rows))
+                    .OfType<RectTransform>().SelectMany(a => Extent(a, half)).ToList();
+                if (hexes.Count > 0) shift = Mathf.Min(shift, halfRect.yMax - AreaTop * f - hexes.Max(p => p.yMax));
                 foreach (RectTransform r in rows.Cast<Transform>().OfType<RectTransform>().Where(r => r.gameObject.activeSelf && r != infuseRow))
                     Shift(r, half, 0, shift);
             }
@@ -808,6 +864,15 @@ namespace FrosthavenMods
         /// <summary>The infusions centred at the half's bottom, 11.5 px up (Call of Doom).</summary>
         private static void PlaceInfusions(RectTransform half, RectTransform infuseRow, List<RectTransform> containers, float f)
         {
+            // infusions in containers of their own on one line close up to Frosthaven's step, about their middle
+            var line = containers.Select(c => (c, r: In(c, half))).Where(x => Mathf.Abs(x.r.center.y - In(containers[0], half).center.y) < 5f * f)
+                .OrderBy(x => x.r.center.x).ToList();
+            if (line.Count > 1 && line.Count == containers.Count)
+            {
+                float mid = (line[0].r.center.x + line[line.Count - 1].r.center.x) / 2f;
+                for (int i = 0; i < line.Count; i++)
+                    Shift(line[i].c, half, mid + (i - (line.Count - 1) / 2f) * InfuseStep * f - line[i].r.center.x, 0f);
+            }
             Rect cr = Union(containers.SelectMany(c => Icons(c, half)));
             Shift(infuseRow, half, half.rect.center.x - cr.center.x, half.rect.yMin + InfuseBottom * f - cr.yMin);
         }
@@ -845,7 +910,9 @@ namespace FrosthavenMods
         /// 6 px above the half's (Sodden Soil: the bar at 434..491 x, 448..486 y in a half 13..491 x, 188..492 y). The bar
         /// sizes itself (ContentSizeFitter), so it is anchored bottom-right and grows leftwards from there.</summary>
         // the "Song" tag (Soothsinger): where Mindthief's "Augment" header sits, in the game's song colour (#EBB0AA)
-        private const float TagLeft = 18f, TagTop = 22f, TagText = 25f, TagIcon = 24f, TagGap = 6f, TagBand = 44f;
+        // measured on the game's own Augment header (Feedback Loop): text size 14 (22.3 here, x f), icon 26 px, frames 30,204 / icon
+        // centre y 219, 5 px from the word to the icon; ours were size 15.7, icon 24, centre 3 px lower
+        private const float TagLeft = 17f, TagTop = 18f, TagText = 22.3f, TagIcon = 26f, TagGap = 5f, TagBand = 44f, TagBaseline = 40f;
         private static readonly Color SongColour = new Color(0xEB / 255f, 0xB0 / 255f, 0xAA / 255f);
         private static readonly Color CommandColour = new Color(0xE0 / 255f, 0xB4 / 255f, 0x7A / 255f);   // Gloomhaven's tan for Command
         private static readonly HashSet<int> Tagged = new HashSet<int>();
@@ -875,12 +942,14 @@ namespace FrosthavenMods
             text.fontStyle = FontStyles.Bold;
             text.color = colour;
             text.enableWordWrapping = false;
-            text.alignment = TextAlignmentOptions.MidlineLeft;
+            // on the header's baseline, 40 px down (Feedback Loop's Augment): a midline alignment centred the ink, and Song's
+            // descender lifted it 3 px above Command
+            text.alignment = TextAlignmentOptions.BaselineLeft;
             text.raycastTarget = false;
             text.text = label;
             float w = text.GetPreferredValues(label).x;
             text.rectTransform.anchorMin = text.rectTransform.anchorMax = text.rectTransform.pivot = new Vector2(0f, 0.5f);
-            text.rectTransform.anchoredPosition = Vector2.zero;
+            text.rectTransform.anchoredPosition = new Vector2(0f, -(TagBaseline - TagTop - TagIcon / 2f) * f);   // a baseline alignment puts the baseline at the rect's middle
             text.rectTransform.sizeDelta = new Vector2(w, TagIcon * f);
             // Command: the class's own symbol (the Beast Tyrant's bear face, the user 2026-10-30: its active-ability icon
             // is a club), gold on a black tile like the active-ability icons; Song and Augment keep theirs
@@ -1003,6 +1072,11 @@ namespace FrosthavenMods
             float bottom = infuseRow != null ? hr.yMin + Band(Union(containers.SelectMany(c => Icons(c, half))).yMax - hr.yMin, f)
                          : badge.width > 0 && parts.Any(p => p.Overlaps(badge)) ? badge.yMax + 2f * f : hr.yMin + FitEdge * f;
             Rect region = Rect.MinMaxRect(hr.xMin + FitEdge * f, bottom, hr.xMax - FitEdge * f, hr.yMax - ContentTopOf(half, f));
+            // an area at the top of the half keeps AreaTop from the rim (Cold Front: fitting centred it back to 22 px)
+            var hexes = rows.GetComponentsInChildren<Transform>(true).Where(t => t.name == "AreaEffectContainer" && Shown(t, rows))
+                .OfType<RectTransform>().SelectMany(a => Extent(a, half)).ToList();
+            if (hexes.Count > 0 && hexes.Max(p => p.yMax) >= b.yMax - 0.5f * f)
+                region = Rect.MinMaxRect(region.xMin, region.yMin, region.xMax, Mathf.Min(region.yMax, hr.yMax - AreaTop * f));
             if (Plugin.Log != null && FitTrace)
             {
                 var card = half.GetComponentInParent<FullAbilityCard>();
@@ -1130,6 +1204,7 @@ namespace FrosthavenMods
                     float push = block.xMax + AreaGap * f - x;   // > 0: the line moves left (it fits: checked above)
                     if (push > 0f) foreach (RectTransform c in beside) Shift(c, half, -push, 0f);
                     Shift(area, half, x - hex.xMin, 0f);
+                    AreaDown(half, rows, area, f);
                 }
                 else if (beside.SelectMany(c => c.GetComponentsInChildren<TMP_Text>(true)).Any(t => (t.text ?? "").Contains("<link=fhpill>")))
                 {
@@ -1161,6 +1236,7 @@ namespace FrosthavenMods
                     if (push > 0f) foreach (RectTransform c in beside) Shift(c, half, -push, 0f);
                     Shift(area, half, x - hex.xMin, 0f);
                     need -= push;
+                    AreaDown(half, rows, area, f);
                     if (need > 0f)
                     {
                         float k = Mathf.Max(0.6f, (hex.width - need) / hex.width);
@@ -1172,6 +1248,26 @@ namespace FrosthavenMods
                     }
                 }
             }
+        }
+
+        /// <summary>An area beside its line no nearer the top rim than AreaTop; the rows after it that it then reaches
+        /// move down (Fit brings the half back inside if that's too tall).</summary>
+        private static void AreaDown(RectTransform half, RectTransform rows, RectTransform area, float f)
+        {
+            var parts = Extent(area, half).ToList();
+            if (parts.Count == 0) return;
+            float dy = parts.Max(p => p.yMax) - (half.rect.yMax - AreaTop * f);
+            if (dy <= 0f) return;
+            Shift(area, half, 0f, -dy);
+            Rect hex = Union(Extent(area, half).ToList());
+            Transform topRow = area;
+            while (topRow.parent != null && topRow.parent != rows) topRow = topRow.parent;
+            var after = rows.Cast<Transform>().OfType<RectTransform>()
+                .Where(r => r.gameObject.activeSelf && r.GetSiblingIndex() > topRow.GetSiblingIndex()).ToList();
+            var reach = after.SelectMany(r => Extent(r, half)).Where(p => p.xMax > hex.xMin && p.xMin < hex.xMax).ToList();
+            if (reach.Count == 0) return;
+            float overlap = reach.Max(p => p.yMax) - (hex.yMin - AreaBelow * f);
+            if (overlap > 0f) foreach (RectTransform r in after) Shift(r, half, 0f, -overlap);
         }
 
         // ------------------------------------------------------------------ area hexes
@@ -1189,7 +1285,7 @@ namespace FrosthavenMods
                 Vector2 centre = new Vector2(hexes.Average(h => h.anchoredPosition.x), hexes.Average(h => h.anchoredPosition.y));
                 // the area's units per measured pixel: the half's f, carried into the area's space
                 float unit = area.InverseTransformVector(rows.TransformVector(new Vector3(f, 0, 0))).magnitude;
-                float kx = HexColumn * unit / cell, ky = kx * (0.8660254f / 0.75f);
+                float kx = HexColumn * unit / cell, ky = kx * (HexRow / 0.75f);
                 Vector2 Map(Vector2 p) => centre + new Vector2((p.x - centre.x) * kx, (p.y - centre.y) * ky);
                 foreach (RectTransform h in hexes)
                 {
@@ -1198,7 +1294,7 @@ namespace FrosthavenMods
                     img.preserveAspect = false;
                     h.localScale = Vector3.one;
                     h.anchoredPosition = Map(h.anchoredPosition);
-                    h.sizeDelta = new Vector2(HexWidth * unit * HexPadW, HexWidth * unit * 2f / 1.7320508f * HexPadH);
+                    h.sizeDelta = new Vector2(HexWidth * unit * HexPadW, HexWidth * unit * HexTall * HexPadH);
                 }
                 foreach (RectTransform d in dots)
                 {
