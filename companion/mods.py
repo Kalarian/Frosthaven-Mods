@@ -31,7 +31,8 @@ def _installer():
     assets = game.latest_release().get("assets") or {}
     url = next((u for n, u in assets.items() if (n or "").replace(".", " ") == INSTALLER_NAME.replace(".", " ")), None)
     if not url:
-        raise RuntimeError("no installer bundled, and none found on the latest GitHub release")
+        raise RuntimeError("this companion's folder is missing its installer (_internal\\installer): download the "
+                           "companion zip from the latest GitHub release again and unzip it over this folder")
     cache = os.path.join(paths.DATA_DIR, "cache")
     os.makedirs(cache, exist_ok=True)
     dest = os.path.join(cache, INSTALLER_NAME)

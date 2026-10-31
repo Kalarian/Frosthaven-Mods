@@ -28,14 +28,26 @@
   try { view = localStorage.getItem("stats-view") || "overview"; } catch (e) {}
   if (/^#stats\/\w+/.test(location.hash)) view = location.hash.split("/")[1];      // /#stats/luck opens that view
 
-  // ---- characters: one identity per class + name across the campaign, coloured in order of first appearance
+  // ---- characters: one identity per class + name across the campaign, in order of first appearance. A colour is reused
+  // once its character has stopped playing: a party has four heroes at most, but a long campaign retires many more than
+  // the eight slots (they all went grey after the eighth); two characters share a colour only if they never overlapped
   let charOrder = [];
   const ckey = p => p.cls + "|" + p.name;
   function indexCharacters(runs) {
     const seen = new Map();
-    for (const r of runs) for (const p of r.party || []) if (!seen.has(ckey(p))) seen.set(ckey(p), {key: ckey(p), cls: p.cls, name: p.name, className: p.className});
+    runs.forEach((r, i) => {
+      for (const p of r.party || []) {
+        if (!seen.has(ckey(p))) seen.set(ckey(p), {key: ckey(p), cls: p.cls, name: p.name, className: p.className, first: i, last: i});
+        seen.get(ckey(p)).last = i;
+      }
+    });
     charOrder = [...seen.values()];
-    charOrder.forEach((c, i) => { c.color = COLORS[i] || OTHER; });
+    const lastUse = COLORS.map(() => -1);       // per slot: the last run its current character played
+    for (const c of charOrder) {
+      const slot = lastUse.findIndex(l => l < c.first);
+      c.color = slot >= 0 ? COLORS[slot] : OTHER;
+      if (slot >= 0) lastUse[slot] = c.last;
+    }
   }
   const charOf = key => charOrder.find(c => c.key === key) || {key, name: key, color: OTHER};
   const who = c => `${c.name} (${c.className || ""})`;

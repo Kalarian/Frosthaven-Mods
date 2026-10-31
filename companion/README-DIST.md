@@ -1,7 +1,7 @@
 Frosthaven Companion
 ====================
 
-The way to install and update the Frosthaven mod pack (since v0.9.5 the release has no separate installer). It has:
+The way to install and update the Frosthaven mod pack, the Gloomhaven classes included. It has:
 
 - Mods: which mod pack version you have, whether there's a newer one, and one-click install, update, reinstall or
   removal. A new mod pack comes as a new companion: when the tab says a newer companion is out, click
@@ -31,7 +31,7 @@ Updating
 --------
 When a newer companion is out, the Mods tab says so: click "Update the app". It downloads the new version from the
 mod pack's GitHub release, checks it against the release's checksums, replaces its own files (your logs and
-settings stay), and reopens by itself. (Version 0.1.0 can't do this yet: unzip 0.1.1 over it once by hand.)
+settings stay), and reopens by itself.
 If the folder can't be written to (under Program Files, say), it links to the release page instead.
 
 Files it writes

@@ -301,14 +301,15 @@ function campaignCard(s) {
   if (!c) return "";
   const on = new Set(c.rules || []);
   const all = ["Battle stats", "Dwarf's balance changes", "Easier item reward window", "Game bug fixes", "Masteries carry over",
-    "Milestone saves", "Modifier deck odds", "More story events", "Reveal event outcomes", "Scenario map file",
-    "Share duplicate loot", "Show personal quest rewards", "Tradeable resources and equipment"];
+    "Milestone saves", "Modifier deck odds", "More story events", "Reduced randomness", "Reveal event outcomes",
+    "Scenario map file", "Share duplicate loot", "Show personal quest rewards", "Tradeable resources and equipment",
+    "Gloomhaven classes: all open at once"];
   const ruled = all.filter(r => on.has(r)).length;
   // content packs: new classes the game loads at startup; each has its own switch, which locks on once used
   const packs = (s.packs || []).map(p => {
     const lit = c.rules && p.rule && on.has(p.rule);
     const state = !c.rules ? "" : lit ? `<span class="chip on">On in this campaign</span>` : `<span class="chip">Off in this campaign</span>`;
-    return `<div class="pack"><div><b>${esc(p.title)}</b> <span class="note">v${esc(p.version ?? "?")}${p.classes.length ? " · adds " + esc(p.classes.join(", ")) : ""}</span></div>${state}</div>`;
+    return `<div class="pack"><div><b>${esc(p.title)}</b> <span class="note">v${esc(p.version ?? "?")}${p.classes.length ? " · adds " + esc(p.classes.map(n => n.replace(/([a-z])([A-Z])/g, "$1 $2")).join(", ")) : ""}</span></div>${state}</div>`;
   }).join("");
   return `<div class="card"><h3>Campaign: ${esc(c.name)}</h3>
     <p class="note" style="margin-top:0">Last played ${esc(when(c.lastPlayed))}. The host changes these in the game: Options, Custom Rules.</p>
@@ -316,7 +317,7 @@ function campaignCard(s) {
     ${c.rules ? `<div class="chips">${all.map(r => `<span class="chip${on.has(r) ? " on" : ""}" title="${on.has(r) ? "On" : "Off"} in this campaign">${esc(r)}</span>`).join("")}</div>` : `<p class="note">Not known until the campaign has been saved with the mods.</p>`}
     <h4>Content packs</h4>
     ${packs || `<p class="note">None installed.</p>`}
-    ${packs ? `<p class="note">A pack adds new classes. Once someone in a campaign has played one, that campaign needs the pack for good.</p>` : ""}
+    ${packs ? `<p class="note">A pack adds new classes. Once someone in a campaign has played one, that campaign needs the pack for good. The way out, if it's ever needed: Copy without content packs, in the game's Save window.</p>` : ""}
   </div>`;
 }
 
