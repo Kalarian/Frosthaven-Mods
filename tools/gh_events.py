@@ -181,13 +181,13 @@ EVENTS = {
                  "outcome": ("The guard taps his notes with a smile on his face.\n\n“This is great,” he says. “I understand that "
                              "you haven’t seen her in a while, but the information you’ve provided should still be useful. Have "
                              "a nice day!”"),
-                 "gh": "+1 reputation", "fh": [("GainMorale", 1)], "note": "Reputation -> morale.", "status": "proposed"},
+                 "gh": "+1 reputation", "fh": [("GainMorale", 1)], "note": "Reputation -> morale.", "status": "approved"},
                 {"text": "Be as vague and unhelpful as possible, giving no useful information.",
                  "outcome": ("The guard scratches his head and looks down at his notes.\n\n“Well, that wasn’t very helpful,” he "
                              "sighs. “But thanks for your time, I guess. Let me know if you remember anything or get any new "
                              "information.”"),
                  "gh": "adds city event 62 to the deck", "fh": [("EnableEvent", "GH.Scoundrel-3")],
-                 "note": "The follow-up event, as in Gloomhaven. No effect now.", "status": "proposed"},
+                 "note": "The follow-up event, as in Gloomhaven. No effect now.", "status": "approved"},
             ],
         },
         {
@@ -208,10 +208,10 @@ EVENTS = {
                              "off by the sudden attack, but others engage you hungrily. The Scoundrel throws a few good daggers, "
                              "too, before she rides off, criticizing your poor decision-making."),
                  "gh": "each character: Poison and 2 damage", "fh": [("PartyPoison",), ("PartyDamage", 2)],
-                 "note": "The same, both at Frosthaven's sizes (its road events deal 2 to the party often).", "status": "proposed"},
+                 "note": "The same, both at Frosthaven's sizes (its road events deal 2 to the party often).", "status": "approved"},
                 {"text": "Let the bandits go.",
                  "outcome": "The bandits seem a little disappointed as they form up and ride off in the opposite direction.",
-                 "gh": "nothing", "fh": [], "note": "Nothing, as in Gloomhaven.", "status": "proposed"},
+                 "gh": "nothing", "fh": [], "note": "Nothing, as in Gloomhaven.", "status": "approved"},
             ],
         },
         {
@@ -231,14 +231,14 @@ EVENTS = {
                              "leave you with something to remember me by.”\n\nA piece of black cloth flutters down onto the "
                              "table. When you look back up, the Scoundrel is gone."),
                  "gh": "gain the Thief's Hood", "fh": [("GainItem", 10109)],
-                 "note": "Frosthaven has the same item: Thief's Hood (10109), head, 20 gold.", "status": "proposed"},
+                 "note": "Frosthaven has the same item: Thief's Hood (10109), head, 20 gold.", "status": "approved"},
                 {"text": "Overpower the Scoundrel and deliver her to the guards.",
                  "outcome": ("A look of horrid surprise flashes in the Scoundrel’s eyes as you leap forward and throw her to the "
                              "ground. She doesn’t even speak as you bind her arms and take her to the guard. They thank you for "
                              "your service, but their words aren’t much counter to the cold, angry stare of the Scoundrel as "
                              "she’s taken away."),
                  "gh": "+3 reputation", "fh": [("GainMorale", 2)],
-                 "note": "Reputation -> morale, at Frosthaven's largest common size (+2; +3 is rare there).", "status": "proposed"},
+                 "note": "Reputation -> morale, at Frosthaven's largest common size (+2; +3 is rare there).", "status": "approved"},
             ],
         },
     ],
@@ -263,12 +263,12 @@ EVENTS = {
                  "fh": [("LoseGold", 5), ("GainInspiration", 1)],
                  "note": "The medallion unlocks nothing in Frosthaven: a keepsake, so +1 inspiration for the 5 gold. Gloomhaven "
                          "only offers the purchase to a party with 5 gold; here the gold goes negative at worst.",
-                 "status": "proposed"},
+                 "status": "approved"},
                 {"text": "Refuse to pay for the note.",
                  "outcome": ("You laugh in indignation and push the messenger away. He opens his mouth to object, then thinks "
                              "better of it and runs off. You turn back to bartering, now leveraging the proof of your extreme "
                              "thriftiness against the merchant."),
-                 "gh": "+3 gold", "fh": [("GainGold", 3)], "note": "The same.", "status": "proposed"},
+                 "gh": "+3 gold", "fh": [("GainGold", 3)], "note": "The same.", "status": "approved"},
             ],
         },
         {
@@ -289,14 +289,14 @@ EVENTS = {
                              "demons everything you know.\nThey seem satisfied with your response and even offer a bitter thanks "
                              "as they fly off to the west."),
                  "gh": "adds road event 61 to the deck", "fh": [("EnableEvent", "GH.Sunkeeper-3")],
-                 "note": "The follow-up event, as in Gloomhaven.", "status": "proposed"},
+                 "note": "The follow-up event, as in Gloomhaven.", "status": "approved"},
                 {"text": "Attack the demons. There are a lot of them, but you do not take kindly to threats.",
                  "outcome": ("Without even speaking, you draw your weapons and attack. The demons are caught off guard, but they "
                              "bounce back with great ferocity. It is a long, brutal battle, and you continue on in your adventure "
                              "greatly wounded and bloody."),
                  "gh": "each character: Muddle, Wound and 3 damage",
                  "fh": [("PartyMuddle",), ("PartyWound",), ("PartyDamage", 3)],
-                 "note": "The same; 3 damage is Frosthaven's largest.", "status": "proposed"},
+                 "note": "The same; 3 damage is Frosthaven's largest.", "status": "approved"},
             ],
         },
         {
@@ -314,7 +314,7 @@ EVENTS = {
                 {"text": "Leave the scene quietly and return to your own business.",
                  "outcome": "Not wanting to get involved, you simply move on. Eventually the screams of the Sunkeeper fade away.",
                  "gh": "adds road event 62 to the deck", "fh": [("EnableEvent", "GH.Sunkeeper-4")],
-                 "note": "The follow-up event, as in Gloomhaven.", "status": "proposed"},
+                 "note": "The follow-up event, as in Gloomhaven.", "status": "approved"},
                 {"text": "Attack the demons and free the Sunkeeper.",
                  "outcome": ("You charge out of the trees and attack the Sun Demons. Fueled by righteous indignation and a bit of "
                              "guilt, you slay them all. The battle leaves you wounded, but the Sunkeeper happily mends your wounds "
@@ -322,7 +322,7 @@ EVENTS = {
                              "says. “I have no reason to believe them, but still, would you mind helping me look into it?”"),
                  "gh": "nothing (the Sunkeeper heals you)", "fh": [("GainMorale", 1)],
                  "note": "Gloomhaven gives nothing; a friend freed is worth +1 morale here, Frosthaven's commonest reward.",
-                 "status": "proposed"},
+                 "status": "approved"},
             ],
         },
         {
@@ -342,14 +342,14 @@ EVENTS = {
                              "They give you the location of the Sun Temple and implore you to hurry."),
                  "gh": "unlocks Gloomhaven's scenario 85", "fh": [("UnlockRandomSideScenario",)],
                  "note": "Frosthaven has no Sun Temple: a random side scenario instead, the one-time unlock its own events give.",
-                 "status": "proposed"},
+                 "status": "approved"},
                 {"text": "Attack the Sun Demons. It may be the only way to stop them from bothering you.",
                  "outcome": ("Without even speaking, you draw your weapons and attack. The demons are caught off guard, but they "
                              "bounce back with great ferocity. It is a long, brutal battle, and you continue on in your adventure "
                              "greatly wounded and bloody."),
                  "gh": "each character: Muddle, Wound and 3 damage; unlocks scenario 85 anyway",
                  "fh": [("PartyMuddle",), ("PartyWound",), ("PartyDamage", 3), ("UnlockRandomSideScenario",)],
-                 "note": "The same conditions and damage; the scenario becomes a random side scenario.", "status": "proposed"},
+                 "note": "The same conditions and damage; the scenario becomes a random side scenario.", "status": "approved"},
             ],
         },
     ],
@@ -369,13 +369,13 @@ EVENTS = {
                 {"text": "Tell him that joining the sanctuary is the right thing to do.",
                  "outcome": ("“I guess you’re right,” he shrugs. “Here’s to one last night of freedom.” He lifts his glass and "
                              "gulps down the contents. You follow his lead and the rest is a blur."),
-                 "gh": "+1 prosperity", "fh": [("AddProsperity", 1)], "note": "The same.", "status": "proposed"},
+                 "gh": "+1 prosperity", "fh": [("AddProsperity", 1)], "note": "The same.", "status": "approved"},
                 {"text": "Tell him to follow his dreams.",
                  "outcome": ("“You’re right! I’m in command of my own life, and I’m going to do what I want with it. Maybe I’ll "
                              "go to the Capital and start my own business or something. Who knows?”\n\nHe lifts his glass and "
                              "looks at you. “To endless possibilities! The next round’s on me.”"),
                  "gh": "adds city event 66 to the deck", "fh": [("EnableEvent", "GH.Sawbones-3")],
-                 "note": "The follow-up event, as in Gloomhaven.", "status": "proposed"},
+                 "note": "The follow-up event, as in Gloomhaven.", "status": "approved"},
             ],
         },
         {
@@ -392,12 +392,12 @@ EVENTS = {
                              "something to eat. He lost a lot of blood, but after some nursing, he’s able to stand and make his "
                              "way back to Frosthaven, thanking you profusely in the process."),
                  "gh": "+1 reputation", "fh": [("GainMorale", 1)],
-                 "note": "Reputation -> morale; \"Gloomhaven\" -> \"Frosthaven\".", "status": "proposed"},
+                 "note": "Reputation -> morale; \"Gloomhaven\" -> \"Frosthaven\".", "status": "approved"},
                 {"text": "Let the man die and take his belongings.",
                  "outcome": ("You riffle through the man’s pockets as he speaks his last words. They’re too soft to make out, but "
                              "the tone is one of anger and disappointment. You make off with a decent amount of money and leave "
                              "the corpse to rot."),
-                 "gh": "+3 gold per character", "fh": [("AllCharactersGainGold", 3)], "note": "The same.", "status": "proposed"},
+                 "gh": "+3 gold per character", "fh": [("AllCharactersGainGold", 3)], "note": "The same.", "status": "approved"},
             ],
         },
         {
@@ -420,14 +420,14 @@ EVENTS = {
                  "fh": [("LoseGold", 30), ("GainItem", 99)],
                  "note": "Frosthaven's largest gold loss, and its Major Healing Potion (99, brewed, no shop price) for "
                          "Gloomhaven's. The game lets the gold go negative if the party is short; Gloomhaven refuses the option.",
-                 "status": "proposed"},
+                 "status": "approved"},
                 {"text": "Get the Sawbones on a boat across the Misty Sea. New adventures surely await there.",
                  "outcome": ("You flatly refuse to pay off the Sawbones’ debt and convince him the only way to escape his pursuers "
                              "is to board a ship bound for the eastern continent, far out of their reach. He is reluctant, but "
                              "eventually agrees when you remind him what unknown adventures await in the land across the ocean. "
                              "You see him off in the night and desperately hope that is the last you hear of this situation."),
                  "gh": "adds city event 67 to the deck", "fh": [("EnableEvent", "GH.Sawbones-4")],
-                 "note": "The follow-up event, as in Gloomhaven.", "status": "proposed"},
+                 "note": "The follow-up event, as in Gloomhaven.", "status": "approved"},
             ],
         },
         {
@@ -447,13 +447,13 @@ EVENTS = {
                              "satisfied and walk out the same way they came in. At least it is over now."),
                  "gh": "-60 gold (only if the party has it)", "fh": [("LoseGold", 30)],
                  "note": "Halved to Frosthaven's largest gold loss. Gloomhaven refuses the option without the gold; here it goes "
-                         "negative at worst.", "status": "proposed"},
+                         "negative at worst.", "status": "approved"},
                 {"text": "Refuse to pay. You won’t be strongarmed by anyone.",
                  "outcome": ("You laugh and wave your hand dismissively. There’s no way you will be paying such a large amount of "
                              "money to these thugs. Unfortunately, the Inox is not amused.\n\n“Then your payment will be blood!” "
                              "she says. “Meet us in the back alley, and we’ll see if we can’t come to terms.”"),
                  "gh": "unlocks Gloomhaven's scenario 92 (the brawl)", "fh": [("UnlockRandomSideScenario",)],
-                 "note": "A random side scenario stands in for the brawl.", "status": "proposed"},
+                 "note": "A random side scenario stands in for the brawl.", "status": "approved"},
             ],
         },
     ],
@@ -473,13 +473,13 @@ EVENTS = {
                              "The captain seems skeptical at first, but admits that they could use an additional supply of "
                              "weapons. Terms are made, and a contract is signed."),
                  "gh": "+1 prosperity", "fh": [("AddProsperity", 1)],
-                 "note": "The same. \"the Ghost Fortress\" -> \"the Barracks\".", "status": "proposed"},
+                 "note": "The same. \"the Ghost Fortress\" -> \"the Barracks\".", "status": "approved"},
                 {"text": "Demand a finder’s fee for setting him up with buyers.",
                  "outcome": "The Valrath looks at you with trepidation, but after some persuasion, you get him to agree.",
                  "gh": "+15 gold, but only with a Scoundrel, Sawbones or Soothsinger in the party; otherwise he storms off",
                  "fh": [("GainGold", 15)],
                  "note": "The party-composition condition is dropped (our events have one outcome per option): the fee is always "
-                         "paid. 15 gold is a common Frosthaven event sum.", "status": "proposed"},
+                         "paid. 15 gold is a common Frosthaven event sum.", "status": "approved"},
             ],
         },
         {
@@ -500,7 +500,7 @@ EVENTS = {
                              "stronghold not far from here up in the mountains. Feel free to visit there if you ever get serious "
                              "about your loyalties.”"),
                  "gh": "unlocks Gloomhaven's scenario 80 (the stronghold)", "fh": [("UnlockRandomSideScenario",)],
-                 "note": "A random side scenario stands in for the stronghold.", "status": "proposed"},
+                 "note": "A random side scenario stands in for the stronghold.", "status": "approved"},
                 {"text": "Claim allegiance to the merchant guilds.",
                  "outcome": ("“Well then, today’s your unlucky day,” the man in front says. “Because we of the Vigil make it a "
                              "point to execute any and all commerce sympathizers we can find in this land.”\n\nThe men grimly draw "
@@ -508,7 +508,7 @@ EVENTS = {
                              "corpses. Among the loot you find a map."),
                  "gh": "unlocks scenario 80; +5 gold per character; 4 damage each",
                  "fh": [("UnlockRandomSideScenario",), ("AllCharactersGainGold", 5), ("PartyDamage", 3)],
-                 "note": "The map becomes a random side scenario; the damage drops to Frosthaven's largest (3).", "status": "proposed"},
+                 "note": "The map becomes a random side scenario; the damage drops to Frosthaven's largest (3).", "status": "approved"},
             ],
         },
     ],

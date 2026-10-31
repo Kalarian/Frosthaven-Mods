@@ -67,11 +67,20 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "GainMorale",
+              1
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "UnlockRandomSideScenario"
+            ]
+          ]
         }
       ]
     },
@@ -87,7 +96,12 @@
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "PartyDiscardCards",
+              2
+            ]
+          ]
         }
       ]
     },
@@ -99,7 +113,12 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "LoseMorale",
+              1
+            ]
+          ]
         },
         {
           "id": 2,
@@ -115,7 +134,12 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "PartyDamage",
+              3
+            ]
+          ]
         },
         {
           "id": 2,
@@ -213,7 +237,16 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "LoseGold",
+              5
+            ],
+            [
+              "GainMorale",
+              1
+            ]
+          ]
         },
         {
           "id": 2,
@@ -229,7 +262,12 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "AllCharactersGainGold",
+              5
+            ]
+          ]
         },
         {
           "id": 2,
@@ -245,11 +283,21 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "AddProsperity",
+              1
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "GainMorale",
+              1
+            ]
+          ]
         }
       ]
     },
@@ -265,7 +313,11 @@
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "PartyPoison"
+            ]
+          ]
         }
       ]
     },
@@ -281,7 +333,12 @@
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "GainGold",
+              3
+            ]
+          ]
         }
       ]
     },
@@ -301,6 +358,10 @@
             [
               "EnableEvent",
               "GH.Elementalist-3"
+            ],
+            [
+              "PartyDiscardCards",
+              2
             ]
           ]
         }
@@ -330,7 +391,15 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "UnlockRandomSideScenario"
+            ],
+            [
+              "LoseMorale",
+              1
+            ]
+          ]
         },
         {
           "id": 2,
@@ -355,7 +424,15 @@
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "PartyPoison"
+            ],
+            [
+              "PartyDamage",
+              2
+            ]
+          ]
         }
       ]
     },
@@ -367,11 +444,24 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "UnlockRandomSideScenario"
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "LoseMorale",
+              1
+            ],
+            [
+              "LoseProsperity",
+              1
+            ]
+          ]
         }
       ]
     },
@@ -387,6 +477,10 @@
             [
               "EnableEvent",
               "GH.Nightshroud-3"
+            ],
+            [
+              "GainMorale",
+              1
             ]
           ]
         },
@@ -420,7 +514,11 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "UnlockRandomSideScenario"
+            ]
+          ]
         },
         {
           "id": 2,
@@ -441,11 +539,29 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "PartyDamage",
+              3
+            ],
+            [
+              "PartyDiscardCards",
+              2
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "PartyDamage",
+              2
+            ],
+            [
+              "PartyDiscardCards",
+              2
+            ]
+          ]
         }
       ]
     },
@@ -457,11 +573,21 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "LoseMorale",
+              2
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "AddProsperity",
+              1
+            ]
+          ]
         }
       ]
     },
@@ -477,7 +603,16 @@
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "GainGold",
+              10
+            ],
+            [
+              "PartyCurse",
+              1
+            ]
+          ]
         }
       ]
     },
@@ -489,11 +624,21 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "AddProsperity",
+              1
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "GainGold",
+              15
+            ]
+          ]
         }
       ]
     },
@@ -505,11 +650,27 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "UnlockRandomSideScenario"
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "UnlockRandomSideScenario"
+            ],
+            [
+              "AllCharactersGainGold",
+              5
+            ],
+            [
+              "PartyDamage",
+              3
+            ]
+          ]
         }
       ]
     },
@@ -521,7 +682,12 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "AddProsperity",
+              1
+            ]
+          ]
         },
         {
           "id": 2,
@@ -542,11 +708,21 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "GainMorale",
+              1
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "AllCharactersGainGold",
+              3
+            ]
+          ]
         }
       ]
     },
@@ -558,7 +734,16 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "LoseGold",
+              30
+            ],
+            [
+              "GainItem",
+              99
+            ]
+          ]
         },
         {
           "id": 2,
@@ -579,11 +764,20 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "LoseGold",
+              30
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "UnlockRandomSideScenario"
+            ]
+          ]
         }
       ]
     },
@@ -595,7 +789,12 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "GainMorale",
+              1
+            ]
+          ]
         },
         {
           "id": 2,
@@ -616,7 +815,15 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "PartyPoison"
+            ],
+            [
+              "PartyDamage",
+              2
+            ]
+          ]
         },
         {
           "id": 2,
@@ -632,11 +839,21 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "GainItem",
+              10109
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "GainMorale",
+              2
+            ]
+          ]
         }
       ]
     },
@@ -648,7 +865,12 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "GainMorale",
+              1
+            ]
+          ]
         },
         {
           "id": 2,
@@ -664,7 +886,16 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "GainMorale",
+              1
+            ],
+            [
+              "PartyDiscardCards",
+              2
+            ]
+          ]
         },
         {
           "id": 2,
@@ -684,7 +915,12 @@
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "GainMorale",
+              1
+            ]
+          ]
         }
       ]
     },
@@ -696,7 +932,11 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "UnlockRandomSideScenario"
+            ]
+          ]
         },
         {
           "id": 2,
@@ -712,11 +952,21 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "GainMorale",
+              1
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "AllCharactersGainGold",
+              10
+            ]
+          ]
         }
       ]
     },
@@ -732,7 +982,12 @@
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "PartyDiscardCards",
+              2
+            ]
+          ]
         }
       ]
     },
@@ -744,11 +999,25 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "LoseGold",
+              5
+            ],
+            [
+              "GainInspiration",
+              1
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "GainGold",
+              3
+            ]
+          ]
         }
       ]
     },
@@ -769,7 +1038,18 @@
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "PartyMuddle"
+            ],
+            [
+              "PartyWound"
+            ],
+            [
+              "PartyDamage",
+              3
+            ]
+          ]
         }
       ]
     },
@@ -790,7 +1070,12 @@
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "GainMorale",
+              1
+            ]
+          ]
         }
       ]
     },
@@ -802,11 +1087,29 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "UnlockRandomSideScenario"
+            ]
+          ]
         },
         {
           "id": 2,
-          "effects": []
+          "effects": [
+            [
+              "PartyMuddle"
+            ],
+            [
+              "PartyWound"
+            ],
+            [
+              "PartyDamage",
+              3
+            ],
+            [
+              "UnlockRandomSideScenario"
+            ]
+          ]
         }
       ]
     },
@@ -834,7 +1137,16 @@
       "options": [
         {
           "id": 1,
-          "effects": []
+          "effects": [
+            [
+              "PartyCurse",
+              1
+            ],
+            [
+              "GainGold",
+              10
+            ]
+          ]
         },
         {
           "id": 2,
@@ -843,7 +1155,7 @@
       ]
     }
   ],
-  "data_sha": "08ae50b94b2d900266a3a31ef734951e5e129a914ba865cb07f529b9135ccadb",
+  "data_sha": "4d2c0cdbde647533e84776b14f02fcb84b2fe6850f5676061817cbe71d77d241",
   "source": {
     "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
     "buildid": "20286313",

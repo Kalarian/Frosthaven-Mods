@@ -19,7 +19,7 @@
       ]
      ],
      "note": "reputation -> morale",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Calm down the crowd and get more details from the man about the attack.",
@@ -31,7 +31,7 @@
       ]
      ],
      "note": "a Gloomhaven scenario unlock -> a random side scenario",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -49,7 +49,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Find your own way through the forest.",
@@ -62,7 +62,7 @@
       ]
      ],
      "note": "discard 3 lowered to Frosthaven's largest, 2",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   }
@@ -87,7 +87,7 @@
       ]
      ],
      "note": "reputation -> morale; ITEM TO CHOOSE: Frosthaven's axes: Flashing Axe (184, 20 gold) is the nearest shop axe; the Cleaving Axe (29) is a scenario reward",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Stay silent and keep out of it.",
@@ -95,7 +95,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -118,7 +118,7 @@
       ]
      ],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Wait and see what happens. It looks like she's handling herself well enough.",
@@ -126,7 +126,7 @@
      "gh": "gain Bloody Axe, each character consumes a small item item",
      "fh": [],
      "note": "ITEM TO CHOOSE: Frosthaven's axes: Flashing Axe (184, 20 gold) is the nearest shop axe; the Cleaving Axe (29) is a scenario reward; Frosthaven's events never consume items: nothing proposed",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   }
@@ -155,7 +155,7 @@
       ]
      ],
      "note": "Frosthaven's LoseGold takes it from the party's total gold once (Gloomhaven took it from each character); reputation -> morale",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Encourage the Cragheart to move on with its life.",
@@ -163,7 +163,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -186,7 +186,7 @@
       ]
      ],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Forget about the rocks and continue on your journey.",
@@ -194,7 +194,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   }
@@ -219,7 +219,7 @@
       ]
      ],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Advise against trading with the Orchids.",
@@ -232,7 +232,7 @@
       ]
      ],
      "note": "reputation -> morale",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -250,7 +250,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Take the overgrown path.",
@@ -262,7 +262,7 @@
       ]
      ],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   }
@@ -282,7 +282,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Refuse to pay for the note.",
@@ -295,7 +295,7 @@
       ]
      ],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -313,7 +313,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Downplay your struggle and politely decline the Savvas's offer.",
@@ -330,7 +330,7 @@
       ]
      ],
      "note": "the follow-up event, as in Gloomhaven",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -348,7 +348,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Admonish the Savvas, claiming you could have handled the demons without his help.",
@@ -356,7 +356,7 @@
      "gh": "gain Sun Earring",
      "fh": [],
      "note": "ITEM TO CHOOSE: Frosthaven's Sun Earring (item 160) costs 35, over the 30 limit; the Moon Earring (156, 20 gold) is the nearest",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   }
@@ -384,7 +384,7 @@
       ]
      ],
      "note": "a Gloomhaven scenario unlock -> a random side scenario; reputation -> morale; the Gloomhaven achievement (ThePoisonsSource) is a town record with no Frosthaven meaning: nothing proposed",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Let the guards continue their business and just continue with yours.",
@@ -397,7 +397,7 @@
       ]
      ],
      "note": "the follow-up event, as in Gloomhaven",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -415,7 +415,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Kill the savage little beast.",
@@ -431,7 +431,7 @@
       ]
      ],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -453,7 +453,7 @@
       ]
      ],
      "note": "a Gloomhaven scenario unlock -> a random side scenario",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Tell the captain to fix his own problem.",
@@ -470,7 +470,7 @@
       ]
      ],
      "note": "reputation -> morale",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   }
@@ -499,7 +499,7 @@
       ]
      ],
      "note": "the follow-up event, as in Gloomhaven; reputation -> morale",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Lie and claim you know nothing.",
@@ -507,7 +507,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -525,7 +525,7 @@
      "gh": "gain Black Card",
      "fh": [],
      "note": "ITEM TO CHOOSE: Frosthaven has no Black Card (a one-use curse-card item); its White Card (190, 20 gold) is the mirror image",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Arm yourself and make a defensive retreat from the area.",
@@ -533,7 +533,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -555,7 +555,7 @@
       ]
      ],
      "note": "a Gloomhaven scenario unlock -> a random side scenario; the Gloomhaven achievement (SinRa) is a town record with no Frosthaven meaning: nothing proposed",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Claim you want nothing to do with this and walk away.",
@@ -568,7 +568,7 @@
       ]
      ],
      "note": "the follow-up event, as in Gloomhaven",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -595,7 +595,7 @@
       ]
      ],
      "note": "perk checks are never a ported reward (they last the campaign): nothing proposed; damage 4 lowered to Frosthaven's largest, 3; discard 4 lowered to Frosthaven's largest, 2",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Arm yourself and make a defensive retreat from the area.",
@@ -612,7 +612,7 @@
       ]
      ],
      "note": "perk checks are never a ported reward (they last the campaign): nothing proposed",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   }
@@ -637,7 +637,7 @@
       ]
      ],
      "note": "reputation -> morale",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Threaten the Plagueherald with retribution if it doesn’t stop attacking residents.",
@@ -650,7 +650,7 @@
       ]
      ],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -668,7 +668,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Inspect the corpses for valuables.",
@@ -685,7 +685,7 @@
       ]
      ],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   }
@@ -710,7 +710,7 @@
       ]
      ],
      "note": "reputation -> morale",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Seems like a good opportunity to pick some pockets while people are distracted.",
@@ -718,7 +718,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -745,7 +745,7 @@
       ]
      ],
      "note": "reputation -> morale",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Give detailed directions about the way out and hope that is sufficient.",
@@ -753,7 +753,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   }
@@ -773,7 +773,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Direct him to the Savvas Elemental Guild and go back to sleep.",
@@ -786,7 +786,7 @@
       ]
      ],
      "note": "reputation -> morale",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -808,7 +808,7 @@
       ]
      ],
      "note": "a Gloomhaven scenario unlock -> a random side scenario",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Use the distraction to disengage from the demons and run away.",
@@ -816,7 +816,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   }
@@ -841,7 +841,7 @@
       ]
      ],
      "note": "experience is never a ported reward (guidelines): nothing proposed; reputation -> morale",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Work on reinforcing the walls. Hold it off for as long as possible.",
@@ -854,7 +854,7 @@
       ]
      ],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -872,7 +872,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Investigate the area and get to the bottom of this.",
@@ -885,7 +885,7 @@
       ]
      ],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   }
@@ -905,7 +905,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "You don’t want to pay for postage. Just keep the thing for yourself.",
@@ -913,7 +913,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   },
@@ -940,7 +940,7 @@
       ]
      ],
      "note": "Gloomhaven's extra -1 cards sit in the deck until the next scenario ends; one curse card each is the Frosthaven event equivalent",
-     "status": "proposed"
+     "status": "approved"
     },
     {
      "text": "Leave the core alone. You don't want anything weighing you down in battle.",
@@ -948,7 +948,7 @@
      "gh": "nothing",
      "fh": [],
      "note": "a straight copy",
-     "status": "proposed"
+     "status": "approved"
     }
    ]
   }
