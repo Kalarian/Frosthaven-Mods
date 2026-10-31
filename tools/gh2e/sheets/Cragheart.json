@@ -1,0 +1,672 @@
+{
+  "class": "Cragheart",
+  "read_by": "image reader, 2026-10-31",
+  "cards": [
+    {
+      "name": "Opposing Strike",
+      "number": "002",
+      "level": "1",
+      "initiative": 46,
+      "top": {
+        "lines": ["Attack 3 [diamond]",
+                  "consume Earth: +1 Attack, Muddle, XP 1",
+                  "area: red hex, grey (attacker) hex, red hex in a straight line (targets on opposite sides of you; doubled coords y up: R -2,0; G 0,0; R 2,0) [hex marks on both ends of the line, -4,0 and 4,0]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"At the end of this and your next four turns, perform:\"",
+                  "Heal 2, range 3",
+                  "slots: 5 (first dashed; XP 1 on slots 1, 3, 5), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": ["bottom: text typo 'this an your' (card: 'this and your')"],
+      "xipe": "agrees",
+      "custom": ["bottom: use slots: at the end of this turn and your next four turns, Heal 2, range 3"],
+      "summons": [],
+      "notes": "Class-wide: GHS numbers the cards 116-145, the printed numbers are 002-031; not counted as a disagreement. Class-wide: many rows and every infusion sit in a box with a '!' tab (written '(! box)' in lines); GHS renders these boxes as parentheses. Xipe: area -4,0,E|-2,0,R|0,0,G|2,0,R|4,0,E matches; bottom EndTurnAbility Heal 2 range 3 [Self, Ally], XPTracker [1,0,1,0,1] matches slots 1, 3, 5."
+    },
+    {
+      "name": "Crushing Grasp",
+      "number": "003",
+      "level": "1",
+      "initiative": 35,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Immobilize", "infuse Earth (! box)"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["\"Create one 1-hex obstacle tile in an adjacent empty hex. All allies and enemies adjacent to the created tile suffer damage 1.\"",
+                  "Loot 1",
+                  "infuse Earth (! box)"],
+        "summary": []
+      },
+      "ghs": ["bottom: text typo 'allies an enemies' (card: 'allies and enemies')"],
+      "xipe": "agrees",
+      "custom": ["bottom: create a 1-hex obstacle in an adjacent empty hex; all allies and enemies adjacent to it suffer damage 1"],
+      "summons": [],
+      "notes": "Xipe: Create RockSingle range 1 with sub-damage 1 on [Enemy, Ally] within 1 of the tile."
+    },
+    {
+      "name": "Avalanche",
+      "number": "004",
+      "level": "1",
+      "initiative": 75,
+      "top": {
+        "lines": ["Attack 4 [diamond]",
+                  "consume Earth: +2 Attack, XP 1",
+                  "area: grey (attacker) hex, red hex up-right of it, red hex right of it (triangle; doubled coords y up: G 0,0; R 1,1 2,0) [hex mark right of the upper red, 3,1]"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Heal 2 [square], range 3 [square]", "consume Earth: +2 Range, XP 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": "Xipe area 0,0,G|2,0,R|1,1,R|3,1,E matches."
+    },
+    {
+      "name": "Rumbling Advance",
+      "number": "005",
+      "level": "1",
+      "initiative": 38,
+      "top": {
+        "lines": ["Heal 4 [diamond+], range 2 [square]", "infuse Earth (! box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]",
+                  "\"All adjacent allies and enemies suffer damage 1.\" (! box)",
+                  "infuse Earth (! box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: after the move, all adjacent allies and enemies suffer damage 1"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Massive Boulder",
+      "number": "006",
+      "level": "1",
+      "initiative": 87,
+      "top": {
+        "lines": ["Attack 3 [diamond], range 2 [square]",
+                  "\"All allies and enemies adjacent to the target suffer damage 1.\" (! box)",
+                  "infuse Earth (! box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: all allies and enemies adjacent to the target suffer damage 1"],
+      "summons": [],
+      "notes": "Xipe: inline sub-damage 1, AllTargetsAdjacentToParentTargets, [Enemy, Ally]."
+    },
+    {
+      "name": "Backup Ammunition",
+      "number": "007",
+      "level": "1",
+      "initiative": 77,
+      "top": {
+        "lines": ["\"On your next four single-target ranged attack abilities, add +1 Target.\"",
+                  "slots: 4 (first dashed; XP 1 on slots 2, 4), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: buff applies to ranged attack abilities (ValidAbilityType Attack, AttackType Ranged); the 'single-target' restriction is not in the data"],
+      "custom": ["top: use slots: +1 Target on your next four single-target ranged attack abilities"],
+      "summons": [],
+      "notes": "Xipe XPTracker [0,1,0,1] matches XP on slots 2, 4."
+    },
+    {
+      "name": "Earthen Bulwark",
+      "number": "008",
+      "level": "1",
+      "initiative": 41,
+      "top": {
+        "lines": ["\"Create two 1-hex obstacle tiles in empty hexes within range 3 [square].\"",
+                  "consume Earth: \"All allies adjacent to at least one created tile suffer damage 1 and gain Ward\", XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "Heal 1 [square], range 2 [square]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: no consume: the damage 1 to adjacent allies always happens", "top: allies gain Strengthen, not Ward", "top: flat XP 1 for the half, not XP 1 on the consume", "top: Range 3 has no enhancement (card: range 3 [square])"],
+      "custom": ["top: create two 1-hex obstacles in empty hexes within range 3", "top (consume Earth): all allies adjacent to at least one created tile suffer damage 1 and gain Ward"],
+      "summons": [],
+      "notes": "The enhancement mark sits on the range value inside the text row. Ward is the pink diamond icon (2e Ward)."
+    },
+    {
+      "name": "Unstable Upheaval",
+      "number": "009",
+      "level": "1",
+      "initiative": 13,
+      "top": {
+        "lines": ["Attack 3: target all adjacent enemies",
+                  "consume Earth: target all enemies up to two hexes away instead, XP 1",
+                  "\"All adjacent allies suffer damage 2.\" (! box)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["Xipe's file is spelled 'Unstable Upheavel' (input flagged matched_by_spelling xipe:unstableupheavel; the card prints 'Unstable Upheaval')", "top: consume implemented as Range +1 on the all-adjacent attack (all enemies within range 2), treated as melee"],
+      "custom": ["top (consume Earth): target all enemies up to two hexes away instead of all adjacent enemies", "top: all adjacent allies suffer damage 2"],
+      "summons": [],
+      "notes": "No enhancement marks anywhere on this card. GHS's consume target is a custom label key (%data.custom.gh2e.cragheart.abilities.123.1%), not resolved in the input; assumed to be the printed text."
+    },
+    {
+      "name": "Crater",
+      "number": "010",
+      "level": "1",
+      "initiative": 61,
+      "top": {
+        "lines": ["Attack 3 [diamond], range 3 [square]", "consume Earth: Push 2, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"All adjacent allies and enemies suffer damage 1.\" (! box)",
+                  "Move 4 [square]", "Jump",
+                  "\"All adjacent allies and enemies suffer damage 1.\" (! box)",
+                  "consume Earth: +1 damage, XP 1 (on the second damage row)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: before and after the move, all adjacent allies and enemies suffer damage 1; consume Earth adds +1 to the second"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Dirt Tornado",
+      "number": "011",
+      "level": "1",
+      "initiative": 82,
+      "top": {
+        "lines": ["Attack 1, range 2", "Muddle",
+                  "consume Earth: +1 Attack, XP 1",
+                  "area: 7 red hexes, a centre hex with its full ring of six (no grey hex; ranged area) [no hex mark]",
+                  "Muddle: target all allies in the red hexes of the attack ability (! box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: Muddle all allies in the red hexes of the attack"],
+      "summons": [],
+      "notes": "No enhancement marks on the top. Xipe: the Muddle is a sub-ability with Filter [Enemy, Ally] (covers the allies row); its own comment says Muddle does not show on the main ability (display only)."
+    },
+    {
+      "name": "Earthen Clod",
+      "number": "012",
+      "level": "1",
+      "initiative": 24,
+      "top": {
+        "lines": ["Attack 2 [square], range 5", "consume Earth: Immobilize, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 3 [diamond], range 5",
+                  "\"Add +1 Attack for each obstacle or objective adjacent to the target.\""],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": ["Initiative 29; the card prints 24"],
+      "xipe": ["Initiative 29; the card prints 24", "bottom: bonus counts adjacent obstacles only (TargetAdjacentValidTilesFilter [Obstacle]); objectives not counted"],
+      "custom": ["bottom: +1 Attack for each obstacle or objective adjacent to the target"],
+      "summons": [],
+      "notes": "Input (card site) initiative is 24, same as the print."
+    },
+    {
+      "name": "Heaving Swing",
+      "number": "013",
+      "level": "X",
+      "initiative": 57,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Push 1 [square]",
+                  "\"You may push the target into hexes containing obstacles. In each case, destroy the obstacle, the target suffers damage 2, and you gain XP 1.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Destroy an adjacent obstacle or suffer damage 1 to add +3 Attack to your next melee attack this round.\""],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: always suffer damage 1 (no option to destroy an adjacent obstacle instead) and a round +3 Attack bonus (BuffAttack); the 'next melee attack' limit is not in the data"],
+      "custom": ["top: may push into obstacle hexes: destroy the obstacle, target suffers damage 2, XP 1 each time", "bottom: cost (destroy an adjacent obstacle or suffer damage 1) for +3 Attack on your next melee attack this round"],
+      "summons": [],
+      "notes": "Xipe top: AdditionalPushEffect IntoObstacles, damage 2, XP 1 (matches)."
+    },
+    {
+      "name": "Petrify",
+      "number": "014",
+      "level": "X",
+      "initiative": 53,
+      "top": {
+        "lines": ["Attack 4 [diamond], range 3",
+                  "\"For each target killed, gain XP 1 and create one 1-hex obstacle tile in the featureless hex they occupied.\"",
+                  "area: 3 red hexes in a triangle, one on top of two (no grey hex; ranged area; doubled coords y up: R 0,0 2,0 1,1) [hex mark right of the top red, 3,1]",
+                  "infuse Earth (! box)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Attack 2 [square], range 2 [square]", "consume Earth: +2 Range, XP 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: a different card: Kill one normal enemy within range 4 and create an obstacle in its hex (MergedKillCreate), no attack, no area; XP 2 instead of XP 1 plus XP 1 per kill (looks like the 1st edition Petrify; older attempts with the 2e area are commented out)"],
+      "custom": ["top: for each target killed: XP 1 and a 1-hex obstacle in the featureless hex it occupied"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Burrow",
+      "number": "015",
+      "level": "X",
+      "initiative": 94,
+      "top": {
+        "lines": ["Heal 2 [square], Target 2, range 3", "infuse Earth (! box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 7 [square]", "Jump",
+                  "consume Earth: Immobilize: target all enemies moved through with the move ability, XP 1"],
+        "summary": ["XP 1", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["Initiative 64; the card prints 94", "top: no infuse Earth (the card infuses Earth)"],
+      "custom": ["bottom (consume Earth): Immobilize all enemies moved through with the move"],
+      "summons": [],
+      "notes": "Xipe bottom consume: AllTargetsOnMovePath + Immobilize (matches)."
+    },
+    {
+      "name": "Mud Eruption",
+      "number": "016",
+      "level": "2",
+      "initiative": 25,
+      "top": {
+        "lines": ["Attack 3 [diamond]: target 4 enemies within 4 hexes", "Push 1",
+                  "\"Create one 1-hex obstacle tile in the featureless hex each target previously occupied.\"",
+                  "infuse Earth (! box)"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: creates one obstacle anywhere within range 4 (separate Create ability), not one in the hex each target was pushed out of"],
+      "custom": ["top: after the push, a 1-hex obstacle in the featureless hex each target previously occupied"],
+      "summons": [],
+      "notes": "GHS's target is a custom label key (%data.custom.gh2e.cragheart.abilities.130.1%), not resolved in the input. Xipe: Range 4, Target 4."
+    },
+    {
+      "name": "Sentient Growth",
+      "number": "017",
+      "level": "2",
+      "initiative": 78,
+      "top": {
+        "lines": ["Attack 2 [square], range 3",
+                  "area: 3 red hexes in a triangle, one on top of two (no grey hex; ranged area; doubled coords y up: R 0,0 2,0 1,1) [hex mark right of the top red, 3,1]",
+                  "Heal 2: target all allies in the red hexes of the attack ability",
+                  "infuse Earth (! box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "Heal 1 [square]: target all, range 1", "Attack 1 [square]: target all adjacent enemies"],
+        "summary": []
+      },
+      "ghs": ["bottom: Move 2 has no mark; the card has Move 2 [circle]"],
+      "xipe": ["top: Heal 2 has Enhancements: 1; the card has no mark on it", "bottom: Move 2 has no enhancement (card: Move 2 [circle])"],
+      "custom": ["top: Heal 2 all allies in the red hexes of the attack"],
+      "summons": [],
+      "notes": "Xipe bottom Heal: Filter Ally, Target all, range 1 (layout 'all adjacent allies')."
+    },
+    {
+      "name": "Clear the Way",
+      "number": "018",
+      "level": "3",
+      "initiative": 30,
+      "top": {
+        "lines": ["\"Relocate one adjacent 1-hex obstacle tile to an empty hex within range 4 to perform:\"",
+                  "Attack 2 [square]: target all enemies adjacent to the relocated tile, Pierce 1",
+                  "consume Earth: +1 Attack, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Jump",
+                  "\"Destroy all obstacles, hazardous terrain, difficult terrain, and traps in hexes you enter.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: only disarms traps and destroys obstacles on the move path; hazardous and difficult terrain are not destroyed"],
+      "custom": ["top: relocate an adjacent 1-hex obstacle to an empty hex within range 4, then attack all enemies adjacent to the relocated tile", "bottom: destroy all obstacles, hazardous terrain, difficult terrain and traps in hexes you enter"],
+      "summons": [],
+      "notes": "Pierce is the orange diamond icon. Xipe top: MergedMoveObstacleAttack (MoveObstacleRange 4, attack all within 1 of the tile)."
+    },
+    {
+      "name": "Blunt Force",
+      "number": "019",
+      "level": "3",
+      "initiative": 21,
+      "top": {
+        "lines": ["Attack 5 [diamond]", "consume Earth: +5 Attack, XP 1"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 1 [circle]", "Heal 2 [square], self", "consume Earth: Ward, XP 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: consume Earth gives Retaliate 1 for the round instead of Ward", "bottom: Heal 2 has no enhancement (card: Heal 2 [square])", "bottom: the Consumes block is indented one space deeper than Abilities (9 spaces), so it may not parse"],
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Rock Slide",
+      "number": "020",
+      "level": "4",
+      "initiative": 81,
+      "top": {
+        "lines": ["\"Create three 1-hex obstacle tiles in empty hexes within range 3 [square]. All allies and enemies adjacent to at least one created tile suffer damage 1 and gain Muddle.\"",
+                  "infuse Earth (! box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Designate one enemy within range 4.\"",
+                  "\"Destroy all obstacles within range 2 of the designated enemy to perform:\"",
+                  "Attack X: target the designated enemy, Immobilize",
+                  "\"where X is twice the number of destroyed obstacles.\""],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["top: XP 1 on the half; the card's top has no XP", "top: Range 3 has no enhancement (card: range 3 [square])", "bottom: DestroyObstacle Range 2 appears to be measured from you, not from the designated enemy (merged destroy+attack, attack range 4)"],
+      "custom": ["top: create three 1-hex obstacles within range 3; all allies and enemies adjacent to at least one suffer damage 1 and Muddle", "bottom: designate an enemy within range 4; destroy all obstacles within range 2 of it; Attack X on it with X = 2 x obstacles destroyed"],
+      "summons": [],
+      "notes": "GHS's target is a custom label key (%data.custom.gh2e.cragheart.abilities.134.4%), not resolved in the input."
+    },
+    {
+      "name": "Kinetic Assault",
+      "number": "021",
+      "level": "4",
+      "initiative": 19,
+      "top": {
+        "lines": ["Move 1 [circle]", "Attack 4 [diamond]",
+                  "\"All allies and enemies adjacent to the target suffer damage 1.\" (! box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Ward [diamond+], self", "Retaliate 3 [square], range 3"],
+        "summary": ["XP 2", "round", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: Shield 1 (round, enhanceable) instead of Ward"],
+      "custom": ["top: all allies and enemies adjacent to the target suffer damage 1"],
+      "summons": [],
+      "notes": "Corner icon is round with an arrow to lost (round bonus, then the card is lost)."
+    },
+    {
+      "name": "Solidify",
+      "number": "022",
+      "level": "5",
+      "initiative": 17,
+      "top": {
+        "lines": ["Attack 3 [diamond], range 4", "consume Earth: +2 Attack, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Grant one ally within range 3:\"", "\"Suffer damage 1.\" (! box)", "Shield 2"],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: the granted ally suffers damage 1 and gains Shield 2 for the round"],
+      "summons": [],
+      "notes": "Xipe: round Shield 2, range 3, Filter Ally, sub-ability Damage 1 with no target settings (UseParentTiles commented out); check it hits the shielded ally."
+    },
+    {
+      "name": "Stone Pummel",
+      "number": "023",
+      "level": "5",
+      "initiative": 32,
+      "top": {
+        "lines": ["Attack 4 [square]",
+                  "area: grey (attacker) hex with red hexes up-right, right, left and down-left of it (doubled coords y up: G 0,0; R 1,1 2,0 -2,0 -1,-1) [hex marks right of the up-right red, 3,1, and left of the down-left red, -3,-1]",
+                  "infuse Earth (! box)"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["\"Whenever you attack an adjacent enemy, you may destroy one 1-hex obstacle adjacent to both you and that enemy to add +2 Attack to the attack.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "ghs": ["top: Attack 4 mark is [diamond]; the card's mark is a square (zoomed)"],
+      "xipe": ["bottom: buff on melee attacks (AttackType Melee) rather than attacks on an adjacent enemy; the obstacle 'adjacent to both you and that enemy' rule is not visible in the data"],
+      "custom": ["bottom: persistent: when attacking an adjacent enemy, may destroy a 1-hex obstacle adjacent to both for +2 Attack"],
+      "summons": [],
+      "notes": "Xipe area -3,-1,E|-1,-1,R|-2,0,R|0,0,G|2,0,R|1,1,R|3,1,E matches, both hex marks included."
+    },
+    {
+      "name": "Dig Pit",
+      "number": "024",
+      "level": "6",
+      "initiative": 88,
+      "top": {
+        "lines": ["Push 2 [square], range 1",
+                  "\"Create one damage 2, Stun trap in an adjacent empty hex.\"",
+                  "\"Create one 1-hex obstacle tile in an empty hex adjacent to the created trap.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Heal 3 [square], range 3 [square]", "consume Earth: +1 Target, XP 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: obstacle created within range 1 of you, not adjacent to the created trap"],
+      "custom": ["top: create a damage 2 + Stun trap in an adjacent empty hex", "top: create a 1-hex obstacle in an empty hex adjacent to that trap"],
+      "summons": [],
+      "notes": "Stun is the navy diamond icon in the trap text. Xipe consume sets Target 2 (= +1 Target)."
+    },
+    {
+      "name": "Cataclysm",
+      "number": "025",
+      "level": "6",
+      "initiative": 26,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Immobilize",
+                  "consume Earth: +2 Attack, XP 1",
+                  "area: 7-hex flower, grey (attacker) hex as the left hex of the ring; red centre hex and the other five ring hexes (doubled coords y up: G -2,0; R 0,0 2,0 1,1 -1,1 -1,-1 1,-1) [hex marks right of the up-right red, 3,1, and right of the down-right red, 3,-1]",
+                  "Immobilize: target all allies in the red hexes of the attack ability (! box)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "consume Earth: +3 Move, XP 1", "infuse Earth (! box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: area has no enhancement hexes; the card has two hex marks"],
+      "custom": ["top: Immobilize all allies in the red hexes of the attack"],
+      "summons": [],
+      "notes": "Xipe area 0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,G|-1,-1,R|1,-1,R matches the red/grey layout; Immobilize sub-ability on [Enemy, Ally]."
+    },
+    {
+      "name": "Meteor",
+      "number": "026",
+      "level": "7",
+      "initiative": 85,
+      "top": {
+        "lines": ["consume Earth: \"Whenever you perform a ranged attack this round, all allies and enemies adjacent to the target suffer damage 1\", XP 1 (round icon inside the consume box)",
+                  "\"Destroy any number of adjacent obstacles. For each obstacle destroyed, perform:\"",
+                  "Attack 2, range 3"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "Jump",
+                  "\"All adjacent allies and enemies suffer damage 1.\" (! box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: destroys one adjacent obstacle (Target 1) for one Attack 2, not any number with one attack each", "top: Attack 2 has Enhancements: 1; the card has no mark", "top: consume is a ControlActor ability on an adjacent ally (copied from Vicious Ballet, ParentName TNull1 does not exist), not a round effect on your own ranged attacks", "top: Infuse Earth and XP 2 on the half; the card's top has neither"],
+      "custom": ["top (consume Earth): this round, your ranged attacks deal damage 1 to all allies and enemies adjacent to the target", "top: destroy any number of adjacent obstacles; Attack 2, range 3 for each one destroyed", "bottom: after the move, all adjacent allies and enemies suffer damage 1"],
+      "summons": [],
+      "notes": "No enhancement marks and no corner icons on the top."
+    },
+    {
+      "name": "Brutal Momentum",
+      "number": "027",
+      "level": "7",
+      "initiative": 37,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Push 2 [square]",
+                  "\"Add +1 Attack, +1 Push for each hex containing an obstacle or wall adjacent to you.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"At the start of your next four turns, perform:\"",
+                  "Move 3",
+                  "\"Add +3 Attack to your next melee attack this turn.\"",
+                  "slots: 4 (first dashed; XP 1 on slots 2, 4), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["top: counts obstacles and walls adjacent to the target (TargetAdjacentValidTiles), not adjacent to you; adds Attack only, no +1 Push", "bottom: the +3 Attack to your next melee attack is missing", "bottom: an extra Move 3 on play besides the persistent start-of-turn Move 3 (XPTracker [0,1,0,1])"],
+      "custom": ["top: +1 Attack and +1 Push for each adjacent hex (to you) with an obstacle or wall", "bottom: use slots: at the start of your next four turns, Move 3 and +3 Attack on your next melee attack that turn"],
+      "summons": [],
+      "notes": "No enhancement mark on the bottom Move 3."
+    },
+    {
+      "name": "Rocky End",
+      "number": "028",
+      "level": "8",
+      "initiative": 31,
+      "top": {
+        "lines": ["Attack 5 [diamond]", "Muddle",
+                  "Heal 5: target all allies in the red hexes of the attack ability",
+                  "consume Earth: \"Create 1-hex obstacle tiles in each empty red hex of the attack ability\", XP 1",
+                  "area: grey (attacker) hex at the bottom-left corner of a triangle; 5 red hexes (doubled coords y up: G 0,0; R 2,0 4,0 1,1 3,1 2,2) [no hex mark]"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Push 2 [square], range 3", "Immobilize",
+                  "\"Create 1-hex obstacle tiles in each featureless hex the target exits with the push.\"",
+                  "infuse Earth (! box)"],
+        "summary": []
+      },
+      "ghs": ["bottom: text typo 'the target exists' (card: 'exits')"],
+      "xipe": ["top: the consume Earth (obstacles in each empty red hex, XP 1) is missing", "bottom: the obstacles in each hex the target exits are missing"],
+      "custom": ["top: Heal 5 all allies in the red hexes of the attack", "top (consume Earth): 1-hex obstacles in each empty red hex of the attack", "bottom: a 1-hex obstacle in each featureless hex the pushed target exits"],
+      "summons": [],
+      "notes": "Xipe area 0,0,G|2,0,R|4,0,R|1,1,R|3,1,R|2,2,R matches. GHS's heal target is a custom label key (%data.custom.gh2e.cragheart.abilities.142.1%), not resolved in the input."
+    },
+    {
+      "name": "Entomb",
+      "number": "029",
+      "level": "8",
+      "initiative": 23,
+      "top": {
+        "lines": ["Attack 5 [diamond]",
+                  "consume Earth: \"Create two 1-hex obstacle tiles in empty hexes adjacent to the target but not adjacent to you. All allies and enemies adjacent to at least one created tile suffer damage 1\", XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]",
+                  "\"Create one 1-hex obstacle tile in an adjacent empty hex.\"",
+                  "\"Destroy any number of obstacles within range 3. For each obstacle destroyed, give Ward to one ally adjacent to the hex that obstacle occupied.\""],
+        "summary": []
+      },
+      "ghs": ["bottom: text 'Create 1-hex obstacle tiles in an adjacent empty hex'; the card prints 'Create one 1-hex obstacle tile in an adjacent empty hex' (wording only)"],
+      "xipe": ["Initiative 86; the card prints 23", "top: consume creates two obstacles in any empty hexes within range 3 of you, not adjacent to the target and not adjacent to you", "bottom: only Move 3; the obstacle creation and the destroy-for-Ward rows are missing"],
+      "custom": ["top (consume Earth): two 1-hex obstacles adjacent to the target but not adjacent to you; all allies and enemies adjacent to at least one suffer damage 1", "bottom: create a 1-hex obstacle in an adjacent empty hex", "bottom: destroy any number of obstacles within range 3; for each, Ward to one ally adjacent to its hex"],
+      "summons": [],
+      "notes": "No corner icons on either half."
+    },
+    {
+      "name": "Wave of Destruction",
+      "number": "030",
+      "level": "9",
+      "initiative": 74,
+      "top": {
+        "lines": ["Attack 1",
+                  "area: grey (attacker) hex, then a two-hex-wide band of 9 red hexes running away from it (drawn with flat-top hexes: zigzag of 3 upper, 3 middle, 3 lower reds; flat-top doubled coords: G 0,0; R 1,-1 1,1 2,0 3,-1 3,1 4,0 5,-1 5,1 6,0) [hex marks on the two hexes beyond the far end, 7,-1 and 7,1]",
+                  "\"For each target, add +X Attack, where X is the range to that target.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 5 [circle]",
+                  "\"You may enter hexes containing obstacles with this movement. When you do, destroy the obstacle.\"",
+                  "\"Add +X Attack to your next attack this turn, where X is twice the number of obstacles destroyed with the move ability.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["Initiative 73; the card prints 74", "bottom: Move 5 has Jump (the card has none); entering/destroying obstacles and the +X Attack bonus are missing (commented out)"],
+      "custom": ["top: +X Attack per target, X = range to that target", "bottom: the move may enter obstacle hexes, destroying them", "bottom: +X Attack on your next attack this turn, X = 2 x obstacles destroyed by the move"],
+      "summons": [],
+      "notes": "Only this card's area is drawn with flat-top hexes. Checked by script: Xipe's area 0,0,G|1,1,R|2,0,R|3,1,R|4,2,R|5,1,R|6,2,R|7,3,R|8,2,R|9,3,R|10,4,E|11,3,E and GHS's area are both the same shape as the card (Xipe exactly, GHS rotated), hex marks included. No enhancement mark on the Attack."
+    },
+    {
+      "name": "Earth's Embrace",
+      "number": "031",
+      "level": "9",
+      "initiative": 52,
+      "top": {
+        "lines": ["Attack 3: target all adjacent enemies", "Push 2",
+                  "\"You may push the targets into hexes containing obstacles. In each case, destroy the obstacle, the target suffers damage 2, and you gain XP 1.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"At the end of each of your turns, perform:\"", "Heal X, self", "\"where X is the number of adjacent obstacles.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["top: Attack 3 and Push 2 each have Enhancements: 1; the card has no marks on this card", "bottom: X = obstacles destroyed this turn (ObstaclesDestroyedThisTurn), not the number of adjacent obstacles"],
+      "custom": ["top: may push targets into obstacle hexes: destroy the obstacle, target suffers damage 2, XP 1 each time", "bottom: persistent: at the end of each of your turns, Heal X self, X = adjacent obstacles"],
+      "summons": [],
+      "notes": "No enhancement marks anywhere on this card. Persistent with no use slots (lasts until the scenario ends)."
+    }
+  ],
+  "summons": [],
+  "mechanics": [
+    "Obstacle creation (1-hex obstacle tiles): Crushing Grasp bottom, Earthen Bulwark top, Petrify top (on kills), Mud Eruption top (where targets stood), Rock Slide top, Dig Pit top (beside its trap), Rocky End top consume (empty red hexes) and bottom (hexes the pushed target exits), Entomb top consume and bottom",
+    "Obstacle destruction as a cost or trigger: Heaving Swing top (push into obstacles) and bottom (destroy or suffer damage 1 for +3 Attack), Rock Slide bottom (Attack X = 2 x destroyed), Stone Pummel bottom (+2 Attack), Meteor top (one Attack 2 per obstacle), Entomb bottom (Ward per obstacle), Wave of Destruction bottom (move through obstacles, +2 Attack each), Earth's Embrace top (push into obstacles), Clear the Way bottom (destroy obstacles, hazardous/difficult terrain and traps entered)",
+    "Obstacle relocation: Clear the Way top (move an adjacent 1-hex obstacle within range 4, attack enemies around it)",
+    "Counting adjacent obstacles/walls/objectives: Earthen Clod bottom (obstacles or objectives adjacent to the target), Brutal Momentum top (obstacles or walls adjacent to you, +1 Attack and +1 Push each), Earth's Embrace bottom (Heal X = adjacent obstacles)",
+    "Friendly fire, damage to allies and enemies alike: Crushing Grasp, Rumbling Advance, Massive Boulder, Crater, Rock Slide (+Muddle), Kinetic Assault, Meteor (bottom and consume top), Entomb; allies only: Unstable Upheaval (damage 2), Earthen Bulwark consume (damage 1 + Ward), Solidify bottom (ally suffers 1 for Shield 2)",
+    "Effects on allies in the red hexes of the attack: Dirt Tornado (Muddle), Cataclysm (Immobilize), Sentient Growth (Heal 2), Rocky End (Heal 5)",
+    "Ward (2e condition): Earthen Bulwark top consume, Blunt Force bottom consume, Kinetic Assault bottom, Entomb bottom",
+    "Trap creation: Dig Pit top (damage 2 + Stun trap)",
+    "Use-slot persistent cards: Opposing Strike bottom (end of this and next four turns Heal 2 range 3, 5 slots, XP on 1/3/5), Backup Ammunition top (+1 Target on single-target ranged attacks, 4 slots, XP on 2/4), Brutal Momentum bottom (start of next four turns Move 3 + +3 Attack next melee attack, 4 slots, XP on 2/4)",
+    "Persistent without slots: Stone Pummel bottom, Earth's Embrace bottom",
+    "Round effects: Heaving Swing bottom, Meteor top consume (your ranged attacks splash damage 1), Solidify bottom, Kinetic Assault bottom",
+    "X values: Rock Slide bottom (2 x destroyed obstacles), Wave of Destruction top (range to each target) and bottom (2 x obstacles destroyed by the move), Earth's Embrace bottom (adjacent obstacles)",
+    "Designated enemy: Rock Slide bottom",
+    "Consume that changes targeting: Unstable Upheaval top (all enemies up to two hexes away instead of all adjacent); target all enemies moved through: Burrow bottom consume",
+    "Kill trigger: Petrify top (XP 1 + obstacle per kill)",
+    "Earth is the only element: infused on 13 halves, consumed on 21",
+    "'!' boxes: most damage rows, ally-condition rows and every infusion and corner box are printed in a box with a '!' tab",
+    "No summons"
+  ],
+  "unclear": [
+    "Class-wide: what the '!' tab on boxed rows means (likely 'mandatory, cannot be skipped', which would matter for the friendly-fire rows); a rules question, check the 2e rulebook",
+    "Backup Ammunition top, Brutal Momentum bottom: the text says 'next four' and the first of the four slots is dashed; whether the dashed slot is used on the turn the card is played (Brutal Momentum says 'at the start of your next four turns') is a rules question. Opposing Strike's dashed slot matches its 'this and your next four turns'",
+    "Sentient Growth bottom: whether 'Heal 1, target all, range 1' includes yourself (Xipe: allies only)",
+    "Unstable Upheaval top: 'all enemies up to two hexes away' read as within range 2 by Xipe; whether walls/path matter is a rules question",
+    "Meteor top: whether the per-obstacle Attack 2 attacks may target the same enemy (rules question)"
+  ]
+}

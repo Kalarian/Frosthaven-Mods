@@ -1,0 +1,641 @@
+{
+  "class": "Mindthief",
+  "read_by": "image reader, 2026-10-31",
+  "cards": [
+    {
+      "name": "Submissive Affliction",
+      "number": "002",
+      "level": "1",
+      "initiative": 48,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "\"Add +1 Attack for each negative condition the target has.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Control one enemy within Range 4:\"", "Move 1 [square]",
+                  "consume Ice: \"The controlled enemy suffers damage 2, XP 1.\""],
+        "summary": []
+      },
+      "ghs": ["bottom: the controlled Move 1 has no mark; the card has Move 1 [square]"],
+      "xipe": ["bottom: the controlled Move 1 has no Enhancements (card: Move 1 [square])"],
+      "custom": ["top: +1 Attack for each negative condition on the target",
+                 "bottom: control one enemy within range 4 (it performs Move 1)",
+                 "bottom: consume Ice: the controlled enemy suffers damage 2, XP 1"],
+      "summons": [],
+      "notes": "Class-wide: GHS numbers the cards 146-174, the printed numbers are 002-030 (same order); not counted as a disagreement. GHS's %data.custom.gh2e.mindthief...% strings were resolved from C:\\Claude\\GH2eData\\ghs\\label\\en.json for the comparison. Element boxes marked '!' in the middle of a half (Frigid Apparition etc.) are infusions, written 'infuse <Element> (box)'. Xipe: ControlActor ControlForOneAction; consume Ice adds Damage 2 (Filter Self, AutoTrigger) to the controlled enemy, XP 1."
+    },
+    {
+      "name": "Hidden in the Shadows",
+      "number": "003",
+      "level": "1",
+      "initiative": 14,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "advantage",
+                  "\"If the attack ability killed an enemy, perform:\"", "Invisible [diamond+], self"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"If you have not moved this round, perform:\"", "Invisible, self",
+                  "\"You cannot perform move abilities this round. At the end of the round, lose Invisible.\""],
+        "summary": ["round"]
+      },
+      "ghs": ["top: Attack 3 has no mark; the card has Attack 3 [diamond]",
+              "top: Invisible mark is [diamond]; the card's mark is a diamond with a plus inside [diamond+]",
+              "bottom: flag 'persistent'; the card shows the round icon (card with circular arrow), not persistent"],
+      "xipe": ["top: Invisible has no enhancement (card: Invisible [diamond+])",
+               "top: the on-kill Invisible is the first ability of the half (TActive, AddActiveBonus DuringActionAbilityOnKill) with AutoTrigger: True",
+               "bottom: 'not moved this round' checked as HexesMovedThisTurn <= 0 (turn, not round)",
+               "bottom: 'cannot perform move abilities this round' done as a round OverrideMoveAbility that turns move abilities into a null Heal 0"],
+      "custom": ["top: Invisible on yourself only if the attack killed an enemy",
+                 "bottom: Invisible only if you have not moved this round; no move abilities this round; lose Invisible at the end of the round"],
+      "summons": [],
+      "notes": "The bottom's long rule is printed in a '!' text box. Xipe's AutoTrigger on the first ability of the top conflicts with the project's standard-confirm rule (packcheck)."
+    },
+    {
+      "name": "Scurry",
+      "number": "004",
+      "level": "1",
+      "initiative": 20,
+      "top": {
+        "lines": ["Move 3 [square]", "Attack 2 [diamond]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Loot 2"],
+        "summary": ["XP 1", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Withering Claw",
+      "number": "005",
+      "level": "1",
+      "initiative": 18,
+      "top": {
+        "lines": ["AUGMENT: \"Add Poison, Muddle to all your melee attacks.\"",
+                  "Attack 2 [diamond]", "Immobilize"],
+        "summary": ["XP 1", "persistent"]
+      },
+      "bottom": {
+        "lines": ["\"Control one enemy within Range 4:\"", "Attack 2 [diamond]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: augment (persistent): add Poison and Muddle to all your melee attacks",
+                 "bottom: control one enemy within range 4 (it performs Attack 2)"],
+      "summons": [],
+      "notes": "Xipe: Augment Type Melee with Conditions [Muddle, Poison]; the controlled attack is Range 1, Target 1, StrengthIsBase."
+    },
+    {
+      "name": "Frigid Apparition",
+      "number": "006",
+      "level": "1",
+      "initiative": 10,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "infuse Ice (box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "Attack 2 [diamond]", "Stun", "infuse Ice (box)"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "The Mind's Weakness",
+      "number": "007",
+      "level": "1",
+      "initiative": 75,
+      "top": {
+        "lines": ["AUGMENT: \"Add +1 Attack to all your melee attacks.\"",
+                  "Attack 2 [diamond]", "\"Control the target of the attack ability:\"", "Attack 2 [diamond]"],
+        "summary": ["XP 1", "persistent"]
+      },
+      "bottom": {
+        "lines": ["Attack 1 [square]", "Wound"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: the controlled Attack 2 has no enhancement (card: Attack 2 [diamond])"],
+      "custom": ["top: augment (persistent): +1 Attack on all your melee attacks",
+                 "top: control the target of the attack (it performs Attack 2)"],
+      "summons": [],
+      "notes": "Xipe: control is a SubAbility with UseParentTargets."
+    },
+    {
+      "name": "Pilfer",
+      "number": "008",
+      "level": "1",
+      "initiative": 79,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "\"If this attack does not kill the target, gain a money token.\"", "Loot 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: the money token clause is dropped (plain Attack 2 then Loot 1)"],
+      "custom": ["top: gain a money token if the attack does not kill the target"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Perverse Edge",
+      "number": "009",
+      "level": "1",
+      "initiative": 8,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "\"Add +2 Attack and gain XP 1 for each negative condition the target has.\"",
+                  "infuse Dark (box)"],
+        "summary": ["lost"]
+      },
+      "bottom": {
+        "lines": ["consume Ice: Stun, range 1, XP 1", "Move 3 [square]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: +2 Attack and XP 1 for each negative condition on the target",
+                 "bottom: consume Ice for a Stun ability on one enemy within range 1 (the half has no other ability before the Move)"],
+      "summons": [],
+      "notes": "Initiative printed as '08'. Xipe: BuffForEachNegativeConditionOnTarget Strength 2 XP 1; bottom uses a Null ability as the parent of the consume Stun."
+    },
+    {
+      "name": "Empathetic Assault",
+      "number": "010",
+      "level": "1",
+      "initiative": 12,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Range 5", "Disarm", "infuse Ice (box)"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 2 [square]", "Heal 2 [square], self"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: Heal 2 has no enhancement (card: Heal 2 [square]); deliberate, Xipe's comment says 'Remove enhancement to avoid strengthen here'"],
+      "custom": [],
+      "summons": [],
+      "notes": "Xipe's Heal has no Filter: Self; check the default target."
+    },
+    {
+      "name": "Psychic Blade",
+      "number": "011",
+      "level": "1",
+      "initiative": 77,
+      "top": {
+        "lines": ["AUGMENT: \"Your single-target melee attack abilities may target enemies within 2 hexes (of you).\"",
+                  "Attack 3 [diamond]", "Curse", "\"Control the target of the attack ability:\"", "Move 1"],
+        "summary": ["XP 1", "persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]", "\"Add Curse to all your melee attacks this round.\""],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": ["top: augment done as +1 Range with TreatAsMelee on melee attacks (no single-target restriction in the data)",
+               "bottom: round Curse bonus (BuffAttack) has no AttackType: Melee, so it may apply to ranged attacks too (card: melee attacks only)"],
+      "custom": ["top: augment (persistent): single-target melee attack abilities may target enemies within 2 hexes",
+                 "top: control the target of the attack (it performs Move 1)",
+                 "bottom: add Curse to all your melee attacks this round"],
+      "summons": [],
+      "notes": "The controlled Move 1 has no enhancement mark (zoomed)."
+    },
+    {
+      "name": "Feedback Loop",
+      "number": "012",
+      "level": "X",
+      "initiative": 51,
+      "top": {
+        "lines": ["AUGMENT: \"After each of your melee attack abilities, grant one of your summons:\" Attack +0",
+                  "Attack 2 [square]", "\"Grant one of your summons:\"", "Move +0"],
+        "summary": ["XP 1", "persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [square]", "Jump",
+                  "\"If you end this movement in the same hex as you start, all enemies moved through gain Muddle.\""],
+        "summary": []
+      },
+      "ghs": ["level 1; the card prints level X"],
+      "xipe": ["top: the augment's summon grant (Attack +0) uses Targeting: All on your summons (card: one of your summons)",
+               "top: the granted move is Move 2 with StrengthIsBase (card: Move +0, the summon's own move value) and Targeting: All (card: one of your summons)"],
+      "custom": ["top: augment (persistent): after each of your melee attack abilities, one of your summons performs Attack +0",
+                 "top: grant one of your summons Move +0",
+                 "bottom: if you end the jump move in the hex where you started, all enemies moved through gain Muddle"],
+      "summons": [],
+      "notes": "Printed name 'Feedback Loop'; the input/card-site name 'feedback loops' is a typo (input flagged matched_by_spelling ghs/xipe:feedbackloop, confirmed). Xipe bottom: AllTargetsOnMovePathSameStartAndEnd + Muddle."
+    },
+    {
+      "name": "Possession",
+      "number": "013",
+      "level": "X",
+      "initiative": 71,
+      "top": {
+        "lines": ["\"Control one enemy within Range 4:\"", "Attack 3 [diamond]", "Muddle"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]", "\"Grant one of your summons:\"", "Move 2 [square]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: the summon grant uses Targeting: All on your summons (card: one of your summons)"],
+      "custom": ["top: control one enemy within range 4 (it performs Attack 3 with Muddle)",
+                 "bottom: grant one of your summons Move 2"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Gnawing Horde",
+      "number": "014",
+      "level": "X",
+      "initiative": 82,
+      "top": {
+        "lines": ["Summon Rat Swarm: HP 5 [square], Move 2 [square], Attack 2 [square], Range - (melee); trait: Poison (its attacks add Poison)"],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": ["Rat Swarm"],
+      "notes": "Xipe summons PlagueRat2ID; its stats are in Xipe's summon data, not in this card's YAML, so they were not compared. The summon portrait is a teal placeholder hex with an X."
+    },
+    {
+      "name": "Fearsome Blade",
+      "number": "015",
+      "level": "2",
+      "initiative": 27,
+      "top": {
+        "lines": ["Attack 2 [square]", "Push 2 [square]", "Curse", "consume Ice: +2 Attack, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Wound, range 1", "Move 4"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: the Wound ability has no Range (card: range 1); check Xipe's default range for a targeted condition"],
+      "custom": [],
+      "summons": [],
+      "notes": "Bottom Wound is its own ability (wound icon with range 1), not a rider on an attack."
+    },
+    {
+      "name": "Hostile Takeover",
+      "number": "016",
+      "level": "2",
+      "initiative": 9,
+      "top": {
+        "lines": ["Attack 2 [square]", "Range 4", "Immobilize", "infuse Ice (box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Place a character token on a normal or elite enemy within Range 4. This round, during that enemy's turn, it treats its enemies as allies and its allies as enemies, with you controlling its abilities.\"",
+                  "infuse Dark (box)"],
+        "summary": ["XP 2", "round", "lost"]
+      },
+      "ghs": ["bottom: no infuse Dark; the card has an infuse Dark box"],
+      "xipe": "agrees",
+      "custom": ["bottom: one normal or elite enemy within range 4 swaps sides for its turn this round, with you controlling its abilities"],
+      "summons": [],
+      "notes": "Initiative printed as '09'. Xipe: ControlActor ControlForOneTurn, ControlActorType Ally, EnemyType [Normal, Elite], infuse Dark, XP 2."
+    },
+    {
+      "name": "Brain Leech",
+      "number": "017",
+      "level": "3",
+      "initiative": 21,
+      "top": {
+        "lines": ["\"Control one enemy within Range 4:\"", "Move 2 [square]", "Attack 2 [diamond]",
+                  "consume Ice: Wound, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 1 [square]", "\"If you performed the attack ability, perform:\"", "Strengthen [diamond+], self"],
+        "summary": []
+      },
+      "ghs": ["bottom: Strengthen has no mark; the card has Strengthen [diamond+]"],
+      "xipe": ["bottom: Strengthen is unconditional (no 'if you performed the attack ability' requirement; a commented-out conditional block shows it was considered)",
+               "bottom: Strengthen has no enhancement (card: [diamond+])"],
+      "custom": ["top: control one enemy within range 4 (it performs Move 2, Attack 2)",
+                 "top: consume Ice: the controlled attack adds Wound, XP 1",
+                 "bottom: Strengthen self only if you performed the attack ability"],
+      "summons": [],
+      "notes": "The consume box hangs from the controlled Attack 2 (Wound applies to the controlled enemy's attack)."
+    },
+    {
+      "name": "Cranium Overload",
+      "number": "018",
+      "level": "3",
+      "initiative": 5,
+      "top": {
+        "lines": ["\"Designate a hex containing an enemy within Range 4 to perform:\"",
+                  "Attack 6: target the enemy in the designated hex, Pierce 5",
+                  "\"If the attack ability killed an enemy, perform:\"",
+                  "Attack 2: target all enemies adjacent to the designated hex"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 5 [circle]", "Jump"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: approximated as a plain Attack 6, Range 4, Pierce 5, then (if it killed) Attack 2 on all enemies adjacent to the parent target; no designated hex"],
+      "custom": ["top: the attack is performed by a designated hex (within range 4) on the enemy in it",
+                 "top: if it killed an enemy, Attack 2 on all enemies adjacent to the designated hex"],
+      "summons": [],
+      "notes": "Initiative printed as '05'. No enhancement marks on the top. GHS's target strings (162.2/162.4) match the card, Pierce 5 included."
+    },
+    {
+      "name": "Frozen Shiv",
+      "number": "019",
+      "level": "4",
+      "initiative": 16,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Pierce 1 [square]", "infuse Ice (box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 3 [diamond]", "Move 3 [circle]", "Attack 3 [diamond]", "infuse Ice (box)"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["top: Pierce 1 has no enhancement (card: Pierce 1 [square])"],
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Silent Scream",
+      "number": "020",
+      "level": "4",
+      "initiative": 83,
+      "top": {
+        "lines": ["AUGMENT: \"After each of your melee attack abilities, perform:\" Heal 2, range 2",
+                  "Attack 2 [diamond]", "Disarm"],
+        "summary": ["XP 1", "persistent"]
+      },
+      "bottom": {
+        "lines": ["\"Control one enemy within Range 4:\"", "Attack -1", "infuse Ice (box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: augment (persistent): Heal 2, range 2 after each of your melee attack abilities",
+                 "bottom: control one enemy within range 4: it performs an attack at its own attack value -1"],
+      "summons": [],
+      "notes": "Bottom 'Attack -1' is relative to the controlled enemy's own attack (Xipe: Attack -1 without StrengthIsBase). Xipe's augment Heal targets [Self, Ally]."
+    },
+    {
+      "name": "Mass Hysteria",
+      "number": "021",
+      "level": "5",
+      "initiative": 11,
+      "top": {
+        "lines": ["Attack 1", "Target 4", "Range 4", "Pierce 3", "Muddle", "infuse Ice (box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]", "Jump", "\"All enemies moved through gain Poison.\"", "infuse Dark (box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: all enemies moved through gain Poison"],
+      "summons": [],
+      "notes": "No marks on the top. Xipe: AllTargetsOnMovePath + Poison."
+    },
+    {
+      "name": "Gangling Abomination",
+      "number": "022",
+      "level": "5",
+      "initiative": 81,
+      "top": {
+        "lines": ["Summon Rat Monstrosity: HP 8 [square], Move 3 [square], Attack 3 [square], Range - (melee); \"Add +1 Attack if the target has a negative condition.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "Attack 2 [square]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: summon trait: +1 Attack if the target has a negative condition"],
+      "summons": ["Rat Monstrosity"],
+      "notes": "Xipe summons GanglingRatMonstrosityID; summon stats not in this YAML, not compared."
+    },
+    {
+      "name": "Telepathic Command",
+      "number": "023",
+      "level": "6",
+      "initiative": 17,
+      "top": {
+        "lines": ["\"Grant one of your summons:\"", "Attack +0", "Invisible [diamond+], self"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "\"Grant one of your summons:\"", "Move 4 [square]"],
+        "summary": []
+      },
+      "ghs": ["top: Invisible mark is [diamond]; the card's mark is [diamond+]"],
+      "xipe": ["top: the grant has Range: 1 (card: no range, any of your summons)",
+               "top: Invisible has no enhancement (card: [diamond+])",
+               "bottom: the summon grant uses Targeting: All (card: one of your summons)"],
+      "custom": ["top: one of your summons performs Attack +0, then gains Invisible itself ('self' = the summon)",
+                 "bottom: grant one of your summons Move 4"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Dark Frenzy",
+      "number": "024",
+      "level": "6",
+      "initiative": 39,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "consume Ice: +2 Attack, XP 1", "consume Dark: +2 Attack, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "\"Control two enemies within Range 4:\"", "Move 1",
+                  "consume Ice: \"The controlled enemies suffer damage 1, XP 1.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: control two enemies within range 4 (each performs Move 1)",
+                 "bottom: consume Ice: each controlled enemy suffers damage 1, XP 1"],
+      "summons": [],
+      "notes": "The controlled Move 1 has no mark (zoomed); compare Submissive Affliction's, which has one."
+    },
+    {
+      "name": "Domination",
+      "number": "025",
+      "level": "7",
+      "initiative": 13,
+      "top": {
+        "lines": ["\"Control two enemies within Range 4 that are adjacent to each other:\"", "Attack 3 [diamond]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"You may have two AUGMENTS active at once. If you play a third AUGMENT, you must discard either of the other two. If you discard this card and you have two active AUGMENTS, you must discard one.\""],
+        "summary": ["persistent"]
+      },
+      "ghs": "agrees",
+      "xipe": ["top: Filter: Ally (card: two enemies) and no 'adjacent to each other' requirement; TransferAugments: True (not on the card)"],
+      "custom": ["top: control two enemies within range 4 that are adjacent to each other (each performs Attack 3)",
+                 "bottom: persistent: two augments may be active at once; playing a third discards one of the other two; discarding this card with two active augments discards one"],
+      "summons": [],
+      "notes": "Xipe bottom: AddAugment 1, persistent. The top's Filter: Ally may be a Xipe bug or engine meaning; check before reuse."
+    },
+    {
+      "name": "Psychic Projection",
+      "number": "026",
+      "level": "7",
+      "initiative": 92,
+      "top": {
+        "lines": ["AUGMENT: \"Add +1 Attack to your melee attacks for each negative condition the target has.\"",
+                  "Pull 2, range 3", "Attack 3 [diamond]"],
+        "summary": ["XP 1", "persistent"]
+      },
+      "bottom": {
+        "lines": ["\"Designate an unoccupied hex within Range 4.\"", "Attack 3 [square]",
+                  "\"Perform this attack as though you occupied the designated hex.\"", "infuse Dark (box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: approximated as Attack 3, Range 5, TreatAsMelee; no designated hex"],
+      "custom": ["top: augment (persistent): +1 Attack on your melee attacks for each negative condition on the target",
+                 "bottom: the attack is performed as though you occupied an unoccupied hex within range 4"],
+      "summons": [],
+      "notes": "Top Pull is its own ability (pull icon in a diamond) with range 3, no mark."
+    },
+    {
+      "name": "Shared Nightmare",
+      "number": "027",
+      "level": "8",
+      "initiative": 7,
+      "top": {
+        "lines": ["Attack 2 [square]", "Target 2 [square]", "Range 4", "Poison", "consume Dark: Curse, XP 1",
+                  "infuse Ice (box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "Attack 1 [diamond]", "Range 2 [square]", "consume Ice: Stun, XP 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: Move 4 has no enhancement (card: Move 4 [circle])"],
+      "custom": [],
+      "summons": [],
+      "notes": "Initiative printed as '07'."
+    },
+    {
+      "name": "Corrupting Embrace",
+      "number": "028",
+      "level": "8",
+      "initiative": 15,
+      "top": {
+        "lines": ["Attack 1 [square]", "Wound", "Attack 2 [square]", "Muddle"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4", "\"On your next four melee attacks, add Stun, Curse to the attack.\"",
+                  "slots: 4 (XP 1 on slots 2, 4), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["Initiative 23; the card prints 15", "bottom: Move 4 has Enhancements: 1; the card has no mark on Move 4"],
+      "custom": ["bottom: use slots: add Stun and Curse to your next four melee attacks"],
+      "summons": [],
+      "notes": "First slot dashed (starts on play). Xipe: persistent BuffAttack Stun+Curse, AttackType Melee, XPTracker [0,1,0,1] (matches)."
+    },
+    {
+      "name": "Many as One",
+      "number": "029",
+      "level": "9",
+      "initiative": 91,
+      "top": {
+        "lines": ["Summon Rat King: HP 10 [square], Move 3 [square], Attack X, Range - (melee); \"Where X is half the Rat King's current hit point value (rounded up).\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["\"Each round, the first of your allies who performs a melee attack ability gains the effects of each of your active AUGMENTS for that attack ability.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: replaced by a round aura (Attack bonus for allies within range 2, StatIsBasedOnX CasterAdjacentAllies); the augment sharing is not implemented",
+               "bottom: Discard [Lost,Discard] makes the bottom non-lost and the effect lasts a round; the card's bottom is persistent and lost"],
+      "custom": ["top: Rat King attack X = half its current hit points, rounded up",
+                 "bottom: persistent: each round the first ally to perform a melee attack ability gains the effects of all your active augments for it"],
+      "summons": ["Rat King"],
+      "notes": "Rat King's Attack X has no enhancement mark (GHS enhancements: heal, move; agrees). Xipe summons RatKing2ID; stats not in this YAML."
+    },
+    {
+      "name": "Phantasmal Killer",
+      "number": "030",
+      "level": "9",
+      "initiative": 67,
+      "top": {
+        "lines": ["AUGMENT: \"After each of your melee attack abilities, control one target of the attack ability:\" Attack 3",
+                  "AUGMENT: \"After each of your control abilities, you may perform:\" consume Dark: \"One controlled enemy suffers damage 3.\"",
+                  "Attack 3", "Wound"],
+        "summary": ["XP 1", "persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "Loot 1", "Invisible, self", "infuse Dark (box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: Attack 3 has Enhancements: 1; the card has no mark on Attack 3 (zoomed)",
+               "top: the consume Dark 'after each of your control abilities' damage 3 is dropped (commented out)"],
+      "custom": ["top: augment (persistent): after each of your melee attack abilities, control one target of it (it performs Attack 3)",
+                 "top: augment: after each of your control abilities, may consume Dark: one controlled enemy suffers damage 3"],
+      "summons": [],
+      "notes": ""
+    }
+  ],
+  "summons": [
+    "Rat Swarm (Gnawing Horde top, level X): HP 5 [square], Move 2 [square], Attack 2 [square], Range - (melee); trait: Poison",
+    "Rat Monstrosity (Gangling Abomination top, level 5): HP 8 [square], Move 3 [square], Attack 3 [square], Range - (melee); \"Add +1 Attack if the target has a negative condition.\"",
+    "Rat King (Many as One top, level 9): HP 10 [square], Move 3 [square], Attack X (no mark), Range - (melee); \"Where X is half the Rat King's current hit point value (rounded up).\""
+  ],
+  "mechanics": [
+    "AUGMENT cards (persistent tops with an AUGMENT banner and an always-on rule for your melee attacks): Withering Claw, The Mind's Weakness, Psychic Blade, Feedback Loop, Silent Scream, Psychic Projection, Phantasmal Killer. One augment active at a time by default (implied by Domination bottom, which allows two and spells out the discard rule)",
+    "Augment sharing: the first ally each round to perform a melee attack ability gains all your active augments (Many as One bottom)",
+    "Control enemy abilities ('Control one enemy within Range 4:' then the enemy performs the listed ability): Submissive Affliction bottom, Withering Claw bottom, Possession top, Brain Leech top, Silent Scream bottom (Attack -1, relative to the enemy's own attack), Dark Frenzy bottom (two enemies), Domination top (two adjacent enemies)",
+    "Control the target of your attack: The Mind's Weakness top, Psychic Blade top, Phantasmal Killer augment",
+    "Damage to controlled enemies via consume: Submissive Affliction bottom (Ice, damage 2), Dark Frenzy bottom (Ice, damage 1 each), Phantasmal Killer augment (Dark, damage 3 after each control ability)",
+    "Full-turn takeover: a normal/elite enemy swaps sides for its turn this round, you control it (Hostile Takeover bottom)",
+    "Grant summons abilities: Feedback Loop (augment Attack +0, top Move +0), Possession bottom (Move 2), Telepathic Command (Attack +0 + Invisible; Move 4)",
+    "Bonuses per negative condition on the target: Submissive Affliction top (+1 Attack), Perverse Edge top (+2 Attack and XP 1 each), Psychic Projection augment (+1 Attack on melee), Rat Monstrosity trait (+1 if any)",
+    "Designated hex: attack from a designated enemy hex with a follow-up on its neighbours if it killed (Cranium Overload top); attack as though you occupied a designated unoccupied hex (Psychic Projection bottom)",
+    "Conditions on enemies moved through: Feedback Loop bottom (Muddle, only if the jump ends where it started), Mass Hysteria bottom (Poison)",
+    "Kill-conditional follow-ups: Invisible self (Hidden in the Shadows top), Attack 2 on adjacent enemies (Cranium Overload top); money token if the attack does not kill (Pilfer top)",
+    "Invisible if not moved this round, then no move abilities this round and lose Invisible at round end (Hidden in the Shadows bottom)",
+    "Conditional self-Strengthen if you performed the attack (Brain Leech bottom)",
+    "Round melee bonus: add Curse to all your melee attacks this round (Psychic Blade bottom); use slots adding Stun + Curse to the next four melee attacks (Corrupting Embrace bottom, 4 slots, lost)",
+    "Summons: Rat Swarm, Rat Monstrosity, Rat King (attack X = half its current HP, rounded up)",
+    "Elements: Ice and Dark only (infuse boxes and consumes); conditions used: Poison, Muddle, Immobilize, Stun, Disarm, Wound, Curse, Invisible, Strengthen; no Ward/Safeguard"
+  ],
+  "unclear": [
+    "Infuse boxes: element icons printed in a small '!' box in the middle of a half (not in the corner box) were read as infusions (Frigid Apparition, Perverse Edge, Empathetic Assault, Hostile Takeover, Frozen Shiv, Silent Scream, Mass Hysteria, Psychic Projection, Shared Nightmare, Phantasmal Killer); GHS and Xipe agree on every one",
+    "Corner icons: the card-with-circular-arrow-and-red-bar icon was read as 'round' and the card-with-infinity-and-red-arrow as 'persistent' (GHS agrees on Psychic Blade bottom round and every persistent); on this basis Hidden in the Shadows bottom is round, where GHS says persistent",
+    "Feedback Loop / Telepathic Command: 'Attack +0' / 'Move +0' granted to a summon read as the summon's own value +0 (rules reading, not a print question)",
+    "Domination top: Xipe's Filter: Ally on a card that controls two enemies; not resolved from the image (the card clearly says enemies)"
+  ]
+}

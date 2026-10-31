@@ -1,0 +1,850 @@
+# Gloomhaven 2nd edition: class mats and perk sheets
+
+Transcribed from the mat and perk-sheet images in `C:\Claude\GH2eData\cards` and cross-checked against Gloomhaven Secretariat. Machine-readable copy: `tools/gh2e/classes.json`.
+
+Icons are written as words in brackets, e.g. [Invisible], [Tear token], [Teleport]; attack modifier cards as [+1], [-1], [2x], [Null]; [Rolling] is the rolling symbol. Linked boxes (one tall box with dashed dividers) are marked *linked*. Every perk sheet has 18 perk boxes.
+
+Classes: [Bruiser](#bruiser), [Cragheart](#cragheart), [Mindthief](#mindthief), [SilentKnife](#silentknife), [Spellweaver](#spellweaver), [Tinkerer](#tinkerer), [Berserker](#berserker), [Doomstalker](#doomstalker), [Elementalist](#elementalist), [Nightshroud](#nightshroud), [Plagueherald](#plagueherald), [Quartermaster](#quartermaster), [Sawbones](#sawbones), [Sunkeeper](#sunkeeper), [Soothsinger](#soothsinger), [Soultether](#soultether), [Wildfury](#wildfury)
+
+
+## Bruiser
+
+Perk sheet title: **Inox Bruiser**. GHS file: `bruiser.json`.
+
+### Class notes
+
+You are a strong, melee fighter with a large pool of hit points. But if you run into the fray without using any defensive abilities, you may find yourself near death quite quickly. Fortunately, you have a number of tools to help reduce incoming damage. If you intend on using more offensive abilities, you may need to pick your spots to attack from more carefully to avoid taking too many hits.
+
+You have many powerful melee attack abilities with an area of effect that are great when enemies clump up for you. When you can’t naturally find groups of enemies next to each other, you also have a variety of abilities that [Push] or [Pull] to move the enemies into place.
+
+### Mat
+
+- Hand size: 10
+- HP by level 1-9: 10, 12, 14, 16, 18, 20, 22, 24, 26
+- Traits: The traits band on this mat image is blank (no traits printed).
+- Rules reference: Area of Effect p.XX; Active Bonuses p.XX; Forced Movement p.XX
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 2 | Replace one [-1] card with one [+1] card |
+| 2 | 2 | Replace one [-1] card with one “[Shield] 1” [Rolling] card |
+| 3 | 2 | Replace one [+0] card with one “Add this card to your active area. On the next attack targeting you performed by an adjacent enemy, discard this card to gain [Retaliate] 2 for the attack” [Rolling] card |
+| 4 | 1 | Replace one [+0] card with one [+0] [Stun] card |
+| 5 | 2 | Add one [+1] “[Heal] 2, self” card |
+| 6 | 2 | Add one [+2] [Push] 2 card |
+| 7 | 1 | Add one [+3] card |
+| 8 | 1 | Add one [Disarm] [Rolling] and one [Muddle] [Rolling] card |
+| 9 | 1 | Ignore item [-1] effects and add two [+1] cards |
+| 10 | 2 linked | Once each scenario, during your turn, you may perform: [Loot] 1, if this ability loots at least one money token, you may [Recover] one [Body] item |
+| 11 | 1 | Whenever you long rest, add +1 [Move] to your first move ability the following round |
+| 12 | 1 | Each character gains advantage on their first attack during the first round of each scenario |
+
+Total boxes: 18.
+
+### Masteries
+
+- In 3 different scenarios, kill an enemy that you Pushed or Pulled that round
+- In a single scenario, across 3 consecutive rounds, play 6 different ability cards and cause enemies to suffer 7 or more damage during each of those rounds
+
+### GHS check
+
+- Traits: GHS lists intimidating, strong, armored; the mat image prints none (blank band), so not checkable from the image.
+
+
+## Cragheart
+
+Perk sheet title: **Savvas Cragheart**. GHS file: `cragheart.json`.
+
+### Class notes
+
+You are versatile and can fill the needs of your party with a variety of offensive and healing abilities. Communicating with your allies when choosing your ability cards for the scenario can make everyone more effective together.
+
+You’re a bit slow to get around. With limited access to big moves and fast initiatives, try to plan ahead.
+
+You have the ability to throw rocks around the battlefield. Not only do you get bonuses directly from creating or moving the obstacles, you can also use them to slow down enemies approaching your party.
+
+There is no limit to the number of obstacles you can place, just remember that whenever you’re creating or moving them, you cannot completely cut off any section of the map.
+
+### Mat
+
+- Hand size: 11
+- HP by level 1-9: 10, 12, 14, 16, 18, 20, 22, 24, 26
+- Traits: Arcane, Outcast, Strong
+- Rules reference: Obstacles p.XX; Area of Effect p.XX; Suffer Damage p.XX; Mandatory Triggers p.XX
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 1 | Replace one [-2] card with one [+0] card |
+| 2 | 3 | Replace one [-1] card with one [+1] card |
+| 3 | 3 | Replace one [+0] card with one [+1] “Create one 1-hex obstacle tile in an empty hex adjacent to the target” [Rolling] card |
+| 4 | 2 | Replace one [+0] card with two [+1] [Push] 1 cards |
+| 5 | 3 | Add one [+2] [Immobilize] card |
+| 6 | 1 | Ignore scenario effects and add one [Muddle] [Rolling] card |
+| 7 | 1 | Ignore item [-1] effects |
+| 8 | 1 | Once each scenario, during your turn, you may destroy one 1-hex obstacle within [Range] 5 to [Teleport] to the hex it occupied |
+| 9 | 1 | At the end of each of your rests, you may destroy one 1-hex obstacle within [Range] 3 to [Earth] |
+| 10 | 2 linked | Whenever a new room is revealed, control all enemies in the newly revealed room: [Move] 1, this movement must end in an empty hex |
+
+Total boxes: 18.
+
+### Masteries
+
+- For an entire scenario, create, destroy, or move at least one obstacle tile each round
+- In a single scenario, heal 8 or more hit points during a single round, deal 8 or more damage with a ranged attack ability, and deal 8 or more damage with a melee attack ability
+
+### GHS check
+
+Agrees.
+
+
+## Mindthief
+
+Perk sheet title: **Vermling Mindthief**. GHS file: `mindthief.json`.
+
+### Class notes
+
+You have key actions known as Augments [Augment]. When you perform an augment ability, you place that card in your active area to gain a persistent bonus on your melee attacks. You may only have one augment active at a time; if you perform a second augment ability, you must discard the previous active augment. Augment abilities are mandatory, so you must switch to the new augment if you want to perform any other abilities from that action.
+
+As a class with few hit points who spends a significant amount of time close to enemies, carefully avoiding enemy focus is integral to your success. You have access to fast and slow initiatives, allowing you to dance in and out of combat by approaching enemies late in the round and then getting away from them early the following round. Additionally, you can disable threatening enemies with your abilities that [Immobilize], [Disarm], or [Stun]. You can even become [Invisible] when in dangerous situations.
+
+_Example on the mat:_ Beside the first paragraph is a picture of an example card labelled "Example": Withering Claw (level 1), tagged AUGMENT, "Add [?], [Muddle] to all your melee attacks." with a lower action of [Attack] 2 plus an element icon.
+
+### Mat
+
+- Hand size: 10
+- HP by level 1-9: 6, 7, 8, 9, 10, 11, 12, 13, 14
+- Traits: Nimble, Outcast, Persuasive
+- Rules reference: Conditions p.XX; Summons p.XX; Commanding Figures p.XX
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 2 | Replace two [-1] cards with one [+0] “After the attack ability, control the target: [Move] 1” card |
+| 2 | 3 | Replace one [+0] card with one [+1] “Add +1 [Attack] for each negative condition the target has” card |
+| 3 | 2 | Replace one [+0] card with one [+2] card |
+| 4 | 1 | Add two [+1] [Immobilize] cards |
+| 5 | 3 | Add one [+2] [Ice] card |
+| 6 | 2 | Add one “[Invisible], self” [Rolling] card |
+| 7 | 1 | Ignore scenario effects and add one [+1] [Rolling] card |
+| 8 | 1 | Whenever you control the attack of an enemy, you may have the enemy use your attack modifier deck |
+| 9 | 1 | You are considered to be last in initiative order when determining monster focus |
+| 10 | 2 linked | At the end of each of your rests, you may [Ice/Dark consume] to control one enemy within [Range] 5: [Attack] 1 |
+
+Total boxes: 18.
+
+### Masteries
+
+- In a single scenario, kill 5 or more enemies with control abilities
+- In a single scenario, trigger the on-attack effect from four different Augments at least 3 times each
+
+### GHS check
+
+- Perks, HP, hand size, traits and masteries agree.
+- Summons: GHS availableSummons lists Rat Swarm (card 150, lvl 1, HP 5, atk 2, move 2, poison), Rat Monstrosity (card 159, lvl 5, HP 8, atk 3, move 3) and Rat King (card 173, lvl 9, HP 10, atk X, move 3); summons are not printed on the mat or perk sheet, so not checkable here.
+
+### Unclear
+
+- Example card on the mat (Withering Claw): the first icon in "Add [?], [Muddle]" is too small to identify; it is only an illustration, not a rule.
+
+
+## SilentKnife
+
+Perk sheet title: **Human Silent Knife**. GHS file: `silent-knife.json`.
+
+### Class notes
+
+Rather than fighting with pure brute force, you have two tactics to gain the upper hand in combat: attacking enemies who are distracted by your adjacent allies or attacking enemies who are completely isolated on the battlefield. Understanding how your allies move and communicating with them regarding their plans can help you determine which approach is best for you both before and during a scenario.
+
+Because of your small hand size, losing cards has a steep cost. If you find yourself often exhausted well before the end of the scenario, you may gain more turns by performing fewer actions with [Lost] early on.
+
+It is easy for you to go early in the round, but you may also want to bring some cards with late initiatives to allow you to approach enemies after their turns, allowing you to get free attacks safely.
+
+_Example on the mat:_ Two example card snippets beside the first paragraph. "Ally adjacency": [Attack] 3 / "Add +2 [Attack] and gain [XP] if the target is adjacent to any of your allies." "Enemy isolation": [Attack] 3 / "Add +2 [Attack] and gain [XP] if the target is adjacent to none of its allies."
+
+### Mat
+
+- Hand size: 9
+- HP by level 1-9: 8, 9, 11, 12, 14, 15, 17, 18, 20
+- Traits: Chaotic, Nimble, Resourceful
+- Rules reference: Attack Effects p.X; Loot p.X
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 1 | Remove one [-2] card |
+| 2 | 1 | Remove two [-1] cards |
+| 3 | 3 | Replace one [-1] card with one [+1] card |
+| 4 | 3 | Replace one [+0] card with one [+1] “Gain one money token if this attack targeted an adjacent enemy” card |
+| 5 | 2 | Replace one [+0] card with one [+2] card |
+| 6 | 2 | Replace one [+1] card with one [+1] “[Invisible], self” [Rolling] card |
+| 7 | 2 | Add one [+1] [Disarm] card |
+| 8 | 1 | At the end of each of your rests, you may place one of your money tokens in the hex occupied by an enemy within [Range] 3 to perform: [Attack] 1, [Target] that enemy, [Range] 3 |
+| 9 | 1 | Whenever you complete a city event, draw an attack modifier card as though you were performing an [Attack] 4. Gain an amount of gold equal to the [Damage] the attack would have dealt |
+| 10 | 2 linked | Once each scenario, during your turn, you may perform: [Invisible], self |
+
+Total boxes: 18.
+
+### Masteries
+
+- For an entire scenario, only attack enemies that are adjacent to one of your allies or adjacent to none of their allies, and perform at least 10 attacks
+- End 3 scenarios with 12 or more money tokens
+
+### GHS check
+
+Agrees.
+
+### Unclear
+
+- Example snippets on the mat: the XP amount after "gain [XP]" is too small to read (looks like 1); illustration only.
+
+
+## Spellweaver
+
+Perk sheet title: **Orchid Spellweaver**. GHS file: `spellweaver.json`.
+
+### Class notes
+
+As you have a very small hand size, the top action of Reviving Ether is an essential tool for your longevity. Be careful not to lose this card when performing a short rest or to negate a source of damage. Additionally, as you will typically want to play it when most of your cards are in your lost pile, you may need to be especially cautious with your positioning when preparing for it.
+
+Despite your hand size, a significant portion of your power comes from performing actions with [Lost]. While Reviving Ether will gain you a significant amount of stamina, you may still exhaust earlier than you would like if you lose too many cards in quick succession. As a starting point, if you perform one action with [Lost] between each of your rests, you should have a reasonable number of turns.
+
+### Mat
+
+- Hand size: 8
+- HP by level 1-9: 6, 7, 8, 9, 10, 11, 12, 13, 14
+- Traits: Arcane, Educated, Resourceful
+- Rules reference: Area of Effect p.X; Elements p.X; Recover p.X; Lost Actions p.X
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 1 | Replace one [-2] card with one [+0] card |
+| 2 | 3 | Replace one [-1] card with one [+0] [Wild] card |
+| 3 | 3 | Replace one [+0] card with one [+1] “Add +2 [Attack] if drawn during an action with [Lost]” card |
+| 4 | 2 | Replace one [+0] card with one [+1] [Curse] card |
+| 5 | 2 | Add one [+1] [Stun] card |
+| 6 | 2 | Add one [+2] [Fire/Ice] card |
+| 7 | 1 | Ignore scenario effects and remove one [+0] card |
+| 8 | 1 | Once each scenario, when you would suffer [Damage], you may gain [Invisible] and [Stun] to negate the [Damage] |
+| 9 | 1 | Whenever you short rest, if Reviving Ether is in your discard pile, first [Recover] it |
+| 10 | 2 linked | At the end of each of your turns during which you performed an action with [Lost], gain [Bless] |
+
+Total boxes: 18.
+
+### Masteries
+
+- In a single scenario, consume both [Fire] and [Ice] during the same turn 6 times
+- In a single scenario, perform 4 different [Lost] actions twice each
+
+### GHS check
+
+Agrees.
+
+
+## Tinkerer
+
+Perk sheet title: **Quatryl Tinkerer**. GHS file: `tinkerer.json`.
+
+### Class notes
+
+You have the right tool for any job: whether an ally needs some healing, you want to set enemies up with some well-placed traps, or you want to take a more direct approach with something a bit more explosive.
+
+Your large hand size gives you a significant amount of stamina, allowing you to play more cards with [Lost] than other classes typically would. However, if you lose too many cards too early in a scenario, you may find yourself exhausted before the end.
+
+Some of your abilities let you place unique tokens on the map that have varying effects. Unlike traps, hexes containing one or more of these tokens are still empty and are not considered negative hexes for the purposes of monster movement.
+
+### Mat
+
+- Hand size: 12
+- HP by level 1-9: 8, 9, 11, 12, 14, 15, 17, 18, 20
+- Traits: Educated, Nimble, Resourceful
+- Rules reference: Traps p.X; Conditions p.X; Summon p.X; Recover p.X
+- Special tokens/trackers: A round gear (cog) token picture beside the third paragraph: the class's unique map token (the same gear as the class icon).
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 1 | Replace one [-2] card with one [+0] card |
+| 2 | 3 | Replace one [-1] card with one [+0] “[Heal] 1, [Target] 1 ally” card |
+| 3 | 2 | Replace one [+0] card with one [+1] [Wound] card |
+| 4 | 2 | Replace one [+0] card with one [+1] [Poison] card |
+| 5 | 2 | Replace one [+0] card with one [+1] [Immobilize] card |
+| 6 | 3 | Add one [+2] “[Strengthen], [Target] 1 ally” card |
+| 7 | 1 | Ignore scenario effects and add one [+0] “[Heal] 1, [Target] 1 ally” card |
+| 8 | 1 | Once each scenario, one adjacent ally may use one of your potion [Small item] items during their turn without it becoming [Lost] |
+| 9 | 1 | Whenever you perform an action with [Lost], you may [Wild] |
+| 10 | 2 linked | Whenever you long rest, you may perform: [Heal] 2, [Range] 3 |
+
+Total boxes: 18.
+
+### Masteries
+
+- For an entire scenario, during each of your turns, give an enemy a negative condition, give an ally a positive condition, heal an ally, or grant an ally shield
+- Perform 11 different [Lost] actions
+
+### GHS check
+
+- Perks, HP, hand size, traits and masteries agree.
+- Summons: GHS availableSummons lists Decoy (card 031, lvl 1, HP 10, move 3), Battle Bot (card 049, lvl 4, HP 7, atk 3, move 3) and Kill Bot (card 055, lvl 7, HP 8, atk 3, move 4, area attack); summons are not printed on the mat or perk sheet, so not checkable here.
+
+
+## Berserker
+
+Perk sheet title: **Inox Berserker**. GHS file: `lightning.json`.
+
+### Class notes
+
+You live life on the edge, skirting the line between life and death. Many of your abilities let you spend your hit points to increase their power. Accordingly, you may often need to view your hit point value as a resource. Additionally, many of your abilities are stronger when your current hit point value is half your maximum hit point value or less. Your survival will depend on your ability to determine when to spend hit points, when to keep your hit point value low, and when to heal up to safety.
+
+You have a number of very powerful actions with [Lost]. While many may seem very tempting, you also have a small hand size, meaning you may want to be selective with which ones you use to avoid exhausting too early. If you decide to go all-in, make sure your party is ready to keep up.
+
+### Mat
+
+- Hand size: 9
+- HP by level 1-9: 10, 12, 14, 16, 18, 20, 22, 24, 26
+- Traits: Chaotic, Intimidating, Strong
+- Rules reference: Added Effects p.20; Forced Movement p.30; Suffer Damage p.27; Mandatory Triggers p.35
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 1 | Remove one [-2] card |
+| 2 | 3 | Replace one [-1] card with one [+0] “[Heal] 1, self” card |
+| 3 | 2 | Replace two [+0] cards with one [+1] “You may suffer [Damage] 2 to add +2 [Attack]” card |
+| 4 | 1 | Replace one [+0] card with two [Wound] [Rolling] cards |
+| 5 | 2 | Add one [+2] [Fire] card |
+| 6 | 1 | Add one [Stun] [Rolling] card |
+| 7 | 1 | Add one [2x] “Suffer [Damage] equal to half your current hit point value (rounded down)” card |
+| 8 | 1 | Ignore item [-1] effects and add one [+1] card |
+| 9 | 1 | Whenever you heal from a long rest, add +1 [Heal] |
+| 10 | 2 linked | Once each scenario, when [Damage] from an attack would reduce your current hit point value to less than 1, instead set your current hit point value to 1 and perform: [Attack] 2, [Target] the attacker |
+| 11 | 3 linked | At the end of each of your turns, you may control all adjacent enemies: [Attack] +0, [Target] [Berserker] |
+
+Total boxes: 18.
+
+### Masteries
+
+- Kill 20 enemies with your retaliate
+- In a single scenario, end all your turns with your hit point value at half your maximum or lower without exhausting
+
+### GHS check
+
+- Agrees in substance. Text-format only: GHS's last perk renders as "[attack] [target+0] [Berserker icon]" while the sheet prints "[Attack] +0, [Target] [Berserker icon]" (the +0 belongs to Attack; the target is the Berserker).
+
+
+## Doomstalker
+
+Perk sheet title: **Orchid Doomstalker**. GHS file: `angry-face.json`.
+
+### Class notes
+
+You have core actions, Dooms [Doom], that place your Doom token [Doom] on one enemy within your line-of-sight. You can only have one enemy with a [Doom] at a time and can only have one [Doom] active at a time; if you play a second [Doom], discard the previous active [Doom].
+
+[Doom] are not negative conditions and may target any enemy, including bosses and objectives.
+
+Bringing summons to the battlefield is not for everyone. You can remain perfectly effective while completely ignoring them. If you do choose to summon forest companions to aid your fight, you may notice that you cannot easily exert direct control over them. You have some [Doom] that can help guide them towards important targets and away from enemies that are dangerous to them.
+
+_Example on the mat:_ "Doom Example": the lower half of a card, initiative 75 (card number 382 G). Top-left box: [Attack] 2, tagged [Doom] DOOM. Top-right trigger box (!): [XP] 2, [Persistent/conditional icon], [Lost]; under it [Move] 2. Body: "This enemy suffers [Damage] 1 at the start of each of its turns." Bottom-right trigger box (!): the same persistent-style icon.
+
+### Mat
+
+- Hand size: 11
+- HP by level 1-9: 8, 9, 11, 12, 14, 15, 17, 18, 20
+- Traits: Chaotic, Intimidating, Nimble
+- Rules reference: Added Effects p.20; Commanding Figures p.31
+- Special tokens/trackers: Doom token [Doom] (an arrow-through-circle symbol), placed on the doomed enemy.
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 1 | Replace one [-2] card with one [+0] card |
+| 2 | 3 | Replace one [-1] card with one [-1] “[Doomstalker] performs: [Attack] 2, [Range] 5” card |
+| 3 | 2 | Replace two [+0] cards with two [+1] cards |
+| 4 | 2 | Add one [+0] “Grant one of your summons adjacent to the target: [Attack] +0 ” card |
+| 5 | 2 | Add one [+3] card |
+| 6 | 2 | Add one [Stun] [Rolling] card |
+| 7 | 1 | Ignore scenario effects and add one [+1] [Rolling] card |
+| 8 | 1 | At the start of each scenario, reveal the top card of each monster ability card deck in the scenario |
+| 9 | 2 linked | Whenever you rest, after you [Recover] your cards from your discard pile, you may play one card from your hand to perform a [Doom] action of the card |
+| 10 | 2 linked | On each of your summons’ turns, you may have them skip their turn and instead perform [Move] +0 treating you as their focus |
+
+Total boxes: 18.
+
+### Masteries
+
+- Kill 20 enemies that have [Doom]
+- In a single round, you and one of your summons must perform a combined total of 6 or more attack abilities
+
+### GHS check
+
+- Perks, HP, hand size, traits and masteries agree.
+- Summons: GHS availableSummons lists Green Snake (lvl 1, HP 5, atk 2, move 3), Vicious Jackal (lvl 1, HP 4, atk 2, move 3, retaliate 1, wound), Battle Boar (lvl 1, HP 7, atk 2, move 2), Staunch Garralev (lvl 3, HP 8, atk 2, move 2, pierce 3), War Raptor (lvl 5, HP 6, atk 3, move 5, flying), Horned Hristek (lvl 7, HP 7, atk 2, move 3) and Great Archinotl (lvl 9, HP 8, atk 3, move 4); summons are not printed on the mat or perk sheet, so not checkable here.
+
+### Unclear
+
+- Doom Example card on the mat: the two square icons in the trigger boxes (a figure-8/loop with an arrow) are not identified; illustration only.
+
+
+## Elementalist
+
+Perk sheet title: **Savvas Elementalist**. GHS file: `triangles.json`.
+
+### Class notes
+
+You are the master of elements. While others use more mundane instruments, your weapons are the elements themselves. You can do almost anything if you have the appropriate element. Conversely, when all elements are inert, your powers are rather meager. As such, planning a turn or two ahead will be paramount. While doing so, it’s important to identify when being at your strongest is most valuable to your party based on your circumstances.
+
+You have a number of actions and attack modifiers that infuse mixed or wild elements. Whenever performing one of these infusions, note that you choose which element you are infusing at the end of that turn, when you move that element to the strong column.
+
+### Mat
+
+- Hand size: 10
+- HP by level 1-9: 6, 7, 8, 9, 10, 11, 12, 13, 14
+- Traits: Arcane, Educated, Intimidating
+- Rules reference: Added Effects p.20; Elements p.21; Recover p.31
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 1 | Replace one [-1] card with one [+0] [Fire/Air] card |
+| 2 | 1 | Replace one [-1] card with one [+0] [Fire/Earth] card |
+| 3 | 1 | Replace one [-1] card with one [+0] [Ice/Air] card |
+| 4 | 1 | Replace one [-1] card with one [+0] [Ice/Earth] card |
+| 5 | 2 | Replace one [+0] card with one [+1] [Fire/Ice] card |
+| 6 | 2 | Replace one [+0] card with one [+1] [Air/Earth] card |
+| 7 | 2 | Replace one [+0] card with one [+1] [Light/Dark] card |
+| 8 | 2 | Add two [Wild] [Rolling] cards |
+| 9 | 1 | Ignore scenario effects and add one [Wild] [Rolling] card |
+| 10 | 1 | At the start of each scenario, you may [Wild] |
+| 11 | 1 | Whenever you long rest, [Wild consume]: [Wild] |
+| 12 | 3 linked | [Fire], [Ice], [Air], and [Earth] do not wane at the end of each round |
+
+Total boxes: 18.
+
+### Masteries
+
+- In a single scenario, consume 4 or more elements in a single turn 5 times
+- Once in 3 different scenarios, have all 6 elements strong or waning at the same time
+
+### GHS check
+
+- Perks, HP, hand size, traits and masteries agree.
+- Summons: GHS availableSummons lists Chromatic Construct (lvl 7, HP 7, move 3) and Elemental Conduit (lvl 9, HP 3, atk 2, move 3, range 3, flying); summons are not printed on the mat or perk sheet, so not checkable here.
+
+
+## Nightshroud
+
+Perk sheet title: **Aesther Nightshroud**. GHS file: `eclipse.json`.
+
+### Class notes
+
+You start each scenario with [Invisible] and do not lose [Invisible] at the end of your turns. While you are [Invisible], you cannot perform attack abilities or open doors, you may move through enemies as if they were your allies, and enemies treat the hex you occupy as unoccupied. If an enemy ends its movement in your hex, you must [Teleport] to the closest empty hex and suffer hazardous terrain damage. When all other characters are exhausted or have escaped, you lose [Invisible] and cannot gain it.
+
+You can also place Tear Tokens [Tear token] on the map. Hexes with only [Tear token] in them are empty and not negative. You may place a maximum of two [Tear token] at any time (you may remove one to replace it elsewhere). Whenever you enter a hex containing a [Tear token] during an ability, you may remove the [Tear token] to lose [Invisible] at the end of the ability. At the end of each round in which you perform an attack, gain [Invisible]. Some of your abilities have [Tear hex] hexes. When you perform the ability, you may place one [Tear token] in that hex.
+
+### Mat
+
+- Hand size: 9
+- HP by level 1-9: 8, 9, 11, 12, 14, 15, 17, 18, 20
+- Traits: Chaotic, Intimidating, Nimble
+- Rules reference: Teleport p.22; Conditions p.26; Area of Effect p.20
+- Special tokens/trackers: Tear tokens [Tear token] (dark round token with a slash); at most two on the map at a time. Ability area diagrams can contain a special [Tear hex] hex (a pale hex shown in the class notes) where a Tear token may be placed.
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 1 | Remove one [-2] card |
+| 2 | 2 | Remove two [-1] cards |
+| 3 | 1 | Replace one [-1] card with two “After the attack ability, grant one adjacent ally or self: [Teleport] 2” [Rolling] cards |
+| 4 | 1 | Replace one [Null] card with one [-2] [Shuffle] card |
+| 5 | 2 | Replace two [+0] cards with two [+1] “If this attack kills the target, shuffle one [Curse] card into the monster attack modifier deck” cards |
+| 6 | 2 | Replace one [+0] card with one [+2] [Dark] card |
+| 7 | 2 | Replace one [+1] card with one [+0] “Place one [Tear token] in a hex adjacent to the target” card |
+| 8 | 1 | Ignore scenario effects and add two [+1] cards |
+| 9 | 1 | Whenever you long rest, you may [Dark] |
+| 10 | 2 linked | Once each scenario, during your turn, place one [Tear token] in an adjacent hex |
+| 11 | 3 linked | If a [Curse] causes an enemy to deal no [Damage] during its attack, that enemy suffers [Damage] 3 |
+
+Total boxes: 18.
+
+### Masteries
+
+- In a single scenario, infuse or consume [Dark] during each of your turns
+- In a single scenario, perform an attack ability during your turn in 5 consecutive rounds
+
+### GHS check
+
+Agrees.
+
+
+## Plagueherald
+
+Perk sheet title: **Harrower Plagueherald**. GHS file: `squidface.json`.
+
+### Class notes
+
+You enjoy nothing more than spreading Xorn’s gifts of poison and plague with those near you. You have abilities that give enemies Plague Tokens [Plague token]. [Plague token] are not negative conditions, have no innate effects, and cannot be removed by enemies. You have access to 12 [Plague token] and if you would ever give an enemy an 13th [Plague token], you must first remove any one previously-placed [Plague token]. An enemy may have up to 3 [Plague token].
+
+Xorn loves your friends and foes equally. Many of your abilities can be augmented by applying [Poison] to allies. You may only activate these conditional bonuses if you can give [Poison] to an ally who does not already have [Poison]. You have a variety of effects that specifically benefit allies that have [Poison], so your allies will also come to embrace the [Poison] you so kindly share with them.
+
+### Mat
+
+- Hand size: 10
+- HP by level 1-9: 6, 7, 8, 9, 10, 11, 12, 13, 14
+- Traits: Arcane, Intimidating, Outcast
+- Rules reference: Suffer Damage p.27; Commanding Figures p.31
+- Special tokens/trackers: Plague tokens [Plague token] (yellow hand-shaped token): 12 available, at most 3 per enemy.
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 2 | Replace one [-1] card with one [+1] card |
+| 2 | 2 | Replace one [-1] card with one [+0] “Give the target or one enemy within [Range] 2 of the target [Plague token]” card |
+| 3 | 2 | Replace one [+0] card with one [+1] [Curse] card |
+| 4 | 2 | Replace one [+0] card with one [+1] [Immobilize] card |
+| 5 | 1 | Replace two [+1] cards with two [+2] cards |
+| 6 | 2 | Add one [+1] [Stun] card |
+| 7 | 1 | Add three “Give the target or one enemy within [Range] 2 of the target [Poison]” [Rolling] cards |
+| 8 | 1 | Add two “[Heal] 1, [Target] 1 ally” [Rolling] cards |
+| 9 | 1 | Ignore scenario effects and add one [+1] card |
+| 10 | 1 | You have [Flying] |
+| 11 | 1 | Whenever you heal from a long rest, you may remove [Poison] from one ally to add +1 [Heal] |
+| 12 | 2 linked | Once each scenario, when an enemy that has [Plague token] would die, first control that enemy and have it perform the abilities on its ability card, adding [Plague token] to all its attacks, then it dies |
+
+Total boxes: 18.
+
+### Masteries
+
+- In a single turn, kill 3 or more enemies without drawing an attack modifier card
+- In a single scenario, either apply or remove [Poison] from an ally or enemy each round
+
+### GHS check
+
+- Numbers, cards and box counts agree. Text differences in GHS only: perk 11 reads "from on ally" (sheet: "from one ally"); perk 12 reads "an enemy that has a [plague] would die, you first control that enemy ... adding [plague] to all its attack" (sheet: "an enemy that has [Plague token] would die, first control that enemy ... to all its attacks").
+
+
+## Quartermaster
+
+Perk sheet title: **Valrath Quartermaster**. GHS file: `three-spears.json`.
+
+### Class notes
+
+Many of your abilities allow you to gather Supplies [Supplies], which are used to recover your and your allies’ [Lost] and [Spent] items. When you gain [Supplies], move the Supplies token [Supplies] up the track. You start each scenario with 10 [Supplies] and may have up to 50. When you spend Supplies [Spend supplies], set the track to 0; then you may [Recover] any number of the target’s items with a combined gold cost equal to or less than the amount of [Supplies] spent. You must have at least 10 [Supplies] to perform an ability or added effect that requires spending them.
+
+You have a special personal supply of [Quartermaster] items. They are not immediately brought into scenarios but can be given to characters through your abilities. These items have no item slot requirements and may be used by characters regardless of their equipped items. There is only one copy of each [Quartermaster] item card—if any character already has that item, you may not give out another copy. When a [Quartermaster] item is used, it is returned to its supply. At the end of each scenario, unused [Quartermaster] items are returned to their supply.
+
+### Mat
+
+- Hand size: 11
+- HP by level 1-9: 10, 12, 14, 16, 18, 20, 22, 24, 26
+- Traits: Armored, Resourceful, Strong
+- Rules reference: Area of Effect p.20; Forced Movement p.30; Recover p.31; Items p.33
+- Special tokens/trackers: Supplies track printed down the left of the class notes, labelled "Supplies": 50, 40, 30, 20, 10, 0 (a pointer sits beside 10, the starting value). The Supplies token [Supplies] (a crate) moves along it. [Spend supplies] is the crate with a red X. [Quartermaster] items are marked with the class's orange three-spears symbol.
+
+### Mat back: Valrath Quartermaster
+
+Valraths originate far in the south of Casskia, in the Red Desert. There was once a great war in that region between Valraths and the humans, both equally interested in conquering the Stormbrew Plains for themselves. The two nations have since made peace, and the Valrath government in particular has made concerted efforts to forsake its aggressive past. In more recent times, they have focused on economic strength over physical domination.
+
+This economic strength can take many forms. Valraths have a strong presence in the Merchant’s Guild, though many prefer to establish more independent business ventures. One could say Quartermasters are a form of merchant, maintaining a stock of goods to keep a fighting force equipped and prepared. That fighting force may be a city garrison or a small mercenary band. For the right price, a Quartermaster can make sure anyone has a good sword at their side for when they need it most.
+
+- Complexity: 5 of 5 (all five dots filled; the Soothsinger back shows an unfilled dot as hollow, so these are all filled)
+- Elemental affinities: None
+- Role bars (approx. 0-5): Melee 4, Ranged 3, Mobility 3, Support 4, Defense 4, Control 2
+- Retirement: [Section book] 42.4
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 2 | Replace two [-1] cards with one [+0] [Muddle] card |
+| 2 | 3 | Replace one [+0] card with one [+0] “Gain 10 [Supplies]” card |
+| 3 | 1 | Replace two [+0] cards with two [Pierce] 3 [Rolling] cards |
+| 4 | 2 | Replace one [+1] card with two [+0] “Gain the Barbed Strip or Iron Plate item” cards |
+| 5 | 1 | Replace two [+1] cards with two [+2] cards |
+| 6 | 2 | Add one ”Gain the Scroll of Relocation or Sharpened Dirk item” [Rolling] card |
+| 7 | 2 | Add one [Stun] [Rolling] card |
+| 8 | 1 | Ignore item [-1] effects and remove one [+0] card |
+| 9 | 1 | You may bring one additional [Small item] item into each scenario |
+| 10 | 1 | Your party may purchase items from each faction as though the items’ costs were five gold less and your reputation with that faction was two greater |
+| 11 | 2 linked | Whenever you long rest, gain 10 [Supplies] |
+
+Total boxes: 18.
+Item names (Barbed Strip, Iron Plate, Scroll of Relocation, Sharpened Dirk) are in italics on the sheet. The "Scroll of Relocation" perk opens with a closing-style quote mark (”) as printed.
+
+### Masteries
+
+- In a single scenario, spend 50 [Supplies] to refresh 50 gold of lost items 3 times
+- For an entire scenario, give yourself or an ally an item from the Quartermaster Item Supply each round except when performing a long rest
+
+### GHS check
+
+Agrees.
+
+### Unclear
+
+- Back side role bars are read from bar heights against the grid lines; approximate.
+
+
+## Sawbones
+
+Perk sheet title: **Human Sawbones**. GHS file: `saw.json`.
+
+### Class notes
+
+You have abilities that can give character allies medical packs, which are extra ability cards. When someone gains a medical pack, add one random card from medical pack supply directly to their hand. Abilities that give medical packs may only be performed if there is at least one medical pack remaining in the supply. Medical packs that have been added to someone’s hand can be played during card selection like any other ability card. Once an action on a medical pack has been performed or the medical pack is otherwise discarded, return that card to your medical pack supply. A player may not lose a medical pack to negate a source of damage.
+
+You also have Prescription [Prescription] actions, which can only be performed if you have at least one adjacent character ally. When you perform a [Prescription] action, immediately place that card in the adjacent ally’s active area. When they discard one of these cards, place that ability card in your discard pile instead of theirs.
+
+You have some attack abilities that gain bonuses if the target is damaged. This is always determined before attacking.
+
+### Mat
+
+- Hand size: 10
+- HP by level 1-9: 8, 9, 11, 12, 14, 15, 17, 18, 20
+- Traits: Educated, Persuasive, Resourceful
+- Rules reference: Conditions p.26; Active Bonuses p.28
+- Special tokens/trackers: Prescription [Prescription] symbol (a curled scroll-like mark) tags Prescription actions; the perk text refers to a token on an ally's active Prescription card that moves along slots. Medical pack cards form a separate supply.
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 1 | Remove two [-1] cards |
+| 2 | 1 | Replace one [-2] card with one [-2] “Give one adjacent ally or self one medical pack” card |
+| 3 | 3 | Replace one [-1] card with one [+1] card |
+| 4 | 2 | Replace two [+0] cards with one [+1] “You may gain [Disarm] to add [Stun]” card |
+| 5 | 2 | Add two [+1] “Add +1 [Attack] if an ally has an active [Prescription]” cards |
+| 6 | 2 | Add one “[Heal] 3, [Range] 1” [Rolling] card |
+| 7 | 2 linked | Add +1 [Heal] to all heal abilities on “Medical Pack” ability cards |
+| 8 | 2 linked | Each City Phase after completing a scenario, your or one ally’s donation to the Sanctuary of the Great Oak is free |
+| 9 | 3 linked | At the end of each of your rests, if an ally has an active [Prescription], gain one “Medical Pack” ability card and move the token on one ally’s active [Prescription] backward one slot |
+
+Total boxes: 18.
+
+### Masteries
+
+- In a single scenario, give an ally a medical pack or [Prescription] each round except when performing a long rest
+- In a single scenario, never attack an undamaged enemy while there are any damaged monsters alive, and perform at least 10 attacks
+
+### GHS check
+
+- Numbers, cards and box counts agree. Text typo in GHS only: perk 9 reads "if an ally as an active" (sheet: "if an ally has an active").
+
+
+## Sunkeeper
+
+Perk sheet title: **Valrath Sunkeeper**. GHS file: `sun.json`.
+
+### Class notes
+
+You have access to strong offensive, defensive, and support abilities. It’s up to you to decide whether you want to heavily focus on one of these aspects, or mix it up to do a bit of everything.
+
+Many of your abilities strongly benefit from [Light], so you may want to think about bringing some abilities that can infuse [Light] and find opportunities to use them.
+
+With your large hand size, you can afford to perform multiple actions with [Lost] in each scenario. You can bring some powerful [Lost] actions to turn the tide of difficult fights or even consider setting up a persistent ability or two early on.
+
+### Mat
+
+- Hand size: 11
+- HP by level 1-9: 10, 12, 14, 16, 18, 20, 22, 24, 26
+- Traits: Armored, Educated, Persuasive
+- Rules reference: Positive Conditions p.26; Shield p.29; Recover p.31; Commanding Figures p.31
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 2 | Replace one [-1] card with two [+0] [Light] cards |
+| 2 | 3 | Replace one [+0] card with one [+1] “[Shield] 1” [Rolling] card |
+| 3 | 2 | Replace one [+0] card with one [+2] card |
+| 4 | 2 | Add two [+1] “[Heal] 1, [Range] 3” cards |
+| 5 | 1 | Add one [-1] “You or an adjacent ally may [Recover] one level 1 card from the discard pile” card |
+| 6 | 1 | Add one [Stun] [Rolling] card |
+| 7 | 1 | Ignore scenario effects and add one [+1] card |
+| 8 | 1 | Ignore item [-1] effects and remove one [-1] card |
+| 9 | 2 linked | Whenever you open one or more doors during your turn, gain [Shield] 1, [Retaliate] 1 for the round |
+| 10 | 1 | Whenever you long rest, you may [Light] |
+| 11 | 2 linked | Whenever one of your heals would cause an ally’s current hit point value to increase beyond their maximum hit point value, that ally gains [Ward] |
+
+Total boxes: 18.
+
+### Masteries
+
+- In a single scenario, infuse or consume [Light] during each of your turns
+- In a single scenario, deal 8 or more [Damage] with an attack 3 or more times
+
+### GHS check
+
+- Numbers, cards and box counts agree. Text differences in GHS only: perk 5 reads "[recover] on level 1 card" (sheet: "one level 1 card"); perk 11 reads "an ally's hit point value" (sheet: "an ally’s current hit point value").
+
+
+## Soothsinger
+
+Perk sheet title: **Quatryl Soothsinger**. GHS file: `music-note.json`.
+
+### Class notes
+
+Many of your actions have one of two notes associated with them: high notes [High note] or low notes [Low note]. Once each round, when you perform an action with a note, you may immediately gain the corresponding note token and place it to the left. You may have a maximum of two of each note at once and you start each scenario with one note of your choice.
+
+You may play notes to create Songs [Song], which are persistent active abilities with use slots that provide ongoing effects. In order to perform a [Song], you must have the corresponding notes on your mat. Whenever you perform a [Song], remove all of your notes, even those that were not part of the [Song]. The [Song]’s effect is active from the moment you play it into your active area and ends when the [Song] is moved from your active area to your discard pile. You must advance your character token on all your active [Song] at the end of each round. If multiple [Song] have effects at the end of your turn, you may apply their effects in any order.
+
+### Mat
+
+- Hand size: 11
+- HP by level 1-9: 6, 7, 8, 9, 10, 11, 12, 13, 14
+- Traits: Educated, Nimble, Persuasive
+- Rules reference: Active Bonuses p.28; Commanding Figures p.31
+- Special tokens/trackers: "Note Tokens" column at the left of the class notes: two high-note slots (treble clef [High note]) above two low-note slots (bass clef [Low note]), dashed circles where note tokens are placed. Max two of each note. [Song] is a lute-in-circle symbol.
+
+### Mat back: Quatryl Soothsinger
+
+Quatryls typically don’t like being underestimated. Yes, they are smaller than the other ancestries they encounter, but that doesn’t mean they are worth any less. If anything, they will go out of their way to show they are worth more. Their scientific institutions on the eastern continent have developed a myriad of technological advancements—primarily bionics and prosthetics used to enhance their own capabilities. Only a fool would shun a Quatryl’s offer of help.
+
+The talents of a Quatryl can extend far beyond the realms of machinery and alchemy. Their long, deft fingers also facilitate astonishing capabilities with musical instruments, given the proper training. Combining this with a Quatryl’s distinctive vocal traits makes their musical talents go far beyond merely entertaining crowds. Soothsingers have been known to empower their allies to great feats and bring their enemies low with a single strum of their lute and the proper note in their voice.
+
+- Complexity: 4 of 5 (four filled dots, one hollow)
+- Elemental affinities: None
+- Role bars (approx. 0-5): Melee 1, Ranged 4, Mobility 4, Support 5, Defense 1, Control 5
+- Retirement: [Section book] 26.4
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 1 | Replace one [-2] card with one [-2] “[Bless], [Target] 2” card |
+| 2 | 3 | Replace one [-1] card with one [+0] “Skip moving your character tokens on active [Song] at the end of this round” card |
+| 3 | 2 | Replace one [-1] card with one [+0] [Stun] card |
+| 4 | 2 | Replace two [+0] cards with one [+1] “[Strengthen], [Target] 1 ally” card |
+| 5 | 2 | Replace one [+0] card and one [+1] card with two [+2] cards |
+| 6 | 3 | Add one “Grant one ally: [Move] 2 or [Attack] 2” [Rolling] card |
+| 7 | 1 | Add three [Curse] [Rolling] cards |
+| 8 | 1 | At the end of each scenario, each character in that scenario gains [XP] 8 if you completed your battle goal |
+| 9 | 1 | Whenever you perform a [Song] action, if you have any unused Notes, gain one Note of your choice in addition to any other Note gained that round |
+| 10 | 2 linked | During ordering of initiative in rounds in which you declare a long rest, gain one Note of your choice, and each of your allies may decrease their initiative by 10 |
+
+Total boxes: 18.
+
+### Masteries
+
+- In a single scenario, perform 7 different [Song] actions
+- In a single scenario, create 20 or more Notes and use each Note you create in a [Song]
+
+### GHS check
+
+- Numbers, cards and box counts agree. Text difference in GHS only: perk 9 reads "Whenever you perform a [song], if you have" (sheet: "perform a [Song] action, if you have").
+
+### Unclear
+
+- Back side role bars are read from bar heights against the grid lines; approximate.
+
+
+## Soultether
+
+Perk sheet title: **Aesther Soultether**. GHS file: `circles.json`.
+
+### Class notes
+
+_No character mat image exists for the Soultether. Hand size, HP and traits below are GHS values only, not checked against a mat._
+
+### Mat
+
+- Hand size: 12 (GHS only, no mat image)
+- HP by level 1-9: 6, 7, 8, 9, 10, 11, 12, 13, 14 (GHS only, no mat image)
+- Traits: Arcane, Chaotic, Resourceful (GHS only, no mat image)
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 1 | Replace one [-2] card with one [+0] card |
+| 2 | 3 | Replace one [-1] card with one [+0] “After the attack ability, grant one of your summons: [Teleport] 2” card |
+| 3 | 3 | Replace one [+0] card with one [+1] “[Invisible], [Target] 1 of your summons” card |
+| 4 | 1 | Replace one [+0] card with two [Wound] [Rolling] cards |
+| 5 | 1 | Replace one [+0] card with two [Poison] [Rolling] cards |
+| 6 | 1 | Replace two [+1] cards with two [+1] [Curse] cards |
+| 7 | 1 | Add one [+2] [Fire/Air] card |
+| 8 | 1 | Add one [+2] [Fire/Dark] card |
+| 9 | 1 | Add one [+2] [Air/Dark] card |
+| 10 | 1 | Ignore scenario effects and add two [+1] cards |
+| 11 | 1 | At the beginning of each round in which you long rest, all your summons gain [Shield] 1 for the round |
+| 12 | 1 | Once each scenario, during your turn, [Teleport] one of your summons to an empty hex adjacent to you |
+| 13 | 2 linked | Once each scenario, during ordering of initiative, after all ability cards have been revealed, all your summons gain [Invisible] |
+
+Total boxes: 18.
+Unlike the other sheets, the left column has an extra untitled box between the XP/Gold box and Notes.
+
+### Masteries
+
+- Perform 3 different summon actions before your first rest and keep those cards in your active area for the entire scenario
+- Perform 6 different summon abilities from your ability cards over the course of the first rounds of 6 scenarios
+
+### GHS check
+
+- Perks and masteries agree with the perk sheet.
+- HP, hand size and traits cannot be checked (no mat image).
+- Summons: GHS availableSummons lists 12: Shadow Wolf (lvl 1, x2, HP 2, atk 2, move 3, pierce 1), Iron Beast (lvl 1, HP 7, atk 1, move 2, shield 1, retaliate 1), Thorn Shooter (lvl 1, HP 3, atk poison, move 2, range 4), Rift Spirit (lvl 1, HP 2, atk muddle, move 2, range 3), Floating Jellyfish (lvl 1, HP 5, atk 3, move 1, flying), Covetous Imp (lvl 3, HP 5, atk 3, move 3), Ember Sprite (lvl 4, HP 3, atk 1, move 3, range 3, flying), Rock Colossus (lvl 5, HP 12, atk 1, move 2, muddle, retaliate 2), Slime Spirit (lvl 6, HP 5, atk 2, move 2, poison), Void Eater (lvl 7, HP 6, atk 4, move 3), Fey Subjugator (lvl 9, HP 4, atk 1, move 2, range 4, flying), Prismatic Unicorn (lvl 9, HP 8, atk 3, move 4, pierce 2); not printed on the perk sheet, so not checkable here.
+
+### Unclear
+
+- No mat image: class notes, hand size, HP, traits and any special tokens are not transcribed from an image.
+
+
+## Wildfury
+
+Perk sheet title: **Vermling Wildfury**. GHS file: `two-mini.json`.
+
+### Class notes
+
+You start every scenario with your bear summon [Bear] by summoning it in an empty adjacent hex before the first round. Its stats are listed below, and it acts immediately before you each round. You may lose cards as normal to negate damage done to you or [Bear]. If [Bear] drops below 1 hit point, it is removed from the map and cannot return that scenario. You have special actions known as Command [Command] actions that grant [Bear] additional abilities, ignoring your line-of-sight. [Bear] will not open doors during its turn, but you may [Command] it to open doors.
+
+Some of your actions require an element in order to be performed. You cannot perform those actions without using the indicated element. You may sometimes have multiple persistent abilities that trigger at the same time. When that happens, you choose the resolution order.
+
+### Mat
+
+- Hand size: 10
+- HP by level 1-9: 6, 7, 8, 9, 10, 11, 12, 13, 14
+- Traits: Armored, Outcast, Strong
+- Rules reference: Teleport p.22; Active Bonuses p.28; Summon p.29; Focus p.39
+- Special tokens/trackers: Bear summon tracker on the mat: a second HP row marked [Bear] [HP] under the Wildfury's own row, and a bear stat box [Move] 3, [Attack] 2. The left panel has a second condition area labelled "[Bear] Damage/Conditions" under the Wildfury's "Conditions". [Bear] is a paw-print symbol; [Command] is a claw-swipe symbol.
+- Bear summon: HP by level 10, 12, 14, 16, 18, 20, 22, 24, 26; [Move] 3, [Attack] 2
+
+### Perks
+
+| # | Boxes | Perk |
+|---|---|---|
+| 1 | 3 | Replace one [-1] card with one “[Heal] 2, [Target] [Bear]” [Rolling] card |
+| 2 | 3 | Replace one [+0] card with one [+1] [Wound] card |
+| 3 | 2 | Replace one [+0] card with one [+2] “Add +1 [Attack] if the Wildfury and [Bear] are within [Range] 4 of each other” card |
+| 4 | 1 | Replace one [+2] card with one [+4] card |
+| 5 | 2 | Add two [+1] [Air/Earth] cards |
+| 6 | 2 | Add one [+2] [Push] 2 card |
+| 7 | 1 | Ignore scenario effects and add one [+1] “[Safeguard], [Target] 1 ally” card |
+| 8 | 1 | Whenever [Bear] is attacked, treat any [2x] attack modifier card the enemy draws as [+0] instead |
+| 9 | 1 | Once each scenario, during your turn, [Command]: [Move] 4. If [Bear] exits a hex adjacent to you during this movement, you may [Teleport] to an empty hex adjacent to [Bear] at the end of the movement |
+| 10 | 2 linked | At the start or end of each of your long rests, you may [Air/Earth] and reduce your current hit point value by X (X must be at least 1) to [Command]: [Heal] X, self |
+
+Total boxes: 18.
+
+### Masteries
+
+- In a single scenario, infuse or consume [Air] or [Earth] during each of your turns
+- In a single scenario, kill 4 or more enemies with [Command] attacks of 7 or greater (after all bonuses, before attack modifiers)
+
+### GHS check
+
+- Numbers, cards, box counts and masteries agree; GHS bear summon (HP 8+2xL, atk 2, move 3) matches the mat's bear row (10..26) and stat box.
+- Text typo in GHS only: perk 8 reads "treat and [2x] attack modifier" (sheet: "treat any").
+- Other summons: GHS availableSummons also lists Wind Idol (lvl 1, HP 1), Monolith (lvl 3, HP 2) and Vital Force (lvl 9, HP 3); not printed on the mat or perk sheet, so not checkable here.
+

@@ -1,0 +1,651 @@
+{
+  "class": "Sunkeeper",
+  "read_by": "image reader B, 2026-10-31",
+  "cards": [
+    {
+      "name": "Hammer Blow",
+      "number": "0175",
+      "level": "1",
+      "initiative": 55,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Muddle",
+                  "consume Light: +1 Attack, advantage, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Loot 1", "Bless [diamond+], self"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: consume Light gives advantage on the attack"],
+      "summons": [],
+      "notes": "Class-wide: printed numbers are 'G 0175' to 'G 0204' (recorded without the G). Condition icons identified by colour/shape: yellow diamond with a circle and triangle = Bless (checked against Tinkerer 'Chimeric Formula', where GHS lists strengthen, bless in the same order as the blue arm and yellow icon); pink diamond with a flame-edged shield = Ward (same shape as the Ward icon on the Sunkeeper perk sheet, GHS custom perk 4); blue arm = Strengthen; brown diamond with '?' = Muddle; dark blue starburst diamond = Stun. Light element = yellow sun-star circle; consume = red X on the element."
+    },
+    {
+      "name": "Holy Strike",
+      "number": "0176",
+      "level": "1",
+      "initiative": 65,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Pierce 1",
+                  "consume Light: +1 Attack, advantage, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 5 [diamond]", "Range 3", "! infuse Light"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: consume Light gives advantage on the attack"],
+      "summons": [],
+      "notes": "Top pierce icon checked zoomed (diamond with arrow through armour, value 1)."
+    },
+    {
+      "name": "Empowering Command",
+      "number": "0177",
+      "level": "1",
+      "initiative": 32,
+      "top": {
+        "lines": ["Strengthen, Bless [diamond+]", "Range 3", "! infuse Light"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Grant one adjacent ally:\"", "Attack 3 [square]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["bottom: grant ability: one adjacent ally performs Attack 3"],
+      "summons": [],
+      "notes": "Top: Strengthen and Bless are one ability (two condition icons, one diamond+ mark after them) with range 3; no target count printed, so one target."
+    },
+    {
+      "name": "Dazzling Charge",
+      "number": "0178",
+      "level": "1",
+      "initiative": 36,
+      "top": {
+        "lines": ["Heal 3 [diamond+]", "Range 3", "! infuse Light"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 5 [circle]", "Stun [diamond]", "Range 1", "! infuse Light"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "Bottom Stun is a standalone ability (stun icon as the ability, its own diamond mark, range 1), not a rider on an attack."
+    },
+    {
+      "name": "Lay On Hands",
+      "number": "0179",
+      "level": "1",
+      "initiative": 90,
+      "top": {
+        "lines": ["Heal X", "Target 1 ally, range 1",
+                  "\"where X is the target's maximum hit point value.\"",
+                  "! infuse Light"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: Heal X where X = the target's maximum hit points; targets an ally only"],
+      "summons": [],
+      "notes": "No enhancement marks on either half."
+    },
+    {
+      "name": "Tactical Order",
+      "number": "0180",
+      "level": "1",
+      "initiative": 29,
+      "top": {
+        "lines": ["\"Grant one ally within Range 3:\"", "Move 4 [square]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3", "consume Light: +2 Move, XP 1"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: grant ability: one ally within range 3 performs Move 4"],
+      "summons": [],
+      "notes": "Bottom Move 3 has no enhancement mark."
+    },
+    {
+      "name": "Brilliant Prayer",
+      "number": "0181",
+      "level": "1",
+      "initiative": 27,
+      "top": {
+        "lines": ["\"One adjacent ally may recover one card from their lost pile.\""],
+        "summary": ["XP 2", "unrecoverable", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 2 [square]", "Bless", "Target 1 ally, range 1"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: an adjacent ally may recover one card from their lost pile",
+                 "top: this card can't be recovered (unrecoverable icon)"],
+      "summons": [],
+      "notes": "'recover' is printed as the recover icon (card with a check mark). Top corner box: XP 2, the unrecoverable icon (card stack with a red X), lost. Bottom Bless has no enhancement mark."
+    },
+    {
+      "name": "Soothing Light",
+      "number": "0182",
+      "level": "1",
+      "initiative": 63,
+      "top": {
+        "lines": ["Heal 3 [diamond+]", "Range 2 [square]",
+                  "consume Light: \"The target may recover one level 1 card from their discard pile, XP 1.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: consume Light: the heal target may recover one level 1 card from their discard pile"],
+      "summons": [],
+      "notes": "The square mark sits inside the Range 2 pill, so it belongs to the range."
+    },
+    {
+      "name": "Purifying Aura",
+      "number": "0183",
+      "level": "1",
+      "initiative": 21,
+      "top": {
+        "lines": ["\"On the next five attacks targeting you performed by an adjacent enemy, gain Retaliate 3.\"",
+                  "slots: 5 (XP 1 on slots 1, 3, 5), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Strengthen", "Target all allies, range 1 [square]",
+                  "consume Light: +1 Range, XP 1"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: use slots: Retaliate 3 against each of the next five attacks on you by adjacent enemies"],
+      "summons": [],
+      "notes": "First slot dashed (starts on play). Bottom square mark sits inside the target/range pill after 'range 1'."
+    },
+    {
+      "name": "Protective Blessing",
+      "number": "0184",
+      "level": "1",
+      "initiative": 16,
+      "top": {
+        "lines": ["Shield 1 [square]"],
+        "summary": ["XP 1", "round"]
+      },
+      "bottom": {
+        "lines": ["\"Whenever you or an adjacent ally would suffer damage this round, negate the damage.\"",
+                  "! infuse Light"],
+        "summary": ["XP 2", "round", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["bottom: this round, negate all damage you or an adjacent ally would suffer"],
+      "summons": [],
+      "notes": "Damage is printed as the damage icon (starburst with a drop), checked zoomed. Top Shield 1 with the round icon: shield for the round, XP 1."
+    },
+    {
+      "name": "Defensive Stance",
+      "number": "0185",
+      "level": "1",
+      "initiative": 85,
+      "top": {
+        "lines": ["Attack 1 [square]", "Stun"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Shield 1",
+                  "\"Reduce the Pierce value of all attacks targeting you by 2.\"",
+                  "! \"Whenever you perform a move ability, add -1 Move.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["bottom: persistent: reduce Pierce of attacks targeting you by 2",
+                 "bottom: persistent mandatory penalty: -1 Move on each of your move abilities"],
+      "summons": [],
+      "notes": "Bottom Shield 1 has no enhancement mark (checked zoomed); it is persistent (no round icon)."
+    },
+    {
+      "name": "Daybreak",
+      "number": "0186",
+      "level": "X",
+      "initiative": 17,
+      "top": {
+        "lines": ["Attack 3 [diamond]",
+                  "consume Dark: +1 Attack, Muddle, infuse Light, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]",
+                  "\"All attacks targeting you this round gain disadvantage.\""],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: consuming Dark infuses Light", "bottom: attacks targeting you this round gain disadvantage"],
+      "summons": [],
+      "notes": "Top consumes Dark (dark crescent circle with red X, checked zoomed), the only non-Light consume in the class."
+    },
+    {
+      "name": "Sanctify",
+      "number": "0187",
+      "level": "X",
+      "initiative": 39,
+      "top": {
+        "lines": ["\"On the next three attacks performed by allies within Range 2, add +1 Attack to the attack. If they have Ward, add +2 Attack instead.\"",
+                  "slots: 3 (XP 1 on slot 3), ends after the last",
+                  "! infuse Light"],
+        "summary": ["persistent"]
+      },
+      "bottom": {
+        "lines": ["Attack 2 [diamond]", "Range 3", "Muddle"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: use slots: +1 Attack on the next three attacks by allies within range 2, +2 instead if the ally has Ward"],
+      "summons": [],
+      "notes": "Top corner shows the persistent icon only (no lost icon), so the card is discarded after the last slot. First slot dashed."
+    },
+    {
+      "name": "Beacon of Light",
+      "number": "0188",
+      "level": "X",
+      "initiative": 80,
+      "top": {
+        "lines": ["\"On your next three single-target heal abilities from your ability cards, additionally target all allies within Range 2 of the primary target.\"",
+                  "slots: 3 (XP 1 on slots 1, 3), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]",
+                  "consume Light: Ward, target 1 ally, range 2, XP 1"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: use slots: your next three single-target card heals also target all allies within range 2 of the primary target"],
+      "summons": [],
+      "notes": "First slot dashed."
+    },
+    {
+      "name": "Holy Defense",
+      "number": "0189",
+      "level": "2",
+      "initiative": 12,
+      "top": {
+        "lines": ["Shield 1 [square]",
+                  "consume Light: Heal 2, self, XP 1"],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]",
+                  "consume Light: Heal 1, target all, range 1, XP 1"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "Bottom heal pill prints 'all' (not 'all allies'); see unclear."
+    },
+    {
+      "name": "Mobilizing Axiom",
+      "number": "0190",
+      "level": "2",
+      "initiative": 23,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Bless [diamond+], self"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Grant all allies within Range 5 and self:\"", "Move 4 [square]"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["bottom: grant ability: all allies within range 5 and you perform Move 4"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Engulfing Radiance",
+      "number": "0191",
+      "level": "3",
+      "initiative": 15,
+      "top": {
+        "lines": ["Heal 5 [diamond+]", "Target all", "! infuse Light"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["\"All attacks targeting you or any ally within Range 4 (of you) gain disadvantage this round.\"",
+                  "! infuse Light"],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: heal with no range printed, target all",
+                 "bottom: this round, attacks targeting you or allies within range 4 of you gain disadvantage"],
+      "summons": [],
+      "notes": "Top heal pill prints only 'all', no range; see unclear."
+    },
+    {
+      "name": "Burning Flash",
+      "number": "0192",
+      "level": "3",
+      "initiative": 51,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Target all adjacent enemies",
+                  "consume Light: +1 Attack, advantage, XP 1",
+                  "\"Gain XP 1 for each enemy targeted.\""],
+        "summary": ["lost"]
+      },
+      "bottom": {
+        "lines": ["Move 5 [circle]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: consume Light gives advantage", "top: XP 1 for each enemy targeted"],
+      "summons": [],
+      "notes": "Top corner box shows only the lost icon (no fixed XP)."
+    },
+    {
+      "name": "Righteous Strength",
+      "number": "0193",
+      "level": "4",
+      "initiative": 72,
+      "top": {
+        "lines": ["Bless", "Target all allies, range 1", "! infuse Light"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Heal 3 [square]", "Range 3",
+                  "consume Light: +1 Target, XP 1"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "Top Bless has no enhancement mark (checked zoomed). Bottom heal mark is a square, not diamond+ (checked zoomed)."
+    },
+    {
+      "name": "Cautious Advance",
+      "number": "0194",
+      "level": "4",
+      "initiative": 18,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "! infuse Light"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Shield 1 [square]"],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "Source list has initiative '18 ' with a trailing space; the card prints 18."
+    },
+    {
+      "name": "Arresting March",
+      "number": "0195",
+      "level": "5",
+      "initiative": 22,
+      "top": {
+        "lines": ["\"Grant one ally within Range 3:\"", "Attack 3 [square]", "Stun",
+                  "consume Light: Heal 3, target: the target of the grant ability, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "\"Grant one ally within Range 3:\"", "Move 3 [square]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: grant ability: one ally within range 3 performs Attack 3 + Stun",
+                 "top: consume Light: Heal 3 on the ally who received the grant",
+                 "bottom: grant ability: one ally within range 3 performs Move 3"],
+      "summons": [],
+      "notes": "Top Stun is a pill (rider on the granted attack)."
+    },
+    {
+      "name": "Path of Glory",
+      "number": "0196",
+      "level": "5",
+      "initiative": 48,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Pierce 1, Muddle",
+                  "consume Light: +1 Attack, advantage, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 6 [circle]",
+                  "Strengthen, Bless: target all allies moved through with the move ability",
+                  "! infuse Light"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: consume Light gives advantage",
+                 "bottom: Strengthen + Bless on all allies moved through with the move ability"],
+      "summons": [],
+      "notes": "Bottom conditions have no enhancement mark."
+    },
+    {
+      "name": "Divine Intervention",
+      "number": "0197",
+      "level": "6",
+      "initiative": 9,
+      "top": {
+        "lines": ["\"Whenever an ally would suffer damage, you may suffer that damage instead.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["\"Grant all allies within Range 3 and self:\"", "Shield 1",
+                  "consume Light: \"Treat all positive and 2x attack modifier cards drawn by enemies this round to be +0 instead, XP 1.\""],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: persistent: you may take damage an ally would suffer instead of them",
+                 "bottom: grant ability: all allies within range 3 and you gain Shield 1 (round)",
+                 "bottom: consume Light: enemies' positive and 2x modifier cards count as +0 this round"],
+      "summons": [],
+      "notes": "Initiative printed '09'. Top persistent has no use slots (lasts until the end of the scenario or until removed). Bottom Shield 1 has no mark."
+    },
+    {
+      "name": "Scales of Justice",
+      "number": "0198",
+      "level": "6",
+      "initiative": 30,
+      "top": {
+        "lines": ["Retaliate 2"],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["\"Whenever you consume Light during one of your attack abilities, add +1 Attack, Pierce 1 to all the attacks and treat all Null attack modifier cards drawn as 2x instead.\""],
+        "summary": ["XP 1", "persistent", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: persistent Retaliate 2 (no round icon, no slots)",
+                 "bottom: persistent: whenever you consume Light during an attack ability, +1 Attack and Pierce 1 on all its attacks and Null modifiers become 2x"],
+      "summons": [],
+      "notes": "'consume Light' is printed as the Light icon with a red X inside the sentence; 'Null' is the gold circle-slash modifier icon, '2x' the purple 2x icon. No enhancement marks on either half."
+    },
+    {
+      "name": "Bright Aegis",
+      "number": "0199",
+      "level": "7",
+      "initiative": 14,
+      "top": {
+        "lines": ["Shield 2 [square]", "Retaliate 1 [square]", "! infuse Light"],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["\"One adjacent ally may recover one card from their lost pile.\"",
+                  "consume Light: \"That ally may immediately play up to two cards from their hand, performing at most one top and one bottom action of the cards, XP 1.\""],
+        "summary": ["XP 2", "unrecoverable", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["bottom: an adjacent ally may recover one card from their lost pile",
+                 "bottom: consume Light: that ally may immediately play up to two cards (at most one top and one bottom action)",
+                 "bottom: this card can't be recovered (unrecoverable icon)"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Illuminate the Target",
+      "number": "0200",
+      "level": "7",
+      "initiative": 91,
+      "top": {
+        "lines": ["\"Designate an adjacent hex containing an enemy to perform:\"",
+                  "Attack 5: target the enemy occupying the designated hex",
+                  "Strengthen: target all allies adjacent to you or the designated hex"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Grant one adjacent ally:\"", "Attack 5 [square]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: designate an adjacent enemy hex; Attack 5 on the enemy in it",
+                 "top: Strengthen all allies adjacent to you or to the designated hex",
+                 "bottom: grant ability: one adjacent ally performs Attack 5"],
+      "summons": [],
+      "notes": "No enhancement marks on the top half; no corner icons on either half."
+    },
+    {
+      "name": "Warding Blow",
+      "number": "0201",
+      "level": "8",
+      "initiative": 25,
+      "top": {
+        "lines": ["Attack 5 [diamond]", "Ward [diamond+], self",
+                  "consume Light: Heal 3, self, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "! infuse Light"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Supportive Chant",
+      "number": "0202",
+      "level": "8",
+      "initiative": 11,
+      "top": {
+        "lines": ["\"Grant all allies within Range 3:\"",
+                  "Ward, Strengthen, Bless, self",
+                  "Attack 5 [diamond]"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["\"All allies add +1 Attack to all their attacks this round.\"",
+                  "consume Light: \"They also gain advantage on all their attacks this round, XP 1.\""],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: grant ability: each ally within range 3 gives itself Ward, Strengthen, Bless and performs Attack 5",
+                 "bottom: all allies +1 Attack on all attacks this round",
+                 "bottom: consume Light: all allies also gain advantage on all attacks this round"],
+      "summons": [],
+      "notes": "Top: the 'self' pill follows the three condition icons inside the grant, so each granted ally targets itself. No mark on the conditions (checked zoomed). The grant text says 'all allies' only, not 'and self'."
+    },
+    {
+      "name": "Divine Ascension",
+      "number": "0203",
+      "level": "9",
+      "initiative": 87,
+      "top": {
+        "lines": ["\"Gain Flying. On your next five melee attack abilities, add +4 Attack to and gain advantage on all attacks.\"",
+                  "slots: 5 (XP 1 on slots 1, 3, 5), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 6 [circle]", "Jump"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: persistent Flying while the card is active",
+                 "top: use slots: next five melee attack abilities get +4 Attack and advantage on all attacks"],
+      "summons": [],
+      "notes": "First slot dashed. Flying printed as the flying (wing) icon inside the text."
+    },
+    {
+      "name": "Solar Bastion",
+      "number": "0204",
+      "level": "9",
+      "initiative": 10,
+      "top": {
+        "lines": ["Heal 3", "Target all, range 3",
+                  "consume Light: \"One ally targeted with the heal ability may recover one card from their discard pile, XP 1.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Shield 2",
+                  "consume Light: Retaliate 2, XP 1"],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: consume Light: one ally targeted by the heal may recover one card from their discard pile"],
+      "summons": [],
+      "notes": "No enhancement mark on the top heal or the bottom Shield 2 (checked zoomed). Bottom round icon covers Shield 2 and the consumed Retaliate 2."
+    }
+  ],
+  "summons": [],
+  "mechanics": [
+    "Light economy: most cards infuse Light (mandatory '!' infusion boxes) and many consume it for a bonus; Daybreak top consumes Dark and infuses Light",
+    "Consume Light grants advantage on the attack (Hammer Blow, Holy Strike, Burning Flash, Path of Glory tops)",
+    "Grant abilities: an ally performs a printed ability (Empowering Command bottom, Tactical Order top, Mobilizing Axiom bottom incl. self, Arresting March both halves, Divine Intervention bottom incl. self, Illuminate the Target bottom, Supportive Chant top with conditions on 'self'); Arresting March consume Light heals 'the target of the grant ability'",
+    "Recover cards for allies: from the lost pile (Brilliant Prayer top, Bright Aegis bottom), from the discard pile (Soothing Light top level 1 only, Solar Bastion top)",
+    "Unrecoverable icon on lost halves (Brilliant Prayer top, Bright Aegis bottom)",
+    "Extra turn for an ally: play up to two cards, one top + one bottom action (Bright Aegis bottom consume Light)",
+    "Heal X = target's maximum HP (Lay On Hands top); heal 'target all' with and without range (Engulfing Radiance, Holy Defense, Solar Bastion)",
+    "Use-slot persistents: Retaliate 3 vs adjacent attackers (Purifying Aura top, 5), +1/+2 Attack on allies' attacks with Ward bonus (Sanctify top, 3, not lost), single-target heals spread to allies within 2 of the primary target (Beacon of Light top, 3), Flying + +4 Attack and advantage on melee attack abilities (Divine Ascension top, 5)",
+    "Round effects: negate all damage to you and adjacent allies (Protective Blessing bottom), attacks on you gain disadvantage (Daybreak bottom), attacks on you and allies within 4 gain disadvantage (Engulfing Radiance bottom), all allies +1 Attack and optional advantage (Supportive Chant bottom), enemies' positive and 2x modifiers become +0 (Divine Intervention bottom)",
+    "Untimed persistents: reduce Pierce against you by 2 with a mandatory -1 Move on your move abilities (Defensive Stance bottom), take damage for allies (Divine Intervention top), Retaliate 2 (Scales of Justice top), consume Light during an attack ability -> +1 Attack, Pierce 1, Null becomes 2x (Scales of Justice bottom)",
+    "Designated-hex attack plus Strengthen on allies adjacent to you or that hex (Illuminate the Target top)",
+    "Conditions on allies/self: Bless, Strengthen, Ward; on enemies: Muddle, Stun (Stun also as a standalone ability, Dazzling Charge bottom); XP 1 per enemy targeted (Burning Flash top); no summons"
+  ],
+  "unclear": [
+    "Heal 'target all' (Engulfing Radiance top: no range printed; Holy Defense bottom: range 1; Solar Bastion top: range 3): whether 'all' includes yourself and, for Engulfing Radiance, what range applies is a rules question; the cards print only 'all' (Righteous Strength and Purifying Aura print 'all allies')",
+    "Illuminate the Target top: 'Designate an adjacent hex containing an enemy to perform:' reads as if the abilities are performed from/at the designated hex; the attack targets the enemy in it and Strengthen targets allies adjacent to you or to that hex. Whether the attack counts as melee or ranged is a rules question",
+    "Supportive Chant top: the grant prints 'all allies within Range 3' without 'and self' (unlike Mobilizing Axiom and Divine Intervention), and the 'self' pill sits after the conditions inside the grant; read as each ally giving itself Ward, Strengthen, Bless. Not decided whether the Sunkeeper is included",
+    "Scales of Justice top: Retaliate 2 with the persistent icon and no slots or round icon, i.e. a permanent Retaliate 2 until the end of the scenario; read as printed",
+    "Use-slot tracks (Purifying Aura, Sanctify, Beacon of Light, Divine Ascension): the small red slash marks after the last slot appear on Sanctify too, whose corner has no lost icon; fate taken from the corner icons (Sanctify discarded, the others lost)"
+  ]
+}

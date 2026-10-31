@@ -1,0 +1,762 @@
+{
+  "class": "Sawbones",
+  "read_by": "image reader, 2026-10-31",
+  "cards": [
+    {
+      "name": "Battlefield Medicine",
+      "number": "0411",
+      "level": "1",
+      "initiative": 83,
+      "top": {
+        "lines": ["Disarm, range 1",
+                  "\"Give one adjacent ally one medical pack to gain XP 1.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 5"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: give one adjacent ally one medical pack; XP 1 for doing so"],
+      "summons": [],
+      "notes": "Class-wide: printed numbers are four digits (0411-0439 ability cards, 0440-0445 Medical Packs) and match GHS's numbers (411-439, 445); no offset. Every corner box (XP/lost/persistent/round) on this class carries the '!' mandatory tab; it is not repeated per card. Top Disarm is its own ability (no attack) with range 1. No enhancement marks on this card."
+    },
+    {
+      "name": "First Aid",
+      "number": "0412",
+      "level": "1",
+      "initiative": 19,
+      "top": {
+        "lines": ["Heal 4 [diamond+], range 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Curative Mixture",
+      "number": "0413",
+      "level": "1",
+      "initiative": 8,
+      "top": {
+        "lines": ["Heal 3 [diamond+], range 1",
+                  "\"Before the heal, remove one negative condition from the target.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]",
+                  "\"Remove one negative condition from one adjacent ally.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: before the heal, remove one negative condition from the heal target",
+                 "bottom: remove one negative condition from one adjacent ally"],
+      "summons": [],
+      "notes": "Initiative printed as '08'."
+    },
+    {
+      "name": "Bloody Saw",
+      "number": "0414",
+      "level": "1",
+      "initiative": 25,
+      "top": {
+        "lines": ["Attack 3 [diamond]",
+                  "\"Add +1 Attack, Wound and gain XP 1 if an ally has an active Prescription.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Safeguard [diamond+], self", "Loot 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: +1 Attack, Wound and XP 1 if any ally has an active Prescription"],
+      "summons": [],
+      "notes": "Safeguard (green diamond with heart) is a 2e condition Frosthaven may lack."
+    },
+    {
+      "name": "Prevention is Key",
+      "number": "0415",
+      "level": "1",
+      "initiative": 13,
+      "top": {
+        "lines": ["Wound, Disarm [diamond]: target all, range 1",
+                  "Safeguard [diamond+]: target all, range 1"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]",
+                  "\"When you next perform a Prescription action this round, grant all adjacent allies and self:\"",
+                  "Shield 1"],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["bottom: round trigger: the next time you perform a Prescription action this round, all adjacent allies and you gain Shield 1"],
+      "summons": [],
+      "notes": "Top: Wound and Disarm are their own abilities (no attack), printed as two icons with one diamond mark after the pair; GHS puts the mark on Disarm. Printed name is 'Prevention is Key' (lower-case 'is'); GHS 'Prevention Is Key' (capitalisation only)."
+    },
+    {
+      "name": "Hand of the Surgeon",
+      "number": "0416",
+      "level": "1",
+      "initiative": 62,
+      "top": {
+        "lines": ["Attack 4 [diamond]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 1 [circle]",
+                  "\"Give one adjacent ally one medical pack to gain XP 1.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["bottom: give one adjacent ally one medical pack; XP 1 for doing so"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Booster Shot",
+      "number": "0417",
+      "level": "1",
+      "initiative": 42,
+      "top": {
+        "lines": ["Prescription (label)",
+                  "\"On the next four sources of damage from attacks targeting you, gain Shield 1 for the attacks.\"",
+                  "slots: 4 (no XP on slots), ends after the last"],
+        "summary": ["XP 1", "persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "Strengthen [diamond+]: target 1 ally, range 1"],
+        "summary": []
+      },
+      "ghs": ["top: text 'next four source of Damage ... for the attack.'; the card prints 'sources' and 'for the attacks.' (wording only)"],
+      "xipe": "missing",
+      "custom": ["top: Prescription; use slots, one per source of damage from an attack targeting you: Shield 1 against that attack"],
+      "summons": [],
+      "notes": "The 'Prescription' label (scroll icon tab, top-left of the half) is not in GHS's rendered text (same on every Prescription card; may be a field the renderer drops)."
+    },
+    {
+      "name": "Syringe",
+      "number": "0418",
+      "level": "1",
+      "initiative": 57,
+      "top": {
+        "lines": ["Prescription (label)",
+                  "\"On your next four attacks, add +1 Attack.\"",
+                  "slots: 4 (no XP on slots), ends after the last"],
+        "summary": ["XP 1", "persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Wound, range 1"],
+        "summary": []
+      },
+      "ghs": ["top: text 'On the next four attacks'; the card prints 'On your next four attacks' (wording; 'your' may matter if a Prescription is held by an ally)"],
+      "xipe": "missing",
+      "custom": ["top: Prescription; use slots: +1 Attack on your next four attacks"],
+      "summons": [],
+      "notes": "Bottom Wound is its own ability (no attack) with range 1."
+    },
+    {
+      "name": "Needle Gun",
+      "number": "0419",
+      "level": "1",
+      "initiative": 44,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Range 3", "Pierce 1 [square]", "Poison"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 1 [diamond]", "Poison", "Stun",
+                  "Attack 1 [diamond]", "Poison", "Stun",
+                  "Attack 1", "Poison", "Stun"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "Bottom: three separate melee attacks (divider lines between them); the third has no enhancement mark."
+    },
+    {
+      "name": "Vital Strikes",
+      "number": "0420",
+      "level": "1",
+      "initiative": 53,
+      "top": {
+        "lines": ["\"Add +1 Attack to all your attacks targeting damaged enemies.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 5"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: persistent: +1 Attack on all your attacks targeting damaged enemies"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Vaccine",
+      "number": "0421",
+      "level": "X",
+      "initiative": 15,
+      "top": {
+        "lines": ["Attack 3 [square]",
+                  "\"Add +1 Target and gain XP 1 if the target is damaged (for a maximum of one additional target).\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Prescription (label)",
+                  "\"On the next three negative conditions an enemy would apply to you, prevent the condition.\"",
+                  "slots: 3 (no XP on slots), ends after the last"],
+        "summary": ["XP 1", "persistent"]
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: +1 Target and XP 1 if the target is damaged (at most one extra target)",
+                 "bottom: Prescription; use slots: prevent the next three negative conditions an enemy would apply to you"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Teamwork",
+      "number": "0422",
+      "level": "X",
+      "initiative": 89,
+      "top": {
+        "lines": ["Attack 2 [square]", "\"Grant one adjacent ally:\"", "Attack 3 [diamond]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "\"Grant one adjacent ally:\"", "Move 3 [square]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: grant one adjacent ally Attack 3", "bottom: grant one adjacent ally Move 3"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Prep for Surgery",
+      "number": "0423",
+      "level": "X",
+      "initiative": 22,
+      "top": {
+        "lines": ["Attack 2 [square]", "\"Add Stun and gain XP 1 if the target is damaged.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"You may treat all your attack abilities and move abilities from your ability cards as heal abilities of equal value plus one. In such cases, ignore all added effects of those abilities.\"",
+                  "\"When treating a move ability as a heal ability, it has Range 1.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: Stun and XP 1 if the target is damaged",
+                 "bottom: persistent: any attack or move ability from your ability cards may be used as a heal of value +1, dropping its added effects; a converted move heals at range 1"],
+      "summons": [],
+      "notes": "Bottom text is printed as two paragraphs. The card does not say what range a converted attack heal has (presumably the attack's own)."
+    },
+    {
+      "name": "Hamstring",
+      "number": "0424",
+      "level": "2",
+      "initiative": 72,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Immobilize"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 6", "! Immobilize, self"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "Bottom: the self-Immobilize is in a '!' (mandatory) box."
+    },
+    {
+      "name": "Precaution",
+      "number": "0425",
+      "level": "2",
+      "initiative": 9,
+      "top": {
+        "lines": ["\"Grant all allies and self:\"", "Shield 1",
+                  "\"Each ally may move the character token backward one slot on one active Prescription they have.\""],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["Ward: Target 2, range 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: grant all allies and self Shield 1 (round)",
+                 "top: each ally may move the token back one slot on one of their active Prescriptions (regains a use)"],
+      "summons": [],
+      "notes": "Initiative printed as '09'. No enhancement marks on this card. The top text implies Prescriptions can be active on allies."
+    },
+    {
+      "name": "Regenerative Tissue",
+      "number": "0426",
+      "level": "3",
+      "initiative": 52,
+      "top": {
+        "lines": ["Heal 4 [diamond+], range 1", "Ward"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Prescription (label)",
+                  "\"At the start of your next three turns where your current hit point value is less than your maximum hit point value, perform:\"",
+                  "Heal 2, self",
+                  "slots: 3 (no XP on slots), ends after the last"],
+        "summary": ["XP 1", "persistent"]
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["bottom: Prescription; use slots: at the start of each of your next three turns on which you are below maximum hit points, Heal 2 self"],
+      "summons": [],
+      "notes": "Top Ward is added to the heal target."
+    },
+    {
+      "name": "Blood Transfusion",
+      "number": "0427",
+      "level": "3",
+      "initiative": 79,
+      "top": {
+        "lines": ["Attack 3 [diamond]",
+                  "Heal X: target 1 ally, range 1",
+                  "\"where X is the amount of damage enemies suffered from the attack ability.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Safeguard, range 1",
+                  "\"Remove all negative conditions from the target and give them one medical pack.\""],
+        "summary": ["XP 1"]
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: Heal X on 1 ally within range 1, X = damage enemies suffered from this card's attack ability",
+                 "bottom: remove all negative conditions from the Safeguard target and give them one medical pack"],
+      "summons": [],
+      "notes": "No marks on Heal X or the bottom Safeguard."
+    },
+    {
+      "name": "Experimental Stimulants",
+      "number": "0428",
+      "level": "4",
+      "initiative": 12,
+      "top": {
+        "lines": ["\"Grant one adjacent ally:\"", "Retaliate 2 [square]",
+                  "\"If the target has an active Prescription, gain XP 1 and negate the next damage they would suffer this round.\""],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Heal 3 [square], range 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: grant one adjacent ally Retaliate 2 (round)",
+                 "top: if that ally has an active Prescription: XP 1 and negate the next damage they would suffer this round"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Do No Harm",
+      "number": "0429",
+      "level": "4",
+      "initiative": 18,
+      "top": {
+        "lines": ["Attack 4", "Wound", "Stun",
+                  "\"Place a character token on the target. The next three times they lose Stun, they gain Stun.\"",
+                  "slots: 3 (no XP on slots), lost after the last",
+                  "! Disarm, self"],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Attack 2 [diamond]", "Poison"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: character token on the target; the next three times it loses Stun it gains Stun again (use slots)"],
+      "summons": [],
+      "notes": "Top Attack 4 has no enhancement mark (zoomed). Self-Disarm is in a '!' (mandatory) box."
+    },
+    {
+      "name": "Hack to Bits",
+      "number": "0430",
+      "level": "5",
+      "initiative": 38,
+      "top": {
+        "lines": ["Attack 2 [square]", "Attack 2 [diamond]",
+                  "\"If this attack kills the target, all enemies adjacent to the hex the target occupied gain Wound.\""],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "Muddle [diamond], range 1", "Strengthen [diamond+]: target 1 ally, range 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: second attack: if it kills the target, all enemies adjacent to the target's hex gain Wound"],
+      "summons": [],
+      "notes": "Bottom Muddle is its own ability (brown question-mark diamond) with range 1."
+    },
+    {
+      "name": "Fortifying Injection",
+      "number": "0431",
+      "level": "5",
+      "initiative": 5,
+      "top": {
+        "lines": ["Prescription (label)",
+                  "\"At the start of your next four turns where you do not have Ward, perform:\"",
+                  "Ward, self",
+                  "slots: 4 (no XP on slots), ends after the last"],
+        "summary": ["XP 1", "persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 5 [circle]",
+                  "\"Whenever an adjacent ally would suffer damage this round, negate the damage.\""],
+        "summary": ["XP 2", "round", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: Prescription; use slots: at the start of each of your next four turns on which you lack Ward, gain Ward",
+                 "bottom: this round, negate all damage adjacent allies would suffer"],
+      "summons": [],
+      "notes": "Initiative printed as '05'. Bottom corner icon zoomed: round (card with circular arrow), not persistent."
+    },
+    {
+      "name": "Amputate",
+      "number": "0432",
+      "level": "6",
+      "initiative": 86,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Wound", "Immobilize"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Heal 7: target 1 ally, enemy, or self, range 1",
+                  "! Stun: target the target of the heal ability"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["bottom: the heal may target an ally, an enemy or yourself; then the heal target must be stunned (mandatory)"],
+      "summons": [],
+      "notes": "GHS's rendered targets are unresolved keys (Target %data.custom.gh2e.saw.abilities.432.1% / .2%); structure (Heal 7, range 1, then Stun on a set target) agrees. Heal 7 has no mark. Healing an enemy is unusual; check Frosthaven supports a heal targeting an enemy."
+    },
+    {
+      "name": "Return the Favor",
+      "number": "0433",
+      "level": "6",
+      "initiative": 40,
+      "top": {
+        "lines": ["Attack 3 [diamond]",
+                  "\"Grant one ally who has an active Prescription:\"",
+                  "Move 3 [square]", "Attack 3 [diamond]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]",
+                  "\"Remove one negative condition from one adjacent ally. If you do, gain XP 1 and and you may give one adjacent enemy the negative condition you removed.\""],
+        "summary": []
+      },
+      "ghs": ["top: GHS 'Grant one adjacent ally who has an active Prescription'; the card has no 'adjacent': 'Grant one ally who has an active Prescription:' (rule difference: any ally, no adjacency)",
+              "bottom: GHS text typo 'enemey' (card: 'enemy'); the card itself prints a doubled 'and and' (print typo, GHS has one 'and')"],
+      "xipe": "missing",
+      "custom": ["top: grant one ally with an active Prescription Move 3 and Attack 3 (no range limit printed)",
+                 "bottom: remove one negative condition from an adjacent ally; if you do, XP 1 and you may give that condition to one adjacent enemy"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Surgeon's Satchel",
+      "number": "0434",
+      "level": "7",
+      "initiative": 14,
+      "top": {
+        "lines": ["Loot 1", "Heal 3: target all, range 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]",
+                  "\"Give one adjacent ally one medical pack to gain XP 1.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["bottom: give one adjacent ally one medical pack; XP 1 for doing so"],
+      "summons": [],
+      "notes": "Top Heal 3 has no mark."
+    },
+    {
+      "name": "Exacting Anger",
+      "number": "0435",
+      "level": "7",
+      "initiative": 49,
+      "top": {
+        "lines": ["Attack 4 [square]", "Disarm"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Prescription (label)",
+                  "\"At the start of your next three turns, perform:\"",
+                  "Strengthen, self",
+                  "slots: 3 (no XP on slots), ends after the last"],
+        "summary": ["XP 1", "persistent"]
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["bottom: Prescription; use slots: Strengthen self at the start of each of your next three turns"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Take Your Medicine",
+      "number": "0436",
+      "level": "8",
+      "initiative": 6,
+      "top": {
+        "lines": ["Prescription (label)",
+                  "\"At the start of your next three turns, gain one medical pack.\"",
+                  "slots: 3 (no XP on slots), ends after the last"],
+        "summary": ["XP 1", "persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]",
+                  "\"In initiative order, each of your allies may immediately play one “Medical Pack” ability card from their hand to perform one action of the card.\""],
+        "summary": []
+      },
+      "ghs": ["bottom: GHS text lacks the final period (wording only)"],
+      "xipe": "missing",
+      "custom": ["top: Prescription; use slots: gain one medical pack at the start of each of your next three turns",
+                 "bottom: in initiative order, each ally may immediately play one Medical Pack card from hand for one of its actions"],
+      "summons": [],
+      "notes": "Initiative printed as '06'. The bottom text shows Medical Packs sit in an ally's hand as ability cards."
+    },
+    {
+      "name": "Euthanize",
+      "number": "0437",
+      "level": "8",
+      "initiative": 27,
+      "top": {
+        "lines": ["\"Kill one adjacent damaged enemy that has at least two negative conditions and whose current hit point value is 8 or less.\""],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "Wound, Poison, Muddle, range 1", "\"The target suffers damage 1.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: kill one adjacent damaged enemy with at least two negative conditions and current hit points 8 or less",
+                 "bottom: Wound, Poison and Muddle on one target within range 1 (no attack), then that target suffers damage 1"],
+      "summons": [],
+      "notes": "No enhancement marks on this card."
+    },
+    {
+      "name": "Secret of the Oak",
+      "number": "0438",
+      "level": "9",
+      "initiative": 10,
+      "top": {
+        "lines": ["Heal 6 [diamond+], range 1", "Safeguard",
+                  "\"Before the heal, remove all negative conditions from the target.\"",
+                  "\"If the target of the heal ability has an active Prescription, gain XP 1 and grant them:\"",
+                  "Shield 2"],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["\"Whenever you or an ally perform a heal ability on a “Medical Pack” ability card, that character may add +4 Attack to their next attack that round or +4 Move to their next move ability that round.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "ghs": ["bottom: flags 'lost, round, xp=2'; the card's corner shows XP 2, persistent (infinity card with arrow, zoomed), lost; no round icon",
+              "bottom: text typo 'next attack that round of Move + 4' (card: 'or +4 Move')"],
+      "xipe": "missing",
+      "custom": ["top: before the heal, remove all negative conditions from the target; the heal adds Safeguard",
+                 "top: if the heal target has an active Prescription: XP 1 and grant them Shield 2 (round)",
+                 "bottom: persistent trigger: whenever you or an ally perform a heal on a Medical Pack card, that character may add +4 Attack to their next attack or +4 Move to their next move ability that round"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Grisly Trauma",
+      "number": "0439",
+      "level": "9",
+      "initiative": 81,
+      "top": {
+        "lines": ["Attack 5 [diamond]: target all adjacent enemies", "Wound", "Poison", "Stun"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "\"Add +1 Target to your next melee attack ability this round.\""],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["bottom: +1 Target on your next melee attack ability this round"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Medical Pack",
+      "number": "0441",
+      "level": "M",
+      "initiative": 50,
+      "top": {
+        "lines": ["Heal 4, self"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Heal 2, self", "Ward"],
+        "summary": []
+      },
+      "ghs": ["GHS has one Medical Pack entry (number 445); the source script matched it to this card, but it is the 0445 card (medical pack 5). Compared with it anyway:",
+              "bottom: GHS has a text row (unresolved key data.custom.gh2e.saw.abilities.445.1) and Heal 3, self; this card has Heal 2, self, Ward"],
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "The six Medical Pack cards are NOT identical: all share the top (Heal 4, self), initiative 50 and level 'M', but each has a different bottom and its own number (0440-0445). No enhancement marks, XP or corner icons on any Medical Pack."
+    },
+    {
+      "name": "Medical Pack",
+      "number": "0442",
+      "level": "M",
+      "initiative": 50,
+      "top": {
+        "lines": ["Heal 4, self"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Heal 3, self", "Safeguard"],
+        "summary": []
+      },
+      "ghs": ["no own GHS entry; compared with GHS's single Medical Pack (445): bottom: GHS has a text row (unresolved key 445.1) and Heal 3, self; this card has Heal 3, self, Safeguard (no text row)"],
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Medical Pack",
+      "number": "0443",
+      "level": "M",
+      "initiative": 50,
+      "top": {
+        "lines": ["Heal 4, self"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Heal 3, self", "Bless"],
+        "summary": []
+      },
+      "ghs": ["no own GHS entry; compared with GHS's single Medical Pack (445): bottom: GHS has a text row (unresolved key 445.1) and Heal 3, self; this card has Heal 3, self, Bless (no text row)"],
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "Bless read from the icon (gold diamond: triangle in a circle with three dots, the Frosthaven Bless icon); zoomed."
+    },
+    {
+      "name": "Medical Pack",
+      "number": "0444",
+      "level": "M",
+      "initiative": 50,
+      "top": {
+        "lines": ["Heal 4, self"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Heal 1, self", "Strengthen", "! Poison, self"],
+        "summary": []
+      },
+      "ghs": ["no own GHS entry; compared with GHS's single Medical Pack (445): bottom: GHS has a text row (unresolved key 445.1) and Heal 3, self; this card has Heal 1, self, Strengthen, then a mandatory self-Poison"],
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "Self-Poison is in a '!' (mandatory) box below a divider."
+    },
+    {
+      "name": "Medical Pack",
+      "number": "0445",
+      "level": "M",
+      "initiative": 50,
+      "top": {
+        "lines": ["Heal 4, self"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Remove one negative condition you have.\"", "Heal 3, self"],
+        "summary": []
+      },
+      "ghs": ["agrees: this is the card GHS's single Medical Pack entry (number 445) describes; its text row is an unresolved key (data.custom.gh2e.saw.abilities.445.1), presumably this card's 'Remove one negative condition you have.'"],
+      "xipe": "missing",
+      "custom": ["bottom: remove one negative condition you have"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Medical Pack",
+      "number": "0440",
+      "level": "M",
+      "initiative": 50,
+      "top": {
+        "lines": ["Heal 4, self"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Heal 6, self", "! Immobilize, self"],
+        "summary": []
+      },
+      "ghs": ["no own GHS entry; compared with GHS's single Medical Pack (445): bottom: GHS has a text row (unresolved key 445.1) and Heal 3, self; this card has Heal 6, self, then a mandatory self-Immobilize"],
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "Input 'medical pack 6' prints number 0440 (the lowest of the six). Self-Immobilize is in a '!' (mandatory) box below a divider."
+    }
+  ],
+  "summons": [],
+  "mechanics": [
+    "Medical Packs: six level-'M' ability cards (initiative 50, numbers 0440-0445), all top Heal 4, self, each with a different bottom: Heal 2 self + Ward (0441), Heal 3 self + Safeguard (0442), Heal 3 self + Bless (0443), Heal 1 self + Strengthen + mandatory self-Poison (0444), remove one negative condition you have + Heal 3 self (0445), Heal 6 self + mandatory self-Immobilize (0440). The Sawbones gives them to allies: 'Give one adjacent ally one medical pack to gain XP 1' (Battlefield Medicine top, Hand of the Surgeon bottom, Surgeon's Satchel bottom), 'give them one medical pack' to the Safeguard target (Blood Transfusion bottom), 'gain one medical pack' yourself at the start of your next three turns (Take Your Medicine top). Allies hold them in hand as ability cards: Take Your Medicine bottom lets each ally immediately play one from hand for one action; Secret of the Oak bottom triggers on 'a heal ability on a Medical Pack ability card'. How a pack is normally played, which pack is given, and what happens to it after use are not on the cards.",
+    "Prescriptions: halves with a 'Prescription' tab (scroll icon) are persistent use-slot effects, XP 1, not lost: Booster Shot top (Shield 1 vs next four attack damage sources), Syringe top (+1 Attack on next four attacks), Vaccine bottom (prevent next three enemy-applied negative conditions), Regenerative Tissue bottom (Heal 2 self at start of next three turns below max HP), Fortifying Injection top (Ward self at start of next four turns without Ward), Exacting Anger bottom (Strengthen self at start of next three turns), Take Your Medicine top (gain one medical pack at start of next three turns). Other cards refer to allies having active Prescriptions: Bloody Saw top (+1 Attack, Wound, XP 1 if an ally has one), Experimental Stimulants top (XP 1 + negate next damage if the ally has one), Return the Favor top (grant Move 3 + Attack 3 to an ally who has one), Secret of the Oak top (XP 1 + Shield 2 if the heal target has one), Precaution top (each ally may move the token back one slot on one active Prescription), Prevention is Key bottom (trigger on your next Prescription action). So Prescriptions can be active on allies (the 'you' on the card then presumably being the holder), but how they get there is not on the cards.",
+    "Bonuses against damaged targets: Vital Strikes top (+1 Attack, persistent), Vaccine top (+1 Target, XP 1), Prep for Surgery top (Stun, XP 1), Euthanize top (execute)",
+    "Execute: kill an adjacent damaged enemy with at least two negative conditions and 8 or fewer hit points (Euthanize top)",
+    "Granting abilities to allies: Teamwork (Attack 3 / Move 3), Experimental Stimulants top (Retaliate 2), Return the Favor top (Move 3 + Attack 3), Precaution top (Shield 1 to all allies and self), Prevention is Key bottom (Shield 1 to adjacent allies and self), Secret of the Oak top (Shield 2)",
+    "Negative condition removal: Curative Mixture (one, before a heal / on an adjacent ally), Blood Transfusion bottom (all), Secret of the Oak top (all, before the heal), Return the Favor bottom (one, may transfer it to an adjacent enemy), Medical Pack 0445 (one of your own)",
+    "Damage and condition negation: Experimental Stimulants top (next damage this round), Fortifying Injection bottom (all damage to adjacent allies this round), Vaccine bottom (prevent three negative conditions)",
+    "Treat attack and move abilities from ability cards as heals of value +1, ignoring added effects; converted moves heal at range 1 (Prep for Surgery bottom)",
+    "Heal X = damage enemies suffered from the card's attack ability (Blood Transfusion top)",
+    "Heal that may target an enemy, then mandatory Stun on the heal target (Amputate bottom)",
+    "Character token on an enemy: re-Stun it the next three times it loses Stun (Do No Harm top, use slots, lost)",
+    "On-kill effect: Wound all enemies adjacent to the killed target's hex (Hack to Bits top)",
+    "Next-ability buffs this round: +1 Target on next melee attack ability (Grisly Trauma bottom); +4 Attack or +4 Move after a heal from a Medical Pack card (Secret of the Oak bottom, persistent)",
+    "Start-of-turn use-slot triggers, some conditional on your state (Regenerative Tissue, Fortifying Injection, Exacting Anger, Take Your Medicine)",
+    "Mandatory self-negative conditions in '!' boxes: Hamstring bottom (Immobilize), Do No Harm top (Disarm), Medical Pack 0444 (Poison), Medical Pack 0440 (Immobilize); Amputate bottom's Stun on the heal target is also in a '!' box",
+    "Conditions used: Wound, Poison, Stun, Immobilize, Disarm, Muddle, Strengthen, Ward, Safeguard, Bless (Medical Pack 0443). Safeguard is a 2e condition Frosthaven may lack. No summons, no elements."
+  ],
+  "unclear": [
+    "Medical Packs: the rules for using them (how an ally plays one, whether it is in addition to their two cards, which of the six is given, and whether it returns to the Sawbones afterwards) are not printed on any card; check the 2e class rules / rulebook",
+    "Prescriptions: the cards never say how a Prescription becomes active on an ally, while several cards assume allies can have one (Bloody Saw, Experimental Stimulants, Return the Favor, Secret of the Oak, Precaution); check the 2e class rules",
+    "Medical Pack 0443 bottom: read the gold icon as Bless (Frosthaven-style Bless icon, zoomed); fairly but not fully certain",
+    "Prevention is Key top: one diamond mark printed after the pair 'Wound, Disarm'; which ability it enhances is not shown (GHS puts it on Disarm)",
+    "'Damaged' (Vital Strikes, Vaccine, Prep for Surgery, Euthanize) is a rules question (below maximum hit points, presumably), not a reading one",
+    "Do No Harm top: the slot track starts with a dashed slot; how that interacts with 'the next three times they lose Stun' (does the attack's own Stun use the first slot?) is a rules question",
+    "Amputate bottom: GHS's target fields are unresolved keys, so GHS's exact target wording could not be compared; the card reads '1 ally, enemy, or self' and 'the target of the heal ability'"
+  ]
+}

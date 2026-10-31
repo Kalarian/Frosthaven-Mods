@@ -1,0 +1,623 @@
+{
+  "class": "SilentKnife",
+  "read_by": "image reader, 2026-10-31",
+  "cards": [
+    {
+      "name": "Single Out",
+      "number": "002",
+      "level": "1",
+      "initiative": 86,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "\"Add +2 Attack and gain XP 1 if the target is adjacent to none of its allies.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"On your next four attacks targeting enemies adjacent to none of their allies, add +3 Attack.\"",
+                  "slots: 4 (XP 1 on slots 2, 4), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: +2 Attack and XP 1 if the target is adjacent to none of its allies",
+                 "bottom: use slots: +3 Attack on your next four attacks targeting enemies adjacent to none of their allies"],
+      "summons": [],
+      "notes": "Class-wide: GHS numbers the cards 88-115, the printed numbers are 002-029 (GHS = printed + 86 on every card); not counted as a disagreement. Xipe's files are 99088-99115 in GHS order, except that Dance of Daggers/Cull the Weak (99109/99108) and Stiletto Storm/Spring the Trap (99111/99110) are swapped against GHS and the print (print: Dance 022, Cull 023, Stiletto 024, Spring 025). Xipe: persistent BuffAttack +3 filtered on TargetAdjacentAlliesOfTarget <= 0, XPTracker [0,1,0,1]; top ConditionalOverride +2 and XP 1."
+    },
+    {
+      "name": "Flanking Strike",
+      "number": "003",
+      "level": "1",
+      "initiative": 4,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "\"Add +2 Attack and gain XP 1 if the target is adjacent to any of your allies.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 5"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: +2 Attack and XP 1 if the target is adjacent to any of your allies"],
+      "summons": [],
+      "notes": "Initiative printed as '04'. Xipe filter TargetAdjacentAllies > 0."
+    },
+    {
+      "name": "Swift Bow",
+      "number": "004",
+      "level": "1",
+      "initiative": 36,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Range 4"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "\"Loot each hex you entered with the move ability.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: loot every hex entered with the move ability"],
+      "summons": [],
+      "notes": "Bottom text starts with the loot icon. Xipe: Loot 0 with AllTargetsOnMovePath."
+    },
+    {
+      "name": "Quick Hands",
+      "number": "005",
+      "level": "1",
+      "initiative": 23,
+      "top": {
+        "lines": ["Loot 1", "Move 2 [circle]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 3 [diamond]"],
+        "summary": ["XP 1"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Sinister Opportunity",
+      "number": "006",
+      "level": "1",
+      "initiative": 93,
+      "top": {
+        "lines": ["Attack 3 [diamond]",
+                  "\"Add +1 Attack if the target is adjacent to any of your allies, add +1 Attack if the target is adjacent to none of its allies, and gain advantage and XP 1 if both are true.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 5"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: +1 Attack if the target is adjacent to any of your allies; +1 Attack if it is adjacent to none of its allies; advantage and XP 1 if both"],
+      "summons": [],
+      "notes": "Xipe: three ConditionalOverrides (+1, +1, advantage + XP 1 when both filters hold)."
+    },
+    {
+      "name": "Venom Shiv",
+      "number": "007",
+      "level": "1",
+      "initiative": 8,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Pierce 1", "Poison"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Add Pierce 2 to all your ranged attacks this round.\""],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: this round, Pierce 2 on all your ranged attacks"],
+      "summons": [],
+      "notes": "Initiative printed as '08'. Xipe: round BuffAttack, AttackType Ranged, Pierce 2."
+    },
+    {
+      "name": "Throwing Knives",
+      "number": "008",
+      "level": "1",
+      "initiative": 10,
+      "top": {
+        "lines": ["Attack 2", "Target 2 [square]", "Range 3 [square]"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Pull 2 [square]", "Range 3 [square]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": "The Attack 2 value itself has no mark. Bottom Pull is its own ability (pull icon in a diamond) with range 3."
+    },
+    {
+      "name": "Practiced Reflexes",
+      "number": "009",
+      "level": "1",
+      "initiative": 64,
+      "top": {
+        "lines": ["Move 3 [circle]", "Attack 3 [diamond]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "\"You may choose not to spring traps in hexes you enter with this movement.\"",
+                  "\"Destroy one trap in a hex you entered with the move ability to gain XP 1.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: replaced by Move 3 + Jump (Jump instead of 'may choose not to spring traps')",
+               "bottom: flat XP 2 for playing the half; the card gives XP 1 only for destroying a trap entered with the move (trap destruction not modelled)",
+               "bottom: Move 3 has Enhancements: 2; the card has one mark (circle)",
+               "bottom: the (commented) layout lists a Loot row that the data and the card don't have"],
+      "custom": ["bottom: may choose not to spring traps in hexes entered with this move",
+                 "bottom: destroy one trap in a hex entered with the move ability to gain XP 1"],
+      "summons": [],
+      "notes": "Frosthaven may lack an 'optionally don't spring traps' move and a 'destroy a trap you moved through' ability."
+    },
+    {
+      "name": "Special Mixture",
+      "number": "010",
+      "level": "1",
+      "initiative": 33,
+      "top": {
+        "lines": ["Heal 3 [diamond+], self", "infuse Dark (corner box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Poison [diamond], range 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: Poison has no enhancement (card: Poison [diamond])"],
+      "custom": [],
+      "summons": [],
+      "notes": "Bottom Poison is its own ability (poison icon in a diamond, range 1), not a rider on an attack."
+    },
+    {
+      "name": "Backstab",
+      "number": "011",
+      "level": "X",
+      "initiative": 6,
+      "top": {
+        "lines": ["Attack 5 [diamond]", "consume Dark: +2 Attack, XP 1",
+                  "\"Add +2 Attack and gain XP 1 if the target is adjacent to any of your allies.\""],
+        "summary": ["lost"]
+      },
+      "bottom": {
+        "lines": ["Move 6"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: +2 Attack and XP 1 if the target is adjacent to any of your allies"],
+      "summons": [],
+      "notes": "Initiative printed as '06'."
+    },
+    {
+      "name": "Smoke Bomb",
+      "number": "012",
+      "level": "X",
+      "initiative": 12,
+      "top": {
+        "lines": ["Invisible [diamond+], self",
+                  "\"On your next attack while you have Invisible, double the value of the attack.\"",
+                  "slots: 1 (XP 2 on slot 1), lost after the last",
+                  "infuse Dark (corner box)"],
+        "summary": ["persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4", "\"Control one adjacent enemy:\"", "Move 1", "\"This movement must end in a hex adjacent to you.\""],
+        "summary": []
+      },
+      "ghs": ["bottom: text 'adjacent to the Silent Knife'; the card prints 'adjacent to you' (wording only)"],
+      "xipe": ["bottom: the controlled Move 1 uses RestrictRange 1 for 'must end in a hex adjacent to you' (approximation; ControlForOneAction)"],
+      "custom": ["top: use slot: double the value of your next attack while you have Invisible",
+                 "bottom: control one adjacent enemy: it performs Move 1, ending adjacent to you"],
+      "summons": [],
+      "notes": "The top's single slot is dashed (starts on play). Xipe: persistent scalar BuffAttack x2 filtered on CasterHasPositiveConditions Invisible, XPTracker [2]."
+    },
+    {
+      "name": "Trickster's Reversal",
+      "number": "013",
+      "level": "X",
+      "initiative": 9,
+      "top": {
+        "lines": ["\"On your next melee attack targeting an enemy that has Shield, add +(X+2) Attack, where X is the Shield value of the target.\"",
+                  "slots: 1 (XP 1 on slot 1), ends after the last"],
+        "summary": ["persistent"]
+      },
+      "bottom": {
+        "lines": ["\"Negate the next damage you would suffer this round.\""],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": ["top: changed to an immediate Attack 0 (with an enhancement) that adds 2x the target's Shield value; the card is a persistent buff on your next melee attack against a shielded enemy adding X+2 (X = Shield value), with XP 1 on its slot; no melee or 'has Shield' restriction, no persistence, no XP in Xipe (several alternative versions are commented out)"],
+      "custom": ["top: use slot: +(X+2) Attack on your next melee attack targeting an enemy with Shield, X = its Shield value",
+                 "bottom: negate the next damage you would suffer this round"],
+      "summons": [],
+      "notes": "Initiative printed as '09'. Top is persistent but not lost (discarded after its slot). Xipe bottom: PreventDamage 1, round."
+    },
+    {
+      "name": "Open Wound",
+      "number": "014",
+      "level": "2",
+      "initiative": 11,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "\"Add Wound and gain XP 1 if the target is adjacent to any of your allies.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 6"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: Wound and XP 1 if the target is adjacent to any of your allies"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Stick to the Shadows",
+      "number": "015",
+      "level": "2",
+      "initiative": 26,
+      "top": {
+        "lines": ["\"On your next three attacks, add +1 Attack, Poison.\"",
+                  "slots: 3 (XP 1 on slot 2), ends after the last"],
+        "summary": ["persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "\"If you are adjacent to no enemies, gain Invisible. At the end of the round, lose Invisible.\""],
+        "summary": ["round"]
+      },
+      "ghs": ["top: text typo 'tree' (card: 'three')"],
+      "xipe": ["bottom: 'At the end of the round, lose Invisible' is not implemented (the end-of-round removal is commented out), so the Invisible lasts its normal duration"],
+      "custom": ["top: use slots: +1 Attack and Poison on your next three attacks",
+                 "bottom: gain Invisible if adjacent to no enemies; lose it at the end of the round"],
+      "summons": [],
+      "notes": "Top is persistent but not lost. Xipe: persistent BuffAttack +1 Poison, XPTracker [0,1,0]; Invisible filtered on TargetAdjacentEnemiesOfCaster == 0."
+    },
+    {
+      "name": "Hidden Daggers",
+      "number": "016",
+      "level": "3",
+      "initiative": 39,
+      "top": {
+        "lines": ["Attack 2", "Range 3", "Attack 2", "Range 3", "Attack 2", "Range 3", "Attack 2", "Range 3", "Attack 2", "Range 3"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["Attack 1", "Target 2 [square]", "Range 3 [square]", "\"Add +1 Attack on each target that is adjacent to none of its allies.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: +1 Attack on each target adjacent to none of its allies"],
+      "summons": [],
+      "notes": "Top: five separate Attack 2, Range 3 abilities, no marks."
+    },
+    {
+      "name": "Flintlock",
+      "number": "017",
+      "level": "3",
+      "initiative": 51,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Range 2", "Muddle",
+                  "\"You may place one of your money tokens in the hex occupied by the target to add +2 Attack, Pierce 2.\"",
+                  "infuse Fire (corner box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "Loot 1", "\"Create one Poison, Immobilize trap in the empty hex of one looted money token.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: always Attack 4, Pierce 2; the card prints Attack 3 and gives +2 Attack, Pierce 2 only if you place one of your money tokens in the target's hex (money-token cost dropped, base value changed)",
+               "bottom: the Poison+Immobilize trap (BearTrap) is placed on a chosen hex (Target 1), not tied to the empty hex of a looted money token"],
+      "custom": ["top: optional: place one of your money tokens in the target's hex for +2 Attack, Pierce 2",
+                 "bottom: create one Poison + Immobilize trap in the now-empty hex of one money token looted by this loot"],
+      "summons": [],
+      "notes": "Muddle is the brown question-mark diamond. 'Your money tokens' = the loot you hold; Frosthaven digital may lack placing loot tokens back on the map."
+    },
+    {
+      "name": "Flurry of Blades",
+      "number": "018",
+      "level": "4",
+      "initiative": 16,
+      "top": {
+        "lines": ["Attack 2", "Target 3 [square]", "Range 3 [square]"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 7 [circle]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Gruesome Advantage",
+      "number": "019",
+      "level": "4",
+      "initiative": 90,
+      "top": {
+        "lines": ["Attack 4 [diamond]",
+                  "\"Add +2 Attack and gain XP 1 if the target is adjacent to any of your allies or is adjacent to none of its allies.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]",
+                  "\"When you next perform a melee attack targeting an enemy that has Poison this round, after the attack ability perform:\"",
+                  "Attack 2", "Range 3", "Poison"],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": ["top: no XP 1 (the three ConditionalOverrides give +2, +2, -2 for the either/both cases but none grants XP)",
+               "bottom: round EndActionAbility after a melee attack on a poisoned enemy; the 'next' (once only) limit is not visible in the data"],
+      "custom": ["top: +2 Attack and XP 1 if the target is adjacent to any of your allies or adjacent to none of its allies (once, not stacking)",
+                 "bottom: this round, after your next melee attack ability targeting a poisoned enemy: Attack 2, Range 3, Poison"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Duelist's Advance",
+      "number": "020",
+      "level": "5",
+      "initiative": 7,
+      "top": {
+        "lines": ["Move 3 [circle]", "Attack 4 [diamond]", "Move 2 [circle]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "Pull 1 [square]", "Range 2 [square]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": "Printed name is 'Duelist's Advance' (GHS and Xipe agree); the input/card-site name 'duelist's advantage' is wrong (input flagged matched_by_spelling, confirmed). Initiative printed as '07'."
+    },
+    {
+      "name": "Serrated Arrow",
+      "number": "021",
+      "level": "5",
+      "initiative": 95,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Range 3", "Wound"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"On your next attack targeting an enemy that is both adjacent to any of your allies and none of its allies, double the value of the attack.\"",
+                  "slots: 1 (XP 2 on slot 1), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: use slot: double the value of your next attack targeting an enemy adjacent to any of your allies and to none of its allies"],
+      "summons": [],
+      "notes": "Xipe: persistent scalar BuffAttack x2 with both adjacency filters, XPTracker [2]."
+    },
+    {
+      "name": "Dance of Daggers",
+      "number": "022",
+      "level": "6",
+      "initiative": 3,
+      "top": {
+        "lines": ["\"Negate the damage and added effects of all attacks targeting you this round.\"",
+                  "\"Immediately after each attack ability targeting you this round, gain XP 1 and perform:\"",
+                  "Attack 2: target the enemy that attacked you"],
+        "summary": ["round", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "\"Gain advantage on all your attacks this round.\""],
+        "summary": ["round"]
+      },
+      "ghs": ["top: the attack's target is an unresolved placeholder '%data.custom.gh2e.silent-knife.abilities.108.3%'; the card prints 'the enemy that attacked you'"],
+      "xipe": ["top: wrong content: Xipe's top is Cull the Weak's top (Attack 5 [enh], +1 Attack, advantage and XP 1 against normal monsters), not the negate-all-attacks/counterattack round effect",
+               "top: Discard [Discard,Discard]; the card's top is lost (round, then lost)",
+               "Xipe file number 99109 (GHS 108)"],
+      "custom": ["top: this round, negate the damage and added effects of all attacks targeting you",
+                 "top: this round, after each attack ability targeting you: XP 1 and Attack 2 against the enemy that attacked you",
+                 "bottom: advantage on all your attacks this round"],
+      "summons": [],
+      "notes": "Initiative printed as '03'. The top's counterattack prints no range."
+    },
+    {
+      "name": "Cull the Weak",
+      "number": "023",
+      "level": "6",
+      "initiative": 62,
+      "top": {
+        "lines": ["Attack 5 [diamond]", "\"Add +1 Attack and gain advantage, XP 1 if the target is a normal monster.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 2: target 2 enemies whose current hit point value is 2 or less, range 2", "Loot 2"],
+        "summary": []
+      },
+      "ghs": ["bottom: the target is an unresolved placeholder '%data.custom.gh2e.silent-knife.abilities.109.2%' and no Range is listed; the card prints 'target 2 enemies whose current hit point value is 2 or less, range 2'"],
+      "xipe": ["bottom: target filter adds EnemyType Normal; the card only requires current hit points 2 or less (elites and bosses qualify)",
+               "Xipe file number 99108 (GHS 109)"],
+      "custom": ["top: +1 Attack, advantage and XP 1 if the target is a normal monster",
+                 "bottom: may only target enemies with current hit points 2 or less"],
+      "summons": [],
+      "notes": "No corner icons on either half."
+    },
+    {
+      "name": "Stiletto Storm",
+      "number": "024",
+      "level": "7",
+      "initiative": 80,
+      "top": {
+        "lines": ["Attack 2", "Target 2 [square]", "Range 3 [square]",
+                  "\"If all the targets of the attack ability were adjacent to none of their allies, perform:\"",
+                  "Attack 2", "Target 2 [square]", "Range 3 [square]"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Attack 3 [square]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: both Attack 2 values have Enhancements: 1; the card has no mark on either Attack 2 (only on Target and Range)",
+               "top: the second attack is a per-target ConditionalOverride (TargetAdjacentAlliesOfTarget == 0), not 'if all the targets of the first attack were adjacent to none of their allies'",
+               "Xipe file number 99111 (GHS 110)"],
+      "custom": ["top: second attack only if every target of the first attack was adjacent to none of its allies"],
+      "summons": [],
+      "notes": "Bottom Attack 3 mark is a square (checked zoomed)."
+    },
+    {
+      "name": "Spring the Trap",
+      "number": "025",
+      "level": "7",
+      "initiative": 13,
+      "top": {
+        "lines": ["\"This action may be performed while you have Stun.\"", "\"Remove all negative conditions you have.\"",
+                  "Heal 5 [diamond+], self"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Designate one adjacent trap.\"", "Move 5 [circle]", "Jump",
+                  "\"Relocate the designated trap to an adjacent featureless hex. If that hex is occupied by an enemy, spring the trap on that enemy and gain XP 1.\""],
+        "summary": []
+      },
+      "ghs": ["top: text typo 'my be performed' (card: 'may')"],
+      "xipe": ["bottom: only Move 5 + Jump; designating, relocating and springing the trap and its XP 1 are dropped",
+               "top: removes a fixed list (Poison, Wound, Immobilize, Disarm, Stun, Muddle) rather than all negative conditions",
+               "Xipe file number 99110 (GHS 111)"],
+      "custom": ["top: may be performed while stunned",
+                 "top: remove all your negative conditions",
+                 "bottom: designate an adjacent trap before the move; after it, move the trap to a featureless hex adjacent to you; if an enemy is there, spring the trap on it and gain XP 1"],
+      "summons": [],
+      "notes": "Stun is the blue starburst diamond. Frosthaven digital may lack trap relocation."
+    },
+    {
+      "name": "Visage of the Inevitable",
+      "number": "026",
+      "level": "8",
+      "initiative": 88,
+      "top": {
+        "lines": ["Attack 4 [square]",
+                  "\"Add Disarm and gain Invisible, XP 1 if the target is both adjacent to any of your allies and none of its allies.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Poison: target all, range 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: Poison modelled as an Attack 0 ability with Poison on all targets in range 1 (an attack, not a plain condition ability)"],
+      "custom": ["top: Disarm on the target, Invisible on you and XP 1 if the target is adjacent to any of your allies and to none of its allies"],
+      "summons": [],
+      "notes": "Top Attack 4 mark is a square (checked zoomed), unlike the class's other single attacks (diamond). Bottom Poison has no mark."
+    },
+    {
+      "name": "Crippling Poison",
+      "number": "027",
+      "level": "8",
+      "initiative": 4,
+      "top": {
+        "lines": ["\"Add Poison to all your attacks. Add +1 Attack to all your attacks targeting enemies that have Poison.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "\"Add Immobilize to all your attacks targeting enemies adjacent to none of their allies this round.\""],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: persistent: Poison on all your attacks; +1 Attack on attacks targeting poisoned enemies",
+                 "bottom: this round, Immobilize on attacks targeting enemies adjacent to none of their allies"],
+      "summons": [],
+      "notes": "Initiative printed as '04'. Top has no use slots (lasts the rest of the scenario)."
+    },
+    {
+      "name": "Hired Help",
+      "number": "028",
+      "level": "9",
+      "initiative": 2,
+      "top": {
+        "lines": ["\"You may lose one of your money tokens to place a character token on an adjacent normal enemy. For the remainder of the scenario, that enemy is an ally to you and an enemy to all other monsters. You may replace its base with a blue base to more easily identify it. When that enemy dies, it drops an additional money token.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "Disarm, range 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: approximated as a persistent start-of-turn ControlActor for one turn (you control the monster each turn) on an adjacent Normal or Elite enemy; the card converts a normal enemy (not elite) into an ally for the rest of the scenario, costs one of your money tokens, and the converted enemy drops an extra money token on death",
+               "top: Discard [Discard,Discard]; the card's top is lost",
+               "top: XP: 2 and XPTracker [2] both set (may give XP 2 twice)",
+               "bottom: Disarm range has Enhancements: 1; the card has no mark on the bottom except Move 4 [circle]"],
+      "custom": ["top: lose one of your money tokens: an adjacent normal enemy becomes your ally (enemy to all other monsters) for the rest of the scenario; it drops an additional money token when it dies"],
+      "summons": [],
+      "notes": "Initiative printed as '02'. The converted monster is not a summon; it keeps acting as a monster allied to you. Frosthaven digital may lack monster conversion."
+    },
+    {
+      "name": "Watch it Burn",
+      "number": "029",
+      "level": "9",
+      "initiative": 98,
+      "top": {
+        "lines": ["Attack 2: target all adjacent enemies", "Wound", "Immobilize",
+                  "\"If you attacked at least three enemies with the attack ability, gain XP 1 and perform:\"",
+                  "Move 3 [circle]", "Jump",
+                  "infuse Fire (corner box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"During your turn, you may play this card from your hand to perform this action (in addition to the two cards you have played for the round).\"",
+                  "Attack 5 [diamond]"],
+        "summary": []
+      },
+      "ghs": ["bottom: text typo 'During you turn' (card: 'your')"],
+      "xipe": ["top: Attack 2 has Enhancements: 1; the card has no mark on it",
+               "top: the Move 3 + Jump always follows (AutoTrigger sub-ability); the 'at least three enemies attacked' condition and its XP 1 are dropped",
+               "bottom: replaced by Move 3 [enh]; the card's bottom is Attack 5 [diamond], playable from your hand during your turn as an extra action"],
+      "custom": ["top: XP 1 and Move 3 Jump only if the attack targeted at least three enemies",
+                 "bottom: may be played from your hand during your turn as an extra action (in addition to your two cards)"],
+      "summons": [],
+      "notes": "Printed name 'Watch it Burn' (lower-case 'it'); GHS writes 'Watch It Burn'. Neither half is lost. What happens to the card after the bottom is played from hand (discard) is a rules question."
+    }
+  ],
+  "summons": [],
+  "mechanics": [
+    "Isolated-target bonus, 'adjacent to none of its allies' (Single Out top and bottom, Sinister Opportunity top, Hidden Daggers bottom, Gruesome Advantage top, Serrated Arrow bottom, Stiletto Storm top, Visage of the Inevitable top, Crippling Poison bottom)",
+    "Flanking bonus, 'adjacent to any of your allies' (Flanking Strike top, Sinister Opportunity top, Backstab top, Open Wound top, Gruesome Advantage top, Serrated Arrow bottom, Visage of the Inevitable top); both at once: advantage + XP (Sinister Opportunity), double attack (Serrated Arrow), Disarm + Invisible + XP (Visage)",
+    "Double the value of the next attack (Smoke Bomb top while Invisible, Serrated Arrow bottom)",
+    "Use-slot persistent next-attack buffs: Single Out bottom (4 slots, lost), Stick to the Shadows top (3 slots, not lost), Smoke Bomb top (1 slot, lost), Trickster's Reversal top (1 slot, not lost), Serrated Arrow bottom (1 slot, lost)",
+    "Attack bonus from the target's Shield value: +(X+2) on the next melee attack against a shielded enemy (Trickster's Reversal top)",
+    "Negate damage: next damage this round (Trickster's Reversal bottom); damage and added effects of all attacks this round, plus XP 1 and an Attack 2 counterattack on each attacker (Dance of Daggers top)",
+    "Advantage: conditional (Sinister Opportunity top, Cull the Weak top), all attacks this round (Dance of Daggers bottom)",
+    "Target restrictions: normal monster bonus (Cull the Weak top), only enemies with current HP 2 or less (Cull the Weak bottom)",
+    "Invisible on self: Smoke Bomb top, Stick to the Shadows bottom (only if adjacent to no enemies, lost at end of round), Visage of the Inevitable top (conditional)",
+    "Money tokens: loot every hex moved through (Swift Bow bottom); place one of your money tokens in the target's hex for +2 Attack, Pierce 2 (Flintlock top); trap in the hex of a looted money token (Flintlock bottom); spend a money token, converted enemy drops an extra one (Hired Help top)",
+    "Traps: optionally don't spring traps while moving, destroy a trap for XP 1 (Practiced Reflexes bottom); create a Poison+Immobilize trap (Flintlock bottom); designate, relocate and spring a trap on an enemy (Spring the Trap bottom)",
+    "Control an enemy: one Move 1 ending adjacent to you (Smoke Bomb bottom); permanent conversion of an adjacent normal enemy into an ally (Hired Help top)",
+    "Conditional follow-up abilities: second attack if all targets were isolated (Stiletto Storm top); Move 3 Jump + XP if at least three enemies were attacked (Watch it Burn top); Attack 2 Range 3 Poison after the next melee attack on a poisoned enemy this round (Gruesome Advantage bottom)",
+    "Persistent global attack riders: Poison on all attacks, +1 Attack vs poisoned enemies (Crippling Poison top); round riders: Pierce 2 on ranged attacks (Venom Shiv bottom), Immobilize vs isolated enemies (Crippling Poison bottom)",
+    "Action usable while stunned + remove all negative conditions (Spring the Trap top)",
+    "Play a card from hand during your turn as an extra action (Watch it Burn bottom)",
+    "Elements: infuse Dark (Special Mixture top, Smoke Bomb top), consume Dark (Backstab top), infuse Fire (Flintlock top, Watch it Burn top)",
+    "No summons; conditions used: Poison, Wound, Immobilize, Disarm, Muddle, Invisible, Stun (only as 'while you have Stun'); no Ward/Safeguard"
+  ],
+  "unclear": [
+    "No reading doubts: every value, mark and corner icon was read with confidence (uncertain marks on Visage of the Inevitable top, Special Mixture bottom, Stiletto Storm bottom, Hired Help bottom and Watch it Burn top were checked zoomed)",
+    "Dance of Daggers top: the counterattack 'Attack 2, target the enemy that attacked you' prints no range; whether it reaches a ranged attacker is a rules question",
+    "Stick to the Shadows bottom: whether 'adjacent to no enemies' is checked after the Move 3 (the rows' order suggests so) is a rules question",
+    "Watch it Burn bottom: what happens to the card after it is played from hand (discarded, and whether it counts against the round's two cards) is a rules question",
+    "Gruesome Advantage top: '+2 Attack and XP 1 if ... or ...' read as a single +2 (not +4 when both are true); Xipe models it the same way"
+  ]
+}

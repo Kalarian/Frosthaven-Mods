@@ -89,3 +89,7 @@ Lessons from the first sheet (Bruiser):
 - The small red marks after the last use slot appear on lost and non-lost cards alike. Take lost or not from the
   corner icons.
 - When a rule word is ambiguous ("undamaged"), say so in `unclear`. Don't decide it.
+- A box with a "!" tab is a **mandatory trigger** (2e rulebook p.35, same as Frosthaven). It marks negative effects
+  on you or allies, element infusions (done at the end of the turn), XP and lost icons. If any part of the action is
+  performed, these can't be skipped. Mark such a row by starting its line with `! ` (for example
+  `! infuse Earth`, `! "Suffer 1 damage."`). It isn't unclear.

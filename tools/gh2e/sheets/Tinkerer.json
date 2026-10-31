@@ -1,0 +1,658 @@
+{
+  "class": "Tinkerer",
+  "read_by": "image reader, 2026-10-31",
+  "cards": [
+    {
+      "name": "Potent Potables",
+      "number": "002",
+      "level": "1",
+      "initiative": 46,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Range 3", "Muddle"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"On your next four single-target heal abilities, add +1 Target.\"",
+                  "slots: 4 (XP 1 on slots 1, 2, 3), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": ["The input's ghs record for this card (GHS cardId 33 'Potent Potables', initiative 73, Stun Target 3 / Heal 2 Range 4) is the wrong card: it is Disorienting Flash, misnamed in GHS. The right GHS card is cardId 30 'Potent Potable' (singular; the input's unmatched_ghs 'potentpotable'), initiative 46. Compared with that one: abilities, marks, slots (slotStartXp:1, slotXpFh:1, slotXpFh:1, slotEnd) and flags (bottomPersistent, bottomLost) agree; only the name differs (card: 'Potent Potables')."],
+      "xipe": "agrees",
+      "custom": ["bottom: use slots: +1 Target on your next four single-target heal abilities (XP 1 on the first three uses)"],
+      "summons": [],
+      "notes": "Class-wide: GHS numbers the cards 30-60, the printed numbers are 002-032 (offset 28 on every card); not counted as a disagreement. Muddle is the brown question-mark diamond. Xipe: persistent BuffTarget AddTarget 1, ValidAbilityType Heal, IsSingleTargetBonus, XPTracker [1,1,1,0]."
+    },
+    {
+      "name": "Harmless Contraption",
+      "number": "003",
+      "level": "1",
+      "initiative": 74,
+      "top": {
+        "lines": ["Summon Decoy: HP 10 [square], Move 3 [square], Attack -, Range -"],
+        "summary": ["XP 3", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: the Decoy has no attack (Attack - / Range -)"],
+      "summons": ["Decoy"],
+      "notes": "Summon portrait is a placeholder teal hex with a white X; no summon text or traits printed. Xipe summons DecoyID (stats not in the card YAML)."
+    },
+    {
+      "name": "Flamethrower",
+      "number": "004",
+      "level": "1",
+      "initiative": 16,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Pierce 2", "Wound",
+                  "area: grey (attacker) hex; red hexes up-right of it, right of that up-right hex, and right of the grey hex (4-hex rhombus; doubled coords y up: G 0,0; R 1,1 3,1 2,0) [hex marks on two empty hexes: 2,2 (above the join of the two upper reds) and 4,0 (right of the lower red)]",
+                  "infuse Fire (corner box)"],
+        "summary": ["XP 3", "lost"]
+      },
+      "bottom": {
+        "lines": ["\"Grant all adjacent allies and self:\"", "Shield 1"],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: Shield 1 for the round granted to yourself and all adjacent allies"],
+      "summons": [],
+      "notes": "Same area and hex marks as the Bruiser's Intimidating Growl. Xipe area 0,0,G|2,0,R|1,1,R|3,1,R|2,2,E|4,0,E matches the picture; bottom done with ControlActor (Shield 1, round) on Self+Ally within range 1, target all."
+    },
+    {
+      "name": "Disorienting Flash",
+      "number": "005",
+      "level": "1",
+      "initiative": 73,
+      "top": {
+        "lines": ["Stun [diamond]", "Target 3 [square]", "Range 3",
+                  "\"Gain XP 1 for each enemy targeted.\"",
+                  "infuse Light (corner box)"],
+        "summary": ["lost"]
+      },
+      "bottom": {
+        "lines": ["Heal 2 [circle]", "Range 4"],
+        "summary": []
+      },
+      "ghs": ["Not matched by the source script (input ghs is null): GHS has this card as cardId 33 named 'Potent Potables' (initiative 73), which the script matched to the real Potent Potables by name. Compared with that record: abilities, marks (Stun [diamond], Target 3 [square]), Light infusion and lost flag all agree; only the name is wrong in GHS."],
+      "xipe": ["top: enhancement on Range 3 (card: Range 3 has no mark) and none on Stun (card: Stun [diamond]); the Target 3 enhancement agrees"],
+      "custom": ["top: XP 1 for each enemy targeted"],
+      "summons": [],
+      "notes": "Stun as a stand-alone condition ability (no attack), Target 3. Xipe: XPPerTarget 1, Filter Enemy, Infuse Light."
+    },
+    {
+      "name": "Ink Bomb",
+      "number": "006",
+      "level": "1",
+      "initiative": 80,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Range 3", "Muddle",
+                  "\"Gain XP 1 for each enemy targeted.\"",
+                  "area: 3 red hexes in a triangle (one on top, two below; doubled coords y up: R 0,0 2,0 1,1), no grey hex [hex mark on the empty hex right of the top red, 3,1]",
+                  "infuse Dark (corner box)"],
+        "summary": ["lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: XP 1 for each enemy targeted"],
+      "summons": [],
+      "notes": "Xipe area 0,0,R|2,0,R|1,1,R|3,1,E matches the picture."
+    },
+    {
+      "name": "Net Shooter",
+      "number": "007",
+      "level": "1",
+      "initiative": 19,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Range 3", "Immobilize",
+                  "\"Gain XP 1 for each enemy targeted.\"",
+                  "area: 3 red hexes in a triangle (one on top, two below; doubled coords y up: R 0,0 2,0 1,1), no grey hex [hex mark on the empty hex right of the top red, 3,1]"],
+        "summary": ["lost"]
+      },
+      "bottom": {
+        "lines": ["Immobilize [diamond]", "Range 1", "Move 3 [circle]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: XP 1 for each enemy targeted"],
+      "summons": [],
+      "notes": "Bottom Immobilize is a stand-alone condition ability (range 1), then a separate Move 3 (divider between them)."
+    },
+    {
+      "name": "Stun Shot",
+      "number": "008",
+      "level": "1",
+      "initiative": 20,
+      "top": {
+        "lines": ["Stun", "Range 3"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 1", "Loot 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": "No enhancement marks anywhere on this card. Top Stun is a stand-alone condition ability (no attack)."
+    },
+    {
+      "name": "Reinvigorating Elixir",
+      "number": "009",
+      "level": "1",
+      "initiative": 37,
+      "top": {
+        "lines": ["Heal 4 [diamond+]", "Range 3"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"One ally within Range 3 may Recover all their cards from their discard pile.\""],
+        "summary": ["XP 3", "lost"]
+      },
+      "ghs": ["bottom: flag 'bottomLoss' (the card-stack-with-red-X icon); this card does not print that icon (corner box: XP 3 and lost only; Stamina Booster and Chimeric Formula do print it)"],
+      "xipe": ["top: enhancement on Range 3 (card: no mark)", "bottom: enhancement on Range 3 (card: no mark in the text)"],
+      "custom": ["bottom: one ally within range 3 may recover all cards from their discard pile"],
+      "summons": [],
+      "notes": "Xipe: RecoverDiscardedCards All, Filter Ally Player, XP 3."
+    },
+    {
+      "name": "Restorative Mist",
+      "number": "010",
+      "level": "1",
+      "initiative": 17,
+      "top": {
+        "lines": ["Heal 4 [diamond+]", "Range 3"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "Heal 1: target all allies, range 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: enhancement on Range 3 (card: no mark)"],
+      "custom": [],
+      "summons": [],
+      "notes": "Bottom Heal 1 targets all allies within range 1 (not self). Xipe: Heal 1, Range 1, Target -1, Filter Ally."
+    },
+    {
+      "name": "Jet Propulsion",
+      "number": "011",
+      "level": "1",
+      "initiative": 34,
+      "top": {
+        "lines": ["Attack 2", "Target 2", "Range 3"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 8 [circle]", "Jump"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Enhancement Field",
+      "number": "012",
+      "level": "1",
+      "initiative": 61,
+      "top": {
+        "lines": ["\"Place the “Enhancement Field” token in an empty hex within Range 3.\"",
+                  "\"Add +1 Attack to all attacks you and all allies perform while within Range 1 of the token.\""],
+        "summary": ["XP 3", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["\"You and all adjacent allies add +1 Attack to all attacks this round.\""],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": ["top: the token is a summon (EnhancementFieldID); its +1 Attack aura lives in the summon definition, not in the card YAML", "bottom: done as a round aura (IsAura, AuraFilter Self+Ally, range 1), so it follows whoever is adjacent during the round rather than the allies adjacent when played"],
+      "custom": ["top: place a token within range 3; persistent: you and all allies add +1 Attack to all attacks performed while within range 1 of the token",
+                 "bottom: you and all adjacent allies add +1 Attack to all attacks this round"],
+      "summons": [],
+      "notes": "A round token picture is printed beside the top text (same generic token art on Teleportation Pad, Pernicious Fogger and Gravity Bomb)."
+    },
+    {
+      "name": "Toxic Bolt",
+      "number": "013",
+      "level": "1",
+      "initiative": 76,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Range 3 [square]", "Poison", "infuse Earth (corner box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 6 [diamond]", "Range 2 [square]"],
+        "summary": ["XP 3", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Gas Canister",
+      "number": "014",
+      "level": "X",
+      "initiative": 22,
+      "top": {
+        "lines": ["\"Create one damage 4 [square], Muddle trap in an adjacent empty hex.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]"],
+        "summary": []
+      },
+      "ghs": ["top: text typo 'hey' (card: 'hex')"],
+      "xipe": ["top: the trap damage has no enhancement (card: damage 4 [square])"],
+      "custom": ["top: create a trap (damage 4 + Muddle) in an adjacent empty hex"],
+      "summons": [],
+      "notes": "Xipe: Trap PoisonMine, Damage 4, Conditions Muddle, Target 1."
+    },
+    {
+      "name": "Volatile Concoction",
+      "number": "015",
+      "level": "X",
+      "initiative": 18,
+      "top": {
+        "lines": ["Strengthen [diamond+]: target 1 ally, range 3",
+                  "\"The target may Recover one level 1 card from their discard pile.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Create one damage 2 [square], Poison trap in an adjacent empty hex.\""],
+        "summary": []
+      },
+      "ghs": ["bottom: text typo 'hey' (card: 'hex')"],
+      "xipe": ["top: Strengthen has no enhancement (card: Strengthen [diamond+])", "bottom: the trap damage has no enhancement (card: damage 2 [square])"],
+      "custom": ["top: the Strengthen target (one ally) may recover one level 1 card from their discard pile",
+                 "bottom: create a trap (damage 2 + Poison) in an adjacent empty hex"],
+      "summons": [],
+      "notes": "Xipe: Strengthen on Ally range 3 with sub-ability RecoverDiscardedCards 1 on the same target; Trap PoisonMine Damage 2 Poison."
+    },
+    {
+      "name": "Hook Gun",
+      "number": "016",
+      "level": "X",
+      "initiative": 72,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Range 3", "Pull 2"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "Loot 2"],
+        "summary": ["XP 1", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["top: Attack 2 has no enhancement (card: Attack 2 [diamond])"],
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Repulsor Gun",
+      "number": "017",
+      "level": "2",
+      "initiative": 35,
+      "top": {
+        "lines": ["Attack 3", "Range 3", "Push 1 [square]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "Push 2 [square], range 2"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": "Bottom Push is its own ability (push icon in a diamond) with range 2, not a rider on an attack."
+    },
+    {
+      "name": "Crank Bow",
+      "number": "018",
+      "level": "2",
+      "initiative": 23,
+      "top": {
+        "lines": ["Attack 8 [diamond]", "Range 5"],
+        "summary": ["XP 3", "lost"]
+      },
+      "bottom": {
+        "lines": ["Heal 2 [square]", "Target 2", "Range 3"],
+        "summary": []
+      },
+      "ghs": ["bottom: Range 2; the card prints Range 3"],
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Teleportation Pad",
+      "number": "019",
+      "level": "3",
+      "initiative": 62,
+      "top": {
+        "lines": ["\"Place two “Teleportation Pad” tokens in empty hexes within Range 5.\"",
+                  "\"You and all allies may treat the two hexes containing the tokens as being adjacent to each other during move abilities.\""],
+        "summary": ["XP 3", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Teleport 4 [circle]"],
+        "summary": []
+      },
+      "ghs": ["top: text typo 'threat' (card: 'treat')"],
+      "xipe": ["placeholder, not implemented: top is a plain Attack 3 (Enhancements 1), bottom a plain Move 4 (the Teleport block is commented out); only the Discard [Lost,Discard] matches the card"],
+      "custom": ["top: place two tokens within range 5; persistent: you and all allies may treat the two token hexes as adjacent during move abilities",
+                 "bottom: Teleport 4"],
+      "summons": [],
+      "notes": "Token picture printed beside the top text. Teleport icon: figure over a hex with a down arrow; value 4 with a circle mark."
+    },
+    {
+      "name": "Stamina Booster",
+      "number": "020",
+      "level": "3",
+      "initiative": 48,
+      "top": {
+        "lines": ["Heal 5 [diamond+]", "Range 3"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"One ally within Range 3 may Recover one card from their lost pile.\""],
+        "summary": ["XP 3", "permanently lost", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: one ally within range 3 may recover one card from their lost pile"],
+      "summons": [],
+      "notes": "Corner box: XP 3, a card-stack-with-red-X icon, then the lost icon. GHS flags it 'bottomLoss', Xipe's Discard is [Discard,Permanently Lost]; I wrote it as 'permanently lost' in summary."
+    },
+    {
+      "name": "Dangerous Contraption",
+      "number": "021",
+      "level": "4",
+      "initiative": 10,
+      "top": {
+        "lines": ["Summon Battle Bot: HP 7 [square], Move 3 [square], Attack 3 [square], Range -"],
+        "summary": ["XP 3", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "\"Grant one adjacent ally:\"", "Shield 1 [diamond+]"],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["bottom: Shield 1 for the round granted to one adjacent ally"],
+      "summons": ["Battle Bot"],
+      "notes": "Battle Bot is melee (Range -); no summon text or traits printed. Xipe summons Battlebot2ID; its bottom Shield 1 (Filter Ally, range 1) names no round duration."
+    },
+    {
+      "name": "Proximity Mine",
+      "number": "022",
+      "level": "4",
+      "initiative": 14,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Range 3", "\"All enemies adjacent to the target gain Muddle.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Create one damage 2 [square], Immobilize trap in an empty hex within Range 2 [square].\""],
+        "summary": []
+      },
+      "ghs": ["bottom: text typo 'hey' (card: 'hex')"],
+      "xipe": ["bottom: neither the trap damage nor the range has an enhancement (card: damage 2 [square], Range 2 [square])"],
+      "custom": ["top: all enemies adjacent to the attack target gain Muddle",
+                 "bottom: create a trap (damage 2 + Immobilize) in an empty hex within range 2"],
+      "summons": [],
+      "notes": "Xipe: Muddle via an inline sub-ability (AllTargetsAdjacentToParentTargets); Trap BearTrap Damage 2 Immobilize, Range 2."
+    },
+    {
+      "name": "Noxious Vials",
+      "number": "023",
+      "level": "5",
+      "initiative": 75,
+      "top": {
+        "lines": ["Attack 1", "Range 3", "Wound", "Disarm"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 3 [diamond]", "Range 3", "Poison",
+                  "\"Gain XP 1 for each enemy targeted.\"",
+                  "area: 3 red hexes in a triangle (one on top, two below; doubled coords y up: R 0,0 2,0 1,1), no grey hex [hex mark on the empty hex right of the top red, 3,1]"],
+        "summary": ["lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: area enhancement hex at -1,1 (left of the top red); the card's hex mark is right of the top red (3,1, as on Ink Bomb and Net Shooter)"],
+      "custom": ["bottom: XP 1 for each enemy targeted"],
+      "summons": [],
+      "notes": "No marks on the top half."
+    },
+    {
+      "name": "Disintegration Beam",
+      "number": "024",
+      "level": "5",
+      "initiative": 36,
+      "top": {
+        "lines": ["\"Kill all enemies in the targeted area whose current hit point value is less than or equal to 5. Gain XP 1 for each enemy killed.\"",
+                  "area: grey (attacker) hex and 4 red hexes in a straight line running diagonally up-right from it [no hex mark]"],
+        "summary": ["lost"]
+      },
+      "bottom": {
+        "lines": ["Attack 3 [square]", "Range 3"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: kill every enemy in the area with current hit points <= 5 (no attack, no damage); XP 1 for each enemy killed"],
+      "summons": [],
+      "notes": "Xipe: Kill with Filter Health <= 5, area 0,0,G|2,0,R|4,0,R|6,0,R|8,0,R with a diagonal layout override, XPPerTarget 1 (per target passing the filter, i.e. per kill)."
+    },
+    {
+      "name": "Invigorating Aerosol",
+      "number": "025",
+      "level": "6",
+      "initiative": 21,
+      "top": {
+        "lines": ["Heal 3 [diamond+]", "Range 2", "Move 2 [circle]", "Heal 4 [diamond+]", "Range 2", "infuse Air (corner box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"At the end of this and your next four turns, perform:\"",
+                  "Heal 1", "Range 5", "Strengthen", "Bless", "Ward", "Safeguard",
+                  "slots: 5 (XP 1 on slots 1, 3, 5), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": ["bottom: Heal 2; the card prints Heal 1", "bottom: conditions listed Safeguard, Ward, Strengthen, Bless; the card's order is Strengthen, Bless, Ward, Safeguard (order only)"],
+      "xipe": ["bottom: Heal 3; the card prints Heal 1", "bottom: only Strengthen and Bless; Ward and Safeguard dropped"],
+      "custom": ["bottom: use slots: at the end of this and your next four turns, Heal 1 range 5 with Strengthen, Bless, Ward and Safeguard on the target"],
+      "summons": [],
+      "notes": "Condition icons: blue bicep = Strengthen, yellow triangle-in-circle = Bless, pink shield with flame = Ward (same icon as Auto Turret's Ward), green heart in a dashed ring = Safeguard (GHS reading). Safeguard is not a Frosthaven condition. Xipe: EndTurnAbility, XPTracker [1,0,1,0,1] (matches the card)."
+    },
+    {
+      "name": "Auto Turret",
+      "number": "026",
+      "level": "6",
+      "initiative": 32,
+      "top": {
+        "lines": ["\"At the end of this and your next three turns, perform the following twice:\"",
+                  "Attack 2", "Range 5", "Pierce 1",
+                  "slots: 4 (XP 1 on slots 1, 2, 3), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Ward [diamond+]", "Range 3", "Move 2 [circle]", "Poison [diamond]", "Range 3"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: 'perform the following twice' done as one Attack 2 with Target 2 (the card's two separate attacks may hit the same enemy twice)", "top: Discard [Discard,Discard], so the top is not lost; the card's corner shows persistent then lost", "bottom: the Ward and Poison abilities are commented out; only Move 2 remains"],
+      "custom": ["top: use slots: at the end of this and your next three turns, perform Attack 2, range 5, Pierce 1 twice"],
+      "summons": [],
+      "notes": "Bottom: Ward (stand-alone, range 3, ally or self) and Poison (stand-alone, range 3) are condition abilities with their own marks. Xipe: EndTurnAbility, XPTracker [1,1,1,0] (matches the card)."
+    },
+    {
+      "name": "Murderous Contraption",
+      "number": "027",
+      "level": "7",
+      "initiative": 84,
+      "top": {
+        "lines": ["Summon Kill Bot: HP 8 [square], Move 4 [square], Attack 3 [square], Range -",
+                  "Kill Bot attack area: grey (attacker) hex and 2 red hexes in a straight line running diagonally up-right from it [no hex mark]"],
+        "summary": ["XP 3", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Heal 5 [diamond+]", "Range 3"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: the Kill Bot's attacks use a 2-hex line area (printed in the summon's stat block)"],
+      "summons": ["Kill Bot"],
+      "notes": "GHS deck area (0,1,target)|(0,2,active)|(1,0,target) matches the picture (grey at the bottom end). GHS's character file (availableSummons) has (0,2,target)|(1,1,target)|(2,0,active), which puts the grey hex at the top end of the line instead. Xipe summons KillBotID (area not in the card YAML)."
+    },
+    {
+      "name": "Pernicious Fogger",
+      "number": "028",
+      "level": "7",
+      "initiative": 71,
+      "top": {
+        "lines": ["\"Place the “Pernicious Fogger” token in an empty hex within Range 3.\"",
+                  "\"At the end of each of their turns, all allies and enemies within Range 1 of the token suffer damage 2.\""],
+        "summary": ["XP 3", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Strengthen [diamond+]", "Range 3"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: the token is a summon (PerniciousFoggerID); the damage effect lives in the summon definition, not in the card YAML", "bottom: Strengthen has no enhancement (card: Strengthen [diamond+])"],
+      "custom": ["top: place a token within range 3; persistent: every ally and enemy within range 1 of the token suffers damage 2 at the end of each of its turns"],
+      "summons": [],
+      "notes": "The token hurts allies too."
+    },
+    {
+      "name": "Cryonic Snare",
+      "number": "029",
+      "level": "8",
+      "initiative": 15,
+      "top": {
+        "lines": ["\"Create one damage 4 [square], Wound, Stun trap in an empty hex within Range 2 [square].\"",
+                  "infuse Ice (corner box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "\"Grant one adjacent ally:\"", "Retaliate 2 [diamond+]"],
+        "summary": ["round"]
+      },
+      "ghs": ["top: text typo 'hey' (card: 'hex')"],
+      "xipe": ["top: neither the trap damage nor the range has an enhancement (card: damage 4 [square], Range 2 [square])", "bottom: Retaliate 2 has no enhancement (card: Retaliate 2 [diamond+])"],
+      "custom": ["top: create a trap (damage 4 + Wound + Stun) in an empty hex within range 2",
+                 "bottom: Retaliate 2 for the round granted to one adjacent ally"],
+      "summons": [],
+      "notes": "Xipe: Trap PoisonMine Damage 4 [Wound, Stun], Range 2; Retaliate 2 Filter Ally range 1."
+    },
+    {
+      "name": "Harsh Stimulants",
+      "number": "030",
+      "level": "8",
+      "initiative": 27,
+      "top": {
+        "lines": ["\"Grant one ally within Range 3:\"", "\"Suffer damage 2.\" (in a '!' box)", "Move 2 [square]", "Attack 6 [square]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Control one enemy within Range 3 [square]:\"", "Attack +2: target all adjacent enemies", "\"then that enemy gains Stun.\""],
+        "summary": ["XP 3", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["placeholder, not implemented: top is a plain Attack 3 (Enhancements 1), bottom a plain Move 3; Discard [Discard,Discard] (the card's bottom is lost)"],
+      "custom": ["top: one ally within range 3 suffers damage 2, then performs Move 2 and Attack 6",
+                 "bottom: control one enemy within range 3: it attacks all adjacent enemies with its attack +2, then gains Stun"],
+      "summons": [],
+      "notes": "The 'Suffer damage 2' row is printed in a box with a '!' (the same box style as the corner boxes and element infusions)."
+    },
+    {
+      "name": "Gravity Bomb",
+      "number": "031",
+      "level": "9",
+      "initiative": 85,
+      "top": {
+        "lines": ["\"Place the “Gravity Bomb” token in an empty hex within Range 4. At the end of your next turn, perform:\"",
+                  "Pull 2: target all enemies within Range 2 of the token",
+                  "\"Pull toward the token. Then any enemy occupying the hex containing the token suffers damage 5, all enemies occupying hexes adjacent to the token suffer damage 1, and you discard this card.\""],
+        "summary": ["persistent"]
+      },
+      "bottom": {
+        "lines": ["Attack 2", "Range 3", "Immobilize",
+                  "area: 3 red hexes in a triangle (one on top, two below), no grey hex [no hex mark]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["placeholder, not implemented: top is a plain Attack 3 (Enhancements 1), bottom a plain Move 3"],
+      "custom": ["top: place a token within range 4; at the end of your next turn: Pull 2 toward the token on all enemies within range 2 of it, then damage 5 to an enemy in the token hex and damage 1 to enemies adjacent to the token, then discard this card"],
+      "summons": [],
+      "notes": "No enhancement marks anywhere on this card. Corner box shows only the persistent icon (no lost icon); the text says you discard the card."
+    },
+    {
+      "name": "Chimeric Formula",
+      "number": "032",
+      "level": "9",
+      "initiative": 33,
+      "top": {
+        "lines": ["Heal 3 [diamond+]: target 1 ally, range 3", "Strengthen", "Bless",
+                  "\"The target of the heal ability may immediately play up to two cards from their hand, performing at most one top and one bottom action of the cards.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"One ally within Range 3 may Recover one card from the lost pile of one ally adjacent to them.\""],
+        "summary": ["XP 3", "permanently lost", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["placeholder, not implemented: top is a plain Attack 3 (Enhancements 1), bottom a plain Move 3; Discard [Discard,Discard] (the card's bottom is lost, with the card-stack-with-red-X icon)"],
+      "custom": ["top: the healed ally may immediately play up to two cards from hand, one top and one bottom action",
+                 "bottom: one ally within range 3 may recover one card from the lost pile of an ally adjacent to them"],
+      "summons": [],
+      "notes": "Corner box: XP 3, card-stack-with-red-X icon, lost icon (as on Stamina Booster). A divider separates the heal from the text row on the top."
+    }
+  ],
+  "summons": [
+    "Decoy (Harmless Contraption top, level 1): HP 10 [square], Move 3 [square], Attack -, Range - (no attack); no traits printed",
+    "Battle Bot (Dangerous Contraption top, level 4): HP 7 [square], Move 3 [square], Attack 3 [square], Range - (melee); no traits printed",
+    "Kill Bot (Murderous Contraption top, level 7): HP 8 [square], Move 4 [square], Attack 3 [square], Range - (melee), attack area: grey hex + 2 red hexes in a diagonal line up-right; no traits printed"
+  ],
+  "mechanics": [
+    "Summons: Decoy (no attack), Battle Bot, Kill Bot (area attack printed in its stat block) (Harmless Contraption, Dangerous Contraption, Murderous Contraption tops; all persistent then lost, XP 3)",
+    "Placed tokens with persistent effects: +1 Attack for you and allies within range 1 (Enhancement Field top); two tokens treated as adjacent for moves (Teleportation Pad top); end-of-turn damage 2 to every ally and enemy within range 1 (Pernicious Fogger top); delayed bomb: at the end of your next turn pull all enemies within range 2 toward it, damage 5 on the token hex, damage 1 adjacent, then discard (Gravity Bomb top)",
+    "Traps created by abilities, with damage + conditions, placed adjacent or within range 2: Gas Canister top (4, Muddle), Volatile Concoction bottom (2, Poison), Proximity Mine bottom (2, Immobilize, range 2), Cryonic Snare top (4, Wound + Stun, range 2)",
+    "Use-slot persistent cards: +1 Target on next four single-target heals (Potent Potables bottom, 4 slots); end-of-turn Heal 1 range 5 + Strengthen/Bless/Ward/Safeguard for 5 turns (Invigorating Aerosol bottom); end-of-turn Attack 2 range 5 Pierce 1 twice for 4 turns (Auto Turret top); all lost after the last slot",
+    "XP per enemy targeted (Disorienting Flash top, Ink Bomb top, Net Shooter top, Noxious Vials bottom); XP per enemy killed (Disintegration Beam top)",
+    "Execute: kill all enemies in an area with current hit points <= 5 (Disintegration Beam top)",
+    "Recover cards for allies: all discarded cards (Reinvigorating Elixir bottom), one level 1 card from discard (Volatile Concoction top), one lost card (Stamina Booster bottom), one card from an adjacent ally's lost pile (Chimeric Formula bottom); the last two carry the card-stack-with-red-X ('permanently lost') icon",
+    "Abilities granted to allies: Shield 1 to self and adjacent allies (Flamethrower bottom), Shield 1 to one adjacent ally (Dangerous Contraption bottom), Retaliate 2 to one adjacent ally (Cryonic Snare bottom), an ally suffers damage 2 then performs Move 2 + Attack 6 (Harsh Stimulants top), the healed ally immediately plays up to two cards (Chimeric Formula top)",
+    "Control an enemy: it attacks all adjacent enemies with its attack +2, then gains Stun (Harsh Stimulants bottom)",
+    "Conditions applied to adjacent-to-target enemies: Muddle (Proximity Mine top)",
+    "Round attack buff for you and adjacent allies (Enhancement Field bottom)",
+    "Stand-alone condition abilities (no attack): Stun (Stun Shot top, Disorienting Flash top with Target 3), Immobilize (Net Shooter bottom), Strengthen (Volatile Concoction top, Pernicious Fogger bottom), Ward and Poison (Auto Turret bottom)",
+    "Teleport (Teleportation Pad bottom)",
+    "Conditions used: Muddle, Immobilize, Stun, Wound, Poison, Disarm, Strengthen, Bless, Ward, Safeguard (Safeguard is not a Frosthaven condition: Invigorating Aerosol bottom)"
+  ],
+  "unclear": [
+    "Invigorating Aerosol bottom: the image clearly prints Heal 1 (zoomed); GHS says Heal 2 and Xipe Heal 3. I kept 1. Worth a check against another printing or errata",
+    "Card-stack-with-red-X corner icon (Stamina Booster, Chimeric Formula bottoms): I wrote it as 'permanently lost' after Xipe's Discard name; check the 2e rulebook for its exact name and rule. GHS also flags Reinvigorating Elixir's bottom with it (bottomLoss), but that card doesn't print the icon",
+    "Harsh Stimulants bottom: 'all adjacent enemies' for a controlled enemy: whose enemies (the monster's own allies, or your enemies) is a rules question, not a reading one",
+    "Pernicious Fogger top: whether 'all allies' includes you (the Tinkerer) and your summons is a rules question",
+    "Enhancement Field bottom: whether 'adjacent allies' are fixed when the card is played or follow adjacency through the round (Xipe uses a round aura) is a rules question",
+    "Green heart-in-dashed-ring icon on Invigorating Aerosol read as Safeguard, following GHS (the pink shield is Ward, confirmed by Auto Turret; yellow is Bless, confirmed by Chimeric Formula)"
+  ]
+}

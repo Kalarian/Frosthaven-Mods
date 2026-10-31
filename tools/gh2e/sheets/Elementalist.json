@@ -1,0 +1,682 @@
+{
+  "class": "Elementalist",
+  "read_by": "image reader, 2026-10-31",
+  "cards": [
+    {
+      "name": "Ice Spikes",
+      "number": "0446",
+      "level": "1",
+      "initiative": 48,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Range 3 [square]",
+                  "consume any: infuse any, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 5 [diamond]", "Range 3 [square]", "Immobilize",
+                  "infuse Ice and Earth (box, two separate element icons)"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "Class-wide: printed numbers are 0446-0474 and match GHS's numbers 446-474 (no offset). Every infuse box and every corner box on this class carries a small '!' tab on its left; recorded once here, not interpreted. Xipe has no Elementalist (2e) cards."
+    },
+    {
+      "name": "Malleable Evocation",
+      "number": "0447",
+      "level": "1",
+      "initiative": 26,
+      "top": {
+        "lines": ["Heal 2 [circle]", "Range 3 [square]",
+                  "consume Fire: Strengthen",
+                  "consume Ice: Ward",
+                  "consume Air: Bless",
+                  "consume Earth: Safeguard",
+                  "\"Add +1 Target and gain XP 1 if you consume two or more elements.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "\"Move one waning element to the strong column.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: the four consumes are one box attached to the heal (any number may be consumed); conditions go on the heal target",
+                 "top: +1 Target and XP 1 if you consume two or more elements",
+                 "bottom: move one waning element to the strong column"],
+      "summons": [],
+      "notes": "Ward (pink diamond) and Safeguard (green diamond with a heart) are Frosthaven-era conditions; check the port supports both on an ally."
+    },
+    {
+      "name": "Formless Power",
+      "number": "0448",
+      "level": "1",
+      "initiative": 45,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Range 3",
+                  "consume any: +1 Attack, +1 Range, XP 1",
+                  "consume any: +1 Attack, +1 Range"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"At the start of each of your turns, you may consume any to add +1 Attack to all your attacks that turn.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: two separate 'consume any' rows (one element each, the first also gives XP 1)",
+                 "bottom: persistent: at the start of each of your turns you may consume any element for +1 Attack on all your attacks that turn"],
+      "summons": [],
+      "notes": "Top Range 3 has no enhancement mark."
+    },
+    {
+      "name": "Shaping the Ether",
+      "number": "0449",
+      "level": "1",
+      "initiative": 54,
+      "top": {
+        "lines": ["Attack 2 [circle]", "Range 3 [square]",
+                  "consume Fire: Wound",
+                  "consume Ice: Immobilize",
+                  "consume Air: Push 3",
+                  "consume Earth: Poison",
+                  "\"Add +1 Target and gain XP 1 if you consume two or more elements.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: +1 Target and XP 1 if you consume two or more elements"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Stoking Hail",
+      "number": "0450",
+      "level": "1",
+      "initiative": 29,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Range 3 [square]",
+                  "consume Ice: +1 Attack, Pierce 2, infuse Ice"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 2 [square]", "\"Add +1 Move if one or more elements are strong or waning.\"",
+                  "infuse Air (box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["bottom: +1 Move if one or more elements are strong or waning"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Magma Scales",
+      "number": "0451",
+      "level": "1",
+      "initiative": 14,
+      "top": {
+        "lines": ["\"Grant one ally within Range 3 [square]:\"",
+                  "Move 2 [square]", "Jump",
+                  "consume Air: Disarm, range 1, infuse Air"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Grant one ally within Range 3 [square]:\"",
+                  "Shield 2 [square]", "Retaliate 2 [square]",
+                  "infuse Fire and Earth (box, two separate element icons)"],
+        "summary": ["XP 2", "round", "lost"]
+      },
+      "ghs": ["bottom: the grant's Range 3 mark appears only inside the text ('Range 3 Square'), without the separate [square] GHS gives the same grant on this card's top, Gravel Guard top and Winter's Edge bottom (card: Range 3 [square] on both halves); data inconsistency, likely harmless"],
+      "xipe": "missing",
+      "custom": ["top: grant an ally within range 3: Move 2 with Jump (ally performs it)",
+                 "bottom: grant an ally within range 3: Shield 2 and Retaliate 2 for the round"],
+      "summons": [],
+      "notes": "The round icon in the bottom corner box covers the granted Shield/Retaliate."
+    },
+    {
+      "name": "Infernal Vortex",
+      "number": "0452",
+      "level": "1",
+      "initiative": 35,
+      "top": {
+        "lines": ["Attack 1 [square]: target all, range 4",
+                  "infuse Fire and Air (box, two separate element icons)"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 2 [square]", "\"Add +1 Move if one or more elements are strong or waning.\"",
+                  "infuse Earth (box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: target all enemies within range 4",
+                 "bottom: +1 Move if one or more elements are strong or waning"],
+      "summons": [],
+      "notes": "Range 4 has no mark."
+    },
+    {
+      "name": "Frigid Torrent",
+      "number": "0453",
+      "level": "1",
+      "initiative": 39,
+      "top": {
+        "lines": ["Attack 5 [diamond]", "Range 4", "Disarm",
+                  "infuse Ice and Air (box, two separate element icons)"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 2 [square]", "\"Add +1 Move if one or more elements are strong or waning.\"",
+                  "infuse Fire (box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["bottom: +1 Move if one or more elements are strong or waning"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Pulsing Cores",
+      "number": "0454",
+      "level": "1",
+      "initiative": 40,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Range 3 [square]",
+                  "consume Fire: area: 3 red hexes in a triangle (one on top, two side by side below it), no grey hex (ranged area) [no hex mark], infuse Fire"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"At the end of this and your next five turns, in order: [Fire|Ice split icon], [Air|Earth split icon], [Light|Dark split icon] (repeat the same order for turns 4-6).\"",
+                  "slots: 6 (XP 1 on slots 2, 4, 6), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: consuming Fire turns the single-target attack into a 3-hex triangle area attack",
+                 "bottom: use slots, one per turn end (this turn and the next five): infuse Fire or Ice, then Air or Earth, then Light or Dark, repeating once"],
+      "summons": [],
+      "notes": "GHS area (0,1)|(1,0)|(1,1) matches the picture. The split icons (one pill, two half elements) are read by GHS as 'Elementhalf' (one of the two)."
+    },
+    {
+      "name": "Dual Nature",
+      "number": "0455",
+      "level": "1",
+      "initiative": 27,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Range 3 [square]",
+                  "consume Earth: Heal 2, range 3, infuse Earth"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 2 [square]", "\"Add +1 Move if one or more elements are strong or waning.\"",
+                  "infuse Ice (box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["bottom: +1 Move if one or more elements are strong or waning"],
+      "summons": [],
+      "notes": "Top: the consume Earth box is its own ability (separated from the attack by a divider line, no connector), a Heal 2 range 3 with no mark."
+    },
+    {
+      "name": "Lingering Essence",
+      "number": "0456",
+      "level": "X",
+      "initiative": 50,
+      "top": {
+        "lines": ["\"Whenever an enemy consumes an element, you may infuse that element.\""],
+        "summary": ["persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: persistent (not lost): whenever an enemy consumes an element, you may infuse that element"],
+      "summons": [],
+      "notes": "Persistent with no lost icon: stays in play until the end of the scenario per normal rules, then goes to discard (check the 2e rule for non-lost persistent cards without slots)."
+    },
+    {
+      "name": "Flash of Brilliance",
+      "number": "0457",
+      "level": "X",
+      "initiative": 67,
+      "top": {
+        "lines": ["\"You or one ally within Range 3 may Recover one level 1 card from the discard pile.\"",
+                  "infuse Light (box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Loot 1", "Heal 1 [square], self", "infuse any (box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: you or one ally within range 3 may recover one level 1 card from the discard pile"],
+      "summons": [],
+      "notes": "The top is not lost (no corner icons). 'Recover' is printed as the card-with-check icon."
+    },
+    {
+      "name": "Encompassing Shadow",
+      "number": "0458",
+      "level": "X",
+      "initiative": 12,
+      "top": {
+        "lines": ["Invisible [diamond+]: target 1 ally, range 4 [square]", "infuse Dark (box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "\"All attacks targeting you or adjacent allies this round gain disadvantage.\""],
+        "summary": ["round"]
+      },
+      "ghs": ["top: Invisible has no mark; the card has a diamond-with-plus mark [diamond+] beside the Invisible icon"],
+      "xipe": "missing",
+      "custom": ["top: Invisible on one ally within range 4 (not self)",
+                 "bottom: this round, all attacks targeting you or allies adjacent to you gain disadvantage"],
+      "summons": [],
+      "notes": "Zoomed: the mark beside Invisible is clearly a small diamond with a plus inside."
+    },
+    {
+      "name": "Gravel Guard",
+      "number": "0459",
+      "level": "2",
+      "initiative": 10,
+      "top": {
+        "lines": ["\"Grant one ally within Range 3 [square]:\"",
+                  "Move 2 [square]", "Shield 1 [square]",
+                  "Muddle: target all, range 1",
+                  "infuse Earth (box)"],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["consume Fire: \"Create one Damage 2 trap in an empty hex within Range 3. All enemies adjacent to the trap suffer Damage 1, infuse Fire.\"",
+                  "Move 2 [circle]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: grant an ally within range 3: Move 2, Shield 1 for the round, and Muddle on all enemies adjacent (range 1)",
+                 "bottom: consume Fire: create a Damage 2 trap in an empty hex within range 3, then all enemies adjacent to the trap suffer damage 1, infuse Fire"],
+      "summons": [],
+      "notes": "The round corner box sits above the initiative, so it belongs to the top (covers the granted Shield 1). The bottom consume row is printed above the Move."
+    },
+    {
+      "name": "Wave of Frost",
+      "number": "0460",
+      "level": "2",
+      "initiative": 47,
+      "top": {
+        "lines": ["Attack 1", "Range 3",
+                  "area: 5 red hexes, no grey hex (ranged area): one on top, two below it, two more below offset to the right (GHS 0,1 1,0 1,1 1,2 2,2) [hex marks on two empty hexes: left of the top red (0,0) and below, between the two bottom reds (1,3)]",
+                  "infuse Ice (box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "consume Air: +2 Move, Jump, infuse Air"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "GHS area string, both enhance hexes included, matches the picture. Attack 1 and Range 3 have no marks."
+    },
+    {
+      "name": "Arresting Gale",
+      "number": "0461",
+      "level": "3",
+      "initiative": 65,
+      "top": {
+        "lines": ["Attack 1 [square]", "Range 3 [square]", "Stun", "infuse Air (box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Ward [circle]", "Range 3 [square]", "consume Earth: +1 Target, infuse Earth"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["bottom: Ward as a standalone ability on a target within range 3 (+1 Target with Earth)"],
+      "summons": [],
+      "notes": "Ward is a Frosthaven-era condition."
+    },
+    {
+      "name": "Empowering Flame",
+      "number": "0462",
+      "level": "3",
+      "initiative": 15,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Range 3 [square]", "Strengthen [diamond+], self", "infuse Fire (box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]",
+                  "\"Grant one ally within Range 2:\"",
+                  "consume Ice: Retaliate 2, range 2, infuse Ice, round icon (inside the consume box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["bottom: only with Ice consumed: grant one ally within range 2 Retaliate 2 (range 2) for the round"],
+      "summons": [],
+      "notes": "The round icon is inside the consume box (applies to the granted Retaliate), not in a corner box."
+    },
+    {
+      "name": "Burial",
+      "number": "0463",
+      "level": "4",
+      "initiative": 77,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Range 4",
+                  "consume Earth: +1 Attack, Immobilize, XP 1",
+                  "consume Dark: +1 Attack, Curse, XP 1",
+                  "area: 4 red hexes, no grey hex (ranged area): a red on top, two reds in the middle row (offset right), a red at the bottom below the top one (GHS 0,0 0,1 0,2 1,1) [no hex mark]"],
+        "summary": ["lost"]
+      },
+      "bottom": {
+        "lines": ["Attack 2 [square]", "Range 4", "infuse Dark (box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "GHS area matches the picture. Curse is the purple diamond with lightning."
+    },
+    {
+      "name": "Chain Lightning",
+      "number": "0464",
+      "level": "4",
+      "initiative": 23,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Target 3", "Range 4",
+                  "consume Air: +1 Attack, +1 Target, XP 1",
+                  "consume Light: +1 Attack, Pierce 2, XP 1",
+                  "\"Add -1 Attack, +2 Range to each attack for each enemy already attacked with this ability. Each target after the first must be within Range 2 of the previous target.\""],
+        "summary": ["lost"]
+      },
+      "bottom": {
+        "lines": ["Heal 4", "Range 2 [square]", "infuse Light (box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: chained targets: each attack after the first gets -1 Attack and +2 Range per enemy already attacked by this ability, and each target after the first must be within range 2 of the previous target"],
+      "summons": [],
+      "notes": "Bottom Heal 4 has no mark (only its Range 2 has [square]); no 'self' pill, so it targets within range 2."
+    },
+    {
+      "name": "Obsidian Shards",
+      "number": "0465",
+      "level": "5",
+      "initiative": 19,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Target 2", "Range 3 [square]",
+                  "consume Fire and Earth: +2 Attack, Muddle, XP 2"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]",
+                  "consume Ice and Earth: \"On the next two sources of damage you or an adjacent ally would suffer, negate the damage.\"",
+                  "infuse Ice or Earth (split icon, inside the consume box)",
+                  "slots: 2 (XP 1 on slot 2), ends after the last",
+                  "persistent icon (inside the consume box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["bottom: only with Ice and Earth consumed: persistent use slots: negate the next two sources of damage suffered by you or an adjacent ally",
+                 "bottom: infuse Ice or Earth (one of the two)"],
+      "summons": [],
+      "notes": "The persistent icon is inside the consume box with no lost icon, so the card is discarded (not lost) after the second slot."
+    },
+    {
+      "name": "Winter's Edge",
+      "number": "0466",
+      "level": "5",
+      "initiative": 43,
+      "top": {
+        "lines": ["Attack 5 [diamond]", "Range 2 [square]",
+                  "consume Ice and Air: +3 Range, Pierce 4, XP 2"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["consume Fire and Air: Strengthen, Bless: target 2 allies, range 3; infuse Fire or Air (split icon), XP 1",
+                  "\"Grant one ally within Range 3 [square]:\"", "Attack 3 [diamond]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["bottom: consume Fire and Air: Strengthen and Bless on 2 allies within range 3, infuse Fire or Air (one of the two), XP 1",
+                 "bottom: grant one ally within range 3: Attack 3 (ally performs it)"],
+      "summons": [],
+      "notes": "Bottom: the consume row is printed first, above the grant."
+    },
+    {
+      "name": "Pragmatic Reinforcement",
+      "number": "0467",
+      "level": "6",
+      "initiative": 13,
+      "top": {
+        "lines": ["Heal 3 [diamond+]", "Range 4",
+                  "consume Light: \"The target may Recover one level 1 card from their discard pile, [infuse Air or Earth, split icon].\"",
+                  "consume Air or Earth (split icon): \"Grant the target:\" Shield 2, round icon"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "infuse Ice or Earth (box, split icon)"],
+        "summary": []
+      },
+      "ghs": ["top: text 'from the discard pile'; the card prints 'from their discard pile' (wording only)"],
+      "xipe": "missing",
+      "custom": ["top: consume Light: the heal target may recover one level 1 card from their discard pile, then infuse Air or Earth",
+                 "top: consume Air or Earth: the heal target gains Shield 2 for the round"],
+      "summons": [],
+      "notes": "Heal 3 mark zoomed: diamond with a plus inside. Range 4 has no mark."
+    },
+    {
+      "name": "Duskstorm",
+      "number": "0468",
+      "level": "6",
+      "initiative": 17,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Range 4",
+                  "area: 3 red hexes in a triangle (one on top, two side by side below it), no grey hex (ranged area) [hex mark on the empty hex right of the top red]",
+                  "consume Dark: \"All allies in the red hexes gain Invisible.\" infuse Fire or Ice (split icon)",
+                  "consume Fire or Ice (split icon): +1 Attack, Wound"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "infuse Fire or Air (box, split icon)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: consume Dark: all allies in the area's red hexes gain Invisible, then infuse Fire or Ice",
+                 "top: consume Fire or Ice: +1 Attack and Wound"],
+      "summons": [],
+      "notes": "GHS area (0,1)|(1,0)|(1,1)|(2,0,enhance) matches the picture. The area hits enemies and also marks allies for the Invisible rider."
+    },
+    {
+      "name": "Elemental Juggernaut",
+      "number": "0469",
+      "level": "7",
+      "initiative": 94,
+      "top": {
+        "lines": ["Summon Chromatic Construct: HP 7 [square], Move 3 [square], Attack 0, Range - (melee); \"Add +1 Attack for each element that is strong or waning.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "infuse Ice or Air (box, split icon)"],
+        "summary": []
+      },
+      "ghs": ["top: the summon's rule text is an unresolved placeholder (%data.custom.gh2e.triangles.abilities.469.1%); stats and enhanceable stats (heal, move) agree"],
+      "xipe": "missing",
+      "custom": ["top: summon's attack = 0 +1 per element that is strong or waning"],
+      "summons": ["Chromatic Construct"],
+      "notes": "GHS attack value is \"0 \" (trailing space)."
+    },
+    {
+      "name": "Confluence of Elements",
+      "number": "0470",
+      "level": "7",
+      "initiative": 64,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Range 3 [square]",
+                  "consume any and any: +2 Attack, XP 1",
+                  "consume any and any: +1 Target, XP 1",
+                  "consume any and any: infuse any, infuse any"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "infuse Fire or Earth (box, split icon)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: three rows, each consuming two elements of your choice"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Prismatic Barrage",
+      "number": "0471",
+      "level": "8",
+      "initiative": 33,
+      "top": {
+        "lines": ["Attack 2", "Range 4",
+                  "consume Ice: Stun, XP 1",
+                  "consume Fire: Attack 2, range 4, \"Create one 1-hex hazardous terrain tile in the featureless hex occupied by the target, XP 1.\"",
+                  "consume Earth: Attack 2, range 4, Push 3, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Heal 2", "Range 3",
+                  "consume Ice: Ward, infuse Ice",
+                  "consume Air: Bless, infuse Air",
+                  "consume Earth: Safeguard, infuse Earth",
+                  "\"Add +1 Heal, gain XP 1, and infuse Light if you consume two or more elements.\""],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: consume Fire: a separate Attack 2 that creates 1-hex hazardous terrain in the target's hex if featureless",
+                 "bottom: +1 Heal, XP 1 and infuse Light if you consume two or more elements"],
+      "summons": [],
+      "notes": "No enhancement marks anywhere on this card (zoomed). Top: the consume Ice box hangs from the first attack (connector line); the consume Fire and consume Earth boxes are their own attacks (divider lines)."
+    },
+    {
+      "name": "Eye of the Hurricane",
+      "number": "0472",
+      "level": "8",
+      "initiative": 25,
+      "top": {
+        "lines": ["Heal 2", "Range 4",
+                  "consume Fire: Strengthen, XP 1",
+                  "consume Ice: Attack 2: target all enemies adjacent to the target of the heal ability, Muddle, XP 1",
+                  "consume Air: Attack 1: target all enemies at exactly Range 2 from the target of the heal ability, Pierce 3, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 2", "Range 3",
+                  "consume Fire: Wound, infuse Fire",
+                  "consume Air: +3 Range, infuse Air",
+                  "consume Earth: Poison, infuse Earth",
+                  "\"Add +1 Attack, gain XP 1, and infuse Dark if you consume two or more elements.\""],
+        "summary": []
+      },
+      "ghs": ["top: the target text of both attacks is an unresolved placeholder (%data.custom.gh2e.triangles.abilities.472.1% / .472.2%); the card prints 'all enemies adjacent to the target of the heal ability' and 'all enemies at exactly Range 2 from the target of the heal ability'; the rest agrees"],
+      "xipe": "missing",
+      "custom": ["top: consume Ice: Attack 2 on all enemies adjacent to the heal target, Muddle",
+                 "top: consume Air: Attack 1 on all enemies at exactly range 2 from the heal target, Pierce 3",
+                 "bottom: +1 Attack, XP 1 and infuse Dark if you consume two or more elements"],
+      "summons": [],
+      "notes": "No enhancement marks anywhere on this card (zoomed). Top: consume Fire hangs from the heal (Strengthen on the heal target); the consume Ice and consume Air boxes are their own attacks (divider lines), so GHS nesting them inside the heal is only a grouping choice."
+    },
+    {
+      "name": "Ethereal Manifestation",
+      "number": "0473",
+      "level": "9",
+      "initiative": 98,
+      "top": {
+        "lines": ["Summon Elemental Conduit: HP 3 [square], Move 3 [square], Attack 2, Range 3; Flying; \"After each attack, infuse any.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "infuse any (box)"],
+        "summary": []
+      },
+      "ghs": ["top: the summon's 'After each attack, infuse any' text is an unresolved placeholder (%data.custom.gh2e.triangles.abilities.473.1%); stats, Flying and enhanceable stats (heal, move) agree"],
+      "xipe": "missing",
+      "custom": ["top: summon infuses any element after each of its attacks"],
+      "summons": ["Elemental Conduit"],
+      "notes": ""
+    },
+    {
+      "name": "Primal Duality",
+      "number": "0474",
+      "level": "9",
+      "initiative": 11,
+      "top": {
+        "lines": ["consume Fire and Ice: Muddle, range 4, \"The target suffers Damage 5.\"",
+                  "consume Air and Earth: \"Grant one ally within Range 4:\" Shield 2, Retaliate 2, round icon",
+                  "consume Light and Dark: Attack 2, Target 2, range 4, Curse, advantage"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["consume Light: \"Recover one card from your discard pile, infuse Dark.\"",
+                  "consume Dark: Teleport 4, infuse Light",
+                  "Loot 1",
+                  "consume any and any: +1 Loot"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "missing",
+      "custom": ["top: consume Fire and Ice: Muddle a target within range 4 and it suffers damage 5 (not an attack)",
+                 "top: consume Air and Earth: grant one ally within range 4 Shield 2 and Retaliate 2 for the round",
+                 "top: consume Light and Dark: the attack has advantage",
+                 "bottom: consume Light: recover any one card from your discard pile, infuse Dark"],
+      "summons": [],
+      "notes": "Neither half has corner icons (not lost, no XP box), including the bottom's recover. Every top row and the first two bottom rows are optional consume abilities; only Loot 1 is unconditional."
+    }
+  ],
+  "summons": [
+    "Chromatic Construct (Elemental Juggernaut top, level 7): HP 7 [square], Move 3 [square], Attack 0, Range - (melee); \"Add +1 Attack for each element that is strong or waning.\"",
+    "Elemental Conduit (Ethereal Manifestation top, level 9): HP 3 [square], Move 3 [square], Attack 2, Range 3; Flying; \"After each attack, infuse any.\""
+  ],
+  "mechanics": [
+    "Wild element: consume any / infuse any (Ice Spikes top, Formless Power top+bottom, Flash of Brilliance bottom, Confluence of Elements top, Ethereal Manifestation bottom + Elemental Conduit, Primal Duality bottom)",
+    "Double consumes (two elements at once): Obsidian Shards top+bottom, Winter's Edge top+bottom, Confluence of Elements top (any+any x3), Primal Duality top (Fire+Ice, Air+Earth, Light+Dark) and bottom (any+any)",
+    "Split element icons (one pill with two half elements; GHS reads 'one of the two'): infuse Fire|Ice, Air|Earth, Light|Dark in turn (Pulsing Cores bottom), infuse in boxes (Pragmatic Reinforcement, Duskstorm, Elemental Juggernaut, Confluence of Elements bottoms), infuse inside consume rows (Obsidian Shards, Winter's Edge, Pragmatic Reinforcement, Duskstorm tops/bottoms), consume Air|Earth (Pragmatic Reinforcement top) and Fire|Ice (Duskstorm top)",
+    "Multi-element menu with a 'consume two or more' bonus: +1 Target and XP 1 (Malleable Evocation top, Shaping the Ether top), +1 Heal, XP 1, infuse Light (Prismatic Barrage bottom), +1 Attack, XP 1, infuse Dark (Eye of the Hurricane bottom)",
+    "+1 Move if one or more elements are strong or waning (Stoking Hail, Infernal Vortex, Frigid Torrent, Dual Nature bottoms); summon +1 Attack per strong or waning element (Chromatic Construct)",
+    "Element manipulation: move one waning element to strong (Malleable Evocation bottom); infuse an element whenever an enemy consumes it (Lingering Essence top, persistent); per-turn infusion track over six turns (Pulsing Cores bottom, slots, XP on 2/4/6)",
+    "Persistent start-of-turn consume: consume any for +1 Attack on all attacks that turn (Formless Power bottom)",
+    "Grant abilities to an ally: Move 2 + Jump (Magma Scales top), Shield 2 + Retaliate 2 (Magma Scales bottom, Primal Duality top), Move 2 + Shield 1 + Muddle adjacent (Gravel Guard top), Retaliate 2 range 2 with Ice (Empowering Flame bottom), Attack 3 (Winter's Edge bottom), Shield 2 to the heal target (Pragmatic Reinforcement top)",
+    "Recover cards: you or an ally recovers a level 1 card (Flash of Brilliance top), heal target recovers a level 1 card (Pragmatic Reinforcement top), recover any card from your discard (Primal Duality bottom); none of these halves is lost",
+    "Ward and Safeguard conditions (Malleable Evocation top, Arresting Gale bottom, Prismatic Barrage bottom); Bless on allies (Malleable Evocation top, Winter's Edge bottom, Prismatic Barrage bottom); Invisible on allies (Encompassing Shadow top, Duskstorm top for allies in the red hexes)",
+    "Disadvantage aura: attacks targeting you or adjacent allies this round gain disadvantage (Encompassing Shadow bottom); advantage on an attack (Primal Duality top)",
+    "Chain attack: -1 Attack / +2 Range per enemy already attacked, each next target within range 2 of the previous (Chain Lightning top)",
+    "Attacks targeted relative to the heal target: all enemies adjacent to it, all enemies at exactly range 2 from it (Eye of the Hurricane top)",
+    "Map features: create a Damage 2 trap and damage 1 to enemies adjacent to it (Gravel Guard bottom); create 1-hex hazardous terrain in the target's featureless hex (Prismatic Barrage top)",
+    "Damage negation for you or an adjacent ally, 2 slots (Obsidian Shards bottom); direct damage 5 without an attack (Primal Duality top)",
+    "Consume-converted area: consuming Fire turns a single-target attack into a 3-hex area (Pulsing Cores top)",
+    "Summons: Chromatic Construct (Elemental Juggernaut), Elemental Conduit (Ethereal Manifestation)"
+  ],
+  "unclear": [
+    "Magma Scales top: whether the consume Air row (Disarm, range 1, infuse Air) is part of the grant (the ally disarms an enemy adjacent to it) or performed by you; it is printed under the granted Move with no connector line. GHS nests it inside the grant.",
+    "Gravel Guard top: whether 'Muddle: target all, range 1' is granted (enemies adjacent to the ally) or yours (enemies adjacent to you); it is printed inside the grant block. GHS nests it inside the grant.",
+    "Winter's Edge bottom: whether 'target 2 allies, range 3' applies to both Strengthen and Bless or only to Bless (the pill follows the Bless icon). GHS attaches it to Bless only.",
+    "Split element icons (Pulsing Cores, Obsidian Shards, Winter's Edge, Pragmatic Reinforcement, Duskstorm, Elemental Juggernaut, Confluence of Elements): read as 'one of the two elements' following GHS; the red X on a split consume icon (Pragmatic Reinforcement, Duskstorm) sits on one half only, so check the 2e rule that a split consume means either element.",
+    "Lingering Essence top: persistent with no lost icon and no slots; when it ends (end of scenario?) is a rules question."
+  ]
+}

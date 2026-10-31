@@ -58,6 +58,8 @@ def main():
     os.makedirs(DOCS, exist_ok=True)
     rows = []
     for f in sorted(glob.glob(os.path.join(HERE, "sheets", "*.json"))):
+        if f.endswith(".B.json"):
+            continue  # a second reading, folded into the main sheet by compare_reads + a check
         with open(f, encoding="utf-8") as fh:
             sheet = json.load(fh)
         text, n, customs, ag, hg = render(sheet)

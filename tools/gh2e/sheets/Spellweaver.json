@@ -1,0 +1,584 @@
+{
+  "class": "Spellweaver",
+  "read_by": "image reader, 2026-10-31",
+  "cards": [
+    {
+      "name": "Reviving Ether",
+      "number": "002",
+      "level": "1",
+      "initiative": 80,
+      "top": {
+        "lines": ["\"Recover all cards in your lost pile.\"", "infuse any (corner box)"],
+        "summary": ["unrecoverable", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [square]", "Jump"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": ["top: recover all cards in your lost pile; this card itself can never be recovered (the unrecoverable icon)"],
+      "summons": [],
+      "notes": "Class-wide: GHS numbers the cards 61-87, the printed numbers are 002-028 (GHS = printed + 59 on every card); not counted as a disagreement. Class-wide: every corner/element box (and Inferno's ally-damage row) has a small '!' tab; its meaning is not interpreted here. The top's corner box shows a card stack with a red X (dashed outline under it) next to the lost icon: read as 'unrecoverable' (GHS flags lost + loss, Xipe Discard 'Permanently Lost')."
+    },
+    {
+      "name": "Fire Orbs",
+      "number": "003",
+      "level": "1",
+      "initiative": 69,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Target 3 [square]", "Range 3", "infuse Fire (corner box)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [square]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: Range 3 has Enhancements: 1; the card has no mark on Range (only Attack 3 [diamond] and Target 3 [square])"],
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Arcane Bolt",
+      "number": "004",
+      "level": "1",
+      "initiative": 70,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Range 3 [square]", "consume any: +1 Attack, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 4 [diamond]", "Range 3", "consume Fire: +1 Attack, Pierce 3, XP 1"],
+        "summary": ["XP 1", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Flame Strike",
+      "number": "005",
+      "level": "1",
+      "initiative": 26,
+      "top": {
+        "lines": ["Strengthen [diamond+], self", "Loot 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 1 [square]", "Range 3 [square]", "consume Fire: +1 Attack, Wound, XP 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: Strengthen has no enhancement (card: Strengthen [diamond+])"],
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Icy Blast",
+      "number": "006",
+      "level": "1",
+      "initiative": 20,
+      "top": {
+        "lines": ["Attack 2 [square]", "Range 3", "consume Ice: +1 Attack, Muddle, XP 1",
+                  "area: 7 red hexes, a centre hex and the 6 hexes around it (no grey hex) [no hex mark]"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [square]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": "Muddle is the brown question-mark diamond. Xipe area 0,0,R plus the six neighbours matches."
+    },
+    {
+      "name": "Aid from the Ether",
+      "number": "007",
+      "level": "1",
+      "initiative": 36,
+      "top": {
+        "lines": ["Heal 3 [diamond+]", "Range 3", "consume any: +1 Heal, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]", "\"When you next perform an action with [lost] this round, infuse any.\""],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: Move 2; the card prints Move 3",
+               "bottom: the lost-action trigger is not implemented; instead an extra Attack 2 whose conditional override (target adjacent to walls) infuses any element, with commented-out experiments (leftover/unfinished data, not the card)"],
+      "custom": ["bottom: this round, when you next perform an action with the lost icon, infuse any element"],
+      "summons": [],
+      "notes": "'[lost]' = the lost icon (card with a red X) printed in the text: an action whose half has the lost icon."
+    },
+    {
+      "name": "Frost Strike",
+      "number": "008",
+      "level": "1",
+      "initiative": 78,
+      "top": {
+        "lines": ["Attack 2 [square]", "Range 3 [square]", "consume Ice: Stun, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]", "consume Fire: \"Gain advantage on all your attacks this round, XP 1.\" (round icon inside the consume box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: consume Ice gives Stun but no XP 1 (card: Stun, XP 1)", "bottom: consume Fire gives the round Advantage but no XP 1 (card: XP 1)"],
+      "custom": ["bottom: consume Fire: advantage on all your attacks this round, XP 1"],
+      "summons": [],
+      "notes": "Stun is the dark blue diamond with a star burst. The bottom has no corner box; the round icon sits inside the consume box, so only the consumed effect is a round bonus."
+    },
+    {
+      "name": "Emberfrost",
+      "number": "009",
+      "level": "1",
+      "initiative": 7,
+      "top": {
+        "lines": ["Attack 2 [square]", "Range 4", "Pierce 1 [square]", "infuse Fire (corner box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Grant one ally within Range 3 [square]:\"", "Shield 1", "infuse Ice (corner box)"],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": ["top: Pierce 1 has no enhancement (card: Pierce 1 [square])"],
+      "custom": ["bottom: grant one ally within range 3 Shield 1 for the round"],
+      "summons": [],
+      "notes": "Initiative printed as '07'. Xipe: ControlActor grant (Shield 1, round) on one ally, range enhanceable."
+    },
+    {
+      "name": "Flameswell",
+      "number": "010",
+      "level": "X",
+      "initiative": 83,
+      "top": {
+        "lines": ["\"On your next four single-target ranged attack abilities, add +2 Attack to the attack.\"",
+                  "slots: 4 (XP 1 on slots 2, 4), lost after the last", "infuse Fire (corner box)"],
+        "summary": ["persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Heal 2 [square]", "Range 3 [square]", "consume Ice: Ward, XP 1"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: consume Ice gives Shield 1 for the round instead of Ward (simplification; XP 1 kept)"],
+      "custom": ["top: use slots: +2 Attack on your next four single-target ranged attack abilities"],
+      "summons": [],
+      "notes": "Xipe top: persistent BuffAttack +2, AttackType Ranged, IsSingleTargetBonus, XPTracker [0,1,0,1] (matches the XP slots). Ward is the pink diamond with a shield-flame shape (same icon as Etheric Echo's 'gain Ward'; GHS reads Ward). Corner icon: persistent card with an arrow to the lost card."
+    },
+    {
+      "name": "Ice Armor",
+      "number": "011",
+      "level": "X",
+      "initiative": 25,
+      "top": {
+        "lines": ["\"Place a character token on one ally within Range 3. On the next three sources of 2 or more damage they would suffer, negate the damage.\"",
+                  "slots: 3 (XP 1 on slots 1, 3), lost after the last", "infuse Ice (corner box)"],
+        "summary": ["persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["\"On the next three sources of 2 or more damage you would suffer, negate the damage.\"",
+                  "slots: 3 (XP 1 on slots 1, 3), lost after the last", "infuse Ice (corner box)"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": ["bottom: text typo 'tree' (card: 'three')"],
+      "xipe": ["level 9 ('Level: 9 #X'); the card is level X",
+               "top: simplified to a persistent Shield 1 on an ally against attacks only (ShieldIncomingAttacks, ValidAbilityType Attack, given to the ally), not negating sources of 2 or more damage; no Range 3 in the data (the PreventDamage version is commented out)",
+               "bottom: PreventDamage 3 without the '2 or more damage' threshold (every source of damage uses a slot)"],
+      "custom": ["top: use slots on an ally within range 3 (character token): negate the next three sources of 2 or more damage they would suffer",
+                 "bottom: use slots: negate the next three sources of 2 or more damage you would suffer"],
+      "summons": [],
+      "notes": "Both halves lost: the card is lost whichever half is played. XPTracker [1,0,1] in Xipe matches the XP slots on both halves."
+    },
+    {
+      "name": "Impaling Eruption",
+      "number": "012",
+      "level": "X",
+      "initiative": 91,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Immobilize",
+                  "area: grey (attacker) hex with 4 red hexes in a line to its right, 1 red hex above between the first and second red, 1 red hex below between the third and fourth red (doubled coords y up: G 0,0; R 2,0 4,0 6,0 8,0 3,1 7,-1) [hex marks on 3 empty hexes: 5,1 (above between the second and third red), 5,-1 (below between the second and third red), 10,0 (right of the last red)]",
+                  "infuse Earth (corner box)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [square]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": "Xipe area 0,0,G|2,0,R|4,0,R|6,0,R|8,0,R|10,0,E|3,1,R|5,1,E|5,-1,E|7,-1,R matches the picture exactly. Immobilize is the red diamond with the bound foot."
+    },
+    {
+      "name": "Freezing Nova",
+      "number": "013",
+      "level": "2",
+      "initiative": 22,
+      "top": {
+        "lines": ["Attack 2 [diamond]: target the 4 enemies closest to you within 5 hexes", "Immobilize", "infuse Ice (corner box)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [square]"],
+        "summary": []
+      },
+      "ghs": ["top: the target is a custom-text key (%data.custom.gh2e.spellweaver.abilities.72.1%), not rendered in the source; the wording can't be compared"],
+      "xipe": ["top: simplified to Target 4, Range 5 (any 4 enemies within range 5 chosen by the player), not the 4 closest enemies within 5 hexes"],
+      "custom": ["top: targets are the 4 enemies closest to you within 5 hexes (fixed by distance, not chosen)"],
+      "summons": [],
+      "notes": "No Range value is printed: 'within 5 hexes' replaces it."
+    },
+    {
+      "name": "Etheric Echo",
+      "number": "014",
+      "level": "2",
+      "initiative": 50,
+      "top": {
+        "lines": ["\"Play one level 1 card from your lost pile other than Reviving Ether to perform an action with [lost] of the card.\"", "infuse any (corner box)"],
+        "summary": ["lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]", "\"When you next perform an action with [lost] this round, gain Ward.\""],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": ["placeholder only: Level 9, Discard [Discard,Discard], top Attack 3, bottom Move 3 (the card's top text, infuse, lost icon and the bottom's Ward trigger are not implemented)"],
+      "custom": ["top: play a level 1 card from your lost pile (not Reviving Ether) and perform its lost action",
+                 "bottom: this round, when you next perform an action with the lost icon, gain Ward"],
+      "summons": [],
+      "notes": "'Reviving Ether' is printed in italics."
+    },
+    {
+      "name": "Heatwave",
+      "number": "015",
+      "level": "3",
+      "initiative": 12,
+      "top": {
+        "lines": ["Attack 4 [diamond]",
+                  "area: grey (attacker) hex bottom-left of a 6-hex triangle: 2 red right of it, 2 red in the row above, 1 red on top (doubled coords y up: G 0,0; R 2,0 4,0 1,1 3,1 2,2) [hex marks on 2 empty hexes: 4,2 (right of the top red) and 5,1 (right of the middle row)]",
+                  "infuse Fire (corner box)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Strengthen [diamond+]: target 1 ally, range 3 [square]", "\"The target adds +2 Attack to their next attack this round.\"", "infuse Fire (corner box)"],
+        "summary": ["round"]
+      },
+      "ghs": ["bottom: text typo 'The target add' (card: 'adds')"],
+      "xipe": "agrees",
+      "custom": ["bottom: the strengthened ally adds +2 Attack to their next attack this round"],
+      "summons": [],
+      "notes": "Xipe area 0,0,G|2,0,R|4,0,R|1,1,R|3,1,R|5,1,E|2,2,R|4,2,E matches. Xipe bottom: the +2 is a round BuffAttack sub-ability with XPTracker [0] (one use)."
+    },
+    {
+      "name": "Arctic Shards",
+      "number": "016",
+      "level": "3",
+      "initiative": 24,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Target 2 [square]", "Range 3", "Muddle", "infuse Ice (corner box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Heal 10 [diamond+]", "Range 3", "infuse Light (corner box)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": "agrees",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Dancing Gales",
+      "number": "017",
+      "level": "4",
+      "initiative": 33,
+      "top": {
+        "lines": ["consume Fire: Strengthen, self", "Attack 3 [square]", "Range 3", "consume Ice: Attack 2, Range 3, Muddle"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Attack 3 [diamond]", "Range 3", "Move 3 [circle]", "Attack 3 [diamond]", "Range 3", "infuse Air (corner box)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: the second attack has Conditions: Muddle; the card's second Attack 3 has no Muddle"],
+      "custom": ["top: consume Fire grants a whole ability (Strengthen self) before the attack; consume Ice grants a whole extra Attack 2, Range 3, Muddle after it"],
+      "summons": [],
+      "notes": "Top: the consumes are separate rows, not riders on the Attack 3."
+    },
+    {
+      "name": "Cold Fire",
+      "number": "018",
+      "level": "4",
+      "initiative": 67,
+      "top": {
+        "lines": ["Attack 1", "Range 3", "consume Fire: +2 Attack", "consume Ice: Immobilize",
+                  "area: 3 red hexes in a triangle, one on top and two below (no grey hex) [hex mark on the empty hex right of the top red]"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "consume any: \"Add +1 Attack to all your attacks this round, XP 1.\" (round icon inside the consume box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["top: area hex mark at -1,1 (left of the top red); the card has it right of the top red (3,1)"],
+      "custom": ["bottom: consume any: +1 Attack on all your attacks this round, XP 1"],
+      "summons": [],
+      "notes": "Top: no marks on Attack 1 or Range 3; the area hex mark is the only top mark. The two consumes are independent (either or both)."
+    },
+    {
+      "name": "Warm Up",
+      "number": "019",
+      "level": "5",
+      "initiative": 60,
+      "top": {
+        "lines": ["Attack 3 [square]", "Range 3 [square]",
+                  "\"On the next attack ability you perform from an action with [lost], add +1 Attack to all your attacks.\"",
+                  "slots: 1 (the dashed slot only), ends after it", "infuse Fire (corner box)"],
+        "summary": ["persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "Loot 2", "infuse any (corner box)"],
+        "summary": ["lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["top: simplified to a persistent +1 Attack BuffAttack the player toggles on (ToggleIsOptional, XPTracker [0]); not tied to an attack ability from a lost action"],
+      "custom": ["top: persistent, one use: the next attack ability you perform from a lost action adds +1 Attack to all its attacks"],
+      "summons": [],
+      "notes": "Top corner icon is persistent only (no lost card), so the card is discarded when the use ends."
+    },
+    {
+      "name": "Cool Down",
+      "number": "020",
+      "level": "5",
+      "initiative": 30,
+      "top": {
+        "lines": ["Heal 2 [square]", "Target 2 [square]", "Range 3", "consume any: +1 Heal, +1 Range, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 2 [square]", "Range 4", "Pierce 1 [square]", "infuse Ice (corner box)"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: Pierce 1 has no enhancement (card: Pierce 1 [square]; Xipe's enhanceable Pierce is commented out)"],
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Elemental Rays",
+      "number": "021",
+      "level": "6",
+      "initiative": 15,
+      "top": {
+        "lines": ["Attack 2 [square]", "Target 2", "Range 3", "consume any: +1 Attack, +1 Range, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Stun, Curse [diamond]: Target 3 [square], range 3", "infuse Dark (corner box)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["Initiative 10; the card prints 15",
+               "bottom: Range 3 has Enhancements: 1; the card has no mark on Range (marks only after Curse [diamond] and Target 3 [square])"],
+      "custom": [],
+      "summons": [],
+      "notes": "Bottom is a condition-only ability (no attack): Stun and Curse on 3 targets within range 3. Curse is the purple diamond with a lightning bolt."
+    },
+    {
+      "name": "Searing Glacier",
+      "number": "022",
+      "level": "6",
+      "initiative": 90,
+      "top": {
+        "lines": ["Attack 5 [diamond]", "Range 3", "consume Fire: Pierce 3, XP 1",
+                  "area: 5 red hexes in a straight diagonal line, top-left to bottom-right (no grey hex) [no hex mark]",
+                  "infuse Ice (corner box)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "\"When you next perform an action with [lost] this round, recover one card from your discard pile.\""],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: simplified to recover one discarded card immediately (RecoverDiscardedCards 1), not when you next perform a lost action this round"],
+      "custom": ["bottom: this round, when you next perform an action with the lost icon, recover one card from your discard pile"],
+      "summons": [],
+      "notes": "Xipe area 0,0,R|1,1,R|2,2,R|3,3,R|4,4,R is the same 5-hex line drawn in the other diagonal direction (a line, so equivalent under rotation)."
+    },
+    {
+      "name": "Spell Mastery",
+      "number": "023",
+      "level": "7",
+      "initiative": 71,
+      "top": {
+        "lines": ["Attack 3 [square]", "Range 4 [square]",
+                  "\"You may play one card from your discard pile to perform an action with [lost] of the card.\"",
+                  "infuse any (corner box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 5 [circle]"],
+        "summary": []
+      },
+      "ghs": ["top: text adds '(the card is moved to your lost pile)'; the card doesn't print that clause"],
+      "xipe": "missing",
+      "custom": ["top: may play one card from your discard pile and perform its lost action"],
+      "summons": [],
+      "notes": "Xipe: no named file; the input's unmatched 'x' entry is a key collision of 7 placeholder files 99080_Spellweaver2_X.yml ... 99086_Spellweaver2_X.yml (all Attack 3 top / Move 3 bottom stubs, Discard [Discard,Discard]). Only 99082_X (Level 7, Initiative 98) has an ID with no named card, and 82 is Spell Mastery's GHS number: it is Spell Mastery's unfinished placeholder. The other six X files reuse the IDs of named cards (80 Elemental Rays, 81 Searing Glacier, 83 Chromatic Explosion, 84 Frostflare Orbs, 85 Twin Beams, 86 Freezing Vortex). The top has no corner icon: not lost itself."
+    },
+    {
+      "name": "Chromatic Explosion",
+      "number": "024",
+      "level": "7",
+      "initiative": 10,
+      "top": {
+        "lines": ["Attack 4", "Range 3", "Poison", "Muddle",
+                  "area: 4 red hexes in a rhombus, 2 on top and 2 below shifted right (no grey hex; doubled coords y up: R 0,0 2,0 -1,1 1,1) [hex mark on the empty hex below between the two lower reds, 1,-1]",
+                  "Heal 4: target all allies in the red hexes of the attack ability", "Strengthen", "Bless",
+                  "infuse Fire, Ice, Air, Earth, Light, Dark (one box with all six)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["\"Choose an ally within Range 3. That ally gains Shield 3 for the next attack targeting them this round.\"",
+                  "consume Fire: \"The attacker suffers damage 3, XP 1.\"",
+                  "consume Ice: +3 Shield, XP 1"],
+        "summary": ["round"]
+      },
+      "ghs": ["top: Heal 4 target is a custom-text key (%data.custom.gh2e.spellweaver.abilities.83.1%), not rendered in the source; the wording can't be compared"],
+      "xipe": ["top: Range 3 not enhanceable (agrees); the heal sub-ability uses 'Condition: [Strengthen, Bless]' (singular key) and Filter Ally, with no restriction to the red hexes visible in the data",
+               "bottom: Range 3 has Enhancements: 1; the card has no enhancement marks at all",
+               "bottom: simplified to Shield 3 for the whole round, not only the next attack targeting the ally; the consume Fire (attacker suffers damage 3, XP 1) and consume Ice (+3 Shield, XP 1) are missing"],
+      "custom": ["top: Heal 4, Strengthen, Bless on all allies standing in the attack's red hexes",
+                 "top: infuses all six elements",
+                 "bottom: ally within range 3 gains Shield 3 against the next attack targeting them this round; consume Fire: that attacker suffers damage 3, XP 1; consume Ice: +3 Shield, XP 1"],
+      "summons": [],
+      "notes": "Xipe area 0,0,R|2,0,R|1,1,R|-1,1,R|1,-1,E matches. No enhancement marks except the area hex mark. Poison is the grey-green diamond with a skull; Bless the yellow diamond with a triangle in a circle."
+    },
+    {
+      "name": "Frostflare Orbs",
+      "number": "025",
+      "level": "8",
+      "initiative": 46,
+      "top": {
+        "lines": ["Attack 5 [diamond]", "Target 3 [square]", "Range 4", "consume Ice: Stun, XP 1", "infuse Fire (corner box)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Attack 1", "Range 3", "consume any: +1 Attack, XP 1",
+                  "area: 3 red hexes in a triangle, one on top and two below (no grey hex) [hex mark on the empty hex right of the top red]"],
+        "summary": []
+      },
+      "ghs": "agrees",
+      "xipe": ["Initiative 78; the card prints 46", "bottom: area hex mark at -1,1 (left of the top red); the card has it right of the top red (3,1)"],
+      "custom": [],
+      "summons": [],
+      "notes": "Bottom area is the same shape as Cold Fire's top."
+    },
+    {
+      "name": "Twin Beams",
+      "number": "026",
+      "level": "8",
+      "initiative": 19,
+      "top": {
+        "lines": ["Attack 1 [square]", "area: grey (attacker) hex and 2 red hexes in a line to its right [no hex mark]", "consume Fire: +1 Attack, Wound",
+                  "Attack 1 [diamond]", "area: grey (attacker) hex and 2 red hexes in a line to its right [no hex mark]", "consume Ice: +1 Attack, Push 2, Muddle"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "\"When you next perform an action with [lost] this round, after the action perform:\"", "Attack 3", "Range 3"],
+        "summary": ["round"]
+      },
+      "ghs": "agrees",
+      "xipe": ["Discard [Lost,Discard] makes the top lost; the card's top has XP 1 only (no lost icon)",
+               "bottom: Attack 3, Range 3 is performed at once, not after your next lost action this round"],
+      "custom": ["bottom: this round, after you next perform an action with the lost icon, perform Attack 3, Range 3"],
+      "summons": [],
+      "notes": "Top: two separate line attacks, each with its own consume (Fire on the first, Ice on the second)."
+    },
+    {
+      "name": "Freezing Vortex",
+      "number": "027",
+      "level": "9",
+      "initiative": 41,
+      "top": {
+        "lines": ["Attack 5 [square]", "Range 3",
+                  "\"After the attack ability, kill each target whose hit point value is 2 or less and create one 1-hex obstacle tile in the featureless hex they occupied.\"",
+                  "area: 7 red hexes, a centre hex and the 6 hexes around it (no grey hex) [no hex mark]",
+                  "infuse Ice (corner box)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["\"Designate a hex within Range 4.\"", "Pull 3: target all enemies within Range 4 of the designated hex",
+                  "\"Pull toward the designated hex.\"", "infuse Ice (corner box)"],
+        "summary": []
+      },
+      "ghs": ["bottom: Pull 3 target is a custom-text key (%data.custom.gh2e.spellweaver.abilities.86.3%), not rendered in the source; the rest agrees"],
+      "xipe": ["top: kill filter Health <= 2 and RockSingle created on the targets' tiles; the 'featureless hex' condition is not visible in the data",
+               "bottom: Pull 3, Range 4, Target all, PullTowardsTile; whether the range-4 radius is measured from the designated hex (card) is not visible in the data"],
+      "custom": ["top: after the attack, kill each target at 2 or fewer hit points and create a 1-hex obstacle in its hex if featureless",
+                 "bottom: designate a hex within range 4; pull all enemies within range 4 of that hex 3 toward it"],
+      "summons": [],
+      "notes": "No enhancement marks on the bottom."
+    },
+    {
+      "name": "Inferno",
+      "number": "028",
+      "level": "9",
+      "initiative": 96,
+      "top": {
+        "lines": ["Attack 2: target all enemies within 2 hexes", "Pierce 2",
+                  "\"All allies within Range 2 suffer damage 2.\" (in a '!' box)", "infuse Fire (corner box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"All allies and enemies in the same room as you suffer damage 4.\"", "infuse Fire (corner box)"],
+        "summary": ["XP 1", "lost"]
+      },
+      "ghs": "agrees",
+      "xipe": ["bottom: the half's only (first) ability has AutoTrigger: True"],
+      "custom": ["top: allies within range 2 suffer damage 2", "bottom: all allies and enemies in your room suffer damage 4 (Targeting: Room in Xipe)"],
+      "summons": [],
+      "notes": "No enhancement marks anywhere on this card. Xipe top: Attack Range 2, Target all, TreatAsMelee; ally Damage 2 auto-triggered after it."
+    }
+  ],
+  "summons": [],
+  "mechanics": [
+    "Delayed trigger 'when you next perform an action with [lost] this round' (round bonus): infuse any (Aid from the Ether bottom), gain Ward (Etheric Echo bottom), recover one discarded card (Searing Glacier bottom), Attack 3 Range 3 after the action (Twin Beams bottom); persistent one-use version: +1 Attack to all attacks of the next attack ability from a lost action (Warm Up top)",
+    "Play a card from a pile and perform its lost action: level 1 card from the lost pile, not Reviving Ether (Etheric Echo top); any card from the discard pile (Spell Mastery top)",
+    "Recover all lost cards, the card itself unrecoverable (Reviving Ether top)",
+    "Consume any element (wild) for bonuses: Arcane Bolt top, Aid from the Ether top, Cool Down top, Elemental Rays top, Cold Fire bottom, Frostflare Orbs bottom; Fire/Ice consumes throughout, two independent consumes on one ability (Cold Fire top, Chromatic Explosion bottom)",
+    "Consume grants a whole separate ability (Dancing Gales top: Strengthen self; extra Attack 2 Range 3 Muddle)",
+    "Consume grants a round effect: advantage on all attacks (Frost Strike bottom), +1 Attack on all attacks (Cold Fire bottom)",
+    "Use-slot persistents: +2 Attack on the next four single-target ranged attack abilities (Flameswell top, 4 slots, lost); negate the next three sources of 2 or more damage, on an ally marked with a character token (Ice Armor top) or on yourself (Ice Armor bottom), 3 slots each, lost",
+    "Buffs on allies: Shield 1 for the round (Emberfrost bottom); Strengthen + next attack +2 (Heatwave bottom); Shield 3 against the next attack targeting them, with consume Fire = damage 3 to the attacker, consume Ice = +3 Shield (Chromatic Explosion bottom); Heal 4 + Strengthen + Bless on allies in the attack's red hexes (Chromatic Explosion top)",
+    "Special targeting: the 4 closest enemies within 5 hexes (Freezing Nova top); all enemies within 2 hexes (Inferno top); all enemies within range 4 of a designated hex, pulled toward it (Freezing Vortex bottom)",
+    "Execute + terrain: kill targets at 2 or fewer HP after the attack and create 1-hex obstacles in their featureless hexes (Freezing Vortex top)",
+    "Damage to allies: allies within range 2 suffer 2 (Inferno top); all allies and enemies in your room suffer 4 (Inferno bottom)",
+    "Infuse all six elements at once (Chromatic Explosion top)",
+    "Conditions used: Ward (Flameswell bottom, Etheric Echo bottom), Bless (Chromatic Explosion top), Curse + Stun as a non-attack ability (Elemental Rays bottom), Strengthen, Muddle, Immobilize, Poison, Wound, Stun; advantage (Frost Strike bottom)",
+    "No summons"
+  ],
+  "unclear": [
+    "Reviving Ether top: the corner icon 'card stack with a red X' beside the lost icon is read as 'unrecoverable' (GHS flag 'loss', Xipe 'Permanently Lost' agree); the exact 2e rule wording for it was not checked",
+    "Class-wide: the small '!' tab on every element/corner box and on Inferno's 'All allies within Range 2 suffer damage 2' row; its rule meaning is not decided here",
+    "Freezing Nova top / Inferno top: 'within 5 hexes' / 'within 2 hexes' (distance, possibly without line of sight) versus a Range value is a rules question; Xipe uses Range",
+    "Warm Up top: a use track with a single dashed slot and no further slots; read as one use that starts on play",
+    "Spell Mastery top: where the card played from the discard pile goes afterwards is not printed (GHS adds 'moved to your lost pile'); rules question",
+    "Chromatic Explosion top: whether 'all allies in the red hexes' can include yourself is a rules question"
+  ]
+}
