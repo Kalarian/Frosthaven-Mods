@@ -220,6 +220,20 @@ namespace FrosthavenMods
                 // wide empty sides, the user 2026-10-30) uses the half's width between the 24 px margins: negative
                 // margins widen it past its rect
                 float left = half.rect.xMin + want - r.xMin, right = r.xMax - (half.rect.xMax - want);
+                // but never into something beside it: an area in the next column (Throw Voice: the widened text ran
+                // under the hexes)
+                bool besideLeft = false, besideRight = false;
+                for (Transform col = rt; col != null && col != rows; col = col.parent)
+                    if (col.parent != null)
+                        foreach (RectTransform sib in col.parent.Cast<Transform>().OfType<RectTransform>())
+                        {
+                            if (sib == col || !sib.gameObject.activeSelf || !Extent(sib, half).Any()) continue;
+                            Rect sr = In(sib, half);
+                            if (sr.yMax <= r.yMin || sr.yMin >= r.yMax) continue;   // above or below: not beside
+                            if (sr.center.x < r.center.x) besideLeft = true; else besideRight = true;
+                        }
+                if (besideLeft) left = Mathf.Max(0f, left);
+                if (besideRight) right = Mathf.Max(0f, right);
                 if (Mathf.Abs(left) < 0.5f * f && Mathf.Abs(right) < 0.5f * f) continue;
                 t.margin = new Vector4(left * k, t.margin.y, right * k, t.margin.w);
                 // a new margin doesn't mark the text's preferred height stale: without this the rows kept their one-line

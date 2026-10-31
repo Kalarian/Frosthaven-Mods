@@ -474,6 +474,16 @@ def _text_modifiers(t):
     t = re.sub(r"</?nobr>", "", t)
     t = re.sub(r"\$(?:FHS_)?Range\$", "<sprite name=Range>", t)
     t = re.sub(r"\$FHS_(\w+)\$", r"$\1$", t)
+    t = re.sub(r"<b></b>\s*", "", t).strip()
+    t = re.sub(r"\$within\$\s*", "", t)   # "Affect all allies $within$ <Range> 3" (Echoing Aria)
+    # targets with "self" or a qualifier, written in Frosthaven's pill words (Rest in the Shade: "◎ all <ally> on hexes
+    # with X and self"): Sap Warmth, Virulent Strain (the user's challenge, 2026-10-30)
+    q = re.fullmatch(r"\$Target_SelfAndAllAlliesWithin\$\s*(<sprite name=Range>.*)", t)
+    if q:
+        return ["<sprite name=Target> all <sprite name=Allies> and self", _clean(q.group(1))]
+    q = re.fullmatch(r"\$Target_AllEnemiesAdjacentToEnemiesWith\$\s*(.+)", t)
+    if q:
+        return [f"<sprite name=Target> all <sprite name=Enemy> adjacent to <sprite name=Enemy> with {q.group(1).strip()}"]
     # "Affect all (adjacent) allies [with X]" under an ability is Frosthaven's pill target ("◎ all <ally> ... and self":
     # Rest in the Shade; Succumb to the Gift's bless crowded its text line, the user 2026-10-30)
     a = re.fullmatch(r"\$Affect_(SelfAnd)?(\w+?)(Allies|Ally)(MovedThrough|Within)?(?:Range(\d+))?\$\s*(.*?)\s*", t)

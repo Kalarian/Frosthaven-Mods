@@ -33,7 +33,7 @@ Layout:
             - Column:
             - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
             - Column:
-                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies> $FHS_within$ <sprite name=Range> *THeal.Range* and self <sprite name=Range> *THeal.Range*</link>"
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies> and self <sprite name=Range> *THeal.Range*</link>"
             - Column:
     Bottom:
         - Active:

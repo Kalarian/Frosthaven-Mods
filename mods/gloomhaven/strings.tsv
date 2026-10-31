@@ -1241,7 +1241,6 @@ FHS_Target_AllAdjacentEnemies	Target all adjacent <sprite name=Enemy>
 FHS_Target_AllAlliesAndEnemies	Target all <sprite name=Allies> and <sprite name=Enemy>
 FHS_Target_AllEnemies	Target all <sprite name=Enemy>
 FHS_Target_AllEnemiesAdjacentToAnyOneSummonedAlly	Target all <sprite name=Enemy> adjacent to any one summoned <sprite name=Allies>
-FHS_Target_AllEnemiesAdjacentToEnemiesWith	Target all <sprite name=Enemy> adjacent to <sprite name=Enemy> with
 FHS_Target_AllEnemiesAdjacentToHexesMovedThrough	Target all <sprite name=Enemy> adjacent to any hexes moved through
 FHS_Target_AllEnemiesAtExactly	Target all <sprite name=Enemy> at exactly
 FHS_Target_AllEnemiesMovedThrough	Target all <sprite name=Enemy> moved through
@@ -1251,7 +1250,6 @@ FHS_Target_OneAdjacentAlliedPlayer	Target one adjacent allied mercenary
 FHS_Target_OneAdjacentAlly	Target one adjacent <sprite name=Allies>
 FHS_Target_OneAdjacentEnemy	Target one adjacent <sprite name=Enemy>
 FHS_Target_SelfAndAllAdjacentAllies	Target self and all adjacent <sprite name=Allies>
-FHS_Target_SelfAndAllAlliesWithin	Target self and all <sprite name=Allies> within
 FHS_Target_TwoHexInstead	Target all <sprite name=Enemy> up to two hexes away instead
 FHS_TatteredWolf	Tattered Wolf
 FHS_ThornShooter	Thorn Shooter

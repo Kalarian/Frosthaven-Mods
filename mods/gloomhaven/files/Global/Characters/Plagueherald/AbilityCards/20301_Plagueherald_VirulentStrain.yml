@@ -47,5 +47,10 @@ Layout:
     Top:
         - Row: "$FHS_GH_301_T$"
     Bottom:
-        - Row: "<size=150%><sprite name=Poison>"
-        - Row: "$FHS_Target_AllEnemiesAdjacentToEnemiesWith$ <nobr><sprite name=Poison></nobr>"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Poison>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Enemy> adjacent to <sprite name=Enemy> with <sprite name=Poison></link>"
+            - Column:
