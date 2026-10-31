@@ -22,8 +22,8 @@ updates and removes the mods, and it also gives you:
 To install:
 
 1. Download **`Frosthaven-Companion-<version>.zip`** from the
-   [latest release](https://github.com/Kalarian/Frosthaven-Mods/releases/latest) and unzip it anywhere. There's
-   nothing to install.
+   [latest release](https://github.com/Kalarian/Frosthaven-Mods/releases/latest) and unzip it anywhere (the app
+   itself needs no installing).
 2. Close Frosthaven.
 3. Run **Frosthaven Companion.exe** and click **Install** in its Mods tab.
 
