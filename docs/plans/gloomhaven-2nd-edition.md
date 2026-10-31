@@ -126,6 +126,29 @@ The plugin assumes one pack per model (`GHClasses.PackOf(ECharacter)`, `PackClas
 - **Check:** a 1st edition campaign loads and plays unchanged; co-op join still checks the pack.
 
 ### Step 2: the 2e reader and a pilot class
+
+**Design (2026-10-31, after reading `gh_port.main`):** `gh_port` takes a dict of Gloomhaven ruleset files
+(`files = gh_files(gh)`: `Character/<cls>.yml`, `AbilityCard/*.yml`, `HeroSummon/*.yml`) and converts them as
+text. So the 2e reader writes a **virtual Gloomhaven install**: Gloomhaven-format YAML in `tools/gh2e/build/`, and
+`gh_port` gets a `--source gh2e` switch that reads `files` from there instead of the Steam install. Assets
+(models, art, sounds) still come from the Steam install by model name.
+
+How the parts fit:
+- **Card IDs:** the reader numbers 2e cards 10001+, so `convert_card`'s +20000 gives 30001+. That's a range of
+  its own, with no change to `convert_card`.
+- **Class files:** `Character/Bruiser.yml` with `ID: BruiserID`, `Model: Brute`. Classes whose names repeat get
+  an ID suffix (`Tinkerer2ID`).
+- **Where the card YAML comes from, per class:**
+  - **Xipe's YAML** for the six classes he made, corrected by the sheet's `xipe` differences. It's already in the
+    format and has layouts.
+  - **Generated from Secretariat's action tree** for the other six with Secretariat data. Card values come from the
+    sheet wherever it disagrees.
+  - **Hand-written** for the five image-only classes, from their double-read sheets.
+- **Special rules:** one table per class (`tools/gh2e/effects/<Class>.py`), the 2e version of `CARD_FIXES`. Each
+  sheet `custom` entry gets a YAML translation and a note.
+- **Pack constants** become per-pack, and the 2e pack builds into `mods/gloomhaven2e/`: `PACK`, `PACK_TITLE`,
+  `PACK_VERSION`, `OUT`, `STARTING_CLASSES`, `CLASS_EXTRAS`, `CLASS_ICONS`.
+
 - `tools/gh2e_import.py`: Secretariat JSON -> Gloomhaven digital AbilityCard YAML (abilities, enhancement marks,
   lost/persistent, layout rows from its grouping), so `convert_card`, `gh_layout` and `GHCardStyle` work unchanged.
   This needs `gh_port.main()` split into reading, converting and assembling.
