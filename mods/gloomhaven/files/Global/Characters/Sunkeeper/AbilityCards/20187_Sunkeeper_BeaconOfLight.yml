@@ -28,8 +28,13 @@ Data:
                     XPTracker: [1,0,1,0,1]
 Layout:
     Top:
-        - Row: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
-        - Row: "$FHS_Affect_SelfAndAllAllies$ $FHS_within$ <nobr><sprite name=Range> *THeal.Range*</nobr>"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies> $FHS_within$ <sprite name=Range> *THeal.Range* and self <sprite name=Range> *THeal.Range*</link>"
+            - Column:
     Bottom:
         - Active:
             Ability: BInfuse

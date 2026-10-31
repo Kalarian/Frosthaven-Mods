@@ -49,7 +49,7 @@ Layout:
             ParentAbility: TAugment
             ActiveBonusLayout: "$FHS_Augment_OnYourMeleeAttacks$ <size=130%><voffset=-1><sprite name=ConsumeIce></voffset>: <nobr><size=100%><sprite name=Stun></nobr>"
             AugmentAbilityLayout:
-                - Row: "<size=130%><voffset=-1><sprite name=ConsumeIce></voffset>: <nobr><size=100%><sprite name=Stun></nobr>"
+                - Row: "<size=125%><sprite name=ConsumeIce>: <sprite name=Stun>"
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:

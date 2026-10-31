@@ -65,6 +65,5 @@ Layout:
                     - Column:
                     - Column: "<size=150%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
                     - Column:
-                        - Row: "<link=fhpill><sprite name=Range> *BRetaliate.RetaliateRange*</link>"
+                        - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies> and self <sprite name=Range> *BRetaliate.RetaliateRange*</link>"
                     - Column:
-                - Row: "$FHS_Affect_SelfAndAllAllies$"

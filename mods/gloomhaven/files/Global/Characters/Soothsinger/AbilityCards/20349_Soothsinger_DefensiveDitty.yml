@@ -37,8 +37,13 @@ Layout:
             Icon: Positive_AttackPlus
             ListLayout: "<sprite name=Shield> 1, $FHS_Affect_AllAllies$"
             Layout:
-                - Row: "<size=150%><sprite name=Shield> 1"
-                - Row: "$FHS_Affect_AllAllies$"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Shield> 1"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies></link>"
+                    - Column:
     Bottom:
         - Active:
             Ability: BPrevent

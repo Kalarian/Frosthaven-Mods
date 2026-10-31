@@ -56,7 +56,7 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
@@ -65,7 +65,7 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
             - Column:
     Bottom:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row: "<size=150%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
         - Divider:
         - Row:

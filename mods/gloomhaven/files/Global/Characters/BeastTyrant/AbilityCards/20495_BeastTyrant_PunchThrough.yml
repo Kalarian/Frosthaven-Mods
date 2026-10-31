@@ -46,7 +46,7 @@ Data:
                 AnimOverload: RadialBeneficial
 Layout:
     Top:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:

@@ -54,4 +54,4 @@ Layout:
             Layout:
                 - Consume:
                     Name: BCLight
-                    Text: "<nobr><sprite name=Muddle></nobr> $FHS_Target_AllAdjacentEnemies$, <nobr><sprite name=CreateDark>, <sprite name=XP1></nobr>"
+                    Text: "<nobr><sprite name=Muddle></nobr> $FHS_Target_AllAdjacentEnemies$, <nobr><voffset=-1.5><sprite name=CreateDark></voffset></size> </nobr>, <sprite name=XP1>"

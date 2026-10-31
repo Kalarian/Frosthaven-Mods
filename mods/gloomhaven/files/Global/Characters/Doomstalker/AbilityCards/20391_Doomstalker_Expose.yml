@@ -83,4 +83,4 @@ Layout:
             Layout:
                 - Row: "$FHS_Doom_MarkText$"
                 - Row: "$FHS_GH_391_B$"
-                - Row: "<size=70%>$FHS_Doom_DiscardReminderText$"
+                - Row: "$FHS_Doom_DiscardReminderText$"

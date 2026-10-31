@@ -45,11 +45,7 @@ Layout:
         - Column:
             - Row: "£Area£"
     Bottom:
-        - Row:
-            - ColumnWidths: "88,12"
-            - Column:
-                - Row: "$FHS_GH_410_B$"
-            - Column:
+        - Row: "$FHS_GH_410_B$"
         - Row: "<size=50%> "
         - Active:
             Ability: BImmune

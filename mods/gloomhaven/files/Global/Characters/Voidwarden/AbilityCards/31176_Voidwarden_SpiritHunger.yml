@@ -56,12 +56,7 @@ Layout:
         - Row: "<size=20%> "
         - Row: "$FHS_JOTL_176_T_2$"
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "20,60,20"
-            - Column:
-            - Column:
-                - Row: "<size=150%><sprite name=Heal> X"
-            - Column:
+        - Row: "<size=150%><sprite name=Heal> X"
         - Row: "<size=20%> "
         - Row: "$FHS_JOTL_176_T_3$"
     Bottom:

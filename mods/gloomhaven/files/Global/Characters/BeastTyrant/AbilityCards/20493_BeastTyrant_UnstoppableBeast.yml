@@ -43,14 +43,14 @@ Layout:
     Top:
         - ColumnWidths: "70,25"
         - Column:
-            - Row: "$FHS_GH_Command$"
+            - Row: "<size=1%><link=fhcommand> </link>"
             - Row: "<size=150%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
             - Row: "<size=20%> "
             - Conditional:
                 Layout:
                     - Consume:
                         Name: TCEarth
-                        Text: "<nobr>+1 <sprite name=Attack>, <sprite name=XP1></nobr>"
+                        Text: "<nobr>+1 <sprite name=Attack> </nobr>, <sprite name=XP1>"
         - Column: "£Area£"
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

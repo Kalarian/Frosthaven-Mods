@@ -60,22 +60,17 @@ Data:
                 AnimOverload: Command
 Layout:
     Top:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row: "<size=120%> "
-        - Row:
-            - ColumnWidths: "20,60,20"
-            - Column:
-            - Column:
-                - Row: "<size=150%><sprite name=Attack> *TAllyAttack1*"
-                - Row: "<size=50%> "
-                - Row: "<size=150%><sprite name=Move> *TAllyMove1* <size=100%><voffset=1>@TAllyMove1@"
-                - Row: "<size=50%> "
-                - Row: "<size=150%><sprite name=Attack> *TAllyAttack2*"
-                - Row: "<size=50%> "
-                - Row: "<size=150%><sprite name=Move> *TAllyMove2* <size=100%><voffset=1>@TAllyMove2@"
-                - Row: "<size=50%> "
-                - Row: "<size=150%><sprite name=Attack> *TAllyAttack3*"
-            - Column:
+        - Row: "<size=150%><sprite name=Attack> *TAllyAttack1*"
+        - Row: "<size=50%> "
+        - Row: "<size=150%><sprite name=Move> *TAllyMove1* <size=100%><voffset=1>@TAllyMove1@"
+        - Row: "<size=50%> "
+        - Row: "<size=150%><sprite name=Attack> *TAllyAttack2*"
+        - Row: "<size=50%> "
+        - Row: "<size=150%><sprite name=Move> *TAllyMove2* <size=100%><voffset=1>@TAllyMove2@"
+        - Row: "<size=50%> "
+        - Row: "<size=150%><sprite name=Attack> *TAllyAttack3*"
     Bottom:
         - Row: "$FHS_GH_496_B$"
         - Row: "<size=50%> "

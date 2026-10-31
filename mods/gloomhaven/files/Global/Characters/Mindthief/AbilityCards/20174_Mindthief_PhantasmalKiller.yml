@@ -54,7 +54,7 @@ Layout:
             ParentAbility: TAugment
             ActiveBonusLayout: "$FHS_Augment_OnYourMeleeAttacks$ <size=150%><voffset=-2><sprite name=ConsumeDark></voffset><size=80%>: Kill one normal target instead"
             AugmentAbilityLayout:
-                - Row: "<sprite name=ConsumeDark><voffset=2>: Kill one normal target instead"
+                - Row: "<sprite name=ConsumeDark>: Kill one normal target instead"
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:

@@ -69,7 +69,7 @@ Layout:
             Layout:
                 - Consume:
                     Name: BCIce
-                    Text: "<size=150%><sprite name=Move> 3"
+                    Text: "<sprite name=Move> 3"
         - Row: "<size=50%> "
         - Row: "$FHS_JOTL_163_B$"
         - Row: "<size=50%> "

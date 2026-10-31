@@ -55,13 +55,23 @@ Layout:
             Icon: Positive_Shield
             ListLayout: "<sprite name=Shield> *BShield*, $FHS_Affect_AllSummonedAllies$"
             Layout:
-                - Row: "<size=150%><sprite name=Shield> *BShield*"
-                - Row: "$FHS_Affect_AllSummonedAllies$"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Shield> *BShield*"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Target> all summoned <sprite name=Allies></link>"
+                    - Column:
         - Divider:
         - Active:
             Ability: BRetaliate
             Icon: Positive_Retaliate
             ListLayout: "<sprite name=Retaliate> *BRetaliate*, $FHS_Affect_AllSummonedAllies$"
             Layout:
-                - Row: "<size=150%><sprite name=Retaliate> *BRetaliate*"
-                - Row: "$FHS_Affect_AllSummonedAllies$"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Retaliate> *BRetaliate*"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Target> all summoned <sprite name=Allies></link>"
+                    - Column:

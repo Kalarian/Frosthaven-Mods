@@ -48,12 +48,7 @@ Layout:
                 - Consume:
                     Name: TCEarth
                     Text: "+1 <sprite name=Range>, <sprite name=XP1>"
-        - Row:
-            - ColumnWidths: "20, 60, 20"
-            - Column:
-            - Column:
-                - Row: "<size=150%><sprite name=Attack> X"
-            - Column:
+        - Row: "<size=150%><sprite name=Attack> X"
         - Row: "$FHS_GH_142_T_2$"
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove*"

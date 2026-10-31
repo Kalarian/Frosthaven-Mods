@@ -52,7 +52,7 @@ Layout:
                 Layout:
                     - Consume:
                         Name: TCAir
-                        Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Push> 1, <sprite name=XP1></nobr>"
+                        Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Push> 1 </nobr>, <sprite name=XP1>"
         - Column:
             - Row: "£Area£"
     Bottom:

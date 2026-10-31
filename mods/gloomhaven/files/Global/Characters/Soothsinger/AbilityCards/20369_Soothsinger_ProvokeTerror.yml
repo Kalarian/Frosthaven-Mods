@@ -34,11 +34,12 @@ Layout:
         - ColumnWidths: "65,30"
         - Column:
             - Row:
-                - Data: "<size=150%><nobr><sprite name=Stun></nobr>"
-                - RowProperties:
-                    - Wrapping: False
-                    - AutoSize: True
-            - Row: "<sprite name=Range> *TStun.Range*"
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><nobr><sprite name=Stun></nobr>"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *TStun.Range*</link>"
+                - Column:
         - Column:
             - Row: "<size=200%> "
             - Row: "£Area£"

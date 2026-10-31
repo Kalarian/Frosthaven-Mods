@@ -41,11 +41,6 @@ Layout:
     Top:
         - Row: "$FHS_JOTL_037_T$"
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Dark
-            - Column:
+        - Infuse: Dark
     Bottom:
         - Row: "$FHS_JOTL_037_B$"

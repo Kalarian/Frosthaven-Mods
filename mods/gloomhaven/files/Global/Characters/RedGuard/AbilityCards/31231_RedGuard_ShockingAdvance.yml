@@ -46,16 +46,13 @@ Layout:
         - Consume:
             Name: TCLight
             Text:
-                - ColumnWidths: "85,15"
-                - Column:
-                    - Active:
-                        Ability: TCLightShield
-                        Icon: Positive_Shield
-                        ListLayout: "<sprite name=Shield> 1"
-                        Layout:
-                            - Row: "<size=150%><sprite name=Shield> 1"
-                - Column:
-                    - Row: "<sprite name=XP1>"
+                - Active:
+                    Ability: TCLightShield
+                    Icon: Positive_Shield
+                    ListLayout: "<sprite name=Shield> 1"
+                    Layout:
+                        - Row: "<sprite name=Shield> 1"
+                - Row: ", <sprite name=XP1>"
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "

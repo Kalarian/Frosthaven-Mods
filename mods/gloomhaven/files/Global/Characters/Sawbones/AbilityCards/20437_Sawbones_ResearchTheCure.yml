@@ -48,11 +48,7 @@ Layout:
         - Row: "<size=50%> "
         - Row: "$FHS_GH_437_T$"
     Bottom:
-        - Row:
-            - ColumnWidths: "88,12"
-            - Column:
-                - Row: "$FHS_GH_410_B$"
-            - Column:
+        - Row: "$FHS_GH_410_B$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "20,60,12"

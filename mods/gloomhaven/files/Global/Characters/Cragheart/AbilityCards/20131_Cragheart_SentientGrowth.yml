@@ -61,8 +61,13 @@ Layout:
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove*"
         - Divider:
-        - Row: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
-        - Row: "$FHS_Affect_AllAdjacentAllies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Allies></link>"
+            - Column:
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "10,35,45,10"

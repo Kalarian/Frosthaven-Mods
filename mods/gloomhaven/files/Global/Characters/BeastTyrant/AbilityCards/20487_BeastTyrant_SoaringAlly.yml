@@ -49,5 +49,5 @@ Layout:
             - Column:
             - Column:
     Bottom:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row: "<size=150%><sprite name=Loot> *BAllyLoot*"

@@ -81,6 +81,6 @@ Layout:
             Layout:
                 - Consume:
                     Name: BCLight
-                    Text: "<size=150%><sprite name=Move> 3, <size=100%><voffset=1><sprite name=XP1>"
+                    Text: "<sprite name=Move> 3, <voffset=1>, <sprite name=XP1>"
         - Row: "<size=50%> "
         - Row: "$FHS_JOTL_252_B$"

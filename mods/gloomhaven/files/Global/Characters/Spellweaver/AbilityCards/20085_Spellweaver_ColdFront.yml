@@ -45,12 +45,7 @@ Layout:
                     - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <voffset=1>@TAttack.Range@</link>"
                 - Column:
             - Row: "<size=10%> "
-            - Row:
-                - ColumnWidths: "18,32,32"
-                - Column:
-                - Column:
-                    - Infuse: Ice
-                - Column:
+            - Infuse: Ice
         - Column:
             - Row: "£Area£"
     Bottom:

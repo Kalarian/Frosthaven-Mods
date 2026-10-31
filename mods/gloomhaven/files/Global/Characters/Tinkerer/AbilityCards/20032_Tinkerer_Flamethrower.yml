@@ -44,12 +44,7 @@ Layout:
                     - Row: "<link=fhpill><sprite name=Wound></link>"
                 - Column:
             - Row: "<size=20%> "
-            - Row:
-                - ColumnWidths: "30,20,20"
-                - Column:
-                - Column:
-                - Column:
-                    - Infuse: Fire
+            - Infuse: Fire
         - Column:
             - Row: "£Area£"
     Bottom:

@@ -85,16 +85,11 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20, 60, 20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row:
-                    - ColumnWidths: "10,35,45,10"
-                    - Column:
-                    - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
-                    - Column:
-                        - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <voffset=1>@TAttack.Range@</link>"
-                    - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <voffset=1>@TAttack.Range@</link>"
             - Column:
         - Row: "<size=50%> "
         - Row:
@@ -139,7 +134,7 @@ Layout:
                     Layout:
                         - Consume:
                             Name: BCIce
-                            Text: "<nobr><b><sprite name=Heal> 2</nobr>"
+                            Text: "<nobr><sprite name=Heal> 2</nobr>"
             - Column:
                 - Conditional:
                     Layout:
@@ -155,4 +150,4 @@ Layout:
                             Icon: Positive_Shield
                             ListLayout: "<nobr><sprite name=Shield> 1</nobr>"
                             Layout:
-                                - Row: "<nobr><b><sprite name=Shield> 1</nobr>"
+                                - Row: "<nobr><sprite name=Shield> 1</nobr>"

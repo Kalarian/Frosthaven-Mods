@@ -45,4 +45,4 @@ Layout:
             Layout:
                 - Consume:
                     Name: BCEarth
-                    Text: "<nobr>+2 <sprite name=Heal>, <sprite name=XP1></nobr>"
+                    Text: "<nobr>+2 <sprite name=Heal> </nobr>, <sprite name=XP1>"

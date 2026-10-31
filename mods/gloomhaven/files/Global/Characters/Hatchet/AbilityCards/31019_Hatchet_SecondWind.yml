@@ -33,12 +33,7 @@ Layout:
     Top:
         - Row: "<link=fhself><size=125%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@</link>"
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Air
-            - Column:
+        - Infuse: Air
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=20%> "

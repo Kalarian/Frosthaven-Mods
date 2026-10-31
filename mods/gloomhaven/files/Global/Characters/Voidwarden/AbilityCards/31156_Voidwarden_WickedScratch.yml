@@ -40,12 +40,7 @@ Layout:
         - Row: "<size=20%> "
         - Row: "<size=150%><sprite name=Attack> *TAllyAttack* @TAllyAttack@"
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "20,30,30"
-            - Column:
-            - Column:
-                - Infuse: Dark
-            - Column:
+        - Infuse: Dark
     Bottom:
         - Row: "<size=150%><sprite name=Loot> *BLoot*"
         - Divider:

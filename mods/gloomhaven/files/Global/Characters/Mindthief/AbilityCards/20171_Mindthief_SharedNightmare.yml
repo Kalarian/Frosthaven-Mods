@@ -59,27 +59,17 @@ Layout:
                 - Consume:
                     Name: TCDark
                     Text: "<sprite name=Poison>, <sprite name=Curse>"
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Ice
-            - Column:
+        - Infuse: Ice
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
         - Consume:
             Name: BCIce
             Text:
-                - ColumnWidths: "75,10,5,10"
-                - Column:
-                    - Active:
-                        Ability: BCIceShield
-                        Icon: Positive_Shield
-                        ListLayout: "<sprite name=Shield> 1"
-                        Layout:
-                            - Row: "<size=150%><sprite name=Shield> 1"
-                - Column:
-                    - Row: "<sprite name=XP1>"
-                - Column:
-                - Column:
+                - Active:
+                    Ability: BCIceShield
+                    Icon: Positive_Shield
+                    ListLayout: "<sprite name=Shield> 1"
+                    Layout:
+                        - Row: "<sprite name=Shield> 1"
+                - Row: ", <sprite name=XP1>"

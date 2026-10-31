@@ -57,7 +57,7 @@ Layout:
         - Row: "<size=100%> "
         - XPTracker: TActive
     Bottom:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row: "<size=150%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
         - Row: "<size=50%> "
         - Row: "<link=fhself><size=125%><sprite name=Heal> *BAllyHeal* <size=100%><voffset=1>@BAllyHeal@</link>"

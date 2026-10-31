@@ -661,17 +661,12 @@ Elementalist_WEAKNESSES	- <indent=%15>Weak with no other element infusers</inden
 FHS_Add	Add
 FHS_Advantage	Advantage
 FHS_Affect_AllAdjacentAllies	Affect all adjacent <sprite name=Allies>
-FHS_Affect_AllAdjacentSummonedAllies	Affect all adjacent summoned <sprite name=Allies>
 FHS_Affect_AllAllies	Affect all <sprite name=Allies>
-FHS_Affect_AllAlliesMovedThrough	Affect all <sprite name=Allies> moved through
 FHS_Affect_AllAlliesWithin	Affect all <sprite name=Allies> within
 FHS_Affect_AllSummonedAllies	Affect all summoned <sprite name=Allies>
-FHS_Affect_AnyOneAlly	Affect any one <sprite name=Allies>
 FHS_Affect_OneAdjacentAlly	Affect one adjacent <sprite name=Allies>
-FHS_Affect_OneAllyWithinRange3	Affect one <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr>
 FHS_Affect_SelfAndAllAdjacentAllies	Affect self and all adjacent <sprite name=Allies>
 FHS_Affect_SelfAndAllAllies	Affect self and all <sprite name=Allies>
-FHS_Affect_SelfAndAllSummonedAllies	Affect self and all summoned <sprite name=Allies>
 FHS_AtEndOfTurn	at end of turn
 FHS_Augment_OnYourMeleeAttacks	On your melee attacks:
 FHS_BattleBoar	Battle Boar
@@ -1052,7 +1047,6 @@ FHS_GH_501_B	All summoned <sprite name=Allies> within <nobr><sprite name=Range> 
 FHS_GH_504_T	Kill one adjacent normal <sprite name=Enemy> whose current hit point value is less than or equal to 6
 FHS_GH_505_B	<sprite name=RecoverIcon> up to two of your lost cards with Summon actions on them
 FHS_GH_505_T	All adjacent <sprite name=Allies> add <nobr>+2 <sprite name=Attack></nobr> to all their attacks
-FHS_GH_Command	Command
 FHS_Gain	Gain
 FHS_Gain_Flying	Gain <nobr><sprite name=Flying></nobr>
 FHS_GiantBat	Giant Bat
@@ -1281,7 +1275,6 @@ FHS_Xis_LostCardCount	where X is the number of cards you have burned
 FHS_Xis_NumberOfSummonedAllies	where X is the number of all summoned <sprite name=Allies>
 FHS_Xis_Shield	where X is your current Shield value
 FHS_instead	instead
-FHS_with	with
 FHS_within	within
 GH_THE_FAVORITE_EFFECT_TOOLTIP	<color=#F3DDAB>The Favorite</color>: You may add +3 Attack to any of your ranged attacks. When an enemy targeted with the Favorite dies, you may loot the hatchet on the hex in which it died to recover this ability.
 GH_THE_NEW_FAVORITE_EFFECT_TOOLTIP	<color=#F3DDAB>The New Favorite</color>: You may add +3 Attack, <nobr>WOUND <sprite name=Wound></nobr>, and <nobr>PUSH <sprite name=Push> 1</nobr> to any of your ranged attacks. When an enemy targeted with the Favorite dies, you may loot the hatchet on the hex in which it died to recover this ability.

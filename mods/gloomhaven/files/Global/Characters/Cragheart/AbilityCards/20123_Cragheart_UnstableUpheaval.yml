@@ -72,5 +72,10 @@ Layout:
             Icon: Positive_Shield
             ListLayout: "<sprite name=Shield> *BShield*, $FHS_Affect_AllAllies$"
             Layout:
-                - Row: "<size=150%><sprite name=Shield> *BShield*"
-                - Row: "$FHS_Affect_AllAllies$"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Shield> *BShield*"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies></link>"
+                    - Column:

@@ -75,8 +75,13 @@ Layout:
             ListLayout: "<sprite name=Retaliate> *BRetaliate*, $FHS_Affect_OneAdjacentAlly$"
             ListLayoutAlt: "<sprite name=Retaliate> 3, $FHS_Affect_OneAdjacentAlly$"
             Layout:
-                - Row: "<size=150%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
-                - Row: "$FHS_Affect_OneAdjacentAlly$"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Target> one adjacent <sprite name=Allies></link>"
+                    - Column:
             LayoutAlt:
                 - Row: "<size=150%><sprite name=Retaliate> 3 <size=100%><voffset=1>@BRetaliate@"
                 - Row: "$FHS_Affect_OneAdjacentAlly$"

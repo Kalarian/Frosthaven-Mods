@@ -61,7 +61,7 @@ Layout:
                 Layout:
                     - Consume:
                         Name: TCAny
-                        Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=CreateDark>, <sprite name=XP1></nobr>"
+                        Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><voffset=-1.5><sprite name=CreateDark></voffset></size> </nobr>, <sprite name=XP1>"
         - Column: "£Area£"
     Bottom:
         - Active:

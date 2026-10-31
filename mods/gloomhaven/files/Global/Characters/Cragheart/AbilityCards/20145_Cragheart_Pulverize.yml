@@ -69,16 +69,11 @@ Layout:
             - Column:
         - Row: "<size=50%> "
         - Row:
-            - ColumnWidths: "20, 60, 20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove*"
             - Column:
-                - Row:
-                    - ColumnWidths: "10,35,45,10"
-                    - Column:
-                    - Column: "<size=150%><sprite name=Move> *BMove*"
-                    - Column:
-                        - Row: "<link=fhpill><sprite name=Jump></link>"
-                    - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Row: "<size=50%> "
         - Row:

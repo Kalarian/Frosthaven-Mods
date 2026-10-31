@@ -546,7 +546,7 @@ def fh_text(t):
     return t
 
 
-LONG_TEXT, LONG_TEXT_SIZE = 280, 85   # visible letters past which a card half's text is drawn smaller, and how small
+LONG_TEXT, LONG_TEXT_SIZE = 280, 100   # was 85; the plugin now widens long texts and fits the half (the user, 2026-10-30: Sand Devil too small)
 TEXT_FIXES = {
     "GH_225_B": "You and all adjacent normal enemies suffer 7 damage.",
     # Soothing Lullaby / Tranquil Trill top (the user, 2026-10-30): each ally heals themselves, shown with Frosthaven's

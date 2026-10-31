@@ -42,12 +42,7 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
             - Column:
     Bottom:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row: "<size=150%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Earth
-            - Column:
+        - Infuse: Earth

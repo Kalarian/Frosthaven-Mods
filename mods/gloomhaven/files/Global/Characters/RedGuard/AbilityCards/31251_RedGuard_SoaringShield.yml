@@ -60,12 +60,7 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy>, <sprite name=Stun></link>"
             - Column:
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Fire
-            - Column:
+        - Infuse: Fire
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"

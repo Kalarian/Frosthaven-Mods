@@ -41,12 +41,7 @@ Layout:
     Top:
         - Row: "$FHS_JOTL_174_T$"
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Dark
-            - Column:
+        - Infuse: Dark
     Bottom:
         - Active:
             Ability: BActive

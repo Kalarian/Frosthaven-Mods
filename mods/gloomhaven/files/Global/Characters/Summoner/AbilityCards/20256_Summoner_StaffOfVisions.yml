@@ -57,5 +57,10 @@ Layout:
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<size=150%><sprite name=Strengthen> <size=100%><voffset=1>@BStrengthen@"
-        - Row: "$FHS_Affect_AllAdjacentAllies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Strengthen> <size=100%><voffset=1>@BStrengthen@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Allies></link>"
+            - Column:

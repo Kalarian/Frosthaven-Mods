@@ -49,17 +49,11 @@ Layout:
         - Row: "$FHS_JOTL_093_B_1$"
         - Row: "<size=20%> "
         - Row:
-            - ColumnWidths: "20, 40, 20, 40"
+            - ColumnWidths: "10,35,45,10"
             - Column:
+            - Column: "<size=150%><sprite name=Attack> X"
             - Column:
-                - Row:
-                    - ColumnWidths: "10,35,45,10"
-                    - Column:
-                    - Column: "<size=150%><sprite name=Attack> X"
-                    - Column:
-                        - Row: "<link=fhpill><sprite name=Push> *BAttackSubPush*</link>"
-                    - Column:
-            - Column:
+                - Row: "<link=fhpill><sprite name=Push> *BAttackSubPush*</link>"
             - Column:
         - Row: "<size=20%> "
         - Row: "$FHS_JOTL_093_B_2$"

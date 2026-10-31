@@ -38,12 +38,7 @@ Layout:
                 - Row: "<link=fhpill>, <sprite name=Muddle></link>"
             - Column:
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Ice
-            - Column:
+        - Infuse: Ice
     Bottom:
         - Active:
             Ability: BAugment

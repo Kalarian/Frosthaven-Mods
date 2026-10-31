@@ -57,7 +57,7 @@ namespace FrosthavenMods
         private static readonly Regex Create = new Regex(@"^Create(Fire|Ice|Air|Earth|Light|Dark|Any|Wild)(_\w+)?$");   // CreateIce_Ice: the ice infusion was the pale one
 
         private static Dictionary<string, Sprite> _atlas;
-        private static Sprite _pill, _self, _consumeAny;
+        private static Sprite _pill, _self, _consumeAny, _dash;
         private static float _anyRetry;
         private static readonly Dictionary<string, Sprite> HexSprites = new Dictionary<string, Sprite>();
         private static TMP_FontAsset _font;
@@ -93,18 +93,24 @@ namespace FrosthavenMods
                     Transform rows = h.Find("Content/Layout Parent");
                     if (rows == null) continue;
                     Fonts(rows);
+                    SummonHealth(rows);
                     Pending.TryGetValue(__instance, out AbilityCardYMLData cardData);
                     CAction act = cardData == null ? null : half == __instance.topActionButton ? cardData.TopActionCardData : cardData.BottomActionCardData;
-                    SongTag(h, f, model, act?.Abilities?.Any(a => a?.AbilityType == CAbility.EAbilityType.PlaySong) == true);
+                    // the port's Command marker (Beast Tyrant): hidden, and the half tagged like a song
+                    TMP_Text cmd = rows.GetComponentsInChildren<TMP_Text>(true).FirstOrDefault(x => (x.text ?? "").Contains("<link=fhcommand>"));
+                    if (cmd != null) { cmd.text = ""; cmd.ForceMeshUpdate(); }
+                    bool song = act?.Abilities?.Any(a => a?.AbilityType == CAbility.EAbilityType.PlaySong) == true;
+                    SongTag(h, f, model, song ? "Song" : cmd != null ? "Command" : null, song ? SongColour : CommandColour);
                     // an Augment half (Mindthief) has its own stacked layout: the fit passes slid it under the top rim
                     bool augment = rows.GetComponentsInChildren<Transform>(true).Any(c => c.name == "AugmentRow");
                     if (!augment) Margins(h, (RectTransform)rows, f);
-                    else AugmentLook(rows, model);
+                    else AugmentLook(rows, h, model, f);
                     Slots(rows, f);
                     ConsumeSprites(h);
                     Pictures(h, tint);
                     Areas(rows, f);
                     ConsumeBoxes(rows, h, f);
+                    BareConsumes(rows, h, tint, f);
                     if (!augment) Relayout(rows);
                     // after Relayout: it stacks a column's rows again, and a pill cut into rows (one per slotted value:
                     // Fire Orbs' target and range) is one pill only once Pills has joined them
@@ -161,6 +167,7 @@ namespace FrosthavenMods
                 else if (s.name == "AddedEffectRoundedBorder" && _pill == null) _pill = s;
                 else if (s.name == "FH_UI_CARDS_PositiveEffectBackground" && _self == null) _self = s;
                 else if (s.name == "ConsumeAny" && _consumeAny == null) _consumeAny = s;   // not in the card atlas
+                else if (s.name == "ConditionalElement" && _dash == null) _dash = s;   // the dashed consume box
             }
             if (_atlas.TryGetValue("ConsumeAny", out Sprite inAtlas)) _consumeAny = inAtlas;
             Plugin.Log.LogInfo($"Gloomhaven card style: consume-any {(_consumeAny != null ? _consumeAny.texture?.name : "MISSING")}");
@@ -208,9 +215,12 @@ namespace FrosthavenMods
                     continue;
                 }
                 float want = TextMargin * f;
-                float left = Mathf.Max(0f, half.rect.xMin + want - r.xMin), right = Mathf.Max(0f, r.xMax - (half.rect.xMax - want));
-                if (left < 0.5f * f && right < 0.5f * f) continue;
                 float k = rt.rect.width / Mathf.Max(r.width, 0.01f);   // the text's units per half unit
+                // a wrapped text in a block narrower than the half (an active bonus: Sand Devil, The New Favorite left
+                // wide empty sides, the user 2026-10-30) uses the half's width between the 24 px margins: negative
+                // margins widen it past its rect
+                float left = half.rect.xMin + want - r.xMin, right = r.xMax - (half.rect.xMax - want);
+                if (Mathf.Abs(left) < 0.5f * f && Mathf.Abs(right) < 0.5f * f) continue;
                 t.margin = new Vector4(left * k, t.margin.y, right * k, t.margin.w);
                 // a new margin doesn't mark the text's preferred height stale: without this the rows kept their one-line
                 // heights and a wrapped line ran into the next row (Rumbling Advance, Rocky End)
@@ -307,6 +317,85 @@ namespace FrosthavenMods
                     shown.sprite = copy[6];
                     shown.preserveAspect = true;
                 }
+            }
+        }
+
+        /// <summary>A consume whose reward the generator's dashed box can't hold (an ability value, an area, an active bonus,
+        /// an infusion: it looks every row up as text and stops at load) is drawn bare; Frosthaven boxes these too (Bone
+        /// Dagger, Flesh Shield, Lacerating Eruption: the user, 2026-10-30). The reward moves up to the colon and the
+        /// dashed box is drawn behind element, colon and reward, as ConsumeBoxes lays out the generator's.</summary>
+        private static void BareConsumes(Transform rows, RectTransform half, Color tint, float f)
+        {
+            if (_dash == null) return;
+            foreach (RectTransform button in rows.GetComponentsInChildren<Transform>(true).Where(t => t.name == "Consume Button" && Shown(t, rows)
+                         && !t.GetComponentsInParent<Transform>(true).Any(p => p.name == "ConditionalElement")).OfType<RectTransform>().ToList())
+            {
+                var element = button.Find("Element2") as RectTransform;
+                var colon = button.Find("Colon") as RectTransform;
+                var desc = button.Find("Description") as RectTransform;
+                if (element == null || colon == null || desc == null || !(button.parent is RectTransform holder)) continue;
+                // the reward's text at the card's size (the generator's rows were the main line's 150%)
+                foreach (TMP_Text t in desc.GetComponentsInChildren<TMP_Text>(true))
+                {
+                    t.enableAutoSizing = false;
+                    t.fontSize = Mathf.Min(t.fontSize, GlobalSettings.Instance.m_AbilityCardSettings.StandardFontSize * 1.1f);
+                    t.ForceMeshUpdate(true);
+                }
+                var second = button.Find("Element1") as RectTransform;
+                var heads = new List<RectTransform> { element, colon };
+                if (second != null && second.gameObject.activeSelf) heads.Add(second);
+                // only what is drawn and icon-sized: a container's own image spans the whole line (the first box
+                // swallowed the ability above it)
+                float cap = 80f * f;
+                IEnumerable<Rect> Seen(Transform root, RectTransform within) => root.GetComponentsInChildren<Graphic>(true)
+                    .Select(g => Extent1(g, within, half)).Where(e => e.HasValue && e.Value.height <= cap * 1.6f).Select(e => e.Value);
+                var headParts = heads.Where(r => r.gameObject.activeSelf).SelectMany(r => Seen(r, button)).ToList();
+                if (headParts.Count == 0) continue;
+                Rect head = Union(headParts);
+                // the reward's rows side by side, each at most the box's height (an area shrinks to it, as Lacerating
+                // Eruption's small area beside its XP), centred on the element, starting after the colon
+                Transform lp = desc.GetComponentsInChildren<Transform>(true).FirstOrDefault(c => c.name == "Layout Parent");
+                var pieces = (lp != null ? lp.Cast<Transform>() : desc.Cast<Transform>()).OfType<RectTransform>().Where(r => r.gameObject.activeSelf).ToList();
+                float x = head.xMax + 12f * f;
+                bool any = false;
+                foreach (RectTransform piece in pieces)
+                {
+                    var areaHex = piece.GetComponentsInChildren<Transform>(true).FirstOrDefault(c => c.name == "AreaEffectContainer") as RectTransform;
+                    var parts = piece.GetComponentsInChildren<Graphic>(true).Select(g => Extent1(g, piece, half)).Where(e => e.HasValue).Select(e => e.Value).ToList();
+                    if (parts.Count == 0) continue;
+                    Rect pr = Union(parts);
+                    if (pr.height > 64f * f && areaHex != null)
+                    {
+                        float k = 64f * f / pr.height;
+                        piece.localScale = new Vector3(piece.localScale.x * k, piece.localScale.y * k, 1f);
+                        pr = Union(piece.GetComponentsInChildren<Graphic>(true).Select(g => Extent1(g, piece, half)).Where(e => e.HasValue).Select(e => e.Value));
+                    }
+                    // a piece opening with its comma (", XP") sits close to the one before it, as one line of text would
+                    bool comma = piece.GetComponentsInChildren<TMP_Text>(true).Any(t => Regex.IsMatch(t.text ?? "", @"^\s*(<[^>]+>)*\s*,"));
+                    if (comma) x -= 4f * f;
+                    Shift(piece, half, x - pr.xMin, head.center.y - pr.center.y);
+                    x += pr.width + 6f * f;
+                    any = true;
+                }
+                if (!any) continue;
+                var rewardParts = Seen(desc, desc).ToList();
+                if (rewardParts.Count == 0) continue;
+                Rect all = Union(headParts.Concat(rewardParts));
+                // centred on the half when the consume has the line to itself (two side by side keep their columns:
+                // Burn Away the Dark)
+                if (In(holder, half).width > 0.8f * half.rect.width)
+                {
+                    float dx = half.rect.center.x - all.center.x;
+                    Shift(button, half, dx, 0f);
+                    all.x += dx;
+                }
+                float hgt = Mathf.Max(54f * f, all.height + 12f * f);   // 61 made stacked boxes overlap (Eternal Equilibrium)
+                Rect box = new Rect(all.xMin - 8f * f, all.center.y - hgt / 2f, all.width + 20f * f, hgt);
+                string boxName = "GHBareBox" + button.GetSiblingIndex();   // one per consume in a holder
+                Transform old = holder.Find(boxName);
+                if (old != null) UnityEngine.Object.DestroyImmediate(old.gameObject);
+                Image bg = Background(holder, boxName, _dash, Image.Type.Tiled, 4.9f, tint);
+                Place(bg.rectTransform, half, box);
             }
         }
 
@@ -447,7 +536,8 @@ namespace FrosthavenMods
                     pt.ForceMeshUpdate();
                 }
                 Rect main = Drawn(mainRow, line);
-                if (main.width <= 0) continue;
+                // no value in front (a pill under a line of conditions: Grisly Trauma): the pill alone, centred
+                if (main.width <= 0.5f * f) main = new Rect(line.rect.center.x, Drawn(pillRow, line).center.y, 0f, 0f);
                 // a slot in the pill (Shard Launch, Exploding Decoy): 7 px after its number, not a value's 10; 15 px
                 // before the next icon; 9 px before the pill's end
                 var slotted = pillRows.Select(r => r.Cast<Transform>().FirstOrDefault(c => c.gameObject.activeSelf && c.name == "EnhancementContainer" && c.childCount > 0)).ToList();
@@ -714,6 +804,7 @@ namespace FrosthavenMods
         // the "Song" tag (Soothsinger): where Mindthief's "Augment" header sits, in the game's song colour (#EBB0AA)
         private const float TagLeft = 18f, TagTop = 22f, TagText = 25f, TagIcon = 24f, TagGap = 6f, TagBand = 44f;
         private static readonly Color SongColour = new Color(0xEB / 255f, 0xB0 / 255f, 0xAA / 255f);
+        private static readonly Color CommandColour = new Color(0xE0 / 255f, 0xB4 / 255f, 0x7A / 255f);   // Gloomhaven's tan for Command
         private static readonly HashSet<int> Tagged = new HashSet<int>();
 
         /// <summary>The top of a half's content: below the Song tag on a half that has one.</summary>
@@ -722,12 +813,12 @@ namespace FrosthavenMods
         /// <summary>A half that plays a song gets "Song" and the class's symbol at its top left (the user, 2026-10-30: songs
         /// weren't easy to pick out; Mindthief's augments carry "Augment" there). A pooled card is styled again, so an old
         /// tag goes first.</summary>
-        private static void SongTag(RectTransform half, float f, ECharacter model, bool song)
+        private static void SongTag(RectTransform half, float f, ECharacter model, string label, Color colour)
         {
             Transform old = half.Find("GHSongTag");
             if (old != null) UnityEngine.Object.DestroyImmediate(old.gameObject);
             Tagged.Remove(half.GetInstanceID());
-            if (!song) return;
+            if (label == null) return;
             var tag = new GameObject("GHSongTag", typeof(RectTransform));
             var rt = (RectTransform)tag.transform;
             rt.SetParent(half, false);
@@ -739,12 +830,12 @@ namespace FrosthavenMods
             if (_font != null) text.font = _font;
             text.fontSize = TagText * f;
             text.fontStyle = FontStyles.Bold;
-            text.color = SongColour;
+            text.color = colour;
             text.enableWordWrapping = false;
             text.alignment = TextAlignmentOptions.MidlineLeft;
             text.raycastTarget = false;
-            text.text = "Song";
-            float w = text.GetPreferredValues("Song").x;
+            text.text = label;
+            float w = text.GetPreferredValues(label).x;
             text.rectTransform.anchorMin = text.rectTransform.anchorMax = text.rectTransform.pivot = new Vector2(0f, 0.5f);
             text.rectTransform.anchoredPosition = Vector2.zero;
             text.rectTransform.sizeDelta = new Vector2(w, TagIcon * f);
@@ -763,13 +854,39 @@ namespace FrosthavenMods
             Tagged.Add(half.GetInstanceID());
         }
 
+        /// <summary>A summon's health with Frosthaven's max-life icon: the generator writes it with the heal drop (the user,
+        /// 2026-10-30). Only the summon block's health cell (SummonContainer.SummonLT) changes.</summary>
+        private static void SummonHealth(Transform rows)
+        {
+            foreach (SummonContainer sc in rows.GetComponentsInChildren<SummonContainer>(true))
+                if (sc.SummonLT != null)
+                    foreach (TMP_Text t in sc.SummonLT.GetComponentsInChildren<TMP_Text>(true))
+                        if ((t.text ?? "").Contains("<sprite name=Heal>"))
+                        {
+                            t.text = t.text.Replace("<sprite name=Heal>", "<sprite name=Health>");
+                            t.ForceMeshUpdate();
+                        }
+        }
+
         /// <summary>An Augment (Mindthief) in the user's look (2026-10-30): the class's own symbol after "Augment" (the
         /// generator draws the card's active-bonus icon, a +attack), and no persistent icon beside the discard reminder:
         /// every augment is persistent, which the badge bar says (AugmentSummary).</summary>
-        private static void AugmentLook(Transform rows, ECharacter model)
+        private static void AugmentLook(Transform rows, RectTransform half, ECharacter model, float f)
         {
             foreach (AugmentContainer ac in rows.GetComponentsInChildren<AugmentContainer>(true))
             {
+                // the shaded band behind "On your melee attacks:" and the effect spans the half (the user, 2026-10-30)
+                // MainBox is a plain-colour image (no sprite) sized by its LayoutElement
+                Image band = ac.GetComponentsInChildren<Image>(true).FirstOrDefault(i => i.name == "MainBox");
+                if (band != null)
+                {
+                    float target = band.transform.parent.InverseTransformVector(half.TransformVector(new Vector3(half.rect.width - 20f * f, 0, 0))).magnitude;
+                    // the container's vertical layout sizes it from its contents: a layout element of its own sets the width
+                    LayoutElement le = band.GetComponent<LayoutElement>() ?? band.gameObject.AddComponent<LayoutElement>();
+                    le.preferredWidth = target; le.minWidth = target;
+                    band.rectTransform.sizeDelta = new Vector2(target, band.rectTransform.sizeDelta.y);
+                    LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)ac.transform);
+                }
                 Sprite symbol = UIInfoTools.Instance?.GetCharacterActiveAbilityIcon(model.ToString());
                 if (symbol != null && ac.AugmentIcon != null)
                 {
@@ -915,7 +1032,8 @@ namespace FrosthavenMods
         /// columns beside it move left, then the area is drawn smaller (not below 70%).</summary>
         private static void AreaClear(RectTransform half, RectTransform rows, float f)
         {
-            foreach (RectTransform area in rows.GetComponentsInChildren<Transform>(true).Where(c => c.name == "AreaEffectContainer" && Shown(c, rows)).OfType<RectTransform>().ToList())
+            foreach (RectTransform area in rows.GetComponentsInChildren<Transform>(true).Where(c => c.name == "AreaEffectContainer" && Shown(c, rows)
+                         && !c.GetComponentsInParent<Transform>(true).Any(pp => pp.name == "Consume Button")).OfType<RectTransform>().ToList())   // a consume's area is its box's
             {
                 // the level where something sits beside the area: the area may be wrapped in a column or two
                 RectTransform col = area, line = null;

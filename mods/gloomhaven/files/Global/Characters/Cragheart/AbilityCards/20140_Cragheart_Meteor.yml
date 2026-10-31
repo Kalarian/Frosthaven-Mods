@@ -54,12 +54,7 @@ Layout:
             - Column:
         - Row: "$FHS_GH_140_T_2$"
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "30, 20, 20"
-            - Column:
-            - Column:
-                - Infuse: Earth
-            - Column:
+        - Infuse: Earth
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"

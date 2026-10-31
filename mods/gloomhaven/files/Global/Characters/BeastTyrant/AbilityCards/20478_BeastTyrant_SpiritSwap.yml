@@ -31,7 +31,7 @@ Data:
                 AnimOverload: RadialBeneficial
 Layout:
     Top:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row: "<size=20%> "
         - Row: "<size=150%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
     Bottom:

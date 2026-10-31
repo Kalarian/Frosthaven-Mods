@@ -28,8 +28,13 @@ Data:
                 AnimOverload: GainDisadvantage
 Layout:
     Top:
-        - Row: "<size=150%><sprite name=Invisible>"
-        - Row: "$FHS_Affect_OneAllyWithinRange3$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Invisible>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> one <sprite name=Allies> <sprite name=Range> 3</link>"
+            - Column:
         - Row: "<size=50%> "
         - Infuse: Dark
     Bottom:

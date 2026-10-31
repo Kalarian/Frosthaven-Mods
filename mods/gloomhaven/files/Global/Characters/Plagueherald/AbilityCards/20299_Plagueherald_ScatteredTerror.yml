@@ -43,12 +43,7 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Pierce> *TAttack.Pierce* <voffset=1>@TAttack.Pierce@</link>"
             - Column:
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Air
-            - Column:
+        - Infuse: Air
     Bottom:
         - Active:
             Ability: BDisadvantage

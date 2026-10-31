@@ -53,4 +53,4 @@ Layout:
             Layout:
                 - Consume:
                     Name: BCDark
-                    Text: "<nobr>-1 <sprite name=Move></nobr>, <sprite name=XP1> <size=150%><nobr><sprite name=Attack> 2</nobr>"
+                    Text: "<nobr>-1 <sprite name=Move></nobr>, <nobr><sprite name=Attack> 2</nobr>, <sprite name=XP1>"

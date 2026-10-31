@@ -66,16 +66,11 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20, 60, 20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row:
-                    - ColumnWidths: "10,35,45,10"
-                    - Column:
-                    - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
-                    - Column:
-                        - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
-                    - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
             - Column:
         - Row: "<size=20%> "
         - Row:

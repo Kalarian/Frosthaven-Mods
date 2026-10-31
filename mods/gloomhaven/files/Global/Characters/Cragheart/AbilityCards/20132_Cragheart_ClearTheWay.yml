@@ -66,13 +66,8 @@ Layout:
     Top:
         - Row: "$FHS_GH_132_T_1$"
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "15, 70, 15"
-            - Column:
-            - Column:
-                - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-                - Row: "$FHS_GH_132_T_2$"
-            - Column:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$FHS_GH_132_T_2$"
         - Row: "<size=20%> "
         - Conditional:
             Layout:

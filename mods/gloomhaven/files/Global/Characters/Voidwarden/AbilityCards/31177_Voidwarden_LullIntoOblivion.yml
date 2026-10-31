@@ -47,10 +47,12 @@ Data:
                 XP: 1
 Layout:
     Top:
+        - Row: "<size=150%><nobr><sprite name=Stun></nobr>, <nobr><sprite name=Curse></nobr>"
+        - Row: "<size=40%> "
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<size=150%><nobr><sprite name=Stun></nobr>, <nobr><sprite name=Curse></nobr>"
+            - Column: "<size=1%> "
             - Column:
                 - Row: "<link=fhpill><sprite name=Target> *TStunUntilDamaged.Target* <sprite name=Range> *TStunUntilDamaged.Range*</link>"
             - Column:

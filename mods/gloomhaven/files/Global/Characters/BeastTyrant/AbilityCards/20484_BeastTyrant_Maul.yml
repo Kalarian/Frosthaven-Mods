@@ -35,7 +35,7 @@ Data:
                 AnimOverload: RadialBeneficial
 Layout:
     Top:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row: "<size=150%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
@@ -45,5 +45,10 @@ Layout:
             Icon: Positive_Shield
             ListLayout: "<sprite name=Shield> *BShield*, $FHS_Affect_OneAdjacentAlly$"
             Layout:
-                - Row: "<size=150%><sprite name=Shield> *BShield*"
-                - Row: "$FHS_Affect_OneAdjacentAlly$"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Shield> *BShield*"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Target> one adjacent <sprite name=Allies></link>"
+                    - Column:

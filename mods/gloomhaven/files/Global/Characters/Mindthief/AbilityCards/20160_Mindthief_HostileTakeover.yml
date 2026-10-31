@@ -42,11 +42,6 @@ Layout:
                 - Row: "<link=fhpill>, <sprite name=Immobilize></link>"
             - Column:
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Ice
-            - Column:
+        - Infuse: Ice
     Bottom:
         - Row: "$FHS_GH_160_B$"

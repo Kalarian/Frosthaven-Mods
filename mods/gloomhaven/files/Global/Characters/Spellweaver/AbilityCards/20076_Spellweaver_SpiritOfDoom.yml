@@ -58,11 +58,11 @@ Layout:
                     Text: "$FHS_Kill_OneNormal$ $FHS_instead$, <sprite name=XP1>"
     Bottom:
         - Row:
-            - ColumnWidths: "20,60,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
+            - Column: "<size=150%><sprite name=Heal> X"
             - Column:
-                - Row: "<size=150%><sprite name=Heal> X"
-                - Row: "$FHS_Affect_AnyOneAlly$"
+                - Row: "<link=fhpill><sprite name=Target> any one <sprite name=Allies></link>"
             - Column:
         - Row: "<size=20%> "
         - Row: "$FHS_GH_076_B_1$"

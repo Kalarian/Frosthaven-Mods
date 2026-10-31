@@ -49,7 +49,7 @@ Layout:
             Layout:
                 - Consume:
                     Name: TCEarth
-                    Text: "<nobr><sprite name=Target> 2,</nobr> <nobr><sprite name=Pierce> 2, <sprite name=XP1></nobr>"
+                    Text: "<nobr><sprite name=Target> 2,</nobr> <nobr><sprite name=Pierce> 2 </nobr>, <sprite name=XP1>"
     Bottom:
         - ColumnWidths: "65,35"
         - Column:

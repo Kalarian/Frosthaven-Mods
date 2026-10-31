@@ -35,12 +35,7 @@ Layout:
         - Row: "<size=50%> "
         - Row: "$FHS_GH_134_T_2$"
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Earth
-            - Column:
+        - Infuse: Earth
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=20%> "

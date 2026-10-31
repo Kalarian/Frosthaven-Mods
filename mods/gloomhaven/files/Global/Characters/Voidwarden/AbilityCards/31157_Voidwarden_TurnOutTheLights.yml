@@ -81,9 +81,4 @@ Layout:
         - Row: "<size=20%> "
         - Row: "$FHS_JOTL_157_B_2$"
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "20,30,30"
-            - Column:
-            - Column:
-                - Infuse: Ice
-            - Column:
+        - Infuse: Ice

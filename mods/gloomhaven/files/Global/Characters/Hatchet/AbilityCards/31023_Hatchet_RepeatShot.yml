@@ -61,9 +61,4 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* @BAttack.Range@</link>"
             - Column:
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Air
-            - Column:
+        - Infuse: Air

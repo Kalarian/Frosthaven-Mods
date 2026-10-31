@@ -60,14 +60,9 @@ Layout:
     Top:
         - Row: "$FHS_JOTL_161_T_1$"
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "15,70,15"
-            - Column:
-            - Column:
-                - Row: "<size=150%><sprite name=Move> *EnemyWillDoThis1* <size=100%><voffset=1>@EnemyWillDoThis1@"
-                - Row: "<size=20%> "
-                - Row: "<size=150%><sprite name=Attack> *EnemyWillDoThis2* <size=100%><voffset=1>@EnemyWillDoThis2@"
-            - Column:
+        - Row: "<size=150%><sprite name=Move> *EnemyWillDoThis1* <size=100%><voffset=1>@EnemyWillDoThis1@"
+        - Row: "<size=20%> "
+        - Row: "<size=150%><sprite name=Attack> *EnemyWillDoThis2* <size=100%><voffset=1>@EnemyWillDoThis2@"
         - Row: "<size=20%> "
         - Row: "$FHS_JOTL_161_T_2$ $FHS_With_YouControllingActions$"
         - Row: "<size=20%> "
@@ -82,5 +77,4 @@ Layout:
         - Consume:
             Name: BCDark
             Text:
-                - Row: "<size=150%><nobr><sprite name=Curse></nobr>"
-                - Row: "<sprite name=Range> *BCDarkCurse.Range*"
+                - Row: "<nobr><sprite name=Curse></nobr> <sprite name=Range> *BCDarkCurse.Range*"

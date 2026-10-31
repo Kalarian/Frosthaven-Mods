@@ -37,11 +37,16 @@ Data:
                 AnimOverload: Heal
 Layout:
     Top:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row: "<size=20%> "
         - Row: "<size=150%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
         - Divider:
         - Row: "<link=fhself><size=125%><sprite name=Strengthen></link>"
     Bottom:
-        - Row: "<size=150%><sprite name=Heal> *BHeal*"
-        - Row: "$FHS_Affect_AllAllies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *BHeal*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies></link>"
+            - Column:

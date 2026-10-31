@@ -66,22 +66,22 @@ Layout:
                     Layout:
                         - Consume:
                             Name: BCFire
-                            Text: "<nobr><b><sprite name=Attack> 3</nobr> <nobr><sprite name=Range> 3</nobr>"
+                            Text: "<nobr><sprite name=Attack> 3</nobr> <nobr><sprite name=Range> 3</nobr>"
                 - Row: "<size=20%> "
                 - Conditional:
                     Layout:
                         - Consume:
                             Name: BCAir
-                            Text: "<nobr><b><sprite name=Move> 3</nobr>"
+                            Text: "<nobr><sprite name=Move> 3</nobr>"
             - Column:
                 - Conditional:
                     Layout:
                         - Consume:
                             Name: BCIce
-                            Text: "<nobr><b><sprite name=Loot> 1</nobr>"
+                            Text: "<nobr><sprite name=Loot> 1</nobr>"
                 - Row: "<size=20%> "
                 - Conditional:
                     Layout:
                         - Consume:
                             Name: BCEarth
-                            Text: "<nobr><b><sprite name=Heal> 3</nobr> <nobr><sprite name=Range> 3</nobr>"
+                            Text: "<nobr><sprite name=Heal> 3</nobr> <nobr><sprite name=Range> 3</nobr>"

@@ -49,4 +49,4 @@ Layout:
             Layout:
                 - Consume:
                     Name: BCFire
-                    Text: "<size=150%><sprite name=Attack> 3"
+                    Text: "<sprite name=Attack> 3"

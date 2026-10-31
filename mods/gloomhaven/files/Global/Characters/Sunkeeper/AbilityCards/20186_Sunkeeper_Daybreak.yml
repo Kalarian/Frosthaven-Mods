@@ -48,9 +48,14 @@ Layout:
             Layout:
                 - Consume:
                     Name: TCDark
-                    Text: "+1 <sprite name=Attack>, <sprite name=CreateLight>, <sprite name=XP1>"
+                    Text: "+1 <sprite name=Attack>, <voffset=-1.5><sprite name=CreateLight></voffset></size>, <sprite name=XP1>"
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
-        - Row: "<size=150%><sprite name=Bless> <size=100%><voffset=1>@BBless@"
-        - Row: "$FHS_Affect_OneAdjacentAlly$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Bless> <size=100%><voffset=1>@BBless@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> one adjacent <sprite name=Allies></link>"
+            - Column:

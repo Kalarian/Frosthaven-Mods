@@ -34,12 +34,14 @@ Data:
                 AnimOverload: RadialBeneficial
 Layout:
     Top:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row: "<size=50%> "
+        - Row: "<size=150%><sprite name=Muddle>, <nobr><sprite name=Immobilize></nobr>"
+        - Row: "<size=40%> "
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<size=150%><sprite name=Muddle>, <nobr><sprite name=Immobilize></nobr>"
+            - Column: "<size=1%> "
             - Column:
                 - Row: "<link=fhpill><sprite name=Target> all <sprite name=Range> *TAllyMuddle.Range*</link>"
             - Column:

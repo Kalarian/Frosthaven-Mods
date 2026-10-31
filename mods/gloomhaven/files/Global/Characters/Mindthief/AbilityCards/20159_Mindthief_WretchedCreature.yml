@@ -44,4 +44,4 @@ Layout:
             Layout:
                 - Consume:
                     Name: BCDark
-                    Text: "<size=150%><sprite name=Curse> $FHS_Target_OneAdjacentEnemy$"
+                    Text: "<sprite name=Curse> $FHS_Target_OneAdjacentEnemy$"

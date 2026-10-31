@@ -60,8 +60,13 @@ Layout:
         - Active:
             Ability: BShield
             Layout:
-                - Row: "<size=150%><sprite name=Shield> *BShield*"
-                - Row: "$FHS_Affect_AnyOneAlly$"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Shield> *BShield*"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Target> any one <sprite name=Allies></link>"
+                    - Column:
             LayoutAlt:
                 - Row: "<size=150%><sprite name=Shield> *BShield*"
                 - Row: "$FHS_Affect_AllAllies$"

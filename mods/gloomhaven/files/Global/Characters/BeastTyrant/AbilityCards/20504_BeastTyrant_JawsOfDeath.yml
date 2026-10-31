@@ -59,22 +59,18 @@ Data:
         XP: 1
 Layout:
     Top:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row: "$FHS_GH_504_T$"
     Bottom:
-        - ColumnWidths: "20,60,20"
-        - Column:
-            - Row: "$FHS_GH_Command$"
-        - Column:
-            - Row:
-                - ColumnWidths: "10,35,45,10"
-                - Column:
-                - Column: "<size=150%><sprite name=Attack> *BAllyAttack1* <size=100%><voffset=1>@BAllyAttack1@"
-                - Column:
-                    - Row: "<link=fhpill><sprite name=Push> 3</link>"
-                - Column:
-            - Row: "<size=50%> "
-            - Row: "<size=150%><sprite name=Move> *BAllyMove1*"
-            - Row: "<size=50%> "
-            - Row: "<size=150%><sprite name=Attack> *BAllyAttack2* <size=100%><voffset=1>@BAllyAttack2@"
-        - Column:
+        - Row: "<size=1%><link=fhcommand> </link>"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *BAllyAttack1* <size=100%><voffset=1>@BAllyAttack1@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Push> 3</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "<size=150%><sprite name=Move> *BAllyMove1*"
+        - Row: "<size=50%> "
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack2* <size=100%><voffset=1>@BAllyAttack2@"

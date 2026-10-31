@@ -57,5 +57,4 @@ Layout:
                 - Row: "$FHS_Doom_MarkText$"
                 - Row: "$FHS_GH_397_B$"
                 - Row: "<size=20%> "
-                - XPTracker: BDoomStartTurnAbilityAfterXCasterTurns
-                - Row: "<size=70%>$FHS_Doom_DiscardReminderText$"
+                - Row: "$FHS_Doom_DiscardReminderText$"

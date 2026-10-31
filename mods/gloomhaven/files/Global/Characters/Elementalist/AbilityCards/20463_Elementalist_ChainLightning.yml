@@ -56,18 +56,16 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
             - Column:
         - Row: "$FHS_GH_463_T_1$"
-        - Row:
-            - Column:
-                - Conditional:
-                    Layout:
-                        - Consume:
-                            Name: TCLight
-                            Text: "+1 <sprite name=Attack>, <sprite name=Pierce> 2, <sprite name=XP1>"
-                - Conditional:
-                    Layout:
-                        - Consume:
-                            Name: TCAir
-                            Text: "$FHS_GH_463_T_2$, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCLight
+                    Text: "+1 <sprite name=Attack>, <sprite name=Pierce> 2, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "$FHS_GH_463_T_2$, <sprite name=XP1>"
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"

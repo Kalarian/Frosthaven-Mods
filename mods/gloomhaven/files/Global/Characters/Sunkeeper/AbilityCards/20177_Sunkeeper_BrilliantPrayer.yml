@@ -39,9 +39,4 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *BHeal.Range*</link>"
             - Column:
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Light
-            - Column:
+        - Infuse: Light

@@ -80,13 +80,13 @@ Layout:
             Layout:
                 - Consume:
                     Name: TCDark
-                    Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr><sprite name=Curse>, <sprite name=XP1></nobr>"
+                    Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr><sprite name=Curse> </nobr>, <sprite name=XP1>"
         - Row: "<size=20%> "
         - Conditional:
             Layout:
                 - Consume:
                     Name: TCLight
-                    Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr><sprite name=Muddle>, <sprite name=XP1></nobr>"
+                    Text: "<nobr>+1 <sprite name=Attack>,</nobr> <nobr><sprite name=Muddle> </nobr>, <sprite name=XP1>"
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"

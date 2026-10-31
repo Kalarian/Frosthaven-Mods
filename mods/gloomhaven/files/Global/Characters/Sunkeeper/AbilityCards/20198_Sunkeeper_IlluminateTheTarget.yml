@@ -38,8 +38,13 @@ Layout:
     Top:
         - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Divider:
-        - Row: "<size=150%><sprite name=Strengthen> @TStrengthen@"
-        - Row: "$FHS_Affect_AllAdjacentAllies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Strengthen> @TStrengthen@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Allies></link>"
+            - Column:
     Bottom:
         - Row: "$FHS_GH_157_T$"
         - Row: "<size=20%> "

@@ -30,8 +30,13 @@ Data:
                 AnimOverload: PlayPositiveTuneAttack
 Layout:
     Top:
-        - Row: "<size=150%><sprite name=Strengthen>"
-        - Row: "$FHS_Affect_AllAllies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Strengthen>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies></link>"
+            - Column:
     Bottom:
         - Row: "$FHS_GH_352_B$"
         - Row: "<size=20%> "

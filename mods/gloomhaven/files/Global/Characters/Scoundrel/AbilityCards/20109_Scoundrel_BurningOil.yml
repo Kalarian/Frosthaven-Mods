@@ -36,11 +36,6 @@ Layout:
                 - Row: "<link=fhpill>, <sprite name=Wound></link>"
             - Column:
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Fire
-            - Column:
+        - Infuse: Fire
     Bottom:
         - Row: "<size=150%><sprite name=Loot> *BLoot*"

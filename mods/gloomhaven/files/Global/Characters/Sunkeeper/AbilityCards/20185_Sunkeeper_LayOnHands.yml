@@ -32,11 +32,6 @@ Layout:
         - Row: "<size=50%> "
         - Row: "$FHS_Suffer_3Damage$"
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Light
-            - Column:
+        - Infuse: Light
     Bottom:
         - Row: "<size=150%><sprite name=Loot> *BLoot*"

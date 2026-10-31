@@ -33,12 +33,7 @@ Layout:
     Top:
         - Row: "$FHS_GH_335_T$"
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Fire
-            - Column:
+        - Infuse: Fire
     Bottom:
         - Row: "<size=150%><sprite name=Attack> *BAttack1*"
         - Divider:

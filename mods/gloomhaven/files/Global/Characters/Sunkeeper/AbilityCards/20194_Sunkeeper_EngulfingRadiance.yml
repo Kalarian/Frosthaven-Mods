@@ -33,15 +33,15 @@ Data:
         Infuse: Light
 Layout:
     Top:
-        - Row: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
-        - Row: "$FHS_Affect_SelfAndAllAllies$"
-        - Row: "<size=50%> "
         - Row:
-            - ColumnWidths: "30,20,20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
             - Column:
-                - Infuse: Light
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies> and self</link>"
             - Column:
+        - Row: "<size=50%> "
+        - Infuse: Light
     Bottom:
         - Active:
             Ability: BDisadvantage

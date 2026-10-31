@@ -50,8 +50,7 @@ Layout:
             ParentAbility: TAttack
             ActiveBonusLayout: "$FHS_Augment_OnYourMeleeAttacks$ <nobr><sprite name=Heal> *TAugmentHeal*,</nobr> <nobr><sprite name=Range> *TAugmentHeal.Range*</nobr>"
             AugmentAbilityLayout:
-                - Row: "<size=150%><sprite name=Heal> *TAugmentHeal*"
-                - Row: "<sprite name=Range> *TAugmentHeal.Range*"
+                - Row: "<size=125%><sprite name=Heal> *TAugmentHeal* <sprite name=Range> *TAugmentHeal.Range*"
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:

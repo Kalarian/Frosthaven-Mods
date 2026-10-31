@@ -65,6 +65,6 @@ Layout:
                         Icon: Positive_Retaliate
                         ListLayout: "<sprite name=Retaliate> 2"
                         Layout:
-                            - Row: "<size=150%><sprite name=Retaliate> 2"
+                            - Row: "<sprite name=Retaliate> 2"
         - Column:
             - Row: "<size=100%> "

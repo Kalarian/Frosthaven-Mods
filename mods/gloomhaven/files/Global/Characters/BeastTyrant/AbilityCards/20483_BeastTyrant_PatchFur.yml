@@ -46,5 +46,5 @@ Layout:
                 - Row: "<size=150%><sprite name=Shield> *TShield*"
                 - Row: "<b></b> $FHS_Affect_AllSummonedAllies$"
     Bottom:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row: "<link=fhself><size=125%><sprite name=Heal> *BAllyHeal* <size=100%><voffset=1>@BAllyHeal@</link>"

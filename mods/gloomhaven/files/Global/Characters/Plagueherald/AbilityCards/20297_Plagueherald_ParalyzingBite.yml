@@ -43,9 +43,4 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Air
-            - Column:
+        - Infuse: Air

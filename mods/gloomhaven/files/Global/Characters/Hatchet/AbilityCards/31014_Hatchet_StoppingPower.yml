@@ -71,9 +71,4 @@ Layout:
         - Row: "<size=150%><sprite name=Immobilize>"
         - Row: "$FHS_Target_AllEnemiesAdjacentToHexesMovedThrough$"
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Air
-            - Column:
+        - Infuse: Air

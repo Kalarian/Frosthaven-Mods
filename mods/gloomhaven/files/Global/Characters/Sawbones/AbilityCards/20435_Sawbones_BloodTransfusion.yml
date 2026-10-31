@@ -36,12 +36,22 @@ Data:
                 AnimOverload: RadialBuff
 Layout:
     Top:
-        - Row: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
-        - Row: "$FHS_Affect_OneAdjacentAlly$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> one adjacent <sprite name=Allies></link>"
+            - Column:
         - Row: "<size=50%> "
         - Row: "$FHS_Suffer_2Damage$"
     Bottom:
         - Row: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
         - Divider:
-        - Row: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
-        - Row: "$FHS_Affect_AllAdjacentAllies$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Allies></link>"
+            - Column:

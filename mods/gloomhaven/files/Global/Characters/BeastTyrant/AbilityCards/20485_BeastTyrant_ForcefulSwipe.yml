@@ -54,12 +54,12 @@ Layout:
     Top:
         - ColumnWidths: "70,25"
         - Column:
-            - Row: "$FHS_GH_Command$"
+            - Row: "<size=1%><link=fhcommand> </link>"
             - Row: "<size=150%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
             - Row: "<size=50%> "
         - Column: "£Area£"
     Bottom:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row: "<size=50%> "
         - Row: "<size=150%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
         - Divider:

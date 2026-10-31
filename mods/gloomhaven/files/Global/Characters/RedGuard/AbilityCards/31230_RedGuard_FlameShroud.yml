@@ -65,13 +65,10 @@ Layout:
         - Consume:
             Name: BCFire
             Text:
-                - ColumnWidths: "85,15"
-                - Column:
-                    - Active:
-                        Ability: BCFireShield
-                        Icon: Positive_Shield
-                        ListLayout: "<sprite name=Shield> 1"
-                        Layout:
-                            - Row: "<size=150%><sprite name=Shield> 1"
-                - Column:
-                    - Row: "<sprite name=XP1>"
+                - Active:
+                    Ability: BCFireShield
+                    Icon: Positive_Shield
+                    ListLayout: "<sprite name=Shield> 1"
+                    Layout:
+                        - Row: "<sprite name=Shield> 1"
+                - Row: ", <sprite name=XP1>"

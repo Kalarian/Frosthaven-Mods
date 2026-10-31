@@ -35,10 +35,12 @@ Data:
         XP: 1
 Layout:
     Top:
+        - Row: "<size=150%><nobr><sprite name=Curse></nobr>, <nobr><sprite name=Muddle></nobr>"
+        - Row: "<size=40%> "
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<size=150%><nobr><sprite name=Curse></nobr>, <nobr><sprite name=Muddle></nobr>"
+            - Column: "<size=1%> "
             - Column:
                 - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
             - Column:
@@ -52,9 +54,4 @@ Layout:
         - Row: "<size=150%><sprite name=Poison>"
         - Row: "$FHS_Target_AllEnemies$"
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Air
-            - Column:
+        - Infuse: Air

@@ -61,7 +61,7 @@ Layout:
             Layout:
                 - Consume:
                     Name: TCLight
-                    Text: $FHS_GH_202_T$
+                    Text: "$FHS_GH_202_T$"
     Bottom:
         - Row: $FHS_GH_371_B$
         - Row: "<size=20%> "

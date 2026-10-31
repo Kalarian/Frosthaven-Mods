@@ -31,7 +31,14 @@ Data:
 Layout:
     Top:
         - Row: "<size=150%><sprite name=Bless>, <size=130%><sprite name=Strengthen>"
-        - Row: "$FHS_Affect_OneAllyWithinRange3$"
+        - Row: "<size=40%> "
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=1%> "
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> one <sprite name=Allies> <sprite name=Range> 3</link>"
+            - Column:
     Bottom:
         - Active:
             Ability: BPrevent

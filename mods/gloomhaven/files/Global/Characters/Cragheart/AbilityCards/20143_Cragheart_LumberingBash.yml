@@ -36,12 +36,7 @@ Layout:
         - Divider:
         - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Earth
-            - Column:
+        - Infuse: Earth
     Bottom:
         - Active:
             Ability: BActive

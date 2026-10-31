@@ -51,7 +51,7 @@ Layout:
                     Layout:
                         - Consume:
                             Name: TCDark
-                            Text: "<nobr><sprite name=Muddle>, <sprite name=XP1></nobr>"
+                            Text: "<nobr><sprite name=Muddle> </nobr>, <sprite name=XP1>"
             - Column:
                 - Row: "£Area£"
     Bottom:

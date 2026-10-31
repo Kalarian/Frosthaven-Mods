@@ -60,10 +60,10 @@ Layout:
             Layout:
                 - Consume:
                     Name: BCAir
-                    Text: "<nobr>+1 $FHS_Damage$, <sprite name=XP1></nobr>"
+                    Text: "<nobr>+1 $FHS_Damage$ </nobr>, <sprite name=XP1>"
         - Row: "<size=20%> "
         - Conditional:
             Layout:
                 - Consume:
                     Name: BCDark
-                    Text: "<nobr>+1 $FHS_Damage$, <sprite name=XP1></nobr>"
+                    Text: "<nobr>+1 $FHS_Damage$ </nobr>, <sprite name=XP1>"

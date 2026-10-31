@@ -45,9 +45,4 @@ Layout:
         - Divider:
         - Row: "<size=150%><sprite name=Stun> <size=100%><voffset=1>@BStun@"
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Light
-            - Column:
+        - Infuse: Light

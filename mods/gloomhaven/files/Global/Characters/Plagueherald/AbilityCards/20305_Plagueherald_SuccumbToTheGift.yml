@@ -32,5 +32,10 @@ Layout:
     Top:
         - Row: "$FHS_GH_305_T$"
     Bottom:
-        - Row: "<size=150%><sprite name=Bless> <size=100%><voffset=1>@BBless@"
-        - Row: "$FHS_Affect_AllAllies$ $FHS_with$ <nobr><sprite name=Poison></nobr>"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Bless> <size=100%><voffset=1>@BBless@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies> with <sprite name=Poison></link>"
+            - Column:

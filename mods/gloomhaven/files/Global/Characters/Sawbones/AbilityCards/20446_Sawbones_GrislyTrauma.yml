@@ -43,10 +43,12 @@ Layout:
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:
+        - Row: "<size=150%><nobr><sprite name=Poison></nobr>, <nobr><sprite name=Wound></nobr>, <nobr><sprite name=Muddle></nobr> "
+        - Row: "<size=40%> "
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<size=150%><nobr><sprite name=Poison></nobr>, <nobr><sprite name=Wound></nobr>, <nobr><sprite name=Muddle></nobr> "
+            - Column: "<size=1%> "
             - Column:
                 - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
             - Column:

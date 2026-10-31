@@ -39,11 +39,7 @@ Layout:
         - Consume:
             Name: TCDark
             Text:
-                - ColumnWidths: "80,20"
-                - ColumnSpacing: 100
-                - Column:
-                    - Row: "<size=150%><sprite name=Heal> *TCDarkHeal*"
-                - Column:
+                - Row: "<sprite name=Heal> *TCDarkHeal*"
     Bottom:
         - Active:
             Ability: BShield

@@ -44,7 +44,7 @@ Layout:
                     SummonName: $FHS_SwampLizard$
                     SpecialText: "<sprite name=Immobilize>"
     Bottom:
-        - Row: "$FHS_GH_Command$"
+        - Row: "<size=1%><link=fhcommand> </link>"
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:

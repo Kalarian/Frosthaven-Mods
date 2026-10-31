@@ -53,14 +53,14 @@ Layout:
             Layout:
                 - Consume:
                     Name: TCAir
-                    Text: "<nobr>+2 <sprite name=Attack>, <sprite name=XP1></nobr>"
+                    Text: "<nobr>+2 <sprite name=Attack> </nobr>, <sprite name=XP1>"
         - Divider:
         - Row: "<link=fhself><size=125%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@</link>"
         - Conditional:
             Layout:
                 - Consume:
                     Name: TCEarth
-                    Text: "<nobr>+2 <sprite name=Heal>, <sprite name=XP1></nobr>"
+                    Text: "<nobr>+2 <sprite name=Heal> </nobr>, <sprite name=XP1>"
     Bottom:
         - Row: "$FHS_GH_489_B_1$"
         - Row: "<size=20%> "

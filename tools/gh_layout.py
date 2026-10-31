@@ -448,6 +448,13 @@ def _pill_block(main, mods, self_box):
     if cur:
         parts.append(cur)
     cols = [Node("Row", _pill_text(p, after=k > 0)) for k, p in enumerate(parts)]
+    # a main line of several conditions and nothing else ("poison, wound, muddle": Grisly Trauma) keeps its own line, the
+    # pill centred under it (the user, 2026-10-30): the narrow main column broke the conditions over two rows
+    plain = re.sub(r"<[^>]+>", "", main)
+    if len(re.findall(r"<sprite name=", main)) >= 2 and not re.search(r"[\w*@]", plain):
+        return [Node("Row", f'"{main}"'), Node("Row", '"<size=40%> "'),
+                Node("Row", children=[Node("ColumnWidths", STYLE_COLUMNS), Node("Column"), Node("Column", '"<size=1%> "'),
+                                      Node("Column", children=cols), Node("Column")])]
     return Node("Row", children=[Node("ColumnWidths", STYLE_COLUMNS), Node("Column"), Node("Column", f'"{main}"'),
                                  Node("Column", children=cols), Node("Column")])
 
@@ -467,6 +474,19 @@ def _text_modifiers(t):
     t = re.sub(r"</?nobr>", "", t)
     t = re.sub(r"\$(?:FHS_)?Range\$", "<sprite name=Range>", t)
     t = re.sub(r"\$FHS_(\w+)\$", r"$\1$", t)
+    # "Affect all (adjacent) allies [with X]" under an ability is Frosthaven's pill target ("◎ all <ally> ... and self":
+    # Rest in the Shade; Succumb to the Gift's bless crowded its text line, the user 2026-10-30)
+    a = re.fullmatch(r"\$Affect_(SelfAnd)?(\w+?)(Allies|Ally)(MovedThrough|Within)?(?:Range(\d+))?\$\s*(.*?)\s*", t)
+    if a:
+        who = " ".join(w.lower() for w in re.findall(r"[A-Z][a-z]*", a.group(2)))
+        tail = {"MovedThrough": " moved through", "Within": ""}.get(a.group(4) or "", "")
+        rest = re.sub(r"\$(?:FHS_)?with\$", "with", a.group(6)).strip()
+        entry = f"<sprite name=Target> {who} <sprite name=Allies>{tail}" + (f" {rest}" if rest and not rest.startswith("<sprite name=Range>") and not rest.startswith("<nobr><sprite name=Range>") else "") + (" and self" if a.group(1) else "")
+        out = [entry]
+        rng = re.search(r"<sprite name=Range>\s*([^<]+)", a.group(6))
+        if a.group(5): out.append(f"<sprite name=Range> {a.group(5)}")
+        elif rng: out.append(f"<sprite name=Range> {rng.group(1).strip()}")
+        return out
     m = re.fullmatch(r"\$(\w+)\$\s*(?:<nobr>)?\s*(<sprite name=Range>.*?)?(?:</nobr>)?\s*", t)
     if not m or m.group(1) not in _TEXT_TARGETS:
         return None
@@ -505,7 +525,8 @@ def _style_items(items):
                 else:
                     break
                 j += 1
-            out.append(_pill_block(main, mods, self_box))
+            pb = _pill_block(main, mods, self_box)
+            out.extend(pb if isinstance(pb, list) else [pb])
             i = j
             continue
         if n.key == "Consume" and n.dash:
@@ -532,6 +553,21 @@ def _style_items(items):
                                 line += (" " if mod else ", ") + x
                             c.children = []
                             c.value = '"' + line + '"'
+            # a reward that can't be text (an ability value, an area, an active bonus) stays a layout, the plugin draws
+            # the dashed box round it (GHCardStyle.BareConsumes); here it goes on one line at the box's size
+            for c in n.children:
+                if c.key == "Text" and c.children:
+                    c.children = _bare_reward(c.children)
+                elif c.key == "Text" and c.value and not c.value.startswith('"$'):
+                    # one size in the box, the XP last ("-1 <move>, XP <size=150%><attack> 2" read oddly: Resigned
+                    # Frenzy, the user 2026-10-30)
+                    t = _SIZES.sub("", c.text())
+                    xp = re.findall(r"<sprite name=XP\d+>", t)
+                    if xp:
+                        t = re.sub(r",?\s*<sprite name=XP\d+>\s*,?", " ", t).strip()
+                        t = re.sub(r"(\S)\s+(<nobr><sprite name=(?:Attack|Move|Heal|Shield)>)", r"\1, \2", t)
+                        t = t.rstrip(", ") + ", " + xp[0]
+                    c.set_text(t)
             # only a reward of text goes in the dashed box: the box's layout looks up every row as text, and an area,
             # an infusion or an ability in it stops the game at load ("an error within one of the Rule Libraries":
             # Shield of the Desert, Burn Away the Dark, 2026-10-30)
@@ -594,6 +630,138 @@ def _drop_self(items):
     return out
 
 
+_SIZES = re.compile(r"<(?:size|line-height)=[^>]*>|</?b>")
+
+
+def _join_parts(parts):
+    """Reward parts on one line: a target, range, pierce, push or pull after a space, the rest after a comma."""
+    line = parts[0]
+    for x in parts[1:]:
+        x = re.sub(r"^\$(?:FHS_)?Retaliate\$\s*", "", x)   # "Retaliate <Range> 2" is the range alone (Boiling Arc)
+        mod = re.match(r"(?:<nobr>)?\s*(?:<sprite name=(?:Range|Target|Pierce|Push|Pull)>|\$(?:FHS_)?Target_)", x)
+        line += (" " if mod else ", ") + x
+    return line
+
+
+def _bare_reward(items):
+    """A consume reward the dashed box can't hold as text, on one line (the user, 2026-10-30: Frosthaven boxes these
+    too - Bone Dagger, Flesh Shield, Lacerating Eruption): column wrappers go, stacked rows join ("<Retaliate> 2" over
+    "<Range> 2" is "<Retaliate> 2 <Range> 2"), the main line's 150% goes; an area stays a row of its own, after the
+    line, and an active bonus keeps its node with its rows joined."""
+    flat = []
+    for n in items:
+        if n.key in ("ColumnWidths", "ColumnSpacing"):
+            continue
+        if n.key == "Column":
+            flat += _bare_reward(n.children) if n.children else ([Node("Row", n.value)] if n.text().strip() else [])
+            continue
+        flat.append(n)
+    rows = [n for n in flat if is_row(n) and not is_spacer(n) and "£" not in n.text()]
+    areas = [n for n in flat if is_row(n) and "£" in n.text()]
+    other = [n for n in flat if not is_row(n)]
+    for a in other:
+        if a.key == "Active":
+            for lay in a.children:
+                if lay.key == "Layout" and lay.children:
+                    parts = [_SIZES.sub("", r.text()).strip() for r in lay.children if is_row(r) and not is_spacer(r)]
+                    if parts:
+                        lay.children = [Node("Row", '"' + _join_parts(parts) + '"')]
+    # an area first, then the rest after a comma, as Lacerating Eruption's "[area], XP"
+    out = list(other) + areas
+    if rows:
+        line = _join_parts([_SIZES.sub("", r.text()).strip() for r in rows])
+        # "shield 1, XP" (Flesh Shield); a range after a retaliate follows with a space ("<Retaliate> 2 <Range> 2")
+        mod = re.match(r"(?:<nobr>)?\s*<sprite name=(?:Range|Target|Pierce|Push|Pull)>", line)
+        out.append(Node("Row", '"' + ((" " if mod else ", ") + line if areas or other else line) + '"'))
+    return out
+
+
+COMMAND_KEY = re.compile(r'^"?\$(?:FHS_)?GH_Command\$"?$')
+
+
+def _commands(items):
+    """The Beast Tyrant's "Command" label (a row of its own or a narrow column beside the bear's abilities) goes; the
+    abilities follow the normal layout rules and the plugin tags the half "Command" at its top left, as Mindthief's
+    augments and Soothsinger's songs (the user, 2026-10-30). Returns (items, found)."""
+    found = False
+
+    def walk(nodes):
+        nonlocal found
+        out = []
+        for n in nodes:
+            if n.key in ("Row", "Column") and not n.children and COMMAND_KEY.match(n.value.strip()):
+                found = True
+                if n.key == "Column":
+                    out.append(Node("Column"))   # keeps the column count
+                continue
+            if n.children:
+                n.children = walk(n.children)
+                cols = [c for c in n.children if c.key == "Column"]
+                full = [c for c in cols if c.children or c.text().strip()]
+                # a row of columns with one column left in use is that column's content
+                if n.key == "Row" and cols and len(full) == 1 and not full[0].text().strip():
+                    out.extend(full[0].children)
+                    continue
+            out.append(n)
+        return out
+
+    items = walk(items)
+    if found:
+        marker = Node("Row", '"<size=1%><link=fhcommand> </link>"')
+        cols = [c for c in items if c.key == "Column"]
+        full = [c for c in cols if c.children or c.text().strip()]
+        if cols and len(full) == 1 and not full[0].text().strip():
+            items = full[0].children          # a half split into columns with one in use (Jaws of Death bottom)
+            cols = []
+        if cols:
+            # still columns (an area beside the bear's attack: Forceful Swipe): the marker goes in the first one
+            first = next((c for c in full if c.children), None)
+            if first is not None:
+                first.children.insert(0, marker)
+        else:
+            items.insert(0, marker)
+    return items
+
+
+def _doom_rows(items, zero_tracker):
+    """A Doom's reminder line at the text's size, and a Doom turn counter that gives no XP not drawn (Inescapable Fate
+    bottom: three green boxes over the text, the reminder at 70%; the user, 2026-10-30)."""
+    out = []
+    for n in items:
+        if n.key == "XPTracker" and "Doom" in n.value and zero_tracker:
+            continue
+        if is_row(n) and "Doom_DiscardReminderText" in n.text():
+            n.set_text(_SIZES.sub("", n.text()))
+        if n.children:
+            n.children = _doom_rows(n.children, zero_tracker)
+        out.append(n)
+    return out
+
+
+def _data_rows(items):
+    """A row written as "Data:" plus "RowProperties:" (Provoke Terror's stun) is an ordinary row for the style pass, so
+    its range joins it in a pill (the user, 2026-10-30)."""
+    for n in items:
+        if n.key == "Row" and n.children and any(c.key == "Data" for c in n.children):
+            data = next(c for c in n.children if c.key == "Data")
+            n.value, n.children = data.value, []
+        elif n.children:
+            _data_rows(n.children)
+    return items
+
+
+def _augment_lines(items):
+    """An augment's effect on one line at one size (the user, 2026-10-30: Silent Scream's heal and range stacked;
+    Frozen Mind's stun small and low beside a larger, raised consume icon)."""
+    for n in _flat(items):
+        if n.key == "AugmentAbilityLayout" and n.children and all(is_row(r) for r in n.children):
+            parts = [re.sub(r"</?(?:nobr|voffset)[^>]*>", "", _SIZES.sub("", r.text())).strip()
+                     for r in n.children if not is_spacer(r)]
+            if parts:
+                n.children = [Node("Row", '"<size=125%>' + _join_parts(parts) + '"')]
+    return items
+
+
 def _flat(items):
     return [m for n in items for m in [n] + _flat(n.children)]
 
@@ -651,8 +819,11 @@ def fh_style(s, warn=print):
     except Unsupported as e:
         warn(f"Frosthaven style not applied ({e})")
         return s
+    # a Doom turn counter with no XP on it (Inescapable Fate: XPTracker [0,0,0])
+    trackers = re.findall(r"XPTracker: \[([\d, ]+)\]", s)
+    zero_doom = bool(trackers) and all(set(x.replace(" ", "").split(",")) <= {"0"} for x in trackers)
     for half in halves:
-        half.children = _tracker_space(_drop_durations(half.children))
-        half.children = _drop_self(_style_items(half.children))
+        half.children = _tracker_space(_drop_durations(_commands(_data_rows(_doom_rows(half.children, zero_doom)))))
+        half.children = _augment_lines(_drop_self(_style_items(half.children)))
     _restyle_values(halves)
     return eol.join(lines[:at + 1]) + eol + "".join(emit(halves, 1, eol))

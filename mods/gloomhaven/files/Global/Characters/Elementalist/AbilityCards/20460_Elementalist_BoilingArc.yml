@@ -49,13 +49,9 @@ Layout:
         - Consume:
             Name: BCFire
             Text:
-                - ColumnWidths: "80,20"
-                - Column:
-                    - Active:
-                        Ability: BCFireReta
-                        Icon: Positive_Retaliate
-                        ListLayout: "<sprite name=Retaliate> 2"
-                        Layout:
-                            - Row: "<b><sprite name=Retaliate> 2"
-                            - Row: "<sprite name=Range> *BCFireReta.RetaliateRange*"
-                - Column:
+                - Active:
+                    Ability: BCFireReta
+                    Icon: Positive_Retaliate
+                    ListLayout: "<sprite name=Retaliate> 2"
+                    Layout:
+                        - Row: "<sprite name=Retaliate> 2 <sprite name=Range> *BCFireReta.RetaliateRange*"

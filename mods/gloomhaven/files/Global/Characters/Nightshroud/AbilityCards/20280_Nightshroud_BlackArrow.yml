@@ -50,9 +50,4 @@ Layout:
         - Consume:
             Name: BCDark
             Text:
-                - ColumnWidths: "80,20"
-                - ColumnSpacing: 150
-                - Column:
-                    - Row: "<b><size=100%><sprite name=Attack> *BCDarkAttack*"
-                    - Row: "<sprite name=Range> *BCDarkAttack.Range*"
-                - Column:
+                - Row: "<sprite name=Attack> *BCDarkAttack* <sprite name=Range> *BCDarkAttack.Range*"

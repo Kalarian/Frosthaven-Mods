@@ -58,13 +58,13 @@ Layout:
                 Layout:
                     - Consume:
                         Name: TCEarth
-                        Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Immobilize>, <sprite name=XP1></nobr>"
+                        Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Immobilize> </nobr>, <sprite name=XP1>"
             - Row: "<size=50%> "
             - Conditional:
                 Layout:
                     - Consume:
                         Name: TCDark
-                        Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Curse>, <sprite name=XP1></nobr>"
+                        Text: "<nobr>+1 <sprite name=Attack></nobr>, <nobr><sprite name=Curse> </nobr>, <sprite name=XP1>"
         - Column:
             - Row: "£Area£"
     Bottom:

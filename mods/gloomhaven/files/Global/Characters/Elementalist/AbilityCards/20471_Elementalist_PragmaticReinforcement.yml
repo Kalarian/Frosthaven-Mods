@@ -75,16 +75,11 @@ Data:
 Layout:
     Top:
         - Row:
-            - ColumnWidths: "20, 60, 20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
             - Column:
-                - Row:
-                    - ColumnWidths: "10,35,45,10"
-                    - Column:
-                    - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
-                    - Column:
-                        - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
-                    - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
             - Column:
         - Row: "<size=20%> "
         - Row:
@@ -112,16 +107,11 @@ Layout:
                     Text: "$FHS_GH_471_T$"
     Bottom:
         - Row:
-            - ColumnWidths: "20, 60, 20"
+            - ColumnWidths: "10,35,45,10"
             - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
             - Column:
-                - Row:
-                    - ColumnWidths: "10,35,45,10"
-                    - Column:
-                    - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
-                    - Column:
-                        - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
-                    - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
             - Column:
         - Row: "<size=20%> "
         - Row:

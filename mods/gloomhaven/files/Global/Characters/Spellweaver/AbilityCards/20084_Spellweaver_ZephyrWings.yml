@@ -60,4 +60,4 @@ Layout:
             Layout:
                 - Consume:
                     Name: BCAir
-                    Text: "+3 <sprite name=Move>, <sprite name=XP1> "
+                    Text: "+3 <sprite name=Move>, <sprite name=XP1>"

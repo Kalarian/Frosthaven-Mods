@@ -33,7 +33,7 @@ Layout:
             ParentAbility: TAttack
             ActiveBonusLayout: "$FHS_Augment_OnYourMeleeAttacks$ $FHS_Add$ <nobr><sprite name=Muddle></nobr>, <nobr><sprite name=Poison></nobr>"
             AugmentAbilityLayout:
-                - Row: "$FHS_Add$ <nobr><sprite name=Muddle></nobr>, <nobr><sprite name=Poison></nobr>"
+                - Row: "<size=125%>$FHS_Add$ <sprite name=Muddle>, <sprite name=Poison>"
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:

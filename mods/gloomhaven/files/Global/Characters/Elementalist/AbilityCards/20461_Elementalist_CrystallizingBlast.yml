@@ -57,12 +57,9 @@ Layout:
         - Consume:
             Name: BCIce
             Text:
-                - ColumnWidths: "80,20"
-                - Column:
-                    - Active:
-                        Ability: BCIceShield
-                        Icon: Positive_Shield
-                        ListLayout: "<sprite name=Shield> 2"
-                        Layout:
-                            - Row: "<b><sprite name=Shield> 2"
-                - Column:
+                - Active:
+                    Ability: BCIceShield
+                    Icon: Positive_Shield
+                    ListLayout: "<sprite name=Shield> 2"
+                    Layout:
+                        - Row: "<sprite name=Shield> 2"

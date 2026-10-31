@@ -46,12 +46,7 @@ Layout:
         - Divider:
         - Row: "<link=fhself><size=125%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@</link>"
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "30,20,20"
-            - Column:
-            - Column:
-                - Infuse: Dark
-            - Column:
+        - Infuse: Dark
     Bottom:
         - Row: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
         - Divider:

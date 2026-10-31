@@ -34,7 +34,12 @@ Layout:
             Icon: Positive_Shield
             ListLayout: "<sprite name=Shield> *TShield*"
             Layout:
-                - Row: "<size=150%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
-                - Row: "$FHS_Affect_AllAllies$"
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies></link>"
+                    - Column:
     Bottom:
         - Row: "$FHS_GH_407_T$"
