@@ -16,13 +16,19 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 def norm(s):
     s = str(s).lower()
     s = s.replace("(! box)", "!").replace("’", "'").replace("“", '"').replace("”", '"')
+    # wording that differs between readers without changing the card
+    for noise in ("(corner box)", "trait box", "no traits", "no trait", "traits", "trait", "ends after the last",
+                  "lost after the last", "discarded after the last", "(no xp on any slot)", "(no xp)"):
+        s = s.replace(noise, " ")
     s = re.sub(r"[\s,;.]+", " ", s)
     return s.strip(' "')
 
 
 def half(h):
+    """A half as one token string (line splits and colons don't count as differences) + its corner icons."""
     h = h or {}
-    return [norm(x) for x in h.get("lines") or []], sorted(norm(x) for x in h.get("summary") or [])
+    text = " ".join(norm(x) for x in h.get("lines") or []).replace(":", " ")
+    return [" ".join(text.split())], sorted(norm(x) for x in h.get("summary") or [])
 
 
 def main(cls):

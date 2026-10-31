@@ -4,6 +4,7 @@ See [README](README.md) for the format and credits.
 
 | Class | Cards | Special rules | GHS agrees | Summons | Mechanics | Unclear |
 |---|---|---|---|---|---|---|
+| [Berserker](Berserker.md) | 28 | 55 | 0/0 | 0 | 20 | 6 |
 | [Bruiser](Bruiser.md) | 29 | 24 | 21/29 | 0 | 14 | 2 |
 | [Cragheart](Cragheart.md) | 30 | 44 | 23/30 | 0 | 18 | 5 |
 | [Doomstalker](Doomstalker.md) | 30 | 52 | 21/30 | 7 | 17 | 6 |
@@ -19,3 +20,4 @@ See [README](README.md) for the format and credits.
 | [Spellweaver](Spellweaver.md) | 27 | 24 | 21/27 | 0 | 14 | 6 |
 | [Sunkeeper](Sunkeeper.md) | 30 | 36 | 0/0 | 0 | 16 | 6 |
 | [Tinkerer](Tinkerer.md) | 31 | 31 | 21/31 | 3 | 14 | 6 |
+| [Wildfury](Wildfury.md) | 29 | 26 | 0/0 | 4 | 20 | 6 |

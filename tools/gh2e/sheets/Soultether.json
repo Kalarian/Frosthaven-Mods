@@ -1,688 +1,1234 @@
 {
-  "class": "Soultether",
-  "read_by": "image reader A, 2026-10-31",
-  "cards": [
-    {
-      "name": "Ethereal Gust",
-      "number": "0235",
-      "level": "1",
-      "initiative": 14,
-      "top": {
-        "lines": ["\"Grant two of your summons:\"", "Move +0"],
-        "summary": ["XP 1"]
-      },
-      "bottom": {
-        "lines": ["Move 3 [square]", "! infuse Air (corner box)"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: grant two of your summons a move ability at their own Move +0"],
-      "summons": [],
-      "notes": "Class-wide: printed card numbers are four digits, 0235-0265, in the input order. No GHS card entries and no Xipe file exist for this class, so 'missing' on every card; GHS's character data (summons) is cross-checked in the class-level summons. Class-wide: every corner box (XP / persistent / lost / round and every infusion box) has the '!' mandatory tab; infusions are written '! infuse ...', the tab is not repeated in summary. Class-wide icons: the persistent icon is a card with an infinity sign; when it carries a red arrow to a lost (red X) card it is written 'persistent', 'lost'; without the lost card, 'persistent' only. Round = card with a circular arrow. Teleport = arrow down onto a hex with rings; Loot = arrow up from a coin stack; Push = grey diamond with an up arrow (confirmed by Biting Wind's 'after the push'); Jump = curved arrow in a pill; damage = starburst with a drop. Conditions: Disarm = grey-teal hand diamond (same icon as Bruiser Warding Strength), Curse = purple lightning diamond, Stun = blue star diamond, Muddle = brown '?' diamond, Wound = orange drop diamond, Poison = grey-green skull diamond, Immobilize = red boot diamond, Strengthen = blue arm diamond, Ward = pink shield-with-flame diamond, Invisible = black dashed-figure diamond, Pierce = tan diamond with an arrow."
-    },
-    {
-      "name": "Forged Ferocity",
-      "number": "0236",
-      "level": "1",
-      "initiative": 37,
-      "top": {
-        "lines": ["Summon Iron Beast: HP 7 [square], Move 2 [square], Attack 1 [square], Range - (melee); Shield 1, Retaliate 1"],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "bottom": {
-        "lines": ["Strengthen [diamond+]: target 1 of your summons", "! infuse Fire (corner box)"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["bottom: Strengthen targets one of your summons (no range printed)"],
-      "summons": ["Iron Beast"],
-      "notes": "Bottom: condition-only ability, no attack; no range given on the card."
-    },
-    {
-      "name": "Living Night",
-      "number": "0237",
-      "level": "1",
-      "initiative": 96,
-      "top": {
-        "lines": ["Summon 2 Shadow Wolves: HP 2 [square], Move 3 [square], Attack 2 [square], Range - (melee); Pierce 1",
-                  "\"Whenever a Shadow Wolf dies, infuse Dark and all Shadow Wolves gain Invisible.\""],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "bottom": {
-        "lines": ["\"On the next two attacks targeting one of your summons, the attacker gains disadvantage for the attack and suffers damage 1 after the attack.\"",
-                  "slots: 2 (no XP), ends after the last",
-                  "! infuse Dark (corner box)"],
-        "summary": ["persistent"]
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: two summons from one action; whenever a Shadow Wolf dies: infuse Dark and all (remaining) Shadow Wolves gain Invisible",
-                 "bottom: use slots: next two attacks targeting any of your summons: attacker has disadvantage, then suffers damage 1"],
-      "summons": ["Shadow Wolf (x2)"],
-      "notes": "Bottom: first slot dashed (starts on play), second slot solid, small red marks after it; the corner box is the persistent icon without the lost card, so the card is discarded, not lost, when the track ends."
-    },
-    {
-      "name": "Wild Animation",
-      "number": "0238",
-      "level": "1",
-      "initiative": 92,
-      "top": {
-        "lines": ["Heal 3 [diamond+]", "Range 4"],
-        "summary": []
-      },
-      "bottom": {
-        "lines": ["Summon Thorn Shooter: HP 3 [square], Move 2 [square], Attack: Poison (condition icon in the attack slot, no number, no mark), Range 4 [square]"],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["bottom: summon whose attack is printed as a Poison icon with no attack value"],
-      "summons": ["Thorn Shooter"],
-      "notes": "Thorn Shooter has no trait box."
-    },
-    {
-      "name": "Planar Protection",
-      "number": "0239",
-      "level": "1",
-      "initiative": 94,
-      "top": {
-        "lines": ["Disarm", "Range 4"],
-        "summary": []
-      },
-      "bottom": {
-        "lines": ["Summon Rift Spirit: HP 2 [square], Move 2, Attack: Muddle (condition icon in the attack slot, no number, no mark), Range 3; \"At end of turn, grant one ally within Range 3: Shield 1\"",
-                  "\"You control the grant abilities of this summon.\""],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["bottom: summon attack is a Muddle icon with no attack value",
-                 "bottom: summon trait: at the end of its turn, grant one ally within range 3 Shield 1; you (the summoner) control that grant"],
-      "summons": ["Rift Spirit"],
-      "notes": "Top: condition-only ability (Disarm at range 4, no attack, no mark). Rift Spirit's only stat mark is on HP. The grant gives Shield 1 (presumably for the round, as a granted ability)."
-    },
-    {
-      "name": "Mighty Bond",
-      "number": "0240",
-      "level": "1",
-      "initiative": 51,
-      "top": {
-        "lines": ["\"Grant one of your summons:\"", "Move +0", "Attack +0"],
-        "summary": ["XP 1"]
-      },
-      "bottom": {
-        "lines": ["Teleport 2 [circle]", "consume Dark: +2 Teleport, XP 1"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: grant one of your summons a move and an attack at its own values +0"],
-      "summons": [],
-      "notes": "Top is identical to Bonded Might's top (same grant, same XP 1)."
-    },
-    {
-      "name": "Bonded Might",
-      "number": "0241",
-      "level": "1",
-      "initiative": 61,
-      "top": {
-        "lines": ["\"Grant one of your summons:\"", "Move +0", "Attack +0"],
-        "summary": ["XP 1"]
-      },
-      "bottom": {
-        "lines": ["consume Air: Move 2, XP 1", "Loot 1"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: grant one of your summons a move and an attack at its own values +0",
-                 "bottom: the Move 2 exists only if Air is consumed (stand-alone consume pill printed above the Loot, no base move)"],
-      "summons": [],
-      "notes": "Bottom: the consume pill comes first, then a divider, then Loot 1 (no marks)."
-    },
-    {
-      "name": "Burning Passion",
-      "number": "0242",
-      "level": "1",
-      "initiative": 12,
-      "top": {
-        "lines": ["Strengthen [diamond+]: Target 2, Range 4", "! infuse Fire (corner box)"],
-        "summary": []
-      },
-      "bottom": {
-        "lines": ["\"Negate the next damage one of your summons would suffer this round.\""],
-        "summary": ["round"]
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["bottom: this round, negate the next source of damage any one of your summons would suffer (one use)"],
-      "summons": [],
-      "notes": "Top infusion box sits in the middle, just above the initiative."
-    },
-    {
-      "name": "Unending Dominance",
-      "number": "0243",
-      "level": "1",
-      "initiative": 22,
-      "top": {
-        "lines": ["\"Recover one card from your lost pile.\"",
-                  "Invisible [diamond+], self",
-                  "\"On the next summon action you perform, any summons summoned by that action gain Invisible.\"",
-                  "slots: 1 (dashed, no XP), lost after the last"],
-        "summary": ["persistent", "lost"]
-      },
-      "bottom": {
-        "lines": ["Move 2 [square]", "\"Grant one of your summons:\"", "Move 2 [square]"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: recover one card from your lost pile",
-                 "top: persistent until your next summon action: summons summoned by it gain Invisible",
-                 "bottom: grant one of your summons Move 2 (a fixed value, not +0)"],
-      "summons": [],
-      "notes": "Top: 'Recover' is the recover icon (card with a red check mark). No XP on this card. The single slot is dashed; a purple arrow follows it."
-    },
-    {
-      "name": "Shadow Dart",
-      "number": "0244",
-      "level": "1",
-      "initiative": 28,
-      "top": {
-        "lines": ["Attack 2 [diamond]", "Range 4", "Curse", "! infuse Dark (corner box)"],
-        "summary": []
-      },
-      "bottom": {
-        "lines": ["\"All your summons' attacks are unaffected by Retaliate.\""],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["bottom: persistent: your summons' attacks ignore Retaliate"],
-      "summons": [],
-      "notes": "Top infusion box in the middle above the initiative."
-    },
-    {
-      "name": "Burning Tether",
-      "number": "0245",
-      "level": "1",
-      "initiative": 43,
-      "top": {
-        "lines": ["Attack 1 [diamond]", "Range 4", "Wound", "consume Fire: +1 Target, XP 1"],
-        "summary": []
-      },
-      "bottom": {
-        "lines": ["Teleport 3 [square]"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": [],
-      "summons": [],
-      "notes": ""
-    },
-    {
-      "name": "Primal Assault",
-      "number": "0246",
-      "level": "1",
-      "initiative": 20,
-      "top": {
-        "lines": ["\"Grant two of your summons:\"", "Attack +1",
-                  "consume Fire: Wound", "consume Air: Pierce 2", "consume Dark: Curse"],
-        "summary": ["XP 2", "lost"]
-      },
-      "bottom": {
-        "lines": ["Heal 2 [circle]", "Range 3 [square]"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: grant two of your summons an attack at their own value +1; each of three element consumes adds a rider to the granted attacks (Fire: Wound, Air: Pierce 2, Dark: Curse)"],
-      "summons": [],
-      "notes": "Top: the three consume rows share one dashed box linked to the granted attack; each can be consumed separately. Bottom: the square mark sits inside the range pill (Range 3 [square])."
-    },
-    {
-      "name": "Drifting Stingers",
-      "number": "0247",
-      "level": "X",
-      "initiative": 90,
-      "top": {
-        "lines": ["Summon Floating Jellyfish: HP 5 [square], Move 1, Attack 3, Range - (melee); Flying; \"+3 Move if Air is strong or waning.\"",
-                  "! infuse Air (corner box)"],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "bottom": {
-        "lines": ["Teleport 3 [square]"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: summon trait: +3 Move while Air is strong or waning"],
-      "summons": ["Floating Jellyfish"],
-      "notes": "Only HP has a mark in the Jellyfish block. Top infusion box in the middle above the initiative (the card infuses the Air its own summon uses)."
-    },
-    {
-      "name": "Biting Wind",
-      "number": "0248",
-      "level": "X",
-      "initiative": 82,
-      "top": {
-        "lines": ["Attack 2 [diamond]", "Range 4", "Push 1 [square]",
-                  "consume Air: +1 Attack, +1 Range, +1 Push, XP 1"],
-        "summary": []
-      },
-      "bottom": {
-        "lines": ["\"Grant one of your summons:\"", "Move +0", "Push 2: target all, range 1",
-                  "\"Each target suffers damage 2 after the push.\"",
-                  "! infuse Air (corner box)"],
-        "summary": ["XP 2", "lost"]
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["bottom: granted to one summon: move +0, then Push 2 on all adjacent enemies, each target suffers damage 2 after the push"],
-      "summons": [],
-      "notes": "Top: the square mark sits at the end of the pill after 'Push 1' (Push is a rider of the attack, in the pill with Range 4). Bottom: no marks."
-    },
-    {
-      "name": "Unwavering Hand",
-      "number": "0249",
-      "level": "X",
-      "initiative": 31,
-      "top": {
-        "lines": ["\"Grant one of your summons:\"", "Attack +1"],
-        "summary": ["XP 1"]
-      },
-      "bottom": {
-        "lines": ["\"Control one enemy within Range 4:\"", "Move 1 [square]", "! infuse Air (corner box)"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: grant one of your summons an attack at its own value +1",
-                 "bottom: control one enemy within range 4: it performs Move 1 (you move it)"],
-      "summons": [],
-      "notes": "Control enemy (you decide the enemy's movement) is a 2e mechanic Frosthaven may lack."
-    },
-    {
-      "name": "Intervening Apparitions",
-      "number": "0250",
-      "level": "2",
-      "initiative": 34,
-      "top": {
-        "lines": ["\"Grant one of your summons:\"", "Attack +0",
-                  "consume Fire: area: grey (attacker) hex, red hex right of it, red hex up-right of it, red hex right of that up-right hex (4-hex rhombus; doubled coords y up: G 0,0; R 2,0 1,1 3,1) [no hex mark]"],
-        "summary": ["XP 1"]
-      },
-      "bottom": {
-        "lines": ["\"On the next three sources of damage that would kill one of your summons, negate the damage and that summon gains Invisible, Stun.\"",
-                  "slots: 3 (XP 1 on slots 1, 3), lost after the last",
-                  "! infuse Dark (corner box)"],
-        "summary": ["persistent", "lost"]
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: grant one of your summons an attack +0; consume Fire turns the granted attack into the 3-hex area attack",
-                 "bottom: use slots: next three sources of damage that would kill a summon are negated, and that summon gains Invisible and Stun"],
-      "summons": [],
-      "notes": "Bottom: XP badges sit at the top-right of slot 1 (the dashed one) and of slot 3; the middle slot has none."
-    },
-    {
-      "name": "Void Imbuement",
-      "number": "0251",
-      "level": "2",
-      "initiative": 23,
-      "top": {
-        "lines": ["\"On the next three attacks performed by your summons, add +1 Attack, Pierce 1 to the attack.\"",
-                  "slots: 3 (XP 1 on slot 3), ends after the last"],
-        "summary": ["persistent"]
-      },
-      "bottom": {
-        "lines": ["\"Grant one of your summons:\"", "Move +1", "Jump",
-                  "consume Air: \"Grant two of your summons the move ability instead, XP 1.\""],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: use slots: next three attacks by any of your summons get +1 Attack and Pierce 1",
-                 "bottom: grant one summon Move +1 with Jump; consume Air: two summons get the granted move instead, XP 1"],
-      "summons": [],
-      "notes": "Top: persistent icon without the lost card, so discarded when the track ends. Bottom Jump is in a pill beside 'Move +1'."
-    },
-    {
-      "name": "Shaping the Void",
-      "number": "0252",
-      "level": "3",
-      "initiative": 41,
-      "top": {
-        "lines": ["Attack 2 [diamond]", "Range 4", "Ward [diamond+]", "Range 4", "! infuse Air (corner box)"],
-        "summary": []
-      },
-      "bottom": {
-        "lines": ["Teleport 3 [circle]", "Heal 1: target all your summons, range 1"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["bottom: Heal 1 targets all your summons within range 1"],
-      "summons": [],
-      "notes": "Input initiative was \"41,\" (stray comma); printed 41. Top: Ward is a separate ability after a divider (range 4, one target). Top infusion box in the middle above the initiative."
-    },
-    {
-      "name": "Deadly Mischief",
-      "number": "0253",
-      "level": "3",
-      "initiative": 81,
-      "top": {
-        "lines": ["Summon Covetous Imp: HP 5 [square], Move 3 [square], Attack 3 [square], Range - (melee)",
-                  "\"Whenever this summon kills an enemy, you gain the money token directly instead of placing it in the hex that enemy occupied.\""],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "bottom": {
-        "lines": ["Attack 2 [square]", "Range 3 [square]", "! infuse Fire (corner box)"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: summon trait: its kills give you the money token directly"],
-      "summons": ["Covetous Imp"],
-      "notes": "Imp has no trait box; the money rule is printed below the stat block."
-    },
-    {
-      "name": "Strength in Numbers",
-      "number": "0254",
-      "level": "4",
-      "initiative": 45,
-      "top": {
-        "lines": ["Heal 2 [square]", "Target 2 [square]", "Range 4",
-                  "\"Add +1 Heal on each target adjacent to two or more allies.\""],
-        "summary": []
-      },
-      "bottom": {
-        "lines": ["Attack X", "Range X+1", "\"where X is the number of your summons.\""],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: +1 Heal on each target adjacent to two or more allies",
-                 "bottom: Attack X and Range X+1, X = number of your summons"],
-      "summons": [],
-      "notes": "No corner icons on either half (no XP, not lost). Bottom has no enhancement marks."
-    },
-    {
-      "name": "Volatile Flame",
-      "number": "0255",
-      "level": "4",
-      "initiative": 97,
-      "top": {
-        "lines": ["Curse [diamond]", "Range 4", "consume Dark: Stun, XP 1"],
-        "summary": []
-      },
-      "bottom": {
-        "lines": ["Summon Ember Sprite (Flying icon beside the name): HP 3 [square], Move 3, Attack 1, Range 3; \"All allies within Range 3 gain Retaliate 1, Range 3 while Fire is strong or waning.\"",
-                  "! infuse Fire (corner box)"],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: condition-only ability: Curse at range 4; consume Dark adds Stun to the same target",
-                 "bottom: summon aura: all allies within range 3 of the sprite gain Retaliate 1 (range 3) while Fire is strong or waning"],
-      "summons": ["Ember Sprite"],
-      "notes": "Bottom: the Flying icon is printed after 'Summon Ember Sprite' in the title row, not in the trait box. The trait box's 'Range 3' after Retaliate 1 is in a pill (the retaliate's range). Only HP has a mark. The card's own infusion (Fire) feeds the sprite's aura."
-    },
-    {
-      "name": "Living Mountain",
-      "number": "0256",
-      "level": "5",
-      "initiative": 19,
-      "top": {
-        "lines": ["Summon Rock Colossus: HP 12 [square], Move 2 [square], Attack 1 [square], Range - (melee); Muddle; Retaliate 2",
-                  "\"Add +1 Heal to all heals targeting this summon. At the end of each of this summon's turns, it performs:\"",
-                  "Heal 1, self"],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "bottom": {
-        "lines": ["Teleport 3 [circle]", "\"Grant one of your summons:\"", "Teleport 3 [square]"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: summon trait: heals targeting it get +1; it heals itself 1 at the end of each of its turns",
-                 "bottom: grant one of your summons Teleport 3"],
-      "summons": ["Rock Colossus"],
-      "notes": "Rock Colossus trait box: Muddle icon (its attacks apply Muddle) and Retaliate 2."
-    },
-    {
-      "name": "Primal Infusion",
-      "number": "0257",
-      "level": "5",
-      "initiative": 88,
-      "top": {
-        "lines": ["\"Grant one of your summons:\"", "Move +1", "Attack +1"],
-        "summary": ["XP 1"]
-      },
-      "bottom": {
-        "lines": ["\"Your summons gain +1 Attack while Fire is strong or waning, +1 Move and Jump while Air is strong or waning, and Shield 1 while Dark is strong or waning.\""],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: grant one summon a move and an attack at its own values +1",
-                 "bottom: persistent element-gated summon buffs: Fire +1 Attack; Air +1 Move and Jump; Dark Shield 1 (each while that element is strong or waning)"],
-      "summons": [],
-      "notes": "No enhancement marks on this card."
-    },
-    {
-      "name": "Tear the Fabric",
-      "number": "0258",
-      "level": "6",
-      "initiative": 11,
-      "top": {
-        "lines": ["Attack 2 [diamond]", "Range 4", "Curse",
-                  "Invisible [diamond+]: target 1 of your summons, range 4",
-                  "! infuse Dark (corner box)"],
-        "summary": []
-      },
-      "bottom": {
-        "lines": ["\"Grant all your summons:\"", "Shield 1 [square]", "Retaliate 1 [square]"],
-        "summary": ["round"]
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: Invisible on one of your summons within range 4",
-                 "bottom: all your summons gain Shield 1 and Retaliate 1 for the round"],
-      "summons": [],
-      "notes": "Top infusion box in the middle above the initiative."
-    },
-    {
-      "name": "Oozing Manifestation",
-      "number": "0259",
-      "level": "6",
-      "initiative": 86,
-      "top": {
-        "lines": ["Summon Slime Spirit: HP 5 [square], Move 2 [square], Attack 2 [square], Range - (melee); Poison",
-                  "\"When this summon would die, if there is no character token on this card, instead negate the damage and place a character token on this card to summon a Slime Spirit in an empty hex adjacent to this summon.\""],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "bottom": {
-        "lines": ["Teleport 4 [circle]", "Poison [diamond]", "Range 2 [square]"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: summon trait: the first time it would die (no character token on the card yet), negate the damage, put a character token on the card and summon a second Slime Spirit in an adjacent empty hex",
-                 "bottom: condition-only ability: Poison at range 2"],
-      "summons": ["Slime Spirit"],
-      "notes": "Top: the dying spirit survives (damage negated) and a second Slime Spirit appears, so two spirits exist afterwards; the token makes it once per card play."
-    },
-    {
-      "name": "Divided Mind",
-      "number": "0260",
-      "level": "7",
-      "initiative": 30,
-      "top": {
-        "lines": ["Heal 5 [diamond+]", "Range 4", "\"Grant the target of the heal ability:\"",
-                  "consume Air: Push 1, Range 1, Immobilize"],
-        "summary": ["XP 1"]
-      },
-      "bottom": {
-        "lines": ["\"Grant one of your summons:\"", "Attack +0",
-                  "consume Fire: \"Grant two of your summons the attack ability instead, XP 1.\""],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: consume Air: the heal target (any ally, not only summons) is granted Push 1, range 1, with Immobilize on the pushed enemy",
-                 "bottom: grant one summon an attack +0; consume Fire: two summons get the granted attack instead, XP 1"],
-      "summons": [],
-      "notes": "Top: the grant exists only with the Air consume (the whole grant row is in the consume pill). Bottom consume element is Fire."
-    },
-    {
-      "name": "Negative Energy",
-      "number": "0261",
-      "level": "7",
-      "initiative": 95,
-      "top": {
-        "lines": ["Summon Void Eater: HP 6 [square], Move 3 [square], Attack 4 [square], Range - (melee)",
-                  "\"Whenever this summon kills an enemy while Dark is strong or waning, shuffle a Curse card into the monster attack modifier deck.\"",
-                  "! infuse Dark (corner box)"],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "bottom": {
-        "lines": ["Teleport 4 [circle]", "Strengthen [diamond+]: target 1 ally, range 3"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: summon trait: each kill while Dark is strong or waning shuffles a Curse into the monster modifier deck"],
-      "summons": ["Void Eater"],
-      "notes": "Top infusion box sits left of the persistent box, above the initiative. Void Eater has no trait box."
-    },
-    {
-      "name": "Otherworldly Rage",
-      "number": "0262",
-      "level": "8",
-      "initiative": 35,
-      "top": {
-        "lines": ["\"Grant one of your summons:\"", "Attack +2", "Wound", "Poison"],
-        "summary": ["XP 1"]
-      },
-      "bottom": {
-        "lines": ["\"Recover one card from your lost pile that has a summon action and immediately play that card to perform the summon action. Any summons summoned by that action gain Ward, Invisible, and Strengthen.\"",
-                  "Invisible [diamond+], self"],
-        "summary": ["lost"]
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: grant one summon an attack +2 with Wound and Poison",
-                 "bottom: recover a lost card with a summon action and play its summon action at once; those summons gain Ward, Invisible and Strengthen"],
-      "summons": [],
-      "notes": "Bottom: 'Recover' is the recover icon. Which half/state the recovered card ends in after its summon action is not printed (rules question)."
-    },
-    {
-      "name": "Interplanar Mastery",
-      "number": "0263",
-      "level": "8",
-      "initiative": 27,
-      "top": {
-        "lines": ["Attack 3 [diamond]", "Range 4",
-                  "consume Fire: +1 Attack, Wound", "consume Air: +1 Attack, Pierce 2", "consume Dark: +1 Attack, Curse"],
-        "summary": ["XP 1"]
-      },
-      "bottom": {
-        "lines": ["\"Grant one of your summons:\"", "Teleport 3 [square]", "Shield 1 [square]",
-                  "consume Dark: \"All adjacent enemies suffer damage 1 and gain Muddle.\""],
-        "summary": ["round"]
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["bottom: grant one summon Teleport 3 and Shield 1 (round)",
-                 "bottom: consume Dark: all adjacent enemies suffer damage 1 and gain Muddle"],
-      "summons": [],
-      "notes": "Top: three separate consumes in one dashed box, each adds +1 Attack and a rider."
-    },
-    {
-      "name": "Imposed Will",
-      "number": "0264",
-      "level": "9",
-      "initiative": 98,
-      "top": {
-        "lines": ["Summon Fey Subjugator: HP 4 [square], Move 2 [square], Attack 1 [square], Range 4 [square]; Flying",
-                  "\"Whenever this summon attacks a normal or elite enemy, after the attack ability control that enemy:\"",
-                  "Attack -1"],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "bottom": {
-        "lines": ["\"Whenever one of your summons is attacked, if that summon does not have Ward, it gains Ward after the attack and the attacker suffers damage 1.\""],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: summon trait: after attacking a normal or elite enemy, you control that enemy to perform Attack -1",
-                 "bottom: persistent: when a summon without Ward is attacked, after the attack it gains Ward and the attacker suffers damage 1"],
-      "summons": ["Fey Subjugator"],
-      "notes": "Both halves are persistent and lost, each XP 1."
-    },
-    {
-      "name": "Horned Nightmare",
-      "number": "0265",
-      "level": "9",
-      "initiative": 80,
-      "top": {
-        "lines": ["Summon Prismatic Unicorn: HP 8 [square], Move 4, Attack 3 [square], Range - (melee); Pierce 2; \"At end of turn, infuse Fire, Air, or Dark.\""],
-        "summary": ["XP 1", "persistent", "lost"]
-      },
-      "bottom": {
-        "lines": ["Teleport 6 [circle]"],
-        "summary": []
-      },
-      "ghs": "missing",
-      "xipe": "missing",
-      "custom": ["top: summon trait: at the end of its turn, infuse one of Fire, Air or Dark (choice)"],
-      "summons": ["Prismatic Unicorn"],
-      "notes": "Unicorn's Move 4 has no mark (HP and Attack have squares)."
-    }
-  ],
-  "summons": [
-    {"name": "Iron Beast", "card": "Forged Ferocity (0236) top", "level": "1", "count": 1, "hp": "7 [square]", "move": "2 [square]", "attack": "1 [square]", "range": "- (melee)", "traits": ["Shield 1", "Retaliate 1"], "text": "", "ghs": "agrees (HP 7, Attack 1, Move 2, Shield 1, Retaliate 1)"},
-    {"name": "Shadow Wolf", "card": "Living Night (0237) top", "level": "1", "count": 2, "hp": "2 [square]", "move": "3 [square]", "attack": "2 [square]", "range": "- (melee)", "traits": ["Pierce 1"], "text": "Whenever a Shadow Wolf dies, infuse Dark and all Shadow Wolves gain Invisible. (card text below the block)", "ghs": "agrees (HP 2, Attack 2, Move 3, count 2, Pierce 1); the death trigger is card text, not in GHS's summon entry"},
-    {"name": "Thorn Shooter", "card": "Wild Animation (0238) bottom", "level": "1", "count": 1, "hp": "3 [square]", "move": "2 [square]", "attack": "Poison icon, no value, no mark", "range": "4 [square]", "traits": [], "text": "", "ghs": "agrees (HP 3, attack = Poison, Move 2, Range 4)"},
-    {"name": "Rift Spirit", "card": "Planar Protection (0239) bottom", "level": "1", "count": 1, "hp": "2 [square]", "move": "2", "attack": "Muddle icon, no value, no mark", "range": "3", "traits": ["At end of turn, grant one ally within Range 3: Shield 1"], "text": "You control the grant abilities of this summon.", "ghs": "agrees (HP 2, attack = Muddle, Move 2, Range 3, custom action gh2e.circles.8 for the grant)"},
-    {"name": "Floating Jellyfish", "card": "Drifting Stingers (0247) top", "level": "X", "count": 1, "hp": "5 [square]", "move": "1", "attack": "3", "range": "- (melee)", "traits": ["Flying", "+3 Move if Air is strong or waning"], "text": "", "ghs": "agrees (HP 5, Attack 3, Move 1, fly, custom gh2e.circles.9); GHS level 1 for the level-X card"},
-    {"name": "Covetous Imp", "card": "Deadly Mischief (0253) top", "level": "3", "count": 1, "hp": "5 [square]", "move": "3 [square]", "attack": "3 [square]", "range": "- (melee)", "traits": [], "text": "Whenever this summon kills an enemy, you gain the money token directly instead of placing it in the hex that enemy occupied.", "ghs": "agrees (level 3, HP 5, Attack 3, Move 3); the money rule is card text"},
-    {"name": "Ember Sprite", "card": "Volatile Flame (0255) bottom", "level": "4", "count": 1, "hp": "3 [square]", "move": "3", "attack": "1", "range": "3", "traits": ["Flying (icon beside the summon name)", "All allies within Range 3 gain Retaliate 1, Range 3 while Fire is strong or waning"], "text": "", "ghs": "agrees (level 4, HP 3, Attack 1, Move 3, Range 3, fly, custom gh2e.circles.10)"},
-    {"name": "Rock Colossus", "card": "Living Mountain (0256) top", "level": "5", "count": 1, "hp": "12 [square]", "move": "2 [square]", "attack": "1 [square]", "range": "- (melee)", "traits": ["Muddle", "Retaliate 2"], "text": "Add +1 Heal to all heals targeting this summon. At the end of each of this summon's turns, it performs: Heal 1, self.", "ghs": "agrees (level 5, HP 12, Attack 1, Move 2, Muddle, Retaliate 2); the heal text is card text, not in GHS's summon entry"},
-    {"name": "Slime Spirit", "card": "Oozing Manifestation (0259) top", "level": "6", "count": 1, "hp": "5 [square]", "move": "2 [square]", "attack": "2 [square]", "range": "- (melee)", "traits": ["Poison"], "text": "When this summon would die, if there is no character token on this card, instead negate the damage and place a character token on this card to summon a Slime Spirit in an empty hex adjacent to this summon.", "ghs": "agrees (level 6, HP 5, Attack 2, Move 2, Poison); the split rule is card text"},
-    {"name": "Void Eater", "card": "Negative Energy (0261) top", "level": "7", "count": 1, "hp": "6 [square]", "move": "3 [square]", "attack": "4 [square]", "range": "- (melee)", "traits": [], "text": "Whenever this summon kills an enemy while Dark is strong or waning, shuffle a Curse card into the monster attack modifier deck.", "ghs": "agrees (level 7, HP 6, Attack 4, Move 3); the curse rule is card text"},
-    {"name": "Fey Subjugator", "card": "Imposed Will (0264) top", "level": "9", "count": 1, "hp": "4 [square]", "move": "2 [square]", "attack": "1 [square]", "range": "4 [square]", "traits": ["Flying"], "text": "Whenever this summon attacks a normal or elite enemy, after the attack ability control that enemy: Attack -1.", "ghs": "agrees (level 9, HP 4, Attack 1, Move 2, Range 4, fly); the control rule is card text"},
-    {"name": "Prismatic Unicorn", "card": "Horned Nightmare (0265) top", "level": "9", "count": 1, "hp": "8 [square]", "move": "4", "attack": "3 [square]", "range": "- (melee)", "traits": ["Pierce 2", "At end of turn, infuse Fire, Air, or Dark"], "text": "", "ghs": "agrees (level 9, HP 8, Attack 3, Move 4, Pierce 2, custom gh2e.circles.11)"}
-  ],
-  "mechanics": [
-    "Grant abilities to summons (the summon performs the granted ability; '+0/+1/+2' are added to the summon's own Move/Attack): one summon (Mighty Bond top, Bonded Might top, Unending Dominance bottom (fixed Move 2), Biting Wind bottom, Unwavering Hand top, Intervening Apparitions top, Void Imbuement bottom, Living Mountain bottom (Teleport 3), Primal Infusion top, Divided Mind bottom, Otherworldly Rage top, Interplanar Mastery bottom), two summons (Ethereal Gust top, Primal Assault top), all summons (Tear the Fabric bottom); element consume upgrades a one-summon grant to two summons (Void Imbuement bottom, Divided Mind bottom) or adds riders/area to the granted attack (Primal Assault top, Intervening Apparitions top)",
-    "Granting an ability to a non-summon ally: the heal target gets Push 1 + Immobilize with Air consumed (Divided Mind top); the Rift Spirit grants an ally Shield 1 at the end of its turn, controlled by you (Planar Protection bottom)",
-    "Control an enemy: you make it perform Move 1 (Unwavering Hand bottom), Attack -1 after the Fey Subjugator attacks it (Imposed Will top)",
-    "Summon protection: use slots on attacks targeting summons (disadvantage + damage 1 to attacker: Living Night bottom), negate lethal damage + Invisible + Stun (Intervening Apparitions bottom), negate the next damage to a summon this round (Burning Passion bottom), Ward and damage 1 to attacker when an un-Warded summon is attacked (Imposed Will bottom), all summons Shield 1 + Retaliate 1 for the round (Tear the Fabric bottom)",
-    "Summon offence buffs: next three summon attacks +1 Attack, Pierce 1 (Void Imbuement top), summons ignore Retaliate (Shadow Dart bottom), element-gated persistent buffs: Fire +1 Attack, Air +1 Move and Jump, Dark Shield 1 (Primal Infusion bottom)",
-    "Element strong-or-waning conditions on summons: Jellyfish +3 Move with Air (Drifting Stingers), Ember Sprite Retaliate aura with Fire (Volatile Flame), Void Eater Curse on kill with Dark (Negative Energy), Primal Infusion bottom",
-    "Summon death / kill triggers: wolf death infuses Dark and makes all wolves Invisible (Living Night), slime splits once per card using a character token on the card (Oozing Manifestation), Imp kills give the money token directly (Deadly Mischief), Void Eater kills shuffle a Curse into the monster modifier deck (Negative Energy)",
-    "Summon end-of-turn actions: Rift Spirit grants Shield 1 (Planar Protection), Rock Colossus Heal 1 self (Living Mountain), Prismatic Unicorn infuses Fire, Air or Dark (Horned Nightmare)",
-    "Summons whose attack is a condition icon with no value: Thorn Shooter (Poison), Rift Spirit (Muddle)",
-    "Rock Colossus: +1 to all heals targeting it (Living Mountain)",
-    "Recover lost cards: any one (Unending Dominance top), one with a summon action played at once, its summons gaining Ward, Invisible, Strengthen (Otherworldly Rage bottom); next summon action's summons gain Invisible (Unending Dominance top, 1-slot persistent)",
-    "X = number of your summons: Attack X, Range X+1 (Strength in Numbers bottom); +1 Heal on targets adjacent to two or more allies (Strength in Numbers top)",
-    "Teleport as the main movement: Mighty Bond, Burning Tether, Drifting Stingers, Shaping the Void, Living Mountain, Oozing Manifestation, Negative Energy, Horned Nightmare (bottoms), granted Teleport (Living Mountain bottom, Interplanar Mastery bottom)",
-    "Stand-alone condition abilities: Disarm (Planar Protection top), Curse (Volatile Flame top), Poison (Oozing Manifestation bottom), Strengthen on summons/allies (Forged Ferocity, Burning Passion, Negative Energy), Ward (Shaping the Void top), Invisible self or on a summon (Unending Dominance, Tear the Fabric, Otherworldly Rage)",
-    "Push damage: each target suffers damage 2 after the push (Biting Wind bottom)",
-    "Elements used: Fire, Air, Dark only; many cards infuse in a '!' box and consume in pills, often three-way consumes (Primal Assault top, Interplanar Mastery top)",
-    "Conditions used: Wound, Poison, Curse, Stun, Muddle, Immobilize, Disarm, Invisible, Strengthen, Ward; Pierce; disadvantage (Living Night bottom). No Bless, Safeguard, Regenerate."
-  ],
-  "unclear": [
-    "Thorn Shooter (Wild Animation) and Rift Spirit (Planar Protection): the attack slot shows only a condition icon (Poison / Muddle) with no number. Read exactly as printed; whether that is an attack of 0 with the condition or a non-attack condition ability is a rules question (GHS stores attack = the condition)",
-    "Unending Dominance top: a single dashed slot (no XP). Dashed slots start on play elsewhere; how a one-slot dashed track counts the 'next summon action' is a rules question, not a reading one",
-    "Biting Wind bottom: I read 'Push 2, target all, range 1' and the damage text as part of the grant to the summon (no divider between 'Move +0' and the Push, one centred block under 'Grant one of your summons:'); confirm",
-    "Interplanar Mastery bottom: consume Dark 'All adjacent enemies suffer damage 1 and gain Muddle' sits under the summon grant; adjacent to the granted summon or to you is not stated",
-    "Imposed Will top: 'control that enemy: Attack -1' - presumably the enemy's own attack value minus 1; the card prints only 'Attack -1'",
-    "Intervening Apparitions bottom: XP badges sit at the top-right of slots 1 and 3 (read as XP on slots 1 and 3; slot 2 none). Clear in the print, noted because badge-to-slot assignment is by position"
-  ]
+ "class": "Soultether",
+ "read_by": "two independent image readers (A, B), differences settled on the image, 2026-10-31; the 5 cards compare_reads still lists differ only in wording (condition-only summon attacks, the Intervening Apparitions rhombus described two ways, Flying placement, infuse one of three), checked by hand",
+ "cards": [
+  {
+   "name": "Ethereal Gust",
+   "number": "0235",
+   "level": "1",
+   "initiative": 14,
+   "top": {
+    "lines": [
+     "\"Grant two of your summons:\"",
+     "Move +0"
+    ],
+    "summary": [
+     "XP 1"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "Move 3 [square]",
+     "! infuse Air (corner box)"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: grant two of your summons a move ability at their own Move +0"
+   ],
+   "summons": [],
+   "notes": "Class-wide: printed card numbers are four digits, 0235-0265, in the input order. No GHS card entries and no Xipe file exist for this class, so 'missing' on every card; GHS's character data (summons) is cross-checked in the class-level summons. Class-wide: every corner box (XP / persistent / lost / round and every infusion box) has the '!' mandatory tab; infusions are written '! infuse ...', the tab is not repeated in summary. Class-wide icons: the persistent icon is a card with an infinity sign; when it carries a red arrow to a lost (red X) card it is written 'persistent', 'lost'; without the lost card, 'persistent' only. Round = card with a circular arrow. Teleport = arrow down onto a hex with rings; Loot = arrow up from a coin stack; Push = grey diamond with an up arrow (confirmed by Biting Wind's 'after the push'); Jump = curved arrow in a pill; damage = starburst with a drop. Conditions: Disarm = grey-teal hand diamond (same icon as Bruiser Warding Strength), Curse = purple lightning diamond, Stun = blue star diamond, Muddle = brown '?' diamond, Wound = orange drop diamond, Poison = grey-green skull diamond, Immobilize = red boot diamond, Strengthen = blue arm diamond, Ward = pink shield-with-flame diamond, Invisible = black dashed-figure diamond, Pierce = tan diamond with an arrow."
+  },
+  {
+   "name": "Forged Ferocity",
+   "number": "0236",
+   "level": "1",
+   "initiative": 37,
+   "top": {
+    "lines": [
+     "Summon Iron Beast: HP 7 [square], Move 2 [square], Attack 1 [square], Range - (melee); Shield 1, Retaliate 1"
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "Strengthen [diamond+]: target 1 of your summons",
+     "! infuse Fire (corner box)"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "bottom: Strengthen targets one of your summons (no range printed)"
+   ],
+   "summons": [
+    "Iron Beast"
+   ],
+   "notes": "Bottom: condition-only ability, no attack; no range given on the card."
+  },
+  {
+   "name": "Living Night",
+   "number": "0237",
+   "level": "1",
+   "initiative": 96,
+   "top": {
+    "lines": [
+     "Summon 2 Shadow Wolves: HP 2 [square], Move 3 [square], Attack 2 [square], Range - (melee); Pierce 1",
+     "\"Whenever a Shadow Wolf dies, infuse Dark and all Shadow Wolves gain Invisible.\""
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "\"On the next two attacks targeting one of your summons, the attacker gains disadvantage for the attack and suffers damage 1 after the attack.\"",
+     "slots: 2 (no XP), ends after the last",
+     "! infuse Dark (corner box)"
+    ],
+    "summary": [
+     "persistent"
+    ]
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: two summons from one action; whenever a Shadow Wolf dies: infuse Dark and all (remaining) Shadow Wolves gain Invisible",
+    "bottom: use slots: next two attacks targeting any of your summons: attacker has disadvantage, then suffers damage 1"
+   ],
+   "summons": [
+    "Shadow Wolf (x2)"
+   ],
+   "notes": "Bottom: first slot dashed (starts on play), second slot solid, small red marks after it; the corner box is the persistent icon without the lost card, so the card is discarded, not lost, when the track ends."
+  },
+  {
+   "name": "Wild Animation",
+   "number": "0238",
+   "level": "1",
+   "initiative": 92,
+   "top": {
+    "lines": [
+     "Heal 3 [diamond+]",
+     "Range 4"
+    ],
+    "summary": []
+   },
+   "bottom": {
+    "lines": [
+     "Summon Thorn Shooter: HP 3 [square], Move 2 [square], Attack: Poison (condition icon in the attack slot, no number, no mark), Range 4 [square]"
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "bottom: summon whose attack is printed as a Poison icon with no attack value"
+   ],
+   "summons": [
+    "Thorn Shooter"
+   ],
+   "notes": "Thorn Shooter has no trait box."
+  },
+  {
+   "name": "Planar Protection",
+   "number": "0239",
+   "level": "1",
+   "initiative": 94,
+   "top": {
+    "lines": [
+     "Disarm",
+     "Range 4"
+    ],
+    "summary": []
+   },
+   "bottom": {
+    "lines": [
+     "Summon Rift Spirit: HP 2 [square], Move 2, Attack: Muddle (condition icon in the attack slot, no number, no mark), Range 3; \"At end of turn, grant one ally within Range 3: Shield 1\"",
+     "\"You control the grant abilities of this summon.\""
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "bottom: summon attack is a Muddle icon with no attack value",
+    "bottom: summon trait: at the end of its turn, grant one ally within range 3 Shield 1; you (the summoner) control that grant"
+   ],
+   "summons": [
+    "Rift Spirit"
+   ],
+   "notes": "Top: condition-only ability (Disarm at range 4, no attack, no mark). Rift Spirit's only stat mark is on HP. The grant gives Shield 1 (presumably for the round, as a granted ability)."
+  },
+  {
+   "name": "Mighty Bond",
+   "number": "0240",
+   "level": "1",
+   "initiative": 51,
+   "top": {
+    "lines": [
+     "\"Grant one of your summons:\"",
+     "Move +0",
+     "Attack +0"
+    ],
+    "summary": [
+     "XP 1"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "Teleport 2 [circle]",
+     "consume Dark: +2 Teleport, XP 1"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: grant one of your summons a move and an attack at its own values +0"
+   ],
+   "summons": [],
+   "notes": "Top is identical to Bonded Might's top (same grant, same XP 1)."
+  },
+  {
+   "name": "Bonded Might",
+   "number": "0241",
+   "level": "1",
+   "initiative": 61,
+   "top": {
+    "lines": [
+     "\"Grant one of your summons:\"",
+     "Move +0",
+     "Attack +0"
+    ],
+    "summary": [
+     "XP 1"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "consume Air: Move 2, XP 1",
+     "Loot 1"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: grant one of your summons a move and an attack at its own values +0",
+    "bottom: the Move 2 exists only if Air is consumed (stand-alone consume pill printed above the Loot, no base move)"
+   ],
+   "summons": [],
+   "notes": "Bottom: the consume pill comes first, then a divider, then Loot 1 (no marks)."
+  },
+  {
+   "name": "Burning Passion",
+   "number": "0242",
+   "level": "1",
+   "initiative": 12,
+   "top": {
+    "lines": [
+     "Strengthen [diamond+]: Target 2, Range 4",
+     "! infuse Fire (corner box)"
+    ],
+    "summary": []
+   },
+   "bottom": {
+    "lines": [
+     "\"Negate the next damage one of your summons would suffer this round.\""
+    ],
+    "summary": [
+     "round"
+    ]
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "bottom: this round, negate the next source of damage any one of your summons would suffer (one use)"
+   ],
+   "summons": [],
+   "notes": "Top infusion box sits in the middle, just above the initiative."
+  },
+  {
+   "name": "Unending Dominance",
+   "number": "0243",
+   "level": "1",
+   "initiative": 22,
+   "top": {
+    "lines": [
+     "\"Recover one card from your lost pile.\"",
+     "Invisible [diamond+], self",
+     "\"On the next summon action you perform, any summons summoned by that action gain Invisible.\"",
+     "slots: 1 (dashed, no XP), lost after the last"
+    ],
+    "summary": [
+     "persistent",
+     "lost"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "Move 2 [square]",
+     "\"Grant one of your summons:\"",
+     "Move 2 [square]"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: recover one card from your lost pile",
+    "top: persistent until your next summon action: summons summoned by it gain Invisible",
+    "bottom: grant one of your summons Move 2 (a fixed value, not +0)"
+   ],
+   "summons": [],
+   "notes": "Top: 'Recover' is the recover icon (card with a red check mark). No XP on this card. The single slot is dashed; a purple arrow follows it."
+  },
+  {
+   "name": "Shadow Dart",
+   "number": "0244",
+   "level": "1",
+   "initiative": 28,
+   "top": {
+    "lines": [
+     "Attack 2 [diamond]",
+     "Range 4",
+     "Curse",
+     "! infuse Dark (corner box)"
+    ],
+    "summary": []
+   },
+   "bottom": {
+    "lines": [
+     "\"All your summons' attacks are unaffected by Retaliate.\""
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "bottom: persistent: your summons' attacks ignore Retaliate"
+   ],
+   "summons": [],
+   "notes": "Top infusion box in the middle above the initiative."
+  },
+  {
+   "name": "Burning Tether",
+   "number": "0245",
+   "level": "1",
+   "initiative": 43,
+   "top": {
+    "lines": [
+     "Attack 1 [diamond]",
+     "Range 4",
+     "Wound",
+     "consume Fire: +1 Target, XP 1"
+    ],
+    "summary": []
+   },
+   "bottom": {
+    "lines": [
+     "Teleport 3 [square]"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [],
+   "summons": [],
+   "notes": ""
+  },
+  {
+   "name": "Primal Assault",
+   "number": "0246",
+   "level": "1",
+   "initiative": 20,
+   "top": {
+    "lines": [
+     "\"Grant two of your summons:\"",
+     "Attack +1",
+     "consume Fire: Wound",
+     "consume Air: Pierce 2",
+     "consume Dark: Curse"
+    ],
+    "summary": [
+     "XP 2",
+     "lost"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "Heal 2 [circle]",
+     "Range 3 [square]"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: grant two of your summons an attack at their own value +1; each of three element consumes adds a rider to the granted attacks (Fire: Wound, Air: Pierce 2, Dark: Curse)"
+   ],
+   "summons": [],
+   "notes": "Top: the three consume rows share one dashed box linked to the granted attack; each can be consumed separately. Bottom: the square mark sits inside the range pill (Range 3 [square])."
+  },
+  {
+   "name": "Drifting Stingers",
+   "number": "0247",
+   "level": "X",
+   "initiative": 90,
+   "top": {
+    "lines": [
+     "Summon Floating Jellyfish: HP 5 [square], Move 1, Attack 3, Range - (melee); Flying; \"+3 Move if Air is strong or waning.\"",
+     "! infuse Air (corner box)"
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "Teleport 3 [square]"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: summon trait: +3 Move while Air is strong or waning"
+   ],
+   "summons": [
+    "Floating Jellyfish"
+   ],
+   "notes": "Only HP has a mark in the Jellyfish block. Top infusion box in the middle above the initiative (the card infuses the Air its own summon uses)."
+  },
+  {
+   "name": "Biting Wind",
+   "number": "0248",
+   "level": "X",
+   "initiative": 82,
+   "top": {
+    "lines": [
+     "Attack 2 [diamond]",
+     "Range 4",
+     "Push 1 [square]",
+     "consume Air: +1 Attack, +1 Range, +1 Push, XP 1"
+    ],
+    "summary": []
+   },
+   "bottom": {
+    "lines": [
+     "\"Grant one of your summons:\"",
+     "Move +0",
+     "Push 2: target all, range 1",
+     "\"Each target suffers damage 2 after the push.\"",
+     "! infuse Air (corner box)"
+    ],
+    "summary": [
+     "XP 2",
+     "lost"
+    ]
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "bottom: granted to one summon: move +0, then Push 2 on all adjacent enemies, each target suffers damage 2 after the push"
+   ],
+   "summons": [],
+   "notes": "Top: the square mark sits at the end of the pill after 'Push 1' (Push is a rider of the attack, in the pill with Range 4). Bottom: no marks."
+  },
+  {
+   "name": "Unwavering Hand",
+   "number": "0249",
+   "level": "X",
+   "initiative": 31,
+   "top": {
+    "lines": [
+     "\"Grant one of your summons:\"",
+     "Attack +1"
+    ],
+    "summary": [
+     "XP 1"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "\"Control one enemy within Range 4:\"",
+     "Move 1 [square]",
+     "! infuse Air (corner box)"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: grant one of your summons an attack at its own value +1",
+    "bottom: control one enemy within range 4: it performs Move 1 (you move it)"
+   ],
+   "summons": [],
+   "notes": "Control enemy (you decide the enemy's movement) is a 2e mechanic Frosthaven may lack."
+  },
+  {
+   "name": "Intervening Apparitions",
+   "number": "0250",
+   "level": "2",
+   "initiative": 34,
+   "top": {
+    "lines": [
+     "\"Grant one of your summons:\"",
+     "Attack +0",
+     "consume Fire: area: grey (attacker) hex, red hex right of it, red hex up-right of it, red hex right of that up-right hex (4-hex rhombus; doubled coords y up: G 0,0; R 2,0 1,1 3,1) [no hex mark]"
+    ],
+    "summary": [
+     "XP 1"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "\"On the next three sources of damage that would kill one of your summons, negate the damage and that summon gains Invisible, Stun.\"",
+     "slots: 3 (XP 1 on slots 1, 3), lost after the last",
+     "! infuse Dark (corner box)"
+    ],
+    "summary": [
+     "persistent",
+     "lost"
+    ]
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: grant one of your summons an attack +0; consume Fire turns the granted attack into the 3-hex area attack",
+    "bottom: use slots: next three sources of damage that would kill a summon are negated, and that summon gains Invisible and Stun"
+   ],
+   "summons": [],
+   "notes": "Bottom: XP badges sit at the top-right of slot 1 (the dashed one) and of slot 3; the middle slot has none."
+  },
+  {
+   "name": "Void Imbuement",
+   "number": "0251",
+   "level": "2",
+   "initiative": 23,
+   "top": {
+    "lines": [
+     "\"On the next three attacks performed by your summons, add +1 Attack, Pierce 1 to the attack.\"",
+     "slots: 3 (XP 1 on slot 3), ends after the last"
+    ],
+    "summary": [
+     "persistent"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "\"Grant one of your summons:\"",
+     "Move +1",
+     "Jump",
+     "consume Air: \"Grant two of your summons the move ability instead, XP 1.\""
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: use slots: next three attacks by any of your summons get +1 Attack and Pierce 1",
+    "bottom: grant one summon Move +1 with Jump; consume Air: two summons get the granted move instead, XP 1"
+   ],
+   "summons": [],
+   "notes": "Top: persistent icon without the lost card, so discarded when the track ends. Bottom Jump is in a pill beside 'Move +1'."
+  },
+  {
+   "name": "Shaping the Void",
+   "number": "0252",
+   "level": "3",
+   "initiative": 41,
+   "top": {
+    "lines": [
+     "Attack 2 [diamond]",
+     "Range 4",
+     "Ward [diamond+]",
+     "Range 4",
+     "! infuse Air (corner box)"
+    ],
+    "summary": []
+   },
+   "bottom": {
+    "lines": [
+     "Teleport 3 [circle]",
+     "Heal 1: target all your summons, range 1"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "bottom: Heal 1 targets all your summons within range 1"
+   ],
+   "summons": [],
+   "notes": "Input initiative was \"41,\" (stray comma); printed 41. Top: Ward is a separate ability after a divider (range 4, one target). Top infusion box in the middle above the initiative."
+  },
+  {
+   "name": "Deadly Mischief",
+   "number": "0253",
+   "level": "3",
+   "initiative": 81,
+   "top": {
+    "lines": [
+     "Summon Covetous Imp: HP 5 [square], Move 3 [square], Attack 3 [square], Range - (melee)",
+     "\"Whenever this summon kills an enemy, you gain the money token directly instead of placing it in the hex that enemy occupied.\""
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "Attack 2 [square]",
+     "Range 3 [square]",
+     "! infuse Fire (corner box)"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: summon trait: its kills give you the money token directly"
+   ],
+   "summons": [
+    "Covetous Imp"
+   ],
+   "notes": "Imp has no trait box; the money rule is printed below the stat block."
+  },
+  {
+   "name": "Strength in Numbers",
+   "number": "0254",
+   "level": "4",
+   "initiative": 45,
+   "top": {
+    "lines": [
+     "Heal 2 [square]",
+     "Target 2 [square]",
+     "Range 4",
+     "\"Add +1 Heal on each target adjacent to two or more allies.\""
+    ],
+    "summary": []
+   },
+   "bottom": {
+    "lines": [
+     "Attack X",
+     "Range X+1",
+     "\"where X is the number of your summons.\""
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: +1 Heal on each target adjacent to two or more allies",
+    "bottom: Attack X and Range X+1, X = number of your summons"
+   ],
+   "summons": [],
+   "notes": "No corner icons on either half (no XP, not lost). Bottom has no enhancement marks."
+  },
+  {
+   "name": "Volatile Flame",
+   "number": "0255",
+   "level": "4",
+   "initiative": 97,
+   "top": {
+    "lines": [
+     "Curse [diamond]",
+     "Range 4",
+     "consume Dark: Stun, XP 1"
+    ],
+    "summary": []
+   },
+   "bottom": {
+    "lines": [
+     "Summon Ember Sprite (Flying icon beside the name): HP 3 [square], Move 3, Attack 1, Range 3; \"All allies within Range 3 gain Retaliate 1, Range 3 while Fire is strong or waning.\"",
+     "! infuse Fire (corner box)"
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: condition-only ability: Curse at range 4; consume Dark adds Stun to the same target",
+    "bottom: summon aura: all allies within range 3 of the sprite gain Retaliate 1 (range 3) while Fire is strong or waning"
+   ],
+   "summons": [
+    "Ember Sprite"
+   ],
+   "notes": "Bottom: the Flying icon is printed after 'Summon Ember Sprite' in the title row, not in the trait box. The trait box's 'Range 3' after Retaliate 1 is in a pill (the retaliate's range). Only HP has a mark. The card's own infusion (Fire) feeds the sprite's aura."
+  },
+  {
+   "name": "Living Mountain",
+   "number": "0256",
+   "level": "5",
+   "initiative": 19,
+   "top": {
+    "lines": [
+     "Summon Rock Colossus: HP 12 [square], Move 2 [square], Attack 1 [square], Range - (melee); Muddle; Retaliate 2",
+     "\"Add +1 Heal to all heals targeting this summon. At the end of each of this summon's turns, it performs:\"",
+     "Heal 1, self"
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "Teleport 3 [circle]",
+     "\"Grant one of your summons:\"",
+     "Teleport 3 [square]"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: summon trait: heals targeting it get +1; it heals itself 1 at the end of each of its turns",
+    "bottom: grant one of your summons Teleport 3"
+   ],
+   "summons": [
+    "Rock Colossus"
+   ],
+   "notes": "Rock Colossus trait box: Muddle icon (its attacks apply Muddle) and Retaliate 2."
+  },
+  {
+   "name": "Primal Infusion",
+   "number": "0257",
+   "level": "5",
+   "initiative": 88,
+   "top": {
+    "lines": [
+     "\"Grant one of your summons:\"",
+     "Move +1",
+     "Attack +1"
+    ],
+    "summary": [
+     "XP 1"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "\"Your summons gain +1 Attack while Fire is strong or waning, +1 Move and Jump while Air is strong or waning, and Shield 1 while Dark is strong or waning.\""
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: grant one summon a move and an attack at its own values +1",
+    "bottom: persistent element-gated summon buffs: Fire +1 Attack; Air +1 Move and Jump; Dark Shield 1 (each while that element is strong or waning)"
+   ],
+   "summons": [],
+   "notes": "No enhancement marks on this card."
+  },
+  {
+   "name": "Tear the Fabric",
+   "number": "0258",
+   "level": "6",
+   "initiative": 11,
+   "top": {
+    "lines": [
+     "Attack 2 [diamond]",
+     "Range 4",
+     "Curse",
+     "Invisible [diamond+]: target 1 of your summons, range 4",
+     "! infuse Dark (corner box)"
+    ],
+    "summary": []
+   },
+   "bottom": {
+    "lines": [
+     "\"Grant all your summons:\"",
+     "Shield 1 [square]",
+     "Retaliate 1 [square]"
+    ],
+    "summary": [
+     "round"
+    ]
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: Invisible on one of your summons within range 4",
+    "bottom: all your summons gain Shield 1 and Retaliate 1 for the round"
+   ],
+   "summons": [],
+   "notes": "Top infusion box in the middle above the initiative."
+  },
+  {
+   "name": "Oozing Manifestation",
+   "number": "0259",
+   "level": "6",
+   "initiative": 86,
+   "top": {
+    "lines": [
+     "Summon Slime Spirit: HP 5 [square], Move 2 [square], Attack 2 [square], Range - (melee); Poison",
+     "\"When this summon would die, if there is no character token on this card, instead negate the damage and place a character token on this card to summon a Slime Spirit in an empty hex adjacent to this summon.\""
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "Teleport 4 [circle]",
+     "Poison [diamond]",
+     "Range 2 [square]"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: summon trait: the first time it would die (no character token on the card yet), negate the damage, put a character token on the card and summon a second Slime Spirit in an adjacent empty hex",
+    "bottom: condition-only ability: Poison at range 2"
+   ],
+   "summons": [
+    "Slime Spirit"
+   ],
+   "notes": "Top: the dying spirit survives (damage negated) and a second Slime Spirit appears, so two spirits exist afterwards; the token makes it once per card play."
+  },
+  {
+   "name": "Divided Mind",
+   "number": "0260",
+   "level": "7",
+   "initiative": 30,
+   "top": {
+    "lines": [
+     "Heal 5 [diamond+]",
+     "Range 4",
+     "\"Grant the target of the heal ability:\"",
+     "consume Air: Push 1, Range 1, Immobilize"
+    ],
+    "summary": [
+     "XP 1"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "\"Grant one of your summons:\"",
+     "Attack +0",
+     "consume Fire: \"Grant two of your summons the attack ability instead, XP 1.\""
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: consume Air: the heal target (any ally, not only summons) is granted Push 1, range 1, with Immobilize on the pushed enemy",
+    "bottom: grant one summon an attack +0; consume Fire: two summons get the granted attack instead, XP 1"
+   ],
+   "summons": [],
+   "notes": "Top: the grant exists only with the Air consume (the whole grant row is in the consume pill). Bottom consume element is Fire."
+  },
+  {
+   "name": "Negative Energy",
+   "number": "0261",
+   "level": "7",
+   "initiative": 95,
+   "top": {
+    "lines": [
+     "Summon Void Eater: HP 6 [square], Move 3 [square], Attack 4 [square], Range - (melee)",
+     "\"Whenever this summon kills an enemy while Dark is strong or waning, shuffle a Curse card into the monster attack modifier deck.\"",
+     "! infuse Dark (corner box)"
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "Teleport 4 [circle]",
+     "Strengthen [diamond+]: target 1 ally, range 3"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: summon trait: each kill while Dark is strong or waning shuffles a Curse into the monster modifier deck"
+   ],
+   "summons": [
+    "Void Eater"
+   ],
+   "notes": "Top infusion box sits left of the persistent box, above the initiative. Void Eater has no trait box."
+  },
+  {
+   "name": "Otherworldly Rage",
+   "number": "0262",
+   "level": "8",
+   "initiative": 35,
+   "top": {
+    "lines": [
+     "\"Grant one of your summons:\"",
+     "Attack +2",
+     "Wound",
+     "Poison"
+    ],
+    "summary": [
+     "XP 1"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "\"Recover one card from your lost pile that has a summon action and immediately play that card to perform the summon action. Any summons summoned by that action gain Ward, Invisible, and Strengthen.\"",
+     "Invisible [diamond+], self"
+    ],
+    "summary": [
+     "lost"
+    ]
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: grant one summon an attack +2 with Wound and Poison",
+    "bottom: recover a lost card with a summon action and play its summon action at once; those summons gain Ward, Invisible and Strengthen"
+   ],
+   "summons": [],
+   "notes": "Bottom: 'Recover' is the recover icon. Which half/state the recovered card ends in after its summon action is not printed (rules question)."
+  },
+  {
+   "name": "Interplanar Mastery",
+   "number": "0263",
+   "level": "8",
+   "initiative": 27,
+   "top": {
+    "lines": [
+     "Attack 3 [diamond]",
+     "Range 4",
+     "consume Fire: +1 Attack, Wound",
+     "consume Air: +1 Attack, Pierce 2",
+     "consume Dark: +1 Attack, Curse"
+    ],
+    "summary": [
+     "XP 1"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "\"Grant one of your summons:\"",
+     "Teleport 3 [square]",
+     "Shield 1 [square]",
+     "consume Dark: \"All adjacent enemies suffer damage 1 and gain Muddle.\""
+    ],
+    "summary": [
+     "round"
+    ]
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "bottom: grant one summon Teleport 3 and Shield 1 (round)",
+    "bottom: consume Dark: all adjacent enemies suffer damage 1 and gain Muddle"
+   ],
+   "summons": [],
+   "notes": "Top: three separate consumes in one dashed box, each adds +1 Attack and a rider."
+  },
+  {
+   "name": "Imposed Will",
+   "number": "0264",
+   "level": "9",
+   "initiative": 98,
+   "top": {
+    "lines": [
+     "Summon Fey Subjugator: HP 4 [square], Move 2 [square], Attack 1 [square], Range 4 [square]; Flying",
+     "\"Whenever this summon attacks a normal or elite enemy, after the attack ability control that enemy:\"",
+     "Attack -1"
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "\"Whenever one of your summons is attacked, if that summon does not have Ward, it gains Ward after the attack and the attacker suffers damage 1.\""
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: summon trait: after attacking a normal or elite enemy, you control that enemy to perform Attack -1",
+    "bottom: persistent: when a summon without Ward is attacked, after the attack it gains Ward and the attacker suffers damage 1"
+   ],
+   "summons": [
+    "Fey Subjugator"
+   ],
+   "notes": "Both halves are persistent and lost, each XP 1."
+  },
+  {
+   "name": "Horned Nightmare",
+   "number": "0265",
+   "level": "9",
+   "initiative": 80,
+   "top": {
+    "lines": [
+     "Summon Prismatic Unicorn: HP 8 [square], Move 4, Attack 3 [square], Range - (melee); Pierce 2; \"At end of turn, infuse Fire, Air, or Dark.\""
+    ],
+    "summary": [
+     "XP 1",
+     "persistent",
+     "lost"
+    ]
+   },
+   "bottom": {
+    "lines": [
+     "Teleport 6 [circle]"
+    ],
+    "summary": []
+   },
+   "ghs": "missing",
+   "xipe": "missing",
+   "custom": [
+    "top: summon trait: at the end of its turn, infuse one of Fire, Air or Dark (choice)"
+   ],
+   "summons": [
+    "Prismatic Unicorn"
+   ],
+   "notes": "Unicorn's Move 4 has no mark (HP and Attack have squares)."
+  }
+ ],
+ "summons": [
+  {
+   "name": "Iron Beast",
+   "card": "Forged Ferocity (0236) top",
+   "level": "1",
+   "count": 1,
+   "hp": "7 [square]",
+   "move": "2 [square]",
+   "attack": "1 [square]",
+   "range": "- (melee)",
+   "traits": [
+    "Shield 1",
+    "Retaliate 1"
+   ],
+   "text": "",
+   "ghs": "agrees (HP 7, Attack 1, Move 2, Shield 1, Retaliate 1)"
+  },
+  {
+   "name": "Shadow Wolf",
+   "card": "Living Night (0237) top",
+   "level": "1",
+   "count": 2,
+   "hp": "2 [square]",
+   "move": "3 [square]",
+   "attack": "2 [square]",
+   "range": "- (melee)",
+   "traits": [
+    "Pierce 1"
+   ],
+   "text": "Whenever a Shadow Wolf dies, infuse Dark and all Shadow Wolves gain Invisible. (card text below the block)",
+   "ghs": "agrees (HP 2, Attack 2, Move 3, count 2, Pierce 1); the death trigger is card text, not in GHS's summon entry"
+  },
+  {
+   "name": "Thorn Shooter",
+   "card": "Wild Animation (0238) bottom",
+   "level": "1",
+   "count": 1,
+   "hp": "3 [square]",
+   "move": "2 [square]",
+   "attack": "Poison icon, no value, no mark",
+   "range": "4 [square]",
+   "traits": [],
+   "text": "",
+   "ghs": "agrees (HP 3, attack = Poison, Move 2, Range 4)"
+  },
+  {
+   "name": "Rift Spirit",
+   "card": "Planar Protection (0239) bottom",
+   "level": "1",
+   "count": 1,
+   "hp": "2 [square]",
+   "move": "2",
+   "attack": "Muddle icon, no value, no mark",
+   "range": "3",
+   "traits": [
+    "At end of turn, grant one ally within Range 3: Shield 1"
+   ],
+   "text": "You control the grant abilities of this summon.",
+   "ghs": "agrees (HP 2, attack = Muddle, Move 2, Range 3, custom action gh2e.circles.8 for the grant)"
+  },
+  {
+   "name": "Floating Jellyfish",
+   "card": "Drifting Stingers (0247) top",
+   "level": "X",
+   "count": 1,
+   "hp": "5 [square]",
+   "move": "1",
+   "attack": "3",
+   "range": "- (melee)",
+   "traits": [
+    "Flying",
+    "+3 Move if Air is strong or waning"
+   ],
+   "text": "",
+   "ghs": "agrees (HP 5, Attack 3, Move 1, fly, custom gh2e.circles.9); GHS level 1 for the level-X card"
+  },
+  {
+   "name": "Covetous Imp",
+   "card": "Deadly Mischief (0253) top",
+   "level": "3",
+   "count": 1,
+   "hp": "5 [square]",
+   "move": "3 [square]",
+   "attack": "3 [square]",
+   "range": "- (melee)",
+   "traits": [],
+   "text": "Whenever this summon kills an enemy, you gain the money token directly instead of placing it in the hex that enemy occupied.",
+   "ghs": "agrees (level 3, HP 5, Attack 3, Move 3); the money rule is card text"
+  },
+  {
+   "name": "Ember Sprite",
+   "card": "Volatile Flame (0255) bottom",
+   "level": "4",
+   "count": 1,
+   "hp": "3 [square]",
+   "move": "3",
+   "attack": "1",
+   "range": "3",
+   "traits": [
+    "Flying (icon beside the summon name)",
+    "All allies within Range 3 gain Retaliate 1, Range 3 while Fire is strong or waning"
+   ],
+   "text": "",
+   "ghs": "agrees (level 4, HP 3, Attack 1, Move 3, Range 3, fly, custom gh2e.circles.10)"
+  },
+  {
+   "name": "Rock Colossus",
+   "card": "Living Mountain (0256) top",
+   "level": "5",
+   "count": 1,
+   "hp": "12 [square]",
+   "move": "2 [square]",
+   "attack": "1 [square]",
+   "range": "- (melee)",
+   "traits": [
+    "Muddle",
+    "Retaliate 2"
+   ],
+   "text": "Add +1 Heal to all heals targeting this summon. At the end of each of this summon's turns, it performs: Heal 1, self.",
+   "ghs": "agrees (level 5, HP 12, Attack 1, Move 2, Muddle, Retaliate 2); the heal text is card text, not in GHS's summon entry"
+  },
+  {
+   "name": "Slime Spirit",
+   "card": "Oozing Manifestation (0259) top",
+   "level": "6",
+   "count": 1,
+   "hp": "5 [square]",
+   "move": "2 [square]",
+   "attack": "2 [square]",
+   "range": "- (melee)",
+   "traits": [
+    "Poison"
+   ],
+   "text": "When this summon would die, if there is no character token on this card, instead negate the damage and place a character token on this card to summon a Slime Spirit in an empty hex adjacent to this summon.",
+   "ghs": "agrees (level 6, HP 5, Attack 2, Move 2, Poison); the split rule is card text"
+  },
+  {
+   "name": "Void Eater",
+   "card": "Negative Energy (0261) top",
+   "level": "7",
+   "count": 1,
+   "hp": "6 [square]",
+   "move": "3 [square]",
+   "attack": "4 [square]",
+   "range": "- (melee)",
+   "traits": [],
+   "text": "Whenever this summon kills an enemy while Dark is strong or waning, shuffle a Curse card into the monster attack modifier deck.",
+   "ghs": "agrees (level 7, HP 6, Attack 4, Move 3); the curse rule is card text"
+  },
+  {
+   "name": "Fey Subjugator",
+   "card": "Imposed Will (0264) top",
+   "level": "9",
+   "count": 1,
+   "hp": "4 [square]",
+   "move": "2 [square]",
+   "attack": "1 [square]",
+   "range": "4 [square]",
+   "traits": [
+    "Flying"
+   ],
+   "text": "Whenever this summon attacks a normal or elite enemy, after the attack ability control that enemy: Attack -1.",
+   "ghs": "agrees (level 9, HP 4, Attack 1, Move 2, Range 4, fly); the control rule is card text"
+  },
+  {
+   "name": "Prismatic Unicorn",
+   "card": "Horned Nightmare (0265) top",
+   "level": "9",
+   "count": 1,
+   "hp": "8 [square]",
+   "move": "4",
+   "attack": "3 [square]",
+   "range": "- (melee)",
+   "traits": [
+    "Pierce 2",
+    "At end of turn, infuse Fire, Air, or Dark"
+   ],
+   "text": "",
+   "ghs": "agrees (level 9, HP 8, Attack 3, Move 4, Pierce 2, custom gh2e.circles.11)"
+  }
+ ],
+ "mechanics": [
+  "Grant abilities to summons (the summon performs the granted ability; '+0/+1/+2' are added to the summon's own Move/Attack): one summon (Mighty Bond top, Bonded Might top, Unending Dominance bottom (fixed Move 2), Biting Wind bottom, Unwavering Hand top, Intervening Apparitions top, Void Imbuement bottom, Living Mountain bottom (Teleport 3), Primal Infusion top, Divided Mind bottom, Otherworldly Rage top, Interplanar Mastery bottom), two summons (Ethereal Gust top, Primal Assault top), all summons (Tear the Fabric bottom); element consume upgrades a one-summon grant to two summons (Void Imbuement bottom, Divided Mind bottom) or adds riders/area to the granted attack (Primal Assault top, Intervening Apparitions top)",
+  "Granting an ability to a non-summon ally: the heal target gets Push 1 + Immobilize with Air consumed (Divided Mind top); the Rift Spirit grants an ally Shield 1 at the end of its turn, controlled by you (Planar Protection bottom)",
+  "Control an enemy: you make it perform Move 1 (Unwavering Hand bottom), Attack -1 after the Fey Subjugator attacks it (Imposed Will top)",
+  "Summon protection: use slots on attacks targeting summons (disadvantage + damage 1 to attacker: Living Night bottom), negate lethal damage + Invisible + Stun (Intervening Apparitions bottom), negate the next damage to a summon this round (Burning Passion bottom), Ward and damage 1 to attacker when an un-Warded summon is attacked (Imposed Will bottom), all summons Shield 1 + Retaliate 1 for the round (Tear the Fabric bottom)",
+  "Summon offence buffs: next three summon attacks +1 Attack, Pierce 1 (Void Imbuement top), summons ignore Retaliate (Shadow Dart bottom), element-gated persistent buffs: Fire +1 Attack, Air +1 Move and Jump, Dark Shield 1 (Primal Infusion bottom)",
+  "Element strong-or-waning conditions on summons: Jellyfish +3 Move with Air (Drifting Stingers), Ember Sprite Retaliate aura with Fire (Volatile Flame), Void Eater Curse on kill with Dark (Negative Energy), Primal Infusion bottom",
+  "Summon death / kill triggers: wolf death infuses Dark and makes all wolves Invisible (Living Night), slime splits once per card using a character token on the card (Oozing Manifestation), Imp kills give the money token directly (Deadly Mischief), Void Eater kills shuffle a Curse into the monster modifier deck (Negative Energy)",
+  "Summon end-of-turn actions: Rift Spirit grants Shield 1 (Planar Protection), Rock Colossus Heal 1 self (Living Mountain), Prismatic Unicorn infuses Fire, Air or Dark (Horned Nightmare)",
+  "Summons whose attack is a condition icon with no value: Thorn Shooter (Poison), Rift Spirit (Muddle)",
+  "Rock Colossus: +1 to all heals targeting it (Living Mountain)",
+  "Recover lost cards: any one (Unending Dominance top), one with a summon action played at once, its summons gaining Ward, Invisible, Strengthen (Otherworldly Rage bottom); next summon action's summons gain Invisible (Unending Dominance top, 1-slot persistent)",
+  "X = number of your summons: Attack X, Range X+1 (Strength in Numbers bottom); +1 Heal on targets adjacent to two or more allies (Strength in Numbers top)",
+  "Teleport as the main movement: Mighty Bond, Burning Tether, Drifting Stingers, Shaping the Void, Living Mountain, Oozing Manifestation, Negative Energy, Horned Nightmare (bottoms), granted Teleport (Living Mountain bottom, Interplanar Mastery bottom)",
+  "Stand-alone condition abilities: Disarm (Planar Protection top), Curse (Volatile Flame top), Poison (Oozing Manifestation bottom), Strengthen on summons/allies (Forged Ferocity, Burning Passion, Negative Energy), Ward (Shaping the Void top), Invisible self or on a summon (Unending Dominance, Tear the Fabric, Otherworldly Rage)",
+  "Push damage: each target suffers damage 2 after the push (Biting Wind bottom)",
+  "Elements used: Fire, Air, Dark only; many cards infuse in a '!' box and consume in pills, often three-way consumes (Primal Assault top, Interplanar Mastery top)",
+  "Conditions used: Wound, Poison, Curse, Stun, Muddle, Immobilize, Disarm, Invisible, Strengthen, Ward; Pierce; disadvantage (Living Night bottom). No Bless, Safeguard, Regenerate."
+ ],
+ "unclear": [
+  "Thorn Shooter (Wild Animation) and Rift Spirit (Planar Protection): the attack slot shows only a condition icon (Poison / Muddle) with no number. Read exactly as printed; whether that is an attack of 0 with the condition or a non-attack condition ability is a rules question (GHS stores attack = the condition)",
+  "Unending Dominance top: a single dashed slot (no XP). Dashed slots start on play elsewhere; how a one-slot dashed track counts the 'next summon action' is a rules question, not a reading one",
+  "Biting Wind bottom: I read 'Push 2, target all, range 1' and the damage text as part of the grant to the summon (no divider between 'Move +0' and the Push, one centred block under 'Grant one of your summons:'); confirm",
+  "Interplanar Mastery bottom: consume Dark 'All adjacent enemies suffer damage 1 and gain Muddle' sits under the summon grant; adjacent to the granted summon or to you is not stated",
+  "Imposed Will top: 'control that enemy: Attack -1' - presumably the enemy's own attack value minus 1; the card prints only 'Attack -1'",
+  "Intervening Apparitions bottom: XP badges sit at the top-right of slots 1 and 3 (read as XP on slots 1 and 3; slot 2 none). Clear in the print, noted because badge-to-slot assignment is by position"
+ ]
 }

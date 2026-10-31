@@ -1,0 +1,647 @@
+{
+  "class": "Wildfury",
+  "read_by": "image reader B, 2026-10-31",
+  "cards": [
+    {
+      "name": "Concentrated Rage",
+      "number": "0475",
+      "level": "1",
+      "initiative": 51,
+      "top": {
+        "lines": ["Attack 1 [square]", "Range 3", "Disarm"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Whenever Bear attacks or suffers damage from Retaliate, place one damage token on this card. Whenever Bear attacks and there are already three or more damage tokens on this card, instead of adding one, remove three to add +3 Attack to the attack.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["bottom: damage-token counter on the card: +1 token whenever the Bear attacks or suffers damage from Retaliate; when the Bear attacks with 3+ tokens, remove 3 instead of adding 1 for +3 Attack on that attack"],
+      "summons": [],
+      "notes": "Class-wide: card numbers print as 'G 0475' to 'G 0503' (recorded without the G). Every corner box on this class has the '!' tab. Class-wide: 'Bear' in quoted text stands for the bear-paw icon, 'Command' for the command icon. Bottom corner: persistent icon with an arrow into the lost icon; no use slots and no printed end condition."
+    },
+    {
+      "name": "Maul",
+      "number": "0476",
+      "level": "1",
+      "initiative": 67,
+      "top": {
+        "lines": ["COMMAND", "Attack 4 [diamond]"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["COMMAND", "Attack 6 [diamond]"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: COMMAND: the Bear performs the half", "bottom: COMMAND: the Bear performs the half"],
+      "summons": [],
+      "notes": "Initiative prints 67 (checked zoomed); the input card list (gloomhavencards.com) says 61."
+    },
+    {
+      "name": "Howling Bolts",
+      "number": "0477",
+      "level": "1",
+      "initiative": 31,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Target 3", "Range 4", "Pierce 3", "! infuse Air (corner box)"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["COMMAND", "Heal 3 [square], self", "! infuse Earth (corner box)"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["bottom: COMMAND: the Bear performs the half (Heal 3 self on the Bear)"],
+      "summons": [],
+      "notes": "Pierce is the orange diamond with the arrow (same icon as on Bruiser's Trample)."
+    },
+    {
+      "name": "Nature's Gift",
+      "number": "0478",
+      "level": "1",
+      "initiative": 42,
+      "top": {
+        "lines": ["Heal 2 [diamond+]", "Range 3", "Regenerate", "! infuse Earth (corner box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Poison", "Muddle", "Range 5", "! infuse Earth (corner box)"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["bottom: conditions applied as their own ability (no attack): Poison and Muddle on one target within range 5"],
+      "summons": [],
+      "notes": "Regenerate = green diamond with a heart; Poison = grey diamond with a skull; Muddle = brown diamond with a question mark."
+    },
+    {
+      "name": "Focused Aggression",
+      "number": "0479",
+      "level": "1",
+      "initiative": 14,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Range 3 [square]", "! infuse Air (corner box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]", "\"Grant one adjacent ally:\"", "Shield 1",
+                  "\"If the target of the grant ability is Bear, also grant them:\"", "Retaliate 1"],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["bottom: grant one adjacent ally Shield 1 (round); if that ally is the Bear, also grant Retaliate 1 (round)"],
+      "summons": [],
+      "notes": "Retaliate is the fist icon (same as Bruiser's Eye for an Eye)."
+    },
+    {
+      "name": "Gnaw",
+      "number": "0480",
+      "level": "1",
+      "initiative": 20,
+      "top": {
+        "lines": ["COMMAND", "Attack 2 [diamond]", "Loot 1", "\"The Wildfury gains all looted tokens and tiles.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["COMMAND", "Attack 2"],
+        "summary": ["XP 1"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: COMMAND: the Bear attacks and loots; the Wildfury gains all looted tokens and tiles", "bottom: COMMAND: the Bear performs the half"],
+      "summons": [],
+      "notes": "Bottom Attack 2 has no enhancement mark."
+    },
+    {
+      "name": "Disorienting Roar",
+      "number": "0481",
+      "level": "1",
+      "initiative": 17,
+      "top": {
+        "lines": ["COMMAND", "Muddle", "Target all", "Range 2",
+                  "\"All enemies within Range 2 that have Muddle add -1 Attack to their attacks this round.\""],
+        "summary": ["XP 1", "round"]
+      },
+      "bottom": {
+        "lines": ["! consume Air (required: the action can't be performed without it)",
+                  "\"After each of Bear's next three attacks, triggering no more than once each round, Command:\"",
+                  "Move 3", "Jump",
+                  "slots: 3 (XP 1 on slot 1), ends after the last"],
+        "summary": ["persistent"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: COMMAND: the Bear muddles all enemies within range 2", "top: round: enemies within range 2 that have Muddle get -1 Attack on their attacks",
+                 "bottom: required Air consume", "bottom: use slots, after each of the Bear's next three attacks (max once per round): command the Bear Move 3, Jump"],
+      "summons": [],
+      "notes": "Bottom corner: persistent icon with an arrow and no lost icon (discarded after the last slot, like Bruiser's Intimidating Growl)."
+    },
+    {
+      "name": "Vitality Siphon",
+      "number": "0482",
+      "level": "1",
+      "initiative": 56,
+      "top": {
+        "lines": ["Attack 1 [diamond]", "Range 3 [square]", "consume Air: +2 Attack, XP 1",
+                  "Heal 1 [diamond+]", "Range 3 [square]", "consume Earth: +2 Heal, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 5 [square]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Spirit Swap",
+      "number": "0483",
+      "level": "1",
+      "initiative": 27,
+      "top": {
+        "lines": ["COMMAND", "Move 1 [circle]",
+                  "consume Air or Earth (split icon): \"Teleport the Wildfury to an adjacent empty hex.\"",
+                  "Attack 2 [diamond]", "Wound"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Teleport any normal or elite enemy to a hex occupied by a different normal or elite enemy and simultaneously Teleport that enemy to the hex occupied by the first.\"",
+                  "! infuse Air (corner box)"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: COMMAND: the Bear moves and attacks", "top: element consume teleports the Wildfury (not the Bear) to an adjacent empty hex",
+                 "bottom: swap the positions of two normal/elite enemies (no range printed)"],
+      "summons": [],
+      "notes": "Wound = orange diamond with a dripping drop."
+    },
+    {
+      "name": "Invocation of Endurance",
+      "number": "0484",
+      "level": "1",
+      "initiative": 71,
+      "top": {
+        "lines": ["! consume Earth (required: the action can't be performed without it)",
+                  "\"After each of Bear's next three attacks, triggering no more than once each round, Command:\"",
+                  "Heal 2, self",
+                  "slots: 3 (XP 1 on slot 1), ends after the last"],
+        "summary": ["persistent"]
+      },
+      "bottom": {
+        "lines": ["COMMAND", "Move 3 [square]", "Jump"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: required Earth consume", "top: use slots, after each of the Bear's next three attacks (max once per round): command the Bear Heal 2 self",
+                 "bottom: COMMAND: the Bear performs the half"],
+      "summons": [],
+      "notes": "Top Heal 2 has no enhancement mark."
+    },
+    {
+      "name": "Invocation of Spirit",
+      "number": "0485",
+      "level": "X",
+      "initiative": 62,
+      "top": {
+        "lines": ["! consume Air or Earth (split icon; required: the action can't be performed without it)",
+                  "\"After each of Bear's next three attacks, triggering no more than once each round, perform the following as if you occupied the same hex as Bear:\"",
+                  "Attack 2: target 1 enemy within 3 hexes",
+                  "slots: 3 (XP 1 on slot 1), ends after the last"],
+        "summary": ["persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]", "Heal 1 [square]", "Range 2 [square]", "consume Earth: +1 Heal, XP 1",
+                  "\"Add +1 Heal if the target is Bear.\""],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: required Air-or-Earth consume", "top: use slots, after each of the Bear's next three attacks (max once per round): the Wildfury attacks 2 one enemy within 3 hexes, measured as if standing in the Bear's hex",
+                 "bottom: +1 Heal if the target is the Bear"],
+      "summons": [],
+      "notes": "Top Attack 2 has no enhancement mark."
+    },
+    {
+      "name": "Gust Sigil",
+      "number": "0486",
+      "level": "X",
+      "initiative": 22,
+      "top": {
+        "lines": ["! consume Air (required: the action can't be performed without it)",
+                  "Summon Wind Idol: HP 1 [square], Move -, Attack -, Range -",
+                  "\"All allies within Range 3 add Pierce 1 to all their attacks.\""],
+        "summary": ["XP 1", "persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 5 [square]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: required Air consume", "top: summon aura: allies within range 3 of the Wind Idol add Pierce 1 to all their attacks"],
+      "summons": ["Wind Idol"],
+      "notes": "Summon block: HP 1 with a square mark; Move, Attack and Range printed as '-'. GHS: wind-idol health 1 (agrees)."
+    },
+    {
+      "name": "Forceful Swipe",
+      "number": "0487",
+      "level": "X",
+      "initiative": 35,
+      "top": {
+        "lines": ["COMMAND", "Attack 2 [square]", "Push 1",
+                  "area: grey (attacker) hex with 3 red hexes on its up-right, right and down-right sides [hex mark on the empty hex up-left of the grey hex]"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["COMMAND", "Move 4 [square]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: COMMAND: the Bear performs the area attack", "bottom: COMMAND: the Bear performs the half"],
+      "summons": [],
+      "notes": "Same area shape as Bruiser's Sweeping Blow, hex mark in the same place. Push 1 has no mark."
+    },
+    {
+      "name": "Energizing Strike",
+      "number": "0488",
+      "level": "2",
+      "initiative": 48,
+      "top": {
+        "lines": ["COMMAND", "Attack 4 [diamond]", "\"If you performed the attack ability, perform:\"", "Strengthen [diamond+], self"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Heal 1: target all allies"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: COMMAND: the Bear attacks; if it performed the attack, Strengthen self (the Bear)",
+                 "bottom: Heal 1 on all allies (no range printed)"],
+      "summons": [],
+      "notes": "Strengthen = blue diamond with a flexed arm. Bottom Heal 1 has no enhancement mark."
+    },
+    {
+      "name": "Earthen Spikes",
+      "number": "0489",
+      "level": "2",
+      "initiative": 11,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Range 4", "Immobilize", "! infuse Earth (corner box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 5 [square]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "Immobilize = red diamond with a boot."
+    },
+    {
+      "name": "Punch Through",
+      "number": "0490",
+      "level": "3",
+      "initiative": 29,
+      "top": {
+        "lines": ["COMMAND", "Attack 3 [diamond]", "Pierce 2", "consume Air: +1 Attack, +2 Pierce, XP 1"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["COMMAND", "Move 3 [circle]", "\"Add +1 Attack to all your attacks this round.\""],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: COMMAND: the Bear performs the half", "bottom: COMMAND: the Bear moves; round bonus +1 Attack to all 'your' attacks this round"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Stone Sigil",
+      "number": "0491",
+      "level": "3",
+      "initiative": 15,
+      "top": {
+        "lines": ["! consume Earth (required: the action can't be performed without it)",
+                  "Summon Monolith: HP 2 [square], Move -, Attack -, Range -",
+                  "\"All allies within Range 3 gain Shield 1.\""],
+        "summary": ["XP 1", "persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "\"If you are adjacent to Bear, perform:\"",
+                  "Attack 1 [diamond]", "Range 3", "Pierce 1", "Muddle",
+                  "consume Air: +1 Attack, +1 Pierce, XP 1"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: required Earth consume", "top: summon aura: allies within range 3 of the Monolith gain Shield 1",
+                 "bottom: the attack only if you are adjacent to the Bear"],
+      "summons": ["Monolith"],
+      "notes": "Summon block: HP 2 with a square mark; Move, Attack and Range printed as '-'. GHS: monolith health 2 (agrees)."
+    },
+    {
+      "name": "Unstoppable Beast",
+      "number": "0492",
+      "level": "4",
+      "initiative": 32,
+      "top": {
+        "lines": ["COMMAND", "Attack 3 [diamond]", "consume Earth: +1 Attack, XP 1",
+                  "area: grey (attacker) hex, red hex up-right of it, red hex right of it (triangle) [hex mark on the empty hex down-right of the grey hex]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["COMMAND", "Move 5 [circle]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: COMMAND: the Bear performs the area attack", "bottom: COMMAND: the Bear performs the half"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Forest's Blessing",
+      "number": "0493",
+      "level": "4",
+      "initiative": 44,
+      "top": {
+        "lines": ["Heal 4 [diamond+]", "Range 3 [square]", "Bless", "! infuse Air (corner box)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 3 [diamond]", "Target 2 [square]", "Range 4", "Poison",
+                  "Heal 3 [diamond+]", "Target 2 [square]", "Range 4", "Strengthen",
+                  "! infuse Air and Earth (corner box, two separate icons)"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "Bless = gold diamond with a triangle in a circle (same icon as on Soothsinger's Tuning the Outcome, which GHS reads as Bless)."
+    },
+    {
+      "name": "Rampage",
+      "number": "0494",
+      "level": "5",
+      "initiative": 16,
+      "top": {
+        "lines": ["COMMAND", "Attack 2 [square]", "Move 2", "Attack 3 [diamond]", "Move 2", "Attack 4 [diamond]"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["COMMAND", "Attack 2 [square]", "Target 2", "Muddle"],
+        "summary": ["XP 1"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: COMMAND: the Bear performs the five abilities in order", "bottom: COMMAND: the Bear performs the half"],
+      "summons": [],
+      "notes": "Top: the two Move 2 rows have no marks."
+    },
+    {
+      "name": "Invocation of Domination",
+      "number": "0495",
+      "level": "5",
+      "initiative": 10,
+      "top": {
+        "lines": ["! consume Air (required: the action can't be performed without it)",
+                  "\"After each of Bear's next four attacks, triggering no more than once each round, control the target of the attack:\"",
+                  "Move 2", "Attack 2",
+                  "slots: 4 (XP 1 on slot 1), ends after the last"],
+        "summary": ["persistent"]
+      },
+      "bottom": {
+        "lines": ["\"Grant one ally within Range 4:\"", "Shield 1 [square]",
+                  "Poison: target all enemies adjacent to the target of the grant ability",
+                  "! infuse Earth (corner box)"],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: required Air consume", "top: use slots, after each of the Bear's next four attacks (max once per round): control the attacked enemy: it performs Move 2, Attack 2",
+                 "bottom: grant one ally within range 4 Shield 1 (round)", "bottom: Poison all enemies adjacent to the granted ally"],
+      "summons": [],
+      "notes": "Top: enemy control (the target of the Bear's attack acts as you direct)."
+    },
+    {
+      "name": "Blood Hunger",
+      "number": "0496",
+      "level": "6",
+      "initiative": 41,
+      "top": {
+        "lines": ["COMMAND", "Attack 3 [diamond]", "Wound", "\"If you performed the attack ability, perform:\"", "Heal 3 [diamond+], self"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["COMMAND",
+                  "! \"At the end of each round, if you neither attacked nor were attacked that round, move this card to the lost pile.\"",
+                  "Shield 1", "Retaliate 2"],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: COMMAND: the Bear attacks; if it performed the attack, Heal 3 self (the Bear)",
+                 "bottom: COMMAND: persistent Shield 1 and Retaliate 2 (on the Bear)",
+                 "bottom: mandatory end-of-round check: lost if 'you' neither attacked nor were attacked that round"],
+      "summons": [],
+      "notes": "Bottom: the condition text sits in a '!' box above Shield 1 and Retaliate 2."
+    },
+    {
+      "name": "Ancient Ward",
+      "number": "0497",
+      "level": "6",
+      "initiative": 59,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Range 4", "Disarm", "consume Air and Earth (two separate icons): +1 Target, XP 2"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "Heal 1 [square]", "Target 2 [square]", "Range 3",
+                  "consume Air or Earth (split icon): +1 Heal, Regenerate, XP 1"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["bottom: Regenerate added to the heal by the consume"],
+      "summons": [],
+      "notes": "This card prints both element notations: top two separate icons, each with a red X; bottom one split pill (Air | Earth) with a single red X."
+    },
+    {
+      "name": "Invocation of Absorption",
+      "number": "0498",
+      "level": "7",
+      "initiative": 24,
+      "top": {
+        "lines": ["! consume Earth (required: the action can't be performed without it)",
+                  "\"After each of Bear's next three attacks, triggering no more than once each round, all enemies within Range 2 of Bear suffer damage 1 and Bear performs:\"",
+                  "Heal X, self",
+                  "\"Where X is the number of enemies that suffered damage.\"",
+                  "slots: 3 (XP 1 on slot 1), ends after the last"],
+        "summary": ["persistent"]
+      },
+      "bottom": {
+        "lines": ["Attack 2 [diamond]", "Range 4", "Push 2 [square]", "! infuse Air (corner box)"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: required Earth consume", "top: use slots, after each of the Bear's next three attacks (max once per round): damage 1 to all enemies within range 2 of the Bear, then the Bear heals self X = enemies damaged"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Unleashed Fury",
+      "number": "0499",
+      "level": "7",
+      "initiative": 65,
+      "top": {
+        "lines": ["COMMAND", "Attack 3 [diamond]", "\"Double the value of all Attack bonuses from your ability cards on this attack.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["COMMAND", "Move 2 [circle]", "Attack 3 [diamond]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: COMMAND: the Bear attacks; all Attack bonuses from your ability cards are doubled on this attack", "bottom: COMMAND: the Bear performs the half"],
+      "summons": [],
+      "notes": "No corner icons on either half."
+    },
+    {
+      "name": "Lash Out",
+      "number": "0500",
+      "level": "8",
+      "initiative": 46,
+      "top": {
+        "lines": ["COMMAND", "Attack 4: target all adjacent enemies"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]",
+                  "\"Teleport to the hex occupied by Bear and simultaneously Teleport Bear to the hex occupied by you.\"",
+                  "Move 3 [circle]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: COMMAND: the Bear attacks all adjacent enemies", "bottom: swap positions with the Bear (teleport, any distance), between two moves"],
+      "summons": [],
+      "notes": "Top Attack 4 has no enhancement mark. Bottom is not a COMMAND half."
+    },
+    {
+      "name": "Unbreakable Bond",
+      "number": "0501",
+      "level": "8",
+      "initiative": 55,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Range 3 [square]",
+                  "Attack 3 [diamond]", "Range 3 [square]", "\"Perform this attack as if you occupied the same hex as Bear.\"",
+                  "! infuse Air or Earth (corner box, split icon)"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"On the next three rounds, skip your card selection and your turn. Your character token does not advance on any of your other persistent abilities. Bear performs their turn twice at initiative 14 each round with you controlling it.\"",
+                  "slots: 3 (XP 1 on slots 1, 3), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: second attack measured as if the Wildfury stood in the Bear's hex",
+                 "bottom: for three rounds: the Wildfury skips card selection and its turn; its other persistent abilities don't advance; the Bear takes two turns at initiative 14 each round, controlled by the player"],
+      "summons": [],
+      "notes": "Top infusion is one split pill (Air | Earth), no red X."
+    },
+    {
+      "name": "Spirit Sigil",
+      "number": "0502",
+      "level": "9",
+      "initiative": 85,
+      "top": {
+        "lines": ["! consume Air and Earth (two separate icons; required: the action can't be performed without them)",
+                  "Summon Vital Force: HP 3 [square], Move -, Attack -, Range -",
+                  "\"All allies within Range 3 add +2 Attack to their first attack each round.\""],
+        "summary": ["XP 1", "persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 5 [circle]", "Regenerate", "Bless", "Target 1 ally", "Range 1 [square]",
+                  "! infuse Air or Earth (corner box, split icon)"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: required Air and Earth consume", "top: summon aura: allies within range 3 of Vital Force add +2 Attack to their first attack each round"],
+      "summons": ["Vital Force"],
+      "notes": "Summon block: HP 3 with a square mark; Move, Attack and Range printed as '-'. GHS: vital-force health 3 (agrees)."
+    },
+    {
+      "name": "Jaws of Death",
+      "number": "0503",
+      "level": "9",
+      "initiative": 18,
+      "top": {
+        "lines": ["COMMAND", "Move 4 [circle]", "Attack 6 [diamond]", "\"If this attack kills an enemy, gain XP 1 and repeat this action.\""],
+        "summary": ["lost"]
+      },
+      "bottom": {
+        "lines": ["COMMAND", "Attack 3 [diamond]", "Push 3", "Move 3 [circle]", "Attack 3 [diamond]"],
+        "summary": ["XP 1"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: COMMAND: the Bear moves and attacks; if the attack kills, gain XP 1 and repeat the whole action (Move 4 + Attack 6)", "bottom: COMMAND: the Bear performs the three abilities in order"],
+      "summons": [],
+      "notes": "Bottom Push 3 has no mark."
+    }
+  ],
+  "summons": [
+    "Bear (class companion, from the mat, not a card): HP 10/12/14/16/18/20/22/24/26 at levels 1-9 (8 + 2 x level), Move 3, Attack 2. Summoned in an empty adjacent hex before the first round of every scenario; acts immediately before the Wildfury each round; the Wildfury may lose cards to negate damage done to the Bear; below 1 HP it is removed and cannot return that scenario; won't open doors on its own turn but can be commanded to. GHS two-mini: health 8+Lx2, attack 2, movement 3 (agrees).",
+    "Wind Idol (Gust Sigil top, level X): HP 1 [square], Move -, Attack -, Range -; \"All allies within Range 3 add Pierce 1 to all their attacks.\"",
+    "Monolith (Stone Sigil top, level 3): HP 2 [square], Move -, Attack -, Range -; \"All allies within Range 3 gain Shield 1.\"",
+    "Vital Force (Spirit Sigil top, level 9): HP 3 [square], Move -, Attack -, Range -; \"All allies within Range 3 add +2 Attack to their first attack each round.\""
+  ],
+  "mechanics": [
+    "Bear companion from the mat: auto-summoned before round 1, acts right before the Wildfury, HP 8 + 2 x level, the Wildfury may lose cards to negate the Bear's damage, can't return once killed",
+    "COMMAND halves: the Bear performs the half's abilities, ignoring the Wildfury's line of sight (Maul, Howling Bolts bottom, Gnaw, Disorienting Roar top, Spirit Swap top, Invocation of Endurance bottom, Forceful Swipe, Energizing Strike top, Punch Through, Unstoppable Beast, Rampage, Blood Hunger, Unleashed Fury, Lash Out top, Jaws of Death); a Command can also make the Bear open doors",
+    "Required element consumes ('!' box with a consume icon at the top of the half): the action can't be performed without the element (Disorienting Roar bottom, Invocation of Endurance/Spirit/Domination/Absorption tops, Gust/Stone/Spirit Sigil tops)",
+    "Split element icon (one pill, Air | Earth) for consume and infuse, distinct from two separate icons (Spirit Swap top, Invocation of Spirit top, Ancient Ward bottom, Unbreakable Bond top, Spirit Sigil bottom); read as 'one of the two'",
+    "Invocation pattern: use-slot persistent triggered after each of the Bear's next N attacks, max once per round (Disorienting Roar bottom: command Move 3 Jump; Invocation of Endurance: command Heal 2 self; Invocation of Spirit: attack from the Bear's hex; Invocation of Domination: control the attacked enemy Move 2 Attack 2; Invocation of Absorption: damage 1 around the Bear and Bear heals X)",
+    "Attacks measured as if the Wildfury occupied the Bear's hex (Invocation of Spirit top, Unbreakable Bond top)",
+    "Static summons with auras and no move/attack (Wind Idol: Pierce 1 to allies within 3; Monolith: Shield 1 to allies within 3; Vital Force: +2 Attack on allies' first attack each round)",
+    "Bear-conditional bonuses: Retaliate 1 if the grant target is the Bear (Focused Aggression bottom), +1 Heal if the target is the Bear (Invocation of Spirit bottom), attack only if adjacent to the Bear (Stone Sigil bottom)",
+    "Position swaps by teleport: two enemies (Spirit Swap bottom), the Wildfury and the Bear (Lash Out bottom); teleport the Wildfury to an adjacent empty hex via a consume (Spirit Swap top)",
+    "Damage-token counter card fed by the Bear's attacks and Retaliate damage (Concentrated Rage bottom)",
+    "Grant abilities to allies: Shield 1 (+Retaliate 1 for the Bear) (Focused Aggression bottom), Shield 1 plus Poison around the granted ally (Invocation of Domination bottom)",
+    "'If you performed the attack ability, perform:' follow-ups (Energizing Strike top, Blood Hunger top)",
+    "Mandatory end-of-round lose check: lost if no attack made or received that round (Blood Hunger bottom)",
+    "Double Attack bonuses from ability cards on one attack (Unleashed Fury top)",
+    "Kill-to-repeat: XP 1 and repeat the action on a kill (Jaws of Death top)",
+    "Turn skip: three rounds of no card selection or turn for the Wildfury, the Bear takes two turns at initiative 14 (Unbreakable Bond bottom)",
+    "Enemy control (Invocation of Domination top)",
+    "Conditions used: Disarm, Regenerate, Poison, Muddle, Wound, Immobilize, Strengthen, Bless; plus Retaliate, Shield, Pierce, Push"
+  ],
+  "unclear": [
+    "Split element icon (one pill, Air | Earth, one red X or none): I read it as 'Air or Earth, one of the two', because Ancient Ward prints both notations on one card (top: two separate icons each with a red X = both). Confirm with the 2e rulebook (Spirit Swap top, Invocation of Spirit top, Ancient Ward bottom, Unbreakable Bond top infusion, Spirit Sigil bottom infusion)",
+    "'you' / 'self' / 'your' on COMMAND halves: is it the Bear or the Wildfury? (Howling Bolts bottom Heal 3 self, Energizing Strike top 'If you performed... Strengthen self', Blood Hunger top Heal 3 self and bottom 'if you neither attacked nor were attacked', Punch Through bottom 'all your attacks this round', Unleashed Fury top 'your ability cards'). Rules question, not a reading one",
+    "Spirit Swap top: 'an adjacent empty hex' - adjacent to the Bear or to the Wildfury is not stated",
+    "Concentrated Rage bottom: persistent into lost with no use slots and no end condition printed (presumably lasts the scenario)",
+    "Disorienting Roar top: the text's 'within Range 2' is presumably measured from the Bear (COMMAND half); not stated",
+    "Energizing Strike bottom 'Heal 1, target all allies': no range printed, and whether it includes the Wildfury itself is a rules question"
+  ]
+}

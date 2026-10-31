@@ -1,0 +1,660 @@
+{
+  "class": "Berserker",
+  "read_by": "image reader B, 2026-10-31",
+  "cards": [
+    {
+      "name": "Numb the Pain",
+      "number": "0323",
+      "level": "1",
+      "initiative": 9,
+      "top": {
+        "lines": ["Retaliate 2 [square]",
+                  "\"Whenever you suffer damage this round, if your current hit point value is half your maximum or less, suffer 1 less damage.\""],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]", "Heal 1 [square], self"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: this round, each time you suffer damage while at half your maximum hit points or less, suffer 1 less damage"],
+      "summons": [],
+      "notes": "Class-wide: the cards print 'G 0323' to 'G 0350' bottom left (G prefix dropped in `number`). Class-wide: every corner box on these cards has the red '!' tab (corner icons are listed plainly in `summary`). Initiative printed as '09'."
+    },
+    {
+      "name": "Shiny Distraction",
+      "number": "0324",
+      "level": "1",
+      "initiative": 11,
+      "top": {
+        "lines": ["Loot 1", "Shield 1 [square]"],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["\"Gain advantage on all your attacks this round.\"",
+                  "\"All attacks targeting you this round gain disadvantage.\"",
+                  "! infuse Fire"],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["bottom: advantage on all your attacks this round", "bottom: all attacks targeting you this round gain disadvantage"],
+      "summons": [],
+      "notes": "Both halves carry the round icon. The two text rows are separate rows (divider between them)."
+    },
+    {
+      "name": "Strength in Agony",
+      "number": "0325",
+      "level": "1",
+      "initiative": 37,
+      "top": {
+        "lines": ["Attack 3 [diamond]",
+                  "\"Add +2 Attack and gain XP 1 if your current hit point value is half your maximum or less.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"You may suffer up to damage 3.\"",
+                  "Move 4+X",
+                  "\"where X is the amount of damage you chose to suffer.\""],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: +2 Attack and XP 1 if at half your maximum hit points or less",
+                 "bottom: optionally suffer 0-3 damage; Move 4+X where X = damage chosen"],
+      "summons": [],
+      "notes": "Bottom Move 4+X has no enhancement mark."
+    },
+    {
+      "name": "Defiance of Death",
+      "number": "0326",
+      "level": "1",
+      "initiative": 31,
+      "top": {
+        "lines": ["Attack 3 [diamond]",
+                  "\"You may suffer damage 2 to add +2 Attack and gain XP 1.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"On the next source of damage you would suffer that would reduce your current hit point value to less than 1, negate the damage.\"",
+                  "slots: 1 (dashed; XP 1 on slot 1), ends after the last"],
+        "summary": ["persistent"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: may suffer damage 2 for +2 Attack and XP 1",
+                 "bottom: persistent: negate the next source of damage that would bring you below 1 hit point (one use, XP 1 on it)"],
+      "summons": [],
+      "notes": "Bottom corner shows only the persistent icon (no lost icon), so the card is discarded after its single use. The only slot is dashed."
+    },
+    {
+      "name": "Resolute Stand",
+      "number": "0327",
+      "level": "1",
+      "initiative": 10,
+      "top": {
+        "lines": ["consume Fire: Heal 2, self",
+                  "Retaliate 2 [square]",
+                  "\"Gain XP 1 the next time you retaliate this round.\""],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["Move 4"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: XP 1 the next time you retaliate this round"],
+      "summons": [],
+      "notes": "Top: the consume-Fire Heal 2 is its own dashed-box row printed above the Retaliate (not attached to another ability). Bottom Move 4 has no enhancement mark (checked zoomed)."
+    },
+    {
+      "name": "Blood Pact",
+      "number": "0328",
+      "level": "1",
+      "initiative": 76,
+      "top": {
+        "lines": ["! \"Suffer damage equal to half your current hit point value (rounded down).\"",
+                  "Attack 6 [diamond]"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["\"Add +1 Attack to all your attacks.\"",
+                  "! \"At the start of each of your turns, if your current hit point value is greater than 1, suffer damage 1.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: mandatory self-damage equal to half your current hit points (rounded down) before the attack",
+                 "bottom: persistent +1 Attack on all your attacks",
+                 "bottom: mandatory: at the start of each of your turns, suffer damage 1 if above 1 hit point"],
+      "summons": [],
+      "notes": "The bottom has no use slots: persistent for the rest of the scenario, then lost. GHS lists a 'blood-pact' special action for this class (expire: true)."
+    },
+    {
+      "name": "Cauterize",
+      "number": "0329",
+      "level": "1",
+      "initiative": 40,
+      "top": {
+        "lines": ["Attack 1", "Range 3", "Wound",
+                  "\"Add +1 Target and gain XP 1 if your current hit point value is half your maximum or less.\"",
+                  "! infuse Fire"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"You may suffer damage 2 to perform:\"",
+                  "Wound, Immobilize, range 1",
+                  "Move 3 [square]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: +1 Target and XP 1 if at half your maximum hit points or less",
+                 "bottom: optional self-damage 2 to apply Wound and Immobilize to one target at range 1 (a condition-only ability)"],
+      "summons": [],
+      "notes": "No enhancement marks on the top (checked zoomed). Bottom: Wound and Immobilize are diamond condition icons followed by a range 1 pill, not riders on an attack."
+    },
+    {
+      "name": "Dazing Wound",
+      "number": "0330",
+      "level": "1",
+      "initiative": 29,
+      "top": {
+        "lines": ["Attack 3 [square]",
+                  "\"You may suffer damage 2 to add Stun and gain XP 1.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Heal 3 [square], range 2 [square]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: may suffer damage 2 to add Stun and XP 1"],
+      "summons": [],
+      "notes": "Bottom heal has range 2 (no 'self'); both Heal and Range carry a square mark."
+    },
+    {
+      "name": "Unbridled Power",
+      "number": "0331",
+      "level": "1",
+      "initiative": 14,
+      "top": {
+        "lines": ["Attack 3 [square]", "Push 2 [square]",
+                  "consume Fire: \"Target 1 enemy up to two hexes away instead, +1 Attack\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]", "Retaliate 1",
+                  "\"Gain XP 1 the next time you retaliate this round.\""],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: consume Fire: the attack may target 1 enemy up to two hexes away (instead of melee) and gets +1 Attack",
+                 "bottom: XP 1 the next time you retaliate this round"],
+      "summons": [],
+      "notes": "Top: the consume box hangs off the attack (connector line). Push 2 is in the attack's pill with its own square mark. Bottom Retaliate 1 has no mark."
+    },
+    {
+      "name": "From the Brink",
+      "number": "0332",
+      "level": "X",
+      "initiative": 24,
+      "top": {
+        "lines": ["\"Remove all negative conditions you have. If your current hit point value is 1, you may recover one card from your lost pile.\"",
+                  "\"Set your current hit point value to half of your maximum (rounded up) and gain Strengthen.\"",
+                  "! infuse Fire"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]", "Pull 1 [square], range 2 [square]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: remove all your negative conditions; if at exactly 1 hit point, may recover one card from your lost pile",
+                 "top: set your current hit points to half your maximum (rounded up) and gain Strengthen"],
+      "summons": [],
+      "notes": "'recover' is the card icon with a red check mark. Bottom Pull is its own ability (pull icon in a diamond) with range 2."
+    },
+    {
+      "name": "Glass Hammer",
+      "number": "0333",
+      "level": "X",
+      "initiative": 43,
+      "top": {
+        "lines": ["Attack X",
+                  "\"where X is your current hit point value. Gain XP 1 for every 5 damage an enemy suffers from this attack.\"",
+                  "! \"Set your current hit point value to 1.\""],
+        "summary": ["lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Jump"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: Attack X = your current hit points; XP 1 per 5 damage the enemy suffers from the attack",
+                 "top: mandatory: set your current hit points to 1"],
+      "summons": [],
+      "notes": "Attack X has no mark."
+    },
+    {
+      "name": "Growing Rage",
+      "number": "0334",
+      "level": "X",
+      "initiative": 85,
+      "top": {
+        "lines": ["\"Whenever you retaliate, perform:\"",
+                  "Heal 1, self",
+                  "\"If, after the heal, your current hit point value is half your maximum or less, repeat this ability once.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]",
+                  "\"If your current hit point value is half your maximum or less, gain XP 1 and perform:\"",
+                  "Attack 2 [square]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: persistent: whenever you retaliate, Heal 1 self; repeat once if still at half your maximum hit points or less after the heal",
+                 "bottom: Attack 2 and XP 1 only if at half your maximum hit points or less"],
+      "summons": [],
+      "notes": "Top Heal 1 has no mark; no use slots (persistent for the scenario, then lost)."
+    },
+    {
+      "name": "Reckless Offensive",
+      "number": "0335",
+      "level": "2",
+      "initiative": 21,
+      "top": {
+        "lines": ["Attack 4 [square]",
+                  "\"You may suffer damage 2 to add +1 Target and gain XP 1.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]",
+                  "consume Fire: +2 Move",
+                  "\"Add +2 Move and gain XP 1 if your current hit point value is half your maximum or less.\""],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: may suffer damage 2 for +1 Target and XP 1",
+                 "bottom: +2 Move and XP 1 if at half your maximum hit points or less"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Into the Fight",
+      "number": "0336",
+      "level": "2",
+      "initiative": 78,
+      "top": {
+        "lines": ["Attack 2", "Target 2", "Range 3", "Pull 2",
+                  "\"Add Muddle and gain XP 1 if your current hit point value is half your maximum or less.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [square]",
+                  "\"You may suffer damage 2 to infuse Fire and perform:\"",
+                  "Stun, range 1"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: add Muddle and XP 1 if at half your maximum hit points or less",
+                 "bottom: optional self-damage 2 to infuse Fire and Stun one target at range 1"],
+      "summons": [],
+      "notes": "No enhancement marks on the top (checked zoomed). Bottom: the text shows a plain Fire icon (no consume X) where 'infuse Fire' is written; Stun is a condition-only ability with a range 1 pill. Muddle = brown diamond with '?'."
+    },
+    {
+      "name": "Final Fight",
+      "number": "0337",
+      "level": "3",
+      "initiative": 89,
+      "top": {
+        "lines": ["\"When this card is moved from your active area to your lost pile, you become exhausted. At the end of this and your next three turns, perform:\"",
+                  "Attack 5, advantage",
+                  "slots: 4 (first dashed; XP 1 on slots 2, 3, 4), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]",
+                  "consume Fire: \"Add +1 Attack to all your attacks this round.\" (round icon inside the box)"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: at the end of this turn and your next three turns, perform Attack 5 with advantage (use slots)",
+                 "top: when the card goes from the active area to the lost pile, you become exhausted",
+                 "bottom: consume Fire: +1 Attack on all your attacks this round"],
+      "summons": [],
+      "notes": "Top Attack 5 has no mark; 'advantage' is in the attack's pill. Bottom half has no corner icons; its only round icon sits inside the consume-Fire box."
+    },
+    {
+      "name": "Tireless Retribution",
+      "number": "0338",
+      "level": "3",
+      "initiative": 7,
+      "top": {
+        "lines": ["Retaliate 3 [square]",
+                  "\"Gain XP 1 the next time you retaliate this round.\"",
+                  "\"All attacks targeting you this round gain disadvantage.\""],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["\"If you short rest at the end of this round, gain all the benefits of a long rest.\"",
+                  "! infuse Fire"],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: XP 1 the next time you retaliate this round",
+                 "top: all attacks targeting you this round gain disadvantage",
+                 "bottom: a short rest at the end of this round gives all the benefits of a long rest"],
+      "summons": [],
+      "notes": "Initiative printed as '07'."
+    },
+    {
+      "name": "Unstoppable Destruction",
+      "number": "0339",
+      "level": "4",
+      "initiative": 26,
+      "top": {
+        "lines": ["Attack 5 [diamond]",
+                  "consume Fire: \"All enemies adjacent to the target but not adjacent to you suffer damage 2.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "Jump", "Heal 2 [square], self"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: consume Fire: enemies adjacent to the target but not adjacent to you suffer damage 2"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Inner Fire",
+      "number": "0340",
+      "level": "4",
+      "initiative": 38,
+      "top": {
+        "lines": ["Heal 4 [diamond+], self",
+                  "\"Add +2 Heal and gain XP 1 if your current hit point value is half your maximum or less.\"",
+                  "! infuse Fire"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 1 [square]", "Move 1 [circle]", "Attack 2 [diamond]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: +2 Heal and XP 1 if at half your maximum hit points or less"],
+      "summons": [],
+      "notes": "Top Heal mark is a diamond with a plus inside (checked zoomed)."
+    },
+    {
+      "name": "Seeing Red",
+      "number": "0341",
+      "level": "5",
+      "initiative": 57,
+      "top": {
+        "lines": ["Attack 3 [diamond]",
+                  "\"You may suffer damage 2 to add +2 Attack.\"",
+                  "\"If your current hit point value is half your maximum or less, gain XP 1 and perform:\"",
+                  "Attack 2 [diamond]"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]",
+                  "Attack 2 [square], Target 2",
+                  "consume Fire: \"Target 2 enemies up to two hexes away instead\""],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: may suffer damage 2 for +2 Attack (no XP)",
+                 "top: second Attack 2 and XP 1 only if at half your maximum hit points or less",
+                 "bottom: consume Fire: the attack may target 2 enemies up to two hexes away"],
+      "summons": [],
+      "notes": "Top: a divider separates the first attack from the conditional text and second attack."
+    },
+    {
+      "name": "Vengeful Barrage",
+      "number": "0342",
+      "level": "5",
+      "initiative": 16,
+      "top": {
+        "lines": ["\"On the next six sources of damage you suffer while an enemy is adjacent to you, after the ability that caused you to suffer the damage, perform Attack 4.\"",
+                  "slots: 6 (first dashed; XP 1 on slots 2, 4, 6), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "Retaliate 2", "consume Fire: +1 Retaliate"],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: use slots: after each of the next six sources of damage you suffer while an enemy is adjacent, perform Attack 4 (after the ability that caused it)"],
+      "summons": [],
+      "notes": "Top slot track is two rows of three. Bottom Retaliate 2 has no mark (checked zoomed)."
+    },
+    {
+      "name": "Flurry of Axes",
+      "number": "0343",
+      "level": "6",
+      "initiative": 17,
+      "top": {
+        "lines": ["\"You may suffer up to damage 4.\"",
+                  "Attack X: target all enemies within 3 hexes",
+                  "\"where X is the amount of damage you chose to suffer.\""],
+        "summary": ["XP 2", "unrecoverable", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 5 [circle]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: optionally suffer 0-4 damage; Attack X on all enemies within 3 hexes where X = damage chosen"],
+      "summons": [],
+      "notes": "Top corner: XP 2, the card-stack-with-red-X icon (unrecoverable), then the single-card-with-red-X icon (lost)."
+    },
+    {
+      "name": "Devil Horns",
+      "number": "0344",
+      "level": "6",
+      "initiative": 32,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Wound",
+                  "area: grey (attacker) hex with 3 red hexes on its up-right, right and down-right sides [no hex mark]",
+                  "! infuse Fire"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 4 [diamond]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": [],
+      "summons": [],
+      "notes": "Area is the same shape as the Bruiser's Sweeping Blow (red hexes carry the usual faint X)."
+    },
+    {
+      "name": "Careless Charge",
+      "number": "0345",
+      "level": "7",
+      "initiative": 15,
+      "top": {
+        "lines": ["Move 3 [circle]", "Attack 4 [diamond]",
+                  "\"If you moved in a straight line in one direction with the move ability and you do not have Wound, gain Wound to add +X Attack, where X is the number of hexes you moved with the move ability.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]",
+                  "\"Whenever you are attacked this round, gain Retaliate X for the attack, where X is the number of enemies adjacent to you when the attack is performed.\""],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: if the move went in a straight line in one direction and you lack Wound, you may gain Wound for +X Attack (X = hexes moved with that move)",
+                 "bottom: this round, Retaliate X against each attack on you, X = enemies adjacent to you when the attack is performed"],
+      "summons": [],
+      "notes": "Top: the conditional text is in a dashed box (no element) hanging off the attack."
+    },
+    {
+      "name": "Fueled by Pain",
+      "number": "0346",
+      "level": "7",
+      "initiative": 22,
+      "top": {
+        "lines": ["Attack 4 [diamond]",
+                  "consume Fire: Heal X, self \"where X is the amount of damage enemies suffered from the attack ability.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "Jump",
+                  "\"You may suffer damage 2 to add +2 Move and gain XP 1.\"",
+                  "Attack 3: target all enemies moved through with the move ability that have Wound"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: consume Fire: Heal X self, X = damage enemies suffered from the attack",
+                 "bottom: may suffer damage 2 for +2 Move and XP 1",
+                 "bottom: the attack targets all enemies moved through with the move that have Wound"],
+      "summons": [],
+      "notes": "Top: the consume box is a separate row after a divider. Bottom Attack 3 has no mark."
+    },
+    {
+      "name": "Bone Breaker",
+      "number": "0347",
+      "level": "8",
+      "initiative": 41,
+      "top": {
+        "lines": ["Attack 5 [diamond]", "Wound", "Immobilize",
+                  "\"Add Push 2 and gain XP 1 if your current hit point value is half your maximum or less.\"",
+                  "! infuse Fire"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Attack 3 [diamond]", "Range 4",
+                  "\"Place your character token on the target. The target loses Flying.\""],
+        "summary": ["persistent"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: add Push 2 and XP 1 if at half your maximum hit points or less",
+                 "bottom: persistent: mark the target with your character token; it loses Flying"],
+      "summons": [],
+      "notes": "Bottom: persistent icon only (no lost icon, no use slots)."
+    },
+    {
+      "name": "Spiked Armor",
+      "number": "0348",
+      "level": "8",
+      "initiative": 8,
+      "top": {
+        "lines": ["Retaliate 2 [square]",
+                  "\"You may suffer damage 2 to add +1 Retaliate and gain XP 1.\"",
+                  "\"Whenever an enemy suffers damage from your Retaliate this round, they gain Wound.\"",
+                  "\"Negate the next damage you suffer this round.\""],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["Heal 5 [diamond+], self",
+                  "\"Add Strengthen and gain XP 1 if your current hit point value is half your maximum or less.\""],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: may suffer damage 2 for +1 Retaliate and XP 1",
+                 "top: enemies damaged by your Retaliate this round gain Wound",
+                 "top: negate the next damage you suffer this round",
+                 "bottom: add Strengthen and XP 1 if at half your maximum hit points or less"],
+      "summons": [],
+      "notes": "Initiative printed as '08'. Top: three rows separated by dividers. Top's self-damage option and 'negate the next damage' are on the same half (order: suffer first, then negate applies to later damage)."
+    },
+    {
+      "name": "Burning Hatred",
+      "number": "0349",
+      "level": "9",
+      "initiative": 50,
+      "top": {
+        "lines": ["Attack 2: target all adjacent enemies",
+                  "consume Fire: \"Target all enemies up to two hexes away instead\"",
+                  "\"You may suffer damage 2 to add +1 Attack and gain XP 1.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"You may perform this action any number of times in succession, increasing the damage suffered by 1 each time.\"",
+                  "! \"Suffer damage 1. This damage cannot be negated.\"",
+                  "Move 1",
+                  "Attack 2"],
+        "summary": ["XP 2", "unrecoverable", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: consume Fire: targets all enemies up to two hexes away instead of all adjacent",
+                 "top: may suffer damage 2 for +1 Attack and XP 1",
+                 "bottom: repeatable action: suffer damage 1 (cannot be negated), Move 1, Attack 2; may repeat any number of times, the damage rising by 1 each time"],
+      "summons": [],
+      "notes": "No enhancement marks anywhere on this card (checked zoomed). Bottom corner: XP 2, card-stack-with-red-X (unrecoverable), single card with red X (lost)."
+    },
+    {
+      "name": "Bathe in Blood",
+      "number": "0350",
+      "level": "9",
+      "initiative": 83,
+      "top": {
+        "lines": ["\"Whenever you suffer damage, all enemies that have Wound suffer damage 1.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 5 [circle]", "Jump",
+                  "Pull 1 [square]: target all, range 2 [square]",
+                  "Muddle: target all, range 1"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: persistent: whenever you suffer damage, every enemy with Wound suffers damage 1"],
+      "summons": [],
+      "notes": "Bottom Muddle (brown '?' diamond) has no mark."
+    }
+  ],
+  "summons": [],
+  "mechanics": [
+    "Half-HP threshold: 'if your current hit point value is half your maximum or less' gates bonuses + XP 1 (Strength in Agony, Cauterize, Growing Rage, Reckless Offensive, Into the Fight, Inner Fire, Seeing Red, Bone Breaker, Spiked Armor) and damage reduction (Numb the Pain)",
+    "Optional self-damage as a cost: 'You may suffer damage 2 to ...' (Defiance of Death, Cauterize, Dazing Wound, Into the Fight, Seeing Red, Fueled by Pain, Spiked Armor, Burning Hatred); variable 'suffer up to N' with X = damage chosen (Strength in Agony 3, Flurry of Axes 4)",
+    "Mandatory self-damage / HP setting in '!' boxes: Blood Pact (half current HP; 1 per turn persistent), Glass Hammer (set HP to 1), Burning Hatred (damage 1 that cannot be negated); From the Brink sets HP to half max",
+    "X values from HP or damage: Attack X = current HP (Glass Hammer), XP per 5 damage dealt (Glass Hammer), Heal X = damage dealt by the attack (Fueled by Pain), Attack +X = hexes moved in a straight line (Careless Charge), Retaliate X = adjacent enemies (Careless Charge)",
+    "Damage negation: next damage that would drop you below 1 (Defiance of Death), next damage this round (Spiked Armor), -1 damage per source this round at half HP (Numb the Pain)",
+    "'Gain XP 1 the next time you retaliate this round' (Resolute Stand, Unbridled Power, Tireless Retribution)",
+    "Retaliate-triggered effects: Heal 1 on each retaliate (Growing Rage), Wound on enemies damaged by your retaliate (Spiked Armor)",
+    "Damage-taken triggers: Attack 4 after each of the next six damage sources while adjacent to an enemy (Vengeful Barrage), damage 1 to all Wounded enemies whenever you suffer damage (Bathe in Blood)",
+    "Advantage on your attacks / disadvantage on attacks targeting you this round (Shiny Distraction, Tireless Retribution); Attack 5 with advantage at end of turn for 4 turns (Final Fight)",
+    "Final Fight: you become exhausted when the card moves from the active area to the lost pile",
+    "Short rest gives the benefits of a long rest (Tireless Retribution)",
+    "Repeatable action with escalating self-damage (Burning Hatred bottom)",
+    "Targeting: enemies moved through that have Wound (Fueled by Pain), all enemies within 3 hexes (Flurry of Axes), consume Fire to extend melee targets to 'up to two hexes away' (Unbridled Power, Seeing Red, Burning Hatred), splash on enemies adjacent to the target but not to you (Unstoppable Destruction)",
+    "Character token placed on an enemy, which loses Flying (Bone Breaker, persistent)",
+    "Self-inflicted Wound as a cost (Careless Charge); recover a lost card at exactly 1 HP (From the Brink)",
+    "Fire is the only element (infuse and consume); conditions used: Wound, Immobilize, Stun, Muddle, Strengthen; no summons",
+    "Corner icons: single card with red X = lost (same icon the Bruiser sheet reads as lost; the mat's LOST pile shows it); card stack with red X = unrecoverable (Flurry of Axes top, Burning Hatred bottom, both also lost). Every corner box has a '!' tab"
+  ],
+  "unclear": [
+    "Bone Breaker bottom: persistent with no use slots and no lost icon; when the character-token effect ends (target dies? end of scenario?) is a rules question, not a reading one",
+    "Vengeful Barrage / Final Fight: XP icons sit at the top-right of slots, read as slots 2, 4, 6 (Vengeful Barrage) and 2, 3, 4 (Final Fight); on the two-row Vengeful track the icon between slots could in principle belong to the next slot (I read it like the Bruiser convention: top-right of the slot it belongs to)",
+    "Into the Fight bottom: the Fire icon inside the text has no consume X, so I read it as 'infuse Fire'"
+  ]
+}

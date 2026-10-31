@@ -62,8 +62,9 @@ One line per printed row, top to bottom, in plain words. Use the card's own numb
   mark on none]`. Use Secretariat's area string if it matches the picture, else write your own description.
 - **Text rows:** quote them exactly, with icons as words: `"On the next six sources of damage from attacks
   targeting you, gain Shield 1, Retaliate 1 for the attacks."`
-- **Use slots:** `slots: 6 (XP 1 on slots 1, 3, 5), lost after the last` (the dashed first slot means the use starts
-  as soon as the card is played).
+- **Use slots:** `slots: 6 (XP 1 on slots 1, 3, 5), lost after the last`. 2e rulebook p.28: the token goes on the first
+  (dashed) slot when the card is placed, advances one slot per trigger, and the bonus ends when it leaves the last
+  slot, so N slots = N triggers.
 - **Summons:** `Summon <Name>: HP 4, Move 2, Attack 2, Range 0` plus any traits or text.
 
 ### `summary`: the corner icons of the half

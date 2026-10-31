@@ -1,0 +1,634 @@
+{
+  "class": "Plagueherald",
+  "read_by": "image reader B, 2026-10-31",
+  "cards": [
+    {
+      "name": "Comorbid Sting",
+      "number": "0294",
+      "level": "1",
+      "initiative": 61,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Range 4 [square]", "Poison", "Plague"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"You may give one ally within Range 3 Poison to grant that ally:\"", "Attack 2 [diamond]", "Poison"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: gives the target a Plague token (class token)",
+                 "bottom: optional cost: give one ally within Range 3 Poison; that ally is granted Attack 2 with Poison (no range printed on the granted attack)"],
+      "summons": [],
+      "notes": "Class-wide: printed numbers are 'G 0294' to 'G 0322' (shown without the G). No GHS or Xipe data for this class. Plague = the class token (yellow hand on a black pentagon); per the mat it is not a condition, has no innate effect, can't be removed by enemies, 12 in the supply (giving a 13th first removes a placed one), max 3 per enemy. Every corner box on this class has a '!' tab (not repeated in summary)."
+    },
+    {
+      "name": "Biting Gnats",
+      "number": "0295",
+      "level": "1",
+      "initiative": 21,
+      "top": {
+        "lines": ["Attack 1 [square]", "Target 2", "Range 5", "Plague",
+                  "Muddle: target all enemies that have Plague"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Poison, Muddle: target all"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: second ability Muddle targets all enemies that have Plague (no range printed)",
+                 "bottom: Poison + Muddle targeting all (no range printed; read as all enemies)"],
+      "summons": [],
+      "notes": "Muddle is the brown question-mark diamond. Top has a thin separator line between the attack and the Muddle row. Bottom 'all' has no 'enemies' word printed."
+    },
+    {
+      "name": "Virulent Strain",
+      "number": "0296",
+      "level": "1",
+      "initiative": 72,
+      "top": {
+        "lines": ["\"On the next three attacks performed by one of your allies that has Poison, add +1 Attack, Plague.\"",
+                  "slots: 3 (first dashed; XP 1 on slot 1), ends after the last"],
+        "summary": ["persistent"]
+      },
+      "bottom": {
+        "lines": ["\"Each enemy suffers damage 1 for each Plague that enemy has.\""],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: next 3 attacks by an ally that has Poison get +1 Attack and Plague (use slots)",
+                 "bottom: every enemy suffers damage 1 per Plague token it has"],
+      "summons": [],
+      "notes": "Corner icon is persistent only (no lost icon); the slot track has the small red marks after the last slot."
+    },
+    {
+      "name": "Contagious Corpse",
+      "number": "0297",
+      "level": "1",
+      "initiative": 16,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Range 3 [square]",
+                  "\"If this attack kills the target, gain XP 1 and shuffle one Curse card into the monster attack modifier deck.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "\"Grant one ally within Range 3 that has Poison:\"", "Shield 2"],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: on kill, XP 1 and one Curse card shuffled into the monster modifier deck",
+                 "bottom: grant Shield 2 (round) to one ally within Range 3 that has Poison"],
+      "summons": [],
+      "notes": "Curse icon = purple diamond with a lightning bolt (as on Nightmarish Affliction). Shield 2 has no enhancement mark."
+    },
+    {
+      "name": "Path of the Pox",
+      "number": "0298",
+      "level": "1",
+      "initiative": 31,
+      "top": {
+        "lines": ["\"One enemy that has Plague suffers damage 3, and all enemies adjacent to that enemy suffer damage 1.\""],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Plague", "Range 4 [square]",
+                  "\"One enemy within Range 3 of the target gains Plague. One enemy within Range 2 of the second enemy gains Plague. One enemy within Range 1 of the third enemy gains Plague. No enemy may gain Plague more than once with this ability.\""],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: damage 3 to one enemy with Plague, damage 1 to all enemies adjacent to it",
+                 "bottom: Plague chain: target, then an enemy within 3 of it, then within 2 of that, then within 1 of that; each enemy at most once"],
+      "summons": [],
+      "notes": "Bottom first row is a Plague ability with Range 4 (no attack)."
+    },
+    {
+      "name": "Vile Pestilence",
+      "number": "0299",
+      "level": "1",
+      "initiative": 27,
+      "top": {
+        "lines": ["Attack 2", "Target: all enemies at any range that have Plague"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: targets all enemies at any range that have Plague"],
+      "summons": [],
+      "notes": "Top Attack 2 has no enhancement mark (zoomed)."
+    },
+    {
+      "name": "Blistering Buboes",
+      "number": "0300",
+      "level": "1",
+      "initiative": 14,
+      "top": {
+        "lines": ["\"Choose up to four enemies that have Plague. The first enemy suffers damage 4, the second suffers damage 3, the third suffers damage 2, and the fourth suffers damage 1.\""],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "\"Each enemy adds -1 Attack to all their attacks this round for each Plague that enemy has.\""],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: up to four enemies with Plague suffer damage 4/3/2/1 in chosen order",
+                 "bottom: this round each enemy gets -1 Attack per Plague token on it"],
+      "summons": [],
+      "notes": ""
+    },
+    {
+      "name": "Festering Sores",
+      "number": "0301",
+      "level": "1",
+      "initiative": 11,
+      "top": {
+        "lines": ["Wound, Plague", "Range 4 [square]",
+                  "\"When an enemy that has Plague dies, you may discard this card to have two enemies within Range 3 of the hex where it died gain Plague.\""],
+        "summary": ["persistent"]
+      },
+      "bottom": {
+        "lines": ["Move 3 [circle]", "\"Each enemy adds -1 Move to all their move abilities this round for each Plague that enemy has.\""],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: Wound + Plague on one enemy within Range 4 (no attack)",
+                 "top: persistent trigger: when an enemy with Plague dies, may discard this card so two enemies within Range 3 of that hex gain Plague",
+                 "bottom: this round each enemy gets -1 Move per Plague token on it"],
+      "summons": [],
+      "notes": "Wound = orange drop diamond. Top persistent has no slots and no lost icon; it ends when discarded by its own trigger."
+    },
+    {
+      "name": "Wretched Yield",
+      "number": "0302",
+      "level": "1",
+      "initiative": 84,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Range 3 [square]", "\"Add +1 Attack for each Plague the target has.\"",
+                  "Heal X, self", "\"where X is the number of Plague the target of the attack ability had before the attack.\""],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: +1 Attack per Plague token on the target",
+                 "top: Heal X self, X = Plague tokens the attack's target had before the attack"],
+      "summons": [],
+      "notes": "Heal X has no enhancement mark."
+    },
+    {
+      "name": "Accelerated End",
+      "number": "0303",
+      "level": "1",
+      "initiative": 76,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Range 4 [square]", "\"Add Plague and gain XP 1 if the target has Plague.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Designate one enemy that has Plague and perform:\"", "Poison: target all figures adjacent to the designated enemy"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: if the target already has Plague, add Plague and gain XP 1",
+                 "bottom: designate an enemy with Plague; Poison all figures adjacent to it (the text says figures, so allies and you too if adjacent)"],
+      "summons": [],
+      "notes": "No corner icons on either half."
+    },
+    {
+      "name": "Delirium's Danse",
+      "number": "0304",
+      "level": "X",
+      "initiative": 68,
+      "top": {
+        "lines": ["Attack 2 [square]", "Range 4 [square]", "\"You may give one ally within Range 3 (of you) Poison to add Stun and gain XP 1.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Stun: target all enemies that have Plague"],
+        "summary": ["XP 2", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: optional cost (give an ally within Range 3 Poison): the attack adds Stun and you gain XP 1",
+                 "bottom: Stun all enemies that have Plague (no range printed)"],
+      "summons": [],
+      "notes": "Stun = dark-blue star diamond. Top attack mark is a square (not a diamond)."
+    },
+    {
+      "name": "Gift of Rot",
+      "number": "0305",
+      "level": "X",
+      "initiative": 47,
+      "top": {
+        "lines": ["Loot 1",
+                  "Heal 1", "Target: all allies that have Poison", "Range 5", "Ward",
+                  "\"For each target, you may heal that target as if they did not have Poison (if you do, their Poison is not removed).\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 2 [circle]", "\"You may give one ally within Range 3 Poison to gain advantage on all your attacks this round.\""],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: Heal 1 + Ward to all allies with Poison within Range 5; per target the heal may ignore Poison and leave it in place",
+                 "bottom: optional cost (give an ally within Range 3 Poison): you gain advantage on all your attacks this round"],
+      "summons": [],
+      "notes": "Ward = pink shield-with-flame diamond. Loot 1 and Heal 1 have no enhancement marks. Separator line between Loot and Heal."
+    },
+    {
+      "name": "Spread the Plague",
+      "number": "0306",
+      "level": "X",
+      "initiative": 35,
+      "top": {
+        "lines": ["\"Control one enemy that has Plague:\"", "Attack 4 [diamond]", "Plague"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Poison, Plague: target 1 enemy that is adjacent to one of your allies that has Poison",
+                  "! \"Remove Poison from that ally.\""],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: control one enemy with Plague; it performs Attack 4 that adds Plague",
+                 "bottom: Poison + Plague on one enemy adjacent to an ally that has Poison; then remove Poison from that ally (mandatory box)"],
+      "summons": [],
+      "notes": "Bottom has no corner icon."
+    },
+    {
+      "name": "Sickening Strength",
+      "number": "0307",
+      "level": "2",
+      "initiative": 19,
+      "top": {
+        "lines": ["Strengthen: target 2 allies that have Poison", "Range 5",
+                  "\"Each target may suffer damage 2 to immediately play one card from their hand, performing either the top or bottom action of the card.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: Strengthen 2 allies with Poison within Range 5; each may suffer damage 2 to immediately play one hand card's top or bottom action"],
+      "summons": [],
+      "notes": "Strengthen = blue arm diamond. No corner icons."
+    },
+    {
+      "name": "Rot Maggots",
+      "number": "0308",
+      "level": "2",
+      "initiative": 69,
+      "top": {
+        "lines": ["Attack 4 [square]", "Range 3 [square]", "Poison", "\"Each ally adjacent to the target gains Poison.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"At the end of this and your next three turns, each enemy suffers damage 1 for each Plague that enemy has.\"",
+                  "slots: 4 (first dashed; XP 1 on slots 2, 4), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: each ally adjacent to the target gains Poison (not optional as printed)",
+                 "bottom: end of this and next three turns, each enemy suffers damage 1 per Plague token"],
+      "summons": [],
+      "notes": "The 'each ally gains Poison' row is plain text, not in a '!' box."
+    },
+    {
+      "name": "Nightmarish Affliction",
+      "number": "0309",
+      "level": "3",
+      "initiative": 43,
+      "top": {
+        "lines": ["Attack 1 [square]", "Range 4", "Poison", "Curse",
+                  "\"You may give one ally within Range 3 (of you) Poison to add +1 Target and gain XP 1.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"On your next six ranged attack abilities, you may give one ally within Range 3 (of you) Poison to add +1 Target.\"",
+                  "slots: 6 (first dashed; XP 1 on slots 2, 4, 6), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: optional cost (give an ally within Range 3 Poison): +1 Target and XP 1",
+                 "bottom: next six ranged attack abilities: optional give-Poison cost for +1 Target each"],
+      "summons": [],
+      "notes": "Curse = purple lightning diamond. Range 4 has no mark. Slots are in two rows of three."
+    },
+    {
+      "name": "Cloying Miasma",
+      "number": "0310",
+      "level": "3",
+      "initiative": 20,
+      "top": {
+        "lines": ["Attack 1 [square]", "Range 4", "Disarm", "Plague"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"You and all allies gain advantage on all attacks targeting enemies that have Plague this round.\""],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["bottom: you and all allies have advantage this round on attacks targeting enemies with Plague"],
+      "summons": [],
+      "notes": "Disarm = grey diamond with an open hand (zoomed)."
+    },
+    {
+      "name": "Rabid Bite",
+      "number": "0311",
+      "level": "4",
+      "initiative": 70,
+      "top": {
+        "lines": ["Strengthen: target 1 normal or elite enemy that has Plague",
+                  "\"Control the target of the strengthen ability:\"",
+                  "Move 1 [square]",
+                  "\"This movement must move toward a monster that does not have Plague.\"",
+                  "Attack 5", "Plague"],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Move 5 [circle]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: Strengthen an enemy (normal or elite, with Plague), then control it: Move 1 toward a monster without Plague, then Attack 5 adding Plague"],
+      "summons": [],
+      "notes": "Strengthen on an enemy (blue arm diamond). Attack 5 has no enhancement mark (zoomed); Move 1 has a square. Separator line after the Strengthen row. No range printed for the Strengthen."
+    },
+    {
+      "name": "Unwilling Sacrifice",
+      "number": "0312",
+      "level": "4",
+      "initiative": 29,
+      "top": {
+        "lines": ["\"One enemy suffers damage 2 for each Plague it has. You may remove any number of Plague from that enemy, even if this ability kills it, to have that number of different enemies adjacent to it suffer damage 1 and gain Plague.\""],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Poison", "Target 3", "Range 4 [square]"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: damage 2 per Plague on one enemy; may remove N of its Plague so N different adjacent enemies suffer damage 1 and gain Plague"],
+      "summons": [],
+      "notes": "Bottom is a Poison ability (no attack): Target 3, Range 4."
+    },
+    {
+      "name": "Wilt and Wither",
+      "number": "0313",
+      "level": "5",
+      "initiative": 91,
+      "top": {
+        "lines": ["Attack 1 [square]", "Target 2", "Range 5", "Plague",
+                  "\"Each enemy suffers damage 1 for each Plague that enemy has.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"During this and your next turn, double all damage that enemies that have Plague suffer.\"",
+                  "slots: 2 (first dashed; XP 1 on slots 1, 2), lost after the last"],
+        "summary": ["persistent", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: every enemy suffers damage 1 per Plague token",
+                 "bottom: this and your next turn, damage suffered by enemies with Plague is doubled"],
+      "summons": [],
+      "notes": "Top: separator line between the attack and the damage text."
+    },
+    {
+      "name": "Compounding Infection",
+      "number": "0314",
+      "level": "5",
+      "initiative": 62,
+      "top": {
+        "lines": ["Curse, Plague", "Range 4 [square]",
+                  "\"Whenever an enemy draws a Curse during its attack, you may discard this card to have that enemy gain Curse, Curse, Plague, Plague.\""],
+        "summary": ["persistent"]
+      },
+      "bottom": {
+        "lines": ["\"Your character allies that have Poison add +1 Attack to all their attacks.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: Curse + Plague on one enemy within Range 4 (no attack)",
+                 "top: persistent trigger: when an enemy draws a Curse in its attack, may discard this card so that enemy gains 2 Curse and 2 Plague",
+                 "bottom: persistent: character allies with Poison add +1 Attack to all attacks"],
+      "summons": [],
+      "notes": "Top persistent has no slots and no lost icon (ends when discarded by its trigger). Bottom persistent has no slots (XP 2, persistent, lost)."
+    },
+    {
+      "name": "Crippling Malady",
+      "number": "0315",
+      "level": "6",
+      "initiative": 26,
+      "top": {
+        "lines": ["Attack 2 [diamond]", "Target: 2 enemies at any range that have Plague",
+                  "\"On each target, add +1 Attack for each Plague that target has.\""],
+        "summary": ["XP 1"]
+      },
+      "bottom": {
+        "lines": ["Immobilize: target all enemies that have Plague"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: 2 targets at any range with Plague; +1 Attack per Plague on each target",
+                 "bottom: Immobilize all enemies that have Plague (no range printed)"],
+      "summons": [],
+      "notes": "Immobilize = red boot diamond."
+    },
+    {
+      "name": "Succumb to the Gift",
+      "number": "0316",
+      "level": "6",
+      "initiative": 81,
+      "top": {
+        "lines": ["Attack 5 [diamond]", "Target: 1 enemy at any range that has Plague", "advantage",
+                  "\"If the attack ability killed an enemy, gain XP 1 and create one damage 3, Poison trap in the featureless hex they occupied.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "Bless: target all allies that have Poison", "Range 5"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: on kill, XP 1 and create a damage 3 + Poison trap in the dead enemy's hex (if featureless)",
+                 "bottom: Bless all allies with Poison within Range 5"],
+      "summons": [],
+      "notes": "Bless = gold triangle-in-circle diamond. Separator lines between the attack and the text, and between Move and Bless. No corner icons."
+    },
+    {
+      "name": "Mass Extinction",
+      "number": "0317",
+      "level": "7",
+      "initiative": 94,
+      "top": {
+        "lines": ["Attack 4 [diamond]", "Target: 1 enemy at any range that has Plague",
+                  "\"Whenever this ability kills an enemy, gain XP 1 and add +2 Attack, +1 Target.\""],
+        "summary": ["XP 1", "lost"]
+      },
+      "bottom": {
+        "lines": ["Plague", "Range 5"],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: each kill gains XP 1 and adds +2 Attack, +1 Target (chain)"],
+      "summons": [],
+      "notes": "Bottom Plague, Range 5 has no enhancement mark (zoomed)."
+    },
+    {
+      "name": "Tainted Offering",
+      "number": "0318",
+      "level": "7",
+      "initiative": 33,
+      "top": {
+        "lines": ["Attack 3 [diamond]", "Range 4", "Poison",
+                  "\"You may give one ally within Range 3 (of you) Poison to gain XP 1 and perform:\"",
+                  "Attack 2 [diamond]", "Range 3", "Poison",
+                  "\"Perform the attack as if you were occupying the same hex as that ally.\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["Heal 2", "Target: all allies that have Poison", "Range 5", "Strengthen",
+                  "\"Each target may recover one level 1 card from their discard pile. For each target, you may heal that target as if they did not have Poison (if you do, their Poison is not removed).\""],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: optional cost (give an ally within Range 3 Poison): XP 1 and a second attack performed from that ally's hex",
+                 "bottom: Heal 2 + Strengthen to all allies with Poison within Range 5; each may recover one level 1 card from their discard pile; heal may ignore Poison and leave it in place"],
+      "summons": [],
+      "notes": "'recover' is the card-with-a-check icon in the text. Neither Range on top nor Heal 2 has an enhancement mark. No corner icons."
+    },
+    {
+      "name": "Creeping Lethargy",
+      "number": "0319",
+      "level": "8",
+      "initiative": 13,
+      "top": {
+        "lines": ["Heal 1 [square]: target all",
+                  "\"Each enemy adds -2 Attack to all their attacks this round for each Plague that enemy has.\""],
+        "summary": ["round"]
+      },
+      "bottom": {
+        "lines": ["Move 4 [circle]", "\"Negate the next damage one adjacent ally that has Poison would suffer this round.\""],
+        "summary": ["round"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: Heal 1 targeting all (read as all allies; no range printed)",
+                 "top: this round each enemy gets -2 Attack per Plague token on it",
+                 "bottom: negate the next damage an adjacent ally with Poison would suffer this round"],
+      "summons": [],
+      "notes": "Heal 'all' has no 'allies' word printed and no 'self'."
+    },
+    {
+      "name": "Convert the Flock",
+      "number": "0320",
+      "level": "8",
+      "initiative": 57,
+      "top": {
+        "lines": ["\"Control all normal and elite enemies that have Plague:\"", "Move 2 [square]", "Attack 5 [diamond]", "Poison, Plague"],
+        "summary": ["XP 2", "lost"]
+      },
+      "bottom": {
+        "lines": ["\"One enemy that has Poison or Plague gains Plague and suffers damage 3. If that enemy dies, gain XP 1 and you may teleport to the hex it occupied.\""],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: control all normal and elite enemies with Plague: each performs Move 2 then Attack 5 adding Poison and Plague",
+                 "bottom: one enemy with Poison or Plague gains Plague and suffers damage 3; if it dies, XP 1 and you may teleport to its hex"],
+      "summons": [],
+      "notes": "Teleport icon in the bottom text. Bottom has no corner icon."
+    },
+    {
+      "name": "Disease Vector",
+      "number": "0321",
+      "level": "9",
+      "initiative": 64,
+      "top": {
+        "lines": ["Attack 1 [diamond]", "Target 3", "Range 5", "Plague",
+                  "Poison: target all enemies that have Plague"],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"Each enemy suffers damage 2 for each Plague that enemy has.\""],
+        "summary": []
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: Poison all enemies that have Plague (no range printed)",
+                 "bottom: every enemy suffers damage 2 per Plague token"],
+      "summons": [],
+      "notes": "Top attack mark is a diamond here (Biting Gnats / Wilt and Wither's similar attacks have a square). No corner icons on either half."
+    },
+    {
+      "name": "Xorn's Embrace",
+      "number": "0322",
+      "level": "9",
+      "initiative": 46,
+      "top": {
+        "lines": ["\"Grant all allies that have Poison:\"", "Attack 3 [diamond]", "Range 3 [square]",
+                  "Heal X, self",
+                  "\"where X is the amount of damage dealt with the granted attack ability. This heal ignores Poison (and does not remove Poison).\""],
+        "summary": []
+      },
+      "bottom": {
+        "lines": ["\"At the end of each of your turns, one enemy that has both Poison and Plague suffers damage 3.\""],
+        "summary": ["XP 2", "persistent", "lost"]
+      },
+      "ghs": "missing",
+      "xipe": "missing",
+      "custom": ["top: every ally with Poison is granted Attack 3 Range 3 then Heal X self (X = damage dealt by that granted attack), ignoring and keeping Poison",
+                 "bottom: persistent: end of each of your turns, one enemy with both Poison and Plague suffers damage 3"],
+      "summons": [],
+      "notes": "Top: 'self' in the heal pill refers to the granted ally (the heal is part of what is granted). Bottom persistent has no slots."
+    }
+  ],
+  "summons": [],
+  "mechanics": [
+    "Plague tokens (class token, yellow hand on a black pentagon): not a condition, no innate effect, not removable by enemies, supply of 12 (a 13th removes a previously placed one), max 3 per enemy. Given by attacks/abilities (Comorbid Sting, Biting Gnats, Festering Sores, Path of the Pox, Spread the Plague, Cloying Miasma, Rabid Bite, Wilt and Wither, Compounding Infection, Mass Extinction, Convert the Flock, Disease Vector, Unwilling Sacrifice, Accelerated End)",
+    "Effects scaling with Plague count: damage per Plague to each enemy (Virulent Strain bottom 1, Rot Maggots bottom 1 per turn, Wilt and Wither top 1, Disease Vector bottom 2, Unwilling Sacrifice top 2 on one enemy), +1 Attack per Plague (Wretched Yield, Crippling Malady), heal per Plague (Wretched Yield), enemy -1/-2 Attack per Plague (Blistering Buboes, Creeping Lethargy), enemy -1 Move per Plague (Festering Sores)",
+    "Targeting by Plague: 'all enemies (at any range) that have Plague' and '1/2 enemies at any range that has Plague' (Vile Pestilence, Biting Gnats, Delirium's Danse, Crippling Malady, Succumb to the Gift, Mass Extinction, Disease Vector)",
+    "Plague spreading: chain (Path of the Pox bottom), on death (Festering Sores top), remove-to-spread (Unwilling Sacrifice top)",
+    "Giving Poison to an ally as an optional cost (only to an ally without Poison, per the mat) for a bonus: Comorbid Sting bottom, Delirium's Danse top, Gift of Rot bottom, Nightmarish Affliction top and bottom, Tainted Offering top",
+    "Effects on allies that have Poison: grants (Contagious Corpse Shield, Xorn's Embrace attack+heal), Strengthen/Bless/Ward/Heal targeting all allies with Poison (Sickening Strength, Succumb to the Gift, Gift of Rot, Tainted Offering), +1 Attack (Compounding Infection, Virulent Strain), damage negation (Creeping Lethargy), heal that ignores and keeps Poison (Gift of Rot, Tainted Offering, Xorn's Embrace), forced Poison on allies (Rot Maggots top, Accelerated End bottom hits all adjacent figures)",
+    "Control enemies: Spread the Plague top, Rabid Bite top (Strengthen then forced Move toward a monster without Plague, then Attack), Convert the Flock top (all normal and elite with Plague)",
+    "Designate an enemy (Accelerated End bottom), create a damage+Poison trap on kill (Succumb to the Gift), shuffle a Curse into the monster deck on kill (Contagious Corpse), double damage to Plague enemies (Wilt and Wither), on-Curse-draw trigger (Compounding Infection), teleport on kill (Convert the Flock), recover a level 1 card (Tainted Offering), out-of-turn card play for allies at a damage cost (Sickening Strength), attack from an ally's hex (Tainted Offering)",
+    "Conditions used: Poison, Wound, Muddle, Stun, Immobilize, Disarm, Curse; positive: Strengthen, Bless, Ward, advantage. No elements on any card. No summons. No area diagrams"
+  ],
+  "unclear": [
+    "Abilities with 'target all' and no printed range (Biting Gnats top Muddle and bottom Poison+Muddle, Delirium's Danse bottom Stun, Crippling Malady bottom Immobilize, Disease Vector top Poison, Creeping Lethargy top Heal 1): any range, or range 1? Rules question; the attacks that mean any range say 'at any range'",
+    "Biting Gnats bottom and Creeping Lethargy top say only 'all' (no 'enemies'/'allies'); read by ability type (negative = enemies, heal = allies), rules question",
+    "Text abilities with no range (Path of the Pox top, Blistering Buboes top, Unwilling Sacrifice top, Spread the Plague top, Rabid Bite top Strengthen, Convert the Flock top and bottom, Accelerated End bottom designate, Xorn's Embrace bottom): whether range / line of sight applies is a rules question",
+    "Virulent Strain top: 'one of your allies that has Poison' — whether it is one chosen ally or any poisoned ally's attacks use the slots is a wording question",
+    "Mass Extinction top: after a kill adds +1 Target, whether the next target must still be an enemy with Plague and whether each kill adds again (rules question)",
+    "Festering Sores top and Compounding Infection top: persistent with no slots and no lost icon; they end when discarded by their own trigger, otherwise (if never triggered) presumably at the end of the scenario (rules question)"
+  ]
+}
