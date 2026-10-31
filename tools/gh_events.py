@@ -26,6 +26,7 @@ it ships with its Gloomhaven text and no effect, so the events can be tested in 
 """
 
 import json
+import re
 from pathlib import Path
 # How often Frosthaven's own events give each effect, by size (tallied from the game's 264 event classes,
 # FHRL.OutpostEvents, build 1.0.34121): the yardstick for the review.
@@ -410,7 +411,7 @@ EVENTS = {
                 "I simply don’t have the money.”\n\n"
                 "He hesitates. “Seeing as how, uh, you bear some responsibility for setting me down this path, I was wondering "
                 "if you’d be willing to offer some assistance in getting me out of this mess?”"),
-            "edits": "none",
+            "edits": "\"the Misty Sea\" -> \"the Biting Sea\".",
             "options": [
                 {"text": "Offer to pay off the Sawbones’ debt.",
                  "outcome": ("It’s a hefty chunk of money, but the Sawbones is incredibly grateful.\n\n“This is wonderful! I knew I "
@@ -421,7 +422,7 @@ EVENTS = {
                  "note": "Frosthaven's largest gold loss, and its Major Healing Potion (99, brewed, no shop price) for "
                          "Gloomhaven's. The game lets the gold go negative if the party is short; Gloomhaven refuses the option.",
                  "status": "approved"},
-                {"text": "Get the Sawbones on a boat across the Misty Sea. New adventures surely await there.",
+                {"text": "Get the Sawbones on a boat across the Biting Sea. New adventures surely await there.",
                  "outcome": ("You flatly refuse to pay off the Sawbones’ debt and convince him the only way to escape his pursuers "
                              "is to board a ship bound for the eastern continent, far out of their reach. He is reluctant, but "
                              "eventually agrees when you remind him what unknown adventures await in the land across the ocean. "
@@ -518,17 +519,64 @@ DECKS = {"SummerOutpost": ("Outpost", False), "WinterOutpost": ("Outpost", True)
          "SummerRoad": ("Road", False), "WinterRoad": ("Road", True)}
 
 
+# Gloomhaven's places in the generated events' text, as Frosthaven's (the user, 2026-10-31: "swap in some FH names").
+# Frosthaven is an outpost on the Biting Sea with a Tavern, a Trading Post, Barracks and a town guard; its regions are
+# the Copperneck Mountains, Crystal Fields, Biting Sea, Radiant Forest and Imperial Mountains (the game's ruleset). The
+# hand-written EVENTS above had the same pass by hand (their "edits"). In order: the specific before the general.
+FH_NAMES = [
+    (r"drinks at the Sleeping Lion, you enter the tavern", "drinks at the Tavern, you step inside"),
+    (r"the Sleeping Lion", "the Tavern"),
+    (r"Gloomhaven guards", "Frosthaven guards"),
+    (r"Gloomhaven Square", "the town square"),
+    (r"the Ghost Fortress", "the Barracks"),
+    (r"([Tt])he Captain of the Guard", r"\1he captain of the town guard"),
+    (r"along the Hook Coast", "along the coast"),
+    (r"outside the walls of Gloomhaven", "outside Frosthaven's walls"),
+    (r"the Hook Coast", "the harbor"),
+    (r"The Hook Coast", "The harbor"),
+    (r"Gloomhaven proper", "Frosthaven itself"),
+    (r"the Misty Sea", "the Biting Sea"),
+    (r"the Dagger Forest", "the Radiant Forest"),
+    (r"the Temple of Coin", "the Trading Post"),
+    (r"the Merchant.s Guild", "the Trading Post"),
+    (r"Gloomhaven", "Frosthaven"),
+    (r"a city of mostly humans", "a town of mostly humans"),
+    (r"city-dwelling", "town-dwelling"),
+    (r"city guards", "town guards"),
+    (r"the city streets", "the outpost's streets"),
+    (r"the entire city", "the entire outpost"),
+    (r"the city(.)s ", r"the outpost\1s "),
+    (r"\b(this|the) city\b", r"\1 outpost"),
+]
+
+
+def fh_names(text):
+    """The text with Gloomhaven's places as Frosthaven's (FH_NAMES), and what changed."""
+    changed = []
+    for pat, rep in FH_NAMES:
+        text, n = re.subn(pat, rep, text)
+        if n:
+            changed.append(pat)
+    return text, changed
+
+
 def events(cls):
     """The class's events: the hand-written entry above, else the proposal tools/gh_rewards.py generated from Gloomhaven's
-    data (tools/gh_events_proposed.json, every option status "proposed" until the review)."""
+    data (tools/gh_events_proposed.json), its text through FH_NAMES."""
     if cls in EVENTS:
         return EVENTS[cls]
     proposed = Path(__file__).with_name("gh_events_proposed.json")
     if proposed.exists():
         data = json.loads(proposed.read_text(encoding="utf-8")).get(cls, [])
         for e in data:
+            edits = []
+            e["front"], ch = fh_names(e["front"]); edits += ch
             for o in e["options"]:
                 o["fh"] = [tuple(x) for x in o["fh"]]
+                for k in ("text", "outcome"):
+                    o[k], ch = fh_names(o[k]); edits += ch
+            if edits:
+                e["edits"] = "Gloomhaven's places as Frosthaven's (FH_NAMES): " + ", ".join(sorted(set(edits)))
         return data
     return []
 
