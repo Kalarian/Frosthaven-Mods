@@ -6,8 +6,8 @@ Frosthaven campaign.
 
 Every mod is a switch. Nothing changes until you turn it on, and your saves are never touched.
 
-**[Download the latest version](https://github.com/Kalarian/Frosthaven-Mods/releases/latest)** ·
-**[Mod guide (PDF)](docs/Frosthaven-Mods-Guide.pdf)**
+**[Download the latest version](https://github.com/Kalarian/Frosthaven-Mods/releases/latest)** · 
+**[Mod guide (PDF)](docs/Frosthaven-Mods-Guide.pdf)** · 
 **[Discord Support](https://discord.gg/MRcQgBVUBv)**
 
 ---
