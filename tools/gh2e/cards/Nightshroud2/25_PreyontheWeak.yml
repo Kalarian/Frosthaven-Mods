@@ -1,0 +1,77 @@
+# card: Prey on the Weak
+# top: "if the target's current hit point value is half (rounded down) its maximum or less, gain XP 1 and perform
+# Attack 4 targeting that enemy" = a second Attack 4 aimed at the first attack's target (custom targeting), run only
+# when that target is alive with 2 x HP <= max HP (the same as HP <= max/2 rounded down), its own XP 1 (AbilityXP).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+            TAttack2:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Filter: Enemy
+                Target: 1
+                AbilityXP: 1
+                Targeting: Custom
+                Vars:
+                    Struck: CustomAbility.FindAbilityInPhaseByName("TAttack")
+                TargetingVars:
+                    AddValidActorsInRange: Struck.ActorsToTarget
+                    AddTilesInRange: Struck.ActorsToTarget.Select(obj.Tile)
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateWeak: Struck != null && Struck.ActorsToTarget.Any(obj.IsDead == False && obj.Health * 2 <= obj.MaxHealth)
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TAttack
+                        Strength: 3
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 6
+                    CircleEnhancements: 1
+            BAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range: 1
+                Target: -1
+                MultiPassAttack: False
+                AnimOverload: RadialAttack
+        Infuse: Dark
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "+3 $Attack$ <sprite name=Attack>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Nightshroud2_25_T$"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+        - Row: "$GH2E_Nightshroud2_25_T2$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:
+                - XP: 2

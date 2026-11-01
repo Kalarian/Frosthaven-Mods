@@ -1,0 +1,43 @@
+# key<TAB>English (the card's printed 2nd edition wording, icons in Frosthaven's sprite markup)
+GH2E_SilentKnife_01_T	Add +2 <sprite name=Attack> and gain <sprite name=XP1> if the target is adjacent to none of its allies.
+GH2E_SilentKnife_01_B	On your next four attacks targeting enemies adjacent to none of their allies, add +3 <sprite name=Attack>.
+GH2E_SilentKnife_02_T	Add +2 <sprite name=Attack> and gain <sprite name=XP1> if the target is adjacent to any of your allies.
+GH2E_SilentKnife_03_B	<sprite name=Loot> each hex you entered with the move ability.
+GH2E_SilentKnife_05_T	Add +1 <sprite name=Attack> if the target is adjacent to any of your allies, add +1 <sprite name=Attack> if the target is adjacent to none of its allies, and gain advantage and <sprite name=XP1> if both are true.
+GH2E_SilentKnife_06_B	Add <nobr><sprite name=Pierce> 2</nobr> to all your ranged attacks this round.
+GH2E_SilentKnife_08_B	You may choose not to spring traps in hexes you enter with this movement.
+GH2E_SilentKnife_08_B2	Destroy one trap in a hex you entered with the move ability to gain <sprite name=XP1>.
+GH2E_SilentKnife_10_T	Add +2 <sprite name=Attack> and gain <sprite name=XP1> if the target is adjacent to any of your allies.
+GH2E_SilentKnife_11_T	On your next attack while you have <sprite name=Invisible>, double the value of the attack.
+GH2E_SilentKnife_11_B	Control one adjacent enemy:
+GH2E_SilentKnife_11_B2	This movement must end in a hex adjacent to you.
+GH2E_SilentKnife_12_T	On your next melee attack targeting an enemy that has <sprite name=Shield>, add +(X+2) <sprite name=Attack>, where X is the <sprite name=Shield> value of the target.
+GH2E_SilentKnife_12_B	Negate the next damage you would suffer this round.
+GH2E_SilentKnife_13_T	Add <sprite name=Wound> and gain <sprite name=XP1> if the target is adjacent to any of your allies.
+GH2E_SilentKnife_14_T	On your next three attacks, add +1 <sprite name=Attack>, <sprite name=Poison>.
+GH2E_SilentKnife_14_B	If you are adjacent to no enemies, gain <sprite name=Invisible>. At the end of the round, lose <sprite name=Invisible>.
+GH2E_SilentKnife_15_B	Add +1 <sprite name=Attack> on each target that is adjacent to none of its allies.
+GH2E_SilentKnife_16_T	You may place one of your money tokens in the hex occupied by the target to add +2 <sprite name=Attack>, <nobr><sprite name=Pierce> 2</nobr>.
+GH2E_SilentKnife_16_B	Create one <sprite name=Poison> <sprite name=Immobilize> trap in the empty hex of one looted money token.
+GH2E_SilentKnife_18_T	Add +2 <sprite name=Attack> and gain <sprite name=XP1> if the target is adjacent to any of your allies or is adjacent to none of its allies.
+GH2E_SilentKnife_18_B	When you next perform a melee attack targeting an enemy that has <sprite name=Poison> this round, after the attack ability perform: <nobr><sprite name=Attack> 2,</nobr> <nobr><sprite name=Range> 3,</nobr> <sprite name=Poison>
+GH2E_SilentKnife_20_B	On your next attack targeting an enemy that is both adjacent to any of your allies and none of its allies, double the value of the attack.
+GH2E_SilentKnife_21_T	Negate the damage and added effects of all attacks targeting you this round.
+GH2E_SilentKnife_21_T2	Immediately after each attack ability targeting you this round, gain <sprite name=XP1> and perform: <nobr><sprite name=Attack> 2,</nobr> target the enemy that attacked you.
+GH2E_SilentKnife_21_B	Gain advantage on all your attacks this round.
+GH2E_SilentKnife_22_T	Add +1 <sprite name=Attack> and gain advantage, <sprite name=XP1> if the target is a normal monster.
+GH2E_SilentKnife_22_B	Target 2 enemies whose current hit point value is 2 or less, <nobr><sprite name=Range> 2</nobr>
+GH2E_SilentKnife_23_T	If all the targets of the attack ability were adjacent to none of their allies, perform:
+GH2E_SilentKnife_24_T	This action may be performed while you have <sprite name=Stun>.
+GH2E_SilentKnife_24_T2	Remove all negative conditions you have.
+GH2E_SilentKnife_24_B	Designate one adjacent trap.
+GH2E_SilentKnife_24_B2	Relocate the designated trap to an adjacent featureless hex. If that hex is occupied by an enemy, spring the trap on that enemy and gain <sprite name=XP1>.
+GH2E_SilentKnife_25_T	Add <sprite name=Disarm> and gain <sprite name=Invisible>, <sprite name=XP1> if the target is both adjacent to any of your allies and none of its allies.
+GH2E_SilentKnife_25_B	Target all adjacent enemies
+GH2E_SilentKnife_26_T	Add <sprite name=Poison> to all your attacks.
+GH2E_SilentKnife_26_T2	Add +1 <sprite name=Attack> to all your attacks targeting enemies that have <sprite name=Poison>.
+GH2E_SilentKnife_26_B	Add <sprite name=Immobilize> to all your attacks targeting enemies adjacent to none of their allies this round.
+GH2E_SilentKnife_27_T	You may lose one of your money tokens to place a character token on an adjacent normal enemy. For the remainder of the scenario, that enemy is an ally to you and an enemy to all other monsters. When that enemy dies, it drops an additional money token.
+GH2E_SilentKnife_28_T	If you attacked at least three enemies with the attack ability, gain <sprite name=XP1> and perform:
+AMC_GH2E_SilentKnife_Invisible_P1_R	+1 <sprite name=Invisible>, self <sprite name=Rolling>
+GH2E_SilentKnife_28_B	During your turn, you may play this card from your hand to perform this action (in addition to the two cards you have played for the round).

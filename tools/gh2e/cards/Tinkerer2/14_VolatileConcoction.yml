@@ -1,0 +1,42 @@
+# card: Volatile Concoction
+# from Xipe's 99043_Tinkerer2_Volatile Concoction.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TStrengthen:
+                Strengthen:
+                    Enhancements: 1
+                Range: 3
+                Target: 1
+                Filter: Ally
+                AnimOverload: PowerUp
+                SubAbilities:
+                    # "may Recover one level 1 card from their discard pile": Frosthaven's recover has no card-level
+                    # filter, so any one discarded card (NOTES.md)
+                    TRecover:
+                        RecoverDiscardedCards: 1
+                        UseParentTargets: True
+                        Filter:
+                            TargetType: Ally
+                            ActorType: Player
+                        AnimOverload: TargetRecover
+    Bottom:
+        Abilities:
+            BTrap:
+                Trap:
+                    TrapName: PoisonMine
+                    Damage: 2
+                    Conditions: Poison
+                SpawnDelay: 2.2
+                Target: 1
+                AnimOverload: LayTrap
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen> <size=100%><voffset=1>@TStrengthen@"
+        - Row: "$GH2E_Tinkerer2_14_T$"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Tinkerer2_14_T2$"
+    Bottom:
+        - Row: "$GH2E_Tinkerer2_14_B$"
+        - Row: "<b><size=130%><sprite name=Damage> *BTrap* <sprite name=Poison>"

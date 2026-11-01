@@ -1,0 +1,27 @@
+# card: Stun Shot
+# from Xipe's 99036_Tinkerer2_Stun Shot.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TStun:
+                Stun: True
+                Range: 3
+                Filter: Enemy
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 1
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Stun$ <sprite name=Stun>"
+        - Row: "$Range$ <sprite name=Range> *TStun.Range*"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *BLoot*"

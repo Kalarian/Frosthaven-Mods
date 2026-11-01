@@ -1,0 +1,5 @@
+Plague:
+    ID: "Plague"
+    Sprite: "HoverHatchet"
+    LocKey: "GH2E_PLAGUE_TOOLTIP"
+    MaxAmount: 3

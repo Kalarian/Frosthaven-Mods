@@ -1,0 +1,49 @@
+# card: Cranium Overload
+# written from tools/gh2e/sheets/Mindthief.json; the designated hex is approximated: Attack 6, Pierce 5 on one enemy
+# within range 4, then (if it killed) Attack 2 on every enemy adjacent to that enemy's hex (the 1st edition Cranium
+# Overload's follow-up, with Frosthaven's Morbid Camouflage kill requirement). No enhancement marks on the top.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 6
+                Pierce: 5
+                Range: 4
+                Target: 1
+                Filter: Enemy
+                AnimOverload: MindAttack
+                SubAbilities:
+                    TAttackAdjacent:
+                        Attack: 2
+                        Range: 1
+                        Target: -1
+                        Filter: Enemy
+                        AllTargetsAdjacentToParentTarget: True
+                        UseParentRangeType: True
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsKilledByAbility: "> 0"
+                        AnimOverload: MindAttack
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 5
+                    Enhancements: 1
+                    Jump: True
+Layout:
+    Top:
+        - Row: "$GH2E_Mindthief2_17_T$"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce*"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Mindthief2_17_T2$"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttackAdjacent*"
+        - Row: "$GH2E_Mindthief2_17_T3$"
+        - Row: "<size=20%> "
+        - XP: 2
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$Jump$ <sprite name=Jump>"

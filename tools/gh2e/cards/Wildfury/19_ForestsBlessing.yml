@@ -1,0 +1,72 @@
+# card: Forest's Blessing
+# top: Heal 4 [diamond+], Range 3 [square], Bless (on the heal target), infuse Air. bottom: Attack 3 [diamond],
+# Target 2 [square], Range 4, Poison; Heal 3 [diamond+], Target 2 [square], Range 4, Strengthen (on the heal targets);
+# infuse Air and Earth (two full circles: both); XP 2, lost.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 4
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Conditions: [Bless]
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: Air
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 4
+                Conditions: Poison
+                MultiPassAttack: False
+                AnimOverload: RangedAttack
+            BHeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 4
+                Conditions: [Strengthen]
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: [Air, Earth]
+        XP: 2
+Layout:
+    Top:
+        - Row: "<size=130%><b>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Range$ <sprite name=Range> *THeal.Range* @THeal.Range@"
+        - Row: "$Bless$ <sprite name=Bless>"
+        - Row: "<size=50%> "
+        - Infuse: Air
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Target$ <sprite name=Target> *BAttack.Target* @BAttack.Target@"
+        - Row: "$Range$ <sprite name=Range> *BAttack.Range*"
+        - Row: "$Poison$ <sprite name=Poison>"
+        - Row: "<size=50%> "
+        - Row: "<size=130%><b>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Target$ <sprite name=Target> *BHeal.Target* @BHeal.Target@"
+        - Row: "$Range$ <sprite name=Range> *BHeal.Range*"
+        - Row: "$Strengthen$ <sprite name=Strengthen>"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,20,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:
+                - Infuse: Earth
+            - Column:
+                - XP: 2

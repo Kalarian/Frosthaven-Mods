@@ -1,0 +1,40 @@
+# card: Elemental Juggernaut
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: ChromaticConstructID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BInfuse:
+                Infuse: [Ice, Air]
+                ShowElementPicker: True
+                CanUndo: False
+                CanSkip: False
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: "Summon"
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_ChromaticConstruct$
+        - Row: "$GH2E_Elementalist2_24_T$"
+        - Row: "<size=20%> "
+        - Duration: Persistent
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Row: "<sprite name=CreateMixed-IA>"

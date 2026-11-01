@@ -1,0 +1,47 @@
+# card: Hostile Takeover
+# written from tools/gh2e/sheets/Mindthief.json; bottom = the Scoundrel's Long Con shape (one turn, no commanded
+# abilities, you control it: GHControlTurn.cs), as the card says "with you controlling its abilities"
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 4
+                Conditions: Immobilize
+                AnimOverload: MindAttack
+        Infuse: Ice
+    Bottom:
+        Abilities:
+            BControl:
+                ControlActor:
+                    ControlDurationType: ControlForOneTurn
+                    ControlActorType: Player
+                AnimOverload: MindControl
+                Range: 4
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+        Infuse: Dark
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Immobilize$ <sprite name=Immobilize>"
+        - Row: "<size=20%> "
+        - Infuse: Ice
+    Bottom:
+        - Row: "$GH2E_Mindthief2_15_B$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20,20"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Round

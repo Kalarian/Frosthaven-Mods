@@ -1,0 +1,20 @@
+Parser: HeroSummon
+ID: RatMonstrosityID
+LocKey: $GH2E_SUMMON_RatMonstrosity$
+Model: GiantRat
+Health:
+    Amount: 8
+    Enhancements: 1
+Move:
+    Amount: 3
+    SquareEnhancements: 1
+Attack:
+    Amount: 3
+    SquareEnhancements: 1
+Range: 1
+AttackOverride:
+    ParentName: DefaultAttack
+    AttackEffect:
+        Type: BuffIfAnyConditionsOnTarget
+        Strength: 1
+        Conditions: [Poison, Wound, Muddle, Immobilize, Disarm, Stun, Brittle, Bane, Impair]

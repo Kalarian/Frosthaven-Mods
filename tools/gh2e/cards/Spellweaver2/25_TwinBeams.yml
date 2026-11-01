@@ -1,0 +1,99 @@
+# card: Twin Beams
+# top: XP 1 only, not lost (Xipe had Discard [Lost, ...]); two line attacks, each with its own consume; the Ice consume's
+# Push is an inline sub-ability (Frosthaven's Crippling Terror top shape)
+# bottom: the lost-action trigger (see Aid from the Ether) performing Attack 3, Range 3 after that action (the player aims it)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack1:
+                Attack:
+                    Amount: 1
+                    Enhancements: 1
+                AreaEffect: "0,0,G|2,0,R|4,0,R"
+                AnimOverload: TargetedGenericFlame
+                MultiPassAttack: False
+            TAttack2:
+                Attack:
+                    Amount: 1
+                    Enhancements: 1
+                AreaEffect: "0,0,G|2,0,R|4,0,R"
+                AnimOverload: TargetedIcyBlast
+                MultiPassAttack: False
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireAttackBuff:
+                        ParentName: TAttack1
+                        Strength: 1
+                        Conditions: Wound
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceAttackBuff:
+                        ParentName: TAttack2
+                        Strength: 1
+                        Conditions: Muddle
+                        SubAbilities:
+                            TCIceSubPush:
+                                Push: 2
+                                IsInlineSubAbility: True
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BOnLost:
+                AddActiveBonus:
+                    Attack: 3
+                    Range: 3
+                    Target: 1
+                    Filter: Enemy
+                    AnimOverload: TargetedManaBolt
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: DuringActionAbilityOnActionEnded
+                    Restriction: OncePerAction
+                    XPTracker: [0]
+                    Vars:
+                        LastPerformedAbility: TriggerActor.LastAbilityPerformed
+                        LostPile: LastPerformedAbility?.GetAbilityBaseCard()?.SelectedAction?.CardPile
+                        ValidateDidLoseCard: LostPile == "Lost" || LostPile == "PermanentlyLost"
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "65,30"
+            - Column:
+                - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+                - Row: "<size=10%> "
+                - Consume:
+                    Name: TCFire
+                    Text: "+1 $Attack$ <sprite name=Attack>, $Wound$ <sprite name=Wound>"
+            - Column:
+                - Row: "£TAttack1.Area£"
+        - Row: "<size=30%> "
+        - Row:
+            - ColumnWidths: "65,30"
+            - Column:
+                - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+                - Row: "<size=10%> "
+                - Consume:
+                    Name: TCIce
+                    Text: "+1 $Attack$ <sprite name=Attack>, $Push$ <sprite name=Push> 2, $Muddle$ <sprite name=Muddle>"
+            - Column:
+                - Row: "£TAttack2.Area£"
+        - XP: 1
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BOnLost
+            ListLayout: "$GH2E_Spellweaver2_25_B$"
+            Layout: "$GH2E_Spellweaver2_25_B$"
+            Icon: "Positive_Attack_Attack"
+        - Duration: Round

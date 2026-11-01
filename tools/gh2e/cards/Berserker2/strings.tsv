@@ -1,0 +1,55 @@
+# key<TAB>English (Berserker, 2nd edition: card texts as printed, icons in Frosthaven's sprite markup)
+GH2E_Berserker2_01_T	Whenever you suffer damage this round, if your current hit point value is half your maximum or less, suffer 1 less damage.
+GH2E_Berserker2_02_B	Gain advantage on all your attacks this round.
+GH2E_Berserker2_02_B2	All attacks targeting you this round gain disadvantage.
+GH2E_Berserker2_03_T	Add +2 <sprite name=Attack> and gain <sprite name=XP1> if your current hit point value is half your maximum or less.
+GH2E_Berserker2_03_B	You may suffer <sprite name=Damage> up to 3.
+GH2E_Berserker2_03_B2	where X is the amount of damage you chose to suffer.
+GH2E_Berserker2_04_T	You may suffer <sprite name=Damage> 2 to add +2 <sprite name=Attack> and gain <sprite name=XP1>.
+GH2E_Berserker2_04_B	On the next source of damage you would suffer that would reduce your current hit point value to less than 1, negate the damage.
+GH2E_Berserker2_05_T	Gain <sprite name=XP1> the next time you retaliate this round.
+GH2E_Berserker2_06_T	Suffer damage equal to half your current hit point value (rounded down).
+GH2E_Berserker2_06_B	Add +1 <sprite name=Attack> to all your attacks.
+GH2E_Berserker2_06_B2	At the start of each of your turns, if your current hit point value is greater than 1, suffer <sprite name=Damage> 1.
+GH2E_Berserker2_07_T	Add +1 <sprite name=Target> and gain <sprite name=XP1> if your current hit point value is half your maximum or less.
+GH2E_Berserker2_07_B	You may suffer <sprite name=Damage> 2 to perform: <sprite name=Wound> <sprite name=Immobilize>, <sprite name=Range> 1
+GH2E_Berserker2_08_T	You may suffer <sprite name=Damage> 2 to add <sprite name=Stun> and gain <sprite name=XP1>.
+GH2E_Berserker2_09_T	Target one enemy up to two hexes away instead, +1 <sprite name=Attack>
+GH2E_Berserker2_10_T	Remove all negative conditions you have. If your current hit point value is 1, you may recover one card from your lost pile.
+GH2E_Berserker2_10_T2	Set your current hit point value to half of your maximum (rounded up) and gain <sprite name=Strengthen>.
+GH2E_Berserker2_11_T	where X is your current hit point value. Gain <sprite name=XP1> for every 5 damage an enemy suffers from this attack.
+GH2E_Berserker2_11_T2	Set your current hit point value to 1.
+GH2E_Berserker2_12_T	Whenever you retaliate, perform <sprite name=Heal> 1. If, after the heal, your current hit point value is half your maximum or less, repeat this ability once.
+GH2E_Berserker2_12_B	If your current hit point value is half your maximum or less, gain <sprite name=XP1> and perform:
+GH2E_Berserker2_13_T	You may suffer <sprite name=Damage> 2 to add +1 <sprite name=Target> and gain <sprite name=XP1>.
+GH2E_Berserker2_13_B	Add +2 <sprite name=Move> and gain <sprite name=XP1> if your current hit point value is half your maximum or less.
+GH2E_Berserker2_14_T	Add <sprite name=Muddle> and gain <sprite name=XP1> if your current hit point value is half your maximum or less.
+GH2E_Berserker2_14_B	You may suffer <sprite name=Damage> 2 to infuse <sprite name=Fire> and perform: <sprite name=Stun>, <sprite name=Range> 1
+GH2E_Berserker2_15_T	When this card is moved from your active area to your lost pile, you become exhausted. At the end of this and your next three turns, perform: <sprite name=Attack> 5, advantage
+GH2E_Berserker2_15_B	Add +1 <sprite name=Attack> to all your attacks this round.
+GH2E_Berserker2_16_B	If you short rest at the end of this round, gain all the benefits of a long rest.
+GH2E_Berserker2_17_T	All enemies adjacent to the target but not adjacent to you suffer <sprite name=Damage> 2.
+GH2E_Berserker2_18_T	Add +2 <sprite name=Heal> and gain <sprite name=XP1> if your current hit point value is half your maximum or less.
+GH2E_Berserker2_19_T	You may suffer <sprite name=Damage> 2 to add +2 <sprite name=Attack>.
+GH2E_Berserker2_19_T2	If your current hit point value is half your maximum or less, gain <sprite name=XP1> and perform:
+GH2E_Berserker2_19_B	Target two enemies up to two hexes away instead
+GH2E_Berserker2_20_T	On the next six sources of damage you suffer while an enemy is adjacent to you, after the ability that caused you to suffer the damage, perform <sprite name=Attack> 4.
+GH2E_Berserker2_21_T	You may suffer <sprite name=Damage> up to 4.
+GH2E_Berserker2_23_T	If you moved in a straight line in one direction with the move ability and you do not have <sprite name=Wound>, gain <sprite name=Wound> to add +X <sprite name=Attack>, where X is the number of hexes you moved with the move ability.
+GH2E_Berserker2_23_B	Whenever you are attacked this round, gain <sprite name=Retaliate> X for the attack, where X is the number of enemies adjacent to you when the attack is performed.
+GH2E_Berserker2_24_T	<sprite name=Heal> X, where X is the amount of damage enemies suffered from the attack ability.
+GH2E_Berserker2_24_B	You may suffer <sprite name=Damage> 2 to add +2 <sprite name=Move> and gain <sprite name=XP1>.
+GH2E_Berserker2_24_B2	Target all enemies moved through with the move ability that have <sprite name=Wound>
+GH2E_Berserker2_25_T	Add <sprite name=Push> 2 and gain <sprite name=XP1> if your current hit point value is half your maximum or less.
+GH2E_Berserker2_25_B	Place your character token on the target. The target loses <sprite name=Flying>.
+GH2E_Berserker2_26_T	You may suffer <sprite name=Damage> 2 to add +1 <sprite name=Retaliate> and gain <sprite name=XP1>.
+GH2E_Berserker2_26_T2	Whenever an enemy suffers damage from your retaliate this round, they gain <sprite name=Wound>.
+GH2E_Berserker2_26_T3	Negate the next damage you suffer this round.
+GH2E_Berserker2_26_B	Add <sprite name=Strengthen> and gain <sprite name=XP1> if your current hit point value is half your maximum or less.
+GH2E_Berserker2_27_T	You may suffer <sprite name=Damage> 2 to add +1 <sprite name=Attack> and gain <sprite name=XP1>.
+GH2E_Berserker2_27_B	You may perform this action any number of times in succession, increasing the damage suffered by 1 each time.
+GH2E_Berserker2_27_B2	Suffer <sprite name=Damage> 1. This damage cannot be negated.
+GH2E_Berserker2_27_B3	Repeat once: suffer <sprite name=Damage> 2, then <sprite name=Move> 1, <sprite name=Attack> 2
+GH2E_Berserker2_27_B4	Repeat twice: suffer <sprite name=Damage> 5 (2 + 3), then <sprite name=Move> 1, <sprite name=Attack> 2 twice
+GH2E_Berserker2_27_B5	Repeat three times: suffer <sprite name=Damage> 9 (2 + 3 + 4), then <sprite name=Move> 1, <sprite name=Attack> 2 three times
+GH2E_Berserker2_28_T	Whenever you suffer damage, all enemies that have <sprite name=Wound> suffer <sprite name=Damage> 1.

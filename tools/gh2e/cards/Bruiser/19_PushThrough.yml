@@ -1,0 +1,43 @@
+# card: Push Through
+# 2e sheet: top Heal 5 [diamond+] self; bottom "during your next attack ability this round, add +1 Attack to all
+# attacks" (printed above the move), Move 3 [circle], round. A round BuffAttack with one use counted per action
+# (EntireAction, as the Drifter's Fierce Barrage counts its uses), so it ends after your next attack ability, where
+# Xipe gave +1 to every attack of the round.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 5
+                    DiamondPlusEnhancements: 1
+                Filter: Self
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BAttackBuff:
+                Attack: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    EntireAction: True
+                    XPTracker: [0]
+                AnimOverload: PowerUp
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+    Bottom:
+        - Active:
+            Ability: BAttackBuff
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH2E_Bruiser_19_B$"
+            Layout: "$GH2E_Bruiser_19_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Duration: Round

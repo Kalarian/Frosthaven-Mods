@@ -1,0 +1,58 @@
+# card: Earthen Clod
+# from Xipe's 99126_Cragheart2_Earthen Clod.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: Attack 2 carries a square mark (square slot)
+# bottom: +1 Attack per adjacent obstacle or objective: the converted 1st edition Nowhere to Run's shape (adjacent
+# valid tiles counted by the target filter); objectives are object actors (ObjectActor in the tile list)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 5
+                AnimOverload: ObstacleEarthenClod
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthImmo:
+                        ParentName: TAttack
+                        Conditions: Immobilize
+                XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 5
+                AnimOverload: ObstacleEarthenClod
+                ConditionalOverrides:
+                    BAttackCO1:
+                        FilterContainer:
+                            FilterTiles:
+                                TargetType: Enemy
+                                TargetAdjacentValidTiles: "> 0"
+                                TargetAdjacentValidTilesFilter: ["Obstacle", "ObjectActor"]
+                        AbilityOverrides:
+                            BAdjObstacleBuff:
+                                StatIsBasedOnX:
+                                    Strength:
+                                        BasedOn: TargetAdjacentValidTiles
+                                        AddTo: True
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCEarth
+            Text: "$Immobilize$ <sprite name=Immobilize>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Range$ <sprite name=Range> *BAttack.Range*"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Cragheart2_11_B$"

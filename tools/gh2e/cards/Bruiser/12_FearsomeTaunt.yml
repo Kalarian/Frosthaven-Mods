@@ -1,0 +1,51 @@
+# card: Fearsome Taunt
+# 2e sheet: top Attack 3 [square], Push 3 [square], XP 1; bottom Shield 1, "whenever an enemy would attack one of your
+# adjacent allies this round, you may have that attack target you instead, regardless of range and line of sight",
+# round. The redirect is the 1st edition Provoking Roar's (Redirect, round), with its Frosthaven icon (CLASS_ICONS
+# Brute BRedirect); Gloomhaven's class icon "Brute" isn't one of Frosthaven's.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    SquareEnhancements: 1
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 3
+                            SquareEnhancements: 1
+                        AnimOverload: None
+                        IsInlineSubAbility: True
+        XP: 1
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+            BRedirect:
+                Redirect:
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Push$ <sprite name=Push> *TAttackSubPush* @TAttackSubPush@"
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield*"
+        - Row: "<size=20%> "
+        - Active:
+            Ability: BRedirect
+            ListLayout: "$GH2E_Bruiser_12_B$"
+            Layout: "$GH2E_Bruiser_12_B$"
+            Icon: Positive_Redirect_Ally_Attack_Aura
+        - Row: "<size=20%> "
+        - Duration: Round

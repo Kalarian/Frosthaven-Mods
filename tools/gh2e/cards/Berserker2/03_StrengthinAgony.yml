@@ -1,0 +1,62 @@
+# card: Strength in Agony
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                ConditionalOverrides:
+                    TAttackCO:
+                        XP: 1
+                        Requirements:
+                            HPPercentOfMax: "<= 50%"
+                        AbilityOverrides:
+                            TAttackLowHP:
+                                Strength: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+        Consumes:
+            BCDamage1:
+                ConsumeGroup: CGAgony
+                CostAbility:
+                    ParentName: BMove
+                    Damage: 1
+                    Filter: Self
+                AbilityOverrides:
+                    BCMoveBuff1:
+                        ParentName: BMove
+                        Strength: 1
+            BCDamage2:
+                ConsumeGroup: CGAgony
+                CostAbility:
+                    ParentName: BMove
+                    Damage: 2
+                    Filter: Self
+                AbilityOverrides:
+                    BCMoveBuff2:
+                        ParentName: BMove
+                        Strength: 2
+            BCDamage3:
+                ConsumeGroup: CGAgony
+                CostAbility:
+                    ParentName: BMove
+                    Damage: 3
+                    Filter: Self
+                AbilityOverrides:
+                    BCMoveBuff3:
+                        ParentName: BMove
+                        Strength: 3
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Berserker2_03_T$"
+    Bottom:
+        - Row: "$GH2E_Berserker2_03_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*+X"
+        - Row: "$GH2E_Berserker2_03_B2$"

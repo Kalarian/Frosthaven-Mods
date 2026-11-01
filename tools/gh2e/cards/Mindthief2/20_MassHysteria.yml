@@ -1,0 +1,41 @@
+# card: Mass Hysteria
+# written from tools/gh2e/sheets/Mindthief.json (Xipe's 99165 agreed); bottom = the 1st edition Corrupting Embrace
+# bottom's shape (poison along a jump's path)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+                Target: 4
+                Range: 4
+                Pierce: 3
+                Conditions: Muddle
+                AnimOverload: MindAttack
+        Infuse: Ice
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    SquareEnhancements: 1
+                    Jump: True
+                AllTargetsOnMovePath: True
+                Conditions: Poison
+        Infuse: Dark
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target*"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce*"
+        - Row: "$Muddle$ <sprite name=Muddle>"
+        - Row: "<size=20%> "
+        - Infuse: Ice
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Mindthief2_20_B$"
+        - Row: "<size=20%> "
+        - Infuse: Dark

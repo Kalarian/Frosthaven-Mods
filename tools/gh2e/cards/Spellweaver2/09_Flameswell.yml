@@ -1,0 +1,53 @@
+# card: Flameswell
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 2
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    AttackType: Ranged
+                    IsSingleTargetBonus: True
+                    XPTracker: [0,1,0,1]
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 2
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            BCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    BCIceWard:
+                        ParentName: BHeal
+                        Condition: Ward
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH2E_Spellweaver2_09_T$"
+            Layout: "$GH2E_Spellweaver2_09_T$"
+            Icon: "Positive_AttackRanged_Plus_Range"
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+        - Row: "<size=20%> "
+        - Infuse: Fire
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Range$ <sprite name=Range> *BHeal.Range* @BHeal.Range@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCIce
+            Text: "$Ward$ <sprite name=Ward>, <sprite name=XP1>"

@@ -1,0 +1,77 @@
+# card: Harsh Stimulants
+# Xipe's 99058 is a placeholder (plain Attack 3 / Move 3); written from tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            # "Grant one ally within Range 3: Suffer damage 2 (mandatory), Move 2, Attack 6": Frosthaven's grant shape
+            # (ControlActor with commanded abilities, ControlActorType Player: the Banner Spear's Combined Effort,
+            # the Shattersong's Empowering Pulse); the self damage is the ally's first commanded ability
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyDamage:
+                            Damage: 2
+                            Filter: Self
+                            AutoTrigger: True
+                            CanSkip: False
+                            AnimOverload: None
+                        TAllyMove:
+                            Move:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                        TAllyAttack:
+                            Attack:
+                                Amount: 6
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                    ControlActorType: Player
+                Range: 3
+                Target: 1
+                Filter: Ally
+                AnimOverload: Grant
+    Bottom:
+        Abilities:
+            # "Control one enemy within Range 3: Attack +2 targeting all adjacent enemies, then that enemy gains
+            # Stun": Frosthaven's Hijack bottom (the HIVE) controls an enemy the same way; the attack is relative to
+            # the monster's own (no StrengthIsBase). The Stun takes the controlled enemy only (the Eye of the Void
+            # filter, gh_port CARD_FIXES 31179: TargetTargetedByCasterPreviousAbility + SpecificAbilityNames)
+            BControl:
+                ControlActor:
+                    Abilities:
+                        BEnemyAttack:
+                            Attack: 2
+                            Range: 1
+                            RangeIsBase: True
+                            Target: -1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Target: 1
+                Filter: Enemy
+                AnimOverload: Grant
+            # range 99: the filter allows only the enemy just controlled (the control's range may be enhanced)
+            BStun:
+                Stun: True
+                Range: 99
+                Target: 1
+                Filter:
+                    TargetType: Enemy
+                    TargetTargetedByCasterPreviousAbility: True
+                    SpecificAbilityNames: [BControl]
+                AnimOverload: RangedAttack
+        XP: 3
+Layout:
+    Top:
+        - Row: "$GH2E_Tinkerer2_29_T$"
+        - Row: "$GH2E_Tinkerer2_29_T2$"
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+    Bottom:
+        - Row: "$GH2E_Tinkerer2_29_B$"
+        - Row: "$Range$ <sprite name=Range> *BControl.Range* @BControl.Range@"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> +2"
+        - Row: "$GH2E_Tinkerer2_29_B2$"
+        - Row: "<size=20%> "
+        - XP: 3

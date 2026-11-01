@@ -1,0 +1,62 @@
+# card: Avalanche
+# from Xipe's 99118_Cragheart2_Avalanche.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# bottom: Heal 2 carries a square mark on the card (written as a square slot; the converter's default for heal is
+# diamond-plus)
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    Enhancements: 1
+                AnimOverload: MeleeSmashAvalanche
+                AreaEffect: "0,0,G|2,0,R|1,1,R|3,1,E"
+                MultiPassAttack: False
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthAttackBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    BCEarthRangeBuff:
+                        ParentName: BHeal
+                        Range: 2
+                XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "65,35"
+            - Column:
+                - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Row: "<size=20%> "
+                - Consume:
+                    Name: TCEarth
+                    Text: "+2 $Attack$ <sprite name=Attack>, <sprite name=XP1>"
+            - Column:
+                - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Range$ <sprite name=Range> *BHeal.Range* @BHeal.Range@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCEarth
+            Text: "+2 $Range$ <sprite name=Range>, <sprite name=XP1>"

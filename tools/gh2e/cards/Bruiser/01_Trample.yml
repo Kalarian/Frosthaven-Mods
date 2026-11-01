@@ -1,0 +1,38 @@
+# card: Trample
+# 2e sheet: top Attack 3 [diamond], Pierce 3; bottom Move 4 [square], Jump, Attack 3 on all enemies moved through,
+# XP 1 per enemy targeted, lost. The attack is its own ability after a plain Move, with Targeting: All (the 1st edition
+# Trample fix, CARD_FIXES 20001: a merged move-attack picks its targets before the walk).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                    Pierce: 3
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Jump: True
+                    SquareEnhancements: 1
+            BAttack:
+                Attack: 3
+                AllTargetsOnMovePath: True
+                Targeting: All
+                Target: -1
+                XPPerTarget: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce*"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack*"
+        - Row: "$GH2E_Bruiser_01_B$"
+        - Row: "<size=20%> "
+        - Row: "$XP_PerEnemy$"

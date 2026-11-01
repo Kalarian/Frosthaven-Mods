@@ -1,0 +1,59 @@
+# card: Dual Shot
+# top: Attack 2 and Target 2 with square marks as printed.
+# bottom: Doom: advantage on your attacks (the 1st edition Singular Focus doom, filtered to this class). "When this enemy
+# dies, shuffle one Curse into the monster attack modifier deck": an on-death Curse on one enemy anywhere (a cursed
+# monster's curse goes into the monster deck in Frosthaven); nothing happens when no enemy is left (approximation).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 2
+                    Enhancements: 1
+                Range: 5
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomAttackDebuff:
+                                Attack: 0
+                                AttackHasAdvantage: True
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    Filter:
+                                        PlayerClasses: Doomstalker2ID
+                            BDoomOnDeath:
+                                AddActiveBonus:
+                                    Curse: True
+                                    Target: 1
+                                    Range: 99
+                                    IgnoreLOS: True
+                                    Filter: Enemy
+                                ActiveBonus:
+                                    Behaviour: DuringActionAbilityOnDeath
+                                    TriggerOnCaster: True
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTargetAlt
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target* @TAttack.Target@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+    Bottom:
+        - Doom:
+            DoomIcon: Doomstalker
+            ParentAbility: BDoom
+            ActiveBonusLayout: "$GH2E_Doomstalker2_16_B$"
+            DoomAbilityLayout: "$GH2E_Doomstalker2_16_B$"

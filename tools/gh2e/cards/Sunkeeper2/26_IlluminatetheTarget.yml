@@ -1,0 +1,52 @@
+# card: Illuminate the Target
+# top: "designate an adjacent hex containing an enemy" = a melee attack on an adjacent enemy. "Strengthen all allies
+# adjacent to you or the designated hex": one Strengthen on the allies adjacent to you, and a second one as the
+# attack's sub-ability on the allies adjacent to its target (AllTargetsAdjacentToParentTargets + TreatAsNonSubAbility,
+# as Care Package and Virulent Strain in CARD_FIXES). An ally adjacent to both gains Strengthen twice (no effect).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 5
+                AnimOverload: MeleeSmite
+                SubAbilities:
+                    TStrengthenNearTarget:
+                        Strengthen: True
+                        AllTargetsAdjacentToParentTargets: True
+                        TreatAsNonSubAbility: True
+                        Target: -1
+                        Filter: Ally
+                        AnimOverload: PositiveBuffRadial
+            TStrengthen:
+                Strengthen: True
+                Range: 1
+                Target: -1
+                Filter: Ally
+                AnimOverload: PositiveBuffRadial
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 5
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                Range: 1
+                Filter: Ally
+                AnimOverload: ControlAlly
+Layout:
+    Top:
+        - Row: "$GH2E_Sunkeeper2_26_T$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen>"
+        - Row: "$GH2E_Sunkeeper2_26_T2$"
+    Bottom:
+        - Row: "$GH2E_Sunkeeper2_03_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

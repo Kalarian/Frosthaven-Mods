@@ -1,0 +1,130 @@
+# card: Burning Hatred
+Discard: [Discard,Permanently Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Range: 1
+                Target: -1
+                MultiPassAttack: False
+                TreatAsMelee: True
+                AnimOverload: RangedRadial
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireRangeBuff:
+                        ParentName: TAttack
+                        Range: 1
+            TCDamage:
+                CostAbility:
+                    ParentName: TAttack
+                    Damage: 2
+                    Filter: Self
+                AbilityOverrides:
+                    TCAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BDamage:
+                Damage: 1
+                Filter: Self
+                CanSkip: False
+            BMove:
+                Move: 1
+            BAttack:
+                Attack: 2
+            BNull:
+                Null: True
+        Consumes:
+            BCRepeat1:
+                ConsumeGroup: CGHatred
+                CostAbility:
+                    ParentName: BNull
+                    Damage: 2
+                    Filter: Self
+                Abilities:
+                    BCMove1:
+                        ParentName: BNull
+                        Move: 1
+                    BCAttack1:
+                        ParentName: BNull
+                        Attack: 2
+            BCRepeat2:
+                ConsumeGroup: CGHatred
+                CostAbility:
+                    ParentName: BNull
+                    Damage: 5
+                    Filter: Self
+                Abilities:
+                    BCMove2a:
+                        ParentName: BNull
+                        Move: 1
+                    BCAttack2a:
+                        ParentName: BNull
+                        Attack: 2
+                    BCMove2b:
+                        ParentName: BNull
+                        Move: 1
+                    BCAttack2b:
+                        ParentName: BNull
+                        Attack: 2
+            BCRepeat3:
+                ConsumeGroup: CGHatred
+                CostAbility:
+                    ParentName: BNull
+                    Damage: 9
+                    Filter: Self
+                Abilities:
+                    BCMove3a:
+                        ParentName: BNull
+                        Move: 1
+                    BCAttack3a:
+                        ParentName: BNull
+                        Attack: 2
+                    BCMove3b:
+                        ParentName: BNull
+                        Move: 1
+                    BCAttack3b:
+                        ParentName: BNull
+                        Attack: 2
+                    BCMove3c:
+                        ParentName: BNull
+                        Move: 1
+                    BCAttack3c:
+                        ParentName: BNull
+                        Attack: 2
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFire
+            Text: "$Target_TwoHexInstead$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDamage
+            Text: "$GH2E_Berserker2_27_T$"
+    Bottom:
+        - Row: "$GH2E_Berserker2_27_B$"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Berserker2_27_B2$"
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCRepeat1
+            Text: "$GH2E_Berserker2_27_B3$"
+        - Consume:
+            Name: BCRepeat2
+            Text: "$GH2E_Berserker2_27_B4$"
+        - Consume:
+            Name: BCRepeat3
+            Text: "$GH2E_Berserker2_27_B5$"
+        - Row: "<size=50%> "
+        - XP: 2

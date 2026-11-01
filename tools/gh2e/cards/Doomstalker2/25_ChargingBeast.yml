@@ -1,0 +1,63 @@
+# card: Charging Beast
+# top: Summon Horned Hristek (stand-in model: the 1st edition Black Unicorn, the horned one). Its trait (+2 Attack for
+# the round after its first move) and "whenever this summon kills an enemy, grant it Move +0" have no Frosthaven summon
+# shape: text only (NEEDS PLUGIN).
+# bottom: Doom. On death, you and all allies Heal 3 (the 1st edition Nature's Hunger doom, Heal 2 -> 3). "Your summons
+# focus on this enemy": text (NEEDS PLUGIN).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: HornedHristekID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomOnDeath:
+                                AddActiveBonus:
+                                    Heal: 3
+                                    Filter: Self
+                                Target: -1
+                                Targeting: All
+                                ActiveBonus:
+                                    Behaviour: DuringActionAbilityOnDeath
+                                    Filter:
+                                        ActorType: [Player, Summon, Ally]
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: "Summon"
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_HornedHristek$
+                    SpecialText:
+                        - Row: "$GH2E_Doomstalker2_25_T$"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Doomstalker2_25_T2$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Doom:
+            DoomIcon: Doomstalker
+            ParentAbility: BDoom
+            ActiveBonusLayout: "$GH2E_Doomstalker2_25_B$"
+            DoomAbilityLayout: "$GH2E_Doomstalker2_25_B$"

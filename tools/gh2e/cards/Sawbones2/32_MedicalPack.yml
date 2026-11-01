@@ -1,0 +1,25 @@
+# card: Medical Pack
+# Medical Pack 0443 (sheet position 32): a supply card (the 1st edition's SupplyCard), handed to allies by
+# GiveSupplyCard 13230 (the plugin gives a free copy of the six); never held in the Sawbones' own hand. Bless read from the icon (sheet: fairly certain).
+SupplyCard: True
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal: 4
+                Filter: Self
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 3
+                Filter: Self
+                Conditions: Bless
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal*"
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*"
+        - Row: "$Bless$ <sprite name=Bless>"

@@ -1,0 +1,53 @@
+# card: Crippling Offensive
+# 2e sheet: top Attack 2 [square], Target 2, Range 3, Immobilize (no corner icons: not lost); bottom Move 4 [circle],
+# Muddle target all, range 1, Shield 1 [square], round. Xipe had the top lost.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 3
+                Target: 2
+                Conditions: Immobilize
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BMuddle:
+                Muddle: True
+                Filter: Enemy
+                Range: 1
+                Target: -1
+                AnimOverload: RadialShout
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUpShield
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target*"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Immobilize$ <sprite name=Immobilize>"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Muddle$ <sprite name=Muddle>"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BShield
+            Icon: Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+        - Row: "<size=20%> "
+        - Duration: Round

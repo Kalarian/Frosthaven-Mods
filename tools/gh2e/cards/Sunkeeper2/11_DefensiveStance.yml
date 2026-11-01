@@ -1,0 +1,52 @@
+# card: Defensive Stance
+# bottom: Shield 1 and the mandatory -1 Move as the 1st edition card wrote them; "reduce the Pierce of attacks
+# targeting you by 2" has no Frosthaven ability (NEEDS PLUGIN): text only.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Conditions: Stun
+                AnimOverload: MeleeSmite
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 1
+                ActiveBonusDuration: Persistent
+                SubAbilities:
+                    BShieldSubMoveDebuff:
+                        Move: -1
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Persistent
+                            Behaviour: BuffMove
+                        AutoTrigger: True
+                        AnimOverload: None
+                AnimOverload: PowerUp
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Stun$ <sprite name=Stun>"
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: "Shield"
+            ListLayout: "$Shield$ <sprite name=Shield> *BShield*. $GH2E_Sunkeeper2_11_B$ $GH2E_Sunkeeper2_11_B2$"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield*"
+                - Row: "<size=50%> "
+                - Row: "$GH2E_Sunkeeper2_11_B$"
+                - Row: "<size=50%> "
+                - Row: "$GH2E_Sunkeeper2_11_B2$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent

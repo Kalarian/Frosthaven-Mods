@@ -1,0 +1,102 @@
+# card: Swallowed by Night
+# top: Stun + Curse, range 1. If you have Invisible: a Tear adjacent to the target (Seeping Tendrils' shape). If you
+# don't and the target is a normal enemy standing on a Tear: you may kill it (a custom-targeted Kill on the stun's
+# target, optional), which removes that Tear (RemoveShadow on its hex, Deathwalker Fluid Night's form) and gives you
+# Invisible; XP 1 on the kill (AbilityXP).
+# bottom: "during this and the next four rounds, you may perform attack abilities while you have Invisible" belongs to
+# the class mat's Invisible rule (NEEDS PLUGIN): a persistent marker bonus whose five slots advance at each round's end
+# (EndRoundAbility, XP on slots 1, 3, 5), which the plugin can read. "When this card is moved from your active area to
+# your lost pile, you become exhausted": no Frosthaven trigger on a card leaving the active area (ExhaustSelf exists
+# only as an ability flag, the 1st edition Final Fight): text only, NEEDS PLUGIN.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TStun:
+                Stun: True
+                Conditions: Curse
+                Range:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Filter: Enemy
+                AnimOverload: WeakRadial
+            TTear:
+                CreateShadow:
+                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+                Target: 1
+                Targeting: Custom
+                Vars:
+                    Stunned: CustomAbility.FindAbilityInPhaseByName("TStun")
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(Stunned.ActorsToTarget)
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateHasInvisibility: TargetingActor.Tokens.HasKey(CCondition.EPositiveCondition.Invisible)
+                AnimOverload: Shadow Manipulation
+            TKill:
+                Kill: True
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: Normal
+                Target: -1
+                AbilityXP: 1
+                Targeting: Custom
+                Vars:
+                    Stunned: CustomAbility.FindAbilityInPhaseByName("TStun")
+                TargetingVars:
+                    AddValidActorsInRange: Stunned.ActorsToTarget
+                    AddActorsToTarget: Stunned.ActorsToTarget
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateNotInvisible: TargetingActor.Tokens.HasKey(CCondition.EPositiveCondition.Invisible) == False
+                        ValidateOnTear: Stunned != null && Stunned.ActorsToTarget.Any(obj.IsDead == False && CustomAbility.SteppedOnShadow(obj.Tile))
+                AnimOverload: Kill
+                SubAbilities:
+                    TKillSubRemoveTear:
+                        RemoveShadow:
+                        Target: 1
+                        AutoTrigger: True
+                        SkipAnim: True
+                        CanUndo: False
+                        TreatAsNonSubAbility: True
+                        Targeting: Custom
+                        TargetingVars:
+                            AddTilesInRange: ParentAbility.TilesSelected
+                            AddSelectedTiles: ParentAbility.TilesSelected
+                    TKillSubInvisible:
+                        Invisible: True
+                        Filter: Self
+                        AutoTrigger: True
+                        TreatAsNonSubAbility: True
+                        AnimOverload: TurnInvisible
+    Bottom:
+        Abilities:
+            BActive:
+                NullTargeting: True
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndRoundAbility
+                    XPTracker: [1,0,1,0,1]
+                    AbilityData:
+                        NullTargeting: True
+                        Filter: Self
+                        AutoTrigger: True
+                        SkipAnim: True
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Stun$ <sprite name=Stun>, $Curse$ <sprite name=Curse>"
+        - Row: "$Range$ <sprite name=Range> *TStun.Range* @TStun.Range@"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Nightshroud2_27_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Icon_Invisible
+            ListLayout: "$GH2E_Nightshroud2_27_B$"
+            Layout: "$GH2E_Nightshroud2_27_B$"
+        - Row: "<size=50%> "
+        - XPTracker: BActive

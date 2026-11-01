@@ -1,0 +1,48 @@
+# card: Perverse Edge
+# written from tools/gh2e/sheets/Mindthief.json (Xipe's 99153 agreed); the consume Stun hangs from a Null parent, as
+# the 1st edition Wretched Creature's consume Curse
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                AttackEffect:
+                    Type: BuffForEachNegativeConditionOnTarget
+                    Strength: 2
+                    XP: 1
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BNull:
+                Null: True
+            BMove:
+                Move:
+                    Amount: 3
+                    SquareEnhancements: 1
+        Consumes:
+            BCIce:
+                Elements: Ice
+                Abilities:
+                    BCIceStun:
+                        ParentName: BNull
+                        Stun: True
+                        Range: 1
+                        Filter: Enemy
+                        AnimOverload: MindAttack
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Mindthief2_08_T$"
+        - Row: "<size=20%> "
+        - Infuse: Dark
+    Bottom:
+        - Consume:
+            Name: BCIce
+            Text: "<sprite name=Stun> <sprite name=Range> 1, <sprite name=XP1>"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

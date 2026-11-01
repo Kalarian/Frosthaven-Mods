@@ -1,0 +1,12 @@
+Parser: HeroSummon
+ID: Decoy2ID
+LocKey: $GH2E_SUMMON_Decoy$
+Model: Decoy
+Health:
+    Amount: 10
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+    SquareEnhancements: 1
+Attack: 0
+Range: 0

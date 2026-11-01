@@ -1,0 +1,74 @@
+# card: Relentless Offensive
+# top: Attack 2 (square mark as printed), then a grant to one of your summons (Command the Wretched shape): Attack +0
+# that may target only the Doomstalker's attack target (Eye of the Void filter).
+# bottom: grant one summon Move +0, Attack +0, Move +0, Attack +0 (one control with four commanded abilities, as
+# Frosthaven's Command the Wretched lists two).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 4
+                    Enhancements: 1
+                AnimOverload: RangedAttack
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack: +0
+                            Range: +0
+                            Filter:
+                                TargetType: Enemy
+                                TargetTargetedByCasterPreviousAbility: True
+                                SpecificAbilityNames: [TAttack]
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter:
+                    TargetType: OwnSummon
+                AnimOverload: ControlSummon
+        XP: 1
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove1:
+                            Move: +0
+                        BAllyAttack1:
+                            Attack: +0
+                            Range: +0
+                        BAllyMove2:
+                            Move: +0
+                        BAllyAttack2:
+                            Attack: +0
+                            Range: +0
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter:
+                    TargetType: OwnSummon
+                AnimOverload: ControlSummon
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Doomstalker2_GRANT$"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> +0"
+        - Row: "$GH2E_Doomstalker2_SAME_TARGET$"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Row: "$GH2E_Doomstalker2_GRANT$"
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> +0"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> +0"
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> +0"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> +0"
+        - Row: "<size=50%> "
+        - XP: 2

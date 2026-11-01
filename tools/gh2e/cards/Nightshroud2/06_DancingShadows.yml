@@ -1,0 +1,68 @@
+# card: Dancing Shadows
+# top: "enemies within range 2 add -1 Attack to all their attacks this round" = Frosthaven's Geminate Voice of Salvation
+# top debuff aura (Attack -1, round BuffAttack aura on enemies within range); then a Tear within range 2.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttackDebuff:
+                Attack: -1
+                Range: 2
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    IsAura: True
+                    AuraFilter: Enemy
+                    AuraTargeting: Range
+                    ValidAbilityType: Attack
+            TTear:
+                CreateShadow:
+                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+                Range: 2
+                Target: 1
+                AnimOverload: Shadow Manipulation
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    SquareEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCDark:
+                Elements: Dark
+                Abilities:
+                    BCDarkCurse:
+                        ParentName: BNull
+                        Curse: True
+                        Range: 1
+                        Filter: Enemy
+                        AnimOverload: WeakRadial
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TAttackDebuff
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH2E_Nightshroud2_06_T$"
+            Layout: "$GH2E_Nightshroud2_06_T$"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Nightshroud2_06_T2$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:
+                - Duration: Round
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCDark
+            Text: "$Curse$ <sprite name=Curse>, $Range$ <sprite name=Range> 1, <sprite name=XP1>"

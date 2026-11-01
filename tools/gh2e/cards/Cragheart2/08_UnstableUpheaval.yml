@@ -1,0 +1,47 @@
+# card: Unstable Upheaval
+# from Xipe's 99123_Cragheart2_Unstable Upheavel.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: no enhancement marks on this card; the consume is "+1 range" on the all-targets melee attack (all enemies within
+# two hexes), the 1st edition card's shape (play-tested); the ally damage is a "!" box: CanSkip False
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                AnimOverload: MeleeSmashUnstableUpheaval
+                Target: -1
+                MultiPassAttack: False
+                TreatAsMelee: True
+            TDamage:
+                Damage: 2
+                Range: 1
+                Target: -1
+                Filter: Ally
+                CanSkip: False
+                AnimOverload: Footstomp
+                SkipAnim: True
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthRangeBuff:
+                        ParentName: TAttack
+                        Range: 1
+                XP: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 3
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCEarth
+            Text: "$Target_TwoHexInstead$, <sprite name=XP1>"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Cragheart2_08_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"

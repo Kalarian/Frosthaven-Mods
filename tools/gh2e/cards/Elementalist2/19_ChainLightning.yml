@@ -1,0 +1,62 @@
+# card: Chain Lightning
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    Enhancements: 1
+                Range: 4
+                Target: 3
+                ChainAttack: True
+                ChainAttackRange: 2
+                ChainAttackDamageReduction: 1
+                MultiPassAttack: False
+                AnimOverload: ChainLightning
+        Consumes:
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Target: 1
+                XP: 1
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Pierce: 2
+                XP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 4
+                Range:
+                    Amount: 2
+                    Enhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: Light
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target*"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAir
+            Text: "+1 $Attack$ <sprite name=Attack>, +1 $Target$ <sprite name=Target>, <sprite name=XP1>"
+        - Consume:
+            Name: TCLight
+            Text: "+1 $Attack$ <sprite name=Attack>, $Pierce$ <sprite name=Pierce> 2, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Elementalist2_19_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*"
+        - Row: "$Range$ <sprite name=Range> *BHeal.Range* @BHeal.Range@"
+        - Row: "<size=20%> "
+        - Infuse: Light

@@ -1,0 +1,95 @@
+# card: Magma Scales
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyMove:
+                            Move:
+                                Amount: 2
+                                Jump: True
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                    ControlActorType: Player
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Filter: Ally
+                AnimOverload: ControlAlly
+        Consumes:
+            TCAir:
+                Elements: Air
+                Infuse: [Air]
+                AbilityOverrides:
+                    TCAirDisarm:
+                        ParentName: TAlly
+                        SubAbilities:
+                            TAllyDisarm:
+                                Disarm: True
+                                Range: 1
+                                Target: 1
+                                Filter: Enemy
+                                AllTargetsAdjacentToParentTargets: True
+                                TreatAsNonSubAbility: True
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyShield:
+                            Shield:
+                                Amount: 2
+                                Enhancements: 1
+                            StrengthIsBase: True
+                            Filter: Self
+                            ActiveBonusDuration: Round
+                            UseOriginalActor: True
+                            AnimOverload: TargetedBuff
+                        BAllyRetaliate:
+                            Retaliate:
+                                Amount: 2
+                                Enhancements: 1
+                            StrengthIsBase: True
+                            Filter: Self
+                            ActiveBonusDuration: Round
+                            UseOriginalActor: True
+                            AnimOverload: TargetedBuff
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Filter: Ally
+                AnimOverload: ControlAlly
+        Infuse: [Fire, Earth]
+        XP: 2
+Layout:
+    Top:
+        - Row: "$GH2E_Elementalist2_GRANT_R3$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAir
+            Text: "$GH2E_Elementalist2_06_T$"
+    Bottom:
+        - Row: "$GH2E_Elementalist2_GRANT_R3$"
+        - Row: "<size=20%> "
+        - Active:
+            Ability: BAllyShield
+            ListLayout: "<b><size=130%>$Shield$ <sprite name=Shield> *BAllyShield*"
+            Layout: "<b><size=130%>$Shield$ <sprite name=Shield> *BAllyShield* <size=100%><voffset=1>@BAllyShield@"
+            Icon: "Shield"
+        - Active:
+            Ability: BAllyRetaliate
+            ListLayout: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *BAllyRetaliate*"
+            Layout: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *BAllyRetaliate* <size=100%><voffset=1>@BAllyRetaliate@"
+            Icon: "Retaliate"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "50, 50"
+            - Column:
+                - Infuse: Fire
+            - Column:
+                - Infuse: Earth

@@ -1,0 +1,34 @@
+# card: Lay On Hands
+# Heal X, X = the target's maximum hit points: the 1st edition port's play-tested heal to full (StatIsBasedOnX
+# TargetDamageTaken), the same result since a heal never raises hit points above the maximum.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal: 0
+                Range: 1
+                Filter: Ally
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: TargetDamageTaken
+                AnimOverload: Heal
+        Infuse: Light
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+Layout:
+    Top:
+        - Row: "$GH2E_Sunkeeper2_05_T$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:
+                - XP: 2
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"

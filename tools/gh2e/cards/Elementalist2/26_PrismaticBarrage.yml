@@ -1,0 +1,139 @@
+# card: Prismatic Barrage
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Range: 4
+                AnimOverload: TargetFloorMulti
+            TCFire:
+                Consume:
+                    Elements: Fire
+                    Abilities:
+                        TCFireAttack:
+                            Attack: 2
+                            Range: 4
+                            Filter: Enemy
+                            AnimOverload: TargetFloorFireIce
+                            SubAbilities:
+                                TCFireHazard:
+                                    CreateTerrain: HotCoals
+                                    TileFilter: FeaturelessHex
+                                    Target: 1
+                                    Targeting: Custom
+                                    TargetingVars:
+                                        AddTilesInRange: ParentAbility.ActorsToTarget.Select(Tile)
+                                    TreatAsNonSubAbility: True
+                                    AutoTrigger: True
+                    XP: 1
+            TCEarth:
+                Consume:
+                    Elements: Earth
+                    Abilities:
+                        TCEarthAttack:
+                            Attack: 2
+                            Range: 4
+                            Filter: Enemy
+                            AnimOverload: TargetFloorObsidian
+                            SubAbilities:
+                                TCEarthPush:
+                                    Push: 3
+                                    AnimOverload: None
+                                    IsInlineSubAbility: True
+                    XP: 1
+        Consumes:
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceStun:
+                        ParentName: TAttack
+                        Conditions: Stun
+                XP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 2
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            BCIce:
+                Elements: Ice
+                Infuse: [Ice]
+                AbilityOverrides:
+                    BCIceWard:
+                        ParentName: BHeal
+                        Conditions: Ward
+            BCAir:
+                Elements: Air
+                Infuse: [Air]
+                AbilityOverrides:
+                    BCAirBless:
+                        ParentName: BHeal
+                        Conditions: Bless
+            BCEarth:
+                Elements: Earth
+                Infuse: [Earth]
+                AbilityOverrides:
+                    BCEarthSafeguard:
+                        ParentName: BHeal
+                        SubAbilities:
+                            BHealSafeguard:
+                                AddActiveBonus:
+                                    Null: True
+                                    Filter: Self
+                                    AutoTrigger: True
+                                    SkipAnim: True
+                                Filter: [Self, Ally]
+                                UseParentTargets: True
+                                SkipAnim: True
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: GenericOnNegativeCondition
+                                    IsToggleBonus: True
+                                    XPTracker: [0]
+                                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
+                                    Vars:
+                                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
+                                        ValidateNotScenarioEffect: TriggerAbility.TreatedAsScenarioEffect() == False
+                                        PreventCondition: True
+            BCTwo:
+                Infuse: [Light]
+                Requirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateTwoElementsConsumed: PhaseManager.CurrentPhaseAction.ActionAugmentationsToConsume.Where(obj.Elements.Count > 0).Count >= 2
+                AbilityOverrides:
+                    BCTwoHeal:
+                        ParentName: BHeal
+                        Strength: 1
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCIce
+            Text: "$Stun$ <sprite name=Stun>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Elementalist2_26_T$"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Elementalist2_26_T2$"
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*"
+        - Row: "$Range$ <sprite name=Range> *BHeal.Range*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCIce
+            Text: "$Ward$ <sprite name=Ward>, <sprite name=CreateIce>"
+        - Consume:
+            Name: BCAir
+            Text: "$Bless$ <sprite name=Bless>, <sprite name=CreateAir>"
+        - Consume:
+            Name: BCEarth
+            Text: "$GH2E_Elementalist2_SAFEGUARD_SHORT$, <sprite name=CreateEarth>"
+        - Consume:
+            Name: BCTwo
+            Text: "$GH2E_Elementalist2_26_B$"

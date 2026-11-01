@@ -1,0 +1,44 @@
+# key<TAB>English: the Wildfury's card texts as printed on the 2nd edition cards (tools/gh2e/sheets/Wildfury.json)
+GH2E_SUMMON_WildfuryBear	Bear
+GH2E_SUMMON_WindIdol	Wind Idol
+GH2E_SUMMON_Monolith	Monolith
+GH2E_SUMMON_VitalForce	Vital Force
+GH2E_SAFEGUARD	Safeguard: prevent the next negative condition
+GH2E_Wildfury_SAFEGUARD_ROW	Safeguard
+GH2E_Wildfury_REQUIRED	required to perform this action:
+GH2E_Wildfury_ALL_R2	Target all enemies within <sprite name=Range> 2
+GH2E_Wildfury_IF_ATTACKED	If you performed the attack ability, perform:
+GH2E_Wildfury_01_B	Whenever the Bear attacks or suffers damage from retaliate, place one damage token on this card. Whenever the Bear attacks and there are already three or more damage tokens on this card, instead of adding one, remove three to add +3 <sprite name=Attack> to the attack.
+GH2E_Wildfury_05_B	Grant one adjacent ally:
+GH2E_Wildfury_05_B2	If the target of the grant ability is the Bear, also grant them:
+GH2E_Wildfury_06_T	The Wildfury gains all looted tokens and tiles.
+GH2E_Wildfury_07_T	All enemies within <sprite name=Range> 2 that have <sprite name=Muddle> add -1 <sprite name=Attack> to their attacks this round.
+GH2E_Wildfury_07_B	After each of the Bear's next three attacks, triggering no more than once each round, Command: <sprite name=Move> 3, <sprite name=Jump>
+GH2E_Wildfury_09_T	<sprite name=ConsumeAir>/<sprite name=ConsumeEarth>: Teleport the Wildfury to an empty hex adjacent to the Bear.
+GH2E_Wildfury_09_B	<sprite name=Teleport> any normal or elite enemy to a hex occupied by a different normal or elite enemy and simultaneously <sprite name=Teleport> that enemy to the hex occupied by the first.
+GH2E_Wildfury_10_T	After each of the Bear's next three attacks, triggering no more than once each round, Command: <sprite name=Heal> 2
+GH2E_Wildfury_11_T	After each of the Bear's next three attacks, triggering no more than once each round, perform the following as if you occupied the same hex as the Bear: <sprite name=Attack> 2, target one enemy within 3 hexes
+GH2E_Wildfury_11_B	Add +1 <sprite name=Heal> if the target is the Bear.
+GH2E_Wildfury_12_T	All allies within <sprite name=Range> 3 add <sprite name=Pierce> 1 to all their attacks.
+GH2E_Wildfury_16_B	Add +1 <sprite name=Attack> to all your attacks this round.
+GH2E_Wildfury_17_T	All allies within <sprite name=Range> 3 gain <sprite name=Shield> 1.
+GH2E_Wildfury_17_B	If you are adjacent to the Bear, perform:
+GH2E_Wildfury_21_T	After each of the Bear's next four attacks, triggering no more than once each round, control the target of the attack: <sprite name=Move> 2, <sprite name=Attack> 2
+GH2E_Wildfury_21_B	Grant one ally within <sprite name=Range> 4:
+GH2E_Wildfury_21_B2	Target all enemies adjacent to the target of the grant ability
+GH2E_Wildfury_22_B	At the end of each round, if you neither attacked nor were attacked that round, move this card to the lost pile.
+GH2E_Wildfury_22_B2	Bear: <sprite name=Shield> 1
+GH2E_Wildfury_22_B3	Bear: <sprite name=Retaliate> 2
+GH2E_Wildfury_23_B	+1 <sprite name=Heal>, Safeguard, <sprite name=XP1>
+GH2E_Wildfury_24_T	After each of the Bear's next three attacks, triggering no more than once each round, all enemies within <sprite name=Range> 2 of the Bear suffer <sprite name=Damage> 1 and the Bear performs: <sprite name=Heal> X, where X is the number of enemies that suffered damage.
+GH2E_Wildfury_25_T	Double the value of all <sprite name=Attack> bonuses from your ability cards on this attack.
+GH2E_Wildfury_26_B	<sprite name=Teleport> to the hex occupied by the Bear and simultaneously <sprite name=Teleport> the Bear to the hex occupied by you.
+GH2E_Wildfury_27_T	Perform this attack as if you occupied the same hex as the Bear.
+GH2E_Wildfury_27_B	On the next three rounds, skip your card selection and your turn. Your character token does not advance on any of your other persistent abilities. The Bear performs their turn twice at initiative 14 each round with you controlling it.
+GH2E_Wildfury_28_T	All allies within <sprite name=Range> 3 add +2 <sprite name=Attack> to their first attack each round.
+GH2E_Wildfury_28_B	Target one ally within
+GH2E_Wildfury_29_T	If this attack kills an enemy, gain <sprite name=XP1> and repeat this action.
+AMC_GH2E_Wildfury_Heal2Bear_R	+0, <sprite name=Heal> 2, target the Bear <sprite name=Rolling>
+AMC_GH2E_Wildfury_P2_Bond	+2, +1 <sprite name=Attack> if the Wildfury and the Bear are within <sprite name=Range> 4 of each other
+AMC_GH2E_Wildfury_AirEarth_P1	+1 Air or Earth
+AMC_GH2E_Wildfury_Push2_P2	+2 <sprite name=Push> 2

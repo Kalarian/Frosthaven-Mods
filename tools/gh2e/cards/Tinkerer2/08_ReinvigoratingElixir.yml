@@ -1,0 +1,31 @@
+# card: Reinvigorating Elixir
+# from Xipe's 99037_Tinkerer2_Reinvigorating Elixir.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 4
+                    Enhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BRecover:
+                RecoverDiscardedCards: All
+                Range: 3
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: TargetRecover
+        XP: 3
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Range$ <sprite name=Range> *THeal.Range*"
+    Bottom:
+        - Row: "$GH2E_Tinkerer2_08_B$"
+        - Row: "<size=20%> "
+        - XP: 3

@@ -1,0 +1,54 @@
+# card: Possession
+# written from tools/gh2e/sheets/Mindthief.json; summon grant = Frosthaven's Command the Wretched shape (one summon)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Attack:
+                                Amount: 3
+                                Enhancements: 1
+                            Range: 1
+                            Target: 1
+                            Conditions: [Muddle]
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 4
+                Filter: Enemy
+                AnimOverload: MindControl
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    SquareEnhancements: 1
+            BSummonMove:
+                ControlActor:
+                    Abilities:
+                        BSummonMoveGrant:
+                            Move:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                Target: 1
+                Range: 99
+                Filter:
+                    TargetType: OwnSummon
+                AnimOverload: ControlSummon
+Layout:
+    Top:
+        - Row: "$GH2E_Mindthief2_CONTROL1$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@"
+        - Row: "$Muddle$ <sprite name=Muddle>"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Mindthief2_GRANTSUMMON$"
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BSummonMoveGrant* <size=100%><voffset=1>@BSummonMoveGrant@"

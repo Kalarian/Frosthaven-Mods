@@ -1,0 +1,42 @@
+# key<TAB>English
+GH2E_Mindthief2_CONTROL1	Control one enemy within <sprite name=Range> 4:
+GH2E_Mindthief2_CONTROL2	Control two enemies within <sprite name=Range> 4:
+GH2E_Mindthief2_CONTROLTARGET	Control the target of the attack ability:
+GH2E_Mindthief2_GRANTSUMMON	Grant one of your summons:
+GH2E_Mindthief2_01_T	Add +1 <sprite name=Attack> for each negative condition the target has.
+GH2E_Mindthief2_01_B	The controlled enemy suffers 2 damage
+GH2E_Mindthief2_02_T	If the attack ability killed an enemy, perform:
+GH2E_Mindthief2_02_B	If you have not moved this round, perform:
+GH2E_Mindthief2_02_B2	You cannot perform move abilities this round. At the end of the round, lose <sprite name=Invisible>.
+GH2E_Mindthief2_04_T	Add <sprite name=Poison>, <sprite name=Muddle> to all your melee attacks.
+GH2E_Mindthief2_06_T	Add +1 <sprite name=Attack> to all your melee attacks.
+GH2E_Mindthief2_07_T	If this attack does not kill the target, gain a money token.
+GH2E_Mindthief2_08_T	Add +2 <sprite name=Attack> and gain <sprite name=XP1> for each negative condition the target has.
+GH2E_Mindthief2_10_T	Your single-target melee attack abilities may target enemies within 2 hexes.
+GH2E_Mindthief2_10_B	Add <sprite name=Curse> to all your melee attacks this round.
+GH2E_Mindthief2_11_T	After each of your melee attack abilities, grant one of your summons:
+GH2E_Mindthief2_11_B	If you end this movement in the same hex as you start, all enemies moved through gain <sprite name=Muddle>.
+GH2E_Mindthief2_15_B	Place a character token on a normal or elite enemy within <sprite name=Range> 4. This round, during that enemy's turn, it treats its enemies as allies and its allies as enemies, with you controlling its abilities.
+GH2E_Mindthief2_16_B	If you performed the attack ability, perform:
+GH2E_Mindthief2_17_T	Designate a hex containing an enemy within <sprite name=Range> 4 to perform, targeting the enemy in the designated hex:
+GH2E_Mindthief2_17_T2	If the attack ability killed an enemy, perform:
+GH2E_Mindthief2_17_T3	Target all enemies adjacent to the designated hex.
+GH2E_Mindthief2_19_T	After each of your melee attack abilities, perform:
+GH2E_Mindthief2_20_B	All enemies moved through gain <sprite name=Poison>.
+GH2E_Mindthief2_21_T	Add +1 <sprite name=Attack> if the target has a negative condition.
+GH2E_Mindthief2_23_B	The controlled enemies suffer 1 damage
+GH2E_Mindthief2_24_T	Control two enemies within <sprite name=Range> 4 that are adjacent to each other:
+GH2E_Mindthief2_24_B	You may have two AUGMENTS active at once. If you play a third AUGMENT, you must discard either of the other two. If you discard this card and you have two active AUGMENTS, you must discard one.
+GH2E_Mindthief2_25_T	Add +1 <sprite name=Attack> to your melee attacks for each negative condition the target has.
+GH2E_Mindthief2_25_B	Designate an unoccupied hex within <sprite name=Range> 4.
+GH2E_Mindthief2_25_B2	Perform this attack as though you occupied the designated hex.
+GH2E_Mindthief2_27_B	On your next four melee attacks, add <sprite name=Stun>, <sprite name=Curse> to the attack.
+GH2E_Mindthief2_28_T	<sprite name=Attack> X, where X is half the Rat King's current hit point value (rounded up).
+GH2E_Mindthief2_28_B	Each round, the first of your allies who performs a melee attack ability gains the effects of each of your active AUGMENTS for that attack ability.
+GH2E_Mindthief2_29_T	After each of your melee attack abilities, control one target of the attack ability: <sprite name=Attack> 3
+GH2E_Mindthief2_29_T2	After each of your control abilities, you may <sprite name=ConsumeDark>: one controlled enemy suffers 3 damage.
+GH2E_SUMMON_RatSwarm	Rat Swarm
+GH2E_SUMMON_RatMonstrosity	Rat Monstrosity
+GH2E_SUMMON_RatKing	Rat King
+AMC_GH2E_Mindthief2_ControlMove1	After the attack ability, control the target: <sprite name=Move> 1
+AMC_GH2E_Mindthief2_P1_PerNegativeCondition	Add +1 <sprite name=Attack> for each negative condition the target has

@@ -1,0 +1,49 @@
+# card: Maul
+# both halves COMMAND (the Bear performs them): the 1st edition Maul top's ControlActor shape.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack:
+                                Amount: 4
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 1
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 6
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 2
+Layout:
+    Top:
+        - Command: True
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Command: True
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
+        - Row: "<size=50%> "
+        - XP: 2

@@ -1,0 +1,76 @@
+# card: From the Brink
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TCleanse:
+                RemoveConditions: "All"
+                Conditions: [Wound,Brittle,Bane,Poison,Immobilize,Disarm,Impair,Stun,Muddle,StopFlying]
+                IgnoreStun: True
+                Filter: Self
+                AnimOverload: PowerUp
+            TRecover:
+                RecoverLostCards: 1
+                Filter: Self
+                CanSkip: True
+                AnimOverload: PowerUp
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    HP: "== 1"
+            THeal:
+                Heal: 0
+                Filter: Self
+                AnimOverload: Heal
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: Vars
+                        Vars:
+                            Value: max(0, TargetingActor.MaxHealthHalfRoundedUp - TargetingActor.Health)
+            TLower:
+                Damage: 0
+                Filter: Self
+                CanSkip: False
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: Vars
+                        Vars:
+                            Value: max(0, TargetingActor.Health - TargetingActor.MaxHealthHalfRoundedUp)
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        HalfHealth: Actor.MaxHealthHalfRoundedUp
+                        ValidateAboveHalf: Actor.Health > HalfHealth
+            TStrengthen:
+                Strengthen: True
+                Filter: Self
+                AnimOverload: PowerUp
+        Infuse: Fire
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BPull:
+                Pull:
+                    Amount: 1
+                    Enhancements: 1
+                Range:
+                    Amount: 2
+                    Enhancements: 1
+                Target: 1
+                Filter: Enemy
+Layout:
+    Top:
+        - Row: "$GH2E_Berserker2_10_T$"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Berserker2_10_T2$"
+        - Row: "<size=50%> "
+        - Infuse: Fire
+        - XP: 2
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Pull$ <sprite name=Pull> *BPull* <size=100%><voffset=1>@BPull@"
+        - Row: "$Range$ <sprite name=Range> *BPull.Range* @BPull.Range@"

@@ -1,0 +1,86 @@
+# card: Festering Sores
+# top: Wound + Plague on one enemy within range 4, then the persistent trigger as Frosthaven's Deathwalker writes
+# "when an enemy dies" (When Your Time Comes bottom: a self aura over all enemies, DuringActionAbilityOnDeath): here
+# only enemies with Plague, one use (the card is discarded after it). "Within range 3 of the hex where it died" is
+# range 3 from you: APPROXIMATION. bottom: -1 Move per Plague = flat -1 Move on enemies with Plague (NEEDS PLUGIN).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TWound:
+                Wound: True
+                Range:
+                    Amount: 4
+                    Enhancements: 1
+                Filter: Enemy
+                ResourcesToGiveToTargets:
+                    - ["Plague", 1]
+                ResourcesToAddOnAbilityEnd:
+                    - ["Plague", 3]
+                AnimOverload: TargetedDebuff
+            TOnDeath:
+                AddActiveBonus:
+                    NullTargeting: True
+                    Range: 3
+                    Target: 2
+                    Filter: Enemy
+                    ResourcesToGiveToTargets:
+                        - ["Plague", 1]
+                    ResourcesToAddOnAbilityEnd:
+                        - ["Plague", 3]
+                    AnimOverload: TargetedDebuff
+                Range: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnDeath
+                    TriggerAbilitiesImmediately: True
+                    TriggerOnCaster: True
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter:
+                        TargetType: Enemy
+                        UseTargetOriginalType: True
+                        TargetHasCharacterResource: ["Plague"]
+                    XPTracker: [0]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BMoveDebuff:
+                Move: -1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffMove
+                    ValidAbilityType: Move
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter:
+                        TargetType: Enemy
+                        TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RadialNegative
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Wound$ <sprite name=Wound>"
+        - Row: "$GH2E_Plagueherald2_PLAGUE$"
+        - Row: "$Range$ <sprite name=Range> *TWound.Range* @TWound.Range@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TOnDeath
+            Icon: "Positive_Damage_Enemy_Death"
+            ListLayout: "$GH2E_Plagueherald2_08_T$"
+            Layout: "$GH2E_Plagueherald2_08_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BMoveDebuff
+            Icon: "Negative_MoveMinus"
+            ListLayout: "$GH2E_Plagueherald2_08_B$"
+            Layout: "$GH2E_Plagueherald2_08_B$"

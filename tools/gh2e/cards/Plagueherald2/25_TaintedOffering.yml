@@ -1,0 +1,77 @@
+# card: Tainted Offering
+# top: the ally-Poison cost-consume adds XP 1 and a second attack (Attack 2, Range 3, Poison). "Perform the attack as if
+# you were occupying the same hex as that ally": the attack is made from your own hex: APPROXIMATION (NEEDS PLUGIN for
+# the ally's hex). bottom: Heal 2 + Strengthen on all allies within range 5 that have Poison, the heal ignoring Poison
+# (IgnoreTokens, as Gift of Rot), then each of them may recover one level 1 card from their discard pile (the
+# Sunkeeper 2e's level-1 recover: Vars CardLevel 1, on the same allies).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 4
+                Conditions: Poison
+                AnimOverload: RangedAttack
+        Consumes:
+            TCPoisonAlly:
+                CostAbility:
+                    ParentName: TAttack
+                    Poison: True
+                    Range: 3
+                    Target: 1
+                    Filter:
+                        TargetType: Ally
+                        Vars:
+                            ValidateNoPoison: not target.Tokens.HasKey(CCondition.ENegativeCondition.Poison)
+                    AnimOverload: TargetedDebuff
+                Abilities:
+                    TCAttack2:
+                        ParentName: TAttack
+                        Attack:
+                            Amount: 2
+                            Enhancements: 1
+                        Range: 3
+                        Conditions: Poison
+                        AnimOverload: RangedAttack
+                XP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 2
+                Range: 5
+                Target: -1
+                Conditions: Strengthen
+                Filter:
+                    TargetType: Ally
+                    TargetHasNegativeCondition: Poison
+                AdditionalHealData:
+                    IgnoreTokens: True
+                AnimOverload: RadialPositive
+            BRecover:
+                RecoverDiscardedCards: 1
+                Range: 5
+                Target: -1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                    TargetHasNegativeCondition: Poison
+                Vars:
+                    CardLevel: 1
+                AnimOverload: PositiveBuffTargeted
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Poison$ <sprite name=Poison>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCPoisonAlly
+            Text: "$GH2E_Plagueherald2_25_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*"
+        - Row: "$GH2E_Plagueherald2_25_B$"
+        - Row: "$Strengthen$ <sprite name=Strengthen>"
+        - Row: "$GH2E_Plagueherald2_25_B2$"

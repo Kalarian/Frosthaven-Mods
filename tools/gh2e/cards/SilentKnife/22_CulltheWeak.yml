@@ -1,0 +1,44 @@
+# card: Cull the Weak
+# from Xipe's 99108_Scoundrel2_Cull the Weak.yml; corrected against tools/gh2e/sheets/SilentKnife.json
+# bottom: any enemy with current hit points 2 or less (Xipe also required a normal monster; the card doesn't)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    Enhancements: 1
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            TargetType: Enemy
+                            EnemyType: Normal
+                        XP: 1
+                        AbilityOverrides:
+                            TNormalBuff:
+                                Strength: 1
+                                AttackHasAdvantage: True
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 2
+                Range: 2
+                Target: 2
+                Filter:
+                    TargetType: Enemy
+                    Health: "<= 2"
+            BLoot:
+                Loot: 2
+                Target: -1
+                AnimOverload: Loot
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_SilentKnife_22_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack*"
+        - Row: "$GH2E_SilentKnife_22_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *BLoot*"

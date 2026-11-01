@@ -1,0 +1,74 @@
+# key<TAB>English (card texts as printed on the 2nd edition cards, tools/gh2e/sheets/Doomstalker.json)
+# GH2E_DOOM_<card file ID> (12700 + the card's position): the doomed enemy's status row (the plugin's GHStatusIcons)
+GH2E_Doomstalker2_GRANT	Grant one of your summons:
+GH2E_Doomstalker2_SAME_TARGET	This attack must target the target of the Doomstalker's attack ability.
+GH2E_Doomstalker2_01_T	On the next four deaths of an enemy that has <nobr><b><color=#39BEED>Doom</color></b></nobr> while there is another <sprite name=Enemy> within <nobr><sprite name=Range> 4</nobr>, perform <nobr><sprite name=Attack> 3</nobr>, <nobr><sprite name=Range> 4</nobr>.
+GH2E_Doomstalker2_01_B	Add <nobr><sprite name=Pierce> 2</nobr> to all your attacks targeting this <sprite name=Enemy>.
+GH2E_DOOM_12701	Add <nobr><sprite name=Pierce> 2</nobr> to all your attacks targeting this <sprite name=Enemy>.
+GH2E_SUMMON_ViciousJackal	Vicious Jackal
+GH2E_Doomstalker2_02_B	This <sprite name=Enemy> suffers 1 damage at the start of each of its turns.
+GH2E_DOOM_12702	This <sprite name=Enemy> suffers 1 damage at the start of each of its turns.
+GH2E_Doomstalker2_03_T	Add <sprite name=Wound> and gain <sprite name=XP1> if the target has <nobr><b><color=#39BEED>Doom</color></b></nobr>.
+GH2E_Doomstalker2_04_B	When this <sprite name=Enemy> dies, all <sprite name=Enemy> adjacent to the hex it occupied suffer 2 damage.
+GH2E_DOOM_12704	When this <sprite name=Enemy> dies, all <sprite name=Enemy> adjacent to the hex it occupied suffer 2 damage.
+GH2E_Doomstalker2_05_T	If this attack kills an <sprite name=Enemy>, gain <sprite name=XP1> and you may play one card from your hand or discard pile to perform a <nobr><b><color=#39BEED>Doom</color></b></nobr> action of the card.
+GH2E_Doomstalker2_06_T	Reveal the top card of one monster within <nobr><sprite name=Range> 5</nobr>'s ability card deck.
+GH2E_Doomstalker2_06_B	Target one of your summons or self, <nobr><sprite name=Range> 1</nobr>
+GH2E_Doomstalker2_07_T	Add <nobr>+2 <sprite name=Attack></nobr> and gain <sprite name=XP1> if the target is undamaged.
+GH2E_Doomstalker2_07_B	Your summons add <nobr>+1 <sprite name=Attack></nobr> to all their attacks targeting this <sprite name=Enemy>. Your summons focus on this <sprite name=Enemy>.
+GH2E_DOOM_12707	Your summons add <nobr>+1 <sprite name=Attack></nobr> to all their attacks targeting this <sprite name=Enemy>. Your summons focus on this <sprite name=Enemy>.
+GH2E_Doomstalker2_08_B	Whenever you or one of your summons damages this <sprite name=Enemy>, you may perform <nobr><sprite name=Heal> 2</nobr>, target self or one ally adjacent to this <sprite name=Enemy>.
+GH2E_DOOM_12708	Whenever you or one of your summons damages this <sprite name=Enemy>, you may perform <nobr><sprite name=Heal> 2</nobr>, target self or one ally adjacent to this <sprite name=Enemy>.
+GH2E_Doomstalker2_09_T	Add <sprite name=Immobilize> and gain <sprite name=XP1> if the target has <nobr><b><color=#39BEED>Doom</color></b></nobr>.
+GH2E_Doomstalker2_10_T	Whenever an <sprite name=Enemy> that has <nobr><b><color=#39BEED>Doom</color></b></nobr> dies, instead of moving any <nobr><b><color=#39BEED>Doom</color></b></nobr> on the target to your discard pile, you may discard this card to perform the <nobr><b><color=#39BEED>Doom</color></b></nobr> actions of the cards, targeting an <sprite name=Enemy> within <nobr><sprite name=Range> 3</nobr> of the hex where the <sprite name=Enemy> died.
+GH2E_SUMMON_GreenSnake	Green Snake
+GH2E_Doomstalker2_11_T	Unaffected by difficult terrain.
+GH2E_Doomstalker2_11_T2	This summon is considered to be last in initiative order when determining monster focus.
+GH2E_Doomstalker2_11_B	Add <nobr>+1 <sprite name=Attack></nobr> to all your attacks targeting this <sprite name=Enemy>.
+GH2E_DOOM_12711	Add <nobr>+1 <sprite name=Attack></nobr> to all your attacks targeting this <sprite name=Enemy>.
+GH2E_Doomstalker2_12_T	Your summons add <nobr>+2 <sprite name=Move></nobr> and <sprite name=Jump> to all their move abilities. Your summons focus on this <sprite name=Enemy>.
+GH2E_DOOM_12712	Your summons add <nobr>+2 <sprite name=Move></nobr> and <sprite name=Jump> to all their move abilities. Your summons focus on this <sprite name=Enemy>.
+GH2E_Doomstalker2_13_T	Add <nobr>+2 <sprite name=Attack></nobr> and gain <sprite name=XP1> if the target is adjacent to one of your summons.
+GH2E_SUMMON_BattleBoar	Battle Boar
+GH2E_Doomstalker2_14_T	When attacking, ignore <sprite name=Retaliate>.
+GH2E_Doomstalker2_14_B	Gain advantage on all your attacks this round.
+GH2E_Doomstalker2_16_B	Gain advantage on all your attacks targeting this <sprite name=Enemy>. When this <sprite name=Enemy> dies, shuffle one <sprite name=Curse> card into the monster attack modifier deck.
+GH2E_DOOM_12716	Gain advantage on all your attacks targeting this <sprite name=Enemy>. When this <sprite name=Enemy> dies, shuffle one <sprite name=Curse> card into the monster attack modifier deck.
+GH2E_SUMMON_StaunchGarralev	Staunch Garralev
+GH2E_Doomstalker2_17_T	When you summon this summon, it gains <sprite name=Ward>. Whenever you long rest, this summon gains <sprite name=Ward>.
+GH2E_Doomstalker2_17_T2	Whenever you long rest, the Staunch Garralev gains <sprite name=Ward>.
+GH2E_Doomstalker2_17_B	Your summons focus on this <sprite name=Enemy>. After one of your summons performs an attack targeting this <sprite name=Enemy>, triggering no more than once each round, grant that summon: <nobr><sprite name=Attack> 1</nobr>, <nobr><sprite name=Pierce> 2</nobr>. This attack must target the <sprite name=Enemy> that has <nobr><b><color=#39BEED>Doom</color></b></nobr>.
+GH2E_DOOM_12717	Your summons focus on this <sprite name=Enemy>. After one of your summons performs an attack targeting this <sprite name=Enemy>, triggering no more than once each round, grant that summon: <nobr><sprite name=Attack> 1</nobr>, <nobr><sprite name=Pierce> 2</nobr>. This attack must target the <sprite name=Enemy> that has <nobr><b><color=#39BEED>Doom</color></b></nobr>.
+GH2E_Doomstalker2_18_T	Add <nobr>+2 <sprite name=Attack></nobr> and gain <sprite name=XP1> if the target has <nobr><b><color=#39BEED>Doom</color></b></nobr>.
+GH2E_Doomstalker2_19_T	If you are adjacent to a wall but not occupying a corridor tile, gain <sprite name=Invisible>. At the end of the round, lose <sprite name=Invisible>.
+GH2E_Doomstalker2_19_B	All attacks targeting any summons adjacent to you this round gain disadvantage.
+GH2E_Doomstalker2_20_T	On your next four ranged attacks, add <sprite name=Poison>, then <sprite name=Wound>, then <sprite name=Immobilize>, then <sprite name=Disarm> (one to each attack).
+GH2E_Doomstalker2_20_B	Add <nobr>+2 <sprite name=Attack></nobr> to all your attacks targeting enemies that have <nobr><b><color=#39BEED>Doom</color></b></nobr> this round.
+GH2E_SUMMON_WarRaptor	War Raptor
+GH2E_Doomstalker2_22_T	Gain advantage on your first attack targeting an <sprite name=Enemy> that has <nobr><b><color=#39BEED>Doom</color></b></nobr> each turn.
+GH2E_Doomstalker2_22_T2	All <sprite name=Enemy> lose <sprite name=Invisible> and may no longer gain <sprite name=Invisible>.
+GH2E_Doomstalker2_22_B	Your summons add <sprite name=Wound> to and gain advantage on all their attacks targeting this <sprite name=Enemy>.
+GH2E_DOOM_12722	Your summons add <sprite name=Wound> to and gain advantage on all their attacks targeting this <sprite name=Enemy>.
+GH2E_Doomstalker2_23_B	Target one <sprite name=Enemy> that has <nobr><b><color=#39BEED>Doom</color></b></nobr> at any range
+GH2E_Doomstalker2_24_T	If this attack kills the target, instead of moving any <nobr><b><color=#39BEED>Doom</color></b></nobr> on the target to your discard pile, you may perform the <nobr><b><color=#39BEED>Doom</color></b></nobr> actions of the cards, targeting an <sprite name=Enemy> within <nobr><sprite name=Range> 3</nobr> of the hex where the <sprite name=Enemy> died.
+GH2E_Doomstalker2_24_B	Add <sprite name=Immobilize> to your first attack targeting this <sprite name=Enemy> and add <nobr>+2 <sprite name=Attack></nobr> to your second and third attacks targeting this <sprite name=Enemy>.
+GH2E_DOOM_12724	Add <sprite name=Immobilize> to your first attack targeting this <sprite name=Enemy> and add <nobr>+2 <sprite name=Attack></nobr> to your second and third attacks targeting this <sprite name=Enemy>.
+GH2E_SUMMON_HornedHristek	Horned Hristek
+GH2E_Doomstalker2_25_T	After moving for the first time each round, add <nobr>+2 <sprite name=Attack></nobr> to all attacks for the round.
+GH2E_Doomstalker2_25_T2	Whenever this summon kills an <sprite name=Enemy>, grant it: <nobr><sprite name=Move> +0</nobr>
+GH2E_Doomstalker2_25_B	Your summons focus on this <sprite name=Enemy>. When this <sprite name=Enemy> dies, you and all allies may perform <nobr><sprite name=Heal> 3</nobr>.
+GH2E_DOOM_12725	Your summons focus on this <sprite name=Enemy>. When this <sprite name=Enemy> dies, you and all allies may perform <nobr><sprite name=Heal> 3</nobr>.
+GH2E_Doomstalker2_26_B	When this <sprite name=Enemy> dies, you may perform <nobr><sprite name=Attack> 2</nobr>, <nobr><sprite name=Target> 3</nobr>, <nobr><sprite name=Range> 3</nobr>.
+GH2E_DOOM_12726	When this <sprite name=Enemy> dies, you may perform <nobr><sprite name=Attack> 2</nobr>, <nobr><sprite name=Target> 3</nobr>, <nobr><sprite name=Range> 3</nobr>.
+GH2E_Doomstalker2_27_T	This movement must end in a hex adjacent to an <sprite name=Enemy> that has <nobr><b><color=#39BEED>Doom</color></b></nobr>.
+GH2E_Doomstalker2_27_T2	This attack must target an <sprite name=Enemy> that has <nobr><b><color=#39BEED>Doom</color></b></nobr>.
+GH2E_Doomstalker2_28_T	Add <nobr>+3 <sprite name=Attack></nobr> and gain <sprite name=XP1> if the target has <nobr><b><color=#39BEED>Doom</color></b></nobr>.
+GH2E_SUMMON_GreatArchinotl	Great Archinotl
+GH2E_Doomstalker2_29_T	At initiative 100 each round, this summon performs an additional turn.
+GH2E_Doomstalker2_29_B	Add <nobr>+X <sprite name=Attack></nobr> to all your attacks targeting this <sprite name=Enemy>, where X is the difference between the <sprite name=Range> of the attack and the number of hexes to the <sprite name=Enemy>.
+GH2E_DOOM_12729	Add <nobr>+X <sprite name=Attack></nobr> to all your attacks targeting this <sprite name=Enemy>, where X is the difference between the <sprite name=Range> of the attack and the number of hexes to the <sprite name=Enemy>.
+GH2E_Doomstalker2_30_T	You may immediately play a card from your hand to perform a <nobr><b><color=#39BEED>Doom</color></b></nobr> action of the card.
+GH2E_Doomstalker2_30_B	You may have any number of <nobr><b><color=#39BEED>Doom</color></b></nobr> active on the same target. If you discard this card, you must discard all but one active <nobr><b><color=#39BEED>Doom</color></b></nobr>.
+GH2E_Doomstalker2_30_B2	You may play one card from your hand or discard pile to perform a <nobr><b><color=#39BEED>Doom</color></b></nobr> action of the card.
+AMC_GH2E_Doomstalker2_Attack2Range5_M1	-1, Doomstalker performs: <sprite name=Attack> 2, <sprite name=Range> 5
+AMC_GH2E_Doomstalker2_SummonAttack_P0	+0, grant one of your summons adjacent to the target: <sprite name=Attack> +0

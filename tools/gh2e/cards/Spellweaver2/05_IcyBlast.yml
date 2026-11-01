@@ -1,0 +1,45 @@
+# card: Icy Blast
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                Range: 3
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,R|-1,-1,R|1,-1,R"
+                AnimOverload: TargetedIcyBlast
+                MultiPassAttack: False
+        Consumes:
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Muddle
+                XP: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Enhancements: 1
+Layout:
+    Top:
+        - ColumnWidths: "60,35"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+            - Row: "<size=10%> "
+            - Consume:
+                Name: TCIce
+                Text: "+1 $Attack$ <sprite name=Attack>, $Muddle$ <sprite name=Muddle>, <sprite name=XP1>"
+            - Row: "<size=10%> "
+            - XP: 1
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

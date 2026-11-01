@@ -1,0 +1,64 @@
+# card: Growing Rage
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Filter: Self
+                AnimOverload: PowerUp
+                AddActiveBonus:
+                    Heal: 1
+                    Filter: Self
+                    AnimOverload: Heal
+                    ConditionalOverrides:
+                        THealCO:
+                            Self: True
+                            Requirements:
+                                Vars:
+                                    HalfHealth: Actor.MaxHealthHalfRoundedUp
+                                    ValidateStillLow: Actor.Health + 1 <= HalfHealth
+                            AbilityOverrides:
+                                THealRepeat:
+                                    Strength: 1
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnAttacked
+                    Vars:
+                        EnemyAttacker: TriggerActor
+                        ValidateIsAttackerAdjacent: TriggerActor.IsInRangeOf(TriggerTarget, 1)
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    HPPercentOfMax: "<= 50%"
+                    XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH2E_Berserker2_12_T$"
+            Layout: "$GH2E_Berserker2_12_T$"
+            Icon: Positive_HealSelf_Damage
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Berserker2_12_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

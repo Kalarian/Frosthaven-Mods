@@ -1,0 +1,47 @@
+# card: Soothing Light
+# consume Light: "the target may recover one level 1 card": a recover of its own (level 1 cards only, as Frosthaven's
+# Stamina Potion / Memory Drive write it) on one figure within the heal's range: the player picks the healed figure.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    Enhancements: 1
+                Range:
+                    Amount: 2
+                    Enhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+            TNull:
+                Null: True
+        Consumes:
+            TCLight:
+                Elements: Light
+                Abilities:
+                    TCLightRecover:
+                        ParentName: TNull
+                        RecoverDiscardedCards: 1
+                        Range: 2
+                        Filter:
+                            TargetType: [Self, Ally]
+                            ActorType: Player
+                        Vars:
+                            CardLevel: 1
+                        AnimOverload: PositiveBuffTargeted
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Range$ <sprite name=Range> *THeal.Range* @THeal.Range@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCLight
+            Text: "$GH2E_Sunkeeper2_08_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"

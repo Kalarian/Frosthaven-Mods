@@ -1,0 +1,30 @@
+Parser: HeroSummon
+ID: EnhancementFieldID
+LocKey: $GH2E_SUMMON_EnhancementField$
+Model: SpiritBanner
+# a map token, not a figure: can't be targeted, hurt or block (the 1st edition Ward's flags, seen in a scenario)
+Health: 1
+Move: 0
+Attack: 0
+Range: 0
+Untargetable: True
+Invulnerable: True
+DoesNotBlock: True
+# "Add +1 Attack to all attacks you and all allies perform while within Range 1 of the token": the 1st edition Spirit
+# Banner's aura (+2 there) with Frosthaven's Banner of Strength range aura keys
+OnSummonAbilities:
+    ABuffAttackAura:
+        Attack: 1
+        Range: 1
+        Target: -1
+        Filter: Self
+        ActiveBonus:
+            Behaviour: BuffAttack
+            Duration: Persistent
+            ValidAbilityTypes: [Attack]
+            IsAura: True
+            AuraTargeting: Range
+            AuraFilter: [Ally]
+            ListLayoutOverride: [$GH2E_Tinkerer2_11_T$, Positive_AttackPlus_Ally_Aura]
+        Text: "$GH2E_Tinkerer2_11_T$"
+        AnimOverload: None

@@ -1,0 +1,70 @@
+# card: Heatwave
+# bottom: the +2 is a one-use round attack bonus (Frosthaven's Gale Barrage bottom: round BuffAttack, XPTracker [0]) as a
+# sub-ability on the strengthened ally (UseParentTargets)
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    Enhancements: 1
+                AreaEffect: "0,0,G|2,0,R|4,0,R|1,1,R|3,1,R|5,1,E|2,2,R|4,2,E"
+                AnimOverload: TargetedGenericFlame
+                MultiPassAttack: False
+        Infuse: Fire
+        XP: 1
+    Bottom:
+        Abilities:
+            BStrengthen:
+                Strengthen:
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Target: 1
+                Filter: Ally
+                AnimOverload: TargetedBuff
+                SubAbilities:
+                    BAllyAttackBuff:
+                        Attack: 2
+                        Filter: Ally
+                        UseParentTargets: True
+                        ActiveBonus:
+                            Duration: Round
+                            Behaviour: BuffAttack
+                            XPTracker: [0]
+        Infuse: Fire
+Layout:
+    Top:
+        - ColumnWidths: "60,35"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<size=20%> "
+            - Row:
+                - ColumnWidths: "20,30,30,5"
+                - Column:
+                - Column:
+                    - Infuse: Fire
+                - Column:
+                    - XP: 1
+                - Column:
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen> <size=100%><voffset=1>@BStrengthen@"
+        - Row: "$Range$ <sprite name=Range> *BStrengthen.Range* @BStrengthen.Range@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BAllyAttackBuff
+            ListLayout: "$GH2E_Spellweaver2_14_B$"
+            Layout: "$GH2E_Spellweaver2_14_B$"
+            Icon: "Positive_AttackPlus_Ally"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Fire
+            - Column:
+                - Duration: Round

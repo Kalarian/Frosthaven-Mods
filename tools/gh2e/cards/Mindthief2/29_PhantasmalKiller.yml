@@ -1,0 +1,72 @@
+# card: Phantasmal Killer
+# written from tools/gh2e/sheets/Mindthief.json; first augment = Xipe's (a control on one target of each melee attack,
+# UseParentTargets); the second augment (after each control ability, consume Dark: one controlled enemy suffers 3) is
+# text only (NEEDS PLUGIN). The card's own Attack 3 has no mark (Xipe had one).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                Conditions: Wound
+                Augment:
+                    Type: Melee
+                    Abilities:
+                        TAugmentControl:
+                            ControlActor:
+                                Abilities:
+                                    EnemyWillDoThis:
+                                        Attack: 3
+                                        Range: 1
+                                        Target: 1
+                                        StrengthIsBase: True
+                                        RangeIsBase: True
+                                        TargetIsBase: True
+                                ControlDurationType: ControlForOneAction
+                                ControlActorType: Player
+                            Filter: Enemy
+                            UseParentTargets: True
+                            Target: 1
+                            AnimOverload: MindControl
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    Enhancements: 1
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+            BInvisible:
+                Invisible: True
+                Filter: Self
+                AnimOverload: TurnInvisible
+        Infuse: Dark
+Layout:
+    Top:
+        - Augment:
+            AugmentIcon: Mindthief
+            ParentAbility: TAttack
+            ActiveBonusLayout: "$GH2E_Mindthief2_29_T$ $GH2E_Mindthief2_29_T2$"
+            AugmentAbilityLayout:
+                - Row: "$GH2E_Mindthief2_29_T$"
+                - Row: "<size=20%> "
+                - Row: "$GH2E_Mindthief2_29_T2$"
+            NormalContentLayout:
+                - ColumnWidths: "20,60,20"
+                - Column:
+                - Column:
+                    - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+                    - Row: "$Wound$ <sprite name=Wound>"
+                - Column:
+                    - XP: 1
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *BLoot*"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Invisible$ <sprite name=Invisible>"
+        - Row: "<size=20%> "
+        - Infuse: Dark

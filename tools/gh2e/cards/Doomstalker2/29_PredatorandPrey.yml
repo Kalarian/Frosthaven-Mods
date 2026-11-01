@@ -1,0 +1,60 @@
+# card: Predator and Prey
+# top: Summon Great Archinotl (stand-in model: the 1st edition Swamp Lizard). "At initiative 100 each round, this summon
+# performs an additional turn": no Frosthaven summon shape, text only (NEEDS PLUGIN).
+# bottom: the 1st edition Predator and Prey doom (StatIsBasedOnX TargetDistanceRangeDiff), filtered to your attacks.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: GreatArchinotlID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomAttackDebuff:
+                                Attack: 0
+                                StatIsBasedOnX:
+                                    Strength:
+                                        BasedOn: TargetDistanceRangeDiff
+                                        AddTo: True
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    Filter:
+                                        PlayerClasses: Doomstalker2ID
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: "Summon"
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_GreatArchinotl$
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Doomstalker2_29_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Doom:
+            DoomIcon: Doomstalker
+            ParentAbility: BDoom
+            ActiveBonusLayout: "$GH2E_Doomstalker2_29_B$"
+            DoomAbilityLayout: "$GH2E_Doomstalker2_29_B$"

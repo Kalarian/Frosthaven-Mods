@@ -1,0 +1,49 @@
+# card: Flamethrower
+# from Xipe's 99032_Tinkerer2_Flamethrower.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                    Pierce: 2
+                Conditions: Wound
+                AreaEffect: "0,0,G|2,0,R|1,1,R|3,1,R|2,2,E|4,0,E"
+                AnimOverload: LeftWristFlameThrower
+                MultiPassAttack: False
+        Infuse: Fire
+        XP: 3
+    Bottom:
+        Abilities:
+            # "Grant all adjacent allies and self: Shield 1" for the round: Frosthaven's Hold the Line top (the Banner
+            # Spear) writes the same rule as a self shield plus a round shield on every adjacent ally
+            BShield:
+                Shield: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: FlamethrowerField
+            BAllyShield:
+                Shield: 1
+                Range: 1
+                Target: -1
+                Filter: Ally
+                ActiveBonus:
+                    Duration: Round
+Layout:
+    Top:
+        - ColumnWidths: "65,35"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce*"
+            - Row: "$Wound$ <sprite name=Wound>"
+            - Row: "<size=50%> "
+            - Infuse: Fire
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "$GH2E_Tinkerer2_03_B$"
+        - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield*"
+        - Row: "<size=20%> "
+        - Duration: Round

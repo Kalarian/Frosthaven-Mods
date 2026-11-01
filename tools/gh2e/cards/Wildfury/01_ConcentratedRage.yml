@@ -1,0 +1,47 @@
+# card: Concentrated Rage
+# top: Attack 1 [square], Range 3, Disarm. bottom: the damage-token counter (+1 token per Bear attack or Retaliate
+# damage to it; at 3+ tokens the Bear's next attack spends three for +3 Attack) has no engine counter: APPROXIMATION,
+# a persistent +1 Attack on every Bear attack (the 1st edition Punch Through bottom's aura on the bear, made
+# persistent; about the card's average of +3 every fourth attack). NEEDS PLUGIN for the token counter.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range: 3
+                Conditions: Disarm
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Behaviour: BuffAttack
+                    Duration: Persistent
+                    ValidAbilityTypes: [Attack]
+                    IsAura: True
+                    AuraFilter:
+                        TargetType: [OwnSummon]
+                        HeroSummonClasses: [WildfuryBearID]
+                    AuraTargeting: All
+                AnimOverload: RadialBeneficial
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Disarm$ <sprite name=Disarm>"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Positive_AttackPlus_Ally
+            ListLayout: "$GH2E_Wildfury_01_B$"
+            Layout: "$GH2E_Wildfury_01_B$"
+        - Row: "<size=50%> "
+        - XP: 2
+        - Duration: Persistent

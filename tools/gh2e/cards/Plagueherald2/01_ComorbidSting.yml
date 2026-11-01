@@ -1,0 +1,60 @@
+# card: Comorbid Sting
+# Plague (class mat token) = the character resource "Plague" (resources.yml): the Plagueherald holds a supply of 3,
+# each Plague ability gives 1 to its target and refills the supply at its end (see NOTES.md).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                Range:
+                    Amount: 4
+                    Enhancements: 1
+                Conditions: Poison
+                ResourcesToGiveToTargets:
+                    - ["Plague", 1]
+                ResourcesToAddOnAbilityEnd:
+                    - ["Plague", 3]
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BPoisonAlly:
+                Poison: True
+                Range: 3
+                Filter:
+                    TargetType: Ally
+                    Vars:
+                        ValidateNoPoison: not target.Tokens.HasKey(CCondition.ENegativeCondition.Poison)
+                AnimOverload: TargetedDebuff
+                SubAbilities:
+                    BGrant:
+                        ControlActor:
+                            UseControllingActorPlayerControl: True
+                            Abilities:
+                                BAllyAttack:
+                                    Attack:
+                                        Amount: 2
+                                        Enhancements: 1
+                                    Conditions: Poison
+                                    StrengthIsBase: True
+                                    AnimOverload: Attack
+                            ControlDurationType: ControlForOneAction
+                            ControlActorType: Player
+                        Filter: Ally
+                        UseParentTargets: True
+                        Target: 1
+                        AutoTrigger: True
+                        AnimOverload: ControlAlly
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "$Poison$ <sprite name=Poison>"
+        - Row: "$GH2E_Plagueherald2_PLAGUE$"
+    Bottom:
+        - Row: "$GH2E_Plagueherald2_01_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BGrant.BAllyAttack* <size=100%><voffset=1>@BGrant.BAllyAttack@"
+        - Row: "$Poison$ <sprite name=Poison>"

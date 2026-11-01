@@ -1,0 +1,52 @@
+# card: Stick to the Shadows
+# from Xipe's 99101_Scoundrel2_Stick to the Shadows.yml; corrected against tools/gh2e/sheets/SilentKnife.json
+# top: three-slot persistent +1 Attack, Poison (XP on slot 2), not lost
+# bottom: "if you are adjacent to no enemies" = Frosthaven's requirement shape (Blinkblade Phasing Blades: enemies within
+# RequirementRange 1 counted); "lose Invisible at the end of the round" = the condition's DecrementTrigger Rounds with a
+# round bonus (Drifter Accurate Strikes' "advantage this round" shape)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 1
+                Conditions: Poison
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    XPTracker: [0,1,0]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BInvis:
+                Invisible:
+                    DecrementTrigger: Rounds
+                Filter: Self
+                AnimOverload: SelfPowderInvisibility
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    RequirementActorFilter: Enemy
+                    ValidActorsInRangeOfRequirementRange: "== 0"
+                    RequirementRange: 1
+                ActiveBonus:
+                    Duration: Round
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Positive_Poison_Attack
+            ListLayout: "$GH2E_SilentKnife_14_T$"
+            Layout: "$GH2E_SilentKnife_14_T$"
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_SilentKnife_14_B$"
+        - Row: "<size=50%> "
+        - Duration: Round

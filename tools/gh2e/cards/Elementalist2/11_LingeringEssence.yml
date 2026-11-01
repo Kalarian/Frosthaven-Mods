@@ -1,0 +1,33 @@
+# card: Lingering Essence
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    Null: True
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndRoundAbility
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Enhancements: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH2E_Elementalist2_11_T$"
+            Layout: "$GH2E_Elementalist2_11_T$"
+            Icon: "Positive_Infusion"
+        - Row: "<size=20%> "
+        - Duration: Persistent
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

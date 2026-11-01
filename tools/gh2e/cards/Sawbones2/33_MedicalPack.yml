@@ -1,0 +1,33 @@
+# card: Medical Pack
+# Medical Pack 0444 (sheet position 33): a supply card (the 1st edition's SupplyCard), handed to allies by
+# GiveSupplyCard 13230 (the plugin gives a free copy of the six); never held in the Sawbones' own hand. The self-Poison is mandatory (! box).
+SupplyCard: True
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal: 4
+                Filter: Self
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 1
+                Filter: Self
+                Conditions: Strengthen
+                AnimOverload: Heal
+            BPoison:
+                Poison: True
+                Filter: Self
+                AutoTrigger: True
+                CanSkip: False
+                AnimOverload: SelfDebuff
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal*"
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*"
+        - Row: "$Strengthen$ <sprite name=Strengthen>"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Sawbones2_POISON_SELF$"

@@ -85,8 +85,16 @@ namespace FrosthavenMods
                 CAbilityCard named = giver.CharacterClass.SupplyCards.FirstOrDefault(c => c.ID == id);
                 CAbilityCard free = named == null ? null : giver.CharacterClass.SupplyCards
                     .Where(c => c.Name == named.Name && !held.Contains(c.ID)).OrderBy(c => c.ID).FirstOrDefault();
-                picked.Add(free?.ID ?? id);
-                if (free != null) held.Add(free.ID);
+                // every copy held: give nothing (a second card of the same ID in one hand made the hand screen throw;
+                // the 2e Sawbones' six packs run out fast, 2026-11-01)
+                if (free == null)
+                {
+                    if (named != null && GHClasses.Reported.Add("supply out " + named.Name))
+                        Plugin.Log.LogInfo($"Gloomhaven supply cards: every {named.Name} is held; none given");
+                    continue;
+                }
+                picked.Add(free.ID);
+                held.Add(free.ID);
             }
             __state = __instance.SupplyCardIDs;
             __instance.SupplyCardIDs = picked;

@@ -1,0 +1,47 @@
+# card: Proximity Mine
+# from Xipe's 99050_Tinkerer2_Proximity Mine.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    Enhancements: 1
+                Range: 3
+                AnimOverload: RangedAttack
+                SubAbilities:
+                    # "All enemies adjacent to the target gain Muddle": the 1st edition Rot Maggots shape as played
+                    # (Filter Enemy + TreatAsNonSubAbility + AllTargetsAdjacentToParentTarget; gh_port CARD_FIXES 20304)
+                    TAttackSubMuddle:
+                        Muddle: True
+                        Range: 1
+                        Target: -1
+                        Filter: Enemy
+                        TreatAsNonSubAbility: True
+                        AllTargetsAdjacentToParentTarget: True
+                        AnimOverload: None
+    Bottom:
+        Abilities:
+            # the Trapper's Boar Catcher shape: a trap within range 2 (Range with RangeIsBase)
+            BTrap:
+                Trap:
+                    TrapName: BearTrap
+                    Damage: 2
+                    Conditions: Immobilize
+                Range:
+                    Amount: 2
+                    Enhancements: 1
+                RangeIsBase: True
+                SpawnDelay: 1.8
+                AnimOverload: RangedTrap
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Tinkerer2_21_T$"
+    Bottom:
+        - Row: "$GH2E_Tinkerer2_21_B$"
+        - Row: "<b><size=130%><sprite name=Damage> *BTrap* <sprite name=Immobilize>"
+        - Row: "$Range$ <sprite name=Range> *BTrap.Range* @BTrap.Range@"

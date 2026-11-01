@@ -1,0 +1,93 @@
+# card: Rocky End
+# from Xipe's 99142_Cragheart2_Rocky End.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: Heal 5 on allies in the red hexes (the 1st edition Sentient Growth's sub-heal shape); the consume (missing in
+#   Xipe) appends a create sub-ability on every empty hex of the attack's area (ParentAbility.ValidTilesInAreaAffected,
+#   EmptyHex; an override's SubAbilities are added to the attack's own, CAbility override merge). Bench first.
+# bottom: APPROXIMATION of "obstacles in each featureless hex the target exits with the push": after the push, obstacles
+#   on the shortest path from the target's start hex to its end hex, start included, end excluded
+#   (CustomAbility.GetTilesOnDirectPath; falls back to the start hex). Bench first.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    Enhancements: 1
+                Conditions: Muddle
+                AreaEffect: "0,0,G|2,0,R|4,0,R|1,1,R|3,1,R|2,2,R"
+                AnimOverload: MeleeSmashRockyEnd
+                MultiPassAttack: False
+                SubAbilities:
+                    TAttackSubHeal:
+                        Heal: 5
+                        Filter: Ally
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthObstacles:
+                        ParentName: TAttack
+                        SubAbilities:
+                            TCRockyCreate:
+                                Create: RockSingle
+                                Target: -1
+                                TreatAsNonSubAbility: True
+                                AutoTrigger: True
+                                TileFilter: EmptyHex
+                                Targeting: Custom
+                                TargetingVars:
+                                    AddTilesInRange: ParentAbility.ValidTilesInAreaAffected
+                                SpawnDelay: 2.9
+                                AnimOverload: None
+                XP: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BPush:
+                Push:
+                    Amount: 2
+                    Enhancements: 1
+                Range: 3
+                Filter: Enemy
+                Conditions: Immobilize
+                AnimOverload: TargetedPull
+                SubAbilities:
+                    BPushCreate:
+                        Create: RockSingle
+                        Target: -1
+                        TreatAsNonSubAbility: True
+                        AutoTrigger: True
+                        TileFilter: FeaturelessHex
+                        Targeting: Custom
+                        TargetingVars:
+                            StartTile: ParentAbility.TilesSelected[0]
+                            EndTile: ParentAbility.ActorsToTarget[0].Tile
+                            AddTilesInRange: CustomAbility.GetTilesOnDirectPath(StartTile, EndTile, true, false) || ParentAbility.TilesSelected
+                        SpawnDelay: 2.9
+                        AnimOverload: None
+        Infuse: Earth
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "60,40"
+            - Column:
+                - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Row: "$Muddle$ <sprite name=Muddle>"
+                - Row: "<size=50%> "
+                - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *TAttackSubHeal*"
+                - Row: "$GH2E_Cragheart2_27_T$"
+            - Column:
+                - Row: "£Area£"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCEarth
+            Text: "$GH2E_Cragheart2_27_T2$"
+    Bottom:
+        - Row: "<b><size=130%>$Push$ <sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"
+        - Row: "$Range$ <sprite name=Range> *BPush.Range*"
+        - Row: "$Immobilize$ <sprite name=Immobilize>"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Cragheart2_27_B$"
+        - Row: "<size=20%> "
+        - Infuse: Earth

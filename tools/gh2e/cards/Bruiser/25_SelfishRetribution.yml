@@ -1,0 +1,49 @@
+# card: Selfish Retribution
+# 2e sheet: top Move 1 [circle], Loot 2, XP 1, lost; bottom Move 3 [circle], Retaliate 2 [square], "gain XP 1 the
+# next time you retaliate this round", round. The XP is ProcXP on the round retaliate (as Eye for an Eye; NOTES.md);
+# Xipe's flat XP 1 for playing the bottom is gone.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 1
+                    CircleEnhancements: 1
+            TLoot:
+                Loot: 2
+                Target: -1
+                AnimOverload: Loot
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BRetaliate:
+                Retaliate:
+                    Amount: 2
+                    SquareEnhancements: 1
+                ActiveBonus:
+                    Duration: Round
+                    ProcXP: 1
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *TLoot*"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BRetaliate
+            Icon: Positive_XP_Retaliate
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*, $GH2E_Bruiser_25_B$"
+            Layout:
+                - Row: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
+                - Row: "<size=20%> "
+                - Row: "$GH2E_Bruiser_25_B$"
+        - Row: "<size=20%> "
+        - Duration: Round

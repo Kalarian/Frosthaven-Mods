@@ -1,0 +1,86 @@
+# card: Invocation of Absorption
+# top: "! consume Earth (required)" + invocation: after each of the Bear's next three attacks, once each round, all
+# enemies within range 2 of the Bear suffer damage 1 and the Bear performs Heal X, self (X = enemies damaged). The added
+# ability is the Bear's Damage 1 on all enemies within range 2, with a Heal sub-ability whose value is the number of
+# figures the damage targeted (Blinkblade The Knife's Edge: StatIsBasedOnX ActorsTargetedByParentAbility,
+# TreatAsNonSubAbility). Untested inside an active bonus. Three slots, XP on the first. Persistent.
+# bottom: Attack 2 [diamond], Range 4, Push 2 [square], infuse Air.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TConsume:
+                Consume:
+                    Elements: [Earth]
+                    Abilities:
+                        TCNull:
+                            Null: True
+                            AutoTrigger: True
+            TInvoke:
+                AddActiveBonus:
+                    Damage: 1
+                    Range: 2
+                    Target: -1
+                    Filter: Enemy
+                    AutoTrigger: True
+                    SkipAnim: True
+                    SubAbilities:
+                        TAbsorbHeal:
+                            Heal: 0
+                            Filter: Self
+                            AutoTrigger: True
+                            TreatAsNonSubAbility: True
+                            StatIsBasedOnX:
+                                Strength:
+                                    BasedOn: ActorsTargetedByParentAbility
+                            AnimOverload: Heal
+                Filter: Self
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    ActorHasPerformedValidAbilityTypesThisAction: "> 0"
+                    AbilityTypes: [Consume]
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnAttackAbilityFinished
+                    ValidAbilityTypes: [Attack]
+                    Restriction: OncePerRound
+                    XPTracker: [1,0,0]
+                    IsAura: True
+                    AuraFilter:
+                        TargetType: [OwnSummon]
+                        HeroSummonClasses: [WildfuryBearID]
+                    AuraTargeting: All
+                AnimOverload: RadialBeneficial
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 4
+                AnimOverload: RangedAttack
+                SubAbilities:
+                    BAttackSubPush:
+                        Push:
+                            Amount: 2
+                            SquareEnhancements: 1
+                        AnimOverload: None
+        Infuse: Air
+Layout:
+    Top:
+        - Row: "<sprite name=ConsumeEarth> $GH2E_Wildfury_REQUIRED$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TInvoke
+            Icon: Positive_HealSelf_Damage
+            ListLayout: "$GH2E_Wildfury_24_T$"
+            Layout: "$GH2E_Wildfury_24_T$"
+        - Row: "<size=50%> "
+        - XPTracker: TInvoke
+        - Duration: Persistent
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Range$ <sprite name=Range> *BAttack.Range*"
+        - Row: "$Push$ <sprite name=Push> *BAttackSubPush* @BAttackSubPush@"
+        - Row: "<size=50%> "
+        - Infuse: Air

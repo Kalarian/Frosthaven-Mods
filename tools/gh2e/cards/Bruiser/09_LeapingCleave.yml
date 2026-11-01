@@ -1,0 +1,40 @@
+# card: Leaping Cleave
+# 2e sheet: top Attack 3 [square], triangle area (no hex mark), XP 1; bottom Move 3 [square], Jump, Push 2 [square]
+# range 1 as its own ability (Frosthaven's standalone push shape: Push, Range).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AreaEffect: "0,0,G|1,1,R|2,0,R"
+                AnimOverload: RadialAttack
+                MultiPassAttack: False
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Jump: True
+                    SquareEnhancements: 1
+            BPush:
+                Push:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 1
+                AnimOverload: TargetedShout
+Layout:
+    Top:
+        - ColumnWidths: "60,35"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Column: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Push$ <sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"
+        - Row: "$Target_OneAdjacentEnemy$"

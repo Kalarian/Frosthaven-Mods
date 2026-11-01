@@ -1,0 +1,58 @@
+# card: Visage of the Inevitable
+# corrected against tools/gh2e/sheets/SilentKnife.json
+# top: the Attack 4 mark is a square (SquareEnhancements written directly). Flanked and isolated: Disarm on the target
+# and XP 1 by override; Invisible on you as a sub-ability that starts only when the attack targeted such an enemy
+# (Frosthaven's Deepwraith Morbid Camouflage top: an Invisible self sub-ability behind a SubAbility requirement)
+# bottom: Poison on every adjacent enemy, a condition ability (the 1e Visage bottom; Xipe made it an Attack 0)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    SquareEnhancements: 1
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentAllies: "> 0"
+                            TargetAdjacentAlliesOfTarget: "== 0"
+                        XP: 1
+                        AbilityOverrides:
+                            TBothBuff:
+                                Conditions: Disarm
+                SubAbilities:
+                    TInvisible:
+                        Invisible: True
+                        Filter: Self
+                        SkipAnim: True
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsTargetedByAbility: ">= 1"
+                            RequirementActorFilter:
+                                TargetType: Enemy
+                                TargetAdjacentAllies: "> 0"
+                                TargetAdjacentAlliesOfTarget: "== 0"
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BPoison:
+                Poison: True
+                Range: 1
+                Target: -1
+                Filter: Enemy
+                AnimOverload: SelfPowderVisage
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_SilentKnife_25_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Poison$ <sprite name=Poison>"
+        - Row: "$GH2E_SilentKnife_25_B$"

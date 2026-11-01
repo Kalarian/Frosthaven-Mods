@@ -1,0 +1,94 @@
+# card: Entomb
+# from Xipe's 99143_Cragheart2_Entomb.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top consume: two obstacles in empty hexes adjacent to the target but not adjacent to you (Xipe: anywhere within range
+#   3), aimed as Frosthaven's Frozen Fist Bring Down the Mountain aims around a parent's tiles; the damage around them
+#   is the create's own sub-ability (AllTargetsAdjacentToParentTargets, the 1st edition Rock Slide fix)
+# bottom (missing in Xipe): create one obstacle in an adjacent empty hex; destroy up to six obstacles within range 3;
+#   then Ward to as many allies as obstacles were destroyed (CPhaseAction.ObstaclesDestroyedThisAction), chosen among
+#   the allies adjacent to a destroyed obstacle's hex. APPROXIMATION: not paired one ally per obstacle. Bench first.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    Enhancements: 1
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthEntomb:
+                        ParentName: TAttack
+                        SubAbilities:
+                            TCEntombCreate:
+                                Create: RockSingle
+                                Target: 2
+                                TreatAsNonSubAbility: True
+                                TileFilter: EmptyHex
+                                Targeting: Custom
+                                TargetingVars:
+                                    NearMe: CustomAbility.GetAdjacentTiles(TargetingActor.Tile)
+                                    AddTilesInRange: CustomAbility.GetAdjacentTiles(ParentAbility.TilesSelected).Where(NearMe.Contains(obj) == false && obj != TargetingActor.Tile)
+                                SpawnDelay: 2.9
+                                AnimOverload: ObstacleAvalanche
+                                SubAbilities:
+                                    TCEntombDamage:
+                                        AllTargetsAdjacentToParentTargets: True
+                                        Damage: 1
+                                        Range: 1
+                                        Target: -1
+                                        Filter: [Enemy, Ally]
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BCreate:
+                Create: RockSingle
+                Range: 1
+                Target: 1
+                SpawnDelay: 2.9
+                AnimOverload: ObstacleAvalanche
+                MultiPassAttack: False
+            BDestroy:
+                DestroyObstacle: True
+                Range: 3
+                Target: 6
+                Targeting: Range
+                AnimOverload: MeleeSmashRockyEnd
+            BWard:
+                Ward: True
+                Filter: Ally
+                Target: 1
+                AnimOverload: PowerUp
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateDestroyed: CPhaseAction.ObstaclesDestroyedThisAction > 0
+                StatIsBasedOnX:
+                    Target:
+                        BasedOn: Vars
+                        Vars:
+                            Value: CPhaseAction.ObstaclesDestroyedThisAction
+                Targeting: Custom
+                Vars:
+                    DestroyAbility: CustomAbility.FindAbilityInPhaseByName("BDestroy")
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(DestroyAbility.TilesSelected)
+                    AddValidActorsInRange: CustomAbility.GetActorsOnTiles(CustomAbility.GetAdjacentTiles(DestroyAbility.TilesSelected))
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCEarth
+            Text: "$GH2E_Cragheart2_28_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Cragheart2_28_B$"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Cragheart2_28_B2$"

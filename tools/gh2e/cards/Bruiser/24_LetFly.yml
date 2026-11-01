@@ -1,0 +1,58 @@
+# card: Let Fly
+# 2e sheet: top Attack 4 [diamond], Push 4, Wound, Stun, "each enemy occupying a hex the target enters suffers damage 4
+# and gains Wound", XP 2, lost; bottom Attack 2 [square], Push 3, Move 2 [circle].
+# APPROXIMATION / NEEDS PLUGIN: Frosthaven's push has no "figures the pushed target passes through" hook, so the
+# damage 4 + Wound hits the enemies adjacent to the target after the push (Xipe's reading), in the shape the 1st
+# edition Cragheart's Blind Destruction passed with (a damage sub-ability on the attack, AllTargetsAdjacentToParentTargets).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Conditions: [Wound, Stun]
+                AnimOverload: HeavyMeleeAttack
+                SubAbilities:
+                    TAttackSubPush:
+                        Push: 4
+                        AnimOverload: None
+                        IsInlineSubAbility: True
+                    TAttackSubDamage:
+                        IsInlineSubAbility: True
+                        Damage: 4
+                        Conditions: Wound
+                        Range: 1
+                        Target: -1
+                        Filter: [Enemy]
+                        AllTargetsAdjacentToParentTargets: True
+        XP: 2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                SubAbilities:
+                    BAttackSubPush:
+                        Push: 3
+                        AnimOverload: None
+                        IsInlineSubAbility: True
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Push$ <sprite name=Push> *TAttackSubPush*"
+        - Row: "$Wound$ <sprite name=Wound>"
+        - Row: "$Stun$ <sprite name=Stun>"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Bruiser_24_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Push$ <sprite name=Push> *BAttackSubPush*"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

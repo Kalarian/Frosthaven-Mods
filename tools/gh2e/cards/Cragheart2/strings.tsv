@@ -1,0 +1,57 @@
+# key<TAB>English (the 2e Cragheart's card texts, worded as printed; Xipe's GH2E_X_* keys are no longer used)
+GH2E_Cragheart2_01_B	At the end of this and your next four turns, perform: <nobr><sprite name=Heal> 2, <sprite name=Range> 3</nobr>
+GH2E_Cragheart2_02_B	Create one 1-hex obstacle tile in an adjacent empty hex. All allies and enemies adjacent to the created tile suffer <nobr><sprite name=Damage> 1</nobr>.
+GH2E_Cragheart2_04_B	All adjacent allies and enemies suffer <nobr><sprite name=Damage> 1</nobr>.
+GH2E_Cragheart2_05_T	All allies and enemies adjacent to the target suffer <nobr><sprite name=Damage> 1</nobr>.
+GH2E_Cragheart2_06_T	On your next four single-target ranged attack abilities, add +1 <sprite name=Target>.
+GH2E_Cragheart2_07_T	Create two 1-hex obstacle tiles in empty hexes within
+GH2E_Cragheart2_07_T2	All allies adjacent to at least one created tile suffer <nobr><sprite name=Damage> 1</nobr> and gain <nobr><sprite name=Ward>, <sprite name=XP1></nobr>
+GH2E_Cragheart2_08_T	All adjacent allies suffer <nobr><sprite name=Damage> 2</nobr>.
+GH2E_Cragheart2_09_B	All adjacent allies and enemies suffer <nobr><sprite name=Damage> 1</nobr>.
+GH2E_Cragheart2_10_T	<sprite name=Muddle>, target all allies in the red hexes of the attack ability
+GH2E_Cragheart2_11_B	Add +1 Attack for each obstacle or objective adjacent to the target.
+GH2E_Cragheart2_12_T	You may push the target into hexes containing obstacles. In each case, destroy the obstacle, the target suffers <nobr><sprite name=Damage> 2,</nobr> and you gain <sprite name=XP1>.
+GH2E_Cragheart2_12_B	Destroy an adjacent obstacle or suffer <nobr><sprite name=Damage> 1</nobr> to add <nobr>+3 <sprite name=Attack></nobr> to your next melee attack this round.
+GH2E_Cragheart2_12_B2	Heaving Swing: suffer 1 damage, or destroy an adjacent obstacle.
+GH2E_Cragheart2_12_B3	<nobr>+3 <sprite name=Attack></nobr> on your next melee attack this round
+GH2E_Cragheart2_13_T	For each target killed, gain <sprite name=XP1> and create one 1-hex obstacle tile in the featureless hex they occupied.
+GH2E_Cragheart2_14_B	<sprite name=Immobilize>, target all enemies moved through with the move ability, <sprite name=XP1>
+GH2E_Cragheart2_15_T	Target 4 enemies within 4 hexes
+GH2E_Cragheart2_15_T2	Create one 1-hex obstacle tile in the featureless hex each target previously occupied.
+GH2E_Cragheart2_16_T	Target all allies in the red hexes of the attack ability
+GH2E_Cragheart2_16_B	Target all, <nobr><sprite name=Range> 1</nobr>
+GH2E_Cragheart2_17_T	Relocate one adjacent 1-hex obstacle tile to an empty hex within <nobr><sprite name=Range> 4</nobr> to perform:
+GH2E_Cragheart2_17_T2	Target all enemies adjacent to the relocated tile
+GH2E_Cragheart2_17_B	Destroy all obstacles, hazardous terrain, difficult terrain, and traps in hexes you enter.
+GH2E_Cragheart2_19_T	Create three 1-hex obstacle tiles in empty hexes within
+GH2E_Cragheart2_19_T2	All allies and enemies adjacent to at least one created tile suffer <nobr><sprite name=Damage> 1</nobr> and gain <sprite name=Muddle>.
+GH2E_Cragheart2_19_B	Designate one enemy within <nobr><sprite name=Range> 4</nobr>.
+GH2E_Cragheart2_19_B2	Destroy all obstacles within <nobr><sprite name=Range> 2</nobr> of the designated enemy to perform:
+GH2E_Cragheart2_19_B3	Target the designated enemy
+GH2E_Cragheart2_19_B4	where X is twice the number of destroyed obstacles.
+GH2E_Cragheart2_20_T	All allies and enemies adjacent to the target suffer <nobr><sprite name=Damage> 1</nobr>.
+GH2E_Cragheart2_21_B	Grant one ally within <nobr><sprite name=Range> 3</nobr>:
+GH2E_Cragheart2_21_B2	Suffer <nobr><sprite name=Damage> 1</nobr>.
+GH2E_Cragheart2_22_B	Whenever you attack an adjacent enemy, you may destroy one 1-hex obstacle adjacent to both you and that enemy to add <nobr>+2 <sprite name=Attack></nobr> to the attack.
+GH2E_Cragheart2_22_B2	Stone Pummel: choose an adjacent obstacle to destroy for +2 Attack, or skip.
+GH2E_Cragheart2_23_T	Create one <nobr><sprite name=Damage> 2,</nobr> <sprite name=Stun> trap in an adjacent empty hex.
+GH2E_Cragheart2_23_T2	Create one 1-hex obstacle tile in an empty hex adjacent to the created trap.
+GH2E_Cragheart2_24_T	<sprite name=Immobilize>, target all allies in the red hexes of the attack ability
+GH2E_Cragheart2_25_T	Whenever you perform a ranged attack this round, all allies and enemies adjacent to the target suffer <nobr><sprite name=Damage> 1, <sprite name=XP1></nobr>
+GH2E_Cragheart2_25_T2	Destroy any number of adjacent obstacles. For each obstacle destroyed, perform:
+GH2E_Cragheart2_25_T3	This round, your ranged attacks deal <nobr><sprite name=Damage> 1</nobr> to all allies and enemies adjacent to the target
+GH2E_Cragheart2_25_B	All adjacent allies and enemies suffer <nobr><sprite name=Damage> 1</nobr>.
+GH2E_Cragheart2_26_T	Add <nobr>+1 <sprite name=Attack>,</nobr> <nobr>+1 <sprite name=Push></nobr> for each hex containing an obstacle or wall adjacent to you.
+GH2E_Cragheart2_26_B	At the start of your next four turns, perform: <nobr><sprite name=Move> 3.</nobr> Add <nobr>+3 <sprite name=Attack></nobr> to your next melee attack this turn.
+GH2E_Cragheart2_27_T	Target all allies in the red hexes of the attack ability
+GH2E_Cragheart2_27_T2	Create 1-hex obstacle tiles in each empty red hex of the attack ability, <sprite name=XP1>
+GH2E_Cragheart2_27_B	Create 1-hex obstacle tiles in each featureless hex the target exits with the push.
+GH2E_Cragheart2_28_T	Create two 1-hex obstacle tiles in empty hexes adjacent to the target but not adjacent to you. All allies and enemies adjacent to at least one created tile suffer <nobr><sprite name=Damage> 1, <sprite name=XP1></nobr>
+GH2E_Cragheart2_28_B	Create one 1-hex obstacle tile in an adjacent empty hex.
+GH2E_Cragheart2_28_B2	Destroy any number of obstacles within <nobr><sprite name=Range> 3</nobr>. For each obstacle destroyed, give <sprite name=Ward> to one ally adjacent to the hex that obstacle occupied.
+GH2E_Cragheart2_29_T	For each target, add <nobr>+X <sprite name=Attack>,</nobr> where X is the range to that target.
+GH2E_Cragheart2_29_B	You may enter hexes containing obstacles with this movement. When you do, destroy the obstacle.
+GH2E_Cragheart2_29_B2	Add <nobr>+X <sprite name=Attack></nobr> to your next attack this turn, where X is twice the number of obstacles destroyed with the move ability.
+GH2E_Cragheart2_29_B3	<nobr>+X <sprite name=Attack></nobr> on your next attack this turn (2 per obstacle destroyed)
+GH2E_Cragheart2_30_T	You may push the targets into hexes containing obstacles. In each case, destroy the obstacle, the target suffers <nobr><sprite name=Damage> 2,</nobr> and you gain <sprite name=XP1>.
+GH2E_Cragheart2_30_B	At the end of each of your turns, perform: <nobr><sprite name=Heal> X,</nobr> where X is the number of adjacent obstacles.

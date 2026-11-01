@@ -1,0 +1,47 @@
+# card: Bone Breaker
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    Enhancements: 1
+                Conditions: [Wound, Immobilize]
+                AnimOverload: HeavyAttack
+                ConditionalOverrides:
+                    TAttackCO:
+                        Self: True
+                        XP: 1
+                        Requirements:
+                            HPPercentOfMax: "<= 50%"
+                        AbilityOverrides:
+                            TAttackLowHP:
+                                SubAbilities:
+                                    TAttackSubPush:
+                                        Push: 2
+                                        IsInlineSubAbility: True
+                                        AnimOverload: None
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 4
+                Conditions: [StopFlying]
+                AnimOverload: RangedAttack
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Wound$ <sprite name=Wound>"
+        - Row: "$Immobilize$ <sprite name=Immobilize>"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Berserker2_25_T$"
+        - Row: "<size=50%> "
+        - Infuse: Fire
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Range$ <sprite name=Range> *BAttack.Range*"
+        - Row: "$GH2E_Berserker2_25_B$"

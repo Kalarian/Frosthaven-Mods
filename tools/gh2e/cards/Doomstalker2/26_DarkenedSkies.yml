@@ -1,0 +1,49 @@
+# card: Darkened Skies
+# top: the 1st edition Darkened Skies top (target all within range, XP per two enemies), range 4; the stack-with-red-X
+# icon = Permanently Lost (2e rulebook p.34). No enhancement marks on this card.
+# bottom: the 1st edition Darkened Skies doom unchanged.
+Discard: [Permanently Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                Range: 4
+                Target: -1
+                XPPerTarget: 1
+                XPPerTargetPerEnemyCount: 2
+                AnimOverload: RadialAttack
+                MultiPassAttack: False
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomOnDeath:
+                                AddActiveBonus:
+                                    Attack: 2
+                                    Range: 3
+                                    Target: 3
+                                    AnimOverload: RangedAttack
+                                ActiveBonus:
+                                    Behaviour: DuringActionAbilityOnDeath
+                                    TriggerOnCaster: True
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$Target_AllEnemiesWithin$ <nobr>$Range$ <sprite name=Range> *TAttack.Range*</nobr>"
+        - Row: "<size=20%> "
+        - Row: "$XP_PerTwoEnemiesTargeted$"
+    Bottom:
+        - Doom:
+            DoomIcon: Doomstalker
+            ParentAbility: BDoom
+            ActiveBonusLayout: "$GH2E_Doomstalker2_26_B$"
+            DoomAbilityLayout: "$GH2E_Doomstalker2_26_B$"

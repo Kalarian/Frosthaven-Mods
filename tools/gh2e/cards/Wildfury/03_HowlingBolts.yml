@@ -1,0 +1,49 @@
+# card: Howling Bolts
+# top: Attack 2 [diamond], Target 3, Range 4, Pierce 3, infuse Air, XP 2, lost. bottom: COMMAND Heal 3 [square], self
+# (the Bear heals itself), infuse Earth (the Wildfury's half infuses).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Target: 3
+                Range: 4
+                Pierce: 3
+                MultiPassAttack: False
+                AnimOverload: RangedAttack
+        Infuse: Air
+        XP: 2
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyHeal:
+                            Heal:
+                                Amount: 3
+                                SquareEnhancements: 1
+                            Filter: Self
+                            AnimOverload: Heal
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        Infuse: Earth
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target*"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce*"
+        - Row: "<size=50%> "
+        - Infuse: Air
+        - XP: 2
+    Bottom:
+        - Command: True
+        - Row: "<size=130%><b>$Heal$ <sprite name=Heal> *BAllyHeal* <size=100%><voffset=1>@BAllyHeal@"
+        - Row: "<size=50%> "
+        - Infuse: Earth

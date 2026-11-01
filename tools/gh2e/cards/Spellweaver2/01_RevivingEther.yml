@@ -1,0 +1,24 @@
+# card: Reviving Ether
+# top: unrecoverable + lost (the card-stack-with-red-X icon) = Permanently Lost, as the 1st edition card
+Discard: [Permanently Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TRecover:
+                RecoverLostCards: All
+        Infuse: Any
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Enhancements: 1
+                    Jump: True
+Layout:
+    Top:
+        - Row: "$GH2E_Spellweaver2_01_T$"
+        - Row: "<size=20%> "
+        - Infuse: Any
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$Jump$ <sprite name=Jump>"

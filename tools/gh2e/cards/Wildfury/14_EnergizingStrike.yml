@@ -1,0 +1,50 @@
+# card: Energizing Strike
+# top: COMMAND Attack 4 [diamond]; "if you performed the attack ability": Strengthen [diamond+], self (the Bear, the
+# performer of the Command half), gated on an attack this action (Frosthaven's Drifter Consume Stamina requirement).
+# bottom: Heal 1 on all allies, no range (the 1st edition Energizing Strike bottom: Target all, Filter Ally; the
+# Wildfury herself is not an ally).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack:
+                                Amount: 4
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                        TAllyStrengthen:
+                            Strengthen:
+                                DiamondPlusEnhancements: 1
+                            Filter: Self
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                ActorHasPerformedValidAbilityTypesThisAction: "> 0"
+                                AbilityTypes: [Attack]
+                            AnimOverload: PowerUp
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 1
+                Target: -1
+                Targeting: All
+                Filter: Ally
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Command: True
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Wildfury_IF_ATTACKED$"
+        - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen> <size=100%><voffset=1>@TAllyStrengthen@"
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*"
+        - Row: "$Affect_AllAllies$"

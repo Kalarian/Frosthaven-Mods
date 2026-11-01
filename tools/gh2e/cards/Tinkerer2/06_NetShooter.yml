@@ -1,0 +1,43 @@
+# card: Net Shooter
+# from Xipe's 99035_Tinkerer2_Net Shooter.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 3
+                Conditions: Immobilize
+                AreaEffect: "0,0,R|2,0,R|1,1,R|3,1,E"
+                MultiPassAttack: False
+                XPPerTarget: 1
+                AnimOverload: LeftWristTechNetShooter
+    Bottom:
+        Abilities:
+            BImmobilize:
+                Immobilize:
+                    Enhancements: 1
+                Range: 1
+                Filter: Enemy
+                AnimOverload: GadgetAdjacentNetShooter
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+Layout:
+    Top:
+        - ColumnWidths: "65,35"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+            - Row: "$Immobilize$ <sprite name=Immobilize>"
+            - Row: "$XP_PerEnemy$"
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%>$Immobilize$ <sprite name=Immobilize> <size=100%><voffset=1>@BImmobilize@"
+        - Row: "$Range$ <sprite name=Range> *BImmobilize.Range*"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

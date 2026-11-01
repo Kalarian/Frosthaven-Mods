@@ -1,0 +1,68 @@
+# card: Obsidian Shards
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                Target: 2
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                MultiPassAttack: False
+                AnimOverload: TargetFloorObsidian
+        Consumes:
+            TCFireEarth:
+                Elements: [Fire, Earth]
+                AbilityOverrides:
+                    TCFireEarthBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                        Conditions: Muddle
+                XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BCIceEarth:
+                Consume:
+                    Elements: [Ice, Earth]
+                    Abilities:
+                        BNegate:
+                            PreventDamage: 99
+                            Range: 1
+                            Target: -1
+                            Filter: Self
+                            AnimOverload: PowerUp
+                            ActiveBonus:
+                                Behaviour: PreventFirstDamage
+                                Duration: Persistent
+                                IsToggleBonus: True
+                                IsAura: True
+                                AuraFilter: [Self, Ally]
+                                AuraTargeting: Range
+                                XPTracker: [0,1]
+                                ListLayoutOverride: [$GH2E_Elementalist2_20_B$, Positive_DamagePrevent_Ally_Aura]
+                        BInfuse:
+                            Infuse: [Ice, Earth]
+                            ShowElementPicker: True
+                            CanUndo: False
+                            CanSkip: False
+                            SkipAnim: True
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target*"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFireEarth
+            Text: "+2 $Attack$ <sprite name=Attack>, $Muddle$ <sprite name=Muddle>, <sprite name=XP2>"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Elementalist2_20_B$"

@@ -1,0 +1,57 @@
+# card: Withering Claw
+# written from tools/gh2e/sheets/Mindthief.json; augment = the 1st edition Withering Claw's (play-tested)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                Conditions: Immobilize
+                Augment:
+                    Type: Melee
+                    AbilityOverrides:
+                        TAugmentAddMuddlePoison:
+                            ParentName: TAttack
+                            Conditions: [Poison, Muddle]
+        XP: 1
+    Bottom:
+        Abilities:
+            BControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Attack:
+                                Amount: 2
+                                Enhancements: 1
+                            Range: 1
+                            Target: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 4
+                Filter: Enemy
+                AnimOverload: MindControl
+Layout:
+    Top:
+        - Augment:
+            AugmentIcon: Mindthief
+            ParentAbility: TAttack
+            ActiveBonusLayout: "$GH2E_Mindthief2_04_T$"
+            AugmentAbilityLayout:
+                - Row: "$GH2E_Mindthief2_04_T$"
+            NormalContentLayout:
+                - ColumnWidths: "20,60,20"
+                - Column:
+                - Column:
+                    - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                    - Row: "$Immobilize$ <sprite name=Immobilize>"
+                - Column:
+                    - XP: 1
+    Bottom:
+        - Row: "$GH2E_Mindthief2_CONTROL1$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@"

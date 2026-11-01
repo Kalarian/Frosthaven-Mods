@@ -1,0 +1,77 @@
+# card: Divine Intervention
+# top: the 1st edition card's damage redirect (PreventAndApplyToActiveBonusCaster, optional per hit).
+# bottom consume: "enemies' positive and 2x modifier cards count as +0 this round" has no Frosthaven ability (NEEDS
+# PLUGIN): approximated with the nearest the engine has, disadvantage on every attack targeting you or an ally this round.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TPrevent:
+                PreventDamage: 1
+                Filter: [Self]
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: PreventAndApplyToActiveBonusCaster
+                    IsAura: True
+                    AuraFilter: [Ally]
+                    AuraTargeting: All
+                    ToggleIsOptional: True
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 1
+                Range: 3
+                Target: -1
+                Filter: [Self, Ally]
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUpShield
+            BNull:
+                Null: True
+        Consumes:
+            BCLight:
+                Elements: Light
+                Abilities:
+                    BCLightDisadvantage:
+                        ParentName: BNull
+                        AttackersGainDisadvantage: 1
+                        Target: -1
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Round
+                            IsAura: True
+                            AuraFilter: [Self, Ally]
+                            AuraTargeting: All
+                        AnimOverload: PositiveBuffRadial
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TPrevent
+            Icon: "Immune"
+            ListLayout: "$GH2E_Sunkeeper2_23_T$"
+            Layout: "$GH2E_Sunkeeper2_23_T$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Row: "$GH2E_Sunkeeper2_23_B$"
+        - Row: "<size=20%> "
+        - Active:
+            Ability: BShield
+            Icon: "Shield"
+            ListLayout: "$Shield$ <sprite name=Shield> *BShield*"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCLight
+            Text: "$GH2E_Sunkeeper2_23_B2$"
+        - Row: "<size=50%> "
+        - Duration: Round

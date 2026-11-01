@@ -1,0 +1,48 @@
+# card: Warding Blow
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    Enhancements: 1
+                AnimOverload: MeleeSmite
+            TWard:
+                Ward:
+                    Enhancements: 1
+                Filter: Self
+                AnimOverload: PowerUp
+            TNull:
+                Null: True
+        Consumes:
+            TCLight:
+                Elements: Light
+                Abilities:
+                    TCLightHeal:
+                        ParentName: TNull
+                        Heal: 3
+                        Filter: Self
+                        AnimOverload: Heal
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Enhancements: 1
+        Infuse: Light
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Ward$ <sprite name=Ward> <size=100%><voffset=1>@TWard@"
+        - Row: "$Self$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCLight
+            Text: "$Heal$ <sprite name=Heal> 3, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Infuse: Light

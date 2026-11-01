@@ -1,0 +1,49 @@
+# key<TAB>English
+GH2E_SAFEGUARD	Safeguard: prevent the next negative condition
+GH2E_SUMMON_ChromaticConstruct	Chromatic Construct
+GH2E_SUMMON_ElementalConduit	Elemental Conduit
+GH2E_Elementalist2_SAFEGUARD_SHORT	Safeguard
+GH2E_Elementalist2_TWO_TARGET	If you consume two or more elements: +1 <sprite name=Target>, <sprite name=XP1>
+GH2E_Elementalist2_MOVE_IF_ELEMENT	Add +1 <sprite name=Move> if one or more elements are strong or waning
+GH2E_Elementalist2_GRANT_R3	Grant one ally within <nobr><sprite name=Range> 3</nobr>:
+GH2E_Elementalist2_02_B	Move one waning element to the strong column
+GH2E_Elementalist2_03_B	At the start of each of your turns, you may <sprite name=ConsumeWild> to add +1 <sprite name=Attack> to all your attacks that turn
+GH2E_Elementalist2_06_T	<sprite name=Disarm> one enemy adjacent to the ally, <sprite name=CreateAir>
+GH2E_Elementalist2_07_T	Target all enemies within <nobr><sprite name=Range> 4</nobr>
+GH2E_Elementalist2_09_T	<sprite name=Target> the target and two hexes beside it (a 3-hex triangle), <sprite name=CreateFire>
+GH2E_Elementalist2_09_B	At the end of this and your next five turns, in order: <sprite name=CreateMixed-FI>, <sprite name=CreateMixed-AE>, <sprite name=CreateLight>/<sprite name=CreateDark> (then the same order again)
+GH2E_Elementalist2_10_T	<sprite name=ConsumeEarth>: <nobr><sprite name=Heal> 2</nobr>, <nobr><sprite name=Range> 3</nobr>, <sprite name=CreateEarth>
+GH2E_Elementalist2_11_T	Whenever an enemy consumes an element, you may infuse that element
+GH2E_Elementalist2_12_T	You or one ally within <nobr><sprite name=Range> 3</nobr> may <sprite name=RecoverDiscardedCards> one level 1 card from the discard pile
+GH2E_Elementalist2_13_T	Target one ally within <nobr><sprite name=Range> 4</nobr>
+GH2E_Elementalist2_13_B	All attacks targeting you or adjacent allies this round gain <sprite name=Disadvantage>
+GH2E_Elementalist2_14_T	<sprite name=Muddle> all enemies adjacent to the ally
+GH2E_Elementalist2_14_B	<sprite name=ConsumeFire>: Create one <nobr><sprite name=Damage> 2</nobr> trap in an empty hex within <nobr><sprite name=Range> 3</nobr>. All enemies adjacent to the trap suffer <nobr><sprite name=Damage> 1</nobr>, <sprite name=CreateFire>
+GH2E_Elementalist2_17_B	<sprite name=ConsumeIce>: Grant one ally within <nobr><sprite name=Range> 2</nobr>: <nobr><sprite name=Retaliate> 2</nobr>, <nobr><sprite name=Range> 2</nobr> this round, <sprite name=CreateIce>
+GH2E_Elementalist2_19_T	Add -1 <sprite name=Attack>, +2 <sprite name=Range> to each attack for each enemy already attacked with this ability. Each target after the first must be within <nobr><sprite name=Range> 2</nobr> of the previous target.
+GH2E_Elementalist2_20_B	<sprite name=ConsumeIce><sprite name=ConsumeEarth>: on the next two sources of damage you or an adjacent ally would suffer, negate the damage, <sprite name=CreateMixed-IE>
+GH2E_Elementalist2_21_B	<sprite name=ConsumeFire><sprite name=ConsumeAir>: <sprite name=Strengthen>, <sprite name=Bless> two allies within <nobr><sprite name=Range> 3</nobr>, <sprite name=CreateMixed-FA>, <sprite name=XP1>
+GH2E_Elementalist2_22_T	The target may <sprite name=RecoverDiscardedCards> one level 1 card from their discard pile, <sprite name=CreateMixed-AE>
+GH2E_Elementalist2_22_T2	<sprite name=ConsumeMixed-AE>: Grant the target <nobr><sprite name=Shield> 2</nobr> this round
+GH2E_Elementalist2_23_T	All allies in the red hexes gain <sprite name=Invisible>, <sprite name=CreateMixed-FI>
+GH2E_Elementalist2_24_T	Add +1 <sprite name=Attack> for each element that is strong or waning
+GH2E_Elementalist2_26_T	<sprite name=ConsumeFire>: <nobr><sprite name=Attack> 2</nobr>, <nobr><sprite name=Range> 4</nobr>. Create one 1-hex hazardous terrain tile in the featureless hex occupied by the target, <sprite name=XP1>
+GH2E_Elementalist2_26_T2	<sprite name=ConsumeEarth>: <nobr><sprite name=Attack> 2</nobr>, <nobr><sprite name=Range> 4</nobr>, <nobr><sprite name=Push> 3</nobr>, <sprite name=XP1>
+GH2E_Elementalist2_26_B	If you consume two or more elements: +1 <sprite name=Heal>, <sprite name=XP1>, <sprite name=CreateLight>
+GH2E_Elementalist2_27_T	<nobr><sprite name=Attack> 2</nobr> all enemies adjacent to the heal target, <sprite name=Muddle>, <sprite name=XP1>
+GH2E_Elementalist2_27_T2	<nobr><sprite name=Attack> 1</nobr> all enemies at exactly <nobr><sprite name=Range> 2</nobr> from the heal target, <nobr><sprite name=Pierce> 3</nobr>, <sprite name=XP1>
+GH2E_Elementalist2_27_B	If you consume two or more elements: +1 <sprite name=Attack>, <sprite name=XP1>, <sprite name=CreateDark>
+GH2E_Elementalist2_28_T	Flying. After each attack, <sprite name=CreateWild>
+GH2E_Elementalist2_29_T	<sprite name=ConsumeFire><sprite name=ConsumeIce>: <sprite name=Muddle> one enemy within <nobr><sprite name=Range> 4</nobr>; the target suffers <nobr><sprite name=Damage> 5</nobr>
+GH2E_Elementalist2_29_T2	<sprite name=ConsumeAir><sprite name=ConsumeEarth>: Grant one ally within <nobr><sprite name=Range> 4</nobr>: <nobr><sprite name=Shield> 2</nobr>, <nobr><sprite name=Retaliate> 2</nobr> this round
+GH2E_Elementalist2_29_T3	<sprite name=ConsumeLight><sprite name=ConsumeDark>: <nobr><sprite name=Attack> 2</nobr>, <nobr><sprite name=Target> 2</nobr>, <nobr><sprite name=Range> 4</nobr>, <sprite name=Curse>, <sprite name=Advantage>
+GH2E_Elementalist2_29_B	<sprite name=ConsumeLight>: <sprite name=RecoverDiscardedCards> one card from your discard pile, <sprite name=CreateDark>
+GH2E_Elementalist2_29_B2	<sprite name=ConsumeDark>: <nobr><sprite name=Teleport> 4</nobr>, <sprite name=CreateLight>
+AMC_GH2E_Elementalist2_FireAir_P0	+0 Fire or Air
+AMC_GH2E_Elementalist2_FireEarth_P0	+0 Fire or Earth
+AMC_GH2E_Elementalist2_IceAir_P0	+0 Ice or Air
+AMC_GH2E_Elementalist2_IceEarth_P0	+0 Ice or Earth
+AMC_GH2E_Elementalist2_FireIce_P1	+1 Fire or Ice
+AMC_GH2E_Elementalist2_AirEarth_P1	+1 Air or Earth
+AMC_GH2E_Elementalist2_LightDark_P1	+1 Light or Dark
+AMC_GH2E_Elementalist2_Wild_R	Infuse any element (rolling)

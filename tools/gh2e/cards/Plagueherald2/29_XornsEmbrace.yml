@@ -1,0 +1,72 @@
+# card: Xorn's Embrace
+# top: every ally with Poison (no range printed: all of them) is granted Attack 3, Range 3, then Heal X self, X = the
+# damage that attack dealt (Frosthaven's DamageInflictedThisAction, Geminate's Hirudotherapy), ignoring and keeping
+# Poison (IgnoreTokens). Untested: several allies granted in turn by one control. bottom: persistent, at the end of each
+# of your turns one enemy with both Poison and Plague (any range) suffers Damage 3.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TGrant:
+                ControlActor:
+                    UseControllingActorPlayerControl: True
+                    Abilities:
+                        TAllyAttack:
+                            Attack:
+                                Amount: 3
+                                Enhancements: 1
+                            Range:
+                                Amount: 3
+                                Enhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            AnimOverload: RangedAttack
+                        TAllyHeal:
+                            Heal: 0
+                            Filter: Self
+                            StatIsBasedOnX:
+                                Strength:
+                                    BasedOn: DamageInflictedThisAction
+                            AdditionalHealData:
+                                IgnoreTokens: True
+                            AutoTrigger: True
+                            AnimOverload: PowerUp
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Ally
+                    TargetHasNegativeCondition: Poison
+                AnimOverload: ControlAlly
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Damage: 3
+                    Range: 99
+                    Target: 1
+                    Filter:
+                        TargetType: Enemy
+                        TargetHasNegativeCondition: Poison
+                        TargetHasCharacterResource: ["Plague"]
+                    AnimOverload: TargetedDebuff
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                AnimOverload: PowerUp
+        XP: 2
+Layout:
+    Top:
+        - Row: "$GH2E_Plagueherald2_29_T$"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TGrant.TAllyAttack* <size=100%><voffset=1>@TGrant.TAllyAttack@"
+        - Row: "$Range$ <sprite name=Range> *TGrant.TAllyAttack.Range* @TGrant.TAllyAttack.Range@"
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> X"
+        - Row: "$GH2E_Plagueherald2_29_T2$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: "Positive_Damage_Enemy_Aura"
+            ListLayout: "$GH2E_Plagueherald2_29_B$"
+            Layout: "$GH2E_Plagueherald2_29_B$"

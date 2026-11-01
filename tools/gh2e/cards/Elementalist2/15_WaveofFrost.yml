@@ -1,0 +1,43 @@
+# card: Wave of Frost
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+                Range: 3
+                AreaEffect: "2,3,R|0,3,E|1,2,R|3,2,R|2,1,R|4,1,R|3,0,E"
+                MultiPassAttack: False
+                AnimOverload: AreaHexIce
+        Infuse: Ice
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+        Consumes:
+            BCAir:
+                Elements: Air
+                Infuse: [Air]
+                AbilityOverrides:
+                    BCAirMove:
+                        ParentName: BMove
+                        Strength: 2
+                        Jump: True
+Layout:
+    Top:
+        - ColumnWidths: "60,40"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+            - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+            - Row: "<size=20%> "
+            - Infuse: Ice
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCAir
+            Text: "+2 $Move$ <sprite name=Move>, $Jump$ <sprite name=Jump>, <sprite name=CreateAir>"

@@ -1,0 +1,57 @@
+# card: Accelerated End
+# top: "add Plague and gain XP 1 if the target has Plague" = a conditional override on the target having the resource,
+# as the Hatchet's Follow Through checks The Favorite. bottom: designate one enemy with Plague (any range), then Poison
+# all figures adjacent to it, allies and you included (TreatAsNonSubAbility, see CARD_FIXES 20304 / 20301).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range:
+                    Amount: 4
+                    Enhancements: 1
+                ConditionalOverrides:
+                    TAttackPlagueCO:
+                        Filter:
+                            TargetType: Enemy
+                            TargetHasCharacterResource: ["Plague"]
+                        XP: 1
+                        AbilityOverrides:
+                            TPlagueAdd:
+                                ResourcesToGiveToTargets:
+                                    - ["Plague", 1]
+                ResourcesToAddOnAbilityEnd:
+                    - ["Plague", 3]
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BDesignate:
+                NullTargeting: True
+                Range: 99
+                Target: 1
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: TargetedDebuff
+                SubAbilities:
+                    BPoisonAll:
+                        Poison: True
+                        Range: 1
+                        Target: -1
+                        Filter: [Enemy, Ally, Self]
+                        AllTargetsAdjacentToParentTargets: True
+                        TreatAsNonSubAbility: True
+                        AutoTrigger: True
+                        AnimOverload: RadialNegative
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "$GH2E_Plagueherald2_10_T$"
+    Bottom:
+        - Row: "$GH2E_Plagueherald2_10_B$"
+        - Row: "<b><size=130%>$Poison$ <sprite name=Poison>"
+        - Row: "$GH2E_Plagueherald2_10_B2$"

@@ -1,0 +1,59 @@
+# card: Immovable Phalanx
+# 2e sheet: top Attack 4 [diamond], Shield 1 [square], round; bottom "once each turn, you may treat one move ability
+# from your ability cards as an attack ability of equal value", XP 2, persistent, lost. The 1st edition Immovable
+# Phalanx's toggle bonus (OverrideMoveAbility; the converted attack is melee, one target), once per turn (Xipe).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+            TShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                AnimOverload: PowerUpShield
+                ActiveBonusDuration: Round
+    Bottom:
+        Abilities:
+            BAbilityOverrideAbilityType:
+                AddActiveBonus:
+                    Attack: 0
+                PreviewEffectText: "<sprite name=Move> / <sprite name=Attack>"
+                ActiveBonus:
+                    Behaviour: OverrideMoveAbility
+                    Duration: Persistent
+                    ValidAbilityType: Move
+                    IsToggleBonus: True
+                    Restriction: OncePerTurn
+                    ActiveBonusAbilityOverrides:
+                        BCTypeOverride:
+                            AbilityType: Attack
+                            Target: 1
+                            Range: 1
+                            RangeIsBase: True
+                            TargetIsBase: True
+                            Filter: Enemy
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TShield
+            Icon: Shield
+            ListLayout: "<sprite name=Shield> *TShield*"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+        - Row: "<size=50%> "
+        - Duration: Round
+    Bottom:
+        - Active:
+            Ability: BAbilityOverrideAbilityType
+            ListLayout: "$GH2E_Bruiser_23_B$"
+            Layout: "$GH2E_Bruiser_23_B$"
+            Icon: Positive_Damage_Move
+        - Row: "<size=50%> "
+        - Duration: Persistent

@@ -1,0 +1,49 @@
+# card: Fearsome Blade
+# written from tools/gh2e/sheets/Mindthief.json; the push is the attack's inline sub-ability (1st edition Fearsome Blade)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Conditions: Curse
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 2
+                            Enhancements: 1
+                        IsInlineSubAbility: True
+        Consumes:
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceAttackBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 1
+    Bottom:
+        Abilities:
+            BWound:
+                Wound: True
+                Range: 1
+                Target: 1
+                Filter: Enemy
+                AnimOverload: TargetedDebuff
+            BMove:
+                Move: 4
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Push$ <sprite name=Push> *TAttackSubPush* @TAttackSubPush@"
+        - Row: "$Curse$ <sprite name=Curse>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCIce
+            Text: "+2 <sprite name=Attack>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%>$Wound$ <sprite name=Wound>"
+        - Row: "$Range$ <sprite name=Range> 1"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"

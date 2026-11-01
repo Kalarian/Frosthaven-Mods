@@ -1,0 +1,56 @@
+# card: Race to the Grave
+# bottom: the 1st edition Race to the Grave doom (StartTurnAbility damage on the doomed enemy), damage 1.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: ViciousJackal2ID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomDamage:
+                                AddActiveBonus:
+                                    Damage: 1
+                                    Filter: Self
+                                    IgnoreStun: True
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: StartTurnAbility
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: "Summon"
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_ViciousJackal$
+                    SpecialText:
+                        - Row: "<nobr>$Retaliate$ <sprite name=Retaliate> 1</nobr>"
+                        - Row: "<nobr>$Wound$ <sprite name=Wound></nobr>"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Doom:
+            DoomIcon: Doomstalker
+            ParentAbility: BDoom
+            ActiveBonusLayout: "$GH2E_Doomstalker2_02_B$"
+            DoomAbilityLayout: "$GH2E_Doomstalker2_02_B$"

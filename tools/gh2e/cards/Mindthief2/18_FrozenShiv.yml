@@ -1,0 +1,49 @@
+# card: Frozen Shiv
+# written from tools/gh2e/sheets/Mindthief.json; the Pierce 1 [square] mark is dropped: Frosthaven's reader takes
+# Pierce only as a number (a mapping with an enhancement fails rulecheck), and no Frosthaven card enhances a pierce
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    Enhancements: 1
+                Pierce: 1
+        Infuse: Ice
+    Bottom:
+        Abilities:
+            BAttack1:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BAttack2:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+        Infuse: Ice
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce*"
+        - Row: "<size=20%> "
+        - Infuse: Ice
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack1* <size=100%><voffset=1>@BAttack1@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack2* <size=100%><voffset=1>@BAttack2@"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Ice
+            - Column:
+                - XP: 2

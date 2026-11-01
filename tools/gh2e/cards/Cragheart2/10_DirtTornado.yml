@@ -1,0 +1,50 @@
+# card: Dirt Tornado
+# from Xipe's 99125_Cragheart2_Dirt Tornado.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: no enhancement marks; the Muddle sub-ability on [Enemy, Ally] covers the enemies' Muddle and the allies in the
+# red hexes (the 1st edition card's shape, play-tested)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+                Range: 2
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,R|-1,-1,R|1,-1,R"
+                MultiPassAttack: False
+                AnimOverload: TargetedDirtTornado
+                SubAbilities:
+                    TAttackSubMuddle:
+                        Muddle: True
+                        Filter: [Enemy, Ally]
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "60,40"
+            - Column:
+                - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+                - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+                - Row: "$Muddle$ <sprite name=Muddle>"
+                - Row: "<size=20%> "
+                - Consume:
+                    Name: TCEarth
+                    Text: "+1 $Attack$ <sprite name=Attack>, <sprite name=XP1>"
+            - Column:
+                - Row: "£Area£"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Cragheart2_10_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

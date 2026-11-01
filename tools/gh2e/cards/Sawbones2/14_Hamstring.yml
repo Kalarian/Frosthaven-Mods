@@ -1,0 +1,31 @@
+# card: Hamstring
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Conditions: Immobilize
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 6
+            BImmobilize:
+                Immobilize: True
+                Filter: Self
+                AutoTrigger: True
+                CanSkip: False
+                AnimOverload: SelfDebuff
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Immobilize$ <sprite name=Immobilize>"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Sawbones2_14_B$"

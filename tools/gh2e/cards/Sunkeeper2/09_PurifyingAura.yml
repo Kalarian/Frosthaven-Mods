@@ -1,0 +1,49 @@
+# card: Purifying Aura
+# "attacks performed by an adjacent enemy": the 1st edition card's melee filter (AttackType: Melee).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TRetaliate:
+                Retaliate: 3
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    AttackType: Melee
+                    Behaviour: Retaliate
+                    XPTracker: [1,0,1,0,1]
+    Bottom:
+        Abilities:
+            BStrengthen:
+                Strengthen: True
+                Range:
+                    Amount: 1
+                    Enhancements: 1
+                Target: -1
+                Filter: Ally
+                AnimOverload: PositiveBuffRadial
+        Consumes:
+            BCLight:
+                Elements: Light
+                AbilityOverrides:
+                    BCLightRangeBuff:
+                        ParentName: BStrengthen
+                        Range: 1
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TRetaliate
+            ListLayout: "$GH2E_Sunkeeper2_09_T$"
+            Layout: "$GH2E_Sunkeeper2_09_T$"
+            Icon: "Retaliate"
+        - Row: "<size=50%> "
+        - XPTracker: TRetaliate
+    Bottom:
+        - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen>"
+        - Row: "$Affect_AllAlliesWithin$ <nobr>$Range$ <sprite name=Range> *BStrengthen.Range* @BStrengthen.Range@</nobr>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCLight
+            Text: "+1 $Range$ <sprite name=Range>, <sprite name=XP1>"

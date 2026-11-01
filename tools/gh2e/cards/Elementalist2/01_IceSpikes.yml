@@ -1,0 +1,59 @@
+# card: Ice Spikes
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                AnimOverload: TargetFloorIce
+        Consumes:
+            TCAny:
+                Elements: Any
+                AbilityOverrides:
+                    TCAnyInfuse:
+                        ParentName: TAttack
+                        SubAbilities:
+                            TCAnyInfuseSub:
+                                CanUndo: False
+                                TreatAsNonSubAbility: True
+                                Infuse: [Any]
+                                ShowElementPicker: True
+                                SkipAnim: True
+                XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 5
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Conditions: Immobilize
+                AnimOverload: TargetFloorIce
+        Infuse: [Ice, Earth]
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAny
+            Text: "<sprite name=CreateWild>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Range$ <sprite name=Range> *BAttack.Range* @BAttack.Range@"
+        - Row: "$Immobilize$ <sprite name=Immobilize>"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "50, 50"
+            - Column:
+                - Infuse: Ice
+            - Column:
+                - Infuse: Earth

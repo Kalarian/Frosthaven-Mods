@@ -1,0 +1,51 @@
+# key<TAB>English: the Sawbones' card texts as printed on the 2nd edition cards (tools/gh2e/sheets/Sawbones.json)
+GH2E_SAFEGUARD	Safeguard: prevent the next negative condition
+GH2E_Sawbones2_SG	<b>Safeguard</b>
+GH2E_Sawbones2_SG_R1	<b>Safeguard</b>, target one ally or self within <nobr><sprite name=Range> 1</nobr>
+GH2E_Sawbones2_RX	<b>Prescription:</b> place this card in one adjacent ally's active area ("you" is that ally)
+GH2E_Sawbones2_PACK	Give one adjacent ally one medical pack to gain <sprite name=XP1>
+GH2E_Sawbones2_GRANT_ADJ	Grant one adjacent ally:
+GH2E_Sawbones2_ALL_R1	Target all within <nobr><sprite name=Range> 1</nobr>
+GH2E_Sawbones2_POISON_SELF	<sprite name=Poison>, self
+GH2E_Sawbones2_03_T	Before the heal, remove one negative condition from the target.
+GH2E_Sawbones2_03_B	Remove one negative condition from one adjacent ally.
+GH2E_Sawbones2_04_T	Add +1 <sprite name=Attack>, <sprite name=Wound> and gain <sprite name=XP1> if an ally has an active Prescription.
+GH2E_Sawbones2_05_T	<b>Safeguard</b>, target all within <nobr><sprite name=Range> 1</nobr>
+GH2E_Sawbones2_05_B	When you next perform a Prescription action this round, grant all adjacent allies and self:
+GH2E_Sawbones2_07_T	On the next four sources of damage from attacks targeting you, gain <nobr><sprite name=Shield> 1</nobr> for the attacks.
+GH2E_Sawbones2_08_T	On your next four attacks, add <nobr>+1 <sprite name=Attack></nobr>.
+GH2E_Sawbones2_10_T	Add <nobr>+1 <sprite name=Attack></nobr> to all your attacks targeting damaged enemies.
+GH2E_Sawbones2_11_T	Add +1 <sprite name=Target> and gain <sprite name=XP1> if the target is damaged (for a maximum of one additional target).
+GH2E_Sawbones2_11_B	On the next three negative conditions an enemy would apply to you, prevent the condition.
+GH2E_Sawbones2_13_T	Add <sprite name=Stun> and gain <sprite name=XP1> if the target is damaged.
+GH2E_Sawbones2_13_B	You may treat all your attack abilities and move abilities from your ability cards as heal abilities of equal value plus one. In such cases, ignore all added effects of those abilities.\nWhen treating a move ability as a heal ability, it has <nobr><sprite name=Range> 1</nobr>.
+GH2E_Sawbones2_14_B	<sprite name=Immobilize>, self
+GH2E_Sawbones2_15_T	Grant all allies and self:
+GH2E_Sawbones2_15_T2	Each ally may move the character token backward one slot on one active Prescription they have.
+GH2E_Sawbones2_16_B	At the start of your next three turns where your current hit point value is less than your maximum hit point value, perform: <nobr><sprite name=Heal> 2</nobr>
+GH2E_Sawbones2_17_T	where X is the amount of damage enemies suffered from the attack ability.
+GH2E_Sawbones2_17_B	Remove all negative conditions from the target and give them one medical pack.
+GH2E_Sawbones2_18_T	If the target has an active Prescription, gain <sprite name=XP1> and negate the next damage they would suffer this round.
+GH2E_Sawbones2_18_NEGATE	Negate the next damage you would suffer this round
+GH2E_Sawbones2_19_T	Place a character token on the target. The next three times they lose <sprite name=Stun>, they gain <sprite name=Stun>.
+GH2E_Sawbones2_19_T2	<sprite name=Disarm>, self
+GH2E_Sawbones2_20_T	If this attack kills the target, all enemies adjacent to the hex the target occupied gain <sprite name=Wound>.
+GH2E_Sawbones2_21_T	At the start of your next four turns where you do not have <sprite name=Ward>, perform: <sprite name=Ward>
+GH2E_Sawbones2_21_B	Whenever an adjacent ally would suffer damage this round, negate the damage.
+GH2E_Sawbones2_22_B	Target one ally, enemy, or self within <nobr><sprite name=Range> 1</nobr>
+GH2E_Sawbones2_22_B2	<sprite name=Stun>, target the target of the heal ability
+GH2E_Sawbones2_23_T	Grant one ally who has an active Prescription:
+GH2E_Sawbones2_23_B	Remove one negative condition from one adjacent ally. If you do, gain <sprite name=XP1> and you may give one adjacent enemy the negative condition you removed.
+GH2E_Sawbones2_25_B	At the start of your next three turns, perform: <sprite name=Strengthen>
+GH2E_Sawbones2_26_T	At the start of your next three turns, gain one medical pack.
+GH2E_Sawbones2_26_B	In initiative order, each of your allies may immediately play one "Medical Pack" ability card from their hand to perform one action of the card.
+GH2E_Sawbones2_27_T	Kill one adjacent damaged enemy that has at least two negative conditions and whose current hit point value is 8 or less.
+GH2E_Sawbones2_27_B	The target suffers <nobr><sprite name=Damage> 1</nobr>.
+GH2E_Sawbones2_28_T	Before the heal, remove all negative conditions from the target.
+GH2E_Sawbones2_28_T2	If the target of the heal ability has an active Prescription, gain <sprite name=XP1> and grant them: <nobr><sprite name=Shield> 2</nobr>
+GH2E_Sawbones2_28_B	Whenever you or an ally perform a heal ability on a "Medical Pack" ability card, that character may add <nobr>+4 <sprite name=Attack></nobr> to their next attack that round or <nobr>+4 <sprite name=Move></nobr> to their next move ability that round.
+GH2E_Sawbones2_29_B	Add +1 <sprite name=Target> to your next melee attack ability this round.
+GH2E_Sawbones2_34_B	Remove one negative condition you have.
+AMC_GH2E_Sawbones2_Pack_M2	-2, give one adjacent ally or self one Medical Pack
+AMC_GH2E_Sawbones2_DisarmStun_P1	+1 <sprite name=Stun>, gain <sprite name=Disarm>
+AMC_GH2E_Sawbones2_Heal3Range1_R	<sprite name=Heal> 3, <sprite name=Range> 1 (rolling)

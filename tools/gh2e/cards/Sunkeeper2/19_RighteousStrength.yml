@@ -1,0 +1,42 @@
+# card: Righteous Strength
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TBless:
+                Bless: True
+                Range: 1
+                Target: -1
+                Filter: Ally
+                AnimOverload: PositiveBuffRadial
+        Infuse: Light
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            BCLight:
+                Elements: Light
+                AbilityOverrides:
+                    BCLightTargetBuff:
+                        ParentName: BHeal
+                        Target: 1
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Bless$ <sprite name=Bless>"
+        - Row: "$Affect_AllAdjacentAllies$"
+        - Row: "<size=50%> "
+        - Infuse: Light
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Range$ <sprite name=Range> *BHeal.Range*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCLight
+            Text: "+1 $Target$ <sprite name=Target>, <sprite name=XP1>"

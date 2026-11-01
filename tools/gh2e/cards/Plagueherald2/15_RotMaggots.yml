@@ -1,0 +1,60 @@
+# card: Rot Maggots
+# top: "each ally adjacent to the target gains Poison": in 2e your allies (the class poisons allies on purpose; the
+# 1st edition card meant the target's allies, CARD_FIXES 20304). Filter Ally with TreatAsNonSubAbility (the 20304
+# finding: without it the sub kept the parent's target list). bottom: four end-of-turn triggers (this turn and the next
+# three), each "every enemy suffers 1 per Plague" written flat (1 per enemy with Plague): NEEDS PLUGIN for the count.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Conditions: Poison
+                AnimOverload: RangedAttack
+                SubAbilities:
+                    TAttackSubPoison:
+                        Poison: True
+                        Range: 1
+                        Target: -1
+                        Filter: Ally
+                        AllTargetsAdjacentToParentTargets: True
+                        TreatAsNonSubAbility: True
+                        AutoTrigger: True
+                        AnimOverload: None
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Damage: 1
+                    Target: -1
+                    Targeting: All
+                    Filter:
+                        TargetType: Enemy
+                        TargetHasCharacterResource: ["Plague"]
+                    AnimOverload: RadialNegativeMajor
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [0,1,0,1]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "$Poison$ <sprite name=Poison>"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Plagueherald2_15_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: "Positive_Damage_Enemy_Aura"
+            ListLayout: "$GH2E_Plagueherald2_15_B$"
+            Layout: "$GH2E_Plagueherald2_15_B$"
+        - Row: "<size=50%> "
+        - XPTracker: BActive

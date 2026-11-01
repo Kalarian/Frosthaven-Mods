@@ -1,0 +1,56 @@
+# card: Engulfing Radiance
+# top: "Heal 5, target all" with no range printed (the card beside it, Holy Defense, prints "all, range 1"): read as you
+# and all allies anywhere, as the 1st edition card of the same name.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 5
+                    Enhancements: 1
+                Target: -1
+                Targeting: All
+                Filter: [Self, Ally]
+                AnimOverload: PositiveBuffRadial
+        Infuse: Light
+        XP: 2
+    Bottom:
+        Abilities:
+            BDisadvantage:
+                AttackersGainDisadvantage: 1
+                Range: 4
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Self, Ally]
+                AnimOverload: PositiveBuffRadial
+        Infuse: Light
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Affect_SelfAndAllAllies$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:
+                - XP: 2
+    Bottom:
+        - Active:
+            Ability: BDisadvantage
+            Icon: Disadvantage
+            ListLayout: "$GH2E_Sunkeeper2_17_B$"
+            Layout: "$GH2E_Sunkeeper2_17_B$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:
+                - Duration: Round

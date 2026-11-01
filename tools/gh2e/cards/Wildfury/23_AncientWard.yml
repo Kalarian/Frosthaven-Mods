@@ -1,0 +1,119 @@
+# card: Ancient Ward
+# top: Attack 2 [diamond], Range 4, Disarm; consume Air and Earth (two circles: both): +1 Target, XP 2.
+# bottom: Move 4 [circle]; Heal 1 [square], Target 2 [square], Range 3; consume Air/Earth (split: either, Geminate's
+# ConsumeOnlyOneElement pair): +1 Heal, Safeguard on the heal targets (the class's Safeguard stand-in), XP 1.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 4
+                Conditions: Disarm
+                MultiPassAttack: False
+                AnimOverload: RangedAttack
+        Consumes:
+            TCAirEarth:
+                Elements: [Air, Earth]
+                AbilityOverrides:
+                    TCAirEarthTarget:
+                        ParentName: TAttack
+                        Target: 1
+                XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BHeal:
+                Heal:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            BCAir:
+                Elements: [Air]
+                ConsumeOnlyOneElement: True
+                AbilityOverrides:
+                    BCAirBuff:
+                        ParentName: BHeal
+                        Strength: 1
+                        SubAbilities:
+                            BHealSafeguardA:
+                                AddActiveBonus:
+                                    Null: True
+                                    Filter: Self
+                                    AutoTrigger: True
+                                    SkipAnim: True
+                                Filter: [Self, Ally]
+                                UseParentTargets: True
+                                SkipAnim: True
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: GenericOnNegativeCondition
+                                    IsToggleBonus: True
+                                    XPTracker: [0]
+                                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
+                                    Vars:
+                                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
+                                        ValidateNotScenarioEffect: TriggerAbility.TreatedAsScenarioEffect() == False
+                                        PreventCondition: True
+                XP: 1
+            BCEarth:
+                Elements: [Earth]
+                ConsumeOnlyOneElement: True
+                AbilityOverrides:
+                    BCEarthBuff:
+                        ParentName: BHeal
+                        Strength: 1
+                        SubAbilities:
+                            BHealSafeguardE:
+                                AddActiveBonus:
+                                    Null: True
+                                    Filter: Self
+                                    AutoTrigger: True
+                                    SkipAnim: True
+                                Filter: [Self, Ally]
+                                UseParentTargets: True
+                                SkipAnim: True
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: GenericOnNegativeCondition
+                                    IsToggleBonus: True
+                                    XPTracker: [0]
+                                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
+                                    Vars:
+                                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
+                                        ValidateNotScenarioEffect: TriggerAbility.TreatedAsScenarioEffect() == False
+                                        PreventCondition: True
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Disarm$ <sprite name=Disarm>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAirEarth
+            Text: "<nobr>+1 $Target$ <sprite name=Target>, <sprite name=XP2></nobr>"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<size=130%><b>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Target$ <sprite name=Target> *BHeal.Target* @BHeal.Target@"
+        - Row: "$Range$ <sprite name=Range> *BHeal.Range*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCAir
+            Text: "$GH2E_Wildfury_23_B$"
+        - Consume:
+            Name: BCEarth
+            Text: "$GH2E_Wildfury_23_B$"

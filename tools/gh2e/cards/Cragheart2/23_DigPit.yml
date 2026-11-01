@@ -1,0 +1,69 @@
+# card: Dig Pit
+# from Xipe's 99138_Cragheart2_Dig Pit.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: the obstacle goes in an empty hex adjacent to the created trap (Xipe: within range 1 of you), aimed the way
+# Frosthaven's Infuser Onyx Shards aims around its own created tiles (FindAbilityInPhaseByName + GetAdjacentTiles)
+# bottom: Heal 3 carries a square mark; consume = +1 Target (Xipe's override of 2 added two targets)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPush:
+                Push:
+                    Amount: 2
+                    Enhancements: 1
+                Range: 1
+                Filter: Enemy
+                AnimOverload: TargetedPull
+            TTrap:
+                Trap:
+                    TrapName: BearTrap
+                    Damage: 2
+                    Conditions: Stun
+                SpawnDelay: 2.8
+                Target: 1
+                AnimOverload: ObstacleDigPit
+            TCreate:
+                Create: RockSingle
+                Target: 1
+                TileFilter: EmptyHex
+                Targeting: Custom
+                Vars:
+                    TrapAbility: CustomAbility.FindAbilityInPhaseByName("TTrap")
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(TrapAbility.TilesSelected)
+                SpawnDelay: 2.9
+                AnimOverload: ObstacleAvalanche
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    BCEarthHealBuff:
+                        ParentName: BHeal
+                        Target: 1
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Push$ <sprite name=Push> *TPush* <size=100%><voffset=1>@TPush@"
+        - Row: "$Range$ <sprite name=Range> *TPush.Range*"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Cragheart2_23_T$"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Cragheart2_23_T2$"
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Range$ <sprite name=Range> *BHeal.Range* @BHeal.Range@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCEarth
+            Text: "+1 $Target$ <sprite name=Target>, <sprite name=XP1>"

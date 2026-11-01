@@ -1,0 +1,46 @@
+# card: Arctic Shards
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                Target:
+                    Amount: 2
+                    Enhancements: 1
+                Range: 3
+                Conditions: Muddle
+                AnimOverload: TargetedIcyBlast
+        Infuse: Ice
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 10
+                    Enhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: Light
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target* @TAttack.Target@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Muddle$ <sprite name=Muddle>"
+        - Row: "<size=20%> "
+        - Infuse: Ice
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Range$ <sprite name=Range> *BHeal.Range*"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:
+                - XP: 1

@@ -1,0 +1,91 @@
+# card: Unbreakable Bond
+# top: Attack 3 [diamond], Range 3 [square]; Attack 3 [diamond], Range 3 [square] "as if you occupied the same hex as
+# the Bear": APPROXIMATION, the second attack is commanded (the Bear performs Attack 3, range 3 from its hex); NEEDS
+# PLUGIN to make it the Wildfury's attack. "! infuse Air/Earth (either)": an Infuse ability with the element picker
+# (Infuse [Air, Earth], ShowElementPicker, can't be skipped).
+# bottom: "for the next three rounds, skip your card selection and turn; your other persistents don't advance; the Bear
+# takes two turns at initiative 14 each round under your control": NEEDS PLUGIN. APPROXIMATION: a persistent bonus with
+# the card's three slots (XP on slots 1 and 3, lost after the last): at the start of each of your next three turns the
+# Bear takes one extra controlled turn (Move +0, Attack +0 at its own values; Frosthaven's AddActiveBonus ControlActor
+# on an own summon, Infuser Boon of the Tempest). You still select cards and act; the card economy of skipping three
+# rounds is not modelled. Persistent, lost.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack:
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            Range:
+                                Amount: 3
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            AnimOverload: RangedAttack
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+            TInfuse:
+                Infuse: [Air, Earth]
+                ShowElementPicker: True
+                CanUndo: False
+                CanSkip: False
+                SkipAnim: True
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    ControlActor:
+                        ControlDurationType: ControlForOneAction
+                        Abilities:
+                            BBearMove:
+                                Move: +0
+                            BBearAttack:
+                                Attack: +0
+                                Range: +0
+                    Filter:
+                        TargetType: [OwnSummon]
+                        HeroSummonClasses: [WildfuryBearID]
+                    Target: 1
+                    Targeting: All
+                    IgnoreLOS: True
+                    SkipAnim: True
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                    XPTracker: [1,0,1]
+                AnimOverload: RadialBeneficial
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAllyAttack.Range* @TAllyAttack.Range@"
+        - Row: "$GH2E_Wildfury_27_T$"
+        - Row: "<size=50%> "
+        - Row: "<sprite name=CreateAir>/<sprite name=CreateEarth>"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Positive_Move_Ally_Grant
+            ListLayout: "$GH2E_Wildfury_27_B$"
+            Layout: "$GH2E_Wildfury_27_B$"
+        - Row: "<size=50%> "
+        - XPTracker: BActive
+        - Duration: Persistent

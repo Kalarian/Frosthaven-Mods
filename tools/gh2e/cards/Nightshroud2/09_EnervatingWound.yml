@@ -1,0 +1,70 @@
+# card: Enervating Wound
+# bottom: "whenever an enemy dies within range 2, you may discard this card to grant whoever killed that enemy Heal 2,
+# self" = a death-triggered aura on enemies within range 2 (Deathwalker When Your Time Comes bottom /
+# BannerSpear Set for the Charge aura shape, AuraTargeting Range), one use (XPTracker [0]); the heal is aimed at the
+# killing ability's figure (TriggerAbility.TargetingActor), you or an ally. Unverified that TriggerAbility is the
+# killing ability in this behaviour (NOTES.md).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Pierce: 2
+                Conditions: Wound
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BActive:
+                AddActiveBonus:
+                    Heal: 2
+                    Filter: [Self, Ally]
+                    Target: 1
+                    Targeting: Custom
+                    TargetingVars:
+                        AddValidActorInRange: Killer
+                        AddActorToTarget: Killer
+                    AnimOverload: Heal
+                Range: 2
+                Target: -1
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnDeath
+                    TriggerAbilitiesImmediately: True
+                    TriggerOnCaster: True
+                    IsAura: True
+                    AuraTargeting: Range
+                    AuraFilter:
+                        TargetType: Enemy
+                        UseTargetOriginalType: True
+                    XPTracker: [0]
+                    Vars:
+                        Killer: TriggerAbility.TargetingActor
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Pierce$ <sprite name=Pierce> 2"
+        - Row: "$Wound$ <sprite name=Wound>"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BActive
+            Icon: Positive_Heal
+            ListLayout: "$GH2E_Nightshroud2_09_B$"
+            Layout: "$GH2E_Nightshroud2_09_B$"
+        - Row: "<size=50%> "
+        - Duration: Persistent

@@ -45,7 +45,7 @@ Data:
             TAttack:
                 Attack:
                     Amount: 3
-                    Enhancements: 1      # one per enhancement mark on that value; the converter picks the shape
+                    Enhancements: 1      # one per mark; the converter picks Frosthaven's usual shape for the ability
                 Pierce: 3
     Bottom:
         Abilities:
@@ -73,6 +73,11 @@ Layout:
 ```
 
 - Ability names start with T (top) or B (bottom) and are unique on the card.
+- **Enhancement mark shapes:** 2e prints the shape (the sheet's `[square]`, `[circle]`, `[diamond]`, `[diamond+]`).
+  Plain `Enhancements: N` gets the converter's default for the ability (attack diamond, move circle, heal diamond-plus,
+  conditions diamond / diamond-plus, the rest square). When the printed shape differs, write the slot key itself:
+  `SquareEnhancements: 1`, `CircleEnhancements: 1`, `DiamondEnhancements: 1`, `DiamondPlusEnhancements: 1` (the
+  converter leaves those as written).
 - XP printed in a half's corner: `XP: N` at the half's level (beside `Abilities:`), as in Gloomhaven's files.
 - Round / persistent bonuses: an `ActiveBonus:` block (`Duration: Round` / `Persistent`), as Gloomhaven and
   Frosthaven write them. Use slots: `XPTracker: [..]`, one entry per slot (XP on that slot: 1, else 0). Slot 1 is
@@ -123,7 +128,7 @@ Prescriptions, Supplies + the Quartermaster's item deck, Notes + songs, permanen
 
 ## Summons
 
-`tools/gh2e/cards/<Class>/summons/<Name>.yml`, Gloomhaven HeroSummon format (see `C:\Claude\GH2eData\gh1e_yml\HeroSummon`).
+`tools/gh2e/cards/<Class>/summons/<ID without "ID">.yml` (never a 1st edition summon's file name: build.py refuses it), Gloomhaven HeroSummon format (see `C:\Claude\GH2eData\gh1e_yml\HeroSummon`).
 ID `<Name>2ID` when the 1st edition has a summon of that name with other stats, else `<Name>ID`; `LocKey: $GH2E_SUMMON_<Name>$`
 with its English in strings.tsv. `Model:` must be a summon model the 1st edition pack already ships (the Model value of
 a file in gh1e_yml\HeroSummon), so it shows in game; for a new 2e creature pick the closest one as a stand-in and say

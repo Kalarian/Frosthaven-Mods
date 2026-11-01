@@ -1,0 +1,34 @@
+# key<TAB>English (card texts as printed on the 2nd edition cards, tools/gh2e/sheets/Sunkeeper.json)
+GH2E_Sunkeeper2_03_B	Grant one adjacent ally:
+GH2E_Sunkeeper2_05_T	<nobr><sprite name=Heal> X</nobr>, target one adjacent ally, where X is the target's maximum hit point value.
+GH2E_Sunkeeper2_06_T	Grant one ally within <nobr><sprite name=Range> 3</nobr>:
+GH2E_Sunkeeper2_07_T	One adjacent ally may <nobr>Recover <sprite name=Recover></nobr> one card from their lost pile.
+GH2E_Sunkeeper2_08_T	The target may <nobr>Recover <sprite name=Recover></nobr> one level 1 card from their discard pile, <sprite name=XP1>
+GH2E_Sunkeeper2_09_T	On the next five attacks targeting you performed by an adjacent enemy, gain <nobr><sprite name=Retaliate> 3</nobr>.
+GH2E_Sunkeeper2_10_B	Whenever you or an adjacent ally would suffer damage this round, negate the damage.
+GH2E_Sunkeeper2_11_B	Reduce the <sprite name=Pierce> value of all attacks targeting you by 2.
+GH2E_Sunkeeper2_11_B2	Whenever you perform a move ability, add <nobr>-1 <sprite name=Move></nobr>.
+GH2E_Sunkeeper2_12_B	All attacks targeting you this round gain disadvantage.
+GH2E_Sunkeeper2_13_T	On the next three attacks performed by allies within <nobr><sprite name=Range> 2</nobr>, add <nobr>+1 <sprite name=Attack></nobr> to the attack. If they have <sprite name=Ward>, add <nobr>+2 <sprite name=Attack></nobr> instead.
+GH2E_Sunkeeper2_14_T	On your next three single-target <sprite name=Heal> abilities from your ability cards, additionally target all allies within <nobr><sprite name=Range> 2</nobr> of the primary target.
+GH2E_Sunkeeper2_14_B	<sprite name=Ward>, target one ally within <nobr><sprite name=Range> 2</nobr>, <sprite name=XP1>
+GH2E_Sunkeeper2_15_B	<nobr><sprite name=Heal> 1</nobr>, target all within <nobr><sprite name=Range> 1</nobr>, <sprite name=XP1>
+GH2E_Sunkeeper2_16_B	Grant all allies within <nobr><sprite name=Range> 5</nobr> and self:
+GH2E_Sunkeeper2_17_B	All attacks targeting you or any ally within <nobr><sprite name=Range> 4</nobr> gain disadvantage this round.
+GH2E_Sunkeeper2_21_T	Grant one ally within <nobr><sprite name=Range> 3</nobr>:
+GH2E_Sunkeeper2_21_T2	<nobr><sprite name=Heal> 3</nobr>, target the target of the grant ability, <sprite name=XP1>
+GH2E_Sunkeeper2_23_T	Whenever an ally would suffer damage, you may suffer that damage instead.
+GH2E_Sunkeeper2_23_B	Grant all allies within <nobr><sprite name=Range> 3</nobr> and self:
+GH2E_Sunkeeper2_23_B2	Treat all positive and 2x attack modifier cards drawn by enemies this round to be +0 instead, <sprite name=XP1>
+GH2E_Sunkeeper2_24_B	Whenever you <sprite name=ConsumeLight> during one of your attack abilities, add <nobr>+1 <sprite name=Attack>, <sprite name=Pierce> 1</nobr> to all the attacks and treat all null attack modifier cards drawn as 2x instead.
+GH2E_Sunkeeper2_25_B	That ally may immediately play up to two cards from their hand, performing at most one top and one bottom action of the cards, <sprite name=XP1>
+GH2E_Sunkeeper2_26_T	Designate an adjacent hex containing an enemy to perform:
+GH2E_Sunkeeper2_26_T2	Target all allies adjacent to you or the designated hex
+GH2E_Sunkeeper2_28_T	Grant all allies within <nobr><sprite name=Range> 3</nobr>:
+GH2E_Sunkeeper2_28_B	All allies add <nobr>+1 <sprite name=Attack></nobr> to all their attacks this round.
+GH2E_Sunkeeper2_28_B2	They also gain advantage on all their attacks this round, <sprite name=XP1>
+GH2E_Sunkeeper2_29_T	Gain <sprite name=Flying>. On your next five melee attack abilities, add <nobr>+4 <sprite name=Attack></nobr> to and gain advantage on all attacks.
+GH2E_Sunkeeper2_30_T	One ally targeted with the heal ability may <nobr>Recover <sprite name=Recover></nobr> one card from their discard pile, <sprite name=XP1>
+AMC_GH2E_Sunkeeper2_Light_P0	+0 <sprite name=CreateLight>
+AMC_GH2E_Sunkeeper2_Heal1Range3_P1	+1 "<sprite name=Heal> 1, <sprite name=Range> 3"
+AMC_GH2E_Sunkeeper2_Recover1_M1	-1 "You or an adjacent ally may <sprite name=RecoverIcon> one level 1 card from the discard pile"

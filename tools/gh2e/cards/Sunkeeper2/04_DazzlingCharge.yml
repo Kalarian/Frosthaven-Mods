@@ -1,0 +1,46 @@
+# card: Dazzling Charge
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: Light
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 5
+                    Enhancements: 1
+            BStun:
+                Stun:
+                    Enhancements: 1
+                Range: 1
+                Filter: Enemy
+                AnimOverload: RangedSmite
+        Infuse: Light
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Range$ <sprite name=Range> *THeal.Range*"
+        - Row: "<size=50%> "
+        - Infuse: Light
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Stun$ <sprite name=Stun> <size=100%><voffset=1>@BStun@"
+        - Row: "$Range$ <sprite name=Range> *BStun.Range*"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:
+                - XP: 2

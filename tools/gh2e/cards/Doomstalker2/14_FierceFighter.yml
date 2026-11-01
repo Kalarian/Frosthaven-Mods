@@ -1,0 +1,50 @@
+# card: Fierce Fighter
+# top: the Battle Boar ignores Retaliate when attacking: Frosthaven's Flesh Fiend (Pain Conduit Scarred Effigy) shape
+# in its summon file (OnSummonAbilities, Behaviour BlockRetaliate).
+# bottom: advantage on all your attacks this round (Frosthaven's round BuffAttack with AttackHasAdvantage).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: BattleBoar2ID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BAdvantage:
+                Attack: 0
+                AttackHasAdvantage: True
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    ValidAbilityType: Attack
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: "Summon"
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_BattleBoar$
+                    SpecialText:
+                        - Row: "$GH2E_Doomstalker2_14_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Active:
+            Ability: BAdvantage
+            Icon: Advantage
+            ListLayout: "$GH2E_Doomstalker2_14_B$"
+            Layout: "$GH2E_Doomstalker2_14_B$"
+        - Row: "<size=50%> "
+        - Duration: Round

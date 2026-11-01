@@ -1,0 +1,66 @@
+# card: Blood Pact
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 6
+                    Enhancements: 1
+                AnimOverload: HeavyAttack
+                SubAbilities:
+                    TAttackSubDamage:
+                        Damage: 0
+                        StatIsBasedOnX:
+                            Strength:
+                                BasedOn: PercentageOfCurrentHP
+                                Multiplier: 0.5
+                                RoundingType: ToFloor
+                        Filter: Self
+                        CanSkip: False
+        XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                AnimOverload: PowerUp
+                SubAbilities:
+                    BActiveSub:
+                        AddActiveBonus:
+                            Damage: 1
+                            Filter: Self
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                HP: "> 1"
+                        ActiveBonus:
+                            Duration: Persistent
+                            Behaviour: StartTurnAbility
+        XP: 2
+Layout:
+    Top:
+        - Row: "$GH2E_Berserker2_06_T$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$GH2E_Berserker2_06_B$ $GH2E_Berserker2_06_B2$"
+            Layout:
+                - Row: "$GH2E_Berserker2_06_B$"
+                - Row: "<size=50%> "
+                - Row: "$GH2E_Berserker2_06_B2$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent

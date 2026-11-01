@@ -1,0 +1,73 @@
+# card: Winter's Edge
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    Enhancements: 1
+                Range:
+                    Amount: 2
+                    Enhancements: 1
+                AnimOverload: TargetFloorIce
+        Consumes:
+            TCIceAir:
+                Elements: [Ice, Air]
+                AbilityOverrides:
+                    TCIceAirBuff:
+                        ParentName: TAttack
+                        Range: 3
+                        Pierce: 4
+                XP: 2
+    Bottom:
+        Abilities:
+            BCFireAir:
+                Consume:
+                    Elements: [Fire, Air]
+                    Abilities:
+                        BStrengthen:
+                            Strengthen: True
+                            Filter: Self
+                            AnimOverload: PowerUp
+                        BBless:
+                            Bless: True
+                            Range: 3
+                            Target: 2
+                            Filter: Ally
+                            AnimOverload: TargetedBuff
+                        BInfuse:
+                            Infuse: [Fire, Air]
+                            ShowElementPicker: True
+                            CanUndo: False
+                            CanSkip: False
+                            SkipAnim: True
+                    XP: 1
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 3
+                                Enhancements: 1
+                            StrengthIsBase: True
+                    ControlActorType: Player
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Filter: Ally
+                AnimOverload: ControlAlly
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCIceAir
+            Text: "+3 $Range$ <sprite name=Range>, $Pierce$ <sprite name=Pierce> 4, <sprite name=XP2>"
+    Bottom:
+        - Row: "$GH2E_Elementalist2_21_B$"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Elementalist2_GRANT_R3$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

@@ -1,0 +1,79 @@
+# card: Confluence of Elements
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                AnimOverload: TargetFloorMulti
+        Consumes:
+            TCAnyAny1:
+                Elements: [Any, Any]
+                AbilityOverrides:
+                    TCAnyAnyAttack:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 1
+            TCAnyAny2:
+                Elements: [Any, Any]
+                AbilityOverrides:
+                    TCAnyAnyTarget:
+                        ParentName: TAttack
+                        Target: 1
+                XP: 1
+            TCAnyAny3:
+                Elements: [Any, Any]
+                AbilityOverrides:
+                    TCAnyAnyInfuse:
+                        ParentName: TAttack
+                        SubAbilities:
+                            TCInfuse1:
+                                CanUndo: False
+                                TreatAsNonSubAbility: True
+                                Infuse: [Any]
+                                ShowElementPicker: True
+                                SkipAnim: True
+                            TCInfuse2:
+                                CanUndo: False
+                                TreatAsNonSubAbility: True
+                                Infuse: [Any]
+                                ShowElementPicker: True
+                                SkipAnim: True
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BInfuse:
+                Infuse: [Fire, Earth]
+                ShowElementPicker: True
+                CanUndo: False
+                CanSkip: False
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAnyAny1
+            Text: "+2 $Attack$ <sprite name=Attack>, <sprite name=XP1>"
+        - Consume:
+            Name: TCAnyAny2
+            Text: "+1 $Target$ <sprite name=Target>, <sprite name=XP1>"
+        - Consume:
+            Name: TCAnyAny3
+            Text: "<sprite name=CreateWild> <sprite name=CreateWild>"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Row: "<sprite name=CreateMixed-FE>"

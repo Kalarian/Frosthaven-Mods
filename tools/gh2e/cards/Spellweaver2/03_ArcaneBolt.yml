@@ -1,0 +1,56 @@
+# card: Arcane Bolt
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                AnimOverload: TargetedManaBolt
+        Consumes:
+            TCAny:
+                Elements: Any
+                AbilityOverrides:
+                    TCAnyAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 4
+                    Enhancements: 1
+                Range: 3
+                AnimOverload: TargetedManaBolt
+        Consumes:
+            BCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    BCFireAttackBuff:
+                        ParentName: BAttack
+                        Strength: 1
+                        Pierce: 3
+                XP: 1
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAny
+            Text: "+1 $Attack$ <sprite name=Attack>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Range$ <sprite name=Range> *BAttack.Range*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCFire
+            Text: "+1 $Attack$ <sprite name=Attack>, $Pierce$ <sprite name=Pierce> 3, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - XP: 1

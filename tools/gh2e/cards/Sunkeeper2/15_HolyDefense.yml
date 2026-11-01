@@ -1,0 +1,63 @@
+# card: Holy Defense
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TShield:
+                Shield:
+                    Amount: 1
+                    Enhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+            TNull:
+                Null: True
+        Consumes:
+            TCLight:
+                Elements: Light
+                Abilities:
+                    TCLightHeal:
+                        ParentName: TNull
+                        Heal: 2
+                        Filter: Self
+                        AnimOverload: Heal
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    SquareEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCLight:
+                Elements: Light
+                Abilities:
+                    BCLightHeal:
+                        ParentName: BNull
+                        Heal: 1
+                        Range: 1
+                        Target: -1
+                        Filter: [Self, Ally]
+                        AnimOverload: PositiveBuffRadial
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TShield
+            Icon: "Shield"
+            ListLayout: "$Shield$ <sprite name=Shield> *TShield*"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCLight
+            Text: "$Heal$ <sprite name=Heal> 2, <sprite name=XP1>"
+        - Row: "<size=50%> "
+        - Duration: Round
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCLight
+            Text: "$GH2E_Sunkeeper2_15_B$"

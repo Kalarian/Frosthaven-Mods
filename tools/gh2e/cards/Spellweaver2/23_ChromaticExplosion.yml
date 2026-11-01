@@ -1,0 +1,87 @@
+# card: Chromatic Explosion
+# top: the heal is a plain sub-ability of the area attack with Filter Ally: Frosthaven's sub-ability targeting copies the
+# parent's area and takes every figure in it that passes the filter (CAbilityTargeting.Restart, UseSubAbilityTargeting:
+# AreaEffect from the parent, GetValidActorsInArea), i.e. the allies in the red hexes (Xipe's shape too)
+# bottom: Shield 3 on one ally against the next attack this round (Frosthaven's ShieldIncomingAttacks, one use);
+# consume Ice +3 Shield; consume Fire: the attacker suffers 3 is approximated as Retaliate 3 (any range) for the round
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 4
+                Range: 3
+                Conditions: [Poison, Muddle]
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,R|1,-1,E"
+                AnimOverload: TargetedChromaticExplosion
+                MultiPassAttack: False
+                SubAbilities:
+                    TAllyHeal:
+                        Heal: 4
+                        Conditions: [Strengthen, Bless]
+                        Filter: Ally
+                        AnimOverload: Heal
+        Infuse: [Air, Ice, Fire, Earth, Light, Dark]
+        XP: 1
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 3
+                Range: 3
+                Target: 1
+                Filter: Ally
+                AnimOverload: TargetedBuff
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: ShieldIncomingAttacks
+                    ValidAbilityType: Attack
+                    XPTracker: [0]
+        Consumes:
+            BCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    BCFireRetaliate:
+                        ParentName: BShield
+                        SubAbilities:
+                            BShieldSubRetaliate:
+                                Retaliate: 3
+                                RetaliateRange: 99
+                                Filter: Ally
+                                UseParentTargets: True
+                                ActiveBonusDuration: Round
+                XP: 1
+            BCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    BCIceShield:
+                        ParentName: BShield
+                        Strength: 3
+                XP: 1
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+            - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+            - Row: "$Poison$ <sprite name=Poison>"
+            - Row: "$Muddle$ <sprite name=Muddle>"
+            - Row: "<size=20%> "
+            - Row: "<b><size=130%>$Heal$ <sprite name=Heal> 4"
+            - Row: "$GH2E_Spellweaver2_23_T$"
+            - Row: "$Strengthen$ <sprite name=Strengthen>, $Bless$ <sprite name=Bless>"
+        - Column:
+            - Row: "£Area£"
+            - Row: "<size=20%> "
+            - Infuse: [Air, Ice, Fire, Earth, Light, Dark]
+            - XP: 1
+    Bottom:
+        - Row: "$GH2E_Spellweaver2_23_B$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCFire
+            Text: "$GH2E_Spellweaver2_23_B2$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCIce
+            Text: "+3 $Shield$ <sprite name=Shield>, <sprite name=XP1>"
+        - Duration: Round

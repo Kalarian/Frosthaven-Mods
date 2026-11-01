@@ -1,0 +1,55 @@
+# card: Opposing Strike
+# from Xipe's 99116_Cragheart2_Opposing Strike.yml; corrected against tools/gh2e/sheets/Cragheart.json
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                AreaEffect: "-4,0,E|-2,0,R|0,0,G|2,0,R|4,0,E"
+                AnimOverload: OppositeOpposingStrike
+                MultiPassAttack: False
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Muddle
+                XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Heal: 2
+                    Range: 3
+                    Filter: [Self, Ally]
+                    AnimOverload: Heal
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [1,0,1,0,1]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "60,40"
+            - Column:
+                - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Row: "<size=20%> "
+                - Consume:
+                    Name: TCEarth
+                    Text: "+1 $Attack$ <sprite name=Attack>, $Muddle$ <sprite name=Muddle>, <sprite name=XP1>"
+            - Column:
+                - Row: "£Area£"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$GH2E_Cragheart2_01_B$"
+            Layout: "$GH2E_Cragheart2_01_B$"
+            Icon: "Heal"
+        - Row: "<size=50%> "
+        - XPTracker: BActive

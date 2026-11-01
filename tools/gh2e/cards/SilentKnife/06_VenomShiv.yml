@@ -1,0 +1,40 @@
+# card: Venom Shiv
+# from Xipe's 99093_Scoundrel2_Venom Shiv.yml; corrected against tools/gh2e/sheets/SilentKnife.json
+# bottom: Frosthaven's round pierce buff (Blinkblade Twin Strike bottom: AttackEffect StandardBuff, Pierce 2), limited to
+# ranged attacks the way the Drifter's Precision Aim limits its bonus (ActiveBonus AttackType: Ranged)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Pierce: 1
+                Conditions: Poison
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 0
+                AttackEffect:
+                    Type: StandardBuff
+                    Pierce: 2
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    AttackType: Ranged
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce*"
+        - Row: "$Poison$ <sprite name=Poison>"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Positive_Pierce
+            ListLayout: "$GH2E_SilentKnife_06_B$"
+            Layout: "$GH2E_SilentKnife_06_B$"
+        - Row: "<size=50%> "
+        - Duration: Round

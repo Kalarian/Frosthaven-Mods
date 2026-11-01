@@ -1,0 +1,47 @@
+# card: Sinister Opportunity
+# from Xipe's 99092_Scoundrel2_Sinister Opportunity.yml; corrected against tools/gh2e/sheets/SilentKnife.json
+# three conditional overrides: +1 flanking, +1 isolated, advantage + XP 1 when both (Frosthaven applies every override
+# whose filter passes, CAttackSummary.TargetSummary)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                ConditionalOverrides:
+                    TAttackCO1:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentAllies: "> 0"
+                        AbilityOverrides:
+                            TFlankBuff:
+                                Strength: 1
+                    TAttackCO2:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentAlliesOfTarget: "== 0"
+                        AbilityOverrides:
+                            TIsolatedBuff:
+                                Strength: 1
+                    TAttackCO3:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentAllies: "> 0"
+                            TargetAdjacentAlliesOfTarget: "== 0"
+                        XP: 1
+                        AbilityOverrides:
+                            TBothBuff:
+                                AttackHasAdvantage: True
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 5
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_SilentKnife_05_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"

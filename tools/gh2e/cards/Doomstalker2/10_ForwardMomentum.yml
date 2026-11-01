@@ -1,0 +1,48 @@
+# card: Forward Momentum
+# top: the 1st edition Frightening Curse transfer shape (an aura over doomed enemies: on a death, TransferDooms to an
+# enemy near the dead one's hex, only when one is there), all dooms (-1, as Rising Momentum), Range 3, one use: the
+# card is discarded after it (persistent, not lost).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    TransferDooms: -1
+                    Range: 3
+                    Target: 1
+                    Filter: Enemy
+                    AnimOverload: DoomTarget
+                    AllTargetsAdjacentToParentTarget: True
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnDeath
+                    TriggerOnCaster: True
+                    Requirement:
+                        ValidActorsInRangeOfAddedAbilityRange: "> 0"
+                        RequirementActorFilter:
+                            ActorType: [Enemy, Enemy2]
+                    IsAura: True
+                    AuraFilter:
+                        IsDoomed: True
+                        TargetType: Enemy
+                    AuraTargeting: All
+                    UseTriggerAbilityAsParent: True
+                    XPTracker: [0]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Enhancements: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH2E_Doomstalker2_10_T$"
+            Layout: "$GH2E_Doomstalker2_10_T$"
+            Icon: "Doom"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

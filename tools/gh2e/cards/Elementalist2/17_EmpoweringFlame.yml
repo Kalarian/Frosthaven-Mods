@@ -1,0 +1,54 @@
+# card: Empowering Flame
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                AnimOverload: TargetFloorFireIce
+            TStrengthen:
+                Strengthen:
+                    Enhancements: 1
+                Filter: Self
+                AnimOverload: PowerUp
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BCIce:
+                Consume:
+                    Elements: Ice
+                    Abilities:
+                        BCIceRetaliate:
+                            Retaliate: 2
+                            RetaliateRange: 2
+                            Range: 2
+                            Target: 1
+                            Filter: Ally
+                            ActiveBonusDuration: Round
+                            AnimOverload: TargetedBuff
+                        BCIceInfuse:
+                            Infuse: [Ice]
+                            CanUndo: False
+                            CanSkip: False
+                            SkipAnim: True
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen> <size=100%><voffset=1>@TStrengthen@"
+        - Row: "<size=20%> "
+        - Infuse: Fire
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Elementalist2_17_B$"

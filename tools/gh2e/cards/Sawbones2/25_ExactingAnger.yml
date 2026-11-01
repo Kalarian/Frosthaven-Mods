@@ -1,0 +1,47 @@
+# card: Exacting Anger
+# bottom (Prescription): StartTurnAbility Strengthen on the holder, three slots, placed on one adjacent ally.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    SquareEnhancements: 1
+                Conditions: Disarm
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Strengthen: True
+                    Filter: Self
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                Range: 1
+                Target: 1
+                MiscVars:
+                    GH2E_Prescription: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                    GiveAbilityCardToActor: True
+                    XPTracker: [0,0,0]
+                AnimOverload: BuffAdjacent
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Disarm$ <sprite name=Disarm>"
+    Bottom:
+        - Row: "$GH2E_Sawbones2_RX$"
+        - Row: "<size=20%> "
+        - Active:
+            Ability: BActive
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH2E_Sawbones2_25_B$"
+            Layout: "$GH2E_Sawbones2_25_B$"
+        - Row: "<size=50%> "
+        - XPTracker: BActive
+        - Row: "<size=20%> "
+        - XP: 1

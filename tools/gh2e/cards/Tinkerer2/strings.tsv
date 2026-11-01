@@ -1,0 +1,37 @@
+# key<TAB>English (Tinkerer2, written from the card sheet tools/gh2e/sheets/Tinkerer.json)
+GH2E_SUMMON_Decoy	Decoy
+GH2E_SUMMON_BattleBot	Battle Bot
+GH2E_SUMMON_KillBot	Kill Bot
+GH2E_SUMMON_EnhancementField	Enhancement Field
+GH2E_SUMMON_PerniciousFogger	Pernicious Fogger
+GH2E_SUMMON_TeleportationPad	Teleportation Pad
+GH2E_Tinkerer2_01_B	On your next four single-target heal abilities, add +1 <sprite name=Target>.
+GH2E_Tinkerer2_03_B	Grant yourself and all adjacent allies:
+GH2E_Tinkerer2_08_B	One ally within <nobr><sprite name=Range> 3</nobr> may <nobr>Recover <sprite name=Recover></nobr> all their cards from their discard pile.
+GH2E_Tinkerer2_11_T	You and all allies add <nobr>+1 <sprite name=Attack></nobr> to all attacks performed while within <nobr><sprite name=Range> 1</nobr> of the token.
+GH2E_Tinkerer2_11_B	You and all adjacent allies add <nobr>+1 <sprite name=Attack></nobr> to all attacks this round.
+GH2E_Tinkerer2_13_T	Create one trap in an adjacent empty hex:
+GH2E_Tinkerer2_14_T	Target one ally within <nobr><sprite name=Range> 3</nobr>
+GH2E_Tinkerer2_14_T2	The target may <nobr>Recover <sprite name=Recover></nobr> one level 1 card from their discard pile.
+GH2E_Tinkerer2_14_B	Create one trap in an adjacent empty hex:
+GH2E_Tinkerer2_18_T	Place two tokens. You and all allies may treat the two hexes containing the tokens as adjacent to each other during move abilities.
+GH2E_Tinkerer2_19_B	One ally within <nobr><sprite name=Range> 3</nobr> may <nobr>Recover <sprite name=Recover></nobr> one card from their lost pile.
+GH2E_Tinkerer2_20_B	Grant one adjacent ally:
+GH2E_Tinkerer2_21_T	All enemies adjacent to the target gain <sprite name=Muddle>
+GH2E_Tinkerer2_21_B	Create one trap in an empty hex:
+GH2E_Tinkerer2_23_T	Kill all enemies in the targeted area whose current hit point value is less than or equal to 5.
+GH2E_Tinkerer2_23_T2	Gain 1 XP for each enemy killed.
+GH2E_Tinkerer2_24_B	At the end of this and your next four turns, perform: <nobr><sprite name=Heal> 1,</nobr> <nobr><sprite name=Range> 5,</nobr> <sprite name=Strengthen> <sprite name=Bless> <sprite name=Ward> Safeguard
+GH2E_Tinkerer2_25_T	At the end of this and your next three turns, perform the following twice: <nobr><sprite name=Attack> 2,</nobr> <nobr><sprite name=Range> 5,</nobr> <nobr><sprite name=Pierce> 1</nobr>
+GH2E_Tinkerer2_27_T	At the end of each of their turns, all allies and enemies within <nobr><sprite name=Range> 1</nobr> of the token suffer <nobr><sprite name=Damage> 2.</nobr>
+GH2E_Tinkerer2_28_T	Create one trap in an empty hex:
+GH2E_Tinkerer2_28_B	Grant one adjacent ally:
+GH2E_Tinkerer2_29_T	Grant one ally within <nobr><sprite name=Range> 3:</nobr>
+GH2E_Tinkerer2_29_T2	Suffer <nobr><sprite name=Damage> 2.</nobr>
+GH2E_Tinkerer2_29_B	Control one enemy:
+GH2E_Tinkerer2_29_B2	Target all adjacent enemies, then that enemy gains <sprite name=Stun>
+GH2E_Tinkerer2_30_T	Place the token in an empty hex within <nobr><sprite name=Range> 4.</nobr> At the end of your next turn, perform <nobr><sprite name=Pull> 2</nobr> targeting all enemies within <nobr><sprite name=Range> 2</nobr> of the token, toward the token. Then an enemy in the token's hex suffers <nobr><sprite name=Damage> 5,</nobr> all enemies adjacent to the token suffer <nobr><sprite name=Damage> 1,</nobr> and you discard this card.
+GH2E_Tinkerer2_31_T	Target one ally within <nobr><sprite name=Range> 3</nobr>
+GH2E_Tinkerer2_31_T2	The target of the heal ability may immediately play up to two cards from their hand, performing at most one top and one bottom action of the cards.
+GH2E_Tinkerer2_31_B	One ally within <nobr><sprite name=Range> 3</nobr> may <nobr>Recover <sprite name=Recover></nobr> one card from the lost pile of one ally adjacent to them.
+AMC_GH2E_Tinkerer2_Strengthen_Ally_P2	+2 <sprite name=Strengthen>, one ally

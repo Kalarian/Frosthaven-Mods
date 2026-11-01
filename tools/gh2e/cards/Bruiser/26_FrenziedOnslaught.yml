@@ -1,0 +1,45 @@
+# card: Frenzied Onslaught
+# 2e sheet: top Move 2 [circle], Attack 3 [square], Move 2 [circle], Attack 3 [diamond]; bottom Heal X self, X = the
+# damage you have dealt this turn.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TMove1:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            TAttack1:
+                Attack:
+                    Amount: 3
+                    SquareEnhancements: 1
+            TMove2:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            TAttack2:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 0
+                Filter: Self
+                AnimOverload: Heal
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: DamageInflictedThisTurn
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove1* <size=100%><voffset=1>@TMove1@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove2* <size=100%><voffset=1>@TMove2@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> X <size=100%>"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Bruiser_26_B$"

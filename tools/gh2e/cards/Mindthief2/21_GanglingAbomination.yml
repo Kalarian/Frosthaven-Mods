@@ -1,0 +1,42 @@
+# card: Gangling Abomination
+# written from tools/gh2e/sheets/Mindthief.json; the Rat Monstrosity is summons/RatMonstrosity.yml (2e stats)
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: RatMonstrosityID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    Enhancements: 1
+            BAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TSummon
+            Icon: Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_RatMonstrosity$
+                    SpecialText: "$GH2E_Mindthief2_21_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

@@ -1,0 +1,87 @@
+# card: Dancing Gales
+# top: each consume grants a whole ability on a Null placeholder (Implode's shape, Frosthaven's Sand in the Hourglass):
+# Strengthen self before the attack, an extra Attack 2, Range 3, Muddle after it
+# bottom: the second Attack 3 has no Muddle on the card (Xipe added one)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TNull:
+                Null: True
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 3
+                AnimOverload: RangedAttackAir
+            TNull2:
+                Null: True
+        Consumes:
+            TCFire:
+                Elements: Fire
+                Abilities:
+                    TCStrengthen:
+                        ParentName: TNull
+                        Strengthen: True
+                        Filter: Self
+                        AnimOverload: PowerUp
+            TCIce:
+                Elements: Ice
+                Abilities:
+                    TCAttack:
+                        ParentName: TNull2
+                        Attack: 2
+                        Range: 3
+                        Conditions: Muddle
+                        AnimOverload: TargetedIcyBlast
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack1:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 3
+                AnimOverload: RangedAttackAir
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BAttack2:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 3
+                AnimOverload: RangedAttackAir
+        Infuse: Air
+        XP: 1
+Layout:
+    Top:
+        - Consume:
+            Name: TCFire
+            Text: "$Strengthen$ <sprite name=Strengthen>, $Self$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: TCIce
+            Text: "$Attack$ <sprite name=Attack> 2, $Range$ <sprite name=Range> 3, $Muddle$ <sprite name=Muddle>"
+        - Row: "<size=20%> "
+        - XP: 1
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack1* <size=100%><voffset=1>@BAttack1@"
+        - Row: "$Range$ <sprite name=Range> *BAttack1.Range*"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack2* <size=100%><voffset=1>@BAttack2@"
+        - Row: "$Range$ <sprite name=Range> *BAttack2.Range*"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:
+                - XP: 1

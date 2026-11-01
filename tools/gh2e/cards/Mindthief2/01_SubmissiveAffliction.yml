@@ -1,0 +1,56 @@
+# card: Submissive Affliction
+# written from tools/gh2e/sheets/Mindthief.json; started from Xipe's 99146
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                AttackEffect:
+                    Type: BuffForEachNegativeConditionOnTarget
+                    Strength: 1
+    Bottom:
+        Abilities:
+            BControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Move:
+                                Amount: 1
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 4
+                Filter: Enemy
+                AnimOverload: MindControl
+        # consume Ice: the controlled enemy suffers 2 (Gloomhaven's Suggestion shape: one more commanded ability, the
+        # enemy's own damage on itself)
+        Consumes:
+            BCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    BCIceDamage:
+                        ParentName: BControl
+                        ControlActor:
+                            Abilities:
+                                EnemyWillDoThisDamage:
+                                    Damage: 2
+                                    Filter: Self
+                                    AutoTrigger: True
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Mindthief2_01_T$"
+    Bottom:
+        - Row: "$GH2E_Mindthief2_CONTROL1$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCIce
+            Text: "$GH2E_Mindthief2_01_B$, <sprite name=XP1>"

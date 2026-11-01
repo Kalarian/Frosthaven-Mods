@@ -1,0 +1,64 @@
+# card: Hack to Bits
+# top: the second attack's on-kill Wound is Frosthaven's Deepwraith Slipping into Death shape: a sub-ability on the
+# enemies adjacent to the parent's target, run only when the attack killed it.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack1:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+            TAttack2:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                SubAbilities:
+                    TAttack2SubWound:
+                        Wound: True
+                        Target: -1
+                        Filter: Enemy
+                        AllTargetsAdjacentToParentTargets: True
+                        TreatAsNonSubAbility: True
+                        AnimOverload: RadialDebuff
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsKilledByAbility: "> 0"
+                            RequirementActorFilter:
+                                TargetType: Enemy
+                                EnemyType: [Normal, Elite, Boss]
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BMuddle:
+                Muddle:
+                    DiamondEnhancements: 1
+                Range: 1
+                Filter: Enemy
+                AnimOverload: TargetedDebuff
+            BStrengthen:
+                Strengthen:
+                    DiamondPlusEnhancements: 1
+                Range: 1
+                Filter: Ally
+                AnimOverload: PositiveBuffTargeted
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+        - Row: "$GH2E_Sawbones2_20_T$"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Muddle$ <sprite name=Muddle> <size=100%><voffset=1>@BMuddle@"
+        - Row: "$Range$ <sprite name=Range> *BMuddle.Range*"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen> <size=100%><voffset=1>@BStrengthen@"
+        - Row: "$Target_OneAdjacentAlly$"

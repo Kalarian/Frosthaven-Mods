@@ -1,0 +1,45 @@
+# card: Crippling Malady
+# top: +1 Attack per Plague on each target = the per-target Vars bonus of Wretched Yield (UNVERIFIED expression).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                Range: 99
+                Target: 2
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                ConditionalOverrides:
+                    TAttackCO:
+                        AbilityOverrides:
+                            TPlagueBuff:
+                                StatIsBasedOnX:
+                                    Strength:
+                                        BasedOn: Vars
+                                        AddTo: True
+                                        Vars:
+                                            Value: TargetActor != null and TargetActor.GetCharacterResourceAmount("Plague") or 0
+                AnimOverload: RangedAttack
+        XP: 1
+    Bottom:
+        Abilities:
+            BImmobilize:
+                Immobilize: True
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RadialNegativeMajor
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$GH2E_Plagueherald2_22_T$"
+        - Row: "$GH2E_Plagueherald2_22_T2$"
+    Bottom:
+        - Row: "<b><size=130%>$Immobilize$ <sprite name=Immobilize>"
+        - Row: "$GH2E_Plagueherald2_22_B$"

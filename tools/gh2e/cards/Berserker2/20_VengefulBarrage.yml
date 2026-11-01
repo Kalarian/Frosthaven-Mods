@@ -1,0 +1,59 @@
+# card: Vengeful Barrage
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Filter: Self
+                AnimOverload: PowerUp
+                AddActiveBonus:
+                    Attack: 4
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnDamaged
+                    XPTracker: [0,1,0,1,0,1]
+                    Vars:
+                        EnemyFilter: CAbilityFilterContainer.CreateDefaultEnemyFilter()
+                        ValidateEnemyAdjacent: GameState.GetActorsInRange(TriggerActor, TriggerActor, 1, null, EnemyFilter, null, null, true).Count > 0
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    Enhancements: 1
+            BRetaliate:
+                Retaliate: 2
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+        Consumes:
+            BCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    BCFireRetaliateBuff:
+                        ParentName: BRetaliate
+                        Strength: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH2E_Berserker2_20_T$"
+            Layout: "$GH2E_Berserker2_20_T$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BRetaliate
+            Icon: Retaliate
+            ListLayout: "$Retaliate$ <sprite name=Retaliate> *BRetaliate*"
+            Layout:
+                - Row: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *BRetaliate*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCFire
+            Text: "+1 $Retaliate$ <sprite name=Retaliate>"
+        - Row: "<size=50%> "
+        - Duration: Round

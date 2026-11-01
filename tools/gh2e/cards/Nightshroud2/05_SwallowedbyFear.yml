@@ -1,0 +1,83 @@
+# card: Swallowed by Fear
+# top: "after the attack, if the target has 2 or fewer hit points, kill the target" = a Kill aimed at the attack's
+# target (Frosthaven's Boneshaper Exploding Corpse: a custom-targeted Kill), only when that target is alive with 2 or
+# fewer hit points (StartAbilityRequirements Vars); normal and elite enemies, as the 1st edition's kills.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+            TKill:
+                Kill: True
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+                Target: -1
+                AutoTrigger: True
+                CanSkip: False
+                Targeting: Custom
+                Vars:
+                    Struck: CustomAbility.FindAbilityInPhaseByName("TAttack")
+                TargetingVars:
+                    AddValidActorsInRange: Struck.ActorsToTarget
+                    AddActorsToTarget: Struck.ActorsToTarget
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateLowHealth: Struck != null && Struck.ActorsToTarget.Any(obj.IsDead == False && obj.Health <= 2)
+                AnimOverload: Kill
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BTear:
+                CreateShadow:
+                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+                Range: 1
+                Target: 1
+                AnimOverload: Shadow Manipulation
+            BMove:
+                Move:
+                    Amount: 5
+                    CircleEnhancements: 1
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+        Infuse: Dark
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "+2 $Attack$ <sprite name=Attack>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Nightshroud2_05_T$"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Row: "$GH2E_Nightshroud2_05_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:
+                - XP: 2

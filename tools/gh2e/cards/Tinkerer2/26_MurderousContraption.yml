@@ -1,0 +1,39 @@
+# card: Murderous Contraption
+# from Xipe's 99055_Tinkerer2_Murderous Contraption.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: Killbot2ID
+                AnimOverload: Summon
+        XP: 3
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 5
+                    Enhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: "Summon"
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_KillBot$
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 3
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Range$ <sprite name=Range> *BHeal.Range*"

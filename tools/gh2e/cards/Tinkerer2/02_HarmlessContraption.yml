@@ -1,0 +1,35 @@
+# card: Harmless Contraption
+# from Xipe's 99031_Tinkerer2_Harmless Contraption.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: Decoy2ID
+                AnimOverload: Summon
+        XP: 3
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Enhancements: 1
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: "Summon"
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_Decoy$
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 3
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

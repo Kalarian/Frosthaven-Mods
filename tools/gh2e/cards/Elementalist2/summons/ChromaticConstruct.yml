@@ -1,0 +1,29 @@
+Parser: HeroSummon
+ID: ChromaticConstructID
+LocKey: $GH2E_SUMMON_ChromaticConstruct$
+Model: LavaGolem
+Health:
+    Amount: 7
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+    SquareEnhancements: 1
+Attack: 0
+Range: 1
+# 2e: "Add +1 Attack for each element that is strong or waning." Frosthaven's Bone Horde shape (a hidden persistent
+# BuffAttack whose strength is read from the game state when the summon attacks).
+OnSummonAbilities:
+    TAttackPerElement:
+        Attack: 0
+        Filter: Self
+        SkipAnim: True
+        AutoTrigger: True
+        StatIsBasedOnX:
+            Strength:
+                BasedOn: Vars
+                Vars:
+                    Value: ElementInfusionBoardManager.GetAvailableElements().Count
+        ActiveBonus:
+            Behaviour: BuffAttack
+            Duration: Persistent
+            Hidden: True

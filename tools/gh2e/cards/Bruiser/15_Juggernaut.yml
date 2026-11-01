@@ -1,0 +1,37 @@
+# card: Juggernaut
+# 2e sheet: top Move 2 [circle], Attack 3 [diamond]; bottom "on the next four sources of damage you would suffer,
+# negate the damage", 4 use slots (XP 1 on slots 2, 4), persistent, lost. Frosthaven's own shape (Boneshaper's Life in
+# Death: PreventDamage N with an N-slot XPTracker) and the 1st edition Juggernaut's.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+    Bottom:
+        Abilities:
+            BPrevent:
+                PreventDamage: 4
+                ActiveBonus:
+                    Duration: Persistent
+                    XPTracker: [0,1,0,1]
+                AnimOverload: PowerUpShield
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+    Bottom:
+        - Active:
+            Ability: BPrevent
+            ListLayout: "$GH2E_Bruiser_15_B$"
+            Layout: "$GH2E_Bruiser_15_B$"
+            Icon: Immune
+        - Row: "<size=50%> "
+        - XPTracker: BPrevent

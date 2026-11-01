@@ -116,6 +116,9 @@ def character_file(cls, template):
     if companion.exists():
         body.append("CompanionSummonData: " + companion.read_text(encoding="utf-8").strip())
     body.append(f"Description: ${cls}_DESCRIPTION$")
+    extra = CARDS / cls / "character_extra.yml"   # more character-file keys (StartScenarioAbilities: the Plagueherald's supply)
+    if extra.exists():
+        body += [ln.rstrip() for ln in extra.read_text(encoding="utf-8").splitlines() if ln.strip()]
     return "\n".join(head + body) + "\n", mat
 
 
@@ -133,12 +136,18 @@ def card_file(cls, path, ids, warn):
     if name is None:
         warn(f"{path.name}: no '# card: <name>' line")
         return None
-    if name.lower() not in ids:
+    # the file's position prefix first (several sheet cards may share a name: the Sawbones' six Medical Packs), then the name
+    pos = re.match(r"^(\d+)_", path.name)
+    cards = sheet(cls)["cards"]
+    if pos and 1 <= int(pos.group(1)) <= len(cards) and cards[int(pos.group(1)) - 1]["name"].lower() == name.lower():
+        cid, c = card_id(cls, int(pos.group(1))), cards[int(pos.group(1)) - 1]
+    elif name.lower() in ids:
+        cid, c = ids[name.lower()]
+    else:
         warn(f"{path.name}: card {name!r} is not on the {cls} sheet")
         return None
-    cid, c = ids[name.lower()]
     lines = [ln for ln in s.split("\n") if ln.split(":", 1)[0] not in HEADER_KEYS]
-    level = c["level"]
+    level = c["level"] if str(c["level"]).isdigit() or c["level"] == "X" else "X"   # Gloomhaven writes supply cards (2e "M") as X
     # Gloomhaven's own name keys ($ABILITY_CARD_EyeforanEye$): a key's text is the card's name, so a 2e card sharing a
     # 1st edition card's name shares its key harmlessly (and the test harness reads both packs alike)
     head = ["Parser: AbilityCard", f"Name: $ABILITY_CARD_{name_key(c['name'])}$", f"Character: {cls}ID", f"ID: {cid}",
@@ -168,7 +177,7 @@ def build(classes):
             strings[f"{cls}_ADVENTURE_DESCRIPTION"] = "\n".join(notes)
         ids = card_ids(cls)
         done = set()
-        for p in sorted((CARDS / cls).glob("*.yml")):
+        for p in sorted(q for q in (CARDS / cls).glob("*.yml") if q.name[:1].isdigit()):   # card files only (NN_Name.yml)
             r = card_file(cls, p, ids, warn)
             if r is None:
                 continue
@@ -179,10 +188,15 @@ def build(classes):
             done.add(cid)
             (OUT / "AbilityCard" / f"{cid}_{cls}_{re.sub(r'[^A-Za-z0-9]+', '', c['name'])}.yml").write_text(s, encoding="utf-8")
             strings[f"ABILITY_CARD_{name_key(c['name'])}"] = c["name"]
-        missing = [c["name"] for n, (cid, c) in ids.items() if cid not in done]
+        missing = [c["name"] for i, c in enumerate(sheet(cls)["cards"], start=1) if card_id(cls, i) not in done]
         if missing:
             warn(f"{len(missing)} cards without a file: {', '.join(missing)}")
         for p in sorted((CARDS / cls / "summons").glob("*.yml")) if (CARDS / cls / "summons").exists() else []:
+            # a file named like a 1st edition summon would replace that summon in the game's ruleset (both packs go into
+            # Base.ruleset by path): 2e summon files must have names of their own (Decoy2.yml)
+            if f"HeroSummon/{p.name}" in files:
+                warn(f"summons/{p.name}: a 1st edition summon file has this name; name it after its 2e ID ({p.stem}2.yml)")
+                continue
             (OUT / "HeroSummon" / p.name).write_text(p.read_text(encoding="utf-8"), encoding="utf-8")
         st = CARDS / cls / "strings.tsv"
         if st.exists():
@@ -190,7 +204,14 @@ def build(classes):
                 if "\t" in ln and not ln.startswith("#"):
                     k, v = ln.split("\t", 1)
                     strings[k.strip()] = v.replace("\\n", "\n")
-        report.append(f"{cls}: {len(done)} of {len(ids)} cards")
+        report.append(f"{cls}: {len(done)} of {len(sheet(cls)['cards'])} cards")
+    # class resources (cards/<Class>/resources.yml, Gloomhaven's CharacterResources format: the Plagueherald's Plague tokens),
+    # added to Gloomhaven's own file, which the virtual install then replaces; gh_port carries the ones cards name
+    blocks = [(CARDS / c / "resources.yml").read_text(encoding="utf-8").strip() for c in classes if (CARDS / c / "resources.yml").exists()]
+    if blocks:
+        base = gh_port.text(files["CharacterResources/CharacterResources.yml"]).rstrip()
+        (OUT / "CharacterResources").mkdir(exist_ok=True)
+        (OUT / "CharacterResources" / "CharacterResources.yml").write_text(base + "\n\n" + "\n\n".join(blocks) + "\n", encoding="utf-8")
     with open(OUT / "strings.tsv", "w", encoding="utf-8") as f:
         for k, v in strings.items():
             f.write(f"{k}\t{v.replace(chr(10), chr(92) + 'n')}\n")

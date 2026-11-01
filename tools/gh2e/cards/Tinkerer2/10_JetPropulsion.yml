@@ -1,0 +1,29 @@
+# card: Jet Propulsion
+# from Xipe's 99039_Tinkerer2_Jet Propulsion.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Range: 3
+                Target: 2
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 8
+                    Enhancements: 1
+                    Jump: True
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target*"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<size=20%> "
+        - XP: 2

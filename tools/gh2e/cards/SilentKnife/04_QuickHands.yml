@@ -1,0 +1,30 @@
+# card: Quick Hands
+# from Xipe's 99091_Scoundrel2_Quick Hands.yml; corrected against tools/gh2e/sheets/SilentKnife.json (agrees)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+            TMove:
+                Move:
+                    Amount: 2
+                    Enhancements: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *TLoot*"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "<size=50%> "
+        - XP: 1

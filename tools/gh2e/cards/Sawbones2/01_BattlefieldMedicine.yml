@@ -1,0 +1,32 @@
+# card: Battlefield Medicine
+# top: Disarm on its own (no attack), then the 1st edition's GiveSupplyCard to one adjacent ally; the XP is the give's
+# own (gained only when a pack is given). Bottom Move 5 has no mark.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TDisarm:
+                Disarm: True
+                Range: 1
+                Filter: Enemy
+                AnimOverload: TargetedDebuff
+            TGiveSupplyCard:
+                GiveSupplyCard: 13230
+                Range: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                XP: 1
+                AnimOverload: GivePackAdjacent
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 5
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Disarm$ <sprite name=Disarm>"
+        - Row: "$Range$ <sprite name=Range> *TDisarm.Range*"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Sawbones2_PACK$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"

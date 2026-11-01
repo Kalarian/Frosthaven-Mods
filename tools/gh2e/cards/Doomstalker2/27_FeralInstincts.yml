@@ -1,0 +1,61 @@
+# card: Feral Instincts
+# top: grant one of your summons Move +0, then Attack +0 that may target only a doomed enemy (Filter IsDoomed). "This
+# movement must end in a hex adjacent to an enemy that has Doom" is not enforced (text; NEEDS PLUGIN).
+# bottom: Heal 4 on yourself or one of your summons within range 1.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 5
+                AnimOverload: RangedAttack
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyMove:
+                            Move: +0
+                        TAllyAttack:
+                            Attack: +0
+                            Range: +0
+                            Filter:
+                                TargetType: Enemy
+                                IsDoomed: True
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter:
+                    TargetType: OwnSummon
+                AnimOverload: ControlSummon
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Enhancements: 1
+            BHeal:
+                Heal: 4
+                Range: 1
+                Filter:
+                    TargetType: [Self, OwnSummon]
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Doomstalker2_GRANT$"
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> +0"
+        - Row: "$GH2E_Doomstalker2_27_T$"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> +0"
+        - Row: "$GH2E_Doomstalker2_27_T2$"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*"
+        - Row: "$GH2E_Doomstalker2_06_B$"

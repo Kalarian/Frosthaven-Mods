@@ -1,0 +1,43 @@
+# card: Solid Bow
+# bottom: the 1st edition Sap Life doom (DuringActionAbilityOnDamaged, the caster heals), Heal 2 on yourself. It fires on
+# any damage to the doomed enemy, not only yours or your summons', and "or one ally adjacent to this enemy" is not
+# offered (approximation).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 5
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomOnDamaged:
+                                AddActiveBonus:
+                                    Heal: 2
+                                    Filter: Self
+                                ActiveBonus:
+                                    Behaviour: DuringActionAbilityOnDamaged
+                                    TriggerOnCaster: True
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+    Bottom:
+        - Doom:
+            DoomIcon: Doomstalker
+            ParentAbility: BDoom
+            ActiveBonusLayout: "$GH2E_Doomstalker2_08_B$"
+            DoomAbilityLayout: "$GH2E_Doomstalker2_08_B$"

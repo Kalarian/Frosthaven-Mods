@@ -1,0 +1,70 @@
+# card: Frostflare Orbs
+# bottom: the area's hex mark is right of the top red hex (3,1), as on Cold Fire top (Xipe had it left)
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    Enhancements: 1
+                Target:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 4
+                MultiPassAttack: True
+                AnimOverload: SingleFireOrbs
+        Consumes:
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceStun:
+                        ParentName: TAttack
+                        Conditions: Stun
+                XP: 1
+        Infuse: Fire
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 1
+                Range: 3
+                AreaEffect: "0,0,R|2,0,R|1,1,R|3,1,E"
+                MultiPassAttack: False
+                AnimOverload: TargetedColdFire
+        Consumes:
+            BCAny:
+                Elements: Any
+                AbilityOverrides:
+                    BCAnyAttackBuff:
+                        ParentName: BAttack
+                        Strength: 1
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target* @TAttack.Target@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCIce
+            Text: "$Stun$ <sprite name=Stun>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Fire
+            - Column:
+                - XP: 1
+    Bottom:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack*"
+            - Row: "$Range$ <sprite name=Range> *BAttack.Range*"
+            - Row: "<size=20%> "
+            - Consume:
+                Name: BCAny
+                Text: "+1 $Attack$ <sprite name=Attack>, <sprite name=XP1>"
+        - Column:
+            - Row: "£Area£"

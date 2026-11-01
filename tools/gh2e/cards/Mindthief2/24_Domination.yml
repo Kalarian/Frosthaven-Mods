@@ -1,0 +1,46 @@
+# card: Domination
+# written from tools/gh2e/sheets/Mindthief.json; top: two enemies within range 4 each perform Attack 3 (the "adjacent
+# to each other" requirement is not enforced; Xipe's Filter Ally + TransferAugments was the 1st edition card's);
+# bottom = the 1st edition Mass Hysteria bottom (AddAugment, persistent: two augments at once)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Attack:
+                                Amount: 3
+                                Enhancements: 1
+                            Range: 1
+                            Target: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 4
+                Target: 2
+                Filter: Enemy
+                AnimOverload: MindControl
+    Bottom:
+        Abilities:
+            BAugment:
+                AddAugment: 1
+                Filter: Self
+                ActiveBonusDuration: Persistent
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "$GH2E_Mindthief2_24_T$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@"
+    Bottom:
+        - Active:
+            Ability: BAugment
+            Icon: Positive_Cards
+            ListLayout: "$GH2E_Mindthief2_24_B$"
+            Layout: "$GH2E_Mindthief2_24_B$"
+        - Row: "<size=20%> "
+        - Duration: Persistent

@@ -1,0 +1,49 @@
+# card: Grisly Trauma
+# bottom: +1 Target on your next melee attack this round: Frosthaven's melee-only BuffAttack (Crushing Weight) with a
+# Target effect (HIVE Rapid Fire), one use.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range: 1
+                Target: -1
+                Conditions: [Wound, Poison, Stun]
+                AnimOverload: HeavyMeleeAttack
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BBuffTarget:
+                Attack: 0
+                AttackEffect:
+                    Type: BuffIfAttackIsMelee
+                    Target: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    AttackType: Melee
+                    XPTracker: [0]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "$Wound$ <sprite name=Wound> $Poison$ <sprite name=Poison> $Stun$ <sprite name=Stun>"
+        - Row: "<size=50%> "
+        - XP: 2
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BBuffTarget
+            Icon: Positive_TargetPlus_Attack
+            ListLayout: "$GH2E_Sawbones2_29_B$"
+            Layout: "$GH2E_Sawbones2_29_B$"

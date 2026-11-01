@@ -1,0 +1,77 @@
+# card: Searing Glacier
+# bottom: the lost-action trigger (see Aid from the Ether), recovering one discarded card (Frosthaven's
+# RecoverDiscardedCards 1, as Frozen Fist's Preserved Fury); Xipe recovered at once instead
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    Enhancements: 1
+                Range: 3
+                AreaEffect: "0,0,R|1,1,R|2,2,R|3,3,R|4,4,R"
+                AnimOverload: TargetedIcyBlast
+                MultiPassAttack: False
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFirePierce:
+                        ParentName: TAttack
+                        Pierce: 3
+                XP: 1
+        Infuse: Ice
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BOnLost:
+                AddActiveBonus:
+                    RecoverDiscardedCards: 1
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: DuringActionAbilityOnActionEnded
+                    Restriction: OncePerAction
+                    XPTracker: [0]
+                    Vars:
+                        LastPerformedAbility: TriggerActor.LastAbilityPerformed
+                        LostPile: LastPerformedAbility?.GetAbilityBaseCard()?.SelectedAction?.CardPile
+                        ValidateDidLoseCard: LostPile == "Lost" || LostPile == "PermanentlyLost"
+Layout:
+    Top:
+        - ColumnWidths: "60,35"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+            - Row: "<size=10%> "
+            - Consume:
+                Name: TCFire
+                Text: "$Pierce$ <sprite name=Pierce> 3, <sprite name=XP1>"
+            - Row: "<size=10%> "
+            - Row:
+                - ColumnWidths: "20,30,30"
+                - Column:
+                - Column:
+                    - Infuse: Ice
+                - Column:
+                    - XP: 1
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BOnLost
+            ListLayout: "$GH2E_Spellweaver2_21_B$"
+            Layout: "$GH2E_Spellweaver2_21_B$"
+            Icon: "Recover"
+        - Duration: Round

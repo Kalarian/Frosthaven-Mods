@@ -1,0 +1,58 @@
+# card: Protective Blessing
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TShield:
+                Shield:
+                    Amount: 1
+                    Enhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+        XP: 1
+    Bottom:
+        Abilities:
+            BPrevent:
+                PreventDamage: -1
+                Range: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Self, Ally]
+                AnimOverload: PositiveBuffRadial
+        Infuse: Light
+        XP: 2
+Layout:
+    Top:
+        - Active:
+            Ability: TShield
+            Icon: "Shield"
+            ListLayout: "$Shield$ <sprite name=Shield> *TShield*"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 1
+            - Column:
+                - Duration: Round
+    Bottom:
+        - Active:
+            Ability: BPrevent
+            Icon: Immune
+            ListLayout: "$GH2E_Sunkeeper2_10_B$"
+            Layout: "$GH2E_Sunkeeper2_10_B$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,20,20,20"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Round

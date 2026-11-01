@@ -1,0 +1,53 @@
+# card: Wretched Yield
+# top: +1 Attack per Plague on the target = a per-target Vars bonus, Frosthaven's Crashing Tide shape (Submerge top:
+# ConditionalOverrides + StatIsBasedOnX Vars on TargetActor). Heal X = the same count, read from the attack's first
+# target (the attack gives no Plague, so "before the attack" holds). Both expressions UNVERIFIED in play.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                ConditionalOverrides:
+                    TAttackCO:
+                        AbilityOverrides:
+                            TPlagueBuff:
+                                StatIsBasedOnX:
+                                    Strength:
+                                        BasedOn: Vars
+                                        AddTo: True
+                                        Vars:
+                                            Value: TargetActor != null and TargetActor.GetCharacterResourceAmount("Plague") or 0
+                AnimOverload: RangedAttack
+            THeal:
+                Heal: 0
+                Filter: Self
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: Vars
+                        Vars:
+                            AttackAbility: CustomAbility.FindAbilityInPhaseByName("TAttack")
+                            Value: AttackAbility != null and AttackAbility.ActorsTargeted.Count > 0 and AttackAbility.ActorsTargeted[0].GetCharacterResourceAmount("Plague") or 0
+                AnimOverload: PowerUp
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Enhancements: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "$GH2E_Plagueherald2_09_T$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> X"
+        - Row: "$GH2E_Plagueherald2_09_T2$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

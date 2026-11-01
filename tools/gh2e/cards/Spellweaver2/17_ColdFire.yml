@@ -1,0 +1,73 @@
+# card: Cold Fire
+# top: the area's hex mark is right of the top red hex (3,1), not left as Xipe and the 1st edition card have it
+# bottom: the consume grants the round "+1 Attack on all your attacks" as a whole ability on a Null placeholder, so no
+# empty +0 bonus shows when nothing is consumed (Xipe's shape)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+                Range: 3
+                AreaEffect: "0,0,R|2,0,R|1,1,R|3,1,E"
+                MultiPassAttack: False
+                AnimOverload: TargetedColdFire
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireAttackBuff:
+                        ParentName: TAttack
+                        Strength: 2
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceImmobilize:
+                        ParentName: TAttack
+                        Conditions: Immobilize
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCAny:
+                Elements: Any
+                Abilities:
+                    BCAnyAttackBuff:
+                        ParentName: BNull
+                        Attack: 1
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Round
+                            Behaviour: BuffAttack
+                        AnimOverload: PowerUp
+                XP: 1
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+            - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+            - Row: "<size=20%> "
+            - Consume:
+                Name: TCFire
+                Text: "+2 $Attack$ <sprite name=Attack>"
+            - Row: "<size=20%> "
+            - Consume:
+                Name: TCIce
+                Text: "$Immobilize$ <sprite name=Immobilize>"
+        - Column:
+            - Row: "£Area£"
+            - Row: "<size=80%> "
+            - XP: 1
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCAny
+            Text: "$GH2E_Spellweaver2_17_B$"

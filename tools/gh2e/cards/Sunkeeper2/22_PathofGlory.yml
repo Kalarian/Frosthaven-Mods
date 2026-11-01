@@ -1,0 +1,62 @@
+# card: Path of Glory
+# bottom: "Strengthen, Bless all allies moved through": a plain Move, then its own condition ability over the walked
+# path with Targeting All (the Trample fix in CARD_FIXES: the move-path branch of Frosthaven's targeting needs
+# Targeting other than Range).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    Enhancements: 1
+                Pierce: 1
+                Conditions: Muddle
+                AnimOverload: MeleeSmite
+        Consumes:
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        AttackHasAdvantage: True
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 6
+                    Enhancements: 1
+            BStrengthen:
+                Strengthen: True
+                Conditions: Bless
+                AllTargetsOnMovePath: True
+                Targeting: All
+                Target: -1
+                Filter: Ally
+                AnimOverload: PositiveBuffRadial
+        Infuse: Light
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce*"
+        - Row: "$Muddle$ <sprite name=Muddle>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCLight
+            Text: "+1 $Attack$ <sprite name=Attack>, $Advantage$, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen>, $Bless$ <sprite name=Bless>"
+        - Row: "$Affect_AllAlliesMovedThrough$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:
+                - XP: 2

@@ -1,0 +1,31 @@
+# card: Flanking Strike
+# from Xipe's 99089_Scoundrel2_Flanking Strike.yml; corrected against tools/gh2e/sheets/SilentKnife.json
+# flanking = TargetAdjacentAllies > 0 (your allies beside the target; Frosthaven's own key, Banner Spear Pinning Charge)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentAllies: "> 0"
+                        XP: 1
+                        AbilityOverrides:
+                            TFlankBuff:
+                                Strength: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 5
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_SilentKnife_02_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"

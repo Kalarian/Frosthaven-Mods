@@ -1,0 +1,48 @@
+# card: Biting Gnats
+# "target all" with no printed range = every enemy in the scenario (Targeting All), as the 1st edition digital port
+# reads the same wording (Airborne Toxin bottom). See NOTES.md.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Target: 2
+                Range: 5
+                ResourcesToGiveToTargets:
+                    - ["Plague", 1]
+                ResourcesToAddOnAbilityEnd:
+                    - ["Plague", 3]
+                AnimOverload: RangedAttack
+            TMuddle:
+                Muddle: True
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RadialNegative
+    Bottom:
+        Abilities:
+            BPoison:
+                Poison: True
+                Conditions: Muddle
+                Target: -1
+                Targeting: All
+                Filter: Enemy
+                AnimOverload: RadialNegativeMajor
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target*"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$GH2E_Plagueherald2_PLAGUE$"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Plagueherald2_02_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Poison$ <sprite name=Poison>"
+        - Row: "<b><size=130%>$Muddle$ <sprite name=Muddle>"
+        - Row: "$GH2E_Plagueherald2_02_B$"

@@ -1,0 +1,48 @@
+# card: Emberfrost
+# bottom: Frosthaven's own "Shield to an ally for the round" (Hold the Line top: Shield, Filter Ally, round bonus)
+# instead of Xipe's ControlActor grant
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                    Pierce: 1
+                    PierceEnhancements: 1
+                Range: 4
+                AnimOverload: TargetedGenericFlame
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Target: 1
+                Filter: Ally
+                AnimOverload: TargetedBuff
+                ActiveBonus:
+                    Duration: Round
+        Infuse: Ice
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce* @TAttack.Pierce@"
+        - Row: "<size=20%> "
+        - Infuse: Fire
+    Bottom:
+        - Row: "$GH2E_Spellweaver2_08_B$"
+        - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield*"
+        - Row: "$Range$ <sprite name=Range> *BShield.Range* @BShield.Range@"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Ice
+            - Column:
+                - Duration: Round

@@ -1,0 +1,37 @@
+Parser: HeroSummon
+ID: PerniciousFoggerID
+LocKey: $GH2E_SUMMON_PerniciousFogger$
+Model: WindTotem
+# a map token, not a figure: can't be targeted, hurt or block (the 1st edition Ward's flags, seen in a scenario)
+Health: 1
+Move: 0
+Attack: 0
+Range: 0
+Untargetable: True
+Invulnerable: True
+DoesNotBlock: True
+# "At the end of each of their turns, all allies and enemies within Range 1 of the token suffer damage 2": Frosthaven's
+# Banner of Doom aura (damage to the figure whose turn it is, GameState.TurnActor) at the end of the turn instead of
+# its start, on allies and enemies alike
+OnSummonAbilities:
+    ADamageAura:
+        Range: 1
+        Target: -1
+        Filter: Self
+        AddActiveBonus:
+            Damage: 2
+            Filter: [Ally, Enemy]
+            IgnoreStun: True
+            Targeting: Custom
+            TargetingVars:
+                AddValidActorInRange: GameState.TurnActor
+        ActiveBonus:
+            Behaviour: EndTurnAbility
+            Duration: Persistent
+            IsAura: True
+            AuraTargeting: Range
+            AuraFilter: [Ally, Enemy]
+            TriggerOnCaster: true
+            ListLayoutOverride: [$GH2E_Tinkerer2_27_T$, Positive_Damage_Enemy_Aura]
+        Text: "$GH2E_Tinkerer2_27_T$"
+        AnimOverload: None

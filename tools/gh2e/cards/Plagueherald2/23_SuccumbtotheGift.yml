@@ -1,0 +1,65 @@
+# card: Succumb to the Gift
+# top: on a kill, XP 1 and a Damage 3 + Poison trap in the killed enemy's hex: a sub-ability gated on the kill
+# (ActorsKilledByAbility, the 1st edition Hatchet's Fearsome Efficiency) placing the trap on the attack's hex (Custom
+# targeting on the parent's selected tile, as CARD_FIXES 20136 Petrify). "Featureless hex" is not checked. The trap
+# uses the 1st edition Tinkerer's poison trap model. Untested shape.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    Enhancements: 1
+                Range: 99
+                Target: 1
+                AttackHasAdvantage: True
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RangedAttack
+                SubAbilities:
+                    TTrap:
+                        Trap:
+                            TrapName: PoisonMine
+                            Damage: 3
+                            Conditions: Poison
+                        Target: 1
+                        AbilityXP: 1
+                        Targeting: Custom
+                        TargetingVars:
+                            ParentTile: ParentAbility.m_TilesSelected[0]
+                            AddTileInRange: ParentTile
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsKilledByAbility: "> 0"
+                        TreatAsNonSubAbility: True
+                        AutoTrigger: True
+                        SpawnDelay: 2.8
+                        AnimOverload: None
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Enhancements: 1
+            BBless:
+                Bless: True
+                Range: 5
+                Target: -1
+                Filter:
+                    TargetType: Ally
+                    TargetHasNegativeCondition: Poison
+                AnimOverload: RadialPositive
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$GH2E_Plagueherald2_23_T$"
+        - Row: "$Advantage$"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Plagueherald2_23_T2$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Bless$ <sprite name=Bless>"
+        - Row: "$GH2E_Plagueherald2_23_B$"

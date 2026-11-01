@@ -1,0 +1,75 @@
+# card: Blistering Buboes
+# top: four Damage abilities in order (4, 3, 2, 1), each on one enemy with Plague at any range that the earlier ones
+# did not pick (IgnorePreviousAbilityTargets). bottom: -1 Attack for each Plague = a round aura on every enemy with
+# Plague, flat -1 (the per-token count: NEEDS PLUGIN).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TDamage4:
+                Damage: 4
+                Range: 99
+                Target: 1
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: TargetedDebuff
+            TDamage3:
+                Damage: 3
+                Range: 99
+                Target: 1
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                IgnorePreviousAbilityTargets: [TDamage4]
+                AnimOverload: TargetedDebuff
+            TDamage2:
+                Damage: 2
+                Range: 99
+                Target: 1
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                IgnorePreviousAbilityTargets: [TDamage4, TDamage3]
+                AnimOverload: TargetedDebuff
+            TDamage1:
+                Damage: 1
+                Range: 99
+                Target: 1
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                IgnorePreviousAbilityTargets: [TDamage4, TDamage3, TDamage2]
+                AnimOverload: TargetedDebuff
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    Enhancements: 1
+            BAttackDebuff:
+                Attack: -1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    ValidAbilityType: Attack
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter:
+                        TargetType: Enemy
+                        TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RadialNegative
+Layout:
+    Top:
+        - Row: "$GH2E_Plagueherald2_07_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BAttackDebuff
+            Icon: "Negative_AttackMinus"
+            ListLayout: "$GH2E_Plagueherald2_07_B$"
+            Layout: "$GH2E_Plagueherald2_07_B$"

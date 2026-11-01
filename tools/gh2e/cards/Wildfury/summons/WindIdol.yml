@@ -1,0 +1,32 @@
+Parser: HeroSummon
+ID: WindIdolID
+LocKey: $GH2E_SUMMON_WindIdol$
+# stand-in model: the 1st edition Wind Totem (Storm Sigil's summon, the same sigil slot)
+Model: WindTotem
+Health:
+    Amount: 1
+    SquareEnhancements: 1
+Move: 0
+Attack: 0
+Range: 0
+# "All allies within Range 3 add Pierce 1 to all their attacks": Frosthaven's Banner of Strength range aura with the
+# Pierce buff of Boneshaper's Solid Bones (AttackEffect StandardBuff, Pierce 1)
+OnSummonAbilities:
+    APierceAura:
+        Attack: 0
+        AttackEffect:
+            Type: StandardBuff
+            Pierce: 1
+        Range: 3
+        Target: -1
+        Filter: Self
+        ActiveBonus:
+            Behaviour: BuffAttack
+            Duration: Persistent
+            ValidAbilityTypes: [Attack]
+            IsAura: True
+            AuraTargeting: Range
+            AuraFilter: [Ally]
+            ListLayoutOverride: [$GH2E_Wildfury_12_T$, Positive_Pierce_Aura]
+        Text: "$GH2E_Wildfury_12_T$"
+        AnimOverload: None

@@ -1,0 +1,30 @@
+# card: Hand of the Surgeon
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 1
+                    CircleEnhancements: 1
+            BGiveSupplyCard:
+                GiveSupplyCard: 13230
+                Range: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                XP: 1
+                AnimOverload: GivePackAdjacent
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Sawbones2_PACK$"

@@ -1,0 +1,57 @@
+# card: Nature's Gift
+# top: Heal 2 [diamond+], Range 3, Safeguard on the heal target (the class's Safeguard stand-in, NOTES.md), infuse
+# Earth. bottom: Poison + Muddle on one enemy within range 5, no attack (the 1st edition Disorienting Roar's
+# condition-only shape), infuse Earth.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 2
+                    DiamondPlusEnhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+                SubAbilities:
+                    THealSafeguard:
+                        AddActiveBonus:
+                            Null: True
+                            Filter: Self
+                            AutoTrigger: True
+                            SkipAnim: True
+                        Filter: [Self, Ally]
+                        UseParentTargets: True
+                        SkipAnim: True
+                        ActiveBonus:
+                            Duration: Persistent
+                            Behaviour: GenericOnNegativeCondition
+                            IsToggleBonus: True
+                            XPTracker: [0]
+                            ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
+                            Vars:
+                                ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
+                                ValidateNotScenarioEffect: TriggerAbility.TreatedAsScenarioEffect() == False
+                                PreventCondition: True
+        Infuse: Earth
+    Bottom:
+        Abilities:
+            BPoison:
+                Poison: True
+                Conditions: [Muddle]
+                Range: 5
+                Filter: Enemy
+                AnimOverload: RangedCast
+        Infuse: Earth
+Layout:
+    Top:
+        - Row: "<size=130%><b>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Range$ <sprite name=Range> *THeal.Range*"
+        - Row: "$GH2E_Wildfury_SAFEGUARD_ROW$"
+        - Row: "<size=50%> "
+        - Infuse: Earth
+    Bottom:
+        - Row: "<b><size=130%>$Poison$ <sprite name=Poison> $Muddle$ <sprite name=Muddle>"
+        - Row: "$Range$ <sprite name=Range> *BPoison.Range*"
+        - Row: "<size=50%> "
+        - Infuse: Earth

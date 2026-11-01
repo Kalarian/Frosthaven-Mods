@@ -1,0 +1,35 @@
+# card: Throwing Knives
+# from Xipe's 99094_Scoundrel2_Throwing Knives.yml; corrected against tools/gh2e/sheets/SilentKnife.json (agrees)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Target:
+                    Amount: 2
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                AnimOverload: RangedAttackThrowingKnives
+        XP: 1
+    Bottom:
+        Abilities:
+            BPull:
+                Pull:
+                    Amount: 2
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target* @TAttack.Target@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Row: "<b><size=130%>$Pull$ <sprite name=Pull> *BPull* <size=100%><voffset=1>@BPull@"
+        - Row: "$Range$ <sprite name=Range> *BPull.Range* @BPull.Range@"

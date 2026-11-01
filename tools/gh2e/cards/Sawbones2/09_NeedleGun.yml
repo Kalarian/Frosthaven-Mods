@@ -1,0 +1,48 @@
+# card: Needle Gun
+# top: the Pierce square mark is dropped (Frosthaven's Pierce takes no enhancement slot: rulecheck rejects it). bottom: three
+# separate melee attacks, the third without a mark.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 3
+                Pierce: 1
+                Conditions: Poison
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BAttack1:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Conditions: [Poison, Stun]
+            BAttack2:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Conditions: [Poison, Stun]
+            BAttack3:
+                Attack: 1
+                Conditions: [Poison, Stun]
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce*"
+        - Row: "$Poison$ <sprite name=Poison>"
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack1* <size=100%><voffset=1>@BAttack1@"
+        - Row: "$Poison$ <sprite name=Poison> $Stun$ <sprite name=Stun>"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack2* <size=100%><voffset=1>@BAttack2@"
+        - Row: "$Poison$ <sprite name=Poison> $Stun$ <sprite name=Stun>"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack3*"
+        - Row: "$Poison$ <sprite name=Poison> $Stun$ <sprite name=Stun>"
+        - Row: "<size=50%> "
+        - XP: 2

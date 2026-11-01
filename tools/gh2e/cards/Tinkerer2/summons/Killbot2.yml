@@ -1,0 +1,20 @@
+Parser: HeroSummon
+ID: Killbot2ID
+LocKey: $GH2E_SUMMON_KillBot$
+Model: Killbot
+Health:
+    Amount: 8
+    SquareEnhancements: 1
+Move:
+    Amount: 4
+    SquareEnhancements: 1
+Attack:
+    Amount: 3
+    SquareEnhancements: 1
+Range: 1
+# the printed attack area: the Kill Bot's hex and two hexes in a diagonal line from it (Frosthaven's Arcing Generator
+# writes a summon's area attack the same way)
+AttackOverride:
+    ParentName: DefaultAttack
+    AreaEffect: "0,0,G|1,1,R|2,2,R"
+    MultiPassAttack: False

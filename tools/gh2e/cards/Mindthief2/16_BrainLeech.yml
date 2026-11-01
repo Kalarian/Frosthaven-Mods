@@ -1,0 +1,68 @@
+# card: Brain Leech
+# written from tools/gh2e/sheets/Mindthief.json; the consume adds Wound to the commanded attack by name (Frosthaven's
+# Flesh Shield overrides an ability inside its control the same way); the bottom's Strengthen needs the attack
+# performed (Frosthaven's Precision Timing: StartAbilityRequirements PreviousAbility)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis1:
+                            Move:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                        EnemyWillDoThis2:
+                            Attack:
+                                Amount: 2
+                                Enhancements: 1
+                            Range: 1
+                            Target: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 4
+                Filter: Enemy
+                AnimOverload: MindControl
+        Consumes:
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceWound:
+                        ParentName: EnemyWillDoThis2
+                        Conditions: [Wound]
+                XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 1
+                    SquareEnhancements: 1
+            BStrengthen:
+                Strengthen:
+                    Enhancements: 1
+                Filter: Self
+                AnimOverload: PowerUp
+                StartAbilityRequirements:
+                    Type: PreviousAbility
+                    AbilityHasHappened: True
+Layout:
+    Top:
+        - Row: "$GH2E_Mindthief2_CONTROL1$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *EnemyWillDoThis1* <size=100%><voffset=1>@EnemyWillDoThis1@"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *EnemyWillDoThis2* <size=100%><voffset=1>@EnemyWillDoThis2@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCIce
+            Text: "$Wound$ <sprite name=Wound>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Mindthief2_16_B$"
+        - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen> <size=100%><voffset=1>@BStrengthen@"

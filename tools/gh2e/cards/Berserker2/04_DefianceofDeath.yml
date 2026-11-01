@@ -1,0 +1,46 @@
+# card: Defiance of Death
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                AnimOverload: HeavyAttack
+        Consumes:
+            TCDamage:
+                CostAbility:
+                    ParentName: TAttack
+                    Damage: 2
+                    Filter: Self
+                AbilityOverrides:
+                    TCAttackBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 1
+    Bottom:
+        Abilities:
+            BPrevent:
+                PreventDamage: 1
+                PreventOnlyIfLethal: True
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    XPTracker: [1]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDamage
+            Text: "$GH2E_Berserker2_04_T$"
+    Bottom:
+        - Active:
+            Ability: BPrevent
+            ListLayout: "$GH2E_Berserker2_04_B$"
+            Layout: "$GH2E_Berserker2_04_B$"
+            Icon: Positive_DamagePrevent
+        - Row: "<size=50%> "
+        - XPTracker: BPrevent

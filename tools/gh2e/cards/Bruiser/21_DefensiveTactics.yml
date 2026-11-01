@@ -1,0 +1,55 @@
+# card: Defensive Tactics
+# 2e sheet: top "the first time each round that you gain Shield or Retaliate from one of your ability or attack
+# modifier cards, gain Shield 1 and Retaliate 1 for the round", XP 2, persistent, lost; bottom Move 3 [circle], Pull 2
+# Target 2 [square] range 3. APPROXIMATION / NEEDS PLUGIN: Frosthaven has no trigger on gaining a shield or retaliate,
+# so the top is a persistent Shield 1 and Retaliate 1 (Xipe's reading; the 1st edition Defensive Tactics shape), on
+# every round instead of only the rounds you gain one from a card. Card text as printed.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TShield:
+                Shield: 1
+                Filter: Self
+                ActiveBonusDuration: Persistent
+                AnimOverload: PowerUp
+            TRetaliate:
+                Retaliate: 1
+                Filter: Self
+                ActiveBonusDuration: Persistent
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BPull:
+                Pull: 2
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 3
+                AnimOverload: TargetedShout
+Layout:
+    Top:
+        - Active:
+            Ability: TShield
+            Icon: Shield
+            ListLayout: "$GH2E_Bruiser_21_T$"
+            Layout: "$GH2E_Bruiser_21_T$"
+        - Active:
+            Ability: TRetaliate
+            Icon: Retaliate
+            ListLayout: "<sprite name=Retaliate> *TRetaliate*"
+            Layout:
+                - Row: "<size=10%> "
+        - Row: "<size=20%> "
+        - Duration: Persistent
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Pull$ <sprite name=Pull> *BPull*"
+        - Row: "$Target$ <sprite name=Target> *BPull.Target* @BPull.Target@"
+        - Row: "$Range$ <sprite name=Range> *BPull.Range*"

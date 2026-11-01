@@ -1,0 +1,47 @@
+# card: Sanctify
+# top: an attack aura on allies within range 2 (Frosthaven's Birds In a Tempest aura shape, BuffAttack) with three use
+# slots. "+2 Attack instead if they have Ward" needs a per-attacker check: NEEDS PLUGIN, +1 for everyone here.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 1
+                Range: 2
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    ValidAbilityType: Attack
+                    IsAura: True
+                    AuraTargeting: Range
+                    AuraFilter:
+                        TargetType: Ally
+                    XPTracker: [0,0,1]
+                AnimOverload: PositiveBuffRadial
+        Infuse: Light
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                Range: 3
+                Conditions: Muddle
+                AnimOverload: RangedSmite
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: "Positive_AttackPlus_Ally_Aura"
+            ListLayout: "$GH2E_Sunkeeper2_13_T$"
+            Layout: "$GH2E_Sunkeeper2_13_T$"
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+        - Row: "<size=50%> "
+        - Infuse: Light
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Range$ <sprite name=Range> *BAttack.Range*"
+        - Row: "$Muddle$ <sprite name=Muddle>"

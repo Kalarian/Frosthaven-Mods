@@ -1,0 +1,46 @@
+# card: Frigid Torrent
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    Enhancements: 1
+                Range: 4
+                Conditions: Disarm
+                AnimOverload: TargetFloorIce
+        Infuse: [Ice, Air]
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    SquareEnhancements: 1
+                ConditionalOverrides:
+                    BMoveCO:
+                        Requirements:
+                            Vars:
+                                ValidateElementStrongOrWaning: ElementInfusionBoardManager.GetAvailableElements().Count > 0
+                        AbilityOverrides:
+                            BMoveBuff:
+                                Strength: 1
+        Infuse: Fire
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Disarm$ <sprite name=Disarm>"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "50, 50"
+            - Column:
+                - Infuse: Ice
+            - Column:
+                - Infuse: Air
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$GH2E_Elementalist2_MOVE_IF_ELEMENT$"
+        - Row: "<size=20%> "
+        - Infuse: Fire

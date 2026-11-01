@@ -1,0 +1,72 @@
+# card: Nightmarish Affliction
+# top: the ally-Poison cost-consume buys +1 Target and XP 1. bottom: the 1st edition Grim Bargain shape (a toggle
+# +1 Target bonus on attacks whose cost is giving an ally a condition), here Poison to an ally without Poison within
+# range 3, ranged attacks only, six use slots.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range: 4
+                Conditions: [Poison, Curse]
+                AnimOverload: RangedAttack
+        Consumes:
+            TCPoisonAlly:
+                CostAbility:
+                    ParentName: TAttack
+                    Poison: True
+                    Range: 3
+                    Target: 1
+                    Filter:
+                        TargetType: Ally
+                        Vars:
+                            ValidateNoPoison: not target.Tokens.HasKey(CCondition.ENegativeCondition.Poison)
+                    AnimOverload: TargetedDebuff
+                AbilityOverrides:
+                    TCAttackBuff:
+                        ParentName: TAttack
+                        Target: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BActive:
+                AddTarget: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffTarget
+                    Restriction: OncePerAction
+                    ValidAbilityType: Attack
+                    AttackType: Ranged
+                    IsToggleBonus: True
+                    XPTracker: [0,1,0,1,0,1]
+                    CostAbility:
+                        Poison: True
+                        Range: 3
+                        Filter:
+                            TargetType: Ally
+                            Vars:
+                                ValidateNoPoison: not target.Tokens.HasKey(CCondition.ENegativeCondition.Poison)
+                        AnimOverload: TargetedDebuff
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Poison$ <sprite name=Poison>"
+        - Row: "$Curse$ <sprite name=Curse>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCPoisonAlly
+            Text: "$GH2E_Plagueherald2_16_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: "Positive_AttackPlus"
+            ListLayout: "$GH2E_Plagueherald2_16_B$"
+            Layout: "$GH2E_Plagueherald2_16_B$"
+        - Row: "<size=50%> "
+        - XPTracker: BActive

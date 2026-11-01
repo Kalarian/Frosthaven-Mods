@@ -1,0 +1,77 @@
+# card: Crater
+# from Xipe's 99124_Cragheart2_Crater.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# bottom: Move 4 carries a square mark (square slot); both damage rows are "!" boxes: CanSkip False
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                AnimOverload: MeleeSmashCrater
+                MultiPassAttack: False
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthPush:
+                        ParentName: TAttack
+                        SubAbilities:
+                            TCAttackSubPush:
+                                Push:
+                                    Amount: 2
+                                AnimOverload: None
+                                IsInlineSubAbility: True
+                XP: 1
+    Bottom:
+        Abilities:
+            BDamage1:
+                Damage: 1
+                Range: 1
+                Target: -1
+                Filter: [Enemy, Ally]
+                CanSkip: False
+                AnimOverload: FootstompCraterStart
+            BMove:
+                Move:
+                    Amount: 4
+                    SquareEnhancements: 1
+                    Jump: True
+            BDamage2:
+                Damage: 1
+                Range: 1
+                Target: -1
+                Filter: [Enemy, Ally]
+                CanSkip: False
+                AnimOverload: FootstompCraterEnd
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    BCEarthDamageBuff2:
+                        ParentName: BDamage2
+                        Strength: 1
+                XP: 1
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCEarth
+            Text: "$Push$ <sprite name=Push> 2, <sprite name=XP1>"
+    Bottom:
+        - Row: "$GH2E_Cragheart2_09_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Cragheart2_09_B$"
+        - Consume:
+            Name: BCEarth
+            Text: "+1 <sprite name=Damage>, <sprite name=XP1>"

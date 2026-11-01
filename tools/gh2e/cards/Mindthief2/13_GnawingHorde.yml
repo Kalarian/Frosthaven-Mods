@@ -1,0 +1,34 @@
+# card: Gnawing Horde
+# written from tools/gh2e/sheets/Mindthief.json; the Rat Swarm is summons/RatSwarm.yml (2e stats)
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: RatSwarmID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+Layout:
+    Top:
+        - Active:
+            Ability: TSummon
+            Icon: Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_RatSwarm$
+                    SpecialText: "$Poison$ <sprite name=Poison>"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"

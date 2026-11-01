@@ -1,0 +1,53 @@
+# card: Intimidating Growl
+# 2e sheet: top Attack 2 [square], Push 2, 4-hex rhombus with two hex marks, XP 1; bottom Move 2 [circle], "on your
+# next two move abilities, add +1 Move", 2 use slots (XP 1 on slot 2), persistent, not lost. The move buff is the
+# Drifter's Sustained Momentum shape (Move N, Filter Self, persistent BuffMove with XPTracker). It is placed after the
+# printed Move 2, so that move isn't one of the two (NOTES.md). No AutoTrigger (standard confirm).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AreaEffect: "0,0,G|2,0,R|1,1,R|3,1,R|2,2,E|4,0,E"
+                MultiPassAttack: False
+                AnimOverload: TargetedShout
+                SubAbilities:
+                    TAttackSubPush:
+                        Push: 2
+                        AnimOverload: None
+                        IsInlineSubAbility: True
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BBuffMove:
+                Move: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffMove
+                    XPTracker: [0,1]
+                AnimOverload: Persistent
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "$Push$ <sprite name=Push> *TAttackSubPush*"
+        - Column: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BBuffMove
+            Icon: Positive_MovePlus
+            ListLayout: "$GH2E_Bruiser_14_B$"
+            Layout: "$GH2E_Bruiser_14_B$"
+        - Row: "<size=20%> "
+        - XPTracker: BBuffMove

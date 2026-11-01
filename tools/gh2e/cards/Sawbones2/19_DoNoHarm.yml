@@ -1,0 +1,38 @@
+# card: Do No Harm
+# top: Attack 4, Wound, Stun and the mandatory self-Disarm. The character token ("the next three times they lose Stun,
+# they gain Stun", three slots) has no engine hook: text only, NEEDS PLUGIN; the card is simply lost.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 4
+                Conditions: [Wound, Stun]
+                AnimOverload: HeavyMeleeAttack
+            TDisarm:
+                Disarm: True
+                Filter: Self
+                AutoTrigger: True
+                CanSkip: False
+                AnimOverload: SelfDebuff
+        XP: 2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Conditions: Poison
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$Wound$ <sprite name=Wound> $Stun$ <sprite name=Stun>"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Sawbones2_19_T$"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Sawbones2_19_T2$"
+        - Row: "<size=50%> "
+        - XP: 2
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Poison$ <sprite name=Poison>"

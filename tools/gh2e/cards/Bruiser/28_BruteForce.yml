@@ -1,0 +1,79 @@
+# card: Brute Force
+# 2e sheet: top Shield 2 [square], "after each attack targeting you this round, perform:" Move 1, Push 2 target 1 ally
+# or enemy range 1, round; bottom "add +1 to each of your Push and Pull. Whenever you Push or Pull an enemy at least one
+# hex, after the forced movement, that enemy and all enemies adjacent to it suffer damage 1", XP 2, persistent, lost.
+# New card (not in Xipe's mod).
+# Top: the reaction is a round DuringActionAbilityOnAttacked bonus (Frosthaven's: Metal Mosaic's Energy Conversion,
+# Stress Vents), which stacks its ability for you after each attack on you has dealt its damage. No Frosthaven card
+# makes the hero move on an enemy's turn: FIRST THING TO TEST (NOTES.md).
+# Bottom: +1 to push and pull is Frosthaven's BuffForcedMovement (Snowdancer's Gathering Force, BuffValue +1 here).
+# NEEDS PLUGIN: the damage 1 after the forced movement has no Frosthaven trigger; it is text only.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TShield:
+                Shield:
+                    Amount: 2
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUpShield
+            TReaction:
+                AddActiveBonus:
+                    Move: 1
+                    CanSkip: True
+                    SubAbilities:
+                        TReactionPush:
+                            Push: 2
+                            Range: 1
+                            Target: 1
+                            Filter: [Enemy, Ally]
+                            TreatAsNonSubAbility: True
+                            AnimOverload: TargetedShout
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: DuringActionAbilityOnAttacked
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BForcedMoveBuff:
+                Move: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffForcedMovement
+                    ValidAbilityTypes: [Push, Pull]
+                    Vars:
+                        BuffValue: 1
+                AnimOverload: Persistent
+        XP: 2
+Layout:
+    Top:
+        - Active:
+            Ability: TShield
+            Icon: Shield
+            ListLayout: "<sprite name=Shield> *TShield*"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TReaction
+            Icon: Positive_Attack_Enemy_Move
+            ListLayout: "$GH2E_Bruiser_28_T$ <sprite name=Move> 1, <sprite name=Push> 2"
+            Layout:
+                - Row: "$GH2E_Bruiser_28_T$"
+                - Row: "<size=20%> "
+                - Row: "<b><size=130%>$Move$ <sprite name=Move> 1"
+                - Row: "<b><size=130%>$Push$ <sprite name=Push> 2"
+                - Row: "$GH2E_Bruiser_28_T2$"
+        - Row: "<size=20%> "
+        - Duration: Round
+    Bottom:
+        - Active:
+            Ability: BForcedMoveBuff
+            ListLayout: "$GH2E_Bruiser_28_B$"
+            Layout: "$GH2E_Bruiser_28_B$"
+            Icon: Positive_ForceMove_Damage
+        - Row: "<size=50%> "
+        - Duration: Persistent

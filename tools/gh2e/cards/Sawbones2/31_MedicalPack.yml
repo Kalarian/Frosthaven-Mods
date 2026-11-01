@@ -1,0 +1,43 @@
+# card: Medical Pack
+# Medical Pack 0442 (sheet position 31): a supply card (the 1st edition's SupplyCard), handed to allies by
+# GiveSupplyCard 13230 (the plugin gives a free copy of the six); never held in the Sawbones' own hand. Safeguard in the class's one shape.
+SupplyCard: True
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal: 4
+                Filter: Self
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 3
+                Filter: Self
+                AnimOverload: Heal
+            BSafeguard:
+                NullTargeting: True
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: GenericOnNegativeCondition
+                    XPTracker: [0]
+                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
+                    Vars:
+                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
+                        ValidateNotImmune: CAbility.ImmuneToAbility(TriggerTarget, TriggerAbility) == False
+                        ValidateIsNegativeCondition: TriggerAbility.AbilityType == "Poison" || TriggerAbility.AbilityType == "Wound" || TriggerAbility.AbilityType == "Stun" || TriggerAbility.AbilityType == "Disarm" || TriggerAbility.AbilityType == "Immobilize" || TriggerAbility.AbilityType == "Muddle" || TriggerAbility.AbilityType == "Curse" || TriggerAbility.AbilityType == "Bane" || TriggerAbility.AbilityType == "Brittle" || TriggerAbility.AbilityType == "Impair"
+                        PreventCondition: True
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal*"
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*"
+        - Row: "<size=20%> "
+        - Active:
+            Ability: BSafeguard
+            Icon: Positive_DamagePrevent
+            ListLayout: "$GH2E_SAFEGUARD$"
+            Layout: "$GH2E_Sawbones2_SG$"

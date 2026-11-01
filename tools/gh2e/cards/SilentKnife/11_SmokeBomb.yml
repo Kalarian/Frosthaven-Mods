@@ -1,0 +1,58 @@
+# card: Smoke Bomb
+# from Xipe's 99098_Scoundrel2_Smoke Bomb.yml; corrected against tools/gh2e/sheets/SilentKnife.json
+# top: the 1st edition Smoke Bomb's shape (passed in the 1e bench): a one-slot persistent x2 attack bonus while Invisible
+# bottom: the 1st edition Sinister Opportunity bottom's control (passed in the 1e bench): the enemy's Move 1 must end
+# adjacent to you (RestrictRange 1)
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TInvis:
+                Invisible:
+                    Enhancements: 1
+                Filter: Self
+                AnimOverload: SelfPowderInvisibility
+                SubAbilities:
+                    TActive:
+                        Attack: 2
+                        ActiveBonus:
+                            Duration: Persistent
+                            Behaviour: BuffAttack
+                            StrengthIsScalar: True
+                            Filter:
+                                CasterHasPositiveConditions: [Invisible]
+                            XPTracker: [2]
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+            BControlActor:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Move: 1
+                            StrengthIsBase: True
+                            RestrictRange: 1
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 1
+                Filter: Enemy
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Invisible$ <sprite name=Invisible> <size=100%><voffset=1>@TInvis@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TActive
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH2E_SilentKnife_11_T$"
+            Layout: "$GH2E_SilentKnife_11_T$"
+        - XPTracker: TActive
+        - Row: "<size=50%> "
+        - Infuse: Dark
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_SilentKnife_11_B$"
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *EnemyWillDoThis*"
+        - Row: "$GH2E_SilentKnife_11_B2$"

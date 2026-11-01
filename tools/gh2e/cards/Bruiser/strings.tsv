@@ -1,0 +1,26 @@
+# key<TAB>English: the Bruiser's card texts as printed on the 2nd edition cards (tools/gh2e/sheets/Bruiser.json)
+GH2E_Bruiser_01_B	Target all enemies moved through with the move ability
+GH2E_Bruiser_02_T	Gain <sprite name=XP1> the next time you retaliate this round.
+GH2E_Bruiser_05_T	where X is the number of hexes you have moved this turn.
+GH2E_Bruiser_05_B	where X is the amount of damage you have dealt this turn.
+GH2E_Bruiser_07_B	On the next six sources of damage from attacks targeting you, gain <nobr><sprite name=Shield> 1,</nobr> <nobr><sprite name=Retaliate> 1</nobr> for the attacks.
+GH2E_Bruiser_11_T	Add +1 <sprite name=Attack> on each undamaged target.
+GH2E_Bruiser_12_B	Whenever an enemy would attack one of your adjacent allies this round, you may have that attack target you instead, regardless of the attack's range and line-of-sight limitations.
+GH2E_Bruiser_13_T	Gain <sprite name=XP1> the next time you retaliate this round.
+GH2E_Bruiser_14_B	On your next two move abilities, add +1 <sprite name=Move>.
+GH2E_Bruiser_15_B	On the next four sources of damage you would suffer, negate the damage.
+GH2E_Bruiser_16_B	If you moved in a straight line in one direction with the move ability, perform:
+GH2E_Bruiser_16_B2	where X is the number of hexes you moved.
+GH2E_Bruiser_17_T	Add +2 <sprite name=Attack> and gain <sprite name=XP1> if you have moved this turn.
+GH2E_Bruiser_19_B	During your next attack ability this round, add +1 <sprite name=Attack> to all attacks.
+GH2E_Bruiser_21_T	The first time each round that you gain <sprite name=Shield> or <sprite name=Retaliate> from one of your ability or attack modifier cards, gain <nobr><sprite name=Shield> 1</nobr> and <nobr><sprite name=Retaliate> 1</nobr> for the round.
+GH2E_Bruiser_22_T	Add +1 <sprite name=Attack> on each undamaged target.
+GH2E_Bruiser_23_B	Once each turn, you may treat one <sprite name=Move> ability from your ability cards as an <sprite name=Attack> ability of equal value.
+GH2E_Bruiser_24_T	Each enemy occupying a hex the target enters suffers <nobr><sprite name=Damage> 4</nobr> and gains <sprite name=Wound>.
+GH2E_Bruiser_25_B	Gain <sprite name=XP1> the next time you retaliate this round.
+GH2E_Bruiser_26_B	where X is the amount of damage you have dealt this turn.
+GH2E_Bruiser_28_T	After each attack targeting you this round, perform:
+GH2E_Bruiser_28_T2	Target one adjacent ally or enemy with the push
+GH2E_Bruiser_28_B	Add +1 to each of your <sprite name=Push> and <sprite name=Pull>. Whenever you <sprite name=Push> or <sprite name=Pull> an enemy at least one hex, after the forced movement, that enemy and all enemies adjacent to it suffer <nobr><sprite name=Damage> 1</nobr>.
+GH2E_Bruiser_29_B	Add +3 <sprite name=Attack> and gain <sprite name=XP1> if the target's current hit point value is lower than yours.
+AMC_GH2E_Bruiser_Push2_P2	+2 <sprite name=Push> 2

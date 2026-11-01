@@ -1,0 +1,58 @@
+# card: Final Fight
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Filter: Self
+                AnimOverload: PowerUp
+                AddActiveBonus:
+                    Attack: 5
+                    AttackHasAdvantage: True
+                    AnimOverload: HeavyAttack
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [0,1,1,1]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Enhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCFire:
+                Elements: Fire
+                Abilities:
+                    BCFireAttackBuff:
+                        ParentName: BNull
+                        Attack: 1
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Round
+                            Behaviour: BuffAttack
+                        AnimOverload: PowerUp
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH2E_Berserker2_15_T$"
+            Layout: "$GH2E_Berserker2_15_T$"
+            Icon: Positive_Advantage_Attack
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCFire
+            Text:
+                - Active:
+                    Ability: BCFireAttackBuff
+                    Icon: Positive_AttackPlus
+                    ListLayout: "$GH2E_Berserker2_15_B$"
+                    Layout: "$GH2E_Berserker2_15_B$"
+        - Row: "<size=50%> "
+        - Duration: Round

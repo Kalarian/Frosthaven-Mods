@@ -1,0 +1,44 @@
+# card: Euthanize
+# top: the 1st edition Euthanize kill with the 2e limits as CAbilityFilter keys: adjacent, damaged (TargetMissingHP),
+# two or more negative conditions, 8 hit points or fewer; normal and elite only (no Frosthaven kill ability takes a
+# boss). bottom: Wound, Poison and Muddle on one enemy within range 1, then damage 1 to it: one Damage 1 carrying the
+# three conditions (same target, same result).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TKill:
+                Kill: True
+                Range: 1
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+                    TargetMissingHP: "> 0"
+                    TargetNegativeConditionCount: ">= 2"
+                    Health: "<= 8"
+                AnimOverload: HeavyMeleeAttack
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BDamage:
+                Damage: 1
+                Range: 1
+                Target: 1
+                Filter: Enemy
+                Conditions: [Wound, Poison, Muddle]
+                AnimOverload: TargetedDebuff
+Layout:
+    Top:
+        - Row: "$GH2E_Sawbones2_27_T$"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Wound$ <sprite name=Wound> $Poison$ <sprite name=Poison> $Muddle$ <sprite name=Muddle>"
+        - Row: "$Range$ <sprite name=Range> *BDamage.Range*"
+        - Row: "$GH2E_Sawbones2_27_B$"

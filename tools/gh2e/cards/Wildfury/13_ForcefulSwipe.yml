@@ -1,0 +1,58 @@
+# card: Forceful Swipe
+# top: COMMAND Attack 2 [square], Push 1, three hexes in front (up-right, right, down-right of the Bear) with the hex
+# mark up-left of the grey hex: the Bruiser's Sweeping Blow area (the sheet: same shape and mark); the 1st edition
+# Forceful Swipe top's ControlActor area attack. XP 1. bottom: COMMAND Move 4 [square].
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            AreaEffect: "0,0,G|1,1,R|2,0,R|1,-1,R|-1,1,E"
+                            MultiPassAttack: False
+                            AnimOverload: ConeAttack
+                            SubAbilities:
+                                TAllyAttackSubPush:
+                                    Push: 1
+                                    AnimOverload: None
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 1
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move:
+                                Amount: 4
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+Layout:
+    Top:
+        - Command: True
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+            - Row: "$Push$ <sprite name=Push> 1"
+            - Row: "<size=50%> "
+            - XP: 1
+        - Column: "£Area£"
+    Bottom:
+        - Command: True
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"

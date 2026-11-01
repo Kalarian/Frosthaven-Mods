@@ -1,0 +1,27 @@
+# card: Pilfer
+# written from tools/gh2e/sheets/Mindthief.json; the money token is text only (NEEDS PLUGIN: Frosthaven's cards have no
+# "gain a money token" ability)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+            TLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$GH2E_Mindthief2_07_T$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *TLoot*"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"

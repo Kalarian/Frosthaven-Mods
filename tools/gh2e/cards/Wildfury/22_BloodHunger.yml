@@ -1,0 +1,94 @@
+# card: Blood Hunger
+# top: COMMAND Attack 3 [diamond], Wound; "if you performed the attack ability": Heal 3 [diamond+], self (the Bear),
+# gated on an attack this action as Energizing Strike top. XP 1.
+# bottom: COMMAND, persistent Shield 1 + Retaliate 2 on the Bear (Frosthaven's persistent shield aura, Banner of
+# Courage's BuffShield, and retaliate aura, Deathwalker Lashing Tendrils' Behaviour Retaliate, filtered to the Bear).
+# The "!" box "at the end of each round, if you neither attacked nor were attacked that round, move this card to the
+# lost pile" has no engine hook: NEEDS PLUGIN (text only; the bonus lasts until the Bear dies or the scenario ends).
+# XP 2, persistent, lost.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack:
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            Conditions: Wound
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                        TAllyHeal:
+                            Heal:
+                                Amount: 3
+                                DiamondPlusEnhancements: 1
+                            Filter: Self
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                ActorHasPerformedValidAbilityTypesThisAction: "> 0"
+                                AbilityTypes: [Attack]
+                            AnimOverload: Heal
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 1
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Behaviour: BuffShield
+                    Duration: Persistent
+                    IsAura: True
+                    AuraFilter:
+                        TargetType: [OwnSummon]
+                        HeroSummonClasses: [WildfuryBearID]
+                    AuraTargeting: All
+                AnimOverload: RadialBeneficial
+            BRetaliate:
+                Retaliate: 2
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Behaviour: Retaliate
+                    Duration: Persistent
+                    IsAura: True
+                    AuraFilter:
+                        TargetType: [OwnSummon]
+                        HeroSummonClasses: [WildfuryBearID]
+                    AuraTargeting: All
+                SkipAnim: True
+        XP: 2
+Layout:
+    Top:
+        - Command: True
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+        - Row: "$Wound$ <sprite name=Wound>"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Wildfury_IF_ATTACKED$"
+        - Row: "<size=130%><b>$Heal$ <sprite name=Heal> *TAllyHeal* <size=100%><voffset=1>@TAllyHeal@"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Command: True
+        - Row: "$GH2E_Wildfury_22_B$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "$GH2E_Wildfury_22_B2$"
+            Layout: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield*"
+        - Active:
+            Ability: BRetaliate
+            Icon: Positive_Retaliate
+            ListLayout: "$GH2E_Wildfury_22_B3$"
+            Layout: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *BRetaliate*"
+        - Row: "<size=50%> "
+        - XP: 2
+        - Duration: Persistent

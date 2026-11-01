@@ -1,0 +1,37 @@
+# card: Disorienting Flash
+# from Xipe's 99033_Tinkerer2_Disorienting Flash.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TStun:
+                Stun:
+                    Enhancements: 1
+                Range: 3
+                Target:
+                    Amount: 3
+                    Enhancements: 1
+                Filter: Enemy
+                XPPerTarget: 1
+                AnimOverload: PowerUpDisorientingFlash
+        Infuse: Light
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 2
+                    CircleEnhancements: 1
+                Range: 4
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Stun$ <sprite name=Stun> <size=100%><voffset=1>@TStun@"
+        - Row: "$Target$ <sprite name=Target> *TStun.Target* @TStun.Target@"
+        - Row: "$Range$ <sprite name=Range> *TStun.Range*"
+        - Row: "$XP_PerEnemy$"
+        - Row: "<size=50%> "
+        - Infuse: Light
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Range$ <sprite name=Range> *BHeal.Range*"

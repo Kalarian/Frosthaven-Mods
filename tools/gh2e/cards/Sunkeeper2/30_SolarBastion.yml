@@ -1,0 +1,75 @@
+# card: Solar Bastion
+# top consume: "one ally targeted with the heal may recover one card from their discard pile": a recover of its own on
+# one ally within the heal's range 3 (the player picks a healed ally).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal: 3
+                Range: 3
+                Target: -1
+                Filter: [Self, Ally]
+                AnimOverload: PositiveBuffRadial
+            TNull:
+                Null: True
+        Consumes:
+            TCLight:
+                Elements: Light
+                Abilities:
+                    TCLightRecover:
+                        ParentName: TNull
+                        RecoverDiscardedCards: 1
+                        Range: 3
+                        Filter:
+                            TargetType: Ally
+                            ActorType: Player
+                        AnimOverload: PositiveBuffTargeted
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BShield:
+                Shield: 2
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+            BNull:
+                Null: True
+        Consumes:
+            BCLight:
+                Elements: Light
+                Abilities:
+                    BCLightRetaliate:
+                        ParentName: BNull
+                        Retaliate: 2
+                        Filter: Self
+                        ActiveBonusDuration: Round
+                        AnimOverload: PowerUp
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal*"
+        - Row: "$Affect_SelfAndAllAllies$ $within$ <nobr>$Range$ <sprite name=Range> *THeal.Range*</nobr>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCLight
+            Text: "$GH2E_Sunkeeper2_30_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BShield
+            Icon: "Shield"
+            ListLayout: "$Shield$ <sprite name=Shield> *BShield*"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCLight
+            Text: "$Retaliate$ <sprite name=Retaliate> 2, <sprite name=XP1>"
+        - Row: "<size=50%> "
+        - Duration: Round

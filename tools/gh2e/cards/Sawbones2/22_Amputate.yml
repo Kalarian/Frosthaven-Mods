@@ -1,0 +1,34 @@
+# card: Amputate
+# bottom: Heal 7 on one figure within range 1, ally, enemy or yourself (Filter [Self, Ally, Enemy]; healing an enemy is
+# unverified in this engine), then the mandatory Stun on the healed figure (the heal's own condition, as the 1st
+# edition card wrote it).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Conditions: [Wound, Immobilize]
+                AnimOverload: HeavyMeleeAttack
+        XP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 7
+                Range: 1
+                Filter: [Self, Ally, Enemy]
+                Conditions: Stun
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Wound$ <sprite name=Wound> $Immobilize$ <sprite name=Immobilize>"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*"
+        - Row: "$GH2E_Sawbones2_22_B$"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Sawbones2_22_B2$"

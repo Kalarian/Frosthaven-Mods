@@ -1,0 +1,16 @@
+Parser: HeroSummon
+ID: ViciousJackal2ID
+LocKey: $GH2E_SUMMON_ViciousJackal$
+Model: ViciousJackal
+Health:
+    Amount: 4
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+    SquareEnhancements: 1
+Attack:
+    Amount: 2
+    SquareEnhancements: 1
+Range: 1
+Retaliate: 1
+OnAttackConditions: Wound

@@ -1,0 +1,48 @@
+# card: Corrupting Embrace
+# written from tools/gh2e/sheets/Mindthief.json; bottom Move 4 has no mark (Xipe had one); the use-slot buff = Xipe's
+# (persistent BuffAttack, melee, XP on slots 2 and 4)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack1:
+                Attack:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Conditions: Wound
+            TAttack2:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Conditions: Muddle
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+            BAttackBuff:
+                Attack: 0
+                Conditions: [Stun, Curse]
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    AttackType: Melee
+                    XPTracker: [0,1,0,1]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+        - Row: "$Wound$ <sprite name=Wound>"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+        - Row: "$Muddle$ <sprite name=Muddle>"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"
+        - Row: "<size=20%> "
+        - Active:
+            Ability: BAttackBuff
+            Icon: Attack
+            ListLayout: "$GH2E_Mindthief2_27_B$"
+            Layout: "$GH2E_Mindthief2_27_B$"
+        - Row: "<size=20%> "
+        - XPTracker: BAttackBuff

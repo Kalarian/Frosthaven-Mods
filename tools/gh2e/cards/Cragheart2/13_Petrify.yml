@@ -1,0 +1,73 @@
+# card: Petrify
+# from Xipe's 99128_Cragheart2_Petrify.yml (Xipe ships the 1st edition card); rewritten from tools/gh2e/sheets/Cragheart.json
+# top: the area attack, then a create sub-ability on the hexes of the enemies this attack killed
+# (CustomAbility.ActorsKilledByThisAbility; a dead figure keeps its ArrayIndex, so .Tile is its last hex), auto-placed,
+# featureless hexes only; XP 1 per kill (StatIsBasedOnX XP: ActorsKilledByParentAbility). Built like Frosthaven's
+# Pyroclast Cooling create (TreatAsNonSubAbility + Targeting Custom). Bench first.
+# bottom: Attack 2 carries a square mark (square slot)
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    Enhancements: 1
+                Range: 3
+                AreaEffect: "0,0,R|2,0,R|1,1,R|3,1,E"
+                AnimOverload: ObstaclePetrify
+                MultiPassAttack: False
+                SubAbilities:
+                    TPetrifyCreate:
+                        Create: RockSingle
+                        Target: -1
+                        TreatAsNonSubAbility: True
+                        AutoTrigger: True
+                        TileFilter: FeaturelessHex
+                        Targeting: Custom
+                        TargetingVars:
+                            AddTilesInRange: CustomAbility.ActorsKilledByThisAbility(ParentAbility).Select(obj.Tile)
+                        StatIsBasedOnX:
+                            XP:
+                                BasedOn: ActorsKilledByParentAbility
+                        SpawnDelay: 3.06
+                        AnimOverload: None
+        Infuse: Earth
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 2
+                    Enhancements: 1
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    BCEarthRangeBuff:
+                        ParentName: BAttack
+                        Range: 2
+                XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "60,40"
+            - Column:
+                - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+            - Column:
+                - Row: "£Area£"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Cragheart2_13_T$"
+        - Row: "<size=20%> "
+        - Infuse: Earth
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Range$ <sprite name=Range> *BAttack.Range* @BAttack.Range@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCEarth
+            Text: "+2 $Range$ <sprite name=Range>, <sprite name=XP1>"

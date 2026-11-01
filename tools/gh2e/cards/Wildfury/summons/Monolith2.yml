@@ -1,0 +1,27 @@
+Parser: HeroSummon
+ID: Monolith2ID
+LocKey: $GH2E_SUMMON_Monolith$
+# the 1st edition Monolith's model (Stone Sigil's summon there too: HP 15, Shield 2; 2e: HP 2 and an aura)
+Model: Monolith
+Health:
+    Amount: 2
+    SquareEnhancements: 1
+Move: 0
+Attack: 0
+Range: 0
+# "All allies within Range 3 gain Shield 1": Frosthaven's Banner of Courage shield aura (BuffShield), range 3
+OnSummonAbilities:
+    AShieldAura:
+        Shield: 1
+        Range: 3
+        Target: -1
+        Filter: Self
+        ActiveBonus:
+            Behaviour: BuffShield
+            Duration: Persistent
+            IsAura: True
+            AuraTargeting: Range
+            AuraFilter: [Ally]
+            ListLayoutOverride: [$GH2E_Wildfury_17_T$, Positive_Shield_Ally_Aura]
+        Text: "$GH2E_Wildfury_17_T$"
+        AnimOverload: None

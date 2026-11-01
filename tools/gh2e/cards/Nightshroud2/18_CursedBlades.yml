@@ -1,0 +1,42 @@
+# card: Cursed Blades
+# top: the consume gives a second, separate Attack 2 with Curse (no "+": the sheet's note), the 1st edition Black Arrow
+# bottom's consume-an-ability shape.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Conditions: Curse
+            TNull:
+                Null: True
+        Consumes:
+            TCDark:
+                Elements: Dark
+                Abilities:
+                    TCDarkAttack:
+                        ParentName: TNull
+                        Attack: 2
+                        Conditions: Curse
+                XP: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 6
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Curse$ <sprite name=Curse>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "$Attack$ <sprite name=Attack> 2, $Curse$ <sprite name=Curse>, <sprite name=XP1>"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

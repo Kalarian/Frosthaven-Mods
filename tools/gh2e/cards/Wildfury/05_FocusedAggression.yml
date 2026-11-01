@@ -1,0 +1,58 @@
+# card: Focused Aggression
+# top: Attack 3 [diamond], Range 3 [square], infuse Air. bottom: Move 3 [square]; grant one adjacent ally Shield 1 for
+# the round (the 1st edition Maul bottom's shape); "if the target of the grant is the Bear, also Retaliate 1": a
+# sub-ability on the shield's own target (UseParentTargets) filtered to the Bear, so it lands only when the shield went
+# to the Bear. Untested filter-on-parent-target shape (NOTES.md).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+        Infuse: Air
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    SquareEnhancements: 1
+            BShield:
+                Shield: 1
+                Range: 1
+                Filter: Ally
+                ActiveBonusDuration: Round
+                AnimOverload: RadialBeneficial
+                SubAbilities:
+                    BBearRetaliate:
+                        Retaliate: 1
+                        UseParentTargets: True
+                        Filter:
+                            TargetType: [OwnSummon]
+                            HeroSummonClasses: [WildfuryBearID]
+                        ActiveBonusDuration: Round
+                        SkipAnim: True
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=50%> "
+        - Infuse: Air
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Wildfury_05_B$"
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield*"
+        - Row: "$GH2E_Wildfury_05_B2$"
+        - Row: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> 1"
+        - Row: "<size=50%> "
+        - Duration: Round

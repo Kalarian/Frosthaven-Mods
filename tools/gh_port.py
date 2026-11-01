@@ -1048,7 +1048,7 @@ def main():
             write(rel, s)
 
         print(f"{cls}: 1 character, {len(cards)} cards (IDs {CARD_ID_OFFSET + 1}..), {len(perks)} perks"
-              + (f" and {len(crossover) - len(perks)} masteries from Frosthaven's crossover sheet" if crossover else " from Gloomhaven")
+              + (f" and {sum(1 for r, _ in crossover if r.startswith('Campaign/Masteries/'))} masteries from {'its perk table' if EDITION == 2 else 'the crossover sheet'}" if crossover else " from Gloomhaven")
               + (f", retirement story (section {gh_story.section_id(cls)})" if story else ", no retirement story yet"))
 
         if EDITION == 2:   # pictures, model, effects and sounds: the 1st edition pack's, found by model name

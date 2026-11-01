@@ -1,0 +1,55 @@
+# card: Run Through
+# 2e sheet: top Attack 3 [diamond], Pierce 2, "+1 Attack on each undamaged target", 3 hexes in a diagonal line with the
+# hex mark on the next hex beyond the last red; bottom Move 3 [circle], Push 1 [square] range 1, Immobilize. The area is
+# the 1st edition Skewer's (a line drawn diagonally) one hex longer; the enhancement hex goes beyond the line (Xipe put
+# it on the last red hex, 6,0). Undamaged = full hit points, as Sweeping Blow. The bottom push carries the immobilize
+# (Frosthaven's pull/push with Conditions, Banner Spear's Taunting Howl).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                    Pierce: 2
+                AreaEffect: "0,0,G|2,0,R|4,0,R|6,0,R|8,0,E"
+                AreaEffectLayoutOverride: "0,0,G|1,1,R|2,2,R|3,3,R|4,4,E"
+                AnimOverload: RadialAttack
+                MultiPassAttack: False
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            TargetType: Enemy
+                            TargetMissingHP: "== 0"
+                        AbilityOverrides:
+                            TUndamagedBuff:
+                                Strength: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BPush:
+                Push:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range: 1
+                Conditions: Immobilize
+                AnimOverload: TargetedShout
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce*"
+            - Row: "<size=20%> "
+            - Row: "$GH2E_Bruiser_22_T$"
+        - Column: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Push$ <sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"
+        - Row: "$Target_OneAdjacentEnemy$"
+        - Row: "$Immobilize$ <sprite name=Immobilize>"

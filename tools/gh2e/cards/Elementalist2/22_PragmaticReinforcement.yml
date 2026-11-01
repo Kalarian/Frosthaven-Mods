@@ -1,0 +1,89 @@
+# card: Pragmatic Reinforcement
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 4
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightRecover:
+                        ParentName: THeal
+                        SubAbilities:
+                            THealRecover:
+                                RecoverDiscardedCards: 1
+                                UseParentTargets: True
+                                CanSkip: True
+                                Vars:
+                                    CardLevel: 1
+                            THealInfuse:
+                                Infuse: [Air, Earth]
+                                ShowElementPicker: True
+                                TreatAsNonSubAbility: True
+                                CanUndo: False
+                                SkipAnim: True
+            TCAir:
+                Elements: Air
+                ConsumeOnlyOneElement: True
+                AbilityOverrides:
+                    TCAirShield:
+                        ParentName: THeal
+                        SubAbilities:
+                            THealShieldA:
+                                Shield: 2
+                                UseParentTargets: True
+                                ActiveBonusDuration: Round
+                                SkipAnim: True
+            TCEarth:
+                Elements: Earth
+                ConsumeOnlyOneElement: True
+                AbilityOverrides:
+                    TCEarthShield:
+                        ParentName: THeal
+                        SubAbilities:
+                            THealShieldE:
+                                Shield: 2
+                                UseParentTargets: True
+                                ActiveBonusDuration: Round
+                                SkipAnim: True
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BInfuse:
+                Infuse: [Ice, Earth]
+                ShowElementPicker: True
+                CanUndo: False
+                CanSkip: False
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Range$ <sprite name=Range> *THeal.Range*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCLight
+            Text: "$GH2E_Elementalist2_22_T$"
+        - Consume:
+            Name: TCAir
+            Text: "$GH2E_Elementalist2_22_T2$"
+        - Consume:
+            Name: TCEarth
+            Text: "$GH2E_Elementalist2_22_T2$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Row: "<sprite name=CreateMixed-IE>"

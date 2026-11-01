@@ -1,0 +1,104 @@
+# card: Malleable Evocation
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 2
+                    CircleEnhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireStrengthen:
+                        ParentName: THeal
+                        Conditions: Strengthen
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceWard:
+                        ParentName: THeal
+                        Conditions: Ward
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirBless:
+                        ParentName: THeal
+                        Conditions: Bless
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthSafeguard:
+                        ParentName: THeal
+                        SubAbilities:
+                            THealSafeguard:
+                                AddActiveBonus:
+                                    Null: True
+                                    Filter: Self
+                                    AutoTrigger: True
+                                    SkipAnim: True
+                                Filter: [Self, Ally]
+                                UseParentTargets: True
+                                SkipAnim: True
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: GenericOnNegativeCondition
+                                    IsToggleBonus: True
+                                    XPTracker: [0]
+                                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
+                                    Vars:
+                                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
+                                        ValidateNotScenarioEffect: TriggerAbility.TreatedAsScenarioEffect() == False
+                                        PreventCondition: True
+            TCTwo:
+                Requirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateTwoElementsConsumed: PhaseManager.CurrentPhaseAction.ActionAugmentationsToConsume.Where(obj.Elements.Count > 0).Count >= 2
+                AbilityOverrides:
+                    TCTwoTarget:
+                        ParentName: THeal
+                        Target: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BInfuseWaning:
+                Infuse: [Air, Earth, Fire, Light, Dark, Ice]
+                SkipAnim: True
+                AnimOverload: GatherElements
+                MiscVars:
+                    InfuseOnlyWaning: True
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Range$ <sprite name=Range> *THeal.Range* @THeal.Range@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFire
+            Text: "$Strengthen$ <sprite name=Strengthen>"
+        - Consume:
+            Name: TCIce
+            Text: "$Ward$ <sprite name=Ward>"
+        - Consume:
+            Name: TCAir
+            Text: "$Bless$ <sprite name=Bless>"
+        - Consume:
+            Name: TCEarth
+            Text: "$GH2E_Elementalist2_SAFEGUARD_SHORT$"
+        - Consume:
+            Name: TCTwo
+            Text: "$GH2E_Elementalist2_TWO_TARGET$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Elementalist2_02_B$"

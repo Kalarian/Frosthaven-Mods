@@ -1,0 +1,58 @@
+# card: Provoking Roar
+# 2e sheet: top Pull 2 [square], Range 3 [square], Muddle; Retaliate 2, "gain XP 1 the next time you retaliate this
+# round", round; bottom Move 2 [circle], Pull 2 [square], Range 3 [square]. A pull that muddles is Frosthaven's own
+# shape (Banner Spear's Taunting Howl: Pull, Range, Conditions). The XP is ProcXP on the round retaliate (NOTES.md).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPull:
+                Pull:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Conditions: Muddle
+                AnimOverload: TargetedShout
+            TRetaliate:
+                Retaliate: 2
+                ActiveBonus:
+                    Duration: Round
+                    ProcXP: 1
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BPull:
+                Pull:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: TargetedShout
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Pull$ <sprite name=Pull> *TPull* <size=100%><voffset=1>@TPull@"
+        - Row: "$Range$ <sprite name=Range> *TPull.Range* @TPull.Range@"
+        - Row: "$Muddle$ <sprite name=Muddle>"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TRetaliate
+            Icon: Positive_XP_Retaliate
+            ListLayout: "<sprite name=Retaliate> *TRetaliate*, $GH2E_Bruiser_13_T$"
+            Layout:
+                - Row: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *TRetaliate*"
+                - Row: "<size=20%> "
+                - Row: "$GH2E_Bruiser_13_T$"
+        - Row: "<size=20%> "
+        - Duration: Round
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Pull$ <sprite name=Pull> *BPull* <size=100%><voffset=1>@BPull@"
+        - Row: "$Range$ <sprite name=Range> *BPull.Range* @BPull.Range@"

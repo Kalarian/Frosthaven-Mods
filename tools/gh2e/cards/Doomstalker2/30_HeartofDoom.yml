@@ -1,0 +1,61 @@
+# card: Heart of Doom
+# top: "play a card from your hand to perform a Doom action" = Frosthaven's SelectAndPlayCard (Blinkblade Reverse the
+# Flow, Boneshaper Malicious Conversion), hand only, actions with a Doom only. Then the 1st edition Wild Command bottom
+# attack (doomed enemy at any range) and a plain Attack 3, Range 5.
+# bottom: "any number of Doom active on the same target" = the 1st edition Inescapable Fate's AddDoomSlot (+4: five
+# dooms, effectively any number). "If you discard this card, discard all but one active Doom" is left to the engine's
+# doom-slot handling (unverified). Then SelectAndPlayCard from the hand or the discard pile.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPlayDoom:
+                Filter: Self
+                SelectAndPlayCard:
+                    CardPile: Hand
+                MiscVars:
+                    IsActionValid: Action.Abilities.Any(obj.AbilityType == CAbility.EAbilityType.AddDoom)
+                AnimOverload: PowerUp
+            TAttackDoomed:
+                Attack: 3
+                Targeting: All
+                Filter:
+                    IsDoomed: True
+                AnimOverload: RangedAttack
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 5
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BAddDoomSlot:
+                AddDoomSlot: 4
+                Filter: Self
+                ActiveBonusDuration: Persistent
+                AnimOverload: PowerUp
+            BPlayDoom:
+                Filter: Self
+                SelectAndPlayCard:
+                    CardPile: [Hand, Discarded]
+                MiscVars:
+                    IsActionValid: Action.Abilities.Any(obj.AbilityType == CAbility.EAbilityType.AddDoom)
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "$GH2E_Doomstalker2_30_T$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttackDoomed*"
+        - Row: "$GH2E_Doomstalker2_23_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+    Bottom:
+        - Active:
+            Ability: BAddDoomSlot
+            Icon: "Doom"
+            ListLayout: "$GH2E_Doomstalker2_30_B$"
+            Layout: "$GH2E_Doomstalker2_30_B$"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Doomstalker2_30_B2$"

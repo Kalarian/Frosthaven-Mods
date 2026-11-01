@@ -1,0 +1,66 @@
+# card: Bathe in Blood
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Filter: Self
+                AnimOverload: PowerUp
+                AddActiveBonus:
+                    Damage: 1
+                    Target: -1
+                    Targeting: All
+                    IgnoreStun: True
+                    Filter:
+                        TargetType: Enemy
+                        TargetHasNegativeCondition: Wound
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnDamaged
+                    TriggerAbilitiesImmediately: True
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 5
+                    Enhancements: 1
+                Jump: True
+            BPull:
+                Pull:
+                    Amount: 1
+                    Enhancements: 1
+                Range:
+                    Amount: 2
+                    Enhancements: 1
+                Target: -1
+                Filter: Enemy
+            BMuddle:
+                Muddle: True
+                Range: 1
+                Target: -1
+                Filter: Enemy
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$GH2E_Berserker2_28_T$"
+            Layout: "$GH2E_Berserker2_28_T$"
+            Icon: Positive_Wound
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Pull$ <sprite name=Pull> *BPull* <size=100%><voffset=1>@BPull@"
+        - Row: "$Target_AllEnemiesWithin$ $Range$ <sprite name=Range> *BPull.Range* @BPull.Range@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Muddle$ <sprite name=Muddle>"
+        - Row: "$Target_AllAdjacentEnemies$"

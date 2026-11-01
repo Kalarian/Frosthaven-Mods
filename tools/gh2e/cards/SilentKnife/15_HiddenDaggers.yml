@@ -1,0 +1,61 @@
+# card: Hidden Daggers
+# from Xipe's 99102_Scoundrel2_Hidden Daggers.yml; corrected against tools/gh2e/sheets/SilentKnife.json (agrees)
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack1:
+                Attack: 2
+                Range: 3
+                AnimOverload: RangedAttackThrowingKnives
+            TAttack2:
+                Attack: 2
+                Range: 3
+                AnimOverload: RangedAttackThrowingKnives
+            TAttack3:
+                Attack: 2
+                Range: 3
+                AnimOverload: RangedAttackThrowingKnives
+            TAttack4:
+                Attack: 2
+                Range: 3
+                AnimOverload: RangedAttackThrowingKnives
+            TAttack5:
+                Attack: 2
+                Range: 3
+                AnimOverload: RangedAttackThrowingKnives
+        XP: 2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 1
+                Target:
+                    Amount: 2
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                AnimOverload: RangedAttackThrowingKnives
+                ConditionalOverrides:
+                    BAttackCO:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentAlliesOfTarget: "== 0"
+                        AbilityOverrides:
+                            BIsolatedBuff:
+                                Strength: 1
+Layout:
+    Top:
+        - Row: "<b>$Attack$ <sprite name=Attack> *TAttack1*   $Range$ <sprite name=Range> *TAttack1.Range*"
+        - Row: "<b>$Attack$ <sprite name=Attack> *TAttack2*   $Range$ <sprite name=Range> *TAttack2.Range*"
+        - Row: "<b>$Attack$ <sprite name=Attack> *TAttack3*   $Range$ <sprite name=Range> *TAttack3.Range*"
+        - Row: "<b>$Attack$ <sprite name=Attack> *TAttack4*   $Range$ <sprite name=Range> *TAttack4.Range*"
+        - Row: "<b>$Attack$ <sprite name=Attack> *TAttack5*   $Range$ <sprite name=Range> *TAttack5.Range*"
+        - Row: "<size=50%> "
+        - XP: 2
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack*"
+        - Row: "$Target$ <sprite name=Target> *BAttack.Target* @BAttack.Target@"
+        - Row: "$Range$ <sprite name=Range> *BAttack.Range* @BAttack.Range@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_SilentKnife_15_B$"

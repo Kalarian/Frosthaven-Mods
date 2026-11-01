@@ -1,0 +1,72 @@
+# card: Supportive Chant
+# top: "grant all allies within range 3: Ward, Strengthen, Bless, self; Attack 5": each ally gains the three conditions
+# (applied by you: the same result as the ally applying them to itself), then each performs Attack 5.
+# bottom: the 1st edition Supportive Chant's round aura on all allies (BuffAttack); the consume adds advantage to it.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TConditions:
+                Ward: True
+                Conditions: [Strengthen, Bless]
+                Range: 3
+                Target: -1
+                Filter: Ally
+                AnimOverload: PositiveBuffRadial
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack:
+                                Amount: 5
+                                Enhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                Range: 3
+                Target: -1
+                Filter: Ally
+                AnimOverload: ControlAlly
+        XP: 2
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    IsAura: True
+                    AuraFilter: [Ally]
+                    AuraTargeting: All
+                AnimOverload: PositiveBuffRadial
+        Consumes:
+            BCLight:
+                Elements: Light
+                AbilityOverrides:
+                    BCLightAdvantage:
+                        ParentName: BActive
+                        AttackHasAdvantage: True
+                XP: 1
+Layout:
+    Top:
+        - Row: "$GH2E_Sunkeeper2_28_T$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Ward$ <sprite name=Ward>, $Strengthen$ <sprite name=Strengthen>, $Bless$ <sprite name=Bless>"
+        - Row: "$Self$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+        - Row: "<size=50%> "
+        - XP: 2
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: "Positive_AttackPlus_Ally_Aura"
+            ListLayout: "$GH2E_Sunkeeper2_28_B$"
+            Layout: "$GH2E_Sunkeeper2_28_B$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCLight
+            Text: "$GH2E_Sunkeeper2_28_B2$"
+        - Row: "<size=50%> "
+        - Duration: Round

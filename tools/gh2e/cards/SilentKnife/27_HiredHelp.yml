@@ -1,0 +1,40 @@
+# card: Hired Help
+# corrected against tools/gh2e/sheets/SilentKnife.json
+# top: Frosthaven's own conversion, ChangeAllegiance to Ally (scenario 119's FH119_InfuserChangeAllegiance): the monster
+# becomes an allied monster for the rest of the scenario, an enemy to the other monsters, acting on its own. Normal
+# enemies only, adjacent. The money-token cost and the extra money token it drops on death have no Frosthaven form -
+# NEEDS PLUGIN. Lost with XP 2 (Xipe's per-turn ControlActor dropped; it was also not lost).
+# bottom: Disarm, range 1 - no mark (Xipe had one on the range)
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TConvert:
+                ChangeAllegiance:
+                    ChangeToType: Ally
+                Range: 1
+                Target: 1
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: Normal
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Enhancements: 1
+            BDisarm:
+                Disarm: True
+                Range: 1
+                Filter: Enemy
+Layout:
+    Top:
+        - Row: "$GH2E_SilentKnife_27_T$"
+        - Row: "<size=50%> "
+        - XP: 2
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Disarm$ <sprite name=Disarm>"
+        - Row: "$Range$ <sprite name=Range> *BDisarm.Range*"

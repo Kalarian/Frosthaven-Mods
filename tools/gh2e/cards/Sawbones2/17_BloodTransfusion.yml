@@ -1,0 +1,75 @@
+# card: Blood Transfusion
+# top: Heal X = the damage the attack dealt, Frosthaven's Drifter Consume Stamina shape (GetDamageDealt of TAttack).
+# bottom: Safeguard on one figure within range 1, with the condition removal and the medical pack as sub-abilities on
+# the same target (a self target gains the pack too).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+            THeal:
+                Heal: 0
+                Range: 1
+                Target: 1
+                Filter: Ally
+                AnimOverload: Heal
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: Vars
+                        Vars:
+                            AttackAbility: CustomAbility.FindAbilityInPhaseByName("TAttack", TargetingActor)
+                            Value: CustomAbility.GetDamageDealt(AttackAbility)
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    ActorHasPerformedValidAbilityTypesThisAction: "> 0"
+                    AbilityTypes: [Attack]
+    Bottom:
+        Abilities:
+            BSafeguard:
+                NullTargeting: True
+                Filter: [Self, Ally]
+                Range: 1
+                Target: 1
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: GenericOnNegativeCondition
+                    XPTracker: [0]
+                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
+                    Vars:
+                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
+                        ValidateNotImmune: CAbility.ImmuneToAbility(TriggerTarget, TriggerAbility) == False
+                        ValidateIsNegativeCondition: TriggerAbility.AbilityType == "Poison" || TriggerAbility.AbilityType == "Wound" || TriggerAbility.AbilityType == "Stun" || TriggerAbility.AbilityType == "Disarm" || TriggerAbility.AbilityType == "Immobilize" || TriggerAbility.AbilityType == "Muddle" || TriggerAbility.AbilityType == "Curse" || TriggerAbility.AbilityType == "Bane" || TriggerAbility.AbilityType == "Brittle" || TriggerAbility.AbilityType == "Impair"
+                        PreventCondition: True
+                SubAbilities:
+                    BSafeguardSubRemove:
+                        RemoveConditions: All
+                        Conditions: [Wound, Brittle, Bane, Poison, Immobilize, Disarm, Impair, Stun, Muddle]
+                        AnimOverload: None
+                    BSafeguardSubGive:
+                        GiveSupplyCard: 13230
+                        Filter:
+                            TargetType: [Self, Ally]
+                            ActorType: Player
+                        AnimOverload: None
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> X"
+        - Row: "$Target_OneAdjacentAlly$"
+        - Row: "$GH2E_Sawbones2_17_T$"
+    Bottom:
+        - Active:
+            Ability: BSafeguard
+            Icon: Positive_DamagePrevent
+            ListLayout: "$GH2E_SAFEGUARD$"
+            Layout: "$GH2E_Sawbones2_SG_R1$"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Sawbones2_17_B$"
+        - Row: "<size=50%> "
+        - XP: 1

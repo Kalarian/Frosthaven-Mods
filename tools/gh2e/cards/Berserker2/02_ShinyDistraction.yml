@@ -1,0 +1,63 @@
+# card: Shiny Distraction
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TLoot:
+                Loot: 1
+                Target: -1
+            TShield:
+                Shield:
+                    Amount: 1
+                    Enhancements: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BAdvantage:
+                Filter: [Self]
+                Attack: 0
+                AttackHasAdvantage: True
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+            BDisadvantage:
+                AttackersGainDisadvantage: 1
+                Range: 0
+                Target: -1
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+        Infuse: Fire
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *TLoot*"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TShield
+            Icon: Shield
+            ListLayout: "$Shield$ <sprite name=Shield> *TShield*"
+            Layout:
+                - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+        - Row: "<size=50%> "
+        - Duration: Round
+    Bottom:
+        - Active:
+            Ability: [BAdvantage, BDisadvantage]
+            Icon: Positive_Disadvantage_Enemy_Attack
+            ListLayout: "$GH2E_Berserker2_02_B$ $GH2E_Berserker2_02_B2$"
+            Layout:
+                - Row: "$GH2E_Berserker2_02_B$"
+                - Row: "<size=50%> "
+                - Row: "$GH2E_Berserker2_02_B2$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Fire
+            - Column:
+                - Duration: Round

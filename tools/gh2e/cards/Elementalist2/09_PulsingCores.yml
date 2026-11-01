@@ -1,0 +1,51 @@
+# card: Pulsing Cores
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                AnimOverload: TargetFloorFireIce
+        Consumes:
+            TCFire:
+                Elements: Fire
+                Infuse: [Fire]
+                AbilityOverrides:
+                    TCFireArea:
+                        ParentName: TAttack
+                        AreaEffect: "0,0,R|2,0,R|1,1,R"
+                        MultiPassAttack: False
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Infuse: [Any]
+                    ShowElementPicker: True
+                    Filter: Self
+                    AnimOverload: None
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [0,1,0,1,0,1]
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFire
+            Text: "$GH2E_Elementalist2_09_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$GH2E_Elementalist2_09_B$"
+            Layout: "$GH2E_Elementalist2_09_B$"
+            Icon: "Positive_FireLightInfuse_Wild"
+        - Row: "<size=20%> "
+        - XPTracker: BActive

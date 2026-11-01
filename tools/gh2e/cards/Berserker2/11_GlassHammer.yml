@@ -1,0 +1,31 @@
+# card: Glass Hammer
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 0
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: PercentageOfCurrentHP
+                        Multiplier: 1.0
+                GainXPPerXDamageDealt: 5
+                SetHPTo: 1
+                AnimOverload: SuperHeavyAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+                Jump: True
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> X"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Berserker2_11_T$"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Berserker2_11_T2$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$Jump$ <sprite name=Jump>"

@@ -1,0 +1,128 @@
+# Nightshroud (2nd edition) perks: the perk sheet "Aesther Nightshroud" (tools/gh2e/classes.json, docs/gh2e/class-notes.md),
+# 18 checks in all. gh_crossover's table format: (checkboxes, name, description in sprite markup, {perk fields}).
+# Linked perks (boxes joined on the sheet) are one perk with Available 1 and Cost = the joined boxes, as gh_crossover
+# writes them. A Tear is a Deathwalker shadow on the map (CreateShadow), as on the cards (NOTES.md).
+
+PERKS = [
+    (1, "Smooth Edge", 'Remove one <sprite name="-2">',
+     {"CardsToRemove": "[AMC_Basic_M2]"}),
+    (2, "Light Step", 'Remove two <sprite name="-1">',
+     {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
+    # "grant one adjacent ally or self: Teleport 2": APPROXIMATION: the Teleport 2 is yours only (a modifier can't grant
+    # an ability to another figure cleanly; NOTES.md)
+    (1, "Shadow Hop", 'Replace one <sprite name="-1"> with two <sprite name="0"> "After the attack ability, grant one adjacent ally or self: <sprite name=Teleport> 2" <sprite name=Rolling>',
+     {"CardsToRemove": "[AMC_Basic_M1]",
+      "CardsToAdd": "[AMC_GH2E_Nightshroud2_Teleport2_R, AMC_GH2E_Nightshroud2_Teleport2_R]"}),
+    (1, "Calculated Risk", 'Replace one <sprite name="NullModifier"> with one <sprite name="-2"> <sprite name=Shuffle>',
+     {"CardsToRemove": "[AMC_Basic_T0]", "CardsToAdd": "[AMC_Basic_M2_Shuffle]"}),
+    # unverified: the kill test reads the target after the attack (NOTES.md)
+    (2, "Lingering Doom", 'Replace two <sprite name="0"> with two <sprite name="+1"> "If this attack kills the target, shuffle one <sprite name=Curse> card into the monster attack modifier deck"',
+     {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P0]",
+      "CardsToAdd": "[AMC_GH2E_Nightshroud2_KillCurse_P1, AMC_GH2E_Nightshroud2_KillCurse_P1]"}),
+    (2, "Gathering Dark", 'Replace one <sprite name="0"> with one <sprite name="+2"> <sprite name=CreateDark>',
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Dark_P2]"}),
+    (2, "Torn Veil", 'Replace one <sprite name="+1"> with one <sprite name="0"> "Place one Tear in a hex adjacent to the target"',
+     {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_GH2E_Nightshroud2_Tear_P0]"}),
+    (1, "Unfazed", 'Ignore scenario effects and add two <sprite name="+1">',
+     {"CardsToAdd": "[AMC_Basic_P1, AMC_Basic_P1]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
+    # the Elementalist's long-rest infusion (gh_crossover ELEMENTALIST_PERKS), Dark only; "may" is automatic
+    (1, "Restful Night", "Whenever you long rest, you may <sprite name=CreateDark>",
+     {"Flags": "[Passive, ExecuteAbilitiesAfterLongRest]", "Abilities": """\
+    BInfuse:
+        Infuse: [Dark]
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        CanUndo: False"""}),
+    # gh_crossover's once-each-scenario toggle (_once_per_quest: Perk_BannerSpear_10's persistent DuringTurnAbility
+    # toggle, one use), its ability a Tear in an adjacent hex (CreateShadow, range 1)
+    (1, "Rift Opener", "Once each scenario, during your turn, place one Tear in an adjacent hex",
+     {"Cost": 2, "Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]", "Abilities": """\
+    TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            CreateShadow:
+            HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+            Range: 1
+            Target: 1
+            AnimOverload: Shadow Manipulation
+            Filter: [Self]
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringTurnAbility
+            XPTracker: [0]
+            IsToggleBonus: True
+            Hidden: True
+            ListLayoutOverride: [$GH2E_Nightshroud2_PERK_10$, Positive_Teleport_Shadow]
+            MiscVars:
+                OverrideIcon: "'Positive_Teleport_Shadow'"
+        AnimOverload: PowerUp"""}),
+    # the 1st edition Plagueherald Baneful Hex's DamageOnCurseModApplied bonus (damage to an enemy whose drawn curse
+    # applies), held for the whole scenario. A drawn curse always makes the attack deal no damage (null), so this is the
+    # printed rule except for curses drawn on attacks that deal no damage anyway.
+    (1, "Hexed Retribution", "If a <sprite name=Curse> causes an enemy to deal no <sprite name=Damage> during its attack, that enemy suffers <sprite name=Damage> 3",
+     {"Cost": 3, "Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]", "Abilities": """\
+    TCurseDamage:
+        Damage: 3
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DamageOnCurseModApplied
+            Filter: Enemy
+            Hidden: True
+        AnimOverload: None"""}),
+]
+
+MASTERIES = [
+    ("Child of Darkness", "In a single scenario, infuse or consume <sprite name=CreateDark> during each of your turns",
+     """\
+# The 1st edition crossover's Creature of the Night: Dark infused or consumed on every turn taken, answered by the
+# Frosthaven Mods plugin (GHMasteries.cs) from the element records.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ElementEveryTurn]
+        Elements: Dark
+        CharacterIDs:
+            ActorID: Nightshroud2ID
+        Value: 1"""),
+    ("Relentless Shadow", "In a single scenario, perform an attack ability during your turn in 5 consecutive rounds",
+     """\
+# The plugin's round streak (GHMasteries.cs, the Brute's Relentless Onslaught): Value rounds in a row with at least
+# Amount damage to enemies, no card count. APPROXIMATION: damage dealt each round stands for "an attack ability
+# performed" (an attack that deals no damage doesn't count; damage from a non-attack does) (NOTES.md).
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_DamageStreak]
+        CharacterIDs:
+            ActorID: Nightshroud2ID
+        Value: 5
+        Amount: 1
+        Targets: 0"""),
+]
+
+NEW_CARDS = {
+    "AMC_GH2E_Nightshroud2_Teleport2_R": ('MathModifier: "+0"\nRolling: True\nAbilities:\n    ATeleport:\n'
+                                          '        Teleport2: 2\n        Filter: Self\n        AnimOverload: Teleport Into\n'
+                                          '        AnimOverload2: Teleport Outof\n'),
+    "AMC_GH2E_Nightshroud2_KillCurse_P1": ('MathModifier: "+1"\nAbilities:\n    ACurseDeck:\n'
+                                           '        AddModifiersToMonsterDeck:\n            Strength: 1\n'
+                                           '            ModifiersToAdd: Curse\n        Filter: Enemy\n'
+                                           '        AutoTrigger: True\n        AnimOverload: None\n'
+                                           '        StartAbilityRequirements:\n            Type: ThisAbility\n'
+                                           '            Vars:\n                ValidateKilled: TargetActor != null && TargetActor.IsDead\n'),
+    "AMC_GH2E_Nightshroud2_Tear_P0": ('MathModifier: "+0"\nAbilities:\n    ATear:\n        CreateShadow:\n'
+                                      '        Target: 1\n        Targeting: Custom\n        TargetingVars:\n'
+                                      '            AddTilesInRange: CustomAbility.GetAdjacentTiles(TargetActor.Tile)\n'
+                                      '        AnimOverload: Shadow Manipulation\n'),
+}
+
+STRINGS = {
+    "GH2E_Nightshroud2_PERK_10": "Once each scenario, during your turn, place one Tear in an adjacent hex",
+}

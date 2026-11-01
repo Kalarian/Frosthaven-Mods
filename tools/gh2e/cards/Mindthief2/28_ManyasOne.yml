@@ -1,0 +1,56 @@
+# card: Many as One
+# written from tools/gh2e/sheets/Mindthief.json; both halves persistent and lost (Xipe's bottom was a round aura).
+# Bottom NEEDS PLUGIN: "each round, the first ally who performs a melee attack ability gains your active augments for
+# it" has no data shape; the card stays in the active area as an inert persistent bonus (Attack +0 on your own melee
+# attacks) so a plugin can find it.
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: RatKing2ID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BAugmentShare:
+                Attack: 0
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    AttackType: Melee
+                AnimOverload: PowerUp
+        XP: 2
+Layout:
+    Top:
+        - Active:
+            Ability: TSummon
+            Icon: Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_RatKing$
+                    SpecialText: "$GH2E_Mindthief2_28_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Active:
+            Ability: BAugmentShare
+            Icon: Positive_Cards
+            ListLayout: "$GH2E_Mindthief2_28_B$"
+            Layout: "$GH2E_Mindthief2_28_B$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent

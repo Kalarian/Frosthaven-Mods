@@ -1,0 +1,61 @@
+# card: Unstoppable Beast
+# top: COMMAND Attack 3 [diamond], triangle area (red up-right and right of the Bear), hex mark down-right of the grey
+# hex; consume Earth: +1 Attack, XP 1 (the 1st edition Unstoppable Beast top, 2e area). bottom: COMMAND Move 5 [circle].
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack:
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            AreaEffect: "0,0,G|1,1,R|2,0,R|1,-1,E"
+                            MultiPassAttack: False
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            AnimOverload: ConeAttack
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthAttackBuff:
+                        ParentName: TAllyAttack
+                        Strength: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move:
+                                Amount: 5
+                                CircleEnhancements: 1
+                            StrengthIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+Layout:
+    Top:
+        - Command: True
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+            - Row: "<size=20%> "
+            - Consume:
+                Name: TCEarth
+                Text: "<nobr>+1 $Attack$ <sprite name=Attack>, <sprite name=XP1></nobr>"
+        - Column: "£Area£"
+    Bottom:
+        - Command: True
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"

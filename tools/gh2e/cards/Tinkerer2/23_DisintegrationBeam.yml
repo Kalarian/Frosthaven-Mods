@@ -1,0 +1,38 @@
+# card: Disintegration Beam
+# from Xipe's 99052_Tinkerer2_Disintegration Beam.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            # the 1st edition Disintegration Beam's kill (played in the 1st edition pack), with 2e's four red hexes
+            # and no hex mark
+            TKill:
+                Kill: True
+                Filter:
+                    TargetType: Enemy
+                    Health: "<= 5"
+                AreaEffect: "0,0,G|2,0,R|4,0,R|6,0,R|8,0,R"
+                AreaEffectLayoutOverride: "0,0,G|1,1,R|2,2,R|3,3,R|4,4,R"
+                MultiPassAttack: False
+                XPPerTarget: 1
+                AnimOverload: LeftWristTechDisintegrationBeam
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Range: 3
+                AnimOverload: RangedAttack
+Layout:
+    Top:
+        - ColumnWidths: "60,40"
+        - Column:
+            - Row: "$GH2E_Tinkerer2_23_T$"
+            - Row: "<size=20%> "
+            - Row: "$GH2E_Tinkerer2_23_T2$"
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Range$ <sprite name=Range> *BAttack.Range*"

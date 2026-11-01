@@ -1,0 +1,91 @@
+# card: Unseen Dread
+# top: a Tear within range 2; "whenever an enemy enters a hex within range 2 of you this round, that enemy gains Wound" =
+# Frosthaven's Banner Spear Set for the Charge top (round DuringActionAbilityOnMoved aura on enemies, NotInRangeToInRange
+# flag, the ability aimed at TriggerActor), Range 2, Wound instead of damage. Consume Dark: "at the end of this round,
+# all enemies that have Wound suffer damage 1" = a round EndRoundAbility bonus (Deepwraith Consume the Helpless bottom)
+# whose Damage 1 targets every wounded enemy (Deathwalker Frozen in Fear top's custom targeting); XP 1 for the consume.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TTear:
+                CreateShadow:
+                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+                Range: 2
+                Target: 1
+                AnimOverload: Shadow Manipulation
+            TWoundAura:
+                AddActiveBonus:
+                    Wound: True
+                    Filter: Enemy
+                    AutoTrigger: True
+                    Targeting: Custom
+                    TargetingVars:
+                        AddValidActorInRange: TriggerActor
+                    MiscVars:
+                        InterruptCurrentAbility: True
+                        StackNextToCurrent: True
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: DuringActionAbilityOnMoved
+                    Flags: NotInRangeToInRangeMove
+                    IsAura: True
+                    HiddenWhenAura: True
+                    TriggerOnCaster: True
+                    AuraTargeting: Range
+                    AuraFilter:
+                        TargetType: Enemy
+                        UseTargetOriginalType: True
+                Range: 2
+                Target: -1
+                Filter: Self
+                AnimOverload: PowerUp
+            TNull:
+                Null: True
+        Consumes:
+            TCDark:
+                Elements: Dark
+                Abilities:
+                    TCDarkEndRound:
+                        ParentName: TNull
+                        AddActiveBonus:
+                            Damage: 1
+                            Target: -1
+                            AutoTrigger: True
+                            Targeting: Custom
+                            TargetingVars:
+                                Actors: AllEnemyMonsters.Where(obj.Tokens.HasKey(CCondition.ENegativeCondition.Wound))
+                                AddValidActorsInRange: Actors
+                                AddTilesInRange: Actors.Select(obj.Tile)
+                            AnimOverload: Debuff
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Round
+                            Behaviour: EndRoundAbility
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+        Infuse: Dark
+Layout:
+    Top:
+        - Row: "$GH2E_Nightshroud2_13_T$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TWoundAura
+            Icon: Icon_Wound
+            ListLayout: "$GH2E_Nightshroud2_13_T2$"
+            Layout: "$GH2E_Nightshroud2_13_T2$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "$GH2E_Nightshroud2_13_T3$"
+        - Row: "<size=50%> "
+        - Duration: Round
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Infuse: Dark

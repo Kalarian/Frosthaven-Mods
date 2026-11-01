@@ -1,0 +1,37 @@
+# card: Noxious Vials
+# from Xipe's 99051_Tinkerer2_Noxious Vials.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+                Range: 3
+                Conditions: [Wound, Disarm]
+                AnimOverload: LeftWristTechNoxiousVial
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 3
+                Conditions: Poison
+                AreaEffect: "0,0,R|2,0,R|1,1,R|3,1,E"
+                MultiPassAttack: False
+                XPPerTarget: 1
+                AnimOverload: LeftWristTechNoxiousVial
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Wound$ <sprite name=Wound> $Disarm$ <sprite name=Disarm>"
+    Bottom:
+        - ColumnWidths: "65,35"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Row: "$Range$ <sprite name=Range> *BAttack.Range*"
+            - Row: "$Poison$ <sprite name=Poison>"
+            - Row: "$XP_PerEnemy$"
+        - Column:
+            - Row: "£Area£"

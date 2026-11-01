@@ -1,0 +1,56 @@
+# card: Booster Shot
+# top (Prescription): placed on one adjacent ally (GiveAbilityCardToActor, the 1st edition's verified shape); there it is
+# Frosthaven's ShieldIncomingAttacks (Drifter Unbreakable) with four use slots, so "you" is the ally holding it.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TShield:
+                Shield: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                Range: 1
+                Target: 1
+                MiscVars:
+                    GH2E_Prescription: True
+                ActiveBonus:
+                    Duration: Persistent
+                    GiveAbilityCardToActor: True
+                    IsToggleBonus: True
+                    ToggleIsOptional: False
+                    Behaviour: ShieldIncomingAttacks
+                    ValidAbilityType: Attack
+                    XPTracker: [0,0,0,0]
+                AnimOverload: BuffAdjacent
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BStrengthen:
+                Strengthen:
+                    DiamondPlusEnhancements: 1
+                Range: 1
+                Filter: Ally
+                AnimOverload: PositiveBuffTargeted
+Layout:
+    Top:
+        - Row: "$GH2E_Sawbones2_RX$"
+        - Row: "<size=20%> "
+        - Active:
+            Ability: TShield
+            Icon: Positive_Shield
+            ListLayout: "$GH2E_Sawbones2_07_T$"
+            Layout: "$GH2E_Sawbones2_07_T$"
+        - Row: "<size=50%> "
+        - XPTracker: TShield
+        - Row: "<size=20%> "
+        - XP: 1
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen> <size=100%><voffset=1>@BStrengthen@"
+        - Row: "$Target_OneAdjacentAlly$"

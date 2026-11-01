@@ -1,0 +1,46 @@
+# card: Mobilizing Axiom
+# bottom: "grant all allies within range 5 and self: Move 4": the allies' move as a grant (the enhancement mark),
+# then your own Move 4 (unenhanced) after theirs, so moving first can't take an ally out of range.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    Enhancements: 1
+                AnimOverload: MeleeSmite
+            TBless:
+                Bless:
+                    Enhancements: 1
+                Filter: Self
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move:
+                                Amount: 4
+                                Enhancements: 1
+                            StrengthIsBase: True
+                Range: 5
+                Target: -1
+                Filter: Ally
+                AnimOverload: ControlAlly
+            BMove:
+                Move: 4
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Bless$ <sprite name=Bless> <size=100%><voffset=1>@TBless@"
+        - Row: "$Self$"
+    Bottom:
+        - Row: "$GH2E_Sunkeeper2_16_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
+        - Row: "<size=50%> "
+        - XP: 2

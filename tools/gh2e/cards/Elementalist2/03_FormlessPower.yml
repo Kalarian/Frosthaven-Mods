@@ -1,0 +1,61 @@
+# card: Formless Power
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                Range: 3
+                AnimOverload: ProjectileFormless
+        Consumes:
+            TCAnyXP:
+                Elements: Any
+                AbilityOverrides:
+                    TCAnyAttackBuff1:
+                        ParentName: TAttack
+                        Strength: 1
+                        Range: 1
+                XP: 1
+            TCAnyNoXP:
+                Elements: Any
+                AbilityOverrides:
+                    TCAnyAttackBuff2:
+                        ParentName: TAttack
+                        Strength: 1
+                        Range: 1
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 1
+                Filter: [Self]
+                ActiveBonus:
+                    Behaviour: BuffAttack
+                    Duration: Persistent
+                    ValidAbilityType: Attack
+                    Consuming: Any
+                    IsToggleBonus: True
+                    Restriction: OncePerAction
+                    EntireAction: True
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAnyXP
+            Text: "+1 $Attack$ <sprite name=Attack>, +1 $Range$ <sprite name=Range>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAnyNoXP
+            Text: "+1 $Attack$ <sprite name=Attack>, +1 $Range$ <sprite name=Range>"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$GH2E_Elementalist2_03_B$"
+            Layout: "$GH2E_Elementalist2_03_B$"
+            Icon: "Positive_AttackPlus"
+        - Row: "<size=20%> "
+        - Duration: Persistent

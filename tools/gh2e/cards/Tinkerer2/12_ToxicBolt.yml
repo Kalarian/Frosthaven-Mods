@@ -1,0 +1,39 @@
+# card: Toxic Bolt
+# from Xipe's 99041_Tinkerer2_Toxic Bolt.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Conditions: Poison
+                AnimOverload: LeftWristTechToxicBolt
+        Infuse: Earth
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 6
+                    Enhancements: 1
+                Range:
+                    Amount: 2
+                    Enhancements: 1
+                AnimOverload: RangedAttack
+        XP: 3
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "$Poison$ <sprite name=Poison>"
+        - Row: "<size=50%> "
+        - Infuse: Earth
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Range$ <sprite name=Range> *BAttack.Range* @BAttack.Range@"
+        - Row: "<size=20%> "
+        - XP: 3

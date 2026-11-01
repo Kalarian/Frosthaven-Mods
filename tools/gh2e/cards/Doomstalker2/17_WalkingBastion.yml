@@ -1,0 +1,86 @@
+# card: Walking Bastion
+# top: "when you summon this summon, it gains Ward" sits in its summon file (OnSummonAbilities Ward). "Whenever you
+# long rest, this summon gains Ward": a second persistent bonus on the summon half (as Frosthaven's Unholy Prowess,
+# Boneshaper 149, keeps extra bonuses on its summon half) that fires on your long rest (Boneshaper perk 10's
+# DuringActionAbilityOnLongRest) and wards the Staunch Garralev. Unverified: that the bonus ends with the summon.
+# bottom: Doom. "Once each round, after a summon attacks it, grant that summon Attack 1, Pierce 2 against it" is folded
+# into the summon's attack: once per round, a summon's attack on the doomed enemy gains +1 Attack and Pierce 2
+# (approximation: one modifier draw instead of two). "Your summons focus on this enemy": text (NEEDS PLUGIN).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: StaunchGarralevID
+                AnimOverload: Summon
+            TLongRestWard:
+                AutoTrigger: True
+                Filter: Self
+                SkipAnim: True
+                AddActiveBonus:
+                    CanUndo: False
+                    Ward: True
+                    Filter:
+                        TargetType: OwnSummon
+                        HeroSummonClasses: [StaunchGarralevID]
+                    Range: 99
+                    Target: -1
+                    IgnoreLOS: True
+                    AutoTrigger: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnLongRest
+                    ListLayoutOverride: ["$GH2E_Doomstalker2_17_T2$", Positive_Summon]
+                Text: "$GH2E_Doomstalker2_17_T2$"
+                TextOnly: True
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomAttackDebuff:
+                                Attack: 1
+                                AttackEffect:
+                                    Type: StandardBuff
+                                    Pierce: 2
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    Restriction: OncePerRound
+                                    Filter:
+                                        ActorType: Summon
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTargetAlt
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: "Summon"
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_StaunchGarralev$
+                    SpecialText:
+                        - Row: "<nobr>$Pierce$ <sprite name=Pierce> 3</nobr>"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Doomstalker2_17_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Doom:
+            DoomIcon: Doomstalker
+            ParentAbility: BDoom
+            ActiveBonusLayout: "$GH2E_Doomstalker2_17_B$"
+            DoomAbilityLayout: "$GH2E_Doomstalker2_17_B$"

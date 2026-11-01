@@ -1,0 +1,67 @@
+# card: Convert the Flock
+# top: control every normal and elite enemy with Plague (any range): Move 2, Attack 5 + Poison. The Plague their
+# attacks add can't be given (the monsters hold no supply): NEEDS PLUGIN. bottom: "one enemy that has Poison or
+# Plague": the target pick checks either (filter Vars); it gains Plague and suffers Damage 3; on a kill, XP 1. "You may
+# Teleport to the hex it occupied": not written, NEEDS PLUGIN.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TControl:
+                ControlActor:
+                    Abilities:
+                        TControlMove:
+                            Move:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                        TControlAttack:
+                            Attack:
+                                Amount: 5
+                                Enhancements: 1
+                            Conditions: Poison
+                            StrengthIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Ally
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: MindControl
+        XP: 2
+    Bottom:
+        Abilities:
+            BDamage:
+                Damage: 3
+                Range: 99
+                Target: 1
+                Filter:
+                    TargetType: Enemy
+                    Vars:
+                        ValidatePoisonOrPlague: target.Tokens.HasKey(CCondition.ENegativeCondition.Poison) or target.GetCharacterResourceAmount("Plague") > 0
+                ResourcesToGiveToTargets:
+                    - ["Plague", 1]
+                ResourcesToAddOnAbilityEnd:
+                    - ["Plague", 3]
+                AnimOverload: TargetedDebuff
+                SubAbilities:
+                    BXP:
+                        GainXP: 1
+                        Filter: Self
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsKilledByAbility: "> 0"
+                        TreatAsNonSubAbility: True
+                        AutoTrigger: True
+                        AnimOverload: None
+Layout:
+    Top:
+        - Row: "$GH2E_Plagueherald2_27_T$"
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TControl.TControlMove* <size=100%><voffset=1>@TControl.TControlMove@"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TControl.TControlAttack* <size=100%><voffset=1>@TControl.TControlAttack@"
+        - Row: "$Poison$ <sprite name=Poison>"
+        - Row: "$GH2E_Plagueherald2_PLAGUE$"
+    Bottom:
+        - Row: "$GH2E_Plagueherald2_27_B$"

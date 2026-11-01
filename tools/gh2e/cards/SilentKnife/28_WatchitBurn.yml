@@ -1,0 +1,50 @@
+# card: Watch it Burn
+# corrected against tools/gh2e/sheets/SilentKnife.json
+# top: no mark on the Attack 2. The Move 3, Jump and its XP 1 follow only if the attack targeted at least three enemies:
+# a sub-ability behind a SubAbility requirement on the parent's targets (Frosthaven's Shattersong Din of Battle top),
+# run as its own ability (TreatAsNonSubAbility, as Frosthaven's sub-ability moves: Crashing Tide Shuck).
+# bottom: Attack 5 as printed (Xipe: Move 3). "Play this card from your hand during your turn as an extra action" has
+# no Frosthaven form - NEEDS PLUGIN; here it is the card's ordinary bottom action.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Range: 1
+                Target: -1
+                Filter: Enemy
+                Conditions: [Wound, Immobilize]
+                SubAbilities:
+                    TMove:
+                        Move:
+                            Amount: 3
+                            Enhancements: 1
+                        Jump: True
+                        TreatAsNonSubAbility: True
+                        AbilityXP: 1
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsTargetedByAbility: ">= 3"
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 5
+                    Enhancements: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "$Wound$ <sprite name=Wound> $Immobilize$ <sprite name=Immobilize>"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_SilentKnife_28_T$"
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<size=50%> "
+        - Infuse: Fire
+    Bottom:
+        - Row: "$GH2E_SilentKnife_28_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

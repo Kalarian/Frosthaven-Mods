@@ -1,0 +1,27 @@
+Parser: HeroSummon
+ID: BattleBoar2ID
+LocKey: $GH2E_SUMMON_BattleBoar$
+Model: BattleBoar
+Health:
+    Amount: 7
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    SquareEnhancements: 1
+Attack:
+    Amount: 2
+    SquareEnhancements: 1
+Range: 1
+# "When attacking, ignore Retaliate": Frosthaven's Flesh Fiend (Pain Conduit Scarred Effigy) blocks the retaliate its
+# attacks would suffer
+OnSummonAbilities:
+    TIgnoreRetaliate:
+        PreventDamage: 1
+        Target: -1
+        Targeting: All
+        Filter: Self
+        ActiveBonus:
+            Behaviour: BlockRetaliate
+            Duration: Persistent
+            IsToggleBonus: False
+            ListLayoutOverride: ["$GH2E_Doomstalker2_14_T$", Positive_RetaliatePrevent]

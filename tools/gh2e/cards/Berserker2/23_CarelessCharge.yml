@@ -1,0 +1,59 @@
+# card: Careless Charge
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            TAttack:
+                Attack:
+                    Amount: 4
+                    Enhancements: 1
+        Consumes:
+            TCWound:
+                CostAbility:
+                    ParentName: TAttack
+                    Wound: True
+                    Filter: Self
+                AbilityOverrides:
+                    TCChargeBuff:
+                        ParentName: TAttack
+                        StatIsBasedOnX:
+                            Strength:
+                                BasedOn: HexesMovedThisAction
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Enhancements: 1
+            BRetaliate:
+                Retaliate: 0
+                Filter: Self
+                AnimOverload: PowerUp
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: CasterAdjacentEnemies
+                ActiveBonus:
+                    Duration: Round
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCWound
+            Text: "$GH2E_Berserker2_23_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BRetaliate
+            Icon: Positive_Retaliate
+            ListLayout: "$GH2E_Berserker2_23_B$"
+            Layout: "$GH2E_Berserker2_23_B$"
+        - Row: "<size=50%> "
+        - Duration: Round

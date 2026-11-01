@@ -1,0 +1,22 @@
+# card: First Aid
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 4
+                    DiamondPlusEnhancements: 1
+                Range: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Range$ <sprite name=Range> *THeal.Range*"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"

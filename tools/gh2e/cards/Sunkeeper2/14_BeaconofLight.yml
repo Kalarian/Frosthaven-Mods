@@ -1,0 +1,58 @@
+# card: Beacon of Light
+# top: "your next three single-target heals also target all allies within range 2 of the primary target" (NEEDS
+# PLUGIN): Frosthaven's use-limited heal override (Gemstone Resonance's OverrideAbility on Heal, Death Spiral's
+# XPTracker) giving the heal +2 targets, aimed from you within the heal's own range.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    Null: True
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    IsAura: True
+                    AuraFilter: [Self]
+                    AuraTargeting: All
+                    Behaviour: OverrideAbility
+                    ValidAbilityTypes: [Heal]
+                    XPTracker: [1,0,1]
+                    ActiveBonusAbilityOverrides:
+                        TCOverride:
+                            Target: 2
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    SquareEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCLight:
+                Elements: Light
+                Abilities:
+                    BCLightWard:
+                        ParentName: BNull
+                        Ward: True
+                        Range: 2
+                        Filter: Ally
+                        AnimOverload: PositiveBuffTargeted
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: "Positive_Heal"
+            ListLayout: "$GH2E_Sunkeeper2_14_T$"
+            Layout: "$GH2E_Sunkeeper2_14_T$"
+        - Row: "<size=50%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCLight
+            Text: "$GH2E_Sunkeeper2_14_B$"

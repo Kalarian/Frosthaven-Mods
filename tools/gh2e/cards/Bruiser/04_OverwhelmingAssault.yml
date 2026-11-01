@@ -1,0 +1,28 @@
+# card: Overwhelming Assault
+# 2e sheet: top Attack 7 [diamond], XP 2, lost; bottom Move 3 [square], Jump, infuse Air.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 7
+                    DiamondEnhancements: 1
+                AnimOverload: HeavyMeleeAttack
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Jump: True
+                    SquareEnhancements: 1
+        Infuse: Air
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<size=20%> "
+        - Infuse: Air

@@ -1,0 +1,46 @@
+# card: Disease Vector
+# bottom: "each enemy suffers 2 per Plague", flat (2 per enemy with Plague): NEEDS PLUGIN for the count.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    Enhancements: 1
+                Target: 3
+                Range: 5
+                ResourcesToGiveToTargets:
+                    - ["Plague", 1]
+                ResourcesToAddOnAbilityEnd:
+                    - ["Plague", 3]
+                AnimOverload: RangedAttack
+            TPoison:
+                Poison: True
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RadialNegativeMajor
+    Bottom:
+        Abilities:
+            BDamage:
+                Damage: 2
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RadialNegativeMajor
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target*"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$GH2E_Plagueherald2_PLAGUE$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Poison$ <sprite name=Poison>"
+        - Row: "$GH2E_Plagueherald2_28_T$"
+    Bottom:
+        - Row: "$GH2E_Plagueherald2_28_B$"

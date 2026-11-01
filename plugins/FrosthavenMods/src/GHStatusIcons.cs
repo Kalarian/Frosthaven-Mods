@@ -36,7 +36,11 @@ namespace FrosthavenMods
         private static bool Icon(UIInfoTools __instance, string iconName, ref Sprite __result)
         {
             if (iconName == null || !iconName.StartsWith(ClassIcon, StringComparison.Ordinal)) return true;
-            __result = __instance.GetCharacterActiveAbilityIcon(iconName.Substring(ClassIcon.Length));
+            string cls = iconName.Substring(ClassIcon.Length);
+            // a 2nd edition class ("Plagueherald2") has its model's pictures (the 1st edition pack's)
+            ScenarioRuleLibrary.CCharacterClass c = GHClasses.ClassById(cls + "ID");
+            if (c != null) cls = c.CharacterModel.ToString();
+            __result = __instance.GetCharacterActiveAbilityIcon(cls);
             return __result == null;
         }
 
@@ -128,9 +132,10 @@ namespace FrosthavenMods
         {
             try
             {
-                if (bonus == null || !bonus.IsDoom || bonus.BaseCard == null || bonus.BaseCard.ID < 20000 || bonus.BaseCard.ID >= 30000) return;
+                if (bonus == null || !bonus.IsDoom || bonus.BaseCard == null || bonus.BaseCard.ID < 20000 || bonus.BaseCard.ID >= 40000) return;
                 if (bonus.Layout?.ListLayouts != null && bonus.Layout.ListLayouts.Count > 0 && bonus.Layout.ListLayouts[0] != null) return;
-                string text = "$GH_" + (bonus.BaseCard.ID - 20000) + "_B$";
+                // 2nd edition cards (30000+, tools/gh2e) name the doom text GH2E_DOOM_<card file ID>
+                string text = bonus.BaseCard.ID >= 30000 ? "$GH2E_DOOM_" + (bonus.BaseCard.ID - 20000) + "$" : "$GH_" + (bonus.BaseCard.ID - 20000) + "_B$";
                 CDoom doom = bonus.Caster?.Dooms?.FirstOrDefault(d => d.DoomAbilities.Any(a => a == bonus.Ability));
                 if (doom != null && string.IsNullOrEmpty(doom.ActiveBonusLayout)) doom.ActiveBonusLayout = text;
                 ActiveBonusUIUtils.CheckForLayoutToGenerate(bonus, out _);

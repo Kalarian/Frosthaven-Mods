@@ -1,0 +1,77 @@
+# card: Psychic Blade
+# written from tools/gh2e/sheets/Mindthief.json; augment approximated as +1 Range treated as melee on every melee
+# attack (no single-target restriction); bottom = Frosthaven's Plague Protocol shape (a round attack buff adding a
+# condition), melee only
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Conditions: Curse
+                Augment:
+                    Type: Melee
+                    AbilityOverrides:
+                        TAugmentReach:
+                            ParentName: TAttack
+                            Range: 1
+                            TreatAsMelee: True
+                SubAbilities:
+                    TControl:
+                        ControlActor:
+                            Abilities:
+                                EnemyWillDoThis:
+                                    Move: 1
+                                    StrengthIsBase: True
+                            ControlDurationType: ControlForOneAction
+                            ControlActorType: Player
+                        Filter: Enemy
+                        UseParentTargets: True
+                        Target: 1
+                        AnimOverload: MindControl
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    SquareEnhancements: 1
+            BCurseBuff:
+                Attack: 0
+                Conditions: [Curse]
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    AttackType: Melee
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Augment:
+            AugmentIcon: Mindthief
+            ParentAbility: TAttack
+            ActiveBonusLayout: "$GH2E_Mindthief2_10_T$"
+            AugmentAbilityLayout:
+                - Row: "$GH2E_Mindthief2_10_T$"
+            NormalContentLayout:
+                - ColumnWidths: "20,60,20"
+                - Column:
+                - Column:
+                    - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                    - Row: "$Curse$ <sprite name=Curse>"
+                    - Row: "$GH2E_Mindthief2_CONTROLTARGET$"
+                    - Row: "<b><size=130%>$Move$ <sprite name=Move> 1"
+                - Column:
+                    - XP: 1
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BCurseBuff
+            Icon: Curse
+            ListLayout: "$GH2E_Mindthief2_10_B$"
+            Layout: "$GH2E_Mindthief2_10_B$"
+        - Row: "<size=20%> "
+        - Duration: Round

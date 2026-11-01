@@ -1,0 +1,61 @@
+# card: Invigorating Aerosol
+# from Xipe's 99053_Tinkerer2_Invigorating Aerosol.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal1:
+                Heal:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 2
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+            TMove:
+                Move:
+                    Amount: 2
+                    Enhancements: 1
+            THeal2:
+                Heal:
+                    Amount: 4
+                    Enhancements: 1
+                Range: 2
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: Air
+    Bottom:
+        Abilities:
+            # "At the end of this and your next four turns, perform: Heal 1, Range 5, Strengthen, Bless, Ward,
+            # Safeguard": the 1st edition Auto Turret / Gas Canister shape (EndTurnAbility, 5 slots, XP on 1, 3, 5).
+            # Safeguard is in the text only: NEEDS PLUGIN (NOTES.md)
+            BActive:
+                AddActiveBonus:
+                    Heal: 1
+                    Range: 5
+                    Filter: [Self, Ally]
+                    Conditions: [Strengthen, Bless, Ward]
+                    AnimOverload: Heal
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [1,0,1,0,1]
+                AnimOverload: PowerUpPotent
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal1* <size=100%><voffset=1>@THeal1@"
+        - Row: "$Range$ <sprite name=Range> *THeal1.Range*"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal2* <size=100%><voffset=1>@THeal2@"
+        - Row: "$Range$ <sprite name=Range> *THeal2.Range*"
+        - Row: "<size=50%> "
+        - Infuse: Air
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$GH2E_Tinkerer2_24_B$"
+            Layout: "$GH2E_Tinkerer2_24_B$"
+            Icon: "Heal"
+        - Row: "<size=20%> "
+        - XPTracker: BActive

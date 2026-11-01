@@ -1,0 +1,97 @@
+# card: Seeping Tendrils
+# top: Immobilize, range 1. "If you have Invisible, place one Tear in a hex adjacent to the target" (CreateShadow aimed
+# with GetAdjacentTiles on the immobilize's target, run only when you have Invisible: the Deepwraith's
+# ValidateHasInvisibility test); "if you do not have Invisible, the target suffers damage 4" (a Damage 4 aimed at that
+# target, run only without Invisible). Both read the Invisible condition: with the class mat's permanent Invisible
+# still NEEDS PLUGIN, you are rarely Invisible today (NOTES.md).
+# bottom: consume Dark "the targets suffer damage 1": a Damage 1 on all adjacent enemies (the push's own targets)
+# performed just before the push, since after it they are no longer adjacent (same targets, same result).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TImmobilize:
+                Immobilize: True
+                Range:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Filter: Enemy
+                AnimOverload: WeakRadial
+            TTear:
+                CreateShadow:
+                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+                Target: 1
+                Targeting: Custom
+                Vars:
+                    Held: CustomAbility.FindAbilityInPhaseByName("TImmobilize")
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(Held.ActorsToTarget)
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateHasInvisibility: TargetingActor.Tokens.HasKey(CCondition.EPositiveCondition.Invisible)
+                AnimOverload: Shadow Manipulation
+            TDamage:
+                Damage: 4
+                Filter: Enemy
+                Target: -1
+                AutoTrigger: True
+                CanSkip: False
+                Targeting: Custom
+                Vars:
+                    Held: CustomAbility.FindAbilityInPhaseByName("TImmobilize")
+                TargetingVars:
+                    AddValidActorsInRange: Held.ActorsToTarget
+                    AddActorsToTarget: Held.ActorsToTarget
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateNotInvisible: TargetingActor.Tokens.HasKey(CCondition.EPositiveCondition.Invisible) == False
+                        ValidateTarget: Held != null && Held.ActorsToTarget.Any(obj.IsDead == False)
+                AnimOverload: Debuff
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BNull:
+                Null: True
+            BPush:
+                Push:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 1
+                Target: -1
+                Filter: Enemy
+                AnimOverload: WeakRadial
+        Consumes:
+            BCDark:
+                Elements: Dark
+                Abilities:
+                    BCDarkDamage:
+                        ParentName: BNull
+                        Damage: 1
+                        Range: 1
+                        Target: -1
+                        Filter: Enemy
+                        AnimOverload: Debuff
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Immobilize$ <sprite name=Immobilize>"
+        - Row: "$Range$ <sprite name=Range> *TImmobilize.Range* @TImmobilize.Range@"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Nightshroud2_20_T$"
+        - Row: "<size=50%> "
+        - Infuse: Dark
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Push$ <sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCDark
+            Text: "$GH2E_Nightshroud2_20_B$"

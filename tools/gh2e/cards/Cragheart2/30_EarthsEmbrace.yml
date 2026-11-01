@@ -1,0 +1,53 @@
+# card: Earth's Embrace
+# from Xipe's 99145_Cragheart2_Earths Embrace.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: no enhancement marks (Xipe gave two); the 1st edition Pulverize's all-adjacent attack with push into obstacles
+# bottom: X = obstacles adjacent to you (Xipe: obstacles destroyed this turn), counted as Frosthaven's Pyroclast Stone
+#   Armor counts them, in a persistent end-of-turn heal as Crashing Tide Dug In writes it
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                Target: -1
+                AnimOverload: MeleeSmash
+                MultiPassAttack: False
+                TreatAsMelee: True
+                SubAbilities:
+                    TAttackSubPush:
+                        Push: 2
+                        AdditionalPushEffect: IntoObstacles
+                        AdditionalPushEffectDamage: 2
+                        AdditionalPushEffectXP: 1
+                        IsInlineSubAbility: True
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Heal: 0
+                    Filter: Self
+                    AnimOverload: Heal
+                    StatIsBasedOnX:
+                        Strength:
+                            BasedOn: Vars
+                            Vars:
+                                Value: CustomAbility.GetAdjacentTiles(TargetingActor.Tile).Where(obj.FindObstacleProp(true, true) != null).Count
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$Target_AllAdjacentEnemies$"
+        - Row: "$Push$ <sprite name=Push> *TAttackSubPush*"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Cragheart2_30_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$GH2E_Cragheart2_30_B$"
+            Layout: "$GH2E_Cragheart2_30_B$"
+            Icon: "Positive_HealSelf"

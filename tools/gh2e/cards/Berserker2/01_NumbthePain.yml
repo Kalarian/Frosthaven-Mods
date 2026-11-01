@@ -1,0 +1,53 @@
+# card: Numb the Pain
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TRetaliate:
+                Retaliate:
+                    Amount: 2
+                    Enhancements: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+            TPrevent:
+                PreventDamage: 1
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: PreventPartialDamage
+                    Requirements:
+                        HPPercentOfMax: "<= 50%"
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BHeal:
+                Heal:
+                    Amount: 1
+                    Enhancements: 1
+                Filter: Self
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Active:
+            Ability: TRetaliate
+            Icon: Retaliate
+            ListLayout: "$Retaliate$ <sprite name=Retaliate> *TRetaliate*"
+            Layout:
+                - Row: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TPrevent
+            Icon: Positive_DamagePrevent
+            ListLayout: "$GH2E_Berserker2_01_T$"
+            Layout: "$GH2E_Berserker2_01_T$"
+        - Row: "<size=50%> "
+        - Duration: Round
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"

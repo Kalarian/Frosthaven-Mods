@@ -1,0 +1,37 @@
+# card: Empowering Command
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TBlessStrengthen:
+                Bless:
+                    Enhancements: 1
+                Condition: Strengthen
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: PositiveBuffTargeted
+        Infuse: Light
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 3
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                Range: 1
+                Filter: Ally
+                AnimOverload: ControlAlly
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen>, $Bless$ <sprite name=Bless> <size=100%><voffset=1>@TBlessStrengthen@"
+        - Row: "$Range$ <sprite name=Range> *TBlessStrengthen.Range*"
+        - Row: "<size=50%> "
+        - Infuse: Light
+    Bottom:
+        - Row: "$GH2E_Sunkeeper2_03_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

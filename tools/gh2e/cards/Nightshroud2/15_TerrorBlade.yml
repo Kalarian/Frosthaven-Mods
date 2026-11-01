@@ -1,0 +1,90 @@
+# card: Terror Blade
+# top: Attack 5, Push 3 (inline sub-ability), Muddle; "if the target is adjacent to none of its allies after the push,
+# it suffers damage 2" = a Damage 2 aimed at the attack's target (custom targeting), only when no figure allied to it
+# stands adjacent (the adjacency test of Frosthaven's Crashing Tide Powerful Pincer: GameState.GetActorsInRange +
+# CActor.AreActorsAllied).
+# bottom: two Tears within range 3 (CreateShadow Target 2; "not adjacent to each other" isn't enforced: APPROXIMATION),
+# then Teleport 3 onto a Tear (both are within 3: Teleport2 with IsValidTeleportTile on shadow hexes; an older Tear
+# within 3 is also valid); "on your next two attacks, double the value of the attack" = the 1st edition Empowering
+# Void's scalar attack buff (Attack 2, AbilityStrengthIsScalar), two use slots with XP on both.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Conditions: Muddle
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 3
+                            SquareEnhancements: 1
+                        IsInlineSubAbility: True
+            TDamage:
+                Damage: 2
+                Filter: Enemy
+                Target: -1
+                AutoTrigger: True
+                CanSkip: False
+                Targeting: Custom
+                Vars:
+                    Struck: CustomAbility.FindAbilityInPhaseByName("TAttack")
+                TargetingVars:
+                    AddValidActorsInRange: Struck.ActorsToTarget
+                    AddActorsToTarget: Struck.ActorsToTarget
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateStruck: Struck != null && Struck.ActorsToTarget.Count > 0
+                        Victim: Struck.ActorsToTarget[0]
+                        ValidateAlive: Victim.IsDead == False
+                        ValidateAlone: GameState.GetActorsInRange(Victim.ArrayIndex, 1).Where(obj != Victim && obj.IsAdjacentTo(Victim) && CActor.AreActorsAllied(obj.Type, Victim.Type, obj, null)).Count == 0
+                AnimOverload: Debuff
+        XP: 1
+    Bottom:
+        Abilities:
+            BTears:
+                CreateShadow:
+                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+                Range: 3
+                Target: 2
+                AnimOverload: Shadow Manipulation
+            BTeleport:
+                Teleport2: 3
+                Filter: Self
+                MiscVars:
+                    IsValidTeleportTile: CustomAbility.SteppedOnShadow(Tile)
+                AnimOverload: Teleport Into
+                AnimOverload2: Teleport Outof
+            BDouble:
+                Attack: 2
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    AbilityStrengthIsScalar: True
+                    XPTracker: [1,1]
+        Infuse: Dark
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Push$ <sprite name=Push> *TAttackSubPush* <size=100%><voffset=1>@TAttackSubPush@"
+        - Row: "$Muddle$ <sprite name=Muddle>"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Nightshroud2_15_T$"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Row: "$GH2E_Nightshroud2_15_B$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BDouble
+            Icon: Positive_AttackPlus
+            ListLayout: "$GH2E_Nightshroud2_15_B2$"
+            Layout: "$GH2E_Nightshroud2_15_B2$"
+        - Row: "<size=50%> "
+        - Infuse: Dark
+        - XPTracker: BDouble

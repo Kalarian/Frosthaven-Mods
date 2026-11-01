@@ -1,0 +1,48 @@
+# card: Unwilling Sacrifice
+# top: one enemy with Plague (any range) suffers Damage 2 (written as for one Plague: the per-token count is NEEDS
+# PLUGIN); then the optional spread: one enemy adjacent to it suffers Damage 1 and gains Plague. "Remove any number of
+# Plague from that enemy to have that many different adjacent enemies ...": one adjacent enemy, and the first enemy
+# keeps its tokens: NEEDS PLUGIN.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TDamage:
+                Damage: 2
+                Range: 99
+                Target: 1
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: TargetedDebuff
+                SubAbilities:
+                    TSpread:
+                        Damage: 1
+                        Range: 1
+                        Target: 1
+                        Filter: Enemy
+                        AllTargetsAdjacentToParentTargets: True
+                        TreatAsNonSubAbility: True
+                        ResourcesToGiveToTargets:
+                            - ["Plague", 1]
+                        ResourcesToAddOnAbilityEnd:
+                            - ["Plague", 3]
+                        AnimOverload: TargetedDebuff
+        XP: 1
+    Bottom:
+        Abilities:
+            BPoison:
+                Poison: True
+                Target: 3
+                Range:
+                    Amount: 4
+                    Enhancements: 1
+                Filter: Enemy
+                AnimOverload: RadialNegativeTarget
+Layout:
+    Top:
+        - Row: "$GH2E_Plagueherald2_19_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Poison$ <sprite name=Poison>"
+        - Row: "$Target$ <sprite name=Target> *BPoison.Target*"
+        - Row: "$Range$ <sprite name=Range> *BPoison.Range* @BPoison.Range@"

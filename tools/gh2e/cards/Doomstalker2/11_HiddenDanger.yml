@@ -1,0 +1,59 @@
+# card: Hidden Danger
+# top: the Green Snake's two rules sit in its summon file (summons/GreenSnake.yml): "unaffected by difficult terrain" as
+# a move override, "last in initiative order for monster focus" as Frosthaven's Snow Fox shape (Snowdancer Nature's
+# Breath: AdjustInitiative 200, Behaviour FocusInitiative).
+# bottom: Doom, +1 Attack on your attacks (the 1st edition Rain of Arrows doom shape).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: GreenSnakeID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomAttackDebuff:
+                                Attack: 1
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    Filter:
+                                        PlayerClasses: Doomstalker2ID
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTargetAlt
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: "Summon"
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_GreenSnake$
+                    SpecialText:
+                        - Row: "$GH2E_Doomstalker2_11_T$"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Doomstalker2_11_T2$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Doom:
+            DoomIcon: Doomstalker
+            ParentAbility: BDoom
+            ActiveBonusLayout: "$GH2E_Doomstalker2_11_B$"
+            DoomAbilityLayout: "$GH2E_Doomstalker2_11_B$"

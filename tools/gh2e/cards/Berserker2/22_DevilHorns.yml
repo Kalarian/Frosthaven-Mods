@@ -1,0 +1,31 @@
+# card: Devil Horns
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                AreaEffect: "0,0,G|1,1,R|2,0,R|1,-1,R"
+                AnimOverload: AreaSlam
+                MultiPassAttack: False
+                Conditions: Wound
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 4
+                    Enhancements: 1
+Layout:
+    Top:
+        - ColumnWidths: "60,35"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "$Wound$ <sprite name=Wound>"
+            - Row: "<size=50%> "
+            - Infuse: Fire
+        - Column: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

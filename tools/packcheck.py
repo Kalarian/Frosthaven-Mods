@@ -29,7 +29,9 @@ EXTRA_KEYS = {"Condition", "Conditions", "Filter", "Target", "Range", "AnimOverl
               "HexEnhancements", "PierceEnhancements", "Enhancements"}
 # ability kinds Frosthaven sells a "+1" (square) sticker for: Outpost/Enhancements/Enhancement_*.yml ForEffect values
 PLUS_ONE = {"Attack", "Move", "Heal", "Range", "Target", "Shield", "Retaliate", "Pierce", "Push", "Pull", "Teleport",
-            "Damage", "SummonHP", "SummonMove", "SummonAttack", "SummonRange"}
+            "Damage", "SummonHP", "SummonMove", "SummonAttack", "SummonRange",
+            "Teleport2",   # Frosthaven's Deepwraith Skewer the Flesh has a square there
+            "Trap"}   # a trap's damage (Frosthaven's Boar Catcher puts its square slot inside the Trap block)
 CONDITIONS = {"Stun", "Immobilize", "Disarm", "Wound", "Poison", "Muddle", "Curse", "Brittle", "Bane", "Impair",
               "Bless", "Strengthen", "Invisible", "Regenerate", "Ward"}
 ABILITY_TYPES = {
@@ -54,7 +56,10 @@ ABILITY_TYPES = {
 KIND_KEYS = ABILITY_TYPES | {"RefreshItems", "MergedMoveAttack", "MergedCreateAttack", "MergedKillCreate", "MergedMoveObstacleAttack",
                              "MergedDestroyObstacleAttack", "MergedDisarmTrapDestroyObstacle",
                              "AddModifiersToMonsterDeck",   # the Voidwarden's Taunting Fate (CAbilityAddModifierToMonsterDeck reads it)
-                             "AddDoomSlot", "OverrideAugmentAttackType"}   # Doomstalker / Mindthief actives the engine keeps
+                             "AddDoomSlot", "OverrideAugmentAttackType",   # Doomstalker / Mindthief actives the engine keeps
+                             "Teleport2",   # Frosthaven's second teleport form (Banner Spear Hail of Spears)
+                             "CreateShadow", "RemoveShadow",   # the Deathwalker's shadows (2e Nightshroud Tears)
+                             "SelectAndPlayCard"}   # play a card from a pile (Frosthaven: HIVE Recall, Low Tide; 2e Spellweaver)
 
 
 def kind_of(props):

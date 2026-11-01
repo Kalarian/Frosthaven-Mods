@@ -1,0 +1,59 @@
+# card: Messenger of Death
+# top: "Move 4, Jump; Attack 2 targeting all enemies moved through" = a plain Move, then its own Attack with
+# AllTargetsOnMovePath + Targeting All (the Trample fix, CARD_FIXES 20001; Bruiser Trample).
+# bottom: consume Dark gives a separate Attack 4 (no "+").
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 4
+                    SquareEnhancements: 1
+                    Jump: True
+            TAttack:
+                Attack: 2
+                AllTargetsOnMovePath: True
+                Targeting: All
+                Target: -1
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCDark:
+                Elements: Dark
+                Abilities:
+                    BCDarkAttack:
+                        ParentName: BNull
+                        Attack: 4
+                XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$Target_AllEnemiesMovedThrough$"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCDark
+            Text: "+1 $Attack$ <sprite name=Attack>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCDark
+            Text: "$Attack$ <sprite name=Attack> 4, <sprite name=XP1>"

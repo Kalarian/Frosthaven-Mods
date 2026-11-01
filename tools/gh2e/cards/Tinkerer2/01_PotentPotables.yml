@@ -1,0 +1,39 @@
+# card: Potent Potables
+# from Xipe's 99030_Tinkerer2_Potent Potables.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 3
+                Conditions: Muddle
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            # "On your next four single-target heal abilities, add +1 Target": the Cragheart's Backup Ammunition shape
+            # (BuffTarget, ValidAbilityType), 4 slots, XP on the first three
+            BActive:
+                AddTarget: 1
+                Filter: Self
+                AnimOverload: PowerUpPotent
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffTarget
+                    ValidAbilityType: Heal
+                    XPTracker: [1,1,1,0]
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Muddle$ <sprite name=Muddle>"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$GH2E_Tinkerer2_01_B$"
+            Layout: "$GH2E_Tinkerer2_01_B$"
+            Icon: "Heal"
+        - Row: "<size=20%> "
+        - XPTracker: BActive

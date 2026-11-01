@@ -1,0 +1,49 @@
+# card: Wilt and Wither
+# top: the second ability, "each enemy suffers 1 per Plague", flat (1 per enemy with Plague): NEEDS PLUGIN for the
+# count. bottom: "during this and your next turn, double all damage enemies with Plague suffer" = Brittle on every
+# enemy with Plague (Frosthaven's "double the next damage"): the doubling applies once per enemy instead of for two
+# turns; the two use slots' XP (1 + 1) is given on play. APPROXIMATION, NEEDS PLUGIN for the real two-turn bonus.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Target: 2
+                Range: 5
+                ResourcesToGiveToTargets:
+                    - ["Plague", 1]
+                ResourcesToAddOnAbilityEnd:
+                    - ["Plague", 3]
+                AnimOverload: RangedAttack
+            TDamage:
+                Damage: 1
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RadialNegativeMajor
+    Bottom:
+        Abilities:
+            BBrittle:
+                Brittle: True
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RadialNegativeMajor
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target*"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$GH2E_Plagueherald2_PLAGUE$"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Plagueherald2_20_T$"
+    Bottom:
+        - Row: "$GH2E_Plagueherald2_20_B$"

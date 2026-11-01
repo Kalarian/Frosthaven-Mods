@@ -1,0 +1,59 @@
+# card: Psychic Projection
+# written from tools/gh2e/sheets/Mindthief.json; augment = Submissive Affliction's per-condition buff on every melee
+# attack; bottom: the designated hex is approximated as Attack 3, Range 5, treated as melee (an enemy adjacent to an
+# unoccupied hex within range 4; line of sight from you, not from the hex)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPull:
+                Pull: 2
+                Range: 3
+                Target: 1
+                Filter: Enemy
+                AnimOverload: MindAttack
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Augment:
+                    Type: Melee
+                    AbilityOverrides:
+                        TAugmentAttackBuff:
+                            ParentName: TAttack
+                            AttackEffect:
+                                Type: BuffForEachNegativeConditionOnTarget
+                                Strength: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Range: 5
+                TreatAsMelee: True
+        Infuse: Dark
+Layout:
+    Top:
+        - Augment:
+            AugmentIcon: Mindthief
+            ParentAbility: TAttack
+            ActiveBonusLayout: "$GH2E_Mindthief2_25_T$"
+            AugmentAbilityLayout:
+                - Row: "$GH2E_Mindthief2_25_T$"
+            NormalContentLayout:
+                - ColumnWidths: "20,60,20"
+                - Column:
+                - Column:
+                    - Row: "<b><size=130%>$Pull$ <sprite name=Pull> *TPull*"
+                    - Row: "$Range$ <sprite name=Range> *TPull.Range*"
+                    - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+                    - XP: 1
+    Bottom:
+        - Row: "$GH2E_Mindthief2_25_B$"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$GH2E_Mindthief2_25_B2$"
+        - Row: "<size=20%> "
+        - Infuse: Dark

@@ -1,0 +1,76 @@
+# card: Press the Attack
+# top: the 1st edition Press the Attack (IsDoomed conditional, +3 Attack, XP 1).
+# bottom: three ranged attacks with a jump between each, as printed (no mark on the first Move and the last Attack).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range:
+                    Amount: 4
+                    Enhancements: 1
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            IsDoomed: True
+                        AbilityOverrides:
+                            TDoomedBuff:
+                                Strength: 3
+                        XP: 1
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BAttack1:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 4
+                Conditions: Poison
+                AnimOverload: RangedAttack
+            BMove1:
+                Move:
+                    Amount: 4
+                    Jump: True
+            BAttack2:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 4
+                Conditions: Immobilize
+                AnimOverload: RangedAttack
+            BMove2:
+                Move:
+                    Amount: 4
+                    Enhancements: 1
+                    Jump: True
+            BAttack3:
+                Attack: 3
+                Range: 4
+                Conditions: Wound
+                AnimOverload: RangedAttack
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Doomstalker2_28_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack1* <size=100%><voffset=1>@BAttack1@"
+        - Row: "$Range$ <sprite name=Range> *BAttack1.Range*"
+        - Row: "$Poison$ <sprite name=Poison>"
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove1*"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack2* <size=100%><voffset=1>@BAttack2@"
+        - Row: "$Range$ <sprite name=Range> *BAttack2.Range*"
+        - Row: "$Immobilize$ <sprite name=Immobilize>"
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove2* <size=100%><voffset=1>@BMove2@"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack3*"
+        - Row: "$Range$ <sprite name=Range> *BAttack3.Range*"
+        - Row: "$Wound$ <sprite name=Wound>"
+        - Row: "<size=50%> "
+        - XP: 2

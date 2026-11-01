@@ -1,0 +1,31 @@
+# key<TAB>English (Spellweaver, Gloomhaven 2nd edition; wording from the card images, tools/gh2e/sheets/Spellweaver.json)
+GH2E_Spellweaver2_01_T	Recover all cards in your lost pile.
+GH2E_Spellweaver2_06_B	When you next perform an action with <sprite name=Lost> this round, infuse <sprite name=CreateWild>.
+GH2E_Spellweaver2_07_B	Gain advantage on all your attacks this round, <sprite name=XP1>
+GH2E_Spellweaver2_08_B	Grant one ally:
+GH2E_Spellweaver2_09_T	On your next four single-target ranged attack abilities, add +2 <sprite name=Attack> to the attack.
+GH2E_Spellweaver2_10_T	Place a character token on one ally within <sprite name=Range> 3. On the next three sources of 2 or more damage they would suffer, negate the damage.
+GH2E_Spellweaver2_10_B	On the next three sources of 2 or more damage you would suffer, negate the damage.
+GH2E_Spellweaver2_12_T	Target the 4 enemies closest to you within 5 hexes
+GH2E_Spellweaver2_13_T	Play one level 1 card from your lost pile other than <i>Reviving Ether</i> to perform an action with <sprite name=Lost> of the card.
+GH2E_Spellweaver2_13_B	When you next perform an action with <sprite name=Lost> this round, gain <sprite name=Ward>.
+GH2E_Spellweaver2_14_B	The target adds +2 <sprite name=Attack> to their next attack this round.
+GH2E_Spellweaver2_17_B	Add +1 <sprite name=Attack> to all your attacks this round, <sprite name=XP1>
+GH2E_Spellweaver2_18_T	On the next attack ability you perform from an action with <sprite name=Lost>, add +1 <sprite name=Attack> to all your attacks.
+GH2E_Spellweaver2_21_B	When you next perform an action with <sprite name=Lost> this round, <sprite name=Recover> one card from your discard pile.
+GH2E_Spellweaver2_22_T	You may play one card from your discard pile to perform an action with <sprite name=Lost> of the card.
+GH2E_Spellweaver2_23_T	Target all allies in the red hexes of the attack ability
+GH2E_Spellweaver2_23_B	Choose an ally within <sprite name=Range> 3. That ally gains <sprite name=Shield> 3 for the next attack targeting them this round.
+GH2E_Spellweaver2_23_B2	The attacker suffers <sprite name=Damage> 3, <sprite name=XP1>
+GH2E_Spellweaver2_25_B	When you next perform an action with <sprite name=Lost> this round, after the action perform:\n<sprite name=Attack> 3, <sprite name=Range> 3
+GH2E_Spellweaver2_26_T	After the attack ability, kill each target whose hit point value is 2 or less and create one 1-hex obstacle tile in the featureless hex they occupied.
+GH2E_Spellweaver2_26_B	Designate a hex within <sprite name=Range> 4.
+GH2E_Spellweaver2_26_B2	Target all enemies within <sprite name=Range> 4 of the designated hex
+GH2E_Spellweaver2_26_B3	Pull toward the designated hex.
+GH2E_Spellweaver2_27_T	Target all enemies within 2 hexes
+GH2E_Spellweaver2_27_T2	All allies within <sprite name=Range> 2 suffer <sprite name=Damage> 2.
+GH2E_Spellweaver2_27_B	All allies and enemies in the same room as you suffer <sprite name=Damage> 4.
+AMC_GH2E_Spellweaver2_Wild_P0	+0 <sprite name=CreateWild>
+AMC_GH2E_Spellweaver2_FireIce_P2	+2 <sprite name=CreateMixed-FI>
+AMC_GH2E_Spellweaver2_Lost_P1	+1 "Add +2 <sprite name=Attack> if drawn during an action with <sprite name=Lost>"
+AMC_Stun_P1	+1 <sprite name=Stun>

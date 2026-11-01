@@ -1,0 +1,89 @@
+# card: Expose
+# top: the 1st edition Expose top (a once-per-turn advantage toggle on attacks at doomed enemies; Invisible immunity aura
+# on all enemies; their Invisible removed at once). The player switches the advantage on for the first such attack.
+# bottom: Doom: your summons' attacks on it add Wound and gain advantage (the 1st edition Singular Focus / Crashing Wave
+# doom shapes, filtered to summons).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAdvantage:
+                Attack: 0
+                AttackHasAdvantage: True
+                Filter: [Self]
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    ValidAbilityType: Attack
+                    Restriction: OncePerTurn
+                    IsToggleBonus: True
+                    Filter:
+                        IsDoomed: True
+                AnimOverload: PowerUp
+            TImmunity:
+                ImmunityTo: [Invisible]
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    IsAura: True
+                    AuraFilter: Enemy
+                    AuraTargeting: All
+                AnimOverload: PowerUp
+            TRemoveConditions:
+                RemoveConditions: All
+                Condition: Invisible
+                Target: -1
+                Targeting: All
+                CanTargetInvisible: True
+                Filter: Enemy
+                AutoTrigger: True
+                AnimOverload: None
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomAttackDebuff:
+                                Attack: 0
+                                Condition: Wound
+                                AttackHasAdvantage: True
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    Filter:
+                                        ActorType: Summon
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTargetAlt
+Layout:
+    Top:
+        - Active:
+            Ability: TAdvantage
+            ListLayout: "$GH2E_Doomstalker2_22_T$"
+            Layout: "$GH2E_Doomstalker2_22_T$"
+            Icon: "Advantage"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TImmunity
+            ListLayout: "$GH2E_Doomstalker2_22_T2$"
+            Layout: "$GH2E_Doomstalker2_22_T2$"
+            Icon: "Invisible"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 2
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Doom:
+            DoomIcon: Doomstalker
+            ParentAbility: BDoom
+            ActiveBonusLayout: "$GH2E_Doomstalker2_22_B$"
+            DoomAbilityLayout: "$GH2E_Doomstalker2_22_B$"

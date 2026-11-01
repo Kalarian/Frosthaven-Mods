@@ -1,0 +1,43 @@
+# card: Hammer Blow
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    Enhancements: 1
+                Conditions: Muddle
+                AnimOverload: MeleeSmite
+        Consumes:
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        AttackHasAdvantage: True
+                XP: 1
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 1
+                Target: -1
+            BBless:
+                Bless:
+                    Enhancements: 1
+                Filter: Self
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Muddle$ <sprite name=Muddle>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCLight
+            Text: "+1 $Attack$ <sprite name=Attack>, $Advantage$, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *BLoot*"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Bless$ <sprite name=Bless> <size=100%><voffset=1>@BBless@"
+        - Row: "$Self$"

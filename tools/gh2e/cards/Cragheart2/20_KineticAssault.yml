@@ -1,0 +1,63 @@
+# card: Kinetic Assault
+# from Xipe's 99135_Cragheart2_Kinetic Assault.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: the inline damage around the target (the 1st edition Massive Boulder's shape)
+# bottom: Ward [diamond+], self (Xipe: Shield 1 for the round); Retaliate 3 [square], range 3 for the round; lost
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 1
+                    Enhancements: 1
+            TAttack:
+                Attack:
+                    Amount: 4
+                    Enhancements: 1
+                SubAbilities:
+                    TAttackSubDamage:
+                        Damage: 1
+                        Range: 1
+                        Target: -1
+                        Filter: [Enemy, Ally]
+                        IsInlineSubAbility: True
+                        AllTargetsAdjacentToParentTargets: True
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Enhancements: 1
+            BWard:
+                Ward:
+                    Enhancements: 1
+                Filter: Self
+                AnimOverload: PowerUp
+            BRetaliate:
+                Retaliate:
+                    Amount: 3
+                    Enhancements: 1
+                RetaliateRange: 3
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonusDuration: Round
+        XP: 2
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$GH2E_Cragheart2_20_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Ward$ <sprite name=Ward> @BWard@"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: BRetaliate
+            Icon: "Retaliate"
+            ListLayout: "<sprite name=Retaliate> *BRetaliate*, <sprite name=Range> *BRetaliate.RetaliateRange*"
+            Layout:
+                - Row: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *BRetaliate* <size=100%><voffset=1>@BRetaliate@"
+                - Row: "$Range$ <sprite name=Range> *BRetaliate.RetaliateRange*"

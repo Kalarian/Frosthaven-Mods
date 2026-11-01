@@ -1,0 +1,59 @@
+# card: Elemental Rays
+# bottom: a condition-only ability (no attack): Curse as the ability (the enhancement mark sits on it) with Stun added by
+# "Condition:", the way the 1st edition port writes "Stun + Curse" on one target (Lull into Oblivion: Condition: Curse)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                Target: 2
+                Range: 3
+                AnimOverload: RadialForkedBeam
+                MultiPassAttack: False
+        Consumes:
+            TCAny:
+                Elements: Any
+                AbilityOverrides:
+                    TCAnyAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Range: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BCurse:
+                Curse:
+                    Enhancements: 1
+                Condition: Stun
+                Target:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 3
+                Filter: Enemy
+                AnimOverload: TargetedDebuff
+        Infuse: Dark
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Target$ <sprite name=Target> *TAttack.Target*"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCAny
+            Text: "+1 $Attack$ <sprite name=Attack>, +1 $Range$ <sprite name=Range>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<b><size=130%>$Stun$ <sprite name=Stun>, $Curse$ <sprite name=Curse> <size=100%><voffset=1>@BCurse@"
+        - Row: "$Target$ <sprite name=Target> *BCurse.Target* @BCurse.Target@"
+        - Row: "$Range$ <sprite name=Range> *BCurse.Range*"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:
+                - XP: 1
