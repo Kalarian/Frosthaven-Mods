@@ -87,10 +87,34 @@ NEW_CARDS = {
     "AMC_GH2E_Sunkeeper2_Heal1Range3_P1": ('MathModifier: "+1"\nControlTargetingActor: True\nAbilities:\n    AHeal:\n'
                                            '        Heal: 1\n        Filter: [Self, Ally]\n        Targeting: Range\n'
                                            '        Range: 3\n        AnimOverload: Heal\n'),
-    "AMC_GH2E_Sunkeeper2_Recover1_M1": ('MathModifier: "-1"\nControlTargetingActor: True\nAbilities:\n    ARecover:\n'
-                                        '        RecoverDiscardedCards: 1\n        Range: 1\n        Filter:\n'
-                                        '            TargetType: [Self, Ally]\n            ActorType: Player\n'
-                                        '        Vars:\n            CardLevel: 1\n        AnimOverload: PositiveBuffTargeted\n'),
+    # "You or an adjacent ally may recover one level 1 card": a RecoverDiscardedCards on a modifier card is the error
+    # screen when drawn (the game's modifier code doesn't run it), so it rides in a Choose, whose chosen option runs as
+    # an ordinary ability (Frosthaven's AMC_PushOrPull2_R is a top-level Choose; AMC_ImproveTrapDamage2OrHeal2_P0's
+    # options are Null abilities). One option, which the player may skip: the printed "may".
+    "AMC_GH2E_Sunkeeper2_Recover1_M1": """\
+MathModifier: "-1"
+Abilities:
+    AChooseRecover:
+        Filter: Self
+        CanUndo: False
+        HelpBoxTooltipLocKey: "GH2E_Sunkeeper2_RECOVER_HELP"
+        PreviewEffectText: "<sprite name=RecoverIcon> 1"
+        Choose:
+            Abilities:
+                ARecover:
+                    RecoverDiscardedCards: 1
+                    CanUndo: False
+                    PreviewEffectText: "<sprite name=RecoverIcon> 1"
+                    Range: 1
+                    Filter:
+                        TargetType: [Self, Ally]
+                        ActorType: Player
+                    Vars:
+                        CardLevel: 1
+                    AnimOverload: PositiveBuffTargeted
+""",
 }
 
-STRINGS = {}
+STRINGS = {
+    "GH2E_Sunkeeper2_RECOVER_HELP": "You or an adjacent ally may recover one level 1 card from the discard pile",
+}

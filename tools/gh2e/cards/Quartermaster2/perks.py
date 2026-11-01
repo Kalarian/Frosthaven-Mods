@@ -54,8 +54,9 @@ NEW_CARDS = {
     # +0 Muddle (Frosthaven has the +0 Disarm one, AMC_Disarm_P0; its Muddle cards are rolling or +1 and up)
     "AMC_GH2E_Quartermaster2_Muddle_P0": ('MathModifier: "+0"\nAbilityOverrides:\n    NegCon:\n'
                                           '        ParentName: AMC_GH2E_Quartermaster2_Muddle_P0\n        Conditions: [Muddle]\n'),
-    # +0, gain 10 supplies (the class resource): a Null ability whose end adds the supplies, as the cards' own gains
-    "AMC_GH2E_Quartermaster2_Supplies10_P0": ('MathModifier: "+0"\nAbilities:\n    ASupplies:\n        Null: True\n'
+    # +0, gain 10 supplies (the class resource): a self NullTargeting (Frosthaven's AMC_Resonance_P1; a Null ability on
+    # a modifier card is the error screen when drawn) whose end adds the supplies, as the cards' own gains
+    "AMC_GH2E_Quartermaster2_Supplies10_P0": ('MathModifier: "+0"\nAbilities:\n    ASupplies:\n        NullTargeting: True\n'
                                               '        Filter: Self\n        AutoTrigger: True\n        SkipAnim: True\n'
                                               '        ResourcesToAddOnAbilityEnd:\n            - ["Supplies", 10]\n'),
     # rolling: recover one spent or lost item (Frosthaven's AMC_RefreshItem, rolling)

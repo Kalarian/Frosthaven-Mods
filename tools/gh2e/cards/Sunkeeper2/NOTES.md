@@ -103,3 +103,4 @@ Where a mark's shape differs from the converter's default (Attack/Heal/Move with
 
 `GH2E_SKIP_RULECHECK_BUILD=1 python tools/gh2e/check.py Sunkeeper2`: **CHECK PASSED Sunkeeper2** (30 of 30 cards,
 packcheck 0 problems / 0 warnings, rulecheck 45 ok, no gh_port warnings, no missing text keys).
+- Perk Second Wind: modifier rewritten, `AMC_GH2E_Sunkeeper2_Recover1_M1` is now -1 with a top-level Choose (Frosthaven's AMC_PushOrPull2_R) whose one option is the RecoverDiscardedCards 1 (level 1, you or an adjacent ally); skipping the Choose is the printed "may" (a RecoverDiscardedCards ability on a modifier card stops the game when drawn; a Choose's option runs as an ordinary ability). Help text GH2E_Sunkeeper2_RECOVER_HELP. Bench it.

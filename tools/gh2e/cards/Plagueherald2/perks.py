@@ -20,9 +20,26 @@ NEW_CARDS = {
                                         + _PLAGUE_OR_POISON_TARGETING
                                         + '        ResourcesToGiveToTargets:\n            - ["Plague", 1]\n'
                                         + '        ResourcesToAddOnAbilityEnd:\n            - ["Plague", 3]\n',
-    # "Give the target or one enemy within Range 2 of the target Poison", rolling
-    "AMC_GH2E_Plagueherald2_Poison_R": 'MathModifier: "+0"\nRolling: True\nAbilities:\n    PoisonAbility:\n        Poison: True\n'
-                                       + _PLAGUE_OR_POISON_TARGETING,
+    # "Give the target or one enemy within Range 2 of the target Poison", rolling. A Poison ability on a modifier card is
+    # the error screen when drawn (the game's modifier code runs no condition abilities): a NullTargeting carrying the
+    # condition, as Frosthaven's cards give an enemy a condition (Infuser Diamondization: NullTargeting, IsNegative,
+    # Conditions), with the Plague card's targeting.
+    "AMC_GH2E_Plagueherald2_Poison_R": """\
+MathModifier: "+0"
+Rolling: True
+Abilities:
+    PoisonAbility:
+        NullTargeting: True
+        Conditions: [Poison]
+        Filter: Enemy
+        Target: 1
+        Targeting: Custom
+        TargetingVars:
+            AddValidActorsInRange: GameState.GetAllEnemiesInRange(TargetingActor, TargetActor.ArrayIndex, 2)
+        MiscVars:
+            TreatAsNonInlineForTargeting: True
+            IsNegative: True
+""",
 }
 
 PERKS = [   # (checkboxes, name, description in sprite markup, {perk fields})

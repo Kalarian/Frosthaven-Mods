@@ -138,3 +138,4 @@ tag on the card face and no music-note status icon (both keyed to PlaySong in th
 `GH2E_SKIP_RULECHECK_BUILD=1 python tools/gh2e/check.py Soothsinger2`: packcheck 30 cards, 0 problems, 0 warnings;
 rulecheck 44 ok, 0 with problems; character resources SoothsingerHighNote, SoothsingerLowNote. **CHECK PASSED
 Soothsinger2** (2026-11-01).
+- Perk Benediction: modifier rewritten, `AMC_GH2E_Soothsinger2_Bless2_M2` blesses with a NullTargeting + `Conditions: [Bless]` (same filter, range 99, target 2, ControlTargetingActor) (a Bless ability on a modifier card stops the game when drawn). Exact.

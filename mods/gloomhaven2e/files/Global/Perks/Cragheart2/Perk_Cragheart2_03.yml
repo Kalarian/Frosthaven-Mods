@@ -5,4 +5,4 @@ Description: PERK_Cragheart2_03_Desc
 CharacterID: Cragheart2ID
 Available: 3
 CardsToRemove: [AMC_Basic_P0]
-CardsToAdd: [AMC_GH2E_Cragheart2_Obstacle_P1_R]
+CardsToAdd: [AMC_P1_R]

@@ -159,6 +159,36 @@ def references(pack, problems):
                 problems.append(f"{rel}: mastery tag {tag} is answered nowhere in the plugin (the mastery could never complete)")
 
 
+def _modifier_kinds(path):
+    """The ability kinds of an attack modifier file's Abilities block."""
+    try:
+        d = yaml.safe_load(path.read_text(encoding="utf-8-sig"))
+    except yaml.YAMLError:
+        return set()
+    out = set()
+    for props in ((d or {}).get("Abilities") or {}).values() if isinstance(d, dict) else []:
+        k = kind_of(props)
+        if k:
+            out.add(k)
+    return out
+
+
+def modifier_abilities(pack, problems):
+    """An attack modifier card runs only the ability kinds the game's modifier code knows: one it doesn't is the error
+    screen the moment the card is drawn ("Unsupported attackAbility modifier ability type": the 2e Cragheart's obstacle
+    modifier, 2026-11-01). Allowed: the kinds Frosthaven's own modifier cards and the 1st edition pack's (played) use."""
+    # the switch in CAbilityAttack that runs a drawn modifier's abilities (decompiled ScenarioRuleLibrary; its default
+    # case is the error screen). Conditions go on the attack (AbilityOverrides ... Conditions), not as abilities.
+    allowed = {"Consume", "Infuse", "ModeTransfer", "Push", "Pull", "Attack", "Heal", "Damage", "Shield", "Retaliate",
+               "Trap", "Strengthen", "RefreshItems", "RefreshItemCards", "AddActiveBonus", "NullTargeting", "Choose",
+               "NullHex", "Brittle", "CreateTerrain", "Teleport2", "MoveActiveBonusTracker",
+               "CreateLimitedHazardousTerrain", "Kill", "ControlActor"}
+    for f in sorted((pack / "files" / "Global" / "AttackModifiers").glob("*.yml")):
+        for k in sorted(_modifier_kinds(f) - allowed):
+            problems.append(f"{f.relative_to(pack).as_posix()}: a {k} ability on an attack modifier card: no modifier of "
+                            f"Frosthaven's runs one (the game stops with an error when the card is drawn)")
+
+
 def check_pack(pack):
     problems, warnings, n = [], [], 0
     for f in sorted((pack / "files" / "Global" / "Characters").glob("*/AbilityCards/*.yml")):
@@ -230,6 +260,7 @@ def check_pack(pack):
                     if not any(re.search(rf"^ID:\s*{re.escape(sid)}(ID)?\s*$", d.read_text(encoding="utf-8-sig"), re.M) for d in defs):
                         problems.append(f"{rel}: {half}/{ab}: summon {sid} has no definition in files/Global/HeroSummons (its card cannot be drawn)")
     references(pack, problems)
+    modifier_abilities(pack, problems)
     # the effects' materials: a shader Frosthaven can't draw shows as a magenta block in game (tools/vfxcheck.py)
     if (pack / "pack.json").exists():
         import vfxcheck

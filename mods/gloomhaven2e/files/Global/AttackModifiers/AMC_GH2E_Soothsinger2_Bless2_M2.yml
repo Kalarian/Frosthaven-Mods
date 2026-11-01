@@ -4,7 +4,8 @@ MathModifier: "-2"
 ControlTargetingActor: True
 Abilities:
     ABless:
-        Bless: True
+        NullTargeting: True
+        Conditions: [Bless]
         Filter: [Self, Ally]
         Targeting: Range
         Range: 99

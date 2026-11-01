@@ -1618,6 +1618,7 @@ Elementalist2_FullName	Elementalist
 CODEX_Hero_Elementalist2_Title	Elementalist
 CODEX_HeroInfo_Elementalist2	You have a number of actions and attack modifiers that infuse mixed or wild elements. Whenever performing one of these infusions, note that you choose which element you are infusing at the end of that turn, when you move that element to the strong column.
 GH2E_Nightshroud2_PERK_10	Once each scenario, during your turn, place one Tear in an adjacent hex
+GH2E_Nightshroud2_TEAR_HELP	Place one Tear in a hex adjacent to the target
 PERK_Nightshroud2_01_Name	Smooth Edge
 PERK_Nightshroud2_01_Desc	Remove one <sprite name="-2">
 PERK_Nightshroud2_02_Name	Light Step
@@ -1702,6 +1703,8 @@ PERK_Quartermaster2_11_Desc	Whenever you long rest, gain 10 supplies
 Quartermaster2_FullName	Quartermaster
 CODEX_Hero_Quartermaster2_Title	Quartermaster
 CODEX_HeroInfo_Quartermaster2	You have a special personal supply of [Quartermaster] items. They are not immediately brought into scenarios but can be given to characters through your abilities. These items have no item slot requirements and may be used by characters regardless of their equipped items. There is only one copy of each [Quartermaster] item card—if any character already has that item, you may not give out another copy. When a [Quartermaster] item is used, it is returned to its supply. At the end of each scenario, unused [Quartermaster] items are returned to their supply.
+GH2E_Sawbones2_PACK_HELP	Give one adjacent ally or self one Medical Pack
+GH2E_Sawbones2_SEDATION_HELP	You may gain <sprite name=Disarm> to add <sprite name=Stun>
 PERK_Sawbones2_01_Name	Steady Hands
 PERK_Sawbones2_01_Desc	Remove two <sprite name="-1">
 PERK_Sawbones2_02_Name	Emergency Supplies
@@ -1725,6 +1728,7 @@ Sawbones2_MASTERY_1_Desc	In a single scenario, give an ally a medical pack or a 
 Sawbones2_FullName	Sawbones
 CODEX_Hero_Sawbones2_Title	Sawbones
 CODEX_HeroInfo_Sawbones2	You also have Prescription [Prescription] actions, which can only be performed if you have at least one adjacent character ally. When you perform a [Prescription] action, immediately place that card in the adjacent ally’s active area. When they discard one of these cards, place that ability card in your discard pile instead of theirs.\n\nYou have some attack abilities that gain bonuses if the target is damaged. This is always determined before attacking.
+GH2E_Sunkeeper2_RECOVER_HELP	You or an adjacent ally may recover one level 1 card from the discard pile
 PERK_Sunkeeper2_01_Name	Radiance
 PERK_Sunkeeper2_01_Desc	Replace one <sprite name="-1"> with two <sprite name="0"> <sprite name=CreateLight>
 PERK_Sunkeeper2_02_Name	Bulwark

@@ -26,16 +26,15 @@ should be in the first bench.
     Frosthaven has no summon ability with a placement range (none of its cards or the 1e cards has one).
   - Tokens are untargetable, invulnerable, non-blocking summons: whether figures may end a move in a token's hex
     (the class mat says the hex stays empty) is to be seen in game.
-- **Trap damage enhancement slots left out** (Gas Canister top, Volatile Concoction bottom, Proximity Mine bottom,
-  Cryonic Snare top; the card prints damage [square]): Frosthaven's own shape (`SquareEnhancements: 1` beside `Damage`
-  inside the `Trap` block, the Trapper's Boar Catcher) is flagged by packcheck as a dead slot (PLUS_ONE has no `Trap`).
-  The trap ranges keep their square slots. See "Shared changes wanted".
+- **Trap damage slots** (Gas Canister top, Volatile Concoction bottom, Proximity Mine bottom, Cryonic Snare top; the
+  card prints damage [square]): Frosthaven's own shape, `SquareEnhancements: 1` beside `Damage` inside the `Trap`
+  block (the Trapper's Boar Catcher). Left out at first because packcheck called it a dead slot; restored once the lead
+  added `Trap` to packcheck's PLUS_ONE. The trap ranges have their square slots too.
 - **Enhancement shapes** follow the print (AUTHORING "Enhancement mark shapes"): plain `Enhancements` where the
   converter's default matches, the slot key written directly where it doesn't: Disorienting Flash bottom Heal
   [circle], Crank Bow bottom Heal [square], Dangerous Contraption Shield [diamond+], Cryonic Snare Retaliate
   [diamond+], Disintegration Beam bottom Attack [square], Harsh Stimulants top granted Move and Attack [square],
-  Teleportation Pad Teleport [circle], every summon stat [square]. Only the four trap damages miss their [square]
-  (above).
+  Teleportation Pad Teleport [circle], every summon stat [square], the four trap damages [square].
 - **Ally-granted round shields/retaliates** (Flamethrower, Dangerous Contraption, Cryonic Snare bottoms): Frosthaven's
   Hold the Line top shape (an ability with `Filter: Ally`, `Range: 1` and `ActiveBonus: Duration: Round`), i.e. given
   at play time, not a round aura (the printed rule; Xipe's and the 1e aura follow adjacency through the round).
@@ -63,8 +62,8 @@ should be in the first bench.
 - 18 Teleportation Pad top: **NEEDS PLUGIN.** "You and all allies may treat the two token hexes as adjacent during
   move abilities" has no engine shape. Written as two token summons (TeleportationPadID, no effect of their own, so a
   plugin can find the two hexes) + the rule as text; XP 3 / persistent / lost as printed. Bottom: Frosthaven's
-  `Teleport2: 4` with a circle slot (Blinkblade's Breakneck Speed); packcheck warns "no ability kind found" because its
-  KIND_KEYS lacks `Teleport2` (a gh_port/packcheck warning I can't fix from here; the key is Frosthaven's own).
+  `Teleport2: 4` with a circle slot (Blinkblade's Breakneck Speed); packcheck's old "no ability kind found" warning on it is
+  gone since `Teleport2` was added to its KIND_KEYS.
 - 19 Stamina Booster: `Discard: [Discard,Permanently Lost]` for the card-stack-with-red-X icon (as Xipe, the 1e file and
   Frosthaven's own cards write it).
 - 20 Dangerous Contraption bottom: Shield 1 round on one adjacent ally (Hold the Line shape, Target 1).
@@ -122,10 +121,9 @@ HealOrDebuffEveryTurn, which doesn't count a positive condition or a shield give
 
 ## Shared changes wanted
 
-1. **packcheck PLUS_ONE: accept `Trap`** (a trap's damage takes "+1": Frosthaven's own Boar Catcher writes
-   `SquareEnhancements: 1` inside the Trap block). Then restore `SquareEnhancements: 1` under `Damage` in the four trap
-   cards (13 top, 14 bottom, 21 bottom, 28 top).
-2. **packcheck KIND_KEYS: add `Teleport2`** (Frosthaven's teleport; silences the Teleportation Pad bottom warning).
+1. ~~packcheck PLUS_ONE: accept `Trap`~~ **done** by the lead; the four trap damage slots (13 top, 14 bottom,
+   21 bottom, 28 top) are restored.
+2. ~~packcheck KIND_KEYS: add `Teleport2`~~ **done** (the Teleportation Pad bottom warning no longer appears).
 3. **Plugin: summon placement range** for token summons (Enhancement Field and Pernicious Fogger range 3,
    Teleportation Pad range 5): a summon ability with `Range` placing on any empty hex in range.
 4. **Plugin: Teleportation Pad adjacency** (the two TeleportationPadID hexes count as adjacent for moves of the
@@ -141,4 +139,4 @@ HealOrDebuffEveryTurn, which doesn't count a positive condition or a shield give
 ## Check
 
 `GH2E_SKIP_RULECHECK_BUILD=1 python tools/gh2e/check.py Tinkerer2` -> **CHECK PASSED Tinkerer2** (31 of 31 cards,
-packcheck 0 problems / 1 warning (Teleport2, above), rulecheck 49 ok, 6 summon definitions, 10 perks + 2 masteries).
+packcheck 0 problems / 0 warnings, rulecheck 49 ok, 6 summon definitions, 10 perks + 2 masteries).

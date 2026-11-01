@@ -28,6 +28,7 @@ Data:
                 Trap:
                     TrapName: BearTrap
                     Damage: 2
+                    SquareEnhancements: 1
                     Conditions: Immobilize
                 Range:
                     Amount: 2
@@ -43,5 +44,5 @@ Layout:
         - Row: "$GH2E_Tinkerer2_21_T$"
     Bottom:
         - Row: "$GH2E_Tinkerer2_21_B$"
-        - Row: "<b><size=130%><sprite name=Damage> *BTrap* <sprite name=Immobilize>"
+        - Row: "<b><size=130%><sprite name=Damage> *BTrap* <size=100%><voffset=1>@BTrap@ <size=130%><sprite name=Immobilize>"
         - Row: "$Range$ <sprite name=Range> *BTrap.Range* @BTrap.Range@"

@@ -15,6 +15,7 @@ Data:
                 Trap:
                     TrapName: Trap
                     Damage: 4
+                    SquareEnhancements: 1
                     Conditions: [Wound, Stun]
                 Range:
                     Amount: 2
@@ -45,7 +46,7 @@ Layout:
         - Row:
             - ColumnWidths: "10,35,45,10"
             - Column:
-            - Column: "<size=150%><sprite name=Damage> *TTrap* <sprite name=Wound> <sprite name=Stun>"
+            - Column: "<size=150%><sprite name=Damage> *TTrap* <size=100%><voffset=1>@TTrap@ <size=130%><sprite name=Wound> <sprite name=Stun>"
             - Column:
                 - Row: "<link=fhpill><sprite name=Range> *TTrap.Range* @TTrap.Range@</link>"
             - Column:

@@ -33,6 +33,7 @@ Data:
                 Trap:
                     TrapName: Trap
                     Damage: 2
+                    SquareEnhancements: 1
                     Conditions: Poison
                 SpawnDelay: 2.2
                 Target: 1
@@ -45,4 +46,4 @@ Layout:
         - Row: "$FHS_GH2E_Tinkerer2_14_T2$"
     Bottom:
         - Row: "$FHS_GH2E_Tinkerer2_14_B$"
-        - Row: "<size=150%><sprite name=Damage> *BTrap* <sprite name=Poison>"
+        - Row: "<size=150%><sprite name=Damage> *BTrap* <size=100%><voffset=1>@BTrap@ <size=130%><sprite name=Poison>"

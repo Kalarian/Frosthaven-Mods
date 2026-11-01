@@ -27,6 +27,7 @@ Data:
                 Trap:
                     TrapName: PoisonMine
                     Damage: 2
+                    SquareEnhancements: 1
                     Conditions: Poison
                 SpawnDelay: 2.2
                 Target: 1
@@ -39,4 +40,4 @@ Layout:
         - Row: "$GH2E_Tinkerer2_14_T2$"
     Bottom:
         - Row: "$GH2E_Tinkerer2_14_B$"
-        - Row: "<b><size=130%><sprite name=Damage> *BTrap* <sprite name=Poison>"
+        - Row: "<b><size=130%><sprite name=Damage> *BTrap* <size=100%><voffset=1>@BTrap@ <size=130%><sprite name=Poison>"

@@ -64,9 +64,12 @@ PERKS = [
 MASTERIES = []
 
 NEW_CARDS = {
-    # Frosthaven's ally-condition modifier shape (AMC_Strengthen_Ally_P1), Bless on two figures, you included
+    # Frosthaven's ally-condition modifier shape (AMC_Strengthen_Ally_P1), Bless on two figures, you included. A Bless
+    # ability on a modifier card is the error screen when drawn (the game's modifier code runs no condition abilities):
+    # a NullTargeting carrying the condition, as Frosthaven's cards give conditions (NullTargeting + Conditions)
     "AMC_GH2E_Soothsinger2_Bless2_M2": ('MathModifier: "-2"\nControlTargetingActor: True\nAbilities:\n    ABless:\n'
-                                        '        Bless: True\n        Filter: [Self, Ally]\n        Targeting: Range\n'
+                                        '        NullTargeting: True\n        Conditions: [Bless]\n'
+                                        '        Filter: [Self, Ally]\n        Targeting: Range\n'
                                         '        Range: 99\n        Target: 2\n        CanUndo: False\n'),
     # Frosthaven's grant-in-a-modifier (AMC_P0_ControlSummonMove2), on an ally, Move 2 then Attack 2
     "AMC_GH2E_Soothsinger2_GrantAlly_R": ('MathModifier: "+0"\nRolling: True\nControlTargetingActor: True\nAbilities:\n'

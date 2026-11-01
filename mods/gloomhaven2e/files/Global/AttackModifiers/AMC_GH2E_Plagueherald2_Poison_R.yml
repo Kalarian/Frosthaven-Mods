@@ -4,7 +4,8 @@ MathModifier: "+0"
 Rolling: True
 Abilities:
     PoisonAbility:
-        Poison: True
+        NullTargeting: True
+        Conditions: [Poison]
         Filter: Enemy
         Target: 1
         Targeting: Custom
@@ -12,3 +13,4 @@ Abilities:
             AddValidActorsInRange: GameState.GetAllEnemiesInRange(TargetingActor, TargetActor.ArrayIndex, 2)
         MiscVars:
             TreatAsNonInlineForTargeting: True
+            IsNegative: True

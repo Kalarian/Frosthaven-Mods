@@ -9,6 +9,7 @@ Data:
                 Trap:
                     TrapName: PoisonMine
                     Damage: 4
+                    SquareEnhancements: 1
                     Conditions: [Wound, Stun]
                 Range:
                     Amount: 2
@@ -36,7 +37,7 @@ Data:
 Layout:
     Top:
         - Row: "$GH2E_Tinkerer2_28_T$"
-        - Row: "<b><size=130%><sprite name=Damage> *TTrap* <sprite name=Wound> <sprite name=Stun>"
+        - Row: "<b><size=130%><sprite name=Damage> *TTrap* <size=100%><voffset=1>@TTrap@ <size=130%><sprite name=Wound> <sprite name=Stun>"
         - Row: "$Range$ <sprite name=Range> *TTrap.Range* @TTrap.Range@"
         - Row: "<size=50%> "
         - Infuse: Ice

@@ -1,12 +1,34 @@
 Parser: AttackModifier
 Name: AMC_GH2E_Sawbones2_DisarmStun_P1
 MathModifier: "+1"
-AbilityOverrides:
-    NegCon:
-        ParentName: AMC_GH2E_Sawbones2_DisarmStun_P1
-        Conditions: [Stun]
 Abilities:
-    ADisarmSelf:
-        Disarm: True
+    AChooseSedate:
         Filter: Self
-        AnimOverload: SelfDebuff
+        CanUndo: False
+        HelpBoxTooltipLocKey: "GH2E_Sawbones2_SEDATION_HELP"
+        PreviewEffectText: "<sprite name=Disarm> > <sprite name=Stun>"
+        Vars:
+            ValidateTargetAlive: TargetActor != null && TargetActor.IsDead == False
+        Choose:
+            Abilities:
+                AStun:
+                    NullTargeting: True
+                    Conditions: [Stun]
+                    CanUndo: False
+                    AutoTrigger: True
+                    PreviewEffectText: "<sprite name=Disarm> > <sprite name=Stun>"
+                    Filter: Enemy
+                    Targeting: Custom
+                    TargetingVars:
+                        AddValidActorInRange: TargetActor
+                        AddActorToTarget: TargetActor
+                    MiscVars:
+                        IsNegative: True
+                    SubAbilities:
+                        ADisarmSelf:
+                            NullTargeting: True
+                            Conditions: [Disarm]
+                            Filter: Self
+                            AutoTrigger: True
+                            TreatAsNonSubAbility: True
+                            AnimOverload: SelfDebuff

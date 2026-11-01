@@ -14,8 +14,8 @@ PERKS = [
      {"CardsToRemove": "[AMC_Basic_M2]", "CardsToAdd": "[AMC_GH2E_Sawbones2_Pack_M2]"}),
     (3, "Precise Incisions", 'Replace one <sprite name="-1"> with one <sprite name="+1">',
      {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Basic_P1]"}),
-    # "you may gain Disarm to add Stun": the choice can't be offered on a modifier; the card always stuns and always
-    # disarms you (NOTES.md)
+    # "you may gain Disarm to add Stun": a Choose on the modifier (one option: Stun the target, Disarm you), which the
+    # player may skip (NEW_CARDS, NOTES.md)
     (2, "Sedation", 'Replace two <sprite name="0"> with one <sprite name="+1"> "You may gain <sprite name=Disarm> to add <sprite name=Stun>"',
      {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P0]", "CardsToAdd": "[AMC_GH2E_Sawbones2_DisarmStun_P1]"}),
     # the conditional +1 Attack needs the plugin (NOTES.md): plain +1 cards until then
@@ -66,17 +66,75 @@ BattleGoalCondition:
 ]
 
 NEW_CARDS = {
-    "AMC_GH2E_Sawbones2_Pack_M2": ('MathModifier: "-2"\nControlTargetingActor: True\nAbilities:\n    AGivePack:\n'
-                                   '        GiveSupplyCard: [33230]\n        Range: 1\n        Targeting: Range\n'
-                                   '        Filter:\n            TargetType: [Self, Ally]\n            ActorType: Player\n'
-                                   '        AnimOverload: GivePackAdjacent\n'),
-    "AMC_GH2E_Sawbones2_DisarmStun_P1": ('MathModifier: "+1"\nAbilityOverrides:\n    NegCon:\n'
-                                         '        ParentName: AMC_GH2E_Sawbones2_DisarmStun_P1\n        Conditions: [Stun]\n'
-                                         'Abilities:\n    ADisarmSelf:\n        Disarm: True\n        Filter: Self\n'
-                                         '        AnimOverload: SelfDebuff\n'),
+    # A modifier card runs only the ability kinds the game's modifier code knows (a GiveSupplyCard or a Disarm on it is
+    # the error screen when drawn). Both ride in a Choose, whose chosen option runs as an ordinary ability (Frosthaven's
+    # AMC_PushOrPull2_R is a top-level Choose; AMC_ImproveTrapDamage2OrHeal2_P0's options are Null abilities); one
+    # option each, which the player may skip.
+    "AMC_GH2E_Sawbones2_Pack_M2": """\
+MathModifier: "-2"
+Abilities:
+    AChoosePack:
+        Filter: Self
+        CanUndo: False
+        HelpBoxTooltipLocKey: "GH2E_Sawbones2_PACK_HELP"
+        PreviewEffectText: "Medical Pack"
+        Choose:
+            Abilities:
+                AGivePack:
+                    GiveSupplyCard: [33230]
+                    CanUndo: False
+                    PreviewEffectText: "Medical Pack"
+                    Range: 1
+                    Targeting: Range
+                    Filter:
+                        TargetType: [Self, Ally]
+                        ActorType: Player
+                    AnimOverload: GivePackAdjacent
+""",
+    # "You may gain Disarm to add Stun": the option is Stun on the attack's target (a NullTargeting with the condition,
+    # aimed at the target as Frosthaven's Boneshaper Exploding Corpse aims a sub-ability: AddValidActorInRange +
+    # AddActorToTarget), then Disarm on you (a self NullTargeting sub-ability, as Banner Spear Boldening Blow's Bless).
+    # The Choose is skipped when the attack killed the target.
+    "AMC_GH2E_Sawbones2_DisarmStun_P1": """\
+MathModifier: "+1"
+Abilities:
+    AChooseSedate:
+        Filter: Self
+        CanUndo: False
+        HelpBoxTooltipLocKey: "GH2E_Sawbones2_SEDATION_HELP"
+        PreviewEffectText: "<sprite name=Disarm> > <sprite name=Stun>"
+        Vars:
+            ValidateTargetAlive: TargetActor != null && TargetActor.IsDead == False
+        Choose:
+            Abilities:
+                AStun:
+                    NullTargeting: True
+                    Conditions: [Stun]
+                    CanUndo: False
+                    AutoTrigger: True
+                    PreviewEffectText: "<sprite name=Disarm> > <sprite name=Stun>"
+                    Filter: Enemy
+                    Targeting: Custom
+                    TargetingVars:
+                        AddValidActorInRange: TargetActor
+                        AddActorToTarget: TargetActor
+                    MiscVars:
+                        IsNegative: True
+                    SubAbilities:
+                        ADisarmSelf:
+                            NullTargeting: True
+                            Conditions: [Disarm]
+                            Filter: Self
+                            AutoTrigger: True
+                            TreatAsNonSubAbility: True
+                            AnimOverload: SelfDebuff
+""",
     "AMC_GH2E_Sawbones2_Heal3Range1_R": ('MathModifier: "+0"\nRolling: True\nControlTargetingActor: True\nAbilities:\n'
                                          '    AHeal:\n        Heal: 3\n        Filter: [Self, Ally]\n        Targeting: Range\n'
                                          '        Range: 1\n        AnimOverload: Heal\n'),
 }
 
-STRINGS = {}
+STRINGS = {
+    "GH2E_Sawbones2_PACK_HELP": "Give one adjacent ally or self one Medical Pack",
+    "GH2E_Sawbones2_SEDATION_HELP": "You may gain <sprite name=Disarm> to add <sprite name=Stun>",
+}

@@ -3,7 +3,7 @@ Name: AMC_GH2E_Quartermaster2_Supplies10_P0
 MathModifier: "+0"
 Abilities:
     ASupplies:
-        Null: True
+        NullTargeting: True
         Filter: Self
         AutoTrigger: True
         SkipAnim: True

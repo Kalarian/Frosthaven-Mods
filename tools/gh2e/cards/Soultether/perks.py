@@ -34,7 +34,8 @@ PERKS = [
      'of your summons: <sprite name=Teleport> 2"',
      {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_GH2E_Soultether_P0_GrantTeleport2]"}),
     # Frosthaven's AMC_Strengthen_Ally_P1 shape (a condition on another figure from a modifier), Invisible on one of
-    # your summons, performed by you when a summon draws it (TryToPerformAsSummoner)
+    # your summons, performed by you when a summon draws it (TryToPerformAsSummoner). The Invisible is a NullTargeting
+    # carrying the condition (an Invisible ability on a modifier card is the error screen when drawn)
     (3, "Veiled Servant", 'Replace one <sprite name="0"> with one <sprite name="+1"> "<sprite name=Invisible>, '
      '<sprite name=Target> 1 of your summons"',
      {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_GH2E_Soultether_P1_InvisibleSummon]"}),
@@ -156,7 +157,8 @@ NEW_CARDS = {
         'TryToPerformAsSummoner: True\n'
         'Abilities:\n'
         '    AInvisible:\n'
-        '        Invisible: True\n'
+        '        NullTargeting: True\n'
+        '        Conditions: [Invisible]\n'
         '        Filter: OwnSummon\n'
         '        Targeting: Range\n'
         '        Range: 99\n'

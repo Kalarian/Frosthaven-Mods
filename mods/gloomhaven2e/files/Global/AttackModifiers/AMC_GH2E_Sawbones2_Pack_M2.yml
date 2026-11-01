@@ -1,13 +1,21 @@
 Parser: AttackModifier
 Name: AMC_GH2E_Sawbones2_Pack_M2
 MathModifier: "-2"
-ControlTargetingActor: True
 Abilities:
-    AGivePack:
-        GiveSupplyCard: [33230]
-        Range: 1
-        Targeting: Range
-        Filter:
-            TargetType: [Self, Ally]
-            ActorType: Player
-        AnimOverload: GivePackAdjacent
+    AChoosePack:
+        Filter: Self
+        CanUndo: False
+        HelpBoxTooltipLocKey: "GH2E_Sawbones2_PACK_HELP"
+        PreviewEffectText: "Medical Pack"
+        Choose:
+            Abilities:
+                AGivePack:
+                    GiveSupplyCard: [33230]
+                    CanUndo: False
+                    PreviewEffectText: "Medical Pack"
+                    Range: 1
+                    Targeting: Range
+                    Filter:
+                        TargetType: [Self, Ally]
+                        ActorType: Player
+                    AnimOverload: GivePackAdjacent

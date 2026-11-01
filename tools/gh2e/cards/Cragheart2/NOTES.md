@@ -109,3 +109,4 @@ Masteries: none written (no existing battle-goal pattern for "obstacle every rou
 
 `GH2E_SKIP_RULECHECK_BUILD=1 python tools/gh2e/check.py Cragheart2`: CHECK PASSED (30 of 30 cards, packcheck 0
 problems 0 warnings, rulecheck 42 ok, no missing text keys, no gh_port warnings).
+- Perk Rock Spray: the obstacle modifier crashed the game when drawn (a modifier card can't run Create: error screen in the 2e pass, 2026-11-01). Now Frosthaven's rolling +1 (AMC_P1_R); the obstacle is NEEDS PLUGIN.

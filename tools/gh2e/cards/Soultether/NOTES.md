@@ -144,3 +144,4 @@ text. HP, hand size and traits are GHS's (classes.json).
 
 `GH2E_SKIP_RULECHECK_BUILD=1 python tools/gh2e/check.py Soultether` -> **CHECK PASSED Soultether** (31 of 31 cards,
 12 summons, 13 perks; packcheck 0 problems / 0 warnings, rulecheck 62 ok, no gh_port warnings, no missing text keys).
+- Perk Veiled Servant: modifier rewritten, `AMC_GH2E_Soultether_P1_InvisibleSummon` gives Invisible with a NullTargeting + `Conditions: [Invisible]` on OwnSummon (same targeting, TryToPerformAsSummoner) (an Invisible ability on a modifier card stops the game when drawn). Exact.

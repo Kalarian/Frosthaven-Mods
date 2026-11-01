@@ -187,3 +187,4 @@ Rabid Bite (controlled Move 1) and Convert the Flock (controlled Move 2).
 
 `GH2E_SKIP_RULECHECK_BUILD=1 python tools/gh2e/check.py Plagueherald2`: **CHECK PASSED**. 29 of 29 cards, packcheck 0
 problems / 0 warnings, rulecheck 46 ok, no gh_port warnings, character resources: Plague.
+- Perk Toxic Touch: modifier rewritten, `AMC_GH2E_Plagueherald2_Poison_R` gives Poison with a NullTargeting + `Conditions: [Poison]` + `IsNegative` (Frosthaven's Infuser Diamondization shape), same target-or-enemy-within-2 targeting as the Plague card (a Poison ability on a modifier card stops the game when drawn). Exact.

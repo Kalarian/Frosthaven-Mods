@@ -148,3 +148,4 @@ Bench first (shapes no Frosthaven card uses, or unverified expressions): a spend
 skip keeps supplies), Continual Supply bottom (slot only on 0-supply turns), Giant Club and Tools of War supply gains,
 Scroll of Judgment bottom reaction, Set Up Shop (both end-turn bonuses, bottom end-round heal), RefreshItems 2,
 Restock perk modifier.
+- Perk Restock: modifier rewritten, `AMC_GH2E_Quartermaster2_Supplies10_P0` is now a self NullTargeting (Frosthaven's AMC_Resonance_P1, auto, no animation) with the same ResourcesToAddOnAbilityEnd Supplies 10 (a Null ability on a modifier card stops the game when drawn). Exact; bench the supply gain.

@@ -4,7 +4,8 @@ MathModifier: "+1"
 TryToPerformAsSummoner: True
 Abilities:
     AInvisible:
-        Invisible: True
+        NullTargeting: True
+        Conditions: [Invisible]
         Filter: OwnSummon
         Targeting: Range
         Range: 99
