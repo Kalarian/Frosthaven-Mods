@@ -45,3 +45,4 @@ companion/logs/
 companion/webview2/
 companion/cache/
 companion/**/__pycache__/
+tools/gh2e/build/

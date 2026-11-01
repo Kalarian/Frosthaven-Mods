@@ -60,6 +60,9 @@ namespace FrosthavenMods
         public const ERulesFlag GloomhavenClasses = (ERulesFlag)(1 << 15);
         // under the pack rule: every pack class open at once instead of one envelope per retirement (2026-10-27)
         public const ERulesFlag AllGloomhavenClassesOpen = (ERulesFlag)(1 << 14);
+        // the Gloomhaven 2nd edition classes pack (2026-11-01); one edition per campaign, so it refuses while bit 15 is on
+        // (the game's own rules use bits 0-6)
+        public const ERulesFlag GloomhavenClasses2e = (ERulesFlag)(1 << 13);
         // The game's own rule bit, which it never shows on its rules screen (ReducedRandomness.cs passes it to the
         // scenario rules). A save keeps it without the mods too. (Its CanRespecCharacters bit was offered as "Respec
         // without the Library" for a day and dropped, 2026-10-25: the Library's respec is enough.)
@@ -77,9 +80,9 @@ namespace FrosthavenMods
                               "classes open the moment this is turned on (in a solo scenario, at the next outpost). The " +
                               "others wait in envelopes: each retirement in the campaign opens one, and the party picks one " +
                               "of two classes to unlock, on the game's own class-choice screen. " +
-                              "\"Gloomhaven classes: all open at once\" (the next switch) opens them all instead. These are " +
-                              "the classes of Gloomhaven's first edition; its second edition's classes may come later as a " +
-                              "separate pack, which a campaign will use instead of this one, not alongside it.\n\n" +
+                              "\"Gloomhaven classes: all open at once\" opens them all instead. These are " +
+                              "the classes of Gloomhaven's first edition; its second edition's classes are a separate pack " +
+                              "with a switch of its own, which a campaign uses instead of this one, not alongside it.\n\n" +
                               "This is a content pack, not a rule: everyone in the game needs the same version of the mods " +
                               "(the companion installs the pack with them). A player without it is refused when they try to join; " +
                               "a player without the mod at all only sees their join window reset, so tell them. Once a " +
@@ -90,8 +93,25 @@ namespace FrosthavenMods
                               "The way out: \"Copy without content packs\" (in the Save Game window here, or on any campaign " +
                               "in Load game) saves a copy of the campaign as a new campaign without the pack's characters and " +
                               "unlocks, which any game loads. It needs the mods, not the pack.",
-                Blocked = GHClassesRule.WhyBlocked,
+                Blocked = on => GHClassesRule.WhyBlocked(1, on),
                 BackupBeforeOn = "Mod backup - before Gloomhaven classes",
+            },
+            new Rule
+            {
+                Flag = GloomhavenClasses2e,
+                Name = "Gloomhaven classes (2nd edition) [WIP]",
+                Description = "Adds the classes of Gloomhaven's second edition to this campaign: the Bruiser, Cragheart, " +
+                              "Mindthief, Silent Knife, Spellweaver and Tinkerer open the moment this is turned on, and the " +
+                              "others arrive in envelopes, one per retirement, like the first edition's (\"Gloomhaven classes: " +
+                              "all open at once\" opens them all). They use the first edition's 3D models, animations and " +
+                              "sounds, so the first edition pack must be installed too. [WIP]: work in progress; some " +
+                              "class rules are still close approximations.\n\n" +
+                              "A campaign uses one edition: this can't go on while \"Gloomhaven classes (1st edition)\" is " +
+                              "on, and the other way round. Everything said there about content packs applies here too: " +
+                              "everyone needs the same pack, a campaign that has had a character of one of these classes " +
+                              "needs it for good, and \"Copy without content packs\" is the way out.",
+                Blocked = on => GHClassesRule.WhyBlocked(2, on),
+                BackupBeforeOn = "Mod backup - before Gloomhaven classes 2e",
             },
             new Rule
             {

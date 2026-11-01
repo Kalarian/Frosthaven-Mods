@@ -65,6 +65,10 @@ namespace FrosthavenMods
             /// GHEvents turns into event definitions.</summary>
             public JArray Events = new JArray();
 
+            /// <summary>Which Gloomhaven edition the pack's classes are (pack.json "edition", 1 when absent): each edition
+            /// has its own house-rule switch (GHClassesRule).</summary>
+            public int Edition = 1;
+
             /// <summary>What two co-op peers must agree on: same pack, same version, same data.</summary>
             public string Stamp => $"{Name}/{Version}/{DataSha}";
             public override string ToString() => $"{Title ?? Name} v{Version}";
@@ -101,6 +105,7 @@ namespace FrosthavenMods
                                 pack.Starting = unlock?["starting"]?.Select(c => (string)c).Where(c => c != null).ToArray() ?? pack.Classes;
                                 pack.Sections = j["sections"]?.Select(c => (string)c).Where(c => !string.IsNullOrEmpty(c)).ToArray() ?? new string[0];
                                 pack.Events = j["events"] as JArray ?? new JArray();
+                                pack.Edition = (int?)j["edition"] ?? 1;
                                 _packs.Add(pack);
                             }
                             catch (Exception e) { Plugin.Log.LogError($"Content packs: could not read {file}: {e.Message}"); }
@@ -117,6 +122,21 @@ namespace FrosthavenMods
         internal static Pack PackOf(ECharacter model) =>
             Packs.FirstOrDefault(p => p.Classes.Any(c => string.Equals(c, model.ToString(), StringComparison.OrdinalIgnoreCase)))
             ?? Packs.FirstOrDefault(p => Directory.Exists(Path.Combine(p.Folder, "art", model.ToString())));
+        /// <summary>A class ID without its "ID" ending ("Tinkerer2ID" -> "Tinkerer2"): how pack.json lists classes.</summary>
+        internal static string ShortName(string classId) =>
+            classId != null && classId.EndsWith("ID", StringComparison.Ordinal) ? classId.Substring(0, classId.Length - 2) : classId;
+
+        /// <summary>The pack that brings <paramref name="c"/>: the one listing its class name (a 2nd edition class shares
+        /// its model with the 1st edition one: Bruiser and Brute), else the one bringing its model. Visual lookups stay
+        /// by model (<see cref="PackOf"/>): the 2nd edition pack borrows the 1st edition pack's models and pictures.</summary>
+        internal static Pack PackOfClass(CCharacterClass c) =>
+            c == null ? null
+            : Packs.FirstOrDefault(p => p.Classes.Any(n => string.Equals(n, ShortName(c.ID), StringComparison.OrdinalIgnoreCase)))
+              ?? PackOf(c.CharacterModel);
+
+        /// <summary>The edition of a pack class (1 for a class no pack lists).</summary>
+        internal static int EditionOf(CCharacterClass c) => PackOfClass(c)?.Edition ?? 1;
+
         private static readonly Dictionary<string, bool> GameHasKey = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
         internal static readonly HashSet<string> Reported = new HashSet<string>();
         private static bool _quitting;
@@ -177,6 +197,10 @@ namespace FrosthavenMods
         /// <summary>The ruleset classes a content pack brought: their model is one of Gloomhaven's or Jaws of the Lion's.</summary>
         internal static List<CCharacterClass> PackClasses() =>
             (CharacterClassManager.Classes ?? new List<CCharacterClass>()).Where(c => c != null && IsGloomhavenClass(c.CharacterModel.ToString(), out _)).ToList();
+
+        /// <summary>The pack classes of one Gloomhaven edition (1st: the 1st edition and Jaws of the Lion pack; 2nd: the
+        /// 2nd edition pack).</summary>
+        internal static List<CCharacterClass> PackClasses(int edition) => PackClasses().Where(c => EditionOf(c) == edition).ToList();
 
         // The switch itself, its guard and the command that unlocks the classes on every PC: GHClassesRule.cs. The
         // co-op join check: PackGate.cs.

@@ -103,24 +103,39 @@ namespace FrosthavenMods
         private static float _nextCheck;
         private static int _failures;
         private static string _lastSkip;
+        private static readonly HashSet<string> _issued = new HashSet<string>();   // commands issued since the last RequestCheck
 
+        public const ERulesFlag Flag2e = ModRules.GloomhavenClasses2e;
+
+        /// <summary>The 1st edition switch.</summary>
         public static bool On => ModRules.IsOn(Flag);
+
+        /// <summary>Either edition's switch.</summary>
+        public static bool OnAny => ModRules.IsOn(Flag) || ModRules.IsOn(Flag2e);
+
+        public static ERulesFlag FlagOf(int edition) => edition == 2 ? Flag2e : Flag;
+        public static bool IsOn(int edition) => ModRules.IsOn(FlagOf(edition));
+        private static string SwitchName(int edition) => edition == 2 ? "Gloomhaven classes (2nd edition) [WIP]" : "Gloomhaven classes (1st edition) [WIP]";
+        private static readonly int[] Editions = { 1, 2 };
 
         /// <summary>The "All Gloomhaven classes open" switch: every pack class opens at once, envelopes or not.</summary>
         public static bool AllOpen => ModRules.IsOn(ModRules.AllGloomhavenClassesOpen);
 
-        /// <summary>The all-open switch needs the pack switch on first (off is always allowed).</summary>
+        /// <summary>The all-open switch needs a pack switch on first (off is always allowed).</summary>
         public static string WhyAllOpenBlocked(bool wantOn) =>
-            wantOn && !On ? "Turn on \"Gloomhaven classes (1st edition) [WIP]\" first." : null;
+            wantOn && !OnAny ? "Turn on \"Gloomhaven classes (1st edition) [WIP]\" or \"Gloomhaven classes (2nd edition) [WIP]\" first." : null;
 
         // ------------------------------------------------------------------ the pack's classes
 
-        /// <summary>The pack classes as campaign IDs ("BruteID") the given rules know.</summary>
-        public static List<CharacterClassID> PackClassIDs(DefRepository repo)
+        /// <summary>The pack classes (both editions) as campaign IDs ("BruteID") the given rules know.</summary>
+        public static List<CharacterClassID> PackClassIDs(DefRepository repo) => PackClassIDs(repo, 0);
+
+        /// <summary>The pack classes of one edition (0: both) as campaign IDs the given rules know.</summary>
+        public static List<CharacterClassID> PackClassIDs(DefRepository repo, int edition)
         {
             var list = new List<CharacterClassID>();
             if (repo == null) return list;
-            foreach (ScenarioRuleLibrary.CCharacterClass c in GHClasses.PackClasses())
+            foreach (ScenarioRuleLibrary.CCharacterClass c in edition == 0 ? GHClasses.PackClasses() : GHClasses.PackClasses(edition))
             {
                 if (string.IsNullOrEmpty(c.ID)) continue;
                 var id = new CharacterClassID(c.ID);
@@ -131,21 +146,25 @@ namespace FrosthavenMods
 
         /// <summary>The pack classes that open the moment the switch is on: a pack's "starting" classes, or all of a
         /// pack's classes when it doesn't deal them out through envelopes.</summary>
-        public static List<CharacterClassID> StartingClassIDs(DefRepository repo) => Select(repo, starting: true);
+        public static List<CharacterClassID> StartingClassIDs(DefRepository repo, int edition) => Select(repo, true, edition);
 
-        /// <summary>The pack classes that wait in retirement envelopes (GHEnvelopes).</summary>
-        public static List<CharacterClassID> EnvelopeClassIDs(DefRepository repo) => Select(repo, starting: false);
+        /// <summary>The pack classes that wait in retirement envelopes (GHEnvelopes): those of the editions switched on.</summary>
+        public static List<CharacterClassID> EnvelopeClassIDs(DefRepository repo) =>
+            Editions.Where(IsOn).SelectMany(e => Select(repo, false, e)).ToList();
 
-        private static List<CharacterClassID> Select(DefRepository repo, bool starting)
+        private static List<CharacterClassID> Select(DefRepository repo, bool starting, int edition)
         {
             var list = new List<CharacterClassID>();
             if (repo == null) return list;
-            foreach (ScenarioRuleLibrary.CCharacterClass c in GHClasses.PackClasses())
+            foreach (ScenarioRuleLibrary.CCharacterClass c in GHClasses.PackClasses(edition))
             {
                 if (string.IsNullOrEmpty(c.ID)) continue;
-                string model = c.CharacterModel.ToString();
-                GHClasses.Pack pack = GHClasses.PackOf(c.CharacterModel);
-                bool opensAtStart = pack == null || !pack.Envelopes || AllOpen || pack.Starting.Any(s => string.Equals(s, model, StringComparison.OrdinalIgnoreCase));
+                string model = c.CharacterModel.ToString(), name = GHClasses.ShortName(c.ID);
+                GHClasses.Pack pack = GHClasses.PackOfClass(c);
+                // pack.json's "starting" names classes (the 1st edition's class names are its model names)
+                bool opensAtStart = pack == null || !pack.Envelopes || AllOpen
+                                    || pack.Starting.Any(s => string.Equals(s, name, StringComparison.OrdinalIgnoreCase)
+                                                             || (pack.Edition == 1 && string.Equals(s, model, StringComparison.OrdinalIgnoreCase)));
                 if (opensAtStart != starting) continue;
                 var id = new CharacterClassID(c.ID);
                 if (repo.CharacterClasses.ContainsKey(id) && !list.Contains(id)) list.Add(id);
@@ -194,20 +213,23 @@ namespace FrosthavenMods
         }
 
         /// <summary>The switch's guard (ModRules.Rule.Blocked): why it can't move to <paramref name="wantOn"/> now, or null.</summary>
-        internal static string WhyBlocked(bool wantOn)
+        internal static string WhyBlocked(int edition, bool wantOn)
         {
             if (wantOn)
             {
-                if (GHClasses.PackClasses().Count == 0)
-                    return GHClasses.Packs.Count == 0
-                        ? "Install the Gloomhaven classes content pack on this PC first (see the mod guide)."
+                int other = edition == 2 ? 1 : 2;
+                if (IsOn(other))
+                    return $"A campaign uses one edition of the Gloomhaven classes: \"{SwitchName(other)}\" is on.";
+                if (GHClasses.PackClasses(edition).Count == 0)
+                    return !GHClasses.Packs.Any(p => p.Edition == edition)
+                        ? $"Install the {(edition == 2 ? "Gloomhaven 2nd edition" : "Gloomhaven")} classes content pack on this PC first (see the mod guide)."
                         : "The installed content pack brought no classes into the game's rules: reinstall it (fh_mods.py install --packs) and restart the game.";
                 return PackGate.WhyCantTurnOn();   // null unless another connected PC lacks this pack
             }
             DefRepository repo = LiveRepo;
             CampaignState state = LiveState;
             if (repo == null || state == null) return null;
-            string why = PackClassIDs(repo).Select(id => ClassInUse(state, repo, id)).FirstOrDefault(w => w != null);
+            string why = PackClassIDs(repo, edition).Select(id => ClassInUse(state, repo, id)).FirstOrDefault(w => w != null);
             return why == null ? null : "Locked: " + why + ". A campaign that ever had a character of a pack class needs the pack for good.";
         }
 
@@ -217,18 +239,19 @@ namespace FrosthavenMods
         /// decides whether this PC may act (host or solo, map shown, nobody joining).</summary>
         internal static void OnRulesApplied(ERulesFlag before, ERulesFlag after)
         {
-            ERulesFlag both = Flag | ModRules.AllGloomhavenClassesOpen;
+            ERulesFlag both = Flag | Flag2e | ModRules.AllGloomhavenClassesOpen;
             if (((before ^ after) & both) == 0) return;
             // all open -> off: the classes only that switch opened go back into the envelopes (on this change only, not on
             // every load: a campaign from before the envelopes had every class opened the same silent way)
             if ((before & ModRules.AllGloomhavenClassesOpen) != 0 && (after & ModRules.AllGloomhavenClassesOpen) == 0) _relockSpare = true;
-            CoopLog.Write($"PACK CLASSES rule -> {((after & Flag) == Flag ? "on" : "off")}, all open -> " +
+            CoopLog.Write($"PACK CLASSES rule -> 1e {((after & Flag) == Flag ? "on" : "off")}, 2e {((after & Flag2e) == Flag2e ? "on" : "off")}, all open -> " +
                           $"{((after & ModRules.AllGloomhavenClassesOpen) != 0 ? "on" : "off")} role={CoopLog.Role()}");
             RequestCheck();
         }
 
         internal static void RequestCheck()
         {
+            _issued.Clear();
             _checkDue = true;
             _nextCheck = 0f;
             _failures = 0;
@@ -270,40 +293,47 @@ namespace FrosthavenMods
 
             CampaignState state = view.GameState;
             DefRepository repo = view.GameController.DefRepository;
-            List<CharacterClassID> pack = PackClassIDs(repo);
-            if (pack.Count == 0) return true;
-            bool on = On;
-            if (_relockSpare)
+            bool relock = _relockSpare;
+            _relockSpare = false;
+            // each edition on its own: on, open its starting classes (its envelope classes arrive through retirements,
+            // GHEnvelopes); off, lock them all. One command per poll; the next poll looks again (each at most once per check).
+            foreach (int edition in Editions)
             {
-                // an envelope class nothing in the campaign names (no character, retired character, enhanced card, pending
-                // choice, and no unlock line: a class a retirement opened has one, the switch's own unlocks don't)
-                List<CharacterClassID> spare = on && !AllOpen
-                    ? EnvelopeClassIDs(repo).Where(id => state.UnlockedClassIDs.Contains(id) && ClassInUse(state, repo, id) == null).ToList()
-                    : new List<CharacterClassID>();
-                _relockSpare = false;
-                if (spare.Count > 0)
+                List<CharacterClassID> pack = PackClassIDs(repo, edition);
+                if (pack.Count == 0) continue;
+                bool on = IsOn(edition);
+                if (relock && on && !AllOpen)
                 {
-                    CoopLog.Write($"PACK CLASSES all open turned off: back into the envelopes: {string.Join(",", spare.Select(i => i.ID))}");
-                    Issue(view, false, spare);
-                    return false;   // the next poll checks the starting classes
+                    // an envelope class nothing in the campaign names (no character, retired character, enhanced card, pending
+                    // choice, and no unlock line: a class a retirement opened has one, the switch's own unlocks don't)
+                    List<CharacterClassID> spare = Select(repo, false, edition)
+                        .Where(id => state.UnlockedClassIDs.Contains(id) && ClassInUse(state, repo, id) == null).ToList();
+                    if (spare.Count > 0 && _issued.Add("relock" + edition))
+                    {
+                        CoopLog.Write($"PACK CLASSES all open turned off: back into the envelopes: {string.Join(",", spare.Select(i => i.ID))}");
+                        Issue(view, false, spare);
+                        _relockSpare = true;   // the other edition's spare ones on a later poll
+                        return false;
+                    }
                 }
-            }
-            // on: open the pack's starting classes (its envelope classes arrive through retirements, GHEnvelopes); off: lock them all
-            List<CharacterClassID> want = on ? StartingClassIDs(repo) : pack;
-            bool allIn = want.All(state.UnlockedClassIDs.Contains);
-            bool anyIn = pack.Any(state.UnlockedClassIDs.Contains);
-            if (on ? allIn : !anyIn) return true;
-            if (!on)
-            {
-                string why = pack.Select(id => ClassInUse(state, repo, id)).FirstOrDefault(w => w != null);
-                if (why != null)
+                List<CharacterClassID> want = on ? StartingClassIDs(repo, edition) : pack;
+                bool allIn = want.All(state.UnlockedClassIDs.Contains);
+                bool anyIn = pack.Any(state.UnlockedClassIDs.Contains);
+                if (on ? allIn : !anyIn) continue;
+                if (!on)
                 {
-                    if (_lastSkip != why) { _lastSkip = why; CoopLog.Write("PACK CLASSES stay unlocked: " + why); }
-                    return true;
+                    string why = pack.Select(id => ClassInUse(state, repo, id)).FirstOrDefault(w => w != null);
+                    if (why != null)
+                    {
+                        if (_lastSkip != why) { _lastSkip = why; CoopLog.Write("PACK CLASSES stay unlocked: " + why); }
+                        continue;
+                    }
                 }
+                if (_failures >= MaxFailures) { CoopLog.Write("PACK CLASSES: giving up after repeated command failures"); return true; }
+                if (!_issued.Add(edition + (on ? "on" : "off"))) continue;   // once per check (a PC whose rules lack a class)
+                Issue(view, on, want);
+                return false;   // the next poll looks again
             }
-            if (_failures >= MaxFailures) { CoopLog.Write("PACK CLASSES: giving up after repeated command failures"); return true; }
-            Issue(view, on, want);
             return true;
         }
 

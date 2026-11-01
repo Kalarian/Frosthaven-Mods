@@ -119,7 +119,7 @@ namespace FrosthavenMods
             if (state == null || repo == null) return false;
             if (SaveData.Instance?.Global == null || SaveData.Instance.Global.CurrentGameState != EGameState.Map) return false;
             if (FFSNetwork.IsOnline && !FFSNetwork.IsHost) return false;
-            return GHClassesRule.On || Traces(state, repo).Any();
+            return GHClassesRule.OnAny || Traces(state, repo).Any();
         }
 
         private static void OnClickLive()

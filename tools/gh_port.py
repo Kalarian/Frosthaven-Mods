@@ -56,6 +56,7 @@ import csv
 import hashlib
 import io
 import json
+import os
 import re
 import shutil
 import sys
@@ -83,6 +84,7 @@ PACK_VERSION = 1
 # out at once (while we test the classes themselves); set it False to deal the rest through retirements. Both go into
 # data_sha, so co-op peers must agree on them like on the cards.
 ALL_CLASSES_OPEN = False
+EDITION = 1   # 2: --edition 2, the Gloomhaven 2nd edition pack (tools/gh2e)
 STARTING_CLASSES = {"Demolitionist", "Hatchet", "RedGuard", "Voidwarden"}   # Jaws of the Lion: Gloomhaven digital's own starters
 # The pack is a mod folder in the repo like any other (mod.json + files/), plus its extras (strings.tsv, art/, pack.json)
 # that the release copies into the game folder under FrosthavenMods\packs\<name>\ for the plugin.
@@ -824,8 +826,41 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("classes", nargs="+", help="Gloomhaven class name(s), e.g. Brute")
     ap.add_argument("--gh", type=Path, help="Gloomhaven install folder (default: found through Steam)")
-    ap.add_argument("--out", type=Path, default=OUT)
+    ap.add_argument("--out", type=Path, default=None)
+    ap.add_argument("--edition", type=int, choices=(1, 2), default=1,
+                    help="2: the Gloomhaven 2nd edition pack from tools/gh2e/build (python tools/gh2e/build.py first)")
     args = ap.parse_args()
+    global PACK, PACK_TITLE, PACK_VERSION, STARTING_CLASSES, EDITION
+    EDITION = args.edition
+    if EDITION == 2:
+        # The 2nd edition pack (tools/gh2e/build.py writes its rule files in Gloomhaven's format): its own pack folder and
+        # class IDs; models, pictures and sounds are the 1st edition pack's (the plugin finds them by model name), so
+        # the 1st edition pack must be installed too.
+        sys.path.insert(0, str(Path(__file__).resolve().parent / "gh2e"))
+        import build as gh2e_build
+        PACK, PACK_TITLE, PACK_VERSION = "gloomhaven2e", "Gloomhaven classes (2nd edition) [WIP]", 1
+        STARTING_CLASSES = {c for c, v in gh2e_build.CLASSES.items() if v[3]}
+        for c in args.classes:
+            if c not in gh2e_build.CLASSES:
+                sys.exit(f"{c} is no 2nd edition class ({', '.join(gh2e_build.CLASSES)})")
+            CLASS_EXTRAS[c] = gh2e_build.extras(c)
+            # the class's 2e perks and masteries (tools/gh2e/cards/<Class>/perks.py, gh_crossover's table format)
+            perks = Path(__file__).resolve().parent / "gh2e" / "cards" / c / "perks.py"
+            if perks.exists():
+                ns = {}
+                exec(compile(perks.read_text(encoding="utf-8"), str(perks), "exec"), ns)
+                gh_crossover.CROSSOVER[c] = {"perks": ns.get("PERKS", []), "masteries": ns.get("MASTERIES", []),
+                                             "strings": ns.get("STRINGS", {})}
+                for k, v in ns.get("NEW_CARDS", {}).items():
+                    if k in gh_crossover.NEW_CARDS and gh_crossover.NEW_CARDS[k] != v:
+                        sys.exit(f"{perks}: attack modifier {k} is already defined differently")
+                    gh_crossover.NEW_CARDS[k] = v
+            # its class icons for active bonuses gh_layout's general map doesn't cover (cards/<Class>/icons.json)
+            icons = Path(__file__).resolve().parent / "gh2e" / "cards" / c / "icons.json"
+            if icons.exists():
+                CLASS_ICONS[c] = json.loads(icons.read_text(encoding="utf-8"))
+    if args.out is None:
+        args.out = fh_mods.MODS / PACK
 
     if args.gh:
         gh, build = args.gh, ""
@@ -833,6 +868,9 @@ def main():
         gh, build = find_gloomhaven()
     files = gh_files(gh)
     strings = gh_strings(gh)
+    if EDITION == 2:
+        files.update(gh2e_build.files())
+        strings.update(gh2e_build.build_strings())
     strings_ci = {k.lower(): k for k in strings}   # Gloomhaven's card files and its English text disagree on case now and then
     fh = rs.read_ruleset(fh_mods.vanilla_backup())
     fh_names = {e["name"].lower() for e in fh}
@@ -954,7 +992,7 @@ def main():
         except ImportError:
             gh_model = None
         for sid in summon_ids:
-            if sid in summon_models or gh_model is None:
+            if sid in summon_models or gh_model is None or EDITION == 2:   # 2e: the 1st edition pack's summon models
                 continue
             try:
                 summon_models[sid] = gh_model.export_npc(gh, fh_mods.GAME, sid, args.out)
@@ -1013,6 +1051,8 @@ def main():
               + (f" and {len(crossover) - len(perks)} masteries from Frosthaven's crossover sheet" if crossover else " from Gloomhaven")
               + (f", retirement story (section {gh_story.section_id(cls)})" if story else ", no retirement story yet"))
 
+        if EDITION == 2:   # pictures, model, effects and sounds: the 1st edition pack's, found by model name
+            continue
         # pictures, composed into Frosthaven's shapes (see gh_art.py); optional, the plugin keeps stand-in art without
         try:
             import gh_art
@@ -1173,7 +1213,7 @@ def main():
     # A card half's text too long for Frosthaven's card at its normal size ran into the half's icons (Sand Devil top,
     # 371 letters; the user's manual test 2026-10-29): the longest ones are drawn smaller
     for k, v in table.items():
-        if re.match(r"^(GH|JOTL)_\d+_[TB]$", k) and len(re.sub(r"<[^>]+>", "", v)) > LONG_TEXT and not v.startswith("<size="):
+        if (re.match(r"^(GH|JOTL)_\d+_[TB]$", k) or re.match(r"^GH2E_\w+_[TB]\d*$", k)) and len(re.sub(r"<[^>]+>", "", v)) > LONG_TEXT and not v.startswith("<size="):
             table[k] = f"<size={LONG_TEXT_SIZE}%>{v}</size>"
     missing = sorted(k for k in used_keys if k not in table)
     table = {k: fh_sprites.to_fh(v) for k, v in table.items()}
@@ -1198,6 +1238,7 @@ def main():
     # The "model" entries are visual only (not in data_sha): a PC without the bundle shows the Drifter's model instead.
     (args.out / "pack.json").write_text(json.dumps({
         "name": PACK, "title": PACK_TITLE, "version": PACK_VERSION, "classes": args.classes, "files": "files",
+        **({"edition": EDITION} if EDITION != 1 else {}),   # the plugin's switch per edition (GHClassesRule)
         "unlock": unlock,
         # the retirement-story sections the pack adds (gh_story.py); the plugin takes them out of a pack-free copy
         "sections": [s for s in (gh_story.section_id(c) for c in args.classes) if s],
@@ -1221,8 +1262,10 @@ def main():
         sys.exit("packcheck found problems in the converted pack (above)")
     # the game's own rule loaders over Frosthaven's files then the pack's (a file they reject is the start-up error
     # screen: Grave Defense's picker inside its Consume, 2026-10-28)
-    if subprocess.call(["dotnet", "run", "--project", str(Path(__file__).resolve().parent / "rulecheck"), "-c", "Release",
-                        "--", str(args.out / "files")]) != 0:
+    # (GH_PORT_RULECHECK_NO_BUILD=1: several conversions at once share one build of the checker, tools/gh2e/check.py)
+    if subprocess.call(["dotnet", "run", "--project", str(Path(__file__).resolve().parent / "rulecheck"), "-c", "Release"]
+                       + (["--no-build"] if os.environ.get("GH_PORT_RULECHECK_NO_BUILD") else [])
+                       + ["--", str(args.out / "files")]) != 0:
         sys.exit("rulecheck: the game's loaders reject a converted file (above)")
 
 

@@ -49,7 +49,7 @@ namespace FrosthavenMods
                 foreach (CCharacterClass c in GHClasses.PackClasses())
                 {
                     if (c == null || string.IsNullOrEmpty(c.ID)) continue;
-                    string cls = c.CharacterModel.ToString();
+                    string cls = GHClasses.ShortName(c.ID);   // the 1st edition's class names are its model names; 2e: Bruiser
                     GameObject template = Template(cls, c.ID, source.EntryContent);
                     if (template == null) continue;
                     CodexConfig.CodexEntry mine = __result.FirstOrDefault(e => e != null && e.ID == cls + "Info");
@@ -58,7 +58,7 @@ namespace FrosthavenMods
                         mine.EntryContent = template;   // listed already; the template may have been rebuilt
                         continue;
                     }
-                    GHClasses.Pack pack = GHClasses.PackOf(c.CharacterModel);
+                    GHClasses.Pack pack = GHClasses.PackOfClass(c);
                     bool starting = pack != null && pack.Starting.Any(s => string.Equals(s, cls, StringComparison.OrdinalIgnoreCase));
                     mine = new CodexConfig.CodexEntry
                     {
@@ -108,7 +108,7 @@ namespace FrosthavenMods
         /// the class's name), else the class's own name key.</summary>
         private static string TitleKey(CCharacterClass c, DefRepository repo)
         {
-            string key = "CODEX_Hero_" + c.CharacterModel + "_Title";
+            string key = "CODEX_Hero_" + GHClasses.ShortName(c.ID) + "_Title";
             if (GHClasses.HasString(key)) return key;
             string name = repo != null && repo.CharacterClasses.TryGetValue(new CharacterClassID(c.ID), out CharacterClassDef def) && def != null
                 ? def.ClassName : null;

@@ -45,7 +45,7 @@ namespace FrosthavenMods
             _retiring = null;
             try
             {
-                if (!GHClassesRule.On) return;
+                if (!GHClassesRule.OnAny) return;
                 CampaignController campaign = __instance.CampaignController;
                 CampaignState state = campaign?.State;
                 DefRepository repo = campaign?.DefRepository;

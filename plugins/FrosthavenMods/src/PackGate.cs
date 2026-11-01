@@ -44,14 +44,27 @@ namespace FrosthavenMods
                 try
                 {
                     List<ScenarioRuleLibrary.CCharacterClass> loaded = GHClasses.PackClasses();
-                    var models = new HashSet<string>(loaded.Select(c => c.CharacterModel.ToString()), StringComparer.OrdinalIgnoreCase);
-                    GHClasses.Pack pack = GHClasses.Packs.FirstOrDefault(p => p.Classes.Any(models.Contains)) ?? GHClasses.Packs.FirstOrDefault();
-                    if (pack != null && loaded.Count > 0)   // installed but not loaded counts as no pack
+                    // the packs whose classes the game loaded (both editions' packs when both are installed); one pack keeps
+                    // its own stamp, so a PC with the 1st edition pack alone announces exactly what it always did
+                    List<GHClasses.Pack> packs = loaded.Select(GHClasses.PackOfClass).Where(p => p != null).Distinct()
+                        .OrderBy(p => p.Name, StringComparer.OrdinalIgnoreCase).ToList();
+                    if (packs.Count == 0 && loaded.Count > 0 && GHClasses.Packs.Count > 0) packs.Add(GHClasses.Packs[0]);
+                    if (packs.Count == 1)
                     {
-                        m.Pack = pack.Name;
-                        m.Version = pack.Version;
-                        string sha = (pack.DataSha ?? "").ToLowerInvariant();
+                        m.Pack = packs[0].Name;
+                        m.Version = packs[0].Version;
+                        string sha = (packs[0].DataSha ?? "").ToLowerInvariant();
                         m.Sha = sha.Substring(0, Math.Min(12, sha.Length));
+                    }
+                    else if (packs.Count > 1)
+                    {
+                        m.Pack = string.Join("+", packs.Select(p => p.Name));
+                        m.Version = packs.Sum(p => p.Version);
+                        using (var h = System.Security.Cryptography.SHA256.Create())
+                        {
+                            byte[] d = h.ComputeHash(Encoding.UTF8.GetBytes(string.Join("|", packs.Select(p => p.Stamp))));
+                            m.Sha = string.Concat(d.Take(6).Select(b => b.ToString("x2")));
+                        }
                     }
                     if (ScenarioRuleLibrary.CharacterClassManager.Classes != null) _local = m;   // rules loaded: the answer is final
                 }
@@ -133,7 +146,7 @@ namespace FrosthavenMods
 
         internal static Mismatch Check(ERulesFlag rules, PackManifest host, PackManifest client)
         {
-            if ((rules & ModRules.GloomhavenClasses) == 0) return Mismatch.None;
+            if ((rules & (ModRules.GloomhavenClasses | ModRules.GloomhavenClasses2e)) == 0) return Mismatch.None;
             if (host == null) return Mismatch.HostNoMod;
             if (!host.HasPack) return Mismatch.HostNoPack;
             if (client == null) return Mismatch.ClientNoMod;
@@ -290,7 +303,7 @@ namespace FrosthavenMods
             catch (Exception e)
             {
                 Plugin.Log.LogError("Pack gate: the client check failed: " + e);
-                if ((rules & ModRules.GloomhavenClasses) == 0) return true;   // nothing to gate: join
+                if ((rules & (ModRules.GloomhavenClasses | ModRules.GloomhavenClasses2e)) == 0) return true;   // nothing to gate: join
                 Refuse("This campaign uses the Gloomhaven classes pack and your game could not check its own copy (see the BepInEx log). Not joining.");
                 return false;
             }
@@ -319,7 +332,7 @@ namespace FrosthavenMods
             {
                 if (p == null || p == FFSNetwork.CurrentPlayer) continue;
                 Verdicts.TryGetValue(p.PlatformID ?? "", out Verdict v);
-                Mismatch why = Check(ModRules.GloomhavenClasses, mine, v?.Client);
+                Mismatch why = Check(ModRules.GloomhavenClasses | ModRules.GloomhavenClasses2e, mine, v?.Client);
                 if (why != Mismatch.None) return Describe(why, p.Username, mine, v?.Client, forHost: true);
             }
             return null;
@@ -333,7 +346,7 @@ namespace FrosthavenMods
         {
             try
             {
-                if (!FFSNetwork.IsOnline || FFSNetwork.IsHost || !ModRules.IsOn(ModRules.GloomhavenClasses) || PackManifest.Local.HasPack) return;
+                if (!FFSNetwork.IsOnline || FFSNetwork.IsHost || !GHClassesRule.OnAny || PackManifest.Local.HasPack) return;
                 CoopLog.Write("PACK rule turned on by the host but this PC has no pack: leaving the session");
                 _pendingModal = Describe(Mismatch.ClientNoPack, "you", null, PackManifest.Local, forHost: false);
                 FFSNetwork.Shutdown();   // takes a client in a game back to the main menu
