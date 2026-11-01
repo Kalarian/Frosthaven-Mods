@@ -22,7 +22,10 @@ PERKS = [
     # AMC_P1_Or_P2_IfPlayedTideThisRound: a boolean Strength var on the card's own override)
     (2, "Pack Bond", 'Replace one <sprite name="0"> with one <sprite name="+2"> "Add +1 <sprite name=Attack> if the '
      'Wildfury and the Bear are within <sprite name=Range> 4 of each other"',
-     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_GH2E_Wildfury_P2_Bond]"}),
+     # NEEDS PLUGIN: the +1 read TargetingActor in an override, which is null when the Bear draws the card for its own
+     # attack (summons draw from the Wildfury's deck): the game's error screen, 2e sweep 2026-11-01 09:36. A plain +2 until
+     # the plugin adds the range check.
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Basic_P2]"}),
     (1, "Savage Strike", 'Replace one <sprite name="+2"> with one <sprite name="+4">',
      {"CardsToRemove": "[AMC_Basic_P2]", "CardsToAdd": "[AMC_Basic_P4]"}),
     (2, "Primal Call", 'Add two <sprite name="+1"> <sprite name=CreateAir>/<sprite name=CreateEarth>',

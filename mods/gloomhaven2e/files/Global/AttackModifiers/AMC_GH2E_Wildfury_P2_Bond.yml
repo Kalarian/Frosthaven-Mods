@@ -1,8 +1,0 @@
-Parser: AttackModifier
-Name: AMC_GH2E_Wildfury_P2_Bond
-MathModifier: "+2"
-AbilityOverrides:
-    NegCon:
-        ParentName: AMC_GH2E_Wildfury_P2_Bond
-        Vars:
-            Strength: (AllHeroSummons.Any(obj.Class.ID == "WildfuryBearID" && SharedAbilityTargeting.GetDistanceBetweenActorsInHexes(obj, TargetingActor.Summoner || TargetingActor) <= 4))
