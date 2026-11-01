@@ -1,0 +1,43 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Amputate$
+Character: Sawbones2ID
+ID: 33222
+Level: 6
+Initiative: 86
+# card: Amputate
+# bottom: Heal 7 on one figure within range 1, ally, enemy or yourself (Filter [Self, Ally, Enemy]; healing an enemy is
+# unverified in this engine), then the mandatory Stun on the healed figure (the heal's own condition, as the 1st
+# edition card wrote it).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Conditions: [Wound, Immobilize]
+                AnimOverload: Attack_AOE_Cone
+        XP: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 7
+                Range: 1
+                Filter: [Self, Ally, Enemy]
+                Conditions: Stun
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Wound><sprite name=Immobilize></link>"
+            - Column:
+    Bottom:
+        - Row: "<size=150%><sprite name=Heal> *BHeal*"
+        - Row: "$FHS_GH2E_Sawbones2_22_B$"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Sawbones2_22_B2$"

@@ -1,0 +1,50 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Backstab$
+Character: SilentKnifeID
+ID: 32310
+Level: X
+Initiative: 6
+# card: Backstab
+# from Xipe's 99097_Scoundrel2_Backstab.yml; corrected against tools/gh2e/sheets/SilentKnife.json (agrees)
+# consume Dark as Gloomhaven's Skewer writes it; flanking override as Flanking Strike
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentAllies: "> 0"
+                        XP: 1
+                        AbilityOverrides:
+                            TFlankBuff:
+                                Strength: 2
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 6
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "+2 <sprite name=Attack>, <sprite name=XP1>"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_SilentKnife_10_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove*"

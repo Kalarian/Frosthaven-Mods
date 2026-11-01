@@ -1,0 +1,37 @@
+Parser: Perk
+ID: Bruiser10
+Name: PERK_Bruiser_10_Name
+Description: PERK_Bruiser_10_Desc
+CharacterID: BruiserID
+Available: 1
+Cost: 2
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            Loot: 1
+            Target: -1
+            AnimOverload: Loot
+            SubAbilities:
+                ARecoverBody:
+                    RefreshItems: 1
+                    SlotToRefresh: [Body]
+                    SlotStateToRefresh: [Spent, Consumed]
+                    Filter: Self
+                    TreatAsNonSubAbility: True
+                    StartAbilityRequirements:
+                        Type: ThisAbility
+                        Vars:
+                            ValidateLootedMoney: Ability.ParentAbility.LootTokenCount > 0
+            Filter: [Self]
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringTurnAbility
+            XPTracker: [0]
+            IsToggleBonus: True
+            Hidden: True
+            ListLayoutOverride: [$PERK_Bruiser_10_Desc$, Loot]
+            MiscVars:
+                OverrideIcon: "'Loot'"
+        AnimOverload: PowerUp

@@ -1,0 +1,50 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RestorativeMist$
+Character: Tinkerer2ID
+ID: 32509
+Level: 1
+Initiative: 17
+# card: Restorative Mist
+# from Xipe's 99038_Tinkerer2_Restorative Mist.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 4
+                    DiamondPlusEnhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BHeal:
+                Heal: 1
+                Range: 1
+                Target: -1
+                Filter: Ally
+                AnimOverload: RadialHeal
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
+            - Column:
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *BHeal*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Allies></link>"
+            - Column:

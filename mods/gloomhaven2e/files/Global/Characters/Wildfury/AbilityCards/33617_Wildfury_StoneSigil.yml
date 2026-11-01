@@ -1,0 +1,87 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StoneSigil$
+Character: WildfuryID
+ID: 33617
+Level: 3
+Initiative: 15
+# card: Stone Sigil
+# top: "! consume Earth (required)", Summon Monolith (summons/Monolith2.yml: HP 2 [square], no move or attack; aura:
+# allies within range 3 gain Shield 1), XP 1 with the consume. Persistent icon, not lost.
+# bottom: Move 3 [circle]; "if you are adjacent to the Bear": Attack 1 [diamond], Range 3, Pierce 1, Muddle; consume
+# Air: +1 Attack, +1 Pierce, XP 1. The condition is a start requirement on the attack: one of the Wildfury's summons of
+# the Bear's class next to her (the Boneshaper's AllHeroSummons.Any(... IsAdjacentTo ...) expression). Untested.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TConsume:
+                Consume:
+                    Elements: [Earth]
+                    Abilities:
+                        TCNull:
+                            Null: True
+                            AutoTrigger: True
+                    XP: 1
+            TSummon:
+                Summon: Monolith2ID
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    ActorHasPerformedValidAbilityTypesThisAction: "> 0"
+                    AbilityTypes: [Consume]
+                AnimOverload: Summon
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Range: 3
+                Pierce: 1
+                Conditions: Muddle
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateAdjacentToBear: AllHeroSummons.Any(obj.Class.ID == "WildfuryBearID" && obj.IsAdjacentTo(TargetingActor))
+                AnimOverload: RangedAttack
+        Consumes:
+            BCAir:
+                Elements: Air
+                AbilityOverrides:
+                    BCAirAttackBuff:
+                        ParentName: BAttack
+                        Attack:
+                            Amount: 1
+                            Pierce: 1
+                XP: 1
+Layout:
+    Top:
+        - Row: "<sprite name=ConsumeEarth> $FHS_GH2E_Wildfury_REQUIRED$"
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_Monolith$
+                    SpecialText: "$FHS_GH2E_Wildfury_17_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Wildfury_17_B$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* <sprite name=Pierce> *BAttack.Pierce*, <sprite name=Muddle></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCAir
+                    Text: "+1 <sprite name=Attack> +1 <sprite name=Pierce>, <sprite name=XP1>"

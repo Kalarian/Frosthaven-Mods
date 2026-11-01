@@ -1,0 +1,80 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ObsidianShards$
+Character: Elementalist2ID
+ID: 32820
+Level: 5
+Initiative: 19
+# card: Obsidian Shards
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Target: 2
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                MultiPassAttack: False
+                AnimOverload: TargetFloorObsidian
+        Consumes:
+            TCFireEarth:
+                Elements: [Fire, Earth]
+                AbilityOverrides:
+                    TCFireEarthBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                        Conditions: Muddle
+                XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BCIceEarth:
+                Consume:
+                    Elements: [Ice, Earth]
+                    Abilities:
+                        BNegate:
+                            PreventDamage: 99
+                            Range: 1
+                            Target: -1
+                            Filter: Self
+                            AnimOverload: PowerUp
+                            ActiveBonus:
+                                Behaviour: PreventFirstDamage
+                                Duration: Persistent
+                                IsToggleBonus: True
+                                IsAura: True
+                                AuraFilter: [Self, Ally]
+                                AuraTargeting: Range
+                                XPTracker: [0,1]
+                                ListLayoutOverride: [$GH2E_Elementalist2_20_B$, Positive_DamagePrevent_Ally_Aura]
+                        BInfuse:
+                            Infuse: [Ice, Earth]
+                            ShowElementPicker: True
+                            CanUndo: False
+                            CanSkip: False
+                            SkipAnim: True
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFireEarth
+                    Text: "+2 <sprite name=Attack>, <sprite name=Muddle>, <sprite name=XP2>"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Elementalist2_20_B$"

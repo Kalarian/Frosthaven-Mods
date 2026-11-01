@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Quartermaster207
+Name: PERK_Quartermaster2_07_Name
+Description: PERK_Quartermaster2_07_Desc
+CharacterID: Quartermaster2ID
+Available: 2
+CardsToAdd: [AMC_Stun_R]

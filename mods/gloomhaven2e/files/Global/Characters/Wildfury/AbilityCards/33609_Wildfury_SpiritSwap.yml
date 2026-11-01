@@ -1,0 +1,96 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SpiritSwap$
+Character: WildfuryID
+ID: 33609
+Level: 1
+Initiative: 27
+# card: Spirit Swap
+# top: COMMAND Move 1 [circle], Attack 2 [diamond], Wound. "consume Air/Earth (either): teleport the Wildfury to an
+# empty hex adjacent to the Bear": the Wildfury's own teleport after the commanded abilities (APPROXIMATION: the card
+# puts it between the Bear's move and attack), limited to hexes next to the Bear (Frosthaven's IsValidTeleportTile, as
+# HIVE Recall's "a hex adjacent to you" and Infuser Formless Bladestorm's tile list). The split element is two Consume
+# abilities: Earth only while Air is not infused, then Air, so one element at most is spent (Air is taken when both
+# are up). Untested expressions (NOTES.md).
+# bottom: swap two normal or elite enemies (the 1st edition Spirit Swap bottom's Swap), infuse Air.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyMove:
+                            Move:
+                                Amount: 1
+                                CircleEnhancements: 1
+                            StrengthIsBase: True
+                        TAllyAttack:
+                            Attack:
+                                Amount: 2
+                                DiamondEnhancements: 1
+                            Conditions: Wound
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+            TCEarth:
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateNoAir: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Air) == False
+                Consume:
+                    Elements: [Earth]
+                    Abilities:
+                        TTeleportEarth:
+                            Teleport2: 99
+                            Filter: Self
+                            Vars:
+                                Bear: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID")
+                            MiscVars:
+                                IsValidTeleportTile: Bear.GetDistanceTo(tile) == 1
+                            AnimOverload: Teleport Into
+                            AnimOverload2: Teleport Outof
+            TCAir:
+                Consume:
+                    Elements: [Air]
+                    Abilities:
+                        TTeleportAir:
+                            Teleport2: 99
+                            Filter: Self
+                            Vars:
+                                Bear: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID")
+                            MiscVars:
+                                IsValidTeleportTile: Bear.GetDistanceTo(tile) == 1
+                            AnimOverload: Teleport Into
+                            AnimOverload2: Teleport Outof
+    Bottom:
+        Abilities:
+            BSwap:
+                Swap: True
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+                AnimOverload: RadialBeneficial
+        Infuse: Air
+Layout:
+    Top:
+        - Row: "<size=1%><link=fhcommand> </link>"
+        - Row: "<size=150%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Wound></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Wildfury_09_T$"
+    Bottom:
+        - Row: "$FHS_GH2E_Wildfury_09_B$"
+        - Row: "<size=50%> "
+        - Infuse: Air

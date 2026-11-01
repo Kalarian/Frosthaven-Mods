@@ -1,0 +1,34 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LayOnHands$
+Character: Sunkeeper2ID
+ID: 33305
+Level: 1
+Initiative: 90
+# card: Lay On Hands
+# Heal X, X = the target's maximum hit points: the 1st edition port's play-tested heal to full (StatIsBasedOnX
+# TargetDamageTaken), the same result since a heal never raises hit points above the maximum.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal: 0
+                Range: 1
+                Filter: Ally
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: TargetDamageTaken
+                AnimOverload: Heal
+        Infuse: Light
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Sunkeeper2_05_T$"
+        - Row: "<size=50%> "
+        - Infuse: Light
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove*"

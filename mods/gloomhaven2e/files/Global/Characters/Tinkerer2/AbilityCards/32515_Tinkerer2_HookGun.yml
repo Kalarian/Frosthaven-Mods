@@ -1,0 +1,44 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HookGun$
+Character: Tinkerer2ID
+ID: 32515
+Level: X
+Initiative: 72
+# card: Hook Gun
+# from Xipe's 99044_Tinkerer2_Hook Gun.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 3
+                AnimOverload: RangedAttack
+                SubAbilities:
+                    TAttackSubPull:
+                        Pull: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BLoot:
+                Loot: 2
+                Target: -1
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <sprite name=Pull> *TAttackSubPull*</link>"
+            - Column:
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"

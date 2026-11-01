@@ -1,0 +1,74 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MessengerofDeath$
+Character: Nightshroud2ID
+ID: 32923
+Level: 7
+Initiative: 63
+# card: Messenger of Death
+# top: "Move 4, Jump; Attack 2 targeting all enemies moved through" = a plain Move, then its own Attack with
+# AllTargetsOnMovePath + Targeting All (the Trample fix, CARD_FIXES 20001; Bruiser Trample).
+# bottom: consume Dark gives a separate Attack 4 (no "+").
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 4
+                    SquareEnhancements: 1
+                    Jump: True
+            TAttack:
+                Attack: 2
+                AllTargetsOnMovePath: True
+                Targeting: All
+                Target: -1
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCDark:
+                Elements: Dark
+                Abilities:
+                    BCDarkAttack:
+                        ParentName: BNull
+                        Attack: 4
+                XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
+        - Divider:
+        - Row: "<size=150%><sprite name=Attack> *TAttack*"
+        - Row: "$FHS_Target_AllEnemiesMovedThrough$"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "+1 <sprite name=Attack>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "<sprite name=Attack> 4, <sprite name=XP1>"

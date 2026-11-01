@@ -1,0 +1,82 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Nightfall$
+Character: Nightshroud2ID
+ID: 32910
+Level: X
+Initiative: 28
+# card: Nightfall
+# top: Push 3 with Immobilize. "If the target is pushed into one or more hexes with a Tear, they gain Muddle, Curse and
+# suffer hazardous terrain damage": APPROXIMATION: Muddle + Curse when the pushed target ends the push on a Tear
+# (CustomAbility.SteppedOnShadow on its hex; a Tear passed through mid-push isn't seen). The hazardous terrain damage
+# (scenario-level dependent) has no data shape here: text only (NEEDS PLUGIN, NOTES.md).
+# bottom: consume Light: Heal 2, self, and infuse Dark (the 1st edition Nightfall bottom's consume-and-infuse shape).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPush:
+                Push:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Range: 1
+                Filter: Enemy
+                Conditions: Immobilize
+                AnimOverload: TargetedPull
+            TTearCurse:
+                Muddle: True
+                Conditions: Curse
+                Filter: Enemy
+                Target: -1
+                AutoTrigger: True
+                CanSkip: False
+                Targeting: Custom
+                Vars:
+                    Pushed: CustomAbility.FindAbilityInPhaseByName("TPush")
+                TargetingVars:
+                    AddValidActorsInRange: Pushed.ActorsToTarget
+                    AddActorsToTarget: Pushed.ActorsToTarget
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateOnTear: Pushed != null && Pushed.ActorsToTarget.Any(obj.IsDead == False && CustomAbility.SteppedOnShadow(obj.Tile))
+                AnimOverload: WeakRadial
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    SquareEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCLight:
+                Elements: Light
+                Abilities:
+                    BCLightHeal:
+                        ParentName: BNull
+                        Heal: 2
+                        Filter: Self
+                        AnimOverload: Heal
+                Infuse: Dark
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Push> *TPush* <size=100%><voffset=1>@TPush@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> 1, <sprite name=Immobilize></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Nightshroud2_10_T$"
+        - Row: "<size=50%> "
+        - Infuse: Dark
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "<sprite name=Heal> 2, <voffset=-1.5><sprite name=CreateDark></voffset></size>"

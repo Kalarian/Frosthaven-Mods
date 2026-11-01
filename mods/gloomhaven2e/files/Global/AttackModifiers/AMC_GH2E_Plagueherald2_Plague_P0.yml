@@ -1,0 +1,17 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Plagueherald2_Plague_P0
+MathModifier: "+0"
+Abilities:
+    PlagueAbility:
+        NullTargeting: True
+        Filter: Enemy
+        Target: 1
+        Targeting: Custom
+        TargetingVars:
+            AddValidActorsInRange: GameState.GetAllEnemiesInRange(TargetingActor, TargetActor.ArrayIndex, 2)
+        MiscVars:
+            TreatAsNonInlineForTargeting: True
+        ResourcesToGiveToTargets:
+            - ["Plague", 1]
+        ResourcesToAddOnAbilityEnd:
+            - ["Plague", 3]

@@ -1,0 +1,106 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DividedMind$
+Character: SoultetherID
+ID: 33526
+Level: 7
+Initiative: 30
+# card: Divided Mind
+# top: Heal 5, Range 4; consume Air: "grant the target of the heal ability: Push 1, Range 1, Immobilize" = a Null the
+# consume fills with a grant (ControlActor) aimed at the heal's own target (Frosthaven's TargetTargetedByCaster-
+# PreviousAbility + SpecificAbilityNames filter, the 1st edition Eye of the Void fix); the push carries Immobilize as a
+# sub-ability on the pushed enemy (UseParentTargets). An ally only: when you heal yourself the grant has no target
+# (APPROXIMATION). Unverified.
+# bottom: grant one of your summons Attack +0; consume Fire: two summons instead (+1 Target on the control).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 5
+                    DiamondPlusEnhancements: 1
+                Range: 4
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+            TNull:
+                Null: True
+        Consumes:
+            TCAir:
+                Elements: Air
+                Abilities:
+                    TCAirGrant:
+                        ParentName: TNull
+                        ControlActor:
+                            Abilities:
+                                TCAirAllyPush:
+                                    Push: 1
+                                    StrengthIsBase: True
+                                    Range: 1
+                                    RangeIsBase: True
+                                    Target: 1
+                                    TargetIsBase: True
+                                    Filter: [Enemy]
+                                    SubAbilities:
+                                        TCAirAllyPushSubImmobilize:
+                                            Immobilize: True
+                                            Target: 1
+                                            UseParentTargets: True
+                                            Filter: Enemy
+                                            AutoTrigger: True
+                                            CanSkip: False
+                                            AnimOverload: None
+                            ControlActorType: Player
+                        Target: 1
+                        Range: 4
+                        Filter:
+                            TargetType: Ally
+                            TargetTargetedByCasterPreviousAbility: True
+                            SpecificAbilityNames: [THeal]
+                        AnimOverload: ControlAlly
+        XP: 1
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack: +0
+                            Range: +0
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter: OwnSummon
+                AnimOverload: ControlSummon
+        Consumes:
+            BCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    BCFireTwoSummons:
+                        ParentName: BAlly
+                        Target: 1
+                XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Soultether_26_T$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "<nobr><sprite name=Push> 1</nobr>, <nobr><sprite name=Range> 1</nobr>, <sprite name=Immobilize>"
+    Bottom:
+        - Row: "$FHS_GH2E_Soultether_GRANT1$"
+        - Row: "<size=150%><sprite name=Attack> +0"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCFire
+                    Text: "$FHS_GH2E_Soultether_26_B$"

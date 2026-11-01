@@ -1,0 +1,18 @@
+Parser: Mastery
+ID: Sawbones2_MASTERY_1
+LocalisedName: Sawbones2_MASTERY_1_Name
+LocalisedDescription: Sawbones2_MASTERY_1_Desc
+PerkPoints: 1
+# The 1st edition crossover's Bedside Manner tag: an ally helped on every turn the Sawbones takes (a heal, shield,
+# supply card, buff or recovery with an ally among its targets), answered by the Frosthaven Mods plugin (GHMasteries.cs).
+# Broader than the sheet (any ally help counts, not only packs and Prescriptions), and long-rest rounds are not exempt
+# unless the plugin skips them (NOTES.md).
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AllySupportEveryTurn]
+        CharacterIDs:
+            ActorID: Sawbones2ID
+        Value: 1

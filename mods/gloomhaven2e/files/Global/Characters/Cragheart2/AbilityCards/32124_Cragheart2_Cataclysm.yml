@@ -1,0 +1,81 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Cataclysm$
+Character: Cragheart2ID
+ID: 32124
+Level: 6
+Initiative: 26
+# card: Cataclysm
+# from Xipe's 99139_Cragheart2_Cataclysm.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: the two hex marks of the card added (3,1 and 3,-1); the Immobilize sub-ability on [Enemy, Ally] covers the
+# enemies and the allies in the red hexes (the 1st edition card's shape, play-tested)
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                AnimOverload: TargetedCataclysm
+                AreaEffect: "0,0,R|2,0,R|1,1,R|-1,1,R|-2,0,G|-1,-1,R|1,-1,R|3,1,E|3,-1,E"
+                MultiPassAttack: False
+                SubAbilities:
+                    TAttackSubImmo:
+                        Immobilize: True
+                        Filter: [Enemy, Ally]
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthAttackBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    BCEarthMoveBuff:
+                        ParentName: BMove
+                        Strength: 3
+                XP: 1
+        Infuse: Earth
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "60,40"
+            - Column:
+                - Row:
+                    - ColumnWidths: "10,35,45,10"
+                    - Column:
+                    - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                    - Column:
+                        - Row: "<link=fhpill><sprite name=Immobilize></link>"
+                    - Column:
+                - Row: "<size=20%> "
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: TCEarth
+                            Text: "+2 <sprite name=Attack>, <sprite name=XP1>"
+            - Column:
+                - Row: "£Area£"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Cragheart2_24_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCEarth
+                    Text: "+3 <sprite name=Move>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Infuse: Earth

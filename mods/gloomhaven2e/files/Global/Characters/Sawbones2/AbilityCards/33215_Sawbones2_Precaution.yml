@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Precaution$
+Character: Sawbones2ID
+ID: 33215
+Level: 2
+Initiative: 9
+# card: Precaution
+# top: Shield 1 this round on you and every ally (no range printed). "Each ally may move the token back one slot on one
+# of their active Prescriptions": Frosthaven's MoveActiveBonusTracker only moves bonuses from the holder's own class
+# cards (CAbilityMoveActiveBonusTracker.GetActiveBonusesWithTrackers: card ClassID == holder's class), and a
+# Prescription stays a Sawbones card: text only, NEEDS PLUGIN. bottom: Ward on up to two figures within range 1.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TShield:
+                Shield: 1
+                Filter: [Self, Ally]
+                Targeting: All
+                Target: -1
+                ActiveBonus:
+                    Duration: Round
+                AnimOverload: RadialBuff
+    Bottom:
+        Abilities:
+            BWard:
+                Ward: True
+                Target: 2
+                Range: 1
+                Filter: [Self, Ally]
+                AnimOverload: PositiveBuffTargeted
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Sawbones2_15_T$"
+        - Active:
+            Ability: TShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *TShield*"
+            Layout: "<size=150%><sprite name=Shield> *TShield*"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Sawbones2_15_T2$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Ward>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *BWard.Target*, <sprite name=Range> *BWard.Range*</link>"
+            - Column:

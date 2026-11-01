@@ -1,0 +1,60 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_UnleashedFury$
+Character: WildfuryID
+ID: 33625
+Level: 7
+Initiative: 65
+# card: Unleashed Fury
+# top: COMMAND Attack 3 [diamond]; "double the value of all Attack bonuses from your ability cards on this attack":
+# NEEDS PLUGIN (no engine hook doubles card bonuses); the attack is plain Attack 3, the rule text as printed.
+# bottom: COMMAND Move 2 [circle], Attack 3 [diamond]. No corner icons.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack:
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move:
+                                Amount: 2
+                                CircleEnhancements: 1
+                            StrengthIsBase: True
+                        BAllyAttack:
+                            Attack:
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+Layout:
+    Top:
+        - Row: "<size=1%><link=fhcommand> </link>"
+        - Row: "<size=150%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Wildfury_25_T$"
+    Bottom:
+        - Row: "<size=1%><link=fhcommand> </link>"
+        - Row: "<size=150%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Cragheart205
+Name: PERK_Cragheart2_05_Name
+Description: PERK_Cragheart2_05_Desc
+CharacterID: Cragheart2ID
+Available: 3
+CardsToAdd: [AMC_Immobilize_P2]

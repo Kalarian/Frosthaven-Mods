@@ -1,0 +1,59 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StonePummel$
+Character: Cragheart2ID
+ID: 32122
+Level: 5
+Initiative: 32
+# card: Stone Pummel
+# from Xipe's 99137_Cragheart2_Stone Pummel.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: Attack 4 carries a square mark (zoomed; square slot)
+# bottom: the 1st edition Stone Pummel's persistent bonus (destroy an adjacent obstacle on a melee attack for +2),
+# with no use track (2e: persistent for the scenario). APPROXIMATION: any obstacle adjacent to you, not only one
+# adjacent to both you and the target; own help text (the shared GUI_StonePummel key says +3)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    SquareEnhancements: 1
+                AreaEffect: "-3,-1,E|-1,-1,R|-2,0,R|0,0,G|2,0,R|1,1,R|3,1,E"
+                AnimOverload: OppositeStonePummel
+                MultiPassAttack: False
+        Infuse: Earth
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttackBuff:
+                Attack: 0
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    AbilityData:
+                        DestroyObstacle:
+                        HelpBoxTooltipLocKey: GH2E_Cragheart2_22_B2
+                        SpawnDelay: 2.16
+                AttackEffect:
+                    Type: BuffIfCanPerformSubAbility
+                    AttackType: Melee
+                    Strength: 2
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "60,40"
+            - Column:
+                - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Row: "<size=20%> "
+                - Infuse: Earth
+            - Column:
+                - Row: "£Area£"
+    Bottom:
+        - Active:
+            Ability: BAttackBuff
+            ListLayout: "$FHS_GH2E_Cragheart2_22_B$"
+            Layout: "$FHS_GH2E_Cragheart2_22_B$"
+            Icon: Positive_AttackPlus_Enemy_Obstacle

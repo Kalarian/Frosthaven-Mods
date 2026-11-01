@@ -1,0 +1,62 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PurifyingAura$
+Character: Sunkeeper2ID
+ID: 33309
+Level: 1
+Initiative: 21
+# card: Purifying Aura
+# "attacks performed by an adjacent enemy": the 1st edition card's melee filter (AttackType: Melee).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TRetaliate:
+                Retaliate: 3
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    AttackType: Melee
+                    Behaviour: Retaliate
+                    XPTracker: [1,0,1,0,1]
+    Bottom:
+        Abilities:
+            BStrengthen:
+                Strengthen: True
+                Range:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Target: -1
+                Filter: Ally
+                AnimOverload: PositiveBuffRadial
+        Consumes:
+            BCLight:
+                Elements: Light
+                AbilityOverrides:
+                    BCLightRangeBuff:
+                        ParentName: BStrengthen
+                        Range: 1
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TRetaliate
+            ListLayout: "$FHS_GH2E_Sunkeeper2_09_T$"
+            Layout: "$FHS_GH2E_Sunkeeper2_09_T$"
+            Icon: Positive_Retaliate
+        - Row: "<size=100%> "
+        - XPTracker: TRetaliate
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Strengthen>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies> <sprite name=Range> *BStrengthen.Range* @BStrengthen.Range@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "+1 <sprite name=Range>, <sprite name=XP1>"

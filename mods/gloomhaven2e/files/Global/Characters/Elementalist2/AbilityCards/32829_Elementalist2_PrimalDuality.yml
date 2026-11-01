@@ -1,0 +1,118 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PrimalDuality$
+Character: Elementalist2ID
+ID: 32829
+Level: 9
+Initiative: 11
+# card: Primal Duality
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TCFireIce:
+                Consume:
+                    Elements: [Fire, Ice]
+                    Abilities:
+                        TDamage:
+                            Damage: 5
+                            Range: 4
+                            Target: 1
+                            Filter: Enemy
+                            Conditions: [Muddle]
+                            AnimOverload: TargetFloorFireIce
+            TCAirEarth:
+                Consume:
+                    Elements: [Air, Earth]
+                    Abilities:
+                        TAlly:
+                            ControlActor:
+                                Abilities:
+                                    TAllyShield:
+                                        Shield: 2
+                                        StrengthIsBase: True
+                                        Filter: Self
+                                        ActiveBonusDuration: Round
+                                        UseOriginalActor: True
+                                        AnimOverload: TargetedBuff
+                                    TAllyRetaliate:
+                                        Retaliate: 2
+                                        StrengthIsBase: True
+                                        Filter: Self
+                                        ActiveBonusDuration: Round
+                                        UseOriginalActor: True
+                                        AnimOverload: TargetedBuff
+                                ControlActorType: Player
+                            Range: 4
+                            Filter: Ally
+                            AnimOverload: ControlAlly
+            TCLightDark:
+                Consume:
+                    Elements: [Light, Dark]
+                    Abilities:
+                        TAttack:
+                            Attack: 2
+                            Target: 2
+                            Range: 4
+                            Filter: Enemy
+                            Conditions: Curse
+                            AttackHasAdvantage: True
+                            AnimOverload: TargetFloorMulti
+    Bottom:
+        Abilities:
+            BCLight:
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        BRecover:
+                            RecoverDiscardedCards: 1
+                            Filter: Self
+                            AnimOverload: Heal
+                        BInfuseDark:
+                            Infuse: [Dark]
+                            CanUndo: False
+                            CanSkip: False
+                            SkipAnim: True
+            BCDark:
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        BTeleport:
+                            Teleport2: 4
+                            Filter: Self
+                            AnimOverload: Teleport Into
+                            AnimOverload2: Teleport Outof
+                        BInfuseLight:
+                            Infuse: [Light]
+                            CanUndo: False
+                            CanSkip: False
+                            SkipAnim: True
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+        Consumes:
+            BCAnyAny:
+                Elements: [Any, Any]
+                AbilityOverrides:
+                    BCAnyAnyLoot:
+                        ParentName: BLoot
+                        Range: 1
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Elementalist2_29_T$"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Elementalist2_29_T2$"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Elementalist2_29_T3$"
+    Bottom:
+        - Row: "$FHS_GH2E_Elementalist2_29_B$"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Elementalist2_29_B2$"
+        - Row: "<size=50%> "
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCAnyAny
+                    Text: "+1 <sprite name=Loot>"

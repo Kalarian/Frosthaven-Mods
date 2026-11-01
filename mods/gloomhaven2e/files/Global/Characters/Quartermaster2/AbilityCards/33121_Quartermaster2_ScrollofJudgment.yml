@@ -1,0 +1,76 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ScrollofJudgment$
+Character: Quartermaster2ID
+ID: 33121
+Level: 5
+Initiative: 12
+# card: Scroll of Judgment
+# top: the 1st edition Scroll of Judgment's shape: all enemies within range 4 suffer damage 2 (Damage, Range 4, Target
+#   -1), then the mandatory self damage 2 (AutoTrigger, CanSkip False; printed first, placed second because a half's
+#   first ability never auto-triggers). XP 2, lost.
+# bottom: Move 2 [circle]; Shield 1 [square], round; "after the next attack targeting you this round, Recover one of
+#   your spent items and gain XP 1": a round DuringActionAbilityOnAttacked bonus (Frosthaven's Energy Conversion /
+#   Stress Vents behaviour) with one use slot carrying the XP ([1]), whose ability recovers one spent item. TEST: the
+#   item choice on a monster's turn.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TDamage:
+                Damage: 2
+                Range: 4
+                Target: -1
+                Filter: Enemy
+                AnimOverload: RadialScroll
+            TDamageSelf:
+                Damage: 2
+                Filter: Self
+                AutoTrigger: True
+                CanSkip: False
+                SkipAnim: True
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+            BReaction:
+                AddActiveBonus:
+                    RefreshItems: 1
+                    SlotStateToRefresh: [Spent]
+                    Filter: Self
+                    AnimOverload: Refresh
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: DuringActionAbilityOnAttacked
+                    XPTracker: [1]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Quartermaster2_21_T$"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Quartermaster2_21_T2$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+        - Divider:
+        - Active:
+            Ability: BReaction
+            Icon: Refresh
+            ListLayout: "$FHS_GH2E_Quartermaster2_21_B$"
+            Layout: "$FHS_GH2E_Quartermaster2_21_B$"
+        - Row: "<size=100%> "
+        - XPTracker: BReaction

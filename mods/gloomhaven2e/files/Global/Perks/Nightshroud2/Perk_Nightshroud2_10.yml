@@ -1,0 +1,28 @@
+Parser: Perk
+ID: Nightshroud210
+Name: PERK_Nightshroud2_10_Name
+Description: PERK_Nightshroud2_10_Desc
+CharacterID: Nightshroud2ID
+Available: 1
+Cost: 2
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            CreateShadow:
+            HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+            Range: 1
+            Target: 1
+            AnimOverload: Shadow Manipulation
+            Filter: [Self]
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringTurnAbility
+            XPTracker: [0]
+            IsToggleBonus: True
+            Hidden: True
+            ListLayoutOverride: [$GH2E_Nightshroud2_PERK_10$, Positive_Teleport_Shadow]
+            MiscVars:
+                OverrideIcon: "'Positive_Teleport_Shadow'"
+        AnimOverload: PowerUp

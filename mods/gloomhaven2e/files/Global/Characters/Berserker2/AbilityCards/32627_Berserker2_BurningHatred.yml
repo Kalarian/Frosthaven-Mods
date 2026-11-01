@@ -1,0 +1,149 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BurningHatred$
+Character: Berserker2ID
+ID: 32627
+Level: 9
+Initiative: 50
+# card: Burning Hatred
+Discard: [Discard,Permanently Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Range: 1
+                Target: -1
+                MultiPassAttack: False
+                TreatAsMelee: True
+                AnimOverload: RangedRadial
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireRangeBuff:
+                        ParentName: TAttack
+                        Range: 1
+            TCDamage:
+                CostAbility:
+                    ParentName: TAttack
+                    Damage: 2
+                    Filter: Self
+                AbilityOverrides:
+                    TCAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BDamage:
+                Damage: 1
+                Filter: Self
+                CanSkip: False
+            BMove:
+                Move: 1
+            BAttack:
+                Attack: 2
+            BNull:
+                Null: True
+        Consumes:
+            BCRepeat1:
+                ConsumeGroup: CGHatred
+                CostAbility:
+                    ParentName: BNull
+                    Damage: 2
+                    Filter: Self
+                Abilities:
+                    BCMove1:
+                        ParentName: BNull
+                        Move: 1
+                    BCAttack1:
+                        ParentName: BNull
+                        Attack: 2
+            BCRepeat2:
+                ConsumeGroup: CGHatred
+                CostAbility:
+                    ParentName: BNull
+                    Damage: 5
+                    Filter: Self
+                Abilities:
+                    BCMove2a:
+                        ParentName: BNull
+                        Move: 1
+                    BCAttack2a:
+                        ParentName: BNull
+                        Attack: 2
+                    BCMove2b:
+                        ParentName: BNull
+                        Move: 1
+                    BCAttack2b:
+                        ParentName: BNull
+                        Attack: 2
+            BCRepeat3:
+                ConsumeGroup: CGHatred
+                CostAbility:
+                    ParentName: BNull
+                    Damage: 9
+                    Filter: Self
+                Abilities:
+                    BCMove3a:
+                        ParentName: BNull
+                        Move: 1
+                    BCAttack3a:
+                        ParentName: BNull
+                        Attack: 2
+                    BCMove3b:
+                        ParentName: BNull
+                        Move: 1
+                    BCAttack3b:
+                        ParentName: BNull
+                        Attack: 2
+                    BCMove3c:
+                        ParentName: BNull
+                        Move: 1
+                    BCAttack3c:
+                        ParentName: BNull
+                        Attack: 2
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFire
+                    Text: "$FHS_Target_TwoHexInstead$"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDamage
+                    Text: "$FHS_GH2E_Berserker2_27_T$"
+    Bottom:
+        - Row: "$FHS_GH2E_Berserker2_27_B$"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Berserker2_27_B2$"
+        - Row: "<size=150%><sprite name=Move> *BMove*"
+        - Row: "<size=150%><sprite name=Attack> *BAttack*"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCRepeat1
+                    Text: "$FHS_GH2E_Berserker2_27_B3$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCRepeat2
+                    Text: "$FHS_GH2E_Berserker2_27_B4$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCRepeat3
+                    Text: "$FHS_GH2E_Berserker2_27_B5$"

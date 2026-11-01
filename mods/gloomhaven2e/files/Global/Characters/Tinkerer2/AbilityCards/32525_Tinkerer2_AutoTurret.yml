@@ -1,0 +1,73 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_AutoTurret$
+Character: Tinkerer2ID
+ID: 32525
+Level: 6
+Initiative: 32
+# card: Auto Turret
+# from Xipe's 99054_Tinkerer2_Auto Turret.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            # "At the end of this and your next three turns, perform the following twice: Attack 2, Range 5, Pierce 1":
+            # the 1st edition Auto Turret shape (EndTurnAbility), 4 slots with XP on the first three. "Twice" is
+            # Target 2 (Xipe's choice): two different enemies, not the same one twice (NOTES.md)
+            TActive:
+                AddActiveBonus:
+                    Attack:
+                        Amount: 2
+                        Pierce: 1
+                    Range: 5
+                    Target: 2
+                    AnimOverload: RangedAttack
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [1,1,1,0]
+                AnimOverload: PowerUpPotent
+    Bottom:
+        Abilities:
+            BWard:
+                Ward:
+                    DiamondPlusEnhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: PowerUp
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BPoison:
+                Poison:
+                    DiamondEnhancements: 1
+                Range: 3
+                Filter: Enemy
+                AnimOverload: RangedAttack
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$FHS_GH2E_Tinkerer2_25_T$"
+            Layout: "$FHS_GH2E_Tinkerer2_25_T$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=100%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Ward> <size=100%><voffset=1>@BWard@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BWard.Range*</link>"
+            - Column:
+        - Divider:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Poison> <size=100%><voffset=1>@BPoison@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BPoison.Range*</link>"
+            - Column:

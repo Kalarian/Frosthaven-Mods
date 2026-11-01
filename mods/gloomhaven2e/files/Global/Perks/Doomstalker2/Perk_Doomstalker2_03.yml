@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Doomstalker203
+Name: PERK_Doomstalker2_03_Name
+Description: PERK_Doomstalker2_03_Desc
+CharacterID: Doomstalker2ID
+Available: 2
+CardsToRemove: [AMC_Basic_P0, AMC_Basic_P0]
+CardsToAdd: [AMC_Basic_P1, AMC_Basic_P1]

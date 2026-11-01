@@ -1,0 +1,37 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LingeringEssence$
+Character: Elementalist2ID
+ID: 32811
+Level: X
+Initiative: 50
+# card: Lingering Essence
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    Null: True
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndRoundAbility
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$FHS_GH2E_Elementalist2_11_T$"
+            Layout: "$FHS_GH2E_Elementalist2_11_T$"
+            Icon: Positive_Infusion
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

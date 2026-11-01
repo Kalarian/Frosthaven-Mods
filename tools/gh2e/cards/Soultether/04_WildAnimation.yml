@@ -1,0 +1,41 @@
+# card: Wild Animation
+# bottom: Thorn Shooter (summons/ThornShooter2.yml): its attack slot prints only Poison, written as Attack 0 + Poison.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    Enhancements: 1
+                Range: 4
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BSummon:
+                Summon: ThornShooter2ID
+                AnimOverload: Summon
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Range$ <sprite name=Range> *THeal.Range*"
+    Bottom:
+        - Active:
+            Ability: BSummon
+            Icon: Summon
+            Layout:
+                - Summon:
+                    Ability: BSummon
+                    SummonName: $GH2E_SUMMON_ThornShooter$
+                    SpecialText:
+                        - Row: "<nobr>$Poison$ <sprite name=Poison></nobr>"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 1
+            - Column:
+                - Duration: Persistent

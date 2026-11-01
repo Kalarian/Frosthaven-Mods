@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DeadlyMischief$
+Character: SoultetherID
+ID: 33519
+Level: 3
+Initiative: 81
+# card: Deadly Mischief
+# top: Covetous Imp (summons/CovetousImp.yml). "Whenever this summon kills an enemy, you gain the money token directly"
+# is text only: NEEDS PLUGIN (no "gain a money token" ability in Frosthaven's data).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: CovetousImpID
+                AnimOverload: Summon
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttackFlame
+        Infuse: Fire
+Layout:
+    Top:
+        - Active:
+            Ability: TSummon
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_CovetousImp$
+                    SpecialText:
+                        - Row: "$FHS_GH2E_Soultether_19_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* @BAttack.Range@</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Fire

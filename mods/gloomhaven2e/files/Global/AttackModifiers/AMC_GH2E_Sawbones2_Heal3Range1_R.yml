@@ -1,0 +1,12 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Sawbones2_Heal3Range1_R
+MathModifier: "+0"
+Rolling: True
+ControlTargetingActor: True
+Abilities:
+    AHeal:
+        Heal: 3
+        Filter: [Self, Ally]
+        Targeting: Range
+        Range: 1
+        AnimOverload: Heal

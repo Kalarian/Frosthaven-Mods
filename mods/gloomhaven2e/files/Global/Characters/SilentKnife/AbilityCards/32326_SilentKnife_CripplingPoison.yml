@@ -1,0 +1,71 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CripplingPoison$
+Character: SilentKnifeID
+ID: 32326
+Level: 8
+Initiative: 4
+# card: Crippling Poison
+# corrected against tools/gh2e/sheets/SilentKnife.json
+# top: two persistent bonuses (an override block on a bonus isn't read by the attack): Poison on all attacks (the 1e
+# Watch It Burn top's shape) and +1 Attack on poisoned targets (the 1e Crippling Poison top's shape), XP 2, lost
+# bottom: round Immobilize on attacks against isolated targets
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 0
+                Conditions: [Poison]
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+            TActive2:
+                Attack: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    Filter:
+                        TargetType: Enemy
+                        TargetHasNegativeConditions: [Poison]
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BActive:
+                Attack: 0
+                Conditions: [Immobilize]
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    Filter:
+                        TargetType: Enemy
+                        TargetAdjacentAlliesOfTarget: "== 0"
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Positive_Poison_Attack
+            ListLayout: "$FHS_GH2E_SilentKnife_26_T$"
+            Layout: "$FHS_GH2E_SilentKnife_26_T$"
+        - Divider:
+        - Active:
+            Ability: TActive2
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_SilentKnife_26_T2$"
+            Layout: "$FHS_GH2E_SilentKnife_26_T2$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BActive
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_SilentKnife_26_B$"
+            Layout: "$FHS_GH2E_SilentKnife_26_B$"

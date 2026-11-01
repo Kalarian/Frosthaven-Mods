@@ -1,0 +1,20 @@
+Parser: Character
+ID: Elementalist2ID
+LocKey: $Elementalist2$
+Model: Elementalist
+Race: Savvas
+Traits: [ Arcane, Educated, Intimidating ]
+Complexity: 4
+ElementalAffinities: [ Fire, Ice, Air, Earth, Light, Dark ]
+DefaultSkin: 1
+# PlayerLevel:  [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
+HealthTable: [ 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+NumberAbilityCardsInBattle: 10
+Description: $Elementalist2_DESCRIPTION$
+HeroStats:
+    Melee: 3
+    Ranged: 4
+    Mobility: 2
+    Support: 3
+    Defense: 2
+    Control: 3

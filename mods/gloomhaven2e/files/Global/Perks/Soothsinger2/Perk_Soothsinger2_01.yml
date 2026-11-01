@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Soothsinger201
+Name: PERK_Soothsinger2_01_Name
+Description: PERK_Soothsinger2_01_Desc
+CharacterID: Soothsinger2ID
+Available: 1
+CardsToRemove: [AMC_Basic_M2]
+CardsToAdd: [AMC_GH2E_Soothsinger2_Bless2_M2]

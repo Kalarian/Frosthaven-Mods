@@ -1,0 +1,50 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WardingStrength$
+Character: BruiserID
+ID: 32007
+Level: 1
+Initiative: 32
+# card: Warding Strength
+# 2e sheet: top Attack 2 [square], Disarm; bottom "on the next six sources of damage from attacks targeting you, gain
+# Shield 1, Retaliate 1 for the attacks", 6 use slots with XP on slots 1, 3, 5, persistent, lost. Xipe's shape
+# (Shield 1 with the ShieldAndRetaliate behaviour carrying Retaliate 1); XPTracker one entry per slot (AUTHORING.md),
+# so [1,0,1,0,1,0] (Xipe had [0,1,0,1,0,1]).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Conditions: Disarm
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 1
+                AttackSourcesOnly: True
+                AnimOverload: Persistent Buff
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: ShieldAndRetaliate
+                    AbilityData:
+                        Retaliate: 1
+                    XPTracker: [1,0,1,0,1,0]
+                    ValidAbilityType: Attack
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Disarm></link>"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BShield
+            ListLayout: "$FHS_GH2E_Bruiser_07_B$"
+            Layout: "$FHS_GH2E_Bruiser_07_B$"
+            Icon: Positive_Shield
+        - Row: "<size=100%> "
+        - XPTracker: BShield

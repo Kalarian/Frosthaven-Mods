@@ -1,0 +1,33 @@
+Parser: Perk
+ID: Soothsinger210
+Name: PERK_Soothsinger2_10_Name
+Description: PERK_Soothsinger2_10_Desc
+CharacterID: Soothsinger2ID
+Available: 1
+Cost: 2
+Flags: [Passive, ExecuteAbilitiesAfterLongRest]
+Abilities:
+    ANoteChoice:
+        Filter: Self
+        AutoTrigger: True
+        CanSkip: False
+        CanUndo: False
+        PreviewEffectText: "High Note / Low Note"
+        Choose:
+            Abilities:
+                ANoteHigh:
+                    PreviewEffectText: "High Note"
+                    NullTargeting: True
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
+                    ResourcesToAddOnAbilityEnd:
+                        - ["SoothsingerHighNote", 1]
+                ANoteLow:
+                    PreviewEffectText: "Low Note"
+                    NullTargeting: True
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
+                    ResourcesToAddOnAbilityEnd:
+                        - ["SoothsingerLowNote", 1]

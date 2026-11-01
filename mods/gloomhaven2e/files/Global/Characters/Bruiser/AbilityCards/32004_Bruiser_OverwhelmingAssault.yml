@@ -1,0 +1,39 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_OverwhelmingAssault$
+Character: BruiserID
+ID: 32004
+Level: 1
+Initiative: 61
+# card: Overwhelming Assault
+# 2e sheet: top Attack 7 [diamond], XP 2, lost; bottom Move 3 [square], Jump, infuse Air.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 7
+                    DiamondEnhancements: 1
+                AnimOverload: Attack_AOE_Cone
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Jump: True
+                    SquareEnhancements: 1
+        Infuse: Air
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Air

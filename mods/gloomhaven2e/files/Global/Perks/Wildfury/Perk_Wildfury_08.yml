@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Wildfury08
+Name: PERK_Wildfury_08_Name
+Description: PERK_Wildfury_08_Desc
+CharacterID: WildfuryID
+Available: 1
+Flags: [Passive]

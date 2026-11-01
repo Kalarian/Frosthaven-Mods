@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Whirlwind$
+Character: BruiserID
+ID: 32018
+Level: 4
+Initiative: 28
+# card: Whirlwind
+# 2e sheet: top Attack 5 [diamond] on all adjacent enemies, XP 1 per enemy targeted, infuse Air, lost; bottom Move 4
+# [circle], Push 3 [square] target all, range 1. The 1st edition Whirlwind's shape.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range: 1
+                Target: -1
+                AnimOverload: Attack_AOE_Radial
+                MultiPassAttack: False
+                XPPerTarget: 1
+        Infuse: Air
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BPush:
+                Push:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Range: 1
+                Target: -1
+                AnimOverload: TargetedShout
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
+        - Row: "$FHS_XP_PerEnemy$"
+        - Row: "<size=20%> "
+        - Infuse: Air
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:

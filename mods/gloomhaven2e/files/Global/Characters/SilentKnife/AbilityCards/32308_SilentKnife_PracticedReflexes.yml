@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PracticedReflexes$
+Character: SilentKnifeID
+ID: 32308
+Level: 1
+Initiative: 64
+# card: Practiced Reflexes
+# from Xipe's 99095_Scoundrel2_Practiced Reflexes.yml; corrected against tools/gh2e/sheets/SilentKnife.json
+# bottom: Frosthaven has no "you may choose not to spring traps" move (only a perk flag, ChooseToNotTriggerTrap), so the
+# move jumps (hexes passed over don't spring their traps; the last hex still does) - approximation, see NOTES.md.
+# "Destroy one trap in a hex you entered": DisarmTrap on the move's path (CAbilityDisarmTrap reads AllTargetsOnMovePath,
+# the same path the 1e Swift Bow loots), XP 1 only when a trap is destroyed (AbilityXP: no target, no XP).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+                Jump: True
+            BDisarm:
+                DisarmTrap: True
+                AllTargetsOnMovePath: True
+                Target: 1
+                AbilityXP: 1
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$FHS_GH2E_SilentKnife_08_B$"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_SilentKnife_08_B2$"

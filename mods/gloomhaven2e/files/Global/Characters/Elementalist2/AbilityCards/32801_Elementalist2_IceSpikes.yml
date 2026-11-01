@@ -1,0 +1,77 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_IceSpikes$
+Character: Elementalist2ID
+ID: 32801
+Level: 1
+Initiative: 48
+# card: Ice Spikes
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: TargetFloorIce
+        Consumes:
+            TCAny:
+                Elements: Any
+                AbilityOverrides:
+                    TCAnyInfuse:
+                        ParentName: TAttack
+                        SubAbilities:
+                            TCAnyInfuseSub:
+                                CanUndo: False
+                                TreatAsNonSubAbility: True
+                                Infuse: [Any]
+                                ShowElementPicker: True
+                                SkipAnim: True
+                XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Conditions: Immobilize
+                AnimOverload: TargetFloorIce
+        Infuse: [Ice, Earth]
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAny
+                    Text: "<sprite name=CreateWild>, <sprite name=XP1>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* @BAttack.Range@</link>"
+                - Row: "<link=fhpill>, <sprite name=Immobilize></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "50, 50"
+            - Column:
+                - Infuse: Ice
+            - Column:
+                - Infuse: Earth

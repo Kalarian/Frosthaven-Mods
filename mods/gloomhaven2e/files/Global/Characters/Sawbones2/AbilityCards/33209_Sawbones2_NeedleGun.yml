@@ -1,0 +1,70 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NeedleGun$
+Character: Sawbones2ID
+ID: 33209
+Level: 1
+Initiative: 44
+# card: Needle Gun
+# top: the Pierce square mark is dropped (Frosthaven's Pierce takes no enhancement slot: rulecheck rejects it). bottom: three
+# separate melee attacks, the third without a mark.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 3
+                Pierce: 1
+                Conditions: Poison
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BAttack1:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Conditions: [Poison, Stun]
+            BAttack2:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Conditions: [Poison, Stun]
+            BAttack3:
+                Attack: 1
+                Conditions: [Poison, Stun]
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <sprite name=Pierce> *TAttack.Pierce*, <sprite name=Poison></link>"
+            - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *BAttack1* <size=100%><voffset=1>@BAttack1@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Poison><sprite name=Stun></link>"
+            - Column:
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *BAttack2* <size=100%><voffset=1>@BAttack2@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Poison><sprite name=Stun></link>"
+            - Column:
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *BAttack3*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Poison><sprite name=Stun></link>"
+            - Column:

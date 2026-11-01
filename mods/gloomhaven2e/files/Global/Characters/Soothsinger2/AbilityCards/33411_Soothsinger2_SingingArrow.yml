@@ -1,0 +1,75 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SingingArrow$
+Character: Soothsinger2ID
+ID: 33411
+Level: 1
+Initiative: 85
+# card: Singing Arrow
+# bottom: the grant's range is [square] as printed (Secretariat has a diamond)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 3
+                Conditions: Curse
+                AnimOverload: RangedAttack
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerHighNote", 1]
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 2
+                                DiamondEnhancements: 1
+                            Range:
+                                Amount: 3
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneAttack
+            BNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Curse></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_HIGH$"
+    Bottom:
+        - Row: "$FHS_GH2E_Soothsinger2_GRANT_RANGE$ <nobr><sprite name=Range> *BAlly.Range*</nobr>: @BAlly.Range@"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAllyAttack.Range* @BAllyAttack.Range@</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_LOW$"

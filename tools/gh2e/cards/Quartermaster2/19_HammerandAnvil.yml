@@ -1,0 +1,47 @@
+# card: Hammer and Anvil
+# top: give the Sturdy Spear to one ally within range 2 (no XP); gain the Barbed Strip or Iron Plate: APPROXIMATION,
+#   each a recover of one spent or lost item (NEEDS PLUGIN); Shield 1 [square], round.
+# bottom: Move 5 [circle].
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TGive:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Range: 2
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: Refresh
+            TGain:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Filter: Self
+                AnimOverload: Refresh
+            TShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 5
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "$GH2E_Quartermaster2_19_T$"
+        - Row: "$GH2E_Quartermaster2_19_T2$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TShield
+            Icon: "Shield"
+            ListLayout: "$Shield$ <sprite name=Shield> *TShield*"
+            Layout: "<b><size=130%>$Shield$ <sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+        - Row: "<size=20%> "
+        - Duration: Round
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

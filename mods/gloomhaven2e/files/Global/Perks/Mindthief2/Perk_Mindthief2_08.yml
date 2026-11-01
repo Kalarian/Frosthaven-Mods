@@ -1,0 +1,25 @@
+Parser: Perk
+ID: Mindthief208
+Name: PERK_Mindthief2_08_Name
+Description: PERK_Mindthief2_08_Desc
+CharacterID: Mindthief2ID
+Available: 1
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    PuppetStrings:
+        AutoTrigger: True
+        AddActiveBonus:
+            Attack: 0
+        Filter: Self
+        ActiveBonus:
+            Behaviour: OverrideAbility
+            Duration: Persistent
+            ValidAbilityType: ControlActor
+            ActiveBonusAbilityOverrides:
+                PuppetStringsOverride:
+                    ControlActor:
+                        UseControllingActorModifierDeck: True
+                        UseControllingActorModifierDeckFilter:
+                            ActorType: [Enemy, Ally, Neutral, Enemy2]
+            Hidden: True
+        AnimOverload: None

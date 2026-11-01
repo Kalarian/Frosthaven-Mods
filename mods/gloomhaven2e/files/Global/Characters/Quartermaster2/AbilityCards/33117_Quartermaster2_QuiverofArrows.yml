@@ -1,0 +1,73 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_QuiverofArrows$
+Character: Quartermaster2ID
+ID: 33117
+Level: 3
+Initiative: 61
+# card: Quiver of Arrows
+# top: optional spend supplies (Recover your items, XP 1); Attack 2 [square], Target 2 [square], Range 4.
+# bottom: +1 Target on the next four ranged attack abilities of adjacent allies: the 1st edition Quiver of Arrows'
+#   aura (BuffTarget, ranged attacks, allies within 1) with 4 use slots, XP on slots 2 and 4 ([0,1,0,1]); persistent,
+#   lost.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TSpend:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Filter: Self
+                AbilityXP: 1
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateSupplies: Actor.GetCharacterResourceAmount("Supplies") >= 10
+                PerformVars:
+                    OnAbilityEnded:
+                        SpendSupplies: AbilityHasHappened && TargetingActor.RemoveCharacterResource("Supplies", 50, true)
+                AnimOverload: Refresh
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 4
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BActive:
+                AddTarget: 1
+                Range: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffTarget
+                    AttackType: Ranged
+                    ValidAbilityType: Attack
+                    IsAura: True
+                    AuraFilter: [Ally]
+                    XPTracker: [0,1,0,1]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Quartermaster2_SPEND_SELF$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* @TAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Positive_TargetPlus_AttackRanged
+            ListLayout: "$FHS_GH2E_Quartermaster2_17_B$"
+            Layout: "$FHS_GH2E_Quartermaster2_17_B$"
+        - Row: "<size=100%> "
+        - XPTracker: BActive

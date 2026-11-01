@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Tinkerer207
+Name: PERK_Tinkerer2_07_Name
+Description: PERK_Tinkerer2_07_Desc
+CharacterID: Tinkerer2ID
+Available: 1
+CardsToAdd: [AMC_Heal1_1Ally]
+Flags: [Passive, IgnoreNegativeScenarioEffects]

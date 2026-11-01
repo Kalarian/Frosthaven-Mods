@@ -1,0 +1,26 @@
+Parser: Perk
+ID: Bruiser12
+Name: PERK_Bruiser_12_Name
+Description: PERK_Bruiser_12_Desc
+CharacterID: BruiserID
+Available: 1
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TActive:
+        AutoTrigger: True
+        Filter: Self
+        SkipAnim: True
+        Attack: 0
+        AttackHasAdvantage: True
+        ActiveBonus:
+            Duration: Persistent
+            Hidden: True
+            Behaviour: BuffAttack
+            IsAura: True
+            AuraTargeting: All
+            AuraFilter:
+                TargetType: [Self, Ally]
+                ActorType: Player
+            Filter:
+                Vars:
+                    ValidateFirstRound: ScenarioManager.CurrentScenarioState.RoundNumber == 1

@@ -1,0 +1,16 @@
+Parser: HeroSummon
+ID: IronBeast2ID
+LocKey: $GH2E_SUMMON_IronBeast$
+Model: IronBeast
+Health:
+    Amount: 7
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    SquareEnhancements: 1
+Attack:
+    Amount: 1
+    SquareEnhancements: 1
+Range: 1
+Shield: 1
+Retaliate: 1

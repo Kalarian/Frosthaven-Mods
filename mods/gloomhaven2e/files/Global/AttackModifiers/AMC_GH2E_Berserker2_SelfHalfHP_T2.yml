@@ -1,0 +1,13 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Berserker2_SelfHalfHP_T2
+MathModifier: "*2"
+Abilities:
+    ADamageSelf:
+        Damage: 0
+        Filter: Self
+        AutoTrigger: True
+        StatIsBasedOnX:
+            Strength:
+                BasedOn: PercentageOfCurrentHP
+                Multiplier: 0.5
+                RoundingType: ToFloor

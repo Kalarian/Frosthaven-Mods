@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ScrollofBlizzards$
+Character: Quartermaster2ID
+ID: 33127
+Level: 8
+Initiative: 46
+# card: Scroll of Blizzards
+# top: Attack 1, Range 2 (no marks), ranged parallelogram of 6 (R 0,0 2,0 1,1 3,1 2,2 4,2) with hex marks on 3,3 and
+#   5,3; infuse Ice (mandatory box).
+# bottom: Move 3 [circle]; the optional spend box between the moves (Recover your and adjacent allies' items, XP 1);
+#   Move 2 [circle].
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+                Range: 2
+                AreaEffect: "0,0,R|2,0,R|1,1,R|3,1,R|2,2,R|4,2,R|3,3,E|5,3,E"
+                MultiPassAttack: False
+                AnimOverload: TargetedScrollBlizzard
+        Infuse: [Ice]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BSpend:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Range: 1
+                Target: -1
+                Filter:
+                    TargetType: [Self, Ally]
+                    ActorType: Player
+                AbilityXP: 1
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateSupplies: Actor.GetCharacterResourceAmount("Supplies") >= 10
+                PerformVars:
+                    OnAbilityEnded:
+                        SpendSupplies: AbilityHasHappened && TargetingActor.RemoveCharacterResource("Supplies", 50, true)
+                AnimOverload: Refresh
+            BMove2:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=RangedAttack> *TAttack*"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+                - Column:
+            - Row: "<size=50%> "
+            - Infuse: Ice
+        - Column: "£Area£"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Quartermaster2_SPEND_GROUP$"
+        - Row: "<size=50%> "
+        - Row: "<size=150%><sprite name=Move> *BMove2* <size=100%><voffset=1>@BMove2@"

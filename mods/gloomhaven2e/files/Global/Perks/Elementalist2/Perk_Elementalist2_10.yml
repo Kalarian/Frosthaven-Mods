@@ -1,0 +1,22 @@
+Parser: Perk
+ID: Elementalist210
+Name: PERK_Elementalist2_10_Name
+Description: PERK_Elementalist2_10_Desc
+CharacterID: Elementalist2ID
+Available: 1
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TStartInfuse:
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        AddActiveBonus:
+            Infuse: [Any]
+            ShowElementPicker: True
+            Filter: Self
+            CanUndo: False
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: StartTurnAbility
+            Hidden: True
+            XPTracker: [0]

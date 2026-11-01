@@ -1,0 +1,34 @@
+Parser: Perk
+ID: Cragheart208
+Name: PERK_Cragheart2_08_Name
+Description: PERK_Cragheart2_08_Desc
+CharacterID: Cragheart2ID
+Available: 1
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            DestroyObstacle: True
+            Range: 5
+            Target: 1
+            Targeting: Range
+            AnimOverload: PowerUp
+            SubAbilities:
+                PTeleport:
+                    Teleport2: 5
+                    Filter: Self
+                    TreatAsNonSubAbility: True
+                    AnimOverload: Teleport Into
+                    AnimOverload2: Teleport Outof
+            Filter: [Self]
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringTurnAbility
+            XPTracker: [0]
+            IsToggleBonus: True
+            Hidden: True
+            ListLayoutOverride: [$PERK_Cragheart2_08_Desc$, Positive_DamagePrevent_Shadow_Teleport]
+            MiscVars:
+                OverrideIcon: "'Positive_DamagePrevent_Shadow_Teleport'"
+        AnimOverload: PowerUp

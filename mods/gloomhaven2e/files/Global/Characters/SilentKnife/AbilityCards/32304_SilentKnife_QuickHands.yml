@@ -1,0 +1,34 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_QuickHands$
+Character: SilentKnifeID
+ID: 32304
+Level: 1
+Initiative: 23
+# card: Quick Hands
+# from Xipe's 99091_Scoundrel2_Quick Hands.yml; corrected against tools/gh2e/sheets/SilentKnife.json (agrees)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+            TMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+        XP: 1
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Loot> *TLoot*"
+        - Divider:
+        - Row: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+    Bottom:
+        - Row: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

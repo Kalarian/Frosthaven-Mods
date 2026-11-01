@@ -1,0 +1,72 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RainofArrows$
+Character: Doomstalker2ID
+ID: 32701
+Level: 1
+Initiative: 9
+# card: Rain of Arrows
+# top: the 1st edition Rain of Arrows shape (an aura on the caster over doomed enemies, DuringActionAbilityOnDeath,
+# four slots, XP on slots 1 and 3) with the 2e Attack 3, Range 4. "While there is another enemy within Range 4" is not
+# checked: the attack simply needs a target in range 4 (a death with nobody in range may still use a slot).
+# bottom: Doom, +Pierce 2 on your attacks (the 1st edition Expose doom's Pierce buff, filtered to this class).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    Attack: 3
+                    Range: 4
+                    AnimOverload: RangedAttack
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnDeath
+                    TriggerOnCaster: True
+                    IsAura: True
+                    AuraFilter:
+                        IsDoomed: True
+                        TargetType: Enemy
+                    AuraTargeting: All
+                    XPTracker: [1,0,1,0]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomAttackDebuff:
+                                Attack: 0
+                                AttackEffect:
+                                    Type: StandardBuff
+                                    Pierce: 2
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    Filter:
+                                        PlayerClasses: Doomstalker2ID
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTargetAlt
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$FHS_GH2E_Doomstalker2_01_T$"
+            Layout: "$FHS_GH2E_Doomstalker2_01_T$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=100%> "
+        - XPTracker: TActive
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_Doomstalker2_01_B$"
+            Layout:
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH2E_Doomstalker2_01_B$"
+                - Row: "$FHS_Doom_DiscardReminderText$"

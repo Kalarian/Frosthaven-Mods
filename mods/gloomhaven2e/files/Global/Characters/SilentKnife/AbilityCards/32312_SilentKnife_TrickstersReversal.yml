@@ -1,0 +1,57 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TrickstersReversal$
+Character: SilentKnifeID
+ID: 32312
+Level: X
+Initiative: 9
+# card: Trickster's Reversal
+# corrected against tools/gh2e/sheets/SilentKnife.json (Xipe's top was an immediate attack; rewritten)
+# top: "next melee attack on an enemy with Shield: +(X+2) Attack, X = its Shield". The Drifter's Accurate Strikes shape
+# (a persistent BuffAttack that only fires on a shielded target: Vars ValidateActorTargetHasShield, AttackEffect
+# BasedOnVarsCondition), melee only, one slot with XP 1. "+X where X = the Shield" is written as piercing the whole
+# Shield: the damage is the same (Attack + X - X = Attack + 0 shield), except that a x2 modifier doubles the X too on
+# the card and not here - see NOTES.md.
+# bottom: the 1st edition Trickster's Reversal bottom (passed in the 1e bench).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 0
+                AttackEffect:
+                    Type: BasedOnVarsCondition
+                    Strength: 2
+                    Pierce: 99
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    AttackType: Melee
+                    XPTracker: [1]
+                    Vars:
+                        ActorTarget: TriggerTarget
+                        ValidateActorTargetHasShield: ActorTarget.CalculateShield() > 0
+    Bottom:
+        Abilities:
+            BPrevent:
+                PreventDamage: 1
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+                    XPTracker: [0]
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Positive_Pierce_Enemy_Shield
+            ListLayout: "$FHS_GH2E_SilentKnife_12_T$"
+            Layout: "$FHS_GH2E_SilentKnife_12_T$"
+        - Row: "<size=100%> "
+        - XPTracker: TActive
+    Bottom:
+        - Active:
+            Ability: BPrevent
+            Icon: Positive_DamagePrevent
+            ListLayout: "$FHS_GH2E_SilentKnife_12_B$"
+            Layout: "$FHS_GH2E_SilentKnife_12_B$"

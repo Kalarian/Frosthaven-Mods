@@ -1,0 +1,7 @@
+Parser: Perk
+ID: SilentKnife09
+Name: PERK_SilentKnife_09_Name
+Description: PERK_SilentKnife_09_Desc
+CharacterID: SilentKnifeID
+Available: 1
+Flags: [Passive]

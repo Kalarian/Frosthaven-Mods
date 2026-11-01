@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Tinkerer206
+Name: PERK_Tinkerer2_06_Name
+Description: PERK_Tinkerer2_06_Desc
+CharacterID: Tinkerer2ID
+Available: 3
+CardsToAdd: [AMC_GH2E_Tinkerer2_Strengthen_Ally_P2]

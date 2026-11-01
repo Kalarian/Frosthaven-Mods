@@ -1,0 +1,75 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GiftofRot$
+Character: Plagueherald2ID
+ID: 33012
+Level: X
+Initiative: 47
+# card: Gift of Rot
+# top: Heal 1 + Ward on all allies within range 5 that have Poison. "You may heal as if they did not have Poison (their
+# Poison is not removed)" = the heal ignores Poison every time (AdditionalHealData IgnoreTokens, as the 1st edition
+# Voidwarden's heal data): keeping Poison is what the class wants, but IgnoreTokens also skips Wound/Bane/Brittle
+# removal. APPROXIMATION ("you may" -> always). bottom: the ally-Poison cost buys a round advantage on your attacks
+# (Drifter's Accurate Strikes bonus), added by the cost-consume.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+            THeal:
+                Heal: 1
+                Range: 5
+                Target: -1
+                Conditions: Ward
+                Filter:
+                    TargetType: Ally
+                    TargetHasNegativeCondition: Poison
+                AdditionalHealData:
+                    IgnoreTokens: True
+                AnimOverload: RadialPositive
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+        Consumes:
+            BCPoisonAlly:
+                CostAbility:
+                    ParentName: BMove
+                    Poison: True
+                    Range: 3
+                    Target: 1
+                    Filter:
+                        TargetType: Ally
+                        Vars:
+                            ValidateNoPoison: not target.Tokens.HasKey(CCondition.ENegativeCondition.Poison)
+                    AnimOverload: TargetedDebuff
+                Abilities:
+                    BCAdvantage:
+                        ParentName: BMove
+                        Advantage:
+                            DecrementTrigger: Rounds
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Round
+                        AutoTrigger: True
+                        AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Loot> *TLoot*"
+        - Divider:
+        - Row: "<size=150%><sprite name=Heal> *THeal*"
+        - Row: "$FHS_GH2E_Plagueherald2_12_T$"
+        - Row: "<sprite name=Ward>"
+        - Row: "$FHS_GH2E_Plagueherald2_12_T2$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCPoisonAlly
+                    Text: "$FHS_GH2E_Plagueherald2_12_B$"

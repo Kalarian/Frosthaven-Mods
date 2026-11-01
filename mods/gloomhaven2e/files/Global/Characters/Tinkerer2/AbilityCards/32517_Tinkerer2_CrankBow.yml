@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CrankBow$
+Character: Tinkerer2ID
+ID: 32517
+Level: 2
+Initiative: 23
+# card: Crank Bow
+# from Xipe's 99046_Tinkerer2_Crank Bow.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 8
+                    DiamondEnhancements: 1
+                Range: 5
+                AnimOverload: RangedAttack
+        XP: 3
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 3
+                Target: 2
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+            - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *BHeal.Target* <sprite name=Range> *BHeal.Range*</link>"
+            - Column:

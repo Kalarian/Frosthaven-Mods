@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Plagueherald208
+Name: PERK_Plagueherald2_08_Name
+Description: PERK_Plagueherald2_08_Desc
+CharacterID: Plagueherald2ID
+Available: 1
+CardsToAdd: [AMC_Heal1_1Ally_R, AMC_Heal1_1Ally_R]

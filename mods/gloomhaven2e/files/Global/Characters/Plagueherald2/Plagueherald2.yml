@@ -1,0 +1,28 @@
+Parser: Character
+ID: Plagueherald2ID
+LocKey: $Plagueherald2$
+Model: Plagueherald
+Race: Harrower
+Traits: [ Arcane, Intimidating, Outcast ]
+Complexity: 2
+DefaultSkin: 1
+# PlayerLevel:    [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
+HealthTable: [ 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+NumberAbilityCardsInBattle: 10
+Description: $Plagueherald2_DESCRIPTION$
+StartScenarioAbilities:
+    PlagueSupply:
+        NullTargeting: True
+        Filter: Self
+        ResourcesToAddOnAbilityEnd:
+            - ["Plague", 3]
+        AutoTrigger: True
+        CanSkip: False
+        SkipAnim: True
+HeroStats:
+    Melee: 1
+    Ranged: 4
+    Mobility: 2
+    Support: 3
+    Defense: 2
+    Control: 4

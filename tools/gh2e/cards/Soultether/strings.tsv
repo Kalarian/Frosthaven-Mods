@@ -1,0 +1,57 @@
+# key<TAB>English
+Soultether_DESCRIPTION	You bind creatures from other planes to your will and fight through them. Your summons hold the line while your cards grant them extra moves and attacks, shield them, and turn the elements of Fire, Air and Dark into power for the whole menagerie.
+Soultether_ADVENTURE_DESCRIPTION	You bind creatures from other planes to your will and fight through them. Your summons hold the line while your cards grant them extra moves and attacks, shield them, and turn the elements of Fire, Air and Dark into power for the whole menagerie.
+GH2E_Soultether_GRANT1	Grant one of your summons:
+GH2E_Soultether_GRANT2	Grant two of your summons:
+GH2E_Soultether_GRANTALL	Grant all your summons:
+GH2E_Soultether_TARGET_SUMMON	<sprite name=Target> 1 of your summons
+GH2E_SUMMON_IronBeast	Iron Beast
+GH2E_SUMMON_ShadowWolf	Shadow Wolf
+GH2E_SUMMON_ThornShooter	Thorn Shooter
+GH2E_SUMMON_RiftSpirit	Rift Spirit
+GH2E_SUMMON_FloatingJellyfish	Floating Jellyfish
+GH2E_SUMMON_CovetousImp	Covetous Imp
+GH2E_SUMMON_EmberSprite	Ember Sprite
+GH2E_SUMMON_RockColossus	Rock Colossus
+GH2E_SUMMON_SlimeSpirit	Slime Spirit
+GH2E_SUMMON_VoidEater	Void Eater
+GH2E_SUMMON_FeySubjugator	Fey Subjugator
+GH2E_SUMMON_PrismaticUnicorn	Prismatic Unicorn
+GH2E_Soultether_03_T	Whenever a Shadow Wolf dies, <sprite name=CreateDark> and all Shadow Wolves gain <sprite name=Invisible>.
+GH2E_Soultether_03_B	On the next two attacks targeting one of your summons, the attacker gains disadvantage for the attack and suffers <nobr><sprite name=Damage> 1</nobr> after the attack.
+GH2E_Soultether_05_B	At end of turn, grant one ally within <nobr><sprite name=Range> 3</nobr>: <nobr><sprite name=Shield> 1</nobr>. You control the grant abilities of this summon.
+GH2E_Soultether_08_B	Negate the next <sprite name=Damage> one of your summons would suffer this round.
+GH2E_Soultether_09_T	<sprite name=RecoverIcon> Recover one card from your lost pile.
+GH2E_Soultether_09_T2	On the next summon action you perform, any summons summoned by that action gain <sprite name=Invisible>.
+GH2E_Soultether_10_B	All your summons' attacks are unaffected by <sprite name=Retaliate>.
+GH2E_Soultether_13_T	+3 <sprite name=Move> if <sprite name=Air> is strong or waning.
+GH2E_Soultether_14_B	Each target suffers <nobr><sprite name=Damage> 2</nobr> after the push.
+GH2E_Soultether_15_B	Control one enemy within <nobr><sprite name=Range> 4</nobr>:
+GH2E_Soultether_16_T	The granted attack targets the 4-hex area (the attacker's hex and three hexes beside it).
+GH2E_Soultether_16_B	On the next three sources of <sprite name=Damage> that would kill one of your summons, negate the <sprite name=Damage> and that summon gains <sprite name=Invisible>, <sprite name=Stun>.
+GH2E_Soultether_17_T	On the next three attacks performed by your summons, add +1 <sprite name=Attack>, <nobr><sprite name=Pierce> 1</nobr> to the attack.
+GH2E_Soultether_17_B	Grant two of your summons the move ability instead, <sprite name=XP1>
+GH2E_Soultether_18_B	<sprite name=Target> all your summons within <nobr><sprite name=Range> 1</nobr>
+GH2E_Soultether_19_T	Whenever this summon kills an enemy, you gain the money token directly instead of placing it in the hex that enemy occupied.
+GH2E_Soultether_20_T	Add +1 <sprite name=Heal> on each target adjacent to two or more allies.
+GH2E_Soultether_20_B	where X is the number of your summons
+GH2E_Soultether_21_B	All allies within <nobr><sprite name=Range> 3</nobr> gain <nobr><sprite name=Retaliate> 1</nobr>, <nobr><sprite name=Range> 3</nobr> while <sprite name=Fire> is strong or waning.
+GH2E_Soultether_22_T	Add +1 <sprite name=Heal> to all heals targeting this summon. At the end of each of this summon's turns, it performs: <nobr><sprite name=Heal> 1</nobr>.
+GH2E_Soultether_23_B	Your summons gain +1 <sprite name=Attack> while <sprite name=Fire> is strong or waning, +1 <sprite name=Move> and <sprite name=Jump> while <sprite name=Air> is strong or waning, and <nobr><sprite name=Shield> 1</nobr> while <sprite name=Dark> is strong or waning.
+GH2E_Soultether_24_T	<sprite name=Target> 1 of your summons, <nobr><sprite name=Range> 4</nobr>
+GH2E_Soultether_24_B	Grant all your summons: <nobr><sprite name=Shield> 1</nobr>, <nobr><sprite name=Retaliate> 1</nobr>
+GH2E_Soultether_25_T	When this summon would die, if there is no character token on this card, instead negate the <sprite name=Damage> and place a character token on this card to summon a Slime Spirit in an empty hex adjacent to this summon.
+GH2E_Soultether_26_T	Grant the target of the heal ability:
+GH2E_Soultether_26_B	Grant two of your summons the attack ability instead, <sprite name=XP1>
+GH2E_Soultether_27_T	Whenever this summon kills an enemy while <sprite name=Dark> is strong or waning, shuffle a <sprite name=Curse> card into the monster attack modifier deck.
+GH2E_Soultether_27_B	<sprite name=Target> 1 ally, <nobr><sprite name=Range> 3</nobr>
+GH2E_Soultether_28_B	<sprite name=RecoverIcon> Recover one card from your lost pile that has a summon action and immediately play that card to perform the summon action. Any summons summoned by that action gain <sprite name=Ward>, <sprite name=Invisible>, and <sprite name=Strengthen>.
+GH2E_Soultether_29_B	All adjacent enemies suffer <nobr><sprite name=Damage> 1</nobr> and gain <sprite name=Muddle>.
+GH2E_Soultether_30_T	Whenever this summon attacks a normal or elite enemy, after the attack ability control that enemy: <nobr><sprite name=Attack> -1</nobr>
+GH2E_Soultether_30_B	Whenever one of your summons is attacked, if that summon does not have <sprite name=Ward>, it gains <sprite name=Ward> after the attack and the attacker suffers <nobr><sprite name=Damage> 1</nobr>.
+GH2E_Soultether_31_T	At end of turn, <sprite name=CreateFire>, <sprite name=CreateAir>, or <sprite name=CreateDark>.
+AMC_GH2E_Soultether_P0_GrantTeleport2	+0, grant one of your summons: <sprite name=Teleport> 2
+AMC_GH2E_Soultether_P1_InvisibleSummon	+1, <sprite name=Invisible>, <sprite name=Target> 1 of your summons
+AMC_GH2E_Soultether_FireAir_P2	+2 Fire or Air
+AMC_GH2E_Soultether_FireDark_P2	+2 Fire or Dark
+AMC_GH2E_Soultether_AirDark_P2	+2 Air or Dark

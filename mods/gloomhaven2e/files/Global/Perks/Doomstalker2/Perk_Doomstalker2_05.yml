@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Doomstalker205
+Name: PERK_Doomstalker2_05_Name
+Description: PERK_Doomstalker2_05_Desc
+CharacterID: Doomstalker2ID
+Available: 2
+CardsToAdd: [AMC_Basic_P3]

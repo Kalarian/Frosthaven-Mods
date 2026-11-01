@@ -1,0 +1,64 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TirelessRetribution$
+Character: Berserker2ID
+ID: 32616
+Level: 3
+Initiative: 7
+# card: Tireless Retribution
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TRetaliate:
+                Retaliate:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+                    ProcXP: 1
+            TDisadvantage:
+                AttackersGainDisadvantage: 1
+                Range: 0
+                Target: -1
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+    Bottom:
+        Abilities:
+            BImprovedShortRest:
+                ImprovedShortRest: True
+                Filter: Self
+                AnimOverload: PowerUp
+        Infuse: Fire
+Layout:
+    Top:
+        - Active:
+            Ability: TRetaliate
+            Icon: Positive_XP_Retaliate
+            ListLayout: "<sprite name=Retaliate> *TRetaliate*, $FHS_GH2E_Berserker2_05_T$"
+            Layout:
+                - Row: "<size=150%><sprite name=Retaliate> *TRetaliate* <size=100%><voffset=1>@TRetaliate@"
+                - Row: "<size=20%> "
+                - Row: "$FHS_GH2E_Berserker2_05_T$"
+        - Divider:
+        - Active:
+            Ability: TDisadvantage
+            Icon: Positive_Disadvantage_Enemy_Attack
+            ListLayout: "$FHS_GH2E_Berserker2_02_B2$"
+            Layout: "$FHS_GH2E_Berserker2_02_B2$"
+    Bottom:
+        - Active:
+            Ability: BImprovedShortRest
+            Icon: Positive_Tide_Rest
+            ListLayout: "$FHS_GH2E_Berserker2_16_B$"
+            Layout: "$FHS_GH2E_Berserker2_16_B$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Fire
+            - Column:

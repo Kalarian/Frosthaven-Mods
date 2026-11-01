@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BurningPassion$
+Character: SoultetherID
+ID: 33508
+Level: 1
+Initiative: 12
+# card: Burning Passion
+# top: Strengthen, target 2, range 4 (self or allies, as a ranged heal).
+# bottom: "negate the next damage one of your summons would suffer this round": Frosthaven's full negation
+# (PreventFirstDamage, PreventDamage 99, as Banner of Valor) as a round aura on your summons, one use (XPTracker [0]).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TStrengthen:
+                Strengthen:
+                    DiamondPlusEnhancements: 1
+                Target: 2
+                Range: 4
+                Filter: [Self, Ally]
+                AnimOverload: TargetedBuff
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BPrevent:
+                PreventDamage: 99
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: PreventFirstDamage
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: OwnSummon
+                    XPTracker: [0]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Strengthen>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TStrengthen.Target* <sprite name=Range> *TStrengthen.Range*</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Fire
+    Bottom:
+        - Active:
+            Ability: BPrevent
+            Icon: Positive_DamagePrevent_Summon
+            ListLayout: "$FHS_GH2E_Soultether_08_B$"
+            Layout: "$FHS_GH2E_Soultether_08_B$"

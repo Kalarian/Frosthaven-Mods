@@ -1,0 +1,21 @@
+Parser: Character
+ID: Spellweaver2ID
+LocKey: $Spellweaver2$
+Model: Spellweaver
+Race: Orchid
+Traits: [ Arcane, Educated, Resourceful ]
+Complexity: 3
+ElementalAffinities: [ Fire, Ice ]
+MasteryIDs: [ Spellweaver2_MASTERY_1 ]
+DefaultSkin: 1
+# PlayerLevel:  [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
+HealthTable: [ 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+NumberAbilityCardsInBattle: 8
+Description: $Spellweaver2_DESCRIPTION$
+HeroStats:
+    Melee: 1
+    Ranged: 5
+    Mobility: 2
+    Support: 2
+    Defense: 1
+    Control: 3

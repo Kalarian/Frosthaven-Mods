@@ -1,0 +1,60 @@
+# card: Change Tempo
+# top: Blinkblade Experimental Adjustment's two-condition NullTargeting, in Secretariat's triangle area
+# (0,1) (1,0) (1,1) + (2,0) hex mark
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TConditions:
+                NullTargeting: True
+                Range: 4
+                Target: -1
+                AreaEffect: "2,1,R|1,0,R|3,0,R|4,1,E"
+                Filter: Enemy
+                Conditions: [Immobilize, Muddle]
+                MiscVars:
+                    IsNegative: True
+                AnimOverload: AggressiveTargetedShout
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerHighNote", 1]
+    Bottom:
+        Abilities:
+            BCurse:
+                Curse:
+                    Enhancements: 1
+                Range: 4
+                Filter: Enemy
+                AnimOverload: AggressiveTargetedShout
+            BBless:
+                Bless:
+                    Enhancements: 1
+                Range: 4
+                Filter: [Self, Ally]
+                AnimOverload: PlayPositiveTune
+            BNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Immobilize$ <sprite name=Immobilize> $Muddle$ <sprite name=Muddle>"
+        - Row: "$Range$ <sprite name=Range> *TConditions.Range*"
+        - Row: "£TConditions.Area£"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_HIGH$"
+    Bottom:
+        - Row: "<b><size=130%>$Curse$ <sprite name=Curse> <size=100%><voffset=1>@BCurse@"
+        - Row: "$Range$ <sprite name=Range> *BCurse.Range*"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Bless$ <sprite name=Bless> <size=100%><voffset=1>@BBless@"
+        - Row: "$Range$ <sprite name=Range> *BBless.Range*"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_LOW$"

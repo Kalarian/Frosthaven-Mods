@@ -1,0 +1,47 @@
+# card: Symphonic Medley
+# bottom: up to three song actions from the hand (Banner Spear Hail of Spears' SelectAndPlayCard; a song action is a
+# top whose abilities include TSongNotes); the 1-, 2- and 3-Note split is not enforced (NOTES.md)
+Discard: [Discard,Permanently Lost]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 2
+                    Enhancements: 1
+            TAttack:
+                Attack: 3
+                Range:
+                    Amount: 2
+                    Enhancements: 1
+                AnimOverload: RangedAttack
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+    Bottom:
+        Abilities:
+            BPlaySongs:
+                Filter: Self
+                SelectAndPlayCard:
+                    CardPile: Hand
+                    Amount: 3
+                    MinRequiredCards: 0
+                MiscVars:
+                    IsActionValid: Action.Abilities.Any(obj.Name == 'TSongNotes')
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_LOW$"
+    Bottom:
+        - Row: "$GH2E_Soothsinger2_17_B$"
+        - Row: "<size=50%> "
+        - XP: 1

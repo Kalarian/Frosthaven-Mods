@@ -1,0 +1,90 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ForestsBlessing$
+Character: WildfuryID
+ID: 33619
+Level: 4
+Initiative: 44
+# card: Forest's Blessing
+# top: Heal 4 [diamond+], Range 3 [square], Bless (on the heal target), infuse Air. bottom: Attack 3 [diamond],
+# Target 2 [square], Range 4, Poison; Heal 3 [diamond+], Target 2 [square], Range 4, Strengthen (on the heal targets);
+# infuse Air and Earth (two full circles: both); XP 2, lost.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 4
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Conditions: [Bless]
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: Air
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 4
+                Conditions: Poison
+                MultiPassAttack: False
+                AnimOverload: RangedAttack
+            BHeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 4
+                Conditions: [Strengthen]
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: [Air, Earth]
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range* @THeal.Range@</link>"
+                - Row: "<link=fhpill>, <sprite name=Bless></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Air
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *BAttack.Target* @BAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*, <sprite name=Poison></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *BHeal.Target* @BHeal.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range*, <sprite name=Strengthen></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,20,20,20"
+            - Column:
+            - Column:
+                - Infuse: Air
+            - Column:
+                - Infuse: Earth
+            - Column:

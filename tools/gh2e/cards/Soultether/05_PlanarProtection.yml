@@ -1,0 +1,43 @@
+# card: Planar Protection
+# top: Disarm, range 4 (a condition ability, no attack, no mark).
+# bottom: Rift Spirit (summons/RiftSpirit.yml): Attack 0 + Muddle; its end-of-turn Shield 1 grant is the summon's own
+# end-of-turn ability, aimed by its AI (NOTES.md).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TDisarm:
+                Disarm: True
+                Range: 4
+                Target: 1
+                Filter: Enemy
+                AnimOverload: CastNegative
+    Bottom:
+        Abilities:
+            BSummon:
+                Summon: RiftSpiritID
+                AnimOverload: Summon
+        XP: 1
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Disarm$ <sprite name=Disarm>"
+        - Row: "$Range$ <sprite name=Range> *TDisarm.Range*"
+    Bottom:
+        - Active:
+            Ability: BSummon
+            Icon: Summon
+            Layout:
+                - Summon:
+                    Ability: BSummon
+                    SummonName: $GH2E_SUMMON_RiftSpirit$
+                    SpecialText:
+                        - Row: "<nobr>$Muddle$ <sprite name=Muddle></nobr>"
+                        - Row: "$GH2E_Soultether_05_B$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 1
+            - Column:
+                - Duration: Persistent

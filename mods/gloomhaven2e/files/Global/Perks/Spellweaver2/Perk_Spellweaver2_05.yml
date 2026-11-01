@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Spellweaver205
+Name: PERK_Spellweaver2_05_Name
+Description: PERK_Spellweaver2_05_Desc
+CharacterID: Spellweaver2ID
+Available: 2
+CardsToAdd: [AMC_Stun_P1]

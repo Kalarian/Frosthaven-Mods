@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MassHysteria$
+Character: Mindthief2ID
+ID: 32220
+Level: 5
+Initiative: 11
+# card: Mass Hysteria
+# written from tools/gh2e/sheets/Mindthief.json (Xipe's 99165 agreed); bottom = the 1st edition Corrupting Embrace
+# bottom's shape (poison along a jump's path)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+                Target: 4
+                Range: 4
+                Pierce: 3
+                Conditions: Muddle
+                AnimOverload: MindAttack
+        Infuse: Ice
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    SquareEnhancements: 1
+                    Jump: True
+                AllTargetsOnMovePath: True
+                Conditions: Poison
+        Infuse: Dark
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <sprite name=Range> *TAttack.Range* <sprite name=Pierce> *TAttack.Pierce*, <sprite name=Muddle></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Ice
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Mindthief2_20_B$"
+        - Row: "<size=20%> "
+        - Infuse: Dark

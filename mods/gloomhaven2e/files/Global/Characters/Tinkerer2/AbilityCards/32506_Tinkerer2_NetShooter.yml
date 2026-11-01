@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NetShooter$
+Character: Tinkerer2ID
+ID: 32506
+Level: 1
+Initiative: 19
+# card: Net Shooter
+# from Xipe's 99035_Tinkerer2_Net Shooter.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 3
+                Conditions: Immobilize
+                AreaEffect: "0,0,R|2,0,R|1,1,R|3,1,E"
+                MultiPassAttack: False
+                XPPerTarget: 1
+                AnimOverload: LeftWristTechNetShooter
+    Bottom:
+        Abilities:
+            BImmobilize:
+                Immobilize:
+                    DiamondEnhancements: 1
+                Range: 1
+                Filter: Enemy
+                AnimOverload: GadgetAdjacentNetShooter
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - ColumnWidths: "65,35"
+        - Column:
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Immobilize></link>"
+                - Column:
+            - Row: "$FHS_XP_PerEnemy$"
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Immobilize> <size=100%><voffset=1>@BImmobilize@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BImmobilize.Range*</link>"
+            - Column:
+        - Divider:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

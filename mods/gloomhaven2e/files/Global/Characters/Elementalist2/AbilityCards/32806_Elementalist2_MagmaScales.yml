@@ -1,0 +1,108 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MagmaScales$
+Character: Elementalist2ID
+ID: 32806
+Level: 1
+Initiative: 14
+# card: Magma Scales
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyMove:
+                            Move:
+                                Amount: 2
+                                Jump: True
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                    ControlActorType: Player
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: Ally
+                AnimOverload: ControlAlly
+        Consumes:
+            TCAir:
+                Elements: Air
+                Infuse: [Air]
+                AbilityOverrides:
+                    TCAirDisarm:
+                        ParentName: TAlly
+                        SubAbilities:
+                            TAllyDisarm:
+                                Disarm: True
+                                Range: 1
+                                Target: 1
+                                Filter: Enemy
+                                AllTargetsAdjacentToParentTargets: True
+                                TreatAsNonSubAbility: True
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyShield:
+                            Shield:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                            Filter: Self
+                            ActiveBonusDuration: Round
+                            UseOriginalActor: True
+                            AnimOverload: TargetedBuff
+                        BAllyRetaliate:
+                            Retaliate:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                            Filter: Self
+                            ActiveBonusDuration: Round
+                            UseOriginalActor: True
+                            AnimOverload: TargetedBuff
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: Ally
+                AnimOverload: ControlAlly
+        Infuse: [Fire, Earth]
+        XP: 2
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Elementalist2_GRANT_R3$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "$FHS_GH2E_Elementalist2_06_T$"
+    Bottom:
+        - Row: "$FHS_GH2E_Elementalist2_GRANT_R3$"
+        - Row: "<size=20%> "
+        - Active:
+            Ability: BAllyShield
+            ListLayout: "<size=150%><sprite name=Shield> *BAllyShield*"
+            Layout: "<size=150%><sprite name=Shield> *BAllyShield* <size=100%><voffset=1>@BAllyShield@"
+            Icon: Positive_Shield
+        - Active:
+            Ability: BAllyRetaliate
+            ListLayout: "<size=150%><sprite name=Retaliate> *BAllyRetaliate*"
+            Layout: "<size=150%><sprite name=Retaliate> *BAllyRetaliate* <size=100%><voffset=1>@BAllyRetaliate@"
+            Icon: Positive_Retaliate
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "50, 50"
+            - Column:
+                - Infuse: Fire
+            - Column:
+                - Infuse: Earth

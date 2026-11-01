@@ -1,0 +1,8 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Elementalist2_IceAir_P0
+MathModifier: "+0"
+Abilities:
+    InfuseAbility:
+        Infuse: [Ice, Air]
+        ShowElementPicker: True
+        CanUndo: False

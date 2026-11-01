@@ -1,0 +1,20 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Soothsinger2_GrantAlly_R
+MathModifier: "+0"
+Rolling: True
+ControlTargetingActor: True
+Abilities:
+    ControlAbility:
+        ControlActor:
+            Abilities:
+                AAllyMove:
+                    Move: 2
+                    StrengthIsBase: True
+                AAllyAttack:
+                    Attack: 2
+                    Range: 1
+                    StrengthIsBase: True
+                    RangeIsBase: True
+        Range: 99
+        Filter: Ally
+        AnimOverload: Grant

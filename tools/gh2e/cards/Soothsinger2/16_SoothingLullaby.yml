@@ -1,0 +1,60 @@
+# card: Soothing Lullaby
+# top: song (High Note); "Heal 1, target all" with no range = you and all allies anywhere (Sunkeeper2 Engulfing Radiance)
+# bottom: APPROXIMATION: the marked monster's Disarm is given now (NOTES.md)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TSong:
+                AddActiveBonus:
+                    Heal: 1
+                    Target: -1
+                    Targeting: All
+                    Filter: [Self, Ally]
+                    AnimOverload: PlayPositiveTune
+                Filter: Self
+                AnimOverload: PlaySongHealing1
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [1,0,0]
+            TSongNotes:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Ability
+                    Hidden: True
+                    RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+    Bottom:
+        Abilities:
+            BDisarm:
+                Disarm: True
+                Range: 3
+                Target: 1
+                Filter: Enemy
+                AnimOverload: AggressiveTargetedShout
+            BNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+Layout:
+    Top:
+        - Row: "$GH2E_Soothsinger2_16_T$"
+        - Active:
+            Ability: TSong
+            Icon: "Positive_Heal"
+            ListLayout: "$GH2E_Soothsinger2_16_T2$"
+            Layout: "$GH2E_Soothsinger2_16_T2$"
+        - Row: "<size=20%> "
+        - XPTracker: TSong
+    Bottom:
+        - Row: "$GH2E_Soothsinger2_16_B$"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_LOW$"
+        - Row: "<size=50%> "
+        - Duration: Round

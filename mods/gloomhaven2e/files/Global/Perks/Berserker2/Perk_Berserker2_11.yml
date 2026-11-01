@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Berserker211
+Name: PERK_Berserker2_11_Name
+Description: PERK_Berserker2_11_Desc
+CharacterID: Berserker2ID
+Available: 1
+Cost: 3
+Flags: [Passive]

@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Sawbones206
+Name: PERK_Sawbones2_06_Name
+Description: PERK_Sawbones2_06_Desc
+CharacterID: Sawbones2ID
+Available: 2
+CardsToAdd: [AMC_GH2E_Sawbones2_Heal3Range1_R]

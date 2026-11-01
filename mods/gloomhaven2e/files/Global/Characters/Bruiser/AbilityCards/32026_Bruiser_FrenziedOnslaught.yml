@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FrenziedOnslaught$
+Character: BruiserID
+ID: 32026
+Level: 8
+Initiative: 41
+# card: Frenzied Onslaught
+# 2e sheet: top Move 2 [circle], Attack 3 [square], Move 2 [circle], Attack 3 [diamond]; bottom Heal X self, X = the
+# damage you have dealt this turn.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TMove1:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            TAttack1:
+                Attack:
+                    Amount: 3
+                    SquareEnhancements: 1
+            TMove2:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            TAttack2:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal: 0
+                Filter: Self
+                AnimOverload: Heal
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: DamageInflictedThisTurn
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Move> *TMove1* <size=100%><voffset=1>@TMove1@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Move> *TMove2* <size=100%><voffset=1>@TMove2@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+    Bottom:
+        - Row: "<size=150%><sprite name=Heal> X <size=100%>"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Bruiser_26_B$"

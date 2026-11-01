@@ -1,0 +1,7 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Quartermaster2_Muddle_P0
+MathModifier: "+0"
+AbilityOverrides:
+    NegCon:
+        ParentName: AMC_GH2E_Quartermaster2_Muddle_P0
+        Conditions: [Muddle]

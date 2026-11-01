@@ -1,0 +1,74 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FormlessPower$
+Character: Elementalist2ID
+ID: 32803
+Level: 1
+Initiative: 45
+# card: Formless Power
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 3
+                AnimOverload: ProjectileFormless
+        Consumes:
+            TCAnyXP:
+                Elements: Any
+                AbilityOverrides:
+                    TCAnyAttackBuff1:
+                        ParentName: TAttack
+                        Strength: 1
+                        Range: 1
+                XP: 1
+            TCAnyNoXP:
+                Elements: Any
+                AbilityOverrides:
+                    TCAnyAttackBuff2:
+                        ParentName: TAttack
+                        Strength: 1
+                        Range: 1
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 1
+                Filter: [Self]
+                ActiveBonus:
+                    Behaviour: BuffAttack
+                    Duration: Persistent
+                    ValidAbilityType: Attack
+                    Consuming: Any
+                    IsToggleBonus: True
+                    Restriction: OncePerAction
+                    EntireAction: True
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAnyXP
+                    Text: "+1 <sprite name=Attack>, +1 <sprite name=Range>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAnyNoXP
+                    Text: "+1 <sprite name=Attack>, +1 <sprite name=Range>"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$FHS_GH2E_Elementalist2_03_B$"
+            Layout: "$FHS_GH2E_Elementalist2_03_B$"
+            Icon: Positive_AttackPlus

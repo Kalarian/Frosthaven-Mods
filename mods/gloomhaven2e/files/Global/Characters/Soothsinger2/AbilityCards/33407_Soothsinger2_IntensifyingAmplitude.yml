@@ -1,0 +1,62 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_IntensifyingAmplitude$
+Character: Soothsinger2ID
+ID: 33407
+Level: 1
+Initiative: 56
+# card: Intensifying Amplitude
+# bottom: APPROXIMATION: +X (0,1,2,3,4 over the five attacks) is a flat +2 on each of the five: the same +10 in all
+# (Sunkeeper2 Sanctify's ally attack aura, any range, allies only)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range: 3
+                Conditions: Wound
+                AnimOverload: RangedAttack
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 2
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    ValidAbilityType: Attack
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter:
+                        TargetType: Ally
+                    XPTracker: [0,1,0,1,0]
+                AnimOverload: PositiveBuffRadial
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Wound></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_LOW$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Positive_AttackPlus_Ally_Aura
+            ListLayout: "$FHS_GH2E_Soothsinger2_07_B$"
+            Layout: "$FHS_GH2E_Soothsinger2_07_B$"
+        - Row: "<size=100%> "
+        - XPTracker: BActive

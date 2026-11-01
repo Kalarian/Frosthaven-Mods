@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GiantClub$
+Character: Quartermaster2ID
+ID: 33120
+Level: 4
+Initiative: 40
+# card: Giant Club
+# top: Attack 5 [diamond], Muddle (no mark).
+# bottom: Move 6 [circle]; "give up to four chosen class items to allies adjacent to any hex you entered; 10 supplies
+#   per ally given": APPROXIMATION, every ally adjacent to you after the move recovers one spent or lost item (NEEDS
+#   PLUGIN: allies along the path, the item choice), and you gain 10 supplies per ally targeted (PerformVars on the
+#   give, 10 x ActorsTargeted.Count; UNVERIFIED expression). XP 2, lost.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Conditions: Muddle
+                AnimOverload: HeavyAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 6
+                    CircleEnhancements: 1
+            BGive:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Range: 1
+                Target: -1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                PerformVars:
+                    OnAbilityEnded:
+                        GainSupplies: AbilityHasHappened && TargetingActor.AddCharacterResource("Supplies", 10 * ActorsTargeted.Count)
+                AnimOverload: Refresh
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Muddle></link>"
+            - Column:
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Quartermaster2_20_B$"

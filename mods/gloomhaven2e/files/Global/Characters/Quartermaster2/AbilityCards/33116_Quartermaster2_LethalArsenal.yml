@@ -1,0 +1,43 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LethalArsenal$
+Character: Quartermaster2ID
+ID: 33116
+Level: 2
+Initiative: 18
+# card: Lethal Arsenal
+# top: Attack 3 [diamond]; gain the Sharpened Dirk and Sturdy Spear: APPROXIMATION, recover two spent or lost items
+#   (NEEDS PLUGIN); XP 2, lost.
+# bottom: Attack 2 [square]; Move 1 [circle].
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+            TGive:
+                RefreshItems: 2
+                SlotStateToRefresh: [Spent, Consumed]
+                Filter: Self
+                AnimOverload: Refresh
+        XP: 2
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+            BMove:
+                Move:
+                    Amount: 1
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Quartermaster2_16_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

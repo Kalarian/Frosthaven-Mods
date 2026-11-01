@@ -1,0 +1,89 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HeavingSwing$
+Character: Cragheart2ID
+ID: 32112
+Level: X
+Initiative: 57
+# card: Heaving Swing
+# from Xipe's 99127_Cragheart2_Heaving Swing.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: push into obstacles, the 1st edition card's shape (play-tested)
+# bottom: the cost is Frosthaven's own "suffer damage or destroy an adjacent obstacle" choice (Pyroclast Obsidian
+# Shield bottom), then a round bonus of +3 on the next melee attack (one use: XPTracker [0], as Pyroclast Hardened Spike)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 1
+                            SquareEnhancements: 1
+                        IsInlineSubAbility: True
+                        AdditionalPushEffect: IntoObstacles
+                        AdditionalPushEffectDamage: 2
+                        AdditionalPushEffectXP: 1
+    Bottom:
+        Abilities:
+            BCost:
+                Filter: Self
+                CanSkip: False
+                HelpBoxTooltipLocKey: "$GH2E_Cragheart2_12_B2$"
+                Choose:
+                    Abilities:
+                        BDamageSelf:
+                            Damage: 1
+                            Filter: Self
+                            AutoTrigger: True
+                            PreviewEffectText: "<sprite name=Damage>1"
+                        BDestroyObstacle:
+                            CanSkip: False
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateHasNearbyObstacle: GameState.GetTilesInRange(Actor, 1).Where(obj.FindObstacleProp(true, true) != null).Count > 0
+                            PreviewEffectText: "$OBSTACLE_TOOLTIP$"
+                            NullHex: True
+                            Range: 1
+                            TileFilter: Custom
+                            MiscVars:
+                                IsValidTile: obj.FindObstacleProp(true, true) != null
+                                DontCancelIfNoTiles: True
+                                DontPreviewDescription: True
+                                SelectMultiHexProps: True
+                            AnimOverload: ObstacleDestruction
+                            PerformVars:
+                                Perform:
+                                    SelectedTile: TilesSelected[0]
+                                    Prop: SelectedTile.FindObstacleProp(true, true)
+                                    DestroyProp: Prop.DestroyPropFromAbility(obj)
+            BActive:
+                Attack: 3
+                Filter: Self
+                AutoTrigger: True
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    AttackType: Melee
+                    XPTracker: [0]
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Push> *TAttackSubPush* @TAttackSubPush@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Cragheart2_12_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$FHS_GH2E_Cragheart2_12_B3$"
+            Layout: "$FHS_GH2E_Cragheart2_12_B$"
+            Icon: Positive_AttackPlus

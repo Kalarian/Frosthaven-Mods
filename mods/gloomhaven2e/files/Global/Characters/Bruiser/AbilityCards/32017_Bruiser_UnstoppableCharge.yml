@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_UnstoppableCharge$
+Character: BruiserID
+ID: 32017
+Level: 3
+Initiative: 86
+# card: Unstoppable Charge
+# 2e sheet: top Attack 3 [diamond], "add +2 Attack and gain XP 1 if you have moved this turn"; bottom Move 4 [square],
+# Stun [diamond] target all, range 1, XP 2, lost. The bonus is a conditional override on the attack (the 1st edition
+# Hatchet's Fearsome Efficiency shape: Requirement, XP, Strength), required HexesMovedThisTurn >= 1, in place of
+# Xipe's separate round bonus.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                AnimOverload: Attack_AOE_Cone
+                ConditionalOverrides:
+                    TAttackCO:
+                        Requirement:
+                            HexesMovedThisTurn: ">= 1"
+                        XP: 1
+                        AbilityOverrides:
+                            TMovedBuff:
+                                Strength: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    SquareEnhancements: 1
+            BStun:
+                Stun:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Filter: Enemy
+                Range: 1
+                Target: -1
+                AnimOverload: RadialShout
+        XP: 2
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Bruiser_17_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Stun> <size=100%><voffset=1>@BStun@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:

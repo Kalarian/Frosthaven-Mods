@@ -1,0 +1,15 @@
+Parser: HeroSummon
+ID: GreatArchinotlID
+LocKey: $GH2E_SUMMON_GreatArchinotl$
+# stand-in model: the 1st edition Swamp Lizard (NOTES.md). Its extra turn at initiative 100 is text only (NEEDS PLUGIN).
+Model: SwampLizard
+Health:
+    Amount: 8
+    SquareEnhancements: 1
+Move:
+    Amount: 4
+    SquareEnhancements: 1
+Attack:
+    Amount: 3
+    SquareEnhancements: 1
+Range: 1

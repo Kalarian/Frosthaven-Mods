@@ -1,0 +1,19 @@
+Parser: Perk
+ID: Bruiser11
+Name: PERK_Bruiser_11_Name
+Description: PERK_Bruiser_11_Desc
+CharacterID: BruiserID
+Available: 1
+Flags: [Passive, ExecuteAbilitiesAfterLongRest]
+Abilities:
+    TRested:
+        Move: 1
+        MiscVars:
+            PrintedProperties: list("Move")
+        Filter: Self
+        SkipAnim: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: BuffMove
+            XPTracker: [0]
+            ListLayoutOverride: [$PERK_Bruiser_11_Bonus$, Positive_MovePlus]

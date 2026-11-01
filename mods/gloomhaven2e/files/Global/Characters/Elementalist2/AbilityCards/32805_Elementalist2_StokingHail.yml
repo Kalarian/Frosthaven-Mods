@@ -1,0 +1,63 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StokingHail$
+Character: Elementalist2ID
+ID: 32805
+Level: 1
+Initiative: 29
+# card: Stoking Hail
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: TargetFloorIce
+        Consumes:
+            TCIce:
+                Elements: Ice
+                Infuse: [Ice]
+                AbilityOverrides:
+                    TCIceBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Pierce: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    SquareEnhancements: 1
+                ConditionalOverrides:
+                    BMoveCO:
+                        Requirements:
+                            Vars:
+                                ValidateElementStrongOrWaning: ElementInfusionBoardManager.GetAvailableElements().Count > 0
+                        AbilityOverrides:
+                            BMoveBuff:
+                                Strength: 1
+        Infuse: Air
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCIce
+                    Text: "+1 <sprite name=Attack>, <sprite name=Pierce> 2, <sprite name=CreateIce>"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$FHS_GH2E_Elementalist2_MOVE_IF_ELEMENT$"
+        - Row: "<size=20%> "
+        - Infuse: Air

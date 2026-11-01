@@ -1,0 +1,28 @@
+Parser: Character
+ID: Quartermaster2ID
+LocKey: $Quartermaster2$
+Model: Quartermaster
+Race: Valrath
+Traits: [ Armored, Resourceful, Strong ]
+Complexity: 2
+DefaultSkin: 1
+# PlayerLevel:    [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
+HealthTable: [ 10, 12, 14, 16, 18, 20, 22, 24, 26 ]
+NumberAbilityCardsInBattle: 11
+Description: $Quartermaster2_DESCRIPTION$
+StartScenarioAbilities:
+    QuartermasterSupplies:
+        NullTargeting: True
+        Filter: Self
+        ResourcesToAddOnAbilityEnd:
+            - ["Supplies", 10]
+        AutoTrigger: True
+        CanSkip: False
+        SkipAnim: True
+HeroStats:
+    Melee: 4
+    Ranged: 2
+    Mobility: 2
+    Support: 3
+    Defense: 3
+    Control: 2

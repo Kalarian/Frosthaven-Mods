@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CleaveandThrust$
+Character: Quartermaster2ID
+ID: 33108
+Level: 1
+Initiative: 39
+# card: Cleave and Thrust
+# top: Attack 4 [diamond], triangle (G 0,0; R 1,1 2,0) with the hex mark down-right of the grey hex (1,-1; GHS lacks
+#   it); give the Sturdy Spear to one ally within range 2 (XP 1): APPROXIMATION, recover one spent or lost item
+#   (NEEDS PLUGIN). Corner XP 1 + give XP 1 = half XP 2. Lost.
+# bottom: Move 2 [circle]; gain 10 supplies.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                AreaEffect: "0,0,G|1,1,R|2,0,R|1,-1,E"
+                MultiPassAttack: False
+                AnimOverload: SlamAttack
+            TGive:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Range: 2
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: Refresh
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BSupplies:
+                Null: True
+                Filter: Self
+                ResourcesToAddOnAbilityEnd:
+                    - ["Supplies", 10]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<size=50%> "
+            - Row: "$FHS_GH2E_Quartermaster2_08_T$"
+        - Column: "£Area£"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Quartermaster2_SUPPLIES10$"

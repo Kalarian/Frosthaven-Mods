@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EyeforanEye$
+Character: BruiserID
+ID: 32002
+Level: 1
+Initiative: 13
+# card: Eye for an Eye
+# 2e sheet: top Shield 1, Retaliate 1, "gain XP 1 the next time you retaliate this round", round; bottom Heal 3
+# [square] self, infuse Earth. The XP rides on the round retaliate as ProcXP (the 1st edition Eye for an Eye's shape):
+# XP each time this retaliate triggers this round, not only the first (NOTES.md).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TShield:
+                Shield: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+            TRetaliate:
+                Retaliate: 1
+                ActiveBonus:
+                    Duration: Round
+                    ProcXP: 1
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: Self
+                AnimOverload: Heal
+        Infuse: Earth
+Layout:
+    Top:
+        - Active:
+            Ability: TShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *TShield*"
+            Layout:
+                - Row: "<size=150%><sprite name=Shield> *TShield*"
+        - Divider:
+        - Active:
+            Ability: TRetaliate
+            Icon: Positive_XP_Retaliate
+            ListLayout: "<sprite name=Retaliate> *TRetaliate*, $FHS_GH2E_Bruiser_02_T$"
+            Layout:
+                - Row: "<size=150%><sprite name=Retaliate> *TRetaliate*"
+                - Row: "<size=20%> "
+                - Row: "$FHS_GH2E_Bruiser_02_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "<size=20%> "
+        - Infuse: Earth

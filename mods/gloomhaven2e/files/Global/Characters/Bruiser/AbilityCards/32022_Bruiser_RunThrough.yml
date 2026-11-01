@@ -1,0 +1,70 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RunThrough$
+Character: BruiserID
+ID: 32022
+Level: 6
+Initiative: 33
+# card: Run Through
+# 2e sheet: top Attack 3 [diamond], Pierce 2, "+1 Attack on each undamaged target", 3 hexes in a diagonal line with the
+# hex mark on the next hex beyond the last red; bottom Move 3 [circle], Push 1 [square] range 1, Immobilize. The area is
+# the 1st edition Skewer's (a line drawn diagonally) one hex longer; the enhancement hex goes beyond the line (Xipe put
+# it on the last red hex, 6,0). Undamaged = full hit points, as Sweeping Blow. The bottom push carries the immobilize
+# (Frosthaven's pull/push with Conditions, Banner Spear's Taunting Howl).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                    Pierce: 2
+                AreaEffect: "0,0,G|2,0,R|4,0,R|6,0,R|8,0,E"
+                AreaEffectLayoutOverride: "0,0,G|1,1,R|2,2,R|3,3,R|4,4,E"
+                AnimOverload: Attack_AOE_Radial
+                MultiPassAttack: False
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            TargetType: Enemy
+                            TargetMissingHP: "== 0"
+                        AbilityOverrides:
+                            TUndamagedBuff:
+                                Strength: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BPush:
+                Push:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range: 1
+                Conditions: Immobilize
+                AnimOverload: TargetedShout
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Pierce> *TAttack.Pierce*</link>"
+                - Column:
+            - Row: "<size=20%> "
+            - Row: "$FHS_GH2E_Bruiser_22_T$"
+        - Column: "£Area£"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Immobilize></link>"
+            - Column:

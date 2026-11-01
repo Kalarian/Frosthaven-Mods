@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TheHuntBegins$
+Character: Doomstalker2ID
+ID: 32707
+Level: 1
+Initiative: 20
+# card: The Hunt Begins
+# top: "undamaged" read as full hit points (the 1st edition Fresh Kill: Health == 100%).
+# bottom: the 1st edition The Hunt Begins doom (summons' attacks on the doomed enemy buffed), +1. "Your summons focus on
+# this enemy": text only (Frosthaven's summons are steered by the player; NEEDS PLUGIN for the focus rule itself).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            Health: == 100%
+                        AbilityOverrides:
+                            TUndamagedBuff:
+                                Strength: 2
+                        XP: 1
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomAttackDebuff:
+                                Attack: 1
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    Filter:
+                                        ActorType: Summon
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTargetAlt
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Doomstalker2_07_T$"
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_Doomstalker2_07_B$"
+            Layout:
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH2E_Doomstalker2_07_B$"
+                - Row: "$FHS_Doom_DiscardReminderText$"

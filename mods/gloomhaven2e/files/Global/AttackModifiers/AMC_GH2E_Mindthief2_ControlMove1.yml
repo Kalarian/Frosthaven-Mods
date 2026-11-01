@@ -1,0 +1,16 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Mindthief2_ControlMove1
+MathModifier: "+0"
+Abilities:
+    ControlAbility:
+        ControlActor:
+            Abilities:
+                EnemyWillDoThis:
+                    Move: 1
+                    StrengthIsBase: True
+            ControlDurationType: ControlForOneAction
+            ControlActorType: Player
+        Filter: Enemy
+        AnimOverload: MindControl
+        Vars:
+            TargetThisActorAutomatically: TargetActor

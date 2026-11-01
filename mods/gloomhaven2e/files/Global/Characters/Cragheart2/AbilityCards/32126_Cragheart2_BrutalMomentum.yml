@@ -1,0 +1,83 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BrutalMomentum$
+Character: Cragheart2ID
+ID: 32126
+Level: 7
+Initiative: 37
+# card: Brutal Momentum
+# from Xipe's 99141_Cragheart2_Brutal Momentum.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: +1 Attack and +1 Push for each hex adjacent to YOU with an obstacle or a wall (Xipe: adjacent to the target,
+#   attack only), counted as Frosthaven's Pyroclast Under Pressure counts them (CAbilityFilter.ObstacleIsAdjacent +
+#   GetAdjacentWallCount) and added as Metal Mosaic Ancient Drill adds a Vars value (StatIsBasedOnX AddTo)
+# bottom: at the start of your next four turns: Move 3, then +3 on your next melee attack that turn (a one-use turn
+#   bonus as a sub-ability of the move); Xipe's extra Move 3 on play removed. Bench first.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: Vars
+                        AddTo: True
+                        Vars:
+                            Value: CAbilityFilter.ObstacleIsAdjacent(TargetingActor) + CAbilityFilter.GetAdjacentWallCount(TargetingActor)
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 2
+                            SquareEnhancements: 1
+                        AnimOverload: None
+                        IsInlineSubAbility: True
+                        StatIsBasedOnX:
+                            Strength:
+                                BasedOn: Vars
+                                AddTo: True
+                                Vars:
+                                    Value: CAbilityFilter.ObstacleIsAdjacent(TargetingActor) + CAbilityFilter.GetAdjacentWallCount(TargetingActor)
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Move: 3
+                    Filter: Self
+                    SubAbilities:
+                        BMomentumBuff:
+                            Attack: 3
+                            Filter: Self
+                            TreatAsNonSubAbility: True
+                            AutoTrigger: True
+                            SkipAnim: True
+                            ActiveBonus:
+                                Duration: Turn
+                                Behaviour: BuffAttack
+                                AttackType: Melee
+                                XPTracker: [0]
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                    XPTracker: [0,1,0,1]
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Push> *TAttackSubPush* @TAttackSubPush@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Cragheart2_26_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            ListLayout: "$FHS_GH2E_Cragheart2_26_B$"
+            Layout: "$FHS_GH2E_Cragheart2_26_B$"
+            Icon: Positive_MovePlus
+        - Row: "<size=100%> "
+        - XPTracker: BActive

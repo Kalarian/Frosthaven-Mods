@@ -1,0 +1,23 @@
+Parser: Perk
+ID: Sunkeeper209
+Name: PERK_Sunkeeper2_09_Name
+Description: PERK_Sunkeeper2_09_Desc
+CharacterID: Sunkeeper2ID
+Available: 1
+Cost: 2
+Flags: [Passive, ExecuteAbilitiesAfterRoomRevealed, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    AShield:
+        Shield: 1
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        ActiveBonus:
+            Duration: Round
+    ARetaliate:
+        Retaliate: 1
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        ActiveBonus:
+            Duration: Round

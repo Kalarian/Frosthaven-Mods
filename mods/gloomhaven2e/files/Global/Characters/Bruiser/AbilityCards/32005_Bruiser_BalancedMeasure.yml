@@ -1,0 +1,37 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BalancedMeasure$
+Character: BruiserID
+ID: 32005
+Level: 1
+Initiative: 20
+# card: Balanced Measure
+# 2e sheet: top Attack X = hexes moved this turn, XP 1; bottom Move X = damage dealt this turn. The 1st edition
+# Balanced Measure's shape (StatIsBasedOnX).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 0
+                AnimOverload: Attack_AOE_Cone
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: HexesMovedThisTurn
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 0
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: DamageInflictedThisTurn
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> X <size=100%>"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Bruiser_05_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> X <size=100%>"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Bruiser_05_B$"

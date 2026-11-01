@@ -1,0 +1,66 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Flameswell$
+Character: Spellweaver2ID
+ID: 32409
+Level: X
+Initiative: 83
+# card: Flameswell
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 2
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    AttackType: Ranged
+                    IsSingleTargetBonus: True
+                    XPTracker: [0,1,0,1]
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 2
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            BCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    BCIceWard:
+                        ParentName: BHeal
+                        Condition: Ward
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$FHS_GH2E_Spellweaver2_09_T$"
+            Layout: "$FHS_GH2E_Spellweaver2_09_T$"
+            Icon: Positive_AttackRanged_Plus_Range
+        - Row: "<size=100%> "
+        - XPTracker: TActive
+        - Row: "<size=20%> "
+        - Infuse: Fire
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range* @BHeal.Range@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCIce
+                    Text: "<sprite name=Ward>, <sprite name=XP1>"

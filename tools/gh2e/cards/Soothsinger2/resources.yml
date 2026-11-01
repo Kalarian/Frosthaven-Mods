@@ -1,0 +1,10 @@
+SoothsingerHighNote:
+    ID: "SoothsingerHighNote"
+    Sprite: "HoverHatchet"
+    LocKey: "GH2E_Soothsinger2_HIGHNOTE_TOOLTIP"
+    MaxAmount: 2
+SoothsingerLowNote:
+    ID: "SoothsingerLowNote"
+    Sprite: "HoverHatchet"
+    LocKey: "GH2E_Soothsinger2_LOWNOTE_TOOLTIP"
+    MaxAmount: 2

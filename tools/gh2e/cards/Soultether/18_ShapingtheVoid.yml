@@ -1,0 +1,51 @@
+# card: Shaping the Void
+# top: Attack 2, Range 4; then Ward on one figure within range 4 (self or an ally, as a ranged heal).
+# bottom: Teleport 3 [circle]; Heal 1 on all your summons within range 1 (Frosthaven's Voice from Below "target all,
+# range 1" heal, OwnSummon).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    Enhancements: 1
+                Range: 4
+                AnimOverload: RangedAttackDark
+            TWard:
+                Ward:
+                    Enhancements: 1
+                Range: 4
+                Target: 1
+                Filter: [Self, Ally]
+                AnimOverload: TargetedBuff
+        Infuse: Air
+    Bottom:
+        Abilities:
+            BTeleport:
+                Teleport2:
+                    Amount: 3
+                    CircleEnhancements: 1
+                Filter: Self
+                AnimOverload: Teleport Into
+                AnimOverload2: Teleport Outof
+            BHeal:
+                Heal: 1
+                Range: 1
+                Target: -1
+                Filter: OwnSummon
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Ward$ <sprite name=Ward>"
+        - Row: "$Range$ <sprite name=Range> *TWard.Range*"
+        - Row: "<size=50%> "
+        - Infuse: Air
+    Bottom:
+        - Row: "<b><size=130%>$Teleport$ <sprite name=Teleport> *BTeleport* <size=100%><voffset=1>@BTeleport@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*"
+        - Row: "$GH2E_Soultether_18_B$"

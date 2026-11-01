@@ -1,0 +1,14 @@
+Parser: HeroSummon
+ID: Battlebot2ID
+LocKey: $GH2E_SUMMON_BattleBot$
+Model: Battlebot
+Health:
+    Amount: 7
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+    SquareEnhancements: 1
+Attack:
+    Amount: 3
+    SquareEnhancements: 1
+Range: 1

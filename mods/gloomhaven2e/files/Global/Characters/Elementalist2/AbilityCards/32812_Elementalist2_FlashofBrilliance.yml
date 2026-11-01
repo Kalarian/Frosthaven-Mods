@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FlashofBrilliance$
+Character: Elementalist2ID
+ID: 32812
+Level: X
+Initiative: 67
+# card: Flash of Brilliance
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TRecover:
+                RecoverDiscardedCards: 1
+                Range: 3
+                Filter: [Self, Ally]
+                CanSkip: True
+                AnimOverload: Heal
+                Vars:
+                    CardLevel: 1
+        Infuse: Light
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+            BHeal:
+                Heal:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Filter: Self
+                AnimOverload: Heal
+            BInfuse:
+                CanUndo: False
+                CanSkip: False
+                Infuse: [Any]
+                ShowElementPicker: True
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Elementalist2_12_T$"
+        - Row: "<size=20%> "
+        - Infuse: Light
+    Bottom:
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"
+        - Divider:
+        - Row: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "<size=20%> "
+        - Infuse: Any

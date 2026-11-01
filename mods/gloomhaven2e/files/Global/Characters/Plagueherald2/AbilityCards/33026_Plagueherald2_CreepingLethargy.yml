@@ -1,0 +1,72 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CreepingLethargy$
+Character: Plagueherald2ID
+ID: 33026
+Level: 8
+Initiative: 13
+# card: Creeping Lethargy
+# top: Heal 1 "target all" with no range: you and all your allies (Targeting All; "all" on a positive ability = allies
+# and yourself, 2e p.19). -2 Attack per Plague = flat -2 on every enemy with Plague this round (NEEDS PLUGIN for the
+# count). bottom: negate the next damage one adjacent ally with Poison would suffer this round = a one-use damage
+# negation on that ally (PreventDamage -1, the 1st edition Protective Blessing value, one use slot).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Target: -1
+                Targeting: All
+                Filter: [Self, Ally]
+                AnimOverload: RadialPositive
+            TAttackDebuff:
+                Attack: -2
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    ValidAbilityType: Attack
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter:
+                        TargetType: Enemy
+                        TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RadialNegative
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BPrevent:
+                PreventDamage: -1
+                Range: 1
+                Target: 1
+                Filter:
+                    TargetType: Ally
+                    TargetHasNegativeCondition: Poison
+                ActiveBonus:
+                    Duration: Round
+                    XPTracker: [0]
+                AnimOverload: PositiveBuffTargeted
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$FHS_GH2E_Plagueherald2_26_T$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TAttackDebuff
+            Icon: Negative_AttackMinus
+            ListLayout: "$FHS_GH2E_Plagueherald2_26_T2$"
+            Layout: "$FHS_GH2E_Plagueherald2_26_T2$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BPrevent
+            Icon: Positive_DamagePrevent_Ally_Aura
+            ListLayout: "$FHS_GH2E_Plagueherald2_26_B$"
+            Layout: "$FHS_GH2E_Plagueherald2_26_B$"

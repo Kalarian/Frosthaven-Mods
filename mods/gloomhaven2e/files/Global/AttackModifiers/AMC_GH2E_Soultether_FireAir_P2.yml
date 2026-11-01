@@ -1,0 +1,8 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Soultether_FireAir_P2
+MathModifier: "+2"
+Abilities:
+    InfuseAbility:
+        Infuse: [Fire, Air]
+        ShowElementPicker: True
+        CanUndo: False

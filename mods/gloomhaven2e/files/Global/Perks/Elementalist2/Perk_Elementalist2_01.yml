@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Elementalist201
+Name: PERK_Elementalist2_01_Name
+Description: PERK_Elementalist2_01_Desc
+CharacterID: Elementalist2ID
+Available: 1
+CardsToRemove: [AMC_Basic_M1]
+CardsToAdd: [AMC_GH2E_Elementalist2_FireAir_P0]

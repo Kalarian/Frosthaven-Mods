@@ -1,0 +1,14 @@
+Parser: Perk
+ID: Berserker209
+Name: PERK_Berserker2_09_Name
+Description: PERK_Berserker2_09_Desc
+CharacterID: Berserker2ID
+Available: 1
+Flags: [Passive, ExecuteAbilitiesAfterLongRest]
+Abilities:
+    AHeal:
+        Heal: 1
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        CanUndo: False

@@ -1,0 +1,25 @@
+StartScenarioAbilities:
+    StartNoteChoice:
+        Filter: Self
+        AutoTrigger: True
+        CanSkip: False
+        CanUndo: False
+        PreviewEffectText: "High Note / Low Note"
+        Choose:
+            Abilities:
+                StartNoteHigh:
+                    PreviewEffectText: "High Note"
+                    NullTargeting: True
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
+                    ResourcesToAddOnAbilityEnd:
+                        - ["SoothsingerHighNote", 1]
+                StartNoteLow:
+                    PreviewEffectText: "Low Note"
+                    NullTargeting: True
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
+                    ResourcesToAddOnAbilityEnd:
+                        - ["SoothsingerLowNote", 1]

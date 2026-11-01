@@ -1,0 +1,61 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LivingMountain$
+Character: SoultetherID
+ID: 33522
+Level: 5
+Initiative: 19
+# card: Living Mountain
+# top: Rock Colossus (summons/RockColossus2.yml: incoming heals +1, Heal 1 self at the end of its turns).
+# bottom: Teleport 3 [circle]; grant one of your summons a fixed Teleport 3 [square] (Frosthaven's HIVE Recall grant of
+# Teleport2, StrengthIsBase).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: RockColossus2ID
+                AnimOverload: Summon
+        XP: 1
+    Bottom:
+        Abilities:
+            BTeleport:
+                Teleport2:
+                    Amount: 3
+                    CircleEnhancements: 1
+                Filter: Self
+                AnimOverload: Teleport Into
+                AnimOverload2: Teleport Outof
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyTeleport:
+                            Teleport2:
+                                Amount: 3
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                            Filter: Self
+                            AnimOverload: Teleport Into
+                            AnimOverload2: Teleport Outof
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter: OwnSummon
+                AnimOverload: ControlSummon
+Layout:
+    Top:
+        - Active:
+            Ability: TSummon
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_RockColossus$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Muddle></nobr>"
+                        - Row: "<nobr><sprite name=Retaliate> 2</nobr>"
+                        - Row: "$FHS_GH2E_Soultether_22_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Teleport> *BTeleport* <size=100%><voffset=1>@BTeleport@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soultether_GRANT1$"
+        - Row: "<size=150%><sprite name=Teleport> *BAllyTeleport* <size=100%><voffset=1>@BAllyTeleport@"

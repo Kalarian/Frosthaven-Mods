@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Wildfury07
+Name: PERK_Wildfury_07_Name
+Description: PERK_Wildfury_07_Desc
+CharacterID: WildfuryID
+Available: 1
+CardsToAdd: [AMC_Basic_P1]
+Flags: [Passive, IgnoreNegativeScenarioEffects]

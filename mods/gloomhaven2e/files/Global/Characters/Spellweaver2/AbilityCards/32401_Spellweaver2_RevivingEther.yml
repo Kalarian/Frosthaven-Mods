@@ -1,0 +1,43 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RevivingEther$
+Character: Spellweaver2ID
+ID: 32401
+Level: 1
+Initiative: 80
+# card: Reviving Ether
+# top: unrecoverable + lost (the card-stack-with-red-X icon) = Permanently Lost, as the 1st edition card
+Discard: [Permanently Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TRecover:
+                RecoverLostCards: All
+            TInfuse:
+                CanUndo: False
+                CanSkip: False
+                Infuse: [Any]
+                ShowElementPicker: True
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+                    Jump: True
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Spellweaver2_01_T$"
+        - Row: "<size=20%> "
+        - Infuse: Any
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:

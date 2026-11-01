@@ -1,0 +1,55 @@
+# card: Oozing Manifestation
+# top: Slime Spirit (summons/SlimeSpirit2.yml): the first lethal damage is negated (one use, standing for the character
+# token); the second Slime Spirit it should summon is NEEDS PLUGIN.
+# bottom: Teleport 4 [circle]; Poison, range 2 [square] (a condition ability).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: SlimeSpirit2ID
+                AnimOverload: Summon
+        XP: 1
+    Bottom:
+        Abilities:
+            BTeleport:
+                Teleport2:
+                    Amount: 4
+                    CircleEnhancements: 1
+                Filter: Self
+                AnimOverload: Teleport Into
+                AnimOverload2: Teleport Outof
+            BPoison:
+                Poison:
+                    Enhancements: 1
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Target: 1
+                Filter: Enemy
+                AnimOverload: CastNegative
+Layout:
+    Top:
+        - Active:
+            Ability: TSummon
+            Icon: Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_SlimeSpirit$
+                    SpecialText:
+                        - Row: "<nobr>$Poison$ <sprite name=Poison></nobr>"
+                        - Row: "$GH2E_Soultether_25_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 1
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Row: "<b><size=130%>$Teleport$ <sprite name=Teleport> *BTeleport* <size=100%><voffset=1>@BTeleport@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Poison$ <sprite name=Poison>"
+        - Row: "$Range$ <sprite name=Range> *BPoison.Range* @BPoison.Range@"

@@ -1,0 +1,59 @@
+# card: Scroll of Recall
+# top: Pull 2 [square] on one ally, Range 3 [square] (Frosthaven pulls allies: Snowdancer Cross Winds' Filter); Heal 3
+#   [diamond+], Range 1 [square]; infuse Earth (mandatory box).
+# bottom: gain the Barbed Strip: APPROXIMATION, recover one spent or lost item (NEEDS PLUGIN); Pull 2, Target 2,
+#   Range 3, Muddle, no marks (Banner Spear's pull-that-muddles, as Bruiser's Provoking Roar).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPull:
+                Pull:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: Ally
+                AnimOverload: TargetedScroll
+            THeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: [Earth]
+    Bottom:
+        Abilities:
+            BGive:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Filter: Self
+                AnimOverload: Refresh
+            BPull:
+                Pull: 2
+                Target: 2
+                Range: 3
+                Conditions: Muddle
+                Filter: Enemy
+                AnimOverload: TargetedScroll
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Pull$ <sprite name=Pull> *TPull* <size=100%><voffset=1>@TPull@"
+        - Row: "$GH2E_Quartermaster2_13_T$"
+        - Row: "$Range$ <sprite name=Range> *TPull.Range* @TPull.Range@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Range$ <sprite name=Range> *THeal.Range* @THeal.Range@"
+        - Row: "<size=50%> "
+        - Infuse: Earth
+    Bottom:
+        - Row: "$GH2E_Quartermaster2_13_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Pull$ <sprite name=Pull> *BPull*"
+        - Row: "$Target$ <sprite name=Target> *BPull.Target*"
+        - Row: "$Range$ <sprite name=Range> *BPull.Range*"
+        - Row: "$Muddle$ <sprite name=Muddle>"

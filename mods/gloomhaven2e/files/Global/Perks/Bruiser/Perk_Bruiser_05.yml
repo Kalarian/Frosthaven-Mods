@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Bruiser05
+Name: PERK_Bruiser_05_Name
+Description: PERK_Bruiser_05_Desc
+CharacterID: BruiserID
+Available: 2
+CardsToAdd: [AMC_Heal2_Self_P1]

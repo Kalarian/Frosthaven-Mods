@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Elementalist208
+Name: PERK_Elementalist2_08_Name
+Description: PERK_Elementalist2_08_Desc
+CharacterID: Elementalist2ID
+Available: 2
+CardsToAdd: [AMC_GH2E_Elementalist2_Wild_R, AMC_GH2E_Elementalist2_Wild_R]

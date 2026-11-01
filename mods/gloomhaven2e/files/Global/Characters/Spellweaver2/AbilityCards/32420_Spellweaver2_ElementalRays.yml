@@ -1,0 +1,70 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ElementalRays$
+Character: Spellweaver2ID
+ID: 32420
+Level: 6
+Initiative: 15
+# card: Elemental Rays
+# bottom: a condition-only ability (no attack): Curse as the ability (the enhancement mark sits on it) with Stun added by
+# "Condition:", the way the 1st edition port writes "Stun + Curse" on one target (Lull into Oblivion: Condition: Curse)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Target: 2
+                Range: 3
+                AnimOverload: RadialForkedBeam
+                MultiPassAttack: False
+        Consumes:
+            TCAny:
+                Elements: Any
+                AbilityOverrides:
+                    TCAnyAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Range: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BCurse:
+                Curse:
+                    DiamondEnhancements: 1
+                Condition: Stun
+                Target:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Range: 3
+                Filter: Enemy
+                AnimOverload: TargetedDebuff
+        Infuse: Dark
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <sprite name=Range> *TAttack.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAny
+                    Text: "+1 <sprite name=Attack>, +1 <sprite name=Range>, <sprite name=XP1>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Stun>, <sprite name=Curse> <size=100%><voffset=1>@BCurse@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *BCurse.Target* @BCurse.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *BCurse.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Dark

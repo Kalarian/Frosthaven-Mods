@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DeliriumsDanse$
+Character: Plagueherald2ID
+ID: 33011
+Level: X
+Initiative: 68
+# card: Delirium's Danse
+# top: "you may give one ally within range 3 Poison to ..." = Frosthaven's cost-consume (Drifter's Break Through,
+# Deathwalker's Anger of the Dead: a Consumes entry with a CostAbility and the overrides it buys). The class mat allows
+# only an ally without Poison: the ally pick checks it (filter Vars, as Deepwraith's Soul Hunger). bottom: Stun every
+# enemy with Plague (no range printed: any range, NOTES.md).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+        Consumes:
+            TCPoisonAlly:
+                CostAbility:
+                    ParentName: TAttack
+                    Poison: True
+                    Range: 3
+                    Target: 1
+                    Filter:
+                        TargetType: Ally
+                        Vars:
+                            ValidateNoPoison: not target.Tokens.HasKey(CCondition.ENegativeCondition.Poison)
+                    AnimOverload: TargetedDebuff
+                AbilityOverrides:
+                    TCAttackBuff:
+                        ParentName: TAttack
+                        Conditions: [Stun]
+                XP: 1
+    Bottom:
+        Abilities:
+            BStun:
+                Stun: True
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RadialNegativeMajor
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCPoisonAlly
+                    Text: "$FHS_GH2E_Plagueherald2_11_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Stun>"
+        - Row: "$FHS_GH2E_Plagueherald2_11_B$"

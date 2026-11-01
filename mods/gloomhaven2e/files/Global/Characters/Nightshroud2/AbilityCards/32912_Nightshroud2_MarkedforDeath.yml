@@ -1,0 +1,71 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MarkedforDeath$
+Character: Nightshroud2ID
+ID: 32912
+Level: X
+Initiative: 84
+# card: Marked for Death
+# top: the mark = a persistent active bonus placed on one enemy within range 3: +2 Attack and advantage on incoming
+# attacks from the Nightshroud only (BuffIncomingAttacks + PlayerClasses filter, the 1st edition Doomstalker's doom
+# ability without the doom), one use (XPTracker [0]: "your next attack targeting that enemy"); the bonus icon on the
+# enemy stands for the character token. Then a Tear adjacent to it (CreateShadow aimed with GetAdjacentTiles).
+# Unverified: an Attack bonus with an Enemy filter is placed, not performed (NOTES.md).
+# bottom: "this Teleport must end in a hex containing a Tear" = Teleport2 with IsValidTeleportTile (Frosthaven's
+# Crashing Tide Sodden Soil) on a shadow hex (CustomAbility.SteppedOnShadow), its printed square mark.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TMark:
+                Attack: 2
+                AttackHasAdvantage: True
+                Range: 3
+                Target: 1
+                Filter: Enemy
+                AnimOverload: Debuff
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffIncomingAttacks
+                    Filter:
+                        PlayerClasses: Nightshroud2ID
+                    XPTracker: [0]
+            TTear:
+                CreateShadow:
+                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+                Target: 1
+                Targeting: Custom
+                Vars:
+                    Marked: CustomAbility.FindAbilityInPhaseByName("TMark")
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(Marked.ActorsToTarget)
+                AnimOverload: Shadow Manipulation
+    Bottom:
+        Abilities:
+            BTeleport:
+                Teleport2:
+                    Amount: 6
+                    SquareEnhancements: 1
+                Filter: Self
+                MiscVars:
+                    IsValidTeleportTile: CustomAbility.SteppedOnShadow(Tile)
+                AnimOverload: Teleport Into
+                AnimOverload2: Teleport Outof
+            BStrengthen:
+                Strengthen:
+                    DiamondPlusEnhancements: 1
+                Filter: Self
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Active:
+            Ability: TMark
+            Icon: Positive_Attack_Curse
+            ListLayout: "$FHS_GH2E_Nightshroud2_12_T$"
+            Layout: "$FHS_GH2E_Nightshroud2_12_T$"
+        - Row: "<size=100%> "
+        - XPTracker: TMark
+    Bottom:
+        - Row: "<size=150%><sprite name=Teleport> *BTeleport* <size=100%><voffset=1>@BTeleport@"
+        - Row: "$FHS_GH2E_Nightshroud2_12_B$"
+        - Row: "<size=50%> "
+        - Row: "<size=150%><sprite name=Strengthen> <size=100%><voffset=1>@BStrengthen@"

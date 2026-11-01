@@ -1,0 +1,125 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MalleableEvocation$
+Character: Elementalist2ID
+ID: 32802
+Level: 1
+Initiative: 26
+# card: Malleable Evocation
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 2
+                    CircleEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireStrengthen:
+                        ParentName: THeal
+                        Conditions: Strengthen
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceWard:
+                        ParentName: THeal
+                        Conditions: Ward
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirBless:
+                        ParentName: THeal
+                        Conditions: Bless
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthSafeguard:
+                        ParentName: THeal
+                        SubAbilities:
+                            THealSafeguard:
+                                AddActiveBonus:
+                                    Null: True
+                                    Filter: Self
+                                    AutoTrigger: True
+                                    SkipAnim: True
+                                Filter: [Self, Ally]
+                                UseParentTargets: True
+                                SkipAnim: True
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: GenericOnNegativeCondition
+                                    IsToggleBonus: True
+                                    XPTracker: [0]
+                                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
+                                    Vars:
+                                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
+                                        ValidateNotScenarioEffect: TriggerAbility.TreatedAsScenarioEffect() == False
+                                        PreventCondition: True
+            TCTwo:
+                Requirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateTwoElementsConsumed: PhaseManager.CurrentPhaseAction.ActionAugmentationsToConsume.Where(obj.Elements.Count > 0).Count >= 2
+                AbilityOverrides:
+                    TCTwoTarget:
+                        ParentName: THeal
+                        Target: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BInfuseWaning:
+                Infuse: [Air, Earth, Fire, Light, Dark, Ice]
+                SkipAnim: True
+                AnimOverload: GatherElements
+                MiscVars:
+                    InfuseOnlyWaning: True
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range* @THeal.Range@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFire
+                    Text: "<sprite name=Strengthen>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCIce
+                    Text: "<sprite name=Ward>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "<sprite name=Bless>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCEarth
+                    Text: "$FHS_GH2E_Elementalist2_SAFEGUARD_SHORT$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCTwo
+                    Text: "$FHS_GH2E_Elementalist2_TWO_TARGET$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Elementalist2_02_B$"

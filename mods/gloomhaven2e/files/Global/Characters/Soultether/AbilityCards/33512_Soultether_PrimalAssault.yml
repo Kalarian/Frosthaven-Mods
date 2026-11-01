@@ -1,0 +1,84 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PrimalAssault$
+Character: SoultetherID
+ID: 33512
+Level: 1
+Initiative: 20
+# card: Primal Assault
+# top: grant two of your summons Attack +1; each of the three consumes adds a rider to the granted attack by naming it
+# (Frosthaven's Dark Tidings: an override on the attack inside the control).
+# bottom: Heal 2 [circle], Range 3 [square] (the mark sits in the range pill).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack: +1
+                            Range: +0
+                    ControlActorType: Player
+                Target: 2
+                Range: 99
+                Filter: OwnSummon
+                AnimOverload: ControlSummon
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireWound:
+                        ParentName: TAllyAttack
+                        Conditions: Wound
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirPierce:
+                        ParentName: TAllyAttack
+                        Pierce: 2
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkCurse:
+                        ParentName: TAllyAttack
+                        Conditions: Curse
+        XP: 2
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 2
+                    CircleEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Soultether_GRANT2$"
+        - Row: "<size=150%><sprite name=Attack> +1"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFire
+                    Text: "<sprite name=Wound>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "<sprite name=Pierce> 2"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "<sprite name=Curse>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range* @BHeal.Range@</link>"
+            - Column:

@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Doomstalker208
+Name: PERK_Doomstalker2_08_Name
+Description: PERK_Doomstalker2_08_Desc
+CharacterID: Doomstalker2ID
+Available: 1
+Flags: [Passive]

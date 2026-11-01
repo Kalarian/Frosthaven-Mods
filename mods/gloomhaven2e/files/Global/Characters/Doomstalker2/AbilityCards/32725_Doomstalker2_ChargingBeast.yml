@@ -1,0 +1,64 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ChargingBeast$
+Character: Doomstalker2ID
+ID: 32725
+Level: 7
+Initiative: 82
+# card: Charging Beast
+# top: Summon Horned Hristek (stand-in model: the 1st edition Black Unicorn, the horned one). Its trait (+2 Attack for
+# the round after its first move) and "whenever this summon kills an enemy, grant it Move +0" have no Frosthaven summon
+# shape: text only (NEEDS PLUGIN).
+# bottom: Doom. On death, you and all allies Heal 3 (the 1st edition Nature's Hunger doom, Heal 2 -> 3). "Your summons
+# focus on this enemy": text (NEEDS PLUGIN).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: HornedHristekID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomOnDeath:
+                                AddActiveBonus:
+                                    Heal: 3
+                                    Filter: Self
+                                Target: -1
+                                Targeting: All
+                                ActiveBonus:
+                                    Behaviour: DuringActionAbilityOnDeath
+                                    Filter:
+                                        ActorType: [Player, Summon, Ally]
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_HornedHristek$
+                    SpecialText:
+                        - Row: "$FHS_GH2E_Doomstalker2_25_T$"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Doomstalker2_25_T2$"
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_Doomstalker2_25_B$"
+            Layout:
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH2E_Doomstalker2_25_B$"
+                - Row: "$FHS_Doom_DiscardReminderText$"

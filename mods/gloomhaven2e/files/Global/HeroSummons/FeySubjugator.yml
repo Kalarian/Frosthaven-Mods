@@ -1,0 +1,43 @@
+Parser: HeroSummon
+ID: FeySubjugatorID
+LocKey: $GH2E_SUMMON_FeySubjugator$
+# stand-in model: the 1st edition Healing Sprite (a new 2e creature; NOTES.md)
+Model: HealingSprite
+Health:
+    Amount: 4
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    SquareEnhancements: 1
+Attack:
+    Amount: 1
+    SquareEnhancements: 1
+Range:
+    Amount: 4
+    SquareEnhancements: 1
+Flying: True
+# "Whenever this summon attacks a normal or elite enemy, after the attack ability control that enemy: Attack -1": the
+# summon's attack with a control sub-ability on its own target (the 1st edition Lead to Slaughter fix: UseParentTargets),
+# normal and elite only; the enemy attacks at its own value -1 in melee (Mindthief2 Silent Scream), driven by the AI
+# (ControlActorType Ally, as the 1st edition Eye of the Void fix). Unverified on a summon's attack.
+AttackOverride:
+    ParentName: DefaultAttack
+    SubAbilities:
+        AControl:
+            ControlActor:
+                Abilities:
+                    EnemyWillDoThis:
+                        Attack: -1
+                        Range: 1
+                        Target: 1
+                        RangeIsBase: True
+                        TargetIsBase: True
+                ControlDurationType: ControlForOneAction
+                ControlActorType: Ally
+            Filter:
+                TargetType: Enemy
+                EnemyType: [Normal, Elite]
+            UseParentTargets: True
+            Target: 1
+            AutoTrigger: True
+            AnimOverload: MindControl

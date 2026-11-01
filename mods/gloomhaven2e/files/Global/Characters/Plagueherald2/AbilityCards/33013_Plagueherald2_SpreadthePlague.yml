@@ -1,0 +1,67 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SpreadthePlague$
+Character: Plagueherald2ID
+ID: 33013
+Level: X
+Initiative: 35
+# card: Spread the Plague
+# top: control one enemy with Plague (any range) for one Attack 4, as the 1st edition Mindthief's Hostile Takeover.
+# The Plague its attack adds can't be given by the engine (a resource is passed from the giver's own supply, and the
+# monster has none): NEEDS PLUGIN. bottom: written as "remove Poison from one of your allies, then Poison + Plague one
+# enemy adjacent to that ally" (the card's mandatory removal comes first here so the target is picked around the
+# chosen ally): APPROXIMATION of the order.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TControl:
+                ControlActor:
+                    Abilities:
+                        TControlAttack:
+                            Attack:
+                                Amount: 4
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Ally
+                Range: 99
+                Target: 1
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: MindControl
+        XP: 1
+    Bottom:
+        Abilities:
+            BRemovePoison:
+                RemoveConditions: 1
+                Conditions: [Poison]
+                Range: 99
+                Target: 1
+                Filter:
+                    TargetType: Ally
+                    TargetHasNegativeCondition: Poison
+                AnimOverload: TargetedHeal
+                SubAbilities:
+                    BPoison:
+                        Poison: True
+                        Range: 1
+                        Target: 1
+                        Filter: Enemy
+                        AllTargetsAdjacentToParentTargets: True
+                        TreatAsNonSubAbility: True
+                        ResourcesToGiveToTargets:
+                            - ["Plague", 1]
+                        ResourcesToAddOnAbilityEnd:
+                            - ["Plague", 3]
+                        AnimOverload: TargetedDebuff
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Plagueherald2_13_T$"
+        - Row: "<size=150%><sprite name=Attack> *TControl.TControlAttack* <size=100%><voffset=1>@TControl.TControlAttack@"
+        - Row: "$FHS_GH2E_Plagueherald2_PLAGUE$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Poison>"
+        - Row: "$FHS_GH2E_Plagueherald2_PLAGUE$"
+        - Row: "$FHS_GH2E_Plagueherald2_13_B$"
+        - Row: "$FHS_GH2E_Plagueherald2_13_B2$"

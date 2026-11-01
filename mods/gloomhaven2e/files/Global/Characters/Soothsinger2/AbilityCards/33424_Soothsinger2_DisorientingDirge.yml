@@ -1,0 +1,84 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DisorientingDirge$
+Character: Soothsinger2ID
+ID: 33424
+Level: 6
+Initiative: 13
+# card: Disorienting Dirge
+# top: song (High, High Note). APPROXIMATION: "all enemies gain disadvantage on all their attacks" = every attack
+# targeting you or an ally gains disadvantage (Deathwalker The Night Takes Shape's aura on [Self, Ally])
+# bottom: the 1st edition Defensive Ditty bottom (one prevention among allies within range 2, this round)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TSong:
+                AttackersGainDisadvantage: True
+                Range: 0
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: [Self, Ally]
+                AnimOverload: PlaySongShield3
+            TSongTimer:
+                AddActiveBonus:
+                    Null: True
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndRoundAbility
+                    XPTracker: [1,0,0]
+                    EndAllActiveBonusesOnBaseCardSimultaneously: True
+            TSongNotes:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Ability
+                    Hidden: True
+                    RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BPrevent:
+                PreventDamage: 1
+                Range: 2
+                Target: -1
+                Filter: [Self]
+                ActiveBonus:
+                    Duration: Round
+                    XPTracker: [0]
+                    IsAura: True
+                    AuraFilter: [Ally]
+                AnimOverload: PlayPositiveTuneShield
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Soothsinger2_24_T$"
+        - Active:
+            Ability: TSong
+            Icon: Positive_Disadvantage_Enemy
+            ListLayout: "$FHS_GH2E_Soothsinger2_24_T2$"
+            Layout: "$FHS_GH2E_Soothsinger2_24_T2$"
+        - Row: "<size=100%> "
+        - XPTracker: TSongTimer
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BPrevent
+            Icon: Positive_DamagePrevent_Ally_Aura
+            ListLayout: "$FHS_GH2E_Soothsinger2_24_B$"
+            Layout: "$FHS_GH2E_Soothsinger2_24_B$"
+            HideTracker: True

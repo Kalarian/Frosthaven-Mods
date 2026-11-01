@@ -1,0 +1,61 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TelepathicCommand$
+Character: Mindthief2ID
+ID: 32222
+Level: 6
+Initiative: 17
+# card: Telepathic Command
+# written from tools/gh2e/sheets/Mindthief.json; grants = Frosthaven's Command the Wretched shape (one of your
+# summons, its own values +0); "Invisible, self" is the summon's own (Frosthaven's Flesh Shield: Filter Self inside a
+# control is the commanded figure)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummonGrant:
+                ControlActor:
+                    Abilities:
+                        TSummonAttack:
+                            Attack: +0
+                            Range: +0
+                        TSummonInvisible:
+                            Invisible:
+                                DiamondPlusEnhancements: 1
+                            Filter: Self
+                            AnimOverload: TurnInvisible
+                Target: 1
+                Range: 99
+                Filter:
+                    TargetType: OwnSummon
+                AnimOverload: ControlSummon
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BSummonMove:
+                ControlActor:
+                    Abilities:
+                        BSummonMoveGrant:
+                            Move:
+                                Amount: 4
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                Target: 1
+                Range: 99
+                Filter:
+                    TargetType: OwnSummon
+                AnimOverload: ControlSummon
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Mindthief2_GRANTSUMMON$"
+        - Row: "<size=20%> "
+        - Row: "<size=150%><sprite name=Attack> +0"
+        - Divider:
+        - Row: "<size=150%><sprite name=Invisible> <size=100%><voffset=1>@TSummonInvisible@"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Mindthief2_GRANTSUMMON$"
+        - Row: "<size=150%><sprite name=Move> *BSummonMoveGrant* <size=100%><voffset=1>@BSummonMoveGrant@"

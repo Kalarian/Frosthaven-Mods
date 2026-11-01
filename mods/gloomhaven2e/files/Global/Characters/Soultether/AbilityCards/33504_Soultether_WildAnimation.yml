@@ -1,0 +1,44 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WildAnimation$
+Character: SoultetherID
+ID: 33504
+Level: 1
+Initiative: 92
+# card: Wild Animation
+# bottom: Thorn Shooter (summons/ThornShooter2.yml): its attack slot prints only Poison, written as Attack 0 + Poison.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range: 4
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BSummon:
+                Summon: ThornShooter2ID
+                AnimOverload: Summon
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BSummon
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: BSummon
+                    SummonName: $FHS_GH2E_SUMMON_ThornShooter$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Poison></nobr>"

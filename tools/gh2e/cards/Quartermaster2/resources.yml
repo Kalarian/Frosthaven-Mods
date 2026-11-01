@@ -1,0 +1,5 @@
+Supplies:
+    ID: "Supplies"
+    Sprite: "HoverHatchet"
+    LocKey: "GH2E_SUPPLIES_TOOLTIP"
+    MaxAmount: 50

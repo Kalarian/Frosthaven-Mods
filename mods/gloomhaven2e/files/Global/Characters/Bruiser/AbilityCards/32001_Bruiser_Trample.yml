@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Trample$
+Character: BruiserID
+ID: 32001
+Level: 1
+Initiative: 72
+# card: Trample
+# 2e sheet: top Attack 3 [diamond], Pierce 3; bottom Move 4 [square], Jump, Attack 3 on all enemies moved through,
+# XP 1 per enemy targeted, lost. The attack is its own ability after a plain Move, with Targeting: All (the 1st edition
+# Trample fix, CARD_FIXES 20001: a merged move-attack picks its targets before the walk).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                    Pierce: 3
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Jump: True
+                    SquareEnhancements: 1
+            BAttack:
+                Attack: 3
+                AllTargetsOnMovePath: True
+                Targeting: All
+                Target: -1
+                XPPerTarget: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Pierce> *TAttack.Pierce*</link>"
+            - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
+        - Divider:
+        - Row: "<size=150%><sprite name=Attack> *BAttack*"
+        - Row: "$FHS_GH2E_Bruiser_01_B$"
+        - Row: "<size=20%> "
+        - Row: "$FHS_XP_PerEnemy$"

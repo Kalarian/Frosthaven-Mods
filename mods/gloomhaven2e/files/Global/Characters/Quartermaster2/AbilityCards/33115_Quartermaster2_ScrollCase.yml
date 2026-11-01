@@ -1,0 +1,63 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ScrollCase$
+Character: Quartermaster2ID
+ID: 33115
+Level: 2
+Initiative: 95
+# card: Scroll Case
+# top: gain 10 supplies; give the Scroll of Embers (no XP) and the Scroll of Foresight (XP 1) to adjacent allies:
+#   APPROXIMATION, two separate gives, each lets one adjacent ally recover one spent or lost item (NEEDS PLUGIN); XP 1 on
+#   the half.
+# bottom: Move 3 [circle]; give the Scroll of Relocation to one adjacent ally: the same approximation.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TSupplies:
+                Null: True
+                Filter: Self
+                ResourcesToAddOnAbilityEnd:
+                    - ["Supplies", 10]
+                AnimOverload: PowerUp
+            TGive1:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Range: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: Refresh
+            TGive2:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Range: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: Refresh
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BGive:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Range: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: Refresh
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Quartermaster2_SUPPLIES10$"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Quartermaster2_15_T$"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Quartermaster2_15_T2$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Quartermaster2_15_B$"

@@ -1,0 +1,153 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EyeoftheHurricane$
+Character: Elementalist2ID
+ID: 32827
+Level: 8
+Initiative: 25
+# card: Eye of the Hurricane
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal: 2
+                Range: 4
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireStrengthen:
+                        ParentName: THeal
+                        Conditions: Strengthen
+                XP: 1
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceAttack:
+                        ParentName: THeal
+                        SubAbilities:
+                            THealAdjacentAttack:
+                                Attack: 2
+                                Range: 1
+                                Target: -1
+                                Filter: Enemy
+                                Conditions: Muddle
+                                AllTargetsAdjacentToParentTargets: True
+                                TreatAsNonSubAbility: True
+                                AnimOverload: RadialHexWind
+                XP: 1
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirAttack:
+                        ParentName: THeal
+                        SubAbilities:
+                            THealRingAttack:
+                                Attack: 1
+                                Pierce: 3
+                                Target: -1
+                                Filter: Enemy
+                                TreatAsNonSubAbility: True
+                                Targeting: Custom
+                                TargetingVars:
+                                    HealTarget: ParentAbility.ActorsToTarget[0]
+                                    NearEnemies: GameState.GetAllEnemiesInRange(HealTarget, HealTarget.ArrayIndex, 1)
+                                    AddValidActorsInRange: GameState.GetAllEnemiesInRange(HealTarget, HealTarget.ArrayIndex, 2).Where(NearEnemies.Contains(obj) == False)
+                                    AddTilesInRange: AddValidActorsInRange.Select(Tile)
+                                AnimOverload: RadialHexWind
+                XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 2
+                Range: 3
+                AnimOverload: TargetFloorMulti
+        Consumes:
+            BCFire:
+                Elements: Fire
+                Infuse: [Fire]
+                AbilityOverrides:
+                    BCFireWound:
+                        ParentName: BAttack
+                        Conditions: Wound
+            BCAir:
+                Elements: Air
+                Infuse: [Air]
+                AbilityOverrides:
+                    BCAirRange:
+                        ParentName: BAttack
+                        Range: 3
+            BCEarth:
+                Elements: Earth
+                Infuse: [Earth]
+                AbilityOverrides:
+                    BCEarthPoison:
+                        ParentName: BAttack
+                        Conditions: Poison
+            BCTwo:
+                Infuse: [Dark]
+                Requirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateTwoElementsConsumed: PhaseManager.CurrentPhaseAction.ActionAugmentationsToConsume.Where(obj.Elements.Count > 0).Count >= 2
+                AbilityOverrides:
+                    BCTwoAttack:
+                        ParentName: BAttack
+                        Strength: 1
+                XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFire
+                    Text: "<sprite name=Strengthen>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCIce
+                    Text: "$FHS_GH2E_Elementalist2_27_T$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "$FHS_GH2E_Elementalist2_27_T2$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCFire
+                    Text: "<sprite name=Wound>, <sprite name=CreateFire>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCAir
+                    Text: "+3 <sprite name=Range>, <sprite name=CreateAir>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCEarth
+                    Text: "<sprite name=Poison>, <sprite name=CreateEarth>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCTwo
+                    Text: "$FHS_GH2E_Elementalist2_27_B$"

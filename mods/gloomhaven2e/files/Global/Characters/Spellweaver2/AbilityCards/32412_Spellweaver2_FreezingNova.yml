@@ -1,0 +1,41 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FreezingNova$
+Character: Spellweaver2ID
+ID: 32412
+Level: 2
+Initiative: 22
+# card: Freezing Nova
+# top: "the 4 enemies closest to you within 5 hexes": approximated as up to 4 targets within 5 hexes, picked by the player
+# (no Frosthaven targeting sorts by distance); no Range is printed, so the attack is treated as melee (as the 1st edition
+# Freezing Nova: TreatAsMelee), which also keeps ranged disadvantage off adjacent targets
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 5
+                Target: 4
+                TreatAsMelee: True
+                Conditions: Immobilize
+                AnimOverload: RadialFreezingNova
+                MultiPassAttack: False
+        Infuse: Ice
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$FHS_GH2E_Spellweaver2_12_T$"
+        - Row: "<sprite name=Immobilize>"
+        - Row: "<size=20%> "
+        - Infuse: Ice
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

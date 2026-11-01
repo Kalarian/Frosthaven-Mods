@@ -1,0 +1,71 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Burrow$
+Character: Cragheart2ID
+ID: 32114
+Level: X
+Initiative: 94
+# card: Burrow
+# from Xipe's 99129_Cragheart2_Burrow.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: Heal 2 carries a square mark (square slot); infuse Earth (Xipe had none)
+# bottom: Move 7 carries a square mark; the consume adds its own Immobilize on every enemy moved through, with
+# Targeting All (the Trample lesson: the move-path branch is reached only when Targeting isn't Range)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 3
+                Target: 2
+                Filter: [Self, Ally]
+                MultiPassAttack: False
+                AnimOverload: Heal
+        Infuse: Earth
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 7
+                    Jump: True
+                    SquareEnhancements: 1
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                Abilities:
+                    BCEarthImmobilize:
+                        ParentName: BMove
+                        Immobilize: True
+                        Filter: Enemy
+                        AllTargetsOnMovePath: True
+                        Targeting: All
+                        Target: -1
+                        AnimOverload: None
+                XP: 1
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *THeal.Target* <sprite name=Range> *THeal.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Earth
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCEarth
+                    Text: "$FHS_GH2E_Cragheart2_14_B$"

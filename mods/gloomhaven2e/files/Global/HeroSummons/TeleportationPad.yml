@@ -1,0 +1,13 @@
+Parser: HeroSummon
+ID: TeleportationPadID
+LocKey: $GH2E_SUMMON_TeleportationPad$
+Model: Ward
+# a map token, not a figure: can't be targeted, hurt or block (the 1st edition Ward's flags, seen in a scenario). No
+# effect of its own: "the two token hexes are adjacent for moves" needs the plugin (NOTES.md)
+Health: 1
+Move: 0
+Attack: 0
+Range: 0
+Untargetable: True
+Invulnerable: True
+DoesNotBlock: True

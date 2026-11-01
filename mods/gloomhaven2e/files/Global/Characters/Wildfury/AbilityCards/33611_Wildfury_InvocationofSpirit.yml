@@ -1,0 +1,120 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_InvocationofSpirit$
+Character: WildfuryID
+ID: 33611
+Level: X
+Initiative: 62
+# card: Invocation of Spirit
+# top: "! consume Air/Earth (either, required)": the split consume as Spirit Swap top (Earth only while Air is not
+# infused, then Air), then the invocation is placed when either was consumed. Invocation: after each of the Bear's next
+# three attacks, once each round, "Attack 2 on one enemy within 3 hexes, as if you occupied the Bear's hex".
+# APPROXIMATION: the Bear itself performs Attack 2, range 3 (same origin hex and reach; the attack counts as the
+# Bear's, not the Wildfury's). NEEDS PLUGIN to make it the Wildfury's attack. Three slots, XP on the first. Persistent.
+# bottom: Move 3 [square]; Heal 1 [square], Range 2 [square], consume Earth: +1 Heal, XP 1; "+1 Heal if the target is
+# the Bear": a target conditional override (the Bruiser's Sweeping Blow shape) filtered to the Bear. Untested on a heal.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TCEarth:
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateNoAir: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Air) == False
+                Consume:
+                    Elements: [Earth]
+                    Abilities:
+                        TCEarthNull:
+                            Null: True
+                            AutoTrigger: True
+            TCAir:
+                Consume:
+                    Elements: [Air]
+                    Abilities:
+                        TCAirNull:
+                            Null: True
+                            AutoTrigger: True
+            TInvoke:
+                AddActiveBonus:
+                    Attack: 2
+                    Range: 3
+                    Target: 1
+                    Filter: Enemy
+                    StrengthIsBase: True
+                    RangeIsBase: True
+                    TargetIsBase: True
+                Filter: Self
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    ActorHasPerformedValidAbilityTypesThisAction: "> 0"
+                    AbilityTypes: [Consume]
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnAttackAbilityFinished
+                    ValidAbilityTypes: [Attack]
+                    Restriction: OncePerRound
+                    XPTracker: [1,0,0]
+                    IsAura: True
+                    AuraFilter:
+                        TargetType: [OwnSummon]
+                        HeroSummonClasses: [WildfuryBearID]
+                    AuraTargeting: All
+                AnimOverload: RadialBeneficial
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    SquareEnhancements: 1
+            BHeal:
+                Heal:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+                ConditionalOverrides:
+                    BHealBearCO:
+                        Filter:
+                            TargetType: [OwnSummon]
+                            HeroSummonClasses: [WildfuryBearID]
+                        AbilityOverrides:
+                            BHealBearBuff:
+                                Strength: 1
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    BCEarthHealBuff:
+                        ParentName: BHeal
+                        Strength: 1
+                XP: 1
+Layout:
+    Top:
+        - Row: "<sprite name=ConsumeAir>/<sprite name=ConsumeEarth> $FHS_GH2E_Wildfury_REQUIRED$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TInvoke
+            Icon: Positive_AttackPlus_Ally
+            ListLayout: "$FHS_GH2E_Wildfury_11_T$"
+            Layout: "$FHS_GH2E_Wildfury_11_T$"
+        - Row: "<size=100%> "
+        - XPTracker: TInvoke
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range* @BHeal.Range@</link>"
+            - Column:
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCEarth
+                    Text: "<nobr>+1 <sprite name=Heal> </nobr>, <sprite name=XP1>"
+        - Row: "$FHS_GH2E_Wildfury_11_B$"

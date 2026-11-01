@@ -1,0 +1,46 @@
+# card: Deadly Mischief
+# top: Covetous Imp (summons/CovetousImp.yml). "Whenever this summon kills an enemy, you gain the money token directly"
+# is text only: NEEDS PLUGIN (no "gain a money token" ability in Frosthaven's data).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: CovetousImpID
+                AnimOverload: Summon
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttackFlame
+        Infuse: Fire
+Layout:
+    Top:
+        - Active:
+            Ability: TSummon
+            Icon: Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_CovetousImp$
+                    SpecialText:
+                        - Row: "$GH2E_Soultether_19_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 1
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Range$ <sprite name=Range> *BAttack.Range* @BAttack.Range@"
+        - Row: "<size=50%> "
+        - Infuse: Fire

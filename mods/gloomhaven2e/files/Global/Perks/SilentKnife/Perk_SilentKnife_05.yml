@@ -1,0 +1,8 @@
+Parser: Perk
+ID: SilentKnife05
+Name: PERK_SilentKnife_05_Name
+Description: PERK_SilentKnife_05_Desc
+CharacterID: SilentKnifeID
+Available: 2
+CardsToRemove: [AMC_Basic_P0]
+CardsToAdd: [AMC_Basic_P2]

@@ -1,0 +1,8 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Quartermaster2_RefreshItem_R
+MathModifier: "+0"
+Rolling: True
+Abilities:
+    RefreshItemsAbility:
+        RefreshItems: 1
+        SlotStateToRefresh: [Spent, Consumed]

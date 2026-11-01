@@ -1,0 +1,67 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Detonation$
+Character: Doomstalker2ID
+ID: 32704
+Level: 1
+Initiative: 8
+# card: Detonation
+# bottom: the 1st edition Detonation doom (on death, damage to all enemies adjacent to its hex), damage 2.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomOnDeath:
+                                AddActiveBonus:
+                                    Damage: 2
+                                    Range: 1
+                                    Target: -1
+                                    Filter:
+                                        ActorType: [Enemy, Enemy2]
+                                    IsInlineSubAbility: True
+                                    AllTargetsAdjacentToParentTarget: True
+                                    IgnoreStun: True
+                                ActiveBonus:
+                                    Behaviour: DuringActionAbilityOnDeath
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* @TAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_Doomstalker2_04_B$"
+            Layout:
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH2E_Doomstalker2_04_B$"
+                - Row: "$FHS_Doom_DiscardReminderText$"

@@ -1,0 +1,52 @@
+# key<TAB>English (card texts as printed on the 2nd edition cards, tools/gh2e/sheets/Soothsinger.json)
+GH2E_Soothsinger2_HIGH	Gain a <b>High Note</b>
+GH2E_Soothsinger2_LOW	Gain a <b>Low Note</b>
+GH2E_Soothsinger2_HIGHNOTE_TOOLTIP	High Note: pays for Songs (at most two)
+GH2E_Soothsinger2_LOWNOTE_TOOLTIP	Low Note: pays for Songs (at most two)
+GH2E_Soothsinger2_GRANT	Grant one ally:
+GH2E_Soothsinger2_GRANT_ADJ	Grant one adjacent ally:
+GH2E_Soothsinger2_GRANT_RANGE	Grant one ally within
+GH2E_Soothsinger2_01_T	<b>Song:</b> Low Note
+GH2E_Soothsinger2_01_T2	At the end of each of your turns, grant the ally closest to you: <nobr><sprite name=Move> 2</nobr>
+GH2E_Soothsinger2_02_T	<b>Song:</b> High Note
+GH2E_Soothsinger2_02_T2	At the end of each of your turns, the enemy with the highest current hit point value suffers <nobr><sprite name=Damage> 1</nobr> and gains <sprite name=Muddle>.
+GH2E_Soothsinger2_03_T	<b>Song:</b> High Note, Low Note
+GH2E_Soothsinger2_03_T2	At the end of each of your turns, the closest enemy to you that does not have <sprite name=Disarm> or <sprite name=Stun> gains <sprite name=Disarm>.
+GH2E_Soothsinger2_04_T	<b>Song:</b> High Note, High Note, Low Note
+GH2E_Soothsinger2_04_T2	You and each ally add <nobr>+1 <sprite name=Attack></nobr> to your first attack each turn.
+GH2E_Soothsinger2_05_T	<b>Song:</b> High Note, Low Note, Low Note
+GH2E_Soothsinger2_05_T2	At the end of each of your turns, perform <nobr><sprite name=Attack> 2</nobr>, target the enemy closest to you, <nobr><sprite name=Push> 2</nobr>, <nobr><sprite name=Pierce> 2</nobr>.
+GH2E_Soothsinger2_06_B	At the end of this and your next five turns, gain one Note of your choice in addition to any other Note gained.
+GH2E_Soothsinger2_07_B	On your allies' next five attacks, add <nobr>+X <sprite name=Attack></nobr>, where X is the number of use slots the character token has passed (0, 1, 2, 3, 4).
+GH2E_Soothsinger2_12_T	<b>Song:</b> High Note, High Note
+GH2E_Soothsinger2_12_T2	You and all allies gain <nobr><sprite name=Shield> 1</nobr>.
+GH2E_Soothsinger2_13_T	<b>Song:</b> Low Note, Low Note
+GH2E_Soothsinger2_13_T2	You and all allies gain <nobr><sprite name=Retaliate> 1</nobr>, <nobr><sprite name=Range> 2</nobr>.
+GH2E_Soothsinger2_16_T	<b>Song:</b> High Note
+GH2E_Soothsinger2_16_T2	At the end of each of your turns, perform <nobr><sprite name=Heal> 1</nobr>, target you and all allies.
+GH2E_Soothsinger2_16_B	Place your character token on a monster within <nobr><sprite name=Range> 3</nobr>. At the end of that enemy's turn this round, remove your character token and that enemy gains <sprite name=Disarm>.
+GH2E_Soothsinger2_17_B	You may immediately play up to three cards from your hand to perform one 1-Note Song action, one 2-Note Song action, and one 3-Note Song action, ignoring the Note requirements of those actions.
+GH2E_Soothsinger2_18_T	<b>Song:</b> High Note, Low Note
+GH2E_Soothsinger2_18_T2	You and each ally may individually choose (after revealing the card) to treat the first attack modifier card drawn each turn as <sprite name=Rolling>.
+GH2E_Soothsinger2_19_B	Grant all allies:
+GH2E_Soothsinger2_20_T	<b>Song:</b> Low Note, Low Note
+GH2E_Soothsinger2_20_T2	At the end of each of your turns, perform <nobr><sprite name=Pull> 3</nobr>, <nobr><sprite name=Range> 5</nobr>, <sprite name=Curse>.
+GH2E_Soothsinger2_22_T	<b>Song:</b> High Note, Low Note, Low Note
+GH2E_Soothsinger2_22_T2	Immediately after you perform your first attack ability from your ability cards each round, you may repeat that attack ability, adding <nobr>+1 <sprite name=Attack></nobr> (you may choose a new target).
+GH2E_Soothsinger2_23_T	Control the target of the attack ability:
+GH2E_Soothsinger2_23_B	Control one enemy within <nobr><sprite name=Range> 5</nobr>:
+GH2E_Soothsinger2_24_T	<b>Song:</b> High Note, High Note
+GH2E_Soothsinger2_24_T2	All enemies gain disadvantage on all their attacks.
+GH2E_Soothsinger2_24_B	Negate the next damage an ally within <nobr><sprite name=Range> 2</nobr> would suffer this round.
+GH2E_Soothsinger2_26_T	<b>Song:</b> Low Note
+GH2E_Soothsinger2_26_T2	You and each ally add <sprite name=Wound> to your first attack each turn.
+GH2E_Soothsinger2_28_T	<b>Song:</b> High Note, Low Note
+GH2E_Soothsinger2_28_T2	You and all allies gain <nobr><sprite name=Shield> 1</nobr> and <nobr><sprite name=Retaliate> 1</nobr>, <nobr><sprite name=Range> 2</nobr>.
+GH2E_Soothsinger2_29_T	Control all enemies moved through with the move ability:
+GH2E_Soothsinger2_29_T2	Gain one Note of your choice in addition to any other Note you gain this round.
+GH2E_Soothsinger2_29_B	You may immediately play any number of cards from your hand and discard pile to perform Song actions of the cards, ignoring all Note requirements. Skip moving your character token on active Songs this round.
+GH2E_Soothsinger2_30_T	<b>Song:</b> High Note, High Note, Low Note, Low Note
+GH2E_Soothsinger2_30_T2	At the end of each of your turns, perform <sprite name=Disarm> on every enemy in a three-hex triangle within <nobr><sprite name=Range> 3</nobr>.
+GH2E_Soothsinger2_30_B	Move your character tokens on each of your active Song abilities backward one slot.
+AMC_GH2E_Soothsinger2_Bless2_M2	-2, <sprite name=Bless>, <sprite name=Target> 2
+AMC_GH2E_Soothsinger2_GrantAlly_R	+0, grant one ally: <sprite name=Move> 2 or <sprite name=Attack> 2 <sprite name=Rolling>

@@ -1,0 +1,50 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LeapingCleave$
+Character: BruiserID
+ID: 32009
+Level: 1
+Initiative: 54
+# card: Leaping Cleave
+# 2e sheet: top Attack 3 [square], triangle area (no hex mark), XP 1; bottom Move 3 [square], Jump, Push 2 [square]
+# range 1 as its own ability (Frosthaven's standalone push shape: Push, Range).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AreaEffect: "0,0,G|1,1,R|2,0,R"
+                AnimOverload: Attack_AOE_Radial
+                MultiPassAttack: False
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    Jump: True
+                    SquareEnhancements: 1
+            BPush:
+                Push:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 1
+                AnimOverload: TargetedShout
+Layout:
+    Top:
+        - ColumnWidths: "60,35"
+        - Column:
+            - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Column: "£Area£"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
+        - Divider:
+        - Row: "<size=150%><sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"

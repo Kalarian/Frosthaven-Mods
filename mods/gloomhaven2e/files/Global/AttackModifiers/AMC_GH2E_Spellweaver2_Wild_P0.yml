@@ -1,0 +1,7 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Spellweaver2_Wild_P0
+MathModifier: "+0"
+Abilities:
+    InfuseAbility:
+        Infuse: [Any]
+        ShowElementPicker: True

@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StrengthinNumbers$
+Character: SoultetherID
+ID: 33520
+Level: 4
+Initiative: 45
+# card: Strength in Numbers
+# top: Heal 2, Target 2, Range 4; "+1 Heal on each target adjacent to two or more allies" = a ConditionalOverrides on
+# the heal (Frosthaven's Pinning Charge test TargetAdjacentAllies, here ">= 2"). Unverified on a heal.
+# bottom: Attack X, Range X+1, X = your summons: the 1st edition Strength in Numbers bottom (StatIsBasedOnX ActorCount),
+# counting your own summons (OwnSummon), the range with AddTo over a base of 1 (Hail of Spears' AddTo).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 4
+                Filter: [Self, Ally]
+                ConditionalOverrides:
+                    THealCO:
+                        Filter:
+                            TargetType: [Self, Ally]
+                            TargetAdjacentAllies: ">= 2"
+                        AbilityOverrides:
+                            THealAdjBuff:
+                                Strength: 1
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 0
+                Range: 1
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: ActorCount
+                        Filter:
+                            TargetType: OwnSummon
+                    Range:
+                        BasedOn: ActorCount
+                        AddTo: True
+                        Filter:
+                            TargetType: OwnSummon
+                AnimOverload: RangedAttackAir
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *THeal.Target* @THeal.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
+            - Column:
+        - Row: "$FHS_GH2E_Soultether_20_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> X"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range>X+1</link>"
+            - Column:
+        - Row: "$FHS_GH2E_Soultether_20_B$"

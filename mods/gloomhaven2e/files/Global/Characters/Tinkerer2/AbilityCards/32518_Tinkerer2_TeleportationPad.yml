@@ -1,0 +1,44 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TeleportationPad$
+Character: Tinkerer2ID
+ID: 32518
+Level: 3
+Initiative: 62
+# card: Teleportation Pad
+# Xipe's 99047 is a placeholder (plain Attack 3 / Move 4); written from tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            # NEEDS PLUGIN: "you and all allies may treat the two token hexes as adjacent during move abilities" has
+            # no engine shape. The two tokens are placed (summons that can't be targeted, hurt or block, the 1st
+            # edition Ward's shape; adjacent, not within range 5) so a plugin can read them; the rule is text.
+            TSummon:
+                Summon: TeleportationPadID
+                AnimOverload: Summon
+            TSummon2:
+                Summon: TeleportationPadID
+                AnimOverload: Summon
+        XP: 3
+    Bottom:
+        Abilities:
+            # Frosthaven's Teleport (the Blinkblade's Breakneck Speed bottom: Teleport2, a circle slot)
+            BTeleport:
+                Teleport2:
+                    Amount: 4
+                    CircleEnhancements: 1
+                Filter: Self
+                AnimOverload: Teleport Into
+                AnimOverload2: Teleport Outof
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_TeleportationPad$
+                    SpecialText: "$FHS_GH2E_Tinkerer2_18_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Teleport> *BTeleport* <size=100%><voffset=1>@BTeleport@"

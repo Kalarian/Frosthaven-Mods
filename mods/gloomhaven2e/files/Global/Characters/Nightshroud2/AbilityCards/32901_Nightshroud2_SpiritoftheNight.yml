@@ -1,0 +1,60 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SpiritoftheNight$
+Character: Nightshroud2ID
+ID: 32901
+Level: 1
+Initiative: 35
+# card: Spirit of the Night
+# top: Curse on an area (the 1st edition Soothsinger's Singing Arrow shape, a melee area from the grey hex). The Tear hex
+# of the area (3,1: two hexes from you) = a Tear placed within range 2 (Deathwalker CreateShadow); APPROXIMATION: the
+# engine can't aim a placement at one hex of a rotated area (NOTES.md)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TCurse:
+                Curse: True
+                Filter: Enemy
+                AreaEffect: "0,0,G|2,0,R|4,0,R|6,0,E"
+                AnimOverload: AggressiveTargetedShout
+            TTear:
+                CreateShadow:
+                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+                Range: 2
+                Target: 1
+                AnimOverload: Shadow Manipulation
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BCurse:
+                Curse: True
+                Range:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Filter: Enemy
+                AnimOverload: WeakRadial
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "65,30"
+            - Column:
+                - Row: "<size=150%><nobr><sprite name=Curse></nobr>"
+                - Row: "<size=20%> "
+                - Row: "$FHS_GH2E_Nightshroud2_TEARHEX$"
+            - Column: "£Area£"
+        - Row: "<size=50%> "
+        - Infuse: Dark
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Curse>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BCurse.Range* @BCurse.Range@</link>"
+            - Column:

@@ -1,0 +1,76 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EarthenClod$
+Character: Cragheart2ID
+ID: 32111
+Level: 1
+Initiative: 24
+# card: Earthen Clod
+# from Xipe's 99126_Cragheart2_Earthen Clod.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: Attack 2 carries a square mark (square slot)
+# bottom: +1 Attack per adjacent obstacle or objective: the converted 1st edition Nowhere to Run's shape (adjacent
+# valid tiles counted by the target filter); objectives are object actors (ObjectActor in the tile list)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 5
+                AnimOverload: ObstacleEarthenClod
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthImmo:
+                        ParentName: TAttack
+                        Conditions: Immobilize
+                XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 5
+                AnimOverload: ObstacleEarthenClod
+                ConditionalOverrides:
+                    BAttackCO1:
+                        FilterContainer:
+                            FilterTiles:
+                                TargetType: Enemy
+                                TargetAdjacentValidTiles: "> 0"
+                                TargetAdjacentValidTilesFilter: ["Obstacle", "ObjectActor"]
+                        AbilityOverrides:
+                            BAdjObstacleBuff:
+                                StatIsBasedOnX:
+                                    Strength:
+                                        BasedOn: TargetAdjacentValidTiles
+                                        AddTo: True
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCEarth
+                    Text: "<sprite name=Immobilize>, <sprite name=XP1>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Cragheart2_11_B$"

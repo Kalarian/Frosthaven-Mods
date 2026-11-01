@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Skewer$
+Character: BruiserID
+ID: 32003
+Level: 1
+Initiative: 35
+# card: Skewer
+# 2e sheet: top Attack 3 [square], 2 hexes in a diagonal line (no hex mark), consume Air: +1 Attack, Pierce 1, XP 1;
+# bottom Move 7 [square], XP 2, lost. Area as the 1st edition Skewer (a straight line, drawn diagonally as printed),
+# without its enhancement hex.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AreaEffect: "0,0,G|2,0,R|4,0,R"
+                AreaEffectLayoutOverride: "0,0,G|1,1,R|2,2,R"
+                AnimOverload: Attack_AOE_Radial
+                MultiPassAttack: False
+        Consumes:
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirAttackBuff:
+                        ParentName: TAttack
+                        Attack:
+                            Amount: 1
+                            Pierce: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 7
+                    SquareEnhancements: 1
+        XP: 2
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "<size=20%> "
+            - Conditional:
+                Layout:
+                    - Consume:
+                        Name: TCAir
+                        Text: "+1 <sprite name=Attack> <sprite name=Pierce> 1, <sprite name=XP1>"
+            - Row: "<size=20%> "
+        - Column: "£Area£"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

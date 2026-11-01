@@ -1,0 +1,17 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Soultether_P0_GrantTeleport2
+MathModifier: "+0"
+TryToPerformAsSummoner: True
+Abilities:
+    ControlAbility:
+        ControlActor:
+            Abilities:
+                BSummonTeleport:
+                    Teleport2: 2
+                    StrengthIsBase: True
+                    Filter: Self
+                    AnimOverload: Teleport Into
+                    AnimOverload2: Teleport Outof
+        Range: 99
+        Filter: OwnSummon
+        AnimOverload: Grant

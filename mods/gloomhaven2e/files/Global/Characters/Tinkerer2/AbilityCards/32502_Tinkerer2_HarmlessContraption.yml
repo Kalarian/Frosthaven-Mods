@@ -1,0 +1,33 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HarmlessContraption$
+Character: Tinkerer2ID
+ID: 32502
+Level: 1
+Initiative: 74
+# card: Harmless Contraption
+# from Xipe's 99031_Tinkerer2_Harmless Contraption.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: Decoy2ID
+                AnimOverload: Summon
+        XP: 3
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_Decoy$
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

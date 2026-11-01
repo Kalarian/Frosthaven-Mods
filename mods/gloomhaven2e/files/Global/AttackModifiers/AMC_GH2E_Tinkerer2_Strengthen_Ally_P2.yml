@@ -1,0 +1,11 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Tinkerer2_Strengthen_Ally_P2
+MathModifier: "+2"
+ControlTargetingActor: True
+Abilities:
+    AStrengthen:
+        Strengthen: True
+        Filter: Ally
+        Targeting: Range
+        Range: 99
+        CanUndo: False

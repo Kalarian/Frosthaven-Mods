@@ -1,0 +1,64 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CorruptingEmbrace$
+Character: Mindthief2ID
+ID: 32227
+Level: 8
+Initiative: 15
+# card: Corrupting Embrace
+# written from tools/gh2e/sheets/Mindthief.json; bottom Move 4 has no mark (Xipe had one); the use-slot buff = Xipe's
+# (persistent BuffAttack, melee, XP on slots 2 and 4)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack1:
+                Attack:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Conditions: Wound
+            TAttack2:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Conditions: Muddle
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+            BAttackBuff:
+                Attack: 0
+                Conditions: [Stun, Curse]
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    AttackType: Melee
+                    XPTracker: [0,1,0,1]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack1* <size=100%><voffset=1>@TAttack1@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Wound></link>"
+            - Column:
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Muddle></link>"
+            - Column:
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove*"
+        - Divider:
+        - Active:
+            Ability: BAttackBuff
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_Mindthief2_27_B$"
+            Layout: "$FHS_GH2E_Mindthief2_27_B$"
+        - Row: "<size=100%> "
+        - XPTracker: BAttackBuff

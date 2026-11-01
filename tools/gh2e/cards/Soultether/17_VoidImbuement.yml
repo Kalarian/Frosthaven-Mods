@@ -1,0 +1,61 @@
+# card: Void Imbuement
+# top: "on the next three attacks performed by your summons, add +1 Attack, Pierce 1": a persistent BuffAttack aura on
+# your summons (Frosthaven's summon auras, Decaying Will's AuraFilter OwnSummon) with three slots, XP on the third;
+# persistent, not lost (discarded when the track ends).
+# bottom: grant one of your summons Move +1, Jump; consume Air: two summons instead (+1 Target on the control, as
+# Frosthaven's Critical Failure overrides its control's Target).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TBuffAttack:
+                Attack: 1
+                Pierce: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: OwnSummon
+                    XPTracker: [0,0,1]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move: +1
+                            Jump: True
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter: OwnSummon
+                AnimOverload: ControlSummon
+        Consumes:
+            BCAir:
+                Elements: Air
+                AbilityOverrides:
+                    BCAirTwoSummons:
+                        ParentName: BAlly
+                        Target: 1
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TBuffAttack
+            Icon: Positive_Pierce_Summon
+            ListLayout: "$GH2E_Soultether_17_T$"
+            Layout: "$GH2E_Soultether_17_T$"
+        - Row: "<size=20%> "
+        - XPTracker: TBuffAttack
+    Bottom:
+        - Row: "$GH2E_Soultether_GRANT1$"
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> +1"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: BCAir
+            Text: "$GH2E_Soultether_17_B$"

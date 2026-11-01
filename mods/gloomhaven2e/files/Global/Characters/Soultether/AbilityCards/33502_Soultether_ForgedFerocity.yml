@@ -1,0 +1,45 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ForgedFerocity$
+Character: SoultetherID
+ID: 33502
+Level: 1
+Initiative: 37
+# card: Forged Ferocity
+# top: Iron Beast (summons/IronBeast2.yml, 2e stats). bottom: Strengthen one of your summons (no range printed: any
+# distance, Range 99 + OwnSummon as Frosthaven's summon grants).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: IronBeast2ID
+                AnimOverload: Summon
+        XP: 1
+    Bottom:
+        Abilities:
+            BStrengthen:
+                Strengthen:
+                    DiamondPlusEnhancements: 1
+                Target: 1
+                Range: 99
+                IgnoreLOS: True
+                Filter: OwnSummon
+                AnimOverload: TargetedBuff
+        Infuse: Fire
+Layout:
+    Top:
+        - Active:
+            Ability: TSummon
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_IronBeast$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Shield> 1</nobr>"
+                        - Row: "<nobr><sprite name=Retaliate> 1</nobr>"
+    Bottom:
+        - Row: "<size=150%><sprite name=Strengthen>"
+        - Row: "$FHS_GH2E_Soultether_TARGET_SUMMON$"
+        - Row: "<size=50%> "
+        - Infuse: Fire

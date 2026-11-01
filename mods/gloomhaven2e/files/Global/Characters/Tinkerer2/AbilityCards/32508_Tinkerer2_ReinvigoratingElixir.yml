@@ -1,0 +1,40 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ReinvigoratingElixir$
+Character: Tinkerer2ID
+ID: 32508
+Level: 1
+Initiative: 37
+# card: Reinvigorating Elixir
+# from Xipe's 99037_Tinkerer2_Reinvigorating Elixir.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 4
+                    DiamondPlusEnhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BRecover:
+                RecoverDiscardedCards: All
+                Range: 3
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: TargetRecover
+        XP: 3
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
+            - Column:
+    Bottom:
+        - Row: "$FHS_GH2E_Tinkerer2_08_B$"

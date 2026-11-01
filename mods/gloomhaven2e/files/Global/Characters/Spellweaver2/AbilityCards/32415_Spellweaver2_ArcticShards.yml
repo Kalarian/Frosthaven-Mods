@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ArcticShards$
+Character: Spellweaver2ID
+ID: 32415
+Level: 3
+Initiative: 24
+# card: Arctic Shards
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 3
+                Conditions: Muddle
+                AnimOverload: TargetedIcyBlast
+        Infuse: Ice
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 10
+                    DiamondPlusEnhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Infuse: Light
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* @TAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Muddle></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Ice
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Light

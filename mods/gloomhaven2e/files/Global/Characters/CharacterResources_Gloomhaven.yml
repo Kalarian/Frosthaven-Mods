@@ -1,0 +1,25 @@
+Parser: CharacterResources
+
+Plague:
+    ID: "Plague"
+    Sprite: "GHClass_Plagueherald2"
+    LocKey: "$GH_GH2E_PLAGUE_TOOLTIP$"
+    MaxAmount: 3
+
+Supplies:
+    ID: "Supplies"
+    Sprite: "GHClass_Quartermaster2"
+    LocKey: "$GH_GH2E_SUPPLIES_TOOLTIP$"
+    MaxAmount: 50
+
+SoothsingerHighNote:
+    ID: "SoothsingerHighNote"
+    Sprite: "GHClass_Soothsinger2"
+    LocKey: "$GH_GH2E_Soothsinger2_HIGHNOTE_TOOLTIP$"
+    MaxAmount: 2
+
+SoothsingerLowNote:
+    ID: "SoothsingerLowNote"
+    Sprite: "GHClass_Soothsinger2"
+    LocKey: "$GH_GH2E_Soothsinger2_LOWNOTE_TOOLTIP$"
+    MaxAmount: 2

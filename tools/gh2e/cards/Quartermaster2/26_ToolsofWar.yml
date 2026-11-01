@@ -1,0 +1,57 @@
+# card: Tools of War
+# top: one adjacent ally may Recover one of their spent items (exact); Move 1 [circle]; give the Scroll of Embers and
+#   Weighted Bolas to one adjacent ally (XP 1): APPROXIMATION, the ally recovers two spent or lost items (NEEDS
+#   PLUGIN), XP 1 on the half.
+# bottom: Move 4 [circle]; Loot 1 (no mark); "if you loot at least one money token, gain 10 supplies": PerformVars on
+#   the loot, gated by its own LootTokenCount (money tokens picked up; the Bruiser Scavenger perk's expression).
+#   UNVERIFIED expression.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TRecover:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent]
+                Range: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: Refresh
+            TMove:
+                Move:
+                    Amount: 1
+                    CircleEnhancements: 1
+            TGive:
+                RefreshItems: 2
+                SlotStateToRefresh: [Spent, Consumed]
+                Range: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: Refresh
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BLoot:
+                Loot: 1
+                Target: -1
+                PerformVars:
+                    OnAbilityEnded:
+                        GainSupplies: AbilityHasHappened && LootTokenCount > 0 && TargetingActor.AddCharacterResource("Supplies", 10)
+                AnimOverload: Loot
+Layout:
+    Top:
+        - Row: "$GH2E_Quartermaster2_26_T$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Quartermaster2_26_T2$"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *BLoot*"
+        - Row: "$GH2E_Quartermaster2_26_B$"

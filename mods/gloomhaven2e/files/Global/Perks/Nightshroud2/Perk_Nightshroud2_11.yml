@@ -1,0 +1,20 @@
+Parser: Perk
+ID: Nightshroud211
+Name: PERK_Nightshroud2_11_Name
+Description: PERK_Nightshroud2_11_Desc
+CharacterID: Nightshroud2ID
+Available: 1
+Cost: 3
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TCurseDamage:
+        Damage: 3
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DamageOnCurseModApplied
+            Filter: Enemy
+            Hidden: True
+        AnimOverload: None

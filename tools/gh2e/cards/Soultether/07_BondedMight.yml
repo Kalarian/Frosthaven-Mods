@@ -1,0 +1,50 @@
+# card: Bonded Might
+# top: as Mighty Bond top. bottom: "consume Air: Move 2, XP 1" with no base move = a Null placeholder the consume fills
+# (Gloomhaven's Barbaric Instincts bottom), then Loot 1.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyMove:
+                            Move: +0
+                        TAllyAttack:
+                            Attack: +0
+                            Range: +0
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter: OwnSummon
+                AnimOverload: ControlSummon
+        XP: 1
+    Bottom:
+        Abilities:
+            BNull:
+                Null: True
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+        Consumes:
+            BCAir:
+                Elements: Air
+                Abilities:
+                    BCAirMove:
+                        ParentName: BNull
+                        Move: 2
+                XP: 1
+Layout:
+    Top:
+        - Row: "$GH2E_Soultether_GRANT1$"
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> +0"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> +0"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Consume:
+            Name: BCAir
+            Text: "<b><size=130%>$Move$ <sprite name=Move> 2, <size=100%><voffset=1><sprite name=XP1>"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *BLoot*"

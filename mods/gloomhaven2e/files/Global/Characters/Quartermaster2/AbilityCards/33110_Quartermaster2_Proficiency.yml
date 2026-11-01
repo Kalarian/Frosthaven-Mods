@@ -1,0 +1,62 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Proficiency$
+Character: Quartermaster2ID
+ID: 33110
+Level: 1
+Initiative: 52
+# card: Proficiency
+# top: persistent, lost, XP 2. "First lost-icon item use each turn: +1 Attack on all your melee attacks that turn" =
+#   APPROXIMATION with the 1st edition Proficiency's shape (BuffIfAnItemUsedInAction +1, persistent), limited to melee
+#   attacks: +1 on each melee attack of an action in which you used any item (spent or lost). "Recover a 30+ gold item
+#   with supplies: gain a random class item" = text only, NEEDS PLUGIN.
+# bottom: persistent, lost, XP 2. "+1 Retaliate on Barbed Strip, +1 Shield on Iron Plate" = text only (no item supply,
+#   NEEDS PLUGIN). "Whenever you rest, gain the Barbed Strip or Iron Plate" = APPROXIMATION: on each short or long rest,
+#   recover one spent or lost item (the 1st edition Refreshment's rest trigger, with both rests as Crashing Tide's
+#   Cleansing Swell lists them).
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttackBuff:
+                Attack: 0
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    AttackType: Melee
+                AttackEffect:
+                    Type: BuffIfAnItemUsedInAction
+                    Strength: 1
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    RefreshItems: 1
+                    SlotStateToRefresh: [Spent, Consumed]
+                    Filter: Self
+                    AnimOverload: Refresh
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: [DuringActionAbilityOnShortRest, DuringActionAbilityOnLongRest]
+                AnimOverload: PowerUp
+        XP: 2
+Layout:
+    Top:
+        - Active:
+            Ability: TAttackBuff
+            Icon: Positive_AttackPlus_Item
+            ListLayout: "$FHS_GH2E_Quartermaster2_10_T$"
+            Layout: "$FHS_GH2E_Quartermaster2_10_T$"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Quartermaster2_10_T2$"
+    Bottom:
+        - Row: "$FHS_GH2E_Quartermaster2_10_B$"
+        - Row: "<size=20%> "
+        - Active:
+            Ability: BActive
+            Icon: Refresh
+            ListLayout: "$FHS_GH2E_Quartermaster2_10_B2$"
+            Layout: "$FHS_GH2E_Quartermaster2_10_B2$"

@@ -1,0 +1,65 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ArrestingGale$
+Character: Elementalist2ID
+ID: 32816
+Level: 3
+Initiative: 65
+# card: Arresting Gale
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Conditions: Stun
+                AnimOverload: AreaHexWind
+        Infuse: Air
+    Bottom:
+        Abilities:
+            BWard:
+                Ward:
+                    CircleEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: TargetedBuff
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                Infuse: [Earth]
+                AbilityOverrides:
+                    BCEarthTarget:
+                        ParentName: BWard
+                        Target: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+                - Row: "<link=fhpill>, <sprite name=Stun></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Air
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Ward> <size=100%><voffset=1>@BWard@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BWard.Range* @BWard.Range@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCEarth
+                    Text: "+1 <sprite name=Target>, <sprite name=CreateEarth>"

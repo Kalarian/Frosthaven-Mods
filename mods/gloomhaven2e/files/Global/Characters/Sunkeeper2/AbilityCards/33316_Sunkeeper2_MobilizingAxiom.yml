@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MobilizingAxiom$
+Character: Sunkeeper2ID
+ID: 33316
+Level: 2
+Initiative: 23
+# card: Mobilizing Axiom
+# bottom: "grant all allies within range 5 and self: Move 4": the allies' move as a grant (the enhancement mark),
+# then your own Move 4 (unenhanced) after theirs, so moving first can't take an ally out of range.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                AnimOverload: MeleeSmite
+            TBless:
+                Bless:
+                    DiamondPlusEnhancements: 1
+                Filter: Self
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move:
+                                Amount: 4
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                Range: 5
+                Target: -1
+                Filter: Ally
+                AnimOverload: ControlAlly
+            BMove:
+                Move: 4
+        XP: 2
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Divider:
+        - Row: "<link=fhself><size=125%><sprite name=Bless> <size=100%><voffset=1>@TBless@</link>"
+    Bottom:
+        - Row: "$FHS_GH2E_Sunkeeper2_16_B$"
+        - Row: "<size=20%> "
+        - Row: "<size=150%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"

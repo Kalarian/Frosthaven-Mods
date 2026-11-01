@@ -1,0 +1,101 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BitingWind$
+Character: SoultetherID
+ID: 33514
+Level: X
+Initiative: 82
+# card: Biting Wind
+# top: Attack 2, Range 4, Push 1 [square] (an inline push sub-ability); consume Air: +1 Attack, +1 Range, +1 Push.
+# bottom: grant one of your summons: Move +0, then Push 2 on every adjacent enemy (Frosthaven's Kinetic Transfer push:
+# Range 1, Target -1, Targeting Range), each pushed target then suffers damage 2 (a damage sub-ability on the push's own
+# targets, UseParentTargets as the 1st edition Lead to Slaughter fix). The sheet reads the push and damage as part of
+# the grant (its 'unclear' note); kept so. Unverified: a push and a damage inside a summon grant.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 4
+                AnimOverload: RangedAttackAir
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 1
+                            SquareEnhancements: 1
+                        AnimOverload: None
+                        IsInlineSubAbility: True
+        Consumes:
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Range: 1
+                    TCAirPushBuff:
+                        ParentName: TAttackSubPush
+                        Strength: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move: +0
+                        BAllyPush:
+                            Push: 2
+                            StrengthIsBase: True
+                            Range: 1
+                            RangeIsBase: True
+                            Target: -1
+                            TargetIsBase: True
+                            Targeting: Range
+                            Filter: [Enemy]
+                            SubAbilities:
+                                BAllyPushSubDamage:
+                                    Damage: 2
+                                    Target: -1
+                                    UseParentTargets: True
+                                    Filter: Enemy
+                                    AutoTrigger: True
+                                    CanSkip: False
+                                    AnimOverload: None
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter: OwnSummon
+                AnimOverload: ControlSummon
+        Infuse: Air
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <sprite name=Push> *TAttackSubPush* @TAttackSubPush@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "+1 <sprite name=Attack>, +1 <sprite name=Range>, +1 <sprite name=Push>, <sprite name=XP1>"
+    Bottom:
+        - Row: "$FHS_GH2E_Soultether_GRANT1$"
+        - Row: "<size=150%><sprite name=Move> +0"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Push> 2"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:
+        - Row: "$FHS_GH2E_Soultether_14_B$"
+        - Row: "<size=50%> "
+        - Infuse: Air

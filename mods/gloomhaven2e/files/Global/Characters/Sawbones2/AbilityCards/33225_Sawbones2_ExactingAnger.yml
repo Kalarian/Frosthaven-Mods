@@ -1,0 +1,56 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ExactingAnger$
+Character: Sawbones2ID
+ID: 33225
+Level: 7
+Initiative: 49
+# card: Exacting Anger
+# bottom (Prescription): StartTurnAbility Strengthen on the holder, three slots, placed on one adjacent ally.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    SquareEnhancements: 1
+                Conditions: Disarm
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Strengthen: True
+                    Filter: Self
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                Range: 1
+                Target: 1
+                MiscVars:
+                    GH2E_Prescription: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                    GiveAbilityCardToActor: True
+                    XPTracker: [0,0,0]
+                AnimOverload: BuffAdjacent
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Disarm></link>"
+            - Column:
+    Bottom:
+        - Row: "$FHS_GH2E_Sawbones2_RX$"
+        - Row: "<size=20%> "
+        - Active:
+            Ability: BActive
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_Sawbones2_25_B$"
+            Layout: "$FHS_GH2E_Sawbones2_25_B$"
+        - Row: "<size=100%> "
+        - XPTracker: BActive

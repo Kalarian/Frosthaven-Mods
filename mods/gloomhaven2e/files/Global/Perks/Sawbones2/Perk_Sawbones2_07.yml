@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Sawbones207
+Name: PERK_Sawbones2_07_Name
+Description: PERK_Sawbones2_07_Desc
+CharacterID: Sawbones2ID
+Available: 1
+Cost: 2
+Flags: [Passive]

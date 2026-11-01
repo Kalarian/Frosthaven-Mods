@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Soultether01
+Name: PERK_Soultether_01_Name
+Description: PERK_Soultether_01_Desc
+CharacterID: SoultetherID
+Available: 1
+CardsToRemove: [AMC_Basic_M2]
+CardsToAdd: [AMC_Basic_P0]

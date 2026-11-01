@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BluntForce$
+Character: Cragheart2ID
+ID: 32118
+Level: 3
+Initiative: 21
+# card: Blunt Force
+# from Xipe's 99133_Cragheart2_Blunt Force.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: lost (Xipe: discard)
+# bottom: Heal 2 carries a square mark; the consume gives Ward (Xipe: Retaliate 1 for the round, in a block that didn't
+# parse), added after the heal as Gloomhaven's consume-adds-an-ability shape
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthAttackBuff:
+                        ParentName: TAttack
+                        Strength: 5
+                XP: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 1
+                    CircleEnhancements: 1
+            BHeal:
+                Heal:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: Self
+                AnimOverload: Heal
+        Consumes:
+            BCEarth:
+                Elements: Earth
+                Abilities:
+                    BCEarthWard:
+                        ParentName: BHeal
+                        Ward: True
+                        Filter: Self
+                        AnimOverload: PowerUp
+                XP: 1
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCEarth
+                    Text: "+5 <sprite name=Attack>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCEarth
+                    Text: "<sprite name=Ward>, <sprite name=XP1>"

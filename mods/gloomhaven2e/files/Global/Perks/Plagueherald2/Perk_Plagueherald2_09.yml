@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Plagueherald209
+Name: PERK_Plagueherald2_09_Name
+Description: PERK_Plagueherald2_09_Desc
+CharacterID: Plagueherald2ID
+Available: 1
+CardsToAdd: [AMC_Basic_P1]
+Flags: [Passive, IgnoreNegativeScenarioEffects]

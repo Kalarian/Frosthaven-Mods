@@ -1,0 +1,63 @@
+# card: Armed to the Teeth
+# top: give the Barbed Strip and Sharpened Dirk to one adjacent ally or self (XP 1; GHS drops "or self", the card has
+#   it): APPROXIMATION, that figure recovers two spent or lost items (NEEDS PLUGIN), XP 1 on the half; "Grant one
+#   adjacent ally or self: Shield 2 [square]", round (Banner Spear Hold the Line's ally shield, one target).
+# bottom: Recover one of your spent items (exact); Move 3 [circle]; gain the Scroll of Foresight: APPROXIMATION,
+#   recover one spent or lost item.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TGive:
+                RefreshItems: 2
+                SlotStateToRefresh: [Spent, Consumed]
+                Range: 1
+                Filter:
+                    TargetType: [Self, Ally]
+                    ActorType: Player
+                AnimOverload: Refresh
+            TShield:
+                Shield:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 1
+                Target: 1
+                Filter: [Self, Ally]
+                ActiveBonus:
+                    Duration: Round
+                AnimOverload: PowerUp
+        XP: 1
+    Bottom:
+        Abilities:
+            BRecover:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent]
+                Filter: Self
+                AnimOverload: Refresh
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BGive:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Filter: Self
+                AnimOverload: Refresh
+Layout:
+    Top:
+        - Row: "$GH2E_Quartermaster2_28_T$"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Quartermaster2_28_T2$"
+        - Active:
+            Ability: TShield
+            Icon: Positive_Shield_Ally_Aura
+            ListLayout: "$Shield$ <sprite name=Shield> *TShield*"
+            Layout: "<b><size=130%>$Shield$ <sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+        - Row: "<size=20%> "
+        - Duration: Round
+    Bottom:
+        - Row: "$GH2E_Quartermaster2_RECOVER1$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Quartermaster2_28_B$"

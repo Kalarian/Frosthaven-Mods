@@ -1,0 +1,105 @@
+# card: Imposed Will
+# top: Fey Subjugator (summons/FeySubjugator.yml: a control sub-ability on its attack target, unverified).
+# bottom: "whenever one of your summons is attacked, if that summon does not have Ward, it gains Ward after the attack
+# and the attacker suffers damage 1": two persistent auras on your summons on DuringActionAbilityOnAttacked (Frosthaven's
+# Stress Vents / Coalescing Darkness: TriggerActor = the attacker, TriggerTarget = the attacked figure), both checking
+# that the attacked summon has no Ward (Tokens.HasKey, as Frosthaven's Leather Armor checks Muddle); the first damages
+# the attacker, the second (hidden) gives the summon Ward. Unverified: the trigger order, and whether the Ward test is
+# made before or after the attack consumed a Ward.
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: FeySubjugatorID
+                AnimOverload: Summon
+        XP: 1
+    Bottom:
+        Abilities:
+            BDamageAttacker:
+                AddActiveBonus:
+                    Damage: 1
+                    Targeting: Custom
+                    TargetingVars:
+                        AddValidActorInRange: EnemyAttacker
+                        AddActorToTarget: EnemyAttacker
+                        AddTileInRange: EnemyAttacker.Tile
+                    IgnoreStun: True
+                    AutoTrigger: True
+                    CanUndo: False
+                    MiscVars:
+                        InterruptCurrentAbility: True
+                        StackNextToCurrent: True
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnAttacked
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: OwnSummon
+                    Vars:
+                        EnemyAttacker: TriggerActor
+                        ValidateNoWard: TriggerTarget.Tokens.HasKey(CCondition.EPositiveCondition.Ward) == false
+                AnimOverload: CastNegative
+            BWardSummon:
+                AddActiveBonus:
+                    Ward: True
+                    Targeting: Custom
+                    TargetingVars:
+                        AddValidActorInRange: AttackedSummon
+                        AddActorToTarget: AttackedSummon
+                        AddTileInRange: AttackedSummon.Tile
+                    IgnoreStun: True
+                    AutoTrigger: True
+                    CanUndo: False
+                    MiscVars:
+                        InterruptCurrentAbility: True
+                        StackNextToCurrent: True
+                Filter: Self
+                SkipAnim: True
+                AutoTrigger: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnAttacked
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: OwnSummon
+                    Hidden: True
+                    Vars:
+                        AttackedSummon: TriggerTarget
+                        ValidateNoWard: TriggerTarget.Tokens.HasKey(CCondition.EPositiveCondition.Ward) == false
+        XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TSummon
+            Icon: Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_FeySubjugator$
+                    SpecialText:
+                        - Row: "<nobr>$Flying$ <sprite name=Flying></nobr>"
+                        - Row: "$GH2E_Soultether_30_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 1
+            - Column:
+                - Duration: Persistent
+    Bottom:
+        - Active:
+            Ability: BDamageAttacker
+            Icon: Positive_Ward
+            ListLayout: "$GH2E_Soultether_30_B$"
+            Layout: "$GH2E_Soultether_30_B$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - XP: 1
+            - Column:
+                - Duration: Persistent

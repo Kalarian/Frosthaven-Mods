@@ -1,0 +1,8 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Berserker2_Heal1Self_P0
+MathModifier: "+0"
+Abilities:
+    AHeal:
+        Heal: 1
+        Filter: Self
+        AutoTrigger: True

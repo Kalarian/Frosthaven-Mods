@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Spellweaver203
+Name: PERK_Spellweaver2_03_Name
+Description: PERK_Spellweaver2_03_Desc
+CharacterID: Spellweaver2ID
+Available: 3
+CardsToRemove: [AMC_Basic_P0]
+CardsToAdd: [AMC_GH2E_Spellweaver2_Lost_P1]

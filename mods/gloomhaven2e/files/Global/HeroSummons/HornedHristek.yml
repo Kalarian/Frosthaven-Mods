@@ -1,0 +1,14 @@
+Parser: HeroSummon
+ID: HornedHristekID
+LocKey: $GH2E_SUMMON_HornedHristek$
+# stand-in model: the 1st edition Black Unicorn (horned; NOTES.md). Its Move has no enhancement mark (the card prints
+# none). Its trait and kill trigger are text only (NEEDS PLUGIN).
+Model: BlackUnicorn
+Health:
+    Amount: 7
+    SquareEnhancements: 1
+Move: 3
+Attack:
+    Amount: 2
+    SquareEnhancements: 1
+Range: 1

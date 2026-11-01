@@ -1,0 +1,78 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WarmUp$
+Character: Spellweaver2ID
+ID: 32418
+Level: 5
+Initiative: 60
+# card: Warm Up
+# top: persistent, one use (the single dashed slot): approximated as a one-use toggle +1 Attack bonus (Frosthaven's
+# Tidal Blast bottom shape: BuffAttack, IsToggleBonus) the player turns on for the next attack ability of a lost action;
+# Frosthaven's BuffAttack never checks requirements, so the "from an action with [lost]" condition is the player's
+# (NEEDS PLUGIN for the exact rule). Top is persistent only (no lost icon): discarded when the use ends.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: TargetedGenericFlame
+            TActive:
+                Attack: 1
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    ValidAbilityType: Attack
+                    IsToggleBonus: True
+                    XPTracker: [0]
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BLoot:
+                Loot: 2
+                Target: -1
+                AnimOverload: Loot
+            BInfuse:
+                CanUndo: False
+                CanSkip: False
+                Infuse: [Any]
+                ShowElementPicker: True
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+        - Divider:
+        - Active:
+            Ability: TActive
+            ListLayout: "$FHS_GH2E_Spellweaver2_18_T$"
+            Layout: "$FHS_GH2E_Spellweaver2_18_T$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=100%> "
+        - XPTracker: TActive
+        - Row: "<size=20%> "
+        - Infuse: Fire
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"
+        - Row: "<size=20%> "
+        - Infuse: Any

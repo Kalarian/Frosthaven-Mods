@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PerniciousFogger$
+Character: Tinkerer2ID
+ID: 32527
+Level: 7
+Initiative: 71
+# card: Pernicious Fogger
+# from Xipe's 99056_Tinkerer2_Pernicious Fogger.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            # The "Pernicious Fogger" token: a summon that can't be targeted, hurt or block (the 1st edition Ward's
+            # shape) carrying an end-of-turn damage aura (Frosthaven's Banner of Doom shape with EndTurnAbility).
+            # Placed as a summon (adjacent), not "within range 3".
+            TSummon:
+                Summon: PerniciousFoggerID
+                AnimOverload: Summon
+        XP: 3
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BStrengthen:
+                Strengthen:
+                    DiamondPlusEnhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_PerniciousFogger$
+                    SpecialText: "$FHS_GH2E_Tinkerer2_27_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Strengthen> <size=100%><voffset=1>@BStrengthen@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BStrengthen.Range*</link>"
+            - Column:

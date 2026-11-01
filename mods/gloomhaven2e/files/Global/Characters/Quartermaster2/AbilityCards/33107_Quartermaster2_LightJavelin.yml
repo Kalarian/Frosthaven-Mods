@@ -1,0 +1,37 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LightJavelin$
+Character: Quartermaster2ID
+ID: 33107
+Level: 1
+Initiative: 81
+# card: Light Javelin
+# top: Attack 3 [diamond], Range 3 [square]. bottom: Loot 2 (no mark). Exact.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 2
+                Target: -1
+                AnimOverload: Loot
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+    Bottom:
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"

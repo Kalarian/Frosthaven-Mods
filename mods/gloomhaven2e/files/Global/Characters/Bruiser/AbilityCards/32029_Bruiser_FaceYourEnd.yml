@@ -1,0 +1,67 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FaceYourEnd$
+Character: BruiserID
+ID: 32029
+Level: 9
+Initiative: 67
+# card: Face Your End
+# 2e sheet: top Attack 2, Target 2, Range 3, Pull 2; Attack 3 [diamond] on 3 hexes in front (no hex mark); bottom
+# Attack 4 [diamond], "add +3 Attack and gain XP 1 if the target's current hit point value is lower than yours".
+# The bottom is exact: a per-target conditional override whose filter compares the two (Frosthaven's filter Vars with
+# target and self, as Metal Mosaic's Heat Conduction), in place of Xipe's fixed "Health <= 13".
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack1:
+                Attack: 2
+                Range: 3
+                Target: 2
+                AnimOverload: RangedAttack
+                SubAbilities:
+                    TAttackSubPull:
+                        Pull: 2
+                        IsInlineSubAbility: True
+            TAttack2:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                AreaEffect: "0,0,G|1,1,R|2,0,R|1,-1,R"
+                AnimOverload: Attack_AOE_Radial
+                MultiPassAttack: False
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                AnimOverload: Attack_AOE_Cone
+                ConditionalOverrides:
+                    BAttackCO:
+                        Filter:
+                            TargetType: Enemy
+                            Vars:
+                                ValidateLowerHP: target.Health < self.Health
+                        XP: 1
+                        AbilityOverrides:
+                            BLowerHPBuff:
+                                Strength: 3
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack1*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TAttack1.Target* <sprite name=Range> *TAttack1.Range* <sprite name=Pull> 2</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "65,30"
+            - Column:
+                - Row: "<size=150%><sprite name=Attack> *TAttack2* <size=100%><voffset=1>@TAttack2@"
+            - Column: "£Area£"
+    Bottom:
+        - Row: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Bruiser_29_B$"

@@ -1,0 +1,61 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HolyStrike$
+Character: Sunkeeper2ID
+ID: 33302
+Level: 1
+Initiative: 65
+# card: Holy Strike
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Pierce: 1
+                AnimOverload: MeleeSmite
+        Consumes:
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        AttackHasAdvantage: True
+                XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range: 3
+                AnimOverload: RangedSmite
+        Infuse: Light
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Pierce> *TAttack.Pierce*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCLight
+                    Text: "+1 <sprite name=Attack>, $FHS_Advantage$, <sprite name=XP1>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Light

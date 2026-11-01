@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Bruiser02
+Name: PERK_Bruiser_02_Name
+Description: PERK_Bruiser_02_Desc
+CharacterID: BruiserID
+Available: 2
+CardsToRemove: [AMC_Basic_M1]
+CardsToAdd: [AMC_Shield1_R]

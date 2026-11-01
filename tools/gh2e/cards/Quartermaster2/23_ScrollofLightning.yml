@@ -1,0 +1,58 @@
+# card: Scroll of Lightning
+# top: Attack 5 [diamond], Range 3 [square]; mandatory "all allies and enemies adjacent to the target suffer damage 1":
+#   an inline Damage sub-ability with AllTargetsAdjacentToParentTargets, Filter [Enemy, Ally], CanSkip False (the
+#   1st edition Cragheart Blind Destruction / Bruiser Let Fly shape); infuse Air (mandatory box).
+# bottom: gain the Corrosive Coating: APPROXIMATION, recover one spent or lost item (NEEDS PLUGIN); Attack 2 [diamond],
+#   Range 4, Pierce 1, Muddle.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: TargetedScrollLightning
+                SubAbilities:
+                    TAttackSubDamage:
+                        IsInlineSubAbility: True
+                        Damage: 1
+                        Range: 1
+                        Target: -1
+                        Filter: [Enemy, Ally]
+                        AllTargetsAdjacentToParentTargets: True
+                        CanSkip: False
+        Infuse: [Air]
+    Bottom:
+        Abilities:
+            BGive:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Filter: Self
+                AnimOverload: Refresh
+            BAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 4
+                Pierce: 1
+                Conditions: Muddle
+                AnimOverload: TargetedScroll
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Quartermaster2_23_T$"
+        - Row: "<size=50%> "
+        - Infuse: Air
+    Bottom:
+        - Row: "$GH2E_Quartermaster2_23_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+        - Row: "$Range$ <sprite name=Range> *BAttack.Range*"
+        - Row: "$Pierce$ <sprite name=Pierce> *BAttack.Pierce*"
+        - Row: "$Muddle$ <sprite name=Muddle>"

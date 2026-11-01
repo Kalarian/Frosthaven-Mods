@@ -1,0 +1,83 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ChangeTempo$
+Character: Soothsinger2ID
+ID: 33421
+Level: 5
+Initiative: 25
+# card: Change Tempo
+# top: Blinkblade Experimental Adjustment's two-condition NullTargeting, in Secretariat's triangle area
+# (0,1) (1,0) (1,1) + (2,0) hex mark
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TConditions:
+                NullTargeting: True
+                Range: 4
+                Target: -1
+                AreaEffect: "2,1,R|1,0,R|3,0,R|4,1,E"
+                Filter: Enemy
+                Conditions: [Immobilize, Muddle]
+                MiscVars:
+                    IsNegative: True
+                AnimOverload: AggressiveTargetedShout
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerHighNote", 1]
+    Bottom:
+        Abilities:
+            BCurse:
+                Curse:
+                    DiamondEnhancements: 1
+                Range: 4
+                Filter: Enemy
+                AnimOverload: AggressiveTargetedShout
+            BBless:
+                Bless:
+                    DiamondPlusEnhancements: 1
+                Range: 4
+                Filter: [Self, Ally]
+                AnimOverload: PlayPositiveTune
+            BNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Immobilize> <sprite name=Muddle>"
+        - Row: "<size=40%> "
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=1%> "
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TConditions.Range*</link>"
+            - Column:
+        - Row: "£TConditions.Area£"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_HIGH$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Curse> <size=100%><voffset=1>@BCurse@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BCurse.Range*</link>"
+            - Column:
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Bless> <size=100%><voffset=1>@BBless@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BBless.Range*</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_LOW$"

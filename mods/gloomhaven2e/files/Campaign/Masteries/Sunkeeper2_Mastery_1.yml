@@ -1,0 +1,17 @@
+Parser: Mastery
+ID: Sunkeeper2_MASTERY_1
+LocalisedName: Sunkeeper2_MASTERY_1_Name
+LocalisedDescription: Sunkeeper2_MASTERY_1_Desc
+PerkPoints: 1
+# The 1st edition crossover's Child of the Sun: Light infused or consumed on every turn the Sunkeeper takes, answered by
+# the Frosthaven Mods plugin (GHMasteries.cs) from the element records.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ElementEveryTurn]
+        Elements: Light
+        CharacterIDs:
+            ActorID: Sunkeeper2ID
+        Value: 1

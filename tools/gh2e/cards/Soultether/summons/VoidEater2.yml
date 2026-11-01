@@ -1,0 +1,39 @@
+Parser: HeroSummon
+ID: VoidEater2ID
+LocKey: $GH2E_SUMMON_VoidEater$
+Model: VoidEater
+Health:
+    Amount: 6
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+    SquareEnhancements: 1
+Attack:
+    Amount: 4
+    SquareEnhancements: 1
+Range: 1
+# "Whenever this summon kills an enemy while Dark is strong or waning, shuffle a Curse card into the monster attack
+# modifier deck": Frosthaven's kill trigger (Drifter Fortitude: DuringActionAbilityOnKill, the killer checked by its
+# class) with the element test; the curse = Curse on one enemy (Frosthaven's monsters share one modifier deck).
+# Unverified.
+OnSummonAbilities:
+    ACurseOnKill:
+        AutoTrigger: True
+        Filter: Self
+        SkipAnim: True
+        AddActiveBonus:
+            Curse: True
+            Range: 99
+            Target: 1
+            IgnoreLOS: True
+            Filter: Enemy
+            CanUndo: False
+            AnimOverload: CastNegative
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringActionAbilityOnKill
+            ListLayoutOverride: [$GH2E_Soultether_27_T$, Icon_Curse]
+            Vars:
+                ValidateKillerIsVoidEater: TriggerActor.Class.ID == "VoidEater2ID"
+                ValidateVictimIsEnemy: CActor.AreActorsAllied(TriggerActor.Type, TriggerTarget.Type, TriggerActor, TriggerTarget) == false
+                ValidateDark: ElementInfusionBoardManager.GetAvailableElements().Contains(ElementInfusionBoardManager.EElement.Dark)

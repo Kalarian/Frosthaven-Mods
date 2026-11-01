@@ -1,0 +1,44 @@
+# card: Crushing Hammer
+# top: Attack 2 [diamond], Stun (no mark), 4-hex rhombus with hex marks on 2,2 and 4,0 (the sheet's coordinates, as
+#   Bruiser's Intimidating Growl); XP 2, lost.
+# bottom: Move 3 [circle]; give the Iron Plate item to one adjacent ally or self: APPROXIMATION, that figure recovers
+#   one spent or lost item (NEEDS PLUGIN); its XP 1 is the half's XP (see NOTES.md, item gives).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Conditions: Stun
+                AreaEffect: "0,0,G|2,0,R|1,1,R|3,1,R|2,2,E|4,0,E"
+                MultiPassAttack: False
+                AnimOverload: HeavyAttack
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BGive:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Range: 1
+                Filter:
+                    TargetType: [Self, Ally]
+                    ActorType: Player
+                AnimOverload: Refresh
+        XP: 1
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Row: "$Stun$ <sprite name=Stun>"
+        - Column: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Quartermaster2_03_B$"

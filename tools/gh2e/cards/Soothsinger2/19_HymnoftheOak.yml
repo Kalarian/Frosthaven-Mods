@@ -1,0 +1,59 @@
+# card: Hymn of the Oak
+# bottom: "grant all allies: Shield 1" for the round = a round Shield 1 aura on every ally (not you)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TWard:
+                Ward:
+                    Enhancements: 1
+                Target:
+                    Amount: 2
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: PlayPositiveTune
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 1
+                Target: -1
+                Targeting: All
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: [Ally]
+                AnimOverload: PlayPositiveTuneShield
+            BNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerHighNote", 1]
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Ward$ <sprite name=Ward> <size=100%><voffset=1>@TWard@"
+        - Row: "$Target$ <sprite name=Target> *TWard.Target* @TWard.Target@"
+        - Row: "$Range$ <sprite name=Range> *TWard.Range* @TWard.Range@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_LOW$"
+    Bottom:
+        - Row: "$GH2E_Soothsinger2_19_B$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Shield$ <sprite name=Shield> 1"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_HIGH$"
+        - Row: "<size=50%> "
+        - Duration: Round

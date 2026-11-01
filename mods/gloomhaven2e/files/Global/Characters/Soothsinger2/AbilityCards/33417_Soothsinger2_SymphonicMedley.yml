@@ -1,0 +1,56 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SymphonicMedley$
+Character: Soothsinger2ID
+ID: 33417
+Level: 3
+Initiative: 62
+# card: Symphonic Medley
+# bottom: up to three song actions from the hand (Banner Spear Hail of Spears' SelectAndPlayCard; a song action is a
+# top whose abilities include TSongNotes); the 1-, 2- and 3-Note split is not enforced (NOTES.md)
+Discard: [Discard,Permanently Lost]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            TAttack:
+                Attack: 3
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+    Bottom:
+        Abilities:
+            BPlaySongs:
+                Filter: Self
+                SelectAndPlayCard:
+                    CardPile: Hand
+                    Amount: 3
+                    MinRequiredCards: 0
+                MiscVars:
+                    IsActionValid: Action.Abilities.Any(obj.Name == 'TSongNotes')
+        XP: 1
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_LOW$"
+    Bottom:
+        - Row: "$FHS_GH2E_Soothsinger2_17_B$"

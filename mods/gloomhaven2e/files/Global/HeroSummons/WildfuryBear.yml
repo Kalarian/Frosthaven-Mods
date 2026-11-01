@@ -1,0 +1,10 @@
+Parser: HeroSummon
+ID: WildfuryBearID
+LocKey: $GH2E_SUMMON_WildfuryBear$
+# the class companion (CompanionSummonData via companion.txt): class mat HP 8 + 2 x level, Move 3, Attack 2, melee.
+# Same stats as the 1st edition Beast Tyrant's bear, own ID so the two editions stay apart; its model.
+Model: BeastTyrantBear
+HealthTable: [  10,   12,   14,   16,  18,  20,  22,  24,  26 ]
+Move: 3
+Attack: 2
+Range: 1

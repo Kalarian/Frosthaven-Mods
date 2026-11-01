@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Quartermaster208
+Name: PERK_Quartermaster2_08_Name
+Description: PERK_Quartermaster2_08_Desc
+CharacterID: Quartermaster2ID
+Available: 1
+CardsToRemove: [AMC_Basic_P0]
+Flags: [Passive, IgnoreMinusOneItemEffects]

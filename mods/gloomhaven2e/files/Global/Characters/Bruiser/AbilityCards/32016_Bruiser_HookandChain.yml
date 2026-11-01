@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HookandChain$
+Character: BruiserID
+ID: 32016
+Level: 3
+Initiative: 42
+# card: Hook and Chain
+# 2e sheet: top Attack 3, Range 4, Pull 3; bottom Move 4, "if you moved in a straight line in one direction with the
+# move ability, perform:" Attack X = hexes moved. No enhancement marks anywhere. The 1st edition Hook and Chain's
+# shape (HexesMovedThisAction, MoveWasStraightLine on the previous ability).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                Range: 4
+                SubAbilities:
+                    TAttackSubPull:
+                        Pull: 3
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+            BAttack:
+                Attack:
+                    Amount: 0
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: HexesMovedThisAction
+                StartAbilityRequirements:
+                    Type: PreviousAbility
+                    MoveWasStraightLine: True
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <sprite name=Pull> 3</link>"
+            - Column:
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove*"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Bruiser_16_B$"
+        - Row: "<size=20%> "
+        - Row: "<size=150%><sprite name=Attack> X"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Bruiser_16_B2$"

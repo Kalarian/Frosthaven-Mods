@@ -1,0 +1,75 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_AidfromtheEther$
+Character: Spellweaver2ID
+ID: 32406
+Level: 1
+Initiative: 36
+# card: Aid from the Ether
+# bottom: "when you next perform an action with [lost] this round" = Frosthaven's own lost-action trigger (Geminate perk 7:
+# DuringActionAbilityOnActionEnded + the performed half's CardPile), one use (XPTracker [0]) for the round
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            TCAny:
+                Elements: Any
+                AbilityOverrides:
+                    TCAnyHealBuff:
+                        ParentName: THeal
+                        Strength: 1
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BOnLost:
+                AddActiveBonus:
+                    Infuse: [Any]
+                    ShowElementPicker: True
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: DuringActionAbilityOnActionEnded
+                    Restriction: OncePerAction
+                    XPTracker: [0]
+                    Vars:
+                        LastPerformedAbility: TriggerActor.LastAbilityPerformed
+                        LostPile: LastPerformedAbility?.GetAbilityBaseCard()?.SelectedAction?.CardPile
+                        ValidateDidLoseCard: LostPile == "Lost" || LostPile == "PermanentlyLost"
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAny
+                    Text: "+1 <sprite name=Heal>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BOnLost
+            ListLayout: "$FHS_GH2E_Spellweaver2_06_B$"
+            Layout: "$FHS_GH2E_Spellweaver2_06_B$"
+            Icon: Positive_FireLightInfuse_Wild

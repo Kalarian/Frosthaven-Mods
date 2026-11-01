@@ -1,0 +1,17 @@
+Parser: Mastery
+ID: Nightshroud2_MASTERY_1
+LocalisedName: Nightshroud2_MASTERY_1_Name
+LocalisedDescription: Nightshroud2_MASTERY_1_Desc
+PerkPoints: 1
+# The 1st edition crossover's Creature of the Night: Dark infused or consumed on every turn taken, answered by the
+# Frosthaven Mods plugin (GHMasteries.cs) from the element records.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ElementEveryTurn]
+        Elements: Dark
+        CharacterIDs:
+            ActorID: Nightshroud2ID
+        Value: 1

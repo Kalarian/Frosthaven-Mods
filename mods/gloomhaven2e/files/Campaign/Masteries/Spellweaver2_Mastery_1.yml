@@ -1,0 +1,17 @@
+Parser: Mastery
+ID: Spellweaver2_MASTERY_1
+LocalisedName: Spellweaver2_MASTERY_1_Name
+LocalisedDescription: Spellweaver2_MASTERY_1_Desc
+PerkPoints: 1
+# the plugin's tag (GHMasteries.cs LossActionsRepeated): Value different card halves with a lost icon each performed
+# Amount times
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_LossActionsRepeated]
+        CharacterIDs:
+            ActorID: Spellweaver2ID
+        Value: 4
+        Amount: 2

@@ -1,0 +1,26 @@
+Parser: Perk
+ID: Plagueherald211
+Name: PERK_Plagueherald2_11_Name
+Description: PERK_Plagueherald2_11_Desc
+CharacterID: Plagueherald2ID
+Available: 1
+Flags: [Passive, ExecuteAbilitiesAfterLongRest]
+Abilities:
+    BRemovePoison:
+        RemoveConditions: 1
+        Conditions: [Poison]
+        Range: 99
+        Target: 1
+        Filter:
+            TargetType: Ally
+            TargetHasNegativeCondition: Poison
+        CanSkip: True
+        CanUndo: False
+        AnimOverload: Heal
+        SubAbilities:
+            BHealBonus:
+                Heal: 1
+                Filter: Self
+                TreatAsNonSubAbility: True
+                AutoTrigger: True
+                AnimOverload: None

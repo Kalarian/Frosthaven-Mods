@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Euthanize$
+Character: Sawbones2ID
+ID: 33227
+Level: 8
+Initiative: 27
+# card: Euthanize
+# top: the 1st edition Euthanize kill with the 2e limits as CAbilityFilter keys: adjacent, damaged (TargetMissingHP),
+# two or more negative conditions, 8 hit points or fewer; normal and elite only (no Frosthaven kill ability takes a
+# boss). bottom: Wound, Poison and Muddle on one enemy within range 1, then damage 1 to it: one Damage 1 carrying the
+# three conditions (same target, same result).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TKill:
+                Kill: True
+                Range: 1
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite]
+                    TargetMissingHP: "> 0"
+                    TargetNegativeConditionCount: ">= 2"
+                    Health: "<= 8"
+                AnimOverload: Attack_AOE_Cone
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BDamage:
+                Damage: 1
+                Range: 1
+                Target: 1
+                Filter: Enemy
+                Conditions: [Wound, Poison, Muddle]
+                AnimOverload: TargetedDebuff
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Sawbones2_27_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Wound> <sprite name=Poison> <sprite name=Muddle>"
+        - Row: "<size=40%> "
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=1%> "
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BDamage.Range*</link>"
+            - Column:
+        - Row: "$FHS_GH2E_Sawbones2_27_B$"

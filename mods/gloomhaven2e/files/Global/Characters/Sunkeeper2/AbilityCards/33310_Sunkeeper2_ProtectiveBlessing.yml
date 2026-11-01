@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ProtectiveBlessing$
+Character: Sunkeeper2ID
+ID: 33310
+Level: 1
+Initiative: 16
+# card: Protective Blessing
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+        XP: 1
+    Bottom:
+        Abilities:
+            BPrevent:
+                PreventDamage: -1
+                Range: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Self, Ally]
+                AnimOverload: PositiveBuffRadial
+        Infuse: Light
+        XP: 2
+Layout:
+    Top:
+        - Active:
+            Ability: TShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *TShield*"
+            Layout:
+                - Row: "<size=150%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+    Bottom:
+        - Active:
+            Ability: BPrevent
+            Icon: Positive_DamagePrevent
+            ListLayout: "$FHS_GH2E_Sunkeeper2_10_B$"
+            Layout: "$FHS_GH2E_Sunkeeper2_10_B$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "20,20,20,20"
+            - Column:
+            - Column:
+                - Infuse: Light
+            - Column:
+            - Column:

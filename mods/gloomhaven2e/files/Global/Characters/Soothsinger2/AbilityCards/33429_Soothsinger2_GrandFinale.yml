@@ -1,0 +1,104 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GrandFinale$
+Character: Soothsinger2ID
+ID: 33429
+Level: 9
+Initiative: 46
+# card: Grand Finale
+# top: a plain Move with Jump, then a control on every enemy moved through (the Trample fix: AllTargetsOnMovePath +
+# Targeting All), each performing Attack 3; the extra Note is a Note choice right away ("this round" not tracked)
+# bottom: song actions from the hand, then from the discard pile (SelectAndPlayCard); the token skip is NEEDS PLUGIN
+Discard: [Discard,Permanently Lost]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+                    Jump: True
+            TControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Attack:
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            Range: 1
+                            Target: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                AllTargetsOnMovePath: True
+                Targeting: All
+                Target: -1
+                Filter: Enemy
+                AnimOverload: AggressiveTargetedShout
+            TNoteChoice:
+                Filter: Self
+                AutoTrigger: True
+                CanSkip: False
+                CanUndo: False
+                PreviewEffectText: "High Note / Low Note"
+                Choose:
+                    Abilities:
+                        TNoteHigh:
+                            PreviewEffectText: "High Note"
+                            NullTargeting: True
+                            Filter: Self
+                            AutoTrigger: True
+                            SkipAnim: True
+                            ResourcesToAddOnAbilityEnd:
+                                - ["SoothsingerHighNote", 1]
+                        TNoteLow:
+                            PreviewEffectText: "Low Note"
+                            NullTargeting: True
+                            Filter: Self
+                            AutoTrigger: True
+                            SkipAnim: True
+                            ResourcesToAddOnAbilityEnd:
+                                - ["SoothsingerLowNote", 1]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BPlayHand:
+                Filter: Self
+                AutoTrigger: True
+                SelectAndPlayCard:
+                    CardPile: Hand
+                    Amount: 10
+                    MinRequiredCards: 0
+                MiscVars:
+                    IsActionValid: Action.Abilities.Any(obj.Name == 'TSongNotes')
+            BPlayDiscard:
+                Filter: Self
+                AutoTrigger: True
+                SelectAndPlayCard:
+                    CardPile: Discarded
+                    Amount: 10
+                    MinRequiredCards: 0
+                MiscVars:
+                    IsActionValid: Action.Abilities.Any(obj.Name == 'TSongNotes')
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_29_T$"
+        - Row: "<size=150%><sprite name=Attack> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_29_T2$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_29_B$"

@@ -1,0 +1,39 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EarthenSpikes$
+Character: WildfuryID
+ID: 33615
+Level: 2
+Initiative: 11
+# card: Earthen Spikes
+# top: Attack 2 [diamond], Range 4, Immobilize, infuse Earth. bottom: Move 5 [square]. As printed.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 4
+                Conditions: Immobilize
+                AnimOverload: RangedAttack
+        Infuse: Earth
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 5
+                    SquareEnhancements: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Immobilize></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Earth
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

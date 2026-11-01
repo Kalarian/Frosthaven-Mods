@@ -1,0 +1,90 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DarkFrenzy$
+Character: Mindthief2ID
+ID: 32223
+Level: 6
+Initiative: 39
+# card: Dark Frenzy
+# written from tools/gh2e/sheets/Mindthief.json; bottom consume = Submissive Affliction's shape (each controlled enemy
+# damages itself)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+        Consumes:
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceAttackBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 1
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Move: 1
+                            StrengthIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 4
+                Target: 2
+                Filter: Enemy
+                AnimOverload: MindControl
+        Consumes:
+            BCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    BCIceDamage:
+                        ParentName: BControl
+                        ControlActor:
+                            Abilities:
+                                EnemyWillDoThisDamage:
+                                    Damage: 1
+                                    Filter: Self
+                                    AutoTrigger: True
+                XP: 1
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCIce
+                    Text: "+2 <sprite name=Attack>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "+2 <sprite name=Attack>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Mindthief2_CONTROL2$"
+        - Row: "<size=20%> "
+        - Row: "<size=150%><sprite name=Move> 1"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCIce
+                    Text: "$FHS_GH2E_Mindthief2_23_B$, <sprite name=XP1>"

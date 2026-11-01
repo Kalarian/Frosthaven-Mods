@@ -1,0 +1,61 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BloodySaw$
+Character: Sawbones2ID
+ID: 33204
+Level: 1
+Initiative: 25
+# card: Bloody Saw
+# top: a self conditional override (Frosthaven's Extra Decoration shape) whose filter checks every player figure for an
+# active bonus tagged as a Prescription (MiscVars GH2E_Prescription on every Prescription ability of this class).
+# bottom: Safeguard (data stand-in, NOTES.md); its diamond-plus mark is dropped (a Safeguard has no value to enhance).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                ConditionalOverrides:
+                    TAttackCO:
+                        Self: True
+                        Filter:
+                            Vars:
+                                ValidateAllyPrescription: ScenarioManager.Scenario.PlayerActors.Any(obj.ActiveBonuses.Any(CustomAbility.GetMiscVarBool(obj.Ability, "GH2E_Prescription")))
+                        XP: 1
+                        AbilityOverrides:
+                            TAttackCOBuff:
+                                Strength: 1
+                                Conditions: [Wound]
+    Bottom:
+        Abilities:
+            BSafeguard:
+                NullTargeting: True
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: GenericOnNegativeCondition
+                    XPTracker: [0]
+                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
+                    Vars:
+                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
+                        ValidateNotImmune: CAbility.ImmuneToAbility(TriggerTarget, TriggerAbility) == False
+                        ValidateIsNegativeCondition: TriggerAbility.AbilityType == "Poison" || TriggerAbility.AbilityType == "Wound" || TriggerAbility.AbilityType == "Stun" || TriggerAbility.AbilityType == "Disarm" || TriggerAbility.AbilityType == "Immobilize" || TriggerAbility.AbilityType == "Muddle" || TriggerAbility.AbilityType == "Curse" || TriggerAbility.AbilityType == "Bane" || TriggerAbility.AbilityType == "Brittle" || TriggerAbility.AbilityType == "Impair"
+                        PreventCondition: True
+            BLoot:
+                Loot: 1
+                AnimOverload: Loot
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Sawbones2_04_T$"
+    Bottom:
+        - Active:
+            Ability: BSafeguard
+            Icon: Positive_DamagePrevent
+            ListLayout: "$FHS_GH2E_SAFEGUARD$"
+            Layout: "$FHS_GH2E_Sawbones2_SG$"
+        - Divider:
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"

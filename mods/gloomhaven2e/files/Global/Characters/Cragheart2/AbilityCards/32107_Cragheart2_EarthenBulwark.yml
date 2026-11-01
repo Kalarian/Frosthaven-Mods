@@ -1,0 +1,80 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EarthenBulwark$
+Character: Cragheart2ID
+ID: 32107
+Level: 1
+Initiative: 41
+# card: Earthen Bulwark
+# from Xipe's 99122_Cragheart2_Earthen Bulwark.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: the damage and Ward are a consume Earth (Xipe: always, Strengthen); both aim at the allies around the created
+# tiles (AllTargetsAdjacentToParentTargets under a Create, the 1st edition Rock Slide fix); range 3 carries a square mark
+# bottom: Heal 1 carries a square mark (square slot)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TCreate:
+                Create: RockSingle
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Target: 2
+                SpawnDelay: 2.9
+                AnimOverload: ObstacleAvalanche
+                MultiPassAttack: False
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthAllies:
+                        ParentName: TCreate
+                        SubAbilities:
+                            TCEarthDamage:
+                                AllTargetsAdjacentToParentTargets: True
+                                Damage: 1
+                                Range: 1
+                                Target: -1
+                                Filter: Ally
+                            TCEarthWard:
+                                AllTargetsAdjacentToParentTargets: True
+                                Ward: True
+                                Range: 1
+                                Target: -1
+                                Filter: Ally
+                                AutoTrigger: True
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BHeal:
+                Heal:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Cragheart2_07_T$"
+        - Row: "<sprite name=Range> *TCreate.Range* @TCreate.Range@"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCEarth
+                    Text: "$FHS_GH2E_Cragheart2_07_T2$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range* @BHeal.Range@</link>"
+            - Column:

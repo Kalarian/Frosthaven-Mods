@@ -1,0 +1,36 @@
+Parser: HeroSummon
+ID: VitalForceID
+LocKey: $GH2E_SUMMON_VitalForce$
+# stand-in model: the 1st edition Spirit Banner (Tribal Sigil's summon, the same sigil slot and also a +2 Attack aura)
+Model: SpiritBanner
+Health:
+    Amount: 3
+    SquareEnhancements: 1
+Move: 0
+Attack: 0
+Range: 0
+# "All allies within Range 3 add +2 Attack to their first attack each round": Frosthaven's Banner of Strength aura
+# (a single-target bonus once per turn per figure, auto-toggled) with +2 and range 3. Once per turn = once per round
+# for every figure with one turn a round.
+OnSummonAbilities:
+    ABuffAttackAura:
+        Range: 3
+        Target: -1
+        Filter: Self
+        Attack: 2
+        ActiveBonus:
+            Behaviour: BuffAttack
+            Duration: Persistent
+            ValidAbilityTypes: [Attack]
+            Restriction: OncePerTurn
+            RestrictPerActor: True
+            IsToggleBonus: True
+            IsSingleTargetBonus: True
+            IsAura: True
+            AuraTargeting: Range
+            AuraFilter: [Ally]
+            Vars:
+                AutoToggle: True
+            ListLayoutOverride: [$GH2E_Wildfury_28_T$, Positive_AttackPlus_Ally_Aura]
+        Text: "$GH2E_Wildfury_28_T$"
+        AnimOverload: None

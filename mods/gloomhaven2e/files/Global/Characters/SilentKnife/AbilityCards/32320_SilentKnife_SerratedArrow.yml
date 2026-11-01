@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SerratedArrow$
+Character: SilentKnifeID
+ID: 32320
+Level: 5
+Initiative: 95
+# card: Serrated Arrow
+# from Xipe's 99107_Scoundrel2_Serrated Arrow.yml; corrected against tools/gh2e/sheets/SilentKnife.json (agrees)
+# bottom: the 1st edition Spring the Trap bottom's shape (passed in the 1e bench): one-slot x2 on a target that is both
+# flanked and isolated
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range: 3
+                Conditions: Wound
+                AnimOverload: RangedAttackPistolBurningOil
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 2
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    StrengthIsScalar: True
+                    Filter:
+                        TargetType: Enemy
+                        TargetAdjacentAlliesOfTarget: "== 0"
+                        TargetAdjacentAllies: "> 0"
+                    XPTracker: [2]
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Wound></link>"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_SilentKnife_20_B$"
+            Layout: "$FHS_GH2E_SilentKnife_20_B$"
+        - Row: "<size=100%> "
+        - XPTracker: BActive

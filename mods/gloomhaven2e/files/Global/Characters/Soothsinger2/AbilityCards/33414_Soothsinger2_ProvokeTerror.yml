@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ProvokeTerror$
+Character: Soothsinger2ID
+ID: 33414
+Level: X
+Initiative: 89
+# card: Provoke Terror
+# top: a ranged area push with Stun on every target, written as Frosthaven's Geminate Two-Pronged Entrapment
+# (NullTargeting area + inline Push sub with the condition); area from Secretariat's (0,0)E (0,1) (1,0) (1,1) (2,0) (2,1)E
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TPush:
+                NullTargeting: True
+                Range: 4
+                Target: -1
+                AreaEffect: "0,1,E|2,1,R|4,1,R|1,0,R|3,0,R|5,0,E"
+                Filter: Enemy
+                AnimOverload: AggressiveTargetedShout
+                SubAbilities:
+                    TPushSub:
+                        Push:
+                            Amount: 2
+                            SquareEnhancements: 1
+                        IsInlineSubAbility: True
+                        Conditions: Stun
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Push> *TPushSub* <size=100%><voffset=1>@TPushSub@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TPush.Range*, <sprite name=Stun></link>"
+            - Column:
+        - Row: "£TPush.Area£"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_LOW$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

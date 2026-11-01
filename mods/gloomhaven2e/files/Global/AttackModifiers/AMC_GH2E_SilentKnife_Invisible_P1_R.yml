@@ -1,0 +1,8 @@
+Parser: AttackModifier
+Name: AMC_GH2E_SilentKnife_Invisible_P1_R
+MathModifier: "+1"
+Rolling: True
+AbilityOverrides:
+    NegCon:
+        ParentName: AMC_GH2E_SilentKnife_Invisible_P1_R
+        Conditions: [Invisible]

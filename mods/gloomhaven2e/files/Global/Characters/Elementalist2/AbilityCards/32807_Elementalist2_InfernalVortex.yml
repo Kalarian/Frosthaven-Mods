@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_InfernalVortex$
+Character: Elementalist2ID
+ID: 32807
+Level: 1
+Initiative: 35
+# card: Infernal Vortex
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range: 4
+                Target: -1
+                MultiPassAttack: False
+                AnimOverload: RadialHexFire
+        Infuse: [Fire, Air]
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    SquareEnhancements: 1
+                ConditionalOverrides:
+                    BMoveCO:
+                        Requirements:
+                            Vars:
+                                ValidateElementStrongOrWaning: ElementInfusionBoardManager.GetAvailableElements().Count > 0
+                        AbilityOverrides:
+                            BMoveBuff:
+                                Strength: 1
+        Infuse: Earth
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$FHS_GH2E_Elementalist2_07_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "50, 50"
+            - Column:
+                - Infuse: Fire
+            - Column:
+                - Infuse: Air
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "$FHS_GH2E_Elementalist2_MOVE_IF_ELEMENT$"
+        - Row: "<size=20%> "
+        - Infuse: Earth

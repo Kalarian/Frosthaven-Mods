@@ -1,0 +1,35 @@
+Parser: HeroSummon
+ID: EmberSpriteID
+LocKey: $GH2E_SUMMON_EmberSprite$
+# stand-in model: the 1st edition Burning Avatar (a new 2e creature; NOTES.md)
+Model: BurningAvatar
+Health:
+    Amount: 3
+    SquareEnhancements: 1
+Move: 3
+Attack: 1
+Range: 3
+Flying: True
+AttackAnimOverload: TargetedGenericFlame
+# "All allies within Range 3 gain Retaliate 1, Range 3 while Fire is strong or waning": Frosthaven's Lashing Tendrils
+# retaliate aura (Behaviour Retaliate, RetaliateRange) around the sprite (Banner of Courage's range aura), valid while
+# Fire can be consumed (the element test of Pyroclast perk 11). Unverified.
+OnSummonAbilities:
+    ARetaliateAura:
+        Retaliate: 1
+        RetaliateRange: 3
+        Range: 3
+        Target: -1
+        Filter: Self
+        ActiveBonus:
+            Behaviour: Retaliate
+            Duration: Persistent
+            IsAura: True
+            AuraTargeting: Range
+            AuraFilter: [Ally]
+            ListLayoutOverride: [$GH2E_Soultether_21_B$, Positive_Retaliate]
+            Requirements:
+                Vars:
+                    ValidateFire: ElementInfusionBoardManager.GetAvailableElements().Contains(ElementInfusionBoardManager.EElement.Fire)
+        Text: "$GH2E_Soultether_21_B$"
+        AnimOverload: None

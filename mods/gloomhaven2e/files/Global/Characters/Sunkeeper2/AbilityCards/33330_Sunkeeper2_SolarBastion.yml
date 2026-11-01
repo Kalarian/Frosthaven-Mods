@@ -1,0 +1,88 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SolarBastion$
+Character: Sunkeeper2ID
+ID: 33330
+Level: 9
+Initiative: 10
+# card: Solar Bastion
+# top consume: "one ally targeted with the heal may recover one card from their discard pile": a recover of its own on
+# one ally within the heal's range 3 (the player picks a healed ally).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal: 3
+                Range: 3
+                Target: -1
+                Filter: [Self, Ally]
+                AnimOverload: PositiveBuffRadial
+            TNull:
+                Null: True
+        Consumes:
+            TCLight:
+                Elements: Light
+                Abilities:
+                    TCLightRecover:
+                        ParentName: TNull
+                        RecoverDiscardedCards: 1
+                        Range: 3
+                        Filter:
+                            TargetType: Ally
+                            ActorType: Player
+                        AnimOverload: PositiveBuffTargeted
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BShield:
+                Shield: 2
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+            BNull:
+                Null: True
+        Consumes:
+            BCLight:
+                Elements: Light
+                Abilities:
+                    BCLightRetaliate:
+                        ParentName: BNull
+                        Retaliate: 2
+                        Filter: Self
+                        ActiveBonusDuration: Round
+                        AnimOverload: PowerUp
+                XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies> and self <sprite name=Range> *THeal.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCLight
+                    Text: "$FHS_GH2E_Sunkeeper2_30_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout:
+                - Row: "<size=150%><sprite name=Shield> *BShield*"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "<sprite name=Retaliate> 2, <sprite name=XP1>"

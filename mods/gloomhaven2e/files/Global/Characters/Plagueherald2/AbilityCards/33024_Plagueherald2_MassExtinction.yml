@@ -1,0 +1,74 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MassExtinction$
+Character: Plagueherald2ID
+ID: 33024
+Level: 7
+Initiative: 94
+# card: Mass Extinction
+# top: "whenever this ability kills an enemy, gain XP 1 and add +2 Attack, +1 Target" = a chain of kill-gated follow-up
+# attacks on another enemy with Plague at any range: Attack 6 after the first kill, Attack 8 after the second (XP 1
+# each). The chain stops at three attacks: APPROXIMATION (the card has no limit).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range: 99
+                Target: 1
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RangedAttack
+                SubAbilities:
+                    TAttack2:
+                        Attack: 6
+                        Range: 99
+                        Target: 1
+                        Filter:
+                            TargetType: Enemy
+                            TargetHasCharacterResource: ["Plague"]
+                        AbilityXP: 1
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsKilledByAbility: "> 0"
+                        TreatAsNonSubAbility: True
+                        AnimOverload: RangedAttack
+                        SubAbilities:
+                            TAttack3:
+                                Attack: 8
+                                Range: 99
+                                Target: 1
+                                Filter:
+                                    TargetType: Enemy
+                                    TargetHasCharacterResource: ["Plague"]
+                                AbilityXP: 1
+                                StartAbilityRequirements:
+                                    Type: SubAbility
+                                    ActorsKilledByAbility: "> 0"
+                                TreatAsNonSubAbility: True
+                                AnimOverload: RangedAttack
+        XP: 1
+    Bottom:
+        Abilities:
+            BPlague:
+                NullTargeting: True
+                Range: 5
+                Target: 1
+                Filter: Enemy
+                ResourcesToGiveToTargets:
+                    - ["Plague", 1]
+                ResourcesToAddOnAbilityEnd:
+                    - ["Plague", 3]
+                AnimOverload: TargetedDebuff
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$FHS_GH2E_Plagueherald2_24_T$"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Plagueherald2_24_T2$"
+    Bottom:
+        - Row: "$FHS_GH2E_Plagueherald2_PLAGUE$"
+        - Row: "<sprite name=Range> *BPlague.Range*"

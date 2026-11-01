@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Quartermaster209
+Name: PERK_Quartermaster2_09_Name
+Description: PERK_Quartermaster2_09_Desc
+CharacterID: Quartermaster2ID
+Available: 1
+Flags: [Passive]

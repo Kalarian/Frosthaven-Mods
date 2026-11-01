@@ -1,0 +1,34 @@
+Parser: HeroSummon
+ID: RockColossus2ID
+LocKey: $GH2E_SUMMON_RockColossus$
+Model: RockColossus
+Health:
+    Amount: 12
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    SquareEnhancements: 1
+Attack:
+    Amount: 1
+    SquareEnhancements: 1
+Range: 1
+OnAttackCondition: Muddle
+Retaliate: 2
+# "At the end of each of this summon's turns, it performs: Heal 1, self" (a summon's end-of-turn ability, as
+# Frosthaven's Repair Drone)
+SpecialAbilities:
+    AHeal:
+        Heal: 1
+        Filter: Self
+        AnimOverload: PowerUp
+# "Add +1 Heal to all heals targeting this summon": Frosthaven's Voice from Below incoming-heal bonus, persistent.
+OnSummonAbilities:
+    AHealPlus:
+        AddHeal: 1
+        Filter: Self
+        SkipAnim: True
+        AutoTrigger: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: BuffIncomingHeal
+            ListLayoutOverride: [$GH2E_Soultether_22_T$, Positive_Heal]

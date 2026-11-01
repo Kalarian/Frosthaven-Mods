@@ -1,0 +1,17 @@
+Parser: Perk
+ID: Quartermaster211
+Name: PERK_Quartermaster2_11_Name
+Description: PERK_Quartermaster2_11_Desc
+CharacterID: Quartermaster2ID
+Available: 1
+Cost: 2
+Flags: [Passive, ExecuteAbilitiesAfterLongRest]
+Abilities:
+    ASupplies:
+        Null: True
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        CanUndo: False
+        ResourcesToAddOnAbilityEnd:
+            - ["Supplies", 10]

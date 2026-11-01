@@ -1,0 +1,16 @@
+Parser: Perk
+ID: Elementalist211
+Name: PERK_Elementalist2_11_Name
+Description: PERK_Elementalist2_11_Desc
+CharacterID: Elementalist2ID
+Available: 1
+Flags: [Passive, ExecuteAbilitiesAfterLongRest]
+Abilities:
+    BRestConsume:
+        Consume:
+            Elements: Any
+            Abilities:
+                BRestInfuse:
+                    Infuse: [Any]
+                    ShowElementPicker: True
+                    CanUndo: False

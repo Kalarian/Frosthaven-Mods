@@ -1,0 +1,65 @@
+# card: Continual Supply
+# top: gain 20 supplies; then the optional spend box "Recover your and adjacent allies' items, XP 1" (you and every
+#   adjacent ally recover one spent or lost item; the gold budget NEEDS PLUGIN).
+# bottom: "on your next three turns that you end with 0 supplies, gain 30 supplies": an EndTurnAbility bonus gated by
+#   the bonus Vars (Validate: no supplies at the end of the turn; Frosthaven checks Validate vars before triggering, so
+#   the slots only advance on a 0-supplies turn), 3 slots with XP on slots 1 and 3 ([1,0,1]); the turn the card is
+#   played counts (the dashed first slot). Persistent, lost.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TSupplies:
+                Null: True
+                Filter: Self
+                ResourcesToAddOnAbilityEnd:
+                    - ["Supplies", 20]
+                AnimOverload: PowerUp
+            TSpend:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Range: 1
+                Target: -1
+                Filter:
+                    TargetType: [Self, Ally]
+                    ActorType: Player
+                AbilityXP: 1
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateSupplies: Actor.GetCharacterResourceAmount("Supplies") >= 10
+                PerformVars:
+                    OnAbilityEnded:
+                        SpendSupplies: AbilityHasHappened && TargetingActor.RemoveCharacterResource("Supplies", 50, true)
+                AnimOverload: Refresh
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Null: True
+                    Filter: Self
+                    AutoTrigger: True
+                    ResourcesToAddOnAbilityEnd:
+                        - ["Supplies", 30]
+                    AnimOverload: PowerUp
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [1,0,1]
+                    Vars:
+                        ValidateNoSupplies: TriggerActor.GetCharacterResourceAmount("Supplies") == 0
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "$GH2E_Quartermaster2_SUPPLIES20$"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Quartermaster2_SPEND_GROUP$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Refresh
+            ListLayout: "$GH2E_Quartermaster2_24_B$"
+            Layout: "$GH2E_Quartermaster2_24_B$"
+        - Row: "<size=20%> "
+        - XPTracker: BActive

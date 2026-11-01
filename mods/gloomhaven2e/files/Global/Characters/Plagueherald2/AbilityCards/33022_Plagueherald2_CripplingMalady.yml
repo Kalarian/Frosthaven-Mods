@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CripplingMalady$
+Character: Plagueherald2ID
+ID: 33022
+Level: 6
+Initiative: 26
+# card: Crippling Malady
+# top: +1 Attack per Plague on each target = the per-target Vars bonus of Wretched Yield (UNVERIFIED expression).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 99
+                Target: 2
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                ConditionalOverrides:
+                    TAttackCO:
+                        AbilityOverrides:
+                            TPlagueBuff:
+                                StatIsBasedOnX:
+                                    Strength:
+                                        BasedOn: Vars
+                                        AddTo: True
+                                        Vars:
+                                            Value: TargetActor != null and TargetActor.GetCharacterResourceAmount("Plague") or 0
+                AnimOverload: RangedAttack
+        XP: 1
+    Bottom:
+        Abilities:
+            BImmobilize:
+                Immobilize: True
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RadialNegativeMajor
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$FHS_GH2E_Plagueherald2_22_T$"
+        - Row: "$FHS_GH2E_Plagueherald2_22_T2$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Immobilize>"
+        - Row: "$FHS_GH2E_Plagueherald2_22_B$"

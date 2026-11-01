@@ -1,0 +1,48 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BoosterPack$
+Character: Quartermaster2ID
+ID: 33101
+Level: 1
+Initiative: 73
+# card: Booster Pack
+# top: 5 random items from the class item supply to adjacent allies and self (at most 3 to yourself): APPROXIMATION,
+#   you recover up to 2 spent or lost items and each adjacent ally 1 (5 items at most with three allies); NEEDS PLUGIN
+#   (Quartermaster item supply). XP 2, lost.
+# bottom: Recover one of your spent items (exact); Move 2 [circle].
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TGiveSelf:
+                RefreshItems: 2
+                SlotStateToRefresh: [Spent, Consumed]
+                Filter: Self
+                AnimOverload: Refresh
+            TGiveAllies:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Range: 1
+                Target: -1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: Refresh
+        XP: 2
+    Bottom:
+        Abilities:
+            BRecover:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent]
+                Filter: Self
+                AnimOverload: Refresh
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Quartermaster2_01_T$"
+    Bottom:
+        - Row: "$FHS_GH2E_Quartermaster2_RECOVER1$"
+        - Row: "<size=50%> "
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

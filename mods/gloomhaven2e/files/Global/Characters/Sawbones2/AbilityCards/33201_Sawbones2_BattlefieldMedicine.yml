@@ -1,0 +1,43 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BattlefieldMedicine$
+Character: Sawbones2ID
+ID: 33201
+Level: 1
+Initiative: 83
+# card: Battlefield Medicine
+# top: Disarm on its own (no attack), then the 1st edition's GiveSupplyCard to one adjacent ally; the XP is the give's
+# own (gained only when a pack is given). Bottom Move 5 has no mark.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TDisarm:
+                Disarm: True
+                Range: 1
+                Filter: Enemy
+                AnimOverload: TargetedDebuff
+            TGiveSupplyCard:
+                GiveSupplyCard: 33230
+                Range: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                XP: 1
+                AnimOverload: GivePackAdjacent
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 5
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Disarm>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TDisarm.Range*</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Sawbones2_PACK$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove*"

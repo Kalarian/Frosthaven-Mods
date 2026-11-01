@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Berserker208
+Name: PERK_Berserker2_08_Name
+Description: PERK_Berserker2_08_Desc
+CharacterID: Berserker2ID
+Available: 1
+CardsToAdd: [AMC_Basic_P1]
+Flags: [Passive, IgnoreMinusOneItemEffects]

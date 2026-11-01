@@ -1,0 +1,68 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Solidify$
+Character: Cragheart2ID
+ID: 32121
+Level: 5
+Initiative: 17
+# card: Solidify
+# from Xipe's 99136_Cragheart2_Solidify.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# bottom: the 1st edition Unstable Upheaval bottom's shape (round Shield 2 on allies, each suffers 1 damage through
+# UseParentTiles; play-tested), here on one ally within range 3. The damage row is a "!" box (CanSkip False).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 4
+                AnimOverload: MeleeSmashCrater
+                MultiPassAttack: False
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthAttackBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 1
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 2
+                Range: 3
+                Target: 1
+                Filter: Ally
+                AnimOverload: TargetedUnstableUpheavalBottom
+                ActiveBonusDuration: Round
+                SubAbilities:
+                    BShieldSubDamage:
+                        Damage: 1
+                        Target: -1
+                        UseParentTiles: True
+                        CanSkip: False
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCEarth
+                    Text: "+2 <sprite name=Attack>, <sprite name=XP1>"
+    Bottom:
+        - Row: "$FHS_GH2E_Cragheart2_21_B$"
+        - Row: "$FHS_GH2E_Cragheart2_21_B2$"
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout:
+                - Row: "<size=150%><sprite name=Shield> *BShield*"

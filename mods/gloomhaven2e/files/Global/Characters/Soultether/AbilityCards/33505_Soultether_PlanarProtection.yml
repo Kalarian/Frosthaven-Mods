@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PlanarProtection$
+Character: SoultetherID
+ID: 33505
+Level: 1
+Initiative: 94
+# card: Planar Protection
+# top: Disarm, range 4 (a condition ability, no attack, no mark).
+# bottom: Rift Spirit (summons/RiftSpirit.yml): Attack 0 + Muddle; its end-of-turn Shield 1 grant is the summon's own
+# end-of-turn ability, aimed by its AI (NOTES.md).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TDisarm:
+                Disarm: True
+                Range: 4
+                Target: 1
+                Filter: Enemy
+                AnimOverload: CastNegative
+    Bottom:
+        Abilities:
+            BSummon:
+                Summon: RiftSpiritID
+                AnimOverload: Summon
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Disarm>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TDisarm.Range*</link>"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BSummon
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: BSummon
+                    SummonName: $FHS_GH2E_SUMMON_RiftSpirit$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Muddle></nobr>"
+                        - Row: "$FHS_GH2E_Soultether_05_B$"

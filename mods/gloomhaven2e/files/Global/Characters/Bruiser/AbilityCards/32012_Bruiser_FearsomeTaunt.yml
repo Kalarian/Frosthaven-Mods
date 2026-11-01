@@ -1,0 +1,60 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FearsomeTaunt$
+Character: BruiserID
+ID: 32012
+Level: X
+Initiative: 10
+# card: Fearsome Taunt
+# 2e sheet: top Attack 3 [square], Push 3 [square], XP 1; bottom Shield 1, "whenever an enemy would attack one of your
+# adjacent allies this round, you may have that attack target you instead, regardless of range and line of sight",
+# round. The redirect is the 1st edition Provoking Roar's (Redirect, round), with its Frosthaven icon (CLASS_ICONS
+# Brute BRedirect); Gloomhaven's class icon "Brute" isn't one of Frosthaven's.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    SquareEnhancements: 1
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 3
+                            SquareEnhancements: 1
+                        AnimOverload: None
+                        IsInlineSubAbility: True
+        XP: 1
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+            BRedirect:
+                Redirect:
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Push> *TAttackSubPush* @TAttackSubPush@</link>"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout:
+                - Row: "<size=150%><sprite name=Shield> *BShield*"
+        - Divider:
+        - Active:
+            Ability: BRedirect
+            ListLayout: "$FHS_GH2E_Bruiser_12_B$"
+            Layout: "$FHS_GH2E_Bruiser_12_B$"
+            Icon: Positive_Redirect_Ally_Attack_Aura

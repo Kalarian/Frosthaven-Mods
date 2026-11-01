@@ -1,0 +1,57 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NegativeEnergy$
+Character: SoultetherID
+ID: 33527
+Level: 7
+Initiative: 95
+# card: Negative Energy
+# top: Void Eater (summons/VoidEater2.yml: a kill while Dark is strong or waning curses one enemy, unverified).
+# bottom: Teleport 4 [circle]; Strengthen one ally within range 3.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: VoidEater2ID
+                AnimOverload: Summon
+        Infuse: Dark
+        XP: 1
+    Bottom:
+        Abilities:
+            BTeleport:
+                Teleport2:
+                    Amount: 4
+                    CircleEnhancements: 1
+                Filter: Self
+                AnimOverload: Teleport Into
+                AnimOverload2: Teleport Outof
+            BStrengthen:
+                Strengthen:
+                    DiamondPlusEnhancements: 1
+                Range: 3
+                Target: 1
+                Filter: Ally
+                AnimOverload: TargetedBuff
+Layout:
+    Top:
+        - Active:
+            Ability: TSummon
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_VoidEater$
+                    SpecialText:
+                        - Row: "$FHS_GH2E_Soultether_27_T$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+                - Infuse: Dark
+            - Column:
+            - Column:
+    Bottom:
+        - Row: "<size=150%><sprite name=Teleport> *BTeleport* <size=100%><voffset=1>@BTeleport@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Strengthen>"
+        - Row: "$FHS_GH2E_Soultether_27_B$"

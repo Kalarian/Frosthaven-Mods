@@ -1,0 +1,20 @@
+Parser: Perk
+ID: Sawbones209
+Name: PERK_Sawbones2_09_Name
+Description: PERK_Sawbones2_09_Desc
+CharacterID: Sawbones2ID
+Available: 1
+Cost: 3
+Flags: [Passive, ExecuteAbilitiesAfterLongRest, ExecuteAbilitiesAfterShortRest]
+Abilities:
+    AGivePack:
+        GiveSupplyCard: [33230]
+        Filter:
+            TargetType: Self
+            ActorType: Player
+        CanUndo: False
+        AnimOverload: GivePackAdjacent
+        StartAbilityRequirements:
+            Type: ThisAbility
+            Vars:
+                ValidateAllyPrescription: ScenarioManager.Scenario.PlayerActors.Any(obj.ActiveBonuses.Any(CustomAbility.GetMiscVarBool(obj.Ability, "GH2E_Prescription")))

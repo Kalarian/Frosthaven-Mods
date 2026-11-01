@@ -1,0 +1,17 @@
+Parser: Perk
+ID: Doomstalker209
+Name: PERK_Doomstalker2_09_Name
+Description: PERK_Doomstalker2_09_Desc
+CharacterID: Doomstalker2ID
+Available: 1
+Cost: 2
+Flags: [Passive, ExecuteAbilitiesAfterLongRest, ExecuteAbilitiesAfterShortRest]
+Abilities:
+    APlayDoom:
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        SelectAndPlayCard:
+            CardPile: Hand
+        MiscVars:
+            IsActionValid: Action.Abilities.Any(obj.AbilityType == CAbility.EAbilityType.AddDoom)

@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Mindthief205
+Name: PERK_Mindthief2_05_Name
+Description: PERK_Mindthief2_05_Desc
+CharacterID: Mindthief2ID
+Available: 3
+CardsToAdd: [AMC_Ice_P2]

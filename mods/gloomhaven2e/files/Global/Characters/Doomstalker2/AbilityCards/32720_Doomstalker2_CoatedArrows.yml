@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CoatedArrows$
+Character: Doomstalker2ID
+ID: 32720
+Level: 4
+Initiative: 25
+# card: Coated Arrows
+# top: "on your next four ranged attacks, add Poison, then Wound, then Immobilize, then Disarm": a different condition per
+# slot has no Frosthaven shape (NEEDS PLUGIN). Approximation: a ranged-only persistent attack bonus (the 1st edition
+# Crippling Noose's AttackType: Ranged) with four slots (XP on the fourth) that adds Poison and Wound to each of the four
+# attacks (two damage conditions in place of Immobilize and Disarm).
+# bottom: the 1st edition Relentless Offensive bottom (round BuffAttack on doomed targets), +2.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 0
+                Conditions: [Poison, Wound]
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    ValidAbilityType: Attack
+                    AttackType: Ranged
+                    XPTracker: [0,0,0,1]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BAttackBuff:
+                Attack: 2
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: BuffAttack
+                    Filter:
+                        IsDoomed: True
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$FHS_GH2E_Doomstalker2_20_T$"
+            Layout: "$FHS_GH2E_Doomstalker2_20_T$"
+            Icon: Positive_AttackPlus
+        - Row: "<size=100%> "
+        - XPTracker: TActive
+    Bottom:
+        - Active:
+            Ability: BAttackBuff
+            ListLayout: "$FHS_GH2E_Doomstalker2_20_B$"
+            Layout: "$FHS_GH2E_Doomstalker2_20_B$"
+            Icon: Positive_AttackPlus

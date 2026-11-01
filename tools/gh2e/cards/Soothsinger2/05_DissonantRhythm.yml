@@ -1,0 +1,69 @@
+# card: Dissonant Rhythm
+# top: song (High, Low, Low Note); end-of-turn Attack 2, Push 2, Pierce 2 on the enemy the player picks
+# (closest not enforced; no range printed: any range, NOTES.md)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TSong:
+                AddActiveBonus:
+                    Attack: 2
+                    Pierce: 2
+                    Range: 99
+                    Target: 1
+                    Filter: Enemy
+                    AnimOverload: AggressiveTargetedShout
+                    SubAbilities:
+                        TSongSubPush:
+                            Push: 2
+                            IsInlineSubAbility: True
+                Filter: Self
+                AnimOverload: PlaySongAttack2
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [1,0,1]
+            TSongNotes:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Ability
+                    Hidden: True
+                    RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+    Bottom:
+        Abilities:
+            BMuddle:
+                Muddle: True
+                Target:
+                    Amount: 3
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Filter: Enemy
+                AnimOverload: AggressiveNonTargetedShout
+            BNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerHighNote", 1]
+Layout:
+    Top:
+        - Row: "$GH2E_Soothsinger2_05_T$"
+        - Active:
+            Ability: TSong
+            Icon: "Positive_ForceMove_Damage"
+            ListLayout: "$GH2E_Soothsinger2_05_T2$"
+            Layout: "$GH2E_Soothsinger2_05_T2$"
+        - Row: "<size=20%> "
+        - XPTracker: TSong
+    Bottom:
+        - Row: "<b><size=130%>$Muddle$ <sprite name=Muddle>"
+        - Row: "$Target$ <sprite name=Target> *BMuddle.Target* @BMuddle.Target@"
+        - Row: "$Range$ <sprite name=Range> *BMuddle.Range* @BMuddle.Range@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_HIGH$"

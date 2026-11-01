@@ -1,0 +1,16 @@
+Parser: Perk
+ID: SilentKnife08
+Name: PERK_SilentKnife_08_Name
+Description: PERK_SilentKnife_08_Desc
+CharacterID: SilentKnifeID
+Available: 1
+Flags: [Passive, ExecuteAbilitiesAfterShortRest, ExecuteAbilitiesAfterLongRest]
+Abilities:
+    BAttack:
+        Attack: 1
+        Range: 3
+        Target: 1
+        Targeting: Range
+        Filter: Enemy
+        CanSkip: True
+        CanUndo: False

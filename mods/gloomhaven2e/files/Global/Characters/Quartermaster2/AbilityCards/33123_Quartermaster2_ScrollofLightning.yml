@@ -1,0 +1,72 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ScrollofLightning$
+Character: Quartermaster2ID
+ID: 33123
+Level: 6
+Initiative: 77
+# card: Scroll of Lightning
+# top: Attack 5 [diamond], Range 3 [square]; mandatory "all allies and enemies adjacent to the target suffer damage 1":
+#   an inline Damage sub-ability with AllTargetsAdjacentToParentTargets, Filter [Enemy, Ally], CanSkip False (the
+#   1st edition Cragheart Blind Destruction / Bruiser Let Fly shape); infuse Air (mandatory box).
+# bottom: gain the Corrosive Coating: APPROXIMATION, recover one spent or lost item (NEEDS PLUGIN); Attack 2 [diamond],
+#   Range 4, Pierce 1, Muddle.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: TargetedScrollLightning
+                SubAbilities:
+                    TAttackSubDamage:
+                        IsInlineSubAbility: True
+                        Damage: 1
+                        Range: 1
+                        Target: -1
+                        Filter: [Enemy, Ally]
+                        AllTargetsAdjacentToParentTargets: True
+                        CanSkip: False
+        Infuse: [Air]
+    Bottom:
+        Abilities:
+            BGive:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Filter: Self
+                AnimOverload: Refresh
+            BAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 4
+                Pierce: 1
+                Conditions: Muddle
+                AnimOverload: TargetedScroll
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Quartermaster2_23_T$"
+        - Row: "<size=50%> "
+        - Infuse: Air
+    Bottom:
+        - Row: "$FHS_GH2E_Quartermaster2_23_B$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* <sprite name=Pierce> *BAttack.Pierce*, <sprite name=Muddle></link>"
+            - Column:

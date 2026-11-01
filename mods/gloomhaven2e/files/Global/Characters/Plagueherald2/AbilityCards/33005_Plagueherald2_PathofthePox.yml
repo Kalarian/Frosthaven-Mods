@@ -1,0 +1,105 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PathofthePox$
+Character: Plagueherald2ID
+ID: 33005
+Level: 1
+Initiative: 31
+# card: Path of the Pox
+# top: "one enemy that has Plague" with no range printed: any range (Range 99, line of sight), as for every
+# no-range Plague effect of this class (NOTES.md). bottom: the chain is three nested Plague sub-abilities, each aimed
+# around the previous one's target (Range 3 / 2 / 1 from it); "no enemy more than once": each link may only pick an
+# enemy without Plague (the target pick checks it).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TDamage:
+                Damage: 3
+                Range: 99
+                Target: 1
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: TargetedDebuff
+                SubAbilities:
+                    TDamageAdjacent:
+                        Damage: 1
+                        Range: 1
+                        Target: -1
+                        Filter: Enemy
+                        AllTargetsAdjacentToParentTargets: True
+                        TreatAsNonSubAbility: True
+                        AutoTrigger: True
+                        AnimOverload: None
+        XP: 1
+    Bottom:
+        Abilities:
+            BPlague:
+                NullTargeting: True
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                Target: 1
+                Filter: Enemy
+                ResourcesToGiveToTargets:
+                    - ["Plague", 1]
+                ResourcesToAddOnAbilityEnd:
+                    - ["Plague", 3]
+                AnimOverload: TargetedDebuff
+                SubAbilities:
+                    BPlague2:
+                        NullTargeting: True
+                        Range: 3
+                        Target: 1
+                        Filter:
+                            TargetType: Enemy
+                            Vars:
+                                ValidateNoPlague: target.GetCharacterResourceAmount("Plague") == 0
+                        AllTargetsAdjacentToParentTargets: True
+                        TreatAsNonSubAbility: True
+                        ResourcesToGiveToTargets:
+                            - ["Plague", 1]
+                        ResourcesToAddOnAbilityEnd:
+                            - ["Plague", 3]
+                        AnimOverload: TargetedDebuff
+                        SubAbilities:
+                            BPlague3:
+                                NullTargeting: True
+                                Range: 2
+                                Target: 1
+                                Filter:
+                                    TargetType: Enemy
+                                    Vars:
+                                        ValidateNoPlague: target.GetCharacterResourceAmount("Plague") == 0
+                                AllTargetsAdjacentToParentTargets: True
+                                TreatAsNonSubAbility: True
+                                ResourcesToGiveToTargets:
+                                    - ["Plague", 1]
+                                ResourcesToAddOnAbilityEnd:
+                                    - ["Plague", 3]
+                                AnimOverload: TargetedDebuff
+                                SubAbilities:
+                                    BPlague4:
+                                        NullTargeting: True
+                                        Range: 1
+                                        Target: 1
+                                        Filter:
+                                            TargetType: Enemy
+                                            Vars:
+                                                ValidateNoPlague: target.GetCharacterResourceAmount("Plague") == 0
+                                        AllTargetsAdjacentToParentTargets: True
+                                        TreatAsNonSubAbility: True
+                                        ResourcesToGiveToTargets:
+                                            - ["Plague", 1]
+                                        ResourcesToAddOnAbilityEnd:
+                                            - ["Plague", 3]
+                                        AnimOverload: TargetedDebuff
+        XP: 2
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Plagueherald2_05_T$"
+    Bottom:
+        - Row: "$FHS_GH2E_Plagueherald2_PLAGUE$"
+        - Row: "<sprite name=Range> *BPlague.Range* @BPlague.Range@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Plagueherald2_05_B$"

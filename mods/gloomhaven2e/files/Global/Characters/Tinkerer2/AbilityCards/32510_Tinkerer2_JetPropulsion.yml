@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_JetPropulsion$
+Character: Tinkerer2ID
+ID: 32510
+Level: 1
+Initiative: 34
+# card: Jet Propulsion
+# from Xipe's 99039_Tinkerer2_Jet Propulsion.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Range: 3
+                Target: 2
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 8
+                    CircleEnhancements: 1
+                    Jump: True
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <sprite name=Range> *TAttack.Range*</link>"
+            - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:

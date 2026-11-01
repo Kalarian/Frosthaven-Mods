@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MarchingBeat$
+Character: Soothsinger2ID
+ID: 33408
+Level: 1
+Initiative: 21
+# card: Marching Beat
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TStrengthen:
+                Strengthen:
+                    DiamondPlusEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: PlayPositiveTune
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerHighNote", 1]
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move:
+                                Amount: 4
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneMove
+            BNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Strengthen> <size=100%><voffset=1>@TStrengthen@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TStrengthen.Target* @TStrengthen.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TStrengthen.Range* @TStrengthen.Range@</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_HIGH$"
+    Bottom:
+        - Row: "$FHS_GH2E_Soothsinger2_GRANT_RANGE$ <nobr><sprite name=Range> *BAlly.Range*</nobr>: @BAlly.Range@"
+        - Row: "<size=20%> "
+        - Row: "<size=150%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_LOW$"

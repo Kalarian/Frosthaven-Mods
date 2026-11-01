@@ -1,0 +1,7 @@
+Parser: Perk
+ID: SilentKnife07
+Name: PERK_SilentKnife_07_Name
+Description: PERK_SilentKnife_07_Desc
+CharacterID: SilentKnifeID
+Available: 2
+CardsToAdd: [AMC_Disarm_P1]

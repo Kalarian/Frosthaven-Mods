@@ -1,0 +1,64 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RegenerativeTissue$
+Character: Sawbones2ID
+ID: 33216
+Level: 3
+Initiative: 52
+# card: Regenerative Tissue
+# bottom (Prescription): the 1st edition's verified StartTurnAbility on an adjacent ally (GiveAbilityCardToActor),
+# three slots; the ActiveBonus Requirements gate each trigger on the holder being below maximum hit points
+# (CStartTurnAbilityActiveBonus.CanTriggerAbility checks them before the slot moves).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 4
+                    DiamondPlusEnhancements: 1
+                Range: 1
+                Filter: [Self, Ally]
+                Conditions: Ward
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Heal: 2
+                    Filter: Self
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                Range: 1
+                Target: 1
+                MiscVars:
+                    GH2E_Prescription: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                    GiveAbilityCardToActor: True
+                    XPTracker: [0,0,0]
+                    Requirements:
+                        Vars:
+                            ValidateDamaged: Actor.Health < Actor.MaxHealth
+                AnimOverload: BuffAdjacent
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*, <sprite name=Ward></link>"
+            - Column:
+    Bottom:
+        - Row: "$FHS_GH2E_Sawbones2_RX$"
+        - Row: "<size=20%> "
+        - Active:
+            Ability: BActive
+            Icon: Positive_HealSelf
+            ListLayout: "$FHS_GH2E_Sawbones2_16_B$"
+            Layout: "$FHS_GH2E_Sawbones2_16_B$"
+        - Row: "<size=100%> "
+        - XPTracker: BActive

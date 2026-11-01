@@ -1,0 +1,89 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FeralAid$
+Character: Doomstalker2ID
+ID: 32713
+Level: X
+Initiative: 35
+# card: Feral Aid
+# top: Frosthaven's Decaying Will (Boneshaper 124) conditional: TargetAdjacentSummonsOfCaster > 0. Attack 2 as printed
+# (Secretariat has 3).
+# bottom: Attack 3 (Secretariat has 2), then a grant to one of your summons (Frosthaven's Command the Wretched: Range 99,
+# OwnSummon): Move 3, Attack 3 that may target only the Doomstalker's attack target (the Eye of the Void filter,
+# TargetTargetedByCasterPreviousAbility + SpecificAbilityNames). Unverified: that filter from a summon's granted attack.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentSummonsOfCaster: "> 0"
+                        AbilityOverrides:
+                            TAdjSummonBuff:
+                                Strength: 2
+                        XP: 1
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 4
+                AnimOverload: RangedAttack
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move: 3
+                            StrengthIsBase: True
+                        BAllyAttack:
+                            Attack: 3
+                            StrengthIsBase: True
+                            Range: 1
+                            RangeIsBase: True
+                            Target: 1
+                            TargetIsBase: True
+                            Filter:
+                                TargetType: Enemy
+                                TargetTargetedByCasterPreviousAbility: True
+                                SpecificAbilityNames: [BAttack]
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter:
+                    TargetType: OwnSummon
+                AnimOverload: ControlSummon
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Doomstalker2_13_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Doomstalker2_GRANT$"
+        - Row: "<size=150%><sprite name=Move> *BAllyMove*"
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack*"
+        - Row: "$FHS_GH2E_Doomstalker2_SAME_TARGET$"

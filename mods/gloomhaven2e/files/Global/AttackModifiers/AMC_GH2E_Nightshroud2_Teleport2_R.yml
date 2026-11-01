@@ -1,0 +1,10 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Nightshroud2_Teleport2_R
+MathModifier: "+0"
+Rolling: True
+Abilities:
+    ATeleport:
+        Teleport2: 2
+        Filter: Self
+        AnimOverload: Teleport Into
+        AnimOverload2: Teleport Outof

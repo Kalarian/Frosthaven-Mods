@@ -1,0 +1,37 @@
+Parser: Perk
+ID: Soultether12
+Name: PERK_Soultether_12_Name
+Description: PERK_Soultether_12_Desc
+CharacterID: SoultetherID
+Available: 1
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            Range: 99
+            Target: 1
+            Filter: OwnSummon
+            Vars:
+                ParentCaster: TargetingActor
+            ControlActor:
+                Abilities:
+                    ASummonTeleport:
+                        Teleport2: 99
+                        StrengthIsBase: True
+                        Filter: Self
+                        MiscVars:
+                            IsValidTeleportTile: ParentCaster.GetDistanceTo(tile) == 1
+                        AnimOverload: Teleport Into
+                        AnimOverload2: Teleport Outof
+            AnimOverload: Grant
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringTurnAbility
+            XPTracker: [0]
+            IsToggleBonus: True
+            Hidden: True
+            ListLayoutOverride: [$PERK_Soultether_12_Desc$, Positive_Summon]
+            MiscVars:
+                OverrideIcon: "'Positive_Summon'"
+        AnimOverload: PowerUp

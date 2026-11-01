@@ -1,0 +1,67 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FearsomeBlade$
+Character: Mindthief2ID
+ID: 32214
+Level: 2
+Initiative: 27
+# card: Fearsome Blade
+# written from tools/gh2e/sheets/Mindthief.json; the push is the attack's inline sub-ability (1st edition Fearsome Blade)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Conditions: Curse
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 2
+                            SquareEnhancements: 1
+                        IsInlineSubAbility: True
+        Consumes:
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceAttackBuff:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 1
+    Bottom:
+        Abilities:
+            BWound:
+                Wound: True
+                Range: 1
+                Target: 1
+                Filter: Enemy
+                AnimOverload: TargetedDebuff
+            BMove:
+                Move: 4
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Push> *TAttackSubPush* @TAttackSubPush@</link>"
+                - Row: "<link=fhpill>, <sprite name=Curse></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCIce
+                    Text: "+2 <sprite name=Attack>, <sprite name=XP1>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Wound>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> 1</link>"
+            - Column:
+        - Divider:
+        - Row: "<size=150%><sprite name=Move> *BMove*"

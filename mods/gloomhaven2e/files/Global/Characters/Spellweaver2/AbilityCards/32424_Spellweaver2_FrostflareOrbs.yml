@@ -1,0 +1,84 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FrostflareOrbs$
+Character: Spellweaver2ID
+ID: 32424
+Level: 8
+Initiative: 46
+# card: Frostflare Orbs
+# bottom: the area's hex mark is right of the top red hex (3,1), as on Cold Fire top (Xipe had it left)
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+                Target:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Range: 4
+                MultiPassAttack: True
+                AnimOverload: SingleFireOrbs
+        Consumes:
+            TCIce:
+                Elements: Ice
+                AbilityOverrides:
+                    TCIceStun:
+                        ParentName: TAttack
+                        Conditions: Stun
+                XP: 1
+        Infuse: Fire
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 1
+                Range: 3
+                AreaEffect: "0,0,R|2,0,R|1,1,R|3,1,E"
+                MultiPassAttack: False
+                AnimOverload: TargetedColdFire
+        Consumes:
+            BCAny:
+                Elements: Any
+                AbilityOverrides:
+                    BCAnyAttackBuff:
+                        ParentName: BAttack
+                        Strength: 1
+                XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* @TAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCIce
+                    Text: "<sprite name=Stun>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Infuse: Fire
+    Bottom:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=RangedAttack> *BAttack*"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
+                - Column:
+            - Row: "<size=20%> "
+            - Conditional:
+                Layout:
+                    - Consume:
+                        Name: BCAny
+                        Text: "+1 <sprite name=Attack>, <sprite name=XP1>"
+        - Column:
+            - Row: "£Area£"

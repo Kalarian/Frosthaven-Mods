@@ -1,0 +1,23 @@
+Parser: HeroSummon
+ID: StaunchGarralevID
+LocKey: $GH2E_SUMMON_StaunchGarralev$
+# stand-in model: the 1st edition Iron Beast (a new 2e creature; NOTES.md)
+Model: IronBeast
+Health:
+    Amount: 8
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    SquareEnhancements: 1
+Attack:
+    Amount: 2
+    SquareEnhancements: 1
+Range: 1
+Pierce: 3
+# "When you summon this summon, it gains Ward" (the long-rest Ward is on the card, Walking Bastion top)
+OnSummonAbilities:
+    AWard:
+        Ward: True
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True

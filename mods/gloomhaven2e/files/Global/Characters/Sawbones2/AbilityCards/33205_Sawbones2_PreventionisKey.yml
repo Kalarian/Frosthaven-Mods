@@ -1,0 +1,73 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PreventionisKey$
+Character: Sawbones2ID
+ID: 33205
+Level: 1
+Initiative: 13
+# card: Prevention is Key
+# top: Wound + Disarm on all enemies within range 1 (no attack; the diamond mark on Disarm, as Secretariat); Safeguard on
+# you and all allies within range 1 (mark dropped). bottom: the round "next Prescription action" trigger has no engine
+# hook: Shield 1 this round for you and adjacent allies at once (the 1st edition card's round aura). Approximation.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TWoundDisarm:
+                Disarm:
+                    DiamondEnhancements: 1
+                Conditions: [Wound]
+                Range: 1
+                Target: -1
+                Filter: Enemy
+                AnimOverload: RadialDebuff
+            TSafeguard:
+                NullTargeting: True
+                Filter: [Self, Ally]
+                Range: 1
+                Target: -1
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: GenericOnNegativeCondition
+                    XPTracker: [0]
+                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
+                    Vars:
+                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
+                        ValidateNotImmune: CAbility.ImmuneToAbility(TriggerTarget, TriggerAbility) == False
+                        ValidateIsNegativeCondition: TriggerAbility.AbilityType == "Poison" || TriggerAbility.AbilityType == "Wound" || TriggerAbility.AbilityType == "Stun" || TriggerAbility.AbilityType == "Disarm" || TriggerAbility.AbilityType == "Immobilize" || TriggerAbility.AbilityType == "Muddle" || TriggerAbility.AbilityType == "Curse" || TriggerAbility.AbilityType == "Bane" || TriggerAbility.AbilityType == "Brittle" || TriggerAbility.AbilityType == "Impair"
+                        PreventCondition: True
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BShield:
+                Shield: 1
+                Range: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Self, Ally]
+                AnimOverload: RadialBuff
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Wound> <sprite name=Disarm> <size=100%><voffset=1>@TWoundDisarm@"
+        - Row: "$FHS_GH2E_Sawbones2_ALL_R1$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TSafeguard
+            Icon: Positive_DamagePrevent
+            ListLayout: "$FHS_GH2E_SAFEGUARD$"
+            Layout: "$FHS_GH2E_Sawbones2_05_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Sawbones2_05_B$"
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield_Ally_Aura
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout: "<size=150%><sprite name=Shield> *BShield*"

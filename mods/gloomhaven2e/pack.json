@@ -1,0 +1,47 @@
+{
+  "name": "gloomhaven2e",
+  "title": "Gloomhaven classes (2nd edition) [WIP]",
+  "version": 1,
+  "classes": [
+    "Bruiser",
+    "Cragheart2",
+    "Mindthief2",
+    "SilentKnife",
+    "Spellweaver2",
+    "Tinkerer2",
+    "Berserker2",
+    "Doomstalker2",
+    "Elementalist2",
+    "Nightshroud2",
+    "Plagueherald2",
+    "Quartermaster2",
+    "Sawbones2",
+    "Sunkeeper2",
+    "Soothsinger2",
+    "Soultether",
+    "Wildfury"
+  ],
+  "files": "files",
+  "edition": 2,
+  "unlock": {
+    "envelopes": true,
+    "starting": [
+      "Bruiser",
+      "Cragheart2",
+      "Mindthief2",
+      "SilentKnife",
+      "Spellweaver2",
+      "Tinkerer2"
+    ]
+  },
+  "sections": [],
+  "events": [],
+  "data_sha": "a955e5d17ef750d0b2886195f52cbb590e9530313aee11fec7c18bfc5da0337e",
+  "source": {
+    "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
+    "buildid": "20286313",
+    "files": 795
+  },
+  "model": {},
+  "summon_models": {}
+}

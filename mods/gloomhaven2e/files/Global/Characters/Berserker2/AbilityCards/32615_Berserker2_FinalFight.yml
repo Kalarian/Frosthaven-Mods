@@ -1,0 +1,62 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FinalFight$
+Character: Berserker2ID
+ID: 32615
+Level: 3
+Initiative: 89
+# card: Final Fight
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Filter: Self
+                AnimOverload: PowerUp
+                AddActiveBonus:
+                    Attack: 5
+                    AttackHasAdvantage: True
+                    AnimOverload: HeavyAttack
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [0,1,1,1]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCFire:
+                Elements: Fire
+                Abilities:
+                    BCFireAttackBuff:
+                        ParentName: BNull
+                        Attack: 1
+                        Filter: Self
+                        ActiveBonus:
+                            Duration: Round
+                            Behaviour: BuffAttack
+                        AnimOverload: PowerUp
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            ListLayout: "$FHS_GH2E_Berserker2_15_T$"
+            Layout: "$FHS_GH2E_Berserker2_15_T$"
+            Icon: Positive_Advantage_Attack
+        - Row: "<size=100%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Consume:
+            Name: BCFire
+            Text:
+                - Active:
+                    Ability: BCFireAttackBuff
+                    Icon: Positive_AttackPlus
+                    ListLayout: "$FHS_GH2E_Berserker2_15_B$"
+                    Layout: "$FHS_GH2E_Berserker2_15_B$"

@@ -1,0 +1,15 @@
+Parser: HeroSummon
+ID: ElementalConduitID
+LocKey: $GH2E_SUMMON_ElementalConduit$
+Model: ManaSphere
+Health:
+    Amount: 3
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+    SquareEnhancements: 1
+Attack:
+    Amount: 2
+    Infuse: Any
+Range: 3
+Flying: True

@@ -1,0 +1,47 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_VirulentStrain$
+Character: Plagueherald2ID
+ID: 33003
+Level: 1
+Initiative: 72
+# card: Virulent Strain
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                Attack: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    ValidAbilityType: Attack
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter:
+                        TargetType: Ally
+                        TargetHasNegativeCondition: Poison
+                    XPTracker: [1,0,0]
+                AnimOverload: PositiveBuffRadial
+    Bottom:
+        Abilities:
+            BDamage:
+                Damage: 1
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RadialNegativeMajor
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Positive_AttackPlus_Ally_Aura
+            ListLayout: "$FHS_GH2E_Plagueherald2_03_T$"
+            Layout: "$FHS_GH2E_Plagueherald2_03_T$"
+        - Row: "<size=100%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "$FHS_GH2E_Plagueherald2_03_B$"

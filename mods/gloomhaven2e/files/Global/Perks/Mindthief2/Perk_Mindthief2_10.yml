@@ -1,0 +1,31 @@
+Parser: Perk
+ID: Mindthief210
+Name: PERK_Mindthief2_10_Name
+Description: PERK_Mindthief2_10_Desc
+CharacterID: Mindthief2ID
+Available: 2
+Flags: [Passive, ExecuteAbilitiesAfterShortRest, ExecuteAbilitiesAfterLongRest]
+Abilities:
+    RestControl:
+        ShowElementPicker: True
+        Consume:
+            Elements: [Ice, Dark]
+            Abilities:
+                CControl:
+                    ControlActor:
+                        Abilities:
+                            EnemyWillDoThis:
+                                Attack: 1
+                                Range: 1
+                                Target: 1
+                                StrengthIsBase: True
+                                RangeIsBase: True
+                                TargetIsBase: True
+                        ControlDurationType: ControlForOneAction
+                        ControlActorType: Player
+                    Range: 5
+                    Target: 1
+                    Filter: Enemy
+                    AnimOverload: MindControl
+        CanSkip: True
+        CanUndo: False

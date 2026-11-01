@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Tinkerer209
+Name: PERK_Tinkerer2_09_Name
+Description: PERK_Tinkerer2_09_Desc
+CharacterID: Tinkerer2ID
+Available: 1
+Flags: [Passive]

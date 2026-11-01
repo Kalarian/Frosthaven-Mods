@@ -1,0 +1,38 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StunShot$
+Character: Tinkerer2ID
+ID: 32507
+Level: 1
+Initiative: 20
+# card: Stun Shot
+# from Xipe's 99036_Tinkerer2_Stun Shot.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TStun:
+                Stun: True
+                Range: 3
+                Filter: Enemy
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 1
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Stun>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TStun.Range*</link>"
+            - Column:
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove*"
+        - Divider:
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"

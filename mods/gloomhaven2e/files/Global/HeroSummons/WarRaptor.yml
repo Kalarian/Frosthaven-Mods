@@ -1,0 +1,16 @@
+Parser: HeroSummon
+ID: WarRaptorID
+LocKey: $GH2E_SUMMON_WarRaptor$
+# stand-in model: the 1st edition War Hawk
+Model: WarHawk
+Health:
+    Amount: 6
+    SquareEnhancements: 1
+Move:
+    Amount: 5
+    SquareEnhancements: 1
+Attack:
+    Amount: 3
+    SquareEnhancements: 1
+Range: 1
+Flying: True

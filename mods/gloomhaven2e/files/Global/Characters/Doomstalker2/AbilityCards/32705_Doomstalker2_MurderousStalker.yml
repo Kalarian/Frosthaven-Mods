@@ -1,0 +1,69 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MurderousStalker$
+Character: Doomstalker2ID
+ID: 32705
+Level: 1
+Initiative: 13
+# card: Murderous Stalker
+# top: Frosthaven's Malicious Conversion (Boneshaper 131) shape: on a kill, play a card's action (SelectAndPlayCard)
+# from the hand or the discard pile, here only actions with a Doom (IsActionValid: AddDoom). The kill XP is a GainXP
+# sub-ability (Crashing Tide Submerge) under the same kill requirement. The corner XP 1 is the card's own.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 6
+                    DiamondEnhancements: 1
+                Range: 5
+                AnimOverload: RangedAttack
+                SubAbilities:
+                    TKillXP:
+                        GainXP: 1
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsKilledByAbility: "> 0"
+                            RequirementActorFilter:
+                                TargetType: Enemy
+                    TPlayDoom:
+                        AutoTrigger: True
+                        Filter: Self
+                        TreatAsNonSubAbility: True
+                        SelectAndPlayCard:
+                            CardPile: [Hand, Discarded]
+                        MiscVars:
+                            IsActionValid: Action.Abilities.Any(obj.AbilityType == CAbility.EAbilityType.AddDoom)
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsKilledByAbility: "> 0"
+                            RequirementActorFilter:
+                                TargetType: Enemy
+                        SkipAnim: True
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+                    Jump: True
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Doomstalker2_05_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:

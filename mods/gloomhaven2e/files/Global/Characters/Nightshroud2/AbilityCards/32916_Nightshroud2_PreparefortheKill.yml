@@ -1,0 +1,68 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PreparefortheKill$
+Character: Nightshroud2ID
+ID: 32916
+Level: 3
+Initiative: 85
+# card: Prepare for the Kill
+# top: "whenever you remove a Tear, you may discard this card to gain Strengthen and have all adjacent enemies suffer
+# damage 2": Frosthaven has no trigger on removing a shadow (Tears are removed mostly by the class mat's "enter a Tear
+# to lose Invisible", itself NEEDS PLUGIN). APPROXIMATION: a persistent once-only toggle the player switches on during
+# a turn (the 1st edition Wings of the Night fix, DuringTurnAbility + IsToggleBonus, CARD_FIXES 20270): Strengthen, and
+# Damage 2 to all adjacent enemies; one use, then the card is discarded (XPTracker [0]). NEEDS PLUGIN for the trigger.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    Strengthen: True
+                    Filter: Self
+                    AnimOverload: PowerUp
+                    SubAbilities:
+                        TActiveSubDamage:
+                            Damage: 2
+                            Range: 1
+                            Target: -1
+                            Filter: Enemy
+                            TreatAsNonSubAbility: True
+                            AutoTrigger: True
+                            CanSkip: False
+                            AnimOverload: Debuff
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringTurnAbility
+                    IsToggleBonus: True
+                    Restriction: OncePerAction
+                    XPTracker: [0]
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_Nightshroud2_16_T$"
+            Layout: "$FHS_GH2E_Nightshroud2_16_T$"
+        - Row: "<size=50%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+            - Column:
+                - Infuse: Dark
+            - Column:
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

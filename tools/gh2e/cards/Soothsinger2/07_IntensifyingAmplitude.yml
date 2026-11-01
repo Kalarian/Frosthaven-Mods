@@ -1,0 +1,52 @@
+# card: Intensifying Amplitude
+# bottom: APPROXIMATION: +X (0,1,2,3,4 over the five attacks) is a flat +2 on each of the five: the same +10 in all
+# (Sunkeeper2 Sanctify's ally attack aura, any range, allies only)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range: 3
+                Conditions: Wound
+                AnimOverload: RangedAttack
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 2
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    ValidAbilityType: Attack
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter:
+                        TargetType: Ally
+                    XPTracker: [0,1,0,1,0]
+                AnimOverload: PositiveBuffRadial
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Wound$ <sprite name=Wound>"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_LOW$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: "Positive_AttackPlus_Ally_Aura"
+            ListLayout: "$GH2E_Soothsinger2_07_B$"
+            Layout: "$GH2E_Soothsinger2_07_B$"
+        - Row: "<size=20%> "
+        - XPTracker: BActive

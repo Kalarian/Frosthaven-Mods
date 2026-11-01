@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Mindthief203
+Name: PERK_Mindthief2_03_Name
+Description: PERK_Mindthief2_03_Desc
+CharacterID: Mindthief2ID
+Available: 2
+CardsToRemove: [AMC_Basic_P0]
+CardsToAdd: [AMC_Basic_P2]

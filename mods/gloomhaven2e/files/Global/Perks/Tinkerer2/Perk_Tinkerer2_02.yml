@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Tinkerer202
+Name: PERK_Tinkerer2_02_Name
+Description: PERK_Tinkerer2_02_Desc
+CharacterID: Tinkerer2ID
+Available: 3
+CardsToRemove: [AMC_Basic_M1]
+CardsToAdd: [AMC_Heal1_1Ally]

@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HammerBlow$
+Character: Sunkeeper2ID
+ID: 33301
+Level: 1
+Initiative: 55
+# card: Hammer Blow
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Conditions: Muddle
+                AnimOverload: MeleeSmite
+        Consumes:
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        AttackHasAdvantage: True
+                XP: 1
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 1
+                Target: -1
+            BBless:
+                Bless:
+                    DiamondPlusEnhancements: 1
+                Filter: Self
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Muddle></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCLight
+                    Text: "+1 <sprite name=Attack>, $FHS_Advantage$, <sprite name=XP1>"
+    Bottom:
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"
+        - Divider:
+        - Row: "<link=fhself><size=125%><sprite name=Bless> <size=100%><voffset=1>@BBless@</link>"

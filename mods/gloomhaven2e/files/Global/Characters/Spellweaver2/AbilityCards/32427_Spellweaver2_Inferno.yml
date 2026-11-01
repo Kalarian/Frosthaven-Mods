@@ -1,0 +1,56 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Inferno$
+Character: Spellweaver2ID
+ID: 32427
+Level: 9
+Initiative: 96
+# card: Inferno
+# top: "all enemies within 2 hexes" = Range 2, every target, treated as melee (Xipe; the 1st edition Inferno's TreatAsMelee);
+# the ally damage follows it automatically (a mandatory "!" row; not the half's first ability)
+# bottom: the 1st edition Inferno's room targeting; no AutoTrigger on the half's first ability (house rule): the player
+# confirms it and can't skip it (CanSkip False, as Catastrophic Bomb in CARD_FIXES)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Pierce: 2
+                Range: 2
+                Target: -1
+                Filter: Enemy
+                TreatAsMelee: True
+                MultiPassAttack: False
+                AnimOverload: RadialInferno
+            TAllyDamage:
+                Damage: 2
+                Range: 2
+                Target: -1
+                Filter: Ally
+                AutoTrigger: True
+                CanSkip: False
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BRoomDamage:
+                Damage: 4
+                Target: -1
+                Targeting: Room
+                Filter: [Enemy, Ally]
+                CanSkip: False
+                AnimOverload: RadialInferno
+        Infuse: Fire
+        XP: 1
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack*"
+        - Row: "$FHS_GH2E_Spellweaver2_27_T$"
+        - Row: "<sprite name=Pierce> *TAttack.Pierce*"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Spellweaver2_27_T2$"
+        - Row: "<size=20%> "
+        - Infuse: Fire
+    Bottom:
+        - Row: "$FHS_GH2E_Spellweaver2_27_B$"
+        - Row: "<size=20%> "
+        - Infuse: Fire

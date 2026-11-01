@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Sunkeeper206
+Name: PERK_Sunkeeper2_06_Name
+Description: PERK_Sunkeeper2_06_Desc
+CharacterID: Sunkeeper2ID
+Available: 1
+CardsToAdd: [AMC_Stun_R]

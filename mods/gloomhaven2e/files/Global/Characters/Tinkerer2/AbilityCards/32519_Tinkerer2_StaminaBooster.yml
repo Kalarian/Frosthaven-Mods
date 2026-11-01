@@ -1,0 +1,40 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_StaminaBooster$
+Character: Tinkerer2ID
+ID: 32519
+Level: 3
+Initiative: 48
+# card: Stamina Booster
+# from Xipe's 99048_Tinkerer2_Stamina Booster.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Permanently Lost]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 5
+                    DiamondPlusEnhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BRecover:
+                RecoverLostCards: 1
+                Range: 3
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: TargetRecover
+        XP: 3
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
+            - Column:
+    Bottom:
+        - Row: "$FHS_GH2E_Tinkerer2_19_B$"

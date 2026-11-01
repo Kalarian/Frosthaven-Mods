@@ -1,0 +1,27 @@
+Parser: Perk
+ID: Spellweaver208
+Name: PERK_Spellweaver2_08_Name
+Description: PERK_Spellweaver2_08_Desc
+CharacterID: Spellweaver2ID
+Available: 1
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    APreventDamage:
+        AutoTrigger: True
+        SkipAnim: True
+        Filter: Self
+        PreventDamage: 1
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: PreventFirstDamage
+            XPTracker: [0]
+            Hidden: True
+            ToggleIsOptional: True
+            ListLayoutOverride: [$PERK_Spellweaver2_08_Desc$, Positive_DamagePrevent]
+            Vars:
+                TriggerActiveBonusAbilities: CustomAbility.PerformActiveBonusAbility(TriggerBehaviour.ActiveBonus, thisContext)
+            AbilityData:
+                Filter: Self
+                AutoTrigger: True
+                NullTargeting: True
+                Conditions: [Invisible, Stun]

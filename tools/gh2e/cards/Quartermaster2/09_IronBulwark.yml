@@ -1,0 +1,60 @@
+# card: Iron Bulwark
+# top: optional spend supplies (Recover your items, XP 1); Shield 1 [square], round.
+# bottom: "Grant all adjacent allies and self: Shield 1", round: Frosthaven's grant to the figures adjacent when played
+#   (Banner Spear Hold the Line / Shattersong Cloaking Refraction: Range 1, Target 99, Filter [Self, Ally]), not an
+#   aura that follows you (the 1st edition card's shape). No mark.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TSpend:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Filter: Self
+                AbilityXP: 1
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateSupplies: Actor.GetCharacterResourceAmount("Supplies") >= 10
+                PerformVars:
+                    OnAbilityEnded:
+                        SpendSupplies: AbilityHasHappened && TargetingActor.RemoveCharacterResource("Supplies", 50, true)
+                AnimOverload: Refresh
+            TShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BShield:
+                Shield: 1
+                Range: 1
+                Target: 99
+                Filter: [Self, Ally]
+                MiscVars:
+                    AutoSelectValidTiles: True
+                ActiveBonus:
+                    Duration: Round
+                AnimOverload: RadialBuff
+Layout:
+    Top:
+        - Row: "$GH2E_Quartermaster2_SPEND_SELF$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TShield
+            Icon: "Shield"
+            ListLayout: "$Shield$ <sprite name=Shield> *TShield*"
+            Layout: "<b><size=130%>$Shield$ <sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+        - Row: "<size=20%> "
+        - Duration: Round
+    Bottom:
+        - Row: "$GH2E_Quartermaster2_09_B$"
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield_Ally_Aura
+            ListLayout: "$Shield$ <sprite name=Shield> *BShield*"
+            Layout: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield*"
+        - Row: "<size=20%> "
+        - Duration: Round

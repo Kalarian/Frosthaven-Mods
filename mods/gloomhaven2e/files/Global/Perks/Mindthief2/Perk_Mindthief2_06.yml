@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Mindthief206
+Name: PERK_Mindthief2_06_Name
+Description: PERK_Mindthief2_06_Desc
+CharacterID: Mindthief2ID
+Available: 2
+CardsToAdd: [AMC_Invisible_R]

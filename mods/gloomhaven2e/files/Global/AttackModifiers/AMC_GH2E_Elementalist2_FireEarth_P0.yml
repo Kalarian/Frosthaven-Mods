@@ -1,0 +1,8 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Elementalist2_FireEarth_P0
+MathModifier: "+0"
+Abilities:
+    InfuseAbility:
+        Infuse: [Fire, Earth]
+        ShowElementPicker: True
+        CanUndo: False

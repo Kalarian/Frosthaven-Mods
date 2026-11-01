@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ShieldBash$
+Character: BruiserID
+ID: 32008
+Level: 1
+Initiative: 15
+# card: Shield Bash
+# 2e sheet: top Attack 4 [diamond], Stun, XP 2, lost; bottom Move 2 [square], Shield 1 (no mark), round.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Conditions: Stun
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    SquareEnhancements: 1
+            BShield:
+                Shield: 1
+                ActiveBonusDuration: Round
+                AnimOverload: Persistent Buff
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Stun></link>"
+            - Column:
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout:
+                - Row: "<size=150%><sprite name=Shield> *BShield*"

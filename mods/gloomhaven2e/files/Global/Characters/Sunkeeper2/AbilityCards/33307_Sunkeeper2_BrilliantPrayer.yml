@@ -1,0 +1,43 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BrilliantPrayer$
+Character: Sunkeeper2ID
+ID: 33307
+Level: 1
+Initiative: 27
+# card: Brilliant Prayer
+Discard: [Permanently Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TRecover:
+                RecoverLostCards: 1
+                Range: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: PositiveBuffTargeted
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    SquareEnhancements: 1
+            BBless:
+                Bless: True
+                Range: 1
+                Filter: Ally
+                AnimOverload: PositiveBuffTargeted
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Sunkeeper2_07_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Bless>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> one adjacent <sprite name=Allies></link>"
+            - Column:

@@ -1,0 +1,33 @@
+# card: Impaling Spear
+# top: Attack 3 [square], grey + 2 red in a line, no hex mark; XP 1.
+# bottom: "Attack 1, target 1 enemy within 2 hexes", Wound, no marks: Range 2 with TreatAsMelee (2e: an attack with
+#   no range value is melee; the reach is a targeting limit). Rules question noted in NOTES.md.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AreaEffect: "0,0,G|2,0,R|4,0,R"
+                MultiPassAttack: False
+                AnimOverload: SlamAttack
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 1
+                Range: 2
+                TreatAsMelee: True
+                Conditions: Wound
+Layout:
+    Top:
+        - ColumnWidths: "65,30"
+        - Column:
+            - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Column: "£Area£"
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack*"
+        - Row: "$GH2E_Quartermaster2_06_B$"
+        - Row: "$Wound$ <sprite name=Wound>"

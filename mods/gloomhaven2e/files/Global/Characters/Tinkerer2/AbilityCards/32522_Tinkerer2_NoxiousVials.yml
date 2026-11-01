@@ -1,0 +1,51 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NoxiousVials$
+Character: Tinkerer2ID
+ID: 32522
+Level: 5
+Initiative: 75
+# card: Noxious Vials
+# from Xipe's 99051_Tinkerer2_Noxious Vials.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 1
+                Range: 3
+                Conditions: [Wound, Disarm]
+                AnimOverload: LeftWristTechNoxiousVial
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 3
+                Conditions: Poison
+                AreaEffect: "0,0,R|2,0,R|1,1,R|3,1,E"
+                MultiPassAttack: False
+                XPPerTarget: 1
+                AnimOverload: LeftWristTechNoxiousVial
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Wound><sprite name=Disarm></link>"
+            - Column:
+    Bottom:
+        - ColumnWidths: "65,35"
+        - Column:
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*, <sprite name=Poison></link>"
+                - Column:
+            - Row: "$FHS_XP_PerEnemy$"
+        - Column:
+            - Row: "£Area£"

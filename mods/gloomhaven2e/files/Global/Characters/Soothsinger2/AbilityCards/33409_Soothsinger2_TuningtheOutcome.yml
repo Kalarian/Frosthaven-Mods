@@ -1,0 +1,68 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TuningtheOutcome$
+Character: Soothsinger2ID
+ID: 33409
+Level: 1
+Initiative: 44
+# card: Tuning the Outcome
+# bottom: the Curse itself carries no mark (only its range)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TBless:
+                Bless:
+                    DiamondPlusEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: PlayPositiveTune
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+    Bottom:
+        Abilities:
+            BCurse:
+                Curse: True
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Filter: Enemy
+                AnimOverload: AggressiveTargetedShout
+            BNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerHighNote", 1]
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Bless> <size=100%><voffset=1>@TBless@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TBless.Target* @TBless.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TBless.Range* @TBless.Range@</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_LOW$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Curse>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BCurse.Range* @BCurse.Range@</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_HIGH$"

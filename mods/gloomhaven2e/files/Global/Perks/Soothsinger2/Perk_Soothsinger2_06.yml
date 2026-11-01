@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Soothsinger206
+Name: PERK_Soothsinger2_06_Name
+Description: PERK_Soothsinger2_06_Desc
+CharacterID: Soothsinger2ID
+Available: 3
+CardsToAdd: [AMC_GH2E_Soothsinger2_GrantAlly_R]

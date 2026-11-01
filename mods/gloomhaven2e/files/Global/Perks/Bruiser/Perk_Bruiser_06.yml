@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Bruiser06
+Name: PERK_Bruiser_06_Name
+Description: PERK_Bruiser_06_Desc
+CharacterID: BruiserID
+Available: 2
+CardsToAdd: [AMC_GH2E_Bruiser_Push2_P2]

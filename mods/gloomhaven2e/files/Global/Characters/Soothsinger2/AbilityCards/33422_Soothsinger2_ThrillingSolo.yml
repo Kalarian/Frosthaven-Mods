@@ -1,0 +1,89 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ThrillingSolo$
+Character: Soothsinger2ID
+ID: 33422
+Level: 5
+Initiative: 60
+# card: Thrilling Solo
+# top: song (High, Low, Low Note). NEEDS PLUGIN (repeat the whole attack ability). APPROXIMATION: after your first
+# attack ability each round, one more single-target attack with that ability's attack value +1 and its range
+# (Drifter Shockwave's after-attack bonus, Shattersong Heartening Harmony's value-from-Vars); unverified
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TSong:
+                AddActiveBonus:
+                    Attack: 1
+                    Range: 1
+                    Target: 1
+                    Filter: Enemy
+                    AnimOverload: RangedAttack
+                    StatIsBasedOnX:
+                        Strength:
+                            BasedOn: Vars
+                            Vars:
+                                Value: max(1, RepeatStrength + 1)
+                        Range:
+                            BasedOn: Vars
+                            Vars:
+                                Value: max(1, RepeatRange)
+                Filter: Self
+                AnimOverload: PlaySongAttack2
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnAttackAbilityFinished
+                    Restriction: OncePerRound
+                    Vars:
+                        RepeatStrength: TriggerAbility.Strength
+                        RepeatRange: TriggerAbility.Range
+            TSongTimer:
+                AddActiveBonus:
+                    Null: True
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndRoundAbility
+                    XPTracker: [1,0,1,0]
+                    EndAllActiveBonusesOnBaseCardSimultaneously: True
+            TSongNotes:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Ability
+                    Hidden: True
+                    RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            BNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Soothsinger2_22_T$"
+        - Active:
+            Ability: TSong
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_Soothsinger2_22_T2$"
+            Layout: "$FHS_GH2E_Soothsinger2_22_T2$"
+        - Row: "<size=100%> "
+        - XPTracker: TSongTimer
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_LOW$"

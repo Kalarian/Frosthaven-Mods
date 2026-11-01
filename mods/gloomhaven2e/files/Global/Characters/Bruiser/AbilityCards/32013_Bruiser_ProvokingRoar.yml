@@ -1,0 +1,72 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ProvokingRoar$
+Character: BruiserID
+ID: 32013
+Level: X
+Initiative: 18
+# card: Provoking Roar
+# 2e sheet: top Pull 2 [square], Range 3 [square], Muddle; Retaliate 2, "gain XP 1 the next time you retaliate this
+# round", round; bottom Move 2 [circle], Pull 2 [square], Range 3 [square]. A pull that muddles is Frosthaven's own
+# shape (Banner Spear's Taunting Howl: Pull, Range, Conditions). The XP is ProcXP on the round retaliate (NOTES.md).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TPull:
+                Pull:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Conditions: Muddle
+                AnimOverload: TargetedShout
+            TRetaliate:
+                Retaliate: 2
+                ActiveBonus:
+                    Duration: Round
+                    ProcXP: 1
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BPull:
+                Pull:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: TargetedShout
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Pull> *TPull* <size=100%><voffset=1>@TPull@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TPull.Range* @TPull.Range@</link>"
+                - Row: "<link=fhpill>, <sprite name=Muddle></link>"
+            - Column:
+        - Divider:
+        - Active:
+            Ability: TRetaliate
+            Icon: Positive_XP_Retaliate
+            ListLayout: "<sprite name=Retaliate> *TRetaliate*, $FHS_GH2E_Bruiser_13_T$"
+            Layout:
+                - Row: "<size=150%><sprite name=Retaliate> *TRetaliate*"
+                - Row: "<size=20%> "
+                - Row: "$FHS_GH2E_Bruiser_13_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Pull> *BPull* <size=100%><voffset=1>@BPull@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BPull.Range* @BPull.Range@</link>"
+            - Column:

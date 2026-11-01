@@ -1,0 +1,11 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Sunkeeper2_Heal1Range3_P1
+MathModifier: "+1"
+ControlTargetingActor: True
+Abilities:
+    AHeal:
+        Heal: 1
+        Filter: [Self, Ally]
+        Targeting: Range
+        Range: 3
+        AnimOverload: Heal

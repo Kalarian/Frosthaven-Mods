@@ -1,0 +1,14 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Plagueherald2_Poison_R
+MathModifier: "+0"
+Rolling: True
+Abilities:
+    PoisonAbility:
+        Poison: True
+        Filter: Enemy
+        Target: 1
+        Targeting: Custom
+        TargetingVars:
+            AddValidActorsInRange: GameState.GetAllEnemiesInRange(TargetingActor, TargetActor.ArrayIndex, 2)
+        MiscVars:
+            TreatAsNonInlineForTargeting: True

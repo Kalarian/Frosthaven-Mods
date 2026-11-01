@@ -1,0 +1,60 @@
+# card: Singing Arrow
+# bottom: the grant's range is [square] as printed (Secretariat has a diamond)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 3
+                Conditions: Curse
+                AnimOverload: RangedAttack
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerHighNote", 1]
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 2
+                                Enhancements: 1
+                            Range:
+                                Amount: 3
+                                Enhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneAttack
+            BNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Curse$ <sprite name=Curse>"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_HIGH$"
+    Bottom:
+        - Row: "$GH2E_Soothsinger2_GRANT_RANGE$ <nobr><sprite name=Range> *BAlly.Range*</nobr>: @BAlly.Range@"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
+        - Row: "$Range$ <sprite name=Range> *BAllyAttack.Range* @BAllyAttack.Range@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_LOW$"

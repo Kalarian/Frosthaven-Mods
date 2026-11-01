@@ -1,0 +1,55 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SilentForce$
+Character: Nightshroud2ID
+ID: 32907
+Level: 1
+Initiative: 8
+# card: Silent Force
+# top: Stun on an area (the 1st edition Soothsinger's Provoke Terror shape, a melee area from the grey hex). The Tear
+# hex (4,0, two hexes away in the line) = a Tear within range 2 (APPROXIMATION, NOTES.md).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TStun:
+                Stun: True
+                Filter: Enemy
+                AreaEffect: "0,0,G|2,0,R"
+                AnimOverload: AggressiveTargetedShout
+            TTear:
+                CreateShadow:
+                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+                Range: 2
+                Target: 1
+                AnimOverload: Shadow Manipulation
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BMuddle:
+                Muddle: True
+                Range: 1
+                Target: -1
+                Filter: Enemy
+                AnimOverload: WeakRadial
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "65,30"
+            - Column:
+                - Row: "<size=150%><nobr><sprite name=Stun></nobr>"
+                - Row: "<size=20%> "
+                - Row: "$FHS_GH2E_Nightshroud2_TEARHEX$"
+            - Column: "£Area£"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Muddle>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
+            - Column:

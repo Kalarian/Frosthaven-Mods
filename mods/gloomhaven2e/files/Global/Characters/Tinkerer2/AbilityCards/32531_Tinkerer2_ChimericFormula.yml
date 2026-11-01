@@ -1,0 +1,45 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ChimericFormula$
+Character: Tinkerer2ID
+ID: 32531
+Level: 9
+Initiative: 33
+# card: Chimeric Formula
+# Xipe's 99060 is a placeholder (plain Attack 3 / Move 3); written from tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Permanently Lost]
+Data:
+    Top:
+        Abilities:
+            # Heal 3, Strengthen, Bless on one ally within range 3. "The target may immediately play up to two cards
+            # from their hand (one top, one bottom)": text only, NEEDS PLUGIN (Frosthaven's SelectAndPlayCard plays the
+            # caster's own cards, never an ally's)
+            THeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range: 3
+                Target: 1
+                Filter: Ally
+                Conditions: [Strengthen, Bless]
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            # APPROXIMATION: "recover one card from the lost pile of one ally adjacent to them" is the ally's own lost
+            # pile (Stamina Booster's RecoverLostCards); NEEDS PLUGIN for the neighbour's pile
+            BRecover:
+                RecoverLostCards: 1
+                Range: 3
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: TargetRecover
+        XP: 3
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$FHS_GH2E_Tinkerer2_31_T$"
+        - Row: "<sprite name=Strengthen> <sprite name=Bless>"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Tinkerer2_31_T2$"
+    Bottom:
+        - Row: "$FHS_GH2E_Tinkerer2_31_B$"

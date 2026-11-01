@@ -1,0 +1,12 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Soothsinger2_Bless2_M2
+MathModifier: "-2"
+ControlTargetingActor: True
+Abilities:
+    ABless:
+        Bless: True
+        Filter: [Self, Ally]
+        Targeting: Range
+        Range: 99
+        Target: 2
+        CanUndo: False

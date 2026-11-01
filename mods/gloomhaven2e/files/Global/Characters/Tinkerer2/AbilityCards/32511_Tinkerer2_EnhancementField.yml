@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EnhancementField$
+Character: Tinkerer2ID
+ID: 32511
+Level: 1
+Initiative: 61
+# card: Enhancement Field
+# from Xipe's 99040_Tinkerer2_Enhancement Field.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            # The "Enhancement Field" token: a summon that can't be targeted, hurt or block (the 1st edition Ward's
+            # shape, seen working in a scenario) carrying the +1 Attack aura of range 1 (the 1st edition Spirit Banner's
+            # and Frosthaven's Banner of Strength's shape). Placed as a summon (adjacent), not "within range 3".
+            TSummon:
+                Summon: EnhancementFieldID
+                AnimOverload: Summon
+        XP: 3
+    Bottom:
+        Abilities:
+            # the 1st edition Enhancement Field bottom (same rule, played in the 1st edition pack): a round aura
+            BAttack:
+                Attack: 1
+                Range: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Behaviour: BuffAttack
+                    Duration: Round
+                    IsAura: True
+                    AuraFilter: [Self, Ally]
+                AnimOverload: EnhancementField
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_EnhancementField$
+                    SpecialText: "$FHS_GH2E_Tinkerer2_11_T$"
+    Bottom:
+        - Active:
+            Ability: BAttack
+            ListLayout: "$FHS_GH2E_Tinkerer2_11_B$"
+            Layout: "$FHS_GH2E_Tinkerer2_11_B$"
+            Icon: Positive_AttackPlus

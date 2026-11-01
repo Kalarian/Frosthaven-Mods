@@ -1,0 +1,78 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Flintlock$
+Character: SilentKnifeID
+ID: 32316
+Level: 3
+Initiative: 51
+# card: Flintlock
+# corrected against tools/gh2e/sheets/SilentKnife.json (Xipe: always Attack 4 Pierce 2, trap on any hex)
+# top: Attack 3 as printed; "you may place one of your money tokens in the target's hex for +2 Attack, Pierce 2" has
+# no Frosthaven form (a hero holds no money tokens to place back on the map), so the bonus is always given, as a
+# conditional override on every enemy target (the 1e Trickster's Reversal's "Filter: Enemy" override) - NEEDS PLUGIN
+# for the cost, see NOTES.md.
+# bottom: Frosthaven's Trapper Honeypot top shape (the loot names itself in a temp var; the trap reads the loot's
+# looted tiles), here the looted tiles that are now empty instead of the unlooted ones; the player picks one.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 2
+                Conditions: Muddle
+                AnimOverload: RangedAttackPistol
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter: Enemy
+                        AbilityOverrides:
+                            TTokenBuff:
+                                Strength: 2
+                                Pierce: 2
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+                Vars:
+                    LootAbility: TargetingActor.SetTempVar("SilentKnifeFlintlockLoot", Ability)
+            BTrap:
+                Trap:
+                    TrapName: BearTrap
+                    Conditions: [Poison, Immobilize]
+                Target: 1
+                SpawnDelay: 2.8
+                Vars:
+                    LootAbility: TargetingActor.SilentKnifeFlintlockLoot
+                    ValidateHasHappened: LootAbility.AbilityHasHappened
+                    LootedTiles: TargetingActor.LastAbilityPerformed and LootAbility.TilesSelected
+                    EmptyLootedTiles: LootedTiles.Where(IsEmpty)
+                    ValidateHasEmptyLootedTiles: EmptyLootedTiles.Count > 0
+                Targeting: Custom
+                TargetingVars:
+                    AddTilesInRange: EmptyLootedTiles
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Muddle></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_SilentKnife_16_T$"
+        - Infuse: Fire
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_SilentKnife_16_B$"

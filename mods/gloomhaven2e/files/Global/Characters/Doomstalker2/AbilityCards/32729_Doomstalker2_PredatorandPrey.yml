@@ -1,0 +1,61 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PredatorandPrey$
+Character: Doomstalker2ID
+ID: 32729
+Level: 9
+Initiative: 86
+# card: Predator and Prey
+# top: Summon Great Archinotl (stand-in model: the 1st edition Swamp Lizard). "At initiative 100 each round, this summon
+# performs an additional turn": no Frosthaven summon shape, text only (NEEDS PLUGIN).
+# bottom: the 1st edition Predator and Prey doom (StatIsBasedOnX TargetDistanceRangeDiff), filtered to your attacks.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: GreatArchinotlID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomAttackDebuff:
+                                Attack: 0
+                                StatIsBasedOnX:
+                                    Strength:
+                                        BasedOn: TargetDistanceRangeDiff
+                                        AddTo: True
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    Filter:
+                                        PlayerClasses: Doomstalker2ID
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_GreatArchinotl$
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Doomstalker2_29_T$"
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_Doomstalker2_29_B$"
+            Layout:
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH2E_Doomstalker2_29_B$"
+                - Row: "$FHS_Doom_DiscardReminderText$"

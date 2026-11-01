@@ -1,0 +1,19 @@
+Parser: Perk
+ID: Plagueherald210
+Name: PERK_Plagueherald2_10_Name
+Description: PERK_Plagueherald2_10_Desc
+CharacterID: Plagueherald2ID
+Available: 1
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TFly:
+        Move:
+            Amount: 0
+            Fly: True
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: BuffMove
+            Hidden: True

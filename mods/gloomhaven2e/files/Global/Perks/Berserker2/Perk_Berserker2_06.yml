@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Berserker206
+Name: PERK_Berserker2_06_Name
+Description: PERK_Berserker2_06_Desc
+CharacterID: Berserker2ID
+Available: 1
+CardsToAdd: [AMC_Stun_R]

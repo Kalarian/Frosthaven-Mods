@@ -1,0 +1,38 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_VitalStrikes$
+Character: Sawbones2ID
+ID: 33210
+Level: 1
+Initiative: 53
+# card: Vital Strikes
+# top: persistent BuffAttack whose filter only takes damaged targets (TargetMissingHP > 0, a CAbilityFilter key the 1st
+# edition port verified on the Sawbones), the Scoundrel Single Out bottom shape.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TBuffAttack:
+                Attack: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    ValidAbilityType: Attack
+                    Filter:
+                        TargetType: Enemy
+                        TargetMissingHP: "> 0"
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 5
+Layout:
+    Top:
+        - Active:
+            Ability: TBuffAttack
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_Sawbones2_10_T$"
+            Layout: "$FHS_GH2E_Sawbones2_10_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove*"

@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Wildfury02
+Name: PERK_Wildfury_02_Name
+Description: PERK_Wildfury_02_Desc
+CharacterID: WildfuryID
+Available: 3
+CardsToRemove: [AMC_Basic_P0]
+CardsToAdd: [AMC_Wound_P1]

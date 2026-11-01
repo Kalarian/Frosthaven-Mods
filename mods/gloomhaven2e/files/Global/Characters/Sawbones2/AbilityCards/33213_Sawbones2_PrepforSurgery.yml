@@ -1,0 +1,61 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PrepforSurgery$
+Character: Sawbones2ID
+ID: 33213
+Level: X
+Initiative: 22
+# card: Prep for Surgery
+# top: Stun + XP 1 on a damaged target (target conditional override, TargetMissingHP > 0). bottom: the 1st edition's
+# Prep for Surgery override (verified there): a persistent toggle turning attack and move abilities into heals of +1,
+# dropping their added effects, with range at least 1 (the converted move heals at range 1; a converted ranged attack
+# keeps its range, which the 2e card leaves open).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            TargetType: Enemy
+                            TargetMissingHP: "> 0"
+                        XP: 1
+                        AbilityOverrides:
+                            TAttackCOStun:
+                                Conditions: [Stun]
+    Bottom:
+        Abilities:
+            BOverride:
+                AddActiveBonus:
+                    Heal: 0
+                ActiveBonus:
+                    Behaviour: OverrideMoveAbility
+                    Duration: Persistent
+                    ValidAbilityType: [Move, Attack]
+                    IsToggleBonus: True
+                    ActiveBonusAbilityOverrides:
+                        BCTypeOverride:
+                            AbilityType: Heal
+                            Strength: 1
+                            RangeAtLeastOne: True
+                            TargetAtLeastOne: True
+                            Filter: [Ally, Self]
+                            AnimOverload: Heal
+                            RemoveConditionsOverride: True
+                PreviewEffectText: "<sprite name=Move> + <sprite name=Attack> / <sprite name=Heal>"
+                AnimOverload: PowerUp
+        XP: 2
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Sawbones2_13_T$"
+    Bottom:
+        - Active:
+            Ability: BOverride
+            Icon: Positive_Heal
+            ListLayout: "$FHS_GH2E_Sawbones2_13_B$"
+            Layout: "$FHS_GH2E_Sawbones2_13_B$"

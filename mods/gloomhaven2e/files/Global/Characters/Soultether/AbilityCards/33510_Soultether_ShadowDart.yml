@@ -1,0 +1,54 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ShadowDart$
+Character: SoultetherID
+ID: 33510
+Level: 1
+Initiative: 28
+# card: Shadow Dart
+# bottom: "all your summons' attacks are unaffected by Retaliate": Frosthaven's Decaying Will bottom word for word
+# (a persistent BlockRetaliate aura on your summons).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range: 4
+                Conditions: Curse
+                AnimOverload: RangedAttackDark
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BIgnoreRetaliate:
+                PreventDamage: 1
+                Target: -1
+                Targeting: All
+                Filter: Self
+                ActiveBonus:
+                    Behaviour: BlockRetaliate
+                    Duration: Persistent
+                    IsAura: True
+                    AuraTargeting: All
+                    IsToggleBonus: False
+                    AuraFilter: OwnSummon
+                AnimOverload: CastNegative
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Curse></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Dark
+    Bottom:
+        - Active:
+            Ability: BIgnoreRetaliate
+            Icon: Positive_RetaliatePrevent_Summon
+            ListLayout: "$FHS_GH2E_Soultether_10_B$"
+            Layout: "$FHS_GH2E_Soultether_10_B$"

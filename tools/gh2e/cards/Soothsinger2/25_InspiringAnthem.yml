@@ -1,0 +1,57 @@
+# card: Inspiring Anthem
+# grants print no range: any ally (Range 99); the Strengthen inside the top grant is the ally's own (Filter Self)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyMove:
+                            Move:
+                                Amount: 5
+                                SquareEnhancements: 1
+                                Jump: True
+                            StrengthIsBase: True
+                        TAllyStrengthen:
+                            Strengthen:
+                                Enhancements: 1
+                            Filter: Self
+                Range: 99
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneMove
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 5
+                                Enhancements: 1
+                            Range: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                Range: 99
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneAttack
+Layout:
+    Top:
+        - Row: "$GH2E_Soothsinger2_GRANT$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
+        - Row: "$Jump$ <sprite name=Jump>"
+        - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen> <size=100%><voffset=1>@TAllyStrengthen@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_LOW$"
+    Bottom:
+        - Row: "$GH2E_Soothsinger2_GRANT$"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

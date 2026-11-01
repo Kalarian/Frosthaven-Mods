@@ -1,0 +1,23 @@
+Parser: Perk
+ID: Berserker210
+Name: PERK_Berserker2_10_Name
+Description: PERK_Berserker2_10_Desc
+CharacterID: Berserker2ID
+Available: 1
+Cost: 2
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TDefyDeath:
+        AutoTrigger: True
+        SkipAnim: True
+        PreventDamage: 1
+        PreventOnlyIfLethal: True
+        PreventDamageSetTargetHealthTo: 1
+        AttackSourcesOnly: True
+        Filter: [Self]
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: PreventAndDamageActiveBonusCaster
+            XPTracker: [0]
+            Hidden: True
+            ListLayoutOverride: [$PERK_Berserker2_10_Desc$, Positive_DamagePrevent]

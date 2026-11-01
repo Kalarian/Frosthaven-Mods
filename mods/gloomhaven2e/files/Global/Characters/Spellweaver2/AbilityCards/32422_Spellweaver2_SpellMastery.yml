@@ -1,0 +1,63 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SpellMastery$
+Character: Spellweaver2ID
+ID: 32422
+Level: 7
+Initiative: 71
+# card: Spell Mastery
+# written new (Xipe has only an Attack 3 / Move 3 placeholder, 99082_X). top: Frosthaven's "play a card from your
+# discard pile" (SelectAndPlayCard, CardPile Discarded: Boneshaper Grave Digging, Blinkblade Reverse the Flow), only its
+# lost half (IsActionValid: IsLoss); "you may": the player can skip it. The played card goes to the lost pile
+# (MoveCardsToLostPile, as Crashing Tide's Low Tide): performing a lost action loses the card (GHS reads the same; the
+# card itself doesn't print where it goes). The top has no lost icon: Spell Mastery itself is discarded.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                AnimOverload: TargetedManaBolt
+            TPlayDiscarded:
+                SelectAndPlayCard:
+                    CardPile: Discarded
+                    Amount: 1
+                Filter: Self
+                AnimOverload: PowerUp
+                MiscVars:
+                    IsActionValid: IsLoss
+                    MoveCardsToLostPile: True
+            TInfuse:
+                CanUndo: False
+                CanSkip: False
+                Infuse: [Any]
+                ShowElementPicker: True
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 5
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Spellweaver2_22_T$"
+        - Row: "<size=20%> "
+        - Infuse: Any
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

@@ -1,0 +1,126 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_InterplanarMastery$
+Character: SoultetherID
+ID: 33529
+Level: 8
+Initiative: 27
+# card: Interplanar Mastery
+# top: Attack 3, Range 4 with three separate consumes, each +1 Attack and a rider (Fire Wound, Air Pierce 2, Dark Curse).
+# bottom: grant one of your summons Teleport 3 [square] and
+# Shield 1 for the round (the grant performs both on the summon, as Frosthaven's Flesh Shield grants a Shield); consume
+# Dark: "all adjacent enemies suffer damage 1 and gain Muddle", read as adjacent to the granted summon (the sheet's
+# unclear note: the row sits inside the grant) = a damage sub-ability around the control's target added by the consume
+# (AllTargetsAdjacentToParentTargets + TreatAsNonSubAbility, Frosthaven's Ice Wall / the Negative Energy fix).
+# Unverified: whether it is aimed after the summon's teleport.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 4
+                AnimOverload: RangedAttackDark
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Wound
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Pierce: 2
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Curse
+        XP: 1
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyTeleport:
+                            Teleport2:
+                                Amount: 3
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                            Filter: Self
+                            AnimOverload: Teleport Into
+                            AnimOverload2: Teleport Outof
+                        BAllyShield:
+                            Shield:
+                                Amount: 1
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                            Filter: Self
+                            ActiveBonusDuration: Round
+                            AnimOverload: TargetedBuff
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter: OwnSummon
+                AnimOverload: ControlSummon
+        Consumes:
+            BCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    BCDarkDamage:
+                        ParentName: BAlly
+                        SubAbilities:
+                            BAllySubDamage:
+                                Damage: 1
+                                Conditions: [Muddle]
+                                Range: 1
+                                Target: -1
+                                Filter: Enemy
+                                AllTargetsAdjacentToParentTargets: True
+                                TreatAsNonSubAbility: True
+                                AutoTrigger: True
+                                CanSkip: False
+                                AnimOverload: RadialDebuff
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFire
+                    Text: "+1 <sprite name=Attack>, <sprite name=Wound>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "+1 <sprite name=Attack>, <sprite name=Pierce> 2"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "+1 <sprite name=Attack>, <sprite name=Curse>"
+    Bottom:
+        - Row: "$FHS_GH2E_Soultether_GRANT1$"
+        - Row: "<size=150%><sprite name=Teleport> *BAllyTeleport* <size=100%><voffset=1>@BAllyTeleport@"
+        - Row: "<size=150%><sprite name=Shield> *BAllyShield* <size=100%><voffset=1>@BAllyShield@"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "$FHS_GH2E_Soultether_29_B$"

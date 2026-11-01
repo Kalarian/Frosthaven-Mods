@@ -1,0 +1,16 @@
+Parser: HeroSummon
+ID: RatSwarmID
+LocKey: $GH2E_SUMMON_RatSwarm$
+Model: PlagueRat
+Health:
+    Amount: 5
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    SquareEnhancements: 1
+Attack:
+    Amount: 2
+    SquareEnhancements: 1
+Range: 1
+OnAttackCondition: Poison
+AttackAnimOverload: PoisonAttack

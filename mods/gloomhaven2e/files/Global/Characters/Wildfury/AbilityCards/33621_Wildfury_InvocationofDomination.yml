@@ -1,0 +1,106 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_InvocationofDomination$
+Character: WildfuryID
+ID: 33621
+Level: 5
+Initiative: 10
+# card: Invocation of Domination
+# top: "! consume Air (required)" + invocation: after each of the Bear's next four attacks, once each round, "control
+# the target of the attack: Move 2, Attack 2". The per-target trigger (DuringActionAbilityOnAttackFinished, Drifter
+# Shockwave / Pyroclast Feed the Beast, TriggerTarget) as an aura on the Bear; the added ability is a ControlActor on
+# that target (Frosthaven's HIVE Hijack bottom: Move 2 / Attack 2 for an enemy, the player controlling), aimed by
+# Pyroclast's custom targeting (TriggerTarget), skipped when the target died. Four slots, XP on the first. Untested.
+# bottom: grant one ally within range 4 Shield 1 [square] for the round (the 1st edition Maul bottom's grant), then
+# Poison every enemy adjacent to that ally (AllTargetsAdjacentToParentTargets + TreatAsNonSubAbility, the Care
+# Package / Virulent Strain fixes in gh_port CARD_FIXES); infuse Earth; round.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TConsume:
+                Consume:
+                    Elements: [Air]
+                    Abilities:
+                        TCNull:
+                            Null: True
+                            AutoTrigger: True
+            TInvoke:
+                AddActiveBonus:
+                    ControlActor:
+                        ControlActorType: Player
+                        Abilities:
+                            TEnemyMove:
+                                Move: 2
+                                StrengthIsBase: True
+                            TEnemyAttack:
+                                Attack: 2
+                                Range: 1
+                                RangeIsBase: True
+                                StrengthIsBase: True
+                    Filter: Enemy
+                    Target: 1
+                    Targeting: Custom
+                    TargetingVars:
+                        AddValidActorInRange: TriggerTarget
+                    SkipAnim: True
+                Filter: Self
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    ActorHasPerformedValidAbilityTypesThisAction: "> 0"
+                    AbilityTypes: [Consume]
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnAttackFinished
+                    Restriction: OncePerRound
+                    XPTracker: [1,0,0,0]
+                    IsAura: True
+                    AuraFilter:
+                        TargetType: [OwnSummon]
+                        HeroSummonClasses: [WildfuryBearID]
+                    AuraTargeting: All
+                    Vars:
+                        AttackTarget: TriggerTarget
+                        ValidateTargetAlive: AttackTarget.IsDead == false
+                AnimOverload: RadialBeneficial
+    Bottom:
+        Abilities:
+            BShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Range: 4
+                Filter: Ally
+                ActiveBonusDuration: Round
+                AnimOverload: RangedCast
+                SubAbilities:
+                    BPoisonAround:
+                        Poison: True
+                        Target: -1
+                        Filter: Enemy
+                        AllTargetsAdjacentToParentTargets: True
+                        TreatAsNonSubAbility: True
+                        SkipAnim: True
+        Infuse: Earth
+Layout:
+    Top:
+        - Row: "<sprite name=ConsumeAir> $FHS_GH2E_Wildfury_REQUIRED$"
+        - Row: "<size=50%> "
+        - Active:
+            Ability: TInvoke
+            Icon: AA_Mind_Control
+            ListLayout: "$FHS_GH2E_Wildfury_21_T$"
+            Layout: "$FHS_GH2E_Wildfury_21_T$"
+        - Row: "<size=100%> "
+        - XPTracker: TInvoke
+    Bottom:
+        - Row: "$FHS_GH2E_Wildfury_21_B$"
+        - Active:
+            Ability: BShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *BShield*"
+            Layout: "<size=150%><sprite name=Shield> *BShield* <size=100%><voffset=1>@BShield@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Poison>"
+        - Row: "$FHS_GH2E_Wildfury_21_B2$"
+        - Row: "<size=50%> "
+        - Infuse: Earth

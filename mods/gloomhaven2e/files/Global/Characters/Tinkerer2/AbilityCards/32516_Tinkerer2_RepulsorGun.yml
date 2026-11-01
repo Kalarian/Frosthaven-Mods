@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RepulsorGun$
+Character: Tinkerer2ID
+ID: 32516
+Level: 2
+Initiative: 35
+# card: Repulsor Gun
+# from Xipe's 99045_Tinkerer2_Repulsor Gun.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 3
+                Range: 3
+                AnimOverload: RangedAttack
+                SubAbilities:
+                    TAttackSubPush:
+                        Push:
+                            Amount: 1
+                            SquareEnhancements: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            BPush:
+                Push:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 2
+                Filter: Enemy
+                AnimOverload: RangedAttack
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <sprite name=Push> *TAttackSubPush* @TAttackSubPush@</link>"
+            - Column:
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Push> *BPush* <size=100%><voffset=1>@BPush@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BPush.Range*</link>"
+            - Column:

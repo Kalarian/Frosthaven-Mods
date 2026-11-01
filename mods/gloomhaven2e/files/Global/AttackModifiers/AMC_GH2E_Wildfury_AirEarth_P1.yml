@@ -1,0 +1,7 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Wildfury_AirEarth_P1
+MathModifier: "+1"
+Abilities:
+    InfuseAbility:
+        Infuse: [Air, Earth]
+        ShowElementPicker: True

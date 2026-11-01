@@ -1,0 +1,89 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Rampage$
+Character: WildfuryID
+ID: 33620
+Level: 5
+Initiative: 16
+# card: Rampage
+# top: COMMAND Attack 2 [square], Move 2, Attack 3 [diamond], Move 2, Attack 4 [diamond] (the 1st edition Rampage top's
+# chain with 2e numbers and marks; the moves have none), XP 2, lost. bottom: COMMAND Attack 2 [square], Target 2,
+# Muddle, XP 1.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack1:
+                            Attack:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                        TAllyMove1:
+                            Move: 2
+                            StrengthIsBase: True
+                        TAllyAttack2:
+                            Attack:
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                        TAllyMove2:
+                            Move: 2
+                            StrengthIsBase: True
+                        TAllyAttack3:
+                            Attack:
+                                Amount: 4
+                                DiamondEnhancements: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 2
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            Target: 2
+                            Conditions: Muddle
+                            MultiPassAttack: False
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                            TargetIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        XP: 1
+Layout:
+    Top:
+        - Row: "<size=1%><link=fhcommand> </link>"
+        - Row: "<size=150%><sprite name=Attack> *TAllyAttack1* <size=100%><voffset=1>@TAllyAttack1@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Move> *TAllyMove1*"
+        - Divider:
+        - Row: "<size=150%><sprite name=Attack> *TAllyAttack2* <size=100%><voffset=1>@TAllyAttack2@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Move> *TAllyMove2*"
+        - Divider:
+        - Row: "<size=150%><sprite name=Attack> *TAllyAttack3* <size=100%><voffset=1>@TAllyAttack3@"
+    Bottom:
+        - Row: "<size=1%><link=fhcommand> </link>"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *BAllyAttack.Target*, <sprite name=Muddle></link>"
+            - Column:

@@ -1,0 +1,71 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HolyDefense$
+Character: Sunkeeper2ID
+ID: 33315
+Level: 2
+Initiative: 12
+# card: Holy Defense
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TShield:
+                Shield:
+                    Amount: 1
+                    SquareEnhancements: 1
+                ActiveBonusDuration: Round
+                AnimOverload: PowerUp
+            TNull:
+                Null: True
+        Consumes:
+            TCLight:
+                Elements: Light
+                Abilities:
+                    TCLightHeal:
+                        ParentName: TNull
+                        Heal: 2
+                        Filter: Self
+                        AnimOverload: Heal
+                XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    SquareEnhancements: 1
+            BNull:
+                Null: True
+        Consumes:
+            BCLight:
+                Elements: Light
+                Abilities:
+                    BCLightHeal:
+                        ParentName: BNull
+                        Heal: 1
+                        Range: 1
+                        Target: -1
+                        Filter: [Self, Ally]
+                        AnimOverload: PositiveBuffRadial
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TShield
+            Icon: Positive_Shield
+            ListLayout: "<sprite name=Shield> *TShield*"
+            Layout:
+                - Row: "<size=150%><sprite name=Shield> *TShield* <size=100%><voffset=1>@TShield@"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCLight
+                    Text: "<sprite name=Heal> 2, <sprite name=XP1>"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCLight
+                    Text: "$FHS_GH2E_Sunkeeper2_15_B$"

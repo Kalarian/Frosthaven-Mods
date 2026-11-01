@@ -1,0 +1,65 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BewilderingInstrumental$
+Character: Soothsinger2ID
+ID: 33402
+Level: 1
+Initiative: 11
+# card: Bewildering Instrumental
+# top: song (High Note); the player picks the enemy (highest current hit points not enforced, NOTES.md)
+# bottom: the granted Shield 1 has no enhancement mark
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TSong:
+                AddActiveBonus:
+                    Damage: 1
+                    Range: 99
+                    Target: 1
+                    Filter: Enemy
+                    Conditions: Muddle
+                    AnimOverload: AggressiveTargetedShout
+                Filter: Self
+                AnimOverload: PlaySongConfuse1
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [1,0,0,0]
+            TSongNotes:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Ability
+                    Hidden: True
+                    RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BShield:
+                Shield: 1
+                Range: 1
+                Target: 1
+                Filter: Ally
+                ActiveBonus:
+                    Duration: Round
+                AnimOverload: PlayPositiveTuneShield
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Soothsinger2_02_T$"
+        - Active:
+            Ability: TSong
+            Icon: Positive_Damage_Enemy_Aura
+            ListLayout: "$FHS_GH2E_Soothsinger2_02_T2$"
+            Layout: "$FHS_GH2E_Soothsinger2_02_T2$"
+        - Row: "<size=100%> "
+        - XPTracker: TSong
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_GRANT_ADJ$"
+        - Row: "<size=150%><sprite name=Shield> 1"

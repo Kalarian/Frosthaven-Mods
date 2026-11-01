@@ -1,0 +1,61 @@
+# card: Wearying Chant
+# top: song (High + Low Note); the player picks the enemy (closest without Disarm or Stun not enforced, NOTES.md)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TSong:
+                AddActiveBonus:
+                    Disarm: True
+                    Range: 99
+                    Target: 1
+                    Filter: Enemy
+                    AnimOverload: AggressiveTargetedShout
+                Filter: Self
+                AnimOverload: PlaySongConfuse2
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [1,0]
+            TSongNotes:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Ability
+                    Hidden: True
+                    RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: PlayPositiveTune
+            BNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+Layout:
+    Top:
+        - Row: "$GH2E_Soothsinger2_03_T$"
+        - Active:
+            Ability: TSong
+            Icon: "Icon_Disarm"
+            ListLayout: "$GH2E_Soothsinger2_03_T2$"
+            Layout: "$GH2E_Soothsinger2_03_T2$"
+        - Row: "<size=20%> "
+        - XPTracker: TSong
+    Bottom:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+        - Row: "$Range$ <sprite name=Range> *BHeal.Range* @BHeal.Range@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_LOW$"

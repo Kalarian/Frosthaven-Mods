@@ -1,0 +1,66 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SilentScream$
+Character: Mindthief2ID
+ID: 32219
+Level: 4
+Initiative: 83
+# card: Silent Scream
+# written from tools/gh2e/sheets/Mindthief.json; augment = the 1st edition Silent Scream's (Heal 2, range 2, self or
+# ally after each melee attack); bottom: the enemy attacks at its own value -1, in melee (no range printed: 2e
+# rulebook p.40, attacks with no range are melee)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Conditions: Disarm
+                Augment:
+                    Type: Melee
+                    Abilities:
+                        TAugmentHeal:
+                            Heal: 2
+                            Range: 2
+                            Filter: [Self, Ally]
+                            AnimOverload: Heal
+        XP: 1
+    Bottom:
+        Abilities:
+            BControl:
+                ControlActor:
+                    Abilities:
+                        EnemyWillDoThis:
+                            Attack: -1
+                            Range: 1
+                            Target: 1
+                            RangeIsBase: True
+                            TargetIsBase: True
+                    ControlDurationType: ControlForOneAction
+                    ControlActorType: Player
+                Range: 4
+                Filter: Enemy
+                AnimOverload: MindControl
+        Infuse: Ice
+Layout:
+    Top:
+        - Augment:
+            AugmentIcon: Positive_AttackPlus
+            ParentAbility: TAttack
+            ActiveBonusLayout: "$FHS_GH2E_Mindthief2_19_T$ <nobr><sprite name=Heal> *TAugmentHeal*,</nobr> <sprite name=Range> *TAugmentHeal.Range*"
+            AugmentAbilityLayout:
+                - Row: "<size=125%>$FHS_GH2E_Mindthief2_19_T$, <sprite name=Heal> *TAugmentHeal* <sprite name=Range> *TAugmentHeal.Range*"
+            NormalContentLayout:
+                - ColumnWidths: "20,60,20"
+                - Column:
+                - Column:
+                    - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                    - Row: "<sprite name=Disarm>"
+                - Column:
+    Bottom:
+        - Row: "$FHS_GH2E_Mindthief2_CONTROL1$"
+        - Row: "<size=20%> "
+        - Row: "<size=150%><sprite name=Attack> -1"
+        - Row: "<size=20%> "
+        - Infuse: Ice

@@ -1,0 +1,94 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PunchThrough$
+Character: WildfuryID
+ID: 33616
+Level: 3
+Initiative: 29
+# card: Punch Through
+# top: COMMAND Attack 3 [diamond], Pierce 2; consume Air: +1 Attack, +2 Pierce, XP 1 (the consume overrides the
+# commanded attack, as the 1st edition Unstoppable Beast top). bottom: COMMAND Move 3 [circle]; "+1 Attack to all your
+# attacks this round", read as the Bear's (the performer of the Command half): the 1st edition Punch Through bottom's
+# round aura on the bear, for all its attacks (the 1st edition limited it to commanded ones).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack:
+                                Amount: 3
+                                DiamondEnhancements: 1
+                            Pierce: 2
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        Consumes:
+            TCAir:
+                Elements: Air
+                AbilityOverrides:
+                    TCAirAttackBuff:
+                        ParentName: TAllyAttack
+                        Attack:
+                            Amount: 1
+                            Pierce: 2
+                XP: 1
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move:
+                                Amount: 3
+                                CircleEnhancements: 1
+                            StrengthIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+            BAttack:
+                Attack: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Behaviour: BuffAttack
+                    Duration: Round
+                    ValidAbilityTypes: [Attack]
+                    IsAura: True
+                    AuraFilter:
+                        TargetType: [OwnSummon]
+                        HeroSummonClasses: [WildfuryBearID]
+                    AuraTargeting: All
+                AnimOverload: RadialBeneficial
+Layout:
+    Top:
+        - Row: "<size=1%><link=fhcommand> </link>"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Pierce> *TAllyAttack.Pierce*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "+1 <sprite name=Attack> +2 <sprite name=Pierce>, <sprite name=XP1>"
+    Bottom:
+        - Row: "<size=1%><link=fhcommand> </link>"
+        - Row: "<size=150%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
+        - Divider:
+        - Active:
+            Ability: BAttack
+            Icon: Positive_AttackPlus_Ally
+            ListLayout: "$FHS_GH2E_Wildfury_16_B$"
+            Layout: "$FHS_GH2E_Wildfury_16_B$"

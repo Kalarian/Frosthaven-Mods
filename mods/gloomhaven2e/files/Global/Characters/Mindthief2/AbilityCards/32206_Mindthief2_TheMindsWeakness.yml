@@ -1,0 +1,74 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TheMindsWeakness$
+Character: Mindthief2ID
+ID: 32206
+Level: 1
+Initiative: 75
+# card: The Mind's Weakness
+# written from tools/gh2e/sheets/Mindthief.json; augment = the 1st edition card's; "control the target" = the control
+# sub-ability on the attack's own target (UseParentTargets, as the 1st edition Lead to Slaughter after its fix)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Augment:
+                    Type: Melee
+                    AbilityOverrides:
+                        TAugmentAttackBuff:
+                            ParentName: TAttack
+                            Attack: 1
+                SubAbilities:
+                    TControl:
+                        ControlActor:
+                            Abilities:
+                                EnemyWillDoThis:
+                                    Attack:
+                                        Amount: 2
+                                        DiamondEnhancements: 1
+                                    Range: 1
+                                    Target: 1
+                                    StrengthIsBase: True
+                                    RangeIsBase: True
+                                    TargetIsBase: True
+                            ControlDurationType: ControlForOneAction
+                            ControlActorType: Player
+                        Filter: Enemy
+                        UseParentTargets: True
+                        Target: 1
+                        AnimOverload: MindControl
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Conditions: Wound
+Layout:
+    Top:
+        - Augment:
+            AugmentIcon: Positive_AttackPlus
+            ParentAbility: TAttack
+            ActiveBonusLayout: "$FHS_GH2E_Mindthief2_06_T$"
+            AugmentAbilityLayout:
+                - Row: "<size=125%>$FHS_GH2E_Mindthief2_06_T$"
+            NormalContentLayout:
+                - ColumnWidths: "20,60,20"
+                - Column:
+                - Column:
+                    - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                    - Row: "$FHS_GH2E_Mindthief2_CONTROLTARGET$"
+                    - Row: "<size=150%><sprite name=Attack> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@"
+                - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Wound></link>"
+            - Column:

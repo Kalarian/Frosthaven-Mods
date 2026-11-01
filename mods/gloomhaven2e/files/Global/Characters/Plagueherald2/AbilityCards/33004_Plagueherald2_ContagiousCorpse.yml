@@ -1,0 +1,62 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ContagiousCorpse$
+Character: Plagueherald2ID
+ID: 33004
+Level: 1
+Initiative: 16
+# card: Contagious Corpse
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+                SubAbilities:
+                    TCurseDeck:
+                        AddModifiersToMonsterDeck:
+                            Strength: 1
+                            ModifiersToAdd: Curse
+                        Filter: Enemy
+                        AbilityXP: 1
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsKilledByAbility: "> 0"
+                        TreatAsNonSubAbility: True
+                        AutoTrigger: True
+                        AnimOverload: None
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BShield:
+                Shield: 2
+                Range: 3
+                Filter:
+                    TargetType: Ally
+                    TargetHasNegativeCondition: Poison
+                ActiveBonusDuration: Round
+                AnimOverload: PositiveBuffTargeted
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Plagueherald2_04_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Plagueherald2_04_B$"
+        - Row: "<size=150%><sprite name=Shield> *BShield*"

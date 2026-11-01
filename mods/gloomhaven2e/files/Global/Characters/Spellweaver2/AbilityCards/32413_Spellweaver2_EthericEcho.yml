@@ -1,0 +1,70 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EthericEcho$
+Character: Spellweaver2ID
+ID: 32413
+Level: 2
+Initiative: 50
+# card: Etheric Echo
+# top: Frosthaven's own "play a card from your lost pile" (SelectAndPlayCard, CardPile Lost: HIVE Recall, Crashing Tide
+# Low Tide); IsCardValid = level 1 (X cards count as level 1, as Frosthaven's Stamina Potion: Level <= 1) and not Reviving
+# Ether (converted card ID 32401); IsActionValid = the half has the lost icon (the engine's IsLoss variable). The played
+# card goes back to the lost pile (the ability's default: the pile it came from).
+# bottom: the lost-action trigger (see Aid from the Ether), gaining Ward
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TPlayLost:
+                SelectAndPlayCard:
+                    CardPile: Lost
+                    Amount: 1
+                Filter: Self
+                AnimOverload: PowerUp
+                MiscVars:
+                    IsCardValid: AbilityCard.Level <= 1 && AbilityCard.ID != 32401
+                    IsActionValid: IsLoss
+            TInfuse:
+                CanUndo: False
+                CanSkip: False
+                Infuse: [Any]
+                ShowElementPicker: True
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BOnLost:
+                AddActiveBonus:
+                    Ward: True
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: DuringActionAbilityOnActionEnded
+                    Restriction: OncePerAction
+                    XPTracker: [0]
+                    Vars:
+                        LastPerformedAbility: TriggerActor.LastAbilityPerformed
+                        LostPile: LastPerformedAbility?.GetAbilityBaseCard()?.SelectedAction?.CardPile
+                        ValidateDidLoseCard: LostPile == "Lost" || LostPile == "PermanentlyLost"
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Spellweaver2_13_T$"
+        - Row: "<size=20%> "
+        - Infuse: Any
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BOnLost
+            ListLayout: "$FHS_GH2E_Spellweaver2_13_B$"
+            Layout: "$FHS_GH2E_Spellweaver2_13_B$"
+            Icon: Positive_WardSelf

@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_MurderousContraption$
+Character: Tinkerer2ID
+ID: 32526
+Level: 7
+Initiative: 84
+# card: Murderous Contraption
+# from Xipe's 99055_Tinkerer2_Murderous Contraption.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: Killbot2ID
+                AnimOverload: Summon
+        XP: 3
+    Bottom:
+        Abilities:
+            BHeal:
+                Heal:
+                    Amount: 5
+                    DiamondPlusEnhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_KillBot$
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BHeal.Range*</link>"
+            - Column:

@@ -1,0 +1,71 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RotMaggots$
+Character: Plagueherald2ID
+ID: 33015
+Level: 2
+Initiative: 69
+# card: Rot Maggots
+# top: "each ally adjacent to the target gains Poison": in 2e your allies (the class poisons allies on purpose; the
+# 1st edition card meant the target's allies, CARD_FIXES 20304). Filter Ally with TreatAsNonSubAbility (the 20304
+# finding: without it the sub kept the parent's target list). bottom: four end-of-turn triggers (this turn and the next
+# three), each "every enemy suffers 1 per Plague" written flat (1 per enemy with Plague): NEEDS PLUGIN for the count.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Conditions: Poison
+                AnimOverload: RangedAttack
+                SubAbilities:
+                    TAttackSubPoison:
+                        Poison: True
+                        Range: 1
+                        Target: -1
+                        Filter: Ally
+                        AllTargetsAdjacentToParentTargets: True
+                        TreatAsNonSubAbility: True
+                        AutoTrigger: True
+                        AnimOverload: None
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Damage: 1
+                    Target: -1
+                    Targeting: All
+                    Filter:
+                        TargetType: Enemy
+                        TargetHasCharacterResource: ["Plague"]
+                    AnimOverload: RadialNegativeMajor
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [0,1,0,1]
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+                - Row: "<link=fhpill>, <sprite name=Poison></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Plagueherald2_15_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Positive_Damage_Enemy_Aura
+            ListLayout: "$FHS_GH2E_Plagueherald2_15_B$"
+            Layout: "$FHS_GH2E_Plagueherald2_15_B$"
+        - Row: "<size=100%> "
+        - XPTracker: BActive

@@ -1,0 +1,63 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HiddenintheShadows$
+Character: Mindthief2ID
+ID: 32202
+Level: 1
+Initiative: 14
+# card: Hidden in the Shadows
+# written from tools/gh2e/sheets/Mindthief.json; top = Frosthaven's Morbid Camouflage top (Invisible on a kill);
+# bottom = Frosthaven's Giant Sword shapes (TilesMovedThisRound, ImmunityTo Move for the round)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                AttackHasAdvantage: True
+                SubAbilities:
+                    TInvisible:
+                        Invisible:
+                            DiamondPlusEnhancements: 1
+                        Filter: Self
+                        Flags: [SubAbilityPreview]
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsKilledByAbility: "> 0"
+                        AnimOverload: TurnInvisible
+    Bottom:
+        Abilities:
+            BInvisible:
+                Invisible:
+                    DecrementTrigger: Rounds
+                Filter: Self
+                AnimOverload: TurnInvisible
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateHasntMoved: TargetingActor.TilesMovedThisRound == 0
+            BPreventMove:
+                ImmunityTo: [Move]
+                Filter: Self
+                AutoTrigger: True
+                CanSkip: False
+                SkipAnim: True
+                StartAbilityRequirements:
+                    Type: PreviousAbility
+                    AbilityHasHappened: True
+                ActiveBonus:
+                    Duration: Round
+                    ListLayoutOverride: [$GH2E_Mindthief2_02_B2$, Negative_MovePrevent]
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$FHS_Advantage$"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Mindthief2_02_T$"
+        - Row: "<size=150%><sprite name=Invisible> <size=100%><voffset=1>@TInvisible@"
+    Bottom:
+        - Row: "$FHS_GH2E_Mindthief2_02_B$"
+        - Row: "<size=150%><sprite name=Invisible>"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Mindthief2_02_B2$"

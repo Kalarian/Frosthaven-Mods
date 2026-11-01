@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Berserker204
+Name: PERK_Berserker2_04_Name
+Description: PERK_Berserker2_04_Desc
+CharacterID: Berserker2ID
+Available: 1
+CardsToRemove: [AMC_Basic_P0]
+CardsToAdd: [AMC_Wound_R, AMC_Wound_R]

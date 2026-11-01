@@ -1,0 +1,22 @@
+Parser: Perk
+ID: Cragheart209
+Name: PERK_Cragheart2_09_Name
+Description: PERK_Cragheart2_09_Desc
+CharacterID: Cragheart2ID
+Available: 1
+Flags: [Passive, ExecuteAbilitiesAfterShortRest, ExecuteAbilitiesAfterLongRest]
+Abilities:
+    BDestroy:
+        DestroyObstacle: True
+        Range: 3
+        Target: 1
+        Targeting: Range
+        CanSkip: True
+        CanUndo: False
+        AnimOverload: PowerUp
+        SubAbilities:
+            BEarth:
+                Infuse: [Earth]
+                TreatAsNonSubAbility: True
+                AutoTrigger: True
+                SkipAnim: True

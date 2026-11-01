@@ -1,0 +1,67 @@
+# card: Increase Cadence
+# bottom: an end-of-turn Note choice (Choose) with six slots, this turn included (Elementalist2 Pulsing Cores' shape)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 4
+                Conditions: Muddle
+                AnimOverload: RangedAttack
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerHighNote", 1]
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    Filter: Self
+                    CanSkip: False
+                    CanUndo: False
+                    PreviewEffectText: "High Note / Low Note"
+                    Choose:
+                        Abilities:
+                            BNoteHigh:
+                                PreviewEffectText: "High Note"
+                                NullTargeting: True
+                                Filter: Self
+                                AutoTrigger: True
+                                SkipAnim: True
+                                ResourcesToAddOnAbilityEnd:
+                                    - ["SoothsingerHighNote", 1]
+                            BNoteLow:
+                                PreviewEffectText: "Low Note"
+                                NullTargeting: True
+                                Filter: Self
+                                AutoTrigger: True
+                                SkipAnim: True
+                                ResourcesToAddOnAbilityEnd:
+                                    - ["SoothsingerLowNote", 1]
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                    XPTracker: [1,0,1,0,1,0]
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
+        - Row: "$Muddle$ <sprite name=Muddle>"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_HIGH$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: "Positive_Resonance"
+            ListLayout: "$GH2E_Soothsinger2_06_B$"
+            Layout: "$GH2E_Soothsinger2_06_B$"
+        - Row: "<size=20%> "
+        - XPTracker: BActive

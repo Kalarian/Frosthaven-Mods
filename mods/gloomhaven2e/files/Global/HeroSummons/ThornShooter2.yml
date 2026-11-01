@@ -1,0 +1,16 @@
+Parser: HeroSummon
+ID: ThornShooter2ID
+LocKey: $GH2E_SUMMON_ThornShooter$
+Model: ThornShooter
+Health:
+    Amount: 3
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    SquareEnhancements: 1
+# the attack slot prints only a Poison icon (no value, no mark): an attack of 0 that poisons (NOTES.md)
+Attack: 0
+Range:
+    Amount: 4
+    SquareEnhancements: 1
+OnAttackCondition: Poison

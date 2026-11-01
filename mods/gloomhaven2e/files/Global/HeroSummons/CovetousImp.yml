@@ -1,0 +1,17 @@
+Parser: HeroSummon
+ID: CovetousImpID
+LocKey: $GH2E_SUMMON_CovetousImp$
+# stand-in model: the 1st edition Sand Devil (a new 2e creature; NOTES.md)
+Model: SandDevil
+Health:
+    Amount: 5
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+    SquareEnhancements: 1
+Attack:
+    Amount: 3
+    SquareEnhancements: 1
+Range: 1
+# "Whenever this summon kills an enemy, you gain the money token directly": NEEDS PLUGIN (Frosthaven has no "gain a
+# money token" ability); the rule is printed on the card as text.

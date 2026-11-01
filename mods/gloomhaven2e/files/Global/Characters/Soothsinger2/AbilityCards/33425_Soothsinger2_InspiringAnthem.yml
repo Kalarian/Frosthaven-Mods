@@ -1,0 +1,68 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_InspiringAnthem$
+Character: Soothsinger2ID
+ID: 33425
+Level: 7
+Initiative: 50
+# card: Inspiring Anthem
+# grants print no range: any ally (Range 99); the Strengthen inside the top grant is the ally's own (Filter Self)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyMove:
+                            Move:
+                                Amount: 5
+                                SquareEnhancements: 1
+                                Jump: True
+                            StrengthIsBase: True
+                        TAllyStrengthen:
+                            Strengthen:
+                                DiamondPlusEnhancements: 1
+                            Filter: Self
+                Range: 99
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneMove
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyAttack:
+                            Attack:
+                                Amount: 5
+                                DiamondEnhancements: 1
+                            Range: 1
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                Range: 99
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneAttack
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Soothsinger2_GRANT$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
+        - Row: "<size=150%><sprite name=Strengthen> <size=100%><voffset=1>@TAllyStrengthen@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soothsinger2_LOW$"
+    Bottom:
+        - Row: "$FHS_GH2E_Soothsinger2_GRANT$"
+        - Row: "<size=20%> "
+        - Row: "<size=150%><sprite name=Attack> *BAllyAttack* <size=100%><voffset=1>@BAllyAttack@"

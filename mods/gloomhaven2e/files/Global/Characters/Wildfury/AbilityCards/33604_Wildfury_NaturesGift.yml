@@ -1,0 +1,75 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_NaturesGift$
+Character: WildfuryID
+ID: 33604
+Level: 1
+Initiative: 42
+# card: Nature's Gift
+# top: Heal 2 [diamond+], Range 3, Safeguard on the heal target (the class's Safeguard stand-in, NOTES.md), infuse
+# Earth. bottom: Poison + Muddle on one enemy within range 5, no attack (the 1st edition Disorienting Roar's
+# condition-only shape), infuse Earth.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 2
+                    DiamondPlusEnhancements: 1
+                Range: 3
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+                SubAbilities:
+                    THealSafeguard:
+                        AddActiveBonus:
+                            Null: True
+                            Filter: Self
+                            AutoTrigger: True
+                            SkipAnim: True
+                        Filter: [Self, Ally]
+                        UseParentTargets: True
+                        SkipAnim: True
+                        ActiveBonus:
+                            Duration: Persistent
+                            Behaviour: GenericOnNegativeCondition
+                            IsToggleBonus: True
+                            XPTracker: [0]
+                            ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
+                            Vars:
+                                ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
+                                ValidateNotScenarioEffect: TriggerAbility.TreatedAsScenarioEffect() == False
+                                PreventCondition: True
+        Infuse: Earth
+    Bottom:
+        Abilities:
+            BPoison:
+                Poison: True
+                Conditions: [Muddle]
+                Range: 5
+                Filter: Enemy
+                AnimOverload: RangedCast
+        Infuse: Earth
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
+            - Column:
+        - Row: "$FHS_GH2E_Wildfury_SAFEGUARD_ROW$"
+        - Row: "<size=50%> "
+        - Infuse: Earth
+    Bottom:
+        - Row: "<size=150%><sprite name=Poison> <sprite name=Muddle>"
+        - Row: "<size=40%> "
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=1%> "
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BPoison.Range*</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Earth

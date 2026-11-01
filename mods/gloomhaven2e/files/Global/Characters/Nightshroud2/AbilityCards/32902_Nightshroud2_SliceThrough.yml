@@ -1,0 +1,88 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SliceThrough$
+Character: Nightshroud2ID
+ID: 32902
+Level: 1
+Initiative: 15
+# card: Slice Through
+# top: the persistent "on a kill, discard this card to place a Tear in the enemy's hex" = Frosthaven's Deathwalker When
+# Your Time Comes bottom (DuringActionAbilityOnDeath aura on enemies, a shadow on TriggerActor.Tile), one use
+# (XPTracker [0]: the card is discarded after it). Placed before Attack 4, so a kill by that attack counts.
+# bottom: consume Dark Teleport 4 (Teleport2) before the swap, as printed; the swap = Gloomhaven's Swap (the 1st
+# edition Summoner's Otherworldly Rage shape: first target you, second an ally), range 8 (the card says "within eight
+# hexes": a range needs line of sight, a hex count doesn't: APPROXIMATION)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    CreateShadow:
+                    Targeting: Custom
+                    TargetingVars:
+                        AddTileInRange: TargetTile
+                    Target: 1
+                    CanUndo: False
+                    AnimOverload: Shadow Manipulation
+                Range: 1
+                Target: -1
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnDeath
+                    TriggerAbilitiesImmediately: True
+                    TriggerOnCaster: True
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter:
+                        TargetType: Enemy
+                        UseTargetOriginalType: True
+                    XPTracker: [0]
+                    Vars:
+                        TargetTile: TriggerActor.Tile
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BNull:
+                Null: True
+            BSwap:
+                Swap:
+                    FirstTargetFilter: Self
+                    SecondTargetFilter: Ally
+                Range: 8
+                AnimOverload: RadialBeneficial
+        Consumes:
+            BCDark:
+                Elements: Dark
+                Abilities:
+                    BCDarkTeleport:
+                        ParentName: BNull
+                        Teleport2: 4
+                        Filter: Self
+                        AnimOverload: Teleport Into
+                        AnimOverload2: Teleport Outof
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Positive_Shadow_Enemy_Death
+            ListLayout: "$FHS_GH2E_Nightshroud2_02_T$"
+            Layout: "$FHS_GH2E_Nightshroud2_02_T$"
+        - Divider:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Infuse: Dark
+    Bottom:
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDark
+                    Text: "<sprite name=Teleport> 4, <sprite name=XP1>"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Nightshroud2_02_B$"

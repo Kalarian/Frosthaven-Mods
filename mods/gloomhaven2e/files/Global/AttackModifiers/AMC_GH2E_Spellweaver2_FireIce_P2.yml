@@ -1,0 +1,7 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Spellweaver2_FireIce_P2
+MathModifier: "+2"
+Abilities:
+    InfuseAbility:
+        Infuse: [Fire, Ice]
+        ShowElementPicker: True

@@ -1,0 +1,12 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Mindthief2_P1_PerNegativeCondition
+MathModifier: "+1"
+AbilityOverrides:
+    ABuffAttack:
+        Flags: [AttackModifierAbilityOverride]
+        StatIsBasedOnX:
+            Strength:
+                BasedOn: Vars
+                AddTo: True
+                Vars:
+                    Value: TargetActor.Tokens.CountNegativeConditions()

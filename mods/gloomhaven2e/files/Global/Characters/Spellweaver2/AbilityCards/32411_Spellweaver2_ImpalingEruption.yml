@@ -1,0 +1,40 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ImpalingEruption$
+Character: Spellweaver2ID
+ID: 32411
+Level: X
+Initiative: 91
+# card: Impaling Eruption
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Conditions: Immobilize
+                AreaEffect: "0,0,G|2,0,R|4,0,R|6,0,R|8,0,R|10,0,E|3,1,R|5,1,E|5,-1,E|7,-1,R"
+                AnimOverload: TargetedImpalingEruption
+                MultiPassAttack: False
+        Infuse: Earth
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Immobilize></link>"
+            - Column:
+        - Row: "£Area£"
+        - Infuse: Earth
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

@@ -1,0 +1,54 @@
+# key<TAB>English: the Quartermaster's card texts as printed on the 2nd edition cards (tools/gh2e/sheets/Quartermaster.json)
+GH2E_SUPPLIES_TOOLTIP	Supplies: the Quartermaster's supply track (starts at 10, up to 50). Spending supplies needs at least 10 and sets the track to 0.
+GH2E_Quartermaster2_SUPPLIES10	Gain 10 supplies.
+GH2E_Quartermaster2_SUPPLIES20	Gain 20 supplies.
+GH2E_Quartermaster2_SPEND_SELF	Spend supplies: Recover your items <sprite name=XP1>
+GH2E_Quartermaster2_SPEND_GROUP	Spend supplies: Recover your items and those of all adjacent allies <sprite name=XP1>
+GH2E_Quartermaster2_RECOVER1	Recover one of your spent items.
+GH2E_Quartermaster2_01_T	Shuffle the Quartermaster item supply face-down and randomly draw five cards. Give the drawn items to any number of adjacent allies and self, giving no more than three of the items to yourself.
+GH2E_Quartermaster2_03_B	Give one adjacent ally or self the Iron Plate item to gain <sprite name=XP1>
+GH2E_Quartermaster2_04_T	Give one adjacent ally the Sharpened Dirk item to gain <sprite name=XP1>
+GH2E_Quartermaster2_06_B	Target one enemy within 2 hexes
+GH2E_Quartermaster2_08_T	Give one ally within <sprite name=Range> 2 the Sturdy Spear item to gain <sprite name=XP1>
+GH2E_Quartermaster2_09_B	Grant all adjacent allies and self:
+GH2E_Quartermaster2_10_T	During each of your turns, the first time you use an item with a <sprite name=LostIcon> icon, add +1 <sprite name=Attack> to all your melee attacks for the turn.
+GH2E_Quartermaster2_10_T2	Whenever you spend supplies to Recover an item with a gold cost of 30 or greater, you may gain one random item from the Quartermaster item supply.
+GH2E_Quartermaster2_10_B	Add +1 <sprite name=Retaliate> to all Barbed Strip items and +1 <sprite name=Shield> to all Iron Plate items.
+GH2E_Quartermaster2_10_B2	Whenever you rest, gain the Barbed Strip or Iron Plate item.
+GH2E_Quartermaster2_11_T	Gain the Scroll of Relocation item.
+GH2E_Quartermaster2_12_T	Give one adjacent ally the Corrosive Coating item.
+GH2E_Quartermaster2_12_B	One adjacent ally may Recover one of their spent items.
+GH2E_Quartermaster2_13_T	Target one ally
+GH2E_Quartermaster2_13_B	Gain the Barbed Strip item.
+GH2E_Quartermaster2_14_T0	Target one ally
+GH2E_Quartermaster2_14_T	Spend supplies: Recover the target's items <sprite name=XP1>
+GH2E_Quartermaster2_14_B	You and all adjacent allies add +1 <sprite name=Attack> to all attacks this round.
+GH2E_Quartermaster2_15_T	Give one adjacent ally the Scroll of Embers item.
+GH2E_Quartermaster2_15_T2	Give one adjacent ally the Scroll of Foresight item to gain <sprite name=XP1>
+GH2E_Quartermaster2_15_B	Give one adjacent ally the Scroll of Relocation item.
+GH2E_Quartermaster2_16_T	Gain the Sharpened Dirk and Sturdy Spear items.
+GH2E_Quartermaster2_17_B	On the next four ranged attack abilities performed by adjacent allies, add +1 <sprite name=Target>.
+GH2E_Quartermaster2_18_T	Give one adjacent ally the Weighted Bolas item to gain <sprite name=XP1>
+GH2E_Quartermaster2_19_T	Give one ally within <sprite name=Range> 2 the Sturdy Spear item.
+GH2E_Quartermaster2_19_T2	Gain the Barbed Strip or Iron Plate item.
+GH2E_Quartermaster2_20_B	You may give up to four items of your choice from the Quartermaster item supply to any allies occupying hexes adjacent to any hexes you entered during the move ability. Gain 10 supplies for each ally you gave an item.
+GH2E_Quartermaster2_21_T	Suffer <sprite name=Damage> 2.
+GH2E_Quartermaster2_21_T2	All enemies within <sprite name=Range> 4 suffer <sprite name=Damage> 2.
+GH2E_Quartermaster2_21_B	After the next attack targeting you this round, Recover one of your spent items and gain <sprite name=XP1>
+GH2E_Quartermaster2_22_T	At the end of each of your turns, gain 10 supplies.
+GH2E_Quartermaster2_22_T2	Whenever an ally ends their move or teleport ability in a hex adjacent to you, you may spend supplies to Recover that ally's items.
+GH2E_Quartermaster2_22_T3	You cannot perform move abilities.
+GH2E_Quartermaster2_22_B	Give one adjacent ally the Scroll of Foresight item.
+GH2E_Quartermaster2_22_B2	At the end of the round, perform: <sprite name=Heal> 2, target all allies within <sprite name=Range> 1
+GH2E_Quartermaster2_23_T	All allies and enemies adjacent to the target suffer <sprite name=Damage> 1.
+GH2E_Quartermaster2_23_B	Gain the Corrosive Coating item.
+GH2E_Quartermaster2_24_B	On your next three turns that you end with 0 supplies, gain 30 supplies.
+GH2E_Quartermaster2_25_B	Give one adjacent ally the Sturdy Spear item.
+GH2E_Quartermaster2_26_T	One adjacent ally may Recover one of their spent items.
+GH2E_Quartermaster2_26_T2	Give one adjacent ally the Scroll of Embers and Weighted Bolas items to gain <sprite name=XP1>
+GH2E_Quartermaster2_26_B	If you loot at least one money token, gain 10 supplies.
+GH2E_Quartermaster2_28_T	Give one adjacent ally or self the Barbed Strip and Sharpened Dirk items to gain <sprite name=XP1>
+GH2E_Quartermaster2_28_T2	Grant one adjacent ally or self:
+GH2E_Quartermaster2_28_B	Gain the Scroll of Foresight item.
+GH2E_Quartermaster2_29_T	At the end of each of your turns, you may shuffle the Quartermaster item supply face-down and draw one random card to give that item to an ally within <sprite name=Range> 2.
+GH2E_Quartermaster2_29_B	At the end of each round, Recover one of your spent items.

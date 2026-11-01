@@ -1,0 +1,80 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_RockSlide$
+Character: Cragheart2ID
+ID: 32119
+Level: 4
+Initiative: 81
+# card: Rock Slide
+# from Xipe's 99134_Cragheart2_Rock Slide.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# top: no XP (Xipe: XP 1); range 3 carries a square mark; damage and Muddle aim around the created tiles
+# (AllTargetsAdjacentToParentTargets, the 1st edition Rock Slide fix)
+# bottom: APPROXIMATION: the 1st edition Rocky End's merged destroy-attack (play-tested): obstacles within range 2 of
+# YOU are destroyed (the card: within range 2 of the designated enemy), then Attack X (X = 2 x destroyed), range 4,
+# Immobilize, on the enemy you pick
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TCreate:
+                Create: RockSingle
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Target: 3
+                SpawnDelay: 2.9
+                AnimOverload: ObstacleAvalanche
+                MultiPassAttack: False
+                SubAbilities:
+                    TCreateSubDamage:
+                        AllTargetsAdjacentToParentTargets: True
+                        Damage: 1
+                        Range: 1
+                        Target: -1
+                        Filter: [Enemy, Ally]
+                    TCreateSubMuddle:
+                        AllTargetsAdjacentToParentTargets: True
+                        Muddle: True
+                        Range: 1
+                        Target: -1
+                        Filter: [Enemy, Ally]
+                        AutoTrigger: True
+        Infuse: Earth
+    Bottom:
+        Abilities:
+            BDestroyObstacleAttack:
+                MergedDestroyObstacleAttack:
+                    Abilities:
+                        BDestroyObstacle:
+                            DestroyObstacle:
+                            Range: 2
+                            Target: -1
+                            AnimOverload: MeleeSmashRockyEnd
+                            SpawnDelay: 2.16
+                        BAttack:
+                            Attack:
+                                Amount: 0
+                            Range: 4
+                            Conditions: Immobilize
+                            StatIsBasedOnX:
+                                Strength:
+                                    BasedOn: ObstaclesToBeDestroyedByMergedAbility
+                                    Multiplier: 2
+                            IgnoreMergedAbilityTargetSelection: True
+                            AnimOverload: None
+        XP: 2
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Cragheart2_19_T$"
+        - Row: "<sprite name=Range> *TCreate.Range* @TCreate.Range@"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Cragheart2_19_T2$"
+        - Row: "<size=20%> "
+        - Infuse: Earth
+    Bottom:
+        - Row: "$FHS_GH2E_Cragheart2_19_B$"
+        - Row: "$FHS_GH2E_Cragheart2_19_B2$"
+        - Row: "<size=20%> "
+        - Row: "<size=150%><sprite name=Attack> X"
+        - Row: "$FHS_GH2E_Cragheart2_19_B3$"
+        - Row: "<sprite name=Immobilize>"
+        - Row: "$FHS_GH2E_Cragheart2_19_B4$"

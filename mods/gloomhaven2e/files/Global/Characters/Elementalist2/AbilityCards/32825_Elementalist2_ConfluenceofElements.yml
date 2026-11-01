@@ -1,0 +1,100 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ConfluenceofElements$
+Character: Elementalist2ID
+ID: 32825
+Level: 7
+Initiative: 64
+# card: Confluence of Elements
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: TargetFloorMulti
+        Consumes:
+            TCAnyAny1:
+                Elements: [Any, Any]
+                AbilityOverrides:
+                    TCAnyAnyAttack:
+                        ParentName: TAttack
+                        Strength: 2
+                XP: 1
+            TCAnyAny2:
+                Elements: [Any, Any]
+                AbilityOverrides:
+                    TCAnyAnyTarget:
+                        ParentName: TAttack
+                        Target: 1
+                XP: 1
+            TCAnyAny3:
+                Elements: [Any, Any]
+                AbilityOverrides:
+                    TCAnyAnyInfuse:
+                        ParentName: TAttack
+                        SubAbilities:
+                            TCInfuse1:
+                                CanUndo: False
+                                TreatAsNonSubAbility: True
+                                Infuse: [Any]
+                                ShowElementPicker: True
+                                SkipAnim: True
+                            TCInfuse2:
+                                CanUndo: False
+                                TreatAsNonSubAbility: True
+                                Infuse: [Any]
+                                ShowElementPicker: True
+                                SkipAnim: True
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BInfuse:
+                Infuse: [Fire, Earth]
+                ShowElementPicker: True
+                CanUndo: False
+                CanSkip: False
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAnyAny1
+                    Text: "+2 <sprite name=Attack>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAnyAny2
+                    Text: "+1 <sprite name=Target>, <sprite name=XP1>"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAnyAny3
+                    Text: "<sprite name=CreateWild> <sprite name=CreateWild>"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=CreateMixed-FE></link>"
+            - Column:

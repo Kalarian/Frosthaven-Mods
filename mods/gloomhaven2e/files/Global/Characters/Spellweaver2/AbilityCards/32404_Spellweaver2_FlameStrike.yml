@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FlameStrike$
+Character: Spellweaver2ID
+ID: 32404
+Level: 1
+Initiative: 26
+# card: Flame Strike
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TStrengthen:
+                Strengthen:
+                    DiamondPlusEnhancements: 1
+                Filter: Self
+                AnimOverload: PowerUp
+            TLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 1
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: TargetedGenericFlame
+        Consumes:
+            BCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    BCFireAttackBuff:
+                        ParentName: BAttack
+                        Strength: 1
+                        Conditions: Wound
+                XP: 1
+Layout:
+    Top:
+        - Row: "<link=fhself><size=125%><sprite name=Strengthen> <size=100%><voffset=1>@TStrengthen@</link>"
+        - Divider:
+        - Row: "<size=150%><sprite name=Loot> *TLoot*"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* @BAttack.Range@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCFire
+                    Text: "+1 <sprite name=Attack>, <sprite name=Wound>, <sprite name=XP1>"

@@ -1,0 +1,88 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ClawsoftheNight$
+Character: Nightshroud2ID
+ID: 32921
+Level: 6
+Initiative: 56
+# card: Claws of the Night
+# top: Attack 5, then the persistent "at the end of your next turn, if you do not have Invisible, you may perform Attack
+# 5" with one slot (XP 1). APPROXIMATION: fired at the START of your next turn (StartTurnAbility); an end-of-turn bonus
+# (EndTurnAbility) would already fire at the end of this turn. Run only without Invisible (ActiveBonus Requirements,
+# Deathwalker Fluid Night's form).
+# bottom: "when you next kill an enemy this round, place one Tear in the hex they occupied" = Slice Through's kill
+# trigger (Deathwalker When Your Time Comes shape) for the round, one use.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+            TActive:
+                AddActiveBonus:
+                    Attack:
+                        Amount: 5
+                        DiamondEnhancements: 1
+                    Filter: Enemy
+                    AnimOverload: HeavyAttack
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                    XPTracker: [1]
+                    Requirements:
+                        Vars:
+                            ValidateNotInvisible: Actor.Tokens.HasKey(CCondition.EPositiveCondition.Invisible) == False
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BActive:
+                AddActiveBonus:
+                    CreateShadow:
+                    Targeting: Custom
+                    TargetingVars:
+                        AddTileInRange: TargetTile
+                    Target: 1
+                    CanUndo: False
+                    AnimOverload: Shadow Manipulation
+                Range: 1
+                Target: -1
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
+                    Behaviour: DuringActionAbilityOnDeath
+                    TriggerAbilitiesImmediately: True
+                    TriggerOnCaster: True
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter:
+                        TargetType: Enemy
+                        UseTargetOriginalType: True
+                    XPTracker: [0]
+                    Vars:
+                        TargetTile: TriggerActor.Tile
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Divider:
+        - Active:
+            Ability: TActive
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_Nightshroud2_21_T$"
+            Layout: "$FHS_GH2E_Nightshroud2_21_T$"
+        - Row: "<size=100%> "
+        - XPTracker: TActive
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Active:
+            Ability: BActive
+            Icon: Positive_Shadow_Enemy_Death
+            ListLayout: "$FHS_GH2E_Nightshroud2_21_B$"
+            Layout: "$FHS_GH2E_Nightshroud2_21_B$"

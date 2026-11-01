@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ToxicBolt$
+Character: Tinkerer2ID
+ID: 32512
+Level: 1
+Initiative: 76
+# card: Toxic Bolt
+# from Xipe's 99041_Tinkerer2_Toxic Bolt.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                Conditions: Poison
+                AnimOverload: LeftWristTechToxicBolt
+        Infuse: Earth
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 6
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 2
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+        XP: 3
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+                - Row: "<link=fhpill>, <sprite name=Poison></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Earth
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* @BAttack.Range@</link>"
+            - Column:

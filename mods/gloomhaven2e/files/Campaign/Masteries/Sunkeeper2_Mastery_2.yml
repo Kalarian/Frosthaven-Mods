@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Sunkeeper2_MASTERY_2
+LocalisedName: Sunkeeper2_MASTERY_2_Name
+LocalisedDescription: Sunkeeper2_MASTERY_2_Desc
+PerkPoints: 1
+# The plugin's attack-action tag (GHMasteries.cs, the Demolitionist's Heavy Hitter): Value attack actions each dealing
+# Amount damage. It counts different card halves, where the sheet counts any three attacks (NOTES.md).
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AttackActionsWithDamage]
+        CharacterIDs:
+            ActorID: Sunkeeper2ID
+        Value: 3
+        Amount: 8

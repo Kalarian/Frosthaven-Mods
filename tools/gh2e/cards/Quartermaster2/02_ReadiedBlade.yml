@@ -1,0 +1,35 @@
+# card: Readied Blade
+# top: the dashed spend-supplies box (printed above the attack) is its own optional ability, then Attack 3 [diamond].
+# bottom: Move 4 (no mark).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TSpend:
+                RefreshItems: 1
+                SlotStateToRefresh: [Spent, Consumed]
+                Filter: Self
+                AbilityXP: 1
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateSupplies: Actor.GetCharacterResourceAmount("Supplies") >= 10
+                PerformVars:
+                    OnAbilityEnded:
+                        SpendSupplies: AbilityHasHappened && TargetingActor.RemoveCharacterResource("Supplies", 50, true)
+                AnimOverload: Refresh
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+Layout:
+    Top:
+        - Row: "$GH2E_Quartermaster2_SPEND_SELF$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"

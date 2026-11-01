@@ -1,0 +1,81 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_FueledbyPain$
+Character: Berserker2ID
+ID: 32624
+Level: 7
+Initiative: 22
+# card: Fueled by Pain
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireHealOverride:
+                        ParentName: TAttack
+                        SubAbilities:
+                            TAttackSubHeal:
+                                Heal: 0
+                                Filter: Self
+                                AnimOverload: Heal
+                                StatIsBasedOnX:
+                                    Strength:
+                                        BasedOn: DamageInflictedByParent
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+                Jump: True
+            BAttack:
+                Attack: 3
+                AllTargetsOnMovePath: True
+                Targeting: All
+                Target: -1
+                Filter:
+                    TargetType: Enemy
+                    TargetHasNegativeCondition: Wound
+        Consumes:
+            BCDamage:
+                CostAbility:
+                    ParentName: BMove
+                    Damage: 2
+                    Filter: Self
+                AbilityOverrides:
+                    BCMoveBuff:
+                        ParentName: BMove
+                        Strength: 2
+                XP: 1
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCFire
+                    Text: "$FHS_GH2E_Berserker2_24_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCDamage
+                    Text: "$FHS_GH2E_Berserker2_24_B$"
+        - Divider:
+        - Row: "<size=150%><sprite name=Attack> *BAttack*"
+        - Row: "$FHS_GH2E_Berserker2_24_B2$"

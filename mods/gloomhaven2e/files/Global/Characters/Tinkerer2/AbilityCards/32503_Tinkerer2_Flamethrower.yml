@@ -1,0 +1,57 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Flamethrower$
+Character: Tinkerer2ID
+ID: 32503
+Level: 1
+Initiative: 16
+# card: Flamethrower
+# from Xipe's 99032_Tinkerer2_Flamethrower.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                    Pierce: 2
+                Conditions: Wound
+                AreaEffect: "0,0,G|2,0,R|1,1,R|3,1,R|2,2,E|4,0,E"
+                AnimOverload: LeftWristFlameThrower
+                MultiPassAttack: False
+        Infuse: Fire
+        XP: 3
+    Bottom:
+        Abilities:
+            # "Grant all adjacent allies and self: Shield 1" for the round: Frosthaven's Hold the Line top (the Banner
+            # Spear) writes the same rule as a self shield plus a round shield on every adjacent ally
+            BShield:
+                Shield: 1
+                Filter: Self
+                ActiveBonusDuration: Round
+                AnimOverload: FlamethrowerField
+            BAllyShield:
+                Shield: 1
+                Range: 1
+                Target: -1
+                Filter: Ally
+                ActiveBonus:
+                    Duration: Round
+Layout:
+    Top:
+        - ColumnWidths: "65,35"
+        - Column:
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Pierce> *TAttack.Pierce*, <sprite name=Wound></link>"
+                - Column:
+            - Row: "<size=50%> "
+            - Infuse: Fire
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "$FHS_GH2E_Tinkerer2_03_B$"
+        - Row: "<size=150%><sprite name=Shield> *BShield*"

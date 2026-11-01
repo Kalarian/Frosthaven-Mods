@@ -1,0 +1,70 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_IceArmor$
+Character: Spellweaver2ID
+ID: 32410
+Level: X
+Initiative: 25
+# card: Ice Armor
+# both halves: Frosthaven's own "negate a source of damage within a threshold" (Scaled Armor item: PreventFirstDamage with
+# a Requirements threshold on GameState.CurrentDamageData), 3 uses; the top is given to the ally the way Frosthaven gives
+# a persistent bonus to an ally (Snowdancer Shifting Zephyr Barrier bottom: GiveAbilityCardToActor), with Range 3
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TPrevent:
+                PreventDamage: 1
+                Range: 3
+                Target: 1
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                AnimOverload: PowerUpFrost
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: PreventFirstDamage
+                    GiveAbilityCardToActor: True
+                    XPTracker: [1,0,1]
+                    Requirements:
+                        Vars:
+                            ValidateHasDamageData: GameState.CurrentDamageData != null
+                            DamageAmount: GameState.CurrentDamageData.DamageSourceStrength
+                            ValidateThreshold: DamageAmount >= 2
+        Infuse: Ice
+    Bottom:
+        Abilities:
+            BPrevent:
+                PreventDamage: 1
+                Filter: Self
+                AnimOverload: PowerUpFrost
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: PreventFirstDamage
+                    XPTracker: [1,0,1]
+                    Requirements:
+                        Vars:
+                            ValidateHasDamageData: GameState.CurrentDamageData != null
+                            DamageAmount: GameState.CurrentDamageData.DamageSourceStrength
+                            ValidateThreshold: DamageAmount >= 2
+        Infuse: Ice
+Layout:
+    Top:
+        - Active:
+            Ability: TPrevent
+            ListLayout: "$FHS_GH2E_Spellweaver2_10_T$"
+            Layout: "$FHS_GH2E_Spellweaver2_10_T$"
+            Icon: Positive_DamagePrevent
+        - Row: "<size=100%> "
+        - XPTracker: TPrevent
+        - Row: "<size=20%> "
+        - Infuse: Ice
+    Bottom:
+        - Active:
+            Ability: BPrevent
+            ListLayout: "$FHS_GH2E_Spellweaver2_10_B$"
+            Layout: "$FHS_GH2E_Spellweaver2_10_B$"
+            Icon: Positive_DamagePrevent
+        - Row: "<size=100%> "
+        - XPTracker: BPrevent
+        - Row: "<size=20%> "
+        - Infuse: Ice

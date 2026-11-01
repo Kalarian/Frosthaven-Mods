@@ -1,0 +1,93 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PrimalInfusion$
+Character: SoultetherID
+ID: 33523
+Level: 5
+Initiative: 88
+# card: Primal Infusion
+# top: grant one of your summons Move +1, Attack +1.
+# bottom: "your summons gain +1 Attack while Fire is strong or waning, +1 Move and Jump while Air is strong or waning,
+# and Shield 1 while Dark is strong or waning": three persistent auras on your summons (BuffAttack, BuffMove with Jump
+# as HIVE Coiled Limbs, BuffShield as Banner of Courage), each valid while its element can be consumed (Pyroclast perk
+# 11's element test in the bonus Requirements). The first carries the card text; the other two are hidden. Unverified.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyMove:
+                            Move: +1
+                        TAllyAttack:
+                            Attack: +1
+                            Range: +0
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter: OwnSummon
+                AnimOverload: ControlSummon
+        XP: 1
+    Bottom:
+        Abilities:
+            BFireAttack:
+                Attack: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: OwnSummon
+                    Requirements:
+                        Vars:
+                            ValidateFire: ElementInfusionBoardManager.GetAvailableElements().Contains(ElementInfusionBoardManager.EElement.Fire)
+                AnimOverload: PowerUp
+            BAirMove:
+                Move:
+                    Amount: 1
+                    Jump: True
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffMove
+                    ValidAbilityType: Move
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: OwnSummon
+                    Hidden: True
+                    Requirements:
+                        Vars:
+                            ValidateAir: ElementInfusionBoardManager.GetAvailableElements().Contains(ElementInfusionBoardManager.EElement.Air)
+                SkipAnim: True
+                AutoTrigger: True
+            BDarkShield:
+                Shield: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffShield
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: OwnSummon
+                    Hidden: True
+                    Requirements:
+                        Vars:
+                            ValidateDark: ElementInfusionBoardManager.GetAvailableElements().Contains(ElementInfusionBoardManager.EElement.Dark)
+                SkipAnim: True
+                AutoTrigger: True
+        XP: 1
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Soultether_GRANT1$"
+        - Row: "<size=150%><sprite name=Move> +1"
+        - Row: "<size=150%><sprite name=Attack> +1"
+    Bottom:
+        - Active:
+            Ability: BFireAttack
+            Icon: Positive_AttackPlus_Ally_Aura
+            ListLayout: "$FHS_GH2E_Soultether_23_B$"
+            Layout: "$FHS_GH2E_Soultether_23_B$"

@@ -1,0 +1,73 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DualShot$
+Character: Doomstalker2ID
+ID: 32716
+Level: 2
+Initiative: 52
+# card: Dual Shot
+# top: Attack 2 and Target 2 with square marks as printed.
+# bottom: Doom: advantage on your attacks (the 1st edition Singular Focus doom, filtered to this class). "When this enemy
+# dies, shuffle one Curse into the monster attack modifier deck": an on-death Curse on one enemy anywhere (a cursed
+# monster's curse goes into the monster deck in Frosthaven); nothing happens when no enemy is left (approximation).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 5
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomAttackDebuff:
+                                Attack: 0
+                                AttackHasAdvantage: True
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    Filter:
+                                        PlayerClasses: Doomstalker2ID
+                            BDoomOnDeath:
+                                AddActiveBonus:
+                                    Curse: True
+                                    Target: 1
+                                    Range: 99
+                                    IgnoreLOS: True
+                                    Filter: Enemy
+                                ActiveBonus:
+                                    Behaviour: DuringActionAbilityOnDeath
+                                    TriggerOnCaster: True
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTargetAlt
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* @TAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+            - Column:
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_Doomstalker2_16_B$"
+            Layout:
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH2E_Doomstalker2_16_B$"
+                - Row: "$FHS_Doom_DiscardReminderText$"

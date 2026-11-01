@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Berserker202
+Name: PERK_Berserker2_02_Name
+Description: PERK_Berserker2_02_Desc
+CharacterID: Berserker2ID
+Available: 3
+CardsToRemove: [AMC_Basic_M1]
+CardsToAdd: [AMC_GH2E_Berserker2_Heal1Self_P0]

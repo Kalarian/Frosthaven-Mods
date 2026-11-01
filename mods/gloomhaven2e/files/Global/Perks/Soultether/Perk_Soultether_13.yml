@@ -1,0 +1,29 @@
+Parser: Perk
+ID: Soultether13
+Name: PERK_Soultether_13_Name
+Description: PERK_Soultether_13_Desc
+CharacterID: SoultetherID
+Available: 1
+Cost: 2
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TActive:
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        AddActiveBonus:
+            Invisible: True
+            Range: 99
+            Target: -1
+            Targeting: All
+            IgnoreLOS: True
+            Filter: OwnSummon
+            CanSkip: True
+            CanUndo: False
+            AnimOverload: RadialBuff
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: PreCalcInitiativeAbility
+            Restriction: OncePerRound
+            Hidden: True
+            XPTracker: [0]

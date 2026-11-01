@@ -1,0 +1,65 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_WatchitBurn$
+Character: SilentKnifeID
+ID: 32328
+Level: 9
+Initiative: 98
+# card: Watch it Burn
+# corrected against tools/gh2e/sheets/SilentKnife.json
+# top: no mark on the Attack 2. The Move 3, Jump and its XP 1 follow only if the attack targeted at least three enemies:
+# a sub-ability behind a SubAbility requirement on the parent's targets (Frosthaven's Shattersong Din of Battle top),
+# run as its own ability (TreatAsNonSubAbility, as Frosthaven's sub-ability moves: Crashing Tide Shuck).
+# bottom: Attack 5 as printed (Xipe: Move 3). "Play this card from your hand during your turn as an extra action" has
+# no Frosthaven form - NEEDS PLUGIN; here it is the card's ordinary bottom action.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Range: 1
+                Target: -1
+                Filter: Enemy
+                Conditions: [Wound, Immobilize]
+                SubAbilities:
+                    TMove:
+                        Move:
+                            Amount: 3
+                            CircleEnhancements: 1
+                        Jump: True
+                        TreatAsNonSubAbility: True
+                        AbilityXP: 1
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsTargetedByAbility: ">= 3"
+        Infuse: Fire
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 5
+                    DiamondEnhancements: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy>, <sprite name=Wound> <sprite name=Immobilize></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_SilentKnife_28_T$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Fire
+    Bottom:
+        - Row: "$FHS_GH2E_SilentKnife_28_B$"
+        - Row: "<size=50%> "
+        - Row: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

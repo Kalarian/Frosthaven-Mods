@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BitingGnats$
+Character: Plagueherald2ID
+ID: 33002
+Level: 1
+Initiative: 21
+# card: Biting Gnats
+# "target all" with no printed range = every enemy in the scenario (Targeting All), as the 1st edition digital port
+# reads the same wording (Airborne Toxin bottom). See NOTES.md.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 1
+                    SquareEnhancements: 1
+                Target: 2
+                Range: 5
+                ResourcesToGiveToTargets:
+                    - ["Plague", 1]
+                ResourcesToAddOnAbilityEnd:
+                    - ["Plague", 3]
+                AnimOverload: RangedAttack
+            TMuddle:
+                Muddle: True
+                Target: -1
+                Targeting: All
+                Filter:
+                    TargetType: Enemy
+                    TargetHasCharacterResource: ["Plague"]
+                AnimOverload: RadialNegative
+    Bottom:
+        Abilities:
+            BPoison:
+                Poison: True
+                Conditions: Muddle
+                Target: -1
+                Targeting: All
+                Filter: Enemy
+                AnimOverload: RadialNegativeMajor
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <sprite name=Range> *TAttack.Range*</link>"
+            - Column:
+        - Row: "$FHS_GH2E_Plagueherald2_PLAGUE$"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Plagueherald2_02_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Poison>"
+        - Row: "<size=150%><sprite name=Muddle>"
+        - Row: "$FHS_GH2E_Plagueherald2_02_B$"

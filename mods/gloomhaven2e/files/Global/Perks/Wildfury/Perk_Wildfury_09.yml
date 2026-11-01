@@ -1,0 +1,34 @@
+Parser: Perk
+ID: Wildfury09
+Name: PERK_Wildfury_09_Name
+Description: PERK_Wildfury_09_Desc
+CharacterID: WildfuryID
+Available: 1
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            ControlActor:
+                ControlDurationType: ControlForOneAction
+                Abilities:
+                    ABearMove:
+                        Move: 4
+                        StrengthIsBase: True
+            Filter:
+                TargetType: [OwnSummon]
+                HeroSummonClasses: [WildfuryBearID]
+            Target: 1
+            Targeting: All
+            IgnoreLOS: True
+            SkipAnim: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringTurnAbility
+            XPTracker: [0]
+            IsToggleBonus: True
+            Hidden: True
+            ListLayoutOverride: [$PERK_Wildfury_09_Desc$, Positive_Move_Ally_Grant]
+            MiscVars:
+                OverrideIcon: "'Positive_Move_Ally_Grant'"
+        AnimOverload: PowerUp

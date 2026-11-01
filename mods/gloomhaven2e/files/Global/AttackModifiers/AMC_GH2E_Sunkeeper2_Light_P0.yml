@@ -1,0 +1,6 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Sunkeeper2_Light_P0
+MathModifier: "+0"
+Abilities:
+    InfuseAbility:
+        Infuse: [Light]

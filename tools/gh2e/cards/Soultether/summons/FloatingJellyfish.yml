@@ -1,0 +1,28 @@
+Parser: HeroSummon
+ID: FloatingJellyfishID
+LocKey: $GH2E_SUMMON_FloatingJellyfish$
+# stand-in model: the 1st edition Nail Sphere (a new 2e creature; NOTES.md)
+Model: NailSphere
+Health:
+    Amount: 5
+    SquareEnhancements: 1
+Move: 1
+Attack: 3
+Range: 1
+Flying: True
+# "+3 Move if Air is strong or waning": a hidden persistent BuffMove on itself (Frosthaven's Bone Horde hidden buff),
+# valid while Air can be consumed (the element test of Frosthaven's Pyroclast perk 11). Unverified on a summon's AI move.
+OnSummonAbilities:
+    AAirMove:
+        Move: 3
+        Filter: Self
+        SkipAnim: True
+        AutoTrigger: True
+        ActiveBonus:
+            Behaviour: BuffMove
+            ValidAbilityType: Move
+            Duration: Persistent
+            Hidden: True
+            Requirements:
+                Vars:
+                    ValidateAir: ElementInfusionBoardManager.GetAvailableElements().Contains(ElementInfusionBoardManager.EElement.Air)

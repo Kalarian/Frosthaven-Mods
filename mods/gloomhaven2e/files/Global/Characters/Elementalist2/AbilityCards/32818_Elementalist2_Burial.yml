@@ -1,0 +1,79 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Burial$
+Character: Elementalist2ID
+ID: 32818
+Level: 4
+Initiative: 77
+# card: Burial
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range: 4
+                AreaEffect: "0,2,R|1,1,R|3,1,R|0,0,R"
+                MultiPassAttack: False
+                AnimOverload: AreaHexEarth
+        Consumes:
+            TCEarth:
+                Elements: Earth
+                AbilityOverrides:
+                    TCEarthAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Immobilize
+                XP: 1
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                        Conditions: Curse
+                XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 4
+                AnimOverload: TargetFloorObsidian
+        Infuse: Dark
+Layout:
+    Top:
+        - ColumnWidths: "65,35"
+        - Column:
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+                - Column:
+            - Row: "<size=20%> "
+            - Conditional:
+                Layout:
+                    - Consume:
+                        Name: TCEarth
+                        Text: "+1 <sprite name=Attack>, <sprite name=Immobilize>, <sprite name=XP1>"
+            - Conditional:
+                Layout:
+                    - Consume:
+                        Name: TCDark
+                        Text: "+1 <sprite name=Attack>, <sprite name=Curse>, <sprite name=XP1>"
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Dark

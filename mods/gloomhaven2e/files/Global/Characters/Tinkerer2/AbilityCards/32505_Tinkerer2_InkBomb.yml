@@ -1,0 +1,47 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_InkBomb$
+Character: Tinkerer2ID
+ID: 32505
+Level: 1
+Initiative: 80
+# card: Ink Bomb
+# from Xipe's 99034_Tinkerer2_Ink Bomb.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range: 3
+                Conditions: Muddle
+                AreaEffect: "0,0,R|2,0,R|1,1,R|3,1,E"
+                MultiPassAttack: False
+                XPPerTarget: 1
+                AnimOverload: LeftWristGrenadeInkBomb
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - ColumnWidths: "65,35"
+        - Column:
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Muddle></link>"
+                - Column:
+            - Row: "$FHS_XP_PerEnemy$"
+            - Row: "<size=50%> "
+            - Infuse: Dark
+        - Column:
+            - Row: "£Area£"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

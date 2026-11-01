@@ -1,0 +1,76 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_IntotheNight$
+Character: Nightshroud2ID
+ID: 32919
+Level: 5
+Initiative: 17
+# card: Into the Night
+# top: Stun on the area; the stunned enemies gain Invisible (a sub-ability on the stun's own targets, UseParentTargets,
+# the Lead to Slaughter fix's shape); the Tear hex (2,0, adjacent to you) = a Tear within range 1 (APPROXIMATION).
+# bottom: "grant one adjacent ally: Teleport 8, must end in a hex containing a Tear" = a grant (ControlActor, the
+# Sunkeeper2 grant shape) of Teleport2 8 limited to shadow hexes (IsValidTeleportTile), its printed square mark.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TStun:
+                Stun: True
+                Filter: Enemy
+                AreaEffect: "0,0,G|1,1,R|1,-1,R"
+                AnimOverload: AggressiveTargetedShout
+                SubAbilities:
+                    TStunSubInvisible:
+                        Invisible: True
+                        Filter: Enemy
+                        Target: -1
+                        UseParentTargets: True
+                        CanSkip: False
+                        AnimOverload: None
+            TTear:
+                CreateShadow:
+                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+                Range: 1
+                Target: 1
+                AnimOverload: Shadow Manipulation
+        Infuse: Dark
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 5
+                    CircleEnhancements: 1
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyTeleport:
+                            Teleport2:
+                                Amount: 8
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                            Filter: Self
+                            MiscVars:
+                                IsValidTeleportTile: CustomAbility.SteppedOnShadow(Tile)
+                            AnimOverload: Teleport Into
+                            AnimOverload2: Teleport Outof
+                Range: 1
+                Filter: Ally
+                AnimOverload: ControlAlly
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "65,30"
+            - Column:
+                - Row: "<size=150%><nobr><sprite name=Stun></nobr>"
+                - Row: "<size=20%> "
+                - Row: "$FHS_GH2E_Nightshroud2_19_T$"
+                - Row: "<size=20%> "
+                - Row: "$FHS_GH2E_Nightshroud2_TEARHEX1$"
+            - Column: "£Area£"
+        - Row: "<size=50%> "
+        - Infuse: Dark
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Nightshroud2_19_B$"
+        - Row: "<size=150%><sprite name=Teleport> *BAllyTeleport* <size=100%><voffset=1>@BAllyTeleport@"
+        - Row: "$FHS_GH2E_Nightshroud2_12_B$"

@@ -1,0 +1,110 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PragmaticReinforcement$
+Character: Elementalist2ID
+ID: 32822
+Level: 6
+Initiative: 13
+# card: Pragmatic Reinforcement
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range: 4
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+        Consumes:
+            TCLight:
+                Elements: Light
+                AbilityOverrides:
+                    TCLightRecover:
+                        ParentName: THeal
+                        SubAbilities:
+                            THealRecover:
+                                RecoverDiscardedCards: 1
+                                UseParentTargets: True
+                                CanSkip: True
+                                Vars:
+                                    CardLevel: 1
+                            THealInfuse:
+                                Infuse: [Air, Earth]
+                                ShowElementPicker: True
+                                TreatAsNonSubAbility: True
+                                CanUndo: False
+                                SkipAnim: True
+            TCAir:
+                Elements: Air
+                ConsumeOnlyOneElement: True
+                AbilityOverrides:
+                    TCAirShield:
+                        ParentName: THeal
+                        SubAbilities:
+                            THealShieldA:
+                                Shield: 2
+                                UseParentTargets: True
+                                ActiveBonusDuration: Round
+                                SkipAnim: True
+            TCEarth:
+                Elements: Earth
+                ConsumeOnlyOneElement: True
+                AbilityOverrides:
+                    TCEarthShield:
+                        ParentName: THeal
+                        SubAbilities:
+                            THealShieldE:
+                                Shield: 2
+                                UseParentTargets: True
+                                ActiveBonusDuration: Round
+                                SkipAnim: True
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BInfuse:
+                Infuse: [Ice, Earth]
+                ShowElementPicker: True
+                CanUndo: False
+                CanSkip: False
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateActionHasHappened: CustomAbility.HasPerformedAction(Ability)
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCLight
+                    Text: "$FHS_GH2E_Elementalist2_22_T$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCAir
+                    Text: "$FHS_GH2E_Elementalist2_22_T2$"
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCEarth
+                    Text: "$FHS_GH2E_Elementalist2_22_T2$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=CreateMixed-IE></link>"
+            - Column:

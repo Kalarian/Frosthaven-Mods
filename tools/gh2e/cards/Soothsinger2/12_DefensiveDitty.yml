@@ -1,0 +1,59 @@
+# card: Defensive Ditty
+# top: song (High, High Note): a persistent Shield 1 aura on you and all allies (Boneshaper Wrath of the Turned
+# Earth's all-range aura), two slots advanced once per round (TSongTimer)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TSong:
+                Shield: 1
+                Target: -1
+                Targeting: All
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: [Self, Ally]
+                AnimOverload: PlaySongShield1
+            TSongTimer:
+                AddActiveBonus:
+                    Null: True
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndRoundAbility
+                    XPTracker: [1,0]
+                    EndAllActiveBonusesOnBaseCardSimultaneously: True
+            TSongNotes:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Ability
+                    Hidden: True
+                    RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    Enhancements: 1
+Layout:
+    Top:
+        - Row: "$GH2E_Soothsinger2_12_T$"
+        - Active:
+            Ability: TSong
+            Icon: "Positive_Shield_Ally_Aura"
+            ListLayout: "$GH2E_Soothsinger2_12_T2$"
+            Layout: "$GH2E_Soothsinger2_12_T2$"
+        - Row: "<size=20%> "
+        - XPTracker: TSongTimer
+    Bottom:
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

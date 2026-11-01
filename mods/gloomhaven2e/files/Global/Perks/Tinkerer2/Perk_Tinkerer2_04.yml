@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Tinkerer204
+Name: PERK_Tinkerer2_04_Name
+Description: PERK_Tinkerer2_04_Desc
+CharacterID: Tinkerer2ID
+Available: 2
+CardsToRemove: [AMC_Basic_P0]
+CardsToAdd: [AMC_Poison_P1]

@@ -1,0 +1,74 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_VoidImbuement$
+Character: SoultetherID
+ID: 33517
+Level: 2
+Initiative: 23
+# card: Void Imbuement
+# top: "on the next three attacks performed by your summons, add +1 Attack, Pierce 1": a persistent BuffAttack aura on
+# your summons (Frosthaven's summon auras, Decaying Will's AuraFilter OwnSummon) with three slots, XP on the third;
+# persistent, not lost (discarded when the track ends).
+# bottom: grant one of your summons Move +1, Jump; consume Air: two summons instead (+1 Target on the control, as
+# Frosthaven's Critical Failure overrides its control's Target).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TBuffAttack:
+                Attack: 1
+                Pierce: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: OwnSummon
+                    XPTracker: [0,0,1]
+                AnimOverload: PowerUp
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move: +1
+                            Jump: True
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter: OwnSummon
+                AnimOverload: ControlSummon
+        Consumes:
+            BCAir:
+                Elements: Air
+                AbilityOverrides:
+                    BCAirTwoSummons:
+                        ParentName: BAlly
+                        Target: 1
+                XP: 1
+Layout:
+    Top:
+        - Active:
+            Ability: TBuffAttack
+            Icon: Positive_Pierce_Summon
+            ListLayout: "$FHS_GH2E_Soultether_17_T$"
+            Layout: "$FHS_GH2E_Soultether_17_T$"
+        - Row: "<size=100%> "
+        - XPTracker: TBuffAttack
+    Bottom:
+        - Row: "$FHS_GH2E_Soultether_GRANT1$"
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> +1"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: BCAir
+                    Text: "$FHS_GH2E_Soultether_17_B$"

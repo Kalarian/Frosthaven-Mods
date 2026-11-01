@@ -1,0 +1,38 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_EtherealGust$
+Character: SoultetherID
+ID: 33501
+Level: 1
+Initiative: 14
+# card: Ethereal Gust
+# top: grant two of your summons Move +0 (Frosthaven's Command the Wretched grant: Range 99, OwnSummon, Target 2).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyMove:
+                            Move: +0
+                    ControlActorType: Player
+                Target: 2
+                Range: 99
+                Filter: OwnSummon
+                AnimOverload: ControlSummon
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    SquareEnhancements: 1
+        Infuse: Air
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Soultether_GRANT2$"
+        - Row: "<size=150%><sprite name=Move> +0"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Infuse: Air

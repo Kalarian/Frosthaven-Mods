@@ -1,0 +1,31 @@
+Parser: HeroSummon
+ID: SlimeSpirit2ID
+LocKey: $GH2E_SUMMON_SlimeSpirit$
+Model: SlimeSpirit
+Health:
+    Amount: 5
+    SquareEnhancements: 1
+Move:
+    Amount: 2
+    SquareEnhancements: 1
+Attack:
+    Amount: 2
+    SquareEnhancements: 1
+Range: 1
+OnAttackCondition: Poison
+# "When this summon would die, if there is no character token on this card, instead negate the damage and ... summon a
+# Slime Spirit in an empty hex adjacent to this summon": the negation is Frosthaven's lethal-only prevention (Metal
+# Mosaic perk 10: PreventFirstDamage, PreventOnlyIfLethal), one use (the character token). The second Slime Spirit is
+# NEEDS PLUGIN (no data shape summons into a hex beside a dying summon).
+OnSummonAbilities:
+    ASplit:
+        PreventDamage: 1
+        PreventOnlyIfLethal: True
+        Filter: Self
+        SkipAnim: True
+        AutoTrigger: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: PreventFirstDamage
+            XPTracker: [0]
+            ListLayoutOverride: [$GH2E_Soultether_25_T$, Positive_DamagePrevent]

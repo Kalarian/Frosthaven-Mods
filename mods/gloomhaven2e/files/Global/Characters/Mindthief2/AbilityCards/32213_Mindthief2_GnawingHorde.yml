@@ -1,0 +1,32 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GnawingHorde$
+Character: Mindthief2ID
+ID: 32213
+Level: X
+Initiative: 82
+# card: Gnawing Horde
+# written from tools/gh2e/sheets/Mindthief.json; the Rat Swarm is summons/RatSwarm.yml (2e stats)
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: RatSwarmID
+                AnimOverload: Summon
+        XP: 2
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 4
+Layout:
+    Top:
+        - Active:
+            Ability: TSummon
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_RatSwarm$
+                    SpecialText: "<sprite name=Poison>"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove*"

@@ -1,0 +1,86 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_LivingNight$
+Character: SoultetherID
+ID: 33503
+Level: 1
+Initiative: 96
+# card: Living Night
+# top: two Shadow Wolves (summons/ShadowWolf2.yml: the death trigger lives on the wolf).
+# bottom: "on the next two attacks targeting one of your summons, the attacker gains disadvantage for the attack and
+# suffers damage 1 after the attack": two persistent auras on your summons with two use slots each (Frosthaven's
+# AttackersGainDisadvantage bonus, Deflecting Maneuver; and Stress Vents' damage to the attacker on
+# DuringActionAbilityOnAttacked, as an aura like Coalescing Darkness), the damage one hidden. Unverified: that both
+# trackers advance once per attack.
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: ShadowWolf2ID
+                Target: 2
+                AnimOverload: Summon
+        XP: 1
+    Bottom:
+        Abilities:
+            BDisadvantage:
+                AttackersGainDisadvantage: 1
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: OwnSummon
+                    XPTracker: [0,0]
+                AnimOverload: RadialBuff
+            BDamageAttacker:
+                AddActiveBonus:
+                    Damage: 1
+                    Targeting: Custom
+                    TargetingVars:
+                        AddValidActorInRange: EnemyAttacker
+                        AddActorToTarget: EnemyAttacker
+                        AddTileInRange: EnemyAttacker.Tile
+                    IgnoreStun: True
+                    AutoTrigger: True
+                    CanUndo: False
+                    MiscVars:
+                        InterruptCurrentAbility: True
+                        StackNextToCurrent: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnAttacked
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: OwnSummon
+                    Hidden: True
+                    XPTracker: [0,0]
+                    Vars:
+                        EnemyAttacker: TriggerActor
+                AnimOverload: None
+        Infuse: Dark
+Layout:
+    Top:
+        - Active:
+            Ability: TSummon
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_ShadowWolf$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Pierce> 1</nobr>"
+                        - Row: "$FHS_GH2E_Soultether_03_T$"
+    Bottom:
+        - Active:
+            Ability: BDisadvantage
+            Icon: Positive_Disadvantage_Enemy_Summon
+            ListLayout: "$FHS_GH2E_Soultether_03_B$"
+            Layout: "$FHS_GH2E_Soultether_03_B$"
+        - Row: "<size=100%> "
+        - XPTracker: BDisadvantage
+        - Row: "<size=20%> "
+        - Infuse: Dark

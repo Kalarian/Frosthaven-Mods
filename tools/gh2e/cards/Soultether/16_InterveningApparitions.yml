@@ -1,0 +1,74 @@
+# card: Intervening Apparitions
+# top: grant one of your summons Attack +0; consume Fire gives the granted attack the 4-hex rhombus (an AreaEffect
+# override on the attack inside the control, the sheet's doubled coordinates G 0,0; R 2,0 1,1 3,1). Unverified: an
+# area override on a granted attack.
+# bottom: "on the next three sources of damage that would kill one of your summons, negate the damage and that summon
+# gains Invisible, Stun": Frosthaven's Metal Mosaic perk 10 (PreventFirstDamage + PreventOnlyIfLethal, its AbilityData
+# Invisible + Stun on the saved figure) as a persistent aura on your summons, slots [1,0,1]. Unverified: that the
+# AbilityData lands on the saved summon in an aura.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack: +0
+                            Range: +0
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter: OwnSummon
+                AnimOverload: ControlSummon
+        Consumes:
+            TCFire:
+                Elements: Fire
+                AbilityOverrides:
+                    TCFireArea:
+                        ParentName: TAllyAttack
+                        AreaEffect: "0,0,G|2,0,R|1,1,R|3,1,R"
+        XP: 1
+    Bottom:
+        Abilities:
+            BPrevent:
+                PreventDamage: 1
+                PreventOnlyIfLethal: True
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: PreventFirstDamage
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: OwnSummon
+                    XPTracker: [1,0,1]
+                    Vars:
+                        TriggerActiveBonusAbilities: CustomAbility.PerformActiveBonusAbility(TriggerBehaviour.ActiveBonus, thisContext)
+                    AbilityData:
+                        Filter: Self
+                        AutoTrigger: True
+                        NullTargeting: True
+                        Conditions: [Invisible, Stun]
+                AnimOverload: PowerUp
+        Infuse: Dark
+Layout:
+    Top:
+        - Row: "$GH2E_Soultether_GRANT1$"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> +0"
+        - Row: "<size=20%> "
+        - Consume:
+            Name: TCFire
+            Text: "$GH2E_Soultether_16_T$"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Active:
+            Ability: BPrevent
+            Icon: Positive_DamagePrevent_Summon
+            ListLayout: "$GH2E_Soultether_16_B$"
+            Layout: "$GH2E_Soultether_16_B$"
+        - Row: "<size=20%> "
+        - XPTracker: BPrevent
+        - Row: "<size=20%> "
+        - Infuse: Dark

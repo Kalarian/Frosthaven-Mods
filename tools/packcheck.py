@@ -68,6 +68,8 @@ def kind_of(props):
     for k in props:
         if k in KIND_KEYS:
             return k
+    if None in props:   # "Null: True": the YAML reader reads the key Null as None (2e Quartermaster)
+        return "Null"
     if isinstance(props.get("Condition"), str):
         return props["Condition"]
     return None

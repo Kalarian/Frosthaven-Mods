@@ -1,0 +1,14 @@
+Parser: Perk
+ID: Sunkeeper210
+Name: PERK_Sunkeeper2_10_Name
+Description: PERK_Sunkeeper2_10_Desc
+CharacterID: Sunkeeper2ID
+Available: 1
+Flags: [Passive, ExecuteAbilitiesAfterLongRest]
+Abilities:
+    BInfuse:
+        Infuse: [Light]
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        CanUndo: False

@@ -1,0 +1,15 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Nightshroud2_KillCurse_P1
+MathModifier: "+1"
+Abilities:
+    ACurseDeck:
+        AddModifiersToMonsterDeck:
+            Strength: 1
+            ModifiersToAdd: Curse
+        Filter: Enemy
+        AutoTrigger: True
+        AnimOverload: None
+        StartAbilityRequirements:
+            Type: ThisAbility
+            Vars:
+                ValidateKilled: TargetActor != null && TargetActor.IsDead

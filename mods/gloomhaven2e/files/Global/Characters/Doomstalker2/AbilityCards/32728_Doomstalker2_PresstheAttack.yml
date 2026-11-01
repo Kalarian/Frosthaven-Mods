@@ -1,0 +1,107 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_PresstheAttack$
+Character: Doomstalker2ID
+ID: 32728
+Level: 8
+Initiative: 22
+# card: Press the Attack
+# top: the 1st edition Press the Attack (IsDoomed conditional, +3 Attack, XP 1).
+# bottom: three ranged attacks with a jump between each, as printed (no mark on the first Move and the last Attack).
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 4
+                    SquareEnhancements: 1
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            IsDoomed: True
+                        AbilityOverrides:
+                            TDoomedBuff:
+                                Strength: 3
+                        XP: 1
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BAttack1:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 4
+                Conditions: Poison
+                AnimOverload: RangedAttack
+            BMove1:
+                Move:
+                    Amount: 4
+                    Jump: True
+            BAttack2:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range: 4
+                Conditions: Immobilize
+                AnimOverload: RangedAttack
+            BMove2:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+                    Jump: True
+            BAttack3:
+                Attack: 3
+                Range: 4
+                Conditions: Wound
+                AnimOverload: RangedAttack
+        XP: 2
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Doomstalker2_28_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack1* <size=100%><voffset=1>@BAttack1@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack1.Range*, <sprite name=Poison></link>"
+            - Column:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove1*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack2* <size=100%><voffset=1>@BAttack2@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack2.Range*, <sprite name=Immobilize></link>"
+            - Column:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove2* <size=100%><voffset=1>@BMove2@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack3*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack3.Range*, <sprite name=Wound></link>"
+            - Column:

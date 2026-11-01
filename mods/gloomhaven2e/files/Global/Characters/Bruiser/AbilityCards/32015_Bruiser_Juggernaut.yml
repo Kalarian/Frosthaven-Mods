@@ -1,0 +1,43 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Juggernaut$
+Character: BruiserID
+ID: 32015
+Level: 2
+Initiative: 34
+# card: Juggernaut
+# 2e sheet: top Move 2 [circle], Attack 3 [diamond]; bottom "on the next four sources of damage you would suffer,
+# negate the damage", 4 use slots (XP 1 on slots 2, 4), persistent, lost. Frosthaven's own shape (Boneshaper's Life in
+# Death: PreventDamage N with an N-slot XPTracker) and the 1st edition Juggernaut's.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 2
+                    CircleEnhancements: 1
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+    Bottom:
+        Abilities:
+            BPrevent:
+                PreventDamage: 4
+                ActiveBonus:
+                    Duration: Persistent
+                    XPTracker: [0,1,0,1]
+                AnimOverload: Persistent Buff
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+    Bottom:
+        - Active:
+            Ability: BPrevent
+            ListLayout: "$FHS_GH2E_Bruiser_15_B$"
+            Layout: "$FHS_GH2E_Bruiser_15_B$"
+            Icon: Positive_DamagePrevent
+        - Row: "<size=100%> "
+        - XPTracker: BPrevent

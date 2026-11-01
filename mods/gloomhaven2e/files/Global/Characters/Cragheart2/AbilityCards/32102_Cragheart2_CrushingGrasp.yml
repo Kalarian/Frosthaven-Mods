@@ -1,0 +1,59 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CrushingGrasp$
+Character: Cragheart2ID
+ID: 32102
+Level: 1
+Initiative: 35
+# card: Crushing Grasp
+# from Xipe's 99117_Cragheart2_Crushing Grasp.yml; corrected against tools/gh2e/sheets/Cragheart.json
+# bottom: the damage sub-ability aims around the created tile (AllTargetsAdjacentToParentTargets, the 1st edition
+# Rock Slide fix: without it the damage targets the new rock's own hex and hits nobody)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Conditions: Immobilize
+        Infuse: Earth
+        XP: 1
+    Bottom:
+        Abilities:
+            BCreate:
+                Create: RockSingle
+                Range: 1
+                Target: 1
+                SpawnDelay: 2.9
+                AnimOverload: ObstacleAvalanche
+                MultiPassAttack: False
+                SubAbilities:
+                    BCreateSubDamage:
+                        AllTargetsAdjacentToParentTargets: True
+                        Damage: 1
+                        Range: 1
+                        Target: -1
+                        Filter: [Enemy, Ally]
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+        Infuse: Earth
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Immobilize></link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Infuse: Earth
+    Bottom:
+        - Row: "$FHS_GH2E_Cragheart2_02_B$"
+        - Row: "<size=50%> "
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"
+        - Row: "<size=20%> "
+        - Infuse: Earth

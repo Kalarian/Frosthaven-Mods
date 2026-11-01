@@ -1,0 +1,6 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Bruiser_Push2_P2
+MathModifier: "+2"
+Abilities:
+    APush:
+        Push: 2

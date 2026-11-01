@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_CurativeMixture$
+Character: Sawbones2ID
+ID: 33203
+Level: 1
+Initiative: 8
+# card: Curative Mixture
+# "remove one negative condition": RemoveConditions 1 over the removable list (the game picks which one, as its Cure
+# Potion comment says; Frosthaven's own "choose which" needs a Choose block on yourself only). Top: the removal is a
+# sub-ability on the heal's target, so it lands after the heal, not before (approximation).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 3
+                    DiamondPlusEnhancements: 1
+                Range: 1
+                Filter: [Self, Ally]
+                AnimOverload: Heal
+                SubAbilities:
+                    THealSubRemove:
+                        RemoveConditions: 1
+                        Conditions: [Wound, Brittle, Bane, Poison, Immobilize, Disarm, Impair, Stun, Muddle]
+                        AnimOverload: None
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BRemove:
+                RemoveConditions: 1
+                Conditions: [Wound, Brittle, Bane, Poison, Immobilize, Disarm, Impair, Stun, Muddle]
+                Range: 1
+                Filter: Ally
+                AnimOverload: BuffAdjacent
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *THeal.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Sawbones2_03_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Sawbones2_03_B$"

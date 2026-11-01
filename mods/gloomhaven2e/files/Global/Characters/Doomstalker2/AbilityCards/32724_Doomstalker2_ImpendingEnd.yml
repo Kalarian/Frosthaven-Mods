@@ -1,0 +1,104 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ImpendingEnd$
+Character: Doomstalker2ID
+ID: 32724
+Level: 6
+Initiative: 47
+# card: Impending End
+# top: "If this attack kills the target, you may perform its Doom actions on an enemy within Range 3 of the hex where it
+# died" = Forward Momentum's transfer (TransferDooms on a doomed enemy's death), as a one-use bonus for this turn. A
+# doom is gone the moment its enemy dies, so the bonus must exist before the attack: it is the half's first ability
+# (standard confirm), the attack second. It also fires if a doomed enemy dies some other way this turn (approximation).
+# bottom: Doom with three slots: "Immobilize on your first attack on it, +2 Attack on the second and third". Two doom
+# bonuses: Immobilize (one use) and +2 Attack (two uses, XP on the last), so the first attack gets Immobilize and +2,
+# the second +2 (same total, two attacks instead of three; approximation). The card is discarded when both are used.
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    TransferDooms: -1
+                    Range: 3
+                    Target: 1
+                    Filter: Enemy
+                    AnimOverload: DoomTarget
+                    AllTargetsAdjacentToParentTarget: True
+                Filter: Self
+                ActiveBonus:
+                    Duration: Turn
+                    Behaviour: DuringActionAbilityOnDeath
+                    TriggerOnCaster: True
+                    Requirement:
+                        ValidActorsInRangeOfAddedAbilityRange: "> 0"
+                        RequirementActorFilter:
+                            ActorType: [Enemy, Enemy2]
+                    IsAura: True
+                    AuraFilter:
+                        IsDoomed: True
+                        TargetType: Enemy
+                    AuraTargeting: All
+                    UseTriggerAbilityAsParent: True
+                    XPTracker: [0]
+                AnimOverload: PowerUp
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Range: 5
+                AnimOverload: RangedAttack
+    Bottom:
+        Abilities:
+            BDoom:
+                AddDoom:
+                    Doom:
+                        DoomAbilities:
+                            BDoomImmobilize:
+                                Attack: 0
+                                Condition: Immobilize
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    Filter:
+                                        PlayerClasses: Doomstalker2ID
+                                    XPTracker: [0]
+                            BDoomAttackDebuff:
+                                Attack: 2
+                                ActiveBonus:
+                                    Duration: Persistent
+                                    Behaviour: BuffIncomingAttacks
+                                    Filter:
+                                        PlayerClasses: Doomstalker2ID
+                                    XPTracker: [0,1]
+                Filter:
+                    TargetType: Enemy
+                    EnemyType: [Normal, Elite, Boss]
+                Target: 1
+                Targeting: All
+                AnimOverload: DoomTarget
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*</link>"
+            - Column:
+        - Divider:
+        - Active:
+            Ability: TActive
+            ListLayout: "$FHS_GH2E_Doomstalker2_24_T$"
+            Layout: "$FHS_GH2E_Doomstalker2_24_T$"
+            Icon: Positive_Attack_Curse
+    Bottom:
+        - Active:
+            Ability: BDoom
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_Doomstalker2_24_B$"
+            Layout:
+                - Row: "$FHS_Doom_MarkText$"
+                - Row: "$FHS_GH2E_Doomstalker2_24_B$"
+                - Row: "<size=20%> "
+                - XPTracker: BDoomAttackDebuff
+                - Row: "$FHS_Doom_DiscardReminderText$"

@@ -1,0 +1,53 @@
+# card: Strength in Numbers
+# top: Heal 2, Target 2, Range 4; "+1 Heal on each target adjacent to two or more allies" = a ConditionalOverrides on
+# the heal (Frosthaven's Pinning Charge test TargetAdjacentAllies, here ">= 2"). Unverified on a heal.
+# bottom: Attack X, Range X+1, X = your summons: the 1st edition Strength in Numbers bottom (StatIsBasedOnX ActorCount),
+# counting your own summons (OwnSummon), the range with AddTo over a base of 1 (Hail of Spears' AddTo).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            THeal:
+                Heal:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 4
+                Filter: [Self, Ally]
+                ConditionalOverrides:
+                    THealCO:
+                        Filter:
+                            TargetType: [Self, Ally]
+                            TargetAdjacentAllies: ">= 2"
+                        AbilityOverrides:
+                            THealAdjBuff:
+                                Strength: 1
+                AnimOverload: Heal
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 0
+                Range: 1
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: ActorCount
+                        Filter:
+                            TargetType: OwnSummon
+                    Range:
+                        BasedOn: ActorCount
+                        AddTo: True
+                        Filter:
+                            TargetType: OwnSummon
+                AnimOverload: RangedAttackAir
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
+        - Row: "$Target$ <sprite name=Target> *THeal.Target* @THeal.Target@"
+        - Row: "$Range$ <sprite name=Range> *THeal.Range*"
+        - Row: "$GH2E_Soultether_20_T$"
+    Bottom:
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> X"
+        - Row: "$Range$ <sprite name=Range> X+1"
+        - Row: "$GH2E_Soultether_20_B$"

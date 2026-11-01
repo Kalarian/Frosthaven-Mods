@@ -1,0 +1,20 @@
+Parser: HeroSummon
+ID: PrismaticUnicornID
+LocKey: $GH2E_SUMMON_PrismaticUnicorn$
+Model: BlackUnicorn
+Health:
+    Amount: 8
+    SquareEnhancements: 1
+Move: 4
+Attack:
+    Amount: 3
+    SquareEnhancements: 1
+Range: 1
+Pierce: 2
+# "At end of turn, infuse Fire, Air, or Dark": the summon's end-of-turn ability (Repair Drone) with Frosthaven's element
+# picker (AMC_FireAir_P1). Unverified who picks on the summon's turn.
+SpecialAbilities:
+    AInfuse:
+        Infuse: [Fire, Air, Dark]
+        ShowElementPicker: True
+        Filter: Self

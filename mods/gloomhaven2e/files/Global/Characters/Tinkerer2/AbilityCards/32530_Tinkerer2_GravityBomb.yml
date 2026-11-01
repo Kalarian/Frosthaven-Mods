@@ -1,0 +1,56 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GravityBomb$
+Character: Tinkerer2ID
+ID: 32530
+Level: 9
+Initiative: 85
+# card: Gravity Bomb
+# Xipe's 99059 is a placeholder (plain Attack 3 / Move 3); written from tools/gh2e/sheets/Tinkerer.json
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            # APPROXIMATION, NEEDS PLUGIN for the exact rule (NOTES.md): the token, the one-turn delay and the pull
+            # toward the token have no engine shape. Done at once instead: damage 5 to one enemy within range 4 (the
+            # bomb's hex), then damage 1 to every enemy adjacent to it (the Rock Slide / Rot Maggots shape:
+            # AllTargetsAdjacentToParentTargets + TreatAsNonSubAbility). No pull.
+            TDamage:
+                Damage: 5
+                Range: 4
+                Target: 1
+                Targeting: Range
+                Filter: Enemy
+                AnimOverload: RangedAttack
+                SubAbilities:
+                    TDamageAdjacent:
+                        Damage: 1
+                        Range: 1
+                        Target: -1
+                        Filter: Enemy
+                        TreatAsNonSubAbility: True
+                        AllTargetsAdjacentToParentTargets: True
+                        AnimOverload: None
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack: 2
+                Range: 3
+                Conditions: Immobilize
+                AreaEffect: "0,0,R|2,0,R|1,1,R"
+                MultiPassAttack: False
+                AnimOverload: RangedAttack
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Tinkerer2_30_T$"
+    Bottom:
+        - ColumnWidths: "65,35"
+        - Column:
+            - Row:
+                - ColumnWidths: "10,35,45,10"
+                - Column:
+                - Column: "<size=150%><sprite name=RangedAttack> *BAttack*"
+                - Column:
+                    - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*, <sprite name=Immobilize></link>"
+                - Column:
+        - Column:
+            - Row: "£Area£"

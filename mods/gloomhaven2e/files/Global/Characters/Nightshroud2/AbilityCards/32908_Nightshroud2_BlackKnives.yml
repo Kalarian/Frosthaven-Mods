@@ -1,0 +1,66 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_BlackKnives$
+Character: Nightshroud2ID
+ID: 32908
+Level: 1
+Initiative: 77
+# card: Black Knives
+# top: "+1 Attack on the second attack if the first attack kills an enemy": Frosthaven has no per-target bonus that
+# reads an earlier target's death inside one multi-target attack. Text only (NEEDS PLUGIN, NOTES.md).
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Target: 2
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkAttackBuff:
+                        ParentName: TAttack
+                        Strength: 1
+                XP: 1
+        XP: 1
+    Bottom:
+        Abilities:
+            BAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                    Pierce: 1
+                    PierceEnhancements: 1
+            BLoot:
+                Loot: 1
+                Target: -1
+                AnimOverload: Loot
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> 2</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "+1 <sprite name=Attack>, <sprite name=XP1>"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Nightshroud2_08_T$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Pierce> *BAttack.Pierce* @BAttack.Pierce@</link>"
+            - Column:
+        - Divider:
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"

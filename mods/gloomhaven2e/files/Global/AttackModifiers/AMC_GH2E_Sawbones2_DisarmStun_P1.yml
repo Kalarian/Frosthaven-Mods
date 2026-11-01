@@ -1,0 +1,12 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Sawbones2_DisarmStun_P1
+MathModifier: "+1"
+AbilityOverrides:
+    NegCon:
+        ParentName: AMC_GH2E_Sawbones2_DisarmStun_P1
+        Conditions: [Stun]
+Abilities:
+    ADisarmSelf:
+        Disarm: True
+        Filter: Self
+        AnimOverload: SelfDebuff

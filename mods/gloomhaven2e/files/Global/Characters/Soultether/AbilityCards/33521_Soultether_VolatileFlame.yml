@@ -1,0 +1,68 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_VolatileFlame$
+Character: SoultetherID
+ID: 33521
+Level: 4
+Initiative: 97
+# card: Volatile Flame
+# top: Curse, range 4 (a condition ability); consume Dark adds Stun to the same target (a Conditions override on it).
+# bottom: Ember Sprite (summons/EmberSprite.yml: its Fire-gated Retaliate aura); the card infuses the Fire it uses.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TCurse:
+                Curse:
+                    DiamondEnhancements: 1
+                Range: 4
+                Target: 1
+                Filter: Enemy
+                AnimOverload: CastNegative
+        Consumes:
+            TCDark:
+                Elements: Dark
+                AbilityOverrides:
+                    TCDarkStun:
+                        ParentName: TCurse
+                        Conditions: Stun
+                XP: 1
+    Bottom:
+        Abilities:
+            BSummon:
+                Summon: EmberSpriteID
+                AnimOverload: Summon
+        Infuse: Fire
+        XP: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Curse>"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *TCurse.Range*</link>"
+            - Column:
+        - Row: "<size=20%> "
+        - Conditional:
+            Layout:
+                - Consume:
+                    Name: TCDark
+                    Text: "<sprite name=Stun>, <sprite name=XP1>"
+    Bottom:
+        - Active:
+            Ability: BSummon
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: BSummon
+                    SummonName: $FHS_GH2E_SUMMON_EmberSprite$
+                    SpecialText:
+                        - Row: "<nobr><sprite name=Flying></nobr>"
+                        - Row: "$FHS_GH2E_Soultether_21_B$"
+        - Row: "<size=20%> "
+        - Row:
+            - ColumnWidths: "30,20,20"
+            - Column:
+                - Infuse: Fire
+            - Column:
+            - Column:

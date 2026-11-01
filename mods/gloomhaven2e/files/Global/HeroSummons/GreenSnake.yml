@@ -1,0 +1,31 @@
+Parser: HeroSummon
+ID: GreenSnakeID
+LocKey: $GH2E_SUMMON_GreenSnake$
+Model: GreenAdder
+Health:
+    Amount: 5
+    SquareEnhancements: 1
+Move:
+    Amount: 3
+    SquareEnhancements: 1
+Attack:
+    Amount: 2
+    SquareEnhancements: 1
+Range: 1
+# "Unaffected by difficult terrain" (the Sturdy Boots / Skitter move flag, here as the summon's move override, as
+# Frosthaven's Leaper writes Jump)
+MoveOverride:
+    IgnoreDifficultTerrain: True
+# "Considered to be last in initiative order when determining monster focus": Frosthaven's Snow Fox (Snowdancer
+# Nature's Breath) does exactly this
+OnSummonAbilities:
+    TActive:
+        AdjustInitiative: 200
+        Filter: Self
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: FocusInitiative
+            ValidAbilityType: AdjustInitiative
+            ListLayoutOverride: ["$GH2E_Doomstalker2_11_T2$", Positive_Summon]
+        TextOnly: True
+        Text: "$GH2E_Doomstalker2_11_T2$"

@@ -1,0 +1,24 @@
+Parser: Perk
+ID: SilentKnife10
+Name: PERK_SilentKnife_10_Name
+Description: PERK_SilentKnife_10_Desc
+CharacterID: SilentKnifeID
+Available: 1
+Cost: 2
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            Invisible: True
+            Filter: [Self]
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringTurnAbility
+            XPTracker: [0]
+            IsToggleBonus: True
+            Hidden: True
+            ListLayoutOverride: [$PERK_SilentKnife_10_Desc$, Invisible]
+            MiscVars:
+                OverrideIcon: "'Invisible'"
+        AnimOverload: PowerUp

@@ -1,0 +1,9 @@
+StartScenarioAbilities:
+    QuartermasterSupplies:
+        NullTargeting: True
+        Filter: Self
+        ResourcesToAddOnAbilityEnd:
+            - ["Supplies", 10]
+        AutoTrigger: True
+        CanSkip: False
+        SkipAnim: True

@@ -1,0 +1,52 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SingleOut$
+Character: SilentKnifeID
+ID: 32301
+Level: 1
+Initiative: 86
+# card: Single Out
+# from Xipe's 99088_Scoundrel2_Single Out.yml; corrected against tools/gh2e/sheets/SilentKnife.json
+# isolated = TargetAdjacentAlliesOfTarget == 0 (the 1st edition Scoundrel's filter, played in the 1e port)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                ConditionalOverrides:
+                    TAttackCO:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentAlliesOfTarget: "== 0"
+                        XP: 1
+                        AbilityOverrides:
+                            TIsolatedBuff:
+                                Strength: 2
+    Bottom:
+        Abilities:
+            BActive:
+                Attack: 3
+                Filter: Self
+                AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    Filter:
+                        TargetType: Enemy
+                        TargetAdjacentAlliesOfTarget: "== 0"
+                    XPTracker: [0,1,0,1]
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_SilentKnife_01_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Positive_AttackPlus
+            ListLayout: "$FHS_GH2E_SilentKnife_01_B$"
+            Layout: "$FHS_GH2E_SilentKnife_01_B$"
+        - Row: "<size=100%> "
+        - XPTracker: BActive

@@ -1,0 +1,30 @@
+Parser: Perk
+ID: Soultether11
+Name: PERK_Soultether_11_Name
+Description: PERK_Soultether_11_Desc
+CharacterID: SoultetherID
+Available: 1
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    OnChooseToLongRest:
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        AddActiveBonus:
+            Shield: 1
+            Range: 99
+            Target: -1
+            Targeting: All
+            IgnoreLOS: True
+            Filter: OwnSummon
+            AutoTrigger: True
+            CanUndo: False
+            ActiveBonus:
+                Duration: Round
+            AnimOverload: RadialBuff
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: PreCalcInitiativeAbility
+            Hidden: True
+            Requirements:
+                IsLongRest: True

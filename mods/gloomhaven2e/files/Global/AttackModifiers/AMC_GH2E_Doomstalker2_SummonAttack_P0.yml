@@ -1,0 +1,14 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Doomstalker2_SummonAttack_P0
+MathModifier: "+0"
+TryToPerformAsSummoner: True
+Abilities:
+    ControlAbility:
+        ControlActor:
+            Abilities:
+                ASummonAttack:
+                    Attack: +0
+                    Range: +0
+        Range: 99
+        Filter: OwnSummon
+        AnimOverload: Grant

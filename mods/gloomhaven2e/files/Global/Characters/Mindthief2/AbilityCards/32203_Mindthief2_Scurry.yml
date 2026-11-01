@@ -1,0 +1,34 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Scurry$
+Character: Mindthief2ID
+ID: 32203
+Level: 1
+Initiative: 20
+# card: Scurry
+# written from tools/gh2e/sheets/Mindthief.json (Xipe's 99148 agreed)
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TMove:
+                Move:
+                    Amount: 3
+                    SquareEnhancements: 1
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+    Bottom:
+        Abilities:
+            BLoot:
+                Loot: 2
+                Target: -1
+                AnimOverload: Loot
+        XP: 1
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
+        - Divider:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+    Bottom:
+        - Row: "<size=150%><sprite name=Loot> *BLoot*"

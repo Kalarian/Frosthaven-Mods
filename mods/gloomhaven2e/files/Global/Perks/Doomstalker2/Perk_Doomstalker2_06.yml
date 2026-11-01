@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Doomstalker206
+Name: PERK_Doomstalker2_06_Name
+Description: PERK_Doomstalker2_06_Desc
+CharacterID: Doomstalker2ID
+Available: 2
+CardsToAdd: [AMC_Stun_R]

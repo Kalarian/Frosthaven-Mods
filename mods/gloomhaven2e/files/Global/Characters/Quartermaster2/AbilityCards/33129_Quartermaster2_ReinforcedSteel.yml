@@ -1,0 +1,58 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ReinforcedSteel$
+Character: Quartermaster2ID
+ID: 33129
+Level: 9
+Initiative: 56
+# card: Reinforced Steel
+# top: "at the end of each of your turns, you may give one random class item to an ally within range 2":
+#   APPROXIMATION, an EndTurnAbility bonus letting one ally within range 2 recover one spent or lost item (NEEDS
+#   PLUGIN: random item supply). Persistent, lost, XP 2.
+# bottom: "at the end of each round, Recover one of your spent items": the 1st edition Reinforced Steel top's
+#   EndRoundAbility bonus, exact. Persistent, lost, XP 2.
+Discard: [Lost,Lost]
+Data:
+    Top:
+        Abilities:
+            TActive:
+                AddActiveBonus:
+                    RefreshItems: 1
+                    SlotStateToRefresh: [Spent, Consumed]
+                    Range: 2
+                    Filter:
+                        TargetType: Ally
+                        ActorType: Player
+                    AnimOverload: Refresh
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndTurnAbility
+                AnimOverload: PowerUp
+        XP: 2
+    Bottom:
+        Abilities:
+            BActive:
+                AddActiveBonus:
+                    RefreshItems: 1
+                    SlotStateToRefresh: [Spent]
+                    Filter: Self
+                    Target: -1
+                    AnimOverload: Refresh
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndRoundAbility
+                AnimOverload: PowerUp
+        XP: 2
+Layout:
+    Top:
+        - Active:
+            Ability: TActive
+            Icon: Refresh
+            ListLayout: "$FHS_GH2E_Quartermaster2_29_T$"
+            Layout: "$FHS_GH2E_Quartermaster2_29_T$"
+    Bottom:
+        - Active:
+            Ability: BActive
+            Icon: Refresh
+            ListLayout: "$FHS_GH2E_Quartermaster2_29_B$"
+            Layout: "$FHS_GH2E_Quartermaster2_29_B$"

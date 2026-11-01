@@ -1,0 +1,49 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_ThrowingKnives$
+Character: SilentKnifeID
+ID: 32307
+Level: 1
+Initiative: 10
+# card: Throwing Knives
+# from Xipe's 99094_Scoundrel2_Throwing Knives.yml; corrected against tools/gh2e/sheets/SilentKnife.json (agrees)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 2
+                Target:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttackThrowingKnives
+        XP: 1
+    Bottom:
+        Abilities:
+            BPull:
+                Pull:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack*"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* @TAttack.Target@</link>"
+                - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* @TAttack.Range@</link>"
+            - Column:
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Pull> *BPull* <size=100%><voffset=1>@BPull@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BPull.Range* @BPull.Range@</link>"
+            - Column:

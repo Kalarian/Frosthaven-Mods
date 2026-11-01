@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Wildfury06
+Name: PERK_Wildfury_06_Name
+Description: PERK_Wildfury_06_Desc
+CharacterID: WildfuryID
+Available: 2
+CardsToAdd: [AMC_GH2E_Wildfury_Push2_P2]

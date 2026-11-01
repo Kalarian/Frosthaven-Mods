@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Doomstalker204
+Name: PERK_Doomstalker2_04_Name
+Description: PERK_Doomstalker2_04_Desc
+CharacterID: Doomstalker2ID
+Available: 2
+CardsToAdd: [AMC_GH2E_Doomstalker2_SummonAttack_P0]

@@ -1,0 +1,7 @@
+Parser: Perk
+ID: Soothsinger209
+Name: PERK_Soothsinger2_09_Name
+Description: PERK_Soothsinger2_09_Desc
+CharacterID: Soothsinger2ID
+Available: 1
+Flags: [Passive]

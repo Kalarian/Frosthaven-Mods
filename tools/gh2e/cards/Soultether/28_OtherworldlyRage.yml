@@ -1,0 +1,59 @@
+# card: Otherworldly Rage
+# top: grant one of your summons Attack +2, Wound, Poison (the 1st edition Otherworldly Rage top's shape).
+# bottom: "recover one card from your lost pile that has a summon action and immediately play that card to perform the
+# summon action" = Frosthaven's HIVE Recall top (SelectAndPlayCard from the lost pile, summon actions only, BlockXP);
+# "any summons summoned by that action gain Ward, Invisible, and Strengthen" = Ward, Invisible, Strengthen on up to two
+# of your summons, picked by you (APPROXIMATION: the engine has no list of the summons just summoned). Then Invisible
+# self. Unverified: which pile the replayed card ends in.
+Discard: [Discard,Lost]
+Data:
+    Top:
+        Abilities:
+            TAlly:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack: +2
+                            Range: +0
+                            Conditions: [Wound, Poison]
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter: OwnSummon
+                AnimOverload: ControlSummon
+        XP: 1
+    Bottom:
+        Abilities:
+            BPlayLost:
+                SelectAndPlayCard:
+                    CardPile: Lost
+                    BlockXP: True
+                    Amount: 1
+                Filter: Self
+                MiscVars:
+                    IsActionValid: Action.Abilities.Any(obj.AbilityType == CAbility.EAbilityType.Summon)
+                AnimOverload: PowerUp
+            BSummonsBuff:
+                Ward: True
+                Conditions: [Invisible, Strengthen]
+                Range: 99
+                Target: 2
+                Filter: OwnSummon
+                AnimOverload: TargetedBuff
+            BInvisible:
+                Invisible:
+                    Enhancements: 1
+                Filter: Self
+                AnimOverload: PowerUp
+Layout:
+    Top:
+        - Row: "$GH2E_Soultether_GRANT1$"
+        - Row: "<b><size=130%>$Attack$ <sprite name=Attack> +2"
+        - Row: "$Wound$ <sprite name=Wound>"
+        - Row: "$Poison$ <sprite name=Poison>"
+        - Row: "<size=50%> "
+        - XP: 1
+    Bottom:
+        - Row: "$GH2E_Soultether_28_B$"
+        - Row: "<size=50%> "
+        - Row: "<b><size=130%>$Invisible$ <sprite name=Invisible>"

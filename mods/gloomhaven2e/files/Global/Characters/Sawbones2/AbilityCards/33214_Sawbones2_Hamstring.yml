@@ -1,0 +1,40 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_Hamstring$
+Character: Sawbones2ID
+ID: 33214
+Level: 2
+Initiative: 72
+# card: Hamstring
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 4
+                    DiamondEnhancements: 1
+                Conditions: Immobilize
+        XP: 1
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 6
+            BImmobilize:
+                Immobilize: True
+                Filter: Self
+                AutoTrigger: True
+                CanSkip: False
+                AnimOverload: SelfDebuff
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Immobilize></link>"
+            - Column:
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove*"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Sawbones2_14_B$"

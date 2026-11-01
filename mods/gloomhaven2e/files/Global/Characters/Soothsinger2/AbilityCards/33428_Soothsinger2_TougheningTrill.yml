@@ -1,0 +1,91 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_TougheningTrill$
+Character: Soothsinger2ID
+ID: 33428
+Level: 8
+Initiative: 78
+# card: Toughening Trill
+# top: song (High + Low Note): Defensive Ditty's Shield aura and Echoing Aria's Retaliate aura, four slots per round
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TSong:
+                Shield: 1
+                Target: -1
+                Targeting: All
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: [Self, Ally]
+                AnimOverload: PlaySongShield1
+            TSongRetaliate:
+                Retaliate: 1
+                RetaliateRange: 2
+                Target: -1
+                Targeting: All
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Persistent
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: [Self, Ally]
+            TSongTimer:
+                AddActiveBonus:
+                    Null: True
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndRoundAbility
+                    XPTracker: [1,0,0,0]
+                    EndAllActiveBonusesOnBaseCardSimultaneously: True
+            TSongNotes:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Ability
+                    Hidden: True
+                    RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+            BAttack:
+                Attack:
+                    Amount: 2
+                    SquareEnhancements: 1
+                Range: 3
+                AnimOverload: RangedAttack
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Soothsinger2_28_T$"
+        - Active:
+            Ability: TSong
+            Icon: Positive_Shield_Ally_Aura
+            ListLayout: "$FHS_GH2E_Soothsinger2_28_T2$"
+            Layout: "$FHS_GH2E_Soothsinger2_28_T2$"
+        - Row: "<size=100%> "
+        - XPTracker: TSongTimer
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Divider:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *BAttack* <size=100%><voffset=1>@BAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
+            - Column:

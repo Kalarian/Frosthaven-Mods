@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Doomstalker210
+Name: PERK_Doomstalker2_10_Name
+Description: PERK_Doomstalker2_10_Desc
+CharacterID: Doomstalker2ID
+Available: 1
+Cost: 2
+Flags: [Passive]

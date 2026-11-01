@@ -1,0 +1,42 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_GlassHammer$
+Character: Berserker2ID
+ID: 32611
+Level: X
+Initiative: 43
+# card: Glass Hammer
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack: 0
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: PercentageOfCurrentHP
+                        Multiplier: 1.0
+                GainXPPerXDamageDealt: 5
+                SetHPTo: 1
+                AnimOverload: SuperHeavyAttack
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 3
+                    CircleEnhancements: 1
+                Jump: True
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> X"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Berserker2_11_T$"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Berserker2_11_T2$"
+    Bottom:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Jump></link>"
+            - Column:

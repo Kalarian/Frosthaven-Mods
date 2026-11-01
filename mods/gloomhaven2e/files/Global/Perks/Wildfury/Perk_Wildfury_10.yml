@@ -1,0 +1,57 @@
+Parser: Perk
+ID: Wildfury10
+Name: PERK_Wildfury_10_Name
+Description: PERK_Wildfury_10_Desc
+CharacterID: WildfuryID
+Available: 1
+Cost: 2
+Flags: [Passive, ExecuteAbilitiesAfterLongRest]
+Abilities:
+    TRestEarth:
+        StartAbilityRequirements:
+            Type: ThisAbility
+            Vars:
+                ValidateNoAir: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Air) == False
+        Consume:
+            Elements: [Earth]
+            Abilities:
+                TRestEarthCost:
+                    Damage: 2
+                    Filter: Self
+                    AutoTrigger: True
+                TRestEarthHeal:
+                    ControlActor:
+                        ControlDurationType: ControlForOneAction
+                        Abilities:
+                            ABearHealE:
+                                Heal: 2
+                                Filter: Self
+                    Filter:
+                        TargetType: [OwnSummon]
+                        HeroSummonClasses: [WildfuryBearID]
+                    Target: 1
+                    Targeting: All
+                    IgnoreLOS: True
+                    SkipAnim: True
+    TRestAir:
+        Consume:
+            Elements: [Air]
+            Abilities:
+                TRestAirCost:
+                    Damage: 2
+                    Filter: Self
+                    AutoTrigger: True
+                TRestAirHeal:
+                    ControlActor:
+                        ControlDurationType: ControlForOneAction
+                        Abilities:
+                            ABearHealA:
+                                Heal: 2
+                                Filter: Self
+                    Filter:
+                        TargetType: [OwnSummon]
+                        HeroSummonClasses: [WildfuryBearID]
+                    Target: 1
+                    Targeting: All
+                    IgnoreLOS: True
+                    SkipAnim: True

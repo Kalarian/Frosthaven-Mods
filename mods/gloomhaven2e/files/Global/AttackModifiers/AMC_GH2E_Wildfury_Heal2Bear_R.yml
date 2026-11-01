@@ -1,0 +1,15 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Wildfury_Heal2Bear_R
+MathModifier: "+0"
+Rolling: True
+Abilities:
+    AHeal:
+        Heal: 2
+        Filter: [Self, Ally]
+        AutoTrigger: True
+        Targeting: Custom
+        TargetingVars:
+            AddValidActorInRange: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID") || TargetingActor
+            AddTileInRange: AddValidActorInRange.Tile
+            AddActorToTarget: AddValidActorInRange
+            AddSelectedTile: AddValidActorInRange.Tile

@@ -1,0 +1,53 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_SinisterOpportunity$
+Character: SilentKnifeID
+ID: 32305
+Level: 1
+Initiative: 93
+# card: Sinister Opportunity
+# from Xipe's 99092_Scoundrel2_Sinister Opportunity.yml; corrected against tools/gh2e/sheets/SilentKnife.json
+# three conditional overrides: +1 flanking, +1 isolated, advantage + XP 1 when both (Frosthaven applies every override
+# whose filter passes, CAttackSummary.TargetSummary)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                ConditionalOverrides:
+                    TAttackCO1:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentAllies: "> 0"
+                        AbilityOverrides:
+                            TFlankBuff:
+                                Strength: 1
+                    TAttackCO2:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentAlliesOfTarget: "== 0"
+                        AbilityOverrides:
+                            TIsolatedBuff:
+                                Strength: 1
+                    TAttackCO3:
+                        Filter:
+                            TargetType: Enemy
+                            TargetAdjacentAllies: "> 0"
+                            TargetAdjacentAlliesOfTarget: "== 0"
+                        XP: 1
+                        AbilityOverrides:
+                            TBothBuff:
+                                AttackHasAdvantage: True
+    Bottom:
+        Abilities:
+            BMove:
+                Move: 5
+Layout:
+    Top:
+        - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_SilentKnife_05_T$"
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove*"

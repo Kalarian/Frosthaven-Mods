@@ -1,0 +1,8 @@
+Parser: Perk
+ID: Elementalist204
+Name: PERK_Elementalist2_04_Name
+Description: PERK_Elementalist2_04_Desc
+CharacterID: Elementalist2ID
+Available: 1
+CardsToRemove: [AMC_Basic_M1]
+CardsToAdd: [AMC_GH2E_Elementalist2_IceEarth_P0]

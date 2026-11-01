@@ -1,0 +1,46 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_DangerousContraption$
+Character: Tinkerer2ID
+ID: 32520
+Level: 4
+Initiative: 10
+# card: Dangerous Contraption
+# from Xipe's 99049_Tinkerer2_Dangerous Contraption.yml; corrected against tools/gh2e/sheets/Tinkerer.json
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TSummon:
+                Summon: Battlebot2ID
+                AnimOverload: Summon
+        XP: 3
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 4
+                    CircleEnhancements: 1
+            # "Grant one adjacent ally: Shield 1" for the round: a round shield on one ally (Frosthaven's Hold the Line)
+            BAllyShield:
+                Shield:
+                    Amount: 1
+                    DiamondPlusEnhancements: 1
+                Range: 1
+                Target: 1
+                Filter: Ally
+                ActiveBonus:
+                    Duration: Round
+Layout:
+    Top:
+        - Active:
+            Ability: "TSummon"
+            Icon: Positive_Summon
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $FHS_GH2E_SUMMON_BattleBot$
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Tinkerer2_20_B$"
+        - Row: "<size=150%><sprite name=Shield> *BAllyShield* <size=100%><voffset=1>@BAllyShield@"

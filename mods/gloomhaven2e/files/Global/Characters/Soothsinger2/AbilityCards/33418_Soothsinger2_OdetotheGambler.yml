@@ -1,0 +1,71 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_OdetotheGambler$
+Character: Soothsinger2ID
+ID: 33418
+Level: 3
+Initiative: 15
+# card: Ode to the Gambler
+# top: song (High + Low Note). NEEDS PLUGIN (a rolling first modifier). APPROXIMATION: once per turn, you and each
+# ally may switch on advantage for one attack (Geminate Dragonfly Surge's advantage buff as a toggled aura)
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TSong:
+                Attack: 0
+                AttackHasAdvantage: True
+                Target: -1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: BuffAttack
+                    ValidAbilityTypes: [Attack]
+                    Restriction: OncePerTurn
+                    RestrictPerActor: True
+                    IsToggleBonus: True
+                    IsSingleTargetBonus: True
+                    IsAura: True
+                    AuraTargeting: All
+                    AuraFilter: [Self, Ally]
+                AnimOverload: PlaySongAttack3
+            TSongTimer:
+                AddActiveBonus:
+                    Null: True
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: EndRoundAbility
+                    XPTracker: [1,0,0,0]
+                    EndAllActiveBonusesOnBaseCardSimultaneously: True
+            TSongNotes:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ActiveBonus:
+                    Duration: Ability
+                    Hidden: True
+                    RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 5
+                    CircleEnhancements: 1
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Soothsinger2_18_T$"
+        - Active:
+            Ability: TSong
+            Icon: Positive_Advantage_Aura
+            ListLayout: "$FHS_GH2E_Soothsinger2_18_T2$"
+            Layout: "$FHS_GH2E_Soothsinger2_18_T2$"
+        - Row: "<size=100%> "
+        - XPTracker: TSongTimer
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

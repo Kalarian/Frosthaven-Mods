@@ -1,0 +1,57 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_HowlingBolts$
+Character: WildfuryID
+ID: 33603
+Level: 1
+Initiative: 31
+# card: Howling Bolts
+# top: Attack 2 [diamond], Target 3, Range 4, Pierce 3, infuse Air, XP 2, lost. bottom: COMMAND Heal 3 [square], self
+# (the Bear heals itself), infuse Earth (the Wildfury's half infuses).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TAttack:
+                Attack:
+                    Amount: 2
+                    DiamondEnhancements: 1
+                Target: 3
+                Range: 4
+                Pierce: 3
+                MultiPassAttack: False
+                AnimOverload: RangedAttack
+        Infuse: Air
+        XP: 2
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyHeal:
+                            Heal:
+                                Amount: 3
+                                SquareEnhancements: 1
+                            Filter: Self
+                            AnimOverload: Heal
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
+        Infuse: Earth
+Layout:
+    Top:
+        - Row:
+            - ColumnWidths: "10,35,45,10"
+            - Column:
+            - Column: "<size=150%><sprite name=RangedAttack> *TAttack* <size=100%><voffset=1>@TAttack@"
+            - Column:
+                - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <sprite name=Range> *TAttack.Range* <sprite name=Pierce> *TAttack.Pierce*</link>"
+            - Column:
+        - Row: "<size=50%> "
+        - Infuse: Air
+    Bottom:
+        - Row: "<size=1%><link=fhcommand> </link>"
+        - Row: "<size=150%><sprite name=Heal> *BAllyHeal* <size=100%><voffset=1>@BAllyHeal@"
+        - Row: "<size=50%> "
+        - Infuse: Earth

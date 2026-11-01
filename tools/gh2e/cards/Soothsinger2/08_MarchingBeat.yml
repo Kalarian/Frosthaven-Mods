@@ -1,0 +1,58 @@
+# card: Marching Beat
+Discard: [Discard,Discard]
+Data:
+    Top:
+        Abilities:
+            TStrengthen:
+                Strengthen:
+                    Enhancements: 1
+                Target:
+                    Amount: 2
+                    Enhancements: 1
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Filter: [Self, Ally]
+                AnimOverload: PlayPositiveTune
+            TNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerHighNote", 1]
+    Bottom:
+        Abilities:
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move:
+                                Amount: 4
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                Range:
+                    Amount: 3
+                    Enhancements: 1
+                Filter: Ally
+                AnimOverload: PlayPositiveTuneMove
+            BNote:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                ResourcesToAddOnAbilityEnd:
+                    - ["SoothsingerLowNote", 1]
+Layout:
+    Top:
+        - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen> <size=100%><voffset=1>@TStrengthen@"
+        - Row: "$Target$ <sprite name=Target> *TStrengthen.Target* @TStrengthen.Target@"
+        - Row: "$Range$ <sprite name=Range> *TStrengthen.Range* @TStrengthen.Range@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_HIGH$"
+    Bottom:
+        - Row: "$GH2E_Soothsinger2_GRANT_RANGE$ <nobr><sprite name=Range> *BAlly.Range*</nobr>: @BAlly.Range@"
+        - Row: "<size=20%> "
+        - Row: "<b><size=130%>$Move$ <sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
+        - Row: "<size=50%> "
+        - Row: "$GH2E_Soothsinger2_LOW$"

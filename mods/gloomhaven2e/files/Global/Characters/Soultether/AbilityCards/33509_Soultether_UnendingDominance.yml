@@ -1,0 +1,83 @@
+Parser: AbilityCard
+Name: $ABILITY_CARD_UnendingDominance$
+Character: SoultetherID
+ID: 33509
+Level: 1
+Initiative: 22
+# card: Unending Dominance
+# top: recover one lost card (Gloomhaven's RecoverLostCards), Invisible self, then "on the next summon action you
+# perform, any summons summoned by that action gain Invisible": a one-slot persistent trigger on your own ability end
+# (Frosthaven's Shattersong Feedback: DuringActionAbilityOnAbilityEnded, TriggerOnCaster), valid for a summon ability
+# that happened; it gives Invisible to up to two of your summons, picked by you (APPROXIMATION: the engine has no list
+# of "the summons that action summoned"; a summon action summons at most two). Unverified.
+# bottom: Move 2, then grant one of your summons a fixed Move 2 (StrengthIsBase).
+Discard: [Lost,Discard]
+Data:
+    Top:
+        Abilities:
+            TRecover:
+                RecoverLostCards: 1
+                Filter: Self
+                AnimOverload: PowerUp
+            TInvisible:
+                Invisible:
+                    DiamondPlusEnhancements: 1
+                Filter: Self
+                AnimOverload: PowerUp
+            TNextSummon:
+                AddActiveBonus:
+                    Invisible: True
+                    Range: 99
+                    Target: 2
+                    IgnoreLOS: True
+                    Filter: OwnSummon
+                    CanUndo: False
+                    AnimOverload: TargetedBuff
+                Filter: Self
+                AutoTrigger: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DuringActionAbilityOnAbilityEnded
+                    TriggerOnCaster: True
+                    XPTracker: [0]
+                    Vars:
+                        ValidateAbilityHappened: TriggerAbility.AbilityHasHappened
+                        ValidateIsSummon: TriggerAbility.AbilityType == CAbility.EAbilityType.Summon
+                AnimOverload: None
+    Bottom:
+        Abilities:
+            BMove:
+                Move:
+                    Amount: 2
+                    SquareEnhancements: 1
+            BAlly:
+                ControlActor:
+                    Abilities:
+                        BAllyMove:
+                            Move:
+                                Amount: 2
+                                SquareEnhancements: 1
+                            StrengthIsBase: True
+                    ControlActorType: Player
+                Target: 1
+                Range: 99
+                Filter: OwnSummon
+                AnimOverload: ControlSummon
+Layout:
+    Top:
+        - Row: "$FHS_GH2E_Soultether_09_T$"
+        - Row: "<size=20%> "
+        - Row: "<size=150%><sprite name=Invisible>"
+        - Divider:
+        - Active:
+            Ability: TNextSummon
+            Icon: Positive_Summon
+            ListLayout: "$FHS_GH2E_Soultether_09_T2$"
+            Layout: "$FHS_GH2E_Soultether_09_T2$"
+        - Row: "<size=100%> "
+        - XPTracker: TNextSummon
+    Bottom:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=50%> "
+        - Row: "$FHS_GH2E_Soultether_GRANT1$"
+        - Row: "<size=150%><sprite name=Move> *BAllyMove* <size=100%><voffset=1>@BAllyMove@"
