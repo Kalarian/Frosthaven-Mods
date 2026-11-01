@@ -11,6 +11,10 @@ Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
+            # the consume's heal comes first: hung after the grant (ControlActor), switching Light on stopped the game
+            # (CardsActionControlller.RefreshConsumeBar NullReference, "StackedAugmentToNullAbility", 2e rerun 2026-11-01 12:34)
+            TNull:
+                Null: True
             TAlly:
                 ControlActor:
                     Abilities:
@@ -24,8 +28,6 @@ Data:
                 Range: 3
                 Filter: Ally
                 AnimOverload: ControlAlly
-            TNull:
-                Null: True
         Consumes:
             TCLight:
                 Elements: Light

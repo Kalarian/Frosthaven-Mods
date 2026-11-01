@@ -255,6 +255,16 @@ def check_pack(pack):
                                 problems.append(f"{rel}: {half}/{k}: AllTargetsOnMovePath with Range targeting (only adjacent enemies are hit): add Targeting: All")
                         path_targets(v, merged or k.startswith("MergedMove"))
             path_targets(abilities)
+            # a consume's abilities hung on a Null placeholder that comes after a ControlActor in the half: switching the
+            # element on after the controlled figure acted stopped the game (RefreshConsumeBar NullReference, the 2e
+            # Arresting March, 2026-11-01); the placeholder goes before the control
+            names = list(abilities) if isinstance(abilities, dict) else []
+            for c in (h.get("Consumes") or {}).values() if isinstance(h.get("Consumes"), dict) else []:
+                for a in ((c or {}).get("Abilities") or {}).values() if isinstance(c, dict) else []:
+                    p = a.get("ParentName") if isinstance(a, dict) else None
+                    if p in names and isinstance(abilities[p], dict) and (abilities[p].get("Null") or None in abilities[p]) \
+                            and any(isinstance(abilities[n], dict) and "ControlActor" in abilities[n] for n in names[:names.index(p)]):
+                        problems.append(f"{rel}: {half}/{p}: a consume's Null placeholder after a ControlActor (the game stops when the element is switched on): put it first")
             for ab, props in abilities.items():
                 check_ability(rel, f"{half}/{ab}", props, problems, warnings)
                 # a summon's card is drawn from the summon's definition (CreateLayout.CreateSummon throws without it)
