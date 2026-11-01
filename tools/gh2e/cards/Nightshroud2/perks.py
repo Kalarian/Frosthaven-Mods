@@ -23,7 +23,7 @@ PERKS = [
     (2, "Gathering Dark", 'Replace one <sprite name="0"> with one <sprite name="+2"> <sprite name=CreateDark>',
      {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Dark_P2]"}),
     (2, "Torn Veil", 'Replace one <sprite name="+1"> with one <sprite name="0"> "Place one Tear in a hex adjacent to the target"',
-     {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_GH2E_Nightshroud2_Tear_P0]"}),
+     {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_Basic_P1]"}),
     (1, "Unfazed", 'Ignore scenario effects and add two <sprite name="+1">',
      {"CardsToAdd": "[AMC_Basic_P1, AMC_Basic_P1]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
     # the Elementalist's long-rest infusion (gh_crossover ELEMENTALIST_PERKS), Dark only; "may" is automatic

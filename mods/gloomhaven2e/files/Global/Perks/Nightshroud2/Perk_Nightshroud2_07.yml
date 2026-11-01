@@ -5,4 +5,4 @@ Description: PERK_Nightshroud2_07_Desc
 CharacterID: Nightshroud2ID
 Available: 2
 CardsToRemove: [AMC_Basic_P1]
-CardsToAdd: [AMC_GH2E_Nightshroud2_Tear_P0]
+CardsToAdd: [AMC_Basic_P1]

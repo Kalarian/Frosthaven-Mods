@@ -184,6 +184,11 @@ def modifier_abilities(pack, problems):
                "NullHex", "Brittle", "CreateTerrain", "Teleport2", "MoveActiveBonusTracker",
                "CreateLimitedHazardousTerrain", "Kill", "ControlActor"}
     for f in sorted((pack / "files" / "Global" / "AttackModifiers").glob("*.yml")):
+        # a Choose is allowed on a modifier (Frosthaven's AMC_PushOrPull2_R), but our own options inside one were never
+        # proven: the 2e Sedation's self-Disarm option stopped the game ("Invalid targeting type", 2026-11-01)
+        if "Choose" in _modifier_kinds(f):
+            problems.append(f"{f.relative_to(pack).as_posix()}: a Choose on a pack's own attack modifier: an unproven shape "
+                            f"(one stopped the game when drawn); use a Frosthaven modifier, or bench it first")
         for k in sorted(_modifier_kinds(f) - allowed):
             problems.append(f"{f.relative_to(pack).as_posix()}: a {k} ability on an attack modifier card: no modifier of "
                             f"Frosthaven's runs one (the game stops with an error when the card is drawn)")

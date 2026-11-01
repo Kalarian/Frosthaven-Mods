@@ -12,7 +12,7 @@ PERKS = [
     (2, "Mending Light", 'Add two <sprite name="+1"> "<sprite name=Heal> 1, <sprite name=Range> 3"',
      {"CardsToAdd": "[AMC_GH2E_Sunkeeper2_Heal1Range3_P1, AMC_GH2E_Sunkeeper2_Heal1Range3_P1]"}),
     (1, "Second Wind", 'Add one <sprite name="-1"> "You or an adjacent ally may <sprite name=RecoverIcon> one level 1 card from the discard pile"',
-     {"CardsToAdd": "[AMC_GH2E_Sunkeeper2_Recover1_M1]"}),
+     {"CardsToAdd": "[AMC_Basic_P0]"}),
     (1, "Dazzle", 'Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>',
      {"CardsToAdd": "[AMC_Stun_R]"}),
     (1, "Unfazed", 'Ignore scenario effects and add one <sprite name="+1">',

@@ -5,4 +5,4 @@ Description: PERK_Sawbones2_04_Desc
 CharacterID: Sawbones2ID
 Available: 2
 CardsToRemove: [AMC_Basic_P0, AMC_Basic_P0]
-CardsToAdd: [AMC_GH2E_Sawbones2_DisarmStun_P1]
+CardsToAdd: [AMC_Basic_P1]
