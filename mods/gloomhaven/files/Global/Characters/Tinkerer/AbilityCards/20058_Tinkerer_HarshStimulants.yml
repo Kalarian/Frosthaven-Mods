@@ -38,6 +38,7 @@ Data:
                         Range: 1
                         Target: -1
                         Filter: [Ally]
+                        TreatAsNonSubAbility: True
 Layout:
     Top:
         - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"

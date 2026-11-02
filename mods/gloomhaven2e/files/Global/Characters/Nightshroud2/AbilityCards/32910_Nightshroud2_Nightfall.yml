@@ -79,4 +79,4 @@ Layout:
             Layout:
                 - Consume:
                     Name: BCLight
-                    Text: "<sprite name=Heal> 2, <sprite name=CreateDark></size>"
+                    Text: "<sprite name=Heal> 2, <voffset=-1.5><sprite name=CreateDark></voffset></size>"

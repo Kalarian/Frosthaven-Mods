@@ -573,7 +573,10 @@ def _style_items(items):
                     # Frenzy, the user 2026-10-30)
                     # (a voffset in front of the XP stayed behind as an empty item: "Move 2, , XP 1", Bonded Might
                     # bottom, the 2026-11-01 visual review)
-                    t = re.sub(r"</?voffset[^>]*>", "", _SIZES.sub("", c.text()))
+                    # (only a voffset with nothing after it but a comma or the XP: the element icons keep theirs, so the
+                    # released 1st edition consume rows don't move, 2026-11-02)
+                    t = re.sub(r"<voffset[^>]*>\s*(?=,|<sprite name=XP|$)", "", _SIZES.sub("", c.text()))
+                    t = re.sub(r",\s*,", ",", t)
                     xp = re.findall(r"<sprite name=XP\d+>", t)
                     if xp:
                         t = re.sub(r",?\s*<sprite name=XP\d+>\s*,?", " ", t).strip()
