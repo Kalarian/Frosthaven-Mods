@@ -22,6 +22,12 @@ from mechanics import load_yaml  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 FH_DIR = ROOT / "extracted" / "Base" / "Global" / "Characters"
 PACK_DIR = ROOT / "mods" / "gloomhaven" / "files" / "Global" / "Characters"
+PACK_DIR_2E = ROOT / "mods" / "gloomhaven2e" / "files" / "Global" / "Characters"
+
+
+def pack_dir(cls):
+    """The pack folder holding the class: the 2nd edition pack's classes (Bruiser, Cragheart2 ...) live in their own."""
+    return PACK_DIR_2E if (PACK_DIR_2E / cls).exists() else PACK_DIR
 SHOTS = Path(r"C:\Claude\FrosthavenCardShots")
 
 ABILITY_TYPES = {"Attack", "Move", "Heal", "Shield", "Retaliate", "Push", "Pull", "Loot", "Summon", "Infuse", "Damage",
@@ -192,7 +198,7 @@ def fh_halves():
 
 
 def pack_halves(cls):
-    for p in sorted((PACK_DIR / cls / "AbilityCards").glob("*.yml")):
+    for p in sorted((pack_dir(cls) / cls / "AbilityCards").glob("*.yml")):
         yield from load(p, "GH", cls)
 
 
@@ -231,9 +237,13 @@ MODS = r"Range|Target|Push|Pull|Pierce|Jump|Poison|Wound|Stun|Disarm|Immobilize|
 
 def strings():
     out = {}
-    for line in (ROOT / "mods" / "gloomhaven" / "strings.tsv").read_text(encoding="utf-8").splitlines():
-        k, _, v = line.partition("\t")
-        out[k] = v
+    for pack in ("gloomhaven", "gloomhaven2e"):   # both packs' texts (their keys don't overlap: GH_ / GH2E_)
+        f = ROOT / "mods" / pack / "strings.tsv"
+        if not f.exists():
+            continue
+        for line in f.read_text(encoding="utf-8").splitlines():
+            k, _, v = line.partition("\t")
+            out[k] = v
     return out
 
 
