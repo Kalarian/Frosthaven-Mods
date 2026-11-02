@@ -50,13 +50,12 @@ Layout:
             ParentAbility: TAttack
             ActiveBonusLayout: "$FHS_GH2E_Mindthief2_19_T$ <nobr><sprite name=Heal> *TAugmentHeal*,</nobr> <sprite name=Range> *TAugmentHeal.Range*"
             AugmentAbilityLayout:
-                - Row: "<size=125%>$FHS_GH2E_Mindthief2_19_T$, <sprite name=Heal> *TAugmentHeal* <sprite name=Range> *TAugmentHeal.Range*"
+                - Row: "<size=125%>$FHS_GH2E_Mindthief2_19_A$"
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:
                 - Column:
-                    - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-                    - Row: "<sprite name=Disarm>"
+                    - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@ <sprite name=Disarm>"
                 - Column:
     Bottom:
         - Row: "$FHS_GH2E_Mindthief2_CONTROL1$"

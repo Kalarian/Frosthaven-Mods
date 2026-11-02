@@ -784,18 +784,22 @@ FHS_GH2E_Mindthief2_16_B	If you performed the attack ability, perform:
 FHS_GH2E_Mindthief2_17_T	Designate a hex containing an <sprite name=Enemy> within <sprite name=Range> 4 to perform, targeting the <sprite name=Enemy> in the designated hex:
 FHS_GH2E_Mindthief2_17_T2	If the attack ability killed an <sprite name=Enemy>, perform:
 FHS_GH2E_Mindthief2_17_T3	Target all <sprite name=Enemy> adjacent to the designated hex
+FHS_GH2E_Mindthief2_19_A	After the attack: <sprite name=Heal> 2, <sprite name=Range> 2
 FHS_GH2E_Mindthief2_19_T	After each of your melee attack abilities, perform:
 FHS_GH2E_Mindthief2_20_B	All <sprite name=Enemy> moved through gain <sprite name=Poison>
 FHS_GH2E_Mindthief2_21_T	+1<sprite name=Attack> if the target has a negative condition
 FHS_GH2E_Mindthief2_23_B	The controlled <sprite name=Enemy> suffer 1 damage
 FHS_GH2E_Mindthief2_24_B	You may have two AUGMENTS active at once. If you play a third AUGMENT, you must discard either of the other two. If you discard this card and you have two active AUGMENTS, you must discard one.
 FHS_GH2E_Mindthief2_24_T	Control two <sprite name=Enemy> within <sprite name=Range> 4 that are adjacent to each other:
+FHS_GH2E_Mindthief2_25_A	+1 <sprite name=Attack> per negative condition
 FHS_GH2E_Mindthief2_25_B	Designate an unoccupied hex within <sprite name=Range> 4
 FHS_GH2E_Mindthief2_25_B2	Perform this attack as though you occupied the designated hex
 FHS_GH2E_Mindthief2_25_T	+1<sprite name=Attack> to your melee attacks for each negative condition the target has
 FHS_GH2E_Mindthief2_27_B	On your next four melee attacks, add <sprite name=Stun>, <sprite name=Curse> to the attack
 FHS_GH2E_Mindthief2_28_B	Each round, the first of your <sprite name=Allies> who performs a melee attack ability gains the effects of each of your active AUGMENTS for that attack ability
 FHS_GH2E_Mindthief2_28_T	<sprite name=Attack> X, where X is half the Rat King's current hit point value (rounded up)
+FHS_GH2E_Mindthief2_29_A	After: control one target: <sprite name=Attack> 3
+FHS_GH2E_Mindthief2_29_A2	<sprite name=ConsumeDark>: a controlled <sprite name=Enemy> suffers 3
 FHS_GH2E_Mindthief2_29_T	After each of your melee attack abilities, control one target of the attack ability: <sprite name=Attack> 3
 FHS_GH2E_Mindthief2_29_T2	After each of your control abilities, you may <sprite name=ConsumeDark>: one controlled <sprite name=Enemy> suffers 3 damage
 FHS_GH2E_Mindthief2_CONTROL1	Control one <sprite name=Enemy> within <sprite name=Range> 4:

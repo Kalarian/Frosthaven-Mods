@@ -44,3 +44,7 @@ GH2E_Mindthief2_04_A	Add <sprite name=Poison>, <sprite name=Muddle>
 GH2E_Mindthief2_06_A	Add +1 <sprite name=Attack>
 GH2E_Mindthief2_10_A	Single target: <sprite name=Enemy> within 2 hexes
 GH2E_Mindthief2_11_A	Grant one summon: <sprite name=Attack> +0
+GH2E_Mindthief2_19_A	After the attack: <sprite name=Heal> 2, <sprite name=Range> 2
+GH2E_Mindthief2_25_A	+1 <sprite name=Attack> per negative condition
+GH2E_Mindthief2_29_A	After: control one target: <sprite name=Attack> 3
+GH2E_Mindthief2_29_A2	<sprite name=ConsumeDark>: a controlled <sprite name=Enemy> suffers 3
