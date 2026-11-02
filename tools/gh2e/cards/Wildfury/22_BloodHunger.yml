@@ -47,7 +47,6 @@ Data:
                     Duration: Persistent
                     IsAura: True
                     AuraFilter:
-                        TargetType: [OwnSummon]
                         HeroSummonClasses: [WildfuryBearID]
                     AuraTargeting: All
                 AnimOverload: RadialBeneficial
@@ -60,7 +59,6 @@ Data:
                     Duration: Persistent
                     IsAura: True
                     AuraFilter:
-                        TargetType: [OwnSummon]
                         HeroSummonClasses: [WildfuryBearID]
                     AuraTargeting: All
                 SkipAnim: True

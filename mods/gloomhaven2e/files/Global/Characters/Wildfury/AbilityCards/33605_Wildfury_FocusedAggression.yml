@@ -39,7 +39,6 @@ Data:
                         Retaliate: 1
                         UseParentTargets: True
                         Filter:
-                            TargetType: [OwnSummon]
                             HeroSummonClasses: [WildfuryBearID]
                         ActiveBonusDuration: Round
                         SkipAnim: True

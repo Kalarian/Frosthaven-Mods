@@ -49,7 +49,6 @@ Data:
                     XPTracker: [1,0,0,0]
                     IsAura: True
                     AuraFilter:
-                        TargetType: [OwnSummon]
                         HeroSummonClasses: [WildfuryBearID]
                     AuraTargeting: All
                     Vars:

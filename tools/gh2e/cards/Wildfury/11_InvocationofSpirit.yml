@@ -50,7 +50,6 @@ Data:
                     XPTracker: [1,0,0]
                     IsAura: True
                     AuraFilter:
-                        TargetType: [OwnSummon]
                         HeroSummonClasses: [WildfuryBearID]
                     AuraTargeting: All
                 AnimOverload: RadialBeneficial
@@ -72,7 +71,6 @@ Data:
                 ConditionalOverrides:
                     BHealBearCO:
                         Filter:
-                            TargetType: [OwnSummon]
                             HeroSummonClasses: [WildfuryBearID]
                         AbilityOverrides:
                             BHealBearBuff:

@@ -64,7 +64,6 @@ Data:
                                 Attack: +0
                                 Range: +0
                     Filter:
-                        TargetType: [OwnSummon]
                         HeroSummonClasses: [WildfuryBearID]
                     Target: 1
                     Targeting: All
