@@ -709,7 +709,7 @@ FHS_GH2E_Doomstalker2_22_B	Your summons add <sprite name=Wound> to and gain adva
 FHS_GH2E_Doomstalker2_22_T	Gain advantage on your first attack targeting an <sprite name=Enemy> that has <nobr><b><color=#39BEED>Doom</color></b></nobr> each turn
 FHS_GH2E_Doomstalker2_22_T2	All <sprite name=Enemy> lose <sprite name=Invisible> and may no longer gain <sprite name=Invisible>
 FHS_GH2E_Doomstalker2_23_B	Target one <sprite name=Enemy> that has <nobr><b><color=#39BEED>Doom</color></b></nobr> at any range
-FHS_GH2E_Doomstalker2_24_B	Add <sprite name=Immobilize> to your first attack targeting this <sprite name=Enemy>, <nobr>+2 <sprite name=Attack></nobr> to your second and third
+FHS_GH2E_Doomstalker2_24_B	First attack on it: add <sprite name=Immobilize>. Second and third: <nobr>+2 <sprite name=Attack></nobr>
 FHS_GH2E_Doomstalker2_24_T	If this attack kills the target, instead of moving any <nobr><b><color=#39BEED>Doom</color></b></nobr> on the target to your discard pile, you may perform the <nobr><b><color=#39BEED>Doom</color></b></nobr> actions of the cards, targeting an <sprite name=Enemy> within <nobr><sprite name=Range> 3</nobr> of the hex where the <sprite name=Enemy> died
 FHS_GH2E_Doomstalker2_25_B	Your summons focus on this <sprite name=Enemy>. When this <sprite name=Enemy> dies, you and all <sprite name=Allies> may perform <nobr><sprite name=Heal> 3</nobr>.
 FHS_GH2E_Doomstalker2_25_T	After moving for the first time each round, add <nobr>+2 <sprite name=Attack></nobr> to all attacks for the round
