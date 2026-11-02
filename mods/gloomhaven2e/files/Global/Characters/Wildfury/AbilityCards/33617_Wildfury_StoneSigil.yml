@@ -45,7 +45,7 @@ Data:
                 StartAbilityRequirements:
                     Type: ThisAbility
                     Vars:
-                        ValidateAdjacentToBear: AllHeroSummons.Any(obj.Class.ID == "WildfuryBearID" && obj.IsAdjacentTo(TargetingActor))
+                        ValidateAdjacentToBear: AllHeroSummons.Any(obj.Class.ID == "WildfuryBearID" && obj.IsAdjacentTo(Actor))
                 AnimOverload: RangedAttack
         Consumes:
             BCAir:
