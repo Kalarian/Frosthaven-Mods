@@ -19,7 +19,9 @@ namespace FrosthavenMods
     {
         private static bool _reported;
 
-        [HarmonyPatch(typeof(CardsActionControlller), nameof(CardsActionControlller.RefreshConsumeBar))]
+        // (the public three-argument one: a private five-argument overload made the bare name ambiguous and the patch did not
+        // load at all, 2026-11-02: "Ambiguous match", and Infernal Vortex top crashed the 00:43 run the same way)
+        [HarmonyPatch(typeof(CardsActionControlller), nameof(CardsActionControlller.RefreshConsumeBar), new[] { typeof(CActor), typeof(CAbility), typeof(bool) })]
         [HarmonyPrefix]
         private static bool Before(CAbility ability)
         {
