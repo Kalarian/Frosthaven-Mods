@@ -1140,7 +1140,11 @@ def main():
             used_keys.update("GH_" + k for k in re.findall(r'^\s*LocKey:\s*"\$?(\w+)\$?"', blk, re.M))
             blk = re.sub(r'^(\s*LocKey:\s*)"\$?(\w+)\$?"', r'\1"$GH_\2$"', blk, flags=re.M)
             blocks.append(blk)
-        write("Global/Characters/CharacterResources_Gloomhaven.yml", "Parser: CharacterResources\n\n" + "\n".join(blocks))
+        # one file name per pack: both packs wrote CharacterResources_Gloomhaven.yml, so installing the 2nd edition replaced
+        # the 1st edition's file and its Hatchet's Favorite resources were gone (2026-11-02 00:53: The Favorite top stopped
+        # the game, "Scenario Rule Library", CCharacterResource with no data)
+        res_file = "CharacterResources_Gloomhaven2e.yml" if EDITION == 2 else "CharacterResources_Gloomhaven.yml"
+        write(f"Global/Characters/{res_file}", "Parser: CharacterResources\n\n" + "\n".join(blocks))
         print(f"character resources: {', '.join(resources)}")
 
     table = {}
