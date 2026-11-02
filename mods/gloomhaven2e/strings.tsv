@@ -767,12 +767,16 @@ FHS_GH2E_Mindthief2_01_T	+1<sprite name=Attack> for each negative condition the 
 FHS_GH2E_Mindthief2_02_B	If you have not moved this round, perform:
 FHS_GH2E_Mindthief2_02_B2	You cannot perform move abilities this round. At the end of the round, lose <sprite name=Invisible>
 FHS_GH2E_Mindthief2_02_T	If the attack ability killed an <sprite name=Enemy>, perform:
+FHS_GH2E_Mindthief2_04_A	Add <sprite name=Poison>, <sprite name=Muddle>
 FHS_GH2E_Mindthief2_04_T	Add <sprite name=Poison>, <sprite name=Muddle> to all your melee attacks
+FHS_GH2E_Mindthief2_06_A	+1<sprite name=Attack>
 FHS_GH2E_Mindthief2_06_T	+1<sprite name=Attack> to all your melee attacks
 FHS_GH2E_Mindthief2_07_T	If this attack does not kill the target, gain a money token
 FHS_GH2E_Mindthief2_08_T	+2<sprite name=Attack> and gain <sprite name=XP1> for each negative condition the target has
+FHS_GH2E_Mindthief2_10_A	Single target: <sprite name=Enemy> within 2 hexes
 FHS_GH2E_Mindthief2_10_B	Add <sprite name=Curse> to all your melee attacks this round
 FHS_GH2E_Mindthief2_10_T	Your single-target melee attack abilities may target <sprite name=Enemy> within 2 hexes
+FHS_GH2E_Mindthief2_11_A	Grant one summon: <sprite name=Attack> +0
 FHS_GH2E_Mindthief2_11_B	If you end this movement in the same hex as you start, all <sprite name=Enemy> moved through gain <sprite name=Muddle>
 FHS_GH2E_Mindthief2_11_T	After each of your melee attack abilities, grant one of your summons:
 FHS_GH2E_Mindthief2_15_B	Place a character token on a normal or elite <sprite name=Enemy> within <sprite name=Range> 4. This round, during that <sprite name=Enemy>'s turn, it treats its enemies as <sprite name=Allies> and its allies as <sprite name=Enemy>, with you controlling its abilities.

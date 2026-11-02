@@ -56,14 +56,13 @@ Layout:
             ParentAbility: TAttack
             ActiveBonusLayout: "$FHS_GH2E_Mindthief2_11_T$ <sprite name=Attack> +0"
             AugmentAbilityLayout:
-                - Row: "<size=125%>$FHS_GH2E_Mindthief2_11_T$, <sprite name=Attack> +0"
+                - Row: "<size=125%>$FHS_GH2E_Mindthief2_11_A$"
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:
                 - Column:
                     - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-                    - Row: "$FHS_GH2E_Mindthief2_GRANTSUMMON$"
-                    - Row: "<size=150%><sprite name=Move> +0"
+                    - Row: "$FHS_GH2E_Mindthief2_GRANTSUMMON$ <sprite name=Move> +0"
                 - Column:
     Bottom:
         - Row:

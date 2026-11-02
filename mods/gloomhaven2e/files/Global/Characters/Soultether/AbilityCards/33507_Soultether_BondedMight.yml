@@ -51,6 +51,6 @@ Layout:
             Layout:
                 - Consume:
                     Name: BCAir
-                    Text: "<sprite name=Move> 2, <voffset=1>, <sprite name=XP1>"
+                    Text: "<sprite name=Move> 2, <sprite name=XP1>"
         - Divider:
         - Row: "<size=150%><sprite name=Loot> *BLoot*"

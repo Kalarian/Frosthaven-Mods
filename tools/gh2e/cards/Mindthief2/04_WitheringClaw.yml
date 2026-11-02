@@ -42,7 +42,7 @@ Layout:
             ParentAbility: TAttack
             ActiveBonusLayout: "$GH2E_Mindthief2_04_T$"
             AugmentAbilityLayout:
-                - Row: "$GH2E_Mindthief2_04_T$"
+                - Row: "<size=125%>$GH2E_Mindthief2_04_A$"
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:

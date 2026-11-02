@@ -49,14 +49,13 @@ Layout:
             ParentAbility: TAttack
             ActiveBonusLayout: "$GH2E_Mindthief2_06_T$"
             AugmentAbilityLayout:
-                - Row: "$GH2E_Mindthief2_06_T$"
+                - Row: "<size=125%>$GH2E_Mindthief2_06_A$"
             NormalContentLayout:
                 - ColumnWidths: "20,60,20"
                 - Column:
                 - Column:
                     - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
-                    - Row: "$GH2E_Mindthief2_CONTROLTARGET$"
-                    - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@"
+                    - Row: "$GH2E_Mindthief2_CONTROLTARGET$ <sprite name=Attack> *EnemyWillDoThis*"
                 - Column:
                     - XP: 1
     Bottom:
