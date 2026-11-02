@@ -766,31 +766,25 @@ def empty_step_consumes(s, warn=None):
                 new += shift(body_of(ca, cb, n), 4)
                 changed += 1
             elif len(elems) > 1:
-                for k in range(len(elems)):
-                    sfx = "" if k == 0 else f"_{k + 1}"
-                    new.append(f"            {n}Pick{k + 1}:")
-                    new.append("                Choose:")
-                    new.append("                    Abilities:")
-                    for cn, ca, cb in elems:
-                        bd = body_of(ca, cb, n)
-                        els = re.findall(r"\w+", (scalar(bd, "Elements") or "").replace("Elements", ""))
-                        if sfx:   # names stay unique on the card (the layout finds each consume by its name)
-                            bd = [re.sub(r"^( {20})(\w+):(\s*)$", lambda m: m.group(1) + m.group(2) + sfx + ":" + m.group(3), l) for l in bd]
-                        if k == 0:
-                            choose_layout[cn] = els
-                        new.append(f"                        {cn}{sfx}:")
-                        new.append("                            Consume:")
-                        new += shift(bd, 16)
-                        if els:
-                            new.append("                            StartAbilityRequirements:")
-                            new.append("                                Type: ThisAbility")
-                            new.append("                                Vars:")
-                            new.append("                                    ValidateElement: " + " && ".join(f"CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.{e})" for e in els))
-                    new.append("                Filter: Self")
-                    if k > 0:
-                        new.append("                StartAbilityRequirements:")
-                        new.append("                    Type: PreviousAbility")
-                        new.append("                    AbilityHasHappened: True")
+                # several: Frosthaven's element selector (the user, 2026-11-02, after manual test 44: "replace the class
+                # icon with the element selector, display the available elements, select, confirm, perform; repeat until
+                # no elements are left"). One Consume step per element, named as its consume (the card text finds each),
+                # marked GHElementPicker: the plugin gives each marked step every consume of the group and the picker. A
+                # step comes only while one of the group's elements is on the board
+                allels = []
+                for cn, ca, cb in elems:
+                    allels += [e for e in re.findall(r"\w+", (scalar(body_of(ca, cb, n), "Elements") or "")) if e not in allels]
+                anyel = " || ".join(f"CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.{e})" for e in allels)
+                for cn, ca, cb in elems:
+                    new.append(f"            {cn}:")
+                    new.append("                Consume:")
+                    new += shift(body_of(ca, cb, n), 4)
+                    new.append("                MiscVars:")
+                    new.append("                    GHElementPicker: True")
+                    new.append("                StartAbilityRequirements:")
+                    new.append("                    Type: ThisAbility")
+                    new.append("                    Vars:")
+                    new.append("                        ValidateAnyElement: " + anyel)
                     changed += 1
             edits.append((a, b, new))
         gone = {cn for v in by_empty.values() for cn, _, _ in v}

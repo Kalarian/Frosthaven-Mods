@@ -52,63 +52,33 @@ Data:
                 Move:
                     Amount: 2
                     CircleEnhancements: 1
-            BNullPick1:
-                Choose:
+            BCIce:
+                Consume:
+                    Elements: Ice
                     Abilities:
-                        BCIce:
-                            Consume:
-                                Elements: Ice
-                                Abilities:
-                                    BCIceHeal:
-                                        Heal: 2
-                                        Filter: Self
-                            StartAbilityRequirements:
-                                Type: ThisAbility
-                                Vars:
-                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Ice)
-                        BCEarth:
-                            Consume:
-                                Elements: Earth
-                                Abilities:
-                                    BCEarthShield:
-                                        Shield: 1
-                                        Filter: Self
-                                        ActiveBonusDuration: Round
-                            StartAbilityRequirements:
-                                Type: ThisAbility
-                                Vars:
-                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Earth)
-                Filter: Self
-            BNullPick2:
-                Choose:
-                    Abilities:
-                        BCIce_2:
-                            Consume:
-                                Elements: Ice
-                                Abilities:
-                                    BCIceHeal_2:
-                                        Heal: 2
-                                        Filter: Self
-                            StartAbilityRequirements:
-                                Type: ThisAbility
-                                Vars:
-                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Ice)
-                        BCEarth_2:
-                            Consume:
-                                Elements: Earth
-                                Abilities:
-                                    BCEarthShield_2:
-                                        Shield: 1
-                                        Filter: Self
-                                        ActiveBonusDuration: Round
-                            StartAbilityRequirements:
-                                Type: ThisAbility
-                                Vars:
-                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Earth)
-                Filter: Self
+                        BCIceHeal:
+                            Heal: 2
+                            Filter: Self
+                MiscVars:
+                    GHElementPicker: True
                 StartAbilityRequirements:
-                    Type: PreviousAbility
-                    AbilityHasHappened: True
+                    Type: ThisAbility
+                    Vars:
+                        ValidateAnyElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Ice) || CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Earth)
+            BCEarth:
+                Consume:
+                    Elements: Earth
+                    Abilities:
+                        BCEarthShield:
+                            Shield: 1
+                            Filter: Self
+                            ActiveBonusDuration: Round
+                MiscVars:
+                    GHElementPicker: True
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateAnyElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Ice) || CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Earth)
         Consumes:
             BCFire:
                 Elements: Fire
