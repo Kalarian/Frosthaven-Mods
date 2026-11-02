@@ -32,21 +32,22 @@ Data:
                 Move:
                     Amount: 3
                     CircleEnhancements: 1
-        Consumes:
             BCDamage:
-                CostAbility:
-                    ParentName: BMove
-                    Damage: 2
-                    Filter: Self
-                Infuse: Fire
-                Abilities:
+                Damage: 2
+                Filter: Self
+                CanSkip: True
+                Infuse: [Fire]
+                SubAbilities:
                     BCDamageStun:
-                        ParentName: BMove
                         Stun: True
                         Range: 1
                         Target: 1
                         Filter: Enemy
                         AnimOverload: AdjacentShove
+                        TreatAsNonSubAbility: True
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            AbilityHasHappened: True
 Layout:
     Top:
         - Row:
@@ -61,8 +62,4 @@ Layout:
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
-        - Conditional:
-            Layout:
-                - Consume:
-                    Name: BCDamage
-                    Text: "$FHS_GH2E_Berserker2_14_B$"
+        - Row: "$FHS_GH2E_Berserker2_14_B$"

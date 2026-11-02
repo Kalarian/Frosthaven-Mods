@@ -629,6 +629,8 @@ def empty_step_consumes(s, warn=None):
     if data is None:
         return s
     edits = []   # (first, last, replacement lines), applied bottom-up
+    cost_layout = set()   # cost consumes made steps: their layout rows become plain rows
+    choose_layout = {}   # consumes made Choose options: their rows drawn by hand (Frosthaven's ConsumeButton threw on them)
     for half, h0, h1 in blocks(data + 1, len(lines), 4):
         parts = {n: (a, b) for n, a, b in blocks(h0 + 1, h1, 8)}
         if "Abilities" not in parts or "Consumes" not in parts:
@@ -638,45 +640,160 @@ def empty_step_consumes(s, warn=None):
         nulls = {n for n, a, b in abil if [l.strip() for l in lines[a + 1:b] if l.strip()] == ["Null: True"]}
         if not nulls:
             continue
-        moved = {}   # empty step -> [consume blocks]
-        real = [n for n, a, b in abil if n not in nulls]
+        # the empty steps' consumes, sorted by kind: an element consume becomes a Consume step (several on one empty step:
+        # a chain of Choose steps, the user, 2026-11-02, manual test 44: "in the physical game, the user can choose to do
+        # them in any order"); a consume paid with a cost becomes a skippable cost step whose abilities run only when the
+        # cost was paid (manual test 46: on the move's bar the option went away with the move, and the stun never came)
+        by_empty = {}
         for n, a, b in cons:
-            body = eol.join(lines[a:b])
-            parents = set(re.findall(r"ParentName:\s*(\w+)", body))
+            parents = set(re.findall(r"ParentName:\s*(\w+)", eol.join(lines[a:b])))
             if len(parents) == 1 and parents <= nulls:
-                # a consume paid with a cost, not an element (Numb the Pain bottom: "suffer 2 damage: stun an adjacent
-                # enemy"): Frosthaven offers no cost on a Consume step (bench 2026-11-02: no slot, confirm dark), only
-                # on a card-level consume of a real step (Deathwalker's "remove a shadow"). It stays a card-level
-                # consume, moved to the half's real step beside the empty one (the one before, else the one after):
-                # chosen on the bar during that step, its abilities run after it
-                if "CostAbility:" in body and real:
-                    empty = next(iter(parents))
-                    names = [x for x, _, _ in abil]
-                    before = [x for x in names[:names.index(empty)] if x in real]
-                    host = before[-1] if before else next(x for x in names[names.index(empty) + 1:] if x in real)
-                    for i in range(a, b):
-                        lines[i] = re.sub(rf"(ParentName:\s*){empty}(\s*)$", lambda m: m.group(1) + host + m.group(2), lines[i])
-                    changed += 1
-                    continue
-                moved.setdefault(parents.pop(), []).append((n, a, b))
-        # an empty step no consume points at any more goes
-        still = set(re.findall(r"ParentName:\s*(\w+)", eol.join(lines[parts["Consumes"][0]:parts["Consumes"][1]])))
-        for n, a, b in abil:
-            if n in nulls and n not in moved and n not in still:
-                edits.append((a, b, []))
-        if not moved:
+                by_empty.setdefault(next(iter(parents)), []).append((n, a, b))
+        if not by_empty:
             continue
+
+        def body_of(ca, cb, empty):
+            return [l for l in lines[ca + 1:cb] if not re.match(rf"^\s*ParentName:\s*{empty}\s*$", l)]
+
+        def shift(ls, by):
+            return [(" " * by + l) if l.strip() else l for l in ls] if by >= 0 else [l[-by:] if l.strip() else l for l in ls]
+
+        def keyed(body, key, indent=16):
+            """The lines of one key's block (the key line and its children) in a consume body."""
+            out, on = [], False
+            for l in body:
+                ind = len(l) - len(l.lstrip(" "))
+                if l.strip() and ind == indent:
+                    on = l.strip().startswith(key + ":")
+                if on:
+                    out.append(l)
+            return out
+
+        def abilities(body):
+            """[(name, [property lines at indent 24])] of a consume body's Abilities."""
+            blk = keyed(body, "Abilities")[1:]
+            out = []
+            for l in blk:
+                if re.match(r"^ {20}\w+:\s*$", l):
+                    out.append((l.strip()[:-1], []))
+                elif out and l.strip():
+                    out[-1][1].append(l)
+            return out
+
+        def scalar(body, key):
+            m = next((re.match(rf"^ {{16}}{key}:\s*(.+?)\s*$", l) for l in body if re.match(rf"^ {{16}}{key}:", l)), None)
+            return m.group(1) if m else None
+
+        def cost_step(name, body, base, then=None):
+            """A skippable cost step at indent base: the cost ability's own lines, XP/Infuse, and its abilities as subs
+            that need the cost paid; 'then' (the lines of a next step, at indent base + 8) rides as its last sub."""
+            pad = " " * base
+            out = [f"{pad}{name}:"]
+            out += shift(keyed(body, "CostAbility")[1:], base + 4 - 20)
+            out.append(f"{pad}    CanSkip: True")
+            xp, infuse = scalar(body, "XP"), scalar(body, "Infuse")
+            if xp:
+                out.append(f"{pad}    AbilityXP: {xp}")
+            if infuse:
+                out.append(f"{pad}    Infuse: {infuse if infuse.startswith('[') else '[' + infuse + ']'}")
+            subs = abilities(body)
+            if subs or then:
+                out.append(f"{pad}    SubAbilities:")
+            for sn, props in subs:
+                out.append(f"{pad}        {sn}:")
+                out += shift(props, base + 12 - 24)
+                out.append(f"{pad}            TreatAsNonSubAbility: True")
+                out.append(f"{pad}            StartAbilityRequirements:")
+                out.append(f"{pad}                Type: SubAbility")
+                out.append(f"{pad}                AbilityHasHappened: True")
+            if then:
+                out += then
+            return out
+
         for n, a, b in abil:
-            if n not in moved:
+            if n not in by_empty:
                 continue
+            group = by_empty[n]
+            costs = [(cn, ca, cb) for cn, ca, cb in group if "CostAbility:" in eol.join(lines[ca:cb])]
+            elems = [(cn, ca, cb) for cn, ca, cb in group if (cn, ca, cb) not in costs]
             new = []
-            for cn, ca, cb in moved[n]:
+            # the cost consumes: one step each; a cost group (Burning Hatred: suffer 2, 5 or 9 damage for one, two or
+            # three repeats) a chain, each next step paying the difference for the abilities the bigger option adds
+            bodies = [(cn, body_of(ca, cb, n)) for cn, ca, cb in costs]
+            dmg = [scalar(keyed(bd, "CostAbility"), "Damage") if False else next((re.match(r"^\s*Damage:\s*(\d+)\s*$", l).group(1) for l in keyed(bd, "CostAbility") if re.match(r"^\s*Damage:\s*(\d+)\s*$", l)), None) for _, bd in bodies]
+            chained = len(bodies) > 1 and any(scalar(bd, "ConsumeGroup") for _, bd in bodies) and all(d is not None for d in dmg)
+            if chained:
+                order = sorted(range(len(bodies)), key=lambda i: int(dmg[i]))
+                prev_n, prev_d, then = 0, 0, None
+                steps = []
+                for i in order:
+                    cn, bd = bodies[i]
+                    subs = abilities(bd)
+                    extra = subs[prev_n:]
+                    d = int(dmg[i])
+                    steps.append((cn, bd, extra, d - prev_d))
+                    prev_n, prev_d = len(subs), d
+                # built from the last: each step's lines sit 8 deeper than the one before
+                then = None
+                for k in range(len(steps) - 1, -1, -1):
+                    cn, bd, extra, d = steps[k]
+                    base = 12 + 8 * k
+                    cost = [re.sub(r"(Damage:\s*)\d+", lambda m: m.group(1) + str(d), l) for l in keyed(bd, "CostAbility")]
+                    xp_infuse = [l for l in bd if re.match(r"^ {16}(XP|Infuse):", l)]
+                    abil_lines = ["                Abilities:"] + [x for sn, props in extra for x in ([f"                    {sn}:"] + props)]
+                    fake = cost + xp_infuse + abil_lines
+                    step = cost_step(cn, fake, base, then)
+                    if k > 0:
+                        step[0:0] = []
+                        step.insert(1, " " * base + "    TreatAsNonSubAbility: True")
+                        step.insert(2, " " * base + "    StartAbilityRequirements:")
+                        step.insert(3, " " * base + "        Type: SubAbility")
+                        step.insert(4, " " * base + "        AbilityHasHappened: True")
+                    then = step
+                new += then
+                changed += len(steps)
+            else:
+                for cn, bd in bodies:
+                    new += cost_step(cn, bd, 12)
+                    changed += 1
+            if costs:
+                cost_layout.update(cn for cn, _, _ in costs)
+            # the element consumes: one Consume step, or a chain of Choose steps over all of them
+            if len(elems) == 1:
+                cn, ca, cb = elems[0]
                 new.append(f"            {cn}:")
                 new.append("                Consume:")
-                new += ["    " + l if l.strip() else l for l in lines[ca + 1:cb] if not re.match(rf"^\s*ParentName:\s*{n}\s*$", l)]
+                new += shift(body_of(ca, cb, n), 4)
                 changed += 1
+            elif len(elems) > 1:
+                for k in range(len(elems)):
+                    sfx = "" if k == 0 else f"_{k + 1}"
+                    new.append(f"            {n}Pick{k + 1}:")
+                    new.append("                Choose:")
+                    new.append("                    Abilities:")
+                    for cn, ca, cb in elems:
+                        bd = body_of(ca, cb, n)
+                        els = re.findall(r"\w+", (scalar(bd, "Elements") or "").replace("Elements", ""))
+                        if sfx:   # names stay unique on the card (the layout finds each consume by its name)
+                            bd = [re.sub(r"^( {20})(\w+):(\s*)$", lambda m: m.group(1) + m.group(2) + sfx + ":" + m.group(3), l) for l in bd]
+                        if k == 0:
+                            choose_layout[cn] = els
+                        new.append(f"                        {cn}{sfx}:")
+                        new.append("                            Consume:")
+                        new += shift(bd, 16)
+                        if els:
+                            new.append("                            StartAbilityRequirements:")
+                            new.append("                                Type: ThisAbility")
+                            new.append("                                Vars:")
+                            new.append("                                    ValidateElement: " + " && ".join(f"CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.{e})" for e in els))
+                    new.append("                Filter: Self")
+                    if k > 0:
+                        new.append("                StartAbilityRequirements:")
+                        new.append("                    Type: PreviousAbility")
+                        new.append("                    AbilityHasHappened: True")
+                    changed += 1
             edits.append((a, b, new))
-        gone = {cn for v in moved.values() for cn, _, _ in v}
+        gone = {cn for v in by_empty.values() for cn, _, _ in v}
         left = [x for x in cons if x[0] not in gone]
         ca0, ca1 = parts["Consumes"]
         if left:
@@ -687,8 +804,27 @@ def empty_step_consumes(s, warn=None):
             edits.append((ca0, ca1, []))
     for a, b, new in sorted(edits, key=lambda e: -e[0]):
         lines[a:b] = new
+    # a cost consume's layout row ("Consume: Name: ..."): no consume of that name is left, the row is plain text
+    for cn in cost_layout:
+        layout = re.sub(rf"^( *)- Consume:\s*\r?\n +Name: {cn}\s*\r?\n +Text: (.*)$", lambda m: m.group(1) + "- Row: " + m.group(2), layout, flags=re.M)
+    # a consume made a Choose option: the card's ConsumeButton found no consume data for it and the hand threw ("Could
+    # not process updating cards", the error screen, 2026-11-02 bench), so its row is drawn by hand as Frosthaven's own
+    # Consume-step cards draw theirs (Crashing Tide's Sharp Chitin: "<sprite name=ConsumeLight>: ...")
+    def _hand_row(m, els):
+        ind, body = m.group(1), m.group(2)
+        icons = "".join(f"<sprite name=Consume{e}>" for e in els)
+        sm = re.match(r'^\s*"(.*)"\s*$', body.split("\n")[0].replace("\r", ""))
+        if sm and "\n" not in body.strip():
+            txt = sm.group(1)
+        else:
+            lm = re.search(r'ListLayout:\s*"(.*?)"', body)
+            txt = lm.group(1) if lm else ""
+        return f'{ind}- Row: "<size=130%>{icons}</size>: {txt}"'
+    for cn, els in choose_layout.items():
+        pat = rf"^( *)- Consume:\s*\r?\n +Name: {cn}\s*\r?\n +Text:((?: .*)?(?:\r?\n\1 {{4,}}.*)*)"
+        layout = re.sub(pat, lambda m, els=els: _hand_row(m, els), layout, flags=re.M)
     if changed and warn:
-        warn(f"{changed} consume(s) on an empty step made Consume steps")
+        warn(f"{changed} consume(s) on an empty step made steps")
     return eol.join(lines) + sep + layout
 
 

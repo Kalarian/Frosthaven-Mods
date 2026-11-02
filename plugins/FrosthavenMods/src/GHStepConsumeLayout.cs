@@ -36,7 +36,12 @@ namespace FrosthavenMods
                 if (linkedAbilities == null || filename == null) return;
                 Match m = PackCard.Match(filename.Replace('\\', '/'));
                 if (!m.Success || !int.TryParse(m.Groups[1].Value, out int id) || id < 20000 || id >= 40000) return;
-                var steps = linkedAbilities.OfType<CAbilityConsume>().SelectMany(c => c.Consumes ?? new List<AbilityConsume>()).Where(c => c != null).ToList();
+                // the Consume steps, at the top level or as the options of a Choose step (several consumes on one Gloomhaven
+                // empty step: a chain of Choose steps over them, Ethereal Manifestation bottom)
+                var all = new List<CAbility>(linkedAbilities);
+                foreach (CAbilityChooseAbility ch in linkedAbilities.OfType<CAbilityChooseAbility>())
+                    if (ch.ChooseAbilities != null) all.AddRange(ch.ChooseAbilities);
+                var steps = all.OfType<CAbilityConsume>().SelectMany(c => c.Consumes ?? new List<AbilityConsume>()).Where(c => c != null).ToList();
                 if (steps.Count == 0) return;
                 var list = consumes != null ? new List<AbilityConsume>(consumes) : new List<AbilityConsume>();
                 int added = 0;

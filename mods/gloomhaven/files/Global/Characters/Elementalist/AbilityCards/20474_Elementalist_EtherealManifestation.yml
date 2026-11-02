@@ -14,36 +14,215 @@ Data:
         XP: 1
     Bottom:
         Abilities:
-            BCFire:
-                Consume:
-                    Elements: Fire
+            BNullPick1:
+                Choose:
                     Abilities:
-                        BCAttack:
-                            Attack: 3
-                            Range: 3
-                            Filter: Enemy
-                            AnimOverload: TargetFloorFireIce
-            BCAir:
-                Consume:
-                    Elements: Air             
+                        BCFire:
+                            Consume:
+                                Elements: Fire
+                                Abilities:
+                                    BCAttack:
+                                        Attack: 3
+                                        Range: 3
+                                        Filter: Enemy
+                                        AnimOverload: TargetFloorFireIce
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Fire)
+                        BCAir:
+                            Consume:
+                                Elements: Air             
+                                Abilities:
+                                    BCMove:
+                                        Move: 3
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Air)
+                        BCIce:
+                            Consume:
+                                Elements: Ice
+                                Abilities:
+                                    BCLoot:
+                                        Loot: 1
+                                        Target: -1
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Ice)
+                        BCEarth:
+                            Consume:
+                                Elements: Earth
+                                Abilities:
+                                    BCHeal:
+                                        Heal: 3
+                                        Range: 3
+                                        Filter: [Self, Ally]
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Earth)
+                Filter: Self
+            BNullPick2:
+                Choose:
                     Abilities:
-                        BCMove:
-                            Move: 3
-            BCIce:
-                Consume:
-                    Elements: Ice
+                        BCFire_2:
+                            Consume:
+                                Elements: Fire
+                                Abilities:
+                                    BCAttack_2:
+                                        Attack: 3
+                                        Range: 3
+                                        Filter: Enemy
+                                        AnimOverload: TargetFloorFireIce
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Fire)
+                        BCAir_2:
+                            Consume:
+                                Elements: Air             
+                                Abilities:
+                                    BCMove_2:
+                                        Move: 3
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Air)
+                        BCIce_2:
+                            Consume:
+                                Elements: Ice
+                                Abilities:
+                                    BCLoot_2:
+                                        Loot: 1
+                                        Target: -1
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Ice)
+                        BCEarth_2:
+                            Consume:
+                                Elements: Earth
+                                Abilities:
+                                    BCHeal_2:
+                                        Heal: 3
+                                        Range: 3
+                                        Filter: [Self, Ally]
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Earth)
+                Filter: Self
+                StartAbilityRequirements:
+                    Type: PreviousAbility
+                    AbilityHasHappened: True
+            BNullPick3:
+                Choose:
                     Abilities:
-                        BCLoot:
-                            Loot: 1
-                            Target: -1
-            BCEarth:
-                Consume:
-                    Elements: Earth
+                        BCFire_3:
+                            Consume:
+                                Elements: Fire
+                                Abilities:
+                                    BCAttack_3:
+                                        Attack: 3
+                                        Range: 3
+                                        Filter: Enemy
+                                        AnimOverload: TargetFloorFireIce
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Fire)
+                        BCAir_3:
+                            Consume:
+                                Elements: Air             
+                                Abilities:
+                                    BCMove_3:
+                                        Move: 3
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Air)
+                        BCIce_3:
+                            Consume:
+                                Elements: Ice
+                                Abilities:
+                                    BCLoot_3:
+                                        Loot: 1
+                                        Target: -1
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Ice)
+                        BCEarth_3:
+                            Consume:
+                                Elements: Earth
+                                Abilities:
+                                    BCHeal_3:
+                                        Heal: 3
+                                        Range: 3
+                                        Filter: [Self, Ally]
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Earth)
+                Filter: Self
+                StartAbilityRequirements:
+                    Type: PreviousAbility
+                    AbilityHasHappened: True
+            BNullPick4:
+                Choose:
                     Abilities:
-                        BCHeal:
-                            Heal: 3
-                            Range: 3
-                            Filter: [Self, Ally]
+                        BCFire_4:
+                            Consume:
+                                Elements: Fire
+                                Abilities:
+                                    BCAttack_4:
+                                        Attack: 3
+                                        Range: 3
+                                        Filter: Enemy
+                                        AnimOverload: TargetFloorFireIce
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Fire)
+                        BCAir_4:
+                            Consume:
+                                Elements: Air             
+                                Abilities:
+                                    BCMove_4:
+                                        Move: 3
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Air)
+                        BCIce_4:
+                            Consume:
+                                Elements: Ice
+                                Abilities:
+                                    BCLoot_4:
+                                        Loot: 1
+                                        Target: -1
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Ice)
+                        BCEarth_4:
+                            Consume:
+                                Elements: Earth
+                                Abilities:
+                                    BCHeal_4:
+                                        Heal: 3
+                                        Range: 3
+                                        Filter: [Self, Ally]
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Earth)
+                Filter: Self
+                StartAbilityRequirements:
+                    Type: PreviousAbility
+                    AbilityHasHappened: True
 Layout:
     Top:
         - Active:
@@ -59,26 +238,10 @@ Layout:
         - Row:
             - ColumnWidths: "55, 45"
             - Column:
-                - Conditional:
-                    Layout:
-                        - Consume:
-                            Name: BCFire
-                            Text: "<nobr><sprite name=Attack> 3</nobr> <nobr><sprite name=Range> 3</nobr>"
+                - Row: "<sprite name=ConsumeFire>: "
                 - Row: "<size=20%> "
-                - Conditional:
-                    Layout:
-                        - Consume:
-                            Name: BCAir
-                            Text: "<nobr><sprite name=Move> 3</nobr>"
+                - Row: "<sprite name=ConsumeAir>: "
             - Column:
-                - Conditional:
-                    Layout:
-                        - Consume:
-                            Name: BCIce
-                            Text: "<nobr><sprite name=Loot> 1</nobr>"
+                - Row: "<sprite name=ConsumeIce>: "
                 - Row: "<size=20%> "
-                - Conditional:
-                    Layout:
-                        - Consume:
-                            Name: BCEarth
-                            Text: "<nobr><sprite name=Heal> 3</nobr> <nobr><sprite name=Range> 3</nobr>"
+                - Row: "<sprite name=ConsumeEarth>: "

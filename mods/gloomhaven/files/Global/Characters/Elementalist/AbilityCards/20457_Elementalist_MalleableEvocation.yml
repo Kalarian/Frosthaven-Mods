@@ -52,21 +52,63 @@ Data:
                 Move:
                     Amount: 2
                     CircleEnhancements: 1
-            BCIce:
-                Consume:
-                    Elements: Ice
+            BNullPick1:
+                Choose:
                     Abilities:
-                        BCIceHeal:
-                            Heal: 2
-                            Filter: Self
-            BCEarth:
-                Consume:
-                    Elements: Earth
+                        BCIce:
+                            Consume:
+                                Elements: Ice
+                                Abilities:
+                                    BCIceHeal:
+                                        Heal: 2
+                                        Filter: Self
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Ice)
+                        BCEarth:
+                            Consume:
+                                Elements: Earth
+                                Abilities:
+                                    BCEarthShield:
+                                        Shield: 1
+                                        Filter: Self
+                                        ActiveBonusDuration: Round
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Earth)
+                Filter: Self
+            BNullPick2:
+                Choose:
                     Abilities:
-                        BCEarthShield:
-                            Shield: 1
-                            Filter: Self
-                            ActiveBonusDuration: Round
+                        BCIce_2:
+                            Consume:
+                                Elements: Ice
+                                Abilities:
+                                    BCIceHeal_2:
+                                        Heal: 2
+                                        Filter: Self
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Ice)
+                        BCEarth_2:
+                            Consume:
+                                Elements: Earth
+                                Abilities:
+                                    BCEarthShield_2:
+                                        Shield: 1
+                                        Filter: Self
+                                        ActiveBonusDuration: Round
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateElement: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Earth)
+                Filter: Self
+                StartAbilityRequirements:
+                    Type: PreviousAbility
+                    AbilityHasHappened: True
         Consumes:
             BCFire:
                 Elements: Fire
@@ -128,11 +170,7 @@ Layout:
                             Name: BCFire
                             Text: "<nobr>+3 <sprite name=Move></nobr>"
                 - Row: "<size=20%> "
-                - Conditional:
-                    Layout:
-                        - Consume:
-                            Name: BCIce
-                            Text: "<nobr><sprite name=Heal> 2</nobr>"
+                - Row: "<sprite name=ConsumeIce>: "
             - Column:
                 - Conditional:
                     Layout:
@@ -140,12 +178,4 @@ Layout:
                             Name: BCAir
                             Text: "<nobr><sprite name=Jump></nobr>"
                 - Row: "<size=20%> "
-                - Consume:
-                    Name: BCEarth
-                    Text:
-                        - Active:
-                            Ability: BCEarthShield
-                            Icon: Positive_Shield
-                            ListLayout: "<nobr><sprite name=Shield> 1</nobr>"
-                            Layout:
-                                - Row: "<nobr><sprite name=Shield> 1</nobr>"
+                - Row: "<sprite name=ConsumeEarth>: <nobr><sprite name=Shield> 1</nobr>"
