@@ -1012,9 +1012,34 @@ namespace FrosthavenMods
                 if (sc.SummonR == null || !(sc.SummonR.transform is RectTransform cell)) continue;
                 float room = cell.rect.height;
                 if (room <= 1f) continue;
-                foreach (TMP_Text t in sc.SummonR.GetComponentsInChildren<TMP_Text>(true))
+                // the "Summon ..." title's bottom edge: the cell reaches up beside the title, and a long text ran over it
+                // (Deadly Mischief 2026-11-02 09:54: auto-size alone kept "Whenever this" on "Imp", the text fitting its cell)
+                var parts = new HashSet<TMP_Text>(sc.SummonR.GetComponentsInChildren<TMP_Text>(true));
+                TMP_Text title = sc.GetComponentsInChildren<TMP_Text>(true).FirstOrDefault(x => !parts.Contains(x) && x.text != null && x.text.Contains("Summon"))
+                    ?? (rows.GetComponentsInChildren<TMP_Text>(true).FirstOrDefault(x => !parts.Contains(x) && x.text != null && x.text.Contains("Summon")));
+                foreach (TMP_Text t in parts)
                 {
                     if (string.IsNullOrEmpty(t.text)) continue;
+                    if (title != null)
+                    {
+                        var tc = new Vector3[4]; title.rectTransform.GetWorldCorners(tc);
+                        var mc = new Vector3[4]; t.rectTransform.GetWorldCorners(mc);
+                        RectTransform par = t.rectTransform.parent as RectTransform;
+                        if (par != null)
+                        {
+                            float titleBottom = par.InverseTransformPoint(tc[0]).y;
+                            float myTop = par.InverseTransformPoint(mc[1]).y;
+                            // a small gap under the title (two of the half's units at the 1.0 card scale)
+                            float gap = 4f;
+                            if (myTop > titleBottom - gap)
+                            {
+                                float cut = myTop - (titleBottom - gap);
+                                t.rectTransform.offsetMax = new Vector2(t.rectTransform.offsetMax.x, t.rectTransform.offsetMax.y - cut);
+                                room = Mathf.Min(room, t.rectTransform.rect.height);
+                                Plugin.Log.LogInfo($"Summon special text kept under its title: top lowered {cut:0.#} ({t.text.Substring(0, Math.Min(24, t.text.Length))}...)");
+                            }
+                        }
+                    }
                     t.ForceMeshUpdate();
                     float tall = t.preferredHeight;
                     float own = t.rectTransform.rect.height > 1f ? Mathf.Min(room, t.rectTransform.rect.height) : room;
