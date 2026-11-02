@@ -25,7 +25,9 @@ Data:
                     Enhancements: 1
                 Range: 2
                 Filter: Enemy
-                AnimOverload: RangedAttack
+                # (not RangedAttack: its projectile behaviour reads the attack's targets and threw ArgumentOutOfRange on
+                # every play of this push-only half, 2026-11-02 harness runs)
+                AnimOverload: Push
 Layout:
     Top:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
