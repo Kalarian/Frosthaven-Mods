@@ -14,7 +14,7 @@ Data:
                     DiamondEnhancements: 2
                 Range: 2
                 Target: -1
-                ExactRange: True
+                MinRange: 2
                 MultiPassAttack: False
                 AnimOverload: AreaHexWind
         Infuse: [Fire, Air]

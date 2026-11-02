@@ -413,6 +413,14 @@ CARD_FIXES = {
         (r"^([ \t]+)Filter: \[Ally\](\r?)$",
          lambda m: f"{m.group(1)}Filter: [Ally]{m.group(2)}\n{m.group(1)}TreatAsNonSubAbility: True{m.group(2)}"),
     ],
+    # Infernal Vortex (Elementalist), top: "Attack 4, all enemies at exactly range 2". Gloomhaven writes ExactRange on the
+    # attack; Frosthaven's engine reads ExactRange only with an area of effect and ignores it here, so the attack took
+    # every enemy within range 2, adjacent ones too, and hit the error screen ("Unable to find res summary", a null in
+    # CAbilityAttack.AttackActor: 3 of 30 harness plays, then the user's manual test 40, 2026-11-02). Frosthaven's own
+    # key for it: MinRange (Deathwalker's Proliferation of the Abyss), equal to the range.
+    20453: [
+        (r"^([ \t]+)ExactRange: True(\r?)$", lambda m: f"{m.group(1)}MinRange: 2{m.group(2)}"),
+    ],
     20304: [
         (r"^([ \t]+)Filter: Ally(\r?)$",
          lambda m: f"{m.group(1)}Filter: Enemy{m.group(2)}\n{m.group(1)}TreatAsNonSubAbility: True{m.group(2)}"),
