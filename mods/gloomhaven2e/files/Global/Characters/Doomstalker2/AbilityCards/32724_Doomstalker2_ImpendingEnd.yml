@@ -99,5 +99,6 @@ Layout:
             Layout:
                 - Row: "$FHS_Doom_MarkText$"
                 - Row: "$FHS_GH2E_Doomstalker2_24_B$"
+                - Row: "<size=100%> "
                 - XPTracker: BDoomAttackDebuff
                 - Row: "$FHS_Doom_DiscardReminderText$"
