@@ -25,19 +25,15 @@ Data:
                 AnimOverload: ObstacleAvalanche
                 MultiPassAttack: False
                 SubAbilities:
+                    # (the Muddle as the damage's own condition, as Frosthaven's Snowdancer Shifting Snow writes it: a second
+                    # sub-ability around the same tiles started 19 times and never muddled anyone, harness 2026-11-02)
                     TCreateSubDamage:
                         AllTargetsAdjacentToParentTargets: True
                         Damage: 1
+                        Conditions: [Muddle]
                         Range: 1
                         Target: -1
                         Filter: [Enemy, Ally]
-                    TCreateSubMuddle:
-                        AllTargetsAdjacentToParentTargets: True
-                        Muddle: True
-                        Range: 1
-                        Target: -1
-                        Filter: [Enemy, Ally]
-                        AutoTrigger: True
         Infuse: Earth
     Bottom:
         Abilities:
