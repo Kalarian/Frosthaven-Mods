@@ -276,7 +276,7 @@
    "name": "trample",
    "level": "1",
    "initiative": "72",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\trample.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\trample.jpeg",
    "ghs": {
     "name": "Trample",
     "number": 1,
@@ -306,7 +306,7 @@
    "name": "eye for an eye",
    "level": "1",
    "initiative": "13",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\eye-for-an-eye.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\eye-for-an-eye.jpeg",
    "ghs": {
     "name": "Eye for an Eye",
     "number": 2,
@@ -337,7 +337,7 @@
    "name": "skewer",
    "level": "1",
    "initiative": "35",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\skewer.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\skewer.jpeg",
    "ghs": {
     "name": "Skewer",
     "number": 3,
@@ -367,7 +367,7 @@
    "name": "overwhelming assault",
    "level": "1",
    "initiative": "61",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\overwhelming-assault.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\overwhelming-assault.jpeg",
    "ghs": {
     "name": "Overwhelming Assault",
     "number": 4,
@@ -398,7 +398,7 @@
    "name": "balanced measure",
    "level": "1",
    "initiative": "20",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\balanced-measure.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\balanced-measure.jpeg",
    "ghs": {
     "name": "Balanced Measure",
     "number": 5,
@@ -427,7 +427,7 @@
    "name": "grab and go",
    "level": "1",
    "initiative": "87",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\grab-and-go.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\grab-and-go.jpeg",
    "ghs": {
     "name": "Grab and Go",
     "number": 6,
@@ -455,7 +455,7 @@
    "name": "warding strength",
    "level": "1",
    "initiative": "32",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\warding-strength.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\warding-strength.jpeg",
    "ghs": {
     "name": "Warding Strength",
     "number": 7,
@@ -486,7 +486,7 @@
    "name": "shield bash",
    "level": "1",
    "initiative": "15",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\shield-bash.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\shield-bash.jpeg",
    "ghs": {
     "name": "Shield Bash",
     "number": 8,
@@ -519,7 +519,7 @@
    "name": "leaping cleave",
    "level": "1",
    "initiative": "54",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\leaping-cleave.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\leaping-cleave.jpeg",
    "ghs": {
     "name": "Leaping Cleave",
     "number": 9,
@@ -549,7 +549,7 @@
    "name": "spare dagger",
    "level": "1",
    "initiative": "27",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\spare-dagger.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\spare-dagger.jpeg",
    "ghs": {
     "name": "Spare Dagger",
     "number": 10,
@@ -576,7 +576,7 @@
    "name": "sweeping blow",
    "level": "X",
    "initiative": "23",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\sweeping-blow.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\sweeping-blow.jpeg",
    "ghs": {
     "name": "Sweeping Blow",
     "number": 11,
@@ -605,7 +605,7 @@
    "name": "fearsome taunt",
    "level": "X",
    "initiative": "10",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\fearsome-taunt.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\fearsome-taunt.jpeg",
    "ghs": {
     "name": "Fearsome Taunt",
     "number": 12,
@@ -637,7 +637,7 @@
    "name": "provoking roar",
    "level": "X",
    "initiative": "18",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\provoking-roar.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\provoking-roar.jpeg",
    "ghs": {
     "name": "Wall of Doom",
     "number": 13,
@@ -671,7 +671,7 @@
    "name": "intimidating growl",
    "level": "2",
    "initiative": "51",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\intimidating-growl.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\intimidating-growl.jpeg",
    "ghs": {
     "name": "Intimidating Growl",
     "number": 14,
@@ -703,7 +703,7 @@
    "name": "juggernaut",
    "level": "2",
    "initiative": "34",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\juggernaut.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\juggernaut.jpeg",
    "ghs": {
     "name": "Juggernaut",
     "number": 15,
@@ -734,7 +734,7 @@
    "name": "hook and chain",
    "level": "3",
    "initiative": "42",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\hook-and-chain.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\hook-and-chain.jpeg",
    "ghs": {
     "name": "Hook and Chain",
     "number": 16,
@@ -762,7 +762,7 @@
    "name": "unstoppable charge",
    "level": "3",
    "initiative": "86",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\unstoppable-charge.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\unstoppable-charge.jpeg",
    "ghs": {
     "name": "Unstoppable Charge",
     "number": 17,
@@ -793,7 +793,7 @@
    "name": "whirlwind",
    "level": "4",
    "initiative": "28",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\whirlwind.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\whirlwind.jpeg",
    "ghs": {
     "name": "Whirlwind",
     "number": 18,
@@ -824,7 +824,7 @@
    "name": "push through",
    "level": "4",
    "initiative": "57",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\push-through.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\push-through.jpeg",
    "ghs": {
     "name": "Push Through",
     "number": 19,
@@ -854,7 +854,7 @@
    "name": "skirmishing maneuver",
    "level": "5",
    "initiative": "29",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\skirmishing-maneuver.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\skirmishing-maneuver.jpeg",
    "ghs": {
     "name": "Skirmishing Maneuver",
     "number": 20,
@@ -884,7 +884,7 @@
    "name": "defensive tactics",
    "level": "5",
    "initiative": "39",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\defensive-tactics.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\defensive-tactics.jpeg",
    "ghs": {
     "name": "Defensive Tactics",
     "number": 21,
@@ -916,7 +916,7 @@
    "name": "run through",
    "level": "6",
    "initiative": "33 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\run-through.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\run-through.jpeg",
    "ghs": {
     "name": "Run Through",
     "number": 22,
@@ -944,7 +944,7 @@
    "name": "immovable phalanx",
    "level": "6",
    "initiative": "17",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\immovable-phalanx.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\immovable-phalanx.jpeg",
    "ghs": {
     "name": "Immovable Phalanx",
     "number": 23,
@@ -978,7 +978,7 @@
    "name": "leg fly",
    "level": "7",
    "initiative": "19",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\leg-fly.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\leg-fly.jpeg",
    "ghs": {
     "name": "Let Fly",
     "number": 24,
@@ -1006,7 +1006,7 @@
    "name": "selfish retribution",
    "level": "7",
    "initiative": "8",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\selfish-retribution.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\selfish-retribution.jpeg",
    "ghs": {
     "name": "Selfish Retribution",
     "number": 25,
@@ -1040,7 +1040,7 @@
    "name": "frenzied onslaught",
    "level": "8",
    "initiative": "41",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\frenzied-onslaught.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\frenzied-onslaught.jpeg",
    "ghs": {
     "name": "Frenzied Onslaught",
     "number": 26,
@@ -1070,7 +1070,7 @@
    "name": "crippling offensive",
    "level": "8",
    "initiative": "16",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\crippling-offensive.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\crippling-offensive.jpeg",
    "ghs": {
     "name": "Crippling Offensive",
     "number": 27,
@@ -1101,7 +1101,7 @@
    "name": "brute force",
    "level": "9",
    "initiative": "9",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\brute-force.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\brute-force.jpeg",
    "ghs": {
     "name": "Brute Force",
     "number": 28,
@@ -1129,7 +1129,7 @@
    "name": "face your end",
    "level": "9",
    "initiative": "67",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\BR2\\face-your-end.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\BR2\\face-your-end.jpeg",
    "ghs": {
     "name": "Face Your End",
     "number": 29,

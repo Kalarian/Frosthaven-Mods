@@ -264,7 +264,7 @@
    "name": "booster pack",
    "level": "1",
    "initiative": "73",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\booster-pack.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\booster-pack.jpeg",
    "ghs": {
     "name": "Booster Pack",
     "number": 205,
@@ -289,7 +289,7 @@
    "name": "readied blade",
    "level": "1",
    "initiative": "98",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\readied-blade.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\readied-blade.jpeg",
    "ghs": {
     "name": "Readied Blade",
     "number": 206,
@@ -311,7 +311,7 @@
    "name": "crushing hammer",
    "level": "1",
    "initiative": "33",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\crushing-hammer.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\crushing-hammer.jpeg",
    "ghs": {
     "name": "Crushing Hammer",
     "number": 207,
@@ -336,7 +336,7 @@
    "name": "hastened step",
    "level": "1",
    "initiative": "26",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\hastened-step.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\hastened-step.jpeg",
    "ghs": {
     "name": "Hastened Step",
     "number": 208,
@@ -359,7 +359,7 @@
    "name": "bladed boomerang",
    "level": "1",
    "initiative": "44",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\bladed-boomerang.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\bladed-boomerang.jpeg",
    "ghs": {
     "name": "Bladed Boomerang",
     "number": 209,
@@ -381,7 +381,7 @@
    "name": "impaling spear",
    "level": "1",
    "initiative": "62",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\impaling-spear.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\impaling-spear.jpeg",
    "ghs": {
     "name": "Impaling Spear",
     "number": 210,
@@ -404,7 +404,7 @@
    "name": "light javelin",
    "level": "1",
    "initiative": "81",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\light-javelin.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\light-javelin.jpeg",
    "ghs": {
     "name": "Light Javelin",
     "number": 211,
@@ -425,7 +425,7 @@
    "name": "cleave and thrust",
    "level": "1",
    "initiative": "39",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\cleave-and-thrust.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\cleave-and-thrust.jpeg",
    "ghs": {
     "name": "Cleave and Thrust",
     "number": 212,
@@ -450,7 +450,7 @@
    "name": "iron bulwark",
    "level": "1",
    "initiative": "17",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\iron-bulwark.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\iron-bulwark.jpeg",
    "ghs": {
     "name": "Iron Bulwark",
     "number": 213,
@@ -476,7 +476,7 @@
    "name": "proficiency",
    "level": "1",
    "initiative": "52",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\proficiency.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\proficiency.jpeg",
    "ghs": {
     "name": "Proficiency",
     "number": 214,
@@ -507,7 +507,7 @@
    "name": "provisions",
    "level": "1",
    "initiative": "48",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\provisions.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\provisions.jpeg",
    "ghs": {
     "name": "Provisions",
     "number": 215,
@@ -529,7 +529,7 @@
    "name": "caustic bolt",
    "level": "X",
    "initiative": "88",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\caustic-bolt.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\caustic-bolt.jpeg",
    "ghs": {
     "name": "Caustic Bolt",
     "number": 216,
@@ -552,7 +552,7 @@
    "name": "scroll of recall",
    "level": "X",
    "initiative": "19",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\scroll-of-recall.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\scroll-of-recall.jpeg",
    "ghs": {
     "name": "Scroll of Recall",
     "number": 217,
@@ -576,7 +576,7 @@
    "name": "sharpening kit",
    "level": "X",
    "initiative": "23",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\sharpening-kit.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\sharpening-kit.jpeg",
    "ghs": {
     "name": "Sharpening Kit",
     "number": 218,
@@ -600,7 +600,7 @@
    "name": "scroll case",
    "level": "2",
    "initiative": "95",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\scroll-case.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\scroll-case.jpeg",
    "ghs": {
     "name": "Scroll Case",
     "number": 219,
@@ -624,7 +624,7 @@
    "name": "lethal arsenal",
    "level": "2",
    "initiative": "18",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\lethal-arsenal.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\lethal-arsenal.jpeg",
    "ghs": {
     "name": "Lethal Arsenal",
     "number": 220,
@@ -650,7 +650,7 @@
    "name": "quiver of arrows",
    "level": "3",
    "initiative": "61",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\quiver-of-arrows.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\quiver-of-arrows.jpeg",
    "ghs": {
     "name": "Quiver of Arrows",
     "number": 221,
@@ -676,7 +676,7 @@
    "name": "concussive snare",
    "level": "3",
    "initiative": "89",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\concussive-snare.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\concussive-snare.jpeg",
    "ghs": {
     "name": "Concussive Snare",
     "number": 222,
@@ -700,7 +700,7 @@
    "name": "hammer and anvil",
    "level": "4",
    "initiative": "21",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\hammer-and-anvil.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\hammer-and-anvil.jpeg",
    "ghs": {
     "name": "Hammer and Anvil",
     "number": 223,
@@ -725,7 +725,7 @@
    "name": "giant club",
    "level": "4",
    "initiative": "40",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\giant-club.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\giant-club.jpeg",
    "ghs": {
     "name": "Giant Club",
     "number": 224,
@@ -750,7 +750,7 @@
    "name": "scroll of judgement",
    "level": "5",
    "initiative": "12",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\scroll-of-judgement.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\scroll-of-judgement.jpeg",
    "ghs": {
     "name": "Scroll of Judgment",
     "number": 225,
@@ -782,7 +782,7 @@
    "name": "set up shop",
    "level": "5",
    "initiative": "41",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\set-up-shop.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\set-up-shop.jpeg",
    "ghs": {
     "name": "Set Up Shop",
     "number": 226,
@@ -812,7 +812,7 @@
    "name": "scroll of lightning",
    "level": "6",
    "initiative": "77",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\scroll-of-lightning.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\scroll-of-lightning.jpeg",
    "ghs": {
     "name": "Scroll of Lightning",
     "number": 227,
@@ -836,7 +836,7 @@
    "name": "continual supply",
    "level": "6",
    "initiative": "86",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\continual-supply.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\continual-supply.jpeg",
    "ghs": {
     "name": "Continual Supply",
     "number": 228,
@@ -862,7 +862,7 @@
    "name": "twin lances",
    "level": "7",
    "initiative": "32",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\twin-lances.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\twin-lances.jpeg",
    "ghs": {
     "name": "Twin Lances",
     "number": 229,
@@ -888,7 +888,7 @@
    "name": "tools of war",
    "level": "7",
    "initiative": "84",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\tools-of-war.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\tools-of-war.jpeg",
    "ghs": {
     "name": "Tools of War",
     "number": 230,
@@ -912,7 +912,7 @@
    "name": "scroll of blizzards",
    "level": "8",
    "initiative": "46",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\scroll-of-blizzards.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\scroll-of-blizzards.jpeg",
    "ghs": {
     "name": "Scroll of Blizzards",
     "number": 231,
@@ -936,7 +936,7 @@
    "name": "armed to the teeth",
    "level": "8",
    "initiative": "10",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\armed-to-the-teeth.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\armed-to-the-teeth.jpeg",
    "ghs": {
     "name": "Armed th the Teeth",
     "number": 232,
@@ -965,7 +965,7 @@
    "name": "reinforced steel",
    "level": "9",
    "initiative": "56",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\reinforced-steel.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\reinforced-steel.jpeg",
    "ghs": {
     "name": "Reinforced Steel",
     "number": 233,
@@ -994,7 +994,7 @@
    "name": "bag of holding",
    "level": "9",
    "initiative": "91",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\QM2\\bag-of-holding.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\QM2\\bag-of-holding.jpeg",
    "ghs": {
     "name": "Bag of Holding",
     "number": 234,

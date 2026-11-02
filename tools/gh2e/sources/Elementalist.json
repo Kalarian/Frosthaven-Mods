@@ -329,7 +329,7 @@
    "name": "ice spikes",
    "level": "1",
    "initiative": "48",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\ice-spikes.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\ice-spikes.jpeg",
    "ghs": {
     "name": "Ice Spikes",
     "number": 446,
@@ -354,7 +354,7 @@
    "name": "malleable evocation",
    "level": "1",
    "initiative": "26",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\malleable-evocation.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\malleable-evocation.jpeg",
    "ghs": {
     "name": "Malleable Evocation",
     "number": 447,
@@ -376,7 +376,7 @@
    "name": "formless power",
    "level": "1",
    "initiative": "45",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\formless-power.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\formless-power.jpeg",
    "ghs": {
     "name": "Formless Power",
     "number": 448,
@@ -401,7 +401,7 @@
    "name": "shaping the ether",
    "level": "1",
    "initiative": "54",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\shaping-the-ether.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\shaping-the-ether.jpeg",
    "ghs": {
     "name": "Shaping the Ether",
     "number": 449,
@@ -422,7 +422,7 @@
    "name": "stoking hail",
    "level": "1",
    "initiative": "29",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\stoking-hail.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\stoking-hail.jpeg",
    "ghs": {
     "name": "Stoking Hail",
     "number": 450,
@@ -445,7 +445,7 @@
    "name": "magma scales",
    "level": "1",
    "initiative": "14",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\magma-scales.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\magma-scales.jpeg",
    "ghs": {
     "name": "Magma Scales",
     "number": 451,
@@ -471,7 +471,7 @@
    "name": "infernal vortex",
    "level": "1",
    "initiative": "35",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\infernal-vortex.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\infernal-vortex.jpeg",
    "ghs": {
     "name": "Infernal Vortex",
     "number": 452,
@@ -497,7 +497,7 @@
    "name": "frigid torrent",
    "level": "1",
    "initiative": "39",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\frigid-torrent.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\frigid-torrent.jpeg",
    "ghs": {
     "name": "Frigid Torrent",
     "number": 453,
@@ -523,7 +523,7 @@
    "name": "pulsing cores",
    "level": "1",
    "initiative": "40",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\pulsing-cores.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\pulsing-cores.jpeg",
    "ghs": {
     "name": "Pulsing Cores",
     "number": 454,
@@ -547,7 +547,7 @@
    "name": "dual nature",
    "level": "1",
    "initiative": "27",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\dual-nature.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\dual-nature.jpeg",
    "ghs": {
     "name": "Dual Nature",
     "number": 455,
@@ -570,7 +570,7 @@
    "name": "lingering essence",
    "level": "X",
    "initiative": "50",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\lingering-essence.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\lingering-essence.jpeg",
    "ghs": {
     "name": "Lingering Essence",
     "number": 456,
@@ -593,7 +593,7 @@
    "name": "flash of brilliance",
    "level": "X",
    "initiative": "67",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\flash-of-brilliance.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\flash-of-brilliance.jpeg",
    "ghs": {
     "name": "Flash of Brilliance",
     "number": 457,
@@ -617,7 +617,7 @@
    "name": "encompassing shadow",
    "level": "X",
    "initiative": "12",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\encompassing-shadow.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\encompassing-shadow.jpeg",
    "ghs": {
     "name": "Encompassing Shadow",
     "number": 458,
@@ -642,7 +642,7 @@
    "name": "gravel guard",
    "level": "2",
    "initiative": "10",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\gravel-guard.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\gravel-guard.jpeg",
    "ghs": {
     "name": "Gravel Guard",
     "number": 459,
@@ -667,7 +667,7 @@
    "name": "wave of frost",
    "level": "2",
    "initiative": "47",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\wave-of-frost.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\wave-of-frost.jpeg",
    "ghs": {
     "name": "Wave of Frost",
     "number": 460,
@@ -689,7 +689,7 @@
    "name": "arresting gale",
    "level": "3",
    "initiative": "65",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\arresting-gale.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\arresting-gale.jpeg",
    "ghs": {
     "name": "Arresting Gale",
     "number": 461,
@@ -711,7 +711,7 @@
    "name": "empowering flame",
    "level": "3",
    "initiative": "15",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\empowering-flame.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\empowering-flame.jpeg",
    "ghs": {
     "name": "Empowering Flame",
     "number": 462,
@@ -735,7 +735,7 @@
    "name": "burial",
    "level": "4",
    "initiative": "77",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\burial.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\burial.jpeg",
    "ghs": {
     "name": "Burial",
     "number": 463,
@@ -759,7 +759,7 @@
    "name": "chain lightning",
    "level": "4",
    "initiative": "23",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\chain-lightning.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\chain-lightning.jpeg",
    "ghs": {
     "name": "Chain Lightning",
     "number": 464,
@@ -783,7 +783,7 @@
    "name": "obsidian shards",
    "level": "5",
    "initiative": "19",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\obsidian-shards.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\obsidian-shards.jpeg",
    "ghs": {
     "name": "Obsidian Shards",
     "number": 465,
@@ -805,7 +805,7 @@
    "name": "winter's edge",
    "level": "5",
    "initiative": "43",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\winters-edge.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\winters-edge.jpeg",
    "ghs": {
     "name": "Winter's Edge",
     "number": 466,
@@ -827,7 +827,7 @@
    "name": "pragmatic reinforcement",
    "level": "6",
    "initiative": "13",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\pragmatic-reinforcement.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\pragmatic-reinforcement.jpeg",
    "ghs": {
     "name": "Pragmatic Reinforcement",
     "number": 467,
@@ -851,7 +851,7 @@
    "name": "duskstorm",
    "level": "6",
    "initiative": "17",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\duskstorm.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\duskstorm.jpeg",
    "ghs": {
     "name": "Duskstorm",
     "number": 468,
@@ -875,7 +875,7 @@
    "name": "elemental juggernaut",
    "level": "7",
    "initiative": "94",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\elemental-juggernaut.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\elemental-juggernaut.jpeg",
    "ghs": {
     "name": "Elemental Juggernaut",
     "number": 469,
@@ -901,7 +901,7 @@
    "name": "confluence of elements",
    "level": "7",
    "initiative": "64",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\confluence-of-elements.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\confluence-of-elements.jpeg",
    "ghs": {
     "name": "Confluence of Elements",
     "number": 470,
@@ -923,7 +923,7 @@
    "name": "prismatic barrage",
    "level": "8",
    "initiative": "33",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\prismatic-barrage.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\prismatic-barrage.jpeg",
    "ghs": {
     "name": "Prismatic Barrage",
     "number": 471,
@@ -946,7 +946,7 @@
    "name": "eye of the hurricane",
    "level": "8",
    "initiative": "25",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\eye-of-the-hurricane.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\eye-of-the-hurricane.jpeg",
    "ghs": {
     "name": "Eye of the Hurricane",
     "number": 472,
@@ -967,7 +967,7 @@
    "name": "ethereal manifestation",
    "level": "9",
    "initiative": "98",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\ethereal-manifestation.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\ethereal-manifestation.jpeg",
    "ghs": {
     "name": "Ethereal Manifestation",
     "number": 473,
@@ -993,7 +993,7 @@
    "name": "primal duality",
    "level": "9",
    "initiative": "11",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\EL2\\primal-duality.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\EL2\\primal-duality.jpeg",
    "ghs": {
     "name": "Primal Duality",
     "number": 474,

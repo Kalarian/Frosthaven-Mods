@@ -48,7 +48,7 @@ def _res(frozen_rel, source_path):
 
 
 MOD_GUIDE = _res(r"guides\mod-guide.html", os.path.join(REPO_DIR, "docs", "guide", "guide.html"))
-PLAY_GUIDE = _res(r"guides\play-guide.html", r"C:\Claude\FrosthavenGuide\frosthaven-play-guide.html")
+PLAY_GUIDE = _res(r"guides\play-guide.html", r"C:\Claude\Frosthaven\local\playguide\frosthaven-play-guide.html")
 INSTALLER = _res(r"installer\Install Frosthaven Mods.exe", os.path.join(REPO_DIR, "dist", "Install Frosthaven Mods.exe"))
 PACK_VERSION_FILE = _res("VERSION", os.path.join(REPO_DIR, "VERSION"))
 

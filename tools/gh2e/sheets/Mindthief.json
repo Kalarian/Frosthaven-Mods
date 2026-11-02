@@ -22,7 +22,7 @@
                  "bottom: control one enemy within range 4 (it performs Move 1)",
                  "bottom: consume Ice: the controlled enemy suffers damage 2, XP 1"],
       "summons": [],
-      "notes": "Class-wide: GHS numbers the cards 146-174, the printed numbers are 002-030 (same order); not counted as a disagreement. GHS's %data.custom.gh2e.mindthief...% strings were resolved from C:\\Claude\\GH2eData\\ghs\\label\\en.json for the comparison. Element boxes marked '!' in the middle of a half (Frigid Apparition etc.) are infusions, written 'infuse <Element> (box)'. Xipe: ControlActor ControlForOneAction; consume Ice adds Damage 2 (Filter Self, AutoTrigger) to the controlled enemy, XP 1."
+      "notes": "Class-wide: GHS numbers the cards 146-174, the printed numbers are 002-030 (same order); not counted as a disagreement. GHS's %data.custom.gh2e.mindthief...% strings were resolved from C:\\Claude\\Frosthaven\\local\\gh2e-data\\ghs\\label\\en.json for the comparison. Element boxes marked '!' in the middle of a half (Frigid Apparition etc.) are infusions, written 'infuse <Element> (box)'. Xipe: ControlActor ControlForOneAction; consume Ice adds Damage 2 (Filter Self, AutoTrigger) to the controlled enemy, XP 1."
     },
     {
       "name": "Hidden in the Shadows",

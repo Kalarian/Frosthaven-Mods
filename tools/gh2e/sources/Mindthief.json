@@ -264,7 +264,7 @@
    "name": "submissive affliction",
    "level": "1",
    "initiative": "48",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\submissive-affliction.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\submissive-affliction.jpeg",
    "ghs": {
     "name": "Submissive Affliction",
     "number": 146,
@@ -292,7 +292,7 @@
    "name": "hidden in the shadows",
    "level": "1",
    "initiative": "14",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\hidden-in-the-shadows.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\hidden-in-the-shadows.jpeg",
    "ghs": {
     "name": "Hidden in the Shadows",
     "number": 147,
@@ -323,7 +323,7 @@
    "name": "scurry",
    "level": "1",
    "initiative": "20",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\scurry.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\scurry.jpeg",
    "ghs": {
     "name": "Scurry",
     "number": 148,
@@ -354,7 +354,7 @@
    "name": "withering claw",
    "level": "1",
    "initiative": "18",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\withering-claw.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\withering-claw.jpeg",
    "ghs": {
     "name": "Withering Claw",
     "number": 149,
@@ -385,7 +385,7 @@
    "name": "frigid apparition",
    "level": "1",
    "initiative": "10",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\frigid-apparition.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\frigid-apparition.jpeg",
    "ghs": {
     "name": "Frigid Apparition",
     "number": 150,
@@ -418,7 +418,7 @@
    "name": "the mind's weakness",
    "level": "1",
    "initiative": "75",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\the-minds-weakness.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\the-minds-weakness.jpeg",
    "ghs": {
     "name": "The Mind's Weakness",
     "number": 151,
@@ -450,7 +450,7 @@
    "name": "pilfer",
    "level": "1",
    "initiative": "79",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\pilfer.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\pilfer.jpeg",
    "ghs": {
     "name": "Pilfer",
     "number": 152,
@@ -478,7 +478,7 @@
    "name": "perverse edge",
    "level": "1",
    "initiative": "8",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\perverse-edge.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\perverse-edge.jpeg",
    "ghs": {
     "name": "Perverse Edge",
     "number": 153,
@@ -509,7 +509,7 @@
    "name": "empathetic assault",
    "level": "1",
    "initiative": "12",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\empathetic-assault.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\empathetic-assault.jpeg",
    "ghs": {
     "name": "Empathetic Assault",
     "number": 154,
@@ -541,7 +541,7 @@
    "name": "psychic blade",
    "level": "1",
    "initiative": "77",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\psychic-blade.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\psychic-blade.jpeg",
    "ghs": {
     "name": "Psychic Blade",
     "number": 155,
@@ -576,7 +576,7 @@
    "name": "feedback loops",
    "level": "X",
    "initiative": "51",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\feedback-loops.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\feedback-loops.jpeg",
    "ghs": {
     "name": "Feedback Loop",
     "number": 156,
@@ -612,7 +612,7 @@
    "name": "possession",
    "level": "X",
    "initiative": "71",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\possession.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\possession.jpeg",
    "ghs": {
     "name": "Possession",
     "number": 157,
@@ -640,7 +640,7 @@
    "name": "gnawing horde",
    "level": "X",
    "initiative": "82",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\gnawing-horde.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\gnawing-horde.jpeg",
    "ghs": {
     "name": "Gnawing Horde",
     "number": 158,
@@ -671,7 +671,7 @@
    "name": "fearsome blade",
    "level": "2",
    "initiative": "27",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\fearsome-blade.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\fearsome-blade.jpeg",
    "ghs": {
     "name": "Fearsome Blade",
     "number": 159,
@@ -699,7 +699,7 @@
    "name": "hostile takeover",
    "level": "2",
    "initiative": "9",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\hostile-takeover.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\hostile-takeover.jpeg",
    "ghs": {
     "name": "Hostile Takeover",
     "number": 160,
@@ -731,7 +731,7 @@
    "name": "brain leech",
    "level": "3",
    "initiative": "21",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\brain-leech.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\brain-leech.jpeg",
    "ghs": {
     "name": "Brain Leech",
     "number": 161,
@@ -759,7 +759,7 @@
    "name": "cranium overload",
    "level": "3",
    "initiative": "5",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\cranium-overload.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\cranium-overload.jpeg",
    "ghs": {
     "name": "Cranium Overload",
     "number": 162,
@@ -790,7 +790,7 @@
    "name": "frozen shiv",
    "level": "4",
    "initiative": "16",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\frozen-shiv.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\frozen-shiv.jpeg",
    "ghs": {
     "name": "Frozen Shiv",
     "number": 163,
@@ -824,7 +824,7 @@
    "name": "silent scream",
    "level": "4",
    "initiative": "83",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\silent-scream.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\silent-scream.jpeg",
    "ghs": {
     "name": "Silent Scream",
     "number": 164,
@@ -856,7 +856,7 @@
    "name": "mass hysteria",
    "level": "5",
    "initiative": "11",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\mass-hysteria.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\mass-hysteria.jpeg",
    "ghs": {
     "name": "Mass Hysteria",
     "number": 165,
@@ -885,7 +885,7 @@
    "name": "gangling abomination",
    "level": "5",
    "initiative": "81",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\gangling-abomination.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\gangling-abomination.jpeg",
    "ghs": {
     "name": "Gangling Abomination",
     "number": 166,
@@ -917,7 +917,7 @@
    "name": "telepathic command",
    "level": "6",
    "initiative": "17",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\telepathic-command.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\telepathic-command.jpeg",
    "ghs": {
     "name": "Telepathic Command",
     "number": 167,
@@ -945,7 +945,7 @@
    "name": "dark frenzy",
    "level": "6",
    "initiative": "39",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\dark-frenzy.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\dark-frenzy.jpeg",
    "ghs": {
     "name": "Dark Frenzy",
     "number": 168,
@@ -974,7 +974,7 @@
    "name": "domination",
    "level": "7",
    "initiative": "13",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\domination.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\domination.jpeg",
    "ghs": {
     "name": "Domination",
     "number": 169,
@@ -1003,7 +1003,7 @@
    "name": "psychic projection",
    "level": "7",
    "initiative": "92",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\psychic-projection.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\psychic-projection.jpeg",
    "ghs": {
     "name": "Psychic Projection",
     "number": 170,
@@ -1037,7 +1037,7 @@
    "name": "shared nightmare",
    "level": "8",
    "initiative": "7",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\shared-nightmare.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\shared-nightmare.jpeg",
    "ghs": {
     "name": "Shared Nightmare",
     "number": 171,
@@ -1066,7 +1066,7 @@
    "name": "corrupting embrace",
    "level": "8",
    "initiative": "15",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\corrupting-embrace.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\corrupting-embrace.jpeg",
    "ghs": {
     "name": "Corrupting Embrace",
     "number": 172,
@@ -1099,7 +1099,7 @@
    "name": "many as one",
    "level": "9",
    "initiative": "91",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\many-as-one.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\many-as-one.jpeg",
    "ghs": {
     "name": "Many as One",
     "number": 173,
@@ -1134,7 +1134,7 @@
    "name": "phantasmal killer",
    "level": "9",
    "initiative": "67",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\MT2\\phantasmal-killer.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\MT2\\phantasmal-killer.jpeg",
    "ghs": {
     "name": "Phantasmal Killer",
     "number": 174,

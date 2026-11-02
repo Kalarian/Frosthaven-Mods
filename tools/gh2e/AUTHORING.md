@@ -18,7 +18,7 @@ Soothsinger2, Soultether, Wildfury (see `CLASSES` in build.py; the sheet name is
    mat rules (tokens, class mechanics).
 2. **Frosthaven's own cards** (`extracted/Base/Global/Characters/<FH class>/AbilityCards/*.yml`): when Frosthaven has a
    card doing the same thing, copy its shape. That is the shape known to work in this engine.
-3. **The 1st edition port of the same character**: Gloomhaven's raw files `C:\Claude\GH2eData\gh1e_yml\AbilityCard\`
+3. **The 1st edition port of the same character**: Gloomhaven's raw files `C:\Claude\Frosthaven\local\gh2e-data\gh1e_yml\AbilityCard\`
    (the same format you write) and the converted, play-tested result `mods/gloomhaven/files/Global/Characters/<Model>/`.
    Many 2e cards are 1e cards with new numbers. `CARD_FIXES` in `tools/gh_port.py` lists engine traps the 1e port
    found and how each was solved: read it before writing anything unusual (merged move-attacks, sub-abilities around a
@@ -128,7 +128,7 @@ Prescriptions, Supplies + the Quartermaster's item deck, Notes + songs, permanen
 
 ## Summons
 
-`tools/gh2e/cards/<Class>/summons/<ID without "ID">.yml` (never a 1st edition summon's file name: build.py refuses it), Gloomhaven HeroSummon format (see `C:\Claude\GH2eData\gh1e_yml\HeroSummon`).
+`tools/gh2e/cards/<Class>/summons/<ID without "ID">.yml` (never a 1st edition summon's file name: build.py refuses it), Gloomhaven HeroSummon format (see `C:\Claude\Frosthaven\local\gh2e-data\gh1e_yml\HeroSummon`).
 ID `<Name>2ID` when the 1st edition has a summon of that name with other stats, else `<Name>ID`; `LocKey: $GH2E_SUMMON_<Name>$`
 with its English in strings.tsv. `Model:` must be a summon model the 1st edition pack already ships (the Model value of
 a file in gh1e_yml\HeroSummon), so it shows in game; for a new 2e creature pick the closest one as a stand-in and say
@@ -149,7 +149,7 @@ STRINGS = {}      # extra text keys the perks name
 ```
 
 Perks come from the class's perk sheet (`classes.json` "perks"; Secretariat's structured perks in
-`C:\Claude\GH2eData\ghs\character\<stem>.json` help). Modifier names: Frosthaven's own
+`C:\Claude\Frosthaven\local\gh2e-data\ghs\character\<stem>.json` help). Modifier names: Frosthaven's own
 `extracted/Base/Global/AttackModifiers/*.yml` first; new ones in NEW_CARDS, named `AMC_GH2E_...`. A perk Frosthaven
 can't express: as close as possible, noted in NOTES.md. Perk names: short, in the style of BRUTE_PERKS (the 2e sheet
 prints no names: make one up from the effect).

@@ -59,7 +59,7 @@ CLASSES = {
     "Wildfury": ("Wildfury", "BeastTyrant", 16, False),
 }
 DISPLAY = {"SilentKnife": "Silent Knife"}
-GHS = Path(r"C:\Claude\GH2eData\ghs\character")
+GHS = Path(r"C:\Claude\Frosthaven\local\gh2e-data\ghs\character")
 GHS_STEM = {"Bruiser": "bruiser", "Cragheart2": "cragheart", "Mindthief2": "mindthief", "SilentKnife": "silent-knife",
             "Spellweaver2": "spellweaver", "Tinkerer2": "tinkerer", "Berserker2": "lightning", "Doomstalker2": "angry-face",
             "Elementalist2": "triangles", "Nightshroud2": "eclipse", "Plagueherald2": "squidface",

@@ -284,7 +284,7 @@
    "name": "concentrated rage",
    "level": "1",
    "initiative": "51",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\concentrated-rage.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\concentrated-rage.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -292,7 +292,7 @@
    "name": "maul",
    "level": "1",
    "initiative": "61",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\maul.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\maul.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -300,7 +300,7 @@
    "name": "howling bolts",
    "level": "1",
    "initiative": "31",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\howling-bolts.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\howling-bolts.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -308,7 +308,7 @@
    "name": "nature's gift",
    "level": "1",
    "initiative": "42",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\natures-gift.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\natures-gift.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -316,7 +316,7 @@
    "name": "focused aggression",
    "level": "1",
    "initiative": "14",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\focused-aggression.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\focused-aggression.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -324,7 +324,7 @@
    "name": "gnaw",
    "level": "1",
    "initiative": "20",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\gnaw.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\gnaw.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -332,7 +332,7 @@
    "name": "disorienting roar",
    "level": "1",
    "initiative": "17",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\disorienting-roar.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\disorienting-roar.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -340,7 +340,7 @@
    "name": "vitality siphon",
    "level": "1",
    "initiative": "56",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\vitality-siphon.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\vitality-siphon.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -348,7 +348,7 @@
    "name": "spirit swap",
    "level": "1",
    "initiative": "27",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\spirit-swap.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\spirit-swap.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -356,7 +356,7 @@
    "name": "invocation of endurance",
    "level": "1",
    "initiative": "71",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\invocation-of-endurance.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\invocation-of-endurance.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -364,7 +364,7 @@
    "name": "invocation of spirit",
    "level": "X",
    "initiative": "62",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\invocation-of-spirit.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\invocation-of-spirit.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -372,7 +372,7 @@
    "name": "gust sigil",
    "level": "X",
    "initiative": "22",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\gust-sigil.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\gust-sigil.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -380,7 +380,7 @@
    "name": "forceful swipe",
    "level": "X",
    "initiative": "35",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\forceful-swipe.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\forceful-swipe.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -388,7 +388,7 @@
    "name": "energizing strike",
    "level": "2",
    "initiative": "48",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\energizing-strike.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\energizing-strike.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -396,7 +396,7 @@
    "name": "earthen spikes",
    "level": "2",
    "initiative": "11",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\earthen-spikes.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\earthen-spikes.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -404,7 +404,7 @@
    "name": "punch through",
    "level": "3",
    "initiative": "29",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\punch-through.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\punch-through.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -412,7 +412,7 @@
    "name": "stone sigil",
    "level": "3",
    "initiative": "15",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\stone-sigil.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\stone-sigil.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -420,7 +420,7 @@
    "name": "unstoppable beast",
    "level": "4",
    "initiative": "32",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\unstoppable-beast.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\unstoppable-beast.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -428,7 +428,7 @@
    "name": "forest's blessing",
    "level": "4",
    "initiative": "44",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\forests-blessing.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\forests-blessing.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -436,7 +436,7 @@
    "name": "rampage",
    "level": "5",
    "initiative": "16",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\rampage.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\rampage.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -444,7 +444,7 @@
    "name": "invocation of domination",
    "level": "5",
    "initiative": "10",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\invocation-of-domination.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\invocation-of-domination.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -452,7 +452,7 @@
    "name": "blood hunger",
    "level": "6",
    "initiative": "41",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\blood-hunger.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\blood-hunger.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -460,7 +460,7 @@
    "name": "ancient ward",
    "level": "6",
    "initiative": "59",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\ancient-ward.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\ancient-ward.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -468,7 +468,7 @@
    "name": "invocation of absorption",
    "level": "7",
    "initiative": "24",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\invocation-of-absorption.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\invocation-of-absorption.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -476,7 +476,7 @@
    "name": "unleashed fury",
    "level": "7",
    "initiative": "65",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\unleashed-fury.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\unleashed-fury.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -484,7 +484,7 @@
    "name": "lash out",
    "level": "8",
    "initiative": "46",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\lash-out.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\lash-out.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -492,7 +492,7 @@
    "name": "unbreakable bond",
    "level": "8",
    "initiative": "55",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\unbreakable-bond.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\unbreakable-bond.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -500,7 +500,7 @@
    "name": "spirit sigil",
    "level": "9",
    "initiative": "85",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\spirit-sigil.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\spirit-sigil.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -508,7 +508,7 @@
    "name": "jaws of death",
    "level": "9",
    "initiative": "18",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\WF2\\jaws-of-death.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\WF2\\jaws-of-death.jpeg",
    "ghs": null,
    "xipe": null
   }

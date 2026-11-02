@@ -28,7 +28,7 @@ PACK_DIR_2E = ROOT / "mods" / "gloomhaven2e" / "files" / "Global" / "Characters"
 def pack_dir(cls):
     """The pack folder holding the class: the 2nd edition pack's classes (Bruiser, Cragheart2 ...) live in their own."""
     return PACK_DIR_2E if (PACK_DIR_2E / cls).exists() else PACK_DIR
-SHOTS = Path(r"C:\Claude\FrosthavenCardShots")
+SHOTS = Path(r"C:\Claude\Frosthaven\local\cardshots")
 
 ABILITY_TYPES = {"Attack", "Move", "Heal", "Shield", "Retaliate", "Push", "Pull", "Loot", "Summon", "Infuse", "Damage",
                  "Teleport", "Create", "Trap", "Jump", "Bless", "Curse", "Strengthen", "Muddle", "Poison", "Wound",

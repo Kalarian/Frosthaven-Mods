@@ -298,7 +298,7 @@
    "name": "rain of arrows",
    "level": "1",
    "initiative": "9",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\rain-of-arrows.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\rain-of-arrows.jpeg",
    "ghs": {
     "name": "Rain of Arrows",
     "number": 381,
@@ -325,7 +325,7 @@
    "name": "race to the grave",
    "level": "1",
    "initiative": "75",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\race-to-the-grave.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\race-to-the-grave.jpeg",
    "ghs": {
     "name": "Race to the Grave",
     "number": 382,
@@ -352,7 +352,7 @@
    "name": "gut shot",
    "level": "1",
    "initiative": "21",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\gut-shot.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\gut-shot.jpeg",
    "ghs": {
     "name": "Gut Shot",
     "number": 383,
@@ -373,7 +373,7 @@
    "name": "detonation",
    "level": "1",
    "initiative": "8",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\detonation.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\detonation.jpeg",
    "ghs": {
     "name": "Detonation",
     "number": 384,
@@ -399,7 +399,7 @@
    "name": "murderous stalker",
    "level": "1",
    "initiative": "13",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\murderous-stalker.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\murderous-stalker.jpeg",
    "ghs": {
     "name": "Murderous Stalker",
     "number": 385,
@@ -423,7 +423,7 @@
    "name": "a moment's peace",
    "level": "1",
    "initiative": "88",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\a-moments-peace.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\a-moments-peace.jpeg",
    "ghs": {
     "name": "A Moment's Peace",
     "number": 386,
@@ -446,7 +446,7 @@
    "name": "the hunt begins",
    "level": "1",
    "initiative": "20",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\the-hunt-begins.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\the-hunt-begins.jpeg",
    "ghs": {
     "name": "The Hunt Begins",
     "number": 387,
@@ -469,7 +469,7 @@
    "name": "solid bow",
    "level": "1",
    "initiative": "54",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\solid-bow.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\solid-bow.jpeg",
    "ghs": {
     "name": "Solid Bow",
     "number": 388,
@@ -492,7 +492,7 @@
    "name": "foot snare",
    "level": "1",
    "initiative": "14",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\foot-snare.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\foot-snare.jpeg",
    "ghs": {
     "name": "Foot Snare",
     "number": 389,
@@ -514,7 +514,7 @@
    "name": "forward momentum",
    "level": "1",
    "initiative": "11",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\forward-momentum.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\forward-momentum.jpeg",
    "ghs": {
     "name": "Forward Momentum",
     "number": 390,
@@ -537,7 +537,7 @@
    "name": "hidden danger",
    "level": "1",
    "initiative": "72",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\hidden-danger.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\hidden-danger.jpeg",
    "ghs": {
     "name": "Hidden Danger",
     "number": 391,
@@ -564,7 +564,7 @@
    "name": "give chase",
    "level": "X",
    "initiative": "80",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\give-chase.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\give-chase.jpeg",
    "ghs": {
     "name": "Give Chase",
     "number": 392,
@@ -587,7 +587,7 @@
    "name": "feral aid",
    "level": "X",
    "initiative": "35",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\feral-aid.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\feral-aid.jpeg",
    "ghs": {
     "name": "Feral Aid",
     "number": 393,
@@ -612,7 +612,7 @@
    "name": "fierce fighter",
    "level": "X",
    "initiative": "78",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\fierce-fighter.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\fierce-fighter.jpeg",
    "ghs": {
     "name": "Fierce Fighter",
     "number": 394,
@@ -639,7 +639,7 @@
    "name": "relentless offensive",
    "level": "2",
    "initiative": "63",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\relentless-offensive.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\relentless-offensive.jpeg",
    "ghs": {
     "name": "Relentless Offensive",
     "number": 395,
@@ -666,7 +666,7 @@
    "name": "dual shot",
    "level": "2",
    "initiative": "52",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\dual-shot.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\dual-shot.jpeg",
    "ghs": {
     "name": "Dual Shot",
     "number": 396,
@@ -689,7 +689,7 @@
    "name": "walking bastion",
    "level": "3",
    "initiative": "90",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\walking-bastion.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\walking-bastion.jpeg",
    "ghs": {
     "name": "Walking Bastion",
     "number": 397,
@@ -716,7 +716,7 @@
    "name": "swift trickery",
    "level": "3",
    "initiative": "10",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\swift-trickery.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\swift-trickery.jpeg",
    "ghs": {
     "name": "Swift Trickery",
     "number": 398,
@@ -738,7 +738,7 @@
    "name": "camouflage",
    "level": "4",
    "initiative": "6",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\camouflage.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\camouflage.jpeg",
    "ghs": {
     "name": "Camouflage",
     "number": 399,
@@ -765,7 +765,7 @@
    "name": "coated arrows",
    "level": "4",
    "initiative": "25",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\coated-arrows.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\coated-arrows.jpeg",
    "ghs": {
     "name": "Coated Arrows",
     "number": 400,
@@ -791,7 +791,7 @@
    "name": "felling swoop",
    "level": "5",
    "initiative": "93",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\felling-swoop.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\felling-swoop.jpeg",
    "ghs": {
     "name": "Falling Swoop",
     "number": 401,
@@ -819,7 +819,7 @@
    "name": "expose",
    "level": "5",
    "initiative": "31",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\expose.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\expose.jpeg",
    "ghs": {
     "name": "Expose",
     "number": 402,
@@ -847,7 +847,7 @@
    "name": "wild command",
    "level": "6",
    "initiative": "46",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\wild-command.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\wild-command.jpeg",
    "ghs": {
     "name": "Wild Command",
     "number": 403,
@@ -869,7 +869,7 @@
    "name": "impending end",
    "level": "6",
    "initiative": "47",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\impending-end.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\impending-end.jpeg",
    "ghs": {
     "name": "Impending End",
     "number": 404,
@@ -894,7 +894,7 @@
    "name": "charging beast",
    "level": "7",
    "initiative": "82",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\charging-beast.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\charging-beast.jpeg",
    "ghs": {
     "name": "Charging Beast",
     "number": 405,
@@ -921,7 +921,7 @@
    "name": "darkened skies",
    "level": "7",
    "initiative": "36",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\darkened-skies.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\darkened-skies.jpeg",
    "ghs": {
     "name": "Darkened Skies",
     "number": 406,
@@ -947,7 +947,7 @@
    "name": "feral instincts",
    "level": "8",
    "initiative": "17",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\feral-instincts.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\feral-instincts.jpeg",
    "ghs": {
     "name": "Feral Instincts",
     "number": 407,
@@ -972,7 +972,7 @@
    "name": "press the attack",
    "level": "8",
    "initiative": "22",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\press-the-attack.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\press-the-attack.jpeg",
    "ghs": {
     "name": "Press the Attack",
     "number": 408,
@@ -1000,7 +1000,7 @@
    "name": "predator and prey",
    "level": "9",
    "initiative": "86",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\predator-and-prey.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\predator-and-prey.jpeg",
    "ghs": {
     "name": "Predator and Prey",
     "number": 409,
@@ -1027,7 +1027,7 @@
    "name": "heart of doom",
    "level": "9",
    "initiative": "40",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\DS2\\heart-of-doom.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\DS2\\heart-of-doom.jpeg",
    "ghs": {
     "name": "Heart of Doom",
     "number": 410,

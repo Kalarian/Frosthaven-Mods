@@ -1,6 +1,6 @@
 # Gloomhaven 2nd edition: class mats and perk sheets
 
-Transcribed from the mat and perk-sheet images in `C:\Claude\GH2eData\cards` and cross-checked against Gloomhaven Secretariat. Machine-readable copy: `tools/gh2e/classes.json`.
+Transcribed from the mat and perk-sheet images in `C:\Claude\Frosthaven\local\gh2e-data\cards` and cross-checked against Gloomhaven Secretariat. Machine-readable copy: `tools/gh2e/classes.json`.
 
 Icons are written as words in brackets, e.g. [Invisible], [Tear token], [Teleport]; attack modifier cards as [+1], [-1], [2x], [Null]; [Rolling] is the rolling symbol. Linked boxes (one tall box with dashed dividers) are marked *linked*. Every perk sheet has 18 perk boxes.
 

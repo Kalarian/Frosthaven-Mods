@@ -1,9 +1,9 @@
 """The layout review page for one ported class: each half beside its closest Frosthaven halves, with the rule breaks.
 
-    python tools/layout_review_page.py <Class>   -> C:\\Claude\\FrosthavenCardShots\\review\\<class>-layout-review.html
+    python tools/layout_review_page.py <Class>   -> C:\\Claude\\Frosthaven\\local\\cardshots\\review\\<class>-layout-review.html
 
 A local page (the card images are the game's art; they stay on this machine). The half crops come from the card
-images in C:\\Claude\\FrosthavenCardShots (tools/cardshots_all.py in the harness repo).
+images in C:\\Claude\\Frosthaven\\local\\cardshots (tools/cardshots_all.py in the harness repo).
 """
 import html
 import json

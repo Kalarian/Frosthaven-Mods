@@ -3,9 +3,9 @@
   python tools/gh2e/sources.py [Class ...]     -> tools/gh2e/sources/<Class>.json
 
 Sources (credited in docs/plans/gloomhaven-2nd-edition.md):
-  - card list + images: gloomhavencards.com (github.com/cmlenius/gloomhaven-card-browser), fetched to C:\\Claude\\GH2eData\\cards
+  - card list + images: gloomhavencards.com (github.com/cmlenius/gloomhaven-card-browser), fetched to C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards
   - structured actions: Gloomhaven Secretariat (github.com/Lurkars/gloomhavensecretariat, data/gh2e, AGPL-3.0),
-    fetched to C:\\Claude\\GH2eData\\ghs
+    fetched to C:\\Claude\\Frosthaven\\local\\gh2e-data\\ghs
   - Gloomhaven digital YAML: Xipe's "Gloomhaven: Second Edition" Steam Workshop mod 3587771315 (local Steam folder)
 
 The card site's list is the master index (all classes, names, levels, initiatives). GHS actions are rendered as one
@@ -17,7 +17,7 @@ import os
 import re
 import sys
 
-DATA = r"C:\Claude\GH2eData"
+DATA = r"C:\Claude\Frosthaven\local\gh2e-data"
 XIPE = r"C:\Program Files (x86)\Steam\steamapps\workshop\content\780290\3587771315\ModdedYML"
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "sources")

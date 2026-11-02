@@ -260,7 +260,7 @@
    "name": "mobilizing measure",
    "level": "1",
    "initiative": "8",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\mobilizing-measure.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\mobilizing-measure.jpeg",
    "ghs": {
     "name": "Mobilizing Measure",
     "number": 351,
@@ -286,7 +286,7 @@
    "name": "bewildering instrumental",
    "level": "1",
    "initiative": "11",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\bewildering-instrumental.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\bewildering-instrumental.jpeg",
    "ghs": {
     "name": "Bewildering Instrumental",
     "number": 352,
@@ -312,7 +312,7 @@
    "name": "wearying chant",
    "level": "1",
    "initiative": "19 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\wearying-chant.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\wearying-chant.jpeg",
    "ghs": {
     "name": "Wearying Chant",
     "number": 353,
@@ -336,7 +336,7 @@
    "name": "power ballad",
    "level": "1",
    "initiative": "12 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\power-ballad.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\power-ballad.jpeg",
    "ghs": {
     "name": "Power Ballad",
     "number": 354,
@@ -359,7 +359,7 @@
    "name": "dissonant rhythm",
    "level": "1",
    "initiative": "14 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\dissonant-rhythm.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\dissonant-rhythm.jpeg",
    "ghs": {
     "name": "Dissonant Rhythm",
     "number": 355,
@@ -383,7 +383,7 @@
    "name": "increase cadence",
    "level": "1",
    "initiative": "32 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\increase-cadence.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\increase-cadence.jpeg",
    "ghs": {
     "name": "Increase Cadence",
     "number": 356,
@@ -409,7 +409,7 @@
    "name": "intensifying amplitude",
    "level": "1",
    "initiative": "56 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\intensifying-amplitude.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\intensifying-amplitude.jpeg",
    "ghs": {
     "name": "Intensifying Amplitude",
     "number": 357,
@@ -435,7 +435,7 @@
    "name": "marching beat",
    "level": "1",
    "initiative": "21 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\marching-beat.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\marching-beat.jpeg",
    "ghs": {
     "name": "Marching Beat",
     "number": 358,
@@ -458,7 +458,7 @@
    "name": "tuning the outcome",
    "level": "1",
    "initiative": "44 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\tuning-the-outcome.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\tuning-the-outcome.jpeg",
    "ghs": {
     "name": "Tuning the Outcome",
     "number": 359,
@@ -481,7 +481,7 @@
    "name": "call to action",
    "level": "1",
    "initiative": "27 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\call-to-action.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\call-to-action.jpeg",
    "ghs": {
     "name": "Call to Action",
     "number": 360,
@@ -503,7 +503,7 @@
    "name": "singing arrow",
    "level": "1",
    "initiative": "85 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\singing-arrow.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\singing-arrow.jpeg",
    "ghs": {
     "name": "Singing Arrow",
     "number": 361,
@@ -526,7 +526,7 @@
    "name": "defensive ditty",
    "level": "X",
    "initiative": "9 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\defensive-ditty.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\defensive-ditty.jpeg",
    "ghs": {
     "name": "Defensive Ditty",
     "number": 362,
@@ -549,7 +549,7 @@
    "name": "echoing aria",
    "level": "X",
    "initiative": "5 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\echoing-aria.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\echoing-aria.jpeg",
    "ghs": {
     "name": "Echoing Aria",
     "number": 363,
@@ -574,7 +574,7 @@
    "name": "provoke terror",
    "level": "X",
    "initiative": "89 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\provoke-terror.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\provoke-terror.jpeg",
    "ghs": {
     "name": "Provoke Terror",
     "number": 364,
@@ -599,7 +599,7 @@
    "name": "onward to battle",
    "level": "2",
    "initiative": "91 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\onward-to-battle.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\onward-to-battle.jpeg",
    "ghs": {
     "name": "Onward to Battle",
     "number": 365,
@@ -621,7 +621,7 @@
    "name": "soothing lullaby",
    "level": "2",
    "initiative": "20 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\soothing-lullaby.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\soothing-lullaby.jpeg",
    "ghs": {
     "name": "Soothing Lullaby",
     "number": 366,
@@ -647,7 +647,7 @@
    "name": "symphonic medley",
    "level": "3",
    "initiative": "62 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\symphonic-medley.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\symphonic-medley.jpeg",
    "ghs": {
     "name": "Symphonic Medley",
     "number": 367,
@@ -675,7 +675,7 @@
    "name": "ode to the gambler",
    "level": "3",
    "initiative": "15 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\ode-to-the-gambler.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\ode-to-the-gambler.jpeg",
    "ghs": {
     "name": "Ode to the Gambler",
     "number": 368,
@@ -698,7 +698,7 @@
    "name": "hymn of the oak",
    "level": "4",
    "initiative": "10 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\hymn-of-the-oak.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\hymn-of-the-oak.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -706,7 +706,7 @@
    "name": "alluring serenade",
    "level": "4",
    "initiative": "24 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\alluring-serenade.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\alluring-serenade.jpeg",
    "ghs": {
     "name": "Alluring Serenade",
     "number": 370,
@@ -730,7 +730,7 @@
    "name": "change tempo",
    "level": "5",
    "initiative": "25 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\change-tempo.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\change-tempo.jpeg",
    "ghs": {
     "name": "Change Tempo",
     "number": 371,
@@ -754,7 +754,7 @@
    "name": "thrilling solo",
    "level": "5",
    "initiative": "60 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\thrilling-solo.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\thrilling-solo.jpeg",
    "ghs": {
     "name": "Thrilling Solo",
     "number": 372,
@@ -778,7 +778,7 @@
    "name": "pull the strings",
    "level": "6",
    "initiative": "34 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\pull-the-strings.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\pull-the-strings.jpeg",
    "ghs": {
     "name": "Pull the Strings",
     "number": 373,
@@ -801,7 +801,7 @@
    "name": "disorienting dirge",
    "level": "6",
    "initiative": "13 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\disorienting-dirge.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\disorienting-dirge.jpeg",
    "ghs": {
     "name": "Disorienting Dirge",
     "number": 374,
@@ -827,7 +827,7 @@
    "name": "inspiring anthem",
    "level": "7",
    "initiative": "50 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\inspiring-anthem.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\inspiring-anthem.jpeg",
    "ghs": {
     "name": "Inspiring Anthem",
     "number": 375,
@@ -849,7 +849,7 @@
    "name": "wistful wounding",
    "level": "7",
    "initiative": "6 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\wistful-wounding.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\wistful-wounding.jpeg",
    "ghs": {
     "name": "Wistful Wounding",
     "number": 376,
@@ -875,7 +875,7 @@
    "name": "commanding presence",
    "level": "8",
    "initiative": "65 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\commanding-presence.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\commanding-presence.jpeg",
    "ghs": {
     "name": "Commanding Presence",
     "number": 377,
@@ -897,7 +897,7 @@
    "name": "toughening trill",
    "level": "8",
    "initiative": "78 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\toughening-trill.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\toughening-trill.jpeg",
    "ghs": {
     "name": "Toughening Trill",
     "number": 378,
@@ -921,7 +921,7 @@
    "name": "grand finale",
    "level": "9",
    "initiative": "46 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\grand-finale.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\grand-finale.jpeg",
    "ghs": {
     "name": "Grand Finale",
     "number": 379,
@@ -949,7 +949,7 @@
    "name": "captivating performance",
    "level": "9",
    "initiative": "71 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SS2\\captivating-performance.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SS2\\captivating-performance.jpeg",
    "ghs": {
     "name": "Captivating Performance",
     "number": 380,

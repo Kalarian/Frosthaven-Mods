@@ -211,7 +211,7 @@
    "name": "opposing strike",
    "level": "1",
    "initiative": "46",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\opposing-strike.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\opposing-strike.jpeg",
    "ghs": {
     "name": "Opposing Strike",
     "number": 116,
@@ -241,7 +241,7 @@
    "name": "crushing grasp",
    "level": "1",
    "initiative": "35",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\crushing-grasp.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\crushing-grasp.jpeg",
    "ghs": {
     "name": "Crushing Grasp",
     "number": 117,
@@ -273,7 +273,7 @@
    "name": "avalanche",
    "level": "1",
    "initiative": "75",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\avalanche.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\avalanche.jpeg",
    "ghs": {
     "name": "Avalanche",
     "number": 118,
@@ -303,7 +303,7 @@
    "name": "rumbling advance",
    "level": "1",
    "initiative": "38",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\rumbling-advance.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\rumbling-advance.jpeg",
    "ghs": {
     "name": "Rumbling Advance",
     "number": 119,
@@ -333,7 +333,7 @@
    "name": "massive boulder",
    "level": "1",
    "initiative": "87",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\massive-boulder.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\massive-boulder.jpeg",
    "ghs": {
     "name": "Massive Boulder",
     "number": 120,
@@ -361,7 +361,7 @@
    "name": "backup ammunition",
    "level": "1",
    "initiative": "77",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\backup-ammunition.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\backup-ammunition.jpeg",
    "ghs": {
     "name": "Backup Ammunition",
     "number": 121,
@@ -392,7 +392,7 @@
    "name": "earthen bulwark",
    "level": "1",
    "initiative": "41",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\earthen-bulwark.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\earthen-bulwark.jpeg",
    "ghs": {
     "name": "Earthen Bulwark",
     "number": 122,
@@ -420,7 +420,7 @@
    "name": "unstable upheaval",
    "level": "1",
    "initiative": "13",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\unstable-upheaval.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\unstable-upheaval.jpeg",
    "ghs": {
     "name": "Unstable Upheaval",
     "number": 123,
@@ -454,7 +454,7 @@
    "name": "crater",
    "level": "1",
    "initiative": "61",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\crater.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\crater.jpeg",
    "ghs": {
     "name": "Crater",
     "number": 124,
@@ -486,7 +486,7 @@
    "name": "dirt tornado",
    "level": "1",
    "initiative": "82",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\dirt-tornado.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\dirt-tornado.jpeg",
    "ghs": {
     "name": "Dirt Tornado",
     "number": 125,
@@ -514,7 +514,7 @@
    "name": "earthen clod",
    "level": "1",
    "initiative": "24",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\earthen-clod.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\earthen-clod.jpeg",
    "ghs": {
     "name": "Earthen Clod",
     "number": 126,
@@ -544,7 +544,7 @@
    "name": "heaving swing",
    "level": "X",
    "initiative": "57",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\heaving-swing.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\heaving-swing.jpeg",
    "ghs": {
     "name": "Heaving Swing",
     "number": 127,
@@ -573,7 +573,7 @@
    "name": "petrify",
    "level": "X",
    "initiative": "53",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\petrify.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\petrify.jpeg",
    "ghs": {
     "name": "Petrify",
     "number": 128,
@@ -604,7 +604,7 @@
    "name": "burrow",
    "level": "X",
    "initiative": "94",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\burrow.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\burrow.jpeg",
    "ghs": {
     "name": "Burrow",
     "number": 129,
@@ -636,7 +636,7 @@
    "name": "mud eruption",
    "level": "2",
    "initiative": "25",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\mud-eruption.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\mud-eruption.jpeg",
    "ghs": {
     "name": "Mud Eruption",
     "number": 130,
@@ -667,7 +667,7 @@
    "name": "sentient growth",
    "level": "2",
    "initiative": "78",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\sentient-growth.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\sentient-growth.jpeg",
    "ghs": {
     "name": "Sentient Growth",
     "number": 131,
@@ -698,7 +698,7 @@
    "name": "clear the way",
    "level": "3",
    "initiative": "30",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\clear-the-way.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\clear-the-way.jpeg",
    "ghs": {
     "name": "Clear the Way",
     "number": 132,
@@ -725,7 +725,7 @@
    "name": "blunt force",
    "level": "3",
    "initiative": "21",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\blunt-force.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\blunt-force.jpeg",
    "ghs": {
     "name": "Blunt Force",
     "number": 133,
@@ -756,7 +756,7 @@
    "name": "rock slide",
    "level": "4",
    "initiative": "81",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\rock-slide.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\rock-slide.jpeg",
    "ghs": {
     "name": "Rock Slide",
     "number": 134,
@@ -787,7 +787,7 @@
    "name": "kinetic assault",
    "level": "4",
    "initiative": "19",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\kinetic-assault.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\kinetic-assault.jpeg",
    "ghs": {
     "name": "Kinetic Assault",
     "number": 135,
@@ -821,7 +821,7 @@
    "name": "solidify",
    "level": "5",
    "initiative": "17",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\solidify.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\solidify.jpeg",
    "ghs": {
     "name": "Solidify",
     "number": 136,
@@ -850,7 +850,7 @@
    "name": "stone pummel",
    "level": "5",
    "initiative": "32",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\stone-pummel.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\stone-pummel.jpeg",
    "ghs": {
     "name": "Stone Pummel",
     "number": 137,
@@ -884,7 +884,7 @@
    "name": "dig pit",
    "level": "6",
    "initiative": "88",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\dig-pit.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\dig-pit.jpeg",
    "ghs": {
     "name": "Dig Pit",
     "number": 138,
@@ -913,7 +913,7 @@
    "name": "cataclysm",
    "level": "6",
    "initiative": "26",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\cataclysm.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\cataclysm.jpeg",
    "ghs": {
     "name": "Cataclysm",
     "number": 139,
@@ -945,7 +945,7 @@
    "name": "meteor",
    "level": "7",
    "initiative": "85",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\meteor.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\meteor.jpeg",
    "ghs": {
     "name": "Meteor",
     "number": 140,
@@ -974,7 +974,7 @@
    "name": "brutal momentum",
    "level": "7",
    "initiative": "37",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\brutal-momentum.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\brutal-momentum.jpeg",
    "ghs": {
     "name": "Brutal Momentum",
     "number": 141,
@@ -1004,7 +1004,7 @@
    "name": "rocky end",
    "level": "8",
    "initiative": "31",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\rocky-end.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\rocky-end.jpeg",
    "ghs": {
     "name": "Rocky End",
     "number": 142,
@@ -1037,7 +1037,7 @@
    "name": "entomb",
    "level": "8",
    "initiative": "23",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\entomb.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\entomb.jpeg",
    "ghs": {
     "name": "Entomb",
     "number": 143,
@@ -1066,7 +1066,7 @@
    "name": "wave of destruction",
    "level": "9",
    "initiative": "74",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\wave-of-destruction.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\wave-of-destruction.jpeg",
    "ghs": {
     "name": "Wave of Destruction",
     "number": 144,
@@ -1094,7 +1094,7 @@
    "name": "earth's embrace",
    "level": "9",
    "initiative": "52",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\CH2\\earths-embrace.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\CH2\\earths-embrace.jpeg",
    "ghs": {
     "name": "Earth's Embrace",
     "number": 145,

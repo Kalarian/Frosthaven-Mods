@@ -461,7 +461,7 @@
    "name": "ethereal gust",
    "level": "1",
    "initiative": "14",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\ethereal-gust.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\ethereal-gust.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -469,7 +469,7 @@
    "name": "forged ferocity",
    "level": "1",
    "initiative": "37",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\forged-ferocity.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\forged-ferocity.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -477,7 +477,7 @@
    "name": "living night",
    "level": "1",
    "initiative": "96",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\living-night.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\living-night.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -485,7 +485,7 @@
    "name": "wild animation",
    "level": "1",
    "initiative": "92",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\wild-animation.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\wild-animation.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -493,7 +493,7 @@
    "name": "planar protection",
    "level": "1",
    "initiative": "94",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\planar-protection.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\planar-protection.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -501,7 +501,7 @@
    "name": "mighty bond",
    "level": "1",
    "initiative": "51",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\mighty-bond.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\mighty-bond.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -509,7 +509,7 @@
    "name": "bonded might",
    "level": "1",
    "initiative": "61",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\bonded-might.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\bonded-might.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -517,7 +517,7 @@
    "name": "burning passion",
    "level": "1",
    "initiative": "12",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\burning-passion.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\burning-passion.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -525,7 +525,7 @@
    "name": "unending dominance",
    "level": "1",
    "initiative": "22",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\unending-dominance.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\unending-dominance.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -533,7 +533,7 @@
    "name": "shadow dart",
    "level": "1",
    "initiative": "28",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\shadow-dart.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\shadow-dart.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -541,7 +541,7 @@
    "name": "burning tether",
    "level": "1",
    "initiative": "43",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\burning-tether.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\burning-tether.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -549,7 +549,7 @@
    "name": "primal assault",
    "level": "1",
    "initiative": "20",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\primal-assault.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\primal-assault.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -557,7 +557,7 @@
    "name": "drifting stingers",
    "level": "X",
    "initiative": "90",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\drifting-stingers.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\drifting-stingers.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -565,7 +565,7 @@
    "name": "biting wind",
    "level": "X",
    "initiative": "82",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\biting-wind.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\biting-wind.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -573,7 +573,7 @@
    "name": "unwavering hand",
    "level": "X",
    "initiative": "31",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\unwavering-hand.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\unwavering-hand.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -581,7 +581,7 @@
    "name": "intervening apparitions",
    "level": "2",
    "initiative": "34",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\intervening-apparitions.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\intervening-apparitions.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -589,7 +589,7 @@
    "name": "void imbuement",
    "level": "2",
    "initiative": "23",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\void-imbuement.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\void-imbuement.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -597,7 +597,7 @@
    "name": "shaping the void",
    "level": "3",
    "initiative": "41,",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\shaping-the-void.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\shaping-the-void.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -605,7 +605,7 @@
    "name": "deadly mischief",
    "level": "3",
    "initiative": "81",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\deadly-mischief.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\deadly-mischief.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -613,7 +613,7 @@
    "name": "strength in numbers",
    "level": "4",
    "initiative": "45",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\strength-in-numbers.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\strength-in-numbers.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -621,7 +621,7 @@
    "name": "volatile flame",
    "level": "4",
    "initiative": "97",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\volatile-flame.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\volatile-flame.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -629,7 +629,7 @@
    "name": "living mountain",
    "level": "5",
    "initiative": "19",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\living-mountain.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\living-mountain.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -637,7 +637,7 @@
    "name": "primal infusion",
    "level": "5",
    "initiative": "88",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\primal-infusion.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\primal-infusion.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -645,7 +645,7 @@
    "name": "tear the fabric",
    "level": "6",
    "initiative": "11",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\tear-the-fabric.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\tear-the-fabric.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -653,7 +653,7 @@
    "name": "oozing manifestation",
    "level": "6",
    "initiative": "86",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\oozing-manifestation.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\oozing-manifestation.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -661,7 +661,7 @@
    "name": "divided mind",
    "level": "7",
    "initiative": "30",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\divided-mind.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\divided-mind.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -669,7 +669,7 @@
    "name": "negative energy",
    "level": "7",
    "initiative": "95",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\negative-energy.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\negative-energy.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -677,7 +677,7 @@
    "name": "otherworldly rage",
    "level": "8",
    "initiative": "35",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\otherworldly-rage.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\otherworldly-rage.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -685,7 +685,7 @@
    "name": "interplanar mastery",
    "level": "8",
    "initiative": "27",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\interplanar-mastery.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\interplanar-mastery.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -693,7 +693,7 @@
    "name": "imposed will",
    "level": "9",
    "initiative": "98",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\imposed-will.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\imposed-will.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -701,7 +701,7 @@
    "name": "horned nightmare",
    "level": "9",
    "initiative": "80",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\ST2\\horned-nightmare.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\ST2\\horned-nightmare.jpeg",
    "ghs": null,
    "xipe": null
   }

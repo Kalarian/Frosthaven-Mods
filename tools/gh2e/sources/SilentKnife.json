@@ -217,7 +217,7 @@
    "name": "single out",
    "level": "1",
    "initiative": "86",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\single-out.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\single-out.jpeg",
    "ghs": {
     "name": "Single Out",
     "number": 88,
@@ -248,7 +248,7 @@
    "name": "flanking strike",
    "level": "1",
    "initiative": "4",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\flanking-strike.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\flanking-strike.jpeg",
    "ghs": {
     "name": "Flanking Strike",
     "number": 89,
@@ -275,7 +275,7 @@
    "name": "swift bow",
    "level": "1",
    "initiative": "36",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\swift-bow.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\swift-bow.jpeg",
    "ghs": {
     "name": "Swift Bow",
     "number": 90,
@@ -303,7 +303,7 @@
    "name": "quick hands",
    "level": "1",
    "initiative": "23",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\quick-hands.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\quick-hands.jpeg",
    "ghs": {
     "name": "Quick Hands",
     "number": 91,
@@ -333,7 +333,7 @@
    "name": "sinister opportunity",
    "level": "1",
    "initiative": "93",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\sinister-opportunity.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\sinister-opportunity.jpeg",
    "ghs": {
     "name": "Sinister Opportunity",
     "number": 92,
@@ -360,7 +360,7 @@
    "name": "venom shiv",
    "level": "1",
    "initiative": "8",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\venom-shiv.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\venom-shiv.jpeg",
    "ghs": {
     "name": "Venom Shiv",
     "number": 93,
@@ -389,7 +389,7 @@
    "name": "throwing knives",
    "level": "1",
    "initiative": "10",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\throwing-knives.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\throwing-knives.jpeg",
    "ghs": {
     "name": "Throwing Knives",
     "number": 94,
@@ -418,7 +418,7 @@
    "name": "practiced reflexes",
    "level": "1",
    "initiative": "64",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\practiced-reflexes.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\practiced-reflexes.jpeg",
    "ghs": {
     "name": "Practiced Reflexes",
     "number": 95,
@@ -447,7 +447,7 @@
    "name": "special mixture",
    "level": "1",
    "initiative": "33",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\special-mixture.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\special-mixture.jpeg",
    "ghs": {
     "name": "Special Mixture",
     "number": 96,
@@ -476,7 +476,7 @@
    "name": "backstab",
    "level": "X",
    "initiative": "6",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\backstab.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\backstab.jpeg",
    "ghs": {
     "name": "Backstab",
     "number": 97,
@@ -505,7 +505,7 @@
    "name": "smoke bomb",
    "level": "X",
    "initiative": "12",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\smoke-bomb.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\smoke-bomb.jpeg",
    "ghs": {
     "name": "Smoke Bomb",
     "number": 98,
@@ -538,7 +538,7 @@
    "name": "trickster's reversal",
    "level": "X",
    "initiative": "9",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\tricksters-reversal.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\tricksters-reversal.jpeg",
    "ghs": {
     "name": "Trickster's Reversal",
     "number": 99,
@@ -569,7 +569,7 @@
    "name": "open wound",
    "level": "2",
    "initiative": "11",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\open-wound.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\open-wound.jpeg",
    "ghs": {
     "name": "Open Wound",
     "number": 100,
@@ -596,7 +596,7 @@
    "name": "stick to the shadows",
    "level": "2",
    "initiative": "26",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\stick-to-the-shadows.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\stick-to-the-shadows.jpeg",
    "ghs": {
     "name": "Stick to the Shadows",
     "number": 101,
@@ -628,7 +628,7 @@
    "name": "hidden daggers",
    "level": "3",
    "initiative": "39",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\hidden-daggers.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\hidden-daggers.jpeg",
    "ghs": {
     "name": "Hidden Daggers",
     "number": 102,
@@ -662,7 +662,7 @@
    "name": "flintlock",
    "level": "3",
    "initiative": "51",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\flintlock.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\flintlock.jpeg",
    "ghs": {
     "name": "Flintlock",
     "number": 103,
@@ -691,7 +691,7 @@
    "name": "flurry of blades",
    "level": "4",
    "initiative": "16",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\flurry-of-blades.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\flurry-of-blades.jpeg",
    "ghs": {
     "name": "Flurry of Blades",
     "number": 104,
@@ -720,7 +720,7 @@
    "name": "gruesome advantage",
    "level": "4",
    "initiative": "90",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\gruesome-advantage.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\gruesome-advantage.jpeg",
    "ghs": {
     "name": "Gruesome Advantage",
     "number": 105,
@@ -750,7 +750,7 @@
    "name": "duelist's advantage",
    "level": "5",
    "initiative": "7",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\duelists-advantage.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\duelists-advantage.jpeg",
    "ghs": {
     "name": "Duelist's Advance",
     "number": 106,
@@ -784,7 +784,7 @@
    "name": "serrated arrow",
    "level": "5",
    "initiative": "95",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\serrated-arrow.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\serrated-arrow.jpeg",
    "ghs": {
     "name": "Serrated Arrow",
     "number": 107,
@@ -814,7 +814,7 @@
    "name": "dance of daggers",
    "level": "6",
    "initiative": "3",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\dance-of-daggers.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\dance-of-daggers.jpeg",
    "ghs": {
     "name": "Dance of Daggers",
     "number": 108,
@@ -848,7 +848,7 @@
    "name": "cull the weak",
    "level": "6",
    "initiative": "62",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\cull-the-weak.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\cull-the-weak.jpeg",
    "ghs": {
     "name": "Cull the Weak",
     "number": 109,
@@ -877,7 +877,7 @@
    "name": "stiletto storm",
    "level": "7",
    "initiative": "80",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\stiletto-storm.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\stiletto-storm.jpeg",
    "ghs": {
     "name": "Stiletto Storm",
     "number": 110,
@@ -908,7 +908,7 @@
    "name": "spring the trap",
    "level": "7",
    "initiative": "13",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\spring-the-trap.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\spring-the-trap.jpeg",
    "ghs": {
     "name": "Spring the Trap",
     "number": 111,
@@ -938,7 +938,7 @@
    "name": "visage of the inevitable",
    "level": "8",
    "initiative": "88",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\visage-of-the-inevitable.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\visage-of-the-inevitable.jpeg",
    "ghs": {
     "name": "Visage of the Inevitable",
     "number": 112,
@@ -966,7 +966,7 @@
    "name": "crippling poison",
    "level": "8",
    "initiative": "4",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\crippling-poison.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\crippling-poison.jpeg",
    "ghs": {
     "name": "Crippling Poison",
     "number": 113,
@@ -1000,7 +1000,7 @@
    "name": "hired help",
    "level": "9",
    "initiative": "2",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\hired-help.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\hired-help.jpeg",
    "ghs": {
     "name": "Hired Help",
     "number": 114,
@@ -1032,7 +1032,7 @@
    "name": "watch it burn",
    "level": "9",
    "initiative": "98",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SC2\\watch-it-burn.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SC2\\watch-it-burn.jpeg",
    "ghs": {
     "name": "Watch It Burn",
     "number": 115,

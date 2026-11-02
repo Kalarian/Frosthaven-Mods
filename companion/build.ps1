@@ -27,7 +27,7 @@ if (-not (Test-Path $installer)) { throw "no ${installer}: build the mod pack in
 Copy-Item $installer "$res\installer\"
 Copy-Item "..\docs\guide\guide.html" "$res\guides\mod-guide.html"
 Copy-Item "..\VERSION" "$res\VERSION"
-$playGuide = "C:\Claude\FrosthavenGuide\frosthaven-play-guide.html"
+$playGuide = "C:\Claude\Frosthaven\local\playguide\frosthaven-play-guide.html"
 if (Test-Path $playGuide) { Copy-Item $playGuide "$res\guides\play-guide.html" }
 else { Write-Host "No play guide at $playGuide; the Play guide tab will be hidden." }
 

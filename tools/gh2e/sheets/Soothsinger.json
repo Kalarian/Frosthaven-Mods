@@ -23,7 +23,7 @@
       "custom": ["top: song (cost: 1 Low Note); at the end of each of your turns, the ally closest to you performs Move 2",
                  "bottom: Retaliate 1 granted to one adjacent ally for the round"],
       "summons": [],
-      "notes": "Class-wide: numbers are printed with a 'G' prefix ('G 0351'); GHS cardIds 351-380 equal the printed numbers. Initiative printed '08'. Class-wide: the source's rendered GHS text drops the 'SONG:' cost box; I compared every song cost with the raw GHS deck file (C:\\Claude\\GH2eData\\ghs\\character\\deck\\music-note.json): all 15 agree. Several source initiatives had a trailing space; ignored. Class-wide: every corner box has a small '!' tab."
+      "notes": "Class-wide: numbers are printed with a 'G' prefix ('G 0351'); GHS cardIds 351-380 equal the printed numbers. Initiative printed '08'. Class-wide: the source's rendered GHS text drops the 'SONG:' cost box; I compared every song cost with the raw GHS deck file (C:\\Claude\\Frosthaven\\local\\gh2e-data\\ghs\\character\\deck\\music-note.json): all 15 agree. Several source initiatives had a trailing space; ignored. Class-wide: every corner box has a small '!' tab."
     },
     {
       "name": "Bewildering Instrumental",

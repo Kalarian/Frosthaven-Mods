@@ -837,7 +837,7 @@ BattleGoalCondition:
 ]
 
 # ---------------------------------------------------------------- group 4 (sheets read 2026-10-27, ahead of the port)
-# Spellweaver and Mindthief typed from the sheets (C:\Claude\crossover-sheets) and checked against Gloomhaven
+# Spellweaver and Mindthief typed from the sheets (C:\Claude\Frosthaven\local\crossover-sheets) and checked against Gloomhaven
 # Secretariat's transcription; their special perks that need the plugin (Etheric Bond, Lying Low) are text-only passives.
 
 SPELLWEAVER_PERKS = [

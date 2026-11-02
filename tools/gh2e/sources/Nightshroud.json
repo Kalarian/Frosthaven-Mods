@@ -240,7 +240,7 @@
    "name": "spirit of the night",
    "level": "1",
    "initiative": "35 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\spirit-of-the-night.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\spirit-of-the-night.jpeg",
    "ghs": {
     "name": "Spirit of the Night",
     "number": 266,
@@ -263,7 +263,7 @@
    "name": "slice through",
    "level": "1",
    "initiative": "15 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\slice-through.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\slice-through.jpeg",
    "ghs": {
     "name": "Slice Through",
     "number": 267,
@@ -289,7 +289,7 @@
    "name": "eyes of the night",
    "level": "1",
    "initiative": "93 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\eyes-of-the-night.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\eyes-of-the-night.jpeg",
    "ghs": {
     "name": "Eyes of the Night",
     "number": 268,
@@ -312,7 +312,7 @@
    "name": "armor of the night",
    "level": "1",
    "initiative": "10",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\armor-of-the-night.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\armor-of-the-night.jpeg",
    "ghs": {
     "name": "Armor of the Night",
     "number": 269,
@@ -336,7 +336,7 @@
    "name": "swallowed by fear",
    "level": "1",
    "initiative": "44",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\swallowed-by-fear.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\swallowed-by-fear.jpeg",
    "ghs": {
     "name": "Swallowed by Fear",
     "number": 270,
@@ -365,7 +365,7 @@
    "name": "dancing shadows",
    "level": "1",
    "initiative": "5 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\dancing-shadows.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\dancing-shadows.jpeg",
    "ghs": {
     "name": "Dancing Shadows",
     "number": 271,
@@ -391,7 +391,7 @@
    "name": "silent force",
    "level": "1",
    "initiative": "8 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\silent-force.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\silent-force.jpeg",
    "ghs": {
     "name": "Silent Force",
     "number": 272,
@@ -413,7 +413,7 @@
    "name": "black knives",
    "level": "1",
    "initiative": "77 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\black-knives.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\black-knives.jpeg",
    "ghs": {
     "name": "Black Knives",
     "number": 273,
@@ -437,7 +437,7 @@
    "name": "enervating wound",
    "level": "1",
    "initiative": "14 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\enervating-wound.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\enervating-wound.jpeg",
    "ghs": {
     "name": "Enervating Wound",
     "number": 274,
@@ -462,7 +462,7 @@
    "name": "nightfall",
    "level": "X",
    "initiative": "28 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\nightfall.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\nightfall.jpeg",
    "ghs": {
     "name": "Nightfall",
     "number": 275,
@@ -485,7 +485,7 @@
    "name": "empowering void",
    "level": "X",
    "initiative": "11 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\empowering-void.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\empowering-void.jpeg",
    "ghs": {
     "name": "Empowering Void",
     "number": 276,
@@ -510,7 +510,7 @@
    "name": "marked for death",
    "level": "X",
    "initiative": "84 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\marked-for-death.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\marked-for-death.jpeg",
    "ghs": {
     "name": "Marked for Death",
     "number": 277,
@@ -534,7 +534,7 @@
    "name": "unseen dread",
    "level": "2",
    "initiative": "12 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\unseen-dread.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\unseen-dread.jpeg",
    "ghs": {
     "name": "Unseen Dread",
     "number": 278,
@@ -560,7 +560,7 @@
    "name": "shroud in shade",
    "level": "2",
    "initiative": "6 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\shroud-in-shade.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\shroud-in-shade.jpeg",
    "ghs": {
     "name": "Shroud in Shade",
     "number": 279,
@@ -590,7 +590,7 @@
    "name": "terror blade",
    "level": "3",
    "initiative": "32 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\terror-blade.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\terror-blade.jpeg",
    "ghs": {
     "name": "Terror Blade",
     "number": 280,
@@ -617,7 +617,7 @@
    "name": "prepare for the kill",
    "level": "3",
    "initiative": "85 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\prepare-for-the-kill.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\prepare-for-the-kill.jpeg",
    "ghs": {
     "name": "Prepare for the Kill",
     "number": 281,
@@ -642,7 +642,7 @@
    "name": "lurking ruin",
    "level": "4",
    "initiative": "4",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\lurking-ruin.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\lurking-ruin.jpeg",
    "ghs": {
     "name": "Lurking Ruin",
     "number": 282,
@@ -669,7 +669,7 @@
    "name": "cursed blades",
    "level": "4",
    "initiative": "18 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\cursed-blades.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\cursed-blades.jpeg",
    "ghs": {
     "name": "Cursed Blades",
     "number": 283,
@@ -693,7 +693,7 @@
    "name": "into the night",
    "level": "5",
    "initiative": "17 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\into-the-night.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\into-the-night.jpeg",
    "ghs": {
     "name": "Into the Night",
     "number": 284,
@@ -717,7 +717,7 @@
    "name": "seeping tendrils",
    "level": "5",
    "initiative": "23 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\seeping-tendrils.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\seeping-tendrils.jpeg",
    "ghs": {
     "name": "Seeping Tendrils",
     "number": 285,
@@ -740,7 +740,7 @@
    "name": "claws of the night",
    "level": "6",
    "initiative": "56 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\claws-of-the-night.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\claws-of-the-night.jpeg",
    "ghs": {
     "name": "Claws of the Night",
     "number": 286,
@@ -767,7 +767,7 @@
    "name": "dark cloud",
    "level": "6",
    "initiative": "2 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\dark-cloud.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\dark-cloud.jpeg",
    "ghs": {
     "name": "Dark Cloud",
     "number": 287,
@@ -794,7 +794,7 @@
    "name": "messenger of death",
    "level": "7",
    "initiative": "63 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\messenger-of-death.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\messenger-of-death.jpeg",
    "ghs": {
     "name": "Messenger of Death",
     "number": 288,
@@ -818,7 +818,7 @@
    "name": "concealed dominance",
    "level": "7",
    "initiative": "26 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\concealed-dominance.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\concealed-dominance.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -826,7 +826,7 @@
    "name": "prey on the weak",
    "level": "8",
    "initiative": "38 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\prey-on-the-weak.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\prey-on-the-weak.jpeg",
    "ghs": {
     "name": "Prey on the Weak",
     "number": 290,
@@ -853,7 +853,7 @@
    "name": "shadowstrike",
    "level": "8",
    "initiative": "90 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\shadowstrike.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\shadowstrike.jpeg",
    "ghs": {
     "name": "Shadowstrike",
     "number": 291,
@@ -877,7 +877,7 @@
    "name": "swallowed by night",
    "level": "9",
    "initiative": "73 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\swallowed-by-night.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\swallowed-by-night.jpeg",
    "ghs": {
     "name": "Swallowed by Night",
     "number": 292,
@@ -901,7 +901,7 @@
    "name": "voice of the night",
    "level": "9",
    "initiative": "19 ",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\NS2\\voice-of-the-night.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\NS2\\voice-of-the-night.jpeg",
    "ghs": {
     "name": "Voice of the Night",
     "number": 293,

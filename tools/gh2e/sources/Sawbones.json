@@ -208,7 +208,7 @@
    "name": "battlefield medicine",
    "level": "1",
    "initiative": "83",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\battlefield-medicine.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\battlefield-medicine.jpeg",
    "ghs": {
     "name": "Battlefield Medicine",
     "number": 411,
@@ -230,7 +230,7 @@
    "name": "first aid",
    "level": "1",
    "initiative": "19",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\first-aid.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\first-aid.jpeg",
    "ghs": {
     "name": "First Aid",
     "number": 412,
@@ -251,7 +251,7 @@
    "name": "curative mixture",
    "level": "1",
    "initiative": "8",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\curative-mixture.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\curative-mixture.jpeg",
    "ghs": {
     "name": "Curative Mixture",
     "number": 413,
@@ -273,7 +273,7 @@
    "name": "bloody saw",
    "level": "1",
    "initiative": "25",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\bloody-saw.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\bloody-saw.jpeg",
    "ghs": {
     "name": "Bloody Saw",
     "number": 414,
@@ -296,7 +296,7 @@
    "name": "prevention is key",
    "level": "1",
    "initiative": "13",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\prevention-is-key.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\prevention-is-key.jpeg",
    "ghs": {
     "name": "Prevention Is Key",
     "number": 415,
@@ -324,7 +324,7 @@
    "name": "hand of the surgeon",
    "level": "1",
    "initiative": "62",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\hand-of-the-surgeon.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\hand-of-the-surgeon.jpeg",
    "ghs": {
     "name": "Hand of the Surgeon",
     "number": 416,
@@ -346,7 +346,7 @@
    "name": "booster shot",
    "level": "1",
    "initiative": "42",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\booster-shot.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\booster-shot.jpeg",
    "ghs": {
     "name": "Booster Shot",
     "number": 417,
@@ -371,7 +371,7 @@
    "name": "syringe",
    "level": "1",
    "initiative": "57",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\syringe.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\syringe.jpeg",
    "ghs": {
     "name": "Syringe",
     "number": 418,
@@ -396,7 +396,7 @@
    "name": "needle gun",
    "level": "1",
    "initiative": "44",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\needle-gun.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\needle-gun.jpeg",
    "ghs": {
     "name": "Needle Gun",
     "number": 419,
@@ -422,7 +422,7 @@
    "name": "vital strikes",
    "level": "1",
    "initiative": "53",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\vital-strikes.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\vital-strikes.jpeg",
    "ghs": {
     "name": "Vital Strikes",
     "number": 420,
@@ -447,7 +447,7 @@
    "name": "vaccine",
    "level": "X",
    "initiative": "15",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\vaccine.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\vaccine.jpeg",
    "ghs": {
     "name": "Vaccine",
     "number": 421,
@@ -471,7 +471,7 @@
    "name": "teamwork",
    "level": "X",
    "initiative": "89",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\teamwork.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\teamwork.jpeg",
    "ghs": {
     "name": "Teamwork",
     "number": 422,
@@ -494,7 +494,7 @@
    "name": "prep for surgery",
    "level": "X",
    "initiative": "22",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\prep-for-surgery.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\prep-for-surgery.jpeg",
    "ghs": {
     "name": "Prep for Surgery",
     "number": 423,
@@ -519,7 +519,7 @@
    "name": "hamstring",
    "level": "2",
    "initiative": "72",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\hamstring.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\hamstring.jpeg",
    "ghs": {
     "name": "Hamstring",
     "number": 424,
@@ -543,7 +543,7 @@
    "name": "precaution",
    "level": "2",
    "initiative": "9",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\precaution.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\precaution.jpeg",
    "ghs": {
     "name": "Precaution",
     "number": 425,
@@ -567,7 +567,7 @@
    "name": "regenerative tissue",
    "level": "3",
    "initiative": "52",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\regenerative-tissue.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\regenerative-tissue.jpeg",
    "ghs": {
     "name": "Regenerative Tissue",
     "number": 426,
@@ -591,7 +591,7 @@
    "name": "blood transfusion",
    "level": "3",
    "initiative": "79",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\blood-transfusion.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\blood-transfusion.jpeg",
    "ghs": {
     "name": "Blood Transfusion",
     "number": 427,
@@ -615,7 +615,7 @@
    "name": "experimental stimulants",
    "level": "4",
    "initiative": "12",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\experimental-stimulants.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\experimental-stimulants.jpeg",
    "ghs": {
     "name": "Experimental Stimulants",
     "number": 428,
@@ -640,7 +640,7 @@
    "name": "do no harm",
    "level": "4",
    "initiative": "18",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\do-no-harm.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\do-no-harm.jpeg",
    "ghs": {
     "name": "Do No Harm",
     "number": 429,
@@ -666,7 +666,7 @@
    "name": "hack to bits",
    "level": "5",
    "initiative": "38",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\hack-to-bits.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\hack-to-bits.jpeg",
    "ghs": {
     "name": "Hack to Bits",
     "number": 430,
@@ -692,7 +692,7 @@
    "name": "fortifying injection",
    "level": "5",
    "initiative": "5",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\fortifying-injection.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\fortifying-injection.jpeg",
    "ghs": {
     "name": "Fortifying Injection",
     "number": 431,
@@ -721,7 +721,7 @@
    "name": "amputate",
    "level": "6",
    "initiative": "86",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\amputate.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\amputate.jpeg",
    "ghs": {
     "name": "Amputate",
     "number": 432,
@@ -745,7 +745,7 @@
    "name": "return the favor",
    "level": "6",
    "initiative": "40",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\return-the-favor.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\return-the-favor.jpeg",
    "ghs": {
     "name": "Return the Favor",
     "number": 433,
@@ -768,7 +768,7 @@
    "name": "surgeons satchel",
    "level": "7",
    "initiative": "14",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\surgeons-satchel.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\surgeons-satchel.jpeg",
    "ghs": {
     "name": "Surgeon's Satchel",
     "number": 434,
@@ -791,7 +791,7 @@
    "name": "exacting anger",
    "level": "7",
    "initiative": "49",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\exacting-anger.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\exacting-anger.jpeg",
    "ghs": {
     "name": "Exacting Anger",
     "number": 435,
@@ -815,7 +815,7 @@
    "name": "take your medicine",
    "level": "8",
    "initiative": "6",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\take-your-medicine.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\take-your-medicine.jpeg",
    "ghs": {
     "name": "Take Your Medicine",
     "number": 436,
@@ -840,7 +840,7 @@
    "name": "euthanize",
    "level": "8",
    "initiative": "27",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\euthanize.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\euthanize.jpeg",
    "ghs": {
     "name": "Euthanize",
     "number": 437,
@@ -864,7 +864,7 @@
    "name": "secret of the oak",
    "level": "9",
    "initiative": "10",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\secret-of-the-oak.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\secret-of-the-oak.jpeg",
    "ghs": {
     "name": "Secret of the Oak",
     "number": 438,
@@ -892,7 +892,7 @@
    "name": "grisly trauma",
    "level": "9",
    "initiative": "81",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\grisly-trauma.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\grisly-trauma.jpeg",
    "ghs": {
     "name": "Grisly Trauma",
     "number": 439,
@@ -919,7 +919,7 @@
    "name": "medical pack 1",
    "level": "M",
    "initiative": "50",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\medical-pack-1.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\medical-pack-1.jpeg",
    "ghs": {
     "name": "Medical Pack",
     "number": 445,
@@ -944,7 +944,7 @@
    "name": "medical pack 2",
    "level": "M",
    "initiative": "50",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\medical-pack-2.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\medical-pack-2.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -952,7 +952,7 @@
    "name": "medical pack 3",
    "level": "M",
    "initiative": "50",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\medical-pack-3.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\medical-pack-3.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -960,7 +960,7 @@
    "name": "medical pack 4",
    "level": "M",
    "initiative": "50",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\medical-pack-4.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\medical-pack-4.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -968,7 +968,7 @@
    "name": "medical pack 5",
    "level": "M",
    "initiative": "50",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\medical-pack-5.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\medical-pack-5.jpeg",
    "ghs": null,
    "xipe": null
   },
@@ -976,7 +976,7 @@
    "name": "medical pack 6",
    "level": "M",
    "initiative": "50",
-   "image": "C:\\Claude\\GH2eData\\cards\\images\\SB2\\medical-pack-6.jpeg",
+   "image": "C:\\Claude\\Frosthaven\\local\\gh2e-data\\cards\\images\\SB2\\medical-pack-6.jpeg",
    "ghs": null,
    "xipe": null
   }
