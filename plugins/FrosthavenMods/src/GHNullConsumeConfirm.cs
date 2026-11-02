@@ -22,6 +22,73 @@ namespace FrosthavenMods
     {
         private static bool _reported;
 
+        // ---- the consume as a toggle until the step is confirmed (the user, 2026-11-02: "clicking on an element should
+        // never progress the game; it's a toggle before the user confirms that step") ----
+        // Applied at once, the Null override emptied the step on the click: the step was gone, so its consume slot left
+        // the bar (no way to switch Dark off again) and the ready button looked disabled. Now, while the step it empties
+        // is the current one, switching such a consume on only marks it to be consumed (the element shows chosen, the
+        // step stays a normal curse with its own Confirm); switching it off unmarks it; confirming the step applies the
+        // override first (the game's own toggle, as a click just before the confirm), so the step ends empty and the
+        // element is taken.
+        private static readonly System.Collections.Generic.HashSet<CActionAugmentation> _held = new System.Collections.Generic.HashSet<CActionAugmentation>();
+
+        private static bool EmptiesCurrent(CPhaseAction pa, CActionAugmentation aug)
+        {
+            CAbility cur = pa?.CurrentPhaseAbility?.m_Ability;
+            if (cur == null || aug?.AugmentationOps == null || cur.AbilityType == CAbility.EAbilityType.Null) return false;
+            if (!(cur.TargetingActor is CPlayerActor)) return false;
+            if (!(cur.GetAbilityBaseCard() is CAbilityCard card) || card.ID < 20000 || card.ID >= 40000) return false;
+            return aug.AugmentationOps.Count > 0 && aug.AugmentationOps.All(op => op != null
+                && op.Type == CActionAugmentationOp.EActionAugmentationType.AbilityOverride
+                && op.AbilityOverride != null && op.AbilityOverride.AbilityType == CAbility.EAbilityType.Null
+                && op.ParentAbilityName == cur.Name);
+        }
+
+        [HarmonyPatch(typeof(CPhaseAction), nameof(CPhaseAction.ToggleActionAugmentation))]
+        [HarmonyPrefix]
+        private static bool Toggle(CPhaseAction __instance, CActionAugmentation actionAugmentation, bool passing)
+        {
+            try
+            {
+                if (passing || !EmptiesCurrent(__instance, actionAugmentation)) return true;
+                var toConsume = __instance.ActionAugmentationsToConsume;
+                if (_held.Contains(actionAugmentation)) { _held.Remove(actionAugmentation); toConsume.Remove(actionAugmentation); }
+                else { _held.Add(actionAugmentation); if (!toConsume.Contains(actionAugmentation)) toConsume.Add(actionAugmentation); }
+                ScenarioRuleClient.MessageHandler(new CToggledActionAugmentation_MessageData
+                {
+                    m_CurrentAbilityAfterToggling = __instance.CurrentPhaseAbility.m_Ability,
+                    m_CurrentAugment = actionAugmentation,
+                });
+                if (!_heldReported) { _heldReported = true; Plugin.Log.LogInfo($"Gloomhaven consume that empties its step: {actionAugmentation.Name} held as a toggle until the step is confirmed"); }
+                return false;
+            }
+            catch (System.Exception e) { Plugin.Log.LogWarning("GHNullConsumeConfirm toggle: " + e.Message); return true; }
+        }
+
+        private static bool _heldReported;
+
+        [HarmonyPatch(typeof(CPhaseAction), "OnStepComplete")]
+        [HarmonyPrefix]
+        private static void Confirmed(CPhaseAction __instance, bool passingStep)
+        {
+            try
+            {
+                if (_held.Count == 0) return;
+                CAbility cur = __instance.CurrentPhaseAbility?.m_Ability;
+                foreach (CActionAugmentation aug in _held.ToList())
+                {
+                    bool mine = cur != null && aug.AugmentationOps.Any(op => op?.ParentAbilityName == cur.Name);
+                    if (!mine) { if (!__instance.ActionAugmentationsToConsume.Contains(aug)) _held.Remove(aug); continue; }
+                    _held.Remove(aug);
+                    __instance.ActionAugmentationsToConsume.Remove(aug);
+                    // skipped: the step didn't happen, nothing to empty and nothing taken
+                    if (passingStep) continue;
+                    __instance.ToggleActionAugmentation(aug, passing: true);
+                }
+            }
+            catch (System.Exception e) { Plugin.Log.LogWarning("GHNullConsumeConfirm confirm: " + e.Message); }
+        }
+
         private static readonly System.Reflection.FieldInfo InnerButton = AccessTools.Field(typeof(ReadyButton), "readyButton");
 
         /// <summary>The current step is a pack card's step a consume emptied, on the local player's turn.</summary>
