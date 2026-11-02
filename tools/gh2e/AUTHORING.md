@@ -116,15 +116,20 @@ Layout:
 
 ## When the engine can't do it
 
-Translate every special rule (the sheet card's `custom` list). In order of preference:
+Translate every special rule (the sheet card's `custom` list). The user's rule (2026-11-02): "Plugin support. If we
+can change the game to support cards, we should. I want to avoid changing card functionality as much as possible."
+In order of preference:
 1. Frosthaven's own shape for the same rule (search `extracted/Base/Global/Characters` for a similar text).
-2. The 1st edition port's solution (the same character often had the same rule).
-3. The closest faithful approximation, with the card text left as printed.
-4. If nothing fits: the plain abilities, with the rule as text only, marked **NEEDS PLUGIN** in NOTES.md.
+2. The 1st edition port's solution (the same character often had the same rule), or an existing GH* plugin
+   (`plugins/FrosthavenMods/src`).
+3. A new plugin rule that makes the engine do what the card prints (a Harmony patch in the mods plugin, inert without
+   the packs; a misc var or requirement on the card marks where it applies).
+Never ship an approximation or a text-only rule as finished: if the plugin isn't written yet, the card plays its plain
+abilities, the rule is marked **NEEDS PLUGIN** in NOTES.md, and it counts as open work until the plugin exists.
 
-Known 2e systems not in Frosthaven yet (write the rest of the card, note the rule as NEEDS PLUGIN with the closest
-approximation you could make): **Safeguard** (blocks the next negative condition), Tear tokens, Plague tokens,
-Prescriptions, Supplies + the Quartermaster's item deck, Notes + songs, permanent Invisible (Nightshroud).
+Known 2e systems not in Frosthaven yet (each wants a plugin): **Safeguard** (blocks the next negative condition), Tear
+tokens, Plague tokens, Prescriptions, Supplies + the Quartermaster's item deck, Notes + songs, permanent Invisible
+(Nightshroud).
 
 ## Summons
 
