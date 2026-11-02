@@ -56,6 +56,22 @@ foreach (var parser in order)
         catch (TargetInvocationException e) { good = false; SharedClient.ValidationRecord.RecordedFailures.Add(null); Console.WriteLine($"  {rel}: threw {e.InnerException?.GetType().Name}: {e.InnerException?.Message}"); if (Environment.GetEnvironmentVariable("RC_STACK") != null) { Console.WriteLine(e.InnerException?.StackTrace); Environment.Exit(2); } }
         var msgs = SharedClient.ValidationRecord.RecordedFailures.Where(m => m != null).Select(m => m.Message).ToList();
         SharedClient.ValidationRecord.RecordedFailures.Clear();
+        // a layout row for a Consume step of the same card ("Unable to find Consume data for entry BCFire"): the mods
+        // plugin's GHStepConsumeLayout gives the layout those consumes in the game (2026-11-02, gh_port.empty_step_consumes)
+        if (ours && msgs.Count > 0)
+        {
+            string text = File.ReadAllText(file);
+            msgs = msgs.Where(m =>
+            {
+                var mm = System.Text.RegularExpressions.Regex.Match(m ?? "", @"Unable to find Consume data for entry (\w+)");
+                if (mm.Success && System.Text.RegularExpressions.Regex.IsMatch(text, @"^ +" + mm.Groups[1].Value + @":\s*\r?\n +(MiscVars:\s*\r?\n(?: {20,}.*\r?\n)*)? +Consume:", System.Text.RegularExpressions.RegexOptions.Multiline))
+                    return false;
+                // an Active layout row for an ability inside a Consume step: the game links those (the round badge and the
+                // row show in game, 2026-11-02 recapture of Boiling Arc), the offline loader doesn't
+                var am = System.Text.RegularExpressions.Regex.Match(m ?? "", @"Active ability name (\w+) not found in linked abilities");
+                return !(am.Success && System.Text.RegularExpressions.Regex.IsMatch(text, @"Consume:\s*\r?\n(?:(?: {20,}.*)?\r?\n)*? {24,}" + am.Groups[1].Value + @":\s*\r?\n"));
+            }).ToList();
+        }
         if (!ours) { if (!good) theirs++; continue; }
         if (good && msgs.Count == 0) { ok++; continue; }
         failed++;

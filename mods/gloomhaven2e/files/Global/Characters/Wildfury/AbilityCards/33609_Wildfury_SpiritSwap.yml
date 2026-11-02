@@ -8,9 +8,10 @@ Initiative: 27
 # top: COMMAND Move 1 [circle], Attack 2 [diamond], Wound. "consume Air/Earth (either): teleport the Wildfury to an
 # empty hex adjacent to the Bear": the Wildfury's own teleport after the commanded abilities (APPROXIMATION: the card
 # puts it between the Bear's move and attack), limited to hexes next to the Bear (Frosthaven's IsValidTeleportTile, as
-# HIVE Recall's "a hex adjacent to you" and Infuser Formless Bladestorm's tile list). The split element is two Consume
-# abilities: Earth only while Air is not infused, then Air, so one element at most is spent (Air is taken when both
-# are up). Untested expressions (NOTES.md).
+# HIVE Recall's "a hex adjacent to you" and Infuser Formless Bladestorm's tile list). The split element (Air or Earth,
+# one teleport) is Frosthaven's element selector: two Consume steps marked GHElementEither, which the plugin merges into
+# the first (both consumes, the picker on) and drops the second, so the player picks either element and teleports once
+# (before 2026-11-02: Earth only while Air was not infused, so with both up Air was forced).
 # bottom: swap two normal or elite enemies (the 1st edition Spirit Swap bottom's Swap), infuse Air.
 Discard: [Discard,Discard]
 Data:
@@ -37,10 +38,8 @@ Data:
                 Filter: Companion
                 AnimOverload: Command
             TCEarth:
-                StartAbilityRequirements:
-                    Type: ThisAbility
-                    Vars:
-                        ValidateNoAir: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Air) == False
+                MiscVars:
+                    GHElementEither: True
                 Consume:
                     Elements: [Earth]
                     Abilities:
@@ -54,6 +53,8 @@ Data:
                             AnimOverload: Teleport Into
                             AnimOverload2: Teleport Outof
             TCAir:
+                MiscVars:
+                    GHElementEither: True
                 Consume:
                     Elements: [Air]
                     Abilities:

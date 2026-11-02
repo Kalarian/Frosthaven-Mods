@@ -34,9 +34,20 @@ namespace FrosthavenMods
             {
                 if (action?.Abilities == null || cardID < 20000 || cardID >= 40000) return;
                 var group = new List<CAbilityConsume>();
+                var drop = new List<CAbility>();
+                bool either = false;
                 void Flush()
                 {
-                    if (group.Count >= 2)
+                    // "either element, once" (the 2nd edition Spirit Swap top: Air or Earth, one teleport): one step with
+                    // every consume and the picker, the group's other steps dropped
+                    if (group.Count >= 2 && either)
+                    {
+                        group[0].Consumes = group.SelectMany(c => c.Consumes ?? new List<AbilityConsume>()).Where(c => c != null).Distinct().ToList();
+                        group[0].ShowPicker = true;
+                        drop.AddRange(group.Skip(1));
+                        if (!_reportedEither) { _reportedEither = true; Plugin.Log.LogInfo($"Gloomhaven element picker (either): card {cardID}, {group.Count} consumes in one step"); }
+                    }
+                    else if (group.Count >= 2)
                     {
                         var all = group.SelectMany(c => c.Consumes ?? new List<AbilityConsume>()).Where(c => c != null).Distinct().ToList();
                         foreach (CAbilityConsume c in group)
@@ -50,17 +61,23 @@ namespace FrosthavenMods
                 }
                 foreach (CAbility a in action.Abilities)
                 {
-                    if (a is CAbilityConsume c && Marked(c)) group.Add(c);
+                    bool e = a is CAbilityConsume && Marked(a, "GHElementEither");
+                    bool m = a is CAbilityConsume && (e || Marked(a, "GHElementPicker"));
+                    if (m && group.Count > 0 && e != either) Flush();
+                    if (m) { group.Add((CAbilityConsume)a); either = e; }
                     else Flush();
                 }
                 Flush();
+                foreach (CAbility a in drop) action.Abilities.Remove(a);
             }
             catch (System.Exception e) { Plugin.Log.LogWarning("GHElementPicker: " + e.Message); }
         }
 
-        private static bool Marked(CAbility a)
+        private static bool _reportedEither;
+
+        private static bool Marked(CAbility a, string key)
         {
-            try { return a.GetMiscVar("GHElementPicker").GetBool(); }
+            try { return a.GetMiscVar(key).GetBool(); }
             catch { return false; }
         }
     }
