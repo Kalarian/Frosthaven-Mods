@@ -65,9 +65,12 @@ Data:
                         TargetingVars:
                             AddTilesInRange: ParentAbility.TilesSelected
                             AddSelectedTiles: ParentAbility.TilesSelected
+                    # (Targeting Range set: as a sub-ability of the custom-targeted kill it took Custom targeting with no vars, and
+                    # the game threw "Invalid targeting type" at the error screen, harness 2026-11-02 08:55)
                     TKillSubInvisible:
                         Invisible: True
                         Filter: Self
+                        Targeting: Range
                         AutoTrigger: True
                         TreatAsNonSubAbility: True
                         AnimOverload: TurnInvisible
