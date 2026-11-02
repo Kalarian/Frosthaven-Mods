@@ -406,6 +406,13 @@ CARD_FIXES = {
     # TreatAsNonSubAbility the sub kept the parent's (now empty) target list: it never poisoned anyone (session
     # 20261028-150904: start, perform, end, no apply; engine reading 2026-10-29). Enemy + TreatAsNonSubAbility, as Frosthaven
     # writes "the enemies beside the target".
+    # Harsh Stimulants (Tinkerer), bottom: "adjacent allies +1 Attack this round; adjacent allies suffer 2 damage". The
+    # same trap as Rot Maggots: a plain sub-ability of the self aura copies the parent's target (the Tinkerer, not an
+    # ally) and damages nobody (harness 2026-11-02: 23 plays, start + perform, no apply, an ally beside in round 3).
+    20058: [
+        (r"^([ \t]+)Filter: \[Ally\](\r?)$",
+         lambda m: f"{m.group(1)}Filter: [Ally]{m.group(2)}\n{m.group(1)}TreatAsNonSubAbility: True{m.group(2)}"),
+    ],
     20304: [
         (r"^([ \t]+)Filter: Ally(\r?)$",
          lambda m: f"{m.group(1)}Filter: Enemy{m.group(2)}\n{m.group(1)}TreatAsNonSubAbility: True{m.group(2)}"),
