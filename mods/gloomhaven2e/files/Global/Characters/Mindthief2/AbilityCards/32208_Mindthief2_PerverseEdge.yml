@@ -22,23 +22,20 @@ Data:
         Infuse: Dark
     Bottom:
         Abilities:
-            BNull:
-                Null: True
+            BCIce:
+                Consume:
+                    Elements: Ice
+                    Abilities:
+                        BCIceStun:
+                            Stun: True
+                            Range: 1
+                            Filter: Enemy
+                            AnimOverload: MindAttack
+                    XP: 1
             BMove:
                 Move:
                     Amount: 3
                     SquareEnhancements: 1
-        Consumes:
-            BCIce:
-                Elements: Ice
-                Abilities:
-                    BCIceStun:
-                        ParentName: BNull
-                        Stun: True
-                        Range: 1
-                        Filter: Enemy
-                        AnimOverload: MindAttack
-                XP: 1
 Layout:
     Top:
         - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"

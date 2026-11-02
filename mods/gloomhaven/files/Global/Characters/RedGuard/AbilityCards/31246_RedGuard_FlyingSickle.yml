@@ -22,18 +22,15 @@ Data:
         Abilities:
             BAttack1:
                 Attack: 2
-            BNull:
-                Null: True
+            BCLight:
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        BCLightMove:
+                            Move: 2
+                    XP: 1
             BAttack2:
                 Attack: 2
-        Consumes:
-            BCLight:
-                Elements: Light
-                Abilities:
-                    BCLightMove:
-                        ParentName: BNull
-                        Move: 2
-                XP: 1
 Layout:
     Top:
         - Row:

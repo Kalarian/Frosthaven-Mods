@@ -10,18 +10,15 @@ Data:
         Abilities:
             TAttack:
                 Attack: 4
-            TNull:
-                Null: True
-        Consumes:
             TCDark:
-                Elements: Dark
-                Abilities:
-                    TCDarkHeal:
-                        ParentName: TNull
-                        Heal: 4
-                        Filter: Self
-                        AnimOverload: Heal
-                XP: 1
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        TCDarkHeal:
+                            Heal: 4
+                            Filter: Self
+                            AnimOverload: Heal
+                    XP: 1
     Bottom:
         Abilities:
             BShield:

@@ -36,19 +36,16 @@ Data:
                 Move:
                     Amount: 4
                     SquareEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCDark:
-                Elements: Dark
-                Abilities:
-                    BCDarkCurse:
-                        ParentName: BNull
-                        Curse: True
-                        Range: 1
-                        Filter: Enemy
-                        AnimOverload: WeakRadial
-                XP: 1
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        BCDarkCurse:
+                            Curse: True
+                            Range: 1
+                            Filter: Enemy
+                            AnimOverload: WeakRadial
+                    XP: 1
 Layout:
     Top:
         - Active:

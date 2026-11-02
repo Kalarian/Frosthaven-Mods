@@ -26,8 +26,6 @@ Data:
         Infuse: Fire
     Bottom:
         Abilities:
-            BNull:
-                Null: True
             BMove:
                 Move:
                     Amount: 3
@@ -35,12 +33,12 @@ Data:
         Consumes:
             BCDamage:
                 CostAbility:
-                    ParentName: BNull
+                    ParentName: BMove
                     Damage: 2
                     Filter: Self
                 Abilities:
                     BCDamageWound:
-                        ParentName: BNull
+                        ParentName: BMove
                         Wound: True
                         Conditions: [Immobilize]
                         Range: 1

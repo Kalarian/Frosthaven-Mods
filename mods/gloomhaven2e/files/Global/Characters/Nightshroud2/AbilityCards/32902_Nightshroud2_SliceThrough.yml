@@ -48,25 +48,22 @@ Data:
         Infuse: Dark
     Bottom:
         Abilities:
-            BNull:
-                Null: True
+            BCDark:
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        BCDarkTeleport:
+                            Teleport2: 4
+                            Filter: Self
+                            AnimOverload: Teleport Into
+                            AnimOverload2: Teleport Outof
+                    XP: 1
             BSwap:
                 Swap:
                     FirstTargetFilter: Self
                     SecondTargetFilter: Ally
                 Range: 8
                 AnimOverload: RadialBeneficial
-        Consumes:
-            BCDark:
-                Elements: Dark
-                Abilities:
-                    BCDarkTeleport:
-                        ParentName: BNull
-                        Teleport2: 4
-                        Filter: Self
-                        AnimOverload: Teleport Into
-                        AnimOverload2: Teleport Outof
-                XP: 1
 Layout:
     Top:
         - Active:

@@ -22,18 +22,15 @@ Data:
                 Move:
                     Amount: 4
                     CircleEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCFire:
-                Elements: Fire
-                Abilities:
-                    BCFireReta:
-                        ParentName: BNull
-                        Retaliate: 2
-                        RetaliateRange: 2
-                        ActiveBonusDuration: Round
-                        AnimOverload: PowerUp
+                Consume:
+                    Elements: Fire
+                    Abilities:
+                        BCFireReta:
+                            Retaliate: 2
+                            RetaliateRange: 2
+                            ActiveBonusDuration: Round
+                            AnimOverload: PowerUp
 Layout:
     Top:
         - ColumnWidths: "60,35"

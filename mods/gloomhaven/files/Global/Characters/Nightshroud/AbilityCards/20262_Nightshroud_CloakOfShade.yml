@@ -18,18 +18,15 @@ Data:
             BMove:
                 Move:
                     Amount: 3
-            BNull:
-                Null: True
-        Consumes:
             BCDark:
-                Elements: Dark
-                Abilities:
-                    BCDarkInvis:
-                        ParentName: BNull
-                        Invisible: True
-                        Filter: Self
-                        AnimOverload: TurnInvisible
-                XP: 1
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        BCDarkInvis:
+                            Invisible: True
+                            Filter: Self
+                            AnimOverload: TurnInvisible
+                    XP: 1
 Layout:
     Top:
         - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"

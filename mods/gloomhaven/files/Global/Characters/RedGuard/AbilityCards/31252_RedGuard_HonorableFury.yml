@@ -40,21 +40,18 @@ Data:
                         Condition: Muddle
     Bottom:
         Abilities:
-            BNull:
-                Null: True
+            BCLight:
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        BCLightMove:
+                            Move: 3
+                    XP: 1
             BDamage:
                 Damage: 3
                 Target: -1
                 Filter: Enemy
                 AnimOverload: Attack_AOE_Radial
-        Consumes:
-            BCLight:
-                Elements: Light
-                Abilities:
-                    BCLightMove:
-                        ParentName: BNull
-                        Move: 3
-                XP: 1
 Layout:
     Top:
         - Row:

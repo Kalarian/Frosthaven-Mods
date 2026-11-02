@@ -32,17 +32,14 @@ Data:
                 Move:
                     Amount: 5
                     CircleEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCIce:
-                Elements: Ice
-                Abilities:
-                    BCIceShield:
-                        ParentName: BNull
-                        Shield: 1
-                        ActiveBonusDuration: Round
-                XP: 1
+                Consume:
+                    Elements: Ice
+                    Abilities:
+                        BCIceShield:
+                            Shield: 1
+                            ActiveBonusDuration: Round
+                    XP: 1
 Layout:
     Top:
         - Row:

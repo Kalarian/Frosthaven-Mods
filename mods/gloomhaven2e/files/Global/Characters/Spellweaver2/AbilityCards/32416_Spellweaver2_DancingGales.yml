@@ -12,34 +12,29 @@ Discard: [Discard,Lost]
 Data:
     Top:
         Abilities:
-            TNull:
-                Null: True
+            TCFire:
+                Consume:
+                    Elements: Fire
+                    Abilities:
+                        TCStrengthen:
+                            Strengthen: True
+                            Filter: Self
+                            AnimOverload: PowerUp
             TAttack:
                 Attack:
                     Amount: 3
                     DiamondEnhancements: 1
                 Range: 3
                 AnimOverload: RangedAttackAir
-            TNull2:
-                Null: True
-        Consumes:
-            TCFire:
-                Elements: Fire
-                Abilities:
-                    TCStrengthen:
-                        ParentName: TNull
-                        Strengthen: True
-                        Filter: Self
-                        AnimOverload: PowerUp
             TCIce:
-                Elements: Ice
-                Abilities:
-                    TCAttack:
-                        ParentName: TNull2
-                        Attack: 2
-                        Range: 3
-                        Conditions: Muddle
-                        AnimOverload: TargetedIcyBlast
+                Consume:
+                    Elements: Ice
+                    Abilities:
+                        TCAttack:
+                            Attack: 2
+                            Range: 3
+                            Conditions: Muddle
+                            AnimOverload: TargetedIcyBlast
         XP: 1
     Bottom:
         Abilities:

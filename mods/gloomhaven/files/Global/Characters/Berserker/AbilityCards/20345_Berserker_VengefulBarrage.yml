@@ -21,21 +21,18 @@ Data:
                 Move:
                     Amount: 4
                     CircleEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCFire:
-                Elements: Fire
-                Abilities:
-                    BCFireAttackBuff:
-                        ParentName: BNull
-                        Attack: 1
-                        Filter: Self
-                        ActiveBonus:
-                            Duration: Round
-                            Behaviour: BuffAttack
-                        AnimOverload: PowerUp
-                XP: 1
+                Consume:
+                    Elements: Fire
+                    Abilities:
+                        BCFireAttackBuff:
+                            Attack: 1
+                            Filter: Self
+                            ActiveBonus:
+                                Duration: Round
+                                Behaviour: BuffAttack
+                            AnimOverload: PowerUp
+                    XP: 1
 Layout:
     Top:
         - Active:

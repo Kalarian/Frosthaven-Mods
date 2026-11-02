@@ -20,23 +20,20 @@ Data:
                     SquareEnhancements: 1
                 Filter: [Self, Ally]
                 AnimOverload: Heal
-            TNull:
-                Null: True
-        Consumes:
             TCLight:
-                Elements: Light
-                Abilities:
-                    TCLightRecover:
-                        ParentName: TNull
-                        RecoverDiscardedCards: 1
-                        Range: 2
-                        Filter:
-                            TargetType: [Self, Ally]
-                            ActorType: Player
-                        Vars:
-                            CardLevel: 1
-                        AnimOverload: PositiveBuffTargeted
-                XP: 1
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        TCLightRecover:
+                            RecoverDiscardedCards: 1
+                            Range: 2
+                            Filter:
+                                TargetType: [Self, Ally]
+                                ActorType: Player
+                            Vars:
+                                CardLevel: 1
+                            AnimOverload: PositiveBuffTargeted
+                    XP: 1
     Bottom:
         Abilities:
             BMove:

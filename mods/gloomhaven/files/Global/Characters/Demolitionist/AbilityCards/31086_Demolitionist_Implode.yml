@@ -26,28 +26,25 @@ Data:
                 Move:
                     Amount: 3
                     CircleEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             TCBottomEarth:
-                Elements: Earth
-                Abilities:
-                    BDestroyObstacle:
-                        ParentName: BNull
-                        DestroyObstacle: True
-                        Range: 1
-                        Target: 1
-                        SpawnDelay: 2.16
-                        AnimOverload: DestroyObstacle
-                        SubAbilities:
-                            BSubCreate:
-                                Create: RockSingle
-                                Range: 1
-                                Target: 2
-                                SpawnDelay: 1.58
-                                AnimOverload: CreateObstacle
-                                MultiPassAttack: False
-                                AllTargetsAdjacentToParentTarget: True
+                Consume:
+                    Elements: Earth
+                    Abilities:
+                        BDestroyObstacle:
+                            DestroyObstacle: True
+                            Range: 1
+                            Target: 1
+                            SpawnDelay: 2.16
+                            AnimOverload: DestroyObstacle
+                            SubAbilities:
+                                BSubCreate:
+                                    Create: RockSingle
+                                    Range: 1
+                                    Target: 2
+                                    SpawnDelay: 1.58
+                                    AnimOverload: CreateObstacle
+                                    MultiPassAttack: False
+                                    AllTargetsAdjacentToParentTarget: True
 
 Layout:
     Top:

@@ -33,22 +33,19 @@ Data:
                 Move:
                     Amount: 3
                     CircleEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCFire:
-                Elements: Fire
-                Abilities:
-                    BCFireAdvantage:
-                        ParentName: BNull
-                        Attack: 0
-                        AttackHasAdvantage: True
-                        Filter: Self
-                        ActiveBonus:
-                            Duration: Round
-                            Behaviour: BuffAttack
-                        AnimOverload: PowerUp
-                XP: 1
+                Consume:
+                    Elements: Fire
+                    Abilities:
+                        BCFireAdvantage:
+                            Attack: 0
+                            AttackHasAdvantage: True
+                            Filter: Self
+                            ActiveBonus:
+                                Duration: Round
+                                Behaviour: BuffAttack
+                            AnimOverload: PowerUp
+                    XP: 1
 Layout:
     Top:
         - Row:

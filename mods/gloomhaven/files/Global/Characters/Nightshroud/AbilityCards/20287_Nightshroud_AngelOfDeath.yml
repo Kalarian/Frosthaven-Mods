@@ -35,21 +35,18 @@ Data:
                     Amount: 5
                     CircleEnhancements: 1
                     Jump: True
-            BNull:
-                Null: True
-        Consumes:
             BCDark:
-                Elements: Dark
-                Abilities:
-                    BCDarkKill:
-                        ParentName: BNull
-                        Kill: True
-                        Range: 1
-                        Filter:
-                            TargetType: Enemy
-                            EnemyType: Normal
-                        AnimOverload: Kill
-                XP: 1
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        BCDarkKill:
+                            Kill: True
+                            Range: 1
+                            Filter:
+                                TargetType: Enemy
+                                EnemyType: Normal
+                            AnimOverload: Kill
+                    XP: 1
 Layout:
     Top:
         - Row:

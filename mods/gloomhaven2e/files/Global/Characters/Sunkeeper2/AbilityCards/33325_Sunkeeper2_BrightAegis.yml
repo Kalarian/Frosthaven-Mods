@@ -34,22 +34,19 @@ Data:
                     TargetType: Ally
                     ActorType: Player
                 AnimOverload: PositiveBuffTargeted
-            BNull:
-                Null: True
-        Consumes:
             BCLight:
-                Elements: Light
-                Abilities:
-                    BCLightExtraTurn:
-                        ParentName: BNull
-                        ExtraTurn: BothActions
-                        Range: 1
-                        PreviewEffectId: Sunkeeper
-                        PreviewEffectText: FHS_GH2E_Sunkeeper2_25_B
-                        Filter:
-                            TargetType: Ally
-                            ActorType: Player
-                XP: 1
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        BCLightExtraTurn:
+                            ExtraTurn: BothActions
+                            Range: 1
+                            PreviewEffectId: Sunkeeper
+                            PreviewEffectText: FHS_GH2E_Sunkeeper2_25_B
+                            Filter:
+                                TargetType: Ally
+                                ActorType: Player
+                    XP: 1
         XP: 2
 Layout:
     Top:

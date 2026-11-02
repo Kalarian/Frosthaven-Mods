@@ -25,16 +25,13 @@ Data:
                 StatIsBasedOnX:
                     Strength:
                         BasedOn: LostCardCount
-            BNull:
-                Null: True
-        Consumes:
             BCFire:
-                Elements: Fire
-                Abilities:
-                    BCFireAttack:
-                        ParentName: BNull
-                        Attack: 3
-                        AnimOverload: MeleeAttackAlt
+                Consume:
+                    Elements: Fire
+                    Abilities:
+                        BCFireAttack:
+                            Attack: 3
+                            AnimOverload: MeleeAttackAlt
 Layout:
     Top:
         - Row: "$FHS_Kill_OneAdjacentEnemy$"

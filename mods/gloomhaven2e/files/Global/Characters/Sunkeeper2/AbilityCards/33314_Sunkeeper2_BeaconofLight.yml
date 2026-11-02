@@ -34,19 +34,16 @@ Data:
                 Move:
                     Amount: 3
                     SquareEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCLight:
-                Elements: Light
-                Abilities:
-                    BCLightWard:
-                        ParentName: BNull
-                        Ward: True
-                        Range: 2
-                        Filter: Ally
-                        AnimOverload: PositiveBuffTargeted
-                XP: 1
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        BCLightWard:
+                            Ward: True
+                            Range: 2
+                            Filter: Ally
+                            AnimOverload: PositiveBuffTargeted
+                    XP: 1
 Layout:
     Top:
         - Active:

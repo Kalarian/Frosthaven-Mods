@@ -28,8 +28,12 @@ Data:
         XP: 1
     Bottom:
         Abilities:
-            BNull:
-                Null: True
+            BCIce:
+                Consume:
+                    Elements: Ice
+                    Abilities:
+                        BCIceMove:
+                            Move: 3
             BDamage:
                 Damage: 1
                 Range: 1
@@ -41,13 +45,6 @@ Data:
                 Range: 1
                 Target: -1
                 Filter: Ally
-        Consumes:
-            BCIce:
-                Elements: Ice
-                Abilities:
-                    BCIceMove:
-                        ParentName: BNull
-                        Move: 3
 Layout:
     Top:
         - Row:

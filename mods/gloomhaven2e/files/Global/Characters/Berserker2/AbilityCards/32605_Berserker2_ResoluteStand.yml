@@ -9,8 +9,14 @@ Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
-            TNull:
-                Null: True
+            TCFire:
+                Consume:
+                    Elements: Fire
+                    Abilities:
+                        TCFireHeal:
+                            Heal: 2
+                            Filter: Self
+                            AnimOverload: Heal
             TRetaliate:
                 Retaliate:
                     Amount: 2
@@ -20,15 +26,6 @@ Data:
                 ActiveBonus:
                     Duration: Round
                     ProcXP: 1
-        Consumes:
-            TCFire:
-                Elements: Fire
-                Abilities:
-                    TCFireHeal:
-                        ParentName: TNull
-                        Heal: 2
-                        Filter: Self
-                        AnimOverload: Heal
     Bottom:
         Abilities:
             BMove:

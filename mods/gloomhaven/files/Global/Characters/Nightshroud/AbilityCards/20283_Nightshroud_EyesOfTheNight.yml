@@ -22,21 +22,18 @@ Data:
         Abilities:
             BMove:
                 Move: 5
-            BNull:
-                Null: True
-        Consumes:
             BCLight:
-                Elements: Light
-                Abilities:
-                    BCLightMuddle:
-                        ParentName: BNull
-                        Muddle: True
-                        Range: 1
-                        Target: -1
-                        AnimOverload: WeakRadial
-                        Filter: Enemy
-                Infuse: Dark
-                XP: 1
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        BCLightMuddle:
+                            Muddle: True
+                            Range: 1
+                            Target: -1
+                            AnimOverload: WeakRadial
+                            Filter: Enemy
+                    Infuse: Dark
+                    XP: 1
 Layout:
     Top:
         - Active:

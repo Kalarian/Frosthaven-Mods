@@ -15,38 +15,32 @@ Data:
                     SquareEnhancements: 1
                 ActiveBonusDuration: Round
                 AnimOverload: PowerUp
-            TNull:
-                Null: True
-        Consumes:
             TCLight:
-                Elements: Light
-                Abilities:
-                    TCLightHeal:
-                        ParentName: TNull
-                        Heal: 2
-                        Filter: Self
-                        AnimOverload: Heal
-                XP: 1
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        TCLightHeal:
+                            Heal: 2
+                            Filter: Self
+                            AnimOverload: Heal
+                    XP: 1
     Bottom:
         Abilities:
             BMove:
                 Move:
                     Amount: 3
                     SquareEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCLight:
-                Elements: Light
-                Abilities:
-                    BCLightHeal:
-                        ParentName: BNull
-                        Heal: 1
-                        Range: 1
-                        Target: -1
-                        Filter: [Self, Ally]
-                        AnimOverload: PositiveBuffRadial
-                XP: 1
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        BCLightHeal:
+                            Heal: 1
+                            Range: 1
+                            Target: -1
+                            Filter: [Self, Ally]
+                            AnimOverload: PositiveBuffRadial
+                    XP: 1
 Layout:
     Top:
         - Active:

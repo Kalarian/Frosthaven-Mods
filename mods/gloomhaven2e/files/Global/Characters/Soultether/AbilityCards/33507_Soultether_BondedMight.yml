@@ -27,20 +27,17 @@ Data:
         XP: 1
     Bottom:
         Abilities:
-            BNull:
-                Null: True
+            BCAir:
+                Consume:
+                    Elements: Air
+                    Abilities:
+                        BCAirMove:
+                            Move: 2
+                    XP: 1
             BLoot:
                 Loot: 1
                 Target: -1
                 AnimOverload: Loot
-        Consumes:
-            BCAir:
-                Elements: Air
-                Abilities:
-                    BCAirMove:
-                        ParentName: BNull
-                        Move: 2
-                XP: 1
 Layout:
     Top:
         - Row: "$FHS_GH2E_Soultether_GRANT1$"

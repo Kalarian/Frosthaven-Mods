@@ -46,29 +46,26 @@ Data:
                 Target: -1
                 Filter: Self
                 AnimOverload: PowerUp
-            TNull:
-                Null: True
-        Consumes:
             TCDark:
-                Elements: Dark
-                Abilities:
-                    TCDarkEndRound:
-                        ParentName: TNull
-                        AddActiveBonus:
-                            Damage: 1
-                            Target: -1
-                            AutoTrigger: True
-                            Targeting: Custom
-                            TargetingVars:
-                                Actors: AllEnemyMonsters.Where(obj.Tokens.HasKey(CCondition.ENegativeCondition.Wound))
-                                AddValidActorsInRange: Actors
-                                AddTilesInRange: Actors.Select(obj.Tile)
-                            AnimOverload: Debuff
-                        Filter: Self
-                        ActiveBonus:
-                            Duration: Round
-                            Behaviour: EndRoundAbility
-                XP: 1
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        TCDarkEndRound:
+                            AddActiveBonus:
+                                Damage: 1
+                                Target: -1
+                                AutoTrigger: True
+                                Targeting: Custom
+                                TargetingVars:
+                                    Actors: AllEnemyMonsters.Where(obj.Tokens.HasKey(CCondition.ENegativeCondition.Wound))
+                                    AddValidActorsInRange: Actors
+                                    AddTilesInRange: Actors.Select(obj.Tile)
+                                AnimOverload: Debuff
+                            Filter: Self
+                            ActiveBonus:
+                                Duration: Round
+                                Behaviour: EndRoundAbility
+                    XP: 1
     Bottom:
         Abilities:
             BMove:

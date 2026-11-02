@@ -22,41 +22,38 @@ Data:
                 Range: 4
                 Filter: [Self, Ally]
                 AnimOverload: Heal
-            TNull:
-                Null: True
-        Consumes:
             TCAir:
-                Elements: Air
-                Abilities:
-                    TCAirGrant:
-                        ParentName: TNull
-                        ControlActor:
-                            Abilities:
-                                TCAirAllyPush:
-                                    Push: 1
-                                    StrengthIsBase: True
-                                    Range: 1
-                                    RangeIsBase: True
-                                    Target: 1
-                                    TargetIsBase: True
-                                    Filter: [Enemy]
-                                    SubAbilities:
-                                        TCAirAllyPushSubImmobilize:
-                                            Immobilize: True
-                                            Target: 1
-                                            UseParentTargets: True
-                                            Filter: Enemy
-                                            AutoTrigger: True
-                                            CanSkip: False
-                                            AnimOverload: None
-                            ControlActorType: Player
-                        Target: 1
-                        Range: 4
-                        Filter:
-                            TargetType: Ally
-                            TargetTargetedByCasterPreviousAbility: True
-                            SpecificAbilityNames: [THeal]
-                        AnimOverload: ControlAlly
+                Consume:
+                    Elements: Air
+                    Abilities:
+                        TCAirGrant:
+                            ControlActor:
+                                Abilities:
+                                    TCAirAllyPush:
+                                        Push: 1
+                                        StrengthIsBase: True
+                                        Range: 1
+                                        RangeIsBase: True
+                                        Target: 1
+                                        TargetIsBase: True
+                                        Filter: [Enemy]
+                                        SubAbilities:
+                                            TCAirAllyPushSubImmobilize:
+                                                Immobilize: True
+                                                Target: 1
+                                                UseParentTargets: True
+                                                Filter: Enemy
+                                                AutoTrigger: True
+                                                CanSkip: False
+                                                AnimOverload: None
+                                ControlActorType: Player
+                            Target: 1
+                            Range: 4
+                            Filter:
+                                TargetType: Ally
+                                TargetTargetedByCasterPreviousAbility: True
+                                SpecificAbilityNames: [THeal]
+                            AnimOverload: ControlAlly
         XP: 1
     Bottom:
         Abilities:

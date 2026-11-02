@@ -14,39 +14,36 @@ Data:
         XP: 1
     Bottom:
         Abilities:
-            BNull:
-                Null: True
-        Consumes:
             BCFire:
-                Elements: Fire
-                Abilities:
-                    BCAttack:
-                        ParentName: BNull
-                        Attack: 3
-                        Range: 3
-                        Filter: Enemy
-                        AnimOverload: TargetFloorFireIce
+                Consume:
+                    Elements: Fire
+                    Abilities:
+                        BCAttack:
+                            Attack: 3
+                            Range: 3
+                            Filter: Enemy
+                            AnimOverload: TargetFloorFireIce
             BCAir:
-                Elements: Air             
-                Abilities:
-                    BCMove:
-                        ParentName: BNull
-                        Move: 3
+                Consume:
+                    Elements: Air             
+                    Abilities:
+                        BCMove:
+                            Move: 3
             BCIce:
-                Elements: Ice
-                Abilities:
-                    BCLoot:
-                        ParentName: BNull
-                        Loot: 1
-                        Target: -1
+                Consume:
+                    Elements: Ice
+                    Abilities:
+                        BCLoot:
+                            Loot: 1
+                            Target: -1
             BCEarth:
-                Elements: Earth
-                Abilities:
-                    BCHeal:
-                        ParentName: BNull
-                        Heal: 3
-                        Range: 3
-                        Filter: [Self, Ally]
+                Consume:
+                    Elements: Earth
+                    Abilities:
+                        BCHeal:
+                            Heal: 3
+                            Range: 3
+                            Filter: [Self, Ally]
 Layout:
     Top:
         - Active:

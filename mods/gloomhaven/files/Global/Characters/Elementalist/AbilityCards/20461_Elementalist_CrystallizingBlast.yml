@@ -25,17 +25,14 @@ Data:
                 Move:
                     Amount: 4
                     CircleEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCIce:
-                Elements: Ice
-                Abilities:
-                    BCIceShield:
-                        ParentName: BNull
-                        Shield: 2
-                        ActiveBonusDuration: Round
-                        AnimOverload: PowerUp
+                Consume:
+                    Elements: Ice
+                    Abilities:
+                        BCIceShield:
+                            Shield: 2
+                            ActiveBonusDuration: Round
+                            AnimOverload: PowerUp
 Layout:
     Top:
         - ColumnWidths: "60,35"

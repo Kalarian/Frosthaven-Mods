@@ -38,21 +38,18 @@ Data:
                 Move:
                     Amount: 3
                     CircleEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCAny:
-                Elements: Any
-                Abilities:
-                    BCAnyAttackBuff:
-                        ParentName: BNull
-                        Attack: 1
-                        Filter: Self
-                        ActiveBonus:
-                            Duration: Round
-                            Behaviour: BuffAttack
-                        AnimOverload: PowerUp
-                XP: 1
+                Consume:
+                    Elements: Any
+                    Abilities:
+                        BCAnyAttackBuff:
+                            Attack: 1
+                            Filter: Self
+                            ActiveBonus:
+                                Duration: Round
+                                Behaviour: BuffAttack
+                            AnimOverload: PowerUp
+                    XP: 1
 Layout:
     Top:
         - ColumnWidths: "65,30"

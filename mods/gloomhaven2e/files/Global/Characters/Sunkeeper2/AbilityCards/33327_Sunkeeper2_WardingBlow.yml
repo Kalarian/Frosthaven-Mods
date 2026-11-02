@@ -19,18 +19,15 @@ Data:
                     DiamondPlusEnhancements: 1
                 Filter: Self
                 AnimOverload: PowerUp
-            TNull:
-                Null: True
-        Consumes:
             TCLight:
-                Elements: Light
-                Abilities:
-                    TCLightHeal:
-                        ParentName: TNull
-                        Heal: 3
-                        Filter: Self
-                        AnimOverload: Heal
-                XP: 1
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        TCLightHeal:
+                            Heal: 3
+                            Filter: Self
+                            AnimOverload: Heal
+                    XP: 1
     Bottom:
         Abilities:
             BMove:

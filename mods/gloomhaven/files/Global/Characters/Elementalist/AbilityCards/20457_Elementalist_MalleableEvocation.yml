@@ -52,8 +52,21 @@ Data:
                 Move:
                     Amount: 2
                     CircleEnhancements: 1
-            BNull:
-                Null: True
+            BCIce:
+                Consume:
+                    Elements: Ice
+                    Abilities:
+                        BCIceHeal:
+                            Heal: 2
+                            Filter: Self
+            BCEarth:
+                Consume:
+                    Elements: Earth
+                    Abilities:
+                        BCEarthShield:
+                            Shield: 1
+                            Filter: Self
+                            ActiveBonusDuration: Round
         Consumes:
             BCFire:
                 Elements: Fire
@@ -67,21 +80,6 @@ Data:
                     BCAirJumpBuff:
                         ParentName: BMove
                         Jump: True
-            BCIce:
-                Elements: Ice
-                Abilities:
-                    BCIceHeal:
-                        ParentName: BNull
-                        Heal: 2
-                        Filter: Self
-            BCEarth:
-                Elements: Earth
-                Abilities:
-                    BCEarthShield:
-                        ParentName: BNull
-                        Shield: 1
-                        Filter: Self
-                        ActiveBonusDuration: Round
 Layout:
     Top:
         - Row:

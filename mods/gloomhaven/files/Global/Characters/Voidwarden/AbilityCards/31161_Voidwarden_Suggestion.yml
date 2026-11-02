@@ -44,18 +44,15 @@ Data:
         Abilities:
             BMove:
                 Move: 3
-            BNull:
-                Null: True
-        Consumes:
             BCDark:
-                Elements: Dark
-                Abilities:
-                    BCDarkCurse:
-                        ParentName: BNull
-                        Curse: True
-                        Range: 3
-                        Filter: Enemy
-                        AnimOverload: TargetedDebuff
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        BCDarkCurse:
+                            Curse: True
+                            Range: 3
+                            Filter: Enemy
+                            AnimOverload: TargetedDebuff
 Layout:
     Top:
         - Row: "$FHS_JOTL_161_T_1$"

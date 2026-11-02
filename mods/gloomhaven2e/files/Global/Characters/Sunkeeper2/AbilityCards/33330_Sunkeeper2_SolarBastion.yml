@@ -17,21 +17,18 @@ Data:
                 Target: -1
                 Filter: [Self, Ally]
                 AnimOverload: PositiveBuffRadial
-            TNull:
-                Null: True
-        Consumes:
             TCLight:
-                Elements: Light
-                Abilities:
-                    TCLightRecover:
-                        ParentName: TNull
-                        RecoverDiscardedCards: 1
-                        Range: 3
-                        Filter:
-                            TargetType: Ally
-                            ActorType: Player
-                        AnimOverload: PositiveBuffTargeted
-                XP: 1
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        TCLightRecover:
+                            RecoverDiscardedCards: 1
+                            Range: 3
+                            Filter:
+                                TargetType: Ally
+                                ActorType: Player
+                            AnimOverload: PositiveBuffTargeted
+                    XP: 1
     Bottom:
         Abilities:
             BMove:
@@ -43,19 +40,16 @@ Data:
                 Filter: Self
                 ActiveBonusDuration: Round
                 AnimOverload: PowerUp
-            BNull:
-                Null: True
-        Consumes:
             BCLight:
-                Elements: Light
-                Abilities:
-                    BCLightRetaliate:
-                        ParentName: BNull
-                        Retaliate: 2
-                        Filter: Self
-                        ActiveBonusDuration: Round
-                        AnimOverload: PowerUp
-                XP: 1
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        BCLightRetaliate:
+                            Retaliate: 2
+                            Filter: Self
+                            ActiveBonusDuration: Round
+                            AnimOverload: PowerUp
+                    XP: 1
 Layout:
     Top:
         - Row:

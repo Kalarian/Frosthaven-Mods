@@ -11,45 +11,39 @@ Data:
             TAttack:
                 Attack:
                     Amount: 2
-            TNull:
-                Null: True
-        Consumes:
             TCDark:
-                Elements: Dark
-                Abilities:
-                    TCDarkDoubleMove:
-                        ParentName: TNull
-                        Move: 2
-                        Range: 1
-                        Target: -1
-                        Filter: [Self]
-                        ActiveBonus:
-                            Duration: Turn
-                            Behaviour: BuffMove
-                            StrengthIsScalar: True
-                XP: 1
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        TCDarkDoubleMove:
+                            Move: 2
+                            Range: 1
+                            Target: -1
+                            Filter: [Self]
+                            ActiveBonus:
+                                Duration: Turn
+                                Behaviour: BuffMove
+                                StrengthIsScalar: True
+                    XP: 1
     Bottom:
         Abilities:
             BMove:
                 Move:
                     Amount: 2
-            BNull:
-                Null: True
-        Consumes:
             BCDark:
-                Elements: Dark
-                Abilities:
-                    BCDarkDoubleAttack:
-                        ParentName: BNull
-                        Attack: 2
-                        Range: 1
-                        Target: -1
-                        Filter: [Self]
-                        ActiveBonus:
-                            Duration: Turn
-                            Behaviour: BuffAttack
-                            AbilityStrengthIsScalar: True
-                XP: 1
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        BCDarkDoubleAttack:
+                            Attack: 2
+                            Range: 1
+                            Target: -1
+                            Filter: [Self]
+                            ActiveBonus:
+                                Duration: Turn
+                                Behaviour: BuffAttack
+                                AbilityStrengthIsScalar: True
+                    XP: 1
 Layout:
     Top:
         - Row: "<size=150%><sprite name=Attack> *TAttack*"

@@ -596,6 +596,102 @@ def _destroy_then_attack(block):
     return eol.join(out) + eol
 
 
+def empty_step_consumes(s, warn=None):
+    """Gloomhaven's "consume X: do Y" with nothing else on the half's line: an empty step (Null: True) that a card-level
+    consume adds its abilities to (ParentName: the empty step). Frosthaven never offers a consume at an empty step: the
+    game passed the step with the bar hidden, or waited with nothing to press (the user's manual test 43, Boiling Arc
+    bottom, 2026-11-02: a softlock; 63 halves of both packs). Frosthaven's own shape for it is a Consume step (Boneshaper's
+    Rotting Multitude, Crashing Tide's Sharp Chitin): a step where the element is chosen or not, whose abilities run only
+    when it was consumed, read by the same parser as a card-level consume (Elements, Abilities, XP, Infuse, CostAbility,
+    ConsumeGroup). Each such consume becomes a Consume step in the empty step's place, named as the consume was, so the
+    layout's "Consume: Name: ..." still finds it (the half's consume list holds the Consume steps too)."""
+    eol = "\r\n" if "\r\n" in s else "\n"
+    head, sep, layout = s.partition(eol + "Layout:")
+    lines = head.split(eol)
+
+    def blocks(start, end, indent):
+        """[(name, first line, last line + 1)] of the entries at this indent between start and end."""
+        out, i = [], start
+        while i < end:
+            m = re.match(rf"^ {{{indent}}}(\w+):\s*$", lines[i])
+            if m:
+                j = i + 1
+                while j < end and (not lines[j].strip() or len(lines[j]) - len(lines[j].lstrip(" ")) > indent):
+                    j += 1
+                out.append((m.group(1), i, j))
+                i = j
+            else:
+                i += 1
+        return out
+
+    changed = 0
+    data = next((i for i, l in enumerate(lines) if l.rstrip() == "Data:"), None)
+    if data is None:
+        return s
+    edits = []   # (first, last, replacement lines), applied bottom-up
+    for half, h0, h1 in blocks(data + 1, len(lines), 4):
+        parts = {n: (a, b) for n, a, b in blocks(h0 + 1, h1, 8)}
+        if "Abilities" not in parts or "Consumes" not in parts:
+            continue
+        abil = blocks(parts["Abilities"][0] + 1, parts["Abilities"][1], 12)
+        cons = blocks(parts["Consumes"][0] + 1, parts["Consumes"][1], 12)
+        nulls = {n for n, a, b in abil if [l.strip() for l in lines[a + 1:b] if l.strip()] == ["Null: True"]}
+        if not nulls:
+            continue
+        moved = {}   # empty step -> [consume blocks]
+        real = [n for n, a, b in abil if n not in nulls]
+        for n, a, b in cons:
+            body = eol.join(lines[a:b])
+            parents = set(re.findall(r"ParentName:\s*(\w+)", body))
+            if len(parents) == 1 and parents <= nulls:
+                # a consume paid with a cost, not an element (Numb the Pain bottom: "suffer 2 damage: stun an adjacent
+                # enemy"): Frosthaven offers no cost on a Consume step (bench 2026-11-02: no slot, confirm dark), only
+                # on a card-level consume of a real step (Deathwalker's "remove a shadow"). It stays a card-level
+                # consume, moved to the half's real step beside the empty one (the one before, else the one after):
+                # chosen on the bar during that step, its abilities run after it
+                if "CostAbility:" in body and real:
+                    empty = next(iter(parents))
+                    names = [x for x, _, _ in abil]
+                    before = [x for x in names[:names.index(empty)] if x in real]
+                    host = before[-1] if before else next(x for x in names[names.index(empty) + 1:] if x in real)
+                    for i in range(a, b):
+                        lines[i] = re.sub(rf"(ParentName:\s*){empty}(\s*)$", lambda m: m.group(1) + host + m.group(2), lines[i])
+                    changed += 1
+                    continue
+                moved.setdefault(parents.pop(), []).append((n, a, b))
+        # an empty step no consume points at any more goes
+        still = set(re.findall(r"ParentName:\s*(\w+)", eol.join(lines[parts["Consumes"][0]:parts["Consumes"][1]])))
+        for n, a, b in abil:
+            if n in nulls and n not in moved and n not in still:
+                edits.append((a, b, []))
+        if not moved:
+            continue
+        for n, a, b in abil:
+            if n not in moved:
+                continue
+            new = []
+            for cn, ca, cb in moved[n]:
+                new.append(f"            {cn}:")
+                new.append("                Consume:")
+                new += ["    " + l if l.strip() else l for l in lines[ca + 1:cb] if not re.match(rf"^\s*ParentName:\s*{n}\s*$", l)]
+                changed += 1
+            edits.append((a, b, new))
+        gone = {cn for v in moved.values() for cn, _, _ in v}
+        left = [x for x in cons if x[0] not in gone]
+        ca0, ca1 = parts["Consumes"]
+        if left:
+            for cn, a, b in cons:
+                if cn in gone:
+                    edits.append((a, b, []))
+        else:
+            edits.append((ca0, ca1, []))
+    for a, b, new in sorted(edits, key=lambda e: -e[0]):
+        lines[a:b] = new
+    if changed and warn:
+        warn(f"{changed} consume(s) on an empty step made Consume steps")
+    return eol.join(lines) + sep + layout
+
+
 def apply_card_fixes(new_id, s):
     for pattern, repl in CARD_FIXES.get(new_id, []):
         s, n = re.subn(pattern, repl, s, flags=re.M)
@@ -955,6 +1051,7 @@ def main():
         for n in cards:
             new_id, s = convert_card(n, text(files[n]), warnings.append, CLASS_ICONS.get(cls))
             s = apply_card_fixes(new_id, s)
+            s = empty_step_consumes(s, lambda w: warnings.append(f"{n}: {w}"))
             s = gh_layout.fh_style(s, lambda w: warnings.append(f"{n}: {w}"))
             # Frosthaven can't aim a Damage ability's area (none of its own cards has one; the preview throws and
             # the damage can't be confirmed): such a card needs a CARD_FIXES entry

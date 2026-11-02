@@ -43,25 +43,22 @@ Data:
                 AnimOverload: PowerUp
                 ActiveBonus:
                     Duration: Round
-            BNull:
-                Null: True
-        Consumes:
             BCDark:
-                Elements: Dark
-                Abilities:
-                    BCDarkAllies:
-                        ParentName: BNull
-                        AttackersGainDisadvantage: 1
-                        Range: 2
-                        Target: -1
-                        Filter: Self
-                        AnimOverload: PositiveBuffRadial
-                        ActiveBonus:
-                            Duration: Round
-                            IsAura: True
-                            AuraFilter: Ally
-                            AuraTargeting: Range
-                XP: 1
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        BCDarkAllies:
+                            AttackersGainDisadvantage: 1
+                            Range: 2
+                            Target: -1
+                            Filter: Self
+                            AnimOverload: PositiveBuffRadial
+                            ActiveBonus:
+                                Duration: Round
+                                IsAura: True
+                                AuraFilter: Ally
+                                AuraTargeting: Range
+                    XP: 1
 Layout:
     Top:
         - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"

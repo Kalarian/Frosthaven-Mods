@@ -18,16 +18,13 @@ Data:
                 Move:
                     Amount: 3
                     CircleEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCDark:
-                Elements: Dark
-                Abilities:
-                    BCDarkCurse:
-                        ParentName: BNull
-                        Curse: True
-                        Filter: Enemy
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        BCDarkCurse:
+                            Curse: True
+                            Filter: Enemy
 Layout:
     Top:
         - Active:

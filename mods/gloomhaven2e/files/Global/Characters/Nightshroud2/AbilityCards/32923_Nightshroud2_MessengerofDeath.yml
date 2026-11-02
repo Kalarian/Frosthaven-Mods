@@ -36,16 +36,13 @@ Data:
                 Move:
                     Amount: 4
                     CircleEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCDark:
-                Elements: Dark
-                Abilities:
-                    BCDarkAttack:
-                        ParentName: BNull
-                        Attack: 4
-                XP: 1
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        BCDarkAttack:
+                            Attack: 4
+                    XP: 1
 Layout:
     Top:
         - Row:

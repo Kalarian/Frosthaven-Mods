@@ -33,24 +33,21 @@ Data:
                 Filter: [Self, Ally]
                 ActiveBonusDuration: Round
                 AnimOverload: Persistent Buff
-            BNull:
-                Null: True
-        Consumes:
             BCLight:
-                Elements: Light
-                Abilities:
-                    BCLightDisadvantage:
-                        ParentName: BNull
-                        AttackersGainDisadvantage: 1
-                        Target: -1
-                        Filter: Self
-                        ActiveBonus:
-                            Duration: Round
-                            IsAura: True
-                            AuraFilter: [Self, Ally]
-                            AuraTargeting: All
-                        AnimOverload: PositiveBuffRadial
-                XP: 1
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        BCLightDisadvantage:
+                            AttackersGainDisadvantage: 1
+                            Target: -1
+                            Filter: Self
+                            ActiveBonus:
+                                Duration: Round
+                                IsAura: True
+                                AuraFilter: [Self, Ally]
+                                AuraTargeting: All
+                            AnimOverload: PositiveBuffRadial
+                    XP: 1
 Layout:
     Top:
         - Active:

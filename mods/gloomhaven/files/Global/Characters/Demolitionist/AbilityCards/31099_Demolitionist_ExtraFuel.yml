@@ -29,16 +29,13 @@ Data:
                 Move: 
                     Amount: 5
                     CircleEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCFire:
-                Elements: Fire
-                Abilities:
-                    BCFireAttack:
-                        ParentName: BNull
-                        Attack: 1
-                        AnimOverload: QuickAttack
+                Consume:
+                    Elements: Fire
+                    Abilities:
+                        BCFireAttack:
+                            Attack: 1
+                            AnimOverload: QuickAttack
 Layout:
     Top:
         - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"

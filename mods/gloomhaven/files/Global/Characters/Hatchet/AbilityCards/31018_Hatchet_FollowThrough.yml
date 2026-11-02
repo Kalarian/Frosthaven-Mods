@@ -41,15 +41,12 @@ Data:
                 Push: 2
                 Filter: Enemy
                 AnimOverload: TargetedPush
-            BNull:
-                Null: True
-        Consumes:
             BCAir:
-                Elements: Air 
-                Abilities:
-                    BCAirMove:
-                        ParentName: BNull
-                        Move: 2
+                Consume:
+                    Elements: Air 
+                    Abilities:
+                        BCAirMove:
+                            Move: 2
 Layout:
     Top:
         - Row:

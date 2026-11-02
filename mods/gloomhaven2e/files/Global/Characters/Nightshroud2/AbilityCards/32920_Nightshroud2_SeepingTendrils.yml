@@ -62,8 +62,17 @@ Data:
                 Move:
                     Amount: 4
                     CircleEnhancements: 1
-            BNull:
-                Null: True
+            BCDark:
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        BCDarkDamage:
+                            Damage: 1
+                            Range: 1
+                            Target: -1
+                            Filter: Enemy
+                            AnimOverload: Debuff
+                    XP: 1
             BPush:
                 Push:
                     Amount: 2
@@ -72,18 +81,6 @@ Data:
                 Target: -1
                 Filter: Enemy
                 AnimOverload: WeakRadial
-        Consumes:
-            BCDark:
-                Elements: Dark
-                Abilities:
-                    BCDarkDamage:
-                        ParentName: BNull
-                        Damage: 1
-                        Range: 1
-                        Target: -1
-                        Filter: Enemy
-                        AnimOverload: Debuff
-                XP: 1
 Layout:
     Top:
         - Row:

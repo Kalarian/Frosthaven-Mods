@@ -40,24 +40,21 @@ Data:
                 Move:
                     Amount: 2 
                     CircleEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             TCFire:
-                Elements: Fire
-                Abilities:
-                    BFireCreate:
-                        ParentName: BNull
-                        Create: RockSingle
-                        TileFilter: EmptyHex
-                        Range: 1
-                        Target: 1
-                        SpawnDelay: 2.9
-                        AnimOverload: CreateObstacle
-                        MultiPassAttack: False
-                        StartAbilityRequirements:
-                            Type: ThisAbility
-                            WallsAdjacent: "> 0"
+                Consume:
+                    Elements: Fire
+                    Abilities:
+                        BFireCreate:
+                            Create: RockSingle
+                            TileFilter: EmptyHex
+                            Range: 1
+                            Target: 1
+                            SpawnDelay: 2.9
+                            AnimOverload: CreateObstacle
+                            MultiPassAttack: False
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                WallsAdjacent: "> 0"
 Layout:
     Top:
         - Row:

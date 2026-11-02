@@ -28,16 +28,13 @@ Data:
                 Move:
                     Amount: 3
                     CircleEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCFire:
-                Elements: Fire
-                Abilities:
-                    BCFireReta:
-                        ParentName: BNull
-                        Retaliate: 2
-                        ActiveBonusDuration: Round
+                Consume:
+                    Elements: Fire
+                    Abilities:
+                        BCFireReta:
+                            Retaliate: 2
+                            ActiveBonusDuration: Round
 Layout:
     Top:
         - Active:

@@ -53,18 +53,15 @@ Data:
                     IsValidTeleportTile: CustomAbility.SteppedOnShadow(Tile)
                 AnimOverload: Teleport Into
                 AnimOverload2: Teleport Outof
-            TNull:
-                Null: True
-        Consumes:
             TCDark:
-                Elements: Dark
-                Abilities:
-                    TCDarkPlay:
-                        ParentName: TNull
-                        SelectAndPlayCard:
-                        Filter: Self
-                        AnimOverload: PowerUp
-                XP: 1
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        TCDarkPlay:
+                            SelectAndPlayCard:
+                            Filter: Self
+                            AnimOverload: PowerUp
+                    XP: 1
     Bottom:
         Abilities:
             BWard:
@@ -76,21 +73,18 @@ Data:
                 Attack:
                     Amount: 3
                     DiamondEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCDark:
-                Elements: Dark
-                Abilities:
-                    BCDarkMarker:
-                        ParentName: BNull
-                        NullTargeting: True
-                        Filter: Self
-                        AnimOverload: None
-                        ActiveBonus:
-                            Duration: Round
-                            ListLayoutOverride: [$GH2E_Nightshroud2_26_B$, Icon_Invisible]
-                XP: 1
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        BCDarkMarker:
+                            NullTargeting: True
+                            Filter: Self
+                            AnimOverload: None
+                            ActiveBonus:
+                                Duration: Round
+                                ListLayoutOverride: [$GH2E_Nightshroud2_26_B$, Icon_Invisible]
+                    XP: 1
         Infuse: Dark
 Layout:
     Top:

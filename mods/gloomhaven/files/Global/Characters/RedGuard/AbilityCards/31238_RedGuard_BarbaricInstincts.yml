@@ -28,19 +28,16 @@ Data:
         Infuse: Fire                    
     Bottom:
         Abilities:
-            BNull:
-                Null: True
+            BCLight:
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        BCLightMove:
+                            Move: 2
+                    XP: 1
             BAttack:
                 Attack: 1
                 Condition: Wound
-        Consumes:
-            BCLight:
-                Elements: Light
-                Abilities:
-                    BCLightMove:
-                        ParentName: BNull
-                        Move: 2
-                XP: 1
 Layout:
     Top:
         - Active:

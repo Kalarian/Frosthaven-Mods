@@ -22,18 +22,15 @@ Data:
                 Invisible: True
                 Filter: Self
                 AnimOverload: TurnInvisible
-            BNull:
-                Null: True
-        Consumes: 
             BCDark:
-                Elements: Dark
-                Abilities:
-                    BCDarkAttack:
-                        ParentName: BNull
-                        Attack: 3
-                        Range: 3
-                        AnimOverload: RangedAttack
-                XP: 1
+                Consume:
+                    Elements: Dark
+                    Abilities:
+                        BCDarkAttack:
+                            Attack: 3
+                            Range: 3
+                            AnimOverload: RangedAttack
+                    XP: 1
 Layout:
     Top:
         - Row:

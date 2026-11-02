@@ -13,46 +13,41 @@ Data:
                     Amount: 3
                     DiamondEnhancements: 1
                 AnimOverload: AltAttack
-            TNull1:
-                Null: True
-            TNull2:
-                Null: True
-        Consumes:
             TCFire:
-                Elements: Fire
-                Abilities:
-                    TCFireAlly:
-                        ParentName: TNull1
-                        ControlActor:
-                            Abilities:
-                                TCFireAllyAttack:
-                                    Attack: 3
-                                    StrengthIsBase: True
-                                    RangeIsBase: True
-                                    TargetIsBase: True
-                        Range: 1
-                        Filter: Ally
-                        AnimOverload: CommandAlly
-                        HelpBoxTooltipLocKey: GUI_ViciousBallet_Tooltip
-                XP: 1
+                Consume:
+                    Elements: Fire
+                    Abilities:
+                        TCFireAlly:
+                            ControlActor:
+                                Abilities:
+                                    TCFireAllyAttack:
+                                        Attack: 3
+                                        StrengthIsBase: True
+                                        RangeIsBase: True
+                                        TargetIsBase: True
+                            Range: 1
+                            Filter: Ally
+                            AnimOverload: CommandAlly
+                            HelpBoxTooltipLocKey: GUI_ViciousBallet_Tooltip
+                    XP: 1
             TCLight:
-                Elements: Light
-                Abilities:
-                    TCLightAlly:
-                        ParentName: TNull2
-                        ControlActor:
-                            Abilities:
-                                TCLightAllyAttack:
-                                    Attack: 3
-                                    StrengthIsBase: True
-                                    RangeIsBase: True
-                                    TargetIsBase: True
-                        Range: 1
-                        Filter: Ally
-                        IgnorePreviousAbilityTargets: TCFireAlly
-                        AnimOverload: CommandAlly
-                        HelpBoxTooltipLocKey: GUI_ViciousBallet_Tooltip
-                XP: 1
+                Consume:
+                    Elements: Light
+                    Abilities:
+                        TCLightAlly:
+                            ControlActor:
+                                Abilities:
+                                    TCLightAllyAttack:
+                                        Attack: 3
+                                        StrengthIsBase: True
+                                        RangeIsBase: True
+                                        TargetIsBase: True
+                            Range: 1
+                            Filter: Ally
+                            IgnorePreviousAbilityTargets: TCFireAlly
+                            AnimOverload: CommandAlly
+                            HelpBoxTooltipLocKey: GUI_ViciousBallet_Tooltip
+                    XP: 1
     Bottom:
         Abilities:
             BDamage1:

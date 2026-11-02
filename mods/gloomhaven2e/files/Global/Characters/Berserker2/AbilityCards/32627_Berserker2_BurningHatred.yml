@@ -43,65 +43,63 @@ Data:
                 Move: 1
             BAttack:
                 Attack: 2
-            BNull:
-                Null: True
         Consumes:
             BCRepeat1:
                 ConsumeGroup: CGHatred
                 CostAbility:
-                    ParentName: BNull
+                    ParentName: BAttack
                     Damage: 2
                     Filter: Self
                 Abilities:
                     BCMove1:
-                        ParentName: BNull
+                        ParentName: BAttack
                         Move: 1
                     BCAttack1:
-                        ParentName: BNull
+                        ParentName: BAttack
                         Attack: 2
             BCRepeat2:
                 ConsumeGroup: CGHatred
                 CostAbility:
-                    ParentName: BNull
+                    ParentName: BAttack
                     Damage: 5
                     Filter: Self
                 Abilities:
                     BCMove2a:
-                        ParentName: BNull
+                        ParentName: BAttack
                         Move: 1
                     BCAttack2a:
-                        ParentName: BNull
+                        ParentName: BAttack
                         Attack: 2
                     BCMove2b:
-                        ParentName: BNull
+                        ParentName: BAttack
                         Move: 1
                     BCAttack2b:
-                        ParentName: BNull
+                        ParentName: BAttack
                         Attack: 2
             BCRepeat3:
                 ConsumeGroup: CGHatred
                 CostAbility:
-                    ParentName: BNull
+                    ParentName: BAttack
                     Damage: 9
                     Filter: Self
                 Abilities:
                     BCMove3a:
-                        ParentName: BNull
+                        ParentName: BAttack
                         Move: 1
                     BCAttack3a:
-                        ParentName: BNull
+                        ParentName: BAttack
                         Attack: 2
                     BCMove3b:
-                        ParentName: BNull
+                        ParentName: BAttack
                         Move: 1
                     BCAttack3b:
-                        ParentName: BNull
+                        ParentName: BAttack
                         Attack: 2
                     BCMove3c:
-                        ParentName: BNull
+                        ParentName: BAttack
                         Move: 1
                     BCAttack3c:
-                        ParentName: BNull
+                        ParentName: BAttack
                         Attack: 2
         XP: 2
 Layout:

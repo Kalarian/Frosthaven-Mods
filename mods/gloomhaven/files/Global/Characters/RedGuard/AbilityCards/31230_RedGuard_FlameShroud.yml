@@ -35,19 +35,16 @@ Data:
                 Move: 
                     Amount: 4
                     CircleEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCFire:
-                Elements: Fire
-                Abilities:
-                    BCFireShield:
-                        ParentName: BNull
-                        Shield: 1
-                        Filter: Self
-                        ActiveBonusDuration: Round
-                        AnimOverload: PowerUp
-                XP: 1
+                Consume:
+                    Elements: Fire
+                    Abilities:
+                        BCFireShield:
+                            Shield: 1
+                            Filter: Self
+                            ActiveBonusDuration: Round
+                            AnimOverload: PowerUp
+                    XP: 1
 Layout:
     Top:
         - Active:

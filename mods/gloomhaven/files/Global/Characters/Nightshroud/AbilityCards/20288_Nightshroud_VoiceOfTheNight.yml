@@ -30,19 +30,16 @@ Data:
                 Attack:
                     Amount: 2
                     DiamondEnhancements: 1
-            BNull:
-                Null: True
-        Consumes:
             BCAny:
-                Elements: Any
-                Abilities:
-                    BCAnyInvis:
-                        ParentName: BNull
-                        Invisible: True
-                        Filter: Self
-                        AnimOverload: TurnInvisible
-                Infuse: Dark
-                XP: 1
+                Consume:
+                    Elements: Any
+                    Abilities:
+                        BCAnyInvis:
+                            Invisible: True
+                            Filter: Self
+                            AnimOverload: TurnInvisible
+                    Infuse: Dark
+                    XP: 1
 Layout:
     Top:
         - Active:

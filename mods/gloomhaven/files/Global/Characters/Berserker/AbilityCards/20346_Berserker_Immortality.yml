@@ -26,16 +26,13 @@ Data:
                     SquareEnhancements: 1
                 ActiveBonusDuration: Round
                 AnimOverload: PowerUp
-            BNull:
-                Null: True
-        Consumes:
             BCFire:
-                Elements: Fire
-                Abilities:
-                    BCFireReta:
-                        ParentName: BNull
-                        Retaliate: 2
-                        ActiveBonusDuration: Round
+                Consume:
+                    Elements: Fire
+                    Abilities:
+                        BCFireReta:
+                            Retaliate: 2
+                            ActiveBonusDuration: Round
 Layout:
     Top:
         - Active:
