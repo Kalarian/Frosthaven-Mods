@@ -47,9 +47,9 @@ GH2E_Berserker2_26_T2	Whenever an enemy suffers damage from your retaliate this 
 GH2E_Berserker2_26_T3	Negate the next damage you suffer this round.
 GH2E_Berserker2_26_B	Add <sprite name=Strengthen> and gain <sprite name=XP1> if your current hit point value is half your maximum or less.
 GH2E_Berserker2_27_T	You may suffer <sprite name=Damage> 2 to add +1 <sprite name=Attack> and gain <sprite name=XP1>.
-GH2E_Berserker2_27_B	You may perform this action any number of times in succession, increasing the damage suffered by 1 each time.
-GH2E_Berserker2_27_B2	Suffer <sprite name=Damage> 1. This damage cannot be negated.
-GH2E_Berserker2_27_B3	Repeat once: suffer <sprite name=Damage> 2, then <sprite name=Move> 1, <sprite name=Attack> 2
-GH2E_Berserker2_27_B4	Repeat twice: suffer <sprite name=Damage> 5 (2 + 3), then <sprite name=Move> 1, <sprite name=Attack> 2 twice
-GH2E_Berserker2_27_B5	Repeat three times: suffer <sprite name=Damage> 9 (2 + 3 + 4), then <sprite name=Move> 1, <sprite name=Attack> 2 three times
+GH2E_Berserker2_27_B	You may repeat this action, suffering 1 more damage each time.
+GH2E_Berserker2_27_B2	Suffer <sprite name=Damage> 1 (cannot be negated).
+GH2E_Berserker2_27_B3	Once: <sprite name=Damage> 2, then <sprite name=Move> 1, <sprite name=Attack> 2
+GH2E_Berserker2_27_B4	Twice: <sprite name=Damage> 5, then twice <sprite name=Move> 1, <sprite name=Attack> 2
+GH2E_Berserker2_27_B5	Three times: <sprite name=Damage> 9, then three times <sprite name=Move> 1, <sprite name=Attack> 2
 GH2E_Berserker2_28_T	Whenever you suffer damage, all enemies that have <sprite name=Wound> suffer <sprite name=Damage> 1.

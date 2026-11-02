@@ -127,7 +127,6 @@ Layout:
                     Text: "$FHS_GH2E_Berserker2_27_T$"
     Bottom:
         - Row: "$FHS_GH2E_Berserker2_27_B$"
-        - Row: "<size=20%> "
         - Row: "$FHS_GH2E_Berserker2_27_B2$"
         - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=150%><sprite name=Attack> *BAttack*"

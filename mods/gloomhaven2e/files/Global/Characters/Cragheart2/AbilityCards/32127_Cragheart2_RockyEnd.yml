@@ -85,7 +85,6 @@ Layout:
                     - Column:
                         - Row: "<link=fhpill><sprite name=Muddle></link>"
                     - Column:
-                - Row: "<size=50%> "
                 - Row: "<size=150%><sprite name=Heal> *TAttackSubHeal*"
                 - Row: "$FHS_GH2E_Cragheart2_27_T$"
             - Column:

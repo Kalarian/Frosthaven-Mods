@@ -112,7 +112,6 @@ Layout:
             Text: "$GH2E_Berserker2_27_T$"
     Bottom:
         - Row: "$GH2E_Berserker2_27_B$"
-        - Row: "<size=20%> "
         - Row: "$GH2E_Berserker2_27_B2$"
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack*"
@@ -126,5 +125,4 @@ Layout:
         - Consume:
             Name: BCRepeat3
             Text: "$GH2E_Berserker2_27_B5$"
-        - Row: "<size=50%> "
         - XP: 2

@@ -593,11 +593,11 @@ FHS_GH2E_Berserker2_26_B	Add <sprite name=Strengthen> and gain <sprite name=XP1>
 FHS_GH2E_Berserker2_26_T	You may suffer <sprite name=Damage> 2 to add +1 <sprite name=Retaliate> and gain <sprite name=XP1>
 FHS_GH2E_Berserker2_26_T2	Whenever an <sprite name=Enemy> suffers damage from your retaliate this round, they gain <sprite name=Wound>
 FHS_GH2E_Berserker2_26_T3	Negate the next damage you suffer this round
-FHS_GH2E_Berserker2_27_B	You may perform this action any number of times in succession, increasing the damage suffered by 1 each time
-FHS_GH2E_Berserker2_27_B2	Suffer <sprite name=Damage> 1. This damage cannot be negated.
-FHS_GH2E_Berserker2_27_B3	Repeat once: suffer <sprite name=Damage> 2, then <sprite name=Move> 1, <sprite name=Attack> 2
-FHS_GH2E_Berserker2_27_B4	Repeat twice: suffer <sprite name=Damage> 5 (2 + 3), then <sprite name=Move> 1, <sprite name=Attack> 2 twice
-FHS_GH2E_Berserker2_27_B5	Repeat three times: suffer <sprite name=Damage> 9 (2 + 3 + 4), then <sprite name=Move> 1, <sprite name=Attack> 2 three times
+FHS_GH2E_Berserker2_27_B	You may repeat this action, suffering 1 more damage each time
+FHS_GH2E_Berserker2_27_B2	Suffer <sprite name=Damage> 1 (cannot be negated)
+FHS_GH2E_Berserker2_27_B3	Once: <sprite name=Damage> 2, then <sprite name=Move> 1, <sprite name=Attack> 2
+FHS_GH2E_Berserker2_27_B4	Twice: <sprite name=Damage> 5, then twice <sprite name=Move> 1, <sprite name=Attack> 2
+FHS_GH2E_Berserker2_27_B5	Three times: <sprite name=Damage> 9, then three times <sprite name=Move> 1, <sprite name=Attack> 2
 FHS_GH2E_Berserker2_27_T	You may suffer <sprite name=Damage> 2 to add +1 <sprite name=Attack> and gain <sprite name=XP1>
 FHS_GH2E_Berserker2_28_T	Whenever you suffer damage, all <sprite name=Enemy> that have <sprite name=Wound> suffer <sprite name=Damage> 1
 FHS_GH2E_Bruiser_01_B	Target all <sprite name=Enemy> moved through with the move ability
@@ -666,8 +666,8 @@ FHS_GH2E_Cragheart2_25_T2	Destroy any number of adjacent obstacles. For each obs
 FHS_GH2E_Cragheart2_26_B	At the start of your next four turns, perform: <nobr><sprite name=Move> 3.</nobr> <nobr>+3<sprite name=Attack></nobr> to your next melee attack this turn.
 FHS_GH2E_Cragheart2_26_T	<nobr>+1<sprite name=Attack>,</nobr> <nobr>+1 <sprite name=Push></nobr> for each hex containing an obstacle or wall adjacent to you
 FHS_GH2E_Cragheart2_27_B	Create 1-hex obstacle tiles in each featureless hex the target exits with the push
-FHS_GH2E_Cragheart2_27_T	Target all <sprite name=Allies> in the red hexes of the attack ability
-FHS_GH2E_Cragheart2_27_T2	Create 1-hex obstacle tiles in each empty red hex of the attack ability, <sprite name=XP1>
+FHS_GH2E_Cragheart2_27_T	Target all <sprite name=Allies> in the red hexes
+FHS_GH2E_Cragheart2_27_T2	Create 1-hex obstacle tiles in the empty red hexes, <sprite name=XP1>
 FHS_GH2E_Cragheart2_28_B	Create one 1-hex obstacle tile in an adjacent empty hex
 FHS_GH2E_Cragheart2_28_B2	Destroy any number of obstacles within <nobr><sprite name=Range> 3</nobr>. For each obstacle destroyed, give <sprite name=Ward> to one <sprite name=Allies> adjacent to the hex that obstacle occupied.
 FHS_GH2E_Cragheart2_28_T	Create two 1-hex obstacle tiles in empty hexes adjacent to the target but not adjacent to you. All <sprite name=Allies> and <sprite name=Enemy> adjacent to at least one created tile suffer <nobr><sprite name=Damage> 1, <sprite name=XP1></nobr>
@@ -709,7 +709,7 @@ FHS_GH2E_Doomstalker2_22_B	Your summons add <sprite name=Wound> to and gain adva
 FHS_GH2E_Doomstalker2_22_T	Gain advantage on your first attack targeting an <sprite name=Enemy> that has <nobr><b><color=#39BEED>Doom</color></b></nobr> each turn
 FHS_GH2E_Doomstalker2_22_T2	All <sprite name=Enemy> lose <sprite name=Invisible> and may no longer gain <sprite name=Invisible>
 FHS_GH2E_Doomstalker2_23_B	Target one <sprite name=Enemy> that has <nobr><b><color=#39BEED>Doom</color></b></nobr> at any range
-FHS_GH2E_Doomstalker2_24_B	Add <sprite name=Immobilize> to your first attack targeting this <sprite name=Enemy> and add <nobr>+2 <sprite name=Attack></nobr> to your second and third attacks targeting this <sprite name=Enemy>
+FHS_GH2E_Doomstalker2_24_B	Add <sprite name=Immobilize> to your first attack targeting this <sprite name=Enemy>, <nobr>+2 <sprite name=Attack></nobr> to your second and third
 FHS_GH2E_Doomstalker2_24_T	If this attack kills the target, instead of moving any <nobr><b><color=#39BEED>Doom</color></b></nobr> on the target to your discard pile, you may perform the <nobr><b><color=#39BEED>Doom</color></b></nobr> actions of the cards, targeting an <sprite name=Enemy> within <nobr><sprite name=Range> 3</nobr> of the hex where the <sprite name=Enemy> died
 FHS_GH2E_Doomstalker2_25_B	Your summons focus on this <sprite name=Enemy>. When this <sprite name=Enemy> dies, you and all <sprite name=Allies> may perform <nobr><sprite name=Heal> 3</nobr>.
 FHS_GH2E_Doomstalker2_25_T	After moving for the first time each round, add <nobr>+2 <sprite name=Attack></nobr> to all attacks for the round

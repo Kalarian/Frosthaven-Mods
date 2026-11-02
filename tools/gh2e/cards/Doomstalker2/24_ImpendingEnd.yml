@@ -87,5 +87,4 @@ Layout:
             ActiveBonusLayout: "$GH2E_Doomstalker2_24_B$"
             DoomAbilityLayout:
                 - Row: "$GH2E_Doomstalker2_24_B$"
-                - Row: "<size=20%> "
                 - XPTracker: BDoomAttackDebuff

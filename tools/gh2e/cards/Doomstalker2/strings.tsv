@@ -51,7 +51,7 @@ GH2E_Doomstalker2_22_B	Your summons add <sprite name=Wound> to and gain advantag
 GH2E_DOOM_12722	Your summons add <sprite name=Wound> to and gain advantage on all their attacks targeting this <sprite name=Enemy>.
 GH2E_Doomstalker2_23_B	Target one <sprite name=Enemy> that has <nobr><b><color=#39BEED>Doom</color></b></nobr> at any range
 GH2E_Doomstalker2_24_T	If this attack kills the target, instead of moving any <nobr><b><color=#39BEED>Doom</color></b></nobr> on the target to your discard pile, you may perform the <nobr><b><color=#39BEED>Doom</color></b></nobr> actions of the cards, targeting an <sprite name=Enemy> within <nobr><sprite name=Range> 3</nobr> of the hex where the <sprite name=Enemy> died.
-GH2E_Doomstalker2_24_B	Add <sprite name=Immobilize> to your first attack targeting this <sprite name=Enemy> and add <nobr>+2 <sprite name=Attack></nobr> to your second and third attacks targeting this <sprite name=Enemy>.
+GH2E_Doomstalker2_24_B	Add <sprite name=Immobilize> to your first attack targeting this <sprite name=Enemy>, <nobr>+2 <sprite name=Attack></nobr> to your second and third
 GH2E_DOOM_12724	Add <sprite name=Immobilize> to your first attack targeting this <sprite name=Enemy> and add <nobr>+2 <sprite name=Attack></nobr> to your second and third attacks targeting this <sprite name=Enemy>.
 GH2E_SUMMON_HornedHristek	Horned Hristek
 GH2E_Doomstalker2_25_T	After moving for the first time each round, add <nobr>+2 <sprite name=Attack></nobr> to all attacks for the round.

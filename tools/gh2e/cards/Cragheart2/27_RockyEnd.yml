@@ -74,7 +74,6 @@ Layout:
             - Column:
                 - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
                 - Row: "$Muddle$ <sprite name=Muddle>"
-                - Row: "<size=50%> "
                 - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *TAttackSubHeal*"
                 - Row: "$GH2E_Cragheart2_27_T$"
             - Column:
