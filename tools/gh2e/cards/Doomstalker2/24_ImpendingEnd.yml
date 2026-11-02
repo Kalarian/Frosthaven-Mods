@@ -89,3 +89,6 @@ Layout:
                 - Row: "$GH2E_Doomstalker2_24_B$"
                 - Row: "<size=100%> "
                 - XPTracker: BDoomAttackDebuff
+                # (an empty row after the tracker too: it takes no height, and touched the "When this dies" line below,
+                # the 2026-11-02 capture)
+                - Row: "<size=70%> "
