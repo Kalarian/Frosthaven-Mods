@@ -807,22 +807,8 @@ def empty_step_consumes(s, warn=None):
     # a cost consume's layout row ("Consume: Name: ..."): no consume of that name is left, the row is plain text
     for cn in cost_layout:
         layout = re.sub(rf"^( *)- Consume:\s*\r?\n +Name: {cn}\s*\r?\n +Text: (.*)$", lambda m: m.group(1) + "- Row: " + m.group(2), layout, flags=re.M)
-    # a consume made a Choose option: the card's ConsumeButton found no consume data for it and the hand threw ("Could
-    # not process updating cards", the error screen, 2026-11-02 bench), so its row is drawn by hand as Frosthaven's own
-    # Consume-step cards draw theirs (Crashing Tide's Sharp Chitin: "<sprite name=ConsumeLight>: ...")
-    def _hand_row(m, els):
-        ind, body = m.group(1), m.group(2)
-        icons = "".join(f"<sprite name=Consume{e}>" for e in els)
-        sm = re.match(r'^\s*"(.*)"\s*$', body.split("\n")[0].replace("\r", ""))
-        if sm and "\n" not in body.strip():
-            txt = sm.group(1)
-        else:
-            lm = re.search(r'ListLayout:\s*"(.*?)"', body)
-            txt = lm.group(1) if lm else ""
-        return f'{ind}- Row: "<size=130%>{icons}</size>: {txt}"'
-    for cn, els in choose_layout.items():
-        pat = rf"^( *)- Consume:\s*\r?\n +Name: {cn}\s*\r?\n +Text:((?: .*)?(?:\r?\n\1 {{4,}}.*)*)"
-        layout = re.sub(pat, lambda m, els=els: _hand_row(m, els), layout, flags=re.M)
+    # (a consume made a Choose option keeps its Gloomhaven layout row: the plugin's GHChooseOptionConsumes gives the
+    # card's consume button its data, which Frosthaven only looks for among the top-level Consume steps)
     if changed and warn:
         warn(f"{changed} consume(s) on an empty step made steps")
     return eol.join(lines) + sep + layout

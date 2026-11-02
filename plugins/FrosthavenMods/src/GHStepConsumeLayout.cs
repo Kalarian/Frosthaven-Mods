@@ -54,4 +54,32 @@ namespace FrosthavenMods
             catch (System.Exception e) { Plugin.Log.LogWarning("GHStepConsumeLayout: " + e.Message); }
         }
     }
+
+    /// <summary>The consume buttons of a pack card's Choose options (see GHStepConsumeLayout): their consume data found.</summary>
+    [HarmonyPatch]
+    internal static class GHChooseOptionConsumes
+    {
+        // the card's consume buttons look their consume up through AbilityCardYMLData.GetConsumes, which holds the top-level
+        // Consume steps but not the options of a Choose step: the button got nothing and the hand threw ("Could not process
+        // updating cards", ConsumeButton.Enable, 2026-11-02 bench). A pack card's Choose options' consumes are added
+        [HarmonyPatch(typeof(ScenarioRuleLibrary.YML.AbilityCardYMLData), nameof(ScenarioRuleLibrary.YML.AbilityCardYMLData.GetConsumes))]
+        [HarmonyPostfix]
+        private static void WithChooseOptions(ScenarioRuleLibrary.YML.AbilityCardYMLData __instance, ref IEnumerable<AbilityConsume> __result)
+        {
+            try
+            {
+                if (__instance == null || __instance.ID < 20000 || __instance.ID >= 40000) return;
+                var extra = new List<AbilityConsume>();
+                foreach (var data in new[] { __instance.TopActionCardData, __instance.BottomActionCardData })
+                {
+                    if (data == null) continue;
+                    foreach (CAbilityChooseAbility ch in CAbilityCard.GetActionAbilities(data).OfType<CAbilityChooseAbility>())
+                        foreach (CAbilityConsume c in (ch.ChooseAbilities ?? new List<CAbility>()).OfType<CAbilityConsume>())
+                            if (c.Consumes != null) extra.AddRange(c.Consumes.Where(x => x != null));
+                }
+                if (extra.Count > 0) __result = __result.Concat(extra).ToList();
+            }
+            catch (System.Exception e) { Plugin.Log.LogWarning("GHStepConsumeLayout consumes: " + e.Message); }
+        }
+    }
 }

@@ -170,7 +170,11 @@ Layout:
                             Name: BCFire
                             Text: "<nobr>+3 <sprite name=Move></nobr>"
                 - Row: "<size=20%> "
-                - Row: "<sprite name=ConsumeIce>: "
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: BCIce
+                            Text: "<nobr><sprite name=Heal> 2</nobr>"
             - Column:
                 - Conditional:
                     Layout:
@@ -178,4 +182,12 @@ Layout:
                             Name: BCAir
                             Text: "<nobr><sprite name=Jump></nobr>"
                 - Row: "<size=20%> "
-                - Row: "<sprite name=ConsumeEarth>: <nobr><sprite name=Shield> 1</nobr>"
+                - Consume:
+                    Name: BCEarth
+                    Text:
+                        - Active:
+                            Ability: BCEarthShield
+                            Icon: Positive_Shield
+                            ListLayout: "<nobr><sprite name=Shield> 1</nobr>"
+                            Layout:
+                                - Row: "<nobr><sprite name=Shield> 1</nobr>"

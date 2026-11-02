@@ -238,10 +238,26 @@ Layout:
         - Row:
             - ColumnWidths: "55, 45"
             - Column:
-                - Row: "<sprite name=ConsumeFire>: "
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: BCFire
+                            Text: "<nobr><sprite name=Attack> 3</nobr> <nobr><sprite name=Range> 3</nobr>"
                 - Row: "<size=20%> "
-                - Row: "<sprite name=ConsumeAir>: "
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: BCAir
+                            Text: "<nobr><sprite name=Move> 3</nobr>"
             - Column:
-                - Row: "<sprite name=ConsumeIce>: "
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: BCIce
+                            Text: "<nobr><sprite name=Loot> 1</nobr>"
                 - Row: "<size=20%> "
-                - Row: "<sprite name=ConsumeEarth>: "
+                - Conditional:
+                    Layout:
+                        - Consume:
+                            Name: BCEarth
+                            Text: "<nobr><sprite name=Heal> 3</nobr> <nobr><sprite name=Range> 3</nobr>"
