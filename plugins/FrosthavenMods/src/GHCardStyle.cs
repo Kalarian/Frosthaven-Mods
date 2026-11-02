@@ -95,6 +95,7 @@ namespace FrosthavenMods
                     if (rows == null) continue;
                     Fonts(rows);
                     SummonHealth(rows);
+                    SummonSpecial(rows);
                     Pending.TryGetValue(__instance, out AbilityCardYMLData cardData);
                     CAction act = cardData == null ? null : half == __instance.topActionButton ? cardData.TopActionCardData : cardData.BottomActionCardData;
                     // the port's Command marker (Beast Tyrant): hidden, and the half tagged like a song
@@ -997,6 +998,35 @@ namespace FrosthavenMods
                             t.text = t.text.Replace("<sprite name=Heal>", "<sprite name=Health>");
                             t.ForceMeshUpdate();
                         }
+        }
+
+        /// <summary>A summon's special text (the stat block's right cell, SummonContainer.SummonR) that is taller than its
+        /// cell: Frosthaven's own summons have a line or two there, the 2nd edition's long rules ran out of the cell over the
+        /// "Summon ..." title (Soultether x5, Tinkerer2 Teleportation Pad; the 2026-11-02 visual review). The text is
+        /// fitted into the cell's height (TextMeshPro's auto-size between its own size and half of it), as the game's
+        /// card texts do elsewhere. Only a text that doesn't fit changes.</summary>
+        private static void SummonSpecial(Transform rows)
+        {
+            foreach (SummonContainer sc in rows.GetComponentsInChildren<SummonContainer>(true))
+            {
+                if (sc.SummonR == null || !(sc.SummonR.transform is RectTransform cell)) continue;
+                float room = cell.rect.height;
+                if (room <= 1f) continue;
+                foreach (TMP_Text t in sc.SummonR.GetComponentsInChildren<TMP_Text>(true))
+                {
+                    if (string.IsNullOrEmpty(t.text)) continue;
+                    t.ForceMeshUpdate();
+                    float tall = t.preferredHeight;
+                    float own = t.rectTransform.rect.height > 1f ? Mathf.Min(room, t.rectTransform.rect.height) : room;
+                    if (tall <= own + 0.5f) continue;
+                    float size = t.enableAutoSizing ? t.fontSizeMax : t.fontSize;
+                    t.enableAutoSizing = true;
+                    t.fontSizeMax = size;
+                    t.fontSizeMin = size * 0.5f;
+                    t.overflowMode = TextOverflowModes.Truncate;
+                    t.ForceMeshUpdate();
+                }
+            }
         }
 
         /// <summary>An Augment (Mindthief) in the user's look (2026-10-30): the class's own symbol after "Augment" (the
