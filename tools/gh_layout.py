@@ -571,7 +571,9 @@ def _style_items(items):
                 elif c.key == "Text" and c.value and not c.value.startswith('"$'):
                     # one size in the box, the XP last ("-1 <move>, XP <size=150%><attack> 2" read oddly: Resigned
                     # Frenzy, the user 2026-10-30)
-                    t = _SIZES.sub("", c.text())
+                    # (a voffset in front of the XP stayed behind as an empty item: "Move 2, , XP 1", Bonded Might
+                    # bottom, the 2026-11-01 visual review)
+                    t = re.sub(r"</?voffset[^>]*>", "", _SIZES.sub("", c.text()))
                     xp = re.findall(r"<sprite name=XP\d+>", t)
                     if xp:
                         t = re.sub(r",?\s*<sprite name=XP\d+>\s*,?", " ", t).strip()
