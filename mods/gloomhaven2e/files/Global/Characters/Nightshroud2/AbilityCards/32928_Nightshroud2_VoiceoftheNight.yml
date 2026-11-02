@@ -65,14 +65,16 @@ Data:
                 Target: -1
                 Targeting: Custom
                 Vars:
+                    # (ActorsTargeted: a push moves each target from ActorsToTarget to ActorsTargeted once pushed, so
+                    # ActorsToTarget is empty by now: the rider never fired, harness 2026-11-02)
                     Pushed: CustomAbility.FindAbilityInPhaseByName("BPush")
                 TargetingVars:
-                    AddValidActorsInRange: Pushed.ActorsToTarget
-                    AddActorsToTarget: Pushed.ActorsToTarget
+                    AddValidActorsInRange: Pushed.ActorsTargeted
+                    AddActorsToTarget: Pushed.ActorsTargeted
                 StartAbilityRequirements:
                     Type: ThisAbility
                     Vars:
-                        ValidateOnTear: Pushed != null && Pushed.ActorsToTarget.Any(obj.IsDead == False && CustomAbility.SteppedOnShadow(obj.Tile))
+                        ValidateOnTear: Pushed != null && Pushed.ActorsTargeted.Any(obj.IsDead == False && CustomAbility.SteppedOnShadow(obj.Tile))
                 AnimOverload: TurnInvisible
                 SubAbilities:
                     BInvisibleSubRemoveTear:
