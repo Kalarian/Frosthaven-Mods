@@ -36,7 +36,6 @@ Data:
                 Damage: 2
                 Filter: Self
                 CanSkip: True
-                Infuse: [Fire]
                 SubAbilities:
                     BCDamageStun:
                         Stun: True
@@ -44,6 +43,12 @@ Data:
                         Target: 1
                         Filter: Enemy
                         AnimOverload: AdjacentShove
+                        TreatAsNonSubAbility: True
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            AbilityHasHappened: True
+                    BCDamageInfuse:
+                        Infuse: [Fire]
                         TreatAsNonSubAbility: True
                         StartAbilityRequirements:
                             Type: SubAbility

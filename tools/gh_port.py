@@ -694,9 +694,12 @@ def empty_step_consumes(s, warn=None):
             xp, infuse = scalar(body, "XP"), scalar(body, "Infuse")
             if xp:
                 out.append(f"{pad}    AbilityXP: {xp}")
-            if infuse:
-                out.append(f"{pad}    Infuse: {infuse if infuse.startswith('[') else '[' + infuse + ']'}")
             subs = abilities(body)
+            # the infusion is a sub ability that needs the cost paid like the others: an "Infuse:" line inside the cost
+            # ability is read as the ability's kind, so the step became an Infuse and the damage was never suffered
+            # (Into the Fight bottom, 2026-11-02 sweep13: "BCDamage type Infuse", no Damage event)
+            if infuse:
+                subs = subs + [(f"{name}Infuse", [f"{' ' * 24}Infuse: {infuse if infuse.startswith('[') else '[' + infuse + ']'}"])]
             if subs or then:
                 out.append(f"{pad}    SubAbilities:")
             for sn, props in subs:
