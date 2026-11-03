@@ -29,8 +29,8 @@ namespace FrosthavenMods
     ///   m_AbilityPath), kept when featureless and empty (the create's TileFilter), so a bent push is followed exactly.
     /// - Wave of Destruction bottom (card 32129), MiscVars GHMoveThroughObstacles on the Move: "you may enter hexes
     ///   containing obstacles with this movement; when you do, destroy the obstacle". While that move is being chosen and
-    ///   performed, every destroyable obstacle stops blocking the path finder (CNode.Blocked, the one flag obstacles set),
-    ///   so the move is an ordinary move (enemies still block, traps and terrain still count) that may pass through or end
+    ///   performed, every destroyable obstacle stops blocking the path finder (CNode.Blocked, and in the mover's own path
+    ///   queries the Blocked|CannotStop flags AddLevelObjectsToPathFindingContext puts back on obstacle hexes), so the move is an ordinary move (enemies still block, traps and terrain still count) that may pass through or end
     ///   in an obstacle's hex; the card's next step destroys every obstacle on the move path (AllTargetsOnMovePath) and
     ///   feeds the +2 Attack per obstacle. The obstacles block again as soon as the move is done or any other ability
     ///   starts (an undo, a cancelled move).
@@ -291,6 +291,48 @@ namespace FrosthavenMods
                 else if (_throughMove != null) Reblock("another move started");
             }
             catch (Exception e) { Error("move through obstacles (start)", e); }
+        }
+
+        private static CAbilityMove _contextLogged;
+
+        /// <summary>The player's move path (CActor.FindCharacterPath -> CPlayerActor.FindPlayerPath ->
+        /// FloodFill_ToLocation(assignLevelObjects: true)) runs AddLevelObjectsToPathFindingContext, which marks every
+        /// obstacle hex Blocked|CannotStop in the query's own node copy, whatever CNode.Blocked says. Both the click
+        /// (Waypoint.TileHandler) and the walk (CAbilityMove.GetNextPathingPosition) build their path this way, so while
+        /// the through-obstacle move runs, its mover's queries get those two flags taken off again on the hexes of the
+        /// unblocked obstacles (their pathing blockers and the prop's own hex). Other figures' queries are untouched.</summary>
+        [HarmonyPatch(typeof(CAIMoveNew), nameof(CAIMoveNew.AddLevelObjectsToPathFindingContext))]
+        [HarmonyPostfix]
+        private static void ThroughContext(CPathFinderContext pfContext, CActor actor)
+        {
+            try
+            {
+                CAbilityMove move = _throughMove;
+                if (move == null || pfContext == null || actor == null || Unblocked.Count == 0) return;
+                if (!ReferenceEquals(actor, move.TargetingActor) && !ReferenceEquals(actor, move.CurrentMovingActor)) return;
+                if (!ReferenceEquals(ScenarioManager.CurrentScenarioState, _throughScenario)) return;
+                const CPathFinderContext.TNode.Flags open = CPathFinderContext.TNode.Flags.Blocked | CPathFinderContext.TNode.Flags.CannotStop;
+                int hexes = 0;
+                var seen = new HashSet<Point>();
+                foreach (CObjectObstacle obstacle in Unblocked)
+                {
+                    if (obstacle == null || obstacle.Activated) continue;
+                    var points = new List<Point> { new Point(obstacle.ArrayIndex) };
+                    if (obstacle.PathingBlockers != null) points.AddRange(obstacle.PathingBlockers.Select(t => new Point(t)));
+                    foreach (Point p in points)
+                    {
+                        if (!seen.Add(p)) continue;
+                        pfContext.GetNode(p).flags &= ~open;
+                        hexes++;
+                    }
+                }
+                if (!ReferenceEquals(_contextLogged, move))
+                {
+                    _contextLogged = move;
+                    Plugin.Log.LogInfo($"GHRule MoveThroughObstacles card {CardId(move)} path finding for {actor.GetPrefabName()}: {hexes} obstacle hex(es) walkable and stoppable");
+                }
+            }
+            catch (Exception e) { Error("move through obstacles (path context)", e); }
         }
 
         [HarmonyPatch(typeof(CAbilityMove), nameof(CAbilityMove.Perform))]
