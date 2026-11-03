@@ -81,7 +81,7 @@ namespace FrosthavenMods
             total = Math.Max(1, last);
             met = Enumerable.Range(1, Math.Max(0, last)).Count(rounds.Contains);
             result = last > 0 && met == last;
-            Plugin.Log.LogInfo($"GHRule ObstacleEveryRound card 0 Cragheart mastery: an obstacle created, destroyed or moved in {met} of {last} rounds");
+            GHMasteryProgress.Once("ObstacleEveryRound", $"Cragheart mastery: an obstacle created, destroyed or moved in {met} of {last} rounds");
         }
 
         private static void HealDamage(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
@@ -108,7 +108,7 @@ namespace FrosthavenMods
             total = 3;
             met = (bestHeal >= needed ? 1 : 0) + (bestRanged >= needed ? 1 : 0) + (bestMelee >= needed ? 1 : 0);
             result = met == 3;
-            Plugin.Log.LogInfo($"GHRule Heal8Ranged8Melee8 card 0 Cragheart mastery: best round heal {bestHeal}, best ranged attack {bestRanged}, best melee attack {bestMelee} (need {needed} each)");
+            GHMasteryProgress.Once("Heal8Ranged8Melee8", $"Cragheart mastery: best round heal {bestHeal}, best ranged attack {bestRanged}, best melee attack {bestMelee} (need {needed} each)");
         }
 
         // ---- obstacles spawned with a character as owner, by round (current scenario only)

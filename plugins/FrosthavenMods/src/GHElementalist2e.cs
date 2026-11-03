@@ -441,7 +441,7 @@ namespace FrosthavenMods
                             if (e != null && e.Round > 0) byRound[e.Round] = (byRound.TryGetValue(e.Round, out int n) ? n : 0) + 1;
                     int turns = byRound.Values.Count(v => v >= per);
                     totalConditions = needed; conditionsMet = Math.Min(turns, needed); __result = turns >= needed;
-                    Plugin.Log.LogInfo($"GHRule ConsumesInOneTurn card 0 mastery: {turns} turn(s) with {per}+ element consumes (needs {needed}){(__result ? ": met" : "")}");
+                    GHMasteryProgress.Once("ConsumesInOneTurn", $"mastery: {turns} turn(s) with {per}+ element consumes (needs {needed}){(__result ? ": met" : "")}");
                 }
                 else
                 {

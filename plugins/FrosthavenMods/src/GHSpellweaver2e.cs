@@ -328,7 +328,7 @@ namespace FrosthavenMods
                     }
                 int turns = byRound.Values.Count(set => set.Contains(ElementInfusionBoardManager.EElement.Fire) && set.Contains(ElementInfusionBoardManager.EElement.Ice));
                 totalConditions = needed; conditionsMet = Math.Min(turns, needed); __result = turns >= needed;
-                Plugin.Log.LogInfo($"GHRule FireAndIceSameTurn card 0 mastery: {turns} turn(s) consuming both Fire and Ice (needs {needed}){(__result ? ": met" : "")}");
+                GHMasteryProgress.Once("FireAndIceSameTurn", $"mastery: {turns} turn(s) consuming both Fire and Ice (needs {needed}){(__result ? ": met" : "")}");
             }
             catch (Exception e)
             {

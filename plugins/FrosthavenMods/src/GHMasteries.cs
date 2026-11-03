@@ -110,7 +110,11 @@ namespace FrosthavenMods
                 if (tags.Contains(StreakTag)) Streak(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(KillsNearTag)) Kills(unlockConditionTarget, stats, true, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(KillsAwayTag)) Kills(unlockConditionTarget, stats, false, ref totalConditions, ref conditionsMet, ref __result);
-                else if (tags.Contains(ElementTag)) EveryTurn(stats, r => ElementInRound(unlockConditionTarget, stats, r), ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(ElementTag))
+                {
+                    EveryTurn(stats, r => ElementInRound(unlockConditionTarget, stats, r), ref totalConditions, ref conditionsMet, ref __result);
+                    GHMasteryProgress.Once("ElementEveryTurn", $"{Who(unlockConditionTarget)} mastery: {string.Join("/", unlockConditionTarget.Elements ?? new List<ElementInfusionBoardManager.EElement>())} infused or consumed in {conditionsMet} of {totalConditions} turns{(__result ? ": met" : "")}");
+                }
                 else if (tags.Contains(AllySupportTag)) EveryTurn(stats, r => AllySupportInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(ItemsTag)) EveryTurn(stats, r => ItemsInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(SingleAbilityTag)) SingleAbility(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
@@ -131,7 +135,11 @@ namespace FrosthavenMods
                 else if (tags.Contains(ObstaclesTag)) ObstaclesDestroyed(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(FavoriteEveryTurnTag) || tags.Contains(FavoriteEveryRoundTag)) EveryTurn(stats, r => FavoriteMovedInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(AllElementsTag)) AllElements(stats, ref totalConditions, ref conditionsMet, ref __result);
-                else if (tags.Contains(LossRepeatedTag)) LossActionsRepeated(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(LossRepeatedTag))
+                {
+                    LossActionsRepeated(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                    GHMasteryProgress.Once("LossActionsRepeated", $"{Who(unlockConditionTarget)} mastery: {conditionsMet} of {totalConditions} lost halves performed {Math.Max(1, unlockConditionTarget.Amount)}+ times{(__result ? ": met" : "")}");
+                }
                 else if (tags.Contains(AugmentsTriggeredTag)) AugmentsTriggered(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(NeverAttackedTag)) NeverAttacked(stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(TwoElementAttacksTag)) AttacksConsumingTwo(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
@@ -142,7 +150,7 @@ namespace FrosthavenMods
                 else if (tags.Contains(TinkererSupportTag))
                 {
                     EveryTurn(stats, r => TinkererSupportInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
-                    Plugin.Log.LogInfo($"GHRule TinkererSupport card 0 Field Medic: {conditionsMet} of {totalConditions} turns with a negative condition on an enemy or a positive condition, heal or shield on an ally");
+                    GHMasteryProgress.Once("TinkererSupport", $"Field Medic: {conditionsMet} of {totalConditions} turns with a negative condition on an enemy or a positive condition, heal or shield on an ally");
                 }
                 else if (tags.Contains(LossBeforeRestsTag)) LossActionsBeforeRests(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(NoRepeatedDoomTag)) NoRepeatedDoom(stats, ref totalConditions, ref conditionsMet, ref __result);
@@ -180,7 +188,8 @@ namespace FrosthavenMods
             total = needed;
             met = Math.Min(count, needed);
             result = count >= needed;
-            Plugin.Log.LogInfo($"GHRule {rule} card 0 mastery: {count} of {needed}");
+            string detail = $"{Who(t)} mastery: {count} of {needed}";
+            if (GHMasteryProgress.IsNew(rule, detail)) Plugin.Log.LogInfo($"GHRule {rule} card 0 {detail}");
         }
 
         /// <summary>Value rounds in a row with Amount damage to enemies on each of the character's turns and Targets
@@ -604,6 +613,14 @@ namespace FrosthavenMods
             ElementInfusionBoardManager.EElement.Earth, ElementInfusionBoardManager.EElement.Light, ElementInfusionBoardManager.EElement.Dark,
         };
 
+        /// <summary>The class a mastery target names (its CharacterIDs, "Nightshroud2ID" -> "Nightshroud2"), for log lines.</summary>
+        private static string Who(CUnlockConditionTarget t)
+        {
+            List<string> ids = t?.CharacterIDs;
+            if (ids == null || ids.Count == 0) return "?";
+            return string.Join("/", ids.Where(x => !string.IsNullOrEmpty(x)).Select(x => x.EndsWith("ID", StringComparison.Ordinal) ? x.Substring(0, x.Length - 2) : x));
+        }
+
         /// <summary>A condition this plugin cannot judge yet: not met, never a free pass.</summary>
         private static void NotAnsweredYet(ref int total, ref int met, ref bool result) { total = 1; met = 0; result = false; }
 
@@ -903,7 +920,7 @@ namespace FrosthavenMods
             int count = stats.Sum(s => (s.DamageDealt ?? Enumerable.Empty<CPlayerStatsDamage>()).Count(d => d != null && d.ActionData != null
                 && IsEnemy(d.ActorWhoReceivedDamageType) && d.ActionData.AbilityType == CAbility.EAbilityType.Attack && d.FinalDamageAmount >= amount));
             total = needed; met = Math.Min(count, needed); result = count >= needed;
-            Plugin.Log.LogInfo($"GHRule HammerOfDawn card 0 mastery: {count} attacks dealt {amount}+ damage (needs {needed}){(result ? ": met" : "")}");
+            GHMasteryProgress.Once("HammerOfDawn", $"mastery: {count} attacks dealt {amount}+ damage (needs {needed}){(result ? ": met" : "")}");
         }
 
         private static readonly Dictionary<string, bool> PrescriptionAbility = new Dictionary<string, bool>(StringComparer.Ordinal);
@@ -959,7 +976,7 @@ namespace FrosthavenMods
                 if (given) ok++;
             }
             total = Math.Max(1, rounds.Count); met = ok; result = rounds.Count > 0 && ok == rounds.Count;
-            Plugin.Log.LogInfo($"GHRule ConstantCare card 0 mastery: a pack or Prescription given to an ally in {ok} of {rounds.Count} rounds ({rests.Count} long-rest rounds skipped){(result ? ": met" : "")}");
+            GHMasteryProgress.Once("ConstantCare", $"mastery: a pack or Prescription given to an ally in {ok} of {rounds.Count} rounds ({rests.Count} long-rest rounds skipped){(result ? ": met" : "")}");
         }
 
         // ---- the 2nd edition Sawbones' second mastery: attacks on undamaged enemies while a damaged monster lives
@@ -1004,7 +1021,7 @@ namespace FrosthavenMods
             total = needed + 1;
             met = Math.Min(attacks, needed) + (bad == 0 ? 1 : 0);
             result = bad == 0 && attacks >= needed;
-            Plugin.Log.LogInfo($"GHRule DamagedFirst card 0 mastery: {attacks} attacks (needs {needed}), {bad} on an undamaged enemy while a damaged monster lived{(result ? ": met" : "")}");
+            GHMasteryProgress.Once("DamagedFirst", $"mastery: {attacks} attacks (needs {needed}), {bad} on an undamaged enemy while a damaged monster lived{(result ? ": met" : "")}");
         }
 
         // ---- augment fires (the Mindthief): each time an attack's augment abilities are stacked, per augment, for the current scenario

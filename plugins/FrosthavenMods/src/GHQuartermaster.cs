@@ -623,7 +623,7 @@ namespace FrosthavenMods
                         else conditionsMet = Math.Min(conditionsMet, totalConditions - 1);
                     }
                 }
-                Plugin.Log.LogInfo($"GHRule QMMastery card 0 {(ledger ? "Quartermaster's Ledger" : "Never Short")}: {conditionsMet}/{totalConditions}{(__result ? " met" : "")}");
+                GHMasteryProgress.Once("QMMastery", $"{(ledger ? "Quartermaster's Ledger" : "Never Short")}: {conditionsMet}/{totalConditions}{(__result ? " met" : "")}");
             }
             catch (Exception e)
             {
