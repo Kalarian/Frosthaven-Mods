@@ -1,6 +1,7 @@
 # card: Soothing Light
 # consume Light: "the target may recover one level 1 card": a recover of its own (level 1 cards only, as Frosthaven's
-# Stamina Potion / Memory Drive write it) on one figure within the heal's range: the player picks the healed figure.
+# Stamina Potion / Memory Drive write it) aimed at the heal's own target (TargetTargetedByCasterPreviousAbility +
+# SpecificAbilityNames [THeal]).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -27,6 +28,9 @@ Data:
                         Filter:
                             TargetType: [Self, Ally]
                             ActorType: Player
+                            # "the target": the heal's target (Soultether Divided Mind's filter)
+                            TargetTargetedByCasterPreviousAbility: True
+                            SpecificAbilityNames: [THeal]
                         Vars:
                             CardLevel: 1
                         AnimOverload: PositiveBuffTargeted

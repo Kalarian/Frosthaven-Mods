@@ -1,7 +1,7 @@
 # card: Euthanize
 # top: the 1st edition Euthanize kill with the 2e limits as CAbilityFilter keys: adjacent, damaged (TargetMissingHP),
-# two or more negative conditions, 8 hit points or fewer; normal and elite only (no Frosthaven kill ability takes a
-# boss). bottom: Wound, Poison and Muddle on one enemy within range 1, then damage 1 to it: one Damage 1 carrying the
+# two or more negative conditions, 8 hit points or fewer; bosses too (the card names no exception, user decision A9;
+# CAbilityKill has no boss check of its own). bottom: Wound, Poison and Muddle on one enemy within range 1, then damage 1 to it: one Damage 1 carrying the
 # three conditions (same target, same result).
 Discard: [Discard,Discard]
 Data:
@@ -12,7 +12,7 @@ Data:
                 Range: 1
                 Filter:
                     TargetType: Enemy
-                    EnemyType: [Normal, Elite]
+                    EnemyType: [Normal, Elite, Boss]      # the card names no exception (user decision A9)
                     TargetMissingHP: "> 0"
                     TargetNegativeConditionCount: ">= 2"
                     Health: "<= 8"

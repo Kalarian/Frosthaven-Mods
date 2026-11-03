@@ -7,9 +7,9 @@ Initiative: 35
 # card: Spread the Plague
 # top: control one enemy with Plague (any range) for one Attack 4, as the 1st edition Mindthief's Hostile Takeover.
 # The Plague its attack adds can't be given by the engine (a resource is passed from the giver's own supply, and the
-# monster has none): NEEDS PLUGIN. bottom: written as "remove Poison from one of your allies, then Poison + Plague one
-# enemy adjacent to that ally" (the card's mandatory removal comes first here so the target is picked around the
-# chosen ally): APPROXIMATION of the order.
+# monster has none): NEEDS PLUGIN. bottom: Poison + Plague on one enemy adjacent to one of your poisoned allies (a custom
+# target list), then the mandatory "remove Poison from that ally" on a poisoned ally adjacent to that enemy (a
+# sub-ability around the target), so no ally loses Poison unless an enemy was there to take it.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -33,28 +33,36 @@ Data:
         XP: 1
     Bottom:
         Abilities:
-            BRemovePoison:
-                RemoveConditions: 1
-                Conditions: [Poison]
-                Range: 99
+            # the enemy first (printed order): one enemy adjacent to one of your allies that has Poison; then that ally
+            # loses Poison (mandatory, "! Remove Poison from that ally": a poisoned ally adjacent to the target)
+            BPoison:
+                Poison: True
                 Target: 1
-                Filter:
-                    TargetType: Ally
-                    TargetHasNegativeCondition: Poison
-                AnimOverload: TargetedHeal
+                Filter: Enemy
+                Targeting: Custom
+                Vars:
+                    PoisonedAllies: AllAliveActors.Where(obj != TargetingActor && CActor.AreActorsAllied(obj.Type, TargetingActor.Type, obj, TargetingActor) && obj.Tokens.HasKey(CCondition.ENegativeCondition.Poison))
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(PoisonedAllies)
+                    AddValidActorsInRange: CustomAbility.GetActorsOnTiles(CustomAbility.GetAdjacentTiles(PoisonedAllies))
+                ResourcesToGiveToTargets:
+                    - ["Plague", 1]
+                ResourcesToAddOnAbilityEnd:
+                    - ["Plague", 3]
+                AnimOverload: TargetedDebuff
                 SubAbilities:
-                    BPoison:
-                        Poison: True
+                    BRemovePoison:
+                        RemoveConditions: 1
+                        Conditions: [Poison]
                         Range: 1
                         Target: 1
-                        Filter: Enemy
+                        Filter:
+                            TargetType: Ally
+                            TargetHasNegativeCondition: Poison
                         AllTargetsAdjacentToParentTargets: True
                         TreatAsNonSubAbility: True
-                        ResourcesToGiveToTargets:
-                            - ["Plague", 1]
-                        ResourcesToAddOnAbilityEnd:
-                            - ["Plague", 3]
-                        AnimOverload: TargetedDebuff
+                        CanSkip: False
+                        AnimOverload: TargetedHeal
 Layout:
     Top:
         - Row: "$FHS_GH2E_Plagueherald2_13_T$"

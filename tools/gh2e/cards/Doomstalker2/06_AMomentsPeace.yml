@@ -1,5 +1,6 @@
 # card: A Moment's Peace
-# top: revealing a monster's next ability card has no Frosthaven ability: text only (NEEDS PLUGIN).
+# top: reveal the top ability card of one monster within range 5: Frosthaven's CustomAbility.ShowTopMonsterCards on the
+# chosen target (the Nightshroud's Eyes of the Night shape; Frosthaven's Shattersong Transparency).
 # bottom: Heal 2 on yourself or one of your summons within range 1.
 Discard: [Discard,Discard]
 Data:
@@ -9,6 +10,16 @@ Data:
                 Loot: 1
                 Target: -1
                 AnimOverload: Loot
+            TReveal:
+                NullTargeting: True
+                Range: 5
+                Target: 1
+                Filter: Enemy
+                AnimOverload: Cast_Concentrate
+                PerformVars:
+                    ApplyToActors:
+                        Targets: ActorsToTarget
+                        ShowMonsterCards: CustomAbility.ShowTopMonsterCards(Targets)
     Bottom:
         Abilities:
             BMove:

@@ -2,8 +2,8 @@
 # bottom: "whenever an enemy dies within range 2, you may discard this card to grant whoever killed that enemy Heal 2,
 # self" = a death-triggered aura on enemies within range 2 (Deathwalker When Your Time Comes bottom /
 # BannerSpear Set for the Charge aura shape, AuraTargeting Range), one use (XPTracker [0]); the heal is aimed at the
-# killing ability's figure (TriggerAbility.TargetingActor), you or an ally. Unverified that TriggerAbility is the
-# killing ability in this behaviour (NOTES.md).
+# killing ability's figure (TriggerAbility.TargetingActor = the cause of death, SetupTriggerContext), you or an ally.
+# The bonus Vars let a death spend the card only when that killer is missing hit points (a heal worth taking).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -50,7 +50,11 @@ Data:
                         UseTargetOriginalType: True
                     XPTracker: [0]
                     Vars:
+                        ValidateHasAbility: TriggerAbility != null
                         Killer: TriggerAbility.TargetingActor
+                        # the card is discarded only for a killer who is missing hit points (SetupTriggerContext checks
+                        # these before the slot is used)
+                        ValidateKillerHurt: Killer != null && Killer.Health < Killer.MaxHealth
 Layout:
     Top:
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"

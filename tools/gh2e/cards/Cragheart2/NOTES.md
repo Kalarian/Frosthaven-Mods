@@ -44,7 +44,8 @@ Meteor's consume text, now `GH2E_Cragheart2_25_T`).
 - 14 Burrow: top infuses Earth (Xipe: none); bottom consume adds its own Immobilize on enemies moved through with
   `Targeting: All` (Trample lesson).
 - 15 Mud Eruption: obstacles in the hexes the targets stood in when targeted (the attack's `TilesSelected`), placed
-  after the pushes, featureless only (Xipe: one obstacle anywhere within 4). Bench first.
+  after the pushes, `TileFilter: EmptyHex` (featureless and no figure: a target whose push was blocked keeps its hex)
+  (Xipe: one obstacle anywhere within 4). Bench first.
 - 16 Sentient Growth: rule question settled: bottom "Heal 1, target all, range 1" includes yourself (a ranged heal may
   target its user; Xipe: allies only). Top heal has no mark (Xipe gave one).
 - 17 Clear the Way bottom: NEEDS PLUGIN for the terrain part: obstacles and traps on the path are destroyed (1st
@@ -74,11 +75,13 @@ Meteor's consume text, now `GH2E_Cragheart2_25_T`).
 - 27 Rocky End: consume (missing in Xipe) appends an auto create on every empty hex of the attack's area
   (`ParentAbility.ValidTilesInAreaAffected`; Frosthaven appends an override's SubAbilities). Bottom: APPROXIMATION of
   "each featureless hex the target exits": the shortest path from the pushed target's start hex to its end hex, start
-  included (`CustomAbility.GetTilesOnDirectPath`, falling back to the start hex). Bench first.
+  included (`CustomAbility.GetTilesOnDirectPath`, falling back to the start hex), `TileFilter: EmptyHex` (no obstacle
+  under a figure). Bench first.
 - 28 Entomb: top consume: two obstacles adjacent to the target and not adjacent to you (Bring Down the Mountain's
   targeting), damage 1 around them. Bottom (missing in Xipe): create beside you, destroy up to 6 within 3, then Ward
-  to as many allies as obstacles were destroyed among the allies adjacent to a destroyed hex. APPROXIMATION: not paired
-  one ally per obstacle. Bench first.
+  per destroyed obstacle to one ally adjacent to that obstacle's hex (BWard1..BWard6: the k-th gated on
+  ObstaclesDestroyedThisAction >= k and aimed around the k-th destroyed tile). Destroy capped at 6 (range 3 rarely holds
+  more). Bench first.
 - 29 Wave of Destruction: top: Frosthaven's per-target `TargetDistanceRangeDiff` is |range - distance| (melee range 1),
   so the stored base is 2 to give the printed 1 + distance; the face shows "1". Bottom: NEEDS PLUGIN: a move that may
   enter obstacle hexes. APPROXIMATION now: Move 5 with Jump (as Xipe) that destroys every obstacle on its path, then
@@ -89,8 +92,9 @@ Meteor's consume text, now `GH2E_Cragheart2_25_T`).
 ## Perks
 
 All ten from the perk sheet (18 checks). New modifier `AMC_GH2E_Cragheart2_Obstacle_P1_R` (+1 rolling, obstacle in an
-empty hex adjacent to the target, aimed like Frosthaven's AMC_Damage1Trap_P0). Boulder Leap: APPROXIMATION: the
-once-per-scenario toggle destroys one obstacle within 5, then Teleport 5 (not tied to the freed hex). Earthen Rest:
+empty hex adjacent to the target, aimed like Frosthaven's AMC_Damage1Trap_P0). Boulder Leap: the
+once-per-scenario toggle destroys one obstacle within 5, then a teleport whose only valid hex is the freed one
+(`IsValidTeleportTile: FreedTiles.Contains(tile)` on the destroy's selected tiles, Infuser Formless Bladestorm). Earthen Rest:
 after-rest hook, destroy within 3 with an Earth infusion sub-ability. Earthquakes: the 1st edition crossover's.
 Masteries: none written (no existing battle-goal pattern for "obstacle every round" or the 8/8/8 one).
 

@@ -6,7 +6,7 @@ Data:
             TAttack:
                 Attack:
                     Amount: 4
-                    Enhancements: 1
+                    SquareEnhancements: 1
         Consumes:
             TCDamage:
                 CostAbility:
@@ -23,7 +23,7 @@ Data:
             BMove:
                 Move:
                     Amount: 3
-                    Enhancements: 1
+                    SquareEnhancements: 1
                 ConditionalOverrides:
                     BMoveCO:
                         Self: True

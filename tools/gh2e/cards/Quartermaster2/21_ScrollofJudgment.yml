@@ -1,7 +1,6 @@
 # card: Scroll of Judgment
-# top: the 1st edition Scroll of Judgment's shape: all enemies within range 4 suffer damage 2 (Damage, Range 4, Target
-#   -1), then the mandatory self damage 2 (AutoTrigger, CanSkip False; printed first, placed second because a half's
-#   first ability never auto-triggers). XP 2, lost.
+# top: the mandatory self damage 2 first, as printed (CanSkip False, standard confirm: no AutoTrigger on a half's first
+#   ability), then all enemies within range 4 suffer damage 2 (Damage, Range 4, Target -1). XP 2, lost.
 # bottom: Move 2 [circle]; Shield 1 [square], round; "after the next attack targeting you this round, Recover one of
 #   your spent items and gain XP 1": a round DuringActionAbilityOnAttacked bonus (Frosthaven's Energy Conversion /
 #   Stress Vents behaviour) with one use slot carrying the XP ([1]), whose ability recovers one spent item. TEST: the
@@ -10,18 +9,17 @@ Discard: [Lost,Discard]
 Data:
     Top:
         Abilities:
+            TDamageSelf:
+                Damage: 2
+                Filter: Self
+                CanSkip: False
+                SkipAnim: True
             TDamage:
                 Damage: 2
                 Range: 4
                 Target: -1
                 Filter: Enemy
                 AnimOverload: RadialScroll
-            TDamageSelf:
-                Damage: 2
-                Filter: Self
-                AutoTrigger: True
-                CanSkip: False
-                SkipAnim: True
         XP: 2
     Bottom:
         Abilities:

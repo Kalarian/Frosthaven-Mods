@@ -7,10 +7,11 @@ Initiative: 15
 # card: Slice Through
 # top: the persistent "on a kill, discard this card to place a Tear in the enemy's hex" = Frosthaven's Deathwalker When
 # Your Time Comes bottom (DuringActionAbilityOnDeath aura on enemies, a shadow on TriggerActor.Tile), one use
-# (XPTracker [0]: the card is discarded after it). Placed before Attack 4, so a kill by that attack counts.
+# (XPTracker [0]: the card is discarded after it), only for your own kills (Vars on the cause of death). Placed before
+# Attack 4, so a kill by that attack counts.
 # bottom: consume Dark Teleport 4 (Teleport2) before the swap, as printed; the swap = Gloomhaven's Swap (the 1st
-# edition Summoner's Otherworldly Rage shape: first target you, second an ally), range 8 (the card says "within eight
-# hexes": a range needs line of sight, a hex count doesn't: APPROXIMATION)
+# edition Summoner's Otherworldly Rage shape: first target you, second an ally), range 8 with IgnoreLOS ("within eight
+# hexes" is a hex count, no line of sight)
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -41,6 +42,10 @@ Data:
                     XPTracker: [0]
                     Vars:
                         TargetTile: TriggerActor.Tile
+                        # "whenever YOU kill an enemy": the cause of death must be your ability (SetupTriggerContext
+                        # checks these before the slot is used, so other figures' kills leave the card alone)
+                        ValidateHasAbility: TriggerAbility != null
+                        ValidateYourKill: TriggerAbility.TargetingActor == ActiveBonus.Caster
             TAttack:
                 Attack:
                     Amount: 4
@@ -63,6 +68,7 @@ Data:
                     FirstTargetFilter: Self
                     SecondTargetFilter: Ally
                 Range: 8
+                IgnoreLOS: True      # "within eight hexes": a hex count, no line of sight (Deepwraith Pinning Spines)
                 AnimOverload: RadialBeneficial
 Layout:
     Top:

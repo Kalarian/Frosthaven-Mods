@@ -58,7 +58,7 @@ Data:
                         Target: -1
                         TreatAsNonSubAbility: True
                         AutoTrigger: True
-                        TileFilter: FeaturelessHex
+                        TileFilter: EmptyHex      # featureless AND no figure (CAbilityFilter.IsTileEmpty): an obstacle needs a free hex
                         Targeting: Custom
                         TargetingVars:
                             StartTile: ParentAbility.TilesSelected[0]

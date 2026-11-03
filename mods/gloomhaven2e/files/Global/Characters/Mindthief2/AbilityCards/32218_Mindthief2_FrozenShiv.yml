@@ -5,8 +5,8 @@ ID: 32218
 Level: 4
 Initiative: 16
 # card: Frozen Shiv
-# written from tools/gh2e/sheets/Mindthief.json; the Pierce 1 [square] mark is dropped: Frosthaven's reader takes
-# Pierce only as a number (a mapping with an enhancement fails rulecheck), and no Frosthaven card enhances a pierce
+# written from tools/gh2e/sheets/Mindthief.json; the Pierce 1 [square] mark: Pierce inside the Attack mapping with
+# PierceEnhancements (Frosthaven's Infuser Gale Barrage shape; a Pierce mapping of its own fails rulecheck)
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -15,7 +15,8 @@ Data:
                 Attack:
                     Amount: 4
                     DiamondEnhancements: 1
-                Pierce: 1
+                    Pierce: 1
+                    PierceEnhancements: 1
         Infuse: Ice
     Bottom:
         Abilities:
@@ -40,7 +41,7 @@ Layout:
             - Column:
             - Column: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Column:
-                - Row: "<link=fhpill><sprite name=Pierce> *TAttack.Pierce*</link>"
+                - Row: "<link=fhpill><sprite name=Pierce> *TAttack.Pierce* @TAttack.Pierce@</link>"
             - Column:
         - Row: "<size=20%> "
         - Infuse: Ice

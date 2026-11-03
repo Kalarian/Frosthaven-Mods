@@ -1,7 +1,7 @@
 # card: Grand Finale
 # top: a plain Move with Jump, then a control on every enemy moved through (the Trample fix: AllTargetsOnMovePath +
 # Targeting All), each performing Attack 3; the extra Note is a Note choice right away ("this round" not tracked)
-# bottom: song actions from the hand, then from the discard pile (SelectAndPlayCard); the token skip is NEEDS PLUGIN
+# bottom: song actions from the hand and the discard pile in one pass (SelectAndPlayCard over both piles); the token skip is NEEDS PLUGIN
 Discard: [Discard,Permanently Lost]
 Data:
     Top:
@@ -60,21 +60,14 @@ Data:
                 Move:
                     Amount: 4
                     Enhancements: 1
-            BPlayHand:
+            # "play any number of cards from your hand and discard pile": one pass over both piles together (a
+            # CardPile list, Frosthaven's Expertise Potion), so they can be played in any order
+            BPlaySongs:
                 Filter: Self
                 AutoTrigger: True
                 SelectAndPlayCard:
-                    CardPile: Hand
-                    Amount: 10
-                    MinRequiredCards: 0
-                MiscVars:
-                    IsActionValid: Action.Abilities.Any(obj.Name == 'TSongNotes')
-            BPlayDiscard:
-                Filter: Self
-                AutoTrigger: True
-                SelectAndPlayCard:
-                    CardPile: Discarded
-                    Amount: 10
+                    CardPile: [Hand, Discarded]
+                    Amount: 20
                     MinRequiredCards: 0
                 MiscVars:
                     IsActionValid: Action.Abilities.Any(obj.Name == 'TSongNotes')

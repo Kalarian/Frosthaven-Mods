@@ -10,11 +10,16 @@ Abilities:
     TActive:
         AutoTrigger: True
         AddActiveBonus:
-            Bless: True
+            NullTargeting: True
             Filter: Self
             AutoTrigger: True
             SkipAnim: True
             CanUndo: False
+            MiscVars:
+                GH2E_LostActionThisTurn: True
+            ActiveBonus:
+                Duration: Round
+                Hidden: True
         ActiveBonus:
             Duration: Persistent
             Behaviour: DuringActionAbilityOnActionEnded
@@ -24,3 +29,18 @@ Abilities:
                 LastPerformedAbility: TriggerActor.LastAbilityPerformed
                 LostPile: LastPerformedAbility?.GetAbilityBaseCard()?.SelectedAction?.CardPile
                 ValidateDidLoseCard: LostPile == "Lost" || LostPile == "PermanentlyLost"
+    TEndBless:
+        AutoTrigger: True
+        AddActiveBonus:
+            Bless: True
+            Filter: Self
+            AutoTrigger: True
+            SkipAnim: True
+            CanUndo: False
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: EndTurnAbility
+            Hidden: True
+            Requirements:
+                Vars:
+                    ValidateLostActionThisTurn: Actor.ActiveBonuses.Any(CustomAbility.GetMiscVarBool(obj.Ability, "GH2E_LostActionThisTurn"))

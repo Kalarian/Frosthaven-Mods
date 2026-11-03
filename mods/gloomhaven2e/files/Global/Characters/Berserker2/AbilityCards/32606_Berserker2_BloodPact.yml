@@ -9,21 +9,23 @@ Discard: [Discard,Lost]
 Data:
     Top:
         Abilities:
+            # printed first (! box): suffer half your current hit points (rounded down), then the attack (From the
+            # Brink's TLower shape: a self Damage ability of its own, standard confirm, can't be skipped)
+            TDamage:
+                Damage: 0
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: PercentageOfCurrentHP
+                        Multiplier: 0.5
+                        RoundingType: ToFloor
+                Filter: Self
+                CanSkip: False
+                AnimOverload: PowerUp
             TAttack:
                 Attack:
                     Amount: 6
                     DiamondEnhancements: 1
                 AnimOverload: HeavyAttack
-                SubAbilities:
-                    TAttackSubDamage:
-                        Damage: 0
-                        StatIsBasedOnX:
-                            Strength:
-                                BasedOn: PercentageOfCurrentHP
-                                Multiplier: 0.5
-                                RoundingType: ToFloor
-                        Filter: Self
-                        CanSkip: False
         XP: 1
     Bottom:
         Abilities:

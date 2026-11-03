@@ -9,6 +9,6 @@ Abilities:
     BInfuse:
         Infuse: [Dark]
         Filter: Self
-        AutoTrigger: True
+        CanSkip: True
         SkipAnim: True
         CanUndo: False

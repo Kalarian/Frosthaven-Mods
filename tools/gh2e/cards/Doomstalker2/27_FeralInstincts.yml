@@ -1,6 +1,7 @@
 # card: Feral Instincts
 # top: grant one of your summons Move +0, then Attack +0 that may target only a doomed enemy (Filter IsDoomed). "This
-# movement must end in a hex adjacent to an enemy that has Doom" is not enforced (text; NEEDS PLUGIN).
+# movement must end in a hex adjacent to an enemy that has Doom": MoveRestrictionType MustEndOnSpecificTiles (Trapper
+# Lure of the Snare) with the hexes adjacent to doomed enemies.
 # bottom: Heal 4 on yourself or one of your summons within range 1.
 Discard: [Discard,Discard]
 Data:
@@ -17,6 +18,11 @@ Data:
                     Abilities:
                         TAllyMove:
                             Move: +0
+                            # "this movement must end in a hex adjacent to an enemy that has Doom" (Trapper Lure of the
+                            # Snare's MustEndOnSpecificTiles)
+                            Vars:
+                                MustEndOnSpecificTiles: CustomAbility.GetAdjacentTiles(AllEnemyMonsters.Where(obj.IsDoomed))
+                            MoveRestrictionType: MustEndOnSpecificTiles
                         TAllyAttack:
                             Attack: +0
                             Range: +0

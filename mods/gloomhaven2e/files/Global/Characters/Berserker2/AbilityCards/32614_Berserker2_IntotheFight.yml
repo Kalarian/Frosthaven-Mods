@@ -31,7 +31,7 @@ Data:
             BMove:
                 Move:
                     Amount: 3
-                    CircleEnhancements: 1
+                    SquareEnhancements: 1
             BCDamage:
                 Damage: 2
                 Filter: Self

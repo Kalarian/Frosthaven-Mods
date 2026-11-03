@@ -26,7 +26,7 @@ Data:
             BMove:
                 Move:
                     Amount: 4
-                    CircleEnhancements: 1
+                    SquareEnhancements: 1
 Layout:
     Top:
         - Row:

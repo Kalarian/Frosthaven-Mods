@@ -1,14 +1,10 @@
 # card: Arresting March
-# top consume: "Heal 3, target the target of the grant ability": a heal of its own within the grant's range 3 on one
-# ally (the player picks the granted ally).
+# top consume: "Heal 3, target the target of the grant ability": after the grant, aimed at the granted ally
+# (TargetTargetedByCasterPreviousAbility + SpecificAbilityNames [TAlly], Soultether Divided Mind's filter).
 Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
-            # the consume's heal comes first: hung after the grant (ControlActor), switching Light on stopped the game
-            # (CardsActionControlller.RefreshConsumeBar NullReference, "StackedAugmentToNullAbility", 2e rerun 2026-11-01 12:34)
-            TNull:
-                Null: True
             TAlly:
                 ControlActor:
                     Abilities:
@@ -22,6 +18,10 @@ Data:
                 Range: 3
                 Filter: Ally
                 AnimOverload: ControlAlly
+            # the consume's heal after the grant, as printed ("target the target of the grant ability"); the crash this
+            # order caused on 2026-11-01 (RefreshConsumeBar NullReference) is what the plugin's GHConsumeOnNull guards
+            TNull:
+                Null: True
         Consumes:
             TCLight:
                 Elements: Light
@@ -30,7 +30,10 @@ Data:
                         ParentName: TNull
                         Heal: 3
                         Range: 3
-                        Filter: Ally
+                        Filter:
+                            TargetType: Ally
+                            TargetTargetedByCasterPreviousAbility: True
+                            SpecificAbilityNames: [TAlly]
                         AnimOverload: Heal
                 XP: 1
     Bottom:

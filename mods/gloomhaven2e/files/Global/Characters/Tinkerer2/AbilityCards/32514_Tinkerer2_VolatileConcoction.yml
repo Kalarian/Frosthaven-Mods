@@ -22,6 +22,8 @@ Data:
                     # filter, so any one discarded card (NOTES.md)
                     TRecover:
                         RecoverDiscardedCards: 1
+                        Vars:
+                            CardLevel: 1      # "one level 1 card" (Metal Mosaic Memory Drive)
                         UseParentTargets: True
                         Filter:
                             TargetType: Ally

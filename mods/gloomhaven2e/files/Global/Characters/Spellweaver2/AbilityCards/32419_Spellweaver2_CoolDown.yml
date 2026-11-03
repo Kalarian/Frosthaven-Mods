@@ -12,7 +12,7 @@ Data:
             THeal:
                 Heal:
                     Amount: 2
-                    DiamondPlusEnhancements: 1
+                    SquareEnhancements: 1
                 Target:
                     Amount: 2
                     SquareEnhancements: 1
@@ -33,7 +33,7 @@ Data:
             BAttack:
                 Attack:
                     Amount: 2
-                    DiamondEnhancements: 1
+                    SquareEnhancements: 1
                     Pierce: 1
                     PierceEnhancements: 1
                 Range: 4

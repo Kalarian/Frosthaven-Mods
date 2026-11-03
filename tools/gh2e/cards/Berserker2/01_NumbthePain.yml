@@ -24,11 +24,11 @@ Data:
             BMove:
                 Move:
                     Amount: 3
-                    Enhancements: 1
+                    SquareEnhancements: 1
             BHeal:
                 Heal:
                     Amount: 1
-                    Enhancements: 1
+                    SquareEnhancements: 1
                 Filter: Self
                 AnimOverload: Heal
 Layout:

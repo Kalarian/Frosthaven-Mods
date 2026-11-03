@@ -32,12 +32,9 @@ Data:
                 Consume:
                     Elements: [Fire, Air]
                     Abilities:
-                        BStrengthen:
-                            Strengthen: True
-                            Filter: Self
-                            AnimOverload: PowerUp
                         BBless:
                             Bless: True
+                            Conditions: Strengthen      # one pill covers both: the 2 allies gain Strengthen and Bless (Geminate Oscillating Entity's Bless + Conditions)
                             Range: 3
                             Target: 2
                             Filter: Ally

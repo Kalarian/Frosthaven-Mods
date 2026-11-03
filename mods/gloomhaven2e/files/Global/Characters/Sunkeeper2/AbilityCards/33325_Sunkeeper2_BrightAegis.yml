@@ -6,8 +6,8 @@ Level: 7
 Initiative: 14
 # card: Bright Aegis
 # bottom consume: "that ally may immediately play up to two cards, at most one top and one bottom action": the 1st
-# edition's verified extra turn (Unwavering Mandate, ExtraTurn: BothActions) on one adjacent ally (the player picks the
-# ally who recovered the card).
+# edition's verified extra turn (Unwavering Mandate, ExtraTurn: BothActions) on the adjacent ally who recovered the card
+# (TargetTargetedByCasterPreviousAbility + SpecificAbilityNames [BRecover]).
 Discard: [Discard,Permanently Lost]
 Data:
     Top:
@@ -46,6 +46,9 @@ Data:
                             Filter:
                                 TargetType: Ally
                                 ActorType: Player
+                                # "that ally": the one who recovered the lost card
+                                TargetTargetedByCasterPreviousAbility: True
+                                SpecificAbilityNames: [BRecover]
                     XP: 1
         XP: 2
 Layout:

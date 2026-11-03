@@ -6,8 +6,9 @@ Level: 1
 Initiative: 13
 # card: Prevention is Key
 # top: Wound + Disarm on all enemies within range 1 (no attack; the diamond mark on Disarm, as Secretariat); Safeguard on
-# you and all allies within range 1 (mark dropped). bottom: the round "next Prescription action" trigger has no engine
-# hook: Shield 1 this round for you and adjacent allies at once (the 1st edition card's round aura). Approximation.
+# you and all allies within range 1 (mark dropped). bottom: a one-use round bonus that fires at the end of your next
+# action holding a Prescription ability (MiscVars GH2E_Prescription) and gives Shield 1 for the round to you and the
+# adjacent allies.
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -43,15 +44,31 @@ Data:
                 Move:
                     Amount: 3
                     CircleEnhancements: 1
+            # "when you next perform a Prescription action this round, grant all adjacent allies and self: Shield 1"
+            # (round): a one-use round bonus fired at the end of an action that holds a Prescription ability (the
+            # class's MiscVars GH2E_Prescription; Etheric Echo bottom's action-ended trigger), giving Shield 1 for the
+            # round to you and the allies adjacent then (Iron Bulwark bottom's shape)
             BShield:
-                Shield: 1
-                Range: 1
+                AddActiveBonus:
+                    Shield: 1
+                    Range: 1
+                    Target: 99
+                    Filter: [Self, Ally]
+                    AutoTrigger: True
+                    ActiveBonusDuration: Round
+                    MiscVars:
+                        AutoSelectValidTiles: True
+                    AnimOverload: RadialBuff
                 Filter: Self
+                AnimOverload: PowerUp
                 ActiveBonus:
                     Duration: Round
-                    IsAura: True
-                    AuraFilter: [Self, Ally]
-                AnimOverload: RadialBuff
+                    Behaviour: DuringActionAbilityOnActionEnded
+                    XPTracker: [0]
+                    Vars:
+                        LastPerformedAbility: TriggerActor.LastAbilityPerformed
+                        PerformedAction: LastPerformedAbility?.GetAbilityBaseCard()?.SelectedAction
+                        ValidatePrescription: PerformedAction != null && PerformedAction.Abilities.Any(CustomAbility.GetMiscVarBool(obj, "GH2E_Prescription"))
 Layout:
     Top:
         - Row: "<size=150%><sprite name=Wound> <sprite name=Disarm> <size=100%><voffset=1>@TWoundDisarm@"

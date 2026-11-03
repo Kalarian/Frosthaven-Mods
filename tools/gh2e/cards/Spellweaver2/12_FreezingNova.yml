@@ -23,7 +23,7 @@ Data:
             BMove:
                 Move:
                     Amount: 4
-                    Enhancements: 1
+                    SquareEnhancements: 1
 Layout:
     Top:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"

@@ -5,8 +5,8 @@ ID: 33316
 Level: 2
 Initiative: 23
 # card: Mobilizing Axiom
-# bottom: "grant all allies within range 5 and self: Move 4": the allies' move as a grant (the enhancement mark),
-# then your own Move 4 (unenhanced) after theirs, so moving first can't take an ally out of range.
+# bottom: "grant all allies within range 5 and self: Move 4": one grant (ControlActor) on the allies within range 5 and
+# yourself, so the single enhanced Move 4 serves everyone and the player orders the moves.
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -33,10 +33,8 @@ Data:
                             StrengthIsBase: True
                 Range: 5
                 Target: -1
-                Filter: Ally
+                Filter: [Ally, Self]      # "all allies within range 5 and self": one enhanced grant for everyone (Shattersong Lifting Voice grants to [Ally, Self])
                 AnimOverload: ControlAlly
-            BMove:
-                Move: 4
         XP: 2
 Layout:
     Top:

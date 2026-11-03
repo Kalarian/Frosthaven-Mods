@@ -30,7 +30,7 @@ PERKS = [
         Range: 3
         Target: 1
         Targeting: Range
-        Filter: Ally
+        Filter: [Self, Ally]
         CanSkip: True
         CanUndo: False
         AnimOverload: Heal"""}),

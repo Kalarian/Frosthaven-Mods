@@ -1,21 +1,23 @@
 # card: Disorienting Dirge
-# top: song (High, High Note). APPROXIMATION: "all enemies gain disadvantage on all their attacks" = every attack
-# targeting you or an ally gains disadvantage (Deathwalker The Night Takes Shape's aura on [Self, Ally])
+# top: song (High, High Note): "all enemies gain disadvantage on all their attacks" = a disadvantage BuffAttack aura on
+# every enemy (Frosthaven's Decanter of Mists shape), whatever they attack
 # bottom: the 1st edition Defensive Ditty bottom (one prevention among allies within range 2, this round)
 Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
+            # "all enemies gain disadvantage on all their attacks" (whoever they target, objectives included):
+            # Frosthaven's Decanter of Mists shape, a disadvantage attack buff as an aura on every enemy
             TSong:
-                AttackersGainDisadvantage: True
-                Range: 0
-                Target: -1
+                Attack: 0
+                AttackHasDisadvantage: True
                 Filter: Self
                 ActiveBonus:
                     Duration: Persistent
+                    Behaviour: BuffAttack
                     IsAura: True
                     AuraTargeting: All
-                    AuraFilter: [Self, Ally]
+                    AuraFilter: Enemy
                 AnimOverload: PlaySongShield3
             TSongTimer:
                 AddActiveBonus:
@@ -40,6 +42,8 @@ Data:
                     Duration: Ability
                     Hidden: True
                     RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+                MiscVars:
+                    GH2E_Song2: True      # the song's Note cost (Symphonic Medley picks songs by it)
     Bottom:
         Abilities:
             BMove:
@@ -47,6 +51,8 @@ Data:
                     Amount: 2
                     Enhancements: 1
             BPrevent:
+                MiscVars:
+                    ImmuneMoveActiveBonusTracker: True      # not a song (Captivating Performance moves song tokens only)
                 PreventDamage: 1
                 Range: 2
                 Target: -1

@@ -1,7 +1,8 @@
 # card: Unseen Dread
 # top: a Tear within range 2; "whenever an enemy enters a hex within range 2 of you this round, that enemy gains Wound" =
-# Frosthaven's Banner Spear Set for the Charge top (round DuringActionAbilityOnMoved aura on enemies, NotInRangeToInRange
-# flag, the ability aimed at TriggerActor), Range 2, Wound instead of damage. Consume Dark: "at the end of this round,
+# Frosthaven's Banner Spear Set for the Charge top (round DuringActionAbilityOnMoved aura on enemies, the ability aimed at
+# TriggerActor), Range 2, Wound instead of damage; without Set for the Charge's NotInRangeToInRangeMove flag, so an enemy
+# already within range 2 that moves to another hex within it counts too (each hex entered: user decision C). Consume Dark: "at the end of this round,
 # all enemies that have Wound suffer damage 1" = a round EndRoundAbility bonus (Deepwraith Consume the Helpless bottom)
 # whose Damage 1 targets every wounded enemy (Deathwalker Frozen in Fear top's custom targeting); XP 1 for the consume.
 Discard: [Discard,Discard]
@@ -28,7 +29,6 @@ Data:
                 ActiveBonus:
                     Duration: Round
                     Behaviour: DuringActionAbilityOnMoved
-                    Flags: NotInRangeToInRangeMove
                     IsAura: True
                     HiddenWhenAura: True
                     TriggerOnCaster: True

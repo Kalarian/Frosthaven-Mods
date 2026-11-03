@@ -9,18 +9,21 @@ counted against the sheet by script (all 30 halves match; the area hex marks inc
 
 **Notes = two character resources** (`resources.yml`): `SoothsingerHighNote` and `SoothsingerLowNote`, `MaxAmount: 2`
 each (the mat's cap; `CCharacterResource.Amount` clamps to it).
-- *Gaining*: a half with a clef gets a last ability `TNote`/`BNote` (NullTargeting on self, AutoTrigger,
-  `ResourcesToAddOnAbilityEnd`), the Plagueherald2 supply's shape. A Null/NullTargeting ability always "happens", so the
-  Note comes even when the half's main ability had no target.
+- *Gaining*: a half with a clef gets a last ability `TNote`/`BNote` (NullTargeting on self, `ResourcesToAddOnAbilityEnd`),
+  the Plagueherald2 supply's shape. A Null/NullTargeting ability always "happens", so the Note comes even when the
+  half's main ability had no target. "Once each round ... you may": the Note ability is offered (CanSkip, no
+  AutoTrigger) and places a hidden round marker bonus (MiscVars `GH2E_NoteThisRound`); its StartAbilityRequirements
+  refuse a second gain while a marker is on you. The "in addition" gains (scenario start, Increase Cadence bottom,
+  Grand Finale top, Harmonics, Lullaby) are Choose abilities without the marker.
 - *Note of your choice* (start of scenario in `character_extra.yml`, Increase Cadence bottom, Grand Finale top, perk
   Lullaby): Frosthaven's `Choose` (Metal Mosaic Energy Conversion) between a High and a Low gain.
 - *Spending*: every song half ends with `TSongNotes`, a hidden `Duration: Ability` bonus whose finish runs
   `RemoveAllInstancesOfResourcesOnFinish: [High, Low]` (the rule "whenever you perform a Song, remove all of your
   Notes"). `CClass.MarkAbilityActiveBonusesFinished` finishes it right after the ability, so a Note gained later the same
   turn (a bottom half) survives. **Unverified** in game.
-- **NEEDS PLUGIN** (three rules not enforced): (1) a song half can be played without the Notes it costs (the cost is
-  printed as text "Song: High Note, Low Note"; the player keeps the rule); (2) "once each round" for gaining a Note;
-  (3) gaining is automatic, not "you may". Possible data gate for (1), not used because a failed check would waste the
+- **NEEDS PLUGIN** (one rule not enforced): (1) a song half can be played without the Notes it costs (the cost is
+  printed as text "Song: High Note, Low Note"; the player keeps the rule). ("Once each round" and "you may" for
+  gaining a Note: done in data, see Gaining.) Possible data gate for (1), not used because a failed check would waste the
   card and the expression is unbenched: `StartAbilityRequirements: {Type: ThisAbility, Vars: {ValidateNotes:
   Actor.GetCharacterResourceAmount('SoothsingerHighNote') >= 2 && ...}}` on TSong and TSongNotes (Shattersong-style
   requirement vars).
@@ -48,15 +51,15 @@ tag on the card face and no music-note status icon (both keyed to PlaySong in th
 - 02 Bewildering Instrumental top: "the enemy with the highest current hit point value" is the enemy the player picks
   (Damage 1 + Muddle, any range). APPROXIMATION.
 - 03 Wearying Chant top: "the closest enemy without Disarm or Stun" is the enemy the player picks. APPROXIMATION.
-- 04 Power Ballad: Shattersong Din of Battle's aura (+1 Attack, once per turn per figure, toggled by each figure on the
-  attack it chooses), persistent. "First attack each turn" becomes "one attack each turn of the figure's choice".
+- 04 Power Ballad: Shattersong Din of Battle's aura (+1 Attack, once per turn per figure), persistent, without the
+  toggle (HIVE Heavy Metal: OncePerTurn single-target buff), so it lands on each figure's first attack of its turn.
 - 05 Dissonant Rhythm top: "target the enemy closest to you" = one enemy the player picks, any range (Range 99, so an
   adjacent target takes the ranged disadvantage). APPROXIMATION.
 - 06 Increase Cadence bottom: a Note choice at the end of this and the next five turns (EndTurnAbility, 6 slots, XP on
   1/3/5, lost). Unverified: a Choose inside AddActiveBonus.
-- 07 Intensifying Amplitude bottom: APPROXIMATION: +X (0..4 over the five attacks) is a flat +2 on each of the five,
-  the same +10 in all; allies only, any range (Sunkeeper2 Sanctify's ally aura; unverified that the aura's slots advance
-  on each ally attack).
+- 07 Intensifying Amplitude bottom: +X = the slots passed (0..4), Snowdancer Snowball's BasedOnActiveBonusVarsStrength
+  (`Strength: obj.TrackerIndex + TargetSelectionNumber - 1`, IsSingleTargetBonus) on an ally aura, any range (Sunkeeper2
+  Sanctify's; unverified that the aura's slots advance on each ally attack: bench).
 - 08/09/19 Strengthen / Bless / Ward "Target 2, Range 3": you or allies (`[Self, Ally]`).
 - 10/11/15/25/27 grants: ControlActor on an ally (1st edition Call to Action / Commanding Presence); a granted attack
   with no range is melee (`Range: 1, RangeIsBase`). The grant's own range mark is an enhancement on the ControlActor's
@@ -69,9 +72,9 @@ tag on the card face and no music-note status icon (both keyed to PlaySong in th
 - 16 Soothing Lullaby top: "Heal 1, target all" with no range = you and all allies anywhere (Sunkeeper2 Engulfing
   Radiance). Bottom: APPROXIMATION: the marked monster gains Disarm now (Range 3) instead of at the end of its turn this
   round. Same one disarmed turn when it has already acted; when it hasn't, its turn this round is the disarmed one.
-- 17 Symphonic Medley bottom: `SelectAndPlayCard` from the hand, up to 3 (Banner Spear Hail of Spears), only actions
-  containing `TSongNotes` (`IsActionValid: Action.Abilities.Any(obj.Name == 'TSongNotes')`). The 1-/2-/3-Note split
-  isn't enforced. Unverified (the Name check, and a played song's own TSongNotes removes your Notes). Card stack with
+- 17 Symphonic Medley bottom: three `SelectAndPlayCard` from the hand, one card each (Banner Spear Hail of Spears):
+  a 1-Note, a 2-Note and a 3-Note song (`IsActionValid` tests the song's TSongNotes MiscVar GH2E_Song1/2/3, which every
+  song card carries with its printed cost; Captivating Performance is the only 4-Note song). Unverified (the Name check, and a played song's own TSongNotes removes your Notes). Card stack with
   red X = Permanently Lost.
 - 18 Ode to the Gambler: **NEEDS PLUGIN** (treat the first modifier as rolling). APPROXIMATION: once per turn you and
   each ally may switch on advantage for one attack (Geminate Dragonfly Surge's `AttackHasAdvantage` BuffAttack, as a
@@ -88,19 +91,22 @@ tag on the card face and no music-note status icon (both keyed to PlaySong in th
   It also fires after item or modifier attacks.
 - 23 Pull the Strings top: the control on the attack's target is the 1st edition Lead to Slaughter fix (sub-ability,
   UseParentTargets, Target 1); bottom = the 1st edition card (the enemy's own attack +0).
-- 24 Disorienting Dirge top: APPROXIMATION: "all enemies gain disadvantage on all their attacks" = every attack
-  targeting you or an ally gains disadvantage (Deathwalker The Night Takes Shape's aura on `[Self, Ally]`); enemy attacks
-  on other targets (objectives) aren't covered. Bottom: the 1st edition Defensive Ditty bottom (one damage prevention
+- 24 Disorienting Dirge top: "all enemies gain disadvantage on all their attacks" = a disadvantage BuffAttack aura on
+  every enemy (Decanter of Mists: Attack 0, AttackHasDisadvantage, AuraFilter Enemy), objectives' attackers included. Bottom: the 1st edition Defensive Ditty bottom (one damage prevention
   among allies within range 2 this round).
-- 26 Wistful Wounding: Crashing Tide Rancid Brine's Wound buff as Power Ballad's toggled once-per-turn aura. Bottom:
+- 26 Wistful Wounding: Crashing Tide Rancid Brine's Wound buff as Power Ballad's once-per-turn aura (no toggle: the
+  first attack each turn). Bottom:
   round Retaliate 2, range 2 on one ally within range 3.
 - 29 Grand Finale top: a plain Move 4 with Jump, then a control on every enemy moved through (the Trample fix:
   `AllTargetsOnMovePath` + `Targeting: All`), each performing a melee Attack 3 (enemy's base replaced); unverified for a
-  control. The extra Note is a Note choice right away ("this round" not tracked). Bottom: SelectAndPlayCard from the
-  hand, then from the discard pile (song actions only, up to 10 each); "skip moving your token this round" is
+  control. The extra Note is a Note choice right away ("this round" not tracked). Bottom: one SelectAndPlayCard over
+  the hand and the discard pile together (`CardPile: [Hand, Discarded]`, Expertise Potion; song actions only, up to 20); "skip moving your token this round" is
   **NEEDS PLUGIN**. Permanently Lost.
 - 30 Captivating Performance top: end-of-turn Disarm in Secretariat's triangle "2,1,R|1,0,R|3,0,R", Range 3, no hex mark.
-  Bottom: "move your tokens back one slot" is **NEEDS PLUGIN** (text only, the Move 4 works).
+  Bottom: "move your tokens back one slot" = MoveActiveBonusTracker -1 with up to 15 cards picked (Drifter Fortitude,
+  AMC_MoveTrackerBackOneSlot; own-class cards only); the non-song trackers (Increase Cadence and Intensifying Amplitude
+  bottoms, Disorienting Dirge bottom) carry ImmuneMoveActiveBonusTracker (Lucky Dice). A song on its first slot can't
+  go back. The player picks each song (a plugin could take them all at once).
 - Affinities: none (no card infuses an element; the mat prints none).
 
 ## Perks (`perks.py`, 18 boxes)

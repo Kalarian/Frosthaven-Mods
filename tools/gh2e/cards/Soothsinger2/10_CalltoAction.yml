@@ -26,10 +26,21 @@ Data:
             TNote:
                 NullTargeting: True
                 Filter: Self
-                AutoTrigger: True
+                CanSkip: True
                 SkipAnim: True
                 ResourcesToAddOnAbilityEnd:
                     - ["SoothsingerLowNote", 1]
+                # "once each round, when you perform an action with a note, you MAY gain the note": offered, not
+                # automatic; a hidden round marker bonus (MiscVars GH2E_NoteThisRound) blocks a second gain this round
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateOncePerRound: Actor.ActiveBonuses.Any(CustomAbility.GetMiscVarBool(obj.Ability, "GH2E_NoteThisRound")) == False
+                MiscVars:
+                    GH2E_NoteThisRound: True
+                ActiveBonus:
+                    Duration: Round
+                    Hidden: True
     Bottom:
         Abilities:
             BMove:

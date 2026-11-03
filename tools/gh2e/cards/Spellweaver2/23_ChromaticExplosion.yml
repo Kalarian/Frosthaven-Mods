@@ -3,7 +3,8 @@
 # parent's area and takes every figure in it that passes the filter (CAbilityTargeting.Restart, UseSubAbilityTargeting:
 # AreaEffect from the parent, GetValidActorsInArea), i.e. the allies in the red hexes (Xipe's shape too)
 # bottom: Shield 3 on one ally against the next attack this round (Frosthaven's ShieldIncomingAttacks, one use);
-# consume Ice +3 Shield; consume Fire: the attacker suffers 3 is approximated as Retaliate 3 (any range) for the round
+# consume Ice +3 Shield; consume Fire: that next attacker suffers damage 3 (a one-use pop on the same attack, Pyroclast
+# Obsidian Shield's TriggerOnPopAbilities), once, not every attacker of the round
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -43,12 +44,31 @@ Data:
                     BCFireRetaliate:
                         ParentName: BShield
                         SubAbilities:
-                            BShieldSubRetaliate:
-                                Retaliate: 3
-                                RetaliateRange: 99
+                            # "the attacker suffers damage 3": a second one-use shield bonus (Shield 0) on the same ally
+                            # whose pop on that next attack deals 3 to the attacker (Pyroclast Obsidian Shield's
+                            # TriggerOnPopAbilities)
+                            BShieldSubFire:
+                                Shield: 0
                                 Filter: Ally
                                 UseParentTargets: True
-                                ActiveBonusDuration: Round
+                                AnimOverload: None
+                                ActiveBonus:
+                                    Duration: Round
+                                    Behaviour: ShieldIncomingAttacks
+                                    ValidAbilityType: Attack
+                                    XPTracker: [0]
+                                    Hidden: True
+                                    Vars:
+                                        TriggerOnPopAbilities: CustomAbility.PerformActiveBonusAbility(ActiveBonus, thisContext)
+                                    AbilityData:
+                                        Damage: 3
+                                        SkipAnim: True
+                                        Targeting: Custom
+                                        TargetingVars:
+                                            AddValidActorInRange: TriggerActor
+                                        AutoTrigger: True
+                                        MiscVars:
+                                            InterruptCurrentAbility: True
                 XP: 1
             BCIce:
                 Elements: Ice

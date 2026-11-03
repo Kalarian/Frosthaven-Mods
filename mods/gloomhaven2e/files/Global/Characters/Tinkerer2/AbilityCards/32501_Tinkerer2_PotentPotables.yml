@@ -30,6 +30,10 @@ Data:
                     Behaviour: BuffTarget
                     ValidAbilityType: Heal
                     XPTracker: [1,1,1,0]
+                    # "single-target heal abilities" only (HIVE Aimed Assault's ValidateIsSingleTargetAttack): a target-all
+                    # or Target 2 heal neither gains the target nor spends a slot
+                    Vars:
+                        ValidateIsSingleTarget: TriggerAbility.OriginalTargetCount == 1
 Layout:
     Top:
         - Row:

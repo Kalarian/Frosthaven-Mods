@@ -48,8 +48,8 @@ worth a bench run.
   of sight from you, and it's a ranged attack from you, not from the hex), then if it killed, Attack 2 on every enemy
   adjacent to that enemy's hex (the 1st edition card's follow-up, with Frosthaven's kill requirement). No marks (as
   printed). **NEEDS PLUGIN** for the real designated hex.
-- **18 Frozen Shiv**: Pierce 1's [square] mark dropped: Frosthaven's reader takes Pierce only as a number (a mapping
-  fails rulecheck: "Invalid entry YamlFormats.Mapping in Pierce entry") and no Frosthaven card enhances a pierce.
+- **18 Frozen Shiv**: Pierce 1's [square] mark = Pierce inside the Attack mapping with `PierceEnhancements: 1`
+  (Frosthaven's Infuser Gale Barrage; a Pierce mapping of its own fails rulecheck).
 - **19 Silent Scream** bottom: the commanded "Attack -1" is relative to the enemy's own attack, in melee (no range
   printed; 2e rulebook p.40, attacks with no range are melee). Decision, not a print question.
 - **20 Mass Hysteria** bottom: the 1st edition Corrupting Embrace bottom's shape (Poison along a jump's path, verified).

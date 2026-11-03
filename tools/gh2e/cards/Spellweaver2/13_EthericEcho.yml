@@ -23,7 +23,7 @@ Data:
             BMove:
                 Move:
                     Amount: 3
-                    Enhancements: 1
+                    SquareEnhancements: 1
             BOnLost:
                 AddActiveBonus:
                     Ward: True

@@ -76,6 +76,7 @@ Data:
                 Infuse: [Air, Earth, Fire, Light, Dark, Ice]
                 SkipAnim: True
                 AnimOverload: GatherElements
+                ShowElementPicker: True      # one waning element, picked (CAbilityInfuse: ShowPicker && InfuseOnlyWaning; AMC_InfuseOneWaning_P0_R)
                 MiscVars:
                     InfuseOnlyWaning: True
 Layout:

@@ -19,24 +19,47 @@ PERKS = [
      {"CardsToAdd": "[AMC_Basic_P1]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
     (1, "Well Armored", 'Ignore item <sprite name="-1"> effects and remove one <sprite name="-1">',
      {"CardsToRemove": "[AMC_Basic_M1]", "Flags": "[Passive, IgnoreMinusOneItemEffects]"}),
-    # Frosthaven's room-revealed perk (Perk_Snowdancer_09): it fires whenever a room is revealed, by anyone; the sheet's
-    # "whenever you open one or more doors during your turn" can't tell who opened it (noted in NOTES.md)
+    # Frosthaven's own "when you open a door" perk shape (Perk_Shattersong_11: a persistent GenericRoomRevealed bonus
+    # triggered on its caster, once per round, interrupting the move that opened the door), one for the Shield and one
+    # for the Retaliate, each a round bonus
     (1, "Vigilant Entry", "Whenever you open one or more doors during your turn, gain <sprite name=Shield> 1, <sprite name=Retaliate> 1 for the round",
-     {"Cost": 2, "Flags": "[Passive, ExecuteAbilitiesAfterRoomRevealed, ApplyActiveBonusesAtScenarioStart]", "Abilities": """\
-    AShield:
-        Shield: 1
+     {"Cost": 2, "Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]", "Abilities": """\
+    AShieldOnDoor:
         Filter: Self
         AutoTrigger: True
         SkipAnim: True
+        AddActiveBonus:
+            Shield: 1
+            Filter: Self
+            AutoTrigger: True
+            ActiveBonusDuration: Round
+            AnimOverload: PowerUp
+            MiscVars:
+                InterruptCurrentAbility: True
         ActiveBonus:
-            Duration: Round
-    ARetaliate:
-        Retaliate: 1
+            Duration: Persistent
+            Behaviour: GenericRoomRevealed
+            Restriction: OncePerRound
+            Hidden: True
+            TriggerOnCaster: True
+    ARetaliateOnDoor:
         Filter: Self
         AutoTrigger: True
         SkipAnim: True
+        AddActiveBonus:
+            Retaliate: 1
+            Filter: Self
+            AutoTrigger: True
+            ActiveBonusDuration: Round
+            AnimOverload: None
+            MiscVars:
+                InterruptCurrentAbility: True
         ActiveBonus:
-            Duration: Round"""}),
+            Duration: Persistent
+            Behaviour: GenericRoomRevealed
+            Restriction: OncePerRound
+            Hidden: True
+            TriggerOnCaster: True"""}),
     # the Elementalist's long-rest infusion (gh_crossover ELEMENTALIST_PERKS), Light only
     (1, "Restful Dawn", "Whenever you long rest, you may <sprite name=CreateLight>",
      {"Flags": "[Passive, ExecuteAbilitiesAfterLongRest]", "Abilities": """\

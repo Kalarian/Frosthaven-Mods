@@ -6,7 +6,7 @@ Level: X
 Initiative: 50
 # card: Medical Pack
 # Medical Pack 0445 (sheet position 34): a supply card (the 1st edition's SupplyCard), handed to allies by
-# GiveSupplyCard 13230 (the plugin gives a free copy of the six); never held in the Sawbones' own hand. The game picks which condition goes.
+# GiveSupplyCard 13230 (the plugin gives a free copy of the six); never held in the Sawbones' own hand. The bottom's removal is a Choose (the player picks the condition).
 SupplyCard: True
 Discard: [Discard,Discard]
 Data:
@@ -18,11 +18,45 @@ Data:
                 AnimOverload: Heal
     Bottom:
         Abilities:
+            # "remove one negative condition you have": the player picks it (Frosthaven's Cure Potion: one
+            # RemoveConditions option per condition in a Choose); skipped when you have none
             BRemove:
-                RemoveConditions: 1
-                Conditions: [Wound, Brittle, Bane, Poison, Immobilize, Disarm, Impair, Stun, Muddle]
                 Filter: Self
+                IgnoreStun: True
                 AnimOverload: PowerUp
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateHasAnyCondition: Actor.Tokens.CountNegativeConditions(true) > 0
+                Choose:
+                    Abilities:
+                        RemoveWound:
+                            RemoveConditions: 1
+                            Conditions: [Wound]
+                        RemoveBrittle:
+                            RemoveConditions: 1
+                            Conditions: [Brittle]
+                        RemoveBane:
+                            RemoveConditions: 1
+                            Conditions: [Bane]
+                        RemovePoison:
+                            RemoveConditions: 1
+                            Conditions: [Poison]
+                        RemoveImmobilize:
+                            RemoveConditions: 1
+                            Conditions: [Immobilize]
+                        RemoveDisarm:
+                            RemoveConditions: 1
+                            Conditions: [Disarm]
+                        RemoveImpair:
+                            RemoveConditions: 1
+                            Conditions: [Impair]
+                        RemoveStun:
+                            RemoveConditions: 1
+                            Conditions: [Stun]
+                        RemoveMuddle:
+                            RemoveConditions: 1
+                            Conditions: [Muddle]
             BHeal:
                 Heal: 3
                 Filter: Self

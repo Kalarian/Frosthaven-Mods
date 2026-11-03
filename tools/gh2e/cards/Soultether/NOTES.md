@@ -66,8 +66,8 @@ Range, Target, Shield, Retaliate or Push is written as `SquareEnhancements`; the
 - **25 Oozing Manifestation**: see Slime Spirit. Bottom: Poison, range 2 [square on the range].
 - **26 Divided Mind** top: consume Air "grant the target of the heal: Push 1, Range 1, Immobilize" = a Null the consume
   fills with a grant aimed at the heal's own target (`TargetTargetedByCasterPreviousAbility` + `SpecificAbilityNames
-  [THeal]`, the 1st edition Eye of the Void fix), the Immobilize a `UseParentTargets` sub-ability of the push.
-  APPROXIMATION: when you heal yourself the grant finds no target. Unverified.
+  [THeal]`, the 1st edition Eye of the Void fix), the Immobilize a `UseParentTargets` sub-ability of the push. Filter
+  `[Self, Ally]`, so when you heal yourself you perform the push (Shattersong Lifting Voice grants to self). Bench.
 - **28 Otherworldly Rage** bottom: HIVE Recall top (`SelectAndPlayCard` from the lost pile, summon actions only,
   `BlockXP`); "its summons gain Ward, Invisible, Strengthen" = Ward + Invisible + Strengthen on **up to two of your
   summons, picked by you** (APPROXIMATION as 09; NEEDS PLUGIN for the exact rule). Then Invisible self. Unverified:
@@ -116,9 +116,9 @@ Move 4" carry no mark, so no slot.
   all your summons once the cards are chosen. Unverified.
 - **Summoner's Call** (1): the once-per-scenario toggle (gh_crossover `_once_per_quest`, rewritten so its ability aims
   at a summon) with HIVE Recall's grant: Teleport2 limited to the hexes adjacent to you. Unverified.
-- **Phase Out** (2 linked = Available 1, Cost 2): Boneshaper perk 7's once-a-scenario choice at initiative ordering
-  (`PreCalcInitiativeAbility`, OncePerRound, single use, skippable): Invisible on all your summons. APPROXIMATION: it is
-  offered after the players' cards are chosen, before the monsters' cards are revealed.
+- **Phase Out** (2 linked = Available 1, Cost 2): a once-a-scenario choice offered each round after the monster cards
+  are revealed (`GenericAfterRevealMonsterCards`, Infuser perk 11; OncePerRound, single use, skippable): Invisible on all
+  your summons.
 - Masteries: none. "3 different summon actions before your first rest, cards kept all scenario" and "6 different summon
   abilities in the first rounds of 6 scenarios" fit no existing tag (the 1st edition Menagerie tag counts a whole
   scenario).

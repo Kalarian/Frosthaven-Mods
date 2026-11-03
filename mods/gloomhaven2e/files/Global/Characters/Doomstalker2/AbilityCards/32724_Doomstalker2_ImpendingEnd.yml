@@ -8,7 +8,7 @@ Initiative: 47
 # top: "If this attack kills the target, you may perform its Doom actions on an enemy within Range 3 of the hex where it
 # died" = Forward Momentum's transfer (TransferDooms on a doomed enemy's death), as a one-use bonus for this turn. A
 # doom is gone the moment its enemy dies, so the bonus must exist before the attack: it is the half's first ability
-# (standard confirm), the attack second. It also fires if a doomed enemy dies some other way this turn (approximation).
+# (standard confirm), the attack second. Its Vars accept only a death caused by this card's attack.
 # bottom: Doom with three slots: "Immobilize on your first attack on it, +2 Attack on the second and third". Two doom
 # bonuses: Immobilize (one use) and +2 Attack (two uses, XP on the last), so the first attack gets Immobilize and +2,
 # the second +2 (same total, two attacks instead of three; approximation). The card is discarded when both are used.
@@ -40,6 +40,12 @@ Data:
                     AuraTargeting: All
                     UseTriggerAbilityAsParent: True
                     XPTracker: [0]
+                    # only a kill by this card's attack (the cause-of-death ability; SetupTriggerContext checks these
+                    # before the slot is used). The turn's other action is a bottom half, so no other "TAttack".
+                    Vars:
+                        ValidateHasAbility: TriggerAbility != null
+                        ValidateYourAttack: TriggerAbility.TargetingActor == ActiveBonus.Caster
+                        ValidateThisAttack: TriggerAbility.Name == "TAttack"
                 AnimOverload: PowerUp
             TAttack:
                 Attack:
@@ -72,9 +78,11 @@ Data:
                                     XPTracker: [0,1]
                 Filter:
                     TargetType: Enemy
-                    EnemyType: [Normal, Elite, Boss]
+                    EnemyType: [Normal, Elite, Boss, Object]
                 Target: 1
                 Targeting: All
+                MiscVars:
+                    CheckLOS: True
                 AnimOverload: DoomTarget
 Layout:
     Top:

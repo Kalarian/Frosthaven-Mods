@@ -28,6 +28,8 @@ Data:
                     Duration: Ability
                     Hidden: True
                     RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+                MiscVars:
+                    GH2E_Song1: True      # the song's Note cost (Symphonic Medley picks songs by it)
     Bottom:
         Abilities:
             BMove:

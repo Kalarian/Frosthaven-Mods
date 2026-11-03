@@ -6,8 +6,9 @@ Level: 1
 Initiative: 9
 # card: Rain of Arrows
 # top: the 1st edition Rain of Arrows shape (an aura on the caster over doomed enemies, DuringActionAbilityOnDeath,
-# four slots, XP on slots 1 and 3) with the 2e Attack 3, Range 4. "While there is another enemy within Range 4" is not
-# checked: the attack simply needs a target in range 4 (a death with nobody in range may still use a slot).
+# four slots, XP on slots 1 and 3) with the 2e Attack 3, Range 4. "While there is another enemy within Range 4": the
+# bonus's Requirement (Forward Momentum's ValidActorsInRangeOfAddedAbilityRange), so a death with nobody in range
+# spends no slot.
 # bottom: Doom, +Pierce 2 on your attacks (the 1st edition Expose doom's Pierce buff, filtered to this class).
 Discard: [Lost,Discard]
 Data:
@@ -23,6 +24,10 @@ Data:
                     Duration: Persistent
                     Behaviour: DuringActionAbilityOnDeath
                     TriggerOnCaster: True
+                    Requirement:
+                        ValidActorsInRangeOfAddedAbilityRange: "> 0"
+                        RequirementActorFilter:
+                            ActorType: [Enemy, Enemy2]
                     IsAura: True
                     AuraFilter:
                         IsDoomed: True
@@ -48,9 +53,11 @@ Data:
                                         PlayerClasses: Doomstalker2ID
                 Filter:
                     TargetType: Enemy
-                    EnemyType: [Normal, Elite, Boss]
+                    EnemyType: [Normal, Elite, Boss, Object]
                 Target: 1
                 Targeting: All
+                MiscVars:
+                    CheckLOS: True
                 AnimOverload: DoomTargetAlt
 Layout:
     Top:

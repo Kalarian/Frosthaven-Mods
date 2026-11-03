@@ -4,7 +4,7 @@ LocKey: $Quartermaster2$
 Model: Quartermaster
 Race: Valrath
 Traits: [ Armored, Resourceful, Strong ]
-Complexity: 2
+Complexity: 5
 DefaultSkin: 1
 # PlayerLevel:    [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
 HealthTable: [ 10, 12, 14, 16, 18, 20, 22, 24, 26 ]
@@ -21,8 +21,8 @@ StartScenarioAbilities:
         SkipAnim: True
 HeroStats:
     Melee: 4
-    Ranged: 2
-    Mobility: 2
-    Support: 3
-    Defense: 3
+    Ranged: 3
+    Mobility: 3
+    Support: 4
+    Defense: 4
     Control: 2

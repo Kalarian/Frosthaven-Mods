@@ -8,7 +8,7 @@ Data:
             TAttack:
                 Attack:
                     Amount: 2
-                    Enhancements: 1
+                    SquareEnhancements: 1
                 Range:
                     Amount: 3
                     Enhancements: 1
@@ -26,7 +26,7 @@ Data:
             BMove:
                 Move:
                     Amount: 3
-                    Enhancements: 1
+                    SquareEnhancements: 1
             BNull:
                 Null: True
         Consumes:

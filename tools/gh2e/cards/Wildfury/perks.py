@@ -4,10 +4,11 @@
 # Decisions in NOTES.md.
 
 # "Command" toggled once each scenario: gh_crossover._once_per_quest's text, with the bear as the target of a control
-# (Frosthaven's AddActiveBonus ControlActor on an own summon, Infuser Boon of the Tempest) instead of Filter Self
+# (Frosthaven's AddActiveBonus ControlActor on an own summon, Infuser Boon of the Tempest) instead of Filter Self. The
+# Bear is a companion: the filter must say Companion (an OwnSummon filter never matches a CompanionSummon, CAbilityFilter)
 def _bear(indent):
     return "\n".join(" " * indent + ln for ln in (
-        "Filter:", "    TargetType: [OwnSummon]", "    HeroSummonClasses: [WildfuryBearID]", "Target: 1",
+        "Filter:", "    TargetType: [Companion]", "    HeroSummonClasses: [WildfuryBearID]", "Target: 1",
         "Targeting: All", "IgnoreLOS: True", "SkipAnim: True"))
 
 PERKS = [
@@ -115,7 +116,24 @@ PERKS = [
 # Neither mastery fits an existing pattern: "infuse or consume Air or Earth during each of your turns" needs a per-turn
 # element tag, "kill 4+ enemies with Command attacks of 7 or more (after bonuses, before modifiers)" a kill tag on the
 # Bear's commanded attacks with their printed value (NOTES.md, shared changes).
-MASTERIES = []
+MASTERIES = [
+    # mastery 1 of the sheet: the plugin's ElementEveryTurn tag (GHMasteries.cs, as the 1st edition Sunkeeper's mastery 2):
+    # one of Elements infused or consumed on every turn the Wildfury takes. Mastery 2 (kills with Command attacks of 7+)
+    # has no tag yet (NOTES.md).
+    ("Elemental Bond", "In a single scenario, infuse or consume <sprite name=Air> or <sprite name=Earth> during each of your turns",
+     """\
+# the plugin's tag (GHMasteries.cs ElementEveryTurn): Air or Earth infused or consumed on every turn of the Wildfury
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ElementEveryTurn]
+        Elements: [Air, Earth]
+        CharacterIDs:
+            ActorID: WildfuryID
+        Value: 1"""),
+]
 
 NEW_CARDS = {
     "AMC_GH2E_Wildfury_Heal2Bear_R": ('MathModifier: "+0"\nRolling: True\nAbilities:\n    AHeal:\n        Heal: 2\n'

@@ -1,7 +1,8 @@
 # card: Mass Extinction
 # top: "whenever this ability kills an enemy, gain XP 1 and add +2 Attack, +1 Target" = a chain of kill-gated follow-up
 # attacks on another enemy with Plague at any range: Attack 6 after the first kill, Attack 8 after the second (XP 1
-# each). The chain stops at three attacks: APPROXIMATION (the card has no limit).
+# each), and so on: eight attacks deep (Attack 4 to 18; GHNestedSubAbilities queues any depth), more enemies with
+# Plague than a room holds in practice.
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -44,6 +45,76 @@ Data:
                                     ActorsKilledByAbility: "> 0"
                                 TreatAsNonSubAbility: True
                                 AnimOverload: RangedAttack
+                                SubAbilities:
+                                    TAttack4:
+                                        Attack: 10
+                                        Range: 99
+                                        Target: 1
+                                        Filter:
+                                            TargetType: Enemy
+                                            TargetHasCharacterResource: ["Plague"]
+                                        AbilityXP: 1
+                                        StartAbilityRequirements:
+                                            Type: SubAbility
+                                            ActorsKilledByAbility: "> 0"
+                                        TreatAsNonSubAbility: True
+                                        AnimOverload: RangedAttack
+                                        SubAbilities:
+                                            TAttack5:
+                                                Attack: 12
+                                                Range: 99
+                                                Target: 1
+                                                Filter:
+                                                    TargetType: Enemy
+                                                    TargetHasCharacterResource: ["Plague"]
+                                                AbilityXP: 1
+                                                StartAbilityRequirements:
+                                                    Type: SubAbility
+                                                    ActorsKilledByAbility: "> 0"
+                                                TreatAsNonSubAbility: True
+                                                AnimOverload: RangedAttack
+                                                SubAbilities:
+                                                    TAttack6:
+                                                        Attack: 14
+                                                        Range: 99
+                                                        Target: 1
+                                                        Filter:
+                                                            TargetType: Enemy
+                                                            TargetHasCharacterResource: ["Plague"]
+                                                        AbilityXP: 1
+                                                        StartAbilityRequirements:
+                                                            Type: SubAbility
+                                                            ActorsKilledByAbility: "> 0"
+                                                        TreatAsNonSubAbility: True
+                                                        AnimOverload: RangedAttack
+                                                        SubAbilities:
+                                                            TAttack7:
+                                                                Attack: 16
+                                                                Range: 99
+                                                                Target: 1
+                                                                Filter:
+                                                                    TargetType: Enemy
+                                                                    TargetHasCharacterResource: ["Plague"]
+                                                                AbilityXP: 1
+                                                                StartAbilityRequirements:
+                                                                    Type: SubAbility
+                                                                    ActorsKilledByAbility: "> 0"
+                                                                TreatAsNonSubAbility: True
+                                                                AnimOverload: RangedAttack
+                                                                SubAbilities:
+                                                                    TAttack8:
+                                                                        Attack: 18
+                                                                        Range: 99
+                                                                        Target: 1
+                                                                        Filter:
+                                                                            TargetType: Enemy
+                                                                            TargetHasCharacterResource: ["Plague"]
+                                                                        AbilityXP: 1
+                                                                        StartAbilityRequirements:
+                                                                            Type: SubAbility
+                                                                            ActorsKilledByAbility: "> 0"
+                                                                        TreatAsNonSubAbility: True
+                                                                        AnimOverload: RangedAttack
         XP: 1
     Bottom:
         Abilities:

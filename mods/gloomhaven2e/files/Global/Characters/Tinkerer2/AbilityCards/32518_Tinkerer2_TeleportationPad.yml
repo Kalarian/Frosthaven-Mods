@@ -12,12 +12,14 @@ Data:
         Abilities:
             # NEEDS PLUGIN: "you and all allies may treat the two token hexes as adjacent during move abilities" has
             # no engine shape. The two tokens are placed (summons that can't be targeted, hurt or block, the 1st
-            # edition Ward's shape; adjacent, not within range 5) so a plugin can read them; the rule is text.
+            # edition Ward's shape; each in an empty hex within range 5) so a plugin can read them; the rule is text.
             TSummon:
                 Summon: TeleportationPadID
+                Range: 5      # "in an empty hex within Range 5" (CAbilitySummon.SelectSummonPosition reads the range)
                 AnimOverload: Summon
             TSummon2:
                 Summon: TeleportationPadID
+                Range: 5      # "in an empty hex within Range 5" (CAbilitySummon.SelectSummonPosition reads the range)
                 AnimOverload: Summon
         XP: 3
     Bottom:

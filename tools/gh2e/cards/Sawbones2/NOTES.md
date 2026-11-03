@@ -31,24 +31,25 @@ lost icons were checked against the sheet by script: all match except the three 
   as the rule says; Elementalist2 wrote its Safeguard as a toggle (`IsToggleBonus`) — the lead may want one shape for
   the pack. A Safeguard on a non-persistent half keeps that card in the active area until it is used (the token's
   stand-in). The Safeguard diamond-plus marks on 04 bottom and 05 top are dropped (nothing to enhance).
-- **"Remove one negative condition"** (03, 23 bottom, Medical Pack 34): `RemoveConditions: 1` over the removable list;
-  the game picks which one (Frosthaven's Cure Potion comment). Frosthaven's own pick-one shape (a `Choose` block) is
-  self-only. Approximation.
+- **"Remove one negative condition"** (03, 23 bottom): `RemoveConditions: 1` over the removable list; the game picks
+  which one (Frosthaven's Cure Potion comment). Frosthaven's own pick-one shape (a `Choose` block) is self-only, so
+  Medical Pack 34 (self) uses it: the player picks.
 - **"Damaged"**: `TargetMissingHP: "> 0"` (CAbilityFilter key, verified by the 1st edition port).
 
 ## Decisions per card
 
 - **01 / 06 / 24** give a pack: GiveSupplyCard on one adjacent ally with the XP on the give ability itself (gained only
   when a pack is given).
-- **03 Curative Mixture** top: the condition removal is a sub-ability of the heal, so it lands after the heal, not
-  before. Approximation (matters only when the heal target is poisoned and the game removes another condition).
+- **03 Curative Mixture** top: the condition removal is the parent ability (it picks the target, range 1, you or an
+  ally) and the heal its sub-ability on the same figure: removal before the heal, as printed.
 - **04 Bloody Saw** top: self conditional override (Extra Decoration shape) on the Prescription check: +1 Attack, Wound,
   XP 1.
 - **05 Prevention is Key** top: Wound + Disarm with no attack on all enemies within range 1 (the diamond on Disarm, as
-  Secretariat). Bottom: the "next Prescription action this round" trigger has no hook: Shield 1 this round on you and
-  adjacent allies at once (the 1st edition card's round aura, which follows you). Approximation.
-- **09 Needle Gun** top: the Pierce [square] mark is dropped: rulecheck rejects a slot on Pierce ("Invalid entry
-  Mapping in Pierce"). Shared change wanted if the converter can express a Pierce slot.
+  Secretariat). Bottom: a one-use round DuringActionAbilityOnActionEnded bonus whose Vars look for a Prescription
+  ability (MiscVars GH2E_Prescription) in the action just performed; it gives Shield 1 for the round to you and the
+  allies adjacent then.
+- **09 Needle Gun** top: the Pierce [square] mark = Pierce inside the Attack mapping with `PierceEnhancements: 1`
+  (Frosthaven's Infuser Gale Barrage; a Pierce mapping of its own fails rulecheck).
 - **10 Vital Strikes**: persistent BuffAttack with an ActiveBonus filter on damaged targets (Scoundrel Single Out shape).
 - **11 Vaccine** top: target conditional override (damaged) giving `Target: 1` + XP 1. **Unverified** whether an
   override found on the first target can still add a second target (the XP works either way). Bottom: the Safeguard
@@ -68,7 +69,8 @@ lost icons were checked against the sheet by script: all match except the three 
   sub-ability (filter Vars on the target) giving XP 1 and a one-use PreventFirstDamage for the round. **Unverified**
   that a sub-ability's filter is checked against the parent's target.
 - **19 Do No Harm** top: Attack 4, Wound, Stun + mandatory self-Disarm, lost. The character token ("the next three times
-  they lose Stun, they gain Stun") has no hook: text only, **NEEDS PLUGIN**.
+  they lose Stun, they gain Stun") = Frosthaven's ApplyConditionOnLoseCondition add-condition bonus on the target (a
+  sub-ability of the attack, `ValidConditions: [Stun]`, three slots). Bench it (no Frosthaven card uses it from YAML).
 - **20 Hack to Bits** top: the on-kill Wound is Deepwraith Slipping into Death's sub-ability (adjacent to the parent's
   target, `ActorsKilledByAbility > 0`).
 - **21 Fortifying Injection** bottom: Sunkeeper2 Protective Blessing's damage-negation aura, allies only, this round.
@@ -84,10 +86,10 @@ lost icons were checked against the sheet by script: all match except the three 
   from their hand for one action": text only, **NEEDS PLUGIN** (candidate shape: Geminate's `SelectAndPlayCard` with
   `CardPile: Hand` and `IsCardValid: AbilityCard.SupplyCard`, targeted at each ally; not used, untested on another
   figure).
-- **27 Euthanize** top: Kill within range 1, normal and elite, damaged, `TargetNegativeConditionCount >= 2`,
+- **27 Euthanize** top: Kill within range 1, normal, elite and boss (user decision A9), damaged, `TargetNegativeConditionCount >= 2`,
   `Health <= 8`. Bottom: one Damage 1 carrying Wound, Poison, Muddle (same target, same result).
-- **28 Secret of the Oak** top: Heal 6 with sub-abilities on the healed figure: remove all conditions (after the heal:
-  approximation), Safeguard, Shield 2 this round + XP 1 if it holds a Prescription (sub filter; unverified as in 18).
+- **28 Secret of the Oak** top: remove all conditions first (the parent ability, range 1), then on the same figure
+  Heal 6, Safeguard, Shield 2 this round + XP 1 if it holds a Prescription (sub filter; unverified as in 18).
   Bottom: a dummy persistent bonus (Shattersong Empowering Note's NullTargeting) keeps the card active and lost as
   printed; "+4 Attack or +4 Move after a heal on a Medical Pack card" is text only, **NEEDS PLUGIN**.
 - **29 Grisly Trauma** bottom: Crushing Weight's melee-only BuffAttack with a `Target: 1` effect (HIVE Rapid Fire),

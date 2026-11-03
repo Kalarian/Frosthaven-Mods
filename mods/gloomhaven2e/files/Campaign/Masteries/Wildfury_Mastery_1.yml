@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Wildfury_MASTERY_1
+LocalisedName: Wildfury_MASTERY_1_Name
+LocalisedDescription: Wildfury_MASTERY_1_Desc
+PerkPoints: 1
+# the plugin's tag (GHMasteries.cs ElementEveryTurn): Air or Earth infused or consumed on every turn of the Wildfury
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ElementEveryTurn]
+        Elements: [Air, Earth]
+        CharacterIDs:
+            ActorID: WildfuryID
+        Value: 1

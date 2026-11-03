@@ -1,22 +1,25 @@
 # card: Curative Mixture
 # "remove one negative condition": RemoveConditions 1 over the removable list (the game picks which one, as its Cure
-# Potion comment says; Frosthaven's own "choose which" needs a Choose block on yourself only). Top: the removal is a
-# sub-ability on the heal's target, so it lands after the heal, not before (approximation).
+# Potion comment says; Frosthaven's own "choose which" needs a Choose block on yourself only). Top: the removal comes
+# first (the parent ability picks the target), the heal is its sub-ability on the same figure.
 Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
-            THeal:
-                Heal:
-                    Amount: 3
-                    DiamondPlusEnhancements: 1
+            # "before the heal, remove one negative condition from the target": the removal is the parent (it picks
+            # the target; CAbilityRemoveConditions takes a target without conditions too), the heal its sub-ability on
+            # the same figure, so a poisoned target loses the Poison first and then gains the hit points
+            TRemove:
+                RemoveConditions: 1
+                Conditions: [Wound, Brittle, Bane, Poison, Immobilize, Disarm, Impair, Stun, Muddle]
                 Range: 1
                 Filter: [Self, Ally]
                 AnimOverload: Heal
                 SubAbilities:
-                    THealSubRemove:
-                        RemoveConditions: 1
-                        Conditions: [Wound, Brittle, Bane, Poison, Immobilize, Disarm, Impair, Stun, Muddle]
+                    THeal:
+                        Heal:
+                            Amount: 3
+                            DiamondPlusEnhancements: 1
                         AnimOverload: None
     Bottom:
         Abilities:
@@ -33,7 +36,7 @@ Data:
 Layout:
     Top:
         - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
-        - Row: "$Range$ <sprite name=Range> *THeal.Range*"
+        - Row: "$Range$ <sprite name=Range> *TRemove.Range*"
         - Row: "<size=20%> "
         - Row: "$GH2E_Sawbones2_03_T$"
     Bottom:

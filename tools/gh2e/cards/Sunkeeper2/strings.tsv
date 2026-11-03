@@ -24,6 +24,7 @@ GH2E_Sunkeeper2_24_B	Whenever you <sprite name=ConsumeLight> during one of your 
 GH2E_Sunkeeper2_25_B	That ally may immediately play up to two cards from their hand, performing at most one top and one bottom action of the cards, <sprite name=XP1>
 GH2E_Sunkeeper2_26_T	Designate an adjacent hex containing an enemy to perform:
 GH2E_Sunkeeper2_26_T2	Target all allies adjacent to you or the designated hex
+GH2E_Sunkeeper2_26_T3	Target the enemy occupying the designated hex
 GH2E_Sunkeeper2_28_T	Grant all allies within <nobr><sprite name=Range> 3</nobr>:
 GH2E_Sunkeeper2_28_B	All allies add <nobr>+1 <sprite name=Attack></nobr> to all their attacks this round.
 GH2E_Sunkeeper2_28_B2	They also gain advantage on all their attacks this round, <sprite name=XP1>

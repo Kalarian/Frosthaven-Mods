@@ -24,7 +24,7 @@ Data:
             BAttack1:
                 Attack:
                     Amount: 1
-                    Enhancements: 1
+                    SquareEnhancements: 1
             BMove:
                 Move:
                     Amount: 1

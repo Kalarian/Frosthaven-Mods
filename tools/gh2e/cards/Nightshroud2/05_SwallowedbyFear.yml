@@ -1,7 +1,7 @@
 # card: Swallowed by Fear
 # top: "after the attack, if the target has 2 or fewer hit points, kill the target" = a Kill aimed at the attack's
 # target (Frosthaven's Boneshaper Exploding Corpse: a custom-targeted Kill), only when that target is alive with 2 or
-# fewer hit points (StartAbilityRequirements Vars); normal and elite enemies, as the 1st edition's kills.
+# fewer hit points (StartAbilityRequirements Vars); bosses too (the card names no exception: user decision A9).
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -14,7 +14,7 @@ Data:
                 Kill: True
                 Filter:
                     TargetType: Enemy
-                    EnemyType: [Normal, Elite]
+                    EnemyType: [Normal, Elite, Boss]      # the card names no exception (user decision A9)
                 Target: -1
                 AutoTrigger: True
                 CanSkip: False

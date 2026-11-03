@@ -30,11 +30,11 @@ Data:
             BMove:
                 Move:
                     Amount: 3
-                    CircleEnhancements: 1
+                    SquareEnhancements: 1
             BHeal:
                 Heal:
                     Amount: 1
-                    DiamondPlusEnhancements: 1
+                    SquareEnhancements: 1
                 Filter: Self
                 AnimOverload: Heal
 Layout:

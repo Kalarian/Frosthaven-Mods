@@ -101,10 +101,9 @@ PERKS = [
                         AnimOverload: Teleport Into
                         AnimOverload2: Teleport Outof
             AnimOverload: Grant""")}),
-    # two linked boxes. Frosthaven's once-a-scenario choice at initiative ordering (Boneshaper perk 7:
-    # PreCalcInitiativeAbility offered each round, finished only when taken, single use): Invisible on all your summons.
-    # PreCalcInitiativeAbility runs once the cards are chosen, before the order is set (APPROXIMATION of "after all
-    # ability cards have been revealed": the monsters' cards are revealed after it).
+    # two linked boxes. A once-a-scenario choice offered each round "after all ability cards have been revealed":
+    # Frosthaven's GenericAfterRevealMonsterCards (Infuser perk 11: offered once the monster cards are revealed,
+    # OncePerRound, finished only when taken; the single slot ends it): Invisible on all your summons.
     (1, "Phase Out", 'Once each scenario, during ordering of initiative, after all ability cards have been revealed, all '
      'your summons gain <sprite name=Invisible>',
      {"Cost": 2, "Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]", "Abilities": """\
@@ -124,7 +123,7 @@ PERKS = [
             AnimOverload: RadialBuff
         ActiveBonus:
             Duration: Persistent
-            Behaviour: PreCalcInitiativeAbility
+            Behaviour: GenericAfterRevealMonsterCards
             Restriction: OncePerRound
             Hidden: True
             XPTracker: [0]"""}),

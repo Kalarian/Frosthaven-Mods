@@ -6,9 +6,10 @@ Data:
         Abilities:
             # The "Pernicious Fogger" token: a summon that can't be targeted, hurt or block (the 1st edition Ward's
             # shape) carrying an end-of-turn damage aura (Frosthaven's Banner of Doom shape with EndTurnAbility).
-            # Placed as a summon (adjacent), not "within range 3".
+            # Placed in an empty hex within range 3.
             TSummon:
                 Summon: PerniciousFoggerID
+                Range: 3      # "in an empty hex within Range 3" (CAbilitySummon.SelectSummonPosition reads the range)
                 AnimOverload: Summon
         XP: 3
     Bottom:

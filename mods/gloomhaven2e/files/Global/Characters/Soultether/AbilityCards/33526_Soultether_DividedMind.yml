@@ -8,8 +8,7 @@ Initiative: 30
 # top: Heal 5, Range 4; consume Air: "grant the target of the heal ability: Push 1, Range 1, Immobilize" = a Null the
 # consume fills with a grant (ControlActor) aimed at the heal's own target (Frosthaven's TargetTargetedByCaster-
 # PreviousAbility + SpecificAbilityNames filter, the 1st edition Eye of the Void fix); the push carries Immobilize as a
-# sub-ability on the pushed enemy (UseParentTargets). An ally only: when you heal yourself the grant has no target
-# (APPROXIMATION). Unverified.
+# sub-ability on the pushed enemy (UseParentTargets). You or an ally ([Self, Ally]): healing yourself, you perform it.
 # bottom: grant one of your summons Attack +0; consume Fire: two summons instead (+1 Target on the control).
 Discard: [Discard,Discard]
 Data:
@@ -50,7 +49,7 @@ Data:
                             Target: 1
                             Range: 4
                             Filter:
-                                TargetType: Ally
+                                TargetType: [Self, Ally]      # healing yourself, you perform the push (Shattersong Lifting Voice grants to [Ally, Self])
                                 TargetTargetedByCasterPreviousAbility: True
                                 SpecificAbilityNames: [THeal]
                             AnimOverload: ControlAlly

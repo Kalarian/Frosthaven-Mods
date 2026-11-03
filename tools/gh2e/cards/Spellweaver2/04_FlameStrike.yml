@@ -17,7 +17,7 @@ Data:
             BAttack:
                 Attack:
                     Amount: 1
-                    Enhancements: 1
+                    SquareEnhancements: 1
                 Range:
                     Amount: 3
                     Enhancements: 1

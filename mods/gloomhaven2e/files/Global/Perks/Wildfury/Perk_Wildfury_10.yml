@@ -27,7 +27,7 @@ Abilities:
                                 Heal: 2
                                 Filter: Self
                     Filter:
-                        TargetType: [OwnSummon]
+                        TargetType: [Companion]
                         HeroSummonClasses: [WildfuryBearID]
                     Target: 1
                     Targeting: All
@@ -49,7 +49,7 @@ Abilities:
                                 Heal: 2
                                 Filter: Self
                     Filter:
-                        TargetType: [OwnSummon]
+                        TargetType: [Companion]
                         HeroSummonClasses: [WildfuryBearID]
                     Target: 1
                     Targeting: All

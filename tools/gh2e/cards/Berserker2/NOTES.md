@@ -32,9 +32,9 @@ cards; engine behaviour was read in the decompiled `ScenarioRuleLibrary.dll` whe
   slot). Discarded (not lost) when spent, as the sheet's corner shows.
 - 05 Resolute Stand top: the consume-Fire heal is its own ability before the retaliate (a `TNull` placeholder carries the
   consume, the 1e pattern).
-- 06 Blood Pact top: the mandatory self-damage stays the 1e shape (a self Damage sub-ability of the attack), so it
-  happens after the attack, not before it as printed; `RoundingType: ToFloor` added for "rounded down" (the game's
-  default rounds .5 up). Bottom: the start-of-turn damage has `StartAbilityRequirements: HP: "> 1"` (the game's
+- 06 Blood Pact top: the mandatory self-damage is its own first ability (From the Brink's TLower shape: self Damage,
+  `CanSkip: False`, standard confirm), so it happens before the attack as printed and on the hit points before any
+  retaliate; `RoundingType: ToFloor` for "rounded down" (the game's default rounds .5 up). Bottom: the start-of-turn damage has `StartAbilityRequirements: HP: "> 1"` (the game's
   absolute-HP requirement). No printed end: lasts until the card leaves the active area (lost), as 1e.
 - 07 Cauterize bottom / 14 Into the Fight bottom: the optional self-damage pays for a condition-only ability (Wound +
   Immobilize via `Wound: True` + `Conditions: [Immobilize]`, as Frosthaven's Deathwalker Vengeful Storm; Stun range 1).

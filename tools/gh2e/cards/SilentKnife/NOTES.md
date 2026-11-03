@@ -51,13 +51,12 @@ Engine facts used (read in the decompiled `ScenarioRuleLibrary.dll`, game build 
   (`EnemyTarget.Tokens.HasKey(CCondition.ENegativeCondition.Poison)`), adding Attack 2, Range 3, Poison. It fires
   after the attack on the target, not strictly "after the attack ability"; the poison is checked after the hit.
 - **20 Serrated Arrow**: bottom = 1e Spring the Trap bottom's shape (x2 on flanked + isolated), passed in the 1e bench.
-- **21 Dance of Daggers** (approximation + NEEDS PLUGIN, top; Xipe's file held Cull the Weak's top): round
-  PreventDamage, attack sources only = all attack damage negated; **the attacks' added effects (conditions, push...)
-  are not negated** (NEEDS PLUGIN). The counterattack is a **round Retaliate 2, RetaliateRange 99, XP 1 per
-  trigger (ProcXP)** instead of "Attack 2 on the attacker" (damage, no modifier draw). The sheet flags the missing
-  range as a rules question; I gave it no limit. Exact shape exists in Frosthaven (Metal Mosaic Stress Vents'
-  `DuringActionAbilityOnAttacked` + Blinkblade Stab Them All's added Attack on a custom target) but is untested for a
-  forced attack during a monster's turn, so I kept the safe one. Lost (Xipe: not lost). Bottom = Drifter advantage.
+- **21 Dance of Daggers** (top; Xipe's file held Cull the Weak's top): round PreventDamage, attack sources only = all
+  attack damage negated; the added effects = a round `ImmunityTo` the conditions and push/pull (Crashing Tide Dug In;
+  side effect: also blocks them from non-attack sources this round). The counterattack = Metal Mosaic Stress Vents'
+  `DuringActionAbilityOnAttacked` reaction: a real Attack 2 stacked next to the monster's attack, aimed at the attacker
+  when it is adjacent (no range printed = melee, user decision B), XP 1 per trigger (ProcXP). Bench it during a
+  monster's turn (a forced attack there is untested). Lost (Xipe: not lost). Bottom = Drifter advantage.
 - **22 Cull the Weak**: bottom targets any enemy with current HP <= 2 (Xipe also required a normal monster).
 - **23 Stiletto Storm**: second attack behind a requirement on the first: `Type: PreviousAbility`,
   `AbilityHasHappened`, `ActorsTargetedByAbility: "== 0"` over targets that were NOT isolated (all isolated -> go).
@@ -102,8 +101,7 @@ Empty: Dark is infused twice (Special Mixture, Smoke Bomb), Fire twice (Flintloc
 
 ## NEEDS PLUGIN (summary)
 
-Practiced Reflexes optional trap skip; Flintlock money-token cost; Dance of Daggers negating added effects (and a
-real Attack 2 counter); Spring the Trap springing the relocated trap on an enemy + XP; Hired Help token cost and extra
+Practiced Reflexes optional trap skip; Flintlock money-token cost; Spring the Trap springing the relocated trap on an enemy + XP; Hired Help token cost and extra
 drop; Watch it Burn play-from-hand; perks 4, 8 (cost), 9.
 
 ## Shared changes wanted

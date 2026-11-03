@@ -11,7 +11,7 @@ Data:
             TAttack:
                 Attack:
                     Amount: 3
-                    Enhancements: 1
+                    SquareEnhancements: 1
                 Range: 3
                 AnimOverload: RangedAttackAir
             TNull2:

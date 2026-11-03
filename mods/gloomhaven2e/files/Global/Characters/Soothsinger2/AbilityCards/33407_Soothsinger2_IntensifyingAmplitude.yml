@@ -5,8 +5,8 @@ ID: 33407
 Level: 1
 Initiative: 56
 # card: Intensifying Amplitude
-# bottom: APPROXIMATION: +X (0,1,2,3,4 over the five attacks) is a flat +2 on each of the five: the same +10 in all
-# (Sunkeeper2 Sanctify's ally attack aura, any range, allies only)
+# bottom: +X (0, 1, 2, 3, 4 over the five attacks) from the tracker position (Snowdancer Snowball's
+# BasedOnActiveBonusVarsStrength, one slot per attack) on an ally aura (Sunkeeper2 Sanctify's, any range, allies only)
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -21,20 +21,42 @@ Data:
             TNote:
                 NullTargeting: True
                 Filter: Self
-                AutoTrigger: True
+                CanSkip: True
                 SkipAnim: True
                 ResourcesToAddOnAbilityEnd:
                     - ["SoothsingerLowNote", 1]
+                # "once each round, when you perform an action with a note, you MAY gain the note": offered, not
+                # automatic; a hidden round marker bonus (MiscVars GH2E_NoteThisRound) blocks a second gain this round
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateOncePerRound: Actor.ActiveBonuses.Any(CustomAbility.GetMiscVarBool(obj.Ability, "GH2E_NoteThisRound")) == False
+                MiscVars:
+                    GH2E_NoteThisRound: True
+                ActiveBonus:
+                    Duration: Round
+                    Hidden: True
     Bottom:
         Abilities:
+            # "on your allies' next five attacks, add +X Attack, X = the slots the token has passed (0, 1, 2, 3, 4)":
+            # Frosthaven's Snowdancer Snowball bottom (strength from the tracker position, one slot per attack) as an
+            # ally aura
             BActive:
-                Attack: 2
+                MiscVars:
+                    ImmuneMoveActiveBonusTracker: True      # not a song (Captivating Performance moves song tokens only)
+                Attack: 0
+                AttackEffect:
+                    Type: BasedOnActiveBonusVarsStrength
                 Target: -1
                 Filter: Self
                 ActiveBonus:
                     Duration: Persistent
                     Behaviour: BuffAttack
                     ValidAbilityType: Attack
+                    IsSingleTargetBonus: True
+                    AlwaysBuff: True
+                    Vars:
+                        Strength: obj.TrackerIndex + TargetSelectionNumber - 1
                     IsAura: True
                     AuraTargeting: All
                     AuraFilter:

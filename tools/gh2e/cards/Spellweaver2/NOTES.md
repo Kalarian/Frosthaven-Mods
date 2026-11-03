@@ -40,7 +40,8 @@ card below) and the engine code (decompiled ScenarioRuleLibrary), so every "veri
   round BuffAttack 1. No empty bonus shows when nothing is consumed (Xipe's Cold Fire made a +0 one).
 - **Emberfrost** bottom: Frosthaven's ally shield for the round (Hold the Line: Shield, Filter Ally, round bonus) instead of
   Xipe's ControlActor.
-- **Flameswell** top: Xipe's shape kept (persistent BuffAttack +2, Ranged, IsSingleTargetBonus, XPTracker [0,1,0,1]).
+- **Flameswell** top: persistent +2 Attack with `AttackEffect: Type: SingleTarget` (no bonus and no slot for an area or
+  multi-target attack ability), Ranged, XPTracker [0,1,0,1].
   Bottom consume Ice: Ward through `Condition: Ward` (Frosthaven's Drive Recharge override shape), not Xipe's Shield 1.
 - **Ice Armor**: Frosthaven's Scaled Armor shape (PreventFirstDamage + `Requirements` threshold on
   GameState.CurrentDamageData: `DamageSourceStrength >= 2`), XPTracker [1,0,1]. Top given to an ally within Range 3 as
@@ -63,9 +64,9 @@ card below) and the engine code (decompiled ScenarioRuleLibrary), so every "veri
   sub-ability targeting copies the parent's area and takes every figure in it that passes the filter (CAbilityTargeting
   Restart, UseSubAbilityTargeting), so the allies in the red hexes get Heal 4, Strengthen, Bless. Rules question settled:
   "allies" excludes yourself (the area has no grey hex). Bottom: Shield 3 on one ally against the next attack this round
-  (ShieldIncomingAttacks, one use, round). Consume Ice +3 Shield exact. Consume Fire: APPROXIMATION: "the attacker suffers
-  damage 3" = Retaliate 3 at any range for the round on that ally (exact would be damage to the next attacker only:
-  Frosthaven's Obsidian Shield does that with TriggerOnPopAbilities, which a consume override can't add).
+  (ShieldIncomingAttacks, one use, round). Consume Ice +3 Shield exact. Consume Fire: "the attacker suffers damage 3" = a
+  second one-use ShieldIncomingAttacks (Shield 0, hidden) added on the same ally as a sub-ability by the consume
+  override, whose pop on that next attack deals 3 to the attacker (Obsidian Shield's TriggerOnPopAbilities). Bench.
 - **Freezing Vortex** top: the kill is a sub-ability of the area attack (the 1st edition port's Impending End: Kill, Filter
   Health "<= 2"); as above it takes every enemy in the area at 2 or fewer hit points after the attack. NEEDS PLUGIN: the
   1-hex obstacle in each killed enemy's featureless hex is text only (no Frosthaven shape creates an obstacle on every hex
@@ -89,9 +90,9 @@ card below) and the engine code (decompiled ScenarioRuleLibrary), so every "veri
   Verify on the bench (optional prompt, conditions applied).
 - Etheric Bond (short rest: recover Reviving Ether from the discard first): NEEDS PLUGIN. Flags [Passive] only; the plugin
   has no implementation for the 1st edition perk either (gh_crossover's comment says "answered by the plugin").
-- Arcane Blessing (Bless at the end of a turn with a lost action): APPROXIMATION. Geminate perk 7's lost-action trigger,
-  once per turn, so the Bless comes right after the lost action, not at the end of the turn (it can bless the turn's
-  second action).
+- Arcane Blessing (Bless at the end of a turn with a lost action): Geminate perk 7's lost-action trigger leaves a hidden
+  round marker (MiscVars GH2E_LostActionThisTurn); a persistent EndTurnAbility bonus whose Requirements look for the
+  marker gives the Bless at the end of that turn. Bench.
 - Masteries: Deep Reserves (four different lost actions twice each) uses the plugin's FrosthavenMods_LossActionsRepeated
   tag with ActorID Spellweaver2ID. Mastery 1 ("consume both Fire and Ice during the same turn 6 times") has no tag: left
   out (shared change wanted below).
@@ -107,8 +108,6 @@ card below) and the engine code (decompiled ScenarioRuleLibrary), so every "veri
 - Plugin: Warm Up top's condition (the +1 applies only to an attack ability performed from a lost action, then ends).
 - Plugin: Freezing Vortex top's obstacle in each killed enemy's featureless hex.
 - Plugin mastery tag: "consume both Fire and Ice during the same turn" counted per turn (Spellweaver2 mastery 1).
-- Optional exactness: Chromatic Explosion bottom's consume Fire as damage to the next attacker only (the
-  ShieldIncomingAttacks bonus's TriggerOnPopAbilities, Obsidian Shield) instead of a round Retaliate.
 
 ## Check
 

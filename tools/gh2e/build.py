@@ -122,6 +122,37 @@ def character_file(cls, template):
     return "\n".join(head + body) + "\n", mat
 
 
+# The class mat notes (classes.json) name icons in brackets ("[Doom]", "[Lost]"); the class description and the codex
+# text (CODEX_HeroInfo, built from them by gh_port) show Frosthaven's sprite where one exists, else the word.
+ICON_TEXT = {
+    "Doom": "<b><color=#39BEED>Doom</color></b>",   # the Doomstalker cards' own Doom markup
+    "Lost": "<sprite name=Lost>", "Invisible": "<sprite name=Invisible>", "Teleport": "<sprite name=Teleport>",
+    "Poison": "<sprite name=Poison>", "Stun": "<sprite name=Stun>", "Immobilize": "<sprite name=Immobilize>",
+    "Disarm": "<sprite name=Disarm>", "Push": "<sprite name=Push>", "Pull": "<sprite name=Pull>",
+    "Light": "<sprite name=Light>", "Recover": "<sprite name=RecoverIcon>",
+    "Tear token": "Tear", "Tear hex": "Tear hex", "Plague token": "Plague", "High note": "High Note",
+    "Low note": "Low Note", "Command": "COMMAND", "Spend supplies": "spend supplies", "Supplies": "supplies",
+    "Quartermaster": "Quartermaster",
+}
+
+
+def icon_text(s):
+    def one(m):
+        name, before = m.group(2), s[:m.start()]
+        icon = ICON_TEXT.get(name, name)
+        if icon.startswith("<sprite"):
+            return m.group(1) + icon
+        # a word stand-in right after the same words ("Supplies [Supplies]", "high notes [High note]", "bear summon
+        # [Bear]", "Doom token [Doom]"): the text already says it, drop the placeholder
+        stem = lambda w: w.lower().rstrip("s")
+        clause = re.split(r"[.;:!?\]]", before)[-1]   # the same clause only, and not across an earlier placeholder
+        near = {stem(w) for w in re.findall(r"[A-Za-z]+", clause)[-3:]}
+        if all(stem(w) in near for w in name.split()):
+            return ""
+        return m.group(1) + icon
+    return re.sub(r"( ?)\[([A-Za-z][A-Za-z ]*)\]", one, s)
+
+
 def name_key(name):
     return re.sub(r"[^A-Za-z0-9]", "", name)
 
@@ -171,7 +202,7 @@ def build(classes):
         text, mat = character_file(cls, gh_port.text(files[f"Character/{model}.yml"]))
         (OUT / "Character" / f"{cls}.yml").write_text(text, encoding="utf-8")
         strings[cls] = display(cls)
-        notes = mat.get("class_notes") or []
+        notes = [icon_text(n) for n in mat.get("class_notes") or []]
         if notes:
             strings[f"{cls}_DESCRIPTION"] = notes[0]
             strings[f"{cls}_ADVENTURE_DESCRIPTION"] = "\n".join(notes)
@@ -246,6 +277,17 @@ def extras(cls):
     edition class of the same model (complexity, hero stats; affinities are checked by gh_port's own count)."""
     import gh_port
     base = dict(gh_port.CLASS_EXTRAS.get(CLASSES[cls][1], {}))
+    # the mat back, where one was read (Quartermaster, Soothsinger): complexity dots and role bars, on Frosthaven's own
+    # scales (Complexity 1-5, HeroStats 0-5)
+    back = json.loads((HERE / "classes.json").read_text(encoding="utf-8"))["classes"][CLASSES[cls][0]]["mat"].get("back") or {}
+    m = re.match(r"\s*(\d)\s+of\s+5", str(back.get("complexity") or ""))
+    if m:
+        base["Complexity"] = m.group(1)
+    if isinstance(back.get("role_bars_approx_0_to_5"), dict):
+        # gh_port rates hero stats 0-6 and maps them onto Frosthaven's 0-5 web (HERO_STAT_TO_FH); the mat bars are
+        # already 0-5, so they go in as the rating that maps back to the same bar
+        to_ours = {0: 0, 1: 1, 2: 2, 3: 3, 4: 5, 5: 6}
+        base["HeroStats"] = {k: to_ours[int(v)] for k, v in back["role_bars_approx_0_to_5"].items()}
     r, t = race(cls), traits(cls)
     if r:
         base["Race"] = r

@@ -51,7 +51,7 @@ Data:
             BMove:
                 Move:
                     Amount: 3
-                    Enhancements: 1
+                    SquareEnhancements: 1
             BPull:
                 Pull:
                     Amount: 1

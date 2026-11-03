@@ -2,8 +2,8 @@
 # top: Heal 3 [diamond+] on one ally, Range 1 (no mark); the attached spend-supplies box "Recover the target's items,
 #   XP 1" = its own optional ability on one adjacent ally (the player picks the healed ally; a sub-ability can't be
 #   skipped, and spending sets supplies to 0).
-# bottom: you and all adjacent allies +1 Attack on all attacks this round: the 1st edition Sharpening Kit's round
-#   aura at range 1 (adjacent), icon Positive_AttackPlus_Ally_Aura.
+# bottom: you and all adjacent allies +1 Attack on all attacks this round, the allies adjacent when played (user
+#   decision C): a round bonus on you and one on each adjacent ally.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -33,16 +33,25 @@ Data:
                 AnimOverload: Refresh
     Bottom:
         Abilities:
+            # "you and all adjacent allies add +1 Attack to all attacks this round": the allies adjacent when played
+            # (user decision C): a round +1 Attack on yourself and one on each adjacent ally (Heatwave bottom's
+            # ally BuffAttack; Hold the Line's self + adjacent-allies split)
             BAttackBuff:
                 Attack: 1
-                Range: 1
                 Filter: Self
                 ActiveBonus:
                     Behaviour: BuffAttack
                     Duration: Round
-                    IsAura: True
-                    AuraFilter: [Self, Ally]
                 AnimOverload: PowerUp
+            BAllyAttackBuff:
+                Attack: 1
+                Range: 1
+                Target: -1
+                Filter: Ally
+                ActiveBonus:
+                    Behaviour: BuffAttack
+                    Duration: Round
+                AnimOverload: None
 Layout:
     Top:
         - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"

@@ -49,7 +49,8 @@ Layout:
         - Row: "$FHS_GH2E_Sunkeeper2_26_T$"
         - Row: "<size=20%> "
         - Row: "<size=150%><sprite name=Attack> *TAttack*"
-        - Divider:
+        - Row: "$FHS_GH2E_Sunkeeper2_26_T3$"
+        - Row: "<size=50%> "
         - Row: "<size=150%><sprite name=Strengthen>"
         - Row: "$FHS_GH2E_Sunkeeper2_26_T2$"
     Bottom:

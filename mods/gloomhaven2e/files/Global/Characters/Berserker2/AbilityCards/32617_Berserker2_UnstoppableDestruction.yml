@@ -42,7 +42,7 @@ Data:
             BHeal:
                 Heal:
                     Amount: 2
-                    DiamondPlusEnhancements: 1
+                    SquareEnhancements: 1
                 Filter: Self
                 AnimOverload: Heal
 Layout:
