@@ -135,7 +135,8 @@ PERKS = [
 {flags}            Hidden: True
             Requirements:
                 Vars:
-                    ValidateUnused: Actor.GHLifeBondUsed != True""" for when, flags in (("Start", "            Flags: [PreRestBonus]\n"), ("End", "")))}),
+                    ValidateUnused: Actor.GHLifeBondUsed != True
+                    ValidateCanPay: Actor.Health > 1""" for when, flags in (("Start", "            Flags: [PreRestBonus]\n"), ("End", "")))}),
 ]
 
 # Mastery 1: the plugin's ElementEveryTurn tag. Mastery 2: the plugin's CommandKillsAtValue tag (GHWildfury.cs counts the
@@ -156,7 +157,7 @@ BattleGoalCondition:
         CharacterIDs:
             ActorID: WildfuryID
         Value: 1"""),
-    ("Unleashed", "In a single scenario, kill 4 or more enemies with <sprite name=Command> attacks of 7 or greater (after all bonuses, before attack modifiers)",
+    ("Unleashed", "In a single scenario, kill 4 or more enemies with Command attacks of 7 or greater (after all bonuses, before attack modifiers)",
      """\
 # the plugin's tag (GHMasteries.cs CommandKillsAtValue, counted by GHWildfury.cs): Value enemies killed by the Bear's
 # commanded attacks whose value before attack modifiers was Amount or more

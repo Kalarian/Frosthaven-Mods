@@ -48,7 +48,11 @@ Data:
                 RemoveConditions: 1
                 Conditions: [Wound, Brittle, Bane, Poison, Immobilize, Disarm, Impair, Stun, Muddle]
                 Range: 1
-                Filter: Ally
+                # "If you do, gain XP 1": only an ally holding one of these conditions can be the target (the engine's
+                # remove "happens", XP included, on any target; re-audit 2026-11-02)
+                Filter:
+                    TargetType: Ally
+                    TargetHasNegativeConditions: [Wound, Brittle, Bane, Poison, Immobilize, Disarm, Impair, Stun, Muddle]
                 XP: 1
                 AnimOverload: BuffAdjacent
                 MiscVars:

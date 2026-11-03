@@ -26,17 +26,20 @@ namespace FrosthavenMods
     ///     this summon": with more than one ally in range the summoner's player picks (asked ally by ally).
     ///     "GHRule RiftSpiritGrant".
     ///   - Slime Spirit (MiscVars GH2E_SlimeSplit on its lethal-damage prevention): when the prevention is spent, a second
-    ///     Slime Spirit is summoned for the same Soultether in an empty hex adjacent to it (the first such hex), tied to the
+    ///     Slime Spirit is summoned for the same Soultether in an empty hex adjacent to it (the summoner's player picks it:
+    ///     each candidate highlighted with a yes/no prompt, PickHex), tied to the
     ///     same card (Oozing Manifestation, 33525); the new one has no prevention of its own (the card's one character
     ///     token is placed). "GHRule SlimeSplit".
     ///   - Void Eater (MiscVars GH2E_CurseMonsterDeck on a NullTargeting step): a curse card goes straight into the monster
     ///     attack modifier deck (10-curse limit). "GHRule VoidEaterCurse".
     ///   - Masteries: FrosthavenMods_SummonCardsKeptBeforeRest (Value different cards whose summon ability was performed
-    ///     before the round of the first rest, all still in the active area at the check) and
-    ///     FrosthavenMods_FirstRoundSummonsAcrossScenarios (a career list of round-1 summon abilities, card + ability, in
-    ///     synced campaign state: a marker in CampaignState.LootedChestTreasureTableIDs, "FHMODS:Soul2R1:<character>=...",
-    ///     written from the scenario result every peer receives, as DwarfTweaks' Boneshaper count; inert in a save without
-    ///     the mod).
+    ///     in a round before the Soultether's first rest, all still in the active area at the check; the rest round is
+    ///     noted from GameState.PlayerShortRested/PlayerLongRested in the hidden resource GH2EFirstRestRound, saved with
+    ///     the scenario) and FrosthavenMods_FirstRoundSummonsAcrossScenarios (per character, one entry per scenario with
+    ///     its round-1 summon abilities, in synced campaign state: "FHMODS:Soul2R1S:<character>=<scenario>~a|b;...",
+    ///     written from the scenario result every peer receives, as DwarfTweaks' Boneshaper count; met when Value
+    ///     scenarios can each be paired with a different summon ability; inert in a save without the mod).
+    ///     "GHRule SummonCardsKept" / "GHRule FirstRoundSummons".
     /// Gated on the pack's class SoultetherID, its summon class IDs, its card IDs and misc vars only the pack carries.
     /// </summary>
     [HarmonyPatch]
@@ -190,13 +193,16 @@ namespace FrosthavenMods
                 if (e.MonsterClass != null && e.MonsterClass.Boss) return;    // a boss drops no money token
                 if (!ReferenceEquals(_impState, ScenarioManager.CurrentScenarioState)) { ImpKills.Clear(); _impState = ScenarioManager.CurrentScenarioState; }
                 if (!ImpKills.Add(e.ActorGuid ?? "")) return;
+                // the token goes to the summoner INSTEAD of the hex: the engine's own suppression of the death drop
+                // (DelayedDropSMB skips an actor with NoGoldDrop, as CAbilityCapture / CAbilityKill set it)
+                e.NoGoldDrop = true;
                 owner.GainLoot(endOfScenario: false, incLootTokenCount: true);
                 ScenarioRuleClient.MessageHandler(new CStackRewardsToShow_MessageData(owner)
                 {
                     m_Rewards = owner.LastLoot.GetRewards().ToList(),
                     m_SourceType = "MoneyToken"
                 });
-                Rule("CovetousImp", 33519, $"the Covetous Imp killed {GHPlague.NameOf(e)}: {GHPlague.NameOf(owner)} gains its money token directly (one loot-deck draw)");
+                Rule("CovetousImp", 33519, $"the Covetous Imp killed {GHPlague.NameOf(e)}: {GHPlague.NameOf(owner)} gains its money token directly (one loot-deck draw; no token dropped in the hex)");
             }
             catch (Exception ex) { Report("Covetous Imp", ex); }
         }
@@ -240,8 +246,9 @@ namespace FrosthavenMods
             if (!(slime.Summoner is CPlayerActor soul) || !IsSoul(soul)) return;
             CAbilityCard card = soul.CharacterClass?.ActivatedAbilityCards?.FirstOrDefault(c => c != null && c.ID == Oozing);
             CAbility summon = card?.TopAction?.Abilities?.FirstOrDefault(a => a != null && a.AbilityType == CAbility.EAbilityType.Summon);
-            CTile tile = GameState.GetTilesInRange(slime.ArrayIndex, 1, CAbility.EAbilityTargeting.Range, emptyTilesOnly: true)
-                .FirstOrDefault(t => t != null && CPathFinder.IsAdjacent(t.m_ArrayIndex, slime.ArrayIndex));
+            List<CTile> hexes = GameState.GetTilesInRange(slime.ArrayIndex, 1, CAbility.EAbilityTargeting.Range, emptyTilesOnly: true)
+                .Where(t => t != null && CPathFinder.IsAdjacent(t.m_ArrayIndex, slime.ArrayIndex)).ToList();
+            CTile tile = PickHex(soul, hexes);
             if (tile == null)
             {
                 Rule("SlimeSplit", Oozing, "the Slime Spirit's damage was negated; no empty adjacent hex for the second Slime Spirit");
@@ -260,6 +267,30 @@ namespace FrosthavenMods
                                                           : $"the second Slime Spirit could not be summoned ({error})");
             }
             finally { _splitting = false; }
+        }
+
+        /// <summary>"in an empty hex adjacent to this summon": the summoner's player chooses. Each candidate hex but the last is
+        /// highlighted in turn (the engine's own tile highlight, CPhaseCheckForInitiativeAdjustments' shape) and offered with
+        /// a yes/no prompt; the last one left is taken. One hex: no prompt.</summary>
+        private static CTile PickHex(CActor owner, List<CTile> hexes)
+        {
+            if (hexes == null || hexes.Count == 0) return null;
+            if (hexes.Count == 1) return hexes[0];
+            var colour = new CVector4(0f, 1f, 0f, 1f);
+            for (int i = 0; i < hexes.Count - 1; i++)
+            {
+                var at = new List<Point> { hexes[i].m_ArrayIndex };
+                ScenarioManager.ToggleTileHighlights(at, enabled: true, colour);
+                bool yes;
+                try { yes = GHPlague.Ask(owner, false, "FHMODS_SOUL_SLIMEHEX", "FHMODS_SOUL_SLIMEHEX_YES", "FHMODS_SOUL_SLIMEHEX_NO", i + 1, hexes.Count); }
+                finally { ScenarioManager.ToggleTileHighlights(at, enabled: false, colour); }
+                if (!yes) continue;
+                Rule("SlimeSplit", Oozing, $"{GHPlague.NameOf(owner)} picks hex {hexes[i].m_ArrayIndex} ({i + 1} of {hexes.Count} empty adjacent hexes)");
+                return hexes[i];
+            }
+            CTile last = hexes[hexes.Count - 1];
+            Rule("SlimeSplit", Oozing, $"{GHPlague.NameOf(owner)} takes the last empty adjacent hex {last.m_ArrayIndex} ({hexes.Count} offered)");
+            return last;
         }
 
         // ------------------------------------------------------------------ Void Eater: a curse into the monster deck
@@ -315,12 +346,42 @@ namespace FrosthavenMods
                 .Where(a => a?.ActionData != null && a.ActionData.AbilityType == CAbility.EAbilityType.Summon && a.ActionData.CardType == CBaseCard.ECardType.CharacterAbility
                             && a.ActionData.CardID >= 33501 && a.ActionData.CardID <= 33531);
 
+        // Mastery 1: "before your first rest". The engine's turn stats never mark a rest (CPlayerStatsStartTurn/EndTurn are
+        // built with mainActorResting: false), so the round of the Soultether's first rest is noted here, from the rule
+        // library's own rest calls, in a hidden character resource saved with the scenario (a reload keeps it). In this
+        // engine both rests happen in the round they are taken before that round's actions (short rest: its own phase
+        // after card selection; long rest: the resting figure's turn at initiative 99, no other action that round), so
+        // "before the first rest" = a summon performed in an EARLIER round.
+        internal const string FirstRestResource = "GH2EFirstRestRound";
+
+        [HarmonyPatch(typeof(GameState), nameof(GameState.PlayerLongRested))]
+        [HarmonyPostfix]
+        private static void LongRested(CPlayerActor playerActor) => NoteRest(playerActor ?? GameState.InternalCurrentActor as CPlayerActor, "long rest");
+
+        [HarmonyPatch(typeof(GameState), nameof(GameState.PlayerShortRested))]
+        [HarmonyPostfix]
+        private static void ShortRested(CPlayerActor playerActor) => NoteRest(playerActor, "short rest");
+
+        private static void NoteRest(CPlayerActor p, string how)
+        {
+            try
+            {
+                if (!IsSoul(p) || p.GetCharacterResourceAmount(FirstRestResource) > 0) return;
+                int round = ScenarioManager.CurrentScenarioState?.RoundNumber ?? 0;
+                if (round <= 0 || ScenarioRuleClient.SRLYML?.CharacterResources?.Any(r => r.ID == FirstRestResource) != true) return;
+                p.AddCharacterResource(FirstRestResource, round);
+                Rule("SummonCardsKept", 0, $"mastery: {GHPlague.NameOf(p)}'s first rest ({how}) in round {round}: summon actions from round {round} on no longer count");
+            }
+            catch (Exception e) { Report("first rest", e); }
+        }
+
         private static void Kept(int needed, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
         {
-            int firstRest = stats.SelectMany(s => s.StartTurn ?? Enumerable.Empty<CPlayerStatsStartTurn>()).Concat<CPlayerStatsAction>(stats.SelectMany(s => s.EndTurn ?? Enumerable.Empty<CPlayerStatsEndTurn>()))
-                .Where(x => x?.ActionData != null && x.ActionData.MainActorResting).Select(x => x.Round).DefaultIfEmpty(int.MaxValue).Min();
+            CScenario sc = ScenarioManager.Scenario;
+            CPlayerActor soul = sc?.PlayerActors?.Concat(sc.ExhaustedPlayers ?? new List<CPlayerActor>()).FirstOrDefault(p => IsSoul(p));
+            int restRound = soul?.GetCharacterResourceAmount(FirstRestResource) ?? 0;
+            int firstRest = restRound > 0 ? restRound : int.MaxValue;
             var cards = new HashSet<int>(SummonRecords(stats).Where(a => a.Round < firstRest).Select(a => a.ActionData.CardID));
-            CPlayerActor soul = ScenarioManager.Scenario?.PlayerActors?.FirstOrDefault(p => IsSoul(p));
             var active = new HashSet<int>((soul?.CharacterClass?.ActivatedAbilityCards ?? new List<CAbilityCard>()).Where(c => c != null).Select(c => c.ID));
             int kept = cards.Count(active.Contains);
             total = needed;
@@ -339,31 +400,95 @@ namespace FrosthavenMods
             return set;
         }
 
-        /// <summary>The career list saved for the party's Soultether (any character of the class: a party has one).</summary>
-        private static HashSet<string> Saved(CampaignState state, string characterGuid)
+        // Mastery 2: "six different summon abilities ... over the first rounds of six scenarios" (user decision 2026-11-02:
+        // it counts SCENARIOS; two summons in one first round count once). The career record keeps, per character, one
+        // entry per scenario (its id) with that scenario's round-1 summon abilities:
+        //   "FHMODS:Soul2R1S:<character id>=<scenario id>~<card/ability>|<card/ability>;<scenario id>~..."
+        // The mastery is met when Value scenarios can each be paired with a DIFFERENT summon ability of their own first
+        // round (a bipartite matching, so a scenario whose only summon was already counted elsewhere adds nothing).
+        // A replay of the same scenario merges into its entry (Elementalist mastery 2's "different scenarios" precedent).
+        // The older flat list ("FHMODS:Soul2R1:<id>=a,b,..."; no scenario grouping) is read as ONE scenario.
+        private const string ScenarioMarker = "FHMODS:Soul2R1S:";
+
+        private static Dictionary<string, HashSet<string>> Saved(CampaignState state, string characterId)
         {
-            var set = new HashSet<string>();
-            if (state?.LootedChestTreasureTableIDs == null) return set;
-            foreach (string s in state.LootedChestTreasureTableIDs.Where(x => x != null && x.StartsWith(CareerMarker, StringComparison.Ordinal)))
+            var map = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
+            if (state?.LootedChestTreasureTableIDs == null || characterId == null) return map;
+            foreach (string s in state.LootedChestTreasureTableIDs.Where(x => x != null))
             {
                 int eq = s.IndexOf('=');
                 if (eq < 0) continue;
-                if (characterGuid != null && s.Substring(CareerMarker.Length, eq - CareerMarker.Length) != characterGuid) continue;
-                foreach (string k in s.Substring(eq + 1).Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)) set.Add(k);
+                if (s.StartsWith(ScenarioMarker, StringComparison.Ordinal) && s.Substring(ScenarioMarker.Length, eq - ScenarioMarker.Length) == characterId)
+                {
+                    foreach (string entry in s.Substring(eq + 1).Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        int t = entry.IndexOf('~');
+                        if (t <= 0) continue;
+                        string scen = entry.Substring(0, t);
+                        if (!map.TryGetValue(scen, out var set)) map[scen] = set = new HashSet<string>(StringComparer.Ordinal);
+                        set.UnionWith(entry.Substring(t + 1).Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries));
+                    }
+                }
+                else if (s.StartsWith(CareerMarker, StringComparison.Ordinal) && s.Substring(CareerMarker.Length, eq - CareerMarker.Length) == characterId)
+                {
+                    var old = new HashSet<string>(s.Substring(eq + 1).Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries), StringComparer.Ordinal);
+                    if (old.Count > 0) map["(older list)"] = old;
+                }
             }
-            return set;
+            return map;
+        }
+
+        /// <summary>The most scenarios that can each be given a different summon ability of their own first round.</summary>
+        private static int Matched(Dictionary<string, HashSet<string>> scenarios)
+        {
+            var owner = new Dictionary<string, string>(StringComparer.Ordinal);   // ability -> scenario using it
+            int count = 0;
+            foreach (string scen in scenarios.Keys)
+                if (Augment(scen, scenarios, owner, new HashSet<string>(StringComparer.Ordinal))) count++;
+            return count;
+        }
+
+        private static bool Augment(string scen, Dictionary<string, HashSet<string>> scenarios, Dictionary<string, string> owner, HashSet<string> seen)
+        {
+            foreach (string ab in scenarios[scen])
+            {
+                if (!seen.Add(ab)) continue;
+                if (!owner.TryGetValue(ab, out string other) || Augment(other, scenarios, owner, seen))
+                {
+                    owner[ab] = scen;
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static CampaignState _lastCampaign;
+        // the round-1 set seen by the mastery check (from the saved stats: reload-safe), kept for the career save at the
+        // scenario's end in case the scenario state object has changed by then
+        private static HashSet<string> _snapshot;
+
+        private static string CharacterIdOf(CampaignState state) =>
+            state?.PartyCharacters?.FirstOrDefault(p => p?.ClassDef?.ID.ID == Soul)?.ID.ID.ToString();
+
+        private static string ScenarioKey() => (ScenarioManager.CurrentScenarioState?.ID ?? "?").Replace(";", "_").Replace("~", "_").Replace("|", "_").Replace("=", "_");
 
         private static void Career(int needed, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
         {
-            var all = new HashSet<string>(Saved(GHClassesRule.LiveState ?? _lastCampaign, null));
-            all.UnionWith(CurrentFirstRound(stats));
+            CampaignState state = GHClassesRule.LiveState ?? _lastCampaign;
+            var all = Saved(state, CharacterIdOf(state));
+            HashSet<string> now = CurrentFirstRound(stats);
+            _snapshot = new HashSet<string>(now, StringComparer.Ordinal);
+            string key = ScenarioKey();
+            if (now.Count > 0)
+            {
+                if (!all.TryGetValue(key, out var set)) all[key] = set = new HashSet<string>(StringComparer.Ordinal);
+                set.UnionWith(now);
+            }
+            int n = Matched(all);
             total = needed;
-            met = Math.Min(all.Count, needed);
-            result = all.Count >= needed;
-            Plugin.Log.LogInfo($"GHRule FirstRoundSummons card 0 mastery: {all.Count} different round-1 summon abilities over the campaign (needs {needed}){(result ? ": met" : "")}");
+            met = Math.Min(n, needed);
+            result = n >= needed;
+            Plugin.Log.LogInfo($"GHRule FirstRoundSummons card 0 mastery: {n} scenarios with a different round-1 summon ability ({all.Count} scenarios with round-1 summons, this one {now.Count}; needs {needed}){(result ? ": met" : "")}");
         }
 
         [HarmonyPatch(typeof(ScenarioController), nameof(ScenarioController.CompleteActiveScenario))]
@@ -375,18 +500,28 @@ namespace FrosthavenMods
                 CampaignState state = __instance?.CampaignController?.State;
                 _lastCampaign = state;
                 if (state == null || result == null || result.isRestarting) return;
+                var now = new HashSet<string>(CurrentFirstRound(null), StringComparer.Ordinal);
+                if (_snapshot != null) now.UnionWith(_snapshot);
+                _snapshot = null;
+                string key = ScenarioKey();
                 foreach (ScenarioResult.CharacterResult r in result.Characters)
                 {
                     if (r.Character?.ID.ID != Soul) continue;
                     CharacterState c = state.PartyCharacters.FirstOrDefault(p => p.ClassDef == r.Character);
                     if (c == null) continue;
-                    string prefix = CareerMarker + c.ID.ID + "=";
-                    var set = Saved(state, c.ID.ID.ToString());
-                    int before = set.Count;
-                    set.UnionWith(CurrentFirstRound(null));
-                    state.LootedChestTreasureTableIDs.RemoveAll(s => s != null && s.StartsWith(prefix, StringComparison.Ordinal));
-                    state.LootedChestTreasureTableIDs.Add(prefix + string.Join(",", set.OrderBy(s => s, StringComparer.Ordinal)));
-                    Rule("FirstRoundSummons", 0, $"mastery: career list of round-1 summon abilities {before} -> {set.Count}");
+                    string id = c.ID.ID.ToString();
+                    var map = Saved(state, id);
+                    int before = Matched(map);
+                    if (now.Count > 0)
+                    {
+                        if (!map.TryGetValue(key, out var set)) map[key] = set = new HashSet<string>(StringComparer.Ordinal);
+                        set.UnionWith(now);
+                    }
+                    state.LootedChestTreasureTableIDs.RemoveAll(s => s != null && (s.StartsWith(ScenarioMarker + id + "=", StringComparison.Ordinal)
+                                                                                    || s.StartsWith(CareerMarker + id + "=", StringComparison.Ordinal)));
+                    state.LootedChestTreasureTableIDs.Add(ScenarioMarker + id + "=" + string.Join(";",
+                        map.OrderBy(kv => kv.Key, StringComparer.Ordinal).Select(kv => kv.Key + "~" + string.Join("|", kv.Value.OrderBy(x => x, StringComparer.Ordinal)))));
+                    Rule("FirstRoundSummons", 0, $"mastery: career record: scenario {key} round-1 summon abilities {(now.Count == 0 ? "none" : string.Join(", ", now))}; counted scenarios {before} -> {Matched(map)}");
                 }
             }
             catch (Exception e) { Report("career save", e); }
@@ -399,6 +534,9 @@ namespace FrosthavenMods
             ["FHMODS_SOUL_GRANT"] = "You control the grant abilities of your {0}: give it to {1}?",
             ["FHMODS_SOUL_GRANT_YES"] = "This ally",
             ["FHMODS_SOUL_GRANT_NO"] = "Next ally",
+            ["FHMODS_SOUL_SLIMEHEX"] = "Oozing Manifestation: summon the second Slime Spirit in the highlighted hex? (empty adjacent hex {0} of {1})",
+            ["FHMODS_SOUL_SLIMEHEX_YES"] = "This hex",
+            ["FHMODS_SOUL_SLIMEHEX_NO"] = "Next hex",
         };
 
         [HarmonyPatch(typeof(GLOOM.LocalizationManager), nameof(GLOOM.LocalizationManager.GetTranslation))]

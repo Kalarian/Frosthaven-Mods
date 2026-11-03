@@ -418,7 +418,7 @@ def printed_vs_shipped(pack, problems, warnings):
             problems.append(f"{where}: {half}: printed vs shipped: {text}")
         if d.get("Initiative") != c["initiative"]:
             problem("card", "initiative", f"initiative printed {c['initiative']}, shipped {d.get('Initiative')}")
-        lvl = str(c["level"]) if str(c["level"]).isdigit() else "X"
+        lvl = str(c["level"]) if str(c["level"]).isdigit() or str(c["level"]) == "M" else "X"
         if str(d.get("Level")) != lvl:
             problem("card", "level", f"level printed {c['level']}, shipped {d.get('Level')}")
         discard = d.get("Discard") or []

@@ -35,6 +35,12 @@ Data:
             TCEarth:
                 MiscVars:
                     GHElementEither: True
+                # no Bear on the map (dead, or not summoned yet): the consume isn't offered (Unbreakable Bond top's
+                # ValidateBear), and the tile test below is null-safe (the Lick Wounds crash shape, re-audit 2026-11-02)
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateBear: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID") != null
                 Consume:
                     Elements: [Earth]
                     Abilities:
@@ -43,13 +49,23 @@ Data:
                             Filter: Self
                             Vars:
                                 Bear: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID")
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateBear: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID") != null
                             MiscVars:
-                                IsValidTeleportTile: Bear.GetDistanceTo(tile) == 1
+                                IsValidTeleportTile: Bear != null && Bear.GetDistanceTo(tile) == 1
                             AnimOverload: Teleport Into
                             AnimOverload2: Teleport Outof
             TCAir:
                 MiscVars:
                     GHElementEither: True
+                # no Bear on the map (dead, or not summoned yet): the consume isn't offered (Unbreakable Bond top's
+                # ValidateBear), and the tile test below is null-safe (the Lick Wounds crash shape, re-audit 2026-11-02)
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateBear: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID") != null
                 Consume:
                     Elements: [Air]
                     Abilities:
@@ -58,8 +74,12 @@ Data:
                             Filter: Self
                             Vars:
                                 Bear: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID")
+                            StartAbilityRequirements:
+                                Type: ThisAbility
+                                Vars:
+                                    ValidateBear: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID") != null
                             MiscVars:
-                                IsValidTeleportTile: Bear.GetDistanceTo(tile) == 1
+                                IsValidTeleportTile: Bear != null && Bear.GetDistanceTo(tile) == 1
                             AnimOverload: Teleport Into
                             AnimOverload2: Teleport Outof
             TAlly2:

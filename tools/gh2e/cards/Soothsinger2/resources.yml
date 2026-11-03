@@ -11,3 +11,27 @@ SoothsingerLowNote:
     Sprite: "Positive_Resonance"
     LocKey: "GH2E_Soothsinger2_LOWNOTE_TOOLTIP"
     MaxAmount: 2
+GH2ESongsSung:
+    # pack-wide: hidden bit mask of the different Songs the Soothsinger performed this scenario (bit = card ID - 33400;
+    # mastery Medley, GHSoothsinger.cs); saved with the scenario, never shown.
+    ID: "GH2ESongsSung"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_Soothsinger2_HIDDEN_TOOLTIP"
+    MaxAmount: 2147483647
+    Hidden: True
+GH2ENotesMade:
+    # pack-wide: hidden count of the Notes the Soothsinger created this scenario (mastery Perfect Pitch,
+    # GHSoothsinger.cs); saved with the scenario, never shown.
+    ID: "GH2ENotesMade"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_Soothsinger2_HIDDEN_TOOLTIP"
+    MaxAmount: 9999
+    Hidden: True
+GH2ENotesWasted:
+    # pack-wide: hidden count of the Notes a Song removed without using them this scenario (mastery Perfect Pitch,
+    # GHSoothsinger.cs); saved with the scenario, never shown.
+    ID: "GH2ENotesWasted"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_Soothsinger2_HIDDEN_TOOLTIP"
+    MaxAmount: 9999
+    Hidden: True

@@ -126,3 +126,6 @@ problems / 2 warnings (SelectAndPlayCard, above), rulecheck 42 ok, no gh_port wa
   back to hand when her short rest starts ("GHRule EthericBond"; 2nd edition only, the 1st edition perk still has none).
 - Mastery FireAndIceSameTurn written (Spellweaver2_MASTERY_2: the printed mastery 1, listed second so the shipped ID
   of Deep Reserves stays).
+- Re-audit fixes (2026-11-02, fix-reaudit-B): Etheric Echo bottom gives Ward as the first ability of her next lost action
+  STARTS (GHSpellweaver2e.WardAtLostStart, then the bonus ends; "GHRule EthericEcho"). Etheric Bond acts only on the
+  rule library's own short-rest message (worker thread), not on the copy the UI builds online.

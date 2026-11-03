@@ -97,7 +97,7 @@ Range, Target, Shield, Retaliate or Push is written as `SquareEnhancements`; the
 | Rock Colossus | RockColossus2ID | RockColossus | Muddle, Retaliate 2; Heal 1 self at end of turn (`SpecialAbilities`); +1 to incoming heals (Voice from Below's `BuffIncomingHeal`, persistent) |
 | Slime Spirit | SlimeSpirit2ID | SlimeSpirit | Poison; first lethal damage negated once (Metal Mosaic perk 10, one-slot). The second Slime Spirit it should summon: **NEEDS PLUGIN** |
 | Void Eater | VoidEater2ID | VoidEater | kill while Dark strong/waning: you Curse one enemy of your choice (monsters share one modifier deck) via `DuringActionAbilityOnKill` (Drifter Fortitude, killer checked by class). Unverified |
-| Fey Subjugator | FeySubjugatorID | **HealingSprite** (stand-in: the 1st edition Summoner's sprite) | Flying, range 4; after attacking a normal/elite enemy, that enemy performs Attack -1 (melee) = control sub-ability on the summon's attack target (`AttackOverride`, `UseParentTargets`, driven by the summon's owner, `ControlActorType Player`: rulebook p33, the commanding figure decides). Unverified |
+| Fey Subjugator | FeySubjugatorID | **HealingSprite** (stand-in: the 1st edition Summoner's sprite) | Flying, range 4; after attacking a normal/elite enemy, that enemy performs Attack -1 at its own range (decision C; Range 0 without RangeIsBase) = control sub-ability on the summon's attack target (`AttackOverride`, `UseParentTargets`, driven by the summon's owner, `ControlActorType Player`: rulebook p33, the commanding figure decides). Unverified |
 | Prismatic Unicorn | PrismaticUnicornID | BlackUnicorn | Pierce 2; end of turn infuse Fire/Air/Dark with the element picker (`SpecialAbilities`). Unverified who picks |
 
 The sheet's "Rift Spirit Move 2", "Jellyfish Move 1 / Attack 3", "Ember Sprite Move 3 / Attack 1 / Range 3", "Unicorn
@@ -159,3 +159,10 @@ Plugin GHSoultether.cs (each rule logs "GHRule <Name> card <id>"):
 - Void Eater: the curse goes straight into the monster modifier deck (GH2E_CurseMonsterDeck).
 - Masteries: FrosthavenMods_SummonCardsKeptBeforeRest and FrosthavenMods_FirstRoundSummonsAcrossScenarios (career list
   in the campaign save, LootedChestTreasureTableIDs marker "FHMODS:Soul2R1:<character>=...").
+- Re-audit fixes (2026-11-02, fix-reaudit-B; supersede NEEDS PLUGIN lines above where they differ): the Covetous Imp's kill
+  sets the victim's NoGoldDrop (no token in the hex; one loot draw for the summoner). Fey Subjugator's controlled enemy
+  attacks at its own range (decision C). The Slime Spirit's split hex is picked by the summoner (each candidate
+  highlighted, yes/no). Bound Legion: the first rest round is the hidden resource GH2EFirstRestRound (from the engine's
+  rest calls); summons in earlier rounds count. Planar Conclave counts SCENARIOS (user decision): per character, one
+  entry per scenario id with its round-1 summon abilities ("FHMODS:Soul2R1S:<id>=..."), met when 6 scenarios can each
+  be paired with a different summon ability.

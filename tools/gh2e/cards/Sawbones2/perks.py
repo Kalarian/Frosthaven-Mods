@@ -14,10 +14,10 @@ PERKS = [
      {"CardsToRemove": "[AMC_Basic_M2]", "CardsToAdd": "[AMC_GH2E_Sawbones2_Pack_M2]"}),
     (3, "Precise Incisions", 'Replace one <sprite name="-1"> with one <sprite name="+1">',
      {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Basic_P1]"}),
-    # "you may gain Disarm to add Stun": a Choose on the modifier (one option: Stun the target, Disarm you), which the
-    # player may skip (NEW_CARDS, NOTES.md)
+    # "you may gain Disarm to add Stun": the plugin asks when the card is used in an attack (GHSawbones2e.Sedation;
+    # NEW_CARDS, NOTES.md)
     (2, "Sedation", 'Replace two <sprite name="0"> with one <sprite name="+1"> "You may gain <sprite name=Disarm> to add <sprite name=Stun>"',
-     {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P0]", "CardsToAdd": "[AMC_Basic_P1]"}),
+     {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P0]", "CardsToAdd": "[AMC_GH2E_Sawbones2_DisarmStun_P1]"}),
     # the conditional +1 Attack: the plugin turns the card's +1 into +2 while an ally holds an active Prescription
     # (GHModifierRewrites.cs, 2026-11-02)
     (2, "Follow-up Care", 'Add two <sprite name="+1"> "Add +1 <sprite name=Attack> if an ally has an active Prescription"',
@@ -30,7 +30,7 @@ PERKS = [
     # the FAQ (Devout): "works just as normal for the Temple, once it is built": in each outpost phase one Temple of the
     # Great Oak blessing for you or an ally costs no gold (Frosthaven's blessing cost; no refunds). Plugin GHSawbones2e
     # (perk ID Sawbones208)
-    (1, "Friend of the Oak", "Each City Phase after completing a scenario, your or one ally's donation to the Sanctuary of the Great Oak is free",
+    (1, "Friend of the Oak", "Each City Phase after completing a scenario, your or one ally's donation to the Sanctuary of the Great Oak is free (Frosthaven: one Temple blessing each outpost phase costs no gold)",
      {"Cost": 2, "Flags": "[Passive]"}),
     # after each of your rests (long and short), if an ally holds an active Prescription: you gain one Medical Pack (the
     # Sawbones gives it to herself, so the pack comes from her own supply), then she may move the token on one ally's
@@ -105,43 +105,22 @@ Abilities:
             ActorType: Player
         AnimOverload: GivePackAdjacent
 """,
-    # "You may gain Disarm to add Stun": the option is Stun on the attack's target (a NullTargeting with the condition,
-    # aimed at the target as Frosthaven's Boneshaper Exploding Corpse aims a sub-ability: AddValidActorInRange +
-    # AddActorToTarget), then Disarm on you (a self NullTargeting sub-ability, as Banner Spear Boldening Blow's Bless).
-    # The Choose is skipped when the attack killed the target.
+    # "You may gain Disarm to add Stun": a +1 whose one ability is only a marker (a self NullTargeting with Disarm). A
+    # Choose on a modifier stopped the game ("Invalid targeting type", 2026-11-01), so the plugin (GHSawbones2e.Sedation)
+    # takes the marker out before the engine runs the card's abilities and asks the drawer: yes = the target gains Stun
+    # and the Sawbones gains Disarm; no = nothing (only a card used in the attack gets there).
     "AMC_GH2E_Sawbones2_DisarmStun_P1": """\
 MathModifier: "+1"
 Abilities:
-    AChooseSedate:
+    ASedation:
+        NullTargeting: True
+        Conditions: [Disarm]
         Filter: Self
         CanUndo: False
+        AutoTrigger: True
         HelpBoxTooltipLocKey: "GH2E_Sawbones2_SEDATION_HELP"
-        PreviewEffectText: "<sprite name=Disarm> > <sprite name=Stun>"
-        Vars:
-            ValidateTargetAlive: TargetActor != null && TargetActor.IsDead == False
-        Choose:
-            Abilities:
-                AStun:
-                    NullTargeting: True
-                    Conditions: [Stun]
-                    CanUndo: False
-                    AutoTrigger: True
-                    PreviewEffectText: "<sprite name=Disarm> > <sprite name=Stun>"
-                    Filter: Enemy
-                    Targeting: Custom
-                    TargetingVars:
-                        AddValidActorInRange: TargetActor
-                        AddActorToTarget: TargetActor
-                    MiscVars:
-                        IsNegative: True
-                    SubAbilities:
-                        ADisarmSelf:
-                            NullTargeting: True
-                            Conditions: [Disarm]
-                            Filter: Self
-                            AutoTrigger: True
-                            TreatAsNonSubAbility: True
-                            AnimOverload: SelfDebuff
+        MiscVars:
+            GH2E_Sedation: True
 """,
     # Follow-up Care: a +1 the plugin reads as +2 while an ally has an active Prescription (GHModifierRewrites.cs)
     "AMC_GH2E_Sawbones2_FollowUp_P1": 'MathModifier: "+1"' + chr(10),

@@ -117,6 +117,18 @@ namespace FrosthavenMods
             BearAttackedRound.Clear();
             CommandKillValues.Clear();
             PendingValue.Clear();
+            CountedKills.Clear();
+        }
+
+        // the mastery's qualifying kills (value 7+ before modifiers, the mastery's Amount) are also kept in a hidden
+        // character resource on the Wildfury, saved with the scenario: a reload or a co-op rejoin keeps them
+        internal const string Kills7Res = "GH2ECommandKills7";
+        private const int MasteryValue = 7;
+
+        private static CPlayerActor Wildfury()
+        {
+            CScenario sc = ScenarioManager.Scenario;
+            return sc?.PlayerActors?.Concat(sc.ExhaustedPlayers ?? new List<CPlayerActor>()).FirstOrDefault(p => p?.Class?.ID == ClassId);
         }
 
         // ------------------------------------------------------------------ Invocation of Spirit top: the Wildfury attacks from the Bear's hex
@@ -354,7 +366,10 @@ namespace FrosthavenMods
                 string key = attack.ID + " " + t.ActorGuid;
                 if (!PendingValue.TryGetValue(key, out int value) || !CountedKills.Add(key)) continue;
                 CommandKillValues.Add(value);
-                Log("CommandKills", CardId(attack), $"{GHPlague.NameOf(t)} killed by a commanded Bear attack of {value} before modifiers ({CommandKillValues.Count(v => v >= 7)} at 7+ this scenario)");
+                CPlayerActor her = (attack.TargetingActor as CHeroSummonActor)?.Summoner as CPlayerActor ?? Wildfury();
+                if (value >= MasteryValue && her != null && ScenarioRuleClient.SRLYML?.CharacterResources?.Any(r => r.ID == Kills7Res) == true)
+                    her.AddCharacterResource(Kills7Res, 1);
+                Log("CommandKills", CardId(attack), $"{GHPlague.NameOf(t)} killed by a commanded Bear attack of {value} before modifiers ({her?.GetCharacterResourceAmount(Kills7Res) ?? CommandKillValues.Count(v => v >= MasteryValue)} at 7+ this scenario, saved)");
             }
         }
 
@@ -363,6 +378,7 @@ namespace FrosthavenMods
         internal static int CommandKillsAtValue(int amount)
         {
             NewScenarioCheck();
+            if (amount == MasteryValue && Wildfury() is CPlayerActor her) return her.GetCharacterResourceAmount(Kills7Res);
             return CommandKillValues.Count(v => v >= amount);
         }
 
@@ -504,6 +520,14 @@ namespace FrosthavenMods
             try
             {
                 if (!Marked(__instance, "GHLifeBond") || !(__instance.TargetingActor is CPlayerActor her)) return;
+                if (her.Health <= 1)
+                {
+                    // X must be at least 1 and she can't go below 1 hit point: nothing can be paid (the perk's requirement
+                    // keeps it from being offered at 1 hit point; this is the safety net)
+                    her.SetTempVar("GHLifeBondX", new TValue(0));
+                    Log("LifeBond", 0, $"Life Bond: {GHPlague.NameOf(her)} has 1 hit point: X can't be paid, no heal");
+                    return;
+                }
                 int max = Math.Max(1, her.Health - 1);
                 int x = 1;
                 while (x < max && GHPlague.Ask(her, false, "FHMODS_WF_LIFEBOND", "FHMODS_WF_LIFEBOND_MORE", "FHMODS_WF_LIFEBOND_DONE", x, x + 1, her.Health))

@@ -72,8 +72,8 @@ Engine facts used (read in the decompiled `ScenarioRuleLibrary.dll`, game build 
   (Deepwraith Morbid Camouflage shape; Xipe's self-Invisible override couldn't work). Bottom Poison all adjacent
   as a condition ability (Xipe: Attack 0).
 - **26 Crippling Poison**: two persistent bonuses (Poison on all attacks; +1 on poisoned targets), XP 2, lost.
-  Note Frosthaven takes only the **largest** untyped attack bonus per target (`Math.Max` in CAttackSummary), so this +1
-  does not stack with e.g. Single Out's +3 - an engine rule for every class, not changed here.
+  This +1 adds to e.g. Single Out's +3 (re-audit 2026-11-02: CAttackSummary folds with `Math.Max` only bonuses with
+  the explicit AttackType Default, "your default attack"; these have none, so they already add, house rule or not).
 - **27 Hired Help**: Frosthaven's own `ChangeAllegiance: ChangeToType: Ally` (scenario 119's Infuser conversion) on
   an adjacent normal enemy: a real permanent ally monster acting on its own. Offered only while she holds a money
   token; the plugin takes one (GHMoneyLose) and puts her character token on it (resource `SilentKnifeHiredHelp`);
@@ -135,3 +135,7 @@ None left from this list (built in GHSilentKnife.cs).
 0 problems, 0 warnings; rulecheck 40 ok; no missing text keys; no gh_port warnings). Untested in game: the composites
 marked above (Flintlock bottom, Gruesome Advantage bottom, Stiletto Storm top, Visage top Invisible, Hired Help top,
 Trickster's Reversal top, Spring the Trap bottom, Watch it Burn top) want a bench run first.
+- Re-audit fixes (2026-11-02, fix-reaudit-B): Dance of Daggers top's round ImmunityTo carries GH2E_AttackEffectsOnly: the
+  plugin leaves it out of every immunity check that isn't an attack on her (conditions put on by a non-attack ability,
+  traps, her own effects land). Mastery 1's counts are the hidden resources GH2EFlankAttacks / GH2EFlankBad (saved with
+  the scenario). Spring the Trap's designation is used once and forgotten; with none, no trap can be relocated.

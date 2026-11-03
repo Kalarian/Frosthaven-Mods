@@ -11,12 +11,15 @@ namespace FrosthavenMods
     /// <summary>
     /// House rule "Stacking attack bonuses" (on by default): every bonus that applies to an attack adds up, the physical
     /// game's rule (rulebook p.25). The engine builds each target's attack numbers in CAttackSummary.TargetSummary's
-    /// constructor: active bonuses with a melee/ranged AttackType are each added, but the default-type ones (a plain
-    /// "+X Attack", the most common kind) are folded with Math.Max, so only the largest counts (Single Out +3 with
-    /// Crippling Poison +1 gave +3, Enhancement Field top and bottom together +1). With the rule on, that one Math.Max
-    /// call adds the positive strengths instead; negative ones stay ignored, as the engine's fold from 0 ignores them.
-    /// Every card is covered, Frosthaven's own included (the user's decision A6, 2026-11-02).
-    /// Logs "GHRule StackingAttackBonuses" when the sum differs from the old maximum.
+    /// constructor: every active bonus whose ActiveBonusData.AttackType is NOT the explicit value Default is added on
+    /// its own (ActiveBonusStrengthBuffs; a bonus with no AttackType is None and adds); only the Default-typed ones
+    /// ("your default attack", CActiveBonus.IsValidAttackType: attackAbility.IsDefaultAttack) are folded with Math.Max,
+    /// so only the largest of THOSE counts. Of Frosthaven's data only three items set AttackType Default, and only one is
+    /// an attack bonus (1155 Versatile Dagger; 1133/1167 are move bonuses); no pack card sets it (re-audit 2026-11-02:
+    /// Enhancement Field's two +1s and Single Out + Crippling Poison already add without this rule). With the rule on,
+    /// that one Math.Max call adds the positive strengths instead; negative ones stay ignored, as the engine's fold from
+    /// 0 ignores them. In practice the result changes only when two Default-typed attack bonuses reach one attack.
+    /// Logs "GHRule StackingAttackBonuses" exactly when the rule changes a result (the sum differs from the maximum).
     /// </summary>
     [HarmonyPatch]
     internal static class StackingAttackBonuses

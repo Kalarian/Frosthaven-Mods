@@ -158,6 +158,71 @@ namespace FrosthavenMods
             catch (Exception e) { Report("Gruesome Advantage", e); return true; }
         }
 
+        // ================================================================ Dance of Daggers top: only the attacks' added effects
+
+        // "Negate the damage and added effects of all attacks targeting you this round": the card's round ImmunityTo
+        // (conditions, push, pull) carries MiscVars GH2E_AttackEffectsOnly. The engine asks for ImmunityTo bonuses in two
+        // places (CAbility.ImmuneToAbility for a condition/push/pull ability, CActor.ApplyCondition for a condition put on
+        // directly), both through CActiveBonus.FindApplicableActiveBonuses: such a bonus is left out of the answer unless
+        // the effect comes from an attack on that figure (the attack's own ProcessNegativeStatusEffects on it, or an
+        // ability whose parent chain holds an attack, e.g. the attack's push/pull or a modifier's sub-ability).
+        internal const int DanceOfDaggers = 32321;
+        [ThreadStatic] private static CActor s_AttackedBy;      // the target of the attack whose added effects resolve now
+        [ThreadStatic] private static CAbility s_Checking;      // the ability CAbility.ImmuneToAbility is asking about
+
+        private static bool FromAttack(CAbility a)
+        {
+            for (int i = 0; a != null && i < 8; i++, a = a.ParentAbility)
+                if (a is CAbilityAttack) return true;
+            return false;
+        }
+
+        [HarmonyPatch(typeof(CAbility), nameof(CAbility.ProcessNegativeStatusEffects))]
+        [HarmonyPrefix]
+        private static void EffectsStart(CAbility __instance, CActor target, out CActor __state)
+        {
+            __state = s_AttackedBy;
+            if (__instance is CAbilityAttack) s_AttackedBy = target;
+        }
+
+        [HarmonyPatch(typeof(CAbility), nameof(CAbility.ProcessNegativeStatusEffects))]
+        [HarmonyFinalizer]
+        private static Exception EffectsEnd(Exception __exception, CActor __state) { s_AttackedBy = __state; return __exception; }
+
+        [HarmonyPatch(typeof(CAbility), nameof(CAbility.ImmuneToAbility))]
+        [HarmonyPrefix]
+        private static void ImmuneStart(CAbility ability, out CAbility __state) { __state = s_Checking; s_Checking = ability; }
+
+        [HarmonyPatch(typeof(CAbility), nameof(CAbility.ImmuneToAbility))]
+        [HarmonyFinalizer]
+        private static Exception ImmuneEnd(Exception __exception, CAbility __state) { s_Checking = __state; return __exception; }
+
+        [HarmonyPatch(typeof(CActiveBonus), nameof(CActiveBonus.FindApplicableActiveBonuses), new[] { typeof(CActor), typeof(CAbility.EAbilityType), typeof(CActiveBonus.EActiveBonusBehaviourType), typeof(bool) })]
+        [HarmonyPostfix]
+        private static void OnlyAttackEffects(CActor actor, CAbility.EAbilityType type, ref List<CActiveBonus> __result)
+        {
+            try
+            {
+                if (type != CAbility.EAbilityType.ImmunityTo || __result == null || __result.Count == 0 || !IsKnife(actor)) return;
+                if (!__result.Any(b => b?.BaseCard?.ID == DanceOfDaggers && GHPlague.Marked(b.Ability, "GH2E_AttackEffectsOnly"))) return;
+                bool attack = ReferenceEquals(s_AttackedBy, actor) || FromAttack(s_Checking);
+                if (attack)
+                {
+                    string key = s_Checking?.ID.ToString() ?? "direct";
+                    if (DanceLogged.Add(key))
+                    {
+                        if (DanceLogged.Count > 300) { DanceLogged.Clear(); DanceLogged.Add(key); }
+                        Plugin.Log.LogInfo($"GHRule DanceOfDaggers card {DanceOfDaggers} {Name(actor)}: an attack's added effect ({s_Checking?.AbilityType.ToString() ?? "condition"}) is negated");
+                    }
+                    return;
+                }
+                __result = __result.Where(b => !(b?.BaseCard?.ID == DanceOfDaggers && GHPlague.Marked(b.Ability, "GH2E_AttackEffectsOnly"))).ToList();
+            }
+            catch (Exception e) { Report("Dance of Daggers", e); }
+        }
+
+        private static readonly HashSet<string> DanceLogged = new HashSet<string>();
+
         // ================================================================ Spring the Trap bottom
 
         private static readonly Dictionary<string, List<CTile>> Designated = new Dictionary<string, List<CTile>>();
@@ -191,7 +256,11 @@ namespace FrosthavenMods
             try
             {
                 if (!GHPlague.Marked(__instance, "GHMoveTrapOntoEnemy") || __instance.TargetingActor == null) return;
-                if (!Designated.TryGetValue(__instance.TargetingActor.ActorGuid, out List<CTile> traps)) return;
+                // this action's designation only: used once, then forgotten; with none (the move's Start never ran) no
+                // trap is designated, so none can be relocated (never a stale list from an earlier play)
+                string guid = __instance.TargetingActor.ActorGuid ?? "";
+                if (!Designated.TryGetValue(guid, out List<CTile> traps)) traps = new List<CTile>();
+                Designated.Remove(guid);
                 __instance.TilesInRange.RemoveAll(t => !traps.Contains(t));
                 OriginalTrapTiles(__instance)?.RemoveAll(t => !traps.Contains(t));
                 Plugin.Log.LogInfo($"GHRule SpringTheTrap card {SpringTheTrap} relocate: {__instance.TilesInRange.Count} designated trap(s) still on the map");
@@ -355,21 +424,25 @@ namespace FrosthavenMods
 
         // ================================================================ Mastery 1: only flanked or isolated targets
 
-        private static object s_FlankScenario;
-        private static int s_FlankAttacks, s_FlankBad;
+        // the counts are hidden character resources on the Silent Knife, saved with the scenario: a reload or a co-op
+        // rejoin keeps them, a rewind rolls them back with the state
+        internal const string FlankAttacksRes = "GH2EFlankAttacks", FlankBadRes = "GH2EFlankBad";
+
+        private static void AddRes(CActor a, string id)
+        {
+            if (ScenarioRuleClient.SRLYML?.CharacterResources?.Any(r => r.ID == id) == true) a.AddCharacterResource(id, 1);
+        }
 
         private static void NoteFlankedOrIsolated(CActor me, CActor target)
         {
             if (!CActor.AreActorsEnemies(me.Type, target.Type, me, target)) return;
-            object scenario = ScenarioManager.CurrentScenarioState;
-            if (!ReferenceEquals(scenario, s_FlankScenario)) { s_FlankScenario = scenario; s_FlankAttacks = 0; s_FlankBad = 0; }
-            s_FlankAttacks++;
+            AddRes(me, FlankAttacksRes);
             List<CActor> around = ScenarioManager.Scenario.AllAliveActors
                 .Where(a => a != null && !a.IsDead && a != target && CPathFinder.IsAdjacent(a.ArrayIndex, target.ArrayIndex)).ToList();
             bool flanked = around.Any(a => a != me && CActor.AreActorsAllied(me.Type, a.Type, me, a));
             bool isolated = !around.Any(a => CActor.AreActorsAllied(target.Type, a.Type, target, a));
             if (flanked || isolated) return;
-            s_FlankBad++;
+            AddRes(me, FlankBadRes);
             Plugin.Log.LogInfo($"GHRule FlankedOrIsolated card 0 mastery: {Name(me)} attacked {Name(target)}, next to none of her allies and next to an ally of its own (mastery failed)");
         }
 
@@ -428,8 +501,9 @@ namespace FrosthavenMods
                 if (tags.Contains(FlankedTag))
                 {
                     int needed = Math.Max(1, unlockConditionTarget.Value);
-                    bool current = ReferenceEquals(ScenarioManager.CurrentScenarioState, s_FlankScenario);
-                    int attacks = current ? s_FlankAttacks : 0, bad = current ? s_FlankBad : 0;
+                    CScenario sc = ScenarioManager.Scenario;
+                    CActor knife = sc?.PlayerActors?.Concat(sc.ExhaustedPlayers ?? new List<CPlayerActor>()).FirstOrDefault(p => IsKnife(p));
+                    int attacks = knife?.GetCharacterResourceAmount(FlankAttacksRes) ?? 0, bad = knife?.GetCharacterResourceAmount(FlankBadRes) ?? 0;
                     totalConditions = needed + 1;
                     conditionsMet = Math.Min(attacks, needed) + (bad == 0 ? 1 : 0);
                     __result = bad == 0 && attacks >= needed;

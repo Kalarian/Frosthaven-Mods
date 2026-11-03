@@ -150,6 +150,11 @@ def icon_text(s):
         near = {stem(w) for w in re.findall(r"[A-Za-z]+", clause)[-3:]}
         if all(stem(w) in near for w in name.split()):
             return ""
+        # a word stand-in used as a plural noun ("all your active [Song]", "multiple [Song]"): the mat's icon reads as
+        # both; the text needs the plural (re-audit 2026-11-02, Soothsinger2-05)
+        last = [w.lower() for w in re.findall(r"[A-Za-z]+", clause)[-3:]]
+        if ("multiple" in last or "all" in last) and re.fullmatch(r"[A-Za-z ]*[^sS ]", icon):
+            icon += "s"
         return m.group(1) + icon
     return re.sub(r"( ?)\[([A-Za-z][A-Za-z ]*)\]", one, s)
 
@@ -179,7 +184,9 @@ def card_file(cls, path, ids, warn):
         warn(f"{path.name}: card {name!r} is not on the {cls} sheet")
         return None
     lines = [ln for ln in s.split("\n") if ln.split(":", 1)[0] not in HEADER_KEYS]
-    level = c["level"] if str(c["level"]).isdigit() or c["level"] == "X" else "X"   # Gloomhaven writes supply cards (2e "M") as X
+    # the printed level: a number, X, or M (the 2e Sawbones' Medical Packs; the card face shows the text, the engine reads
+    # any non-number as level 1, CAbilityCard)
+    level = c["level"] if str(c["level"]).isdigit() or c["level"] in ("X", "M") else "X"
     # Gloomhaven's own name keys ($ABILITY_CARD_EyeforanEye$): a key's text is the card's name, so a 2e card sharing a
     # 1st edition card's name shares its key harmlessly (and the test harness reads both packs alike)
     head = ["Parser: AbilityCard", f"Name: $ABILITY_CARD_{name_key(c['name'])}$", f"Character: {cls}ID", f"ID: {cid}",

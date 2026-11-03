@@ -50,3 +50,4 @@ GH2E_Soothsinger2_30_T2	At the end of each of your turns, perform <sprite name=D
 GH2E_Soothsinger2_30_B	Move your character tokens on each of your active Song abilities backward one slot.
 AMC_GH2E_Soothsinger2_Bless2_M2	-2, <sprite name=Bless>, <sprite name=Target> 2
 AMC_GH2E_Soothsinger2_GrantAlly_R	+0, grant one ally: <sprite name=Move> 2 or <sprite name=Attack> 2 <sprite name=Rolling>
+GH2E_Soothsinger2_HIDDEN_TOOLTIP	Soothsinger rule bookkeeping (hidden).

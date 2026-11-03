@@ -514,6 +514,7 @@ AMC_GH2E_Nightshroud2_Tear_P0	+0, place one Tear in a hex adjacent to the target
 AMC_GH2E_Nightshroud2_Teleport2_R	+0, after the attack ability, grant one adjacent ally or self: <sprite name=Teleport> 2
 AMC_GH2E_Plagueherald2_Plague_P0	+0, the target or one enemy within <sprite name=Range> 2 of the target gains Plague
 AMC_GH2E_Plagueherald2_Poison_R	+0, the target or one enemy within <sprite name=Range> 2 of the target gains <sprite name=Poison>
+AMC_GH2E_Sawbones2_DisarmStun_P1	+1, you may gain <sprite name=Disarm> to add <sprite name=Stun>
 AMC_GH2E_Sawbones2_FollowUp_P1	+1, add +1 <sprite name=Attack> if an ally has an active Prescription
 AMC_GH2E_Sawbones2_Heal3Range1_R	<sprite name=Heal> 3, <sprite name=Range> 1 (rolling)
 AMC_GH2E_Sawbones2_Pack_M2	-2, give one adjacent ally or self one Medical Pack
@@ -1397,10 +1398,14 @@ GH_GH2E_PLAGUE_TOOLTIP	Plague: the Plagueherald's tokens on this figure (at most
 GH_GH2E_SAFEGUARD_TOOLTIP	Safeguard: the next negative condition this figure would gain is prevented, then Safeguard is removed
 GH_GH2E_SOUL_HIDDEN_TOOLTIP	Soultether rule bookkeeping (hidden).
 GH_GH2E_SUPPLIES_TOOLTIP	Supplies: the Quartermaster's supply track (starts at 10, up to 50). Spending supplies needs at least 10 and sets the track to 0.
+GH_GH2E_Sawbones2_HIDDEN_TOOLTIP	Sawbones rule bookkeeping (hidden).
+GH_GH2E_SilentKnife_HIDDEN_TOOLTIP	Silent Knife rule bookkeeping (hidden).
 GH_GH2E_SilentKnife_HIREDHELP_TOOLTIP	Hired Help: this enemy is the Silent Knife's ally for the rest of the scenario and drops an additional loot token when it dies.
 GH_GH2E_SilentKnife_MONEY_TOOLTIP	Money tokens: the loot tokens the Silent Knife has looted this scenario. Placing or losing one puts one of her loot cards (her choice, never the random item) back on top of the loot deck; a placed token can be looted again.
+GH_GH2E_Soothsinger2_HIDDEN_TOOLTIP	Soothsinger rule bookkeeping (hidden).
 GH_GH2E_Soothsinger2_HIGHNOTE_TOOLTIP	High Note: pays for Songs (at most two)
 GH_GH2E_Soothsinger2_LOWNOTE_TOOLTIP	Low Note: pays for Songs (at most two)
+GH_GH2E_Wildfury_HIDDEN_TOOLTIP	Wildfury rule bookkeeping (hidden).
 GH_GH2E_Wildfury_RAGE_TOOLTIP	Concentrated Rage: damage tokens on the card. One is added whenever the Bear attacks or suffers damage from retaliate; a Bear attack with three or more removes three for +3 Attack instead.
 Mindthief2	Mindthief
 Mindthief2_DESCRIPTION	You have key actions known as Augments. When you perform an augment ability, you place that card in your active area to gain a persistent bonus on your melee attacks. You may only have one augment active at a time; if you perform a second augment ability, you must discard the previous active augment. Augment abilities are mandatory, so you must switch to the new augment if you want to perform any other abilities from that action.
@@ -1799,7 +1804,7 @@ PERK_Sawbones2_06_Desc	Add one "<sprite name=Heal> 3, <sprite name=Range> 1" <sp
 PERK_Sawbones2_07_Name	Potent Remedies
 PERK_Sawbones2_07_Desc	Add +1 <sprite name=Heal> to all heal abilities on "Medical Pack" ability cards
 PERK_Sawbones2_08_Name	Friend of the Oak
-PERK_Sawbones2_08_Desc	Each City Phase after completing a scenario, your or one ally's donation to the Sanctuary of the Great Oak is free
+PERK_Sawbones2_08_Desc	Each City Phase after completing a scenario, your or one ally's donation to the Sanctuary of the Great Oak is free (Frosthaven: one Temple blessing each outpost phase costs no gold)
 PERK_Sawbones2_09_Name	Restorative Rounds
 PERK_Sawbones2_09_Desc	At the end of each of your rests, if an ally has an active Prescription, gain one "Medical Pack" ability card and move the token on one ally's active Prescription backward one slot
 Sawbones2_MASTERY_1_Name	Constant Care
@@ -1866,7 +1871,7 @@ Soothsinger2_MASTERY_2_Name	Perfect Pitch
 Soothsinger2_MASTERY_2_Desc	In a single scenario, create 20 or more Notes and use each Note you create in a Song
 Soothsinger2_FullName	Soothsinger
 CODEX_Hero_Soothsinger2_Title	Soothsinger
-CODEX_HeroInfo_Soothsinger2	You may play notes to create Songs, which are persistent active abilities with use slots that provide ongoing effects. In order to perform a Song, you must have the corresponding notes on your mat. Whenever you perform a Song, remove all of your notes, even those that were not part of the Song. The Song’s effect is active from the moment you play it into your active area and ends when the Song is moved from your active area to your discard pile. You must advance your character token on all your active Song at the end of each round. If multiple Song have effects at the end of your turn, you may apply their effects in any order.
+CODEX_HeroInfo_Soothsinger2	You may play notes to create Songs, which are persistent active abilities with use slots that provide ongoing effects. In order to perform a Song, you must have the corresponding notes on your mat. Whenever you perform a Song, remove all of your notes, even those that were not part of the Song. The Song’s effect is active from the moment you play it into your active area and ends when the Song is moved from your active area to your discard pile. You must advance your character token on all your active Songs at the end of each round. If multiple Songs have effects at the end of your turn, you may apply their effects in any order.
 PERK_Soultether_01_Name	Composure
 PERK_Soultether_01_Desc	Replace one <sprite name="-2"> with one <sprite name="0">
 PERK_Soultether_02_Name	Planar Shift
@@ -1923,7 +1928,7 @@ PERK_Wildfury_10_Desc	At the start or end of each of your long rests, you may <s
 Wildfury_MASTERY_1_Name	Elemental Bond
 Wildfury_MASTERY_1_Desc	In a single scenario, infuse or consume <sprite name=CreateAir> or <sprite name=CreateEarth> during each of your turns
 Wildfury_MASTERY_2_Name	Unleashed
-Wildfury_MASTERY_2_Desc	In a single scenario, kill 4 or more enemies with attacks of 7 or greater (after all bonuses, before attack modifiers)
+Wildfury_MASTERY_2_Desc	In a single scenario, kill 4 or more enemies with Command attacks of 7 or greater (after all bonuses, before attack modifiers)
 Wildfury_FullName	Wildfury
 CODEX_Hero_Wildfury_Title	Wildfury
 CODEX_HeroInfo_Wildfury	Some of your actions require an element in order to be performed. You cannot perform those actions without using the indicated element. You may sometimes have multiple persistent abilities that trigger at the same time. When that happens, you choose the resolution order.

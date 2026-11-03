@@ -1,0 +1,8 @@
+GH2EUndamagedAttacks:
+    # pack-wide: hidden count of the Sawbones' attacks on an undamaged enemy while a damaged monster lived (mastery 2
+    # Triage, GHMasteries.cs DamagedFirst); saved with the scenario, never shown.
+    ID: "GH2EUndamagedAttacks"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_Sawbones2_HIDDEN_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True

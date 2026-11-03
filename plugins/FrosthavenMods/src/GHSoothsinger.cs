@@ -36,7 +36,8 @@ namespace FrosthavenMods
     ///     Lullaby (Soothsinger210) when initiative is ordered in a round its holder long rests: a Note of choice and each
     ///     ally character may lower their initiative by 10.
     ///   - Masteries: FrosthavenMods_SSDistinctSongs (Value different songs performed), FrosthavenMods_SSNotesAllUsed
-    ///     (Value Notes created, none wasted, none left at the end).
+    ///     (Value Notes created, none wasted, none left at the end); the counts are hidden character resources on the
+    ///     Soothsinger (GH2ESongsSung bit mask, GH2ENotesMade, GH2ENotesWasted), saved with the scenario.
     ///   - The 2e songs on the status rows (GHStatusIcons asks SongsReaching) and the card face "Song" tag (GHCardStyle).
     /// Every action logs "GHRule &lt;Rule&gt; card N ...".
     /// </summary>
@@ -80,7 +81,7 @@ namespace FrosthavenMods
             if (ReferenceEquals(s, _scenario)) return;
             _scenario = s;
             SkipRound.Clear(); SoloRound.Clear(); OdeTurn.Clear(); LullabyMarks.Clear(); Held.Clear(); LullabyRound = -1;
-            DistinctSongs.Clear(); Created.Clear(); Wasted.Clear(); StorytellerDone = false;
+            StorytellerDone = false;
         }
 
         /// <summary>The song half's TSongNotes ability, or null when the card's top isn't a 2e song.</summary>
@@ -165,9 +166,26 @@ namespace FrosthavenMods
 
         // ------------------------------------------------------------------ paying for a song; Harmonics; the Note ledger
 
-        private static readonly Dictionary<string, HashSet<int>> DistinctSongs = new Dictionary<string, HashSet<int>>();
-        private static readonly Dictionary<string, int> Created = new Dictionary<string, int>();
-        private static readonly Dictionary<string, int> Wasted = new Dictionary<string, int>();
+        // the masteries' counts live in hidden character resources on the Soothsinger, saved with the scenario (a reload, a
+        // co-op rejoin or a round restart keeps them; a rewind rolls them back with the state): the songs performed as a
+        // bit mask (bit = card ID - 33400), the Notes created and the Notes wasted by Songs
+        internal const string SongsSungRes = "GH2ESongsSung", NotesMadeRes = "GH2ENotesMade", NotesWastedRes = "GH2ENotesWasted";
+
+        private static void SetRes(CActor a, string id, int value)
+        {
+            if (ScenarioRuleClient.SRLYML?.CharacterResources?.Any(r => r.ID == id) != true) return;   // pack data missing: never the error screen
+            int has = Has(a, id);
+            if (has == value) return;
+            if (has > 0) a.RemoveCharacterResource(id, has);
+            if (value > 0) a.AddCharacterResource(id, value);
+        }
+
+        private static int SongsSung(CActor a)
+        {
+            int mask = Has(a, SongsSungRes), n = 0;
+            for (; mask != 0; mask &= mask - 1) n++;
+            return n;
+        }
 
         private struct Paying { public CActor Singer; public int Card; public int Unused; }
 
@@ -192,14 +210,12 @@ namespace FrosthavenMods
                 int h = Has(singer, High), l = Has(singer, Low);
                 int paidH = Math.Min(h, needH), paidL = Math.Min(l, needL);
                 int unused = h - paidH + l - paidL;
-                string g = Guid(singer);
-                if (!DistinctSongs.TryGetValue(g, out HashSet<int> set)) DistinctSongs[g] = set = new HashSet<int>();
-                set.Add(card);
-                Wasted[g] = (Wasted.TryGetValue(g, out int w) ? w : 0) + unused;
+                if (card > 33400 && card < 33431) SetRes(singer, SongsSungRes, Has(singer, SongsSungRes) | (1 << (card - 33400)));
+                if (unused > 0) SetRes(singer, NotesWastedRes, Has(singer, NotesWastedRes) + unused);
                 bool ignored = GameState.CurrentSelectAndPlayCardAbility != null;
                 Plugin.Log.LogInfo($"GHRule SongPay card {card} {CardName(__instance.BaseCard)}: cost High {needH} Low {needL}, mat High {h} Low {l}; "
                                    + $"{paidH + paidL} used, {unused} wasted, all Notes removed{(ignored ? " (played ignoring the Note requirements)" : "")}; "
-                                   + $"{set.Count} different song(s) this scenario");
+                                   + $"{SongsSung(singer)} different song(s) this scenario, {Has(singer, NotesWastedRes)} Note(s) wasted so far");
                 __state = new Paying { Singer = singer, Card = card, Unused = unused };
             }
             catch (Exception e) { if (GHClasses.Reported.Add("sooth pay")) Plugin.Log.LogError("GHSoothsinger (song pay): " + e); }
@@ -235,10 +251,68 @@ namespace FrosthavenMods
                 Fresh();
                 int made = Has(__instance, resourceID) - __state;
                 if (made <= 0) return;
-                string g = Guid(__instance);
-                Created[g] = (Created.TryGetValue(g, out int c) ? c : 0) + made;
+                SetRes(__instance, NotesMadeRes, Has(__instance, NotesMadeRes) + made);
             }
             catch (Exception e) { if (GHClasses.Reported.Add("sooth ledger")) Plugin.Log.LogError("GHSoothsinger (Note ledger): " + e); }
+        }
+
+        // ------------------------------------------------------------------ perk Call and Response: "Grant one ally: Move 2 OR Attack 2"
+
+        private const string CallAndResponseCard = "AMC_GH2E_Soothsinger2_GrantAlly_R";
+
+        /// <summary>The perk modifier's grant carries both abilities (AAllyMove, AAllyAttack); a Choose on a modifier stopped
+        /// the game (2026-11-01). When the card is used in an attack, before the engine copies and stacks the grant, the
+        /// drawer's player picks one and the grant keeps only that ability (a copy: the card's own data is untouched).
+        /// Logs "GHRule CallAndResponse card 0 ...".</summary>
+        [HarmonyPatch(typeof(CAbilityAttack), "ProcessModifierAbilities")]
+        [HarmonyPrefix]
+        private static void CallAndResponse(CAbilityAttack __instance, List<CAbilityAttack.AttackModifierAbilityInfo> modifierAbilities)
+        {
+            try
+            {
+                if (modifierAbilities == null) return;
+                foreach (CAbilityAttack.AttackModifierAbilityInfo info in modifierAbilities)
+                {
+                    if (info?.Card?.Name != CallAndResponseCard || !(info.Ability is CAbilityControlActor grant)) continue;
+                    List<CAbility> both = grant.ControlActorData?.ControlAbilities;
+                    if (both == null || both.Count < 2) continue;
+                    CActor me = info.TargetingActor ?? __instance.TargetingActor;
+                    bool move = GHPlague.Ask(me, true, "FHMODS_SOOTH_CALLRESPONSE", "FHMODS_SOOTH_CALLRESPONSE_MOVE", "FHMODS_SOOTH_CALLRESPONSE_ATTACK");
+                    CAbility chosen = both.FirstOrDefault(a => a != null && (move ? a.AbilityType == CAbility.EAbilityType.Move : a.AbilityType == CAbility.EAbilityType.Attack)) ?? both[0];
+                    var copy = CAbility.CopyAbility(grant, generateNewID: false) as CAbilityControlActor;
+                    if (copy?.ControlActorData == null) continue;
+                    copy.ControlActorData.ControlAbilities = new List<CAbility> { chosen };
+                    info.Ability = copy;
+                    Plugin.Log.LogInfo($"GHRule CallAndResponse card 0 Call and Response drawn by {NameOf(me)}: grant one ally {(move ? "Move 2" : "Attack 2")} (not both)");
+                }
+            }
+            catch (Exception e) { if (GHClasses.Reported.Add("sooth call")) Plugin.Log.LogError("GHSoothsinger (Call and Response): " + e); }
+        }
+
+        // ------------------------------------------------------------------ Captivating Performance bottom: EACH active song back
+
+        internal const int CaptivatingCard = 33430;
+
+        /// <summary>"Move your character tokens on each of your active Song abilities backward one slot": the engine's tracker
+        /// picker is an "up to" selection (End selection after one card), so whatever the player picked, every song card
+        /// with a movable tracker moves (the class's non-song trackers are ImmuneMoveActiveBonusTracker). OnTrackerUpdated
+        /// runs on every machine (the picker's result is synced), so all of them widen the list the same way.</summary>
+        [HarmonyPatch(typeof(CAbilityMoveActiveBonusTracker), nameof(CAbilityMoveActiveBonusTracker.OnTrackerUpdated))]
+        [HarmonyPrefix]
+        private static void EverySongBack(CAbilityMoveActiveBonusTracker __instance, ref List<CAbilityCard> selectedCards, int moveStrength)
+        {
+            try
+            {
+                if (__instance?.Name != "BTrackersBack" || CardOf(__instance) != CaptivatingCard || !Is(__instance.TargetingActor)) return;
+                var all = CAbilityMoveActiveBonusTracker.GetActiveBonusesWithMovableTrackers(__instance.TargetingActor, moveStrength)
+                    .Where(b => IsSongCard(b.BaseCard)).Select(b => b.BaseCard as CAbilityCard).Where(c => c != null).Distinct().ToList();
+                int picked = selectedCards?.Count ?? 0;
+                selectedCards = all;
+                foreach (CAbilityCard c in all)
+                    Plugin.Log.LogInfo($"GHRule SongTokenBack card {CaptivatingCard} {CardName(c)}: token back one slot (every active song; {picked} picked in the engine's picker)");
+                if (all.Count == 0) Plugin.Log.LogInfo($"GHRule SongTokenBack card {CaptivatingCard} no active song token can move back");
+            }
+            catch (Exception e) { if (GHClasses.Reported.Add("sooth captivating")) Plugin.Log.LogError("GHSoothsinger (Captivating Performance): " + e); }
         }
 
         // ------------------------------------------------------------------ song tokens held this round (Grand Finale, Fermata)
@@ -606,18 +680,19 @@ namespace FrosthavenMods
                 string self = stats.SelectMany(x => x.StartTurn ?? Enumerable.Empty<CPlayerStatsStartTurn>())
                     .Select(x => x?.ActionData?.MainActorGUID).FirstOrDefault(x => !string.IsNullOrEmpty(x)) ?? "";
                 int need = Math.Max(1, unlockConditionTarget.Value);
+                CActor singer = ScenarioManager.Scenario?.AllPlayers?.FirstOrDefault(p => p.ActorGuid == self)
+                                ?? ScenarioManager.Scenario?.AllPlayers?.FirstOrDefault(p => Is(p));
                 if (distinct)
                 {
-                    int have = DistinctSongs.TryGetValue(self, out HashSet<int> set) ? set.Count : 0;
+                    int have = singer != null ? SongsSung(singer) : 0;
                     totalConditions = need;
                     conditionsMet = Math.Min(have, need);
                     __result = have >= need;
                 }
                 else
                 {
-                    int made = Created.TryGetValue(self, out int c) ? c : 0;
-                    int wasted = Wasted.TryGetValue(self, out int w) ? w : 0;
-                    CActor singer = ScenarioManager.Scenario?.AllPlayers?.FirstOrDefault(p => p.ActorGuid == self);
+                    int made = singer != null ? Has(singer, NotesMadeRes) : 0;
+                    int wasted = singer != null ? Has(singer, NotesWastedRes) : 0;
                     int left = singer != null ? Has(singer, High) + Has(singer, Low) : 0;
                     totalConditions = need;
                     conditionsMet = wasted + left == 0 ? Math.Min(made, need) : 0;
@@ -640,6 +715,9 @@ namespace FrosthavenMods
         private static readonly Dictionary<string, string> Strings = new Dictionary<string, string>
         {
             ["FHMODS_SOOTH_HIGH"] = "High Note",
+            ["FHMODS_SOOTH_CALLRESPONSE"] = "Call and Response: grant one ally Move 2 or Attack 2?",
+            ["FHMODS_SOOTH_CALLRESPONSE_MOVE"] = "Move 2",
+            ["FHMODS_SOOTH_CALLRESPONSE_ATTACK"] = "Attack 2",
             ["FHMODS_SOOTH_LOW"] = "Low Note",
             ["FHMODS_SOOTH_YES"] = "Yes",
             ["FHMODS_SOOTH_NO"] = "No",

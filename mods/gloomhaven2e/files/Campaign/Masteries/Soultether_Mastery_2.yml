@@ -3,11 +3,11 @@ ID: Soultether_MASTERY_2
 LocalisedName: Soultether_MASTERY_2_Name
 LocalisedDescription: Soultether_MASTERY_2_Desc
 PerkPoints: 1
-# Answered by the Frosthaven Mods plugin (GHSoultether.cs, FrosthavenMods_FirstRoundSummonsAcrossScenarios): the summon
-# abilities (card + ability) the Soultether performed in round 1 of each scenario are added to a career list kept in
-# the campaign save (synced campaign state, written from the scenario result every peer receives); the mastery is met
-# when the list holds Value different ones (two summon cards can be played in one first round; the scenarios need not
-# be in a row).
+# Answered by the Frosthaven Mods plugin (GHSoultether.cs, FrosthavenMods_FirstRoundSummonsAcrossScenarios): each
+# scenario's round-1 summon abilities (card + ability) are recorded per character in the campaign save (synced
+# campaign state, written from the scenario result every peer receives); the mastery is met when Value different
+# scenarios can each be paired with a different summon ability of their own first round (user decision 2026-11-02: it
+# counts scenarios, two summons in one first round count once; the scenarios need not be in a row).
 CheckAtEndOfScenario: True
 BattleGoalCondition:
     - Targets:

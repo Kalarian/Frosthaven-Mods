@@ -18,7 +18,8 @@ Range:
 Flying: True
 # "Whenever this summon attacks a normal or elite enemy, after the attack ability control that enemy: Attack -1": the
 # summon's attack with a control sub-ability on its own target (the 1st edition Lead to Slaughter fix: UseParentTargets),
-# normal and elite only; the enemy attacks at its own value -1 in melee (Mindthief2 Silent Scream), its target chosen by
+# normal and elite only; the enemy attacks at its own value -1 at its OWN range (decision C, QUESTIONS.md: Range 0
+# without RangeIsBase = the monster's own range, Soothsinger2 Pull the Strings bottom's shape), its target chosen by
 # the summon's owner (ControlActorType Player: rulebook p33, the commanding figure decides how a controlled ability is
 # performed; the engine hands a summon's controlled figure to the summoner's player, FFSNetwork.GetControllingPlayer).
 # Unverified on a summon's attack.
@@ -30,9 +31,8 @@ AttackOverride:
                 Abilities:
                     EnemyWillDoThis:
                         Attack: -1
-                        Range: 1
+                        Range: 0
                         Target: 1
-                        RangeIsBase: True
                         TargetIsBase: True
                 ControlDurationType: ControlForOneAction
                 ControlActorType: Player

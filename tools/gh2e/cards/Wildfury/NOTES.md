@@ -106,8 +106,8 @@ gave most shapes. Layouts are plain Gloomhaven style (gh_layout redraws them). E
   AddActiveBonus; fallback: a Heal valued by a Vars count of enemies in range 2.
 - 25 Unleashed Fury top: the commanded attack is marked `GHDoubleCardBonuses`; the plugin (UnleashedFury) adds every
   positive Attack bonus from her ability cards on that attack a second time (Punch Through bottom; Concentrated Rage's +3
-  becomes +6). Not the Vital Force aura (the summon's, decision C), not modifiers. With the stacking house rule off only
-  the largest plain bonus counts, so only that one is doubled when it is a card's.
+  becomes +6). Not the Vital Force aura (the summon's, decision C), not modifiers. (Card bonuses add in the engine
+  whether the stacking house rule is on or off: it only touches "default attack" item bonuses.)
 - 26 Lash Out bottom: swap with the Bear = the 1st edition Primal Blessing Swap (Self / Companion).
 - 27 Unbreakable Bond: top's second attack is the Wildfury's own Attack 3, range 3 performed from the Bear's hex (Vars
   `TargetingOverrideArrayIndex: Bear.Tile`, Frosthaven's Pyroclast shape; it needs the Bear on the map; the name
@@ -192,3 +192,7 @@ bottom, the three Safeguards, perks 1, 3, 9, 10.
 Plugin GHWildfury.cs builds shared changes 1, 2 (Invocation of Spirit; Unbreakable Bond top is data only), 4, 5, 6, 8
 and 9 above, and Invocation of Spirit bottom's Bear heal. 3 (Unbreakable Bond bottom): GHUnbreakableBond.cs
 (task wildfury-hard).
+- Re-audit fixes (2026-11-02, fix-reaudit-B): mastery 2's qualifying kills are the hidden resource GH2ECommandKills7
+  (saved with the scenario); its text says Command. Life Bond isn't offered at 1 hit point (ValidateCanPay) and does
+  nothing there (safety net). Spirit Swap top's consume and teleport need a living Bear (ValidateBear), the tile test is
+  null-safe.

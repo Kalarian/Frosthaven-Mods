@@ -2,7 +2,7 @@ Parser: AbilityCard
 Name: $ABILITY_CARD_MedicalPack$
 Character: Sawbones2ID
 ID: 33231
-Level: X
+Level: M
 Initiative: 50
 # card: Medical Pack
 # Medical Pack 0442 (sheet position 31): a supply card (the 1st edition's SupplyCard), handed to allies by

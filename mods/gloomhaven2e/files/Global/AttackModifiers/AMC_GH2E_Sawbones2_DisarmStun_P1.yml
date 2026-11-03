@@ -1,0 +1,13 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Sawbones2_DisarmStun_P1
+MathModifier: "+1"
+Abilities:
+    ASedation:
+        NullTargeting: True
+        Conditions: [Disarm]
+        Filter: Self
+        CanUndo: False
+        AutoTrigger: True
+        HelpBoxTooltipLocKey: "GH2E_Sawbones2_SEDATION_HELP"
+        MiscVars:
+            GH2E_Sedation: True

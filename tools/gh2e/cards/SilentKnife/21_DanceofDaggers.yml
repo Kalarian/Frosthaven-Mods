@@ -2,8 +2,8 @@
 # rewritten from tools/gh2e/sheets/SilentKnife.json (Xipe's file 99109 held Cull the Weak's top)
 # top: negate the damage of every attack this round = a round PreventDamage with no use track, attack sources only
 # (CPreventDamageActiveBonus prevents every time while it lasts; the 1e Trickster's Reversal bottom adds a one-slot
-# track for "the next"); the added effects: a round ImmunityTo the conditions and push/pull (this also blocks those
-# from non-attack sources this round). "After each attack ability targeting you: XP 1 and Attack 2 on the attacker" =
+# track for "the next"); the added effects: a round ImmunityTo the conditions and push/pull, limited by the plugin to
+# effects of attacks targeting her (GH2E_AttackEffectsOnly). "After each attack ability targeting you: XP 1 and Attack 2 on the attacker" =
 # Metal Mosaic Stress Vents' on-attacked reaction, a real melee attack (modifier draw, shields) on an adjacent attacker.
 # bottom: Move 4, then Frosthaven's "advantage on all attacks this round" (Drifter Accurate Strikes bottom).
 Discard: [Lost,Discard]
@@ -17,11 +17,14 @@ Data:
                 ActiveBonus:
                     Duration: Round
             # "...and added effects": the attacks' conditions and forced moves can't land this round (Frosthaven's
-            # round ImmunityTo: Crashing Tide Dug In, Frozen Fist Freezing Shell)
+            # round ImmunityTo: Crashing Tide Dug In, Frozen Fist Freezing Shell), from attacks targeting her ONLY: the
+            # plugin leaves the bonus out of every other immunity check (GHSilentKnife, GH2E_AttackEffectsOnly)
             TImmune:
                 ImmunityTo: [Poison, Wound, Immobilize, Disarm, Stun, Muddle, Impair, Bane, Brittle, Curse, Push, Pull]
                 Filter: Self
                 AnimOverload: None
+                MiscVars:
+                    GH2E_AttackEffectsOnly: True
                 ActiveBonus:
                     Duration: Round
                     Hidden: True

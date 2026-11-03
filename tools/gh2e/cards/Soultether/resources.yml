@@ -7,3 +7,12 @@ GH2EHadWard:
     LocKey: "GH2E_SOUL_HIDDEN_TOOLTIP"
     MaxAmount: 1
     Hidden: True
+GH2EFirstRestRound:
+    # pack-wide: hidden number of the round of the Soultether's first rest this scenario (mastery 1 "before your first
+    # rest": GHSoultether.cs notes it from the engine's rest calls; the turn stats never mark a rest); saved with the
+    # scenario, never shown.
+    ID: "GH2EFirstRestRound"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_SOUL_HIDDEN_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True

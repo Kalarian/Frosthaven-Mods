@@ -4,7 +4,8 @@ LocalisedName: Soultether_MASTERY_1_Name
 LocalisedDescription: Soultether_MASTERY_1_Desc
 PerkPoints: 1
 # Answered by the Frosthaven Mods plugin (GHSoultether.cs, FrosthavenMods_SummonCardsKeptBeforeRest): Value different
-# ability cards whose summon ability the Soultether performed before the round of its first rest, and every one of
+# ability cards whose summon ability the Soultether performed in a round before its first rest (the plugin notes the
+# rest round from the engine's rest calls, saved with the scenario), and every one of
 # them still in its active area when the scenario ends (a summon card leaves the active area only when its summon is
 # gone, so one that left can't have stayed all scenario).
 CheckAtEndOfScenario: True

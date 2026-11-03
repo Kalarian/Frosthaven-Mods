@@ -173,3 +173,11 @@ packcheck 0 problems / 0 warnings, rulecheck 48 ok, no gh_port warnings, no miss
   long-rest rounds skipped); the second (named "Triage" here, the sheet prints no names) =
   FrosthavenMods_NoUndamagedWhileDamaged (10+ attacks, none on an undamaged enemy while a damaged monster lives; the
   violations are noted as the attacks happen, in memory).
+- Re-audit fixes (2026-11-02, fix-reaudit-B; supersede the lines above): Sedation is `AMC_GH2E_Sawbones2_DisarmStun_P1`, a
+  +1 whose one self NullTargeting Disarm is only a marker: GHSawbones2e.Sedation takes it out before the engine runs the
+  card's abilities and asks "gain Disarm to add Stun?" (yes: Stun on the target, Disarm on her; only a card used in the
+  attack; "GHRule Sedation"). Medical Packs show level M (the engine reads any non-number as level 1). A give with no
+  free pack left is not performed (no card, no XP, no Constant Care count; "GHRule PackSupplyEmpty"). Return the Favor
+  bottom targets only an ally holding one of the nine conditions (Filter TargetHasNegativeConditions), so its XP needs a
+  real removal. Triage's violations are the hidden resource GH2EUndamagedAttacks (saved with the scenario). Friend of
+  the Oak's used week is saved in the campaign ("FHMODS:FriendOfTheOak=<week>"); its perk text names the Temple.

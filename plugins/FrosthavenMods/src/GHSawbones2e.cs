@@ -36,7 +36,7 @@ namespace FrosthavenMods
     ///   - Perk Sawbones208, Friend of the Oak (the FAQ's Devout: "works just as normal for the Temple, once it is built"):
     ///     in each outpost phase (one per calendar week) one Temple of the Great Oak blessing for the Sawbones or an ally
     ///     costs no gold (no refunds; the blessing's cost is Frosthaven's). Logs "GHRule FriendOfTheOak card 0 ...". The
-    ///     "used this outpost phase" mark is kept in memory: restarting the game in the same outpost phase offers it again.
+    ///     "used this outpost phase" mark is saved in the campaign ("FHMODS:FriendOfTheOak=<week>").
     /// </summary>
     [HarmonyPatch]
     internal static class GHSawbones2e
@@ -282,11 +282,64 @@ namespace FrosthavenMods
             }
         }
 
+        // ------------------------------------------------------------------ perk Sedation: "+1, you may gain Disarm to add Stun"
+
+        internal const string SedationCard = "AMC_GH2E_Sawbones2_DisarmStun_P1";
+
+        /// <summary>The Sedation modifier carries one Disarm ability (Filter Self) only as its marker: a Choose on a modifier card
+        /// stopped the game ("Invalid targeting type", 2026-11-01) and a Disarm is a kind the engine's modifier code doesn't
+        /// run. Before the engine processes the card's abilities (only a card that was USED in the attack gets here, not
+        /// the discarded one of an advantage pair), the marker is taken out and the drawer's player is asked; yes = the
+        /// target gains Stun (the attack's added effect; none if the target already died) and the drawer gains Disarm.
+        /// Logs "GHRule Sedation card 0 ...".</summary>
+        [HarmonyPatch(typeof(CAbilityAttack), "ProcessModifierAbilities")]
+        [HarmonyPrefix]
+        private static void Sedation(CAbilityAttack __instance, List<CAbilityAttack.AttackModifierAbilityInfo> modifierAbilities, CActor targetActor)
+        {
+            try
+            {
+                if (modifierAbilities == null || modifierAbilities.Count == 0) return;
+                var ours = modifierAbilities.Where(i => i?.Card?.Name == SedationCard).ToList();
+                if (ours.Count == 0) return;
+                foreach (CAbilityAttack.AttackModifierAbilityInfo info in ours) modifierAbilities.Remove(info);
+                CActor me = ours[0].TargetingActor ?? __instance.TargetingActor;
+                if (me == null || me.IsMirrorActor()) return;
+                bool alive = targetActor != null && !targetActor.IsDead && ScenarioManager.Scenario.HasActor(targetActor);
+                if (!alive)
+                {
+                    Log("Sedation", 0, $"Sedation drawn by {Name(me)}: the target is gone, nothing to Stun (not offered)");
+                    return;
+                }
+                if (!Ask(me, "FHMODS_SAW_SEDATE", Name(targetActor)))
+                {
+                    Log("Sedation", 0, $"Sedation drawn by {Name(me)}: declined (no Stun, no Disarm)");
+                    return;
+                }
+                targetActor.ApplyCondition(me, CCondition.ENegativeCondition.Stun, 1, EConditionDecTrigger.Turns);
+                me.ApplyCondition(me, CCondition.ENegativeCondition.Disarm, 1, EConditionDecTrigger.Turns);
+                Log("Sedation", 0, $"Sedation drawn by {Name(me)}: {Name(targetActor)} gains Stun ({(targetActor.Tokens.HasKey(CCondition.ENegativeCondition.Stun) ? "stunned" : "not stunned: immune or prevented")}), "
+                                   + $"{Name(me)} gains Disarm ({(me.Tokens.HasKey(CCondition.ENegativeCondition.Disarm) ? "disarmed" : "not disarmed: prevented")})");
+            }
+            catch (Exception e) { if (GHClasses.Reported.Add("saw sedation")) Plugin.Log.LogError("GHSawbones2e (Sedation): " + e); }
+        }
+
         // ------------------------------------------------------------------ perk Friend of the Oak (Temple of the Great Oak)
 
-        private static object _freeState;
-        private static uint _freeWeek = uint.MaxValue;
+        // the outpost phase whose free blessing is used: a marker in the campaign save (synced campaign state, the inert
+        // spot GHSilentKnife's FHMODS:SKMoney12 uses), so restarting the game or reloading in the same outpost phase
+        // doesn't offer a second one
+        private const string OakMarker = "FHMODS:FriendOfTheOak=";
         [ThreadStatic] private static FHRL.CharacterState _freeBless;
+
+        private static bool UsedThisWeek(FHRL.CampaignState state) =>
+            state?.LootedChestTreasureTableIDs?.Contains(OakMarker + state.Outpost.Week) == true;
+
+        private static void MarkWeek(FHRL.CampaignState state, bool used)
+        {
+            if (state?.LootedChestTreasureTableIDs == null) return;
+            state.LootedChestTreasureTableIDs.RemoveAll(x => x != null && x.StartsWith(OakMarker, StringComparison.Ordinal));
+            if (used) state.LootedChestTreasureTableIDs.Add(OakMarker + state.Outpost.Week);
+        }
 
         private static bool HasPerk(FHRL.CharacterState c, string perk) => c?.PerkIDs != null && c.PerkIDs.Any(p => p.ID == perk);
 
@@ -297,7 +350,7 @@ namespace FrosthavenMods
             if (state?.PartyCharacters == null || state.Outpost == null) return false;
             saw = state.PartyCharacters.FirstOrDefault(c => HasPerk(c, FriendOfTheOak));
             if (saw == null) return false;
-            return !(ReferenceEquals(_freeState, state) && _freeWeek == state.Outpost.Week);
+            return !UsedThisWeek(state);
         }
 
         [HarmonyPatch(typeof(FHRL.OutpostController), nameof(FHRL.OutpostController.CanBlessCharacter))]
@@ -324,9 +377,8 @@ namespace FrosthavenMods
                 if (character != null && FreeAvailable(__instance, out FHRL.CharacterState saw))
                 {
                     _freeBless = character;
-                    _freeState = __instance.CampaignController.State;
-                    _freeWeek = __instance.CampaignController.State.Outpost.Week;
-                    Log("FriendOfTheOak", 0, $"Friend of the Oak ({saw.Name}): {character.Name}'s Temple blessing this outpost phase (week {_freeWeek}) costs no gold");
+                    MarkWeek(__instance.CampaignController.State, used: true);
+                    Log("FriendOfTheOak", 0, $"Friend of the Oak ({saw.Name}): {character.Name}'s Temple blessing this outpost phase (week {__instance.CampaignController.State.Outpost.Week}) costs no gold (saved in the campaign)");
                 }
             }
             catch (Exception e) { if (GHClasses.Reported.Add("oak bless")) Plugin.Log.LogError("GHSawbones2e (Friend of the Oak): " + e); }
@@ -334,9 +386,10 @@ namespace FrosthavenMods
 
         [HarmonyPatch(typeof(FHRL.OutpostController), nameof(FHRL.OutpostController.BlessCharacter), new[] { typeof(FHRL.CharacterState) })]
         [HarmonyFinalizer]
-        private static Exception BlessEnd(Exception __exception, FHRL.CharacterState __state)
+        private static Exception BlessEnd(FHRL.OutpostController __instance, Exception __exception, FHRL.CharacterState __state)
         {
-            if (__exception != null && _freeBless != null) { _freeState = null; _freeWeek = uint.MaxValue; }   // the blessing failed: still free
+            if (__exception != null && _freeBless != null)   // the blessing failed: still free
+                try { MarkWeek(__instance?.CampaignController?.State, used: false); } catch (Exception) { }
             _freeBless = __state;
             return __exception;
         }
@@ -373,6 +426,9 @@ namespace FrosthavenMods
             ["FHMODS_SAW_BACK"] = "Move the token on {0} ({1}'s Prescription) back one slot?",
             ["FHMODS_SAW_BACK_YES"] = "Move it back",
             ["FHMODS_SAW_BACK_NO"] = "No",
+            ["FHMODS_SAW_SEDATE"] = "Sedation: gain Disarm to add Stun to this attack on {0}?",
+            ["FHMODS_SAW_SEDATE_YES"] = "Stun it (gain Disarm)",
+            ["FHMODS_SAW_SEDATE_NO"] = "No",
         };
 
         [HarmonyPatch(typeof(GLOOM.LocalizationManager), nameof(GLOOM.LocalizationManager.GetTranslation))]
