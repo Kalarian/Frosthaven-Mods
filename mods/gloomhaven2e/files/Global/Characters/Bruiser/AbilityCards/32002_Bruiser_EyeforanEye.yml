@@ -18,6 +18,8 @@ Data:
                 AnimOverload: PowerUp
             TRetaliate:
                 Retaliate: 1
+                MiscVars:
+                    GH2E_ProcXPOnce: True
                 ActiveBonus:
                     Duration: Round
                     ProcXP: 1

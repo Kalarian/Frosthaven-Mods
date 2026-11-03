@@ -10,7 +10,8 @@ Data:
                         BasedOn: PercentageOfCurrentHP
                         Multiplier: 1.0
                 GainXPPerXDamageDealt: 5
-                SetHPTo: 1
+                MiscVars:
+                    GH2E_SetHP: 1
                 AnimOverload: SuperHeavyAttack
     Bottom:
         Abilities:

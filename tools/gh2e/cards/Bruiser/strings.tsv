@@ -24,3 +24,4 @@ GH2E_Bruiser_28_T2	Target one adjacent ally or enemy with the push
 GH2E_Bruiser_28_B	Add +1 to each of your <sprite name=Push> and <sprite name=Pull>. Whenever you <sprite name=Push> or <sprite name=Pull> an enemy at least one hex, after the forced movement, that enemy and all enemies adjacent to it suffer <nobr><sprite name=Damage> 1</nobr>.
 GH2E_Bruiser_29_B	Add +3 <sprite name=Attack> and gain <sprite name=XP1> if the target's current hit point value is lower than yours.
 AMC_GH2E_Bruiser_Push2_P2	+2 <sprite name=Push> 2
+GH2E_Bruiser_SPIKEDHIDE_TOOLTIP	Spiked Hide: attack modifier cards in the Bruiser's active area. On the next attack targeting him performed by an adjacent enemy, each is discarded to gain <sprite name=Retaliate> 2 for the attack.

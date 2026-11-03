@@ -4,6 +4,32 @@ All 28 cards written from scratch from `tools/gh2e/sheets/Berserker.json` (no Xi
 Shapes come from the 1st edition Berserker (`gh1e_yml` 319-347, converted in `mods/gloomhaven`) and Frosthaven's own
 cards; engine behaviour was read in the decompiled `ScenarioRuleLibrary.dll` where it decided a shape.
 
+## Plugin support (2e card-accuracy pass, task rest-a, 2026-11-02): supersedes the APPROXIMATION / NEEDS PLUGIN notes below
+
+- XP once on the next retaliate (Resolute Stand top, Unbridled Power bottom, Tireless Retribution top): `MiscVars:
+  GH2E_ProcXPOnce` on the round retaliate; GHRetaliate2e pays its ProcXP only the first time.
+- From the Brink top / Glass Hammer top: "set your hit point value" is not damage and not a heal (approved reading):
+  `GH2E_SetHPHalf` on From the Brink's Strengthen, `GH2E_SetHP: 1` on Glass Hammer's attack (replaces SetHPTo, which
+  the engine applied as damage); GHBerserker2e sets the hit points at the end of that ability.
+- Growing Rage top: a persistent NullTargeting marker `GH2E_GrowingRage`; after each of your retaliates GHRetaliate2e
+  performs Heal 1 (heal rules apply) and repeats it once at half or less.
+- Final Fight top: moving the card from the active area to the lost pile exhausts the Berserker (GHBerserker2e, card ID).
+- Careless Charge top: the consume has `Requirements: MoveWasStraightLine, DoesntHaveNegativeCondition [Wound]`
+  (Frosthaven's keys; GHBerserker2e points the straight-line check at the action's move); the Wound stays optional.
+  Bottom: `GH2E_RetaliatePerAttack`, X recounted at each attack.
+- Burning Hatred bottom: suffer 1 (`GH2E_CannotPrevent`), Move 1, Attack 2; after the attack the player is asked to
+  repeat with damage +1, no cap (the old 4-pass consumes are gone).
+- Bone Breaker bottom: persistent marker `GH2E_BoneBreaker`; the target gets the Berserker2Token (resources.yml, on its
+  status row) and StopFlying while the card is in the active area (approved reading: the scenario; FH digital has no
+  "drop a persistent card" button, so it stays until the scenario ends).
+- Spiked Armor top: `GH2E_SpikedArmorWound` on the round retaliate: any of your retaliates that damages the attacker
+  wounds it (the Conditions: Wound on this retaliate is gone).
+- Perks: Reckless Blows = AMC_GH2E_Berserker2_Reckless_P1, asked when drawn (+3 and suffer 2; not offered at 2 HP or
+  less, where it would exhaust him mid-attack); Defy Death performs Attack 2 on the attacker (the bonus's AbilityData);
+  Taunting Fury is an end-of-turn player-driven control of the adjacent enemies whose Attack +0 targets the Berserker.
+- Masteries (names made up): Retribution (kill 20 enemies with your retaliate, within one scenario) and On the Brink
+  (every turn ended at half or less, not exhausted): GHMasteriesRestA.
+
 ## Shapes used for the class rules (all cards)
 
 - **"If your current hit point value is half your maximum or less"**: Gloomhaven's requirement key `HPPercentOfMax:

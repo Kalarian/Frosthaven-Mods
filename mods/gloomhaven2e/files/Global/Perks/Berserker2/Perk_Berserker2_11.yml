@@ -5,4 +5,34 @@ Description: PERK_Berserker2_11_Desc
 CharacterID: Berserker2ID
 Available: 1
 Cost: 3
-Flags: [Passive]
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    TTauntingFury:
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        AddActiveBonus:
+            ControlActor:
+                Abilities:
+                    EnemyWillDoThis:
+                        Attack: 0
+                        StrengthIsBase: True
+                        Targeting: Custom
+                        TargetingVars:
+                            AutoTarget: TargetingActor.GH2ETauntTarget
+                            AddValidActorInRange: AutoTarget
+                            AddTileInRange: AutoTarget.Tile
+                            AddSelectedTile: AutoTarget.Tile
+                ControlDurationType: ControlForOneAction
+                ControlActorType: Player
+            Range: 1
+            Target: -1
+            Filter: Enemy
+            CanSkip: True
+            AnimOverload: MindControl
+            MiscVars:
+                GH2E_TauntingFury: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: EndTurnAbility
+            Hidden: True

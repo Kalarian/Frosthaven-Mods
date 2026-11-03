@@ -1,0 +1,7 @@
+Berserker2Token:
+    # Bone Breaker bottom: the Berserker's character token on the target (it loses Flying while the card is active).
+    # Given and removed by the plugin (GHBerserker2e.cs); shown on the enemy's status row.
+    ID: "Berserker2Token"
+    Sprite: "HoverHatchet"
+    LocKey: "GH2E_Berserker2_TOKEN_TOOLTIP"
+    MaxAmount: 1

@@ -12,6 +12,8 @@ Abilities:
         SkipAnim: True
         Attack: 0
         AttackHasAdvantage: True
+        MiscVars:
+            GH2E_WarCry: True
         ActiveBonus:
             Duration: Persistent
             Hidden: True

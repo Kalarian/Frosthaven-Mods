@@ -18,6 +18,10 @@ Data:
                 Shield: 1
                 AttackSourcesOnly: True
                 AnimOverload: PowerUpShield
+                # the Retaliate 1 and the slot come after the attack's damage, and only when the Bruiser suffered damage
+                # (plugin GHRetaliate2e)
+                MiscVars:
+                    GH2E_RetaliateAfterDamage: True
                 ActiveBonus:
                     Duration: Persistent
                     Behaviour: ShieldAndRetaliate

@@ -5,6 +5,24 @@ areas, text rows). 28 started from Xipe's import, rewritten; Brute Force (28) is
 style (gh_layout redraws them). Every printed rule has its own text key `GH2E_Bruiser_NN_T/B` in strings.tsv with the
 card's 2e wording; Xipe's `GH2E_X_*` keys are no longer used.
 
+## Plugin support (2e card-accuracy pass, task rest-a, 2026-11-02): supersedes the APPROXIMATION / NEEDS PLUGIN notes below
+
+- XP once on the next retaliate (Eye for an Eye top, Provoking Roar top, Selfish Retribution bottom): `MiscVars:
+  GH2E_ProcXPOnce` (GHRetaliate2e).
+- Warding Strength bottom: `GH2E_RetaliateAfterDamage`: the Retaliate 1 and the slot come after the attack's damage,
+  only when he suffered damage (a 0-damage attack uses no slot, approved reading), never when the attack killed him.
+- Fearsome Taunt bottom: the redirect is offered (yes/no) each time (GHBruiser2e, card ID).
+- Defensive Tactics top: the persistent Shield 1 / Retaliate 1 count only from the first shield or retaliate gained from
+  one of his ability cards or modifiers in a round to that round's end (GHBruiser2e, card ID).
+- Let Fly top: the damage 4 + Wound hits the enemies on the push path (`GH2E_PushPathDamage: 4` on the push).
+- Brute Force bottom: after each push or pull of an enemy that moved, damage 1 to it and the enemies adjacent to it.
+- Perks: Spiked Hide = AMC_GH2E_Bruiser_SpikedHide_P0_R (rolling +0): drawn, it becomes a BruiserSpikedHide token
+  (resources.yml); the next attack on him by an adjacent enemy gets Retaliate 2 per token and spends them. War Cry's
+  aura (`GH2E_WarCry`) stops for a character after its first attack in round 1.
+- Masteries: 1 Unstoppable Force (kill an enemy you pushed or pulled that round, in 3 different scenarios: the done
+  scenarios kept in synced campaign state) and 2 Relentless Onslaught counted over whole rounds (retaliate included):
+  GHMasteriesRestA. The mastery IDs moved: Bruiser_MASTERY_1 is now the first sheet mastery, _2 Relentless Onslaught.
+
 ## Class-wide decisions
 
 - **Enhancement marks are written as Frosthaven slot keys** (`SquareEnhancements`, `CircleEnhancements`,

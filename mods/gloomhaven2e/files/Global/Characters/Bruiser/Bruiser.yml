@@ -5,7 +5,7 @@ Model: Brute
 Race: Inox
 Traits: [ Intimidating, Strong, Armored ]
 Complexity: 1
-MasteryIDs: [ Bruiser_MASTERY_1 ]
+MasteryIDs: [ Bruiser_MASTERY_1, Bruiser_MASTERY_2 ]
 DefaultSkin: 1
 # PlayerLevel:    [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
 HealthTable: [ 10, 12, 14, 16, 18, 20, 22, 24, 26 ]

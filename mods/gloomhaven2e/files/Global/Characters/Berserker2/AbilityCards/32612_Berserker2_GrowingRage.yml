@@ -9,29 +9,16 @@ Discard: [Lost,Discard]
 Data:
     Top:
         Abilities:
+            # a persistent marker: after each of your retaliates the plugin (GHRetaliate2e, GH2E_GrowingRage) performs Heal 1,
+            # self, and repeats it once if you are then at half your maximum or less
             TActive:
+                NullTargeting: True
                 Filter: Self
                 AnimOverload: PowerUp
-                AddActiveBonus:
-                    Heal: 1
-                    Filter: Self
-                    AnimOverload: Heal
-                    ConditionalOverrides:
-                        THealCO:
-                            Self: True
-                            Requirements:
-                                Vars:
-                                    HalfHealth: Actor.MaxHealthHalfRoundedUp
-                                    ValidateStillLow: Actor.Health + 1 <= HalfHealth
-                            AbilityOverrides:
-                                THealRepeat:
-                                    Strength: 1
+                MiscVars:
+                    GH2E_GrowingRage: True
                 ActiveBonus:
                     Duration: Persistent
-                    Behaviour: DuringActionAbilityOnAttacked
-                    Vars:
-                        EnemyAttacker: TriggerActor
-                        ValidateIsAttackerAdjacent: TriggerActor.IsInRangeOf(TriggerTarget, 1)
         XP: 2
     Bottom:
         Abilities:

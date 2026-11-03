@@ -1,0 +1,14 @@
+Parser: Mastery
+ID: Berserker2_MASTERY_1
+LocalisedName: Berserker2_MASTERY_1_Name
+LocalisedDescription: Berserker2_MASTERY_1_Desc
+PerkPoints: 1
+# Value enemies killed by the Berserker's retaliate in the scenario (the plugin counts each retaliate kill).
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_KillsByRetaliate]
+        CharacterIDs:
+            ActorID: Berserker2ID
+        Value: 20

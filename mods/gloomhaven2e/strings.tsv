@@ -601,9 +601,6 @@ FHS_GH2E_Berserker2_26_T2	Whenever an <sprite name=Enemy> suffers damage from yo
 FHS_GH2E_Berserker2_26_T3	Negate the next damage you suffer this round
 FHS_GH2E_Berserker2_27_B	You may repeat this action, suffering 1 more damage each time
 FHS_GH2E_Berserker2_27_B2	Suffer <sprite name=Damage> 1 (cannot be negated)
-FHS_GH2E_Berserker2_27_B3	Repeat: suffer <sprite name=Damage> 2, then <sprite name=Move> 1, <sprite name=Attack> 2
-FHS_GH2E_Berserker2_27_B4	Again: suffer <sprite name=Damage> 3, then <sprite name=Move> 1, <sprite name=Attack> 2
-FHS_GH2E_Berserker2_27_B5	Again: suffer <sprite name=Damage> 4, then <sprite name=Move> 1, <sprite name=Attack> 2
 FHS_GH2E_Berserker2_27_T	You may suffer <sprite name=Damage> 2 to add +1 <sprite name=Attack> and gain <sprite name=XP1>
 FHS_GH2E_Berserker2_28_T	Whenever you suffer damage, all <sprite name=Enemy> that have <sprite name=Wound> suffer <sprite name=Damage> 1
 FHS_GH2E_Bruiser_01_B	Target all <sprite name=Enemy> moved through with the move ability
@@ -1426,6 +1423,7 @@ Tinkerer2_DESCRIPTION	You have the right tool for any job: whether an ally needs
 Trap	Trap
 Wildfury	Wildfury
 Wildfury_DESCRIPTION	You start every scenario with your bear summon by summoning it in an empty adjacent hex before the first round. Its stats are listed below, and it acts immediately before you each round. You may lose cards as normal to negate damage done to you or Bear. If Bear drops below 1 hit point, it is removed from the map and cannot return that scenario. You have special actions known as Command actions that grant Bear additional abilities, ignoring your line-of-sight. Bear will not open doors during its turn, but you may COMMAND it to open doors.
+AMC_GH2E_Bruiser_SpikedHide_P0_R	<sprite name="0"> Spiked Hide: <sprite name=Retaliate> 2 on the next attack by an adjacent enemy <sprite name=Rolling>
 PERK_Bruiser_11_Bonus	Rested and Ready: +1 <sprite name=Move> to your next move ability
 PERK_Bruiser_01_Name	Precision
 PERK_Bruiser_01_Desc	Replace one <sprite name="-1"> with one <sprite name="+1">
@@ -1451,8 +1449,10 @@ PERK_Bruiser_11_Name	Rested and Ready
 PERK_Bruiser_11_Desc	Whenever you long rest, add +1 <sprite name=Move> to your first move ability the following round
 PERK_Bruiser_12_Name	War Cry
 PERK_Bruiser_12_Desc	Each character gains advantage on their first attack during the first round of each scenario
-Bruiser_MASTERY_1_Name	Relentless Onslaught
-Bruiser_MASTERY_1_Desc	In a single scenario, across three consecutive rounds, play six different ability cards and cause enemies to suffer <sprite name=Damage> 7 or more during each of those rounds
+Bruiser_MASTERY_1_Name	Unstoppable Force
+Bruiser_MASTERY_1_Desc	In three different scenarios, kill an enemy that you <sprite name=Push> or <sprite name=Pull> that round
+Bruiser_MASTERY_2_Name	Relentless Onslaught
+Bruiser_MASTERY_2_Desc	In a single scenario, across three consecutive rounds, play six different ability cards and cause enemies to suffer <sprite name=Damage> 7 or more during each of those rounds
 Bruiser_FullName	Bruiser
 CODEX_Hero_Bruiser_Title	Bruiser
 CODEX_HeroInfo_Bruiser	You have many powerful melee attack abilities with an area of effect that are great when enemies clump up for you. When you can’t naturally find groups of enemies next to each other, you also have a variety of abilities that <sprite name=Push> or <sprite name=Pull> to move the enemies into place.
@@ -1580,6 +1580,7 @@ Tinkerer2_MASTERY_2_Desc	Perform 11 different actions with a lost icon
 Tinkerer2_FullName	Tinkerer
 CODEX_Hero_Tinkerer2_Title	Tinkerer
 CODEX_HeroInfo_Tinkerer2	Your large hand size gives you a significant amount of stamina, allowing you to play more cards with <sprite name=Lost> than other classes typically would. However, if you lose too many cards too early in a scenario, you may find yourself exhausted before the end.\n\nSome of your abilities let you place unique tokens on the map that have varying effects. Unlike traps, hexes containing one or more of these tokens are still empty and are not considered negative hexes for the purposes of monster movement.
+AMC_GH2E_Berserker2_Reckless_P1	<sprite name="+1"> You may suffer <sprite name=Damage> 2 to add +2 <sprite name=Attack>
 AMC_GH2E_Berserker2_Heal1Self_P0	<sprite name="0"> <sprite name=Heal> 1
 AMC_GH2E_Berserker2_SelfHalfHP_T2	<sprite name="2x"> Suffer <sprite name=Damage> equal to half your current hit point value (rounded down)
 PERK_Berserker2_01_Name	Iron Will
@@ -1604,6 +1605,10 @@ PERK_Berserker2_10_Name	Defy Death
 PERK_Berserker2_10_Desc	Once each scenario, when <sprite name=Damage> from an attack would reduce your current hit point value to less than 1, instead set your current hit point value to 1 and perform: <sprite name=Attack> 2, target the attacker
 PERK_Berserker2_11_Name	Taunting Fury
 PERK_Berserker2_11_Desc	At the end of each of your turns, you may control all adjacent enemies: <sprite name=Attack> +0, target the Berserker
+Berserker2_MASTERY_1_Name	Retribution
+Berserker2_MASTERY_1_Desc	Kill 20 enemies with your <sprite name=Retaliate>
+Berserker2_MASTERY_2_Name	On the Brink
+Berserker2_MASTERY_2_Desc	In a single scenario, end all your turns with your hit point value at half your maximum or lower without exhausting
 Berserker2_FullName	Berserker
 CODEX_Hero_Berserker2_Title	Berserker
 CODEX_HeroInfo_Berserker2	You have a number of very powerful actions with <sprite name=Lost>. While many may seem very tempting, you also have a small hand size, meaning you may want to be selective with which ones you use to avoid exhausting too early. If you decide to go all-in, make sure your party is ready to keep up.

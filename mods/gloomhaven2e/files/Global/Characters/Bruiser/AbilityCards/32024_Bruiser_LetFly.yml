@@ -21,18 +21,13 @@ Data:
                 Conditions: [Wound, Stun]
                 AnimOverload: Attack_AOE_Cone
                 SubAbilities:
+                    # the enemies on the hexes the target enters suffer 4 and gain Wound (plugin GHBruiser2e, after the push)
                     TAttackSubPush:
                         Push: 4
                         AnimOverload: None
                         IsInlineSubAbility: True
-                    TAttackSubDamage:
-                        IsInlineSubAbility: True
-                        Damage: 4
-                        Conditions: Wound
-                        Range: 1
-                        Target: -1
-                        Filter: [Enemy]
-                        AllTargetsAdjacentToParentTargets: True
+                        MiscVars:
+                            GH2E_PushPathDamage: 4
         XP: 2
     Bottom:
         Abilities:

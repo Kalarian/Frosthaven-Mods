@@ -23,6 +23,8 @@ Data:
                     SquareEnhancements: 1
                 Filter: Self
                 AnimOverload: PowerUp
+                MiscVars:
+                    GH2E_ProcXPOnce: True
                 ActiveBonus:
                     Duration: Round
                     ProcXP: 1
