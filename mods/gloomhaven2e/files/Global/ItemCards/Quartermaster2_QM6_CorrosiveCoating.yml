@@ -1,8 +1,8 @@
+Parser: ItemCard
 # QM6 Corrosive Coating: During your attack ability, add Pierce 2 to one attack (Frosthaven's Titan Nail shape). Lost.
 # A Quartermaster class item: no slot (QuestItem: no slot requirement), one copy, no gold cost (supplies can't
 #   refresh it: Gloomhaven 2e FAQ), never in the shop (no campaign item entry). Given in a scenario by the
 #   plugin (GHQuartermaster.cs); returned to the supply when used and when the scenario ends.
-Parser: ItemCard
 ID: 33206
 StringID: GH2E_QMItem6ID
 Name: $GH2E_QMItem_CorrosiveCoating_1$

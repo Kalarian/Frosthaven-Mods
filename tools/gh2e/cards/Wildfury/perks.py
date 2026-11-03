@@ -191,10 +191,13 @@ Abilities:
         MiscVars:
             GH2ESafeguard: True
 """,
+    # Lick Wounds: "Heal 2, target Bear" heals the Bear only (no fallback to the drawer, which read TargetingActor: null
+    # when the Bear draws the card, the Pack Bond error). With no Bear on the map the plugin (GHWildfury.cs LickWounds)
+    # draws the card without its heal at the game's modifier rewrite step, so the custom targeting never runs empty.
     "AMC_GH2E_Wildfury_Heal2Bear_R": ('MathModifier: "+0"\nRolling: True\nAbilities:\n    AHeal:\n        Heal: 2\n'
                                       '        Filter: [Self, Ally]\n        AutoTrigger: True\n        Targeting: Custom\n'
                                       '        TargetingVars:\n'
-                                      '            AddValidActorInRange: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID") || TargetingActor\n'
+                                      '            AddValidActorInRange: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID")\n'
                                       '            AddTileInRange: AddValidActorInRange.Tile\n'
                                       '            AddActorToTarget: AddValidActorInRange\n'
                                       '            AddSelectedTile: AddValidActorInRange.Tile\n'),
