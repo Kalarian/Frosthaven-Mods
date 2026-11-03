@@ -85,19 +85,23 @@ Data:
                         AnimOverload: TurnInvisible
     Bottom:
         Abilities:
+            # An AddActiveBonus with a Null add-ability (Elementalist2 Lingering Essence / Soothsinger2 TSongTimer shape):
+            # the engine only runs an EndRoundAbility bonus, and advances its tracker, when the bonus's ability is an
+            # AddActiveBonus (PhaseManager.NextActiveBonusOrScenarioModifier -> CEndRoundAbilityActiveBonus.TriggerAbility).
+            # The earlier NullTargeting ability with ActiveBonus.AbilityData never ticked (AbilityData is not read for
+            # this behaviour), so the card stayed active forever (harness 20261103-110730).
             BActive:
-                NullTargeting: True
+                AddActiveBonus:
+                    Null: True
+                    Filter: Self
+                    AutoTrigger: True
+                    SkipAnim: True
                 Filter: Self
                 AnimOverload: PowerUp
                 ActiveBonus:
                     Duration: Persistent
                     Behaviour: EndRoundAbility
                     XPTracker: [1,0,1,0,1]
-                    AbilityData:
-                        NullTargeting: True
-                        Filter: Self
-                        AutoTrigger: True
-                        SkipAnim: True
 Layout:
     Top:
         - Row: "<size=150%><sprite name=Stun>, <sprite name=Curse>"

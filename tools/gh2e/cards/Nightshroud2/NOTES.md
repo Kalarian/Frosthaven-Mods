@@ -127,8 +127,10 @@ list text `GH2E_Nightshroud2_26_B`) and Swallowed by Night bottom (a persistent 
   Unverified: where the played card goes afterwards. Bottom: Ward + Strengthen as one ability; consume = the marker.
 - **27 Swallowed by Night** top: a Kill on the stun's target (normal only) when you aren't Invisible and it stands on a
   Tear; optional; removes that Tear and gives you Invisible; XP 1 (AbilityXP). Bottom: persistent marker, 5 slots
-  advanced by EndRoundAbility (XP 1, 3, 5). "Exhausted when this card moves to the lost pile": text only, **NEEDS
-  PLUGIN** (no card-leaves-active-area trigger; ExhaustSelf exists only as an ability flag).
+  advanced by EndRoundAbility (XP 1, 3, 5); an AddActiveBonus with a Null add-ability (Lingering Essence / TSongTimer
+  shape), because the engine only triggers and ticks an EndRoundAbility bonus whose ability is an AddActiveBonus (the
+  first build used ActiveBonus.AbilityData, never ticked, harness 20261103-110730). "Exhausted when this card moves to
+  the lost pile": plugin GHTears.cs (MoveAbilityCardToPile Activated -> Lost, GHRule SwallowedByNight).
 - **28 Voice of the Night** top: NullTargeting area (Filter Ally) whose sub-ability grants Teleport2 3 to allies on the
   red hexes; two Tears within range 2. Bottom: Push 3 on an ally or enemy; APPROXIMATION: if the pushed figure ends on
   a Tear, you may give it Invisible, which removes the Tear.

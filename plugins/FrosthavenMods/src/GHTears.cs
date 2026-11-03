@@ -617,7 +617,14 @@ namespace FrosthavenMods
                 if (__state != CBaseCard.ECardPile.Activated || abilityCard.CurrentCardPile != CBaseCard.ECardPile.Lost) return;
                 CPlayerActor her = ScenarioManager.Scenario?.PlayerActors?.FirstOrDefault(p => p.CharacterClass == __instance);
                 if (her == null || her.IsDead) return;
-                if (GameState.InternalCurrentActor == her && PhaseManager.CurrentPhase is CPhaseAction)
+                // ExhaustAfterAction is honoured only at the end of a card action (CPhaseAction's card branch). The card's
+                // usual way out is its 5th end-of-round slot, run as an active-bonus action with her as the current actor
+                // (initiator ActiveBonus): that branch never reads the flag (nor do the item / outside-phase / override
+                // branches), which would stay set and kill her after her next card action a round later. So outside a
+                // card action she goes on the pending list (exhausted at the next phase change).
+                if (GameState.InternalCurrentActor == her && PhaseManager.CurrentPhase is CPhaseAction
+                    && (GameState.CurrentActionInitiator == GameState.EActionInitiator.None
+                        || GameState.CurrentActionInitiator == GameState.EActionInitiator.AbilityCard))
                 {
                     her.ExhaustAfterAction = true;
                     Log("SwallowedByNight", GHNightshroud.SwallowedByNightCard, "moved from the active area to the lost pile: exhausted after this action");
