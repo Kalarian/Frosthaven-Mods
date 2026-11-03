@@ -5,15 +5,4 @@ Description: PERK_Elementalist2_12_Desc
 CharacterID: Elementalist2ID
 Available: 1
 Cost: 3
-Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
-Abilities:
-    TDontWane:
-        NullTargeting: True
-        Filter: Self
-        AutoTrigger: True
-        SkipAnim: True
-        MiscVars:
-            ElementsDontWane: True
-        ActiveBonus:
-            Duration: Persistent
-            Hidden: True
+Flags: [Passive]

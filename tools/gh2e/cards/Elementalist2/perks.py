@@ -24,24 +24,11 @@ PERKS = [
      {"CardsToAdd": f"[{_C}Wild_R, {_C}Wild_R]"}),
     (1, "Unfazed", 'Ignore scenario effects and add one <sprite name=CreateWild> <sprite name=Rolling>',
      {"CardsToAdd": f"[{_C}Wild_R]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
-    # 2e: "At the start of each scenario, you may infuse any". No perk flag runs an ability at scenario start; the
-    # closest is a one-use bonus applied at scenario start that infuses any element at the start of your first turn.
+    # 2e: "At the start of each scenario, you may infuse any": the plugin (GHElementalist2e.cs, Primed) queues an optional
+    # infuse-any with the element picker among Frosthaven's scenario-start abilities (StartScenarioAbilities, HIVE's
+    # mode choice), strong at once
     (1, "Primed", 'At the start of each scenario, you may <sprite name=CreateWild>',
-     {"Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]", "Abilities": """\
-    TStartInfuse:
-        Filter: Self
-        AutoTrigger: True
-        SkipAnim: True
-        AddActiveBonus:
-            Infuse: [Any]
-            ShowElementPicker: True
-            Filter: Self
-            CanUndo: False
-        ActiveBonus:
-            Duration: Persistent
-            Behaviour: StartTurnAbility
-            Hidden: True
-            XPTracker: [0]"""}),
+     {"Flags": "[Passive]"}),
     # Frosthaven's own consume-any-to-infuse-any shape (AMC_ConsumeInfuseWild), on the long-rest hook
     (1, "Restful Flux", 'Whenever you long rest, <sprite name=ConsumeWild>: <sprite name=CreateWild>',
      {"Flags": "[Passive, ExecuteAbilitiesAfterLongRest]", "Abilities": """\
@@ -53,25 +40,42 @@ PERKS = [
                     Infuse: [Any]
                     ShowElementPicker: True
                     CanUndo: False"""}),
-    # 2e: Fire, Ice, Air and Earth don't wane. Frosthaven's only "elements don't wane" switch (the Tome of Elements'
-    # ElementsDontWane) holds every element: Light and Dark don't wane either (NOTES.md: needs the plugin to be exact).
+    # 2e: Fire, Ice, Air and Earth don't wane; Light and Dark do. The plugin (GHElementalist2e.cs, Elemental Mastery)
+    # keeps those four strong through the end of the round (Frosthaven's ElementsDontWane would hold all six)
     (1, "Elemental Mastery", '<sprite name=CreateFire>, <sprite name=CreateIce>, <sprite name=CreateAir> and <sprite name=CreateEarth> do not wane at the end of each round',
-     {"Cost": 3, "Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]", "Abilities": """\
-    TDontWane:
-        NullTargeting: True
-        Filter: Self
-        AutoTrigger: True
-        SkipAnim: True
-        MiscVars:
-            ElementsDontWane: True
-        ActiveBonus:
-            Duration: Persistent
-            Hidden: True"""}),
+     {"Cost": 3, "Flags": "[Passive]"}),
 ]
 
-# The two 2e masteries (consume 4+ elements in one turn five times; all six elements strong or waning at once, in three
-# scenarios) have no Frosthaven battle-goal filter: left out until the plugin has tags for them (NOTES.md).
-MASTERIES = []
+MASTERIES = [
+    ("Elemental Overload", "In a single scenario, consume 4 or more elements in a single turn 5 times",
+     """\
+# Answered by the Frosthaven Mods plugin (GHElementalist2e.cs, FrosthavenMods_ConsumesInOneTurn): Value turns with Amount
+# or more element consumes by the Elementalist, from the element records.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ConsumesInOneTurn]
+        CharacterIDs:
+            ActorID: Elementalist2ID
+        Value: 5
+        Amount: 4"""),
+    ("Elemental Harmony", "Once in 3 different scenarios, have all 6 elements strong or waning at the same time",
+     """\
+# Answered by the Frosthaven Mods plugin (GHElementalist2e.cs, FrosthavenMods_AllSixElementsInScenarios): the moment all
+# six elements are strong or waning is noted on the Elementalist (saved with the scenario); the scenarios are counted
+# per character in the campaign save, Value different scenarios.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AllSixElementsInScenarios]
+        CharacterIDs:
+            ActorID: Elementalist2ID
+        Value: 3"""),
+]
 
 
 def _mixed(math, a, b):

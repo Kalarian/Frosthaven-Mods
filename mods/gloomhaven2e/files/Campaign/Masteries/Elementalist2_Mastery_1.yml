@@ -1,0 +1,17 @@
+Parser: Mastery
+ID: Elementalist2_MASTERY_1
+LocalisedName: Elementalist2_MASTERY_1_Name
+LocalisedDescription: Elementalist2_MASTERY_1_Desc
+PerkPoints: 1
+# Answered by the Frosthaven Mods plugin (GHElementalist2e.cs, FrosthavenMods_ConsumesInOneTurn): Value turns with Amount
+# or more element consumes by the Elementalist, from the element records.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ConsumesInOneTurn]
+        CharacterIDs:
+            ActorID: Elementalist2ID
+        Value: 5
+        Amount: 4

@@ -1393,6 +1393,7 @@ GH2E_Wildfury_07_T	All enemies within <sprite name=Range> 2 that have <sprite na
 GH2E_Wildfury_12_T	All allies within <sprite name=Range> 3 add <sprite name=Pierce> 1 to all their attacks.
 GH2E_Wildfury_17_T	All allies within <sprite name=Range> 3 gain <sprite name=Shield> 1.
 GH2E_Wildfury_28_T	All allies within <sprite name=Range> 3 add +2 <sprite name=Attack> to their first attack each round.
+GH_GH2E_Elementalist2_ALLSIX_TOOLTIP	All six elements were strong or waning at the same time this scenario (Elementalist mastery).
 GH_GH2E_PLAGUE_TOOLTIP	Plague: the Plagueherald's tokens on this figure (at most 3). Many Plagueherald abilities target or hurt figures that have Plague.
 GH_GH2E_SAFEGUARD_TOOLTIP	Safeguard: the next negative condition this figure would gain is prevented, then Safeguard is removed
 GH_GH2E_SUPPLIES_TOOLTIP	Supplies: the Quartermaster's supply track (starts at 10, up to 50). Spending supplies needs at least 10 and sets the track to 0.
@@ -1550,6 +1551,8 @@ PERK_Spellweaver2_10_Name	Arcane Blessing
 PERK_Spellweaver2_10_Desc	At the end of each of your turns during which you performed an action with <sprite name=Lost>, gain <sprite name=Bless>
 Spellweaver2_MASTERY_1_Name	Deep Reserves
 Spellweaver2_MASTERY_1_Desc	In a single scenario, perform four different <sprite name=Lost> actions twice each
+Spellweaver2_MASTERY_2_Name	Fire and Frost
+Spellweaver2_MASTERY_2_Desc	In a single scenario, consume both <sprite name=CreateFire> and <sprite name=CreateIce> during the same turn 6 times
 Spellweaver2_FullName	Spellweaver
 CODEX_Hero_Spellweaver2_Title	Spellweaver
 CODEX_HeroInfo_Spellweaver2	Despite your hand size, a significant portion of your power comes from performing actions with <sprite name=Lost>. While Reviving Ether will gain you a significant amount of stamina, you may still exhaust earlier than you would like if you lose too many cards in quick succession. As a starting point, if you perform one action with <sprite name=Lost> between each of your rests, you should have a reasonable number of turns.
@@ -1654,6 +1657,10 @@ PERK_Elementalist2_11_Name	Restful Flux
 PERK_Elementalist2_11_Desc	Whenever you long rest, <sprite name=ConsumeWild>: <sprite name=CreateWild>
 PERK_Elementalist2_12_Name	Elemental Mastery
 PERK_Elementalist2_12_Desc	<sprite name=CreateFire>, <sprite name=CreateIce>, <sprite name=CreateAir> and <sprite name=CreateEarth> do not wane at the end of each round
+Elementalist2_MASTERY_1_Name	Elemental Overload
+Elementalist2_MASTERY_1_Desc	In a single scenario, consume 4 or more elements in a single turn 5 times
+Elementalist2_MASTERY_2_Name	Elemental Harmony
+Elementalist2_MASTERY_2_Desc	Once in 3 different scenarios, have all 6 elements strong or waning at the same time
 Elementalist2_FullName	Elementalist
 CODEX_Hero_Elementalist2_Title	Elementalist
 CODEX_HeroInfo_Elementalist2	You have a number of actions and attack modifiers that infuse mixed or wild elements. Whenever performing one of these infusions, note that you choose which element you are infusing at the end of that turn, when you move that element to the strong column.

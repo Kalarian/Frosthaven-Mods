@@ -172,3 +172,17 @@ rolling is a new rolling infuse-any modifier.
 
 `GH2E_SKIP_RULECHECK_BUILD=1 python tools/gh2e/check.py Elementalist2`: **CHECK PASSED Elementalist2** (29 of 29 cards,
 packcheck 0 problems, rulecheck 52 ok, no gh_port warnings, no missing text keys).
+
+## Card-accuracy pass, 2026-11-02 (plugin GHElementalist2e.cs; supersedes the NEEDS PLUGIN items above)
+- "If you consume two or more elements" (Malleable Evocation, Shaping the Ether, Prismatic Barrage, Eye of the
+  Hurricane): the `?CTwo` consume has no Requirements and no button any more; the plugin switches it on when two element
+  consumes are toggled and off when they drop below two ("GHRule TwoOrMoreConsumes").
+- Pulsing Cores bottom: each end-of-turn infuse offers only its slot's pair ("GHRule PulsingCores").
+- Lingering Essence top: when a hostile monster consumes an element the holder is asked to infuse it ("GHRule
+  LingeringEssence").
+- Class rule: mixed / wild picker infusions on her own turn are chosen at the end of the turn, strong at once ("GHRule
+  DeferredInfusion").
+- Primed: an optional infuse-any at scenario start (plugin; the perk is Passive only). Elemental Mastery: Fire, Ice, Air,
+  Earth held strong at round end (plugin; ElementsDontWane dropped).
+- Masteries written: ConsumesInOneTurn (5 turns with 4+ consumes) and AllSixElementsInScenarios (3 different scenarios,
+  counted per character in the campaign save; the hidden resource GH2EAllSixElements marks the scenario).

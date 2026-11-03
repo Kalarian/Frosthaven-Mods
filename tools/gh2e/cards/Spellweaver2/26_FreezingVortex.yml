@@ -1,8 +1,8 @@
 # card: Freezing Vortex
 # top: the kill is a sub-ability of the attack on its targets at 2 or fewer hit points (the 1st edition port's Impending
-# End shape: Kill with Filter Health "<= 2"); the obstacle in each killed target's featureless hex is text only (NEEDS
-# PLUGIN: no Frosthaven shape creates an obstacle on every hex a multi-target kill emptied; Xipe's merged create filled
-# the attack's tiles instead)
+# End shape: Kill with Filter Health "<= 2"); each target the kill kills leaves a 1-hex obstacle (Frozen Fist's ice
+# obstacle) in its hex when that hex is featureless, placed by the plugin (GHSpellweaver2e.cs, MiscVars
+# GH2E_ObstacleOnKill; no Frosthaven shape creates an obstacle on every hex a multi-target kill emptied)
 # bottom: the 1st edition Black Hole bottom's shape (Pull, Range 4, all targets, PullTowardsTile), Pull 3, no marks
 Discard: [Lost,Discard]
 Data:
@@ -23,6 +23,8 @@ Data:
                             TargetType: Enemy
                             Health: "<= 2"
                         AnimOverload: None
+                        MiscVars:
+                            GH2E_ObstacleOnKill: True
         Infuse: Ice
         XP: 1
     Bottom:
