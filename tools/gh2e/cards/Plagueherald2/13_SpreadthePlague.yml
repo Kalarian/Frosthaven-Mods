@@ -65,4 +65,6 @@ Layout:
         - Row: "<b><size=130%>$Poison$ <sprite name=Poison>"
         - Row: "$GH2E_Plagueherald2_PLAGUE$"
         - Row: "$GH2E_Plagueherald2_13_B$"
-        - Row: "$GH2E_Plagueherald2_13_B2$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$GH2E_Plagueherald2_13_B2$"

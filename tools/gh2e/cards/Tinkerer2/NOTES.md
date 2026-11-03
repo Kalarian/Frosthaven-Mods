@@ -149,3 +149,19 @@ Regenerate / Invisible / Shield / Heal record aimed at another character or a su
 
 `GH2E_SKIP_RULECHECK_BUILD=1 python tools/gh2e/check.py Tinkerer2` -> **CHECK PASSED Tinkerer2** (31 of 31 cards,
 packcheck 0 problems / 0 warnings, rulecheck 49 ok, 6 summon definitions, 10 perks + 2 masteries).
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/TI2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- 03 Flamethrower top: infuse Fire
+- 04 Disorienting Flash top: infuse Light
+- 05 Ink Bomb top: infuse Dark
+- 12 Toxic Bolt top: infuse Earth
+- 24 Invigorating Aerosol top: infuse Air
+- 28 Cryonic Snare top: infuse Ice
+- 29 Harsh Stimulants top: "Suffer 2."

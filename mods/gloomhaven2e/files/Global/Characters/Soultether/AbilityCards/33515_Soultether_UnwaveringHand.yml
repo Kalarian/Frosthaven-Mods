@@ -49,4 +49,6 @@ Layout:
         - Row: "<size=20%> "
         - Row: "<size=150%><sprite name=Move> *EnemyWillDoThis* <size=100%><voffset=1>@EnemyWillDoThis@"
         - Row: "<size=50%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air

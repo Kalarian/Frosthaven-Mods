@@ -53,4 +53,6 @@ Layout:
     Bottom:
         - Row: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
         - Row: "<size=20%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth

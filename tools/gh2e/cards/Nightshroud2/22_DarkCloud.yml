@@ -59,7 +59,9 @@ Layout:
         - Row: "<size=50%> "
         - Row: "$GH2E_Nightshroud2_22_T3$"
         - Row: "<size=50%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark
     Bottom:
         - Row: "<b><size=130%>$GH2E_SAFEGUARD_NAME$ <size=100%><voffset=1>@BSafeguard@"
         - Row: "<size=50%> "
@@ -68,4 +70,6 @@ Layout:
         - Row: "<b><size=130%>$Curse$ <sprite name=Curse>"
         - Row: "$Range$ <sprite name=Range> *BCurse.Range* @BCurse.Range@"
         - Row: "<size=50%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark

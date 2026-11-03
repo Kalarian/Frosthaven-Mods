@@ -60,7 +60,9 @@ Data:
                 SkipAnim: True
 Layout:
     Top:
-        - Row: "<sprite name=ConsumeAir><sprite name=ConsumeEarth> $FHS_GH2E_Wildfury_REQUIRED$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "<sprite name=ConsumeAir><sprite name=ConsumeEarth> $FHS_GH2E_Wildfury_REQUIRED$"
         - Active:
             Ability: "TSummon"
             Icon: Positive_Summon
@@ -75,4 +77,6 @@ Layout:
         - Row: "<size=150%>$FHS_GH2E_Wildfury_SAFEGUARD_ROW$, <sprite name=Bless>"
         - Row: "$FHS_GH2E_Wildfury_28_B$ <sprite name=Range> *BBless.Range* @BBless.Range@"
         - Row: "<size=50%> "
-        - Row: "<sprite name=CreateAir>/<sprite name=CreateEarth>"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "<sprite name=CreateAir>/<sprite name=CreateEarth>"

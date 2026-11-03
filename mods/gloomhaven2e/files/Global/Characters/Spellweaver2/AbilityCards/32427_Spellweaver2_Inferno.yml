@@ -47,10 +47,16 @@ Layout:
         - Row: "$FHS_GH2E_Spellweaver2_27_T$"
         - Row: "<sprite name=Pierce> *TAttack.Pierce*"
         - Row: "<size=20%> "
-        - Row: "$FHS_GH2E_Spellweaver2_27_T2$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$FHS_GH2E_Spellweaver2_27_T2$"
         - Row: "<size=20%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire
     Bottom:
         - Row: "$FHS_GH2E_Spellweaver2_27_B$"
         - Row: "<size=20%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire

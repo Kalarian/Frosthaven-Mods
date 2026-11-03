@@ -26,6 +26,7 @@ Data:
                             Duration: Persistent
                             Behaviour: BuffMove
                         AutoTrigger: True
+                        CanSkip: False
                         AnimOverload: None
                 AnimOverload: PowerUp
         XP: 2
@@ -43,7 +44,9 @@ Layout:
                 - Row: "<size=50%> "
                 - Row: "$GH2E_Sunkeeper2_11_B$"
                 - Row: "<size=50%> "
-                - Row: "$GH2E_Sunkeeper2_11_B2$"
+                - MandatoryTrigger:
+                    Layout:
+                        - Row: "$GH2E_Sunkeeper2_11_B2$"
         - Row: "<size=50%> "
         - Row:
             - ColumnWidths: "30,20,20"

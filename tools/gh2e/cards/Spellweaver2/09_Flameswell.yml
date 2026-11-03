@@ -48,7 +48,9 @@ Layout:
         - Row: "<size=50%> "
         - XPTracker: TActive
         - Row: "<size=20%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire
     Bottom:
         - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
         - Row: "$Range$ <sprite name=Range> *BHeal.Range* @BHeal.Range@"

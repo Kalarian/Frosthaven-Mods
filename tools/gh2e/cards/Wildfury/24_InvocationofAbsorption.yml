@@ -67,7 +67,9 @@ Data:
         Infuse: Air
 Layout:
     Top:
-        - Row: "<sprite name=ConsumeEarth> $GH2E_Wildfury_REQUIRED$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "<sprite name=ConsumeEarth> $GH2E_Wildfury_REQUIRED$"
         - Row: "<size=50%> "
         - Active:
             Ability: TInvoke
@@ -82,4 +84,6 @@ Layout:
         - Row: "$Range$ <sprite name=Range> *BAttack.Range*"
         - Row: "$Push$ <sprite name=Push> *BAttackSubPush* @BAttackSubPush@"
         - Row: "<size=50%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air

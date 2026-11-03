@@ -43,7 +43,9 @@ Layout:
         - Row: "<size=50%> "
         - XPTracker: TActive
         - Row: "<size=50%> "
-        - Infuse: Light
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Light
     Bottom:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
         - Row: "$Range$ <sprite name=Range> *BAttack.Range*"

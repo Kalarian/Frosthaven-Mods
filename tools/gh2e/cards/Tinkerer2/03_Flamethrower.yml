@@ -39,7 +39,9 @@ Layout:
             - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce*"
             - Row: "$Wound$ <sprite name=Wound>"
             - Row: "<size=50%> "
-            - Infuse: Fire
+            - MandatoryTrigger:
+                Layout:
+                    - Infuse: Fire
         - Column:
             - Row: "£Area£"
     Bottom:

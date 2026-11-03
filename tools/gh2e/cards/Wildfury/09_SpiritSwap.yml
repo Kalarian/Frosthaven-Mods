@@ -113,4 +113,6 @@ Layout:
     Bottom:
         - Row: "$GH2E_Wildfury_09_B$"
         - Row: "<size=50%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air

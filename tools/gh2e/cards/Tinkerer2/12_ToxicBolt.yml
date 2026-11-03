@@ -31,7 +31,9 @@ Layout:
         - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
         - Row: "$Poison$ <sprite name=Poison>"
         - Row: "<size=50%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth
     Bottom:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
         - Row: "$Range$ <sprite name=Range> *BAttack.Range* @BAttack.Range@"

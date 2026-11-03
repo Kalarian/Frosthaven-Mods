@@ -164,3 +164,13 @@ the player" claim: hero summons are AI-driven unless PlayerControlled).
 - **Heart of Doom** bottom: when the slots drop, the player picks the Doom(s) to keep (yes/no per Doom). Slots +98 (any number; re-audit).
 - **Heel** perk: asked at the start of each summon turn; yes = the summon's own move only, toward you, no attack.
 - **Masteries**: Kill 20 doomed enemies (yourself, within one scenario); you + one summon 6 attack abilities in a round.
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/DS2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- None on any card of this class.

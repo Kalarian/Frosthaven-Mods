@@ -59,7 +59,9 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *TWard.Range*</link>"
             - Column:
         - Row: "<size=50%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air
     Bottom:
         - Row: "<size=150%><sprite name=Teleport> *BTeleport* <size=100%><voffset=1>@BTeleport@"
         - Divider:

@@ -47,7 +47,9 @@ Layout:
         - Column:
             - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Row: "<size=20%> "
-            - Infuse: Fire
+            - MandatoryTrigger:
+                Layout:
+                    - Infuse: Fire
         - Column:
             - Row: "£Area£"
     Bottom:
@@ -69,5 +71,7 @@ Layout:
             - ColumnWidths: "30,20,20"
             - Column:
             - Column:
-                - Infuse: Fire
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Fire
             - Column:

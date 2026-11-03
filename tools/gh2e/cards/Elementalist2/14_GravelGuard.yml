@@ -74,7 +74,9 @@ Layout:
             Icon: "Shield"
         - Row: "$GH2E_Elementalist2_14_T$"
         - Row: "<size=20%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth
     Bottom:
         - Row: "$GH2E_Elementalist2_14_B$"
         - Row: "<size=50%> "

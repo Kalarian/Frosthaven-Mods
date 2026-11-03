@@ -71,7 +71,9 @@ Layout:
         - Row: "$Range$ <sprite name=Range> *TAllyAttack.Range* @TAllyAttack.Range@"
         - Row: "$GH2E_Wildfury_27_T$"
         - Row: "<size=50%> "
-        - Row: "<sprite name=CreateAir>/<sprite name=CreateEarth>"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "<sprite name=CreateAir>/<sprite name=CreateEarth>"
     Bottom:
         - Active:
             Ability: BActive

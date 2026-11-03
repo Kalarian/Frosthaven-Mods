@@ -42,7 +42,9 @@ Layout:
         - Row: "<size=20%> "
         - Row: "$FHS_GH2E_Mindthief2_08_T$"
         - Row: "<size=20%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark
     Bottom:
         - Conditional:
             Layout:

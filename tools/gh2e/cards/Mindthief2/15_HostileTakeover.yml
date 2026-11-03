@@ -32,7 +32,9 @@ Layout:
         - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
         - Row: "$Immobilize$ <sprite name=Immobilize>"
         - Row: "<size=20%> "
-        - Infuse: Ice
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Ice
     Bottom:
         - Row: "$GH2E_Mindthief2_15_B$"
         - Row: "<size=20%> "
@@ -40,7 +42,9 @@ Layout:
             - ColumnWidths: "30,20,20,20"
             - Column:
             - Column:
-                - Infuse: Dark
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Dark
             - Column:
                 - XP: 2
             - Column:

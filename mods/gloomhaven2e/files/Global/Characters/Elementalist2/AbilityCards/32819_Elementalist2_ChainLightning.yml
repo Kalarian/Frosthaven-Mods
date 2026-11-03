@@ -78,4 +78,6 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *BHeal.Range* @BHeal.Range@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Infuse: Light
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Light

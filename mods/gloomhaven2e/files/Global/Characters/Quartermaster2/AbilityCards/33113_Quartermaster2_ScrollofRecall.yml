@@ -61,7 +61,9 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *THeal.Range* @THeal.Range@</link>"
             - Column:
         - Row: "<size=50%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth
     Bottom:
         - Row: "$FHS_GH2E_Quartermaster2_13_B$"
         - Row: "<size=50%> "

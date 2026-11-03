@@ -33,7 +33,9 @@ Layout:
         - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
         - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce* @TAttack.Pierce@"
         - Row: "<size=20%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire
     Bottom:
         - Row: "$GH2E_Spellweaver2_08_B$"
         - Row: "<b><size=130%>$Shield$ <sprite name=Shield> *BShield*"
@@ -43,6 +45,8 @@ Layout:
             - ColumnWidths: "30,20,20"
             - Column:
             - Column:
-                - Infuse: Ice
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Ice
             - Column:
                 - Duration: Round

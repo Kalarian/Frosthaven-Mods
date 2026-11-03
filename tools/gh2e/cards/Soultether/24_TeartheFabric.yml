@@ -51,7 +51,9 @@ Layout:
         - Row: "<b><size=130%>$Invisible$ <sprite name=Invisible>"
         - Row: "$GH2E_Soultether_24_T$"
         - Row: "<size=50%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark
     Bottom:
         - Active:
             Ability: BShield

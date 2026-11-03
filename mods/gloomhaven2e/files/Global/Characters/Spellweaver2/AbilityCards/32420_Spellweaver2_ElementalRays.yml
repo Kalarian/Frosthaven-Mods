@@ -67,4 +67,6 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *BCurse.Range*</link>"
             - Column:
         - Row: "<size=20%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark

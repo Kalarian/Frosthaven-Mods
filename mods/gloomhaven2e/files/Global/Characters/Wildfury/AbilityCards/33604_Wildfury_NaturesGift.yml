@@ -49,7 +49,9 @@ Layout:
             - Column:
         - Row: "$FHS_GH2E_Wildfury_SAFEGUARD_ROW$"
         - Row: "<size=50%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth
     Bottom:
         - Row: "<size=150%><sprite name=Poison> <sprite name=Muddle>"
         - Row: "<size=40%> "
@@ -61,4 +63,6 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *BPoison.Range*</link>"
             - Column:
         - Row: "<size=50%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth

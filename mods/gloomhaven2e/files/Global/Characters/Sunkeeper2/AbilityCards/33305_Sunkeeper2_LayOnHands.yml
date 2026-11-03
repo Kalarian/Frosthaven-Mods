@@ -30,6 +30,8 @@ Layout:
     Top:
         - Row: "$FHS_GH2E_Sunkeeper2_05_T$"
         - Row: "<size=50%> "
-        - Infuse: Light
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Light
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove*"

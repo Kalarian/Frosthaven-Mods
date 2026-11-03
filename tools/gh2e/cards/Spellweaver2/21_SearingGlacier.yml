@@ -61,7 +61,9 @@ Layout:
                 - ColumnWidths: "20,30,30"
                 - Column:
                 - Column:
-                    - Infuse: Ice
+                    - MandatoryTrigger:
+                        Layout:
+                            - Infuse: Ice
                 - Column:
                     - XP: 1
         - Column:

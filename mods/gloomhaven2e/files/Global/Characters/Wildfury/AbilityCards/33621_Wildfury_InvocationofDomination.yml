@@ -82,7 +82,9 @@ Data:
         Infuse: Earth
 Layout:
     Top:
-        - Row: "<sprite name=ConsumeAir> $FHS_GH2E_Wildfury_REQUIRED$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "<sprite name=ConsumeAir> $FHS_GH2E_Wildfury_REQUIRED$"
         - Row: "<size=50%> "
         - Active:
             Ability: TInvoke
@@ -102,4 +104,6 @@ Layout:
         - Row: "<size=150%><sprite name=Poison>"
         - Row: "$FHS_GH2E_Wildfury_21_B2$"
         - Row: "<size=50%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth

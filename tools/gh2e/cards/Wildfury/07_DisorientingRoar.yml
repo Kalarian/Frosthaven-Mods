@@ -91,7 +91,9 @@ Layout:
         - XP: 1
         - Duration: Round
     Bottom:
-        - Row: "<sprite name=ConsumeAir> $GH2E_Wildfury_REQUIRED$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "<sprite name=ConsumeAir> $GH2E_Wildfury_REQUIRED$"
         - Row: "<size=50%> "
         - Active:
             Ability: BInvoke

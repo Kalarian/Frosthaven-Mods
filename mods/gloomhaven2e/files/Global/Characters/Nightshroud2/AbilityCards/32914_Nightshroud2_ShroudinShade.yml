@@ -73,7 +73,9 @@ Layout:
             - ColumnWidths: "20,20,20,20"
             - Column:
             - Column:
-                - Infuse: Dark
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Dark
             - Column:
             - Column:
     Bottom:

@@ -59,7 +59,9 @@ Layout:
         - Row: "<size=100%> "
         - XPTracker: TPrevent
         - Row: "<size=20%> "
-        - Infuse: Ice
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Ice
     Bottom:
         - Active:
             Ability: BPrevent
@@ -69,4 +71,6 @@ Layout:
         - Row: "<size=100%> "
         - XPTracker: BPrevent
         - Row: "<size=20%> "
-        - Infuse: Ice
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Ice

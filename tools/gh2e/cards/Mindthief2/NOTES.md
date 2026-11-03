@@ -131,3 +131,27 @@ worth a bench run.
 
 `GH2E_SKIP_RULECHECK_BUILD=1 python tools/gh2e/check.py Mindthief2` -> **CHECK PASSED Mindthief2** (29 cards,
 packcheck 0 problems / 0 warnings, rulecheck 45 ok, no gh_port warnings, no missing text keys).
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/MT2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- 02 Hidden in the Shadows bottom: "You cannot perform move abilities this round. At the end of the round, lose invisible."
+- 05 Frigid Apparition bottom: infuse Ice
+- 05 Frigid Apparition top: infuse Ice
+- 08 Perverse Edge top: infuse Dark
+- 09 Empathetic Assault top: infuse Ice
+- 15 Hostile Takeover bottom: infuse Dark
+- 15 Hostile Takeover top: infuse Ice
+- 18 Frozen Shiv bottom: infuse Ice
+- 18 Frozen Shiv top: infuse Ice
+- 19 Silent Scream bottom: infuse Ice
+- 20 Mass Hysteria bottom: infuse Dark
+- 20 Mass Hysteria top: infuse Ice
+- 25 Psychic Projection bottom: infuse Dark
+- 26 Shared Nightmare top: infuse Ice
+- 29 Phantasmal Killer bottom: infuse Dark

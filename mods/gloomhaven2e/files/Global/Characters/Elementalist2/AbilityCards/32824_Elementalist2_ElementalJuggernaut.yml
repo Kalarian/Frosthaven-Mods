@@ -39,10 +39,8 @@ Layout:
                     SummonName: $FHS_GH2E_SUMMON_ChromaticConstruct$
         - Row: "$FHS_GH2E_Elementalist2_24_T$"
     Bottom:
-        - Row:
-            - ColumnWidths: "10,35,45,10"
-            - Column:
-            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
-            - Column:
-                - Row: "<link=fhpill><sprite name=CreateMixed-IA></link>"
-            - Column:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - MandatoryTrigger:
+            Layout:
+                - Row: "<sprite name=CreateMixed-IA>"

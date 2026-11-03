@@ -43,7 +43,9 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *TAttack.Range* <sprite name=Pierce> *TAttack.Pierce* @TAttack.Pierce@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire
     Bottom:
         - Row: "$FHS_GH2E_Spellweaver2_08_B$"
         - Row:
@@ -58,5 +60,7 @@ Layout:
             - ColumnWidths: "30,20,20"
             - Column:
             - Column:
-                - Infuse: Ice
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Ice
             - Column:

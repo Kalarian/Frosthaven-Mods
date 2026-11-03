@@ -57,7 +57,9 @@ Layout:
             - ColumnWidths: "30,20,20"
             - Column:
             - Column:
-                - Infuse: Dark
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Dark
             - Column:
                 - Duration: Round
     Bottom:

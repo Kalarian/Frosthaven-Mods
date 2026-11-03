@@ -32,7 +32,9 @@ Layout:
         - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
         - Row: "$Muddle$ <sprite name=Muddle>"
         - Row: "<size=20%> "
-        - Infuse: Ice
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Ice
     Bottom:
         - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
         - Row: "$Range$ <sprite name=Range> *BHeal.Range*"
@@ -41,6 +43,8 @@ Layout:
             - ColumnWidths: "30,20,20"
             - Column:
             - Column:
-                - Infuse: Light
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Light
             - Column:
                 - XP: 1

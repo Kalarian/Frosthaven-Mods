@@ -155,3 +155,13 @@ Soothsinger2** (2026-11-01).
   Performance bottom moves EVERY active song back whatever the picker held (EverySongBack, "GHRule SongTokenBack"). The
   masteries' counts are hidden resources on her (GH2ESongsSung bit mask, GH2ENotesMade, GH2ENotesWasted), saved with
   the scenario. Codex: "all your active Songs", "multiple Songs".
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/SS2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- None on any card of this class.

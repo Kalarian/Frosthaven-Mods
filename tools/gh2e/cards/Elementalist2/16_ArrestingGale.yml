@@ -37,7 +37,9 @@ Layout:
         - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
         - Row: "$Stun$ <sprite name=Stun>"
         - Row: "<size=20%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air
     Bottom:
         - Row: "<b><size=130%>$Ward$ <sprite name=Ward> <size=100%><voffset=1>@BWard@"
         - Row: "$Range$ <sprite name=Range> *BWard.Range* @BWard.Range@"

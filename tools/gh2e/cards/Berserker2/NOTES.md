@@ -151,3 +151,23 @@ cards; engine behaviour was read in the decompiled `ScenarioRuleLibrary.dll` whe
 
 `GH2E_SKIP_RULECHECK_BUILD=1 python tools/gh2e/check.py Berserker2`: packcheck 28 cards, 0 problems, 0 warnings;
 rulecheck 42 ok; no gh_port warnings; CHECK PASSED Berserker2.
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/BE2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- 02 Shiny Distraction bottom: infuse Fire
+- 06 Blood Pact bottom: "At the start of each of your turns, if hp > 1, suffer 1"
+- 06 Blood Pact top: "Suffer damage equal to half your current hit point value"
+- 07 Cauterize top: infuse Fire
+- 10 From the Brink top: infuse Fire
+- 11 Glass Hammer top: "Set your current hit point value to 1."
+- 16 Tireless Retribution bottom: infuse Fire
+- 18 Inner Fire top: infuse Fire
+- 22 Devil Horns top: infuse Fire
+- 25 Bone Breaker top: infuse Fire
+- 27 Burning Hatred bottom: "Suffer 1. This cannot be negated."

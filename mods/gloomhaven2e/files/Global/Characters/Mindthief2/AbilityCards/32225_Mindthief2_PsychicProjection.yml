@@ -79,4 +79,6 @@ Layout:
         - Row: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
         - Row: "$FHS_GH2E_Mindthief2_25_B2$"
         - Row: "<size=20%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark

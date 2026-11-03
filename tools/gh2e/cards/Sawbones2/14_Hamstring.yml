@@ -28,4 +28,6 @@ Layout:
     Bottom:
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"
         - Row: "<size=50%> "
-        - Row: "$GH2E_Sawbones2_14_B$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$GH2E_Sawbones2_14_B$"

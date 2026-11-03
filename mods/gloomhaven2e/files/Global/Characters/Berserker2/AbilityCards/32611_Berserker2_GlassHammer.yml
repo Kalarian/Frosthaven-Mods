@@ -32,7 +32,9 @@ Layout:
         - Row: "<size=20%> "
         - Row: "$FHS_GH2E_Berserker2_11_T$"
         - Row: "<size=50%> "
-        - Row: "$FHS_GH2E_Berserker2_11_T2$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$FHS_GH2E_Berserker2_11_T2$"
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"

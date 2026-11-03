@@ -76,7 +76,9 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *THeal2.Range*</link>"
             - Column:
         - Row: "<size=50%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air
     Bottom:
         - Active:
             Ability: BActive

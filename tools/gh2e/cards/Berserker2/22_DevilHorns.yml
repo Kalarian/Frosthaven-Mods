@@ -25,7 +25,9 @@ Layout:
             - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
             - Row: "$Wound$ <sprite name=Wound>"
             - Row: "<size=50%> "
-            - Infuse: Fire
+            - MandatoryTrigger:
+                Layout:
+                    - Infuse: Fire
         - Column: "£Area£"
     Bottom:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"

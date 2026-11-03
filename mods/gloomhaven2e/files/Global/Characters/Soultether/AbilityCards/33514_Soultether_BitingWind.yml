@@ -98,4 +98,6 @@ Layout:
             - Column:
         - Row: "$FHS_GH2E_Soultether_14_B$"
         - Row: "<size=50%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air

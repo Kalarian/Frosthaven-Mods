@@ -101,10 +101,8 @@ Layout:
                     Name: TCEarth
                     Text: "$FHS_GH2E_Elementalist2_22_T2$"
     Bottom:
-        - Row:
-            - ColumnWidths: "10,35,45,10"
-            - Column:
-            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
-            - Column:
-                - Row: "<link=fhpill><sprite name=CreateMixed-IE></link>"
-            - Column:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - MandatoryTrigger:
+            Layout:
+                - Row: "<sprite name=CreateMixed-IE>"

@@ -64,4 +64,6 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *BAttack.Range* <sprite name=Pierce> *BAttack.Pierce* @BAttack.Pierce@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Infuse: Ice
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Ice

@@ -30,7 +30,9 @@ Layout:
         - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen>, $Bless$ <sprite name=Bless> <size=100%><voffset=1>@TBlessStrengthen@"
         - Row: "$Range$ <sprite name=Range> *TBlessStrengthen.Range*"
         - Row: "<size=50%> "
-        - Infuse: Light
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Light
     Bottom:
         - Row: "$GH2E_Sunkeeper2_03_B$"
         - Row: "<size=20%> "

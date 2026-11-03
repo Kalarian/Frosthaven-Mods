@@ -39,7 +39,9 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <sprite name=Range> *TAttack.Range* <sprite name=Pierce> *TAttack.Pierce*, <sprite name=Muddle></link>"
             - Column:
         - Row: "<size=20%> "
-        - Infuse: Ice
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Ice
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"
@@ -51,4 +53,6 @@ Layout:
         - Row: "<size=50%> "
         - Row: "$FHS_GH2E_Mindthief2_20_B$"
         - Row: "<size=20%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark

@@ -31,7 +31,9 @@ Layout:
         - Row: "$Range$ <sprite name=Range> *TStun.Range*"
         - Row: "$XP_PerEnemy$"
         - Row: "<size=50%> "
-        - Infuse: Light
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Light
     Bottom:
         - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
         - Row: "$Range$ <sprite name=Range> *BHeal.Range*"

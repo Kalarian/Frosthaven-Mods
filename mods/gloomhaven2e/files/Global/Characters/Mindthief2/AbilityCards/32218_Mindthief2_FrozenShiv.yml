@@ -44,7 +44,9 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Pierce> *TAttack.Pierce* @TAttack.Pierce@</link>"
             - Column:
         - Row: "<size=20%> "
-        - Infuse: Ice
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Ice
     Bottom:
         - Row: "<size=150%><sprite name=Attack> *BAttack1* <size=100%><voffset=1>@BAttack1@"
         - Divider:
@@ -52,4 +54,6 @@ Layout:
         - Divider:
         - Row: "<size=150%><sprite name=Attack> *BAttack2* <size=100%><voffset=1>@BAttack2@"
         - Row: "<size=20%> "
-        - Infuse: Ice
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Ice

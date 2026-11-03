@@ -42,4 +42,6 @@ Layout:
         - Row: "<size=150%><sprite name=Strengthen>"
         - Row: "$FHS_GH2E_Soultether_TARGET_SUMMON$"
         - Row: "<size=50%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire

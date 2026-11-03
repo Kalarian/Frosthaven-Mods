@@ -44,7 +44,9 @@ Data:
         XP: 2
 Layout:
     Top:
-        - Row: "$GH2E_Berserker2_06_T$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$GH2E_Berserker2_06_T$"
         - Row: "<size=50%> "
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "<size=50%> "
@@ -56,7 +58,9 @@ Layout:
             Layout:
                 - Row: "$GH2E_Berserker2_06_B$"
                 - Row: "<size=50%> "
-                - Row: "$GH2E_Berserker2_06_B2$"
+                - MandatoryTrigger:
+                    Layout:
+                        - Row: "$GH2E_Berserker2_06_B2$"
             Icon: Positive_AttackPlus
         - Row: "<size=50%> "
         - Row:

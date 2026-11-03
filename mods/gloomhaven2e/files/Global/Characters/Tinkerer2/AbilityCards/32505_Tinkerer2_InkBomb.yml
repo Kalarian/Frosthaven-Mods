@@ -40,7 +40,9 @@ Layout:
                 - Column:
             - Row: "$FHS_XP_PerEnemy$"
             - Row: "<size=50%> "
-            - Infuse: Dark
+            - MandatoryTrigger:
+                Layout:
+                    - Infuse: Dark
         - Column:
             - Row: "£Area£"
     Bottom:

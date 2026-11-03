@@ -43,7 +43,9 @@ Layout:
         - Row: "<b><size=130%>$Ward$ <sprite name=Ward>"
         - Row: "$Range$ <sprite name=Range> *TWard.Range*"
         - Row: "<size=50%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air
     Bottom:
         - Row: "<b><size=130%>$Teleport$ <sprite name=Teleport> *BTeleport* <size=100%><voffset=1>@BTeleport@"
         - Row: "<size=50%> "

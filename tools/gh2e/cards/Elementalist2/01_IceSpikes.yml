@@ -51,9 +51,6 @@ Layout:
         - Row: "$Range$ <sprite name=Range> *BAttack.Range* @BAttack.Range@"
         - Row: "$Immobilize$ <sprite name=Immobilize>"
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "50, 50"
-            - Column:
-                - Infuse: Ice
-            - Column:
-                - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: [Ice, Earth]

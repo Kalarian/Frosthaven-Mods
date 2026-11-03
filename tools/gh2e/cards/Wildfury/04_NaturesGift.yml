@@ -38,9 +38,13 @@ Layout:
         - Row: "$Range$ <sprite name=Range> *THeal.Range*"
         - Row: "$GH2E_Wildfury_SAFEGUARD_ROW$"
         - Row: "<size=50%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth
     Bottom:
         - Row: "<b><size=130%>$Poison$ <sprite name=Poison> $Muddle$ <sprite name=Muddle>"
         - Row: "$Range$ <sprite name=Range> *BPoison.Range*"
         - Row: "<size=50%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth

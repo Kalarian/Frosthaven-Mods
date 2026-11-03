@@ -205,3 +205,13 @@ Plugin GHPlagueherald2e.cs (each rule logs "GHRule <Name> card <id>"):
   GH2EXornUsed).
 - Masteries: FrosthavenMods_KillsWithoutModifierInTurn (3 kills in one turn of his, no modifier drawn by him) and
   FrosthavenMods_PoisonEveryRound (Poison given or removed by him in every round he took a turn).
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/PH2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- 13 Spread the Plague bottom: "Remove poison from that ally."

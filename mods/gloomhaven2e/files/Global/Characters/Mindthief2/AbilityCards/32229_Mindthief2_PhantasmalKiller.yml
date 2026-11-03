@@ -93,4 +93,6 @@ Layout:
         - Divider:
         - Row: "<size=150%><sprite name=Invisible>"
         - Row: "<size=20%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark

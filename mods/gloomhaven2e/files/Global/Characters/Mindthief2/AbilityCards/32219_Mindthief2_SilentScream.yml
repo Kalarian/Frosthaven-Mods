@@ -62,4 +62,6 @@ Layout:
         - Row: "<size=20%> "
         - Row: "<size=150%><sprite name=Attack> -1"
         - Row: "<size=20%> "
-        - Infuse: Ice
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Ice

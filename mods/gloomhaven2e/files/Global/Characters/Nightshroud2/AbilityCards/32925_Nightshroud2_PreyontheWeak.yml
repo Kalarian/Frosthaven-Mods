@@ -81,4 +81,6 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Enemy></link>"
             - Column:
         - Row: "<size=50%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark

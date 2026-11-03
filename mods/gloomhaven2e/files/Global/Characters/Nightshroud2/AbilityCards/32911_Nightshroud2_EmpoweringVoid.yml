@@ -57,7 +57,9 @@ Layout:
             - ColumnWidths: "30,20,20"
             - Column:
             - Column:
-                - Infuse: Dark
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Dark
             - Column:
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

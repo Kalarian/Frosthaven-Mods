@@ -50,7 +50,9 @@ Layout:
         - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
         - Row: "$Range$ <sprite name=Range> *THeal.Range* @THeal.Range@"
         - Row: "<size=50%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth
     Bottom:
         - Row: "$GH2E_Quartermaster2_13_B$"
         - Row: "<size=50%> "

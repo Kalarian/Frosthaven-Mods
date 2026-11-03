@@ -96,7 +96,9 @@ Data:
                 XP: 1
 Layout:
     Top:
-        - Row: "<sprite name=ConsumeAir>/<sprite name=ConsumeEarth> $FHS_GH2E_Wildfury_REQUIRED$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "<sprite name=ConsumeAir>/<sprite name=ConsumeEarth> $FHS_GH2E_Wildfury_REQUIRED$"
         - Row: "<size=50%> "
         - Active:
             Ability: TInvoke

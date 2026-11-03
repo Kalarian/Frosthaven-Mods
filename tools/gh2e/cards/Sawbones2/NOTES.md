@@ -181,3 +181,17 @@ packcheck 0 problems / 0 warnings, rulecheck 48 ok, no gh_port warnings, no miss
   bottom targets only an ally holding one of the nine conditions (Filter TargetHasNegativeConditions), so its XP needs a
   real removal. Triage's violations are the hidden resource GH2EUndamagedAttacks (saved with the scenario). Friend of
   the Oak's used week is saved in the campaign ("FHMODS:FriendOfTheOak=<week>"); its perk text names the Temple.
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/SB2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- 14 Hamstring bottom: "Immobilize self"
+- 19 Do No Harm top: "Disarm self"
+- 22 Amputate bottom: "Stun the target of the heal ability"
+- 33 Medical Pack 0444 bottom: "Poison self"
+- 35 Medical Pack (Immobilize self) bottom: "Immobilize self"

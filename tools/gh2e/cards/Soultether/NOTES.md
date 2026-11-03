@@ -166,3 +166,26 @@ Plugin GHSoultether.cs (each rule logs "GHRule <Name> card <id>"):
   rest calls); summons in earlier rounds count. Planar Conclave counts SCENARIOS (user decision): per character, one
   entry per scenario id with its round-1 summon abilities ("FHMODS:Soul2R1S:<id>=..."), met when 6 scenarios can each
   be paired with a different summon ability.
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/ST2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- 01 Ethereal Gust bottom: infuse Air
+- 02 Forged Ferocity bottom: infuse Fire
+- 03 Living Night bottom: infuse Dark
+- 08 Burning Passion top: infuse Fire
+- 10 Shadow Dart top: infuse Dark
+- 13 Drifting Stingers top: infuse Air
+- 14 Biting Wind bottom: infuse Air
+- 15 Unwavering Hand bottom: infuse Air
+- 16 Intervening Apparitions bottom: infuse Dark
+- 18 Shaping the Void top: infuse Air
+- 19 Deadly Mischief bottom: infuse Fire
+- 21 Volatile Flame bottom: infuse Fire
+- 24 Tear the Fabric top: infuse Dark
+- 27 Negative Energy top: infuse Dark

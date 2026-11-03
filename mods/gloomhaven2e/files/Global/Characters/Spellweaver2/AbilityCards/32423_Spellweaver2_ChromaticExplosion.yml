@@ -101,7 +101,9 @@ Layout:
         - Column:
             - Row: "£Area£"
             - Row: "<size=20%> "
-            - Infuse: [Air, Ice, Fire, Earth, Light, Dark]
+            - MandatoryTrigger:
+                Layout:
+                    - Infuse: [Air, Ice, Fire, Earth, Light, Dark]
     Bottom:
         - Row: "$FHS_GH2E_Spellweaver2_23_B$"
         - Row: "<size=20%> "

@@ -43,10 +43,14 @@ Layout:
     Top:
         - Row: "$FHS_GH2E_Elementalist2_12_T$"
         - Row: "<size=20%> "
-        - Infuse: Light
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Light
     Bottom:
         - Row: "<size=150%><sprite name=Loot> *BLoot*"
         - Divider:
         - Row: "<size=150%><sprite name=Heal> *BHeal* <size=100%><voffset=1>@BHeal@"
         - Row: "<size=20%> "
-        - Infuse: Any
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Any

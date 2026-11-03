@@ -63,6 +63,8 @@ Layout:
         - Row:
             - ColumnWidths: "30,20,20"
             - Column:
-                - Infuse: Fire
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Fire
             - Column:
             - Column:

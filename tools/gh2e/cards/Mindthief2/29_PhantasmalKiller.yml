@@ -89,4 +89,6 @@ Layout:
         - Row: "<size=50%> "
         - Row: "<b><size=130%>$Invisible$ <sprite name=Invisible>"
         - Row: "<size=20%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark

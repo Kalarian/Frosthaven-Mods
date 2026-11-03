@@ -28,4 +28,6 @@ Layout:
     Bottom:
         - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*"
         - Row: "<size=50%> "
-        - Row: "$GH2E_Sawbones2_14_B$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$GH2E_Sawbones2_14_B$"

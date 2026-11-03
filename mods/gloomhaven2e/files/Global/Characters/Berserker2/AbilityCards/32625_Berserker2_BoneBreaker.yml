@@ -59,7 +59,9 @@ Layout:
         - Row: "<size=20%> "
         - Row: "$FHS_GH2E_Berserker2_25_T$"
         - Row: "<size=50%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"
