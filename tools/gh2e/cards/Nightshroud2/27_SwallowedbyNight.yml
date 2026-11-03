@@ -3,11 +3,11 @@
 # don't and the target is a normal enemy standing on a Tear: you may kill it (a custom-targeted Kill on the stun's
 # target, optional), which removes that Tear (RemoveShadow on its hex, Deathwalker Fluid Night's form) and gives you
 # Invisible; XP 1 on the kill (AbilityXP).
-# bottom: "during this and the next four rounds, you may perform attack abilities while you have Invisible" belongs to
-# the class mat's Invisible rule (NEEDS PLUGIN): a persistent marker bonus whose five slots advance at each round's end
-# (EndRoundAbility, XP on slots 1, 3, 5), which the plugin can read. "When this card is moved from your active area to
-# your lost pile, you become exhausted": no Frosthaven trigger on a card leaving the active area (ExhaustSelf exists
-# only as an ability flag, the 1st edition Final Fight): text only, NEEDS PLUGIN.
+# bottom: "during this and the next four rounds, you may perform attack abilities while you have Invisible": a
+# persistent marker bonus whose five slots advance at each round's end (EndRoundAbility, XP on slots 1, 3, 5); while
+# it is active the class mat's no-attack rule lets her attacks through (GHNightshroud.cs). "When this card is moved
+# from your active area to your lost pile, you become exhausted": GHTears.cs exhausts her when the card goes from the
+# active area to the lost pile (after her action if it is her turn, else at the next exhaustion check).
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -22,7 +22,7 @@ Data:
                 AnimOverload: WeakRadial
             TTear:
                 CreateShadow:
-                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+                HelpBoxTooltipLocKey: "GH2E_Nightshroud2_TEAR_PLACE_HELP"
                 Target: 1
                 Targeting: Custom
                 Vars:

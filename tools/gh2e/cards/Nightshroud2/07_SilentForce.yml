@@ -1,6 +1,7 @@
 # card: Silent Force
-# top: Stun on an area (the 1st edition Soothsinger's Provoke Terror shape, a melee area from the grey hex). The Tear
-# hex (4,0, two hexes away in the line) = a Tear within range 2 (APPROXIMATION, NOTES.md).
+# top: Stun on an area (the 1st edition Soothsinger's Provoke Terror shape, a melee area from the grey hex); the Tear
+# hex 4,0: the Tear hex is a blue hex of the area (it turns with it; tag GH2ETearHexArea) and the Tear placement may
+# use only that hex (tag GH2ETearHex, GHTears.cs), once the area's ability was performed (2e FAQ).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -8,13 +9,21 @@ Data:
             TStun:
                 Stun: True
                 Filter: Enemy
-                AreaEffect: "0,0,G|2,0,R"
+                AreaEffect: "0,0,G|2,0,R|4,0,B"
+                MiscVars:
+                    GH2ETearHexArea: True
                 AnimOverload: AggressiveTargetedShout
             TTear:
                 CreateShadow:
-                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
-                Range: 2
+                HelpBoxTooltipLocKey: "GH2E_Nightshroud2_TEARHEX_HELP"
                 Target: 1
+                # (the tiles are replaced by the Tear hexes of the area by GHTears.cs; Custom targeting is what makes the
+                # game ask for them)
+                Targeting: Custom
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(TargetingActor.Tile)
+                MiscVars:
+                    GH2ETearHex: True
                 AnimOverload: Shadow Manipulation
     Bottom:
         Abilities:
@@ -35,7 +44,7 @@ Layout:
             - Column:
                 - Row: "<nobr><b><size=130%>$Stun$ <sprite name=Stun></nobr>"
                 - Row: "<size=20%> "
-                - Row: "$GH2E_Nightshroud2_TEARHEX$"
+                - Row: "$GH2E_Nightshroud2_TEARHEXB$"
             - Column: "£Area£"
     Bottom:
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

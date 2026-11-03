@@ -3,16 +3,13 @@ ID: Nightshroud2_MASTERY_2
 LocalisedName: Nightshroud2_MASTERY_2_Name
 LocalisedDescription: Nightshroud2_MASTERY_2_Desc
 PerkPoints: 1
-# The plugin's round streak (GHMasteries.cs, the Brute's Relentless Onslaught): Value rounds in a row with at least
-# Amount damage to enemies, no card count. APPROXIMATION: damage dealt each round stands for "an attack ability
-# performed" (an attack that deals no damage doesn't count; damage from a non-attack does) (NOTES.md).
+# The plugin's attack streak (GHMasteries.cs, FrosthavenMods_AttackStreak): Value rounds in a row in each of which an
+# attack ability of yours happened, whatever damage it dealt.
 BattleGoalCondition:
     - Targets:
         Filter: CountXRounds
         SubFilter: Scenario
-        EnemyFamilies: [FrosthavenMods_DamageStreak]
+        EnemyFamilies: [FrosthavenMods_AttackStreak]
         CharacterIDs:
             ActorID: Nightshroud2ID
         Value: 5
-        Amount: 1
-        Targets: 0

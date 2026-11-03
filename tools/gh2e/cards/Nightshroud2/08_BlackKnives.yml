@@ -1,6 +1,6 @@
 # card: Black Knives
-# top: "+1 Attack on the second attack if the first attack kills an enemy": Frosthaven has no per-target bonus that
-# reads an earlier target's death inside one multi-target attack. Text only (NEEDS PLUGIN, NOTES.md).
+# top: "+1 Attack on the second attack if the first attack kills an enemy": the plugin (GHTears.cs) adds +1 to the
+# second target's attack (before the modifier's math) when the first target died (card 32908 only).
 Discard: [Discard,Discard]
 Data:
     Top:

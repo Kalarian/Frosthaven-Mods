@@ -1,8 +1,9 @@
 # card: Nightfall
 # top: Push 3 with Immobilize. "If the target is pushed into one or more hexes with a Tear, they gain Muddle, Curse and
-# suffer hazardous terrain damage": APPROXIMATION: Muddle + Curse when the pushed target ends the push on a Tear
-# (CustomAbility.SteppedOnShadow on its hex; a Tear passed through mid-push isn't seen). The hazardous terrain damage
-# (scenario-level dependent) has no data shape here: text only (NEEDS PLUGIN, NOTES.md).
+# suffer hazardous terrain damage": the plugin (GHTears.cs) marks each figure a Nightshroud push moves through or into a
+# hex with one of her Tears (the actor's temp var GH2EPushTear, read here as obj.GH2EPushTear), so a Tear passed
+# mid-push counts. Muddle + Curse on it, then the scenario's hazardous terrain damage (Damage 0 with StatIsBasedOnX
+# ScenarioHazardousTerrainDamage, Frosthaven's Laser Spire / Algox Icespeaker Ice Wall form).
 # bottom: consume Light: Heal 2, self, and infuse Dark (the 1st edition Nightfall bottom's consume-and-infuse shape).
 Discard: [Discard,Discard]
 Data:
@@ -34,8 +35,28 @@ Data:
                 StartAbilityRequirements:
                     Type: ThisAbility
                     Vars:
-                        ValidateOnTear: Pushed != null && Pushed.ActorsTargeted.Any(obj.IsDead == False && CustomAbility.SteppedOnShadow(obj.Tile))
+                        ValidateOnTear: Pushed != null && Pushed.ActorsTargeted.Any(obj.IsDead == False && obj.GH2EPushTear == True)
                 AnimOverload: WeakRadial
+            TTearDamage:
+                Damage: 0
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: ScenarioHazardousTerrainDamage
+                Filter: Enemy
+                Target: -1
+                AutoTrigger: True
+                CanSkip: False
+                Targeting: Custom
+                Vars:
+                    Pushed: CustomAbility.FindAbilityInPhaseByName("TPush")
+                TargetingVars:
+                    AddValidActorsInRange: Pushed.ActorsTargeted.Where(obj.IsDead == False && obj.GH2EPushTear == True)
+                    AddActorsToTarget: Pushed.ActorsTargeted.Where(obj.IsDead == False && obj.GH2EPushTear == True)
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateOnTear: Pushed != null && Pushed.ActorsTargeted.Any(obj.IsDead == False && obj.GH2EPushTear == True)
+                AnimOverload: Debuff
         Infuse: Dark
     Bottom:
         Abilities:

@@ -7,20 +7,23 @@ Initiative: 90
 # card: Shadowstrike
 # top: "enemies in the red hexes suffer damage 2": Damage can't take an area (CARD_FIXES 20225), so the area is a
 # NullTargeting ability and the damage its sub-ability on the figures in its red hexes (Frosthaven's Banner Spear
-# Boldening Blow top: CustomAbility.ActorsOnRedHexes). "Teleport to the Tear hex of the damage ability" = a Tear within
-# range 2 (the Tear hex 3,1 is two hexes away), then Teleport 2 onto a Tear (APPROXIMATION: not tied to the area's
-# rotation). Consume Dark: "play a card from your hand to perform its top or bottom action" = Frosthaven's
+# Boldening Blow top: CustomAbility.ActorsOnRedHexes). The Tear hex 3,1 is a blue hex of the area (the Tear may go only
+# there) and "Teleport to the Tear hex of the damage ability" may land only on it (tag GH2ETearHexTeleport, GHTears.cs);
+# both need the damage ability performed (an enemy in the red hexes, 2e FAQ). Consume Dark: "play a card from your hand to perform its top or bottom action" = Frosthaven's
 # SelectAndPlayCard from the hand (Blinkblade Sand in the Hourglass bottom), XP 1.
 # bottom: Ward and Strengthen on you, Attack 3. Consume Dark: "this attack does not cause you to gain Invisible at the
-# end of the round" belongs to the class mat's Invisible rule (NEEDS PLUGIN): a round marker bonus on you (a
-# NullTargeting round bonus with its own list text, Blinkblade Systems Reboot's form) the plugin can read; XP 1.
+# end of the round": a round marker bonus on you (a NullTargeting round bonus with its own list text, Blinkblade Systems
+# Reboot's form); the class mat rule (GHNightshroud.cs) gives no Invisible at the round's end for this card's attack
+# while it is active; XP 1.
 Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
             TArea:
                 NullTargeting: True
-                AreaEffect: "0,0,G|2,0,R|1,1,R|4,0,E"
+                AreaEffect: "0,0,G|2,0,R|1,1,R|4,0,E|3,1,B"
+                MiscVars:
+                    GH2ETearHexArea: True
                 Filter: Enemy
                 SkipAnim: True
                 SubAbilities:
@@ -42,15 +45,21 @@ Data:
                         AnimOverload: Debuff
             TTear:
                 CreateShadow:
-                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
-                Range: 2
+                HelpBoxTooltipLocKey: "GH2E_Nightshroud2_TEARHEX_HELP"
                 Target: 1
+                # (the tiles are replaced by the Tear hexes of the area by GHTears.cs; Custom targeting is what makes the
+                # game ask for them)
+                Targeting: Custom
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(TargetingActor.Tile)
+                MiscVars:
+                    GH2ETearHex: True
                 AnimOverload: Shadow Manipulation
             TTeleport:
                 Teleport2: 2
                 Filter: Self
                 MiscVars:
-                    IsValidTeleportTile: CustomAbility.SteppedOnShadow(Tile)
+                    GH2ETearHexTeleport: True
                 AnimOverload: Teleport Into
                 AnimOverload2: Teleport Outof
             TCDark:

@@ -80,6 +80,8 @@ namespace FrosthavenMods
         internal const string EnemiesDebuffedTag = "FrosthavenMods_EnemiesDebuffed";           // (Beast Tyrant) Value distinct enemies given a negative condition
         internal const string LavaGolemTag = "FrosthavenMods_LavaGolemAllScenario";            // (Summoner) the Lava Golem out on turn 1 and never killed
         internal const string SummonCardsTag = "FrosthavenMods_SummonsFromDifferentCards";     // (Summoner) Value cards whose summon ability was performed
+        // 2nd edition card-accuracy pass (2026-11-02)
+        internal const string AttackStreakTag = "FrosthavenMods_AttackStreak";                 // (Nightshroud 2e) Value rounds in a row with an attack ability performed
 
         private static readonly HashSet<CAbility.EAbilityType> SupportTypes = new HashSet<CAbility.EAbilityType>
         {
@@ -138,6 +140,7 @@ namespace FrosthavenMods
                 else if (tags.Contains(EnemiesDebuffedTag)) EnemiesDebuffed(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(LavaGolemTag)) LavaGolemAllScenario(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(SummonCardsTag)) SummonsFromDifferentCards(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(AttackStreakTag)) AttackStreak(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else return true;   // a marker of a newer pack this plugin doesn't know: the game's own filter answers
             }
             catch (Exception e)
@@ -186,6 +189,28 @@ namespace FrosthavenMods
                 if (distinct.Count >= cards) { met = rounds; result = true; return; }
             }
             met = Math.Min(best, rounds - 1);
+        }
+
+        /// <summary>Value rounds in a row in each of which the character performed an attack ability (the 2nd edition
+        /// Nightshroud's Relentless Shadow: "perform an attack ability during your turn in 5 consecutive rounds"). An
+        /// attack ability counts when it happened (it had a target), whether or not it dealt damage.</summary>
+        private static void AttackStreak(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int rounds = Math.Max(1, t.Value);
+            var attacked = new HashSet<int>();
+            foreach (CPlayerStats s in stats)
+                foreach (CPlayerStatsAbilities a in s.Abilities ?? Enumerable.Empty<CPlayerStatsAbilities>())
+                    if (a != null && a.HasHappened && a.ActionData != null && a.ActionData.AbilityType == CAbility.EAbilityType.Attack) attacked.Add(a.Round);
+            int last = attacked.DefaultIfEmpty(0).Max(), run = 0, best = 0;
+            for (int r = 1; r <= last; r++)
+            {
+                run = attacked.Contains(r) ? run + 1 : 0;
+                best = Math.Max(best, run);
+            }
+            total = rounds;
+            met = Math.Min(best, rounds);
+            result = best >= rounds;
+            if (result && Reported.Add("AttackStreak met " + best)) Plugin.Log.LogInfo($"GHRule AttackStreak card 0 Relentless Shadow: attack abilities in {best} rounds in a row");
         }
 
         /// <summary>Value kills of enemies that had (near) or lacked (away) another character adjacent when they fell.</summary>
