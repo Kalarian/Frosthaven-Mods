@@ -90,7 +90,7 @@ namespace FrosthavenMods
                 int card = CardId(abilityOverride.OriginalAbility);
                 if (card == 0)
                 {
-                    string cls = (attack.TargetingActor as CPlayerActor)?.CharacterClass?.ID ?? "";
+                    string cls = ((attack.TargetingActor ?? GameState.InternalCurrentActor) as CPlayerActor)?.CharacterClass?.ID ?? "";   // (TargetingActor is unset this early: night46 still logged 0)
                     card = cls.StartsWith("Mindthief2") ? 32210 : cls.StartsWith("Cragheart2") ? 32106 : 0;
                 }
                 Log("SingleTargetAugment", card,
