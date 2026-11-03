@@ -1,6 +1,7 @@
 # card: Psychic Blade
-# written from tools/gh2e/sheets/Mindthief.json; augment approximated as +1 Range treated as melee on every melee
-# attack (no single-target restriction); bottom = Frosthaven's Plague Protocol shape (a round attack buff adding a
+# written from tools/gh2e/sheets/Mindthief.json; augment = +1 Range treated as melee (reach 2) on her melee attacks,
+# single-target only: the override is marked GHSingleTargetOnly and the plugin (GHMindthief2.cs) skips it on an attack
+# with more than one target, Targeting All or an area; bottom = Frosthaven's Plague Protocol shape (a round attack buff adding a
 # condition), melee only
 Discard: [Discard,Discard]
 Data:
@@ -18,6 +19,8 @@ Data:
                             ParentName: TAttack
                             Range: 1
                             TreatAsMelee: True
+                            MiscVars:
+                                GHSingleTargetOnly: True
                 SubAbilities:
                     TControl:
                         ControlActor:

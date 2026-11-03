@@ -15,6 +15,25 @@ Abilities:
                     ABearMove:
                         Move: 4
                         StrengthIsBase: True
+                        MiscVars:
+                            GHCallOfTheWild: True
+                        SubAbilities:
+                            ACallTeleport:
+                                Teleport2: 99
+                                Filter: Self
+                                CanSkip: True
+                                TreatAsNonSubAbility: True
+                                StartAbilityRequirements:
+                                    Type: ThisAbility
+                                    Vars:
+                                        ValidateWildfury: TargetingActor.Class.ID == "WildfuryID"
+                                Vars:
+                                    Bear: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID")
+                                MiscVars:
+                                    IsValidTeleportTile: Bear.GetDistanceTo(tile) == 1
+                                    GHCallOfTheWildTeleport: True
+                                AnimOverload: Teleport Into
+                                AnimOverload2: Teleport Outof
             Filter:
                 TargetType: [Companion]
                 HeroSummonClasses: [WildfuryBearID]

@@ -536,6 +536,7 @@ AMC_GH2E_Tinkerer2_Strengthen_Ally_P2	+2 <sprite name=Strengthen>, one ally
 AMC_GH2E_Wildfury_AirEarth_P1	+1 Air or Earth
 AMC_GH2E_Wildfury_Heal2Bear_R	+0, <sprite name=Heal> 2, target the Bear <sprite name=Rolling>
 AMC_GH2E_Wildfury_P1_Safeguard	+1, Safeguard, target 1 ally
+AMC_GH2E_Wildfury_P2_Bond	+2, +1 <sprite name=Attack> if the Wildfury and the Bear are within <sprite name=Range> 4 of each other
 AMC_GH2E_Wildfury_Push2_P2	+2 <sprite name=Push> 2
 AMC_Stun_P1	+1 <sprite name=Stun>
 BearTrap	Trap
@@ -1398,6 +1399,7 @@ GH_GH2E_SilentKnife_HIREDHELP_TOOLTIP	Hired Help: this enemy is the Silent Knife
 GH_GH2E_SilentKnife_MONEY_TOOLTIP	Money tokens: the loot tokens the Silent Knife has looted this scenario. Placing or losing one puts one of her loot cards (her choice, never the random item) back on top of the loot deck; a placed token can be looted again.
 GH_GH2E_Soothsinger2_HIGHNOTE_TOOLTIP	High Note: pays for Songs (at most two)
 GH_GH2E_Soothsinger2_LOWNOTE_TOOLTIP	Low Note: pays for Songs (at most two)
+GH_GH2E_Wildfury_RAGE_TOOLTIP	Concentrated Rage: damage tokens on the card. One is added whenever the Bear attacks or suffers damage from retaliate; a Bear attack with three or more removes three for +3 Attack instead.
 Mindthief2	Mindthief
 Mindthief2_DESCRIPTION	You have key actions known as Augments. When you perform an augment ability, you place that card in your active area to gain a persistent bonus on your melee attacks. You may only have one augment active at a time; if you perform a second augment ability, you must discard the previous active augment. Augment abilities are mandatory, so you must switch to the new augment if you want to perform any other abilities from that action.
 Nightshroud2	Nightshroud
@@ -1498,8 +1500,10 @@ PERK_Mindthief2_09_Name	Lying Low
 PERK_Mindthief2_09_Desc	You are considered to be last in initiative order when determining monster focus
 PERK_Mindthief2_10_Name	Restless Mind
 PERK_Mindthief2_10_Desc	At the end of each of your rests, you may <sprite name=ConsumeIce> or <sprite name=ConsumeDark> to control one enemy within <sprite name=Range> 5: <sprite name=Attack> 1
-Mindthief2_MASTERY_1_Name	Thought Thief
-Mindthief2_MASTERY_1_Desc	In a single scenario, trigger the on-attack effect from four different Augments at least 3 times each
+Mindthief2_MASTERY_1_Name	Puppet Master
+Mindthief2_MASTERY_1_Desc	In a single scenario, kill 5 or more enemies with control abilities
+Mindthief2_MASTERY_2_Name	Thought Thief
+Mindthief2_MASTERY_2_Desc	In a single scenario, trigger the on-attack effect from four different Augments at least 3 times each
 Mindthief2_FullName	Mindthief
 CODEX_Hero_Mindthief2_Title	Mindthief
 CODEX_HeroInfo_Mindthief2	As a class with few hit points who spends a significant amount of time close to enemies, carefully avoiding enemy focus is integral to your success. You have access to fast and slow initiatives, allowing you to dance in and out of combat by approaching enemies late in the round and then getting away from them early the following round. Additionally, you can disable threatening enemies with your abilities that <sprite name=Immobilize>, <sprite name=Disarm>, or <sprite name=Stun>. You can even become <sprite name=Invisible> when in dangerous situations.
@@ -1875,6 +1879,8 @@ PERK_Wildfury_10_Name	Life Bond
 PERK_Wildfury_10_Desc	At the start or end of each of your long rests, you may <sprite name=ConsumeAir>/<sprite name=ConsumeEarth> and reduce your current hit point value by X (X must be at least 1) to Command: <sprite name=Heal> X
 Wildfury_MASTERY_1_Name	Elemental Bond
 Wildfury_MASTERY_1_Desc	In a single scenario, infuse or consume <sprite name=CreateAir> or <sprite name=CreateEarth> during each of your turns
+Wildfury_MASTERY_2_Name	Unleashed
+Wildfury_MASTERY_2_Desc	In a single scenario, kill 4 or more enemies with attacks of 7 or greater (after all bonuses, before attack modifiers)
 Wildfury_FullName	Wildfury
 CODEX_Hero_Wildfury_Title	Wildfury
 CODEX_HeroInfo_Wildfury	Some of your actions require an element in order to be performed. You cannot perform those actions without using the indicated element. You may sometimes have multiple persistent abilities that trigger at the same time. When that happens, you choose the resolution order.

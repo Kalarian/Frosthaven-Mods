@@ -61,9 +61,11 @@ gave most shapes. Layouts are plain Gloomhaven style (gh_layout redraws them). E
 
 ## Per card
 
-- 01 Concentrated Rage: **APPROXIMATION / NEEDS PLUGIN.** The bottom's damage-token counter (token per Bear attack or
-  Retaliate damage, spend three for +3 Attack) is a persistent +1 Attack aura on the Bear's attacks (about the card's
-  +3 every fourth attack; retaliate tokens not counted). Text as printed.
+- 01 Concentrated Rage: the bottom's damage tokens are the Wildfury's character resource `WildfuryRage` (resources.yml,
+  pack-wide: saved with the scenario, on her status row); the card keeps a marker bonus (Attack +0 aura on the Bear,
+  `MiscVars GHRageTokens`). Plugin GHWildfury.cs RageTokens: +1 token per Bear attack (each target is an attack, 2e) and
+  per Retaliate damage the Bear suffers; a Bear attack with 3+ tokens removes three for +3 Attack instead; the tokens go
+  when the card's bonus ends.
 - 03 Howling Bolts: bottom infuse Earth is the Wildfury's (half level) while the Bear heals.
 - 05 Focused Aggression: grant Shield 1 (round) to one adjacent ally (1st edition Maul bottom). "If the target is the
   Bear, also Retaliate 1": a Retaliate sub-ability with `UseParentTargets` filtered to the Bear. **Untested**: whether
@@ -81,10 +83,11 @@ gave most shapes. Layouts are plain Gloomhaven style (gh_layout redraws them). E
   expression.** Bottom:
   the 1st edition Swap with `EnemyType [Normal, Elite]`.
 - 10 Invocation of Endurance: invocation Heal 2 on the Bear. Bottom Move 3 [square] + Jump (Move map `Jump: True`).
-- 11 Invocation of Spirit top: **APPROXIMATION / NEEDS PLUGIN.** "Attack 2 as if you occupied the Bear's hex": the
-  Bear performs Attack 2, range 3 (same origin and reach; counts as the Bear's attack: Bear bonuses apply, the
-  Wildfury's don't). Bottom: "+1 Heal if the target is the Bear" as a target conditional override filtered to the Bear
-  (**untested** on a heal).
+- 11 Invocation of Spirit top: the trigger's Attack 2, range 3 is marked `GHBySummonerFromHex`; the plugin
+  (BySummonerFromHex) stacks it for the Wildfury instead of the Bear, with Frosthaven's own `TargetingOverrideArrayIndex`
+  set to the Bear's hex: her attack (her deck, her bonuses), range and line of sight from the Bear (rulebook p21).
+  Bottom: "+1 Heal if the target is the Bear" is a target conditional override filtered to the Bear; Frosthaven reads
+  per-target overrides only on attacks, so the plugin (TargetHealBonus) adds it to a pack heal on a matching figure.
 - 14 Energizing Strike bottom: Heal 1 on all allies, no range (the 1st edition card; "allies" excludes the Wildfury).
 - 16 Punch Through bottom: +1 on all the Bear's attacks this round (the 1st edition aura without `AttackType: Control`).
 - 17 Stone Sigil bottom: "if you are adjacent to the Bear" = start requirement `AllHeroSummons.Any(obj.Class.ID ==
@@ -94,49 +97,55 @@ gave most shapes. Layouts are plain Gloomhaven style (gh_layout redraws them). E
   custom targeting) with HIVE Hijack's enemy Move 2 / Attack 2, skipped when the target died. Bottom: grant Shield 1
   [square] (round) to an ally within 4; Poison every enemy adjacent to it (`AllTargetsAdjacentToParentTargets` +
   `TreatAsNonSubAbility`, CARD_FIXES Care Package / Virulent Strain).
-- 22 Blood Hunger bottom: **NEEDS PLUGIN** for the "!" rule (lose the card at the end of a round in which the Bear
-  neither attacked nor was attacked). Now the persistent Shield 1 (BuffShield aura) + Retaliate 2 (Behaviour Retaliate
-  aura, Deathwalker Lashing Tendrils) on the Bear last until it dies or the scenario ends.
+- 22 Blood Hunger bottom: the persistent Shield 1 (BuffShield aura) + Retaliate 2 (Behaviour Retaliate aura) on the
+  Bear; the "!" rule is the plugin's (LoseIfIdle, marker `GHLoseIfIdle` on BShield): at the end of a round in which the
+  Bear neither attacked nor was attacked (or is gone), the card's bonuses finish and the card goes to the lost pile.
 - 24 Invocation of Absorption top: the Bear's Damage 1 on all enemies within range 2 with a Heal sub-ability valued
   by `StatIsBasedOnX ActorsTargetedByParentAbility` (Blinkblade The Knife's Edge). **Untested** nested inside an
   AddActiveBonus; fallback: a Heal valued by a Vars count of enemies in range 2.
-- 25 Unleashed Fury top: **NEEDS PLUGIN.** "Double all Attack bonuses from your ability cards on this attack" is text
-  only; plain Attack 3.
+- 25 Unleashed Fury top: the commanded attack is marked `GHDoubleCardBonuses`; the plugin (UnleashedFury) adds every
+  positive Attack bonus from her ability cards on that attack a second time (Punch Through bottom; Concentrated Rage's +3
+  becomes +6). Not the Vital Force aura (the summon's, decision C), not modifiers. With the stacking house rule off only
+  the largest plain bonus counts, so only that one is doubled when it is a card's.
 - 26 Lash Out bottom: swap with the Bear = the 1st edition Primal Blessing Swap (Self / Companion).
-- 27 Unbreakable Bond: top's second attack **APPROXIMATION / NEEDS PLUGIN** as Invocation of Spirit (commanded Attack 3,
-  range 3). Bottom **APPROXIMATION / NEEDS PLUGIN**: skipping card selection and turns for three rounds, freezing other
-  persistents and the Bear's two turns at initiative 14 have no engine shape. Now: at the start of each of your next
-  three turns (StartTurnAbility, slots [1,0,1], lost after) the Bear takes one extra controlled turn (Move +0, Attack +0
-  at its own values; AddActiveBonus ControlActor on the Bear, Infuser Boon of the Tempest). You still select cards and
-  act (the skipped rounds' saved cards and lost actions roughly cancel; balance not checked).
+- 27 Unbreakable Bond: top's second attack is the Wildfury's own Attack 3, range 3 performed from the Bear's hex (Vars
+  `TargetingOverrideArrayIndex: Bear.Tile`, Frosthaven's Pyroclast shape; it needs the Bear on the map; the name
+  TAllyAttack keeps the enhancement slot). Bottom **still APPROXIMATION / NEEDS PLUGIN**: skipping card selection and
+  turns for three rounds, freezing other persistents and the Bear's two turns at initiative 14 have no engine shape. Now:
+  at the start of each of your next three turns (StartTurnAbility, slots [1,0,1], lost after) the Bear takes one extra
+  controlled turn (Move +0, Attack +0 at its own values; AddActiveBonus ControlActor on the Bear, Infuser Boon of the
+  Tempest). You still select cards and act.
 - 28 Spirit Sigil bottom: Bless one ally within range 1 [square] with Safeguard as its sub-ability.
-- 29 Jaws of Death top: **APPROXIMATION / NEEDS PLUGIN** for unlimited repeats. The repeat is written out twice (Move 4 +
-  Attack 6 again while the action has 1, then 2 kills: `CPhaseAction.ActorsKilledThisAction.Count`, the Drifter's
-  expression), XP 1 per repeat as `GainXP` after the command. **Untested**: whether the Bear's kills inside the command
-  count in this action.
+- 29 Jaws of Death top: the commanded Attack 6 is marked `GHRepeatOnKill`; each time it kills, the plugin (JawsRepeat)
+  gives the Wildfury XP 1 and stacks copies of the commanded Move 4 and Attack 6 (enhancements kept) for the Bear, again
+  after every repeat that kills (unlimited, as printed).
 
 ## Perks (perks.py)
 
 All 10 perks from the "Vermling Wildfury" sheet, 18 checks; names made up in the 1st edition style.
 - 1 "Lick Wounds": new modifier `AMC_GH2E_Wildfury_Heal2Bear_R` (rolling +0, Heal 2 on the Bear by Frosthaven's
   AMC_Heal1_TBoneshaper_R custom targeting). When the Bear is gone, or the Bear itself draws it, the attacker is healed.
-- 3 "Pack Bond": new `AMC_GH2E_Wildfury_P2_Bond`, +2 plus a boolean Strength var (Frosthaven's
-  AMC_P1_Or_P2_IfPlayedTideThisRound) true when the Bear and the Wildfury are within 4 hexes
-  (`SharedAbilityTargeting.GetDistanceBetweenActorsInHexes`, `TargetingActor.Summoner || TargetingActor` so it works
-  when the Bear draws it). **Untested expression.**
+- 3 "Pack Bond": `AMC_GH2E_Wildfury_P2_Bond` is a plain +2 again; the plugin (PackBond) rewrites it to +3 at the game's
+  modifier rewrite step while the Wildfury and the Bear are within 4 hexes (read in C#: the old expression override
+  crashed when the Bear drew the card).
 - 5 "Primal Call": new `AMC_GH2E_Wildfury_AirEarth_P1` (+1, Air or Earth picker; AMC_FireAir_P1 shape).
 - 6 "Bowl Over": new `AMC_GH2E_Wildfury_Push2_P2` (+2 Push 2).
 - 7 "Warded Path": **APPROXIMATION / NEEDS PLUGIN.** Ignore scenario effects + a plain +1; the card's "Safeguard,
   target 1 ally" is left out (no attack-modifier shape places a bonus on another figure).
-- 8 "Thick Hide": **NEEDS PLUGIN**, text only (enemy 2x against the Bear treated as +0).
-- 9 "Call of the Wild": once each scenario toggle (gh_crossover `_once_per_quest`'s text) commanding the Bear Move 4
-  (ControlActor on the Bear; `TargetType: [Companion]`: an OwnSummon filter never matched the Bear, also in perk 10). The "teleport next to the Bear if it left your side" rider is left out (NEEDS PLUGIN).
-- 10 "Life Bond" (linked, Cost 2): **APPROXIMATION.** After each long rest (ExecuteAbilitiesAfterLongRest), consume Air
-  or Earth (split shape above) to suffer 2 damage and Command the Bear Heal 2. X fixed at 2 (the sheet: any X >= 1),
-  once (the sheet: start or end of the rest). **Untested.**
+- 8 "Thick Hide": the plugin (ThickHide) turns a 2x an enemy draws attacking the Bear into +0 (perk Wildfury08).
+- 9 "Call of the Wild": once each scenario toggle commanding the Bear Move 4 (ControlActor on the Bear; `TargetType:
+  [Companion]`). The rider: the move is marked `GHCallOfTheWild` and carries a Teleport sub-ability (Spirit Swap top's,
+  any distance, ending adjacent to the Bear, skippable) that only the Wildfury can start; when the move ends and the
+  Bear left a hex adjacent to her on the way, the plugin (CallOfTheWild) stacks it for her.
+- 10 "Life Bond" (linked, Cost 2): two hidden long-rest bonuses, one at the start (PreRestBonus, Boneshaper perk 10) and
+  one at the end; once per rest (temp var GHLifeBondUsed, cleared by the plugin when a long rest starts). Either element
+  (element picker beside one Consume of [Air, Earth], Restless Mind's shape). The marked step `GHLifeBond`: the plugin
+  asks for X (yes/no loop, 1 up to her hit points - 1), lowers her current hit points by X (not damage) and sets the
+  temp var GHLifeBondX, which the commanded Bear heal reads (StatIsBasedOnX).
 - Masteries: mastery 1 (Air or Earth infused or consumed on every turn) = the plugin's ElementEveryTurn tag with
-  `Elements: [Air, Earth]` (the 1st edition Sunkeeper's mastery 2). Mastery 2 (kills by Command attacks of 7+) has no
-  tag.
+  `Elements: [Air, Earth]`. Mastery 2 "Unleashed" (4 kills by Command attacks of 7+, after bonuses, before modifiers) =
+  the new tag FrosthavenMods_CommandKillsAtValue (Value 4, Amount 7): the plugin records each commanded Bear attack's
+  value before modifiers and counts the kills (in memory: a reload mid-scenario starts the count again).
 
 ## Shared changes wanted
 
@@ -170,8 +179,13 @@ Bench these first (shapes no Frosthaven card uses this way): the invocations (07
 the Bear + OncePerRound + the required-consume gate), Spirit Swap top teleport, Disorienting Roar top enemy aura,
 Focused Aggression bottom Bear-only retaliate, Stone Sigil bottom adjacency, Jaws of Death repeats, Unbreakable Bond
 bottom, the three Safeguards, perks 1, 3, 9, 10.
-- Perk Pack Bond: its override read TargetingActor, null when the Bear draws the card (error screen in the 2e sweep, 2026-11-01 09:36). Now Frosthaven's plain +2 (AMC_Basic_P2); the +1 within range 4 is NEEDS PLUGIN.
+- Perk Pack Bond: its override read TargetingActor, null when the Bear draws the card (error screen in the 2e sweep, 2026-11-01 09:36). Since 2026-11-02 the +1 is the plugin's (see perk 3 above).
 
 ## 2026-11-02: modifier abilities and Safeguard
 
 - Perk 7 Warded Path (2026-11-02, supersedes the line above): `AMC_GH2E_Wildfury_P1_Safeguard`, +1 and the pack's Safeguard on one ally at any distance (GHModifierAbilities.cs runs its Ward carrier, GHSafeguard.cs turns it into Safeguard). The three card Safeguards are the real condition too. Bench it.
+
+## 2026-11-02: companion rules (2e card-accuracy pass, task wildfury-mindthief)
+
+Plugin GHWildfury.cs builds shared changes 1, 2 (Invocation of Spirit; Unbreakable Bond top is data only), 4, 5, 6, 8
+and 9 above, and Invocation of Spirit bottom's Bear heal. Still open: 3 (Unbreakable Bond bottom).

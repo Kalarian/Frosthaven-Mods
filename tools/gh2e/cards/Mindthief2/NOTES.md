@@ -28,10 +28,10 @@ worth a bench run.
   marked `GHMoneyGain` has the plugin (GHMoneyTokens) give her one loot token (one loot-deck draw). The printed Loot 1
   follows.
 - **09 Empathetic Assault**: the Heal keeps its printed mark (Xipe removed it on purpose).
-- **10 Psychic Blade** augment: approximated as `Range +1, TreatAsMelee` on every melee attack (Xipe's). The
-  "single-target" restriction isn't enforced, and whether an augment override's Range adds (2) or sets (1) is unverified.
-  Bottom: round melee-only Curse buff (Frosthaven's Plague Protocol shape: `Attack 0, Conditions [Curse]`, BuffAttack,
-  `AttackType: Melee`; Xipe's applied to ranged attacks too).
+- **10 Psychic Blade** augment: `Range +1, TreatAsMelee` on her melee attacks (reach 2), single-target only: the override
+  carries `MiscVars GHSingleTargetOnly` and the plugin (GHMindthief2.cs SingleTargetAugment) skips it on an attack with
+  more than one target, Targeting All or an area. Bottom: round melee-only Curse buff (Frosthaven's Plague Protocol
+  shape: `Attack 0, Conditions [Curse]`, BuffAttack, `AttackType: Melee`; Xipe's applied to ranged attacks too).
 - **11 Feedback Loop / 12 Possession / 22 Telepathic Command** "grant one of your summons": Frosthaven's Command the
   Wretched shape (`Target 1, Range 99, Filter TargetType OwnSummon`, the summon's own value `+0`), one summon, where Xipe
   granted all of them. The augment on 11 carries that control inside `Augment: Abilities:` (a control inside an augment
@@ -46,10 +46,12 @@ worth a bench run.
   Frosthaven's Flesh Shield overrides abilities inside its control the same way). Bottom: the Strengthen needs the attack
   performed (`StartAbilityRequirements: PreviousAbility, AbilityHasHappened`, Frosthaven's Precision Timing); Xipe's was
   unconditional and unmarked.
-- **17 Cranium Overload** top: the designated hex is approximated: Attack 6, Pierce 5 on one enemy within range 4 (line
-  of sight from you, and it's a ranged attack from you, not from the hex), then if it killed, Attack 2 on every enemy
-  adjacent to that enemy's hex (the 1st edition card's follow-up, with Frosthaven's kill requirement). No marks (as
-  printed). **NEEDS PLUGIN** for the real designated hex.
+- **17 Cranium Overload** top: the designated hex is Frosthaven's own "perform from a hex" shape (Pyroclast Cloud of Ash,
+  Shattersong Resonant Frequency): a NullHex pick of a hex holding an enemy within range 4 (line of sight from her), then
+  the attacks performed from that hex (`Vars TargetingOverrideArrayIndex`: range, line of sight and adjacency count from
+  the hex, rulebook p21 and decision B). They print no range, so they are melee: Attack 6, Pierce 5 on the enemy in the
+  hex (custom targeting), then, if it killed, Attack 2 on every enemy adjacent to the hex (a sub-ability of the attack,
+  queued by GHNestedSubAbilities; Frosthaven's kill requirement). No marks (as printed).
 - **18 Frozen Shiv**: Pierce 1's [square] mark = Pierce inside the Attack mapping with `PierceEnhancements: 1`
   (Frosthaven's Infuser Gale Barrage; a Pierce mapping of its own fails rulecheck).
 - **19 Silent Scream** bottom: the commanded "Attack -1" is relative to the enemy's own attack, in melee (no range
@@ -57,18 +59,22 @@ worth a bench run.
 - **20 Mass Hysteria** bottom: the 1st edition Corrupting Embrace bottom's shape (Poison along a jump's path, verified).
 - **23 Dark Frenzy** bottom: two enemies each perform Move 1; consume Ice = Submissive Affliction's self-damage shape
   (1 each). Unverified (as 01).
-- **24 Domination** top: two enemies within range 4 each perform Attack 3; "adjacent to each other" is not enforced
-  (approximation; Xipe's `Filter: Ally` + `TransferAugments` was the 1st edition card's top). Bottom: the 1st edition Mass
-  Hysteria bottom (`AddAugment: 1`, persistent), icon Positive_Cards; not lost (as printed).
-- **25 Psychic Projection** top: Pull 2, range 3 is its own ability before the attack. Bottom: the designated unoccupied
-  hex is approximated as Attack 3, Range 5, `TreatAsMelee` (so augments apply), line of sight from you. **NEEDS PLUGIN**
-  for the real designated hex.
+- **24 Domination** top: two enemies within range 4 each perform Attack 3; "adjacent to each other" = `MiscVars
+  GHTargetsAdjacent` on the control: once one enemy is picked, the plugin (TargetsAdjacent) refuses a second pick that is
+  not adjacent to it. Bottom: the 1st edition Mass Hysteria bottom (`AddAugment: 1`, persistent), icon Positive_Cards; not
+  lost (as printed). Its two choices are the plugin's (AugmentChoice): a third augment asks which active one is
+  discarded (Frosthaven's own slot choice always dropped the oldest), and when the card leaves with two augments active
+  she picks the one that goes (asked on the rules thread; from the main thread the engine's oldest-first trim stays).
+- **25 Psychic Projection** top: Pull 2, range 3 is its own ability before the attack. Bottom: the designated
+  unoccupied hex is a NullHex pick within range 4 (line of sight from her); the melee Attack 3 is performed as though she
+  stood there (`Vars TargetingOverrideArrayIndex`, as Cranium Overload): range 1, line of sight and adjacency from that
+  hex; her melee augments apply (it is her melee attack).
 - **26 Shared Nightmare**: bottom Move 4 keeps its mark (Xipe dropped it).
 - **27 Corrupting Embrace**: bottom Move 4 has no mark (Xipe had one); four use slots, XP on 2 and 4, melee only.
-- **28 Many as One**: both halves persistent and lost, XP 2 each (Xipe's bottom was a one-round non-lost aura). Bottom
-  **NEEDS PLUGIN**: "each round, the first of your allies who performs a melee attack ability gains the effects of each
-  of your active augments" has no data shape; the card stays in the active area as an inert persistent bonus
-  (`Attack 0` BuffAttack on your melee attacks, `BAugmentShare`) for a plugin to hook.
+- **28 Many as One**: both halves persistent and lost, XP 2 each (Xipe's bottom was a one-round non-lost aura). Bottom:
+  the marker bonus `BAugmentShare` (`MiscVars GHAugmentShare`); the plugin (AugmentShare) gives her active augments to the
+  first melee attack ability of one of her allies each round (summons included, a controlled enemy not), the way the
+  engine's TransferAugments gives them to a controlled figure, and takes them back when that attack ends.
 - **29 Phantasmal Killer** top: first augment = a control on one target of each melee attack (Attack 3, melee,
   `UseParentTargets`). Second augment "after each of your control abilities, you may consume Dark: one controlled enemy
   suffers 3": an augment ability marked `GHAfterControl` (a Consume Dark step holding Damage 3 on one of the enemies the
@@ -100,12 +106,16 @@ worth a bench run.
 - Sharpened Claws (2), Hobbling Bite (1), Cold Snap (3), Vanish (2, AMC_Invisible_R), Unfazed (1: "ignore scenario
   effects" = IgnoreNegativeScenarioEffects + AMC_P1_R): Frosthaven's own modifiers.
 - **Puppet Strings** (1): a hidden scenario-long `OverrideAbility` on ControlActor with
-  `UseControllingActorModifierDeck` (Gloomhaven's Master Influence data). Always on: the perk says "may". Unverified.
-- **Lying Low** (1): text-only passive, **NEEDS PLUGIN** (as the 1st edition's Lying Low).
+  `UseControllingActorModifierDeck` (Gloomhaven's Master Influence data); "may": the plugin (PuppetStrings) asks before
+  each controlled action with an attack whether the enemy draws from her deck or its own.
+- **Lying Low** (1): Frosthaven's Flea-Bitten Shawl shape (AdjustInitiative with the FocusInitiative behaviour, read
+  only by the monsters' focus sort), at 100: after every initiative a card can have.
 - **Restless Mind** (2): after each rest, optional consume Ice or Dark (element picker) to control one enemy within
   range 5: Attack 1 (the 1st edition Voidwarden's Grave Defense shape).
-- Masteries: only "Thought Thief" (the 1st edition's AugmentsTriggered tag, ActorID Mindthief2ID). "Kill 5 or more
-  enemies with control abilities" needs a new GHMasteries tag, so it is left out.
+- Masteries: 1 "Puppet Master" (kill 5 enemies with control abilities): the new tag FrosthavenMods_KillsByControl; the
+  plugin counts enemies killed by abilities she controlled (`ControlledByClassID`) during the scenario (in memory: a
+  reload in the middle of a scenario starts the count again). 2 "Thought Thief" (the 1st edition's AugmentsTriggered
+  tag, ActorID Mindthief2ID).
 
 ## Affinities
 
@@ -113,12 +123,9 @@ worth a bench run.
 
 ## Shared changes wanted
 
-1. **Plugin**: augment sharing with the first ally's melee attack each round (28 Many as
-   One bottom); a real
-   designated hex for Cranium Overload (17) and Psychic Projection bottom (25); the "two adjacent enemies" restriction
-   (24 top); the single-target restriction of Psychic Blade's augment (10); Lying Low (perk); a mastery tag for kills by
-   control abilities.
-2. **packcheck**: a `Pierce:` mapping (an enhancement on a pierce) could be flagged before rulecheck (18).
+1. Done 2026-11-02 (2e card-accuracy pass, task wildfury-mindthief): augment sharing (28), the designated hex (17, 25,
+   data only), adjacent control targets (24 top), the augment choices (24 bottom), the single-target augment (10), Lying
+   Low (data), Puppet Strings' choice and the control-kills mastery tag (plugin GHMindthief2.cs).
 
 ## Check
 

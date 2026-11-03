@@ -6,7 +6,7 @@ Race: Vermling
 Traits: [ Nimble, Outcast, Persuasive ]
 Complexity: 3
 ElementalAffinities: [ Ice, Dark ]
-MasteryIDs: [ Mindthief2_MASTERY_1 ]
+MasteryIDs: [ Mindthief2_MASTERY_1, Mindthief2_MASTERY_2 ]
 DefaultSkin: 1
 # PlayerLevel:  [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
 HealthTable: [ 6, 7, 8, 9, 10, 11, 12, 13, 14 ]

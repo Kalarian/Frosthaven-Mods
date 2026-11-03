@@ -1,30 +1,69 @@
 # card: Cranium Overload
-# written from tools/gh2e/sheets/Mindthief.json; the designated hex is approximated: Attack 6, Pierce 5 on one enemy
-# within range 4, then (if it killed) Attack 2 on every enemy adjacent to that enemy's hex (the 1st edition Cranium
-# Overload's follow-up, with Frosthaven's Morbid Camouflage kill requirement). No enhancement marks on the top.
+# written from tools/gh2e/sheets/Mindthief.json. Top: the designated hex is Frosthaven's own "perform from a hex" shape
+# (Pyroclast Cloud of Ash / Shattersong Resonant Frequency): a NullHex pick of a hex holding an enemy within range 4
+# (line of sight from you), then the attacks are performed from that hex (Vars TargetingOverrideArrayIndex: range, line
+# of sight and adjacency count from the designated hex, rulebook p21). The attacks print no range, so they are melee
+# (2e rulebook: an attack with no range is melee): Attack 6, Pierce 5 on the enemy in the hex, then, if it killed, Attack
+# 2 on every enemy adjacent to the hex (a sub-ability of the attack: GHNestedSubAbilities queues it, the kill check reads
+# the attack). No enhancement marks on the top (as printed).
 Discard: [Lost,Discard]
 Data:
     Top:
         Abilities:
-            TAttack:
-                Attack: 6
-                Pierce: 5
+            TDesignate:
+                NullHex: True
                 Range: 4
                 Target: 1
-                Filter: Enemy
-                AnimOverload: MindAttack
+                TileFilter: Custom
+                MiscVars:
+                    IsValidTile: obj.LivingActor != null && CustomAbility.IsEnemy(TargetingActor, obj.LivingActor)
+                    DontPreviewDescription: True
+                SkipAnim: True
                 SubAbilities:
-                    TAttackAdjacent:
-                        Attack: 2
-                        Range: 1
-                        Target: -1
+                    TAttack:
+                        Attack: 6
+                        Pierce: 5
+                        Target: 1
                         Filter: Enemy
-                        AllTargetsAdjacentToParentTarget: True
-                        UseParentRangeType: True
-                        StartAbilityRequirements:
-                            Type: SubAbility
-                            ActorsKilledByAbility: "> 0"
+                        TreatAsMelee: True
+                        TreatAsNonSubAbility: True
                         AnimOverload: MindAttack
+                        StartAbilityRequirements:
+                            Type: ThisAbility
+                            Vars:
+                                ValidateDesignated: ParentAbility != null && ParentAbility.AbilityHasHappened
+                        Vars:
+                            DesignatedHex: ParentAbility.m_TilesSelected[0]
+                            TargetingOverrideArrayIndex: DesignatedHex
+                        MiscVars:
+                            AutoSelectValidTiles: True
+                        Targeting: Custom
+                        TargetingVars:
+                            DesignatedTile: ParentAbility.m_TilesSelected[0]
+                            AddValidActorsInRange: list(DesignatedTile).Select(obj.LivingActor).Where(obj != null)
+                            AddTilesInRange: list(DesignatedTile)
+                        SubAbilities:
+                            TAttackAdjacent:
+                                Attack: 2
+                                Target: 99
+                                Filter: Enemy
+                                TreatAsMelee: True
+                                TreatAsNonSubAbility: True
+                                AnimOverload: MindAttack
+                                StartAbilityRequirements:
+                                    Type: SubAbility
+                                    ActorsKilledByAbility: "> 0"
+                                Vars:
+                                    DesignatedHex: ParentAbility.ParentAbility.m_TilesSelected[0]
+                                    TargetingOverrideArrayIndex: DesignatedHex
+                                MiscVars:
+                                    AllowUndoAfterFirst: True
+                                    AutoSelectValidTiles: True
+                                Targeting: Custom
+                                TargetingVars:
+                                    DesignatedTile: ParentAbility.ParentAbility.m_TilesSelected[0]
+                                    AddValidActorsInRange: GameState.GetAdjacentEnemies(TargetingActor, DesignatedTile.m_ArrayIndex)
+                                    AddTilesInRange: AddValidActorsInRange.Select(obj.Tile)
         XP: 2
     Bottom:
         Abilities:

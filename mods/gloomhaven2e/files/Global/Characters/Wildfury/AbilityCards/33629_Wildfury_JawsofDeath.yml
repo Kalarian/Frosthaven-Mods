@@ -6,9 +6,9 @@ Level: 9
 Initiative: 18
 # card: Jaws of Death
 # top: COMMAND Move 4 [circle], Attack 6 [diamond]; "if this attack kills an enemy, gain XP 1 and repeat this action":
-# APPROXIMATION, the repeat written out twice (Move 4 + Attack 6 again when the action has one kill, once more with two),
-# gated on CPhaseAction.ActorsKilledThisAction (the Drifter's Shockwave expression); XP 1 per repeat as GainXP after the
-# command (Boneshaper Rotting Multitude's GainXP). Unlimited repeats NEED PLUGIN; two cover almost every case. Lost.
+# the attack is marked GHRepeatOnKill: each time it kills, the plugin (GHWildfury.cs JawsRepeat) gives the Wildfury XP 1
+# and stacks copies of the commanded Move 4 and Attack 6 (enhancements kept) for the Bear, as often as each repeat
+# kills. Lost.
 # bottom: COMMAND Attack 3 [diamond], Push 3; Move 3 [circle]; Attack 3 [diamond] (the 1st edition Jaws of Death
 # bottom's chain, 2e numbers); XP 1.
 Discard: [Lost,Discard]
@@ -29,53 +29,13 @@ Data:
                                 DiamondEnhancements: 1
                             StrengthIsBase: True
                             RangeIsBase: True
-                        TAllyMoveR1:
-                            Move: 4
-                            StrengthIsBase: True
-                            StartAbilityRequirements:
-                                Type: ThisAbility
-                                Vars:
-                                    ValidateKilled: CPhaseAction.ActorsKilledThisAction.Count >= 1
-                        TAllyAttackR1:
-                            Attack: 6
-                            StrengthIsBase: True
-                            RangeIsBase: True
-                            StartAbilityRequirements:
-                                Type: ThisAbility
-                                Vars:
-                                    ValidateKilled: CPhaseAction.ActorsKilledThisAction.Count >= 1
-                        TAllyMoveR2:
-                            Move: 4
-                            StrengthIsBase: True
-                            StartAbilityRequirements:
-                                Type: ThisAbility
-                                Vars:
-                                    ValidateKilled: CPhaseAction.ActorsKilledThisAction.Count >= 2
-                        TAllyAttackR2:
-                            Attack: 6
-                            StrengthIsBase: True
-                            RangeIsBase: True
-                            StartAbilityRequirements:
-                                Type: ThisAbility
-                                Vars:
-                                    ValidateKilled: CPhaseAction.ActorsKilledThisAction.Count >= 2
+                            MiscVars:
+                                GHRepeatOnKill: True
                     ControlActorType: Player
                 Target: -1
                 Targeting: All
                 Filter: Companion
                 AnimOverload: Command
-            TXP1:
-                GainXP: 1
-                StartAbilityRequirements:
-                    Type: ThisAbility
-                    Vars:
-                        ValidateKilled: CPhaseAction.ActorsKilledThisAction.Count >= 1
-            TXP2:
-                GainXP: 1
-                StartAbilityRequirements:
-                    Type: ThisAbility
-                    Vars:
-                        ValidateKilled: CPhaseAction.ActorsKilledThisAction.Count >= 2
     Bottom:
         Abilities:
             BAlly:

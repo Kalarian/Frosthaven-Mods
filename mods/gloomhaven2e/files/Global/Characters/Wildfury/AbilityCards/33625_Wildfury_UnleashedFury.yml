@@ -6,7 +6,9 @@ Level: 7
 Initiative: 65
 # card: Unleashed Fury
 # top: COMMAND Attack 3 [diamond]; "double the value of all Attack bonuses from your ability cards on this attack":
-# NEEDS PLUGIN (no engine hook doubles card bonuses); the attack is plain Attack 3, the rule text as printed.
+# the attack is marked GHDoubleCardBonuses: the plugin (GHWildfury.cs UnleashedFury) adds every positive Attack bonus
+# from the Wildfury's ability cards on that attack a second time (Punch Through, Concentrated Rage's +3); the Vital
+# Force aura is the summon's, not a card's (decision C), and modifiers are not bonuses.
 # bottom: COMMAND Move 2 [circle], Attack 3 [diamond]. No corner icons.
 Discard: [Discard,Discard]
 Data:
@@ -21,6 +23,8 @@ Data:
                                 DiamondEnhancements: 1
                             StrengthIsBase: True
                             RangeIsBase: True
+                            MiscVars:
+                                GHDoubleCardBonuses: True
                     ControlActorType: Player
                 Target: -1
                 Targeting: All

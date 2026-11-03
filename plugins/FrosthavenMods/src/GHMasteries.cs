@@ -83,6 +83,8 @@ namespace FrosthavenMods
         internal const string SummonCardsTag = "FrosthavenMods_SummonsFromDifferentCards";     // (Summoner) Value cards whose summon ability was performed
         // 2nd edition card-accuracy pass (2026-11-02)
         internal const string AttackStreakTag = "FrosthavenMods_AttackStreak";                 // (Nightshroud 2e) Value rounds in a row with an attack ability performed
+        internal const string KillsByControlTag = "FrosthavenMods_KillsByControl";             // (Mindthief 2e) Value enemies killed by abilities she controlled (GHMindthief2 counts)
+        internal const string CommandKillsTag = "FrosthavenMods_CommandKillsAtValue";          // (Wildfury) Value kills by commanded Bear attacks of Amount+ before modifiers (GHWildfury counts)
 
         private static readonly HashSet<CAbility.EAbilityType> SupportTypes = new HashSet<CAbility.EAbilityType>
         {
@@ -147,6 +149,8 @@ namespace FrosthavenMods
                 else if (tags.Contains(LavaGolemTag)) LavaGolemAllScenario(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(SummonCardsTag)) SummonsFromDifferentCards(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(AttackStreakTag)) AttackStreak(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(KillsByControlTag)) Counted(unlockConditionTarget, GHMindthief2.KillsByControl(), "KillsByControl", ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(CommandKillsTag)) Counted(unlockConditionTarget, GHWildfury.CommandKillsAtValue(Math.Max(1, unlockConditionTarget.Amount)), "CommandKills", ref totalConditions, ref conditionsMet, ref __result);
                 else return true;   // a marker of a newer pack this plugin doesn't know: the game's own filter answers
             }
             catch (Exception e)
@@ -161,6 +165,17 @@ namespace FrosthavenMods
         }
 
         // ------------------------------------------------------------------ the conditions
+
+        /// <summary>Value or more of a count the plugin kept during the scenario (kills the statistics can't attribute:
+        /// a controlled enemy's kills are not in the controller's records).</summary>
+        private static void Counted(CUnlockConditionTarget t, int count, string rule, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value);
+            total = needed;
+            met = Math.Min(count, needed);
+            result = count >= needed;
+            Plugin.Log.LogInfo($"GHRule {rule} card 0 mastery: {count} of {needed}");
+        }
 
         /// <summary>Value rounds in a row with Amount damage to enemies on each of the character's turns and Targets
         /// different ability cards played over them (the Brute's second mastery).</summary>

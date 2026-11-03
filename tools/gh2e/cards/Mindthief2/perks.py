@@ -21,8 +21,8 @@ PERKS = [
     (1, "Unfazed", 'Ignore scenario effects and add one <sprite name="+1"> <sprite name=Rolling>',
      {"CardsToAdd": "[AMC_P1_R]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
     # Frosthaven's own data for "a controlled figure draws from the controller's deck": the hidden OverrideAbility on
-    # ControlActor that Gloomhaven's Master Influence (Voidwarden) adds, here for the whole scenario. Always on (the
-    # perk says "may"): the controlled attack always uses the Mindthief's deck.
+    # ControlActor that Gloomhaven's Master Influence (Voidwarden) adds, here for the whole scenario. "May": the plugin
+    # (GHMindthief2.cs PuppetStrings) asks at each controlled attack whether the enemy uses her deck or its own.
     (1, "Puppet Strings", "Whenever you control the attack of an enemy, you may have the enemy use your attack modifier deck",
      {"Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]", "Abilities": """\
     PuppetStrings:
@@ -42,9 +42,18 @@ PERKS = [
                             ActorType: [Enemy, Ally, Neutral, Enemy2]
             Hidden: True
         AnimOverload: None"""}),
-    # NEEDS PLUGIN (as the 1st edition's Lying Low): monster focus treating her as last in initiative order
+    # Frosthaven's own "considered initiative 99 for monster focus" (Flea-Bitten Shawl: AdjustInitiative with the
+    # FocusInitiative behaviour, read only by the monsters' focus sort), at 100: after every initiative a card can have
     (1, "Lying Low", "You are considered to be last in initiative order when determining monster focus",
-     {"Flags": "[Passive]"}),
+     {"Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]", "Abilities": """    LyingLow:
+        AutoTrigger: True
+        AdjustInitiative: 100
+        Filter: Self
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: FocusInitiative
+            Hidden: True
+        AnimOverload: None"""}),
     # Frosthaven's after-rest hooks with an Ice-or-Dark consume (the element picker beside the Consume), as the 1st
     # edition Voidwarden's Grave Defense; the control is the cards' own (Attack 1 commanded, melee)
     (2, "Restless Mind", "At the end of each of your rests, you may <sprite name=ConsumeIce> or <sprite name=ConsumeDark> to control one enemy within <sprite name=Range> 5: <sprite name=Attack> 1",
@@ -77,6 +86,18 @@ PERKS = [
 # Only the mastery an existing tag answers: the 1st edition Mindthief's "four different augments, three times each"
 # (GHMasteries.cs AugmentsTriggered). "Kill 5 or more enemies with control abilities" has no tag yet (NOTES.md).
 MASTERIES = [
+    ("Puppet Master", "In a single scenario, kill 5 or more enemies with control abilities",
+     """# NEW TAG (GHMasteries.cs KillsByControl): Value enemies killed by abilities performed under her control (the plugin
+# counts them as they die, GHMindthief2.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_KillsByControl]
+        CharacterIDs:
+            ActorID: Mindthief2ID
+        Value: 5"""),
     ("Thought Thief", "In a single scenario, trigger the on-attack effect from four different Augments at least 3 times each",
      """\
 # NEW TAG: Value different augments whose on-attack abilities fired Amount times (GHMasteries.cs; the augment

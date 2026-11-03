@@ -5,53 +5,92 @@ Description: PERK_Wildfury_10_Desc
 CharacterID: WildfuryID
 Available: 1
 Cost: 2
-Flags: [Passive, ExecuteAbilitiesAfterLongRest]
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
 Abilities:
-    TRestEarth:
-        StartAbilityRequirements:
-            Type: ThisAbility
-            Vars:
-                ValidateNoAir: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Air) == False
-        Consume:
-            Elements: [Earth]
-            Abilities:
-                TRestEarthCost:
-                    Damage: 2
-                    Filter: Self
-                    AutoTrigger: True
-                TRestEarthHeal:
-                    ControlActor:
-                        ControlDurationType: ControlForOneAction
-                        Abilities:
-                            ABearHealE:
-                                Heal: 2
-                                Filter: Self
-                    Filter:
-                        TargetType: [Companion]
-                        HeroSummonClasses: [WildfuryBearID]
-                    Target: 1
-                    Targeting: All
-                    IgnoreLOS: True
-                    SkipAnim: True
-    TRestAir:
-        Consume:
-            Elements: [Air]
-            Abilities:
-                TRestAirCost:
-                    Damage: 2
-                    Filter: Self
-                    AutoTrigger: True
-                TRestAirHeal:
-                    ControlActor:
-                        ControlDurationType: ControlForOneAction
-                        Abilities:
-                            ABearHealA:
-                                Heal: 2
-                                Filter: Self
-                    Filter:
-                        TargetType: [Companion]
-                        HeroSummonClasses: [WildfuryBearID]
-                    Target: 1
-                    Targeting: All
-                    IgnoreLOS: True
-                    SkipAnim: True
+    TLifeBondStart:
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        AddActiveBonus:
+            ShowElementPicker: True
+            CanSkip: True
+            CanUndo: False
+            Consume:
+                Elements: [Air, Earth]
+                Abilities:
+                    TLifeBondXStart:
+                        Null: True
+                        AutoTrigger: True
+                        CanUndo: False
+                        MiscVars:
+                            GHLifeBond: True
+                    TLifeBondHealStart:
+                        ControlActor:
+                            ControlDurationType: ControlForOneAction
+                            Abilities:
+                                ABearHealStart:
+                                    Heal: 1
+                                    Filter: Self
+                                    StatIsBasedOnX:
+                                        Strength:
+                                            BasedOn: Vars
+                                            Vars:
+                                                Value: TargetingActor.Summoner.GHLifeBondX
+                        Filter:
+                            TargetType: [Companion]
+                            HeroSummonClasses: [WildfuryBearID]
+                        Target: 1
+                        Targeting: All
+                        IgnoreLOS: True
+                        SkipAnim: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringActionAbilityOnLongRest
+            Flags: [PreRestBonus]
+            Hidden: True
+            Requirements:
+                Vars:
+                    ValidateUnused: Actor.GHLifeBondUsed != True
+    TLifeBondEnd:
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        AddActiveBonus:
+            ShowElementPicker: True
+            CanSkip: True
+            CanUndo: False
+            Consume:
+                Elements: [Air, Earth]
+                Abilities:
+                    TLifeBondXEnd:
+                        Null: True
+                        AutoTrigger: True
+                        CanUndo: False
+                        MiscVars:
+                            GHLifeBond: True
+                    TLifeBondHealEnd:
+                        ControlActor:
+                            ControlDurationType: ControlForOneAction
+                            Abilities:
+                                ABearHealEnd:
+                                    Heal: 1
+                                    Filter: Self
+                                    StatIsBasedOnX:
+                                        Strength:
+                                            BasedOn: Vars
+                                            Vars:
+                                                Value: TargetingActor.Summoner.GHLifeBondX
+                        Filter:
+                            TargetType: [Companion]
+                            HeroSummonClasses: [WildfuryBearID]
+                        Target: 1
+                        Targeting: All
+                        IgnoreLOS: True
+                        SkipAnim: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringActionAbilityOnLongRest
+            Hidden: True
+            Requirements:
+                Vars:
+                    ValidateUnused: Actor.GHLifeBondUsed != True
