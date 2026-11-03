@@ -349,19 +349,23 @@ namespace FrosthavenMods
 
         [HarmonyPatch(typeof(CAbilityRequirements), nameof(CAbilityRequirements.MeetsAbilityRequirements), new[] { typeof(CActor), typeof(CAbility), typeof(CVarsContext), typeof(CItem), typeof(CActiveBonus) })]
         [HarmonyPrefix]
-        private static void StraightLineFromMove(CAbilityRequirements __instance, ref CAbility ability)
+        private static bool StraightLineFromMove(CAbilityRequirements __instance, ref CAbility ability, ref bool __result)
         {
             try
             {
-                if (__instance.AbilityMovementWasStraightLine != true || ability == null || ability is CAbilityMove) return;
-                if (CardOf(ability) < 20000 || CardOf(ability) >= 40000) return;   // pack cards only
-                if (!(PhaseManager.Phase is CPhaseAction action)) return;
+                if (__instance.AbilityMovementWasStraightLine != true || ability == null || ability is CAbilityMove) return true;
+                if (CardOf(ability) < 20000 || CardOf(ability) >= 40000) return true;   // pack cards only
+                if (!(PhaseManager.Phase is CPhaseAction action)) return true;
                 CActor mover = ability.TargetingActor;
                 CAbility move = action.PreviousPhaseAbilities?.Select(p => p?.m_Ability).LastOrDefault(a => a is CAbilityMove && a.TargetingActor == mover);
-                if (move == null) return;
+                // no move this action, or a move with no recorded path (the engine passes the path to List.AddRange: a null
+                // path threw ArgumentNullException and the error screen came up, Careless Charge top 2026-11-02 22:15):
+                // not a straight-line move, so the requirement fails instead
+                if (!(move is CAbilityMove m) || m.AllArrayIndexOnPathIncludingRepeatsCopy == null) { __result = false; return false; }
                 ability = move;
             }
             catch (Exception e) { if (GHClasses.Reported.Add("ra straight")) Plugin.Log.LogError("GHBerserker2e (straight line): " + e); }
+            return true;
         }
 
         // ------------------------------------------------------------------ our text
