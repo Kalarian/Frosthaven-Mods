@@ -35,6 +35,7 @@ sys.path.insert(0, str(TOOLS))
 import os
 OUT = Path(os.environ.get("GH2E_BUILD") or HERE / "build")   # check.py gives each class its own folder
 CARDS = HERE / "cards"
+SHARED = HERE / "shared"   # pack-wide data: resources.yml, strings.tsv
 SHEETS = HERE / "sheets"
 BASE_ID = 12000
 
@@ -165,6 +166,13 @@ def build(classes):
     (OUT / "AbilityCard").mkdir()
     (OUT / "HeroSummon").mkdir()
     strings, warnings, report = {}, [], []
+    # pack-wide texts (shared/strings.tsv: the Safeguard token's tooltip), any class may use them
+    shared_st = SHARED / "strings.tsv"
+    if shared_st.exists():
+        for ln in shared_st.read_text(encoding="utf-8").splitlines():
+            if "\t" in ln and not ln.startswith("#"):
+                k, v = ln.split("\t", 1)
+                strings[k.strip()] = v.replace("\\n", "\n")
     for cls in classes:
         sheet_name, model, _k, _start = CLASSES[cls]
         warn = lambda w, cls=cls: warnings.append(f"{cls}: {w}")
@@ -208,6 +216,9 @@ def build(classes):
     # class resources (cards/<Class>/resources.yml, Gloomhaven's CharacterResources format: the Plagueherald's Plague tokens),
     # added to Gloomhaven's own file, which the virtual install then replaces; gh_port carries the ones cards name
     blocks = [(CARDS / c / "resources.yml").read_text(encoding="utf-8").strip() for c in classes if (CARDS / c / "resources.yml").exists()]
+    # pack-wide resources (shared/resources.yml: the Safeguard token the plugin gives, GHSafeguard.cs)
+    if (SHARED / "resources.yml").exists():
+        blocks.append((SHARED / "resources.yml").read_text(encoding="utf-8").strip())
     if blocks:
         base = gh_port.text(files["CharacterResources/CharacterResources.yml"]).rstrip()
         (OUT / "CharacterResources").mkdir(exist_ok=True)

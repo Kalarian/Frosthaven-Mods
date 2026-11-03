@@ -17,27 +17,15 @@ Data:
                 Filter: Self
                 AnimOverload: Heal
             BSafeguard:
-                NullTargeting: True
+                Ward: True
                 Filter: Self
                 AnimOverload: PowerUp
-                ActiveBonus:
-                    Duration: Persistent
-                    Behaviour: GenericOnNegativeCondition
-                    XPTracker: [0]
-                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
-                    Vars:
-                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
-                        ValidateNotImmune: CAbility.ImmuneToAbility(TriggerTarget, TriggerAbility) == False
-                        ValidateIsNegativeCondition: TriggerAbility.AbilityType == "Poison" || TriggerAbility.AbilityType == "Wound" || TriggerAbility.AbilityType == "Stun" || TriggerAbility.AbilityType == "Disarm" || TriggerAbility.AbilityType == "Immobilize" || TriggerAbility.AbilityType == "Muddle" || TriggerAbility.AbilityType == "Curse" || TriggerAbility.AbilityType == "Bane" || TriggerAbility.AbilityType == "Brittle" || TriggerAbility.AbilityType == "Impair"
-                        PreventCondition: True
+                MiscVars:
+                    GH2ESafeguard: True
 Layout:
     Top:
         - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal*"
     Bottom:
         - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*"
         - Row: "<size=20%> "
-        - Active:
-            Ability: BSafeguard
-            Icon: Positive_DamagePrevent
-            ListLayout: "$GH2E_SAFEGUARD$"
-            Layout: "$GH2E_Sawbones2_SG$"
+        - Row: "<size=130%>$GH2E_Sawbones2_SG$"

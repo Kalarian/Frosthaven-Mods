@@ -27,7 +27,8 @@ Data:
         Abilities:
             # "At the end of this and your next four turns, perform: Heal 1, Range 5, Strengthen, Bless, Ward,
             # Safeguard": the 1st edition Auto Turret / Gas Canister shape (EndTurnAbility, 5 slots, XP on 1, 3, 5).
-            # Safeguard is in the text only: NEEDS PLUGIN (NOTES.md)
+            # Safeguard: the pack's one shape (a Ward carrier tagged GH2ESafeguard, GHSafeguard.cs) as a sub-ability on
+            # the heal's targets.
             BActive:
                 AddActiveBonus:
                     Heal: 1
@@ -35,6 +36,15 @@ Data:
                     Filter: [Self, Ally]
                     Conditions: [Strengthen, Bless, Ward]
                     AnimOverload: Heal
+                    SubAbilities:
+                        BActiveSafeguard:
+                            Ward: True
+                            Filter: [Self, Ally]
+                            UseParentTargets: True
+                            SkipAnim: True
+                            AnimOverload: None
+                            MiscVars:
+                                GH2ESafeguard: True
                 ActiveBonus:
                     Duration: Persistent
                     Behaviour: EndTurnAbility

@@ -975,7 +975,7 @@ FHS_GH2E_Quartermaster2_SPEND_GROUP	Spend supplies: Recover your items and those
 FHS_GH2E_Quartermaster2_SPEND_SELF	Spend supplies: Recover your items <sprite name=XP1>
 FHS_GH2E_Quartermaster2_SUPPLIES10	Gain 10 supplies
 FHS_GH2E_Quartermaster2_SUPPLIES20	Gain 20 supplies
-FHS_GH2E_SAFEGUARD	Safeguard: prevent the next negative condition
+FHS_GH2E_SAFEGUARD_NAME	Safeguard
 FHS_GH2E_SUMMON_BattleBoar	Battle Boar
 FHS_GH2E_SUMMON_BattleBot	Battle Bot
 FHS_GH2E_SUMMON_ChromaticConstruct	Chromatic Construct
@@ -1313,7 +1313,6 @@ GH2E_Doomstalker2_17_T2	Whenever you long rest, the Staunch Garralev gains <spri
 GH2E_Elementalist2_20_B	<sprite name=ConsumeIce><sprite name=ConsumeEarth>: on the next two sources of damage you or an adjacent ally would suffer, negate the damage, <sprite name=CreateMixed-IE>
 GH2E_Mindthief2_02_B2	You cannot perform move abilities this round. At the end of the round, lose <sprite name=Invisible>.
 GH2E_Nightshroud2_26_B	This attack does not cause you to gain <sprite name=Invisible> at the end of the round.
-GH2E_SAFEGUARD	Safeguard: prevent the next negative condition
 GH2E_SUMMON_BattleBoar	Battle Boar
 GH2E_SUMMON_BattleBot	Battle Bot
 GH2E_SUMMON_ChromaticConstruct	Chromatic Construct
@@ -1361,6 +1360,7 @@ GH2E_Wildfury_12_T	All allies within <sprite name=Range> 3 add <sprite name=Pier
 GH2E_Wildfury_17_T	All allies within <sprite name=Range> 3 gain <sprite name=Shield> 1.
 GH2E_Wildfury_28_T	All allies within <sprite name=Range> 3 add +2 <sprite name=Attack> to their first attack each round.
 GH_GH2E_PLAGUE_TOOLTIP	Plague: the Plagueherald's tokens on this figure (at most 3). Many Plagueherald abilities target or hurt figures that have Plague.
+GH_GH2E_SAFEGUARD_TOOLTIP	Safeguard: the next negative condition this figure would gain is prevented, then Safeguard is removed
 GH_GH2E_SUPPLIES_TOOLTIP	Supplies: the Quartermaster's supply track (starts at 10, up to 50). Spending supplies needs at least 10 and sets the track to 0.
 GH_GH2E_SilentKnife_HIREDHELP_TOOLTIP	Hired Help: this enemy is the Silent Knife's ally for the rest of the scenario and drops an additional loot token when it dies.
 GH_GH2E_SilentKnife_MONEY_TOOLTIP	Money tokens: the loot tokens the Silent Knife has looted this scenario. Placing or losing one puts one of her loot cards (her choice, never the random item) back on top of the loot deck; a placed token can be looted again.

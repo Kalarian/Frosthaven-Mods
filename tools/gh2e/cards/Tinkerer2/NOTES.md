@@ -74,12 +74,10 @@ should be in the first bench.
 - 23 Disintegration Beam top: the 1e kill (Filter Health <= 5, XP per target, diagonal layout override) with four red
   hexes and no hex mark, as printed.
 - 24 Invigorating Aerosol bottom: Heal **1** as the image prints (GHS 2, Xipe 3; the sheet's unclear note), Range 5,
-  Strengthen + Bless + Ward each end of turn for 5 turns (EndTurnAbility, slots [1,0,1,0,1]). **Safeguard: NEEDS
-  PLUGIN**, text only. The AUTHORING Safeguard recipe (GenericOnNegativeCondition + PreventCondition, Geminate perk 12)
-  validates on the bonus's caster (`ValidateIsCaster`); here the Safeguard lands on whichever figure the end-of-turn
-  heal picks, inside an AddActiveBonus, and there is no Frosthaven example of placing that bonus on another figure
-  from a nested ability. Rather than risk the whole persistent bonus failing, Safeguard is left out of the data. This is
-  the class's only Safeguard.
+  Strengthen + Bless + Ward each end of turn for 5 turns (EndTurnAbility, slots [1,0,1,0,1]). Safeguard: the
+  pack's real condition (AUTHORING.md, Safeguard; GHSafeguard.cs) as a sub-ability of the end-of-turn heal
+  (`UseParentTargets`), so each heal target also gains Safeguard. **Untested**: a sub-ability inside an AddActiveBonus
+  ability. The class's only Safeguard.
 - 25 Auto Turret top: lost (Xipe had it as a discard). "Perform the following twice: Attack 2, Range 5, Pierce 1" is
   **approximated** as one Attack 2 with Target 2 (Xipe's choice): two different enemies, never the same enemy twice
   (a sub-ability attack under an attack inside an AddActiveBonus is an untested shape). Bottom: Ward [diamond+] range 3

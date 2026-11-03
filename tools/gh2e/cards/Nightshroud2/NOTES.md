@@ -107,10 +107,10 @@ list text `GH2E_Nightshroud2_26_B`) and Swallowed by Night bottom (a persistent 
 - **21 Claws of the Night** top: APPROXIMATION: the delayed Attack 5 fires at the **start** of your next turn
   (StartTurnAbility), since an end-of-turn bonus would fire at the end of this turn already; skipped while Invisible
   (ActiveBonus Requirements). Bottom: Slice Through's kill trigger for the round, one use.
-- **22 Dark Cloud** bottom: Safeguard = the AUTHORING recipe (GenericOnNegativeCondition + PreventCondition,
-  TriggerOnCaster, ValidateIsCaster, one prevention via XPTracker [0], list text `GH2E_SAFEGUARD`): the data stand-in
-  until the plugin has a real Safeguard. **Mark**: the printed diamond+ on Safeguard is dropped (the bonus has no
-  condition value to enhance).
+- **22 Dark Cloud** bottom: Safeguard [diamond+], self: the pack's real Safeguard condition since 2026-11-02
+  (AUTHORING.md, Safeguard; plugin GHSafeguard.cs): a Ward carrier tagged `GH2ESafeguard`, which the plugin turns into
+  the Safeguard token (a status-row icon; it blocks the next negative condition by itself, then ends; no stacking; the
+  card is not kept active). The carrier holds the printed diamond+ mark.
 - **25 Prey on the Weak** top: a second Attack 4 on the first attack's target when 2 x HP <= max HP (= HP <= half max
   rounded down), its XP 1 as AbilityXP.
 - **26 Shadowstrike** top: area damage = NullTargeting area + Damage sub-ability on `ActorsOnRedHexes` (Banner Spear

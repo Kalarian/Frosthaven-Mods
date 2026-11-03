@@ -1,6 +1,6 @@
 # card: Prevention is Key
 # top: Wound + Disarm on all enemies within range 1 (no attack; the diamond mark on Disarm, as Secretariat); Safeguard on
-# you and all allies within range 1 (mark dropped). bottom: the round "next Prescription action" trigger has no engine
+# you and all allies within range 1 (the pack's Safeguard condition with its diamond+ mark). bottom: the round "next Prescription action" trigger has no engine
 # hook: Shield 1 this round for you and adjacent allies at once (the 1st edition card's round aura). Approximation.
 Discard: [Lost,Discard]
 Data:
@@ -15,21 +15,14 @@ Data:
                 Filter: Enemy
                 AnimOverload: RadialDebuff
             TSafeguard:
-                NullTargeting: True
+                Ward:
+                    DiamondPlusEnhancements: 1
                 Filter: [Self, Ally]
                 Range: 1
                 Target: -1
                 AnimOverload: PowerUp
-                ActiveBonus:
-                    Duration: Persistent
-                    Behaviour: GenericOnNegativeCondition
-                    XPTracker: [0]
-                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
-                    Vars:
-                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
-                        ValidateNotImmune: CAbility.ImmuneToAbility(TriggerTarget, TriggerAbility) == False
-                        ValidateIsNegativeCondition: TriggerAbility.AbilityType == "Poison" || TriggerAbility.AbilityType == "Wound" || TriggerAbility.AbilityType == "Stun" || TriggerAbility.AbilityType == "Disarm" || TriggerAbility.AbilityType == "Immobilize" || TriggerAbility.AbilityType == "Muddle" || TriggerAbility.AbilityType == "Curse" || TriggerAbility.AbilityType == "Bane" || TriggerAbility.AbilityType == "Brittle" || TriggerAbility.AbilityType == "Impair"
-                        PreventCondition: True
+                MiscVars:
+                    GH2ESafeguard: True
         XP: 2
     Bottom:
         Abilities:
@@ -51,11 +44,7 @@ Layout:
         - Row: "<b><size=130%>$Wound$ <sprite name=Wound> $Disarm$ <sprite name=Disarm> <size=100%><voffset=1>@TWoundDisarm@"
         - Row: "$GH2E_Sawbones2_ALL_R1$"
         - Row: "<size=50%> "
-        - Active:
-            Ability: TSafeguard
-            Icon: Positive_DamagePrevent
-            ListLayout: "$GH2E_SAFEGUARD$"
-            Layout: "$GH2E_Sawbones2_05_T$"
+        - Row: "$GH2E_Sawbones2_05_T$ <voffset=1>@TSafeguard@"
         - Row: "<size=50%> "
         - XP: 2
     Bottom:

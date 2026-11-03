@@ -23,14 +23,12 @@ lost icons were checked against the sheet by script: all match except the three 
 - **Start-of-turn Prescriptions** (16, 21, 25): StartTurnAbility with use slots; the "turns where ..." conditions are
   `ActiveBonus.Requirements.Vars` on the holder (`Actor`), which CStartTurnAbilityActiveBonus.CanTriggerAbility checks
   before the slot moves, so a skipped turn keeps its slot.
-- **Safeguard** (04 bottom, 05 top, 17 bottom, 28 top, Medical Pack 31): the data stand-in from AUTHORING.md, one shape
-  for the whole class: a `NullTargeting` ability (CAbilityNullTargeting targets and puts the bonus on each target) with
-  a persistent `GenericOnNegativeCondition` bonus, `XPTracker: [0]` (one prevention, Geminate perk 12),
-  `TriggerTarget == ActiveBonus.Actor`, not when immune, only the ten negative conditions (Curse included: a curse
-  added to the deck counts, 2e p.26). **Not a toggle** (Reject the Gift bottom's automatic shape), so it fires by itself
-  as the rule says; Elementalist2 wrote its Safeguard as a toggle (`IsToggleBonus`) — the lead may want one shape for
-  the pack. A Safeguard on a non-persistent half keeps that card in the active area until it is used (the token's
-  stand-in). The Safeguard diamond-plus marks on 04 bottom and 05 top are dropped (nothing to enhance).
+- **Safeguard** (04 bottom, 05 top, 17 bottom, 28 top, Medical Pack 31): the pack's real Safeguard condition since
+  2026-11-02 (AUTHORING.md, Safeguard; plugin GHSafeguard.cs): a Ward carrier tagged `GH2ESafeguard`, which the plugin
+  turns into the Safeguard token (a status-row icon; it blocks the next negative condition by itself, then ends; no
+  stacking; the card is not kept active). The diamond+ marks on 04 bottom and 05 top are back (on the carrier). 17
+  keeps its condition removal and medical pack as sub-abilities of the carrier; 28 has it as a sub-ability of the
+  heal.
 - **"Remove one negative condition"** (03, 23 bottom, Medical Pack 34): `RemoveConditions: 1` over the removable list;
   the game picks which one (Frosthaven's Cure Potion comment). Frosthaven's own pick-one shape (a `Choose` block) is
   self-only. Approximation.

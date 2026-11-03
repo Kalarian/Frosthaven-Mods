@@ -42,10 +42,10 @@ gave most shapes. Layouts are plain Gloomhaven style (gh_layout redraws them). E
   OncePerRound`. Use slots: `XPTracker` one entry per slot, XP on the dashed first slot ([1,0,0], Domination
   [1,0,0,0]); N slots = N triggers (AUTHORING.md / 2e rulebook p.28). **Untested:** OncePerRound on this behaviour
   (Frosthaven uses it on toggles and banners).
-- **Safeguard** (Nature's Gift top, Ancient Ward bottom, Spirit Sigil bottom): the data stand-in until the plugin has
-  a real Safeguard condition, in the Elementalist's shape (a sub-ability with `UseParentTargets` on the heal/bless,
-  `AddActiveBonus Null` + `GenericOnNegativeCondition`, `PreventCondition`, one-slot track, holder check), list line
-  `GH2E_SAFEGUARD`, icon `Positive_DamagePrevent`. All three the same shape. **Untested.**
+- **Safeguard** (Nature's Gift top, Ancient Ward bottom, Spirit Sigil bottom): the pack's real Safeguard condition
+  since 2026-11-02 (AUTHORING.md, Safeguard; plugin GHSafeguard.cs): a Ward carrier tagged `GH2ESafeguard`, which the
+  plugin turns into the Safeguard token (a status-row icon; it blocks the next negative condition by itself, then
+  ends; no stacking; the card is not kept active). A sub-ability with `UseParentTargets` on the heal/bless.
 - **Summons** (immobile aura sigils, Move/Attack/Range 0, persistent, not lost), Frosthaven's banner auras:
   - Wind Idol (`WindIdolID`, model stand-in `WindTotem`, the 1st edition Storm Sigil's summon): Pierce 1 aura range 3
     (Banner of Strength range aura + Boneshaper Solid Bones' `AttackEffect StandardBuff Pierce`).

@@ -35,21 +35,13 @@ Data:
     Bottom:
         Abilities:
             BSafeguard:
-                NullTargeting: True
+                Ward: True
                 Filter: [Self, Ally]
                 Range: 1
                 Target: 1
                 AnimOverload: PowerUp
-                ActiveBonus:
-                    Duration: Persistent
-                    Behaviour: GenericOnNegativeCondition
-                    XPTracker: [0]
-                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
-                    Vars:
-                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
-                        ValidateNotImmune: CAbility.ImmuneToAbility(TriggerTarget, TriggerAbility) == False
-                        ValidateIsNegativeCondition: TriggerAbility.AbilityType == "Poison" || TriggerAbility.AbilityType == "Wound" || TriggerAbility.AbilityType == "Stun" || TriggerAbility.AbilityType == "Disarm" || TriggerAbility.AbilityType == "Immobilize" || TriggerAbility.AbilityType == "Muddle" || TriggerAbility.AbilityType == "Curse" || TriggerAbility.AbilityType == "Bane" || TriggerAbility.AbilityType == "Brittle" || TriggerAbility.AbilityType == "Impair"
-                        PreventCondition: True
+                MiscVars:
+                    GH2ESafeguard: True
                 SubAbilities:
                     BSafeguardSubRemove:
                         RemoveConditions: All
@@ -70,10 +62,6 @@ Layout:
         - Row: "$FHS_Target_OneAdjacentAlly$"
         - Row: "$FHS_GH2E_Sawbones2_17_T$"
     Bottom:
-        - Active:
-            Ability: BSafeguard
-            Icon: Positive_DamagePrevent
-            ListLayout: "$FHS_GH2E_SAFEGUARD$"
-            Layout: "$FHS_GH2E_Sawbones2_SG_R1$"
+        - Row: "$FHS_GH2E_Sawbones2_SG_R1$"
         - Row: "<size=20%> "
         - Row: "$FHS_GH2E_Sawbones2_17_B$"
