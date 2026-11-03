@@ -8,6 +8,17 @@ against the sheet card by card. A printed square on an Attack, Move or Heal is w
 Biting Gnats, Delirium's Danse, Rot Maggots, Nightmarish Affliction, Cloying Miasma, Wilt and Wither, Creeping Lethargy,
 Rabid Bite (controlled Move 1) and Convert the Flock (controlled Move 2).
 
+## Commanded enemies
+
+Controlled enemies are driven by the player (Frosthaven rulebook p33, "the commanding figure decides how the ability is
+performed"; approved rule B): Spread the Plague, Rabid Bite, Convert the Flock and the Xorn's Last Gift perk use
+`ControlActorType: Player` (the 2nd edition Mindthief's shape: the controlled monster becomes a Player-type figure for
+the action, so the move and attack ask the commanding player; GetControllingPlayer gives the input to that player).
+The monster AI no longer picks the move or the targets. Rabid Bite's "this movement must move toward a monster that does
+not have Plague": the controlled Move 1 may only end on a hex adjacent to its start that is closer (in hexes along a
+path around walls) to at least one other monster without Plague (Frosthaven's `MoveRestrictionType:
+MustEndOnSpecificTiles`, Trapper Lure of the Snare's shape).
+
 ## Plague tokens: how they are built
 
 - **Resource.** Plague is a character resource `Plague` (`resources.yml`, Gloomhaven's CharacterResources format,
@@ -114,7 +125,8 @@ Rabid Bite (controlled Move 1) and Convert the Flock (controlled Move 2).
 - **18 Rabid Bite top:**
   - Strengthen, then control with Move 1 + Attack 5. Whether the strengthen boosts the controlled attack is up to the
     engine.
-  - "Must move toward a monster without Plague": the move follows the monster AI's own focus. NEEDS PLUGIN.
+  - "Must move toward a monster without Plague": the player moves it (Player control); the end hex must be closer to
+    a monster without Plague (MustEndOnSpecificTiles, see Commanded enemies).
 - **19 Unwilling Sacrifice top:**
   - 2 damage (flat), then the optional spread to one adjacent enemy (1 damage + Plague).
   - "Remove any number of Plague to hit that many adjacent enemies": one enemy only, and the first enemy keeps its

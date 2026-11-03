@@ -5,7 +5,7 @@ ID: 33402
 Level: 1
 Initiative: 11
 # card: Bewildering Instrumental
-# top: song (High Note); the player picks the enemy (highest current hit points not enforced, NOTES.md)
+# top: song (High Note); Damage 1 + Muddle on the enemy with the highest current hit points (Custom targeting; ties: the player picks)
 # bottom: the granted Shield 1 has no enhancement mark
 Discard: [Discard,Discard]
 Data:
@@ -18,6 +18,16 @@ Data:
                     Target: 1
                     Filter: Enemy
                     Conditions: Muddle
+                    Vars:
+                        SongMe: TargetingActor
+                        SongFoes: AllAliveMonsters.Where(CActor.AreActorsEnemies(obj.Type, SongMe.Type, obj, SongMe))
+                        ValidateSongFoes: SongFoes.Count > 0
+                        SongTopHealth: SongFoes.OrderBy(0 - obj.Health).First.Health
+                        SongHighest: SongFoes.Where(obj.Health == SongTopHealth)
+                    Targeting: Custom
+                    TargetingVars:
+                        AddTilesInRange: SongHighest.Select(Tile)
+                        AddValidActorsInRange: SongHighest
                     AnimOverload: AggressiveTargetedShout
                 Filter: Self
                 AnimOverload: PlaySongConfuse1

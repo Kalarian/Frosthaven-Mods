@@ -8,8 +8,11 @@ Initiative: 2
 # corrected against tools/gh2e/sheets/SilentKnife.json
 # top: Frosthaven's own conversion, ChangeAllegiance to Ally (scenario 119's FH119_InfuserChangeAllegiance): the monster
 # becomes an allied monster for the rest of the scenario, an enemy to the other monsters, acting on its own. Normal
-# enemies only, adjacent. The money-token cost and the extra money token it drops on death have no Frosthaven form -
-# NEEDS PLUGIN. Lost with XP 2 (Xipe's per-turn ControlActor dropped; it was also not lost).
+# enemies only, adjacent. The cost: offered only while she holds a money token (SilentKnifeMoney); on the conversion the
+# plugin (GHMoneyTokens, MiscVars GHMoneyLose) takes one token (one of her loot cards goes back on top of the loot deck,
+# Frosthaven FAQ section 10) and puts the character token on the enemy (the SilentKnifeHiredHelp resource, shown on
+# it); when that enemy dies the plugin drops one loot token in its hex ("an additional money token": Frosthaven
+# monsters drop none of their own). Lost with XP 2 (Xipe's per-turn ControlActor dropped; it was also not lost).
 # bottom: Disarm, range 1 - no mark (Xipe had one on the range)
 Discard: [Lost,Discard]
 Data:
@@ -23,6 +26,14 @@ Data:
                 Filter:
                     TargetType: Enemy
                     EnemyType: Normal
+                    Vars:
+                        ValidateNotHired: target.GetCharacterResourceAmount("SilentKnifeHiredHelp") == 0
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateMoney: Actor.GetCharacterResourceAmount("SilentKnifeMoney") >= 1
+                MiscVars:
+                    GHMoneyLose: True
         XP: 2
     Bottom:
         Abilities:

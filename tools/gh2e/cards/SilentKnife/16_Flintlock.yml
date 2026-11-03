@@ -1,15 +1,31 @@
 # card: Flintlock
 # corrected against tools/gh2e/sheets/SilentKnife.json (Xipe: always Attack 4 Pierce 2, trap on any hex)
-# top: Attack 3 as printed; "you may place one of your money tokens in the target's hex for +2 Attack, Pierce 2" has
-# no Frosthaven form (a hero holds no money tokens to place back on the map), so the bonus is always given, as a
-# conditional override on every enemy target (the 1e Trickster's Reversal's "Filter: Enemy" override) - NEEDS PLUGIN
-# for the cost, see NOTES.md.
+# top: money tokens = loot tokens (Frosthaven FAQ section 10). "You may place one of your money tokens in the hex
+# occupied by the target to add +2 Attack, Pierce 2": an optional step before the attack (TMoney, offered only while
+# she holds a money token, the SilentKnifeMoney resource) picks the enemy within the attack's range; the plugin
+# (GHMoneyTokens, MiscVars GHMoneyPlace) takes one token, puts one of her loot cards back on top of the loot deck and
+# a loot token into that enemy's hex. The attack's +2 Attack, Pierce 2 override applies only to that enemy
+# (TargetTargetedByCasterPreviousAbility + SpecificAbilityNames, the Eye of the Void port's filter).
 # bottom: Frosthaven's Trapper Honeypot top shape (the loot names itself in a temp var; the trap reads the loot's
-# looted tiles), here the looted tiles that are now empty instead of the unlooted ones; the player picks one.
+# looted tiles), here only the hexes where this loot picked up a loot token (the plugin keeps them in the temp var
+# GHMoneyLootedTiles) that are now empty; the player picks one.
 Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
+            TMoney:
+                NullTargeting: True
+                Range: 2
+                Target: 1
+                Filter: Enemy
+                SkipAnim: True
+                CanUndo: False
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateMoney: Actor.GetCharacterResourceAmount("SilentKnifeMoney") >= 1
+                MiscVars:
+                    GHMoneyPlace: True
             TAttack:
                 Attack:
                     Amount: 3
@@ -19,7 +35,10 @@ Data:
                 AnimOverload: RangedAttackPistol
                 ConditionalOverrides:
                     TAttackCO:
-                        Filter: Enemy
+                        Filter:
+                            TargetType: Enemy
+                            TargetTargetedByCasterPreviousAbility: True
+                            SpecificAbilityNames: [TMoney]
                         AbilityOverrides:
                             TTokenBuff:
                                 Strength: 2
@@ -37,6 +56,7 @@ Data:
                 AnimOverload: Loot
                 Vars:
                     LootAbility: TargetingActor.SetTempVar("SilentKnifeFlintlockLoot", Ability)
+                    MoneyTilesReset: TargetingActor.SetTempVar("GHMoneyLootedTiles", list())
             BTrap:
                 Trap:
                     TrapName: BearTrap
@@ -47,7 +67,8 @@ Data:
                     LootAbility: TargetingActor.SilentKnifeFlintlockLoot
                     ValidateHasHappened: LootAbility.AbilityHasHappened
                     LootedTiles: TargetingActor.LastAbilityPerformed and LootAbility.TilesSelected
-                    EmptyLootedTiles: LootedTiles.Where(IsEmpty)
+                    MoneyTiles: TargetingActor.GHMoneyLootedTiles
+                    EmptyLootedTiles: LootedTiles.Where(IsEmpty and MoneyTiles.Contains(obj))
                     ValidateHasEmptyLootedTiles: EmptyLootedTiles.Count > 0
                 Targeting: Custom
                 TargetingVars:

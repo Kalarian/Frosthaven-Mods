@@ -40,11 +40,12 @@ Engine facts used (read in the decompiled `ScenarioRuleLibrary.dll`, game build 
   `DecrementTrigger: Rounds` + round bonus (Drifter Accurate Strikes' advantage shape). Xipe's version kept the
   Invisible past the round.
 - **15 Hidden Daggers**: as Xipe.
-- **16 Flintlock** (approximation + NEEDS PLUGIN, top): the money-token cost can't be paid (a Frosthaven hero holds
-  no tokens to place back on the map), so **+2 Attack, Pierce 2 is always added** (override on every enemy target);
-  base Attack 3 as printed (Xipe printed Attack 4). Bottom: Frosthaven's Trapper Honeypot top shape (loot stores itself
-  in a temp var `SilentKnifeFlintlockLoot`; the trap offers the looted tiles that are now empty, player picks one).
-  Untested composite; any looted token's hex counts, not only money tokens.
+- **16 Flintlock**: top: an optional step before the attack (`TMoney`, NullTargeting on an enemy within range 2,
+  offered only while she holds a money token) places a money token (GHMoneyTokens, see Money tokens below); the
+  attack's +2 Attack, Pierce 2 override applies only to that enemy (`TargetTargetedByCasterPreviousAbility` +
+  `SpecificAbilityNames: [TMoney]`). Base Attack 3 as printed (Xipe printed Attack 4). Bottom: Frosthaven's Trapper
+  Honeypot top shape (loot stores itself in a temp var `SilentKnifeFlintlockLoot`); the trap offers only the hexes
+  where that loot picked up a loot token (temp var `GHMoneyLootedTiles`, filled by the plugin) that are now empty.
 - **18 Gruesome Advantage**: top = two exclusive overrides (flanking; isolated and not flanking), each +2 XP 1
   (Xipe gave no XP). Bottom (untested composite): Pyroclast Feed the Beast's one-slot round
   `DuringActionAbilityOnAttackFinished` bonus + Drifter Shockwave's melee check + a poison check on the target
@@ -74,9 +75,10 @@ Engine facts used (read in the decompiled `ScenarioRuleLibrary.dll`, game build 
 - **26 Crippling Poison**: two persistent bonuses (Poison on all attacks; +1 on poisoned targets), XP 2, lost.
   Note Frosthaven takes only the **largest** untyped attack bonus per target (`Math.Max` in CAttackSummary), so this +1
   does not stack with e.g. Single Out's +3 - an engine rule for every class, not changed here.
-- **27 Hired Help** (NEEDS PLUGIN for cost/drop): Frosthaven's own `ChangeAllegiance: ChangeToType: Ally` (scenario
-  119's Infuser conversion) on an adjacent normal enemy: a real permanent ally monster acting on its own. Untested on
-  a hero card. The money-token cost and the extra money token on death have no Frosthaven form. Lost, XP 2 (Xipe:
+- **27 Hired Help**: Frosthaven's own `ChangeAllegiance: ChangeToType: Ally` (scenario 119's Infuser conversion) on
+  an adjacent normal enemy: a real permanent ally monster acting on its own. Offered only while she holds a money
+  token; the plugin takes one (GHMoneyLose) and puts her character token on it (resource `SilentKnifeHiredHelp`);
+  when it dies one loot token drops in its hex. Lost, XP 2 (Xipe:
   per-turn control, not lost). The physical "blue base" sentence is left out of the text. Bottom Disarm range has no
   mark (Xipe had one).
 - **28 Watch it Burn**: top: Move 3 Jump + XP 1 only if >= 3 enemies were targeted (Shattersong Din of Battle's
@@ -86,11 +88,13 @@ Engine facts used (read in the decompiled `ScenarioRuleLibrary.dll`, game build 
 
 ## Perks (perks.py)
 
-- 4 "Pickpocket" (+1 "gain one money token if the attack targeted an adjacent enemy"): a plain +1 - NEEDS PLUGIN.
+- 4 "Pickpocket": new card `AMC_GH2E_SilentKnife_Pickpocket_P1` (+1, a self step marked `GHMoneyGainAdjacent`: one
+  loot token when the attack's target is adjacent).
 - 6 "Vanish": new card `AMC_GH2E_SilentKnife_Invisible_P1_R` (+1, Invisible self, rolling), as printed (Secretariat
   agrees on +1 rolling).
-- 8 "Parting Gift": after each rest (short and long hooks), a free skippable Attack 1, Range 3 - the money-token cost
-  is NEEDS PLUGIN.
+- 8 "Parting Gift": after each rest (short and long hooks), an optional step placing a money token in the hex of an
+  enemy within range 3 (`GHMoneyPlace`), then Attack 1 on that enemy only (Boldening Blow's Custom targeting of the
+  parent's target).
 - 9 "Fence" (city event gold): text-only passive - NEEDS PLUGIN.
 - 10 "Cloak of Invisibility" (linked): the 1e Scoundrel's once-per-scenario toggle, Cost 2.
 - No masteries: neither 2e mastery fits an existing tag (the first could reuse the 1e Pack Hunter/Lone Wolf kill
@@ -102,15 +106,24 @@ Empty: Dark is infused twice (Special Mixture, Smoke Bomb), Fire twice (Flintloc
 
 ## NEEDS PLUGIN (summary)
 
-Practiced Reflexes optional trap skip; Flintlock money-token cost; Dance of Daggers negating added effects (and a
-real Attack 2 counter); Spring the Trap springing the relocated trap on an enemy + XP; Hired Help token cost and extra
-drop; Watch it Burn play-from-hand; perks 4, 8 (cost), 9.
+Practiced Reflexes optional trap skip; Dance of Daggers negating added effects (and a real Attack 2 counter); Spring the
+Trap springing the relocated trap on an enemy + XP; Watch it Burn play-from-hand; perk 9; mastery 2 (money tokens held
+at the end of 3 scenarios: needs a count kept across scenarios).
+
+## Money tokens (GHMoneyTokens.cs)
+
+Frosthaven FAQ section 10: money tokens = loot tokens; returning a loot token to the scenario puts one of your loot
+cards (not the random item) back on top of the loot deck; printed gold amounts stay as printed. Her money tokens = the
+loot tokens she looted this scenario (character resource `SilentKnifeMoney`, counted by the plugin at Frosthaven's
+loot-token pick-up). Placing or losing one: the count drops by one and one of her loot cards (her choice through
+Frosthaven's loot-card picker when the values differ) goes back on top of the deck, its value leaving her loot; a placed
+token is a real loot token in that hex. Gaining one = one loot-deck draw (Pilfer, Pickpocket).
 
 ## Shared changes wanted
 
 - Plugin: a per-ability "may choose not to spring traps" (reuse `TryChooseToSkipTrap`'s confirm) - Practiced
   Reflexes.
-- Plugin: hero money-token pool (spend a looted token / gain one) - Flintlock, Hired Help, perks 4 and 8, mastery 2.
+- Plugin: mastery 2's count across scenarios.
 - Plugin: MoveTrap onto an enemy's hex springs the trap on it - Spring the Trap.
 - Plugin: "play this card from hand during your turn" - Watch it Burn.
 - Plugin/tag: masteries ("only attack flanked or isolated enemies, 10+ attacks"; "end 3 scenarios with 12+ tokens").

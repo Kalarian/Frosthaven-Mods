@@ -5,4 +5,4 @@ Description: PERK_SilentKnife_04_Desc
 CharacterID: SilentKnifeID
 Available: 3
 CardsToRemove: [AMC_Basic_P0]
-CardsToAdd: [AMC_Basic_P1]
+CardsToAdd: [AMC_GH2E_SilentKnife_Pickpocket_P1]

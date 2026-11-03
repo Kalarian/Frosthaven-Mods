@@ -1,5 +1,17 @@
 Parser: CharacterResources
 
+SilentKnifeMoney:
+    ID: "SilentKnifeMoney"
+    Sprite: "GHClass_SilentKnife"
+    LocKey: "$GH_GH2E_SilentKnife_MONEY_TOOLTIP$"
+    MaxAmount: 99
+
+SilentKnifeHiredHelp:
+    ID: "SilentKnifeHiredHelp"
+    Sprite: "GHClass_SilentKnife"
+    LocKey: "$GH_GH2E_SilentKnife_HIREDHELP_TOOLTIP$"
+    MaxAmount: 1
+
 Plague:
     ID: "Plague"
     Sprite: "GHClass_Plagueherald2"

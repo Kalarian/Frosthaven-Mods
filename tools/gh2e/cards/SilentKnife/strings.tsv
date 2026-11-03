@@ -41,3 +41,6 @@ GH2E_SilentKnife_27_T	You may lose one of your money tokens to place a character
 GH2E_SilentKnife_28_T	If you attacked at least three enemies with the attack ability, gain <sprite name=XP1> and perform:
 AMC_GH2E_SilentKnife_Invisible_P1_R	+1 <sprite name=Invisible>, self <sprite name=Rolling>
 GH2E_SilentKnife_28_B	During your turn, you may play this card from your hand to perform this action (in addition to the two cards you have played for the round).
+GH2E_SilentKnife_MONEY_TOOLTIP	Money tokens: the loot tokens the Silent Knife has looted this scenario. Placing or losing one puts one of her loot cards (her choice, never the random item) back on top of the loot deck; a placed token can be looted again.
+GH2E_SilentKnife_HIREDHELP_TOOLTIP	Hired Help: this enemy is the Silent Knife's ally for the rest of the scenario and drops an additional loot token when it dies.
+AMC_GH2E_SilentKnife_Pickpocket_P1	+1 Gain one money token if this attack targeted an adjacent <sprite name=Enemy>

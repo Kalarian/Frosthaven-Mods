@@ -18,8 +18,10 @@ Range:
 Flying: True
 # "Whenever this summon attacks a normal or elite enemy, after the attack ability control that enemy: Attack -1": the
 # summon's attack with a control sub-ability on its own target (the 1st edition Lead to Slaughter fix: UseParentTargets),
-# normal and elite only; the enemy attacks at its own value -1 in melee (Mindthief2 Silent Scream), driven by the AI
-# (ControlActorType Ally, as the 1st edition Eye of the Void fix). Unverified on a summon's attack.
+# normal and elite only; the enemy attacks at its own value -1 in melee (Mindthief2 Silent Scream), its target chosen by
+# the summon's owner (ControlActorType Player: rulebook p33, the commanding figure decides how a controlled ability is
+# performed; the engine hands a summon's controlled figure to the summoner's player, FFSNetwork.GetControllingPlayer).
+# Unverified on a summon's attack.
 AttackOverride:
     ParentName: DefaultAttack
     SubAbilities:
@@ -33,7 +35,7 @@ AttackOverride:
                         RangeIsBase: True
                         TargetIsBase: True
                 ControlDurationType: ControlForOneAction
-                ControlActorType: Ally
+                ControlActorType: Player
             Filter:
                 TargetType: Enemy
                 EnemyType: [Normal, Elite]

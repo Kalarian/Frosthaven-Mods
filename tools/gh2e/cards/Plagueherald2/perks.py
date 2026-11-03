@@ -109,7 +109,7 @@ PERKS = [   # (checkboxes, name, description in sprite markup, {perk fields})
         AddActiveBonus:
             ControlActor:
                 ControlDurationType: ControlForOneTurn
-                ControlActorType: Ally
+                ControlActorType: Player
             Range: 99
             Target: 1
             Filter:

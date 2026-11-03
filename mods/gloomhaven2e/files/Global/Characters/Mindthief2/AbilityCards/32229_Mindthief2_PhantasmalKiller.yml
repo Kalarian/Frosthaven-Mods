@@ -6,8 +6,11 @@ Level: 9
 Initiative: 67
 # card: Phantasmal Killer
 # written from tools/gh2e/sheets/Mindthief.json; first augment = Xipe's (a control on one target of each melee attack,
-# UseParentTargets); the second augment (after each control ability, consume Dark: one controlled enemy suffers 3) is
-# text only (NEEDS PLUGIN). The card's own Attack 3 has no mark (Xipe had one).
+# UseParentTargets); the second augment "after each of your control abilities, you may perform: consume Dark: one
+# controlled enemy suffers damage 3" is the augment ability TAugmentAfterControl (MiscVars GHAfterControl): the plugin
+# (GHAfterControl) takes it out of the augment's per-attack list when the card is read and, after each control ability
+# of the Mindthief that controlled an enemy while this augment is hers, stacks it with the enemies that ability
+# controlled (temp var GHControlledEnemies) as the only targets. The card's own Attack 3 has no mark (Xipe had one).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -34,6 +37,25 @@ Data:
                             UseParentTargets: True
                             Target: 1
                             AnimOverload: MindControl
+                        TAugmentAfterControl:
+                            Consume:
+                                Elements: [Dark]
+                                Abilities:
+                                    TAfterControlDamage:
+                                        Damage: 3
+                                        Target: 1
+                                        Filter: Enemy
+                                        Vars:
+                                            Controlled: TargetingActor.GHControlledEnemies
+                                            ValidateControlled: Controlled.Count > 0
+                                        Targeting: Custom
+                                        TargetingVars:
+                                            AddTilesInRange: Controlled.Select(Tile)
+                                            AddValidActorsInRange: Controlled
+                                        AnimOverload: TargetedDebuff
+                            Filter: Self
+                            MiscVars:
+                                GHAfterControl: True
         XP: 1
     Bottom:
         Abilities:

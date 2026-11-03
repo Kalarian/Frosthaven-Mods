@@ -11,11 +11,12 @@ PERKS = [
      {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
     (3, "Steady Hand", 'Replace one <sprite name="-1"> with one <sprite name="+1">',
      {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Basic_P1]"}),
-    # "Gain one money token if this attack targeted an adjacent enemy": Frosthaven has no way to hand a hero a money
-    # token (loot is picked up from the map); a plain +1 until the plugin can (NEEDS PLUGIN, NOTES.md)
+    # "Gain one money token if this attack targeted an adjacent enemy": money tokens are loot tokens (Frosthaven FAQ
+    # section 10), so a +1 card whose self step (MiscVars GHMoneyGainAdjacent) has the plugin (GHMoneyTokens) give her
+    # one loot token (one loot-deck draw, one more money token) when the attack's target is adjacent to her
     (3, "Pickpocket", 'Replace one <sprite name="0"> with one <sprite name="+1"> "Gain one money token if this attack '
      'targeted an adjacent <sprite name=Enemy>"',
-     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Basic_P1]"}),
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_GH2E_SilentKnife_Pickpocket_P1]"}),
     (2, "Vital Strike", 'Replace one <sprite name="0"> with one <sprite name="+2">',
      {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Basic_P2]"}),
     (2, "Vanish", 'Replace one <sprite name="+1"> with one <sprite name="+1"> "<sprite name=Invisible>, self" '
@@ -23,20 +24,41 @@ PERKS = [
      {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_GH2E_SilentKnife_Invisible_P1_R]"}),
     (2, "Disarming Cut", 'Add one <sprite name="+1"> <sprite name=Disarm>',
      {"CardsToAdd": "[AMC_Disarm_P1]"}),
-    # Frosthaven's after-rest perk hooks (both rests, as the 1e Plagueherald's Grave Defense); the money token placed in
-    # the enemy's hex has no Frosthaven form, so the attack is free and may be skipped (NEEDS PLUGIN for the cost)
+    # Frosthaven's after-rest perk hooks (both rests, as the 1e Plagueherald's Grave Defense). The cost: a step offered
+    # only while she holds a money token (SilentKnifeMoney) picks an enemy within range 3; the plugin (GHMoneyTokens,
+    # GHMoneyPlace) takes the token, puts one of her loot cards back on top of the loot deck and a loot token in that
+    # enemy's hex; the Attack 1 then targets that enemy only (Frosthaven's Boldening Blow shape: a sub-ability aimed at
+    # the parent step's target by Custom targeting). Skipping the step skips the attack.
     (1, "Parting Gift", "At the end of each of your rests, you may place one of your money tokens in the hex occupied by "
      "an <sprite name=Enemy> within <sprite name=Range> 3 to perform: <sprite name=Attack> 1, <sprite name=Target> that "
      "<sprite name=Enemy>, <sprite name=Range> 3",
      {"Flags": "[Passive, ExecuteAbilitiesAfterShortRest, ExecuteAbilitiesAfterLongRest]", "Abilities": """\
-    BAttack:
-        Attack: 1
+    BMoney:
+        NullTargeting: True
         Range: 3
         Target: 1
-        Targeting: Range
         Filter: Enemy
+        SkipAnim: True
         CanSkip: True
-        CanUndo: False"""}),
+        CanUndo: False
+        StartAbilityRequirements:
+            Type: ThisAbility
+            Vars:
+                ValidateMoney: Actor.GetCharacterResourceAmount("SilentKnifeMoney") >= 1
+        MiscVars:
+            GHMoneyPlace: True
+        SubAbilities:
+            BAttack:
+                Attack: 1
+                Range: 3
+                Target: 1
+                Filter: Enemy
+                TreatAsNonSubAbility: True
+                CanUndo: False
+                Targeting: Custom
+                TargetingVars:
+                    AddTilesInRange: ParentAbility.ActorsTargeted.Select(Tile)
+                    AddValidActorsInRange: ParentAbility.ActorsTargeted"""}),
     # needs the plugin (no Frosthaven hook on city events): a passive with its text only
     (1, "Fence", "Whenever you complete a city event, draw an attack modifier card as though you were performing an "
      "<sprite name=Attack> 4. Gain an amount of gold equal to the <sprite name=Damage> the attack would have dealt",
@@ -52,6 +74,11 @@ PERKS = [
 MASTERIES = []
 
 NEW_CARDS = {
+    # Pickpocket: +1, "gain one money token if this attack targeted an adjacent enemy" (Frosthaven's AMC_Resonance_P1
+    # self step: NullTargeting, Filter Self, AutoTrigger; the plugin reads the marker and the attack's target)
+    "AMC_GH2E_SilentKnife_Pickpocket_P1": 'MathModifier: "+1"\nAbilities:\n    APickpocket:\n        Filter: Self\n'
+                                          '        AutoTrigger: True\n        NullTargeting: True\n        SkipAnim: True\n'
+                                          '        MiscVars:\n            GHMoneyGainAdjacent: True\n',
     # +1, Invisible self, rolling (Frosthaven's AMC_Invisible_R with +1, as AMC_P1_R is a rolling +1)
     "AMC_GH2E_SilentKnife_Invisible_P1_R": 'MathModifier: "+1"\nRolling: True\nAbilityOverrides:\n    NegCon:\n'
                                            '        ParentName: AMC_GH2E_SilentKnife_Invisible_P1_R\n'

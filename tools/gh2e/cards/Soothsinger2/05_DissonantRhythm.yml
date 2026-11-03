@@ -1,6 +1,7 @@
 # card: Dissonant Rhythm
-# top: song (High, Low, Low Note); end-of-turn Attack 2, Push 2, Pierce 2 on the enemy the player picks
-# (closest not enforced; no range printed: any range, NOTES.md)
+# top: song (High, Low, Low Note); end-of-turn Attack 2, Push 2, Pierce 2 on the enemy closest to you. No range printed:
+# a melee attack (rulebook p21, approved rule B), so it can only reach an adjacent enemy, and every adjacent enemy is at
+# the closest distance (1): Range 1, the player picks among them (ties are the player's choice)
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -9,7 +10,7 @@ Data:
                 AddActiveBonus:
                     Attack: 2
                     Pierce: 2
-                    Range: 99
+                    Range: 1
                     Target: 1
                     Filter: Enemy
                     AnimOverload: AggressiveTargetedShout

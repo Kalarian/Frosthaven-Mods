@@ -5,7 +5,7 @@ ID: 33403
 Level: 1
 Initiative: 19
 # card: Wearying Chant
-# top: song (High + Low Note); the player picks the enemy (closest without Disarm or Stun not enforced, NOTES.md)
+# top: song (High + Low Note); Disarm on the closest enemy without Disarm or Stun (Custom targeting; ties: the player picks)
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -16,6 +16,16 @@ Data:
                     Range: 99
                     Target: 1
                     Filter: Enemy
+                    Vars:
+                        SongMe: TargetingActor
+                        SongFoes: AllAliveMonsters.Where(CActor.AreActorsEnemies(obj.Type, SongMe.Type, obj, SongMe) and !obj.Tokens.HasKey(CCondition.ENegativeCondition.Disarm) and !obj.Tokens.HasKey(CCondition.ENegativeCondition.Stun))
+                        ValidateSongFoes: SongFoes.Count > 0
+                        SongNearestDist: SongFoes.OrderBy(obj.GetDistanceTo(SongMe, true)).First.GetDistanceTo(SongMe, true)
+                        SongClosest: SongFoes.Where(obj.GetDistanceTo(SongMe, true) == SongNearestDist)
+                    Targeting: Custom
+                    TargetingVars:
+                        AddTilesInRange: SongClosest.Select(Tile)
+                        AddValidActorsInRange: SongClosest
                     AnimOverload: AggressiveTargetedShout
                 Filter: Self
                 AnimOverload: PlaySongConfuse2

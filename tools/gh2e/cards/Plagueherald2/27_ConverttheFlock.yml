@@ -1,5 +1,5 @@
 # card: Convert the Flock
-# top: control every normal and elite enemy with Plague (any range): Move 2, Attack 5 + Poison. The Plague their
+# top: control every normal and elite enemy with Plague (any range): Move 2, Attack 5 + Poison, each driven by the player (ControlActorType Player, rulebook p33). The Plague their
 # attacks add can't be given (the monsters hold no supply): NEEDS PLUGIN. bottom: "one enemy that has Poison or
 # Plague": the target pick checks either (filter Vars); it gains Plague and suffers Damage 3; on a kill, XP 1. "You may
 # Teleport to the hex it occupied": not written, NEEDS PLUGIN.
@@ -22,7 +22,7 @@ Data:
                             Conditions: Poison
                             StrengthIsBase: True
                     ControlDurationType: ControlForOneAction
-                    ControlActorType: Ally
+                    ControlActorType: Player
                 Target: -1
                 Targeting: All
                 Filter:

@@ -23,8 +23,10 @@ worth a bench run.
   Abilities); the plugin's GHAugments fix covers them.
 - **06 The Mind's Weakness / 10 Psychic Blade** "control the target of the attack ability": control sub-ability with
   `UseParentTargets` (the 1st edition Lead to Slaughter after its CARD_FIXES fix). The controlled Attack 2 keeps its mark.
-- **07 Pilfer**: "If this attack does not kill the target, gain a money token" is text only. **NEEDS PLUGIN**
-  (Frosthaven's cards have no "gain a money token" ability; its loot can only pick up tokens on the map).
+- **07 Pilfer**: "If this attack does not kill the target, gain a money token": money tokens are loot tokens (Frosthaven
+  FAQ section 10), so a sub-ability of the attack with the negated kill requirement (`ActorsKilledByAbility: "== 0"`)
+  marked `GHMoneyGain` has the plugin (GHMoneyTokens) give her one loot token (one loot-deck draw). The printed Loot 1
+  follows.
 - **09 Empathetic Assault**: the Heal keeps its printed mark (Xipe removed it on purpose).
 - **10 Psychic Blade** augment: approximated as `Range +1, TreatAsMelee` on every melee attack (Xipe's). The
   "single-target" restriction isn't enforced, and whether an augment override's Range adds (2) or sets (1) is unverified.
@@ -69,7 +71,9 @@ worth a bench run.
   (`Attack 0` BuffAttack on your melee attacks, `BAugmentShare`) for a plugin to hook.
 - **29 Phantasmal Killer** top: first augment = a control on one target of each melee attack (Attack 3, melee,
   `UseParentTargets`). Second augment "after each of your control abilities, you may consume Dark: one controlled enemy
-  suffers 3" is text only: **NEEDS PLUGIN** (no "after each control ability" trigger in the data). The card's Attack 3
+  suffers 3": an augment ability marked `GHAfterControl` (a Consume Dark step holding Damage 3 on one of the enemies the
+  control ability controlled, Custom targeting, no range); the plugin GHAfterControl lifts it out of the per-attack
+  augment list and stacks it after each control ability of hers that controlled an enemy while the augment is active. The card's Attack 3
   has no mark (Xipe had one).
 
 ## Summons (`summons/`)
@@ -109,8 +113,8 @@ worth a bench run.
 
 ## Shared changes wanted
 
-1. **Plugin**: money token gain (07 Pilfer); augment sharing with the first ally's melee attack each round (28 Many as
-   One bottom); "after each of your control abilities, consume Dark: 3 damage to one controlled enemy" (29); a real
+1. **Plugin**: augment sharing with the first ally's melee attack each round (28 Many as
+   One bottom); a real
    designated hex for Cranium Overload (17) and Psychic Projection bottom (25); the "two adjacent enemies" restriction
    (24 top); the single-target restriction of Psychic Blade's augment (10); Lying Low (perk); a mastery tag for kills by
    control abilities.

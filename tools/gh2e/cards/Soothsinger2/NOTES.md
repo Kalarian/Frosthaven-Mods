@@ -43,15 +43,18 @@ tag on the card face and no music-note status icon (both keyed to PlaySong in th
 
 ## Decisions per card
 
-- 01 Mobilizing Measure top: "the ally closest to you" is the ally the player picks (any range). Bottom Retaliate 1 is a
+- 01 Mobilizing Measure top: "the ally closest to you": Custom targeting offers only the allies at the smallest distance
+  (counted in hexes along a path around walls, figures ignored, CActor.GetDistanceTo(x, true)); ties are the player's
+  choice. Bottom Retaliate 1 is a
   round bonus on one adjacent ally. Unverified: a ControlActor grant inside an EndTurnAbility bonus.
-- 02 Bewildering Instrumental top: "the enemy with the highest current hit point value" is the enemy the player picks
-  (Damage 1 + Muddle, any range). APPROXIMATION.
-- 03 Wearying Chant top: "the closest enemy without Disarm or Stun" is the enemy the player picks. APPROXIMATION.
+- 02 Bewildering Instrumental top: Custom targeting offers only the enemy monsters with the highest current hit points
+  (ties: the player picks); no range or line of sight ("suffers").
+- 03 Wearying Chant top: Custom targeting offers only the closest enemy monsters without Disarm or Stun (distance as 01;
+  ties: the player picks).
 - 04 Power Ballad: Shattersong Din of Battle's aura (+1 Attack, once per turn per figure, toggled by each figure on the
   attack it chooses), persistent. "First attack each turn" becomes "one attack each turn of the figure's choice".
-- 05 Dissonant Rhythm top: "target the enemy closest to you" = one enemy the player picks, any range (Range 99, so an
-  adjacent target takes the ranged disadvantage). APPROXIMATION.
+- 05 Dissonant Rhythm top: no range printed = melee (rule B); the closest enemy of a melee attack is an adjacent one and
+  all adjacent enemies tie at distance 1: Range 1, the player picks among them.
 - 06 Increase Cadence bottom: a Note choice at the end of this and the next five turns (EndTurnAbility, 6 slots, XP on
   1/3/5, lost). Unverified: a Choose inside AddActiveBonus.
 - 07 Intensifying Amplitude bottom: APPROXIMATION: +X (0..4 over the five attacks) is a flat +2 on each of the five,
