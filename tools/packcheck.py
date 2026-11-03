@@ -418,8 +418,12 @@ def printed_vs_shipped(pack, problems, warnings):
             problems.append(f"{where}: {half}: printed vs shipped: {text}")
         if d.get("Initiative") != c["initiative"]:
             problem("card", "initiative", f"initiative printed {c['initiative']}, shipped {d.get('Initiative')}")
-        lvl = str(c["level"]) if str(c["level"]).isdigit() or str(c["level"]) == "M" else "X"
-        if str(d.get("Level")) != lvl:
+        # the engine takes a number or X only: a printed "M" (Medical Packs) ships as X. "Level: M" broke the outpost map
+        # (FHMapView.InitUI NullReferenceException, no Edit Party: 2026-11-02 23:30)
+        lvl = str(c["level"]) if str(c["level"]).isdigit() else "X"
+        if not (str(d.get("Level")).isdigit() or str(d.get("Level")) == "X"):
+            problems.append(f"{where}: card: Level {d.get('Level')!r} is not a number or X (the game's outpost map fails to build)")
+        elif str(d.get("Level")) != lvl:
             problem("card", "level", f"level printed {c['level']}, shipped {d.get('Level')}")
         discard = d.get("Discard") or []
         if isinstance(discard, str):

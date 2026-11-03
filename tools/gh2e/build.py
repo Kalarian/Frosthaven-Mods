@@ -186,7 +186,7 @@ def card_file(cls, path, ids, warn):
     lines = [ln for ln in s.split("\n") if ln.split(":", 1)[0] not in HEADER_KEYS]
     # the printed level: a number, X, or M (the 2e Sawbones' Medical Packs; the card face shows the text, the engine reads
     # any non-number as level 1, CAbilityCard)
-    level = c["level"] if str(c["level"]).isdigit() or c["level"] in ("X", "M") else "X"
+    level = c["level"] if str(c["level"]).isdigit() or c["level"] == "X" else "X"
     # Gloomhaven's own name keys ($ABILITY_CARD_EyeforanEye$): a key's text is the card's name, so a 2e card sharing a
     # 1st edition card's name shares its key harmlessly (and the test harness reads both packs alike)
     head = ["Parser: AbilityCard", f"Name: $ABILITY_CARD_{name_key(c['name'])}$", f"Character: {cls}ID", f"ID: {cid}",
