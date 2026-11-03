@@ -103,6 +103,31 @@ namespace FrosthavenMods
             catch (Exception e) { Report("TeleportPad", e); }
         }
 
+        /// <summary>"Place two tokens in empty hexes": two different hexes. A token hex counts as empty (above), so without
+        /// this the second pad could go on the first pad's hex, and two pads in one hex link nothing (bench 20261102-214859:
+        /// both pads at (6,10), no TeleportPad rule). A pad summon's position choice leaves out the hexes of the summoner's
+        /// standing pads. Other tokens may still share a pad's hex (they are empty hexes).</summary>
+        [HarmonyPatch(typeof(SharedAbilityTargeting), nameof(SharedAbilityTargeting.RemoveInvalidTilesForAbilityMirrored))]
+        [HarmonyPostfix]
+        private static void AfterRemoveInvalidTiles(List<CTile> tiles, CAbility ability)
+        {
+            try
+            {
+                if (tiles == null || tiles.Count == 0 || !(ability is CAbilitySummon summon)) return;
+                if (summon.SummonIDs == null || summon.SelectedSummonID != PadID) return;
+                CActor owner = ability.TargetingActor;
+                CScenario scenario = ScenarioManager.Scenario;
+                if (owner == null || scenario?.HeroSummons == null) return;
+                var taken = new HashSet<Point>(scenario.HeroSummons
+                    .Where(s => s != null && !s.IsDead && IsToken(s, PadID) && s.Summoner == owner).Select(s => s.ArrayIndex));
+                if (taken.Count == 0) return;
+                int removed = tiles.RemoveAll(t => t != null && taken.Contains(t.m_ArrayIndex));
+                if (removed > 0)
+                    Plugin.Log.LogInfo($"GHRule TeleportPadHexes card {PadCard} the second pad goes in another hex ({removed} pad hex(es) left out for {GHPlague.NameOf(owner)})");
+            }
+            catch (Exception e) { Report("TeleportPad hexes", e); }
+        }
+
         private static void ClearPadLinks()
         {
             if (s_PadLinks.Count == 0) return;

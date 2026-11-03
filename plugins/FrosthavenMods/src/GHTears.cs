@@ -392,6 +392,23 @@ namespace FrosthavenMods
             catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: push path: " + e); }
         }
 
+        /// <summary>Nightfall top's hazardous terrain damage (card step TTearDamage) on a figure pushed into a Tear: one rule
+        /// line per figure it hits, so a bench can see the damage step ran (the card's own data does the damage).</summary>
+        [HarmonyPatch(typeof(CAbilityDamage), nameof(CAbilityDamage.ApplyToActor))]
+        [HarmonyPostfix]
+        private static void NightfallTearDamage(CAbilityDamage __instance, CActor actor)
+        {
+            try
+            {
+                if (__instance == null || actor == null || __instance.Name != "TTearDamage") return;
+                if (!GHNightshroud.Is(__instance.TargetingActor) || GHNightshroud.CardId(__instance) != NightfallCard) return;
+                Log("TearDamage", NightfallCard, $"{actor.GetPrefabName()} pushed into a Tear suffers hazardous terrain damage {__instance.Strength}");
+            }
+            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: Nightfall damage: " + e); }
+        }
+
+        private const int NightfallCard = 32910;
+
         // ------------------------------------------------------------------ Black Knives
 
         [HarmonyPatch(typeof(CAbilityAttack), "AttackActor")]
