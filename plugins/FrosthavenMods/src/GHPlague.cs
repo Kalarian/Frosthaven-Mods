@@ -579,6 +579,9 @@ namespace FrosthavenMods
     /// instead of its damage, the Plagueherald's player is asked; on yes the attacker gains two Curses (two curse cards
     /// in its modifier deck) and two Plague and the bonus ends (the card goes to the discard pile); on no it stays.
     /// Logs "GHRule CompoundingInfection card N ...".
+    /// The trigger site runs inside CAbilityAttack's foreach over CharacterClassManager.FindAllActiveBonuses(): ending the
+    /// bonus there is safe only because GHBonusSnapshot turns that enumeration into a snapshot list (it crashed with
+    /// "Collection was modified" before, bench 2026-11-03).
     /// </summary>
     [HarmonyPatch]
     internal static class GHCompoundingInfection
