@@ -455,7 +455,7 @@ namespace FrosthavenMods
             try
             {
                 if (action?.Abilities == null || cardID < 20000 || cardID >= 40000) return;
-                List<CAbility> marked = action.Abilities.Where(a => GHSawbones2e.Tagged(a, GHSawbones2e.TemplateTag)).ToList();
+                List<CAbility> marked = action.Abilities.Where(a => a?.Name != null && GHSawbones2e.Tagged(a, GHSawbones2e.TemplateTag)).ToList();
                 foreach (CAbility a in marked)
                 {
                     action.Abilities.Remove(a);
@@ -464,7 +464,7 @@ namespace FrosthavenMods
                     if (!known) Plugin.Log.LogInfo($"Gloomhaven 2e templates: card {cardID} keeps {a.Name} for its plugin rule");
                 }
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHSawbones2eTemplates (read): " + e.Message); }
+            catch (Exception e) { if (GHClasses.Reported.Add("saw templates read")) Plugin.Log.LogWarning("GHSawbones2eTemplates (read): " + e); }
         }
     }
 }

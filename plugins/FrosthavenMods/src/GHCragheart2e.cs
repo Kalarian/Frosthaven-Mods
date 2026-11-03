@@ -271,7 +271,7 @@ namespace FrosthavenMods
             int card = CardId(_throughMove);
             int back = 0;
             ScenarioState scenario = ScenarioManager.CurrentScenarioState;
-            if (scenario != null && ReferenceEquals(scenario, _throughScenario))
+            if (scenario?.Props != null && ReferenceEquals(scenario, _throughScenario))
                 foreach (CObjectObstacle obstacle in Unblocked)
                     if (scenario.Props.Contains(obstacle) && !obstacle.Activated) { SetBlocked(obstacle, true); back++; }
             Unblocked.Clear();

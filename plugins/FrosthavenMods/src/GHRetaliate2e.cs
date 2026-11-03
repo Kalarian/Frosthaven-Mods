@@ -65,7 +65,9 @@ namespace FrosthavenMods
             s_LastCalc = 0;
             s_SpikedHideUsed = 0;
             s_SpikedHideHolder = null;
-            __state = new Scope { On = true, Retaliator = actorBeingAttacked, AttackerHealth = __instance.Health, AttackerWasDead = __instance.IsDead, Override = retaliateBuffOverride };
+            __state = default(Scope);
+            try { __state = new Scope { On = true, Retaliator = actorBeingAttacked, AttackerHealth = __instance.Health, AttackerWasDead = __instance.IsDead, Override = retaliateBuffOverride }; }
+            catch (Exception e) { if (GHClasses.Reported.Add("ra retaliate start")) Plugin.Log.LogError("GHRetaliate2e (start): " + e); }
         }
 
         [HarmonyPatch(typeof(CActor), nameof(CActor.ApplyRetaliateToAttack))]
@@ -76,9 +78,11 @@ namespace FrosthavenMods
             try
             {
                 CActor me = __state.Retaliator, attacker = __instance;
-                if (s_SpikedHideUsed > 0 && s_SpikedHideHolder != null)
+                // never remove more than is held: the engine's RemoveCharacterResource reports an error (ErrorWithReport) for none
+                int stillHeld = s_SpikedHideHolder?.GetCharacterResourceAmount(SpikedHideResource) ?? 0;
+                if (s_SpikedHideUsed > 0 && s_SpikedHideHolder != null && stillHeld > 0)
                 {
-                    s_SpikedHideHolder.RemoveCharacterResource(SpikedHideResource, s_SpikedHideUsed, updateWorldSpaceUI: true);
+                    s_SpikedHideHolder.RemoveCharacterResource(SpikedHideResource, Math.Min(s_SpikedHideUsed, stillHeld), updateWorldSpaceUI: true);
                     Plugin.Log.LogInfo($"GHRule SpikedHide card 0 perk Spiked Hide: {s_SpikedHideUsed} card(s) discarded for Retaliate {2 * s_SpikedHideUsed} against {Name(attacker)}");
                 }
                 bool retaliated = __state.Override.HasValue ? __state.Override.Value > 0 : s_LastCalc > 0;

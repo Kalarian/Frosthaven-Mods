@@ -138,7 +138,7 @@ namespace FrosthavenMods
                 }
                 Log("DoomFocus", doomCard, $"{NameOf(__instance)} focuses on the doomed {NameOf(target)}");
             }
-            catch (Exception e) { Plugin.Log.LogError("Doomstalker (2e) summon turn: " + e); }
+            catch (Exception e) { if (GHClasses.Reported.Add("doom2e summon turn")) Plugin.Log.LogError("Doomstalker (2e) summon turn: " + e); }
         }
 
         private static void SetFocus(CAbilityMove move, CAIFocusOverrideDetails focus) =>
@@ -162,7 +162,7 @@ namespace FrosthavenMods
                 MoveJump(__instance) = true;
                 Log("GiveChase", GiveChase, $"{NameOf(mover)}'s move {__instance.Name}: +2 Move and Jump (now {ModifiedStrength.GetValue(__instance)})");
             }
-            catch (Exception e) { Plugin.Log.LogError("Doomstalker (2e) Give Chase: " + e); }
+            catch (Exception e) { if (GHClasses.Reported.Add("doom2e Give Chase")) Plugin.Log.LogError("Doomstalker (2e) Give Chase: " + e); }
         }
 
         // ------------------------------------------------------------------ ability ends: Walking Bastion, Hristek's move
@@ -223,7 +223,7 @@ namespace FrosthavenMods
                     Log("WalkingBastion", WalkingBastion, $"{NameOf(summon)} attacked the doomed {NameOf(doomed)}: granted Attack 1, Pierce 2 on it (once this round)");
                 }
             }
-            catch (Exception e) { Plugin.Log.LogError("Doomstalker (2e) ability end: " + e); }
+            catch (Exception e) { if (GHClasses.Reported.Add("doom2e ability end")) Plugin.Log.LogError("Doomstalker (2e) ability end: " + e); }
         }
 
         [HarmonyPatch(typeof(CAbilityAttack), nameof(CAbilityAttack.Start))]
@@ -240,7 +240,7 @@ namespace FrosthavenMods
                 __instance.Strength += 2;
                 Log("HornedHristek", ChargingBeast, $"{NameOf(summon)}'s attack {__instance.Name}: +2 Attack after its first move this round (now {__instance.Strength})");
             }
-            catch (Exception e) { Plugin.Log.LogError("Doomstalker (2e) Horned Hristek: " + e); }
+            catch (Exception e) { if (GHClasses.Reported.Add("doom2e Horned Hristek")) Plugin.Log.LogError("Doomstalker (2e) Horned Hristek: " + e); }
         }
 
         // ------------------------------------------------------------------ Great Archinotl: an extra turn at initiative 100
@@ -271,8 +271,10 @@ namespace FrosthavenMods
             {
                 List<CActor> sorted = SortedActors();
                 if (sorted == null || ScenarioManager.Scenario?.HeroSummons == null) return;
+                // inert unless a 2e Doomstalker's Great Archinotl is out (runs before every turn of every scenario)
+                if (!ScenarioManager.Scenario.HeroSummons.Any(s => s != null && s.SummonData?.ID == Archinotl && SummonerOf(s) != null)) return;
                 NewScenarioCheck();
-                bool someoneLeft = sorted.Any(a => ScenarioManager.Scenario.HasActor(a) && (!a.Deactivated || !a.SkipTurnWhenDeactivated)
+                bool someoneLeft = sorted.Any(a => a != null && ScenarioManager.Scenario.HasActor(a) && (!a.Deactivated || !a.SkipTurnWhenDeactivated)
                                                    && (!a.PlayedThisRound || a.HasPendingExtraTurn));
                 if (someoneLeft) return;
                 CHeroSummonActor next = ScenarioManager.Scenario.HeroSummons.FirstOrDefault(s => s != null && !s.IsDead && s.SummonData?.ID == Archinotl
@@ -284,7 +286,7 @@ namespace FrosthavenMods
                 next.PlayedThisRound = false;
                 Log("ArchinotlExtraTurn", PredatorAndPrey, $"{NameOf(next)} performs its additional turn at initiative 100 (round {Round})");
             }
-            catch (Exception e) { Plugin.Log.LogError("Doomstalker (2e) Great Archinotl: " + e); }
+            catch (Exception e) { if (GHClasses.Reported.Add("doom2e Great Archinotl")) Plugin.Log.LogError("Doomstalker (2e) Great Archinotl: " + e); }
         }
 
         [HarmonyPatch(typeof(CHeroSummonActor), nameof(CHeroSummonActor.Initiative))]
@@ -325,7 +327,7 @@ namespace FrosthavenMods
                 me.Dooms.AddRange(keep);
                 Log("HeartOfDoom", HeartOfDoom, $"doom slots now {slots}: kept {string.Join(", ", keep.Select(d => DoomName(me, d)))}; discarded {dooms.Count - keep.Count}");
             }
-            catch (Exception e) { Plugin.Log.LogError("Doomstalker (2e) Heart of Doom: " + e); }
+            catch (Exception e) { if (GHClasses.Reported.Add("doom2e Heart of Doom")) Plugin.Log.LogError("Doomstalker (2e) Heart of Doom: " + e); }
         }
 
         private static string DoomName(CPlayerActor me, CDoom doom)
@@ -394,7 +396,7 @@ namespace FrosthavenMods
         [HarmonyPrefix]
         private static void BeforeBuffAttack(CAttackActiveBonus_BuffAttack __instance)
         {
-            try { Sync(__instance.ActiveBonus, "attack"); } catch (Exception e) { Plugin.Log.LogError("Doomstalker (2e) slot sequence: " + e); }
+            try { Sync(__instance.ActiveBonus, "attack"); } catch (Exception e) { if (GHClasses.Reported.Add("doom2e slot sequence")) Plugin.Log.LogError("Doomstalker (2e) slot sequence: " + e); }
         }
 
         [HarmonyPatch(typeof(CAttackActiveBonus_BuffAttack), nameof(CAttackActiveBonus_BuffAttack.OnAttackStart))]
@@ -408,7 +410,7 @@ namespace FrosthavenMods
         [HarmonyPrefix]
         private static void BeforeIncoming(CAttackActiveBonus_BuffIncomingAttacks __instance)
         {
-            try { Sync(__instance.ActiveBonus, "attack on the doomed enemy"); } catch (Exception e) { Plugin.Log.LogError("Doomstalker (2e) slot sequence: " + e); }
+            try { Sync(__instance.ActiveBonus, "attack on the doomed enemy"); } catch (Exception e) { if (GHClasses.Reported.Add("doom2e slot sequence")) Plugin.Log.LogError("Doomstalker (2e) slot sequence: " + e); }
         }
 
         [HarmonyPatch(typeof(CAttackActiveBonus_BuffIncomingAttacks), nameof(CAttackActiveBonus_BuffIncomingAttacks.ReferenceStrength))]

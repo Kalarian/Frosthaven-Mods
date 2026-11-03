@@ -86,7 +86,7 @@ namespace FrosthavenMods
                     }
                 }
             }
-            catch (Exception e) { Plugin.Log.LogError("Gloomhaven modifier rewrites: " + e); }
+            catch (Exception e) { if (GHClasses.Reported.Add("modifier rewrites")) Plugin.Log.LogError("Gloomhaven modifier rewrites: " + e); }
         }
 
         private static readonly HashSet<string> ScalesLogged = new HashSet<string>();
@@ -96,18 +96,22 @@ namespace FrosthavenMods
         [HarmonyPostfix]
         private static void ScalesNeedsLight(CBespokeBehaviour __instance, CAbility ability, ref bool __result)
         {
-            if (!__result || !(__instance is CAttackActiveBonus_BuffAttack)) return;
-            CActiveBonus bonus = __instance.ActiveBonus;
-            if (bonus?.BaseCard == null || bonus.BaseCard.ID != ScalesOfJustice) return;
-            if (!(ability is CAbilityAttack)) return;
-            bool light = LightConsumedThisAction();
-            __result = light;
-            string key = ability.ID + " " + light;
-            if (light && ScalesLogged.Add(key))
+            try
             {
-                if (ScalesLogged.Count > 500) { ScalesLogged.Clear(); ScalesLogged.Add(key); }
-                Plugin.Log.LogInfo($"GHRule ScalesOfJustice card {ScalesOfJustice} +1 Attack, Pierce 1 on this attack (Light consumed)");
+                if (!__result || !(__instance is CAttackActiveBonus_BuffAttack)) return;
+                CActiveBonus bonus = __instance.ActiveBonus;
+                if (bonus?.BaseCard == null || bonus.BaseCard.ID != ScalesOfJustice) return;
+                if (!(ability is CAbilityAttack)) return;
+                bool light = LightConsumedThisAction();
+                __result = light;
+                string key = ability.ID + " " + light;
+                if (light && ScalesLogged.Add(key))
+                {
+                    if (ScalesLogged.Count > 500) { ScalesLogged.Clear(); ScalesLogged.Add(key); }
+                    Plugin.Log.LogInfo($"GHRule ScalesOfJustice card {ScalesOfJustice} +1 Attack, Pierce 1 on this attack (Light consumed)");
+                }
             }
+            catch (Exception e) { if (GHClasses.Reported.Add("scales valid target")) Plugin.Log.LogError("GHModifierRewrites (Scales of Justice target): " + e); }
         }
     }
 }

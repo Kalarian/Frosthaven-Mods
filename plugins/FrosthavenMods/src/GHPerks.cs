@@ -58,7 +58,9 @@ namespace FrosthavenMods
         [HarmonyPrefix]
         private static void BeforeHeal(CAbilityHeal __instance, CActor actor, out (int health, bool poisoned, int plus) __state)
         {
-            __state = (actor != null ? actor.Health : 0, actor != null && actor.Tokens.HasKey(CCondition.ENegativeCondition.Poison), 0);
+            __state = (0, false, 0);
+            try { __state = (actor != null ? actor.Health : 0, actor != null && actor.Tokens != null && actor.Tokens.HasKey(CCondition.ENegativeCondition.Poison), 0); }
+            catch (Exception e) { Report("Shielding Light state", e); }
             try { RemoveConditionFirst(__instance, actor); }
             catch (Exception e) { Report("Revitalizing Medicine", e); }
             try { __state.plus = PotentPlus(__instance, actor, true); }
@@ -105,8 +107,10 @@ namespace FrosthavenMods
             CPlayerActor saw = WithPerk(PotentRemedies);
             if (saw == null) return 0;
             heal.Strength += 1;
+            // the +1 must be reported back even if the log line throws, or the finalizer never takes it off again
             if (log)
-                Plugin.Log.LogInfo($"GHRule PotentRemedies card {heal.GetAbilityBaseCard()?.ID} +1 Heal on the Medical Pack's heal ({heal.TargetingActor?.GetPrefabName()} heals {actor?.GetPrefabName()} for {heal.Strength}; perk of {saw.GetPrefabName()})");
+                try { Plugin.Log.LogInfo($"GHRule PotentRemedies card {heal.GetAbilityBaseCard()?.ID} +1 Heal on the Medical Pack's heal ({heal.TargetingActor?.GetPrefabName()} heals {actor?.GetPrefabName()} for {heal.Strength}; perk of {saw.GetPrefabName()})"); }
+                catch (Exception e) { Report("Potent Remedies log", e); }
             return 1;
         }
 

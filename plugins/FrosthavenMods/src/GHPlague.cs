@@ -141,13 +141,20 @@ namespace FrosthavenMods
         private static bool Placing(CActor __instance, string resourceID, int amountToAdd)
         {
             if (resourceID != Plague || s_Inside) return true;
+            int before = -1;
             try
             {
+                before = __instance.GetCharacterResourceAmount(Plague);
                 int card = CardOf(s_Ability);
                 for (int i = 0; i < Math.Max(1, amountToAdd); i++)
                     Give(s_Giver, __instance, card, "ability");
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHPlague (place): " + e); }
+            catch (Exception e)
+            {
+                if (GHClasses.Reported.Add("GHPlague place")) Plugin.Log.LogError("GHPlague (place): " + e);
+                // nothing placed yet: let the engine place the token itself rather than lose it
+                try { if (before >= 0 && before < 3 && __instance.GetCharacterResourceAmount(Plague) == before) return true; } catch { }
+            }
             return false;
         }
 
@@ -281,12 +288,16 @@ namespace FrosthavenMods
                 CActor target = summary?.ActorToAttack;
                 if (target == null || summary.AttackAbilityWithOverrides == null) return;
                 int n = target.GetCharacterResourceAmount(GHPlague.Plague);
-                if (GHPlague.Marked(__instance, "GH2E_UnwillingSacrifice")) LastTarget[__instance.ID] = (target, n, target.ArrayIndex);
+                if (GHPlague.Marked(__instance, "GH2E_UnwillingSacrifice"))
+                {
+                    if (LastTarget.Count > 64) LastTarget.Clear();   // abilities that never ended (reload, rewind)
+                    LastTarget[__instance.ID] = (target, n, target.ArrayIndex);
+                }
                 int printed = __instance.Strength;
                 summary.AttackAbilityWithOverrides.Strength += printed * (n - 1);
                 Plugin.Log.LogInfo($"GHRule PerPlague card {GHPlague.CardOf(__instance)} {GHPlague.NameOf(target)} has {n} Plague: damage {printed} x {n} = {summary.AttackAbilityWithOverrides.Strength}");
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHPerPlague (damage): " + e.Message); }
+            catch (Exception e) { if (GHClasses.Reported.Add("GHPerPlague (damage)")) Plugin.Log.LogError("GHPerPlague (damage): " + e); }
         }
 
         private static string _lastLogged;
@@ -309,7 +320,7 @@ namespace FrosthavenMods
         private static void AttackAura(CAttackActiveBonus_BuffAttack __instance, CAbility ability, ref int __result)
         {
             try { __result = Scale(__instance, ability, __result, "attacks"); }
-            catch (Exception e) { Plugin.Log.LogWarning("GHPerPlague (attack aura): " + e.Message); }
+            catch (Exception e) { if (GHClasses.Reported.Add("GHPerPlague (attack aura)")) Plugin.Log.LogError("GHPerPlague (attack aura): " + e); }
         }
 
         [HarmonyPatch(typeof(CMoveActiveBonus_BuffMove), nameof(CMoveActiveBonus_BuffMove.ReferenceStrength))]
@@ -317,7 +328,7 @@ namespace FrosthavenMods
         private static void MoveAura(CMoveActiveBonus_BuffMove __instance, CAbility ability, ref int __result)
         {
             try { __result = Scale(__instance, ability, __result, "moves"); }
-            catch (Exception e) { Plugin.Log.LogWarning("GHPerPlague (move aura): " + e.Message); }
+            catch (Exception e) { if (GHClasses.Reported.Add("GHPerPlague (move aura)")) Plugin.Log.LogError("GHPerPlague (move aura): " + e); }
         }
     }
 
@@ -357,7 +368,7 @@ namespace FrosthavenMods
                 Plugin.Log.LogInfo($"GHRule PlagueByAlly card {card} {GHPlague.NameOf(attackAbility?.TargetingActor)}'s attack on {GHPlague.NameOf(target)} adds Plague");
                 GHPlague.Give(attackAbility?.TargetingActor, target, card, "ally's attack bonus");
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHPlagueByAlly: " + e.Message); }
+            catch (Exception e) { if (GHClasses.Reported.Add("GHPlagueByAlly")) Plugin.Log.LogError("GHPlagueByAlly: " + e); }
         }
     }
 
@@ -407,7 +418,7 @@ namespace FrosthavenMods
                 }
                 Plugin.Log.LogInfo($"GHRule FesteringSores card {card} {GHPlague.NameOf(actor)} died at {actor.ArrayIndex}: used, {inRange.Count} enemies within range 3 of that hex may gain Plague");
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHFesteringSores: " + e.Message); }
+            catch (Exception e) { if (GHClasses.Reported.Add("GHFesteringSores")) Plugin.Log.LogError("GHFesteringSores: " + e); }
             return true;
         }
     }
@@ -446,7 +457,7 @@ namespace FrosthavenMods
                     Templates[cardID] = marked;
                 }
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHUnwillingSacrifice (read): " + e.Message); }
+            catch (Exception e) { if (GHClasses.Reported.Add("GHUnwillingSacrifice (read)")) Plugin.Log.LogError("GHUnwillingSacrifice (read): " + e); }
         }
 
         internal static void Ended(CAbility ability)
@@ -502,7 +513,7 @@ namespace FrosthavenMods
                 phase.StackNextAbilities(new List<CAbility> { copy }, me, killAfter: false, stackToNextCurrent: true, copyCurrentActionID: true);
                 Plugin.Log.LogInfo($"GHRule UnwillingSacrifice card {card} {removed} Plague removed from {GHPlague.NameOf(first)} ({(alive ? "alive" : "killed")}): {removed} of {adjacent.Count} adjacent enemies suffer damage 1 and gain Plague");
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHUnwillingSacrifice (ended): " + e.Message); }
+            catch (Exception e) { if (GHClasses.Reported.Add("GHUnwillingSacrifice (ended)")) Plugin.Log.LogError("GHUnwillingSacrifice (ended): " + e); }
         }
 
         private static bool Adjacent(CActor first, Point hex, CActor other)
@@ -546,7 +557,7 @@ namespace FrosthavenMods
                 strength *= 2;
                 Plugin.Log.LogInfo($"GHRule WiltAndWither card {bonus.BaseCard?.ID ?? 0} {GHPlague.NameOf(__instance)} has Plague: damage {before} doubled to {strength}");
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHWiltAndWither: " + e.Message); }
+            catch (Exception e) { if (GHClasses.Reported.Add("GHWiltAndWither")) Plugin.Log.LogError("GHWiltAndWither: " + e); }
         }
     }
 
@@ -590,7 +601,7 @@ namespace FrosthavenMods
                 }
                 Plugin.Log.LogInfo($"GHRule CompoundingInfection card {card} {GHPlague.NameOf(actorToDamage)} drew a Curse: gains Curse, Curse, Plague, Plague; card discarded");
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHCompoundingInfection: " + e.Message); }
+            catch (Exception e) { if (GHClasses.Reported.Add("GHCompoundingInfection")) Plugin.Log.LogError("GHCompoundingInfection: " + e); }
             return false;
         }
     }

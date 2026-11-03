@@ -53,7 +53,7 @@ namespace FrosthavenMods
                     Plugin.Log.LogInfo($"Gloomhaven after-control augment: card {cardID} keeps {marked.Name} for after each control ability");
                 }
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHAfterControl (read): " + e.Message); }
+            catch (Exception e) { if (GHClasses.Reported.Add("after control read")) Plugin.Log.LogWarning("GHAfterControl (read): " + e); }
         }
 
         /// <summary>Called from the AbilityEnded postfix (GHAfterControlEnded) for every ended ability.</summary>
@@ -68,7 +68,7 @@ namespace FrosthavenMods
                 CAugment augment = me.Augments.FirstOrDefault(x => x?.RegisteredBaseCard != null && Templates.ContainsKey(x.RegisteredBaseCard.ID));
                 if (augment == null) return;
                 var controlled = control.ActorsTargeted
-                    .Where(x => x != null && !x.IsDead && ScenarioManager.Scenario.HasActor(x) && CActor.AreActorsEnemies(x.Type, me.Type, x, me))
+                    .Where(x => x != null && !x.IsDead && ScenarioManager.Scenario != null && ScenarioManager.Scenario.HasActor(x) && CActor.AreActorsEnemies(x.Type, me.Type, x, me))
                     .Distinct().Cast<object>().ToList();
                 if (controlled.Count == 0) return;
                 int cardId = augment.RegisteredBaseCard.ID;
@@ -84,7 +84,7 @@ namespace FrosthavenMods
                 phase.StackNextAbilities(new List<CAbility> { copy }, me, killAfter: false, stackToNextCurrent: true, copyCurrentActionID: true);
                 Plugin.Log.LogInfo($"GHRule AfterControl card {cardId} after {control.Name}: consume Dark for damage 3 on one of {controlled.Count} controlled enemies offered");
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHAfterControl (ended): " + e.Message); }
+            catch (Exception e) { if (GHClasses.Reported.Add("after control ended")) Plugin.Log.LogWarning("GHAfterControl (ended): " + e); }
         }
     }
 

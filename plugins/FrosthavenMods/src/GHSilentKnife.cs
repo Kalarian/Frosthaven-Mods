@@ -360,9 +360,12 @@ namespace FrosthavenMods
         [HarmonyPostfix]
         private static void TurnHooks(CActor actor, CAbility.EAbilityType type, CActiveBonus.EActiveBonusBehaviourType behaviourType)
         {
-            if (type != CAbility.EAbilityType.AddActiveBonus || actor == null || actor != GameState.InternalCurrentActor) return;
+            if (type != CAbility.EAbilityType.AddActiveBonus || actor == null) return;
             try
             {
+                // only the rules thread's own turn queries: a UI/preview call must not use up this phase's offer
+                // (the question can only be asked on the rules thread anyway)
+                if (!IsKnife(actor) || !ScenarioRuleClient.IsWorkerThread || actor != GameState.InternalCurrentActor) return;
                 if (behaviourType == CActiveBonus.EActiveBonusBehaviourType.StartTurnAbility && PhaseManager.CurrentPhase is CPhaseStartTurn start
                     && !ReferenceEquals(start, s_LastStart))
                 {

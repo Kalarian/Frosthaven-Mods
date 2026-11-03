@@ -143,8 +143,8 @@ namespace FrosthavenMods
                 CAbility ab = nextAbilities[0];
                 if (!Marked(ab, "GHBySummonerFromHex")) return;
                 CPlayerActor her = SummonerOf(targetingActor);
-                if (her == null || her.IsDead || !ScenarioManager.Scenario.HasActor(her)) return;
-                foreach (CAbility a in nextAbilities) a.TargetingOverrideArrayIndex = targetingActor.ArrayIndex;
+                if (her == null || her.IsDead || ScenarioManager.Scenario?.HasActor(her) != true) return;
+                foreach (CAbility a in nextAbilities) if (a != null) a.TargetingOverrideArrayIndex = targetingActor.ArrayIndex;
                 Log("BySummonerFromHex", CardId(ab), $"{ab.Name} performed by {GHPlague.NameOf(her)} as if in the Bear's hex ({targetingActor.ArrayIndex.X},{targetingActor.ArrayIndex.Y})");
                 targetingActor = her;
             }
@@ -447,13 +447,13 @@ namespace FrosthavenMods
 
         // ------------------------------------------------------------------ Pack Bond and Thick Hide: modifier rewrites
 
-        private static AttackModifierYMLData Rewritten(AttackModifierYMLData card, string math)
+        private static AttackModifierYMLData Rewritten(AttackModifierYMLData card, string math, CActor drawer)
         {
             AttackModifierYMLData copy = card.Copy(createCard: true);
             copy.OriginalModifier = card.MathModifier;
             copy.MathModifier = math;
             copy.ModifiedFromModifier = card.Card;
-            ScenarioRuleClient.MessageHandler(new CChangeModifier_MessageData(GameState.InternalCurrentActor) { m_OriginalModifier = copy.OriginalModifier });
+            ScenarioRuleClient.MessageHandler(new CChangeModifier_MessageData(GameState.InternalCurrentActor ?? drawer) { m_OriginalModifier = copy.OriginalModifier });
             return copy;
         }
 
@@ -484,7 +484,7 @@ namespace FrosthavenMods
                         int d = bear != null ? SharedAbilityTargeting.GetDistanceBetweenActorsInHexes(bear, her) : -1;
                         if (d >= 0 && d <= 4)
                         {
-                            modifiers[i] = Rewritten(card, "+3");
+                            modifiers[i] = Rewritten(card, "+3", actor);
                             Log("PackBond", 0, $"Pack Bond: the Wildfury and the Bear are {d} hexes apart: +2 counts as +3");
                         }
                         continue;
@@ -492,7 +492,7 @@ namespace FrosthavenMods
                     if (card.MathModifier == "*2" && IsBear(currentTarget) && !CActor.AreActorsAllied(actor.Type, currentTarget.Type, actor, currentTarget)
                         && HasPerk(SummonerOf(currentTarget), ThickHidePerk))
                     {
-                        modifiers[i] = Rewritten(card, "+0");
+                        modifiers[i] = Rewritten(card, "+0", actor);
                         Log("ThickHide", 0, $"Thick Hide: {GHPlague.NameOf(actor)} drew 2x attacking the Bear: counts as +0");
                     }
                 }

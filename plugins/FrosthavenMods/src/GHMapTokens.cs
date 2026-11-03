@@ -61,21 +61,29 @@ namespace FrosthavenMods
         [HarmonyPostfix]
         private static void AfterFindActorsAt(List<CActor> __result)
         {
-            if (__result == null || __result.Count == 0) return;
-            for (int i = __result.Count - 1; i >= 0; i--)
-                if (IsToken(__result[i])) { __result.RemoveAt(i); ReportEmpty(); }
+            try
+            {
+                if (__result == null || __result.Count == 0) return;
+                for (int i = __result.Count - 1; i >= 0; i--)
+                    if (IsToken(__result[i])) { __result.RemoveAt(i); ReportEmpty(); }
+            }
+            catch (Exception e) { Report("empty hex (actors)", e); }
         }
 
         [HarmonyPatch(typeof(CScenario), nameof(CScenario.FindActorAt), new[] { typeof(Point), typeof(CActor), typeof(bool), typeof(bool) })]
         [HarmonyPostfix]
         private static void AfterFindActorAt(CScenario __instance, Point position, CActor actorToIgnore, bool includeInitial, ref CActor __result)
         {
-            if (!IsToken(__result)) return;
-            // the figure sharing the token's hex, if any (FindActorsAt already leaves the tokens out); else the hex is empty
-            CActor other = null;
-            try { other = __instance.FindActorsAt(position, actorToIgnore, includeInitial)?.FirstOrDefault(); } catch { }
-            __result = other;
-            ReportEmpty();
+            try
+            {
+                if (!IsToken(__result)) return;
+                // the figure sharing the token's hex, if any (FindActorsAt already leaves the tokens out); else the hex is empty
+                CActor other = null;
+                try { other = __instance.FindActorsAt(position, actorToIgnore, includeInitial)?.FirstOrDefault(); } catch { }
+                __result = other;
+                ReportEmpty();
+            }
+            catch (Exception e) { Report("empty hex (actor)", e); }
         }
 
         private static void ReportEmpty()
@@ -93,7 +101,11 @@ namespace FrosthavenMods
 
         [HarmonyPatch(typeof(CAbilityMove), nameof(CAbilityMove.ClearShadowNavLinks))]
         [HarmonyPostfix]
-        private static void AfterClearLinks() => ClearPadLinks();
+        private static void AfterClearLinks()
+        {
+            try { ClearPadLinks(); }
+            catch (Exception e) { s_PadLinks.Clear(); Report("TeleportPad clear", e); }
+        }
 
         [HarmonyPatch(typeof(CAbilityMove), nameof(CAbilityMove.RefreshShadowNavLinks))]
         [HarmonyPostfix]
@@ -176,11 +188,17 @@ namespace FrosthavenMods
         /// and before the engine starts the pending abilities (see GHTinkerer.AfterFindBonuses).</summary>
         internal static void OnEndTurn(CActor actor)
         {
+            try { EndTurnBombs(actor); }
+            catch (Exception e) { Report("GravityBomb end of turn", e); }
+        }
+
+        private static void EndTurnBombs(CActor actor)
+        {
             if (!(actor is CPlayerActor tinkerer) || tinkerer.CharacterClass?.ID != TinkererClass) return;
             if (!(PhaseManager.CurrentPhase is CPhaseEndTurn phase) || ReferenceEquals(phase, s_LastEndTurn) || phase.m_SentEndTurnMessage) return;
             s_LastEndTurn = phase;
             CScenario scenario = ScenarioManager.Scenario;
-            if (scenario?.HeroSummons == null || GameState.PendingScenarioModifierAbilities == null) return;
+            if (scenario?.HeroSummons == null || GameState.PendingScenarioModifierAbilities == null || ScenarioManager.CurrentScenarioState == null) return;
             if (!ReferenceEquals(s_BombState, ScenarioManager.CurrentScenarioState)) { s_BombState = ScenarioManager.CurrentScenarioState; s_BombArmedRound.Clear(); }
             int round = ScenarioManager.CurrentScenarioState.RoundNumber;
             foreach (CHeroSummonActor bomb in scenario.HeroSummons.Where(s => s != null && !s.IsDead && IsToken(s, BombID) && s.Summoner == tinkerer).ToList())
@@ -214,12 +232,20 @@ namespace FrosthavenMods
         {
             List<CAbility> abilities = bomb.SummonData?.OnDeathAbilities;
             if (abilities == null || abilities.Count == 0) { Plugin.Log.LogWarning("GHMapTokens: the Gravity Bomb has no abilities to perform"); return; }
-            s_Queued.Clear();
+            // copy all three first, so a failed copy queues none of them (never half a bomb with the token left behind)
+            var copies = new List<Tuple<CAbility, CActor>>();
             foreach (CAbility a in abilities)
             {
+                if (a == null) continue;
                 CAbility copy = CAbility.CopyAbility(a, generateNewID: false);
+                if (copy == null) continue;
                 copy.ProcessIfDead = false;
-                var entry = new Tuple<CAbility, CActor>(copy, bomb);
+                copies.Add(new Tuple<CAbility, CActor>(copy, bomb));
+            }
+            if (copies.Count == 0) { Plugin.Log.LogWarning("GHMapTokens: the Gravity Bomb's abilities could not be copied"); return; }
+            s_Queued.Clear();
+            foreach (var entry in copies)
+            {
                 s_Queued.Add(entry);
                 GameState.PendingScenarioModifierAbilities.Add(entry);
             }

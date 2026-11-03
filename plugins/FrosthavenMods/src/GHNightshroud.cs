@@ -90,6 +90,21 @@ namespace FrosthavenMods
 
         public static void Log(int card, string detail) => Plugin.Log.LogInfo($"GHRule {Rule} card {card} {detail}");
 
+        private static void Report(string what, Exception e)
+        {
+            if (GHClasses.Reported.Add("nightshroud " + what)) Plugin.Log.LogError("Nightshroud class mat: " + what + ": " + e);
+        }
+
+        /// <summary>A loaded save or a restarted round: the per-round notes belong to the old state (attacks noted before a
+        /// round restart would otherwise still give Invisible at the round's end).</summary>
+        [HarmonyPatch(typeof(ScenarioManager), nameof(ScenarioManager.Load))]
+        [HarmonyPrefix]
+        private static void ScenarioLoaded()
+        {
+            try { AttacksThisRound.Clear(); MarkerThisRound.Clear(); CancelledAttacks.Clear(); }
+            catch (Exception e) { Report("scenario load", e); }
+        }
+
         private static void Lose(CPlayerActor her, string why)
         {
             if (!HasInvisible(her)) return;
@@ -123,7 +138,7 @@ namespace FrosthavenMods
                 GHTears.Reset();
                 foreach (CPlayerActor her in Heroes()) Gain(her, "the scenario starts");
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud class mat: scenario start: " + e); }
+            catch (Exception e) { Report("scenario start", e); }
         }
 
         // ---- 2. never lost at the end of her turns
@@ -158,7 +173,7 @@ namespace FrosthavenMods
                 if (Refused.Add(__instance.ActorGuid)) Log(0, "class mat: all other characters are exhausted or have escaped: cannot gain Invisible");
                 return false;
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud class mat: " + e); return true; }
+            catch (Exception e) { Report("refuse when alone", e); return true; }
         }
 
         [HarmonyPatch(typeof(GameState), nameof(GameState.KillActor))]
@@ -166,7 +181,7 @@ namespace FrosthavenMods
         private static void AfterKill(CActor actor)
         {
             try { if (actor is CPlayerActor) CheckAlone(); }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud class mat: " + e); }
+            catch (Exception e) { Report("after kill", e); }
         }
 
         [HarmonyPatch(typeof(GameState), nameof(GameState.LogEndTurn))]
@@ -178,7 +193,7 @@ namespace FrosthavenMods
                 CheckAlone();
                 if (Is(actor)) { NoteMarker(actor); GHTears.EndOfAbilityPoint(actor, null); }
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud class mat: " + e); }
+            catch (Exception e) { Report("turn end", e); }
         }
 
         // ---- 3. no attacks while Invisible
@@ -195,7 +210,7 @@ namespace FrosthavenMods
                 __instance.SetCancelAbilityFlag(cancel: true, forceImmediate: true);
                 if (CancelledAttacks.Add(__instance.ID)) Log(CardId(__instance), $"class mat: {__instance.Name} not performed (attack abilities are not allowed while Invisible)");
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud class mat: attack check: " + e); }
+            catch (Exception e) { Report("attack check", e); }
         }
 
         // ---- 3. doors and enemies on her path
@@ -250,10 +265,14 @@ namespace FrosthavenMods
         private static bool BlocksHer(CActor blocker)
         {
             bool blocks = blocker.VisibleBlocksPathing;
-            if (!blocks || !(_mover is CPlayerActor her) || blocker is CObjectActor) return blocks;
-            if (!Hidden(her) || CActor.AreActorsAllied(her.Type, blocker.Type, her, blocker)) return blocks;
-            if (!_throughReported) { _throughReported = true; Log(0, "class mat: moves through enemies while Invisible"); }
-            return false;
+            try
+            {
+                if (!blocks || !(_mover is CPlayerActor her) || blocker is CObjectActor) return blocks;
+                if (!Hidden(her) || CActor.AreActorsAllied(her.Type, blocker.Type, her, blocker)) return blocks;
+                if (!_throughReported) { _throughReported = true; Log(0, "class mat: moves through enemies while Invisible"); }
+                return false;
+            }
+            catch (Exception e) { Report("path blockers", e); return blocks; }
         }
 
         /// <summary>The game makes closed doors walls for a hero summon's path ("is CHeroSummonActor"); the Invisible
@@ -275,9 +294,13 @@ namespace FrosthavenMods
         [HarmonyPostfix]
         private static void EnemyMayStop(CActor movingActor, CActor otherActor, ref bool __result)
         {
-            if (__result || movingActor == null || !Hidden(otherActor)) return;
-            if (!CActor.AreActorsEnemies(movingActor.Type, otherActor.Type, movingActor, otherActor)) return;
-            __result = true;
+            try
+            {
+                if (__result || movingActor == null || !Hidden(otherActor)) return;
+                if (!CActor.AreActorsEnemies(movingActor.Type, otherActor.Type, movingActor, otherActor)) return;
+                __result = true;
+            }
+            catch (Exception e) { Report("enemy may stop", e); }
         }
 
         [HarmonyPatch(typeof(CAbilityMove), nameof(CAbilityMove.AbilityEnded))]
@@ -295,7 +318,7 @@ namespace FrosthavenMods
                     PushOut(her, mover);
                 }
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud class mat: enemy in her hex: " + e); }
+            catch (Exception e) { Report("enemy in her hex", e); }
         }
 
         private static bool IsEmpty(CTile t, CActor her)
@@ -363,7 +386,7 @@ namespace FrosthavenMods
                 if (!Is(her)) return;
                 NoteMarker(her);
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud class mat: " + e); }
+            catch (Exception e) { Report("ability ended", e); }
         }
 
         [HarmonyPatch(typeof(CAbilityAttack), nameof(CAbilityAttack.AbilityEnded))]
@@ -378,7 +401,7 @@ namespace FrosthavenMods
                 l.Add(CardId(__instance));
                 NoteMarker(her);
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud class mat: " + e); }
+            catch (Exception e) { Report("attack ended", e); }
         }
 
         [HarmonyPatch(typeof(CPhaseEndRound), "OnNextStep")]
@@ -402,7 +425,7 @@ namespace FrosthavenMods
                 }
                 CheckAlone();
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud class mat: round end: " + e); }
+            catch (Exception e) { Report("round end", e); }
             finally { AttacksThisRound.Clear(); MarkerThisRound.Clear(); CancelledAttacks.Clear(); }
         }
     }

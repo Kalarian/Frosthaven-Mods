@@ -71,7 +71,12 @@ namespace FrosthavenMods
         private static void CarrierStart(CAbilityWard __instance, out CAbility __state)
         {
             __state = _carrier;
-            _carrier = __instance.GetMiscVar(Tag).GetBool() ? __instance : null;
+            try { _carrier = __instance != null && __instance.GetMiscVar(Tag).GetBool() ? __instance : null; }
+            catch (Exception e)
+            {
+                _carrier = null;
+                if (GHClasses.Reported.Add("safeguard carrier")) Plugin.Log.LogError("Safeguard: carrier check failed: " + e);
+            }
         }
 
         [HarmonyPatch(typeof(CAbilityWard), nameof(CAbilityWard.ApplyToActor))]
@@ -94,7 +99,7 @@ namespace FrosthavenMods
                 _carrier = null;   // one conversion per target (an enhancement's own conditions pass untouched)
                 Give(__instance, CardId(carrier), "from " + carrier.Name);
             }
-            catch (Exception e) { Plugin.Log.LogError("Safeguard: could not give it: " + e); }
+            catch (Exception e) { if (GHClasses.Reported.Add("safeguard give")) Plugin.Log.LogError("Safeguard: could not give it: " + e); }
             return false;
         }
 
@@ -122,7 +127,7 @@ namespace FrosthavenMods
             }
             catch (Exception e)
             {
-                Plugin.Log.LogError("Safeguard: prevention failed: " + e);
+                if (GHClasses.Reported.Add("safeguard prevent")) Plugin.Log.LogError("Safeguard: prevention failed: " + e);
                 return true;
             }
         }

@@ -103,9 +103,17 @@ namespace FrosthavenMods
             private static void Prefix(CActor actor, CActor damageSource, out Hp __state)
             {
                 __state = default;
-                if (actor == null || !(damageSource is CPlayerActor p) || p.Class?.ID != GHBruiser2e.ClassId) return;
-                if (!CActor.AreActorsEnemies(actor.Type, p.Type, actor, p)) return;
-                __state = new Hp { On = true, Health = actor.Health, Source = G(p) };
+                try
+                {
+                    if (actor == null || !(damageSource is CPlayerActor p) || p.Class?.ID != GHBruiser2e.ClassId) return;
+                    if (!CActor.AreActorsEnemies(actor.Type, p.Type, actor, p)) return;
+                    __state = new Hp { On = true, Health = actor.Health, Source = G(p) };
+                }
+                catch (Exception e)
+                {
+                    __state = default;
+                    if (GHClasses.Reported.Add("ra damage tally pre")) Plugin.Log.LogError("GHMasteriesRestA (damage, before): " + e);
+                }
             }
 
             private static void Postfix(CActor actor, Hp __state)
@@ -129,9 +137,9 @@ namespace FrosthavenMods
         [HarmonyPrefix]
         private static void KeepPushKill(ScenarioController __instance, ScenarioResult result)
         {
-            if (result == null || result.isRestarting) return;
             try
             {
+                if (result == null || result.isRestarting) return;
                 Fresh();
                 if (PushKillScenario.Count == 0) return;
                 CampaignState state = __instance.CampaignController.State;
@@ -147,7 +155,7 @@ namespace FrosthavenMods
                     Plugin.Log.LogInfo($"GHRule KillPushedThisRound card 0 Bruiser mastery: scenario {scenario} recorded ({StoredScenarios(state, null).Count} so far)");
                 }
             }
-            catch (Exception e) { Plugin.Log.LogError("GHMasteriesRestA: push-kill scenario not recorded: " + e); }
+            catch (Exception e) { if (GHClasses.Reported.Add("ra push-kill keep")) Plugin.Log.LogError("GHMasteriesRestA: push-kill scenario not recorded: " + e); }
         }
 
         private static string ScenarioKey()
