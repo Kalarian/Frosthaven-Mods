@@ -183,13 +183,19 @@ def modifier_abilities(pack, problems):
                "Trap", "Strengthen", "RefreshItems", "RefreshItemCards", "AddActiveBonus", "NullTargeting", "Choose",
                "NullHex", "Brittle", "CreateTerrain", "Teleport2", "MoveActiveBonusTracker",
                "CreateLimitedHazardousTerrain", "Kill", "ControlActor"}
+    # kinds the plugin runs after the attack on a pack's own card (AMC_GH2E_..., GHModifierAbilities.cs, 2026-11-02)
+    plugin_run = {"Create", "CreateShadow", "GiveSupplyCard", "RecoverDiscardedCards", "Ward", "Bless", "Invisible"}
     for f in sorted((pack / "files" / "Global" / "AttackModifiers").glob("*.yml")):
+        if f.stem.startswith("AMC_GH2E_"):
+            allowed_here = allowed | plugin_run
+        else:
+            allowed_here = allowed
         # a Choose is allowed on a modifier (Frosthaven's AMC_PushOrPull2_R), but our own options inside one were never
         # proven: the 2e Sedation's self-Disarm option stopped the game ("Invalid targeting type", 2026-11-01)
         if "Choose" in _modifier_kinds(f):
             problems.append(f"{f.relative_to(pack).as_posix()}: a Choose on a pack's own attack modifier: an unproven shape "
                             f"(one stopped the game when drawn); use a Frosthaven modifier, or bench it first")
-        for k in sorted(_modifier_kinds(f) - allowed):
+        for k in sorted(_modifier_kinds(f) - allowed_here):
             problems.append(f"{f.relative_to(pack).as_posix()}: a {k} ability on an attack modifier card: no modifier of "
                             f"Frosthaven's runs one (the game stops with an error when the card is drawn)")
 

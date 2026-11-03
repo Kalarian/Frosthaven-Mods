@@ -168,3 +168,7 @@ the Bear + OncePerRound + the required-consume gate), Spirit Swap top teleport, 
 Focused Aggression bottom Bear-only retaliate, Stone Sigil bottom adjacency, Jaws of Death repeats, Unbreakable Bond
 bottom, the three Safeguards, perks 1, 3, 9, 10.
 - Perk Pack Bond: its override read TargetingActor, null when the Bear draws the card (error screen in the 2e sweep, 2026-11-01 09:36). Now Frosthaven's plain +2 (AMC_Basic_P2); the +1 within range 4 is NEEDS PLUGIN.
+
+## 2026-11-02: modifier abilities and Safeguard
+
+- Perk 7 Warded Path (2026-11-02, supersedes the line above): `AMC_GH2E_Wildfury_P1_Safeguard`, +1 and the pack's Safeguard on one ally at any distance (GHModifierAbilities.cs runs its Ward carrier, GHSafeguard.cs turns it into Safeguard). The three card Safeguards are the real condition too. Bench it.

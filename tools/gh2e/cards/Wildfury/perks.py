@@ -32,11 +32,10 @@ PERKS = [
      {"CardsToAdd": "[AMC_GH2E_Wildfury_AirEarth_P1, AMC_GH2E_Wildfury_AirEarth_P1]"}),
     (2, "Bowl Over", 'Add one <sprite name="+2"> <sprite name=Push> 2',
      {"CardsToAdd": "[AMC_GH2E_Wildfury_Push2_P2]"}),
-    # APPROXIMATION: the card's Safeguard to an ally is left out (no attack-modifier shape places a bonus on another
-    # figure); a plain +1. NEEDS PLUGIN (NOTES.md).
+    # "+1, Safeguard, target 1 ally": AMC_GH2E_Wildfury_P1_Safeguard (NEW_CARDS; the plugin runs its Safeguard)
     (1, "Warded Path", 'Ignore scenario effects and add one <sprite name="+1"> "Safeguard, <sprite name=Target> 1 '
      '<sprite name=Allies>"',
-     {"CardsToAdd": "[AMC_Basic_P1]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
+     {"CardsToAdd": "[AMC_GH2E_Wildfury_P1_Safeguard]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
     # NEEDS PLUGIN: no data shape changes the modifier an enemy draws against one figure (text only)
     (1, "Thick Hide", 'Whenever the Bear is attacked, treat any <sprite name="2x"> attack modifier card the enemy draws '
      'as <sprite name="0"> instead',
@@ -118,6 +117,24 @@ PERKS = [
 MASTERIES = []
 
 NEW_CARDS = {
+    # Warded Path: "+1, Safeguard, target 1 ally": the pack's Safeguard shape (a Ward carrier tagged GH2ESafeguard,
+    # GHSafeguard.cs), run after the attack by the plugin (GHModifierAbilities.cs; a Ward isn't a kind the game's
+    # modifier code runs), by the Wildfury also when the Bear drew the card. No range printed: any distance (p21).
+    "AMC_GH2E_Wildfury_P1_Safeguard": """\
+MathModifier: "+1"
+TryToPerformAsSummoner: True
+Abilities:
+    ASafeguard:
+        Ward: True
+        Filter: Ally
+        Target: 1
+        Targeting: Range
+        Range: 99
+        CanUndo: False
+        AnimOverload: Heal
+        MiscVars:
+            GH2ESafeguard: True
+""",
     "AMC_GH2E_Wildfury_Heal2Bear_R": ('MathModifier: "+0"\nRolling: True\nAbilities:\n    AHeal:\n        Heal: 2\n'
                                       '        Filter: [Self, Ally]\n        AutoTrigger: True\n        Targeting: Custom\n'
                                       '        TargetingVars:\n'

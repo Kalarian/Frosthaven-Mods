@@ -12,7 +12,7 @@ PERKS = [
     (2, "Mending Light", 'Add two <sprite name="+1"> "<sprite name=Heal> 1, <sprite name=Range> 3"',
      {"CardsToAdd": "[AMC_GH2E_Sunkeeper2_Heal1Range3_P1, AMC_GH2E_Sunkeeper2_Heal1Range3_P1]"}),
     (1, "Second Wind", 'Add one <sprite name="-1"> "You or an adjacent ally may <sprite name=RecoverIcon> one level 1 card from the discard pile"',
-     {"CardsToAdd": "[AMC_Basic_P0]"}),
+     {"CardsToAdd": "[AMC_GH2E_Sunkeeper2_Recover1_M1]"}),
     (1, "Dazzle", 'Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>',
      {"CardsToAdd": "[AMC_Stun_R]"}),
     (1, "Unfazed", 'Ignore scenario effects and add one <sprite name="+1">',
@@ -87,31 +87,25 @@ NEW_CARDS = {
     "AMC_GH2E_Sunkeeper2_Heal1Range3_P1": ('MathModifier: "+1"\nControlTargetingActor: True\nAbilities:\n    AHeal:\n'
                                            '        Heal: 1\n        Filter: [Self, Ally]\n        Targeting: Range\n'
                                            '        Range: 3\n        AnimOverload: Heal\n'),
-    # "You or an adjacent ally may recover one level 1 card": a RecoverDiscardedCards on a modifier card is the error
-    # screen when drawn (the game's modifier code doesn't run it), so it rides in a Choose, whose chosen option runs as
-    # an ordinary ability (Frosthaven's AMC_PushOrPull2_R is a top-level Choose; AMC_ImproveTrapDamage2OrHeal2_P0's
-    # options are Null abilities). One option, which the player may skip: the printed "may".
+    # "You or an adjacent ally may recover one level 1 card": a RecoverDiscardedCards on a modifier card isn't run by
+    # the game's modifier code; the plugin runs it after the attack (GHModifierAbilities.cs, 2026-11-02). An ally target
+    # as Frosthaven's Shattersong Sound Therapy recover; skippable (the printed "may").
     "AMC_GH2E_Sunkeeper2_Recover1_M1": """\
 MathModifier: "-1"
 Abilities:
-    AChooseRecover:
-        Filter: Self
+    ARecover:
+        RecoverDiscardedCards: 1
         CanUndo: False
+        CanSkip: True
         HelpBoxTooltipLocKey: "GH2E_Sunkeeper2_RECOVER_HELP"
-        PreviewEffectText: "<sprite name=RecoverIcon> 1"
-        Choose:
-            Abilities:
-                ARecover:
-                    RecoverDiscardedCards: 1
-                    CanUndo: False
-                    PreviewEffectText: "<sprite name=RecoverIcon> 1"
-                    Range: 1
-                    Filter:
-                        TargetType: [Self, Ally]
-                        ActorType: Player
-                    Vars:
-                        CardLevel: 1
-                    AnimOverload: PositiveBuffTargeted
+        Range: 1
+        Targeting: Range
+        Filter:
+            TargetType: [Self, Ally]
+            ActorType: Player
+        Vars:
+            CardLevel: 1
+        AnimOverload: PositiveBuffTargeted
 """,
 }
 

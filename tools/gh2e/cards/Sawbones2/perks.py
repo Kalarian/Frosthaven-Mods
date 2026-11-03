@@ -11,16 +11,17 @@ PERKS = [
     (1, "Steady Hands", 'Remove two <sprite name="-1">',
      {"CardsToRemove": "[AMC_Basic_M1, AMC_Basic_M1]"}),
     (1, "Emergency Supplies", 'Replace one <sprite name="-2"> with one <sprite name="-2"> "Give one adjacent ally or self one Medical Pack"',
-     {"CardsToRemove": "[AMC_Basic_M2]", "CardsToAdd": "[AMC_Basic_M2]"}),
+     {"CardsToRemove": "[AMC_Basic_M2]", "CardsToAdd": "[AMC_GH2E_Sawbones2_Pack_M2]"}),
     (3, "Precise Incisions", 'Replace one <sprite name="-1"> with one <sprite name="+1">',
      {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Basic_P1]"}),
     # "you may gain Disarm to add Stun": a Choose on the modifier (one option: Stun the target, Disarm you), which the
     # player may skip (NEW_CARDS, NOTES.md)
     (2, "Sedation", 'Replace two <sprite name="0"> with one <sprite name="+1"> "You may gain <sprite name=Disarm> to add <sprite name=Stun>"',
      {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P0]", "CardsToAdd": "[AMC_Basic_P1]"}),
-    # the conditional +1 Attack needs the plugin (NOTES.md): plain +1 cards until then
+    # the conditional +1 Attack: the plugin turns the card's +1 into +2 while an ally holds an active Prescription
+    # (GHModifierRewrites.cs, 2026-11-02)
     (2, "Follow-up Care", 'Add two <sprite name="+1"> "Add +1 <sprite name=Attack> if an ally has an active Prescription"',
-     {"CardsToAdd": "[AMC_Basic_P1, AMC_Basic_P1]"}),
+     {"CardsToAdd": "[AMC_GH2E_Sawbones2_FollowUp_P1, AMC_GH2E_Sawbones2_FollowUp_P1]"}),
     (2, "Field Dressing", 'Add one "<sprite name=Heal> 3, <sprite name=Range> 1" <sprite name=Rolling>',
      {"CardsToAdd": "[AMC_GH2E_Sawbones2_Heal3Range1_R]"}),
     # text only until the plugin knows "a heal on a Medical Pack card" (NOTES.md)
@@ -70,26 +71,21 @@ NEW_CARDS = {
     # the error screen when drawn). Both ride in a Choose, whose chosen option runs as an ordinary ability (Frosthaven's
     # AMC_PushOrPull2_R is a top-level Choose; AMC_ImproveTrapDamage2OrHeal2_P0's options are Null abilities); one
     # option each, which the player may skip.
+    # Emergency Supplies: the GiveSupplyCard runs after the attack through the plugin (GHModifierAbilities.cs,
+    # 2026-11-02), not in a Choose.
     "AMC_GH2E_Sawbones2_Pack_M2": """\
 MathModifier: "-2"
 Abilities:
-    AChoosePack:
-        Filter: Self
+    AGivePack:
+        GiveSupplyCard: [33230]
         CanUndo: False
         HelpBoxTooltipLocKey: "GH2E_Sawbones2_PACK_HELP"
-        PreviewEffectText: "Medical Pack"
-        Choose:
-            Abilities:
-                AGivePack:
-                    GiveSupplyCard: [33230]
-                    CanUndo: False
-                    PreviewEffectText: "Medical Pack"
-                    Range: 1
-                    Targeting: Range
-                    Filter:
-                        TargetType: [Self, Ally]
-                        ActorType: Player
-                    AnimOverload: GivePackAdjacent
+        Range: 1
+        Targeting: Range
+        Filter:
+            TargetType: [Self, Ally]
+            ActorType: Player
+        AnimOverload: GivePackAdjacent
 """,
     # "You may gain Disarm to add Stun": the option is Stun on the attack's target (a NullTargeting with the condition,
     # aimed at the target as Frosthaven's Boneshaper Exploding Corpse aims a sub-ability: AddValidActorInRange +
@@ -129,6 +125,8 @@ Abilities:
                             TreatAsNonSubAbility: True
                             AnimOverload: SelfDebuff
 """,
+    # Follow-up Care: a +1 the plugin reads as +2 while an ally has an active Prescription (GHModifierRewrites.cs)
+    "AMC_GH2E_Sawbones2_FollowUp_P1": 'MathModifier: "+1"' + chr(10),
     "AMC_GH2E_Sawbones2_Heal3Range1_R": ('MathModifier: "+0"\nRolling: True\nControlTargetingActor: True\nAbilities:\n'
                                          '    AHeal:\n        Heal: 3\n        Filter: [Self, Ally]\n        Targeting: Range\n'
                                          '        Range: 1\n        AnimOverload: Heal\n'),

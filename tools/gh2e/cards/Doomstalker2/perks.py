@@ -5,15 +5,13 @@
 PERKS = [
     (1, "Steady Nerves", 'Replace one <sprite name="-2"> with one <sprite name="0">',
      {"CardsToRemove": "[AMC_Basic_M2]", "CardsToAdd": "[AMC_Basic_P0]"}),
-    # "Doomstalker performs: Attack 2, Range 5": an attack inside an attack's modifier draw has no Frosthaven card; the
-    # nearest is a modifier with its own damage ability (AMC_Damage1Range1_P0 shape), here 2 damage on one enemy within
-    # range 5 that the player picks (NOTES.md)
+    # "Doomstalker performs: Attack 2, Range 5": a real Attack 2, Range 5 by the Doomstalker after the attack (NEW_CARDS)
     (3, "Second Arrow", 'Replace one <sprite name="-1"> with one <sprite name="-1"> "Doomstalker performs: <sprite name=Attack> 2, <sprite name=Range> 5"',
      {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_GH2E_Doomstalker2_Attack2Range5_M1]"}),
     (2, "Keen Eye", 'Replace two <sprite name="0"> with two <sprite name="+1">',
      {"CardsToRemove": "[AMC_Basic_P0, AMC_Basic_P0]", "CardsToAdd": "[AMC_Basic_P1, AMC_Basic_P1]"}),
-    # Frosthaven's HIVE perk card AMC_P0_ControlSummonMove2 (a +0 that grants a summon an action), with an Attack +0;
-    # "adjacent to the target" is not checked: any of your summons (NOTES.md)
+    # Frosthaven's HIVE perk card AMC_P0_ControlSummonMove2 (a +0 that grants a summon an action), with an Attack +0, for
+    # one of your summons adjacent to the attack's target (NEW_CARDS)
     (2, "Pack Hunt", 'Add one <sprite name="0"> "Grant one of your summons adjacent to the target: <sprite name=Attack> +0"',
      {"CardsToAdd": "[AMC_GH2E_Doomstalker2_SummonAttack_P0]"}),
     (2, "Deadly Shot", 'Add one <sprite name="+3">',
@@ -49,13 +47,40 @@ PERKS = [
 MASTERIES = []
 
 NEW_CARDS = {
-    "AMC_GH2E_Doomstalker2_Attack2Range5_M1": ('MathModifier: "-1"\nControlTargetingActor: True\nAbilities:\n    ADamage:\n'
-                                               '        Damage: 2\n        Filter: Enemy\n        Targeting: Range\n'
-                                               '        Range: 5\n        Target: 1\n'),
-    "AMC_GH2E_Doomstalker2_SummonAttack_P0": ('MathModifier: "+0"\nTryToPerformAsSummoner: True\nAbilities:\n    ControlAbility:\n'
-                                              '        ControlActor:\n            Abilities:\n                ASummonAttack:\n'
-                                              '                    Attack: +0\n                    Range: +0\n'
-                                              '        Range: 99\n        Filter: OwnSummon\n        AnimOverload: Grant\n'),
+    # "Doomstalker performs: Attack 2, Range 5": a real attack (Attack is a kind the game's modifier code runs: after the
+    # attack as the Doomstalker's own ability, or, when one of the summons drew the card, stacked for the Doomstalker:
+    # TryToPerformAsSummoner, as Frosthaven's AMC_P0_Attack2Rolling)
+    "AMC_GH2E_Doomstalker2_Attack2Range5_M1": """\
+MathModifier: "-1"
+TryToPerformAsSummoner: True
+Abilities:
+    AAttack:
+        Attack: 2
+        Range: 5
+        Target: 1
+        Filter: Enemy
+        AnimOverload: RangedAttack
+""",
+    # "Grant one of your summons adjacent to the target": the grant's candidates are your summons on the hexes around
+    # the attack's target (TargetActor, set by the game's modifier code for a ControlActor; Frosthaven's AMC_CreateIce_P2
+    # reads the same var, FrozenFist Frozen Over turns tiles into actors this way)
+    "AMC_GH2E_Doomstalker2_SummonAttack_P0": """\
+MathModifier: "+0"
+TryToPerformAsSummoner: True
+Abilities:
+    ControlAbility:
+        ControlActor:
+            Abilities:
+                ASummonAttack:
+                    Attack: +0
+                    Range: +0
+        Target: 1
+        Targeting: Custom
+        TargetingVars:
+            AddValidActorsInRange: CustomAbility.GetAdjacentTiles(TargetActor.Tile).Where(obj.LivingActor != null).Select(obj.LivingActor)
+        Filter: OwnSummon
+        AnimOverload: Grant
+""",
 }
 
 STRINGS = {}

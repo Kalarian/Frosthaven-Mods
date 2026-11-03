@@ -54,6 +54,6 @@ GH2E_Nightshroud2_27_B	During this and the next four rounds, you may perform att
 GH2E_Nightshroud2_28_T	Grant all allies in the red hexes:
 GH2E_Nightshroud2_28_B	Target one ally or enemy within <nobr><sprite name=Range> 1</nobr>
 GH2E_Nightshroud2_28_B2	If the target enters a hex containing a Tear, you may remove the Tear to have the target gain <sprite name=Invisible>.
-AMC_GH2E_Nightshroud2_Teleport2_R	+0, after the attack ability: <sprite name=Teleport> 2
+AMC_GH2E_Nightshroud2_Teleport2_R	+0, after the attack ability, grant one adjacent ally or self: <sprite name=Teleport> 2
 AMC_GH2E_Nightshroud2_KillCurse_P1	+1, if this attack kills the target, shuffle one <sprite name=Curse> card into the monster attack modifier deck
 AMC_GH2E_Nightshroud2_Tear_P0	+0, place one Tear in a hex adjacent to the target
