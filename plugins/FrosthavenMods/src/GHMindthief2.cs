@@ -85,7 +85,15 @@ namespace FrosthavenMods
                 if (!abilityOverride.MiscVars.Any(v => v.Item1 == "GHSingleTargetOnly")) return true;
                 if (IsSingleTarget(attack)) return true;
                 __result = null;
-                Log("SingleTargetAugment", CardId(abilityOverride.OriginalAbility),
+                // (2026-11-03: OriginalAbility is null on the stored override (the engine sets it only on a later copy), so the
+                // card came out 0: the two cards carrying GHSingleTargetOnly are told apart by the attacker's class)
+                int card = CardId(abilityOverride.OriginalAbility);
+                if (card == 0)
+                {
+                    string cls = (attack.TargetingActor as CPlayerActor)?.CharacterClass?.ID ?? "";
+                    card = cls.StartsWith("Mindthief2") ? 32210 : cls.StartsWith("Cragheart2") ? 32106 : 0;
+                }
+                Log("SingleTargetAugment", card,
                     $"augment reach skipped on {attack.Name}: {attack.NumberTargets} target(s), targeting {attack.Targeting}{(attack.AreaEffect != null ? ", area" : "")}");
                 return false;
             }
