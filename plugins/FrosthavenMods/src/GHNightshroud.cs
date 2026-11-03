@@ -27,7 +27,10 @@ namespace FrosthavenMods
     ///     there (CAIMoveNew.CanStopOnTopOf). "If an enemy ends its movement in your hex, you must Teleport to the closest
     ///     empty hex and suffer hazardous terrain damage": after that enemy's move she gets an inline Teleport to the
     ///     closest empty hex (fewest hexes away; a tie: the player picks among them) and a Damage ability of the scenario's
-    ///     hazardous terrain damage.
+    ///     hazardous terrain damage. The engine's teleport keeps an inline tile list only when it holds one hex; with a
+    ///     tie it recomputes "empty hexes within range 1" (none when she is surrounded: "Could not find any tiles to
+    ///     teleport to", the Rule Library error screen). The tied hexes are handed back to that step (still-empty ones
+    ///     only); none left = the teleport is skipped cleanly (GHRule NightshroudInvisible ... PushOutTiles).
     ///  4. "When all other characters are exhausted or have escaped, you lose Invisible and cannot gain it" (no other
     ///     living character in the scenario, a solo Nightshroud included): checked at every turn end, exhaustion and round
     ///     end; any Invisible she would gain then is refused.
@@ -380,6 +383,7 @@ namespace FrosthavenMods
                 tp.IsInlineSubAbility = true;
                 tp.SetCanSkip(canSkip: false);
                 tp.SetMiscVar(GHTears.OwnTag, new TValue(true));
+                tp.SetMiscVar(PushOutTag, new TValue(true));
                 list.Add(tp);
             }
             CAbility dmg = CAbilityDamage.CreateDefaultDamage(ScenarioManager.HazardousTerrainDamage, 0, 1, isMonster: false, "", isMultipass: true,
@@ -392,6 +396,72 @@ namespace FrosthavenMods
             if (GameState.InternalCurrentActor != her) GameState.OverrideCurrentActorForOneAction(her);
             PhaseManager.CurrentPhaseAction?.StackNextAbilities(list, her, killAfter: false, stackToNextCurrent: true);
             Log(0, $"class mat: {enemy.GetPrefabName()} ended its move in her hex: Teleport to {(target == null ? "nowhere (no empty hex)" : closest.Count == 1 ? target.m_ArrayIndex.ToString() : $"one of {closest.Count} equally close empty hexes (the player picks: {string.Join(" ", closest.Select(c => c.m_ArrayIndex.ToString()))})")} and hazardous terrain damage {ScenarioManager.HazardousTerrainDamage}");
+        }
+
+        // The push-out teleport's tile step. CAbilityTeleport.Start keeps InlineSubAbilityTiles only when there is one
+        // hex; with several it goes to ActorIsSelectingTeleportTile, whose Perform clears TilesInRange and recomputes
+        // GameState.GetTilesInRange(her, Range 1, empty only), and an empty result is Log.ErrorWithReport (the error
+        // screen). For this teleport the recomputed list is replaced by the tied closest hexes that are still empty; if
+        // none is left the step is cancelled the way the engine cancels a teleport with no valid target (cancel flag +
+        // NextStep), never reaching the engine with zero tiles.
+        private const string PushOutTag = "GH2EPushOutTeleport";
+        private static readonly AccessTools.FieldRef<CAbilityTeleport, CAbilityTeleport.ETeleportState> TeleportState =
+            AccessTools.FieldRefAccess<CAbilityTeleport, CAbilityTeleport.ETeleportState>("m_State");
+        [ThreadStatic] private static List<CTile> s_PushOutTiles;
+        private static readonly HashSet<Guid> PushOutLogged = new HashSet<Guid>();
+
+        private static bool IsPushOut(CAbility a)
+        {
+            try { return a != null && a.GetMiscVar(PushOutTag).GetBool(); }
+            catch (Exception) { return false; }
+        }
+
+        [HarmonyPatch(typeof(CAbilityTeleport), nameof(CAbilityTeleport.Perform))]
+        [HarmonyPrefix]
+        private static bool PushOutTilesStart(CAbilityTeleport __instance, ref bool __result, out bool __state)
+        {
+            __state = false;
+            try
+            {
+                if (!IsPushOut(__instance) || TeleportState(__instance) != CAbilityTeleport.ETeleportState.ActorIsSelectingTeleportTile) return true;
+                CActor her = __instance.TargetingActor;
+                if (her == null || her.IsDead || !ScenarioManager.Scenario.HasActor(her)) return true;
+                if (her.Tokens.HasKey(CCondition.ENegativeCondition.Sleep) || her.Tokens.HasKey(CCondition.ENegativeCondition.Stun)) return true;
+                List<CTile> tiles = (__instance.InlineSubAbilityTiles ?? new List<CTile>()).Where(t => IsEmpty(t, her)).Distinct().ToList();
+                if (tiles.Count == 0)
+                {
+                    Log(0, "class mat: PushOutTiles: none of the closest empty hexes is still empty: the teleport is skipped");
+                    __instance.SetCancelAbilityFlag(cancel: true);
+                    PhaseManager.NextStep();
+                    __result = false;
+                    return false;
+                }
+                s_PushOutTiles = tiles;
+                __state = true;
+                if (PushOutLogged.Add(__instance.ID)) Log(0, $"class mat: PushOutTiles: the player picks among {tiles.Count} equally close empty hexes ({string.Join(" ", tiles.Select(t => t.m_ArrayIndex.ToString()))})");
+            }
+            catch (Exception e) { Report("push-out tiles", e); }
+            return true;
+        }
+
+        [HarmonyPatch(typeof(CAbilityTeleport), nameof(CAbilityTeleport.Perform))]
+        [HarmonyFinalizer]
+        private static Exception PushOutTilesEnd(Exception __exception, bool __state)
+        {
+            if (__state) s_PushOutTiles = null;
+            return __exception;
+        }
+
+        [HarmonyPatch(typeof(GameState), nameof(GameState.GetTilesInRange), new[] { typeof(CActor), typeof(int), typeof(CAbility.EAbilityTargeting), typeof(bool),
+            typeof(bool), typeof(List<CTile>), typeof(bool), typeof(bool), typeof(bool), typeof(bool), typeof(bool), typeof(bool), typeof(bool), typeof(int),
+            typeof(bool), typeof(bool), typeof(bool), typeof(bool) })]
+        [HarmonyPostfix]
+        private static void PushOutTilesInRange(ref List<CTile> __result)
+        {
+            List<CTile> tiles = s_PushOutTiles;
+            if (tiles == null) return;
+            s_PushOutTiles = null;   // one shot: only the tile step's own call
+            __result = tiles.ToList();
         }
 
         // ---- 5. attacks this round, and the round's end
