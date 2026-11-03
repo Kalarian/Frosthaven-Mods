@@ -28,8 +28,9 @@ Meteor's consume text, now `GH2E_Cragheart2_25_T`).
 - 01 Opposing Strike: as Xipe (area with both end hex marks; end-of-turn Heal 2 range 3, 5 slots XP 1/3/5; the
   bonus also fires at the end of the turn it is played = "this and your next four turns").
 - 02 Crushing Grasp: bottom damage now aimed around the created tile (Xipe's hit nobody, the Rock Slide trap).
-- 06 Backup Ammunition: APPROXIMATION: +1 Target on the next four ranged attack abilities; the "single-target" limit
-  has no bonus filter (1st edition shape, play-tested).
+- 06 Backup Ammunition: +1 Target on the next four single-target ranged attack abilities: the 1st edition BuffTarget
+  shape marked `GHSingleTargetOnly`; plugin GHCragheart2e gives no +1 and spends no slot on an attack ability that, as
+  written, has more than one target or an area (2e pass, rest-a).
 - 07 Earthen Bulwark: damage 1 + Ward to allies around the created tiles is a consume Earth (Xipe: always, and
   Strengthen); range 3 enhanceable.
 - 08 Unstable Upheaval: no marks; consume = +1 range on the all-adjacent melee attack (1st edition shape).
@@ -56,8 +57,9 @@ Meteor's consume text, now `GH2E_Cragheart2_25_T`).
   Immobilize, on an enemy you pick. Top: no XP (Xipe had 1), Muddle added as its own sub-ability.
 - 20 Kinetic Assault: bottom Ward [diamond+] self (Xipe: Shield 1), Retaliate 3 range 3 round; top adjacency damage.
 - 21 Solidify: the 1st edition Unstable Upheaval bottom (Shield + UseParentTiles damage), one ally within 3.
-- 22 Stone Pummel bottom: APPROXIMATION: the 1st edition persistent destroy-for-+2 bonus without a use track; any
-  obstacle adjacent to you counts, not only one adjacent to both you and the target. Own help text key (the shared
+- 22 Stone Pummel bottom: the 1st edition persistent destroy-for-+2 bonus without a use track; the destroy is marked
+  `GHStonePummel`: plugin GHCragheart2e offers it only when the target is adjacent to you (melee or ranged attack) and
+  a destroyable 1-hex obstacle is adjacent to both of you, and limits the pick to those. Own help text key (the shared
   `GUI_StonePummel_Bottom_HelpBoxTooltip` says +3).
 - 23 Dig Pit: the obstacle goes beside the created trap (Onyx Shards' `FindAbilityInPhaseByName` +
   `GetAdjacentTiles`; Xipe: beside you).
@@ -73,19 +75,20 @@ Meteor's consume text, now `GH2E_Cragheart2_25_T`).
   Bottom: start of next four turns Move 3 with a one-use turn bonus of +3 melee as the move's sub-ability (Xipe:
   missing, plus an extra Move 3 on play, removed). Bench first.
 - 27 Rocky End: consume (missing in Xipe) appends an auto create on every empty hex of the attack's area
-  (`ParentAbility.ValidTilesInAreaAffected`; Frosthaven appends an override's SubAbilities). Bottom: APPROXIMATION of
-  "each featureless hex the target exits": the shortest path from the pushed target's start hex to its end hex, start
-  included (`CustomAbility.GetTilesOnDirectPath`, falling back to the start hex), `TileFilter: EmptyHex` (no obstacle
-  under a figure). Bench first.
+  (`ParentAbility.ValidTilesInAreaAffected`; Frosthaven appends an override's SubAbilities). Bottom: "each featureless
+  hex the target exits": the create is marked `GHPushExitedHexes`; plugin GHCragheart2e sets its hexes to the push's
+  real path (`CAbilityPush.m_StartingPoint` + `m_AbilityPath` minus the end hex), `TileFilter: EmptyHex` (no obstacle
+  under a figure).
 - 28 Entomb: top consume: two obstacles adjacent to the target and not adjacent to you (Bring Down the Mountain's
   targeting), damage 1 around them. Bottom (missing in Xipe): create beside you, destroy up to 6 within 3, then Ward
   per destroyed obstacle to one ally adjacent to that obstacle's hex (BWard1..BWard6: the k-th gated on
   ObstaclesDestroyedThisAction >= k and aimed around the k-th destroyed tile). Destroy capped at 6 (range 3 rarely holds
   more). Bench first.
 - 29 Wave of Destruction: top: Frosthaven's per-target `TargetDistanceRangeDiff` is |range - distance| (melee range 1),
-  so the stored base is 2 to give the printed 1 + distance; the face shows "1". Bottom: NEEDS PLUGIN: a move that may
-  enter obstacle hexes. APPROXIMATION now: Move 5 with Jump (as Xipe) that destroys every obstacle on its path, then
-  +2 per destroyed obstacle on the next attack this turn. Jump also passes enemies/traps and can't end on the rock.
+  so the stored base is 2 to give the printed 1 + distance; the face shows "1". Bottom: a plain Move 5 (no Jump)
+  marked `GHMoveThroughObstacles`: plugin GHCragheart2e unblocks destroyable obstacles for the path finder while that
+  move runs (it may pass or end in an obstacle hex; enemies, traps and terrain count as normal), then the card destroys
+  every obstacle on the move path and gives +2 per destroyed obstacle on the next attack this turn.
 - 30 Earth's Embrace: no marks; bottom X = adjacent obstacles (Pyroclast Stone Armor's count; Xipe: destroyed this
   turn), persistent end-of-turn heal as Crashing Tide Dug In.
 
@@ -96,7 +99,10 @@ empty hex adjacent to the target, aimed like Frosthaven's AMC_Damage1Trap_P0). B
 once-per-scenario toggle destroys one obstacle within 5, then a teleport whose only valid hex is the freed one
 (`IsValidTeleportTile: FreedTiles.Contains(tile)` on the destroy's selected tiles, Infuser Formless Bladestorm). Earthen Rest:
 after-rest hook, destroy within 3 with an Earth infusion sub-ability. Earthquakes: the 1st edition crossover's.
-Masteries: none written (no existing battle-goal pattern for "obstacle every round" or the 8/8/8 one).
+Masteries (2e pass, rest-a): plugin GHMasteriesCragheart2 answers `FrosthavenMods_ObstacleEveryRound` (an obstacle
+created, destroyed or moved in every round of the scenario) and `FrosthavenMods_Heal8Ranged8Melee8` (8+ hit points
+actually restored in one round by your heals, on anyone; 8+ damage to enemies with one ranged attack ability and with
+one melee attack ability).
 
 ## Shared changes wanted
 
