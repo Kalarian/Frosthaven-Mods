@@ -1,6 +1,6 @@
 # card: Caustic Bolt
 # top: Attack 2 [diamond], Range 3 [square], Pierce 2; give the Corrosive Coating to one adjacent ally (no XP):
-#   APPROXIMATION, the ally recovers one spent or lost item (NEEDS PLUGIN).
+#   the class item from the plugin (GH2E_QMGive, NOTES.md item supply).
 # bottom: Move 3 [circle]; one adjacent ally may Recover one of their spent items (exact).
 Discard: [Discard,Discard]
 Data:
@@ -16,12 +16,14 @@ Data:
                 Pierce: 2
                 AnimOverload: RangedAttack
             TGive:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 1
+                IsTargetedAbility: False
                 Filter:
                     TargetType: Ally
                     ActorType: Player
+                MiscVars:
+                    GH2E_QMGive: 6
                 AnimOverload: Refresh
     Bottom:
         Abilities:

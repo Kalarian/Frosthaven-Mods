@@ -1,5 +1,5 @@
 # card: Provisions
-# top: gain 10 supplies; gain the Scroll of Relocation: APPROXIMATION, recover one spent or lost item (NEEDS PLUGIN).
+# top: gain 10 supplies; gain the Scroll of Relocation: the class item from the plugin (GH2E_QMGive, NOTES.md item supply).
 # bottom: Move 4 (no mark).
 Discard: [Discard,Discard]
 Data:
@@ -12,9 +12,10 @@ Data:
                     - ["Supplies", 10]
                 AnimOverload: PowerUp
             TGive:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Filter: Self
+                MiscVars:
+                    GH2E_QMGive: 5
                 AnimOverload: Refresh
     Bottom:
         Abilities:

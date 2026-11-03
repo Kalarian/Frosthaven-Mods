@@ -52,3 +52,25 @@ GH2E_Quartermaster2_28_T2	Grant one adjacent ally or self:
 GH2E_Quartermaster2_28_B	Gain the Scroll of Foresight item.
 GH2E_Quartermaster2_29_T	At the end of each of your turns, you may shuffle the Quartermaster item supply face-down and draw one random card to give that item to an ally within <sprite name=Range> 2.
 GH2E_Quartermaster2_29_B	At the end of each round, Recover one of your spent items.
+GH2E_QMItem_SharpenedDirk_1	Sharpened Dirk
+GH2E_QMItem_SharpenedDirk_2	During your turn, perform: <sprite name=Attack> 2
+GH2E_QMItem_SturdySpear_1	Sturdy Spear
+GH2E_QMItem_SturdySpear_2	During your turn, perform: <sprite name=Attack> 2, target the two hexes in a line beyond you
+GH2E_QMItem_ScrollofEmbers_1	Scroll of Embers
+GH2E_QMItem_ScrollofEmbers_2	During your turn, perform: <sprite name=Wound>, <sprite name=Range> 2, target two adjacent hexes. <sprite name=CreateFire>
+GH2E_QMItem_WeightedBolas_1	Weighted Bolas
+GH2E_QMItem_WeightedBolas_2	During your turn, perform: <sprite name=Immobilize>, <sprite name=Range> 3
+GH2E_QMItem_ScrollofRelocation_1	Scroll of Relocation
+GH2E_QMItem_ScrollofRelocation_2	During your turn, perform: <sprite name=Teleport> 2. <sprite name=CreateDark>
+GH2E_QMItem_CorrosiveCoating_1	Corrosive Coating
+GH2E_QMItem_CorrosiveCoating_2	During your attack ability, add <sprite name=Pierce> 2 to one attack.
+GH2E_QMItem_IronPlate_1	Iron Plate
+GH2E_QMItem_IronPlate_2	When you suffer <sprite name=Damage> from an attack, gain <sprite name=Shield> 2 for the attack.
+GH2E_QMItem_IronPlatePlus_1	Iron Plate
+GH2E_QMItem_IronPlatePlus_2	When you suffer <sprite name=Damage> from an attack, gain <sprite name=Shield> 3 for the attack (2, +1 from Proficiency).
+GH2E_QMItem_BarbedStrip_1	Barbed Strip
+GH2E_QMItem_BarbedStrip_2	When you are attacked by an adjacent enemy, gain <sprite name=Retaliate> 2 for the attack.
+GH2E_QMItem_BarbedStripPlus_1	Barbed Strip
+GH2E_QMItem_BarbedStripPlus_2	When you are attacked by an adjacent enemy, gain <sprite name=Retaliate> 3 for the attack (2, +1 from Proficiency).
+GH2E_QMItem_ScrollofForesight_1	Scroll of Foresight
+GH2E_QMItem_ScrollofForesight_2	During your turn, reveal the top two cards of your attack modifier deck. You may place any of them on the bottom of the deck. <sprite name=CreateLight>

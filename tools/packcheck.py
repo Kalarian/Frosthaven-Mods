@@ -242,14 +242,6 @@ PRINTED_EXCEPTIONS = {
     (33429, "Bottom", "round"): "OPEN Soothsinger2-26 Grand Finale: 'skip moving your token this round' is not built",
     (32530, "Top", "persistent"): "OPEN Tinkerer2-10 Gravity Bomb: the token is not built (damage at once)",
     (32530, "Top", "number Pull 2"): "OPEN Tinkerer2-10 Gravity Bomb: the end-of-turn Pull 2 toward the token is not built",
-    # Quartermaster: "give ... the item to gain XP 1" is printed in the text, paid as half XP until the item supply ships
-    (33103, "Bottom", "xp"): "OPEN Quartermaster2-06: the give's 'gain XP 1' paid as half XP",
-    (33104, "Top", "xp"): "OPEN Quartermaster2-07: the give's 'gain XP 1' paid as half XP",
-    (33108, "Top", "xp"): "OPEN Quartermaster2-08: corner XP 1 + the give's 'gain XP 1' paid as half XP 2",
-    (33115, "Top", "xp"): "OPEN Quartermaster2-18: the give's XP paid as half XP",
-    (33118, "Top", "xp"): "OPEN Quartermaster2-21: the give's 'gain XP 1' paid as half XP",
-    (33126, "Top", "xp"): "OPEN Quartermaster2-31: the give's 'gain XP 1' paid as half XP",
-    (33128, "Top", "xp"): "OPEN Quartermaster2-32: the give's 'gain XP 1' paid as half XP",
 }
 
 

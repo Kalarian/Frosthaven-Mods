@@ -7,7 +7,7 @@ Initiative: 32
 # card: Twin Lances
 # top: Attack 3 (no value mark), V of two 2-hex lines (G 0,0; R 2,0 4,0 1,1 2,2) with the hex mark on 6,0; XP 1.
 # bottom: Attack 2 [diamond], grey + 2 red in a line with the hex mark next in the line; give the Sturdy Spear to one
-#   adjacent ally (no XP): APPROXIMATION, the ally recovers one spent or lost item (NEEDS PLUGIN); XP 1.
+#   adjacent ally (no XP): the class item from the plugin (GH2E_QMGive, NOTES.md item supply); XP 1.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -28,12 +28,14 @@ Data:
                 MultiPassAttack: False
                 AnimOverload: SlamAttack
             BGive:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 1
+                IsTargetedAbility: False
                 Filter:
                     TargetType: Ally
                     ActorType: Player
+                MiscVars:
+                    GH2E_QMGive: 2
                 AnimOverload: Refresh
         XP: 1
 Layout:

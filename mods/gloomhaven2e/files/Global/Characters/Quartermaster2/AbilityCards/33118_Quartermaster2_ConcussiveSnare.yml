@@ -5,20 +5,22 @@ ID: 33118
 Level: 3
 Initiative: 89
 # card: Concussive Snare
-# top: give the Weighted Bolas to one adjacent ally (XP 1; printed first): APPROXIMATION, the ally recovers one spent
-#   or lost item (NEEDS PLUGIN), XP 1 on the half; Move 1 [circle]; Attack 3 [diamond], Push 2 [square].
+# top: give the Weighted Bolas to one adjacent ally (XP 1; printed first): the class item from the plugin (GH2E_QMGive, NOTES.md item supply), XP 1 only when given (GH2E_QMGiveXP); Move 1 [circle]; Attack 3 [diamond], Push 2 [square].
 # bottom: Move 3 [circle]; gain 10 supplies.
 Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
             TGive:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 1
+                IsTargetedAbility: False
                 Filter:
                     TargetType: Ally
                     ActorType: Player
+                MiscVars:
+                    GH2E_QMGive: 4
+                    GH2E_QMGiveXP: 1
                 AnimOverload: Refresh
             TMove:
                 Move:
@@ -35,7 +37,6 @@ Data:
                             SquareEnhancements: 1
                         AnimOverload: None
                         IsInlineSubAbility: True
-        XP: 1
     Bottom:
         Abilities:
             BMove:

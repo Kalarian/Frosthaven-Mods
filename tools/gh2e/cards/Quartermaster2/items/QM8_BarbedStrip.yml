@@ -1,0 +1,26 @@
+# QM8 Barbed Strip: When you are attacked by an adjacent enemy, gain Retaliate 2 for the attack (Frosthaven's
+#   Biting Gauntlet shape). Lost.
+# A Quartermaster class item: no slot (QuestItem: no slot requirement), one copy, no gold cost (supplies can't
+#   refresh it: Gloomhaven 2e FAQ), never in the shop (no campaign item entry). Given in a scenario by the
+#   plugin (GHQuartermaster.cs); returned to the supply when used and when the scenario ends.
+Parser: ItemCard
+ID: 33208
+StringID: GH2E_QMItem8ID
+Name: $GH2E_QMItem_BarbedStrip_1$
+Art: Spiked Collar
+TotalInGame: 1
+Cost: 0
+Slot: QuestItem
+Rarity: Rare
+Usage: Consumed
+Trigger: OnAttackedIgnoringDamageTaken
+Data:
+    RetaliateValue: 2
+    CompareAbility:
+        AbilityType: Attack
+        Filter: Enemy
+        Adjacent: True
+    Vars:
+        NotAShieldEffect: True
+Layout:
+    - Row: "$GH2E_QMItem_BarbedStrip_2$"

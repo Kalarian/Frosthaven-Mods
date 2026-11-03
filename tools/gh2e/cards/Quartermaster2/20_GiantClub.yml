@@ -1,9 +1,9 @@
 # card: Giant Club
 # top: Attack 5 [diamond], Muddle (no mark).
-# bottom: Move 6 [circle]; "give up to four chosen class items to allies adjacent to any hex you entered; 10 supplies
-#   per ally given": APPROXIMATION, every ally adjacent to you after the move recovers one spent or lost item (NEEDS
-#   PLUGIN: allies along the path, the item choice), and you gain 10 supplies per ally targeted (PerformVars on the
-#   give, 10 x ActorsTargeted.Count; UNVERIFIED expression). XP 2, lost.
+# bottom: Move 6 [circle]; "you may give up to four items of your choice from the Quartermaster item supply to any
+#   allies adjacent to any hexes you entered during the move; gain 10 supplies for each ally you gave an item": a self
+#   NullTargeting marked GH2E_QMGiantClub; the plugin (GHQuartermaster.cs) reads the move's path, asks per ally and per
+#   item (not targeted: no line of sight, GH2e FAQ) and adds the supplies. XP 2, lost.
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -21,16 +21,10 @@ Data:
                     Amount: 6
                     CircleEnhancements: 1
             BGive:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
-                Range: 1
-                Target: -1
-                Filter:
-                    TargetType: Ally
-                    ActorType: Player
-                PerformVars:
-                    OnAbilityEnded:
-                        GainSupplies: AbilityHasHappened && TargetingActor.AddCharacterResource("Supplies", 10 * ActorsTargeted.Count)
+                NullTargeting: True
+                Filter: Self
+                MiscVars:
+                    GH2E_QMGiantClub: 1
                 AnimOverload: Refresh
         XP: 2
 Layout:

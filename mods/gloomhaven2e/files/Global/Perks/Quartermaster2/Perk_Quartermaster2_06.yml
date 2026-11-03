@@ -4,4 +4,4 @@ Name: PERK_Quartermaster2_06_Name
 Description: PERK_Quartermaster2_06_Desc
 CharacterID: Quartermaster2ID
 Available: 2
-CardsToAdd: [AMC_GH2E_Quartermaster2_RefreshItem_R]
+CardsToAdd: [AMC_GH2E_Quartermaster2_GainScroll_R]

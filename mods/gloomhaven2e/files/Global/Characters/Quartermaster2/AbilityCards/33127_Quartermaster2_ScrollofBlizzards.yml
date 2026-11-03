@@ -27,8 +27,7 @@ Data:
                     Amount: 3
                     CircleEnhancements: 1
             BSpend:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 1
                 Target: -1
                 Filter:
@@ -39,9 +38,8 @@ Data:
                     Type: ThisAbility
                     Vars:
                         ValidateSupplies: Actor.GetCharacterResourceAmount("Supplies") >= 10
-                PerformVars:
-                    OnAbilityEnded:
-                        SpendSupplies: AbilityHasHappened && TargetingActor.RemoveCharacterResource("Supplies", 50, true)
+                MiscVars:
+                    GH2E_QMSpend: 1
                 AnimOverload: Refresh
             BMove2:
                 Move:

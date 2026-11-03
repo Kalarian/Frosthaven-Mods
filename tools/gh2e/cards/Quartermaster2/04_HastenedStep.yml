@@ -1,6 +1,6 @@
 # card: Hastened Step
-# top: Attack 2 [diamond]; Move 1 [circle]; give the Sharpened Dirk to one adjacent ally (XP 1): APPROXIMATION, the
-#   ally recovers one spent or lost item (NEEDS PLUGIN); XP 1 on the half.
+# top: Attack 2 [diamond]; Move 1 [circle]; give the Sharpened Dirk to one adjacent ally (XP 1): the class
+#   item from the plugin (GH2E_QMGive, NOTES.md item supply); XP 1 only when given (GH2E_QMGiveXP).
 # bottom: Move 4 (no mark).
 Discard: [Discard,Discard]
 Data:
@@ -15,14 +15,16 @@ Data:
                     Amount: 1
                     CircleEnhancements: 1
             TGive:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 1
+                IsTargetedAbility: False
                 Filter:
                     TargetType: Ally
                     ActorType: Player
+                MiscVars:
+                    GH2E_QMGive: 1
+                    GH2E_QMGiveXP: 1
                 AnimOverload: Refresh
-        XP: 1
     Bottom:
         Abilities:
             BMove:

@@ -1,0 +1,23 @@
+# QM4 Weighted Bolas: During your turn, perform: Immobilize, Range 3. Lost.
+# A Quartermaster class item: no slot (QuestItem: no slot requirement), one copy, no gold cost (supplies can't
+#   refresh it: Gloomhaven 2e FAQ), never in the shop (no campaign item entry). Given in a scenario by the
+#   plugin (GHQuartermaster.cs); returned to the supply when used and when the scenario ends.
+Parser: ItemCard
+ID: 33204
+StringID: GH2E_QMItem4ID
+Name: $GH2E_QMItem_WeightedBolas_1$
+Art: Hooked Chain
+TotalInGame: 1
+Cost: 0
+Slot: QuestItem
+Rarity: Rare
+Usage: Consumed
+Trigger: DuringOwnTurn
+Data:
+    Abilities:
+        AImmobilize:
+            Filter: Enemy
+            Immobilize: True
+            Range: 3
+Layout:
+    - Row: "$GH2E_QMItem_WeightedBolas_2$"

@@ -1,0 +1,12 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Quartermaster2_GainArmor_P0
+MathModifier: "+0"
+Abilities:
+    AGain:
+        NullTargeting: True
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        MiscVars:
+            GH2E_QMGive: 8
+            GH2E_QMGiveOr: 7

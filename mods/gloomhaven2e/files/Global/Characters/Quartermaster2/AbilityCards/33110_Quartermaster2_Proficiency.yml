@@ -5,39 +5,42 @@ ID: 33110
 Level: 1
 Initiative: 52
 # card: Proficiency
-# top: persistent, lost, XP 2. "First lost-icon item use each turn: +1 Attack on all your melee attacks that turn" =
-#   APPROXIMATION with the 1st edition Proficiency's shape (BuffIfAnItemUsedInAction +1, persistent), limited to melee
-#   attacks: +1 on each melee attack of an action in which you used any item (spent or lost). "Recover a 30+ gold item
-#   with supplies: gain a random class item" = text only, NEEDS PLUGIN.
-# bottom: persistent, lost, XP 2. "+1 Retaliate on Barbed Strip, +1 Shield on Iron Plate" = text only (no item supply,
-#   NEEDS PLUGIN). "Whenever you rest, gain the Barbed Strip or Iron Plate" = APPROXIMATION: on each short or long rest,
-#   recover one spent or lost item (the 1st edition Refreshment's rest trigger, with both rests as Crashing Tide's
-#   Cleansing Swell lists them).
+# top: persistent, lost, XP 2. A persistent +1 melee Attack bonus marked GH2E_QMProficiencyTop: the plugin
+#   (GHQuartermaster.cs) makes it count only from the first time on each of your turns that you use an item with a lost
+#   icon until the turn ends. "Recover a 30+ gold item with supplies: you may gain a random class item" is the plugin's
+#   supplies spend (it asks after each such recover while this bonus is active).
+# bottom: persistent, lost, XP 2, marked GH2E_QMProficiencyBottom: while active, the plugin hands out (and swaps in)
+#   the +1 copies of Barbed Strip (Retaliate 3) and Iron Plate (Shield 3). "Whenever you rest, gain the Barbed Strip or
+#   Iron Plate" = on each short or long rest (both rest behaviours, as Crashing Tide's Cleansing Swell lists them) a
+#   self give the plugin performs, asking which of the two.
 Discard: [Lost,Lost]
 Data:
     Top:
         Abilities:
             TAttackBuff:
-                Attack: 0
+                Attack: 1
                 Filter: Self
                 ActiveBonus:
                     Duration: Persistent
                     Behaviour: BuffAttack
                     AttackType: Melee
-                AttackEffect:
-                    Type: BuffIfAnItemUsedInAction
-                    Strength: 1
+                MiscVars:
+                    GH2E_QMProficiencyTop: 1
                 AnimOverload: PowerUp
         XP: 2
     Bottom:
         Abilities:
             BActive:
                 AddActiveBonus:
-                    RefreshItems: 1
-                    SlotStateToRefresh: [Spent, Consumed]
+                    NullTargeting: True
                     Filter: Self
+                    MiscVars:
+                        GH2E_QMGive: 8
+                        GH2E_QMGiveOr: 7
                     AnimOverload: Refresh
                 Filter: Self
+                MiscVars:
+                    GH2E_QMProficiencyBottom: 1
                 ActiveBonus:
                     Duration: Persistent
                     Behaviour: [DuringActionAbilityOnShortRest, DuringActionAbilityOnLongRest]

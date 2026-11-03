@@ -1,7 +1,8 @@
 # card: Reinforced Steel
-# top: "at the end of each of your turns, you may give one random class item to an ally within range 2":
-#   APPROXIMATION, an EndTurnAbility bonus letting one ally within range 2 recover one spent or lost item (NEEDS
-#   PLUGIN: random item supply). Persistent, lost, XP 2.
+# top: "at the end of each of your turns, you may shuffle the Quartermaster item supply and draw one random card to give
+#   that item to an ally within range 2": an EndTurnAbility bonus whose NullTargeting on one ally within range 2 (not
+#   targeted, skippable) is marked GH2E_QMGiveRandom 1; the plugin draws from the items nobody holds. Persistent, lost,
+#   XP 2.
 # bottom: "at the end of each round, Recover one of your spent items": the 1st edition Reinforced Steel top's
 #   EndRoundAbility bonus, exact. Persistent, lost, XP 2.
 Discard: [Lost,Lost]
@@ -10,12 +11,14 @@ Data:
         Abilities:
             TActive:
                 AddActiveBonus:
-                    RefreshItems: 1
-                    SlotStateToRefresh: [Spent, Consumed]
+                    NullTargeting: True
                     Range: 2
+                    IsTargetedAbility: False
                     Filter:
                         TargetType: Ally
                         ActorType: Player
+                    MiscVars:
+                        GH2E_QMGiveRandom: 1
                     AnimOverload: Refresh
                 Filter: Self
                 ActiveBonus:

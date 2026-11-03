@@ -2,7 +2,7 @@
 # top: Attack 5 [diamond], Range 3 [square]; mandatory "all allies and enemies adjacent to the target suffer damage 1":
 #   an inline Damage sub-ability with AllTargetsAdjacentToParentTargets, Filter [Enemy, Ally], CanSkip False (the
 #   1st edition Cragheart Blind Destruction / Bruiser Let Fly shape); infuse Air (mandatory box).
-# bottom: gain the Corrosive Coating: APPROXIMATION, recover one spent or lost item (NEEDS PLUGIN); Attack 2 [diamond],
+# bottom: gain the Corrosive Coating: the class item from the plugin (GH2E_QMGive, NOTES.md item supply); Attack 2 [diamond],
 #   Range 4, Pierce 1, Muddle.
 Discard: [Discard,Discard]
 Data:
@@ -29,9 +29,10 @@ Data:
     Bottom:
         Abilities:
             BGive:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Filter: Self
+                MiscVars:
+                    GH2E_QMGive: 6
                 AnimOverload: Refresh
             BAttack:
                 Attack:

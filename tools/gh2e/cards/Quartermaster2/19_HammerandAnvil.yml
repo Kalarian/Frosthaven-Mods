@@ -1,23 +1,27 @@
 # card: Hammer and Anvil
-# top: give the Sturdy Spear to one ally within range 2 (no XP); gain the Barbed Strip or Iron Plate: APPROXIMATION,
-#   each a recover of one spent or lost item (NEEDS PLUGIN); Shield 1 [square], round.
+# top: give the Sturdy Spear to one ally within range 2 (no XP); gain the Barbed Strip or Iron Plate (the
+#   player picks): plugin gives (GH2E_QMGive / GH2E_QMGiveOr, NOTES.md item supply); Shield 1 [square], round.
 # bottom: Move 5 [circle].
 Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
             TGive:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 2
+                IsTargetedAbility: False
                 Filter:
                     TargetType: Ally
                     ActorType: Player
+                MiscVars:
+                    GH2E_QMGive: 2
                 AnimOverload: Refresh
             TGain:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Filter: Self
+                MiscVars:
+                    GH2E_QMGive: 8
+                    GH2E_QMGiveOr: 7
                 AnimOverload: Refresh
             TShield:
                 Shield:

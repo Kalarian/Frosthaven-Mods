@@ -1,0 +1,29 @@
+# QM5 Scroll of Relocation: During your turn, perform: Teleport 2; infuse Dark. Lost.
+# A Quartermaster class item: no slot (QuestItem: no slot requirement), one copy, no gold cost (supplies can't
+#   refresh it: Gloomhaven 2e FAQ), never in the shop (no campaign item entry). Given in a scenario by the
+#   plugin (GHQuartermaster.cs); returned to the supply when used and when the scenario ends.
+Parser: ItemCard
+ID: 33205
+StringID: GH2E_QMItem5ID
+Name: $GH2E_QMItem_ScrollofRelocation_1$
+Art: Scroll of Haste
+TotalInGame: 1
+Cost: 0
+Slot: QuestItem
+Rarity: Rare
+Usage: Consumed
+Trigger: DuringOwnTurn
+Data:
+    Abilities:
+        ATeleport:
+            Teleport2: 2
+            Filter: Self
+            AnimOverload: Teleport Into
+            AnimOverload2: Teleport Outof
+            SubAbilities:
+                AInfuse:
+                    TreatAsNonSubAbility: True
+                    Infuse: [Dark]
+                    SkipAnim: True
+Layout:
+    - Row: "$GH2E_QMItem_ScrollofRelocation_2$"

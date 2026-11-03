@@ -1,8 +1,7 @@
 # card: Crushing Hammer
 # top: Attack 2 [diamond], Stun (no mark), 4-hex rhombus with hex marks on 2,2 and 4,0 (the sheet's coordinates, as
 #   Bruiser's Intimidating Growl); XP 2, lost.
-# bottom: Move 3 [circle]; give the Iron Plate item to one adjacent ally or self: APPROXIMATION, that figure recovers
-#   one spent or lost item (NEEDS PLUGIN); its XP 1 is the half's XP (see NOTES.md, item gives).
+# bottom: Move 3 [circle]; give the Iron Plate item to one adjacent ally or self: the class item from the plugin (GH2E_QMGive, NOTES.md item supply); its XP 1 only when given (GH2E_QMGiveXP).
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -23,14 +22,16 @@ Data:
                     Amount: 3
                     CircleEnhancements: 1
             BGive:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 1
+                IsTargetedAbility: False
                 Filter:
                     TargetType: [Self, Ally]
                     ActorType: Player
+                MiscVars:
+                    GH2E_QMGive: 7
+                    GH2E_QMGiveXP: 1
                 AnimOverload: Refresh
-        XP: 1
 Layout:
     Top:
         - ColumnWidths: "65,30"

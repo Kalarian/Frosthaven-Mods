@@ -6,21 +6,25 @@ Level: 8
 Initiative: 10
 # card: Armed to the Teeth
 # top: give the Barbed Strip and Sharpened Dirk to one adjacent ally or self (XP 1; GHS drops "or self", the card has
-#   it): APPROXIMATION, that figure recovers two spent or lost items (NEEDS PLUGIN), XP 1 on the half; "Grant one
+#   it): the class item from the plugin (GH2E_QMGive, NOTES.md item supply), XP 1 only when given (GH2E_QMGiveXP); "Grant one
 #   adjacent ally or self: Shield 2 [square]", round (Banner Spear Hold the Line's ally shield, one target).
-# bottom: Recover one of your spent items (exact); Move 3 [circle]; gain the Scroll of Foresight: APPROXIMATION,
-#   recover one spent or lost item.
+# bottom: Recover one of your spent items (exact); Move 3 [circle]; gain the Scroll of Foresight (plugin
+#   give).
 Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
             TGive:
-                RefreshItems: 2
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 1
+                IsTargetedAbility: False
                 Filter:
                     TargetType: [Self, Ally]
                     ActorType: Player
+                MiscVars:
+                    GH2E_QMGive: 8
+                    GH2E_QMGive2: 1
+                    GH2E_QMGiveXP: 1
                 AnimOverload: Refresh
             TShield:
                 Shield:
@@ -32,7 +36,6 @@ Data:
                 ActiveBonus:
                     Duration: Round
                 AnimOverload: PowerUp
-        XP: 1
     Bottom:
         Abilities:
             BRecover:
@@ -45,9 +48,10 @@ Data:
                     Amount: 3
                     CircleEnhancements: 1
             BGive:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Filter: Self
+                MiscVars:
+                    GH2E_QMGive: 9
                 AnimOverload: Refresh
 Layout:
     Top:
