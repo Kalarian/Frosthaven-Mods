@@ -71,6 +71,15 @@ namespace FrosthavenMods
             try { return a?.GetAbilityBaseCard(actor)?.ID ?? 0; } catch { return 0; }
         }
 
+        /// <summary>The card id a GHRule line names: a pack card's id, else 0 (an attack modifier's, item's or dummy card's id
+        /// is a hash or a negative running number, not a card the reader can look up).</summary>
+        private static int LogId(CBaseCard c) => c != null && c.ID >= 20000 && c.ID <= 39999 ? c.ID : 0;
+
+        /// <summary>Where an infusion came from, for the log: the card's name, or its kind when it is not a pack card.</summary>
+        private static string Source(CBaseCard c) =>
+            c == null ? "no card" : LogId(c) != 0 ? c.StrictName
+            : c.CardType == CBaseCard.ECardType.AttackModifier ? "attack modifier" : c.CardType.ToString();
+
         private static bool IsElementalist(CActor a) => a is CPlayerActor p && p.CharacterClass?.ID == ClassId;
 
         // ================================================================== two or more consumes
@@ -145,6 +154,8 @@ namespace FrosthavenMods
         /// <summary>Infusions noted at Start, waiting for their Perform: only a performed infusion is deferred to the turn's
         /// end (an infuse started, undone and replayed is noted once; one undone for good is never asked).</summary>
         private static readonly Dictionary<CAbilityInfuse, Deferred> s_Skip = new Dictionary<CAbilityInfuse, Deferred>();
+        /// <summary>The end-of-turn infuse abilities queued for noted infusions, with the note (its source card, for the log).</summary>
+        private static readonly Dictionary<CAbility, Deferred> s_EndOfTurn = new Dictionary<CAbility, Deferred>();
         private static object s_DeferredState;
         private static readonly AccessTools.FieldRef<CAbility, bool> CanUndo = AccessTools.FieldRefAccess<CAbility, bool>("m_CanUndo");
 
@@ -154,6 +165,7 @@ namespace FrosthavenMods
             s_DeferredState = ScenarioManager.CurrentScenarioState;
             s_Deferred.Clear();
             s_Skip.Clear();
+            s_EndOfTurn.Clear();
         }
 
         [HarmonyPatch(typeof(CAbilityInfuse), nameof(CAbilityInfuse.Start))]
@@ -172,7 +184,9 @@ namespace FrosthavenMods
                     CActiveBonus cores = PulsingCoresBonus(__instance, actor);
                     if (cores != null) { PulsingCoresPair(__instance, cores); return; }
                 }
-                int card = CardId(__instance, actor);
+                CBaseCard baseCard = null;
+                try { baseCard = __instance.GetAbilityBaseCard(actor); } catch { }
+                int card = baseCard?.ID ?? 0;
                 if (card == PulsingCores) return;   // its infuse with no bonus found: left as the card data has it
                 if (!IsElementalist(actor) || !__instance.ShowPicker || __instance.InfuseOnlyWaning) return;
                 if (__instance.GetMiscVar("GH2E_DeferredInfuse").GetBool()) return;
@@ -189,7 +203,7 @@ namespace FrosthavenMods
                 if (taker.IsTakingExtraTurn && taker.TakingExtraTurnOfType != CAbilityExtraTurn.EExtraTurnType.BothActionsLater
                     && taker.TakingExtraTurnOfType != CAbilityExtraTurn.EExtraTurnType.SingleCardAnyActionAtTheEndOfTurn)
                 {
-                    Plugin.Log.LogInfo($"GHRule DeferredInfusion card {card} {string.Join("/", __instance.ElementsToInfuse)}: extra turn ({taker.TakingExtraTurnOfType}) with no end-of-turn step: the element is picked now");
+                    Plugin.Log.LogInfo($"GHRule DeferredInfusion card {LogId(baseCard)} {string.Join("/", __instance.ElementsToInfuse)} ({Source(baseCard)}): extra turn ({taker.TakingExtraTurnOfType}) with no end-of-turn step: the element is picked now");
                     return;
                 }
                 NewScenarioCheck();
@@ -197,7 +211,7 @@ namespace FrosthavenMods
                 {
                     Actor = actor,
                     Elements = __instance.ElementsToInfuse.ToList(),
-                    Card = __instance.GetAbilityBaseCard(actor) ?? __instance.ParentBaseCard,
+                    Card = baseCard ?? __instance.ParentBaseCard,
                 };
             }
             catch (Exception e) { Report("infuse start", e); }
@@ -213,7 +227,7 @@ namespace FrosthavenMods
             {
                 NewScenarioCheck();
                 s_Deferred.Add(d);
-                Plugin.Log.LogInfo($"GHRule DeferredInfusion card {CardId(__instance)} {string.Join("/", d.Elements)}: the element is chosen at the end of the turn (one picker for this infusion)");
+                Plugin.Log.LogInfo($"GHRule DeferredInfusion card {LogId(d.Card)} {string.Join("/", d.Elements)} ({Source(d.Card)}): the element is chosen at the end of the turn (one picker for this infusion)");
                 __instance.AbilityHasHappened = true;
                 CanUndo(__instance) = false;
                 PhaseManager.NextStep();
@@ -266,14 +280,20 @@ namespace FrosthavenMods
                 {
                     s_Deferred.Remove(d);
                     if (d.Actor.IsDead) continue;
+                    // No parent base card (2026-11-03 crash fix): the picker (UIUseAbilitiesBar.GetInfusions) reads a set
+                    // ParentBaseCard as "an enhancement's wild infuse on this hand card" and looks the card up in the hand: an
+                    // attack modifier's card is not there (null -> "Could not process Show Element Picker"), and even a hand
+                    // card would offer only its enhancement buttons. The engine sets it only on enhancement infuses; without
+                    // it the ability's own elements are the picker's choices, as for a printed "Fire/Ice" or wild infuse.
                     CAbility infuse = CAbility.CreateAbility(CAbility.EAbilityType.Infuse, CAbilityFilterContainer.CreateDefaultFilter(), isMonster: false, isTargetedAbility: false,
-                        elementsToInfuse: d.Elements.ToList(), showElementPicker: true, parentBaseCard: d.Card);
+                        elementsToInfuse: d.Elements.ToList(), showElementPicker: true);
                     if (infuse == null) continue;
+                    s_EndOfTurn[infuse] = d;
                     infuse.SetMiscVar("GH2E_DeferredInfuse", new TValue(true));
                     infuse.SetMiscVar("InfuseAsStrong", new TValue(true));
                     infuse.SkipAnim = true;
                     GameState.PendingScenarioModifierAbilities.Add(new Tuple<CAbility, CActor>(infuse, actor));
-                    Plugin.Log.LogInfo($"GHRule DeferredInfusion card {d.Card?.ID ?? 0} end of turn: {GHPlague.NameOf(actor)} picks {string.Join("/", d.Elements)} now (strong)");
+                    Plugin.Log.LogInfo($"GHRule DeferredInfusion card {LogId(d.Card)} end of turn: {GHPlague.NameOf(actor)} picks {string.Join("/", d.Elements)} ({Source(d.Card)}) now (strong)");
                 }
             }
             catch (Exception e) { Report("deferred infusion at turn end", e); }
@@ -348,7 +368,12 @@ namespace FrosthavenMods
                     ? "infuses " + string.Join("/", picked.Select(e => $"{e} ({ElementInfusionBoardManager.ElementColumn(e)})"))
                     : "declined (no element infused)";
                 if (primed) Plugin.Log.LogInfo($"GHRule Primed card 0 Primed: {who} {what}");
-                else Plugin.Log.LogInfo($"GHRule DeferredInfusion card {CardId(__instance)} end of turn: {who} {what}");
+                else
+                {
+                    s_EndOfTurn.TryGetValue(__instance, out Deferred d);
+                    s_EndOfTurn.Remove(__instance);
+                    Plugin.Log.LogInfo($"GHRule DeferredInfusion card {LogId(d.Card)} end of turn: {who} {what} ({Source(d.Card)})");
+                }
             }
             catch (Exception e) { Report("infusion outcome", e); }
         }

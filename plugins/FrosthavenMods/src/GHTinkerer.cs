@@ -169,7 +169,9 @@ namespace FrosthavenMods
                     : bottom ? card.GetAbilityCardYML.BottomDiscardType : DiscardType.None;
                 if (discard != DiscardType.Lost && discard != DiscardType.PermanentlyLost) return;
                 CAbility infuse = CAbility.CreateAbility(CAbility.EAbilityType.Infuse, CAbilityFilterContainer.CreateDefaultFilter(), isMonster: false, isTargetedAbility: false,
-                    elementsToInfuse: new List<ElementInfusionBoardManager.EElement> { ElementInfusionBoardManager.EElement.Any }, showElementPicker: true, parentBaseCard: card);
+                    elementsToInfuse: new List<ElementInfusionBoardManager.EElement> { ElementInfusionBoardManager.EElement.Any }, showElementPicker: true);
+                // (no parentBaseCard, 2026-11-03: the picker reads a set one as an enhancement's wild infuse and offers only the
+                // card's enhancement buttons, or throws when the card has left the hand; the CPhaseAbility carries the card)
                 if (infuse == null) return;
                 infuse.SkipAnim = true;
                 list.Add(new CPhaseAction.CPhaseAbility(infuse, me, card, current.Action.ID));
