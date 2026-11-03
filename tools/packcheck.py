@@ -143,6 +143,10 @@ def references(pack, problems):
     for f in sorted(files.glob("**/*.yml")):
         rel = f.relative_to(pack).as_posix()
         text = f.read_text(encoding="utf-8-sig", errors="replace")
+        # the game (YMLLoading) and fh_mods read the FIRST line as "Parser: <kind>"; a comment above it makes the file
+        # unreadable (2026-11-02 night: the Quartermaster's class items, fh_mods install failed "unknown parser type")
+        if not text.lstrip("﻿").startswith("Parser:"):
+            problems.append(f"{rel}: the first line must be 'Parser: <kind>' (the game and the installer read it there)")
         for blk in resource_block.finditer(text):
             for rid in re.findall(r'\[\s*"?([A-Za-z0-9_]+)"?\s*,', blk.group(3)):
                 if rid not in resources:
