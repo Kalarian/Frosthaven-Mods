@@ -138,7 +138,7 @@ ICON_TEXT = {
     "Poison": "<sprite name=Poison>", "Stun": "<sprite name=Stun>", "Immobilize": "<sprite name=Immobilize>",
     "Disarm": "<sprite name=Disarm>", "Push": "<sprite name=Push>", "Pull": "<sprite name=Pull>",
     "Light": "<sprite name=Light>", "Recover": "<sprite name=RecoverIcon>",
-    "Tear token": "Tear", "Tear hex": "Tear hex", "Plague token": "Plague", "High note": "High Note",
+    "Tear token": "Tear", "Tear hex": "Tear", "Plague token": "Plague", "High note": "High Note",
     "Low note": "Low Note", "Command": "COMMAND", "Spend supplies": "spend supplies", "Supplies": "supplies",
     "Quartermaster": "Quartermaster",
 }
