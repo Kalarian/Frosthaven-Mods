@@ -17,6 +17,7 @@ namespace FrosthavenMods
     ///   - Sickening Strength top (GH2E_SickeningStrength): after the Strengthen, each strengthened character in turn is
     ///     asked whether to suffer Damage 2 to play one card from their hand now; on yes they perform the card's templates
     ///     PH2_SickDamage then PH2_SickPlay (Frosthaven's SelectAndPlayCard from their own hand). "GHRule SickeningStrength".
+    ///     The Plagueherald's action and hand come back after each play through GHAllyCardPlay.
     ///   - Nightmarish Affliction bottom (card 33016): each of the holder's next six ranged attack abilities uses a slot
     ///     whether or not its cost was paid: at the end of a ranged attack ability that did not move the tracker, the
     ///     plugin moves it (and gives its XP). "GHRule NightmarishSlot".
