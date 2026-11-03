@@ -149,16 +149,36 @@ namespace FrosthavenMods
         private static readonly AccessTools.FieldRef<CAbilityMove, bool> MoveJump = AccessTools.FieldRefAccess<CAbilityMove, bool>("m_Jump");
         private static readonly System.Reflection.PropertyInfo ModifiedStrength = AccessTools.Property(typeof(CAbility), "m_ModifiedStrength");
 
+        /// <summary>Once per move ability: the move value right after Give Chase's +2 was added. A later GetBonuses that
+        /// finds the value still there (no reset to the printed value in between, as Start and Restart do) adds nothing.</summary>
+        private sealed class ChaseAdded { public int After; }
+        private static readonly ConditionalWeakTable<CAbilityMove, ChaseAdded> GiveChaseAdded = new ConditionalWeakTable<CAbilityMove, ChaseAdded>();
+
+        [HarmonyPatch(typeof(CAbilityMove), nameof(CAbilityMove.GetBonuses))]
+        [HarmonyPrefix]
+        private static void GiveChaseBefore(CAbilityMove __instance, out int __state)
+        {
+            __state = int.MinValue;
+            try { __state = (int)ModifiedStrength.GetValue(__instance); } catch { }
+        }
+
         [HarmonyPatch(typeof(CAbilityMove), nameof(CAbilityMove.GetBonuses))]
         [HarmonyPostfix]
-        private static void GiveChaseMove(CAbilityMove __instance, CActor actor)
+        private static void GiveChaseMove(CAbilityMove __instance, CActor actor, int __state)
         {
             try
             {
                 CActor mover = actor ?? __instance.TargetingActor;
                 CPlayerActor me = SummonerOf(mover);
                 if (me == null || !__instance.CanApplyActiveBonusTogglesTo() || !HasDoom(me, GiveChase)) return;
+                if (GiveChaseAdded.TryGetValue(__instance, out ChaseAdded prev) && __state == prev.After && __state != __instance.Strength)
+                {
+                    Log("GiveChase", GiveChase, $"{NameOf(mover)}'s move {__instance.Name}: +2 already added to this move (now {ModifiedStrength.GetValue(__instance)}), not again");
+                    return;
+                }
                 ModifiedStrength.SetValue(__instance, (int)ModifiedStrength.GetValue(__instance) + 2);
+                GiveChaseAdded.Remove(__instance);
+                GiveChaseAdded.Add(__instance, new ChaseAdded { After = (int)ModifiedStrength.GetValue(__instance) });
                 MoveJump(__instance) = true;
                 Log("GiveChase", GiveChase, $"{NameOf(mover)}'s move {__instance.Name}: +2 Move and Jump (now {ModifiedStrength.GetValue(__instance)})");
             }

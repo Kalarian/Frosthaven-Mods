@@ -222,9 +222,55 @@ namespace FrosthavenMods
         }
 
         private static readonly Dictionary<CActor, CActor> BoneBreakerTargets = new Dictionary<CActor, CActor>();
+        private static ScenarioState s_BoneBreakerState;
+
+        /// <summary>The target dictionary belongs to one loaded scenario: a reload or a rewind makes new actor objects.</summary>
+        private static void BoneBreakerScenarioCheck()
+        {
+            ScenarioState s = ScenarioManager.CurrentScenarioState;
+            if (ReferenceEquals(s, s_BoneBreakerState)) return;
+            s_BoneBreakerState = s;
+            BoneBreakerTargets.Clear();
+        }
+
+        /// <summary>
+        /// The token is right only while a Berserker's Bone Breaker marker bonus is active. A reload mid-card (the token is
+        /// saved on the target, the card's bonus not yet there), an undone attack or a card played another way could leave
+        /// it behind: at each turn's end and each round's start (outside any action) every token with no active marker is
+        /// removed, and the memory dictionary is rebuilt from the tokens (one token per Berserker: the newest stays).
+        /// </summary>
+        [HarmonyPatch(typeof(GameState), nameof(GameState.NextPhase))]
+        [HarmonyPrefix]
+        private static void BoneBreakerReconcile()
+        {
+            try
+            {
+                CPhase.PhaseType leaving = PhaseManager.PhaseType;
+                if (leaving != CPhase.PhaseType.EndTurn && leaving != CPhase.PhaseType.Autosave) return;
+                CScenario sc = ScenarioManager.Scenario;
+                if (sc?.PlayerActors == null) return;
+                BoneBreakerScenarioCheck();
+                List<CPlayerActor> berserkers = sc.PlayerActors.Concat(sc.ExhaustedPlayers ?? new List<CPlayerActor>()).Where(p => p != null && IsBerserker(p)).ToList();
+                if (berserkers.Count == 0) return;
+                List<CActor> tokened = (sc.AllAliveActors ?? new List<CActor>()).Where(x => x != null && x.GetCharacterResourceAmount(TokenResource) > 0).ToList();
+                if (tokened.Count == 0) { BoneBreakerTargets.Clear(); return; }
+                CPlayerActor holder = berserkers.FirstOrDefault(p => !p.IsDead && (p.ActiveBonuses ?? new List<CActiveBonus>()).Any(b => b != null && !b.Finished() && Marked(b.Ability, "GH2E_BoneBreaker")));
+                if (holder == null)
+                {
+                    foreach (CActor t in tokened) Release(t, berserkers[0], "no Bone Breaker in the active area (after a reload, an undo or a card that never stayed)");
+                    BoneBreakerTargets.Clear();
+                    return;
+                }
+                CActor keep = BoneBreakerTargets.TryGetValue(holder, out CActor known) && tokened.Contains(known) ? known : tokened.Last();
+                BoneBreakerTargets[holder] = keep;
+                foreach (CActor t in tokened.Where(t => t != keep)) Release(t, holder, "a second token (only one target holds it)");
+            }
+            catch (Exception e) { if (GHClasses.Reported.Add("ra bone breaker reconcile")) Plugin.Log.LogError("GHBerserker2e (Bone Breaker reconcile): " + e); }
+        }
 
         private static void BoneBreakerHit(CAbilityAttack attack, CActor me)
         {
+            BoneBreakerScenarioCheck();
             CActor target = attack.ActorsTargeted?.FirstOrDefault(x => x != null && !x.IsDead && ScenarioManager.Scenario.HasActor(x));
             if (target == null) return;
             if (BoneBreakerTargets.TryGetValue(me, out CActor old) && old != null && old != target) Release(old, me, "the token moves to a new target");
@@ -252,6 +298,7 @@ namespace FrosthavenMods
             try
             {
                 if (!Marked(__instance?.Ability, "GH2E_BoneBreaker")) return;
+                BoneBreakerScenarioCheck();
                 CActor me = __instance.Actor ?? __instance.Caster;
                 if (me != null && BoneBreakerTargets.TryGetValue(me, out CActor target))
                 {
