@@ -169,6 +169,7 @@ NAME_AT, NAME_LEN, RULES_AT = 20, 128, 720     # in a save's header (after "SSGK
 # The mod pack's house rules, by their bit in the campaign's rules number (plugins/FrosthavenMods/src/ModRules.cs).
 MOD_RULES = {
     0: "Reduced randomness",  # the game's own hidden ERulesFlag.ReducedRandomness bit, offered by the mods
+    13: "Gloomhaven classes (2nd edition) [WIP]",
     14: "Gloomhaven classes: all open at once", 15: "Gloomhaven classes (1st edition) [WIP]", 16: "Masteries carry over", 17: "Show personal quest rewards", 18: "More story events", 19: "Scenario map file",
     20: "Modifier deck odds", 21: "Easier item reward window", 22: "Battle stats", 23: "Milestone saves",
     24: "Tradeable resources and equipment", 26: "Share duplicate loot", 28: "Reveal event outcomes",
@@ -187,7 +188,7 @@ def rules_on(rules):
 
 # A content pack is data the game loads at startup (FrosthavenMods\packs\<name>\pack.json); its house rule bit unlocks it
 # in a campaign. Packs by their rule bit:
-PACK_RULES = {"gloomhaven": 15}
+PACK_RULES = {"gloomhaven": 15, "gloomhaven2e": 13}
 
 
 def installed_packs(gdir=None):

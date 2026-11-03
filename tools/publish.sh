@@ -20,8 +20,13 @@ sed -i -E "s#(public const string Version = \")[^\"]*#\1$VER#" plugins/Frosthave
 python -I tools/build_guide.py
 # the content pack's static checks (dead enhancement slots, unknown ability keys) gate the release
 python tools/packcheck.py mods/gloomhaven
+python tools/packcheck.py mods/gloomhaven2e
 # and every rule file must load with the game's own loaders (tools/rulecheck; a rejected file = the error screen at start-up)
 dotnet run --project tools/rulecheck -c Release
+dotnet run --project tools/rulecheck -c Release -- mods/gloomhaven2e/files
+# every class/perk/mastery/modifier a pack names must be defined (tools/defcheck)
+dotnet run --project tools/defcheck -c Release -- mods/gloomhaven/files
+dotnet run --project tools/defcheck -c Release -- mods/gloomhaven2e/files
 python -I tools/pack_zip.py
 # every game hook must still resolve against the installed game (pack_zip just built the plugin)
 dotnet run --project tools/hookcheck -c Release
