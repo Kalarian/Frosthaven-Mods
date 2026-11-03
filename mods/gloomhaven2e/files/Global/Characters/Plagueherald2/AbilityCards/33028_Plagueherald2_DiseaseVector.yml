@@ -5,7 +5,7 @@ ID: 33028
 Level: 9
 Initiative: 64
 # card: Disease Vector
-# bottom: "each enemy suffers 2 per Plague", flat (2 per enemy with Plague): NEEDS PLUGIN for the count.
+# bottom: "each enemy suffers Damage 2 for each Plague that enemy has" (plugin GHPerPlague, MiscVars GH2E_PerPlague).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -18,8 +18,6 @@ Data:
                 Range: 5
                 ResourcesToGiveToTargets:
                     - ["Plague", 1]
-                ResourcesToAddOnAbilityEnd:
-                    - ["Plague", 3]
                 AnimOverload: RangedAttack
             TPoison:
                 Poison: True
@@ -38,6 +36,8 @@ Data:
                 Filter:
                     TargetType: Enemy
                     TargetHasCharacterResource: ["Plague"]
+                MiscVars:
+                    GH2E_PerPlague: True
                 AnimOverload: RadialNegativeMajor
 Layout:
     Top:

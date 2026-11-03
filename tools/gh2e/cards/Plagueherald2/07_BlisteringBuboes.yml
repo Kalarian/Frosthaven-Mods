@@ -1,7 +1,7 @@
 # card: Blistering Buboes
 # top: four Damage abilities in order (4, 3, 2, 1), each on one enemy with Plague at any range that the earlier ones
 # did not pick (IgnorePreviousAbilityTargets). bottom: -1 Attack for each Plague = a round aura on every enemy with
-# Plague, flat -1 (the per-token count: NEEDS PLUGIN).
+# Plague, -1 per token that enemy has (plugin GHPerPlague, MiscVars GH2E_PerPlague).
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -61,6 +61,8 @@ Data:
                     AuraFilter:
                         TargetType: Enemy
                         TargetHasCharacterResource: ["Plague"]
+                MiscVars:
+                    GH2E_PerPlague: True
                 AnimOverload: RadialNegative
 Layout:
     Top:

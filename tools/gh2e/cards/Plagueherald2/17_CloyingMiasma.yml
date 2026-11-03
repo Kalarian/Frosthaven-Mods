@@ -13,8 +13,6 @@ Data:
                 Conditions: Disarm
                 ResourcesToGiveToTargets:
                     - ["Plague", 1]
-                ResourcesToAddOnAbilityEnd:
-                    - ["Plague", 3]
                 AnimOverload: RangedAttack
     Bottom:
         Abilities:

@@ -13,5 +13,3 @@ Abilities:
             TreatAsNonInlineForTargeting: True
         ResourcesToGiveToTargets:
             - ["Plague", 1]
-        ResourcesToAddOnAbilityEnd:
-            - ["Plague", 3]

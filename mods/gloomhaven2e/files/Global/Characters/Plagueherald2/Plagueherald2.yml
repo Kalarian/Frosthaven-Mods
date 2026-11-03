@@ -10,15 +10,6 @@ DefaultSkin: 1
 HealthTable: [ 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
 NumberAbilityCardsInBattle: 10
 Description: $Plagueherald2_DESCRIPTION$
-StartScenarioAbilities:
-    PlagueSupply:
-        NullTargeting: True
-        Filter: Self
-        ResourcesToAddOnAbilityEnd:
-            - ["Plague", 3]
-        AutoTrigger: True
-        CanSkip: False
-        SkipAnim: True
 HeroStats:
     Melee: 1
     Ranged: 4

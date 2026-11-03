@@ -1,8 +1,9 @@
 # card: Compounding Infection
 # top: Curse + Plague on one enemy within range 4. The persistent trigger ("whenever an enemy draws a Curse during its
-# attack, you may discard this card to have that enemy gain Curse, Curse, Plague, Plague"): Frosthaven's only
-# curse-drawn behaviour (DamageOnCurseModApplied, the 1st edition Baneful Hex) deals damage and can't give conditions
-# or tokens: text only, the card is discarded after the play. NEEDS PLUGIN. bottom: persistent +1 Attack aura on
+# attack, you may discard this card to have that enemy gain Curse, Curse, Plague, Plague"): Frosthaven's curse-drawn
+# bonus (DamageOnCurseModApplied, the 1st edition Baneful Hex), one use, marked MiscVars GH2E_CompoundingInfection:
+# plugin GHCompoundingInfection asks the player instead of dealing the damage, gives the two Curses and two Plague on
+# yes and ends the bonus (the card goes to the discard pile). bottom: persistent +1 Attack aura on
 # character allies (ActorType Player) that have Poison.
 Discard: [Discard,Lost]
 Data:
@@ -16,9 +17,18 @@ Data:
                 Filter: Enemy
                 ResourcesToGiveToTargets:
                     - ["Plague", 1]
-                ResourcesToAddOnAbilityEnd:
-                    - ["Plague", 3]
                 AnimOverload: TargetedDebuff
+            TInfection:
+                Damage: 1
+                Filter: Self
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: DamageOnCurseModApplied
+                    Filter: Enemy
+                    XPTracker: [0]
+                MiscVars:
+                    GH2E_CompoundingInfection: True
+                AnimOverload: PowerUp
     Bottom:
         Abilities:
             BActive:
@@ -43,7 +53,11 @@ Layout:
         - Row: "$GH2E_Plagueherald2_PLAGUE$"
         - Row: "$Range$ <sprite name=Range> *TCurse.Range* @TCurse.Range@"
         - Row: "<size=50%> "
-        - Row: "$GH2E_Plagueherald2_21_T$"
+        - Active:
+            Ability: TInfection
+            Icon: "Icon_Curse"
+            ListLayout: "$GH2E_Plagueherald2_21_T$"
+            Layout: "$GH2E_Plagueherald2_21_T$"
     Bottom:
         - Active:
             Ability: BActive

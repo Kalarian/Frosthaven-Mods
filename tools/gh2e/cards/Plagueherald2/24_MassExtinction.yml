@@ -54,8 +54,6 @@ Data:
                 Filter: Enemy
                 ResourcesToGiveToTargets:
                     - ["Plague", 1]
-                ResourcesToAddOnAbilityEnd:
-                    - ["Plague", 3]
                 AnimOverload: TargetedDebuff
 Layout:
     Top:

@@ -25,32 +25,25 @@ MustEndOnSpecificTiles`, Trapper Lure of the Snare's shape).
   `MaxAmount: 3`). The engine caps each actor at MaxAmount, so **an enemy can't hold more than 3** (class mat rule).
   `TargetHasCharacterResource: ["Plague"]` in a filter means "an enemy that has Plague", the way the Hatchet's cards check
   The Favorite.
-- **Supply on the caster.** `ResourcesToGiveToTargets` moves a resource from the giver to the target, and only if the
-  giver holds it (CAbility.ApplyToActor / CAbilityAttack). So the Plagueherald holds 3 Plague of its own:
-  - `character_extra.yml` gives 3 at scenario start (`StartScenarioAbilities`, as HIVE.yml does).
-  - Every Plague ability gives `["Plague", 1]` per target and ends with `ResourcesToAddOnAbilityEnd: ["Plague", 3]`. The
-    amount is clamped at 3, which refills the supply.
-  - The Plagueherald's own status row shows "Plague 3" for the whole scenario. That is a side effect of this design.
-- **The 12-token pool is not modelled.** The supply never runs out, so the "13th token removes a placed one" rule never
-  happens. NEEDS PLUGIN, but it is rarely relevant.
-- **Tokens leave with a dying enemy.** `DropOnDeath` is off, so no prop drops.
+- **The class supply of 12 (plugin GHPlague).** `ResourcesToGiveToTargets` moves a resource out of the giver's own
+  stock, so the plugin makes the giver of a Plague give (the Plagueherald, an ally, a controlled monster) "hold" the
+  supply while the engine's give site runs: the target gains one, nobody loses one. No supply on the Plagueherald, no
+  refill, no "Plague 3" on his status row. Every Plague placed counts the tokens on all living non-player figures; with
+  12 placed, the Plagueherald's player first picks the placed token to remove (one Remove / Next box per enemy that has
+  Plague; one candidate = no question). A figure holding 3 takes no more and no token is removed for it.
+- **Tokens leave with a dying enemy.** `DropOnDeath` is off, so no prop drops (they go back to the supply).
 - **Per-token scaling on attacks.** "+1 Attack for each Plague the target has" is a per-target Vars bonus:
   `ConditionalOverrides` + `StatIsBasedOnX` (`BasedOn: Vars`, `AddTo`), Frosthaven's Crashing Tide Submerge shape. The
   value is `TargetActor.GetCharacterResourceAmount("Plague")`, a public CActor method that the expression engine calls
   by reflection (CVarsContext.CallObjectMethod). UNVERIFIED in play.
-- **Per-token scaling on damage, debuffs and penalties: NEEDS PLUGIN.** Damage abilities have no per-target stat
-  (CAbilityDamage reads no conditional overrides). Filter Vars are only checked when the player clicks a target
-  (WorldspaceStarHexDisplay sets the Vars context), never for `Targeting: All`, so a "2+ tokens" filter on an
-  all-enemies effect would hit every enemy with Plague. Every "for each Plague that enemy has" on damage, -Attack or -Move
-  is therefore written **as for one token**:
-  - Virulent Strain bottom, Wilt and Wither top, Rot Maggots bottom: 1 damage per enemy with Plague.
-  - Disease Vector bottom: 2 damage per enemy with Plague.
-  - Unwilling Sacrifice top: 2 damage.
-  - Blistering Buboes bottom and Creeping Lethargy top: -1 / -2 Attack.
-  - Festering Sores bottom: -1 Move.
-- **Plague added by a controlled monster's attack: NEEDS PLUGIN.** The monster has no supply, so the give does nothing
-  (Spread the Plague top, Rabid Bite top, Convert the Flock top). The same applies to allies' attacks (Virulent Strain
-  top).
+- **Per-token scaling on damage and on -Attack / -Move auras (plugin GHPerPlague, MiscVars `GH2E_PerPlague: True`).**
+  A marked Damage ability deals its printed damage once per Plague on each target (the target's damage summary is
+  raised before the damage); a marked attack/move aura applies its -X once per Plague on the attacking/moving enemy:
+  Virulent Strain bottom, Wilt and Wither top, Rot Maggots bottom, Disease Vector bottom, Unwilling Sacrifice top,
+  Blistering Buboes bottom, Creeping Lethargy top, Festering Sores bottom.
+- **Plague added by others.** Controlled monsters' commanded attacks (Spread the Plague top, Rabid Bite top, Convert the
+  Flock top) carry `ResourcesToGiveToTargets: [Plague, 1]` and give from the class supply. Virulent Strain top's ally
+  aura is marked `GH2E_GivePlague`: plugin GHPlagueByAlly gives the attacked enemy one Plague when a use slot is spent.
 
 ## Rules questions settled (sheet "unclear")
 
@@ -88,8 +81,8 @@ MustEndOnSpecificTiles`, Trapper Lure of the Snare's shape).
 
 - **01 Comorbid Sting:** see costs above. The granted attack has no range (melee).
 - **03 Virulent Strain:**
-  - Top: a +1 Attack aura on allies with Poison, 3 slots (XP on slot 1). The Plague on their attacks is NEEDS PLUGIN.
-  - Bottom: flat damage.
+  - Top: a +1 Attack aura on allies with Poison, 3 slots (XP on slot 1). The Plague on their attacks: GHPlagueByAlly.
+  - Bottom: 1 damage per Plague (GHPerPlague).
 - **04 Contagious Corpse:**
   - Top: the kill-gated sub-ability (`ActorsKilledByAbility`, Hatchet's Fearsome Efficiency) adds one Curse to the
     monster deck (`AddModifiersToMonsterDeck`, Voidwarden's Taunting Fate) and gives XP 1.
@@ -105,7 +98,9 @@ MustEndOnSpecificTiles`, Trapper Lure of the Snare's shape).
   - The persistent trigger is Deathwalker's "when an enemy dies" shape (When Your Time Comes bottom: a self aura over all
     enemies, `DuringActionAbilityOnDeath`, `TriggerOnCaster`), limited to enemies with Plague, one use. The card goes to
     the discard pile after the trigger.
-  - "Within range 3 of the hex where it died" is range 3 from you. APPROXIMATION.
+  - Plugin GHFesteringSores: "you may" is a yes/no box (no: the card stays; no enemy within range 3 of the hex: not
+    asked, the card stays); the two targets are picked among the enemies within range 3 of the hex where it died
+    (Custom targeting, no line of sight: a standalone Plague, FAQ 8.11).
 - **09 Wretched Yield top:** +1 Attack per token (see above). Heal X reads the attack's first target through
   `CustomAbility.FindAbilityInPhaseByName("TAttack").ActorsTargeted[0]`. UNVERIFIED expression.
 - **10 Accelerated End:**
@@ -119,7 +114,7 @@ MustEndOnSpecificTiles`, Trapper Lure of the Snare's shape).
     to that ally. Order APPROXIMATION.
 - **14 Sickening Strength top:** Strengthen only. "May suffer 2 damage to immediately play one card from their hand"
   needs another player's extra card play. Text only, NEEDS PLUGIN.
-- **15 Rot Maggots bottom:** an `EndTurnAbility` bonus with 4 slots (XP on slots 2 and 4), flat damage.
+- **15 Rot Maggots bottom:** an `EndTurnAbility` bonus with 4 slots (XP on slots 2 and 4), 1 damage per Plague.
 - **17 Cloying Miasma bottom:** a round attack aura with `AttackHasAdvantage`, whose bonus filter names a target with
   Plague (1st edition Doomstalker's Expose, IsDoomed). UNVERIFIED that the aura passes the target filter.
 - **18 Rabid Bite top:**
@@ -128,16 +123,16 @@ MustEndOnSpecificTiles`, Trapper Lure of the Snare's shape).
   - "Must move toward a monster without Plague": the player moves it (Player control); the end hex must be closer to
     a monster without Plague (MustEndOnSpecificTiles, see Commanded enemies).
 - **19 Unwilling Sacrifice top:**
-  - 2 damage (flat), then the optional spread to one adjacent enemy (1 damage + Plague).
-  - "Remove any number of Plague to hit that many adjacent enemies": one enemy only, and the first enemy keeps its
-    tokens. NEEDS PLUGIN.
-- **20 Wilt and Wither bottom:** "double all damage enemies with Plague suffer during this and your next turn" is
-  Brittle on every enemy with Plague. That doubles one damage per enemy, not two turns of damage. The slots' 2 XP are
-  given on play. APPROXIMATION, NEEDS PLUGIN for the exact effect.
+  - 2 damage per Plague (GHPerPlague). Plugin GHUnwillingSacrifice: after the damage the player removes tokens one box
+    at a time (up to the Plague it had before the damage and the enemies adjacent to its hex; a kill doesn't stop it),
+    then the spread template (TSpread, taken off the card when read) runs with that many targets among those adjacent
+    enemies: 1 damage + Plague each.
+- **20 Wilt and Wither bottom:** a persistent `EndTurnAbility` marker with two use slots (XP 1 each): it ends at the end
+  of your next turn. While it is in play plugin GHWiltAndWither doubles every damage an enemy with Plague suffers.
 - **21 Compounding Infection top:**
-  - The curse-drawn trigger is not built. Frosthaven's only curse-drawn behaviour (DamageOnCurseModApplied, the 1st
-    edition Baneful Hex) deals damage and can't add conditions or tokens.
-  - The card discards after the play instead of staying persistent. Text only, NEEDS PLUGIN.
+  - A persistent one-use DamageOnCurseModApplied bonus (the 1st edition Baneful Hex's curse-drawn trigger), marked
+    `GH2E_CompoundingInfection`: plugin GHCompoundingInfection asks instead of dealing damage; yes = the attacker gains
+    two Curses and two Plague and the card goes to the discard pile; no = it stays.
 - **21 Compounding Infection bottom:** a persistent +1 Attack aura on character allies (`ActorType: Player`) with
   Poison.
 - **23 Succumb to the Gift top:** on a kill, XP 1 and a 3 damage + Poison trap. The trap is placed on the attack's hex
@@ -150,7 +145,7 @@ MustEndOnSpecificTiles`, Trapper Lure of the Snare's shape).
 - **26 Creeping Lethargy bottom:** a one-use damage negation (`PreventDamage: -1`, the Protective Blessing value,
   `XPTracker: [0]`) on one adjacent ally with Poison, for the round.
 - **27 Convert the Flock:**
-  - Top: control all normal/elite enemies with Plague for Move 2, Attack 5 + Poison. The Plague is NEEDS PLUGIN.
+  - Top: control all normal/elite enemies with Plague for Move 2, Attack 5 + Poison + Plague (class supply, GHPlague).
   - Bottom: the target pick takes an enemy with Poison or Plague (filter Vars). XP 1 on a kill (`GainXP`). The optional
     Teleport to its hex is not built (NEEDS PLUGIN).
 - **29 Xorn's Embrace:**
@@ -178,18 +173,11 @@ MustEndOnSpecificTiles`, Trapper Lure of the Snare's shape).
   - build.py support for `resources.yml` and `character_extra.yml`.
   - The card glob skips those two files.
   - The GHClass_Plagueherald2 status icon.
-- **Plugin: per-token effects.** Damage, -Attack and -Move "for each Plague" (above). For example, a plugin hook that
-  multiplies a Damage ability's strength per target by `GetCharacterResourceAmount("Plague")` when the ability carries a
-  marker (MiscVars `GH2E_PerPlague: True`).
-- **Plugin: giving Plague from someone else.** From controlled monsters' and allies' attacks, the giver has no supply;
-  the plugin could make the Plagueherald the source.
-- **Plugin: the 12-token pool.** Count the tokens on the board, and remove one when a 13th is given.
-- **Plugin: Festering Sores range.** Measure the range from the death hex instead of from the Plagueherald.
-- **Plugin: the rest.** Compounding Infection trigger, Sickening Strength extra card play, Unwilling Sacrifice token
-  removal, Wilt and Wither two-turn doubling, Convert the Flock teleport, Tainted Offering "from the ally's hex",
-  Xorn's Last Gift perk at death.
+- **Done (plugin GHPlague.cs, 2026-11-02):** per-token effects, Plague from others, the 12-token pool, Festering Sores
+  range and "may", Compounding Infection trigger, Unwilling Sacrifice token removal, Wilt and Wither two-turn doubling.
+- **Plugin: the rest.** Sickening Strength extra card play, Convert the Flock teleport, Tainted Offering "from the
+  ally's hex", Xorn's Last Gift perk at death.
 - **In-game bench wanted:**
-  - The supply seed (StartScenarioAbilities runs as a pending scenario-modifier ability).
   - The expressions (`GetCharacterResourceAmount` by reflection).
   - The cost-consumes with an ally pick.
   - Path of the Pox's nested chain.

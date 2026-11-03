@@ -6,7 +6,7 @@ Level: 8
 Initiative: 57
 # card: Convert the Flock
 # top: control every normal and elite enemy with Plague (any range): Move 2, Attack 5 + Poison, each driven by the player (ControlActorType Player, rulebook p33). The Plague their
-# attacks add can't be given (the monsters hold no supply): NEEDS PLUGIN. bottom: "one enemy that has Poison or
+# attacks add comes from the class supply (plugin GHPlague). bottom: "one enemy that has Poison or
 # Plague": the target pick checks either (filter Vars); it gains Plague and suffers Damage 3; on a kill, XP 1. "You may
 # Teleport to the hex it occupied": not written, NEEDS PLUGIN.
 Discard: [Lost,Discard]
@@ -27,6 +27,8 @@ Data:
                                 DiamondEnhancements: 1
                             Conditions: Poison
                             StrengthIsBase: True
+                            ResourcesToGiveToTargets:
+                                - ["Plague", 1]
                     ControlDurationType: ControlForOneAction
                     ControlActorType: Player
                 Target: -1
@@ -49,8 +51,6 @@ Data:
                         ValidatePoisonOrPlague: target.Tokens.HasKey(CCondition.ENegativeCondition.Poison) or target.GetCharacterResourceAmount("Plague") > 0
                 ResourcesToGiveToTargets:
                     - ["Plague", 1]
-                ResourcesToAddOnAbilityEnd:
-                    - ["Plague", 3]
                 AnimOverload: TargetedDebuff
                 SubAbilities:
                     BXP:
