@@ -40,7 +40,9 @@ Layout:
         - Row: "<size=20%> "
         - Row: "$GH2E_Berserker2_18_T$"
         - Row: "<size=50%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire
     Bottom:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack1* <size=100%><voffset=1>@BAttack1@"
         - Row: "<size=50%> "

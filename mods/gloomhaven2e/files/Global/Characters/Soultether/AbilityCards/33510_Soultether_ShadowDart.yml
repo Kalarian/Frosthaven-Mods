@@ -45,7 +45,9 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Curse></link>"
             - Column:
         - Row: "<size=50%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark
     Bottom:
         - Active:
             Ability: BIgnoreRetaliate

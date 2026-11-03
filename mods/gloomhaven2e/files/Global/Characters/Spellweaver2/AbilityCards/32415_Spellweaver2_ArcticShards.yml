@@ -42,7 +42,9 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *TAttack.Range*, <sprite name=Muddle></link>"
             - Column:
         - Row: "<size=20%> "
-        - Infuse: Ice
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Ice
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"
@@ -52,4 +54,6 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *BHeal.Range*</link>"
             - Column:
         - Row: "<size=20%> "
-        - Infuse: Light
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Light

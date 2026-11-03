@@ -65,7 +65,9 @@ Data:
 Layout:
     Top:
         - Row: "$GH2E_Tinkerer2_29_T$"
-        - Row: "$GH2E_Tinkerer2_29_T2$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$GH2E_Tinkerer2_29_T2$"
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *TAllyMove* <size=100%><voffset=1>@TAllyMove@"
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAllyAttack* <size=100%><voffset=1>@TAllyAttack@"
     Bottom:

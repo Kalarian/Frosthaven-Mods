@@ -63,7 +63,9 @@ Layout:
                     Name: TCIce
                     Text: "<sprite name=Stun>, <sprite name=XP1>"
         - Row: "<size=20%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire
     Bottom:
         - ColumnWidths: "65,30"
         - Column:

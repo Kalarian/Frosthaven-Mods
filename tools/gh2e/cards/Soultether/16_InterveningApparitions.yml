@@ -71,4 +71,6 @@ Layout:
         - Row: "<size=20%> "
         - XPTracker: BPrevent
         - Row: "<size=20%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark

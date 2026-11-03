@@ -34,7 +34,9 @@ Layout:
         - Row: "$Target_AllAdjacentEnemies$"
         - Row: "$XP_PerEnemy$"
         - Row: "<size=20%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air
     Bottom:
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "

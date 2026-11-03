@@ -94,7 +94,9 @@ Layout:
         - Row: "<size=50%> "
         - Row: "$FHS_GH2E_Wildfury_07_T$"
     Bottom:
-        - Row: "<sprite name=ConsumeAir> $FHS_GH2E_Wildfury_REQUIRED$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "<sprite name=ConsumeAir> $FHS_GH2E_Wildfury_REQUIRED$"
         - Row: "<size=50%> "
         - Active:
             Ability: BInvoke

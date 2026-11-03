@@ -40,7 +40,9 @@ Layout:
         - Row: "<size=150%><sprite name=Invisible> <size=100%><voffset=1>@TInvisible@"
         - Row: "$FHS_GH2E_Elementalist2_13_T$"
         - Row: "<size=20%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:

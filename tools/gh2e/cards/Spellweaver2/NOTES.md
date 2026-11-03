@@ -129,3 +129,39 @@ problems / 2 warnings (SelectAndPlayCard, above), rulecheck 42 ok, no gh_port wa
 - Re-audit fixes (2026-11-02, fix-reaudit-B): Etheric Echo bottom gives Ward as the first ability of her next lost action
   STARTS (GHSpellweaver2e.WardAtLostStart, then the bonus ends; "GHRule EthericEcho"). Etheric Bond acts only on the
   rule library's own short-rest message (worker thread), not on the copy the UI builds online.
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/SW2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- 01 Reviving Ether top: infuse Any
+- 02 Fire Orbs top: infuse Fire
+- 08 Emberfrost bottom: infuse Ice
+- 08 Emberfrost top: infuse Fire
+- 09 Flameswell top: infuse Fire
+- 10 Ice Armor bottom: infuse Ice
+- 10 Ice Armor top: infuse Ice
+- 11 Impaling Eruption top: infuse Earth
+- 12 Freezing Nova top: infuse Ice
+- 13 Etheric Echo top: infuse Any
+- 14 Heatwave bottom: infuse Fire
+- 14 Heatwave top: infuse Fire
+- 15 Arctic Shards bottom: infuse Light
+- 15 Arctic Shards top: infuse Ice
+- 16 Dancing Gales bottom: infuse Air
+- 18 Warm Up bottom: infuse Any
+- 18 Warm Up top: infuse Fire
+- 19 Cool Down bottom: infuse Ice
+- 20 Elemental Rays bottom: infuse Dark
+- 21 Searing Glacier top: infuse Ice
+- 22 Spell Mastery top: infuse Any
+- 23 Chromatic Explosion top: infuse Fire and Ice and Air and Earth and Light and Dark
+- 24 Frostflare Orbs top: infuse Fire
+- 26 Freezing Vortex bottom: infuse Ice
+- 26 Freezing Vortex top: infuse Ice
+- 27 Inferno bottom: infuse Fire
+- 27 Inferno top: "All allies within range 2 suffer 2."; infuse Fire

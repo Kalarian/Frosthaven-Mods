@@ -39,14 +39,13 @@ Layout:
         - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "$FHS_GH2E_Elementalist2_07_T$"
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "50, 50"
-            - Column:
-                - Infuse: Fire
-            - Column:
-                - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: [Fire, Air]
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "$FHS_GH2E_Elementalist2_MOVE_IF_ELEMENT$"
         - Row: "<size=20%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth

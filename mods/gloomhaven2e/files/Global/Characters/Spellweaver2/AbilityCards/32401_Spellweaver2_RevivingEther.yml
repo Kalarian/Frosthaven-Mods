@@ -32,7 +32,9 @@ Layout:
     Top:
         - Row: "$FHS_GH2E_Spellweaver2_01_T$"
         - Row: "<size=20%> "
-        - Infuse: Any
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Any
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"

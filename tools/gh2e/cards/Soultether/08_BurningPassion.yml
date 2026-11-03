@@ -34,7 +34,9 @@ Layout:
         - Row: "$Target$ <sprite name=Target> *TStrengthen.Target*"
         - Row: "$Range$ <sprite name=Range> *TStrengthen.Range*"
         - Row: "<size=50%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire
     Bottom:
         - Active:
             Ability: BPrevent

@@ -78,7 +78,9 @@ Layout:
         - XP: 1
     Bottom:
         - Command: True
-        - Row: "$GH2E_Wildfury_22_B$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$GH2E_Wildfury_22_B$"
         - Row: "<size=50%> "
         - Active:
             Ability: BShield

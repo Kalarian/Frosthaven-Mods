@@ -47,7 +47,9 @@ Data:
                 AnimOverload: PowerUp
 Layout:
     Top:
-        - Row: "$GH2E_Quartermaster2_21_T$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$GH2E_Quartermaster2_21_T$"
         - Row: "<size=20%> "
         - Row: "$GH2E_Quartermaster2_21_T2$"
     Bottom:

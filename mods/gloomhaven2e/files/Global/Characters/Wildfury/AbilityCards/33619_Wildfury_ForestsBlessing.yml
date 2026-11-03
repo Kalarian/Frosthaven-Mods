@@ -60,7 +60,9 @@ Layout:
                 - Row: "<link=fhpill>, <sprite name=Bless></link>"
             - Column:
         - Row: "<size=50%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"
@@ -80,11 +82,6 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *BHeal.Range*, <sprite name=Strengthen></link>"
             - Column:
         - Row: "<size=50%> "
-        - Row:
-            - ColumnWidths: "20,20,20,20"
-            - Column:
-            - Column:
-                - Infuse: Air
-            - Column:
-                - Infuse: Earth
-            - Column:
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: [Air, Earth]

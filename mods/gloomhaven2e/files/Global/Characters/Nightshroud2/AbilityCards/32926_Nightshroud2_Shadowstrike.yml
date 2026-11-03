@@ -121,4 +121,6 @@ Layout:
                     Name: BCDark
                     Text: "$FHS_GH2E_Nightshroud2_26_B2$"
         - Row: "<size=50%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark

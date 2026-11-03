@@ -72,4 +72,6 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies> moved through</link>"
             - Column:
         - Row: "<size=50%> "
-        - Infuse: Light
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Light

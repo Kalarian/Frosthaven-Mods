@@ -69,9 +69,6 @@ Layout:
                 - Row: "<link=fhpill>, <sprite name=Immobilize></link>"
             - Column:
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "50, 50"
-            - Column:
-                - Infuse: Ice
-            - Column:
-                - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: [Ice, Earth]

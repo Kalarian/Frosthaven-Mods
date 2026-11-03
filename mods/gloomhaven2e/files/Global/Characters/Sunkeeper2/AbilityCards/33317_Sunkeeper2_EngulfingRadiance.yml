@@ -44,7 +44,9 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Target> all <sprite name=Allies> and self</link>"
             - Column:
         - Row: "<size=50%> "
-        - Infuse: Light
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Light
     Bottom:
         - Active:
             Ability: BDisadvantage
@@ -56,5 +58,7 @@ Layout:
             - ColumnWidths: "30,20,20"
             - Column:
             - Column:
-                - Infuse: Light
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Light
             - Column:

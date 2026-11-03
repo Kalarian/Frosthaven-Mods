@@ -54,7 +54,9 @@ Layout:
         - Row: "<size=20%> "
         - Row: "$FHS_GH2E_Berserker2_10_T2$"
         - Row: "<size=50%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:

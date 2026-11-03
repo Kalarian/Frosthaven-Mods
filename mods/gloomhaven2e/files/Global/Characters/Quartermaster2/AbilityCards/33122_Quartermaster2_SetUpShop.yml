@@ -74,7 +74,9 @@ Layout:
         - Row: "<size=20%> "
         - Row: "$FHS_GH2E_Quartermaster2_22_T2$"
         - Row: "<size=20%> "
-        - Row: "$FHS_GH2E_Quartermaster2_22_T3$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$FHS_GH2E_Quartermaster2_22_T3$"
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "

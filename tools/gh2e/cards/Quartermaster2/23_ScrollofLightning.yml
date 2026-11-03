@@ -47,9 +47,13 @@ Layout:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "$Range$ <sprite name=Range> *TAttack.Range* @TAttack.Range@"
         - Row: "<size=50%> "
-        - Row: "$GH2E_Quartermaster2_23_T$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$GH2E_Quartermaster2_23_T$"
         - Row: "<size=50%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air
     Bottom:
         - Row: "$GH2E_Quartermaster2_23_B$"
         - Row: "<size=50%> "

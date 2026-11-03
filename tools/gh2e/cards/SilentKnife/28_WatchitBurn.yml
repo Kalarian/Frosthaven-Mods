@@ -44,7 +44,9 @@ Layout:
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"
         - Row: "$Jump$ <sprite name=Jump>"
         - Row: "<size=50%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire
     Bottom:
         - Row: "$GH2E_SilentKnife_28_B$"
         - Row: "<size=50%> "

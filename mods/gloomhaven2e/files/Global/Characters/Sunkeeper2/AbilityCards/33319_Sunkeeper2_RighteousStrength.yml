@@ -43,7 +43,9 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Target> all adjacent <sprite name=Allies></link>"
             - Column:
         - Row: "<size=50%> "
-        - Infuse: Light
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Light
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"

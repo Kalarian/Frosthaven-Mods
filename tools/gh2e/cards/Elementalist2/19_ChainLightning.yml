@@ -59,4 +59,6 @@ Layout:
         - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*"
         - Row: "$Range$ <sprite name=Range> *BHeal.Range* @BHeal.Range@"
         - Row: "<size=20%> "
-        - Infuse: Light
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Light

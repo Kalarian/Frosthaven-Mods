@@ -186,3 +186,34 @@ packcheck 0 problems, rulecheck 52 ok, no gh_port warnings, no missing text keys
   Earth held strong at round end (plugin; ElementsDontWane dropped).
 - Masteries written: ConsumesInOneTurn (5 turns with 4+ consumes) and AllSixElementsInScenarios (3 different scenarios,
   counted per character in the campaign save; the hidden resource GH2EAllSixElements marks the scenario).
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/EL2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- 01 Ice Spikes bottom: infuse Ice and Earth
+- 05 Stoking Hail bottom: infuse Air
+- 06 Magma Scales bottom: infuse Fire and Earth
+- 07 Infernal Vortex bottom: infuse Earth
+- 07 Infernal Vortex top: infuse Fire and Air
+- 08 Frigid Torrent bottom: infuse Fire
+- 08 Frigid Torrent top: infuse Ice and Air
+- 10 Dual Nature bottom: infuse Ice
+- 12 Flash of Brilliance bottom: infuse Any
+- 12 Flash of Brilliance top: infuse Light
+- 13 Encompassing Shadow top: infuse Dark
+- 14 Gravel Guard top: infuse Earth
+- 15 Wave of Frost top: infuse Ice
+- 16 Arresting Gale top: infuse Air
+- 17 Empowering Flame top: infuse Fire
+- 18 Burial bottom: infuse Dark
+- 19 Chain Lightning bottom: infuse Light
+- 22 Pragmatic Reinforcement bottom: infuse Ice/Earth (either)
+- 23 Duskstorm bottom: infuse Fire/Air (either)
+- 24 Elemental Juggernaut bottom: infuse Ice/Air (either)
+- 25 Confluence of Elements bottom: infuse Fire/Earth (either)
+- 28 Ethereal Manifestation bottom: infuse Any

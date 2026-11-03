@@ -87,9 +87,6 @@ Layout:
             Layout: "<b><size=130%>$Retaliate$ <sprite name=Retaliate> *BAllyRetaliate* <size=100%><voffset=1>@BAllyRetaliate@"
             Icon: "Retaliate"
         - Row: "<size=20%> "
-        - Row:
-            - ColumnWidths: "50, 50"
-            - Column:
-                - Infuse: Fire
-            - Column:
-                - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: [Fire, Earth]

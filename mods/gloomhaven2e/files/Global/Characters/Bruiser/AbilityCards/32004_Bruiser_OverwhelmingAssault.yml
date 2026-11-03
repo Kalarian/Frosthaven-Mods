@@ -36,4 +36,6 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Row: "<size=20%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air

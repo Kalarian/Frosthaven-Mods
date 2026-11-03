@@ -41,4 +41,6 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Strengthen></link>"
             - Column:
         - Row: "<size=50%> "
-        - Row: "$FHS_GH2E_Sawbones2_POISON_SELF$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$FHS_GH2E_Sawbones2_POISON_SELF$"

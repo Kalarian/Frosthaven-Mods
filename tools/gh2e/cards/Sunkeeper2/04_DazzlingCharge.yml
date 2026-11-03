@@ -30,7 +30,9 @@ Layout:
         - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal* <size=100%><voffset=1>@THeal@"
         - Row: "$Range$ <sprite name=Range> *THeal.Range*"
         - Row: "<size=50%> "
-        - Infuse: Light
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Light
     Bottom:
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "
@@ -41,6 +43,8 @@ Layout:
             - ColumnWidths: "30,20,20"
             - Column:
             - Column:
-                - Infuse: Light
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Light
             - Column:
                 - XP: 2

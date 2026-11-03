@@ -87,7 +87,9 @@ Layout:
         - Row: "<size=150%><sprite name=Heal> *TAllyHeal* <size=100%><voffset=1>@TAllyHeal@"
     Bottom:
         - Row: "<size=1%><link=fhcommand> </link>"
-        - Row: "$FHS_GH2E_Wildfury_22_B$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$FHS_GH2E_Wildfury_22_B$"
         - Row: "<size=50%> "
         - Active:
             Ability: BShield

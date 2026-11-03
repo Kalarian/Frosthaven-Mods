@@ -49,7 +49,9 @@ Layout:
         - Row: "<size=20%> "
         - Row: "$GH2E_Berserker2_07_T$"
         - Row: "<size=50%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire
     Bottom:
         - Consume:
             Name: BCDamage

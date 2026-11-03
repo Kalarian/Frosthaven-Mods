@@ -122,3 +122,17 @@ skip keeps supplies), Continual Supply bottom (slot only on 0-supply turns), Gia
 Scroll of Judgment bottom reaction, Set Up Shop (both end-turn bonuses, bottom end-round heal), RefreshItems 2,
 Restock perk modifier.
 - Perk Restock: modifier rewritten, `AMC_GH2E_Quartermaster2_Supplies10_P0` is now a self NullTargeting (Frosthaven's AMC_Resonance_P1, auto, no animation) with the same ResourcesToAddOnAbilityEnd Supplies 10 (a Null ability on a modifier card stops the game when drawn). Exact; bench the supply gain.
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/QM2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- 13 Scroll of Recall top: infuse Earth
+- 21 Scroll of Judgment top: "Suffer 2."
+- 22 Set Up Shop top: "You cannot perform move abilities."
+- 23 Scroll of Lightning top: "All allies and enemies adjacent to the target suffer 1."; infuse Air
+- 27 Scroll of Blizzards top: infuse Ice

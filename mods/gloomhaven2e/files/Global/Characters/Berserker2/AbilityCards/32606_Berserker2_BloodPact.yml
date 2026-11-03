@@ -50,7 +50,9 @@ Data:
         XP: 2
 Layout:
     Top:
-        - Row: "$FHS_GH2E_Berserker2_06_T$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$FHS_GH2E_Berserker2_06_T$"
         - Row: "<size=50%> "
         - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
     Bottom:
@@ -60,5 +62,7 @@ Layout:
             Layout:
                 - Row: "$FHS_GH2E_Berserker2_06_B$"
                 - Row: "<size=50%> "
-                - Row: "$FHS_GH2E_Berserker2_06_B2$"
+                - MandatoryTrigger:
+                    Layout:
+                        - Row: "$FHS_GH2E_Berserker2_06_B2$"
             Icon: Positive_AttackPlus

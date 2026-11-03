@@ -24,6 +24,8 @@ Layout:
         - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
         - Row: "$Immobilize$ <sprite name=Immobilize>"
         - Row: "<size=50%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth
     Bottom:
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

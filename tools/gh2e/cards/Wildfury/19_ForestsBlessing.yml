@@ -49,7 +49,9 @@ Layout:
         - Row: "$Range$ <sprite name=Range> *THeal.Range* @THeal.Range@"
         - Row: "$Bless$ <sprite name=Bless>"
         - Row: "<size=50%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air
     Bottom:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
         - Row: "$Target$ <sprite name=Target> *BAttack.Target* @BAttack.Target@"
@@ -62,11 +64,11 @@ Layout:
         - Row: "$Strengthen$ <sprite name=Strengthen>"
         - Row: "<size=50%> "
         - Row:
-            - ColumnWidths: "20,20,20,20"
+            - ColumnWidths: "20,40,20"
             - Column:
             - Column:
-                - Infuse: Air
-            - Column:
-                - Infuse: Earth
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: [Air, Earth]
             - Column:
                 - XP: 2

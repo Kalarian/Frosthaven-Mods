@@ -30,4 +30,6 @@ Layout:
         - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *BHeal*"
         - Row: "$Strengthen$ <sprite name=Strengthen>"
         - Row: "<size=50%> "
-        - Row: "$GH2E_Sawbones2_POISON_SELF$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$GH2E_Sawbones2_POISON_SELF$"

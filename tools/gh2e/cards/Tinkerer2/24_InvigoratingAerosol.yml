@@ -60,7 +60,9 @@ Layout:
         - Row: "<b><size=130%>$Heal$ <sprite name=Heal> *THeal2* <size=100%><voffset=1>@THeal2@"
         - Row: "$Range$ <sprite name=Range> *THeal2.Range*"
         - Row: "<size=50%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air
     Bottom:
         - Active:
             Ability: BActive

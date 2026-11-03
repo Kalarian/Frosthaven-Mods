@@ -205,3 +205,30 @@ both act only for Nightshroud2ID and her card IDs. Their summary comments hold t
 - Help boxes: `GH2E_Nightshroud2_TEAR_PLACE_HELP` ("Place one Tear") replaces the shadow text on every placement.
 - Still open: the Tear look (Deathwalker shadow, the user's decision A5); enemies' teleports onto her hex and pushes of
   her through enemies follow the game's rules; entering a Tear through someone else's push doesn't offer the removal.
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/NS2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- 01 Spirit of the Night top: infuse Dark
+- 02 Slice Through top: infuse Dark
+- 03 Eyes of the Night top: infuse Dark
+- 05 Swallowed by Fear bottom: infuse Dark
+- 06 Dancing Shadows top: infuse Dark
+- 10 Nightfall top: infuse Dark
+- 11 Empowering Void top: infuse Dark
+- 13 Unseen Dread bottom: infuse Dark
+- 14 Shroud in Shade top: infuse Dark
+- 15 Terror Blade bottom: infuse Dark
+- 16 Prepare for the Kill top: infuse Dark
+- 19 Into the Night top: "invisible on all targets of the stun ability"; infuse Dark
+- 20 Seeping Tendrils top: infuse Dark
+- 22 Dark Cloud bottom: infuse Dark
+- 22 Dark Cloud top: infuse Dark
+- 25 Prey on the Weak bottom: infuse Dark
+- 26 Shadowstrike bottom: infuse Dark
+- 28 Voice of the Night top: infuse Dark

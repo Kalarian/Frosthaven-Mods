@@ -70,7 +70,9 @@ Layout:
                         Name: TCFire
                         Text: "<sprite name=Pierce> 3, <sprite name=XP1>"
             - Row: "<size=10%> "
-            - Infuse: Ice
+            - MandatoryTrigger:
+                Layout:
+                    - Infuse: Ice
         - Column:
             - Row: "£Area£"
     Bottom:

@@ -49,9 +49,13 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Target> *TAttack.Target* <sprite name=Range> *TAttack.Range* <sprite name=Pierce> *TAttack.Pierce*</link>"
             - Column:
         - Row: "<size=50%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air
     Bottom:
         - Row: "<size=1%><link=fhcommand> </link>"
         - Row: "<size=150%><sprite name=Heal> *BAllyHeal* <size=100%><voffset=1>@BAllyHeal@"
         - Row: "<size=50%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth

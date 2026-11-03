@@ -59,7 +59,9 @@ Data:
                 XP: 1
 Layout:
     Top:
-        - Row: "<sprite name=ConsumeEarth> $FHS_GH2E_Wildfury_REQUIRED$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "<sprite name=ConsumeEarth> $FHS_GH2E_Wildfury_REQUIRED$"
         - Active:
             Ability: "TSummon"
             Icon: Positive_Summon

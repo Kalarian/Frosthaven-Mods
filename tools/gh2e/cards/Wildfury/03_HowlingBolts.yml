@@ -40,10 +40,14 @@ Layout:
         - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
         - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce*"
         - Row: "<size=50%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air
         - XP: 2
     Bottom:
         - Command: True
         - Row: "<size=130%><b>$Heal$ <sprite name=Heal> *BAllyHeal* <size=100%><voffset=1>@BAllyHeal@"
         - Row: "<size=50%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth

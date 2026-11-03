@@ -80,7 +80,9 @@ Layout:
             Icon: Positive_Shield
         - Row: "$FHS_GH2E_Elementalist2_14_T$"
         - Row: "<size=20%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth
     Bottom:
         - Row: "$FHS_GH2E_Elementalist2_14_B$"
         - Row: "<size=50%> "

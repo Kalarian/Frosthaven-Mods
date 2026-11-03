@@ -54,6 +54,8 @@ Layout:
         - Row: "$GH2E_Mindthief2_02_B$"
         - Row: "<b><size=130%>$Invisible$ <sprite name=Invisible>"
         - Row: "<size=20%> "
-        - Row: "$GH2E_Mindthief2_02_B2$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$GH2E_Mindthief2_02_B2$"
         - Row: "<size=20%> "
         - Duration: Round

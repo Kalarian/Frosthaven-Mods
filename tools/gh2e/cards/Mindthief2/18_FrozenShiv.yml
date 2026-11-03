@@ -33,7 +33,9 @@ Layout:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce* @TAttack.Pierce@"
         - Row: "<size=20%> "
-        - Infuse: Ice
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Ice
     Bottom:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack1* <size=100%><voffset=1>@BAttack1@"
         - Row: "<size=50%> "
@@ -45,6 +47,8 @@ Layout:
             - ColumnWidths: "30,20,20"
             - Column:
             - Column:
-                - Infuse: Ice
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Ice
             - Column:
                 - XP: 2

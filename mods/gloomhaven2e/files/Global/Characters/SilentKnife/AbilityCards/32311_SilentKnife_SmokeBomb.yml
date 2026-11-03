@@ -56,7 +56,9 @@ Layout:
         - Row: "<size=100%> "
         - XPTracker: TActive
         - Row: "<size=50%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=50%> "

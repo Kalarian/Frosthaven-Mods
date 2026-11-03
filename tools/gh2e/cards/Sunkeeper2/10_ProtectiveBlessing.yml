@@ -51,7 +51,9 @@ Layout:
             - ColumnWidths: "20,20,20,20"
             - Column:
             - Column:
-                - Infuse: Light
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Light
             - Column:
                 - XP: 2
             - Column:

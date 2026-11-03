@@ -58,7 +58,9 @@ Layout:
         - Column:
             - Row: "£Area£"
             - Row: "<size=20%> "
-            - Infuse: Ice
+            - MandatoryTrigger:
+                Layout:
+                    - Infuse: Ice
     Bottom:
         - Row: "$FHS_GH2E_Spellweaver2_26_B$"
         - Row: "<size=30%> "
@@ -66,4 +68,6 @@ Layout:
         - Row: "$FHS_GH2E_Spellweaver2_26_B2$"
         - Row: "$FHS_GH2E_Spellweaver2_26_B3$"
         - Row: "<size=20%> "
-        - Infuse: Ice
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Ice

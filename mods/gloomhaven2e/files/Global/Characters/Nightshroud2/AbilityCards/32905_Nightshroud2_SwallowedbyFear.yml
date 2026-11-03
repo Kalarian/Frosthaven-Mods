@@ -80,4 +80,6 @@ Layout:
         - Divider:
         - Row: "<size=150%><sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
         - Row: "<size=50%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark

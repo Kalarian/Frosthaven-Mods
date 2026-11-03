@@ -72,12 +72,16 @@ Layout:
             - Column:
                 - Row: "<size=150%><nobr><sprite name=Stun></nobr>"
                 - Row: "<size=20%> "
-                - Row: "$FHS_GH2E_Nightshroud2_19_T$"
+                - MandatoryTrigger:
+                    Layout:
+                        - Row: "$FHS_GH2E_Nightshroud2_19_T$"
                 - Row: "<size=20%> "
                 - Row: "$FHS_GH2E_Nightshroud2_TEARHEXB$"
             - Column: "£Area£"
         - Row: "<size=50%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=50%> "

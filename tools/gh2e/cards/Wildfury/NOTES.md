@@ -196,3 +196,34 @@ and 9 above, and Invocation of Spirit bottom's Bear heal. 3 (Unbreakable Bond bo
   (saved with the scenario); its text says Command. Life Bond isn't offered at 1 hit point (ValidateCanPay) and does
   nothing there (safety net). Spirit Swap top's consume and teleport need a living Bear (ValidateBear), the tile test is
   null-safe.
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/WF2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- 03 Howling Bolts bottom: infuse Earth
+- 03 Howling Bolts top: infuse Air
+- 04 Nature's Gift bottom: infuse Earth
+- 04 Nature's Gift top: infuse Earth
+- 05 Focused Aggression top: infuse Air
+- 07 Disorienting Roar bottom: required consume Air
+- 09 Spirit Swap bottom: infuse Air
+- 10 Invocation of Endurance top: required consume Earth
+- 11 Invocation of Spirit top: required consume Air/Earth (either)
+- 12 Gust Sigil top: required consume Air
+- 15 Earthen Spikes top: infuse Earth
+- 17 Stone Sigil top: required consume Earth
+- 19 Forest's Blessing bottom: infuse Air and Earth
+- 19 Forest's Blessing top: infuse Air
+- 21 Invocation of Domination bottom: infuse Earth
+- 21 Invocation of Domination top: required consume Air
+- 22 Blood Hunger bottom: "At the end of each round, if you neither attacked nor were attacked, lose this card."
+- 24 Invocation of Absorption bottom: infuse Air
+- 24 Invocation of Absorption top: required consume Earth
+- 27 Unbreakable Bond top: infuse Air/Earth (either)
+- 28 Spirit Sigil bottom: infuse Air/Earth (either)
+- 28 Spirit Sigil top: required consume Air and Earth

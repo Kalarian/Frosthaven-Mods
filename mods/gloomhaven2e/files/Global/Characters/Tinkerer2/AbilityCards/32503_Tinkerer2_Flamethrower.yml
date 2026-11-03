@@ -49,7 +49,9 @@ Layout:
                     - Row: "<link=fhpill><sprite name=Pierce> *TAttack.Pierce*, <sprite name=Wound></link>"
                 - Column:
             - Row: "<size=50%> "
-            - Infuse: Fire
+            - MandatoryTrigger:
+                Layout:
+                    - Infuse: Fire
         - Column:
             - Row: "£Area£"
     Bottom:

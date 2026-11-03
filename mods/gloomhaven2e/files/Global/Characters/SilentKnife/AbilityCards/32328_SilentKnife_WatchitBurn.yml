@@ -59,7 +59,9 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Jump></link>"
             - Column:
         - Row: "<size=50%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire
     Bottom:
         - Row: "$FHS_GH2E_SilentKnife_28_B$"
         - Row: "<size=50%> "

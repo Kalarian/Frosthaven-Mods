@@ -42,7 +42,9 @@ Layout:
             - Column:
         - Row: "$FHS_XP_PerEnemy$"
         - Row: "<size=50%> "
-        - Infuse: Light
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Light
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"

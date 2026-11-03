@@ -57,7 +57,9 @@ Layout:
             Text: "$GH2E_Berserker2_27_T$"
     Bottom:
         - Row: "$GH2E_Berserker2_27_B$"
-        - Row: "$GH2E_Berserker2_27_B2$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$GH2E_Berserker2_27_B2$"
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack*"
         - Row: "<size=20%> "

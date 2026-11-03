@@ -150,3 +150,16 @@ rulecheck 43 ok; no missing text keys; no gh_port warnings. **CHECK PASSED Bruis
 
 In-game tests to run first (shapes no Frosthaven card uses): Brute Force top reaction, Warding Strength bottom, Push
 Through bottom, Let Fly top damage, Face Your End bottom, the Scavenger and War Cry perks.
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/BR2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- 02 Eye for an Eye bottom: infuse Earth
+- 04 Overwhelming Assault bottom: infuse Air
+- 18 Whirlwind top: infuse Air
+- 20 Skirmishing Maneuver bottom: infuse Air

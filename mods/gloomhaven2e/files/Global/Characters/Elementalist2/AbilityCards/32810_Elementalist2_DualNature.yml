@@ -61,4 +61,6 @@ Layout:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "$FHS_GH2E_Elementalist2_MOVE_IF_ELEMENT$"
         - Row: "<size=20%> "
-        - Infuse: Ice
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Ice

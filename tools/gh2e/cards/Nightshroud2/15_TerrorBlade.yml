@@ -100,5 +100,7 @@ Layout:
             ListLayout: "$GH2E_Nightshroud2_15_B2$"
             Layout: "$GH2E_Nightshroud2_15_B2$"
         - Row: "<size=50%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark
         - XPTracker: BDouble

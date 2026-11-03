@@ -35,7 +35,9 @@ Data:
                     SquareEnhancements: 1
 Layout:
     Top:
-        - Row: "<sprite name=ConsumeAir> $FHS_GH2E_Wildfury_REQUIRED$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "<sprite name=ConsumeAir> $FHS_GH2E_Wildfury_REQUIRED$"
         - Active:
             Ability: "TSummon"
             Icon: Positive_Summon

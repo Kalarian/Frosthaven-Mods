@@ -91,10 +91,8 @@ Layout:
                     Name: TCAnyAny3
                     Text: "<sprite name=CreateWild> <sprite name=CreateWild>"
     Bottom:
-        - Row:
-            - ColumnWidths: "10,35,45,10"
-            - Column:
-            - Column: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
-            - Column:
-                - Row: "<link=fhpill><sprite name=CreateMixed-FE></link>"
-            - Column:
+        - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
+        - Row: "<size=20%> "
+        - MandatoryTrigger:
+            Layout:
+                - Row: "<sprite name=CreateMixed-FE>"

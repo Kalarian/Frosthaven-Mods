@@ -84,7 +84,9 @@ Layout:
         - Row:
             - ColumnWidths: "30,20,20"
             - Column:
-                - Infuse: Air
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Air
             - Column:
                 - XP: 2
             - Column:

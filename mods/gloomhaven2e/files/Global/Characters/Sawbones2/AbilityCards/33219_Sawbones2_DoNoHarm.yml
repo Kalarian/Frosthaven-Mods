@@ -63,7 +63,9 @@ Layout:
         - Row: "<size=20%> "
         - Row: "$FHS_GH2E_Sawbones2_19_T$"
         - Row: "<size=20%> "
-        - Row: "$FHS_GH2E_Sawbones2_19_T2$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$FHS_GH2E_Sawbones2_19_T2$"
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"

@@ -76,4 +76,6 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
             - Column:
         - Row: "<size=20%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark

@@ -83,4 +83,6 @@ Layout:
         - Row: "<size=100%> "
         - XPTracker: BDamageAttacker
         - Row: "<size=20%> "
-        - Infuse: Dark
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Dark

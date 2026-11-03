@@ -139,3 +139,16 @@ Trickster's Reversal top, Spring the Trap bottom, Watch it Burn top) want a benc
   plugin leaves it out of every immunity check that isn't an attack on her (conditions put on by a non-attack ability,
   traps, her own effects land). Mastery 1's counts are the hidden resources GH2EFlankAttacks / GH2EFlankBad (saved with
   the scenario). Spring the Trap's designation is used once and forgotten; with none, no trap can be relocated.
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/SC2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- 09 Special Mixture top: infuse Dark
+- 11 Smoke Bomb top: infuse Dark
+- 16 Flintlock top: infuse Fire
+- 28 Watch it Burn top: infuse Fire

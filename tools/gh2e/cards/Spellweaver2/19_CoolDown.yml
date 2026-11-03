@@ -47,4 +47,6 @@ Layout:
         - Row: "$Range$ <sprite name=Range> *BAttack.Range*"
         - Row: "$Pierce$ <sprite name=Pierce> *BAttack.Pierce* @BAttack.Pierce@"
         - Row: "<size=20%> "
-        - Infuse: Ice
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Ice

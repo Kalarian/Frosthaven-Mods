@@ -41,7 +41,9 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Range> *TBlessStrengthen.Range*</link>"
             - Column:
         - Row: "<size=50%> "
-        - Infuse: Light
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Light
     Bottom:
         - Row: "$FHS_GH2E_Sunkeeper2_03_B$"
         - Row: "<size=20%> "

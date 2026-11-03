@@ -48,7 +48,9 @@ Layout:
                 - Row: "<link=fhpill>, <sprite name=Stun></link>"
             - Column:
         - Row: "<size=20%> "
-        - Infuse: Air
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Air
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"

@@ -44,7 +44,9 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Target> *TStrengthen.Target* <sprite name=Range> *TStrengthen.Range*</link>"
             - Column:
         - Row: "<size=50%> "
-        - Infuse: Fire
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Fire
     Bottom:
         - Active:
             Ability: BPrevent

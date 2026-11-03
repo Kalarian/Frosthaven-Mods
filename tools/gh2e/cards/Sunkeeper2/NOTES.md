@@ -129,3 +129,27 @@ Plugin GHSunkeeper2e (misc vars on the pack abilities):
 - Perk Shielding Light (Sunkeeper211) = GHPerks (with Lay on Hands counted as a heal of the target's maximum HP).
 - Mastery Hammer of Dawn = FrosthavenMods_AttacksWithDamage (any three attacks, one target each, of 8+ damage).
 - Re-audit fix (2026-11-02, fix-reaudit-B): Beacon of Light's splash never heals the Sunkeeper herself ("allies").
+
+## "!" boxes (mandatory triggers, 2e rulebook p.35)
+
+Drawn with Frosthaven's own `- MandatoryTrigger: Layout:` box (Banner Spear Javelin, Boneshaper Malicious
+Conversion for two elements in one box), found on the card images (local/gh2e-data/cards/images/SK2), the
+corner XP/lost/persistent boxes aside (Frosthaven draws its own corner). Each boxed effect is mandatory in the
+data: half infusions always happen, element pickers and self/ally effects have `CanSkip: False` or are plugin
+rules with no prompt.
+
+- 02 Holy Strike bottom: infuse Light
+- 03 Empowering Command top: infuse Light
+- 04 Dazzling Charge bottom: infuse Light
+- 04 Dazzling Charge top: infuse Light
+- 05 Lay On Hands top: infuse Light
+- 10 Protective Blessing bottom: infuse Light
+- 11 Defensive Stance bottom: "Whenever you perform a move ability, add -1 move." (the -1 Move sub-ability now also says `CanSkip: False`)
+- 13 Sanctify top: infuse Light
+- 17 Engulfing Radiance bottom: infuse Light
+- 17 Engulfing Radiance top: infuse Light
+- 19 Righteous Strength top: infuse Light
+- 20 Cautious Advance top: infuse Light
+- 22 Path of Glory bottom: infuse Light
+- 25 Bright Aegis top: infuse Light
+- 27 Warding Blow bottom: infuse Light
