@@ -236,9 +236,10 @@ PRINTED_EXCEPTIONS = {
         "the summon's own end-of-turn Heal 1 lives in its summon file (summons/RockColossus2.yml), not on the card",
     (32530, "Top", "number Pull 2"):       # Gravity Bomb: the token performs the pull at the end of your next turn
         "the token's Pull 2 / damage 5 / damage 1 live in its summon file (summons/GravityBomb.yml, GHMapTokens.cs), not on the card",
+    (33228, "Bottom", "round"):            # Secret of the Oak: the +4 Attack / +4 Move "that round" choice
+        "the plugin's template BSecretChoice (GHSawbones2e) holds one-use round bonuses: printed 'that round', not a round icon",
     # --- OPEN rows (ALL.json): the printed rule needs a plugin system another task builds; remove the line when it ships ---
     (32625, "Bottom", "persistent"): "OPEN Berserker2-27 Bone Breaker: the character token (persistent) is not built",
-    (33226, "Top", "persistent"): "OPEN Sawbones2-25 Take Your Medicine: the per-turn Prescription is not built",
     (32327, "Top", "persistent"): "OPEN SilentKnife-11 Hired Help: the money-token cost and token are not built",
     (33416, "Bottom", "round"): "OPEN Soothsinger2-21 Soothing Lullaby: the token on the monster is not built",
     (33429, "Bottom", "round"): "OPEN Soothsinger2-26 Grand Finale: 'skip moving your token this round' is not built",

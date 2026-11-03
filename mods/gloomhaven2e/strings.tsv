@@ -1380,6 +1380,8 @@ GH2E_SUMMON_WildfuryBear	Bear
 GH2E_SUMMON_WindIdol	Wind Idol
 GH2E_Sawbones2_18_NEGATE	Negate the next damage you would suffer this round
 GH2E_Sawbones2_19_T	Place a character token on the target. The next three times they lose <sprite name=Stun>, they gain <sprite name=Stun>.
+GH2E_Sawbones2_PLAYPACK_HELP	You may play one "Medical Pack" ability card from your hand to perform one action of the card
+GH2E_Sawbones2_SECRET_HELP	Secret of the Oak: you may add +4 <sprite name=Attack> to your next attack this round or +4 <sprite name=Move> to your next move ability this round
 GH2E_Soultether_03_T	Whenever a Shadow Wolf dies, <sprite name=CreateDark> and all Shadow Wolves gain <sprite name=Invisible>.
 GH2E_Soultether_21_B	All allies within <nobr><sprite name=Range> 3</nobr> gain <nobr><sprite name=Retaliate> 1</nobr>, <nobr><sprite name=Range> 3</nobr> while <sprite name=Fire> is strong or waning.
 GH2E_Soultether_22_T	Add +1 <sprite name=Heal> to all heals targeting this summon. At the end of each of this summon's turns, it performs: <nobr><sprite name=Heal> 1</nobr>.
@@ -1768,6 +1770,8 @@ PERK_Sawbones2_09_Name	Restorative Rounds
 PERK_Sawbones2_09_Desc	At the end of each of your rests, if an ally has an active Prescription, gain one "Medical Pack" ability card and move the token on one ally's active Prescription backward one slot
 Sawbones2_MASTERY_1_Name	Constant Care
 Sawbones2_MASTERY_1_Desc	In a single scenario, give an ally a medical pack or a Prescription each round except when performing a long rest
+Sawbones2_MASTERY_2_Name	Triage
+Sawbones2_MASTERY_2_Desc	In a single scenario, never attack an undamaged enemy while there are any damaged monsters alive, and perform at least 10 attacks
 Sawbones2_FullName	Sawbones
 CODEX_Hero_Sawbones2_Title	Sawbones
 CODEX_HeroInfo_Sawbones2	You also have Prescription actions, which can only be performed if you have at least one adjacent character ally. When you perform a Prescription action, immediately place that card in the adjacent ally’s active area. When they discard one of these cards, place that ability card in your discard pile instead of theirs.\n\nYou have some attack abilities that gain bonuses if the target is damaged. This is always determined before attacking.

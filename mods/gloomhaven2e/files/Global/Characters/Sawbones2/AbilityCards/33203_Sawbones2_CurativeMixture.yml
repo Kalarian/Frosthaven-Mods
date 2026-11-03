@@ -5,8 +5,8 @@ ID: 33203
 Level: 1
 Initiative: 8
 # card: Curative Mixture
-# "remove one negative condition": RemoveConditions 1 over the removable list (the game picks which one, as its Cure
-# Potion comment says; Frosthaven's own "choose which" needs a Choose block on yourself only). Top: the removal comes
+# "remove one negative condition": RemoveConditions 1 over the removable list; with two or more of them on the target,
+# the plugin (GHSawbones2e, MiscVars GH2E_ChooseCondition) asks the performer which one goes. Top: the removal comes
 # first (the parent ability picks the target), the heal is its sub-ability on the same figure.
 Discard: [Discard,Discard]
 Data:
@@ -21,6 +21,8 @@ Data:
                 Range: 1
                 Filter: [Self, Ally]
                 AnimOverload: Heal
+                MiscVars:
+                    GH2E_ChooseCondition: True
                 SubAbilities:
                     THeal:
                         Heal:
@@ -39,6 +41,8 @@ Data:
                 Range: 1
                 Filter: Ally
                 AnimOverload: BuffAdjacent
+                MiscVars:
+                    GH2E_ChooseCondition: True
 Layout:
     Top:
         - Row:

@@ -151,3 +151,25 @@ packcheck 0 problems / 0 warnings, rulecheck 48 ok, no gh_port warnings, no miss
 ## 2026-11-02: modifier abilities and Safeguard
 
 - Perks (2026-11-02, supersede the lines above): Emergency Supplies is `AMC_GH2E_Sawbones2_Pack_M2` with a plain GiveSupplyCard (run after the attack by GHModifierAbilities.cs, no Choose; mandatory as printed); Follow-up Care is two `AMC_GH2E_Sawbones2_FollowUp_P1`, +1 that the plugin reads as +2 while an ally has an active Prescription (GHModifierRewrites.cs). Sedation is still the plain +1 (a Choose on a modifier stopped the game; open).
+
+## 2026-11-02: card-accuracy pass (sunkeeper-sawbones; supersedes the matching lines above)
+
+- Medical Packs: a give draws one of the free packs at random with the scenario's seeded generator (GHSupplyCards,
+  2nd edition supply cards only; "GHRule RandomMedicalPack").
+- "Remove one negative condition" (03 top/bottom, 23 bottom): MiscVars GH2E_ChooseCondition; with two or more removable
+  conditions on the target the performer is asked which one (GHSawbones2e; the engine's yes/no box per condition).
+- 23 Return the Favor bottom: GH2E_TransferRemoved: the removed condition may go to one enemy adjacent to the Sawbones.
+- Prescription tokens back (15 Precaution top: GH2E_PrescriptionBack, each ally decides; perk Restorative Rounds:
+  GH2E_PrescriptionBackOne, the Sawbones picks one): the plugin moves the bonus's slot back (TrackerIndex - 1).
+- 26 Take Your Medicine: top is a real Prescription (start-of-turn GiveSupplyCard on the ally, three slots); the pack
+  comes from the Sawbones' supply (GHSupplyCards.Supplier). Bottom: GH2E_AlliesPlayPacks: each ally with a pack, in
+  initiative order, performs the template BPlayPack (SelectAndPlayCard from its own hand, supply cards only).
+- 28 Secret of the Oak bottom: GH2E_SecretOfTheOak marker; after each Medical Pack heal the performer gets the template
+  BSecretChoice (+4 Attack next attack / +4 Move next move this round, skippable).
+- Templates: abilities tagged GH2E_Template are taken out of the card's action when the card is read (GHSawbones2eTemplates).
+- Perks: Potent Remedies = GHPerks (+1 on Medical Pack heals); Friend of the Oak = one free Temple blessing per outpost
+  phase for the Sawbones or an ally (the FAQ's Devout; GHSawbones2e; the "used" mark is kept in memory only).
+- Masteries: Constant Care = FrosthavenMods_PackOrPrescriptionEveryRound (packs / Prescriptions to an ally only,
+  long-rest rounds skipped); the second (named "Triage" here, the sheet prints no names) =
+  FrosthavenMods_NoUndamagedWhileDamaged (10+ attacks, none on an undamaged enemy while a damaged monster lives; the
+  violations are noted as the attacks happen, in memory).

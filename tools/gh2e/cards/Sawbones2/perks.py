@@ -24,15 +24,18 @@ PERKS = [
      {"CardsToAdd": "[AMC_GH2E_Sawbones2_FollowUp_P1, AMC_GH2E_Sawbones2_FollowUp_P1]"}),
     (2, "Field Dressing", 'Add one "<sprite name=Heal> 3, <sprite name=Range> 1" <sprite name=Rolling>',
      {"CardsToAdd": "[AMC_GH2E_Sawbones2_Heal3Range1_R]"}),
-    # text only until the plugin knows "a heal on a Medical Pack card" (NOTES.md)
+    # answered by the plugin (GHPerks.cs, perk ID Sawbones207): +1 on every heal of a Medical Pack (33230-33235)
     (1, "Potent Remedies", 'Add +1 <sprite name=Heal> to all heal abilities on "Medical Pack" ability cards',
      {"Cost": 2, "Flags": "[Passive]"}),
-    # Frosthaven has no Sanctuary of the Great Oak donation in its outpost phase: text only (NOTES.md)
+    # the FAQ (Devout): "works just as normal for the Temple, once it is built": in each outpost phase one Temple of the
+    # Great Oak blessing for you or an ally costs no gold (Frosthaven's blessing cost; no refunds). Plugin GHSawbones2e
+    # (perk ID Sawbones208)
     (1, "Friend of the Oak", "Each City Phase after completing a scenario, your or one ally's donation to the Sanctuary of the Great Oak is free",
      {"Cost": 2, "Flags": "[Passive]"}),
     # after each of your rests (long and short), if an ally holds an active Prescription: you gain one Medical Pack (the
-    # Sawbones gives it to herself, so the pack comes from her own supply). Moving a Prescription's token back needs
-    # the plugin (MoveActiveBonusTracker only moves the holder's own class cards; NOTES.md)
+    # Sawbones gives it to herself, so the pack comes from her own supply), then she may move the token on one ally's
+    # active Prescription back one slot (the plugin, GHSawbones2e, MiscVars GH2E_PrescriptionBackOne: MoveActiveBonusTracker
+    # only moves the holder's own class cards)
     (1, "Restorative Rounds", 'At the end of each of your rests, if an ally has an active Prescription, gain one "Medical Pack" ability card and move the token on one ally\'s active Prescription backward one slot',
      {"Cost": 3, "Flags": "[Passive, ExecuteAbilitiesAfterLongRest, ExecuteAbilitiesAfterShortRest]", "Abilities": f"""\
     AGivePack:
@@ -42,6 +45,8 @@ PERKS = [
             ActorType: Player
         CanUndo: False
         AnimOverload: GivePackAdjacent
+        MiscVars:
+            GH2E_PrescriptionBackOne: True
         StartAbilityRequirements:
             Type: ThisAbility
             Vars:
@@ -51,19 +56,32 @@ PERKS = [
 MASTERIES = [
     ("Constant Care", "In a single scenario, give an ally a medical pack or a Prescription each round except when performing a long rest",
      """\
-# The 1st edition crossover's Bedside Manner tag: an ally helped on every turn the Sawbones takes (a heal, shield,
-# supply card, buff or recovery with an ally among its targets), answered by the Frosthaven Mods plugin (GHMasteries.cs).
-# Broader than the sheet (any ally help counts, not only packs and Prescriptions), and long-rest rounds are not exempt
-# unless the plugin skips them (NOTES.md).
+# Answered by the Frosthaven Mods plugin (GHMasteries.cs, FrosthavenMods_PackOrPrescriptionEveryRound): in every round
+# the Sawbones took a turn, except the rounds she long rested, she gave an ally a Medical Pack (GiveSupplyCard) or put
+# a Prescription (an ability tagged GH2E_Prescription) on an ally.
 CheckAtEndOfScenario: True
 BattleGoalCondition:
     - Targets:
         Filter: CountXRounds
         SubFilter: Scenario
-        EnemyFamilies: [FrosthavenMods_AllySupportEveryTurn]
+        EnemyFamilies: [FrosthavenMods_PackOrPrescriptionEveryRound]
         CharacterIDs:
             ActorID: Sawbones2ID
         Value: 1"""),
+    ("Triage", "In a single scenario, never attack an undamaged enemy while there are any damaged monsters alive, and perform at least 10 attacks",
+     """\
+# Answered by the Frosthaven Mods plugin (GHMasteries.cs, FrosthavenMods_NoUndamagedWhileDamaged): Value attacks (one
+# per target of an attack ability) and none of them on an enemy at full hit points while a damaged monster is alive
+# (each attack is checked as it happens).
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_NoUndamagedWhileDamaged]
+        CharacterIDs:
+            ActorID: Sawbones2ID
+        Value: 10"""),
 ]
 
 NEW_CARDS = {

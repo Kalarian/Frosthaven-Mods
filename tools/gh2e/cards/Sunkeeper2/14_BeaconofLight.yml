@@ -1,26 +1,20 @@
 # card: Beacon of Light
-# top: "your next three single-target heals also target all allies within range 2 of the primary target" (NEEDS
-# PLUGIN): Frosthaven's use-limited heal override (Gemstone Resonance's OverrideAbility on Heal, Death Spiral's
-# XPTracker) giving the heal +2 targets, aimed from you within the heal's own range.
+# top: "your next three single-target heals from your ability cards also target all allies within range 2 of the
+# primary target": a persistent marker bonus with the three slots (Secret of the Oak's NullTargeting shape, MiscVars
+# GH2E_HealSplash: 2); the plugin (GHSunkeeper2e) applies the heal to the allies around the primary target and moves
+# the slot after each such heal.
 Discard: [Lost,Discard]
 Data:
     Top:
         Abilities:
             TActive:
-                AddActiveBonus:
-                    Null: True
+                NullTargeting: True
                 Filter: Self
+                MiscVars:
+                    GH2E_HealSplash: 2
                 ActiveBonus:
                     Duration: Persistent
-                    IsAura: True
-                    AuraFilter: [Self]
-                    AuraTargeting: All
-                    Behaviour: OverrideAbility
-                    ValidAbilityTypes: [Heal]
                     XPTracker: [1,0,1]
-                    ActiveBonusAbilityOverrides:
-                        TCOverride:
-                            Target: 2
                 AnimOverload: PowerUp
     Bottom:
         Abilities:

@@ -6,7 +6,7 @@ Level: 1
 Initiative: 85
 # card: Defensive Stance
 # bottom: Shield 1 and the mandatory -1 Move as the 1st edition card wrote them; "reduce the Pierce of attacks
-# targeting you by 2" has no Frosthaven ability (NEEDS PLUGIN): text only.
+# targeting you by 2": the plugin (GHSunkeeper2e) reads MiscVars GH2E_PierceReduction on the persistent Shield.
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -22,6 +22,8 @@ Data:
             BShield:
                 Shield: 1
                 ActiveBonusDuration: Persistent
+                MiscVars:
+                    GH2E_PierceReduction: 2
                 SubAbilities:
                     BShieldSubMoveDebuff:
                         Move: -1

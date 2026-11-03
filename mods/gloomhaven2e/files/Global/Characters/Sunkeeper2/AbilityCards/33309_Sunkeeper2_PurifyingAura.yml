@@ -5,7 +5,8 @@ ID: 33309
 Level: 1
 Initiative: 21
 # card: Purifying Aura
-# "attacks performed by an adjacent enemy": the 1st edition card's melee filter (AttackType: Melee).
+# "attacks performed by an adjacent enemy": any attack (melee or ranged) whose attacker stands next to you; the plugin
+# (GHSunkeeper2e, MiscVars GH2E_AdjacentAttackerOnly) makes the bonus skip the others (no Retaliate, no slot used).
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -14,9 +15,10 @@ Data:
                 Retaliate: 3
                 Filter: Self
                 AnimOverload: PowerUp
+                MiscVars:
+                    GH2E_AdjacentAttackerOnly: True
                 ActiveBonus:
                     Duration: Persistent
-                    AttackType: Melee
                     Behaviour: Retaliate
                     XPTracker: [1,0,1,0,1]
     Bottom:

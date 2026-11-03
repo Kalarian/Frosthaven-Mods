@@ -50,3 +50,5 @@ AMC_GH2E_Sawbones2_Pack_M2	-2, give one adjacent ally or self one Medical Pack
 AMC_GH2E_Sawbones2_DisarmStun_P1	+1 <sprite name=Stun>, gain <sprite name=Disarm>
 AMC_GH2E_Sawbones2_Heal3Range1_R	<sprite name=Heal> 3, <sprite name=Range> 1 (rolling)
 AMC_GH2E_Sawbones2_FollowUp_P1	+1, add +1 <sprite name=Attack> if an ally has an active Prescription
+GH2E_Sawbones2_PLAYPACK_HELP	You may play one "Medical Pack" ability card from your hand to perform one action of the card
+GH2E_Sawbones2_SECRET_HELP	Secret of the Oak: you may add +4 <sprite name=Attack> to your next attack this round or +4 <sprite name=Move> to your next move ability this round

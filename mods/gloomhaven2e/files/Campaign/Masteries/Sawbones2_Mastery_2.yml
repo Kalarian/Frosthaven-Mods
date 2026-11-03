@@ -1,0 +1,17 @@
+Parser: Mastery
+ID: Sawbones2_MASTERY_2
+LocalisedName: Sawbones2_MASTERY_2_Name
+LocalisedDescription: Sawbones2_MASTERY_2_Desc
+PerkPoints: 1
+# Answered by the Frosthaven Mods plugin (GHMasteries.cs, FrosthavenMods_NoUndamagedWhileDamaged): Value attacks (one
+# per target of an attack ability) and none of them on an enemy at full hit points while a damaged monster is alive
+# (each attack is checked as it happens).
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_NoUndamagedWhileDamaged]
+        CharacterIDs:
+            ActorID: Sawbones2ID
+        Value: 10

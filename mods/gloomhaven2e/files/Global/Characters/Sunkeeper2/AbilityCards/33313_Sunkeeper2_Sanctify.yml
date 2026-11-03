@@ -6,7 +6,8 @@ Level: X
 Initiative: 39
 # card: Sanctify
 # top: an attack aura on allies within range 2 (Frosthaven's Birds In a Tempest aura shape, BuffAttack) with three use
-# slots. "+2 Attack instead if they have Ward" needs a per-attacker check: NEEDS PLUGIN, +1 for everyone here.
+# slots. "+2 Attack instead if they have Ward": the plugin (GHSunkeeper2e) adds MiscVars GH2E_WardBonus (+1 more) to the
+# aura's strength while the attacking ally has Ward.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -16,6 +17,8 @@ Data:
                 Range: 2
                 Target: -1
                 Filter: Self
+                MiscVars:
+                    GH2E_WardBonus: 1
                 ActiveBonus:
                     Duration: Persistent
                     Behaviour: BuffAttack
