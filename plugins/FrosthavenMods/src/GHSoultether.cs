@@ -215,15 +215,28 @@ namespace FrosthavenMods
 
         // ------------------------------------------------------------------ Rift Spirit: the summoner picks the grant's ally
 
+        private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<CAbility, object> _oneAlly = new System.Runtime.CompilerServices.ConditionalWeakTable<CAbility, object>();
+        private static class OneAllyLogged
+        {
+            internal static bool Add(CAbility a) { if (a == null || _oneAlly.TryGetValue(a, out _)) return false; _oneAlly.Add(a, new object()); return true; }
+        }
+
         [HarmonyPatch(typeof(CAbilityTargeting), nameof(CAbilityTargeting.SortValidActorsInRange))]
         [HarmonyPostfix]
         private static void AfterSort(CAbilityTargeting __instance, CActor actorApplying, ref List<CActor> validActorsInRange)
         {
             try
             {
-                if (__instance?.MiscVars == null || validActorsInRange == null || validActorsInRange.Count < 2 || !GHPlague.Marked(__instance, "GH2E_SummonerPicksTarget")) return;
+                if (__instance?.MiscVars == null || validActorsInRange == null || !GHPlague.Marked(__instance, "GH2E_SummonerPicksTarget")) return;
                 CActor owner = SummonerOf(actorApplying);
                 if (owner == null) return;
+                // (2026-11-03: with one ally in range there is no choice to make; say so, so the grant is still seen)
+                if (validActorsInRange.Count < 2)
+                {
+                    if (validActorsInRange.Count == 1 && OneAllyLogged.Add(__instance))
+                        Rule("RiftSpiritGrant", 0, $"{GHPlague.NameOf(actorApplying)}'s {__instance.AbilityType}: only {GHPlague.NameOf(validActorsInRange[0])} in range, no pick for {GHPlague.NameOf(owner)}");
+                    return;
+                }
                 for (int i = 0; i < validActorsInRange.Count - 1; i++)
                 {
                     CActor c = validActorsInRange[i];
