@@ -56,8 +56,10 @@ Data:
                 Vars:
                     Pushed: CustomAbility.FindAbilityInPhaseByName("TPush")
                 TargetingVars:
-                    AddValidActorsInRange: Pushed.ActorsTargeted.Where(obj.IsDead == False && obj.GH2EPushTear == True)
-                    AddActorsToTarget: Pushed.ActorsTargeted.Where(obj.IsDead == False && obj.GH2EPushTear == True)
+                    # (the same lists as TTearCurse, seen working in game: Push targets one figure and the requirement
+                    # below already checks that it entered a Tear; GHTears.cs logs "GHRule TearDamage" per hit)
+                    AddValidActorsInRange: Pushed.ActorsTargeted
+                    AddActorsToTarget: Pushed.ActorsTargeted
                 StartAbilityRequirements:
                     Type: ThisAbility
                     Vars:
