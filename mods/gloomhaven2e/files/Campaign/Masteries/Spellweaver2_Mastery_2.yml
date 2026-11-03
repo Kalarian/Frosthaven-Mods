@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Spellweaver2_MASTERY_2
+LocalisedName: Spellweaver2_MASTERY_2_Name
+LocalisedDescription: Spellweaver2_MASTERY_2_Desc
+PerkPoints: 1
+# mastery 1 of the sheet. Answered by the Frosthaven Mods plugin (GHSpellweaver2e.cs, FrosthavenMods_FireAndIceSameTurn):
+# Value turns in which the Spellweaver consumed both Fire and Ice, from the element records.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_FireAndIceSameTurn]
+        CharacterIDs:
+            ActorID: Spellweaver2ID
+        Value: 6

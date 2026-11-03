@@ -1,8 +1,7 @@
 # card: Warm Up
-# top: persistent, one use (the single dashed slot): approximated as a one-use toggle +1 Attack bonus (Frosthaven's
-# Tidal Blast bottom shape: BuffAttack, IsToggleBonus) the player turns on for the next attack ability of a lost action;
-# Frosthaven's BuffAttack never checks requirements, so the "from an action with [lost]" condition is the player's
-# (NEEDS PLUGIN for the exact rule). Top is persistent only (no lost icon): discarded when the use ends.
+# top: persistent, one use (the single dashed slot): a +1 Attack BuffAttack bonus that the plugin (GHSpellweaver2e.cs,
+# WarmUp) lets count only on an attack ability of an action with a lost icon; every attack of that ability gets +1 and
+# the slot is spent when the ability ends. Top is persistent only (no lost icon): discarded when the use ends.
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -23,7 +22,6 @@ Data:
                     Duration: Persistent
                     Behaviour: BuffAttack
                     ValidAbilityType: Attack
-                    IsToggleBonus: True
                     XPTracker: [0]
         Infuse: Fire
     Bottom:

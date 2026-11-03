@@ -9,6 +9,15 @@ Tinkerer2SharedSupplies:
     Hidden: True
     MaxAmount: 1
 
+GH2EAllSixElements:
+    # pack-wide: hidden, a marker the plugin puts on the Elementalist the first time in a scenario all six elements are
+    # strong or waning at once (GHElementalist2e.cs, mastery 2); saved with the scenario, counted at its end
+    ID: "GH2EAllSixElements"
+    Sprite: "GHClass_Elementalist2"
+    LocKey: "$GH_GH2E_Elementalist2_ALLSIX_TOOLTIP$"
+    MaxAmount: 1
+    Hidden: True
+
 GH2ESafeguard:
     # pack-wide: the Safeguard condition token (2e rulebook: the next negative condition the figure would gain is
     # prevented, then Safeguard is removed; no stacking: MaxAmount 1). Given and spent by the plugin (GHSafeguard.cs);

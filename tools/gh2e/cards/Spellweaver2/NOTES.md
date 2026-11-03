@@ -113,3 +113,16 @@ card below) and the engine code (decompiled ScenarioRuleLibrary), so every "veri
 
 `GH2E_SKIP_RULECHECK_BUILD=1 python tools/gh2e/check.py Spellweaver2`: CHECK PASSED (27 of 27 cards, packcheck 0
 problems / 2 warnings (SelectAndPlayCard, above), rulecheck 42 ok, no gh_port warnings, no missing text keys).
+
+## Card-accuracy pass, 2026-11-02 (plugin GHSpellweaver2e.cs; supersedes the NEEDS PLUGIN items above)
+- Ice Armor top: any ally, an ally's summon included; the slots' XP goes to the Spellweaver ("GHRule IceArmor").
+- Freezing Nova top: MiscVars GH2E_ClosestTargets 4: only the 4 nearest enemies (ties kept) are valid ("GHRule
+  ClosestTargets"). Inferno top: Range 2 with line of sight is the approved reading (QUESTIONS.md B); unchanged.
+- Warm Up top: no toggle; counts only on an attack ability of a lost action, on all its attacks, the slot spent at its
+  end ("GHRule WarmUp").
+- Freezing Vortex top: a 1-hex obstacle (FrozenFistObstacle) in each killed target's featureless hex ("GHRule
+  FreezingVortex").
+- Spent Power: the +1 becomes +3 during an action with a lost icon ("GHRule SpentPower"). Etheric Bond: Reviving Ether
+  back to hand when her short rest starts ("GHRule EthericBond"; 2nd edition only, the 1st edition perk still has none).
+- Mastery FireAndIceSameTurn written (Spellweaver2_MASTERY_2: the printed mastery 1, listed second so the shipped ID
+  of Deep Reserves stays).

@@ -6,6 +6,7 @@ Race: Savvas
 Traits: [ Arcane, Educated, Intimidating ]
 Complexity: 4
 ElementalAffinities: [ Fire, Ice, Air, Earth, Light, Dark ]
+MasteryIDs: [ Elementalist2_MASTERY_1, Elementalist2_MASTERY_2 ]
 DefaultSkin: 1
 # PlayerLevel:  [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
 HealthTable: [ 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
