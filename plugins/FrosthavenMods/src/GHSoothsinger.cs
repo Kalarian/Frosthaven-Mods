@@ -698,10 +698,10 @@ namespace FrosthavenMods
                     totalConditions = need;
                     conditionsMet = wasted + left == 0 ? Math.Min(made, need) : 0;
                     __result = made >= need && wasted == 0 && left == 0;
-                    Plugin.Log.LogInfo($"GHRule SSMastery card 0 Perfect Pitch: {made} Notes created, {wasted} wasted by Songs, {left} left{(__result ? ": met" : "")}");
+                    GHMasteryProgress.Once("SSMastery", $"Perfect Pitch: {made} Notes created, {wasted} wasted by Songs, {left} left{(__result ? ": met" : "")}");
                     return false;
                 }
-                Plugin.Log.LogInfo($"GHRule SSMastery card 0 Medley: {conditionsMet}/{totalConditions} different Songs{(__result ? ": met" : "")}");
+                GHMasteryProgress.Once("SSMastery", $"Medley: {conditionsMet}/{totalConditions} different Songs{(__result ? ": met" : "")}");
             }
             catch (Exception e)
             {

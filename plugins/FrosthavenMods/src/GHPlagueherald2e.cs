@@ -471,7 +471,7 @@ namespace FrosthavenMods
             total = needed;
             met = Math.Min(best, needed);
             result = best >= needed;
-            Plugin.Log.LogInfo($"GHRule KillsWithoutModifier card 0 mastery: best turn {best} kills without a modifier draw (needs {needed}){(result ? ": met" : "")}");
+            GHMasteryProgress.Once("KillsWithoutModifier", $"mastery: best turn {best} kills without a modifier draw (needs {needed}){(result ? ": met" : "")}");
         }
 
         private static void PoisonEveryRound(List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
@@ -483,7 +483,7 @@ namespace FrosthavenMods
             total = Math.Max(1, rounds.Count);
             met = Math.Min(marked, total);
             result = rounds.Count > 0 && marked >= rounds.Count;
-            Plugin.Log.LogInfo($"GHRule PoisonEveryRound card 0 mastery: Poison given or removed in {marked} rounds of {rounds.Count} with a turn{(result ? ": met" : "")}");
+            GHMasteryProgress.Once("PoisonEveryRound", $"mastery: Poison given or removed in {marked} rounds of {rounds.Count} with a turn{(result ? ": met" : "")}");
         }
 
         // ------------------------------------------------------------------ our text

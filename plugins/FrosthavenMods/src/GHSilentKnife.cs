@@ -510,7 +510,7 @@ namespace FrosthavenMods
                     totalConditions = needed + 1;
                     conditionsMet = Math.Min(attacks, needed) + (bad == 0 ? 1 : 0);
                     __result = bad == 0 && attacks >= needed;
-                    Plugin.Log.LogInfo($"GHRule FlankedOrIsolated card 0 mastery: {attacks} attacks (needs {needed}), {bad} on a target neither flanked nor isolated{(__result ? ": met" : "")}");
+                    GHMasteryProgress.Once("FlankedOrIsolated", $"mastery: {attacks} attacks (needs {needed}), {bad} on a target neither flanked nor isolated{(__result ? ": met" : "")}");
                     return false;
                 }
                 if (tags.Contains(MoneyEndTag))

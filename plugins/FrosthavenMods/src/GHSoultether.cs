@@ -393,7 +393,7 @@ namespace FrosthavenMods
             total = needed;
             met = Math.Min(kept, needed);
             result = kept >= needed;
-            Plugin.Log.LogInfo($"GHRule SummonCardsKept card 0 mastery: {cards.Count} summon cards before the first rest{(firstRest == int.MaxValue ? " (no rest)" : $" (round {firstRest})")}, {kept} still in the active area (needs {needed}){(result ? ": met" : "")}");
+            GHMasteryProgress.Once("SummonCardsKept", $"mastery: {cards.Count} summon cards before the first rest{(firstRest == int.MaxValue ? " (no rest)" : $" (round {firstRest})")}, {kept} still in the active area (needs {needed}){(result ? ": met" : "")}");
         }
 
         private static HashSet<string> CurrentFirstRound(List<CPlayerStats> stats)
@@ -494,7 +494,7 @@ namespace FrosthavenMods
             total = needed;
             met = Math.Min(n, needed);
             result = n >= needed;
-            Plugin.Log.LogInfo($"GHRule FirstRoundSummons card 0 mastery: {n} scenarios with a different round-1 summon ability ({all.Count} scenarios with round-1 summons, this one {now.Count}; needs {needed}){(result ? ": met" : "")}");
+            GHMasteryProgress.Once("FirstRoundSummons", $"mastery: {n} scenarios with a different round-1 summon ability ({all.Count} scenarios with round-1 summons, this one {now.Count}; needs {needed}){(result ? ": met" : "")}");
         }
 
         [HarmonyPatch(typeof(ScenarioController), nameof(ScenarioController.CompleteActiveScenario))]
