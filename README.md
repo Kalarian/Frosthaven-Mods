@@ -46,6 +46,7 @@ When a new version is out, the Mods tab says so: click **Update the app**, then 
 | Reveal event outcomes | See what each event choice will do before you pick it | Information only |
 | Show personal quest rewards | Quest cards show which building each quest unlocks when you retire | No |
 | Reduced randomness | No nulls or x2s in modifier decks: a -2 and a +2 instead | Yes |
+| Stacking attack bonuses (on by default) | Every +X Attack bonus on an attack adds up, as in the board game (rulebook p.25) | Yes (official rule) |
 | Masteries carry over | A mastery earned once counts for every later character of that class | Yes |
 | Dwarf's balance changes | Fixes for some of the campaign's rough spots, from Dwarf74's well-known campaign tweaks | Yes |
 | More story events | Town events that unlock something come up more often | Yes |
