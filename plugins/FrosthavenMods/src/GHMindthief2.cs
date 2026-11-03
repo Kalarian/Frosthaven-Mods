@@ -15,8 +15,9 @@ namespace FrosthavenMods
     ///     target, Targeting All / all targets, or an area of effect (CAbilityAttack.Start applies augment overrides
     ///     through CAbility.OverrideAbilityValues).
     ///   - TargetsAdjacent (Domination top, "control two enemies ... that are adjacent to each other"): on an ability
-    ///     marked GHTargetsAdjacent, once a target is picked, a further pick that is not adjacent to a picked one is
-    ///     refused (SharedAbilityTargeting.TileSelected, where every targeting ability's picks land).
+    ///     marked GHTargetsAdjacent, once a target is controlled, a further pick that is not adjacent to a picked one is
+    ///     refused (CAbilityTargeting.TileSelected: control is one target at a time, the earlier one is in ActorsTargeted);
+    ///     both outcomes log ("accepted: adjacent pair" / "refused: not adjacent").
     ///   - AugmentChoice (Domination bottom, "if you play a third AUGMENT, you must discard either of the other two; if
     ///     you discard this card and you have two active AUGMENTS, you must discard one"): Frosthaven's own slot choice
     ///     (Choreographer.Handle_ActiveBonusAugmentSlotChoice) always drops Augments[0] and the slot refresh trims the
@@ -102,19 +103,43 @@ namespace FrosthavenMods
 
         // ------------------------------------------------------------------ Domination top: adjacent targets
 
-        [HarmonyPatch(typeof(SharedAbilityTargeting), nameof(SharedAbilityTargeting.TileSelected))]
+        // (2026-11-03: the rule sat on SharedAbilityTargeting.TileSelected and never logged. A ControlActor ability is
+        // one target at a time (CAbilityControlActor sets m_OneTargetAtATime): CAbilityTargeting.TileSelected clears
+        // m_ActorsToTarget before it calls SharedAbilityTargeting, so the list was always empty there, and the earlier
+        // target (already controlled) lives in ActorsTargeted. It also only logged a refusal. Now it runs first in
+        // CAbilityTargeting.TileSelected, compares against ActorsTargeted (+ the current pick of a many-at-once ability),
+        // and logs both outcomes. A refused click is dropped before the engine touches its pick state (the engine had
+        // already stored the clicked actor as m_LastActorSelected, which confirm would then have applied).)
+        [HarmonyPatch(typeof(CAbilityTargeting), nameof(CAbilityTargeting.TileSelected))]
         [HarmonyPrefix]
-        private static bool TargetsAdjacent(CAbility ability, CTile selectedTile, ref List<CActor> actorsToTarget, ref bool __result)
+        private static bool TargetsAdjacent(CAbilityTargeting __instance, CTile selectedTile, List<CTile> optionalTileList)
         {
             try
             {
-                if (ability == null || selectedTile == null || actorsToTarget == null || actorsToTarget.Count == 0) return true;
-                if (!Marked(ability, "GHTargetsAdjacent")) return true;
-                CActor picked = selectedTile.LivingActor ?? ScenarioManager.Scenario?.FindActorAt(selectedTile.m_ArrayIndex);
-                if (picked == null || actorsToTarget.Contains(picked)) return true;
-                if (actorsToTarget.Any(a => a != null && a.IsAdjacentTo(picked))) return true;
-                __result = false;
-                Log("TargetsAdjacent", CardId(ability), $"{GHPlague.NameOf(picked)} refused: not adjacent to {string.Join(", ", actorsToTarget.Select(GHPlague.NameOf))}");
+                if (__instance == null || selectedTile == null || !Marked(__instance, "GHTargetsAdjacent")) return true;
+                CActor picked = selectedTile.LivingActor;
+                // only a valid new target is judged (anything else: the engine's own handling)
+                if (picked == null || __instance.ValidActorsInRange == null || !__instance.ValidActorsInRange.Contains(picked)) return true;
+                List<CActor> earlier = (__instance.ActorsTargeted ?? new List<CActor>())
+                    .Concat(__instance.OneTargetAtATime ? Enumerable.Empty<CActor>() : (__instance.ActorsToTarget ?? new List<CActor>()))
+                    .Where(a => a != null && a != picked).Distinct().ToList();
+                if (earlier.Count == 0) return true;   // the first target: any enemy in range
+                int card = CardId(__instance);
+                string others = string.Join(", ", earlier.Select(GHPlague.NameOf));
+                if (earlier.Any(a => a.IsAdjacentTo(picked)))
+                {
+                    Log("TargetsAdjacent", card, $"accepted: adjacent pair {GHPlague.NameOf(picked)} + {others}");
+                    return true;
+                }
+                Log("TargetsAdjacent", card, $"refused: not adjacent {GHPlague.NameOf(picked)} (to {others})");
+                __instance.InvalidTileReason = "FHMODS_MT_NOT_ADJACENT";
+                ScenarioRuleClient.MessageHandler(new CFinishedProcessingTileSelected_MessageData
+                {
+                    m_SelectedTile = selectedTile,
+                    m_OptionalTileList = optionalTileList,
+                    m_Ability = __instance,
+                    m_AreaEffectLocked = __instance.AreaEffectLocked
+                });
                 return false;
             }
             catch (Exception e) { Report("adjacent targets", e); return true; }
@@ -369,6 +394,7 @@ namespace FrosthavenMods
             ["FHMODS_MT_PUPPET"] = "Puppet Strings: should {0} use your attack modifier deck for this controlled attack?",
             ["FHMODS_MT_PUPPET_MINE"] = "My deck",
             ["FHMODS_MT_PUPPET_OWN"] = "Its own deck",
+            ["FHMODS_MT_NOT_ADJACENT"] = "Domination: the second enemy must be adjacent to the first.",
         };
 
         [HarmonyPatch(typeof(GLOOM.LocalizationManager), nameof(GLOOM.LocalizationManager.GetTranslation))]
