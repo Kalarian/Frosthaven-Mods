@@ -2,10 +2,13 @@
 # top: "! consume Air/Earth (either, required)": the split consume as Spirit Swap top (two GHElementEither steps the
 # plugin merges into one element picker: either element), then the invocation is placed when either was consumed. Invocation: after each of the Bear's next
 # three attacks, once each round, "Attack 2 on one enemy within 3 hexes, as if you occupied the Bear's hex".
-# APPROXIMATION: the Bear itself performs Attack 2, range 3 (same origin hex and reach; the attack counts as the
-# Bear's, not the Wildfury's). NEEDS PLUGIN to make it the Wildfury's attack. Three slots, XP on the first. Persistent.
+# The trigger's Attack 2 is marked GHBySummonerFromHex: the plugin (GHWildfury.cs) stacks it for the Wildfury instead of
+# the Bear, performed from the Bear's hex (TargetingOverrideArrayIndex, Frosthaven's own "perform from a hex"): her
+# attack, her modifier deck and bonuses, range and line of sight from the Bear (rulebook p21). Three slots, XP on the
+# first. Persistent.
 # bottom: Move 3 [square]; Heal 1 [square], Range 2 [square], consume Earth: +1 Heal, XP 1; "+1 Heal if the target is
-# the Bear": a target conditional override (the Bruiser's Sweeping Blow shape) filtered to the Bear. Untested on a heal.
+# the Bear": a target conditional override filtered to the Bear; Frosthaven evaluates per-target overrides only for
+# attacks, so the plugin (GHWildfury.cs TargetHealBonus) adds it when a pack heal heals a target its filter matches.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -36,9 +39,9 @@ Data:
                     Range: 3
                     Target: 1
                     Filter: Enemy
-                    StrengthIsBase: True
-                    RangeIsBase: True
-                    TargetIsBase: True
+                    AnimOverload: RangedAttack
+                    MiscVars:
+                        GHBySummonerFromHex: True
                 Filter: Self
                 StartAbilityRequirements:
                     Type: ThisAbility

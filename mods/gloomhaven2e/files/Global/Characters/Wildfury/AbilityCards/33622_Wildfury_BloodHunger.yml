@@ -10,7 +10,8 @@ Initiative: 41
 # bottom: COMMAND, persistent Shield 1 + Retaliate 2 on the Bear (Frosthaven's persistent shield aura, Banner of
 # Courage's BuffShield, and retaliate aura, Deathwalker Lashing Tendrils' Behaviour Retaliate, filtered to the Bear).
 # The "!" box "at the end of each round, if you neither attacked nor were attacked that round, move this card to the
-# lost pile" has no engine hook: NEEDS PLUGIN (text only; the bonus lasts until the Bear dies or the scenario ends).
+# lost pile": the plugin (GHWildfury.cs LoseIfIdle, the marker GHLoseIfIdle) watches the Bear's attacks and the attacks
+# on it and, at the end of a round with neither (or with the Bear dead), finishes the bonuses: the card goes to lost.
 # XP 2, persistent, lost.
 Discard: [Discard,Lost]
 Data:
@@ -48,6 +49,8 @@ Data:
                 Shield: 1
                 Target: -1
                 Filter: Self
+                MiscVars:
+                    GHLoseIfIdle: True
                 ActiveBonus:
                     Behaviour: BuffShield
                     Duration: Persistent

@@ -5,10 +5,10 @@ ID: 33601
 Level: 1
 Initiative: 51
 # card: Concentrated Rage
-# top: Attack 1 [square], Range 3, Disarm. bottom: the damage-token counter (+1 token per Bear attack or Retaliate
-# damage to it; at 3+ tokens the Bear's next attack spends three for +3 Attack) has no engine counter: APPROXIMATION,
-# a persistent +1 Attack on every Bear attack (the 1st edition Punch Through bottom's aura on the bear, made
-# persistent; about the card's average of +3 every fourth attack). NEEDS PLUGIN for the token counter.
+# top: Attack 1 [square], Range 3, Disarm. bottom: the damage-token counter: a persistent marker bonus (Attack +0 aura
+# on the Bear, MiscVars GHRageTokens); the plugin (GHWildfury.cs RageTokens) keeps the tokens as the Wildfury's
+# character resource WildfuryRage (saved with the scenario, shown on her status row): +1 per Bear attack (each target)
+# and per Retaliate damage the Bear suffers; a Bear attack with 3+ tokens spends three for +3 Attack instead.
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -23,9 +23,11 @@ Data:
     Bottom:
         Abilities:
             BActive:
-                Attack: 1
+                Attack: 0
                 Target: -1
                 Filter: Self
+                MiscVars:
+                    GHRageTokens: True
                 ActiveBonus:
                     Behaviour: BuffAttack
                     Duration: Persistent

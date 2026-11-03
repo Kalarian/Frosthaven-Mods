@@ -1,6 +1,7 @@
 # card: Domination
-# written from tools/gh2e/sheets/Mindthief.json; top: two enemies within range 4 each perform Attack 3 (the "adjacent
-# to each other" requirement is not enforced; Xipe's Filter Ally + TransferAugments was the 1st edition card's);
+# written from tools/gh2e/sheets/Mindthief.json; top: two enemies within range 4 each perform Attack 3; "adjacent to
+# each other" = MiscVars GHTargetsAdjacent: once one enemy is picked, the plugin (GHMindthief2.cs) refuses a second one
+# that isn't adjacent to it;
 # bottom = the 1st edition Mass Hysteria bottom (AddAugment, persistent: two augments at once)
 Discard: [Discard,Discard]
 Data:
@@ -23,6 +24,8 @@ Data:
                 Range: 4
                 Target: 2
                 Filter: Enemy
+                MiscVars:
+                    GHTargetsAdjacent: True
                 AnimOverload: MindControl
     Bottom:
         Abilities:

@@ -1,0 +1,17 @@
+Parser: Mastery
+ID: Wildfury_MASTERY_2
+LocalisedName: Wildfury_MASTERY_2_Name
+LocalisedDescription: Wildfury_MASTERY_2_Desc
+PerkPoints: 1
+# the plugin's tag (GHMasteries.cs CommandKillsAtValue, counted by GHWildfury.cs): Value enemies killed by the Bear's
+# commanded attacks whose value before attack modifiers was Amount or more
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_CommandKillsAtValue]
+        CharacterIDs:
+            ActorID: WildfuryID
+        Value: 4
+        Amount: 7

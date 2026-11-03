@@ -1,7 +1,8 @@
 # card: Unbreakable Bond
 # top: Attack 3 [diamond], Range 3 [square]; Attack 3 [diamond], Range 3 [square] "as if you occupied the same hex as
-# the Bear": APPROXIMATION, the second attack is commanded (the Bear performs Attack 3, range 3 from its hex); NEEDS
-# PLUGIN to make it the Wildfury's attack. "! infuse Air/Earth (either)": an Infuse ability with the element picker
+# the Bear": the second attack is the Wildfury's own, performed from the Bear's hex with Frosthaven's own "perform from
+# a hex" var (Vars TargetingOverrideArrayIndex, Pyroclast Cloud of Ash): range, line of sight and adjacency count from
+# the Bear's hex (rulebook p21); it needs the Bear on the map. The name TAllyAttack keeps the enhancement slot. "! infuse Air/Earth (either)": an Infuse ability with the element picker
 # (Infuse [Air, Earth], ShowElementPicker, can't be skipped).
 # bottom: "for the next three rounds, skip your card selection and turn; your other persistents don't advance; the Bear
 # takes two turns at initiative 14 each round under your control": NEEDS PLUGIN. APPROXIMATION: a persistent bonus with
@@ -21,24 +22,21 @@ Data:
                     Amount: 3
                     SquareEnhancements: 1
                 AnimOverload: RangedAttack
-            TAlly:
-                ControlActor:
-                    Abilities:
-                        TAllyAttack:
-                            Attack:
-                                Amount: 3
-                                DiamondEnhancements: 1
-                            Range:
-                                Amount: 3
-                                SquareEnhancements: 1
-                            StrengthIsBase: True
-                            RangeIsBase: True
-                            AnimOverload: RangedAttack
-                    ControlActorType: Player
-                Target: -1
-                Targeting: All
-                Filter: Companion
-                AnimOverload: Command
+            TAllyAttack:
+                Attack:
+                    Amount: 3
+                    DiamondEnhancements: 1
+                Range:
+                    Amount: 3
+                    SquareEnhancements: 1
+                AnimOverload: RangedAttack
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateBear: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID") != null
+                Vars:
+                    Bear: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID")
+                    TargetingOverrideArrayIndex: Bear.Tile
             TInfuse:
                 Infuse: [Air, Earth]
                 ShowElementPicker: True

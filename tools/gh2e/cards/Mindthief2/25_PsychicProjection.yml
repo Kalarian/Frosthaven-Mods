@@ -1,7 +1,9 @@
 # card: Psychic Projection
 # written from tools/gh2e/sheets/Mindthief.json; augment = Submissive Affliction's per-condition buff on every melee
-# attack; bottom: the designated hex is approximated as Attack 3, Range 5, treated as melee (an enemy adjacent to an
-# unoccupied hex within range 4; line of sight from you, not from the hex)
+# attack. Bottom: the designated hex is Frosthaven's own "perform from a hex" shape (Pyroclast Cloud of Ash): a NullHex
+# pick of an unoccupied hex within range 4, then the melee Attack 3 performed as though she occupied it (Vars
+# TargetingOverrideArrayIndex: range 1, line of sight and adjacency from that hex, rulebook p21; her melee augments
+# apply, it is her melee attack)
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -27,12 +29,29 @@ Data:
         XP: 1
     Bottom:
         Abilities:
-            BAttack:
-                Attack:
-                    Amount: 3
-                    SquareEnhancements: 1
-                Range: 5
-                TreatAsMelee: True
+            BDesignate:
+                NullHex: True
+                Range: 4
+                Target: 1
+                TileFilter: Custom
+                MiscVars:
+                    IsValidTile: obj.LivingActor == null
+                    DontPreviewDescription: True
+                SkipAnim: True
+                SubAbilities:
+                    BAttack:
+                        Attack:
+                            Amount: 3
+                            SquareEnhancements: 1
+                        Filter: Enemy
+                        TreatAsNonSubAbility: True
+                        StartAbilityRequirements:
+                            Type: ThisAbility
+                            Vars:
+                                ValidateDesignated: ParentAbility != null && ParentAbility.AbilityHasHappened
+                        Vars:
+                            DesignatedHex: ParentAbility.m_TilesSelected[0]
+                            TargetingOverrideArrayIndex: DesignatedHex
         Infuse: Dark
 Layout:
     Top:

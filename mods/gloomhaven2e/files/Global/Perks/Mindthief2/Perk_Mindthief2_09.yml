@@ -4,4 +4,14 @@ Name: PERK_Mindthief2_09_Name
 Description: PERK_Mindthief2_09_Desc
 CharacterID: Mindthief2ID
 Available: 1
-Flags: [Passive]
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
+Abilities:
+    LyingLow:
+        AutoTrigger: True
+        AdjustInitiative: 100
+        Filter: Self
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: FocusInitiative
+            Hidden: True
+        AnimOverload: None
