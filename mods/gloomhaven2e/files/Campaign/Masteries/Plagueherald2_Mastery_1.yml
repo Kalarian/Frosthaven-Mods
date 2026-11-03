@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Plagueherald2_MASTERY_1
+LocalisedName: Plagueherald2_MASTERY_1_Name
+LocalisedDescription: Plagueherald2_MASTERY_1_Desc
+PerkPoints: 1
+# Answered by the Frosthaven Mods plugin (GHPlagueherald2e.cs, FrosthavenMods_KillsWithoutModifierInTurn): a turn of the
+# Plagueherald in which he killed Value or more enemies and drew no attack modifier card (kill and modifier records).
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_KillsWithoutModifierInTurn]
+        CharacterIDs:
+            ActorID: Plagueherald2ID
+        Value: 3

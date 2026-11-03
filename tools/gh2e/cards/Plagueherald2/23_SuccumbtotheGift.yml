@@ -1,7 +1,8 @@
 # card: Succumb to the Gift
 # top: on a kill, XP 1 and a Damage 3 + Poison trap in the killed enemy's hex: a sub-ability gated on the kill
 # (ActorsKilledByAbility, the 1st edition Hatchet's Fearsome Efficiency) placing the trap on the attack's hex (Custom
-# targeting on the parent's selected tile, as CARD_FIXES 20136 Petrify). "Featureless hex" is not checked. The trap
+# targeting on the parent's selected tile, as CARD_FIXES 20136 Petrify), only in a featureless hex (the trap's own
+# PlacementTileFilter: FeaturelessHex; the engine's default is an empty hex). The trap
 # uses the 1st edition Tinkerer's poison trap model. Untested shape.
 Discard: [Discard,Discard]
 Data:
@@ -24,6 +25,7 @@ Data:
                             TrapName: PoisonMine
                             Damage: 3
                             Conditions: Poison
+                            PlacementTileFilter: FeaturelessHex
                         Target: 1
                         AbilityXP: 1
                         Targeting: Custom

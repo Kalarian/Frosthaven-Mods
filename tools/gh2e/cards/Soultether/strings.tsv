@@ -55,3 +55,4 @@ AMC_GH2E_Soultether_P1_InvisibleSummon	+1, <sprite name=Invisible>, <sprite name
 AMC_GH2E_Soultether_FireAir_P2	+2 Fire or Air
 AMC_GH2E_Soultether_FireDark_P2	+2 Fire or Dark
 AMC_GH2E_Soultether_AirDark_P2	+2 Air or Dark
+GH2E_SOUL_HIDDEN_TOOLTIP	Soultether rule bookkeeping (hidden).

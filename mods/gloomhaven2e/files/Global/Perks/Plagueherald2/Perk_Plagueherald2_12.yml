@@ -5,27 +5,4 @@ Description: PERK_Plagueherald2_12_Desc
 CharacterID: Plagueherald2ID
 Available: 1
 Cost: 2
-Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
-Abilities:
-    TActive:
-        AutoTrigger: True
-        AddActiveBonus:
-            ControlActor:
-                ControlDurationType: ControlForOneTurn
-                ControlActorType: Player
-            Range: 99
-            Target: 1
-            Filter:
-                TargetType: Enemy
-                TargetHasCharacterResource: ["Plague"]
-            AnimOverload: MindControl
-        ActiveBonus:
-            Duration: Persistent
-            Behaviour: DuringTurnAbility
-            XPTracker: [0]
-            IsToggleBonus: True
-            Hidden: True
-            ListLayoutOverride: [$PERK_Plagueherald2_12_Desc$, AA_Mind_Control]
-            MiscVars:
-                OverrideIcon: "'AA_Mind_Control'"
-        AnimOverload: PowerUp
+Flags: [Passive]

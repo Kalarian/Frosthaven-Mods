@@ -15,8 +15,9 @@ Range: 1
 OnAttackCondition: Poison
 # "When this summon would die, if there is no character token on this card, instead negate the damage and ... summon a
 # Slime Spirit in an empty hex adjacent to this summon": the negation is Frosthaven's lethal-only prevention (Metal
-# Mosaic perk 10: PreventFirstDamage, PreventOnlyIfLethal), one use (the character token). The second Slime Spirit is
-# NEEDS PLUGIN (no data shape summons into a hex beside a dying summon).
+# Mosaic perk 10: PreventFirstDamage, PreventOnlyIfLethal), one use (the character token). When that use is spent
+# (MiscVars GH2E_SlimeSplit), the plugin GHSoultether summons a second Slime Spirit for the same Soultether in an empty
+# hex adjacent to this one, tied to the same card (Oozing Manifestation) so both leave with it.
 OnSummonAbilities:
     ASplit:
         PreventDamage: 1
@@ -29,3 +30,5 @@ OnSummonAbilities:
             Behaviour: PreventFirstDamage
             XPTracker: [0]
             ListLayoutOverride: [$GH2E_Soultether_25_T$, Positive_DamagePrevent]
+        MiscVars:
+            GH2E_SlimeSplit: True

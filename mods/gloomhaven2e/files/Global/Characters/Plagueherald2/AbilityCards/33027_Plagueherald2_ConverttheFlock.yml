@@ -8,7 +8,8 @@ Initiative: 57
 # top: control every normal and elite enemy with Plague (any range): Move 2, Attack 5 + Poison, each driven by the player (ControlActorType Player, rulebook p33). The Plague their
 # attacks add comes from the class supply (plugin GHPlague). bottom: "one enemy that has Poison or
 # Plague": the target pick checks either (filter Vars); it gains Plague and suffers Damage 3; on a kill, XP 1. "You may
-# Teleport to the hex it occupied": not written, NEEDS PLUGIN.
+# Teleport to the hex it occupied": a kill-gated, skippable Teleport whose only valid hex is the killed enemy's (the
+# Infuser's Formless Bladestorm shape: IsValidTeleportTile).
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -62,6 +63,22 @@ Data:
                         TreatAsNonSubAbility: True
                         AutoTrigger: True
                         AnimOverload: None
+                    BTeleport:
+                        Teleport2: 99
+                        Range: 99
+                        Target: -1
+                        Filter: Self
+                        TreatAsNonSubAbility: True
+                        CanSkip: True
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsKilledByAbility: "> 0"
+                        Vars:
+                            KillTile: ParentAbility.ActorsToTarget[0].Tile
+                        MiscVars:
+                            IsValidTeleportTile: tile.Equals(KillTile)
+                        AnimOverload: Teleport Into
+                        AnimOverload2: Teleport Outof
 Layout:
     Top:
         - Row: "$FHS_GH2E_Plagueherald2_27_T$"

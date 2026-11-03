@@ -67,3 +67,4 @@ GH2E_Plagueherald2_29_B	At the end of each of your turns, one enemy that has bot
 AMC_GH2E_Plagueherald2_Plague_P0	+0, the target or one enemy within <sprite name=Range> 2 of the target gains Plague
 AMC_GH2E_Plagueherald2_Poison_R	+0, the target or one enemy within <sprite name=Range> 2 of the target gains <sprite name=Poison>
 AMC_Stun_P1	+1 <sprite name=Stun>
+GH2E_PH2_HIDDEN_TOOLTIP	Plagueherald rule bookkeeping (hidden).
