@@ -161,6 +161,6 @@ the player" claim: hero summons are AI-driven unless PlayerControlled).
 - **Horned Hristek**: +2 Attack on its attacks for the rest of the round after its first move of the round.
 - **Great Archinotl**: one more turn after every figure with initiative 1-99 has acted (shown as initiative 100), not in
   the round it was summoned. The initiative track shows no second slot.
-- **Heart of Doom** bottom: when the slots drop, the player picks the Doom(s) to keep (yes/no per Doom). Slots stay +4.
+- **Heart of Doom** bottom: when the slots drop, the player picks the Doom(s) to keep (yes/no per Doom). Slots +98 (any number; re-audit).
 - **Heel** perk: asked at the start of each summon turn; yes = the summon's own move only, toward you, no attack.
 - **Masteries**: Kill 20 doomed enemies (yourself, within one scenario); you + one summon 6 attack abilities in a round.

@@ -54,8 +54,8 @@ worth a bench run.
   queued by GHNestedSubAbilities; Frosthaven's kill requirement). No marks (as printed).
 - **18 Frozen Shiv**: Pierce 1's [square] mark = Pierce inside the Attack mapping with `PierceEnhancements: 1`
   (Frosthaven's Infuser Gale Barrage; a Pierce mapping of its own fails rulecheck).
-- **19 Silent Scream** bottom: the commanded "Attack -1" is relative to the enemy's own attack, in melee (no range
-  printed; 2e rulebook p.40, attacks with no range are melee). Decision, not a print question.
+- **19 Silent Scream** bottom: the commanded "Attack -1" is relative to the enemy's own attack, with its own range (Range +0;
+  the lead's decision 2026-11-02, as the approved Fey Subjugator default; it was melee).
 - **20 Mass Hysteria** bottom: the 1st edition Corrupting Embrace bottom's shape (Poison along a jump's path, verified).
 - **23 Dark Frenzy** bottom: two enemies each perform Move 1; consume Ice = Submissive Affliction's self-damage shape
   (1 each). Unverified (as 01).

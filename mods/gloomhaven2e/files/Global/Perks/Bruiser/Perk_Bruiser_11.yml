@@ -10,6 +10,9 @@ Abilities:
         Move: 1
         MiscVars:
             PrintedProperties: list("Move")
+            # "the following round" only: plugin GHBruiser2e (RestedAndReady) keeps it off in the round of the long rest
+            # and ends it at the end of the following round (re-audit; it lasted until any later move)
+            GH2E_RestedAndReady: True
         Filter: Self
         SkipAnim: True
         ActiveBonus:

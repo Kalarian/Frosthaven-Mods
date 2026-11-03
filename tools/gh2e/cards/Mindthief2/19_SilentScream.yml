@@ -1,7 +1,8 @@
 # card: Silent Scream
 # written from tools/gh2e/sheets/Mindthief.json; augment = the 1st edition Silent Scream's (Heal 2, range 2, self or
-# ally after each melee attack); bottom: the enemy attacks at its own value -1, in melee (no range printed: 2e
-# rulebook p.40, attacks with no range are melee)
+# ally after each melee attack); bottom: the enemy attacks at its own value -1 with its own range (Range +0, the
+# Boneshaper Command the Wretched shape; the lead's decision 2026-11-02, as the approved Fey Subjugator default:
+# "Attack -1" is relative to the enemy's own attack, range included)
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -27,9 +28,8 @@ Data:
                     Abilities:
                         EnemyWillDoThis:
                             Attack: -1
-                            Range: 1
+                            Range: +0
                             Target: 1
-                            RangeIsBase: True
                             TargetIsBase: True
                     ControlDurationType: ControlForOneAction
                     ControlActorType: Player

@@ -499,5 +499,43 @@ namespace FrosthavenMods
         {
             if (term != null && term.StartsWith("FHMODS_PH2_", StringComparison.Ordinal) && Strings.TryGetValue(term, out string text)) __result = text;
         }
+
+        // ------------------------------------------------------------------ Wretched Yield top: Plague before the attack
+
+        // "Heal X, self, where X is the number of Plague the target of the attack ability had before the attack": the
+        // count is noted when the attack's first target is about to draw its modifiers (a Carrier perk modifier drawn on
+        // this attack would give it one more Plague first), into the hidden saved count GH2ECount9 on the Plagueherald
+        // (GHSavedCounts slot 9), which the card's THeal reads. Reset when the attack starts (no target = no stale value).
+        internal const int WretchedYieldCard = 33009, SlotWretchedPlague = 9;
+
+        [HarmonyPatch(typeof(CAbilityAttack), nameof(CAbilityAttack.Start))]
+        [HarmonyPrefix]
+        private static void WretchedStart(CAbilityAttack __instance, CActor targetingActor)
+        {
+            try
+            {
+                CActor me = targetingActor ?? __instance?.TargetingActor;
+                if (__instance?.Name != "TAttack" || GHPlague.CardOf(__instance) != WretchedYieldCard || !(me is CPlayerActor p) || p.Class?.ID != PH) return;
+                if (__instance.IsAttackAbilityWithOverrides) return;
+                GHSavedCounts.Set(me, SlotWretchedPlague, 0);
+            }
+            catch (Exception e) { Report("Wretched Yield start", e); }
+        }
+
+        [HarmonyPatch(typeof(CActor), nameof(CActor.DrawAttackModifierCards))]
+        [HarmonyPrefix]
+        private static void WretchedBefore(CActor actor, CAbilityAttack attackAbility, CActor currentTarget)
+        {
+            try
+            {
+                if (attackAbility == null || currentTarget == null || attackAbility.Name != "TAttack" || GHPlague.CardOf(attackAbility) != WretchedYieldCard) return;
+                if (!(actor is CPlayerActor p) || p.Class?.ID != PH) return;
+                if (attackAbility.ActorsTargeted != null && attackAbility.ActorsTargeted.Any(t => t != null && t != currentTarget)) return;   // the first target only
+                int n = currentTarget.GetCharacterResourceAmount(GHPlague.Plague);
+                GHSavedCounts.Set(actor, SlotWretchedPlague, n);
+                Rule("WretchedYield", WretchedYieldCard, $"{GHPlague.NameOf(currentTarget)} has {n} Plague before the attack: Heal {n}");
+            }
+            catch (Exception e) { Report("Wretched Yield", e); }
+        }
     }
 }

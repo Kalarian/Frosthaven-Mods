@@ -54,7 +54,9 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Target> *THeal.Target* <sprite name=Range> *THeal.Range*</link>"
             - Column:
         - Row: "<size=20%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth
     Bottom:
         - Row:
             - ColumnWidths: "10,35,45,10"

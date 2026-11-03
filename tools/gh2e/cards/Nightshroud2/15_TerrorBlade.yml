@@ -55,7 +55,7 @@ Data:
             # ability of the action)
             BTear2:
                 CreateShadow:
-                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+                HelpBoxTooltipLocKey: "GH2E_Nightshroud2_TEAR_PLACE_HELP"
                 Target: 1
                 Targeting: Custom
                 Vars:
@@ -68,6 +68,8 @@ Data:
                 Filter: Self
                 MiscVars:
                     IsValidTeleportTile: CustomAbility.SteppedOnShadow(Tile)
+                    GH2ETearOnly: True
+                    GH2ETearPlacedOnly: True
                 AnimOverload: Teleport Into
                 AnimOverload2: Teleport Outof
             BDouble:

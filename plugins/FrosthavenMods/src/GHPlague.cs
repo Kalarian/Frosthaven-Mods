@@ -532,7 +532,7 @@ namespace FrosthavenMods
     {
         [HarmonyPatch(typeof(CActor), nameof(CActor.Damaged))]
         [HarmonyPrefix]
-        private static void Doubling(CActor __instance, ref int strength)
+        private static void Doubling(CActor __instance, ref int strength, CAbility damagingAbility)
         {
             try
             {
@@ -544,7 +544,18 @@ namespace FrosthavenMods
                 if (bonus == null) return;
                 int before = strength;
                 strength *= 2;
-                Plugin.Log.LogInfo($"GHRule WiltAndWither card {bonus.BaseCard?.ID ?? 0} {GHPlague.NameOf(__instance)} has Plague: damage {before} doubled to {strength}");
+                // GameState.ActorBeenDamaged counted the undoubled damage before this call: the damage the ability dealt
+                // (DamageInflictedByAbility: Xorn's Embrace's "Heal X, X = damage dealt") and the action's/turn's damage
+                // (FinishActorDamaged adds min(health, damage) afterwards) get the doubled half too
+                if (damagingAbility != null)
+                {
+                    damagingAbility.DamageInflictedByAbility += before;
+                    damagingAbility.DamageInflictedByAbilityOnLastTarget += before;
+                }
+                int health = __instance.Health;
+                int extra = Math.Max(0, Math.Min(health, strength) - Math.Min(health, before));
+                if (extra > 0) GameState.UpdateDamageInflictedThisTurn(extra, damagingAbility?.AbilityType ?? CAbility.EAbilityType.None);
+                Plugin.Log.LogInfo($"GHRule WiltAndWither card {bonus.BaseCard?.ID ?? 0} {GHPlague.NameOf(__instance)} has Plague: damage {before} doubled to {strength} (damage dealt counted {strength})");
             }
             catch (Exception e) { Plugin.Log.LogWarning("GHWiltAndWither: " + e.Message); }
         }

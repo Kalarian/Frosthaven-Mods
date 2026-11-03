@@ -108,4 +108,6 @@ Layout:
         - Row: "<size=20%> "
         - Row: "$FHS_GH2E_Cragheart2_27_B$"
         - Row: "<size=20%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth

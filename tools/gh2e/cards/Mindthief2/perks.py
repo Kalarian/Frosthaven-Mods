@@ -55,9 +55,10 @@ PERKS = [
             Hidden: True
         AnimOverload: None"""}),
     # Frosthaven's after-rest hooks with an Ice-or-Dark consume (the element picker beside the Consume), as the 1st
-    # edition Voidwarden's Grave Defense; the control is the cards' own (Attack 1 commanded, melee)
-    (2, "Restless Mind", "At the end of each of your rests, you may <sprite name=ConsumeIce> or <sprite name=ConsumeDark> to control one enemy within <sprite name=Range> 5: <sprite name=Attack> 1",
-     {"Flags": "[Passive, ExecuteAbilitiesAfterShortRest, ExecuteAbilitiesAfterLongRest]", "Abilities": """\
+    # edition Voidwarden's Grave Defense; the control is the cards' own (Attack 1 commanded, melee). Two LINKED boxes
+    # on the sheet: one perk costing 2 checks (Available 1, Cost 2; it was buyable twice, re-audit)
+    (1, "Restless Mind", "At the end of each of your rests, you may <sprite name=ConsumeIce> or <sprite name=ConsumeDark> to control one enemy within <sprite name=Range> 5: <sprite name=Attack> 1",
+     {"Cost": 2, "Flags": "[Passive, ExecuteAbilitiesAfterShortRest, ExecuteAbilitiesAfterLongRest]", "Abilities": """\
     RestControl:
         ShowElementPicker: True
         Consume:

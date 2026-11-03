@@ -55,7 +55,9 @@ Layout:
             - Column:
                 - Row: "£Area£"
         - Row: "<size=50%> "
-        - Row: "$GH2E_Cragheart2_24_T$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$GH2E_Cragheart2_24_T$"
     Bottom:
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Row: "<size=20%> "
@@ -63,4 +65,6 @@ Layout:
             Name: BCEarth
             Text: "+3 $Move$ <sprite name=Move>, <sprite name=XP1>"
         - Row: "<size=20%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth

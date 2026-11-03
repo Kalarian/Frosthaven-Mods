@@ -63,7 +63,9 @@ Layout:
         - Row: "<size=20%> "
         - Row: "$GH2E_Cragheart2_13_T$"
         - Row: "<size=20%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth
     Bottom:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack* <size=100%><voffset=1>@BAttack@"
         - Row: "$Range$ <sprite name=Range> *BAttack.Range* @BAttack.Range@"

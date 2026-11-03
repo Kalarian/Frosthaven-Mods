@@ -1,7 +1,7 @@
 # card: Wretched Yield
 # top: +1 Attack per Plague on the target = a per-target Vars bonus, Frosthaven's Crashing Tide shape (Submerge top:
-# ConditionalOverrides + StatIsBasedOnX Vars on TargetActor). Heal X = the same count, read from the attack's first
-# target (the attack gives no Plague, so "before the attack" holds). Both expressions UNVERIFIED in play.
+# ConditionalOverrides + StatIsBasedOnX Vars on TargetActor). Heal X = the first target's Plague before the attack,
+# noted by the plugin when its modifiers are drawn (a Carrier perk modifier could add one). UNVERIFIED in play.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -32,7 +32,10 @@ Data:
                         BasedOn: Vars
                         Vars:
                             AttackAbility: CustomAbility.FindAbilityInPhaseByName("TAttack")
-                            Value: AttackAbility != null and AttackAbility.ActorsTargeted.Count > 0 and AttackAbility.ActorsTargeted[0].GetCharacterResourceAmount("Plague") or 0
+                            # the first target's Plague BEFORE the attack, noted by the plugin (GHPlagueherald2e, Wretched
+                            # Yield) into the hidden count GH2ECount9 on the Plagueherald (re-audit: a Carrier modifier drawn
+                            # on the attack could add one first)
+                            Value: AttackAbility != null and AttackAbility.ActorsTargeted.Count > 0 and AttackAbility.TargetingActor.GetCharacterResourceAmount("GH2ECount9") or 0
                 AnimOverload: PowerUp
         XP: 1
     Bottom:

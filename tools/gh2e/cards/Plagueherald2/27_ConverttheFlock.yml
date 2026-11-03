@@ -68,7 +68,8 @@ Data:
                             Type: SubAbility
                             ActorsKilledByAbility: "> 0"
                         Vars:
-                            KillTile: ParentAbility.ActorsToTarget[0].Tile
+                            # ActorsTargeted (the engine empties ActorsToTarget before a kill-gated sub-ability starts; re-audit)
+                            KillTile: ParentAbility.ActorsTargeted[0].Tile
                         MiscVars:
                             IsValidTeleportTile: tile.Equals(KillTile)
                         AnimOverload: Teleport Into

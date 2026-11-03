@@ -289,6 +289,10 @@ namespace FrosthavenMods
         private static void ControlKill(CAbility ab)
         {
             if (ab == null || ab.ControlledByClassID != ClassId || ab.ActorsTargeted == null || ab.ActorsTargeted.Count == 0) return;
+            // "with control abilities": an enemy she controls. The engine sets ControlledByClassID on the abilities her own
+            // summons perform when a card grants them (Feedback Loop, Possession, Telepathic Command): those kills are not
+            // control-ability kills (re-audit Mindthief2-12)
+            if (!(ab.TargetingActor is CEnemyActor)) return;
             CPlayerActor me = ScenarioManager.Scenario?.PlayerActors?.FirstOrDefault(p => p?.Class?.ID == ClassId);
             if (me == null) return;
             NewScenarioCheck();
@@ -297,7 +301,8 @@ namespace FrosthavenMods
             {
                 if (t == null || !t.IsDead || CActor.AreActorsAllied(me.Type, t.Type, me, t)) continue;
                 if (!set.Add(t.ActorGuid)) continue;
-                Log("KillsByControl", CardId(ab), $"{GHPlague.NameOf(t)} killed by a controlled {ab.AbilityType} ({set.Count} this scenario)");
+                int saved = GHSavedCounts.Add(me, SlotControlKills);
+                Log("KillsByControl", CardId(ab), $"{GHPlague.NameOf(t)} killed by a controlled {ab.AbilityType} ({Math.Max(saved, set.Count)} this scenario)");
             }
         }
 
@@ -305,7 +310,36 @@ namespace FrosthavenMods
         internal static int KillsByControl()
         {
             NewScenarioCheck();
-            return ControlKills.Values.Select(s => s.Count).DefaultIfEmpty(0).Max();
+            int saved = (ScenarioManager.Scenario?.PlayerActors ?? new List<CPlayerActor>()).Concat(ScenarioManager.Scenario?.ExhaustedPlayers ?? new List<CPlayerActor>())
+                .Where(p => p?.Class?.ID == ClassId).Select(p => GHSavedCounts.Get(p, SlotControlKills)).DefaultIfEmpty(0).Max();
+            return Math.Max(saved, ControlKills.Values.Select(s => s.Count).DefaultIfEmpty(0).Max());
+        }
+
+        // Saved with the scenario (GHSavedCounts slots on the Mindthief, so a reload keeps the mastery counts): slot 1 =
+        // enemies killed with control abilities; slots 2-9 = fires of each of her 8 augments, in AugmentCards order
+        // (Thought Thief).
+        internal const int SlotControlKills = 1;
+        private static readonly int[] AugmentCards = { 32204, 32206, 32210, 32211, 32219, 32224, 32225, 32229 };
+
+        internal static void SaveAugmentFire(CActor me, int card, int count)
+        {
+            if (me?.Class?.ID != ClassId) return;
+            int i = Array.IndexOf(AugmentCards, card);
+            if (i >= 0 && GHSavedCounts.Get(me, 2 + i) < count) GHSavedCounts.Set(me, 2 + i, count);
+        }
+
+        /// <summary>The saved augment fires of the Mindthief with this guid (card id -> fires).</summary>
+        internal static Dictionary<int, int> SavedAugmentFires(string guid)
+        {
+            var d = new Dictionary<int, int>();
+            CPlayerActor me = GHSavedCounts.Player(guid);
+            if (me?.Class?.ID != ClassId) return d;
+            for (int i = 0; i < AugmentCards.Length; i++)
+            {
+                int n = GHSavedCounts.Get(me, 2 + i);
+                if (n > 0) d[AugmentCards[i]] = n;
+            }
+            return d;
         }
 
         // ------------------------------------------------------------------ our text

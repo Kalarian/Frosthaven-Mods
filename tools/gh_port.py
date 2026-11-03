@@ -1246,8 +1246,9 @@ def main():
         for m in re.finditer(r"^(\w+):\r?\n((?:[ \t]+.*\r?\n?|[ \t]*\r?\n)+)", gh_res, re.M):
             rid = re.search(r'^\s*ID:\s*"?(\w+)"?', m.group(2), re.M)
             # "# pack-wide": a resource the plugin gives (the 2nd edition's Safeguard token, GHSafeguard.cs), carried
-            # whether or not a card names it, with its own Frosthaven icon
-            if rid and (any(f'"{rid.group(1)}"' in c for c in converted) or "# pack-wide" in m.group(2)):
+            # whether or not a card names it, with its own Frosthaven icon; "# plugin": a class resource only the plugin
+            # names (the Bruiser's Spiked Hide token, GHBruiser2e.cs), carried too, with the class picture like a card's
+            if rid and (any(f'"{rid.group(1)}"' in c for c in converted) or "# pack-wide" in m.group(2) or "# plugin" in m.group(2)):
                 resources[rid.group(1)] = (cls, m.group(0).rstrip() + "\n")
         if summon_ids:
             print(f"{cls}: {len(summon_ids)} summon definition(s): {', '.join(summon_ids)}; models copied: {', '.join(shipped) or 'none'}")
@@ -1388,6 +1389,16 @@ def main():
         for cls in args.classes:
             for p in sorted((gh2e_build.CARDS / cls / "items").glob("*.yml")) if (gh2e_build.CARDS / cls / "items").exists() else []:
                 write(f"Global/ItemCards/{cls}_{p.name}", p.read_text(encoding="utf-8").replace("\r\n", "\n"))
+
+    # text keys only the plugin names (a help box's HelpBoxTooltipLocKey set in code, GHTears.cs; a GetTranslation call):
+    # the 2nd edition's "GH2E_..." literals in plugins/FrosthavenMods/src, shipped under the same key when the class
+    # strings have it (a yml-named key ships with the GH_ prefix, the plugin asks for the bare one)
+    if EDITION == 2:
+        src = Path(__file__).resolve().parent.parent / "plugins" / "FrosthavenMods" / "src"
+        for f in sorted(src.glob("*.cs")) if src.exists() else []:
+            for k in re.findall(r'"(GH2E_\w+)"', f.read_text(encoding="utf-8", errors="replace")):
+                if k in strings:
+                    used_keys.add(k)
 
     table = {}
     for key in sorted(used_keys):

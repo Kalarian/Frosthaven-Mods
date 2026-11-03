@@ -1,7 +1,9 @@
 BruiserSpikedHide:
     # Spiked Hide (perk 3): drawn Spiked Hide cards "in the active area"; each gives Retaliate 2 on the next attack by
     # an adjacent enemy, then is discarded. Given and spent by the plugin (GHBruiser2e.cs / GHRetaliate2e.cs).
+    # plugin: no card names it, so gh_port carries it by this marker (it was missing from the pack: re-audit Bruiser-10);
+    # own sprite: the Bruiser's class picture, named here (every class's build file holds all class resources)
     ID: "BruiserSpikedHide"
-    Sprite: "HoverHatchet"
+    Sprite: "GHClass_Bruiser"
     LocKey: "GH2E_Bruiser_SPIKEDHIDE_TOOLTIP"
     MaxAmount: 2

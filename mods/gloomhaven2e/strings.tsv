@@ -733,7 +733,7 @@ FHS_GH2E_Elementalist2_02_B	Move one waning element to the strong column
 FHS_GH2E_Elementalist2_03_B	At the start of each of your turns, you may <sprite name=ConsumeWild> to add +1 <sprite name=Attack> to all your attacks that turn
 FHS_GH2E_Elementalist2_06_T	<sprite name=Disarm> one <sprite name=Enemy> adjacent to the <sprite name=Allies>, <sprite name=CreateAir>
 FHS_GH2E_Elementalist2_07_T	Target all <sprite name=Enemy> within <nobr><sprite name=Range> 4</nobr>
-FHS_GH2E_Elementalist2_09_B	At the end of this and your next five turns, in order: <sprite name=CreateMixed-FI>, <sprite name=CreateMixed-AE>, <sprite name=CreateLight>/<sprite name=CreateDark> (then the same order again)
+FHS_GH2E_Elementalist2_09_B	At the end of this and your next five turns, in order: <sprite name=CreateMixed-FI>, <sprite name=CreateMixed-AE>, <sprite name=CreateMixed-LD> (then the same order again)
 FHS_GH2E_Elementalist2_09_T	<sprite name=Target> the target and two hexes beside it (a 3-hex triangle), <sprite name=CreateFire>
 FHS_GH2E_Elementalist2_10_T	<sprite name=ConsumeEarth>: <nobr><sprite name=Heal> 2</nobr>, <nobr><sprite name=Range> 3</nobr>, <sprite name=CreateEarth>
 FHS_GH2E_Elementalist2_11_T	Whenever an <sprite name=Enemy> consumes an element, you may infuse that element
@@ -1317,7 +1317,9 @@ GH2E_Doomstalker2_25_T2	Whenever this summon kills an <sprite name=Enemy>, grant
 GH2E_Elementalist2_20_B	<sprite name=ConsumeIce><sprite name=ConsumeEarth>: on the next two sources of damage you or an adjacent ally would suffer, negate the damage, <sprite name=CreateMixed-IE>
 GH2E_Mindthief2_02_B2	You cannot perform move abilities this round. At the end of the round, lose <sprite name=Invisible>.
 GH2E_Nightshroud2_26_B	This attack does not cause you to gain <sprite name=Invisible> at the end of the round.
+GH2E_Nightshroud2_PREPARE_HELP	Prepare for the Kill: you may discard it to gain Strengthen and have all adjacent enemies suffer 2 damage
 GH2E_Nightshroud2_TEARHEX_HELP	You may place one Tear in the Tear hex (the blue hex) of the ability
+GH2E_Nightshroud2_TEAR_ENTER_HELP	You entered a Tear: you may remove it to lose Invisible at the end of the ability
 GH2E_Nightshroud2_TEAR_PLACE_HELP	Place one Tear
 GH2E_QMItem_BarbedStripPlus_1	Barbed Strip
 GH2E_QMItem_BarbedStripPlus_2	When you are attacked by an adjacent enemy, gain <sprite name=Retaliate> 3 for the attack (2, +1 from Proficiency).
@@ -1391,7 +1393,9 @@ GH2E_Wildfury_07_T	All enemies within <sprite name=Range> 2 that have <sprite na
 GH2E_Wildfury_12_T	All allies within <sprite name=Range> 3 add <sprite name=Pierce> 1 to all their attacks.
 GH2E_Wildfury_17_T	All allies within <sprite name=Range> 3 gain <sprite name=Shield> 1.
 GH2E_Wildfury_28_T	All allies within <sprite name=Range> 3 add +2 <sprite name=Attack> to their first attack each round.
+GH_GH2E_Bruiser_SPIKEDHIDE_TOOLTIP	Spiked Hide: attack modifier cards in the Bruiser's active area. On the next attack targeting him performed by an adjacent enemy, each is discarded to gain <sprite name=Retaliate> 2 for the attack.
 GH_GH2E_Elementalist2_ALLSIX_TOOLTIP	All six elements were strong or waning at the same time this scenario (Elementalist mastery).
+GH_GH2E_HIDDEN_COUNT_TOOLTIP	(hidden count kept by the mod)
 GH_GH2E_PH2_HIDDEN_TOOLTIP	Plagueherald rule bookkeeping (hidden).
 GH_GH2E_PLAGUE_TOOLTIP	Plague: the Plagueherald's tokens on this figure (at most 3). Many Plagueherald abilities target or hurt figures that have Plague.
 GH_GH2E_SAFEGUARD_TOOLTIP	Safeguard: the next negative condition this figure would gain is prevented, then Safeguard is removed
@@ -1640,7 +1644,7 @@ PERK_Doomstalker2_04_Desc	Add one <sprite name="0"> "Grant one of your summons a
 PERK_Doomstalker2_05_Name	Deadly Shot
 PERK_Doomstalker2_05_Desc	Add one <sprite name="+3">
 PERK_Doomstalker2_06_Name	Stunning Shot
-PERK_Doomstalker2_06_Desc	Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>
+PERK_Doomstalker2_06_Desc	Add one <sprite name=Stun> <sprite name=Rolling>
 PERK_Doomstalker2_07_Name	Unfazed
 PERK_Doomstalker2_07_Desc	Ignore scenario effects and add one <sprite name="+1"> <sprite name=Rolling>
 PERK_Doomstalker2_08_Name	Foresight

@@ -118,6 +118,10 @@ namespace FrosthavenMods
                     foreach (CTile t in selected) cancel.Add(CAbilityCreateShadow.SpawnShadow(t, new CVector3(0f, 0f, 0f), 0f, __instance, actor));
                     List<CTile> tiles = ScenarioManager.CurrentScenarioState.ShadowProps
                         .Where(p => counts(p) && !(p is CObjectShadow cs && cs.WillBeRemoved)).Select(p => p.PropTile).ToList();
+                    // the hexes this placement put Tears in; the game reuses TilesSelected for the removal choice, so a
+                    // card reading it afterwards (Terror Blade's "not adjacent to each other") would see the removed Tears:
+                    // restored when the ability ends (PlacedBack)
+                    if (mine) { Placed.Remove(__instance); Placed.Add(__instance, selected.ToList()); }
                     tr.Field("_isRemovingShadows").SetValue(true);
                     if (__instance.TilesInRange == null) __instance.TilesInRange = new List<CTile>();
                     __instance.TilesInRange.Clear();
@@ -136,6 +140,153 @@ namespace FrosthavenMods
                 Plugin.Log.LogError("Nightshroud Tears: limit: " + e);
                 return true;
             }
+        }
+
+        private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<CAbilityCreateShadow, List<CTile>> Placed =
+            new System.Runtime.CompilerServices.ConditionalWeakTable<CAbilityCreateShadow, List<CTile>>();
+
+        [HarmonyPatch(typeof(CAbilityCreateShadow), nameof(CAbilityCreateShadow.AbilityEnded))]
+        [HarmonyPostfix]
+        private static void PlacedBack(CAbilityCreateShadow __instance)
+        {
+            try
+            {
+                if (!Placed.TryGetValue(__instance, out List<CTile> tiles)) return;
+                Placed.Remove(__instance);
+                if (!__instance.AbilityHasHappened || __instance.TilesSelected == null) return;
+                __instance.TilesSelected.Clear();
+                __instance.TilesSelected.AddRange(tiles);
+                Log("Tears", GHNightshroud.CardId(__instance), $"{__instance.Name}: placed at {string.Join(" ", tiles.Select(t => t.m_ArrayIndex.ToString()))} (over the limit; the hexes the card reads)");
+            }
+            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: placed tiles: " + e); }
+        }
+
+        // ------------------------------------------------------------------ Enervating Wound bottom
+
+        // "Whenever an enemy dies within range 2, you MAY discard this card to grant whoever killed that enemy: Heal 2,
+        // self" (card 32909). The engine spends the card's one slot as soon as a death passes the bonus's requirements and
+        // the Nightshroud performs the heal on the killer. Here the Nightshroud's player is asked first (the game's yes/no
+        // box): no = the card stays for a later death; yes = the killer performs Heal 2 targeting itself (its own heal
+        // bonuses apply) and the card's slot is used (it goes to the discard pile). Outside an action phase the engine's own
+        // path runs (logged).
+        public const int EnervatingWoundCard = 32909;
+
+        [HarmonyPatch(typeof(CDuringActionAbilityActiveBonus_TriggerAbilityOnDeath), nameof(CDuringActionAbilityActiveBonus_TriggerAbilityOnDeath.OnDeath))]
+        [HarmonyPrefix]
+        private static bool EnervatingWound(CDuringActionAbilityActiveBonus_TriggerAbilityOnDeath __instance, CActor actor, CAbility causeOfDeathAbility)
+        {
+            try
+            {
+                CActiveBonus bonus = __instance.ActiveBonus;
+                if (bonus?.BaseCard == null || bonus.BaseCard.ID != EnervatingWoundCard || bonus.Finished() || bonus.Finishing()) return true;
+                CActor her = bonus.Caster;
+                if (!GHNightshroud.Is(her) || !bonus.IsActiveBonusToggledAndNotRestricted(actor)) return true;
+                CActor killer = causeOfDeathAbility?.TargetingActor;
+                if (killer == null || killer.IsDead || !(killer == her || CActor.AreActorsAllied(her.Type, killer.Type, her, killer))) return false;
+                if (killer.Health >= killer.MaxHealth)
+                {
+                    Log("EnervatingWound", EnervatingWoundCard, $"{actor.GetPrefabName()} died; the killer {killer.GetPrefabName()} has full hit points: not offered (the card stays)");
+                    return false;
+                }
+                if (PhaseManager.CurrentPhaseAction == null)
+                {
+                    Log("EnervatingWound", EnervatingWoundCard, "outside an action phase: the engine's own trigger (the Nightshroud heals the killer)");
+                    return true;
+                }
+                bool yes = GHPlague.Ask(her, false, "FHMODS_NS_ENERVATE", "FHMODS_NS_YES", "FHMODS_NS_NO", killer.GetPrefabName(), actor.GetPrefabName());
+                if (!yes)
+                {
+                    Log("EnervatingWound", EnervatingWoundCard, $"{actor.GetPrefabName()} died: declined, the card stays active");
+                    return false;
+                }
+                CAbility heal = CAbilityHeal.CreateDefaultHeal(2, 1, 1, isMonster: false, new CAbilityFilterContainer(CAbilityFilter.EFilterTargetType.Self));
+                if (heal.MiscAbilityData == null) heal.MiscAbilityData = new AbilityData.MiscAbilityData();
+                heal.MiscAbilityData.AutotriggerAbility = true;
+                heal.MiscAbilityData.IgnoreStun = true;
+                heal.SetCanSkip(canSkip: false);
+                heal.CanUndoOverride = false;
+                heal.SetMiscVar(OwnTag, new TValue(true));
+                Stack(killer, heal, interrupt: true);
+                bonus.UpdateXPTracker();
+                bonus.FinishIfNoRemaining();
+                Log("EnervatingWound", EnervatingWoundCard, $"{actor.GetPrefabName()} died: the card is discarded, {killer.GetPrefabName()} (the killer) performs Heal 2, self");
+                return false;
+            }
+            catch (Exception e) { Plugin.Log.LogError("Nightshroud: Enervating Wound: " + e); return true; }
+        }
+
+        private static readonly Dictionary<string, string> Text = new Dictionary<string, string>
+        {
+            ["FHMODS_NS_ENERVATE"] = "Enervating Wound: {1} died. Discard this card to grant {0} (who killed it): Heal 2, self?",
+            ["FHMODS_NS_YES"] = "Discard it",
+            ["FHMODS_NS_NO"] = "Keep it",
+        };
+
+        [HarmonyPatch(typeof(GLOOM.LocalizationManager), nameof(GLOOM.LocalizationManager.GetTranslation))]
+        [HarmonyPostfix]
+        private static void Translate(string term, ref string __result)
+        {
+            if (term != null && term.StartsWith("FHMODS_NS_", StringComparison.Ordinal) && Text.TryGetValue(term, out string t)) __result = t;
+        }
+
+        // ------------------------------------------------------------------ Tear-only tests (not a Deathwalker's shadow)
+
+        // Marked for Death bottom, Into the Night bottom, Terror Blade bottom (teleports) and Swallowed by Night top (the
+        // kill's requirement) test "a hex containing a Tear" with CustomAbility.SteppedOnShadow, which any shadow passes (a
+        // Deathwalker's too). Steps tagged GH2ETearOnly count only a Nightshroud's Tears; Terror Blade's teleport (tag
+        // GH2ETearPlacedOnly) only the two Tears its own card placed this action ("Teleport to one of those hexes").
+        private const string TearOnlyTag = "GH2ETearOnly", PlacedOnlyTag = "GH2ETearPlacedOnly";
+        [ThreadStatic] private static int s_TearOnly;
+
+        private static bool HasNightshroudTear(CTile t) => t != null && t.m_Props.Any(p => IsNightshroudTear(p) && !(p is CObjectShadow s && s.WillBeRemoved));
+
+        [HarmonyPatch(typeof(CAbilityTeleport2), nameof(CAbilityTeleport2.GetTeleportTiles))]
+        [HarmonyPostfix]
+        private static void TeleportTearOnly(CAbilityTeleport2 __instance, ref List<CTile> __result)
+        {
+            try
+            {
+                if (__result == null || !Tagged(__instance, TearOnlyTag)) return;
+                int before = __result.Count;
+                List<CTile> keep = __result.Where(HasNightshroudTear).ToList();
+                if (Tagged(__instance, PlacedOnlyTag))
+                {
+                    int card = GHNightshroud.CardId(__instance);
+                    var placed = new HashSet<CTile>((PhaseManager.CurrentPhaseAction?.PreviousPhaseAbilities ?? new List<CPhaseAction.CPhaseAbility>())
+                        .Select(x => x?.m_Ability).OfType<CAbilityCreateShadow>()
+                        .Where(a => a.TargetingActor == __instance.TargetingActor && GHNightshroud.CardId(a) == card && a.AbilityHasHappened)
+                        .SelectMany(a => a.TilesSelected ?? new List<CTile>()));
+                    keep = keep.Where(placed.Contains).ToList();
+                }
+                __result = keep;
+                if (Logged.Add(__instance.ID))
+                    Log("Tears", GHNightshroud.CardId(__instance), $"{__instance.Name}: {keep.Count} of {before} hexes hold {(Tagged(__instance, PlacedOnlyTag) ? "a Tear this card placed" : "a Nightshroud's Tear")}");
+            }
+            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: Tear-only teleport: " + e); }
+        }
+
+        [HarmonyPatch(typeof(CAbilityRequirements), nameof(CAbilityRequirements.MeetsAbilityRequirements), new[] { typeof(CActor), typeof(CAbility), typeof(CVarsContext), typeof(CItem), typeof(CActiveBonus) })]
+        [HarmonyPrefix]
+        private static void TearOnlyStart(CAbility ability, out bool __state)
+        {
+            __state = Tagged(ability, TearOnlyTag);
+            if (__state) s_TearOnly++;
+        }
+
+        [HarmonyPatch(typeof(CAbilityRequirements), nameof(CAbilityRequirements.MeetsAbilityRequirements), new[] { typeof(CActor), typeof(CAbility), typeof(CVarsContext), typeof(CItem), typeof(CActiveBonus) })]
+        [HarmonyFinalizer]
+        private static Exception TearOnlyEnd(Exception __exception, bool __state)
+        {
+            if (__state && s_TearOnly > 0) s_TearOnly--;
+            return __exception;
+        }
+
+        [HarmonyPatch(typeof(CustomAbility), nameof(CustomAbility.SteppedOnShadow))]
+        [HarmonyPostfix]
+        private static void SteppedOnTear(CTile tile, ref bool __result)
+        {
+            if (s_TearOnly <= 0 || !__result) return;
+            __result = HasNightshroudTear(tile);
         }
 
         // ------------------------------------------------------------------ entering a Tear
@@ -457,11 +608,18 @@ namespace FrosthavenMods
                 else
                 {
                     PendingExhaust.Add(her.ActorGuid);
-                    Log("SwallowedByNight", GHNightshroud.SwallowedByNightCard, "moved from the active area to the lost pile: exhausted at the next exhaustion check");
+                    Log("SwallowedByNight", GHNightshroud.SwallowedByNightCard, "moved from the active area to the lost pile: exhausted at the next phase change (before the round's end checks)");
                 }
             }
             catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: Swallowed by Night: " + e); }
         }
+
+        // The card reaches the lost pile outside her action at a round's end (its last end-of-round slot): she is exhausted
+        // at the very next phase change (the Final Fight precedent, GHBerserker2e), so before the scenario's end-of-round
+        // checks and the next round; the next exhaustion check stays as a fallback.
+        [HarmonyPatch(typeof(GameState), nameof(GameState.NextPhase))]
+        [HarmonyPrefix]
+        private static void ExhaustAtPhaseChange() => ExhaustPending();
 
         [HarmonyPatch(typeof(CPhasePlayerExhausted), "OnNextStep")]
         [HarmonyPrefix]

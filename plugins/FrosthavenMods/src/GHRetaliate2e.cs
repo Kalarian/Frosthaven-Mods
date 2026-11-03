@@ -79,6 +79,7 @@ namespace FrosthavenMods
                 if (s_SpikedHideUsed > 0 && s_SpikedHideHolder != null)
                 {
                     s_SpikedHideHolder.RemoveCharacterResource(SpikedHideResource, s_SpikedHideUsed, updateWorldSpaceUI: true);
+                    GHBruiser2e.SpikedHideSpent(s_SpikedHideHolder, s_SpikedHideUsed);
                     Plugin.Log.LogInfo($"GHRule SpikedHide card 0 perk Spiked Hide: {s_SpikedHideUsed} card(s) discarded for Retaliate {2 * s_SpikedHideUsed} against {Name(attacker)}");
                 }
                 bool retaliated = __state.Override.HasValue ? __state.Override.Value > 0 : s_LastCalc > 0;
@@ -115,6 +116,8 @@ namespace FrosthavenMods
                     __result += 2 * held;
                     s_SpikedHideUsed = held;
                     s_SpikedHideHolder = __instance;
+                    // a retaliate "from one of your attack modifier cards": Defensive Tactics top's trigger
+                    __result += GHBruiser2e.SpikedHideRetaliate(__instance);
                 }
             }
             catch (Exception e) { if (GHClasses.Reported.Add("ra spiked hide")) Plugin.Log.LogError("GHRetaliate2e (Spiked Hide): " + e); }

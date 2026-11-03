@@ -48,6 +48,7 @@ Data:
                 Filter: Self
                 MiscVars:
                     IsValidTeleportTile: CustomAbility.SteppedOnShadow(Tile)
+                    GH2ETearOnly: True
                 AnimOverload: Teleport Into
                 AnimOverload2: Teleport Outof
             BStrengthen:

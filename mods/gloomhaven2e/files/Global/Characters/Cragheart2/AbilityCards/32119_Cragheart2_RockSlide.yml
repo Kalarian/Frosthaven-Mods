@@ -8,9 +8,12 @@ Initiative: 81
 # from Xipe's 99134_Cragheart2_Rock Slide.yml; corrected against tools/gh2e/sheets/Cragheart.json
 # top: no XP (Xipe: XP 1); range 3 carries a square mark; damage and Muddle aim around the created tiles
 # (AllTargetsAdjacentToParentTargets, the 1st edition Rock Slide fix)
-# bottom: APPROXIMATION: the 1st edition Rocky End's merged destroy-attack (play-tested): obstacles within range 2 of
-# YOU are destroyed (the card: within range 2 of the designated enemy), then Attack X (X = 2 x destroyed), range 4,
-# Immobilize, on the enemy you pick
+# bottom (re-audit Cragheart2-02): "Designate one enemy within range 4" = a NullTargeting pick (BDesignate); "destroy
+# all obstacles within range 2 of the designated enemy" = DestroyObstacle, all targets, its hexes measured from the
+# designated enemy by plugin GHCragheart2e (MiscVars GH2E_DestroyAroundDesignated; the engine measures from you);
+# "to perform: Attack X, target the designated enemy, Immobilize, X = twice the destroyed obstacles" = an attack aimed
+# at the designated enemy (Custom targeting), X from CPhaseAction.ObstaclesDestroyedThisAction x 2 (Wave of Destruction
+# shape), performed only when at least one obstacle was destroyed. UNVERIFIED in play.
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -37,26 +40,48 @@ Data:
         Infuse: Earth
     Bottom:
         Abilities:
-            BDestroyObstacleAttack:
-                MergedDestroyObstacleAttack:
-                    Abilities:
-                        BDestroyObstacle:
-                            DestroyObstacle:
-                            Range: 2
-                            Target: -1
-                            AnimOverload: MeleeSmashRockyEnd
-                            SpawnDelay: 2.16
-                        BAttack:
-                            Attack:
-                                Amount: 0
-                            Range: 4
-                            Conditions: Immobilize
-                            StatIsBasedOnX:
-                                Strength:
-                                    BasedOn: ObstaclesToBeDestroyedByMergedAbility
-                                    Multiplier: 2
-                            IgnoreMergedAbilityTargetSelection: True
-                            AnimOverload: None
+            BDesignate:
+                NullTargeting: True
+                Range: 4
+                Target: 1
+                Filter: Enemy
+                AnimOverload: None
+            BDestroyObstacle:
+                DestroyObstacle:
+                Range: 2
+                Target: -1
+                AnimOverload: MeleeSmashRockyEnd
+                SpawnDelay: 2.16
+                MiscVars:
+                    GH2E_DestroyAroundDesignated: True
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        Designate: CustomAbility.FindAbilityInPhaseByName("BDesignate")
+                        ValidateDesignated: Designate != null && Designate.ActorsTargeted.Count > 0
+            BAttack:
+                Attack:
+                    Amount: 0
+                Range: 4
+                Target: 1
+                Conditions: Immobilize
+                Targeting: Custom
+                Vars:
+                    Designate: CustomAbility.FindAbilityInPhaseByName("BDesignate")
+                TargetingVars:
+                    AddValidActorsInRange: Designate.ActorsTargeted
+                    AddActorsToTarget: Designate.ActorsTargeted
+                StatIsBasedOnX:
+                    Strength:
+                        BasedOn: ObstaclesDestroyedThisAction
+                        Multiplier: 2
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateDestroyed: CPhaseAction.ObstaclesDestroyedThisAction > 0
+                        Designate: CustomAbility.FindAbilityInPhaseByName("BDesignate")
+                        ValidateAlive: Designate != null && Designate.ActorsTargeted.Count > 0 && Designate.ActorsTargeted[0].IsDead == False
+                AnimOverload: MeleeSmashRockyEnd
         XP: 2
 Layout:
     Top:
@@ -65,7 +90,9 @@ Layout:
         - Row: "<size=20%> "
         - Row: "$FHS_GH2E_Cragheart2_19_T2$"
         - Row: "<size=20%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth
     Bottom:
         - Row: "$FHS_GH2E_Cragheart2_19_B$"
         - Row: "$FHS_GH2E_Cragheart2_19_B2$"
