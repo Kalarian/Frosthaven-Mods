@@ -8,7 +8,9 @@ Initiative: 87
 # top: "+4 Attack and advantage on all attacks of your next five melee attack abilities": Frosthaven's Crushing Weight
 # shape (BuffAttack, AttackType Melee, BuffIfAttackIsMelee) with advantage and the whole ability counted once
 # (EntireAction, the 1st edition's Angelic Ascension). "Gain Flying": the 1st edition's Winged Congregation (a
-# persistent Move 0 with Fly) as a second bonus of the card; it ends when the card leaves the active area.
+# persistent Move 0 with Fly) as a second bonus of the card: the engine makes a figure flying while it holds a Fly move
+# bonus (CActor.RefreshFlyingFlag: traps and hazardous terrain on forced moves too). The attack bonus ends both when its
+# fifth slot is used (EndAllActiveBonusesOnBaseCardSimultaneously), so the Flying ends with the card.
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -25,6 +27,7 @@ Data:
                     Behaviour: BuffAttack
                     AttackType: Melee
                     EntireAction: True
+                    EndAllActiveBonusesOnBaseCardSimultaneously: True
                     XPTracker: [1,0,1,0,1]
                 AnimOverload: PowerUp
             TFly:

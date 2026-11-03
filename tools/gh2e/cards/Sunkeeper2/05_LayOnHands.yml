@@ -1,6 +1,7 @@
 # card: Lay On Hands
 # Heal X, X = the target's maximum hit points: the 1st edition port's play-tested heal to full (StatIsBasedOnX
-# TargetDamageTaken), the same result since a heal never raises hit points above the maximum.
+# TargetDamageTaken), the same result since a heal never raises hit points above the maximum. For Shielding Light the
+# plugin (GHPerks) counts it as a heal of the target's maximum hit points (it always overflows).
 Discard: [Lost,Discard]
 Data:
     Top:

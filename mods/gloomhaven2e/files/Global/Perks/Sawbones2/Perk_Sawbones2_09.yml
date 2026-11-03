@@ -14,6 +14,8 @@ Abilities:
             ActorType: Player
         CanUndo: False
         AnimOverload: GivePackAdjacent
+        MiscVars:
+            GH2E_PrescriptionBackOne: True
         StartAbilityRequirements:
             Type: ThisAbility
             Vars:

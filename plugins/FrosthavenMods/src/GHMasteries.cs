@@ -82,6 +82,9 @@ namespace FrosthavenMods
         internal const string SummonCardsTag = "FrosthavenMods_SummonsFromDifferentCards";     // (Summoner) Value cards whose summon ability was performed
         // 2nd edition card-accuracy pass (2026-11-02)
         internal const string AttackStreakTag = "FrosthavenMods_AttackStreak";                 // (Nightshroud 2e) Value rounds in a row with an attack ability performed
+        internal const string AttacksWithDamageTag = "FrosthavenMods_AttacksWithDamage";       // (Sunkeeper 2e) Value attacks (one target each) each dealing Amount damage
+        internal const string PackOrPrescriptionTag = "FrosthavenMods_PackOrPrescriptionEveryRound"; // (Sawbones 2e) an ally given a Medical Pack or a Prescription every round but long rests
+        internal const string DamagedFirstTag = "FrosthavenMods_NoUndamagedWhileDamaged";     // (Sawbones 2e) Value attacks, none on an undamaged enemy while a damaged monster lives
 
         private static readonly HashSet<CAbility.EAbilityType> SupportTypes = new HashSet<CAbility.EAbilityType>
         {
@@ -141,6 +144,9 @@ namespace FrosthavenMods
                 else if (tags.Contains(LavaGolemTag)) LavaGolemAllScenario(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(SummonCardsTag)) SummonsFromDifferentCards(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(AttackStreakTag)) AttackStreak(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(AttacksWithDamageTag)) AttacksWithDamage(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(PackOrPrescriptionTag)) PackOrPrescriptionEveryRound(stats, ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(DamagedFirstTag)) DamagedFirst(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else return true;   // a marker of a newer pack this plugin doesn't know: the game's own filter answers
             }
             catch (Exception e)
@@ -830,6 +836,122 @@ namespace FrosthavenMods
             int needed = Math.Max(1, t.Value);
             var cards = new HashSet<int>(AbilityRecords(stats).Where(a => a.ActionData.AbilityType == CAbility.EAbilityType.Summon && a.ActionData.CardID != int.MaxValue).Select(a => a.ActionData.CardID));
             total = needed; met = Math.Min(cards.Count, needed); result = cards.Count >= needed;
+        }
+
+        // ------------------------------------------------------------------ 2nd edition card-accuracy pass: Sunkeeper / Sawbones
+
+        /// <summary>Value attacks each dealing Amount damage or more (the 2nd edition Sunkeeper's Hammer of Dawn: "deal 8
+        /// or more damage with an attack 3 or more times"). One attack = one target of an attack ability (rulebook: each
+        /// target of an attack ability is a separate attack), read from the damage records.</summary>
+        private static void AttacksWithDamage(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value), amount = Math.Max(1, t.Amount);
+            int count = stats.Sum(s => (s.DamageDealt ?? Enumerable.Empty<CPlayerStatsDamage>()).Count(d => d != null && d.ActionData != null
+                && IsEnemy(d.ActorWhoReceivedDamageType) && d.ActionData.AbilityType == CAbility.EAbilityType.Attack && d.FinalDamageAmount >= amount));
+            total = needed; met = Math.Min(count, needed); result = count >= needed;
+            Plugin.Log.LogInfo($"GHRule HammerOfDawn card 0 mastery: {count} attacks dealt {amount}+ damage (needs {needed}){(result ? ": met" : "")}");
+        }
+
+        private static readonly Dictionary<string, bool> PrescriptionAbility = new Dictionary<string, bool>(StringComparer.Ordinal);
+
+        /// <summary>Whether the named ability of a card is a Sawbones Prescription (MiscVars GH2E_Prescription).</summary>
+        internal static bool IsPrescription(int cardId, string abilityName)
+        {
+            if (cardId < 20000 || cardId >= 40000 || string.IsNullOrEmpty(abilityName)) return false;
+            string key = cardId + "/" + abilityName;
+            if (PrescriptionAbility.TryGetValue(key, out bool known)) return known;
+            bool found = false;
+            try
+            {
+                ScenarioRuleLibrary.YML.AbilityCardYMLData data = ScenarioRuleClient.SRLYML?.AbilityCards?.FirstOrDefault(c => c != null && c.ID == cardId);
+                if (data != null)
+                    foreach (var action in new[] { data.TopActionCardData, data.BottomActionCardData })
+                    {
+                        if (action == null) continue;
+                        foreach (CAbility a in CAbilityCard.GetActionAbilities(action))
+                            if (a != null && a.Name == abilityName && a.GetMiscVar("GH2E_Prescription").GetBool()) found = true;
+                    }
+            }
+            catch (Exception) { found = false; }
+            PrescriptionAbility[key] = found;
+            return found;
+        }
+
+        /// <summary>The 2nd edition Sawbones' Constant Care: in every round she took a turn in, except the rounds she long
+        /// rested, she gave an ally (not herself) a Medical Pack or placed a Prescription on one.</summary>
+        private static void PackOrPrescriptionEveryRound(List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            var rests = new HashSet<int>(RestRounds(stats));
+            List<int> rounds = TurnRounds(stats).Where(r => !rests.Contains(r)).ToList();
+            int ok = 0;
+            foreach (int round in rounds)
+            {
+                bool given = false;
+                foreach (CPlayerStatsAbilities a in AbilityRecords(stats))
+                {
+                    if (a.Round != round) continue;
+                    bool pack = a.ActionData.AbilityType == CAbility.EAbilityType.GiveSupplyCard;
+                    if (!pack && !IsPrescription(a.ActionData.CardID, a.ActionData.ActingAbilityName)) continue;
+                    string self = a.ActionData.MainActorGUID;
+                    List<string> guids = a.TargetGUIDs ?? new List<string>();
+                    for (int i = 0; i < guids.Count && !given; i++)
+                    {
+                        if (string.IsNullOrEmpty(guids[i]) || guids[i] == self) continue;
+                        if (a.TargetTypes != null && i < a.TargetTypes.Count && a.TargetTypes[i] != CActor.EType.Player && a.TargetTypes[i] != CActor.EType.HeroSummon && a.TargetTypes[i] != CActor.EType.Ally) continue;
+                        given = true;
+                    }
+                    if (given) break;
+                }
+                if (given) ok++;
+            }
+            total = Math.Max(1, rounds.Count); met = ok; result = rounds.Count > 0 && ok == rounds.Count;
+            Plugin.Log.LogInfo($"GHRule ConstantCare card 0 mastery: a pack or Prescription given to an ally in {ok} of {rounds.Count} rounds ({rests.Count} long-rest rounds skipped){(result ? ": met" : "")}");
+        }
+
+        // ---- the 2nd edition Sawbones' second mastery: attacks on undamaged enemies while a damaged monster lives
+
+        internal const string Sawbones2Class = "Sawbones2ID";
+        private static readonly Dictionary<string, int> UndamagedAttacks = new Dictionary<string, int>(StringComparer.Ordinal);
+        private static readonly Dictionary<string, int> AttacksMade = new Dictionary<string, int>(StringComparer.Ordinal);
+        private static ScenarioState _damagedScenario;
+
+        [HarmonyPatch(typeof(CAbilityAttack), "AttackActor")]
+        [HarmonyPrefix]
+        private static void NoteAttackTarget(CActor targetingActor, CAttackSummary.TargetSummary attackingTargetSummary)
+        {
+            try
+            {
+                if (!(targetingActor is CPlayerActor p) || p.CharacterClass?.ID != Sawbones2Class) return;
+                CActor target = attackingTargetSummary?.ActorToAttack;
+                if (target == null || !CActor.AreActorsEnemies(p.Type, target.Type, p, target)) return;
+                ScenarioState scenario = ScenarioManager.CurrentScenarioState;
+                if (scenario == null) return;
+                if (!ReferenceEquals(scenario, _damagedScenario)) { UndamagedAttacks.Clear(); AttacksMade.Clear(); _damagedScenario = scenario; }
+                string guid = p.ActorGuid ?? "";
+                AttacksMade[guid] = (AttacksMade.TryGetValue(guid, out int n) ? n : 0) + 1;
+                if (target.Health < target.MaxHealth) return;
+                CActor damaged = ScenarioManager.Scenario.AllAliveActors.FirstOrDefault(x => x != null && !x.IsDead && x != target
+                    && (x.Type == CActor.EType.Enemy || x.Type == CActor.EType.Enemy2) && x.Health < x.MaxHealth);
+                if (damaged == null) return;
+                UndamagedAttacks[guid] = (UndamagedAttacks.TryGetValue(guid, out int v) ? v : 0) + 1;
+                Plugin.Log.LogInfo($"GHRule DamagedFirst card 0 mastery: {p.GetPrefabName()} attacked undamaged {target.GetPrefabName()} while damaged {damaged.GetPrefabName()} lives (mastery failed)");
+            }
+            catch (Exception e) { if (Reported.Add("damaged first")) Plugin.Log.LogError("Gloomhaven masteries: Sawbones attack not noted: " + e); }
+        }
+
+        /// <summary>Value attacks or more, none of them on an undamaged enemy while any damaged monster was alive (the
+        /// attacks counted from the ability records, one per target; the violations noted as the attacks happen).</summary>
+        private static void DamagedFirst(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
+        {
+            int needed = Math.Max(1, t.Value);
+            int attacks = AbilityRecords(stats).Where(a => a.ActionData.AbilityType == CAbility.EAbilityType.Attack && a.TargetGUIDs != null)
+                .Sum(a => a.TargetGUIDs.Where((g, i) => !string.IsNullOrEmpty(g) && IsEnemyTarget(a, i)).Count());
+            string guid = SelfGuid(stats) ?? "";
+            int bad = ReferenceEquals(ScenarioManager.CurrentScenarioState, _damagedScenario) && UndamagedAttacks.TryGetValue(guid, out int v) ? v : 0;
+            total = needed + 1;
+            met = Math.Min(attacks, needed) + (bad == 0 ? 1 : 0);
+            result = bad == 0 && attacks >= needed;
+            Plugin.Log.LogInfo($"GHRule DamagedFirst card 0 mastery: {attacks} attacks (needs {needed}), {bad} on an undamaged enemy while a damaged monster lived{(result ? ": met" : "")}");
         }
 
         // ---- augment fires (the Mindthief): each time an attack's augment abilities are stacked, per augment, for the current scenario

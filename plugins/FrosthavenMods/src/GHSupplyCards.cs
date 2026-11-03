@@ -65,12 +65,30 @@ namespace FrosthavenMods
         /// may not share an ID (the hand UI looks cards up by ID and throws on a duplicate). The ability names the first
         /// copy; it is given the first copy of that card that no hero holds right now, so every give is one card, as in
         /// Gloomhaven. The ability object is reused, so its list is put back afterwards.</summary>
+        /// <summary>The 2nd edition packs (supply cards 30000-39999): "add one random card from the supply" (Sawbones' class
+        /// notes), so a free copy is drawn at random with the scenario's seeded generator (the same draw on every co-op PC);
+        /// the 1st edition's packs keep the lowest free copy (its packs are identical cards).</summary>
+        private static bool RandomCopy(int id) => id >= 30000 && id < 40000;
+
+        /// <summary>Whose supply a give comes from: the performer's class when it owns the card, else (a Prescription in an
+        /// ally's active area giving the ally a pack at the start of its turn: Take Your Medicine top) the hero in the
+        /// scenario whose class owns it.</summary>
+        internal static CPlayerActor Supplier(CPlayerActor giver, IEnumerable<int> ids)
+        {
+            if (giver?.CharacterClass?.SupplyCards == null || ids == null) return giver;
+            List<int> list = ids.ToList();
+            if (list.Count == 0 || giver.CharacterClass.SupplyCards.Any(c => list.Contains(c.ID))) return giver;
+            return ScenarioManager.Scenario?.PlayerActors?.FirstOrDefault(p => p?.CharacterClass?.SupplyCards != null
+                && p.CharacterClass.SupplyCards.Any(c => list.Contains(c.ID))) ?? giver;
+        }
+
         [HarmonyPatch(typeof(CAbilityGiveSupplyCard), nameof(CAbilityGiveSupplyCard.ApplyToActor))]
         [HarmonyPrefix]
-        private static void FreeCopy(CAbilityGiveSupplyCard __instance, out List<int> __state)
+        private static bool FreeCopy(CAbilityGiveSupplyCard __instance, CActor actor, out List<int> __state)
         {
             __state = null;
-            if (!(__instance.TargetingActor is CPlayerActor giver) || __instance.SupplyCardIDs == null || Ids.Count == 0) return;
+            if (!(__instance.TargetingActor is CPlayerActor giver) || __instance.SupplyCardIDs == null || Ids.Count == 0) return true;
+            CPlayerActor supplier = Supplier(giver, __instance.SupplyCardIDs);
             var held = new HashSet<int>();
             foreach (CPlayerActor p in ScenarioManager.Scenario?.PlayerActors ?? new List<CPlayerActor>())
             {
@@ -82,22 +100,60 @@ namespace FrosthavenMods
             var picked = new List<int>();
             foreach (int id in __instance.SupplyCardIDs)
             {
-                CAbilityCard named = giver.CharacterClass.SupplyCards.FirstOrDefault(c => c.ID == id);
-                CAbilityCard free = named == null ? null : giver.CharacterClass.SupplyCards
-                    .Where(c => c.Name == named.Name && !held.Contains(c.ID)).OrderBy(c => c.ID).FirstOrDefault();
+                CAbilityCard named = supplier.CharacterClass.SupplyCards.FirstOrDefault(c => c.ID == id);
+                List<CAbilityCard> free = named == null ? new List<CAbilityCard>() : supplier.CharacterClass.SupplyCards
+                    .Where(c => c.Name == named.Name && !held.Contains(c.ID)).OrderBy(c => c.ID).ToList();
                 // every copy held: give nothing (a second card of the same ID in one hand made the hand screen throw;
                 // the 2e Sawbones' six packs run out fast, 2026-11-01)
-                if (free == null)
+                if (free.Count == 0)
                 {
                     if (named != null && GHClasses.Reported.Add("supply out " + named.Name))
                         Plugin.Log.LogInfo($"Gloomhaven supply cards: every {named.Name} is held; none given");
                     continue;
                 }
-                picked.Add(free.ID);
-                held.Add(free.ID);
+                CAbilityCard chosen = free[0];
+                if (RandomCopy(id) && free.Count > 1)
+                {
+                    int roll = 0;
+                    try { roll = ScenarioManager.CurrentScenarioState.ScenarioRNG.Next(free.Count); } catch (Exception) { roll = 0; }
+                    chosen = free[roll];
+                    Plugin.Log.LogInfo($"GHRule RandomMedicalPack card {chosen.ID} drawn at random from {free.Count} free {named.Name} cards ({string.Join(", ", free.Select(c => c.ID))})");
+                }
+                picked.Add(chosen.ID);
+                held.Add(chosen.ID);
             }
             __state = __instance.SupplyCardIDs;
             __instance.SupplyCardIDs = picked;
+            if (ReferenceEquals(supplier, giver)) return true;
+            // the performer's class owns none of these cards: give them from the owner's supply, as the game's own give does
+            try
+            {
+                __instance.AbilityHasHappened = true;
+                if (__instance.ActorsTargeted == null) Traverse.Create(__instance).Property("ActorsTargeted").SetValue(new List<CActor>());
+                __instance.ActorsTargeted.Add(actor);
+                var given = new List<CAbilityCard>();
+                if (actor is CPlayerActor receiver)
+                    foreach (int id in picked)
+                    {
+                        CAbilityCard card = supplier.CharacterClass.SupplyCards.FirstOrDefault(c => c.ID == id);
+                        if (card == null) continue;
+                        CAbilityCard copy = card.Copy();
+                        given.Add(copy);
+                        receiver.CharacterClass.HandAbilityCards.Add(copy);
+                        CharacterClassManager.AllAbilityCardInstances.Add(copy);
+                    }
+                if (actor is CPlayerActor to)
+                    ScenarioRuleClient.MessageHandler(new CSupplyCardsGiven_MessageData(__instance.TargetingActor) { m_ActorGivenCards = to, m_SupplyCardsGiven = given });
+                Plugin.Log.LogInfo($"GHRule PackFromOwnerSupply card {SafeCard(__instance)} {giver.GetPrefabName()} gains {string.Join(", ", given.Select(c => c.Name + " " + c.ID))} from {supplier.GetPrefabName()}'s supply");
+            }
+            catch (Exception e) { Plugin.Log.LogError("Gloomhaven supply cards: give from the owner's supply failed: " + e); }
+            return false;
+        }
+
+        private static int SafeCard(CAbility a)
+        {
+            try { return a?.GetAbilityBaseCard()?.ID ?? 0; }
+            catch (Exception) { return 0; }
         }
 
         [HarmonyPatch(typeof(CAbilityGiveSupplyCard), nameof(CAbilityGiveSupplyCard.ApplyToActor))]

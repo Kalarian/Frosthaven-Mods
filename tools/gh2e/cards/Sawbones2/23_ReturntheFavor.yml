@@ -1,8 +1,8 @@
 # card: Return the Favor
 # top: the grant (ControlActor) may only pick an ally holding an active Prescription (filter Vars), no range printed:
-# range 99. bottom: one condition removed from an adjacent ally (the game picks which) with the XP on the removal;
-# "you may give one adjacent enemy the condition you removed" has no shape without a Choose on the ally: text only,
-# NEEDS PLUGIN.
+# range 99. bottom: one condition removed from an adjacent ally (the performer picks which: GH2E_ChooseCondition) with
+# the XP on the removal; then "you may give one adjacent enemy the condition you removed": the plugin (GHSawbones2e,
+# GH2E_TransferRemoved) offers each enemy adjacent to the Sawbones in turn, and the one accepted gains that condition.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -45,6 +45,9 @@ Data:
                 Filter: Ally
                 XP: 1
                 AnimOverload: BuffAdjacent
+                MiscVars:
+                    GH2E_ChooseCondition: True
+                    GH2E_TransferRemoved: True
 Layout:
     Top:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"

@@ -1,19 +1,36 @@
 # card: Take Your Medicine
-# top (Prescription): a pack given by an ally's start-of-turn bonus would come from that ally's class (the engine's
-# CAbilityGiveSupplyCard takes TargetingActor.CharacterClass.SupplyCards), which holds none: front-loaded instead, the
-# three medical packs go to the adjacent ally at once (the plugin hands out three different free copies). Approximation.
-# bottom: playing a Medical Pack from an ally's hand for one action: text only, NEEDS PLUGIN.
+# top (Prescription): Regenerative Tissue's start-of-turn Prescription shape on one adjacent ally (GiveAbilityCardToActor,
+# three slots, MiscVars GH2E_Prescription): at the start of each of the ally's next three turns it performs a
+# GiveSupplyCard to itself. The engine would take the pack from the performer's own class supply (the ally has none);
+# the plugin (GHSupplyCards) takes it from the Sawbones' supply when the performer's class has no such card.
+# bottom: Move 3, then "in initiative order, each ally may play one Medical Pack from their hand for one action": the
+# marker BAlliesPlayPacks (MiscVars GH2E_AlliesPlayPacks) makes the plugin (GHSawbones2e) give each ally holding a
+# pack, in initiative order, the template BPlayPack (Geminate's SelectAndPlayCard from the hand, one card, skippable,
+# supply cards only) performed by that ally. The template (MiscVars GH2E_Template) is taken out of the card's action
+# when the card is read, so it never runs on its own.
 Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
-            TGiveSupplyCard:
-                GiveSupplyCard: [13230, 13230, 13230]
-                Range: 1
+            TPrescription:
+                AddActiveBonus:
+                    GiveSupplyCard: [13230]
+                    Filter: Self
+                    CanUndo: False
+                    AnimOverload: GivePackAdjacent
                 Filter:
                     TargetType: Ally
                     ActorType: Player
-                AnimOverload: GivePackAdjacent
+                Range: 1
+                Target: 1
+                MiscVars:
+                    GH2E_Prescription: True
+                ActiveBonus:
+                    Duration: Persistent
+                    Behaviour: StartTurnAbility
+                    GiveAbilityCardToActor: True
+                    XPTracker: [0,0,0]
+                AnimOverload: BuffAdjacent
         XP: 1
     Bottom:
         Abilities:
@@ -21,12 +38,41 @@ Data:
                 Move:
                     Amount: 3
                     CircleEnhancements: 1
+            BAlliesPlayPacks:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                CanUndo: False
+                AnimOverload: None
+                MiscVars:
+                    GH2E_AlliesPlayPacks: True
+            BPlayPack:
+                SelectAndPlayCard:
+                    CardPile: Hand
+                    Amount: 1
+                    MinRequiredCards: 0
+                Filter: Self
+                AutoTrigger: True
+                CanSkip: True
+                CanUndo: False
+                SkipAnim: True
+                HelpBoxTooltipLocKey: "GH2E_Sawbones2_PLAYPACK_HELP"
+                MiscVars:
+                    GH2E_Template: True
+                    IsCardValid: AbilityCard.SupplyCard
 Layout:
     Top:
         - Row: "$GH2E_Sawbones2_RX$"
         - Row: "<size=20%> "
-        - Row: "$GH2E_Sawbones2_26_T$"
+        - Active:
+            Ability: TPrescription
+            Icon: Positive_Cards
+            ListLayout: "$GH2E_Sawbones2_26_T$"
+            Layout: "$GH2E_Sawbones2_26_T$"
         - Row: "<size=50%> "
+        - XPTracker: TPrescription
+        - Row: "<size=20%> "
         - XP: 1
     Bottom:
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"

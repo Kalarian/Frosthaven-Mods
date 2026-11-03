@@ -1,8 +1,9 @@
 # card: Precaution
 # top: Shield 1 this round on you and every ally (no range printed). "Each ally may move the token back one slot on one
 # of their active Prescriptions": Frosthaven's MoveActiveBonusTracker only moves bonuses from the holder's own class
-# cards (CAbilityMoveActiveBonusTracker.GetActiveBonusesWithTrackers: card ClassID == holder's class), and a
-# Prescription stays a Sawbones card: text only, NEEDS PLUGIN. bottom: Ward on up to two figures within range 1.
+# cards, and a Prescription stays a Sawbones card, so the plugin (GHSawbones2e, MiscVars GH2E_PrescriptionBack) asks
+# each ally given the Shield that holds a Prescription with a used slot whether to move its token back one slot.
+# bottom: Ward on up to two figures within range 1.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -12,6 +13,8 @@ Data:
                 Filter: [Self, Ally]
                 Targeting: All
                 Target: -1
+                MiscVars:
+                    GH2E_PrescriptionBack: True
                 ActiveBonus:
                     Duration: Round
                 AnimOverload: RadialBuff

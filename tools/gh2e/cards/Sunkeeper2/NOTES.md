@@ -114,3 +114,17 @@ packcheck 0 problems / 0 warnings, rulecheck 45 ok, no gh_port warnings, no miss
 
 - Perk Second Wind (2026-11-02, supersedes the line above): `AMC_GH2E_Sunkeeper2_Recover1_M1` with a plain skippable RecoverDiscardedCards (run after the attack by GHModifierAbilities.cs, no Choose). Bench it.
 - 21 Arresting March top: the consume's Null placeholder was moved before the grant on 2026-11-01 (after it, switching Light on stopped the game: RefreshConsumeBar NullReference); since the plugin's GHConsumeOnNull guard loads (423dade) it is back after the grant, as printed. Bench once (switch Light on at the step).
+
+## 2026-11-02: card-accuracy pass (sunkeeper-sawbones; supersedes the matching lines above)
+
+Plugin GHSunkeeper2e (misc vars on the pack abilities):
+- 09 Purifying Aura top: no AttackType; GH2E_AdjacentAttackerOnly: only attacks from an adjacent enemy (melee or ranged)
+  give the Retaliate and use a slot.
+- 11 Defensive Stance bottom: GH2E_PierceReduction 2 on the persistent Shield: attacks on her lose 2 Pierce.
+- 13 Sanctify top: GH2E_WardBonus 1: +2 instead of +1 while the attacking ally has Ward.
+- 14 Beacon of Light top: a persistent marker bonus (NullTargeting, three slots, GH2E_HealSplash 2) replaces the Target
+  override: single-target heals from ability cards also heal every ally within range 2 (line of sight) of the primary.
+- 29 Divine Ascension top: EndAllActiveBonusesOnBaseCardSimultaneously on the attack bonus: the Flying bonus ends with
+  the fifth melee attack; the engine already treats a held Fly move bonus as standing Flying (RefreshFlyingFlag).
+- Perk Shielding Light (Sunkeeper211) = GHPerks (with Lay on Hands counted as a heal of the target's maximum HP).
+- Mastery Hammer of Dawn = FrosthavenMods_AttacksWithDamage (any three attacks, one target each, of 8+ damage).

@@ -69,8 +69,8 @@ PERKS = [
         AutoTrigger: True
         SkipAnim: True
         CanUndo: False"""}),
-    # the 1st edition's Shielding Light, answered by the plugin there (GHPerks.cs, perk ID Sunkeeper10); this one is
-    # Sunkeeper211: text only until the plugin knows that ID (NOTES.md, shared changes)
+    # answered by the plugin (GHPerks.cs knows both the 1st edition's Sunkeeper10 and this Sunkeeper211; Lay on Hands
+    # counts as a heal of the target's maximum hit points)
     (1, "Shielding Light", "Whenever one of your heals would cause an ally's current hit point value to increase beyond their maximum hit point value, that ally gains <sprite name=Ward>",
      {"Cost": 2, "Flags": "[Passive]"}),
 ]
@@ -92,13 +92,13 @@ BattleGoalCondition:
         Value: 1"""),
     ("Hammer of Dawn", "In a single scenario, deal <sprite name=Damage> 8 or more with an attack 3 or more times",
      """\
-# The plugin's attack-action tag (GHMasteries.cs, the Demolitionist's Heavy Hitter): Value attack actions each dealing
-# Amount damage. It counts different card halves, where the sheet counts any three attacks (NOTES.md).
+# Answered by the Frosthaven Mods plugin (GHMasteries.cs, FrosthavenMods_AttacksWithDamage): Value attacks (one target
+# of an attack ability each, any card, the same card again included) each dealing Amount damage or more.
 BattleGoalCondition:
     - Targets:
         Filter: CountXRounds
         SubFilter: Scenario
-        EnemyFamilies: [FrosthavenMods_AttackActionsWithDamage]
+        EnemyFamilies: [FrosthavenMods_AttacksWithDamage]
         CharacterIDs:
             ActorID: Sunkeeper2ID
         Value: 3

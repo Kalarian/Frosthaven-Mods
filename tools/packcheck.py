@@ -234,9 +234,10 @@ PRINTED_EXCEPTIONS = {
         "Frosthaven's TargetDistanceRangeDiff gives distance - 1 for a melee area; base 2 makes 1 + distance (NOTES 29)",
     (33522, "Top", "number Heal 1"):       # Living Mountain: "at the end of each of this summon's turns it performs: Heal 1"
         "the summon's own end-of-turn Heal 1 lives in its summon file (summons/RockColossus2.yml), not on the card",
+    (33228, "Bottom", "round"):            # Secret of the Oak: the +4 Attack / +4 Move "that round" choice
+        "the plugin's template BSecretChoice (GHSawbones2e) holds one-use round bonuses: printed 'that round', not a round icon",
     # --- OPEN rows (ALL.json): the printed rule needs a plugin system another task builds; remove the line when it ships ---
     (32625, "Bottom", "persistent"): "OPEN Berserker2-27 Bone Breaker: the character token (persistent) is not built",
-    (33226, "Top", "persistent"): "OPEN Sawbones2-25 Take Your Medicine: the per-turn Prescription is not built",
     (32327, "Top", "persistent"): "OPEN SilentKnife-11 Hired Help: the money-token cost and token are not built",
     (33416, "Bottom", "round"): "OPEN Soothsinger2-21 Soothing Lullaby: the token on the monster is not built",
     (33429, "Bottom", "round"): "OPEN Soothsinger2-26 Grand Finale: 'skip moving your token this round' is not built",
