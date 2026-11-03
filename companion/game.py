@@ -174,6 +174,15 @@ MOD_RULES = {
     24: "Tradeable resources and equipment", 26: "Share duplicate loot", 28: "Reveal event outcomes",
     29: "Dwarf's balance changes", 30: "Game bug fixes",
 }
+# Rules that are on by default: their bit means "switched off" (ModRules.Rule.Inverted).
+MOD_RULES_OFF = {12: "Stacking attack bonuses"}
+
+
+def rules_on(rules):
+    """The names of the mod rules on in a campaign's rules number."""
+    on = [(b, n) for b, n in MOD_RULES.items() if rules >> b & 1]
+    on += [(b, n) for b, n in MOD_RULES_OFF.items() if not rules >> b & 1]
+    return [n for b, n in sorted(on)]
 
 
 # A content pack is data the game loads at startup (FrosthavenMods\packs\<name>\pack.json); its house rule bit unlocks it
@@ -226,8 +235,7 @@ def all_campaigns(gdir=None):
         name, rules = _header(saves[0])
         name = name or os.path.basename(folder).replace("_", " ")
         found[_key(name)] = {"name": name, "lastPlayed": os.path.getmtime(saves[0]),
-                             "rules": [MOD_RULES[b] for b in sorted(MOD_RULES) if rules is not None and rules >> b & 1]
-                             if rules is not None else None, "hasMap": False, "records": 0}
+                             "rules": rules_on(rules) if rules is not None else None, "hasMap": False, "records": 0}
     for c in campaigns(gdir):
         e = found.setdefault(_key(c["name"]), {"name": c["name"], "lastPlayed": c["mtime"], "rules": None, "records": 0})
         e["hasMap"], e["mapSaved"] = True, c["mtime"]

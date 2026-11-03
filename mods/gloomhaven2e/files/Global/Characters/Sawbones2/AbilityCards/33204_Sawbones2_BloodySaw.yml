@@ -7,7 +7,7 @@ Initiative: 25
 # card: Bloody Saw
 # top: a self conditional override (Frosthaven's Extra Decoration shape) whose filter checks every player figure for an
 # active bonus tagged as a Prescription (MiscVars GH2E_Prescription on every Prescription ability of this class).
-# bottom: Safeguard (data stand-in, NOTES.md); its diamond-plus mark is dropped (a Safeguard has no value to enhance).
+# bottom: Safeguard [diamond+], self (the pack's Safeguard condition, AUTHORING.md; the carrier holds the mark).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -30,19 +30,12 @@ Data:
     Bottom:
         Abilities:
             BSafeguard:
-                NullTargeting: True
+                Ward:
+                    DiamondPlusEnhancements: 1
                 Filter: Self
                 AnimOverload: PowerUp
-                ActiveBonus:
-                    Duration: Persistent
-                    Behaviour: GenericOnNegativeCondition
-                    XPTracker: [0]
-                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
-                    Vars:
-                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
-                        ValidateNotImmune: CAbility.ImmuneToAbility(TriggerTarget, TriggerAbility) == False
-                        ValidateIsNegativeCondition: TriggerAbility.AbilityType == "Poison" || TriggerAbility.AbilityType == "Wound" || TriggerAbility.AbilityType == "Stun" || TriggerAbility.AbilityType == "Disarm" || TriggerAbility.AbilityType == "Immobilize" || TriggerAbility.AbilityType == "Muddle" || TriggerAbility.AbilityType == "Curse" || TriggerAbility.AbilityType == "Bane" || TriggerAbility.AbilityType == "Brittle" || TriggerAbility.AbilityType == "Impair"
-                        PreventCondition: True
+                MiscVars:
+                    GH2ESafeguard: True
             BLoot:
                 Loot: 1
                 AnimOverload: Loot
@@ -52,10 +45,6 @@ Layout:
         - Row: "<size=20%> "
         - Row: "$FHS_GH2E_Sawbones2_04_T$"
     Bottom:
-        - Active:
-            Ability: BSafeguard
-            Icon: Positive_DamagePrevent
-            ListLayout: "$FHS_GH2E_SAFEGUARD$"
-            Layout: "$FHS_GH2E_Sawbones2_SG$"
-        - Divider:
+        - Row: "<size=130%>$FHS_GH2E_Sawbones2_SG$ <size=100%><voffset=1>@BSafeguard@"
+        - Row: "<size=50%> "
         - Row: "<size=150%><sprite name=Loot> *BLoot*"

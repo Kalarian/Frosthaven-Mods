@@ -1245,7 +1245,9 @@ def main():
         gh_res = text(files["CharacterResources/CharacterResources.yml"]) if "CharacterResources/CharacterResources.yml" in files else ""
         for m in re.finditer(r"^(\w+):\r?\n((?:[ \t]+.*\r?\n?|[ \t]*\r?\n)+)", gh_res, re.M):
             rid = re.search(r'^\s*ID:\s*"?(\w+)"?', m.group(2), re.M)
-            if rid and any(f'"{rid.group(1)}"' in c for c in converted):
+            # "# pack-wide": a resource the plugin gives (the 2nd edition's Safeguard token, GHSafeguard.cs), carried
+            # whether or not a card names it, with its own Frosthaven icon
+            if rid and (any(f'"{rid.group(1)}"' in c for c in converted) or "# pack-wide" in m.group(2)):
                 resources[rid.group(1)] = (cls, m.group(0).rstrip() + "\n")
         if summon_ids:
             print(f"{cls}: {len(summon_ids)} summon definition(s): {', '.join(summon_ids)}; models copied: {', '.join(shipped) or 'none'}")
@@ -1366,7 +1368,8 @@ def main():
         # 126's, also DropOnDeath). APPROXIMATION (looks only).
         blocks = []
         for rid, (owner, blk) in resources.items():
-            blk = re.sub(r'^(\s*Sprite:\s*).*$', lambda g: f'{g.group(1)}"GHClass_{owner}"', blk, flags=re.M)
+            if "# pack-wide" not in blk:
+                blk = re.sub(r'^(\s*Sprite:\s*).*$', lambda g: f'{g.group(1)}"GHClass_{owner}"', blk, flags=re.M)
             blk = re.sub(r'^(\s*ResourceModel:\s*).*$', r'\1"FH_Scenario_Campaign_126_SCENARIO_OBJECT_1"', blk, flags=re.M)
             used_keys.update("GH_" + k for k in re.findall(r'^\s*LocKey:\s*"\$?(\w+)\$?"', blk, re.M))
             blk = re.sub(r'^(\s*LocKey:\s*)"\$?(\w+)\$?"', r'\1"$GH_\2$"', blk, flags=re.M)

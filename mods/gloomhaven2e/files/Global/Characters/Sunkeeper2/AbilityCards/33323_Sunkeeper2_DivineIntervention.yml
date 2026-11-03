@@ -6,8 +6,9 @@ Level: 6
 Initiative: 9
 # card: Divine Intervention
 # top: the 1st edition card's damage redirect (PreventAndApplyToActiveBonusCaster, optional per hit).
-# bottom consume: "enemies' positive and 2x modifier cards count as +0 this round" has no Frosthaven ability (NEEDS
-# PLUGIN): approximated with the nearest the engine has, disadvantage on every attack targeting you or an ally this round.
+# bottom consume: "enemies' positive and 2x modifier cards count as +0 this round": Frosthaven's Iron Helmet rewrite
+# (ChangeAttackModifier, Behaviour AdjustWhenAttacked: a drawn modifier is replaced when the holder is the attack's
+# target) with +1, +2 and 2x -> +0, for the round, on you and every ally (Targeting All): every enemy attack on your side.
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -37,15 +38,16 @@ Data:
                 Consume:
                     Elements: Light
                     Abilities:
-                        BCLightDisadvantage:
-                            AttackersGainDisadvantage: 1
+                        BCLightAdjust:
+                            ChangeAttackModifier:
+                            ReplaceModifiers: ["+1", "+2", "*2"]
+                            ReplaceWithModifier: "+0"
                             Target: -1
-                            Filter: Self
+                            Targeting: All
+                            Filter: [Self, Ally]
                             ActiveBonus:
                                 Duration: Round
-                                IsAura: True
-                                AuraFilter: [Self, Ally]
-                                AuraTargeting: All
+                                Behaviour: AdjustWhenAttacked
                             AnimOverload: PositiveBuffRadial
                     XP: 1
 Layout:

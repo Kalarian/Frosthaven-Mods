@@ -48,13 +48,14 @@ Where a mark's shape differs from the converter's default (Attack/Heal/Move with
   move. Unverified for a condition ability (the Trample fix was proven on an attack).
 - **23 Divine Intervention** top: the 1st edition's redirect (`PreventAndApplyToActiveBonusCaster`). Bottom: "grant
   all allies within range 3 and self: Shield 1" = a round Shield 1 on you and allies within range 3. Consume Light:
-  "enemies' positive and 2x modifier cards count as +0 this round" has no Frosthaven ability. **NEEDS PLUGIN.**
-  Approximation: every attack targeting you or any ally gains disadvantage this round (the nearest engine effect; text
-  left as printed).
-- **24 Scales of Justice** bottom: **NEEDS PLUGIN** (null drawn counts as 2x; triggering on any Light consumed during an
-  attack). Approximation: the 1st edition's Weapon of Purity toggle: a persistent attack bonus the player switches on
-  for an attack, consuming Light for +1 Attack, Pierce 1. A Light spent by the attack card's own consume can't also pay
-  for the toggle.
+  "enemies' positive and 2x modifier cards count as +0 this round" = Frosthaven's Iron Helmet
+  rewrite (ChangeAttackModifier, AdjustWhenAttacked) with ReplaceModifiers +1, +2, 2x -> +0, Duration Round, on you and
+  every ally (Targeting All, 2026-11-02). Attacks on an objective or an unallied figure aren't covered (none are
+  enemies' targets in practice).
+- **24 Scales of Justice** bottom (2026-11-02): a persistent BuffAttack +1, Pierce 1 (not a toggle) that the plugin
+  (GHModifierRewrites.cs) lets count only on attacks of an action whose toggled consumes include Light; in those
+  attacks a drawn null counts as 2x (GameState.ChangeModifierValues). "During one of your attack abilities" is read as
+  "during the action": a Light consume on another ability of the same half counts too.
 - **25 Bright Aegis** bottom consume: "that ally may immediately play up to two cards, one top and one bottom action" =
   the 1st edition's verified `ExtraTurn: BothActions` (Unwavering Mandate) on one adjacent ally (the player picks the ally
   who recovered). Its `PreviewEffectText` points at `FHS_GH2E_Sunkeeper2_25_B` (a key the pack writes).
@@ -93,8 +94,8 @@ Where a mark's shape differs from the converter's default (Attack/Heal/Move with
 
 - **GHPerks.cs**: Shielding Light for perk ID `Sunkeeper211` (the 2e class), as for `Sunkeeper10`.
 - **Plugin (NEEDS PLUGIN rules)**: Pierce reduction (Defensive Stance); per-attacker Ward check for +2 (Sanctify);
-  heal splash to allies within range 2 of the primary target (Beacon of Light); enemies' positive/2x modifiers as +0 for
-  a round (Divine Intervention); null-as-2x and "any Light consumed during an attack" trigger (Scales of Justice).
+  heal splash to allies within range 2 of the primary target (Beacon of Light). (Done 2026-11-02: Divine Intervention's
+  rewrite is data; Scales of Justice is GHModifierRewrites.cs; Second Wind's recover runs through GHModifierAbilities.cs.)
 - **GHMasteries.cs**: a per-attack damage tag (any N attacks dealing X+), for the second mastery.
 - **1st edition pack** (seen while porting, not changed): Unwavering Mandate (20190) has `PreviewEffectText: 190_T`, but
   the 1e pack's strings.tsv only holds `FHS_GH_190_T`, so the preview probably shows the raw key.
@@ -106,3 +107,7 @@ packcheck 0 problems / 0 warnings, rulecheck 45 ok, no gh_port warnings, no miss
 - Perk Second Wind: modifier rewritten, `AMC_GH2E_Sunkeeper2_Recover1_M1` is now -1 with a top-level Choose (Frosthaven's AMC_PushOrPull2_R) whose one option is the RecoverDiscardedCards 1 (level 1, you or an adjacent ally); skipping the Choose is the printed "may" (a RecoverDiscardedCards ability on a modifier card stops the game when drawn; a Choose's option runs as an ordinary ability). Help text GH2E_Sunkeeper2_RECOVER_HELP. Bench it.
 - 2026-11-01: the perk modifiers built on a Choose inside a modifier card are plain Frosthaven cards for now (NEEDS PLUGIN): Sedation's self-Disarm option stopped the game ('Invalid targeting type', 2e rerun 10:47), and the same untested shape was in every Choose modifier. Each perk now gives only its number, never worse than not taking it.
 - 21 Arresting March top: the consume's Null placeholder now comes before the grant (after it, switching Light on stopped the game: RefreshConsumeBar NullReference, 2026-11-01 12:34). The heal now happens before the ally's attack.
+
+## 2026-11-02: modifier abilities and Safeguard
+
+- Perk Second Wind (2026-11-02, supersedes the line above): `AMC_GH2E_Sunkeeper2_Recover1_M1` with a plain skippable RecoverDiscardedCards (run after the attack by GHModifierAbilities.cs, no Choose). Bench it.

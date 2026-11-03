@@ -136,3 +136,7 @@ the converted files: all 30 match. Square marks on Attack (Relentless Offensive 
 `GH2E_SKIP_RULECHECK_BUILD=1 python tools/gh2e/check.py Doomstalker2`: **CHECK PASSED Doomstalker2** (30 of 30 cards,
 packcheck 0 problems / 0 warnings, rulecheck 50 ok, 7 summon definitions, 10 perks, no gh_port warnings, no missing
 text keys).
+
+## 2026-11-02: modifier abilities and Safeguard
+
+- Perks (2026-11-02, supersede the lines above): Second Arrow is a real Attack 2, Range 5 (TryToPerformAsSummoner: the Doomstalker attacks also when a summon drew it); Pack Hunt grants only a summon adjacent to the attack's target (Custom targeting on TargetActor's neighbours). Bench both.

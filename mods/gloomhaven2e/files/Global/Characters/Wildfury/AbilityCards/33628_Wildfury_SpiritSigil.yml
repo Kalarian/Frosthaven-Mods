@@ -8,7 +8,7 @@ Initiative: 85
 # top: "! consume Air and Earth (required, both)", Summon Vital Force (summons/VitalForce.yml: HP 3 [square], no move or
 # attack; aura: allies within range 3 add +2 Attack to their first attack each round), XP 1 with the consume.
 # Persistent icon, not lost.
-# bottom: Move 5 [circle]; Bless and Safeguard on one ally within range 1 [square] (Safeguard: the class's stand-in, a
+# bottom: Move 5 [circle]; Bless and Safeguard on one ally within range 1 [square] (Safeguard: the pack's condition, a
 # sub-ability on the Bless target); "! infuse Air/Earth (either)": an Infuse ability with the element picker.
 Discard: [Discard,Discard]
 Data:
@@ -45,24 +45,13 @@ Data:
                 AnimOverload: RangedCast
                 SubAbilities:
                     BBlessSafeguard:
-                        AddActiveBonus:
-                            Null: True
-                            Filter: Self
-                            AutoTrigger: True
-                            SkipAnim: True
+                        Ward: True
                         Filter: [Self, Ally]
                         UseParentTargets: True
                         SkipAnim: True
-                        ActiveBonus:
-                            Duration: Persistent
-                            Behaviour: GenericOnNegativeCondition
-                            IsToggleBonus: True
-                            XPTracker: [0]
-                            ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
-                            Vars:
-                                ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
-                                ValidateNotScenarioEffect: TriggerAbility.TreatedAsScenarioEffect() == False
-                                PreventCondition: True
+                        AnimOverload: None
+                        MiscVars:
+                            GH2ESafeguard: True
             BInfuse:
                 Infuse: [Air, Earth]
                 ShowElementPicker: True

@@ -6,10 +6,8 @@ Level: 6
 Initiative: 2
 # card: Dark Cloud
 # top: Muddle on all enemies within range 3; reveal (Eyes of the Night's shape, range 3); a Tear within range 3.
-# bottom: Safeguard, self = the class's Safeguard stand-in (AUTHORING.md: Frosthaven's prevent-a-negative-condition
-# bonus, Metal Mosaic perk 09 / Pain Conduit Blood Ritual: GenericOnNegativeCondition + PreventCondition on the caster,
-# one prevention: XPTracker [0]). The printed diamond+ mark on Safeguard has no slot (the bonus has no condition value
-# to enhance): dropped (NOTES.md).
+# bottom: Safeguard [diamond+], self: the pack's Safeguard condition (AUTHORING.md: a Ward carrier tagged GH2ESafeguard,
+# GHSafeguard.cs), which holds the printed diamond+ mark.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -40,24 +38,12 @@ Data:
     Bottom:
         Abilities:
             BSafeguard:
-                AddActiveBonus:
-                    NullTargeting: True
-                    Filter: Self
-                    AutoTrigger: True
-                    SkipAnim: True
-                    IgnoreStun: True
+                Ward:
+                    DiamondPlusEnhancements: 1
                 Filter: Self
                 AnimOverload: PowerUp
-                ActiveBonus:
-                    Duration: Persistent
-                    Behaviour: GenericOnNegativeCondition
-                    TriggerOnCaster: True
-                    IsToggleBonus: True
-                    XPTracker: [0]
-                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
-                    Vars:
-                        ValidateIsCaster: TriggerTarget == ActiveBonus.Caster
-                        PreventCondition: True
+                MiscVars:
+                    GH2ESafeguard: True
             BMove:
                 Move:
                     Amount: 4
@@ -81,11 +67,7 @@ Layout:
         - Row: "<size=50%> "
         - Infuse: Dark
     Bottom:
-        - Active:
-            Ability: BSafeguard
-            Icon: Positive_DamagePrevent
-            ListLayout: "$FHS_GH2E_SAFEGUARD$"
-            Layout: "$FHS_GH2E_SAFEGUARD$"
+        - Row: "<size=150%>$FHS_GH2E_SAFEGUARD_NAME$ <size=100%><voffset=1>@BSafeguard@"
         - Divider:
         - Row: "<size=150%><sprite name=Move> *BMove* <size=100%><voffset=1>@BMove@"
         - Divider:

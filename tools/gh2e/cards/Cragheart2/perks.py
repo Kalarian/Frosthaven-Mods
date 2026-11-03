@@ -10,9 +10,9 @@ PERKS = [
     # a new modifier: +1, rolling, a 1-hex obstacle in an empty hex adjacent to the target (aimed as Frosthaven's own
     # AMC_Damage1Trap_P0 / AMC_CreateLimitedHazardous_P0 aim around the target)
     (3, "Rock Spray", 'Replace one <sprite name="0"> with one <sprite name="+1"> "Create one 1-hex obstacle tile in an empty hex adjacent to the target" <sprite name=Rolling>',
-     # NEEDS PLUGIN: a modifier card can't run a Create ability ("Unsupported attackAbility modifier ability type": the
-     # game's error screen, 2e pass 1, 2026-11-01 03:09, Avalanche). Frosthaven's rolling +1 until the plugin makes the obstacle.
-     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_P1_R]"}),
+     # a modifier card's Create ability was "Unsupported attackAbility modifier ability type" (the game's error screen, 2e
+     # pass 1, 2026-11-01 03:09, Avalanche); the plugin runs it after the attack since 2026-11-02 (GHModifierAbilities.cs)
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_GH2E_Cragheart2_Obstacle_P1_R]"}),
     (2, "Rumbling Shove", 'Replace one <sprite name="0"> with two <sprite name="+1"> <sprite name=Push> 1',
      {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Push1_P1, AMC_Push1_P1]"}),
     (3, "Grasping Earth", 'Add one <sprite name="+2"> <sprite name=Immobilize>',

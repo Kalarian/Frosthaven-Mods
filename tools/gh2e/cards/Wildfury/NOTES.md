@@ -42,10 +42,10 @@ gave most shapes. Layouts are plain Gloomhaven style (gh_layout redraws them). E
   OncePerRound`. Use slots: `XPTracker` one entry per slot, XP on the dashed first slot ([1,0,0], Domination
   [1,0,0,0]); N slots = N triggers (AUTHORING.md / 2e rulebook p.28). **Untested:** OncePerRound on this behaviour
   (Frosthaven uses it on toggles and banners).
-- **Safeguard** (Nature's Gift top, Ancient Ward bottom, Spirit Sigil bottom): the data stand-in until the plugin has
-  a real Safeguard condition, in the Elementalist's shape (a sub-ability with `UseParentTargets` on the heal/bless,
-  `AddActiveBonus Null` + `GenericOnNegativeCondition`, `PreventCondition`, one-slot track, holder check), list line
-  `GH2E_SAFEGUARD`, icon `Positive_DamagePrevent`. All three the same shape. **Untested.**
+- **Safeguard** (Nature's Gift top, Ancient Ward bottom, Spirit Sigil bottom): the pack's real Safeguard condition
+  since 2026-11-02 (AUTHORING.md, Safeguard; plugin GHSafeguard.cs): a Ward carrier tagged `GH2ESafeguard`, which the
+  plugin turns into the Safeguard token (a status-row icon; it blocks the next negative condition by itself, then
+  ends; no stacking; the card is not kept active). A sub-ability with `UseParentTargets` on the heal/bless.
 - **Summons** (immobile aura sigils, Move/Attack/Range 0, persistent, not lost), Frosthaven's banner auras:
   - Wind Idol (`WindIdolID`, model stand-in `WindTotem`, the 1st edition Storm Sigil's summon): Pierce 1 aura range 3
     (Banner of Strength range aura + Boneshaper Solid Bones' `AttackEffect StandardBuff Pierce`).
@@ -168,3 +168,7 @@ the Bear + OncePerRound + the required-consume gate), Spirit Swap top teleport, 
 Focused Aggression bottom Bear-only retaliate, Stone Sigil bottom adjacency, Jaws of Death repeats, Unbreakable Bond
 bottom, the three Safeguards, perks 1, 3, 9, 10.
 - Perk Pack Bond: its override read TargetingActor, null when the Bear draws the card (error screen in the 2e sweep, 2026-11-01 09:36). Now Frosthaven's plain +2 (AMC_Basic_P2); the +1 within range 4 is NEEDS PLUGIN.
+
+## 2026-11-02: modifier abilities and Safeguard
+
+- Perk 7 Warded Path (2026-11-02, supersedes the line above): `AMC_GH2E_Wildfury_P1_Safeguard`, +1 and the pack's Safeguard on one ally at any distance (GHModifierAbilities.cs runs its Ward carrier, GHSafeguard.cs turns it into Safeguard). The three card Safeguards are the real condition too. Bench it.

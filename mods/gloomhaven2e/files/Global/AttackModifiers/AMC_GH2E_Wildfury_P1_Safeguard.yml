@@ -1,0 +1,15 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Wildfury_P1_Safeguard
+MathModifier: "+1"
+TryToPerformAsSummoner: True
+Abilities:
+    ASafeguard:
+        Ward: True
+        Filter: Ally
+        Target: 1
+        Targeting: Range
+        Range: 99
+        CanUndo: False
+        AnimOverload: Heal
+        MiscVars:
+            GH2ESafeguard: True

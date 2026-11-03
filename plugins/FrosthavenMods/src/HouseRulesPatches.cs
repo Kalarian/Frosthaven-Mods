@@ -49,7 +49,7 @@ namespace FrosthavenMods
                 foreach (ModRules.Rule rule in ModRules.All.OrderBy(x => x.Name, StringComparer.OrdinalIgnoreCase))
                 {
                     ModRules.Rule r = rule;
-                    bool isOn = (rules & r.Flag) == r.Flag;
+                    bool isOn = r.OnIn(rules);
                     string blocked = Blocked(r, !isOn);
                     var dto = new CampaignSettingDTO
                     {
@@ -60,7 +60,7 @@ namespace FrosthavenMods
                         Interactable = interactable && blocked == null,
                         OnValueChange = result =>
                         {
-                            if (result is bool on && Blocked(r, on) == null) onRuleChangeCallback?.Invoke(r.Flag, on);
+                            if (result is bool on && Blocked(r, on) == null) onRuleChangeCallback?.Invoke(r.Flag, on != r.Inverted);
                         },
                     };
                     Ours.Add(dto, r);
@@ -106,7 +106,7 @@ namespace FrosthavenMods
             {
                 if (!Ours.TryGetValue(dto, out ModRules.Rule r)) continue;
                 bool locked = r.AffectsScenarios && onlineScenario;
-                string blocked = locked ? null : Blocked(r, !ModRules.IsOn(r.Flag));
+                string blocked = locked ? null : Blocked(r, !r.OnIn(ModRules.Current));
                 dto.Interactable = canChange && !locked && blocked == null;
                 // AddOurRules built these texts from the rules as they were then; rebuild them for now
                 string note = locked ? ModRules.LockedNote : Note(blocked);
@@ -153,7 +153,7 @@ namespace FrosthavenMods
                     data = SaveData.Instance?.Global?.CurrentAdventureData;
                     if (data == null) return;
                 }
-                ERulesFlag next = on ? data.Rules | r.Flag : data.Rules & ~r.Flag;
+                ERulesFlag next = r.Switch(data.Rules, on);
                 CoopLog.Write($"RULES CHANGED here: '{r.Name}' -> {(on ? "on" : "off")} (rules {(int)data.Rules:X} -> {(int)next:X}: {ModRules.Describe(next)}) role={CoopLog.Role()}");
                 data.ChangeCampaignRules(next);
                 CoopLog.Snapshot("after rule change");

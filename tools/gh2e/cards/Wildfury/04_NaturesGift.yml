@@ -1,5 +1,5 @@
 # card: Nature's Gift
-# top: Heal 2 [diamond+], Range 3, Safeguard on the heal target (the class's Safeguard stand-in, NOTES.md), infuse
+# top: Heal 2 [diamond+], Range 3, Safeguard on the heal target (the pack's Safeguard condition, AUTHORING.md), infuse
 # Earth. bottom: Poison + Muddle on one enemy within range 5, no attack (the 1st edition Disorienting Roar's
 # condition-only shape), infuse Earth.
 Discard: [Discard,Discard]
@@ -15,24 +15,13 @@ Data:
                 AnimOverload: Heal
                 SubAbilities:
                     THealSafeguard:
-                        AddActiveBonus:
-                            Null: True
-                            Filter: Self
-                            AutoTrigger: True
-                            SkipAnim: True
+                        Ward: True
                         Filter: [Self, Ally]
                         UseParentTargets: True
                         SkipAnim: True
-                        ActiveBonus:
-                            Duration: Persistent
-                            Behaviour: GenericOnNegativeCondition
-                            IsToggleBonus: True
-                            XPTracker: [0]
-                            ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
-                            Vars:
-                                ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
-                                ValidateNotScenarioEffect: TriggerAbility.TreatedAsScenarioEffect() == False
-                                PreventCondition: True
+                        AnimOverload: None
+                        MiscVars:
+                            GH2ESafeguard: True
         Infuse: Earth
     Bottom:
         Abilities:

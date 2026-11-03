@@ -23,7 +23,7 @@ PERKS = [
     (2, "Gathering Dark", 'Replace one <sprite name="0"> with one <sprite name="+2"> <sprite name=CreateDark>',
      {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Dark_P2]"}),
     (2, "Torn Veil", 'Replace one <sprite name="+1"> with one <sprite name="0"> "Place one Tear in a hex adjacent to the target"',
-     {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_Basic_P1]"}),
+     {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_GH2E_Nightshroud2_Tear_P0]"}),
     (1, "Unfazed", 'Ignore scenario effects and add two <sprite name="+1">',
      {"CardsToAdd": "[AMC_Basic_P1, AMC_Basic_P1]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
     # the Elementalist's long-rest infusion (gh_crossover ELEMENTALIST_PERKS), Dark only; "may" is automatic
@@ -109,9 +109,29 @@ BattleGoalCondition:
 ]
 
 NEW_CARDS = {
-    "AMC_GH2E_Nightshroud2_Teleport2_R": ('MathModifier: "+0"\nRolling: True\nAbilities:\n    ATeleport:\n'
-                                          '        Teleport2: 2\n        Filter: Self\n        AnimOverload: Teleport Into\n'
-                                          '        AnimOverload2: Teleport Outof\n'),
+    # "grant one adjacent ally or self: Teleport 2": a granted action (ControlActor, a kind the game's modifier code runs
+    # after the attack) on you or an adjacent ally, in Frosthaven's Banner Spear Explosive Epicenter shape (Filter
+    # [Self, Ally], Range 1, Target 1, ControlActorType Player)
+    "AMC_GH2E_Nightshroud2_Teleport2_R": """\
+MathModifier: "+0"
+Rolling: True
+Abilities:
+    AGrantHop:
+        ControlActor:
+            Abilities:
+                AHop:
+                    Teleport2: 2
+                    StrengthIsBase: True
+                    Filter: Self
+                    AnimOverload: Teleport Into
+                    AnimOverload2: Teleport Outof
+            ControlActorType: Player
+        Target: 1
+        Range: 1
+        Targeting: Range
+        Filter: [Self, Ally]
+        AnimOverload: Grant
+""",
     # A modifier card runs only the ability kinds the game's modifier code knows (an AddModifiersToMonsterDeck or a
     # CreateShadow on it is the error screen when drawn). The curse: a self NullTargeting (Frosthaven's AMC_Resonance_P1)
     # whose end (PerformVars OnAbilityEnded, as Frosthaven's AMC_ShowNextAbilityCard_P0) calls the game's own
@@ -129,28 +149,20 @@ Abilities:
             OnAbilityEnded:
                 AddCurse: (TargetActor == null) || (TargetActor.IsDead == False) || CustomAbility.AddCurseModifiersToEnemyMonsterDecks(1)
 """,
-    # The Tear: the CreateShadow rides in a Choose, whose chosen option runs as an ordinary ability (Frosthaven's
-    # AMC_PushOrPull2_R is a top-level Choose; AMC_ImproveTrapDamage2OrHeal2_P0's options are Null abilities). One
-    # option, so the player may skip the Tear.
+    # The Tear: a CreateShadow on a modifier card isn't run by the game's modifier code; the plugin runs it after the
+    # attack (GHModifierAbilities.cs, 2026-11-02), with the attack's target as TargetActor: one hex adjacent to it.
     "AMC_GH2E_Nightshroud2_Tear_P0": """\
 MathModifier: "+0"
 Abilities:
-    AChooseTear:
-        Filter: Self
+    ATear:
+        CreateShadow:
         CanUndo: False
         HelpBoxTooltipLocKey: "GH2E_Nightshroud2_TEAR_HELP"
-        PreviewEffectText: "Tear"
-        Choose:
-            Abilities:
-                ATear:
-                    CreateShadow:
-                    CanUndo: False
-                    PreviewEffectText: "Tear"
-                    Target: 1
-                    Targeting: Custom
-                    TargetingVars:
-                        AddTilesInRange: CustomAbility.GetAdjacentTiles(TargetActor.Tile)
-                    AnimOverload: Shadow Manipulation
+        Target: 1
+        Targeting: Custom
+        TargetingVars:
+            AddTilesInRange: CustomAbility.GetAdjacentTiles(TargetActor.Tile)
+        AnimOverload: Shadow Manipulation
 """,
 }
 

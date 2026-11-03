@@ -37,14 +37,11 @@ Nothing here has been run in the game. Every shape below that Frosthaven's own c
   checks consume Requirements. So the player clicks this bonus after toggling two element consumes; it isn't
   automatic. If an element is untoggled afterwards, the bonus stays. **Untested**: it needs a check that the button
   shows and refreshes after each toggle. Fallback: text only.
-- **Safeguard** (Malleable Evocation top, Prismatic Barrage bottom, both on the heal target): the data stand-in until
-  the plugin has a real Safeguard condition. The consume override adds a sub-ability under the heal
-  (`UseParentTargets`). That sub-ability is an `AddActiveBonus` with a Null effect, which puts the bonus on the target
-  (CAbilityAddActiveBonus.ApplyToActor -> baseCard.AddActiveBonus(this, actor, caster)). The bonus is
-  `GenericOnNegativeCondition`, `PreventCondition: True`, with a one-slot track (`XPTracker: [0]`). It checks
-  `TriggerTarget == ActiveBonus.Actor`, the holder, rather than Caster, because an ally can hold it. Its list line is
-  `GH2E_SAFEGUARD` with the icon `Positive_DamagePrevent`. The generic event is global (CGenericActiveBonus.FireEvent),
-  so the holder check is what limits it. **Untested.**
+- **Safeguard** (Malleable Evocation top, Prismatic Barrage bottom, both on the heal target): the pack's real
+  Safeguard condition since 2026-11-02 (AUTHORING.md, Safeguard; plugin GHSafeguard.cs): a Ward carrier tagged
+  `GH2ESafeguard`, which the plugin turns into the Safeguard token (a status-row icon; it blocks the next negative
+  condition by itself, then ends; no stacking; the card is not kept active). Here a sub-ability of the heal with
+  `UseParentTargets`.
 - **Grant one ally X**: ControlActor on an ally, using JotL Signs of the Void's verified shape (the ally's
   Shield/Retaliate with `Filter: Self`, `UseOriginalActor`, `ActiveBonusDuration: Round`).
 
@@ -160,7 +157,7 @@ rolling is a new rolling infuse-any modifier.
 
 - Plugin: Lingering Essence hook (enemy consumes an element -> the holder may infuse it).
 - Plugin: Pulsing Cores per-slot rotation (Fire|Ice, Air|Earth, Light|Dark).
-- Plugin: real Safeguard condition (replaces the data stand-in on Malleable Evocation and Prismatic Barrage).
+- (done 2026-11-02) Plugin: real Safeguard condition.
 - Plugin: per-element "doesn't wane" for perk 12 (Fire/Ice/Air/Earth only).
 - Plugin (optional): make the "two or more elements consumed" bonuses automatic instead of an extra consume button.
 - GHMasteries: tags for "consume 4+ elements in one turn (count 5)" and "all six elements strong or waning at once (3

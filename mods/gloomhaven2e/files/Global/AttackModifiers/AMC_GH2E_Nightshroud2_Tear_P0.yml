@@ -1,0 +1,13 @@
+Parser: AttackModifier
+Name: AMC_GH2E_Nightshroud2_Tear_P0
+MathModifier: "+0"
+Abilities:
+    ATear:
+        CreateShadow:
+        CanUndo: False
+        HelpBoxTooltipLocKey: "GH2E_Nightshroud2_TEAR_HELP"
+        Target: 1
+        Targeting: Custom
+        TargetingVars:
+            AddTilesInRange: CustomAbility.GetAdjacentTiles(TargetActor.Tile)
+        AnimOverload: Shadow Manipulation

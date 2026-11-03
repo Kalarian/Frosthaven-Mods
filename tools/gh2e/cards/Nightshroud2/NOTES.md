@@ -107,10 +107,10 @@ list text `GH2E_Nightshroud2_26_B`) and Swallowed by Night bottom (a persistent 
 - **21 Claws of the Night** top: APPROXIMATION: the delayed Attack 5 fires at the **start** of your next turn
   (StartTurnAbility), since an end-of-turn bonus would fire at the end of this turn already; skipped while Invisible
   (ActiveBonus Requirements). Bottom: Slice Through's kill trigger for the round, one use.
-- **22 Dark Cloud** bottom: Safeguard = the AUTHORING recipe (GenericOnNegativeCondition + PreventCondition,
-  TriggerOnCaster, ValidateIsCaster, one prevention via XPTracker [0], list text `GH2E_SAFEGUARD`): the data stand-in
-  until the plugin has a real Safeguard. **Mark**: the printed diamond+ on Safeguard is dropped (the bonus has no
-  condition value to enhance).
+- **22 Dark Cloud** bottom: Safeguard [diamond+], self: the pack's real Safeguard condition since 2026-11-02
+  (AUTHORING.md, Safeguard; plugin GHSafeguard.cs): a Ward carrier tagged `GH2ESafeguard`, which the plugin turns into
+  the Safeguard token (a status-row icon; it blocks the next negative condition by itself, then ends; no stacking; the
+  card is not kept active). The carrier holds the printed diamond+ mark.
 - **25 Prey on the Weak** top: a second Attack 4 on the first attack's target when 2 x HP <= max HP (= HP <= half max
   rounded down), its XP 1 as AbilityXP.
 - **26 Shadowstrike** top: area damage = NullTargeting area + Damage sub-ability on `ActorsOnRedHexes` (Banner Spear
@@ -159,3 +159,7 @@ packcheck 0 problems / 0 warnings, rulecheck 43 ok, no gh_port warnings, no miss
 - Perk Lingering Doom: modifier rewritten, `AMC_GH2E_Nightshroud2_KillCurse_P1` is now +1 with a self NullTargeting (Frosthaven's AMC_Resonance_P1) whose OnAbilityEnded PerformVars (as AMC_ShowNextAbilityCard_P0) calls the game's own `CustomAbility.AddCurseModifiersToEnemyMonsterDecks(1)` (Pain Conduit Redemption) only when the attack's target `IsDead` (an AddModifiersToMonsterDeck ability on a modifier card stops the game when drawn). Exact; bench: the curse comes on a kill and not otherwise.
 - Perk Torn Veil: modifier rewritten, `AMC_GH2E_Nightshroud2_Tear_P0` is now +0 with a top-level Choose (Frosthaven's AMC_PushOrPull2_R) whose one option is the CreateShadow adjacent to the target (a CreateShadow ability on a modifier card stops the game when drawn; a Choose's chosen option runs as an ordinary ability, as AMC_ImproveTrapDamage2OrHeal2_P0's Null options). The Tear can be skipped (printed: mandatory). Help text GH2E_Nightshroud2_TEAR_HELP. Bench it.
 - 2026-11-01: the perk modifiers built on a Choose inside a modifier card are plain Frosthaven cards for now (NEEDS PLUGIN): Sedation's self-Disarm option stopped the game ('Invalid targeting type', 2e rerun 10:47), and the same untested shape was in every Choose modifier. Each perk now gives only its number, never worse than not taking it.
+
+## 2026-11-02: modifier abilities and Safeguard
+
+- Perks (2026-11-02, supersede the lines above): Shadow Hop grants Teleport 2 to you or an adjacent ally (ControlActor, Banner Spear Explosive Epicenter shape); Torn Veil is the +0 Tear card (CreateShadow adjacent to the target, run after the attack by GHModifierAbilities.cs, no Choose; mandatory as printed). Bench both.

@@ -1,7 +1,7 @@
 # card: Ancient Ward
 # top: Attack 2 [diamond], Range 4, Disarm; consume Air and Earth (two circles: both): +1 Target, XP 2.
 # bottom: Move 4 [circle]; Heal 1 [square], Target 2 [square], Range 3; consume Air/Earth (split: either, Geminate's
-# ConsumeOnlyOneElement pair): +1 Heal, Safeguard on the heal targets (the class's Safeguard stand-in), XP 1.
+# ConsumeOnlyOneElement pair): +1 Heal, Safeguard on the heal targets (the pack's Safeguard condition), XP 1.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -48,24 +48,13 @@ Data:
                         Strength: 1
                         SubAbilities:
                             BHealSafeguardA:
-                                AddActiveBonus:
-                                    Null: True
-                                    Filter: Self
-                                    AutoTrigger: True
-                                    SkipAnim: True
+                                Ward: True
                                 Filter: [Self, Ally]
                                 UseParentTargets: True
                                 SkipAnim: True
-                                ActiveBonus:
-                                    Duration: Persistent
-                                    Behaviour: GenericOnNegativeCondition
-                                    IsToggleBonus: True
-                                    XPTracker: [0]
-                                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
-                                    Vars:
-                                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
-                                        ValidateNotScenarioEffect: TriggerAbility.TreatedAsScenarioEffect() == False
-                                        PreventCondition: True
+                                AnimOverload: None
+                                MiscVars:
+                                    GH2ESafeguard: True
                 XP: 1
             BCEarth:
                 Elements: [Earth]
@@ -76,24 +65,13 @@ Data:
                         Strength: 1
                         SubAbilities:
                             BHealSafeguardE:
-                                AddActiveBonus:
-                                    Null: True
-                                    Filter: Self
-                                    AutoTrigger: True
-                                    SkipAnim: True
+                                Ward: True
                                 Filter: [Self, Ally]
                                 UseParentTargets: True
                                 SkipAnim: True
-                                ActiveBonus:
-                                    Duration: Persistent
-                                    Behaviour: GenericOnNegativeCondition
-                                    IsToggleBonus: True
-                                    XPTracker: [0]
-                                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
-                                    Vars:
-                                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
-                                        ValidateNotScenarioEffect: TriggerAbility.TreatedAsScenarioEffect() == False
-                                        PreventCondition: True
+                                AnimOverload: None
+                                MiscVars:
+                                    GH2ESafeguard: True
                 XP: 1
 Layout:
     Top:

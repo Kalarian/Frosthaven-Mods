@@ -32,6 +32,15 @@ namespace FrosthavenMods
             /// <summary>A named save the host's game makes just before this rule goes on (a point to go back to when the
             /// rule commits the campaign to something, as a content pack does).</summary>
             public string BackupBeforeOn;
+
+            /// <summary>The bit means OFF: a rule that is on by default (in every campaign, old ones included) stores
+            /// "switched off" instead, so a campaign that never touched it has it on.</summary>
+            public bool Inverted;
+
+            public bool OnIn(ERulesFlag rules) => Inverted ? (rules & Flag) == 0 : (rules & Flag) == Flag;
+
+            /// <summary>The rules number with this rule switched to <paramref name="on"/>.</summary>
+            public ERulesFlag Switch(ERulesFlag rules, bool on) => on != Inverted ? rules | Flag : rules & ~Flag;
         }
 
         /// <summary>The note added to a locked rule's description while it is locked.</summary>
@@ -67,6 +76,8 @@ namespace FrosthavenMods
         // scenario rules). A save keeps it without the mods too. (Its CanRespecCharacters bit was offered as "Respec
         // without the Library" for a day and dropped, 2026-10-25: the Library's respec is enough.)
         public const ERulesFlag ReducedRandomness = ERulesFlag.ReducedRandomness;
+        // "Stacking attack bonuses" (2026-11-02), on by default: the bit means it was switched OFF (Rule.Inverted)
+        public const ERulesFlag StackingAttackBonusesOff = (ERulesFlag)(1 << 12);
 
         public static readonly List<Rule> All = new List<Rule>
         {
@@ -247,6 +258,19 @@ namespace FrosthavenMods
             },
             new Rule
             {
+                Flag = StackingAttackBonusesOff,
+                Inverted = true,
+                AffectsScenarios = true,
+                Name = "Stacking attack bonuses (mod)",
+                Description = "The official rule of the physical game (rulebook p.25): every bonus that applies to an " +
+                              "attack adds up. The digital game keeps only the largest plain +X Attack bonus: with a +1 " +
+                              "from one card and a +2 from another, an attack gets +2, not +3. With this on (the default), " +
+                              "it gets +3. Bonuses for melee or ranged attacks only already add up in the digital game.\n\n" +
+                              "Applies to every card, items and Frosthaven's own included.\n" +
+                              "Board game rule restored: every attack bonus adds.",
+            },
+            new Rule
+            {
                 Flag = MilestoneSaves,
                 Name = "Milestone saves (mod)",
                 Description = "The host's game makes a named save at the start of each scenario and when the outpost opens " +
@@ -307,12 +331,15 @@ namespace FrosthavenMods
 
         public static bool IsOn(ERulesFlag flag) => (Current & flag) == flag;
 
+        /// <summary>Stacking attack bonuses (on unless switched off: its bit means off).</summary>
+        public static bool StackingAttackBonuses => (Current & StackingAttackBonusesOff) == 0;
+
         /// <summary>The Give window (Ctrl+click, the GIVE button, the hint line) is there while the trading rule is on.</summary>
         public static bool GiveOn => IsOn(Trading);
 
         public static string Describe(ERulesFlag rules)
         {
-            var on = All.Where(r => (rules & r.Flag) == r.Flag).Select(r => r.Name).ToArray();
+            var on = All.Where(r => r.OnIn(rules)).Select(r => r.Name).ToArray();
             return on.Length == 0 ? "none on" : string.Join(", ", on);
         }
 

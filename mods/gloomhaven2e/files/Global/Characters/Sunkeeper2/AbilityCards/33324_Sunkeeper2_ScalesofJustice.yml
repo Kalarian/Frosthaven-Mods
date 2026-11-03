@@ -6,9 +6,9 @@ Level: 6
 Initiative: 30
 # card: Scales of Justice
 # bottom: "whenever you consume Light during one of your attack abilities, +1 Attack, Pierce 1 on all its attacks, and
-# null modifier cards count as 2x". The 1st edition's Weapon of Purity shape: a persistent attack bonus the player
-# toggles on an attack, which consumes Light for it (Consuming: Light). A Light consumed by the attack card's own
-# consume can't also pay for the toggle, and the null-as-2x rule has no Frosthaven ability: NEEDS PLUGIN.
+# null modifier cards count as 2x": a persistent BuffAttack +1, Pierce 1 that the plugin lets count only on attacks of
+# an action that consumes Light, and in those attacks a drawn null is a 2x (GHModifierRewrites.cs, 2026-11-02). Not a
+# toggle: the Light comes from the card's own consume, as printed.
 Discard: [Lost,Lost]
 Data:
     Top:
@@ -32,8 +32,6 @@ Data:
                     Behaviour: BuffAttack
                     Duration: Persistent
                     ValidAbilityType: Attack
-                    Consuming: Light
-                    IsToggleBonus: True
                 AnimOverload: PowerUp
         XP: 1
 Layout:

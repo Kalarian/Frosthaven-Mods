@@ -180,15 +180,24 @@ for anything outside the class's folder (converter, plugin) that would make a ca
 ## Safeguard (2e rulebook p.26)
 
 "The next time the figure would gain one or more negative conditions, prevent one of the conditions" (a curse card
-added to the deck counts; a drawn curse doesn't). Frosthaven has no Safeguard condition, but it has the data shape for
-"prevent a negative condition": an active bonus with `Behaviour: GenericOnNegativeCondition` and `Vars:
-PreventCondition: True` (Frosthaven's Metal Mosaic perk 09, `extracted/Base/Global/Perks/MetalMosaic/Perk_MetalMosaic_09.yml`,
-prevents its own poison; Pain Conduit's Blood Ritual bottom, `.../PainConduit/AbilityCards/306_PainConduit_BloodRitual.yml`,
-prevents an ally's condition as an aura; Geminate perk 12 too). Write Safeguard as that bonus on the figure that gains
-Safeguard, ending after one prevention (a one-slot use track, `XPTracker: [0]`, or the cleanest way you find in those
-examples), `TriggerOnCaster: True` with `ValidateIsCaster` for yourself; for "Safeguard, target one ally" put it on the
-ally (Frosthaven's way of placing a bonus on another figure: see how its cards give an ally a persistent bonus, e.g.
-the Banner Spear's or Blood Ritual's aura with a single target). Icon: `Positive_DamagePrevent` unless Frosthaven has
-a better one; the text key `GH2E_SAFEGUARD` ("Safeguard: prevent the next negative condition") may be used for the
-list line. Note in NOTES.md that it is the data stand-in (until the plugin has a real Safeguard condition), and keep
-all of a class's Safeguards in the same shape.
+added to the deck counts; a drawn curse doesn't). Safeguard is a real condition in the pack since 2026-11-02, built by
+the plugin (`plugins/FrosthavenMods/src/GHSafeguard.cs`): the token is the pack-wide character resource `GH2ESafeguard`
+(`tools/gh2e/shared/resources.yml`, MaxAmount 1: no stacking), shown on the figure's status row with the icon
+`Positive_DamagePrevent`; the plugin removes it when it blocks the next negative condition (CActor.ApplyCondition,
+curses added to the deck included; immunity first). It is not tied to the card: the card goes where it is printed to go.
+
+The one shape, for every class: a Ward ability tagged `GH2ESafeguard` (Ward is only the carrier; the plugin turns its
+Ward into Safeguard). Standalone ("Safeguard, self" / "target all within range 1"):
+
+    BSafeguard:
+        Ward:
+            DiamondPlusEnhancements: 1     # only where the card prints the mark; otherwise `Ward: True`
+        Filter: Self                       # or [Self, Ally] with Range / Target
+        AnimOverload: PowerUp
+        MiscVars:
+            GH2ESafeguard: True
+
+On another ability's targets ("Heal 2, Range 3, Safeguard"): the same ability as a sub-ability with `UseParentTargets:
+True`, `SkipAnim: True`, `AnimOverload: None`. The card's layout writes Safeguard as a plain row (it is not an active
+bonus): the shared text `GH2E_SAFEGUARD_NAME` ("Safeguard") or the class's own key, with `@<ability>@` for a mark.
+Never the old data stand-in (a GenericOnNegativeCondition + PreventCondition bonus).

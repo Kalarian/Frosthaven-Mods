@@ -1,5 +1,14 @@
 Parser: CharacterResources
 
+GH2ESafeguard:
+    # pack-wide: the Safeguard condition token (2e rulebook: the next negative condition the figure would gain is
+    # prevented, then Safeguard is removed; no stacking: MaxAmount 1). Given and spent by the plugin (GHSafeguard.cs);
+    # shown on the figure's status row with this Frosthaven icon and text.
+    ID: "GH2ESafeguard"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "$GH_GH2E_SAFEGUARD_TOOLTIP$"
+    MaxAmount: 1
+
 SilentKnifeMoney:
     ID: "SilentKnifeMoney"
     Sprite: "GHClass_SilentKnife"

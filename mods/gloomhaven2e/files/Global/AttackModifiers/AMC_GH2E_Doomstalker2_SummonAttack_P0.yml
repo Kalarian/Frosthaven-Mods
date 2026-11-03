@@ -9,6 +9,9 @@ Abilities:
                 ASummonAttack:
                     Attack: +0
                     Range: +0
-        Range: 99
+        Target: 1
+        Targeting: Custom
+        TargetingVars:
+            AddValidActorsInRange: CustomAbility.GetAdjacentTiles(TargetActor.Tile).Where(obj.LivingActor != null).Select(obj.LivingActor)
         Filter: OwnSummon
         AnimOverload: Grant

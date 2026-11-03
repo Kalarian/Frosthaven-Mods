@@ -302,7 +302,7 @@ function campaignCard(s) {
   const on = new Set(c.rules || []);
   const all = ["Battle stats", "Dwarf's balance changes", "Easier item reward window", "Game bug fixes", "Masteries carry over",
     "Milestone saves", "Modifier deck odds", "More story events", "Reduced randomness", "Reveal event outcomes",
-    "Scenario map file", "Share duplicate loot", "Show personal quest rewards", "Tradeable resources and equipment",
+    "Scenario map file", "Share duplicate loot", "Show personal quest rewards", "Stacking attack bonuses", "Tradeable resources and equipment",
     "Gloomhaven classes: all open at once"];
   const ruled = all.filter(r => on.has(r)).length;
   // content packs: new classes the game loads at startup; each has its own switch, which locks on once used

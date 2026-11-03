@@ -44,24 +44,13 @@ Data:
                         ParentName: THeal
                         SubAbilities:
                             THealSafeguard:
-                                AddActiveBonus:
-                                    Null: True
-                                    Filter: Self
-                                    AutoTrigger: True
-                                    SkipAnim: True
+                                Ward: True
                                 Filter: [Self, Ally]
                                 UseParentTargets: True
                                 SkipAnim: True
-                                ActiveBonus:
-                                    Duration: Persistent
-                                    Behaviour: GenericOnNegativeCondition
-                                    IsToggleBonus: True
-                                    XPTracker: [0]
-                                    ListLayoutOverride: [$GH2E_SAFEGUARD$, Positive_DamagePrevent]
-                                    Vars:
-                                        ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
-                                        ValidateNotScenarioEffect: TriggerAbility.TreatedAsScenarioEffect() == False
-                                        PreventCondition: True
+                                AnimOverload: None
+                                MiscVars:
+                                    GH2ESafeguard: True
             TCTwo:
                 Requirements:
                     Type: ThisAbility
