@@ -49,8 +49,9 @@ Everyone in a co-op game must update. **Finish your current scenario before you 
 
 ## Known issues
 
-- **Finish a scenario before you update.** Some modifier cards were renamed, and a save made in the middle of a
-  scenario with the old version may not load. Saves made in the outpost are fine.
+- **Safest to finish your current scenario before you update.** 59 Gloomhaven cards' consume steps changed shape, and a
+  save made in the middle of a scenario that has one of those bonuses in play may not load cleanly. Saves made in the
+  outpost are fine.
 - The 2nd edition pack uses **stand-in models for 17 summons** (borrowed from the 1st edition: the Doomstalker's
   beasts, the Soultether's spirits, the Tinkerer's devices and others).
 - Not tried yet: co-op with the 2nd edition pack; the 2nd edition masteries counted at the end of a scenario on a
