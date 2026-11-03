@@ -3,10 +3,11 @@
 # top: Frosthaven's Blinkblade Systems Reboot bottom ("may be performed while stunned; remove all negative conditions":
 # IgnoreStun + RemoveConditions All over Frosthaven's negative-condition list); the heal also ignores Stun, as the
 # whole action may be performed while stunned
-# bottom: the trap is relocated with Frosthaven's MoveTrap (Trapper Spike Pit): after the move, any trap within 6 (the
-# designated adjacent trap is at most 6 away after Move 5) to an empty hex adjacent to you (MoveTrapRange is counted from
-# the mover, CAbilityMoveTrap). Springing it on an enemy is impossible (Frosthaven only moves traps to empty hexes) -
-# NEEDS PLUGIN for "spring it on the enemy there, XP 1".
+# bottom: the trap is relocated with Frosthaven's MoveTrap (Trapper Spike Pit) after the move. The plugin
+# (GHSilentKnife.cs): the traps adjacent to her when the move starts are designated (GHDesignateAdjacentTrap) and the
+# only ones MoveTrap offers (range 6: at most 6 away after Move 5); the destinations, empty hexes adjacent to her, also
+# offer featureless hexes adjacent to her holding an enemy (GHMoveTrapOntoEnemy): the trap springs on that enemy at once
+# and she gains XP 1.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -31,6 +32,8 @@ Data:
                     Amount: 5
                     Enhancements: 1
                 Jump: True
+                MiscVars:
+                    GHDesignateAdjacentTrap: True
             BMoveTrap:
                 MoveTrap:
                 Range: 6
@@ -38,6 +41,8 @@ Data:
                 Target: 1
                 TargetIsBase: True
                 MoveTrapRange: 1
+                MiscVars:
+                    GHMoveTrapOntoEnemy: True
 Layout:
     Top:
         - Row: "$GH2E_SilentKnife_24_T$"

@@ -8,9 +8,10 @@ Initiative: 90
 # corrected against tools/gh2e/sheets/SilentKnife.json
 # top: "+2 Attack and XP 1 if flanking OR isolated" (one +2, not +4): two mutually exclusive overrides - flanking, or
 # isolated and not flanking (Xipe's +2/+2/-2 gave no XP)
-# bottom: Frosthaven's Pyroclast Feed the Beast bottom (a one-slot round bonus fired by DuringActionAbilityOnAttackFinished)
-# with the Drifter's Shockwave checks (melee attack; the target, here, has Poison), performing Attack 2, Range 3, Poison
-# as a Blinkblade Stab Them All-style added attack
+# bottom: a one-slot round bonus fired after the whole attack ability (Frosthaven's DuringActionAbilityOnAttackAbility-
+# Finished, Infuser Propulsive Tailwind) of a melee attack (the Drifter's Shockwave check), performing Attack 2, Range 3,
+# Poison as a Blinkblade Stab Them All-style added attack. "Targeting an enemy that has Poison": the plugin
+# (GHSilentKnife.cs) notes each target's Poison before its hit and lets the bonus fire only if one had it.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -53,15 +54,14 @@ Data:
                     Filter: Enemy
                     CanUndo: False
                 ActiveBonus:
-                    Behaviour: DuringActionAbilityOnAttackFinished
+                    Behaviour: DuringActionAbilityOnAttackAbilityFinished
+                    ValidAbilityTypes: [Attack]
                     Duration: Round
                     AttackType: Melee
                     XPTracker: [0]
                     Vars:
                         AttackAbility: TriggerAbility
                         ValidateIsMeleeAttack: AttackAbility.IsMeleeAttack
-                        EnemyTarget: TriggerTarget
-                        ValidateTargetHasPoison: EnemyTarget.Tokens.HasKey(CCondition.ENegativeCondition.Poison)
 Layout:
     Top:
         - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"

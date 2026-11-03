@@ -39,11 +39,21 @@ namespace FrosthavenMods
             List<CodeInstruction> list = code.ToList();
             int at = list.FindIndex(c => c.Calls(Reference));
             int swapped = 0;
+            // the bonus whose strength is read: the instruction that loads the instance for ReferenceStrength (3 before the
+            // call: bonus, ability, target). Passed to the fold so the log names the bonuses even if the ReferenceStrength
+            // postfix below never ran (the bench of 2026-11-02 21:15 saw no StackingAttackBonuses line; an offline trace
+            // of this transpiler on the game's IL, rest-b, shows the right Math.Max swapped and +1 +1 = +2).
+            CodeInstruction loadBonus = at >= 3 && list[at - 3].IsLdloc() ? list[at - 3] : null;
             if (at >= 0)
                 for (int i = at + 1; i < list.Count; i++)
                 {
                     if (!list[i].Calls(MathMax)) continue;
-                    list[i].operand = AccessTools.Method(typeof(StackingAttackBonuses), nameof(Fold));
+                    if (loadBonus != null)
+                    {
+                        list.Insert(i, new CodeInstruction(loadBonus.opcode, loadBonus.operand));
+                        list[i + 1].operand = AccessTools.Method(typeof(StackingAttackBonuses), nameof(FoldWith));
+                    }
+                    else list[i].operand = AccessTools.Method(typeof(StackingAttackBonuses), nameof(Fold));
                     swapped++;
                     break;
                 }
@@ -90,6 +100,12 @@ namespace FrosthavenMods
             {
                 if (_depth > 0) _last = __instance;
             }
+        }
+
+        private static int FoldWith(int acc, int value, CActiveBonus bonus)
+        {
+            if (bonus != null && _depth > 0) _last = bonus;
+            return Fold(acc, value);
         }
 
         private static int Fold(int acc, int value)

@@ -3,8 +3,9 @@
 # top: no mark on the Attack 2. The Move 3, Jump and its XP 1 follow only if the attack targeted at least three enemies:
 # a sub-ability behind a SubAbility requirement on the parent's targets (Frosthaven's Shattersong Din of Battle top),
 # run as its own ability (TreatAsNonSubAbility, as Frosthaven's sub-ability moves: Crashing Tide Shuck).
-# bottom: Attack 5 as printed (Xipe: Move 3). "Play this card from your hand during your turn as an extra action" has
-# no Frosthaven form - NEEDS PLUGIN; here it is the card's ordinary bottom action.
+# bottom: Attack 5 as printed (Xipe: Move 3), also the card's ordinary bottom action. "Play this card from your hand
+# during your turn as an extra action": the plugin (GHSilentKnife.cs) offers it from her hand at the start of her turn,
+# before her second action and at the end of her turn (with an enemy adjacent); the card then goes to her discard pile.
 Discard: [Discard,Discard]
 Data:
     Top:

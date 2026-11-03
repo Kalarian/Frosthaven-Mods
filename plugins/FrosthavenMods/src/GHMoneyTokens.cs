@@ -140,13 +140,23 @@ namespace FrosthavenMods
             catch (Exception e) { Plugin.Log.LogWarning("GHMoneyTokens (step): " + e.Message); }
         }
 
+        // CAbilityChangeAllegiance.ApplyToActor always returns false (decompiled: "return false" after the conversion), so
+        // the conversion is told by the actor's type before and after, not by the result (the bench of 2026-11-02 20:54:
+        // the enemy turned but the token was never spent)
+        [HarmonyPatch(typeof(CAbilityChangeAllegiance), nameof(CAbilityChangeAllegiance.ApplyToActor))]
+        [HarmonyPrefix]
+        private static void BeforeConvert(CActor actor, out CActor.EType __state)
+        {
+            __state = actor != null ? actor.OriginalType : CActor.EType.Unknown;
+        }
+
         [HarmonyPatch(typeof(CAbilityChangeAllegiance), nameof(CAbilityChangeAllegiance.ApplyToActor))]
         [HarmonyPostfix]
-        private static void Converted(CAbilityChangeAllegiance __instance, CActor actor, bool __result)
+        private static void Converted(CAbilityChangeAllegiance __instance, CActor actor, CActor.EType __state)
         {
             try
             {
-                if (!__result || actor == null || !Marked(__instance, "GHMoneyLose")) return;
+                if (actor == null || actor.IsDead || actor.OriginalType == __state || !Marked(__instance, "GHMoneyLose")) return;
                 CActor me = __instance.TargetingActor;
                 if (!Spend(me, CardOf(__instance), "MoneyTokenLose")) return;
                 if (actor.GetCharacterResourceAmount(Hired) == 0) actor.AddCharacterResource(Hired, 1);

@@ -1,0 +1,18 @@
+Parser: Mastery
+ID: SilentKnife_MASTERY_2
+LocalisedName: SilentKnife_MASTERY_2_Name
+LocalisedDescription: SilentKnife_MASTERY_2_Desc
+PerkPoints: 1
+# Across scenarios: the Frosthaven Mods plugin (GHSilentKnife.cs) counts the scenarios she ends holding Amount or more
+# money tokens in synced campaign state (not necessarily in a row) and completes this mastery from the scenario result
+# at Value; this condition only shows the count.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_MoneyTokensAtEnd]
+        CharacterIDs:
+            ActorID: SilentKnifeID
+        Value: 3
+        Amount: 12

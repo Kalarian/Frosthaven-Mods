@@ -1525,6 +1525,10 @@ PERK_SilentKnife_09_Name	Fence
 PERK_SilentKnife_09_Desc	Whenever you complete a city event, draw an attack modifier card as though you were performing an <sprite name=Attack> 4. Gain an amount of gold equal to the <sprite name=Damage> the attack would have dealt
 PERK_SilentKnife_10_Name	Cloak of Invisibility
 PERK_SilentKnife_10_Desc	Once each scenario, during your turn, you may perform: <sprite name=Invisible>, self
+SilentKnife_MASTERY_1_Name	Calculated Strikes
+SilentKnife_MASTERY_1_Desc	For an entire scenario, only attack enemies that are adjacent to one of your allies or adjacent to none of their allies, and perform at least 10 attacks
+SilentKnife_MASTERY_2_Name	Deep Pockets
+SilentKnife_MASTERY_2_Desc	End 3 scenarios with 12 or more money tokens
 SilentKnife_FullName	Silent Knife
 CODEX_Hero_SilentKnife_Title	Silent Knife
 CODEX_HeroInfo_SilentKnife	Because of your small hand size, losing cards has a steep cost. If you find yourself often exhausted well before the end of the scenario, you may gain more turns by performing fewer actions with <sprite name=Lost> early on.\n\nIt is easy for you to go early in the round, but you may also want to bring some cards with late initiatives to allow you to approach enemies after their turns, allowing you to get free attacks safely.

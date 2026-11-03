@@ -1,0 +1,8 @@
+Tinkerer2SharedSupplies:
+    # pack-wide: a hidden flag on the Tinkerer, set when an ally used one of her potions through the Shared Supplies perk
+    # (once each scenario, GHTinkerer.cs); a character resource is saved with the scenario, so a reload keeps it used
+    ID: "Tinkerer2SharedSupplies"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_SAFEGUARD_TOOLTIP"
+    Hidden: True
+    MaxAmount: 1
