@@ -126,7 +126,9 @@ namespace FrosthavenMods
                 }
             }
             catch (Exception e) { if (GHClasses.Reported.Add("ra spiked hide")) Plugin.Log.LogError("GHRetaliate2e (Spiked Hide): " + e); }
-            s_LastCalc = __result;
+            // (2026-11-03: the engine's OnListenersRefreshed calls CalculateRetaliate(null, 0) inside the retaliate and got 0,
+            // so 'retaliated' read false and Growing Rage / Spiked Armor never ran: only an attack's own calculation counts)
+            if (ability != null) s_LastCalc = __result;
         }
 
         private static void AfterRetaliate(CActor me, CActor attacker, int dealt, bool died)
