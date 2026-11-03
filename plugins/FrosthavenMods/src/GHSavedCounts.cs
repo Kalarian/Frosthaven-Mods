@@ -17,6 +17,7 @@ namespace FrosthavenMods
     {
         internal const int Slots = 10;
         private static string Id(int slot) => "GH2ECount" + slot;
+        internal static string ResourceId(int slot) => Id(slot);
 
         /// <summary>The character with this actor guid, alive or exhausted, in the scenario being played.</summary>
         internal static CPlayerActor Player(string guid)

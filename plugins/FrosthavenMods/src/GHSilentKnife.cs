@@ -43,7 +43,8 @@ namespace FrosthavenMods
     ///   - Mastery 1 (FrosthavenMods_FlankedOrIsolatedOnly): every target she attacks this scenario stood next to one of her
     ///     allies, or next to none of its own allies; Value attacks or more. Each attack is checked as it happens.
     ///   - Mastery 2 (FrosthavenMods_MoneyTokensAtEnd): "End 3 scenarios with 12 or more money tokens": the money tokens she
-    ///     holds when a scenario ends (GHMoneyTokens' SilentKnifeMoney) are read in the scenario result every peer receives;
+    ///     holds when a scenario ends (GHMoneyTokens' SilentKnifeMoney, copied at the scenario's end by GHScenarioEnd, alive
+    ///     or exhausted) are read in the scenario result every peer receives;
     ///     each scenario ending with Amount or more adds one to a career count kept in synced campaign state (a marker in
     ///     CampaignState.LootedChestTreasureTableIDs, as the Boneshaper's career count in DwarfTweaks); at Value on a won
     ///     scenario the mastery is completed (not necessarily in a row; QUESTIONS.md C). "GHRule MoneyTokensAtEnd".
@@ -468,8 +469,10 @@ namespace FrosthavenMods
                     if (r.Character?.ID.ID != ClassId) continue;
                     FHRL.CharacterState c = state.PartyCharacters.FirstOrDefault(p => p.ClassDef == r.Character);
                     if (c == null || c.CompletedMasteryIDs.Contains(MoneyMastery)) continue;
-                    CActor knife = ScenarioManager.Scenario?.PlayerActors?.FirstOrDefault(IsKnife);
-                    int held = knife?.GetCharacterResourceAmount(GHMoneyTokens.Money) ?? 0;
+                    // copied when the scenario ended (GHScenarioEnd): the scenario may be gone by now, and an exhausted
+                    // Silent Knife is no longer in PlayerActors
+                    int held = GHScenarioEnd.Resource(ClassId, GHMoneyTokens.Money, out string from);
+                    Plugin.Log.LogInfo($"GHRule MoneyTokensAtEnd card 0 mastery: read {held} money tokens for {GiveRules.Name(c)} from {from}");
                     string prefix = MoneyMarker + c.ID.ID + "=";
                     string old = state.LootedChestTreasureTableIDs.FirstOrDefault(s => s.StartsWith(prefix, StringComparison.Ordinal));
                     int total = old != null && int.TryParse(old.Substring(prefix.Length), out int n) ? n : 0;

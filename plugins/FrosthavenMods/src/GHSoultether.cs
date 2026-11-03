@@ -476,7 +476,18 @@ namespace FrosthavenMods
         private static string CharacterIdOf(CampaignState state) =>
             state?.PartyCharacters?.FirstOrDefault(p => p?.ClassDef?.ID.ID == Soul)?.ID.ID.ToString();
 
-        private static string ScenarioKey() => (ScenarioManager.CurrentScenarioState?.ID ?? "?").Replace(";", "_").Replace("~", "_").Replace("|", "_").Replace("=", "_");
+        private static string ScenarioKey() => Clean(ScenarioManager.CurrentScenarioState?.ID ?? "?");
+
+        private static string Clean(string id) => (id ?? "?").Replace(";", "_").Replace("~", "_").Replace("|", "_").Replace("=", "_");
+
+        /// <summary>The round-1 summon abilities seen so far (live set and the mastery check's copy), for GHScenarioEnd's
+        /// snapshot at the scenario's end, while the scenario state still exists.</summary>
+        internal static HashSet<string> FirstRoundForSnapshot()
+        {
+            var set = new HashSet<string>(CurrentFirstRound(null), StringComparer.Ordinal);
+            if (_snapshot != null) set.UnionWith(_snapshot);
+            return set;
+        }
 
         private static void Career(int needed, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)
         {
@@ -506,10 +517,16 @@ namespace FrosthavenMods
                 CampaignState state = __instance?.CampaignController?.State;
                 _lastCampaign = state;
                 if (state == null || result == null || result.isRestarting || result.Characters == null || state.PartyCharacters == null || state.LootedChestTreasureTableIDs == null) return;
-                var now = new HashSet<string>(CurrentFirstRound(null), StringComparer.Ordinal);
+                // the round-1 set and scenario id copied when the scenario ended (GHScenarioEnd); without that copy the
+                // live scenario (CurrentFirstRound forgets its set once the scenario state is gone)
+                HashSet<string> copied = GHScenarioEnd.SoulFirstRound();
+                string from = copied != null ? GHScenarioEnd.FromSnapshot : ScenarioManager.CurrentScenarioState != null ? GHScenarioEnd.FromLive : GHScenarioEnd.FromNothing;
+                var now = new HashSet<string>(copied ?? CurrentFirstRound(null), StringComparer.Ordinal);
                 if (_snapshot != null) now.UnionWith(_snapshot);
                 _snapshot = null;
-                string key = ScenarioKey();
+                string key = Clean(GHScenarioEnd.ScenarioId(out string keyFrom));
+                if (result.Characters.Any(r => r?.Character?.ID.ID == Soul))
+                    Rule("FirstRoundSummons", 0, $"mastery: career record read {now.Count} round-1 summon abilities from {from}, scenario {key} from {keyFrom}");
                 foreach (ScenarioResult.CharacterResult r in result.Characters)
                 {
                     if (r?.Character?.ID.ID != Soul) continue;
