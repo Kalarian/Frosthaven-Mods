@@ -7,9 +7,8 @@ Initiative: 19
 # card: Let Fly
 # 2e sheet: top Attack 4 [diamond], Push 4, Wound, Stun, "each enemy occupying a hex the target enters suffers damage 4
 # and gains Wound", XP 2, lost; bottom Attack 2 [square], Push 3, Move 2 [circle].
-# APPROXIMATION / NEEDS PLUGIN: Frosthaven's push has no "figures the pushed target passes through" hook, so the
-# damage 4 + Wound hits the enemies adjacent to the target after the push (Xipe's reading), in the shape the 1st
-# edition Cragheart's Blind Destruction passed with (a damage sub-ability on the attack, AllTargetsAdjacentToParentTargets).
+# The damage 4 + Wound to the enemies on the hexes the pushed target enters: the push's GH2E_PushPathDamage marker,
+# dealt by the plugin (GHBruiser2e) right after the push along its real path.
 Discard: [Lost,Discard]
 Data:
     Top:
