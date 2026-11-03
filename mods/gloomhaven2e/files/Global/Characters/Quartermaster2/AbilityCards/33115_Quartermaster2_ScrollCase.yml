@@ -6,9 +6,8 @@ Level: 2
 Initiative: 95
 # card: Scroll Case
 # top: gain 10 supplies; give the Scroll of Embers (no XP) and the Scroll of Foresight (XP 1) to adjacent allies:
-#   APPROXIMATION, two separate gives, each lets one adjacent ally recover one spent or lost item (NEEDS PLUGIN); XP 1 on
-#   the half.
-# bottom: Move 3 [circle]; give the Scroll of Relocation to one adjacent ally: the same approximation.
+#   two separate plugin gives (GH2E_QMGive, NOTES.md item supply); the Foresight give's XP 1 only when given.
+# bottom: Move 3 [circle]; give the Scroll of Relocation to one adjacent ally (plugin give).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -20,22 +19,26 @@ Data:
                     - ["Supplies", 10]
                 AnimOverload: PowerUp
             TGive1:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 1
+                IsTargetedAbility: False
                 Filter:
                     TargetType: Ally
                     ActorType: Player
+                MiscVars:
+                    GH2E_QMGive: 3
                 AnimOverload: Refresh
             TGive2:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 1
+                IsTargetedAbility: False
                 Filter:
                     TargetType: Ally
                     ActorType: Player
+                MiscVars:
+                    GH2E_QMGive: 9
+                    GH2E_QMGiveXP: 1
                 AnimOverload: Refresh
-        XP: 1
     Bottom:
         Abilities:
             BMove:
@@ -43,12 +46,14 @@ Data:
                     Amount: 3
                     CircleEnhancements: 1
             BGive:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 1
+                IsTargetedAbility: False
                 Filter:
                     TargetType: Ally
                     ActorType: Player
+                MiscVars:
+                    GH2E_QMGive: 5
                 AnimOverload: Refresh
 Layout:
     Top:

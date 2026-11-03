@@ -1,0 +1,24 @@
+# The same item while a Quartermaster has Proficiency's bottom active (+1 Shield on Iron Plate / +1 Retaliate
+#   on Barbed Strip): the plugin hands out or swaps in this copy; it counts as the same one item.
+# QM7 Iron Plate: When you suffer damage from an attack, gain Shield 2 for the attack (Frosthaven's Steel Ring
+#   shape). Lost.
+# A Quartermaster class item: no slot (QuestItem: no slot requirement), one copy, no gold cost (supplies can't
+#   refresh it: Gloomhaven 2e FAQ), never in the shop (no campaign item entry). Given in a scenario by the
+#   plugin (GHQuartermaster.cs); returned to the supply when used and when the scenario ends.
+Parser: ItemCard
+ID: 33217
+StringID: GH2E_QMItem7PlusID
+Name: $GH2E_QMItem_IronPlatePlus_1$
+Art: Parrying Gauntlet
+TotalInGame: 1
+Cost: 0
+Slot: QuestItem
+Rarity: Rare
+Usage: Consumed
+Trigger: OnAttacked
+Data:
+    ShieldValue: 3
+    CompareAbility:
+        AbilityType: Attack
+Layout:
+    - Row: "$GH2E_QMItem_IronPlatePlus_2$"

@@ -9,11 +9,11 @@ Initiative: 41
 #   - "end of each of your turns, gain 10 supplies": an EndTurnAbility bonus whose Null ability adds 10 (AutoTrigger
 #     inside the bonus, as the 1st edition end-of-turn cards).
 #   - "whenever an ally ends a move or teleport adjacent to you, you may spend supplies to Recover that ally's items":
-#     APPROXIMATION, at the end of each of your turns you may spend supplies to let one adjacent ally recover one spent
-#     or lost item (a second EndTurnAbility bonus). The ally-move trigger is NEEDS PLUGIN (Frosthaven's ally-triggered
-#     shapes run the caster's ability on another figure's turn; not risked for an item choice).
-#   - mandatory "You cannot perform move abilities": text only, NEEDS PLUGIN.
-# bottom: Move 4 [circle]; give the Scroll of Foresight to one adjacent ally (APPROXIMATION as elsewhere); "at the end
+#     the plugin (GHQuartermaster.cs) watches every ally's move / teleport ability end while the bonus (marked
+#     GH2E_QMSetUpShop) is active and asks the Quartermaster's player (10+ supplies, the ally adjacent).
+#   - mandatory "You cannot perform move abilities": the plugin makes the Quartermaster unable to perform move
+#     abilities while the bonus is active (the game's own "cannot use move abilities" refusal).
+# bottom: Move 4 [circle]; give the Scroll of Foresight to one adjacent ally (the plugin's class-item give); "at the end
 #   of the round, Heal 2 on all allies within range 1": a round EndRoundAbility bonus (heal unmarked). TEST: the round
 #   bonus still triggers in the end-of-round phase.
 Discard: [Discard,Discard]
@@ -32,27 +32,8 @@ Data:
                 ActiveBonus:
                     Duration: Persistent
                     Behaviour: EndTurnAbility
-                AnimOverload: PowerUp
-            TActive2:
-                AddActiveBonus:
-                    RefreshItems: 1
-                    SlotStateToRefresh: [Spent, Consumed]
-                    Range: 1
-                    Filter:
-                        TargetType: Ally
-                        ActorType: Player
-                    StartAbilityRequirements:
-                        Type: ThisAbility
-                        Vars:
-                            ValidateSupplies: Actor.GetCharacterResourceAmount("Supplies") >= 10
-                    PerformVars:
-                        OnAbilityEnded:
-                            SpendSupplies: AbilityHasHappened && TargetingActor.RemoveCharacterResource("Supplies", 50, true)
-                    AnimOverload: Refresh
-                Filter: Self
-                ActiveBonus:
-                    Duration: Persistent
-                    Behaviour: EndTurnAbility
+                MiscVars:
+                    GH2E_QMSetUpShop: 1
                 AnimOverload: PowerUp
         XP: 1
     Bottom:
@@ -62,12 +43,14 @@ Data:
                     Amount: 4
                     CircleEnhancements: 1
             BGive:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 1
+                IsTargetedAbility: False
                 Filter:
                     TargetType: Ally
                     ActorType: Player
+                MiscVars:
+                    GH2E_QMGive: 9
                 AnimOverload: Refresh
             BActive:
                 AddActiveBonus:
@@ -88,12 +71,8 @@ Layout:
             Icon: Refresh
             ListLayout: "$FHS_GH2E_Quartermaster2_22_T$"
             Layout: "$FHS_GH2E_Quartermaster2_22_T$"
-        - Divider:
-        - Active:
-            Ability: TActive2
-            Icon: Recover
-            ListLayout: "$FHS_GH2E_Quartermaster2_22_T2$"
-            Layout: "$FHS_GH2E_Quartermaster2_22_T2$"
+        - Row: "<size=20%> "
+        - Row: "$FHS_GH2E_Quartermaster2_22_T2$"
         - Row: "<size=20%> "
         - Row: "$FHS_GH2E_Quartermaster2_22_T3$"
     Bottom:

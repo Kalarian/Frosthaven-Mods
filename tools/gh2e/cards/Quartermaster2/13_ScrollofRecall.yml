@@ -1,7 +1,7 @@
 # card: Scroll of Recall
 # top: Pull 2 [square] on one ally, Range 3 [square] (Frosthaven pulls allies: Snowdancer Cross Winds' Filter); Heal 3
 #   [diamond+], Range 1 [square]; infuse Earth (mandatory box).
-# bottom: gain the Barbed Strip: APPROXIMATION, recover one spent or lost item (NEEDS PLUGIN); Pull 2, Target 2,
+# bottom: gain the Barbed Strip: the class item from the plugin (GH2E_QMGive, NOTES.md item supply); Pull 2, Target 2,
 #   Range 3, Muddle, no marks (Banner Spear's pull-that-muddles, as Bruiser's Provoking Roar).
 Discard: [Discard,Discard]
 Data:
@@ -29,9 +29,10 @@ Data:
     Bottom:
         Abilities:
             BGive:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Filter: Self
+                MiscVars:
+                    GH2E_QMGive: 8
                 AnimOverload: Refresh
             BPull:
                 Pull: 2

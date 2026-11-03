@@ -1,7 +1,6 @@
 # card: Tools of War
 # top: one adjacent ally may Recover one of their spent items (exact); Move 1 [circle]; give the Scroll of Embers and
-#   Weighted Bolas to one adjacent ally (XP 1): APPROXIMATION, the ally recovers two spent or lost items (NEEDS
-#   PLUGIN), XP 1 on the half.
+#   Weighted Bolas to one adjacent ally (XP 1): the class item from the plugin (GH2E_QMGive, NOTES.md item supply), XP 1 only when given (GH2E_QMGiveXP).
 # bottom: Move 4 [circle]; Loot 1 (no mark); "if you loot at least one money token, gain 10 supplies": PerformVars on
 #   the loot, gated by its own LootTokenCount (money tokens picked up; the Bruiser Scavenger perk's expression).
 #   UNVERIFIED expression.
@@ -22,14 +21,17 @@ Data:
                     Amount: 1
                     CircleEnhancements: 1
             TGive:
-                RefreshItems: 2
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 1
+                IsTargetedAbility: False
                 Filter:
                     TargetType: Ally
                     ActorType: Player
+                MiscVars:
+                    GH2E_QMGive: 3
+                    GH2E_QMGive2: 4
+                    GH2E_QMGiveXP: 1
                 AnimOverload: Refresh
-        XP: 1
     Bottom:
         Abilities:
             BMove:

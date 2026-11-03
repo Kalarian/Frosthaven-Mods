@@ -14,17 +14,15 @@ Data:
     Top:
         Abilities:
             TSpend:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Filter: Self
                 AbilityXP: 1
                 StartAbilityRequirements:
                     Type: ThisAbility
                     Vars:
                         ValidateSupplies: Actor.GetCharacterResourceAmount("Supplies") >= 10
-                PerformVars:
-                    OnAbilityEnded:
-                        SpendSupplies: AbilityHasHappened && TargetingActor.RemoveCharacterResource("Supplies", 50, true)
+                MiscVars:
+                    GH2E_QMSpend: 1
                 AnimOverload: Refresh
             TShield:
                 Shield:

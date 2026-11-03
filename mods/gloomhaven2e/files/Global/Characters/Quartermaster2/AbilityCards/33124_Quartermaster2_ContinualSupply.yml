@@ -5,8 +5,8 @@ ID: 33124
 Level: 6
 Initiative: 86
 # card: Continual Supply
-# top: gain 20 supplies; then the optional spend box "Recover your and adjacent allies' items, XP 1" (you and every
-#   adjacent ally recover one spent or lost item; the gold budget NEEDS PLUGIN).
+# top: gain 20 supplies; then the optional spend box "Recover your and adjacent allies' items, XP 1" (the plugin's
+#   supplies spend: one shared gold pool).
 # bottom: "on your next three turns that you end with 0 supplies, gain 30 supplies": an EndTurnAbility bonus gated by
 #   the bonus Vars (Validate: no supplies at the end of the turn; Frosthaven checks Validate vars before triggering, so
 #   the slots only advance on a 0-supplies turn), 3 slots with XP on slots 1 and 3 ([1,0,1]); the turn the card is
@@ -22,8 +22,7 @@ Data:
                     - ["Supplies", 20]
                 AnimOverload: PowerUp
             TSpend:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 1
                 Target: -1
                 Filter:
@@ -34,9 +33,8 @@ Data:
                     Type: ThisAbility
                     Vars:
                         ValidateSupplies: Actor.GetCharacterResourceAmount("Supplies") >= 10
-                PerformVars:
-                    OnAbilityEnded:
-                        SpendSupplies: AbilityHasHappened && TargetingActor.RemoveCharacterResource("Supplies", 50, true)
+                MiscVars:
+                    GH2E_QMSpend: 1
                 AnimOverload: Refresh
     Bottom:
         Abilities:

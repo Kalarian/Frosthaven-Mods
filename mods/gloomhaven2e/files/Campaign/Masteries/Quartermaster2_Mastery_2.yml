@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Quartermaster2_MASTERY_2
+LocalisedName: Quartermaster2_MASTERY_2_Name
+LocalisedDescription: Quartermaster2_MASTERY_2_Desc
+PerkPoints: 1
+# A class item given (to yourself or an ally) in every round of the scenario in which the Quartermaster took a turn and
+# did not long rest, answered by the Frosthaven Mods plugin (the marker in EnemyFamilies, GHQuartermaster.cs).
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_QMItemEveryRound]
+        CharacterIDs:
+            ActorID: Quartermaster2ID
+        Value: 1

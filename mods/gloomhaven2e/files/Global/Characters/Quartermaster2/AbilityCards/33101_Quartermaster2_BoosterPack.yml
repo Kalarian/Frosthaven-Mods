@@ -5,27 +5,19 @@ ID: 33101
 Level: 1
 Initiative: 73
 # card: Booster Pack
-# top: 5 random items from the class item supply to adjacent allies and self (at most 3 to yourself): APPROXIMATION,
-#   you recover up to 2 spent or lost items and each adjacent ally 1 (5 items at most with three allies); NEEDS PLUGIN
-#   (Quartermaster item supply). XP 2, lost.
+# top: draw 5 random items from the Quartermaster item supply and give them to any adjacent allies and self (at most 3
+#   to yourself): one self NullTargeting marked GH2E_QMBoosterPack; the plugin (GHQuartermaster.cs) draws from the
+#   items nobody holds and asks the Quartermaster's player who gets each one. XP 2, lost.
 # bottom: Recover one of your spent items (exact); Move 2 [circle].
 Discard: [Lost,Discard]
 Data:
     Top:
         Abilities:
-            TGiveSelf:
-                RefreshItems: 2
-                SlotStateToRefresh: [Spent, Consumed]
+            TGive:
+                NullTargeting: True
                 Filter: Self
-                AnimOverload: Refresh
-            TGiveAllies:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
-                Range: 1
-                Target: -1
-                Filter:
-                    TargetType: Ally
-                    ActorType: Player
+                MiscVars:
+                    GH2E_QMBoosterPack: 1
                 AnimOverload: Refresh
         XP: 2
     Bottom:

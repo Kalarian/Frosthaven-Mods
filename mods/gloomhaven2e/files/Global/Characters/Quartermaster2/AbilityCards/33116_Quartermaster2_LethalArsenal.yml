@@ -5,8 +5,7 @@ ID: 33116
 Level: 2
 Initiative: 18
 # card: Lethal Arsenal
-# top: Attack 3 [diamond]; gain the Sharpened Dirk and Sturdy Spear: APPROXIMATION, recover two spent or lost items
-#   (NEEDS PLUGIN); XP 2, lost.
+# top: Attack 3 [diamond]; gain the Sharpened Dirk and Sturdy Spear: the class item from the plugin (GH2E_QMGive, NOTES.md item supply); XP 2, lost.
 # bottom: Attack 2 [square]; Move 1 [circle].
 Discard: [Lost,Discard]
 Data:
@@ -17,9 +16,11 @@ Data:
                     Amount: 3
                     DiamondEnhancements: 1
             TGive:
-                RefreshItems: 2
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Filter: Self
+                MiscVars:
+                    GH2E_QMGive: 1
+                    GH2E_QMGive2: 2
                 AnimOverload: Refresh
         XP: 2
     Bottom:

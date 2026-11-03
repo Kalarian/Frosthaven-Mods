@@ -5,4 +5,4 @@ Description: PERK_Quartermaster2_04_Desc
 CharacterID: Quartermaster2ID
 Available: 2
 CardsToRemove: [AMC_Basic_P1]
-CardsToAdd: [AMC_RefreshItem, AMC_RefreshItem]
+CardsToAdd: [AMC_GH2E_Quartermaster2_GainArmor_P0, AMC_GH2E_Quartermaster2_GainArmor_P0]

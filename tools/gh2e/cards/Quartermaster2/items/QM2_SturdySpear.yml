@@ -1,0 +1,23 @@
+# QM2 Sturdy Spear: During your turn, perform: Attack 2, grey hex + two red hexes in a line. Lost.
+# A Quartermaster class item: no slot (QuestItem: no slot requirement), one copy, no gold cost (supplies can't
+#   refresh it: Gloomhaven 2e FAQ), never in the shop (no campaign item entry). Given in a scenario by the
+#   plugin (GHQuartermaster.cs); returned to the supply when used and when the scenario ends.
+Parser: ItemCard
+ID: 33202
+StringID: GH2E_QMItem2ID
+Name: $GH2E_QMItem_SturdySpear_1$
+Art: Long Spear
+TotalInGame: 1
+Cost: 0
+Slot: QuestItem
+Rarity: Rare
+Usage: Consumed
+Trigger: DuringOwnTurn
+Data:
+    Abilities:
+        AAttack:
+            Attack: 2
+            AreaEffect: "0,0,G|2,0,R|4,0,R"
+            MultiPassAttack: False
+Layout:
+    - Row: "$GH2E_QMItem_SturdySpear_2$"

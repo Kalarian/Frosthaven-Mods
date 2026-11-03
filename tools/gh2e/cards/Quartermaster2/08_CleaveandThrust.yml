@@ -1,7 +1,6 @@
 # card: Cleave and Thrust
 # top: Attack 4 [diamond], triangle (G 0,0; R 1,1 2,0) with the hex mark down-right of the grey hex (1,-1; GHS lacks
-#   it); give the Sturdy Spear to one ally within range 2 (XP 1): APPROXIMATION, recover one spent or lost item
-#   (NEEDS PLUGIN). Corner XP 1 + give XP 1 = half XP 2. Lost.
+#   it); give the Sturdy Spear to one ally within range 2 (XP 1): the class item from the plugin (GH2E_QMGive, NOTES.md item supply). Corner XP 1; the give's XP 1 only when given. Lost.
 # bottom: Move 2 [circle]; gain 10 supplies.
 Discard: [Lost,Discard]
 Data:
@@ -15,14 +14,17 @@ Data:
                 MultiPassAttack: False
                 AnimOverload: SlamAttack
             TGive:
-                RefreshItems: 1
-                SlotStateToRefresh: [Spent, Consumed]
+                NullTargeting: True
                 Range: 2
+                IsTargetedAbility: False
                 Filter:
                     TargetType: Ally
                     ActorType: Player
+                MiscVars:
+                    GH2E_QMGive: 2
+                    GH2E_QMGiveXP: 1
                 AnimOverload: Refresh
-        XP: 2
+        XP: 1
     Bottom:
         Abilities:
             BMove:

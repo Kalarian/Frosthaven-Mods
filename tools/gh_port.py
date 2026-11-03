@@ -1381,6 +1381,14 @@ def main():
         write(f"Global/Characters/{res_file}", "Parser: CharacterResources\n\n" + "\n".join(blocks))
         print(f"character resources: {', '.join(resources)}")
 
+    if EDITION == 2:
+        # a class's own item cards (the 2nd edition Quartermaster's 9 class items: tools/gh2e/cards/<Class>/items/), already
+        # in Frosthaven's ItemCard format; no campaign item entry names them, so they are never in the shop; the plugin
+        # hands them out in a scenario (GHQuartermaster.cs)
+        for cls in args.classes:
+            for p in sorted((gh2e_build.CARDS / cls / "items").glob("*.yml")) if (gh2e_build.CARDS / cls / "items").exists() else []:
+                write(f"Global/ItemCards/{cls}_{p.name}", p.read_text(encoding="utf-8").replace("\r\n", "\n"))
+
     table = {}
     for key in sorted(used_keys):
         if key.startswith("FHS_"):   # a Frosthaven-styled class's own copy of a text, in Frosthaven's words (fh_text)

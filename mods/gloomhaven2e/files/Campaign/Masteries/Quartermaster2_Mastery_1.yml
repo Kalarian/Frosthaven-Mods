@@ -1,0 +1,18 @@
+Parser: Mastery
+ID: Quartermaster2_MASTERY_1
+LocalisedName: Quartermaster2_MASTERY_1_Name
+LocalisedDescription: Quartermaster2_MASTERY_1_Desc
+PerkPoints: 1
+# Three supply spends in one scenario that each spent 50 supplies and recovered lost items worth 50 gold or more
+# together, answered by the Frosthaven Mods plugin (the marker in EnemyFamilies, GHQuartermaster.cs).
+# Value = spends, Amount = supplies spent and gold of lost items recovered.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_QMSupplySpends]
+        CharacterIDs:
+            ActorID: Quartermaster2ID
+        Value: 3
+        Amount: 50
