@@ -242,7 +242,10 @@ namespace FrosthavenMods
             try
             {
                 if (__instance == null) return;
-                if (_packChain != null && ReferenceEquals(__instance, _packChain))
+                // (2026-11-03 sweep: StackNextAbilities queues a CopyAbility of what it is given (generateNewID: false), so
+                // the ability that ends is never _packChain itself: by reference the chain stopped after the first ally.
+                // The copy keeps the ID, which CopyAbility(generateNewID: true) below made unique.)
+                if (_packChain != null && (ReferenceEquals(__instance, _packChain) || __instance.ID == _packChain.ID))
                 {
                     _packChain = null;
                     NextPack();

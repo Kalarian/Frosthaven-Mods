@@ -33,6 +33,9 @@ namespace FrosthavenMods
     internal static class GHMindthief2
     {
         internal const string ClassId = "Mindthief2ID";
+        // Domination (bottom: the second augment slot and its "discard one" rule): the card AugmentChoice is logged under
+        // (2026-11-03: it was logged under the new or the discarded augment's card, so the checker could never tie it to the half)
+        private const int DominationCard = 32224;
         private const string PuppetStringsPerk = "Mindthief208";
 
         private static bool Marked(CAbility a, string key)
@@ -135,7 +138,7 @@ namespace FrosthavenMods
                 List<CAugment> options = __instance.Augments.Where(a => a != null).ToList();
                 if (options.Count < 2) return true;   // nothing to choose between (0 slots, a null entry): the engine's own path
                 CAugment chosen = AskWhichAugment(__instance, options, "FHMODS_MT_THIRD");
-                Log("AugmentChoice", CardId(ability), $"new augment {CardName(ability.GetAbilityBaseCard())}: {AugmentName(chosen)} discarded (her choice of {options.Count})");
+                Log("AugmentChoice", DominationCard, $"new augment {CardName(ability.GetAbilityBaseCard())}: {AugmentName(chosen)} discarded (her choice of {options.Count})");
                 __instance.ReplaceAugment(ability, chosen, caster ?? __instance);
                 return false;
             }
@@ -154,7 +157,7 @@ namespace FrosthavenMods
                 {
                     List<CAugment> options = __instance.Augments.ToList();
                     CAugment chosen = AskWhichAugment(__instance, options, "FHMODS_MT_SLOT");
-                    Log("AugmentChoice", chosen?.RegisteredBaseCard?.ID ?? 0, $"augment slot lost: {AugmentName(chosen)} discarded (her choice of {options.Count})");
+                    Log("AugmentChoice", DominationCard, $"augment slot lost: {AugmentName(chosen)} discarded (her choice of {options.Count})");
                     __instance.RemoveAugment(chosen);
                     // RemoveAugment returns quietly when it finds nothing to remove: never loop (and ask) forever; the
                     // engine's own trim (oldest first) then runs

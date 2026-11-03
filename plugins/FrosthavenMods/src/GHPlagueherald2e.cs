@@ -153,8 +153,10 @@ namespace FrosthavenMods
 
         private static void SickeningEnded(CAbility a)
         {
-            if (_sickPlay != null && ReferenceEquals(a, _sickPlay)) { _sickPlay = null; _sickDamage = null; NextSick(); return; }
-            if (_sickDamage != null && ReferenceEquals(a, _sickDamage))
+            // (2026-11-03 sweep: StackNextAbilities queues copies (same ID) of the two abilities, never these objects: by
+            // reference the next strengthened ally was never offered. The IDs are unique: CopyAbility(generateNewID: true).)
+            if (_sickPlay != null && (ReferenceEquals(a, _sickPlay) || a.ID == _sickPlay.ID)) { _sickPlay = null; _sickDamage = null; NextSick(); return; }
+            if (_sickDamage != null && (ReferenceEquals(a, _sickDamage) || a.ID == _sickDamage.ID))
             {
                 if (_sickAlly == null || _sickAlly.IsDead) { _sickPlay = null; _sickDamage = null; NextSick(); }
                 return;

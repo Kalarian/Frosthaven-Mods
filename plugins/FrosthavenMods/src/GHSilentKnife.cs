@@ -394,9 +394,12 @@ namespace FrosthavenMods
                 if (GameState.CurrentActionInitiator != GameState.EActionInitiator.AbilityCard) return;
                 CActor me = GameState.InternalCurrentActor;
                 if (!IsKnife(me) || !ReferenceEquals(me, s_TurnActor) || ++s_CardActions != 2) return;
+                // (2026-11-03 sweep: GameState.CurrentAction is already null in this postfix, the constructor moved it into
+                // the phase, so a yes here was dropped; read the phase's own, and only ask when the play can be queued)
+                GameState.CurrentActorAction current = GHCurrentAction.Get(__instance);
+                if (current?.Action == null || __instance?.RemainingPhaseAbilities == null) return;
                 List<CAbility> abilities = AskWatchItBurn(me as CPlayerActor, "before her second action");
-                GameState.CurrentActorAction current = GameState.CurrentAction;
-                if (abilities == null || current?.Action == null || __instance?.RemainingPhaseAbilities == null) return;
+                if (abilities == null) return;
                 for (int i = abilities.Count - 1; i >= 0; i--)
                     __instance.RemainingPhaseAbilities.Insert(0, new CPhaseAction.CPhaseAbility(abilities[i], me, current.BaseCard, current.Action.ID));
             }

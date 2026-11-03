@@ -83,7 +83,8 @@ namespace FrosthavenMods
         private static void SyncTwo(CPhaseAction phase)
         {
             if (s_Syncing || phase == null) return;
-            GameState.CurrentActorAction current = GameState.CurrentAction;
+            // (2026-11-03 sweep: GameState.CurrentAction is null while the action runs, so this never synced: the phase's own)
+            GameState.CurrentActorAction current = GHCurrentAction.Get(phase);
             int cardId = current?.BaseCard?.ID ?? 0;
             if (cardId < FirstCard || cardId > LastCard || current.Action?.Augmentations == null) return;
             CActionAugmentation two = current.Action.Augmentations.FirstOrDefault(a => IsTwoBonus(a, cardId));
@@ -122,7 +123,7 @@ namespace FrosthavenMods
         {
             try
             {
-                int cardId = GameState.CurrentAction?.BaseCard?.ID ?? 0;
+                int cardId = GHCurrentAction.Get()?.BaseCard?.ID ?? 0;   // (GameState.CurrentAction is null in the action phase)
                 if (cardId < FirstCard || cardId > LastCard || consumes == null) return;
                 consumes.RemoveAll(c => IsTwoBonus(c.Augmentation, cardId));
             }

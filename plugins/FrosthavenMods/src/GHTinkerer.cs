@@ -119,7 +119,9 @@ namespace FrosthavenMods
                 if (!(GameState.InternalCurrentActor is CPlayerActor ally) || !ReferenceEquals(ally, s_ActionTurnActor)) return;
                 if (++s_CardActions != 2) return;
                 List<CPhaseAction.CPhaseAbility> list = __instance?.RemainingPhaseAbilities;
-                GameState.CurrentActorAction current = GameState.CurrentAction;
+                // (2026-11-03 sweep: the constructor has already moved GameState.CurrentAction into the phase and set it
+                // to null, so the potion was never offered between the actions; read the phase's own)
+                GameState.CurrentActorAction current = GHCurrentAction.Get(__instance);
                 if (list == null || current?.Action == null) return;
                 List<CAbility> abilities = AskSharedSupplies(ally, "between the actions");
                 if (abilities == null) return;
@@ -157,12 +159,12 @@ namespace FrosthavenMods
             try
             {
                 List<CPhaseAction.CPhaseAbility> list = __instance?.RemainingPhaseAbilities;
-                GameState.CurrentActorAction current = GameState.CurrentAction;
+                GameState.CurrentActorAction current = GHCurrentAction.Get(__instance);   // (GameState.CurrentAction is null here: see GHCurrentAction)
                 if (list == null || current?.Action == null || !(current.BaseCard is CAbilityCard card)) return;
                 if (GameState.CurrentActionInitiator != GameState.EActionInitiator.AbilityCard) return;   // not a persistent bonus's later trigger
                 if (!(GameState.InternalCurrentActor is CPlayerActor me) || !HasPerk(me, SpareParts)) return;
                 // (2026-11-03: CurrentAction holds a Copy() of the card's action; compare by ID, as GHSpellweaver2e.IsLostAction)
-                bool top = current.Action.ID == card.TopAction?.ID, bottom = current.Action.ID == card.BottomAction?.ID;
+                bool top = GHCurrentAction.IsTop(current.Action, card), bottom = GHCurrentAction.IsBottom(current.Action, card);
                 DiscardType discard = top ? card.GetAbilityCardYML.TopDiscardType
                     : bottom ? card.GetAbilityCardYML.BottomDiscardType : DiscardType.None;
                 if (discard != DiscardType.Lost && discard != DiscardType.PermanentlyLost) return;
