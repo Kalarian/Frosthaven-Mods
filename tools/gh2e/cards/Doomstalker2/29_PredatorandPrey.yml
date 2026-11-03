@@ -1,6 +1,7 @@
 # card: Predator and Prey
 # top: Summon Great Archinotl (stand-in model: the 1st edition Swamp Lizard). "At initiative 100 each round, this summon
-# performs an additional turn": no Frosthaven summon shape, text only (NEEDS PLUGIN).
+# performs an additional turn": plugin GHDoomstalker2e (ArchinotlExtraTurn: one more turn once every figure with
+# initiative 1-99 has acted, not in the round it was summoned).
 # bottom: the 1st edition Predator and Prey doom (StatIsBasedOnX TargetDistanceRangeDiff), filtered to your attacks.
 Discard: [Lost,Discard]
 Data:

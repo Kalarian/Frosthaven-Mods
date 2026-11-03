@@ -9,9 +9,11 @@ Initiative: 90
 # long rest, this summon gains Ward": a second persistent bonus on the summon half (as Frosthaven's Unholy Prowess,
 # Boneshaper 149, keeps extra bonuses on its summon half) that fires on your long rest (Boneshaper perk 10's
 # DuringActionAbilityOnLongRest) and wards the Staunch Garralev. Unverified: that the bonus ends with the summon.
-# bottom: Doom. "Once each round, after a summon attacks it, grant that summon Attack 1, Pierce 2 against it" is folded
-# into the summon's attack: once per round, a summon's attack on the doomed enemy gains +1 Attack and Pierce 2
-# (approximation: one modifier draw instead of two). "Your summons focus on this enemy": text (NEEDS PLUGIN).
+# bottom: Doom. "After one of your summons performs an attack targeting this enemy, once each round, grant that summon
+# Attack 1, Pierce 2 (must target the doomed enemy)": plugin GHDoomstalker2e (WalkingBastion: after the summon's attack
+# ability on the doomed enemy ends, once per round, the summon performs Attack 1 Pierce 2 on it, its own modifier draw).
+# "Your summons focus on this enemy": GHDoomstalker2e DoomFocus. The doom keeps a +0 summon attack bonus so it has a
+# doom ability (token and status row; no effect on the numbers).
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -46,15 +48,11 @@ Data:
                 AddDoom:
                     Doom:
                         DoomAbilities:
-                            BDoomAttackDebuff:
-                                Attack: 1
-                                AttackEffect:
-                                    Type: StandardBuff
-                                    Pierce: 2
+                            BDoomMarker:
+                                Attack: 0
                                 ActiveBonus:
                                     Duration: Persistent
                                     Behaviour: BuffIncomingAttacks
-                                    Restriction: OncePerRound
                                     Filter:
                                         ActorType: Summon
                                         Summoner: [Doomstalker2ID]   # "your summons": the Doomstalker's own (CAbilityFilter.CheckSummoner)

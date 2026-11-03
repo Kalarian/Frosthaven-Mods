@@ -240,6 +240,10 @@ PRINTED_EXCEPTIONS = {
         "the plugin's template BSecretChoice (GHSawbones2e) holds one-use round bonuses: printed 'that round', not a round icon",
     (32612, "Top", "number Heal 1"):       # Growing Rage: "whenever you retaliate, perform Heal 1, self"
         "the Heal 1 after each retaliate is performed by the plugin (GHRetaliate2e, the card's GH2E_GrowingRage marker)",
+    (32717, "Bottom", "number Attack 1"):  # Walking Bastion: "grant that summon: Attack 1, Pierce 2" after its attack
+        "the granted Attack 1, Pierce 2 is built by the plugin (GHDoomstalker2e WalkingBastion), not a card ability",
+    (32717, "Bottom", "number Pierce 2"):
+        "the granted Attack 1, Pierce 2 is built by the plugin (GHDoomstalker2e WalkingBastion), not a card ability",
     # --- OPEN rows (ALL.json): the printed rule needs a plugin system another task builds; remove the line when it ships ---
     (32327, "Top", "persistent"): "OPEN SilentKnife-11 Hired Help: the money-token cost and token are not built",
     (33416, "Bottom", "round"): "OPEN Soothsinger2-21 Soothing Lullaby: the token on the monster is not built",

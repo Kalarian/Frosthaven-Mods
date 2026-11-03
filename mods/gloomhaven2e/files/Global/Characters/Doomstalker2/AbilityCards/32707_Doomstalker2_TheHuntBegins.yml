@@ -7,7 +7,7 @@ Initiative: 20
 # card: The Hunt Begins
 # top: "undamaged" read as full hit points (the 1st edition Fresh Kill: Health == 100%).
 # bottom: the 1st edition The Hunt Begins doom (summons' attacks on the doomed enemy buffed), +1. "Your summons focus on
-# this enemy": text only (Frosthaven's summons are steered by the player; NEEDS PLUGIN for the focus rule itself).
+# this enemy": plugin GHDoomstalker2e (DoomFocus: the summons' turns get the engine's focus override on the doomed enemy).
 Discard: [Discard,Discard]
 Data:
     Top:
