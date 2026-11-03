@@ -11,11 +11,14 @@ Initiative: 55
 # the Bear's hex (rulebook p21); it needs the Bear on the map. The name TAllyAttack keeps the enhancement slot. "! infuse Air/Earth (either)": an Infuse ability with the element picker
 # (Infuse [Air, Earth], ShowElementPicker, can't be skipped).
 # bottom: "for the next three rounds, skip your card selection and turn; your other persistents don't advance; the Bear
-# takes two turns at initiative 14 each round under your control": NEEDS PLUGIN. APPROXIMATION: a persistent bonus with
-# the card's three slots (XP on slots 1 and 3, lost after the last): at the start of each of your next three turns the
-# Bear takes one extra controlled turn (Move +0, Attack +0 at its own values; Frosthaven's AddActiveBonus ControlActor
-# on an own summon, Infuser Boon of the Tempest). You still select cards and act; the card economy of skipping three
-# rounds is not modelled. Persistent, lost.
+# takes two turns at initiative 14 each round under your control" (GH2e FAQ: you play no cards and do nothing on your
+# turn; your wound doesn't hurt you and your end-of-turn conditions don't expire; for focus you are last in initiative;
+# the Bear takes two full turns; your other persistents work but their slots don't move). A persistent marker bonus
+# (MiscVars GHUnbreakableBond) with the card's three slots (XP on slots 1 and 3, lost after the last); its
+# StartTurnAbility never fires (she has no turn while it is out; the play turn has already started). The plugin
+# (GHUnbreakableBond.cs) does the rest on the rounds after the play round, from the marker and its start round (both in
+# the save): no card selection, her turn skipped (initiative 99), the Bear at initiative 14 twice under her control, her
+# other cards' slots held, this card's slot advanced at each of those rounds' end.
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -53,21 +56,13 @@ Data:
         Abilities:
             BActive:
                 AddActiveBonus:
-                    ControlActor:
-                        ControlDurationType: ControlForOneAction
-                        Abilities:
-                            BBearMove:
-                                Move: +0
-                            BBearAttack:
-                                Attack: +0
-                                Range: +0
-                    Filter:
-                        HeroSummonClasses: [WildfuryBearID]
-                    Target: 1
-                    Targeting: All
-                    IgnoreLOS: True
+                    Null: True
+                    AutoTrigger: True
+                    CanUndo: False
                     SkipAnim: True
                 Filter: Self
+                MiscVars:
+                    GHUnbreakableBond: True
                 ActiveBonus:
                     Duration: Persistent
                     Behaviour: StartTurnAbility

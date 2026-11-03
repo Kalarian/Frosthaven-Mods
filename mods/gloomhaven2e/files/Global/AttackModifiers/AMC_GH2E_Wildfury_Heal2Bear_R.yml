@@ -9,7 +9,7 @@ Abilities:
         AutoTrigger: True
         Targeting: Custom
         TargetingVars:
-            AddValidActorInRange: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID") || TargetingActor
+            AddValidActorInRange: AllHeroSummons.Find(obj.Class.ID == "WildfuryBearID")
             AddTileInRange: AddValidActorInRange.Tile
             AddActorToTarget: AddValidActorInRange
             AddSelectedTile: AddValidActorInRange.Tile

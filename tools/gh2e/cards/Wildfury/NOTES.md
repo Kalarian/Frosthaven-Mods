@@ -53,7 +53,8 @@ gave most shapes. Layouts are plain Gloomhaven style (gh_layout redraws them). E
     (Banner of Courage's BuffShield).
   - Vital Force (`VitalForceID`, model stand-in `SpiritBanner`, the 1st edition Tribal Sigil's +2 Attack banner): +2 on
     the first attack each round, range 3, Banner of Strength's single-target auto-toggled bonus with `OncePerTurn` +
-    `RestrictPerActor` (= once a round for figures with one turn; the Bear under Unbreakable Bond gets it twice).
+    `RestrictPerActor` (= once a round for figures with one turn; under Unbreakable Bond the plugin keeps the Bear's use
+    from its first turn for its second, GHUnbreakableBond.cs).
 - affinities.txt `[ Air, Earth ]`: Air infused 6 times (Howling Bolts, Focused Aggression, Spirit Swap, Forest's
   Blessing x2, Invocation of Absorption), Earth 6 (Howling Bolts, Nature's Gift x2, Earthen Spikes, Forest's Blessing,
   Invocation of Domination); the 1st edition had `[ Earth ]`. gh_port agrees (no warning).
@@ -110,11 +111,11 @@ gave most shapes. Layouts are plain Gloomhaven style (gh_layout redraws them). E
 - 26 Lash Out bottom: swap with the Bear = the 1st edition Primal Blessing Swap (Self / Companion).
 - 27 Unbreakable Bond: top's second attack is the Wildfury's own Attack 3, range 3 performed from the Bear's hex (Vars
   `TargetingOverrideArrayIndex: Bear.Tile`, Frosthaven's Pyroclast shape; it needs the Bear on the map; the name
-  TAllyAttack keeps the enhancement slot). Bottom **still APPROXIMATION / NEEDS PLUGIN**: skipping card selection and
-  turns for three rounds, freezing other persistents and the Bear's two turns at initiative 14 have no engine shape. Now:
-  at the start of each of your next three turns (StartTurnAbility, slots [1,0,1], lost after) the Bear takes one extra
-  controlled turn (Move +0, Attack +0 at its own values; AddActiveBonus ControlActor on the Bear, Infuser Boon of the
-  Tempest). You still select cards and act.
+  TAllyAttack keeps the enhancement slot). Bottom (2026-11-02, task wildfury-hard): as printed, by plugin
+  GHUnbreakableBond.cs on a persistent marker (MiscVars GHUnbreakableBond, slots [1,0,1], lost after): on the three
+  rounds after the play round she picks no cards and has no turn (initiative 99, last for focus), the Bear takes two
+  full turns at initiative 14 under her player's control, her other cards' slots don't move (their effects still
+  happen), this card's slot moves at each of those rounds' end. GH2e FAQ readings in the plugin's summary.
 - 28 Spirit Sigil bottom: Bless one ally within range 1 [square] with Safeguard as its sub-ability.
 - 29 Jaws of Death top: the commanded Attack 6 is marked `GHRepeatOnKill`; each time it kills, the plugin (JawsRepeat)
   gives the Wildfury XP 1 and stacks copies of the commanded Move 4 and Attack 6 (enhancements kept) for the Bear, again
@@ -124,7 +125,8 @@ gave most shapes. Layouts are plain Gloomhaven style (gh_layout redraws them). E
 
 All 10 perks from the "Vermling Wildfury" sheet, 18 checks; names made up in the 1st edition style.
 - 1 "Lick Wounds": new modifier `AMC_GH2E_Wildfury_Heal2Bear_R` (rolling +0, Heal 2 on the Bear by Frosthaven's
-  AMC_Heal1_TBoneshaper_R custom targeting). When the Bear is gone, or the Bear itself draws it, the attacker is healed.
+  AMC_Heal1_TBoneshaper_R custom targeting). The Bear only (2026-11-02): with no Bear on the map the plugin draws the
+  card without its heal (GHWildfury.cs LickWounds); the old fallback to the attacker is gone.
 - 3 "Pack Bond": `AMC_GH2E_Wildfury_P2_Bond` is a plain +2 again; the plugin (PackBond) rewrites it to +3 at the game's
   modifier rewrite step while the Wildfury and the Bear are within 4 hexes (read in C#: the old expression override
   crashed when the Bear drew the card).
@@ -188,4 +190,5 @@ bottom, the three Safeguards, perks 1, 3, 9, 10.
 ## 2026-11-02: companion rules (2e card-accuracy pass, task wildfury-mindthief)
 
 Plugin GHWildfury.cs builds shared changes 1, 2 (Invocation of Spirit; Unbreakable Bond top is data only), 4, 5, 6, 8
-and 9 above, and Invocation of Spirit bottom's Bear heal. Still open: 3 (Unbreakable Bond bottom).
+and 9 above, and Invocation of Spirit bottom's Bear heal. 3 (Unbreakable Bond bottom): GHUnbreakableBond.cs
+(task wildfury-hard).

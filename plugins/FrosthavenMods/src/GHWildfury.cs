@@ -33,6 +33,9 @@ namespace FrosthavenMods
     ///     the Wildfury gains 1 XP and the commanded action (the control's abilities up to the attack) is performed again.
     ///   - PackBond (perk "Pack Bond", card AMC_GH2E_Wildfury_P2_Bond): the +2 counts as +3 while the Wildfury and the Bear
     ///     are within range 4 of each other (at the game's modifier rewrite step, as GHModifierRewrites does).
+    ///   - LickWounds (perk "Lick Wounds", card AMC_GH2E_Wildfury_Heal2Bear_R: "Heal 2, target Bear"): drawn with no Bear
+    ///     on the map, the card is drawn without its heal (a copy with no abilities), so the heal's custom target list is
+    ///     never empty (the printed card heals the Bear only).
     ///   - ThickHide (perk Wildfury08): a 2x an enemy draws for an attack on the Bear counts as +0.
     ///   - CallOfTheWild (perk Wildfury09, marker GHCallOfTheWild on the commanded move): if the Bear exited a hex
     ///     adjacent to her during the move, the move's teleport sub-ability is offered to her afterwards.
@@ -48,6 +51,7 @@ namespace FrosthavenMods
         internal const string BearId = "WildfuryBearID";
         internal const string Rage = "WildfuryRage";
         private const string PackBondCard = "AMC_GH2E_Wildfury_P2_Bond";
+        private const string LickWoundsCard = "AMC_GH2E_Wildfury_Heal2Bear_R";
         private const string ThickHidePerk = "Wildfury08";
         private const string LifeBondPerk = "Wildfury10";
 
@@ -448,6 +452,15 @@ namespace FrosthavenMods
                 {
                     AttackModifierYMLData card = modifiers[i];
                     if (card == null) continue;
+                    if (card.Name == LickWoundsCard && card.Abilities != null && card.Abilities.Count > 0
+                        && !(ScenarioManager.Scenario?.HeroSummons?.Any(s => s != null && !s.IsDead && s.Class?.ID == BearId) ?? false))
+                    {
+                        AttackModifierYMLData copy = card.Copy(createCard: true);
+                        copy.Abilities = new List<CAbility>();   // a fresh list: the deck card keeps its heal
+                        modifiers[i] = copy;
+                        Log("LickWounds", 0, $"Lick Wounds drawn by {GHPlague.NameOf(actor)} with no Bear on the map: the heal has no target and is skipped");
+                        continue;
+                    }
                     if (card.Name == PackBondCard && card.MathModifier == "+2")
                     {
                         CPlayerActor her = actor as CPlayerActor ?? SummonerOf(actor);
