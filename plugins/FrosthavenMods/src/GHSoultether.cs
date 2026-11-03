@@ -29,7 +29,8 @@ namespace FrosthavenMods
     ///     Slime Spirit is summoned for the same Soultether in an empty hex adjacent to it (the summoner's player picks it:
     ///     each candidate highlighted with a yes/no prompt, PickHex), tied to the
     ///     same card (Oozing Manifestation, 33525); the new one has no prevention of its own (the card's one character
-    ///     token is placed). "GHRule SlimeSplit".
+    ///     token is placed). Its model is placed from the split's own Summon message (SplitModel: no summon ability ends
+    ///     to place it, 2026-11-03 soft-lock). "GHRule SlimeSplit".
     ///   - Void Eater (MiscVars GH2E_CurseMonsterDeck on a NullTargeting step): a curse card goes straight into the monster
     ///     attack modifier deck (10-curse limit). "GHRule VoidEaterCurse".
     ///   - Masteries: FrosthavenMods_SummonCardsKeptBeforeRest (Value different cards whose summon ability was performed
@@ -278,7 +279,11 @@ namespace FrosthavenMods
             _splitting = true;
             try
             {
-                CAbilitySummon.TrySpawnSummon(soul, "SlimeSpirit2ID", null, new List<CTile> { tile }, out string error, summon?.AnimOverload, summon, null, made, out done, ref summoned, ref cancel);
+                // counted before the spawn: TrySpawnSummon queues the client's Summon message itself, and the main thread
+                // may handle it before this thread returns (SplitModel places the model and takes the count back)
+                System.Threading.Interlocked.Increment(ref _splitModels);
+                if (!CAbilitySummon.TrySpawnSummon(soul, "SlimeSpirit2ID", null, new List<CTile> { tile }, out string error, summon?.AnimOverload, summon, null, made, out done, ref summoned, ref cancel))
+                    System.Threading.Interlocked.Decrement(ref _splitModels);   // failed before any message was sent
                 foreach (CActor a in made)
                     foreach (CActiveBonus x in a.ActiveBonuses.Where(x => x?.Ability != null && GHPlague.Marked(x.Ability, "GH2E_SlimeSplit")).ToList())
                         x.Finish();   // the card's one character token is placed: the new Slime Spirit has no prevention
@@ -286,6 +291,33 @@ namespace FrosthavenMods
                                                           : $"the second Slime Spirit could not be summoned ({error})");
             }
             finally { _splitting = false; }
+        }
+
+        private static int _splitModels;   // split Summon messages queued whose model is not placed yet
+
+        /// <summary>The second Slime Spirit's model. The game makes a summon's model in one of three places: Handle_Summon
+        /// when no summon animation plays, the summoner's animator (SummonSMB, which the Soultether's summon state does not
+        /// carry), or the summon ability's end (Handle_AbilityEndUpdateCombatLog, SummonSMB.SummonCharacters). The split
+        /// summons outside any summon ability, so that end never comes: the actor existed with no model, and its first
+        /// attack waited for an attack animation forever (harness session 20261103-102612, WaitingForAttackAnim). The
+        /// split's own Summon message places the model here, on the main thread, the way the ability's end would.</summary>
+        [HarmonyPatch(typeof(Choreographer), "Handle_Summon")]
+        [HarmonyPostfix]
+        private static void SplitModel(CMessageData message)
+        {
+            try
+            {
+                if (System.Threading.Volatile.Read(ref _splitModels) <= 0 || !(message is CSummon_MessageData m) || m.m_SummonedActors == null) return;
+                List<CActor> slimes = m.m_SummonedActors.Where(a => a is CHeroSummonActor s && s.HeroSummonClass?.ID == "SlimeSpirit2ID").ToList();
+                if (slimes.Count == 0) return;
+                System.Threading.Interlocked.Decrement(ref _splitModels);
+                List<CActor> missing = slimes.Where(a => Choreographer.s_Choreographer.FindClientActor(a) == null).ToList();
+                if (missing.Count == 0) return;
+                SummonSMB.SummonCharacters(missing);
+                Rule("SlimeSplit", Oozing, $"the second Slime Spirit's model is placed ({string.Join(", ", missing.Select(GHPlague.NameOf))}"
+                                           + $"{(missing.All(a => Choreographer.s_Choreographer.FindClientActor(a) != null) ? "" : "; FAILED: still no model")})");
+            }
+            catch (Exception e) { Report("Slime Spirit model", e); }
         }
 
         /// <summary>"in an empty hex adjacent to this summon": the summoner's player chooses. Each candidate hex but the last is
