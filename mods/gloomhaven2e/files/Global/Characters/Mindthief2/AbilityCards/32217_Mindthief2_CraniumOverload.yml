@@ -7,10 +7,11 @@ Initiative: 5
 # card: Cranium Overload
 # written from tools/gh2e/sheets/Mindthief.json. Top: the designated hex is Frosthaven's own "perform from a hex" shape
 # (Pyroclast Cloud of Ash / Shattersong Resonant Frequency): a NullHex pick of a hex holding an enemy within range 4
-# (line of sight from you), then the attacks are performed from that hex (Vars TargetingOverrideArrayIndex: range, line
-# of sight and adjacency count from the designated hex, rulebook p21). The attacks print no range, so they are melee
-# (2e rulebook: an attack with no range is melee): Attack 6, Pierce 5 on the enemy in the hex, then, if it killed, Attack
-# 2 on every enemy adjacent to the hex (a sub-ability of the attack: GHNestedSubAbilities queues it, the kill check reads
+# (line of sight from you). The attacks print no range, so they are melee (2e rulebook: an attack with no range is
+# melee): Attack 6, Pierce 5 on the enemy in the hex (aimed at it from you, Range 4 as the designation, TreatAsMelee;
+# performed from its own hex the game offered no target), then, if it killed, Attack 2 on every enemy adjacent to the
+# hex, performed from the hex (Vars TargetingOverrideArrayIndex: range, line of sight and adjacency count from it,
+# rulebook p21) (a sub-ability of the attack: GHNestedSubAbilities queues it, the kill check reads
 # the attack). No enhancement marks on the top (as printed).
 Discard: [Lost,Discard]
 Data:
@@ -26,9 +27,14 @@ Data:
                     DontPreviewDescription: True
                 SkipAnim: True
                 SubAbilities:
+                    # (the enemy IN the designated hex: performed from that hex she stood on her own target's hex and
+                    # the game offered no target, harness 2026-11-03; so this attack is aimed from her at that hex's
+                    # enemy, Range 4 as the designation, melee as printed (no adjacency disadvantage); only the follow-up
+                    # attack is performed from the hex)
                     TAttack:
                         Attack: 6
                         Pierce: 5
+                        Range: 4
                         Target: 1
                         Filter: Enemy
                         TreatAsMelee: True
@@ -38,9 +44,6 @@ Data:
                             Type: ThisAbility
                             Vars:
                                 ValidateDesignated: ParentAbility != null && ParentAbility.AbilityHasHappened
-                        Vars:
-                            DesignatedHex: ParentAbility.m_TilesSelected[0]
-                            TargetingOverrideArrayIndex: DesignatedHex
                         MiscVars:
                             AutoSelectValidTiles: True
                         Targeting: Custom

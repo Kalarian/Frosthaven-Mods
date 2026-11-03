@@ -43,6 +43,10 @@ Data:
                         Attack:
                             Amount: 3
                             SquareEnhancements: 1
+                        # (Range 1 written out: a sub-ability naming no range takes its parent's, here the designation's
+                        # 4, and the "melee" attack reached 4 hexes from the designated hex, harness 2026-11-03)
+                        Range: 1
+                        TreatAsMelee: True
                         Filter: Enemy
                         TreatAsNonSubAbility: True
                         StartAbilityRequirements:

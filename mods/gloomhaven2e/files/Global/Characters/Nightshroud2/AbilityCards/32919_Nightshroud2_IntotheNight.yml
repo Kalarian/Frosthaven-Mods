@@ -5,8 +5,8 @@ ID: 32919
 Level: 5
 Initiative: 17
 # card: Into the Night
-# top: Stun on the area; the stunned enemies gain Invisible (a sub-ability on the stun's own targets, UseParentTargets,
-# the Lead to Slaughter fix's shape); the Tear hex 2,0 is a blue hex of the area, the only hex the Tear may go
+# top: Stun on the area; the stunned enemies gain Invisible (a sub-ability on the stun's own targets: custom targeting on
+# ParentAbility.ActorsTargeted, Frosthaven's Snowdancer Enticing Breeze bottom); the Tear hex 2,0 is a blue hex of the area, the only hex the Tear may go
 # (GHTears.cs).
 # bottom: "grant one adjacent ally: Teleport 8, must end in a hex containing a Tear" = a grant (ControlActor, the
 # Sunkeeper2 grant shape) of Teleport2 8 limited to shadow hexes (IsValidTeleportTile), its printed square mark.
@@ -22,11 +22,19 @@ Data:
                     GH2ETearHexArea: True
                 AnimOverload: AggressiveTargetedShout
                 SubAbilities:
+                    # (Frosthaven's Snowdancer Enticing Breeze bottom shape for "the area's targets": a plain sub-ability
+                    # of an area ability re-reads the parent's area tiles and found nobody in 4 of 6 plays, harness
+                    # 2026-11-01..03; the parent's own target list is what the card means)
                     TStunSubInvisible:
                         Invisible: True
                         Filter: Enemy
                         Target: -1
-                        UseParentTargets: True
+                        TreatAsNonSubAbility: True
+                        Targeting: Custom
+                        TargetingVars:
+                            AddValidActorsInRange: ParentAbility.ActorsTargeted
+                        MiscVars:
+                            NoAreaEffectExplicit: True
                         CanSkip: False
                         AnimOverload: None
             TTear:
