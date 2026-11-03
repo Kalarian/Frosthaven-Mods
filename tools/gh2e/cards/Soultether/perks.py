@@ -136,7 +136,8 @@ MASTERIES = [
      "Perform three different summon actions before your first rest and keep those cards in your active area for the entire scenario",
      """\
 # Answered by the Frosthaven Mods plugin (GHSoultether.cs, FrosthavenMods_SummonCardsKeptBeforeRest): Value different
-# ability cards whose summon ability the Soultether performed before the round of its first rest, and every one of
+# ability cards whose summon ability the Soultether performed in a round before its first rest (the plugin notes the
+# rest round from the engine's rest calls, saved with the scenario), and every one of
 # them still in its active area when the scenario ends (a summon card leaves the active area only when its summon is
 # gone, so one that left can't have stayed all scenario).
 CheckAtEndOfScenario: True
@@ -151,11 +152,11 @@ BattleGoalCondition:
     ("Planar Conclave",
      "Perform six different summon abilities from your ability cards over the course of the first rounds of six scenarios",
      """\
-# Answered by the Frosthaven Mods plugin (GHSoultether.cs, FrosthavenMods_FirstRoundSummonsAcrossScenarios): the summon
-# abilities (card + ability) the Soultether performed in round 1 of each scenario are added to a career list kept in
-# the campaign save (synced campaign state, written from the scenario result every peer receives); the mastery is met
-# when the list holds Value different ones (two summon cards can be played in one first round; the scenarios need not
-# be in a row).
+# Answered by the Frosthaven Mods plugin (GHSoultether.cs, FrosthavenMods_FirstRoundSummonsAcrossScenarios): each
+# scenario's round-1 summon abilities (card + ability) are recorded per character in the campaign save (synced
+# campaign state, written from the scenario result every peer receives); the mastery is met when Value different
+# scenarios can each be paired with a different summon ability of their own first round (user decision 2026-11-02: it
+# counts scenarios, two summons in one first round count once; the scenarios need not be in a row).
 CheckAtEndOfScenario: True
 BattleGoalCondition:
     - Targets:

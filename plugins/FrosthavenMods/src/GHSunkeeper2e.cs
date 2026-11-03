@@ -26,7 +26,7 @@ namespace FrosthavenMods
     ///   - GH2E_HealSplash N (Beacon of Light top, card 33314, a persistent marker bonus with three use slots): "on your
     ///     next three single-target heal abilities from your ability cards, additionally target all allies within Range N
     ///     of the primary target". After such a heal (one target, no area, from an ability card) is applied to its primary
-    ///     target, the same heal is applied to every ally (the Sunkeeper herself included) within N hexes of that target
+    ///     target, the same heal is applied to every ally (never the Sunkeeper herself: "ally" excludes you) within N hexes of that target
     ///     with line of sight to it, and a use slot moves (its XP with it); the card is lost after the third.
     ///     Logs "GHRule HealSplash card 33314 ...".
     ///   - Divine Ascension (card 33329): its Flying is a persistent Fly move bonus (the engine makes the figure flying while
@@ -204,7 +204,7 @@ namespace FrosthavenMods
                 CBaseCard card = __instance.GetAbilityBaseCard();
                 if (!(card is CAbilityCard) || card.CardType != CBaseCard.ECardType.CharacterAbility) return;  // "from your ability cards"
                 int range = MiscInt(bonus.Ability, HealSplashTag);
-                var extra = ScenarioManager.Scenario.AllAliveActors.Where(x => x != null && !x.IsDead && x != actor
+                var extra = ScenarioManager.Scenario.AllAliveActors.Where(x => x != null && !x.IsDead && x != actor && x != healer   // "allies": never the Sunkeeper herself
                         && !CActor.AreActorsEnemies(healer.Type, x.Type, healer, x)
                         && (x.Type == CActor.EType.Player || x.Type == CActor.EType.HeroSummon || x.Type == CActor.EType.Ally)
                         && Point.HexDist(actor.ArrayIndex, x.ArrayIndex) <= range && x.Tile != null && actor.Tile != null

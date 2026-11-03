@@ -959,9 +959,9 @@ namespace FrosthavenMods
         // ---- the 2nd edition Sawbones' second mastery: attacks on undamaged enemies while a damaged monster lives
 
         internal const string Sawbones2Class = "Sawbones2ID";
-        private static readonly Dictionary<string, int> UndamagedAttacks = new Dictionary<string, int>(StringComparer.Ordinal);
-        private static readonly Dictionary<string, int> AttacksMade = new Dictionary<string, int>(StringComparer.Ordinal);
-        private static ScenarioState _damagedScenario;
+        // the violations are a hidden character resource on the Sawbones, saved with the scenario: a reload or a co-op
+        // rejoin keeps them, a rewind rolls them back with the state (the attacks themselves come from the saved records)
+        internal const string UndamagedResource = "GH2EUndamagedAttacks";
 
         [HarmonyPatch(typeof(CAbilityAttack), "AttackActor")]
         [HarmonyPrefix]
@@ -972,16 +972,12 @@ namespace FrosthavenMods
                 if (!(targetingActor is CPlayerActor p) || p.CharacterClass?.ID != Sawbones2Class) return;
                 CActor target = attackingTargetSummary?.ActorToAttack;
                 if (target == null || !CActor.AreActorsEnemies(p.Type, target.Type, p, target)) return;
-                ScenarioState scenario = ScenarioManager.CurrentScenarioState;
-                if (scenario == null) return;
-                if (!ReferenceEquals(scenario, _damagedScenario)) { UndamagedAttacks.Clear(); AttacksMade.Clear(); _damagedScenario = scenario; }
-                string guid = p.ActorGuid ?? "";
-                AttacksMade[guid] = (AttacksMade.TryGetValue(guid, out int n) ? n : 0) + 1;
+                if (ScenarioManager.CurrentScenarioState == null) return;
                 if (target.Health < target.MaxHealth) return;
                 CActor damaged = ScenarioManager.Scenario.AllAliveActors.FirstOrDefault(x => x != null && !x.IsDead && x != target
                     && (x.Type == CActor.EType.Enemy || x.Type == CActor.EType.Enemy2) && x.Health < x.MaxHealth);
                 if (damaged == null) return;
-                UndamagedAttacks[guid] = (UndamagedAttacks.TryGetValue(guid, out int v) ? v : 0) + 1;
+                if (ScenarioRuleClient.SRLYML?.CharacterResources?.Any(r => r.ID == UndamagedResource) == true) p.AddCharacterResource(UndamagedResource, 1);
                 Plugin.Log.LogInfo($"GHRule DamagedFirst card 0 mastery: {p.GetPrefabName()} attacked undamaged {target.GetPrefabName()} while damaged {damaged.GetPrefabName()} lives (mastery failed)");
             }
             catch (Exception e) { if (Reported.Add("damaged first")) Plugin.Log.LogError("Gloomhaven masteries: Sawbones attack not noted: " + e); }
@@ -995,7 +991,10 @@ namespace FrosthavenMods
             int attacks = AbilityRecords(stats).Where(a => a.ActionData.AbilityType == CAbility.EAbilityType.Attack && a.TargetGUIDs != null)
                 .Sum(a => a.TargetGUIDs.Where((g, i) => !string.IsNullOrEmpty(g) && IsEnemyTarget(a, i)).Count());
             string guid = SelfGuid(stats) ?? "";
-            int bad = ReferenceEquals(ScenarioManager.CurrentScenarioState, _damagedScenario) && UndamagedAttacks.TryGetValue(guid, out int v) ? v : 0;
+            CScenario sc = ScenarioManager.Scenario;
+            List<CPlayerActor> all = sc == null ? new List<CPlayerActor>() : sc.PlayerActors.Concat(sc.ExhaustedPlayers ?? new List<CPlayerActor>()).ToList();
+            CPlayerActor saw = all.FirstOrDefault(x => x.ActorGuid == guid) ?? all.FirstOrDefault(x => x.CharacterClass?.ID == Sawbones2Class);
+            int bad = saw?.GetCharacterResourceAmount(UndamagedResource) ?? 0;
             total = needed + 1;
             met = Math.Min(attacks, needed) + (bad == 0 ? 1 : 0);
             result = bad == 0 && attacks >= needed;

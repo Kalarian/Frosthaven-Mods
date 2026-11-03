@@ -6,3 +6,11 @@ WildfuryRage:
     Sprite: "Positive_AttackPlus"
     LocKey: "GH2E_Wildfury_RAGE_TOOLTIP"
     MaxAmount: 99
+GH2ECommandKills7:
+    # pack-wide: hidden count of the enemies killed this scenario by Command attacks of 7 or more (mastery 2
+    # Unleashed, GHWildfury.cs); saved with the scenario, never shown.
+    ID: "GH2ECommandKills7"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_Wildfury_HIDDEN_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True

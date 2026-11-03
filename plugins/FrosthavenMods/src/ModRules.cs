@@ -263,11 +263,11 @@ namespace FrosthavenMods
                 AffectsScenarios = true,
                 Name = "Stacking attack bonuses (mod)",
                 Description = "The official rule of the physical game (rulebook p.25): every bonus that applies to an " +
-                              "attack adds up. The digital game keeps only the largest plain +X Attack bonus: with a +1 " +
-                              "from one card and a +2 from another, an attack gets +2, not +3. With this on (the default), " +
-                              "it gets +3. Bonuses for melee or ranged attacks only already add up in the digital game.\n\n" +
-                              "Applies to every card, items and Frosthaven's own included.\n" +
-                              "Board game rule restored: every attack bonus adds.",
+                              "attack adds up. The digital game already adds almost every bonus; it keeps only the largest " +
+                              "of the bonuses written for \"your default attack\" (of Frosthaven's cards only the " +
+                              "Versatile Dagger's). With this on (the default), those add up too. Card bonuses (Frosthaven's " +
+                              "and the Gloomhaven packs') are not affected: they already add.\n\n" +
+                              "Board game rule kept: every attack bonus adds.",
             },
             new Rule
             {

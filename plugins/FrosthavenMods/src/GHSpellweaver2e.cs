@@ -252,7 +252,38 @@ namespace FrosthavenMods
             catch (Exception e) { Report("Spent Power", e); }
         }
 
+        // ================================================================== Etheric Echo bottom: Ward as the lost action starts
+
+        private const int EthericEcho = 32413;
+
+        /// <summary>"When you next perform an action with [lost] this round, gain Ward": the card's round bonus BOnLost fires
+        /// when such an action ENDS (Frosthaven's DuringActionAbilityOnActionEnded), too late for damage she takes during
+        /// it (retaliate on a lost attack, a trap on a lost move). So as the first ability of her next lost action starts,
+        /// she gains Ward and the bonus is finished (its end-of-action trigger then never runs; if this hook misses, it is
+        /// the fallback). "GHRule EthericEcho".</summary>
+        [HarmonyPatch(typeof(CAbility), nameof(CAbility.Start))]
+        [HarmonyPrefix]
+        private static void WardAtLostStart(CAbility __instance, CActor targetingActor)
+        {
+            try
+            {
+                CActor her = targetingActor ?? __instance?.TargetingActor;
+                if (!(her is CPlayerActor p) || p.CharacterClass?.ID != ClassId || GameState.InternalCurrentActor != her) return;
+                CActiveBonus echo = her.ActiveBonuses?.FirstOrDefault(b => b?.BaseCard?.ID == EthericEcho && b.Ability?.Name == "BOnLost" && !b.Finished() && !b.Finishing());
+                if (echo == null || !IsLostAction(__instance)) return;
+                CBaseCard card = null;
+                try { card = __instance.GetAbilityBaseCard(); } catch { }
+                if (card == null || card.ID == EthericEcho) return;   // Etheric Echo's own bottom is no lost action
+                her.ApplyCondition(her, CCondition.EPositiveCondition.Ward);
+                echo.Finish();
+                Plugin.Log.LogInfo($"GHRule EthericEcho card {EthericEcho} {GHPlague.NameOf(her)} starts a lost action ({card.ID} {__instance.Name}): Ward now, before its abilities");
+            }
+            catch (Exception e) { Report("Etheric Echo", e); }
+        }
+
         // ================================================================== Etheric Bond
+
+        private static readonly System.Reflection.FieldInfo WorkThread = AccessTools.Field(typeof(ScenarioRuleClient), "s_WorkThread");
 
         [HarmonyPatch(typeof(CPlayerToShortRest_MessageData), MethodType.Constructor, new[] { typeof(CActor) })]
         [HarmonyPostfix]
@@ -260,6 +291,10 @@ namespace FrosthavenMods
         {
             try
             {
+                // only the rule library's own message (CPhaseShortRest.OnNextStep, the worker thread every machine runs):
+                // online, Choreographer.Handle_PlayerToShortRest builds a second one on the main thread after the sync
+                // point, and a card move from there could run on one machine only (a hand desync)
+                if (WorkThread?.GetValue(null) != null && !ScenarioRuleClient.IsWorkerThread) return;
                 if (!(actorSpawningMessage is CPlayerActor p) || !GHPerks.HasPerk(p, EthericBond)) return;
                 CCharacterClass cls = p.CharacterClass;
                 if (cls == null || cls.HasShortRested || !cls.ShortRest) return;

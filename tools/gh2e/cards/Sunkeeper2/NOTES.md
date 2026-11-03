@@ -128,3 +128,4 @@ Plugin GHSunkeeper2e (misc vars on the pack abilities):
   the fifth melee attack; the engine already treats a held Fly move bonus as standing Flying (RefreshFlyingFlag).
 - Perk Shielding Light (Sunkeeper211) = GHPerks (with Lay on Hands counted as a heal of the target's maximum HP).
 - Mastery Hammer of Dawn = FrosthavenMods_AttacksWithDamage (any three attacks, one target each, of 8+ damage).
+- Re-audit fix (2026-11-02, fix-reaudit-B): Beacon of Light's splash never heals the Sunkeeper herself ("allies").

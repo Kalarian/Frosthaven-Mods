@@ -8,3 +8,19 @@ SilentKnifeHiredHelp:
     Sprite: "HoverHatchet"
     LocKey: "GH2E_SilentKnife_HIREDHELP_TOOLTIP"
     MaxAmount: 1
+GH2EFlankAttacks:
+    # pack-wide: hidden count of the Silent Knife's attacks this scenario (mastery 1, GHSilentKnife.cs); saved with the
+    # scenario, never shown.
+    ID: "GH2EFlankAttacks"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_SilentKnife_HIDDEN_TOOLTIP"
+    MaxAmount: 9999
+    Hidden: True
+GH2EFlankBad:
+    # pack-wide: hidden count of the Silent Knife's attacks on a target neither flanked nor isolated (mastery 1,
+    # GHSilentKnife.cs); saved with the scenario, never shown.
+    ID: "GH2EFlankBad"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_SilentKnife_HIDDEN_TOOLTIP"
+    MaxAmount: 9999
+    Hidden: True

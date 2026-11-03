@@ -150,3 +150,8 @@ All four done 2026-11-02 (GHSoothsinger.cs, GHStatusIcons, GHCardStyle, gh_port 
 rulecheck 44 ok, 0 with problems; character resources SoothsingerHighNote, SoothsingerLowNote. **CHECK PASSED
 Soothsinger2** (2026-11-01).
 - Perk Benediction: modifier rewritten, `AMC_GH2E_Soothsinger2_Bless2_M2` blesses with a NullTargeting + `Conditions: [Bless]` (same filter, range 99, target 2, ControlTargetingActor) (a Bless ability on a modifier card stops the game when drawn). Exact.
+- Re-audit fixes (2026-11-02, fix-reaudit-B; supersede the Call and Response line above): Call and Response's grant keeps
+  only the ability the drawer's player picks (Move 2 or Attack 2; GHSoothsinger.CallAndResponse). Captivating
+  Performance bottom moves EVERY active song back whatever the picker held (EverySongBack, "GHRule SongTokenBack"). The
+  masteries' counts are hidden resources on her (GH2ESongsSung bit mask, GH2ENotesMade, GH2ENotesWasted), saved with
+  the scenario. Codex: "all your active Songs", "multiple Songs".

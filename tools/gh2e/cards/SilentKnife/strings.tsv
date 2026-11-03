@@ -44,3 +44,4 @@ GH2E_SilentKnife_28_B	During your turn, you may play this card from your hand to
 GH2E_SilentKnife_MONEY_TOOLTIP	Money tokens: the loot tokens the Silent Knife has looted this scenario. Placing or losing one puts one of her loot cards (her choice, never the random item) back on top of the loot deck; a placed token can be looted again.
 GH2E_SilentKnife_HIREDHELP_TOOLTIP	Hired Help: this enemy is the Silent Knife's ally for the rest of the scenario and drops an additional loot token when it dies.
 AMC_GH2E_SilentKnife_Pickpocket_P1	+1 Gain one money token if this attack targeted an adjacent <sprite name=Enemy>
+GH2E_SilentKnife_HIDDEN_TOOLTIP	Silent Knife rule bookkeeping (hidden).

@@ -84,7 +84,7 @@ namespace FrosthavenMods
 
         [HarmonyPatch(typeof(CAbilityGiveSupplyCard), nameof(CAbilityGiveSupplyCard.ApplyToActor))]
         [HarmonyPrefix]
-        private static bool FreeCopy(CAbilityGiveSupplyCard __instance, CActor actor, out List<int> __state)
+        private static bool FreeCopy(CAbilityGiveSupplyCard __instance, CActor actor, out List<int> __state, ref bool __result)
         {
             __state = null;
             if (!(__instance.TargetingActor is CPlayerActor giver) || __instance.SupplyCardIDs == null || Ids.Count == 0) return true;
@@ -124,6 +124,15 @@ namespace FrosthavenMods
             }
             __state = __instance.SupplyCardIDs;
             __instance.SupplyCardIDs = picked;
+            // none left in the supply: the give can't be performed (Sawbones class notes: "abilities that give medical packs
+            // may only be performed if there is at least one medical pack remaining in the supply"): nothing happens, so no
+            // XP and no ability record (Constant Care doesn't count it)
+            if (picked.Count == 0 && __state.Count > 0 && __state.All(RandomCopy))   // 2nd edition packs only: the released 1st edition keeps its behaviour
+            {
+                __result = false;
+                Plugin.Log.LogInfo($"GHRule PackSupplyEmpty card {SafeCard(__instance)} {giver.GetPrefabName()}'s give: no free copy left in the supply: not performed (no card, no XP)");
+                return false;
+            }
             if (ReferenceEquals(supplier, giver)) return true;
             // the performer's class owns none of these cards: give them from the owner's supply, as the game's own give does
             try

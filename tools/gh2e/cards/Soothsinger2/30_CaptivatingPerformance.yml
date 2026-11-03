@@ -39,7 +39,9 @@ Data:
                     Enhancements: 1
             # "move your character tokens on each of your active Song abilities backward one slot": Frosthaven's
             # MoveActiveBonusTracker -1 (Drifter Fortitude bottom, AMC_MoveTrackerBackOneSlot), as many cards as you have
-            # songs; the class's non-song trackers are marked ImmuneMoveActiveBonusTracker (Lucky Dice's flag)
+            # songs; the class's non-song trackers are marked ImmuneMoveActiveBonusTracker (Lucky Dice's flag). The
+            # engine's picker allows fewer ("End selection"); the plugin moves EVERY active song whatever was picked
+            # (GHSoothsinger.EverySongBack, "GHRule SongTokenBack")
             BTrackersBack:
                 MoveActiveBonusTracker: -1
                 Filter: Self
