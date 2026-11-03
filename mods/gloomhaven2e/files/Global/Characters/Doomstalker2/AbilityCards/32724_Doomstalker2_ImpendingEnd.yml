@@ -9,9 +9,9 @@ Initiative: 47
 # died" = Forward Momentum's transfer (TransferDooms on a doomed enemy's death), as a one-use bonus for this turn. A
 # doom is gone the moment its enemy dies, so the bonus must exist before the attack: it is the half's first ability
 # (standard confirm), the attack second. Its Vars accept only a death caused by this card's attack.
-# bottom: Doom with three slots: "Immobilize on your first attack on it, +2 Attack on the second and third". Two doom
-# bonuses: Immobilize (one use) and +2 Attack (two uses, XP on the last), so the first attack gets Immobilize and +2,
-# the second +2 (same total, two attacks instead of three; approximation). The card is discarded when both are used.
+# bottom: Doom with three slots: "Immobilize on your first attack on it, +2 Attack on the second and third". One doom
+# bonus with three slots (XP on the third), marked GHSlotSequence: plugin GHDoomstalker2e gives slot 1 Immobilize and
+# +0, slots 2 and 3 +2 Attack and no condition. The card is discarded when the three are used.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -59,23 +59,17 @@ Data:
                 AddDoom:
                     Doom:
                         DoomAbilities:
-                            BDoomImmobilize:
-                                Attack: 0
-                                Condition: Immobilize
-                                ActiveBonus:
-                                    Duration: Persistent
-                                    Behaviour: BuffIncomingAttacks
-                                    Filter:
-                                        PlayerClasses: Doomstalker2ID
-                                    XPTracker: [0]
                             BDoomAttackDebuff:
                                 Attack: 2
+                                Condition: Immobilize
+                                MiscVars:
+                                    GHSlotSequence: True
                                 ActiveBonus:
                                     Duration: Persistent
                                     Behaviour: BuffIncomingAttacks
                                     Filter:
                                         PlayerClasses: Doomstalker2ID
-                                    XPTracker: [0,1]
+                                    XPTracker: [0,0,1]
                 Filter:
                     TargetType: Enemy
                     EnemyType: [Normal, Elite, Boss, Object]

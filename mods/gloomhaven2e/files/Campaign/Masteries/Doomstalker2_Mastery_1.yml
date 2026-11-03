@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Doomstalker2_MASTERY_1
+LocalisedName: Doomstalker2_MASTERY_1_Name
+LocalisedDescription: Doomstalker2_MASTERY_1_Desc
+PerkPoints: 1
+# FrosthavenMods_DoomedKillsTotal: Value kills of doomed enemies by the Doomstalker itself (not its summons), within one
+# scenario (the user's default for this mastery, QUESTIONS.md B).
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_DoomedKillsTotal]
+        CharacterIDs:
+            ActorID: Doomstalker2ID
+        Value: 20

@@ -236,6 +236,10 @@ PRINTED_EXCEPTIONS = {
         "the summon's own end-of-turn Heal 1 lives in its summon file (summons/RockColossus2.yml), not on the card",
     (32530, "Top", "number Pull 2"):       # Gravity Bomb: the token performs the pull at the end of your next turn
         "the token's Pull 2 / damage 5 / damage 1 live in its summon file (summons/GravityBomb.yml, GHMapTokens.cs), not on the card",
+    (32717, "Bottom", "number Attack 1"):  # Walking Bastion: "grant that summon: Attack 1, Pierce 2" after its attack
+        "the granted Attack 1, Pierce 2 is built by the plugin (GHDoomstalker2e WalkingBastion), not a card ability",
+    (32717, "Bottom", "number Pierce 2"):
+        "the granted Attack 1, Pierce 2 is built by the plugin (GHDoomstalker2e WalkingBastion), not a card ability",
     # --- OPEN rows (ALL.json): the printed rule needs a plugin system another task builds; remove the line when it ships ---
     (32625, "Bottom", "persistent"): "OPEN Berserker2-27 Bone Breaker: the character token (persistent) is not built",
     (33226, "Top", "persistent"): "OPEN Sawbones2-25 Take Your Medicine: the per-turn Prescription is not built",

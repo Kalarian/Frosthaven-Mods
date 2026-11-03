@@ -2,7 +2,7 @@ Parser: HeroSummon
 ID: HornedHristekID
 LocKey: $GH2E_SUMMON_HornedHristek$
 # stand-in model: the 1st edition Black Unicorn (horned; NOTES.md). Its Move has no enhancement mark (the card prints
-# none). Its trait (+2 Attack after its first move each round) is text only (NEEDS PLUGIN); its kill trigger
+# none). Its trait (+2 Attack after its first move each round) is plugin GHDoomstalker2e (HornedHristek); its kill trigger
 # ("whenever this summon kills an enemy, grant it Move +0") is a persistent on-kill bonus on itself (Drifter Fortitude
 # bottom's DuringActionAbilityOnKill), the move stacked next to the current ability.
 Model: BlackUnicorn

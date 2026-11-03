@@ -1625,6 +1625,10 @@ PERK_Doomstalker2_09_Name	Restless Doom
 PERK_Doomstalker2_09_Desc	Whenever you rest, after you <sprite name=RecoverIcon> your cards from your discard pile, you may play one card from your hand to perform a Doom action of the card
 PERK_Doomstalker2_10_Name	Heel
 PERK_Doomstalker2_10_Desc	On each of your summons' turns, you may have them skip their turn and instead perform <sprite name=Move> +0 treating you as their focus
+Doomstalker2_MASTERY_1_Name	Inevitable End
+Doomstalker2_MASTERY_1_Desc	Kill 20 enemies that have <nobr><b><color=#39BEED>Doom</color></b></nobr>
+Doomstalker2_MASTERY_2_Name	Pack Leader
+Doomstalker2_MASTERY_2_Desc	In a single round, you and one of your summons must perform a combined total of 6 or more attack abilities
 Doomstalker2_FullName	Doomstalker
 CODEX_Hero_Doomstalker2_Title	Doomstalker
 CODEX_HeroInfo_Doomstalker2	<b><color=#39BEED>Doom</color></b> are not negative conditions and may target any enemy, including bosses and objectives.\n\nBringing summons to the battlefield is not for everyone. You can remain perfectly effective while completely ignoring them. If you do choose to summon forest companions to aid your fight, you may notice that you cannot easily exert direct control over them. You have some <b><color=#39BEED>Doom</color></b> that can help guide them towards important targets and away from enemies that are dangerous to them.
