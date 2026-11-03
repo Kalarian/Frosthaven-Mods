@@ -48,7 +48,9 @@ namespace FrosthavenMods
         /// <summary>The current card action has a lost icon (and <paramref name="ability"/>, if given, is from that card).</summary>
         internal static bool IsLostAction(CAbility ability)
         {
-            GameState.CurrentActorAction cur = GameState.CurrentAction;
+            // (2026-11-03 sweep: GameState.CurrentAction is null while the action runs, the CPhaseAction constructor moves
+            // it into the phase; GHCurrentAction reads the phase's copy. The ID test below alone never got to run.)
+            GameState.CurrentActorAction cur = GHCurrentAction.Get();
             if (cur?.Action == null || !(cur.BaseCard is CAbilityCard card)) return false;
             if (ability != null)
             {
@@ -59,9 +61,8 @@ namespace FrosthavenMods
             // (2026-11-03: GameState.CurrentAction holds a Copy() of the card's action (PlayerSelectedAbilityCardAction),
             // never the same object, so a reference test was always false: Spent Power, Warm Up and Etheric Echo never
             // applied. CAction.Copy keeps the ID.)
-            bool Same(CAction a) => a != null && (ReferenceEquals(cur.Action, a) || cur.Action.ID == a.ID);
-            DiscardType d = Same(card.TopAction) ? card.GetAbilityCardYML.TopDiscardType
-                : Same(card.BottomAction) ? card.GetAbilityCardYML.BottomDiscardType : DiscardType.None;
+            DiscardType d = GHCurrentAction.IsTop(cur.Action, card) ? card.GetAbilityCardYML.TopDiscardType
+                : GHCurrentAction.IsBottom(cur.Action, card) ? card.GetAbilityCardYML.BottomDiscardType : DiscardType.None;
             return d == DiscardType.Lost || d == DiscardType.PermanentlyLost;
         }
 
