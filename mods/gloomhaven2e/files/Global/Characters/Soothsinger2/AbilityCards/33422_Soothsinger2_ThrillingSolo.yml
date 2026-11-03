@@ -5,38 +5,21 @@ ID: 33422
 Level: 5
 Initiative: 60
 # card: Thrilling Solo
-# top: song (High, Low, Low Note). NEEDS PLUGIN (repeat the whole attack ability). APPROXIMATION: after your first
-# attack ability each round, one more single-target attack with that ability's attack value +1 and its range
-# (Drifter Shockwave's after-attack bonus, Shattersong Heartening Harmony's value-from-Vars); unverified
+# top: song (High, Low, Low Note): a marker persistent bonus (MiscVars GH2E_ThrillingSolo); the plugin (GHSoothsinger)
+# repeats your first attack ability from an ability card each round, whole (area, targets, effects), with +1 Attack,
+# new targets chosen (the copy can be skipped), as Frosthaven's repeat behaviour copies an ability (CRepeatAbilityBaseBehaviour)
 Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
             TSong:
-                AddActiveBonus:
-                    Attack: 1
-                    Range: 1
-                    Target: 1
-                    Filter: Enemy
-                    AnimOverload: RangedAttack
-                    StatIsBasedOnX:
-                        Strength:
-                            BasedOn: Vars
-                            Vars:
-                                Value: max(1, RepeatStrength + 1)
-                        Range:
-                            BasedOn: Vars
-                            Vars:
-                                Value: max(1, RepeatRange)
+                NullTargeting: True
                 Filter: Self
                 AnimOverload: PlaySongAttack2
+                MiscVars:
+                    GH2E_ThrillingSolo: True
                 ActiveBonus:
                     Duration: Persistent
-                    Behaviour: DuringActionAbilityOnAttackAbilityFinished
-                    Restriction: OncePerRound
-                    Vars:
-                        RepeatStrength: TriggerAbility.Strength
-                        RepeatRange: TriggerAbility.Range
             TSongTimer:
                 AddActiveBonus:
                     Null: True
@@ -62,6 +45,8 @@ Data:
                     RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
                 MiscVars:
                     GH2E_Song3: True      # the song's Note cost (Symphonic Medley picks songs by it)
+                    GH2E_SongHigh: 1   # the printed cost in High / Low Notes (plugin GHSoothsinger)
+                    GH2E_SongLow: 2
     Bottom:
         Abilities:
             BMove:

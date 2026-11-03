@@ -1,7 +1,8 @@
 # card: Grand Finale
 # top: a plain Move with Jump, then a control on every enemy moved through (the Trample fix: AllTargetsOnMovePath +
 # Targeting All), each performing Attack 3; the extra Note is a Note choice right away ("this round" not tracked)
-# bottom: song actions from the hand and the discard pile in one pass (SelectAndPlayCard over both piles); the token skip is NEEDS PLUGIN
+# bottom: song actions from the hand and the discard pile in one pass (SelectAndPlayCard over both piles); then a marker
+# (MiscVars GH2E_SkipSongTokens): the plugin GHSoothsinger holds every active song's token at the end of this round
 Discard: [Discard,Permanently Lost]
 Data:
     Top:
@@ -71,6 +72,14 @@ Data:
                     MinRequiredCards: 0
                 MiscVars:
                     IsActionValid: Action.Abilities.Any(obj.Name == 'TSongNotes')
+            # "Skip moving your character token on active Songs this round" (all of them: GH2e FAQ, Fermata)
+            BSkipTokens:
+                NullTargeting: True
+                Filter: Self
+                AutoTrigger: True
+                SkipAnim: True
+                MiscVars:
+                    GH2E_SkipSongTokens: True
 Layout:
     Top:
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *TMove* <size=100%><voffset=1>@TMove@"

@@ -47,8 +47,13 @@ namespace FrosthavenMods
         private static List<CActiveBonus> Songs(CActor actor)
         {
             if (actor == null || actor.IsDead || ScenarioManager.Scenario == null) return new List<CActiveBonus>();
-            try { return CharacterClassManager.FindAllSongActiveBonuses(actor) ?? new List<CActiveBonus>(); }
-            catch (Exception) { return new List<CActiveBonus>(); }
+            var songs = new List<CActiveBonus>();
+            try { songs.AddRange(CharacterClassManager.FindAllSongActiveBonuses(actor) ?? new List<CActiveBonus>()); }
+            catch (Exception) { }
+            // the 2nd edition songs are plain persistent bonuses, not Gloomhaven's PlaySong: GHSoothsinger finds them
+            try { songs.AddRange(GHSoothsinger.SongsReaching(actor).Where(s => !songs.Contains(s))); }
+            catch (Exception) { }
+            return songs;
         }
 
         /// <summary>The song icons on the figure's status row, after the game has drawn its own.</summary>

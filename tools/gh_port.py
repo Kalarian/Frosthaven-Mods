@@ -1368,7 +1368,7 @@ def main():
         # 126's, also DropOnDeath). APPROXIMATION (looks only).
         blocks = []
         for rid, (owner, blk) in resources.items():
-            if "# pack-wide" not in blk:
+            if "# pack-wide" not in blk and "# own sprite" not in blk:   # "own sprite": the class's own picture choice (Soothsinger 2e Notes)
                 blk = re.sub(r'^(\s*Sprite:\s*).*$', lambda g: f'{g.group(1)}"GHClass_{owner}"', blk, flags=re.M)
             blk = re.sub(r'^(\s*ResourceModel:\s*).*$', r'\1"FH_Scenario_Campaign_126_SCENARIO_OBJECT_1"', blk, flags=re.M)
             used_keys.update("GH_" + k for k in re.findall(r'^\s*LocKey:\s*"\$?(\w+)\$?"', blk, re.M))

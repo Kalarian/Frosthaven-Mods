@@ -47,6 +47,8 @@ Data:
                     RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
                 MiscVars:
                     GH2E_Song2: True      # the song's Note cost (Symphonic Medley picks songs by it)
+                    GH2E_SongHigh: 2   # the printed cost in High / Low Notes (plugin GHSoothsinger)
+                    GH2E_SongLow: 0
     Bottom:
         Abilities:
             BMove:

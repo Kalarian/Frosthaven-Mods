@@ -34,13 +34,16 @@ Supplies:
     MaxAmount: 50
 
 SoothsingerHighNote:
+    # own sprite: two Frosthaven icons so High and Low Notes can be told apart on the status row (Shattersong's song
+    # icon for High, its resonance icon for Low; the porter keeps a block's sprite when it says "own sprite")
     ID: "SoothsingerHighNote"
-    Sprite: "GHClass_Soothsinger2"
+    Sprite: "Positive_Shattersong"
     LocKey: "$GH_GH2E_Soothsinger2_HIGHNOTE_TOOLTIP$"
     MaxAmount: 2
 
 SoothsingerLowNote:
+    # own sprite (see the High Note)
     ID: "SoothsingerLowNote"
-    Sprite: "GHClass_Soothsinger2"
+    Sprite: "Positive_Resonance"
     LocKey: "$GH_GH2E_Soothsinger2_LOWNOTE_TOOLTIP$"
     MaxAmount: 2
