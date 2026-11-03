@@ -313,9 +313,13 @@ namespace FrosthavenMods
             try
             {
                 if (_rester == null || actor == null || !ReferenceEquals(actor, _rester) || !ReferenceEquals(__instance.TargetingActor, _rester)) return;
+                // The engine's rest heal: GameState.PlayerLongRested builds CAbilityHeal.CreateDefaultHeal(2, ...) (Name
+                // "DefaultHeal") and starts it through PhaseManager.StartAbility; FindCardWithAbility then gives it a Dummy
+                // card (DummyCardID), never null. A player heal goes through ApplyToActor even at full HP.
+                if (__instance.Name != "DefaultHeal") return;
                 CBaseCard card = null;
                 try { card = __instance.GetAbilityBaseCard(); } catch { }
-                if (card != null) return;                      // a card's heal: the rest heal has none
+                if (card != null && card.CardType != CBaseCard.ECardType.Dummy) return;   // a real card's heal
                 CPlayerActor ph = _rester;
                 _rester = null;                                // one rest heal
                 var allies = ScenarioManager.Scenario.AllAliveActors
