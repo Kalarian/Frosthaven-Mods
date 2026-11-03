@@ -3,13 +3,14 @@ ID: Tinkerer2_MASTERY_1
 LocalisedName: Tinkerer2_MASTERY_1_Name
 LocalisedDescription: Tinkerer2_MASTERY_1_Desc
 PerkPoints: 1
-# NEW TAG: every turn taken, an ally healed by the character or a negative condition applied to an enemy (GHMasteries.cs)
+# NEW TAG: every turn taken, a negative condition on an enemy, or a positive condition, heal or shield on an ally
+# (GHMasteries.cs, TinkererSupportInRound)
 CheckAtEndOfScenario: True
 BattleGoalCondition:
     - Targets:
         Filter: CountXRounds
         SubFilter: Scenario
-        EnemyFamilies: [FrosthavenMods_HealOrDebuffEveryTurn]
+        EnemyFamilies: [FrosthavenMods_TinkererSupportEveryTurn]
         CharacterIDs:
             ActorID: Tinkerer2ID
         Value: 1

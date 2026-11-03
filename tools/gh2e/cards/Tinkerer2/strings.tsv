@@ -35,3 +35,4 @@ GH2E_Tinkerer2_31_T	Target one ally within <nobr><sprite name=Range> 3</nobr>
 GH2E_Tinkerer2_31_T2	The target of the heal ability may immediately play up to two cards from their hand, performing at most one top and one bottom action of the cards.
 GH2E_Tinkerer2_31_B	One ally within <nobr><sprite name=Range> 3</nobr> may <nobr>Recover <sprite name=Recover></nobr> one card from the lost pile of one ally adjacent to them.
 AMC_GH2E_Tinkerer2_Strengthen_Ally_P2	+2 <sprite name=Strengthen>, one ally
+GH2E_SUMMON_GravityBomb	Gravity Bomb

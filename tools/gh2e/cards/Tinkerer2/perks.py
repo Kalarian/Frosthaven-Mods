@@ -15,10 +15,10 @@ PERKS = [
      {"CardsToAdd": "[AMC_GH2E_Tinkerer2_Strengthen_Ally_P2]"}),
     (1, "Hardened", 'Ignore negative scenario effects and add one <sprite name="0"> <sprite name=Heal> 1, one <sprite name=Allies>',
      {"CardsToAdd": "[AMC_Heal1_1Ally]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
-    # needs the plugin (no Frosthaven perk flag lends an item to an ally): a passive with its text only
+    # GHTinkerer.cs (no Frosthaven perk flag lends an item to an ally): a passive the plugin reads by its ID (Tinkerer208)
     (1, "Shared Supplies", "Once each scenario, one adjacent <sprite name=Allies> may use one of your potion <sprite name=SmallItem> items during their turn without it becoming lost",
      {"Flags": "[Passive]"}),
-    # needs the plugin (no Frosthaven trigger fires on a lost action): a passive with its text only
+    # GHTinkerer.cs (no Frosthaven trigger fires on a lost action): a passive the plugin reads by its ID (Tinkerer209)
     (1, "Spare Parts", "Whenever you perform an action with a lost icon, you may infuse any one element",
      {"Flags": "[Passive]"}),
     # two linked boxes on the sheet: one perk that costs two checks (Frosthaven's Cost: 2); the 1st edition Tinkerer's
@@ -37,17 +37,18 @@ PERKS = [
 ]
 
 MASTERIES = [
-    # the 1st edition Tinkerer's Field Medic tag (an ally healed or an enemy given a negative condition on every turn);
-    # 2e also counts a positive condition or a shield given to an ally, which the tag doesn't (NOTES.md)
+    # every turn: an enemy given a negative condition, or an ally given a positive condition, healed or granted a shield
+    # (the 1st edition Field Medic tag counts only the heal and the negative condition: the 2e wording has its own tag)
     ("Field Medic", "For an entire scenario, during each of your turns, give an enemy a negative condition, give an ally a positive condition, heal an ally, or grant an ally <sprite name=Shield>",
      """\
-# NEW TAG: every turn taken, an ally healed by the character or a negative condition applied to an enemy (GHMasteries.cs)
+# NEW TAG: every turn taken, a negative condition on an enemy, or a positive condition, heal or shield on an ally
+# (GHMasteries.cs, TinkererSupportInRound)
 CheckAtEndOfScenario: True
 BattleGoalCondition:
     - Targets:
         Filter: CountXRounds
         SubFilter: Scenario
-        EnemyFamilies: [FrosthavenMods_HealOrDebuffEveryTurn]
+        EnemyFamilies: [FrosthavenMods_TinkererSupportEveryTurn]
         CharacterIDs:
             ActorID: Tinkerer2ID
         Value: 1"""),

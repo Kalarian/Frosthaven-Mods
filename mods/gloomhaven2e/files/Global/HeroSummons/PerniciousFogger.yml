@@ -2,7 +2,11 @@ Parser: HeroSummon
 ID: PerniciousFoggerID
 LocKey: $GH2E_SUMMON_PerniciousFogger$
 Model: WindTotem
-# a map token, not a figure: can't be targeted, hurt or block (the 1st edition Ward's flags, seen in a scenario)
+# a map token, not a figure (class mat: "hexes containing one or more of these tokens are still empty"; GH2e FAQ:
+# tokens "won't make a hex non-empty"): can't be targeted, hurt or block (the 1st edition Ward's flags), any figure may
+# end a move in its hex or be summoned / placed there (IgnoreActorCollision: Frosthaven's own flag for a figure that
+# shares a hex, the 1st edition Sand Devil's; GHMapTokens.cs hides the token from the engine's "who stands here"
+# lookups so the hex counts as empty)
 Health: 1
 Move: 0
 Attack: 0
@@ -10,6 +14,7 @@ Range: 0
 Untargetable: True
 Invulnerable: True
 DoesNotBlock: True
+IgnoreActorCollision: True
 # "At the end of each of their turns, all allies and enemies within Range 1 of the token suffer damage 2": Frosthaven's
 # Banner of Doom aura (damage to the figure whose turn it is, GameState.TurnActor) at the end of the turn instead of
 # its start, on allies and enemies alike

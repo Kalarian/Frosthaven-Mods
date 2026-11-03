@@ -2,8 +2,12 @@ Parser: HeroSummon
 ID: TeleportationPadID
 LocKey: $GH2E_SUMMON_TeleportationPad$
 Model: Ward
-# a map token, not a figure: can't be targeted, hurt or block (the 1st edition Ward's flags, seen in a scenario). No
-# effect of its own: "the two token hexes are adjacent for moves" needs the plugin (NOTES.md)
+# a map token, not a figure (class mat: "hexes containing one or more of these tokens are still empty"; GH2e FAQ:
+# tokens "won't make a hex non-empty"): can't be targeted, hurt or block (the 1st edition Ward's flags), any figure may
+# end a move in its hex or be summoned / placed there (IgnoreActorCollision: Frosthaven's own flag for a figure that
+# shares a hex, the 1st edition Sand Devil's; GHMapTokens.cs hides the token from the engine's "who stands here"
+# lookups so the hex counts as empty). No ability of its own: while both of a Tinkerer's pads stand, GHMapTokens.cs
+# links their two hexes as adjacent for the moves of the Tinkerer and every ally (Frosthaven's own Shadow nav links)
 Health: 1
 Move: 0
 Attack: 0
@@ -11,3 +15,4 @@ Range: 0
 Untargetable: True
 Invulnerable: True
 DoesNotBlock: True
+IgnoreActorCollision: True
