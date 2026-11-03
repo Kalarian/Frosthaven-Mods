@@ -556,15 +556,21 @@ namespace FrosthavenMods
 
         /// <summary>Nightfall top's hazardous terrain damage (card step TTearDamage) on a figure pushed into a Tear: one rule
         /// line per figure it hits, so a bench can see the damage step ran (the card's own data does the damage).</summary>
-        [HarmonyPatch(typeof(CAbilityDamage), nameof(CAbilityDamage.ApplyToActor))]
+        // (2026-11-03: CAbilityDamage.ApplyToActor only runs for damage buffs; the real damage goes through
+        // GameState.ActorBeenDamaged with the step as damageAbility, so the line never came)
+        [HarmonyPatch(typeof(GameState), nameof(GameState.ActorBeenDamaged),
+            new[] { typeof(CActor), typeof(int), typeof(bool), typeof(GameState.DamageData), typeof(bool), typeof(CActor), typeof(CAbility), typeof(CAbility.EAbilityType),
+                    typeof(int), typeof(bool), typeof(bool), typeof(bool), typeof(bool), typeof(int), typeof(bool), typeof(int), typeof(bool) },
+            new[] { ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Out, ArgumentType.Out, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal,
+                    ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal, ArgumentType.Normal })]
         [HarmonyPostfix]
-        private static void NightfallTearDamage(CAbilityDamage __instance, CActor actor)
+        private static void NightfallTearDamage(CActor actor, int strength, CAbility damageAbility)
         {
             try
             {
-                if (__instance == null || actor == null || __instance.Name != "TTearDamage") return;
-                if (!GHNightshroud.Is(__instance.TargetingActor) || GHNightshroud.CardId(__instance) != NightfallCard) return;
-                Log("TearDamage", NightfallCard, $"{actor.GetPrefabName()} pushed into a Tear suffers hazardous terrain damage {__instance.Strength}");
+                if (damageAbility == null || actor == null || damageAbility.Name != "TTearDamage") return;
+                if (!GHNightshroud.Is(damageAbility.TargetingActor) || GHNightshroud.CardId(damageAbility) != NightfallCard) return;
+                Log("TearDamage", NightfallCard, $"{actor.GetPrefabName()} pushed into a Tear suffers hazardous terrain damage {strength}");
             }
             catch (Exception e) { Report("Nightfall damage", e); }
         }
