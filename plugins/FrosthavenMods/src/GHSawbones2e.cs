@@ -31,6 +31,7 @@ namespace FrosthavenMods
     ///     play one Medical Pack from their hand to perform one action of the card": each ally holding a pack, in
     ///     initiative order, performs the card's template BPlayPack (SelectAndPlayCard from their own hand, supply cards
     ///     only, skippable), one ally after the other. Logs "GHRule AlliesPlayPacks card 33226 ...".
+    ///     The Sawbones' action and hand come back after each play through GHAllyCardPlay.
     ///   - Templates: an ability tagged GH2E_Template is taken out of its card's action when the card is read (so it never
     ///     runs as part of the card) and kept by name for the rules above.
     ///   - Perk Sawbones208, Friend of the Oak (the FAQ's Devout: "works just as normal for the Temple, once it is built"):
