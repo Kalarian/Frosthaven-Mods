@@ -145,3 +145,17 @@ text. HP, hand size and traits are GHS's (classes.json).
 `GH2E_SKIP_RULECHECK_BUILD=1 python tools/gh2e/check.py Soultether` -> **CHECK PASSED Soultether** (31 of 31 cards,
 12 summons, 13 perks; packcheck 0 problems / 0 warnings, rulecheck 62 ok, no gh_port warnings, no missing text keys).
 - Perk Veiled Servant: modifier rewritten, `AMC_GH2E_Soultether_P1_InvisibleSummon` gives Invisible with a NullTargeting + `Conditions: [Invisible]` on OwnSummon (same targeting, TryToPerformAsSummoner) (an Invisible ability on a modifier card stops the game when drawn). Exact.
+
+## Card-accuracy pass (2026-11-02): supersedes the APPROXIMATION / NEEDS PLUGIN notes above
+Plugin GHSoultether.cs (each rule logs "GHRule <Name> card <id>"):
+- Living Night bottom: one tracker (on the hidden damage bonus); the disadvantage bonus ends with it.
+- Unending Dominance top, Otherworldly Rage bottom: exactly the summons the (next / replayed) summon ability created
+  (GH2E_LastSummoned, GH2E_ResetLastSummoned). The recovered card is played normally.
+- Imposed Will bottom: "does not have Ward" is read at the start of the attack (hidden resource GH2EHadWard).
+- Covetous Imp: its kill of a normal or elite, non-summoned enemy = one loot-deck draw for the Soultether.
+- Rift Spirit: the summoner picks its Shield's ally (GH2E_SummonerPicksTarget).
+- Slime Spirit: when its lethal-damage prevention is spent, a second Slime Spirit appears in the first empty adjacent
+  hex, tied to Oozing Manifestation, without a prevention of its own.
+- Void Eater: the curse goes straight into the monster modifier deck (GH2E_CurseMonsterDeck).
+- Masteries: FrosthavenMods_SummonCardsKeptBeforeRest and FrosthavenMods_FirstRoundSummonsAcrossScenarios (career list
+  in the campaign save, LootedChestTreasureTableIDs marker "FHMODS:Soul2R1:<character>=...").

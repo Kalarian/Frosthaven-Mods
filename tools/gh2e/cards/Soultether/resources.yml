@@ -1,0 +1,9 @@
+GH2EHadWard:
+    # pack-wide: hidden mark on a Soultether's summon that it had Ward when the attack now resolving started (Imposed
+    # Will bottom reads it after the attack: GHSoultether.cs sets it at the start of every attack on such a summon);
+    # never shown.
+    ID: "GH2EHadWard"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_SOUL_HIDDEN_TOOLTIP"
+    MaxAmount: 1
+    Hidden: True

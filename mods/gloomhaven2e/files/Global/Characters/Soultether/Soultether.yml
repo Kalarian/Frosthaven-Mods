@@ -6,6 +6,7 @@ Race: Aesther
 Traits: [ Arcane, Chaotic, Resourceful ]
 Complexity: 2
 ElementalAffinities: [ Fire, Air, Dark ]
+MasteryIDs: [ Soultether_MASTERY_1, Soultether_MASTERY_2 ]
 DefaultSkin: 1
 # PlayerLevel:    [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
 HealthTable: [ 6, 7, 8, 9, 10, 11, 12, 13, 14 ]

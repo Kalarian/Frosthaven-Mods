@@ -7,7 +7,8 @@ Initiative: 46
 # card: Xorn's Embrace
 # top: every ally with Poison (no range printed: all of them) is granted Attack 3, Range 3, then Heal X self, X = the
 # damage that attack dealt (Frosthaven's DamageInflictedThisAction, Geminate's Hirudotherapy), ignoring and keeping
-# Poison (IgnoreTokens). Untested: several allies granted in turn by one control. bottom: persistent, at the end of each
+# Poison (MiscVars GH2E_HealThroughPoison, plugin GHPlagueherald2e: the hit points are added and Wound / Bane / Brittle
+# removed as a normal heal does; only the Poison stays). Untested: several allies granted in turn by one control. bottom: persistent, at the end of each
 # of your turns one enemy with both Poison and Plague (any range) suffers Damage 3.
 Discard: [Discard,Lost]
 Data:
@@ -33,8 +34,8 @@ Data:
                             StatIsBasedOnX:
                                 Strength:
                                     BasedOn: DamageInflictedThisAction
-                            AdditionalHealData:
-                                IgnoreTokens: True
+                            MiscVars:
+                                GH2E_HealThroughPoison: True
                             AutoTrigger: True
                             AnimOverload: PowerUp
                     ControlDurationType: ControlForOneAction

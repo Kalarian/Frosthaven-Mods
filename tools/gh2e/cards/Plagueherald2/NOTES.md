@@ -188,3 +188,20 @@ MustEndOnSpecificTiles`, Trapper Lure of the Snare's shape).
 `GH2E_SKIP_RULECHECK_BUILD=1 python tools/gh2e/check.py Plagueherald2`: **CHECK PASSED**. 29 of 29 cards, packcheck 0
 problems / 0 warnings, rulecheck 46 ok, no gh_port warnings, character resources: Plague.
 - Perk Toxic Touch: modifier rewritten, `AMC_GH2E_Plagueherald2_Poison_R` gives Poison with a NullTargeting + `Conditions: [Poison]` + `IsNegative` (Frosthaven's Infuser Diamondization shape), same target-or-enemy-within-2 targeting as the Plague card (a Poison ability on a modifier card stops the game when drawn). Exact.
+
+## Card-accuracy pass (2026-11-02): supersedes the APPROXIMATION / NEEDS PLUGIN notes above
+Plugin GHPlagueherald2e.cs (each rule logs "GHRule <Name> card <id>"):
+- Gift of Rot top, Tainted Offering bottom: the heal through Poison is the Plagueherald's choice per target
+  (GH2E_HealThroughPoisonChoice); Xorn's Embrace top always (GH2E_HealThroughPoison). Heal through = hit points added,
+  Wound/Bane/Brittle removed, the Poison token kept (IgnoreTokens is gone).
+- Sickening Strength top: each strengthened character may suffer Damage 2 and play one card from their hand
+  (templates PH2_SickDamage / PH2_SickPlay).
+- Nightmarish Affliction bottom: every ranged attack ability of the holder uses a slot, paid or not.
+- Succumb to the Gift top: the trap's PlacementTileFilter is FeaturelessHex (data).
+- Tainted Offering top: the bought attack is made from the poisoned ally's hex (TargetingOverrideArrayIndex).
+- Convert the Flock bottom: on a kill, a skippable Teleport onto the killed enemy's hex (data, Infuser shape).
+- Purging Rest: +1 on the long rest's own heal when an ally's Poison is removed (no second heal).
+- Xorn's Last Gift: the real "would die" rule through the engine's on-death path, once each scenario (hidden resource
+  GH2EXornUsed).
+- Masteries: FrosthavenMods_KillsWithoutModifierInTurn (3 kills in one turn of his, no modifier drawn by him) and
+  FrosthavenMods_PoisonEveryRound (Poison given or removed by him in every round he took a turn).

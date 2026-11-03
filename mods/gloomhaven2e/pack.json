@@ -36,11 +36,11 @@
   },
   "sections": [],
   "events": [],
-  "data_sha": "48a5a7ba602e32eb5c68757b2da9e8259613f5e9f5bf704a6ef0fb481c57b2d0",
+  "data_sha": "c59446341d4b7af43520ac805dd4d6a60bb3a6d41ec4e7b53cf0788b23c9ee44",
   "source": {
     "gloomhaven": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Gloomhaven",
     "buildid": "20286313",
-    "files": 816
+    "files": 820
   },
   "model": {},
   "summon_models": {}

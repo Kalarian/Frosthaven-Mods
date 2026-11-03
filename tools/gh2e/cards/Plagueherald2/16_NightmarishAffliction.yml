@@ -1,7 +1,9 @@
 # card: Nightmarish Affliction
 # top: the ally-Poison cost-consume buys +1 Target and XP 1. bottom: the 1st edition Grim Bargain shape (a toggle
 # +1 Target bonus on attacks whose cost is giving an ally a condition), here Poison to an ally without Poison within
-# range 3, ranged attacks only, six use slots.
+# range 3, ranged attacks only, six use slots. Each of the next six ranged attack abilities uses a slot whether or not
+# the cost is paid (rulebook: the token advances even if no benefit is gained): the plugin (GHPlagueherald2e) advances
+# the tracker at the end of a ranged attack ability that did not advance it.
 Discard: [Discard,Lost]
 Data:
     Top:

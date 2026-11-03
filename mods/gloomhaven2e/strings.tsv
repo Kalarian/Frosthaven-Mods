@@ -1393,8 +1393,10 @@ GH2E_Wildfury_07_T	All enemies within <sprite name=Range> 2 that have <sprite na
 GH2E_Wildfury_12_T	All allies within <sprite name=Range> 3 add <sprite name=Pierce> 1 to all their attacks.
 GH2E_Wildfury_17_T	All allies within <sprite name=Range> 3 gain <sprite name=Shield> 1.
 GH2E_Wildfury_28_T	All allies within <sprite name=Range> 3 add +2 <sprite name=Attack> to their first attack each round.
+GH_GH2E_PH2_HIDDEN_TOOLTIP	Plagueherald rule bookkeeping (hidden).
 GH_GH2E_PLAGUE_TOOLTIP	Plague: the Plagueherald's tokens on this figure (at most 3). Many Plagueherald abilities target or hurt figures that have Plague.
 GH_GH2E_SAFEGUARD_TOOLTIP	Safeguard: the next negative condition this figure would gain is prevented, then Safeguard is removed
+GH_GH2E_SOUL_HIDDEN_TOOLTIP	Soultether rule bookkeeping (hidden).
 GH_GH2E_SUPPLIES_TOOLTIP	Supplies: the Quartermaster's supply track (starts at 10, up to 50). Spending supplies needs at least 10 and sets the track to 0.
 GH_GH2E_SilentKnife_HIREDHELP_TOOLTIP	Hired Help: this enemy is the Silent Knife's ally for the rest of the scenario and drops an additional loot token when it dies.
 GH_GH2E_SilentKnife_MONEY_TOOLTIP	Money tokens: the loot tokens the Silent Knife has looted this scenario. Placing or losing one puts one of her loot cards (her choice, never the random item) back on top of the loot deck; a placed token can be looted again.
@@ -1712,6 +1714,10 @@ PERK_Plagueherald2_11_Name	Purging Rest
 PERK_Plagueherald2_11_Desc	Whenever you heal from a long rest, you may remove <sprite name=Poison> from one <sprite name=Allies> to add +1 <sprite name=Heal>
 PERK_Plagueherald2_12_Name	Xorn's Last Gift
 PERK_Plagueherald2_12_Desc	Once each scenario, when an <sprite name=Enemy> that has Plague would die, first control that <sprite name=Enemy> and have it perform the abilities on its ability card, adding Plague to all its attacks, then it dies
+Plagueherald2_MASTERY_1_Name	Plague Bearer's Harvest
+Plagueherald2_MASTERY_1_Desc	In a single turn, kill three or more enemies without drawing an attack modifier card
+Plagueherald2_MASTERY_2_Name	Endless Contagion
+Plagueherald2_MASTERY_2_Desc	In a single scenario, either apply or remove Poison from an ally or enemy each round
 Plagueherald2_FullName	Plagueherald
 CODEX_Hero_Plagueherald2_Title	Plagueherald
 CODEX_HeroInfo_Plagueherald2	Xorn loves your friends and foes equally. Many of your abilities can be augmented by applying <sprite name=Poison> to allies. You may only activate these conditional bonuses if you can give <sprite name=Poison> to an ally who does not already have <sprite name=Poison>. You have a variety of effects that specifically benefit allies that have <sprite name=Poison>, so your allies will also come to embrace the <sprite name=Poison> you so kindly share with them.
@@ -1859,6 +1865,10 @@ PERK_Soultether_12_Name	Summoner's Call
 PERK_Soultether_12_Desc	Once each scenario, during your turn, <sprite name=Teleport> one of your summons to an empty hex adjacent to you
 PERK_Soultether_13_Name	Phase Out
 PERK_Soultether_13_Desc	Once each scenario, during ordering of initiative, after all ability cards have been revealed, all your summons gain <sprite name=Invisible>
+Soultether_MASTERY_1_Name	Bound Legion
+Soultether_MASTERY_1_Desc	Perform three different summon actions before your first rest and keep those cards in your active area for the entire scenario
+Soultether_MASTERY_2_Name	Planar Conclave
+Soultether_MASTERY_2_Desc	Perform six different summon abilities from your ability cards over the course of the first rounds of six scenarios
 Soultether_FullName	Soultether
 CODEX_Hero_Soultether_Title	Soultether
 CODEX_HeroInfo_Soultether	You bind creatures from other planes to your will and fight through them. Your summons hold the line while your cards grant them extra moves and attacks, shield them, and turn the elements of Fire, Air and Dark into power for the whole menagerie.

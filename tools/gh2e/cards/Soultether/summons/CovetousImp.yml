@@ -13,5 +13,7 @@ Attack:
     Amount: 3
     SquareEnhancements: 1
 Range: 1
-# "Whenever this summon kills an enemy, you gain the money token directly": NEEDS PLUGIN (Frosthaven has no "gain a
-# money token" ability); the rule is printed on the card as text.
+# "Whenever this summon kills an enemy, you gain the money token directly instead of placing it in the hex that enemy
+# occupied": a money token is a loot token (Frosthaven FAQ section 10) and gaining one is one loot-deck draw. When the
+# imp kills a normal or elite enemy that was not summoned (the monsters that drop a money token in Gloomhaven), its
+# summoner draws one loot card (plugin GHSoultether, "GHRule CovetousImp").

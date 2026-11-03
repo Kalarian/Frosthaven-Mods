@@ -74,58 +74,48 @@ PERKS = [   # (checkboxes, name, description in sprite markup, {perk fields})
             Duration: Persistent
             Behaviour: BuffMove
             Hidden: True"""}),
-    # the game's long-rest perk hook (as the Banner Spear's / the 1st edition Soothsinger's): remove Poison from one
-    # ally (optional); the +1 heal is a Heal 1 on yourself after it. APPROXIMATION: the extra heal is a second heal, not
-    # +1 on the rest's own heal.
+    # Answered by the plugin (GHPlagueherald2e, perk Plagueherald211): when the long rest's own heal is about to apply,
+    # the Plagueherald may remove Poison from one ally (asked ally by ally) to add +1 to that heal.
     (1, "Purging Rest", "Whenever you heal from a long rest, you may remove <sprite name=Poison> from one <sprite name=Allies> to add +1 <sprite name=Heal>",
-     {"Flags": "[Passive, ExecuteAbilitiesAfterLongRest]", "Abilities": """\
-    BRemovePoison:
-        RemoveConditions: 1
-        Conditions: [Poison]
-        Range: 99
-        Target: 1
-        Filter:
-            TargetType: Ally
-            TargetHasNegativeCondition: Poison
-        CanSkip: True
-        CanUndo: False
-        AnimOverload: Heal
-        SubAbilities:
-            BHealBonus:
-                Heal: 1
-                Filter: Self
-                TreatAsNonSubAbility: True
-                AutoTrigger: True
-                AnimOverload: None"""}),
-    # "Once each scenario, when an enemy that has Plague would die, first control that enemy and have it perform the
-    # abilities on its ability card, adding Plague to all its attacks, then it dies": no hook before a monster's death.
-    # APPROXIMATION: once each scenario, during your turn, control one enemy that has Plague for one turn (it performs its
-    # own ability card, the 1st edition Mindthief's Hostile Takeover); the death and the added Plague are NEEDS PLUGIN.
+     {"Flags": "[Passive]"}),
+    # Answered by the plugin (GHPlagueherald2e, perk Plagueherald212): once each scenario (the used mark is the hidden
+    # resource GH2EXornUsed on the Plagueherald, saved with the scenario), when an enemy that has Plague would die, the
+    # Plagueherald may first control it: it performs the abilities of its monster ability card for this round (its
+    # attacks also give Plague), driven by the Plagueherald's player, then it dies (the engine's own on-death path:
+    # the kill stays credited as it was).
     (1, "Xorn's Last Gift", "Once each scenario, when an <sprite name=Enemy> that has Plague would die, first control that <sprite name=Enemy> and have it perform the abilities on its ability card, adding Plague to all its attacks, then it dies",
-     {"Cost": 2, "Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]", "Abilities": """\
-    TActive:
-        AutoTrigger: True
-        AddActiveBonus:
-            ControlActor:
-                ControlDurationType: ControlForOneTurn
-                ControlActorType: Player
-            Range: 99
-            Target: 1
-            Filter:
-                TargetType: Enemy
-                TargetHasCharacterResource: ["Plague"]
-            AnimOverload: MindControl
-        ActiveBonus:
-            Duration: Persistent
-            Behaviour: DuringTurnAbility
-            XPTracker: [0]
-            IsToggleBonus: True
-            Hidden: True
-            ListLayoutOverride: [$PERK_Plagueherald2_12_Desc$, AA_Mind_Control]
-            MiscVars:
-                OverrideIcon: "'AA_Mind_Control'"
-        AnimOverload: PowerUp"""}),
+     {"Cost": 2, "Flags": "[Passive]"}),
 ]
-MASTERIES = []    # the two 2e masteries (3 kills in one turn without drawing a modifier; Poison applied or removed each
-                  # round) have no existing pattern; left for the plugin's mastery tags (NOTES.md)
+
+MASTERIES = [
+    ("Plague Bearer's Harvest",
+     "In a single turn, kill three or more enemies without drawing an attack modifier card",
+     """\
+# Answered by the Frosthaven Mods plugin (GHPlagueherald2e.cs, FrosthavenMods_KillsWithoutModifierInTurn): a turn of the
+# Plagueherald in which he killed Value or more enemies and drew no attack modifier card (kill and modifier records).
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_KillsWithoutModifierInTurn]
+        CharacterIDs:
+            ActorID: Plagueherald2ID
+        Value: 3"""),
+    ("Endless Contagion",
+     "In a single scenario, either apply or remove Poison from an ally or enemy each round",
+     """\
+# Answered by the Frosthaven Mods plugin (GHPlagueherald2e.cs, FrosthavenMods_PoisonEveryRound): in every round the
+# Plagueherald took a turn, he gave Poison to or removed Poison from a figure (counted as it happens, kept in hidden
+# resources saved with the scenario).
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_PoisonEveryRound]
+        CharacterIDs:
+            ActorID: Plagueherald2ID
+        Value: 1"""),
+]
 STRINGS = {}

@@ -129,10 +129,43 @@ PERKS = [
             XPTracker: [0]"""}),
 ]
 
-# Neither 2e mastery fits an existing tag: "3 different summon actions before your first rest, those cards kept in the
-# active area all scenario" and "6 different summon abilities over the first rounds of 6 scenarios" (the 1st edition
-# Menagerie tag, FrosthavenMods_SummonsFromDifferentCards, counts a whole scenario): none written (NOTES.md)
-MASTERIES = []
+# Both 2e masteries are answered by the plugin (GHSoultether.cs): the first from the ability records and the active
+# area at the check, the second with a career count kept in the campaign save.
+MASTERIES = [
+    ("Bound Legion",
+     "Perform three different summon actions before your first rest and keep those cards in your active area for the entire scenario",
+     """\
+# Answered by the Frosthaven Mods plugin (GHSoultether.cs, FrosthavenMods_SummonCardsKeptBeforeRest): Value different
+# ability cards whose summon ability the Soultether performed before the round of its first rest, and every one of
+# them still in its active area when the scenario ends (a summon card leaves the active area only when its summon is
+# gone, so one that left can't have stayed all scenario).
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_SummonCardsKeptBeforeRest]
+        CharacterIDs:
+            ActorID: SoultetherID
+        Value: 3"""),
+    ("Planar Conclave",
+     "Perform six different summon abilities from your ability cards over the course of the first rounds of six scenarios",
+     """\
+# Answered by the Frosthaven Mods plugin (GHSoultether.cs, FrosthavenMods_FirstRoundSummonsAcrossScenarios): the summon
+# abilities (card + ability) the Soultether performed in round 1 of each scenario are added to a career list kept in
+# the campaign save (synced campaign state, written from the scenario result every peer receives); the mastery is met
+# when the list holds Value different ones (two summon cards can be played in one first round; the scenarios need not
+# be in a row).
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_FirstRoundSummonsAcrossScenarios]
+        CharacterIDs:
+            ActorID: SoultetherID
+        Value: 6"""),
+]
 
 NEW_CARDS = {
     "AMC_GH2E_Soultether_P0_GrantTeleport2": (

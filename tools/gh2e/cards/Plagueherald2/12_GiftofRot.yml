@@ -1,8 +1,8 @@
 # card: Gift of Rot
-# top: Heal 1 + Ward on all allies within range 5 that have Poison. "You may heal as if they did not have Poison (their
-# Poison is not removed)" = the heal ignores Poison every time (AdditionalHealData IgnoreTokens, as the 1st edition
-# Voidwarden's heal data): keeping Poison is what the class wants, but IgnoreTokens also skips Wound/Bane/Brittle
-# removal. APPROXIMATION ("you may" -> always). bottom: the ally-Poison cost buys a round advantage on your attacks
+# top: Heal 1 + Ward on all allies within range 5 that have Poison. "For each target, you may heal that target as if they
+# did not have Poison (if you do, their Poison is not removed)": MiscVars GH2E_HealThroughPoisonChoice, the plugin
+# (GHPlagueherald2e) asks the Plagueherald per poisoned target; on yes the heal adds the hit points and removes Wound /
+# Bane / Brittle as a normal heal does, and the Poison stays; on no it is a normal heal (it removes the Poison). bottom: the ally-Poison cost buys a round advantage on your attacks
 # (Drifter's Accurate Strikes bonus), added by the cost-consume.
 Discard: [Discard,Discard]
 Data:
@@ -20,8 +20,8 @@ Data:
                 Filter:
                     TargetType: Ally
                     TargetHasNegativeCondition: Poison
-                AdditionalHealData:
-                    IgnoreTokens: True
+                MiscVars:
+                    GH2E_HealThroughPoisonChoice: True
                 AnimOverload: RadialPositive
     Bottom:
         Abilities:
