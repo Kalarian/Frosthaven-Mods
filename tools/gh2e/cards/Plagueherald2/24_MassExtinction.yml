@@ -1,7 +1,8 @@
 # card: Mass Extinction
 # top: "whenever this ability kills an enemy, gain XP 1 and add +2 Attack, +1 Target" = a chain of kill-gated follow-up
-# attacks on another enemy with Plague at any range: Attack 6 after the first kill, Attack 8 after the second (XP 1
-# each), and so on: eight attacks deep (Attack 4 to 18; GHNestedSubAbilities queues any depth), more enemies with
+# attacks on another enemy with Plague at any range: Attack 6 after the first kill, Attack 8 after the second, and so
+# on; each kill's XP 1 is its own kill-gated GainXP step under the killing attack (TXP1..TXP8: the last kill, with no
+# further attack, still pays; re-audit): eight attacks deep (Attack 4 to 18; GHNestedSubAbilities queues any depth), more enemies with
 # Plague than a room holds in practice.
 Discard: [Lost,Discard]
 Data:
@@ -18,6 +19,15 @@ Data:
                     TargetHasCharacterResource: ["Plague"]
                 AnimOverload: RangedAttack
                 SubAbilities:
+                    TXP1:
+                        GainXP: 1
+                        Filter: Self
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsKilledByAbility: "> 0"
+                        TreatAsNonSubAbility: True
+                        AutoTrigger: True
+                        AnimOverload: None
                     TAttack2:
                         Attack: 6
                         Range: 99
@@ -25,13 +35,21 @@ Data:
                         Filter:
                             TargetType: Enemy
                             TargetHasCharacterResource: ["Plague"]
-                        AbilityXP: 1
                         StartAbilityRequirements:
                             Type: SubAbility
                             ActorsKilledByAbility: "> 0"
                         TreatAsNonSubAbility: True
                         AnimOverload: RangedAttack
                         SubAbilities:
+                            TXP2:
+                                GainXP: 1
+                                Filter: Self
+                                StartAbilityRequirements:
+                                    Type: SubAbility
+                                    ActorsKilledByAbility: "> 0"
+                                TreatAsNonSubAbility: True
+                                AutoTrigger: True
+                                AnimOverload: None
                             TAttack3:
                                 Attack: 8
                                 Range: 99
@@ -39,13 +57,21 @@ Data:
                                 Filter:
                                     TargetType: Enemy
                                     TargetHasCharacterResource: ["Plague"]
-                                AbilityXP: 1
                                 StartAbilityRequirements:
                                     Type: SubAbility
                                     ActorsKilledByAbility: "> 0"
                                 TreatAsNonSubAbility: True
                                 AnimOverload: RangedAttack
                                 SubAbilities:
+                                    TXP3:
+                                        GainXP: 1
+                                        Filter: Self
+                                        StartAbilityRequirements:
+                                            Type: SubAbility
+                                            ActorsKilledByAbility: "> 0"
+                                        TreatAsNonSubAbility: True
+                                        AutoTrigger: True
+                                        AnimOverload: None
                                     TAttack4:
                                         Attack: 10
                                         Range: 99
@@ -53,13 +79,21 @@ Data:
                                         Filter:
                                             TargetType: Enemy
                                             TargetHasCharacterResource: ["Plague"]
-                                        AbilityXP: 1
                                         StartAbilityRequirements:
                                             Type: SubAbility
                                             ActorsKilledByAbility: "> 0"
                                         TreatAsNonSubAbility: True
                                         AnimOverload: RangedAttack
                                         SubAbilities:
+                                            TXP4:
+                                                GainXP: 1
+                                                Filter: Self
+                                                StartAbilityRequirements:
+                                                    Type: SubAbility
+                                                    ActorsKilledByAbility: "> 0"
+                                                TreatAsNonSubAbility: True
+                                                AutoTrigger: True
+                                                AnimOverload: None
                                             TAttack5:
                                                 Attack: 12
                                                 Range: 99
@@ -67,13 +101,21 @@ Data:
                                                 Filter:
                                                     TargetType: Enemy
                                                     TargetHasCharacterResource: ["Plague"]
-                                                AbilityXP: 1
                                                 StartAbilityRequirements:
                                                     Type: SubAbility
                                                     ActorsKilledByAbility: "> 0"
                                                 TreatAsNonSubAbility: True
                                                 AnimOverload: RangedAttack
                                                 SubAbilities:
+                                                    TXP5:
+                                                        GainXP: 1
+                                                        Filter: Self
+                                                        StartAbilityRequirements:
+                                                            Type: SubAbility
+                                                            ActorsKilledByAbility: "> 0"
+                                                        TreatAsNonSubAbility: True
+                                                        AutoTrigger: True
+                                                        AnimOverload: None
                                                     TAttack6:
                                                         Attack: 14
                                                         Range: 99
@@ -81,13 +123,21 @@ Data:
                                                         Filter:
                                                             TargetType: Enemy
                                                             TargetHasCharacterResource: ["Plague"]
-                                                        AbilityXP: 1
                                                         StartAbilityRequirements:
                                                             Type: SubAbility
                                                             ActorsKilledByAbility: "> 0"
                                                         TreatAsNonSubAbility: True
                                                         AnimOverload: RangedAttack
                                                         SubAbilities:
+                                                            TXP6:
+                                                                GainXP: 1
+                                                                Filter: Self
+                                                                StartAbilityRequirements:
+                                                                    Type: SubAbility
+                                                                    ActorsKilledByAbility: "> 0"
+                                                                TreatAsNonSubAbility: True
+                                                                AutoTrigger: True
+                                                                AnimOverload: None
                                                             TAttack7:
                                                                 Attack: 16
                                                                 Range: 99
@@ -95,13 +145,21 @@ Data:
                                                                 Filter:
                                                                     TargetType: Enemy
                                                                     TargetHasCharacterResource: ["Plague"]
-                                                                AbilityXP: 1
                                                                 StartAbilityRequirements:
                                                                     Type: SubAbility
                                                                     ActorsKilledByAbility: "> 0"
                                                                 TreatAsNonSubAbility: True
                                                                 AnimOverload: RangedAttack
                                                                 SubAbilities:
+                                                                    TXP7:
+                                                                        GainXP: 1
+                                                                        Filter: Self
+                                                                        StartAbilityRequirements:
+                                                                            Type: SubAbility
+                                                                            ActorsKilledByAbility: "> 0"
+                                                                        TreatAsNonSubAbility: True
+                                                                        AutoTrigger: True
+                                                                        AnimOverload: None
                                                                     TAttack8:
                                                                         Attack: 18
                                                                         Range: 99
@@ -109,12 +167,21 @@ Data:
                                                                         Filter:
                                                                             TargetType: Enemy
                                                                             TargetHasCharacterResource: ["Plague"]
-                                                                        AbilityXP: 1
                                                                         StartAbilityRequirements:
                                                                             Type: SubAbility
                                                                             ActorsKilledByAbility: "> 0"
                                                                         TreatAsNonSubAbility: True
                                                                         AnimOverload: RangedAttack
+                                                                        SubAbilities:
+                                                                            TXP8:
+                                                                                GainXP: 1
+                                                                                Filter: Self
+                                                                                StartAbilityRequirements:
+                                                                                    Type: SubAbility
+                                                                                    ActorsKilledByAbility: "> 0"
+                                                                                TreatAsNonSubAbility: True
+                                                                                AutoTrigger: True
+                                                                                AnimOverload: None
         XP: 1
     Bottom:
         Abilities:

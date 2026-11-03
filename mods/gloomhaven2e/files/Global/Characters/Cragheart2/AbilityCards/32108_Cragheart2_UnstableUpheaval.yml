@@ -55,6 +55,8 @@ Layout:
                     Name: TCEarth
                     Text: "$FHS_Target_TwoHexInstead$, <sprite name=XP1>"
         - Row: "<size=50%> "
-        - Row: "$FHS_GH2E_Cragheart2_08_T$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$FHS_GH2E_Cragheart2_08_T$"
     Bottom:
         - Row: "<size=150%><sprite name=Move> *BMove*"

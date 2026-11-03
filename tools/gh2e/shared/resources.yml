@@ -6,3 +6,93 @@ GH2ESafeguard:
     Sprite: "Positive_DamagePrevent"
     LocKey: "GH2E_SAFEGUARD_TOOLTIP"
     MaxAmount: 1
+
+GH2ECount1:
+    # pack-wide: hidden, an in-scenario count a 2nd edition plugin keeps on its own character (mastery counts, "this
+    # round" states; GHSavedCounts.cs: each class numbers its own slots); saved with the scenario, never shown
+    ID: "GH2ECount1"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_HIDDEN_COUNT_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True
+
+GH2ECount2:
+    # pack-wide: hidden, an in-scenario count a 2nd edition plugin keeps on its own character (mastery counts, "this
+    # round" states; GHSavedCounts.cs: each class numbers its own slots); saved with the scenario, never shown
+    ID: "GH2ECount2"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_HIDDEN_COUNT_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True
+
+GH2ECount3:
+    # pack-wide: hidden, an in-scenario count a 2nd edition plugin keeps on its own character (mastery counts, "this
+    # round" states; GHSavedCounts.cs: each class numbers its own slots); saved with the scenario, never shown
+    ID: "GH2ECount3"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_HIDDEN_COUNT_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True
+
+GH2ECount4:
+    # pack-wide: hidden, an in-scenario count a 2nd edition plugin keeps on its own character (mastery counts, "this
+    # round" states; GHSavedCounts.cs: each class numbers its own slots); saved with the scenario, never shown
+    ID: "GH2ECount4"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_HIDDEN_COUNT_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True
+
+GH2ECount5:
+    # pack-wide: hidden, an in-scenario count a 2nd edition plugin keeps on its own character (mastery counts, "this
+    # round" states; GHSavedCounts.cs: each class numbers its own slots); saved with the scenario, never shown
+    ID: "GH2ECount5"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_HIDDEN_COUNT_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True
+
+GH2ECount6:
+    # pack-wide: hidden, an in-scenario count a 2nd edition plugin keeps on its own character (mastery counts, "this
+    # round" states; GHSavedCounts.cs: each class numbers its own slots); saved with the scenario, never shown
+    ID: "GH2ECount6"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_HIDDEN_COUNT_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True
+
+GH2ECount7:
+    # pack-wide: hidden, an in-scenario count a 2nd edition plugin keeps on its own character (mastery counts, "this
+    # round" states; GHSavedCounts.cs: each class numbers its own slots); saved with the scenario, never shown
+    ID: "GH2ECount7"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_HIDDEN_COUNT_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True
+
+GH2ECount8:
+    # pack-wide: hidden, an in-scenario count a 2nd edition plugin keeps on its own character (mastery counts, "this
+    # round" states; GHSavedCounts.cs: each class numbers its own slots); saved with the scenario, never shown
+    ID: "GH2ECount8"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_HIDDEN_COUNT_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True
+
+GH2ECount9:
+    # pack-wide: hidden, an in-scenario count a 2nd edition plugin keeps on its own character (mastery counts, "this
+    # round" states; GHSavedCounts.cs: each class numbers its own slots); saved with the scenario, never shown
+    ID: "GH2ECount9"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_HIDDEN_COUNT_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True
+
+GH2ECount10:
+    # pack-wide: hidden, an in-scenario count a 2nd edition plugin keeps on its own character (mastery counts, "this
+    # round" states; GHSavedCounts.cs: each class numbers its own slots); saved with the scenario, never shown
+    ID: "GH2ECount10"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_HIDDEN_COUNT_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True

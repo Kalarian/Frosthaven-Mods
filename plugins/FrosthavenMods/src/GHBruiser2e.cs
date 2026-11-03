@@ -24,8 +24,9 @@ namespace FrosthavenMods
     ///     forced movement, that enemy and all enemies adjacent to it suffer damage 1".
     ///   - War Cry perk (its aura marked GH2E_WarCry): "Each character gains advantage on their first attack during the
     ///     first round of each scenario": the round-1 aura stops counting for a character once its first attack is done.
-    ///   - Spiked Hide perk modifier (AMC_GH2E_Bruiser_SpikedHide_P0_R): drawn = one BruiserSpikedHide token on the Bruiser
-    ///     (the card "in the active area"); the retaliate itself is in GHRetaliate2e.
+    ///   - Spiked Hide perk modifier (AMC_GH2E_Bruiser_SpikedHide_P0_R): drawn and used = one BruiserSpikedHide token on the
+    ///     Bruiser (the card "in the active area", out of the modifier deck until spent); the retaliate itself is in
+    ///     GHRetaliate2e, and it triggers Defensive Tactics (a retaliate from an attack modifier card).
     /// Every action logs "GHRule &lt;Rule&gt; card N ...".
     /// </summary>
     [HarmonyPatch]
@@ -76,10 +77,17 @@ namespace FrosthavenMods
 
         // ------------------------------------------------------------------ Defensive Tactics
 
+        // the round is also saved on the Bruiser (GHSavedCounts slot 1 = round number + 1 of the round Defensive Tactics
+        // triggered), so a save/reload or a rejoin in the middle of the round keeps the Shield 1 / Retaliate 1
+        internal const int SlotTacticsRound = 1;
+
         private static bool TacticsOn(CActor a)
         {
             Fresh();
-            return a != null && TacticsRound.TryGetValue(a, out int r) && r == Round;
+            if (a == null) return false;
+            if (TacticsRound.TryGetValue(a, out int r) && r == Round) return true;
+            if (GHSavedCounts.Get(a, SlotTacticsRound) == Round + 1) { TacticsRound[a] = Round; return true; }
+            return false;
         }
 
         [HarmonyPatch(typeof(CActiveBonus), nameof(CActiveBonus.ReferenceStrength))]
@@ -116,12 +124,39 @@ namespace FrosthavenMods
                     if (source is CItem || source.IsItemOrPet) return;
                     if (source is CAbilityCard ac && actor is CPlayerActor p && !string.IsNullOrEmpty(ac.ClassID) && ac.ClassID != p.Class?.ID) return;   // another player's card
                 }
-                if (TacticsOn(actor)) return;
-                TacticsRound[actor] = Round;
-                actor.CheckForCachedValuesAfterActiveBonusesUpdate();
-                Plugin.Log.LogInfo($"GHRule DefensiveTactics card {DefensiveTacticsCard} {Name(actor)} gained {what} from {(source == null ? "a modifier card" : "card " + source.ID)}: Shield 1 and Retaliate 1 for the rest of round {Round}");
+                // no base card: counts only for an attack modifier card's ability (CAbilityAttack.ProcessModifierAbilities
+                // runs those with the attack as ParentAbility; IsModifierAbility for the engine's own modifier abilities)
+                if (source == null && !ability.IsModifierAbility && !(ability.ParentAbility is CAbilityAttack)) return;
+                Trigger(actor, what, source == null ? "a modifier card" : "card " + source.ID);
             }
             catch (Exception e) { if (GHClasses.Reported.Add("ra tactics")) Plugin.Log.LogError("GHBruiser2e (Defensive Tactics): " + e); }
+        }
+
+        /// <summary>Spiked Hide (perk modifier card, GHRetaliate2e) gave the Bruiser Retaliate 2: a retaliate "from one of
+        /// your attack modifier cards".</summary>
+        /// Returns the card's Retaliate that it turned on (for the attack being answered), 0 if it was on already.
+        internal static int SpikedHideRetaliate(CActor actor)
+        {
+            try
+            {
+                if (actor == null || CardBonus(actor, DefensiveTacticsCard) == null || TacticsOn(actor)) return 0;
+                Trigger(actor, "Retaliate", "the Spiked Hide modifier card");
+                return actor.ActiveBonuses.Where(b => b != null && !b.Finished() && b.BaseCard != null && b.BaseCard.ID == DefensiveTacticsCard && b.Ability is CAbilityRetaliate)
+                    .Sum(b => Math.Max(0, b.Ability.Strength));
+            }
+            catch (Exception e) { if (GHClasses.Reported.Add("ra tactics spiked")) Plugin.Log.LogError("GHBruiser2e (Defensive Tactics, Spiked Hide): " + e); }
+            return 0;
+        }
+
+        private static void Trigger(CActor actor, string what, string from)
+        {
+            {
+                if (TacticsOn(actor)) return;
+                TacticsRound[actor] = Round;
+                GHSavedCounts.Set(actor, SlotTacticsRound, Round + 1);
+                actor.CheckForCachedValuesAfterActiveBonusesUpdate();
+                Plugin.Log.LogInfo($"GHRule DefensiveTactics card {DefensiveTacticsCard} {Name(actor)} gained {what} from {from}: Shield 1 and Retaliate 1 for the rest of round {Round}");
+            }
         }
 
         // ------------------------------------------------------------------ Let Fly, Brute Force (after a push or pull)
@@ -181,7 +216,10 @@ namespace FrosthavenMods
                 Plugin.Log.LogInfo($"GHRule PushPathDamage card {CardOf(ability)} {Name(target)} pushed through {path.Count} hex(es): {hit.Count} enemy(ies) on its path suffer {pathDamage} and gain Wound{(hit.Count > 0 ? " (" + string.Join(", ", hit.Select(Name)) + ")" : "")}");
             }
             // Brute Force
-            if (moved && CardBonus(me, BruteForceCard) != null && CActor.AreActorsEnemies(target.Type, me.Type, target, me))
+            // the bottom's persistent bonus only (the top's round Shield and reaction carry the same card ID)
+            bool bruteForce = me.ActiveBonuses?.Any(b => b != null && !b.Finished() && b.BaseCard != null && b.BaseCard.ID == BruteForceCard
+                && b.Ability?.Name == "BForcedMoveBuff") == true;
+            if (moved && bruteForce && CActor.AreActorsEnemies(target.Type, me.Type, target, me))
             {
                 var hit = new List<CActor>();
                 if (!target.IsDead && ScenarioManager.Scenario.HasActor(target)) hit.Add(target);
@@ -216,7 +254,7 @@ namespace FrosthavenMods
 
         [HarmonyPatch(typeof(CBespokeBehaviour), "IsValidTarget")]
         [HarmonyPostfix]
-        private static void WarCryFirstAttack(CBespokeBehaviour __instance, CAbility ability, ref bool __result)
+        private static void WarCryFirstAttack(CBespokeBehaviour __instance, CAbility ability, CActor target, ref bool __result)
         {
             try
             {
@@ -226,6 +264,16 @@ namespace FrosthavenMods
                 Fresh();
                 CActor who = ability.TargetingActor;
                 if (who != null && FirstAttackDone.Contains(who)) { __result = false; return; }
+                // each target of an attack ability is a separate attack: only the first target attacked has advantage
+                CActor first = ability.ActorsTargeted?.FirstOrDefault(x => x != null) ?? ability.ActorsToTarget?.FirstOrDefault(x => x != null)
+                               ?? (ability as CAbilityAttack)?.AttackSummary?.Targets?.FirstOrDefault(t => t?.ActorToAttack != null)?.ActorToAttack;
+                if (target != null && first != null && target != first)
+                {
+                    __result = false;
+                    string k2 = ability.ID + "/" + who?.ActorGuid + "/not first/" + target.ActorGuid;
+                    if (WarCryLogged.Add(k2)) Plugin.Log.LogInfo($"GHRule WarCry card 0 perk War Cry: {Name(who)}'s attack on {Name(target)} is not the first attack (first target {Name(first)}): no advantage");
+                    return;
+                }
                 string key = ability.ID + "/" + who?.ActorGuid;
                 if (WarCryLogged.Add(key))
                 {
@@ -250,11 +298,75 @@ namespace FrosthavenMods
             catch (Exception e) { if (GHClasses.Reported.Add("ra first attack")) Plugin.Log.LogError("GHBruiser2e (first attack): " + e); }
         }
 
+        // ------------------------------------------------------------------ Rested and Ready perk
+
+        // "Whenever you long rest, add +1 Move to your first move ability the following round": the perk's after-long-rest
+        // BuffMove (MiscVars GH2E_RestedAndReady) counts only in the round after the long rest (not a move granted later in
+        // the rest's own round) and ends at the end of that round if no move used it.
+        private static bool RestedBonus(CBespokeBehaviour b) => b?.ActiveBonus != null && GHPlague.Marked(b.ActiveBonus.Ability, "GH2E_RestedAndReady");
+
+        [HarmonyPatch(typeof(CMoveActiveBonus_BuffMove), nameof(CMoveActiveBonus_BuffMove.OnMoving))]
+        [HarmonyPrefix]
+        private static bool RestedMoving(CMoveActiveBonus_BuffMove __instance)
+        {
+            try
+            {
+                if (!RestedBonus(__instance)) return true;
+                if (__instance.ActiveBonus.InternalRoundNumber == 1) return true;
+                Plugin.Log.LogInfo($"GHRule RestedAndReady card 0 perk Rested and Ready: not the round after the long rest (round {Round}): no +1 Move");
+                return false;
+            }
+            catch (Exception e) { if (GHClasses.Reported.Add("ra rested")) Plugin.Log.LogError("GHBruiser2e (Rested and Ready): " + e); return true; }
+        }
+
+        [HarmonyPatch(typeof(CMoveActiveBonus_BuffMove), nameof(CMoveActiveBonus_BuffMove.ReferenceStrength))]
+        [HarmonyPostfix]
+        private static void RestedStrength(CMoveActiveBonus_BuffMove __instance, ref int __result)
+        {
+            try { if (__result != 0 && RestedBonus(__instance) && __instance.ActiveBonus.InternalRoundNumber != 1) __result = 0; }
+            catch { }
+        }
+
+        [HarmonyPatch(typeof(ElementInfusionBoardManager), nameof(ElementInfusionBoardManager.EndRound))]
+        [HarmonyPrefix]
+        private static void RestedRoundEnd()
+        {
+            try
+            {
+                foreach (CPlayerActor p in ScenarioManager.Scenario?.PlayerActors?.Where(x => x?.Class?.ID == ClassId).ToList() ?? new List<CPlayerActor>())
+                    foreach (CActiveBonus b in p.ActiveBonuses?.Where(b => b != null && !b.Finished() && GHPlague.Marked(b.Ability, "GH2E_RestedAndReady") && b.InternalRoundNumber >= 1).ToList() ?? new List<CActiveBonus>())
+                    {
+                        b.Finish();
+                        Plugin.Log.LogInfo($"GHRule RestedAndReady card 0 perk Rested and Ready: the round after the long rest ends unused: the +1 Move ends");
+                    }
+            }
+            catch (Exception e) { if (GHClasses.Reported.Add("ra rested end")) Plugin.Log.LogError("GHBruiser2e (Rested and Ready, round end): " + e); }
+        }
+
         // ------------------------------------------------------------------ Spiked Hide drawn
 
+        // "Add this card to your active area": only a card the attack uses (without advantage/disadvantage every drawn card,
+        // asked as it is drawn; with advantage/disadvantage the used list CActor.DrawAttackModifierCards returns: a
+        // rolling card drawn with disadvantage is not used). The card leaves the modifier deck while it is held (taken back
+        // out of the discard pile, where the engine put it) and returns to the discard pile when it is spent (GHRetaliate2e
+        // calls SpikedHideSpent).
         [HarmonyPatch(typeof(GameState), nameof(GameState.ChangeModifierValues))]
         [HarmonyPostfix]
-        private static void SpikedHideDrawn(CActor actor, List<AttackModifierYMLData> modifiers)
+        private static void SpikedHideDrawn(CActor actor, List<AttackModifierYMLData> modifiers, EAdvantageStatuses advantageStatus)
+        {
+            if (advantageStatus != EAdvantageStatuses.None) return;
+            SpikedHideHeld(actor, modifiers);
+        }
+
+        [HarmonyPatch(typeof(CActor), nameof(CActor.DrawAttackModifierCards))]
+        [HarmonyPostfix]
+        private static void SpikedHideUsed(CActor actor, EAdvantageStatuses advStatus, List<AttackModifierYMLData> __result)
+        {
+            if (advStatus == EAdvantageStatuses.None) return;
+            SpikedHideHeld(actor, __result);
+        }
+
+        private static void SpikedHideHeld(CActor actor, List<AttackModifierYMLData> modifiers)
         {
             try
             {
@@ -262,9 +374,29 @@ namespace FrosthavenMods
                 int n = modifiers.Count(c => c != null && c.Name == GHRetaliate2e.SpikedHideCard);
                 if (n <= 0) return;
                 actor.AddCharacterResource(GHRetaliate2e.SpikedHideResource, n);
-                Plugin.Log.LogInfo($"GHRule SpikedHide card 0 perk Spiked Hide: drawn, now {actor.GetCharacterResourceAmount(GHRetaliate2e.SpikedHideResource)} in {Name(actor)}'s active area (Retaliate 2 on the next attack by an adjacent enemy)");
+                int out_ = 0;
+                List<AttackModifierYMLData> discard = p.CharacterClass?.DiscardedAttackModifierCards;
+                for (int i = 0; i < n && discard != null; i++)
+                {
+                    int at = discard.FindLastIndex(c => c != null && c.Name == GHRetaliate2e.SpikedHideCard);
+                    if (at < 0) break;
+                    discard.RemoveAt(at);
+                    out_++;
+                }
+                Plugin.Log.LogInfo($"GHRule SpikedHide card 0 perk Spiked Hide: drawn, now {actor.GetCharacterResourceAmount(GHRetaliate2e.SpikedHideResource)} in {Name(actor)}'s active area (Retaliate 2 on the next attack by an adjacent enemy); {out_} card(s) out of the modifier deck until spent");
             }
             catch (Exception e) { if (GHClasses.Reported.Add("ra spiked hide draw")) Plugin.Log.LogError("GHBruiser2e (Spiked Hide): " + e); }
+        }
+
+        /// <summary>The held Spiked Hide cards were discarded for Retaliate: back onto the modifier discard pile.</summary>
+        internal static void SpikedHideSpent(CActor actor, int n)
+        {
+            try
+            {
+                if (!(actor is CPlayerActor p) || p.CharacterClass == null || n <= 0) return;
+                p.CharacterClass.AddAdditionalModifierCards(Enumerable.Repeat(GHRetaliate2e.SpikedHideCard, n).ToList(), toDiscard: true);
+            }
+            catch (Exception e) { if (GHClasses.Reported.Add("ra spiked hide spent")) Plugin.Log.LogError("GHBruiser2e (Spiked Hide back to the discard pile): " + e); }
         }
     }
 }

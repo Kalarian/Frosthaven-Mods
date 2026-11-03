@@ -51,7 +51,9 @@ Layout:
             - Column:
                 - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
                 - Row: "<size=20%> "
-                - Infuse: Earth
+                - MandatoryTrigger:
+                    Layout:
+                        - Infuse: Earth
             - Column:
                 - Row: "£Area£"
     Bottom:

@@ -16,7 +16,7 @@ PERKS = [
      {"CardsToAdd": "[AMC_GH2E_Doomstalker2_SummonAttack_P0]"}),
     (2, "Deadly Shot", 'Add one <sprite name="+3">',
      {"CardsToAdd": "[AMC_Basic_P3]"}),
-    (2, "Stunning Shot", 'Add one <sprite name="0"> <sprite name=Stun> <sprite name=Rolling>',
+    (2, "Stunning Shot", 'Add one <sprite name=Stun> <sprite name=Rolling>',
      {"CardsToAdd": "[AMC_Stun_R]"}),
     (1, "Unfazed", 'Ignore scenario effects and add one <sprite name="+1"> <sprite name=Rolling>',
      {"CardsToAdd": "[AMC_P1_R]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),

@@ -59,7 +59,9 @@ Layout:
                     Text: "+2 <sprite name=Attack>, <sprite name=XP1>"
     Bottom:
         - Row: "$FHS_GH2E_Cragheart2_21_B$"
-        - Row: "$FHS_GH2E_Cragheart2_21_B2$"
+        - MandatoryTrigger:
+            Layout:
+                - Row: "$FHS_GH2E_Cragheart2_21_B2$"
         - Active:
             Ability: BShield
             Icon: Positive_Shield

@@ -46,7 +46,9 @@ Data:
                     Duration: Round
                     IsAura: True
                     AuraFilter:
-                        TargetType: OwnSummon
+                        # "any summons adjacent to you": every summon on your side, not only yours (re-audit)
+                        TargetType: Ally
+                        ActorType: Summon
                 AnimOverload: PositiveBuffRadial
 Layout:
     Top:

@@ -48,6 +48,9 @@ Data:
                 Target: -1
                 AbilityXP: 1
                 Targeting: Custom
+                MiscVars:
+                    # only a Nightshroud's Tear passes SteppedOnShadow in this requirement (GHTears), not a Deathwalker's shadow
+                    GH2ETearOnly: True
                 Vars:
                     Stunned: CustomAbility.FindAbilityInPhaseByName("TStun")
                 TargetingVars:

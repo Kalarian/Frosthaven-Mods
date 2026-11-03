@@ -20,6 +20,17 @@ Data:
                     TargetHasCharacterResource: ["Plague"]
                 AnimOverload: RangedAttack
                 SubAbilities:
+                    # "If the attack ability killed an enemy, gain XP 1": its own kill-gated step (the Convert the Flock
+                    # BXP shape), so the XP doesn't depend on the trap finding a featureless hex (re-audit)
+                    TXP:
+                        GainXP: 1
+                        Filter: Self
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsKilledByAbility: "> 0"
+                        TreatAsNonSubAbility: True
+                        AutoTrigger: True
+                        AnimOverload: None
                     TTrap:
                         Trap:
                             TrapName: PoisonMine
@@ -27,7 +38,6 @@ Data:
                             Conditions: Poison
                             PlacementTileFilter: FeaturelessHex
                         Target: 1
-                        AbilityXP: 1
                         Targeting: Custom
                         TargetingVars:
                             ParentTile: ParentAbility.m_TilesSelected[0]

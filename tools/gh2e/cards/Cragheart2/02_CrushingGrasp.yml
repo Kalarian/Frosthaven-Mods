@@ -39,10 +39,14 @@ Layout:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "$Immobilize$ <sprite name=Immobilize>"
         - Row: "<size=20%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth
     Bottom:
         - Row: "$GH2E_Cragheart2_02_B$"
         - Row: "<size=50%> "
         - Row: "<b><size=130%>$Loot$ <sprite name=Loot> *BLoot*"
         - Row: "<size=20%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth

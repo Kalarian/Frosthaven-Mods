@@ -226,7 +226,7 @@ namespace FrosthavenMods
         }
 
         private static List<CPlayerActor> AdjacentAllies(CActor me) =>
-            LivingPlayers().Where(p => p != me && me != null && p.GetDistanceTo(me) == 1 && CActor.AreActorsAllied(me.Type, p.Type, me, p)).ToList();
+            LivingPlayers().Where(p => p != me && me != null && me.IsAdjacentTo(p) && CActor.AreActorsAllied(me.Type, p.Type, me, p)).ToList();
 
         private static void BoosterPack(CActor qm, int card)
         {
@@ -265,7 +265,7 @@ namespace FrosthavenMods
             if (CAbilityMove.s_LastMover == qm && CAbilityMove.AllPlayerArrayIndexOnPath.Count > 0
                 && CAbilityMove.AllPlayerArrayIndexOnPath[CAbilityMove.AllPlayerArrayIndexOnPath.Count - 1].Equals(qm.ArrayIndex))
                 path.AddRange(CAbilityMove.AllPlayerArrayIndexOnPath);
-            var allies = LivingPlayers().Where(p => p != qm && CActor.AreActorsAllied(qm.Type, p.Type, qm, p) && path.Any(pt => p.GetDistanceTo(pt) == 1)).ToList();
+            var allies = LivingPlayers().Where(p => p != qm && CActor.AreActorsAllied(qm.Type, p.Type, qm, p) && path.Any(pt => ScenarioManager.IsTileAdjacent(pt.X, pt.Y, p.ArrayIndex.X, p.ArrayIndex.Y))).ToList();
             Plugin.Log.LogInfo($"GHRule QMGiantClub card {card} the move entered {path.Count} hex(es); {allies.Count} ally(ies) next to them");
             int given = 0;
             var receivers = new HashSet<CActor>();
@@ -366,6 +366,7 @@ namespace FrosthavenMods
             if (budget >= 50 && lostGold >= 50)
             {
                 Count(LedgerSpends, qm);
+                LedgerSpends[qm.ActorGuid ?? ""] = Math.Max(LedgerSpends[qm.ActorGuid ?? ""], GHSavedCounts.Add(qm, SlotLedger));
                 Plugin.Log.LogInfo($"GHRule QMMastery card 0 Quartermaster's Ledger: 50 supplies spent for {lostGold} gold of lost items ({LedgerSpends[qm.ActorGuid ?? ""]} so far)");
             }
             Plugin.Log.LogInfo($"GHRule QMSpend card {card} done: {recovered} gold recovered of {budget}");
@@ -470,7 +471,7 @@ namespace FrosthavenMods
             if (ability.AbilityType != CAbility.EAbilityType.Move && ability.ActorsTargeted != null && !ability.ActorsTargeted.Contains(ally)) return;
             foreach (CPlayerActor qm in LivingPlayers().Where(p => p != ally && IsQM(p)).ToList())
             {
-                if (!BonusActive(qm, "GH2E_QMSetUpShop") || qm.GetDistanceTo(ally) != 1) continue;
+                if (!BonusActive(qm, "GH2E_QMSetUpShop") || !qm.IsAdjacentTo(ally)) continue;
                 if (!CActor.AreActorsAllied(qm.Type, ally.Type, qm, ally)) continue;
                 int have = qm.GetCharacterResourceAmount(Supplies);
                 if (have < 10)
@@ -502,7 +503,8 @@ namespace FrosthavenMods
                 if (IsQM(actor))
                 {
                     if (_profTurn == TurnKey(actor)) _profTurn = null;
-                    if (((CPlayerActor)actor).CharacterClass.LongRest) Note(LongRests, actor);
+                    if (((CPlayerActor)actor).CharacterClass.LongRest) { Note(LongRests, actor); GHSavedCounts.Set(actor, SlotRestRound, Round); }
+                    GHSavedCounts.Set(actor, SlotTurnRound, Round);
                 }
             }
             catch (Exception e) { if (GHClasses.Reported.Add("qm turn end")) Plugin.Log.LogWarning("GHQuartermaster (turn end): " + e); }
@@ -542,7 +544,36 @@ namespace FrosthavenMods
 
         private static void NoteGive(CActor giver)
         {
-            if (IsQM(giver)) Note(GiveRounds, giver);
+            if (!IsQM(giver)) return;
+            Note(GiveRounds, giver);
+            GHSavedCounts.Set(giver, SlotGiveRound, Round);
+        }
+
+        private static int Round => ScenarioManager.CurrentScenarioState?.RoundNumber ?? 0;
+
+        // The mastery records are also saved with the scenario (GHSavedCounts slots on the Quartermaster), so a save/reload,
+        // a rewind or a rejoin keeps them: 1 = Ledger spends this scenario, 2 = "missed a round" (a round in which she took a
+        // turn, didn't long rest and gave no item), 3 = last round with an item given, 4 = last round with a long rest,
+        // 5 = last round in which she ended a turn. Slot 2 is judged at each round's end from slots 3-5.
+        internal const int SlotLedger = 1, SlotMissed = 2, SlotGiveRound = 3, SlotRestRound = 4, SlotTurnRound = 5;
+
+        [HarmonyPatch(typeof(ElementInfusionBoardManager), nameof(ElementInfusionBoardManager.EndRound))]
+        [HarmonyPrefix]
+        private static void RoundEnded()
+        {
+            try
+            {
+                int r = Round;
+                if (r <= 0 || ScenarioManager.Scenario?.PlayerActors == null) return;
+                foreach (CPlayerActor qm in ScenarioManager.Scenario.PlayerActors.Where(p => p != null && IsQM(p)))
+                {
+                    if (GHSavedCounts.Get(qm, SlotTurnRound) != r || GHSavedCounts.Get(qm, SlotMissed) > 0) continue;
+                    if (GHSavedCounts.Get(qm, SlotGiveRound) == r || GHSavedCounts.Get(qm, SlotRestRound) == r) continue;
+                    GHSavedCounts.Set(qm, SlotMissed, 1);
+                    Plugin.Log.LogInfo($"GHRule QMMastery card 0 Never Short: round {r} ended without an item given (no long rest): the mastery is missed this scenario");
+                }
+            }
+            catch (Exception e) { if (GHClasses.Reported.Add("qm round end")) Plugin.Log.LogWarning("GHQuartermaster (round end): " + e); }
         }
 
         [HarmonyPatch(typeof(CUnlockCondition), "CheckUnlockConditionTarget")]
@@ -564,7 +595,7 @@ namespace FrosthavenMods
                 if (ledger)
                 {
                     int need = Math.Max(1, unlockConditionTarget.Value);
-                    int have = LedgerSpends.TryGetValue(self, out int n) ? n : 0;
+                    int have = Math.Max(LedgerSpends.TryGetValue(self, out int n) ? n : 0, GHSavedCounts.Get(self, SlotLedger));
                     totalConditions = need;
                     conditionsMet = Math.Min(have, need);
                     __result = have >= need;
@@ -579,6 +610,17 @@ namespace FrosthavenMods
                     totalConditions = Math.Max(1, judged.Count);
                     conditionsMet = judged.Count(gives.Contains);
                     __result = judged.Count > 0 && conditionsMet == judged.Count;
+                    // after a reload the memory sets miss the earlier rounds: the saved record decides (no round missed
+                    // at a round's end, and the last round given or rested, as the check may run before its end)
+                    CPlayerActor me = GHSavedCounts.Player(self);
+                    if (me != null && judged.Count > 0)
+                    {
+                        int last = rounds.Max();
+                        bool lastOk = !judged.Contains(last) || gives.Contains(last) || GHSavedCounts.Get(me, SlotGiveRound) == last || GHSavedCounts.Get(me, SlotRestRound) == last;
+                        __result = GHSavedCounts.Get(me, SlotMissed) == 0 && lastOk;
+                        if (__result) conditionsMet = totalConditions;
+                        else conditionsMet = Math.Min(conditionsMet, totalConditions - 1);
+                    }
                 }
                 Plugin.Log.LogInfo($"GHRule QMMastery card 0 {(ledger ? "Quartermaster's Ledger" : "Never Short")}: {conditionsMet}/{totalConditions}{(__result ? " met" : "")}");
             }
@@ -667,7 +709,7 @@ namespace FrosthavenMods
                 }
                 int amount = actor.GetCharacterResourceAmount(Supplies);
                 text.text = amount.ToString();
-                string tip = GLOOM.LocalizationManager.GetTranslation("GH2E_SUPPLIES_TOOLTIP");
+                string tip = GLOOM.LocalizationManager.GetTranslation("GH_GH2E_SUPPLIES_TOOLTIP");   // the resource's LocKey as the porter ships it
                 Traverse.Create(effect).Field("tooltip").GetValue<UITextTooltipTarget>()?.SetText($"Supplies: {amount}", refreshTooltip: false, tip);
             }
             catch (Exception e) { if (GHClasses.Reported.Add("qm supplies number")) Plugin.Log.LogWarning("GHQuartermaster (supplies number): " + e); }

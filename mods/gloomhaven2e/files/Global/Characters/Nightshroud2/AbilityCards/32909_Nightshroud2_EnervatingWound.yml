@@ -10,6 +10,9 @@ Initiative: 14
 # BannerSpear Set for the Charge aura shape, AuraTargeting Range), one use (XPTracker [0]); the heal is aimed at the
 # killing ability's figure (TriggerAbility.TargetingActor = the cause of death, SetupTriggerContext), you or an ally.
 # The bonus Vars let a death spend the card only when that killer is missing hit points (a heal worth taking).
+# Plugin GHTears (EnervatingWound, re-audit): the player is asked first ("may": no = the card stays for a later death);
+# yes = the killer performs Heal 2 targeting itself (granted, its own heal bonuses apply) and the slot is used. The heal
+# below is only the engine's fallback outside an action phase.
 Discard: [Discard,Discard]
 Data:
     Top:

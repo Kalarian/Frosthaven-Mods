@@ -670,7 +670,13 @@ namespace FrosthavenMods
         {
             int needed = Math.Max(1, t.Value), times = Math.Max(1, t.Amount);
             string self = SelfGuid(stats);
-            int count = !string.IsNullOrEmpty(self) && AugmentFires.TryGetValue(self, out Dictionary<int, int> fires) ? fires.Values.Count(n => n >= times) : 0;
+            var all = new Dictionary<int, int>();
+            if (!string.IsNullOrEmpty(self) && AugmentFires.TryGetValue(self, out Dictionary<int, int> fires))
+                foreach (var kv in fires) all[kv.Key] = kv.Value;
+            // the saved counts (2nd edition Mindthief): a reload keeps them
+            if (!string.IsNullOrEmpty(self))
+                foreach (var kv in GHMindthief2.SavedAugmentFires(self)) all[kv.Key] = Math.Max(all.TryGetValue(kv.Key, out int m) ? m : 0, kv.Value);
+            int count = all.Values.Count(n => n >= times);
             total = needed; met = Math.Min(count, needed); result = count >= needed;
         }
 
@@ -1024,9 +1030,70 @@ namespace FrosthavenMods
                     if (augment == null) continue;
                     int key = augment.RegisteredBaseCard != null ? augment.RegisteredBaseCard.ID : System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(augment);
                     fires[key] = (fires.TryGetValue(key, out int n) ? n : 0) + 1;
+                    GHMindthief2.SaveAugmentFire(__instance.TargetingActor, key, fires[key]);
                 }
             }
             catch (Exception e) { if (Reported.Add("augments")) Plugin.Log.LogError("Gloomhaven masteries: an augment's fire was not noted: " + e); }
+        }
+
+        // Override-type augments (the 2nd edition Mindthief's Withering Claw, The Mind's Weakness, Psychic Blade, Psychic
+        // Projection: "AbilityOverrides") are applied in CAbilityAttack.Start, not through ProcessAbilityAugments, so they
+        // were never counted and Thought Thief could not be met (re-audit). Counted here when a real attack (not a per-target
+        // copy, not an active-bonus attack) that took the overrides happened. Only the 2nd edition Mindthief: the 1st
+        // edition Mindthief's released mastery keeps its count (it has the same hole; reported, not changed).
+        private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<CAbilityAttack, List<CAugment>> OverridesTaken =
+            new System.Runtime.CompilerServices.ConditionalWeakTable<CAbilityAttack, List<CAugment>>();
+        private static readonly AccessTools.FieldRef<CAbility, List<CAugment>> OverrideAugments = AccessTools.FieldRefAccess<CAbility, List<CAugment>>("m_OverrideAugments");
+        private static readonly AccessTools.FieldRef<CAbility, bool> OverridesProcessed = AccessTools.FieldRefAccess<CAbility, bool>("m_AugmentOverridesProcessed");
+
+        [HarmonyPatch(typeof(CAbilityAttack), nameof(CAbilityAttack.Start))]
+        [HarmonyPrefix]
+        private static void OverridesBefore(CAbilityAttack __instance, out bool __state)
+        {
+            __state = false;
+            try { __state = __instance != null && OverridesProcessed(__instance); } catch { }
+        }
+
+        [HarmonyPatch(typeof(CAbilityAttack), nameof(CAbilityAttack.Start))]
+        [HarmonyPostfix]
+        private static void OverridesAfter(CAbilityAttack __instance, bool __state)
+        {
+            try
+            {
+                if (__state || __instance?.TargetingActor?.Class?.ID != GHMindthief2.ClassId || __instance.IsAttackAbilityWithOverrides) return;
+                if (__instance.ActiveBonusData != null && __instance.ActiveBonusData.Duration != CActiveBonus.EActiveBonusDurationType.NA) return;
+                List<CAugment> taken = OverrideAugments(__instance);
+                if (!OverridesProcessed(__instance) || taken == null || taken.Count == 0) return;
+                OverridesTaken.Remove(__instance);
+                OverridesTaken.Add(__instance, taken.Where(a => a != null).ToList());
+            }
+            catch (Exception e) { if (Reported.Add("override augments")) Plugin.Log.LogError("Gloomhaven masteries: override augments not noted: " + e); }
+        }
+
+        [HarmonyPatch(typeof(CAbilityAttack), nameof(CAbilityAttack.AbilityEnded))]
+        [HarmonyPostfix]
+        private static void OverridesFired(CAbilityAttack __instance)
+        {
+            try
+            {
+                if (__instance == null || !OverridesTaken.TryGetValue(__instance, out List<CAugment> taken)) return;
+                OverridesTaken.Remove(__instance);
+                if (!__instance.AbilityHasHappened || __instance.TargetingActor == null) return;
+                ScenarioState scenario = ScenarioManager.CurrentScenarioState;
+                if (scenario == null) return;
+                if (!ReferenceEquals(scenario, _augmentScenario)) { AugmentFires.Clear(); _augmentScenario = scenario; }
+                string guid = __instance.TargetingActor.ActorGuid ?? "";
+                if (!AugmentFires.TryGetValue(guid, out Dictionary<int, int> fires)) AugmentFires[guid] = fires = new Dictionary<int, int>();
+                foreach (CAugment augment in taken)
+                {
+                    if (augment.RegisteredBaseCard == null) continue;
+                    int key = augment.RegisteredBaseCard.ID;
+                    fires[key] = (fires.TryGetValue(key, out int n) ? n : 0) + 1;
+                    GHMindthief2.SaveAugmentFire(__instance.TargetingActor, key, fires[key]);
+                    Plugin.Log.LogInfo($"GHRule AugmentsTriggered card {key} override augment fired on {__instance.Name} ({fires[key]} this scenario)");
+                }
+            }
+            catch (Exception e) { if (Reported.Add("override augments fired")) Plugin.Log.LogError("Gloomhaven masteries: override augments not counted: " + e); }
         }
 
         private static bool IsAlly(string actorType) =>

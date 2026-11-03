@@ -21,6 +21,9 @@ namespace FrosthavenMods
     ///                                      the heal record holds the restored amount) by the character's heals in a
     ///                                      single round, on anyone; Amount damage to enemies with one ranged attack
     ///                                      ability (all its targets together); and Amount with one melee attack ability.
+    /// An exhausted character is judged at its exhaustion (FH rulebook p.48: "they can still achieve a mastery if its
+    /// requirements were met at the time they became exhausted"), so the rounds counted end at its last turn; a Create
+    /// that placed nothing leaves no "happened" record (the engine sets AbilityHasHappened only when it spawns).
     /// Logs "GHRule ObstacleEveryRound / Heal8Ranged8Melee8 card 0 ..." when checked.
     /// </summary>
     [HarmonyPatch]
@@ -73,6 +76,7 @@ namespace FrosthavenMods
             string self = SelfGuid(stats);
             if (!string.IsNullOrEmpty(self) && Spawned.TryGetValue(self, out HashSet<int> spawned) && ReferenceEquals(_spawnScenario, ScenarioManager.CurrentScenarioState))
                 rounds.UnionWith(spawned);
+            rounds.UnionWith(SavedSpawnRounds(GHSavedCounts.Player(self)));
             int last = stats.SelectMany(s => s.StartTurn ?? Enumerable.Empty<CPlayerStatsStartTurn>()).Where(x => x != null).Select(x => x.Round).DefaultIfEmpty(0).Max();
             total = Math.Max(1, last);
             met = Enumerable.Range(1, Math.Max(0, last)).Count(rounds.Contains);
@@ -109,6 +113,29 @@ namespace FrosthavenMods
 
         // ---- obstacles spawned with a character as owner, by round (current scenario only)
 
+        // The spawn notes are also saved with the scenario (a reload keeps them): GHSavedCounts slots 1-4 on the 2nd edition
+        // Cragheart hold the rounds 1-36 as bits (9 rounds per slot, a slot holds up to 999); later rounds stay in memory.
+        private const int RoundsPerSlot = 9, SpawnSlots = 4;
+
+        private static void SaveSpawnRound(CPlayerActor p, int round)
+        {
+            if (p?.Class?.ID != "Cragheart2ID" || round < 1 || round > RoundsPerSlot * SpawnSlots) return;
+            int slot = 1 + (round - 1) / RoundsPerSlot, bit = 1 << ((round - 1) % RoundsPerSlot);
+            int v = GHSavedCounts.Get(p, slot);
+            if ((v & bit) == 0) GHSavedCounts.Set(p, slot, v | bit);
+        }
+
+        private static IEnumerable<int> SavedSpawnRounds(CPlayerActor p)
+        {
+            if (p?.Class?.ID != "Cragheart2ID") yield break;
+            for (int slot = 1; slot <= SpawnSlots; slot++)
+            {
+                int v = GHSavedCounts.Get(p, slot);
+                for (int b = 0; b < RoundsPerSlot; b++)
+                    if ((v & (1 << b)) != 0) yield return (slot - 1) * RoundsPerSlot + b + 1;
+            }
+        }
+
         private static readonly Dictionary<string, HashSet<int>> Spawned = new Dictionary<string, HashSet<int>>(StringComparer.Ordinal);
         private static ScenarioState _spawnScenario;
 
@@ -124,6 +151,7 @@ namespace FrosthavenMods
                 if (!ReferenceEquals(scenario, _spawnScenario)) { Spawned.Clear(); _spawnScenario = scenario; }
                 if (!Spawned.TryGetValue(prop.OwnerGUID, out HashSet<int> rounds)) Spawned[prop.OwnerGUID] = rounds = new HashSet<int>();
                 rounds.Add(scenario.RoundNumber);
+                SaveSpawnRound(GHSavedCounts.Player(prop.OwnerGUID), scenario.RoundNumber);
             }
             catch (Exception e) { if (GHClasses.Reported.Add("cragheart2 spawn")) Plugin.Log.LogError("Cragheart (2e) masteries: obstacle spawn not noted: " + e); }
         }

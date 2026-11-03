@@ -11,7 +11,7 @@ GH2E_Elementalist2_03_B	At the start of each of your turns, you may <sprite name
 GH2E_Elementalist2_06_T	<sprite name=Disarm> one enemy adjacent to the ally, <sprite name=CreateAir>
 GH2E_Elementalist2_07_T	Target all enemies within <nobr><sprite name=Range> 4</nobr>
 GH2E_Elementalist2_09_T	<sprite name=Target> the target and two hexes beside it (a 3-hex triangle), <sprite name=CreateFire>
-GH2E_Elementalist2_09_B	At the end of this and your next five turns, in order: <sprite name=CreateMixed-FI>, <sprite name=CreateMixed-AE>, <sprite name=CreateLight>/<sprite name=CreateDark> (then the same order again)
+GH2E_Elementalist2_09_B	At the end of this and your next five turns, in order: <sprite name=CreateMixed-FI>, <sprite name=CreateMixed-AE>, <sprite name=CreateMixed-LD> (then the same order again)
 GH2E_Elementalist2_10_T	<sprite name=ConsumeEarth>: <nobr><sprite name=Heal> 2</nobr>, <nobr><sprite name=Range> 3</nobr>, <sprite name=CreateEarth>
 GH2E_Elementalist2_11_T	Whenever an enemy consumes an element, you may infuse that element
 GH2E_Elementalist2_12_T	You or one ally within <nobr><sprite name=Range> 3</nobr> may <sprite name=RecoverDiscardedCards> one level 1 card from the discard pile

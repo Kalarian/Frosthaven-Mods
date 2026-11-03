@@ -33,7 +33,7 @@ namespace FrosthavenMods
     ///   - Taunting Fury perk (Berserker2 perk 11): its end-of-turn control (MiscVars GH2E_TauntingFury) makes every
     ///     controlled enemy's Attack +0 target the Berserker (a temp var the commanded attack's custom targeting reads).
     ///   - Reckless Blows perk modifier (AMC_GH2E_Berserker2_Reckless_P1): "+1, you may suffer damage 2 to add +2 Attack":
-    ///     asked when the card is drawn for the Berserker's attack; yes = the card counts +3 and the Berserker suffers 2
+    ///     asked for the card the Berserker's attack actually uses (with advantage/disadvantage after the pick); yes = the card counts +3 and the Berserker suffers 2
     ///     (offered only while that won't exhaust him).
     ///   - Careless Charge top: Frosthaven's MoveWasStraightLine requirement only looks at a move ability; on a consume
     ///     (checked against the attack) it now looks at the same action's last move ability.
@@ -231,6 +231,9 @@ namespace FrosthavenMods
             BoneBreakerTargets[me] = target;
             if (target.GetCharacterResourceAmount(TokenResource) <= 0) target.AddCharacterResource(TokenResource, 1);
             target.ApplyCondition(me, CCondition.ENegativeCondition.StopFlying);
+            // a flier that lands on an obstacle/trap/hazard is handled like Frosthaven's own StopFlying ability
+            try { CAbilityStopFlying.CheckPostStopFlying(target); }
+            catch (Exception e) { if (GHClasses.Reported.Add("ra bone breaker land")) Plugin.Log.LogError("GHBerserker2e (Bone Breaker landing): " + e); }
             Plugin.Log.LogInfo($"GHRule BoneBreaker card {BoneBreakerCard} {Name(me)}'s token placed on {Name(target)}: it loses Flying while the card is active");
         }
 
@@ -254,6 +257,13 @@ namespace FrosthavenMods
                 {
                     BoneBreakerTargets.Remove(me);
                     Release(target, me, "Bone Breaker left the active area");
+                }
+                else if (me != null)
+                {
+                    // the target dictionary is memory only: after a save/reload or a rewind, find the target by the token
+                    // (a character resource saved with the actor)
+                    foreach (CActor t in ScenarioManager.Scenario?.AllAliveActors?.Where(x => x != null && x.GetCharacterResourceAmount(TokenResource) > 0).ToList() ?? new List<CActor>())
+                        Release(t, me, "Bone Breaker left the active area; target found by its token after a reload");
                 }
             }
             catch (Exception e) { if (GHClasses.Reported.Add("ra bone breaker")) Plugin.Log.LogError("GHBerserker2e (Bone Breaker): " + e); }
@@ -313,9 +323,26 @@ namespace FrosthavenMods
 
         // ------------------------------------------------------------------ Reckless Blows perk modifier
 
+        // Without advantage or disadvantage every drawn card is used: asked as the card is drawn (ChangeModifierValues, so
+        // the modifier display shows +3). With advantage/disadvantage only the card the attack keeps may be paid for: the
+        // ask waits for CActor.DrawAttackModifierCards to return the used list (the +1 is what the comparison sees).
         [HarmonyPatch(typeof(GameState), nameof(GameState.ChangeModifierValues))]
         [HarmonyPostfix]
-        private static void Reckless(CActor actor, List<AttackModifierYMLData> modifiers, CAbilityAttack attackAbility)
+        private static void Reckless(CActor actor, List<AttackModifierYMLData> modifiers, CAbilityAttack attackAbility, EAdvantageStatuses advantageStatus)
+        {
+            if (advantageStatus != EAdvantageStatuses.None) return;
+            RecklessAsk(actor, modifiers, attackAbility, null);
+        }
+
+        [HarmonyPatch(typeof(CActor), nameof(CActor.DrawAttackModifierCards))]
+        [HarmonyPostfix]
+        private static void RecklessUsed(CActor actor, EAdvantageStatuses advStatus, CAbilityAttack attackAbility, List<AttackModifierYMLData> cardsDrawnTotal, List<AttackModifierYMLData> __result)
+        {
+            if (advStatus == EAdvantageStatuses.None) return;
+            RecklessAsk(actor, __result, attackAbility, cardsDrawnTotal);
+        }
+
+        private static void RecklessAsk(CActor actor, List<AttackModifierYMLData> modifiers, CAbilityAttack attackAbility, List<AttackModifierYMLData> drawn)
         {
             try
             {
@@ -337,11 +364,81 @@ namespace FrosthavenMods
                     copy.ModifiedFromModifier = card.Card;
                     ScenarioRuleClient.MessageHandler(new CChangeModifier_MessageData(GameState.InternalCurrentActor) { m_OriginalModifier = copy.OriginalModifier });
                     modifiers[i] = copy;
+                    if (drawn != null) { int at = drawn.IndexOf(card); if (at >= 0) drawn[at] = copy; }
+                    if (drawn != null && attackAbility.ModifierAbilities != null)
+                        foreach (CAbilityAttack.AttackModifierAbilityInfo info in attackAbility.ModifierAbilities) if (info.Card == card) info.Card = copy;
                     actor.ApplyImmediateDamage(2);
                     Plugin.Log.LogInfo($"GHRule RecklessBlows card 0 perk Reckless Blows: {Name(actor)} suffers 2 for +2 Attack (the card counts +3)");
                 }
             }
             catch (Exception e) { if (GHClasses.Reported.Add("ra reckless")) Plugin.Log.LogError("GHBerserker2e (Reckless Blows): " + e); }
+        }
+
+        // ------------------------------------------------------------------ Tireless Retribution bottom
+
+        // "If you short rest at the end of this round, gain all the benefits of a long rest." The card is Frosthaven's
+        // improved short rest (the player picks the lost card); GameState.PlayerLongRested skips the rest of a long rest
+        // on that path. Added here (before the rest runs, since the improved path ends with PhaseManager.StepComplete):
+        // Heal 2 self (a card-less heal applied like a trap's heal: poison/wound rules and heal bonuses apply), spent
+        // items refreshed (as the long-rest branch does) and the perks that act after a long rest (Rapid Recovery: their
+        // heals). Bonuses that fire "on long rest" (DuringActionAbilityOnLongRest) need an action phase: logged, not run.
+        internal const int TirelessRetributionCard = 32616;
+        private static readonly Dictionary<CActor, int> TirelessRound = new Dictionary<CActor, int>();
+
+        [HarmonyPatch(typeof(CAbilityImprovedShortRest), nameof(CAbilityImprovedShortRest.ApplyToActor))]
+        [HarmonyPostfix]
+        private static void TirelessPlayed(CAbilityImprovedShortRest __instance, CActor actor)
+        {
+            try
+            {
+                if (!IsBerserker(actor) || CardOf(__instance) != TirelessRetributionCard) return;
+                lock (TirelessRound) TirelessRound[actor] = ScenarioManager.CurrentScenarioState?.RoundNumber ?? 0;
+            }
+            catch (Exception e) { if (GHClasses.Reported.Add("ra tireless mark")) Plugin.Log.LogError("GHBerserker2e (Tireless Retribution mark): " + e); }
+        }
+
+        [HarmonyPatch(typeof(GameState), nameof(GameState.PlayerLongRested))]
+        [HarmonyPrefix]
+        private static void TirelessRest(CPlayerActor playerActor, bool improvedShortRestUsed)
+        {
+            try
+            {
+                CPlayerActor me = playerActor ?? GameState.InternalCurrentActor as CPlayerActor;
+                if (!improvedShortRestUsed || !IsBerserker(me) || me.IsDead || me.CharacterClass?.ImprovedShortRest != true) return;
+                int round = ScenarioManager.CurrentScenarioState?.RoundNumber ?? 0;
+                bool marked;
+                lock (TirelessRound) marked = TirelessRound.TryGetValue(me, out int r) && r == round;
+                // after a reload the mark is gone: the card played this round is still among the round's cards
+                if (!marked) marked = me.CharacterClass.RoundAbilityCards?.Any(c => c != null && c.ID == TirelessRetributionCard) == true;
+                if (!marked) return;
+                lock (TirelessRound) TirelessRound.Remove(me);
+                int before = me.Health;
+                HealCardless(me, 2);
+                me.Inventory.RefreshItems(CItem.EItemSlotState.Spent);
+                me.Inventory.RefreshItems(CItem.EItemSlotState.Locked, CItem.EItemSlot.None, CItem.EUsageType.Spent);
+                me.ActivatePassiveItems(firstLoad: true);
+                int perks = 0;
+                foreach (CAbility a in me.CharacterClass.Perks.Where(p => (p.Flags & EPerkFlag.ExecuteAbilitiesAfterLongRest) != 0).SelectMany(p => p.Abilities))
+                {
+                    if (a is CAbilityHeal h && a.MeetsStartAbilityRequirements(me)) { HealCardless(me, h.Strength); perks++; }
+                    else Plugin.Log.LogWarning($"Tireless Retribution: after-long-rest perk ability {a?.Name} ({a?.AbilityType}) is not a heal: not run");
+                }
+                int onRest = me.FindApplicableActiveBonuses(CAbility.EAbilityType.AddActiveBonus, CActiveBonus.EActiveBonusBehaviourType.DuringActionAbilityOnLongRest).Count();
+                Plugin.Log.LogInfo($"GHRule LongRestBenefits card {TirelessRetributionCard} {Name(me)} short rests with the benefits of a long rest: Heal 2 ({before} -> {me.Health}), spent items refreshed, {perks} after-long-rest perk heal(s)" + (onRest > 0 ? $", {onRest} on-long-rest bonus(es) not run" : ""));
+            }
+            catch (Exception e) { if (GHClasses.Reported.Add("ra tireless")) Plugin.Log.LogError("GHBerserker2e (Tireless Retribution): " + e); }
+        }
+
+        private static void HealCardless(CActor me, int amount)
+        {
+            if (amount <= 0 || !GameState.ActorHealthCheck(me, me)) return;
+            CAbilityHeal heal = CAbilityHeal.CreateDefaultHeal(amount, 1, 1, isMonster: false, new CAbilityFilterContainer(CAbilityFilter.EFilterTargetType.Self)) as CAbilityHeal;
+            if (heal == null) return;
+            heal.SkipAnim = true;
+            heal.MiscAbilityData = new AbilityData.MiscAbilityData { AutotriggerAbility = true, IgnoreStun = true };
+            heal.Start(me, me);
+            heal.ActorIsApplying(me, new List<CActor> { me });
+            heal.ApplyToActor(me);
         }
 
         // ------------------------------------------------------------------ MoveWasStraightLine on a consume

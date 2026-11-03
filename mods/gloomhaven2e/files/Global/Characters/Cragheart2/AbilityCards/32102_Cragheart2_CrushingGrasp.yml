@@ -50,10 +50,14 @@ Layout:
                 - Row: "<link=fhpill><sprite name=Immobilize></link>"
             - Column:
         - Row: "<size=20%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth
     Bottom:
         - Row: "$FHS_GH2E_Cragheart2_02_B$"
         - Row: "<size=50%> "
         - Row: "<size=150%><sprite name=Loot> *BLoot*"
         - Row: "<size=20%> "
-        - Infuse: Earth
+        - MandatoryTrigger:
+            Layout:
+                - Infuse: Earth

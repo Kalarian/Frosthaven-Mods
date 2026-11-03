@@ -42,7 +42,7 @@ ABILITY_TYPES = {
     "Move", "Attack", "Heal", "Damage", "Loot", "PreventDamage", "Shield", "Retaliate", "Trap", "Create", "RecoverLostCards",
     "Invisible", "Poison", "Wound", "Muddle", "Immobilize", "Disarm", "Curse", "Stun", "Strengthen", "Bless", "Consume",
     "Infuse", "RefreshItemCards", "RecoverDiscardedCards", "Summon", "Advantage", "Teleport", "Kill", "DisarmTrap",
-    "DestroyObstacle", "Redirect", "AddTarget", "Push", "Pull", "AddHeal", "AddRange", "ControlActor", "AddAugment",
+    "DestroyObstacle", "DestroyTerrain", "Redirect", "AddTarget", "Push", "Pull", "AddHeal", "AddRange", "ControlActor", "AddAugment",
     "MoveObstacle", "AttackersGainDisadvantage", "AddCondition", "AddSong", "PlaySong", "AddActiveBonus", "Null",
     "ImmunityTo", "ConsumeElement", "ChooseAbility", "LoseCards", "IncreaseCardLimit", "Augment", "StopFlying", "ExtraTurn",
     "ImprovedShortRest", "Overheal", "GainXP", "AdjustInitiative", "Swap", "RedistributeDamage", "ChangeModifier",

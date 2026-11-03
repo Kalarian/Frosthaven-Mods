@@ -24,8 +24,10 @@ namespace FrosthavenMods
     ///   FrosthavenMods_DamageStreakRound     (Bruiser) Value rounds in a row with Amount damage you caused to enemies in
     ///                                        each whole round (retaliate and other turns included) and Targets different
     ///                                        ability cards played over them
-    /// The in-scenario counts the statistics don't hold (retaliate kills, the forced-moved enemies, the per-round damage)
-    /// are kept in memory for the scenario being played. Logs "GHRule &lt;Tag&gt; card 0 ..." when a check answers.
+    /// The in-scenario counts the statistics don't hold are kept for the scenario being played: the retaliate kills and the
+    /// push-kill flag are also saved with the scenario (GHSavedCounts hidden resources, a reload keeps them); the
+    /// forced-moved enemies (this round only) and the per-round damage tally (the statistics' damage records back it) are
+    /// memory only. Logs "GHRule &lt;Tag&gt; card 0 ..." when a check answers.
     /// </summary>
     [HarmonyPatch]
     internal static class GHMasteriesRestA
@@ -35,6 +37,10 @@ namespace FrosthavenMods
         internal const string KillPushedTag = "FrosthavenMods_KillPushedThisRound";
         internal const string DamageRoundTag = "FrosthavenMods_DamageStreakRound";
         private const string PushKillMarker = "FHMODS:PushKill:";
+
+        // saved counts (GHSavedCounts slots on the character): Berserker slot 1 = kills by retaliate this scenario;
+        // Bruiser slot 2 = "killed an enemy it pushed or pulled that round" in this scenario (slot 1 is Defensive Tactics)
+        internal const int SlotRetaliateKills = 1, SlotPushKill = 2;
 
         private static ScenarioState _scenario;
         private static readonly Dictionary<string, int> RetaliateKills = new Dictionary<string, int>();
@@ -63,7 +69,8 @@ namespace FrosthavenMods
         {
             Fresh();
             if (!(me is CPlayerActor) || victim == null || !CActor.AreActorsEnemies(victim.Type, me.Type, victim, me)) return;
-            RetaliateKills[G(me)] = (RetaliateKills.TryGetValue(G(me), out int n) ? n : 0) + 1;
+            int saved = GHSavedCounts.Add(me, SlotRetaliateKills);
+            RetaliateKills[G(me)] = Math.Max(saved, (RetaliateKills.TryGetValue(G(me), out int n) ? n : 0) + 1);
             Plugin.Log.LogInfo($"GHRule KillsByRetaliate card 0 {GHPlague.NameOf(me)}'s retaliate killed {GHPlague.NameOf(victim)} ({RetaliateKills[G(me)]} this scenario)");
         }
 
@@ -86,6 +93,7 @@ namespace FrosthavenMods
                 if (!__result || !(targetingActor is CPlayerActor me) || actor == null) return;
                 Fresh();
                 if (!Pushed.Contains($"{G(me)}/{G(actor)}/{Round}")) return;
+                GHSavedCounts.Set(me, SlotPushKill, 1);
                 if (PushKillScenario.Add(G(me)))
                     Plugin.Log.LogInfo($"GHRule KillPushedThisRound card 0 {GHPlague.NameOf(me)} killed {GHPlague.NameOf(actor)}, which it pushed or pulled this round (this scenario counts)");
             }
@@ -133,6 +141,9 @@ namespace FrosthavenMods
             try
             {
                 Fresh();
+                // after a reload the memory set is empty: the hidden saved flag on the Bruiser still says so
+                foreach (CPlayerActor p in (ScenarioManager.Scenario?.PlayerActors ?? new List<CPlayerActor>()).Concat(ScenarioManager.Scenario?.ExhaustedPlayers ?? new List<CPlayerActor>()))
+                    if (p?.Class?.ID == GHBruiser2e.ClassId && GHSavedCounts.Get(p, SlotPushKill) > 0) PushKillScenario.Add(G(p));
                 if (PushKillScenario.Count == 0) return;
                 CampaignState state = __instance.CampaignController.State;
                 string scenario = ScenarioKey();
@@ -187,7 +198,7 @@ namespace FrosthavenMods
                 int need = Math.Max(1, unlockConditionTarget.Value);
                 if (kills)
                 {
-                    int n = !string.IsNullOrEmpty(self) && RetaliateKills.TryGetValue(self, out int k) ? k : 0;
+                    int n = Math.Max(!string.IsNullOrEmpty(self) && RetaliateKills.TryGetValue(self, out int k) ? k : 0, GHSavedCounts.Get(self, SlotRetaliateKills));
                     totalConditions = need; conditionsMet = Math.Min(n, need); __result = n >= need;
                     Log(KillsByRetaliateTag, $"Berserker mastery: {n} of {need} kills by retaliate this scenario");
                 }
@@ -195,7 +206,8 @@ namespace FrosthavenMods
                 else if (pushed)
                 {
                     HashSet<string> done = StoredScenarios(GHClassesRule.LiveState, null);
-                    int n = done.Count + (!string.IsNullOrEmpty(self) && PushKillScenario.Contains(self) && !done.Contains(ScenarioKey()) ? 1 : 0);
+                    bool here = !string.IsNullOrEmpty(self) && (PushKillScenario.Contains(self) || GHSavedCounts.Get(self, SlotPushKill) > 0);
+                    int n = done.Count + (here && !done.Contains(ScenarioKey()) ? 1 : 0);
                     totalConditions = need; conditionsMet = Math.Min(n, need); __result = n >= need;
                     Log(KillPushedTag, $"Bruiser mastery: {n} of {need} scenarios with a kill of an enemy pushed or pulled that round");
                 }

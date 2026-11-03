@@ -306,6 +306,80 @@ namespace FrosthavenMods
             catch (Exception e) { Error("move through obstacles (done)", e); }
         }
 
+        // ------------------------------------------------------------------ Clear the Way bottom: terrain on the path
+
+        /// <summary>Clear the Way bottom (card 32117), MiscVars GH2E_PathTerrain on a DestroyTerrain with
+        /// AllTargetsOnMovePath: "destroy all ... hazardous terrain, difficult terrain ... in hexes you enter". Frosthaven's
+        /// DestroyTerrain collects the move path's hexes when it starts but selects the terrain in them only on a restart
+        /// (CAbilityDestroyTerrain.Restart); here the start does the same selection (every path hex with destroyable
+        /// terrain), so the step destroys them all (none: the step is cancelled, as the engine does).</summary>
+        [HarmonyPatch(typeof(CAbilityDestroyTerrain), nameof(CAbilityDestroyTerrain.Start))]
+        [HarmonyPostfix]
+        private static void PathTerrain(CAbilityDestroyTerrain __instance)
+        {
+            try
+            {
+                if (!Tagged(__instance, "GH2E_PathTerrain") || !__instance.AllTargetsOnMovePath) return;
+                List<CTile> valid = __instance.ValidTilesInAreaAffected ?? new List<CTile>();
+                int n = 0;
+                foreach (CTile t in valid)
+                {
+                    if (t == null || t.FindTerrainProp(forDestructionFromPlayer: true) == null || __instance.TilesSelected.Contains(t)) continue;
+                    __instance.TilesSelected.Add(t);
+                    n++;
+                }
+                __instance.AllTargets = true;
+                Plugin.Log.LogInfo($"GHRule PathTerrain card {CardId(__instance)} {n} hex(es) with hazardous/difficult terrain on the move path ({valid.Count} hexes entered): destroyed");
+            }
+            catch (Exception e) { Error("terrain on the move path", e); }
+        }
+
+        // ------------------------------------------------------------------ Rock Slide bottom: around the designated enemy
+
+        /// <summary>Rock Slide bottom (card 32119), MiscVars GH2E_DestroyAroundDesignated on an all-targets DestroyObstacle:
+        /// "destroy all obstacles within range 2 of the designated enemy". The engine measures the destroy's range from its
+        /// user; here, after it starts, its hexes are those within its range of the enemy the same card's BDesignate picked
+        /// this action, and the obstacles in them are selected the way the engine selects them for an all-targets destroy
+        /// (each obstacle's hexes; obstacles with hit points or that may not be destroyed are left out).</summary>
+        [HarmonyPatch(typeof(CAbilityDestroyObstacle), nameof(CAbilityDestroyObstacle.Start))]
+        [HarmonyPostfix]
+        private static void AroundDesignated(CAbilityDestroyObstacle __instance)
+        {
+            try
+            {
+                if (!Tagged(__instance, "GH2E_DestroyAroundDesignated")) return;
+                int card = CardId(__instance);
+                CAbility designate = (PhaseManager.CurrentPhaseAction?.PreviousPhaseAbilities ?? new List<CPhaseAction.CPhaseAbility>())
+                    .Select(x => x?.m_Ability).LastOrDefault(a => a != null && a.Name == "BDesignate" && a.TargetingActor == __instance.TargetingActor && CardId(a) == card);
+                CActor marked = designate?.ActorsTargeted?.FirstOrDefault(a => a != null);
+                List<CTile> valid = __instance.ValidTilesInAreaAffected;
+                __instance.TilesSelected.Clear();
+                valid.Clear();
+                if (marked == null)
+                {
+                    Plugin.Log.LogInfo($"GHRule DestroyAroundDesignated card {card} no enemy was designated: nothing to destroy");
+                    return;
+                }
+                valid.AddRange(GameState.GetTilesInRange(marked, __instance.Range, CAbility.EAbilityTargeting.Range, emptyTilesOnly: false, ignoreBlocked: true)
+                    .Where(t => t != null && !t.m_Props.Any(p => p.OverrideDisallowDestroyAndMove || (p.PropHealthDetails != null && p.PropHealthDetails.HasHealth))));
+                __instance.TilesInRange = valid.ToList();
+                foreach (CTile t in valid)
+                {
+                    CTile propTile = null;
+                    CObjectObstacle obstacle = t.FindProp(ScenarioManager.ObjectImportType.Obstacle) as CObjectObstacle ?? CObjectProp.FindPropWithPathingBlocker(t.m_ArrayIndex, ref propTile);
+                    if (obstacle == null || obstacle.Activated) continue;
+                    foreach (TileIndex b in obstacle.PathingBlockers)
+                    {
+                        CTile bt = ScenarioManager.Tiles[b.X, b.Y];
+                        if (bt != null && !__instance.TilesSelected.Contains(bt)) __instance.TilesSelected.Add(bt);
+                    }
+                }
+                __instance.AllTargets = true;
+                Plugin.Log.LogInfo($"GHRule DestroyAroundDesignated card {card} obstacles within range {__instance.Range} of the designated {marked.GetPrefabName()}: {__instance.TilesSelected.Count} hex(es) selected");
+            }
+            catch (Exception e) { Error("destroy around the designated enemy", e); }
+        }
+
         /// <summary>Any other ability starting (the destroy step, an undo to another card, the next turn): block again.</summary>
         [HarmonyPatch(typeof(CAbility), nameof(CAbility.Start))]
         [HarmonyPrefix]

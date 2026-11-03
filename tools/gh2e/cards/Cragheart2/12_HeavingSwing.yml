@@ -2,7 +2,9 @@
 # from Xipe's 99127_Cragheart2_Heaving Swing.yml; corrected against tools/gh2e/sheets/Cragheart.json
 # top: push into obstacles, the 1st edition card's shape (play-tested)
 # bottom: the cost is Frosthaven's own "suffer damage or destroy an adjacent obstacle" choice (Pyroclast Obsidian
-# Shield bottom), then a round bonus of +3 on the next melee attack (one use: XPTracker [0], as Pyroclast Hardened Spike)
+# Shield bottom), then a round bonus of +3 on the next melee attack (one use: XPTracker [0], as Pyroclast Hardened Spike).
+# The cost is optional (no "!" box; rulebook p22, decision B): BCost may be skipped, and the bonus comes only when one
+# of its two options was performed this action (re-audit).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -24,7 +26,7 @@ Data:
         Abilities:
             BCost:
                 Filter: Self
-                CanSkip: False
+                CanSkip: True
                 HelpBoxTooltipLocKey: "$GH2E_Cragheart2_12_B2$"
                 Choose:
                     Abilities:
@@ -59,6 +61,12 @@ Data:
                 Filter: Self
                 AutoTrigger: True
                 AnimOverload: PowerUp
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        PaidDamage: CustomAbility.FindAbilityInPhaseByName("BDamageSelf")
+                        PaidObstacle: CustomAbility.FindAbilityInPhaseByName("BDestroyObstacle")
+                        ValidatePaid: (PaidDamage != null && PaidDamage.AbilityHasHappened) || (PaidObstacle != null && PaidObstacle.AbilityHasHappened)
                 ActiveBonus:
                     Duration: Round
                     Behaviour: BuffAttack

@@ -26,7 +26,7 @@ namespace FrosthavenMods
     ///     unoccupied": Frosthaven already lets enemies move through an Invisible figure; the AI may now also end its move
     ///     there (CAIMoveNew.CanStopOnTopOf). "If an enemy ends its movement in your hex, you must Teleport to the closest
     ///     empty hex and suffer hazardous terrain damage": after that enemy's move she gets an inline Teleport to the
-    ///     closest empty hex (fewest hexes away; ties: the first in map order) and a Damage ability of the scenario's
+    ///     closest empty hex (fewest hexes away; a tie: the player picks among them) and a Damage ability of the scenario's
     ///     hazardous terrain damage.
     ///  4. "When all other characters are exhausted or have escaped, you lose Invisible and cannot gain it" (no other
     ///     living character in the scenario, a solo Nightshroud included): checked at every turn end, exhaustion and round
@@ -99,7 +99,13 @@ namespace FrosthavenMods
 
         private static void Gain(CPlayerActor her, string why)
         {
-            if (Alone(her) || HasInvisible(her)) return;
+            if (Alone(her))
+            {
+                // the printed rule read literally (the lead's decision 2026-11-02): a solo Nightshroud is never Invisible
+                if (Refused.Add(her.ActorGuid)) Log(0, $"class mat: {why}: no other character is in the scenario (all other characters exhausted or escaped, or none: a solo Nightshroud): no Invisible");
+                return;
+            }
+            if (HasInvisible(her)) return;
             her.ApplyCondition(her, CCondition.EPositiveCondition.Invisible, 1, EConditionDecTrigger.Never);
             Log(0, $"class mat: {why}: Invisible gained");
         }
@@ -176,9 +182,24 @@ namespace FrosthavenMods
             try
             {
                 CheckAlone();
-                if (Is(actor)) { NoteMarker(actor); GHTears.EndOfAbilityPoint(actor, null); }
+                if (Is(actor)) { NoteMarker(actor); GHTears.EndOfAbilityPoint(actor, null); ClawsNextTurnEnded(actor); }
             }
             catch (Exception e) { Plugin.Log.LogError("Nightshroud class mat: " + e); }
+        }
+
+        // Claws of the Night top (card 32921): "At the end of your next turn, if you do not have Invisible, you may perform:
+        // Attack 5". The card's EndTurnAbility bonus fires only when its requirements are met (not Invisible, next turn);
+        // otherwise the engine keeps it, and it fired at a LATER turn's end. Here: when the next turn ended (the bonus is
+        // from an earlier round) and it is still unfinished, it ends (the card goes to the discard pile).
+        public const int ClawsCard = 32921;
+
+        private static void ClawsNextTurnEnded(CActor her)
+        {
+            CActiveBonus claws = CardBonus(her, ClawsCard);
+            if (claws == null || claws.InternalRoundNumber <= 0) return;   // played this turn: its "next turn" is still to come
+            if (claws.HasBehaviour(CActiveBonus.EActiveBonusBehaviourType.EndTurnAbility) != true) return;
+            claws.Finish();
+            Log(ClawsCard, $"Claws of the Night: the next turn ended{(HasInvisible(her) ? " while Invisible" : " without the attack")}: the card ends");
         }
 
         // ---- 3. no attacks while Invisible
@@ -316,19 +337,23 @@ namespace FrosthavenMods
 
         private static void PushOut(CPlayerActor her, CActor enemy)
         {
-            CTile target = null;
+            // every empty hex at the smallest distance: with a tie the player picks (the inline teleport's own tile
+            // choice; one hex = no choice)
+            var closest = new List<CTile>();
             int best = int.MaxValue;
             foreach (CTile t in ScenarioManager.Tiles)
             {
                 if (t == null || t.m_ArrayIndex == her.ArrayIndex || !IsEmpty(t, her)) continue;
                 int d = Point.HexDist(her.ArrayIndex, t.m_ArrayIndex);
-                if (d < best) { best = d; target = t; }
+                if (d < best) { best = d; closest.Clear(); }
+                if (d == best) closest.Add(t);
             }
+            CTile target = closest.FirstOrDefault();
             var list = new List<CAbility>();
             if (target != null)
             {
                 CAbilityTeleport tp = (CAbilityTeleport)CAbilityTeleport.CreateDefaultTeleport(new CAbilityTeleport.TeleportData());
-                tp.InlineSubAbilityTiles.Add(target);
+                tp.InlineSubAbilityTiles.AddRange(closest);
                 tp.IsInlineSubAbility = true;
                 tp.SetCanSkip(canSkip: false);
                 tp.SetMiscVar(GHTears.OwnTag, new TValue(true));
@@ -343,7 +368,7 @@ namespace FrosthavenMods
             list.Add(dmg);
             if (GameState.InternalCurrentActor != her) GameState.OverrideCurrentActorForOneAction(her);
             PhaseManager.CurrentPhaseAction?.StackNextAbilities(list, her, killAfter: false, stackToNextCurrent: true);
-            Log(0, $"class mat: {enemy.GetPrefabName()} ended its move in her hex: Teleport to {(target == null ? "nowhere (no empty hex)" : target.m_ArrayIndex.ToString())} and hazardous terrain damage {ScenarioManager.HazardousTerrainDamage}");
+            Log(0, $"class mat: {enemy.GetPrefabName()} ended its move in her hex: Teleport to {(target == null ? "nowhere (no empty hex)" : closest.Count == 1 ? target.m_ArrayIndex.ToString() : $"one of {closest.Count} equally close empty hexes (the player picks: {string.Join(" ", closest.Select(c => c.m_ArrayIndex.ToString()))})")} and hazardous terrain damage {ScenarioManager.HazardousTerrainDamage}");
         }
 
         // ---- 5. attacks this round, and the round's end

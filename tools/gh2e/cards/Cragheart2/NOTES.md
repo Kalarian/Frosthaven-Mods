@@ -49,8 +49,8 @@ Meteor's consume text, now `GH2E_Cragheart2_25_T`).
   (Xipe: one obstacle anywhere within 4). Bench first.
 - 16 Sentient Growth: rule question settled: bottom "Heal 1, target all, range 1" includes yourself (a ranged heal may
   target its user; Xipe: allies only). Top heal has no mark (Xipe gave one).
-- 17 Clear the Way bottom: NEEDS PLUGIN for the terrain part: obstacles and traps on the path are destroyed (1st
-  edition shape); hazardous and difficult terrain stay. Top: 1st edition merged move-obstacle attack.
+- 17 Clear the Way bottom: obstacles and traps on the path are destroyed (1st
+  edition shape), then terrain on the path (DestroyTerrain + plugin GHCragheart2e PathTerrain). Top: 1st edition merged move-obstacle attack.
 - 18 Blunt Force: consume gives Ward (Xipe: Retaliate, in a block that didn't parse); top lost.
 - 19 Rock Slide bottom: APPROXIMATION / NEEDS PLUGIN for exactness: the 1st edition Rocky End merged destroy-attack:
   obstacles within range 2 of YOU are destroyed (card: of the designated enemy), Attack X = 2 x destroyed, range 4,

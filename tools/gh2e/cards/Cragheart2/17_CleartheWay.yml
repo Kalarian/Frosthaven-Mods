@@ -1,8 +1,10 @@
 # card: Clear the Way
 # from Xipe's 99132_Cragheart2_Clear the Way.yml; corrected against tools/gh2e/sheets/Cragheart.json
 # top: the 1st edition card's merged move-obstacle attack (play-tested); Attack 2 carries a square mark
-# bottom: APPROXIMATION: obstacles and traps on the path are destroyed (the 1st edition card's merged disarm/destroy,
-# play-tested); hazardous and difficult terrain stay
+# bottom: obstacles and traps on the path are destroyed (the 1st edition card's merged disarm/destroy, play-tested),
+# then hazardous, difficult (and icy) terrain on the path: Frosthaven's DestroyTerrain on the move path (all hexes the
+# move entered, jumped ones included: QUESTIONS C), its tiles filled by plugin GHCragheart2e (MiscVars
+# GH2E_PathTerrain: the engine fills them only on a restart). Re-audit Cragheart2-01.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -60,6 +62,13 @@ Data:
                             AllTargetsOnMovePath: True
                             SpawnDelay: 0.2
                             SkipAnim: True
+            BDestroyTerrain:
+                DestroyTerrain:
+                Target: -1
+                AllTargetsOnMovePath: True
+                SkipAnim: True
+                MiscVars:
+                    GH2E_PathTerrain: True
 Layout:
     Top:
         - Row: "$GH2E_Cragheart2_17_T$"

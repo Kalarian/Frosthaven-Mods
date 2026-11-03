@@ -169,6 +169,16 @@ namespace FrosthavenMods
                 if (__instance.GetMiscVar("GH2E_DeferredInfuse").GetBool()) return;
                 if (!(__instance.ElementsToInfuse.Contains(ElementInfusionBoardManager.EElement.Any) || __instance.ElementsToInfuse.Count > 1)) return;
                 if (GameState.TurnActor != __instance.TargetingActor || !(PhaseManager.CurrentPhase is CPhaseAction)) return;
+                // an extra turn whose end the engine doesn't scan for end-of-turn bonuses (PhaseManager EndTurn: only
+                // BothActionsLater / SingleCardAnyActionAtTheEndOfTurn) has no place to ask at its end: the noted infusion
+                // would wait a round, or be lost. The element is picked now instead (it still infuses at the turn's end).
+                CActor taker = __instance.TargetingActor;
+                if (taker.IsTakingExtraTurn && taker.TakingExtraTurnOfType != CAbilityExtraTurn.EExtraTurnType.BothActionsLater
+                    && taker.TakingExtraTurnOfType != CAbilityExtraTurn.EExtraTurnType.SingleCardAnyActionAtTheEndOfTurn)
+                {
+                    Plugin.Log.LogInfo($"GHRule DeferredInfusion card {card} {string.Join("/", __instance.ElementsToInfuse)}: extra turn ({taker.TakingExtraTurnOfType}) with no end-of-turn step: the element is picked now");
+                    return;
+                }
                 NewScenarioCheck();
                 s_Deferred.Add(new Deferred
                 {
