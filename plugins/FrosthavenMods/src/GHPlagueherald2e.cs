@@ -243,7 +243,15 @@ namespace FrosthavenMods
             NightmarishAtStart.Remove(a);
             if (atk.IsMeleeAttack || !a.AbilityHasHappened) return;
             CActiveBonus b = start.bonus;
-            if (b == null || b.Finishing() || b.Finished() || b.TrackerIndex != start.index) return;   // the paid toggle already used the slot
+            if (b == null) return;
+            // (2026-11-03: the engine's own CAddTargetActiveBonus_BuffTarget already moves the tracker on every ranged attack,
+            // paid or not, so this branch never ran and the rule never showed: say so when the engine moved it)
+            if (b.TrackerIndex != start.index)
+            {
+                Rule("NightmarishSlot", NightmarishCard, $"ranged attack ability: a slot used by the game ({b.Remaining} left)");
+                return;
+            }
+            if (b.Finishing() || b.Finished()) return;
             b.UpdateXPTracker();
             Rule("NightmarishSlot", NightmarishCard, $"ranged attack ability without the cost: a slot used anyway ({b.Remaining} left)");
             b.FinishIfNoRemaining();
