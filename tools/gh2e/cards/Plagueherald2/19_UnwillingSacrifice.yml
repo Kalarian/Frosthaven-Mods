@@ -1,8 +1,9 @@
 # card: Unwilling Sacrifice
-# top: one enemy with Plague (any range) suffers Damage 2 (written as for one Plague: the per-token count is NEEDS
-# PLUGIN); then the optional spread: one enemy adjacent to it suffers Damage 1 and gains Plague. "Remove any number of
-# Plague from that enemy to have that many different adjacent enemies ...": one adjacent enemy, and the first enemy
-# keeps its tokens: NEEDS PLUGIN.
+# top: one enemy with Plague (any range) suffers Damage 2 for each Plague it has (plugin GHPerPlague, MiscVars
+# GH2E_PerPlague). Then plugin GHUnwillingSacrifice (MiscVars GH2E_UnwillingSacrifice): the player removes any number of
+# its Plague (up to the tokens it had before the damage, so also when it was killed, and the enemies adjacent to its
+# hex); TSpread (the template, MiscVars GH2E_PlagueSpreadTemplate, taken off the card when it is read) is then performed
+# with that many targets among the enemies adjacent to that hex: Damage 1 and Plague each.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -14,6 +15,9 @@ Data:
                 Filter:
                     TargetType: Enemy
                     TargetHasCharacterResource: ["Plague"]
+                MiscVars:
+                    GH2E_PerPlague: True
+                    GH2E_UnwillingSacrifice: True
                 AnimOverload: TargetedDebuff
                 SubAbilities:
                     TSpread:
@@ -21,12 +25,11 @@ Data:
                         Range: 1
                         Target: 1
                         Filter: Enemy
-                        AllTargetsAdjacentToParentTargets: True
                         TreatAsNonSubAbility: True
+                        MiscVars:
+                            GH2E_PlagueSpreadTemplate: True
                         ResourcesToGiveToTargets:
                             - ["Plague", 1]
-                        ResourcesToAddOnAbilityEnd:
-                            - ["Plague", 3]
                         AnimOverload: TargetedDebuff
         XP: 1
     Bottom:

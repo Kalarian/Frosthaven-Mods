@@ -6,8 +6,8 @@ Level: X
 Initiative: 35
 # card: Spread the Plague
 # top: control one enemy with Plague (any range) for one Attack 4, the player choosing its target (ControlActorType Player, rulebook p33).
-# The Plague its attack adds can't be given by the engine (a resource is passed from the giver's own supply, and the
-# monster has none): NEEDS PLUGIN. bottom: written as "remove Poison from one of your allies, then Poison + Plague one
+# The Plague its attack adds comes from the class supply (plugin GHPlague: any giver gives a Plague without holding
+# one). bottom: written as "remove Poison from one of your allies, then Poison + Plague one
 # enemy adjacent to that ally" (the card's mandatory removal comes first here so the target is picked around the
 # chosen ally): APPROXIMATION of the order.
 Discard: [Discard,Discard]
@@ -22,6 +22,8 @@ Data:
                                 Amount: 4
                                 DiamondEnhancements: 1
                             StrengthIsBase: True
+                            ResourcesToGiveToTargets:
+                                - ["Plague", 1]
                     ControlDurationType: ControlForOneAction
                     ControlActorType: Player
                 Range: 99
@@ -52,8 +54,6 @@ Data:
                         TreatAsNonSubAbility: True
                         ResourcesToGiveToTargets:
                             - ["Plague", 1]
-                        ResourcesToAddOnAbilityEnd:
-                            - ["Plague", 3]
                         AnimOverload: TargetedDebuff
 Layout:
     Top:

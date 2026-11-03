@@ -7,8 +7,10 @@ Initiative: 11
 # card: Festering Sores
 # top: Wound + Plague on one enemy within range 4, then the persistent trigger as Frosthaven's Deathwalker writes
 # "when an enemy dies" (When Your Time Comes bottom: a self aura over all enemies, DuringActionAbilityOnDeath): here
-# only enemies with Plague, one use (the card is discarded after it). "Within range 3 of the hex where it died" is
-# range 3 from you: APPROXIMATION. bottom: -1 Move per Plague = flat -1 Move on enemies with Plague (NEEDS PLUGIN).
+# only enemies with Plague, one use (the card is discarded after it). Plugin GHFesteringSores (MiscVars
+# GH2E_FesteringSores): "you may" is asked (declined: the card stays), and the targets are the enemies within range 3 of
+# the hex where it died (Custom targeting; the data's TriggerActor expression is the same set). bottom: -1 Move per
+# Plague that enemy has (plugin GHPerPlague, MiscVars GH2E_PerPlague).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -21,19 +23,17 @@ Data:
                 Filter: Enemy
                 ResourcesToGiveToTargets:
                     - ["Plague", 1]
-                ResourcesToAddOnAbilityEnd:
-                    - ["Plague", 3]
                 AnimOverload: TargetedDebuff
             TOnDeath:
                 AddActiveBonus:
                     NullTargeting: True
-                    Range: 3
                     Target: 2
                     Filter: Enemy
+                    Targeting: Custom
+                    TargetingVars:
+                        AddValidActorsInRange: GameState.GetAllEnemiesInRange(TargetingActor, TriggerActor.ArrayIndex, 3)
                     ResourcesToGiveToTargets:
                         - ["Plague", 1]
-                    ResourcesToAddOnAbilityEnd:
-                        - ["Plague", 3]
                     AnimOverload: TargetedDebuff
                 Range: 1
                 Target: -1
@@ -50,6 +50,8 @@ Data:
                         UseTargetOriginalType: True
                         TargetHasCharacterResource: ["Plague"]
                     XPTracker: [0]
+                MiscVars:
+                    GH2E_FesteringSores: True
                 AnimOverload: PowerUp
     Bottom:
         Abilities:
@@ -70,6 +72,8 @@ Data:
                     AuraFilter:
                         TargetType: Enemy
                         TargetHasCharacterResource: ["Plague"]
+                MiscVars:
+                    GH2E_PerPlague: True
                 AnimOverload: RadialNegative
 Layout:
     Top:

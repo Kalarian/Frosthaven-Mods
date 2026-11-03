@@ -19,8 +19,6 @@ Data:
                 Range: 5
                 ResourcesToGiveToTargets:
                     - ["Plague", 1]
-                ResourcesToAddOnAbilityEnd:
-                    - ["Plague", 3]
                 AnimOverload: RangedAttack
             TMuddle:
                 Muddle: True

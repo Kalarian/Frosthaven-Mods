@@ -5,8 +5,8 @@ ID: 33001
 Level: 1
 Initiative: 61
 # card: Comorbid Sting
-# Plague (class mat token) = the character resource "Plague" (resources.yml): the Plagueherald holds a supply of 3,
-# each Plague ability gives 1 to its target and refills the supply at its end (see NOTES.md).
+# Plague (class mat token) = the character resource "Plague" (resources.yml): each Plague ability gives 1 to its target
+# from the class supply of 12 (plugin GHPlague, see NOTES.md).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -21,8 +21,6 @@ Data:
                 Conditions: Poison
                 ResourcesToGiveToTargets:
                     - ["Plague", 1]
-                ResourcesToAddOnAbilityEnd:
-                    - ["Plague", 3]
                 AnimOverload: RangedAttack
     Bottom:
         Abilities:

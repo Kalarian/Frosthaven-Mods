@@ -1,6 +1,6 @@
 # card: Creeping Lethargy
 # top: Heal 1 "target all" with no range: you and all your allies (Targeting All; "all" on a positive ability = allies
-# and yourself, 2e p.19). -2 Attack per Plague = flat -2 on every enemy with Plague this round (NEEDS PLUGIN for the
+# and yourself, 2e p.19). -2 Attack per Plague = -2 per token on every enemy with Plague this round (plugin GHPerPlague, the
 # count). bottom: negate the next damage one adjacent ally with Poison would suffer this round = a one-use damage
 # negation on that ally (PreventDamage -1, the 1st edition Protective Blessing value, one use slot).
 Discard: [Discard,Discard]
@@ -28,6 +28,8 @@ Data:
                     AuraFilter:
                         TargetType: Enemy
                         TargetHasCharacterResource: ["Plague"]
+                MiscVars:
+                    GH2E_PerPlague: True
                 AnimOverload: RadialNegative
     Bottom:
         Abilities:

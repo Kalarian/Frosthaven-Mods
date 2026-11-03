@@ -1,4 +1,7 @@
 # card: Virulent Strain
+# top: a +1 Attack aura on allies with Poison, 3 slots; the Plague it adds to their attacks: plugin GHPlagueByAlly
+# (MiscVars GH2E_GivePlague) gives the attack's target one Plague when a slot is used. bottom: 1 damage for each Plague
+# that enemy has (plugin GHPerPlague, MiscVars GH2E_PerPlague).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -17,6 +20,8 @@ Data:
                         TargetType: Ally
                         TargetHasNegativeCondition: Poison
                     XPTracker: [1,0,0]
+                MiscVars:
+                    GH2E_GivePlague: True
                 AnimOverload: PositiveBuffRadial
     Bottom:
         Abilities:
@@ -27,6 +32,8 @@ Data:
                 Filter:
                     TargetType: Enemy
                     TargetHasCharacterResource: ["Plague"]
+                MiscVars:
+                    GH2E_PerPlague: True
                 AnimOverload: RadialNegativeMajor
 Layout:
     Top:

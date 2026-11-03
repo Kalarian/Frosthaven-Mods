@@ -1,9 +1,0 @@
-StartScenarioAbilities:
-    PlagueSupply:
-        NullTargeting: True
-        Filter: Self
-        ResourcesToAddOnAbilityEnd:
-            - ["Plague", 3]
-        AutoTrigger: True
-        CanSkip: False
-        SkipAnim: True

@@ -8,8 +8,8 @@ Initiative: 70
 # top: Strengthen one normal or elite enemy with Plague (any range), then control it (UseParentTargets, as CARD_FIXES
 # 20406 Lead to Slaughter): Move 1, Attack 5, driven by the player (ControlActorType Player, rulebook p33). "This
 # movement must move toward a monster that does not have Plague": the move may only end on an adjacent hex closer (path
-# around walls) to some other monster without Plague (MustEndOnSpecificTiles). The Plague its attack adds: the monster
-# has no supply to give from, NEEDS PLUGIN.
+# around walls) to some other monster without Plague (MustEndOnSpecificTiles). The Plague its attack adds comes from
+# the class supply (plugin GHPlague).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -40,6 +40,8 @@ Data:
                                 TControlAttack:
                                     Attack: 5
                                     StrengthIsBase: True
+                                    ResourcesToGiveToTargets:
+                                        - ["Plague", 1]
                             ControlDurationType: ControlForOneAction
                             ControlActorType: Player
                         Filter: Enemy

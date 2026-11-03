@@ -8,7 +8,7 @@ Initiative: 69
 # top: "each ally adjacent to the target gains Poison": in 2e your allies (the class poisons allies on purpose; the
 # 1st edition card meant the target's allies, CARD_FIXES 20304). Filter Ally with TreatAsNonSubAbility (the 20304
 # finding: without it the sub kept the parent's target list). bottom: four end-of-turn triggers (this turn and the next
-# three), each "every enemy suffers 1 per Plague" written flat (1 per enemy with Plague): NEEDS PLUGIN for the count.
+# three), each "every enemy suffers 1 for each Plague that enemy has" (plugin GHPerPlague, MiscVars GH2E_PerPlague).
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -42,6 +42,8 @@ Data:
                     Filter:
                         TargetType: Enemy
                         TargetHasCharacterResource: ["Plague"]
+                    MiscVars:
+                        GH2E_PerPlague: True
                     AnimOverload: RadialNegativeMajor
                 Filter: Self
                 ActiveBonus:

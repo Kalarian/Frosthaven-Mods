@@ -1,7 +1,7 @@
 # Plagueherald (2nd edition) perks, from the perk sheet (tools/gh2e/classes.json "Plagueherald" perks; docs/gh2e/class-notes.md),
 # in gh_crossover's table format. 18 checkboxes, as on the sheet.
-# Plague = the character resource "Plague" (resources.yml): the Plagueherald holds a supply of 3, a give passes one token
-# from that supply to the target and the ability refills it at its end (see NOTES.md).
+# Plague = the character resource "Plague" (resources.yml): a give places one token from the class supply of 12 (plugin
+# GHPlague, see NOTES.md).
 
 _PLAGUE_OR_POISON_TARGETING = """\
         Filter: Enemy
@@ -18,8 +18,7 @@ NEW_CARDS = {
     # AMC_Damage1Range1_P0, range 2: the attack's target is at range 0 of itself)
     "AMC_GH2E_Plagueherald2_Plague_P0": 'MathModifier: "+0"\nAbilities:\n    PlagueAbility:\n        NullTargeting: True\n'
                                         + _PLAGUE_OR_POISON_TARGETING
-                                        + '        ResourcesToGiveToTargets:\n            - ["Plague", 1]\n'
-                                        + '        ResourcesToAddOnAbilityEnd:\n            - ["Plague", 3]\n',
+                                        + '        ResourcesToGiveToTargets:\n            - ["Plague", 1]\n',
     # "Give the target or one enemy within Range 2 of the target Poison", rolling. A Poison ability on a modifier card is
     # the error screen when drawn (the game's modifier code runs no condition abilities): a NullTargeting carrying the
     # condition, as Frosthaven's cards give an enemy a condition (Infuser Diamondization: NullTargeting, IsNegative,
