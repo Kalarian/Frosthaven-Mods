@@ -1,0 +1,17 @@
+Parser: Mastery
+ID: SilentKnife_MASTERY_1
+LocalisedName: SilentKnife_MASTERY_1_Name
+LocalisedDescription: SilentKnife_MASTERY_1_Desc
+PerkPoints: 1
+# Answered by the Frosthaven Mods plugin (GHSilentKnife.cs, FrosthavenMods_FlankedOrIsolatedOnly): every target she
+# attacks (checked as each attack happens) stands next to one of her allies or next to none of its own allies, and Value
+# attacks (one per target) or more.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_FlankedOrIsolatedOnly]
+        CharacterIDs:
+            ActorID: SilentKnifeID
+        Value: 10

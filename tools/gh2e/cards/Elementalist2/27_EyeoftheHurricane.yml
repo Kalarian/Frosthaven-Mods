@@ -82,10 +82,6 @@ Data:
                         Conditions: Poison
             BCTwo:
                 Infuse: [Dark]
-                Requirements:
-                    Type: ThisAbility
-                    Vars:
-                        ValidateTwoElementsConsumed: PhaseManager.CurrentPhaseAction.ActionAugmentationsToConsume.Where(obj.Elements.Count > 0).Count >= 2
                 AbilityOverrides:
                     BCTwoAttack:
                         ParentName: BAttack

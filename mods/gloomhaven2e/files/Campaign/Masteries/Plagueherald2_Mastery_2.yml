@@ -1,0 +1,17 @@
+Parser: Mastery
+ID: Plagueherald2_MASTERY_2
+LocalisedName: Plagueherald2_MASTERY_2_Name
+LocalisedDescription: Plagueherald2_MASTERY_2_Desc
+PerkPoints: 1
+# Answered by the Frosthaven Mods plugin (GHPlagueherald2e.cs, FrosthavenMods_PoisonEveryRound): in every round the
+# Plagueherald took a turn, he gave Poison to or removed Poison from a figure (counted as it happens, kept in hidden
+# resources saved with the scenario).
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_PoisonEveryRound]
+        CharacterIDs:
+            ActorID: Plagueherald2ID
+        Value: 1

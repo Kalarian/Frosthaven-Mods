@@ -66,15 +66,23 @@ namespace FrosthavenMods
         }
 
         // ---- Shared Supplies ----
+        // "during their turn": offered at the start of the adjacent ally's turn, again just before their second card
+        // action (between the two actions: the bench of 2026-11-02 found no offer there) and at the end of the turn.
+        // Used once each scenario: the flag is the hidden character resource Tinkerer2SharedSupplies on the Tinkerer,
+        // saved with the scenario (a reload kept offering it when the flag was a static).
 
-        private static object s_SharedState;
-        private static bool s_SharedUsed;
+        internal const string SharedUsedResource = "Tinkerer2SharedSupplies";
+        private static CActor s_ActionTurnActor;
+        private static int s_CardActions;
 
-        private static void OfferSharedSupplies(CActor actor, string when)
+        private static bool SharedUsed() =>
+            ScenarioManager.Scenario.PlayerActors.Any(p => p != null && p.GetCharacterResourceAmount(SharedUsedResource) > 0);
+
+        /// <summary>Asks the adjacent ally's player, potion by potion; on yes marks the perk used and returns the potion's
+        /// abilities (copies) for the caller to queue.</summary>
+        private static List<CAbility> AskSharedSupplies(CPlayerActor ally, string when)
         {
-            if (!(actor is CPlayerActor ally) || ally.IsDead || GameState.PendingScenarioModifierAbilities == null) return;
-            if (!ReferenceEquals(s_SharedState, ScenarioManager.CurrentScenarioState)) { s_SharedState = ScenarioManager.CurrentScenarioState; s_SharedUsed = false; }
-            if (s_SharedUsed) return;
+            if (ally == null || ally.IsDead || SharedUsed()) return null;
             foreach (CPlayerActor tinkerer in ScenarioManager.Scenario.PlayerActors.Where(p => p != null && p != ally && !p.IsDead && HasPerk(p, SharedSupplies)))
             {
                 if (!CPathFinder.IsAdjacent(ally.ArrayIndex, tinkerer.ArrayIndex)) continue;
@@ -82,13 +90,43 @@ namespace FrosthavenMods
                 {
                     if (!GHPlague.Ask(ally, false, "FHMODS_TINKER_SHARED", "FHMODS_TINKER_USE", "FHMODS_TINKER_NOTNOW",
                             GHPlague.NameOf(tinkerer), ItemName(item), GHPlague.NameOf(ally))) continue;
-                    foreach (CAbility a in item.YMLData.Data.Abilities)
-                        GameState.PendingScenarioModifierAbilities.Add(new Tuple<CAbility, CActor>(CAbility.CopyAbility(a, generateNewID: false), ally));
-                    s_SharedUsed = true;
-                    Plugin.Log.LogInfo($"GHRule SharedSupplies card 0 Shared Supplies: {GHPlague.NameOf(ally)} uses {GHPlague.NameOf(tinkerer)}'s {ItemName(item)} at the {when} of their turn; the item is not lost");
-                    return;
+                    tinkerer.AddCharacterResource(SharedUsedResource, 1);
+                    Plugin.Log.LogInfo($"GHRule SharedSupplies card 0 Shared Supplies: {GHPlague.NameOf(ally)} uses {GHPlague.NameOf(tinkerer)}'s {ItemName(item)} {when} of their turn; the item is not lost (used for this scenario)");
+                    return item.YMLData.Data.Abilities.Select(a => CAbility.CopyAbility(a, generateNewID: false)).ToList();
                 }
             }
+            return null;
+        }
+
+        private static void OfferSharedSupplies(CActor actor, string when)
+        {
+            if (when == "start") { s_ActionTurnActor = actor; s_CardActions = 0; }
+            if (!(actor is CPlayerActor ally) || GameState.PendingScenarioModifierAbilities == null) return;
+            List<CAbility> abilities = AskSharedSupplies(ally, "at the " + when);
+            if (abilities == null) return;
+            foreach (CAbility a in abilities)
+                GameState.PendingScenarioModifierAbilities.Add(new Tuple<CAbility, CActor>(a, ally));
+        }
+
+        /// <summary>Between the two actions: the second card action of the ally's turn starts with the potion's abilities.</summary>
+        [HarmonyPatch(typeof(CPhaseAction), MethodType.Constructor)]
+        [HarmonyPostfix]
+        private static void SharedBetweenActions(CPhaseAction __instance)
+        {
+            try
+            {
+                if (GameState.CurrentActionInitiator != GameState.EActionInitiator.AbilityCard) return;
+                if (!(GameState.InternalCurrentActor is CPlayerActor ally) || !ReferenceEquals(ally, s_ActionTurnActor)) return;
+                if (++s_CardActions != 2) return;
+                List<CPhaseAction.CPhaseAbility> list = __instance?.RemainingPhaseAbilities;
+                GameState.CurrentActorAction current = GameState.CurrentAction;
+                if (list == null || current?.Action == null) return;
+                List<CAbility> abilities = AskSharedSupplies(ally, "between the actions");
+                if (abilities == null) return;
+                for (int i = abilities.Count - 1; i >= 0; i--)
+                    list.Insert(0, new CPhaseAction.CPhaseAbility(abilities[i], ally, current.BaseCard, current.Action.ID));
+            }
+            catch (Exception e) { GHMapTokens.Report("Shared Supplies", e); }
         }
 
         private static IEnumerable<CItem> Potions(CPlayerActor p) =>

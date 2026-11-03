@@ -1,13 +1,58 @@
 Parser: CharacterResources
 
-WildfuryRage:
-    # pack-wide (carried although no card names it): Concentrated Rage bottom's damage tokens (on the card in the
-    # physical game), kept on the Wildfury so they are saved with the scenario and shown on her status row. Given and
-    # spent by the plugin (GHWildfury.cs RageTokens).
-    ID: "WildfuryRage"
-    Sprite: "Positive_AttackPlus"
-    LocKey: "$GH_GH2E_Wildfury_RAGE_TOOLTIP$"
-    MaxAmount: 99
+Tinkerer2SharedSupplies:
+    # pack-wide: a hidden flag on the Tinkerer, set when an ally used one of her potions through the Shared Supplies perk
+    # (once each scenario, GHTinkerer.cs); a character resource is saved with the scenario, so a reload keeps it used
+    ID: "Tinkerer2SharedSupplies"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "$GH_GH2E_SAFEGUARD_TOOLTIP$"
+    Hidden: True
+    MaxAmount: 1
+
+GH2EAllSixElements:
+    # pack-wide: hidden, a marker the plugin puts on the Elementalist the first time in a scenario all six elements are
+    # strong or waning at once (GHElementalist2e.cs, mastery 2); saved with the scenario, counted at its end
+    ID: "GH2EAllSixElements"
+    Sprite: "GHClass_Elementalist2"
+    LocKey: "$GH_GH2E_Elementalist2_ALLSIX_TOOLTIP$"
+    MaxAmount: 1
+    Hidden: True
+
+GH2EXornUsed:
+    # pack-wide: hidden mark on the Plagueherald that Xorn's Last Gift (perk Plagueherald212) was used this scenario
+    # (GHPlagueherald2e.cs); saved with the scenario, never shown.
+    ID: "GH2EXornUsed"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "$GH_GH2E_PH2_HIDDEN_TOOLTIP$"
+    MaxAmount: 1
+    Hidden: True
+
+GH2EPoisonRounds:
+    # pack-wide: hidden count of the rounds in which the Plagueherald gave or removed Poison (his second mastery,
+    # GHPlagueherald2e.cs); saved with the scenario, never shown.
+    ID: "GH2EPoisonRounds"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "$GH_GH2E_PH2_HIDDEN_TOOLTIP$"
+    MaxAmount: 999
+    Hidden: True
+
+GH2EPoisonLastRound:
+    # pack-wide: hidden number of the last round counted in GH2EPoisonRounds (GHPlagueherald2e.cs).
+    ID: "GH2EPoisonLastRound"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "$GH_GH2E_PH2_HIDDEN_TOOLTIP$"
+    MaxAmount: 999
+    Hidden: True
+
+GH2EHadWard:
+    # pack-wide: hidden mark on a Soultether's summon that it had Ward when the attack now resolving started (Imposed
+    # Will bottom reads it after the attack: GHSoultether.cs sets it at the start of every attack on such a summon);
+    # never shown.
+    ID: "GH2EHadWard"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "$GH_GH2E_SOUL_HIDDEN_TOOLTIP$"
+    MaxAmount: 1
+    Hidden: True
 
 GH2ESafeguard:
     # pack-wide: the Safeguard condition token (2e rulebook: the next negative condition the figure would gain is

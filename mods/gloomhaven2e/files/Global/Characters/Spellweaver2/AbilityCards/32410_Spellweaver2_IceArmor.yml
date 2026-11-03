@@ -7,7 +7,10 @@ Initiative: 25
 # card: Ice Armor
 # both halves: Frosthaven's own "negate a source of damage within a threshold" (Scaled Armor item: PreventFirstDamage with
 # a Requirements threshold on GameState.CurrentDamageData), 3 uses; the top is given to the ally the way Frosthaven gives
-# a persistent bonus to an ally (Snowdancer Shifting Zephyr Barrier bottom: GiveAbilityCardToActor), with Range 3
+# a persistent bonus to an ally (Snowdancer Shifting Zephyr Barrier bottom: GiveAbilityCardToActor), with Range 3.
+# Any ally, an ally's summon included (2e: summons are allies; QUESTIONS.md B): on a summon the bonus is held by the
+# summon while the card stays in the Spellweaver's active area (Frosthaven moves the card only to a character); the
+# plugin (GHSpellweaver2e.cs, IceArmor) gives the slots' XP to the Spellweaver whoever holds the bonus
 Discard: [Lost,Lost]
 Data:
     Top:
@@ -18,7 +21,6 @@ Data:
                 Target: 1
                 Filter:
                     TargetType: Ally
-                    ActorType: Player
                 AnimOverload: PowerUpFrost
                 ActiveBonus:
                     Duration: Persistent

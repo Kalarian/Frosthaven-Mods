@@ -6,8 +6,8 @@ PERKS = [
      {"CardsToRemove": "[AMC_Basic_M2]", "CardsToAdd": "[AMC_Basic_P0]"}),
     (3, "Wild Weave", 'Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=CreateWild>',
      {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_GH2E_Spellweaver2_Wild_P0]"}),
-    # the conditional +2 needs the plugin (no attack modifier can ask whether the current action has the lost icon):
-    # until then the card is a plain +1 with the rule printed on the perk
+    # the conditional +2: the plugin (GHSpellweaver2e.cs, SpentPower) turns the drawn +1 into +3 when the attack belongs
+    # to an action with a lost icon (no attack modifier can ask that itself)
     (3, "Spent Power", 'Replace one <sprite name="0"> with one <sprite name="+1"> "Add +2 <sprite name=Attack> if drawn during an action with <sprite name=Lost>"',
      {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_GH2E_Spellweaver2_Lost_P1]"}),
     (2, "Hex", 'Replace one <sprite name="0"> with one <sprite name="+1"> <sprite name=Curse>',
@@ -42,8 +42,8 @@ PERKS = [
                 AutoTrigger: True
                 NullTargeting: True
                 Conditions: [Invisible, Stun]"""}),
-    # NEEDS PLUGIN: the 1st edition's Etheric Bond is answered by the plugin for the 1st edition Reviving Ether; the 2e
-    # card is 32401 (see NOTES.md, shared changes wanted)
+    # the plugin (GHSpellweaver2e.cs, EthericBond): when her short rest starts, Reviving Ether (card 32401) goes from the
+    # discard pile back to her hand before the random card is chosen
     (1, "Etheric Bond", "Whenever you short rest, if <i>Reviving Ether</i> is in your discard pile, first <sprite name=Recover> it",
      {"Flags": "[Passive]"}),
     # two linked boxes: one perk costing two marks (as the Scoundrel's Cloak of Invisibility). "At the end of each of
@@ -92,8 +92,8 @@ PERKS = [
 ]
 
 MASTERIES = [
-    # mastery 2 of the sheet; the 1st edition Spellweaver's Deep Reserves is the same rule and its plugin tag counts any
-    # character's lost halves. Mastery 1 (consume both Fire and Ice in one turn, six times) has no tag yet (NOTES.md).
+    # mastery 2 of the sheet (listed first: it shipped first, its ID stays); the 1st edition Spellweaver's Deep Reserves
+    # is the same rule and its plugin tag counts any character's lost halves. Mastery 1 of the sheet follows.
     ("Deep Reserves", "In a single scenario, perform four different <sprite name=Lost> actions twice each",
      """\
 # the plugin's tag (GHMasteries.cs LossActionsRepeated): Value different card halves with a lost icon each performed
@@ -108,12 +108,25 @@ BattleGoalCondition:
             ActorID: Spellweaver2ID
         Value: 4
         Amount: 2"""),
+    ("Fire and Frost", "In a single scenario, consume both <sprite name=CreateFire> and <sprite name=CreateIce> during the same turn 6 times",
+     """\
+# mastery 1 of the sheet. Answered by the Frosthaven Mods plugin (GHSpellweaver2e.cs, FrosthavenMods_FireAndIceSameTurn):
+# Value turns in which the Spellweaver consumed both Fire and Ice, from the element records.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_FireAndIceSameTurn]
+        CharacterIDs:
+            ActorID: Spellweaver2ID
+        Value: 6"""),
 ]
 
 NEW_CARDS = {
     "AMC_GH2E_Spellweaver2_Wild_P0": 'MathModifier: "+0"\nAbilities:\n    InfuseAbility:\n        Infuse: [Any]\n        ShowElementPicker: True\n',
     "AMC_GH2E_Spellweaver2_FireIce_P2": 'MathModifier: "+2"\nAbilities:\n    InfuseAbility:\n        Infuse: [Fire, Ice]\n        ShowElementPicker: True\n',
-    # +1 now; the "+2 more during a lost action" needs the plugin (NOTES.md)
+    # +1; the plugin adds the "+2 more during an action with lost" (GHSpellweaver2e.cs, SpentPower)
     "AMC_GH2E_Spellweaver2_Lost_P1": 'MathModifier: "+1"\n',
 }
 

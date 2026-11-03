@@ -6,9 +6,11 @@ Level: 7
 Initiative: 33
 # card: Tainted Offering
 # top: the ally-Poison cost-consume adds XP 1 and a second attack (Attack 2, Range 3, Poison). "Perform the attack as if
-# you were occupying the same hex as that ally": the attack is made from your own hex: APPROXIMATION (NEEDS PLUGIN for
-# the ally's hex). bottom: Heal 2 + Strengthen on all allies within range 5 that have Poison, the heal ignoring Poison
-# (IgnoreTokens, as Gift of Rot), then each of them may recover one level 1 card from their discard pile (the
+# you were occupying the same hex as that ally": MiscVars GH2E_FromPoisonedAlly, the plugin (GHPlagueherald2e) makes
+# the attack from the hex of the ally the cost just poisoned (Frosthaven's TargetingOverrideArrayIndex, as Shattersong's
+# Resonant Frequency: range, line of sight and ranged-adjacency are counted from that hex). bottom: Heal 2 + Strengthen
+# on all allies within range 5 that have Poison, each target's heal through Poison the Plagueherald's choice (as Gift of
+# Rot), then each of them may recover one level 1 card from their discard pile (the
 # Sunkeeper 2e's level-1 recover: Vars CardLevel 1, on the same allies).
 Discard: [Discard,Discard]
 Data:
@@ -41,6 +43,8 @@ Data:
                             DiamondEnhancements: 1
                         Range: 3
                         Conditions: Poison
+                        MiscVars:
+                            GH2E_FromPoisonedAlly: True
                         AnimOverload: RangedAttack
                 XP: 1
     Bottom:
@@ -53,8 +57,8 @@ Data:
                 Filter:
                     TargetType: Ally
                     TargetHasNegativeCondition: Poison
-                AdditionalHealData:
-                    IgnoreTokens: True
+                MiscVars:
+                    GH2E_HealThroughPoisonChoice: True
                 AnimOverload: RadialPositive
             BRecover:
                 RecoverDiscardedCards: 1

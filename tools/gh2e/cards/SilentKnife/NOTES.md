@@ -94,10 +94,14 @@ Engine facts used (read in the decompiled `ScenarioRuleLibrary.dll`, game build 
 - 8 "Parting Gift": after each rest (short and long hooks), an optional step placing a money token in the hex of an
   enemy within range 3 (`GHMoneyPlace`), then Attack 1 on that enemy only (Boldening Blow's Custom targeting of the
   parent's target).
-- 9 "Fence" (city event gold): text-only passive - NEEDS PLUGIN.
+- 9 "Fence" (city event gold): a passive answered by the plugin (GHSilentKnife.cs): Frosthaven's outpost events stand
+  for city events (QUESTIONS.md A8); on completing one she draws from her modifier deck as an Attack 4 (rolling cards
+  add) and gains the damage as gold.
 - 10 "Cloak of Invisibility" (linked): the 1e Scoundrel's once-per-scenario toggle, Cost 2.
-- No masteries: neither 2e mastery fits an existing tag (the first could reuse the 1e Pack Hunter/Lone Wolf kill
-  records with an "every attack" variant; the second needs money-token totals across scenarios).
+- Masteries (GHSilentKnife.cs): 1 = FrosthavenMods_FlankedOrIsolatedOnly (every attacked target next to one of her
+  allies or next to none of its own, 10+ attacks, checked as each attack happens); 2 = FrosthavenMods_MoneyTokensAtEnd
+  (money tokens held at each scenario's end, 12+ counted in synced campaign state across scenarios, not necessarily in a
+  row; completed from the scenario result at 3).
 
 ## affinities.txt
 
@@ -105,9 +109,10 @@ Empty: Dark is infused twice (Special Mixture, Smoke Bomb), Fire twice (Flintloc
 
 ## NEEDS PLUGIN (summary)
 
-Practiced Reflexes optional trap skip; Dance of Daggers negating added effects (and a real Attack 2 counter); Spring the
-Trap springing the relocated trap on an enemy + XP; Watch it Burn play-from-hand; perk 9; mastery 2 (money tokens held
-at the end of 3 scenarios: needs a count kept across scenarios).
+Dance of Daggers negating added effects (and a real Attack 2 counter). Built in GHSilentKnife.cs (rest-b, 2026-11-02):
+Practiced Reflexes optional trap skip, Trickster's Reversal +X, Gruesome Advantage (Poison before the hit, after the
+whole attack ability), Spring the Trap designation and springing on an enemy + XP, Watch it Burn play-from-hand, Fence,
+both masteries.
 
 ## Money tokens (GHMoneyTokens.cs)
 
@@ -122,12 +127,7 @@ drop; Watch it Burn play-from-hand; perks 4, 8 (cost), 9.
 
 ## Shared changes wanted
 
-- Plugin: a per-ability "may choose not to spring traps" (reuse `TryChooseToSkipTrap`'s confirm) - Practiced
-  Reflexes.
-- Plugin: mastery 2's count across scenarios.
-- Plugin: MoveTrap onto an enemy's hex springs the trap on it - Spring the Trap.
-- Plugin: "play this card from hand during your turn" - Watch it Burn.
-- Plugin/tag: masteries ("only attack flanked or isolated enemies, 10+ attacks"; "end 3 scenarios with 12+ tokens").
+None left from this list (built in GHSilentKnife.cs).
 
 ## Check
 

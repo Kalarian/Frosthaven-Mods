@@ -3,3 +3,29 @@ Plague:
     Sprite: "HoverHatchet"
     LocKey: "GH2E_PLAGUE_TOOLTIP"
     MaxAmount: 3
+
+GH2EXornUsed:
+    # pack-wide: hidden mark on the Plagueherald that Xorn's Last Gift (perk Plagueherald212) was used this scenario
+    # (GHPlagueherald2e.cs); saved with the scenario, never shown.
+    ID: "GH2EXornUsed"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_PH2_HIDDEN_TOOLTIP"
+    MaxAmount: 1
+    Hidden: True
+
+GH2EPoisonRounds:
+    # pack-wide: hidden count of the rounds in which the Plagueherald gave or removed Poison (his second mastery,
+    # GHPlagueherald2e.cs); saved with the scenario, never shown.
+    ID: "GH2EPoisonRounds"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_PH2_HIDDEN_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True
+
+GH2EPoisonLastRound:
+    # pack-wide: hidden number of the last round counted in GH2EPoisonRounds (GHPlagueherald2e.cs).
+    ID: "GH2EPoisonLastRound"
+    Sprite: "Positive_DamagePrevent"
+    LocKey: "GH2E_PH2_HIDDEN_TOOLTIP"
+    MaxAmount: 999
+    Hidden: True

@@ -3,8 +3,9 @@
 # bottom: "on the next two attacks targeting one of your summons, the attacker gains disadvantage for the attack and
 # suffers damage 1 after the attack": two persistent auras on your summons with two use slots each (Frosthaven's
 # AttackersGainDisadvantage bonus, Deflecting Maneuver; and Stress Vents' damage to the attacker on
-# DuringActionAbilityOnAttacked, as an aura like Coalescing Darkness), the damage one hidden. Unverified: that both
-# trackers advance once per attack.
+# DuringActionAbilityOnAttacked, as an aura like Coalescing Darkness), the damage one hidden. The printed card has one
+# token for both: the damage bonus carries the two slots (one per attack on a summon, shown on the card), the
+# disadvantage bonus has none of its own and the plugin (GHSoultether) finishes it when the damage bonus finishes.
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -25,7 +26,6 @@ Data:
                     IsAura: True
                     AuraTargeting: All
                     AuraFilter: OwnSummon
-                    XPTracker: [0,0]
                 AnimOverload: RadialBuff
             BDamageAttacker:
                 AddActiveBonus:
@@ -83,6 +83,6 @@ Layout:
             ListLayout: "$GH2E_Soultether_03_B$"
             Layout: "$GH2E_Soultether_03_B$"
         - Row: "<size=20%> "
-        - XPTracker: BDisadvantage
+        - XPTracker: BDamageAttacker
         - Row: "<size=20%> "
         - Infuse: Dark

@@ -13,8 +13,9 @@ Range: 3
 OnAttackCondition: Muddle
 AttackAnimOverload: TargetedManaBolt
 # "At end of turn, grant one ally within Range 3: Shield 1": a summon's end-of-turn ability (Frosthaven's Repair Drone
-# heal, the 1st edition Healing Sprite), Shield 1 for the round on one ally. The summon's AI picks the ally ("you
-# control the grant abilities of this summon" is not reproduced: NOTES.md).
+# heal, the 1st edition Healing Sprite), Shield 1 for the round on one ally. "You control the grant abilities of this
+# summon": MiscVars GH2E_SummonerPicksTarget, the summoner's player picks the ally (plugin GHSoultether asks ally by
+# ally when there is more than one).
 SpecialAbilities:
     AShield:
         Shield: 1
@@ -23,4 +24,6 @@ SpecialAbilities:
         Filter: [Ally]
         ActiveBonus:
             Duration: Round
+        MiscVars:
+            GH2E_SummonerPicksTarget: True
         AnimOverload: TargetedBuff

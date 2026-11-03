@@ -14,20 +14,21 @@ Attack:
 Range: 1
 # "Whenever this summon kills an enemy while Dark is strong or waning, shuffle a Curse card into the monster attack
 # modifier deck": Frosthaven's kill trigger (Drifter Fortitude: DuringActionAbilityOnKill, the killer checked by its
-# class) with the element test; the curse = Curse on one enemy (Frosthaven's monsters share one modifier deck).
-# Unverified.
+# class) with the element test; the curse card goes straight into the monster attack modifier deck (MiscVars
+# GH2E_CurseMonsterDeck on a NullTargeting step, plugin GHSoultether; the deck's 10-curse limit holds), so it happens
+# even when no enemy is left on the map.
 OnSummonAbilities:
     ACurseOnKill:
         AutoTrigger: True
         Filter: Self
         SkipAnim: True
         AddActiveBonus:
-            Curse: True
-            Range: 99
-            Target: 1
-            IgnoreLOS: True
-            Filter: Enemy
+            NullTargeting: True
+            Filter: Self
+            AutoTrigger: True
             CanUndo: False
+            MiscVars:
+                GH2E_CurseMonsterDeck: True
             AnimOverload: CastNegative
         ActiveBonus:
             Duration: Persistent

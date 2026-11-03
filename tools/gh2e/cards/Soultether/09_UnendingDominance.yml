@@ -2,8 +2,8 @@
 # top: recover one lost card (Gloomhaven's RecoverLostCards), Invisible self, then "on the next summon action you
 # perform, any summons summoned by that action gain Invisible": a one-slot persistent trigger on your own ability end
 # (Frosthaven's Shattersong Feedback: DuringActionAbilityOnAbilityEnded, TriggerOnCaster), valid for a summon ability
-# that happened; it gives Invisible to up to two of your summons, picked by you (APPROXIMATION: the engine has no list
-# of "the summons that action summoned"; a summon action summons at most two). Unverified.
+# that happened; it gives Invisible to every summon that summon ability created (MiscVars GH2E_LastSummoned: the
+# plugin GHSoultether keeps the summons each summon ability created and makes them the only valid targets).
 # bottom: Move 2, then grant one of your summons a fixed Move 2 (StrengthIsBase).
 Discard: [Lost,Discard]
 Data:
@@ -22,10 +22,12 @@ Data:
                 AddActiveBonus:
                     Invisible: True
                     Range: 99
-                    Target: 2
+                    Target: -1
                     IgnoreLOS: True
                     Filter: OwnSummon
                     CanUndo: False
+                    MiscVars:
+                        GH2E_LastSummoned: True
                     AnimOverload: TargetedBuff
                 Filter: Self
                 AutoTrigger: True

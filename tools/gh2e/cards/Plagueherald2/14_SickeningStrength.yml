@@ -1,6 +1,9 @@
 # card: Sickening Strength
 # top: Strengthen up to 2 allies within range 5 that have Poison. "Each target may suffer Damage 2 to immediately play
-# one card from their hand": no engine shape for another player's extra card play: text only, NEEDS PLUGIN.
+# one card from their hand": MiscVars GH2E_SickeningStrength, the plugin (GHPlagueherald2e) asks each strengthened
+# character in turn; on yes that character performs the templates PH2_SickDamage (Damage 2 to itself) and PH2_SickPlay
+# (Frosthaven's SelectAndPlayCard from its own hand, top or bottom action; the card goes to its discard or lost pile by
+# its icons). The templates (MiscVars GH2E_Template, GHSawbones2e) never run as part of the card.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -12,7 +15,28 @@ Data:
                 Filter:
                     TargetType: Ally
                     TargetHasNegativeCondition: Poison
+                MiscVars:
+                    GH2E_SickeningStrength: True
                 AnimOverload: PositiveBuffTargeted
+            PH2_SickDamage:
+                Damage: 2
+                Filter: Self
+                AutoTrigger: True
+                CanUndo: False
+                MiscVars:
+                    GH2E_Template: True
+            PH2_SickPlay:
+                SelectAndPlayCard:
+                    CardPile: Hand
+                    Amount: 1
+                    MinRequiredCards: 0
+                Filter: Self
+                AutoTrigger: True
+                CanSkip: True
+                CanUndo: False
+                SkipAnim: True
+                MiscVars:
+                    GH2E_Template: True
     Bottom:
         Abilities:
             BMove:

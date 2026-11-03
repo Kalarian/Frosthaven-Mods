@@ -1,0 +1,17 @@
+Parser: Mastery
+ID: Elementalist2_MASTERY_2
+LocalisedName: Elementalist2_MASTERY_2_Name
+LocalisedDescription: Elementalist2_MASTERY_2_Desc
+PerkPoints: 1
+# Answered by the Frosthaven Mods plugin (GHElementalist2e.cs, FrosthavenMods_AllSixElementsInScenarios): the moment all
+# six elements are strong or waning is noted on the Elementalist (saved with the scenario); the scenarios are counted
+# per character in the campaign save, Value different scenarios.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_AllSixElementsInScenarios]
+        CharacterIDs:
+            ActorID: Elementalist2ID
+        Value: 3

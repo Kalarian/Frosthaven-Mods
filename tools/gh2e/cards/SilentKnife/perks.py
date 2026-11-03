@@ -59,7 +59,8 @@ PERKS = [
                 TargetingVars:
                     AddTilesInRange: ParentAbility.ActorsTargeted.Select(Tile)
                     AddValidActorsInRange: ParentAbility.ActorsTargeted"""}),
-    # needs the plugin (no Frosthaven hook on city events): a passive with its text only
+    # the plugin (GHSilentKnife.cs): Frosthaven's outpost events stand for city events (QUESTIONS.md A8); when one is
+    # completed she draws from her modifier deck as an Attack 4 and gains the damage as gold
     (1, "Fence", "Whenever you complete a city event, draw an attack modifier card as though you were performing an "
      "<sprite name=Attack> 4. Gain an amount of gold equal to the <sprite name=Damage> the attack would have dealt",
      {"Flags": "[Passive]"}),
@@ -69,9 +70,36 @@ PERKS = [
       "Abilities": _once_per_quest("PERK_SilentKnife_10_Desc", "Invisible", "            Invisible: True")}),
 ]
 
-# The two 2e masteries ("only attack flanked or isolated enemies, at least 10 attacks"; "end 3 scenarios with 12+
-# money tokens") fit no existing mastery tag: none written (NOTES.md)
-MASTERIES = []
+MASTERIES = [
+    ("Calculated Strikes", "For an entire scenario, only attack enemies that are adjacent to one of your allies or adjacent "
+     "to none of their allies, and perform at least 10 attacks",
+     """# Answered by the Frosthaven Mods plugin (GHSilentKnife.cs, FrosthavenMods_FlankedOrIsolatedOnly): every target she
+# attacks (checked as each attack happens) stands next to one of her allies or next to none of its own allies, and Value
+# attacks (one per target) or more.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_FlankedOrIsolatedOnly]
+        CharacterIDs:
+            ActorID: SilentKnifeID
+        Value: 10"""),
+    ("Deep Pockets", "End 3 scenarios with 12 or more money tokens",
+     """# Across scenarios: the Frosthaven Mods plugin (GHSilentKnife.cs) counts the scenarios she ends holding Amount or more
+# money tokens in synced campaign state (not necessarily in a row) and completes this mastery from the scenario result
+# at Value; this condition only shows the count.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_MoneyTokensAtEnd]
+        CharacterIDs:
+            ActorID: SilentKnifeID
+        Value: 3
+        Amount: 12"""),
+]
 
 NEW_CARDS = {
     # Pickpocket: +1, "gain one money token if this attack targeted an adjacent enemy" (Frosthaven's AMC_Resonance_P1

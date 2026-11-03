@@ -1,7 +1,8 @@
 # card: Freezing Nova
-# top: "the 4 enemies closest to you within 5 hexes": approximated as up to 4 targets within 5 hexes, picked by the player
-# (no Frosthaven targeting sorts by distance); no Range is printed, so the attack is treated as melee (as the 1st edition
-# Freezing Nova: TreatAsMelee), which also keeps ranged disadvantage off adjacent targets
+# top: "the 4 enemies closest to you within 5 hexes": Range 5 targeting (range rules, line of sight; QUESTIONS.md B)
+# narrowed by the plugin (GHSpellweaver2e.cs, MiscVars GH2E_ClosestTargets: 4) to the 4 enemies nearest by range,
+# every enemy tied at the cut-off staying a choice; no Range is printed, so the attack is treated as melee (as the 1st
+# edition Freezing Nova: TreatAsMelee), which also keeps ranged disadvantage off adjacent targets
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -16,6 +17,8 @@ Data:
                 Conditions: Immobilize
                 AnimOverload: RadialFreezingNova
                 MultiPassAttack: False
+                MiscVars:
+                    GH2E_ClosestTargets: 4
         Infuse: Ice
         XP: 1
     Bottom:

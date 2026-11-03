@@ -6,7 +6,7 @@ Race: Orchid
 Traits: [ Arcane, Educated, Resourceful ]
 Complexity: 3
 ElementalAffinities: [ Fire, Ice ]
-MasteryIDs: [ Spellweaver2_MASTERY_1 ]
+MasteryIDs: [ Spellweaver2_MASTERY_1, Spellweaver2_MASTERY_2 ]
 DefaultSkin: 1
 # PlayerLevel:  [  1,   2,   3,   4,   5,   6,   7,   8,   9 ]
 HealthTable: [ 6, 7, 8, 9, 10, 11, 12, 13, 14 ]

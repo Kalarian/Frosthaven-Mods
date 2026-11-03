@@ -2,9 +2,10 @@
 # top: grant one of your summons Attack +2, Wound, Poison (the 1st edition Otherworldly Rage top's shape).
 # bottom: "recover one card from your lost pile that has a summon action and immediately play that card to perform the
 # summon action" = Frosthaven's HIVE Recall top (SelectAndPlayCard from the lost pile, summon actions only, BlockXP);
-# "any summons summoned by that action gain Ward, Invisible, and Strengthen" = Ward, Invisible, Strengthen on up to two
-# of your summons, picked by you (APPROXIMATION: the engine has no list of the summons just summoned). Then Invisible
-# self. Unverified: which pile the replayed card ends in.
+# "any summons summoned by that action gain Ward, Invisible, and Strengthen" = Ward, Invisible, Strengthen on exactly
+# the summons the replayed card's summon ability created (MiscVars GH2E_LastSummoned / GH2E_ResetLastSummoned, plugin
+# GHSoultether). Then Invisible self. The recovered card is played normally (QUESTIONS.md C): a summon card stays in
+# the active area with its summon.
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -32,13 +33,17 @@ Data:
                 Filter: Self
                 MiscVars:
                     IsActionValid: Action.Abilities.Any(obj.AbilityType == CAbility.EAbilityType.Summon)
+                    GH2E_ResetLastSummoned: True
                 AnimOverload: PowerUp
             BSummonsBuff:
                 Ward: True
                 Conditions: [Invisible, Strengthen]
                 Range: 99
-                Target: 2
+                Target: -1
+                IgnoreLOS: True
                 Filter: OwnSummon
+                MiscVars:
+                    GH2E_LastSummoned: True
                 AnimOverload: TargetedBuff
             BInvisible:
                 Invisible:
