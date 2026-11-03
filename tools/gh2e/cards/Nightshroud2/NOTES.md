@@ -60,21 +60,21 @@ list text `GH2E_Nightshroud2_26_B`) and Swallowed by Night bottom (a persistent 
 - **01 Spirit of the Night / 07 Silent Force / 24 Concealed Dominance**: area conditions (the 1st edition Soothsinger's
   Singing Arrow / Provoke Terror shape, melee area from G). 24's consume swaps the AreaEffect (the 1st edition
   Concealed Dominance override). Coordinates are the sheet's (y up, as the Bruiser's areas).
-- **02 Slice Through** top: one-use kill trigger (XPTracker [0] = "discard this card"); it fires on an enemy death
-  during an action ability, possibly not only your own kills (unverified). Bottom: consume Teleport2 4 first, then the
-  1st edition Swap (first target you, second an ally) at Range 8: "within eight hexes" ignores line of sight, a range
-  doesn't (APPROXIMATION).
+- **02 Slice Through** top: one-use kill trigger (XPTracker [0] = "discard this card"); the bonus Vars accept only a
+  death caused by your own ability (TriggerAbility.TargetingActor == the caster). Bottom: consume Teleport2 4 first, then
+  the 1st edition Swap (first target you, second an ally) at Range 8 with `IgnoreLOS` ("within eight hexes").
 - **03 Eyes of the Night / 22 Dark Cloud** reveal: Shattersong's `CustomAbility.ShowTopMonsterCards(Targets)` on all
   enemies within range (NullTargeting, Target -1, `PerformVars: ApplyToActors`). Unverified on a top-level ability
   (Frosthaven uses it in sub-abilities); with no enemy in range it does nothing (the printed rule says the same).
 - **04 Armor of the Night** top: PreventDamage 99 + PreventFirstDamage on one ally in range 3, one use (persistent):
   the active-bonus icon on the ally stands for the character token. Unverified: PreventFirstDamage placed on an ally.
-- **05 Swallowed by Fear** top: a Kill on the attack's target when it is alive with 2 or fewer HP (normal and elite:
-  bosses excluded, as the 1st edition's kills).
+- **05 Swallowed by Fear** top: a Kill on the attack's target when it is alive with 2 or fewer HP (normal, elite and
+  boss: the card names no exception, user decision A9).
 - **06 Dancing Shadows** top: the Geminate Voice of Salvation enemy aura (Attack -1, range 2, round).
 - **08 Black Knives** top: "+1 Attack on the second attack if the first kills": text only, **NEEDS PLUGIN**.
 - **09 Enervating Wound** bottom: a one-use death aura on enemies within range 2; the Heal 2 goes to
-  `TriggerAbility.TargetingActor` (the killer, you or an ally). Unverified that TriggerAbility is the killing ability.
+  `TriggerAbility.TargetingActor` (the killer, you or an ally; TriggerAbility is the cause of death in
+  SetupTriggerContext). The bonus Vars let a death spend the card only when that killer is missing hit points.
 - **10 Nightfall** top: Muddle + Curse when the pushed target **ends** the push on a Tear (a Tear passed through isn't
   seen); the hazardous terrain damage is text only (**NEEDS PLUGIN**: a scenario-level value and a push-path test).
 - **11 Empowering Void** top: Deepwraith Crippling Terror's aura (BasedOnVarsCondition, distance to
@@ -83,20 +83,21 @@ list text `GH2E_Nightshroud2_26_B`) and Swallowed by Night bottom (a persistent 
   Nightshroud2ID: the 1st edition Doomstalker's doom ability without the doom wrapper), one use. Unverified: an Attack
   bonus with an Enemy filter is placed on the enemy, not performed as an attack; fallback = the doom form (AddDoom).
   Bottom: Teleport must end on a Tear, with its printed square mark (as Frosthaven's Deepwraith Skewer the Flesh).
-- **13 Unseen Dread** top: Banner Spear Set for the Charge's enter-range aura (range 2, Wound); consume = a round
+- **13 Unseen Dread** top: Banner Spear Set for the Charge's moved aura (range 2, Wound) without its
+  NotInRangeToInRangeMove flag (a move inside the zone counts too: user decision C); consume = a round
   EndRoundAbility Damage 1 on every wounded enemy (Frozen in Fear targeting). Unverified that a round-duration
   EndRoundAbility fires before the round bonus expires.
 - **14 Shroud in Shade**: Swift Pivot's one-use round prevent; disadvantage on you, consume adds an ally aura (range 2).
 - **15 Terror Blade** top: Damage 2 on the target when no figure allied to it is adjacent after the push (Crashing Tide
-  Powerful Pincer's adjacency test). Bottom: two Tears in range 3 (non-adjacency not enforced), Teleport2 3 onto a Tear
-  (any Tear within 3, not only the two new ones), then "double the attack value" = the 1st edition Empowering Void's
+  Powerful Pincer's adjacency test). Bottom: two Tears in range 3, the second from a custom tile list that leaves out the
+  first Tear's hex and its neighbours; Teleport2 3 onto a Tear (with the two-Tear limit only the new ones remain), then "double the attack value" = the 1st edition Empowering Void's
   scalar buff (Attack 2, AbilityStrengthIsScalar) with two XP slots.
 - **16 Prepare for the Kill** top: no trigger on removing a shadow exists: a once-only DuringTurnAbility toggle (the
   1st edition Wings of the Night fix shape): Strengthen + Damage 2 on adjacent enemies. **NEEDS PLUGIN** for the
   trigger (fire it when the Nightshroud removes a Tear).
 - **17 Lurking Ruin** top: advantage aura vs poisoned targets (Barbaric Yawp + Crippling Terror's condition test).
-  Bottom: Heal 1 for you/allies after each attack ability (DuringActionAbilityOnAttackAbilityFinished aura);
-  APPROXIMATION: the "enemy within range 2 of you" test is left out.
+  Bottom: Heal 1 for you/allies after each attack ability (DuringActionAbilityOnAttackAbilityFinished aura) whose
+  targets include an enemy within 2 hexes of you (bonus Vars on TriggerAbility.ActorsTargeted).
 - **18 Cursed Blades / 23 Messenger of Death** bottom: the consume gives a separate attack (no "+"). 23 top: plain Move
   then its own Attack (Trample fix).
 - **19 Into the Night** top: the stun's targets gain Invisible (sub-ability, UseParentTargets, Filter Enemy).
@@ -111,6 +112,13 @@ list text `GH2E_Nightshroud2_26_B`) and Swallowed by Night bottom (a persistent 
   (AUTHORING.md, Safeguard; plugin GHSafeguard.cs): a Ward carrier tagged `GH2ESafeguard`, which the plugin turns into
   the Safeguard token (a status-row icon; it blocks the next negative condition by itself, then ends; no stacking; the
   card is not kept active). The carrier holds the printed diamond+ mark.
+- **21 Claws of the Night** top: the delayed Attack 5 at the **end** of your next turn (EndTurnAbility; the bonus
+  Requirements skip the turn it is played, `CheckingBonus.InternalRoundNumber > 0`, and any turn you are Invisible).
+  Bottom: Slice Through's kill trigger for the round, one use, your kills only.
+- **22 Dark Cloud** bottom: Safeguard = the AUTHORING recipe (GenericOnNegativeCondition + PreventCondition,
+  TriggerOnCaster, ValidateIsCaster, one prevention via XPTracker [0], list text `GH2E_SAFEGUARD`): the data stand-in
+  until the plugin has a real Safeguard. **Mark**: the printed diamond+ on Safeguard is dropped (the bonus has no
+  condition value to enhance).
 - **25 Prey on the Weak** top: a second Attack 4 on the first attack's target when 2 x HP <= max HP (= HP <= half max
   rounded down), its XP 1 as AbilityXP.
 - **26 Shadowstrike** top: area damage = NullTargeting area + Damage sub-ability on `ActorsOnRedHexes` (Banner Spear
@@ -134,7 +142,7 @@ list text `GH2E_Nightshroud2_26_B`) and Swallowed by Night bottom (a persistent 
 - 5 Lingering Doom: new `AMC_GH2E_Nightshroud2_KillCurse_P1` (+1, AddModifiersToMonsterDeck Curse when
   `TargetActor.IsDead`). Unverified: if the modifier's ability is checked before the damage lands, the curse never comes.
 - 7 Torn Veil: new `AMC_GH2E_Nightshroud2_Tear_P0` (+0, a shadow adjacent to `TargetActor`). Unverified context var.
-- 9 Restful Night: the Elementalist's long-rest infusion, Dark.
+- 9 Restful Night: the Elementalist's long-rest infusion, Dark, offered (no AutoTrigger) so it may be skipped.
 - 10 Rift Opener (linked, 2): gh_crossover's once-each-scenario toggle with a CreateShadow range 1.
 - 11 Hexed Retribution (linked, 3): the 1st edition Baneful Hex's `DamageOnCurseModApplied` Damage 3 bonus for the
   whole scenario (a drawn curse always zeroes the attack, so this matches the rule).

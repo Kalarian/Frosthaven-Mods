@@ -21,8 +21,28 @@ PERKS = [
     (1, "Unfazed", 'Ignore scenario effects and add one <sprite name="+1"> <sprite name=Rolling>',
      {"CardsToAdd": "[AMC_P1_R]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
     # revealing monster ability cards has no Frosthaven ability: text only (NEEDS PLUGIN, NOTES.md)
+    # Frosthaven's Brummix pet (372): a one-use StartRoundAbility whose NullTargeting calls ShowTopMonsterCards() (every
+    # monster class in play), placed at scenario start, so it fires at the start of round 1
     (1, "Foresight", "At the start of each scenario, reveal the top card of each monster ability card deck in the scenario",
-     {"Flags": "[Passive]"}),
+     {"Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]", "Abilities": """\
+    AForesight:
+        AddActiveBonus:
+            AutoTrigger: True
+            NullTargeting: True
+            Filter: Self
+            MiscVars:
+                DontCopy: True
+            PerformVars:
+                ApplyToActors:
+                    ShowMonsterCards: CustomAbility.ShowTopMonsterCards()
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: StartRoundAbility
+            Hidden: True
+            XPTracker: [0]"""}),
     # Frosthaven's rest perks (ExecuteAbilitiesAfterLongRest / ...ShortRest, Perk_Boneshaper_10's two rest triggers in
     # one perk) with SelectAndPlayCard from the hand (Blinkblade Reverse the Flow), Doom actions only. Unverified: a card
     # played from the hand during a rest (NOTES.md)

@@ -2,9 +2,9 @@
 # rewritten from tools/gh2e/sheets/SilentKnife.json (Xipe's file 99109 held Cull the Weak's top)
 # top: negate the damage of every attack this round = a round PreventDamage with no use track, attack sources only
 # (CPreventDamageActiveBonus prevents every time while it lasts; the 1e Trickster's Reversal bottom adds a one-slot
-# track for "the next"). The attacks' added effects are not negated (no Frosthaven shape) - NEEDS PLUGIN.
-# "after each attack ability targeting you: XP 1 and Attack 2 on the attacker" = a round Retaliate 2 with XP 1 per
-# trigger (ProcXP, Gloomhaven's Eye for an Eye) and no range limit - an approximation (damage, no modifier draw).
+# track for "the next"); the added effects: a round ImmunityTo the conditions and push/pull (this also blocks those
+# from non-attack sources this round). "After each attack ability targeting you: XP 1 and Attack 2 on the attacker" =
+# Metal Mosaic Stress Vents' on-attacked reaction, a real melee attack (modifier draw, shields) on an adjacent attacker.
 # bottom: Move 4, then Frosthaven's "advantage on all attacks this round" (Drifter Accurate Strikes bottom).
 Discard: [Lost,Discard]
 Data:
@@ -16,14 +16,45 @@ Data:
                 AnimOverload: PowerUp
                 ActiveBonus:
                     Duration: Round
-            TRetaliate:
-                Retaliate: 2
-                RetaliateRange: 99
+            # "...and added effects": the attacks' conditions and forced moves can't land this round (Frosthaven's
+            # round ImmunityTo: Crashing Tide Dug In, Frozen Fist Freezing Shell)
+            TImmune:
+                ImmunityTo: [Poison, Wound, Immobilize, Disarm, Stun, Muddle, Impair, Bane, Brittle, Curse, Push, Pull]
+                Filter: Self
+                AnimOverload: None
+                ActiveBonus:
+                    Duration: Round
+                    Hidden: True
+            # "immediately after each attack ability targeting you this round, gain XP 1 and perform: Attack 2, target
+            # the enemy that attacked you": Metal Mosaic Stress Vents' on-attacked reaction (an attack stacked next to
+            # the monster's, aimed at TriggerActor) with XP 1 per trigger. No range printed: a melee attack (user
+            # decision B), so only an adjacent attacker can be hit (the XP comes either way).
+            TCounter:
+                AddActiveBonus:
+                    Attack: 2
+                    Range: 1
+                    Targeting: Custom
+                    TargetingVars:
+                        AddValidActorInRange: AdjacentAttacker
+                        AddActorToTarget: AdjacentAttacker
+                    IgnoreStun: True
+                    CanUndo: False
+                    CanSkip: True
+                    AnimOverload: MeleeAttack
+                    MiscVars:
+                        InterruptCurrentAbility: True
+                        StackNextToCurrent: True
+                    Vars:
+                        CanClearTargets: False
                 Filter: Self
                 AnimOverload: PowerUp
                 ActiveBonus:
                     Duration: Round
+                    Behaviour: DuringActionAbilityOnAttacked
                     ProcXP: 1
+                    Vars:
+                        EnemyAttacker: TriggerActor
+                        AdjacentAttacker: TriggerActor.IsInRangeOf(TriggerTarget, 1) && TriggerActor || null
     Bottom:
         Abilities:
             BMove:
@@ -46,8 +77,8 @@ Layout:
             Layout: "$GH2E_SilentKnife_21_T$"
         - Row: "<size=50%> "
         - Active:
-            Ability: TRetaliate
-            Icon: Positive_Retaliate_Range
+            Ability: TCounter
+            Icon: Positive_Retaliate
             ListLayout: "$GH2E_SilentKnife_21_T2$"
             Layout: "$GH2E_SilentKnife_21_T2$"
         - Row: "<size=50%> "

@@ -32,11 +32,11 @@ Data:
             BMove:
                 Move:
                     Amount: 3
-                    Enhancements: 1
+                    SquareEnhancements: 1
             BAttack:
                 Attack:
                     Amount: 2
-                    Enhancements: 1
+                    SquareEnhancements: 1
                 StartAbilityRequirements:
                     Type: ThisAbility
                     HPPercentOfMax: "<= 50%"

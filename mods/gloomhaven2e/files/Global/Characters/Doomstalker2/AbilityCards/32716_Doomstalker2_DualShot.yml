@@ -7,8 +7,9 @@ Initiative: 52
 # card: Dual Shot
 # top: Attack 2 and Target 2 with square marks as printed.
 # bottom: Doom: advantage on your attacks (the 1st edition Singular Focus doom, filtered to this class). "When this enemy
-# dies, shuffle one Curse into the monster attack modifier deck": an on-death Curse on one enemy anywhere (a cursed
-# monster's curse goes into the monster deck in Frosthaven); nothing happens when no enemy is left (approximation).
+# dies, shuffle one Curse into the monster attack modifier deck": on death, a self NullTargeting whose end calls the
+# game's own CustomAbility.AddCurseModifiersToEnemyMonsterDecks(1) (Pain Conduit Redemption; the Nightshroud's Lingering
+# Doom modifier) - no target to pick, works with no enemy left.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -38,19 +39,23 @@ Data:
                                         PlayerClasses: Doomstalker2ID
                             BDoomOnDeath:
                                 AddActiveBonus:
-                                    Curse: True
-                                    Target: 1
-                                    Range: 99
-                                    IgnoreLOS: True
-                                    Filter: Enemy
+                                    NullTargeting: True
+                                    Filter: Self
+                                    AutoTrigger: True
+                                    SkipAnim: True
+                                    PerformVars:
+                                        OnAbilityEnded:
+                                            AddCurse: CustomAbility.AddCurseModifiersToEnemyMonsterDecks(1)
                                 ActiveBonus:
                                     Behaviour: DuringActionAbilityOnDeath
                                     TriggerOnCaster: True
                 Filter:
                     TargetType: Enemy
-                    EnemyType: [Normal, Elite, Boss]
+                    EnemyType: [Normal, Elite, Boss, Object]
                 Target: 1
                 Targeting: All
+                MiscVars:
+                    CheckLOS: True
                 AnimOverload: DoomTargetAlt
 Layout:
     Top:

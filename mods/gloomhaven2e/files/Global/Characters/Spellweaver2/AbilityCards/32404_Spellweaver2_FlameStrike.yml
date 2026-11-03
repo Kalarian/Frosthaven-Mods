@@ -23,7 +23,7 @@ Data:
             BAttack:
                 Attack:
                     Amount: 1
-                    DiamondEnhancements: 1
+                    SquareEnhancements: 1
                 Range:
                     Amount: 3
                     SquareEnhancements: 1

@@ -57,11 +57,14 @@ Data:
                                     Restriction: OncePerRound
                                     Filter:
                                         ActorType: Summon
+                                        Summoner: [Doomstalker2ID]   # "your summons": the Doomstalker's own (CAbilityFilter.CheckSummoner)
                 Filter:
                     TargetType: Enemy
-                    EnemyType: [Normal, Elite, Boss]
+                    EnemyType: [Normal, Elite, Boss, Object]
                 Target: 1
                 Targeting: All
+                MiscVars:
+                    CheckLOS: True
                 AnimOverload: DoomTargetAlt
 Layout:
     Top:

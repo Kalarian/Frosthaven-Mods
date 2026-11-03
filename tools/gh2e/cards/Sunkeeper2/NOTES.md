@@ -16,8 +16,9 @@ Where a mark's shape differs from the converter's default (Attack/Heal/Move with
 - **07 Brilliant Prayer / 25 Bright Aegis**: the stack-with-red-X icon = `Permanently Lost` (2e rulebook p.34, same as
   Frosthaven).
 - **08 Soothing Light** top consume: "the target may recover one level 1 card" is a recover of its own (level 1 only:
-  `Vars: CardLevel: 1`, as Frosthaven's Memory Drive / Stamina Potion) on one figure within range 2; the player picks the
-  healed figure. Approximation (not tied to the heal's target). The CardLevel filter on an ally's recover is unverified.
+  `Vars: CardLevel: 1`, as Frosthaven's Memory Drive / Stamina Potion) aimed at the heal's target
+  (`TargetTargetedByCasterPreviousAbility` + `SpecificAbilityNames: [THeal]`). The CardLevel filter on an ally's recover
+  is unverified.
 - **09 Purifying Aura** top: "attacks performed by an adjacent enemy" = the 1st edition's melee filter
   (`AttackType: Melee`): a ranged attack from an adjacent enemy doesn't trigger it. Approximation.
 - **10 Protective Blessing** bottom: the 1st edition's damage-negation aura, unchanged.
@@ -35,14 +36,14 @@ Where a mark's shape differs from the converter's default (Attack/Heal/Move with
   the override's `Target: 2` adds or sets.
 - **15 Holy Defense** bottom consume: "Heal 1, target all, range 1" includes you (2e p.19: positive "all" = allies or
   yourself).
-- **16 Mobilizing Axiom** bottom: "grant all allies within range 5 and self: Move 4": the allies' move as a grant (it
-  carries the enhancement), then your own plain Move 4 after theirs (no ControlActor on yourself; moving last keeps
-  allies in range). Your move doesn't take the enhancement. Approximation.
+- **16 Mobilizing Axiom** bottom: "grant all allies within range 5 and self: Move 4": one ControlActor with
+  `Filter: [Ally, Self]` (Shattersong Lifting Voice grants to self this way): the enhanced Move 4 serves everyone. Bench
+  the self grant and the order of the moves.
 - **17 Engulfing Radiance** top: "Heal 5, target all" with no range = you and all allies anywhere, as the 1st edition
   card. Rejected the "melee range" reading (docs/gh2e/groups.md, open question) because the same class prints "all,
   range 1" explicitly on Holy Defense.
-- **21 Arresting March** top consume: "Heal 3, target the target of the grant ability" is a heal of its own on one ally
-  within the grant's range 3 (the player picks the granted ally). Approximation.
+- **21 Arresting March** top consume: "Heal 3, target the target of the grant ability": a heal after the grant aimed at
+  the granted ally (`TargetTargetedByCasterPreviousAbility` + `SpecificAbilityNames: [TAlly]`).
 - **22 Path of Glory** bottom: "Strengthen, Bless all allies moved through": a plain Move, then its own condition ability
   with `AllTargetsOnMovePath` + `Targeting: All` (the Trample fix in CARD_FIXES), not the 1st edition's conditions on the
   move. Unverified for a condition ability (the Trample fix was proven on an attack).
@@ -57,8 +58,8 @@ Where a mark's shape differs from the converter's default (Attack/Heal/Move with
   attacks a drawn null counts as 2x (GameState.ChangeModifierValues). "During one of your attack abilities" is read as
   "during the action": a Light consume on another ability of the same half counts too.
 - **25 Bright Aegis** bottom consume: "that ally may immediately play up to two cards, one top and one bottom action" =
-  the 1st edition's verified `ExtraTurn: BothActions` (Unwavering Mandate) on one adjacent ally (the player picks the ally
-  who recovered). Its `PreviewEffectText` points at `FHS_GH2E_Sunkeeper2_25_B` (a key the pack writes).
+  the 1st edition's verified `ExtraTurn: BothActions` (Unwavering Mandate) on the adjacent ally who recovered the card
+  (`TargetTargetedByCasterPreviousAbility` + `SpecificAbilityNames: [BRecover]`). Its `PreviewEffectText` points at `FHS_GH2E_Sunkeeper2_25_B` (a key the pack writes).
 - **26 Illuminate the Target** top: the designated hex = a melee attack on an adjacent enemy. "Strengthen all allies
   adjacent to you or the designated hex" = a Strengthen on allies adjacent to you, plus the attack's sub-ability on
   allies adjacent to its target (`AllTargetsAdjacentToParentTargets` + `TreatAsNonSubAbility`, as Care Package / Virulent
@@ -81,8 +82,9 @@ Where a mark's shape differs from the converter's default (Attack/Heal/Move with
 - 4 Mending Light: new `AMC_GH2E_Sunkeeper2_Heal1Range3_P1` (+1, Heal 1 on you or an ally within range 3).
 - 5 Second Wind: new `AMC_GH2E_Sunkeeper2_Recover1_M1` (-1, recover one level 1 discarded card, you or an adjacent
   ally). Unverified: a card-picking recover in the middle of an attack's modifier draw. Check on the bench.
-- 9 Vigilant Entry (linked): Frosthaven's room-revealed perk (Perk_Snowdancer_09). It fires whenever any room is
-  revealed, not only when you open a door on your turn. Approximation.
+- 9 Vigilant Entry (linked): Frosthaven's own "when you open a door" shape (Perk_Shattersong_11: GenericRoomRevealed,
+  TriggerOnCaster, OncePerRound), one bonus for the round Shield 1 and one for the round Retaliate 1. Bench that it
+  fires only for your own door and not at the scenario start.
 - 10 Restful Dawn: the Elementalist's long-rest infusion, Light only; "may" is automatic.
 - 11 Shielding Light (linked): text only. The plugin answers the 1st edition's (perk ID Sunkeeper10); this one is
   `Sunkeeper211`.
@@ -111,3 +113,4 @@ packcheck 0 problems / 0 warnings, rulecheck 45 ok, no gh_port warnings, no miss
 ## 2026-11-02: modifier abilities and Safeguard
 
 - Perk Second Wind (2026-11-02, supersedes the line above): `AMC_GH2E_Sunkeeper2_Recover1_M1` with a plain skippable RecoverDiscardedCards (run after the attack by GHModifierAbilities.cs, no Choose). Bench it.
+- 21 Arresting March top: the consume's Null placeholder was moved before the grant on 2026-11-01 (after it, switching Light on stopped the game: RefreshConsumeBar NullReference); since the plugin's GHConsumeOnNull guard loads (423dade) it is back after the grant, as printed. Bench once (switch Light on at the step).

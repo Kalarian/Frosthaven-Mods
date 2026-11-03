@@ -65,7 +65,9 @@ Data:
                 Target: 6
                 Targeting: Range
                 AnimOverload: MeleeSmashRockyEnd
-            BWard:
+            # one Ward per destroyed obstacle, each to one ally adjacent to THAT obstacle's hex (Meteor top's
+            # counter gate; the k-th step reads the k-th destroyed tile). Up to 6 obstacles (range 3).
+            BWard1:
                 Ward: True
                 Filter: Ally
                 Target: 1
@@ -73,18 +75,94 @@ Data:
                 StartAbilityRequirements:
                     Type: ThisAbility
                     Vars:
-                        ValidateDestroyed: CPhaseAction.ObstaclesDestroyedThisAction > 0
-                StatIsBasedOnX:
-                    Target:
-                        BasedOn: Vars
-                        Vars:
-                            Value: CPhaseAction.ObstaclesDestroyedThisAction
+                        ValidateDestroyed: CPhaseAction.ObstaclesDestroyedThisAction >= 1
                 Targeting: Custom
                 Vars:
                     DestroyAbility: CustomAbility.FindAbilityInPhaseByName("BDestroy")
+                    ObstacleTile: DestroyAbility.TilesSelected[0]
                 TargetingVars:
-                    AddTilesInRange: CustomAbility.GetAdjacentTiles(DestroyAbility.TilesSelected)
-                    AddValidActorsInRange: CustomAbility.GetActorsOnTiles(CustomAbility.GetAdjacentTiles(DestroyAbility.TilesSelected))
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(ObstacleTile)
+                    AddValidActorsInRange: CustomAbility.GetActorsOnTiles(CustomAbility.GetAdjacentTiles(ObstacleTile))
+            BWard2:
+                Ward: True
+                Filter: Ally
+                Target: 1
+                AnimOverload: PowerUp
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateDestroyed: CPhaseAction.ObstaclesDestroyedThisAction >= 2
+                Targeting: Custom
+                Vars:
+                    DestroyAbility: CustomAbility.FindAbilityInPhaseByName("BDestroy")
+                    ObstacleTile: DestroyAbility.TilesSelected[1]
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(ObstacleTile)
+                    AddValidActorsInRange: CustomAbility.GetActorsOnTiles(CustomAbility.GetAdjacentTiles(ObstacleTile))
+            BWard3:
+                Ward: True
+                Filter: Ally
+                Target: 1
+                AnimOverload: PowerUp
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateDestroyed: CPhaseAction.ObstaclesDestroyedThisAction >= 3
+                Targeting: Custom
+                Vars:
+                    DestroyAbility: CustomAbility.FindAbilityInPhaseByName("BDestroy")
+                    ObstacleTile: DestroyAbility.TilesSelected[2]
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(ObstacleTile)
+                    AddValidActorsInRange: CustomAbility.GetActorsOnTiles(CustomAbility.GetAdjacentTiles(ObstacleTile))
+            BWard4:
+                Ward: True
+                Filter: Ally
+                Target: 1
+                AnimOverload: PowerUp
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateDestroyed: CPhaseAction.ObstaclesDestroyedThisAction >= 4
+                Targeting: Custom
+                Vars:
+                    DestroyAbility: CustomAbility.FindAbilityInPhaseByName("BDestroy")
+                    ObstacleTile: DestroyAbility.TilesSelected[3]
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(ObstacleTile)
+                    AddValidActorsInRange: CustomAbility.GetActorsOnTiles(CustomAbility.GetAdjacentTiles(ObstacleTile))
+            BWard5:
+                Ward: True
+                Filter: Ally
+                Target: 1
+                AnimOverload: PowerUp
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateDestroyed: CPhaseAction.ObstaclesDestroyedThisAction >= 5
+                Targeting: Custom
+                Vars:
+                    DestroyAbility: CustomAbility.FindAbilityInPhaseByName("BDestroy")
+                    ObstacleTile: DestroyAbility.TilesSelected[4]
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(ObstacleTile)
+                    AddValidActorsInRange: CustomAbility.GetActorsOnTiles(CustomAbility.GetAdjacentTiles(ObstacleTile))
+            BWard6:
+                Ward: True
+                Filter: Ally
+                Target: 1
+                AnimOverload: PowerUp
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateDestroyed: CPhaseAction.ObstaclesDestroyedThisAction >= 6
+                Targeting: Custom
+                Vars:
+                    DestroyAbility: CustomAbility.FindAbilityInPhaseByName("BDestroy")
+                    ObstacleTile: DestroyAbility.TilesSelected[5]
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(ObstacleTile)
+                    AddValidActorsInRange: CustomAbility.GetActorsOnTiles(CustomAbility.GetAdjacentTiles(ObstacleTile))
 Layout:
     Top:
         - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"

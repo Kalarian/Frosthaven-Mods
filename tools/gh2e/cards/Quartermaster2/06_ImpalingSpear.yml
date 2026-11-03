@@ -1,7 +1,7 @@
 # card: Impaling Spear
 # top: Attack 3 [square], grey + 2 red in a line, no hex mark; XP 1.
-# bottom: "Attack 1, target 1 enemy within 2 hexes", Wound, no marks: Range 2 with TreatAsMelee (2e: an attack with
-#   no range value is melee; the reach is a targeting limit). Rules question noted in NOTES.md.
+# bottom: "Attack 1, target 1 enemy within 2 hexes", Wound, no marks: a ranged attack, Range 2 ("within N hexes"
+#   follows range rules, rulebook p21: user decision B).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -19,7 +19,6 @@ Data:
             BAttack:
                 Attack: 1
                 Range: 2
-                TreatAsMelee: True
                 Conditions: Wound
 Layout:
     Top:

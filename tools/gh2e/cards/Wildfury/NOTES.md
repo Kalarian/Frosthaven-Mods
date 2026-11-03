@@ -70,13 +70,15 @@ gave most shapes. Layouts are plain Gloomhaven style (gh_layout redraws them). E
   a mismatched filter simply drops it (intended) or asks for another target.
 - 06 Gnaw: Loot 1 performed by the Bear (1st edition Soaring Ally's commanded loot). "The Wildfury gains all looted
   tokens" is text; the engine credits a summon's loot to its summoner (TEST).
-- 07 Disorienting Roar top: **APPROXIMATION.** Muddle all within 2 of the Bear, then a round -1 Attack aura (BuffAttack
-  -1, `AuraFilter [Enemy]`, range 2) on the Bear without the Muddle check and following the Bear. **Untested** enemy
+- 07 Disorienting Roar top: Muddle all within 2 of the Bear, then a round -1 Attack aura (`AuraFilter [Enemy]`, range 2)
+  on the Bear, applying only to a muddled attacker (AttackEffect `BasedOnVarsCondition` -1 with the holder's Muddle
+  test, Deepwraith Crippling Terror); it follows the Bear. **Untested** enemy
   BuffAttack aura from a commanded ability (fallback: text only). Bottom: invocation Move 3, Jump.
 - 09 Spirit Swap top: the teleport is the Wildfury's own `Teleport2: 99` limited to hexes adjacent to the Bear
   (`MiscVars IsValidTeleportTile: Bear.GetDistanceTo(tile) == 1`, `Bear` from `AllHeroSummons.Find(obj.Class.ID ==
-  "WildfuryBearID")`: HIVE Recall's / Infuser Formless Bladestorm's / Boneshaper's expressions combined). **APPROXIMATION**:
-  it comes after the Bear's whole action (the card: between its move and attack). **Untested expression.** Bottom:
+  "WildfuryBearID")`: HIVE Recall's / Infuser Formless Bladestorm's / Boneshaper's expressions combined), between the
+  Bear's commanded move and attack (the command is two ControlActor steps around it, as printed). **Untested
+  expression.** Bottom:
   the 1st edition Swap with `EnemyType [Normal, Elite]`.
 - 10 Invocation of Endurance: invocation Heal 2 on the Bear. Bottom Move 3 [square] + Jump (Move map `Jump: True`).
 - 11 Invocation of Spirit top: **APPROXIMATION / NEEDS PLUGIN.** "Attack 2 as if you occupied the Bear's hex": the
@@ -128,11 +130,13 @@ All 10 perks from the "Vermling Wildfury" sheet, 18 checks; names made up in the
   target 1 ally" is left out (no attack-modifier shape places a bonus on another figure).
 - 8 "Thick Hide": **NEEDS PLUGIN**, text only (enemy 2x against the Bear treated as +0).
 - 9 "Call of the Wild": once each scenario toggle (gh_crossover `_once_per_quest`'s text) commanding the Bear Move 4
-  (ControlActor on the Bear). The "teleport next to the Bear if it left your side" rider is left out (NEEDS PLUGIN).
+  (ControlActor on the Bear; `TargetType: [Companion]`: an OwnSummon filter never matched the Bear, also in perk 10). The "teleport next to the Bear if it left your side" rider is left out (NEEDS PLUGIN).
 - 10 "Life Bond" (linked, Cost 2): **APPROXIMATION.** After each long rest (ExecuteAbilitiesAfterLongRest), consume Air
   or Earth (split shape above) to suffer 2 damage and Command the Bear Heal 2. X fixed at 2 (the sheet: any X >= 1),
   once (the sheet: start or end of the rest). **Untested.**
-- Masteries: none written (MASTERIES = []); neither has an existing pattern.
+- Masteries: mastery 1 (Air or Earth infused or consumed on every turn) = the plugin's ElementEveryTurn tag with
+  `Elements: [Air, Earth]` (the 1st edition Sunkeeper's mastery 2). Mastery 2 (kills by Command attacks of 7+) has no
+  tag.
 
 ## Shared changes wanted
 
@@ -148,8 +152,7 @@ All 10 perks from the "Vermling Wildfury" sheet, 18 checks; names made up in the
 7. **Plugin: Safeguard condition** (replaces the data stand-in on Nature's Gift, Ancient Ward, Spirit Sigil and perk 7's
    card, which is now a plain +1).
 8. **Plugin: perk 8** (enemy 2x against the Bear = +0) and **perk 9's teleport rider**; perk 10's free choice of X.
-9. **Masteries**: a per-turn "infused or consumed Air/Earth on every turn" tag, and a "kills by Command attacks of
-   printed value 7+" tag (counting card bonuses, before modifiers).
+9. **Masteries**: a "kills by Command attacks of printed value 7+" tag (counting card bonuses, before modifiers).
 10. gh_port prints "10 perks and 4 masteries" for this class: the count includes the four new attack-modifier files
     (cosmetic, as the Bruiser noted).
 11. Summon models: gh_port reports "models copied: none" for every 2e summon (by design for edition 2, which borrows the

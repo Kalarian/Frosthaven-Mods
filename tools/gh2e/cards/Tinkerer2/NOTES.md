@@ -44,19 +44,20 @@ should be in the first bench.
 
 - 01 Potent Potables bottom: Backup Ammunition's BuffTarget shape (`ValidAbilityType: Heal`, slots [1,1,1,0]); Xipe's
   `IsSingleTargetBonus` dropped (in Frosthaven it means "the bonus hits one target", not "single-target abilities
-  only"). Approximation: a multi-target heal (Restorative Mist bottom) would also take a slot and +1 target.
+  only"); bonus Vars `ValidateIsSingleTarget: TriggerAbility.OriginalTargetCount == 1` (HIVE Aimed Assault) keep
+  multi-target heals (Restorative Mist bottom, Crank Bow bottom) from taking a slot.
 - 03 Flamethrower bottom: self Shield 1 (round) + Shield 1 round on every adjacent ally (Hold the Line).
 - 04 Disorienting Flash: enhancement marks fixed (Stun diamond, Target square; no slot on Range).
 - 08, 09 Reinvigorating Elixir / Restorative Mist: Xipe's Range slots removed (none printed).
 - 11 Enhancement Field top: token summon with a persistent BuffAttack range-1 aura, AuraFilter Ally (1e Spirit Banner
-  shape, Banner of Strength range keys; untested shape). Bottom: the 1e Enhancement Field bottom round aura (played in
-  the 1e pack), so it follows adjacency through the round (rules question in the sheet; 1e/Xipe reading kept).
+  shape, Banner of Strength range keys; untested shape), placed within range 3. Bottom: a round +1 Attack on you and
+  on each ally adjacent when played (user decision C: the allies adjacent at play time, as Flamethrower bottom).
 - 13 Gas Canister / 14 Volatile Concoction bottom / 21 Proximity Mine bottom / 28 Cryonic Snare top: traps as Xipe and
   the 1e Tinkerer wrote them (gh_port renames the trap model); ranged traps take the Boar Catcher's `Range` +
   `RangeIsBase`.
 - 14 Volatile Concoction top: Strengthen one ally range 3, sub-ability `RecoverDiscardedCards: 1` on the same target
-  (`UseParentTargets`). **Approximation:** "one level 1 card": Frosthaven's recover has no card-level filter, so any
-  one discarded card; text left as printed.
+  (`UseParentTargets`), level 1 cards only (`Vars: CardLevel: 1`, Metal Mosaic Memory Drive: CAbilityRecoverDiscardedCards
+  filters on it).
 - 15 Hook Gun top: Attack slot added (printed [diamond]).
 - 16 Repulsor Gun bottom: stand-alone Push 2 range 2 (`Filter: Enemy`).
 - 18 Teleportation Pad top: **NEEDS PLUGIN.** "You and all allies may treat the two token hexes as adjacent during
@@ -122,15 +123,15 @@ HealOrDebuffEveryTurn, which doesn't count a positive condition or a shield give
 1. ~~packcheck PLUS_ONE: accept `Trap`~~ **done** by the lead; the four trap damage slots (13 top, 14 bottom,
    21 bottom, 28 top) are restored.
 2. ~~packcheck KIND_KEYS: add `Teleport2`~~ **done** (the Teleportation Pad bottom warning no longer appears).
-3. **Plugin: summon placement range** for token summons (Enhancement Field and Pernicious Fogger range 3,
-   Teleportation Pad range 5): a summon ability with `Range` placing on any empty hex in range.
+3. ~~Plugin: summon placement range~~ **done in data**: CAbilitySummon reads the ability's Range (Enhancement Field and
+   Pernicious Fogger 3, Teleportation Pad 5); bench one placement.
 4. **Plugin: Teleportation Pad adjacency** (the two TeleportationPadID hexes count as adjacent for moves of the
    Tinkerer and allies).
 5. **Plugin: Gravity Bomb** as printed (token, end of next turn: Pull 2 toward it on enemies within 2, damage 5 in
    the hex / 1 adjacent, then discard).
 6. **Plugin: Chimeric Formula** (an ally plays one top + one bottom from hand at once; recover from an adjacent ally's
    lost pile) and **Safeguard** for Invigorating Aerosol's end-of-turn heal target.
-7. **Plugin: recover a level 1 card** (Volatile Concoction top).
+7. ~~Plugin: recover a level 1 card~~ **done** (`Vars: CardLevel: 1`).
 8. **Mastery tag** that also counts a positive condition or shield given to an ally (Field Medic, 2e wording).
 9. **Perk plugin hooks**: Shared Supplies, Spare Parts.
 

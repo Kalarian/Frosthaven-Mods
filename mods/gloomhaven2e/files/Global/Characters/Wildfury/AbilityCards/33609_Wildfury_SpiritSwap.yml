@@ -6,8 +6,8 @@ Level: 1
 Initiative: 27
 # card: Spirit Swap
 # top: COMMAND Move 1 [circle], Attack 2 [diamond], Wound. "consume Air/Earth (either): teleport the Wildfury to an
-# empty hex adjacent to the Bear": the Wildfury's own teleport after the commanded abilities (APPROXIMATION: the card
-# puts it between the Bear's move and attack), limited to hexes next to the Bear (Frosthaven's IsValidTeleportTile, as
+# empty hex adjacent to the Bear": the Wildfury's own teleport between the Bear's commanded move and its commanded attack
+# (the command is two ControlActor steps around it, as printed), limited to hexes next to the Bear (Frosthaven's IsValidTeleportTile, as
 # HIVE Recall's "a hex adjacent to you" and Infuser Formless Bladestorm's tile list). The split element (Air or Earth,
 # one teleport) is Frosthaven's element selector: two Consume steps marked GHElementEither, which the plugin merges into
 # the first (both consumes, the picker on) and drops the second, so the player picks either element and teleports once
@@ -17,6 +17,8 @@ Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
+            # the command split in two around the consume row, as printed (Move, then the optional teleport, then
+            # the Attack); the ability names TAllyMove / TAllyAttack keep their enhancement slots
             TAlly:
                 ControlActor:
                     Abilities:
@@ -25,13 +27,6 @@ Data:
                                 Amount: 1
                                 CircleEnhancements: 1
                             StrengthIsBase: True
-                        TAllyAttack:
-                            Attack:
-                                Amount: 2
-                                DiamondEnhancements: 1
-                            Conditions: Wound
-                            StrengthIsBase: True
-                            RangeIsBase: True
                     ControlActorType: Player
                 Target: -1
                 Targeting: All
@@ -67,6 +62,21 @@ Data:
                                 IsValidTeleportTile: Bear.GetDistanceTo(tile) == 1
                             AnimOverload: Teleport Into
                             AnimOverload2: Teleport Outof
+            TAlly2:
+                ControlActor:
+                    Abilities:
+                        TAllyAttack:
+                            Attack:
+                                Amount: 2
+                                DiamondEnhancements: 1
+                            Conditions: Wound
+                            StrengthIsBase: True
+                            RangeIsBase: True
+                    ControlActorType: Player
+                Target: -1
+                Targeting: All
+                Filter: Companion
+                AnimOverload: Command
     Bottom:
         Abilities:
             BSwap:

@@ -6,7 +6,7 @@ Level: 1
 Initiative: 12
 # card: Power Ballad
 # top: song (High, High, Low Note): Shattersong Din of Battle's once-per-turn attack aura, persistent, on you and
-# every ally; its three slots advance once per round (TSongTimer, NOTES.md)
+# every ally, untoggled so it takes each figure's first attack of its turn; its three slots advance once per round (TSongTimer, NOTES.md)
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -21,7 +21,7 @@ Data:
                     ValidAbilityTypes: [Attack]
                     Restriction: OncePerTurn
                     RestrictPerActor: True
-                    IsToggleBonus: True
+                    # no toggle: lands by itself on each figure's first attack of its turn (HIVE Heavy Metal)
                     IsSingleTargetBonus: True
                     IsAura: True
                     AuraTargeting: All
@@ -50,6 +50,8 @@ Data:
                     Duration: Ability
                     Hidden: True
                     RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+                MiscVars:
+                    GH2E_Song3: True      # the song's Note cost (Symphonic Medley picks songs by it)
     Bottom:
         Abilities:
             BMove:

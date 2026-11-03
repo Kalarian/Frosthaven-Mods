@@ -7,8 +7,8 @@ Initiative: 17
 # card: Disorienting Roar
 # top: COMMAND Muddle all enemies within range 2 of the Bear (the 1st edition Disorienting Roar top's shape, without its
 # Immobilize), then a round aura on the Bear: -1 Attack on enemies' attacks within range 2 (BuffAttack -1 with an Enemy
-# aura filter, the 1st edition Ward's enemy-aura shape). APPROXIMATION: the aura doesn't check Muddle (every enemy in
-# range was just muddled; only immune ones differ) and follows the Bear through the round. XP 1, round.
+# aura filter, the 1st edition Ward's enemy-aura shape) that applies only to a muddled attacker (BasedOnVarsCondition with
+# the holder's Muddle test, Deepwraith Crippling Terror); it follows the Bear through the round. XP 1, round.
 # bottom: "! consume Air (required)": Frosthaven's required-consume shape (Infuser Propulsive Tailwind: a Consume
 # ability, then the bonus with ActorHasPerformedValidAbilityTypesThisAction Consume). Invocation: after each of the
 # Bear's next three attacks (Infuser's DuringActionAbilityOnAttackAbilityFinished aura on the summon, as the 1st
@@ -30,7 +30,10 @@ Data:
                             TargetIsBase: True
                             AnimOverload: RadialRoar
                         TAllyWeaken:
-                            Attack: -1
+                            Attack: 0
+                            AttackEffect:
+                                Type: BasedOnVarsCondition
+                                Strength: -1
                             Range: 2
                             Target: -1
                             Filter: Self
@@ -41,6 +44,11 @@ Data:
                                 AuraTargeting: Range
                                 AuraFilter: [Enemy]
                                 ListLayoutOverride: [$GH2E_Wildfury_07_T$, Positive_AttackMinus_Enemy_Aura]
+                                # "enemies within range 2 that have Muddle": the attacking enemy (the buff's holder,
+                                # Deepwraith Crippling Terror's BespokeBehaviour.m_Actor) must be muddled
+                                Vars:
+                                    Holder: BespokeBehaviour.m_Actor
+                                    ValidateMuddled: Holder.Tokens.HasKey(CCondition.ENegativeCondition.Muddle)
                             AnimOverload: None
                     ControlActorType: Player
                 Target: -1

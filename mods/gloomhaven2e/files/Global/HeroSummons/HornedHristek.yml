@@ -2,7 +2,9 @@ Parser: HeroSummon
 ID: HornedHristekID
 LocKey: $GH2E_SUMMON_HornedHristek$
 # stand-in model: the 1st edition Black Unicorn (horned; NOTES.md). Its Move has no enhancement mark (the card prints
-# none). Its trait and kill trigger are text only (NEEDS PLUGIN).
+# none). Its trait (+2 Attack after its first move each round) is text only (NEEDS PLUGIN); its kill trigger
+# ("whenever this summon kills an enemy, grant it Move +0") is a persistent on-kill bonus on itself (Drifter Fortitude
+# bottom's DuringActionAbilityOnKill), the move stacked next to the current ability.
 Model: BlackUnicorn
 Health:
     Amount: 7
@@ -12,3 +14,22 @@ Attack:
     Amount: 2
     SquareEnhancements: 1
 Range: 1
+OnSummonAbilities:
+    AKillMove:
+        AddActiveBonus:
+            Move: 3
+            Filter: Self
+            AnimOverload: None
+            MiscVars:
+                InterruptCurrentAbility: True
+                StackNextToCurrent: True
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringActionAbilityOnKill
+            ListLayoutOverride: ["$GH2E_Doomstalker2_25_T2$", Positive_Summon]
+            Vars:
+                ValidateKillerIsThis: TriggerActor == ActiveBonus.Actor
+                ValidateVictimIsEnemy: CActor.AreActorsAllied(TriggerActor.Type, TriggerTarget.Type, TriggerActor, TriggerTarget) == false

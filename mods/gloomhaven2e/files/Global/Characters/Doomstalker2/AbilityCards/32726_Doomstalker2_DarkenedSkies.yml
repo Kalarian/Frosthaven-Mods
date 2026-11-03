@@ -37,9 +37,11 @@ Data:
                                     TriggerOnCaster: True
                 Filter:
                     TargetType: Enemy
-                    EnemyType: [Normal, Elite, Boss]
+                    EnemyType: [Normal, Elite, Boss, Object]
                 Target: 1
                 Targeting: All
+                MiscVars:
+                    CheckLOS: True
                 AnimOverload: DoomTarget
 Layout:
     Top:

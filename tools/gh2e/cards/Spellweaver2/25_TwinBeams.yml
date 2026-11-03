@@ -9,7 +9,7 @@ Data:
             TAttack1:
                 Attack:
                     Amount: 1
-                    Enhancements: 1
+                    SquareEnhancements: 1
                 AreaEffect: "0,0,G|2,0,R|4,0,R"
                 AnimOverload: TargetedGenericFlame
                 MultiPassAttack: False

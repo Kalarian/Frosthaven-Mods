@@ -46,12 +46,35 @@ PERKS = [
     # card is 32401 (see NOTES.md, shared changes wanted)
     (1, "Etheric Bond", "Whenever you short rest, if <i>Reviving Ether</i> is in your discard pile, first <sprite name=Recover> it",
      {"Flags": "[Passive]"}),
-    # two linked boxes: one perk costing two marks (as the Scoundrel's Cloak of Invisibility). Frosthaven's own lost-action
-    # trigger (Geminate perk 7: DuringActionAbilityOnActionEnded + the performed half's CardPile), once per turn; the Bless
-    # comes right after the lost action instead of at the end of the turn (NOTES.md)
+    # two linked boxes: one perk costing two marks (as the Scoundrel's Cloak of Invisibility). "At the end of each of
+    # your turns during which you performed an action with lost": Frosthaven's own lost-action trigger (Geminate perk 7:
+    # DuringActionAbilityOnActionEnded + the performed half's CardPile) only leaves a hidden round marker (MiscVars
+    # GH2E_LostActionThisTurn); an EndTurnAbility bonus gives the Bless at the end of the turn when the marker is there
     (1, "Arcane Blessing", "At the end of each of your turns during which you performed an action with <sprite name=Lost>, gain <sprite name=Bless>",
      {"Cost": 2, "Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]", "Abilities": """\
     TActive:
+        AutoTrigger: True
+        AddActiveBonus:
+            NullTargeting: True
+            Filter: Self
+            AutoTrigger: True
+            SkipAnim: True
+            CanUndo: False
+            MiscVars:
+                GH2E_LostActionThisTurn: True
+            ActiveBonus:
+                Duration: Round
+                Hidden: True
+        ActiveBonus:
+            Duration: Persistent
+            Behaviour: DuringActionAbilityOnActionEnded
+            Restriction: OncePerTurn
+            Hidden: True
+            Vars:
+                LastPerformedAbility: TriggerActor.LastAbilityPerformed
+                LostPile: LastPerformedAbility?.GetAbilityBaseCard()?.SelectedAction?.CardPile
+                ValidateDidLoseCard: LostPile == "Lost" || LostPile == "PermanentlyLost"
+    TEndBless:
         AutoTrigger: True
         AddActiveBonus:
             Bless: True
@@ -61,13 +84,11 @@ PERKS = [
             CanUndo: False
         ActiveBonus:
             Duration: Persistent
-            Behaviour: DuringActionAbilityOnActionEnded
-            Restriction: OncePerTurn
+            Behaviour: EndTurnAbility
             Hidden: True
-            Vars:
-                LastPerformedAbility: TriggerActor.LastAbilityPerformed
-                LostPile: LastPerformedAbility?.GetAbilityBaseCard()?.SelectedAction?.CardPile
-                ValidateDidLoseCard: LostPile == "Lost" || LostPile == "PermanentlyLost\""""}),
+            Requirements:
+                Vars:
+                    ValidateLostActionThisTurn: Actor.ActiveBonuses.Any(CustomAbility.GetMiscVarBool(obj.Ability, "GH2E_LostActionThisTurn"))"""}),
 ]
 
 MASTERIES = [

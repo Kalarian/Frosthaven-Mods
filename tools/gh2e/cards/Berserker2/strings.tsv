@@ -49,7 +49,7 @@ GH2E_Berserker2_26_B	Add <sprite name=Strengthen> and gain <sprite name=XP1> if 
 GH2E_Berserker2_27_T	You may suffer <sprite name=Damage> 2 to add +1 <sprite name=Attack> and gain <sprite name=XP1>.
 GH2E_Berserker2_27_B	You may repeat this action, suffering 1 more damage each time.
 GH2E_Berserker2_27_B2	Suffer <sprite name=Damage> 1 (cannot be negated).
-GH2E_Berserker2_27_B3	Once: <sprite name=Damage> 2, then <sprite name=Move> 1, <sprite name=Attack> 2
-GH2E_Berserker2_27_B4	Twice: <sprite name=Damage> 5, then twice <sprite name=Move> 1, <sprite name=Attack> 2
-GH2E_Berserker2_27_B5	Three times: <sprite name=Damage> 9, then three times <sprite name=Move> 1, <sprite name=Attack> 2
+GH2E_Berserker2_27_B3	Repeat: suffer <sprite name=Damage> 2, then <sprite name=Move> 1, <sprite name=Attack> 2
+GH2E_Berserker2_27_B4	Again: suffer <sprite name=Damage> 3, then <sprite name=Move> 1, <sprite name=Attack> 2
+GH2E_Berserker2_27_B5	Again: suffer <sprite name=Damage> 4, then <sprite name=Move> 1, <sprite name=Attack> 2
 GH2E_Berserker2_28_T	Whenever you suffer damage, all enemies that have <sprite name=Wound> suffer <sprite name=Damage> 1.

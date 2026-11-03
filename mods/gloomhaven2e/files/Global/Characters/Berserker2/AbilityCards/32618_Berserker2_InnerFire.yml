@@ -30,7 +30,7 @@ Data:
             BAttack1:
                 Attack:
                     Amount: 1
-                    DiamondEnhancements: 1
+                    SquareEnhancements: 1
             BMove:
                 Move:
                     Amount: 1

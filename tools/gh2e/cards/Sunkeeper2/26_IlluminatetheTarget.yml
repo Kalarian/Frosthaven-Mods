@@ -43,6 +43,7 @@ Layout:
         - Row: "$GH2E_Sunkeeper2_26_T$"
         - Row: "<size=20%> "
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack*"
+        - Row: "$GH2E_Sunkeeper2_26_T3$"
         - Row: "<size=50%> "
         - Row: "<b><size=130%>$Strengthen$ <sprite name=Strengthen>"
         - Row: "$GH2E_Sunkeeper2_26_T2$"

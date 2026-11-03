@@ -6,11 +6,10 @@ Level: 6
 Initiative: 56
 # card: Claws of the Night
 # top: Attack 5, then the persistent "at the end of your next turn, if you do not have Invisible, you may perform Attack
-# 5" with one slot (XP 1). APPROXIMATION: fired at the START of your next turn (StartTurnAbility); an end-of-turn bonus
-# (EndTurnAbility) would already fire at the end of this turn. Run only without Invisible (ActiveBonus Requirements,
-# Deathwalker Fluid Night's form).
+# 5" with one slot (XP 1): EndTurnAbility, skipped on the turn it is played (CheckingBonus.InternalRoundNumber > 0 in
+# the bonus Requirements) and run only without Invisible (Deathwalker Fluid Night's form).
 # bottom: "when you next kill an enemy this round, place one Tear in the hex they occupied" = Slice Through's kill
-# trigger (Deathwalker When Your Time Comes shape) for the round, one use.
+# trigger (Deathwalker When Your Time Comes shape) for the round, one use, your kills only.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -30,11 +29,13 @@ Data:
                 AnimOverload: PowerUp
                 ActiveBonus:
                     Duration: Persistent
-                    Behaviour: StartTurnAbility
+                    Behaviour: EndTurnAbility
                     XPTracker: [1]
                     Requirements:
                         Vars:
                             ValidateNotInvisible: Actor.Tokens.HasKey(CCondition.EPositiveCondition.Invisible) == False
+                            # not the turn the card is played (CheckingBonus = this bonus; rounds since it was placed)
+                            ValidateNextTurn: CheckingBonus.InternalRoundNumber > 0
     Bottom:
         Abilities:
             BMove:
@@ -67,6 +68,10 @@ Data:
                     XPTracker: [0]
                     Vars:
                         TargetTile: TriggerActor.Tile
+                        # "whenever YOU kill an enemy": the cause of death must be your ability (SetupTriggerContext
+                        # checks these before the slot is used, so other figures' kills leave the card alone)
+                        ValidateHasAbility: TriggerAbility != null
+                        ValidateYourKill: TriggerAbility.TargetingActor == ActiveBonus.Caster
 Layout:
     Top:
         - Row: "<size=150%><sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"

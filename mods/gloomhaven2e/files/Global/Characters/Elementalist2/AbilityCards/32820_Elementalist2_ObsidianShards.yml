@@ -47,7 +47,6 @@ Data:
                             ActiveBonus:
                                 Behaviour: PreventFirstDamage
                                 Duration: Persistent
-                                IsToggleBonus: True
                                 IsAura: True
                                 AuraFilter: [Self, Ally]
                                 AuraTargeting: Range

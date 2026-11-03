@@ -6,7 +6,8 @@ Level: 3
 Initiative: 62
 # card: Symphonic Medley
 # bottom: up to three song actions from the hand (Banner Spear Hail of Spears' SelectAndPlayCard; a song action is a
-# top whose abilities include TSongNotes); the 1-, 2- and 3-Note split is not enforced (NOTES.md)
+# top whose abilities include TSongNotes): three plays of one card each, a 1-, a 2- and a 3-Note song (the songs'
+# TSongNotes carry their cost as MiscVars GH2E_Song1/2/3)
 Discard: [Discard,Permanently Lost]
 Data:
     Top:
@@ -24,20 +25,49 @@ Data:
             TNote:
                 NullTargeting: True
                 Filter: Self
-                AutoTrigger: True
+                CanSkip: True
                 SkipAnim: True
                 ResourcesToAddOnAbilityEnd:
                     - ["SoothsingerLowNote", 1]
+                # "once each round, when you perform an action with a note, you MAY gain the note": offered, not
+                # automatic; a hidden round marker bonus (MiscVars GH2E_NoteThisRound) blocks a second gain this round
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateOncePerRound: Actor.ActiveBonuses.Any(CustomAbility.GetMiscVarBool(obj.Ability, "GH2E_NoteThisRound")) == False
+                MiscVars:
+                    GH2E_NoteThisRound: True
+                ActiveBonus:
+                    Duration: Round
+                    Hidden: True
     Bottom:
         Abilities:
-            BPlaySongs:
+            # one 1-Note, one 2-Note and one 3-Note Song action, each from its own card (the songs' TSongNotes carry
+            # their cost as MiscVars GH2E_Song1/2/3)
+            BPlaySong1:
                 Filter: Self
                 SelectAndPlayCard:
                     CardPile: Hand
-                    Amount: 3
+                    Amount: 1
                     MinRequiredCards: 0
                 MiscVars:
-                    IsActionValid: Action.Abilities.Any(obj.Name == 'TSongNotes')
+                    IsActionValid: Action.Abilities.Any(obj.Name == 'TSongNotes' && CustomAbility.GetMiscVarBool(obj, 'GH2E_Song1'))
+            BPlaySong2:
+                Filter: Self
+                SelectAndPlayCard:
+                    CardPile: Hand
+                    Amount: 1
+                    MinRequiredCards: 0
+                MiscVars:
+                    IsActionValid: Action.Abilities.Any(obj.Name == 'TSongNotes' && CustomAbility.GetMiscVarBool(obj, 'GH2E_Song2'))
+            BPlaySong3:
+                Filter: Self
+                SelectAndPlayCard:
+                    CardPile: Hand
+                    Amount: 1
+                    MinRequiredCards: 0
+                MiscVars:
+                    IsActionValid: Action.Abilities.Any(obj.Name == 'TSongNotes' && CustomAbility.GetMiscVarBool(obj, 'GH2E_Song3'))
         XP: 1
 Layout:
     Top:

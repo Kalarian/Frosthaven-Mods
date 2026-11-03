@@ -25,6 +25,7 @@ Data:
                     GiveAbilityCardToActor: True
                     Behaviour: BuffAttack
                     ValidAbilityType: Attack
+                    IsSingleTargetBonus: True      # "your next four attacks": one slot per attack (target), HIVE Heavy Metal / Snowdancer Snowball
                     XPTracker: [0,0,0,0]
                 AnimOverload: BuffAdjacent
         XP: 1

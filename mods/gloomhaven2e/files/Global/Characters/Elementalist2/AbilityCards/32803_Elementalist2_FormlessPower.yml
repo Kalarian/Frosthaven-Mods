@@ -33,17 +33,31 @@ Data:
                         Range: 1
     Bottom:
         Abilities:
+            # "at the start of each of your turns, you may consume any to add +1 Attack to all your attacks that turn":
+            # Snowdancer Cold Therapy's start-of-turn consume (element picker over all six), whose ability is a Round
+            # +1 Attack bonus on yourself (the round ends with your turn as far as your attacks go)
             BActive:
-                Attack: 1
-                Filter: [Self]
+                AddActiveBonus:
+                    IgnoreStun: True
+                    Consume:
+                        Elements: [Fire, Ice, Air, Earth, Light, Dark]
+                        Abilities:
+                            CABuff:
+                                Attack: 1
+                                Filter: Self
+                                IgnoreStun: True
+                                AnimOverload: PowerUp
+                                ActiveBonus:
+                                    Duration: Round
+                                    Behaviour: BuffAttack
+                                    ValidAbilityType: Attack
+                    ShowElementPicker: True
+                Filter: Self
                 ActiveBonus:
-                    Behaviour: BuffAttack
+                    Behaviour: StartTurnAbility
                     Duration: Persistent
-                    ValidAbilityType: Attack
-                    Consuming: Any
-                    IsToggleBonus: True
-                    Restriction: OncePerAction
-                    EntireAction: True
+                    ValidAbilityType: Consume
+                    Restriction: OncePerRound
         XP: 2
 Layout:
     Top:

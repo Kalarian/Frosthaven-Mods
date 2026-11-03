@@ -6,7 +6,7 @@ Data:
             TAttack:
                 Attack:
                     Amount: 3
-                    Enhancements: 1
+                    SquareEnhancements: 1
                 TreatAsMelee: True
                 SubAbilities:
                     TAttackSubPush:
@@ -28,7 +28,7 @@ Data:
             BMove:
                 Move:
                     Amount: 3
-                    Enhancements: 1
+                    SquareEnhancements: 1
             BRetaliate:
                 Retaliate: 1
                 Filter: Self

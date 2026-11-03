@@ -6,7 +6,7 @@
 # bottom: "whenever you or an ally attack an enemy within range 2 of you this round, after the attack ability the
 # attacker may perform Heal 1, self" = a round aura on you and allies firing after each attack ability
 # (DuringActionAbilityOnAttackAbilityFinished, the 1st edition Black Knives top's behaviour), Heal 1 on the attacker.
-# APPROXIMATION: the "enemy within range 2 of you" test is left out (any attack ability triggers it).
+# Only when one of the attack's targets is within 2 hexes of you (bonus Vars on TriggerAbility.ActorsTargeted).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -57,6 +57,11 @@ Data:
                     IsAura: True
                     AuraFilter: [Self, Ally]
                     AuraTargeting: All
+                    # "attack an enemy within range 2 (of you)": one of the attack's targets stood within 2 hexes of
+                    # the Nightshroud (checked before the heal is offered)
+                    Vars:
+                        ValidateHasAbility: TriggerAbility != null
+                        ValidateTargetNearYou: TriggerAbility.ActorsTargeted.Any(obj.GetDistanceTo(ActiveBonus.Caster) <= 2)
 Layout:
     Top:
         - Row:

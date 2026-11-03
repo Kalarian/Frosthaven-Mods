@@ -8,7 +8,7 @@ Data:
             TAttack:
                 Attack:
                     Amount: 2
-                    Enhancements: 1
+                    SquareEnhancements: 1
                 Target: 2
                 Range: 3
                 AnimOverload: RadialForkedBeam

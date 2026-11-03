@@ -3,9 +3,9 @@
 # it suffers damage 2" = a Damage 2 aimed at the attack's target (custom targeting), only when no figure allied to it
 # stands adjacent (the adjacency test of Frosthaven's Crashing Tide Powerful Pincer: GameState.GetActorsInRange +
 # CActor.AreActorsAllied).
-# bottom: two Tears within range 3 (CreateShadow Target 2; "not adjacent to each other" isn't enforced: APPROXIMATION),
-# then Teleport 3 onto a Tear (both are within 3: Teleport2 with IsValidTeleportTile on shadow hexes; an older Tear
-# within 3 is also valid); "on your next two attacks, double the value of the attack" = the 1st edition Empowering
+# bottom: two Tears within range 3, the second not adjacent to (or on) the first (a custom tile list built from the first
+# Tear's hex), then Teleport 3 onto a Tear (Teleport2 with IsValidTeleportTile on shadow hexes; with the two-Tear limit
+# the older Tears are gone, so only these two remain); "on your next two attacks, double the value of the attack" = the 1st edition Empowering
 # Void's scalar attack buff (Attack 2, AbilityStrengthIsScalar), two use slots with XP on both.
 Discard: [Discard,Lost]
 Data:
@@ -45,11 +45,23 @@ Data:
         XP: 1
     Bottom:
         Abilities:
-            BTears:
+            BTear1:
                 CreateShadow:
                 HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
                 Range: 3
-                Target: 2
+                Target: 1
+                AnimOverload: Shadow Manipulation
+            # the second Tear: within range 3, not adjacent to the first (Dig Pit's custom tile list from an earlier
+            # ability of the action)
+            BTear2:
+                CreateShadow:
+                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+                Target: 1
+                Targeting: Custom
+                Vars:
+                    FirstTear: CustomAbility.FindAbilityInPhaseByName("BTear1")
+                TargetingVars:
+                    AddTilesInRange: GameState.GetTilesInRange(TargetingActor, 3).Where(CustomAbility.GetAdjacentTiles(FirstTear.TilesSelected, true).Contains(obj) == false)
                 AnimOverload: Shadow Manipulation
             BTeleport:
                 Teleport2: 3

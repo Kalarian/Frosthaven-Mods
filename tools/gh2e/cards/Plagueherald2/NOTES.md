@@ -110,8 +110,8 @@ MustEndOnSpecificTiles`, Trapper Lure of the Snare's shape).
 - **12 Gift of Rot:** heal with IgnoreTokens; the bottom cost buys Drifter's round advantage bonus.
 - **13 Spread the Plague:**
   - Top: control for one Attack 4 (1st edition Hostile Takeover).
-  - Bottom: the mandatory "remove Poison from that ally" is done first, then the Poison + Plague on one enemy adjacent
-    to that ally. Order APPROXIMATION.
+  - Bottom: Poison + Plague on one enemy adjacent to a poisoned ally (custom target list), then the mandatory "remove
+    Poison from that ally" as a sub-ability on a poisoned ally adjacent to that enemy (printed order).
 - **14 Sickening Strength top:** Strengthen only. "May suffer 2 damage to immediately play one card from their hand"
   needs another player's extra card play. Text only, NEEDS PLUGIN.
 - **15 Rot Maggots bottom:** an `EndTurnAbility` bonus with 4 slots (XP on slots 2 and 4), 1 damage per Plague.
@@ -138,8 +138,8 @@ MustEndOnSpecificTiles`, Trapper Lure of the Snare's shape).
 - **23 Succumb to the Gift top:** on a kill, XP 1 and a 3 damage + Poison trap. The trap is placed on the attack's hex
   (Custom targeting on `ParentAbility.m_TilesSelected[0]`, as CARD_FIXES 20136) with the `PoisonMine` trap name (the 1st
   edition Tinkerer's). "Featureless" is not checked. Untested shape.
-- **24 Mass Extinction top:** chain of kill-gated follow-up attacks (Attack 6, then Attack 8, XP 1 each) on another
-  enemy with Plague. It stops at three attacks. APPROXIMATION.
+- **24 Mass Extinction top:** chain of kill-gated follow-up attacks (Attack 6, 8, ... 18, XP 1 each) on another enemy
+  with Plague, eight attacks deep (GHNestedSubAbilities queues any depth).
 - **25 Tainted Offering top:** the bought Attack 2 is made from your own hex, not from the ally's.
   APPROXIMATION / NEEDS PLUGIN.
 - **26 Creeping Lethargy bottom:** a one-use damage negation (`PreventDamage: -1`, the Protective Blessing value,

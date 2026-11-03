@@ -546,7 +546,7 @@ Bruiser_DESCRIPTION	You are a strong, melee fighter with a large pool of hit poi
 Cragheart2	Cragheart
 Cragheart2_DESCRIPTION	You are versatile and can fill the needs of your party with a variety of offensive and healing abilities. Communicating with your allies when choosing your ability cards for the scenario can make everyone more effective together.
 Doomstalker2	Doomstalker
-Doomstalker2_DESCRIPTION	You have core actions, Dooms [Doom], that place your Doom token [Doom] on one enemy within your line-of-sight. You can only have one enemy with a [Doom] at a time and can only have one [Doom] active at a time; if you play a second [Doom], discard the previous active [Doom].
+Doomstalker2_DESCRIPTION	You have core actions, Dooms, that place your Doom token on one enemy within your line-of-sight. You can only have one enemy with a <b><color=#39BEED>Doom</color></b> at a time and can only have one <b><color=#39BEED>Doom</color></b> active at a time; if you play a second <b><color=#39BEED>Doom</color></b>, discard the previous active <b><color=#39BEED>Doom</color></b>.
 Elementalist2	Elementalist
 Elementalist2_DESCRIPTION	You are the master of elements. While others use more mundane instruments, your weapons are the elements themselves. You can do almost anything if you have the appropriate element. Conversely, when all elements are inert, your powers are rather meager. As such, planning a turn or two ahead will be paramount. While doing so, it’s important to identify when being at your strongest is most valuable to your party based on your circumstances.
 FHS_Advantage	Advantage
@@ -601,9 +601,9 @@ FHS_GH2E_Berserker2_26_T2	Whenever an <sprite name=Enemy> suffers damage from yo
 FHS_GH2E_Berserker2_26_T3	Negate the next damage you suffer this round
 FHS_GH2E_Berserker2_27_B	You may repeat this action, suffering 1 more damage each time
 FHS_GH2E_Berserker2_27_B2	Suffer <sprite name=Damage> 1 (cannot be negated)
-FHS_GH2E_Berserker2_27_B3	Once: <sprite name=Damage> 2, then <sprite name=Move> 1, <sprite name=Attack> 2
-FHS_GH2E_Berserker2_27_B4	Twice: <sprite name=Damage> 5, then twice <sprite name=Move> 1, <sprite name=Attack> 2
-FHS_GH2E_Berserker2_27_B5	Three times: <sprite name=Damage> 9, then three times <sprite name=Move> 1, <sprite name=Attack> 2
+FHS_GH2E_Berserker2_27_B3	Repeat: suffer <sprite name=Damage> 2, then <sprite name=Move> 1, <sprite name=Attack> 2
+FHS_GH2E_Berserker2_27_B4	Again: suffer <sprite name=Damage> 3, then <sprite name=Move> 1, <sprite name=Attack> 2
+FHS_GH2E_Berserker2_27_B5	Again: suffer <sprite name=Damage> 4, then <sprite name=Move> 1, <sprite name=Attack> 2
 FHS_GH2E_Berserker2_27_T	You may suffer <sprite name=Damage> 2 to add +1 <sprite name=Attack> and gain <sprite name=XP1>
 FHS_GH2E_Berserker2_28_T	Whenever you suffer damage, all <sprite name=Enemy> that have <sprite name=Wound> suffer <sprite name=Damage> 1
 FHS_GH2E_Bruiser_01_B	Target all <sprite name=Enemy> moved through with the move ability
@@ -1235,6 +1235,7 @@ FHS_GH2E_Sunkeeper2_24_B	Whenever you <sprite name=ConsumeLight> during one of y
 FHS_GH2E_Sunkeeper2_25_B	That <sprite name=Allies> may immediately play up to two cards from their hand, performing at most one top and one bottom action of the cards, <sprite name=XP1>
 FHS_GH2E_Sunkeeper2_26_T	Designate an adjacent hex containing an <sprite name=Enemy> to perform:
 FHS_GH2E_Sunkeeper2_26_T2	Target all <sprite name=Allies> adjacent to you or the designated hex
+FHS_GH2E_Sunkeeper2_26_T3	Target the <sprite name=Enemy> occupying the designated hex
 FHS_GH2E_Sunkeeper2_28_B	All <sprite name=Allies> add <nobr>+1 <sprite name=Attack></nobr> to all their attacks this round
 FHS_GH2E_Sunkeeper2_28_B2	They also gain advantage on all their attacks this round, <sprite name=XP1>
 FHS_GH2E_Sunkeeper2_28_T	Grant all <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr>:
@@ -1315,6 +1316,7 @@ GH2E_Cragheart2_25_T3	This round, your ranged attacks deal <nobr><sprite name=Da
 GH2E_Doomstalker2_11_T2	This summon is considered to be last in initiative order when determining monster focus.
 GH2E_Doomstalker2_14_T	When attacking, ignore <sprite name=Retaliate>.
 GH2E_Doomstalker2_17_T2	Whenever you long rest, the Staunch Garralev gains <sprite name=Ward>.
+GH2E_Doomstalker2_25_T2	Whenever this summon kills an <sprite name=Enemy>, grant it: <nobr><sprite name=Move> +0</nobr>
 GH2E_Elementalist2_20_B	<sprite name=ConsumeIce><sprite name=ConsumeEarth>: on the next two sources of damage you or an adjacent ally would suffer, negate the damage, <sprite name=CreateMixed-IE>
 GH2E_Mindthief2_02_B2	You cannot perform move abilities this round. At the end of the round, lose <sprite name=Invisible>.
 GH2E_Nightshroud2_26_B	This attack does not cause you to gain <sprite name=Invisible> at the end of the round.
@@ -1353,6 +1355,7 @@ GH2E_SUMMON_WarRaptor	War Raptor
 GH2E_SUMMON_WildfuryBear	Bear
 GH2E_SUMMON_WindIdol	Wind Idol
 GH2E_Sawbones2_18_NEGATE	Negate the next damage you would suffer this round
+GH2E_Sawbones2_19_T	Place a character token on the target. The next three times they lose <sprite name=Stun>, they gain <sprite name=Stun>.
 GH2E_Soultether_03_T	Whenever a Shadow Wolf dies, <sprite name=CreateDark> and all Shadow Wolves gain <sprite name=Invisible>.
 GH2E_Soultether_21_B	All allies within <nobr><sprite name=Range> 3</nobr> gain <nobr><sprite name=Retaliate> 1</nobr>, <nobr><sprite name=Range> 3</nobr> while <sprite name=Fire> is strong or waning.
 GH2E_Soultether_22_T	Add +1 <sprite name=Heal> to all heals targeting this summon. At the end of each of this summon's turns, it performs: <nobr><sprite name=Heal> 1</nobr>.
@@ -1372,20 +1375,20 @@ GH_GH2E_SilentKnife_MONEY_TOOLTIP	Money tokens: the loot tokens the Silent Knife
 GH_GH2E_Soothsinger2_HIGHNOTE_TOOLTIP	High Note: pays for Songs (at most two)
 GH_GH2E_Soothsinger2_LOWNOTE_TOOLTIP	Low Note: pays for Songs (at most two)
 Mindthief2	Mindthief
-Mindthief2_DESCRIPTION	You have key actions known as Augments [Augment]. When you perform an augment ability, you place that card in your active area to gain a persistent bonus on your melee attacks. You may only have one augment active at a time; if you perform a second augment ability, you must discard the previous active augment. Augment abilities are mandatory, so you must switch to the new augment if you want to perform any other abilities from that action.
+Mindthief2_DESCRIPTION	You have key actions known as Augments. When you perform an augment ability, you place that card in your active area to gain a persistent bonus on your melee attacks. You may only have one augment active at a time; if you perform a second augment ability, you must discard the previous active augment. Augment abilities are mandatory, so you must switch to the new augment if you want to perform any other abilities from that action.
 Nightshroud2	Nightshroud
-Nightshroud2_DESCRIPTION	You start each scenario with [Invisible] and do not lose [Invisible] at the end of your turns. While you are [Invisible], you cannot perform attack abilities or open doors, you may move through enemies as if they were your allies, and enemies treat the hex you occupy as unoccupied. If an enemy ends its movement in your hex, you must [Teleport] to the closest empty hex and suffer hazardous terrain damage. When all other characters are exhausted or have escaped, you lose [Invisible] and cannot gain it.
+Nightshroud2_DESCRIPTION	You start each scenario with <sprite name=Invisible> and do not lose <sprite name=Invisible> at the end of your turns. While you are <sprite name=Invisible>, you cannot perform attack abilities or open doors, you may move through enemies as if they were your allies, and enemies treat the hex you occupy as unoccupied. If an enemy ends its movement in your hex, you must <sprite name=Teleport> to the closest empty hex and suffer hazardous terrain damage. When all other characters are exhausted or have escaped, you lose <sprite name=Invisible> and cannot gain it.
 OBSTACLE_TOOLTIP	Obstacle
 Plagueherald2	Plagueherald
-Plagueherald2_DESCRIPTION	You enjoy nothing more than spreading Xorn’s gifts of poison and plague with those near you. You have abilities that give enemies Plague Tokens [Plague token]. [Plague token] are not negative conditions, have no innate effects, and cannot be removed by enemies. You have access to 12 [Plague token] and if you would ever give an enemy an 13th [Plague token], you must first remove any one previously-placed [Plague token]. An enemy may have up to 3 [Plague token].
+Plagueherald2_DESCRIPTION	You enjoy nothing more than spreading Xorn’s gifts of poison and plague with those near you. You have abilities that give enemies Plague Tokens. Plague are not negative conditions, have no innate effects, and cannot be removed by enemies. You have access to 12 Plague and if you would ever give an enemy an 13th Plague, you must first remove any one previously-placed Plague. An enemy may have up to 3 Plague.
 Quartermaster2	Quartermaster
-Quartermaster2_DESCRIPTION	Many of your abilities allow you to gather Supplies [Supplies], which are used to recover your and your allies’ [Lost] and [Spent] items. When you gain [Supplies], move the Supplies token [Supplies] up the track. You start each scenario with 10 [Supplies] and may have up to 50. When you spend Supplies [Spend supplies], set the track to 0; then you may [Recover] any number of the target’s items with a combined gold cost equal to or less than the amount of [Supplies] spent. You must have at least 10 [Supplies] to perform an ability or added effect that requires spending them.
+Quartermaster2_DESCRIPTION	Many of your abilities allow you to gather Supplies, which are used to recover your and your allies’ <sprite name=Lost> and Spent items. When you gain supplies, move the Supplies token up the track. You start each scenario with 10 supplies and may have up to 50. When you spend Supplies, set the track to 0; then you may <sprite name=RecoverIcon> any number of the target’s items with a combined gold cost equal to or less than the amount of supplies spent. You must have at least 10 supplies to perform an ability or added effect that requires spending them.
 Sawbones2	Sawbones
 Sawbones2_DESCRIPTION	You have abilities that can give character allies medical packs, which are extra ability cards. When someone gains a medical pack, add one random card from medical pack supply directly to their hand. Abilities that give medical packs may only be performed if there is at least one medical pack remaining in the supply. Medical packs that have been added to someone’s hand can be played during card selection like any other ability card. Once an action on a medical pack has been performed or the medical pack is otherwise discarded, return that card to your medical pack supply. A player may not lose a medical pack to negate a source of damage.
 SilentKnife	Silent Knife
 SilentKnife_DESCRIPTION	Rather than fighting with pure brute force, you have two tactics to gain the upper hand in combat: attacking enemies who are distracted by your adjacent allies or attacking enemies who are completely isolated on the battlefield. Understanding how your allies move and communicating with them regarding their plans can help you determine which approach is best for you both before and during a scenario.
 Soothsinger2	Soothsinger
-Soothsinger2_DESCRIPTION	Many of your actions have one of two notes associated with them: high notes [High note] or low notes [Low note]. Once each round, when you perform an action with a note, you may immediately gain the corresponding note token and place it to the left. You may have a maximum of two of each note at once and you start each scenario with one note of your choice.
+Soothsinger2_DESCRIPTION	Many of your actions have one of two notes associated with them: high notes or low notes. Once each round, when you perform an action with a note, you may immediately gain the corresponding note token and place it to the left. You may have a maximum of two of each note at once and you start each scenario with one note of your choice.
 Soultether	Soultether
 Soultether_DESCRIPTION	You bind creatures from other planes to your will and fight through them. Your summons hold the line while your cards grant them extra moves and attacks, shield them, and turn the elements of Fire, Air and Dark into power for the whole menagerie.
 Spellweaver2	Spellweaver
@@ -1396,7 +1399,7 @@ Tinkerer2	Tinkerer
 Tinkerer2_DESCRIPTION	You have the right tool for any job: whether an ally needs some healing, you want to set enemies up with some well-placed traps, or you want to take a more direct approach with something a bit more explosive.
 Trap	Trap
 Wildfury	Wildfury
-Wildfury_DESCRIPTION	You start every scenario with your bear summon [Bear] by summoning it in an empty adjacent hex before the first round. Its stats are listed below, and it acts immediately before you each round. You may lose cards as normal to negate damage done to you or [Bear]. If [Bear] drops below 1 hit point, it is removed from the map and cannot return that scenario. You have special actions known as Command [Command] actions that grant [Bear] additional abilities, ignoring your line-of-sight. [Bear] will not open doors during its turn, but you may [Command] it to open doors.
+Wildfury_DESCRIPTION	You start every scenario with your bear summon by summoning it in an empty adjacent hex before the first round. Its stats are listed below, and it acts immediately before you each round. You may lose cards as normal to negate damage done to you or Bear. If Bear drops below 1 hit point, it is removed from the map and cannot return that scenario. You have special actions known as Command actions that grant Bear additional abilities, ignoring your line-of-sight. Bear will not open doors during its turn, but you may COMMAND it to open doors.
 PERK_Bruiser_11_Bonus	Rested and Ready: +1 <sprite name=Move> to your next move ability
 PERK_Bruiser_01_Name	Precision
 PERK_Bruiser_01_Desc	Replace one <sprite name="-1"> with one <sprite name="+1">
@@ -1426,7 +1429,7 @@ Bruiser_MASTERY_1_Name	Relentless Onslaught
 Bruiser_MASTERY_1_Desc	In a single scenario, across three consecutive rounds, play six different ability cards and cause enemies to suffer <sprite name=Damage> 7 or more during each of those rounds
 Bruiser_FullName	Bruiser
 CODEX_Hero_Bruiser_Title	Bruiser
-CODEX_HeroInfo_Bruiser	You have many powerful melee attack abilities with an area of effect that are great when enemies clump up for you. When you can’t naturally find groups of enemies next to each other, you also have a variety of abilities that [Push] or [Pull] to move the enemies into place.
+CODEX_HeroInfo_Bruiser	You have many powerful melee attack abilities with an area of effect that are great when enemies clump up for you. When you can’t naturally find groups of enemies next to each other, you also have a variety of abilities that <sprite name=Push> or <sprite name=Pull> to move the enemies into place.
 AMC_GH2E_Cragheart2_Obstacle_P1_R	+1, create one 1-hex obstacle tile in an empty hex adjacent to the target
 PERK_Cragheart2_01_Name	Sure Footing
 PERK_Cragheart2_01_Desc	Replace one <sprite name="-2"> with one <sprite name="0">
@@ -1475,7 +1478,7 @@ Mindthief2_MASTERY_1_Name	Thought Thief
 Mindthief2_MASTERY_1_Desc	In a single scenario, trigger the on-attack effect from four different Augments at least 3 times each
 Mindthief2_FullName	Mindthief
 CODEX_Hero_Mindthief2_Title	Mindthief
-CODEX_HeroInfo_Mindthief2	As a class with few hit points who spends a significant amount of time close to enemies, carefully avoiding enemy focus is integral to your success. You have access to fast and slow initiatives, allowing you to dance in and out of combat by approaching enemies late in the round and then getting away from them early the following round. Additionally, you can disable threatening enemies with your abilities that [Immobilize], [Disarm], or [Stun]. You can even become [Invisible] when in dangerous situations.
+CODEX_HeroInfo_Mindthief2	As a class with few hit points who spends a significant amount of time close to enemies, carefully avoiding enemy focus is integral to your success. You have access to fast and slow initiatives, allowing you to dance in and out of combat by approaching enemies late in the round and then getting away from them early the following round. Additionally, you can disable threatening enemies with your abilities that <sprite name=Immobilize>, <sprite name=Disarm>, or <sprite name=Stun>. You can even become <sprite name=Invisible> when in dangerous situations.
 PERK_SilentKnife_01_Name	Composure
 PERK_SilentKnife_01_Desc	Remove one <sprite name="-2">
 PERK_SilentKnife_02_Name	Light Step
@@ -1498,7 +1501,7 @@ PERK_SilentKnife_10_Name	Cloak of Invisibility
 PERK_SilentKnife_10_Desc	Once each scenario, during your turn, you may perform: <sprite name=Invisible>, self
 SilentKnife_FullName	Silent Knife
 CODEX_Hero_SilentKnife_Title	Silent Knife
-CODEX_HeroInfo_SilentKnife	Because of your small hand size, losing cards has a steep cost. If you find yourself often exhausted well before the end of the scenario, you may gain more turns by performing fewer actions with [Lost] early on.\n\nIt is easy for you to go early in the round, but you may also want to bring some cards with late initiatives to allow you to approach enemies after their turns, allowing you to get free attacks safely.
+CODEX_HeroInfo_SilentKnife	Because of your small hand size, losing cards has a steep cost. If you find yourself often exhausted well before the end of the scenario, you may gain more turns by performing fewer actions with <sprite name=Lost> early on.\n\nIt is easy for you to go early in the round, but you may also want to bring some cards with late initiatives to allow you to approach enemies after their turns, allowing you to get free attacks safely.
 PERK_Spellweaver2_01_Name	Composure
 PERK_Spellweaver2_01_Desc	Replace one <sprite name="-2"> with one <sprite name="0">
 PERK_Spellweaver2_02_Name	Wild Weave
@@ -1523,7 +1526,7 @@ Spellweaver2_MASTERY_1_Name	Deep Reserves
 Spellweaver2_MASTERY_1_Desc	In a single scenario, perform four different <sprite name=Lost> actions twice each
 Spellweaver2_FullName	Spellweaver
 CODEX_Hero_Spellweaver2_Title	Spellweaver
-CODEX_HeroInfo_Spellweaver2	Despite your hand size, a significant portion of your power comes from performing actions with [Lost]. While Reviving Ether will gain you a significant amount of stamina, you may still exhaust earlier than you would like if you lose too many cards in quick succession. As a starting point, if you perform one action with [Lost] between each of your rests, you should have a reasonable number of turns.
+CODEX_HeroInfo_Spellweaver2	Despite your hand size, a significant portion of your power comes from performing actions with <sprite name=Lost>. While Reviving Ether will gain you a significant amount of stamina, you may still exhaust earlier than you would like if you lose too many cards in quick succession. As a starting point, if you perform one action with <sprite name=Lost> between each of your rests, you should have a reasonable number of turns.
 PERK_Tinkerer2_01_Name	Composure
 PERK_Tinkerer2_01_Desc	Replace one <sprite name="-2"> with one <sprite name="0">
 PERK_Tinkerer2_02_Name	First Aid Kit
@@ -1550,7 +1553,7 @@ Tinkerer2_MASTERY_2_Name	Inventor's Stamina
 Tinkerer2_MASTERY_2_Desc	Perform 11 different actions with a lost icon
 Tinkerer2_FullName	Tinkerer
 CODEX_Hero_Tinkerer2_Title	Tinkerer
-CODEX_HeroInfo_Tinkerer2	Your large hand size gives you a significant amount of stamina, allowing you to play more cards with [Lost] than other classes typically would. However, if you lose too many cards too early in a scenario, you may find yourself exhausted before the end.\n\nSome of your abilities let you place unique tokens on the map that have varying effects. Unlike traps, hexes containing one or more of these tokens are still empty and are not considered negative hexes for the purposes of monster movement.
+CODEX_HeroInfo_Tinkerer2	Your large hand size gives you a significant amount of stamina, allowing you to play more cards with <sprite name=Lost> than other classes typically would. However, if you lose too many cards too early in a scenario, you may find yourself exhausted before the end.\n\nSome of your abilities let you place unique tokens on the map that have varying effects. Unlike traps, hexes containing one or more of these tokens are still empty and are not considered negative hexes for the purposes of monster movement.
 AMC_GH2E_Berserker2_Heal1Self_P0	<sprite name="0"> <sprite name=Heal> 1
 AMC_GH2E_Berserker2_SelfHalfHP_T2	<sprite name="2x"> Suffer <sprite name=Damage> equal to half your current hit point value (rounded down)
 PERK_Berserker2_01_Name	Iron Will
@@ -1577,7 +1580,7 @@ PERK_Berserker2_11_Name	Taunting Fury
 PERK_Berserker2_11_Desc	At the end of each of your turns, you may control all adjacent enemies: <sprite name=Attack> +0, target the Berserker
 Berserker2_FullName	Berserker
 CODEX_Hero_Berserker2_Title	Berserker
-CODEX_HeroInfo_Berserker2	You have a number of very powerful actions with [Lost]. While many may seem very tempting, you also have a small hand size, meaning you may want to be selective with which ones you use to avoid exhausting too early. If you decide to go all-in, make sure your party is ready to keep up.
+CODEX_HeroInfo_Berserker2	You have a number of very powerful actions with <sprite name=Lost>. While many may seem very tempting, you also have a small hand size, meaning you may want to be selective with which ones you use to avoid exhausting too early. If you decide to go all-in, make sure your party is ready to keep up.
 PERK_Doomstalker2_01_Name	Steady Nerves
 PERK_Doomstalker2_01_Desc	Replace one <sprite name="-2"> with one <sprite name="0">
 PERK_Doomstalker2_02_Name	Second Arrow
@@ -1600,7 +1603,7 @@ PERK_Doomstalker2_10_Name	Heel
 PERK_Doomstalker2_10_Desc	On each of your summons' turns, you may have them skip their turn and instead perform <sprite name=Move> +0 treating you as their focus
 Doomstalker2_FullName	Doomstalker
 CODEX_Hero_Doomstalker2_Title	Doomstalker
-CODEX_HeroInfo_Doomstalker2	[Doom] are not negative conditions and may target any enemy, including bosses and objectives.\n\nBringing summons to the battlefield is not for everyone. You can remain perfectly effective while completely ignoring them. If you do choose to summon forest companions to aid your fight, you may notice that you cannot easily exert direct control over them. You have some [Doom] that can help guide them towards important targets and away from enemies that are dangerous to them.
+CODEX_HeroInfo_Doomstalker2	<b><color=#39BEED>Doom</color></b> are not negative conditions and may target any enemy, including bosses and objectives.\n\nBringing summons to the battlefield is not for everyone. You can remain perfectly effective while completely ignoring them. If you do choose to summon forest companions to aid your fight, you may notice that you cannot easily exert direct control over them. You have some <b><color=#39BEED>Doom</color></b> that can help guide them towards important targets and away from enemies that are dangerous to them.
 PERK_Elementalist2_01_Name	Flame and Gale
 PERK_Elementalist2_01_Desc	Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=CreateMixed-FA>
 PERK_Elementalist2_02_Name	Flame and Stone
@@ -1658,7 +1661,7 @@ Nightshroud2_MASTERY_2_Name	Relentless Shadow
 Nightshroud2_MASTERY_2_Desc	In a single scenario, perform an attack ability during your turn in 5 consecutive rounds
 Nightshroud2_FullName	Nightshroud
 CODEX_Hero_Nightshroud2_Title	Nightshroud
-CODEX_HeroInfo_Nightshroud2	You can also place Tear Tokens [Tear token] on the map. Hexes with only [Tear token] in them are empty and not negative. You may place a maximum of two [Tear token] at any time (you may remove one to replace it elsewhere). Whenever you enter a hex containing a [Tear token] during an ability, you may remove the [Tear token] to lose [Invisible] at the end of the ability. At the end of each round in which you perform an attack, gain [Invisible]. Some of your abilities have [Tear hex] hexes. When you perform the ability, you may place one [Tear token] in that hex.
+CODEX_HeroInfo_Nightshroud2	You can also place Tear Tokens on the map. Hexes with only Tear in them are empty and not negative. You may place a maximum of two Tear at any time (you may remove one to replace it elsewhere). Whenever you enter a hex containing a Tear during an ability, you may remove the Tear to lose <sprite name=Invisible> at the end of the ability. At the end of each round in which you perform an attack, gain <sprite name=Invisible>. Some of your abilities have Tear hex hexes. When you perform the ability, you may place one Tear in that hex.
 PERK_Plagueherald2_01_Name	Virulence
 PERK_Plagueherald2_01_Desc	Replace one <sprite name="-1"> with one <sprite name="+1">
 PERK_Plagueherald2_02_Name	Carrier
@@ -1685,7 +1688,7 @@ PERK_Plagueherald2_12_Name	Xorn's Last Gift
 PERK_Plagueherald2_12_Desc	Once each scenario, when an <sprite name=Enemy> that has Plague would die, first control that <sprite name=Enemy> and have it perform the abilities on its ability card, adding Plague to all its attacks, then it dies
 Plagueherald2_FullName	Plagueherald
 CODEX_Hero_Plagueherald2_Title	Plagueherald
-CODEX_HeroInfo_Plagueherald2	Xorn loves your friends and foes equally. Many of your abilities can be augmented by applying [Poison] to allies. You may only activate these conditional bonuses if you can give [Poison] to an ally who does not already have [Poison]. You have a variety of effects that specifically benefit allies that have [Poison], so your allies will also come to embrace the [Poison] you so kindly share with them.
+CODEX_HeroInfo_Plagueherald2	Xorn loves your friends and foes equally. Many of your abilities can be augmented by applying <sprite name=Poison> to allies. You may only activate these conditional bonuses if you can give <sprite name=Poison> to an ally who does not already have <sprite name=Poison>. You have a variety of effects that specifically benefit allies that have <sprite name=Poison>, so your allies will also come to embrace the <sprite name=Poison> you so kindly share with them.
 AMC_GH2E_Quartermaster2_Muddle_P0	<sprite name="0"> <sprite name=Muddle>
 AMC_GH2E_Quartermaster2_Supplies10_P0	<sprite name="0"> Gain 10 supplies
 AMC_GH2E_Quartermaster2_RefreshItem_R	<sprite name=Rolling> Recover one spent or lost item
@@ -1713,7 +1716,7 @@ PERK_Quartermaster2_11_Name	Resupply
 PERK_Quartermaster2_11_Desc	Whenever you long rest, gain 10 supplies
 Quartermaster2_FullName	Quartermaster
 CODEX_Hero_Quartermaster2_Title	Quartermaster
-CODEX_HeroInfo_Quartermaster2	You have a special personal supply of [Quartermaster] items. They are not immediately brought into scenarios but can be given to characters through your abilities. These items have no item slot requirements and may be used by characters regardless of their equipped items. There is only one copy of each [Quartermaster] item card—if any character already has that item, you may not give out another copy. When a [Quartermaster] item is used, it is returned to its supply. At the end of each scenario, unused [Quartermaster] items are returned to their supply.
+CODEX_HeroInfo_Quartermaster2	You have a special personal supply of Quartermaster items. They are not immediately brought into scenarios but can be given to characters through your abilities. These items have no item slot requirements and may be used by characters regardless of their equipped items. There is only one copy of each Quartermaster item card—if any character already has that item, you may not give out another copy. When a Quartermaster item is used, it is returned to its supply. At the end of each scenario, unused Quartermaster items are returned to their supply.
 GH2E_Sawbones2_PACK_HELP	Give one adjacent ally or self one Medical Pack
 GH2E_Sawbones2_SEDATION_HELP	You may gain <sprite name=Disarm> to add <sprite name=Stun>
 PERK_Sawbones2_01_Name	Steady Hands
@@ -1738,7 +1741,7 @@ Sawbones2_MASTERY_1_Name	Constant Care
 Sawbones2_MASTERY_1_Desc	In a single scenario, give an ally a medical pack or a Prescription each round except when performing a long rest
 Sawbones2_FullName	Sawbones
 CODEX_Hero_Sawbones2_Title	Sawbones
-CODEX_HeroInfo_Sawbones2	You also have Prescription [Prescription] actions, which can only be performed if you have at least one adjacent character ally. When you perform a [Prescription] action, immediately place that card in the adjacent ally’s active area. When they discard one of these cards, place that ability card in your discard pile instead of theirs.\n\nYou have some attack abilities that gain bonuses if the target is damaged. This is always determined before attacking.
+CODEX_HeroInfo_Sawbones2	You also have Prescription actions, which can only be performed if you have at least one adjacent character ally. When you perform a Prescription action, immediately place that card in the adjacent ally’s active area. When they discard one of these cards, place that ability card in your discard pile instead of theirs.\n\nYou have some attack abilities that gain bonuses if the target is damaged. This is always determined before attacking.
 GH2E_Sunkeeper2_RECOVER_HELP	You or an adjacent ally may recover one level 1 card from the discard pile
 PERK_Sunkeeper2_01_Name	Radiance
 PERK_Sunkeeper2_01_Desc	Replace one <sprite name="-1"> with two <sprite name="0"> <sprite name=CreateLight>
@@ -1768,7 +1771,7 @@ Sunkeeper2_MASTERY_2_Name	Hammer of Dawn
 Sunkeeper2_MASTERY_2_Desc	In a single scenario, deal <sprite name=Damage> 8 or more with an attack 3 or more times
 Sunkeeper2_FullName	Sunkeeper
 CODEX_Hero_Sunkeeper2_Title	Sunkeeper
-CODEX_HeroInfo_Sunkeeper2	Many of your abilities strongly benefit from [Light], so you may want to think about bringing some abilities that can infuse [Light] and find opportunities to use them.\n\nWith your large hand size, you can afford to perform multiple actions with [Lost] in each scenario. You can bring some powerful [Lost] actions to turn the tide of difficult fights or even consider setting up a persistent ability or two early on.
+CODEX_HeroInfo_Sunkeeper2	Many of your abilities strongly benefit from <sprite name=CreateLight>, so you may want to think about bringing some abilities that can infuse <sprite name=CreateLight> and find opportunities to use them.\n\nWith your large hand size, you can afford to perform multiple actions with <sprite name=Lost> in each scenario. You can bring some powerful <sprite name=Lost> actions to turn the tide of difficult fights or even consider setting up a persistent ability or two early on.
 PERK_Soothsinger2_01_Name	Benediction
 PERK_Soothsinger2_01_Desc	Replace one <sprite name="-2"> with one <sprite name="-2"> "<sprite name=Bless>, <sprite name=Target> 2"
 PERK_Soothsinger2_02_Name	Fermata
@@ -1791,7 +1794,7 @@ PERK_Soothsinger2_10_Name	Lullaby
 PERK_Soothsinger2_10_Desc	During ordering of initiative in rounds in which you declare a long rest, gain one Note of your choice, and each of your allies may decrease their initiative by 10
 Soothsinger2_FullName	Soothsinger
 CODEX_Hero_Soothsinger2_Title	Soothsinger
-CODEX_HeroInfo_Soothsinger2	You may play notes to create Songs [Song], which are persistent active abilities with use slots that provide ongoing effects. In order to perform a [Song], you must have the corresponding notes on your mat. Whenever you perform a [Song], remove all of your notes, even those that were not part of the [Song]. The [Song]’s effect is active from the moment you play it into your active area and ends when the [Song] is moved from your active area to your discard pile. You must advance your character token on all your active [Song] at the end of each round. If multiple [Song] have effects at the end of your turn, you may apply their effects in any order.
+CODEX_HeroInfo_Soothsinger2	You may play notes to create Songs, which are persistent active abilities with use slots that provide ongoing effects. In order to perform a Song, you must have the corresponding notes on your mat. Whenever you perform a Song, remove all of your notes, even those that were not part of the Song. The Song’s effect is active from the moment you play it into your active area and ends when the Song is moved from your active area to your discard pile. You must advance your character token on all your active Song at the end of each round. If multiple Song have effects at the end of your turn, you may apply their effects in any order.
 PERK_Soultether_01_Name	Composure
 PERK_Soultether_01_Desc	Replace one <sprite name="-2"> with one <sprite name="0">
 PERK_Soultether_02_Name	Planar Shift
@@ -1841,6 +1844,8 @@ PERK_Wildfury_09_Name	Call of the Wild
 PERK_Wildfury_09_Desc	Once each scenario, during your turn, Command: <sprite name=Move> 4. If the Bear exits a hex adjacent to you during this movement, you may <sprite name=Teleport> to an empty hex adjacent to the Bear at the end of the movement
 PERK_Wildfury_10_Name	Life Bond
 PERK_Wildfury_10_Desc	At the start or end of each of your long rests, you may <sprite name=ConsumeAir>/<sprite name=ConsumeEarth> and reduce your current hit point value by X (X must be at least 1) to Command: <sprite name=Heal> X
+Wildfury_MASTERY_1_Name	Elemental Bond
+Wildfury_MASTERY_1_Desc	In a single scenario, infuse or consume <sprite name=CreateAir> or <sprite name=CreateEarth> during each of your turns
 Wildfury_FullName	Wildfury
 CODEX_Hero_Wildfury_Title	Wildfury
 CODEX_HeroInfo_Wildfury	Some of your actions require an element in order to be performed. You cannot perform those actions without using the indicated element. You may sometimes have multiple persistent abilities that trigger at the same time. When that happens, you choose the resolution order.

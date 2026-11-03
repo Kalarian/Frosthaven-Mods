@@ -11,10 +11,14 @@ card file under <pack>/files/Global/Characters/*/AbilityCards:
       number (a condition, a loot, a control) is a dead slot nobody can use (the 2026-10-26 enhancement check found
       15 such slots shipped in v0.8.0); a hex slot needs an area effect with hexes to add
     - every half has at least one ability the game can perform (or is a rest)
+    - 2nd edition pack only: every half against its printed card (tools/gh2e/sheets): enhancement mark shapes, the main
+      numbers, corner XP, lost / persistent / round icons, initiative and level (printed_vs_shipped; intentional or still
+      open differences only through PRINTED_EXCEPTIONS, each with its reason)
 Prints one line per problem and a count; exit 1 on any problem (--strict also fails on warnings).
 """
 
 import argparse
+import json
 import re
 import sys
 from pathlib import Path
@@ -200,6 +204,273 @@ def modifier_abilities(pack, problems):
                             f"Frosthaven's runs one (the game stops with an error when the card is drawn)")
 
 
+# ---------------------------------------------------------------------------------------------------------------------
+# Printed vs shipped (2nd edition pack only): every card half's printed sheet (tools/gh2e/sheets/<Sheet>.json, read from
+# the card images; the deciding source) against the shipped YAML. Compared per half:
+#   - enhancement marks: the multiset of (stat, shape) printed ("Attack 3 [square]", "Strengthen [diamond+]", hex marks
+#     in an area line) == the slots the shipped half carries (SquareEnhancements under Attack, ...; "E" hexes in an
+#     AreaEffect). Conditions count as one stat ("Condition"); summon stat lines are left to the summon files.
+#   - numbers: every printed "Attack 3" / "Move 4" / "Range 2" / "Target 2" / "Pierce 1" / "Push 2" ... (plain, not "+1")
+#     must appear with that value somewhere in the shipped half, and every shipped number that carries a slot must be a
+#     printed one;
+#   - XP in the corner (half-level XP), lost / unrecoverable (Discard entry), persistent / round icons (a bonus of that
+#     duration in the half), initiative and level (the card header).
+# An intentional difference goes in PRINTED_EXCEPTIONS with the reason; nothing else passes.
+PRINTED_STATS = ("attack", "move", "heal", "shield", "retaliate", "range", "target", "pierce", "push", "pull", "teleport", "loot")
+PRINTED_CONDITIONS = ("stun", "immobilize", "disarm", "wound", "poison", "muddle", "curse", "brittle", "bane", "impair",
+                      "bless", "strengthen", "invisible", "regenerate", "ward", "safeguard")
+SHAPES = {"square": "square", "circle": "circle", "diamond": "diamond", "diamond+": "diamond+", "hex": "hex"}
+SLOT_SHAPE = {"SquareEnhancements": "square", "CircleEnhancements": "circle", "DiamondEnhancements": "diamond",
+              "DiamondPlusEnhancements": "diamond+", "HexEnhancements": "hex", "PierceEnhancements": "square"}
+SHIPPED_STAT = {"Attack": "Attack", "Move": "Move", "Heal": "Heal", "Shield": "Shield", "Retaliate": "Retaliate",
+                "Range": "Range", "RetaliateRange": "Range", "Target": "Target", "Pierce": "Pierce", "Push": "Push",
+                "Pull": "Pull", "Teleport": "Teleport", "Teleport2": "Teleport", "Loot": "Loot",
+                "Trap": "Damage"}   # a trap's damage: its slot sits in the Trap block (Boar Catcher)
+# (card ID, "Top"/"Bottom", what) -> why the shipped card differs on purpose. 'what' is the problem's kind: "marks",
+# "number <Stat> <value>", "slot-number <Stat> <value>", "xp", "pile", "persistent", "round".
+PRINTED_EXCEPTIONS = {
+    # --- intentional (the shipped number or shape is right for the engine) ---
+    (32129, "Top", "number Attack 1"):     # Wave of Destruction: the stored base is 2 so printed 1 + distance comes out
+        "Frosthaven's TargetDistanceRangeDiff gives distance - 1 for a melee area; base 2 makes 1 + distance (NOTES 29)",
+    (33522, "Top", "number Heal 1"):       # Living Mountain: "at the end of each of this summon's turns it performs: Heal 1"
+        "the summon's own end-of-turn Heal 1 lives in its summon file (summons/RockColossus2.yml), not on the card",
+    # --- OPEN rows (ALL.json): the printed rule needs a plugin system another task builds; remove the line when it ships ---
+    (32625, "Bottom", "persistent"): "OPEN Berserker2-27 Bone Breaker: the character token (persistent) is not built",
+    (33226, "Top", "persistent"): "OPEN Sawbones2-25 Take Your Medicine: the per-turn Prescription is not built",
+    (32327, "Top", "persistent"): "OPEN SilentKnife-11 Hired Help: the money-token cost and token are not built",
+    (33416, "Bottom", "round"): "OPEN Soothsinger2-21 Soothing Lullaby: the token on the monster is not built",
+    (33429, "Bottom", "round"): "OPEN Soothsinger2-26 Grand Finale: 'skip moving your token this round' is not built",
+    (32530, "Top", "persistent"): "OPEN Tinkerer2-10 Gravity Bomb: the token is not built (damage at once)",
+    (32530, "Top", "number Pull 2"): "OPEN Tinkerer2-10 Gravity Bomb: the end-of-turn Pull 2 toward the token is not built",
+    # Quartermaster: "give ... the item to gain XP 1" is printed in the text, paid as half XP until the item supply ships
+    (33103, "Bottom", "xp"): "OPEN Quartermaster2-06: the give's 'gain XP 1' paid as half XP",
+    (33104, "Top", "xp"): "OPEN Quartermaster2-07: the give's 'gain XP 1' paid as half XP",
+    (33108, "Top", "xp"): "OPEN Quartermaster2-08: corner XP 1 + the give's 'gain XP 1' paid as half XP 2",
+    (33115, "Top", "xp"): "OPEN Quartermaster2-18: the give's XP paid as half XP",
+    (33118, "Top", "xp"): "OPEN Quartermaster2-21: the give's 'gain XP 1' paid as half XP",
+    (33126, "Top", "xp"): "OPEN Quartermaster2-31: the give's 'gain XP 1' paid as half XP",
+    (33128, "Top", "xp"): "OPEN Quartermaster2-32: the give's 'gain XP 1' paid as half XP",
+}
+
+
+def _printed_items(lines):
+    """(marks Counter of (stat, shape), plain numbers set of (stat, value), unparsed mark texts) from a half's sheet lines."""
+    from collections import Counter
+    marks, numbers, unparsed = Counter(), set(), []
+    for line in lines:
+        s = line.strip()
+        if s.lower().startswith("slots:"):
+            continue
+        if re.match(r"^Summon\b", s) or " trait" in s:   # summon stats: the summon file's slots
+            continue
+        if re.search(r"\barea( becomes)?:", s):   # an area picture: its hex marks only
+            m = re.search(r"\[(hex marks?[^\]]*)\]", s)
+            if m:
+                coords = re.findall(r"-?\d+,-?\d+", m.group(1))
+                word = re.search(r"\b(both|two|three|four|\d) ", m.group(1))
+                count = {"both": 2, "two": 2, "three": 3, "four": 4}.get(word.group(1), None) if word else None
+                if word and word.group(1).isdigit():
+                    count = int(word.group(1))
+                marks[("Hex", "hex")] += len(coords) or count or (1 + m.group(1).count(" and ") if m.group(1).startswith("hex marks") else 1)
+            continue
+        # a mark inside rule text ("Create two obstacles within range 3 [square].")
+        for q in re.findall(r'"[^"]*"', s):
+            for m in re.finditer(rf"\b({'|'.join(PRINTED_STATS + ('damage',))})\s+(\d+)\s*\[(square|circle|diamond\+?|hex)\]", q, re.I):
+                marks[(m.group(1).capitalize(), SHAPES[m.group(3)])] += 1
+                numbers.add((m.group(1).capitalize(), int(m.group(2))))
+        s = re.sub(r'"[^"]*"', "", s)               # quoted rule text
+        s = re.sub(r"\([^)]*\)", "", s)             # remarks "(! box)", "(split icon)"
+        for seg in re.split(r"[,:;]", s):
+            seg = seg.strip().lstrip("!").strip()
+            if not seg:
+                continue
+            mark = re.search(r"\[(square|circle|diamond\+?|hex)\]", seg)
+            m = re.match(rf"^({'|'.join(PRINTED_STATS)})\s+([+-]?)(\d+|X)\b", seg, re.I)
+            if m:
+                stat = m.group(1).capitalize()
+                if mark:
+                    marks[(stat, SHAPES[mark.group(1)])] += 1
+                if not m.group(2) and m.group(3).isdigit():
+                    numbers.add((stat, int(m.group(3))))
+                continue
+            c = re.match(rf"^({'|'.join(PRINTED_CONDITIONS)})\b", seg, re.I)
+            if c and mark:
+                marks[("Condition", SHAPES[mark.group(1)])] += 1
+            elif mark:
+                unparsed.append(seg)
+    return marks, numbers, unparsed
+
+
+def _shipped_items(half):
+    """(marks Counter, numbers set, slot numbers set) of a shipped half (its abilities, consumes and nested blocks)."""
+    from collections import Counter
+    marks, numbers, slotted = Counter(), set(), set()
+
+    def walk(node, key=None):
+        if isinstance(node, dict):
+            if key in SHIPPED_STAT or key in CONDITIONS or key == "Safeguard":
+                stat = SHIPPED_STAT.get(key, "Condition")
+                amount = node.get("Damage") if key == "Trap" else node.get("Amount")
+                has_slot = False
+                for slot, shape in SLOT_SHAPE.items():
+                    n = node.get(slot)
+                    if isinstance(n, int) and n > 0:
+                        st = "Pierce" if slot == "PierceEnhancements" else stat
+                        marks[(st, shape)] += n
+                        if slot == "PierceEnhancements" and isinstance(node.get("Pierce"), int):
+                            slotted.add(("Pierce", node["Pierce"]))
+                        elif slot != "PierceEnhancements":
+                            has_slot = True
+                if isinstance(amount, int) and stat != "Condition":
+                    numbers.add((stat, amount))
+                    if has_slot:
+                        slotted.add((stat, amount))
+            area = node.get("AreaEffect")
+            if isinstance(area, str) and ",E" in area:
+                marks[("Hex", "hex")] += sum(1 for h in area.split("|") if h.strip().endswith(",E"))
+            for k, v in node.items():
+                if k in SHIPPED_STAT and isinstance(v, int) and not isinstance(v, bool):
+                    numbers.add((SHIPPED_STAT[k], v))
+                if isinstance(k, str) and k.startswith("Summon"):
+                    continue   # summon stats live in the summon file
+                walk(v, k)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v, key)
+    walk({k: v for k, v in half.items() if k != "XP"})
+    numbers.add(("Target", 1))   # an ability without a Target value has one target
+    return marks, numbers, slotted
+
+
+# ability kinds that stay in play by themselves (Frosthaven draws their persistent icon from the kind, not a duration)
+PERSISTENT_KINDS = {"Summon", "AddDoom", "AddAugment", "Augment", "AddSong", "PlaySong"}
+
+
+def _durations(node, out, skip=()):
+    """The bonus durations in a block; keys in skip are not entered (a triggered ability's own bonus, inside an
+    AddActiveBonus or a doom/bonus AbilityData, is what the trigger does, not the card's icon)."""
+    if isinstance(node, dict):
+        # the Safeguard stand-in (AUTHORING.md: a prevent-a-negative-condition bonus) is a condition kept until used,
+        # printed without a persistent icon
+        safeguard = node.get("Behaviour") == "GenericOnNegativeCondition" and len(node.get("XPTracker") or [0]) == 1 and \
+            (isinstance(node.get("Vars"), dict) and node["Vars"].get("PreventCondition") or "GH2E_SAFEGUARD" in str(node.get("ListLayoutOverride")))
+        hidden = node.get("Hidden") is True   # a hidden bookkeeping bonus (the Soothsinger's once-a-round Note marker)
+        for k, v in node.items():
+            if k in ("Duration", "ActiveBonusDuration") and isinstance(v, str) and not safeguard and not hidden:
+                out.add(v)
+            if k in PERSISTENT_KINDS:
+                out.add("Persistent")
+            if k == "ControlDurationType" and v == "ControlForOneTurn":   # "this round, during that enemy's turn"
+                out.add("Round")
+            if k == "ImprovedShortRest":   # "if you short rest at the end of this round": a round effect by itself
+                out.add("Round")
+            if k not in skip:
+                _durations(v, out, skip)
+    elif isinstance(node, list):
+        for v in node:
+            _durations(v, out, skip)
+    return out
+
+
+def _pack_name(pack):
+    try:
+        return json.loads((pack / "pack.json").read_text(encoding="utf-8")).get("name")
+    except (OSError, ValueError):
+        return None
+
+
+def printed_vs_shipped(pack, problems, warnings):
+    """The 2nd edition pack's shipped cards against the printed sheets (see the block comment above)."""
+    sys.path.insert(0, str(ROOT / "tools" / "gh2e"))
+    import build as gh2e
+    by_index = {v[2]: (cls, v[0]) for cls, v in gh2e.CLASSES.items()}
+    sheets, unparsed_total, used = {}, 0, set()
+    for f in sorted((pack / "files" / "Global" / "Characters").glob("*/AbilityCards/*.yml")):
+        rel = f.relative_to(pack).as_posix()
+        try:
+            d = yaml.safe_load(f.read_text(encoding="utf-8-sig"))
+        except yaml.YAMLError:
+            continue
+        cid = d.get("ID") if isinstance(d, dict) else None
+        if not isinstance(cid, int) or not 32000 <= cid < 34000:
+            continue
+        cls, sheet_name = by_index.get((cid - 32000) // 100, (None, None))
+        pos = (cid - 32000) % 100
+        if cls is None:
+            problems.append(f"{rel}: card ID {cid} belongs to no 2nd edition class")
+            continue
+        if sheet_name not in sheets:
+            sheets[sheet_name] = json.loads((ROOT / "tools" / "gh2e" / "sheets" / f"{sheet_name}.json").read_text(encoding="utf-8"))["cards"]
+        cards = sheets[sheet_name]
+        if not 1 <= pos <= len(cards):
+            problems.append(f"{rel}: card ID {cid}: no card {pos} on the {sheet_name} sheet")
+            continue
+        c = cards[pos - 1]
+        where = f"{rel} ({c['name']})"
+
+        def problem(half, what, text):
+            key = (cid, half, what)
+            if key in PRINTED_EXCEPTIONS:
+                used.add(key)
+                return
+            problems.append(f"{where}: {half}: printed vs shipped: {text}")
+        if d.get("Initiative") != c["initiative"]:
+            problem("card", "initiative", f"initiative printed {c['initiative']}, shipped {d.get('Initiative')}")
+        lvl = str(c["level"]) if str(c["level"]).isdigit() else "X"
+        if str(d.get("Level")) != lvl:
+            problem("card", "level", f"level printed {c['level']}, shipped {d.get('Level')}")
+        discard = d.get("Discard") or []
+        if isinstance(discard, str):
+            discard = [x.strip() for x in discard.strip("[]").split(",")]
+        for i, half in enumerate(("Top", "Bottom")):
+            sh = c[half.lower()]
+            h = (d.get("Data") or {}).get(half) or {}
+            summary = [s.lower() for s in sh.get("summary") or []]
+            # the pile
+            want = "Permanently Lost" if any(s in ("unrecoverable", "permanently lost") for s in summary) else \
+                "Lost" if "lost" in summary else "Discard"
+            got = discard[i].strip() if i < len(discard) else "Discard"
+            if got != want:
+                problem(half, "pile", f"printed {want}, shipped {got}")
+            # XP in the corner
+            xp = next((int(m.group(1)) for s in summary for m in [re.match(r"xp (\d+)$", s)] if m), 0)
+            # (a half whose first ability is a required consume pays its corner XP with the consume: Gust Sigil)
+            first = next(iter((h.get("Abilities") or {}).values()), None) if isinstance(h.get("Abilities"), dict) else None
+            req = first.get("Consume") if isinstance(first, dict) and isinstance(first.get("Consume"), dict) \
+                and (sh.get("lines") or [""])[0].startswith("! consume") else {}
+            got_xp = h.get("XP") or req.get("XP") or 0
+            if got_xp != xp:
+                problem(half, "xp", f"XP printed {xp}, shipped {got_xp}")
+            # persistent / round icons
+            # (an icon inside a consume box is printed on its line and shipped inside the half's Consumes)
+            durs = _durations(h, set())
+            main_durs = _durations({k: v for k, v in h.items() if k != "Consumes"}, set(), skip=("AddActiveBonus", "AbilityData", "Consume"))
+            for dur in ("persistent", "round"):
+                printed = dur in summary or any(f"{dur} icon" in ln for ln in sh.get("lines") or [])
+                if printed and dur.capitalize() not in durs:
+                    problem(half, dur, f"{dur} icon printed, no {dur.capitalize()} bonus shipped")
+                elif not printed and dur.capitalize() in main_durs:
+                    problem(half, dur, f"{dur} icon not printed, a {dur.capitalize()} bonus shipped")
+            # marks and numbers
+            pm, pn, unparsed = _printed_items(sh.get("lines") or [])
+            sm, sn, slotted = _shipped_items(h)
+            unparsed_total += len(unparsed)
+            if pm != sm:
+                fmt = lambda cnt: ", ".join(f"{s} {sh_} x{n}" if n > 1 else f"{s} {sh_}" for (s, sh_), n in sorted(cnt.items())) or "none"
+                problem(half, "marks", f"enhancement marks printed [{fmt(pm)}], shipped [{fmt(sm)}]")
+            for stat, v in sorted(pn):
+                if (stat, v) not in sn:
+                    others = sorted(x for s, x in sn if s == stat)
+                    problem(half, f"number {stat} {v}", f"{stat} {v} printed, shipped {stat} {others or 'none'}")
+            for stat, v in sorted(slotted):
+                if (stat, v) not in pn:
+                    problem(half, f"slot-number {stat} {v}", f"shipped {stat} {v} carries an enhancement slot but no printed {stat} {v}")
+    for key in sorted(set(PRINTED_EXCEPTIONS) - used, key=str):
+        warnings.append(f"printed-vs-shipped exception {key} matched nothing (stale: remove it)")
+    if unparsed_total:
+        warnings.append(f"printed-vs-shipped: {unparsed_total} printed mark(s) in a form the check can't read")
+
+
 def check_pack(pack):
     problems, warnings, n = [], [], 0
     for f in sorted((pack / "files" / "Global" / "Characters").glob("*/AbilityCards/*.yml")):
@@ -263,8 +534,12 @@ def check_pack(pack):
             path_targets(abilities)
             # a consume's abilities hung on a Null placeholder that comes after a ControlActor in the half: switching the
             # element on after the controlled figure acted stopped the game (RefreshConsumeBar NullReference, the 2e
-            # Arresting March, 2026-11-01); the placeholder goes before the control
-            names = list(abilities) if isinstance(abilities, dict) else []
+            # Arresting March, 2026-11-01); the placeholder goes before the control. Since the plugin's GHConsumeOnNull
+            # guard loads (the public RefreshConsumeBar overload, commit 423dade) the crash can't happen: the shape is
+            # allowed while that guard is in the plugin (the 2e Arresting March puts its heal back after the grant).
+            guard = ROOT / "plugins" / "FrosthavenMods" / "src" / "GHConsumeOnNull.cs"
+            guarded = guard.exists() and "typeof(CActor), typeof(CAbility), typeof(bool)" in guard.read_text(encoding="utf-8")
+            names = list(abilities) if isinstance(abilities, dict) and not guarded else []
             for c in (h.get("Consumes") or {}).values() if isinstance(h.get("Consumes"), dict) else []:
                 for a in ((c or {}).get("Abilities") or {}).values() if isinstance(c, dict) else []:
                     p = a.get("ParentName") if isinstance(a, dict) else None
@@ -282,6 +557,8 @@ def check_pack(pack):
                         problems.append(f"{rel}: {half}/{ab}: summon {sid} has no definition in files/Global/HeroSummons (its card cannot be drawn)")
     references(pack, problems)
     modifier_abilities(pack, problems)
+    if _pack_name(pack) == "gloomhaven2e":
+        printed_vs_shipped(pack, problems, warnings)
     # the effects' materials: a shader Frosthaven can't draw shows as a magenta block in game (tools/vfxcheck.py)
     if (pack / "pack.json").exists():
         import vfxcheck

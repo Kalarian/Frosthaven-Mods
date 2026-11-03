@@ -9,15 +9,20 @@ Discard: [Lost,Discard]
 Data:
     Top:
         Abilities:
+            # "on your next four single-target ranged attack abilities, add +2 Attack": the attack effect type
+            # SingleTarget (CAttackEffect.GetBonus gives nothing to an area attack or one with more than one target, so
+            # those spend no slot), ranged only
             TActive:
-                Attack: 2
+                Attack: 0
+                AttackEffect:
+                    Type: SingleTarget
+                    Strength: 2
                 Filter: Self
                 AnimOverload: PowerUp
                 ActiveBonus:
                     Duration: Persistent
                     Behaviour: BuffAttack
                     AttackType: Ranged
-                    IsSingleTargetBonus: True
                     XPTracker: [0,1,0,1]
         Infuse: Fire
     Bottom:
@@ -25,7 +30,7 @@ Data:
             BHeal:
                 Heal:
                     Amount: 2
-                    DiamondPlusEnhancements: 1
+                    SquareEnhancements: 1
                 Range:
                     Amount: 3
                     SquareEnhancements: 1

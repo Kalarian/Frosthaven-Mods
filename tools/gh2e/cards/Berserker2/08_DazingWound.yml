@@ -6,7 +6,7 @@ Data:
             TAttack:
                 Attack:
                     Amount: 3
-                    Enhancements: 1
+                    SquareEnhancements: 1
         Consumes:
             TCDamage:
                 CostAbility:
@@ -23,7 +23,7 @@ Data:
             BHeal:
                 Heal:
                     Amount: 3
-                    Enhancements: 1
+                    SquareEnhancements: 1
                 Range:
                     Amount: 2
                     Enhancements: 1

@@ -23,7 +23,7 @@ Abilities:
             AnimOverload: RadialBuff
         ActiveBonus:
             Duration: Persistent
-            Behaviour: PreCalcInitiativeAbility
+            Behaviour: GenericAfterRevealMonsterCards
             Restriction: OncePerRound
             Hidden: True
             XPTracker: [0]

@@ -1,6 +1,7 @@
 # card: Do No Harm
 # top: Attack 4, Wound, Stun and the mandatory self-Disarm. The character token ("the next three times they lose Stun,
-# they gain Stun", three slots) has no engine hook: text only, NEEDS PLUGIN; the card is simply lost.
+# they gain Stun", three slots): an ApplyConditionOnLoseCondition bonus placed on the target (a sub-ability of the
+# attack), three uses; the card is lost after the last.
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -9,6 +10,27 @@ Data:
                 Attack: 4
                 Conditions: [Wound, Stun]
                 AnimOverload: HeavyMeleeAttack
+                SubAbilities:
+                    # the character token on the target: "the next three times they lose Stun, they gain Stun" =
+                    # Frosthaven's ApplyConditionOnLoseCondition add-condition bonus (CChallengeSpitefulRetribution
+                    # builds one in code): three slots, listened on the holder only
+                    TToken:
+                        AddCondition: 1
+                        Filter: Enemy
+                        AutoTrigger: True
+                        SkipAnim: True
+                        AnimOverload: None
+                        ActiveBonus:
+                            Duration: Persistent
+                            Behaviour: ApplyConditionOnLoseCondition
+                            ValidConditions: [Stun]
+                            AbilityData:
+                                NullTargeting: True
+                                Conditions: [Stun]
+                            XPTracker: [0,0,0]
+                            ListLayoutOverride: [$GH2E_Sawbones2_19_T$, Icon_Stun]
+                            Vars:
+                                ValidateIsHolder: TriggerTarget == ActiveBonus.Actor
             TDisarm:
                 Disarm: True
                 Filter: Self

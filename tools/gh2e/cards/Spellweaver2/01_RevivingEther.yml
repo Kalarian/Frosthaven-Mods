@@ -12,7 +12,7 @@ Data:
             BMove:
                 Move:
                     Amount: 4
-                    Enhancements: 1
+                    SquareEnhancements: 1
                     Jump: True
 Layout:
     Top:

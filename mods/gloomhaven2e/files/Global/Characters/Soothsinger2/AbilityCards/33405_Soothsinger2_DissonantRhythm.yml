@@ -39,6 +39,8 @@ Data:
                     Duration: Ability
                     Hidden: True
                     RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+                MiscVars:
+                    GH2E_Song3: True      # the song's Note cost (Symphonic Medley picks songs by it)
     Bottom:
         Abilities:
             BMuddle:
@@ -54,10 +56,21 @@ Data:
             BNote:
                 NullTargeting: True
                 Filter: Self
-                AutoTrigger: True
+                CanSkip: True
                 SkipAnim: True
                 ResourcesToAddOnAbilityEnd:
                     - ["SoothsingerHighNote", 1]
+                # "once each round, when you perform an action with a note, you MAY gain the note": offered, not
+                # automatic; a hidden round marker bonus (MiscVars GH2E_NoteThisRound) blocks a second gain this round
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateOncePerRound: Actor.ActiveBonuses.Any(CustomAbility.GetMiscVarBool(obj.Ability, "GH2E_NoteThisRound")) == False
+                MiscVars:
+                    GH2E_NoteThisRound: True
+                ActiveBonus:
+                    Duration: Round
+                    Hidden: True
 Layout:
     Top:
         - Row: "$FHS_GH2E_Soothsinger2_05_T$"

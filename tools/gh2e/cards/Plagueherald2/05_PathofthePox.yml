@@ -1,8 +1,8 @@
 # card: Path of the Pox
 # top: "one enemy that has Plague" with no range printed: any range (Range 99, line of sight), as for every
 # no-range Plague effect of this class (NOTES.md). bottom: the chain is three nested Plague sub-abilities, each aimed
-# around the previous one's target (Range 3 / 2 / 1 from it); "no enemy more than once": each link may only pick an
-# enemy without Plague (the target pick checks it).
+# around the previous one's target (Range 3 / 2 / 1 from it); "no enemy more than once": each link ignores the earlier
+# links' targets (IgnorePreviousAbilityTargets, Blistering Buboes top), so an enemy plagued before may still be chained.
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -43,10 +43,8 @@ Data:
                         NullTargeting: True
                         Range: 3
                         Target: 1
-                        Filter:
-                            TargetType: Enemy
-                            Vars:
-                                ValidateNoPlague: target.GetCharacterResourceAmount("Plague") == 0
+                        Filter: Enemy
+                        IgnorePreviousAbilityTargets: [BPlague]      # no enemy twice in this chain (Blistering Buboes)
                         AllTargetsAdjacentToParentTargets: True
                         TreatAsNonSubAbility: True
                         ResourcesToGiveToTargets:
@@ -57,10 +55,8 @@ Data:
                                 NullTargeting: True
                                 Range: 2
                                 Target: 1
-                                Filter:
-                                    TargetType: Enemy
-                                    Vars:
-                                        ValidateNoPlague: target.GetCharacterResourceAmount("Plague") == 0
+                                Filter: Enemy
+                                IgnorePreviousAbilityTargets: [BPlague, BPlague2]      # no enemy twice in this chain (Blistering Buboes)
                                 AllTargetsAdjacentToParentTargets: True
                                 TreatAsNonSubAbility: True
                                 ResourcesToGiveToTargets:
@@ -71,10 +67,8 @@ Data:
                                         NullTargeting: True
                                         Range: 1
                                         Target: 1
-                                        Filter:
-                                            TargetType: Enemy
-                                            Vars:
-                                                ValidateNoPlague: target.GetCharacterResourceAmount("Plague") == 0
+                                        Filter: Enemy
+                                        IgnorePreviousAbilityTargets: [BPlague, BPlague2, BPlague3]      # no enemy twice in this chain (Blistering Buboes)
                                         AllTargetsAdjacentToParentTargets: True
                                         TreatAsNonSubAbility: True
                                         ResourcesToGiveToTargets:

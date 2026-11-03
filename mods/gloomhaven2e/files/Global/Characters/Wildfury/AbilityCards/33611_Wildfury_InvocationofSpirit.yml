@@ -5,8 +5,8 @@ ID: 33611
 Level: X
 Initiative: 62
 # card: Invocation of Spirit
-# top: "! consume Air/Earth (either, required)": the split consume as Spirit Swap top (Earth only while Air is not
-# infused, then Air), then the invocation is placed when either was consumed. Invocation: after each of the Bear's next
+# top: "! consume Air/Earth (either, required)": the split consume as Spirit Swap top (two GHElementEither steps the
+# plugin merges into one element picker: either element), then the invocation is placed when either was consumed. Invocation: after each of the Bear's next
 # three attacks, once each round, "Attack 2 on one enemy within 3 hexes, as if you occupied the Bear's hex".
 # APPROXIMATION: the Bear itself performs Attack 2, range 3 (same origin hex and reach; the attack counts as the
 # Bear's, not the Wildfury's). NEEDS PLUGIN to make it the Wildfury's attack. Three slots, XP on the first. Persistent.
@@ -16,11 +16,11 @@ Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
+            # the split Air/Earth consume: one element picker (GHElementEither, the plugin merges the marked steps into
+            # the first, as on Spirit Swap top): either element, the player's pick
             TCEarth:
-                StartAbilityRequirements:
-                    Type: ThisAbility
-                    Vars:
-                        ValidateNoAir: CustomAbility.IsElementInfused(ElementInfusionBoardManager.EElement.Air) == False
+                MiscVars:
+                    GHElementEither: True
                 Consume:
                     Elements: [Earth]
                     Abilities:
@@ -28,6 +28,8 @@ Data:
                             Null: True
                             AutoTrigger: True
             TCAir:
+                MiscVars:
+                    GHElementEither: True
                 Consume:
                     Elements: [Air]
                     Abilities:

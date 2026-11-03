@@ -1,7 +1,7 @@
 # card: Camouflage
 # top: Invisible only when you are adjacent to a wall (the 1st edition Crushing Weight filter TargetAdjacentToWalls, on
-# yourself). Frosthaven digital has no corridor tiles: that clause is dropped. Frosthaven's Invisible lasts until the end
-# of your next turn, not the end of this round (approximation).
+# yourself). Frosthaven digital has no corridor tiles: that clause is dropped (user decision C). "Lose Invisible at the
+# end of the round": the condition's DecrementTrigger Rounds with a round bonus (Silent Knife Stick to the Shadows).
 # bottom: attacks on your summons adjacent to you gain disadvantage this round: the Sunkeeper's round disadvantage aura
 # (AttackersGainDisadvantage, Frosthaven's Deflecting Maneuver) on your summons within range 1.
 Discard: [Discard,Discard]
@@ -17,11 +17,14 @@ Data:
                     Enhancements: 1
                 AnimOverload: RangedAttack
             TInvis:
-                Invisible: True
+                Invisible:
+                    DecrementTrigger: Rounds
                 Filter:
                     TargetType: Self
                     TargetAdjacentToWalls: "> 0"
                 AnimOverload: PowerUp
+                ActiveBonus:
+                    Duration: Round
     Bottom:
         Abilities:
             BMove:

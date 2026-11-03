@@ -26,13 +26,14 @@ PERKS = [
      {"CardsToRemove": "[AMC_Basic_P1]", "CardsToAdd": "[AMC_GH2E_Nightshroud2_Tear_P0]"}),
     (1, "Unfazed", 'Ignore scenario effects and add two <sprite name="+1">',
      {"CardsToAdd": "[AMC_Basic_P1, AMC_Basic_P1]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
-    # the Elementalist's long-rest infusion (gh_crossover ELEMENTALIST_PERKS), Dark only; "may" is automatic
+    # the Elementalist's long-rest infusion (gh_crossover ELEMENTALIST_PERKS), Dark only; no AutoTrigger, so the infusion
+    # is offered and may be skipped ("you may")
     (1, "Restful Night", "Whenever you long rest, you may <sprite name=CreateDark>",
      {"Flags": "[Passive, ExecuteAbilitiesAfterLongRest]", "Abilities": """\
     BInfuse:
         Infuse: [Dark]
         Filter: Self
-        AutoTrigger: True
+        CanSkip: True
         SkipAnim: True
         CanUndo: False"""}),
     # gh_crossover's once-each-scenario toggle (_once_per_quest: Perk_BannerSpear_10's persistent DuringTurnAbility

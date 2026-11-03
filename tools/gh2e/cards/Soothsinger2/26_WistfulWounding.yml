@@ -1,6 +1,6 @@
 # card: Wistful Wounding
 # top: song (Low Note): a once-per-turn Wound on one attack (Crashing Tide Rancid Brine's condition buff) as Power
-# Ballad's toggled aura on you and every ally; two slots per round
+# Ballad's untoggled once-per-turn aura on you and every ally (the first attack each turn); two slots per round
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -18,7 +18,7 @@ Data:
                     ValidAbilityTypes: [Attack]
                     Restriction: OncePerTurn
                     RestrictPerActor: True
-                    IsToggleBonus: True
+                    # no toggle: lands by itself on each figure's first attack of its turn (HIVE Heavy Metal)
                     IsSingleTargetBonus: True
                     IsAura: True
                     AuraTargeting: All
@@ -47,6 +47,8 @@ Data:
                     Duration: Ability
                     Hidden: True
                     RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+                MiscVars:
+                    GH2E_Song1: True      # the song's Note cost (Symphonic Medley picks songs by it)
     Bottom:
         Abilities:
             BRetaliate:
@@ -65,10 +67,21 @@ Data:
             BNote:
                 NullTargeting: True
                 Filter: Self
-                AutoTrigger: True
+                CanSkip: True
                 SkipAnim: True
                 ResourcesToAddOnAbilityEnd:
                     - ["SoothsingerHighNote", 1]
+                # "once each round, when you perform an action with a note, you MAY gain the note": offered, not
+                # automatic; a hidden round marker bonus (MiscVars GH2E_NoteThisRound) blocks a second gain this round
+                StartAbilityRequirements:
+                    Type: ThisAbility
+                    Vars:
+                        ValidateOncePerRound: Actor.ActiveBonuses.Any(CustomAbility.GetMiscVarBool(obj.Ability, "GH2E_NoteThisRound")) == False
+                MiscVars:
+                    GH2E_NoteThisRound: True
+                ActiveBonus:
+                    Duration: Round
+                    Hidden: True
 Layout:
     Top:
         - Row: "$GH2E_Soothsinger2_26_T$"

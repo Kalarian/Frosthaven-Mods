@@ -1,6 +1,6 @@
 # card: Captivating Performance
 # top: song (High, High, Low, Low Note); end-of-turn Disarm in Secretariat's triangle (0,1) (1,0) (1,1), no hex mark
-# bottom: moving song tokens back is NEEDS PLUGIN (text only)
+# bottom: Move 4, then song tokens back one slot (MoveActiveBonusTracker -1, the player picks each song card)
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -27,12 +27,23 @@ Data:
                     Duration: Ability
                     Hidden: True
                     RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
+                MiscVars:
+                    GH2E_Song4: True      # the song's Note cost (Symphonic Medley picks songs by it)
     Bottom:
         Abilities:
             BMove:
                 Move:
                     Amount: 4
                     Enhancements: 1
+            # "move your character tokens on each of your active Song abilities backward one slot": Frosthaven's
+            # MoveActiveBonusTracker -1 (Drifter Fortitude bottom, AMC_MoveTrackerBackOneSlot), as many cards as you have
+            # songs; the class's non-song trackers are marked ImmuneMoveActiveBonusTracker (Lucky Dice's flag)
+            BTrackersBack:
+                MoveActiveBonusTracker: -1
+                Filter: Self
+                AnimOverload: PowerUp
+                Vars:
+                    NumberOfCardsToSelect: 15
 Layout:
     Top:
         - Row: "$GH2E_Soothsinger2_30_T$"

@@ -5,19 +5,41 @@ Description: PERK_Sunkeeper2_09_Desc
 CharacterID: Sunkeeper2ID
 Available: 1
 Cost: 2
-Flags: [Passive, ExecuteAbilitiesAfterRoomRevealed, ApplyActiveBonusesAtScenarioStart]
+Flags: [Passive, ApplyActiveBonusesAtScenarioStart]
 Abilities:
-    AShield:
-        Shield: 1
+    AShieldOnDoor:
         Filter: Self
         AutoTrigger: True
         SkipAnim: True
+        AddActiveBonus:
+            Shield: 1
+            Filter: Self
+            AutoTrigger: True
+            ActiveBonusDuration: Round
+            AnimOverload: PowerUp
+            MiscVars:
+                InterruptCurrentAbility: True
         ActiveBonus:
-            Duration: Round
-    ARetaliate:
-        Retaliate: 1
+            Duration: Persistent
+            Behaviour: GenericRoomRevealed
+            Restriction: OncePerRound
+            Hidden: True
+            TriggerOnCaster: True
+    ARetaliateOnDoor:
         Filter: Self
         AutoTrigger: True
         SkipAnim: True
+        AddActiveBonus:
+            Retaliate: 1
+            Filter: Self
+            AutoTrigger: True
+            ActiveBonusDuration: Round
+            AnimOverload: None
+            MiscVars:
+                InterruptCurrentAbility: True
         ActiveBonus:
-            Duration: Round
+            Duration: Persistent
+            Behaviour: GenericRoomRevealed
+            Restriction: OncePerRound
+            Hidden: True
+            TriggerOnCaster: True

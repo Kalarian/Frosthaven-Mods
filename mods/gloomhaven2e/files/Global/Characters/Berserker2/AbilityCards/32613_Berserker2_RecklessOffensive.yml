@@ -12,7 +12,7 @@ Data:
             TAttack:
                 Attack:
                     Amount: 4
-                    DiamondEnhancements: 1
+                    SquareEnhancements: 1
         Consumes:
             TCDamage:
                 CostAbility:
@@ -29,7 +29,7 @@ Data:
             BMove:
                 Move:
                     Amount: 3
-                    CircleEnhancements: 1
+                    SquareEnhancements: 1
                 ConditionalOverrides:
                     BMoveCO:
                         Self: True

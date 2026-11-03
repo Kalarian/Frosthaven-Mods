@@ -19,6 +19,10 @@ Abilities:
                     Teleport2: 5
                     Filter: Self
                     TreatAsNonSubAbility: True
+                    Vars:
+                        FreedTiles: ParentAbility.TilesSelected
+                    MiscVars:
+                        IsValidTeleportTile: FreedTiles.Contains(tile)
                     AnimOverload: Teleport Into
                     AnimOverload2: Teleport Outof
             Filter: [Self]

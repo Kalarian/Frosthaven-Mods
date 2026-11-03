@@ -1,6 +1,6 @@
 # card: Needle Gun
-# top: the Pierce square mark is dropped (Frosthaven's Pierce takes no enhancement slot: rulecheck rejects it). bottom: three
-# separate melee attacks, the third without a mark.
+# top: the Pierce square mark = Pierce inside the Attack mapping with PierceEnhancements (Frosthaven's Infuser Gale
+# Barrage shape). bottom: three separate melee attacks, the third without a mark.
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -9,8 +9,9 @@ Data:
                 Attack:
                     Amount: 2
                     DiamondEnhancements: 1
+                    Pierce: 1
+                    PierceEnhancements: 1
                 Range: 3
-                Pierce: 1
                 Conditions: Poison
                 AnimOverload: RangedAttack
     Bottom:
@@ -33,7 +34,7 @@ Layout:
     Top:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *TAttack* <size=100%><voffset=1>@TAttack@"
         - Row: "$Range$ <sprite name=Range> *TAttack.Range*"
-        - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce*"
+        - Row: "$Pierce$ <sprite name=Pierce> *TAttack.Pierce* @TAttack.Pierce@"
         - Row: "$Poison$ <sprite name=Poison>"
     Bottom:
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack1* <size=100%><voffset=1>@BAttack1@"

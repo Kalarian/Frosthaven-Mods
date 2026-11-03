@@ -50,11 +50,11 @@ Nothing here has been run in the game. Every shape below that Frosthaven's own c
 - 01 Ice Spikes: as printed.
 - 02 Malleable Evocation: Strengthen, Ward and Bless are `Conditions` on the heal (Boneshaper Wailing from Beyond
   shape). Safeguard and the two-or-more bonus use the class-wide shapes above. Bottom "move one waning element to the
-  strong column" is the Infuser Desperate Throw bottom (`InfuseOnlyWaning: True` over all six elements).
-- 03 Formless Power: top is as printed. Bottom: APPROXIMATION using the 1st edition's verified shape (a toggle BuffAttack
-  with `Consuming: Any`, `EntireAction`, `Restriction: OncePerAction`). The card says "at the start of each of your
-  turns, consume any for +1 Attack on all attacks that turn". In the port you consume when attacking instead, once per
-  action. A turn with two attack actions can therefore consume twice, where the card consumes once for both.
+  strong column" = Frosthaven's AMC_InfuseOneWaning_P0_R (`InfuseOnlyWaning: True` + `ShowElementPicker: True` over all
+  six elements: the picker offers only the waning ones and moves one).
+- 03 Formless Power: top is as printed. Bottom: Snowdancer Cold Therapy's persistent StartTurnAbility consume (picker
+  over all six elements, skippable) whose ability is a Round +1 Attack bonus on yourself: one consume at the start of
+  the turn buffs every attack of that turn. Bench it.
 - 04 Shaping the Ether: the Air Push 3 is the 1st edition's inline push. Two-or-more bonus as above.
 - 05 Stoking Hail, 07 Infernal Vortex, 08 Frigid Torrent, 10 Dual Nature: as printed (the +1 Move is the conditional
   above). Infernal Vortex top is the 1st edition Lava Eruption shape: `Target: -1` within range 4.
@@ -95,11 +95,13 @@ Nothing here has been run in the game. Every shape below that Frosthaven's own c
   ChainAttackRange already enforces.
 - 20 Obsidian Shards: bottom is a Consume Ice+Earth ability. Inside it is a PreventFirstDamage aura (Banner of Valor
   shape: `PreventDamage: 99`, Range 1, `AuraFilter: [Self, Ally]`) with a 2-slot track `[0,1]`, plus the Ice|Earth
-  picker. The persistent bonus isn't lost, so the card discards after the second use. The layout is a text row: an
-  `- Active:` element can't name an ability nested inside a Consume (rulecheck: "Active ability name not found").
-  **Untested.**
-- 21 Winter's Edge: bottom "Strengthen, Bless: target 2 allies, range 3" follows Secretariat: Strengthen yourself, Bless
-  two allies within range 3 (the sheet lists it as unclear; the target pill follows the Bless icon). The grant Attack 3
+  picker. No toggle: the next two sources of damage are negated automatically, as printed. The persistent bonus isn't
+  lost, so the card discards after the second use. The layout is a text row: an `- Active:` element can't name an
+  ability nested inside a Consume (rulecheck: "Active ability name not found"). **Untested** (Frosthaven's own
+  PreventFirstDamage uses are toggles: bench that it fires untoggled).
+- 21 Winter's Edge: bottom "Strengthen, Bless: target 2 allies, range 3": both conditions on the 2 allies (one pill after
+  the pair, as Biting Gnats' "Poison, Muddle: target all"; user decision C): one Bless ability with
+  `Conditions: Strengthen` (Geminate Oscillating Entity). The grant Attack 3
   is a ControlActor attack with `StrengthIsBase`.
 - 22 Pragmatic Reinforcement: consume Light gives the heal target a level 1 recover (`UseParentTargets`, CardLevel 1)
   plus an Air|Earth picker. Consume Air|Earth is a split consume giving Shield 2 for the round to the heal target (the
@@ -162,8 +164,6 @@ rolling is a new rolling infuse-any modifier.
 - Plugin (optional): make the "two or more elements consumed" bonuses automatic instead of an extra consume button.
 - GHMasteries: tags for "consume 4+ elements in one turn (count 5)" and "all six elements strong or waning at once (3
   scenarios)" to add the two masteries.
-- Formless Power bottom: a start-of-turn consume that buffs the whole turn (Snowdancer Cold Therapy's StartTurnAbility
-  consume could carry a round BuffAttack) would make it exact. Not done because the 1st edition shape is verified.
 - Bench these first (untested shapes): Malleable Evocation / Prismatic Barrage (Safeguard on an ally, two-or-more
   button), Eye of the Hurricane top (attacks around the heal target), Prismatic Barrage top (hazard in target hex),
   Obsidian Shards bottom, Gravel Guard bottom, Encompassing Shadow bottom aura, Chromatic Construct's attack bonus.

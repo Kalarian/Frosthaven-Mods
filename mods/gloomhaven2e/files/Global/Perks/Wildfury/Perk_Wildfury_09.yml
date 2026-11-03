@@ -16,7 +16,7 @@ Abilities:
                         Move: 4
                         StrengthIsBase: True
             Filter:
-                TargetType: [OwnSummon]
+                TargetType: [Companion]
                 HeroSummonClasses: [WildfuryBearID]
             Target: 1
             Targeting: All

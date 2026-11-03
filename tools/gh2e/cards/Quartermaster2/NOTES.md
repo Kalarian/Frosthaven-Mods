@@ -56,8 +56,8 @@ as printed. Per card: 01 (self 2 + each adjacent ally 1, for "5 random, at most 
 
 - 05 Bladed Boomerang: ring area copied from the sheet's coordinates (empty centre 0,0; grey -1,-1), as the other 2e
   classes copy them.
-- 06 Impaling Spear bottom: "target 1 enemy within 2 hexes" with no range icon = `Range: 2` + `TreatAsMelee: True`
-  (2e: no range value = melee; reach as a targeting limit). Rules question (sheet "unclear"); my reading.
+- 06 Impaling Spear bottom: "target 1 enemy within 2 hexes" with no range icon = a ranged attack, `Range: 2` ("within N
+  hexes" follows range rules, rulebook p21: user decision B).
 - 08 Cleave and Thrust: the hex mark down-right of the grey hex (1,-1) from the image (GHS lacks it).
 - 09 Iron Bulwark bottom / 28 Armed to the Teeth top: "Grant ... : Shield" = a round shield on the figures adjacent
   when played (Banner Spear Hold the Line, Shattersong Cloaking Refraction: Range 1, Target 99 / 1, Filter
@@ -71,13 +71,14 @@ as printed. Per card: 01 (self 2 + each adjacent ally 1, for "5 random, at most 
   (the 1st edition Refreshment's rest trigger; both rest behaviours listed as Crashing Tide Cleansing Swell does).
 - 13 Scroll of Recall top: Pull on one ally (Filter Ally, Snowdancer Cross Winds pulls allies); the heal Filter
   [Self, Ally]. Bottom pull carries the Muddle (Conditions), Filter Enemy.
-- 14 Sharpening Kit: heal Filter Ally (allies and summons, not self); bottom = the 1st edition round aura at range 1.
+- 14 Sharpening Kit: heal Filter Ally (allies and summons, not self); bottom = a round +1 Attack on you and on each ally
+  adjacent when played (user decision C; not an aura that follows you).
 - 17 Quiver of Arrows bottom: the 1st edition aura (BuffTarget, ranged, allies within 1) + XPTracker [0,1,0,1].
 - 20 Giant Club bottom: APPROXIMATION / NEEDS PLUGIN. Allies adjacent to you after the move (not "to any hex entered
   during the move") each recover one item; "10 supplies per ally given" = PerformVars `10 * ActorsTargeted.Count` on
   that refresh. UNVERIFIED expression.
-- 21 Scroll of Judgment top: the 1st edition shape (enemies first, then the mandatory self damage with AutoTrigger and
-  CanSkip False; printed first, but a half's first ability never auto-triggers). Bottom reaction: round
+- 21 Scroll of Judgment top: the mandatory self damage first, as printed (CanSkip False, standard confirm), then the
+  enemies' damage 2. Bottom reaction: round
   DuringActionAbilityOnAttacked (Energy Conversion / Stress Vents behaviour) with one slot carrying the XP ([1]),
   its ability recovers one spent item. TEST: the item pick on a monster's turn; the slot ends the bonus.
 - 22 Set Up Shop top: persistent, NOT lost, no slots: stays to the end of the scenario (rules question: 2e may let

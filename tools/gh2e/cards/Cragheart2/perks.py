@@ -21,8 +21,9 @@ PERKS = [
      {"CardsToAdd": "[AMC_Muddle_R]", "Flags": "[Passive, IgnoreNegativeScenarioEffects]"}),
     (1, "Thick Skin", 'Ignore item <sprite name="-1"> effects',
      {"Flags": "[Passive, IgnoreMinusOneItemEffects]"}),
-    # APPROXIMATION: Frosthaven's once-per-scenario toggle (as the 1st edition crossover perks): destroy one obstacle
-    # within range 5, then Teleport 5 (the player picks the freed hex; the engine doesn't tie the teleport to it)
+    # Frosthaven's once-per-scenario toggle (as the 1st edition crossover perks): destroy one obstacle within range 5,
+    # then a teleport whose only valid hex is the freed one (IsValidTeleportTile on the destroy's selected tile, the
+    # Infuser Formless Bladestorm form: Vars list + MiscVars test)
     (1, "Boulder Leap", 'Once each scenario, during your turn, you may destroy one 1-hex obstacle within <sprite name=Range> 5 to <sprite name=Teleport> to the hex it occupied',
      {"Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]",
       "Abilities": _once_per_quest("PERK_Cragheart2_08_Desc", "Positive_DamagePrevent_Shadow_Teleport", """\
@@ -36,6 +37,10 @@ PERKS = [
                     Teleport2: 5
                     Filter: Self
                     TreatAsNonSubAbility: True
+                    Vars:
+                        FreedTiles: ParentAbility.TilesSelected
+                    MiscVars:
+                        IsValidTeleportTile: FreedTiles.Contains(tile)
                     AnimOverload: Teleport Into
                     AnimOverload2: Teleport Outof""")}),
     # Frosthaven's after-rest perk hooks (both rests, as gh_crossover's Remodeling and Grave Defense), a skippable

@@ -12,7 +12,7 @@ Data:
             TAttack:
                 Attack:
                     Amount: 3
-                    DiamondEnhancements: 1
+                    SquareEnhancements: 1
         Consumes:
             TCDamage:
                 CostAbility:
@@ -29,7 +29,7 @@ Data:
             BHeal:
                 Heal:
                     Amount: 3
-                    DiamondPlusEnhancements: 1
+                    SquareEnhancements: 1
                 Range:
                     Amount: 2
                     SquareEnhancements: 1

@@ -17,7 +17,7 @@ Data:
             TAttack:
                 Attack:
                     Amount: 3
-                    DiamondEnhancements: 1
+                    SquareEnhancements: 1
                 Range:
                     Amount: 4
                     SquareEnhancements: 1
