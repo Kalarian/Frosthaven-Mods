@@ -24,7 +24,8 @@ namespace FrosthavenMods
     ///   - GH2E_RetaliateAfterDamage (Warding Strength bottom, Shield 1 with Frosthaven's ShieldAndRetaliate behaviour):
     ///     the Retaliate 1 and the use slot come after the attack's damage (OnBeingAttackedPostDamage) and only when the
     ///     attack made the Bruiser suffer damage (the approved reading: a 0-damage attack uses no slot), never when the
-    ///     attack killed him; the engine did both before the damage, on any attack with a value above 0.
+    ///     attack killed him, once per attack; the engine did both before the damage, on any attack with a value above 0, and
+    ///     again from its prevent-damage hook (OnPreventDamageTriggered, skipped for the marked bonus).
     ///   - Spiked Hide (Bruiser perk, AMC_GH2E_Bruiser_SpikedHide_P0_R): the drawn card goes "to the active area" as the
     ///     Bruiser's BruiserSpikedHide token (a character resource: saved, shown on his status row); on the next attack on
     ///     him by an adjacent enemy every held card gives Retaliate 2 for that attack and is discarded.
@@ -222,6 +223,24 @@ namespace FrosthavenMods
             catch { return true; }
         }
 
+        // The engine's prevent-damage hook (the Shield 1 stopped some damage) retaliated and used a slot too, even when the
+        // shield stopped all of it, and on top of the post-damage retaliate below (twice): never for a marked bonus.
+        [HarmonyPatch(typeof(CShieldActiveBonus_ShieldAndRetaliate), nameof(CShieldActiveBonus_ShieldAndRetaliate.OnPreventDamageTriggered))]
+        [HarmonyPrefix]
+        private static bool NotOnPrevent(CShieldActiveBonus_ShieldAndRetaliate __instance, CActiveBonus preventedByBonus)
+        {
+            try
+            {
+                if (preventedByBonus != __instance.ActiveBonus || !Marked(__instance.ActiveBonus?.Ability, "GH2E_RetaliateAfterDamage")) return true;
+                Plugin.Log.LogInfo($"GHRule WardingStrength card {CardOf(__instance.ActiveBonus)} damage prevented by the shield: no retaliate or slot from the prevention (only after suffered damage)");
+                return false;
+            }
+            catch { return true; }
+        }
+
+        /// <summary>One retaliate per attack: the per-target summary of each attack that already retaliated.</summary>
+        private static readonly ConditionalWeakTable<CAttackSummary.TargetSummary, object> WardingDone = new ConditionalWeakTable<CAttackSummary.TargetSummary, object>();
+
         [HarmonyPatch(typeof(CBespokeBehaviour), nameof(CBespokeBehaviour.OnBeingAttackedPostDamage))]
         [HarmonyPostfix]
         private static void AfterDamage(CBespokeBehaviour __instance, CAbilityAttack attackAbility, CAttackSummary.TargetSummary targetSummary)
@@ -244,6 +263,12 @@ namespace FrosthavenMods
                     Plugin.Log.LogInfo($"GHRule WardingStrength card {card} {Name(attacker)}'s attack made {Name(me)} suffer no damage: no retaliate, no slot used");
                     return;
                 }
+                if (WardingDone.TryGetValue(targetSummary, out _))
+                {
+                    Plugin.Log.LogInfo($"GHRule WardingStrength card {card} {Name(attacker)}'s attack already answered: no second retaliate, no second slot");
+                    return;
+                }
+                WardingDone.Add(targetSummary, new object());
                 shield.Retaliate(attacker, attackAbility);
                 b.RestrictActiveBonus(attacker);
                 if (b.HasTracker)

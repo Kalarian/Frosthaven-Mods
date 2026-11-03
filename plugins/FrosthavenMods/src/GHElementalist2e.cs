@@ -140,7 +140,9 @@ namespace FrosthavenMods
 
         private struct Deferred { public CActor Actor; public List<ElementInfusionBoardManager.EElement> Elements; public CBaseCard Card; }
         private static readonly List<Deferred> s_Deferred = new List<Deferred>();
-        private static readonly HashSet<CAbilityInfuse> s_Skip = new HashSet<CAbilityInfuse>();
+        /// <summary>Infusions noted at Start, waiting for their Perform: only a performed infusion is deferred to the turn's
+        /// end (an infuse started, undone and replayed is noted once; one undone for good is never asked).</summary>
+        private static readonly Dictionary<CAbilityInfuse, Deferred> s_Skip = new Dictionary<CAbilityInfuse, Deferred>();
         private static object s_DeferredState;
         private static readonly AccessTools.FieldRef<CAbility, bool> CanUndo = AccessTools.FieldRefAccess<CAbility, bool>("m_CanUndo");
 
@@ -180,14 +182,12 @@ namespace FrosthavenMods
                     return;
                 }
                 NewScenarioCheck();
-                s_Deferred.Add(new Deferred
+                s_Skip[__instance] = new Deferred
                 {
                     Actor = __instance.TargetingActor,
                     Elements = __instance.ElementsToInfuse.ToList(),
                     Card = __instance.GetAbilityBaseCard() ?? __instance.ParentBaseCard,
-                });
-                s_Skip.Add(__instance);
-                Plugin.Log.LogInfo($"GHRule DeferredInfusion card {card} {string.Join("/", __instance.ElementsToInfuse)}: the element is chosen at the end of the turn");
+                };
             }
             catch (Exception e) { Report("infuse start", e); }
         }
@@ -196,9 +196,13 @@ namespace FrosthavenMods
         [HarmonyPrefix]
         private static bool BeforeInfusePerform(CAbilityInfuse __instance, ref bool __result)
         {
-            if (__instance == null || !s_Skip.Remove(__instance)) return true;
+            if (__instance == null || !s_Skip.TryGetValue(__instance, out Deferred d)) return true;
+            s_Skip.Remove(__instance);
             try
             {
+                NewScenarioCheck();
+                s_Deferred.Add(d);
+                Plugin.Log.LogInfo($"GHRule DeferredInfusion card {CardId(__instance)} {string.Join("/", d.Elements)}: the element is chosen at the end of the turn (one picker for this infusion)");
                 __instance.AbilityHasHappened = true;
                 CanUndo(__instance) = false;
                 PhaseManager.NextStep();

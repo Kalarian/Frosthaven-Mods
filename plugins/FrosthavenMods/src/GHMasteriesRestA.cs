@@ -25,9 +25,9 @@ namespace FrosthavenMods
     ///                                        each whole round (retaliate and other turns included) and Targets different
     ///                                        ability cards played over them
     /// The in-scenario counts the statistics don't hold are kept for the scenario being played: the retaliate kills and the
-    /// push-kill flag are also saved with the scenario (GHSavedCounts hidden resources, a reload keeps them); the
-    /// forced-moved enemies (this round only) and the per-round damage tally (the statistics' damage records back it) are
-    /// memory only. Logs "GHRule &lt;Tag&gt; card 0 ..." when a check answers.
+    /// push-kill flag are also saved with the scenario (GHSavedCounts hidden resources, a reload keeps them), and so are
+    /// the forced-moved enemies (this round's mark on the enemy) and the last three rounds' damage tally (on the Bruiser;
+    /// the statistics' damage records back older rounds). Logs "GHRule &lt;Tag&gt; card 0 ..." when a check answers.
     /// </summary>
     [HarmonyPatch]
     internal static class GHMasteriesRestA
@@ -41,6 +41,23 @@ namespace FrosthavenMods
         // saved counts (GHSavedCounts slots on the character): Berserker slot 1 = kills by retaliate this scenario;
         // Bruiser slot 2 = "killed an enemy it pushed or pulled that round" in this scenario (slot 1 is Defensive Tactics)
         internal const int SlotRetaliateKills = 1, SlotPushKill = 2;
+        // Bruiser slots 3-5 = round number + 1 of the last three rounds' damage tally (index round % 3), slots 6-8 = that
+        // round's damage to enemies; on the forced-moved ENEMY: slot 10 = round number + 1 of the round the Bruiser pushed
+        // or pulled it (an enemy holds no other GHSavedCounts slot). A reload keeps both.
+        internal const int SlotStreakRound = 3, SlotStreakDamage = 6, SlotPushedOnTarget = 10;
+
+        private static int SavedRoundDamage(CActor p, int round)
+        {
+            int i = ((round % 3) + 3) % 3;
+            return GHSavedCounts.Get(p, SlotStreakRound + i) == round + 1 ? GHSavedCounts.Get(p, SlotStreakDamage + i) : 0;
+        }
+
+        private static void SaveRoundDamage(CActor p, int round, int damage)
+        {
+            int i = ((round % 3) + 3) % 3;
+            GHSavedCounts.Set(p, SlotStreakRound + i, round + 1);
+            GHSavedCounts.Set(p, SlotStreakDamage + i, damage);
+        }
 
         private static ScenarioState _scenario;
         private static readonly Dictionary<string, int> RetaliateKills = new Dictionary<string, int>();
@@ -77,7 +94,9 @@ namespace FrosthavenMods
         internal static void NoteForced(CActor me, CActor target)
         {
             Fresh();
-            if (me is CPlayerActor && target != null) Pushed.Add($"{G(me)}/{G(target)}/{Round}");
+            if (!(me is CPlayerActor) || target == null) return;
+            Pushed.Add($"{G(me)}/{G(target)}/{Round}");
+            GHSavedCounts.Set(target, SlotPushedOnTarget, Round + 1);
         }
 
         internal static void NoteAttack(CActor me) { }
@@ -92,7 +111,10 @@ namespace FrosthavenMods
             {
                 if (!__result || !(targetingActor is CPlayerActor me) || actor == null) return;
                 Fresh();
-                if (!Pushed.Contains($"{G(me)}/{G(actor)}/{Round}")) return;
+                // the memory note, or after a reload the saved round on the enemy (only a Bruiser sets it)
+                bool pushed = Pushed.Contains($"{G(me)}/{G(actor)}/{Round}")
+                    || (me.Class?.ID == GHBruiser2e.ClassId && GHSavedCounts.Get(actor, SlotPushedOnTarget) == Round + 1);
+                if (!pushed) return;
                 GHSavedCounts.Set(me, SlotPushKill, 1);
                 if (PushKillScenario.Add(G(me)))
                     Plugin.Log.LogInfo($"GHRule KillPushedThisRound card 0 {GHPlague.NameOf(me)} killed {GHPlague.NameOf(actor)}, which it pushed or pulled this round (this scenario counts)");
@@ -133,7 +155,11 @@ namespace FrosthavenMods
                     if (dealt <= 0) return;
                     Fresh();
                     if (!RoundDamage.TryGetValue(__state.Source, out Dictionary<int, int> d)) RoundDamage[__state.Source] = d = new Dictionary<int, int>();
-                    d[Round] = (d.TryGetValue(Round, out int n) ? n : 0) + dealt;
+                    CPlayerActor p = GHSavedCounts.Player(__state.Source);
+                    // after a reload the memory tally is empty: the saved one carries on
+                    int before = Math.Max(d.TryGetValue(Round, out int n) ? n : 0, SavedRoundDamage(p, Round));
+                    d[Round] = before + dealt;
+                    if (p != null) SaveRoundDamage(p, Round, d[Round]);
                 }
                 catch (Exception e) { if (GHClasses.Reported.Add("ra damage tally")) Plugin.Log.LogError("GHMasteriesRestA (damage): " + e); }
             }
@@ -284,6 +310,14 @@ namespace FrosthavenMods
             }
             if (!string.IsNullOrEmpty(self) && RoundDamage.TryGetValue(self, out Dictionary<int, int> mine))
                 foreach (KeyValuePair<int, int> kv in mine) dealt[kv.Key] = Math.Max(dealt.TryGetValue(kv.Key, out int v) ? v : 0, kv.Value);
+            // the last three rounds' tally saved on the Bruiser (a reload emptied the memory one)
+            CPlayerActor me = GHSavedCounts.Player(self);
+            if (me != null)
+                for (int i = 0; i < 3; i++)
+                {
+                    int r = GHSavedCounts.Get(me, SlotStreakRound + i) - 1;
+                    if (r > 0) dealt[r] = Math.Max(dealt.TryGetValue(r, out int v) ? v : 0, GHSavedCounts.Get(me, SlotStreakDamage + i));
+                }
             int last = dealt.Keys.Concat(played.Keys).DefaultIfEmpty(0).Max();
             int run = 0, best = 0;
             total = rounds; met = 0; result = false;
