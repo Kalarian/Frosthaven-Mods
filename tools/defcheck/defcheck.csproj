@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Offline check of the values a pack's loaders accept but the game can't use (data-validity review 2026-11-03):
+       loads Frosthaven's files and then a pack with the game's own loaders (ScenarioRuleLibrary, and MapRuleLibrary for
+       masteries and battle goals), then repeats on the loaded objects what the game does with them when the outpost or
+       campaign starts (YMLDefRepository.ToRuleLibraryDefRepo). rulecheck stops after the load; this goes on from there.
+       See Program.cs. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <NoWarn>$(NoWarn);MSB3277;CS0618;CS8632</NoWarn>
+    <GamePath Condition="'$(GamePath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Frosthaven</GamePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="SharedLibrary"><HintPath>$(GamePath)\Frosthaven_Data\Managed\SharedLibrary.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="ScenarioRuleLibrary"><HintPath>$(GamePath)\Frosthaven_Data\Managed\ScenarioRuleLibrary.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="MapRuleLibrary"><HintPath>$(GamePath)\Frosthaven_Data\Managed\MapRuleLibrary.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(GamePath)\Frosthaven_Data\Managed\UnityEngine.CoreModule.dll</HintPath><Private>true</Private></Reference>
+  </ItemGroup>
+
+</Project>

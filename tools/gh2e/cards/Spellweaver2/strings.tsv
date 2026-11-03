@@ -29,3 +29,6 @@ AMC_GH2E_Spellweaver2_Wild_P0	+0 <sprite name=CreateWild>
 AMC_GH2E_Spellweaver2_FireIce_P2	+2 <sprite name=CreateMixed-FI>
 AMC_GH2E_Spellweaver2_Lost_P1	+1 "Add +2 <sprite name=Attack> if drawn during an action with <sprite name=Lost>"
 AMC_Stun_P1	+1 <sprite name=Stun>
+Spellweaver2_ROLE	Ranged Damage
+Spellweaver2_STRENGTHS	- <indent=%15>Powerful ranged attacks, many of them on several enemies</indent>\n- <indent=%15>Reviving Ether recovers lost cards</indent>\n- <indent=%15>Uses Fire and Ice to boost her abilities</indent>
+Spellweaver2_WEAKNESSES	- <indent=%15>Low health, can die very fast</indent>\n- <indent=%15>Very small hand size</indent>\n- <indent=%15>Losing Reviving Ether early is costly</indent>

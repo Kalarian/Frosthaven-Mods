@@ -14,6 +14,8 @@ card file under <pack>/files/Global/Characters/*/AbilityCards:
     - 2nd edition pack only: every half against its printed card (tools/gh2e/sheets): enhancement mark shapes, the main
       numbers, corner XP, lost / persistent / round icons, initiative and level (printed_vs_shipped; intentional or still
       open differences only through PRINTED_EXCEPTIONS, each with its reason)
+    - every character resource ID the plugin adds or reads is defined (Frosthaven's or a pack's CharacterResources)
+    - an enhanceable hex the Enhancer can price (red hexes on the half's top level, or GHEnhancerInnerHexes covers it)
 Prints one line per problem and a count; exit 1 on any problem (--strict also fails on warnings).
 """
 
@@ -165,6 +167,193 @@ def references(pack, problems):
         for tag in set(re.findall(r"FrosthavenMods_[A-Za-z0-9_]+", text)):
             if tag not in plugin:
                 problems.append(f"{rel}: mastery tag {tag} is answered nowhere in the plugin (the mastery could never complete)")
+
+
+PLUGIN_SRC = ROOT / "plugins" / "FrosthavenMods" / "src"
+RESOURCE_CALL = re.compile(r"\.\s*(?:Add|Get|Remove|Has|Set)CharacterResource(?:Amount)?\s*\(\s*")
+# resource IDs the plugin builds at run time, which the source can't show as one string: (file, argument text) -> IDs
+PLUGIN_RESOURCE_DYNAMIC = {
+    # GHSavedCounts: "GH2ECount" + slot, slots 1..Slots (never cut below 10: saved scenarios hold them)
+    ("GHSavedCounts.cs", "Id(slot)"): lambda src: [f"GH2ECount{i}" for i in range(1, int(re.search(r"const int Slots = (\d+)", src).group(1)) + 1)],
+}
+
+
+def _call_arg(text, start):
+    """The first argument of the call whose '(' ends just before text[start]: the text up to a top-level ',' or ')'."""
+    depth, i = 0, start
+    while i < len(text):
+        ch = text[i]
+        if ch in "([{":
+            depth += 1
+        elif ch in ")]}":
+            if depth == 0:
+                break
+            depth -= 1
+        elif ch == "," and depth == 0:
+            break
+        elif ch == '"':
+            i = text.index('"', i + 1)
+        i += 1
+    return text[start:i].strip()
+
+
+def _split_args(s):
+    out, depth, cur = [], 0, ""
+    for ch in s:
+        if ch in "([{":
+            depth += 1
+        elif ch in ")]}":
+            depth -= 1
+        if ch == "," and depth == 0:
+            out.append(cur.strip())
+            cur = ""
+        else:
+            cur += ch
+    if cur.strip():
+        out.append(cur.strip())
+    return out
+
+
+def plugin_resource_ids(problems):
+    """Every character resource ID the plugin passes to Add/Get/Remove...CharacterResource: string literals, string
+    constants (const / static readonly, also Class.Name), a helper's string parameter traced to its callers' constants,
+    and PLUGIN_RESOURCE_DYNAMIC for IDs built at run time. An argument none of these explains is a problem (the check
+    must see every ID). Returns {id: 'file:line'}."""
+    srcs = {p.name: p.read_text(encoding="utf-8", errors="replace") for p in sorted(PLUGIN_SRC.glob("*.cs"))}
+    consts, glob = {}, {}
+    decl = re.compile(r"(?:const|static\s+readonly)\s+string\s+((?:\w+\s*=\s*\"[^\"]*\"\s*,?\s*)+);")
+    for name, src in srcs.items():
+        consts[name] = {}
+        for d in decl.finditer(src):
+            for k, v in re.findall(r"(\w+)\s*=\s*\"([^\"]*)\"", d.group(1)):
+                consts[name][k] = v
+                glob.setdefault(k, v)
+
+    def resolve(name, expr):
+        expr = expr.strip()
+        m = re.fullmatch(r'"([^"]*)"', expr)
+        if m:
+            return m.group(1)
+        m = re.fullmatch(r"(?:\w+\.)*(\w+)", expr)
+        if m:
+            return consts[name].get(m.group(1), glob.get(m.group(1)) if "." in expr else None)
+        return None
+
+    found = {}
+    for name, src in srcs.items():
+        for m in RESOURCE_CALL.finditer(src):
+            arg = _call_arg(src, m.end())
+            line = src.count("\n", 0, m.start()) + 1
+            where = f"{name}:{line}"
+            rid = resolve(name, arg)
+            if rid is not None:
+                found.setdefault(rid, where)
+                continue
+            dyn = PLUGIN_RESOURCE_DYNAMIC.get((name, arg))
+            if dyn:
+                for r in dyn(src):
+                    found.setdefault(r, where)
+                continue
+            # a local just above (string note = high ? High : Low;): every branch of its value
+            loc = list(re.finditer(r"\bstring\s+" + re.escape(arg) + r"\s*=\s*([^;]+);", src[max(0, m.start() - 1500):m.start()])) if re.fullmatch(r"\w+", arg) else []
+            if loc:
+                expr = loc[-1].group(1)
+                branches = re.split(r"[?:]", expr)[1:] if "?" in expr else [expr]
+                vals = [resolve(name, b) for b in branches]
+                if all(v is not None for v in vals):
+                    for v in vals:
+                        found.setdefault(v, where)
+                    continue
+            # a helper's parameter (SetAmount(CActor a, string id, int value)): the callers' arguments at that position
+            sig = None
+            for sm in re.finditer(r"(?:static|private|internal|public)[^;{=\n]*?\b(\w+)\s*\(([^)]*\bstring\s+" + re.escape(arg) + r"\b[^)]*)\)", src[:m.start()]):
+                sig = sm
+            if re.fullmatch(r"\w+", arg) and sig:
+                method, params = sig.group(1), _split_args(sig.group(2))
+                pos = next(i for i, p in enumerate(params) if re.search(r"\bstring\s+" + re.escape(arg) + r"\b", p))
+                calls = 0
+                for cm in re.finditer(r"\b" + re.escape(method) + r"\s*\(", src):
+                    if src[cm.start() - 1:cm.start()] == "." or re.match(r"[^\n]*\bstring\s+" + re.escape(arg), src[cm.end():cm.end() + 200]):
+                        continue   # the declaration itself
+                    a = _split_args(_balanced(src, cm.end()))
+                    if len(a) > pos:
+                        r = resolve(name, a[pos])
+                        if r is None and not re.fullmatch(r"\w+", a[pos]):
+                            problems.append(f"plugin {name}:{src.count(chr(10), 0, cm.start()) + 1}: resource ID {a[pos]!r} passed to {method} can't be read (add it to packcheck PLUGIN_RESOURCE_DYNAMIC)")
+                        elif r is not None:
+                            calls += 1
+                            found.setdefault(r, f"{name}:{src.count(chr(10), 0, cm.start()) + 1}")
+                if calls:
+                    continue
+            problems.append(f"plugin {where}: resource ID {arg!r} can't be read from the source (add it to packcheck PLUGIN_RESOURCE_DYNAMIC)")
+    return found
+
+
+def _balanced(text, start):
+    depth, i = 0, start
+    while i < len(text):
+        if text[i] == "(":
+            depth += 1
+        elif text[i] == ")":
+            if depth == 0:
+                return text[start:i]
+            depth -= 1
+        elif text[i] == '"':
+            i = text.index('"', i + 1)
+        i += 1
+    return text[start:]
+
+
+def plugin_resources(problems):
+    """Every resource ID the plugin adds or reads is defined in Frosthaven's CharacterResources or a pack's: an undefined
+    one throws in CCharacterResource.set_Amount the moment the plugin gives it (the 2e Bone Breaker bottom,
+    Berserker2Token, never shipped: data-validity review 2026-11-03). The plugin serves both packs, so both are read."""
+    defined = _ids([ROOT / "extracted" / "Base" / "Global" / "Characters"]
+                   + [p / "files" / "Global" / "Characters" for p in sorted((ROOT / "mods").glob("gloomhaven*")) if (p / "files").is_dir()])
+    for rid, where in sorted(plugin_resource_ids(problems).items()):
+        if rid not in defined:
+            problems.append(f"plugin {where}: character resource {rid!r} is in no CharacterResources file (Frosthaven's or a pack's): the game throws when the plugin gives it")
+
+
+def _area_red(area):
+    return sum(1 for h in area.split("|") if h.strip().endswith(",R")) if isinstance(area, str) else 0
+
+
+def _area_has_slot(area):
+    return isinstance(area, str) and any(h.strip().endswith(",E") for h in area.split("|"))
+
+
+def inner_hex_slots(rel, card_id, half, abilities, problems):
+    """The Enhancer's hex price divides by the action's red hexes, counted on its top-level abilities only (the game's
+    YMLDefRepository): a hex slot whose top-level abilities have no red hex (the slot sits in a commanded or sub ability)
+    prices at a division by 0 and buying it zeroes the gold. GHEnhancerInnerHexes.cs counts the inner abilities' red
+    hexes for pack cards (20000-39999); a slot it can't cover (no ability of the half has a red hex, or a card outside
+    that range, or the fix missing) is a problem."""
+    if not isinstance(abilities, dict):
+        return
+    every = []
+
+    def walk(props):
+        if not isinstance(props, dict):
+            return
+        every.append(props)
+        for sp in (props.get("SubAbilities") or {}).values() if isinstance(props.get("SubAbilities"), dict) else []:
+            walk(sp)
+        ctl = props.get("ControlActor")
+        if isinstance(ctl, dict) and isinstance(ctl.get("Abilities"), dict):
+            for sp in ctl["Abilities"].values():
+                walk(sp)
+    for p in abilities.values():
+        walk(p)
+    if not any(_area_has_slot(p.get("AreaEffect")) for p in every):
+        return
+    top = max((_area_red(p.get("AreaEffect")) for p in abilities.values() if isinstance(p, dict)), default=0)
+    if top > 0:
+        return
+    fixed = (PLUGIN_SRC / "GHEnhancerInnerHexes.cs").exists() and isinstance(card_id, int) and 20000 <= card_id < 40000 \
+        and max((_area_red(p.get("AreaEffect")) for p in every), default=0) > 0
+    if not fixed:
+        problems.append(f"{rel}: {half}: an enhanceable hex with no red hex on the half's top-level abilities, which the plugin's GHEnhancerInnerHexes can't price (the Enhancer divides by 0 and buying zeroes the gold)")
 
 
 def _modifier_kinds(path):
@@ -538,6 +727,7 @@ def check_pack(pack):
                                 problems.append(f"{rel}: {half}/{k}: AllTargetsOnMovePath with Range targeting (only adjacent enemies are hit): add Targeting: All")
                         path_targets(v, merged or k.startswith("MergedMove"))
             path_targets(abilities)
+            inner_hex_slots(rel, d.get("ID"), half, abilities, problems)
             # a consume's abilities hung on a Null placeholder that comes after a ControlActor in the half: switching the
             # element on after the controlled figure acted stopped the game (RefreshConsumeBar NullReference, the 2e
             # Arresting March, 2026-11-01); the placeholder goes before the control. Since the plugin's GHConsumeOnNull
@@ -562,6 +752,7 @@ def check_pack(pack):
                     if not any(re.search(rf"^ID:\s*{re.escape(sid)}(ID)?\s*$", d.read_text(encoding="utf-8-sig"), re.M) for d in defs):
                         problems.append(f"{rel}: {half}/{ab}: summon {sid} has no definition in files/Global/HeroSummons (its card cannot be drawn)")
     references(pack, problems)
+    plugin_resources(problems)
     modifier_abilities(pack, problems)
     if _pack_name(pack) == "gloomhaven2e":
         printed_vs_shipped(pack, problems, warnings)

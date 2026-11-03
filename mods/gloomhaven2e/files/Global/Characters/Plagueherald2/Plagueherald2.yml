@@ -11,6 +11,11 @@ DefaultSkin: 1
 HealthTable: [ 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
 NumberAbilityCardsInBattle: 10
 Description: $Plagueherald2_DESCRIPTION$
+Role: $Plagueherald2_ROLE$
+Difficulty: $DIFFICULTY_MEDIUM$
+Strengths: $Plagueherald2_STRENGTHS$
+Weaknesses: $Plagueherald2_WEAKNESSES$
+Adventure_Description: $Plagueherald2_ADVENTURE_DESCRIPTION$
 HeroStats:
     Melee: 1
     Ranged: 4

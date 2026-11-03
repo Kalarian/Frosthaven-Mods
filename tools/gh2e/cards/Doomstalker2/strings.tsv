@@ -72,3 +72,6 @@ GH2E_Doomstalker2_30_B	You may have any number of <nobr><b><color=#39BEED>Doom</
 GH2E_Doomstalker2_30_B2	You may play one card from your hand or discard pile to perform a <nobr><b><color=#39BEED>Doom</color></b></nobr> action of the card.
 AMC_GH2E_Doomstalker2_Attack2Range5_M1	-1, Doomstalker performs: <sprite name=Attack> 2, <sprite name=Range> 5
 AMC_GH2E_Doomstalker2_SummonAttack_P0	+0, grant one of your summons adjacent to the target: <sprite name=Attack> +0
+Doomstalker2_ROLE	Ranged Damage/Support
+Doomstalker2_STRENGTHS	- <indent=%15>High ranged damage</indent>\n- <indent=%15>Dooms give a wide range of extra effects on one enemy</indent>\n- <indent=%15>Can summon forest companions</indent>
+Doomstalker2_WEAKNESSES	- <indent=%15>Generally wants to focus on one enemy at a time</indent>\n- <indent=%15>Only one Doom active at a time</indent>\n- <indent=%15>Little control over his summons</indent>

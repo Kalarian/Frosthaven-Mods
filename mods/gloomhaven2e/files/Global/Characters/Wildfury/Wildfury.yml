@@ -13,6 +13,11 @@ HealthTable: [ 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
 NumberAbilityCardsInBattle: 10
 CompanionSummonData: WildfuryBearID
 Description: $Wildfury_DESCRIPTION$
+Role: $Wildfury_ROLE$
+Difficulty: $DIFFICULTY_MEDIUM$
+Strengths: $Wildfury_STRENGTHS$
+Weaknesses: $Wildfury_WEAKNESSES$
+Adventure_Description: $Wildfury_ADVENTURE_DESCRIPTION$
 HeroStats:
     Melee: 3
     Ranged: 2

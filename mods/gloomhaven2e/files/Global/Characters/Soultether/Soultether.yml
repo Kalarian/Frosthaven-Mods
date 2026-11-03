@@ -12,6 +12,11 @@ DefaultSkin: 1
 HealthTable: [ 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
 NumberAbilityCardsInBattle: 12
 Description: $Soultether_DESCRIPTION$
+Role: $Soultether_ROLE$
+Difficulty: $DIFFICULTY_MEDIUM$
+Strengths: $Soultether_STRENGTHS$
+Weaknesses: $Soultether_WEAKNESSES$
+Adventure_Description: $Soultether_ADVENTURE_DESCRIPTION$
 HeroStats:
     Melee: 1
     Ranged: 3

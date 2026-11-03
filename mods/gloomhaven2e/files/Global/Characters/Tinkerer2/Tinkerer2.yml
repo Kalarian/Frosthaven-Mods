@@ -11,6 +11,11 @@ DefaultSkin: 1
 HealthTable: [ 8, 9, 11, 12, 14, 15, 17, 18, 20 ]
 NumberAbilityCardsInBattle: 12
 Description: $Tinkerer2_DESCRIPTION$
+Role: $Tinkerer2_ROLE$
+Difficulty: $DIFFICULTY_MEDIUM$
+Strengths: $Tinkerer2_STRENGTHS$
+Weaknesses: $Tinkerer2_WEAKNESSES$
+Adventure_Description: $Tinkerer2_ADVENTURE_DESCRIPTION$
 HeroStats:
     Melee: 1
     Ranged: 3

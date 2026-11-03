@@ -55,3 +55,6 @@ GH2E_Cragheart2_29_B2	Add <nobr>+X <sprite name=Attack></nobr> to your next atta
 GH2E_Cragheart2_29_B3	<nobr>+X <sprite name=Attack></nobr> on your next attack this turn (2 per obstacle destroyed)
 GH2E_Cragheart2_30_T	You may push the targets into hexes containing obstacles. In each case, destroy the obstacle, the target suffers <nobr><sprite name=Damage> 2,</nobr> and you gain <sprite name=XP1>.
 GH2E_Cragheart2_30_B	At the end of each of your turns, perform: <nobr><sprite name=Heal> X,</nobr> where X is the number of adjacent obstacles.
+Cragheart2_ROLE	Damage/Support
+Cragheart2_STRENGTHS	- <indent=%15>Creates and moves obstacles, and gains bonuses from them</indent>\n- <indent=%15>Versatile melee, ranged and healing options</indent>\n- <indent=%15>Obstacles slow down approaching enemies</indent>
+Cragheart2_WEAKNESSES	- <indent=%15>Slow, with few big moves or fast initiatives</indent>\n- <indent=%15>Doesn't excel in any one role</indent>\n- <indent=%15>Some abilities need obstacles in the right places</indent>

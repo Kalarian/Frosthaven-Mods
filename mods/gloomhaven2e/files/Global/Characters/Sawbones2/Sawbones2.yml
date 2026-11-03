@@ -11,6 +11,11 @@ DefaultSkin: 1
 HealthTable: [ 8, 9, 11, 12, 14, 15, 17, 18, 20 ]
 NumberAbilityCardsInBattle: 10
 Description: $Sawbones2_DESCRIPTION$
+Role: $Sawbones2_ROLE$
+Difficulty: $DIFFICULTY_LOW$
+Strengths: $Sawbones2_STRENGTHS$
+Weaknesses: $Sawbones2_WEAKNESSES$
+Adventure_Description: $Sawbones2_ADVENTURE_DESCRIPTION$
 HeroStats:
     Melee: 3
     Ranged: 1

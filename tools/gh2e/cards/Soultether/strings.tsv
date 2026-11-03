@@ -56,3 +56,6 @@ AMC_GH2E_Soultether_FireAir_P2	+2 Fire or Air
 AMC_GH2E_Soultether_FireDark_P2	+2 Fire or Dark
 AMC_GH2E_Soultether_AirDark_P2	+2 Air or Dark
 GH2E_SOUL_HIDDEN_TOOLTIP	Soultether rule bookkeeping (hidden).
+Soultether_ROLE	Summoner/Support
+Soultether_STRENGTHS	- <indent=%15>Wide range of creatures to summon</indent>\n- <indent=%15>Cards that give summons extra moves, attacks and shields</indent>\n- <indent=%15>Large hand size</indent>
+Soultether_WEAKNESSES	- <indent=%15>Low damage without summons</indent>\n- <indent=%15>Very low health</indent>\n- <indent=%15>Too many active summons can leave too few cards</indent>

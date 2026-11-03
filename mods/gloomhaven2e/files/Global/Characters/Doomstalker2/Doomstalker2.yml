@@ -11,6 +11,11 @@ DefaultSkin: 1
 HealthTable: [ 8, 9, 11, 12, 14, 15, 17, 18, 20 ]
 NumberAbilityCardsInBattle: 11
 Description: $Doomstalker2_DESCRIPTION$
+Role: $Doomstalker2_ROLE$
+Difficulty: $DIFFICULTY_MEDIUM$
+Strengths: $Doomstalker2_STRENGTHS$
+Weaknesses: $Doomstalker2_WEAKNESSES$
+Adventure_Description: $Doomstalker2_ADVENTURE_DESCRIPTION$
 HeroStats:
     Melee: 1
     Ranged: 5

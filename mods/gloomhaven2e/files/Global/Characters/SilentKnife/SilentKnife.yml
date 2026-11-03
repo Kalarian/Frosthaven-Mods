@@ -11,6 +11,11 @@ DefaultSkin: 1
 HealthTable: [ 8, 9, 11, 12, 14, 15, 17, 18, 20 ]
 NumberAbilityCardsInBattle: 9
 Description: $SilentKnife_DESCRIPTION$
+Role: $SilentKnife_ROLE$
+Difficulty: $DIFFICULTY_LOW$
+Strengths: $SilentKnife_STRENGTHS$
+Weaknesses: $SilentKnife_WEAKNESSES$
+Adventure_Description: $SilentKnife_ADVENTURE_DESCRIPTION$
 HeroStats:
     Melee: 5
     Ranged: 2
