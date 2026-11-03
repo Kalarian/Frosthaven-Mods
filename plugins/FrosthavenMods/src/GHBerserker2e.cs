@@ -28,7 +28,8 @@ namespace FrosthavenMods
     ///     (persistent, the approved reading: for the scenario, until the card leaves the active area): the target gets
     ///     the Berserker2Token (a character resource on its status row) and StopFlying while the card's marker bonus
     ///     (GH2E_BoneBreaker) is active; both go when it ends.
-    ///   - Defy Death perk (Berserker2 perk 10): after its prevent sets the hit points to 1, the Berserker performs Attack 2
+    ///   - Defy Death perk (Berserker2 perk 10): after its prevent sets the hit points to 1 (the engine body, only when the
+    ///     bonus is toggled in the rules; once per scenario through its one-slot tracker), the Berserker performs Attack 2
     ///     targeting the attacker (the attack is the perk bonus's AbilityData, aimed through a temp var).
     ///   - Taunting Fury perk (Berserker2 perk 11): its end-of-turn control (MiscVars GH2E_TauntingFury) makes every
     ///     controlled enemy's Attack +0 target the Berserker (a temp var the commanded attack's custom targeting reads).
@@ -318,22 +319,50 @@ namespace FrosthavenMods
 
         // ------------------------------------------------------------------ Defy Death perk
 
+        // Engine path (read 2026-11-03): the damage panel's prevent reaches CPreventDamageActiveBonus.TriggerPreventDamage
+        // (GameState, s_UsedPreventDamageBonusesToAvoidDamage after "UsePreventDamageActiveBonus"), which returns at once
+        // unless the bonus is toggled in the rules (CActiveBonus.ToggledBonus, set by a slot click through
+        // ScenarioRuleClient.ToggleActiveBonus). When toggled it calls the actor's prevent listeners, i.e. this
+        // OnPreventDamageTriggered with preventedByBonus = the bonus; the engine body sets the hit points to 1
+        // (ApplyImmediateDamage(PreDamageHealth - 1), cannot be prevented) and then clears the toggle. Afterwards
+        // TriggerPreventDamage uses the XPTracker [0] slot and finishes the bonus: that is the "once each scenario"
+        // (saved with the bonus). The engine never performs the bonus's AbilityData: the Attack 2 is this plugin's.
+        // The prefix records whether the engine body will act (toggled, not restricted), because the body clears the
+        // toggle: the attack only follows a real "set to 1".
         private static readonly ConditionalWeakTable<CActiveBonus, object> DefyUsed = new ConditionalWeakTable<CActiveBonus, object>();
 
         [HarmonyPatch(typeof(CPreventDamageActiveBonus_PreventAndDamageActiveBonusCaster), nameof(CPreventDamageActiveBonus_PreventAndDamageActiveBonusCaster.OnPreventDamageTriggered))]
+        [HarmonyPrefix]
+        private static void DefyDeathBefore(CPreventDamageActiveBonus_PreventAndDamageActiveBonusCaster __instance, CActor damagedActor, CActiveBonus preventedByBonus, out bool __state)
+        {
+            __state = false;
+            try
+            {
+                CActiveBonus b = __instance?.ActiveBonus;
+                __state = b != null && preventedByBonus == b && damagedActor != null && b.IsActiveBonusToggledAndNotRestricted(damagedActor);
+            }
+            catch { }
+        }
+
+        [HarmonyPatch(typeof(CPreventDamageActiveBonus_PreventAndDamageActiveBonusCaster), nameof(CPreventDamageActiveBonus_PreventAndDamageActiveBonusCaster.OnPreventDamageTriggered))]
         [HarmonyPostfix]
-        private static void DefyDeath(CPreventDamageActiveBonus_PreventAndDamageActiveBonusCaster __instance, CActor damageSource, CActor damagedActor, CActiveBonus preventedByBonus)
+        private static void DefyDeath(CPreventDamageActiveBonus_PreventAndDamageActiveBonusCaster __instance, CActor damageSource, CActor damagedActor, CActiveBonus preventedByBonus, bool __state)
         {
             try
             {
                 CActiveBonus b = __instance.ActiveBonus;
                 if (b == null || preventedByBonus != b || !Marked(b.Ability, "GH2E_DefyDeath") || !IsBerserker(damagedActor)) return;
+                if (!__state)
+                {
+                    Plugin.Log.LogInfo($"GHRule DefyDeath card 0 perk Defy Death: prevent reached the bonus but it was not toggled or was restricted: no hit point change, no attack (hit points {damagedActor.Health})");
+                    return;
+                }
                 if (DefyUsed.TryGetValue(b, out _)) return;
                 DefyUsed.Add(b, new object());
                 CAbility template = b.Ability?.ActiveBonusData?.AbilityData;
                 if (damageSource == null || damageSource.IsDead || template == null || damagedActor.IsDead)
                 {
-                    Plugin.Log.LogInfo($"GHRule DefyDeath card 0 perk Defy Death: hit points set to 1; no attack ({(template == null ? "no attack data" : "the attacker is gone")})");
+                    Plugin.Log.LogInfo($"GHRule DefyDeath card 0 perk Defy Death: hit points set to {damagedActor.Health}; no attack ({(template == null ? "no attack data" : "the attacker is gone")})");
                     return;
                 }
                 damagedActor.SetTempVar("GH2EDefyDeathTarget", new TValue(damageSource));
@@ -341,7 +370,7 @@ namespace FrosthavenMods
                 attack.Name = "DefyDeathAttack";
                 attack.SetMiscVar("InterruptCurrentAbility", true);
                 PhaseManager.StartAbilities(attack, damagedActor, stackInsteadOfInject: true);
-                Plugin.Log.LogInfo($"GHRule DefyDeath card 0 perk Defy Death: {Name(damagedActor)} at 1 hit point performs Attack 2 on the attacker {Name(damageSource)}");
+                Plugin.Log.LogInfo($"GHRule DefyDeath card 0 perk Defy Death: lethal attack damage prevented, {Name(damagedActor)} at {damagedActor.Health} hit point(s) performs Attack 2 on the attacker {Name(damageSource)}");
             }
             catch (Exception e) { if (GHClasses.Reported.Add("ra defy death")) Plugin.Log.LogError("GHBerserker2e (Defy Death): " + e); }
         }
