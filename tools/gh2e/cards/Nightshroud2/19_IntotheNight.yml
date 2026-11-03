@@ -1,6 +1,7 @@
 # card: Into the Night
 # top: Stun on the area; the stunned enemies gain Invisible (a sub-ability on the stun's own targets, UseParentTargets,
-# the Lead to Slaughter fix's shape); the Tear hex (2,0, adjacent to you) = a Tear within range 1 (APPROXIMATION).
+# the Lead to Slaughter fix's shape); the Tear hex 2,0 is a blue hex of the area, the only hex the Tear may go
+# (GHTears.cs).
 # bottom: "grant one adjacent ally: Teleport 8, must end in a hex containing a Tear" = a grant (ControlActor, the
 # Sunkeeper2 grant shape) of Teleport2 8 limited to shadow hexes (IsValidTeleportTile), its printed square mark.
 Discard: [Discard,Discard]
@@ -10,7 +11,9 @@ Data:
             TStun:
                 Stun: True
                 Filter: Enemy
-                AreaEffect: "0,0,G|1,1,R|1,-1,R"
+                AreaEffect: "0,0,G|1,1,R|1,-1,R|2,0,B"
+                MiscVars:
+                    GH2ETearHexArea: True
                 AnimOverload: AggressiveTargetedShout
                 SubAbilities:
                     TStunSubInvisible:
@@ -22,9 +25,15 @@ Data:
                         AnimOverload: None
             TTear:
                 CreateShadow:
-                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
-                Range: 1
+                HelpBoxTooltipLocKey: "GH2E_Nightshroud2_TEARHEX_HELP"
                 Target: 1
+                # (the tiles are replaced by the Tear hexes of the area by GHTears.cs; Custom targeting is what makes the
+                # game ask for them)
+                Targeting: Custom
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(TargetingActor.Tile)
+                MiscVars:
+                    GH2ETearHex: True
                 AnimOverload: Shadow Manipulation
         Infuse: Dark
     Bottom:
@@ -58,7 +67,7 @@ Layout:
                 - Row: "<size=20%> "
                 - Row: "$GH2E_Nightshroud2_19_T$"
                 - Row: "<size=20%> "
-                - Row: "$GH2E_Nightshroud2_TEARHEX1$"
+                - Row: "$GH2E_Nightshroud2_TEARHEXB$"
             - Column: "£Area£"
         - Row: "<size=50%> "
         - Infuse: Dark

@@ -1,6 +1,6 @@
 # card: Lurking Ruin
-# top: Poison on the 8-hex area (three hex marks as E hexes); the Tear hex (0,2, two hexes away) = a Tear within range 2
-# (APPROXIMATION, NOTES.md); "you and all allies gain advantage on all attacks targeting enemies that have Poison this
+# top: Poison on the 8-hex area (three hex marks as E hexes); the Tear hex 0,2 is a blue hex of the area and the
+# Tear placement may use only it (GHTears.cs, NOTES.md); "you and all allies gain advantage on all attacks targeting enemies that have Poison this
 # round" = a round advantage aura on you and allies (Shattersong Barbaric Yawp bottom) whose BasedOnVarsCondition
 # checks the target's Poison (Deepwraith Crippling Terror bottom's condition test).
 # bottom: "whenever you or an ally attack an enemy within range 2 of you this round, after the attack ability the
@@ -14,13 +14,21 @@ Data:
             TPoison:
                 Poison: True
                 Filter: Enemy
-                AreaEffect: "0,0,G|2,0,R|4,0,R|1,1,R|3,1,R|5,1,R|2,2,R|4,2,R|6,0,E|7,1,E|6,2,E"
+                AreaEffect: "0,0,G|2,0,R|4,0,R|1,1,R|3,1,R|5,1,R|2,2,R|4,2,R|6,0,E|7,1,E|6,2,E|0,2,B"
+                MiscVars:
+                    GH2ETearHexArea: True
                 AnimOverload: AggressiveTargetedShout
             TTear:
                 CreateShadow:
-                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
-                Range: 2
+                HelpBoxTooltipLocKey: "GH2E_Nightshroud2_TEARHEX_HELP"
                 Target: 1
+                # (the tiles are replaced by the Tear hexes of the area by GHTears.cs; Custom targeting is what makes the
+                # game ask for them)
+                Targeting: Custom
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(TargetingActor.Tile)
+                MiscVars:
+                    GH2ETearHex: True
                 AnimOverload: Shadow Manipulation
             TAdvantage:
                 Attack: 0
@@ -64,7 +72,7 @@ Layout:
             - Column:
                 - Row: "<nobr><b><size=130%>$Poison$ <sprite name=Poison></nobr>"
                 - Row: "<size=20%> "
-                - Row: "$GH2E_Nightshroud2_TEARHEX$"
+                - Row: "$GH2E_Nightshroud2_TEARHEXB$"
             - Column: "£Area£"
         - Row: "<size=20%> "
         - Active:

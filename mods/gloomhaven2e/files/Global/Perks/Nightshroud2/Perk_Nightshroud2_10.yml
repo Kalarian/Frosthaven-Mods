@@ -11,7 +11,7 @@ Abilities:
         AutoTrigger: True
         AddActiveBonus:
             CreateShadow:
-            HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+            HelpBoxTooltipLocKey: "GH2E_Nightshroud2_TEAR_PLACE_HELP"
             Range: 1
             Target: 1
             AnimOverload: Shadow Manipulation

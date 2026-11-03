@@ -854,16 +854,14 @@ FHS_GH2E_Nightshroud2_25_T	If the target of the attack ability's current hit poi
 FHS_GH2E_Nightshroud2_25_T2	Target that <sprite name=Enemy>
 FHS_GH2E_Nightshroud2_26_B2	This attack does not cause you to gain <sprite name=Invisible> at the end of the round, <sprite name=XP1>
 FHS_GH2E_Nightshroud2_26_T	Enemies in the red hexes suffer <nobr><sprite name=Damage> 2</nobr>
-FHS_GH2E_Nightshroud2_26_T2	<sprite name=Teleport> to the Tear hex of the damage ability (place one Tear within <nobr><sprite name=Range> 2</nobr>, then <nobr><sprite name=Teleport></nobr> to it)
+FHS_GH2E_Nightshroud2_26_T2	<sprite name=Teleport> to the Tear hex of the damage ability
 FHS_GH2E_Nightshroud2_26_T3	Play a card from your hand to perform the top or bottom action of the card, <sprite name=XP1>
 FHS_GH2E_Nightshroud2_27_B	During this and the next four rounds, you may perform attack abilities while you have <sprite name=Invisible>. When this card is moved from your active area to your lost pile, you become exhausted.
 FHS_GH2E_Nightshroud2_27_T	If you have <sprite name=Invisible>, place one Tear in a hex adjacent to the target. If you do not have <sprite name=Invisible> and the target is a normal <sprite name=Enemy> occupying a hex containing a Tear, you may remove the Tear and gain <sprite name=Invisible> to kill the target and gain <sprite name=XP1>
 FHS_GH2E_Nightshroud2_28_B	Target one <sprite name=Allies> or <sprite name=Enemy> within <nobr><sprite name=Range> 1</nobr>
 FHS_GH2E_Nightshroud2_28_B2	If the target enters a hex containing a Tear, you may remove the Tear to have the target gain <sprite name=Invisible>
 FHS_GH2E_Nightshroud2_28_T	Grant all <sprite name=Allies> in the red hexes:
-FHS_GH2E_Nightshroud2_TEARHEX	Tear hex: you may place one Tear in a hex within <nobr><sprite name=Range> 2</nobr>
-FHS_GH2E_Nightshroud2_TEARHEX1	Tear hex: you may place one Tear in an adjacent hex
-FHS_GH2E_Nightshroud2_TEARHEX2	Tear hexes: you may place two Tears in hexes within <nobr><sprite name=Range> 2</nobr>
+FHS_GH2E_Nightshroud2_TEARHEXB	Blue hex: Tear hex. You may place one Tear in that hex.
 FHS_GH2E_Plagueherald2_01_B	You may give one <sprite name=Allies> within <nobr><sprite name=Range> 3</nobr> <sprite name=Poison> to grant that <sprite name=Allies>:
 FHS_GH2E_Plagueherald2_02_B	Target all <sprite name=Enemy>
 FHS_GH2E_Plagueherald2_02_T	<sprite name=Muddle>, target all <sprite name=Enemy> that have Plague
@@ -1318,6 +1316,8 @@ GH2E_Doomstalker2_17_T2	Whenever you long rest, the Staunch Garralev gains <spri
 GH2E_Elementalist2_20_B	<sprite name=ConsumeIce><sprite name=ConsumeEarth>: on the next two sources of damage you or an adjacent ally would suffer, negate the damage, <sprite name=CreateMixed-IE>
 GH2E_Mindthief2_02_B2	You cannot perform move abilities this round. At the end of the round, lose <sprite name=Invisible>.
 GH2E_Nightshroud2_26_B	This attack does not cause you to gain <sprite name=Invisible> at the end of the round.
+GH2E_Nightshroud2_TEARHEX_HELP	You may place one Tear in the Tear hex (the blue hex) of the ability
+GH2E_Nightshroud2_TEAR_PLACE_HELP	Place one Tear
 GH2E_SUMMON_BattleBoar	Battle Boar
 GH2E_SUMMON_BattleBot	Battle Bot
 GH2E_SUMMON_ChromaticConstruct	Chromatic Construct

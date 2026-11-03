@@ -163,3 +163,37 @@ packcheck 0 problems / 0 warnings, rulecheck 43 ok, no gh_port warnings, no miss
 ## 2026-11-02: modifier abilities and Safeguard
 
 - Perks (2026-11-02, supersede the lines above): Shadow Hop grants Teleport 2 to you or an adjacent ally (ControlActor, Banner Spear Explosive Epicenter shape); Torn Veil is the +0 Tear card (CreateShadow adjacent to the target, run after the attack by GHModifierAbilities.cs, no Choose; mandatory as printed). Bench both.
+
+## 2026-11-02 (night): the class mat and the Tears are built (supersede the NEEDS PLUGIN / APPROXIMATION lines above)
+
+Plugin files `GHNightshroud.cs` (the Invisible half of the mat) and `GHTears.cs` (Tears and the cards that read them);
+both act only for Nightshroud2ID and her card IDs. Their summary comments hold the details; in short:
+
+- **Invisible**: Invisible at scenario start; her Invisible never runs out at the end of her turns (Never trigger); no
+  attack abilities while Invisible (cancelled when performed) unless Swallowed by Night's bottom bonus is active; closed
+  doors are walls and enemies don't block her path while Invisible (she can't end on them); enemies may end their move
+  in her hex (AI), she then gets a forced Teleport to the closest empty hex (ties: first in map order) and hazardous
+  terrain damage; gains Invisible at the end of a round in which an attack of hers happened (not when Shadowstrike's
+  consumed bottom was the only one); loses it and can't regain it once no other character is left (a solo Nightshroud
+  included: the printed rule taken literally).
+- **Tears**: owned shadows; her cap is 2 (the game's own remove-extras choice), a Deathwalker's 5 without her Tears.
+  Entering one of her Tears during her own move (a jump: last hex; a teleport: landing hex) interrupts the move with an
+  optional RemoveShadow ("may"); removed, Invisible goes just before her next ability or at her turn's end (FAQ: the end
+  of the move/teleport). Offered only while Invisible or with Prepare for the Kill active.
+- **Prepare for the Kill** (16): now a plain persistent marker; every removal of her Tears by her own ability (limit
+  removals included, the approved default) offers Strengthen (skippable); taken: the card's bonus ends and adjacent
+  enemies suffer Damage 2.
+- **Tear hexes** (01, 07, 17, 19, 26, 28): blue hexes in the area (`x,y,B`, tag GH2ETearHexArea), so they turn with
+  it; the placement (Custom targeting, tag GH2ETearHex) may use only those hexes and only when the area's ability was
+  performed (FAQ); the area needs no ally in its blue hex and doesn't touch a figure there. Shadowstrike's teleport
+  (tag GH2ETearHexTeleport) lands only on its Tear hex. Card text: "Blue hex: Tear hex. You may place one Tear in that
+  hex." (`GH2E_Nightshroud2_TEARHEXB`).
+- **Push paths** (10 Nightfall top, 28 Voice bottom): the pushed figure's temp vars `GH2EPushTear` /
+  `GH2EPushTearTiles` say whether (and where first) the push entered one of her Tears; Nightfall adds the hazardous
+  terrain damage (StatIsBasedOnX ScenarioHazardousTerrainDamage).
+- **Black Knives** (08): +1 Attack on the second target when the first died (worked through the modifier's math).
+- **Swallowed by Night** (27) bottom: exhausted when the card goes from the active area to the lost pile.
+- **Relentless Shadow** mastery: `FrosthavenMods_AttackStreak` (rounds in a row with an attack ability that happened).
+- Help boxes: `GH2E_Nightshroud2_TEAR_PLACE_HELP` ("Place one Tear") replaces the shadow text on every placement.
+- Still open: the Tear look (Deathwalker shadow, the user's decision A5); enemies' teleports onto her hex and pushes of
+  her through enemies follow the game's rules; entering a Tear through someone else's push doesn't offer the removal.

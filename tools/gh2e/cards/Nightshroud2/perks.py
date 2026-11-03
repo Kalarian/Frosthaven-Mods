@@ -43,7 +43,7 @@ PERKS = [
         AutoTrigger: True
         AddActiveBonus:
             CreateShadow:
-            HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+            HelpBoxTooltipLocKey: "GH2E_Nightshroud2_TEAR_PLACE_HELP"
             Range: 1
             Target: 1
             AnimOverload: Shadow Manipulation
@@ -93,19 +93,16 @@ BattleGoalCondition:
         Value: 1"""),
     ("Relentless Shadow", "In a single scenario, perform an attack ability during your turn in 5 consecutive rounds",
      """\
-# The plugin's round streak (GHMasteries.cs, the Brute's Relentless Onslaught): Value rounds in a row with at least
-# Amount damage to enemies, no card count. APPROXIMATION: damage dealt each round stands for "an attack ability
-# performed" (an attack that deals no damage doesn't count; damage from a non-attack does) (NOTES.md).
+# The plugin's attack streak (GHMasteries.cs, FrosthavenMods_AttackStreak): Value rounds in a row in each of which an
+# attack ability of yours happened, whatever damage it dealt.
 BattleGoalCondition:
     - Targets:
         Filter: CountXRounds
         SubFilter: Scenario
-        EnemyFamilies: [FrosthavenMods_DamageStreak]
+        EnemyFamilies: [FrosthavenMods_AttackStreak]
         CharacterIDs:
             ActorID: Nightshroud2ID
-        Value: 5
-        Amount: 1
-        Targets: 0"""),
+        Value: 5"""),
 ]
 
 NEW_CARDS = {

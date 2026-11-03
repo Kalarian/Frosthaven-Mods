@@ -47,7 +47,7 @@ Data:
         Abilities:
             BTears:
                 CreateShadow:
-                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
+                HelpBoxTooltipLocKey: "GH2E_Nightshroud2_TEAR_PLACE_HELP"
                 Range: 3
                 Target: 2
                 AnimOverload: Shadow Manipulation

@@ -6,37 +6,20 @@ Level: 3
 Initiative: 85
 # card: Prepare for the Kill
 # top: "whenever you remove a Tear, you may discard this card to gain Strengthen and have all adjacent enemies suffer
-# damage 2": Frosthaven has no trigger on removing a shadow (Tears are removed mostly by the class mat's "enter a Tear
-# to lose Invisible", itself NEEDS PLUGIN). APPROXIMATION: a persistent once-only toggle the player switches on during
-# a turn (the 1st edition Wings of the Night fix, DuringTurnAbility + IsToggleBonus, CARD_FIXES 20270): Strengthen, and
-# Damage 2 to all adjacent enemies; one use, then the card is discarded (XPTracker [0]). NEEDS PLUGIN for the trigger.
+# damage 2": a persistent marker bonus (a NullTargeting bonus with no behaviour of its own, Shadowstrike bottom's marker
+# form). The plugin (GHTears.cs) watches every Tear the Nightshroud removes (the two-Tear limit's removals included, the
+# user's default) and, while this card is active, offers Strengthen (self, the step's confirm or skip = "you may");
+# taken, the card is discarded (its bonus finished) and all adjacent enemies suffer Damage 2.
 Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
             TActive:
-                AddActiveBonus:
-                    Strengthen: True
-                    Filter: Self
-                    AnimOverload: PowerUp
-                    SubAbilities:
-                        TActiveSubDamage:
-                            Damage: 2
-                            Range: 1
-                            Target: -1
-                            Filter: Enemy
-                            TreatAsNonSubAbility: True
-                            AutoTrigger: True
-                            CanSkip: False
-                            AnimOverload: Debuff
+                NullTargeting: True
                 Filter: Self
                 AnimOverload: PowerUp
                 ActiveBonus:
                     Duration: Persistent
-                    Behaviour: DuringTurnAbility
-                    IsToggleBonus: True
-                    Restriction: OncePerAction
-                    XPTracker: [0]
         Infuse: Dark
     Bottom:
         Abilities:

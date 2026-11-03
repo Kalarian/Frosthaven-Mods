@@ -1,7 +1,7 @@
 # card: Spirit of the Night
-# top: Curse on an area (the 1st edition Soothsinger's Singing Arrow shape, a melee area from the grey hex). The Tear hex
-# of the area (3,1: two hexes from you) = a Tear placed within range 2 (Deathwalker CreateShadow); APPROXIMATION: the
-# engine can't aim a placement at one hex of a rotated area (NOTES.md)
+# top: Curse on an area (the 1st edition Soothsinger's Singing Arrow shape, a melee area from the grey hex); the Tear
+# hex 3,1: the Tear hex is a blue hex of the area (it turns with it; tag GH2ETearHexArea) and the Tear placement may
+# use only that hex (tag GH2ETearHex, GHTears.cs), once the area's ability was performed (2e FAQ).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -9,13 +9,21 @@ Data:
             TCurse:
                 Curse: True
                 Filter: Enemy
-                AreaEffect: "0,0,G|2,0,R|4,0,R|6,0,E"
+                AreaEffect: "0,0,G|2,0,R|4,0,R|6,0,E|3,1,B"
+                MiscVars:
+                    GH2ETearHexArea: True
                 AnimOverload: AggressiveTargetedShout
             TTear:
                 CreateShadow:
-                HelpBoxTooltipLocKey: "FH/GUI_PLACE_SHADOWS_HELPBOX"
-                Range: 2
+                HelpBoxTooltipLocKey: "GH2E_Nightshroud2_TEARHEX_HELP"
                 Target: 1
+                # (the tiles are replaced by the Tear hexes of the area by GHTears.cs; Custom targeting is what makes the
+                # game ask for them)
+                Targeting: Custom
+                TargetingVars:
+                    AddTilesInRange: CustomAbility.GetAdjacentTiles(TargetingActor.Tile)
+                MiscVars:
+                    GH2ETearHex: True
                 AnimOverload: Shadow Manipulation
         Infuse: Dark
     Bottom:
@@ -38,7 +46,7 @@ Layout:
             - Column:
                 - Row: "<nobr><b><size=130%>$Curse$ <sprite name=Curse></nobr>"
                 - Row: "<size=20%> "
-                - Row: "$GH2E_Nightshroud2_TEARHEX$"
+                - Row: "$GH2E_Nightshroud2_TEARHEXB$"
             - Column: "£Area£"
         - Row: "<size=50%> "
         - Infuse: Dark
