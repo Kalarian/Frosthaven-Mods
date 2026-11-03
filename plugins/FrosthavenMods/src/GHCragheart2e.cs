@@ -32,7 +32,8 @@ namespace FrosthavenMods
     ///   performed, every destroyable obstacle stops blocking the path finder (CNode.Blocked, and in the mover's own path
     ///   queries the Blocked|CannotStop flags AddLevelObjectsToPathFindingContext puts back on obstacle hexes), so the move is an ordinary move (enemies still block, traps and terrain still count) that may pass through or end
     ///   in an obstacle's hex; the card's next step destroys every obstacle on the move path (AllTargetsOnMovePath) and
-    ///   feeds the +2 Attack per obstacle. The obstacles block again as soon as the move is done or any other ability
+    ///   feeds the +2 Attack per obstacle. Entering an unblocked obstacle's hex does not activate it during this move
+    ///   (an activated obstacle is skipped by the destroy step). Every unblocked obstacle not destroyed blocks again as soon as the move is done or any other ability
     ///   starts (an undo, a cancelled move).
     /// Logs "GHRule {Rule} card {id} ..." each time a rule acts.
     /// </summary>
@@ -273,7 +274,7 @@ namespace FrosthavenMods
             ScenarioState scenario = ScenarioManager.CurrentScenarioState;
             if (scenario?.Props != null && ReferenceEquals(scenario, _throughScenario))
                 foreach (CObjectObstacle obstacle in Unblocked)
-                    if (scenario.Props.Contains(obstacle) && !obstacle.Activated) { SetBlocked(obstacle, true); back++; }
+                    if (scenario.Props.Contains(obstacle) && !obstacle.IsDestroyed) { SetBlocked(obstacle, true); back++; }
             Unblocked.Clear();
             _throughMove = null;
             _throughScenario = null;
@@ -291,6 +292,25 @@ namespace FrosthavenMods
                 else if (_throughMove != null) Reblock("another move started");
             }
             catch (Exception e) { Error("move through obstacles (start)", e); }
+        }
+
+        /// <summary>A walking figure that enters a hex activates every prop on it (CAbilityMove.TryActivateProp ->
+        /// CObjectProp.AutomaticActivate sets Activated). The card's destroy step skips activated obstacles
+        /// (CAbilityDestroyObstacle.Start, AllTargetsOnMovePath: "!cObjectObstacle.Activated"), so nothing was destroyed
+        /// and no +2 Attack given, and Reblock left them open. During the through-obstacle move, the obstacles it unblocked
+        /// are not activated (by the mover or anyone it carries).</summary>
+        [HarmonyPatch(typeof(CAbilityMove), "TryActivateProp")]
+        [HarmonyPrefix]
+        private static bool ThroughNoActivate(CAbilityMove __instance, CActor actor, CObjectProp prop, ref bool __result)
+        {
+            try
+            {
+                if (_throughMove == null || !ReferenceEquals(__instance, _throughMove) || !(prop is CObjectObstacle obstacle) || !Unblocked.Contains(obstacle)) return true;
+                __result = false;
+                Plugin.Log.LogInfo($"GHRule MoveThroughObstacles card {CardId(__instance)} {actor?.GetPrefabName()} entered {obstacle.PrefabName} at {new Point(obstacle.ArrayIndex)}: not activated, left for the destroy step");
+                return false;
+            }
+            catch (Exception e) { Error("move through obstacles (no activation)", e); return true; }
         }
 
         private static CAbilityMove _contextLogged;
