@@ -1,0 +1,17 @@
+Parser: Mastery
+ID: Soothsinger2_MASTERY_2
+LocalisedName: Soothsinger2_MASTERY_2_Name
+LocalisedDescription: Soothsinger2_MASTERY_2_Desc
+PerkPoints: 1
+# The plugin's Note ledger (GHSoothsinger.cs, FrosthavenMods_SSNotesAllUsed): Value Notes created (resource gains that
+# placed a Note) and none wasted: a Note a Song removes counts as used only when it paid that Song's printed cost (the
+# approved default), and no Note may be left at the scenario's end.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_SSNotesAllUsed]
+        CharacterIDs:
+            ActorID: Soothsinger2ID
+        Value: 20

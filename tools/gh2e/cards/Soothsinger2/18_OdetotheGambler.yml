@@ -1,23 +1,20 @@
 # card: Ode to the Gambler
-# top: song (High + Low Note). NEEDS PLUGIN (a rolling first modifier). APPROXIMATION: once per turn, you and each
-# ally may switch on advantage for one attack (Geminate Dragonfly Surge's advantage buff as a toggled aura)
+# top: song (High + Low Note): you and every ally, each turn, may treat the first modifier card drawn as rolling, chosen
+# after it is revealed (a marker aura; the plugin GHSoothsinger asks and makes the card rolling)
 Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
+            # Frosthaven's Tome of Conflict aura (1229: a NullTargeting persistent aura), on you and every ally; its marker
+            # GH2E_OdeRolling (not the engine's TreatFirstAttackModifierAsRolling) lets the plugin (GHSoothsinger) offer
+            # each figure, once per turn on its first modifier card drawn, after the card is revealed, to treat it as rolling
             TSong:
-                Attack: 0
-                AttackHasAdvantage: True
-                Target: -1
+                NullTargeting: True
                 Filter: Self
+                MiscVars:
+                    GH2E_OdeRolling: True
                 ActiveBonus:
                     Duration: Persistent
-                    Behaviour: BuffAttack
-                    ValidAbilityTypes: [Attack]
-                    Restriction: OncePerTurn
-                    RestrictPerActor: True
-                    IsToggleBonus: True
-                    IsSingleTargetBonus: True
                     IsAura: True
                     AuraTargeting: All
                     AuraFilter: [Self, Ally]
@@ -47,6 +44,8 @@ Data:
                     RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
                 MiscVars:
                     GH2E_Song2: True      # the song's Note cost (Symphonic Medley picks songs by it)
+                    GH2E_SongHigh: 1   # the printed cost in High / Low Notes (plugin GHSoothsinger)
+                    GH2E_SongLow: 1
     Bottom:
         Abilities:
             BMove:
@@ -58,7 +57,7 @@ Layout:
         - Row: "$GH2E_Soothsinger2_18_T$"
         - Active:
             Ability: TSong
-            Icon: "Positive_Advantage_Aura"
+            Icon: "Positive_Rolling_Enemy_Death_Item"   # Tome of Conflict's rolling-first-modifier icon
             ListLayout: "$GH2E_Soothsinger2_18_T2$"
             Layout: "$GH2E_Soothsinger2_18_T2$"
         - Row: "<size=20%> "

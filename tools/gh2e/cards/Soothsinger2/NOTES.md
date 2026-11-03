@@ -21,12 +21,11 @@ each (the mat's cap; `CCharacterResource.Amount` clamps to it).
   `RemoveAllInstancesOfResourcesOnFinish: [High, Low]` (the rule "whenever you perform a Song, remove all of your
   Notes"). `CClass.MarkAbilityActiveBonusesFinished` finishes it right after the ability, so a Note gained later the same
   turn (a bottom half) survives. **Unverified** in game.
-- **NEEDS PLUGIN** (one rule not enforced): (1) a song half can be played without the Notes it costs (the cost is
-  printed as text "Song: High Note, Low Note"; the player keeps the rule). ("Once each round" and "you may" for
-  gaining a Note: done in data, see Gaining.) Possible data gate for (1), not used because a failed check would waste the
-  card and the expression is unbenched: `StartAbilityRequirements: {Type: ThisAbility, Vars: {ValidateNotes:
-  Actor.GetCharacterResourceAmount('SoothsingerHighNote') >= 2 && ...}}` on TSong and TSongNotes (Shattersong-style
-  requirement vars).
+- *Cost* (plugin GHSoothsinger, 2026-11-02): every song's TSongNotes carries its printed cost as MiscVars
+  `GH2E_SongHigh` / `GH2E_SongLow`. The card hand greys out a song top's action (the basic Attack 2 stays) while the
+  Notes on the mat don't cover it (FullAbilityCard.ToggleActionInteractivity after CardsActionControlller
+  .DisableForgoneActions); Symphonic Medley / Grand Finale plays ignore it (a SelectAndPlayCard is running). When the
+  song is paid, the Notes matching the cost are "used", the rest wasted (mastery 2, approved default; GH2e FAQ 8.13).
 
 **Songs** are plain Frosthaven persistent bonuses, not Gloomhaven's PlaySong / OverrideAsSong: those go through
 `CActor.AddAugmentOrSong` with song slots (one song, the next replaces it), while 2e songs stack. Consequence: no "Song"
@@ -42,7 +41,13 @@ tag on the card face and no music-note status icon (both keyed to PlaySong in th
   `EndAllActiveBonusesOnBaseCardSimultaneously` (the 1st edition Lull Into Oblivion) so its last slot ends the effect
   too: active from the play to the end of round N, as printed. **Unverified** (the flag on a Persistent EndRound bonus).
 - "You and all allies" = an aura `AuraTargeting: All`, `AuraFilter: [Self, Ally]`, any range.
-- Grand Finale / Captivating Performance / perk Fermata token moves: **NEEDS PLUGIN** (text only).
+- Grand Finale bottom and perk Fermata hold every song token this round (plugin GHSoothsinger: the TSong / TSongTimer
+  tracker neither advances nor awards slot XP at this round's trigger; all or nothing, GH2e FAQ). Captivating
+  Performance's move back: data, see 30.
+- Status rows: a 2e song shows the Soothsinger's music note on every figure it reaches (her, and each figure inside an
+  aura song's aura; GHStatusIcons via GHSoothsinger.SongsReaching); the card face carries the "Song" tag (GHCardStyle
+  keys on TSongNotes). Notes: Frosthaven's Shattersong icons, `Positive_Shattersong` (High) and `Positive_Resonance`
+  (Low) (resources.yml "own sprite", which gh_port keeps).
 
 ## Decisions per card
 
@@ -58,13 +63,8 @@ tag on the card face and no music-note status icon (both keyed to PlaySong in th
   attack it chooses), persistent. "First attack each turn" becomes "one attack each turn of the figure's choice".
 - 05 Dissonant Rhythm top: no range printed = melee (rule B); the closest enemy of a melee attack is an adjacent one and
   all adjacent enemies tie at distance 1: Range 1, the player picks among them.
-- 02 Bewildering Instrumental top: "the enemy with the highest current hit point value" is the enemy the player picks
-  (Damage 1 + Muddle, any range). APPROXIMATION.
-- 03 Wearying Chant top: "the closest enemy without Disarm or Stun" is the enemy the player picks. APPROXIMATION.
 - 04 Power Ballad: Shattersong Din of Battle's aura (+1 Attack, once per turn per figure), persistent, without the
   toggle (HIVE Heavy Metal: OncePerTurn single-target buff), so it lands on each figure's first attack of its turn.
-- 05 Dissonant Rhythm top: "target the enemy closest to you" = one enemy the player picks, any range (Range 99, so an
-  adjacent target takes the ranged disadvantage). APPROXIMATION.
 - 06 Increase Cadence bottom: a Note choice at the end of this and the next five turns (EndTurnAbility, 6 slots, XP on
   1/3/5, lost). Unverified: a Choose inside AddActiveBonus.
 - 07 Intensifying Amplitude bottom: +X = the slots passed (0..4), Snowdancer Snowball's BasedOnActiveBonusVarsStrength
@@ -80,25 +80,26 @@ tag on the card face and no music-note status icon (both keyed to PlaySong in th
   Stun). Area "0,1,E|2,1,R|4,1,R|1,0,R|3,0,R|5,0,E" from Secretariat's (0,0)E (0,1) (1,0) (1,1) (2,0) (2,1)E, translated
   as Elementalist2 Burial does (x -> 2x + odd row, rows flipped); the bottom pair sits half a hex left, as the sheet says.
 - 16 Soothing Lullaby top: "Heal 1, target all" with no range = you and all allies anywhere (Sunkeeper2 Engulfing
-  Radiance). Bottom: APPROXIMATION: the marked monster gains Disarm now (Range 3) instead of at the end of its turn this
-  round. Same one disarmed turn when it has already acted; when it hasn't, its turn this round is the disarmed one.
+  Radiance). Bottom: the Disarm (MiscVars `GH2E_DisarmAtTurnEnd`) is held by the plugin as the token on the monster
+  (a custom effect on its status row) and given at the end of that monster's turn this round (CPhaseEndTurn; applied
+  during its own turn, so it lasts through its next turn, as a condition gained at a turn's end does); a monster that
+  already acted this round gets nothing, the token goes at the round's end.
 - 17 Symphonic Medley bottom: three `SelectAndPlayCard` from the hand, one card each (Banner Spear Hail of Spears):
   a 1-Note, a 2-Note and a 3-Note song (`IsActionValid` tests the song's TSongNotes MiscVar GH2E_Song1/2/3, which every
   song card carries with its printed cost; Captivating Performance is the only 4-Note song). Unverified (the Name check, and a played song's own TSongNotes removes your Notes). Card stack with
   red X = Permanently Lost.
-- 18 Ode to the Gambler: **NEEDS PLUGIN** (treat the first modifier as rolling). APPROXIMATION: once per turn you and
-  each ally may switch on advantage for one attack (Geminate Dragonfly Surge's `AttackHasAdvantage` BuffAttack, as a
-  toggled aura).
+- 18 Ode to the Gambler: Tome of Conflict's NullTargeting aura on you and all allies with the marker `GH2E_OdeRolling`;
+  the plugin asks each figure (its player) on the first modifier card it draws each turn, after the card is drawn,
+  whether to treat it as rolling (CActor.TreatFirstAttackModifierAsRolling, the engine's rolling copy).
 - 19 Hymn of the Oak bottom: "grant all allies: Shield 1" = a round Shield 1 aura on every ally (not you).
 - 20 Alluring Serenade bottom: the Pull 3 is a sub-ability on the healed figure (`UseParentTargets`, Filter Ally), so it
   is skipped when you heal yourself. Unverified.
 - 21 Change Tempo top: Blinkblade Experimental Adjustment's two-condition NullTargeting, area "2,1,R|1,0,R|3,0,R|4,1,E"
   (Secretariat (0,1) (1,0) (1,1) + (2,0) hex mark).
-- 22 Thrilling Solo: **NEEDS PLUGIN** (repeat the whole attack ability, area/conditions included). APPROXIMATION: after
-  your first attack ability each round (`DuringActionAbilityOnAttackAbilityFinished`, OncePerRound, Drifter Shockwave),
-  one single-target attack with that ability's value +1 and its range (Vars from `TriggerAbility`, Shattersong
-  Heartening Harmony's Range-from-Vars). Unverified; if `TriggerAbility` isn't the attack, the extra attack is 1, range 1.
-  It also fires after item or modifier attacks.
+- 22 Thrilling Solo: a marker persistent bonus (`GH2E_ThrillingSolo`); after your first attack ability from an ability
+  card each round (the round is spent even before the song is out), the plugin injects a copy of the whole ability
+  (area, targets, effects; Frosthaven's CRepeatAbilityBaseBehaviour copy) with +1 Attack, targets chosen anew, which
+  can be skipped. Item and modifier attacks don't count.
 - 23 Pull the Strings top: the control on the attack's target is the 1st edition Lead to Slaughter fix (sub-ability,
   UseParentTargets, Target 1); bottom = the 1st edition card (the enemy's own attack +0).
 - 24 Disorienting Dirge top: "all enemies gain disadvantage on all their attacks" = a disadvantage BuffAttack aura on
@@ -110,8 +111,8 @@ tag on the card face and no music-note status icon (both keyed to PlaySong in th
 - 29 Grand Finale top: a plain Move 4 with Jump, then a control on every enemy moved through (the Trample fix:
   `AllTargetsOnMovePath` + `Targeting: All`), each performing a melee Attack 3 (enemy's base replaced); unverified for a
   control. The extra Note is a Note choice right away ("this round" not tracked). Bottom: one SelectAndPlayCard over
-  the hand and the discard pile together (`CardPile: [Hand, Discarded]`, Expertise Potion; song actions only, up to 20); "skip moving your token this round" is
-  **NEEDS PLUGIN**. Permanently Lost.
+  the hand and the discard pile together (`CardPile: [Hand, Discarded]`, Expertise Potion; song actions only, up to 20); then `BSkipTokens` (marker `GH2E_SkipSongTokens`):
+  the plugin holds every song token this round. Permanently Lost.
 - 30 Captivating Performance top: end-of-turn Disarm in Secretariat's triangle "2,1,R|1,0,R|3,0,R", Range 3, no hex mark.
   Bottom: "move your tokens back one slot" = MoveActiveBonusTracker -1 with up to 15 cards picked (Drifter Fortitude,
   AMC_MoveTrackerBackOneSlot; own-class cards only); the non-song trackers (Increase Cadence and Intensifying Amplitude
@@ -122,32 +123,26 @@ tag on the card face and no music-note status icon (both keyed to PlaySong in th
 ## Perks (`perks.py`, 18 boxes)
 
 - Benediction: new AMC_GH2E_Soothsinger2_Bless2_M2 (-2, Bless two figures, you or allies, any range).
-- Fermata (x3): **NEEDS PLUGIN**: a plain +0 for now (the "skip moving your tokens" text is printed only).
+- Fermata (x3): new AMC_GH2E_Soothsinger2_Fermata_P0, a +0 with a NullTargeting marker (`GH2E_SkipSongTokens`); the
+  plugin holds the song tokens this round when it applies (CAbilityAttack.ProcessModifierAbilities).
 - Rousing Chord: Frosthaven's AMC_Strengthen_Ally_P1. Crescendo, Stunning Note, Dirge: Frosthaven's own cards.
 - Call and Response (x3): new AMC_GH2E_Soothsinger2_GrantAlly_R. APPROXIMATION: one grant of Move 2 then Attack 2
   (the ally may skip either), not a choice of one; a Choose inside a modifier draw is unbenched.
-- Storyteller: text only (the 1st edition's plugin answer keys on its perk ID; shared change 3).
-- Harmonics (a Note when you perform a Song with Notes left): **NEEDS PLUGIN**, text only.
-- Lullaby (linked, cost 2): on your long rest, a Note choice (ExecuteAbilitiesAfterLongRest; at the rest, not "during
-  ordering of initiative"). The allies' -10 initiative is **NEEDS PLUGIN**.
-- Masteries: none written. "Perform 7 different Song actions" and "create 20+ Notes and use each in a Song" need plugin
-  tags (shared change 4).
+- Storyteller (plugin): at the scenario's end (results screen / EndCurrentScenario), when the holder's battle goal is
+  complete, 8 XP to every character in the scenario.
+- Harmonics (plugin): when a Song removes a Note it didn't need, a Note of your choice right after (outside the
+  once-a-round limit; GH2e FAQ: "refunds" a Note that would otherwise be wasted).
+- Lullaby (linked, cost 2; plugin): when initiative is ordered (GameState.SortIntoInitiativeAndIDOrder at the end of
+  card selection) in a round the holder long rests: a Note of your choice, and each other character is asked whether
+  to lower their initiative by 10 (the engine's own initiative bonus, this round).
+- Masteries (plugin tags, names ours: the sheet prints none): Medley, `FrosthavenMods_SSDistinctSongs` Value 7 (songs
+  performed, by card); Perfect Pitch, `FrosthavenMods_SSNotesAllUsed` Value 20 (Notes created = resource gains that
+  placed a Note; none wasted by a Song; none left at the end). Counts live in the plugin for the scenario (a reload
+  mid-scenario starts them again).
 
-## Shared changes wanted
+## Shared changes
 
-1. **Note icons**: gh_port gives every Gloomhaven-file resource the sprite `GHClass_<owner>`, so both Notes show the same
-   class icon. Wanted: two distinct status icons (treble / bass clef, or Frosthaven's Shattersong resonance style) for
-   SoothsingerHighNote / SoothsingerLowNote, with the count, and the GHStatusIcons class-icon lookup for
-   `GHClass_Soothsinger2` (check it resolves at all for a 2e class).
-2. **Song tag + song status icon** for 2e songs: GHCardStyle's "Song" tag and GHStatusIcons' music note key on
-   `PlaySong`. A 2e song half is recognisable by its `TSongNotes` ability (every song has it, nothing else does).
-3. **Storyteller** perk: let the plugin's 1st edition answer (8 XP each at scenario end if the battle goal was met) also
-   take perk ID `Soothsinger208`.
-4. **Plugin rules** (in order of value): (a) refuse a song half / its TSongNotes when the Notes it costs aren't there
-   (cost per card: the `_T` text key of each song) and cap Note gains at one per round; (b) song token skip / move back
-   (Grand Finale bottom, Captivating Performance bottom, Fermata perk) = hold or step back `TSongTimer`'s / TSong's
-   `TrackerIndex` on the Soothsinger's persistent song bonuses; (c) Ode to the Gambler's rolling first modifier;
-   (d) Thrilling Solo's true repeat; (e) Harmonics perk; (f) mastery tags.
+All four done 2026-11-02 (GHSoothsinger.cs, GHStatusIcons, GHCardStyle, gh_port "own sprite").
 
 ## Check
 

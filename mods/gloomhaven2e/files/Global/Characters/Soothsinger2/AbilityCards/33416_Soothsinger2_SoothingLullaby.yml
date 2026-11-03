@@ -6,7 +6,8 @@ Level: 2
 Initiative: 20
 # card: Soothing Lullaby
 # top: song (High Note); "Heal 1, target all" with no range = you and all allies anywhere (Sunkeeper2 Engulfing Radiance)
-# bottom: APPROXIMATION: the marked monster's Disarm is given now (NOTES.md)
+# bottom: the token on a monster within range 3 (the plugin GHSoothsinger marks the target, MiscVars GH2E_DisarmAtTurnEnd);
+# at the end of that monster's turn this round it gains Disarm; a monster that already acted this round gains nothing
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -35,6 +36,8 @@ Data:
                     RemoveAllInstancesOfResourcesOnFinish: ["SoothsingerHighNote", "SoothsingerLowNote"]
                 MiscVars:
                     GH2E_Song1: True      # the song's Note cost (Symphonic Medley picks songs by it)
+                    GH2E_SongHigh: 1   # the printed cost in High / Low Notes (plugin GHSoothsinger)
+                    GH2E_SongLow: 0
     Bottom:
         Abilities:
             BDisarm:
@@ -43,6 +46,8 @@ Data:
                 Target: 1
                 Filter: Enemy
                 AnimOverload: AggressiveTargetedShout
+                MiscVars:
+                    GH2E_DisarmAtTurnEnd: True
             BNote:
                 NullTargeting: True
                 Filter: Self

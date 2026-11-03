@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Soothsinger2_MASTERY_1
+LocalisedName: Soothsinger2_MASTERY_1_Name
+LocalisedDescription: Soothsinger2_MASTERY_1_Desc
+PerkPoints: 1
+# The plugin's distinct-song count (GHSoothsinger.cs, FrosthavenMods_SSDistinctSongs): Value different Song actions
+# (cards whose song top was performed, its TSongNotes) in the scenario.
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_SSDistinctSongs]
+        CharacterIDs:
+            ActorID: Soothsinger2ID
+        Value: 7

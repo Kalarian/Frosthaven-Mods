@@ -5,10 +5,10 @@
 PERKS = [
     (1, "Benediction", 'Replace one <sprite name="-2"> with one <sprite name="-2"> "<sprite name=Bless>, <sprite name=Target> 2"',
      {"CardsToRemove": "[AMC_Basic_M2]", "CardsToAdd": "[AMC_GH2E_Soothsinger2_Bless2_M2]"}),
-    # skipping the song tokens has no Frosthaven ability (the songs' slots are TSongTimer's EndRoundAbility tracker):
-    # a plain +0 here, the text as printed (NEEDS PLUGIN, NOTES.md)
+    # a +0 whose marker ability (MiscVars GH2E_SkipSongTokens) the plugin reads when the card is drawn: every active
+    # song's token stays where it is at the end of this round (GHSoothsinger; all or nothing, GH2e FAQ)
     (3, "Fermata", 'Replace one <sprite name="-1"> with one <sprite name="0"> "Skip moving your character tokens on active Songs at the end of this round"',
-     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Basic_P0]"}),
+     {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_GH2E_Soothsinger2_Fermata_P0]"}),
     (2, "Stunning Note", 'Replace one <sprite name="-1"> with one <sprite name="0"> <sprite name=Stun>',
      {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Stun_P0]"}),
     # Frosthaven's own "+1, Strengthen one ally" card
@@ -22,48 +22,60 @@ PERKS = [
      {"CardsToAdd": "[AMC_GH2E_Soothsinger2_GrantAlly_R]"}),
     (1, "Dirge", 'Add three <sprite name=Curse> <sprite name=Rolling>',
      {"CardsToAdd": "[AMC_Curse_R, AMC_Curse_R, AMC_Curse_R]"}),
-    # the 1st edition's Storyteller, answered by the plugin there (GHPerks.cs); text only until the plugin knows this
-    # class's perk ID (NOTES.md, shared changes)
+    # the plugin (GHSoothsinger): at the scenario's end, if this character's battle goal is complete, 8 XP to every
+    # character in the scenario
     (1, "Storyteller", "At the end of each scenario, each character in that scenario gains 8 experience if you completed your battle goal",
      {"Flags": "[Passive]"}),
-    # NEEDS PLUGIN: a Note on performing a Song (NOTES.md)
+    # the plugin (GHSoothsinger): when a Song removes Notes beyond its cost, a Note of your choice (no round limit)
     (1, "Harmonics", "Whenever you perform a Song action, if you have any unused Notes, gain one Note of your choice in addition to any other Note gained that round",
      {"Flags": "[Passive]"}),
-    # Frosthaven's long-rest trigger (ExecuteAbilitiesAfterLongRest, gh_crossover ELEMENTALIST_PERKS) with the Note choice;
-    # the allies' -10 initiative is NEEDS PLUGIN (NOTES.md)
+    # the plugin (GHSoothsinger): when initiative is ordered in a round this character long rests, a Note of your choice
+    # and each ally character may lower their initiative by 10 (the engine's own initiative bonus, this round)
     (1, "Lullaby", "During ordering of initiative in rounds in which you declare a long rest, gain one Note of your choice, and each of your allies may decrease their initiative by 10",
-     {"Cost": 2, "Flags": "[Passive, ExecuteAbilitiesAfterLongRest]", "Abilities": """\
-    ANoteChoice:
-        Filter: Self
-        AutoTrigger: True
-        CanSkip: False
-        CanUndo: False
-        PreviewEffectText: "High Note / Low Note"
-        Choose:
-            Abilities:
-                ANoteHigh:
-                    PreviewEffectText: "High Note"
-                    NullTargeting: True
-                    Filter: Self
-                    AutoTrigger: True
-                    SkipAnim: True
-                    ResourcesToAddOnAbilityEnd:
-                        - ["SoothsingerHighNote", 1]
-                ANoteLow:
-                    PreviewEffectText: "Low Note"
-                    NullTargeting: True
-                    Filter: Self
-                    AutoTrigger: True
-                    SkipAnim: True
-                    ResourcesToAddOnAbilityEnd:
-                        - ["SoothsingerLowNote", 1]"""}),
+     {"Cost": 2, "Flags": "[Passive]"}),
 ]
 
-# Neither mastery fits an existing pattern: "perform 7 different Song actions" and "create 20+ Notes and use each in a
-# Song" need plugin tags that count TSongNotes plays and the Note resources (NOTES.md, shared changes).
-MASTERIES = []
+MASTERIES = [
+    ("Medley", "In a single scenario, perform 7 different Song actions",
+     """# The plugin's distinct-song count (GHSoothsinger.cs, FrosthavenMods_SSDistinctSongs): Value different Song actions
+# (cards whose song top was performed, its TSongNotes) in the scenario.
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_SSDistinctSongs]
+        CharacterIDs:
+            ActorID: Soothsinger2ID
+        Value: 7"""),
+    ("Perfect Pitch", "In a single scenario, create 20 or more Notes and use each Note you create in a Song",
+     """# The plugin's Note ledger (GHSoothsinger.cs, FrosthavenMods_SSNotesAllUsed): Value Notes created (resource gains that
+# placed a Note) and none wasted: a Note a Song removes counts as used only when it paid that Song's printed cost (the
+# approved default), and no Note may be left at the scenario's end.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_SSNotesAllUsed]
+        CharacterIDs:
+            ActorID: Soothsinger2ID
+        Value: 20"""),
+]
 
 NEW_CARDS = {
+    # Fermata: a +0 with a self NullTargeting marker (Frosthaven's AMC_Resonance_P1 / the Quartermaster's Supplies10
+    # shape); the plugin (GHSoothsinger) sees the marker when the card applies and holds the song tokens this round
+    "AMC_GH2E_Soothsinger2_Fermata_P0": """\
+MathModifier: "+0"
+Abilities:
+    AFermata:
+        NullTargeting: True
+        Filter: Self
+        AutoTrigger: True
+        SkipAnim: True
+        MiscVars:
+            GH2E_SkipSongTokens: True
+""",
     # Frosthaven's ally-condition modifier shape (AMC_Strengthen_Ally_P1), Bless on two figures, you included. A Bless
     # ability on a modifier card is the error screen when drawn (the game's modifier code runs no condition abilities):
     # a NullTargeting carrying the condition, as Frosthaven's cards give conditions (NullTargeting + Conditions)
@@ -80,4 +92,6 @@ NEW_CARDS = {
                                           '        Range: 99\n        Filter: Ally\n        AnimOverload: Grant\n'),
 }
 
-STRINGS = {}
+STRINGS = {   # the new modifiers' names (the game looks a modifier's Name up as text)
+    "AMC_GH2E_Soothsinger2_Fermata_P0": '<sprite name="0"> Skip moving your character tokens on active Songs at the end of this round',
+}

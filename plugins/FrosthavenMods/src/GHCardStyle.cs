@@ -101,7 +101,8 @@ namespace FrosthavenMods
                     // the port's Command marker (Beast Tyrant): hidden, and the half tagged like a song
                     TMP_Text cmd = rows.GetComponentsInChildren<TMP_Text>(true).FirstOrDefault(x => (x.text ?? "").Contains("<link=fhcommand>"));
                     if (cmd != null) { cmd.text = ""; cmd.ForceMeshUpdate(); }
-                    bool song = act?.Abilities?.Any(a => a?.AbilityType == CAbility.EAbilityType.PlaySong) == true;
+                    // a 2nd edition song half is a plain persistent bonus whose half carries TSongNotes (GHSoothsinger)
+                    bool song = act?.Abilities?.Any(a => a?.AbilityType == CAbility.EAbilityType.PlaySong || a?.Name == "TSongNotes") == true;
                     SongTag(h, f, model, song ? "Song" : cmd != null ? "Command" : null, song ? SongColour : CommandColour);
                     // an Augment half (Mindthief) has its own stacked layout: the fit passes slid it under the top rim
                     bool augment = rows.GetComponentsInChildren<Transform>(true).Any(c => c.name == "AugmentRow");

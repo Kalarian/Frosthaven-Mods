@@ -1801,6 +1801,7 @@ Sunkeeper2_MASTERY_2_Desc	In a single scenario, deal <sprite name=Damage> 8 or m
 Sunkeeper2_FullName	Sunkeeper
 CODEX_Hero_Sunkeeper2_Title	Sunkeeper
 CODEX_HeroInfo_Sunkeeper2	Many of your abilities strongly benefit from <sprite name=CreateLight>, so you may want to think about bringing some abilities that can infuse <sprite name=CreateLight> and find opportunities to use them.\n\nWith your large hand size, you can afford to perform multiple actions with <sprite name=Lost> in each scenario. You can bring some powerful <sprite name=Lost> actions to turn the tide of difficult fights or even consider setting up a persistent ability or two early on.
+AMC_GH2E_Soothsinger2_Fermata_P0	<sprite name="0"> Skip moving your character tokens on active Songs at the end of this round
 PERK_Soothsinger2_01_Name	Benediction
 PERK_Soothsinger2_01_Desc	Replace one <sprite name="-2"> with one <sprite name="-2"> "<sprite name=Bless>, <sprite name=Target> 2"
 PERK_Soothsinger2_02_Name	Fermata
@@ -1821,6 +1822,10 @@ PERK_Soothsinger2_09_Name	Harmonics
 PERK_Soothsinger2_09_Desc	Whenever you perform a Song action, if you have any unused Notes, gain one Note of your choice in addition to any other Note gained that round
 PERK_Soothsinger2_10_Name	Lullaby
 PERK_Soothsinger2_10_Desc	During ordering of initiative in rounds in which you declare a long rest, gain one Note of your choice, and each of your allies may decrease their initiative by 10
+Soothsinger2_MASTERY_1_Name	Medley
+Soothsinger2_MASTERY_1_Desc	In a single scenario, perform 7 different Song actions
+Soothsinger2_MASTERY_2_Name	Perfect Pitch
+Soothsinger2_MASTERY_2_Desc	In a single scenario, create 20 or more Notes and use each Note you create in a Song
 Soothsinger2_FullName	Soothsinger
 CODEX_Hero_Soothsinger2_Title	Soothsinger
 CODEX_HeroInfo_Soothsinger2	You may play notes to create Songs, which are persistent active abilities with use slots that provide ongoing effects. In order to perform a Song, you must have the corresponding notes on your mat. Whenever you perform a Song, remove all of your notes, even those that were not part of the Song. The Song’s effect is active from the moment you play it into your active area and ends when the Song is moved from your active area to your discard pile. You must advance your character token on all your active Song at the end of each round. If multiple Song have effects at the end of your turn, you may apply their effects in any order.
