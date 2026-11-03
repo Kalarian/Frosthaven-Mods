@@ -56,8 +56,12 @@ namespace FrosthavenMods
                 try { bc = ability.GetAbilityBaseCard(); } catch { }
                 if (bc != null && bc.ID != card.ID) return false;
             }
-            DiscardType d = cur.Action == card.TopAction ? card.GetAbilityCardYML.TopDiscardType
-                : cur.Action == card.BottomAction ? card.GetAbilityCardYML.BottomDiscardType : DiscardType.None;
+            // (2026-11-03: GameState.CurrentAction holds a Copy() of the card's action (PlayerSelectedAbilityCardAction),
+            // never the same object, so a reference test was always false: Spent Power, Warm Up and Etheric Echo never
+            // applied. CAction.Copy keeps the ID.)
+            bool Same(CAction a) => a != null && (ReferenceEquals(cur.Action, a) || cur.Action.ID == a.ID);
+            DiscardType d = Same(card.TopAction) ? card.GetAbilityCardYML.TopDiscardType
+                : Same(card.BottomAction) ? card.GetAbilityCardYML.BottomDiscardType : DiscardType.None;
             return d == DiscardType.Lost || d == DiscardType.PermanentlyLost;
         }
 

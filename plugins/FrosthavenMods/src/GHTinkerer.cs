@@ -161,15 +161,17 @@ namespace FrosthavenMods
                 if (list == null || current?.Action == null || !(current.BaseCard is CAbilityCard card)) return;
                 if (GameState.CurrentActionInitiator != GameState.EActionInitiator.AbilityCard) return;   // not a persistent bonus's later trigger
                 if (!(GameState.InternalCurrentActor is CPlayerActor me) || !HasPerk(me, SpareParts)) return;
-                DiscardType discard = current.Action == card.TopAction ? card.GetAbilityCardYML.TopDiscardType
-                    : current.Action == card.BottomAction ? card.GetAbilityCardYML.BottomDiscardType : DiscardType.None;
+                // (2026-11-03: CurrentAction holds a Copy() of the card's action; compare by ID, as GHSpellweaver2e.IsLostAction)
+                bool top = current.Action.ID == card.TopAction?.ID, bottom = current.Action.ID == card.BottomAction?.ID;
+                DiscardType discard = top ? card.GetAbilityCardYML.TopDiscardType
+                    : bottom ? card.GetAbilityCardYML.BottomDiscardType : DiscardType.None;
                 if (discard != DiscardType.Lost && discard != DiscardType.PermanentlyLost) return;
                 CAbility infuse = CAbility.CreateAbility(CAbility.EAbilityType.Infuse, CAbilityFilterContainer.CreateDefaultFilter(), isMonster: false, isTargetedAbility: false,
                     elementsToInfuse: new List<ElementInfusionBoardManager.EElement> { ElementInfusionBoardManager.EElement.Any }, showElementPicker: true, parentBaseCard: card);
                 if (infuse == null) return;
                 infuse.SkipAnim = true;
                 list.Add(new CPhaseAction.CPhaseAbility(infuse, me, card, current.Action.ID));
-                Plugin.Log.LogInfo($"GHRule SpareParts card {card.ID} Spare Parts: {GHPlague.NameOf(me)} performs a lost action ({(current.Action == card.TopAction ? "top" : "bottom")}): may infuse any element at its end");
+                Plugin.Log.LogInfo($"GHRule SpareParts card {card.ID} Spare Parts: {GHPlague.NameOf(me)} performs a lost action ({(top ? "top" : "bottom")}): may infuse any element at its end");
             }
             catch (Exception e) { GHMapTokens.Report("Spare Parts", e); }
         }
