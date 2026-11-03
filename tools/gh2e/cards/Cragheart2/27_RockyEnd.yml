@@ -3,9 +3,9 @@
 # top: Heal 5 on allies in the red hexes (the 1st edition Sentient Growth's sub-heal shape); the consume (missing in
 #   Xipe) appends a create sub-ability on every empty hex of the attack's area (ParentAbility.ValidTilesInAreaAffected,
 #   EmptyHex; an override's SubAbilities are added to the attack's own, CAbility override merge). Bench first.
-# bottom: APPROXIMATION of "obstacles in each featureless hex the target exits with the push": after the push, obstacles
-#   on the shortest path from the target's start hex to its end hex, start included, end excluded
-#   (CustomAbility.GetTilesOnDirectPath; falls back to the start hex). Bench first.
+# bottom: "obstacles in each featureless hex the target exits with the push": the create is marked GHPushExitedHexes;
+#   the plugin (GHCragheart2e.cs) sets its hexes to the push's real path (the start hex and every hex passed, the end
+#   hex excluded), featureless and empty ones only. The TargetingVars below only seed the custom targeting.
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -66,6 +66,8 @@ Data:
                             AddTilesInRange: CustomAbility.GetTilesOnDirectPath(StartTile, EndTile, true, false) || ParentAbility.TilesSelected
                         SpawnDelay: 2.9
                         AnimOverload: None
+                        MiscVars:
+                            GHPushExitedHexes: True
         Infuse: Earth
 Layout:
     Top:

@@ -1,0 +1,17 @@
+Parser: Mastery
+ID: Cragheart2_MASTERY_2
+LocalisedName: Cragheart2_MASTERY_2_Name
+LocalisedDescription: Cragheart2_MASTERY_2_Desc
+PerkPoints: 1
+# NEW TAG: Amount hit points actually restored by your heals in one round (anyone), Amount damage to enemies with one
+# ranged attack ability and Amount with one melee attack ability (GHMasteriesCragheart2.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_Heal8Ranged8Melee8]
+        CharacterIDs:
+            ActorID: Cragheart2ID
+        Amount: 8
+        Value: 1

@@ -1,0 +1,16 @@
+Parser: Mastery
+ID: Cragheart2_MASTERY_1
+LocalisedName: Cragheart2_MASTERY_1_Name
+LocalisedDescription: Cragheart2_MASTERY_1_Desc
+PerkPoints: 1
+# NEW TAG: every round of the scenario, an obstacle created, destroyed or moved by you (GHMasteriesCragheart2.cs, from
+# the ability and destroyed-obstacle records plus the obstacles spawned with you as their owner)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ObstacleEveryRound]
+        CharacterIDs:
+            ActorID: Cragheart2ID
+        Value: 1

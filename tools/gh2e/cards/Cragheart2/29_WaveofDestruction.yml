@@ -3,10 +3,10 @@
 # top: no enhancement mark on the attack. "+X Attack per target, X = range to it": Frosthaven's per-target
 #   TargetDistanceRangeDiff is |ability range - distance|, and a melee area attack has range 1, so it gives distance - 1;
 #   the stored base is 2 so the total is the printed 1 + distance (the card face shows the printed 1)
-# bottom: APPROXIMATION: the move is a Jump (as Xipe; the card has none) that destroys every obstacle on its path (the
-#   1st edition Clear the Way's destroy-on-path, play-tested), so you can't end in an obstacle's hex and you pass over
-#   enemies and traps; then +2 per destroyed obstacle on your next attack this turn (a one-use turn bonus,
-#   CPhaseAction obstacle count of the action). Bench first.
+# bottom: a plain Move 5 (no Jump: the card has none) marked GHMoveThroughObstacles: the plugin (GHCragheart2e.cs)
+#   lets it enter (pass or end in) hexes with obstacles; the next step destroys every obstacle on the move path (the
+#   1st edition Clear the Way's destroy-on-path), then +2 per destroyed obstacle on your next attack this turn (a
+#   one-use turn bonus, CPhaseAction obstacle count of the action).
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -25,7 +25,8 @@ Data:
                 Move:
                     Amount: 5
                     Enhancements: 1
-                    Jump: True
+                MiscVars:
+                    GHMoveThroughObstacles: True
             BDestroyObstacle:
                 DestroyObstacle:
                 Target: -1
