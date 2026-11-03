@@ -17,6 +17,7 @@ Abilities:
                     EnemyWillDoThis:
                         Attack: 0
                         StrengthIsBase: True
+                        Filter: [Enemy, Ally]
                         Targeting: Custom
                         TargetingVars:
                             AutoTarget: TargetingActor.GH2ETauntTarget

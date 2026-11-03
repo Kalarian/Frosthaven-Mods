@@ -65,7 +65,10 @@ PERKS = [
     # An end-of-turn ability (Final Fight's EndTurnAbility shape, from scenario start) controlling the adjacent enemies
     # (player-driven control, for one action, skippable: "you may"), each performing Attack +0 (its own base attack)
     # aimed at the Berserker: the plugin (GHBerserker2e, GH2E_TauntingFury) gives each adjacent enemy a temp var the
-    # commanded attack's custom targeting reads (Frosthaven's Parrying Gauntlet shape).
+    # commanded attack's custom targeting reads (Frosthaven's Parrying Gauntlet shape). The control makes the enemy a
+    # Player-type figure for its action (ControlActorData.ControlType defaults to Player, GameState.
+    # OverrideCurrentActorForOneAction), so the Berserker is its ally then: the attack's default Enemy filter dropped him
+    # ("the game offers no target", 2026-11-03 triage). Filter [Enemy, Ally]: the custom target is only ever the Berserker.
     (1, "Taunting Fury", "At the end of each of your turns, you may control all adjacent enemies: <sprite name=Attack> +0, target the Berserker",
      {"Cost": 3, "Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]",
       "Abilities": """\
@@ -79,6 +82,7 @@ PERKS = [
                     EnemyWillDoThis:
                         Attack: 0
                         StrengthIsBase: True
+                        Filter: [Enemy, Ally]
                         Targeting: Custom
                         TargetingVars:
                             AutoTarget: TargetingActor.GH2ETauntTarget

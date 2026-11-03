@@ -228,7 +228,10 @@ namespace FrosthavenMods
                     && LastPoisonedAlly.TryGetValue(targetingActor, out CActor ally) && ally != null && !ally.IsDead && ScenarioManager.Scenario.HasActor(ally))
                 {
                     __instance.TargetingOverrideArrayIndex = ally.ArrayIndex;
-                    Rule("FromAllyHex", GHPlague.CardOf(__instance), $"{GHPlague.NameOf(targetingActor)} attacks as if occupying the hex of {GHPlague.NameOf(ally)} ({ally.ArrayIndex})");
+                    // (a Start prefix: the ability's TargetingActor is not set yet, so the card is looked up with the actor given)
+                    int fromCard = 0;
+                    try { fromCard = __instance.GetAbilityBaseCard(targetingActor)?.ID ?? 0; } catch { }
+                    Rule("FromAllyHex", fromCard,$"{GHPlague.NameOf(targetingActor)} attacks as if occupying the hex of {GHPlague.NameOf(ally)} ({ally.ArrayIndex})");
                 }
             }
             catch (Exception e) { Report("Tainted Offering (ally hex)", e); }

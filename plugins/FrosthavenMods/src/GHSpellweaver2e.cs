@@ -265,7 +265,10 @@ namespace FrosthavenMods
         /// when such an action ENDS (Frosthaven's DuringActionAbilityOnActionEnded), too late for damage she takes during
         /// it (retaliate on a lost attack, a trap on a lost move). So as the first ability of her next lost action starts,
         /// she gains Ward and the bonus is finished (its end-of-action trigger then never runs; if this hook misses, it is
-        /// the fallback). "GHRule EthericEcho".</summary>
+        /// the fallback). "GHRule EthericEcho".
+        /// (2026-11-03 triage: it never acted, the end-of-action trigger gave the Ward. In a CAbility.Start prefix the
+        /// ability's TargetingActor is not set yet, so GetAbilityBaseCard() without an actor found no card and the hook
+        /// returned. The card is now the running action's own (GHCurrentAction), else looked up with her as the actor.)</summary>
         [HarmonyPatch(typeof(CAbility), nameof(CAbility.Start))]
         [HarmonyPrefix]
         private static void WardAtLostStart(CAbility __instance, CActor targetingActor)
@@ -274,10 +277,10 @@ namespace FrosthavenMods
             {
                 CActor her = targetingActor ?? __instance?.TargetingActor;
                 if (!(her is CPlayerActor p) || p.CharacterClass?.ID != ClassId || GameState.InternalCurrentActor != her) return;
-                CActiveBonus echo = her.ActiveBonuses?.FirstOrDefault(b => b?.BaseCard?.ID == EthericEcho && b.Ability?.Name == "BOnLost" && !b.Finished() && !b.Finishing());
+                CActiveBonus echo = GHCasterBonuses.OfCard(her, EthericEcho, b => b.Ability?.Name == "BOnLost");
                 if (echo == null || !IsLostAction(__instance)) return;
-                CBaseCard card = null;
-                try { card = __instance.GetAbilityBaseCard(); } catch { }
+                CBaseCard card = GHCurrentAction.Get()?.BaseCard;
+                if (card == null) { try { card = __instance.GetAbilityBaseCard(her); } catch { } }
                 if (card == null || card.ID == EthericEcho) return;   // Etheric Echo's own bottom is no lost action
                 her.ApplyCondition(her, CCondition.EPositiveCondition.Ward);
                 echo.Finish();

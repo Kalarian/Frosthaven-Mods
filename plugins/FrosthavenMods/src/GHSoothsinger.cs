@@ -581,7 +581,9 @@ namespace FrosthavenMods
             if (actor == null || ScenarioManager.Scenario == null) return list;
             foreach (CPlayerActor singer in ScenarioManager.Scenario.PlayerActors.Where(p => Is(p) && !p.IsDead))
             {
-                foreach (IGrouping<int, CActiveBonus> song in singer.ActiveBonuses.Where(b => b != null && !b.Finished() && b.Ability?.Name != null
+                // her cards' bonuses, not singer.ActiveBonuses: an aura song that leaves her out (Disorienting Dirge's enemy
+                // aura) is listed only under the figures in its range, so its effect on them was never found here
+                foreach (IGrouping<int, CActiveBonus> song in GHCasterBonuses.Of(singer).Where(b => b != null && !b.Finished() && b.Ability?.Name != null
                              && b.Ability.Name.StartsWith("TSong", StringComparison.Ordinal) && b.Ability.Name != "TSongNotes" && IsSongCard(b.BaseCard))
                              .GroupBy(b => b.BaseCard.ID))
                 {
