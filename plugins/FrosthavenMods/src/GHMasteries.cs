@@ -73,6 +73,7 @@ namespace FrosthavenMods
         internal const string NewSongTag = "FrosthavenMods_NewSongAfterRests";                 // (Soothsinger) a new song on the first turn and after each rest
         internal const string AllCursesBlessesTag = "FrosthavenMods_AllCursesAndBlessesOut";   // (Soothsinger) every curse and bless in the decks at once
         internal const string HealOrDebuffTag = "FrosthavenMods_HealOrDebuffEveryTurn";        // (Tinkerer) an ally healed or an enemy debuffed every turn
+        internal const string TinkererSupportTag = "FrosthavenMods_TinkererSupportEveryTurn";  // (2e Tinkerer) every turn: a negative condition on an enemy, or a positive condition, heal or shield on an ally
         internal const string LossBeforeRestsTag = "FrosthavenMods_LossActionsBeforeRests";    // (Tinkerer) Amount lost halves before every rest
         internal const string NoRepeatedDoomTag = "FrosthavenMods_NoRepeatedDoom";             // (Doomstalker) no doom half performed twice
         internal const string DoomedKillsTag = "FrosthavenMods_DoomedKillsInTurn";             // (Doomstalker) Value doomed enemies killed in one turn
@@ -133,6 +134,11 @@ namespace FrosthavenMods
                 else if (tags.Contains(NewSongTag)) NewSongAfterRests(stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(AllCursesBlessesTag)) NotAnsweredYet(ref totalConditions, ref conditionsMet, ref __result);   // needs the decks at runtime: with the Soothsinger's port
                 else if (tags.Contains(HealOrDebuffTag)) EveryTurn(stats, r => HealOrDebuffInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
+                else if (tags.Contains(TinkererSupportTag))
+                {
+                    EveryTurn(stats, r => TinkererSupportInRound(stats, r), ref totalConditions, ref conditionsMet, ref __result);
+                    Plugin.Log.LogInfo($"GHRule TinkererSupport card 0 Field Medic: {conditionsMet} of {totalConditions} turns with a negative condition on an enemy or a positive condition, heal or shield on an ally");
+                }
                 else if (tags.Contains(LossBeforeRestsTag)) LossActionsBeforeRests(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(NoRepeatedDoomTag)) NoRepeatedDoom(stats, ref totalConditions, ref conditionsMet, ref __result);
                 else if (tags.Contains(DoomedKillsTag)) DoomedKillsInTurn(unlockConditionTarget, stats, ref totalConditions, ref conditionsMet, ref __result);
@@ -733,6 +739,33 @@ namespace FrosthavenMods
             }
             return false;
         }
+
+        /// <summary>The 2nd edition Tinkerer's Field Medic, as printed: during the turn the character gave an enemy a negative
+        /// condition, or gave an ally (another character or a summon, not themselves) a positive condition, a heal or a
+        /// shield. The 1st edition tag's heal / negative-condition test, plus every ability record of a positive-condition,
+        /// heal or shield type aimed at an ally.</summary>
+        private static bool TinkererSupportInRound(List<CPlayerStats> stats, int round)
+        {
+            if (HealOrDebuffInRound(stats, round)) return true;
+            foreach (CPlayerStatsAbilities a in AbilityRecords(stats))
+            {
+                if (a.Round != round || !AllyPositiveTypes.Contains(a.ActionData.AbilityType) || a.TargetGUIDs == null) continue;
+                string self = a.ActionData.MainActorGUID;
+                for (int i = 0; i < a.TargetGUIDs.Count; i++)
+                {
+                    if (string.IsNullOrEmpty(a.TargetGUIDs[i]) || a.TargetGUIDs[i] == self) continue;
+                    if (a.TargetTypes != null && i < a.TargetTypes.Count && a.TargetTypes[i] != CActor.EType.Player && a.TargetTypes[i] != CActor.EType.HeroSummon && a.TargetTypes[i] != CActor.EType.Ally) continue;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static readonly HashSet<CAbility.EAbilityType> AllyPositiveTypes = new HashSet<CAbility.EAbilityType>
+        {
+            CAbility.EAbilityType.Bless, CAbility.EAbilityType.Strengthen, CAbility.EAbilityType.Ward, CAbility.EAbilityType.Regenerate,
+            CAbility.EAbilityType.Invisible, CAbility.EAbilityType.Shield, CAbility.EAbilityType.Heal,
+        };
 
         /// <summary>Amount lost halves performed before the first rest and between every two rests.</summary>
         private static void LossActionsBeforeRests(CUnlockConditionTarget t, List<CPlayerStats> stats, ref int total, ref int met, ref bool result)

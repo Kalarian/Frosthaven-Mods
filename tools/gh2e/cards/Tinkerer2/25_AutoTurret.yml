@@ -5,16 +5,28 @@ Data:
     Top:
         Abilities:
             # "At the end of this and your next three turns, perform the following twice: Attack 2, Range 5, Pierce 1":
-            # the 1st edition Auto Turret shape (EndTurnAbility), 4 slots with XP on the first three. "Twice" is
-            # Target 2 (Xipe's choice): two different enemies, not the same one twice (NOTES.md)
+            # the 1st edition Auto Turret shape (EndTurnAbility), 4 slots with XP on the first three. "Twice" = two
+            # attacks, each with its own target and modifier (the same enemy may be attacked both times): the second
+            # is a sub-ability attack that picks its own target (TreatAsNonSubAbility, the Banner Spear's Boldening
+            # Blow), run inside the bonus's ability as Invigorating Aerosol's end-of-turn sub-ability is (benched)
             TActive:
                 AddActiveBonus:
                     Attack:
                         Amount: 2
                         Pierce: 1
                     Range: 5
-                    Target: 2
+                    Target: 1
                     AnimOverload: RangedAttack
+                    SubAbilities:
+                        TActiveSecond:
+                            Attack:
+                                Amount: 2
+                                Pierce: 1
+                            Range: 5
+                            Target: 1
+                            Filter: Enemy
+                            TreatAsNonSubAbility: True
+                            AnimOverload: RangedAttack
                 ActiveBonus:
                     Duration: Persistent
                     Behaviour: EndTurnAbility

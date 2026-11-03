@@ -10,9 +10,7 @@ Discard: [Discard,Permanently Lost]
 Data:
     Top:
         Abilities:
-            # Heal 3, Strengthen, Bless on one ally within range 3. "The target may immediately play up to two cards
-            # from their hand (one top, one bottom)": text only, NEEDS PLUGIN (Frosthaven's SelectAndPlayCard plays the
-            # caster's own cards, never an ally's)
+            # Heal 3, Strengthen, Bless on one ally within range 3
             THeal:
                 Heal:
                     Amount: 3
@@ -22,17 +20,35 @@ Data:
                 Filter: Ally
                 Conditions: [Strengthen, Bless]
                 AnimOverload: Heal
+            # "The target of the heal ability may immediately play up to two cards from their hand, performing at most
+            # one top and one bottom action of the cards": the same printed rule as Bright Aegis's consume, built the
+            # same way: Frosthaven's extra turn (ExtraTurn: BothActions, the 1st edition Unwavering Mandate, verified)
+            # given to the character the heal just targeted (TargetTargetedByCasterPreviousAbility + SpecificAbilityNames)
+            THealExtraTurn:
+                ExtraTurn: BothActions
+                Range: 3
+                PreviewEffectId: Sunkeeper
+                PreviewEffectText: FHS_GH2E_Tinkerer2_31_T2
+                Filter:
+                    TargetType: Ally
+                    ActorType: Player
+                    TargetTargetedByCasterPreviousAbility: True
+                    SpecificAbilityNames: [THeal]
     Bottom:
         Abilities:
-            # APPROXIMATION: "recover one card from the lost pile of one ally adjacent to them" is the ally's own lost
-            # pile (Stamina Booster's RecoverLostCards); NEEDS PLUGIN for the neighbour's pile
+            # "One ally within Range 3 may Recover one card from the lost pile of one ally adjacent to them": the card
+            # comes back to the hand of its owner, a character adjacent to an ally (character or summon, not you) within
+            # range 3; that owner may be you (QUESTIONS.md C: own card allowed, the chosen ally must be within range 3).
+            # GHTinkerer.cs builds the targets (misc var GHAdjacentToAllyInRange); the owner picks the card.
             BRecover:
                 RecoverLostCards: 1
                 Range: 3
                 Filter:
-                    TargetType: Ally
+                    TargetType: [Self, Ally]
                     ActorType: Player
                 AnimOverload: TargetRecover
+                MiscVars:
+                    GHAdjacentToAllyInRange: True
         XP: 3
 Layout:
     Top:

@@ -1,0 +1,55 @@
+Parser: HeroSummon
+ID: GravityBombID
+LocKey: $GH2E_SUMMON_GravityBomb$
+Model: NailSphere
+# the "Gravity Bomb" token (stand-in model: the 1st edition Nail Sphere). A map token, not a figure (class mat / GH2e
+# FAQ: tokens "won't make a hex non-empty"): can't be targeted, hurt or block, shares its hex (IgnoreActorCollision,
+# GHMapTokens.cs). No ability on its own turn (a passive summon).
+Health: 1
+Move: 0
+Attack: 0
+Range: 0
+Untargetable: True
+Invulnerable: True
+DoesNotBlock: True
+IgnoreActorCollision: True
+# What the token performs at the end of the Tinkerer's next turn (GHMapTokens.cs queues these three as the token's own
+# abilities at that end of turn, then takes the token off the map, which sends the card to the discard pile). They are
+# written here as OnDeathAbilities only to carry them: the plugin never lets them run on a death (the Tinkerer's
+# exhaustion must not set the bomb off).
+OnDeathAbilities:
+    # "Pull 2, target all enemies within Range 2 of the token. Pull toward the token": a pull performed by the token
+    # pulls toward it
+    AGravityPull:
+        Pull: 2
+        Range: 2
+        Target: -1
+        Filter: Enemy
+        AutoTrigger: True    # not optional: the token performs it (no confirm click)
+        AnimOverload: None
+        MiscVars:
+            GHGravityBomb: True
+    # "Then any enemy occupying the hex containing the token suffers damage 5" (the token's own hex: includeCasterTile;
+    # the plugin keeps only the enemies in that hex)
+    AGravityHex:
+        Damage: 5
+        Range: 0
+        Target: -1
+        Filter: Enemy
+        AutoTrigger: True    # not optional: the token performs it (no confirm click)
+        AnimOverload: None
+        MiscVars:
+            includeCasterTile: True
+            GHGravityBomb: True
+            GHTokenHexOnly: True
+    # "all enemies occupying hexes adjacent to the token suffer damage 1"
+    AGravityAdjacent:
+        Damage: 1
+        Range: 1
+        Target: -1
+        Filter: Enemy
+        AutoTrigger: True    # not optional: the token performs it (no confirm click)
+        AnimOverload: None
+        MiscVars:
+            GHGravityBomb: True
+            GHTokenAdjacentOnly: True

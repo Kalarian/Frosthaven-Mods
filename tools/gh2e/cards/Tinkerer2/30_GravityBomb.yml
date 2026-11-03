@@ -4,26 +4,15 @@ Discard: [Discard,Discard]
 Data:
     Top:
         Abilities:
-            # APPROXIMATION, NEEDS PLUGIN for the exact rule (NOTES.md): the token, the one-turn delay and the pull
-            # toward the token have no engine shape. Done at once instead: damage 5 to one enemy within range 4 (the
-            # bomb's hex), then damage 1 to every enemy adjacent to it (the Rock Slide / Rot Maggots shape:
-            # AllTargetsAdjacentToParentTargets + TreatAsNonSubAbility). No pull.
-            TDamage:
-                Damage: 5
-                Range: 4
-                Target: 1
-                Targeting: Range
-                Filter: Enemy
-                AnimOverload: RangedAttack
-                SubAbilities:
-                    TDamageAdjacent:
-                        Damage: 1
-                        Range: 1
-                        Target: -1
-                        Filter: Enemy
-                        TreatAsNonSubAbility: True
-                        AllTargetsAdjacentToParentTargets: True
-                        AnimOverload: None
+            # The "Gravity Bomb" token (summons/GravityBomb.yml: a map token that keeps its hex empty), placed in an empty
+            # hex within range 4. The card stays in the active area while the token stands (persistent, as printed).
+            # At the end of your next turn (not the turn it is placed) GHMapTokens.cs has the token perform its three
+            # abilities: Pull 2 on all enemies within range 2 toward the token, damage 5 to an enemy in the token's hex,
+            # damage 1 to the enemies adjacent to it; then the token leaves the map and this card goes to the discard.
+            TSummon:
+                Summon: GravityBombID
+                Range: 4      # "in an empty hex within Range 4" (CAbilitySummon.SelectSummonPosition reads the range)
+                AnimOverload: Summon
     Bottom:
         Abilities:
             BAttack:
@@ -35,7 +24,16 @@ Data:
                 AnimOverload: RangedAttack
 Layout:
     Top:
-        - Row: "$GH2E_Tinkerer2_30_T$"
+        - Active:
+            Ability: "TSummon"
+            Icon: "Summon"
+            Layout:
+                - Summon:
+                    Ability: TSummon
+                    SummonName: $GH2E_SUMMON_GravityBomb$
+                    SpecialText: "$GH2E_Tinkerer2_30_T$"
+        - Row: "<size=20%> "
+        - Duration: Persistent
     Bottom:
         - ColumnWidths: "65,35"
         - Column:

@@ -22,10 +22,12 @@ should be in the first bench.
   token's effect as an `OnSummonAbilities` aura. Stand-in models from the 1st edition pack: Enhancement Field =
   SpiritBanner (the 1st edition Spirit Banner does the same job, +2 Attack aura), Pernicious Fogger = WindTotem,
   Teleportation Pad = Ward. How they look is to be judged in game.
-  - **Approximation (all three):** a summon is placed adjacent to the Tinkerer, not "in an empty hex within range 3/5".
-    Frosthaven has no summon ability with a placement range (none of its cards or the 1e cards has one).
-  - Tokens are untargetable, invulnerable, non-blocking summons: whether figures may end a move in a token's hex
-    (the class mat says the hex stays empty) is to be seen in game.
+  - Placement: the summon ability's `Range` (3 / 3 / 5, Gravity Bomb 4) is read by CAbilitySummon.
+  - **Empty hexes** (class mat; GH2e FAQ: tokens "won't make a hex non-empty"; user decision A3): every token also has
+    `IgnoreActorCollision: True` (Frosthaven's flag for a figure that shares a hex, the 1e Sand Devil's), so figures may
+    end a move, be pushed / pulled / teleported onto it, and GHMapTokens.cs hides the four token IDs from the engine's
+    position lookups (CScenario.FindActorAt / FindActorsAt), so a token hex is empty for summoning, spawning and
+    placing, and the figure sharing it is the one found for targeting. Log `GHRule MapTokenEmptyHex`.
 - **Trap damage slots** (Gas Canister top, Volatile Concoction bottom, Proximity Mine bottom, Cryonic Snare top; the
   card prints damage [square]): Frosthaven's own shape, `SquareEnhancements: 1` beside `Damage` inside the `Trap`
   block (the Trapper's Boar Catcher). Left out at first because packcheck called it a dead slot; restored once the lead
@@ -60,9 +62,11 @@ should be in the first bench.
   filters on it).
 - 15 Hook Gun top: Attack slot added (printed [diamond]).
 - 16 Repulsor Gun bottom: stand-alone Push 2 range 2 (`Filter: Enemy`).
-- 18 Teleportation Pad top: **NEEDS PLUGIN.** "You and all allies may treat the two token hexes as adjacent during
-  move abilities" has no engine shape. Written as two token summons (TeleportationPadID, no effect of their own, so a
-  plugin can find the two hexes) + the rule as text; XP 3 / persistent / lost as printed. Bottom: Frosthaven's
+- 18 Teleportation Pad top: two token summons (TeleportationPadID). "You and all allies may treat the two token hexes as
+  adjacent during move abilities": GHMapTokens.cs adds a cost-1 link between the two pad hexes (both ways) to every
+  move of the Tinkerer or a figure allied to them while both pads stand: Frosthaven's own Deathwalker shadow links
+  (CAbilityMove.RefreshShadowNavLinks / ClearShadowNavLinks), which the player's reachable hexes, an ally summon's AI
+  path and the move cost all read; monsters never get them. Log `GHRule TeleportPad`. XP 3 / persistent / lost. Bottom: Frosthaven's
   `Teleport2: 4` with a circle slot (Blinkblade's Breakneck Speed); packcheck's old "no ability kind found" warning on it is
   gone since `Teleport2` was added to its KIND_KEYS.
 - 19 Stamina Booster: `Discard: [Discard,Permanently Lost]` for the card-stack-with-red-X icon (as Xipe, the 1e file and
@@ -79,9 +83,9 @@ should be in the first bench.
   pack's real condition (AUTHORING.md, Safeguard; GHSafeguard.cs) as a sub-ability of the end-of-turn heal
   (`UseParentTargets`), so each heal target also gains Safeguard. **Untested**: a sub-ability inside an AddActiveBonus
   ability. The class's only Safeguard.
-- 25 Auto Turret top: lost (Xipe had it as a discard). "Perform the following twice: Attack 2, Range 5, Pierce 1" is
-  **approximated** as one Attack 2 with Target 2 (Xipe's choice): two different enemies, never the same enemy twice
-  (a sub-ability attack under an attack inside an AddActiveBonus is an untested shape). Bottom: Ward [diamond+] range 3
+- 25 Auto Turret top: lost (Xipe had it as a discard). "Perform the following twice: Attack 2, Range 5, Pierce 1": two
+  attacks, each Target 1 with its own modifier draw (the same enemy may be hit twice): the second is a sub-ability
+  attack with TreatAsNonSubAbility (Boldening Blow) inside the end-of-turn bonus (Invigorating Aerosol's benched shape). Bottom: Ward [diamond+] range 3
   (self or ally) and Poison [diamond] range 3 restored (Xipe had them commented out).
 - 26 Murderous Contraption: Kill Bot as above.
 - 27 Pernicious Fogger top: token summon with Frosthaven's Banner of Doom aura shape changed to `EndTurnAbility` and
@@ -96,27 +100,36 @@ should be in the first bench.
   the monster's attack: no StrengthIsBase), range 1, all targets; then a Stun limited to the enemy just controlled
   (`TargetTargetedByCasterPreviousAbility` + `SpecificAbilityNames: [BControl]`, the Eye of the Void fix). Whose
   enemies the controlled monster attacks is the engine's control rule (the sheet's rules question). **Untested shape.**
-- 30 Gravity Bomb top: **APPROXIMATION + NEEDS PLUGIN.** The token, the delay to the end of your next turn and the
-  pull toward the token have no engine shape. Done at once: Damage 5 on one enemy within range 4, then Damage 1 on
-  every enemy adjacent to it (AllTargetsAdjacentToParentTargets + TreatAsNonSubAbility, the Rock Slide / Rot Maggots
-  shape). No pull, not persistent (the card goes to the discard as the text says). Text left as printed. Bottom: the
+- 30 Gravity Bomb top: the GravityBombID token (stand-in model NailSphere) placed within range 4; the card stays active
+  while it stands (persistent). At the end of the Tinkerer's turn in a later round (an extra turn the same round is
+  not "your next turn"), GHMapTokens.cs queues the token's three abilities (carried in summons/GravityBomb.yml as
+  OnDeathAbilities, never run on a death) as the token's own end-of-turn actions: Pull 2 on all enemies within range 2
+  (a pull performed by the token is toward it; the token hex is empty, so an enemy can be pulled into it), damage 5 to
+  the enemies in its hex (GHTokenHexOnly), damage 1 to those adjacent (GHTokenAdjacentOnly); then the token leaves the
+  map and the card goes to the discard pile. Log `GHRule GravityBomb`. Bottom: the
   plain triangle attack, no hex mark (none printed).
-- 31 Chimeric Formula (placeholder in Xipe): top Heal 3 + Strengthen + Bless on one ally within range 3. "The target
-  may immediately play up to two cards (one top, one bottom)": **NEEDS PLUGIN**, text only (Frosthaven's
-  SelectAndPlayCard plays the caster's own cards). Bottom: **approximation** RecoverLostCards 1 for one ally within
-  range 3 from their own lost pile (the printed rule: from the lost pile of an ally adjacent to them: NEEDS PLUGIN);
-  `Discard: [Discard,Permanently Lost]`.
+- 31 Chimeric Formula (placeholder in Xipe): top Heal 3 + Strengthen + Bless on one ally within range 3, then "the
+  target may immediately play up to two cards (one top, one bottom)" = Frosthaven's extra turn (ExtraTurn: BothActions)
+  on the character the heal targeted (Bright Aegis's shape: TargetTargetedByCasterPreviousAbility + SpecificAbilityNames
+  [THeal]). Bottom: RecoverLostCards 1 whose targets GHTinkerer.cs builds (GHAdjacentToAllyInRange): the characters
+  adjacent to an ally (character or summon, not the Tinkerer) within range 3, the Tinkerer included (QUESTIONS.md C);
+  the owner picks the card. Log `GHRule ChimericRecover`. `Discard: [Discard,Permanently Lost]`.
 
 ## Perks (perks.py)
 
 All 10 perks / 18 checks from the perk sheet. Existing Frosthaven modifiers: AMC_Basic_M2/P0, AMC_Heal1_1Ally,
 AMC_Wound_P1, AMC_Poison_P1, AMC_Immobilize_P1. New: `AMC_GH2E_Tinkerer2_Strengthen_Ally_P2` (+2, Strengthen one
 ally; Frosthaven's AMC_Strengthen_Ally_P1 at +2). The linked two-box perk (long rest: Heal 2, Range 3) is one perk
-with `Cost: 2` (the 1e Rejuvenating Vapor abilities). **NEEDS PLUGIN** (passive flag + text only): "Shared Supplies"
-(an adjacent ally uses your potion once per scenario) and "Spare Parts" (infuse any element on a lost action).
+with `Cost: 2` (the 1e Rejuvenating Vapor abilities). GHTinkerer.cs reads two passive perks by ID: "Spare Parts"
+(Tinkerer209: a card action whose half has a lost icon gets a skippable Infuse [Any] with the element picker at its
+end, log `GHRule SpareParts`) and "Shared Supplies" (Tinkerer208: at the start and at the end of an adjacent
+character's turn, once per scenario, that player may use one of the Tinkerer's unspent potion small items; its
+abilities are performed by that character and the item is not spent, log `GHRule SharedSupplies`; **limit**: offered
+at the start and the end of the turn only, not between the two actions).
 Masteries: "Perform 11 different lost actions" = the existing LossActionsRepeated tag (Value 11, Amount 1);
-"each turn: negative condition on an enemy, positive condition / heal / shield on an ally" = the 1e Field Medic tag
-HealOrDebuffEveryTurn, which doesn't count a positive condition or a shield given to an ally (stricter than printed).
+"each turn: negative condition on an enemy, positive condition / heal / shield on an ally" = the new tag
+TinkererSupportEveryTurn (GHMasteries.TinkererSupportInRound: the 1e Field Medic test plus a Bless / Strengthen / Ward /
+Regenerate / Invisible / Shield / Heal record aimed at another character or a summon).
 
 ## Shared changes wanted
 
@@ -125,15 +138,12 @@ HealOrDebuffEveryTurn, which doesn't count a positive condition or a shield give
 2. ~~packcheck KIND_KEYS: add `Teleport2`~~ **done** (the Teleportation Pad bottom warning no longer appears).
 3. ~~Plugin: summon placement range~~ **done in data**: CAbilitySummon reads the ability's Range (Enhancement Field and
    Pernicious Fogger 3, Teleportation Pad 5); bench one placement.
-4. **Plugin: Teleportation Pad adjacency** (the two TeleportationPadID hexes count as adjacent for moves of the
-   Tinkerer and allies).
-5. **Plugin: Gravity Bomb** as printed (token, end of next turn: Pull 2 toward it on enemies within 2, damage 5 in
-   the hex / 1 adjacent, then discard).
-6. **Plugin: Chimeric Formula** (an ally plays one top + one bottom from hand at once; recover from an adjacent ally's
-   lost pile) and **Safeguard** for Invigorating Aerosol's end-of-turn heal target.
+4. ~~Plugin: Teleportation Pad adjacency~~ **done** (GHMapTokens.cs).
+5. ~~Plugin: Gravity Bomb~~ **done** (GHMapTokens.cs).
+6. ~~Plugin: Chimeric Formula~~ **done** (top: extra turn in data; bottom: GHTinkerer.cs); Safeguard done (GHSafeguard.cs).
 7. ~~Plugin: recover a level 1 card~~ **done** (`Vars: CardLevel: 1`).
-8. **Mastery tag** that also counts a positive condition or shield given to an ally (Field Medic, 2e wording).
-9. **Perk plugin hooks**: Shared Supplies, Spare Parts.
+8. ~~Mastery tag~~ **done** (TinkererSupportEveryTurn).
+9. ~~Perk plugin hooks~~ **done** (GHTinkerer.cs; Shared Supplies offered at the start / end of the turn only).
 
 ## Check
 
