@@ -231,6 +231,11 @@ namespace FrosthavenMods
                 CActor her = __instance.TargetingActor;
                 if (!Hidden(her) || __instance.AbilityHasHappened || __instance.AbilityHasBeenCancelled) return;
                 if (CardBonus(her, SwallowedByNightCard) != null) return;
+                // an attack BONUS is not an attack ability: Frosthaven writes "+X on your next attacks" as an Attack ability
+                // that only places an active bonus (Terror Blade bottom's "double your next two attacks", harness
+                // 2026-11-03: cancelled while Invisible, so the card's bonus never came). The engine's own test for it
+                // (CAbility.ImmuneToAbility): an Attack with an active-bonus duration.
+                if (__instance.ActiveBonusData != null && __instance.ActiveBonusData.Duration != CActiveBonus.EActiveBonusDurationType.NA) return;
                 __instance.SetCancelAbilityFlag(cancel: true, forceImmediate: true);
                 if (CancelledAttacks.Add(__instance.ID)) Log(CardId(__instance), $"class mat: {__instance.Name} not performed (attack abilities are not allowed while Invisible)");
             }

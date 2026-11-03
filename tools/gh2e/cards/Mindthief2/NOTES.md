@@ -48,9 +48,10 @@ worth a bench run.
   unconditional and unmarked.
 - **17 Cranium Overload** top: the designated hex is Frosthaven's own "perform from a hex" shape (Pyroclast Cloud of Ash,
   Shattersong Resonant Frequency): a NullHex pick of a hex holding an enemy within range 4 (line of sight from her), then
-  the attacks performed from that hex (`Vars TargetingOverrideArrayIndex`: range, line of sight and adjacency count from
+  the follow-up performed from that hex (`Vars TargetingOverrideArrayIndex`: range, line of sight and adjacency count from
   the hex, rulebook p21 and decision B). They print no range, so they are melee: Attack 6, Pierce 5 on the enemy in the
-  hex (custom targeting), then, if it killed, Attack 2 on every enemy adjacent to the hex (a sub-ability of the attack,
+  hex (custom targeting, aimed from her with Range 4 and TreatAsMelee: performed from the enemy's own hex the game
+  offered no target, harness 2026-11-03), then, if it killed, Attack 2 on every enemy adjacent to the hex (a sub-ability of the attack,
   queued by GHNestedSubAbilities; Frosthaven's kill requirement). No marks (as printed).
 - **18 Frozen Shiv**: Pierce 1's [square] mark = Pierce inside the Attack mapping with `PierceEnhancements: 1`
   (Frosthaven's Infuser Gale Barrage; a Pierce mapping of its own fails rulecheck).
@@ -67,8 +68,9 @@ worth a bench run.
   she picks the one that goes (asked on the rules thread; from the main thread the engine's oldest-first trim stays).
 - **25 Psychic Projection** top: Pull 2, range 3 is its own ability before the attack. Bottom: the designated
   unoccupied hex is a NullHex pick within range 4 (line of sight from her); the melee Attack 3 is performed as though she
-  stood there (`Vars TargetingOverrideArrayIndex`, as Cranium Overload): range 1, line of sight and adjacency from that
-  hex; her melee augments apply (it is her melee attack).
+  stood there (`Vars TargetingOverrideArrayIndex`, as Cranium Overload's follow-up): range 1 (written out: a sub-ability
+  takes its parent's range when it names none, so it was Range 4 from the hex, harness 2026-11-03), TreatAsMelee, line of
+  sight and adjacency from that hex; her melee augments apply (it is her melee attack).
 - **26 Shared Nightmare**: bottom Move 4 keeps its mark (Xipe dropped it).
 - **27 Corrupting Embrace**: bottom Move 4 has no mark (Xipe had one); four use slots, XP on 2 and 4, melee only.
 - **28 Many as One**: both halves persistent and lost, XP 2 each (Xipe's bottom was a one-round non-lost aura). Bottom:

@@ -233,6 +233,29 @@ namespace FrosthavenMods
             return false;
         }
 
+        /// <summary>A given supply card sits in the receiver's hand list with no pile of its own (CurrentCardPile None: the
+        /// engine's give, like ours, adds the copy to HandAbilityCards and never sets it). A card played out of phase from
+        /// the hand (SelectAndPlayCard: Take Your Medicine bottom's "each ally may play one Medical Pack", Sickening
+        /// Strength) is checked against the list of its pile, and the list of pile None is null: "Could not process on
+        /// card selected", the game's error screen (harness 2026-11-03, CardsHandUI.OnCardSelected IL_056e). A supply card
+        /// picked out of phase from a hand it is in is given that hand's pile first (round selection is left alone).</summary>
+        [HarmonyPatch(typeof(CardsHandUI), nameof(CardsHandUI.OnCardSelected))]
+        [HarmonyPrefix]
+        private static void SupplyCardPile(CardsHandUI __instance, AbilityCardUI cardUI)
+        {
+            try
+            {
+                CAbilityCard card = cardUI?.AbilityCard;
+                if (card == null || !card.SupplyCard || card.CurrentCardPile != CBaseCard.ECardPile.None || !Ids.Contains(card.ID)) return;
+                if (!GameState.IsPerformingCardOutOfPhase) return;   // only that branch reads the pile (round selection works as is)
+                CCharacterClass cc = __instance?.PlayerActor?.CharacterClass;
+                if (cc?.HandAbilityCards == null || !cc.HandAbilityCards.Contains(card)) return;
+                card.CurrentCardPile = CBaseCard.ECardPile.Hand;
+                Plugin.Log.LogInfo($"GHRule SupplyCardPile card {card.ID} {__instance.PlayerActor.GetPrefabName()} picks {card.Name} from the hand: its pile set to Hand (it had none)");
+            }
+            catch (Exception e) { if (Reported.Add("supply pile")) Plugin.Log.LogError("GHSupplyCards (pile): " + e); }
+        }
+
         private static readonly HashSet<string> Reported = new HashSet<string>();
     }
 }
