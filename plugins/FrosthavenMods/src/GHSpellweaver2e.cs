@@ -311,6 +311,36 @@ namespace FrosthavenMods
             catch (Exception e) { Report("Etheric Bond", e); }
         }
 
+        /// <summary>The short rest a player picks during card selection (the Short Rest button: CardsHandUI.StartShortRest ->
+        /// PerformShortRest -> PerformNormalShortRestCoroutine, which draws the random card to lose from the discard pile on
+        /// the main thread) never goes through CPhaseShortRest / CPlayerToShortRest_MessageData, so the hook above missed
+        /// every normal short rest. Recover Reviving Ether here, before the coroutine draws. Online only the resting
+        /// player's machine runs this path; the others get the drawn card (GameActionType.ShortRest -> ProxyShortRest ->
+        /// FinalizeShortRest -> GameState.PlayerShortRested), which can then never be Reviving Ether, and PlayerShortRested
+        /// recovers the rest of the discard pile (Reviving Ether with it) on every machine: the hands end the same.</summary>
+        [HarmonyPatch(typeof(CardsHandUI), nameof(CardsHandUI.PerformShortRest))]
+        [HarmonyPrefix]
+        private static void BeforeShortRestButton(CPlayerActor actor)
+        {
+            try
+            {
+                if (actor == null || !GHPerks.HasPerk(actor, EthericBond)) return;
+                CCharacterClass cls = actor.CharacterClass;
+                if (cls == null || cls.HasShortRested || cls.LongRest) return;
+                CAbilityCard ether = cls.DiscardedAbilityCards?.FirstOrDefault(c => c?.ID == RevivingEther);
+                if (ether == null) return;
+                if (cls.DiscardedAbilityCards.Count < 2)
+                {
+                    // the draw needs a card left (the coroutine indexes the pile): a rest the rules allow has two or more
+                    Plugin.Log.LogWarning("Etheric Bond: Reviving Ether is the only discarded card: not recovered (the rest needs a card to lose)");
+                    return;
+                }
+                cls.MoveAbilityCard(ether, cls.DiscardedAbilityCards, cls.HandAbilityCards, "DiscardedAbilityCards", "HandAbilityCards");
+                Plugin.Log.LogInfo($"GHRule EthericBond card 0 Etheric Bond: {GHPlague.NameOf(actor)} short rests; Reviving Ether recovered from the discard pile first (before the random lose)");
+            }
+            catch (Exception e) { Report("Etheric Bond (short rest button)", e); }
+        }
+
         // ================================================================== mastery: Fire and Ice in one turn
 
         [HarmonyPatch(typeof(CUnlockCondition), "CheckUnlockConditionTarget")]

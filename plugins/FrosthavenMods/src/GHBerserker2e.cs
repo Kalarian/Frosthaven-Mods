@@ -481,11 +481,15 @@ namespace FrosthavenMods
             {
                 CPlayerActor me = playerActor ?? GameState.InternalCurrentActor as CPlayerActor;
                 if (!improvedShortRestUsed || !IsBerserker(me) || me.IsDead || me.CharacterClass?.ImprovedShortRest != true) return;
+                // Frosthaven digital runs "the short rest at the end of this round" in the NEXT round's card selection
+                // (phase ShortRest, after SelectAbilityCardsOrLongRest; RoundNumber has already gone up and the card was
+                // discarded at the end of its turn). So the card counts if it was played this round or the one before,
+                // or (after a reload, mark lost) if the engine's played-cards list still has its bottom: that list is
+                // saved and only cleared after the ShortRest phase (GameState.ClearPlayedCards, MonsterClassesSelect...).
                 int round = ScenarioManager.CurrentScenarioState?.RoundNumber ?? 0;
                 bool marked;
-                lock (TirelessRound) marked = TirelessRound.TryGetValue(me, out int r) && r == round;
-                // after a reload the mark is gone: the card played this round is still among the round's cards
-                if (!marked) marked = me.CharacterClass.RoundAbilityCards?.Any(c => c != null && c.ID == TirelessRetributionCard) == true;
+                lock (TirelessRound) marked = TirelessRound.TryGetValue(me, out int r) && (r == round || r == round - 1);
+                if (!marked) marked = TirelessBottomPlayed(me);
                 if (!marked) return;
                 lock (TirelessRound) TirelessRound.Remove(me);
                 int before = me.Health;
@@ -503,6 +507,17 @@ namespace FrosthavenMods
                 Plugin.Log.LogInfo($"GHRule LongRestBenefits card {TirelessRetributionCard} {Name(me)} short rests with the benefits of a long rest: Heal 2 ({before} -> {me.Health}), spent items refreshed, {perks} after-long-rest perk heal(s)" + (onRest > 0 ? $", {onRest} on-long-rest bonus(es) not run" : ""));
             }
             catch (Exception e) { if (GHClasses.Reported.Add("ra tireless")) Plugin.Log.LogError("GHBerserker2e (Tireless Retribution): " + e); }
+        }
+
+        private static bool TirelessBottomPlayed(CPlayerActor me)
+        {
+            foreach (CAbilityExtraTurn.EExtraTurnType t in Enum.GetValues(typeof(CAbilityExtraTurn.EExtraTurnType)))
+            {
+                List<Tuple<int, GameState.EActionFlag>> played = GameState.GetPlayedCards(t, me.ActorGuid);
+                if (played != null && played.Any(p => p.Item1 == TirelessRetributionCard && (p.Item2 & GameState.EActionFlag.BottomPlayed) != 0))
+                    return true;
+            }
+            return false;
         }
 
         private static void HealCardless(CActor me, int amount)

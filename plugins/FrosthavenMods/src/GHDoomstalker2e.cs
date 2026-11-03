@@ -37,7 +37,8 @@ namespace FrosthavenMods
     ///     round), then the round ends.
     ///   - HeartOfDoom (32730 bottom): "If you discard this card, you must discard all but one active Doom." When the
     ///     Doomstalker's doom slots drop (the AddDoomSlot bonus ends) the player picks the Dooms to keep (asked doom by
-    ///     doom; the last one left is kept), instead of the engine dropping the oldest.
+    ///     doom; the last one left is kept), instead of the engine dropping the oldest. The slot count is recalculated
+    ///     first: the engine calls RefreshCharacterSpecialMechanicSlots before it updates the cached DoomSlots.
     ///   - SlotSequence (Coated Arrows top 32720, Impending End bottom 32724): one tracker, a different effect per slot.
     ///     Coated Arrows: Poison, then Wound, then Immobilize, then Disarm on the next four ranged attacks. Impending End:
     ///     Immobilize on the first attack on the doomed enemy, +2 Attack on the second and the third. The bonus ability
@@ -329,7 +330,12 @@ namespace FrosthavenMods
         {
             try
             {
-                if (!(__instance is CPlayerActor me) || me.Class?.ID != ClassId || me.Dooms == null) return;
+                if (!(__instance is CPlayerActor me) || me.Class?.ID != ClassId || me.Dooms == null || me.IsDead) return;
+                if (me.Dooms.Count <= 1) return;
+                // DoomSlots is a cached value: CClass.CancelActiveBonus (the player discarding the card) finishes the
+                // AddDoomSlot bonus and calls this BEFORE CheckForCachedValuesAfterActiveBonusesUpdate recalculates it,
+                // so it still reads 99 here and the engine trims nothing. Recalculate first (the engine's own sum).
+                me.CheckForCachedValuesAfterActiveBonusesUpdate();
                 int slots = Math.Max(0, me.DoomSlots);
                 if (me.Dooms.Count <= slots || slots == 0) return;
                 List<CDoom> dooms = me.Dooms.ToList();

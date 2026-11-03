@@ -66,9 +66,9 @@ namespace FrosthavenMods
             if (Reported.Add(what)) Plugin.Log.LogError($"Gloomhaven 2e Elementalist: {what} failed: {e}");
         }
 
-        private static int CardId(CAbility a)
+        private static int CardId(CAbility a, CActor actor = null)
         {
-            try { return a?.GetAbilityBaseCard()?.ID ?? 0; } catch { return 0; }
+            try { return a?.GetAbilityBaseCard(actor)?.ID ?? 0; } catch { return 0; }
         }
 
         private static bool IsElementalist(CActor a) => a is CPlayerActor p && p.CharacterClass?.ID == ClassId;
@@ -158,25 +158,34 @@ namespace FrosthavenMods
 
         [HarmonyPatch(typeof(CAbilityInfuse), nameof(CAbilityInfuse.Start))]
         [HarmonyPrefix]
-        private static void BeforeInfuseStart(CAbilityInfuse __instance)
+        private static void BeforeInfuseStart(CAbilityInfuse __instance, CActor targetActor)
         {
             try
             {
-                if (__instance?.TargetingActor == null || __instance.ElementsToInfuse == null) return;
-                int card = CardId(__instance);
-                if (card == PulsingCores && __instance.ElementsToInfuse.Contains(ElementInfusionBoardManager.EElement.Any))
+                // The prefix runs before Start sets TargetingActor: an end-of-turn bonus's infuse is a fresh full copy of the
+                // bonus's AddAbility (PhaseManager.NextActiveBonusOrScenarioModifier), whose TargetingActor is null until
+                // Start, so the actor (and the card lookup that needs it) comes from Start's own argument.
+                CActor actor = targetActor ?? __instance?.TargetingActor;
+                if (actor == null || __instance.ElementsToInfuse == null) return;
+                if (__instance.ElementsToInfuse.Contains(ElementInfusionBoardManager.EElement.Any))
                 {
-                    PulsingCoresPair(__instance);
-                    return;
+                    CActiveBonus cores = PulsingCoresBonus(__instance, actor);
+                    if (cores != null) { PulsingCoresPair(__instance, cores); return; }
                 }
-                if (!IsElementalist(__instance.TargetingActor) || !__instance.ShowPicker || __instance.InfuseOnlyWaning) return;
+                int card = CardId(__instance, actor);
+                if (card == PulsingCores) return;   // its infuse with no bonus found: left as the card data has it
+                if (!IsElementalist(actor) || !__instance.ShowPicker || __instance.InfuseOnlyWaning) return;
                 if (__instance.GetMiscVar("GH2E_DeferredInfuse").GetBool()) return;
+                // a start/end-of-turn bonus's own infuse already runs at its moment (the end-of-turn step has been collected)
+                if (GameState.PendingStartEndTurnAbilityBonusTriggers?.Any(b =>
+                        (b is CEndTurnAbilityActiveBonus e && ReferenceEquals(e.AddAbility, __instance))
+                        || (b is CStartTurnAbilityActiveBonus st && ReferenceEquals(st.AddAbility, __instance))) == true) return;
                 if (!(__instance.ElementsToInfuse.Contains(ElementInfusionBoardManager.EElement.Any) || __instance.ElementsToInfuse.Count > 1)) return;
-                if (GameState.TurnActor != __instance.TargetingActor || !(PhaseManager.CurrentPhase is CPhaseAction)) return;
+                if (GameState.TurnActor != actor || !(PhaseManager.CurrentPhase is CPhaseAction)) return;
                 // an extra turn whose end the engine doesn't scan for end-of-turn bonuses (PhaseManager EndTurn: only
                 // BothActionsLater / SingleCardAnyActionAtTheEndOfTurn) has no place to ask at its end: the noted infusion
                 // would wait a round, or be lost. The element is picked now instead (it still infuses at the turn's end).
-                CActor taker = __instance.TargetingActor;
+                CActor taker = actor;
                 if (taker.IsTakingExtraTurn && taker.TakingExtraTurnOfType != CAbilityExtraTurn.EExtraTurnType.BothActionsLater
                     && taker.TakingExtraTurnOfType != CAbilityExtraTurn.EExtraTurnType.SingleCardAnyActionAtTheEndOfTurn)
                 {
@@ -186,9 +195,9 @@ namespace FrosthavenMods
                 NewScenarioCheck();
                 s_Skip[__instance] = new Deferred
                 {
-                    Actor = __instance.TargetingActor,
+                    Actor = actor,
                     Elements = __instance.ElementsToInfuse.ToList(),
-                    Card = __instance.GetAbilityBaseCard() ?? __instance.ParentBaseCard,
+                    Card = __instance.GetAbilityBaseCard(actor) ?? __instance.ParentBaseCard,
                 };
             }
             catch (Exception e) { Report("infuse start", e); }
@@ -214,13 +223,22 @@ namespace FrosthavenMods
             return false;
         }
 
-        private static void PulsingCoresPair(CAbilityInfuse infuse)
+        /// <summary>The Pulsing Cores bonus whose end-of-turn infuse this is: the pending end-turn trigger whose AddAbility is
+        /// this very ability (PhaseManager sets it to the copy it runs), else, when the running action is the bonus's own
+        /// (its CurrentActorAction carries the bonus's card) or the ability resolves to the card, the actor's bonus.</summary>
+        private static CActiveBonus PulsingCoresBonus(CAbilityInfuse infuse, CActor me)
         {
-            CActor me = infuse.TargetingActor;
-            CActiveBonus bonus = GameState.PendingStartEndTurnAbilityBonusTriggers?.OfType<CEndTurnAbilityActiveBonus>()
-                .FirstOrDefault(b => b.BaseCard?.ID == PulsingCores && b.Actor == me)
+            List<CActiveBonus> pending = GameState.PendingStartEndTurnAbilityBonusTriggers;
+            CActiveBonus bonus = pending?.OfType<CEndTurnAbilityActiveBonus>()
+                .FirstOrDefault(b => ReferenceEquals(b.AddAbility, infuse) && b.BaseCard?.ID == PulsingCores);
+            if (bonus != null) return bonus;
+            if (GHCurrentAction.Get()?.BaseCard?.ID != PulsingCores && CardId(infuse, me) != PulsingCores) return null;
+            return pending?.OfType<CEndTurnAbilityActiveBonus>().FirstOrDefault(b => b.BaseCard?.ID == PulsingCores && b.Actor == me)
                 ?? me.ActiveBonuses?.FirstOrDefault(b => b?.BaseCard?.ID == PulsingCores && b.HasBehaviour(CActiveBonus.EActiveBonusBehaviourType.EndTurnAbility));
-            if (bonus == null) return;
+        }
+
+        private static void PulsingCoresPair(CAbilityInfuse infuse, CActiveBonus bonus)
+        {
             int slot = Math.Max(0, bonus.TrackerIndex);          // not yet advanced: the action's end advances it
             var pair = CorePairs[slot % 3];
             infuse.ElementsToInfuse = pair.ToList();
