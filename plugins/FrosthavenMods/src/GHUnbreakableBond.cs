@@ -218,6 +218,11 @@ namespace FrosthavenMods
 
         private static CActor _bearFirstTurnEnding;
 
+        /// <summary>A loaded save or restarted round: a Bear noted by the old state is not this state's figure.</summary>
+        [HarmonyPatch(typeof(ScenarioManager), nameof(ScenarioManager.Load))]
+        [HarmonyPrefix]
+        private static void ScenarioLoaded() => _bearFirstTurnEnding = null;
+
         /// <summary>Before the turn order is walked: a bound Wildfury's turn is marked taken (she never starts one), and a
         /// bound Bear whose first turn just ended gets its second.</summary>
         [HarmonyPatch(typeof(GameState), nameof(GameState.MoveToNextActor))]

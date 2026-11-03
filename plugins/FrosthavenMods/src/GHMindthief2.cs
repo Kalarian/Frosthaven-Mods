@@ -125,13 +125,15 @@ namespace FrosthavenMods
         /// <summary>A new augment with all slots full (two or more slots): she picks which active one is discarded.</summary>
         [HarmonyPatch(typeof(CActor), nameof(CActor.AddAugmentOrSong))]
         [HarmonyPrefix]
-        private static bool ThirdAugment(CActor __instance, CAbility ability, CActor caster)
+        private static bool ThirdAugment(CActor __instance, CAbility ability, CActor caster, int? id)
         {
             try
             {
-                if (ability?.Augment == null || __instance?.Class?.ID != ClassId || !ScenarioRuleClient.IsWorkerThread) return true;
+                // id: a saved bonus being restored (CCharacterClass load path): never ask while a save loads
+                if (id.HasValue || ability?.Augment == null || __instance?.Class?.ID != ClassId || !ScenarioRuleClient.IsWorkerThread) return true;
                 if (__instance.Augments.Contains(ability.Augment) || __instance.Augments.Count < __instance.AugmentSlots || __instance.AugmentSlots == 1) return true;
-                List<CAugment> options = __instance.Augments.ToList();
+                List<CAugment> options = __instance.Augments.Where(a => a != null).ToList();
+                if (options.Count < 2) return true;   // nothing to choose between (0 slots, a null entry): the engine's own path
                 CAugment chosen = AskWhichAugment(__instance, options, "FHMODS_MT_THIRD");
                 Log("AugmentChoice", CardId(ability), $"new augment {CardName(ability.GetAbilityBaseCard())}: {AugmentName(chosen)} discarded (her choice of {options.Count})");
                 __instance.ReplaceAugment(ability, chosen, caster ?? __instance);
@@ -154,6 +156,9 @@ namespace FrosthavenMods
                     CAugment chosen = AskWhichAugment(__instance, options, "FHMODS_MT_SLOT");
                     Log("AugmentChoice", chosen?.RegisteredBaseCard?.ID ?? 0, $"augment slot lost: {AugmentName(chosen)} discarded (her choice of {options.Count})");
                     __instance.RemoveAugment(chosen);
+                    // RemoveAugment returns quietly when it finds nothing to remove: never loop (and ask) forever; the
+                    // engine's own trim (oldest first) then runs
+                    if (__instance.Augments.Count >= options.Count) break;
                 }
             }
             catch (Exception e) { Report("augment slot lost", e); }

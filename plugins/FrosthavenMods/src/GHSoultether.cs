@@ -104,7 +104,8 @@ namespace FrosthavenMods
             try
             {
                 if (!__result || !IsSoul(summoner) || summonedActors == null || summonedActors.Count == 0 || ability == null) return;
-                LastSummoned[summoner.ActorGuid ?? ""] = summonedActors;
+                // a copy: the list is the summon ability's own SummonedActors, which the engine may clear or reuse
+                LastSummoned[summoner.ActorGuid ?? ""] = new List<CActor>(summonedActors);
                 int round = ScenarioManager.CurrentScenarioState?.RoundNumber ?? 0;
                 CBaseCard card = null;
                 try { card = ability.GetAbilityBaseCard(); } catch { }
@@ -138,7 +139,12 @@ namespace FrosthavenMods
             {
                 if (ability?.MiscVars == null || ability.TargetingActor == null || !GHPlague.Marked(ability, "GH2E_LastSummoned")) return;
                 LastSummoned.TryGetValue(ability.TargetingActor.ActorGuid ?? "", out List<CActor> made);
-                var keep = (made ?? new List<CActor>()).Where(a => a != null && !a.IsDead && ScenarioManager.Scenario.HasActor(a)).ToList();
+                CScenario sc = ScenarioManager.Scenario;
+                if (sc == null || ability.ValidActorsInRange == null) return;
+                // a summon object from before a reload is no longer in the scenario: the same summon is found by its guid
+                var keep = (made ?? new List<CActor>()).Where(a => a != null)
+                    .Select(a => sc.HasActor(a) ? a : sc.HeroSummons?.FirstOrDefault(s => s != null && a.ActorGuid != null && s.ActorGuid == a.ActorGuid))
+                    .Where(a => a != null && !a.IsDead).Distinct().ToList();
                 ability.ValidActorsInRange.RemoveAll(a => !keep.Contains(a));
                 foreach (CActor a in keep)
                     if (!ability.ValidActorsInRange.Contains(a)) ability.ValidActorsInRange.Add(a);
@@ -499,15 +505,15 @@ namespace FrosthavenMods
             {
                 CampaignState state = __instance?.CampaignController?.State;
                 _lastCampaign = state;
-                if (state == null || result == null || result.isRestarting) return;
+                if (state == null || result == null || result.isRestarting || result.Characters == null || state.PartyCharacters == null || state.LootedChestTreasureTableIDs == null) return;
                 var now = new HashSet<string>(CurrentFirstRound(null), StringComparer.Ordinal);
                 if (_snapshot != null) now.UnionWith(_snapshot);
                 _snapshot = null;
                 string key = ScenarioKey();
                 foreach (ScenarioResult.CharacterResult r in result.Characters)
                 {
-                    if (r.Character?.ID.ID != Soul) continue;
-                    CharacterState c = state.PartyCharacters.FirstOrDefault(p => p.ClassDef == r.Character);
+                    if (r?.Character?.ID.ID != Soul) continue;
+                    CharacterState c = state.PartyCharacters.FirstOrDefault(p => p != null && p.ClassDef == r.Character);
                     if (c == null) continue;
                     string id = c.ID.ID.ToString();
                     var map = Saved(state, id);

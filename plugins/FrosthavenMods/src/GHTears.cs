@@ -64,6 +64,11 @@ namespace FrosthavenMods
 
         private static void Log(string rule, int card, string detail) => Plugin.Log.LogInfo($"GHRule {rule} card {card} {detail}");
 
+        private static void Report(string what, Exception e)
+        {
+            if (GHClasses.Reported.Add("GHTears " + what)) Plugin.Log.LogError("Nightshroud Tears: " + what + ": " + e);
+        }
+
         private static bool Tagged(CAbility a, string tag)
         {
             try { return a != null && a.GetMiscVar(tag).GetBool(); }
@@ -90,8 +95,11 @@ namespace FrosthavenMods
 
         [HarmonyPatch(typeof(CAbilityCreateShadow), nameof(CAbilityCreateShadow.Perform))]
         [HarmonyPrefix]
-        private static bool Limit(CAbilityCreateShadow __instance)
+        private static bool Limit(CAbilityCreateShadow __instance, ref bool __result)
         {
+            // the engine's own PreCreateShadow step re-enters Perform for the new state and returns false; that re-entry runs
+            // outside the try below, so an engine exception in it is not swallowed into a second engine Perform of the
+            // already-advanced state (the catch's "let the engine run" is only for a failure before any state change here)
             try
             {
                 if (__instance.m_State != CAbilityCreateShadow.CreateShadowState.PreCreateShadow) return true;
@@ -132,14 +140,15 @@ namespace FrosthavenMods
                     tr.Property("m_State").SetValue(CAbilityCreateShadow.CreateShadowState.RemoveShadowPositions);
                     if (mine) Log("Tears", GHNightshroud.CardId(__instance), $"two-Tear limit: {tiles.Count} Tears, choose {tiles.Count - cap} to remove");
                 }
-                __instance.Perform();
-                return false;
             }
             catch (Exception e)
             {
-                Plugin.Log.LogError("Nightshroud Tears: limit: " + e);
+                Report("limit", e);
                 return true;
             }
+            __instance.Perform();
+            __result = false;
+            return false;
         }
 
         private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<CAbilityCreateShadow, List<CTile>> Placed =
@@ -317,7 +326,7 @@ namespace FrosthavenMods
                 Stack(movedActor, remove, interrupt);
                 Log("Tears", GHNightshroud.CardId(moveAbility), $"class mat: entered a Tear at {tile.m_ArrayIndex} during {moveAbility.Name}: may remove it to lose Invisible");
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: enter: " + e); }
+            catch (Exception e) { Report("enter", e); }
         }
 
         /// <summary>The end of the ability in which she removed a Tear by entering it: the next ability of hers (not the
@@ -341,7 +350,7 @@ namespace FrosthavenMods
                 CActor her = targetingActor ?? __instance.TargetingActor;
                 if (GHNightshroud.Is(her)) EndOfAbilityPoint(her, __instance);
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: " + e); }
+            catch (Exception e) { Report("ability start", e); }
         }
 
         // ------------------------------------------------------------------ removing a Tear
@@ -382,7 +391,7 @@ namespace FrosthavenMods
                     PendingLose[her.ActorGuid] = destroyedByAbility.GetMiscVar(EnterTag).GetString();
                 OfferPrepare(her);
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: removal: " + e); }
+            catch (Exception e) { Report("removal", e); }
         }
 
         private static void OfferPrepare(CPlayerActor her)
@@ -421,7 +430,7 @@ namespace FrosthavenMods
                 Stack(her, dmg, interrupt: false);
                 Log("PrepareForTheKill", GHNightshroud.PrepareCard, "taken: Strengthen, the card is discarded, all adjacent enemies suffer Damage 2");
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: Prepare for the Kill: " + e); }
+            catch (Exception e) { Report("Prepare for the Kill", e); }
         }
 
         // ------------------------------------------------------------------ Tear hexes
@@ -454,6 +463,7 @@ namespace FrosthavenMods
                 if (Logged.Add(ability.ID)) Log("TearHex", card, $"{why}: {area.Name} was not performed (FAQ: the main-line ability must be performed)");
                 return none;
             }
+            if (area.FlagsOfValidTiles == null) return none;
             List<CTile> tiles = area.FlagsOfValidTiles
                 .Where(kv => (kv.Value & CAreaEffect.EHexFlag.Ally) != 0 && (kv.Value & CAreaEffect.EHexFlag.Enemy) == 0)
                 .Select(kv => kv.Key).ToList();
@@ -473,7 +483,7 @@ namespace FrosthavenMods
                 ability.TilesInRange.Clear();
                 ability.TilesInRange.AddRange(tiles);
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: Tear hex: " + e); }
+            catch (Exception e) { Report("Tear hex", e); }
         }
 
         [HarmonyPatch(typeof(CAbilityTeleport2), nameof(CAbilityTeleport2.GetTeleportTiles))]
@@ -486,7 +496,7 @@ namespace FrosthavenMods
                 List<CTile> hexes = TearHexes(__instance, "Teleport to the Tear hex");
                 __result = __result.Where(hexes.Contains).ToList();
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: Tear hex teleport: " + e); }
+            catch (Exception e) { Report("Tear hex teleport", e); }
         }
 
         [HarmonyPatch(typeof(CAbility), nameof(CAbility.RequiresAllyTargeting))]
@@ -511,10 +521,11 @@ namespace FrosthavenMods
             {
                 if (!Tagged(__instance, AreaTag)) return;
                 Dictionary<CTile, CAreaEffect.EHexFlag> flags = __instance.FlagsOfValidTiles;
+                if (flags == null) return;
                 __instance.ValidTilesInAreaAffected?.RemoveAll(t => flags.TryGetValue(t, out CAreaEffect.EHexFlag f)
                     && (f & CAreaEffect.EHexFlag.Ally) != 0 && (f & CAreaEffect.EHexFlag.Enemy) == 0);
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: Tear hex area: " + e); }
+            catch (Exception e) { Report("Tear hex area", e); }
         }
 
         // ------------------------------------------------------------------ push paths through Tears
@@ -540,7 +551,7 @@ namespace FrosthavenMods
                 if (first != null)
                     Log("PushPathTear", GHNightshroud.CardId(__instance), $"{target.GetPrefabName()} pushed into a Tear at {first.m_ArrayIndex}");
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: push path: " + e); }
+            catch (Exception e) { Report("push path", e); }
         }
 
         /// <summary>Nightfall top's hazardous terrain damage (card step TTearDamage) on a figure pushed into a Tear: one rule
@@ -555,7 +566,7 @@ namespace FrosthavenMods
                 if (!GHNightshroud.Is(__instance.TargetingActor) || GHNightshroud.CardId(__instance) != NightfallCard) return;
                 Log("TearDamage", NightfallCard, $"{actor.GetPrefabName()} pushed into a Tear suffers hazardous terrain damage {__instance.Strength}");
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: Nightfall damage: " + e); }
+            catch (Exception e) { Report("Nightfall damage", e); }
         }
 
         private const int NightfallCard = 32910;
@@ -578,7 +589,7 @@ namespace FrosthavenMods
                 modifiedStrength += delta;
                 Log("BlackKnives", GHNightshroud.BlackKnivesCard, $"the first attack killed {first.GetPrefabName()}: +1 Attack on the second ({delta} after the modifier)");
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: Black Knives: " + e); }
+            catch (Exception e) { Report("Black Knives", e); }
         }
 
         // ------------------------------------------------------------------ Swallowed by Night: exhausted when it goes to the lost pile
@@ -611,7 +622,7 @@ namespace FrosthavenMods
                     Log("SwallowedByNight", GHNightshroud.SwallowedByNightCard, "moved from the active area to the lost pile: exhausted at the next phase change (before the round's end checks)");
                 }
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: Swallowed by Night: " + e); }
+            catch (Exception e) { Report("Swallowed by Night", e); }
         }
 
         // The card reaches the lost pile outside her action at a round's end (its last end-of-round slot): she is exhausted
@@ -628,7 +639,7 @@ namespace FrosthavenMods
             try
             {
                 if (PendingExhaust.Count == 0) return;
-                foreach (CPlayerActor her in ScenarioManager.Scenario.PlayerActors.Where(p => PendingExhaust.Contains(p.ActorGuid) && !p.IsDead).ToList())
+                foreach (CPlayerActor her in (ScenarioManager.Scenario?.PlayerActors ?? new List<CPlayerActor>()).Where(p => p != null && PendingExhaust.Contains(p.ActorGuid) && !p.IsDead).ToList())
                 {
                     bool asleep = her.Tokens.HasKey(CCondition.ENegativeCondition.Sleep);
                     GameState.KillActor(her, her, CActor.ECauseOfDeath.NoMoreCards, out bool _, null, asleep);
@@ -636,7 +647,7 @@ namespace FrosthavenMods
                 }
                 PendingExhaust.Clear();
             }
-            catch (Exception e) { Plugin.Log.LogError("Nightshroud Tears: Swallowed by Night exhaustion: " + e); }
+            catch (Exception e) { PendingExhaust.Clear(); Report("Swallowed by Night exhaustion", e); }
         }
     }
 }

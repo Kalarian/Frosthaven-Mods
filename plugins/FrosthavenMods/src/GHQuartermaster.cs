@@ -86,7 +86,7 @@ namespace FrosthavenMods
 
         /// <summary>The living character holding item n unused, or null (in the supply).</summary>
         private static CPlayerActor Holder(int n) =>
-            LivingPlayers().FirstOrDefault(p => p.Inventory.AllItems.Any(i => No(i.ID) == n && i.SlotState != CItem.EItemSlotState.Consumed));
+            LivingPlayers().FirstOrDefault(p => p.Inventory?.AllItems?.Any(i => i != null && No(i.ID) == n && i.SlotState != CItem.EItemSlotState.Consumed) == true);
 
         private static List<int> SupplyItems() => Enumerable.Range(1, 9).Where(n => Holder(n) == null).ToList();
 
@@ -94,7 +94,7 @@ namespace FrosthavenMods
         private static void Purge()
         {
             foreach (CPlayerActor p in Players().ToList())
-                foreach (CItem i in p.Inventory.AllItems.Where(i => IsClassItem(i) && (i.SlotState == CItem.EItemSlotState.Consumed || p.IsDead)).ToList())
+                foreach (CItem i in (p.Inventory?.AllItems ?? new List<CItem>()).Where(i => IsClassItem(i) && (i.SlotState == CItem.EItemSlotState.Consumed || p.IsDead)).ToList())
                 {
                     p.Inventory.RemoveItem(i);
                     Plugin.Log.LogInfo($"GHRule QMItemReturn card 0 {ItemName(No(i.ID))} leaves {GHPlague.NameOf(p)}'s items (back in the Quartermaster item supply)");
@@ -338,7 +338,7 @@ namespace FrosthavenMods
             Plugin.Log.LogInfo($"GHRule QMSpend card {card} {GHPlague.NameOf(qm)} spends {budget} supplies (track to 0) on {string.Join(", ", targets.Select(GHPlague.NameOf))} ({source})");
             int remaining = budget, lostGold = 0, recovered = 0;
             var candidates = targets.OfType<CPlayerActor>().Distinct()
-                .SelectMany(t => t.Inventory.AllItems.Where(i => i != null && !IsClassItem(i) && i.YMLData.PermanentlyConsumed != true
+                .SelectMany(t => (t.Inventory?.AllItems ?? new List<CItem>()).Where(i => i != null && i.YMLData != null && !IsClassItem(i) && i.YMLData.PermanentlyConsumed != true
                                                                 && (i.SlotState == CItem.EItemSlotState.Spent || i.SlotState == CItem.EItemSlotState.Consumed))
                                     .Select(i => (owner: t, item: i)))
                 .OrderByDescending(x => x.item.YMLData.Cost).ToList();
@@ -435,7 +435,7 @@ namespace FrosthavenMods
         private static void Upgrade()
         {
             foreach (CPlayerActor p in LivingPlayers().ToList())
-                foreach (CItem i in p.Inventory.AllItems.Where(i => (i.ID == ItemBase + 7 || i.ID == ItemBase + 8) && i.SlotState != CItem.EItemSlotState.Consumed).ToList())
+                foreach (CItem i in (p.Inventory?.AllItems ?? new List<CItem>()).Where(i => i != null && (i.ID == ItemBase + 7 || i.ID == ItemBase + 8) && i.SlotState != CItem.EItemSlotState.Consumed).ToList())
                 {
                     int plus = i.ID == ItemBase + 7 ? IronPlus : BarbedPlus;
                     p.Inventory.RemoveItem(i);
@@ -520,7 +520,8 @@ namespace FrosthavenMods
         private static void Fresh()
         {
             ScenarioState s = ScenarioManager.CurrentScenarioState;
-            if (ReferenceEquals(s, _scenario)) return;
+            // no scenario state (results screen, map): keep the last scenario's counts for the mastery check
+            if (s == null || ReferenceEquals(s, _scenario)) return;
             _scenario = s;
             LedgerSpends.Clear();
             GiveRounds.Clear();

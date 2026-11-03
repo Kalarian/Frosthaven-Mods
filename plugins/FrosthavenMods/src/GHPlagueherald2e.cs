@@ -349,6 +349,7 @@ namespace FrosthavenMods
         private static bool BeforeEnemyDies(CEnemyActor __instance, CActor targetingActor, CActor.ECauseOfDeath causeOfDeath, ref bool startedOnDeathAbility,
                                             bool fromDeathAbilityComplete, CAbility causeOfDeathAbility, CAttackSummary.TargetSummary attackSummary, ref bool __result)
         {
+            bool committed = false, usedBefore = false;
             try
             {
                 if (fromDeathAbilityComplete || causeOfDeath == CActor.ECauseOfDeath.ActorRemovedFromMap || OnDeathAbilityUsed(__instance)) return true;
@@ -382,7 +383,7 @@ namespace FrosthavenMods
                         clone.ProcessIfDead = true;
                         list.Add(clone);
                     }
-                if (__instance.MonsterClass.CurrentMonsterStat?.OnDeathAbilities != null)
+                if (__instance.MonsterClass?.CurrentMonsterStat?.OnDeathAbilities != null)
                     foreach (CAbility ability in __instance.MonsterClass.CurrentMonsterStat.OnDeathAbilities)
                     {
                         CAbility clone = CAbility.CopyAbility(ability, generateNewID: false);
@@ -392,6 +393,8 @@ namespace FrosthavenMods
                     }
                 if (list.Count == 0) return true;
 
+                usedBefore = OnDeathAbilityUsed(__instance);
+                committed = true;
                 SetAmount(ph, XornUsed, 1);
                 __instance.CauseOfDeath = causeOfDeath;
                 Traverse.Create(__instance).Property("AttackSummary").SetValue(attackSummary);
@@ -407,7 +410,14 @@ namespace FrosthavenMods
                 Rule("XornsLastGift", 0, $"Xorn's Last Gift: {GHPlague.NameOf(__instance)} would die with Plague; {GHPlague.NameOf(ph)} controls it for its ability card ({list.Count} abilities, its attacks give Plague), then it dies");
                 return false;
             }
-            catch (Exception e) { Report("Xorn's Last Gift", e); return true; }
+            catch (Exception e)
+            {
+                Report("Xorn's Last Gift", e);
+                // failed half-way through taking control: hand the death back to the engine's own path whole (its own
+                // on-death abilities run, the figure dies as it would without the perk)
+                if (committed) try { OnDeathAbilityUsed(__instance) = usedBefore; } catch { }
+                return true;
+            }
         }
 
         // ------------------------------------------------------------------ the masteries

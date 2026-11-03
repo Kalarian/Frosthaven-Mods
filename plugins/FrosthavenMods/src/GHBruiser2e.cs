@@ -168,8 +168,12 @@ namespace FrosthavenMods
 
         [HarmonyPatch(typeof(CAbilityPush), nameof(CAbilityPush.Perform))]
         [HarmonyPrefix]
-        private static void PushStep(CAbilityPush __instance, out Forced __state) =>
-            __state = new Forced { Final = __instance.State == CAbilityPush.EPushState.ActorFinalizePush, Target = PushTarget?.GetValue(__instance) as CActor };
+        private static void PushStep(CAbilityPush __instance, out Forced __state)
+        {
+            __state = default(Forced);
+            try { __state = new Forced { Final = __instance.State == CAbilityPush.EPushState.ActorFinalizePush, Target = PushTarget?.GetValue(__instance) as CActor }; }
+            catch (Exception e) { if (GHClasses.Reported.Add("ra push step")) Plugin.Log.LogError("GHBruiser2e (push step): " + e); }
+        }
 
         [HarmonyPatch(typeof(CAbilityPush), nameof(CAbilityPush.Perform))]
         [HarmonyPostfix]
@@ -182,8 +186,12 @@ namespace FrosthavenMods
 
         [HarmonyPatch(typeof(CAbilityPull), nameof(CAbilityPull.Perform))]
         [HarmonyPrefix]
-        private static void PullStep(CAbilityPull __instance, out Forced __state) =>
-            __state = new Forced { Final = __instance.State == CAbilityPull.EPullState.ActorFinalizePull, Target = PullTarget?.GetValue(__instance) as CActor };
+        private static void PullStep(CAbilityPull __instance, out Forced __state)
+        {
+            __state = default(Forced);
+            try { __state = new Forced { Final = __instance.State == CAbilityPull.EPullState.ActorFinalizePull, Target = PullTarget?.GetValue(__instance) as CActor }; }
+            catch (Exception e) { if (GHClasses.Reported.Add("ra pull step")) Plugin.Log.LogError("GHBruiser2e (pull step): " + e); }
+        }
 
         [HarmonyPatch(typeof(CAbilityPull), nameof(CAbilityPull.Perform))]
         [HarmonyPostfix]

@@ -44,25 +44,38 @@ namespace FrosthavenMods
                 if (modifierAbilities == null || modifierAbilities.Count == 0) return;
                 var ours = modifierAbilities.Where(i => IsPackCard(i) && i.Ability != null && Stacked.Contains(i.Ability.AbilityType)).ToList();
                 if (ours.Count == 0) return;
+                // all out of the engine's list first: one left in hits the engine's "Unsupported ... modifier ability type"
+                foreach (CAbilityAttack.AttackModifierAbilityInfo info in ours) modifierAbilities.Remove(info);
                 foreach (CAbilityAttack.AttackModifierAbilityInfo info in ours)
                 {
-                    modifierAbilities.Remove(info);
-                    if (__instance.TargetingActor == null || __instance.TargetingActor.IsMirrorActor()) continue;
-                    CAbility ability = CAbility.CopyAbility(info.Ability, generateNewID: false);
-                    if (targetSummary != null && ability.AddTargetSummaryContext(targetSummary).obj is CVars vars)
+                    try
                     {
-                        vars.Set("AttackSummaryModInfo", new TValue(info));
-                        vars.Set("TargetActor", new TValue(targetActor));
+                        if (__instance.TargetingActor == null || __instance.TargetingActor.IsMirrorActor()) continue;
+                        CPhaseAction phase = PhaseManager.CurrentPhaseAction;
+                        if (phase == null)
+                        {
+                            if (GHClasses.Reported.Add("modifier abilities no phase"))
+                                Plugin.Log.LogWarning($"Gloomhaven modifier abilities: {info.Card?.Name} {info.Ability.AbilityType} drawn outside an action phase: skipped");
+                            continue;
+                        }
+                        CAbility ability = CAbility.CopyAbility(info.Ability, generateNewID: false);
+                        if (ability == null) continue;
+                        if (targetSummary != null && ability.AddTargetSummaryContext(targetSummary).obj is CVars vars)
+                        {
+                            vars.Set("AttackSummaryModInfo", new TValue(info));
+                            vars.Set("TargetActor", new TValue(targetActor));
+                        }
+                        ability.ParentAbility = __instance;
+                        AttackState?.SetValue(__instance, CAbilityAttack.EAttackState.CheckForPlayerIdle);
+                        CActor performer = info.TargetingActor ?? __instance.TargetingActor;
+                        phase.StackNextAbilities(new List<CAbility> { ability }, performer, killAfter: false,
+                            stackToNextCurrent: true, copyCurrentActionID: false, interruptCurrent: true);
+                        Plugin.Log.LogInfo($"GHRule ModifierAbility card 0 {info.Card?.Name} {ability.AbilityType} by {performer?.GetPrefabName()} (target {targetActor?.GetPrefabName()})");
                     }
-                    ability.ParentAbility = __instance;
-                    AttackState?.SetValue(__instance, CAbilityAttack.EAttackState.CheckForPlayerIdle);
-                    CActor performer = info.TargetingActor ?? __instance.TargetingActor;
-                    PhaseManager.CurrentPhaseAction.StackNextAbilities(new List<CAbility> { ability }, performer, killAfter: false,
-                        stackToNextCurrent: true, copyCurrentActionID: false, interruptCurrent: true);
-                    Plugin.Log.LogInfo($"GHRule ModifierAbility card 0 {info.Card.Name} {ability.AbilityType} by {performer?.GetPrefabName()} (target {targetActor?.GetPrefabName()})");
+                    catch (Exception e) { string n = info?.Card?.Name ?? "?"; if (GHClasses.Reported.Add("modifier abilities " + n)) Plugin.Log.LogError("Gloomhaven modifier abilities (" + n + "): " + e); }
                 }
             }
-            catch (Exception e) { Plugin.Log.LogError("Gloomhaven modifier abilities: " + e); }
+            catch (Exception e) { if (GHClasses.Reported.Add("modifier abilities")) Plugin.Log.LogError("Gloomhaven modifier abilities: " + e); }
         }
     }
 }

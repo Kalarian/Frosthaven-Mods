@@ -37,7 +37,7 @@ namespace FrosthavenMods
             new[] { typeof(CAttackSummary), typeof(CActor), typeof(CAbility), typeof(int) });
 
         [HarmonyTranspiler]
-        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> code)
+        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> code, MethodBase original)
         {
             List<CodeInstruction> list = code.ToList();
             int at = list.FindIndex(c => c.Calls(Reference));
@@ -46,14 +46,18 @@ namespace FrosthavenMods
             // call: bonus, ability, target). Passed to the fold so the log names the bonuses even if the ReferenceStrength
             // postfix below never ran (the bench of 2026-11-02 21:15 saw no StackingAttackBonuses line; an offline trace
             // of this transpiler on the game's IL, rest-b, shows the right Math.Max swapped and +1 +1 = +2).
-            CodeInstruction loadBonus = at >= 3 && list[at - 3].IsLdloc() ? list[at - 3] : null;
+            // Only a local typed CActiveBonus is passed on (a different IL shape would otherwise hand FoldWith a wrong-typed
+            // object); anything else falls back to Fold.
+            CodeInstruction loadBonus = at >= 3 && list[at - 3].IsLdloc() && IsBonusLocal(list[at - 3], original) ? list[at - 3] : null;
             if (at >= 0)
                 for (int i = at + 1; i < list.Count; i++)
                 {
                     if (!list[i].Calls(MathMax)) continue;
                     if (loadBonus != null)
                     {
-                        list.Insert(i, new CodeInstruction(loadBonus.opcode, loadBonus.operand));
+                        // the inserted load takes over the call's labels/blocks, so a branch to the call still runs it
+                        CodeInstruction load = new CodeInstruction(loadBonus.opcode, loadBonus.operand).MoveLabelsFrom(list[i]).MoveBlocksFrom(list[i]);
+                        list.Insert(i, load);
                         list[i + 1].operand = AccessTools.Method(typeof(StackingAttackBonuses), nameof(FoldWith));
                     }
                     else list[i].operand = AccessTools.Method(typeof(StackingAttackBonuses), nameof(Fold));
@@ -62,6 +66,25 @@ namespace FrosthavenMods
                 }
             if (swapped == 0) Plugin.Log.LogWarning("Stacking attack bonuses: not applied (the game's code changed)");
             return list;
+        }
+
+        /// <summary>True when the ldloc reads a local whose declared type is CActiveBonus (or a subclass).</summary>
+        private static bool IsBonusLocal(CodeInstruction ldloc, MethodBase original)
+        {
+            try
+            {
+                Type type = null;
+                if (ldloc.operand is LocalVariableInfo lvi) type = lvi.LocalType;
+                else
+                {
+                    int index = ldloc.opcode == OpCodes.Ldloc_0 ? 0 : ldloc.opcode == OpCodes.Ldloc_1 ? 1 : ldloc.opcode == OpCodes.Ldloc_2 ? 2
+                              : ldloc.opcode == OpCodes.Ldloc_3 ? 3 : ldloc.operand is int n ? n : ldloc.operand is byte b ? b : ldloc.operand is short s ? s : -1;
+                    IList<LocalVariableInfo> locals = original?.GetMethodBody()?.LocalVariables;
+                    if (index >= 0 && locals != null && index < locals.Count) type = locals[index].LocalType;
+                }
+                return type != null && typeof(CActiveBonus).IsAssignableFrom(type);
+            }
+            catch (Exception) { return false; }
         }
 
         [HarmonyPrefix]

@@ -147,10 +147,10 @@ namespace FrosthavenMods
         private static bool WarmUpApply(CAttackActiveBonus_BuffAttack __instance, CAbilityAttack attackAbility, out CActiveBonus __state)
         {
             __state = s_InApply;
-            CActiveBonus bonus = __instance?.ActiveBonus;
-            if (!IsWarmUp(bonus)) return true;
             try
             {
+                CActiveBonus bonus = __instance?.ActiveBonus;
+                if (!IsWarmUp(bonus)) return true;
                 if (!IsLostAction(attackAbility)) return false;   // not an attack of a lost action: nothing applies, no slot
                 if (s_WarmUpUsed.Add(bonus))
                     Plugin.Log.LogInfo($"GHRule WarmUp card {WarmUp} +1 Attack on every attack of {attackAbility?.GetAbilityBaseCard()?.Name} (an action with a lost icon)");

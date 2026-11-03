@@ -55,6 +55,11 @@ namespace FrosthavenMods
             try { return a?.GetAbilityBaseCard()?.ID ?? 0; } catch { return 0; }
         }
 
+        private static void Warn(string what, Exception e)
+        {
+            if (GHClasses.Reported.Add("money tokens " + what)) Plugin.Log.LogWarning($"GHMoneyTokens ({what}): {e}");
+        }
+
         // ---- gaining: every loot token she picks up is one of her money tokens ----
 
         [HarmonyPatch(typeof(CActor), "ApplyLoot", new[] { typeof(LootCard), typeof(ScenarioState), typeof(bool) })]
@@ -73,7 +78,7 @@ namespace FrosthavenMods
                 }
                 Plugin.Log.LogInfo($"GHRule MoneyTokenGain card 0 {__instance.Class.ID} looted a loot token ({lc.Type}): {__instance.GetCharacterResourceAmount(Money)} money tokens");
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHMoneyTokens (gain): " + e.Message); }
+            catch (Exception e) { Warn("gain", e); }
         }
 
         // ---- the hexes a loot picked a loot token up from (Flintlock bottom) ----
@@ -99,7 +104,7 @@ namespace FrosthavenMods
                 list.Add(tile);
                 Plugin.Log.LogInfo($"GHRule MoneyTokenLootedHex card 0 {__instance.Class?.ID} picked a loot token up at {tile.m_ArrayIndex}");
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHMoneyTokens (looted hex): " + e.Message); }
+            catch (Exception e) { Warn("looted hex", e); }
         }
 
         // ---- the marked steps ----
@@ -137,7 +142,7 @@ namespace FrosthavenMods
                         Plugin.Log.LogInfo($"GHRule MoneyTokenGain card 0 Pickpocket perk: target not adjacent, no token");
                 }
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHMoneyTokens (step): " + e.Message); }
+            catch (Exception e) { Warn("step", e); }
         }
 
         // CAbilityChangeAllegiance.ApplyToActor always returns false (decompiled: "return false" after the conversion), so
@@ -162,7 +167,7 @@ namespace FrosthavenMods
                 if (actor.GetCharacterResourceAmount(Hired) == 0) actor.AddCharacterResource(Hired, 1);
                 Plugin.Log.LogInfo($"GHRule HiredHelp card {CardOf(__instance)} {actor.Class?.ID} is hired (drops a loot token when it dies)");
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHMoneyTokens (Hired Help): " + e.Message); }
+            catch (Exception e) { Warn("Hired Help", e); }
         }
 
         [HarmonyPatch(typeof(CActor), nameof(CActor.OnDeath))]
@@ -178,7 +183,7 @@ namespace FrosthavenMods
                 PlaceToken(tile);
                 Plugin.Log.LogInfo($"GHRule HiredHelpDrop card 0 {__instance.Class?.ID} died: an additional loot token dropped at {tile.m_ArrayIndex}");
             }
-            catch (Exception e) { Plugin.Log.LogWarning("GHMoneyTokens (Hired Help death): " + e.Message); }
+            catch (Exception e) { Warn("Hired Help death", e); }
         }
 
         // ---- the acts ----
@@ -205,7 +210,9 @@ namespace FrosthavenMods
                 return false;
             }
             me.RemoveCharacterResource(Money, 1, true);
-            string back = ReturnLootCard(me);
+            string back;
+            try { back = ReturnLootCard(me); }
+            catch (Exception e) { Warn("return loot card", e); back = "no loot card put back (error)"; }
             Plugin.Log.LogInfo($"GHRule {rule} card {cardId} {me.Class?.ID} spent a money token ({me.GetCharacterResourceAmount(Money)} left); {back}");
             return true;
         }
@@ -227,7 +234,8 @@ namespace FrosthavenMods
         private static string ReturnLootCard(CActor me)
         {
             ScenarioState css = ScenarioManager.CurrentScenarioState;
-            List<byte> deck = css.LootDeck;
+            List<byte> deck = css?.LootDeck;
+            if (deck == null) return "no loot deck";
             int delimiter = CLootDeck.GetDelimiterID(deck);
             var drawnSection = deck.Skip(delimiter + 1).ToList();
             Drawn.TryGetValue(me.ActorGuid, out var mine);
@@ -242,11 +250,17 @@ namespace FrosthavenMods
             if (choices.Count > 1)
             {
                 var cards = choices.Select(b => CLootDeck.AllCards[b]).ToList();
-                if (GameState.ShowLootCardSelection(me, cards, out LootCard picked, ReturnHelpKey))
+                try
                 {
-                    int i = Array.FindIndex(CLootDeck.AllCards, x => x == picked);
-                    if (i > 0 && choices.Contains((byte)i)) chosen = (byte)i;
+                    // the engine reads its selection list [0] after the wait: an empty answer throws there; keep the first
+                    if (GameState.ShowLootCardSelection(me, cards, out LootCard picked, ReturnHelpKey))
+                    {
+                        int i = Array.FindIndex(CLootDeck.AllCards, x => x == picked);
+                        if (i > 0 && choices.Contains((byte)i)) chosen = (byte)i;
+                    }
                 }
+                catch (System.Threading.ThreadAbortException) { throw; }
+                catch (Exception e) { Warn("loot card choice", e); }
             }
             LootCard card = CLootDeck.AllCards[chosen];
             deck.Remove(chosen);

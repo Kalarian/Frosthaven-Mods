@@ -78,7 +78,8 @@ namespace FrosthavenMods
         private static void Fresh()
         {
             ScenarioState s = ScenarioManager.CurrentScenarioState;
-            if (ReferenceEquals(s, _scenario)) return;
+            // no scenario state (results screen, map): keep the records (Storyteller must not pay twice)
+            if (s == null || ReferenceEquals(s, _scenario)) return;
             _scenario = s;
             SkipRound.Clear(); SoloRound.Clear(); OdeTurn.Clear(); LullabyMarks.Clear(); Held.Clear(); LullabyRound = -1;
             StorytellerDone = false;

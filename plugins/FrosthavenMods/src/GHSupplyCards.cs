@@ -87,8 +87,24 @@ namespace FrosthavenMods
         private static bool FreeCopy(CAbilityGiveSupplyCard __instance, CActor actor, out List<int> __state, ref bool __result)
         {
             __state = null;
+            try
+            {
+                return FreeCopyBody(__instance, actor, ref __state, ref __result);
+            }
+            catch (Exception e)
+            {
+                // let the engine's own give run with the ability's original list
+                if (__state != null) { __instance.SupplyCardIDs = __state; __state = null; }
+                if (GHClasses.Reported.Add("supply free copy")) Plugin.Log.LogError("GHSupplyCards (free copy): " + e);
+                return true;
+            }
+        }
+
+        private static bool FreeCopyBody(CAbilityGiveSupplyCard __instance, CActor actor, ref List<int> __state, ref bool __result)
+        {
             if (!(__instance.TargetingActor is CPlayerActor giver) || __instance.SupplyCardIDs == null || Ids.Count == 0) return true;
             CPlayerActor supplier = Supplier(giver, __instance.SupplyCardIDs);
+            if (supplier?.CharacterClass?.SupplyCards == null) return true;
             var held = new HashSet<int>();
             foreach (CPlayerActor p in ScenarioManager.Scenario?.PlayerActors ?? new List<CPlayerActor>())
             {
@@ -135,6 +151,7 @@ namespace FrosthavenMods
             }
             if (ReferenceEquals(supplier, giver)) return true;
             // the performer's class owns none of these cards: give them from the owner's supply, as the game's own give does
+            __result = true;   // the engine's own ApplyToActor always returns true
             try
             {
                 __instance.AbilityHasHappened = true;
