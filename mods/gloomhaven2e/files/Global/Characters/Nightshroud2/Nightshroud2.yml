@@ -12,6 +12,11 @@ DefaultSkin: 1
 HealthTable: [ 8, 9, 11, 12, 14, 15, 17, 18, 20 ]
 NumberAbilityCardsInBattle: 9
 Description: $Nightshroud2_DESCRIPTION$
+Role: $Nightshroud2_ROLE$
+Difficulty: $DIFFICULTY_MEDIUM$
+Strengths: $Nightshroud2_STRENGTHS$
+Weaknesses: $Nightshroud2_WEAKNESSES$
+Adventure_Description: $Nightshroud2_ADVENTURE_DESCRIPTION$
 HeroStats:
     Melee: 5
     Ranged: 1

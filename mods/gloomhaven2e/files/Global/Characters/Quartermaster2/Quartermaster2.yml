@@ -11,6 +11,11 @@ DefaultSkin: 1
 HealthTable: [ 10, 12, 14, 16, 18, 20, 22, 24, 26 ]
 NumberAbilityCardsInBattle: 11
 Description: $Quartermaster2_DESCRIPTION$
+Role: $Quartermaster2_ROLE$
+Difficulty: $DIFFICULTY_VERY_HIGH$
+Strengths: $Quartermaster2_STRENGTHS$
+Weaknesses: $Quartermaster2_WEAKNESSES$
+Adventure_Description: $Quartermaster2_ADVENTURE_DESCRIPTION$
 StartScenarioAbilities:
     QuartermasterSupplies:
         NullTargeting: True

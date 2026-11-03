@@ -117,6 +117,13 @@ def character_file(cls, template):
     if companion.exists():
         body.append("CompanionSummonData: " + companion.read_text(encoding="utf-8").strip())
     body.append(f"Description: ${cls}_DESCRIPTION$")
+    # the class screens' role, difficulty, strengths and weaknesses (blank without them; CharacterYMLData.Validate wants
+    # a Role): 2e text in cards/<Class>/strings.tsv; difficulty on Frosthaven's scale from the class's complexity, as
+    # the 1st edition pack's (1 Low, 2 Medium, 3 High, 4-5 Very High)
+    complexity = int(str(extras(cls).get("Complexity") or 2))
+    difficulty = {1: "LOW", 2: "MEDIUM", 3: "HIGH"}.get(complexity, "VERY_HIGH")
+    body += [f"Role: ${cls}_ROLE$", f"Difficulty: $DIFFICULTY_{difficulty}$", f"Strengths: ${cls}_STRENGTHS$",
+             f"Weaknesses: ${cls}_WEAKNESSES$", f"Adventure_Description: ${cls}_ADVENTURE_DESCRIPTION$"]
     extra = CARDS / cls / "character_extra.yml"   # more character-file keys (StartScenarioAbilities: the Plagueherald's supply)
     if extra.exists():
         body += [ln.rstrip() for ln in extra.read_text(encoding="utf-8").splitlines() if ln.strip()]

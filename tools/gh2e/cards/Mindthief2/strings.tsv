@@ -48,3 +48,6 @@ GH2E_Mindthief2_19_A	After the attack: <sprite name=Heal> 2, <sprite name=Range>
 GH2E_Mindthief2_25_A	+1 <sprite name=Attack> per negative condition
 GH2E_Mindthief2_29_A	After: control one target: <sprite name=Attack> 3
 GH2E_Mindthief2_29_A2	<sprite name=ConsumeDark>: a controlled <sprite name=Enemy> suffers 3
+Mindthief2_ROLE	Melee Damage
+Mindthief2_STRENGTHS	- <indent=%15>Augments give lasting bonuses to melee attacks</indent>\n- <indent=%15>Can Immobilize, Disarm and Stun dangerous enemies</indent>\n- <indent=%15>Fast and slow initiatives to dance in and out of combat</indent>
+Mindthief2_WEAKNESSES	- <indent=%15>Fragile melee character</indent>\n- <indent=%15>Only one augment active at a time</indent>\n- <indent=%15>Must avoid the enemies' focus</indent>

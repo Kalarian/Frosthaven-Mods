@@ -33,3 +33,6 @@ GH2E_Sunkeeper2_30_T	One ally targeted with the heal ability may <nobr>Recover <
 AMC_GH2E_Sunkeeper2_Light_P0	+0 <sprite name=CreateLight>
 AMC_GH2E_Sunkeeper2_Heal1Range3_P1	+1 "<sprite name=Heal> 1, <sprite name=Range> 3"
 AMC_GH2E_Sunkeeper2_Recover1_M1	-1 "You or an adjacent ally may <sprite name=RecoverIcon> one level 1 card from the discard pile"
+Sunkeeper2_ROLE	Melee Tank/Support
+Sunkeeper2_STRENGTHS	- <indent=%15>Strong offensive, defensive and support abilities</indent>\n- <indent=%15>Uses Light to boost her abilities</indent>\n- <indent=%15>Large hand size: can afford powerful lost actions</indent>
+Sunkeeper2_WEAKNESSES	- <indent=%15>Can struggle against groups of smaller enemies</indent>\n- <indent=%15>Weaker without Light</indent>\n- <indent=%15>Weaker with fewer allies</indent>

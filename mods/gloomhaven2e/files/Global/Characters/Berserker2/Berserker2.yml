@@ -12,6 +12,11 @@ DefaultSkin: 1
 HealthTable: [ 10, 12, 14, 16, 18, 20, 22, 24, 26 ]
 NumberAbilityCardsInBattle: 9
 Description: $Berserker2_DESCRIPTION$
+Role: $Berserker2_ROLE$
+Difficulty: $DIFFICULTY_HIGH$
+Strengths: $Berserker2_STRENGTHS$
+Weaknesses: $Berserker2_WEAKNESSES$
+Adventure_Description: $Berserker2_ADVENTURE_DESCRIPTION$
 HeroStats:
     Melee: 5
     Ranged: 1

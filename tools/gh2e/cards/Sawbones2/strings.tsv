@@ -53,3 +53,6 @@ AMC_GH2E_Sawbones2_FollowUp_P1	+1, add +1 <sprite name=Attack> if an ally has an
 GH2E_Sawbones2_PLAYPACK_HELP	You may play one "Medical Pack" ability card from your hand to perform one action of the card
 GH2E_Sawbones2_SECRET_HELP	Secret of the Oak: you may add +4 <sprite name=Attack> to your next attack this round or +4 <sprite name=Move> to your next move ability this round
 GH2E_Sawbones2_HIDDEN_TOOLTIP	Sawbones rule bookkeeping (hidden).
+Sawbones2_ROLE	Melee Damage/Support
+Sawbones2_STRENGTHS	- <indent=%15>Particularly efficient healer</indent>\n- <indent=%15>Medical packs give allies extra cards</indent>\n- <indent=%15>Strong attacks on damaged enemies</indent>
+Sawbones2_WEAKNESSES	- <indent=%15>Poor ranged attacks</indent>\n- <indent=%15>Prescriptions need an adjacent ally</indent>\n- <indent=%15>Weaker with fewer allies</indent>

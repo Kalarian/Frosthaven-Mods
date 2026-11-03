@@ -48,3 +48,6 @@ AMC_GH2E_Elementalist2_AirEarth_P1	+1 Air or Earth
 AMC_GH2E_Elementalist2_LightDark_P1	+1 Light or Dark
 AMC_GH2E_Elementalist2_Wild_R	Infuse any element (rolling)
 GH2E_Elementalist2_ALLSIX_TOOLTIP	All six elements were strong or waning at the same time this scenario (Elementalist mastery).
+Elementalist2_ROLE	Ranged Damage
+Elementalist2_STRENGTHS	- <indent=%15>Can do almost anything with the right elements</indent>\n- <indent=%15>Very effective at range</indent>\n- <indent=%15>Great at infusing elements</indent>
+Elementalist2_WEAKNESSES	- <indent=%15>Weak when all elements are inert</indent>\n- <indent=%15>Needs to plan a turn or two ahead</indent>\n- <indent=%15>Low health</indent>

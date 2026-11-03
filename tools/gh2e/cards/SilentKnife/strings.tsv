@@ -45,3 +45,6 @@ GH2E_SilentKnife_MONEY_TOOLTIP	Money tokens: the loot tokens the Silent Knife ha
 GH2E_SilentKnife_HIREDHELP_TOOLTIP	Hired Help: this enemy is the Silent Knife's ally for the rest of the scenario and drops an additional loot token when it dies.
 AMC_GH2E_SilentKnife_Pickpocket_P1	+1 Gain one money token if this attack targeted an adjacent <sprite name=Enemy>
 GH2E_SilentKnife_HIDDEN_TOOLTIP	Silent Knife rule bookkeeping (hidden).
+SilentKnife_ROLE	Melee Damage
+SilentKnife_STRENGTHS	- <indent=%15>High damage on enemies next to an ally or on their own</indent>\n- <indent=%15>Easy to act early in the round</indent>\n- <indent=%15>Can afflict enemies with Poison</indent>
+SilentKnife_WEAKNESSES	- <indent=%15>Small hand size: lost cards cost a lot</indent>\n- <indent=%15>Few defensive abilities and low health</indent>\n- <indent=%15>Needs allies in the right places</indent>

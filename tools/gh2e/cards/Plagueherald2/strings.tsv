@@ -68,3 +68,6 @@ AMC_GH2E_Plagueherald2_Plague_P0	+0, the target or one enemy within <sprite name
 AMC_GH2E_Plagueherald2_Poison_R	+0, the target or one enemy within <sprite name=Range> 2 of the target gains <sprite name=Poison>
 AMC_Stun_P1	+1 <sprite name=Stun>
 GH2E_PH2_HIDDEN_TOOLTIP	Plagueherald rule bookkeeping (hidden).
+Plagueherald2_ROLE	Ranged Damage/Support
+Plagueherald2_STRENGTHS	- <indent=%15>Can often target multiple enemies</indent>\n- <indent=%15>Plague tokens and Poison weaken enemies over time</indent>\n- <indent=%15>Allies with Poison gain bonuses</indent>
+Plagueherald2_WEAKNESSES	- <indent=%15>Low health</indent>\n- <indent=%15>Many bonuses need an ally without Poison</indent>\n- <indent=%15>Less effective against single large targets</indent>

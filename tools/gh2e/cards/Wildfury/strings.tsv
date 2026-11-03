@@ -45,3 +45,6 @@ AMC_GH2E_Wildfury_Push2_P2	+2 <sprite name=Push> 2
 AMC_GH2E_Wildfury_P1_Safeguard	+1, Safeguard, target 1 ally
 GH2E_Wildfury_RAGE_TOOLTIP	Concentrated Rage: damage tokens on the card. One is added whenever the Bear attacks or suffers damage from retaliate; a Bear attack with three or more removes three for +3 Attack instead.
 GH2E_Wildfury_HIDDEN_TOOLTIP	Wildfury rule bookkeeping (hidden).
+Wildfury_ROLE	Melee Damage/Summoner
+Wildfury_STRENGTHS	- <indent=%15>Starts every scenario with a strong Bear ally</indent>\n- <indent=%15>Commands give the Bear extra abilities</indent>\n- <indent=%15>Wide range of multi-use abilities</indent>
+Wildfury_WEAKNESSES	- <indent=%15>Weak if the Bear is ever removed</indent>\n- <indent=%15>Some actions need an element</indent>\n- <indent=%15>Low health</indent>

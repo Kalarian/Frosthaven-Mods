@@ -59,3 +59,6 @@ GH2E_Nightshroud2_28_B2	If the target enters a hex containing a Tear, you may re
 AMC_GH2E_Nightshroud2_Teleport2_R	+0, after the attack ability, grant one adjacent ally or self: <sprite name=Teleport> 2
 AMC_GH2E_Nightshroud2_KillCurse_P1	+1, if this attack kills the target, shuffle one <sprite name=Curse> card into the monster attack modifier deck
 AMC_GH2E_Nightshroud2_Tear_P0	+0, place one Tear in a hex adjacent to the target
+Nightshroud2_ROLE	Melee Damage
+Nightshroud2_STRENGTHS	- <indent=%15>Starts every scenario Invisible and stays so between turns</indent>\n- <indent=%15>Powerful attacks with Dark</indent>\n- <indent=%15>Can Curse and Stun enemies</indent>
+Nightshroud2_WEAKNESSES	- <indent=%15>Can't attack while Invisible</indent>\n- <indent=%15>Poor ranged options</indent>\n- <indent=%15>Doesn't assist allies much</indent>

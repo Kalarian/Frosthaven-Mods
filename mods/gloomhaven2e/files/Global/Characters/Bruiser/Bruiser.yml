@@ -11,6 +11,11 @@ DefaultSkin: 1
 HealthTable: [ 10, 12, 14, 16, 18, 20, 22, 24, 26 ]
 NumberAbilityCardsInBattle: 10
 Description: $Bruiser_DESCRIPTION$
+Role: $Bruiser_ROLE$
+Difficulty: $DIFFICULTY_LOW$
+Strengths: $Bruiser_STRENGTHS$
+Weaknesses: $Bruiser_WEAKNESSES$
+Adventure_Description: $Bruiser_ADVENTURE_DESCRIPTION$
 HeroStats:
     Melee: 4
     Ranged: 1

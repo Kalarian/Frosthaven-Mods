@@ -51,3 +51,6 @@ GH2E_Soothsinger2_30_B	Move your character tokens on each of your active Song ab
 AMC_GH2E_Soothsinger2_Bless2_M2	-2, <sprite name=Bless>, <sprite name=Target> 2
 AMC_GH2E_Soothsinger2_GrantAlly_R	+0, grant one ally: <sprite name=Move> 2 or <sprite name=Attack> 2 <sprite name=Rolling>
 GH2E_Soothsinger2_HIDDEN_TOOLTIP	Soothsinger rule bookkeeping (hidden).
+Soothsinger2_ROLE	Ranged Support
+Soothsinger2_STRENGTHS	- <indent=%15>Songs give the whole party lasting bonuses</indent>\n- <indent=%15>Effective at crowd control</indent>\n- <indent=%15>Varied bottom half abilities</indent>
+Soothsinger2_WEAKNESSES	- <indent=%15>Poor damage dealer</indent>\n- <indent=%15>Very low health</indent>\n- <indent=%15>Songs need the right notes first</indent>

@@ -74,3 +74,6 @@ GH2E_QMItem_BarbedStripPlus_1	Barbed Strip
 GH2E_QMItem_BarbedStripPlus_2	When you are attacked by an adjacent enemy, gain <sprite name=Retaliate> 3 for the attack (2, +1 from Proficiency).
 GH2E_QMItem_ScrollofForesight_1	Scroll of Foresight
 GH2E_QMItem_ScrollofForesight_2	During your turn, reveal the top two cards of your attack modifier deck. You may place any of them on the bottom of the deck. <sprite name=CreateLight>
+Quartermaster2_ROLE	Melee Damage/Support
+Quartermaster2_STRENGTHS	- <indent=%15>Recovers lost and spent items for the whole party</indent>\n- <indent=%15>Gives out his own items to allies</indent>\n- <indent=%15>Moderate offensive and defensive abilities</indent>
+Quartermaster2_WEAKNESSES	- <indent=%15>Doesn't excel in any one role</indent>\n- <indent=%15>Weaker when the party has few good items</indent>\n- <indent=%15>Supplies take a while to gather</indent>

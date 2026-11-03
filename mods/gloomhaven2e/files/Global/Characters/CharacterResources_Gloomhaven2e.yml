@@ -37,6 +37,17 @@ Tinkerer2SharedSupplies:
     Hidden: True
     MaxAmount: 1
 
+Berserker2Token:
+    # Bone Breaker bottom: the Berserker's character token on the target (it loses Flying while the card is active).
+    # Given and removed by the plugin (GHBerserker2e.cs); shown on the enemy's status row.
+    # plugin: the card names it only in a comment, so gh_port carries it by this marker (it was missing from the pack and
+    # Bone Breaker bottom crashed in CCharacterResource.set_Amount: data-validity review 2026-11-03);
+    # own sprite: the Berserker's class picture, named here (every class's build carries the plugin-marked blocks)
+    ID: "Berserker2Token"
+    Sprite: "GHClass_Berserker2"
+    LocKey: "$GH_GH2E_Berserker2_TOKEN_TOOLTIP$"
+    MaxAmount: 1
+
 GH2EAllSixElements:
     # pack-wide: hidden, a marker the plugin puts on the Elementalist the first time in a scenario all six elements are
     # strong or waning at once (GHElementalist2e.cs, mastery 2); saved with the scenario, counted at its end

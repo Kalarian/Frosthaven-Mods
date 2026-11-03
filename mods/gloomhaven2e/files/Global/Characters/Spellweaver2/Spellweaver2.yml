@@ -12,6 +12,11 @@ DefaultSkin: 1
 HealthTable: [ 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
 NumberAbilityCardsInBattle: 8
 Description: $Spellweaver2_DESCRIPTION$
+Role: $Spellweaver2_ROLE$
+Difficulty: $DIFFICULTY_HIGH$
+Strengths: $Spellweaver2_STRENGTHS$
+Weaknesses: $Spellweaver2_WEAKNESSES$
+Adventure_Description: $Spellweaver2_ADVENTURE_DESCRIPTION$
 HeroStats:
     Melee: 1
     Ranged: 5

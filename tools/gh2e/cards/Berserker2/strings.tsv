@@ -51,3 +51,6 @@ GH2E_Berserker2_27_B	You may repeat this action, suffering 1 more damage each ti
 GH2E_Berserker2_27_B2	Suffer <sprite name=Damage> 1 (cannot be negated).
 GH2E_Berserker2_28_T	Whenever you suffer damage, all enemies that have <sprite name=Wound> suffer <sprite name=Damage> 1.
 GH2E_Berserker2_TOKEN_TOOLTIP	Bone Breaker: the Berserker's token. This figure loses <sprite name=Flying> while the Berserker's Bone Breaker is in the active area.
+Berserker2_ROLE	Melee Damage
+Berserker2_STRENGTHS	- <indent=%15>One of the highest damage-dealing classes</indent>\n- <indent=%15>Gets stronger at half health or less</indent>\n- <indent=%15>Powerful lost actions</indent>
+Berserker2_WEAKNESSES	- <indent=%15>Spends own hit points: can fall quickly</indent>\n- <indent=%15>Small hand size</indent>\n- <indent=%15>Few abilities that help allies</indent>
