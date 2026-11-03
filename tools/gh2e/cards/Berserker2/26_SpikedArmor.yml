@@ -7,8 +7,9 @@ Data:
                 Retaliate:
                     Amount: 2
                     Enhancements: 1
-                Conditions: Wound
                 Filter: Self
+                MiscVars:
+                    GH2E_SpikedArmorWound: True
                 ActiveBonusDuration: Round
                 AnimOverload: PowerUp
             TPrevent:

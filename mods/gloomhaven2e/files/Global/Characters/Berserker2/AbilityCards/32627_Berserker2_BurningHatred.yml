@@ -34,74 +34,20 @@ Data:
                         Strength: 1
                 XP: 1
     Bottom:
+        # "You may perform this action any number of times in succession, increasing the damage suffered by 1 each time":
+        # after the attack the plugin (GHBerserker2e) asks; yes repeats suffer damage N+1 (cannot be negated), Move 1,
+        # Attack 2, with no cap. GH2E_CannotPrevent: no prevent bonus or lost card negates the damage.
         Abilities:
             BDamage:
                 Damage: 1
                 Filter: Self
                 CanSkip: False
+                MiscVars:
+                    GH2E_CannotPrevent: True
             BMove:
                 Move: 1
             BAttack:
                 Attack: 2
-            BCRepeat1:
-                Damage: 2
-                Filter: Self
-                CanSkip: True
-                SubAbilities:
-                    BCMove1:
-                        Move: 1
-                        TreatAsNonSubAbility: True
-                        StartAbilityRequirements:
-                            Type: SubAbility
-                            AbilityHasHappened: True
-                    BCAttack1:
-                        Attack: 2
-                        TreatAsNonSubAbility: True
-                        StartAbilityRequirements:
-                            Type: SubAbility
-                            AbilityHasHappened: True
-                    BCRepeat2:
-                        TreatAsNonSubAbility: True
-                        StartAbilityRequirements:
-                            Type: SubAbility
-                            AbilityHasHappened: True
-                        Damage: 3
-                        Filter: Self
-                        CanSkip: True
-                        SubAbilities:
-                            BCMove2b:
-                                Move: 1
-                                TreatAsNonSubAbility: True
-                                StartAbilityRequirements:
-                                    Type: SubAbility
-                                    AbilityHasHappened: True
-                            BCAttack2b:
-                                Attack: 2
-                                TreatAsNonSubAbility: True
-                                StartAbilityRequirements:
-                                    Type: SubAbility
-                                    AbilityHasHappened: True
-                            BCRepeat3:
-                                TreatAsNonSubAbility: True
-                                StartAbilityRequirements:
-                                    Type: SubAbility
-                                    AbilityHasHappened: True
-                                Damage: 4
-                                Filter: Self
-                                CanSkip: True
-                                SubAbilities:
-                                    BCMove3c:
-                                        Move: 1
-                                        TreatAsNonSubAbility: True
-                                        StartAbilityRequirements:
-                                            Type: SubAbility
-                                            AbilityHasHappened: True
-                                    BCAttack3c:
-                                        Attack: 2
-                                        TreatAsNonSubAbility: True
-                                        StartAbilityRequirements:
-                                            Type: SubAbility
-                                            AbilityHasHappened: True
         XP: 2
 Layout:
     Top:
@@ -129,7 +75,3 @@ Layout:
         - Row: "$FHS_GH2E_Berserker2_27_B2$"
         - Row: "<size=150%><sprite name=Move> *BMove*"
         - Row: "<size=150%><sprite name=Attack> *BAttack*"
-        - Row: "<size=20%> "
-        - Row: "$FHS_GH2E_Berserker2_27_B3$"
-        - Row: "$FHS_GH2E_Berserker2_27_B4$"
-        - Row: "$FHS_GH2E_Berserker2_27_B5$"

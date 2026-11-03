@@ -25,6 +25,8 @@ Data:
                 Retaliate:
                     Amount: 2
                     SquareEnhancements: 1
+                MiscVars:
+                    GH2E_ProcXPOnce: True
                 ActiveBonus:
                     Duration: Round
                     ProcXP: 1

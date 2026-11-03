@@ -56,15 +56,37 @@ PERKS = [
             CardPile: Hand
         MiscVars:
             IsActionValid: Action.Abilities.Any(obj.AbilityType == CAbility.EAbilityType.AddDoom)"""}),
-    # Frosthaven's summons are moved by the player, who can already bring them back: text only (NOTES.md)
+    # Frosthaven's summons are AI-driven: plugin GHDoomstalker2e (Heel) asks the Doomstalker's player at the start of each
+    # summon turn; yes = the summon's own move only, focused on the Doomstalker (benign), no attack
     (1, "Heel", "On each of your summons' turns, you may have them skip their turn and instead perform <sprite name=Move> +0 treating you as their focus",
      {"Cost": 2, "Flags": "[Passive]"}),
 ]
 
-# Neither mastery fits an existing pattern: "Kill 20 enemies that have Doom" needs a total-kills-of-doomed-enemies tag
-# (the plugin's FrosthavenMods_DoomedKillsInTurn counts kills in one turn), "you and one of your summons perform 6+
-# attack abilities in one round" a per-round attack count over a hero and a summon (NOTES.md, shared changes).
-MASTERIES = []
+# Both masteries are answered by the plugin (GHMasteriesDoomstalker2.cs) from the statistics records.
+MASTERIES = [
+    ("Inevitable End", "Kill 20 enemies that have <nobr><b><color=#39BEED>Doom</color></b></nobr>",
+     """# FrosthavenMods_DoomedKillsTotal: Value kills of doomed enemies by the Doomstalker itself (not its summons), within one
+# scenario (the user's default for this mastery, QUESTIONS.md B).
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_DoomedKillsTotal]
+        CharacterIDs:
+            ActorID: Doomstalker2ID
+        Value: 20"""),
+    ("Pack Leader", "In a single round, you and one of your summons must perform a combined total of 6 or more attack abilities",
+     """# FrosthavenMods_HeroPlusSummonAttacks: per round, your attack abilities that happened plus those of one summon (the
+# busiest), Value or more.
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_HeroPlusSummonAttacks]
+        CharacterIDs:
+            ActorID: Doomstalker2ID
+        Value: 6"""),
+]
 
 NEW_CARDS = {
     # "Doomstalker performs: Attack 2, Range 5": a real attack (Attack is a kind the game's modifier code runs: after the

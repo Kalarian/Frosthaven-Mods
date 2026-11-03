@@ -238,8 +238,13 @@ PRINTED_EXCEPTIONS = {
         "the token's Pull 2 / damage 5 / damage 1 live in its summon file (summons/GravityBomb.yml, GHMapTokens.cs), not on the card",
     (33228, "Bottom", "round"):            # Secret of the Oak: the +4 Attack / +4 Move "that round" choice
         "the plugin's template BSecretChoice (GHSawbones2e) holds one-use round bonuses: printed 'that round', not a round icon",
+    (32612, "Top", "number Heal 1"):       # Growing Rage: "whenever you retaliate, perform Heal 1, self"
+        "the Heal 1 after each retaliate is performed by the plugin (GHRetaliate2e, the card's GH2E_GrowingRage marker)",
+    (32717, "Bottom", "number Attack 1"):  # Walking Bastion: "grant that summon: Attack 1, Pierce 2" after its attack
+        "the granted Attack 1, Pierce 2 is built by the plugin (GHDoomstalker2e WalkingBastion), not a card ability",
+    (32717, "Bottom", "number Pierce 2"):
+        "the granted Attack 1, Pierce 2 is built by the plugin (GHDoomstalker2e WalkingBastion), not a card ability",
     # --- OPEN rows (ALL.json): the printed rule needs a plugin system another task builds; remove the line when it ships ---
-    (32625, "Bottom", "persistent"): "OPEN Berserker2-27 Bone Breaker: the character token (persistent) is not built",
     (32327, "Top", "persistent"): "OPEN SilentKnife-11 Hired Help: the money-token cost and token are not built",
     (33416, "Bottom", "round"): "OPEN Soothsinger2-21 Soothing Lullaby: the token on the monster is not built",
     (33429, "Bottom", "round"): "OPEN Soothsinger2-26 Grand Finale: 'skip moving your token this round' is not built",

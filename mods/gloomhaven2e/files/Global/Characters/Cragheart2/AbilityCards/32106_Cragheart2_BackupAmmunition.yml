@@ -6,8 +6,9 @@ Level: 1
 Initiative: 77
 # card: Backup Ammunition
 # from Xipe's 99121_Cragheart2_Backup Ammunition.yml; corrected against tools/gh2e/sheets/Cragheart.json
-# top: APPROXIMATION: the +1 Target applies to the next four ranged attack abilities; the "single-target" limit has no
-# bonus filter in the engine (the 1st edition card's shape, play-tested)
+# top: +1 Target on the next four SINGLE-TARGET ranged attack abilities: the BuffTarget bonus (the 1st edition card's
+# shape) marked GHSingleTargetOnly; the plugin (GHCragheart2e.cs) gives no +1 and spends no slot on an attack ability
+# that, as written, has more than one target or an area
 Discard: [Lost,Discard]
 Data:
     Top:
@@ -22,6 +23,8 @@ Data:
                     ValidAbilityType: Attack
                     AttackType: Ranged
                     XPTracker: [0,1,0,1]
+                MiscVars:
+                    GHSingleTargetOnly: True
     Bottom:
         Abilities:
             BMove:

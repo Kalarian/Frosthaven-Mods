@@ -7,9 +7,11 @@ Initiative: 32
 # card: Stone Pummel
 # from Xipe's 99137_Cragheart2_Stone Pummel.yml; corrected against tools/gh2e/sheets/Cragheart.json
 # top: Attack 4 carries a square mark (zoomed; square slot)
-# bottom: the 1st edition Stone Pummel's persistent bonus (destroy an adjacent obstacle on a melee attack for +2),
-# with no use track (2e: persistent for the scenario). APPROXIMATION: any obstacle adjacent to you, not only one
-# adjacent to both you and the target; own help text (the shared GUI_StonePummel key says +3)
+# bottom: the 1st edition Stone Pummel's persistent bonus (destroy an obstacle for +2), with no use track (2e:
+# persistent for the scenario); the destroy is marked GHStonePummel: the plugin (GHCragheart2e.cs) makes the offer
+# only on an attack whose target is adjacent to you (melee or ranged: no AttackType here) with a destroyable 1-hex
+# obstacle adjacent to both of you, and lets the destroy pick only such an obstacle; own help text (the shared
+# GUI_StonePummel key says +3)
 Discard: [Discard,Lost]
 Data:
     Top:
@@ -36,9 +38,10 @@ Data:
                         DestroyObstacle:
                         HelpBoxTooltipLocKey: GH2E_Cragheart2_22_B2
                         SpawnDelay: 2.16
+                        MiscVars:
+                            GHStonePummel: True
                 AttackEffect:
                     Type: BuffIfCanPerformSubAbility
-                    AttackType: Melee
                     Strength: 2
         XP: 2
 Layout:

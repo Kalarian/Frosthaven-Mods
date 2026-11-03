@@ -17,33 +17,14 @@ Data:
                 StartAbilityRequirements:
                     Type: ThisAbility
                     HP: "== 1"
-            THeal:
-                Heal: 0
-                Filter: Self
-                AnimOverload: Heal
-                StatIsBasedOnX:
-                    Strength:
-                        BasedOn: Vars
-                        Vars:
-                            Value: max(0, TargetingActor.MaxHealthHalfRoundedUp - TargetingActor.Health)
-            TLower:
-                Damage: 0
-                Filter: Self
-                CanSkip: False
-                StatIsBasedOnX:
-                    Strength:
-                        BasedOn: Vars
-                        Vars:
-                            Value: max(0, TargetingActor.Health - TargetingActor.MaxHealthHalfRoundedUp)
-                StartAbilityRequirements:
-                    Type: ThisAbility
-                    Vars:
-                        HalfHealth: Actor.MaxHealthHalfRoundedUp
-                        ValidateAboveHalf: Actor.Health > HalfHealth
+            # set the hit points to half the maximum (rounded up): not damage, not a heal (plugin GHBerserker2e, GH2E_SetHPHalf,
+            # at the end of this ability), then Strengthen
             TStrengthen:
                 Strengthen: True
                 Filter: Self
                 AnimOverload: PowerUp
+                MiscVars:
+                    GH2E_SetHPHalf: True
         Infuse: Fire
         XP: 2
     Bottom:

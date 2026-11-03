@@ -5,10 +5,10 @@ ID: 32720
 Level: 4
 Initiative: 25
 # card: Coated Arrows
-# top: "on your next four ranged attacks, add Poison, then Wound, then Immobilize, then Disarm": a different condition per
-# slot has no Frosthaven shape (NEEDS PLUGIN). Approximation: a ranged-only persistent attack bonus (the 1st edition
-# Crippling Noose's AttackType: Ranged) with four slots (XP on the fourth) that adds Poison and Wound to each of the four
-# attacks (two damage conditions in place of Immobilize and Disarm).
+# top: "on your next four ranged attacks, add Poison, then Wound, then Immobilize, then Disarm": a ranged-only persistent
+# attack bonus (the 1st edition Crippling Noose's AttackType: Ranged) with four slots (XP on the fourth), marked
+# GHSlotSequence: plugin GHDoomstalker2e puts only the current slot's condition on the bonus (Poison, Wound,
+# Immobilize, Disarm in turn).
 # bottom: the 1st edition Relentless Offensive bottom (round BuffAttack on doomed targets), +2.
 Discard: [Discard,Discard]
 Data:
@@ -16,8 +16,10 @@ Data:
         Abilities:
             TActive:
                 Attack: 0
-                Conditions: [Poison, Wound]
+                Conditions: [Poison]
                 Filter: Self
+                MiscVars:
+                    GHSlotSequence: True
                 ActiveBonus:
                     Duration: Persistent
                     Behaviour: BuffAttack

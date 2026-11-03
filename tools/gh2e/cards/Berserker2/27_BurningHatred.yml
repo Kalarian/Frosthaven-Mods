@@ -28,75 +28,20 @@ Data:
                         Strength: 1
                 XP: 1
     Bottom:
+        # "You may perform this action any number of times in succession, increasing the damage suffered by 1 each time":
+        # after the attack the plugin (GHBerserker2e) asks; yes repeats suffer damage N+1 (cannot be negated), Move 1,
+        # Attack 2, with no cap. GH2E_CannotPrevent: no prevent bonus or lost card negates the damage.
         Abilities:
             BDamage:
                 Damage: 1
                 Filter: Self
                 CanSkip: False
+                MiscVars:
+                    GH2E_CannotPrevent: True
             BMove:
                 Move: 1
             BAttack:
                 Attack: 2
-            BNull:
-                Null: True
-        Consumes:
-            BCRepeat1:
-                ConsumeGroup: CGHatred
-                CostAbility:
-                    ParentName: BNull
-                    Damage: 2
-                    Filter: Self
-                Abilities:
-                    BCMove1:
-                        ParentName: BNull
-                        Move: 1
-                    BCAttack1:
-                        ParentName: BNull
-                        Attack: 2
-            BCRepeat2:
-                ConsumeGroup: CGHatred
-                CostAbility:
-                    ParentName: BNull
-                    Damage: 5
-                    Filter: Self
-                Abilities:
-                    BCMove2a:
-                        ParentName: BNull
-                        Move: 1
-                    BCAttack2a:
-                        ParentName: BNull
-                        Attack: 2
-                    BCMove2b:
-                        ParentName: BNull
-                        Move: 1
-                    BCAttack2b:
-                        ParentName: BNull
-                        Attack: 2
-            BCRepeat3:
-                ConsumeGroup: CGHatred
-                CostAbility:
-                    ParentName: BNull
-                    Damage: 9
-                    Filter: Self
-                Abilities:
-                    BCMove3a:
-                        ParentName: BNull
-                        Move: 1
-                    BCAttack3a:
-                        ParentName: BNull
-                        Attack: 2
-                    BCMove3b:
-                        ParentName: BNull
-                        Move: 1
-                    BCAttack3b:
-                        ParentName: BNull
-                        Attack: 2
-                    BCMove3c:
-                        ParentName: BNull
-                        Move: 1
-                    BCAttack3c:
-                        ParentName: BNull
-                        Attack: 2
         XP: 2
 Layout:
     Top:
@@ -116,13 +61,4 @@ Layout:
         - Row: "<b><size=130%>$Move$ <sprite name=Move> *BMove*"
         - Row: "<b><size=130%>$Attack$ <sprite name=Attack> *BAttack*"
         - Row: "<size=20%> "
-        - Consume:
-            Name: BCRepeat1
-            Text: "$GH2E_Berserker2_27_B3$"
-        - Consume:
-            Name: BCRepeat2
-            Text: "$GH2E_Berserker2_27_B4$"
-        - Consume:
-            Name: BCRepeat3
-            Text: "$GH2E_Berserker2_27_B5$"
         - XP: 2

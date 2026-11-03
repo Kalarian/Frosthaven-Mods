@@ -1,9 +1,9 @@
 # card: Charging Beast
-# top: Summon Horned Hristek (stand-in model: the 1st edition Black Unicorn, the horned one). Its trait (+2 Attack for
-# the round after its first move) and "whenever this summon kills an enemy, grant it Move +0" have no Frosthaven summon
-# shape: text only (NEEDS PLUGIN).
+# top: Summon Horned Hristek (stand-in model: the 1st edition Black Unicorn, the horned one). Its trait (+2 Attack on
+# its attacks for the round after its first move) is plugin GHDoomstalker2e (HornedHristek); "whenever this summon kills
+# an enemy, grant it Move +0" is an on-kill bonus in its summon file.
 # bottom: Doom. On death, you and all allies Heal 3 (the 1st edition Nature's Hunger doom, Heal 2 -> 3). "Your summons
-# focus on this enemy": text (NEEDS PLUGIN).
+# focus on this enemy": plugin GHDoomstalker2e (DoomFocus).
 Discard: [Lost,Discard]
 Data:
     Top:

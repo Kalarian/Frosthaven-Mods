@@ -12,7 +12,12 @@ Data:
                     Amount: 4
                     Enhancements: 1
         Consumes:
+            # only after a straight-line move and while not wounded (Frosthaven's requirement keys; the plugin GHBerserker2e
+            # points MoveWasStraightLine at this action's move); gaining Wound stays optional (approved reading)
             TCWound:
+                Requirements:
+                    MoveWasStraightLine: True
+                    DoesntHaveNegativeCondition: [Wound]
                 CostAbility:
                     ParentName: TAttack
                     Wound: True
@@ -36,6 +41,9 @@ Data:
                 StatIsBasedOnX:
                     Strength:
                         BasedOn: CasterAdjacentEnemies
+                # X is recounted at each attack (plugin GHRetaliate2e)
+                MiscVars:
+                    GH2E_RetaliatePerAttack: True
                 ActiveBonus:
                     Duration: Round
 Layout:

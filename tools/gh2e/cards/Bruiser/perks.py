@@ -9,12 +9,13 @@ PERKS = [
      {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Basic_P1]"}),
     (2, "Brace", 'Replace one <sprite name="-1"> with one <sprite name=Shield> 1 <sprite name=Rolling>',
      {"CardsToRemove": "[AMC_Basic_M1]", "CardsToAdd": "[AMC_Shield1_R]"}),
-    # The sheet's card goes to the active area and gives Retaliate 2 on the next attack by an adjacent enemy;
-    # Frosthaven's nearest card is its rolling +0 Retaliate 2 (Metal Mosaic's perk 4). Approximation, NOTES.md.
+    # Its own rolling +0 card: drawn, it goes "to the active area" as the Bruiser's BruiserSpikedHide token (resources.yml,
+    # on his status row); on the next attack on him by an adjacent enemy each held card gives Retaliate 2 for that attack
+    # and is discarded (plugin GHBruiser2e / GHRetaliate2e).
     (2, "Spiked Hide", 'Replace one <sprite name="0"> with one "Add this card to your active area. On the next attack '
      'targeting you performed by an adjacent <sprite name=Enemy>, discard this card to gain <sprite name=Retaliate> 2 for '
      'the attack" <sprite name=Rolling>',
-     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Retaliate2_P0_R]"}),
+     {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_GH2E_Bruiser_SpikedHide_P0_R]"}),
     (1, "Stunning Blow", 'Replace one <sprite name="0"> with one <sprite name="0"> <sprite name=Stun>',
      {"CardsToRemove": "[AMC_Basic_P0]", "CardsToAdd": "[AMC_Stun_P0]"}),
     (2, "Second Wind", 'Add one <sprite name="+1"> "<sprite name=Heal> 2, self"',
@@ -64,7 +65,7 @@ PERKS = [
             ListLayoutOverride: [$PERK_Bruiser_11_Bonus$, Positive_MovePlus]"""}),
     # Frosthaven's scenario-start advantage perk (Perk_CrashingTide_10, Perk_Deepwraith_12: a hidden persistent
     # BuffAttack with AttackHasAdvantage and a filter), as an aura on every character (Perk_Boneshaper_06's aura filter)
-    # valid in round 1 only. APPROXIMATION: advantage on every attack in round 1, not only each character's first.
+    # valid in round 1 only; the plugin (GHBruiser2e, GH2E_WarCry) stops it for a character once its first attack is done.
     (1, "War Cry", 'Each character gains advantage on their first attack during the first round of each scenario',
      {"Flags": "[Passive, ApplyActiveBonusesAtScenarioStart]", "Abilities": """\
     TActive:
@@ -73,6 +74,8 @@ PERKS = [
         SkipAnim: True
         Attack: 0
         AttackHasAdvantage: True
+        MiscVars:
+            GH2E_WarCry: True
         ActiveBonus:
             Duration: Persistent
             Hidden: True
@@ -88,22 +91,33 @@ PERKS = [
 ]
 
 MASTERIES = [
-    # The sheet's second mastery is the 1st edition Brute's Relentless Onslaught (gh_crossover BRUTE_MASTERIES) with
-    # 7 damage: the plugin's streak tag counts the damage on the Bruiser's own turns (the sheet: "during each of those
-    # rounds"). The first mastery (in 3 different scenarios, kill an enemy you pushed or pulled that round) has no
-    # pattern: not written (NOTES.md).
-    ("Relentless Onslaught",
-     "In a single scenario, across three consecutive rounds, play six different ability cards and cause enemies to "
-     "suffer <sprite name=Damage> 7 or more during each of those rounds",
+    # The sheet's first mastery, answered by the plugin (GHMasteriesRestA.cs): the scenarios already done are kept in
+    # synced campaign state; this one counts when the Bruiser killed an enemy he pushed or pulled that same round.
+    ("Unstoppable Force", "In three different scenarios, kill an enemy that you <sprite name=Push> or <sprite name=Pull> that round",
      """\
-# Three rounds in a row with at least 7 damage to enemies on each of the Bruiser's turns and six different ability cards
-# played over the three, answered by the Frosthaven Mods plugin (the marker in EnemyFamilies, GHMasteries.cs) from the
-# damage and ability records. Value = rounds in a row, Amount = damage per turn, Targets = different cards.
 BattleGoalCondition:
     - Targets:
         Filter: CountXRounds
         SubFilter: Scenario
-        EnemyFamilies: [FrosthavenMods_DamageStreak]
+        EnemyFamilies: [FrosthavenMods_KillPushedThisRound]
+        CharacterIDs:
+            ActorID: BruiserID
+        Value: 3"""),
+    # The sheet's second mastery is the 1st edition Brute's Relentless Onslaught (gh_crossover BRUTE_MASTERIES) with
+    # 7 damage, counted over the whole round ("during each of those rounds": retaliate and damage on other turns too),
+    # the plugin's FrosthavenMods_DamageStreakRound (GHMasteriesRestA.cs).
+    ("Relentless Onslaught",
+     "In a single scenario, across three consecutive rounds, play six different ability cards and cause enemies to "
+     "suffer <sprite name=Damage> 7 or more during each of those rounds",
+     """\
+# Three rounds in a row with at least 7 damage the Bruiser caused to enemies in each whole round and six different
+# ability cards played over the three, answered by the Frosthaven Mods plugin (the marker in EnemyFamilies,
+# GHMasteriesRestA.cs). Value = rounds in a row, Amount = damage per round, Targets = different cards.
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_DamageStreakRound]
         CharacterIDs:
             ActorID: BruiserID
         Value: 3
@@ -112,9 +126,12 @@ BattleGoalCondition:
 ]
 
 NEW_CARDS = {
+    # Spiked Hide: rolling +0; the active-area effect is the plugin's (GHBruiser2e / GHRetaliate2e)
+    "AMC_GH2E_Bruiser_SpikedHide_P0_R": 'MathModifier: "+0"\nRolling: True\n',
     "AMC_GH2E_Bruiser_Push2_P2": 'MathModifier: "+2"\nAbilities:\n    APush:\n        Push: 2\n',
 }
 
 STRINGS = {
+    "AMC_GH2E_Bruiser_SpikedHide_P0_R": '<sprite name="0"> Spiked Hide: <sprite name=Retaliate> 2 on the next attack by an adjacent enemy <sprite name=Rolling>',
     "PERK_Bruiser_11_Bonus": "Rested and Ready: +1 <sprite name=Move> to your next move ability",
 }

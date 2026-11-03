@@ -1,7 +1,7 @@
 # card: Give Chase
 # top: the only Doom on a top half. "Your summons add +2 Move and Jump to all their move abilities" has no doom shape
-# (a doom's bonuses sit on the doomed monster; nothing in Frosthaven or the 1st edition buffs the caster's summons from
-# there) and "your summons focus on this enemy" is the player's steering in Frosthaven: NEEDS PLUGIN. The doom places
+# (a doom's bonuses sit on the doomed monster): plugin GHDoomstalker2e (GiveChase: +2 and Jump on every move ability of
+# the Doomstalker's summons while this Doom is on a living enemy; DoomFocus: the summons focus on it). The doom places
 # its token with a +0 summon attack bonus so the card has a doom ability (no effect on the numbers); the text is printed.
 Discard: [Discard,Discard]
 Data:

@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Doomstalker2_MASTERY_2
+LocalisedName: Doomstalker2_MASTERY_2_Name
+LocalisedDescription: Doomstalker2_MASTERY_2_Desc
+PerkPoints: 1
+# FrosthavenMods_HeroPlusSummonAttacks: per round, your attack abilities that happened plus those of one summon (the
+# busiest), Value or more.
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_HeroPlusSummonAttacks]
+        CharacterIDs:
+            ActorID: Doomstalker2ID
+        Value: 6

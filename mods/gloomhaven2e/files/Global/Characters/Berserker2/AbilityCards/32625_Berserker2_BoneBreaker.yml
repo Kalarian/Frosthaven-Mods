@@ -36,8 +36,17 @@ Data:
                     Amount: 3
                     DiamondEnhancements: 1
                 Range: 4
-                Conditions: [StopFlying]
                 AnimOverload: RangedAttack
+            # persistent: the Berserker's token on the target (plugin GHBerserker2e: the Berserker2Token resource and
+            # StopFlying on it while this marker is active; both removed when the card leaves the active area)
+            BToken:
+                NullTargeting: True
+                Filter: Self
+                AnimOverload: None
+                MiscVars:
+                    GH2E_BoneBreaker: True
+                ActiveBonus:
+                    Duration: Persistent
 Layout:
     Top:
         - Row:
@@ -59,4 +68,8 @@ Layout:
             - Column:
                 - Row: "<link=fhpill><sprite name=Range> *BAttack.Range*</link>"
             - Column:
-        - Row: "$FHS_GH2E_Berserker2_25_B$"
+        - Active:
+            Ability: BToken
+            Icon: Positive_Attack_Curse
+            ListLayout: "$FHS_GH2E_Berserker2_25_B$"
+            Layout: "$FHS_GH2E_Berserker2_25_B$"

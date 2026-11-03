@@ -15,9 +15,19 @@ Abilities:
         PreventDamageSetTargetHealthTo: 1
         AttackSourcesOnly: True
         Filter: [Self]
+        MiscVars:
+            GH2E_DefyDeath: True
         ActiveBonus:
             Duration: Persistent
             Behaviour: PreventAndDamageActiveBonusCaster
             XPTracker: [0]
             Hidden: True
+            AbilityData:
+                Attack: 2
+                Targeting: Custom
+                TargetingVars:
+                    AutoTarget: TargetingActor.GH2EDefyDeathTarget
+                    AddValidActorInRange: AutoTarget
+                    AddTileInRange: AutoTarget.Tile
+                    AddSelectedTile: AutoTarget.Tile
             ListLayoutOverride: [$PERK_Berserker2_10_Desc$, Positive_DamagePrevent]

@@ -1,0 +1,15 @@
+Parser: Mastery
+ID: Berserker2_MASTERY_2
+LocalisedName: Berserker2_MASTERY_2_Name
+LocalisedDescription: Berserker2_MASTERY_2_Desc
+PerkPoints: 1
+# Every turn taken ends at half the maximum hit points (rounded up) or lower, and the Berserker is not exhausted.
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_HalfHpEveryTurn]
+        CharacterIDs:
+            ActorID: Berserker2ID
+        Value: 1

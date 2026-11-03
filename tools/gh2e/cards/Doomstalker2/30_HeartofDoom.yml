@@ -3,8 +3,9 @@
 # Flow, Boneshaper Malicious Conversion), hand only, actions with a Doom only. Then the 1st edition Wild Command bottom
 # attack (doomed enemy at any range) and a plain Attack 3, Range 5.
 # bottom: "any number of Doom active on the same target" = the 1st edition Inescapable Fate's AddDoomSlot (+4: five
-# dooms, effectively any number). "If you discard this card, discard all but one active Doom" is left to the engine's
-# doom-slot handling (unverified). Then SelectAndPlayCard from the hand or the discard pile.
+# dooms, effectively any number). "If you discard this card, discard all but one active Doom": when the slots drop,
+# plugin GHDoomstalker2e (HeartOfDoom) asks the player which Doom to keep (the engine would drop the oldest ones).
+# Then SelectAndPlayCard from the hand or the discard pile.
 Discard: [Discard,Discard]
 Data:
     Top:

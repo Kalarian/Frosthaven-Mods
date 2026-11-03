@@ -75,9 +75,34 @@ PERKS = [
         Filter: Enemy""")}),
 ]
 
-# the 2e masteries ("create, destroy or move an obstacle every round"; "8+ heal in a round, 8+ damage with a ranged and
-# with a melee attack") have no existing battle-goal pattern: left out (see NOTES.md)
-MASTERIES = []
+# the 2e masteries (the sheet prints no names: named here), answered by the plugin (GHMasteriesCragheart2.cs)
+MASTERIES = [
+    ("Earth Mover", "For an entire scenario, create, destroy, or move at least one obstacle tile each round",
+     """# NEW TAG: every round of the scenario, an obstacle created, destroyed or moved by you (GHMasteriesCragheart2.cs, from
+# the ability and destroyed-obstacle records plus the obstacles spawned with you as their owner)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_ObstacleEveryRound]
+        CharacterIDs:
+            ActorID: Cragheart2ID
+        Value: 1"""),
+    ("Versatile Brawler", "In a single scenario, heal 8 or more hit points during a single round, deal 8 or more damage with a ranged attack ability, and deal 8 or more damage with a melee attack ability",
+     """# NEW TAG: Amount hit points actually restored by your heals in one round (anyone), Amount damage to enemies with one
+# ranged attack ability and Amount with one melee attack ability (GHMasteriesCragheart2.cs)
+CheckAtEndOfScenario: True
+BattleGoalCondition:
+    - Targets:
+        Filter: CountXRounds
+        SubFilter: Scenario
+        EnemyFamilies: [FrosthavenMods_Heal8Ranged8Melee8]
+        CharacterIDs:
+            ActorID: Cragheart2ID
+        Amount: 8
+        Value: 1"""),
+]
 
 NEW_CARDS = {
     "AMC_GH2E_Cragheart2_Obstacle_P1_R": 'MathModifier: "+1"\nRolling: True\nAbilities:\n    AObstacle:\n'

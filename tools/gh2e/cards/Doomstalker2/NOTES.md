@@ -146,3 +146,21 @@ text keys).
 ## 2026-11-02: modifier abilities and Safeguard
 
 - Perks (2026-11-02, supersede the lines above): Second Arrow is a real Attack 2, Range 5 (TryToPerformAsSummoner: the Doomstalker attacks also when a summon drew it); Pack Hunt grants only a summon adjacent to the attack's target (Custom targeting on TargetActor's neighbours). Bench both.
+
+## 2026-11-02 (card-accuracy pass, rest-a): plugin GHDoomstalker2e + GHMasteriesDoomstalker2
+
+These supersede the "text only / NEEDS PLUGIN / approximation" lines above (and the "Frosthaven's summons are steered by
+the player" claim: hero summons are AI-driven unless PlayerControlled).
+- **Summon focus** (The Hunt Begins, Give Chase, Walking Bastion, Charging Beast): each summon turn gets the engine's
+  focus override on the doomed enemy (DoomFocus).
+- **Give Chase** top: +2 Move and Jump on every move ability of your summons while the Doom is on a living enemy.
+- **Walking Bastion** bottom: after a summon's attack ability on the doomed enemy, once per round, the summon performs
+  Attack 1, Pierce 2 on it (its own modifier draw). The doom keeps a +0 marker bonus only for its token.
+- **Coated Arrows** top / **Impending End** bottom: one tracker with a different effect per slot (GHSlotSequence):
+  Poison, Wound, Immobilize, Disarm; Immobilize (+0), then +2, +2. Impending End's Doom now lasts three attacks.
+- **Horned Hristek**: +2 Attack on its attacks for the rest of the round after its first move of the round.
+- **Great Archinotl**: one more turn after every figure with initiative 1-99 has acted (shown as initiative 100), not in
+  the round it was summoned. The initiative track shows no second slot.
+- **Heart of Doom** bottom: when the slots drop, the player picks the Doom(s) to keep (yes/no per Doom). Slots stay +4.
+- **Heel** perk: asked at the start of each summon turn; yes = the summon's own move only, toward you, no attack.
+- **Masteries**: Kill 20 doomed enemies (yourself, within one scenario); you + one summon 6 attack abilities in a round.

@@ -17,6 +17,8 @@ Data:
                 AnimOverload: TargetedShout
             TRetaliate:
                 Retaliate: 2
+                MiscVars:
+                    GH2E_ProcXPOnce: True
                 ActiveBonus:
                     Duration: Round
                     ProcXP: 1
