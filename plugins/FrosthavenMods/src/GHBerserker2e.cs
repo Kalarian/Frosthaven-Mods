@@ -353,7 +353,11 @@ namespace FrosthavenMods
         {
             try
             {
-                if (__instance.AbilityMovementWasStraightLine != true || ability == null || ability is CAbilityMove) return true;
+                if (__instance.AbilityMovementWasStraightLine != true || ability == null) return true;
+                // the move itself before it has a path (the augmentation bar asks during the move step: same null path,
+                // same error screen, Careless Charge top 2026-11-02 23:01): not a straight line yet. Any card (the engine
+                // would throw for Frosthaven's own cards too).
+                if (ability is CAbilityMove own) { if (own.AllArrayIndexOnPathIncludingRepeatsCopy == null) { __result = false; return false; } return true; }
                 if (CardOf(ability) < 20000 || CardOf(ability) >= 40000) return true;   // pack cards only
                 if (!(PhaseManager.Phase is CPhaseAction action)) return true;
                 CActor mover = ability.TargetingActor;
