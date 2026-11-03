@@ -175,6 +175,9 @@ RESOURCE_CALL = re.compile(r"\.\s*(?:Add|Get|Remove|Has|Set)CharacterResource(?:
 PLUGIN_RESOURCE_DYNAMIC = {
     # GHSavedCounts: "GH2ECount" + slot, slots 1..Slots (never cut below 10: saved scenarios hold them)
     ("GHSavedCounts.cs", "Id(slot)"): lambda src: [f"GH2ECount{i}" for i in range(1, int(re.search(r"const int Slots = (\d+)", src).group(1)) + 1)],
+    # GHScenarioEnd.Resource: a pass-through of the caller's resource ID (SilentKnifeMoney, GH2EAllSixElements,
+    # GH2ECount slots), each of which its own class file already reads directly
+    ("GHScenarioEnd.cs", "resourceId"): lambda src: [],
 }
 
 

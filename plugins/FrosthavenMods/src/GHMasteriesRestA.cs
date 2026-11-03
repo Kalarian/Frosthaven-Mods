@@ -174,13 +174,15 @@ namespace FrosthavenMods
             try
             {
                 if (result == null || result.isRestarting) return;
+                if (!result.Characters.Any(r => r.Character?.ID.ID == GHBruiser2e.ClassId)) return;
                 Fresh();
-                // after a reload the memory set is empty: the hidden saved flag on the Bruiser still says so
-                foreach (CPlayerActor p in (ScenarioManager.Scenario?.PlayerActors ?? new List<CPlayerActor>()).Concat(ScenarioManager.Scenario?.ExhaustedPlayers ?? new List<CPlayerActor>()))
-                    if (p?.Class?.ID == GHBruiser2e.ClassId && GHSavedCounts.Get(p, SlotPushKill) > 0) PushKillScenario.Add(G(p));
-                if (PushKillScenario.Count == 0) return;
+                // after a reload the memory set is empty: the hidden saved flag on the Bruiser still says so; read from
+                // the copy made when the scenario ended (GHScenarioEnd), as the scenario may be gone by now
+                int flag = GHScenarioEnd.Resource(GHBruiser2e.ClassId, GHSavedCounts.ResourceId(SlotPushKill), out string flagFrom);
+                string scenario = GHScenarioEnd.ScenarioId(out string idFrom);
+                Plugin.Log.LogInfo($"GHRule KillPushedThisRound card 0 Bruiser mastery: read push-kill flag {flag} from {flagFrom} (memory {PushKillScenario.Count}), scenario {scenario} from {idFrom}");
+                if (PushKillScenario.Count == 0 && flag <= 0) return;
                 CampaignState state = __instance.CampaignController.State;
-                string scenario = ScenarioKey();
                 foreach (ScenarioResult.CharacterResult r in result.Characters)
                 {
                     if (r.Character?.ID.ID != GHBruiser2e.ClassId) continue;

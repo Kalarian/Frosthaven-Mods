@@ -398,8 +398,12 @@ namespace FrosthavenMods
             {
                 CampaignState state = __instance.CampaignController?.State;
                 if (state == null) return;
-                string scenarioId = ScenarioManager.CurrentScenarioState?.ID ?? "?";
-                bool noted = NotedThisScenario();
+                // copied when the scenario ended (GHScenarioEnd): the scenario may be gone by now
+                string scenarioId = GHScenarioEnd.ScenarioId(out string idFrom);
+                int flag = GHScenarioEnd.Resource(ClassId, AllSixResource, out string flagFrom);
+                bool noted = flag > 0;
+                if (result.Characters.Any(r => r.Character?.ID.ID == ClassId))
+                    Plugin.Log.LogInfo($"GHRule AllSixElements card 0 mastery: read all-six flag {flag} from {flagFrom}, scenario {scenarioId} from {idFrom}");
                 foreach (ScenarioResult.CharacterResult r in result.Characters)
                 {
                     if (r.Character?.ID.ID != ClassId) continue;
