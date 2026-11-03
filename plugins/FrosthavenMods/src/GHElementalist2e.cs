@@ -28,7 +28,8 @@ namespace FrosthavenMods
     ///     strong column. "GHRule DeferredInfusion".
     ///   - Primed (perk Elementalist210): "At the start of each scenario, you may infuse any": an optional infuse-any with
     ///     the picker among the scenario-start abilities (Frosthaven's own StartScenarioAbilities queue, HIVE's mode
-    ///     choice), strong at once. "GHRule Primed".
+    ///     choice), strong at once. "GHRule Primed" when queued, and again naming the element infused (or "declined":
+    ///     the picker's Skip clears the pick, which is the printed "may" declined).
     ///   - Elemental Mastery (perk Elementalist212): Fire, Ice, Air and Earth do not wane at the end of the round; Light
     ///     and Dark do (Frosthaven's ElementsDontWane holds all six). "GHRule ElementalMastery".
     ///   - Masteries: FrosthavenMods_ConsumesInOneTurn (Value turns with Amount or more element consumes, from the element
@@ -302,12 +303,35 @@ namespace FrosthavenMods
                     if (infuse == null) continue;
                     infuse.SetMiscVar("InfuseAsStrong", new TValue(true));
                     infuse.SetMiscVar("GH2E_DeferredInfuse", new TValue(true));
+                    infuse.SetMiscVar("GH2E_Primed", new TValue(true));
                     infuse.SkipAnim = true;
                     GameState.PendingScenarioModifierAbilities.Add(new Tuple<CAbility, CActor>(infuse, p));
                     Plugin.Log.LogInfo($"GHRule Primed card 0 Primed: {GHPlague.NameOf(p)} may infuse any element at the start of the scenario");
                 }
             }
             catch (Exception e) { Report("Primed", e); }
+        }
+
+        /// <summary>The outcome of a Primed or end-of-turn (deferred) infusion, named: the element picked and its column
+        /// now (strong), or "declined" when the picker was skipped (Skip clears the pick: the "may" is declined).</summary>
+        [HarmonyPatch(typeof(CAbilityInfuse), nameof(CAbilityInfuse.AbilityEnded))]
+        [HarmonyPostfix]
+        private static void AfterInfuseEnded(CAbilityInfuse __instance)
+        {
+            try
+            {
+                if (__instance == null || !__instance.GetMiscVar("GH2E_DeferredInfuse").GetBool()) return;
+                bool primed = __instance.GetMiscVar("GH2E_Primed").GetBool();
+                string who = GHPlague.NameOf(__instance.TargetingActor);
+                var picked = (__instance.SelectedElementsToInfuse ?? new List<ElementInfusionBoardManager.EElement>())
+                    .Where(e => e != ElementInfusionBoardManager.EElement.Any).Distinct().ToList();
+                string what = __instance.HasInfusedAnElement && picked.Count > 0
+                    ? "infuses " + string.Join("/", picked.Select(e => $"{e} ({ElementInfusionBoardManager.ElementColumn(e)})"))
+                    : "declined (no element infused)";
+                if (primed) Plugin.Log.LogInfo($"GHRule Primed card 0 Primed: {who} {what}");
+                else Plugin.Log.LogInfo($"GHRule DeferredInfusion card {CardId(__instance)} end of turn: {who} {what}");
+            }
+            catch (Exception e) { Report("infusion outcome", e); }
         }
 
         // ================================================================== Elemental Mastery
