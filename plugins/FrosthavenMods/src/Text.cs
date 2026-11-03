@@ -24,6 +24,8 @@ namespace FrosthavenMods
             ["FHMODS_STRIP_TITLE"] = "Copy without content packs",
             ["FHMODS_STRIP_MISSING"] = "Content pack missing",
             ["FHMODS_STRIP_DO"] = "Make the copy",
+            // GHMoneyTokens: a Silent Knife places or loses a money token (Frosthaven FAQ section 10)
+            ["FHMODS_MONEY_RETURN"] = "Money token spent: choose one of your loot cards to put back on top of the loot deck.",
         };
 
         public static string Get(string key) => Strings.TryGetValue(key, out string text) ? text : key;

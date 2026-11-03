@@ -1,0 +1,10 @@
+SilentKnifeMoney:
+    ID: "SilentKnifeMoney"
+    Sprite: "HoverHatchet"
+    LocKey: "GH2E_SilentKnife_MONEY_TOOLTIP"
+    MaxAmount: 99
+SilentKnifeHiredHelp:
+    ID: "SilentKnifeHiredHelp"
+    Sprite: "HoverHatchet"
+    LocKey: "GH2E_SilentKnife_HIREDHELP_TOOLTIP"
+    MaxAmount: 1

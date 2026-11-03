@@ -1,5 +1,5 @@
 # card: Spread the Plague
-# top: control one enemy with Plague (any range) for one Attack 4, as the 1st edition Mindthief's Hostile Takeover.
+# top: control one enemy with Plague (any range) for one Attack 4, the player choosing its target (ControlActorType Player, rulebook p33).
 # The Plague its attack adds can't be given by the engine (a resource is passed from the giver's own supply, and the
 # monster has none): NEEDS PLUGIN. bottom: written as "remove Poison from one of your allies, then Poison + Plague one
 # enemy adjacent to that ally" (the card's mandatory removal comes first here so the target is picked around the
@@ -17,7 +17,7 @@ Data:
                                 Enhancements: 1
                             StrengthIsBase: True
                     ControlDurationType: ControlForOneAction
-                    ControlActorType: Ally
+                    ControlActorType: Player
                 Range: 99
                 Target: 1
                 Filter:

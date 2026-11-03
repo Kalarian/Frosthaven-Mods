@@ -5,7 +5,7 @@ ID: 33401
 Level: 1
 Initiative: 8
 # card: Mobilizing Measure
-# top: song (Low Note); end-of-turn grant: the ally you pick performs Move 2 (closest ally not enforced, NOTES.md)
+# top: song (Low Note); end-of-turn grant Move 2 to the closest ally (Custom targeting: only the closest; ties: the player picks)
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -20,6 +20,16 @@ Data:
                     Range: 99
                     Target: 1
                     Filter: Ally
+                    Vars:
+                        SongMe: TargetingActor
+                        SongAllies: AllAliveActors.Where(obj != SongMe and CActor.AreActorsAllied(obj.Type, SongMe.Type, obj, SongMe))
+                        ValidateSongAllies: SongAllies.Count > 0
+                        SongNearestDist: SongAllies.OrderBy(obj.GetDistanceTo(SongMe, true)).First.GetDistanceTo(SongMe, true)
+                        SongClosest: SongAllies.Where(obj.GetDistanceTo(SongMe, true) == SongNearestDist)
+                    Targeting: Custom
+                    TargetingVars:
+                        AddTilesInRange: SongClosest.Select(Tile)
+                        AddValidActorsInRange: SongClosest
                     AnimOverload: PlayPositiveTuneMove
                 Filter: Self
                 AnimOverload: PlaySongSpeed1

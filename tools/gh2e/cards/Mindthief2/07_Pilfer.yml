@@ -1,6 +1,8 @@
 # card: Pilfer
-# written from tools/gh2e/sheets/Mindthief.json; the money token is text only (NEEDS PLUGIN: Frosthaven's cards have no
-# "gain a money token" ability)
+# written from tools/gh2e/sheets/Mindthief.json. "If this attack does not kill the target, gain a money token": money
+# tokens are loot tokens (Frosthaven FAQ section 10), so gaining one = picking up a loot token (one loot-deck draw).
+# A sub-ability of the attack with Frosthaven's kill requirement negated (ActorsKilledByAbility "== 0", as Convert the
+# Flock's "> 0"), marked MiscVars GHMoneyGain: the plugin (GHMoneyTokens) has the Mindthief gain a loot token.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -9,6 +11,18 @@ Data:
                 Attack:
                     Amount: 2
                     Enhancements: 1
+                SubAbilities:
+                    TMoney:
+                        NullTargeting: True
+                        Filter: Self
+                        StartAbilityRequirements:
+                            Type: SubAbility
+                            ActorsKilledByAbility: "== 0"
+                        TreatAsNonSubAbility: True
+                        AutoTrigger: True
+                        SkipAnim: True
+                        MiscVars:
+                            GHMoneyGain: True
             TLoot:
                 Loot: 1
                 Target: -1

@@ -6,11 +6,29 @@ CharacterID: SilentKnifeID
 Available: 1
 Flags: [Passive, ExecuteAbilitiesAfterShortRest, ExecuteAbilitiesAfterLongRest]
 Abilities:
-    BAttack:
-        Attack: 1
+    BMoney:
+        NullTargeting: True
         Range: 3
         Target: 1
-        Targeting: Range
         Filter: Enemy
+        SkipAnim: True
         CanSkip: True
         CanUndo: False
+        StartAbilityRequirements:
+            Type: ThisAbility
+            Vars:
+                ValidateMoney: Actor.GetCharacterResourceAmount("SilentKnifeMoney") >= 1
+        MiscVars:
+            GHMoneyPlace: True
+        SubAbilities:
+            BAttack:
+                Attack: 1
+                Range: 3
+                Target: 1
+                Filter: Enemy
+                TreatAsNonSubAbility: True
+                CanUndo: False
+                Targeting: Custom
+                TargetingVars:
+                    AddTilesInRange: ParentAbility.ActorsTargeted.Select(Tile)
+                    AddValidActorsInRange: ParentAbility.ActorsTargeted

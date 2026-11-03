@@ -6,9 +6,10 @@ Level: 4
 Initiative: 70
 # card: Rabid Bite
 # top: Strengthen one normal or elite enemy with Plague (any range), then control it (UseParentTargets, as CARD_FIXES
-# 20406 Lead to Slaughter): Move 1, Attack 5. "This movement must move toward a monster that does not have Plague":
-# the controlled move follows the monster AI's own focus. The Plague its attack adds: the monster has no supply to give
-# from. Both NEEDS PLUGIN.
+# 20406 Lead to Slaughter): Move 1, Attack 5, driven by the player (ControlActorType Player, rulebook p33). "This
+# movement must move toward a monster that does not have Plague": the move may only end on an adjacent hex closer (path
+# around walls) to some other monster without Plague (MustEndOnSpecificTiles). The Plague its attack adds: the monster
+# has no supply to give from, NEEDS PLUGIN.
 Discard: [Discard,Discard]
 Data:
     Top:
@@ -31,11 +32,16 @@ Data:
                                         Amount: 1
                                         SquareEnhancements: 1
                                     StrengthIsBase: True
+                                    Vars:
+                                        RabidMover: TargetingActor
+                                        RabidClean: AllAliveMonsters.Where(obj != RabidMover and obj.GetCharacterResourceAmount("Plague") == 0)
+                                        MustEndOnSpecificTiles: CustomAbility.GetAdjacentTiles(RabidMover.Tile).Where(RabidClean.Any(obj.GetDistanceTo(parentContext.obj, true) < obj.GetDistanceTo(RabidMover, true)))
+                                    MoveRestrictionType: MustEndOnSpecificTiles
                                 TControlAttack:
                                     Attack: 5
                                     StrengthIsBase: True
                             ControlDurationType: ControlForOneAction
-                            ControlActorType: Ally
+                            ControlActorType: Player
                         Filter: Enemy
                         UseParentTargets: True
                         Target: 1
