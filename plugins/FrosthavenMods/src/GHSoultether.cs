@@ -77,8 +77,10 @@ namespace FrosthavenMods
             {
                 if (__instance.BaseCard?.ID == LivingNight && __instance.Ability.Name == "BDamageAttacker")
                 {
-                    foreach (CActiveBonus b in __instance.Actor.ActiveBonuses.Where(x => x != null && x != __instance && x.BaseCard?.ID == LivingNight
-                                                                                         && x.Ability?.Name == "BDisadvantage" && !x.Finishing()).ToList())
+                    // read from the card itself: both bonuses are auras on the Soultether's summons, and an aura is listed
+                    // only under the figures in its range (never under the Soultether: Actor.ActiveBonuses never had it)
+                    foreach (CActiveBonus b in (__instance.BaseCard.ActiveBonuses ?? new List<CActiveBonus>()).Where(x => x != null && x != __instance
+                                 && x.Caster == __instance.Caster && x.Ability?.Name == "BDisadvantage" && !x.Finished() && !x.Finishing()).ToList())
                     {
                         b.Finish();
                         Rule("LivingNight", LivingNight, "the two attacks on your summons are used: the disadvantage ends with the damage");
@@ -177,7 +179,8 @@ namespace FrosthavenMods
                 int has = target.GetCharacterResourceAmount(HadWard);
                 if (ward && has == 0) target.AddCharacterResource(HadWard, 1);
                 else if (!ward && has > 0) target.RemoveCharacterResource(HadWard, has);
-                if (ward && SummonerOf(target).ActiveBonuses.Any(b => b?.BaseCard?.ID == ImposedWill))
+                // the card's two bonuses are auras on the summons: looked up through the summoner's cards (GHCasterBonuses)
+                if (ward && GHCasterBonuses.OfCard(SummonerOf(target), ImposedWill) != null)
                     Rule("ImposedWill", ImposedWill, $"{GHPlague.NameOf(target)} has Ward as the attack starts: no Ward and no damage to the attacker after it");
             }
             catch (Exception e) { Report("Imposed Will", e); }
