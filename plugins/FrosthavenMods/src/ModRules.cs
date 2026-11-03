@@ -115,8 +115,9 @@ namespace FrosthavenMods
                               "Mindthief, Silent Knife, Spellweaver and Tinkerer open the moment this is turned on, and the " +
                               "others arrive in envelopes, one per retirement, like the first edition's (\"Gloomhaven classes: " +
                               "all open at once\" opens them all). They use the first edition's 3D models, animations and " +
-                              "sounds, so the first edition pack must be installed too. [WIP]: work in progress; some " +
-                              "class rules are still close approximations.\n\n" +
+                              "sounds, so the first edition pack must be installed too (17 summons use stand-in models). [WIP]: " +
+                              "every card is checked against the printed card, but the pack hasn't been played in co-op " +
+                              "yet.\n\n" +
                               "A campaign uses one edition: this can't go on while \"Gloomhaven classes (1st edition)\" is " +
                               "on, and the other way round. Everything said there about content packs applies here too: " +
                               "everyone needs the same pack, a campaign that has had a character of one of these classes " +
