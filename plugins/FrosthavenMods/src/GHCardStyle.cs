@@ -43,6 +43,9 @@ namespace FrosthavenMods
         private const float BadgeBottom = 6f;
         private const float GeneratorElement = 51f, GeneratorSlot = 26f, SlotSize = 32f, SlotGap = 5f, SlotPair = 10f, SlotPairDiamond = 7f;
         private const float PillSlotPull = 0f, PillSlotAfter = 11f, PillSlotEnd = 2f;   // slot to next icon: Exploding Decoy 12 px; 21 drew 22
+        // a "!" box around infusions (2nd edition, as printed: Rumbling Advance, Flamethrower): elements 42 px, 7 px from
+        // the tab and the right edge, 6 px above and below (the printed box: 75 tall around a 58 element on a 750 card)
+        private const float BoxIcon = 42f, BoxPadX = 7f, BoxPadV = 6f;
         private const float InfuseSize = 48f, InfuseBottom = 11.5f, InfuseBand = 72f, InfuseStep = 60.5f, ContentTop = 20f;   // step: two infusions' centres (Frosthaven's 181; ours were 94 apart, in columns of their own)   // 9 crowded the rim (the visual review)
         // wrapped text keeps 24 px from the half's sides (Against All Odds: 26..27; the generator's rows run to 11); a
         // half that doesn't fit is scaled to keep FitEdge px from the sides, clear of the badges and the infusion band
@@ -114,6 +117,7 @@ namespace FrosthavenMods
                     Areas(rows, f);
                     ConsumeBoxes(rows, h, f);
                     BareConsumes(rows, h, tint, f);
+                    BoxInfusions((RectTransform)rows, h, f);
                     if (!augment) Relayout(rows);
                     // after Relayout: it stacks a column's rows again, and a pill cut into rows (one per slotted value:
                     // Fire Orbs' target and range) is one pill only once Pills has joined them
@@ -124,6 +128,7 @@ namespace FrosthavenMods
                     Infusions(h, rows as RectTransform, f);
                     Badges(h, f);
                     if (!augment) Fit(h, (RectTransform)rows, f);
+                    BoxClear(h, (RectTransform)rows, f);
                 }
             }
             catch (Exception e) { if (Reported.Add("style")) Plugin.Log.LogWarning("Gloomhaven card style: " + e); }
@@ -816,11 +821,15 @@ namespace FrosthavenMods
             if (rows == null) return;
             RectTransform infuseRow = InfuseRow(rows, half, out List<RectTransform> containers);
             if (infuseRow == null) return;
-            // the generator's element is 51 px, Frosthaven's 48 (absolute: a pooled card is generated again)
+            // the generator's element is 51 px, Frosthaven's 48 (absolute: a pooled card is generated again); in a "!" box
+            // (2nd edition: the printed card boxes the half's infusion) a little smaller, as the printed box holds it
+            RectTransform box = BoxOf(containers, half);
+            float size = box != null ? BoxIcon : InfuseSize;
             foreach (RectTransform container in containers)
-                container.localScale = new Vector3(InfuseSize / GeneratorElement, InfuseSize / GeneratorElement, 1f);
+                container.localScale = new Vector3(size / GeneratorElement, size / GeneratorElement, 1f);
+            if (box != null) FitBox(box, containers, half, f);
             Rect halfRect = half.rect;
-            float band = Band(InfuseBottom * f + Union(containers.SelectMany(c => Icons(c, half))).height, f);
+            float band = Band(InfuseBottom * f + InfuseExtent(containers, half).height, f);
             // the rest, centred above the band: whole top-level rows move (the infusions' own row is placed after)
             var parts = Parts(rows, half, infuseRow);
             if (parts.Count > 0)
@@ -849,8 +858,9 @@ namespace FrosthavenMods
                 .OfType<RectTransform>().ToList();
             if (containers.Count == 0) return null;
             var all = containers;
-            // the lowest container around all of them (two infusions in columns of their own: Frigid Torrent's Ice, Air) ...
-            RectTransform row = containers[0];
+            // the lowest container around all of them (two infusions in columns of their own: Frigid Torrent's Ice, Air);
+            // infusions in a "!" box move with their box (moved alone, they left it empty: the 2026-11-03 recapture) ...
+            RectTransform row = BoxOf(containers, rows) ?? containers[0];
             while (!all.All(c => c.IsChildOf(row)) && row.parent is RectTransform up && row != rows) row = up;
             if (row == rows) return null;
             // ... then up while it holds nothing else
@@ -869,14 +879,100 @@ namespace FrosthavenMods
             // infusions in containers of their own on one line close up to Frosthaven's step, about their middle
             var line = containers.Select(c => (c, r: In(c, half))).Where(x => Mathf.Abs(x.r.center.y - In(containers[0], half).center.y) < 5f * f)
                 .OrderBy(x => x.r.center.x).ToList();
-            if (line.Count > 1 && line.Count == containers.Count)
+            if (line.Count > 1 && line.Count == containers.Count && BoxOf(containers, half) == null)
             {
                 float mid = (line[0].r.center.x + line[line.Count - 1].r.center.x) / 2f;
                 for (int i = 0; i < line.Count; i++)
                     Shift(line[i].c, half, mid + (i - (line.Count - 1) / 2f) * InfuseStep * f - line[i].r.center.x, 0f);
             }
-            Rect cr = Union(containers.SelectMany(c => Icons(c, half)));
+            Rect cr = InfuseExtent(containers, half);
             Shift(infuseRow, half, half.rect.center.x - cr.center.x, half.rect.yMin + InfuseBottom * f - cr.yMin);
+        }
+
+        /// <summary>The "!" box (MandatoryTrigger) all of a half's infusions sit in, or null (no box, or not all in one).</summary>
+        private static RectTransform BoxOf(List<RectTransform> containers, Transform root)
+        {
+            RectTransform box = null;
+            foreach (RectTransform c in containers)
+            {
+                MandatoryTriggerContainer mt = c.GetComponentsInParent<MandatoryTriggerContainer>(true).FirstOrDefault();
+                if (mt == null || !(mt.transform is RectTransform rt) || !rt.IsChildOf(root)) return null;
+                if (box == null) box = rt;
+                else if (box != rt) return null;
+            }
+            return box;
+        }
+
+        /// <summary>What the infusions take at the half's bottom: their box, or the elements themselves.</summary>
+        private static Rect InfuseExtent(List<RectTransform> containers, RectTransform half)
+        {
+            RectTransform box = BoxOf(containers, half);
+            return box != null ? In(box, half) : Union(containers.SelectMany(c => Icons(c, half)));
+        }
+
+        /// <summary>A "!" box around a half's infusions, drawn as the printed 2nd edition card draws it (Rumbling Advance,
+        /// Flamethrower): the "!" tab, then the element(s) with BoxPadX on each side and BoxPadV above and below. The
+        /// generator sizes the box from its inner layout, whose infusion row has no height (an empty 62x39 box, the
+        /// element drawn outside it); here the box is sized to the elements and the elements centred in it.</summary>
+        private static void FitBox(RectTransform box, List<RectTransform> containers, RectTransform half, float f)
+        {
+            Transform left = box.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "Left");
+            float tab = left is RectTransform lt ? In(lt, half).width : 23f * f;
+            Rect icons = Union(containers.SelectMany(c => Icons(c, half)));
+            Rect now = In(box, half);
+            float w = tab + 2f * BoxPadX * f + icons.width, h = icons.height + 2f * BoxPadV * f;
+            Place(box, half, new Rect(now.center.x - w / 2f, now.center.y - h / 2f, w, h));
+            // the frame stretches with the box; set it where it doesn't (centre-anchored pieces)
+            foreach (string name in new[] { "UIBorderedElement", "Background" })
+                if (box.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == name) is RectTransform piece
+                    && Mathf.Abs(In(piece, half).width - w) > 0.5f * f)
+                    Place(piece, half, In(box, half));
+            Rect b = In(box, half);
+            icons = Union(containers.SelectMany(c => Icons(c, half)));
+            RectTransform inner = box.GetComponent<MandatoryTriggerContainer>()?.Container;
+            Transform mover = inner != null ? (Transform)inner : containers[0];
+            Shift(mover, half, b.xMin + tab + BoxPadX * f + icons.width / 2f - icons.center.x, b.center.y - icons.center.y);
+            if (Reported.Add("box:" + box.GetInstanceID()))
+                Plugin.Log.LogInfo($"Gloomhaven card style: infusion box {w / f:0}x{h / f:0} px, tab {tab / f:0}, elements {icons.width / f:0}x{icons.height / f:0}");
+        }
+
+        /// <summary>Inside a "!" box that holds the half's infusions (it goes to the half's bottom with them).</summary>
+        private static bool InfusionBox(Transform t)
+        {
+            MandatoryTriggerContainer mt = t.GetComponentsInParent<MandatoryTriggerContainer>(true).FirstOrDefault();
+            return mt != null && mt.GetComponentsInChildren<Transform>(true).Any(c => c.name == "InfuseContainer")
+                && !mt.GetComponentsInParent<Transform>(true).Any(p => p.name == "Consume Button" || p.name == "ConditionalElement");
+        }
+
+        /// <summary>A "!" box around the half's infusions is sized to them before anything measures the half: the generator's
+        /// box is an empty 62x39 frame with the element drawn wherever its inner layout put it, over the rows above (an area
+        /// beside it was then pushed under it: Impaling Eruption's hexes ran 200 px down and the half was shrunk to 60%).</summary>
+        private static void BoxInfusions(RectTransform rows, RectTransform half, float f)
+        {
+            var containers = rows.GetComponentsInChildren<Transform>(true).Where(c => c.name == "InfuseContainer" && Shown(c, rows)
+                    && !c.GetComponentsInParent<Transform>(true).Any(p => p.name == "Consume Button" || p.name == "ConditionalElement"))
+                .OfType<RectTransform>().ToList();
+            if (containers.Count == 0) return;
+            RectTransform box = BoxOf(containers, rows);
+            if (box == null) return;
+            foreach (RectTransform container in containers)
+                container.localScale = new Vector3(BoxIcon / GeneratorElement, BoxIcon / GeneratorElement, 1f);
+            FitBox(box, containers, half, f);
+        }
+
+        /// <summary>A boxed infusion row wider than the space beside the badges moves left of them (Chromatic Explosion's
+        /// six elements: the box ran under the XP badge).</summary>
+        private static void BoxClear(RectTransform half, RectTransform rows, float f)
+        {
+            RectTransform row = InfuseRow(rows, half, out List<RectTransform> containers);
+            RectTransform box = row == null ? null : BoxOf(containers, half);
+            if (box == null) return;
+            var bar = half.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "FH_UI_HUD_CARD_A_ExperienceActiveBonuses") as RectTransform;
+            if (bar == null || !Shown(bar, half) || bar.rect.width <= 1f) return;
+            Rect b = In(box, half), bb = In(bar, half);
+            if (!b.Overlaps(bb)) return;
+            float dx = Mathf.Max(bb.xMin - 6f * f - b.xMax, half.rect.xMin + FitEdge * f - b.xMin);
+            Shift(row, half, dx, 0f);
         }
 
         /// <summary>The elements themselves: six of them wrap to a second row below the container's own rect (Chromatic Explosion).</summary>
@@ -1125,7 +1221,7 @@ namespace FrosthavenMods
             if (parts.Count == 0) return;
             Rect b = Union(parts);
             Rect hr = half.rect;
-            float bottom = infuseRow != null ? hr.yMin + Band(Union(containers.SelectMany(c => Icons(c, half))).yMax - hr.yMin, f)
+            float bottom = infuseRow != null ? hr.yMin + Band(InfuseExtent(containers, half).yMax - hr.yMin, f)
                          : badge.width > 0 && parts.Any(p => p.Overlaps(badge)) ? badge.yMax + 2f * f : hr.yMin + FitEdge * f;
             Rect region = Rect.MinMaxRect(hr.xMin + FitEdge * f, bottom, hr.xMax - FitEdge * f, hr.yMax - ContentTopOf(half, f));
             // an area at the top of the half keeps AreaTop from the rim (Cold Front: fitting centred it back to 22 px)
@@ -1137,7 +1233,15 @@ namespace FrosthavenMods
             {
                 var card = half.GetComponentInParent<FullAbilityCard>();
                 string name = card != null && Pending.TryGetValue(card, out AbilityCardYMLData d) ? d.Name : "?";
-                Plugin.Log.LogInfo($"Gloomhaven card style: check {name}/{half.name} parts {parts.Count} content {b.xMin:0},{b.yMin:0}..{b.xMax:0},{b.yMax:0} region {region.xMin:0},{region.yMin:0}..{region.xMax:0},{region.yMax:0} half {hr.xMin:0},{hr.yMin:0}..{hr.xMax:0},{hr.yMax:0}");
+                Plugin.Log.LogInfo($"Gloomhaven card style: check {name}/{half.name} parts {parts.Count} content {b.xMin:0},{b.yMin:0}..{b.xMax:0},{b.yMax:0} region {region.xMin:0},{region.yMin:0}..{region.xMax:0},{region.yMax:0} half {hr.xMin:0},{hr.yMin:0}..{hr.xMax:0},{hr.yMax:0} infuseRow {(infuseRow != null ? infuseRow.name : "-")}");
+                foreach (RectTransform r in others)
+                    foreach (Graphic g in r.GetComponentsInChildren<Graphic>(true))
+                        if ((infuseRow == null || !g.transform.IsChildOf(infuseRow)) && Extent1(g, r, half) is Rect e && (e.yMin < region.yMin || e.yMax > region.yMax))
+                        {
+                            string path = g.name;
+                            for (Transform p = g.transform.parent; p != null && p != rows; p = p.parent) path = p.name + "/" + path;
+                            Plugin.Log.LogInfo($"Gloomhaven card style:   outside {path} {e.xMin:0},{e.yMin:0}..{e.xMax:0},{e.yMax:0}");
+                        }
             }
             if (region.xMin <= b.xMin && b.xMax <= region.xMax && region.yMin <= b.yMin && b.yMax <= region.yMax) return;
             float k = Mathf.Clamp(Mathf.Min(region.width / b.width, region.height / b.height), FitMin, 1f);
@@ -1241,9 +1345,11 @@ namespace FrosthavenMods
                 Rect hex = hexParts.Aggregate((a, b) => Rect.MinMaxRect(Mathf.Min(a.xMin, b.xMin), Mathf.Min(a.yMin, b.yMin), Mathf.Max(a.xMax, b.xMax), Mathf.Max(a.yMax, b.yMax)));
                 var beside = line.Cast<Transform>().OfType<RectTransform>().Where(c => c != col && c.gameObject.activeSelf).ToList();
                 // the half's infusions don't count: they go to the half's bottom (The Bigger One's two elements made its
-                // short attack line look too wide for the area beside it)
+                // short attack line look too wide for the area beside it), nor their "!" box (2nd edition: Impaling
+                // Eruption's area went under the box, 200 px down)
                 var all = beside.SelectMany(c => c.GetComponentsInChildren<Graphic>(true)
                     .Where(g => !g.GetComponentsInParent<Transform>(true).Any(pp => pp.name == "InfuseContainer"))
+                    .Where(g => !InfusionBox(g.transform))
                     .Select(g => Extent1(g, c, half)).Where(e => e.HasValue).Select(e => e.Value)).ToList();
                 if (all.Count == 0) continue;
                 Rect block = Union(all);

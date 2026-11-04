@@ -24,14 +24,9 @@ Data:
                 AnimOverload: RangedAttack
 Layout:
     Top:
-        - Active:
-            Ability: "TSummon"
-            Icon: "Summon"
-            Layout:
-                - Summon:
-                    Ability: TSummon
-                    SummonName: $GH2E_SUMMON_GravityBomb$
-                    SpecialText: "$GH2E_Tinkerer2_30_T$"
+        # the token's rules as plain text, as printed (no summon stat block: a token has no stats, and the block's cell
+        # shrank the text to unreadable: the 2026-11-03 recapture; an Active box drew it small too)
+        - Row: "$GH2E_Tinkerer2_30_T$"
         - Row: "<size=20%> "
         - Duration: Persistent
     Bottom:
