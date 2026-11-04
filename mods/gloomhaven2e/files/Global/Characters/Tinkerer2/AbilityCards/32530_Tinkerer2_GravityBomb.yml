@@ -30,14 +30,7 @@ Data:
                 AnimOverload: RangedAttack
 Layout:
     Top:
-        - Active:
-            Ability: "TSummon"
-            Icon: Positive_Summon
-            Layout:
-                - Summon:
-                    Ability: TSummon
-                    SummonName: $FHS_GH2E_SUMMON_GravityBomb$
-                    SpecialText: "$FHS_GH2E_Tinkerer2_30_T$"
+        - Row: "$FHS_GH2E_Tinkerer2_30_T$"
     Bottom:
         - ColumnWidths: "65,35"
         - Column:
