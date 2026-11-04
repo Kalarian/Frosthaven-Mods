@@ -1,4 +1,4 @@
-# Frosthaven Mods: next release (draft)
+**Frosthaven Mods 1.1**
 
 Everyone in a co-op game must update. **Finish your current scenario before you update** (see Known issues).
 
